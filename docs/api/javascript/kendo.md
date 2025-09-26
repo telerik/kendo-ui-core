@@ -13,6 +13,11 @@ res_type: api
 ### alert
 Opens a [Kendo UI Alert](/api/javascript/ui/alert) popup. Similar to the native [window.alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) method.
 
+
+<div class="meta-api-description">
+Display a modal popup or dialog to show alert messages, notifications, or warnings that require user acknowledgment, similar to native browser alert functions; control, trigger, or invoke simple popup dialogs with an OK button for confirmations, information, or error messages; programmatically open modal alert windows for notifications, blocking interaction until users confirm by clicking OK, enabling straightforward message display, alerts, or prompts within applications.
+</div>
+
 #### Example - Open a Kendo UI Alert on the page
 
     <script>
@@ -31,6 +36,11 @@ Returns an object that contains common
 found on the page.
 
 These include tokens used by ASP.NET, Ruby on Rails and others.
+
+
+<div class="meta-api-description">
+Retrieve and manage cross-site request forgery tokens for secure AJAX calls or form submissions by accessing a collection of anti-forgery token names and values extracted automatically from the web page, enabling seamless inclusion of CSRF tokens in request headers or payloads to prevent unauthorized actions; supports tokens from common frameworks such as ASP.NET, Ruby on Rails, and similar security mechanisms to configure, enable, or set protection against CSRF attacks in client-server interactions.
+</div>
 
 #### Example - Send CSRF tokens in DataSource read request
 
@@ -59,6 +69,11 @@ Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elem
 
 Model View ViewModel ([MVVM](https://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
+
+
+<div class="meta-api-description">
+Configure or enable automatic connection between HTML views and data models by linking UI components to underlying data structures and event handlers, allowing declarative binding of elements marked with specific roles to relevant widgets, ensuring dynamic synchronization between model and interface, supporting initialization and updating of UI elements based on the view-model’s properties, methods, and observable data changes, facilitating MVVM patterns by scanning the DOM to activate interactive components with data binding and event wiring, making it possible to set up two-way data communication and initialize UI widgets dynamically from structured data definitions.
+</div>
 
 #### Example - bind a DOM element to a view model
 
@@ -110,6 +125,11 @@ Optional namespace to look in when instantiating Kendo UI widgets. The valid nam
 ### confirm
 Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
 
+
+<div class="meta-api-description">
+Open or trigger a customizable modal confirmation popup to display messages and capture user responses such as OK or Cancel, providing a promise-based interface for handling confirmation or cancellation outcomes through asynchronous callbacks, enabling dialog control similar to native confirm dialogs but with enhanced styling and interaction options for managing user decisions, confirmations, or prompts in web applications.
+</div>
+
 #### Example - Open a Kendo UI Confirm on the page
 
     <script>
@@ -151,6 +171,11 @@ If no culture is found the default one is used.
 
 > The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
+
+<div class="meta-api-description">
+Configure or retrieve the current locale or regional settings to control number formats, date formats, currency symbols, and parsing behaviors for UI components; set the language and cultural preferences using standard culture codes or language tags to ensure proper localization and formatting across widgets; automatically fall back to country-specific or default locales when exact matches are unavailable; manage and switch localization dynamically before initializing interface elements dependent on culture settings, enabling comprehensive internationalization support, formatting customization, and culture-aware data display in applications.
+</div>
+
 #### Example -  include a culture-specific JavaScript file and set the culture
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.en-GB.min.js"></script>
     <script>
@@ -178,6 +203,11 @@ The culture to set.
 
 Finds all Kendo widgets that are children of the specified element and calls their destroy method.
 
+
+<div class="meta-api-description">
+Remove or clean up all Kendo UI components inside a specific DOM element by finding every child widget or instance and triggering their destruction processes, including unbinding event listeners, releasing resources, clearing internal data, and fully tearing down Kendo-related elements to prevent memory leaks and ensure proper cleanup during component removal, page updates, or dynamic UI changes.
+</div>
+
 #### Example
 
     <input id="autocomplete">
@@ -197,6 +227,11 @@ Finds all Kendo widgets that are children of the specified element and calls the
 ### format
 
 Replaces each format item in a specified string with the text equivalent of a corresponding object's value. Uses [toString](/api/javascript/kendo/methods/tostring) for every format item.
+
+
+<div class="meta-api-description">
+Format strings by substituting placeholders with object properties or values, enabling dynamic text rendering, string interpolation, composing user-facing messages, or binding data into templates. Convert objects to strings using automatic stringification, replace indexed format tokens, control how variables appear in output text, and customize formatted output by injecting values into template strings. This covers scenarios like string templating, data-binding in UI components, generating dynamic messages, and transforming object data into readable text formats for display or logging purposes.
+</div>
 
 #### Parameters
 
@@ -222,6 +257,11 @@ The format string.
 
 Generates a random GUID (globally unique identifier).
 
+
+<div class="meta-api-description">
+Generate unique global identifiers, random GUID strings, or universally unique IDs for DOM elements, data objects, client tokens, session keys, or correlation IDs using a method that creates collision-resistant identifiers suitable for client-side models, temporary keys, and request validation. This functionality supports producing distinct alphanumeric strings to enable unique element IDs, secure data record keys, or any scenario requiring guaranteed uniqueness across sessions or components. Configure, call, or generate unique random identifiers that follow standard GUID formats to ensure consistent, non-repeating identifiers for front-end applications and asynchronous operations.
+</div>
+
 #### Example
     <script>
     var value = kendo.guid();
@@ -236,6 +276,11 @@ Generates a random GUID (globally unique identifier).
 ### htmlEncode
 
 Encodes HTML characters to entities.
+
+
+<div class="meta-api-description">
+Convert or escape user input text by encoding HTML special characters like less-than, greater-than, ampersand, quotes, and apostrophes into safe HTML entities to prevent raw HTML injection, XSS vulnerabilities, and rendering issues when inserting dynamic content into the DOM; control or serialize strings for safe binding, template rendering, innerHTML or textContent updates, sanitize text inputs, and ensure that all embedded user-generated or external data is properly escaped to avoid unintended HTML parsing or script execution in web components or UI frameworks.
+</div>
 
 #### Example
     <script>
@@ -257,6 +302,11 @@ The string that needs to be HTML encoded.
 ### init
 
 Instantiates Kendo UI widgets in a given DOM element based on role data attributes.
+
+
+<div class="meta-api-description">
+Initialize or set up UI components dynamically within a specific container element by scanning its descendants for data attributes or roles that declare components; programmatically enable, configure, or instantiate widgets inside a chosen DOM node to create interactive elements from markup or injected HTML content, supporting scenarios where components need to be initialized after DOM updates, partial page renders, or dynamic content injection by searching for relevant attributes to automatically generate the appropriate UI controls.
+</div>
 
 #### Example
      <div id="view">
@@ -311,6 +361,11 @@ The `destroy` method will remove the event listeners and destroy the `MediaQuery
 You can modify the default [`media queries`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries) for the adaptive components by modifying the breakpoints defined in `kendo.defaults.breakpoints`. The default break points are defined as:
 
 `kendo.defaults.breakpoints = { small: '(max-width: 700px)', medium: '(min-width: 700.1px) and (max-width: 768px)', large: '(min-width: 768.1px)' }`
+
+
+<div class="meta-api-description">
+Manage responsive design with JavaScript media query handling that enables detecting viewport or device width changes, triggering callbacks when a media query matches, stops matching, or initializes in matched state. Configure event listeners for entering, leaving, or changing media query conditions, with support for chaining handlers and cleanly removing listeners when no longer needed. Customize or override default breakpoint definitions for small, medium, and large screen sizes to adapt UI components dynamically based on screen width ranges. Monitor media query status with emitted events, enabling fine-grained control over responsive behavior, layout adjustments, or feature toggling as device characteristics shift.
+</div>
 
 #### Parameters
 
@@ -386,6 +441,11 @@ The media query that will create the [MediaQueryList instance](https://developer
 
 Creates an ObservableArray instance that is bound to a FileManagerDataSource. Required to bind a FileManagerDataSource-enabled widget (such as the Kendo UI FileManager) to a view-model.
 
+
+<div class="meta-api-description">
+Connect and synchronize file manager data with a view model by creating an observable data source that supports two-way binding and event-driven updates, enabling seamless integration between file management components and MVVM frameworks; configure, set up, or enable dynamic data synchronization so file lists, folders, and metadata stay in sync with your UI model, supporting scenarios like binding file explorer contents, reflecting file changes in real time, and updating views automatically as files are added, removed, or modified through an observable array or reactive data structure designed for file system integration in UI frameworks.
+</div>
+
 #### Example
 
     <div id="example">      
@@ -442,6 +502,11 @@ The array that will be converted to an ObservableArray.
 
 Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model.
 
+
+<div class="meta-api-description">
+Create or generate an observable collection that reflects hierarchical or tree-structured data, converting nested data sources into observable arrays that maintain parent-child connections, enabling real-time updates, data binding, synchronization, and change tracking between hierarchical data sources and user interface components like tree views or nested lists. This method supports configuring observable data models from hierarchical datasets, facilitating the integration of structured, multi-level data into reactive view models for dynamic UI updates, binding data with parent-child relationships, and handling changes in nested collections automatically.
+</div>
+
 #### Example
 
     <div data-role="treeview" data-bind="source: products"></div>
@@ -469,6 +534,11 @@ The array that will be converted to an ObservableArray.
 ### parseDate
 
 Parses as a formatted string as a `Date`. Also see [Date Parsing](/framework/globalization/dateparsing)
+
+
+<div class="meta-api-description">
+Convert formatted date strings into JavaScript Date objects by parsing various user inputs, binding date values, or normalizing dates within applications; handle diverse date string formats, localized date inputs, custom date representations, and flexible parsing scenarios to reliably transform text-based dates into usable Date instances for processing, validation, or display in web development environments.
+</div>
 
 #### Example
     <script>
@@ -503,6 +573,11 @@ The culture used to parse the number. The current culture is used by default.
 ### parseExactDate
 
 Parses a formatted string as a `Date`. The method returns `null` if the string doesn't match the format exactly. Also see [Date Parsing](/framework/globalization/dateparsing)
+
+
+<div class="meta-api-description">
+Convert date strings into JavaScript Date objects using strict, exact format matching that respects culture-specific date patterns, tokenized or custom-formatted inputs, precise date parsing, and format validation that returns null when the string does not conform exactly. This method enables setting, configuring, or enforcing exact date formats for reliable date conversion, ensuring no loose or fuzzy parsing errors, useful for localized date strings or scenarios where format precision and accurate date interpretation are critical.
+</div>
 
 #### Example
     <script>
@@ -544,6 +619,11 @@ The culture used to parse the number. The current culture is used by default.
 
 Parses a string as a floating point number.
 
+
+<div class="meta-api-description">
+Convert string inputs, text values, JSON data, or user-entered numeric strings into decimal numbers, float values, or JavaScript floating-point types for calculations, sorting, filtering, comparisons, and data processing; parse textual or formatted numeric strings into precise floating-point numbers, enabling robust handling of numeric conversions, data binding, validation, and mathematical operations in JavaScript environments.
+</div>
+
 #### Example
 
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
@@ -574,6 +654,11 @@ The culture used to parse the number. The current culture is used by default.
 ### parseInt
 
 Parses as a string as an integer.
+
+
+<div class="meta-api-description">
+Convert numeric strings to integers, parse string values into whole numbers, cast text-based numbers to integer format, enable string-to-integer transformation for data processing, form input validation, client-side calculations, and numeric conversion tasks, supporting scenarios where text containing digits needs to be interpreted and used as integer values in programming, binding, or numeric operations.
+</div>
 
 #### Example
 
@@ -606,6 +691,11 @@ The culture used to parse the number. The current culture is used by default.
 
 Parse a color string to a Color object.  If the input is not valid throws an Error, unless the `noerror` argument is given.
 
+
+<div class="meta-api-description">
+Convert, parse, decode, or normalize CSS color strings including hex codes, rgb, rgba, hsl, hsla, and named colors into standardized color objects for comparison, manipulation, or transformation. Enable error handling control to suppress exceptions when invalid color inputs occur, support validation of color formats for consistent color processing, and facilitate color conversion workflows in JavaScript environments. Use for extracting color data from strings, validating user input colors, or preparing colors for rendering, styling, or animation by generating reliable, uniform color representations.
+</div>
+
 #### Example
 
     <script>
@@ -635,6 +725,11 @@ If you pass `true` then this function will return `undefined` rather than throwi
 
 ### prompt
 Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
+
+
+<div class="meta-api-description">
+Display a modal input dialog or popup that requests text input from the user, similar to the native prompt function but styled consistently with custom UI components, enabling developers to show a quick, interactive text box, gather user responses, capture typed values, and control modal dialogs for prompt interactions within their applications, with options to open, configure, and handle user input in a blocking or asynchronous manner.
+</div>
 
 #### Example - Open a Kendo UI Prompt on the page
 
@@ -679,6 +774,11 @@ The default value that will be shown in the popup's input.
 
 Creates a wrapper object over the passed one, with get/set properties that set the original object `dirty` flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
 
+
+<div class="meta-api-description">
+Enable synchronization between Kendo data items and external MVVM frameworks by creating wrapper objects that expose getter and setter properties for existing model items, automatically tracking changes and marking data as modified when values update; this ensures integration with third-party libraries like AngularJS by supporting two-way binding, change detection, data modification tracking, and consistent data source synchronization through proxying model setters.
+</div>
+
 #### Example
 
     <script>
@@ -717,6 +817,11 @@ The model that will be wrapped.
 
 Renders the specified template using the provided array.
 
+
+<div class="meta-api-description">
+Generate dynamic HTML output by applying templates to arrays or collections of data, enabling iteration over multiple items to produce repeated or batch-rendered markup. Configure or set rendering of template-driven content from data arrays, bind collections to templates for consistent output, and control how data items are transformed into HTML strings or fragments using flexible template execution methods. Enable automated rendering of lists, grids, or repeated structures by processing arrays with templates to create customized, data-bound markup efficiently.
+</div>
+
 #### Example
     <ul></ul>
     <script>
@@ -739,6 +844,11 @@ The array of objects which contains the data that the template will render.
 ### resize
 
 Finds all Kendo widgets that are children of the specified element and calls their `resize` method.
+
+
+<div class="meta-api-description">
+Trigger or invoke layout recalculations and dimension updates on nested UI components after container resizing, DOM changes, or dynamic content modifications; force descendant widgets or elements to reflow, redraw, and adjust their sizes without full reinitialization, enabling responsive adjustments following AJAX content loads, manual DOM manipulations, or window resizing events; control child component resizing behavior, refresh their layouts, and ensure proper rendering and alignment in updated containers or changed viewports.
+</div>
 
 #### Example
 
@@ -801,6 +911,11 @@ Determines whether the resizing routine should be executed even if the respectiv
 Saves a file with the specified name and content.
 A server "echo" proxy might be required, depending on browser capabilities.
 
+
+<div class="meta-api-description">
+Trigger file downloads or save generated files on the client side by configuring file names and content dynamically, enabling developers to export data, Blob objects, or binary streams as downloadable files across different browsers. Control file saving operations by specifying custom filenames, handling raw data payloads, and accounting for browser compatibility through optional server-side proxies or echo mechanisms to ensure the download completes smoothly regardless of environment. Enable exporting and downloading files directly from client-side scripts, streamlining saving processes for content generated within web apps, with flexibility to set file extensions, manage Blob data types, and support fallback strategies for browsers lacking native download support.
+</div>
+
 #### Parameters
 
 ##### options `Object`
@@ -855,6 +970,11 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 
 Converts a JavaScript object to [JSON](https://en.wikipedia.org/wiki/JSON). Uses [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in browsers that support it.
 
+
+<div class="meta-api-description">
+Convert JavaScript objects, including nested structures, arrays, and primitive values, into JSON strings for serialization, data logging, API requests, or transferring data over networks; supports preparing objects for storage or transmission by encoding complex data into JSON format using the standard JSON serialization approach, leveraging browser-native JSON.stringify when present to ensure consistent and efficient string conversion usable in debugging, saving state, or sending structured data.
+</div>
+
 #### Parameters
 
 ##### value `Object`
@@ -878,6 +998,11 @@ The value to convert to a JSON string.
 Compiles a template to a function that builds HTML. Useful when a template will be used several times.
 Templates offer way of creating HTML chunks. Options such as HTML encoding and compilation for optimal
 performance are available.
+
+
+<div class="meta-api-description">
+Generate reusable HTML snippets or dynamic markup by compiling templates into JavaScript functions that produce HTML output based on input data. Configure, set up, or enable template compilation for prebuilding reusable HTML chunks to enhance rendering efficiency, support data-driven markup generation, apply HTML encoding to secure output, and optimize template reuse across multiple UI components or views. Control how templates transform data into HTML strings for dynamic interfaces, leverage precompiled functions to reduce runtime overhead, and customize rendering logic with flexible templating approaches for consistent, maintainable HTML generation in web applications.
+</div>
 
 #### Example - Basic template
 
@@ -984,6 +1109,11 @@ the performance of the template.
 
 Limits the number of calls to a function to one for a specified amount of time.
 
+
+<div class="meta-api-description">
+Configure rate limiting and control execution frequency of functions or event handlers by applying throttling mechanisms that restrict calls to a maximum of one invocation per defined time interval, enabling you to manage debounce behavior, optimize performance by preventing rapid or repeated triggers of callbacks, limit function firing rate in scenarios like scroll, resize, or input events, and wrap original methods to ensure timely and efficient execution without overwhelming system resources.
+</div>
+
 #### Example
 
     <script>
@@ -1018,6 +1148,11 @@ The amount of time that needs to pass before a subsequent function call is made.
 
 Enables kinetic scrolling on touch devices
 
+
+<div class="meta-api-description">
+Activate or configure smooth, kinetic, momentum-based scrolling for scrollable content on touch-enabled devices, enabling natural fling, swipe, pan, and deceleration effects to enhance user interactions. Implement touch-driven scroll behavior with methods that initialize and control momentum scrolling after component setup, supporting responsive gestures and fluid touch navigation on elements. Enable or manage touch momentum scrolling, kinetic swipe response, smooth deceleration, and flick scrolling to improve touch UX and control scrolling physics on mobile and tablet interfaces.
+</div>
+
 #### Example
     <div id="scrollable" style="height: 200px">
       Scrollable
@@ -1036,6 +1171,11 @@ The container element to enable scrolling for.
 ### toString
 
 Formats a `Number` or `Date` using the specified format and the current culture.
+
+
+<div class="meta-api-description">
+Format numbers or dates into localized strings using customizable format patterns, enabling developers to convert numeric values or date objects into readable text that respects current culture settings, regional formats, and internationalization preferences. This functionality supports configuring string output for currency, percentages, decimals, short or long date representations, and custom numeric patterns, helping to control how numeric and date data appear in user interfaces by applying culture-aware formatting rules and locale-specific symbols. Users often search for ways to display numbers or dates in a specific format, adjust output based on culture or locale, convert values to formatted strings, or implement internationalized number and date rendering in client-side applications.
+</div>
 
 #### Example
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
@@ -1091,6 +1231,11 @@ The name of the culture which should be used to format the value. [The culture s
 
 Unbinds a tree of HTML elements from a View-Model.
 
+
+<div class="meta-api-description">
+Remove or detach data bindings from a section of HTML elements to stop synchronization and automatic updates between the UI and its underlying data model, disconnecting view components from their bound data sources, disabling MVVM binding handlers and preventing further changes from propagating; useful for controlling or cleaning up dynamic interfaces, managing the lifecycle of bound elements, or resetting parts of a view to avoid stale data and ensure proper unbinding of model-view connections.
+</div>
+
 #### Example
      <div id="view">
        <label>First Name:<input data-bind="value: firstName" /></label>
@@ -1124,6 +1269,11 @@ All descendant elements are traversed.
 
 Decodes string from UTF-8 or a Unicode character set. Substitutes the native [`unescape`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/unescape) function, which should not be used according to the recommendations of the ECMA-262 standard.
 
+
+<div class="meta-api-description">
+Convert encoded text by decoding percent-encoded strings, UTF-8 sequences, or Unicode escape patterns like \uXXXX back into readable characters; perform string unescaping, reversing URL encoding, or transforming escaped Unicode code points while replacing deprecated native unescape functions, handling character decoding, string normalization, and supporting safe parsing of encoded or escaped inputs in JavaScript and web applications.
+</div>
+
 #### Example
     <script>
         var result = kendo.unescape("This is a test: %97 %3f %D5 %e5 %U0107 %U123F %u39f5 %uDEe5");
@@ -1149,6 +1299,11 @@ The string that needs to be unescaped (decoded).
 
 Returns a Kendo UI widget instance, attached to the provided element.
 This method can be used in scenarios when the page (e.g. a form) contains both generic HTML elements and Kendo UI widgets and the exact distribution is not clear.
+
+
+<div class="meta-api-description">
+Retrieve or access the UI component instance linked to a specific element to inspect, interact with, or invoke methods on dynamic Kendo widgets embedded within pages mixing standard HTML and Kendo controls, enabling detection, state management, and manipulation of bound components regardless of uncertain layout or component distribution, facilitating queries like how to get or find widget references, obtain underlying objects, or call functions on Kendo elements within complex, mixed-content interfaces.
+</div>
 
 #### Parameters
 
@@ -1186,6 +1341,11 @@ The DOM element that may have a Kendo UI instance attached to it.
 
 A dictionary of special keys' ASCII codes, which can be accessed by user-friendly names, instead of their numeric values.
 The collection includes only key codes, which are used by the Kendo UI widgets' source code.
+
+
+<div class="meta-api-description">
+Access and configure mappings between common keyboard key names and their corresponding numeric ASCII or key codes to identify, compare, or handle keyboard events in UI components, enabling detection of special keys like Enter, Escape, Arrow keys, and function keys by readable labels rather than raw numeric codes, facilitating keyboard event processing, custom shortcut implementation, and key event filtering across web applications using standardized key identification methods compatible with common event properties such as keyCode and which.
+</div>
 
 #### kendo.keys collection
 
@@ -1247,6 +1407,16 @@ The key codes are especially helpful in keydown, keyup and keypress event handle
 
 A range of useful supported by the current browser capabilities and features.
 
+
+<div class="meta-api-description">
+Detect and verify browser capabilities including support for touch input, CSS transforms, SVG and Canvas rendering, CSS transitions, pointer events, and other key features to adapt application behavior dynamically based on environment. Enable feature detection and runtime checks for device and browser properties to conditionally configure UI components, handle compatibility issues, switch between input event models, and optimize performance by identifying available client-side functionalities. This supports use cases like enabling touch gestures, fallback rendering options, responsive design adjustments, and conditional event handling depending on browser and device support.
+</div>
+
+
+<div class="meta-api-description">
+Configure and control feature detection settings, capability queries, environment compatibility checks, and support options for various platforms and browsers. Enable or disable specific supports, customize adaptive behaviors based on detected features, manage fallback strategies for unsupported environments, and control how application functionality responds to differing runtime capabilities. Adjust detection mechanisms for device, browser, and API supports to ensure smooth operation and compatibility, improve responsiveness to platform differences, and fine-tune feature availability or polyfill application according to current support status.
+</div>
+
 #### Example
 
     <div id="support-info"></div>
@@ -1292,6 +1462,11 @@ Returns the current zoom level on a mobile browser (returns 1 on desktop).
 
 ### support.mobileOS `Object`
 Returns a number of properties that identify the current mobile browser. Parses navigator.userAgent to do it. False on desktop.
+
+
+<div class="meta-api-description">
+Identify the current mobile operating system and device type during runtime by analyzing the user agent string, enabling detection of specific mobile platforms, browsers, and versions while distinguishing mobile from desktop environments, supporting use cases such as conditionally enabling features, customizing behavior based on OS (like iOS, Android, Windows Phone), retrieving device-specific flags, performing runtime checks for mobile environments, and integrating adaptive functionality that depends on the client's mobile OS and browser details.
+</div>
 
 #### Example
 
@@ -1365,6 +1540,11 @@ Returns true if running in a Cordova/PhoneGap/Telerik AppBuilder application.
 Convenience replacement for the now deprecated jQuery.browser. It returns an object with the browser identifier initialized as a boolean property and a version.
 The identifiers are identical to jQuery ones, e.g. "webkit", "opera", "msie", "edge" and "mozilla". In addition WebKit browsers will return their name e.g. "safari" and "chrome".
 
+
+<div class="meta-api-description">
+Detect or identify the user’s browser type, vendor, and exact version number through an object that exposes boolean flags for common browser engines such as WebKit, Opera, Microsoft Internet Explorer (msie), Edge, and Mozilla, along with specific vendor names like Safari or Chrome for WebKit-based browsers. Enable browser detection to programmatically distinguish browser families, detect version details for compatibility checks, feature support queries, conditional scripting, or fallback strategies, replacing deprecated jQuery.browser usage with a modern, convenient interface to access browser identity and precise version information for client-side environment handling or adaptive behavior in web applications.
+</div>
+
 #### Example
 
     <div id="browser-info"></div>
@@ -1417,6 +1597,11 @@ R3 service packs and internal builds may be released in the following year. In t
 For example `"2012.3.1315"` means a service pack (internal build) released after R3 **2012** on January 15, **2013**.
 
 The returned value does not indicate if the given Kendo UI version represents a major release, service pack, or the so-called internal (nightly) build.
+
+
+<div class="meta-api-description">
+Retrieve or check the component release version as a formatted string representing the runtime Kendo UI version, including release year, major release number, and month/day of release encoded in YYYY.M.DD or extended formats for service packs and internal builds, useful for detecting, comparing, logging, validating, or conditionally executing code based on specific framework versions, patch levels, hotfixes, or calendar dates, enabling developers to programmatically identify major releases, minor updates, or cumulative patches across different builds and deployment scenarios.
+</div>
 
 #### Example
 

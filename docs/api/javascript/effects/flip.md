@@ -50,6 +50,11 @@ The element **should be positioned absolutely/relatively**, and contain two chil
 
 The axis of the flip. Accepted values are `"horizontal"` or `"vertical"`
 
+
+<div class="meta-api-description">
+Control or configure the flip animation direction during component creation by specifying the axis of rotation, enabling horizontal or vertical flipping effects, setting the flip orientation to either left-right or up-down, adjusting the flip direction parameter at initialization, defining whether the flip transition rotates around a horizontal or vertical axis, and customizing the flip behavior for UI elements by selecting the axis along which the flip should occur.
+</div>
+
 #### Example
 
     <style>
@@ -87,6 +92,11 @@ The axis of the flip. Accepted values are `"horizontal"` or `"vertical"`
 ### face `jQuery`
 
 The initially visible element in the container.
+
+
+<div class="meta-api-description">
+Specify or configure the initially visible side, front face, or starting element shown when creating a flip animation instance, controlling which container face or content is displayed first before any flip or transition occurs, setting the default visible panel, side, or component in a flipping interface and determining the initial state or front content that users see immediately upon rendering or initialization.
+</div>
 
 #### Example
 
@@ -129,6 +139,11 @@ The initially visible element in the container.
 ### back `jQuery`
 
 The finally visible element in the container.
+
+
+<div class="meta-api-description">
+Configure the element or content displayed on the reverse side of a flip animation by setting the final visible component after the flip completes; control the back-facing content, specify which item or view replaces the front during or after the flip effect, and customize the destination element shown post-animation using constructor parameters to manage what appears behind the flipping front face in a dynamic flip container.
+</div>
 
 #### Example
 

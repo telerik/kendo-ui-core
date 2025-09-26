@@ -21,6 +21,11 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 The schema configuration of the SchedulerDataSource.
 
+
+<div class="meta-api-description">
+Configure event data structure and parsing rules for scheduling systems by defining data models, field mappings, unique identifiers, date and string types, custom parse functions, and handling nested or complex event objects to control how events are loaded, validated, and interpreted within calendar or scheduler components. Enable precise control over event data format, validation methods, data transformation, and field correspondence for accurate schedule rendering and interaction by setting up mapping schemas that dictate how raw event input is converted into structured and typed scheduling items, supporting diverse input formats and ensuring consistent event handling.
+</div>
+
 #### Example
 
     <script>
@@ -50,6 +55,11 @@ The schema configuration of the SchedulerDataSource.
 ### schema.model `Object`
 
 The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/framework/schedulerevent#configuration) for more info.
+
+
+<div class="meta-api-description">
+Define and customize the structure and mapping of event records in the Scheduler’s data source by setting the event model schema, including specifying field names, types, default values, unique identifiers, and mapping fields like start time, end time, title, and recurrence. Control how event data is parsed, converted, and synchronized for accurate reading and writing within the Scheduler, enabling configuration, customization, or adjustment of event record formats, field bindings, and data transformations to fit diverse scheduling data models and user requirements.
+</div>
 
 #### Example - configure the data source model schema
 
@@ -114,6 +124,11 @@ The timezone which the data source will use to convert the scheduler event dates
 If the data source is initialized by the scheduler, its [timezone](/api/javascript/ui/scheduler/configuration/timezone) option will be used.
 
 The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
+
+
+<div class="meta-api-description">
+Configure and control how event start and end dates are interpreted, converted, and normalized across different time zones by setting the data source timezone or overriding the default system or scheduler time zone settings. Manage time zone handling for scheduling data, adjust for global user locations, handle conversions between event local times and UTC, and ensure consistent date and time calculations regardless of the server or client environment. Enable specifying or changing the time zone context for calendar events, support IANA time zone identifiers for accurate international time management, and customize how scheduling data aligns with various geographical and daylight saving time rules.
+</div>
 
 #### Example - configure the data source model
 
@@ -188,6 +203,11 @@ See the [DataSource methods](/api/framework/datasource#methods) for all inherite
 ### expand
 
 Expands all recurring events in the data and returns a list of events for a specific period.
+
+
+<div class="meta-api-description">
+Generate individual event occurrences from recurring schedules within a specified date range by expanding recurrence patterns into concrete event instances; configure, retrieve, or filter all expanded events for specific time intervals, fully unfolding recurring rules into a collection of discrete occurrences to facilitate rendering, processing, querying, or binding only the events active during a desired period.
+</div>
 
 #### Parameters
 

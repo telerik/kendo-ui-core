@@ -14,6 +14,11 @@ Represents an individual map layer.
 ### map `kendo.dataviz.ui.Map`
 The owner Map widget.
 
+
+<div class="meta-api-description">
+Configure the initial mapping relationship by specifying the parent map when creating a layer, enabling the layer to bind to its containing map component for proper rendering, event handling, spatial context, and coordinate system association. This setting controls which map instance the layer belongs to at construction time, supporting scenarios like linking layers to maps for display updates, interaction management, or geographic alignment, and is essential for establishing the ownership or hierarchy between map and layer objects in mapping applications.
+</div>
+
 #### Example - add a layer to an existing map instance
 
     <button class="k-button k-button-lg k-button-solid-primary" id="add">Add Layer</button>
@@ -46,6 +51,11 @@ The owner Map widget.
 
 ### options `Object`
 The layer [`options`](/api/javascript/dataviz/ui/map/configuration/layers#related-properties).
+
+
+<div class="meta-api-description">
+Configure and customize a map layer at creation by setting initialization parameters that control source data, visual style, attribution details, rendering options, and other layer-specific behaviors; this includes defining how the layer loads and displays content on the map, setting styling rules, managing data sources, enabling or adjusting interactivity, and specifying metadata or attribution information during layer setup.
+</div>
 
 #### Example - add a layer to an existing map instance
 
@@ -82,6 +92,11 @@ The layer [`options`](/api/javascript/dataviz/ui/map/configuration/layers#relate
 ### map `kendo.dataviz.ui.Map`
 The owner Map widget.
 
+
+<div class="meta-api-description">
+Retrieve or access the parent map object associated with a specific map layer to interact with the main map component, enabling developers to invoke map functions, query or monitor current map state, bind event listeners for user interactions, synchronize layer actions with map updates, and manage the connection between individual layers and the overall map instance once initialized and ready.
+</div>
+
 #### Example
 
     <div id="map"></div>
@@ -115,6 +130,11 @@ The owner Map widget.
 
 ### show
 Shows the layer, if not visible.
+
+
+<div class="meta-api-description">
+Control layer visibility by enabling or activating hidden map layers dynamically through code, toggling layers to appear on the map interface when needed, revealing specific data overlays, turning on layers during user interactions, conditionally displaying map features based on runtime conditions, making invisible layers visible for updates or events, showing layers programmatically without affecting already visible ones, configuring map visuals by setting layers to display on demand, and managing real-time visibility states for geographic data layers to reflect current user needs or application logic.
+</div>
 
 #### Example
 
@@ -154,6 +174,11 @@ Shows the layer, if not visible.
 
 ### hide
 Hides the layer, if visible.
+
+
+<div class="meta-api-description">
+Control, toggle, or change the visibility of map layers programmatically by hiding layers that are currently visible without removing or destroying them; dynamically disable rendering or interaction on specific layers, temporarily conceal map data, show or hide layers based on user actions or conditions, manage layer display states on demand, enable or disable layer visibility in real-time, and update map visuals by hiding selected layers while preserving their state for later reactivation.
+</div>
 
 #### Example
 

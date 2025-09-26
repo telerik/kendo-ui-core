@@ -26,6 +26,11 @@ Playing the effect in reverse will slide the element out of its position.
 
 The direction to which the sliding will occur.  Supported directions are `left`, `right`, `up` and `down`.
 
+
+<div class="meta-api-description">
+Configure the animation's entry direction to control whether an element slides in from the left, right, top, or bottom, specifying movement orientation for slide-in effects during instantiation. Enable setting slide directions such as left, right, up, or down to determine how an element animates into view, ideal for creating sliding entrances or directional motion in UI animations. Adjust or specify the movement vector of sliding animations at construction time to control where content appears from or moves toward, supporting various orientation strings to customize the slide-in effect directionality.
+</div>
+
 #### Example
 
     <div id="foo">

@@ -13,6 +13,11 @@ This represents a single, straight line.
 
 Defines the stroke configuration.
 
+
+<div class="meta-api-description">
+Configure the visual styling of connectors and lines by setting attributes like color, thickness, dash patterns, opacity, and stroke details to control how lines appear and render in diagrams or graphical components, enabling customization of line appearance, line weight, dashed or solid styles, transparency levels, and other decorative stroke features commonly used for enhancing connectors and diagram links.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -39,6 +44,11 @@ Defines the stroke configuration.
 
 Defines the line color.
 
+
+<div class="meta-api-description">
+Adjust, define, or customize the color of lines, connectors, or borders within diagrams and shapes using CSS color formats such as hex codes, rgb(), rgba(), or named colors to control visual styling, appearance, or theming of stroke outlines for diagram elements during setup or dynamically.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -63,6 +73,11 @@ Defines the line color.
 ### stroke.width `Number`
 
 Defines the line width.
+
+
+<div class="meta-api-description">
+Adjust the thickness, weight, or width of lines, strokes, or borders in diagrams, flowcharts, or graphical connections to configure how bold, thin, or visually prominent outlines, link paths, or shapes appear, controlling line rendering styles for emphasis, clarity, or aesthetic effects in visual elements.
+</div>
 
 #### Example
 
@@ -89,6 +104,11 @@ Defines the line width.
 
 The first point of the line.
 
+
+<div class="meta-api-description">
+Set or configure the starting point, initial coordinates, or anchor position of a line in a diagram, including specifying the first endpoint's x and y values, linking the line's origin to a shape's connector, controlling where a line begins when rendering or drawing diagrams, defining the initial attachment or reference point for connections, and establishing the line’s source position for flowcharts, graphs, or visual layouts.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -112,6 +132,11 @@ The Y position of first point.
 ### to `Object`
 
 The second point of the line.
+
+
+<div class="meta-api-description">
+Control, set, or retrieve the endpoint of a line segment within a diagram or graphical component by specifying the target position, coordinate, or element where the line connects. Configure the line’s destination point to determine its direction, length, and final placement, enabling precise connection between nodes, shapes, or diagram elements. Adjust, define, or link the line’s terminating coordinate or anchor to customize how lines connect or point to specific properties, objects, or diagram parts, supporting dynamic positioning and directional control in visual layouts.
+</div>
 
 #### Example
 
@@ -139,6 +164,11 @@ The Y position of second point.
 
 The drawing element used to draw the line.
 
+
+<div class="meta-api-description">
+Retrieve or configure the graphical object responsible for rendering a line in diagrams, enabling customization of appearance through styling, geometry updates, dimension measurements, interaction handling, and event attachments on the visual element that visually represents or draws the line within diagram components.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -159,6 +189,11 @@ The drawing element used to draw the line.
 
 ### position
 Sets the element position.
+
+
+<div class="meta-api-description">
+Control or adjust the placement of a line within a diagram by setting its coordinates, repositioning or moving it dynamically after initialization, enabling precise alignment, layout updates, or visual repositioning programmatically. Enable developers to shift, relocate, or place line elements at specific positions within graphical layouts, supporting dynamic changes, coordinate settings, and visual flow control for diagrams or flowcharts. This method supports manipulation of a line’s rendered location, facilitating movement, adjustment, or realignment in response to interaction, data updates, or layout recalculations.
+</div>
 
 #### Example
 
@@ -185,6 +220,11 @@ The origin of the element.
 
 ### visible
 Gets or sets the visibility of the current element.
+
+
+<div class="meta-api-description">
+Control, check, or modify the visibility and display state of diagram lines by toggling or setting whether a line is shown or hidden within a diagram, affecting its rendering, layout inclusion, selection, hit-testing responsiveness, and export presence; retrieve the current visibility status or update it dynamically to manage line appearance and interaction in diagrams, flowcharts, or graphical layouts.
+</div>
 
 #### Example
 

@@ -16,6 +16,11 @@ See the [HierarchicalDataSource configuration](/api/framework/hierarchicaldataso
 
 The schema configuration. See the [`DataSource.schema` configuration](/api/framework/datasource#configuration-schema) for all available options.
 
+
+<div class="meta-api-description">
+Define and customize the structure and format of data records for file management by specifying field names, data types, unique identifiers, and nested or hierarchical relationships, enabling the parsing, mapping, and transformation of server or local datasets into the file manager’s internal model; configure data schemas to control how incoming files and metadata are interpreted, shaped, and organized for efficient access, manipulation, and display within file management components.
+</div>
+
 #### Example
 
     <div id="filemanager"></div>
@@ -48,6 +53,11 @@ The data item (model) configuration. See the [`DataSource.schema.model` configur
 
 > The model must inherit from [`kendo.data.FileEntry`](/api/javascript/data/fileentry).
 
+
+<div class="meta-api-description">
+Define and customize the data structure, fields, identifiers, parsing rules, validation, and data model behavior for file entries managed and displayed by the file management system, enabling control over how files are represented, processed, and manipulated during data binding, create, read, update, and delete operations, including setting up field mappings, validation logic, and inheritance from specific file entry schemas to ensure consistent handling and interaction with file items in the data source.
+</div>
+
 #### Example
 
     <div id="filemanager"></div>
@@ -79,6 +89,11 @@ The data item (model) configuration. See the [`DataSource.schema.model` configur
 ### schema.model.isDirectory `Boolean|String|Function` *(default: false)*
 
 Specifies whether the model is directory
+
+
+<div class="meta-api-description">
+Identify and distinguish folders from files within a file management system by configuring a boolean indicator that marks items as directories or not, enabling developers to customize rendering with folder icons, implement folder-specific behaviors like opening, navigating, uploading content, filtering file lists to separate folders from files, controlling how file trees display hierarchical structures, and managing user interactions based on item type through model configuration during setup for effective file system manipulation and UI presentation.
+</div>
 
 #### Example
 

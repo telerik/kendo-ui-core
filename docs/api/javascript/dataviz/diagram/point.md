@@ -13,6 +13,11 @@ Represents a point in two-dimensional space.
 
 The x coordinate of the point.
 
+
+<div class="meta-api-description">
+Specify or set the initial horizontal coordinate for a diagram point during creation by providing a numeric x-value that determines the point’s placement or movement along the x-axis, enabling control over the point’s left-to-right positioning, alignment, or offset when constructing or configuring diagram elements, shapes, nodes, or visual components that require precise horizontal layout adjustments.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -37,6 +42,11 @@ The x coordinate of the point.
 ### y `Number`
 
 The y coordinate of the point.
+
+
+<div class="meta-api-description">
+Set or configure the vertical coordinate or y-position of a diagram point, specifying the point’s placement along the vertical axis during creation or initialization. Control or define the y-value to influence layout arrangement, connector routing, and precise rendering of points in visual diagrams, graphs, or node-link structures. Adjust the vertical positioning to affect alignment, spacing, or distribution of points in diagrammatic representations, ensuring accurate vertical placement for spatial calculations, layout algorithms, or graphical interface designs.
+</div>
 
 #### Example
 
@@ -64,6 +74,11 @@ The y coordinate of the point.
 ### x `Number`
 
 The x coordinate of the point.
+
+
+<div class="meta-api-description">
+Configure, retrieve, or adjust the horizontal position value of a point within a diagram, enabling precise control over its x-coordinate for layout calculations, placement, alignment, movement, or spatial positioning. This numeric horizontal coordinate supports operations like setting the left-to-right location, updating point coordinates dynamically, computing geometry, and managing diagrammatic structures by defining or reading the exact horizontal axis value. Use cases include manipulating point positions for rendering, layout algorithms, coordinate transformations, and responsive repositioning along the x-axis.
+</div>
 
 #### Example
 
@@ -93,6 +108,11 @@ The x coordinate of the point.
 ### y `Number`
 
 The y coordinate of the point.
+
+
+<div class="meta-api-description">
+Set or adjust the vertical position, height, or Y-coordinate of a point within a diagram or coordinate system to control alignment, placement, or spatial calculations. Enable precise vertical movement, positioning, or offset by specifying numeric values for the point’s vertical axis, supporting tasks like layout adjustment, coordinate mapping, or graphical transformations. Use this to configure or modify the point’s vertical dimension for alignment, layout design, positioning logic, or dynamic coordinate updates in diagrams, charts, or graphical representations.
+</div>
 
 #### Example
 

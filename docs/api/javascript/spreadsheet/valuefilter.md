@@ -14,6 +14,11 @@ Represents a filter applied to a column of a given [range](/api/javascript/sprea
 
 The constructor of the filter.
 
+
+<div class="meta-api-description">
+Initialize or construct a value-based filtering mechanism by configuring and setting up a filter instance ready to filter data or component content based on specific values, enabling value matching, criteria setup, default filtering options, internal state initialization, and preparation for use in custom filtering logic or extended filter features, ensuring the filter is activated and correctly configured for value comparisons and selective data display.
+</div>
+
 #### Parameters
 
 ##### options `Object`

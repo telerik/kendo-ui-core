@@ -15,6 +15,11 @@ The `kendo.data.OrgChartModel` class represents a data item from the [kendo.data
 
 The name of the Model's avatar field. Will be used to render the item avatar in the card (item) template.
 
+
+<div class="meta-api-description">
+Configure the field that holds profile images, photos, or avatar URLs within your data model to display personalized user pictures in organizational charts, enabling dynamic binding of image sources for each node, card, or item representation; control how profile photos, user pictures, or visual identifiers appear by specifying the exact attribute containing image links or binary image data to customize avatars shown in hierarchical or card-based layouts.
+</div>
+
 #### Example
 
     <div id="orgchart"></div>
@@ -58,6 +63,11 @@ The name of the Model's avatar field. Will be used to render the item avatar in 
 
 The name of the Model's name field. Will be used to render the item name in the card (item) template.
 
+
+<div class="meta-api-description">
+Set or customize the field in your data model that determines the label or title shown on each organizational chart card, control which property supplies the displayed node names, configure how item labels appear by specifying the text field for node titles, bind and present the appropriate data field for chart node labeling, define or change the source attribute used for card text in org chart views, enable flexible naming by selecting or mapping the display name property, adjust the field that populates each card’s visible title, and control the organization chart’s node text output by assigning the relevant label data key.
+</div>
+
 #### Example
 
     <div id="orgchart"></div>
@@ -99,6 +109,11 @@ The name of the Model's name field. Will be used to render the item name in the 
 ### parentId *(default: "{ type: 'number', nullable: true }")*
 
 The name of the Model's parentId field. The Kendo UI OrgChart distinguishes the root items based on the `parentId` field. If the `schema.model.fields.[parentIdField]` is nullable, root items with be items whose `parentId` field values are `null`. If the `schema.model.fields.[parentIdField]` is *not* nullable, root items will be items which have a default value for their data type.
+
+
+<div class="meta-api-description">
+Configure and customize the hierarchical structure by specifying the field name that identifies parent nodes in your data model, enabling control over which items are treated as root elements in organizational charts or tree structures. Set or map the key that links child nodes to their parents, define how root nodes are recognized by indicating nullable or default parent references, and adjust the parent-child relationships in data visualizations or tree models by controlling the designation of parent ID fields. Manage root detection logic based on whether the parent identifier is null or matches a default value, support flexible hierarchy mapping, and tailor the parent node identification for accurate representation of organizational or relational data trees.
+</div>
 
 #### Example
 
@@ -142,6 +157,11 @@ The name of the Model's parentId field. The Kendo UI OrgChart distinguishes the 
 ### title *(default: "{ type: 'string', nullable: true }")*
 
 The name of the Model's title field. Will be used to render the item title in the card (item) template.
+
+
+<div class="meta-api-description">
+Configure or bind the data field used to display the main label or heading on organizational chart nodes, controlling which model attribute appears as the card title or node caption in the chart. Enable setting or mapping a specific property to act as the visible title text for each item, letting you customize and control the displayed names, headings, or labels in hierarchical charts, org tree views, or node cards by specifying a data field that is rendered as the prominent title or identifier.
+</div>
 
 #### Example
 
@@ -198,6 +218,11 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
 
 > The parameter name can be changed with the [`paramaterMap`](/api/javascript/data/datasource/configuration/transport.parametermap) function.
 
+
+<div class="meta-api-description">
+Control and configure which nodes in an organizational chart show as expandable or collapsible by specifying which items have child nodes, enabling dynamic rendering of expand icons based on a true/false flag that indicates presence of children. Manage the detection of child availability during local or remote data binding scenarios, including server-side calculation for lazy loading, and customize request parameters sent when users expand nodes to fetch child data. Enable precise control over hierarchical data structures by indicating expandable nodes, adjusting parameter mappings for server requests, and supporting responsive user interactions that trigger loading of child elements dynamically in org chart visualizations.
+</div>
+
 #### Example
 
     <div id="example">
@@ -236,6 +261,11 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
 ### loaded
 
 Gets or sets the loaded flag of the OrgChart. Setting the loaded flag to `false` allows reloading of child items.
+
+
+<div class="meta-api-description">
+Check and control if child nodes in an organizational chart have finished loading or need to be refreshed, manage flags that indicate whether descendants are currently loaded or require re-fetching, enable or disable automatic reloading of child elements, toggle loaded state to trigger data refresh for lazy-loaded or remotely fetched children, set or retrieve loading status to control dynamic updates and synchronization of hierarchical data, determine if subnodes can be reloaded to update organization tree structures, control refresh behavior for nested items in charts, mark children as loaded to prevent unnecessary network calls, handle loading state when configuring or resetting child node data retrieval, manage flags that dictate whether child branches should be fetched again or kept cached.
+</div>
 
 #### Example
 

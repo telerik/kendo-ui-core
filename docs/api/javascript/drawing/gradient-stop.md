@@ -13,6 +13,11 @@ Represents a gradient color stop.
 ### options `Object`
 The configuration of this GradientStop.
 
+
+<div class="meta-api-description">
+Set up and customize a gradient color point by specifying properties like color, position offset, opacity level, and various other stop-related settings when initializing a gradient stop element for drawing or graphic components. Control how each color transition point behaves within gradients by providing detailed configuration options through an initialization parameter, enabling precise adjustment of appearance, transparency, and placement along the gradient range. This includes defining color values, stop locations, alpha transparency, and other customizable attributes that affect how the gradient stop contributes to the overall gradient effect in rendering contexts or UI design workflows.
+</div>
+
 #### Example
 
     <div id="surface"></div>
@@ -34,6 +39,11 @@ The configuration of this GradientStop.
 ### offset `Number`
 The stop offset from the start of the element.
 Ranges from 0 (start of gradient) to 1 (end of gradient).
+
+
+<div class="meta-api-description">
+Set or adjust the position of a color stop within a gradient by specifying a numeric value between zero and one to control where along the gradient line the color begins or changes, enabling precise placement of color transitions, stops, and offsets for creating smooth or sharp color blends in drawing or graphic elements, allowing developers to define fractional positions and control gradient progression from start to end coordinates.
+</div>
 
 #### Example
 
@@ -60,6 +70,11 @@ The color in any of the following formats.
 | rgb(255, 0, 0) | RGB value
 
 Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
+
+
+<div class="meta-api-description">
+Specify or configure gradient stop colors using CSS color names, hex codes, RGB values, or transparent and none keywords to set, update, clear, or control color stops within gradients. Enable programmable manipulation of color points in gradients with formats like named colors (e.g., red), hexadecimal notation (#ff0000), and rgb() functions (rgb(255, 0, 0)), supporting flexible styling, dynamic updates, resetting fills, or clearing colors through empty strings or transparent values. Adjust, define, customize, or override gradient colors in drawing contexts with comprehensive color format support for precise visual control.
+</div>
 
 #### Example
 
@@ -92,6 +107,11 @@ Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
 ### opacity `Number`
 The fill opacity.
 Ranges from 0 (completely transparent) to 1 (completely opaque).
+
+
+<div class="meta-api-description">
+Adjust or configure the transparency level, alpha, or fill opacity of a color stop within a gradient fill, controlling how see-through, transparent, translucent, or solid the gradient segment appears in drawing or graphic components; set or modify the opacity value ranging from fully invisible or transparent (0) to fully visible or opaque (1) to customize the visual blending, fade, or transparency effects in drawing shapes, backgrounds, or UI elements.
+</div>
 
 #### Example
 
@@ -128,6 +148,11 @@ Ranges from 0 (completely transparent) to 1 (completely opaque).
 
 ### options `kendo.drawing.OptionsStore`
 The configuration options of the gradient stop.
+
+
+<div class="meta-api-description">
+Accessing or modifying the configuration settings of a gradient stop, including reading or updating properties that control its color, position, opacity, and behavior, programmatically managing the gradient stop’s parameters after creation, inspecting and adjusting rendering options or appearance details of individual gradient points within a gradient, configuring or customizing gradient stops in code for dynamic gradients, retrieving or setting stop-specific options that influence how gradients transition, working with the settings object tied to specific gradient locations, and controlling fine-grained attributes of gradient stops such as interpolation, offset, and color values.
+</div>
 
 #### Example
 

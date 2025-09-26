@@ -53,6 +53,11 @@ For this effect to work as expected, the elements should be positioned on top of
 
 The direction to which the sliding will occur.
 
+
+<div class="meta-api-description">
+Specify or configure the sliding direction for a tile’s animation behavior during initialization, controlling the flow and orientation of content transitions such as slide in, slide out, left to right, right to left, up, down, or diagonal movements; adjust or set the entry and exit animation paths, enable directional control for effects, and define how content animates within a component to customize motion behavior and visual flow in user interfaces.
+</div>
+
 #### Example
 
     <div id="container">
@@ -76,6 +81,11 @@ The direction to which the sliding will occur.
 ### previous `jQuery`
 
 The element to slide out of the view.
+
+
+<div class="meta-api-description">
+Control the outgoing element that slides or animates out of view during tile transitions by specifying a reference object such as a DOM element, CSS selector, or jQuery object; set or configure which outgoing tile or component should animate away, enabling smooth exit animations for elements when transitioning or replacing visual tiles, allowing developers to define and target the specific element that moves offscreen during UI animations or dynamic content swaps.
+</div>
 
 #### Example
 

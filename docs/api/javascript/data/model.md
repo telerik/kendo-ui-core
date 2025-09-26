@@ -16,6 +16,11 @@ res_type: api
 
 The value of the ID of the `Model`. This field is available only if the `id` is defined in the Model configuration. See the following example.
 
+
+<div class="meta-api-description">
+Retrieve or access the unique identifier, primary key, or record ID of a data model instance to reference, update, delete, or manage specific entries and their relationships within a database or data source. Enable querying by ID, set or get the instance's identifier value, control entity references, link records via IDs, or manipulate model objects using their unique keys after data source connection. This identifier field is essential for targeting individual records, syncing changes, and handling model relationships programmatically when an ID attribute is configured in the model schema.
+</div>
+
 #### Example - configure the Model id 
 
     <script>
@@ -69,6 +74,11 @@ The value of the ID of the `Model`. This field is available only if the `id` is 
 
 The name of the `Model` ID field. This field is available only if the `id` is defined in the Model configuration.
 
+
+<div class="meta-api-description">
+Specify or configure the unique identifier field name for data records to enable precise referencing, lookup, update, or deletion operations on models where an ID is defined; control which model attribute functions as the primary key for matching, key-based access, or record identification, supporting scenarios like querying by unique keys, syncing data changes, or ensuring consistent entity recognition across data sources.
+</div>
+
 #### Example
 
     <script>
@@ -114,6 +124,11 @@ The name of the `Model` ID field. This field is available only if the `id` is de
 
 The unique identifier of the `Model`. Inherited from `ObservableObject`. For more information, refer to the [`uid`](/api/javascript/data/observableobject#fields-uid) API reference.
 
+
+<div class="meta-api-description">
+retrieve or access the unique identifier, id, or key for an object or model instance to track, reference, compare, or map specific records or entities; manage identity fields used within observable objects for distinguishing instances, accessing primary keys, or linking data entries consistently across components and data stores; get or set unique instance identifiers, object IDs, or unique keys for efficient lookup, data synchronization, entity comparison, or debugging purposes in reactive or observable frameworks.
+</div>
+
 #### Example
 
     <script>
@@ -134,6 +149,11 @@ The main benefit of the `uid` identifiers is to represent a link between data it
 
 Indicates whether the model is modified.
 
+
+<div class="meta-api-description">
+Detect if data has unsaved modifications, changes, or edits in a model to control save and revert workflows, enable or disable save buttons based on local updates, trigger validations when data differs from the original state, track whether fields or records are altered, and decide when to persist or discard user input or changes in forms, data sources, or objects.
+</div>
+
 #### Example - use the dirty field
 
     <script>
@@ -153,6 +173,11 @@ Indicates whether the model is modified.
 ### bind
 
 Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable/methods/bind) API reference.
+
+
+<div class="meta-api-description">
+Attach event listeners or handlers to specific named events on data models by subscribing with the event name and a callback function, enabling detection and response to changes, updates, triggers, or custom events within the model. Configure event binding to listen for and handle model state changes, mutations, notifications, or user-defined event triggers, allowing dynamic reaction to data modifications and event-driven programming patterns in your application. Enable, set up, or control event subscriptions on model objects to execute callback functions when certain events occur, supporting custom logic execution when model events fire or data changes happen.
+</div>
 
 #### Example
 
@@ -179,6 +204,11 @@ Attaches a handler to an event. For more information and examples, refer to the 
 ### define
 
 Defines a new `Model` type by using the provided options. The returned value inherits from the `kendo.data.Model` class.
+
+
+<div class="meta-api-description">
+Create or configure custom data model types by defining new models with specified options, enabling extension or customization of data items such as fields, identifiers, default values, validation rules, and instance methods. This method supports generating constructors that inherit from base data model classes, allowing developers to tailor model behavior, implement custom data bindings, control serialization, and add unique logic for individual model instances in data sources or application contexts. Set up, extend, or override model schemas and behaviors to meet specific data representation needs or validation requirements within your data-driven application.
+</div>
 
 #### Example - define a model
 
@@ -325,6 +355,11 @@ Specifies the validation options which will be used by the [Kendo UI Validator](
 
 Determines if the specified field is editable or not.
 
+
+<div class="meta-api-description">
+Determine if a specific data field can be modified at runtime by checking its edit permissions, enabling dynamic control over inline editing, form binding, or update handling. Configure whether a field is writable, toggling edit modes and validation logic based on current conditions, user roles, or business rules. Use this to enable, disable, or conditionally allow editing of model properties within data sources, supporting customization of user interface behavior for editing, input control, or form interactions.
+</div>
+
 #### Returns
 
 `Boolean`&mdash;Returns `true` if the field is editable. Otherwise, returns `false`.
@@ -359,6 +394,11 @@ The field that will be checked.
 
 Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/methods/get) API reference.
 
+
+<div class="meta-api-description">
+Access, retrieve, or read the value of a specific field or property from a data model instance representing structured data within a data source, enabling extraction of individual attribute values for use in user interface templates, form editors, event handler logic, or business workflows. This functionality supports fetching field data dynamically by name, obtaining model property values for display, validation, conditional logic, or data manipulation scenarios during runtime. It is commonly employed to get the contents of a single property within complex data records or objects managed by observable models and data-binding frameworks.
+</div>
+
 #### Example
 
     <script>
@@ -383,6 +423,11 @@ Gets the value of the specified field. Inherited from `kendo.data.ObservableObje
 ### isNew
 
 Checks if the `Model` is new or not. The `id` field is used to determine if a model instance is new or existing. If the value of the specified field is equal to the default value that is specified through the `fields` configuration, the model is considered new.
+
+
+<div class="meta-api-description">
+Check if a data record is new, unsaved, or already exists by verifying the presence or default state of its unique identifier to decide whether to create a new entry or update an existing one; this method helps control save operations, differentiate between insert versus update in data workflows, and manage conditional logic based on whether the model instance has been persisted or remains fresh without an assigned ID or primary key.
+</div>
 
 #### Returns
 
@@ -409,6 +454,11 @@ Checks if the `Model` is new or not. The `id` field is used to determine if a mo
 ### set
 
 Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/methods/set) API reference.
+
+
+<div class="meta-api-description">
+Update or assign values to data model fields dynamically, modify specific attributes within data objects, change property values programmatically, enable synchronization between model changes and UI components, trigger change notifications for data bindings, control observable data updates, configure model properties to automatically notify connected views or data sources, set attributes on objects with reactive event propagation, adjust model data fields while ensuring UI reflects the latest state, and manage real-time updates between data structures and interface elements.
+</div>
 
 #### Example
 
@@ -442,6 +492,11 @@ Sets the value of the specified field. Inherited from `kendo.data.ObservableObje
 ### toJSON
 
 Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`toJSON`](/api/javascript/data/observableobject/methods/tojson) API reference.
+
+
+<div class="meta-api-description">
+Convert a data model instance into a plain JavaScript object representation to inspect, serialize, export, or manipulate its current field values and properties; enable easy transformation of complex model data into simple JSON-ready objects for sending over networks, storing, or logging, with support for extracting all fields, flattening nested properties, and creating serializable snapshots of data entities from observable data sources or structured objects.
+</div>
 
 #### Example
 
@@ -479,6 +534,11 @@ Creates a plain JavaScript object which contains all fields of the `Model`. Inhe
 
 Fires when a field value is updated through the `set` method. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`change`](/api/javascript/data/observableobject/events/change) API reference.
 
+
+<div class="meta-api-description">
+Detect and handle updates when a data model’s field value changes due to set operations, enabling real-time listening for changes, automatic UI refreshes, data validation triggers, synchronization of updated values with backend servers, reacting to user edits or programmatic modifications, monitoring observable object property updates, tracking model state mutations, firing change event handlers for reactive programming, capturing data changes in client-side frameworks, and implementing change detection mechanisms to maintain consistency between the model and application view layers.
+</div>
+
 #### Example
 
     <script>
@@ -513,6 +573,11 @@ Fires when a field value is updated through the `set` method. Inherited from `ke
 
 Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/events/get) API reference.
 
+
+<div class="meta-api-description">
+Detect and respond to whenever a model property is accessed or retrieved by configuring listeners for property read actions, enabling monitoring or reacting when the get method is called on data model instances. Track and handle property access events, observe changes during data retrieval operations, set up handlers for property fetch triggers within observable model or data source objects, and capture moments when data fields are requested or read in applications managing data models. Control behavior on property fetching, intercept access calls for validation, logging, or dynamic processing tied to property reads in data-bound contexts.
+</div>
+
 #### Example
 
     <script>
@@ -540,6 +605,11 @@ Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObj
 ### set
 
 Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/events/set) API reference.
+
+
+<div class="meta-api-description">
+Detect and respond to changes in data model properties when values are updated or assigned via setter methods, enabling synchronization of application state, UI refreshes, validation triggers, event handling on property modification, monitoring dynamic data updates, reacting to property value assignment, and integrating custom logic upon model data changes across reactive or observable data sources.
+</div>
 
 #### Example
 

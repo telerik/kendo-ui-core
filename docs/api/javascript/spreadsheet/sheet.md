@@ -14,6 +14,11 @@ Represents a sheet instance in the [Kendo UI Spreadsheet](/api/javascript/ui/spr
 
 The [DataSource](/framework/datasource/overview) instance to which the Sheet is bound to.
 
+
+<div class="meta-api-description">
+Configure and connect spreadsheet sheets to external data sources or database tables to enable dynamic loading, syncing, updating, and real-time data binding of rows and cells; control and access the linked data for programmatic reading, modifying, synchronizing, or refreshing content within sheets, ensuring seamless integration with underlying datasets, live data feeds, or APIs for automated updates and data-driven spreadsheet management.
+</div>
+
 #### Example
 
     <div id="spreadsheet"></div>
@@ -43,6 +48,11 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
 ### addDrawing
 
 Adds a new drawing to this sheet.
+
+
+<div class="meta-api-description">
+Add, insert, or embed shapes, images, annotations, or graphics onto a sheet programmatically by creating and attaching new visual elements to the sheet’s drawing layer. Enable adding new drawings that can be accessed, modified, or managed using drawing-related functions and APIs, supporting dynamic placement, editing, and control of embedded objects or visual overlays within the spreadsheet. Control embedding of custom images, diagrams, or annotations as part of the sheet content through automation or scripting interfaces.
+</div>
 
 #### Parameters
 
@@ -86,6 +96,11 @@ if you want to remove this drawing.
 
 Clears the filters for the passed column index. If an array is passed, `clearFilter` will clear the filter for each column index.
 
+
+<div class="meta-api-description">
+Clear or reset filters on spreadsheet columns by removing any applied filtering criteria using column indexes, supporting clearing filters for single or multiple columns at once, enabling removal of active filter settings to restore original data views, managing and disabling column-specific filtering configurations, and controlling filtered data display by resetting one or more specified columns’ filter states.
+</div>
+
 #### Parameters
 
 ##### indexes `Number|Array`
@@ -120,6 +135,11 @@ The column index(es)
 
 Gets or sets the width of the column at the given index.
 
+
+<div class="meta-api-description">
+Retrieve or set the width of a specific column by its index to control or modify column size dynamically during runtime, allowing programmatic adjustment of layout, resizing columns individually, customizing or configuring column widths, managing grid or spreadsheet column dimensions, changing column width by position, and enabling flexible column size updates within the sheet structure for responsive or precise layout control.
+</div>
+
 #### Parameters
 
 ##### index `Number`
@@ -149,6 +169,11 @@ If passed, the method will set the width of the column at the passed index.
 Suppresses triggering of change events for a sequence of actions. Triggers a single change event at the end of the sequence.
 
 Greatly improves performance when calling multiple methods that change the sheet state, as the widget will be refreshed once.
+
+
+<div class="meta-api-description">
+Optimize multiple updates to a spreadsheet or tabular interface by grouping changes to avoid repetitive event triggers, allowing batch execution of state modifications that suppress individual update notifications and emit a single consolidated change event after all actions complete, improving performance and reducing UI refresh overhead by applying multiple edits, configurations, or state changes in one operation without intermediate redraws or event firing.
+</div>
 
 #### Parameters
 
@@ -183,6 +208,11 @@ The change event arguments that will be used for the change event triggered afte
 
 Deletes the contents of the column at the provided index and shifts the remaining contents of the sheet to the left.
 
+
+<div class="meta-api-description">
+Remove a specific column by index from a spreadsheet, clearing its cells and shifting all subsequent columns and data leftward to maintain layout continuity, enabling tasks such as deleting columns, adjusting sheet structure, updating cell positions, reordering data, modifying columns dynamically, or managing spreadsheet content by eliminating unwanted vertical sections.
+</div>
+
 #### Parameters
 
 ##### index `Number`
@@ -208,6 +238,11 @@ The zero-based index of the column
 ### deleteRow
 
 Deletes the contents of the row at the provided index and shifts the remaining contents of the sheet up.
+
+
+<div class="meta-api-description">
+Delete a specific row by index to remove its data and shift all rows below upward, effectively closing the gap and reflowing the sheet’s content; this operation enables programmatic removal of rows, clearing row contents, adjusting row positions after row deletion, managing spreadsheet data updates, dynamically controlling row structures, and handling row-based modifications such as removing empty or unwanted rows and reorganizing sheet layout.
+</div>
 
 #### Parameters
 
@@ -244,6 +279,11 @@ Loads the sheet from an object in the format defined in the [sheet configuration
 > The configuration and cell values will be merged.
 >
 > **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet/methods/fromjson) method.
+
+
+<div class="meta-api-description">
+Import, load, or merge spreadsheet data and sheet settings from JSON structures that match the sheet configuration schema, enabling dynamic updates or initial population of a single sheet’s cells, formatting, and layout within a spreadsheet component. Control how cell values, formulas, styles, and metadata integrate or overwrite existing sheet content without altering the overall spreadsheet framework, ensuring the imported JSON matches predefined row and column limits to avoid size conflicts. Facilitate seamless synchronization, data restoration, or partial updates by applying JSON-based configurations directly into a sheet instance while preserving sheet dimensions and preventing resizing, supporting workflows such as syncing external data, restoring saved sheets, or incrementally modifying individual sheets inside a larger workbook structure.
+</div>
 
 #### Parameters
 
@@ -317,6 +357,11 @@ The object to load data from.  This should be **the deserialized object**, not t
 
 Gets or sets the amount of frozen columns displayed by the sheet.
 
+
+<div class="meta-api-description">
+Control or retrieve the number of columns fixed or pinned on the left side of a data grid or spreadsheet to stay visible while scrolling horizontally, enabling dynamic locking or unlocking of columns for consistent header or key data display, adjusting frozen column counts in response to layout or content updates, synchronizing visible locked columns with UI state or custom functionality, and configuring how many columns remain static during navigation to improve user interface clarity and data comparison across wide datasets.
+</div>
+
 #### Parameters
 
 ##### count `Number` *optional*
@@ -344,6 +389,11 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 ### frozenRows
 
 Gets or sets the amount of frozen rows displayed by the sheet.
+
+
+<div class="meta-api-description">
+Control, set, or retrieve the count of top rows that remain fixed or locked in place when scrolling vertically within a spreadsheet or grid interface, enabling users to freeze header rows or important top sections for constant visibility. Configure how many leading rows stay static at the sheet’s top during navigation, adjust or query the number of frozen rows to maintain persistent row visibility, lock specific rows from scrolling off-screen, and dynamically update the layout to enable or disable row freezing for improved data readability and interface usability. Enable programmatic access to manage, modify, or get the currently locked top rows that stay visible, supporting use cases like static headers, prominent row locking, or controlling vertical scroll behavior in tabular data structures.
+</div>
 
 #### Parameters
 
@@ -373,6 +423,11 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
 Hides the column at the provided index.
 
+
+<div class="meta-api-description">
+Programmatically hide or conceal specific columns by index in a spreadsheet or grid component to dynamically control column visibility, manage layout adjustments, toggle column display based on user interactions or application conditions, enable hiding certain data columns for user interface customization, configure which columns are shown or hidden at runtime, set column visibility states by position, and update the sheet layout to reflect these changes automatically.
+</div>
+
 #### Parameters
 
 ##### index `Number`
@@ -398,6 +453,11 @@ The zero-based index of the column
 ### hideRow
 
 Hides the row at the provided index.
+
+
+<div class="meta-api-description">
+Control the visibility of individual rows by specifying their index to hide or conceal a particular row from display within a sheet or grid component, enabling dynamic hiding of rows for filtering, conditional display, or user interface adjustments with programmatic control to toggle row visibility on and off using index-based row targeting for granular row management and presentation control.
+</div>
 
 #### Parameters
 
@@ -425,6 +485,11 @@ The zero-based index of the row
 
 Inserts a new, empty column at the provided index. The contents of the spreadsheet (including the ones in the current column index) are shifted to the right.
 
+
+<div class="meta-api-description">
+Add or insert a new blank column at a specified index within a spreadsheet, shifting all existing columns and their contents to the right to make space; control column insertion position, enable column addition without overwriting, manage spreadsheet structure by adding columns dynamically, adjust table layouts by inserting columns at any point, and modify sheet data by pushing existing cells rightward when expanding columns.
+</div>
+
 #### Parameters
 
 ##### index `Number`
@@ -450,6 +515,11 @@ The zero-based index of the column
 ### insertRow
 
 Inserts a new, empty row at the provided index. The contents of the spreadsheet (including the ones in the current row index) are shifted down.
+
+
+<div class="meta-api-description">
+Insert a new blank row at a specified position within a spreadsheet or table, enabling developers to add rows dynamically without overwriting existing content, shift all rows downward starting from a certain index, control and configure row injection in grid-like data structures, create space in data sheets or tables by adding empty rows at chosen locations, and manage row insertion to update layouts while preserving current cell values and formatting.
+</div>
 
 #### Parameters
 
@@ -480,6 +550,11 @@ If passed `true`, the method does not insert item in the DataSource.
 ### range
 
 Returns a [Range](/api/javascript/spreadsheet/range) for the given range specification.
+
+
+<div class="meta-api-description">
+Access or retrieve a specific block or area of cells from a spreadsheet sheet using various range identifiers, coordinates, or addresses to read data, update cell values, select multiple cells, apply styles or formatting, modify content, iterate through cells, control cell regions, or use range-related functions for batch operations. Enable extracting a subset of the sheet’s grid for manipulation, transformation, bulk editing, or targeted cell processing by specifying ranges via A1 notation, row and column indexes, or named ranges, supporting tasks like data input, selection, applying styling, and calling further methods that operate on cell collections within a spreadsheet tab.
+</div>
 
 #### Parameters
 
@@ -534,6 +609,11 @@ If the parameters are `Numbers`, the first two would represent the row index (th
 
 Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
 
+
+<div class="meta-api-description">
+Delete or detach a specific drawing element that was previously added to a sheet or canvas, enabling control over graphical overlays, removing visual objects, clearing or updating drawings by reference, undoing or managing added illustrations dynamically, programmatically eliminating shapes or annotations from the drawing layer, handling removal of graphical components after initialization, modifying or resetting drawings via stored drawing instances, and managing visual content on sheets by specifying and removing particular drawing objects.
+</div>
+
 #### Parameters
 
 ##### drawing `Object`
@@ -571,6 +651,11 @@ Resize the sheet to accommodate the specified number of rows and columns. If the
 new dimensions are smaller than the current ones, any existing data in the rows
 or columns that are to be removed will be discarded.
 
+
+<div class="meta-api-description">
+Adjust grid or table size by setting the number of rows and columns, enable resizing to expand or shrink the spreadsheet layout dynamically, control sheet dimensions to fit specific row and column counts, configure grid capacity to increase or decrease available cells, handle data truncation when reducing size by removing overflowing rows or columns, update sheet structure for custom row and column adjustments, manage grid resizing for layout optimization or data fitting, modify sheet area to accommodate new dimensions, set spreadsheet size to predefined or dynamic values, and perform layout recalculations when changing the number of rows and columns to scale or limit the sheet accordingly.
+</div>
+
 #### Parameters
 
 ##### newRows `Number`
@@ -596,6 +681,11 @@ The new number of columns.
 ### rowHeight
 
 Gets or sets the height of the row at the given index.
+
+
+<div class="meta-api-description">
+Adjust or retrieve the vertical size, height, or spacing of a specific row by its index in a spreadsheet or data grid, enabling programmatic control over row dimensions to customize layout, improve readability, modify spacing between rows, set print formatting, or dynamically resize rows based on content, with functions to query current row height or update it directly by specifying row position and new height value.
+</div>
 
 #### Parameters
 
@@ -627,6 +717,11 @@ If passed, the method will set the height of the row at the passed index.
 
 Returns a range with the current active selection.
 
+
+<div class="meta-api-description">
+access the currently selected cells or active range within a spreadsheet or grid interface, retrieve selection coordinates or boundaries, identify which cells are highlighted or chosen by the user, read cell spans or merged areas within the selection, programmatically get or update the user's current selection range, persist or store the active selection state for later use, obtain details about the highlighted cell group for processing or manipulation, track which part of the sheet is focused or selected during runtime, enable selection-based features or actions by fetching the selection data, and control or query the current selection range dynamically in the sheet component environment.
+</div>
+
 #### Returns
 
 `kendo.spreadsheet.Range` the selection range.
@@ -652,6 +747,11 @@ Returns a range with the current active selection.
 ### setDataSource
 
 Binds the sheet to a DataSource instance. For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](/controls/spreadsheet/import-and-export-data/bind-to-data-source).
+
+
+<div class="meta-api-description">
+Configure and attach a data source to a spreadsheet sheet to dynamically load, bind, and synchronize tabular data, enabling interactive operations such as sorting, filtering, paging, and real-time updates of rows and columns by connecting to existing data collections or data sources; set or update the underlying data provider to control spreadsheet content and behavior based on external or in-memory datasets, integrating with data-binding workflows and enhancing data management within spreadsheet components through declarative or programmatic data source linkage.
+</div>
 
 #### Parameters
 
@@ -737,6 +837,11 @@ Columns configuration.
 
 Gets or sets a flag indicating if the grid lines should be visible.
 
+
+<div class="meta-api-description">
+Set, retrieve, toggle, or control visibility of grid lines in spreadsheet or sheet components, enabling dynamic show or hide of cell grid outlines, configuring boolean flags to display or suppress grid borders for better readability or clean layouts, adjusting grid line appearance programmatically or interactively during runtime, managing visual cell separators to customize sheet presentation, and querying current grid line state to determine if cell boundaries are visible or hidden.
+</div>
+
 #### Parameters
 
 ##### showGridLines `Boolean` *optional*
@@ -762,6 +867,11 @@ If passed, the method will toggle the display of the grid lines according to the
 
 ### toJSON
 Serializes the sheet in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
+
+
+<div class="meta-api-description">
+Convert or serialize a spreadsheet’s current state, including configuration, data, and settings, into a JSON format for saving, exporting, backing up, syncing, or transferring between applications and servers, enabling recreation, restoration, duplication, or synchronization of the sheet’s structure and content across different environments or sessions.
+</div>
 
 #### Example - Serialize the sheet as JSON
 
@@ -796,6 +906,11 @@ Serializes the sheet in the format defined in the [sheet configuration](/api/jav
 
 Shows the hidden column at the provided index. Does not have any effect if the column is already visible.
 
+
+<div class="meta-api-description">
+Reveal or restore a hidden column by specifying its index to programmatically make columns visible again after being hidden, control column visibility dynamically, toggle hidden columns back into view, enable showing previously collapsed or concealed columns, manage and update column display states based on user interactions or application logic, reinstate column visibility after hiding, and handle scenarios where columns need to be unhidden within grid or sheet components.
+</div>
+
 #### Parameters
 
 ##### index `Number`
@@ -824,6 +939,11 @@ The zero-based index of the column
 ### unhideRow
 
 Shows the hidden row at the provided index. Does not have any effect if the row is already visible.
+
+
+<div class="meta-api-description">
+Reveal or restore visibility of specific hidden rows in a spreadsheet or grid by specifying their index, enabling row unhide functionality to make previously concealed rows visible again, controlling row display states, toggling hidden rows back to shown status, adjusting grid or sheet views to expose selected rows, managing row visibility programmatically without affecting other rows, setting or enabling individual row visibility, showing rows that were hidden by index, and handling display toggles for rows within tabular data structures.
+</div>
 
 #### Parameters
 
@@ -855,6 +975,11 @@ The zero-based index of the row
 ### change
 
 Fires when the configuration or the data of the sheet change.
+
+
+<div class="meta-api-description">
+Monitor and respond to updates or modifications in spreadsheet data, configuration settings, or user inputs within a sheet environment. Detect changes triggered by user edits, programmatic updates, autosave events, or configuration alterations and enable event-driven handling for validation, synchronization, re-rendering, or dynamic update workflows. Listen for data mutations, property adjustments, or interactive changes to trigger custom logic that keeps sheet content current and consistent across different states or components. Configure event handlers to capture and process real-time modifications in sheet data models, settings, or user-driven changes for seamless integration and responsive app behavior.
+</div>
 
 #### Event Data
 

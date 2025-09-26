@@ -13,6 +13,11 @@ Router class is responsible for tracking the application state and navigating be
 
 Introduced with Q3 2014. If set to `false`, the router instance will perform case sensitive match of the url against the defined routes.
 
+
+<div class="meta-api-description">
+Configure route matching sensitivity to URL letter casing by enabling or disabling case-insensitive comparisons for routing paths, controlling whether URLs with different capitalization patterns are treated as equivalent or distinct, managing case sensitivity in URL matching logic, adjusting route resolution to be strict or flexible based on uppercase or lowercase characters, supporting scenarios where routes need exact case matches versus those allowing case variations for navigation, toggling URL matching behavior for case-sensitive or case-insensitive routing to affect how incoming requests map to route definitions.
+</div>
+
 #### Example
 
     <script>
@@ -43,6 +48,11 @@ If set to true, the router will use the [history pushState API](https://develope
 
 > The history `pushState` API currently has [limited support across current browsers](https://caniuse.com/#search=pushstate).
 
+
+<div class="meta-api-description">
+Control updating the browser address bar or URL dynamically without triggering a full page reload by enabling history manipulation through pushState or similar browser history APIs; configure navigation to seamlessly modify the URL while preserving the current page state, allowing single-page application style routing, deep linking, or stateful URLs without refreshing the entire document. This setting is useful for developers needing to manage forward and backward navigation, URL changes on client side routing, or customizing browser history entries while avoiding page reloads, improving user experience with instant state updates and seamless transitions.
+</div>
+
 #### Example
 
     <script>
@@ -65,6 +75,11 @@ If set to true, the router will use the [history pushState API](https://develope
 
 Applicable if `pushState` is used and the application is deployed to a path different than `/`. If the application start page is hosted on `http://foo.com/myapp/`, the root option should be set to `/myapp/`.
 
+
+<div class="meta-api-description">
+Configure the base URL or root path for client-side routing when using HTML5 history pushState to ensure correct URL generation and navigation within applications deployed under subdirectories or custom base paths, enabling control over route prefixes, setting the starting route segment, adjusting router base paths for SPA deployments not hosted at the domain root, and managing how the application resolves relative URLs when the site is served from a nested folder or path other than root.
+</div>
+
 #### Example
     <script>
         var router = new kendo.Router();
@@ -85,6 +100,11 @@ Applicable if `pushState` is used and the application is deployed to a path diff
 
 Introduced in the 2014 Q1 Service Pack 1 release. If set to `true`, the hash based navigation will parse and prefix the fragment value with `!`,
 which [should be SEO friendly](http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html), and allows non-prefixed anchor links to work as expected.
+
+
+<div class="meta-api-description">
+Configure hash-based URL navigation with optional exclamation mark prefixes to enhance SEO crawlability for single-page applications, enabling search engines to index fragment identifiers properly, support hash-bang style routing, control URL fragments for SEO-friendly navigation, parse and handle URL hashes with or without "!" prefix, and ensure anchor links function seamlessly within client-side routing while improving discoverability and compatibility with link crawling and web crawlers.
+</div>
 
 #### Example
     <a href="#!bar">Go to bar</a>
@@ -112,6 +132,11 @@ Activates the router binding to the URL changes.
 
 > The `start` method should only be called once the routes have been registered. Otherwise the route for the current page/fragment will not be called.
 
+
+<div class="meta-api-description">
+Activate and enable client-side routing to listen for browser URL changes, hash fragments, or history events, allowing route handlers to respond dynamically to navigation updates. Configure, set, or trigger the routing system to monitor URL modifications and initiate associated callbacks, ensuring all registered routes react appropriately to pushState, popState, or fragment identifier changes after routes are defined. Initialize client-side navigation control to bind route callbacks to URL alterations and manage single-page application state transitions efficiently.
+</div>
+
 #### Example
 
     <script>
@@ -125,6 +150,11 @@ Activates the router binding to the URL changes.
 ### route
 
 Adds a new route definition to the router.
+
+
+<div class="meta-api-description">
+configure URL routing by adding new route definitions that map specific URL patterns or paths to handlers such as callbacks or controllers, set route names for identification, control navigation behavior and URL matching options, register routes dynamically within the routing system, manage endpoint associations with paths, customize route handling logic, and enable flexible path-to-handler bindings for web request processing and navigation control.
+</div>
 
 #### Example
 
@@ -156,6 +186,11 @@ The callback to be executed when the route is matched.
 ### navigate
 
 Navigates to the given route.
+
+
+<div class="meta-api-description">
+Control and direct application routing by programmatically changing the current path, triggering route updates, handling navigation events, jumping to specific URLs, updating browser history, and managing SPA route transitions using methods to move between defined routes, enable dynamic navigation changes, and manipulate the router state to reflect user or code-driven path changes within a single-page application environment.
+</div>
 
 #### Parameters
 
@@ -190,6 +225,11 @@ If set to true, the router callbacks will not be called.
 ### replace
 
 Navigates to the given route, replacing the current view in the history stack (like `window.history.replaceState` or `location.replace` work).
+
+
+<div class="meta-api-description">
+Navigate to a different route or URL without creating a new browser history entry by replacing the current route or view, enabling control over navigation behavior without adding to the back-button stack, updating the address bar and active content seamlessly while preventing users from returning to the previous page using back navigation; useful for situations where route transitions need to overwrite the current history state, such as redirecting after form submissions, authentication flows, or updating the URL dynamically without cluttering the navigation history, effectively mimicking behaviors like location.replace or history.replaceState to manage session history programmatically.
+</div>
 
 #### Parameters
 
@@ -229,6 +269,11 @@ If set to `true`, the router callbacks will not be called.
 
 Unbinds the router instance listeners from the URL fragment part changes.
 
+
+<div class="meta-api-description">
+Stop listening to URL hash or fragment changes by disabling or removing event handlers that track fragment updates, unbinding routing listeners to halt navigation responses, clean up resources and prevent memory leaks by detaching router callbacks related to URL fragments or hashes, control and disable routing event listeners, and deactivate routing behavior linked to URL fragment changes when no longer needed or before disposing of routing instances.
+</div>
+
 #### Example
 
     <script>
@@ -256,6 +301,11 @@ Unbinds the router instance listeners from the URL fragment part changes.
 ### back
 
 Triggered when the user navigates back to the previous URL.
+
+
+<div class="meta-api-description">
+Detect when users navigate backward through browser history or application routes by listening to back navigation events triggered by actions like clicking the browser back button or invoking history.back. Capture and handle these backward navigation signals to update state, refresh or reload data for the prior view, perform cleanup tasks, synchronize UI with previous route context, track user navigation patterns, or control history-aware behaviors within single-page applications and web routers. Functionality includes monitoring navigation backward, managing application changes on historical route visits, and enabling reactive handling of user history movements or route backtracking.
+</div>
 
 #### Event Data
 
@@ -304,6 +354,11 @@ The fragment part of the previous URL
 
 Triggered when the fragment part of the URL changes.
 
+
+<div class="meta-api-description">
+Detect and respond to changes in the URL fragment or hash by listening for navigation events triggered when the part of the URL after the hash symbol updates; enable handling of route or view updates, synchronize application state with URL changes, set up event listeners for hashchange or fragment navigation, manage single-page application routing, control navigation flow, update components on URL hash modifications, and bind custom handlers for history synchronization or navigation events related to changing URL fragments.
+</div>
+
 #### Event Data
 
 ##### e.url `String`
@@ -345,6 +400,11 @@ The parsed query string parameters of the URL
 ### routeMissing
 
 Triggered when the URL does not match any of the provided routes.
+
+
+<div class="meta-api-description">
+Detect and manage navigation attempts to URLs that don't correspond to any defined routes by capturing unmatched paths, enabling custom handling such as displaying 404 error pages, redirecting users programmatically to alternate routes, implementing fallback or default views when no route matches, intercepting unknown navigation requests for logging or analytics purposes, and controlling application behavior on missing or invalid URLs to improve user experience and error management in routing systems.
+</div>
 
 #### Example
 

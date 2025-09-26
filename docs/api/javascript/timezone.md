@@ -14,6 +14,11 @@ Collection of timezone related utilities. List of all time zones is available [h
 
 Returns the timezone difference between UTC and the passed timezone.
 
+
+<div class="meta-api-description">
+Calculate or retrieve the time difference between Coordinated Universal Time (UTC) and any specified timezone to convert local times to UTC or vice versa, determine timezone offsets for scheduling or event planning, handle daylight saving adjustments, display accurate timezone-aware timestamps, configure timezone differences for applications, determine hour and minute offsets relative to UTC, obtain numeric or string representations of timezone shifts, compute time differences for internationalization tasks, and perform conversions needed for date-time calculations involving multiple regions and global time coordination.
+</div>
+
 #### Parameters
 
 ##### utcTime `Date|Number`
@@ -52,6 +57,11 @@ The timezone.
 ### convert
 
 Adds the time difference between two timezones to a new date object.
+
+
+<div class="meta-api-description">
+Convert dates and times between different time zones by calculating the offset or difference, adjusting timestamps, shifting or translating a Date object’s time from one zone to another, handling conversions from UTC to local time or vice versa, enabling timezone normalization, adjusting for daylight saving time, working with timezone-aware date objects, synchronizing times across regions, and performing accurate date adjustments when dealing with multiple geographic locations or server/client time differences.
+</div>
 
 #### Parameters
 
@@ -103,6 +113,11 @@ The `'to'` offset represented as minutes (that is, the `Number` type) or timezon
 
 Adds the time difference between the current and the passed timezones to a new date object.
 
+
+<div class="meta-api-description">
+Convert, normalize, or adjust timestamps and dates to different time zones or offsets by adding time differences between source and target zones without altering the original date object. Enable timezone conversion, handle daylight saving time shifts, apply UTC offsets, and generate new date instances reflecting the correct local or target time. Use this method to calculate adjusted timestamps, reconcile date and time discrepancies across zones, set or transform datetime values dynamically, and normalize date objects for consistent timezone-aware processing across various regions and scenarios.
+</div>
+
 #### Parameters
 
 ##### targetDate `Date`
@@ -144,6 +159,11 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
 ### remove
 
 Removes the time difference between the current and the passed timezones to a new date object.
+
+
+<div class="meta-api-description">
+Convert dates across time zones, normalize timestamps, adjust or shift JavaScript Date objects by subtracting or removing timezone offsets, handle cross-zone date calculations, align dates by eliminating time differences, convert local time to another zone by offset removal, manage date adjustments when working with multiple time zones, synchronize or standardize dates by compensating for timezone discrepancies, and transform date objects to reflect accurate universal or target zone times.
+</div>
 
 #### Parameters
 
@@ -187,6 +207,11 @@ The offset represented as minutes (that is, the `Number` type) or timezone (that
 
 Returns the timezone abbreviation.
 
+
+<div class="meta-api-description">
+Retrieve or generate short timezone abbreviations such as PST, UTC, or EST for display purposes, logging timestamps, formatting dates, or comparing time zones in user interfaces. Obtain concise, standardized zone codes to configure time displays, enable quick timezone identification, set labels in date outputs, or control timestamp formatting with abbreviated timezone strings used in logs, reports, or scheduling applications. This supports use cases involving timezone short codes, abbreviation retrieval, and converting full time zones into compact, recognizable formats for UI, data processing, or event tracking.
+</div>
+
 #### Parameters
 
 ##### targetDate `Date`
@@ -224,6 +249,11 @@ The name of the particular timezone that will be used to get the abbreviation of
 ### toLocalDate
 
 Converts a date to the `"Etc/UTC"` timezone.
+
+
+<div class="meta-api-description">
+Convert date and time values to Coordinated Universal Time by adjusting timestamps to the UTC timezone, enabling accurate normalization, consistent comparison of different time zones, reliable synchronization of dates across systems, and standardizing date formats for storage or transmission; configure date conversion to universal time, set time offsets to zero, handle timezone normalization for global applications, and control how local or regional date values map to UTC equivalents for interoperability and timestamp consistency.
+</div>
 
 #### Parameters
 

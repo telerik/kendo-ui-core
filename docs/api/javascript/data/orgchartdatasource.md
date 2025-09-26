@@ -20,6 +20,11 @@ See the [TreeListDataSource configuration](/api/javascript/data/treelistdatasour
 
 The schema configuration of the OrgChartDataSource.
 
+
+<div class="meta-api-description">
+Configure data structure, field mappings, and parsing rules to control how hierarchical data is interpreted and transformed into node objects for organizational chart components; set up identifiers, map source fields to target properties, define parent-child relationships, and customize schema to ensure correct initialization and rendering of tree-like data in chart visualizations.
+</div>
+
 #### Example
 
     <script>
@@ -48,6 +53,11 @@ The schema configuration of the OrgChartDataSource.
 
 The model configuration of the OrgChartDataSource. See [kendo.data.OrgChartModel](/api/javascript/data/orgchartmodel) for more info.
 
+
+<div class="meta-api-description">
+Define and customize the structure of hierarchical data for organizational charts by specifying data item fields, unique identifiers, parent-child relationships, and default values, enabling control over how data entries are interpreted, mapped, and linked within the chart; configure or set up data models to represent complex org structures, manage node identities and connections, establish relationships between items, and enforce schema consistency for seamless data binding in organizational visualization tools.
+</div>
+
 #### Example
 
     <script>
@@ -75,6 +85,11 @@ See the [TreeListDataSource methods](/api/javascript/data/treelistdatasource#met
 ### groupedItemsTree
 
 Builds and returns an items tree when grouping is enabled.
+
+
+<div class="meta-api-description">
+Generate or retrieve the hierarchical tree structure representing grouped nodes within an organizational chart, enabling access to the nested arrangement of grouped items for visualization, analysis, or manipulation. Extract, build, or obtain the grouped items hierarchy used in org chart components when grouping is active, facilitating inspection, processing, traversal, or customization of the grouped node relationships, clusters, or nested data layout. Enable fetching or constructing the organized grouped nodes tree for organizational diagrams to support features like hierarchical rendering, data grouping evaluation, structural queries, or dynamic updates of grouped elements within the chart.
+</div>
 
 #### Parameters
 
@@ -121,6 +136,11 @@ The field the items should be grouped by.
 
 Returns a list of all direct child items.
 
+
+<div class="meta-api-description">
+Access or obtain direct child nodes, immediate descendants, or subordinate items from a hierarchical data structure by retrieving the list of all children associated with a specific parent node for traversing organizational charts, tree views, or nested collections. Use this method to fetch, enumerate, access, or bind the immediate child elements in a hierarchy, supporting operations like iteration over direct subordinates, loading child data dynamically, exploring node branches one level deep, or displaying connected lower-level items within organizational structures or data trees. This function is key for navigation, data binding, and manipulation of first-level descendant nodes across hierarchical datasets and tree-like data sources.
+</div>
+
 #### Parameters
 
 ##### item `kendo.data.OrgChartModel` *(optional)*
@@ -156,6 +176,11 @@ Whether the data should be taken from the `dataSource.view()` (only the visible 
 ### itemsTree
 
 Builds and returns an items tree.
+
+
+<div class="meta-api-description">
+Generate or build a hierarchical tree structure representing parent and child relationships from raw data for organizational charts, create nested nodes for rendering or traversal, configure and produce a structured items tree that models hierarchy for visualization, enable traversal or search within tree-like data, prepare and output a fully organized node hierarchy suitable for binding to org chart components, build and resolve node relationships for layout, access or set up a hierarchical data source for navigating or displaying nested organizational levels, transform flat data into a tree format for visualization or analysis, produce structured hierarchical datasets that support traversal, search, and rendering in organizational chart applications.
+</div>
 
 #### Parameters
 
@@ -201,6 +226,11 @@ The parent item for which the tree should be created. If this parameter is not s
 ### prospectParents
 
 Returns a list of all items in the source that can be parents of the passed item. It will filter-out the item and the full hierarchy of its children.
+
+
+<div class="meta-api-description">
+Identify and retrieve all valid parent nodes for a specific item within a hierarchical chart or organizational structure by generating a filtered list that excludes the item itself and all its descendant nodes to avoid cycles, invalid parent-child assignments, or reparenting errors; this functionality supports determining eligible drop targets during drag-and-drop operations, validating node moves, managing and updating hierarchical relationships, and ensuring integrity of tree structures by controlling possible parent selections dynamically.
+</div>
 
 #### Parameters
 

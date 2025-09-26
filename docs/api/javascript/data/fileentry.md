@@ -17,6 +17,11 @@ See the [`Node` fields](/api/framework/node#fields) for all inherited fields.
 
 The child `kendo.data.FileManagerDataSource` of the node. This field is initialized lazily if the `hasChildren` or `isDirectory` field is set or when the [`load`](/api/javascript/data/node/methods/load) or [`append`](/api/javascript/data/node/methods/append) methods were called.
 
+
+<div class="meta-api-description">
+Access, retrieve, or configure the child nodes, subfolders, or nested files within a file management system by interacting with the hierarchical data source representing directory contents; manage and traverse folder structures dynamically, enable lazy loading and on-demand expansion of nested directories, bind or link to child data collections, control loading or appending of subitems, and explore or manipulate file tree branches programmatically for scenarios involving recursive navigation, folder expansion, or fetching child entries in a directory hierarchy.
+</div>
+
 #### Example
 
     <div id="filemanager"></div>

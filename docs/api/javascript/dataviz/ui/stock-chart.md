@@ -22,6 +22,11 @@ The data item field value must be either:
 
 * String in ASP.NET JSON format, i.e. "\/Date(1320825600000-0800)\/"
 
+
+<div class="meta-api-description">
+Set or specify the data field representing the date or time for chart points in time series or stock visualizations, controlling which property the chart uses as the main time axis or category axis. Enable configuring the source of date values for data points, ensuring compatibility with JavaScript Date objects, ISO date strings, or JSON date formats to establish timeline alignment, time-based plotting, and chronological ordering in the chart's series. Control and map the time or date attribute from your dataset to drive rendering of dates on the horizontal axis, supporting various date formats used in data binding, parsing timestamp strings, or handling date-time fields in financial or temporal data visualization components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -45,6 +50,11 @@ The data item field value must be either:
 ### navigator `Object`
 
 The data navigator configuration options.
+
+
+<div class="meta-api-description">
+Adjust the interactive data range selector and timeline overview controls to manage visible chart portions, customize preview series display, configure zooming and panning behavior, set selection handles, and personalize the navigator’s style and responsiveness for enhanced user navigation and data exploration in stock or time series charts.
+</div>
 
 #### Example
 
@@ -74,6 +84,11 @@ The data navigator configuration options.
 ### navigator.categoryAxis `Object`
 
 The category axis configuration options.
+
+
+<div class="meta-api-description">
+Control and customize the category axis inside a stock chart navigator by configuring axis type options such as categorical or date-based scales, setting intervals like base unit and major unit for zoom and step control, defining minimum and maximum axis range limits, formatting and rotating axis labels for readability, adjusting major and minor tick marks, enabling or styling major grid lines, and adding plot bands for highlighting specific ranges. Enable binding to category data sources, manage date or categorical label formatting, set axis scaling and interval stepping for smooth navigation, and tailor the axis appearance and behavior to suit time series data or grouped categories in financial charts.
+</div>
 
 #### Example
 
@@ -112,6 +127,11 @@ The discrete [navigator.categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/st
 either [navigator.categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnit) is set to "fit" or
 [navigator.categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) is set to "auto".
 
+
+<div class="meta-api-description">
+Control and customize the discrete time intervals or unit steps used for automatic scaling and selection of categories along the navigation axis in stock charts, including options to configure specific base unit steps, define the granularity of time units like days, weeks, months, or custom intervals for better auto-fitting or automatic unit determination within chart navigators, enabling flexible adjustment of category axis resolution, interval snapping, automatic unit step selection, and fine-tuning of timeline display rules to improve time-based data navigation and zooming behaviors.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -149,6 +169,11 @@ either [navigator.categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#
 
 The seconds unit steps.
 
+
+<div class="meta-api-description">
+Configure and customize the discrete time intervals in seconds used for automatic base unit calculations on time-based charts, enabling precise control over navigator axis tick spacing, grid steps, and increments such as one, two, five, or ten seconds. Adjust available second-level time units or step sizes for dynamic time axis scaling, auto-determined tick marks, chart navigation granularity, and temporal data visualization with varying second increments to suit detailed time series rendering and improve user interaction on stock or time chart navigators.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -183,6 +208,11 @@ The seconds unit steps.
 ### navigator.categoryAxis.autoBaseUnitSteps.minutes `Array` *(default: [1, 2, 5, 15, 30])*
 
 The minutes unit steps.
+
+
+<div class="meta-api-description">
+Set or configure minute interval steps for time-based scales in a stock chart navigator, controlling how zoom levels, tick marks, and data grouping adjust automatically based on minute increments; customize or define minute units to optimize time axis granularity, enable specific minute step sizes for better visualization of minute-level data segments, manage zoom precision and interval segmentation on the time scale using minute-based units, and adjust category axis behavior to reflect desired minute increments when the chart automatically determines the base time unit.
+</div>
 
 #### Example
 
@@ -219,6 +249,11 @@ The minutes unit steps.
 
 The hours unit steps.
 
+
+<div class="meta-api-description">
+Set or customize automatic hourly intervals for time-based axis scaling in stock or financial charts, controlling which hour step sizes such as 1, 3, or 6 hours can be dynamically selected by the chart’s navigator to optimize date and time grouping, time unit granularity adjustment, and axis base unit selection for better timeline representation and zooming behavior in interactive stock graphs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -253,6 +288,11 @@ The hours unit steps.
 ### navigator.categoryAxis.autoBaseUnitSteps.days `Array` *(default: [1, 2, 3])*
 
 The days unit steps.
+
+
+<div class="meta-api-description">
+Control and customize how day intervals are selected and spaced on the category axis in a stock chart when the base unit is set to automatic, including configuring day step sizes, tick intervals, granularity levels, and numeric step values such as 1, 2, 5, or 10 days to influence how time spans are divided and displayed for navigation and zooming on time-based data axes in financial or time series charts.
+</div>
 
 #### Example
 
@@ -289,6 +329,11 @@ The days unit steps.
 
 The weeks unit steps.
 
+
+<div class="meta-api-description">
+Configure weekly intervals and spacing for time-based category axes, adjust automatic grouping steps for weeks, control weekly tick marks and labels on stock or financial charts, set custom weekly base units for date axis grouping, manage how weeks are segmented and displayed in chart navigators, fine-tune weekly data aggregation or resolution in time series visualizations, enable precise control over week-based scales and automatic unit selection, optimize display of weekly data points and time intervals in stock chart navigation axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -324,6 +369,11 @@ The weeks unit steps.
 
 The months unit steps.
 
+
+<div class="meta-api-description">
+Configure and control the selectable month intervals or step sizes used for automatic base time unit calculation in time-based category axes, enabling dynamic adjustment of ticks and labels on stock chart navigators. Customize or set month-based time unit steps for the category axis to influence how the system picks month ranges when generating timeline scales, intervals, or granularity in charts displaying temporal data. Optimize how monthly increments are handled during auto-scaling of category axis labels and ticks for financial or time-series visualizations, allowing precise control over month unit segmentation, resolution, and grouping in date-driven axis navigation. Enable flexible or fixed month step options for improved automatic time unit selection in chart navigators, affecting time axis layout, interval predictions, and user interaction with month-based scaling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -358,6 +408,11 @@ The months unit steps.
 ### navigator.categoryAxis.autoBaseUnitSteps.years `Array` *(default: [1, 2, 3, 5, 10, 25, 50])*
 
 The years unit steps.
+
+
+<div class="meta-api-description">
+Configure and customize year-based intervals for time axis scaling in stock or financial charts by setting allowed year step sizes or increments, controlling how the timeline aggregates or segments yearly data points automatically during navigation or zooming; adjust, enable, or specify year granularity options such as single years, five-year spans, or decade intervals to optimize chart resolution and timeline precision for large date ranges, dynamic zoom levels, and adaptive base unit selection on category axes in navigators or range selectors.
+</div>
 
 #### Example
 
@@ -398,6 +453,11 @@ Category indices at which the value axes cross the category axis (when set as an
 
 > set an index greater than or equal to the number of categories to denote the far end of the axis.
 
+
+<div class="meta-api-description">
+Set or configure where the value axis intersects or crosses the category axis in a stock chart by specifying crossing positions using category indices, enabling control over axis crossing points through single or multiple values, such as setting intersection points at a specific data category or multiple categories along the axis, adjusting the placement of the value axis relative to categories including crossing at the start, middle, or end of the axis, and providing flexibility to define these crossing points via single objects or arrays for charts with one or several value axes to customize the layout and relationship between category and value axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -429,6 +489,11 @@ Category indices at which the value axes cross the category axis (when set as an
 ### navigator.categoryAxis.background `String`
 
 The background color of the axis.
+
+
+<div class="meta-api-description">
+Customize or set the background color behind the category axis of a stock chart navigator to enhance visual clarity and contrast for axis labels and ticks, using CSS color values to theme, style, or override the axis fill area in various configurations. Control or configure the fill color of the navigator’s horizontal category axis to improve readability, distinguish the axis from other chart elements, adjust appearance for light or dark modes, and tailor the navigator axis background during chart setup or dynamic updates. Enable coloring options for the category axis background to support better visualization, highlighting, or style adjustments aligned with user interface design and chart aesthetics.
+</div>
 
 #### Example
 
@@ -479,6 +544,11 @@ that the total number of categories does not exceed [categoryAxis.maxDateGroups]
 
 Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/stock-chart#configuration-series.aggregate) function.
 
+
+<div class="meta-api-description">
+Adjust or configure the time interval, base time unit, or grouping scale used to aggregate and segment dates on a stock or time series chart’s category axis, choosing from units like seconds, minutes, hours, days, weeks, months, years, or an automatic fit option that optimizes the grouping based on data density and maximum date groups, enabling control over how date categories are grouped, aggregated, and displayed with appropriate tick intervals and granularity for timeline control, time series data bucketing, and axis tick customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -514,6 +584,11 @@ that the total number of categories does not exceed [categoryAxis.maxDateGroups]
 
 This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
+
+<div class="meta-api-description">
+Adjust or configure the spacing interval between data categories on the StockChart navigator's horizontal timeline or category axis, controlling how densely or sparsely the time units or categories appear, with options to set fixed steps or automatic scaling to limit the number of visible data groups and manage zoom levels or data granularity, influencing how time intervals or categories are grouped, stepped, or displayed in date-based stock visualizations, allowing fine-tuning of category intervals, step size, or grouping frequency for improved chart readability and performance under different date ranges and zoom levels.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -548,6 +623,11 @@ This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/sto
 The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.labels.color) and
 [categoryAxis.line.color](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.line.color).
 
+
+<div class="meta-api-description">
+Customize the appearance and style of the category axis in the chart navigator by specifying colors for axis labels, tick marks, grid lines, and other axis elements using any CSS-compatible color format like hex, RGB, or named colors. Adjust, configure, or override axis text color, line color, and tick styling for better visibility, theming, or emphasis in stock or financial charts. Enable control over the navigator axis color scheme to match branding or highlight specific data ranges, with the option to override label or line colors separately for fine-tuned customization of the category axis appearance.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -581,6 +661,11 @@ The color to apply to all axis elements. Accepts a valid CSS color string, inclu
 The crosshair configuration options.
 
 > The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
+
+
+<div class="meta-api-description">
+Customize and control the styling, position, visibility, and interactive behavior of the category axis crosshair within the stock chart navigator, including options to enable or disable the crosshair line, adjust its appearance, set alignment or snapping to categories, modify hover effects, and fine-tune how the crosshair responds to user input or pointer movement along the timeline axis in financial or time-series charts.
+</div>
 
 #### Example
 
@@ -617,6 +702,11 @@ The crosshair configuration options.
 ### navigator.categoryAxis.crosshair.color `String`
 
 The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or define the color of the interactive crosshair line on the category axis within the chart navigator to highlight or differentiate it against the chart background, enabling customization with any CSS-compatible color value such as hex codes, RGB, or named colors for tailored visual appearance and improved user focus when hovering or inspecting specific data points along the axis.
+</div>
 
 #### Example
 
@@ -663,6 +753,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Control and customize the stroke pattern of the crosshair line on the navigator category axis in stock charts by configuring different dash styles, such as solid lines, dotted lines, dashed lines, dash-dot sequences, long dashes, and complex repeating patterns like long dash-dot or long dash-dot-dot, enabling developers to set the appearance of crosshair indicators precisely for enhanced visual distinction, clarity, or stylistic preferences in financial or time-series chart navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -697,6 +792,11 @@ The following dash types are supported:
 ### navigator.categoryAxis.crosshair.opacity `Number` *(default: 1)*
 
 The opacity of the crosshair. By default the crosshair is opaque.
+
+
+<div class="meta-api-description">
+Adjust the transparency level, alpha, or visibility of the navigator’s category axis crosshair line on stock or financial charts to control how prominently the guide line appears over the chart area, enabling customization of crosshair opacity, translucency, or fade effect to enhance focus, reduce visual distraction, or improve clarity when hovering or tracking data points in the navigation pane.
+</div>
 
 #### Example
 
@@ -734,6 +834,11 @@ The opacity of the crosshair. By default the crosshair is opaque.
 The crosshair tooltip options.
 
 > The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
+
+
+<div class="meta-api-description">
+Control and customize the tooltip that appears on the crosshair when hovering over the category axis in the stock chart navigator, including options to set the content text, date or value formatting, apply custom templates, and adjust visual styles for clarity and readability. Enable, configure, or style the crosshair tooltip on the navigator’s category axis to display dynamic data labels, timestamps, or category information interactively as users move the mouse or touch the chart, ensuring precise insights and enhanced user experience with flexible formatting and presentation settings. Adjust how the crosshair’s tooltip appears and behaves in the navigator context, including enabling, disabling, formatting, templating, and styling to suit different data visualization needs and interactive data exploration workflows.
+</div>
 
 #### Example
 
@@ -774,6 +879,11 @@ The crosshair tooltip options.
 
 The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust, configure, or customize the background color for tooltips displayed on the crosshair over the category axis in a stock chart navigator, supporting any valid CSS color formats such as hex codes, RGB, RGBA with transparency, or named colors to enhance visibility, readability, and visual styling of data point highlights on interactive financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -811,6 +921,11 @@ The background color of the tooltip. Accepts a valid CSS color string, including
 ### navigator.categoryAxis.crosshair.tooltip.border `Object`
 
 The border options.
+
+
+<div class="meta-api-description">
+Control and customize the border appearance of the crosshair tooltip on the category axis within stock chart navigators by setting color, thickness, style, and dash patterns to enhance visual clarity, match chart themes, emphasize data points, and adjust tooltip framing for better readability during interactive crosshair navigation and axis highlighting events.
+</div>
 
 #### Example
 
@@ -853,6 +968,11 @@ The border options.
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or configure the border color of the tooltip displayed on the category axis crosshair within a stock chart navigator, enabling control over the appearance, styling, and theme matching of tooltip outlines using any valid CSS color format such as hex codes, RGB values, or standard color names to enhance visual clarity, user interface aesthetics, or highlight specific data points in stock or financial charting applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -892,6 +1012,11 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 ### navigator.categoryAxis.crosshair.tooltip.border.dashType `String` *(default: "solid")*
 
 This option is ignored and deprecated.
+
+
+<div class="meta-api-description">
+Configure or customize the dash pattern, dashed border style, or stroke type for the border of a crosshair tooltip on a stock chart navigator's category axis, including options to set dashed, dotted, or solid lines for enhanced visual distinction, although this setting is deprecated and may be ignored; users often seek to define or control the border dash style for crosshair tooltips to improve chart readability, design, or aesthetic, or to modify appearance at initialization or runtime, aiming for customization of chart crosshair tooltip borders in financial, stock, or time-series data visualization contexts.
+</div>
 
 #### Example
 
@@ -933,6 +1058,11 @@ This option is ignored and deprecated.
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness of the tooltip border outlining the category axis crosshair in the stock chart navigator by setting a numeric pixel value to increase or decrease the border width; this enables control over the visual prominence of the crosshair tooltip's border, allowing developers to customize or enable the outline thickness surrounding the navigator's category axis crosshair tooltip for enhanced visibility, styling, or UI emphasis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -973,6 +1103,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Set or customize the text color of the tooltip displayed on the crosshair over the category axis in the Stock Chart navigator, enabling configuration of tooltip font color using any valid CSS color format such as hex codes, RGB values, or named colors, allowing control over the appearance of hover or crosshair labels for enhanced chart readability and visual customization during initialization or dynamic updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1005,6 +1140,11 @@ The text color of the tooltip. Accepts a valid CSS color string, including hex a
 ### navigator.categoryAxis.crosshair.tooltip.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+
+<div class="meta-api-description">
+Adjust and customize the font styling, typography, and text appearance of the tooltip shown on the category axis crosshair within the stock chart navigator by configuring font size, font family, font weight, and font type using CSS font syntax. Control the navigator crosshair tooltip text formatting to enhance readability and visual consistency with options to set font attributes such as pixel size, font name, style, and fallback fonts for axis indicators in financial chart navigation features. Enable precise font customization for crosshair hover tooltips on the time or category axis of stock market charts to improve user interface clarity and accommodate various design themes and developer preferences.
+</div>
 
 #### Example
 
@@ -1039,6 +1179,11 @@ The tooltip font.
 
 The format used to display the tooltip. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
 
+
+<div class="meta-api-description">
+Customize and configure the tooltip text shown when hovering over the category axis crosshair in the stock chart navigator by setting a format string that determines how category values are displayed, allowing you to specify patterns with placeholders for dates, numbers, or custom labels, enabling you to control and style the tooltip content for clearer data presentation, support for dynamic formatting, string templates, and localization of category labels in tooltips during interactive navigation or crosshair tracking on categorical time series or financial chart axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1072,6 +1217,11 @@ The format used to display the tooltip. Uses [kendo.format](/api/framework/kendo
 
 The padding of the crosshair tooltip. A numeric value will set all paddings.
 
+
+<div class="meta-api-description">
+Adjust the inner spacing or padding inside the crosshair tooltip on the category axis of a stock chart navigator to control content layout, improve readability, and customize the distance between tooltip text and its borders. Configure, set, or change the padding size uniformly with a numeric value to fine-tune the tooltip’s margin and inner whitespace for better visual clarity during data point inspection, crosshair interactions, or when highlighting specific categories on the financial chart timeline. Enable precise control over tooltip content positioning, spacing adjustments, and user interface aesthetics for enhanced crosshair feedback on stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1104,6 +1254,11 @@ The padding of the crosshair tooltip. A numeric value will set all paddings.
 ### navigator.categoryAxis.crosshair.tooltip.padding.bottom `Number` *(default: 0)*
 
 The bottom padding of the crosshair tooltip.
+
+
+<div class="meta-api-description">
+Set or customize the bottom padding of the tooltip displayed on the category axis crosshair within the stock chart navigator to control the vertical spacing between the tooltip's content and its lower edge, enabling precise adjustment of tooltip layout, spacing, and appearance for improved readability and UI alignment when hovering over the navigator axis, including fine-tuning tooltip padding, margin, or inner spacing at the bottom area for enhanced visual clarity and user interaction feedback in chart navigation contexts.
+</div>
 
 #### Example
 
@@ -1140,6 +1295,11 @@ The bottom padding of the crosshair tooltip.
 
 The left padding of the crosshair tooltip.
 
+
+<div class="meta-api-description">
+Adjust or set the left padding or spacing for the tooltip displayed on the crosshair of the navigator's category axis in a stock chart, controlling horizontal offset, alignment, margin, or indentation of the tooltip near the crosshair for better visual positioning or layout customization during chart initialization or runtime.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1175,6 +1335,11 @@ The left padding of the crosshair tooltip.
 
 The right padding of the crosshair tooltip.
 
+
+<div class="meta-api-description">
+Adjust the right padding or space around the crosshair tooltip on the category axis within a stock chart navigator to control its positioning, alignment, and layout, ensuring clear separation from chart elements and avoiding overlap or clipping on the right side, enabling fine-tuning of the tooltip’s placement and spacing for improved readability and visual balance in stock chart navigation interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1209,6 +1374,11 @@ The right padding of the crosshair tooltip.
 ### navigator.categoryAxis.crosshair.tooltip.padding.top `Number` *(default: 0)*
 
 The top padding of the crosshair tooltip.
+
+
+<div class="meta-api-description">
+Control and customize the vertical spacing above the crosshair tooltip on the category axis within the stock chart navigator by adjusting the top padding or margin values, enabling precise alignment and layout tweaks for better readability and visual balance in tooltip display, modify the inner top space to refine tooltip positioning relative to the axis lines or other chart elements, set or configure padding properties to increase or decrease the gap above the tooltip content for improved UI clarity and user interaction feedback in navigator crosshair tooltips.
+</div>
 
 #### Example
 
@@ -1249,6 +1419,11 @@ The fields which can be used in the template are:
 
 * value - the category value
 
+
+<div class="meta-api-description">
+Customize, configure, or set the navigator's category axis crosshair tooltip display in stock charts by applying a template that controls how the tooltip text or content appears when hovering or interacting with the crosshair. Enable dynamic tooltip rendering using template variables, such as the category value, to present precise contextual information on the timeline or category axis during navigation, allowing tailored formatting, styling, or content injection for improved data insight and user interface customizability in charting scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1282,6 +1457,11 @@ The fields which can be used in the template are:
 
 If set to `true` the chart will display the category axis crosshair tooltip. By default the category axis crosshair tooltip is not visible.
 
+
+<div class="meta-api-description">
+Control the visibility of the tooltip that appears when hovering or interacting with the category axis crosshair in a stock chart navigator, enabling or disabling the small informational popup that displays category data dynamically as users move along the axis, with options to show or hide this interaction indicator to customize user experience, assist in data point identification on the navigator timeline, and improve clarity or reduce visual clutter depending on preferences for tooltip display in financial or time-series chart navigation contexts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1314,6 +1494,11 @@ If set to `true` the chart will display the category axis crosshair tooltip. By 
 
 If set to `true` the chart will display the category axis crosshair. By default the category axis crosshair is not visible.
 
+
+<div class="meta-api-description">
+Control the visibility of the interactive crosshair line along the category axis in the stock chart navigator to enhance precise data tracking and pinpoint exact categories such as dates, timestamps, or labels. Enable, display, show, or toggle the category axis crosshair for improved user interaction, focus, and detailed analysis within the navigator view, helping users accurately identify specific points or intervals on the chart. Easily set the crosshair visibility to highlight category positions, assist in navigation through timeline data, or enhance cross-referencing within financial or time-series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1342,6 +1527,11 @@ If set to `true` the chart will display the category axis crosshair. By default 
 ### navigator.categoryAxis.crosshair.width `Number` *(default: 1)*
 
 The width of the crosshair in pixels.
+
+
+<div class="meta-api-description">
+Adjust the thickness, size, or width of the crosshair line on the navigator’s category axis in a stock or financial chart to control how bold, thin, or prominent the vertical hover indicator appears when interacting with the timeline or date axis. Configure, set, or customize the pixel width of the crosshair line for improved visibility, precision tracking, or visual clarity while hovering over or selecting categories along the navigator axis in time series or stock price charts. Control the crosshair line thickness for fine-tuning user interaction feedback on chart navigation and category axis highlighting.
+</div>
 
 #### Example
 
@@ -1372,6 +1562,11 @@ The width of the crosshair in pixels.
 ### navigator.categoryAxis.field `String`
 
 The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/stock-chart#configuration-dataSource) option to be set.
+
+
+<div class="meta-api-description">
+Configure the data field that defines the category labels or grouping values for the timeline or axis in a stock chart navigator, enabling binding to a specific property in your dataset to control how categories, dates, or labels appear along the navigator's horizontal axis; this is essential when setting up category-based navigation or grouping in stock or financial chart visualizations where you need to specify which attribute from your data source drives the category axis display and user interaction.
+</div>
 
 #### Example
 
@@ -1404,6 +1599,11 @@ The default value is `false` except for "area" and "verticalArea".
 
 > This option is ignored if the [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) option is set to "bar", "column", "ohlc" or "candlestick".
 
+
+<div class="meta-api-description">
+Control alignment of categories and data points along main ticks on a chart axis to ensure consistent spacing without leading or trailing gaps, enabling precise placement of series on major grid lines for improved visual accuracy in time or category-based navigators, with options to enable or disable justification depending on chart type or series style while avoiding offset or empty space before or after the data range, especially relevant for line, area, and vertical area charts but not impacting bar, column, OHLC, or candlestick series alignment.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1430,6 +1630,11 @@ The default value is `false` except for "area" and "verticalArea".
 ### navigator.categoryAxis.labels `Object`
 
 The axis labels configuration.
+
+
+<div class="meta-api-description">
+Control and customize the category axis labels in the Stock Chart navigator, including adjusting text content, formatting options, rotation angles, skipping or stepping of labels, visibility toggles, templating for custom label appearance, and styling choices. Configure label positioning, density, and layout to ensure readable, localized category axis ticks that adapt to different data intervals and screen sizes. Enable fine-tuning of label display settings to optimize how category axis text appears and behaves within the navigator, supporting use cases like hiding overlapping labels, setting label rotation for space management, applying formats or templates for consistent styling, and controlling step intervals to reduce clutter. This covers needs for adjusting axis label readability, localization, rotation, spacing, and custom styling in the context of the navigator’s category axis.
+</div>
 
 #### Example
 
@@ -1461,6 +1666,11 @@ The axis labels configuration.
 
 The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or set the background color behind category axis labels in financial or stock chart navigators to enhance readability, improve label contrast, customize label appearance, or highlight navigation axis text with any CSS color value such as hex codes, rgb, rgba, or named colors. Enable styling configurations to manage label backgrounds for better visual clarity on timeline or category axes within stock chart panels, ensuring clear display of axis categories and improved user interaction during chart navigation and data analysis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1489,6 +1699,11 @@ The background color of the labels. Accepts a valid CSS color string, including 
 ### navigator.categoryAxis.labels.border `Object`
 
 The border of the labels.
+
+
+<div class="meta-api-description">
+Customize and control the outline styling of axis labels within the Stock Chart navigator category axis by setting properties like border color, thickness, width, dash pattern, and stroke style to enhance label visibility and design. Enable or adjust label border appearance to highlight, differentiate, or emphasize category axis text in stock charts, including options to configure label borders for clarity, aesthetics, or branding in financial data visualizations. Whether you want to define border color for labels, set border width for crisp edges, apply dashed or solid lines around category labels, or control the label outline style on the navigator axis, this setting provides detailed customization of label borders to meet various visualization, UI design, and readability needs in stock or time-series chart interfaces.
+</div>
 
 #### Example
 
@@ -1521,6 +1736,11 @@ The border of the labels.
 ### navigator.categoryAxis.labels.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Customize, configure, or control the outline color around category axis labels in navigator charts by setting the label border color with any CSS-compatible color format such as hex codes, RGB, RGBA, or named colors, enabling precise styling of label edges for improved visual clarity or emphasis in stock charts, chart axis label outlines, navigator label borders, or category label frame colors.
+</div>
 
 #### Example
 
@@ -1564,6 +1784,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Configure and customize the style and pattern of the border around navigator axis labels by selecting or setting different border line styles such as dashed, dotted, dash-dot combinations, long dashes, and solid lines, enabling control over how label borders appear in stock charts, timeline navigators, and category axis visuals, including options like dash, dashDot, dot, longDash, longDashDot, longDashDotDot, or solid to tailor label border aesthetics and ensure clarity or emphasis in chart navigation elements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1595,6 +1820,11 @@ The following dash types are supported:
 ### navigator.categoryAxis.labels.border.width `Number` *(default: 0)*
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+
+<div class="meta-api-description">
+Adjust the thickness or pixel width of the border around labels on the category axis within the stock chart navigator area, enabling customization of label outlines from invisible (no border) to various border widths. Control, set, or configure the label edge thickness to highlight or hide outlines around the category axis text in stock chart navigation, affecting visual emphasis, clarity, and style of axis labels for improved chart readability and presentation during initialization or dynamic updates.
+</div>
 
 #### Example
 
@@ -1628,6 +1858,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or set the text color of category axis labels in a stock chart navigator using any valid CSS color format such as hex codes, RGB, or named colors to adjust label appearance, enhance readability, or match design themes. Configure the label font color for the timeline or date axis on navigators, control visual styling of axis labels, enable color changes for better contrast or branding, and apply specific color settings to improve chart clarity and user interface consistency. Adjust or override default label coloring on stock chart category axes to fit different themes, highlight time divisions, or ensure accessibility in data visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1656,6 +1891,11 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 ### navigator.categoryAxis.labels.culture `String`
 
 The culture to use when formatting date values. See the [globalization overview](/framework/globalization/overview) for more information.
+
+
+<div class="meta-api-description">
+Set or customize the date and time formatting, locale, language, regional settings, or cultural conventions for the timeline or category axis labels in stock chart navigators, including specifying culture codes like en-US or fr-FR to control how date values appear, adapting labels for internationalization, localization, global date display formats, regional date strings, or calendar settings for financial or stock market charts with time-based axes, enabling developers to configure or override default date label formatting by language or culture preferences during chart initialization or runtime.
+</div>
 
 #### Example
 
@@ -1687,6 +1927,11 @@ The culture to use when formatting date values. See the [globalization overview]
 The format used to display the labels when the categories are dates. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
 
 > The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.labels.format) option will override the date formats.
+
+
+<div class="meta-api-description">
+Control and customize date label formatting on the chart navigator’s category axis by defining flexible templates that specify how dates appear across different time intervals, such as days, weeks, months, or years, enabling precise display of date categories with dynamic format patterns. Configure or override default date formats for axis labels using formatting strings with placeholders for date values, allowing adjustment of label appearance depending on the base unit of time presented on the axis. Adjust the way date labels are rendered in financial or time series charts by setting specialized date format templates that adapt to zoom levels or different date granularities, ensuring clear, readable, and context-appropriate date displays for timeline navigation and analysis. Customize date display on stock or time-based chart navigators by setting format strings that control how axis labels reflect dates, helpful for developers needing to tailor date intervals and make category axis labels intuitive and accurate for users viewing specific time segments.
+</div>
 
 #### Example
 
@@ -1720,6 +1965,11 @@ The format used to display the labels when the categories are dates. Uses [kendo
 
 The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "days".
 
+
+<div class="meta-api-description">
+Customize the display format of day-based labels on time series or financial charts by configuring date and time patterns for axis categories, enabling precise control over daily date representation, such as setting formats like month/day/year, day-month abbreviations, or other common day-oriented timestamp styles to enhance readability and match user locale or display preferences in timeline navigators and stock chart interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1751,6 +2001,11 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-ch
 ### navigator.categoryAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
 The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "hours".
+
+
+<div class="meta-api-description">
+Customize and configure the display format for hour-level time labels on the horizontal axis of a stock or time series chart navigator, enabling precise control over how hours appear on category-based axes when time is segmented by hours; set, adjust, or format date and time strings using common date format patterns to refine the appearance of hourly intervals, timestamps, or tick labels on the axis, supporting various use cases such as changing time display styles, enabling hour granularity, adapting to different time zones or localization, and enhancing readability of hour labels during data navigation and zooming in financial or temporal data visualizations.
+</div>
 
 #### Example
 
@@ -1784,6 +2039,11 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-ch
 
 The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "months".
 
+
+<div class="meta-api-description">
+Customize and configure the formatting of month labels on time-based category axes where months are the base unit, enabling control over how month names appear on stock or time series charts including full month names, abbreviations, numeric or custom date formats for axis labels, allowing developers to set, modify, or override default month tick labels to match locale preferences, abbreviations, or specific display requirements for better readability and presentation in financial or temporal data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1815,6 +2075,11 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-ch
 ### navigator.categoryAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
 The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+
+
+<div class="meta-api-description">
+Control and customize the date formats for weekly labels on the category axis of a stock chart navigator, enabling precise configuration of how week-based intervals appear on the timeline, set or modify the date string pattern for displaying week ranges or single weeks, adjust label formatting when the axis granularity or base unit is set to weeks, tailor the presentation of navigation timeline weeks by specifying date format strings, manage the appearance of weekly ticks and labels for better readability and data interpretation, and enable flexible formatting options for date labels in weekly time series views within a stock chart navigator context.
+</div>
 
 #### Example
 
@@ -1848,6 +2113,11 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-ch
 
 The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "years".
 
+
+<div class="meta-api-description">
+Customize and control the formatting of year labels on a time-based chart axis when displaying yearly intervals, enabling setting or configuring date strings that define how year values appear, such as using full four-digit years, two-digit abbreviations, or localized date formats to adjust the appearance of year markers on timeline navigations, time series graphs, or stock chart navigators. This includes specifying, configuring, or enabling different year label formats to enhance readability, localization, or user interface preferences for category axes dealing with annual time units.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1880,6 +2150,11 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-ch
 
 The font style of the labels.
 
+
+<div class="meta-api-description">
+Adjust the typography and appearance of category axis labels within the stock chart navigator by setting font properties such as font family, size, weight, style, and line height using standard CSS font declarations. Customize or control label text styling, modify navigation axis fonts, configure label readability and visual hierarchy, change font attributes for axis tick labels, set up the text format and design for the category axis in interactive stock charts, and ensure consistent font presentation for navigator labels across different chart views or themes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1908,6 +2183,11 @@ The font style of the labels.
 ### navigator.categoryAxis.labels.format `String` *(default: "{0}")*
 
 The format used to display the labels. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+
+<div class="meta-api-description">
+Control and customize the formatting of category axis labels on a stock chart by specifying how dates, numbers, or custom text appear, using format strings that include placeholders to define label output. Enable developers to set, configure, or adjust label rendering styles on the chart’s navigator axis, with support for dynamic string templates that transform raw category values into formatted displays such as formatted dates, numeric precision, or tailored textual representations. This feature supports formatting patterns, string interpolation, and embedding variables within labels to match developer needs for readable, consistent, or localized axis annotations.
+</div>
 
 #### Example
 
@@ -1938,6 +2218,11 @@ The format used to display the labels. Uses [kendo.format](/api/framework/kendo#
 
 The margin of the labels. A numeric value will set all margins.
 
+
+<div class="meta-api-description">
+Adjust or configure the spacing, padding, or margins around category axis labels within the stock chart’s navigator to customize label positioning and improve readability; set uniform or specific numeric margins that control the distance between label text and surrounding elements on the axis, effectively managing label layout and avoiding overlap or clutter in time-series or categorical data visualizations during chart initialization and rendering.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -1965,6 +2250,11 @@ The margin of the labels. A numeric value will set all margins.
 ### navigator.categoryAxis.labels.margin.bottom `Number` *(default: 0)*
 
 The bottom margin of the labels.
+
+
+<div class="meta-api-description">
+Adjust or configure the space below category axis labels in stock chart navigators by setting the margin at the bottom of label elements, controlling label padding, distance, or offset beneath axis text in time series or categorical data visualizations, enabling fine-tuning of label positioning for clearer readability and layout adjustments in chart navigation panels, managing vertical spacing under axis labels to avoid overlap or crowding in interactive or dynamic financial charts.
+</div>
 
 #### Example
 
@@ -1996,6 +2286,11 @@ The bottom margin of the labels.
 
 The left margin of the labels.
 
+
+<div class="meta-api-description">
+Adjust or configure the left margin or horizontal spacing for labels along the category axis in the stock chart navigator to control how far labels are offset from the axis line or container edge. Set, customize, fine-tune, or control the horizontal padding, indentation, or margin on the left side of category axis labels within the navigator for better label alignment, readability, or layout spacing using numeric values or pixels. Modify, shift, or space out the labels horizontally to prevent overlap, improve clarity, or customize label positioning in stock chart navigators.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2025,6 +2320,11 @@ The left margin of the labels.
 ### navigator.categoryAxis.labels.margin.right `Number` *(default: 0)*
 
 The right margin of the labels.
+
+
+<div class="meta-api-description">
+Set or configure the spacing, padding, or margin on the right side of category axis labels within a stock chart navigator to control or adjust the distance between label text and nearby elements, enabling precise label alignment, layout customization, and improved readability in financial or time series charts by controlling horizontal label gaps and label positioning in the navigator axis.
+</div>
 
 #### Example
 
@@ -2056,6 +2356,11 @@ The right margin of the labels.
 
 The top margin of the labels.
 
+
+<div class="meta-api-description">
+Configure the vertical spacing or padding above labels on the timeline or category axis within a stock chart’s navigator or overview section, enabling the adjustment of top margin, top padding, or distance above label text to enhance label readability, prevent overlap, customize label layout spacing, and control the gap between category axis labels and surrounding chart elements in financial charts or time series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2086,6 +2391,11 @@ The top margin of the labels.
 
 If set to `true` the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.
 
+
+<div class="meta-api-description">
+Control the positioning and alignment of category axis labels and ticks by toggling whether labels are mirrored to the opposite side of the axis, enabling display of axis labels and tick marks flipped horizontally for symmetric or alternate placement in stock chart navigators, allowing customization of label alignment and tick orientation on either side to enhance readability, support reversed or mirrored axis layouts, or achieve specific visual designs where labels typically aligned on one side appear on the other side with ticks correspondingly flipped.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2114,6 +2424,11 @@ If set to `true` the chart will mirror the axis labels and ticks. If the labels 
 
 The padding of the labels. A numeric value will set all paddings.
 
+
+<div class="meta-api-description">
+Adjust, set, or configure the spacing and inner margin around category axis labels within stock chart navigators, controlling the padding applied uniformly to all sides of these labels to enhance readability and visual clarity. This includes modifying label buffer, margin, or whitespace in chart navigators, enabling customization of label gaps, edges, or offsets on category axes during initialization or runtime to improve label placement and prevent overlap in time or category-based stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2141,6 +2456,11 @@ The padding of the labels. A numeric value will set all paddings.
 ### navigator.categoryAxis.labels.padding.bottom `Number` *(default: 0)*
 
 The bottom padding of the labels.
+
+
+<div class="meta-api-description">
+Adjust and control the vertical spacing below category axis labels in stock chart navigators by setting bottom padding values, enabling customization of label positioning to enhance readability, prevent overlap, and fine-tune layout in time-series or categorical data visualizations. This adjustment helps manage label collision issues, supports clear axis label presentation, and allows configuring the gap beneath labels for improved chart clarity and user interface polish.
+</div>
 
 #### Example
 
@@ -2172,6 +2492,11 @@ The bottom padding of the labels.
 
 The left padding of the labels.
 
+
+<div class="meta-api-description">
+Control the horizontal spacing or left-side padding before category axis labels in a stock or financial chart navigator to adjust label alignment, indentation, or margin. Configure, set, or customize the left padding to optimize label positioning, improve readability, reduce label overlap, and fine-tune the distance from axis ticks or chart edges. Enable precise label layout by adjusting left padding on the category axis labels in stock chart navigation components, ensuring proper spacing, visual balance, and clear categorization in time series or categorical data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2201,6 +2526,11 @@ The left padding of the labels.
 ### navigator.categoryAxis.labels.padding.right `Number` *(default: 0)*
 
 The right padding of the labels.
+
+
+<div class="meta-api-description">
+Control the horizontal spacing and layout of category axis labels within a chart navigator by adjusting the right inner padding to set the distance between label text and its right edge, enabling customization of label alignment, spacing, overlap prevention, and visual clarity. Configure, set, or fine-tune the right padding on axis labels to manage label appearance, prevent text clipping or crowding, and optimize readability and layout within financial or stock chart navigators. Adjust label margins or padding on the right side of the category axis to influence how labels align horizontally and how they avoid overlapping or crowding in data visualization contexts.
+</div>
 
 #### Example
 
@@ -2232,6 +2562,11 @@ The right padding of the labels.
 
 The top padding of the labels.
 
+
+<div class="meta-api-description">
+Control vertical spacing or offset above horizontal axis labels in the stock chart navigator by configuring top padding to adjust label placement, fine-tune label positioning, prevent overlapping or crowding of category axis text, modify label margins, set label distance from the axis, and customize label layout for clear readability in stock or financial chart navigators.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2262,6 +2597,11 @@ The top padding of the labels.
 
 The rotation angle of the labels. By default the labels are not rotated.
 
+
+<div class="meta-api-description">
+Adjust or set the angle of category axis labels in a stock chart navigator to optimize label readability, prevent text overlap, tilt, slant, or rotate axis labels for better visualization, control label orientation on the horizontal axis, and customize the display of category names in time series or trading charts by configuring label rotation degree to fit crowded or dense data points.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2289,6 +2629,11 @@ The rotation angle of the labels. By default the labels are not rotated.
 ### navigator.categoryAxis.labels.skip `Number` *(default: 0)*
 
 The number of labels to skip. By default no labels are skipped.
+
+
+<div class="meta-api-description">
+Adjust the frequency of category axis labels on stock or time series charts by skipping a specified number of labels to reduce overcrowding, control label density, manage label spacing, and enhance axis readability in visualizations; configure how many labels to omit between visible ticks to declutter charts, prevent label overlap, set intervals for label display, and customize axis label intervals for better presentation and user experience.
+</div>
 
 #### Example
 
@@ -2319,6 +2664,11 @@ The number of labels to skip. By default no labels are skipped.
 ### navigator.categoryAxis.labels.step `Number` *(default: 1)*
 
 The label rendering step - render every n-th label. By default every label is rendered.
+
+
+<div class="meta-api-description">
+Adjust or configure the interval, frequency, or spacing of labels displayed along the category axis in the StockChart navigator to control how many labels appear, enabling you to show every nth label, reduce clutter, improve readability, optimize rendering performance, or customize the label density by setting step values that skip or include labels at specified increments.
+</div>
 
 #### Example
 
@@ -2359,6 +2709,11 @@ The fields which can be used in the template are:
 * index - the 0-based index of the current label
 * count - the total number of labels on the axis
 
+
+<div class="meta-api-description">
+Control and customize the appearance and content of category axis labels in the stock chart navigator by defining templates that generate label text or HTML dynamically, allowing formatting options based on category values, data items, default label formats, cultural settings, label indexes, and total label counts, enabling developers to configure, customize, format, stylize, and manipulate axis label rendering, content, localization, and indexing for precise display control and enhanced visual representation within stock chart navigation axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2387,6 +2742,11 @@ The fields which can be used in the template are:
 
 If set to `true` the chart will display the category axis labels. By default the category axis labels are visible.
 
+
+<div class="meta-api-description">
+Control the display of category axis labels in the chart navigator by enabling or disabling visibility, showing or hiding axis labels along the timeline or category scale, adjusting whether labels appear on the navigator's category axis, toggling label rendering for clearer or simplified navigator views, setting label visibility to true or false to customize UI, managing axis label presence for better readability or a cleaner interface, and configuring label display during initialization for precise control over the navigator's category axis labeling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2414,6 +2774,11 @@ If set to `true` the chart will display the category axis labels. By default the
 ### navigator.categoryAxis.line `Object`
 
 The configuration of the axis lines. Also affects the major and minor ticks, but not the grid lines.
+
+
+<div class="meta-api-description">
+Adjust and customize the appearance, style, and behavior of category axis lines in stock charts, including setting line color, width, dash type, and opacity, as well as controlling how major and minor tick marks are drawn and styled on the axis; this configuration influences axis line visuals and tick rendering without impacting grid line display, enabling fine-tuned axis line formatting, tick visibility, and axis boundary styling for enhanced chart readability and presentation.
+</div>
 
 #### Example
 
@@ -2445,6 +2810,11 @@ The configuration of the axis lines. Also affects the major and minor ticks, but
 The color of the lines. Accepts a valid CSS color string, including hex and rgb.
 
 > Setting the `color` option affects the major and minor ticks, but not the grid lines.
+
+
+<div class="meta-api-description">
+Set and customize the color of the category axis line and its major and minor tick marks in the navigator section of a stock chart using any valid CSS color format such as hex codes, RGB, or color names; adjust, configure, or style the axis line appearance without altering grid line colors, enabling precise control over axis line visibility, themes, and chart navigation readability in financial or time series charting contexts.
+</div>
 
 #### Example
 
@@ -2482,6 +2852,11 @@ The following dash types are supported:
 * "longDash" - a line consisting of a repeating pattern of long-dash
 * "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
 
+
+<div class="meta-api-description">
+Configure and customize the stroke style, pattern, or appearance of axis lines with options to set various dash, dot, and mixed line styles for chart navigation category axes, enabling control over dashed, dotted, dash-dot, long dash, and long dash-dot line patterns to differentiate axis lines visually, adjust line textures for clarity, and apply dashed or dotted stroke effects in stock chart navigators or any time series data visuals requiring distinct axis line styles.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2512,6 +2887,11 @@ The following dash types are supported:
 
 If set to `true` the chart will display the category axis lines. By default the category axis lines are visible.
 
+
+<div class="meta-api-description">
+Control the display and visibility of the category axis lines in the stock chart navigator, enabling or disabling the rendering of those axis lines according to preferences, with options to show, hide, toggle, enable, or disable axis line visibility for better chart readability, customization, and visual clarity on the navigator’s category axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2539,6 +2919,11 @@ If set to `true` the chart will display the category axis lines. By default the 
 ### navigator.categoryAxis.line.width `Number` *(default: 1)*
 
 The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.
+
+
+<div class="meta-api-description">
+Adjust the pixel thickness or stroke width of the category axis line in a stock chart navigator to control the visual prominence and appearance of the axis boundary and its major and minor tick marks without altering grid line widths; configure, set, or customize the axis line thickness for clearer axis delineation, improved chart readability, and precise styling of the navigator’s category axis in financial or time-series charts.
+</div>
 
 #### Example
 
@@ -2569,6 +2954,11 @@ The width of the line in pixels. Also affects the major and minor ticks, but not
 The configuration of the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
 
+
+<div class="meta-api-description">
+Configure and customize the main grid lines along the navigator's category axis in stock charts, including adjusting visibility, styling options like color and thickness, controlling spacing and alignment with major ticks, enabling or disabling the prominent vertical lines that extend through the chart for easier data alignment and reference, and fine-tuning appearance to enhance chart readability and navigation precision.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2598,6 +2988,11 @@ body of the chart.
 ### navigator.categoryAxis.majorGridLines.color `String` *(default: "black")*
 
 The color of the major grid lines. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Customize or adjust the color of major grid lines on the category axis of a stock chart navigator by setting a valid CSS color value such as hex, rgb, or named colors. Configure, change, control, or style the navigator’s primary vertical or horizontal grid lines to improve chart readability, highlight sections, or match a theme. Enable visual distinctions for major ticks or grid markers on the time or categorical axis within financial or stock data charts, ensuring flexible design of axis grid lines for navigation components in interactive charting interfaces.
+</div>
 
 #### Example
 
@@ -2638,6 +3033,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Adjusting the stroke pattern or line style for major grid lines on the category axis in chart navigators, enabling options to configure dashed, dotted, solid, dash-dot, long dash, or complex repeating dash-dot-dot patterns for precise control over grid line appearance, customizing the visual display of axis lines with various dash types or stroke effects to differentiate or emphasize data separations, and setting how major grid lines render with alternating dash, dot, or solid styles to tailor chart navigational aids and improve readability or stylistic preferences in financial or time series charting interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2667,6 +3067,11 @@ The following dash types are supported:
 
 If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
 
+
+<div class="meta-api-description">
+Control the display of primary grid lines along the horizontal or category axis in the StockChart navigator, enabling or disabling the visibility of major grid markers for improved readability or cleaner visuals; configure whether to show or hide key vertical or horizontal guide lines that segment the navigator’s timeline or categories, allowing customization of grid line presence to enhance chart clarity, focus, or visual simplicity according to user preferences or UI requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2694,6 +3099,11 @@ If set to `true` the chart will display the major grid lines. By default the maj
 ### navigator.categoryAxis.majorGridLines.width `Number` *(default: 1)*
 
 The width of the category axis major grid lines in pixels.
+
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of major grid lines on the category axis within the stock chart navigator by setting the line width in pixels, enabling control over the visual prominence or weight of these grid lines for clearer or subtler axis demarcation, customizable for styling or readability preferences, grid line size configuration, axis line thickness tuning, and modifying chart navigator grid appearance to enhance data visualization clarity.
+</div>
 
 #### Example
 
@@ -2723,6 +3133,11 @@ The width of the category axis major grid lines in pixels.
 ### navigator.categoryAxis.majorGridLines.step `Number` *(default: 1)*
 
 The step of the category axis major grid lines.
+
+
+<div class="meta-api-description">
+Adjust or configure the interval and spacing between major grid lines on a stock chart’s category or time axis in the navigator portion, controlling how frequently lines appear to optimize chart readability and visual density, including setting the step size to show grid lines every N categories, dates, time units, or data points, enabling fine-tuning of grid line frequency, spacing, and density for better navigation context and data clarity.
+</div>
 
 #### Example
 
@@ -2755,6 +3170,11 @@ The step of the category axis major grid lines.
 
 The skip of the category axis major grid lines.
 
+
+<div class="meta-api-description">
+Control the frequency and spacing of major grid lines on a chart’s category axis by setting how many categories or intervals to skip between each rendered line, allowing you to reduce visual clutter, customize grid density, improve chart readability, enable sparse or dense grid layouts, adjust grid line intervals, and tailor the appearance of time or categorical axes for clearer data visualization and better user experience in financial or stock charting scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2786,6 +3206,11 @@ The skip of the category axis major grid lines.
 
 The configuration of the category axis major ticks.
 
+
+<div class="meta-api-description">
+Configure and customize the main tick marks on the category axis within the stock chart navigator by setting visibility options, adjusting the size, position, and style of major ticks to control how the axis segments are displayed; enable or disable prominent tick indicators, set spacing and alignment to enhance readability, and tailor the navigator’s category axis ticks to fit different chart zoom levels, time scales, or data groupings for clearer timeline navigation and improved axis labeling precision.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2815,6 +3240,11 @@ The configuration of the category axis major ticks.
 
 The color of the category axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or configure the color of the major tick marks along the category axis in stock chart navigators, enabling adjustment of tick line colors to align with chart themes, highlight specific data segments, or improve visual contrast; supports setting any standard CSS color formats such as hex codes, RGB, RGBA, HSL, or named colors to control the appearance, styling, and visibility of primary tick lines within the timeline or categorical axis in stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2842,6 +3272,11 @@ The color of the category axis major ticks lines. Accepts a valid CSS color stri
 ### navigator.categoryAxis.majorTicks.size `Number` *(default: 4)*
 
 The length of the tick line in pixels.
+
+
+<div class="meta-api-description">
+Control and adjust the length of tick marks on the horizontal or category axis in stock or financial charts to customize visibility, spacing, and alignment of major ticks, enabling precise styling of axis lines and enhancing readability by setting pixel dimensions for tick size on timeline or categorical axes in navigators or chart components.
+</div>
 
 #### Example
 
@@ -2871,6 +3306,11 @@ The length of the tick line in pixels.
 
 If set to `true` the chart will display the category axis major ticks. By default the category axis major ticks are visible.
 
+
+<div class="meta-api-description">
+Control the display or suppression of primary tick marks along the timeline or category axis within a stock chart navigator, enabling users to toggle visibility of significant intervals or markers that denote key data points, dates, or categories. This feature supports customization of axis ticks, including showing, hiding, or configuring major ticks for clearer data navigation, timeline scaling, or readability. Developers frequently look to enable or disable prominent category ticks, manage axis markers for improved chart clarity, or adjust visual presentation of time-based or categorical axis ticks in stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2899,6 +3339,11 @@ If set to `true` the chart will display the category axis major ticks. By defaul
 
 The width of the major ticks in pixels.
 
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of primary tick marks on the horizontal or category axis within a stock or financial chart’s navigator pane, controlling the size, weight, or pixel width of prominent axis ticks for improved visibility, styling, or precise axis customization. Customize major tick line thickness, bar width, or pixel size to emphasize key date markers, timeline intervals, or navigation axis indicators, setting or configuring the visual prominence, boldness, or line weight of major-axis ticks displayed along the navigator’s category axis for enhanced chart readability and styling control.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -2926,6 +3371,11 @@ The width of the major ticks in pixels.
 ### navigator.categoryAxis.majorTicks.step `Number` *(default: 1)*
 
 The step of the category axis major ticks.
+
+
+<div class="meta-api-description">
+Adjust or set the interval, spacing, frequency, or step size between major ticks on a chart’s category axis within a stock chart navigator to control how densely or sparsely major ticks appear, allowing customization of tick granularity, tick step, or label distribution for better readability and visual clarity across different timeframes or data resolutions.
+</div>
 
 #### Example
 
@@ -2956,6 +3406,11 @@ The step of the category axis major ticks.
 ### navigator.categoryAxis.majorTicks.skip `Number` *(default: 0)*
 
 The skip of the category axis major ticks.
+
+
+<div class="meta-api-description">
+Configure the frequency of major category axis ticks by setting how many are skipped or omitted to reduce clutter and improve readability on chart navigators, control the spacing between visible major ticks by specifying intervals to bypass, adjust tick density for better visual clarity, enable selective hiding of major category ticks on navigation axes, set numeric intervals to limit displayed ticks on stock or time series category axes, control major tick rendering frequency to optimize chart axis presentation, and manage axis label spacing by skipping ticks during chart initialization or updates.
+</div>
 
 #### Example
 
@@ -2989,6 +3444,11 @@ The last date displayed on the category date axis. By default, the minimum date 
 This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
+
+<div class="meta-api-description">
+Control and configure the ending boundary or maximum date displayed on the timeline or category axis of a stock chart navigator, enabling you to set a fixed endpoint for the visible date range in financial or time-series data visualization. This feature lets you define the last date shown on the axis to restrict zoom or scroll limits, lock the visible date window, and manage how the chart scales or rounds date units, allowing precise adjustment of the timeline range, fixing or limiting the endpoint to a specific date, and coordinating with minimum date settings and rounding options for consistent and customizable time axis display in stock market or date-based chart navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3017,6 +3477,11 @@ set up a fixed date range.
 The maximum number of groups (categories) to display when
 [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
 [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
+
+
+<div class="meta-api-description">
+Control and configure the maximum number of date groups displayed on the category axis of a stock chart navigator, setting limits on automatic grouping when the axis base unit is set to "fit" or the step is "auto"; this enables managing how many date intervals or categories appear, adjusting group counts for better time series visualization, and optimizing the display of timeline segments, date groupings, or time buckets for stock data navigation and chart axis granularity.
+</div>
 
 #### Example
 
@@ -3047,6 +3512,11 @@ The maximum number of groups (categories) to display when
 ### navigator.categoryAxis.maxDivisions `Number`
 
 The maximum number of ticks and labels to display.
+
+
+<div class="meta-api-description">
+Adjust the maximum number of ticks and labels on a chart's category axis to limit clutter and control label density, configure or set upper bounds for tick marks and text intervals, reduce overcrowding by capping the divisions or segments shown on an axis, manage spacing and frequency of category labels and ticks for better clarity and readability, optimize axis labeling to prevent overlap or crowding in stock or financial charts, customize how many category axis divisions appear in navigators or timeline sections, control axis segmentation to improve visualization clarity by limiting labels and ticks, set thresholds on axis label counts to maintain clean and readable navigation charts, define maximum label divisions to balance detail and simplicity in chart axis displays, and enable fine-tuned control over the number of category axis tick marks for improved user interface legibility.
+</div>
 
 #### Example
 
@@ -3080,6 +3550,11 @@ The first date displayed on the category date axis. By default, the minimum date
 This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
+
+<div class="meta-api-description">
+Control or set the initial start date, minimum date, or earliest visible date on the timeline or category date axis of a stock chart navigator to fix or define the first date displayed within the zoomed or overview range, enabling configuration of the visible date range for time series data, date axis starting points, or date range selection in interactive stock or financial charts, often used alongside configuring axis minimum values, base unit rounding, or date range limits to establish the precise temporal window on navigational chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3107,6 +3582,11 @@ set up a fixed date range.
 
 The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
 body of the chart.
+
+
+<div class="meta-api-description">
+Adjust and customize the appearance, visibility, and styling of grid lines extending from minor ticks along the category axis in stock charts, including options to enable or disable minor grid lines, control their alignment with minor ticks, set colors, widths, dash types, and manage how these subtle grid markers enhance or reduce chart readability and detail navigation.
+</div>
 
 #### Example
 
@@ -3136,6 +3616,11 @@ body of the chart.
 ### navigator.categoryAxis.minorGridLines.color `String` *(default: "black")*
 
 The color of the minor grid lines. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or define the color of minor grid lines on the category axis within a stock chart navigator using CSS-compatible color formats such as hex, rgb, or named colors to control and customize subtle grid line appearance, enhance visual clarity, modify chart axis detailing, or tailor the grid styling for improved readability and design consistency in time series navigation or stock price visualization interfaces.
+</div>
 
 #### Example
 
@@ -3176,6 +3661,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Configure and customize the pattern style of minor grid lines on the category axis within a stock chart's navigator, enabling control over line appearance with various dash styles such as solid, dotted, dashed, dash-dot, long dash, and compound dash-dot sequences to enhance chart readability or visual differentiation of grid intervals. Adjust, set, or enable specific line patterns for subtle axis grid detailing, axis background rendering, or timeline segmentation in interactive financial or time-series visualizations, ensuring precise and clear minor grid line representation on the navigator's category axis for refined chart navigation and user interface customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3205,6 +3695,11 @@ The following dash types are supported:
 
 If set to `true` the chart will display the minor grid lines. By default the minor grid lines are visible.
 
+
+<div class="meta-api-description">
+Control the visibility of the minor grid lines on the category axis within a stock chart's navigator, enabling you to toggle these finer grid markers on or off to customize the chart’s axis appearance, enhance visual clarity for time series or financial data navigation, adjust grid line display for better data segmentation, and refine the chart layout by showing or hiding small interval lines along the category axis in the stock chart’s overview navigator panel.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3232,6 +3727,11 @@ If set to `true` the chart will display the minor grid lines. By default the min
 ### navigator.categoryAxis.minorGridLines.width `Number` *(default: 1)*
 
 The width of the category axis minor grid lines in pixels.
+
+
+<div class="meta-api-description">
+Adjust the thickness, pixel width, or line weight of the small or minor grid lines on the category axis within the navigator area of stock charts, enabling control over the precision, visibility, and styling of these minor grid markers for enhanced chart readability, customization of grid line appearance, and fine-tuning of the navigator’s axis segmentation and line rendering effects.
+</div>
 
 #### Example
 
@@ -3261,6 +3761,11 @@ The width of the category axis minor grid lines in pixels.
 ### navigator.categoryAxis.minorGridLines.step `Number` *(default: 1)*
 
 The step of the category axis minor grid lines.
+
+
+<div class="meta-api-description">
+Adjust the interval or spacing between minor grid lines on the category axis in chart navigators, configure how frequently the minor divisions or ticks appear, set the step size for minor gridline rendering, control the frequency of minor axis grid markers during zoom or pan interactions, define the gap or count between successive minor grid lines to enhance visual clarity or precision, enables fine-tuning of axis subdivisions on time, categorical, or numeric scales for improved readability or alignment with data points, customize the density of minor grid lines to manage clutter or detail level, determine how often small grid markers appear between major categories on stock or financial charts, set step intervals for minor ticks to optimize axis granularity and user navigation experience.
+</div>
 
 #### Example
 
@@ -3293,6 +3798,11 @@ The step of the category axis minor grid lines.
 
 The skip of the category axis minor grid lines.
 
+
+<div class="meta-api-description">
+Set the frequency or interval for skipping minor grid lines on the chart’s category axis to adjust the density and spacing of tick marks, customize grid line visibility for the navigator or timeline area, control how many small grid steps are omitted for clearer or less cluttered axis presentation, configure minor tick intervals for better readability in stock or time series charts, and manage axis grid styling by enabling or disabling rendering of certain minor lines to optimize chart clarity and navigation experience.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3324,6 +3834,11 @@ The skip of the category axis minor grid lines.
 
 The configuration of the category axis minor ticks.
 
+
+<div class="meta-api-description">
+Adjust or configure the rendering, visibility, spacing, size, and behavior of minor ticks or subdivision marks along the timeline or category axis in the stock chart navigator to enhance axis detail, improve granularity, control tick frequency, fine-tune axis markers, and customize the visual appearance of smaller interval indicators for better timeline readability and precision on stock or time series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3353,6 +3868,11 @@ The configuration of the category axis minor ticks.
 
 The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust the color or customize the appearance of small tick marks along the category axis in the stock chart navigator by setting the minor tick lines’ color, enabling styling of these subtle grid or scale indicators with any standard CSS color value such as hex codes, RGB, or color names, useful for fine-tuning navigator axis visuals, enhancing contrast, or matching dashboard themes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3380,6 +3900,11 @@ The color of the category axis minor ticks lines. Accepts a valid CSS color stri
 ### navigator.categoryAxis.minorTicks.size `Number` *(default: 4)*
 
 The length of the tick line in pixels.
+
+
+<div class="meta-api-description">
+Adjust the length or size of small tick marks along the category axis in stock or financial charts, controlling how far minor ticks extend visually by setting their pixel length. Configure or customize the minor tick line dimensions, fine-tune tick mark size on time or categorical axis scales, set the pixel length for subtle angular markers, modify the appearance of small axis ticks for enhanced chart precision, enable or disable minor tick sizing for navigational axes, and control axis tick granularity with precise tick length adjustments in data visualization tools.
+</div>
 
 #### Example
 
@@ -3409,6 +3934,11 @@ The length of the tick line in pixels.
 
 If set to `true` the chart will display the category axis minor ticks. By default the category axis minor ticks are visible.
 
+
+<div class="meta-api-description">
+Configure visibility of minor tick marks on the category axis of a stock chart's navigator, enabling or disabling the display of small interval indicators along the axis to enhance precision or declutter the visual; adjust settings to show or hide these minor ticks for better axis granularity control, tick mark customization, axis detail toggling, axis labeling refinement, timeline interval visibility, and improved chart navigation clarity in financial or time-series data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3437,6 +3967,11 @@ If set to `true` the chart will display the category axis minor ticks. By defaul
 
 The width of the minor ticks in pixels.
 
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of small tick marks along the category axis in stock or financial charts, controlling the pixel size of minor tick marks for the navigator axis to customize the visual detail, line weight, or stroke thickness of minor ticks in chart navigators or axis scales, enabling fine-tuning of minor grid line or tick mark size for clearer data representation and axis segmentation in stock chart navigation views.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3464,6 +3999,11 @@ The width of the minor ticks in pixels.
 ### navigator.categoryAxis.minorTicks.step `Number` *(default: 1)*
 
 The step of the category axis minor ticks.
+
+
+<div class="meta-api-description">
+Adjust, configure, or set the interval spacing, step size, frequency, or density of minor ticks on the category axis of a chart navigator to control axis granularity, tick placement, and labeling precision. Customize how minor tick marks appear on timeline or category scales within stock or financial charts, enabling finer or coarser divisions between minor tick marks for improved visualization, axis scaling, or detailed data segmentation in navigators or timeline sliders. Manage the step interval to optimize minor tick distribution for better readability, zooming, and navigation experience in time series or categorical axis implementations.
+</div>
 
 #### Example
 
@@ -3495,6 +4035,11 @@ The step of the category axis minor ticks.
 
 The skip of the category axis minor ticks.
 
+
+<div class="meta-api-description">
+Control the frequency of minor tick marks on the category axis in chart navigators by specifying a numeric interval to skip or omit certain minor ticks, helping to declutter and simplify axis labeling, improve readability, and customize the density of tick marks for better visual clarity in stock or data charts. Adjust how many minor ticks are displayed or skipped to manage axis granularity, reduce overcrowding, and fine-tune the appearance of time or category scales by enabling, setting, or configuring the spacing between minor tick marks.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3524,6 +4069,11 @@ The skip of the category axis minor ticks.
 ### navigator.categoryAxis.plotBands `Array`
 
 The plot bands of the category axis.
+
+
+<div class="meta-api-description">
+Configure and customize shaded bands or highlighted intervals along the category axis of a stock chart’s navigator to emphasize specific time periods, date ranges, or categorical sections by defining colored, bordered, and labeled plot bands; enable visual markers that distinguish particular spans within the axis for enhanced data segmentation, range highlighting, and temporal or category-based emphasis in charts, including flexible control over start and end points, appearance, and annotation to improve chart readability and highlight notable events or intervals.
+</div>
 
 #### Example
 
@@ -3559,6 +4109,11 @@ The plot bands of the category axis.
 
 The color of the plot band.
 
+
+<div class="meta-api-description">
+Set or customize the background fill color for highlighted ranges or bands on a chart’s category axis to emphasize specific intervals, time periods, or data segments; control and configure the shading or coloring of plot bands within the navigator area to improve visual distinction and range highlighting, enabling easy identification of selected or important zones on stock or time-based charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3592,6 +4147,11 @@ The color of the plot band.
 
 The start position of the plot band in axis units.
 
+
+<div class="meta-api-description">
+Set or control the starting position of a plot band along the navigator’s category axis by specifying the initial value, index, or coordinate where the highlight or shaded region should begin, enabling users to define dynamic ranges, emphasize specific segments, mark important categories, or customize visual axis overlays within stock or time series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3624,6 +4184,11 @@ The start position of the plot band in axis units.
 ### navigator.categoryAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
+
+
+<div class="meta-api-description">
+Adjust the transparency level or alpha opacity of a highlighted range or plot band within a stock chart’s navigator category axis to control how visible, translucent, or solid the band appears. Configure the plot band’s see-through effect by setting a numeric value that defines its brightness, clarity, fade, or intensity, enabling customization of visual emphasis in time series or categorized axis areas for better data segmentation and user focus. Modify, fine-tune, or control the shading strength to make portions of the axis stand out subtly or boldly in financial charts, timeline selectors, or interactive data visualizations.
+</div>
 
 #### Example
 
@@ -3659,6 +4224,11 @@ The opacity of the plot band.
 
 The end position of the plot band in axis units.
 
+
+<div class="meta-api-description">
+Define or adjust the ending value or upper limit of a highlighted range on the category axis within a stock chart navigator, setting where a plot band finishes based on numeric, date, or time axis units, enabling developers to control the extent, boundary, or cutoff point of visual emphasis along the axis to mark specific data intervals or highlighted segments for analysis, zoom, or selection purposes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3692,6 +4262,11 @@ The end position of the plot band in axis units.
 
 If set to `true` the category axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
 
+
+<div class="meta-api-description">
+Control the ordering direction of category labels on the navigator’s horizontal or vertical axis by enabling or disabling axis reversal, allowing you to flip categories from left-to-right to right-to-left or from bottom-to-top to top-to-bottom. Configure the axis to invert label sequences for customized timeline views, reversed sorting, mirrored categories, or flipped data navigation in stock charts, supporting options to reverse axis direction, reorder categories, and adjust label flow to better match user preferences or visual design requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3722,6 +4297,11 @@ If set to `true` the chart will round the first and last date to the nearest bas
 
 The `roundToBaseUnit` option will be ignored if [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "ohlc" or "candlestick".
 
+
+<div class="meta-api-description">
+Configure the navigator axis to align the visible date range edges to the nearest standard time interval or base unit, enabling precise snapping of the start and end dates on a time-based scale for smoother scrolling and zooming experiences. Control how the first and last visible points snap to meaningful time buckets such as days, weeks, or months to create consistent axis alignment during timeline navigation, though this behavior may be disabled for certain series types like bar, column, or candlestick charts. Enable or disable automatic rounding of axis boundaries to improve readability, ensure consistent time unit grouping, or fine-tune the navigator's date display when browsing stock or financial charts with time-based data. Adjust the alignment of time axis edges in the scroll navigator for better visualization of historical periods, date ranges, and increments used in financial or stock data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3749,6 +4329,11 @@ The `roundToBaseUnit` option will be ignored if [series.type](/api/javascript/da
 The title configuration of the category axis.
 
 > The [categoryAxis.title.text](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
+
+
+<div class="meta-api-description">
+Set or customize the text label, heading, or caption displayed along the category axis in a stock or financial chart, including controlling the title’s wording, font style, color, alignment, placement, and visibility to clearly identify the axis context; configure axis labels or headings for clarity and presentation in time series, date categories, or grouped data, and enable or disable the axis title to match chart design preferences or data narrative needs.
+</div>
 
 #### Example
 
@@ -3781,6 +4366,11 @@ The title configuration of the category axis.
 
 The background color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Set or customize the background color behind the category axis title in a stock chart navigator to enhance visibility, highlight or emphasize the axis label area using any CSS-compatible color format such as named colors, hexadecimal codes, RGB or RGBA values, and HSL or HSLA settings; configure, adjust, or enable background styling for the axis title to improve chart readability, differentiate the navigator’s category axis, or implement consistent visual theming that matches chart designs or user interface palettes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3809,6 +4399,11 @@ The background color of the title. Accepts a valid CSS color string, including h
 ### navigator.categoryAxis.title.border `Object`
 
 The border of the title.
+
+
+<div class="meta-api-description">
+Configure and customize the border appearance of the category axis title within stock chart navigators by setting attributes like border color, thickness, style, and visibility to align the axis title’s outline with overall chart design. Enable control over the category axis title’s frame or edge styling in financial or time series stock charts, adjusting border features for clarity, emphasis, or visual consistency. Set or modify the outline parameters surrounding the category axis label heading in navigators to enhance chart readability, highlight axis titles, or match them seamlessly with axis line styling and themes used in stock or market data visualizations.
+</div>
 
 #### Example
 
@@ -3841,6 +4436,11 @@ The border of the title.
 ### navigator.categoryAxis.title.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Configure and customize the outline color of the category axis title within the stock chart navigator, enabling control over the border hue, border shading, or title frame color using any valid CSS color format such as hex codes, RGB, or named colors. Adjust the visual emphasis, styling, or highlight of the category axis label by setting its border color, allowing for tailored border appearance, stroke color adjustments, or axis title outline customization in various color modes to enhance chart navigation clarity and design consistency.
+</div>
 
 #### Example
 
@@ -3884,6 +4484,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Configure and customize the border line style of the category axis title in a stock chart navigator by setting the pattern of dashes, dots, or solid lines, allowing various dash patterns such as dashed lines, dash-dot combinations, dotted lines, long dashes, long dash followed by dots, and continuous solid borders, enabling precise control over the navigational axis title appearance, border styling, line design, stroke patterns, and visual representation for clear chart labeling and improved axis title border customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3917,6 +4522,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust the thickness or pixel width of the border around the stock chart’s navigator category axis title, enabling customization of the title’s outline visibility and style by setting or modifying the border width, controlling whether the title border is displayed or hidden, and configuring the edge thickness for enhanced visual emphasis or subtle separation on the navigator’s category axis label area.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3949,6 +4559,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the text color of the title on the navigator’s category axis in a stock chart, enabling you to specify any valid CSS color formats such as hex codes (#FF0000), RGB values (rgb(255,0,0)), named colors, or other standard CSS color strings. Adjust the appearance, style, and visual emphasis of axis titles by setting or changing the color, tint, shade, or hue to match themes, improve readability, or highlight specific data ranges on the stock chart’s navigation axis. Use this capability to configure, style, or theme the text color of category axis headings in the navigator for clearer data presentation and user interface customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -3978,6 +4593,11 @@ The text color of the title. Accepts a valid CSS color string, including hex and
 
 The font style of the title.
 
+
+<div class="meta-api-description">
+Customize and control the typography of the navigator's category axis title in stock charts by setting font family, size, weight, style, and color to configure how axis titles appear visually. Adjust, define, or style text options to change the axis label’s font attributes, including typeface selection, font sizing, bold or italic styling, and color customization for clear and consistent chart headings. Enable fine-grained font configuration during chart setup to enhance readability, branding, or theming of the category axis title in financial data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4006,6 +4626,11 @@ The font style of the title.
 ### navigator.categoryAxis.title.margin `Number|Object` *(default: 5)*
 
 The margin of the title. A numeric value will set all margins.
+
+
+<div class="meta-api-description">
+Adjust or configure the spacing, padding, or margin around the category axis title in the stock chart navigator to control the distance between the title text and surrounding elements, setting uniform numeric margin values that affect all sides including top, bottom, left, and right; customize the layout, positioning, or whitespace of the axis title area for enhanced readability and visual balance within the navigator’s category axis.
+</div>
 
 #### Example
 
@@ -4041,6 +4666,11 @@ The margin of the title. A numeric value will set all margins.
 
 The bottom margin of the title.
 
+
+<div class="meta-api-description">
+Adjust or set the space below the navigator’s category axis title in stock charts by configuring the bottom margin, enabling control over padding or spacing beneath axis titles to improve layout and readability. Modify or customize the distance between the axis title and adjacent elements in the chart navigator, manage vertical spacing for category axis labels, fine-tune visual separation under the title for better clarity, and control the bottom gap to align or space text elements in stock chart navigation axes during setup or rendering.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4071,6 +4701,11 @@ The bottom margin of the title.
 ### navigator.categoryAxis.title.margin.left `Number` *(default: 0)*
 
 The left margin of the title.
+
+
+<div class="meta-api-description">
+Adjust the horizontal spacing or left offset of the navigator’s category axis title in stock charts, allowing control over the margin between the axis title and chart elements, enabling precise alignment, padding, or positioning of the title text relative to the chart area or axis line during chart setup or configuration for optimal layout and readability.
+</div>
 
 #### Example
 
@@ -4103,6 +4738,11 @@ The left margin of the title.
 
 The right margin of the title.
 
+
+<div class="meta-api-description">
+Configure or adjust the right margin spacing of the category axis title within a stock chart navigator, control the amount of horizontal space separating the axis title from adjacent elements on the right side, set or modify padding and margins to fine-tune label positioning, customize layout by increasing or decreasing spacing to avoid overlap or crowding, manage the alignment and distance of category axis titles for clarity and better visual organization in financial or time series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4134,6 +4774,11 @@ The right margin of the title.
 
 The top margin of the title.
 
+
+<div class="meta-api-description">
+Control and customize the vertical spacing above the category axis title within the stock chart navigator by setting or configuring the top margin, enabling precise adjustment of title positioning, padding, or clearance; this spacing property helps fine-tune layout alignment, improve readability, and manage visual hierarchy for axis labels or titles displayed in financial stock chart navigation components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4164,6 +4809,11 @@ The top margin of the title.
 ### navigator.categoryAxis.title.padding `Number|Object` *(default: 0)*
 
 The padding of the title. A numeric value will set all paddings.
+
+
+<div class="meta-api-description">
+Adjust the inner spacing or padding around the title of the category axis in the stock chart’s navigator to control layout, margin, and visual spacing; set uniform numeric padding values to increase or decrease the blank space surrounding the axis title, enabling customization of title positioning, layout alignment, and visual clarity within chart navigation components.
+</div>
 
 #### Example
 
@@ -4199,6 +4849,11 @@ The padding of the title. A numeric value will set all paddings.
 
 The bottom padding of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the vertical spacing below the category axis title in a stock chart navigator by setting or controlling the bottom padding value, enabling customization of the gap between the axis title text and the elements below; tweak, set, modify, or fine-tune the padding underneath the category axis label for clearer presentation, improved layout, or visual separation in financial or stock chart interfaces, including options for margin, spacing, or offset adjustments related to the navigator's axis title area.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4229,6 +4884,11 @@ The bottom padding of the title.
 ### navigator.categoryAxis.title.padding.left `Number` *(default: 0)*
 
 The left padding of the title.
+
+
+<div class="meta-api-description">
+Adjust or set the left padding, margin, or spacing of the category axis title within the navigator or scrollbar section of a stock or financial chart to control the horizontal alignment, indentation, and whitespace between the title text and the axis or chart edges, enabling customization of visual layout and fine-tuning of title positioning relative to axis labels and chart components.
+</div>
 
 #### Example
 
@@ -4261,6 +4921,11 @@ The left padding of the title.
 
 The right padding of the title.
 
+
+<div class="meta-api-description">
+Set or modify the right padding, spacing, or offset of the category axis title within the navigator section of a stock or financial chart to control its positioning, alignment, and layout relative to the axis labels, ticks, and other chart components; configure the horizontal space on the right side of the axis title to optimize visual clarity, avoid overlap, and customize how the title appears alongside the navigator's timeline or categorical data display.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4291,6 +4956,11 @@ The right padding of the title.
 ### navigator.categoryAxis.title.padding.top `Number` *(default: 0)*
 
 The top padding of the title.
+
+
+<div class="meta-api-description">
+Adjust, configure, or set the vertical spacing or top padding above the category axis title in stock charts, controlling the distance or space between the chart’s category axis label and its title for improved layout, visual separation, or better readability. Enable customization of the upper margin, gap, or padding above the axis title to enhance chart appearance, spacing, or text positioning, especially in stock or financial charts with navigators. Manage how much empty space appears above category axis titles to avoid overlap or crowding in dynamic chart interfaces.
+</div>
 
 #### Example
 
@@ -4331,6 +5001,11 @@ The supported values are:
 * "right" - the axis title is positioned on the right (applicable to horizontal axis)
 * "center" - the axis title is positioned in the center
 
+
+<div class="meta-api-description">
+Adjusting the label placement or setting the alignment of the chart axis title along the navigator’s category axis, including options to position text at the top, bottom, left, right, or center relative to the axis orientation enables precise control over title layout and appearance. Users often seek to configure, align, or relocate axis titles for better visualization, customize axis label positions, or control title placement on horizontal or vertical navigational axes in stock charts. This property supports setting axis title alignment, placement, orientation, and label positioning for navigational category axes, facilitating improved chart readability and design customization with flexible positioning choices across top, bottom, left, right, or centered locations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4359,6 +5034,11 @@ The supported values are:
 ### navigator.categoryAxis.title.rotation `Number` *(default: 0)*
 
 The rotation angle of the title. By default the title is not rotated.
+
+
+<div class="meta-api-description">
+Control or set the angle at which the navigator’s category axis title in stock charts is displayed by adjusting its rotation, enabling customization of title orientation for better readability or design preferences. Configure or enable precise tilting, slanting, or angular positioning of the axis label heading within the chart navigator area, allowing developers to rotate the label to any degree for styling, alignment, or visual clarity purposes. Adjust and customize the navigator category axis label text orientation to improve presentation, improve space usage, or meet specific interface layout requirements in financial or stock data visualizations.
+</div>
 
 #### Example
 
@@ -4389,6 +5069,11 @@ The rotation angle of the title. By default the title is not rotated.
 
 The text of the title.
 
+
+<div class="meta-api-description">
+Configure the label or title text shown above the category axis in a stock chart’s navigator to identify, describe, or highlight the axis purpose, enabling customization of axis headings, captions, or names for clearer chart navigation and readability. Adjust, set, or control the navigator category axis header text to improve user understanding, display informative axis titles, and enhance visual data context in financial or stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4416,6 +5101,11 @@ The text of the title.
 ### navigator.categoryAxis.title.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the category axis title. By default the category axis title is visible.
+
+
+<div class="meta-api-description">
+Control the visibility of the category axis title in a stock chart navigator, enabling toggling or configuring whether the axis title is displayed or hidden for cleaner, more compact chart layouts; customize axis label presentation by showing, disabling, enabling, or hiding the title to suit dashboard design, user interface preferences, or data visualization clarity in financial charts, timeline navigations, or series categorization.
+</div>
 
 #### Example
 
@@ -4446,6 +5136,11 @@ If set to `true` the chart will display the category axis title. By default the 
 
 If set to `true` the chart will display the category axis. By default the category axis is visible.
 
+
+<div class="meta-api-description">
+Control the visibility of the category axis in a stock chart navigator, enabling or disabling the display of date or category labels along the navigator timeline, toggling the axis visibility on or off, configuring whether the horizontal axis with categories or time intervals is shown in the navigator pane, setting the display state of the category axis line and labels during stock chart navigation, managing the presence of the axis for better clarity or a cleaner navigator view, showing or hiding the category axis to customize the navigator’s appearance and behavior.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4471,6 +5166,11 @@ If set to `true` the chart will display the category axis. By default the catego
 If set to `true` the chart will display the category axis. By default the category axis is visible.
 
 ### navigator.categoryAxis.weekStartDay `Number` *(default: kendo.days.Sunday)*
+
+
+<div class="meta-api-description">
+Set or configure the first day of the week for weekly-based category axis in stock charts by specifying which day the week should begin on, such as Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, or Saturday, enabling control over weekly time intervals, start-of-week alignment, week boundary customization, and accurate data grouping for week-start selection in timeline or financial chart visualizations.
+</div>
 
 #### Example
 
@@ -4500,6 +5200,11 @@ The supported values are:
 * kendo.days.Friday - equal to 5
 * kendo.days.Saturday - equal to 6
 
+
+<div class="meta-api-description">
+Set or configure the first day of the week for weekly-based category axis in stock charts by specifying which day the week should begin on, such as Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, or Saturday, enabling control over weekly time intervals, start-of-week alignment, week boundary customization, and accurate data grouping for week-start selection in timeline or financial chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4526,6 +5231,11 @@ The supported values are:
 ### navigator.categoryAxis.notes `Object`
 
 The category axis notes configuration.
+
+
+<div class="meta-api-description">
+Customize and control annotations, labels, markers, and notes on the category axis within a stock chart navigator, enabling the addition of contextual information, text, icons, or custom templates to specific axis points or categories during chart setup. This feature supports configuring the appearance, positioning, styling, and content of axis notes, allowing developers to highlight important data categories, add descriptive labels, embed visual icons, or apply custom note templates for enhanced chart readability and user guidance on the timeline or categorical axis in financial or stock chart visualizations.
+</div>
 
 #### Example
 
@@ -4565,6 +5275,11 @@ The category axis notes configuration.
 ### navigator.categoryAxis.notes.icon `Object`
 
 The icon of the notes.
+
+
+<div class="meta-api-description">
+Customize or set the symbol, marker, or graphic used for annotations, notes, or indicators on the category axis of the stock chart navigator, including changing, enabling, or controlling the visual icon representing axis remarks, flags, or labels on timeline or categorical data displays, allowing adjustment of note symbols for better visual distinction in financial or stock chart navigators.
+</div>
 
 #### Example
 
@@ -4611,6 +5326,11 @@ The position of the category axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+
+<div class="meta-api-description">
+Control and configure the placement of annotation notes or labels on the category axis within a stock chart's navigator, enabling you to set positions such as top, bottom, left, or right to customize where notes appear along the axis; adjust note alignment, orientation, and positioning dynamically or statically to enhance readability and visuals in financial chart navigation, supporting use cases like highlighting key data points or events on the timeline axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4642,6 +5362,11 @@ The position of the category axis note.
 ### navigator.categoryAxis.notes.icon.background `String`
 
 The background color of the notes icon.
+
+
+<div class="meta-api-description">
+Control and customize the background color or fill of annotation icons on the category axis within stock chart navigation components, enabling developers to set, adjust, or style the icon backdrop for better visibility, theme consistency, contrast enhancement, or UI clarity in financial charts, time series graphs, and axis note indicators. This affects the colored area behind marker symbols or notes that appear along the category axis navigator, providing options to personalize or standardize the appearance of note icons for chart annotations, event markers, or highlight points in stock or data visualization interfaces.
+</div>
 
 #### Example
 
@@ -4676,6 +5401,11 @@ The background color of the notes icon.
 ### navigator.categoryAxis.notes.icon.border `Object`
 
 The border of the icon.
+
+
+<div class="meta-api-description">
+Adjust the outline appearance of annotation icons within chart navigator axes by setting border properties like color, thickness, style, and dash patterns to customize, style, or control the edge visuals around notes or markers on category axis elements in stock or data visualizations, ensuring consistent integration with chart themes and enhancing visual distinction for axis annotations or indicators.
+</div>
 
 #### Example
 
@@ -4714,6 +5444,11 @@ The border of the icon.
 
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Adjust or customize the outline color, stroke color, or border hue of note icons displayed on the category axis within a stock chart navigator, enabling control over the visual style, highlight color, or frame color of annotation markers, allowing developers to set, configure, or style the edge color of note symbols or indicators on timeline charts, ensuring the note icon’s border matches design themes or improves visibility in financial or data visualization contexts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4750,6 +5485,11 @@ The border color of the icon.
 
 The border width of the icon.
 
+
+<div class="meta-api-description">
+Adjust and configure the thickness, line width, outline size, or border pixel value of note icons on the category axis in a StockChart navigator, enabling control over the visual weight or stroke size of the icon edges, settable via numeric values to customize how bold or thin the note icon outlines appear in charts, useful for styling, emphasis, clarity, or distinguishing annotations along the time or category axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4785,6 +5525,11 @@ The border width of the icon.
 ### navigator.categoryAxis.notes.icon.size `Number`
 
 The size of the icon.
+
+
+<div class="meta-api-description">
+Adjust the dimensions, scale, or icon size of annotations and markers on the stock chart navigator’s category axis to control the visual prominence, customize the note icon’s width and height, configure display size for improved clarity of navigator notes, set marker sizing to enhance readability within chart navigation, and fine-tune icon scale for category axis notes in stock chart visualization.
+</div>
 
 #### Example
 
@@ -4826,6 +5571,11 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+
+<div class="meta-api-description">
+Configure and customize the shape or style of visual markers, icons, or symbols used for notes or annotations specifically on the category axis within a stock chart navigator, including setting or changing to common marker types like circles, squares, triangles, crosses, or other geometric shapes for enhanced data visualization, axis labeling, highlighting points, or improving chart readability by adjusting the icon form representing category axis notes in financial or time-series charting tools.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4860,6 +5610,11 @@ The supported values are:
 
 The icon visibility.
 
+
+<div class="meta-api-description">
+Control the visibility, display, or appearance of icons representing notes or annotations on the category axis within a chart navigator, enabling developers to enable or disable these icons for enhanced data highlighting or simplified axis visuals, customize note markers, toggle annotation indicators on the timeline or category axis, and configure how note icons appear in stock or financial charts for improved user interface clarity and focus.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4893,6 +5648,11 @@ The icon visibility.
 ### navigator.categoryAxis.notes.label `Object`
 
 The label of the notes.
+
+
+<div class="meta-api-description">
+Configure or customize the text content, label, or description of annotations, notes, or markers attached to the category axis within a stock chart's navigator, enabling control over axis note labels, captions, or inline textual highlights to display context, comments, or metadata on timeline or category axis elements during initialization or runtime.
+</div>
 
 #### Example
 
@@ -4932,6 +5692,11 @@ The label of the notes.
 
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or customize the background color behind note labels on the category axis within a stock chart’s navigator for enhanced visibility, emphasis, or distinction of annotations; supports setting any valid CSS color format including hex codes like #ff0000 and RGB values such as rgb(255,0,0), enabling control over highlight colors, label backgrounds, or visual styling to differentiate notes on timeline or financial data axis markers.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -4965,6 +5730,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 ### navigator.categoryAxis.notes.label.border `Object`
 
 The border of the label.
+
+
+<div class="meta-api-description">
+Customize and configure the outline styling for note labels on the category axis within the stock chart navigator, including options to set border color, thickness, and dash style for label frames, enabling control over the appearance of axis annotations and notes, such as adjusting label edges, framing note text, applying dashed or solid borders, and enhancing visual distinction of navigator category axis notes in financial charting interfaces.
+</div>
 
 #### Example
 
@@ -5003,6 +5773,11 @@ The border of the label.
 ### navigator.categoryAxis.notes.label.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Set or customize the outline color, stroke, or border hue for annotations, labels, or notes on the category axis within stock chart navigators, enabling control over the label edge appearance using any valid CSS color formats such as hex codes, RGB, RGBA, or named colors. Adjust, configure, or style the frame color around axis note text to highlight, differentiate, or emphasize data points, markers, or commentary on the timeline or category axis in financial or stock chart visualizations.
+</div>
 
 #### Example
 
@@ -5050,6 +5825,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Customize and configure the border style of note labels on the StockChart navigator’s category axis using various dash patterns such as dashed, dotted, dash-dot combinations, long dashes, and solid lines to visually differentiate annotations, notes, or markers. Control the appearance, enable distinct dashed or solid border lines, set specific stroke patterns like dot, dash, longDash, dashDot, longDashDot, or longDashDotDot to highlight or emphasize category axis notes, and adjust label border styles for clarity and better visual distinction in chart navigation and annotations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5085,6 +5865,11 @@ The following dash types are supported:
 ### navigator.categoryAxis.notes.label.border.width `Number` *(default: 0)*
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+
+<div class="meta-api-description">
+Adjust the pixel thickness or size of the border surrounding labels on notes along the category axis in a stock chart navigator, enabling configuration of label outlines, edges, or frame width for clearer visual distinction or emphasis, with options to set or remove the border by specifying numeric values for border thickness around note labels in the chart’s navigation axis.
+</div>
 
 #### Example
 
@@ -5122,6 +5907,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust the text color of note labels on the navigator’s category axis in stock charts by setting or customizing label colors using any valid CSS color formats like hex, rgb, rgba, or named colors. Enable, configure, or control the color appearance of axis annotation labels to improve visibility, highlight important notes, or match theming and styling requirements for stock chart navigators. Change, set, or style the labels’ font color dynamically during chart setup or runtime for enhanced clarity and user interface consistency in financial or timeline visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5155,6 +5945,11 @@ The text color of the label. Accepts a valid CSS color string, including hex and
 ### navigator.categoryAxis.notes.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the label.
+
+
+<div class="meta-api-description">
+Configure and customize the typography of note labels on the navigator category axis by setting font properties including font family, font size, font weight, and font style using standard CSS font values; this enables adjusting label appearance for clarity, emphasis, readability, or branding on stock chart navigators, supporting scenarios that require precise control over text styling such as changing typeface, making labels bold or italic, resizing text, or applying custom fonts to enhance visual presentation and user interface consistency.
+</div>
 
 #### Example
 
@@ -5194,6 +5989,11 @@ The fields which can be used in the template are:
 
 * value - the category value
 
+
+<div class="meta-api-description">
+Customize the display of note labels on the stock chart’s navigator category axis by defining your own HTML templates, enabling formatting, dynamic content insertion, and binding of category values within labels; control how text and markup appear in annotations, tailor labels for data points, and create personalized visual notes by configuring templates that inject HTML, apply styles, or link to underlying category field values for enhanced readability and contextual emphasis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5227,6 +6027,11 @@ The fields which can be used in the template are:
 ### navigator.categoryAxis.notes.label.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the category notes label. By default the category notes label are visible.
+
+
+<div class="meta-api-description">
+Configure visibility of category axis note labels on the stock chart navigator, toggle display of annotation labels along the category axis, enable or disable showing notes text for data categories in the navigator timeline, control whether category markers or labels appear within the navigator’s axis area, set visibility of inline comments or highlight labels on the time scale category axis, show or hide textual notes that annotate categories in the stock chart’s navigator axis, manage presentation of category-specific notes for timeline overview, determine if category annotations or labels are visible on the navigator’s category axis, adjust settings to display or conceal notes linked to categories in the chart’s navigator section, control whether short descriptive labels for category notes along the navigator axis are visible or hidden.
+</div>
 
 #### Example
 
@@ -5262,6 +6067,11 @@ If set to `true` the chart will display the category notes label. By default the
 
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Adjust text orientation, angle, or tilt of category axis labels on stock chart navigators to enhance label readability, prevent overlapping, control label rotation degrees, set label alignment, rotate notes or annotations on axis categories, customize label angles for better visualization, configure text direction for axis notes, and manage label display by turning or slanting text on chart category axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5295,6 +6105,11 @@ The rotation angle of the label. By default the label are not rotated.
 ### navigator.categoryAxis.notes.label.format `String` *(default: "{0}")*
 
 The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+
+<div class="meta-api-description">
+Customize how labels on chart navigation notes display category values by setting format strings that control the appearance of dates, numbers, or text within notes on timeline axes; configure, format, or set patterns to define how category axis note labels render using placeholders representing category data, enabling tailored display of date formats, numeric representations, or custom label text in stock or financial chart navigators.
+</div>
 
 #### Example
 
@@ -5333,6 +6148,11 @@ The position of the labels.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+
+<div class="meta-api-description">
+Adjust or set the placement of annotation labels for notes on the category axis of a stock chart’s navigator, enabling control over whether note labels appear inside, overlapping, enclosed within, or outside, adjacent to, or separate from their corresponding note icons; configure label alignment relative to the note marker, customize note tag positioning for clarity, and manage visibility or layout of axis annotations in stock chart navigation components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5366,6 +6186,11 @@ The position of the labels.
 ### navigator.categoryAxis.notes.line `Object`
 
 The line of the notes.
+
+
+<div class="meta-api-description">
+Customize and style the connecting or marker lines for annotations on the chart’s category axis navigator by setting stroke color, line width, line style, appearance, and visual properties. Enable control over note indicator lines on the stock chart axis, adjusting colors, thickness, and design to visually link annotations or markers effectively within the navigator area. Fine-tune the look of connector lines for notes or markers on the axis, allowing configuration of line color, stroke properties, width, and other appearance attributes to enhance note visibility and styling in the chart navigation pane.
+</div>
 
 #### Example
 
@@ -5403,6 +6228,11 @@ The line of the notes.
 
 The line width of the notes.
 
+
+<div class="meta-api-description">
+Adjust the thickness or weight of connector lines linking notes to the category axis in stock chart navigators, enabling customization of note line width through numeric values to enhance visual clarity, control appearance, set line thickness for annotation indicators, modify note pointer line size, tune connector line boldness, and define the pixel width of lines connecting notes on time or categorical axes in financial or data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5436,6 +6266,11 @@ The line width of the notes.
 ### navigator.categoryAxis.notes.line.color `String`
 
 The line color of the notes.
+
+
+<div class="meta-api-description">
+Set or control the color and appearance of annotation lines or markers on the timeline or category axis within stock or financial charts, enabling customization of note lines with various color formats such as hex codes, RGB values, or named colors to highlight or differentiate specific events or data points on the navigator axis. Adjust or configure the styling of these connector lines that link notes or comments to the axis for better visual clarity, emphasis, or branding in stock chart interfaces, and apply color settings that influence how note lines appear in the category axis navigation panel used in finance or trading data visualization applications.
+</div>
 
 #### Example
 
@@ -5471,6 +6306,11 @@ The line color of the notes.
 
 The length of the connecting lines in pixels.
 
+
+<div class="meta-api-description">
+Adjust the pixel length or size of connector lines that link annotation notes to points along the category axis within a stock chart's navigator, enabling control over how far note connector lines extend, customize link lengths, set or modify the note line distance for clearer visual association between axis labels and their descriptive notes, and fine-tune the spacing or extension of connecting lines on the category axis annotations in the stock chart navigation view.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5505,6 +6345,11 @@ The length of the connecting lines in pixels.
 
 The items of the notes.
 
+
+<div class="meta-api-description">
+Configure and manage a collection of annotation entries or markers appearing along the timeline or categorical axis within the stock chart's navigator area, enabling you to add, bind, update, or remove individual note data points that highlight specific events, comments, or labels. This feature supports supplying an array or list of note objects that correspond to user-defined notes, annotations, markers, or flags attached to particular positions on the category axis, useful for displaying contextual information such as alerts, milestones, or custom labels within the stock chart navigation pane. It facilitates control over note data binding, dynamic note updates, and customization of axis annotations for enhanced visual context and interactive timeline or category marking.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5538,6 +6383,11 @@ The items of the notes.
 ### navigator.categoryAxis.notes.data.value `Object`
 
 The value of the note.
+
+
+<div class="meta-api-description">
+Control or configure the exact position of annotations, markers, or notes on a StockChart navigator category axis by specifying the anchor point based on a category label, date, or numeric value; set or adjust where notes appear along the axis by binding them to specific data values, timestamps, or categories to customize how notes align with data points or intervals in the chart navigation area.
+</div>
 
 #### Example
 
@@ -5575,6 +6425,11 @@ The position of the category axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+
+<div class="meta-api-description">
+Set or control the placement of data annotations or notes along the category axis in a stock chart, enabling you to position these labels or markers above, below, to the left, or to the right of the axis line; this enables customization of how notes appear relative to the chart’s horizontal axis for better visualization, annotation alignment, or user interface layout preferences across various stock chart or time-series data scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5606,6 +6461,11 @@ The position of the category axis note.
 ### navigator.categoryAxis.notes.data.icon `Object`
 
 The icon of the note.
+
+
+<div class="meta-api-description">
+Adjust, set, or configure the visual icon representing annotations or notes attached to specific data points along the category axis in a stock chart's navigator, enabling customization of marker symbols, changing indicator graphics, or tailoring note icons to differentiate or highlight important data flags, comments, or remarks within the chart's timeline or axis.
+</div>
 
 #### Example
 
@@ -5643,6 +6503,11 @@ The icon of the note.
 
 The background color of the note icon.
 
+
+<div class="meta-api-description">
+Control and customize the background color of note icons or markers displayed on data annotations within the navigation category axis of stock charts, enabling you to style or highlight data notes with any CSS color value, set or configure icon backgrounds for clearer visualization, and adjust annotation icon appearance for improved chart readability and user interface design on chart navigators.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5677,6 +6542,11 @@ The background color of the note icon.
 
 The border of the icon.
 
+
+<div class="meta-api-description">
+Adjust and customize the border styling around data note icons on category axes within stock chart navigators by setting parameters like color, thickness, and line style to control the outline appearance of annotation markers, enabling tailored visuals for note indicators on axis elements in financial or time series chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5704,6 +6574,11 @@ The border of the icon.
 
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Customize and control the outline color, border shade, or edge hue of note icons within the data annotations on the category axis of a stock chart navigator; adjust the highlight, frame color, or stroke tint around marker icons used for data notes, enabling configuration of visual emphasis, differentiation, or styling for note symbols attached to data points in financial or time-series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5730,6 +6605,11 @@ The border color of the icon.
 
 The border width of the icon.
 
+
+<div class="meta-api-description">
+Adjust the thickness of the border or outline around data point markers, note icons, or annotations within the navigator's category axis on stock charts, enabling control over the stroke width or line weight of these highlight icons, so you can customize how prominently note icons appear by setting or configuring the border thickness parameter with numeric values to emphasize or de-emphasize note visuals in chart navigation areas.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5755,6 +6635,11 @@ The border width of the icon.
 ### navigator.categoryAxis.notes.data.icon.size `Number`
 
 The size of the icon.
+
+
+<div class="meta-api-description">
+Adjust or configure the size, scale, or dimensions of note icons or marker symbols on navigator category axis data points in stock or financial charts, enabling control over the visual appearance, prominence, or spacing of data annotations and notes within chart navigators, allowing developers to customize marker icon sizing to enhance readability, fit layout constraints, or match design preferences for axis notes in time series or category-based navigator charts.
+</div>
 
 #### Example
 
@@ -5786,6 +6671,11 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+
+<div class="meta-api-description">
+Customize or configure the shape of markers appearing on note data icons along the category axis in a stock chart navigator, enabling control over visual indicators such as circles, squares, triangles, or crosses for highlighting specific data points; adjust the geometric symbol used for annotations or notes on timeline or category axes in stock or financial charts to enhance clarity, recognition, and user interaction by choosing among common marker styles or shapes for better data visualization in chart navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5809,6 +6699,11 @@ The supported values are:
 ### navigator.categoryAxis.notes.data.icon.visible `Boolean` *(default: "true")*
 
 The icon visibility.
+
+
+<div class="meta-api-description">
+Control the visibility of icons representing data notes on the category axis within the navigator of a stock chart, enabling or disabling these markers to highlight or hide specific data points in the timeline view; toggle display of note symbols for clearer data visualization, customize icon appearance for annotations, manage chart markers on the axis, and set boolean flags to show or conceal data-related icons during chart setup or dynamic updates.
+</div>
 
 #### Example
 
@@ -5834,6 +6729,11 @@ The icon visibility.
 
 The label of the note.
 
+
+<div class="meta-api-description">
+Customize, configure, or control the text labels shown on data notes or annotations attached to the category axis within stock chart navigators, enabling setting, binding, or templating of note text for enhanced clarity, localization, or dynamic content on axis markers. This includes setting plain text labels, applying templates for rich formatting, localizing note descriptions, or dynamically updating annotation labels tied to category axis data points in stock market visualizations and interactive charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5858,6 +6758,11 @@ The label of the note.
 
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Configure and customize the background color for data note labels on the category axis within a stock chart navigator, enabling control over label appearance using any CSS-compatible color format such as hexadecimal, RGB, or named colors. Adjust, set, or style the background behind data point annotations, markers, or labels to enhance readability, highlight specific data notes, or match chart themes and color schemes. Enable or modify label backgrounds for clearer visualization of notes attached to the category axis in financial or time series charts, ensuring that annotations stand out through background color adjustments using standard CSS color codes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5881,6 +6786,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 ### navigator.categoryAxis.notes.data.label.border `Object`
 
 The border of the label.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of outline borders around data point labels in the category axis notes within the stock chart navigator, including setting border color, thickness, dash style, and corner radius to enhance label visibility and styling. Enable configuration of label outlines, borders around note annotations, or framed data labels on the axis to match design requirements, improve readability, or highlight specific data points in stock chart navigation. Adjust border styling for note labels at the category axis to create distinct, visually separated annotations supporting various visual customization needs.
+</div>
 
 #### Example
 
@@ -5908,6 +6818,11 @@ The border of the label.
 ### navigator.categoryAxis.notes.data.label.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Control and customize the outline color or border shade of data note labels on the category axis within a stock chart navigator, enabling precise styling of label borders using any valid CSS color format such as hex codes, RGB, or named colors. Adjust the label frame color to highlight, differentiate, or visually enhance annotations, notes, or data points along the category axis in financial or time-series stock charts, supporting flexible appearance settings for label outlines and borders. This configuration supports developers looking to style, theme, or modify label borders on chart navigators for improved clarity, emphasis, or branding consistency in data visualizations.
+</div>
 
 #### Example
 
@@ -5945,6 +6860,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Configure and customize the outline style of data label borders for notes on a stock chart's navigator category axis by setting the border stroke pattern, including various dash styles such as solid lines, dashed lines, dotted lines, dash-dot patterns, long dashes, long dash-dot combinations, and long dash-dot-dot sequences. Control the appearance of note label outlines with options for different line patterns to enhance visual distinction, readability, and emphasis in chart annotations and navigator elements. Adjust, enable, or set border dash types to suit styling preferences, improve UI clarity, or match specific design requirements for financial or stock data visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -5970,6 +6890,11 @@ The following dash types are supported:
 ### navigator.categoryAxis.notes.data.label.border.width `Number` *(default: 0)*
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+
+<div class="meta-api-description">
+Control and configure the thickness, size, and visibility of the border around category axis note data labels in the stock chart navigator by adjusting the pixel width of the label border, enabling customization of border prominence or complete removal by setting the width to zero.
+</div>
 
 #### Example
 
@@ -5997,6 +6922,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the note label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or set the text color of annotation labels on data points within the category axis of a stock chart navigator, enabling control over note label appearance using any valid CSS color format such as hexadecimal codes, RGB values, or named colors. Adjust, configure, or style the color of textual notes that mark specific data points on the navigator’s category axis, supporting use cases that require changing highlight colors, enhancing visibility, matching themes, or differentiating annotations by altering label hues for improved chart annotation clarity and visual customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6020,6 +6950,11 @@ The text color of the note label. Accepts a valid CSS color string, including he
 ### navigator.categoryAxis.notes.data.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the note label.
+
+
+<div class="meta-api-description">
+Control and customize the typography for note labels on stock chart navigator category axis data, including font family, size, weight, style, and other text appearance settings to adjust label readability, styling, and visual emphasis for data annotations in chart navigation elements.
+</div>
 
 #### Example
 
@@ -6049,6 +6984,11 @@ The fields which can be used in the template are:
 
 * value - the category value
 
+
+<div class="meta-api-description">
+Customize and control the rendering of annotation or note labels on the category axis within a stock chart's navigator by defining a flexible template that can format, bind data, or transform label content dynamically. This enables developers to set custom display patterns for axis note labels, manipulate how category values appear, apply conditional formatting, and integrate variable placeholders for precise label customization and styling. Adjust content rendering for data labels connected to axis notes, supporting scenarios such as displaying category names, values, or custom text with full control over layout and presentation in the context of stock chart navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6072,6 +7012,11 @@ The fields which can be used in the template are:
 ### navigator.categoryAxis.notes.data.label.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the category notes label. By default the category notes label are visible.
+
+
+<div class="meta-api-description">
+Control the display of category axis note labels on the stock chart navigator by enabling or disabling visibility for data item annotations, allowing you to show or hide markers, tags, or labels related to specific data points on the timeline axis; configure the visibility setting to manage whether these descriptive notes or callouts appear, toggle display of category notes, adjust label presence on the navigator's axis for clearer data representation, show contextual information directly on the axis, or remove clutter by hiding labels for focused chart navigation and improved visual clarity.
+</div>
 
 #### Example
 
@@ -6097,6 +7042,11 @@ If set to `true` the chart will display the category notes label. By default the
 
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Adjust or set the angle of rotation for labels attached to data notes on the category axis within a stock chart navigator, enabling control over the orientation of annotation text such as notes or comments on axis data points, including the ability to tilt, rotate, or angle labels for better readability, customization, or alignment during chart setup, initialization, or dynamic updates to improve visualization and accommodate different label layouts or dense data scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6121,6 +7071,11 @@ The rotation angle of the label. By default the label are not rotated.
 
 The format used to display the note label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
 
+
+<div class="meta-api-description">
+Customize, configure, or control the formatting and display of labels on notes attached to the category axis within the stock chart navigator, including setting or enabling custom string formats, templates, or patterns that incorporate dynamic category values using placeholders or format tokens, allowing for tailored presentation of axis annotations or remarks with flexible text, numeric, or date representations consistent with Kendo-style formatting syntax and options.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6144,6 +7099,11 @@ The format used to display the note label. Uses [kendo.format](/api/framework/ke
 ### navigator.categoryAxis.notes.data.label.text `String`
 
 The label note text.
+
+
+<div class="meta-api-description">
+Set or customize the displayed text content for data note labels on the navigator’s category axis in stock charts, enabling control over annotations, captions, or tags shown on category axis markers in financial or time series visualizations. This includes configuring, editing, or updating the label strings for data notes linked to categories, dates, or points along the navigator axis, supporting use cases such as highlighting specific events, marking key moments, or providing custom textual information on the minimized overview chart axis.
+</div>
 
 #### Example
 
@@ -6172,6 +7132,11 @@ The position of the category axis note label.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+
+<div class="meta-api-description">
+Adjust label placement on category axis data notes within a stock chart navigator to control annotation positioning relative to note markers, enabling setting labels inside or outside note icons for improved clarity, label alignment, and readability; configure data point note label locations to appear either within note symbols or adjacent to them, catering to preferences for visual emphasis, spatial arrangement, and annotation visibility on financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6195,6 +7160,11 @@ The position of the category axis note label.
 ### navigator.categoryAxis.notes.data.line `Object`
 
 The line of the note.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of connector lines or annotation lines linked to notes on the category axis within a stock chart navigator, including options to set line color, thickness, dash patterns, stroke styles, and visual rendering details for data point annotations, enabling fine-tuned styling of note connector visuals in financial chart axis navigation contexts.
+</div>
 
 #### Example
 
@@ -6222,6 +7192,11 @@ The line of the note.
 
 The line width of the note.
 
+
+<div class="meta-api-description">
+Adjust the thickness, stroke weight, or line width of annotation connectors, note lines, or data labels within chart navigators and category axes to customize the visual emphasis or prominence of notes on stock or timeline charts. Configure, set, or control the numeric value that determines how thick or thin the connecting lines or markers appear, influencing the appearance and clarity of note indicators in stock chart navigators or axis data annotations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6246,6 +7221,11 @@ The line width of the note.
 
 The line color of the note.
 
+
+<div class="meta-api-description">
+Customize and control the stroke color, outline, or line color of annotation notes linked to data points along the category axis within the stock chart navigator. Adjust, set, or configure the visual line color for data-related note markers to highlight, emphasize, or style note lines matching chart series colors or annotation themes, enabling enhanced visual clarity, annotation styling, or note differentiation on the navigator axis. Use this to define the color of connecting lines for data notes, supporting customization of annotation line appearances, highlighting important data tags, or aligning note colors with chart branding and color schemes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6269,6 +7249,11 @@ The line color of the note.
 ### navigator.categoryAxis.notes.data.line.length `Number`
 
 The length of the connecting lines in pixels.
+
+
+<div class="meta-api-description">
+Adjust the pixel length of connector lines linking data point annotations or notes to their corresponding labels on the horizontal category axis within a stock chart navigator or timeline, controlling the distance these leader lines extend from markers to text, enabling customization of note visibility and clarity by setting or configuring the length of these arrows, lines, or indicators that visually associate data highlights or comments to their axis categories in financial or time series charts.
+</div>
 
 #### Example
 
@@ -6299,6 +7284,11 @@ it will automatically set "from" and "to" filters on the main data source.
 
 This, in conjunction with server filtering, allows you to visualize large data sets
 without loading them at once.
+
+
+<div class="meta-api-description">
+Configure an independent dataset or data source instance to power the interactive navigator panel in stock charts, enabling control over the visible time window and range selection separately from the main data. Enable setting filters such as date ranges or time frames on the primary dataset through this connected secondary source to optimize performance and support server-side filtering. Control and customize the navigator’s data input independently to efficiently handle large financial or time series data, manage visible intervals, and update displayed subsets dynamically without loading the entire dataset at once. Use separate or linked data configurations to segment, filter, and drive the stock chart timeline overview and navigation functionality.
+</div>
 
 #### Example
 
@@ -6348,6 +7338,11 @@ without loading them at once.
 Indicates whether the navigator will call read on the data source initially.
 Applicable only when using a dedicated navigator data source.
 
+
+<div class="meta-api-description">
+Configure automatic loading or disabling of data fetching for the stock chart navigator during initialization, controlling whether the navigator triggers data source reads on startup, managing dynamic data binding or manual data refresh options for separate navigator data sources, setting up whether the navigator automatically retrieves or defers data loading when the chart component is created, enabling or preventing auto-fetch of navigator data with independent data source instances, and controlling initial data synchronization behaviors for stock chart navigation elements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6392,6 +7387,11 @@ It is used as a default `field` for the navigator axis.
 
 The data item field value must be either:
 
+
+<div class="meta-api-description">
+Set or configure the date axis field for the stock chart’s navigator by specifying the data property that contains date values, enabling control over which date-related data points the timeline or range selector uses for navigation; support input formats include JavaScript Date objects, ISO or parsable date strings, and ASP.NET JSON date strings, allowing binding to various date representations for time-series navigation, timeline control, zooming on date intervals, and filtering data based on date fields in stock or financial charts.
+</div>
+
 ####* Date instance
 
 ####* String parsable by `new Date([field value])`
@@ -6419,6 +7419,11 @@ The data item field value must be either:
 
 The navigator pane configuration.
 
+
+<div class="meta-api-description">
+Adjust or set the layout, size, dimensions, spacing, styling, and visual appearance of the chart navigator area or subsection, control pane width and height, customize navigator panel look and feel, configure spacing between elements within the navigator, modify background, borders, or style settings for the navigation pane area, define how the navigator section is displayed or arranged, and tailor the navigation pane layout options for overview or mini-chart navigation in stock or data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6440,6 +7445,11 @@ The navigator pane configuration.
 
 The background color of the pane. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize and control the background color or fill of the navigation pane area in stock or financial charts, enabling setting any CSS-compatible color value like hex codes, RGB, or named colors to visually style or theme the navigator's backdrop. Configure, adjust, or change the pane's background shade to enhance chart readability, user interface appearance, or highlight the selection window within time series or stock price data views. Enable flexible background styling for the navigator region to match branding, improve contrast, or blend with surrounding elements in chart visualization setups.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6456,6 +7466,11 @@ The background color of the pane. Accepts a valid CSS color string, including he
 ### navigator.pane.border `Object`
 
 The border of the navigator pane.
+
+
+<div class="meta-api-description">
+Adjust and customize the outline, edge, or frame surrounding the chart navigation area, controlling border color, thickness, style, dash patterns, and visual separation between the navigator section and the main stock chart; set or modify the navigation pane’s perimeter appearance to enhance chart readability, emphasize boundaries, or define clear edges for interactive timeline controls and zoom overview functionality.
+</div>
 
 #### Example
 
@@ -6477,6 +7492,11 @@ The border of the navigator pane.
 ### navigator.pane.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Set or customize the border color of the stock chart navigator pane using any valid CSS color format such as hex, RGB, or named colors, enabling control over the outline, edge color, frame hue, or stroke shade around the navigator area for styling, theming, and visual customization of the chart's navigation pane border appearance.
+</div>
 
 #### Example
 
@@ -6507,6 +7527,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Control and customize the border style of a chart navigation pane by configuring the line pattern to solid, dashed, dotted, or various combinations like dash-dot and long dash variations, enabling you to adjust visual emphasis and styling for chart outlines, borders, or navigator sections through options such as dash, dashDot, dot, longDash, longDashDot, longDashDotDot, and solid line styles to enhance chart readability and appearance.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6525,6 +7550,11 @@ The following dash types are supported:
 ### navigator.pane.border.width `Number` *(default: 0)*
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+
+<div class="meta-api-description">
+Adjust the thickness or width of the border around the stock chart navigator pane by setting numeric pixel values to enhance or reduce the visual separation of the navigator area, enabling control over border visibility, edge styling, and outline prominence around the navigation section of the chart for clearer delineation or subtle design, useful for customizing the navigator pane’s outline, managing border size, or toggling the presence of a border in financial chart interfaces.
+</div>
 
 #### Example
 
@@ -6545,6 +7575,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The navigator pane height in pixels.
 
+
+<div class="meta-api-description">
+Adjust or set the vertical size and height of the chart navigator pane in pixels, control the fixed or custom pixel height allocation for the navigator area, modify navigator pane dimensions to affect layout spacing and the visible portion of the main chart, customize the pixel-based height of the navigation section for better chart presentation, configure the navigator’s pixel height to manage how much vertical space it occupies within the overall stock chart layout.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6561,6 +7596,11 @@ The navigator pane height in pixels.
 ### navigator.pane.margin `Number|Object` *(default: 0)*
 
 The margin of the pane. A numeric value will set all margins.
+
+
+<div class="meta-api-description">
+Adjust the outer spacing or padding surrounding the chart navigator area by configuring uniform margin values to control the distance between the navigator pane and adjacent elements, enabling precise layout adjustments, spacing customization, and fine-tuning of the navigator's position and alignment within the stock or financial chart interface.
+</div>
 
 #### Example
 
@@ -6584,6 +7624,11 @@ The margin of the pane. A numeric value will set all margins.
 
 The bottom margin of the navigator pane.
 
+
+<div class="meta-api-description">
+Adjusting the space below the chart navigator pane to control bottom margin, padding, or gap for better layout alignment, visual separation, and spacing between the navigator area and other chart components; configuring, setting, or customizing the lower margin or empty space beneath the navigation pane to optimize chart appearance and prevent overlap or crowding in stock or data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6602,6 +7647,11 @@ The bottom margin of the navigator pane.
 ### navigator.pane.margin.left `Number` *(default: 0)*
 
 The left margin of the navigator pane.
+
+
+<div class="meta-api-description">
+Control and customize the left margin or spacing of the navigator area in stock charts to adjust layout alignment, configure offset values to shift the navigator pane horizontally, set padding or margin on the left side of the navigation bar, fine-tune positioning to manage spacing between the navigator and chart edges, modify left offset during setup to move the navigator inward or outward, and enable precise control over horizontal placement within chart components for better visual arrangement and user interface adjustments.
+</div>
 
 #### Example
 
@@ -6622,6 +7672,11 @@ The left margin of the navigator pane.
 
 The right margin of the navigator pane.
 
+
+<div class="meta-api-description">
+Adjust or configure the right-side spacing, padding, or margin of the navigator panel within a stock chart or financial graph interface to control how much empty space appears between the navigator area and the chart’s edge, enabling fine-tuning of layout alignment, visual separation, and component positioning during rendering or initialization of interactive stock or timeline charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6641,6 +7696,11 @@ The right margin of the navigator pane.
 
 The top margin of the navigator pane.
 
+
+<div class="meta-api-description">
+Adjust or configure the vertical spacing above the navigator pane within stock charts by setting the upper margin to control distance between the navigator and other chart sections, enabling precise layout alignment, spacing customization, margin adjustment, and visual separation to optimize the navigator's position in relation to the main chart area and adjacent elements for improved readability and interface organization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6659,6 +7719,11 @@ The top margin of the navigator pane.
 ### navigator.pane.name `String`
 
 The unique name of the navigator pane.
+
+
+<div class="meta-api-description">
+Assign or configure a unique identifier, label, or key for a navigator pane within your stock chart setup to easily reference, control, update, or target that specific pane during chart configuration, series binding, pane option adjustments, or dynamic runtime interactions. This enables pinpointed management, manipulation, and differentiation of individual navigator panes for tasks such as enabling, disabling, updating properties, or linking data series within complex chart interfaces.
+</div>
 
 #### Example
 
@@ -6688,6 +7753,11 @@ The unique name of the navigator pane.
 
 The padding of the pane. A numeric value will set all paddings.
 
+
+<div class="meta-api-description">
+Adjust inner spacing, margin, or buffer inside chart navigator pane, control the gap between pane content and edges, set uniform padding or whitespace around navigation area, configure inset space to refine layout and visual separation, manage internal offsets within stock chart navigation pane for balanced design and optimal display, customize spacing to reduce clutter or increase breathing room inside pane boundaries, control navigator margin for better alignment and aesthetic spacing in financial chart interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6715,6 +7785,11 @@ The padding of the pane. A numeric value will set all paddings.
 ### navigator.pane.padding.bottom `Number` *(default: 0)*
 
 The bottom padding of the navigator pane.
+
+
+<div class="meta-api-description">
+Adjust or configure the space beneath the navigator area by setting bottom padding, controlling the vertical gap between the navigator pane and the main chart, enabling precise layout alignment, spacing adjustments, margin control, and improved visual separation in stock charts or time series graphs. Optimize the navigator’s lower spacing to prevent overlap, fine-tune the interface’s vertical layout, set or customize the distance between navigator content and chart area, and manage padding to enhance readability, appearance, or GUI arrangement in interactive financial or data visualization charts.
+</div>
 
 #### Example
 
@@ -6746,6 +7821,11 @@ The bottom padding of the navigator pane.
 
 The left padding of the navigator pane.
 
+
+<div class="meta-api-description">
+Adjust or configure the horizontal space or left margin inside the navigator pane of a stock chart, controlling how far the content sits from the left edge, enabling layout customization, padding settings, spacing tweaks, or margin adjustments for the chart's navigator area to improve visual alignment, layout balance, or UI spacing in financial chart interfaces during setup or dynamic updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6776,6 +7856,11 @@ The left padding of the navigator pane.
 
 The right padding of the navigator pane.
 
+
+<div class="meta-api-description">
+Adjust the inner spacing or margin on the right side of a chart navigator pane, enabling you to set or customize the right padding, buffer, or empty space between the pane's contents and its right boundary; configure this layout aspect to control visual alignment, prevent content clipping, manage horizontal whitespace, or tailor the navigator’s edge offset during chart initialization and layout design.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6805,6 +7890,11 @@ The right padding of the navigator pane.
 ### navigator.pane.padding.top `Number` *(default: 0)*
 
 The top padding of the navigator pane.
+
+
+<div class="meta-api-description">
+Control or configure the vertical spacing above the navigator pane in stock charts by adjusting the top padding to increase or decrease the gap between the navigator area and other chart components, enabling precise layout customization and visual separation. This setting helps set margins, tune vertical offset, or apply extra space above the navigation panel for improved readability, alignment, or design balance in financial or data visualization charts with interactive timelines or scrubbers. Use it to fine-tune overlap issues, padding adjustments, or spacing preferences related to the navigator section in stock or time series charts.
+</div>
 
 #### Example
 
@@ -6838,6 +7928,11 @@ The title configuration of the navigator pane.
 
 > The [panes.title.text](/api/javascript/dataviz/ui/stock-chart#configuration-panes.title.text) option must be set in order to display the title.
 
+
+<div class="meta-api-description">
+Customize and configure the text, formatting, style, and position of the navigation pane title within stock charts, enabling control over how the subtitle or heading appears in the chart’s navigator area; set, enable, or modify title content for clarity, branding, or readability in financial data visualizations, including options for placement, font, and visibility to enhance chart navigation labels and user interface elements during initialization or runtime adjustments.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -6867,6 +7962,11 @@ The title configuration of the navigator pane.
 ### navigator.pane.title.background `String`
 
 The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or configure the background color of the navigator pane title area in a stock chart, enabling you to set custom colors using any valid CSS format such as hex codes, RGB values, or named colors; control and customize the appearance, theme, or style of the title bar behind the navigator pane to enhance visual distinction, branding, readability, or UI aesthetics within charting components; modify, style, or change the title background color dynamically to match application themes or user preferences in financial or data visualization interfaces.
+</div>
 
 #### Example
 
@@ -6898,6 +7998,11 @@ The background color of the title. Accepts a valid CSS color string, including h
 ### navigator.pane.title.border `Object`
 
 The border of the title.
+
+
+<div class="meta-api-description">
+Configure and customize the outline and visual style of the navigator pane's title border in stock or financial charts by adjusting properties like color, thickness, dash patterns, and stroke style. Control the appearance, styling, and design of the title border to enhance clarity and aesthetics in chart navigation panels. Enable setting or modifying the border around navigator titles for improved visual distinction and user interface refinement in interactive stock chart components.
+</div>
 
 #### Example
 
@@ -6932,6 +8037,11 @@ The border of the title.
 ### navigator.pane.title.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Configure and customize the border color of the navigator pane title in stock charts by specifying any valid CSS color format such as hex codes, RGB, RGBA, named colors, or CSS color strings to control, set, enable, or style the title border appearance, allowing developers to adjust and fine-tune the visual outline of the navigator pane’s title area for chart navigation interfaces.
+</div>
 
 #### Example
 
@@ -6977,6 +8087,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Adjust or configure the border style pattern of the chart navigator title pane by setting the dash type to various line patterns including dashed lines, dot sequences, dash-dot repeats, long dashes, combinations of long dashes with dots, or a solid continuous border line; customize, enable, or control the visual appearance of outlines with different stroke styles such as dash, dot, dashDot, longDash, longDashDot, longDashDotDot, and solid to achieve specific design or emphasis effects around the navigator title area in stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7012,6 +8127,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust the thickness or visibility of the border around the navigator pane title by specifying a numeric pixel value to control its width, enabling customization of border prominence or complete removal by setting the width to zero for no outline, useful for styling chart navigation headers, configuring border size, enabling or disabling border display, and fine-tuning the visual emphasis of the navigator title area in stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7046,6 +8166,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or configure the text color, font color, or title foreground shade for the navigator pane in a stock chart using CSS color formats such as hexadecimal codes, RGB, RGBA, or named colors; control or customize the appearance, styling, or visual color settings of the navigation pane's heading to match themes, improve readability, or comply with branding requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7076,6 +8201,11 @@ The text color of the title. Accepts a valid CSS color string, including hex and
 ### navigator.pane.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
+
+
+<div class="meta-api-description">
+Adjust the typography, font family, size, weight, style, and other text attributes of the chart navigator's pane title to customize how the title appears visually, including configuring font styles for clearer, more readable, or branded title headers in stock or financial charts. Control and set the text appearance of navigation pane titles to match design requirements, enabling font customization such as bold, italic, different font sizes, and specific font types for title elements within interactive stock chart components.
+</div>
 
 #### Example
 
@@ -7108,6 +8238,11 @@ The font style of the title.
 
 The margin of the title. A numeric value will set all margins.
 
+
+<div class="meta-api-description">
+Control and customize the outer spacing or padding around the stock chart navigator pane title by setting uniform margins with numeric values, enabling precise adjustment of title placement and whitespace on all sides during chart setup, support for configuring consistent gaps, borders, or offsets around the title text to improve layout, appearance, or readability within financial or data visualization interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7138,6 +8273,11 @@ The margin of the title. A numeric value will set all margins.
 ### navigator.pane.title.margin.bottom `Number` *(default: 0)*
 
 The bottom margin of the title.
+
+
+<div class="meta-api-description">
+Adjust the space or gap beneath the navigator pane's title in a stock chart interface, controlling the lower margin to increase or decrease vertical distance between the title text and the underlying navigator elements; customize or configure padding, spacing, or margin below the heading area to fine-tune layout alignment, improve readability, or separate title from chart navigator content in data visualization dashboards, time series controls, or interactive stock chart components.
+</div>
 
 #### Example
 
@@ -7172,6 +8312,11 @@ The bottom margin of the title.
 
 The left margin of the title.
 
+
+<div class="meta-api-description">
+Adjust, configure, or set the horizontal spacing or left offset of the navigator pane title in a stock chart to control the extra empty space, padding, or margin on the left side of the title text; customize the layout, positioning, or alignment of the title within the navigator area to improve visual spacing, prevent overlap, or achieve precise title placement in financial charts, price graphs, or stock data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7205,6 +8350,11 @@ The left margin of the title.
 
 The right margin of the title.
 
+
+<div class="meta-api-description">
+Control the horizontal spacing and layout of the title in the navigator pane by setting the right margin to increase or decrease the gap between the title and nearby elements; customize, adjust, configure, or set this numeric right margin value to fine-tune how the navigator pane title is positioned within the StockChart interface for optimal alignment and spacing during chart initialization or layout updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7237,6 +8387,11 @@ The right margin of the title.
 ### navigator.pane.title.margin.top `Number` *(default: 0)*
 
 The top margin of the title.
+
+
+<div class="meta-api-description">
+Control or customize the vertical spacing or gap above the navigator pane title by setting the top margin, adjust or configure the distance or padding above the title for layout optimization, manage the title’s top offset to increase or reduce whitespace, set how much space appears above the pane’s label or heading in chart navigation, fine-tune or tweak the margin above navigator titles to ensure clear visual separation and improved readability within chart components during initialization or runtime.
+</div>
 
 #### Example
 
@@ -7277,6 +8432,11 @@ The supported values are:
 * "right" - the axis title is positioned on the right (applicable to horizontal axis)
 * "center" - the axis title is positioned in the center
 
+
+<div class="meta-api-description">
+Adjust or set the horizontal alignment and placement of the navigator pane title in stock charts, enabling control over whether the title appears centered, left-aligned, or right-aligned relative to the axis; configure the title position to customize chart navigation pane headings, align axis labels, or modify title layout for clearer visual display and intuitive axis reference in financial or time-series data visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7308,6 +8468,11 @@ The supported values are:
 
 The text of the title.
 
+
+<div class="meta-api-description">
+Control and customize the text displayed as the navigator pane title in a stock chart interface by setting or updating the title string, enabling localization, personalized labeling, or dynamic changes during chart initialization or runtime, supporting specific naming, descriptive headings, or contextual titles for the chart's navigation section.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7337,6 +8502,11 @@ The text of the title.
 ### navigator.pane.title.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the pane title. By default the pane title is visible.
+
+
+<div class="meta-api-description">
+Toggle the visibility of the chart's navigator pane label, enabling or disabling the display of the pane title depending on whether you want to show, hide, or configure the heading above the navigator section, control the display of the navigation title text, set the presence of the navigator pane’s header, or modify the UI element that identifies the mini chart area for browsing stock data.
+</div>
 
 #### Example
 
@@ -7374,6 +8544,11 @@ The supported values are:
 * "top" - the navigator is positioned on the top
 * "bottom" - the navigator is positioned on the bottom (default)
 
+
+<div class="meta-api-description">
+Control the vertical placement of the chart's timeline or overview area by setting the navigator to appear above or below the main data visualization, adjusting the layout to prioritize different visual hierarchies or design preferences. Configure the navigator position to top or bottom to influence how users interact with the summary timeline, enabling customization of chart structure for better readability, user experience, or specific interface requirements. Enable positioning the navigation pane at the top to highlight overview first or at the bottom for conventional placement, supporting layout adjustments and visual arrangement in financial or data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7404,6 +8579,11 @@ Accepts the same options as the root `series` collection.
 
 Omitting the array and specifying a single series is also acceptable.
 
+
+<div class="meta-api-description">
+Set or customize the smaller overview graph inside a stock chart that controls the navigation panel by defining one or multiple series, enabling control over which data series appear in the navigator area; configure the navigator’s mini-chart using arrays or single series objects, specify series types, data, and visual properties for the overview segment, and adjust the subsets of data shown for easier navigation and zooming across different stock data series in the interactive timeline or stock analysis tools.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7427,6 +8607,11 @@ The type of the series. Available types:
 * bullet
 * area
 * line
+
+
+<div class="meta-api-description">
+Configure the style or chart type used to display the navigator’s series in stock charts, including options like candlestick, OHLC, column, bullet, area, or line, enabling customization of how historical or summary data is visually represented, adjusted, or rendered for timeline navigation, setup during chart initialization, allowing developers to select or switch between different series visualizations to optimize clarity, interaction, and data interpretation in the chart’s navigation pane.
+</div>
 
 #### Example
 
@@ -7464,6 +8649,11 @@ The following dash types are supported:
 * "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
+
+
+<div class="meta-api-description">
+Configure and customize the stroke style or line pattern of navigator line series in stock or financial charts by setting dashed, dotted, solid, or various combined dash-dot stroke styles including dash, dash-dot, dot, long dash, long dash-dot, and long dash-dot-dot patterns. Control the visual appearance of line series by enabling different dash types or stroke patterns to highlight trends, enhance readability, or differentiate series in interactive stock chart navigator components where line series styling is needed for clarity, aesthetic, or user interaction purposes. Adjust stroke configurations to toggle between solid lines and multiple dashed variations for enhanced data visualization and customized line rendering in financial chart navigation.
+</div>
 
 #### Example - set the chart legend border dash type
 
@@ -7536,6 +8726,11 @@ Set the chart series data as array of objects
   });
   </script>
 ```
+
+
+<div class="meta-api-description">
+Configure and set the data points for the stock chart’s navigator series using arrays that can include arrays of numbers, arrays of objects, or nested arrays, depending on the series type such as line, area, column, OHLC, or candlestick charts. Enable binding of series fields to the data points, supporting diverse formats like object arrays with key-value pairs, simple numerical arrays for basic series, or multi-dimensional arrays for financial chart types (open, high, low, close). Control the navigator’s data input by supplying series points in flexible formats to match different charting needs and ensure accurate visual representation of time-series or financial data trends within the stock chart navigation view.
+</div>
 
 #### Set the chart series data as array of arrays
 
@@ -7660,6 +8855,11 @@ The data field containing the high value.
 
 ** Available for candlestick and ohlc series only **
 
+
+<div class="meta-api-description">
+Configure or bind the data field representing the highest value or peak price within each data point for financial chart series such as candlestick or OHLC, allowing precise mapping of high prices in stock, market, or trading visualizations; set or specify which property holds the maximum price or upper bound per data item in stock chart navigator series to control how highs are displayed, enabling accurate reflection of price movements and enabling queries related to high value data binding, price peaks, or candlestick/OHLC chart customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7687,6 +8887,11 @@ The data field containing the high value.
 ### navigator.series.field `String`
 
 The data field containing the series value.
+
+
+<div class="meta-api-description">
+Configure the data binding to specify which numeric data field supplies values for the navigator series, enabling control over which dataset property drives the chart’s navigation display, set or change the underlying value field used for plotting the navigator, link or map your dataset’s numeric property to the navigation series, assign the correct data attribute to represent the numeric values shown in the chart navigator, define or customize the data source field that provides the series data points for the navigator view, control the source property that the navigator uses to read numeric values for rendering the overview series, select and set the dataset field that determines how the chart’s navigator series plots numerical data, bind or configure the value field used exclusively in the stock chart’s navigation mini-series, specify the data item key that holds the relevant numeric values for the navigator overview, manage and adjust which property in the data model feeds the series data visualized in the navigator segment.
+</div>
 
 #### Example
 
@@ -7717,6 +8922,11 @@ The data item field which contains the category name or date.
 
 > If specified, the [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
 
+
+<div class="meta-api-description">
+Configure the category or date field for the navigator series in stock charts to bind data points according to chronological order or specific category names, enabling the display of time-series data or grouped categories in the navigator view. This setting controls how the navigator interprets the underlying data field for sorting and rendering points, supporting date-based timelines as well as categorical grouping, and interacts with date fields to default to timeline sequencing when applicable, allowing you to set or change the key field that drives the navigator’s visual data progression and categorization for overview and interaction purposes.
+</div>
+
 #### Example - set series date category field
 
     <div id="stock-chart"></div>
@@ -7737,6 +8947,11 @@ The data item field which contains the category name or date.
 ### navigator.series.name `String`
 
 The navigator series name.
+
+
+<div class="meta-api-description">
+Set or configure the label, display name, or identifier for a navigator series within a stock chart, enabling customized naming for tooltips, legends, data binding, filtering, or programmatic reference. Control the unique series name for easy lookup, updates, dynamic adjustments, and differentiation among multiple navigational chart series in stock or financial visualizations, enhancing clarity in UI elements and code-based access. Use this naming property to manage series identification in chart navigation context, indexing series by name during runtime, or when handling series-based events and interactions.
+</div>
 
 #### Example - set the navigator series name
 
@@ -7810,6 +9025,11 @@ Configures the appearance of highlighted points.
 
 ** Applicable to candlestick and ohlc series. **
 
+
+<div class="meta-api-description">
+Control and configure the appearance of highlighted data points within chart navigator series to emphasize selected candlestick or OHLC entries by adjusting color, border, size, opacity, and highlight styling for improved visual focus, clarity, and readability in stock or financial charts; customize how highlighted candles or bars stand out in navigation views, enabling precise control over emphasis effects for developer-defined series highlights during initialization or runtime.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7841,6 +9061,11 @@ Configures the appearance of highlighted points.
 ### navigator.series.highlight.border `Object`
 
 The border of highlighted points. The color is computed automatically from the base point color.
+
+
+<div class="meta-api-description">
+Control and customize the outline styling, thickness, and appearance of highlighted points in a stock chart’s navigator series to emphasize or distinguish specific data markers, including setting border colors that automatically derive from the base point colors, enabling adjustments to how emphasis and focus on selected navigator points are visually presented for improved clarity, highlight contrast, or enhanced user interaction in financial charting and time series navigation.
+</div>
 
 #### Example
 
@@ -7876,6 +9101,11 @@ The border of highlighted points. The color is computed automatically from the b
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness or width of the highlight border outlining series within the stock chart navigator, enabling customization of how prominently the selected or focused series is outlined or emphasized. Control, set, or configure the border line thickness around highlighted data series for better visibility, emphasis, or styling of the navigator’s series selection. Modify the border size to make highlight outlines bolder, thinner, or more subtle, improving user interaction feedback or visual distinction in financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -7908,6 +9138,11 @@ The width of the border.
 ### navigator.series.highlight.border.color `String`
 
 The border color.
+
+
+<div class="meta-api-description">
+Customize or configure the outline color that appears around a series in the stock chart navigator during highlight or selection, enabling control over the border's visual emphasis using any CSS color format such as hex codes, RGB, RGBA, or named colors; adjust the highlight border hue to improve visibility, differentiate highlighted series, or match branding, and set or change the highlight outline color dynamically to create distinct navigation cues and improve user interaction feedback in financial or time series visualizations.
+</div>
 
 #### Example
 
@@ -7942,6 +9177,11 @@ The border color.
 ### navigator.series.highlight.border.opacity `Number`
 
 The border opacity.
+
+
+<div class="meta-api-description">
+Control the transparency level of the highlight border around the navigator series in stock charts by adjusting the border’s opacity, enabling fine-tuning of visual emphasis, border visibility, and highlight prominence with customizable transparency settings or alpha values to make the series highlight more subtle or distinct according to user preferences or UI design needs.
+</div>
 
 #### Example
 
@@ -7979,6 +9219,11 @@ The highlight color.
 
 ** Available only for pie series **
 
+
+<div class="meta-api-description">
+Control and customize the highlight fill color for pie chart slices in stock chart navigator series by configuring the color, including any CSS-compatible color formats such as hexadecimal codes, RGB values, or named colors. Adjust or set the highlight shade that appears when a slice is selected, hovered, or emphasized within pie series charts to enhance visual focus or improve user interaction feedback. This setting applies specifically to pie segments, enabling dynamic color changes, highlight effects, selection coloration, and interactive slice coloring tailored for stock chart navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8008,6 +9253,11 @@ The highlight color.
 Line options for highlighted points. The color is computed automatically from the base point color.
 
 ** Available only for candlestick series **
+
+
+<div class="meta-api-description">
+Adjust or configure the visual style of highlight lines for selected points in stock chart navigator series, focusing on stroke attributes such as width, pattern, and style while the color dynamically inherits from the base point or candlestick colors; customize how highlighted data points stand out within candlestick navigator views, enabling control over line thickness and dash styles to emphasize user interactions or specific data highlights effectively.
+</div>
 
 #### Example
 
@@ -8043,6 +9293,11 @@ Line options for highlighted points. The color is computed automatically from th
 
 The width of the line.
 
+
+<div class="meta-api-description">
+Adjust the thickness, stroke weight, or line width of the highlight indicator on the navigation series within a financial or stock chart to customize how prominently the selected range is visually emphasized. Configure, set, or control the thickness of the navigator highlight line to enhance visibility, improve range selection clarity, or tailor the appearance of the selection bar’s border in interactive stock or time series charts. Modify the visual weight, line stroke size, or border thickness to suit user interface needs, making sure the highlighted range stands out in navigator panels or mini-charts commonly used for timeline or data window navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8075,6 +9330,11 @@ The width of the line.
 ### navigator.series.highlight.line.color `String`
 
 The line color.
+
+
+<div class="meta-api-description">
+Configure or customize the color, hue, shade, or appearance of the highlight line that outlines or emphasizes a selected or focused data series within the stock chart’s navigator or timeline view. Adjust the highlight line to match theme palettes, branding colors, or visual emphasis needs for easier series identification, differentiation, or enhanced user interface consistency when exploring or navigating stock chart data. This covers setting, controlling, or modifying the highlight stroke or line tone used in the small navigator series preview area to ensure visual clarity and aesthetic alignment.
+</div>
 
 #### Example
 
@@ -8109,6 +9369,11 @@ The line color.
 ### navigator.series.highlight.line.opacity `Number`
 
 The opacity of the line.
+
+
+<div class="meta-api-description">
+Adjust the transparency level of the highlight line within the chart navigator area to make the line more or less visible for emphasis or subtlety, controlling its opacity through numeric values to set how faint or bold the line appears, enabling developers to fine-tune the visual prominence of highlighted series segments in stock or financial charts. This setting governs the clarity of the navigation highlight line, allowing customization of line visibility intensity for better data focus, user interface clarity, and visual hierarchy in time series or stock chart navigation elements.
+</div>
 
 #### Example
 
@@ -8196,6 +9461,11 @@ The opacity of the line.
 
 The opacity of the highlighted points.
 
+
+<div class="meta-api-description">
+Adjust or configure the transparency level, translucency, or fade intensity of highlighted points within stock chart navigator series to control their visual prominence, opacity, or emphasis. Enable setting the degree of highlight visibility, brightness, or clarity for navigational series points, allowing fine-tuning of how strongly the highlight stands out or blends in, including options to increase or decrease point opacity for customized highlight effects in financial chart navigation components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8279,6 +9549,11 @@ The opacity of the highlighted points.
 ### navigator.series.highlight.visible `Boolean`*(default: true)*
 
 A value indicating if the series points should be highlighted.
+
+
+<div class="meta-api-description">
+Control the visibility of highlighted points on series within a stock chart navigator by enabling or disabling the visual emphasis on navigator series data points, allowing developers to configure whether individual series points appear visually distinct or enhanced during rendering, useful for emphasizing series details, toggling highlight effects on stock chart navigator graphs, adjusting visual focus on series points, setting highlight visibility states, and managing series point accentuation in financial data navigation views.
+</div>
 
 #### Example
 
@@ -8387,6 +9662,11 @@ The supported values are:
         low: "max"
     }
 ```
+
+<div class="meta-api-description">
+Configure how multiple data points within a single date category are combined or summarized by setting aggregation methods such as average, count, maximum, minimum, sum, or first value to consolidate dataset values for a given time period like year or month. Enable custom aggregation through user-defined functions to return a single representative value from all points within each date segment. Control summary statistics, reduce data granularity, optimize chart performance, or implement compound aggregation for specialized series types like candlestick and OHLC by specifying aggregation rules for individual data fields such as open, high, low, and close. This functionality supports use cases involving data compression, trend analysis, volume calculation, and customized summarization to facilitate clearer visualization and analysis of time-based financial or stock chart series.
+</div>
+
 #### Example
  
     <div id="stock-chart"></div>
@@ -8470,6 +9750,11 @@ The supported values are:
 The name of the value axis to use.
 
 ** Applicable to area, column, line, ohlc and candlestick series **
+
+
+<div class="meta-api-description">
+Select or configure the value axis for the StockChart navigator series to link or bind navigator chart types like area, column, line, OHLC, or candlestick series with a specific named value axis. Enable setting or changing which axis the navigator series uses, control axis association by name, adjust axis bindings for navigator visualizations, and specify or customize the value axis reference for accurate data scaling and display in stock chart navigation components.
+</div>
 
 #### Example
 
@@ -8555,6 +9840,11 @@ The border of the points.
 
 ** Applicable to column, ohlc and candlestick series **
 
+
+<div class="meta-api-description">
+Configure and customize the outline or border of data points in stock chart navigator series, including setting stroke color, thickness, and dash style for visual emphasis on columns, OHLC bars, and candlestick elements; enable precise control over point borders to enhance chart readability, modify border appearance, adjust line weight and pattern around series markers for clearer distinction, and style borders to highlight specific data points or trends in stock chart navigator displays.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8586,6 +9876,11 @@ The border of the points.
 
 The color of the border.  It defaults to the color of the current series.
 
+
+<div class="meta-api-description">
+Control and customize the outline or stroke color of the series border within the chart navigator area, enabling you to set, change, override, or style the border color distinct from the default series hue for enhanced visualization and clarity in stock or time series charts. Adjust the navigator series border appearance by specifying color values to highlight, differentiate, or redefine the stroke color of timeline or data preview panels, ensuring precise control over the series edge styling in interactive financial or data range selectors.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8615,6 +9910,11 @@ The color of the border.  It defaults to the color of the current series.
 ### navigator.series.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Customize the outline style of a chart navigator series by configuring the border dash pattern, allowing control over whether the border appears as a solid line, dashed segments, dotted dots, or various dash styles. Adjust or set the dash pattern of the series border to enhance visual distinction, emphasize data trends, highlight boundaries, or apply different stroke patterns in the chart navigator. Enable, define, or modify border line types such as solid, dashed, dotted, or custom dash arrays to tailor the appearance and improve readability or design contrast within stock or financial visualization components.
+</div>
 
 #### Example
 
@@ -8674,6 +9974,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, width, or stroke size of the outline around the series in the stock chart navigator to emphasize or reduce the visual prominence of the navigator’s data series border, control the border line weight or thickness for clearer separation, and customize the series border appearance by setting numeric values to increase or decrease the border’s boldness or subtlety within the chart navigator view.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8706,6 +10011,11 @@ The data field containing the close value.
 
 ** Available for candlestick and ohlc series only **
 
+
+<div class="meta-api-description">
+Configure or set the data field representing the closing price in stock chart navigator series, enabling binding of close values from your dataset for visualizing end-of-period prices in financial charts. Control which data attribute corresponds to the close or final trading price specifically in candlestick or OHLC series, facilitating accurate representation of stock market close values or last traded prices. Enable mapping of closing price fields to highlight end-of-day or session close data within navigator components for interactive stock analysis and charting applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8735,6 +10045,11 @@ The series base color. The supported values are:
 
 * CSS color string, including hex and rgb
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
+
+
+<div class="meta-api-description">
+Adjust the primary color or fill of the chart navigator's data series by specifying a fixed CSS color code, such as hex or RGB, or by configuring a dynamic color through a callback function that generates colors per data point, enabling customization of line stroke and area fill colors in the stock chart navigator to visually differentiate series, emphasize specific points, or apply conditional coloring logic based on each data item's properties.
+</div>
 
 #### Example
 
@@ -8819,6 +10134,11 @@ The series base color. The supported values are:
 The data field containing the point color.
 
 ** Applicable for column, candlestick and ohlc series. **
+
+
+<div class="meta-api-description">
+Set or configure individual data point colors in stock chart series by linking a specific data field that holds color values in formats like hex codes, RGB, or named colors; useful for visualizing varying colors on columns, candlesticks, or OHLC charts, enabling dynamic color assignment, per-point color customization, color coding based on data fields, color mapping for each series data item, and enhancing chart readability by controlling point colors through data-driven properties.
+</div>
 
 #### Example
 
@@ -8908,6 +10228,11 @@ The series color when the open value is greater than the close value.
 
 ** Available for candlestick series only **
 
+
+<div class="meta-api-description">
+Control or customize the color displayed for declining or bearish candlesticks in a stock chart navigator, specifically when the opening price is higher than the closing price, enabling clear visual differentiation of downward price movements or negative trends in the mini overview graph. Adjust or set the fill color for candles that represent price drops, configure the appearance of falling stock prices in the navigator’s candlestick series, or change the hue that highlights bearish market sentiment and decreasing values within financial data previews. This setting applies exclusively to candlestick chart types within the navigator, helping users quickly identify and interpret downward price fluctuations or losses in a compact stock chart view.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8938,6 +10263,11 @@ The data field containing the color applied when the open value is greater than 
 
 ** Available for candlestick series only **
 
+
+<div class="meta-api-description">
+Configure the data field that defines the color for downward or falling candlesticks within stock chart navigator series, enabling dynamic per-point color binding based on data values where the open price exceeds the close price. This setting controls the visual representation of negative price movements in candlestick charts by linking a specific data source field to customize colors for each declining point. Developers often search for ways to set or bind custom colors, apply conditional coloring to candlesticks, style falling price indicators, or control the appearance of downward trading signals using data-driven color fields in stock or financial chart navigator series.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -8967,6 +10297,11 @@ The data field containing the color applied when the open value is greater than 
 The distance between category clusters.
 
 ** Applicable for column, candlestick and ohlc series. **
+
+
+<div class="meta-api-description">
+Adjust the spacing or distance between groups or clusters in stock chart navigator series to increase or decrease the gap between columns, candlesticks, or OHLC bars for clearer visual separation. Configure or set the gap size to control the horizontal padding or interval between consecutive category groups, managing how tightly or loosely the data points appear in time series or financial chart navigators. Enable fine-tuning of space distribution between adjacent series elements in the navigation area for improved readability and customized layout of grouped financial data points.
+</div>
 
 #### Example
 
@@ -9053,6 +10388,11 @@ The distance between category clusters.
 ### navigator.series.labels `Object`
 
 Configures the series data labels.
+
+
+<div class="meta-api-description">
+Configure and customize labels for data points within the navigation view of a stock chart, including options to show or hide text, apply formatting, set positioning, bind label templates, and control visibility and layout of series point labels in the chart navigator for enhanced readability and tailored presentation.
+</div>
 
 #### Example
 
@@ -9147,6 +10487,11 @@ The fields which can be used in the template are:
 *   series - the data series
 *   value - the point value. Can be a number or object containing each bound field.
 
+
+<div class="meta-api-description">
+Customize accessible ARIA text labels for navigator series points in stock charts by configuring dynamic templates that generate screen reader descriptions, enabling control over how each series label is vocalized and interpreted for enhanced accessibility. Templates can incorporate variables like category names, data items, percentage values for stacked charts, series details, and point values, allowing you to define meaningful, context-rich textual representations for chart navigation elements. This supports scenarios such as improving screen reader output, tailoring descriptive labels for different series types (area, bar, column, bubble, donut, line, pie), handling data-bound or array-based points, and ensuring accessible, informative narration of chart data points in visual analytics interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -9183,6 +10528,11 @@ The fields which can be used in the template are:
 ### navigator.series.labels.background `String`
 
 The background color of the labels.
+
+
+<div class="meta-api-description">
+Adjusting the background fill or color behind text labels in chart navigation elements to enhance readability, improve contrast for series labels on stock or financial charts, setting or customizing label backgrounds to emphasize or distinguish navigator series data points, enabling label background color changes for better visual clarity in chart navigators, controlling or configuring series label backdrops to enhance label legibility and user interface in timeline or range selectors.
+</div>
 
 #### Example
 
@@ -9272,6 +10622,11 @@ The background color of the labels.
 ### navigator.series.labels.border `Object`
 
 The border of the labels.
+
+
+<div class="meta-api-description">
+Adjust and style the outline or stroke of small navigation chart label borders, including configuring color, thickness, dash patterns, and stroke properties to enhance visibility, highlight data points, coordinate with themes, or emphasize specific values within stock or financial chart navigation displays. Customize edge appearance for mini-chart labels, control border aesthetics for timeline selectors, and define stroke styles to suit user interface design or improve data readability in stock chart navigators.
+</div>
 
 #### Example
 
@@ -9365,6 +10720,11 @@ The border of the labels.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Control and customize the border color of series labels within a chart's navigator or overview panel to enhance visual styling, match branding guidelines, or improve label distinction; this includes setting or configuring label outline colors using CSS-compatible formats such as hex codes, RGB, RGBA, or color names, enabling developers to fine-tune the appearance of data series tags, legends, or annotations in stock or financial charts with precision and flexibility.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -9455,6 +10815,11 @@ The border of the labels.
 ### navigator.series.labels.border.dashType `String`*(default: "solid")*
 
  The dash type of the border.
+
+
+<div class="meta-api-description">
+Adjust or configure the outline style of label borders around series in stock chart navigators by setting the dash pattern to solid, dashed, dotted, or custom stroke styles, enabling control over the visual appearance of label edges for highlighting, differentiation, or design customization within chart navigation elements and series annotations.
+</div>
 
 #### Example
 
@@ -9575,6 +10940,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of the outline border around labels in a stock chart navigator to control label visibility, prominence, edge sharpness, or separation from background elements, enabling customization of label border weight, line width, border thickness, or outline size for better visual clarity and emphasis in chart navigation components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -9666,6 +11036,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The text color of the labels.
 
+
+<div class="meta-api-description">
+Adjust or define the text color of chart navigator series labels using any CSS-compatible color format such as hexadecimal codes, RGB or RGBA values, HSL notation, or standard named colors. Configure and customize the label font color to improve visibility, theme consistency, or branding in stock chart navigator components by setting or updating this style property dynamically or at initialization. Easily control the appearance of time series label text on stock charts by specifying and changing color values for enhanced readability, UI customization, or visual emphasis within chart navigation elements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -9754,6 +11129,11 @@ The text color of the labels.
 ### navigator.series.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+
+<div class="meta-api-description">
+Control and customize the typography, font style, text appearance, font family, size, weight, and styling of series labels within chart navigators, enabling precise configuration of label fonts through CSS font syntax to enhance readability, adjust label design, set font characteristics for navigator series, modify text formatting, and fine-tune label visuals in stock or time-series charts.
+</div>
 
 #### Example
 
@@ -9844,6 +11224,11 @@ The font style of the labels.
 
 The format of the labels.
 
+
+<div class="meta-api-description">
+Control and customize the display format of labels in the navigator series of stock charts by setting patterns for numbers, currencies, dates, or times to improve readability, localization, and user interface presentation. Adjust label text formatting for various data types, tailor numeric and financial display styles, configure date and time formats, and set precise output styling to match regional settings or visual preferences in stock chart navigation. Enable developers to define how data labels appear, including currency symbols, decimal precision, date formats, and text layout for enhanced chart labeling and user-friendly visualization.
+</div>
+
 #### Example
 
 ```pseudo
@@ -9854,6 +11239,11 @@ The format of the labels.
 ### navigator.series.labels.margin `Number|Object`*(default: { left: 5, right: 5})*
 
 The margin of the labels.
+
+
+<div class="meta-api-description">
+Adjust the outer spacing or whitespace around navigator series labels to control label padding, margin, or distance in stock charts, enabling customization of label placement, visual density, separation between text and other chart elements, and overall layout clarity. Configure label margins to optimize label position, avoid overlap, and enhance readability in time series or stock price navigators by managing label boundary spacing, outer gaps, or buffer zones around the text.
+</div>
 
 #### Example
 
@@ -9870,6 +11260,11 @@ The margin of the labels.
 
  The padding of the labels.
 
+
+<div class="meta-api-description">
+Adjust inner spacing or padding around chart navigator labels to customize label layout, control text wrapping and alignment, set margins for label readability, manage spacing for better visual separation between labels, configure label placement within the navigator series, enable fine-tuned control of label positioning, handle label overflow and wrapping behavior, set inner margins inside labels for clarity, optimize label spacing for clearer navigation interface, and customize how close or separated navigator labels appear within the stock chart.
+</div>
+
 #### Example
 
 ```pseudo
@@ -9884,6 +11279,11 @@ The margin of the labels.
 ### navigator.series.labels.position `String`*(default: "above")*
 
 Defines the position of the labels.
+
+
+<div class="meta-api-description">
+Adjust or configure the placement and alignment of series labels within a stock chart's navigator area, enabling control over label positioning such as above, below, inside, outside, or relative to the chart elements; customize label location to enhance readability, layout, or visual hierarchy in financial time series navigation, controlling how labels appear in relation to the series line or bar elements within the navigator for optimized display and user interaction.
+</div>
 
 #### Example
 
@@ -10030,6 +11430,11 @@ The fields which can be used in the template are:
 *   series - the data series
 *   value - the point value. Can be a number or object containing each bound field.
 
+
+<div class="meta-api-description">
+Control and customize the appearance of series labels within the chart navigator by defining templates that format text, bind to data points, and include dynamic fields like category names, data items, numerical values, percentages for 100% stacked charts, and series metadata. Enable precise label rendering by configuring template expressions to display or manipulate label content for different series types such as area, bar, column, bubble, donut, line, and pie charts. Adjust series label formatting, content, and binding to point fields and data values to optimize navigator label visibility, styling, text replacement, or contextual display according to data-driven conditions or series-specific attributes. Support flexible label customization in the stock chart navigator by utilizing templates that reflect underlying data properties, point values, category labels, percentage calculations, and original data items to enhance readability, data insights, and user interface clarity.
+</div>
+
 #### Example
 
 ```pseudo
@@ -10058,6 +11463,11 @@ The fields which can be used in the template are:
 ### navigator.series.labels.visible `Boolean`*(default: false)*
 
  The visibility of the labels.
+
+
+<div class="meta-api-description">
+Show, hide, toggle, or enable visibility of labels for series within the chart navigator area, controlling display of textual identifiers, names, or tags attached to navigator data series for better clarity, navigation, or customization in financial or stock charts with options to configure visibility on initialization or dynamically adjust during runtime.
+</div>
 
 #### Example
 
@@ -10149,6 +11559,11 @@ Line options.
 
 ** Applicable to area, candlestick and ohlc series. **
 
+
+<div class="meta-api-description">
+Customize the visual style and behavior of navigator series lines by adjusting stroke color, line width, dash patterns, opacity, and other line-specific settings to control appearance and rendering details for stock chart navigator elements, including configurations for area, candlestick, and OHLC series that enable precise line styling and fine-tuned display in interactive stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -10236,6 +11651,11 @@ Line options.
 ### navigator.series.line.color `String`
 
 The line color.
+
+
+<div class="meta-api-description">
+Configure or customize the color of the series line in the stock chart's navigator to enhance visual clarity, contrast, and emphasis; adjust the navigator line styling by setting its color for better readability, highlight, or differentiation, enabling control over the appearance of the timeline or overview chart segment often used for navigation and zooming within stock charts.
+</div>
 
 #### Example
 
@@ -10325,6 +11745,11 @@ The line color.
 
 The line opacity.
 
+
+<div class="meta-api-description">
+Adjust, set, or configure the transparency level, alpha, or translucency of the navigation series line to highlight, fade, or subtly display data trends within stock charts or financial visualizations, controlling how prominent or faint the summary or preview line appears in the navigator area, including options to increase, decrease, or fine-tune the line’s visibility for better emphasis or reduced distraction in time series or stock performance displays.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -10412,6 +11837,11 @@ The line opacity.
 ### navigator.series.line.width `String`*(default: 4)*
 
 The line width.
+
+
+<div class="meta-api-description">
+Adjust the thickness, stroke width, or line weight of the navigation series line in stock or financial charts to customize visual emphasis, prominence, or clarity while browsing or scrolling through chart data. Configure or set the line width, pixel size, or series line stroke to enhance navigation usability, highlight selected ranges, modify appearance alongside other line attributes like color and dash patterns, and control how bold or subtle the navigator’s timeline indicator appears during interactive chart exploration or data range selection.
+</div>
 
 #### Example
 
@@ -10503,6 +11933,11 @@ The data field containing the low value.
 
 ** Available for candlestick and ohlc series **
 
+
+<div class="meta-api-description">
+Configure the data field used to specify the lowest price or minimum value in each data point within a stock chart’s navigator series, enabling binding of the low values for candlestick or OHLC chart types. This setting lets developers assign or map the low price data attribute for the range slider or summary view, helping control which source property represents the low point in financial time series data, allowing customization, filtering, and accurate representation of the minimum price in navigator visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -10531,6 +11966,11 @@ The data field containing the low value.
 Marker options.
 
 ** Applicable for area and line series. **
+
+
+<div class="meta-api-description">
+Customize and control the styling, visibility, size, color, border, and appearance of data point markers on time series or area charts within a chart navigator, enabling precise configuration of marker display, enabling or disabling markers, adjusting marker color schemes, border thickness, and shape for enhanced data point highlighting and improved navigation clarity in stock or financial charting tools.
+</div>
 
 #### Example
 
@@ -10621,6 +12061,11 @@ Marker options.
 
 The background color of the current series markers.
 
+
+<div class="meta-api-description">
+Configure and customize the fill or background color of data point markers within the series displayed in the StockChart navigator area, enabling control over marker appearance using any valid CSS color format such as hexadecimal codes, RGB or RGBA values, or named colors to highlight selected series points, enhance visual distinction, and improve readability in chart navigation elements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -10709,6 +12154,11 @@ The background color of the current series markers.
 ### navigator.series.markers.border `Object`
 
 The border of the markers.
+
+
+<div class="meta-api-description">
+Customize and control the outline styling around data point markers within the stock chart navigator, including setting the border color, thickness, stroke style, or opacity to enhance marker visibility and distinctiveness for time series or financial data visualization. Adjust marker borders for better clarity, emphasis, or differentiation on navigation charts, enabling fine-tuning of border attributes such as line width, color customization, and style presets to match design requirements or improve data point highlighting in interactive stock chart components.
+</div>
 
 #### Example
 
@@ -10802,6 +12252,11 @@ The border of the markers.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Customize or configure the outline color, border shade, or stroke color of marker points in a stock chart navigator series using any valid CSS color format such as named colors, hexadecimal, RGB, or RGBA values; control and set marker border appearance, highlight marker edges, define marker outlines, adjust border colors for series markers in financial or stock chart navigators, configure marker stroke color for better visibility or styling, and specify marker border hues to match themes or improve chart readability.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -10892,6 +12347,11 @@ The border of the markers.
 ### navigator.series.markers.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of series marker borders in stock or financial charts by configuring numeric values to control how bold or subtle marker outlines appear, enabling customization of marker edge prominence, border weight, marker stroke thickness, or line width around data points for enhanced visual emphasis or reduced highlight in time series and stock data visualizations.
+</div>
 
 #### Example
 
@@ -10984,6 +12444,11 @@ The border of the markers.
 
 The rotation angle of the markers.
 
+
+<div class="meta-api-description">
+Control and configure the rotation angle of data point markers within stock chart navigators, enabling customization of marker orientation in degrees for clearer visual distinction or enhanced readability. Adjust, set, or enable marker rotation to fine-tune how points in the navigator series are displayed, including rotating markers to match specific angles, improve chart navigation visuals, or highlight data trends with tailored marker alignment during chart setup or updates. This covers use cases involving rotating markers for better data emphasis, customizing marker direction, or controlling marker orientation dynamically in stock chart navigation contexts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -11010,6 +12475,11 @@ The rotation angle of the markers.
 ### navigator.series.markers.size `Number`*(default: 6)*
 
  The marker size.
+
+
+<div class="meta-api-description">
+Adjust or control the dimensions, scale, or radius of markers representing data points within a stock chart navigator's series to emphasize specific points or minimize clutter by increasing or decreasing their visual size, marker diameter, or marker extent during chart setup or configuration for clearer data visualization and enhanced readability.
+</div>
 
 #### Example
 
@@ -11076,6 +12546,11 @@ The rotation angle of the markers.
 ### navigator.series.markers.type `String`*(default: "circle")*
 
 Configures the markers shape type.
+
+
+<div class="meta-api-description">
+Set or customize the shape of markers for data points in chart navigators using options like circle, square, triangle, diamond, or other geometric styles to control marker appearance and enhance visual differentiation of series points in stock or financial charts. Adjust marker symbols to improve clarity, distinguish between data sets, and tailor point visualization in navigation components by selecting and configuring different marker forms or icons that represent each series element effectively.
+</div>
 
 #### Example
 
@@ -11157,6 +12632,11 @@ The marker shape is cross.
 
 The markers visibility.
 
+
+<div class="meta-api-description">
+Toggle visibility of point markers in the chart's navigator series to show or hide data markers, enabling control over whether individual points appear within the stock chart navigation area, configure marker display settings for the navigator view, enable or disable marker rendering on navigation series for better visual clarity or minimalism, set marker visibility to manage the display of point indicators in timeline or overview sections, adjust marker presence for enhanced navigation data representation or streamlined visual output.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11229,6 +12709,11 @@ The behavior for handling missing values. The supported values are:
 
 > The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
 
+
+<div class="meta-api-description">
+Control how time series charts handle absent or missing data points in the navigator area by choosing to leave gaps in the graph where data is missing, interpolate values between known points to create smooth transitions, or treat missing entries as zero to maintain continuity. This setting affects line and area chart types and allows customization for dealing with incomplete datasets in navigator series, enabling developers to set behavior for gaps, linear interpolation, zero-filling, or data smoothing to optimize visualization and match various data quality scenarios and user expectations when plotting stock or time-based data.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11294,6 +12779,11 @@ The supported values are:
 
 > The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area", "line".
 
+
+<div class="meta-api-description">
+Configure the visual connection style between data points in time series charts, enabling selection between smooth straight lines or stepped right-angled connectors for stock chart navigator series, useful for area and line chart types; options support controlling line interpolation to display trends as continuous linear paths or as discrete step changes, helping to tailor the chart’s appearance to emphasize gradual versus abrupt value transitions, ideal for users seeking to customize data point linkage styles, set line rendering modes, or adjust the graphical representation of series data in stock market or time-based analysis visualizations.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11353,6 +12843,11 @@ The supported values are:
 
 The series opacity.
 
+
+<div class="meta-api-description">
+Adjust or set the transparency level, alpha, or opacity value of chart series within the navigator view of a stock chart, enabling control over how visible or translucent the preview or mini-chart data appears; tune the fade, blend, or see-through effect of series rendered in the stock chart navigator using numeric opacity inputs typically ranging from fully transparent (0) to fully opaque (1), useful for customizing overlay visibility, subtle highlighting, or background emphasis of navigator series data.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11409,6 +12904,11 @@ The data field containing the open value.
 
 ** Available for candlestick and ohlc series **
 
+
+<div class="meta-api-description">
+Configure or set the data field that supplies the opening price or value in financial chart navigator series such as candlestick or OHLC charts, enabling control over which data attribute is bound as the open value for accurate rendering and data mapping in stock or trading visualizations. This feature supports defining or customizing the source field for the open price in navigator series data binding, useful for developers managing stock chart visuals, configuring chart data properties, syncing open values in financial time series, or handling candlestick and OHLC chart data inputs in trading applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -11435,6 +12935,11 @@ The data field containing the open value.
 ### navigator.series.overlay `Object`
 
 The effects overlay.
+
+
+<div class="meta-api-description">
+Control and customize visual overlay effects on the stock chart's navigator series by setting, adjusting, or enabling blend modes, transparency, layering, and appearance of graphical overlays to enhance or modify the navigator's look and feel. Configure how overlay layers render over the navigator series area, including options to set visual effects intensity, blending styles, and visibility of overlays for better distinction or subtlety. Manage the stylistic layering of overlays to achieve specific visual outcomes on the stock chart navigator, controlling how graphical effects appear, interact, and integrate with the underlying data series in the mini-chart navigation strip. Adjust overlay presence and effect parameters to fine-tune the display of highlight layers, shading, or other visual enhancements on the scroll navigator portion of stock charts for improved usability and aesthetic customization.
+</div>
 
 #### Example
 
@@ -11498,6 +13003,11 @@ Available options:
 * **glass** (column and candlestick series)
 * **none**
 
+
+<div class="meta-api-description">
+Configure the visual overlay fill for stock chart navigator series by setting or enabling a predefined gradient effect, controlling the appearance with gradient names like glass or no fill, allowing customization of the overlay style, shading, or transparency on column, candlestick, or other series types, adjusting how the overlay gradient is applied to enhance data visualization, and specifying whether to use a gradient overlay or none for a cleaner display in financial chart navigation components.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11556,6 +13066,11 @@ Available options:
 Space between points as proportion of the point width.
 
 Available for column, candlestick and ohlc series.
+
+
+<div class="meta-api-description">
+Adjust and control the horizontal spacing or gap between data points in stock chart navigator series to fine-tune visual density and appearance for column, candlestick, or OHLC chart types; configure the proportional distance between each point’s width to set compactness or spread in the timeline overview, enabling customization of point distribution, series point intervals, horizontal padding, or gap size during chart setup or rendering.
+</div>
 
 #### Example
 
@@ -11617,6 +13132,11 @@ A string value is interpreted as [navigator.series.stack.group](/api/javascript/
 
 > Stack settings of the first series are applied to the rest of the series.
 
+
+<div class="meta-api-description">
+Control and configure visual stacking for chart navigator series by enabling or disabling series stacking with boolean values or grouping series under stack group names for combined display. Adjust how multiple series in the stock chart navigator overlap or layer by setting stack groups, stacking bars, columns, lines, areas, vertical or radar chart types, and managing series stacking behavior collectively. Set, toggle, or organize stacking for navigator series to aggregate data visually in bar, column, line, area, vertical line, vertical area, radar line, radar area, and radar column charts, allowing developers to stack single or multiple series by group or boolean flags for enhanced data comparison and layered chart visualization.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11675,6 +13195,11 @@ The type of stack to plot. The following types are supported:
 * "normal" - the value of the stack is the sum of all points in the category (or group)
 * "100%" - the value of the stack is always 100% (1.00). Points within the category (or group) are represented as percentages.
 
+
+<div class="meta-api-description">
+Configure how stacking is handled in chart navigator series by setting the stacking mode to combine values either as cumulative sums or as proportional percentages; control whether data points are aggregated normally by adding values together or displayed as a relative 100% stacked view to compare parts of a whole within categories or groups, enabling customization of stacked data visualization for summarizing trends, comparing contributions, adjusting stack calculations, setting normalized versus absolute stacking, and toggling between absolute totals and percentage-based representations in time series or grouped data plots.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11731,6 +13256,11 @@ Indicates that the series should be stacked in a group with the specified name.
 
 > The `group` option is supported when [navigator.series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
 
+
+<div class="meta-api-description">
+Control grouping and stacking of multiple bar or column series in the stock chart navigator by assigning them to a common named stack group, enabling combined visual stacking of series as layered bars or columns, configuring how navigator data series overlay or aggregate when displayed, managing stack groups by setting group names to organize series rendering together in the navigator area, facilitating comparison and aggregation of multiple data series in stacked formats for better visual analysis of navigator bars or columns.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -11786,6 +13316,11 @@ Indicates that the series should be stacked in a group with the specified name.
 
 The data point tooltip configuration options.
 
+
+<div class="meta-api-description">
+Adjust, customize, and control the display of interactive tooltips for data points within the navigator series of stock charts, including setting tooltip text content, formatting numbers and dates, applying custom HTML or template layouts, toggling tooltip visibility, styling appearance such as colors and fonts, and managing how detailed information appears on hover or focus in timeline or zoom navigator areas, allowing flexible presentation of series data summaries and enhancing user insights during chart navigation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -11806,6 +13341,11 @@ The data point tooltip configuration options.
 
 The background color of the tooltip. The default is determined from the series color.
 
+
+<div class="meta-api-description">
+Adjust or configure the background color of tooltip popups for data series within interactive stock or financial charts, enabling customization to enhance visibility, contrast, or readability against the navigator's default or inherited color schemes. Control the tooltip shading, fill, or backdrop to either match the series' color or override it with a specific color value, supporting improved UI clarity when hovering or focusing on navigator timeline data points in financial charting tools. Enable setting or modifying tooltip backgrounds for series navigator elements to better suit dark, light, or custom-themed interfaces in stock market visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -11824,6 +13364,11 @@ The background color of the tooltip. The default is determined from the series c
 ### navigator.series.tooltip.border `Object`
 
 The border configuration options.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of the tooltip border around the navigator series in stock charts by adjusting stroke color, thickness, and dash style to enhance visual emphasis, style tooltip edges, or highlight data points within the navigator area. Set border color, width, dash patterns, or stroke properties to configure how the navigator series tooltip outlines appear during hover or focus, enabling clear visual distinction, improved readability, and user interaction feedback for time series data previews and chart navigation tooltips.
+</div>
 
 #### Example
 
@@ -11847,6 +13392,11 @@ The border configuration options.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Customize or configure the outline color, border shade, or edge hue of the tooltip displayed for the navigator series in stock charts, enabling control over the tooltip’s visual emphasis, highlight, or framing during interactive data exploration, chart zooming, or mouse hover events. Adjust or set the tooltip border color to enhance visibility, distinguish tooltip boundaries, or style the tooltip’s edge in financial or stock trading chart interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -11867,6 +13417,11 @@ The color of the border.
 ### navigator.series.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+
+<div class="meta-api-description">
+Adjust or configure the thickness, size, or width of the tooltip border around navigator series markers to enhance visual clarity, emphasize data points, control marker separation, and customize the appearance of hover information in stock charts. This setting defines how thick or thin the outline around tooltips appears, affecting the style and visibility of interactive data highlights within the chart navigator area.
+</div>
 
 #### Example
 
@@ -11889,6 +13444,11 @@ The width of the border.
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+
+<div class="meta-api-description">
+Customize or configure the text color of tooltips displayed in the stock chart’s navigator series to enhance readability, match brand colors, improve contrast, or visually distinguish tooltip information during data exploration; this controls the appearance of the tooltip text by setting a specific color or hue, overriding default label colors, enabling clearer user interface customization, and supporting various color formats for precise styling of tooltip text in navigator mini charts or series previews.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -11907,6 +13467,11 @@ The text color of the tooltip. The default is the same as the series labels colo
 ### navigator.series.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+
+<div class="meta-api-description">
+Control and customize the typography, font family, size, weight, and style of the tooltip text displayed on the navigator series in stock or financial charts, enabling tailored appearance and readability of hover or tooltip information within chart navigation elements, including configuring font settings to match branding or design requirements for interactive series tooltips in the navigator area.
+</div>
 
 #### Example
 
@@ -11936,6 +13501,11 @@ The tooltip format. Format variables depend on the series type:
     *   **3** - close value
     *   **4** - category name
 
+
+<div class="meta-api-description">
+Customize, set, configure, or control the tooltip display text for stock chart navigator series by defining string templates or format patterns that dynamically insert series-specific values such as open, high, low, close, category names, or generic data points depending on the type—whether area, column, line, pie, candlestick, or OHLC series—to tailor tooltip content and data representation, enabling dynamic, contextual, and precise informational popups over the navigator’s graphical elements during user interaction or data exploration.
+</div>
+
 #### Example
 
 ```pseudo
@@ -11946,6 +13516,11 @@ The tooltip format. Format variables depend on the series type:
 ### navigator.series.tooltip.padding `Number|Object`
 
 The padding of the tooltip.
+
+
+<div class="meta-api-description">
+Configure the inner spacing around the content inside navigator series tooltips to control the gap between the tooltip edge and text or graphics, enabling adjustment of tooltip layout, readability, and visual spacing in stock charts. Customize the padding to fine-tune tooltip appearance for navigator series, enhance user interface clarity, and improve the presentation of data overlays or hover info within chart navigation elements. Optimize the space inside tooltip boxes to achieve balanced, clear, and visually appealing tooltip popups shown when interacting with stock chart navigator data points.
+</div>
 
 #### Example
 
@@ -11968,6 +13543,11 @@ Template variables:
 *   **series** - the data series
 *   **dataItem** - the original data item used to construct the point.
         Will be null if binding to array.
+
+
+<div class="meta-api-description">
+Configure and customize the tooltip content and HTML that appears when hovering or tapping on points within the stock chart's navigator series, enabling full control over the displayed information through string templates or callback functions. Set or define dynamic tooltip text using variables such as point value, category label, series information, or the original data item, allowing tailored displays for numbers, objects, categories, series metadata, or raw data elements. Enable rich, context-aware tooltips that respond to user interactions on navigator points, supporting customization for different data binding scenarios, including arrays and object-based data, to enhance data visualization and user engagement in stock charts.
+</div>
 
 #### Example
 
@@ -11997,6 +13577,11 @@ Template variables:
 
 A value indicating if the tooltip should be displayed.
 
+
+<div class="meta-api-description">
+Enable or disable the display of tooltips on the navigator series within stock charts, controlling whether additional information or data summaries appear when hovering over the navigation timeline. This setting governs the visibility of pop-up informational tooltips for the series used in the chart's navigator area, allowing customization of interactive feedback, hover previews, data tips, or brief data insights in stock chart navigation. Adjust tooltip visibility to show or hide series-specific contextual details in the navigator, supporting configurations that toggle on or off floating informational boxes or quick data views while navigating the stock chart timeline.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12018,6 +13603,11 @@ The line width.
 
 ** Applicable for line series. **
 
+
+<div class="meta-api-description">
+Control and configure the thickness, stroke width, or line weight of the series displayed in the chart navigator, adjusting how bold or thin the navigator’s line series appears, enabling customization of visual prominence and clarity for line graphs in stock or financial charts by setting numeric values to increase or decrease the line’s breadth, ensuring better visibility and stylistic tuning of navigation paths within interactive chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12037,6 +13627,11 @@ The line width.
 Specifies the initially selected range.
 
 The full range of values is shown if no range is specified.
+
+
+<div class="meta-api-description">
+Configure the initially selected zoom window or visible range in a chart navigator by setting start and end values, specifying date or numeric ranges to control which portion of data appears focused when the chart loads; adjust initial selection, default view, preselected timeframe, or default range to customize the visible window on stock or time series visualizations, enabling control over initial zoom levels and the subset of data presented on load.
+</div>
 
 #### Example
 
@@ -12071,6 +13666,11 @@ The full range of values is shown if no range is specified.
 
 The lower boundary of the selected range.
 
+
+<div class="meta-api-description">
+Set or configure the starting point, lower limit, or beginning boundary of a date range or axis selection to control the initial visible timeframe or zoom window in a stock or financial chart navigator, enabling users to define, adjust, reset, or programmatically update the initial selected range for detailed analysis, custom views, or focused time spans by specifying a date, timestamp, or axis value that determines where the visible area or data display starts before pairing with an end boundary for complete range selection.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12090,6 +13690,11 @@ The lower boundary of the selected range.
 The mousewheel configuration of the selection.
 
 If set to `false` the mousewheel will not update the selection.
+
+
+<div class="meta-api-description">
+Enable or disable scrolling to adjust the selection range in a chart navigator using the mouse wheel, allowing users to control whether mouse wheel movements change the visible data range or remain static, useful for preventing accidental zoom or selection shifts during wheel scrolling, configuring mouse scroll behavior over chart components to update or lock the navigator selection window, managing range selection sensitivity via mouse wheel input, setting scroll-to-select functionality for intuitive or fixed chart navigation, controlling wheel-based range adjustments within stock or financial charts, handling mouse wheel interactions to refine or ignore navigator range changes during user input.
+</div>
 
 #### Example - configure the selection mousewheel behavior
 
@@ -12158,6 +13763,11 @@ If set to `false` the mousewheel will not update the selection.
 
 If set to `true` will reverse the mouse wheel direction. The normal direction is down for "zoom out", up for "zoom in".
 
+
+<div class="meta-api-description">
+Adjust the zoom direction of mouse wheel interactions on the stock chart navigator selection by enabling an option to invert the default scrolling behavior, allowing users to customize whether scrolling up zooms in or out and likewise for scrolling down, effectively controlling how mouse wheel gestures expand or shrink the visible data range, reverse zoom, invert scroll zoom, configure navigator zoom direction, switch zoom scroll behavior, toggle scroll wheel zoom inversion, set mouse wheel zoom polarity, and tailor zoom controls for intuitive or alternative navigation preferences within stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12183,6 +13793,11 @@ The supported values are:
 * "left" - zooming expands and contracts the selection left side only
 * "right" - zooming expands and contracts the selection right side only
 
+
+<div class="meta-api-description">
+Adjust how mouse wheel input modifies the zoom level of a stock chart navigator selection, enabling users to configure zoom direction behavior such as expanding or contracting the selection area from both edges, or limiting zoom changes exclusively to the left or right side. This setting controls zoom interaction sensitivity and direction for precise range selection, allowing customization of how mouse wheel scrolling impacts the visible portion of stock data, including options to expand or shrink the selected time window from one or both ends. It supports use cases like fine-tuning the chart's zoom focus during data analysis, controlling selection resizing dynamically via scroll gestures, and adapting navigator zoom behavior for improved user experience in interactive financial charting applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12203,6 +13818,11 @@ The supported values are:
 
 The upper boundary of the selected range.
 
+
+<div class="meta-api-description">
+Control and configure the end point or upper limit of a chart navigator's selection range for zooming and panning within stock or time series charts, specifying where the visible window or selection segment terminates, enabling precise definition of the selected data interval, adjusting the navigator's range endpoint, setting the final boundary for selection windows, determining the cutoff position of the selected viewport, and managing the extent of user-selected ranges in interactive chart navigation and data visualization contexts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12221,6 +13841,11 @@ The upper boundary of the selected range.
 
 Default options for the navigator hint.
 
+
+<div class="meta-api-description">
+Configure default tooltip settings, customize hover hints, control visibility, text formatting, templates, styling, and interaction behaviors for small navigator tooltips on stock charts; set, enable, or modify the appearance and content of hover popups or scrubbing indicators in chart navigation to optimize user feedback and interface clarity.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12238,6 +13863,11 @@ Default options for the navigator hint.
 ### navigator.hint.visible `Boolean`*(default: true)*
 
 The visibility of the hint.
+
+
+<div class="meta-api-description">
+Control the display or concealment of the stock chart navigator’s tooltip, hint, or guide by enabling or disabling its visibility setting to show, hide, or toggle the navigator’s contextual help, pointer information, or on-hover indicator in the chart’s navigation area during initialization or runtime configuration.
+</div>
 
 #### Example
 
@@ -12259,6 +13889,11 @@ Template variables:
 
 *   **from** - The lower boundary of the selected range
 *   **to** - Theupper boundary of the selected range
+
+
+<div class="meta-api-description">
+Customize or configure the hint text shown in the stock chart navigator to display specific information about the selected range, such as date intervals or numeric boundaries, using template strings or Kendo UI templates. Enable dynamic formatting and localization by accessing variables representing the lower and upper limits of the selected range, allowing developers to control, set, or alter the navigator tooltip content, label, or hover description for improved user interaction and clarity in time series or numeric data visualization. This supports customization of range hints for better display, filtering, or selection feedback within stock or financial charts.
+</div>
 
 #### Example
 
@@ -12288,6 +13923,11 @@ Template variables:
 
 The format of the hint.
 
+
+<div class="meta-api-description">
+Configure how numeric or date values appear in the stock chart navigator tooltip by setting custom or standard format strings to control the display style of hints, including options for date formats, number precision, value presentation, and customizable patterns for clearer visualization of data points while navigating the chart timeline or ranges.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12306,6 +13946,11 @@ The format of the hint.
 The visibility of the navigator.
 
 
+
+<div class="meta-api-description">
+Control the display of the stock chart’s navigator panel to enable or disable the small overview section and range selector interface, allowing you to show or hide the timeline minimap, toggle the mini chart summary, manage the visibility of the zoom slider, and configure whether the compact navigation overview is active during chart initialization or runtime. This setting governs the presence of the navigator component for users who want to access or remove the timeline range control, adjust overview display settings, or customize the chart’s interactive navigation features.
+</div>
+
 #### Example
 
 ```pseudo
@@ -12316,6 +13961,11 @@ The visibility of the navigator.
 ### axisDefaults `Object`
 
 Default options for all chart axes.
+
+
+<div class="meta-api-description">
+Configure and control default settings for all chart axes including labels, titles, tick marks, ranges, and styles to uniformly apply common axis options across the entire stock chart by setting global axis parameters, establishing consistent appearance and behavior for axis elements, and simplifying customization of axis defaults that affect every axis unless individually overridden.
+</div>
 
 #### Example
 
@@ -12338,6 +13988,11 @@ Default options for all chart axes.
 ### categoryAxis `Array`
 
 The category axis configuration options.
+
+
+<div class="meta-api-description">
+Set up and customize the horizontal axis that displays category values in stock or time series charts, including binding category fields, formatting and rotating labels, controlling intervals, handling base units like dates and times, managing axis crossings, configuring grid lines and tick marks, sorting or grouping categories, applying zoom levels, and defining axis breaks or gaps to optimize data visualization and improve chart readability during initialization or runtime.
+</div>
 
 #### Example
 
@@ -12365,6 +14020,11 @@ Category indicies at which the value axes cross the category axis. (Only for arr
 **Note:** Specify an index greater than or equal to the number
 of categories to denote the far end of the axis.
 
+
+<div class="meta-api-description">
+Adjust the position where the value axis intersects or crosses the category axis by setting a specific category index or multiple indices for multiple value axes, enabling precise control over axis placement and alignment in charts. This feature lets you define exact crossing points for one or more value axes on the category axis using numerical indexes, including options to place the intersection at the start, within, or beyond the range of categories. Configure crossing positions flexibly using single index values or arrays to control how different value axes align relative to categorical data points, supporting scenarios like shifting axis origins, aligning axes to specific categories, or pushing intersections to chart edges. This functionality is essential for customizing chart layout, modifying axis alignment, and controlling the coordinate grid intersection points in stock or financial charts where categories represent discrete intervals or time series segments.
+</div>
+
 #### Example
 
 ```pseudo
@@ -12382,6 +14042,11 @@ of categories to denote the far end of the axis.
 Color to apply to all axis elements. Any valid CSS color string will work here, including hex and rgb.
 Individual color settings for line and labels take priority.
 
+
+<div class="meta-api-description">
+Control and customize the color styling of all category axis components in stock or financial charts, setting universal hues for axis lines, labels, and ticks using any valid CSS color values such as hex codes, RGB, or named colors, enabling developers to uniformly theme or highlight the category axis area; note that more specific color settings like individual line or label colors can override this general axis color configuration for precise visual adjustments on the stock chart’s horizontal category axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12396,6 +14061,11 @@ Individual color settings for line and labels take priority.
 ### categoryAxis.field `String`
 
 The data field containing the category name.
+
+
+<div class="meta-api-description">
+Control and configure the data attribute used for category labels on the x-axis, enabling mapping and binding of categorical values from data sources to organize and sort chart categories effectively. Set or specify the key that drives category grouping, label display, and axis classification when working with local arrays or remote datasets, ensuring correct alignment of category names in stock or time series charts. Manage category axis data binding, sorting, grouping, and label generation for clear categorical axis representation in dynamic or static data visualizations, supporting customization of category label fields and their association with chart elements.
+</div>
 
 #### Example
 
@@ -12421,6 +14091,11 @@ Positions categories and series points on major ticks. This removes the empty sp
 
 This option is ignored if either column, ohlc or candlestick series are plotted on the axis.
 
+
+<div class="meta-api-description">
+Control alignment of category labels and data points along the horizontal axis to eliminate leading and trailing gaps, ensuring categories and series align precisely with major tick marks; manage spacing and positioning on the chart’s time or categorical axis for continuous and tidy data presentation, particularly for line or area charts, while noting that this alignment setting does not apply for column, OHLC, or candlestick series types; configure chart axis behavior to create evenly distributed points along the category axis, optimize visual consistency, set tight sequence alignment without padding, or adjust axis labeling to remove unwanted whitespace before or after data series.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12435,6 +14110,11 @@ This option is ignored if either column, ohlc or candlestick series are plotted 
 ### categoryAxis.labels `Object`
 
 Configures the axis labels.
+
+
+<div class="meta-api-description">
+Adjust and customize the appearance and behavior of category axis labels on stock charts by setting text styles, date and number formats, label rotation angles, label skipping or stepping intervals, font types and colors, label templates, positions, and visibility options, enabling precise control over axis tick labeling and formatting to improve readability and presentation of time or categorical data on financial charts, including configuring label display frequency, orientation, color schemes, and custom templates for enhanced axis visualization.
+</div>
 
 #### Example
 
@@ -12455,6 +14135,11 @@ Configures the axis labels.
 
 The background color of the labels. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the background color behind category axis labels on financial charts or StockCharts to enhance label visibility, improve contrast, highlight or visually group specific categories, set transparent or solid color backgrounds using any CSS-compatible color formats such as hex codes, RGB or HSL values, and enable better readability or stylistic differentiation of axis labels during chart initialization or configuration.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12471,6 +14156,11 @@ The background color of the labels. Any valid CSS color string will work here, i
 ### categoryAxis.labels.border `Object`
 
 The border of the labels.
+
+
+<div class="meta-api-description">
+Control and customize the outlines or borders of category axis labels on charts by setting visual properties like color, thickness, style, and dash patterns, enabling precise label border styling for axis text in stock or data charts, configuring how label edges appear, including border visibility and design, managing label boundary appearance for clarity and emphasis, and adjusting the graphical outlines around category axis labels to enhance chart readability and aesthetics.
+</div>
 
 #### Example
 
@@ -12493,6 +14183,11 @@ The border of the labels.
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust, configure, or set the border color of labels along the category axis in charts, using any valid CSS color format such as hex codes, RGB, RGBA, HSL, or named colors to customize appearance, style label borders, control axis label outlines, apply themes, enhance visual contrast, and fine-tune chart label presentation for better readability and design consistency.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12511,6 +14206,11 @@ The color of the border. Any valid CSS color string will work here, including he
 ### categoryAxis.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Customize the visual style of category axis label borders by adjusting the stroke pattern to solid, dashed, dotted, or other dash types, enabling control over label border appearance, rhythm, and emphasis; configure or set the label border dash style to enhance clarity, style, or distinction in stock charts, including controlling line patterns, border dashes, stroke types, and label highlight effects for improved readability and design consistency on axis labels.
+</div>
 
 #### *"solid"*
 
@@ -12559,6 +14259,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or set the thickness, weight, or width of borders around category axis labels in stock or financial charts, controlling label outline thickness in pixels to customize the visual prominence of axis label borders, enabling changes to the border line strength, edge thickness, or frame width of labels along the category axis in time-series or categorical stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12578,6 +14283,11 @@ The width of the border.
 
 The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or customize the text color of the category axis labels on stock charts by setting colors using CSS formats such as hex codes, RGB, RGBA, HSL, or named color values. Enable changing or styling the axis label font color to improve chart readability, enhance visual appearance, or match theming requirements for financial or stock market data visualizations. Configure, set, or control the label text color on the category axis to integrate with custom color schemes, dark mode, or branding needs, ensuring clear and distinct category labeling in stock chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12594,6 +14304,11 @@ The text color of the labels. Any valid CSS color string will work here, includi
 ### categoryAxis.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+
+<div class="meta-api-description">
+Customize and configure the appearance of category axis labels by setting font properties such as typeface, size, weight, style, and spacing to enhance readability, adjust label typography, control text styling, and improve visual clarity on stock or financial charts, including options to define font families, scale label text, and tailor label presentation for better chart comprehension and design consistency.
+</div>
 
 #### Example
 
@@ -12612,6 +14327,11 @@ The font style of the labels.
 
 The format of the labels.
 
+
+<div class="meta-api-description">
+Customize and control the display format of category axis labels in stock or financial charts by setting numeric, date, or custom string patterns to modify label appearance and alignment with data types and localization preferences. Configure how category labels render text on the axis to match various data formats, including timestamps, numbers, currencies, or user-defined formats, enabling precise control over label styling, formatting options, and readable presentation in time series or categorical data charts. Enable formatting of chart axis labels to support localization, numeric precision, date formatting, and flexible pattern definitions that align label text with data visualization goals and user interface requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12628,6 +14348,11 @@ The format of the labels.
 ### categoryAxis.labels.margin `Number | Object`*(default: 0)*
 
 The margin of the labels.
+
+
+<div class="meta-api-description">
+Adjust and configure spacing, padding, or margins around category axis labels in stock or financial charts to control label offset, distance from axis lines, and prevent overlap or clutter. Manage label layout, alignment, and positioning relative to the axis to improve readability and visual clarity by increasing or decreasing space around category labels on time series or categorical axes. Fine-tune label separation, margin size, or whitespace to customize chart appearance, control label density, and optimize the relationship between labels and axis elements in financial or stock market visualizations.
+</div>
 
 #### Example
 
@@ -12646,6 +14371,11 @@ Mirrors the axis labels and ticks.
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.
 
+
+<div class="meta-api-description">
+Control the positioning of axis labels and tick marks by enabling mirroring to display them on the opposite side of the category axis, allowing labels and ticks that typically appear on the left side to shift to the right side or vice versa, useful for customizing chart layouts, adjusting label orientation, flipping axis elements, and enhancing readability from different perspectives in stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12663,6 +14393,11 @@ mirroring the axis will render them to the right.
 
 The padding of the labels.
 
+
+<div class="meta-api-description">
+Adjust spacing and offset of category axis labels in stock charts by configuring padding values for top, bottom, left, and right sides to control label layout, prevent overlap, improve readability, customize label distance from axis lines, and fine-tune chart appearance by setting or modifying label margins and gaps on the category axis.
+</div>
+
 #### Example
 
 ```pseudo
@@ -12677,6 +14412,11 @@ The padding of the labels.
 ### categoryAxis.labels.rotation `Number`*(default: 0)*
 
 The rotation angle of the labels.
+
+
+<div class="meta-api-description">
+Adjust or set the angle, tilt, or orientation of category axis labels in stock or financial charts to enhance label readability, avoid text overlapping, customize label alignment, and improve the visual layout of categories on the horizontal axis by rotating the label text using degree values. This enables configuring how labels are displayed on the date, time, or category axis in time series or stock charts for better clarity in dense or cluttered data presentations.
+</div>
 
 #### Example
 
@@ -12696,6 +14436,11 @@ The rotation angle of the labels.
 Number of labels to skip.
 Skips rendering the first n labels.
 
+
+<div class="meta-api-description">
+Adjust the spacing and density of category axis labels by omitting a specified number of initial labels to prevent overlapping, reduce clutter, and enhance readability on stock charts or time series axes. Configure how many labels to skip or ignore at the start of the axis to control label frequency, customize axis label distribution, manage label crowding, and improve the visual clarity of date, category, or numeric axis labels in financial or data visualization charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12713,6 +14458,11 @@ Skips rendering the first n labels.
 
 Label rendering step.
 Every n-th label is rendered where n is the step
+
+
+<div class="meta-api-description">
+Control the frequency of category axis labels on a stock or time-series chart by configuring the interval to display every nth label, enabling reduction of label crowding, adjustment of label density, and management of tick label spacing. This setting helps customize how often axis labels appear to improve readability, manage overlapping text, set label skipping intervals, balance information density, and fine-tune the chronological or categorical axis presentation in data visualizations. Whether you want to configure label spacing, enable selective label rendering, or limit visible axis labels for cleaner charts, adjusting the label display step provides flexible control over category axis label visibility and interval rendering.
+</div>
 
 #### Example
 
@@ -12739,6 +14489,11 @@ The fields which can be used in the template are:
 * culture - the default culture (if set) on the label
 * index - the 0-based index of the current label
 * count - the total number of labels on the axis
+
+
+<div class="meta-api-description">
+Adjust and customize category axis labels in stock charts by configuring templates that control label rendering, formatting, and data binding. Enable dynamic label content using templates that access category values, associated data items, label formats, cultural settings, label indices, and total label counts. Set up personalized label displays on time or categorical axes, modify appearance through template-based expressions, format labels for localization or specific data representation, and manipulate label text or structure programmatically to suit diverse charting needs. Control category label presentation with flexible templating options that allow developers to configure, format, localize, and enumerate axis labels in stock or financial charts with precision.
+</div>
 
 #### Example
 
@@ -12767,6 +14522,11 @@ The fields which can be used in the template are:
 
 The visibility of the labels.
 
+
+<div class="meta-api-description">
+Configure the display of category axis labels on financial or time-series charts to show or hide labels that identify categories along the horizontal axis, enabling control over label visibility, toggling label rendering, managing axis label layout, customizing the presentation of category markers, and adjusting chart readability by enabling or disabling category text annotations in stock or data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12783,6 +14543,11 @@ The visibility of the labels.
 ### categoryAxis.line `Object`
 
 Configures the axis line. This will also effect major and minor ticks, but not gridlines.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of the category axis baseline by setting color, thickness, dash style, and visibility options for the axis line, enabling precise styling of axis borders and tick marks without altering gridline display, useful for configuring the visual boundary of horizontal or vertical category ranges in stock charts, adjusting line aesthetics for major and minor ticks emphasis, and managing axis underline or separator presentation in financial or timeline visualizations.
+</div>
 
 #### Example
 
@@ -12815,6 +14580,11 @@ Configures the axis line. This will also effect major and minor ticks, but not g
 
 The color of the lines. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Set or customize the stroke color of the category axis lines, axis boundaries, or grid lines in stock or financial charts, enabling control over line color styling using any standard CSS color formats such as hex codes, RGB, RGBA, HSL, or named colors to enhance visual clarity, theming, or highlighting specific chart elements related to categorical data axes on time series or stock performance visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12845,6 +14615,11 @@ The color of the lines. Any valid CSS color string will work here, including hex
 ### categoryAxis.line.dashType `String`*(default: "solid")*
 
 The dash type of the line.
+
+
+<div class="meta-api-description">
+Control and customize the stroke pattern or dash style of the horizontal or category axis line in stock charts, enabling settings like solid, dashed, dotted, dash-dot, or custom dash patterns to modify the axis line’s appearance, border style, and visual rendering for clearer separation, emphasis, or stylistic preferences in chart axes.
+</div>
 
 #### Example
 
@@ -12903,6 +14678,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The visibility of the lines.
 
+
+<div class="meta-api-description">
+Control the display and visibility of the category axis gridlines or boundary lines on a financial or stock chart by enabling or disabling the axis line rendering, toggling the stroke or outline for the horizontal or vertical category axis, showing or hiding axis boundaries for clearer data segmentation or visual separation, configuring axis line visibility for improved chart readability and customization, and adjusting whether category axis lines appear on initialization to customize the chart’s visual structure and enhance user interpretation of categorical data divisions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12933,6 +14713,11 @@ The visibility of the lines.
 The width of the line. This will also effect the major and minor ticks, but
 not the grid lines.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, stroke width, or line weight of the horizontal or category axis line in stock charts to influence the visual prominence, alignment, and clarity of axis markings and ticks while keeping grid lines unaffected; customize axis line styling, control the boldness or thinness of the line, and fine-tune the appearance of major and minor tick marks on stock or financial chart category axes for enhanced readability and precise visual design.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -12962,6 +14747,11 @@ not the grid lines.
 
 Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
+
+
+<div class="meta-api-description">
+Adjust or customize the primary grid lines along the horizontal or category axis of a stock or financial chart, enabling control over their visibility, line color, thickness, pattern such as dashed or solid, and overall style to enhance chart readability, guide data interpretation, and align with visual design preferences. This includes options to turn the main grid lines on or off, modify their appearance extending from key axis markers or major ticks across the chart area, and tailor the axis grid visuals for clearer data segmentation or highlighting specific intervals when analyzing time-series, stock prices, or categorical data trends.
+</div>
 
 #### Example
 
@@ -12994,6 +14784,11 @@ body of the chart.
 
 The color of the lines. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize the color of primary grid lines along the horizontal or category axis in financial or stock charts by specifying any valid CSS color format such as hex codes, RGB, RGBA, HSL, or named colors to visually distinguish the main axis divisions, control chart background separation, configure grid line hues, adjust line coloring for better readability, highlight or de-emphasize major grid markers on time or category axes, set stroke colors for axis grid lines, and tailor the visual grid structure to fit branding or thematic requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13022,6 +14817,11 @@ The color of the lines. Any valid CSS color string will work here, including hex
 ### categoryAxis.majorGridLines.dashType `String`*(default: "solid")*
 
 The dash type of the grid lines.
+
+
+<div class="meta-api-description">
+Set or customize the line style for major grid lines on the stock chart’s category axis, including options to enable solid, dashed, dotted, or various stroke patterns for the grid lines; control the appearance and pattern of horizontal or vertical major grid markers to improve chart readability, highlight intervals, or match specific visual themes by configuring line dash formats, line styles, or stroke patterns during chart setup or dynamically to influence axis grid rendering and presentation behaviors.
+</div>
 
 #### Example
 
@@ -13080,6 +14880,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The visibility of the lines.
 
+
+<div class="meta-api-description">
+Control the display of primary vertical or horizontal grid lines aligned with category labels on stock or financial charts, enabling toggling of major grid lines visibility to customize chart backgrounds, improve readability, or declutter axis presentations. Configure, enable, disable, show, or hide the main category axis grid lines that run along major tick marks, affecting how grid lines appear in time series, financial data, or categorical axes for enhanced visual clarity and data segmentation. Adjust grid visibility for category axis to suit chart styling preferences, highlight key data points, or simplify axis grids across various stock chart implementations and category-based data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13109,6 +14914,11 @@ The visibility of the lines.
 
 The width of the lines.
 
+
+<div class="meta-api-description">
+Adjust, set, or configure the thickness, width, stroke weight, or boldness of the main vertical or horizontal grid lines along the category axis in stock or financial charts, controlling how prominent or subtle these major grid lines appear to enhance chart readability, visual clarity, and spacing; useful for customizing grid line density, line thickness scaling, or stroke size in chart axis styling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13137,6 +14947,11 @@ The width of the lines.
 ### categoryAxis.majorGridLines.step `Number` *(default: 1)*
 
 The step of the category axis major grid lines.
+
+
+<div class="meta-api-description">
+Adjust the interval or spacing between primary vertical grid lines along the category axis in stock or time-based charts, enabling configuration of how frequently major grid lines appear to match category labels, date markers, or time units, allowing developers to control grid density, step size, and alignment to enhance readability or emphasize specific intervals on the category axis.
+</div>
 
 #### Example
 
@@ -13169,6 +14984,11 @@ The step of the category axis major grid lines.
 
 The skip of the category axis major grid lines.
 
+
+<div class="meta-api-description">
+Adjust interval or frequency of major grid lines on the stock chart category axis by specifying how many lines to omit or skip between displayed grid lines, enabling control over grid line density, spacing, and visual clarity on time or categorical axes, useful for customizing chart appearance, reducing clutter, improving readability, configuring axis grid intervals, setting step size for grid lines, and fine-tuning axis layout by showing every Nth line or controlling major grid line rendering intervals.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13199,6 +15019,11 @@ The skip of the category axis major grid lines.
 ### categoryAxis.majorTicks `Object`
 
 The major ticks of the axis.
+
+
+<div class="meta-api-description">
+Configure and customize the main tick marks on the horizontal or categorical axis of a stock or financial chart, including options to enable or disable visibility, adjust tick size and length, set colors and styles, control spacing or intervals between ticks by step or frequency, position ticks inside or outside the axis line, and fine-tune their appearance to enhance readability and axis labeling in time series, category-based, or stock price visualizations.
+</div>
 
 #### Example
 
@@ -13231,6 +15056,11 @@ The major ticks of the axis.
 
 The color of the category axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Set or customize the color of major tick marks along the horizontal or categorical axis in stock or financial charts to enhance visual clarity, match branding colors, improve axis readability, or differentiate data segments; configure stroke colors using hex, RGB, or CSS color values for category axis ticks, control the appearance and styling of significant axis markers, and adjust axis line highlights to fit chart themes or user interface designs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13261,6 +15091,11 @@ The color of the category axis major ticks lines. Accepts a valid CSS color stri
 The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.
 
+
+<div class="meta-api-description">
+Adjusting the length or size of major tick marks on a chart axis, setting custom tick lengths in pixels, controlling the scale or dimensions of axis ticks, configuring the thickness or appearance of major tick lines on category or time axes, defining the visual spacing for tick indicators, modifying the distance or reach of tick marks from the axis baseline, enabling precise tuning of tick mark dimensions for better visual alignment or styling, setting pixel values to increase or decrease the length of key ticks on chart axes, customizing axis tick appearance for improved readability or design consistency, and tailoring major tick size on stock or financial charts for accurate data representation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13289,6 +15124,11 @@ on the chart.
 ### categoryAxis.majorTicks.width `Number` *(default: 1)*
 
 The width of the major ticks in pixels.
+
+
+<div class="meta-api-description">
+Adjust or set the thickness, size, or pixel width of major tick marks on the category axis in stock charts to customize axis appearance, increase or decrease the prominence of major ticks, configure axis line weight, control tick mark boldness or line thickness, and enhance visual clarity or styling of axis ticks for better chart readability and aesthetic tuning.
+</div>
 
 #### Example
 
@@ -13319,6 +15159,11 @@ The width of the major ticks in pixels.
 
 The visibility of the major ticks.
 
+
+<div class="meta-api-description">
+Toggle the display of prominent tick marks along the horizontal or category axis in financial or time-series charts, enabling users to enable or disable major gridline indicators that enhance axis readability, control axis scaling markers, adjust spacing for clearer data intervals, and customize the visibility of key axis notches that help in interpreting stock price movements or timeline divisions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13347,6 +15192,11 @@ The visibility of the major ticks.
 ### categoryAxis.majorTicks.step `Number` *(default: 1)*
 
 The step of the category axis major ticks.
+
+
+<div class="meta-api-description">
+Adjust or set the interval, spacing, frequency, or density of major tick marks on a chart’s category axis by controlling how many categories, units, or steps are skipped between consecutive major ticks; configure, customize, or define the step size to space out, reduce clutter, enable clearer labeling, optimize readability, or control tick mark distribution along the category or horizontal axis in stock charts, time series, or categorical data visualizations.
+</div>
 
 #### Example
 
@@ -13379,6 +15229,11 @@ The step of the category axis major ticks.
 
 The skip of the category axis major ticks.
 
+
+<div class="meta-api-description">
+Control spacing of major tick marks on the chart’s category axis by setting how many ticks to skip, adjusting intervals between visible ticks for clearer axis labeling, customizing tick frequency, enabling or disabling tick display density, modifying step size in category tick marks, managing axis tick visibility, configuring tick intervals in time or categorical axes, fine-tuning axis granularity for better readability, setting numeric or date-based tick skips, and optimizing axis presentation by skipping selected major ticks on the category axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13410,6 +15265,11 @@ The skip of the category axis major ticks.
 
 Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
 the body of the chart.
+
+
+<div class="meta-api-description">
+Control and customize the display of grid lines aligned with minor ticks on the horizontal or category axis in stock or financial charts, enabling configuration of visibility, color, thickness, dash patterns, and overall styling to enhance chart readability and tailoring of axis minor grid lines. Adjust or toggle these subtle guide lines that run through the chart background for precise visual reference points, including options to show, hide, style, and format minor grid lines to improve clarity on timeline or categorical scales.
+</div>
 
 #### Example
 
@@ -13448,6 +15308,11 @@ rgb.
 Note that this setting has no effect if the visibility of the minor
 grid lines is not set to **true**.
 
+
+<div class="meta-api-description">
+Set or customize the color of minor grid lines on the category axis in stock charts using any valid CSS color format such as hex, RGB, or named colors; ideal for controlling the visual style, appearance, or theme of grid lines beneath the major ticks, enhancing readability, supporting chart styling, or matching brand colors when minor grid lines are enabled.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13477,6 +15342,11 @@ grid lines is not set to **true**.
 ### categoryAxis.minorGridLines.dashType `String`*(default: "solid")*
 
 The dash type of the grid lines.
+
+
+<div class="meta-api-description">
+Configure and customize the stroke style of minor grid lines along the category axis in stock charts by setting different dash patterns such as solid, dashed, dotted, or other stroke styles to control the appearance and visual segmentation of these grid lines for clarity, readability, and enhanced chart design. Adjust the dash type to change how minor grid lines are displayed, enabling pattern variations like continuous lines, spaced dashes, dots, or combinations to optimize the chart’s grid layout and improve data visualization accuracy. Whether you want to enable dotted minor grid lines, create dash styles for axis details, set line patterns for finer grid distinctions, or control visual separation on the category axis, this setting governs the pattern styling of those minor ticks in financial or time-series stock charts.
+</div>
 
 #### Example
 
@@ -13536,6 +15406,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The visibility of the lines.
 
+
+<div class="meta-api-description">
+Control the display or visibility of minor grid lines along the category axis in stock charts, enabling or disabling fine interval markers to customize chart background clarity, grid line appearance, axis detailing, or visual segmentation. Toggle, set, show, hide, or configure the minor grid markers for better readability, precise data alignment, enhanced axis granularity, and tailored chart grid styling on category axes in time series or categorical stock market graphs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13568,6 +15443,11 @@ The width of the lines.
 Note that this setting has no effect if the visibility of the minor
 grid lines is not set to **true**.
 
+
+<div class="meta-api-description">
+Adjusting the thickness or line weight of minor grid lines on the category axis in stock or financial charts, controlling the visibility and prominence of detailed grid markings, configuring how fine or bold the background grid appears to improve readability or visual emphasis on minor intervals, enabling or customizing subtle guide lines on the category axis for better data alignment and comparison, setting the width of fine horizontal or vertical lines that subdivide chart categories to enhance clarity in time series or grouped data visualization, tuning minor interval grid line thickness to balance between cluttered and clear axis backgrounds, controlling the stroke size of minor axis grid lines for improved chart precision and aesthetic, modifying or scaling the minor grid line width on categorical axes for granular visual segmentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13597,6 +15477,11 @@ grid lines is not set to **true**.
 ### categoryAxis.minorGridLines.step `Number` *(default: 1)*
 
 The step of the category axis minor grid lines.
+
+
+<div class="meta-api-description">
+Adjust the interval or spacing between minor grid lines on the category axis of a stock or financial chart to control the frequency of these finer grid markers, specifying how many category units or data points appear between each minor line for clearer visual segmentation or more granular axis division. Enable configuring minor grid line steps or increments to manage the density of grid lines for better readability, precision, or customization in stock price timelines, financial data visualization, or timeline axis layout on a category-based axis. Set, modify, or fine-tune the step size or gap of minor grid lines for detailed control over chart axis grid appearance and scaling to support various zoom levels, data grouping, or presentation preferences.
+</div>
 
 #### Example
 
@@ -13630,6 +15515,11 @@ The step of the category axis minor grid lines.
 
 The skip of the category axis minor grid lines.
 
+
+<div class="meta-api-description">
+Adjust and control the spacing and frequency of minor grid lines on the category axis of a stock chart by setting intervals that determine how many minor divisions or grid lines to omit or skip between visible lines, enabling finer customization over axis density, reducing visual clutter, managing grid line frequency, and improving chart readability by configuring the gaps between minor tick marks or grid steps.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13661,6 +15551,11 @@ The skip of the category axis minor grid lines.
 ### categoryAxis.minorTicks `Object`
 
 The minor ticks of the axis.
+
+
+<div class="meta-api-description">
+Adjust and customize the appearance and behavior of small tick marks on the category axis in charts by controlling their visibility, spacing intervals, step frequency, size, color, and width, enabling fine-tuned granularity and detailed axis labeling for time or categorical scales, ideal for setting subtle grid lines, enhancing axis readability, or defining precision markers in stock or financial chart visualizations.
+</div>
 
 #### Example
 
@@ -13694,6 +15589,11 @@ The minor ticks of the axis.
 The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.
 
+
+<div class="meta-api-description">
+Adjust or set the length, size, or pixel measurement of minor tick marks on the horizontal or category axis in stock, financial, or time-series charts to customize their visibility, spacing, and appearance. Control how prominent, long, short, or subtle the smaller interval tick marks appear beneath major axis ticks to enhance chart readability, axis detail, and presentation style. Configure, modify, enable, or disable minor tick length to fine-tune detailed axis scaling, improve data granularity display, or tailor the chart’s time or category subdivision markers during initialization or rendering.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13724,6 +15624,11 @@ on the chart.
 
 The visibility of the minor ticks.
 
+
+<div class="meta-api-description">
+Control the visibility or display of smaller tick marks along a stock chart’s category axis for more precise time or category divisions, enabling or disabling finer graduations on the axis scale, toggling minor tick lines to enhance or simplify the chart’s axis detail, configuring whether subtle axis markers appear for detailed labeling, turning on or off the small interval ticks that help indicate minor steps between major points, adjusting the presence of tiny tick marks along the horizontal axis to aid in reading trends or data density with Boolean options, setting whether minor subdivisions are drawn to improve visual granularity or to reduce clutter on the category axis scale.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13752,6 +15657,11 @@ The visibility of the minor ticks.
 ### categoryAxis.minorTicks.color `String` *(default: "black")*
 
 The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Customize the color of small tick marks on the category axis of financial or stock charts by setting the minor ticks color to improve visual clarity and axis readability, enabling configuration of subtle or distinct hues using hex codes, RGB values, or named CSS colors. Control or set the appearance of minor tick lines to highlight time intervals or data categories clearly, adjust styling of axis details for better chart precision, and enhance the overall user interface by configuring these fine-grained axis markers’ color during chart setup or initialization.
+</div>
 
 #### Example
 
@@ -13783,6 +15693,11 @@ The color of the category axis minor ticks lines. Accepts a valid CSS color stri
 
 The width of the minor ticks in pixels.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or pixel width of small tick marks on the time or category axis of financial charts, enabling customization of minor grid markers to enhance visual clarity, scale precision, and readability by configuring or controlling the width of subtle tick indicators on stock or data category axes for better chart detailing and axis demarcation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13812,6 +15727,11 @@ The width of the minor ticks in pixels.
 ### categoryAxis.minorTicks.step `Number` *(default: 1)*
 
 The step of the category axis minor ticks.
+
+
+<div class="meta-api-description">
+Configure the spacing and interval between minor tick marks on a chart’s category axis by setting how frequently these smaller ticks appear, controlling the density and distribution along the axis to increase or decrease visual granularity, adjust alignment precision, or customize tick frequency for better readability and detailed time or category segmentation in stock charts or other axis-based visualizations.
+</div>
 
 #### Example
 
@@ -13845,6 +15765,11 @@ The step of the category axis minor ticks.
 
 The skip of the category axis minor ticks.
 
+
+<div class="meta-api-description">
+Configure the density and spacing of minor ticks along the horizontal category axis by setting how many minor ticks to omit or skip, enabling control over visual clutter and axis readability in time series or categorical charts. Adjust the interval at which minor tick marks appear on the category axis, allowing you to render fewer ticks by skipping every Nth minor division, which helps in customizing tick frequency, improving chart clarity, and managing axis label overcrowding. This setting is useful for controlling the granularity of sub-divisions on a category or time axis, useful when tailoring chart detail during initialization or dynamic updates to optimize display across different data scales or screen sizes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13877,6 +15802,11 @@ The skip of the category axis minor ticks.
 
 The unique axis name.
 
+
+<div class="meta-api-description">
+Assign a unique identifier to a specific category axis in stock charts to reference, bind, or link data series, enable axis-specific settings, configurations, or API interactions, and differentiate among multiple category axes when configuring or controlling chart behavior. This identifier helps in targeting particular axes for customization, data binding, or precise manipulation within complex multi-axis stock chart setups.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13905,6 +15835,11 @@ The unique axis name.
 The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.
 
+
+<div class="meta-api-description">
+Control where the category axis is displayed by specifying the target pane name as a string to assign the axis to a particular chart pane or section. Configure the axis rendering placement within a multi-pane stock or financial chart setup, enabling axis positioning for clearer data segmentation, layout customization, or to separate different data series. This setting lets you direct the category axis to any designated pane beyond the default first pane, helping with layered chart layouts, axis alignment, or visualization separation across multiple panes in complex charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13931,6 +15866,11 @@ The axis will be rendered in the first (default) pane if not set.
 ### categoryAxis.plotBands `Array`
 
 The plot bands of the category axis.
+
+
+<div class="meta-api-description">
+Configure highlighted ranges or colored bands along the category or time axis of a stock chart to emphasize specific value intervals, time periods, or categories by setting start and end points, colors, opacity levels, and optional labels. Enable or customize shaded bands or overlays on the axis to mark important time frames, highlight data segments, create visual cues for range boundaries, segment the timeline, or define focus areas for better readability and data interpretation on financial or time series charts. Adjust these visual bands to create emphasis on selected ranges, intervals, or categories directly on the axis for enhanced data visualization and clear boundary indication.
+</div>
 
 #### Example
 
@@ -13966,6 +15906,11 @@ The plot bands of the category axis.
 
 The start position of the plot band in axis units.
 
+
+<div class="meta-api-description">
+Control or define the starting point, beginning position, or initial value of a highlighted range, shaded area, or plot band on a chart’s category axis; specify where the coloration or emphasis zone starts based on axis units, index, or category values to customize visual ranges, mark intervals, or highlight segments in timeline charts, stock charts, or categorical data axes for analysis, comparison, or event indication.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -13998,6 +15943,11 @@ The start position of the plot band in axis units.
 ### categoryAxis.plotBands.to `Number`
 
 The end position of the plot band in axis units.
+
+
+<div class="meta-api-description">
+Adjust or configure the ending boundary, endpoint, or final position of a highlighted range, plot band, or shaded area on the time or category axis of stock charts and data visualizations, specifying the inclusive or exclusive axis value where the plot band should terminate. Enable setting, updating, or controlling the upper limit, maximum, or stopping point of axis-based overlay regions to visually emphasize or compare intervals, ranges, or segments within financial or time series data. Use axis units to precisely place or move the concluding coordinate of these visual bands for customized timeline markings, range highlighting, or segment annotations in chart configurations.
+</div>
 
 #### Example
 
@@ -14032,6 +15982,11 @@ The end position of the plot band in axis units.
 
 The color of the plot band.
 
+
+<div class="meta-api-description">
+Customize or configure the background color, fill color, or shading for category axis plot bands on stock charts, enabling control over highlighted regions or time frames along the x-axis; set or adjust band colors to emphasize specific ranges, segments, or intervals in financial or time series visualizations, including adjusting transparency, opacity, or color codes to differentiate plots, highlight trends, or mark significant categories on the stock chart axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14064,6 +16019,11 @@ The color of the plot band.
 ### categoryAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
+
+
+<div class="meta-api-description">
+Adjust the transparency level or opacity of highlighted sections on a category axis in stock or time series charts to control visual emphasis on specific ranges, enabling you to set how see-through or solid these bands appear for better data focus or background blending. This configurable value lets you fine-tune the translucency of plot bands within the category axis to highlight, fade, or mask selected intervals smoothly, useful for emphasizing periods or zones in financial or timeline visualizations, and can be set during chart setup or dynamically adjusted to manage clarity, contrast, or layering effects across axis segments.
+</div>
 
 #### Example
 
@@ -14100,6 +16060,11 @@ The opacity of the plot band.
 Reverses the axis direction -
 categories are listed from right to left and from top to bottom.
 
+
+<div class="meta-api-description">
+Control the order and direction of categorical data on a chart axis by enabling the option to invert or flip the sequence of categories, allowing the axis labels and categories to display in reverse order such as right-to-left for horizontal layouts or top-to-bottom for vertical layouts, effectively mirroring or reversing the category axis orientation to customize visual data flow, adjust axis direction, reorder categories, or invert the timeline and categorical sequences for enhanced chart readability and presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14126,6 +16091,11 @@ categories are listed from right to left and from top to bottom.
 ### categoryAxis.select `Object`
 
 The selected axis range. If configured, axis selection will be enabled.
+
+
+<div class="meta-api-description">
+Control and configure the selected range or active interval on a stock chart’s category axis by setting or enabling axis selection, defining the specific portion of the axis to focus on or highlight, adjusting the visible date or category window, specifying start and end points for the axis selection, activating a predefined axis range for zoom or filtering purposes, managing the current selection state on the chart’s horizontal axis, customizing which segments of the timeline or categories are actively selected, and enabling precise control over the axis subset to display or analyze within the stock chart view.
+</div>
 
 #### Example
 
@@ -14158,6 +16128,11 @@ The selected axis range. If configured, axis selection will be enabled.
 ### categoryAxis.select.from `String|Date`
 
 The lower boundary of the selected range.
+
+
+<div class="meta-api-description">
+Configure or access the starting point, lower limit, or beginning boundary of a range selection on a chart's category axis, enabling control over the initial value of the selected segment or interval for data filtering, zooming, or range setting purposes. This includes setting, retrieving, or adjusting the initial position or minimum value of a user-defined or programmatic selection area within the category axis on stock or time series charts to customize visible data ranges or highlight specific periods.
+</div>
 
 #### Example
 
@@ -14194,6 +16169,11 @@ The upper boundary of the selected range.
 unless the axis is justified. In order to select all categories specify
 a value larger than the last category date.
 
+
+<div class="meta-api-description">
+Configure or define the ending point of the selection range on a stock chart’s horizontal category axis, enabling control over where the selection window stops based on a specific date or numeric value. This setting determines the upper limit of the selected interval for zooming, filtering, or highlighting periods in time series or numeric sequences, and it is commonly used to set the endpoint of date ranges, time windows, or numeric boundaries in interactive financial charts. Adjust or set the final value of the selection to restrict the displayed segment, handle partial inclusions of categories depending on axis justification, or extend beyond the last category to encompass all data points in the chart’s timeline or numeric scale. This parameter is crucial for customizing selection extents or ranges when users want to specify the last visible or analyzed category, date, or value on time-based or category axis visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14224,6 +16204,11 @@ a value larger than the last category date.
 ### categoryAxis.select.min `Object`
 
 The minimum value that is selectable by the user.
+
+
+<div class="meta-api-description">
+Control or configure the minimum selectable value on a chart’s horizontal category axis to set the lower boundary for user selections or zoom ranges, defining the earliest date or smallest numeric point that can be chosen or highlighted. Restrict, limit, or constrain the starting point of axis range selection, enabling developers to set a lower limit for interactive data zooming, panning, or filtering within charts that display time series or numerical categories. Adjust the minimal selection threshold to prevent users from selecting or zooming below a specific date, value, or index on the chart axis, supporting customized control over user interaction with data ranges.
+</div>
 
 #### Example
 
@@ -14260,6 +16245,11 @@ The maximum value that is selectable by the user.
 unless the axis is justified. In order to select all categories specify
 a value larger than the last category index (date).
 
+
+<div class="meta-api-description">
+Set or control the maximum limit for user selection on a chart's category axis, defining the highest allowable range or endpoint that users can select or zoom into; this setting caps the selectable categories or dates on the axis, helping restrict or expand the range of data points users can focus on, adjust, or highlight during interactive chart navigation or filtering, including cases where you need to limit selection to a subset of categories or allow full-range selection by specifying a value beyond the last category index.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14290,6 +16280,11 @@ a value larger than the last category index (date).
 ### categoryAxis.select.mousewheel `Object`
 
 Mousewheel zoom settings for the selection.
+
+
+<div class="meta-api-description">
+Control and customize zooming behavior on time or category axes using mousewheel interactions during range selection, enabling or disabling scroll wheel zoom when users highlight or select portions of the chart axis, configuring options for smooth zooming, scaling, magnifying, or adjusting focus on selected data ranges via mousewheel gestures, managing how scroll input affects zoom levels in graphs with categorized or time-based axes, setting parameters for precise or accelerated zoom triggered by the mousewheel on selected axis segments to improve data exploration and interactive analysis.
+</div>
 
 #### Example
 
@@ -14326,6 +16321,11 @@ Mousewheel zoom settings for the selection.
 Reverses the mousewheel zoom direction.
 Normal direction is down for "zoom out", up for "zoom in".
 
+
+<div class="meta-api-description">
+Adjust or reverse the mouse wheel zoom direction on the category axis in stock charts to control whether scrolling up zooms in or out and similarly affects zooming when scrolling down, enabling customization of zoom behavior for better user interaction and preference in chart navigation and data exploration.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14358,6 +16358,11 @@ Normal direction is down for "zoom out", up for "zoom in".
 ### categoryAxis.select.mousewheel.zoom `String`*(default: "both")*
 
 The zoom direction. Possible values:
+
+
+<div class="meta-api-description">
+Adjust and configure the behavior of mouse wheel interactions to control zooming in and out on the horizontal category axis of a stock chart, enabling users to specify whether scrolling the mouse wheel expands or contracts the selected date or category range, customize zoom direction for range selection, manipulate how mousewheel input modifies the visible data window on the axis, fine-tune scrolling behavior to increase or decrease the zoom level of the timeline or category axis selection, and manage intuitive control over zoom in stock chart navigation and data exploration with mousewheel gestures.
+</div>
 
 #### Example
 
@@ -14401,6 +16406,11 @@ Zooming expands and contracts the selection right side only.
 
 The title of the category axis.
 
+
+<div class="meta-api-description">
+Configure and customize the label or heading text shown on the horizontal or category axis of a stock chart or timeline chart, enabling clear identification of categories, dates, time intervals, or groupings along the axis. Control, set, or update the axis header string or title text for better chart readability, clarity, and presentation in financial or categorical data visualizations, ensuring users can specify descriptive names or titles that appear along the category axis to represent periods, labels, or categories effectively.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14433,6 +16443,11 @@ The title of the category axis.
 The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
 
+
+<div class="meta-api-description">
+Configure or customize the background color behind the category axis title in a stock chart, enabling control over the title's backdrop using any CSS color format such as hexadecimal codes, RGB values, or named colors to enhance visual styling, highlight the axis label, adjust chart presentation aesthetics, and set or change the fill color behind axis titles for clarity and design purposes in financial or data visualization charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14462,6 +16477,11 @@ hex and rgb.
 ### categoryAxis.title.border `Object`
 
 The border of the title.
+
+
+<div class="meta-api-description">
+Customize and control the border styling, outline, stroke appearance, visibility, and edge details of the category axis title on stock charts, enabling adjustment of line thickness, color, emphasis, and rendering of the axis title frame or boundary for clear labeling, focus, or stylistic enhancements in financial or data visualization charts.
+</div>
 
 #### Example
 
@@ -14497,6 +16517,11 @@ The border of the title.
 The color of the border. Any valid CSS color string will work here, including
 hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the border color surrounding the category axis title in stock charts, specifying any valid CSS color format such as hex codes, RGB, RGBA, HSL, named color values, or CSS variables to style and highlight the axis title boundary for better visual distinction, enabling precise color theming, enhanced chart readability, and tailored design appearance of axis labels and headings in financial or time series data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -14528,6 +16553,11 @@ hex and rgb.
 ### categoryAxis.title.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure and customize the style of the border line around the category axis title of a stock chart by setting the dash pattern or stroke style, enabling you to choose between solid, dashed, dotted, or other line types that define how the border appears visually, allowing control over border aesthetics, stroke pattern, line decoration, or border styling for axis labels and titles in chart visualizations.
+</div>
 
 #### Example
 
@@ -14620,6 +16650,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, size, or width of the border surrounding the chart's category axis title, enabling control over how prominent or subtle the title border appears on stock charts, with options to set numeric values to increase or decrease border visibility and styling during chart setup or rendering.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -14682,6 +16717,11 @@ The width of the border.
 ### categoryAxis.title.color `String`
 
 The text color of the title. Any valid CSS color string will work here, including hex and rgb.
+
+
+<div class="meta-api-description">
+Control and customize the color of the text for the category axis title on stock charts by setting or configuring the title text hue with CSS-compatible color values, including hex codes, RGB formats, and standard color names, enabling precise styling of axis labels, adjusting appearance for better readability or theming, and allowing developers to change axis title color dynamically or statically for enhanced visual presentation in financial charting applications.
+</div>
 
 #### Example
 
@@ -14746,6 +16786,11 @@ The text color of the title. Any valid CSS color string will work here, includin
 
 The font style of the title.
 
+
+<div class="meta-api-description">
+Control and customize the typography of the category axis title text in stock or financial charts with flexible font styling options, including setting font family, size, weight, style, and other CSS font properties using standard font strings like "12px Arial" to enhance readability, adjust appearance, and match visual design preferences for axis labels or titles in time series, categorical data, or financial visualizations.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -14805,6 +16850,11 @@ The font style of the title.
 
 The margin of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the spacing, padding, or outer margin around the category axis title in a stock or financial chart to control the distance between the axis title and nearby elements like axis labels, tick marks, chart plot area, or surrounding components. Enable fine-tuning of title positioning, layout adjustment, and visual separation on the horizontal or vertical axis by setting the margin or outer gap, useful for avoiding overlap, improving readability, or customizing chart appearance during initialization or dynamic updates.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -14863,6 +16913,11 @@ The margin of the title.
 ### categoryAxis.title.position `String`*(default: "center")*
 
 The position of the title.
+
+
+<div class="meta-api-description">
+Adjust, set, or control the placement and alignment of the category axis title in stock charts, including positioning above, below, or centered relative to the axis; configure or enable custom title layout on the category axis to optimize chart readability and appearance, determining where the title appears along the axis line for improved visualization and user interface consistency during chart setup.
+</div>
 
 #### Example
 
@@ -14943,6 +16998,11 @@ The axis title is positioned in the center
 
 The rotation angle of the title.
 
+
+<div class="meta-api-description">
+Adjust the orientation and angle of axis titles by configuring the rotation degree to display category axis labels vertically, horizontally, or at custom angles; control how chart titles are angled for better readability, alignment, and presentation in stock charts or similar visualizations, enabling title text rotation to enhance clarity, accommodate space constraints, or match design preferences across various charting scenarios.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -15002,6 +17062,11 @@ The rotation angle of the title.
 
 The text of the title.
 
+
+<div class="meta-api-description">
+Configure and customize the label text displayed as the title above the category axis in a stock chart, enabling setting, updating, or binding the axis heading to clarify data categories, improve chart readability, control axis captions, and ensure the axis title reflects desired content dynamically in financial or time series visualizations.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -15059,6 +17124,11 @@ The text of the title.
 ### categoryAxis.title.visible `Boolean`*(default: true)*
 
 The visibility of the title.
+
+
+<div class="meta-api-description">
+Control the visibility and display of the horizontal or category axis label in stock or financial charts, enabling or disabling the axis title text that describes time intervals, data categories, or timeline names along the bottom axis. Configure whether the axis label header is shown or hidden to improve chart readability, set axis titles on or off for clarity in stock price, trading volume, or historical data visualizations, and toggle the presence of descriptive category axis text to suit presentation or UI needs when rendering financial or time series charts.
+</div>
 
 #### Example
 
@@ -15118,6 +17188,11 @@ The visibility of the title.
 ### categoryAxis.type `String`*(default: "category")*
 
 The axis type.
+
+
+<div class="meta-api-description">
+Configure the category axis to interpret and display values as categorical labels, dates and times, or numeric data, enabling control over axis type selection, parsing methods, tick interval spacing, label formatting, and layout options for various chart scenarios such as timeline visualization, data categorization, numeric scales, and time series representation.
+</div>
 
 #### Example
 
@@ -15185,6 +17260,11 @@ The discrete [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#
 either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
 [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
+
+<div class="meta-api-description">
+Control and customize the selectable discrete time or category intervals for the chart's horizontal axis when automatic scaling or adaptive interval steps are enabled, allowing you to define specific base units or step sizes for time series, date, or categorical data scaling, fine-tuning how the axis dynamically adjusts intervals like days, weeks, months, or custom units for clearer readability and precise data representation in stock charts and timeline visualizations.
+</div>
+
 #### Example - set category axis auto base unit steps
 
     <div id="stockChart"></div>
@@ -15242,6 +17322,11 @@ either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configurat
 ### categoryAxis.autoBaseUnitSteps.days `Array` *(default: [1, 2, 3])*
 
 The days unit steps.
+
+
+<div class="meta-api-description">
+Adjust and define the selectable day step intervals for automatic scaling of time-based axis units in stock or financial charts, enabling precise control over tick spacing, label frequency, and daily granularity when displaying time series data. Customize day interval options to optimize axis labeling density, improve readability for daily data points, configure automatic base unit calculations on the category axis, and manage how time increments appear when plotting stock prices or other chronological datasets. This setting helps tailor intervals for day-based steps in charts that automatically determine optimal axis units, supporting scenarios where users want to control day granularity, tick marks, and label placement dynamically based on data-driven scaling logic.
+</div>
 
 #### Example
 
@@ -15301,6 +17386,11 @@ The days unit steps.
 
 The hours unit steps.
 
+
+<div class="meta-api-description">
+Control and configure the discrete hourly intervals or increments used for time-based data grouping and tick marks on the category axis in stock or time series charts, enabling automatic calculation of base time units with flexible step sizes such as 1-hour, 2-hour, or multiple-hour increments to tailor axis granularity, time scaling, and grouping behavior for improved visualization of hourly data, supporting setting, enabling, or adjusting hourly step options for smooth automatic axis adjustment during initialization or dynamic updates in financial or time-sensitive charting contexts.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -15358,6 +17448,11 @@ The hours unit steps.
 ### categoryAxis.autoBaseUnitSteps.minutes `Array` *(default: [1, 2, 5, 15, 30])*
 
 The minutes unit steps.
+
+
+<div class="meta-api-description">
+Adjust, configure, or set minute interval steps for time-based category axes in stock charts by specifying candidate minute increments such as 1, 5, 15, or 30 to guide automatic base unit selection; control how the chart auto-selects minute granularity when plotting time series data, enabling customization of zoom levels, axis scaling, and time grouping for financial or chronological visualizations based on minute intervals.
+</div>
 
 #### Example
 
@@ -15417,6 +17512,11 @@ The minutes unit steps.
 
 The months unit steps.
 
+
+<div class="meta-api-description">
+Control and configure month interval steps on the category axis for time-based stock charts, enabling precise selection or restriction of month unit sizes such as 1-month, 3-month, or 6-month increments during automatic base unit calculation. Adjust or set allowed month step intervals for the axis to optimize time scale granularity, customize date grouping, enable fine-tuning of timeline segmentation, or influence how month ranges are automatically chosen and rendered on chart axes with dynamic scaling and adaptive time unit selection.
+</div>
+
 #### Example
 
     <div id="stockChart"></div>
@@ -15474,6 +17574,11 @@ The months unit steps.
 ### categoryAxis.autoBaseUnitSteps.weeks `Array` *(default: [1, 2])*
 
 The weeks unit steps.
+
+
+<div class="meta-api-description">
+Configure or customize automatic scaling intervals for weekly time units on the category axis, controlling the spacing, granularity, step sizes, and tick intervals when visualizing weekly data segments in stock charts. Adjust how weekly periods group, scale, and display along the axis during automatic base unit calculations, enabling precise control over time-based axis breakdowns, weekly granularity, and dynamic interval generation for time series and financial data visualizations.
+</div>
 
 #### Example
 
@@ -15533,6 +17638,11 @@ The weeks unit steps.
 
 The years unit steps.
 
+
+<div class="meta-api-description">
+Configure and control year interval steps for timeline or date-based charts by setting allowed increments such as 1 year, 2 years, 5 years, or custom year ranges to influence how chart axes automatically calculate and display yearly divisions on category timelines. Adjust year-based scaling, set preferred year step sizes, enable specific year increments for axis labeling, and customize automatic time unit selection for better visualization of annual data trends or intervals. Manage and specify year intervals to optimize date axis granularity, timeline precision, and automatic base unit adjustments in stock charts or time series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15558,6 +17668,11 @@ The years unit steps.
 
 The background color of the axis.
 
+
+<div class="meta-api-description">
+Set or customize the background color behind the category axis labels and ticks in a stock or financial chart to visually distinguish the category axis area from the main chart plot; configure, style, or control the axis background for improved visual separation, clarity, or emphasis on the categorical scale region, enabling differentiation between the axis band and chart data area with color settings for the category axis background.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15581,6 +17696,11 @@ The background color of the axis.
 
 The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
 between subsequent categories.
+
+
+<div class="meta-api-description">
+Control and customize the time interval granularity on date or time-based axes for charts by setting the fundamental time unit used for grouping categories and generating ticks, enabling precise scale adjustments, label placement, and date range segmentation; options include configuring the base time step like seconds, minutes, hours, days, weeks, or months to influence how data points are clustered and displayed along the timeline, affecting visual resolution, axis scaling, and overall chart readability in temporal data visualizations.
+</div>
 
 #### Example
 
@@ -15625,6 +17745,11 @@ that the total number of categories does not exceed [categoryAxis.maxDateGroups]
 
 This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
+
+<div class="meta-api-description">
+Adjust and configure the interval or step size between category axis base units in time series or stock charts to control how data points are grouped or spaced, specifying either a fixed numeric step or automatic adjustment that dynamically chooses step increments to limit the total displayed categories according to maximum allowed groups. This feature is useful for customizing or fine-tuning category granularity, compressing or expanding category intervals, managing date or time grouping density, and optimizing axis labeling to improve readability in visualizations with temporal or categorical data. It applies when grouping dates or periods along the horizontal axis unless overridden by automatic fitting settings that determine base units automatically, making it ideal for developers seeking precise control over category intervals, axis scaling, label distribution, or time interval segmentation in financial or stock market charting components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15652,6 +17777,11 @@ This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/sto
 Culture to use for formatting the dates. See [Globalization](/framework/globalization/overview) for more information.
 It defaults to the global culture.
 
+
+<div class="meta-api-description">
+Set or customize date and time formatting on chart axis labels by specifying locale, language, regional settings, cultural formatting, or internationalization options that affect how dates appear on time-series or stock chart category axes. Control or configure localized date display, cultural conventions, calendar formats, and language-sensitive date strings for axis labels to match user preferences or application globalization requirements, ensuring correct month, day, year, and time formats on chart categories aligned with specific cultural or regional norms.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15678,6 +17808,11 @@ It defaults to the global culture.
 ### categoryAxis.labels.dateFormats `Object`
 
 Date format strings
+
+
+<div class="meta-api-description">
+Set and customize date and time display formats on the category axis of stock charts by specifying patterns for various time units such as days, months, quarters, and years, enabling control over how dates appear as labels in timeline or financial data visualizations. Configure date formatting to ensure readable, localized, or custom date strings on axis labels, supporting flexible date representations across different granularities and timeframes, ideal for adjusting the display of temporal data points on charts. Adjust and format the timeline axis labels dynamically to handle various date formats for improved clarity and user-friendly interpretation of date-based axis markings.
+</div>
 
 #### Example
 
@@ -15735,6 +17870,11 @@ By default, the minimum date is the same as the last category.
 This is often used in combination with the **min** and **roundToBaseUnit** configuration options to
 set up a fixed date range.
 
+
+<div class="meta-api-description">
+Control and configure the visible endpoint of the time or date range on the chart's horizontal axis by setting the maximum date or timestamp displayed, effectively clamping the axis bounds to a specific upper limit. Enable or adjust the last shown category value to fix the chart's time span, restrict scrolling or zooming beyond this end date, and define the chart’s visible window boundaries. Combine with minimum date settings or base unit rounding to set precise fixed ranges for time series data, timeline views, or stock price charts, ensuring consistent date range display and preventing the axis from extending beyond a chosen final date or period. This is essential for customizing time axis limits, controlling date visibility, and managing the end of temporal data presentation on stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15763,6 +17903,11 @@ By default, the minimum date is the same as the first category.
 This is often used in combination with the **max** and **roundToBaseUnit** configuration options to
 set up a fixed date range.
 
+
+<div class="meta-api-description">
+Set or control the starting date boundary, earliest date, or minimum time shown on a stock chart’s horizontal axis to fix the left limit of the displayed date range, enabling you to configure, lock, or initialize the timeline view with a specific earliest timestamp or period; this setting works alongside maximum date bounds and rounding options to establish or restrict a fixed chronological range, handle date range zooming, panning, and initial viewport configurations, and manage how far back in time data points or categories appear on the chart axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15790,6 +17935,11 @@ By default, the first and last dates will be rounded off to the nearest base uni
 Specifying **false** for this option will disable this behavior.
 
 This option is most useful in combination with explicit **min** and **max** dates.
+
+
+<div class="meta-api-description">
+Adjust and configure the category axis date rounding to control whether the axis endpoints align by snapping the first and last category dates to the nearest base unit, such as days, months, or years. Enable or disable automatic rounding of axis boundaries to ensure precise date range display, especially when setting explicit minimum and maximum date values or customizing timeline scales. Manage date axis alignment and granularity by choosing whether to round category axis start and end points, improving chart accuracy, zooming behavior, and axis scaling for stock or time-series data visualizations.
+</div>
 
 #### Example
 
@@ -15829,6 +17979,11 @@ Use the *kendo.days* constants to specify the day by name.
 * kendo.days.Friday (5)
 * kendo.days.Saturday (6)
 
+
+<div class="meta-api-description">
+Set or configure the starting day of the week for chart time scales to control how weekly data is grouped, displayed, and labeled on the horizontal axis, enabling customization of weekly intervals, tick marks, and date labels in time series charts with options to specify any day as the week start, such as Sunday, Monday, or other weekdays, affecting the aggregation and visualization of weekly units, ensuring correct alignment of data points and user-defined calendar conventions in stock, financial, or time-based charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15860,6 +18015,11 @@ This option is ignored in all other cases.
 
 The default value is approximately equal to `[widget width, px] / 30`
 
+
+<div class="meta-api-description">
+Control and limit the maximum number of date or time-based category groups displayed on a stock chart when adaptive time grouping is enabled, especially useful for managing how many intervals or bins appear in timelines with dynamic grouping like automatic or fitting base units; this setting caps the count of categories generated during responsive or automatic step sizing, preventing overcrowding or excessive granularity in time axis labels or data grouping, and is typically proportional to chart width in pixels divided by a constant to balance clarity and detail in time series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15884,6 +18044,11 @@ The default value is approximately equal to `[widget width, px] / 30`
 ### categoryAxis.maxDivisions `Number`
 
 The maximum number of ticks and labels to display.
+
+
+<div class="meta-api-description">
+Adjust the maximum number of ticks, labels, or divisions displayed along the category axis of a stock chart to limit clutter, control axis label density, customize axis intervals, set a cap on the number of visible tick marks, manage axis granularity, configure how many category axis markers are shown, restrict or enable fewer axis labels for clearer visuals, and tune axis division counts for better readability or data presentation.
+</div>
 
 #### Example
 
@@ -15914,6 +18079,11 @@ The maximum number of ticks and labels to display.
 
 The visibility of the axis.
 
+
+<div class="meta-api-description">
+Control the display and visibility of the horizontal or category axis in a stock or financial chart by enabling or disabling its line, labels, tick marks, and grid lines. Adjust or toggle the presence of the axis to customize chart appearance, manage layout spacing, show or hide category data markers, and configure how categorical time intervals or labels are presented alongside price movements. This setting affects whether the category axis elements are rendered, helping to optimize visual clarity, reduce clutter, or emphasize other chart components in stock or timeline-based data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15936,6 +18106,11 @@ The visibility of the axis.
 ### categoryAxis.crosshair `Object`
 
 The crosshair configuration options.
+
+
+<div class="meta-api-description">
+Enable or disable a tracking vertical line along the category axis in stock charts to highlight and follow data points interactively, customize its appearance including color, thickness, dash style, control snapping behavior to align precisely with categories or data points, and configure tooltip interaction for enhanced data readability on hover or touch. Adjust visual styles and visibility to emphasize or simplify the crosshair overlay on time or categorical axes, supporting intuitive exploration, data tracking, and focused analysis in financial or stock market visualizations.
+</div>
 
 #### Example
 
@@ -15964,6 +18139,11 @@ The crosshair configuration options.
 
 The color of the crosshair.
 
+
+<div class="meta-api-description">
+Customize the color of the stock chart’s category axis crosshair line or marker to enhance visibility, contrast, and readability when hovering or inspecting data points; set or configure the highlight, outline, or stroke color using any standard CSS color format such as hex, RGB, or named colors to control the appearance of the focus indicator, tooltip alignment, or data inspection guides along the horizontal time or category axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -15989,6 +18169,11 @@ The color of the crosshair.
 ### categoryAxis.crosshair.width `Number`
 
 The width of the crosshair.
+
+
+<div class="meta-api-description">
+Adjust the thickness, stroke width, or line weight of the vertical or horizontal crosshair line on the category axis in a stock or financial chart to customize its visibility, prominence, or emphasis. Configure, set, or control the pixel size or numeric value defining how thick or thin the axis crosshair appears when enabled, enhancing clarity or subtlety in chart interaction and data point tracking along the category axis timeline or labels.
+</div>
 
 #### Example
 
@@ -16016,6 +18201,11 @@ The width of the crosshair.
 
 The opacity of the crosshair.
 
+
+<div class="meta-api-description">
+Adjust or configure the transparency level, translucency, or opacity of the vertical or horizontal crosshair line or overlay used on the category axis of stock or financial charts, enabling fine control over visual emphasis, clarity, and user focus by making the crosshair more or less visible, faint, subtle, or prominent during interactions, hover, or cursor tracking in time, date, or category-based axis representations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -16041,6 +18231,11 @@ The opacity of the crosshair.
 ### categoryAxis.crosshair.dashType `Number`
 
 The dash type of the crosshair.
+
+
+<div class="meta-api-description">
+Set or customize the pattern and style of the crosshair line on the category axis of stock or financial charts, including options to enable dashed, dotted, solid, or various stroke dash types for improved visual distinction, crosshair line rendering, axis highlighting, and enhanced data point tracking along the horizontal axis. Adjust, configure, or control the dash style of the crosshair to match chart theming, improve readability of the crosshair indicator, or implement specific stroke patterns for stock chart category axis overlays and interactive data exploration.
+</div>
 
 #### Example
 
@@ -16068,6 +18263,11 @@ The dash type of the crosshair.
 
 The dash type of the crosshair.
 
+
+<div class="meta-api-description">
+Control the visibility of the category axis crosshair line on financial or stock charts to enable precise tracking of data points and values, configure showing or hiding the crosshair overlay for improved readability and detailed inspection, adjust whether the crosshair indicator along the horizontal or category axis is active during chart interaction, set crosshair presence to enhance user focus on specific categories or time intervals, toggle the crosshair’s display to help users highlight, compare, or analyze exact values within stock, time series, or category-based charts, and customize the appearance and behavior of the crosshair marker for clearer visual guidance on category axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -16092,6 +18292,11 @@ The dash type of the crosshair.
 ### categoryAxis.crosshair.tooltip `Object`
 
 The crosshair tooltip configuration options.
+
+
+<div class="meta-api-description">
+Configure and customize the interactive tooltip displayed on the category axis crosshair of financial or stock charts, including options to enable or disable the tooltip, set its visibility, control content and text formatting, apply custom templates, and adjust visual styling such as colors, borders, fonts, and layout. Enable detailed or minimal hover tooltips for stock chart category axes, customize tooltip display formats, style appearance to fit UI themes, and manage crosshair tooltip behavior and content to enhance user interaction and data readability on axis hover events.
+</div>
 
 #### Example
 
@@ -16121,6 +18326,11 @@ The crosshair tooltip configuration options.
 ### categoryAxis.crosshair.tooltip.background `String`
 
 The background color of the tooltip.
+
+
+<div class="meta-api-description">
+Control and customize the background color of the crosshair tooltip on the category axis in stock charts by specifying any CSS color format such as hex, rgb, rgba, hsl, or named colors to enhance visibility, improve contrast, match theme styling, highlight data points, or adjust the tooltip appearance for better user interaction and readability during crosshair hover.
+</div>
 
 #### Example
 
@@ -16156,6 +18366,11 @@ The background color of the tooltip.
 ### categoryAxis.crosshair.tooltip.border `Object`
 
 The border configuration options.
+
+
+<div class="meta-api-description">
+Adjust and customize the outline, stroke color, thickness, dash style, and border appearance of the category axis crosshair tooltip in financial stock charts, enabling precise control over the tooltip’s visual styling such as border color, line width, dash patterns, and overall framing effects to enhance clarity and match design preferences for crosshair hover indicators on categorical axes.
+</div>
 
 #### Example
 
@@ -16195,6 +18410,11 @@ The border configuration options.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Customize and control the outline color or border shade of the tooltip that appears on the category axis crosshair in stock charts by setting or configuring its color property, enabling users to change, adjust, or style the tooltip’s border appearance for enhanced visibility, design consistency, or UI clarity when hovering or interacting with the chart’s category axis indicator.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -16231,6 +18451,11 @@ The color of the border.
 ### categoryAxis.crosshair.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+
+<div class="meta-api-description">
+Adjust border thickness, width, or size of the category axis crosshair tooltip outline in stock or financial charts, control or configure the pixel value for the border line around crosshair tooltips on category axes, customize or set the numeric border dimension to emphasize or reduce tooltip edge visibility during data crosshair hover interactions on stock charts, modify the thickness of the outline framing tooltips tied to category axis crosshairs to enhance chart readability or visual prominence across financial data points.
+</div>
 
 #### Example
 
@@ -16269,6 +18494,11 @@ The width of the border.
 
 The text color of the tooltip.
 
+
+<div class="meta-api-description">
+Customize or configure the text color of the tooltip displayed on the crosshair label along the category axis in stock charts, enabling control over the foreground color for enhanced readability, styling, branding consistency, or theming of tooltip text when hovering or interacting with the chart's category axis crosshair element.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -16303,6 +18533,11 @@ The text color of the tooltip.
 ### categoryAxis.crosshair.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+
+<div class="meta-api-description">
+Set or customize the font style, size, weight, family, and appearance of the tooltip text that appears alongside the crosshair on the horizontal or category axis in financial or stock charts, enabling control over the crosshair's tooltip typography, including adjusting font properties such as boldness, italics, and pixel size to improve readability, visual consistency, or branding within chart interfaces; useful for configuring tooltip text style during chart initialization or dynamically modifying the crosshair's label text formatting on the category axis to enhance user interaction and data clarity.
+</div>
 
 #### Example
 
@@ -16339,6 +18574,11 @@ The tooltip font.
 
 The tooltip format.
 
+
+<div class="meta-api-description">
+Customize the display format of axis labels within the crosshair tooltip on a stock chart’s category axis by defining specific numeric or date patterns, enabling precise control over how category values appear during interactive data inspection. Adjust, set, or configure formatting strings to present category axis tooltips with tailored date and number representations, ensuring that crosshair feedback matches desired localization, style, or readability preferences in financial or time series charts. This formatting can handle various data types to improve clarity and user experience when hovering over chart categories.
+</div>
+
 #### Example
 
 ```pseudo
@@ -16349,6 +18589,11 @@ The tooltip format.
 ### categoryAxis.crosshair.tooltip.padding `Number|Object`
 
 The padding of the tooltip.
+
+
+<div class="meta-api-description">
+Adjust the spacing inside the crosshair tooltip on the category axis of a StockChart, controlling the distance between the tooltip’s content and its border to customize the tooltip’s layout and visual padding. Configure or set the padding to fine-tune the inner margins, create comfortable spacing around text or data inside the tooltip, enable consistent spacing presentation, or control how close or far the content appears from the edges in crosshair tooltips during chart interactions, enhancing readability and user interface clarity.
+</div>
 
 #### Example
 
@@ -16367,6 +18612,11 @@ The tooltip template.
 Template variables:
 
 *   **value** - the point value (either a number or an object)
+
+
+<div class="meta-api-description">
+Adjust or configure the content display for the crosshair tooltip on the category axis of a stock or financial chart by defining a customizable HTML or string template that formats and presents dynamic data such as point values, data labels, or complex objects. Control how the tooltip shows information related to the category axis intersection when hovering or tracking points, enabling tailored formatting, labeling, or templating of the crosshair popup with variables that represent the data value, whether numeric or structured. This includes setting or customizing crosshair tooltips on stock price charts to display specific content, styles, or layouts based on the underlying data points or series.
+</div>
 
 #### Example
 
@@ -16397,6 +18647,11 @@ Template variables:
 ### categoryAxis.crosshair.tooltip.visible `Boolean`*(default: false)*
 
 A value indicating if the tooltip should be displayed.
+
+
+<div class="meta-api-description">
+Configure the visibility of the interactive crosshair tooltip on the category axis of a stock chart, enabling or disabling the small info popup that appears when hovering or aligning the crosshair with the axis labels, allowing control over whether detailed axis information is shown on mouseover, touch, or pointer events for enhanced data readability or minimal interface clutter, useful for customizing user experience by toggling the display of contextual axis tooltips or suppressing them when a cleaner chart presentation is needed.
+</div>
 
 #### Example
 
@@ -16432,6 +18687,11 @@ A value indicating if the tooltip should be displayed.
 
 The category axis notes configuration.
 
+
+<div class="meta-api-description">
+Add, customize, and control annotations or notes on the category axis of a stock or financial chart by configuring labels, icons, connecting lines, and custom visuals, enabling developers to highlight specific category values, display additional information, or mark significant events on axis categories through flexible note items and rendering callbacks that integrate seamlessly during chart setup for enhanced chart context and interactivity.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -16466,6 +18726,11 @@ The category axis notes configuration.
 ### categoryAxis.notes.position `String`
 
 The position of the category axis note.
+
+
+<div class="meta-api-description">
+Control and configure the placement and alignment of annotations, labels, or notes along the category axis in stock charts, enabling setting positions such as above, below, left, or right relative to the axis to improve clarity, readability, and user interface customization. Adjust note alignment for category axis markers, data highlight labels, or event annotations, supporting placement preferences, layout tuning, and fine-grained control over how and where notes appear in timeline or categorical data visualizations. Customize the positioning of category axis notes for enhanced chart annotation visibility, enabling developers to set note orientation and spatial arrangement to best fit the displayed data context and improve user comprehension of stock price movements or categorical data points.
+</div>
 
 #### Example
 
@@ -16504,6 +18769,11 @@ The position of the category axis note.
 
 The icon of the notes.
 
+
+<div class="meta-api-description">
+Set or customize the visual markers, icons, symbols, or images that appear as annotations or notes on a chart’s category axis, enabling control over their style, appearance, source, template, or design for marking key points, events, or highlights on timeline or categorical data axes in stock charts or similar visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -16540,6 +18810,11 @@ The icon of the notes.
 
 The background color of the notes icon.
 
+
+<div class="meta-api-description">
+Adjust or define the background fill color for icons representing notes on the horizontal or category axis in stock charts, enabling visual customization or highlight of annotation markers, note indicators, or comments on the timeline axis. Configure the fill, background shade, or color behind note icons to enhance visibility, differentiate annotations, or set visual context for markers appearing on the axis category line, including use cases such as highlighting special events, alerts, or data notes in financial or time-series charts.
+</div>
+
 #### Example - set the category axis notes icon background
 
     <div id="chart"></div>
@@ -16562,6 +18837,11 @@ The background color of the notes icon.
 ### categoryAxis.notes.icon.border `Object`
 
 The border of the icon.
+
+
+<div class="meta-api-description">
+Customize and control the outline border of annotation icons on the horizontal or categorical axis of a financial or stock chart, including setting the border color, thickness, style, and visibility to highlight, emphasize, or differentiate note markers or tooltips from other chart elements. This feature lets developers configure the boundary appearance around note icons displayed on the category axis labels or markers, enabling fine-tuning of visual cues for alerts, annotations, or important data points on time-series or categorical charts. Adjust and style the icon edge or frame to match chart themes or improve readability, emphasis, or contrast of notes directly on the axis scale or labels.
+</div>
 
 #### Example - set the category axis notes icon border
 
@@ -16589,6 +18869,11 @@ The border of the icon.
 
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Control and customize the outline color of icons displayed on category axis annotations or notes in stock charts, setting the border color using any valid CSS color format such as hex codes, RGB, RGBA, or named colors to style note markers, highlight or differentiate category axis notes, or configure visual emphasis on chart annotations with customizable icon borders on time series or financial data visualizations.
+</div>
+
 #### Example - set the category axis notes icon border color
 
     <div id="chart"></div>
@@ -16615,6 +18900,11 @@ The border color of the icon.
 
 The border width of the icon.
 
+
+<div class="meta-api-description">
+Control and customize the thickness, size, or width of the border around note icons displayed on the category axis of stock charts, adjusting the pixel value or border weight to enhance visual emphasis or styling for data annotations. Enable setting or modifying the outline thickness of axis note markers, configure how bold or thin the icon edges appear along the horizontal axis labels, and fine-tune border dimensions to improve clarity or highlight important data points on financial charts. Adjust, set, or define the pixel width of the border surrounding annotation icons to suit design preferences or visual hierarchy in stock market axis notes.
+</div>
+
 #### Example - set the category axis notes icon border width
 
     <div id="chart"></div>
@@ -16640,6 +18930,11 @@ The border width of the icon.
 ### categoryAxis.notes.icon.size `Number`
 
 The size of the icon.
+
+
+<div class="meta-api-description">
+Adjust, configure, or set the dimensions and scale of icons representing notes on the category axis of stock charts, including resizing, controlling pixel size, customizing icon width and height for note markers, and managing the visual prominence of annotation symbols along the chart’s horizontal axis where categories are displayed.
+</div>
 
 #### Example - set the category axis notes icon size
 
@@ -16670,6 +18965,11 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+
+<div class="meta-api-description">
+Configure or customize the shape, style, or appearance of markers, icons, or note symbols on a chart’s category axis to visually highlight data points using shapes such as circle, square, triangle, or cross; control the icon form or marker type for annotations, notes, or point indicators on timeline or categorical axes by setting shape options to differentiate, emphasize, or categorize key data events or annotations in stock charts, financial graphs, or time series visualizations.
+</div>
+
 #### Example - set the category axis notes icon shape
 
     <div id="chart"></div>
@@ -16693,6 +18993,11 @@ The supported values are:
 
 The icon visibility.
 
+
+<div class="meta-api-description">
+Control whether the notes icon appears on the category axis of a stock chart, enabling or disabling the visibility of annotation markers associated with category axis notes labels, allowing users to show, hide, toggle, or configure the icon display for contextual hints, data callouts, or informational symbols on the horizontal axis timeline, date categories, or grouped data points in financial charts or stock price visualizations.
+</div>
+
 #### Example - set the category axis notes icon visibility
 
     <div id="chart"></div>
@@ -16715,6 +19020,11 @@ The icon visibility.
 ### categoryAxis.notes.label `Object`
 
 The label of the notes.
+
+
+<div class="meta-api-description">
+Control or customize the text displayed for annotation labels on the category axis of stock or financial charts, enabling setting, editing, or binding custom note label content for axis markers or events, adjusting the descriptive text for category axis notes, enhancing readability, and managing how annotations are presented along the x-axis timeline or category scale in stock data visualizations.
+</div>
 
 #### Example
 
@@ -16751,6 +19061,11 @@ The label of the notes.
 
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjusting the background color for chart axis annotations, configuring note label backdrops to improve visual clarity, setting or customizing the fill color behind category axis notes to enhance contrast and readability, enabling highlight or emphasis on annotations with CSS-compatible color values including hex codes, RGB, and other standard color formats, controlling the visual appearance of labels tied to category axis notes for better distinction on stock or financial charts.
+</div>
+
 #### Example - set the category axis label background
 
     <div id="chart"></div>
@@ -16773,6 +19088,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 ### categoryAxis.notes.label.border `Object`
 
 The border of the label.
+
+
+<div class="meta-api-description">
+Customize the appearance of note labels on the category axis by setting border properties such as color, thickness, and dash style to control the label's outline or stroke around annotations or markers on the chart's category axis. Adjust, style, or configure the edge, frame, or boundary of axis note labels to enhance visibility, design, or theming for financial or stock chart visualizations with options to define solid, dashed, or custom strokes that help highlight, differentiate, or emphasize notes attached to axis categories.
+</div>
 
 #### Example - set the category axis label border
 
@@ -16800,6 +19120,11 @@ The border of the label.
 ### categoryAxis.notes.label.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or customize the border color of axis note labels on stock or financial charts using any valid CSS color format such as hexadecimal codes, RGB, or named colors, allowing control over the visual styling or outline of category axis notes, enabling refined appearance tweaks, label border color settings, and design customization for chart annotations, axis markers, or note highlights in data visualization and interactive charting environments.
+</div>
 
 #### Example - set the category axis label border color
 
@@ -16836,6 +19161,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Configure and customize the border stroke pattern for note labels on a chart’s category axis by setting various dash styles such as solid, dotted lines, dashed lines, long dashes, combinations of dashes and dots including dash-dot, long dash-dot, or long dash-dot-dot patterns, enabling control over the visual appearance, style, and pattern of label borders for enhanced chart readability and presentation in stock or financial charting tools.
+</div>
+
 #### Example - set the category axis label border dash type
 
     <div id="chart"></div>
@@ -16862,6 +19192,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust, configure, or control the pixel width or thickness of the outline or border surrounding category axis note labels in stock charts, enabling emphasis, visibility, or concealment of the label border according to design needs, including setting the border size to zero to remove outlines or increasing pixel width for stronger border prominence.
+</div>
+
 #### Example - set the category axis label border width
 
     <div id="chart"></div>
@@ -16887,6 +19222,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize and configure the text color of labels for annotations or notes along the category axis in stock charts, enabling control over the note label appearance to enhance readability, contrast, branding, or visual differentiation. Adjust, set, or style note label colors using any CSS-compatible color values such as hex codes, RGB, RGBA, HSL, or named colors to match design themes or improve clarity on chart axes, including options for highlighting or dimming annotation text along the categorical timeline or axis categories in financial or data visualization contexts.
+</div>
+
 #### Example - set the category axis label color as a hex string
 
     <div id="chart"></div>
@@ -16909,6 +19249,11 @@ The text color of the label. Accepts a valid CSS color string, including hex and
 ### categoryAxis.notes.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the label.
+
+
+<div class="meta-api-description">
+Configure and customize the typography, style, and appearance of annotation labels on the category axis of stock or financial charts, including setting font family, size, weight, color, and style to control how notes or comments are displayed next to axis categories; enable tailored text styling for axis note markers, modify label fonts for better readability or branding, and adjust font attributes for annotations aligned with stock chart categories or time series axis labels.
+</div>
 
 #### Example - set the chart series label font
 
@@ -16937,6 +19282,11 @@ The fields which can be used in the template are:
 
 * value - the category value
 
+
+<div class="meta-api-description">
+Configure and customize labels for annotations on the category axis of stock charts by defining flexible templates that control how note text is displayed, formatted, or transformed using template syntax. Enable dynamic rendering, HTML injection, conditional formatting, or data binding for each label, allowing the use of category values or other fields to tailor the appearance of axis notes, annotations, or markers in financial or timeline visualizations. Adjust the design, content, and presentation of category axis note labels to suit different data contexts, user interfaces, or display requirements by setting up custom templates that modify or enhance the default text output.
+</div>
+
 #### Example - set the category axis notes label template as a string
 
     <div id="chart"></div>
@@ -16959,6 +19309,11 @@ The fields which can be used in the template are:
 ### categoryAxis.notes.label.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the category notes label. By default the category notes label are visible.
+
+
+<div class="meta-api-description">
+Control the visibility of labels on note annotations along the category axis in stock or time series charts, enabling or disabling the display of category axis note text to customize annotations, show or hide note labels for clearer category axis presentation, toggle note label visibility on axis categories, manage annotation label display on time or date axes, adjust whether notes' text labels appear on the category axis for clarity or decluttering, configure the appearance of axis note labels to enhance chart readability by showing or hiding these labels as needed.
+</div>
 
 #### Example - hide the category axis notes label
 
@@ -16983,6 +19338,11 @@ If set to `true` the chart will display the category notes label. By default the
 
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Adjust the orientation and tilt of axis note labels by setting the rotation angle in degrees to customize label alignment, slant, or angle on the category axis. Configure label rotation to improve readability, avoid overlapping text, and control the direction and degree of label text tilt using positive or negative numeric values. Enable or disable angled labels on axis notes to better fit crowded chart layouts or emphasize specific data points through rotated text formatting.
+</div>
+
 #### Example - rotate the category axis notes label
 
     <div id="chart"></div>
@@ -17005,6 +19365,11 @@ The rotation angle of the label. By default the label are not rotated.
 ### categoryAxis.notes.label.format `String` *(default: "{0}")*
 
 The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+
+<div class="meta-api-description">
+Configure the display format of note labels on the stock chart’s category axis by setting a custom text pattern that can include numeric or date formats, prefixes, suffixes, or any surrounding text, enabling precise control over how category note labels appear visually. This setting supports defining templates with placeholders to customize label content, allowing developers to format data points, append units, add descriptive text, or transform raw category values into readable, context-specific strings on the axis. Optimize label presentation by applying string formatting techniques that adapt labels for financial dates, numerical values, annotations, or other category-specific notes with tailored text, symbols, or markers.
+</div>
 
 #### Example - set the category axis notes label format
 
@@ -17031,6 +19396,11 @@ The position of the labels.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+
+<div class="meta-api-description">
+Adjust or configure the placement of annotation labels on the category axis in stock or financial charts, controlling whether note labels appear inside the note marker icon or outside it near the category axis line; set position options to align labels relative to markers for customization of chart annotations, notes, or callouts on the horizontal axis in time series, stock data visualization, or categorical data charts, enabling precise label positioning to improve readability, clarity, and visual integration with chart markers or notes.
+</div>
 
 #### Example
 
@@ -17065,6 +19435,11 @@ The position of the labels.
 ### categoryAxis.notes.line `Object`
 
 The line of the notes.
+
+
+<div class="meta-api-description">
+Customize and control the style of connector lines linking notes to category axis labels in stock charts, including setting line color, thickness, dash patterns, stroke styles, and visual appearance for annotations or markers on the horizontal axis. Enable adjustments to note connector lines on categorical timelines, configure styling options for clarity and emphasis of category-axis notes, and tailor line attributes for enhanced readability or thematic consistency in financial or stock market visualizations.
+</div>
 
 #### Example
 
@@ -17101,6 +19476,11 @@ The line of the notes.
 
 The line width of the notes.
 
+
+<div class="meta-api-description">
+Adjust or customize the thickness, stroke width, or line weight of note connectors and borders on the category axis in stock charts, allowing you to set, configure, or control how bold or thin the lines appear around annotation notes, markers, or callouts. Modify the dimension, size, or pixel value of note lines to enhance visibility, style, or emphasis in chart category axes, including scaling line thickness for clarity or design consistency in financial or stock data visualizations.
+</div>
+
 #### Example - set the category axis notes line width
 
     <div id="chart"></div>
@@ -17123,6 +19503,11 @@ The line width of the notes.
 ### categoryAxis.notes.line.color `String`
 
 The line color of the notes.
+
+
+<div class="meta-api-description">
+Customize, set, or configure the color of lines connecting notes or annotations on the category axis of stock charts, enabling you to highlight, differentiate, or visually organize note indicators, connectors, or markers for improved clarity in chart timelines, axis labeling, and data point annotations. Adjust the line appearance, tint, shade, or hue of note connectors to enhance visual distinction, emphasize specific categories, or tailor the chart axis notes' styling according to design or thematic requirements.
+</div>
 
 #### Example - set the category axis notes color width
 
@@ -17147,6 +19532,11 @@ The line color of the notes.
 
 The length of the connecting lines in pixels.
 
+
+<div class="meta-api-description">
+Adjust or configure the length of connecting lines for notes on category axes in stock charts by specifying pixel distance, controlling how far note connectors extend from axis labels or data points, setting or modifying line extension length for annotation connectors in charts, defining or customizing connector line size between axis categories and notes, enabling precise control over note line reach or connector length in financial or time-based chart visualizations, setting numeric pixel values to extend or shorten annotation link lines on the category axis, managing connection distances for labels and notes in stock or financial axis charts, fine-tuning or controlling the spatial length of note connector lines to improve chart clarity and readability.
+</div>
+
 #### Example - set the category axis notes color width
 
     <div id="chart"></div>
@@ -17169,6 +19559,11 @@ The length of the connecting lines in pixels.
 ### categoryAxis.notes.data `Array`
 
 The items of the notes.
+
+
+<div class="meta-api-description">
+Provide, set, or configure an array or collection of annotation notes, markers, labels, comments, or custom entries specifically linked to the category axis in stock or financial charts. Enable adding, managing, customizing, or controlling individual note items, callouts, or highlights along the horizontal or categorical axis to display contextual information, alerts, or metadata related to category points or time intervals. Define notes during chart setup or initialization to embed extra descriptive data tied to category axis values, timestamps, or labels, allowing enhanced axis annotations and user guidance in stock market, timeline, or series visualizations.
+</div>
 
 #### Example
 
@@ -17204,6 +19599,11 @@ The items of the notes.
 ### categoryAxis.notes.data.value `Object`
 
 The value of the note.
+
+
+<div class="meta-api-description">
+Control or specify the content, text, label, or annotation displayed for an individual data point or item's note on a categorical axis within a stock chart, enabling customization, setting, or retrieving of the note's value tied to the category axis. Adjust or configure the note content for specific data entries, manage annotations by setting numerical or textual values linked to category axis markers, customize callouts or labels on stock chart categories, and manipulate the displayed information for highlighting, tooltips, or data point notes within category-based chart axes.
+</div>
 
 #### Example
 
@@ -17243,6 +19643,11 @@ The position of the category axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+
+<div class="meta-api-description">
+Adjust or set the placement, alignment, or location of annotations, labels, or data notes in relation to the horizontal category axis on stock or financial charts, enabling positioning options such as top, bottom, left, or right to control where informational markers appear along the time or category scale, useful for customizing chart visuals, highlighting specific data points, and improving readability by configuring note orientation and side relative to the category axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -17276,6 +19681,11 @@ The position of the category axis note.
 ### categoryAxis.notes.data.icon `Object`
 
 The icon of the note.
+
+
+<div class="meta-api-description">
+Control, customize, or set the visual symbol, marker, or icon displayed for annotation notes attached to data points on a stock chart’s category axis, enabling configuration of the specific image, glyph, or graphic used to represent note indicators in chart data annotations, including the ability to change, replace, or style the note symbols shown along the horizontal axis for highlighting, labeling, or marking particular category axis values within financial or time series charts.
+</div>
 
 #### Example
 
@@ -17314,6 +19724,11 @@ The icon of the note.
 
 The background color of the note icon.
 
+
+<div class="meta-api-description">
+Set or modify the background color of data note icons on the category axis of stock charts to customize their appearance, control icon visuals for axis data annotations, change note marker backgrounds, adjust colors for clarity or emphasis in data notes, configure axis note indicators’ background hues, enhance note visibility with color settings, style the note icon backgrounds on category axes, and apply specific color values to highlight or differentiate data notes on the stock chart axis.
+</div>
+
 #### Example - set the category axis note icon background
 
     <div id="chart"></div>
@@ -17338,6 +19753,11 @@ The background color of the note icon.
 ### categoryAxis.notes.data.icon.border `Object`
 
 The border of the icon.
+
+
+<div class="meta-api-description">
+Customize and control the border styling, color, thickness, and appearance of data note icons displayed on the category axis in stock or financial charts, enabling developers to set, configure, enable, or adjust the outline or frame of these annotation icons for clear visualization and emphasis in time-series or categorical axis charts.
+</div>
 
 #### Example - set the category axis note icon border
 
@@ -17367,6 +19787,11 @@ The border of the icon.
 
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Adjust the outline color of note icons displayed on the category axis in stock charts, enabling customization of the icon border to highlight, differentiate, or style note markers using any CSS-compatible color format such as hexadecimal, RGB, RGBA, or standard color names. This setting helps control visual emphasis, improve readability, and tailor chart annotations by configuring the note icon’s border hue, stroke, or frame color on the axis data points for enhanced clarity and distinction.
+</div>
+
 #### Example - set the category axis note icon border color
 
     <div id="chart"></div>
@@ -17395,6 +19820,11 @@ The border color of the icon.
 
 The border width of the icon.
 
+
+<div class="meta-api-description">
+Adjust or set the thickness, size, or width of the outline or border surrounding note icons on the category axis of a stock chart, controlling how prominent, visible, or bold the icon’s edge appears. Enable customization of note icon outlines for improved visual clarity, fine-tune border thickness for data annotation markers on the axis, and configure the stroke width or line weight of category axis note icons to achieve preferred styling, highlight notes effectively, or match specific chart design requirements.
+</div>
+
 #### Example - set the category axis note icon border width
 
     <div id="chart"></div>
@@ -17422,6 +19852,11 @@ The border width of the icon.
 ### categoryAxis.notes.data.icon.size `Number`
 
 The size of the icon.
+
+
+<div class="meta-api-description">
+Adjust the size, scale, dimension, or pixel value of data note icons displayed on the category axis of stock or financial charts, allowing fine-tuning of the visual markers for data points, customizing icon appearance for better readability, clarity, or emphasis in chart annotations, and controlling how large or small note icons appear on time-series or categorical axes in stock graph visualizations.
+</div>
 
 #### Example - set the category axis note icon size
 
@@ -17454,6 +19889,11 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+
+<div class="meta-api-description">
+Set or customize the shape, style, and geometry of annotation markers or note icons on the category axis of stock charts by choosing among various marker types such as circle, square, triangle, or cross; configure the visual representation of data point notes to improve chart readability, differentiate data highlights, or tailor the appearance of axis annotations with distinct icon shapes.
+</div>
+
 #### Example - set the category axis note icon shape
 
     <div id="chart"></div>
@@ -17479,6 +19919,11 @@ The supported values are:
 
 The icon visibility.
 
+
+<div class="meta-api-description">
+Control the display, visibility, or toggling of note icons or markers on category axis data points in stock charts, enabling or disabling the rendering and showing or hiding of small icons, symbols, or indicators attached to axis notes or annotations for clearer visualization and customization of chart annotations, data labeling, or highlighting specific data points along the category axis in financial or stock charting components.
+</div>
+
 #### Example - set the category axis note icon visibility
 
     <div id="chart"></div>
@@ -17503,6 +19948,11 @@ The icon visibility.
 ### categoryAxis.notes.data.label `Object`
 
 The label of the note.
+
+
+<div class="meta-api-description">
+Configure or customize the text content displayed as data labels on category axis annotations within financial charts, enabling setting, editing, or controlling the descriptive or metadata text shown next to category-specific notes or markers along the time or categorical X-axis. This covers use cases like labeling, highlighting, annotating, or adding informational text for category axis notes in stock or financial visualization components, supporting diverse phrasing such as defining note labels, setting annotation texts, or adjusting category axis note descriptions in chart setups.
+</div>
 
 #### Example
 
@@ -17542,6 +19992,11 @@ The label of the note.
 
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust the background color or fill of data labels on a category axis in stock or financial charts to enhance readability, improve contrast against chart lines, series, or axes, customize label styling with any CSS-compatible color format like hex codes or RGB values, and control visual clarity of note annotations within timeline or categorical axis displays on financial plotting components or stock price trend charts.
+</div>
+
 #### Example - set the category axis note label background
 
     <div id="chart"></div>
@@ -17566,6 +20021,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 ### categoryAxis.notes.data.label.border `Object`
 
 The border of the label.
+
+
+<div class="meta-api-description">
+Adjust and customize the label border appearance for annotations or notes on the category axis of a stock chart by setting visual border properties such as color, thickness, style, and dash patterns, enabling control over label outlines for enhanced chart readability, consistent annotation styling, personalized design, and precise visual emphasis on axis markers or highlighted data points in time series or categorical financial charts.
+</div>
 
 #### Example - set the category axis note label border
 
@@ -17595,6 +20055,11 @@ The border of the label.
 ### categoryAxis.notes.data.label.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Customize and control the border color of data note labels displayed on the category axis in stock charts by specifying any valid CSS color format such as hexadecimal codes, RGB, RGBA, or named color values; adjust, configure, or set the outline hue of annotation labels along the horizontal axis to enhance visual clarity or match design themes during chart setup and initialization.
+</div>
 
 #### Example - set the category axis note label border color
 
@@ -17633,6 +20098,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Control and customize the stroke style of borders around category axis note data labels in stock charts by selecting from various line patterns such as solid, dashed, dotted, dash-dot combinations, long dashes, and mixed long-dash-dot-dot styles. Configure, set, or enable different border dash types to achieve specific visual effects or highlight annotations with flexible stroke patterns including solid lines, dash sequences, dot sequences, and complex repeating dash-dot arrangements. Adjust the border appearance for note labels on chart axes to meet design preferences or clear visual delineation requirements using customizable border dash styles.
+</div>
+
 #### Example - set the category axis note label border dash type
 
     <div id="chart"></div>
@@ -17661,6 +20131,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust the thickness or pixel width of the border around data labels for notes displayed on the category axis in stock or financial charts, enabling control over how prominently the label outlines appear or disabling borders by setting the border width to zero; useful for configuring label visibility, styling note annotations, customizing axis label borders, or setting precise pixel measurements for label outlines in chart visualizations.
+</div>
+
 #### Example - set the category axis note label border width
 
     <div id="chart"></div>
@@ -17688,6 +20163,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the note label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or customize the text color of note labels on the category axis in stock charts by specifying CSS color values such as hex codes, RGB, or named colors. Control and configure label text styling for annotations or data point notes on the category axis to enhance readability, match design themes, or improve visual contrast. Enable setting dynamic or static colors for note label text on the axis to emphasize, highlight, or differentiate notes within time series or categorical data displays on financial or stock market charts.
+</div>
+
 #### Example - set the category axis note label color as a hex string
 
     <div id="chart"></div>
@@ -17712,6 +20192,11 @@ The text color of the note label. Accepts a valid CSS color string, including he
 ### categoryAxis.notes.data.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the note label.
+
+
+<div class="meta-api-description">
+Adjust and customize the typography, font style, font family, font size, font weight, font style, and other text formatting options specifically for data note labels displayed on the category axis of stock charts, enabling control over how note labels appear, including configuring font settings during chart setup to enhance readability, style, and visual emphasis of axis annotations, labels, and notes related to stock data on time or category axes.
+</div>
 
 #### Example - set the category axis note label font
 
@@ -17742,6 +20227,11 @@ The fields which can be used in the template are:
 
 * value - the category value
 
+
+<div class="meta-api-description">
+Customize or format data labels on the category axis notes in stock charts using templates that support dynamic HTML rendering, binding the category values to display tailored information, configure or build custom note labels with flexible template options, control label appearance by injecting formatted content for each category axis annotation, enable personalized annotations or data-driven labels linked to category data for enhanced chart readability.
+</div>
+
 #### Example - set the category axis note label template as a string
 
     <div id="chart"></div>
@@ -17766,6 +20256,11 @@ The fields which can be used in the template are:
 ### categoryAxis.notes.data.label.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the category notes label. By default the category notes label are visible.
+
+
+<div class="meta-api-description">
+Configure the visibility of data point labels on the category axis of a stock chart to show or hide annotations, toggling display of category axis note labels for enhanced readability or cleaner visuals, enabling users to set whether descriptive notes appear alongside data points on the horizontal axis, controlling label presence to highlight or suppress category annotations in financial time series charts, managing visibility settings to display or conceal textual tags linked to specific data entries within the chart’s category axis.
+</div>
 
 #### Example - hide the category axis note label
 
@@ -17792,6 +20287,11 @@ If set to `true` the chart will display the category notes label. By default the
 
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Adjust, configure, or control the angle of rotation for data note labels along the category axis in stock charts to improve label orientation, tilt text for better readability, prevent overlap, customize label alignment, or enhance visual presentation. Enable rotation of category axis annotations or notes to set label angles dynamically, specify degrees of tilt, slant text labels for clarity, and manage label positioning in financial or stock market chart visualizations. This setting helps developers apply label rotation, set angular orientation, or modify the display of category axis notes for optimized chart annotation visibility.
+</div>
+
 #### Example - rotate the category axis note label
 
     <div id="chart"></div>
@@ -17817,6 +20317,11 @@ The rotation angle of the label. By default the label are not rotated.
 
 The format used to display the note label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
 
+
+<div class="meta-api-description">
+Control and customize the appearance and text formatting of note labels on the category axis of stock charts, enabling configuration of label display with placeholders for category values using numeric, date, or custom formatting patterns; set how note annotations appear with flexible formatting options, apply kendo.format-style templates incorporating "{0}" as a dynamic placeholder for the category data, and enable presentation of note labels in various styles including dates, numbers, or specialized custom masks for clear, precise axis annotations.
+</div>
+
 #### Example - set the category axis note label format
 
     <div id="chart"></div>
@@ -17841,6 +20346,11 @@ The format used to display the note label. Uses [kendo.format](/api/framework/ke
 ### categoryAxis.notes.data.label.text `String`
 
 The label note text.
+
+
+<div class="meta-api-description">
+Configure or customize the text displayed for annotation labels on the category axis of a stock or financial chart, enabling setting, editing, or controlling the exact wording for data point notes, comments, or markers shown alongside the axis categories, including adjusting labels for notes tied to specific data items to improve clarity, highlight important values, and tailor axis annotations to user-defined strings or descriptions.
+</div>
 
 #### Example - set the category axis label note text
 
@@ -17869,6 +20379,11 @@ The position of the category axis note label.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+
+<div class="meta-api-description">
+Control and customize the placement of labels associated with notes on the category axis of a stock chart, enabling adjustments of note label alignment relative to the note marker or icon, such as positioning text inside or outside the icon area, configuring label placement for clarity, readability, and visual preference during chart initialization or rendering, allowing developers to set label location precisely for annotations and notes along the categorical data axis in financial or time series visualizations.
+</div>
 
 #### Example
 
@@ -17903,6 +20418,11 @@ The position of the category axis note label.
 ### categoryAxis.notes.data.line `Object`
 
 The line of the note.
+
+
+<div class="meta-api-description">
+Customize and configure the appearance of lines connecting data notes to the category axis on stock charts by setting properties such as color, width, dash style, visibility, and style options for note connectors, enabling precise control over annotation visuals, line styling, connector designs, and axis note presentation for enhanced chart readability and design consistency.
+</div>
 
 #### Example
 
@@ -17939,6 +20459,11 @@ The line of the note.
 
 The line width of the note.
 
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of annotation lines on chart categories, control how bold or thin the lines connecting data points or notes appear, configure line weight for data markers, set numeric values to increase or decrease the width of lines highlighting specific data annotations, customize line thickness for notes or callouts on time series or categorical axes, enable fine-tuning of visual emphasis on notes by changing their connecting line size, manipulate the line width to enhance clarity or subtlety of chart note indicators, define precise line dimensions for annotation connectors on stock or financial charts, modify boundary lines of note highlights to suit visual style or readability preferences.
+</div>
+
 #### Example - set the category axis note line width
 
     <div id="chart"></div>
@@ -17963,6 +20488,11 @@ The line width of the note.
 ### categoryAxis.notes.data.line.color `String`
 
 The line color of the note.
+
+
+<div class="meta-api-description">
+Adjust or customize the color of annotation lines, connectors, or note indicators on the category axis in stock charts, enabling developers to set colors using any CSS-compatible format such as hex codes, RGB, RGBA, HSL, or standard named colors for precise styling of note lines and visual differentiation in chart annotations.
+</div>
 
 #### Example - set the category axis note color width
 
@@ -17989,6 +20519,11 @@ The line color of the note.
 
 The length of the connecting lines in pixels.
 
+
+<div class="meta-api-description">
+Adjust or configure the pixel length of connector lines linking data notes to category axis points in stock charts, controlling the spacing or distance between annotations and their corresponding axis positions. Customize, set, or modify the length of leader lines for chart data notes to enhance readability, improve note alignment, or visually separate notes from axis labels by increasing or decreasing the connector line pixel size on the category axis. Manage, control, or fine-tune the line length that ties data callouts or annotations to specific axis categories, ensuring clarity and precise placement in financial or stock chart visualizations.
+</div>
+
 #### Example - set the category axis note color width
 
     <div id="chart"></div>
@@ -18014,6 +20549,11 @@ The length of the connecting lines in pixels.
 
 The chart area configuration options.
 This is the entire visible area of the chart.
+
+
+<div class="meta-api-description">
+Set and adjust the visible drawing region of stock price visualizations by configuring dimensions like width and height, controlling background colors and styles, managing spacing with margins and paddings, and customizing border appearance including thickness and color to tailor the overall layout and presentation of financial charts. Enable detailed control over how the chart’s main display area appears to suit different screen sizes, themes, and design requirements, ensuring the plotting area is properly sized and styled for optimal readability and user interface integration. Control or customize the canvas or container region where stock data lines, candlesticks, or indicators render, allowing developers to define the exact visual boundaries and aesthetics of the chart’s display area during rendering or initialization phases. Adjust layout constraints and visual properties of the chart’s main content zone to influence how stock market data is framed, background shading options, border styling, and spacing around the chart, enabling responsive or adaptive chart design for dashboards and trading apps.
+</div>
 
 #### Example
 
@@ -18046,6 +20586,11 @@ This is the entire visible area of the chart.
 
 The background color of the chart area.
 
+
+<div class="meta-api-description">
+Adjust or configure the background fill color behind the chart's main area, enabling customization of the visual canvas beneath data series and axis elements using color formats like hex codes, RGB, RGBA, or named CSS colors to enhance theme consistency, improve readability, or tailor the chart’s appearance to specific design needs and contrast requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18074,6 +20619,11 @@ The background color of the chart area.
 ### chartArea.opacity `Number`*(default: 1)*
 
 The background opacity of the chart area.
+
+
+<div class="meta-api-description">
+Adjust the transparency level, alpha value, or opacity of the chart background to blend with user interface themes, highlight or de-emphasize the chart area, customize visual appearance, set translucency for better layering or overlay effects, and control how see-through the stock chart’s plotting region appears to improve readability or design consistency across dashboards and data visualizations.
+</div>
 
 #### Example
 
@@ -18104,6 +20654,11 @@ The background opacity of the chart area.
 ### chartArea.border `Object`
 
 The border of the chart area.
+
+
+<div class="meta-api-description">
+Configure and customize the visible border surrounding the chart area in financial or stock visualization components, enabling control over border color, thickness, line style, and appearance to highlight or subtly separate the plotting region. Adjust border settings during chart initialization to emphasize boundaries, create visual distinction between chart elements, or modify aesthetic styling including solid, dashed, or dotted outlines, ensuring precise control over the edge framing of stock charts or time series visualizations. This feature supports fine-tuning the chart area’s perimeter for enhanced readability, layout balance, and customization of chart display boundaries.
+</div>
 
 #### Example
 
@@ -18138,6 +20693,11 @@ The border of the chart area.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Customize and control the outline color surrounding the chart area using any standard CSS color format like hex codes, RGB, RGBA, or named colors to clearly define or highlight the chart boundary, adjust visual styling, set border hues dynamically for themes or states, and ensure the chart area stands out or blends seamlessly within dashboards and interfaces by configuring the border color precisely.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18169,6 +20729,11 @@ The color of the border.
 ### chartArea.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure and control the outline style of chart area borders by setting dash patterns such as solid lines, dashed streaks, dotted strokes, or custom dash patterns, enabling developers to customize border styles, border stroke types, chart area edge designs, and visual border effects for financial or stock charts. Adjust border dash types to specify how the chart boundary lines appear, controlling the visual separation and emphasis of the chart region with options for various dash styles and stroke configurations during chart setup or rendering.
+</div>
 
 #### *"solid"*
 
@@ -18231,6 +20796,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or width of the outline or border surrounding a stock chart’s chart area by setting the numeric value for the border thickness, enabling control over how bold, subtle, or prominent the chart’s edge appears. Configure, control, customize, or set the line weight or border size around the stock chart plot area to highlight, frame, or visually separate the chart content, affecting the overall chart appearance and styling. This property is relevant for users who want to modify or style the chart’s boundary line thickness to improve visibility, formatting, or aesthetic presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18263,6 +20833,11 @@ The width of the border.
 
 The height of the chart area.
 
+
+<div class="meta-api-description">
+Set, configure, or adjust the vertical height of the chart plotting area to control layout spacing, chart rendering size, and display proportions within the container, enabling customization of the visible plot region’s tallness for stock or financial charts, and managing how the chart scales during initialization or dynamic resizing.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18292,6 +20867,11 @@ The height of the chart area.
 
 The margin of the chart area.
 
+
+<div class="meta-api-description">
+Set or configure the spacing, padding, or gaps around the chart area in stock charts by adjusting margins on all sides including top, right, bottom, and left; control layout, positioning, and visual separation between the chart content and its edges by specifying uniform numeric values or custom objects with individual side settings, enabling fine-tuning of chart boundaries, buffer zones, white space, or inset areas to optimize appearance, alignment, and plot placement within the stock visualization.
+</div>
+
 #### Example
 
 ```pseudo
@@ -18306,6 +20886,11 @@ The margin of the chart area.
 ### chartArea.width `Number`*(default: 600)*
 
  The width of the chart area.
+
+
+<div class="meta-api-description">
+Adjust or configure the horizontal size, width, or dimensions of the stock chart’s plotting area, chart region, or drawing space to control layout, align the chart with other UI components, resize the visible data area, or customize the display width for responsive design and precise visual arrangement within dashboards, trading platforms, or data visualization interfaces.
+</div>
 
 #### Example
 
@@ -18335,6 +20920,11 @@ The margin of the chart area.
 ### dataSource `Object`
 
 DataSource configuration or instance.
+
+
+<div class="meta-api-description">
+Set or configure the data input for a stock or financial chart by binding data arrays, remote API endpoints, or data source objects that support dynamic loading, querying, filtering, and real-time update tracking, enabling seamless integration of local datasets or server responses to populate and refresh chart series data automatically for stock market visualization or time-series analysis.
+</div>
 
 #### Example
 
@@ -18375,6 +20965,11 @@ DataSource configuration or instance.
 
 Indicates whether the chart will call read on the data source initially.
 
+
+<div class="meta-api-description">
+Configure automatic data loading on initialization for stock chart components by enabling or disabling immediate data fetch from the data source when the chart is created, controlling whether the chart auto-loads data or waits for manual data binding or explicit read commands, setting initial data retrieval behavior, managing data source read invocation automatically or programmatically, and adjusting whether data is fetched instantly upon rendering or deferred until triggered by the developer.
+</div>
+
 #### Example
 
 ```pseudo
@@ -18390,6 +20985,11 @@ Indicates whether the chart will call read on the data source initially.
 ### legend `Object`
 
 The chart legend configuration options.
+
+
+<div class="meta-api-description">
+Control and customize chart series identification and management including toggling series visibility by clicking legend items, adjusting legend placement such as position and orientation, configuring layout styles and label formatting, setting markers and custom item templates, enabling interaction behaviors, and fine-tuning appearance and dynamics of the series legend to enhance data representation and user engagement within stock or financial charts.
+</div>
 
 #### Example
 
@@ -18417,6 +21017,11 @@ The chart legend configuration options.
 ### legend.background `String`*(default: "white")*
 
  The background color of the legend. Any valid CSS color string will work here, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or customize the legend area background color to enhance visibility, contrast, or style in stock or financial charts by setting color values using hex codes, RGB, RGBA, HSL, named colors, or CSS variables; control legend backdrop appearance for better readability, visual clarity, or themed styling in chart legends, ensuring the legend stands out or blends as needed, and configure these background color settings at chart setup to tailor legend presentation and user interface aesthetics in data visualization components.
+</div>
 
 #### Example
 
@@ -18448,6 +21053,11 @@ The chart legend configuration options.
 
 The border of the legend.
 
+
+<div class="meta-api-description">
+Customize and control the border appearance of chart legends, including setting the color, thickness, dashed or solid lines, rounded corners, and overall style of the frame surrounding legend labels or symbols in stock or financial charts. Enable detailed border styling for legend boxes to enhance visual distinction, adjust the line pattern, width, and corner radius for better chart legend presentation, or configure the outline that encloses legend items to match specific design or branding requirements. Modify the legend’s border styling properties to achieve precise visual framing and separation of legend content in interactive or static stock charts.
+</div>
+
 #### Example
 
 ```pseudo
@@ -18469,6 +21079,11 @@ The border of the legend.
 ### legend.border.color `String`*(default: "black")*
 
  The color of the border.
+
+
+<div class="meta-api-description">
+Set or customize the outline color, stroke color, or border hue around the chart legend box to enhance visibility, style, or theme consistency in stock or financial charts. Control the frame or edge color shown around the legend area, configure the legend's border shade for branding or UI integration, and adjust appearance settings to highlight or differentiate the legend section from the chart background or plot area. Enable or modify the stroke color of the legend boundary to improve readability or match color schemes in stock data visualizations and interactive chart components.
+</div>
 
 #### Example
 
@@ -18502,6 +21117,11 @@ The border of the legend.
 ### legend.border.dashType `String`*(default: "solid")*
 
  The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure and customize the outline style of the legend border by specifying the border’s dash pattern, enabling solid, dashed, dotted, or various stroke styles to enhance the visual appearance of chart legends; control and set border line patterns for the legend frame to achieve desired styling effects, including dash types for different border aesthetics when initializing or updating chart components.
+</div>
 
 #### Example
 
@@ -18565,6 +21185,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or width of the outline surrounding the legend area in stock charts, enabling customization of the border’s prominence, edge weight, or frame thickness to enhance or reduce the visual emphasis of the legend graphics; configure, set, or control the numeric value that determines how bold, thin, or noticeable the legend’s border appears within financial or stock market data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18598,6 +21223,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 The configuration of the Chart legend item.
 
 To override the marker configuration of individual series, use the [series.legendItem](/api/javascript/dataviz/ui/stock-chart#configuration-series.legendItem) settings of the series.
+
+
+<div class="meta-api-description">
+Customize and control the appearance and behavior of legend items in stock charts by configuring text labels, marker styles, colors, sizes, templates, and visual elements for each legend entry. Enable setting or overriding legend item markers on a global or per-series basis, adjusting fonts, icons, colors, and layout to fine-tune the chart legend’s display, style, and interactivity. Easily set item templates, text formatting, and marker visuals to tailor the legend representation in financial or stock data visualizations. Adjust legend item properties for clearer identification, customized labeling, or enhanced graphical consistency across series in stock charts.
+</div>
 
 #### Example - disable highlight of legend items
 
@@ -18700,6 +21330,11 @@ To override the marker configuration of individual series, use the [series.legen
 Sets the configuration of the legend items of type `area`.
 By default, all series except line and scatter use this legend type.
 
+
+<div class="meta-api-description">
+Control the appearance and behavior of legend entries representing area-type series in stock or financial charts, including customization of markers, labels, icons, and visual styles linked to filled or area-like chart types such as filled lines, area charts, or range bands. Configure how legend items visually convey series data with configurable symbols, color fills, shapes, and label formatting to distinguish area-based series from line or scatter plots in the chart legend. Adjust display options to enhance clarity, differentiate chart areas in the legend, or modify how area data series are represented visually for stock chart legends, covering scenarios where area shading, fill color, or legend marker styling needs to be enabled, customized, or controlled.
+</div>
+
 #### Example - sets the opacity of `area` legend items
 
     <div id="chart"></div>
@@ -18748,6 +21383,11 @@ By default, all series except line and scatter use this legend type.
 The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
 Defaults to the series color.
 
+
+<div class="meta-api-description">
+Control and customize the background color of chart legend swatches by specifying any valid CSS color format such as HEX, RGB, or named colors, overriding the default series or item color in the legend area. Configure or set the legend item background to enhance chart readability, distinguish series visually, or align with branding by adjusting the legend swatch fill independently from the data series color. Enable precise styling of the legend’s color swatch area to improve chart legend clarity, visibility, or design consistency by applying custom color values during chart setup or initialization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18780,6 +21420,11 @@ Defaults to the series color.
 The opacity of the legend item.
 Defaults to the series opacity.
 
+
+<div class="meta-api-description">
+Adjust transparency or alpha level of the legend item area fills in stock or financial charts to control how translucent or opaque the legend symbols and backgrounds appear. Enable or set the opacity of legend markers, modify transparency settings for legend areas to enhance visual clarity or blend with chart elements, configure fill opacity for legend icons, and fine-tune the visibility of legend sections to match or differ from series opacity for better chart annotation and emphasis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18811,6 +21456,11 @@ Defaults to the series opacity.
 
 The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
 
+
+<div class="meta-api-description">
+Control and customize the mouse pointer appearance when hovering over chart legend items to signal interactivity or user engagement, including setting standard or custom CSS cursor styles like pointer, crosshair, grab, or default. Adjust the cursor behavior on legend elements in data visualizations, stock charts, or interactive graphs to enhance user experience and indicate clickable or hover-responsive areas, enabling developers to tailor the pointer to match UI design or accessibility needs while supporting all valid CSS cursor values for dynamic feedback during mouseover events.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18839,6 +21489,11 @@ The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of t
 ### legend.item.highlight `Object`
 
 The highlight configuration of the legend item.
+
+
+<div class="meta-api-description">
+Customize and control the visual emphasis and interaction effects for chart legend items, including setting highlight colors, opacity levels, borders, and custom templates to define how items stand out on hover, selection, or other user interactions within stock or financial charts. Enable configuring or adjusting the way legend entries respond visually to mouse events or highlighting triggers, manage highlight styling behavior for better clarity and user feedback, and tailor legend item appearance to improve chart readability and interactivity in diverse use cases.
+</div>
 
 #### Example
 
@@ -18874,6 +21529,11 @@ The highlight configuration of the legend item.
 
 The `markers` configuration of the legend item when it is hovered.
 
+
+<div class="meta-api-description">
+Adjust marker appearance for legend items on hover in stock charts, including setting marker size, shape, color, border styles, visibility, and highlight effects to emphasize data series when users mouse over or focus on legend entries. Control visual feedback for interactive chart legends by customizing hover-state marker styling to improve chart readability and user engagement. Enable dynamic marker highlighting on legend items for clearer series identification through configurable marker attributes during hover interactions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18908,6 +21568,11 @@ The `markers` configuration of the legend item when it is hovered.
 
 The background color of the highlighted legend item markers.
 
+
+<div class="meta-api-description">
+Control and customize the background color of highlighted legend markers in stock or financial charts to enhance visibility and user experience when items are hovered over or selected, enabling theme matching, accessibility adjustments, and consistent marker styling during interactions such as highlighting or focusing on legend entries.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -18940,6 +21605,11 @@ The background color of the highlighted legend item markers.
 ### legend.item.highlight.markers.border `Object|Function`
 
 The border of the highlighted markers.
+
+
+<div class="meta-api-description">
+Control and customize the border appearance of highlighted markers in a stock chart legend by setting properties such as color, width, style, or dash patterns to emphasize or distinguish selected legend items. Adjust the outline and stroke details for marker highlights to enhance visual clarity, enable distinct highlighting effects, configure marker borders for better identification during user interaction, and tailor the emphasis style of legend markers when active or focused in financial or data visualization charts.
+</div>
 
 #### Example
 
@@ -18977,6 +21647,11 @@ The border of the highlighted markers.
 ### legend.item.highlight.markers.border.color `String|Function`
 
 The configuration of the Chart legend highlighted item markers border.
+
+
+<div class="meta-api-description">
+Set and customize the color of borders or strokes around highlighted markers in chart legends to control the visual emphasis of selected or active items, adjusting the outline color to improve marker visibility, style highlighted legend indicators, define border hues for focused or hovered legend symbols, configure stroke colors for emphasis on chart legend items when highlighted, and enhance user interaction feedback by styling the outlines of legend markers in financial or stock charts.
+</div>
 
 #### Example
 
@@ -19023,6 +21698,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Adjust or set the border stroke pattern on highlighted legend markers to solid, dashed, dotted, dash-dot, long-dash, long-dash-dot, or long-dash-dot-dot styles; customize, configure, or control the marker border dash style to differentiate or emphasize legend items on charts, enabling changes to the outline appearance such as switching from continuous lines to various dash or dot patterns for visual clarity and styling preferences when an item in the legend is active or highlighted.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19057,6 +21737,11 @@ The following dash types are supported:
 ### legend.item.highlight.markers.borderRadius `Number`
 
 The border radius in pixels when `type` is set to `"roundedRect"`.
+
+
+<div class="meta-api-description">
+Control the corner radius of highlighted legend markers in stock charts by adjusting the pixel value that shapes marker edges from sharp to rounded, enabling customization of marker styles such as square corners or pill-shaped highlights. Configure and fine-tune the appearance of legend highlight markers by setting border radius values to modify their roundness, enhancing visual distinction and user interface clarity when markers are emphasized. Enable or adjust marker border curvature to tailor the highlight effect on legend items for better chart readability, marker emphasis, or aesthetic preference, supporting common use cases like making markers look more rectangular or smoothly rounded when selected or hovered over.
+</div>
 
 #### Example
 
@@ -19100,6 +21785,11 @@ The supported values are:
 * "rect" - alias for "square".
 * "roundedRect" - the marker shape is a rounded rectangle.
 
+
+<div class="meta-api-description">
+Set and customize the shape or form of highlight markers in stock chart legends to visually emphasize or distinguish series using various marker types such as circles, squares, triangles, crosses, rounded rectangles, or rectangular shapes. Control, configure, or adjust the highlight marker style to enhance legend item visibility, recognition, or differentiation. Enable or switch between different highlight marker geometries and shapes to match specific visual preferences or UI designs for interactive chart legends, focusing on marker appearance during legend item highlighting or selection states.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19132,6 +21822,11 @@ The supported values are:
 ### legend.item.highlight.markers.visible `Boolean|Function`
 
 If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+
+<div class="meta-api-description">
+Enable or disable the visibility of markers next to legend items during hover, selection, or highlight states in stock chart legends, allowing control over whether series symbols appear when interacting with legend entries; this setting accepts true or false values to show or hide these marker icons dynamically as users focus or select legend items within financial or stock data visualizations, improving clarity and visual feedback.
+</div>
 
 #### Example
 
@@ -19175,6 +21870,11 @@ A function that can be used to create a custom visual for the highlighted marker
 * sender - the chart instance.
 * series - the series of the marker point.
 
+
+<div class="meta-api-description">
+Customize and configure the appearance of highlighted markers within stock chart legend items by defining personalized visuals that control how markers are rendered when selected or emphasized; this involves creating tailored marker shapes and styles based on position, chart data points, series information, categories, or values, using functions that receive contextual parameters like geometry boundaries, default visuals, data items, and chart instances, enabling developers to set, style, override, or enhance the visual representation of legend highlights dynamically for better clarity, interactivity, and data visualization customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19215,6 +21915,11 @@ A function that can be used to create a custom visual for the highlighted marker
 
 If set to `false`, the hover effect of the legend item is disabled.
 
+
+<div class="meta-api-description">
+Enable or disable interactive highlight effects on legend items when users hover or pointer-over the legend in stock charts, controlling whether visual feedback or emphasis appears on legend entries during mouse or touch hover events, allowing customization of pointer-responsive highlighting for legend keys, toggling hover state visibility to improve user interface clarity, manage legend interactivity by setting highlight activation on mouseover or pointer interaction, and configure responsiveness of legend items in financial or stock chart visualizations to pointer focus or hover actions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19246,6 +21951,11 @@ If set to `false`, the hover effect of the legend item is disabled.
 
 Sets the configuration of the legend items of type `line`.
 This is the default legend item type for all line and scatter series.
+
+
+<div class="meta-api-description">
+Control and customize the appearance of line and scatter series representations in chart legends by setting line symbols, stroke colors, line widths, dash patterns, and marker icons to shape how line entries display within the legend. Adjust or configure line visuals, line styles, and markers that denote data trends or scatter points in the legend area, including changing stroke thickness, line dashes, and symbol icons that summarize line or scatter series on stock or financial charts. Enable fine-tuned legend styling for line-based chart series by defining legend item visuals such as solid or dashed lines, stroke colors, line widths, and associated markers to ensure clear identification of plotted line and scatter data segments in chart legends.
+</div>
 
 #### Example - override the color of `line` legend items
 
@@ -19295,6 +22005,11 @@ This is the default legend item type for all line and scatter series.
 The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
 Defaults to the series color.
 
+
+<div class="meta-api-description">
+Control and customize the color of line entries in the chart legend by setting the legend item line color, enabling specifying any valid CSS color format such as HEX codes, RGB values, or named colors to adjust how line-type legend items display their colors independently from the series color; useful for configuring, styling, highlighting, or differentiating line representations within stock charts or financial graph legends according to user preference or theme requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19337,6 +22052,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Adjust, customize, or configure the stroke pattern, style, or appearance of line markers in chart legends by selecting from various dash styles such as dashed, dotted, dash-dot, long dash, long dash dot, long dash dot dot, or solid lines; control how line indicators appear next to legend items in stock or financial charts to improve visual distinction, readability, and design consistency, whether you want segmented lines, dotted lines, or continuous solid strokes for legend entries representing line series or trends.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19369,6 +22089,11 @@ The following dash types are supported:
 
 The opacity of the legend item of type `line`.
 Defaults to the series opacity.
+
+
+<div class="meta-api-description">
+Control or set the transparency level, opacity, or alpha of line-type legend items in stock charts to customize or override their visual appearance independently from series opacity, enabling emphasis, styling adjustments, blending effects, or improving accessibility by making legend lines more or less visible in the chart’s legend display.
+</div>
 
 #### Example
 
@@ -19403,6 +22128,11 @@ Defaults to the series opacity.
 The configuration of the Chart legend item markers.
 
 By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of legend markers in stock chart legends by setting marker shapes, sizes, colors, and styles independently from the chart series markers, enabling fine-tuned adjustments to legend symbols, visual differentiation of series, and tailored marker presentation within legend entries, including overriding default marker configurations inherited from series settings to achieve specific legend marker customization, styling, and display options.
+</div>
 
 #### Example - override marker settings for the legend
 
@@ -19451,6 +22181,11 @@ By default, the marker configuration will be the same as the [series.markers](/a
 
 The background color of the legend item markers.
 
+
+<div class="meta-api-description">
+Control and customize the fill color behind legend markers in stock or financial charts to enhance visual clarity, match series or data point colors, improve legend item contrast, or align the chart’s legend with specific branding or theme colors while adjusting the appearance of legend icons or symbols for better readability and consistent styling across chart elements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19481,6 +22216,11 @@ The background color of the legend item markers.
 ### legend.item.markers.border `Object|Function`
 
 The border of the markers.
+
+
+<div class="meta-api-description">
+Configure and customize the border or outline of markers in chart legend items, including setting the color, width, style, and appearance of marker edges to enhance or control visual distinction in stock chart legends, legend marker borders, or legend symbol outlines, allowing adjustment of marker framing, stroke, and border styling to improve readability and presentation in chart displays and interfaces.
+</div>
 
 #### Example
 
@@ -19516,6 +22256,11 @@ The border of the markers.
 ### legend.item.markers.border.color `String|Function`
 
 The configuration of the Chart legend item markers border.
+
+
+<div class="meta-api-description">
+Control and customize the outline color of legend markers in stock charts by setting any valid CSS color format such as hex, RGB, RGBA, or named colors to visually distinguish series, enhance theme consistency, adjust marker border hues for clarity, emphasize or de-emphasize legend item outlines, and tailor the appearance of chart legends for better readability and user interface styling in financial or data visualization applications.
+</div>
 
 #### Example
 
@@ -19560,6 +22305,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Adjust and customize the outline style of chart legend markers by configuring the pattern of the marker border stroke, including options to set dashed, dotted, solid, dash-dot, long dash, long dash with dots, and various repeating dash patterns for controlling the visual style and appearance of legend item borders in stock or financial charts. Enable setting border line styles such as dash, dot, dash-dot, long dash, and solid to influence how marker outlines are rendered, useful for enhancing chart clarity, differentiating series, or matching design requirements for interactive or static stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19592,6 +22342,11 @@ The following dash types are supported:
 ### legend.item.markers.borderRadius `Number`
 
 The border radius in pixels when `type` is set to `"roundedRect"`.
+
+
+<div class="meta-api-description">
+Adjust the corner roundness or curvature of chart legend item markers by setting pixel values for border radius, enabling customization of marker shapes to appear more rounded or sharp when using rounded rectangle styles, and allowing developers to configure, style, fine-tune, or control the visual appearance of legend markers in stock or financial charts for improved aesthetics or theme matching during chart setup and initialization.
+</div>
 
 #### Example
 
@@ -19633,6 +22388,11 @@ The supported values are:
 * "rect" - alias for "square".
 * "roundedRect" - the marker shape is a rounded rectangle.
 
+
+<div class="meta-api-description">
+Customize and control the shape or symbol of legend item markers in a stock chart by setting marker types such as circle, square, triangle, cross, rounded rectangle, or other geometric icons. Configure the appearance, shape, or style of legend markers to visually match series data, customize legend symbols, switch between different marker shapes like circles, squares, triangles, crosses, or rounded rectangles, and adjust legend icon types for clarity, readability, visual differentiation, or branding in financial chart legends. Set, enable, or define the legend marker shape to suit chart aesthetics or improve legend interpretation by choosing from standard marker shapes and icons.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19663,6 +22423,11 @@ The supported values are:
 ### legend.item.markers.visible `Boolean|Function`
 
 If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+
+<div class="meta-api-description">
+Configure the display of markers next to legend items in stock charts by enabling or disabling the visibility of legend item markers, control whether symbols or icons appear alongside legend entries for better identification, toggle legend markers on or off, adjust legend symbols display to enhance chart readability, set visibility of markers linked to legend entries independently or inherit from series configurations, manage the presence of graphical markers in the chart legend for improved visual cues, customize legend item icons visibility for clearer data representation, control showing or hiding markers in legend items to distinguish series, enable or disable small graphical indicators beside legend labels to refine chart presentation.
+</div>
 
 #### Example
 
@@ -19703,6 +22468,11 @@ A function that can be used to create a custom visual for the markers. The avail
 * value - the value of the marker point.
 * sender - the chart instance.
 * series - the series of the marker point.
+
+
+<div class="meta-api-description">
+Customize and control chart legend markers by providing a function to generate personalized visuals, enabling overrides of default marker rendering, appearance, and styles based on position, options, or data context; configure marker graphics dynamically by accessing dimensions, category labels, data points, series information, and chart instances, allowing for tailored marker shapes, colors, icons, or complex visuals in stock or time series charts, supporting use cases such as conditional formatting, interactive legend indicators, and advanced theme adjustments for better data representation and user interface customization.
+</div>
 
 #### Example - use custom visual for the markers
 
@@ -19775,6 +22545,11 @@ The supported values are:
 - `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
 * `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
 
+
+<div class="meta-api-description">
+Control or customize the visual representation and symbol style of legend entries in stock or financial charts, configuring how each data series is depicted in the legend by setting icons as lines, filled shapes, or other marks that correspond to series types like line or area charts; adjust the legend markers to display as linear strokes, solid blocks, or alternate visual cues reflecting the chart’s data rendering style, enabling clear identification and differentiation of series in chart legends with flexible symbol styling options.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19802,6 +22577,11 @@ A function that can be used to create a custom visual for the legend items. The 
 
 * options - the item options.
 * createVisual - a function that can be used to get the default visual.
+
+
+<div class="meta-api-description">
+Control and customize the appearance and rendering of legend entries in stock charts by defining a custom function to generate each legend item's visual representation, enabling developers to tailor the legend icons, markers, or labels according to dynamic data or styling requirements, override default visuals, modify colors, shapes, or layouts of legend elements, and implement personalized rendering logic that integrates with the chart's data points or series, thereby facilitating detailed customization of legend presentation in financial or time series visualizations.
+</div>
 
 #### Example - using custom visual for the legend items
 
@@ -19874,6 +22654,11 @@ A function that can be used to create a custom visual for the legend items. The 
 
 Configures the legend labels.
 
+
+<div class="meta-api-description">
+Customize and control the appearance and content of legend text in financial or stock chart visualizations with options to set label text, formatting styles, font types, colors, padding, text alignment, wrapping, truncation, and templates, enabling tailored display of legend entries for clarity and design consistency, including per-item customization and rendering control to achieve precise visual representation and enhance chart readability across various data labeling scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19901,6 +22686,11 @@ Configures the legend labels.
 The color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the text color of chart legend labels by specifying any valid CSS color format such as hex codes, RGB, RGBA, HSL, or named colors to enhance legend visibility, match branding guidelines, improve readability, or adjust label appearance in financial or stock charts. Adjust, set, or configure legend label colors to ensure clarity in data visualization, tailor the look and feel to your application's design system, or highlight important information by changing label text hues. Use this capability to style legend text for accessibility, contrast optimization, or aesthetic preferences across different charting scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19925,6 +22715,11 @@ Any valid CSS color string will work here, including hex and rgb.
 ### legend.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+
+<div class="meta-api-description">
+Control and customize the typography, font family, size, weight, style, and text appearance of legend labels in stock chart visualizations, enabling developers to set and adjust legend text styling, format legend fonts, change legend label font properties, configure text appearance for chart legends, style legend caption fonts, and manage how legend text is displayed for improved readability and presentation in financial or stock market charts.
+</div>
 
 #### Example
 
@@ -19959,6 +22754,11 @@ The fields which can be used in the template are:
 *   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
 *   dataItem - the original data item used to construct the point.
 
+
+<div class="meta-api-description">
+Customize and control legend item labels in stock charts by defining templates that format text, insert dynamic series names, display data point values, show percentages for 100% stacked charts, and include original data elements. Configure and modify legend label content to present tailored series information, numeric values, percentages, or custom text strings for pie, donut, and other chart types. Enable formatting options for legend entries to suit diverse visualizations, ensuring flexible display of series details, data item properties, or computed metrics within chart legends. Adjust legend label representation for clear identification of data series, value annotations, percentage breakdowns, and custom descriptions using template syntax and contextual placeholders.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -19985,6 +22785,11 @@ The fields which can be used in the template are:
 ### legend.margin `Number | Object`*(default: 10)*
 
  The margin of the legend.
+
+
+<div class="meta-api-description">
+Control and customize the spacing or padding around the chart legend to adjust the whitespace between the legend and the main chart area, enabling you to manage layout, positioning, and visual separation of the legend from other chart elements by setting margins or gaps during configuration, initialization, or design time to create more or less room and improve readability, alignment, and overall chart appearance.
+</div>
 
 #### Example
 
@@ -20013,6 +22818,11 @@ The fields which can be used in the template are:
 For instance, a value of 20 will move the legend 20 pixels to the right of it's initial position.  A negative value will move the legend
 to the left of the current position.
 
+
+<div class="meta-api-description">
+Adjust horizontal positioning of the stock chart legend by specifying pixel offsets to shift it left or right; control placement by setting positive values to move the legend right or negative values to move it left, enabling precise alignment, custom layout adjustments, or fine-tuning the legend’s location horizontally relative to its default or current position in the chart interface.
+</div>
+
 #### Example
 
 ```pseudo
@@ -20031,6 +22841,11 @@ to the left of the current position.
 For instance, a value of 20 will move the legend 20 pixels down from it's initial position.  A negative value will move the legend
 upwards from the current position.
 
+
+<div class="meta-api-description">
+Adjust vertical position, vertical alignment, or Y-axis placement of chart legend by specifying a pixel offset to move the legend up or down relative to its default location; control vertical spacing, fine-tune legend display, reposition legend labels vertically for better layout, shift legend down with positive values or move it up with negative values to customize legend alignment on stock charts or other financial graphs.
+</div>
+
 #### Example
 
 ```pseudo
@@ -20046,6 +22861,11 @@ upwards from the current position.
 ### legend.padding `Number | Object`*(default: 5)*
 
  The padding of the legend.
+
+
+<div class="meta-api-description">
+Adjust the spacing or margin around the chart legend items to increase or decrease the empty area inside the legend container, enabling control over internal padding, gaps, or whitespace between legend entries for a cleaner or more compact layout. Enable customization of the space surrounding labels, symbols, or swatches in financial or stock charts to improve visual clarity, layout balance, and readability by setting or configuring how much padding or buffer surrounds the legend elements. Whether adjusting the distance between legend text and edges, controlling spacing for better alignment, or fine-tuning the internal legend area, this setting helps manage the legend’s empty space for optimized user interface presentation in stock or data visualization charts.
+</div>
 
 #### Example
 
@@ -20073,6 +22893,11 @@ upwards from the current position.
 
  The positions of the legend.
 
+
+
+<div class="meta-api-description">
+Control the placement and alignment of the chart legend by configuring its position to top, bottom, left, right, or custom locations, enabling customization of layout, spacing, and visual arrangement for better readability and aesthetics in stock or financial charts, adjusting where labels appear relative to the chart to enhance user interface, presentation, and clarity in data visualization tools.
+</div>
 
 #### *"top"*
 
@@ -20119,6 +22944,11 @@ If set to `true` the legend items will be reversed.
 
 Available in versions 2013.3.1306 and later.
 
+
+<div class="meta-api-description">
+Control the order and sequence of chart legend items by reversing or flipping the display so that legend entries appear from last to first instead of the default first to last order; configure, enable, or set the legend to invert its item arrangement for customized visual presentation in stock charts, facilitating use cases like reversing legend stacking, toggling legend item sequence, or altering symbol order to suit data interpretation, visualization preferences, or design requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20151,6 +22981,11 @@ Available in versions 2013.3.1306 and later.
 
  The visibility of the legend.
 
+
+<div class="meta-api-description">
+Control the display of the chart legend to show or hide labels and symbols that explain data series, enabling customization of legend visibility in stock charts, toggle on or off the legend area to improve clarity or save space, configure whether the legend is rendered or suppressed during chart setup, manage the presence of descriptive keys for data points to enhance or simplify the chart interface, and adjust settings to enable or disable visual guides that help interpret stock chart data series.
+</div>
+
 #### Example
 
 ```pseudo
@@ -20166,6 +23001,11 @@ Available in versions 2013.3.1306 and later.
 ### legend.inactiveItems `Object`
 
 Configures the legend inactive items.
+
+
+<div class="meta-api-description">
+Configure how chart legend entries behave and appear when the associated data series is inactive, hidden, toggled off, or disabled in stock or financial charts, including options to style, dim, fade, hide, customize markers, apply templates, control visibility, adjust interactivity like disabling clicks, and manage appearance for inactive or non-visible legend items during initialization or runtime.
+</div>
 
 #### Example
 
@@ -20196,6 +23036,11 @@ Configures the legend inactive items.
 
 Configures the legend labels.
 
+
+<div class="meta-api-description">
+Customize the text, appearance, and visibility of labels for inactive legend entries in stock charts by setting content templates, formatting font styles, colors, and controlling how these inactive legend labels display or hide. Adjust label text content, style inactive legend item labels, modify label font and color for non-active legend entries, and configure the presentation and visibility of inactive legend labels in financial or data visualization charts. Enable developers to set or style labels for legend items that are not currently active, dormant, or disabled within stock chart legends using flexible formatting and display options.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20225,6 +23070,11 @@ Configures the legend labels.
 The color of the labels.
 Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust the text color for labels of inactive or disabled legend entries in stock charts, enabling customization of these labels' appearance with any valid CSS color format such as hexadecimal codes, RGB, RGBA, HSL values, or named colors; configure, set, or control the visual styling of non-active legend item text to improve chart readability, distinguish inactive series, change label coloration for disabled or hidden chart elements, or tailor legend label colors in financial or stock data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20251,6 +23101,11 @@ Any valid CSS color string will work here, including hex and rgb.
 ### legend.inactiveItems.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+
+<div class="meta-api-description">
+Adjust or configure the font style, size, weight, family, and appearance of labels for inactive or disabled legend entries in stock charts, enabling control over typography for non-active legend items, customizing label fonts to match chart themes, styling inactive legend text in financial or data visualization charts, setting font attributes for grayed-out or de-emphasized legend descriptions, and ensuring consistent visual design and readability of legend labels when items are not selected or active.
+</div>
 
 #### Example
 
@@ -20287,6 +23142,11 @@ The fields which can be used in the template are:
 *   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
 *   dataItem - the original data item used to construct the point.
 
+
+<div class="meta-api-description">
+Control and customize the appearance and content of inactive legend labels in stock charts by defining templates that dynamically render label text, series details, data points, numeric values, and percentages for various chart types including donut, pie, and 100% stacked charts, enabling flexible formatting, markup control, and binding to legend item properties such as item text, associated data series, original data entries, and calculated values for enhanced visualization and tailored legend label presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20314,6 +23174,11 @@ The fields which can be used in the template are:
 ### legend.inactiveItems.markers `Object`
 
 Configures the legend markers.
+
+
+<div class="meta-api-description">
+Customize and control the styling, visibility, shape, size, and color of symbols or markers next to legend labels when chart series or items are inactive or disabled, enabling tailored theming, appearance adjustments, accessibility enhancements, and clear distinction of inactive data points in stock or financial charts.
+</div>
 
 #### Example
 
@@ -20343,6 +23208,11 @@ Configures the legend markers.
 The color of the markers.
 Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the color of markers for inactive or disabled legend items in stock charts, enabling adjustment of how series markers appear when not active or visible. This includes setting marker hues using any valid CSS color formats such as hexadecimal codes, RGB values, or color names, to distinguish inactive data series visually, improve chart readability, configure appearance for hidden or toggled off data sets, and tailor the legend marker colors to fit design preferences or accessibility needs. Adjust marker color settings to highlight or dim chart elements through flexible color options for inactive legend points and series identifiers.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20369,6 +23239,11 @@ Any valid CSS color string will work here, including hex and rgb.
 ### legend.title `Object`
 
 The legend title configuration options or text.
+
+
+<div class="meta-api-description">
+Adjust, set, or customize the title displayed in the legend area of stock charts, enabling control over text content, font style, size, alignment, and visual appearance of the legend heading. Developers and users can define a simple text label or apply detailed configuration options to modify how the legend title looks and aligns within financial or stock market charts, enhancing clarity and presentation. This capability supports styling parameters, textual customization, position adjustments, and formatting controls to tailor the legend heading for stock data visualizations, ensuring the chart’s legend title meets diverse layout, branding, or readability requirements across various applications or dashboards.
+</div>
 
 #### Example
 
@@ -20461,6 +23336,11 @@ The alignment of the title.
 * "left" - the text is aligned to the left.
 * "right" - the text is aligned to the right.
 
+
+<div class="meta-api-description">
+Adjusting the horizontal text alignment for the chart legend title to position it left, center, or right, enabling customization of title placement within the chart legend area, controlling how the legend header aligns to the left edge, right edge, or is centered, configuring text alignment options for better visual layout of the legend heading, setting legend title justification to left-align, center-align, or right-align the text, managing horizontal positioning of the legend’s main label to improve readability or aesthetics in data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20548,6 +23428,11 @@ The alignment of the title.
 
 The background color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the background color or backdrop of chart legend titles to enhance visibility, create contrast, emphasize labels, or match themes by setting color values in common CSS formats like hex, rgb, or named colors. Configure the legend header background shading to improve readability or style consistency in stock or financial charts, enabling tailored palettes for title areas in data visualizations, dashboards, or analytical interfaces. Adjust and define the color behind legend text to highlight or differentiate the legend’s heading according to branding, UI design preferences, or user interface requirements in charting components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20634,6 +23519,11 @@ The background color of the title. Accepts a valid CSS color string, including h
 ### legend.title.border `Object`
 
 The border of the title.
+
+
+<div class="meta-api-description">
+Customize and control the border styling around chart legend titles including color, thickness, dash patterns, and visual borders to enhance the legend’s header appearance in financial or stock visualizations. Enable setting border attributes such as stroke color, width, dash type, and design details that define the outline of legend titles. Configure, style, or modify the border effects for legend headings to improve chart readability, theme consistency, or highlight specific legend sections in stock charts or other financial graph components. Adjust or fine-tune the legend title’s border appearance for a polished and distinct visual presentation in data-driven charts.
+</div>
 
 #### Example
 
@@ -20724,6 +23614,11 @@ The border of the title.
 ### legend.title.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Control and customize the color of the border around the legend title in stock charts by specifying any valid CSS color format such as hex codes, RGB, or named colors. Enable setting or adjusting the outline color of the legend header to enhance visual clarity or match chart themes, ensuring seamless integration with user interface design. Configure, modify, or style the border color of the legend heading to highlight or separate it visually, supporting diverse customization needs in financial charting or data visualization environments.
+</div>
 
 #### Example
 
@@ -20824,6 +23719,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Control and customize the border line style around the chart legend title by configuring patterns such as solid, dashed, dotted, dash-dot combinations, long dashes, and various dash-dot-dot sequences to modify the visual appearance of the border line using settings for line style, line pattern, stroke style, border decoration, and rendering options that enable applying different dashed, dotted, or solid line effects for enhanced chart legend title design and presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -20915,6 +23815,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust the thickness or visibility of the border around the legend title in a stock chart by setting the border width in pixels, enabling customization of the border’s appearance from no border to a defined pixel size, controlling the outline thickness around legend titles to enhance styling, toggling border display by configuring the pixel width value, and managing the visual emphasis or separation of the legend title in financial or data visualization charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21005,6 +23910,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the color of the legend title text in stock charts by specifying any valid CSS color format such as hexadecimal codes, RGB values, or named colors to style and match themes, configure the appearance, adjust the title text hue, change the legend heading color, set the title font color, enable dynamic title color customization, fine-tune visual contrast, or override default legend title colors to improve readability and aesthetic integration within chart displays.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21091,6 +24001,11 @@ The text color of the title. Accepts a valid CSS color string, including hex and
 ### legend.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
 
 The font of the title.
+
+
+<div class="meta-api-description">
+Adjust the typography settings for the chart legend heading by specifying font family, size, weight, style, and other text attributes to customize the title appearance in stock charts, enabling control over the visual style, emphasis, and readability of legend titles through font configuration, styling, and font string options commonly used in CSS or UI design.
+</div>
 
 #### Example
 
@@ -21179,6 +24094,11 @@ The font of the title.
 
 The margin of the title. A numeric value will set all margins.
 
+
+<div class="meta-api-description">
+Adjust or set the spacing around the legend title in stock charts by defining outer margins, controlling the gap or padding surrounding the title text, configuring uniform or specific space to separate the title from legend borders, managing title placement through margin values, and customizing legend title layout for clarity, readability, or visual spacing preferences in chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21265,6 +24185,11 @@ The margin of the title. A numeric value will set all margins.
 ### legend.title.margin.bottom `Number` *(default: 0)*
 
 The bottom margin of the title.
+
+
+<div class="meta-api-description">
+Control the spacing or gap below the legend title in stock charts by configuring the bottom margin, enabling adjustments to the vertical distance between the legend heading and its associated content, useful for customizing layout, appearance, alignment, or padding beneath the legend title area to improve readability or design in stock chart visualizations.
+</div>
 
 #### Example
 
@@ -21355,6 +24280,11 @@ The bottom margin of the title.
 
 The left margin of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the horizontal spacing and left offset for the legend title in a stock chart, controlling the margin on the left side to increase or decrease space between the title and adjacent elements, enabling layout customization, title alignment tweaking, and precise positioning in chart legends to suit design preferences, styling requirements, or visual clarity needs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21390,6 +24320,11 @@ The left margin of the title.
 ### legend.title.margin.right `Number` *(default: 0)*
 
 The right margin of the title.
+
+
+<div class="meta-api-description">
+Control or adjust the horizontal spacing and right-side padding of a chart legend's title to fine-tune layout and positioning, set or configure the amount of space between the legend title and adjacent elements, customize margin or padding on the right side of the legend heading, improve visual alignment by tweaking right margin values, manage spacing for better clarity or aesthetic in stock charts or data visualizations, set numeric right margin distance for legend title placement, enable precise layout adjustments to prevent overlap or crowding on the legend's right edge.
+</div>
 
 #### Example
 
@@ -21427,6 +24362,11 @@ The right margin of the title.
 
 The top margin of the title.
 
+
+<div class="meta-api-description">
+Adjust the vertical spacing or top padding above the chart legend title to control the distance between the legend container and its header, allowing customization of margin size, layout spacing, title position, and visual separation in stock or financial charts. Configure the amount of space above the legend heading, set numeric padding or margin values, and fine-tune alignment, layout gaps, or whitespace around the legend title to achieve optimal spacing and improve clarity in chart presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21463,6 +24403,11 @@ The top margin of the title.
 
 The padding of the title. A numeric value will set all margins.
 
+
+<div class="meta-api-description">
+Adjust the spacing or inner margin around the legend title in a stock chart to control how much empty space or padding surrounds the title text, enabling precise layout customization, title positioning, and visual separation from adjacent elements using a single numeric value that applies evenly to all sides, top, right, bottom, and left. This setting helps configure the title’s breathing room, set consistent gaps, control legend aesthetics, and fine-tune the chart’s overall appearance by increasing or decreasing the padding area around the label or heading within the legend.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21496,6 +24441,11 @@ The padding of the title. A numeric value will set all margins.
 ### legend.title.padding.bottom `Number` *(default: 0)*
 
 The bottom padding of the title.
+
+
+<div class="meta-api-description">
+Adjust or configure the vertical spacing below the legend title in stock charts by setting the bottom padding or margin to control the gap between the title text and the legend entries, enabling fine-tuning of layout, appearance, and spacing for clearer chart legends, customizable title spacing, and improved legend item alignment and readability.
+</div>
 
 #### Example
 
@@ -21533,6 +24483,11 @@ The bottom padding of the title.
 
 The left padding of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the horizontal spacing, indentation, or left margin of the legend title within chart legends to control the distance between the title text and the left boundary or edge of the legend area, enabling fine-tuning of the visual alignment, padding, spacing, or layout of chart captions, labels, or legend headers to improve readability and design consistency in stock charts or similar data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21569,6 +24524,11 @@ The left padding of the title.
 
 The right padding of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the right padding, inner margin, or spacing on the legend title within a stock chart or financial graph to control the distance between the title text and the chart’s legend border or container, enabling precise layout design, visual alignment, or spacing tweaks for better readability and presentation of the legend heading in data visualization components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21604,6 +24564,11 @@ The right padding of the title.
 ### legend.title.padding.top `Number` *(default: 0)*
 
 The top padding of the title.
+
+
+<div class="meta-api-description">
+Adjust the spacing above the legend title in stock chart components by setting the top padding to control the vertical alignment, customize the gap or margin above the legend heading, modify layout spacing for better visual balance, configure the distance between the chart legend’s title and surrounding elements, fine-tune the title padding to improve readability, and set the upper buffer area for legend text to achieve precise styling and consistent chart presentation.
+</div>
 
 #### Example
 
@@ -21644,6 +24609,11 @@ The position of the title.
 * "bottom" - the title is positioned on the bottom.
 * "top" - the title is positioned on the top.
 
+
+<div class="meta-api-description">
+Adjust or configure the placement of the chart legend title, controlling whether the label or header appears above or below the legend area, with options to set the title position at the top or bottom of the legend for better visualization, layout customization, or UI design alignment in financial or stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21680,6 +24650,11 @@ The text of the legend title. You can also set the text directly for a title wit
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
+
+<div class="meta-api-description">
+Control or configure the header text of the chart legend, customize the legend heading or label string, set or change the legend title content with support for multiline text using newline characters, enable specifying and formatting the legend’s descriptive title, adjust or modify the caption shown above the legend entries, provide custom text to identify the legend section clearly, define the textual heading that appears with legend keys, allow wrapping or splitting the title into multiple lines for clarity in stock or financial charts, manage how the legend title displays descriptive information about chart series or data categories.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21712,6 +24687,11 @@ The text of the legend title. You can also set the text directly for a title wit
 ### legend.title.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the title. By default the title will be displayed.
+
+
+<div class="meta-api-description">
+Toggle visibility of the legend's title in stock charts by enabling or disabling the display of the legend header text, allowing control over whether the chart's legend includes a descriptive title label, turning the legend title on or off, managing legend header appearance, configuring the presence of the legend’s text label, setting to show or hide the legend’s caption, adjusting legend title visibility during chart setup or runtime, customizing the display of the legend heading, and controlling whether the chart legend includes a title element for clarity or a cleaner presentation.
+</div>
 
 #### Example
 
@@ -21753,6 +24733,11 @@ Each axis can be associated with a pane by setting its `pane` option to the name
 Axis that don't have specified pane are placed in the top (default) pane.
 
 Series are moved to the desired pane by associating them with an axis.
+
+
+<div class="meta-api-description">
+Customize and control vertical chart segmentation by dividing the stock chart into multiple stacked sections or panels arranged from top to bottom. Set or assign data axes and series to specific areas by linking them to named partitions, enabling detailed multi-pane layouts. Adjust or configure the layout for separate chart parts, managing which axes and data series appear in each stacked segment to create layered visualizations with distinct zones. Use pane assignments to organize chart elements into different vertically aligned sections, facilitating complex chart presentations with multiple synchronized views or focused data regions. Enable dynamic chart splitting, axis grouping, and series placement to tailor multi-pane stock or time series charts for enhanced clarity and comparison.
+</div>
 
 #### Example
 
@@ -21806,6 +24791,11 @@ Series are moved to the desired pane by associating them with an axis.
 
 The unique pane name.
 
+
+<div class="meta-api-description">
+Assigning a unique identifier to a chart pane allows developers to select, control, customize, and manipulate specific sections or panels of a stock chart for layout, data binding, axis linkage, style updates, or dynamic adjustments. This naming feature supports referencing particular chart regions for configuring visual elements, attaching data series or axes, accessing pane properties programmatically, enabling targeted modifications, or managing multiple panes independently within financial or stock chart visualizations. Whether configuring, updating, or integrating panes, uniquely identifying each one ensures precise control for developers handling complex multi-pane stock or time series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21850,6 +24840,11 @@ The unique pane name.
 
 The margin of the pane.
 
+
+<div class="meta-api-description">
+Adjust the spacing or outer padding surrounding a chart pane to control the gap between the pane border and neighboring elements such as axes, adjacent panes, or the overall chart container, allowing precise configuration of margins on each side—top, bottom, left, and right—using pixel values or similar units. This enables layout customization, spacing control between chart sections, and fine-tuning of visual separation, helping users set outer distance around chart panes in dashboards, time series visualizations, or financial graphs to optimize readability, alignment, and design balance.
+</div>
+
 #### Example
 
 ```pseudo
@@ -21864,6 +24859,11 @@ The margin of the pane.
 
 The padding of the pane.
 
+
+<div class="meta-api-description">
+Configure the internal spacing or margin inside chart sections to control the space between content elements such as data series, axes, labels, and borders within stock chart panes; adjust the padding to manage layout gaps, inner gutters, visual separation, or whitespace around chart components, enabling fine-tuned alignment, clear axis positioning, consistent spacing between graphical elements, and customized chart appearance by setting or modifying the internal buffer around pane contents.
+</div>
+
 #### Example
 
 ```pseudo
@@ -21877,6 +24877,11 @@ The padding of the pane.
 ### panes.background `String`
 
 The background color of the pane.
+
+
+<div class="meta-api-description">
+Customize the background color or fill of chart panes to visually distinguish different sections or layers within stock charts, enabling control over pane shading, transparency, and color styling using CSS color formats like hex codes, RGBA values, named colors, or transparent settings. Adjust or set the fill behind chart series to enhance clarity, separate multiple chart areas, and improve visual grouping of data panels by configuring background hues, opacities, or themes for individual chart segments.
+</div>
 
 #### Example
 
@@ -21908,6 +24913,11 @@ The background color of the pane.
 ### panes.border `Object`
 
 The border of the pane.
+
+
+<div class="meta-api-description">
+Control and customize the appearance, style, visibility, thickness, color, and configuration of chart pane borders including enabling or disabling the outline around stock chart sections, adjusting border properties such as line style and opacity, setting pane edges or frames for enhanced visual separation, and styling boundaries to improve chart readability or highlight pane divisions within financial or stock market visualizations.
+</div>
 
 #### Example
 
@@ -21943,6 +24953,11 @@ The border of the pane.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Customize or configure the color of the border or outline surrounding individual chart panes by specifying any CSS-compatible color value such as hex codes, color names, or RGB formats to control the stroke appearance around stock chart sections. Adjust or set pane frame coloring for visual distinction, theming, or highlighting specific chart areas with border color options supporting varied color models and syntax commonly used in web styling and UI design. Enable fine-grained control over pane edge colors to differentiate or style multiple panes within stock or financial charts dynamically using standard CSS color inputs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -21975,6 +24990,11 @@ The color of the border.
 ### panes.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure the border line style or pattern for chart panes by selecting from various dash types such as solid, dashed, dotted, or dash-dot to customize the visual appearance and highlight pane boundaries; control the border stroke style to differentiate sections, set the outline design, adjust line patterns, and enhance the chart’s pane separation effects with flexible border dash styling options.
+</div>
 
 #### *"solid"*
 
@@ -22037,6 +25057,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or width of chart pane borders to control how bold, heavy, or prominent the edges appear; customize the border line weight or set numeric values to increase or reduce the visual emphasis and styling of pane outlines in stock or financial charts, influencing layout clarity, separation between panes, and overall pane boundary appearance.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22070,6 +25095,11 @@ The width of the border.
 
 Specifies whether the charts in the pane should be clipped.
 
+
+<div class="meta-api-description">
+Control whether chart elements like series lines, data points, markers, and annotations are confined within the visible bounds of a chart pane or allowed to extend beyond its edges by enabling or disabling clipping of the graphical rendering area. Configure the rendering restriction to either crop or overflow chart components within the defined pane rectangle, affecting how visuals are displayed relative to pane boundaries during chart initialization or dynamic updates. Adjust this setting to manage visual overflow, layout containment, or to create effects where chart elements can draw outside of pane limits for custom visualization designs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22100,6 +25130,11 @@ Specifies whether the charts in the pane should be clipped.
 ### panes.height `Number`
 
 The pane height in pixels.
+
+
+<div class="meta-api-description">
+Control and configure the vertical size of individual chart sections by setting fixed pixel height values to adjust layout spacing and customize the visible plotting area within financial or stock charts. Easily set, specify, or modify the height of chart panes to optimize space, ensure consistent alignment, and tailor the display for complex multi-pane data visualizations. Enable precise control over pane dimensions to balance overview and detail, support responsive designs, and manage how much vertical room each chart section occupies in a stock or financial graph interface.
+</div>
 
 #### Example
 
@@ -22132,6 +25167,11 @@ The pane height in pixels.
 
 The pane title text or configuration.
 
+
+<div class="meta-api-description">
+Customize or configure the header text of chart panes by setting or adjusting pane titles, including simple strings or detailed title settings, to control how each pane’s heading appears, how to label chart sections, rename pane headers, define title text content, manage pane identifiers visually, and modify title styles or display options in stock or financial charts during initialization or runtime.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22163,6 +25203,11 @@ The pane title text or configuration.
 
 The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
+
+
+<div class="meta-api-description">
+Customize, configure, or set the background color of chart pane titles using any valid CSS color format including hex codes, RGB values, or named colors, enabling control over the visual styling of the title area in stock charts, such as changing shading, tint, or theme color of the pane heading to match design preferences or branding.
+</div>
 
 #### Example
 
@@ -22197,6 +25242,11 @@ hex and rgb.
 ### panes.title.border `Object`
 
 The border of the title.
+
+
+<div class="meta-api-description">
+Control and customize the border styling around a chart pane title including stroke color, width, dash patterns, opacity, and overall appearance to enhance or modify how pane titles render visually within stock or financial charts; set or configure the outline, edge, or frame styling effects on pane headers, enabling adjustments of border thickness, dashed or solid lines, transparency levels, and stroke hues for better visual separation or emphasis of chart sections during initialization or setup in data visualization contexts.
+</div>
 
 #### Example
 
@@ -22236,6 +25286,11 @@ The border of the title.
 The color of the border. Any valid CSS color string will work here, including
 hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or configure the border color around the title of chart panes to highlight, emphasize, or visually separate pane titles in stock or financial charts, supporting any CSS-compatible color input such as hexadecimal codes, RGB values, named colors, or custom color strings to match themes, branding, or visual styles, enabling control over the visual appearance of pane title outlines, borders, and frame colors in data visualization environments.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22271,6 +25326,11 @@ hex and rgb.
 ### panes.title.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure and customize the border style of chart pane titles by setting patterns for line strokes such as solid lines, dashed lines, dotted lines, dash-dot combinations, or longer dashes to control the visual appearance and styling of outlines and borders around chart sections. Adjust border dash patterns to enhance UI design, modify the look of pane titles, set custom line styles, enable different dashed or dotted outlines, and fine-tune border visuals for improved chart aesthetics and clarity. Control how lines are drawn around pane headers by selecting from multiple dash types to create distinct border effects and tailor the user interface of financial or stock charts.
+</div>
 
 #### *"solid"*
 
@@ -22336,6 +25396,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, width, or size of the border surrounding the title area in chart panes, enabling customization of pane title edges, borders, outlines, or frames to emphasize, highlight, or style the chart header; control border line thickness or weight for clearer separation, enhanced visibility, or spacing around pane titles in stock or financial charts, suitable for developers looking to configure, set, or modify the visual boundary and prominence of pane headings.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22372,6 +25437,11 @@ The width of the border.
 
 The text color of the title. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Set or customize the text color of chart pane titles using any CSS-compatible color format such as named colors, hex codes, RGB, RGBA, HSL, HSLA, or CSS variables; control, change, or style pane heading colors individually during chart setup, adjust color themes for titles within stock or financial charts, specify pane label hues, and assign custom colors to improve visual clarity and match branding or design preferences across multiple chart sections.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22405,6 +25475,11 @@ The text color of the title. Any valid CSS color string will work here, includin
 ### panes.title.font `String`*(default: "16px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
+
+
+<div class="meta-api-description">
+Adjust and customize the text style, appearance, and typography of chart pane headers by specifying font family, size, weight, style, and formatting using standard CSS font syntax such as bold, italic, pixel sizes, and common font names; control the look and feel of pane titles in stock charts to enhance readability and visual hierarchy during setup or runtime by configuring font properties like font-weight, font-size, font-style, and font-family in a flexible, granular way.
+</div>
 
 #### Example
 
@@ -22440,6 +25515,11 @@ The font style of the title.
 
 The margin of the title.
 
+
+<div class="meta-api-description">
+Adjust and control the space or padding around chart pane titles to customize the distance between titles and adjacent elements like axes, plot areas, or chart borders, enabling fine-tuning of title positioning, layout spacing, and visual balance in stock charts through configurable margins or offsets affecting title proximity and alignment within panes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22473,6 +25553,11 @@ The margin of the title.
 ### panes.title.position `String`*(default: "center")*
 
 The position of the title.
+
+
+<div class="meta-api-description">
+Control the placement and alignment of a pane's title within a stock chart by configuring its position to appear at the top, bottom, left, or right of the pane. Adjust and set the title alignment to customize the visual layout, enabling flexible title orientation and location within chart panes for clearer labeling and better user interface design. Facilitate positioning and alignment options for chart pane titles to optimize readability, appearance, and spatial organization in financial or data visualization contexts.
+</div>
 
 #### *"left"*
 
@@ -22520,6 +25605,11 @@ The pane title is positioned in the center
 
 The text of the title.
 
+
+<div class="meta-api-description">
+Set or customize the chart pane header, caption, or title text displayed above the stock chart section, enabling control over the label, heading, or descriptive title string shown in the pane area; configure, define, or specify the pane title or header text during initialization to clearly identify or name the chart segment, section heading, or visual pane label for better chart readability and organization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22552,6 +25642,11 @@ The text of the title.
 ### panes.title.visible `Boolean`*(default: true)*
 
 The visibility of the title.
+
+
+<div class="meta-api-description">
+Control the display of pane titles or headings within stock or financial charts by enabling, disabling, showing, hiding, toggling, or conditionally rendering the title text of individual chart panes or sections. Customize and manage whether pane labels, headers, or captions appear on different chart segments in StockChart, affecting the visibility of descriptive titles that can help identify chart areas, indicators, or data groupings. Adjust the visibility settings to configure the user interface, improve readability, or create cleaner chart layouts by controlling the presence or absence of pane title elements.
+</div>
 
 #### Example
 
@@ -22586,6 +25681,11 @@ The visibility of the title.
 ### pdf `Object`
 Configures the export settings for the [exportPDF](/api/javascript/dataviz/ui/stock-chart/methods/exportpdf) method.
 
+
+<div class="meta-api-description">
+Customize PDF export settings for stock charts by controlling file names, page dimensions, margins, scaling, layout, resolution, and formatting preferences when generating PDF output. Adjust or configure export parameters to define paper size, orientation, content scale, print quality, padding, and naming conventions for high-fidelity chart exports. Enable detailed control over PDF output generation for charts, including specifying export options such as printable area, design scaling, margin spacing, file naming, and overall PDF layout customization to optimize exported document appearance and usability.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22618,6 +25718,11 @@ Configures the export settings for the [exportPDF](/api/javascript/dataviz/ui/st
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.
 
+
+<div class="meta-api-description">
+Control and customize the PDF author metadata for charts exported as PDFs, enabling you to set or update the creator, author name, copyright holder, or attribution information embedded in the PDF file’s metadata fields. Configure the exported document’s author label, specifying who generated or owns the content, ensuring that the PDF includes accurate identification for licensing, branding, or compliance purposes. Adjust the metadata author tag at export time to reflect the desired creator or organization, allowing proper credit, ownership details, or source tracking within the saved PDF documents.
+</div>
+
 #### Example - set the author
 
     <div id="stock-chart"></div>
@@ -22643,6 +25748,11 @@ The author of the PDF document.
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 The creator of the PDF document.
+
+
+<div class="meta-api-description">
+Configure or set the creator metadata string for PDF exports of stock charts to define who authored the PDF document, enabling control over the creator field when generating or exporting charts as PDF files, specifying PDF document creator information during initialization or at export time, customizing the author or source metadata embedded within the exported PDF to track origin or ownership, and adjusting the creator property in PDF settings for identification, attribution, or compliance purposes.
+</div>
 
 #### Example - set the creator
 
@@ -22670,6 +25780,11 @@ The creator of the PDF document.
 ### pdf.date `Date`
 The date when the PDF document is created. Defaults to `new Date()`.
 
+
+<div class="meta-api-description">
+Configure the export time or custom timestamp embedded in PDF files generated from stock charts, enabling precise control over the document's creation date and time metadata. Set or override the PDF’s date property with a specific JavaScript Date object to reflect desired export timing, adjust time settings for generated reports, or manage document timestamps for versioning, audit trails, or automated workflows. This allows defining, controlling, or customizing the datetime information in PDF exports from chart data, ensuring correct time records for saved, shared, or archived financial visualizations.
+</div>
+
 #### Example - set the date
 
     <div id="stock-chart"></div>
@@ -22695,6 +25810,11 @@ The date when the PDF document is created. Defaults to `new Date()`.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/dataviz/ui/stock-chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+
+<div class="meta-api-description">
+Control whether PDF exports always route through a server proxy for generating and downloading files, overriding browser-native save capabilities; enable, set, or configure PDF export to use a remote proxy endpoint for file handling, ensuring server-side processing of charts or data when browsers support local saving but centralized export or logging is needed, useful for forcing server-based PDF rendering, proxy forwarding, or handling export workflows through specified URLs despite client support for direct downloads.
+</div>
 
 #### Example
 
@@ -22725,6 +25845,11 @@ If set to true, the content will be forwarded to [proxyURL](/api/javascript/data
 ### pdf.fileName `String` *(default: "Export.pdf")*
 Specifies the file name of the exported PDF file.
 
+
+<div class="meta-api-description">
+Configure or specify the exported PDF’s filename when saving or downloading the stock chart, enabling custom file naming, controlling output names for automated or programmatic exports, defining predictable save dialog defaults, and managing server-side file tracking or organization by setting the desired PDF file name for the chart export operation.
+</div>
+
 #### Example - set the default PDF file name
 
     <div id="stock-chart"></div>
@@ -22751,6 +25876,11 @@ Specifies the file name of the exported PDF file.
 ### pdf.keywords `String` *(default: null)*
 Specifies the keywords of the exported PDF file.
 
+
+<div class="meta-api-description">
+Configure or set searchable metadata keywords and tags for PDF files generated from chart exports, enabling enhanced indexing, searchability, and categorization of exported documents by PDF viewers or search engines. Control the comma-separated terms that describe contents or themes of the PDF for better discoverability, enabling keyword tagging or labeling of exported charts to improve document retrieval, filtering, and metadata-based search across different PDF readers or document management systems. Optimize exported file properties with custom search terms and descriptive tags to support search tools and indexing features when exporting visual data charts or reports as PDF files.
+</div>
+
 #### Example - set the keywords
 
     <div id="stock-chart"></div>
@@ -22776,6 +25906,11 @@ Specifies the keywords of the exported PDF file.
 
 ### pdf.landscape `Boolean` *(default: false)*
 Set to `true` to reverse the paper dimensions if needed such that width is the larger edge.
+
+
+<div class="meta-api-description">
+Adjust or configure the PDF export orientation to switch between portrait and landscape modes for charts, enabling control over page layout by setting the width as the larger edge to better accommodate wide visualizations, flip paper dimensions, or change export orientation for improved readability and presentation when saving or exporting chart data as PDFs.
+</div>
 
 #### Example - enable landscape mode
 
@@ -22804,6 +25939,11 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
 ### pdf.margin `Object`
 Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
+
+
+<div class="meta-api-description">
+Configure page margins for PDF export or printing of stock charts by setting numeric values or strings with units such as millimeters, centimeters, inches, or points to control spacing around the chart on the PDF page, enabling customization of top, bottom, left, and right edges for precise layout, printable area adjustments, and improved presentation when generating or saving charts as PDF documents.
+</div>
 
 #### Example - set the margins
 
@@ -22836,6 +25976,11 @@ units are "mm", "cm", "in" and "pt" (default).
 ### pdf.margin.bottom `Number|String` *(default: 0)*
 The bottom margin. Numbers are considered as "pt" units.
 
+
+<div class="meta-api-description">
+Adjust or set the bottom page margin, spacing, or padding when exporting a stock or financial chart to PDF, controlling how much blank space appears below the chart content on the exported document; this numeric measurement can be customized to increase or decrease the distance from the chart’s bottom edge to the page border, enabling fine-tuning of PDF layout, formatting, and print-ready output for reports, presentations, or data visualization exports.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22864,6 +26009,11 @@ The bottom margin. Numbers are considered as "pt" units.
 
 ### pdf.margin.left `Number|String` *(default: 0)*
 The left margin. Numbers are considered as "pt" units.
+
+
+<div class="meta-api-description">
+Set or adjust the left margin spacing for PDF exports of stock charts by specifying a numeric value interpreted as points; control, configure, or customize the left page padding, whitespace, or inset to achieve precise layout, alignment, and formatting of exported financial or stock data visualizations, enabling tailored page margins when generating chart PDFs for reports, presentations, or print-ready documents.
+</div>
 
 #### Example
 
@@ -22894,6 +26044,11 @@ The left margin. Numbers are considered as "pt" units.
 ### pdf.margin.right `Number|String` *(default: 0)*
 The right margin. Numbers are considered as "pt" units.
 
+
+<div class="meta-api-description">
+Adjust or set the right page margin or spacing when exporting charts or graphs to PDF, configure numeric margin values to control the empty space on the right side of the exported PDF page, modify right boundary padding for PDF exports to customize layout or printing margins, control the horizontal offset on the right edge during PDF generation for charts, fine-tune the right margin in points to optimize the PDF export layout and ensure content fits properly within the printable area, customize or enable adjustments to right-side whitespace in PDF output from chart exports, define the numerical right margin for precise alignment or spacing when saving visual data representations as PDF files.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -22922,6 +26077,11 @@ The right margin. Numbers are considered as "pt" units.
 
 ### pdf.margin.top `Number|String` *(default: 0)*
 The top margin. Numbers are considered as "pt" units.
+
+
+<div class="meta-api-description">
+Adjust or set the top margin space when exporting StockChart visuals to PDF, controlling the upper whitespace or padding of the output page layout for better formatting and spacing; specify numeric values interpreted as points to customize the vertical offset from the top edge, enabling fine-tuning of document headers, margins, or page flow during PDF generation or export processes.
+</div>
 
 #### Example
 
@@ -22962,6 +26122,11 @@ Supported values:
 * An array of two strings specifying the width and height in units.
   Supported units are "mm", "cm", "in" and "pt".
 
+
+<div class="meta-api-description">
+Configure or set the export page dimensions, paper size, or PDF output size for stock chart rendering, controlling width and height for PDF export with options including standard formats like A4 or A3, custom numeric dimensions in points or string formats with units such as millimeters, centimeters, inches, or points. Adjust or specify page layout, paper format, canvas size, export scale, print dimensions, or tailor page sizing when exporting charts to PDF, enabling precise control over document size, print area, and layout scaling by defining exact measurements or choosing automatic sizing based on chart content.
+</div>
+
 #### Example - set custom paper size
 
     <div id="stock-chart"></div>
@@ -23001,6 +26166,11 @@ The proxy will receive a POST request with the following parameters in the reque
 
 The proxy should return the decoded file with set "Content-Disposition" header.
 
+
+<div class="meta-api-description">
+Configure or set a server-side proxy URL to handle streaming and delivering exported PDF files from chart components when browsers cannot save files directly, enabling PDF export fallback for environments like older Internet Explorer versions and Safari; this proxy endpoint receives POST requests containing the file’s MIME type, base64-encoded content, and filename, then returns the decoded PDF with appropriate content-disposition headers to prompt download or display, facilitating seamless PDF downloads, export handling, proxy setup for file saving limitations, and compatibility with browsers that restrict local file storage.
+</div>
+
 #### Example - set the server proxy URL
 
     <div id="stock-chart"></div>
@@ -23031,6 +26201,11 @@ A name or keyword indicating where to display the document returned from the pro
 If you want to display the document in a new window or iframe,
 the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.pdf>"`.
 
+
+<div class="meta-api-description">
+Control or configure where a PDF document fetched through a proxy is rendered by specifying a target such as a new browser window, an iframe element, or any named browsing context using a keyword or identifier. Enable inline or embedded display of the proxied document by targeting frames or windows, ensuring the correct content disposition headers facilitate viewing within the app or external contexts. This setting supports directing fetched PDF content to specific UI areas, pop-ups, or embedded containers, allowing developers to set or customize how and where documents appear when loaded via proxy. Adjust rendering destinations for documents returned from backend proxies by defining target names, frame references, or windows to control user experience in charting or data visualization environments.
+</div>
+
 #### Example - open the generated document in a new window
 
     <div id="stock-chart"></div>
@@ -23059,6 +26234,11 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 ### pdf.subject `String` *(default: null)*
 Sets the subject of the PDF file.
 
+
+<div class="meta-api-description">
+Configure or specify the subject metadata field embedded in exported PDF files to define the document’s topic or summary, enabling better identification, searchability, indexing, and organization within PDF viewers or document management systems when saving charts or reports. This setting controls the descriptive text metadata for PDFs created from visual data exports, ensuring the resulting file includes relevant subject information for users searching, filtering, or categorizing the document later by its content theme or purpose, useful for automated workflows, archival, or compliance.
+</div>
+
 #### Example - set the subject
 
     <div id="stock-chart"></div>
@@ -23084,6 +26264,11 @@ Sets the subject of the PDF file.
 
 ### pdf.title `String` *(default: null)*
 Sets the title of the PDF file.
+
+
+<div class="meta-api-description">
+Configure the visible title and metadata label for PDF exports of financial or stock charts, enabling customization of the document title, file name display, and embedded PDF metadata for clear identification and better organization when saving, downloading, or sharing chart snapshots as PDF files across different viewers and platforms.
+</div>
 
 #### Example - set the title
 
@@ -23112,6 +26297,11 @@ Sets the title of the PDF file.
 
 Specifies if the series visible option should be persisted when changing the dataSource data.
 
+
+<div class="meta-api-description">
+Control whether the chart retains the visibility status of data series after updating or refreshing the data source, enabling persistent show or hide settings for individual series across reloads or data changes, so toggled or programmatically set visibility states remain consistent instead of resetting to default configurations when new data is loaded or the dataset is replaced.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23137,6 +26327,11 @@ Specifies if the series visible option should be persisted when changing the dat
 ### plotArea `Object`
 
 The plot area configuration options. This is the area containing the plotted series.
+
+
+<div class="meta-api-description">
+Configure and customize the region where stock chart data series are displayed, controlling the plotting area’s layout, dimensions, boundaries, and visual appearance for charted series. Adjust the chart’s rendering zone, plotting space, or graph area to set size, margins, background, and arrangement of series plots, enabling precise control over how data points and series are positioned and visualized within the chart’s main display region. Optimize or fine-tune the drawing space for multiple series, graph segments, or data visualization fields to tailor the display area according to design or functional needs in stock market or financial charts.
+</div>
 
 #### Example
 
@@ -23167,6 +26362,11 @@ The plot area configuration options. This is the area containing the plotted ser
 
  The background color of the plot area.
 
+
+<div class="meta-api-description">
+Configure the chart's plot area background color or fill by setting any valid CSS color format such as hex codes, RGB or RGBA values, or standard named colors, allowing control over transparency and opacity behind data series, axes, grids, and chart elements; useful for customizing visual contrast, theme styling, background transparency, or highlighting specific chart regions during initialization or dynamic updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23194,6 +26394,11 @@ The plot area configuration options. This is the area containing the plotted ser
 ### plotArea.opacity `Number`*(default: 1)*
 
 The background opacity of the plot area.
+
+
+<div class="meta-api-description">
+Control and adjust the transparency, opacity level, or background visibility of the chart’s plot area or drawing region to achieve subtle or prominent backdrops behind data series, gridlines, and overlays, enabling fine-tuning of background clarity, see-through effect, or translucency for better visual layering and contrast in stock charts, trading graphs, or data visualizations.
+</div>
 
 #### Example
 
@@ -23223,6 +26428,11 @@ The background opacity of the plot area.
 ### plotArea.border `Object`
 
 The border of the plot area.
+
+
+<div class="meta-api-description">
+Adjust the plot area's outer edge styling by setting the border color, thickness, dash pattern, and visibility to customize or remove the outline around the Stock Chart's plotting region, enabling fine-tuned control over the chart's framed area appearance, border stroke design, and whether to show or hide the boundary lines for improved visual emphasis or minimalist display.
+</div>
 
 #### Example
 
@@ -23256,6 +26466,11 @@ The border of the plot area.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Set or customize the border color of a chart's plot area using CSS color values to control the outline, frame, or edge appearance around the chart's main data display region, enabling styling, theming, or visual emphasis of the chart area boundary in stock charts or similar data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23286,6 +26501,11 @@ The border of the plot area.
 
  The dash type of the border.
 
+
+
+<div class="meta-api-description">
+Customize or configure the border line style or stroke pattern around a chart's plot area by setting dashed, dotted, solid, or other alternating line patterns to control the border appearance and visual emphasis of chart backgrounds. Enable or adjust patterned borders to create distinct outlines, control line rhythm, enable stylistic dashes or dots on plot area edges, and refine the chart's visual presentation with flexible border line styles.
+</div>
 
 #### *"solid"*
 
@@ -23345,6 +26565,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, width, or stroke size of the plot area border outline in stock charts to control the line weight, edge thickness, or boundary thickness surrounding the chart plotting region, enabling customization of the chart’s visual frame, border line width, or contour thickness during chart setup or styling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23375,6 +26600,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The margin of the plot area.
 
+
+<div class="meta-api-description">
+Set or customize the spacing and padding around the stock chart’s main drawing area to control layout, alignment, and visual balance; adjust margins between the plot region and adjacent elements to manage whitespace, set outer edges or borders, and refine chart positioning for better clarity and design during initialization or configuration.
+</div>
+
 #### Example
 
 ```pseudo
@@ -23395,6 +26625,11 @@ The supported values are:
 
 * "svg" - renders the widget as inline SVG document, if available
 * "canvas" - renders the widget as a Canvas element, if available.
+
+
+<div class="meta-api-description">
+Control how the stock chart is displayed by selecting the rendering mode, configuring output as either scalable vector graphics (SVG) or HTML canvas, enabling adaptation for browser compatibility to ensure proper visualization, choosing between drawing the chart as an inline SVG element for resolution-independent graphics or as a canvas bitmap for performance optimization, setting or switching rendering engines based on environment support, and managing display methods to optimize rendering quality, responsiveness, and browser fallback handling.
+</div>
 
 #### Example - Render as Canvas, if supported
 
@@ -23424,6 +26659,11 @@ If a type value is missing, the type is assumed to be the one specified in serie
 Each series type has a different set of options.
 
 > **Info:** Some options accept function as argument. They will be evaluated for each point (supplied as parameter). The theme/seriesDefaults value will be used if no value is returned.
+
+
+<div class="meta-api-description">
+Control and configure multiple data series within a stock chart by defining an array of series objects that specify how each series is displayed and rendered, including setting series types such as line, candlestick, or area charts. Enable dynamic customization of series appearance and behavior by binding data points, using functions for per-point evaluation of options, and applying default styles or themes when specific properties are undefined. Adjust, enable, or override series-specific settings like type, color, and rendering options to handle diverse financial data visualizations and support mixed or multiple chart types layered together for complex data analysis and presentation.
+</div>
 
 #### Example
 
@@ -23478,6 +26718,11 @@ The type of the series. Available types:
 * `polynomialTrendline`
 * `powerTrendline`
 
+
+<div class="meta-api-description">
+Configure the chart series rendering style by selecting from various visualization types such as line, column, area, candlestick, or OHLC to control how data points appear on stock charts. Enable or set different trendline algorithms including exponential, linear, logarithmic, moving average, polynomial, and power trendlines to analyze financial data patterns effectively. Adjust the series display type to switch between graphical representations like bar charts, line graphs, and candlestick patterns, allowing customizable visual formats to highlight stock price movements, trends, and statistical analyses. Choose or specify the rendering method to suit charting needs, including traditional stock chart visuals and advanced trendline calculations for enhanced data insights.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23505,6 +26750,11 @@ The type of the series. Available types:
 The series line dash type.
 
 ** Applicable only to line series **
+
+
+<div class="meta-api-description">
+Customize or set the line style pattern of stock chart series to solid, dashed, dotted, or other stroke types that change the visual appearance of series lines for better differentiation and clarity. Adjust or configure dash patterns, stroke dash styles, or line dash effects to control how series lines are rendered with varied dash types in financial or stock data visualizations. Enable or modify dash patterns to visually distinguish line series, improve chart readability, or apply specific stroke styles during chart setup and rendering for line-based series.
+</div>
 
 #### *"solid"*
 
@@ -23566,6 +26816,11 @@ Array of data items. The data item type can be either a:
 * Array of arrays of numbers. Available for:
     * OHLC and candlestick series (open, high, low, close)
 
+
+<div class="meta-api-description">
+Set or configure the data source for stock chart series by binding arrays of objects representing point fields, arrays of numerical values for area, line, or column charts, or arrays of numeric tuples specifying open, high, low, and close values for financial chart types like OHLC and candlestick, enabling flexible input formats to define series points, update chart visualizations, input raw series data, or control the points rendered in financial and standard stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23590,6 +26845,11 @@ Array of data items. The data item type can be either a:
 The data field containing the high value.
 
 ** Available for candlestick and ohlc series only **
+
+
+<div class="meta-api-description">
+Set or specify the data field name representing the highest or maximum price in stock chart series such as candlestick or OHLC, enabling configuration of which data property holds the peak value for accurate plotting and rendering of stock price highs, allowing control over data binding to the high value in financial chart visualizations and time series analysis, useful for tailoring series input mappings and ensuring correct extraction of maximum values from datasets in stock market graphs.
+</div>
 
 #### Example
 
@@ -23626,6 +26886,11 @@ The data field containing the high value.
 
 The data field containing the series value.
 
+
+<div class="meta-api-description">
+Specify or configure the data field that holds numeric values for each data point in a chart series, enabling dynamic binding, mapping, or updating of series data from your source; control which property or attribute within your data items is used to plot values on the stock chart, set or change the series data key, define the value field for each series point, and link series points to specific data keys for accurate rendering and real-time data updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23656,6 +26921,11 @@ The data item field which contains the category name or date.
 
 > If specified, the [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
 
+
+<div class="meta-api-description">
+Configure the data field used to group and label chart data points along the horizontal axis by specifying the category name, label, or date value to organize series points in sequence, including chronological ordering when dates are involved, enabling control over grouping and sorting of time-based or categorical data within financial or stock charts by setting or overriding default fields that determine how the x-axis categories layout and how data points align according to labels, timestamps, or other category identifiers.
+</div>
+
 #### Example - set series date category field
 
     <div id="stock-chart"></div>
@@ -23678,6 +26948,11 @@ The data item field which contains the category name or date.
 The data field containing the current value.
 
 ** Available for bullet and verticalBullet series. **
+
+
+<div class="meta-api-description">
+Configure or bind the data field representing the current value or metric within a chart series to display dynamic, real-time measurements in bullet or vertical bullet visuals, enabling users to track and visualize up-to-date statistics, current performance indicators, or live data points in stock or time series charts by specifying which property contains the latest or ongoing value for each data item in the series.
+</div>
 
 #### Example
 
@@ -23710,6 +26985,11 @@ The data field containing the target value.
 
 ** Available for bullet and verticalBullet series. **
 
+
+<div class="meta-api-description">
+Configure or set the specific data key that contains the target numeric value for series in stock charts, enabling display of target markers, reference points, or comparison values within bullet or vertical bullet chart types. Control which field in your dataset is used to represent goal, benchmark, or expected figures for series visualization, allowing the chart to render visual indicators for target-based analysis, progress tracking, or comparative metrics on stock chart series with customizable data connections. This setting helps in mapping your data’s target values for enhanced chart highlighting and marker positioning in bullet style stock series.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23741,6 +27021,11 @@ The name of the parent series of the trendline.
 
 > The `for` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to
 > "`linearTrendline`", "`exponentialTrendline`", "`logarithmicTrendline`", "`powerTrendline`", "`polynomialTrendline`" or "`movingAverageTrendline`".
+
+
+<div class="meta-api-description">
+Link a trendline to an existing data series by specifying its name to create relationships between datasets in StockChart, enabling the configuration of trendlines such as linear, exponential, logarithmic, power, polynomial, or moving average types for analytical visualization; set, associate, or connect trendlines to a parent series using the series identifier string, facilitating trend analysis, data comparison, or overlay of calculated series driven by original data input within the chart framework.
+</div>
 
 #### Example - set the trendline parent series for field
 
@@ -23784,6 +27069,11 @@ The name of the parent series of the trendline.
 The trendline configuration options.
 
 > The `trendline` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline", "powerTrendline" or "movingAverageTrendline".
+
+
+<div class="meta-api-description">
+Configure and customize trendlines for chart series to visualize data trends using linear, exponential, logarithmic, power, or moving average fits; control rendering options such as appearance, smoothing parameters, window length, and fitting behavior to highlight trend direction and patterns in stock or time series data; enable, set, or adjust trendline properties to improve data interpretation, trend analysis, and statistical fitting on various series types and visualizations.
+</div>
 
 #### Example - set the trendline options
 
@@ -23830,6 +27120,11 @@ The trendline configuration options.
 The trendline forecast settings. By default, the trendline does not display a forecast.
 
 > The `forecast` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "linearTrendline", "exponentialTrendline", "logarithmicTrendline" or "powerTrendline" and the parent series are either [Date Series]({% slug dateseries_charts_widget %}), "scatter" or "scatterLine" series.
+
+
+<div class="meta-api-description">
+Configure and enable trendline forecasting to project and extend future data points beyond existing stock chart series, supporting predictive trend extensions for linear, exponential, logarithmic, and power trendlines applied to date-based series, scatter plots, or scatter line charts. Control how trend projections display anticipated values past the current dataset, allowing users to set up, display, or adjust forecasted points along financial time series or scatter data, facilitating analytical insights and visual forecasting of stock or data trends based on historical patterns.
+</div>
 
 #### Example - set the trendline forecast
 
@@ -23902,6 +27197,11 @@ The trendline forecast settings. By default, the trendline does not display a fo
 
 The number of intervals to extend the trendline before the first data point.
 
+
+<div class="meta-api-description">
+Control how far backward a stock chart trendline forecast extends before the initial data point by setting a numeric value indicating the number of intervals to project the trendline into the past, enabling users to expand predictions earlier than existing data, adjust historical forecast range, configure the trendline to start before the first record, manage backward extension of analytical lines, set the duration for pre-data trend projection, and customize how the forecast spans prior time periods in financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -23938,6 +27238,11 @@ The number of intervals to extend the trendline before the first data point.
 ### series.trendline.forecast.after `Number` *(default: 0)*
 
 The number of intervals to extend the trendline after the last data point.
+
+
+<div class="meta-api-description">
+Control the extension of a trendline beyond the last available data point by specifying how many future periods or intervals to project or forecast ahead on a stock or financial chart; configure the number of steps, periods, or data points to continue the trendline forward to anticipate upcoming values, enabling prediction, future trend estimation, or forward-looking analysis on time series data by setting the count of intervals to extend the trendline beyond the existing dataset.
+</div>
 
 #### Example
 
@@ -23982,6 +27287,11 @@ Accepted values are from 2 to 6:
 * 4: a polynomial trendline of 4th degree with up to 3 extreme points.
 * 5: a polynomial trendline of 5th degree with up to 4 extreme points.
 * 6: a polynomial trendline of 6th degree with up to 5 extreme points.
+
+
+<div class="meta-api-description">
+Control and configure the degree of the polynomial used for trendline smoothing in stock charts by setting an integer value between 2 and 6 to adjust how closely the curve fits the data points; options range from quadratic (order 2) capturing a single peak or trough, up to 6th-degree polynomials (order 6) allowing multiple inflection points for more complex data patterns. Adjusting the polynomial order enables fine-tuning of trendline responsiveness to fluctuations, peaks, and valleys, helping to model data with varying smoothness and complexity based on developer preference or analytical requirements for trend visualization, data fitting, curve approximation, or predictive line adjustments in time series and financial charting contexts.
+</div>
 
 #### Example - set the polynomial trendline order (degree)
 
@@ -24053,6 +27363,11 @@ The number of intervals to take when calculating averages. The value should be a
 
 > The period setting is supported only when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "movingAverageTrendline".
 
+
+<div class="meta-api-description">
+Adjust the number of intervals or data points used to calculate a moving average trendline to control the smoothing level, sensitivity, responsiveness, and window size of trendline calculations in stock or financial charts. Configure how many periods or time steps are included in the moving average computation to fine-tune trendline behavior, enhance signal clarity, reduce noise, and customize the duration of data aggregation for trend analysis, specifically when using moving average or moving-average-type trendlines. This setting impacts how quickly the trendline reacts to changes, enabling you to set a smoothing period that balances between lag and volatility filtering.
+</div>
+
 #### Example - set the moving average trendline period
 
     <div id="stock-chart"></div>
@@ -24121,6 +27436,11 @@ The number of intervals to take when calculating averages. The value should be a
 
 The series name visible in the legend.
 
+
+<div class="meta-api-description">
+Set or customize the display text for data series in chart legends to identify, label, or distinguish multiple series within financial or stock charts; configure series titles, modify legend labels, control the naming shown in the legend entries, assign descriptive or meaningful names for each data series to improve chart readability, user recognition, and series differentiation when visualizing stock or time-series data.
+</div>
+
 #### Example - set the series name
 
     <div id="stock-chart"></div>
@@ -24185,6 +27505,11 @@ The fields which can be used in the template are:
 
 Configures the appearance of highlighted points.
 
+
+<div class="meta-api-description">
+Configure and customize the appearance of data points when hovered over or selected in stock or financial charts by adjusting marker fill colors, border strokes, sizes, transparency levels, and animations to create distinct visual highlights and interactive feedback on series points, enabling clear emphasis and focus during user interactions with chart data, with options to control styling, effects, and behavior of highlighted chart elements for better readability and dynamic visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24216,6 +27541,11 @@ Configures the appearance of highlighted points.
 
 A value indicating if the series points should be highlighted.
 
+
+<div class="meta-api-description">
+Control the visibility of visual emphasis on data points within chart series to highlight or de-emphasize specific points in stock or financial charts, configure showing or hiding point highlights or emphasis markers, enable or disable series point highlighting to improve focus or clarity on selected data, set the display of highlights during chart initialization to either emphasize key data points or keep the series unhighlighted, manage point visibility toggles for better data interaction and clarity in visualization of time series, enabling developers to tailor the prominence of individual points for analysis or user experience enhancements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24246,6 +27576,11 @@ A value indicating if the series points should be highlighted.
 The border of highlighted points. The color is computed automatically from the base point color.
 
 ** Applicable to bubble, pie, candlestick and ohlc series. **
+
+
+<div class="meta-api-description">
+Control and customize the border appearance around highlighted data points in financial or stock chart series such as bubble, pie, candlestick, and OHLC charts, enabling emphasis and distinction of selected points with adjustable outline colors that are often derived from the original point color. Configure, set, or modify the highlight border color, thickness, or style to enhance visual focus on specific data markers during interactions or hover states, improving data readability and user experience in dynamic stock or series chart visualizations. Adjust the border that frames emphasized points to match design themes or highlight criteria, supporting various chart types and use cases where point distinction and highlight clarity are important for analysis and presentation.
+</div>
 
 #### Example
 
@@ -24280,6 +27615,11 @@ The border of highlighted points. The color is computed automatically from the b
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or width of the border outlining a highlighted data series in stock or financial charts, enabling customization of the stroke or line thickness that emphasizes selected or focused series elements. Control, set, or configure the border line weight around active or highlighted series to make certain data stand out visually with thicker or thinner outlines according to user preference or design requirements in chart rendering and data visualization contexts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24311,6 +27651,11 @@ The width of the border.
 
 The border color.
 
+
+<div class="meta-api-description">
+Configure the color of the outline or border around highlighted, hovered, or selected data series in stock charts, enabling you to set borders using any CSS color format such as hex codes, RGB, RGBA, or named colors to customize visual emphasis for interactive chart elements, control highlight stroke color for series when users hover or select points, adjust the appearance of focus outlines on series data, and style the border color to improve chart readability and user interaction feedback.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24341,6 +27686,11 @@ The border color.
 ### series.highlight.border.opacity `Number`
 
 The border opacity.
+
+
+<div class="meta-api-description">
+Control and customize the transparency level, visibility, and opacity of the border outlining a highlighted data series in a stock or financial chart, enabling developers to set how clear, faint, solid, or translucent the border around selected or focused series appears, including adjusting border alpha, fade level, or highlight intensity to emphasize or de-emphasize series prominence dynamically during chart rendering or interaction.
+</div>
 
 #### Example
 
@@ -24375,6 +27725,11 @@ The highlight color.
 
 ** Available only for pie series **
 
+
+<div class="meta-api-description">
+Set or customize the highlight color that visually emphasizes pie chart slices or segments when hovered over or selected, control the accent color for active or focused pie series pieces in a stock chart, configure how the highlight or selection color appears on pie chart wedges to improve user interaction feedback, adjust or enable the color that stands out on pie slices during mouseover or click events, define the visual highlight tone that differentiates active pie series portions, specify or change the highlight shade to enhance segment visibility in pie charts, manage the color used for interactive highlighting of pie chart sections, tailor the emphasis color for hovered or selected slices in pie series, control the accentuation color on pie wedges for user engagement, and customize the color setting that triggers on pie series slice highlight actions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24405,6 +27760,11 @@ The highlight color.
 Line options for highlighted points. The color is computed automatically from the base point color.
 
 ** Available only for candlestick series **
+
+
+<div class="meta-api-description">
+Adjust the visual emphasis on highlighted candlestick data points by customizing the appearance and style of the outline or stroke line around selected or hovered points within stock chart series, enabling control over line color, thickness, visibility, and highlighting effects that help distinguish emphasized data markers in financial charts, with automatic color derivation from the original data point and configuration options for enhancing user interaction, focus, and readability in candlestick chart visualizations.
+</div>
 
 #### Example
 
@@ -24439,6 +27799,11 @@ Line options for highlighted points. The color is computed automatically from th
 
 The width of the line.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, weight, or pixel width of a chart line that becomes visually emphasized or highlighted during hover, selection, or focus in a series on a stock chart or line graph; control line boldness, prominence, stroke size, or line thickness for better visibility and user interaction feedback when a data series is active or emphasized in financial or data visualization charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24470,6 +27835,11 @@ The width of the line.
 
 The line color.
 
+
+<div class="meta-api-description">
+Control or customize the highlight line color for the data series in a financial or stock chart, setting the stroke or outline color that appears when hovering over or selecting series lines. Adjust or configure the visible line color using any CSS-compatible color format, such as hexadecimal codes, RGB, RGBA, or named colors, to emphasize or distinguish specific series within the chart interactions. Enable or set the highlight stroke color to improve visual clarity, focus, or user experience during interactive exploration of financial data trends.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24500,6 +27870,11 @@ The line color.
 ### series.highlight.line.opacity `Number`
 
 The opacity of the line.
+
+
+<div class="meta-api-description">
+Adjust the transparency level or alpha of the highlight line to customize how prominently a series stands out when emphasized or focused in a stock chart, enabling control over the visibility, clarity, brightness, or subtlety of the highlight effect during interactions like hovering, selecting, or spotlighting specific data series in financial or time series visualizations.
+</div>
 
 #### Example
 
@@ -24534,6 +27909,11 @@ The opacity of the highlighted points.
 
 ** Applicable to bubble, pie, candlestick and ohlc series. **
 
+
+<div class="meta-api-description">
+Adjust the transparency level of highlighted data points or segments in financial charts, including bubble, pie, candlestick, and OHLC series, to control how visible or translucent these points appear when hovered over or selected, enabling customization of emphasis intensity, highlight clarity, and visual focus on active chart elements by setting the opacity or alpha blending for interactive highlights.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24565,6 +27945,11 @@ The aggregate function to apply for date series.
 
 This function is used when a category (an year, month, etc.) contains two or more points.
 The function return value is displayed instead of the individual points.
+
+
+<div class="meta-api-description">
+Summarize or combine multiple data points within the same date category such as year, month, or day by applying custom aggregation functions to time-series data, enabling developers to roll up, reduce, group, or bucket overlapping or duplicate timestamps into single summarized values for clearer visualizations and concise data representation in charts. This supports scenarios like computing averages, sums, counts, or custom calculations over clustered dates, enhancing date-based series analysis by controlling how multiple entries are merged or condensed within shared time intervals.
+</div>
 
 #### Example
 
@@ -24619,6 +28004,11 @@ The name of the value axis to use.
 
 ** Applicable to area, column, line, ohlc and candlestick series **
 
+
+<div class="meta-api-description">
+Configure or assign a specific numeric axis for chart series visualization, enabling control over which value axis area, column, line, OHLC, or candlestick series use for data plotting, supporting scenarios where multiple axes are needed, allowing customization of series alignment to distinct value scales, setting or linking series to designated axes for precise chart representation, managing axis bindings, and enabling clear differentiation of data trends by associating individual series with selected numeric axes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24652,6 +28042,11 @@ The border of the points.
 
 ** Applicable to column, ohlc and candlestick series **
 
+
+<div class="meta-api-description">
+Adjust and configure the outline or stroke around chart data points, enabling control over border color, thickness, style, dash patterns, and visibility for various series types such as columns, OHLC, and candlestick charts. Enable customization of data point edges to highlight, differentiate, or stylize chart visuals, specifying stroke width, color codes, dashed or solid lines, and frame appearance for enhanced readability and presentation in financial or stock data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24683,6 +28078,11 @@ The border of the points.
 
 The color of the border.  It defaults to the color of the current series.
 
+
+<div class="meta-api-description">
+Customize and control the outline color of chart series by setting the border color to any CSS color value, including named colors, hex codes, or rgba formats, enabling precise styling and overriding default series colors for clear visual distinction and tailored chart appearance, ideal for adjusting border highlights, defining series edges, or emphasizing data outlines in stock or data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24711,6 +28111,11 @@ The color of the border.  It defaults to the color of the current series.
 ### series.border.dashType `String|Function`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure the border line style for chart series by setting patterns such as solid lines, dashed strokes, dotted outlines, or various custom dash styles to control the visual emphasis and appearance of series borders in stock or financial charts. Adjust the border dash type to enable distinct line patterns that enhance readability, highlight trends, or differentiate multiple data series with customizable stroke designs ranging from continuous lines to segmented and patterned strokes. This setting helps control the outline decoration for chart elements, allowing developers to customize the series border visualization to match user interface themes, highlight specific data points, or create clear separations between overlapping series.
+</div>
 
 #### Example
 
@@ -24769,6 +28174,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The border opacity.
 
+
+<div class="meta-api-description">
+Adjust or set the transparency level, translucency, or alpha value of chart series borders or outlines in stock or financial charts, enabling control over how visible or faint the edges around data series appear, with options to configure opacity as a numeric value between transparent and opaque for styling, visual emphasis, or subtle border effects in time-series, candlestick, or line chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24798,6 +28208,11 @@ The border opacity.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust, set, or configure the thickness, width, or prominence of the outline or border line around data series in stock charts or financial graphs, controlling how bold or subtle the edges of series elements appear; this includes changing numeric values to make borders thicker or thinner for clear visual distinction, enhancing series visibility, styling, or emphasis in chart rendering.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -24826,6 +28241,11 @@ The width of the border.
 ### series.closeField `String`
 
 The data field containing the close value.
+
+
+<div class="meta-api-description">
+Set or configure the data field name that contains the closing price value for each data point in financial chart series such as OHLC or candlestick charts, enabling control over which data property represents the final price in time series visualizations. This setting helps specify, bind, or map the close or last traded price field from your dataset for accurate plotting of stock price movements, final values, or closing quotes within series visualizations, allowing developers to define how the end-of-period prices are read, referenced, or linked in chart configurations.
+</div>
 
 #### Example
 
@@ -24857,6 +28277,11 @@ The series base color. The supported values are:
 
 * CSS color string, including hex and rgb
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
+
+
+<div class="meta-api-description">
+Set or customize the base color for chart series using CSS color strings like hex, rgb, or by providing a callback function that dynamically determines each data point’s color, enabling control over color schemes, conditional coloring, theming, or highlighting specific points; supports static color assignment, dynamic coloring via functions, default fallbacks, and flexible styling to match design requirements, data-driven color adjustments, or visual differentiation in stock or financial charts.
+</div>
 
 #### Example - set color as a string
 
@@ -24922,6 +28347,11 @@ The series base color. The supported values are:
 The data field containing the point color.
 
 ** Applicable for column, candlestick and ohlc series. **
+
+
+<div class="meta-api-description">
+Set or bind the color of individual data points in a stock chart series by linking color values from a specific data field, enabling dynamic per-point coloring for column, candlestick, or OHLC charts; customize, control, or configure point colors based on underlying data attributes, use data-driven color styling, apply conditional or value-based coloring, and map series colors directly from your dataset to visually differentiate points according to specified data properties.
+</div>
 
 #### Example
 
@@ -25012,6 +28442,11 @@ The data field containing the point color.
 
 The series color when the open value is greater than the close value.
 
+
+<div class="meta-api-description">
+Customize or configure the color representing declining or bearish price movements in stock charts, specifically for periods where the opening value exceeds the closing value, including down candles and down bars in candlestick or OHLC series. Control visual indicators that mark falling prices, decreasing trends, negative price action, or bearish periods by setting the color for series segments that signify a drop in value. Adjust or define the appearance of downward price fluctuations and enable intuitive recognition of downtrends, falling market segments, or loss periods within financial visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25043,6 +28478,11 @@ The data field containing the color applied when the open value is greater than 
 
 ** Available for candlestick series only **
 
+
+<div class="meta-api-description">
+Specify or bind a data field to dynamically set the color of downward or falling candlestick bars in a stock or financial chart, enabling customization of candle colors when the opening price is higher than the closing price, useful for highlighting negative trends, losses, or price drops within candlestick series visualization and allowing control over the appearance of bearish movements for clearer financial data representation and customized visual cues in trading or stock market charting applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25072,6 +28512,11 @@ The distance between category clusters.
 
 ** Applicable for column, candlestick and ohlc series. **
 
+
+<div class="meta-api-description">
+Adjust spacing between grouped bars, columns, candlesticks, or OHLC price markers in stock charts by configuring or setting the gap, space, or distance between category clusters to enhance chart readability, layout, and visual separation of series data points, controlling how tightly or loosely price series or columns are arranged for clearer comparisons and improved presentation in financial or stock market visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25098,6 +28543,11 @@ The distance between category clusters.
 ### series.labels `Object`
 
 Configures the series data labels.
+
+
+<div class="meta-api-description">
+Customize the appearance and behavior of data labels for chart series by enabling or disabling labels, binding label text dynamically to data fields, formatting text with templates or patterns, adjusting label positions relative to data points, controlling font style, size, and color, setting background colors or transparency, rotating labels for better fit, and managing visibility and display conditions for individual or grouped series data points in stock or financial charts.
+</div>
 
 #### Example
 
@@ -25138,6 +28588,11 @@ The labels are positioned in columns to the left and right of the chart.
 
 The background color of the labels.
 
+
+<div class="meta-api-description">
+Configure or set the background color behind series labels in stock charts to enhance label readability and contrast against chart data, using customizable color values such as hex codes, RGB or RGBA formats, or named CSS colors, enabling control over label appearance and visibility in various charting scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25167,6 +28622,11 @@ The background color of the labels.
 ### series.labels.border `Object`
 
 The border of the labels.
+
+
+<div class="meta-api-description">
+Control and customize the appearance of borders surrounding data labels in chart series by setting border color, width, dash style, and thickness to enhance label visibility, readability, and alignment with overall chart design. Adjust outline styling for series labels on stock or financial charts to make data points stand out, ensure consistent label framing across multiple series, and improve clarity in dense or multi-series visualizations. Configure border attributes to fine-tune label differentiation, highlight specific data points, or match branding and styling requirements in interactive or static stock charts, enabling precise control over label edges, strokes, and decorative line patterns for effective data presentation.
+</div>
 
 #### Example
 
@@ -25201,6 +28661,11 @@ The border of the labels.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Adjust and customize the outline color or stroke of data labels on chart series by setting the border color using any valid CSS color format such as hex codes, RGB, RGBA, or named colors. This controls the visual appearance of label borders in stock or financial charts, enabling options to configure, style, highlight, or differentiate series data labels by their border hues for clearer presentation, emphasis, or thematic design in charting components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25232,6 +28697,11 @@ The border of the labels.
 ### series.labels.border.dashType `String|Function`*(default: "solid")*
 
  The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure and customize the border dash pattern for labels in chart series, enabling control over the label outlines using styles such as solid, dashed, dotted, or various dash arrangements to modify the appearance and emphasis of series labels within stock or financial charts. Adjust, set, or enable different stroke dash styles to enhance label visibility, differentiate data points, or stylize chart annotations by altering the border pattern around series labels, helping to highlight, separate, or visually organize label boundaries in time series, candlestick, or line charts commonly used in trading and analytics dashboards.
+</div>
 
 #### Example
 
@@ -25293,6 +28763,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, width, or stroke size of borders around series labels in stock charts to customize label outlines, set border line thickness, control label border weight, or define the numeric value for label border size. Enable precise control over the outline width or stroke thickness of chart series labels to enhance visual clarity, emphasize label edges, or style series label borders according to design needs or configuration settings during chart setup.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25325,6 +28800,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The text color of the labels.
 
+
+<div class="meta-api-description">
+Set or customize the font color, text hue, or label color for series annotations, data point labels, or chart legends in stock or financial charts using any valid CSS color notation, including hex codes, RGB, RGBA, HSL, or color names; adjust label text appearance by configuring series label colors for improved readability, branding, or thematic design across chart data series and graphical elements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25354,6 +28834,11 @@ The text color of the labels.
 ### series.labels.font `String|Function`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+
+<div class="meta-api-description">
+Adjust or customize the typography, font styling, and appearance of data series labels in stock or financial charts by specifying font family, size, weight, style, or entire CSS font strings to control how text labels on chart lines or series appear, enabling configuration of label fonts such as bold, italic, standard, or custom fonts like Arial, Verdana, or any web-safe font for improved readability, presentation, and clarity in charts displaying stock trends, price movements, or financial data series.
+</div>
 
 #### Example
 
@@ -25385,6 +28870,11 @@ The font style of the labels.
 
 The format of the labels.
 
+
+<div class="meta-api-description">
+Configure and customize data label text formatting for chart series by specifying numeric, date, or custom format patterns and templates to control how values appear on series labels, enabling flexible, readable, and consistent display of data points in stock or financial charts. Adjust label output styling, set precision, apply date/time formats, and use templates to format series data labels for enhanced presentation and clarity in visual data representations.
+</div>
+
 #### Example
 
 ```pseudo
@@ -25395,6 +28885,11 @@ The format of the labels.
 ### series.labels.margin `Number|Object`*(default: { left: 5, right: 5})*
 
 The margin of the labels.
+
+
+<div class="meta-api-description">
+Adjust or configure the spacing and padding around data series labels in stock charts, controlling margins to prevent label overlap and improve readability by setting uniform or individual top, right, bottom, and left gaps; customize label positioning, offset, and layout within chart components to optimize visual clarity and prevent crowding of series text annotations.
+</div>
 
 #### Example
 
@@ -25411,6 +28906,11 @@ The margin of the labels.
 
  The padding of the labels.
 
+
+<div class="meta-api-description">
+Adjust, configure, or set the inner spacing around chart series labels to control the space between label text and its surrounding box, improving label readability and preventing overlap of annotations and data labels in time series or financial charts. Enable padding customization to fine-tune label placement, enhance clarity, avoid cluttered visuals, and manage label layout when rendering series data points, stock trends, or dynamic chart annotations.
+</div>
+
 #### Example
 
 ```pseudo
@@ -25425,6 +28925,11 @@ The margin of the labels.
 ### series.labels.position `String|Function`*(default: "above")*
 
 Defines the position of the labels.
+
+
+<div class="meta-api-description">
+Adjust the placement or alignment of data labels in stock chart series to appear above, below, left, right, inside, or outside the data points for improved readability, visualization, or custom label positioning. Configure label location relative to chart markers or points to control how value annotations, text labels, or numeric indicators are displayed on stock or financial charts, enabling fine-tuning of label orientation for clear data representation and avoiding overlap or clutter in time-series or price data visualizations.
+</div>
 
 #### Example
 
@@ -25509,6 +29014,11 @@ The fields which can be used in the template are:
 *   series - the data series
 *   value - the point value. Can be a number or object containing each bound field.
 
+
+<div class="meta-api-description">
+Customize chart data point labels by defining HTML or text templates that dynamically access point details like category names, original data entries, numerical or object values, percentage values for stacked charts, and series information, enabling flexible label formatting, display control, data binding, and visual customization across area, bar, column, bubble, donut, line, pie, and 100% stacked chart types.
+</div>
+
 #### Example
 
 ```pseudo
@@ -25539,6 +29049,11 @@ The fields which can be used in the template are:
 
  The visibility of the labels.
 
+
+<div class="meta-api-description">
+Control the visibility of data point or series labels within financial or stock charts by toggling label display on or off, configuring whether series annotations, data tags, or marker text appear, enabling developers to set label rendering for clarity or minimalism in chart presentations, adjust label visibility dynamically, customize annotation display for user interfaces, and manage how textual identifiers accompany data series or points in stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25567,6 +29082,11 @@ The fields which can be used in the template are:
 ### series.legendItem `Object`
 
 The configuration of the Chart legend item for this series.
+
+
+<div class="meta-api-description">
+Control and customize the display of a data series in the chart legend by configuring label text, marker styles, visibility toggles, positioning options, and applying custom templates or formatting for the legend entry. Enable or disable the legend item, set how it appears in the legend area, adjust marker icons, control the textual label for better identification, and manipulate layout placement to optimize the series representation in the stock chart legend. This facilitates tailoring legend entries for clarity, branding, or enhanced user interface consistency when visualizing multiple data series.
+</div>
 
 #### Example - override the legend item type for the series
 
@@ -25613,6 +29133,11 @@ The configuration of the Chart legend item for this series.
 
 Sets the configuration of the legend items of type `area`.
 By default, all series except line and scatter use this legend type.
+
+
+<div class="meta-api-description">
+Configure and customize legend entries, symbols, and labels specifically for area-style data series in financial or stock charts, controlling how the legend visually represents filled area graphs, enabling options to adjust appearance, behavior, and display properties of legend items tied to area-based series, useful for differentiating chart series, enhancing legend clarity, and managing visual cues for area plots in dashboards, reports, or analytics interfaces where area graphs need distinct legend presentation apart from lines, scatter points, or other chart types.
+</div>
 
 #### Example - sets the opacity of `area` legend items
 
@@ -25662,6 +29187,11 @@ By default, all series except line and scatter use this legend type.
 The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
 Defaults to the series color.
 
+
+<div class="meta-api-description">
+Customize or control the background color behind the legend item's area in chart series displays, enabling you to override default series color with any valid CSS color value such as hex codes, RGB, RGBA, HSL, or named colors; configure visual appearance, highlight specific legend items, apply custom styling for clarity or branding, set transparency or solid backgrounds, adjust area color contrast, and enable personalized legend aesthetics for improved chart readability and user interface design.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25691,6 +29221,11 @@ Defaults to the series color.
 The opacity of the legend item.
 Defaults to the series opacity.
 
+
+<div class="meta-api-description">
+Adjust the transparency level or opacity setting for the colored area representing series data in the chart legend, enabling you to configure how faint, see-through, or prominent the legend's color swatch appears relative to the series visuals; this controls the visual emphasis or subtlety of the legend items’ color blocks and allows customization of legend item shading intensity independently or in relation to the overall series opacity for clearer data distinction, easier readability, and tailored chart legend styling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25717,6 +29252,11 @@ Defaults to the series opacity.
 
 ### series.legendItem.cursor `String`
 The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
+
+
+<div class="meta-api-description">
+Set or customize the mouse pointer style that appears when hovering over chart legend entries or series labels, including options to change the cursor to pointer, default, or any standard CSS cursor value, enabling clear visual cues for interactive legend items, clickable series, or disabling hover effects on stock chart legend components, and configuring cursor behavior for enhancing user interaction feedback in data visualization interfaces.
+</div>
 
 #### Example
 
@@ -25746,6 +29286,11 @@ The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of t
 ### series.legendItem.highlight `Object`
 
 The highlight configuration of the legend item.
+
+
+<div class="meta-api-description">
+Control and customize the visual highlighting and interactive behavior of chart legend items, enabling or adjusting effects such as hover states, focus cues, selection highlights, and appearance attributes including color changes, opacity levels, borders, and visibility toggling for enhanced user feedback in stock or data charts.
+</div>
 
 #### Example
 
@@ -25781,6 +29326,11 @@ The highlight configuration of the legend item.
 
 The `markers` configuration of the legend item when it is hovered.
 
+
+<div class="meta-api-description">
+Control and customize the appearance, shape, size, fill, stroke, visibility, and styling of markers in chart legend items during hover or highlight states for time series and stock charts. Enable or configure marker emphasis, hover effects, and interactive styling on legend entries to improve visual feedback and user interaction with chart series indicators. Adjust marker highlights dynamically to distinguish series in the legend when a user hovers or focuses on legend items, enhancing usability and visual clarity in financial or stock data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25815,6 +29365,11 @@ The `markers` configuration of the legend item when it is hovered.
 
 The background color of the highlighted legend item markers.
 
+
+<div class="meta-api-description">
+Set or configure the fill color, background shade, or highlight tone applied to legend marker highlights in time series or stock charts to visually emphasize selected data series, enabling customization of hover, focus, or active states on legend icons using color values like hex, RGBA, or named colors to improve clarity and user interaction with chart legend items.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25844,6 +29399,11 @@ The background color of the highlighted legend item markers.
 ### series.legendItem.highlight.markers.border `Object|Function`
 
 The border of the highlighted markers.
+
+
+<div class="meta-api-description">
+Customize and control the border style of markers displayed when highlighting legend items in stock or data charts, including setting border color, thickness, width, and other visual border properties to emphasize selected series or data points in chart legends, enabling clear differentiation and enhanced visual feedback for users interacting with chart legends and series highlights.
+</div>
 
 #### Example
 
@@ -25879,6 +29439,11 @@ The border of the highlighted markers.
 
 The configuration of the Chart legend highlighted item markers border.
 
+
+<div class="meta-api-description">
+Customize or set the edge color of markers when a legend item in a stock chart series is highlighted, hovered over, or selected, enabling precise control over marker border styling for visual emphasis or interaction states. Adjust or configure the outline color around legend markers during highlight or hover events to improve visibility, emphasis, or user interface feedback in data visualization. Enable or change the border hue of active legend item markers to distinguish selected or focused elements within the stock chart series, supporting custom color settings for marker edges to match theme or accessibility needs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25910,6 +29475,11 @@ The configuration of the Chart legend highlighted item markers border.
 ### series.legendItem.highlight.markers.border.dashType `String`
 
 The dash type of the highlighted legend item border.
+
+
+<div class="meta-api-description">
+Control and customize the border style of markers for highlighted legend items in chart series by configuring the dash pattern, allowing the marker border to appear solid, dashed, dotted, or as a custom dash style. Enable or set different dash types to visually distinguish highlighted legend markers in stock or financial charts, adjusting the border stroke pattern for emphasis, clarity, or styling in interactive chart legends. Modify or configure the border dash effect on marker highlights for better visual feedback, using dash style options to tailor how legend item markers are outlined during selection or hover states in series data visualization.
+</div>
 
 #### Example
 
@@ -25953,6 +29523,11 @@ The following dash types are supported:
 
 The border radius in pixels when `type` is set to `"roundedRect"`.
 
+
+<div class="meta-api-description">
+Adjust and customize the corner radius or rounded corners of highlighted legend markers in stock chart series, enabling control over the border roundness for marker shapes specifically when using rounded rectangle styles. Configure the size of the curved edges or pixel radius for legend item highlight markers to tailor visual emphasis, ensuring that highlighted markers appear with smooth, rounded borders. Set, control, or modify the highlight state marker border radius to achieve desired aesthetics for legend indicators in financial or stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -25995,6 +29570,11 @@ The supported values are:
 * "rect" - alias for "square".
 * "roundedRect" - the marker shape is a rounded rectangle.
 
+
+<div class="meta-api-description">
+Adjust, configure, or customize the shape and geometry of highlighted markers in a chart legend to emphasize or distinguish series during hover, focus, or selection states by setting marker icons to various forms such as circle, square, rounded rectangle, triangle, cross, or alternative shapes like rectangular variants, enabling control over visual emphasis, highlight effects, marker styling, and interactive legend appearance in data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26027,6 +29607,11 @@ The supported values are:
 ### series.legendItem.highlight.markers.visible `Boolean|Function`
 
 If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+
+<div class="meta-api-description">
+Control the visibility of marker icons within highlighted legend items in stock chart series, allowing you to toggle or configure whether markers appear when a series is selected, focused, or hovered over; adjust marker display settings for emphasis in legends, choose to show or hide these visual cues in legend highlights to improve clarity, customize marker presence during interactions, enable or disable marker icons in series legend highlights for distinction, and set preferences to emphasize series markers in the chart legend when active or highlighted.
+</div>
 
 #### Example
 
@@ -26070,6 +29655,11 @@ A function that can be used to create a custom visual for the highlighted marker
 * sender - the chart instance.
 * series - the series of the marker point.
 
+
+<div class="meta-api-description">
+Customize and control the highlighted series markers’ visual appearance by defining a function that creates custom marker graphics during highlight states in financial or stock charts, enabling tailored marker rendering based on position, marker options, or underlying data points; this includes designing unique visual elements for highlighted markers using default visuals as a base or fully custom drawings, accessing marker location rectangles, series data, category labels, data item values, and overall chart context to dynamically generate or override marker highlights and icons, useful for developers looking to configure, style, or programmatically manipulate highlighted marker visuals in time series, stock, or financial charting scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26111,6 +29701,11 @@ A function that can be used to create a custom visual for the highlighted marker
 
 If set to `false`, the hover effect of the legend item is disabled.
 
+
+<div class="meta-api-description">
+Control the visibility of the hover highlight effect on chart legend items for data series, allowing you to enable or disable the visual feedback that appears when hovering over a legend entry in stock or financial charts. Configure whether the legend item's highlight on mouse over is shown or hidden to customize user interaction, highlight emphasis, or reduce distractions in series legend displays. Adjust hover state visibility for series legend markers to manage focus and interactivity cues during chart exploration, ensuring the legend’s feedback is either active or suppressed according to interface or design requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26142,6 +29737,11 @@ If set to `false`, the hover effect of the legend item is disabled.
 
 Sets the configuration of the legend items of type `line`.
 This is the default legend item type for all line and scatter series.
+
+
+<div class="meta-api-description">
+Control and customize the appearance, style, and behavior of legend markers for line-based chart series such as line and scatter plots. Adjust how line indicators are displayed in chart legends, configure visual properties of legend line items, set the format and presentation of legend entries representing line data series, and manage the rendering of legend lines to enhance clarity and match design preferences in stock or time series charts. Enable flexible styling, shape, color, thickness, and interactive behavior of legend elements associated with line and scatter series in data visualizations.
+</div>
 
 #### Example - override the color of `line` legend items
 
@@ -26188,6 +29788,11 @@ This is the default legend item type for all line and scatter series.
 The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
 Defaults to the series color.
 
+
+<div class="meta-api-description">
+Customize or override the color of the line swatch or line indicator in the chart legend, set or configure legend line item colors for series displayed in StockChart, control or change legend line marker colors using CSS-compatible values such as HEX, RGB, or named colors, adjust the legend line color for better differentiation or accessibility, specify custom colors for line series in the legend to match branding or visual preferences, enable distinct legend line swatch colors independent of the series color, modify or set the display color for line-type legend entries to improve chart clarity and user interface consistency.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26227,6 +29832,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Customize or configure the stroke pattern, style, or appearance of line-type legend items in charts by setting different dash types such as solid, dashed, dotted, dash-dot, long dash, long dash-dot, or long dash-dot-dot patterns; control how the legend line is rendered to visually differentiate series, enable specific line stroke styles for legend markers, set line decoration styles to match chart series, and manage the display style of legend lines with options like solid lines, dash sequences, dot sequences, or mixed dash-dot patterns for better data visualization clarity and user interface consistency.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26256,6 +29866,11 @@ The following dash types are supported:
 
 The opacity of the legend item of type `line`.
 Defaults to the series opacity.
+
+
+<div class="meta-api-description">
+Adjust, configure, or set the transparency level and visibility of the line indicator in chart legends, controlling how faint or prominent the legend's line symbol appears in stock or time series charts. This covers modifying the alpha, opacity, or translucency of the legend line to make it more or less visible, blending with background or series colors, and managing visual emphasis or subtlety in the chart's legend lines. Enables tuning of legend line transparency for better clarity, customization, or visual styling in financial charts, stock graphs, or data series presentations.
+</div>
 
 #### Example
 
@@ -26287,6 +29902,11 @@ Defaults to the series opacity.
 The configuration of the Chart legend item markers.
 
 By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+
+
+<div class="meta-api-description">
+Control and customize the appearance and behavior of markers within chart legend items by configuring marker shape, size, color, visibility, and styling options used to represent data series visually in legends. Adjust how legend markers display to differentiate series through visual cues, override default inheritance from series marker settings, enable or disable marker symbols in the legend, and tailor marker presentation to improve chart readability and distinction between data lines or areas for stock or financial chart visualizations, including configuring marker icons or symbols used in legend keys.
+</div>
 
 #### Example - override marker settings for the legend
 
@@ -26335,6 +29955,11 @@ By default, the marker configuration will be the same as the [series.markers](/a
 
 The background color of the legend item markers.
 
+
+<div class="meta-api-description">
+Adjust or customize the background color of legend markers in stock or financial charts to improve visual distinction among series, enabling developers to set, configure, or style marker backgrounds with any CSS-compatible color formats such as hex codes, RGB, RGBA, or named colors; control the appearance of legend items for clearer identification of data series, support branding or theme customization by changing marker fill colors, and enhance user interfaces by enabling contrast or color coding within chart legends to match overall design requirements or user preferences.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26364,6 +29989,11 @@ The background color of the legend item markers.
 ### series.legendItem.markers.border `Object|Function`
 
 The border of the markers.
+
+
+<div class="meta-api-description">
+Control and customize the appearance of legend marker borders within stock chart series by setting attributes like border color, thickness, stroke style, visibility, and emphasis, enabling developers to define how legend symbols are outlined or framed for better clarity, highlight, or design consistency in chart legends, including options to configure line width, border style, color customization, and toggle marker border display for enhanced visual distinction of series in financial or data visualization charts.
+</div>
 
 #### Example
 
@@ -26397,6 +30027,11 @@ The border of the markers.
 ### series.legendItem.markers.border.color `String|Function`
 
 The configuration of the Chart legend item markers border.
+
+
+<div class="meta-api-description">
+Adjust or configure the outline color of legend markers in financial charts to enhance visibility, match your chart theme, emphasize specific data series, or customize the border shades of series legend symbols. Control the marker border color to improve clarity, highlight important stock chart series, and create visually distinct legend items for clearer data representation and user interface customization.
+</div>
 
 #### Example
 
@@ -26440,6 +30075,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Customize or configure the border stroke style or pattern for the legend markers in financial or stock chart visualizations by selecting different dash or line styles such as dashed, dotted, dash-dot, long dash, long dash with dots, or solid lines to control the appearance of the marker outlines in chart legends. Adjust or set the border line pattern for legend item markers to improve chart readability, highlight series distinctions, or match design requirements by enabling different border stroke types including solid, dash, dot, dash-dot, and long dash variations for a more tailored legend marker border style.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26471,6 +30111,11 @@ The following dash types are supported:
 ### series.legendItem.markers.borderRadius `Number`
 
 The border radius in pixels when `type` is set to `"roundedRect"`.
+
+
+<div class="meta-api-description">
+Adjust the pixel radius to customize the rounded corners of legend markers in a stock chart, enabling you to configure how smooth or sharp the marker edges appear when using rounded rectangle styles, control marker shape styling, set roundness levels for chart legend icons, modify the corner curvature for clarity or aesthetic preferences, and define marker border rounding to enhance visual consistency in series legends.
+</div>
 
 #### Example
 
@@ -26511,6 +30156,11 @@ The supported values are:
 * "rect" - alias for "square".
 * "roundedRect" - the marker shape is a rounded rectangle.
 
+
+<div class="meta-api-description">
+Configure or customize the shape and style of legend markers representing data series in stock or financial charts, enabling selection and control of various symbol types such as circles, squares, triangles, crosses, rectangles, and rounded rectangles for clear visualization and differentiation of series in the chart legend; set marker shapes for better series identification, legend customization, symbol styling, and graphical representation of data points in series legends on stock charts or time-series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26540,6 +30190,11 @@ The supported values are:
 ### series.legendItem.markers.visible `Boolean|Function`
 
 If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+
+<div class="meta-api-description">
+Control the visibility of symbol icons or markers displayed alongside legend labels in stock or financial charts, enabling you to show or hide graphical indicators that represent each data series in the legend. Configure whether marker symbols appear next to series names in chart legends, toggle display of small icons or markers identifying series, enable or disable visual aids in legends for easier data association, customize legend item markers for series in time series, candlestick, or line charts, and manage legend marker visibility to enhance clarity or simplify chart appearance in dashboards and reporting tools.
+</div>
 
 #### Example
 
@@ -26579,6 +30234,11 @@ A function that can be used to create a custom visual for the markers. The avail
 * value - the value of the marker point.
 * sender - the chart instance.
 * series - the series of the marker point.
+
+
+<div class="meta-api-description">
+Customize or override legend marker visuals in stock charts by supplying a callback function that generates drawing elements based on input parameters like rendering area coordinates, marker configuration options, default visual generators, data category, data items, data values, chart instance references, and series details; control, define, or create personalized legend icons, symbols, or shapes dynamically to tailor appearance, enhance visualization clarity, and integrate unique graphical indicators for data series representation in stock or financial chart legends.
+</div>
 
 #### Example - use custom visual for the markers
 
@@ -26649,6 +30309,11 @@ The supported values are:
 - `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
 * `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
 
+
+<div class="meta-api-description">
+Set or customize how legend icons or symbols appear in stock chart series by specifying the shape or style of legend items, overriding default shapes tied to the chart series type. Control whether legend markers render as lines, filled shapes, rectangles, or other visuals to better match line charts, area charts, or custom series, enabling configuration of legend item appearance, design, symbol type, icon style, or marker representation in the legend area. Adjust legend symbol rendering for better chart clarity, visual consistency, or user interface preferences by defining the type, shape, or style of legend elements associated with each series.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26680,6 +30345,11 @@ A function that can be used to create a custom visual for the legend items. The 
 - `createVisual`&mdash;A function for getting the default visual.
 - `series`&mdash;The item series.
 - `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+
+<div class="meta-api-description">
+Customize and control the appearance and rendering of chart legend items by configuring or overriding the default legend visuals, symbols, or icons with flexible options to modify, wrap, or replace legend item graphics in various chart series; enable tailored legend item styles, custom visuals generation, symbol adjustments, or icon overrides based on series data, point position, or item options, supporting diverse chart types like pie charts, donuts, funnels, and stock series for enhanced legend customization and precise visual representation in charts.
+</div>
 
 #### Example - using custom visual for the legend items
 
@@ -26753,6 +30423,11 @@ Line options.
 
 ** Applicable to area, candlestick and ohlc series. **
 
+
+<div class="meta-api-description">
+Customize and control the appearance and rendering of lines in stock chart series, including stroke color, line width, dash or dotted patterns, smoothing options, and line style for precise visual adjustments. Enable styling of line segments within various series types such as area charts, candlesticks, and OHLC representations, adjusting line thickness, dash arrays, smoothing curves, and stroke properties to tailor chart outlines, borders, and connections. Configure line visuals to enhance clarity, highlight trends, or emphasize data points by setting parameters for line shapes, edge smoothness, dashed or solid strokes, and other line decoration attributes across multiple financial chart series types.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26783,6 +30458,11 @@ Line options.
 
 The line color.
 
+
+<div class="meta-api-description">
+Customize or configure the color of the line that represents data in a chart series using CSS-compatible values such as hex codes, RGB or RGBA formats, and named colors to control the stroke or outline color of chart series lines. Adjust or set the series line color to match themes, improve visibility, highlight specific data trends, or apply consistent styling across financial or stock charts. Enable changing or overriding default line colors for individual series lines in charts to enhance readability or visual distinction in data visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26812,6 +30492,11 @@ The line color.
 
 The line opacity.
 
+
+<div class="meta-api-description">
+Control the transparency and visibility of chart lines by adjusting the opacity level to set how solid or faint the series line appears, enabling emphasis or subtlety in data presentation through configuring line transparency, alpha blending, or translucency for clearer visual distinction, blending, or highlighting of data series in stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26840,6 +30525,11 @@ The line opacity.
 ### series.line.width `String`*(default: 4)*
 
 The line width.
+
+
+<div class="meta-api-description">
+Adjusting the stroke thickness or line weight for chart series lines, customizing how thick or thin the lines appear in stock or financial charts, setting or controlling line width for better visibility, emphasis, or differentiation between data series, configuring line thickness to improve chart readability and contrast, changing series line stroke size to highlight trends or data points, modifying the thickness of plotted lines to suit presentation or analysis needs, controlling line render size to enhance visual clarity in time series or stock performance charts, setting line boldness or thinness in graphical data representations, and enabling dynamic adjustment of series line stroke intensity for clearer data visualization.
+</div>
 
 #### Example
 
@@ -26878,6 +30568,11 @@ The supported values are:
 
 > The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area".
 
+
+<div class="meta-api-description">
+Configure how data points are connected in a time series or area chart by selecting line styles such as straight lines, stepped right-angle connections, or smooth curves to control the appearance of trend lines, enabling options for continuous, discrete-step, or softly interpolated graph lines for visualizing stock prices, financial metrics, or sequential values with flexible line rendering modes including normal linear joins, stepwise transitions, or smooth Bézier-like paths to customize chart series aesthetics and improve data readability across various visualization and plotting scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26907,6 +30602,11 @@ The data field containing the low value.
 
 ** Available for candlestick and ohlc series **
 
+
+<div class="meta-api-description">
+Configure the data mapping for the lowest price or minimum value in financial chart series, specifying which data attribute or field supplies the low point for candlestick, OHLC, or stock graph visualizations. Enable precise binding of the low price value from your dataset, allowing control over which numeric or object field represents the minimum measurement in each data item for accurate rendering and analysis of stock, trading, or time series data with fluctuating low values.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26934,6 +30634,11 @@ The data field containing the low value.
 Marker options.
 
 ** Applicable for area and line series. **
+
+
+<div class="meta-api-description">
+Control visibility, size, shape, color, and custom templates for individual data point markers in area and line charts, enabling detailed styling, highlighting specific points, configuring marker appearance, adjusting marker design, setting marker types, customizing marker colors, and managing how data points are visually represented in stock and time series charts.
+</div>
 
 #### Example
 
@@ -26964,6 +30669,11 @@ Marker options.
 
 The background color of the current series markers.
 
+
+<div class="meta-api-description">
+Set or customize the fill or background color of data point markers in stock chart series using various CSS color formats such as hex codes, RGB, RGBA, or named colors. Control the appearance, highlight, or differentiate series markers by configuring marker backgrounds, enabling color adjustments for visualization, styling, or thematic purposes within stock or financial charts. Adjust marker fill colors dynamically or statically to enhance chart readability, emphasize specific data points, or conform to branding color schemes in stock chart series visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -26991,6 +30701,11 @@ The background color of the current series markers.
 ### series.markers.border `Object|Function`
 
 The border of the markers.
+
+
+<div class="meta-api-description">
+Control and customize the outline around data point markers in stock chart series by adjusting border color, thickness, and dash style to enhance marker visibility or emphasis, enabling configurations that define marker edges for clarity, contrast, highlighting specific points, or differentiating series with customizable outlines on chart markers.
+</div>
 
 #### Example
 
@@ -27023,6 +30738,11 @@ The border of the markers.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Configure or customize the outline color, stroke color, or border hue of data point markers on stock charts to control the visual contrast, emphasis, or style of each series’ markers, enabling developers to set marker borders for clear distinction, highlight, or improved readability of chart points across various series types and visual themes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27052,6 +30772,11 @@ The border of the markers.
 ### series.markers.border.width `Number|Function`*(default: 0)*
 
  The width of the border.
+
+
+<div class="meta-api-description">
+Adjust or control the thickness, size, or weight of chart marker borders in stock or financial graphs by setting numeric values for marker outlines to enhance visibility, customize styling, or emphasize data points, including increasing or decreasing the border width around series markers for better visual distinction, clarity, or aesthetic preferences in interactive or static chart components.
+</div>
 
 #### Example
 
@@ -27083,6 +30808,11 @@ The border of the markers.
 
  The marker size.
 
+
+<div class="meta-api-description">
+Control and customize the size, scale, and dimensions of data point markers or symbols in stock charts or time series visualizations, enabling adjustment of marker visibility, emphasis, or decluttering in dense datasets. Configure marker radius, diameter, or pixel size to increase marker prominence or reduce overlap in crowded chart areas, supporting better data differentiation, readability, and aesthetic tuning. Resize plotted markers dynamically or statically to enhance interpretation of series points, improve visual clarity, and manage spatial distribution in financial or time-based graph representations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27111,6 +30841,11 @@ The border of the markers.
 
 The rotation angle of the markers.
 
+
+<div class="meta-api-description">
+Adjusting the angle or direction of data point markers in financial charts, controlling marker rotation, orienting series markers by degrees in stock or time series visualizations, configuring marker tilt or spin for better visual distinction, setting marker alignment or rotation angle to enhance chart readability, enabling custom rotation of plot markers, configuring marker spin or turn to differentiate series data points, modifying marker orientation settings to improve chart clarity, applying rotational transformation on chart markers, and customizing the display angle of series points in stock or financial graphs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27135,6 +30870,11 @@ The rotation angle of the markers.
 ### series.markers.type `String|Function`*(default: "circle")*
 
 Configures the markers shape type.
+
+
+<div class="meta-api-description">
+Control and customize the shape or style of data point markers in stock chart series by configuring marker shapes such as circles, squares, triangles, or other geometric forms, enabling visual distinction of series points, configuring marker appearance for better data visualization, setting point representation styles in financial charts, selecting or enabling different marker types, adjusting how series markers appear on stock or time series charts, specifying marker geometry to highlight specific data points, and defining marker visuals to improve chart readability and aesthetics.
+</div>
 
 #### Example
 
@@ -27180,6 +30920,11 @@ The marker shape is cross.
 
 The markers visibility.
 
+
+<div class="meta-api-description">
+Control the display of individual data point markers on chart series by enabling or disabling visibility for markers, configuring whether points along a series line or dataset are highlighted, shown, or hidden. Adjust marker rendering to emphasize data fluctuations, enable or suppress marker icons on financial or stock charts, toggle visibility of series markers during initialization or updates, and customize chart appearance by showing or hiding series point indicators for improved readability or minimal visual clutter. This setting helps set, configure, or control the presence of data markers on time series, line graphs, or stock price visualizations to match user preferences or presentation needs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27215,6 +30960,11 @@ The behavior for handling missing values. The supported values are:
 
 > The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
 
+
+<div class="meta-api-description">
+Control how charts handle missing, null, or absent data points in time series or stock charts by configuring whether gaps appear where data is missing, whether values are linearly interpolated between existing points, or assumed as zero for continuous display; this setting enables developers to specify if discontinuities should create breaks, smooth transitions with estimated values, or default empty points to zero, particularly relevant for line, area, or stacked series visualizations needing robust handling of incomplete datasets, null data, or intermittent missing entries to influence chart rendering, data continuity, and visual analysis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27248,6 +30998,11 @@ The supported values are:
 
 > The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "line".
 
+
+<div class="meta-api-description">
+Configure how line charts connect data points in stock or time series visualizations by selecting the interpolation style used to render the series lines, including straight segments for linear connections, right-angled steps to highlight discrete intervals or changes, and smooth curves for fluid transitions between points; this setting affects the appearance of line-type series and is useful for adjusting chart readability, emphasizing trends or discrete jumps, enabling different visual interpretations, customizing line rendering styles, and controlling how data continuity is displayed in time series, stock charts, or line graphs for enhanced visual storytelling or analysis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27274,6 +31029,11 @@ The supported values are:
 Color to use for bars with negative values.
 
 ** Applicable only to column series. **
+
+
+<div class="meta-api-description">
+Control the color styling of bars or columns indicating negative or decreasing values in stock or financial charts, enabling visual differentiation for declines, losses, or drops using customizable color settings. Adjust, configure, or set the color highlight for negative data points, bearish trends, or downward movements specifically in column-type series or bar charts, distinguishing them clearly from positive or neutral values. Enable color customization for negative values to emphasize decreases, downturns, or red indicators in stock data visualizations, price falls, or value reductions in chart series presentations.
+</div>
 
 #### Example
 
@@ -27302,6 +31062,11 @@ The plot stops before the missing point and continues after it.
 
 The series opacity.
 
+
+<div class="meta-api-description">
+Adjust the transparency or translucency level of chart data series to control visibility, highlight or de-emphasize specific series, manage overlapping elements, blend colors, set fade effects, control series opacity for better visual emphasis, configure series transparency for improved readability, enable partial transparency for layering, and customize how solid or transparent each data series appears within financial or stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27329,6 +31094,11 @@ The data field containing the open value.
 
 ** Available for candlestick and ohlc series **
 
+
+<div class="meta-api-description">
+Configure the mapping of the opening price from your data source to the chart series by specifying the field name that holds the open price value, enabling correct display of candlestick or OHLC charts, controlling how the initial price point in each series is interpreted and visualized, setting the data key for open prices in stock or financial chart series, and aligning the data field that represents the start price for each time interval or data item within financial visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27354,6 +31124,11 @@ The data field containing the open value.
 ### series.overlay `Object`
 
 The effects overlay.
+
+
+<div class="meta-api-description">
+Configure visual enhancements and effects layered on top of chart series data, such as shading, blending modes, highlighting, or overlays that modify the appearance of time series or financial data plots. Enable or adjust overlay settings to control how graphical effects are rendered dynamically over stock chart series to improve visibility, emphasize trends, create highlights, or customize the visual presentation of data points and lines. Customize series appearance with overlay effects for better distinction, clarity, or aesthetic modifications in stock or financial charts by setting parameters that influence blending, transparency, and layered rendering on chart series elements.
+</div>
 
 #### Example
 
@@ -27389,6 +31164,11 @@ Available options:
 * **glass** (column and candlestick series)
 * **none**
 
+
+<div class="meta-api-description">
+Control the visual styling of series overlays in stock charts by applying gradient effects or disabling them for clear, customizable appearance of candlestick and column series, enabling options like glass-style translucent gradients, no gradients, or other visual treatments to enhance chart readability, customize the look and feel of data series overlays, set, configure, or enable gradient overlays for better differentiation of series visuals, and adjust transparency and shading effects on financial chart series for improved data analysis and presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27420,6 +31200,11 @@ Space between points as proportion of the point width.
 
 Available for column, candlestick and ohlc series.
 
+
+<div class="meta-api-description">
+Control the horizontal spacing or gap between data points in column, candlestick, and OHLC chart series to adjust the density, padding, or separation of bars and points, enabling customization of point distribution, width proportion, and visual clarity in stock charts or financial time series displays.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27448,6 +31233,11 @@ A boolean value indicating if the series should be stacked.
 A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/stock-chart#configuration-series.stack.group).
 
 > The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+
+
+<div class="meta-api-description">
+Control whether chart data series are stacked to display combined or cumulative values across categories, enabling aggregation and layering of multiple series in bar, column, line, area, radar, and similar chart types; adjust stacking behavior by setting true or false, or group series stacks together using group identifiers, allowing flexible configuration of visual data layering, cumulative totals, grouped stacking, and comparative analysis across overlapping or sequential data series in financial and stock chart visualizations.
+</div>
 
 #### Example
 
@@ -27484,6 +31274,11 @@ The type of stack to plot. The following types are supported:
 * "normal" - the value of the stack is the sum of all points in the category (or group)
 * "100%" - the value of the stack is always 100% (1.00). Points within the category (or group) are represented as percentages.
 
+
+<div class="meta-api-description">
+Configure how stacked data series are calculated and displayed in financial or stock charts by setting the stacking method to either accumulate raw values for grouped data points or normalize stack heights to percentages for relative comparison, enabling control over whether series sums reflect total amounts or proportionate contributions within each category, useful for visualization scenarios like showing cumulative totals versus percentage-based distributions in time series, grouped datasets, or layered chart segments.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27517,6 +31312,11 @@ The type of stack to plot. The following types are supported:
 ### series.stack.group `String`
 
 Indicates that the series should be stacked in a group with the specified name.
+
+
+<div class="meta-api-description">
+Control grouping of multiple data series to stack visually within stock charts by assigning a common group identifier, enabling aggregation and layered display of stacked columns, bars, or areas in grouped segments; configure series stacking behavior to organize related datasets together, combine series in shared stacks, and manage visual grouping of overlapping or cumulative data points across time series, facilitating comparative analysis in financial or time-based charting scenarios.
+</div>
 
 #### Example
 
@@ -27560,6 +31360,11 @@ Indicates that the series should be stacked in a group with the specified name.
 
 The data point tooltip configuration options.
 
+
+<div class="meta-api-description">
+Control, configure, and customize interactive data point hover popups for stock chart series including enabling or disabling tooltips, setting custom content using templates or format strings, adjusting tooltip position and visibility, and using callback functions to format or aggregate data values shown in tooltips, letting developers tailor how information is displayed dynamically on mouseover or touch events for each series representation in financial or stock market charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27593,6 +31398,11 @@ The data point tooltip configuration options.
 
 The background color of the tooltip. The default is determined from the series color.
 
+
+<div class="meta-api-description">
+Customize or configure the background color of tooltips displayed on data series in stock chart visuals, enabling control over tooltip appearance, shading, fill, or backdrop for better clarity or branding; adjust, set, or override default tooltip backgrounds that typically inherit the series color, allowing enhanced visibility, theming, or styling of interactive data point hover labels across financial or time-series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27619,6 +31429,11 @@ The background color of the tooltip. The default is determined from the series c
 ### series.tooltip.border `Object`
 
 The border configuration options.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of tooltip borders in stock chart series by configuring stroke color, width, line style such as solid or dashed, and other outline visuals to enhance tooltip framing, styling, and presentation for data point highlights, hover effects, and informational popups within financial charts.
+</div>
 
 #### Example
 
@@ -27650,6 +31465,11 @@ The border configuration options.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Customize or configure the color of the tooltip border that appears on data series within stock charts to enhance visual styling, highlight specific series information, adjust appearance for better data inspection or hover effects, control tooltip border colors for improved readability or emphasis, set or modify border hues to match themes or highlight particular chart series dynamically during interaction, and style tooltip edges to distinguish series data points clearly in financial or stock data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27679,6 +31499,11 @@ The color of the border.
 ### series.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+
+<div class="meta-api-description">
+Adjust the thickness, width, or size of the border or outline surrounding a chart series tooltip in stock or financial charts, enabling control over the visual weight, prominence, or removal (by setting zero) of the tooltip’s frame or edge styling to customize appearance, enhance readability, or emphasize data points within interactive chart tooltips for better user experience and design consistency.
+</div>
 
 #### Example
 
@@ -27710,6 +31535,11 @@ The width of the border.
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+
+<div class="meta-api-description">
+Adjust or customize the tooltip text color displayed for data series in financial or stock charts by specifying any valid CSS color format such as hex codes, RGB, RGBA, or named colors; override default or inherited label colors to enhance readability, improve visual contrast, or align with branding requirements when displaying contextual information on hover or focus for individual chart series.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27737,6 +31567,11 @@ The text color of the tooltip. The default is the same as the series labels colo
 ### series.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+
+<div class="meta-api-description">
+Set and customize the font styling for data series tooltips in interactive charts, including options to adjust font family, size, weight, style, or use CSS font shorthand to enhance tooltip text readability and visual appearance, control how tooltip information is displayed on hover or focus in stock or time series charts, specify typography preferences for tooltip overlays, and configure text presentation for clearer data insights in chart series tooltips.
+</div>
 
 #### Example
 
@@ -27774,6 +31609,11 @@ The tooltip format. Format variables depend on the series type:
     *   **3** - close value
     *   **4** - category name
 
+
+<div class="meta-api-description">
+Adjust or define how tooltip text appears for data series in financial or stock charts, specifying dynamic placeholders or tokens that display series values such as open, high, low, close, category names, or numeric data points depending on chart types like line, column, area, pie, candlestick, or OHLC; customize tooltip content formatting, binding, or value representation to enhance clarity, user interaction, or data presentation in chart series tooltips.
+</div>
+
 #### Example
 
 ```pseudo
@@ -27784,6 +31624,11 @@ The tooltip format. Format variables depend on the series type:
 ### series.tooltip.padding `Number|Object`
 
 The padding of the tooltip.
+
+
+<div class="meta-api-description">
+Adjust the inner spacing or margin around the content within series tooltips in stock charts to control the visual layout, improve readability, and customize the hit area for touch or mouse interactions. Configure the padding inside chart tooltips to set the distance between text or elements and the tooltip boundary, enhancing user experience by making tooltips easier to read and interact with on different devices. Enable customization of tooltip spacing to optimize appearance and usability in financial or data visualization charts showing series data points, with the ability to increase or decrease space inside the tooltip container. This setting helps refine tooltip layout by managing the whitespace or gap inside the tooltip area for clearer presentation and improved accessibility across varying application scenarios.
+</div>
 
 #### Example
 
@@ -27806,6 +31651,11 @@ Template variables:
 *   **series** - the data series
 *   **dataItem** - the original data item used to construct the point.
         Will be null if binding to array.
+
+
+<div class="meta-api-description">
+Control and customize the tooltip content displayed on data points in stock charts by defining flexible HTML or JavaScript templates that enable formatting of values, categories, series information, and underlying data items; configure and bind original point data, including numerical or object values, category labels, series metadata, and raw data entries to tailor interactive tooltip displays for enhanced data visualization and user insight.
+</div>
 
 #### Example
 
@@ -27835,6 +31685,11 @@ Template variables:
 
 A value indicating if the tooltip should be displayed.
 
+
+<div class="meta-api-description">
+Control the display of data point information on stock chart series by enabling or disabling tooltips, allowing users to show or hide detailed series point tooltips for interactive charts with a simple true or false setting, useful for customizing visibility of point-specific details, hover info, or series data markers during user interaction or data exploration.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27861,6 +31716,11 @@ A value indicating if the tooltip should be displayed.
 ### series.visibleInLegend `Boolean`*(default: true)*
 
 A value indicating whether to show the series name in the legend.
+
+
+<div class="meta-api-description">
+Control display of series labels in chart legends by configuring visibility of series names, choosing whether to show or hide individual data series in the legend, toggle legend entries for specific series, manage label inclusion or exclusion within the legend for enhanced clarity, customize which series appear in chart keys, adjust legend item visibility dynamically, enable or disable legend text for particular data sets, and set series visibility in legends to optimize user interface and data presentation flexibility.
+</div>
 
 #### Example
 
@@ -27893,6 +31753,11 @@ The line width.
 
 ** Applicable for area and line series. **
 
+
+<div class="meta-api-description">
+Adjust the thickness or stroke width of area and line chart series lines to control the visual weight, boldness, or thickness of data lines in financial or stock graphs by setting numeric values that influence how prominently the series appears, enabling customization of line thickness, stroke size, or series width for clearer visualization or design preferences in time series data charts and stock market plotting.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -27918,6 +31783,11 @@ The line width.
 ### series.target `Object`
 
 The target of the bullet chart.
+
+
+<div class="meta-api-description">
+Set or configure a benchmark, goal, or target value for bullet chart series to visually compare actual data against desired metrics or reference points; control the target marker placement by specifying fixed values, data fields, or dynamic targets to enable highlighting performance goals, thresholds, or key indicators within financial or stock chart visualizations; adjust or define the comparison reference for bullet or indicator charts to assess progress, measure against expected outcomes, and enhance data-driven insights through customizable target settings.
+</div>
 
 #### Example
 
@@ -27947,6 +31817,11 @@ The target of the bullet chart.
 ### series.target.line `Object`
 
 The target line.
+
+
+<div class="meta-api-description">
+Control, customize, and configure the target line's appearance and behavior in stock chart series, including setting line color, thickness, dash patterns, styling, visual attributes, and display options. Enable or adjust the highlight, emphasis, or guideline that marks targets within financial or stock data visualizations, applying line styles during chart initialization. Set parameters for the target indicator line to optimize visualization, including solid or dashed lines, color coding, and width adjustments for clarity and emphasis in time series or stock price charts.
+</div>
 
 #### Example
 
@@ -27979,6 +31854,11 @@ The target line.
 
 The width of the line.
 
+
+<div class="meta-api-description">
+Configure or modify the thickness, stroke width, line weight, or visual width of a target series line in financial or stock charts, enabling control over how bold or thin the target data line appears in the chart rendering. Adjust line thickness, set stroke width for highlighting trends, customize visual emphasis on target series lines for better clarity or style, and fine-tune the appearance of stock chart lines during initialization or dynamic updates to tailor the graphical representation of financial target data.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28010,6 +31890,11 @@ The width of the line.
 
 The target color.
 
+
+<div class="meta-api-description">
+Control and customize the color used for target indicators, markers, highlights, or target lines within a stock chart series, enabling you to set, configure, or style the specific hue that visually represents target points or goals on time series data. Adjust the appearance of target visuals by defining colors for emphasis, differentiation, or thematic consistency in stock charts, allowing developers to manipulate target elements’ color settings dynamically or statically during chart setup or updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28038,6 +31923,11 @@ The target color.
 ### series.target.border `Object|Function`
 
 The border of the target.
+
+
+<div class="meta-api-description">
+Adjust and customize the outline appearance of chart series targets by setting border color, thickness, dash patterns, stroke style, line width, and other edge properties to control the visual emphasis and styling of target borders in stock or financial charts, enabling developers to define how the target's contour is rendered including solid, dashed, or dotted lines and fine-tuning the border for clarity, emphasis, or design consistency within series data visualizations.
+</div>
 
 #### Example
 
@@ -28071,6 +31961,11 @@ The border of the target.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Adjust, configure, or set the outline hue, stroke color, or border shading of highlighted or focused data series within a financial or stock chart visualization to customize appearance, emphasize key data, match themes, or differentiate series using any valid CSS color format such as hex codes, RGB, RGBA, or named colors for clear visual distinction and styling customization of the target series border in chart rendering.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28101,6 +31996,11 @@ The color of the border.
 ### series.target.border.dashType `String|Function`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Set or customize the stroke pattern, dash style, or line design of a target border around a data series in financial or stock charts, including options like solid lines, dashed lines, dotted lines, or various dash-dot patterns to control the visual appearance and styling of series outlines within stock or time series visualizations. Adjust, configure, or enable different border dash types to emphasize, highlight, or distinguish series targets in chart rendering, supporting flexible line patterns for clearer data presentation and visualization customization.
+</div>
 
 #### Example
 
@@ -28162,6 +32062,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, stroke weight, or border width of outline edges around graphical target shapes in financial or stock chart series to control visual emphasis, highlight data points, enhance borders on series targets, customize stroke thickness, increase or decrease line weight for better clarity, define border prominence around stock chart elements, set the numeric value for border thickness on series target indicators, and tailor the visual style of chart markers or shapes with precise border sizing for improved readability and design flexibility.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28193,6 +32098,11 @@ The width of the border.
 ### series.notes `Object`
 The series notes configuration.
 
+
+<div class="meta-api-description">
+Configure annotations and labels for data points in time series charts, enabling customization of note content, text, templates, styling, icons, positioning, visibility, and callouts on series data elements. Set up series-level notes to add descriptive remarks, tooltips, or flags on stock or financial chart points, control how annotations appear during chart initialization, and enhance data visualization with personalized labels or interactive indicators for series values. Enable or disable notes on series, adjust formatting and placement, and apply custom templates or icons to highlight specific data points in stock trend graphs or financial data series.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28221,6 +32131,11 @@ The series notes configuration.
 
 ### series.notes.icon `Object`
 The icon of the notes.
+
+
+<div class="meta-api-description">
+Control and customize the appearance of note markers or annotations for data points within a stock chart series, enabling configuration of icons, symbols, shapes, images, or CSS-styled markers to visually highlight or mark specific points on the chart; set, change, or style note icons to enhance series data annotations and improve chart readability with flexible visual indicators.
+</div>
 
 #### Example
 
@@ -28260,6 +32175,11 @@ The position of the series note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+
+<div class="meta-api-description">
+Adjust, set, or configure the placement and alignment of annotations, labels, or notes related to data points or series in a stock chart, with options to position these notes above, below, to the left, or to the right of the series or specific points. Control how commentary, tooltips, or markers appear relative to series data on financial or stock visualizations, enabling placement customization for better readability, visual clarity, or layout preferences by specifying directional note positioning such as top, bottom, left, or right.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28288,6 +32208,11 @@ The position of the series note.
 
 ### series.notes.icon.background `String`
 The background color of the notes icon.
+
+
+<div class="meta-api-description">
+Customize or configure the background color of annotation icons on chart data points, enabling you to highlight, style, or differentiate note markers with any CSS-compatible color format such as hex codes, RGB, RGBA, HSL, or standard color names, controlling the fill appearance behind note icons in stock or financial charts for enhanced visual emphasis or clarity in data presentation.
+</div>
 
 #### Example
 
@@ -28320,6 +32245,11 @@ The background color of the notes icon.
 ### series.notes.icon.border `Object`
 The border of the icon.
 
+
+<div class="meta-api-description">
+Customize and configure the appearance of note marker borders within chart series by setting border color, thickness, style such as solid or dashed lines, and other visual border attributes for annotation icons in stock or financial charts. Enable precise control over the styling of series note icons’ outlines to highlight, differentiate, or emphasize annotations and data notes effectively, supporting use cases like adjusting border visibility, changing hue or opacity, specifying width for emphasis, or applying dashed or dotted effects for better chart readability and thematic consistency.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28346,6 +32276,11 @@ The border of the icon.
 ### series.notes.icon.border.color `String`
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Customize the outline color of annotation icons on chart data points by configuring the border color of note icons in series, enabling control over highlight visibility and style using hex codes, RGB values, or named colors for chart note markers, data point annotations, or series highlights to enhance visual emphasis, set or change icon border hues in stock charts, and adjust note icon appearance for clear differentiation and improved readability of data notes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28370,6 +32305,11 @@ The border color of the icon.
 
 ### series.notes.icon.border.width `Number`
 The border width of the icon.
+
+
+<div class="meta-api-description">
+Adjust the thickness, stroke width, or border size of note icons displayed on data series within stock charts, enabling control over icon outlines, edges, and visual emphasis for annotations or markers tied to chart series data points. This setting affects the numeric value that changes how bold or thin the note icon’s border appears, allowing developers to customize highlight intensity or visibility of note markers on stock or financial graphs by configuring or modifying the outline width of series annotation icons.
+</div>
 
 #### Example
 
@@ -28396,6 +32336,11 @@ The border width of the icon.
 ### series.notes.icon.size `Number`
 The size of the icon.
 
+
+<div class="meta-api-description">
+Adjust the dimensions, scale, and size of annotation icons appearing on data points within financial or stock charts, enabling customization of note markers’ visibility, prominence, and visual weight on series elements. Configure, set, or control how large or small note indicators or symbols appear over chart series points to optimize clarity and emphasis in data visualization, including resizing icons for better readability or specific stylistic preferences in time series and stock market graph annotations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28418,6 +32363,11 @@ The size of the icon.
 
 ### series.notes.icon.type `String` *(default: "circle")*
 The icon shape.
+
+
+<div class="meta-api-description">
+Customize the shape or style of note markers on chart data points by configuring the icon type for series annotations, enabling control over how notes visually appear on graphs, graphs with labeled points, or annotated data series. Adjust or set the marker symbol, shape, or icon to highlight specific chart values, change note icons to circles, squares, triangles, or custom shapes, and enable distinctive visual cues for data notes, comments, or annotations within a series to enhance clarity or emphasis.
+</div>
 
 #### Example
 
@@ -28448,6 +32398,11 @@ The supported values are:
 ### series.notes.icon.visible `Boolean` *(default: "true")*
 The icon visibility.
 
+
+<div class="meta-api-description">
+Control the display visibility of annotation or note icons attached to data series in stock charts, enabling or disabling the presence of small markers or indicators that highlight specific points or notes directly on series graphs, allowing developers to toggle, show, hide, configure, or customize these icons for data annotations, callouts, or highlights within financial or time-series visualizations to enhance or simplify chart readability and user interaction.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28470,6 +32425,11 @@ The icon visibility.
 
 ### series.notes.label `Object`
 The label of the notes.
+
+
+<div class="meta-api-description">
+Configure and customize the text displayed on annotations or notes attached to data points in stock chart series, enabling control over the label content shown next to series markers or highlights. Set, update, or modify the note text for series data points, adjust the annotation labels to convey additional information, context, or comments on specific points within financial charts or time series data. Control the messaging, captions, or descriptive text tied to series notes to enhance clarity, provide insights, or emphasize particular data trends in stock or financial visualizations.
+</div>
 
 #### Example
 
@@ -28495,6 +32455,11 @@ The label of the notes.
 ### series.notes.label.background `String`
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or configure the background color behind labels on data point notes within chart series to enhance visibility, highlight annotations, or improve contrast in financial or stock charts, using any valid CSS color format such as hex codes, RGB, RGBA, HSL, named colors, or CSS variables, enabling customization of tooltip or note label appearances for clearer emphasis, readability, or thematic styling of series indicators and annotations in interactive chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28518,6 +32483,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 
 ### series.notes.label.border `Object`
 The border of the label.
+
+
+<div class="meta-api-description">
+Customize and configure the border appearance of annotation labels in financial or stock charts, including adjusting the color, width, style, and visibility of note label borders within chart series to enhance visual clarity and match overall chart design. Enable control over the outline of data point notes or markers with options to style edges for better distinction, border thickness adjustments, and color customization that integrates seamlessly during chart setup or initialization for tailored data visualization and annotation emphasis.
+</div>
 
 #### Example
 
@@ -28546,6 +32516,11 @@ The border of the label.
 ### series.notes.label.border.color `String` *(default: "black")*
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Configure, customize, or change the outline color of annotation labels, note callouts, or markers on stock chart series using any valid CSS color format such as hex codes, RGB values, or named colors. Control the border styling of notes attached to data series to highlight, differentiate, or style the edges of note labels, enabling precise visual distinction or emphasis on chart annotations, including setting transparent, solid, or custom colored outlines around series note text or markers. Adjust the external stroke color of labels for comments, tips, or alerts linked to series data points in financial or stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28571,6 +32546,11 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
 
 ### series.notes.label.border.dashType `String` *(default: "solid")*
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Control and customize the border stroke pattern or dash style for labels on series notes in stock charts, enabling you to set, adjust, or configure dashed, dotted, or continuous lines around note labels for clearer visual differentiation, emphasis, or design preferences in chart annotations and series data highlights during chart setup or runtime styling.
+</div>
 
 #### Example
 
@@ -28608,6 +32588,11 @@ The following dash types are supported:
 ### series.notes.label.border.width `Number` *(default: 0)*
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Set or adjust the thickness of the outline surrounding annotation labels on data series in stock charts, controlling the pixel width of the label's border or frame around notes, enabling customization of border visibility by increasing or removing border size to highlight or soften label edges, including options to define no border, thin lines, or thicker outline widths for enhanced visual emphasis or subtlety on chart annotations and data point notes in financial or time series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28634,6 +32619,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 ### series.notes.label.color `String`
 The text color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize the color of note label text on chart series by defining any valid CSS color value such as hexadecimal codes like #ff0000, RGB strings like rgb(255,0,0), or other color formats to enhance visibility, adjust label contrast, control annotation styling, set highlight colors, and ensure consistent color theming for notes attached to series in stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28657,6 +32647,11 @@ The text color of the label. Accepts a valid CSS color string, including hex and
 
 ### series.notes.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 The font style of the label.
+
+
+<div class="meta-api-description">
+Adjust and control the font style, size, weight, family, and appearance of note labels attached to chart series to customize their text display, enabling configuration of typography such as font type, thickness, italicization, and pixel dimensions using standard CSS font strings, applicable for enhancing readability, styling notes, annotations, or data point labels within charts during setup or rendering.
+</div>
 
 #### Example
 
@@ -28686,6 +32681,11 @@ The fields which can be used in the template are:
 
 * value - the point value
 
+
+<div class="meta-api-description">
+Customize and control the display of labels attached to notes in stock chart series by configuring dynamic templates that support HTML or plain text formats, enabling personalized annotations for data points. This feature facilitates rendering custom labels for each note with either string templates or callback functions that process note data, including point values and related metadata. Developers can set, define, or adjust label content to match specific visualization needs, such as highlighting, displaying values, or embedding contextual information in note labels within financial charts. This capability supports use cases like enhancing chart readability, customizing note appearance, dynamically generating labels based on data properties, or overriding default series note label rendering.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28708,6 +32708,11 @@ The fields which can be used in the template are:
 
 ### series.notes.label.visible `Boolean` *(default: true)*
 If set to `true` the chart will display the series notes label. By default the series notes label are visible.
+
+
+<div class="meta-api-description">
+Control the visibility of annotation labels for data points in financial charts by enabling or disabling the display of note labels attached to series elements, allowing you to show or hide detailed text annotations, comments, or remarks for stock chart series data points. This setting helps customize whether descriptive labels for series notes appear alongside chart data, supporting use cases like showing extra information, highlighting specific points, toggling annotations on or off, configuring display of note texts, and managing label visibility for dynamic chart presentations.
+</div>
 
 #### Example
 
@@ -28733,6 +32738,11 @@ If set to `true` the chart will display the series notes label. By default the s
 ### series.notes.label.rotation `Number` *(default: 0)*
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Adjust or configure the rotation angle of annotation or data point labels within a stock or financial chart, enabling customization of label orientation by specifying the degree of tilt for improved readability, visual alignment, or stylistic preference. This feature helps control the rotation of note labels attached to chart series, allowing developers to set numeric values to rotate text labels to any desired angle, supporting scenarios like angled text for better fit, improved data visualization clarity, or customized annotation presentation in time series or candlestick charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28756,6 +32766,11 @@ The rotation angle of the label. By default the label are not rotated.
 
 ### series.notes.label.format `String` *(default: "{0}")*
 The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+
+
+<div class="meta-api-description">
+Customize or define the text format for annotations or notes displayed on a chart series by specifying a pattern that controls how label content is presented, including placeholders or tokens to insert dynamic axis values, enabling configuration of label appearance for data points, series comments, or markers with flexible string formatting options similar to templating, string interpolation, or custom label rendering for stock or financial charts.
+</div>
 
 #### Example
 
@@ -28783,6 +32798,11 @@ The position of the labels.
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
 
+
+<div class="meta-api-description">
+Control the placement of annotation or note labels in stock chart series to appear either inside or outside the note icons, enabling customization of label positioning relative to markers or indicators on financial or time series charts. Adjust label location around data point notes, tooltip labels, or annotations to fine-tune readability and visual association, configuring label alignment, proximity, or offsets adjacent to chart markers for clearer display of contextual information. Optimize the positioning of descriptive tags, comments, or flags attached to particular data points on stock or trading charts, selecting whether labels overlay the icons or appear beside them for enhanced clarity and user interaction.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28806,6 +32826,11 @@ The position of the labels.
 
 ### series.notes.line `Object`
 The line of the notes.
+
+
+<div class="meta-api-description">
+Adjust or configure the connector lines linking annotations or notes to data points in stock or time series charts, including customizing the stroke, color, thickness, style, and overall appearance of these lines that visually connect series notes or labels to specific points on the graph; enable precise control over how annotation connectors render in financial or time-based charts to enhance readability, styling, or highlight particular data insights by setting line properties such as color, width, dash style, and stroke options during chart setup or updates.
+</div>
 
 #### Example
 
@@ -28831,6 +32856,11 @@ The line of the notes.
 ### series.notes.line.width `Number`
 The line width of the notes.
 
+
+<div class="meta-api-description">
+Adjust or set the thickness, width, stroke, or weight of connector lines linking annotations or notes within chart data series to enhance or reduce their visibility and prominence. Control how thick or thin the lines appear that connect notes, callouts, or annotation markers in financial or stock charts, enabling customization of line stroke size, connector line width, or note link thickness for better visual clarity and emphasis. Configure and customize the line measurement that joins explanatory notes to chart points, supporting varied thickness levels to highlight or de-emphasize annotation lines in time series, stock charts, or data visualization components during setup or styling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28854,6 +32884,11 @@ The line width of the notes.
 ### series.notes.line.color `String`
 The line color of the notes.
 
+
+<div class="meta-api-description">
+Configure, customize, or set the color of connector lines linking annotations, notes, or markers within stock chart series, enabling control over the visual style and stroke color of note-linked lines for enhanced readability and consistent chart annotation appearance. Adjust, define, or change the line color used to connect notes to data points in financial or stock charts, supporting styling preferences, theme matching, or emphasis on specific annotations with flexible color options for note connectors in series displays.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28876,6 +32911,11 @@ The line color of the notes.
 
 ### series.notes.line.length `Number`
 The length of the connecting lines in pixels.
+
+
+<div class="meta-api-description">
+Adjust or configure the length of connector lines linking annotations, notes, or callouts to specific data points in stock charts, controlling the pixel distance for better visual clarity and spacing between notes and their corresponding chart elements; set, change, or customize the line size to enhance chart readability, annotation alignment, or note placement on series data points by specifying the connector’s pixel length to manage how notes are visually connected in financial or data visualization contexts.
+</div>
 
 #### Example
 
@@ -28903,6 +32943,11 @@ An optional Z-index that can be used to change the default stacking order of ser
 The series with the highest Z-index will be placed on top.
 
 Series with no Z-index will use the default stacking order based on series type.
+
+
+<div class="meta-api-description">
+Adjust the display layering, stacking order, or render priority of chart series by setting the drawing sequence or overlay position, enabling control over which data series appears visually above or below others on a financial stock or time series chart. Control the order of series rendering through custom priority or z-index settings to emphasize specific datasets, manage overlapping elements, or configure visual stacking in complex multi-series charts, ensuring the most important lines, candlesticks, or graph types remain prominent regardless of default automatic ordering based on series type.
+</div>
 
 #### Example
 
@@ -28939,6 +32984,11 @@ For example line series will be on top with bar and area following below.
 
 The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.
 
+
+<div class="meta-api-description">
+Control and customize the default color palette or theme for chart series by specifying an array of colors, including hex, RGB, or named colors, that define the visual styling of each data series in a chart. Enable, set, or configure repeated color sequences for multiple series, ensuring consistent or unique series color assignments across initialization and runtime, allowing you to personalize series appearance, style charts visually, cycle through defined colors automatically, and override default coloring behavior for better thematic representation and data distinction.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -28963,6 +33013,11 @@ The default colors for the chart's series. When all colors are used, new colors 
 ### seriesDefaults `Object`
 
 Default values for each series.
+
+
+<div class="meta-api-description">
+Set default visual styles and functional options for all data series in stock charts, including chart type selection, data field mapping, color schemes, marker styles, label displays, tooltip configurations, stacking behavior, and axis associations to ensure consistent appearance and interaction across every series by applying universal shared settings at chart initialization or configuration time.
+</div>
 
 #### Example
 
@@ -28996,6 +33051,11 @@ Default values for each series.
 The area configuration options.
 The default options for all area series. For more details see the series options.
 
+
+<div class="meta-api-description">
+Configure default visual styles and behaviors for all area-type data series in financial or stock charts, enabling control over colors, transparency, line thickness, marker shapes, fill opacity, and other common settings applied uniformly to every area series to simplify repetitive customization. Set global defaults for area charts to control appearance and interaction patterns across multiple datasets, streamline styling of area graph layers, standardize fill and stroke options, and adjust markers or line properties collectively rather than individually for each series. Optimize area chart presentation with default property adjustments to manage visual consistency, thematic color schemes, layering opacity, and unified marker configurations within a stock or time-series chart context.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29023,6 +33083,11 @@ The default options for all area series. For more details see the series options
 The candlestick configuration options.
 The default options for all candlestick series. For more details see the series options.
 
+
+<div class="meta-api-description">
+Configure and customize default visual styles, colors, borders, spacing, data mapping for open, close, high, and low values, tooltip content, and animation effects for candlestick charts within stock or financial data graphs. Control the baseline appearance and behavior settings that apply to every candlestick series by setting defaults for data field binding, appearance parameters, interactive tooltips, and smooth transitions or animations in stock market visualizations, enabling consistent styling and data representation across multiple candlestick series in financial or trading dashboards. Adjust the look, feel, and dynamic presentation of candlestick charts, including how price movements are visually encoded and how user interactions respond across all such series in your stock chart applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29046,6 +33111,11 @@ The default options for all candlestick series. For more details see the series 
 The ohlc configuration options.
 The default options for all ohlc series. For more details see the series options.
 
+
+<div class="meta-api-description">
+Set up and customize default open-high-low-close (OHLC) candlestick chart styles, including color schemes, data field mappings, display settings, interaction modes, and visual appearance for financial stock charts. Control the baseline behavior, appearance, and interactivity of OHLC series across your charts while enabling consistent defaults that can be overridden per individual data series. Configure charting behavior for market data visualization such as price movements, trading ranges, and volume summaries using standardized OHLC formatting and common options that apply globally to all OHLC series in a stock or financial time series chart.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29067,6 +33137,11 @@ The default options for all ohlc series. For more details see the series options
 ### seriesDefaults.border `Object`
 
 The border of the series.
+
+
+<div class="meta-api-description">
+Set and customize the default outline around chart data series with options to control border color, thickness, style, and dash patterns when rendering stock or financial charts. Configure series borders globally to ensure consistent visual styling of all series elements, including enabling or disabling borders, adjusting edge appearance, defining stroke width, choosing solid or dashed lines, and standardizing the look of data outlines across multiple series or chart types. This setting helps manage series edge rendering for clarity, highlighting, or design uniformity within stock or time-series visualizations.
+</div>
 
 #### Example
 
@@ -29095,6 +33170,11 @@ The border of the series.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Set or customize the outline, stroke, or border color around data series in stock charts, controlling the appearance and styling of series edges, lines, or frames for all default series. Adjust, configure, enable, or specify the color that defines the border or perimeter of chart data series to enhance visibility, customize chart visuals, or match branding in financial or stock market graph components. This includes changing series outlines, edge colors, stroke color, or border hues for better distinction of data lines or areas in time series charts, price movements, or candlestick displays.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29120,6 +33200,11 @@ The color of the border.
 ### seriesDefaults.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Customize the stroke pattern or style of borders around chart series with options to set dashed, dotted, or solid lines for default series elements in stock or financial charts, enabling control over border appearance such as dash types, line styles, and border effects for series visualization and chart design consistency.
+</div>
 
 #### Example
 
@@ -29176,6 +33261,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the default thickness, stroke weight, or outline width of chart series borders to control visual separation, clarity, and styling consistency across all data series in stock or financial charts; configure, set, or customize border line width for series outlines to enhance chart readability, emphasize data boundaries, and standardize the appearance of multiple series in financial or stock charting applications.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29204,6 +33294,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 The column configuration options.
 The default options for all column series. For more details see the series options.
 
+
+<div class="meta-api-description">
+Set and control default styling, spacing, stacking order, labels, and visual options for all column-type data series in stock or financial charts to apply consistent appearance and behavior without repeating configurations for each series. Enable uniform column chart formatting, shared series customization, collective layout adjustments, and default label display settings across multiple column series within time-based or stock data visualizations. Adjust general column graph defaults, configure group-wide series styles, and manage overall column chart presentation to streamline repetitive series-specific settings in financial graphing and stock price chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29231,6 +33326,11 @@ The default options for all column series. For more details see the series optio
 
  The distance between category clusters.
 
+
+<div class="meta-api-description">
+Configure the spacing or distance between grouped data clusters, category groups, or series sets in stock charts to adjust visual separation of bars, columns, or clustered data points by setting the gap or interval size. Enable control over cluster padding, separation between adjacent data groups, or margin adjustment for tightly or loosely packed series in stock chart visualizations by specifying numeric values to increase or reduce the spaces between category clusters or grouped series, enhancing readability and layout customization in financial or time-series data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29256,6 +33356,11 @@ The default options for all column series. For more details see the series optio
 ### seriesDefaults.labels `Object`
 
 Configures the series data labels.
+
+
+<div class="meta-api-description">
+Control and customize the display of data labels on chart series by enabling or disabling label visibility, adjusting label text content and number formats, positioning labels strategically around data points, applying various visual styles and themes, and binding custom templates or data fields to enhance data visualization clarity and context in financial and stock charts. Configure annotations to show values, categories, or custom information with precise formatting and placement for improved readability and insight.
+</div>
 
 #### Example
 
@@ -29285,6 +33390,11 @@ The fields which can be used in the template are:
 *   percentage - the point value represented as a percentage value. Available only for 100% stacked charts.
 *   series - the data series
 *   value - the point value. Can be a number or object containing each bound field.
+
+
+<div class="meta-api-description">
+Control and customize the accessibility labels and screen reader descriptions for data points in chart series by using templates to define dynamic ARIA attributes based on series data, including category names, original data items, percentage values for stacked charts, series metadata, and individual point values, enabling improved verbalization and enhanced support for assistive technologies, voiceover configurations, and accessibility compliance in various chart types such as area, bar, column, bubble, donut, line, and pie charts.
+</div>
 
 #### Example
 
@@ -29319,6 +33429,11 @@ The fields which can be used in the template are:
 The background color of the labels. Any valid CSS color string will work here,
 including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the background color behind chart series labels, enabling you to configure the fill color for label elements using any standard CSS color format such as hex codes, RGB, RGBA, HSL, or predefined color names, to enhance label visibility, style series annotations, adjust label backgrounds, or apply custom coloring for better chart readability and presentation consistency.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29345,6 +33460,11 @@ including hex and rgb.
 ### seriesDefaults.labels.border `Object`
 
 The border of the labels.
+
+
+<div class="meta-api-description">
+Adjust and customize the outline, frame, or edge styling of chart series labels by configuring border color, thickness, style, and visibility to enhance label clarity, match your data visualization theme, or highlight label boundaries in stock or financial charts. Enable setting borders around label text to improve readability against chart backgrounds, control label edge appearance for better user interface design, and tailor label decoration for clearer data presentation.
+</div>
 
 #### Example
 
@@ -29376,6 +33496,11 @@ The border of the labels.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Adjust or customize the border stroke color around data series labels in stock or financial charts, enabling setting and controlling label outline hues using any CSS color format such as hex codes, RGB, RGBA, or color names; configure label borders to enhance chart readability, improve visual distinction of series data, and style label frames or outlines in time series, candlestick, or line charts for stocks and financial data visualization.
+</div>
+
 #### Example
 
     $("#stock-chart").kendoStockChart({
@@ -29402,6 +33527,11 @@ The border of the labels.
 ### seriesDefaults.labels.border.dashType `String`*(default: "solid")*
 
  The dash type of the border.
+
+
+<div class="meta-api-description">
+Adjust and customize the outline stroke pattern around chart series labels by setting the border dash style, enabling control over label borders with options like dashed, dotted, or solid lines; configure, modify, or set the label border dash type to change the appearance of series data labels for better visual distinction or emphasis in stock or financial charts.
+</div>
 
 #### Example
 
@@ -29463,6 +33593,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or width of the border surrounding data point labels or series labels in stock or financial charts to customize label appearance, including configuring, setting, or controlling the border thickness, line weight, or outline width for enhanced visibility, styling, or emphasis of chart label borders in time series or stock chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29494,6 +33629,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 The text color of the labels. Any valid CSS color string will work here, including hex
 and rgb.
 
+
+<div class="meta-api-description">
+Adjust or customize the text color of data series labels in financial or stock charts to enhance visibility, readability, and visual styling by specifying any valid CSS color format such as hexadecimal codes, RGB or RGBA values, or standard color names. Control label appearance for default series labeling in StockChart components by setting preferred font colors, tweaking label aesthetics, or configuring dynamic coloring options to match themes, improve contrast against backgrounds, or highlight specific chart data points. This setting supports use cases like customizing label colors for better UI consistency, improving accessibility by adjusting text contrast, and applying brand colors programmatically across multiple chart series labels.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29522,6 +33662,11 @@ and rgb.
 The font style of the labels.
 labels
 
+
+<div class="meta-api-description">
+Set or customize the font style, size, weight, family, and typography for series labels in stock chart visualizations by specifying CSS font properties or font strings. Control how text appears on chart series, including label appearance, font customization, text styling, font configuration, and default label fonts for series data. Enable setting of font attributes to adjust label readability and presentation, such as defining pixel size, font families like Arial or Helvetica, and font weights for chart series annotations and data labels in financial or stock data visualizations.
+</div>
+
 #### Example
 
 ```pseudo
@@ -29541,6 +33686,11 @@ labels
 
 The format of the labels.
 
+
+<div class="meta-api-description">
+Customize and control the formatting of series labels in financial charts by setting patterns for numeric, date, or custom value displays, enabling precise adjustment of data label appearances, configuring how values appear on stock or time series charts, formatting numbers with decimals or currency symbols, applying date formats for time-based data labels, and defining custom strings to tailor label output for clearer visualization in chart series.
+</div>
+
 #### Example
 
 ```pseudo
@@ -29551,6 +33701,11 @@ The format of the labels.
 ### seriesDefaults.labels.margin `Number|Object`*(default: 0)*
 
  The margin of the labels.
+
+
+<div class="meta-api-description">
+Adjust and control the spacing or margin around chart series labels to manage label positioning, prevent overlap, fine-tune label offsets, customize label layout in stock or time-series charts, set padding around data point labels for clarity, configure label gaps for better readability, and optimize visual presentation of series labels during chart rendering.
+</div>
 
 #### Example
 
@@ -29577,6 +33732,11 @@ The format of the labels.
 
  The padding of the labels.
 
+
+<div class="meta-api-description">
+Adjust the internal spacing or padding inside chart series labels to control the whitespace between label text and its surrounding background or border, enhancing readability and visual layout of data points, value labels, or series annotations in stock charts. Configure or customize label padding to manage distance inside labels, fine-tune label appearance, set inner margins for text clarity, and optimize label presentation for clearer data visualization and user interface consistency.
+</div>
+
 #### Example
 
 ```pseudo
@@ -29598,6 +33758,11 @@ Template variables:
 *   **series** - the data series
 *   **dataItem** - the original data item used to construct the point.
         Will be null if binding to array.
+
+
+<div class="meta-api-description">
+Configure and customize default labels for series in stock charts by defining templates that control the display content using flexible syntax supporting HTML injection, data binding, and dynamic formatting. Set or enable label templates that utilize values like point data, category names, series information, or original data entries to precisely format chart labels, allowing developers to insert custom HTML, bind to data fields, or manipulate label text for enhanced visualization. This covers use cases such as injecting formatted numbers, applying conditional styling, referencing series metadata, or dynamically generating labels from data points, categories, or data items, supporting a wide range of label customization and presentation needs within stock chart series defaults.
+</div>
 
 #### Example
 
@@ -29630,6 +33795,11 @@ Template variables:
 
  The visibility of the labels.
 
+
+<div class="meta-api-description">
+Control the visibility of data point labels across all default series in a stock chart by enabling or disabling label display to annotate, simplify, or enhance readability of the chart; configure label rendering to show or hide series labels collectively for clearer presentation, adjusting whether labels appear on data points or remain hidden to reduce clutter or highlight key values on stock or time series visualizations.
+</div>
+
 #### Example
 
 ```pseudo
@@ -29648,6 +33818,11 @@ Template variables:
 
 The line configuration options.
 The default options for all line series. For more details see the series options.
+
+
+<div class="meta-api-description">
+Set or adjust default styling and behavior for all line-type data series in stock charts including line color, thickness, dash or solid patterns, marker visibility and shape on data points, transparency levels, and how to manage gaps or missing data in the lines. Control shared visual properties and interaction settings that apply universally to line series unless specifically customized per series. Enable consistent line appearance across multiple datasets in financial or time series charts by configuring general line rendering options such as stroke style, marker configuration, opacity control, and missing value interpolation or omission behavior. Optimize the overall look and handling of line plots within stock or candlestick charts through global line series settings that cover style, markers, opacity, and gap treatment.
+</div>
 
 #### Example
 
@@ -29675,6 +33850,11 @@ The default options for all line series. For more details see the series options
 ### seriesDefaults.legendItem `Object`
 
 The configuration of the Chart legend item for all series.
+
+
+<div class="meta-api-description">
+Set or customize the default legend item options for all chart series to control appearance, text labels, markers, templates, visibility, and shared styling across multiple data series in stock or financial charts. Enable configuring consistent legend elements, such as name display, icon style, formatting, and default visibility settings, allowing unified control of how each series appears in the legend. Manage global legend item behavior for all series at once, including customizing labels, markers, templates, and visibility preferences to enhance chart readability and presentation for financial data visualization.
+</div>
 
 #### Example - override the legend item type for the series
 
@@ -29721,6 +33901,11 @@ The configuration of the Chart legend item for all series.
 
 Sets the configuration of the legend items of type `area`.
 By default, all series except line and scatter use this legend type.
+
+
+<div class="meta-api-description">
+Control and customize the appearance of area-type data series in chart legends by configuring their symbol shapes, labels, colors, and visual styling within stock or financial charts. Adjust settings related to how area graphs or filled area series are represented in the legend, including modifying defaults for area chart legend icons, text descriptions, and style attributes. Enable or set properties that govern the look and feel of legend items specifically for area series to differentiate them from other types such as line or scatter plots in visual data summaries. Configure the legend to clearly identify area-based datasets, supporting improved readability and user interaction in analytics dashboards or financial data visualizations.
+</div>
 
 #### Example - sets the opacity of `area` legend items
 
@@ -29770,6 +33955,11 @@ By default, all series except line and scatter use this legend type.
 The background color of the legend item. Accepts a valid CSS color string, including HEX and RGB.
 Defaults to the series color.
 
+
+<div class="meta-api-description">
+Customize or configure the background fill color behind each legend item in a stock chart’s series defaults, enabling control over the legend item area appearance by setting any valid CSS color value such as HEX, RGB, RGBA, HSL, or named color strings; this feature lets developers adjust or override default series colors for legend backgrounds to enhance visual distinction, style consistency, or thematic design in chart legends.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29799,6 +33989,11 @@ Defaults to the series color.
 The opacity of the legend item.
 Defaults to the series opacity.
 
+
+<div class="meta-api-description">
+Adjust and customize the transparency level of the filled area within chart legend markers for data series, enabling control over how opaque or transparent legend areas appear to visually match or differentiate from their corresponding series. Configure the fill opacity to enhance chart readability, emphasize specific data points, blend legend items seamlessly with background or series styling, or set distinct transparency levels for better visual emphasis in stock or financial charts. This setting is essential for developers seeking to style legend visuals, control fill alpha values, or synchronize legend area transparency with series opacity for clearer data representation and improved user interface design.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29826,6 +34021,11 @@ Defaults to the series opacity.
 ### seriesDefaults.legendItem.cursor `String`
 The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of the legend item.
 
+
+<div class="meta-api-description">
+Configure the mouse pointer style or cursor appearance when hovering over legend entries in financial or stock charts, including setting custom CSS cursor types like pointer, default, grab, or crosshair to enhance user interaction and visual feedback on chart legend labels, markers, or items. This setting helps modify how the cursor behaves or looks while users point, hover, or click on legend elements, improving usability and indicating interactivity for chart legends in data visualizations and stock market graphs.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29852,6 +34052,11 @@ The [cursor style](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) of t
 
 Sets the configuration of the legend items of type `line`.
 This is the default legend item type for all line and scatter series.
+
+
+<div class="meta-api-description">
+Configure and customize the default appearance and style of line and scatter series legend symbols within stock charts, including setting the visual representation, appearance, and symbol type for line legend items, controlling how these series are displayed in the chart legend, adjusting settings for line-type legend markers, and specifying default legend icon styles for line and scatter data series in financial or time series charts.
+</div>
 
 #### Example - override the color of `line` legend items
 
@@ -29898,6 +34103,11 @@ This is the default legend item type for all line and scatter series.
 The color of the legend item of type `line`. Accepts a valid CSS color string, including HEX and RGB.
 Defaults to the series color.
 
+
+<div class="meta-api-description">
+Control and customize the color of the line indicator in chart legends by defining the line swatch color using any valid CSS format such as HEX codes, RGB values, or named colors, enabling consistent and visually distinct legend items for line series in stock charts, overriding default series colors for clearer data representation, and allowing configuration of legend line appearances to improve chart readability and branding across diverse visualization scenarios.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29924,6 +34134,11 @@ Defaults to the series color.
 ### seriesDefaults.legendItem.line.dashType `String`
 
 The dash type of the legend item of type `line`.
+
+
+<div class="meta-api-description">
+Adjust or customize the stroke pattern for line series legend symbols to specify whether the legend line appears solid, dashed, dotted, or with other dash styles; control and configure the line style of legend items for stock charts by setting dash patterns that affect visual representation, enabling design of legend lines with varied stroke types such as continuous, broken, or patterned lines, and tailoring the appearance for better clarity, distinction, or branding in chart legends.
+</div>
 
 #### Example
 
@@ -29963,6 +34178,11 @@ The following dash types are supported:
 The opacity of the legend item of type `line`.
 Defaults to the series opacity.
 
+
+<div class="meta-api-description">
+Adjust or configure the transparency level, visibility, or translucency of lines in chart legends, controlling how faint, clear, or solid the legend line appears for series in stock charts, including setting custom opacity for the legend items independently from the series or using default transparency settings to highlight or dim the legend line’s appearance in visual data representations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -29991,6 +34211,11 @@ Defaults to the series opacity.
 The configuration of the Chart legend item markers.
 
 By default, the marker configuration will be the same as the [series.markers](/api/javascript/dataviz/ui/stock-chart#configuration-series.markers) settings of the displayed series.
+
+
+<div class="meta-api-description">
+Control and customize the markers shown in chart legends including their shape, size, visibility, style, and appearance specifically for legend items separate from the chart series markers. Enable or disable legend markers, adjust marker shapes like circles or squares, modify dimensions, override default series marker settings for clearer legend representation, and fine-tune how markers are displayed within stock or financial chart legends to improve readability and visual distinction between series in legends.
+</div>
 
 #### Example - override marker settings for the legend
 
@@ -30039,6 +34264,11 @@ By default, the marker configuration will be the same as the [series.markers](/a
 
 The background color of the legend item markers.
 
+
+<div class="meta-api-description">
+Configure or customize the background color of legend markers to match data series styles or branding by setting CSS color values for marker backgrounds, enabling control over the visual appearance of chart legends, adjusting marker colors during chart initialization or dynamically, aligning legend marker backgrounds with series themes, styles, and colors, supporting consistent branding and visual cues in stock charts and data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30065,6 +34295,11 @@ The background color of the legend item markers.
 ### seriesDefaults.legendItem.markers.border `Object|Function`
 
 The border of the markers.
+
+
+<div class="meta-api-description">
+Configure and customize the outline, border color, thickness, style, or appearance of markers within legend items on financial or stock charts, enabling control over the visual border details of series markers shown in the legend to improve clarity, highlight data points, adjust marker edging, or differentiate data series visually in chart legends.
+</div>
 
 #### Example
 
@@ -30096,6 +34331,11 @@ The border of the markers.
 
 The configuration of the Chart legend item markers border.
 
+
+<div class="meta-api-description">
+Customize or configure the outline color of legend marker borders in stock or financial charts by setting the border color of legend item markers with CSS color values such as hex codes, RGB, RGBA, or named colors. Control, adjust, or override the default border color for markers displayed in the chart legend for series data to enhance visual clarity, styling, or differentiation between series, while also supporting per-series custom border color settings to modify the legend marker outlines in stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30124,6 +34364,11 @@ The configuration of the Chart legend item markers border.
 ### seriesDefaults.legendItem.markers.border.dashType `String`
 
 The dash type of the legend item border.
+
+
+<div class="meta-api-description">
+Customize the border style of chart legend markers by setting different dash patterns such as solid, dashed, or dotted outlines, enabling control over the stroke style and appearance of marker borders in financial or stock visualizations. This configuration influences how legend item markers’ edges are rendered, allowing you to adjust the line style around marker shapes to improve chart clarity, enhance visual distinction, or match specific design requirements in stock charts and data visualization legends. Adjust or configure the border dash type for legend markers to create distinctive outlines, separate series visually in legends, or apply stylistic variations to marker borders in chart legends for better user interpretation and design consistency.
+</div>
 
 #### Example
 
@@ -30164,6 +34409,11 @@ The following dash types are supported:
 
 The border radius in pixels when `type` is set to `"roundedRect"`.
 
+
+<div class="meta-api-description">
+Adjust the roundness or corner radius of legend marker shapes in stock charts by configuring the border radius for marker edges, enabling smooth or sharp corners on legend symbols, controlling pixel-based corner curvature specifically when using rounded rectangle marker types, customizing the appearance and style of legend indicators by setting how rounded or square the corners appear, manipulating marker border curves to enhance visual clarity or match design aesthetics in chart legends, setting the degree of corner rounding to influence marker shape softness or angularity within default series legend items, applying pixel precision to corner radius for refined marker styling under series legend markers, managing the shape detail of legend marker corners to improve user interface consistency in stock or financial charts, fine-tuning legend item marker outlines by specifying border radius when working with rounded rectangle markers, and enabling style adjustments on chart legend markers by altering the corner rounding parameter for better symbol differentiation or thematic alignment.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30191,6 +34441,11 @@ The border radius in pixels when `type` is set to `"roundedRect"`.
 ### seriesDefaults.legendItem.markers.type `String|Function`
 
 The markers shape.
+
+
+<div class="meta-api-description">
+Control and customize the shape of legend markers in stock charts by setting marker types such as circles, squares, triangles, or other geometric forms to visually differentiate series in the legend, enabling configuration of marker appearance, style, and symbol shapes for clearer identification, toggling between various marker designs for better chart legend readability, and adjusting how series data points are represented visually next to their labels in the legend area to enhance user interface clarity and chart interpretation.
+</div>
 
 #### Example
 
@@ -30227,6 +34482,11 @@ The supported values are:
 
 If set to `true` the chart will display the legend item markers. Defaults to the series options.
 
+
+<div class="meta-api-description">
+Control whether legend item markers are shown or hidden in stock or financial charts by enabling or disabling the visibility of default series markers within the chart legend; configure, set, or toggle marker icons next to legend labels for clarity or minimalism in series representation, affecting how data series markers appear in the legend area, with options to override individual series marker visibility and customize the display of chart legend symbols for improved visual understanding and user-friendly presentation in stock data visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30262,6 +34522,11 @@ A function that can be used to create a custom visual for the markers. The avail
 * value - the value of the marker point.
 * sender - the chart instance.
 * series - the series of the marker point.
+
+
+<div class="meta-api-description">
+Customize or override the legend markers in stock charts by defining a function that generates custom visuals for legend items, enabling you to control marker appearance based on chart geometry, series data, categories, values, and chart instance context. This includes configuring, setting, or creating unique legend symbols, icons, or graphics for series points, allowing dynamic rendering that adapts to data items, series characteristics, and layout rectangles, useful for advanced legend styling, tailoring marker visuals, or enhancing chart legends with personalized icons or drawing elements linked to specific chart series or categories.
+</div>
 
 #### Example - use custom visual for the markers
 
@@ -30332,6 +34597,11 @@ The supported values are:
 - `"line"`&mdash;the legend items are rendered as a line. This is the default value for line charts.
 * `"area"`&mdash;the legend items are rendered as a filled rectangle. This is the default value for area charts.
 
+
+<div class="meta-api-description">
+Configure the appearance of legend markers in stock charts by setting the visual style or icon type used to represent data series in the legend, enabling options such as lines for line charts or filled rectangles for area charts, which helps sync the legend's look with the chart's series style, allowing customization of legend item shapes, markers, or symbols to match different chart types and improve chart legend clarity and visual consistency.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30370,6 +34640,11 @@ A function that can be used to create a custom visual for the legend items. The 
 - `createVisual`&mdash;A function for getting the default visual.
 - `series`&mdash;The item series.
 - `pointIndex`&mdash;The index of the point in the series. Available for the Pie, Donut, and Funnel series.
+
+
+<div class="meta-api-description">
+Customize or override the default legend marker visuals in stock or financial charts by defining custom drawing elements for legend items, enabling unique symbols, icons, or graphics in chart legends, with access to series data, item options, default visual builders, and point indices for fine-tuned control across pie, donut, funnel, and other series types; configure, enable, or set personalized legend markers, visuals, or elements to enhance chart legend appearance and provide tailored legend item representation based on series or data point context.
+</div>
 
 #### Example - using custom visual for the legend items
 
@@ -30441,6 +34716,11 @@ A function that can be used to create a custom visual for the legend items. The 
 
 The effects overlay.
 
+
+<div class="meta-api-description">
+Customize and control default visual effects overlays applied to chart series, enabling developers to configure appearance enhancements, graphical overlays, or layered effects on stock chart series by setting or modifying default visual styling parameters during chart initialization, allowing adjustments to overlay color, opacity, blending, and other rendering features that affect how series data is visually presented with enhanced graphical layers or filters to achieve desired chart aesthetics and visual emphasis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30466,6 +34746,11 @@ The effects overlay.
 
  Space between bars.
 
+
+<div class="meta-api-description">
+Adjust or control the gap, distance, or spacing between bars or columns in a stock chart to manage the visual density, appearance, or layout of bar and column series; configure or set the interval between bars for clearer separation or tighter grouping in financial data visualizations, enabling customization of bar width and spacing to optimize chart readability and presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30490,6 +34775,11 @@ The effects overlay.
 A boolean value indicating if the series should be stacked.
 
 > The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+
+
+<div class="meta-api-description">
+Control whether chart data series are cumulatively layered or displayed individually by enabling or disabling stacking of series values in financial or stock charts, allowing multiple data sets like bar, column, line, area, vertical line, vertical area, and radar types to visually accumulate their values for easier comparison or analysis; set stacking as true or false to configure how overlapping series combine, aggregate, or layer on top of each other in the graphical representation of sequential or comparative time-based or category-based data points.
+</div>
 
 #### Example
 
@@ -30524,6 +34814,11 @@ The type of stack to plot. The following types are supported:
 * "normal" - the value of the stack is the sum of all points in the category (or group)
 * "100%" - the value of the stack is always 100% (1.00). Points within the category (or group) are represented as percentages.
 
+
+<div class="meta-api-description">
+Configure how data series are stacked or layered in financial charts by selecting stacking modes such as normal stacking where values accumulate as sums within categories or groups, or percentage stacking which converts stack values into proportional parts totaling 100%, enabling display of relative distribution across data points. Adjust or enable stack types to control aggregation of series values, visualize cumulative totals versus percentage shares, manage grouping and layering behavior in time series or grouped categories, and tailor chart rendering to compare absolute versus relative contributions within stock or financial data visualizations. Utilize stack configuration to switch between additive value stacking and normalized percent stacking for clearer insights, and customize how chart series combine or overlap in stock market, trading, or analytic dashboards.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30556,6 +34851,11 @@ The type of stack to plot. The following types are supported:
 
 The default type of the series.
 
+
+<div class="meta-api-description">
+Configure the default chart series style for financial or stock data visualization by specifying the initial type that applies automatically to all series without individual type settings, including popular options like line graphs, OHLC, candlestick patterns, column bars, or area fills, enabling consistent visual representation, streamlined setup, easy toggling between chart types, and simplified customization of overall chart appearance in stock or time-series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30584,6 +34884,11 @@ The supported values are:
 
 The data point tooltip configuration options.
 
+
+<div class="meta-api-description">
+Control and customize the appearance, content, and behavior of tooltips for data points in stock or time series charts, including enabling or disabling tooltips, setting custom formats or templates for displayed information, managing visibility and shared tooltip display across multiple series, adjusting styling options like colors and fonts, and configuring animation effects for tooltip transitions, with default settings that apply globally but can be tailored individually per data series to enhance interactive data exploration and precise information presentation on financial or time-based chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30610,6 +34915,11 @@ The data point tooltip configuration options.
 
 The background color of the tooltip. The default is determined from the series color.
 
+
+<div class="meta-api-description">
+Set or customize the tooltip background color for stock chart series to control the appearance of data hints or info pop-ups, specifying colors using hex codes, RGB, RGBA, or named CSS color values. Adjust or override default tooltip shading that typically matches the series color for clearer visibility or styling consistency in chart visualizations, enabling flexible color configuration for hover labels, info bubbles, or data point popups. Tailor tooltip backgrounds to enhance readability, highlight specific series, and improve user interactions by defining the exact shade behind indicator details and contextual data displays in stock charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30635,6 +34945,11 @@ The background color of the tooltip. The default is determined from the series c
 ### seriesDefaults.tooltip.border `Object`
 
 The border configuration options.
+
+
+<div class="meta-api-description">
+Customize or set the appearance of chart tooltip borders including color, thickness, style, dash patterns, and outline for series tooltips on financial or stock charts. Enable or adjust border styling to control how tooltip edges look on series data points, ensuring visual distinction or emphasis in interactive data visualization. Configure default border settings for tooltip popups in series graphs, modifying parameters like border color, width, and dash styles to improve readability and highlight key information in stock chart series. Adjust tooltip outline features to enhance UI clarity for series in time series, candlestick, or line charts used in stock or financial data presentations.
+</div>
 
 #### Example
 
@@ -30665,6 +34980,11 @@ The border configuration options.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Configure or customize the default border color of tooltip outlines in stock chart series by setting or changing the tooltip border styling using CSS color formats such as hex codes, RGB or RGBA values, or named color strings. Control how the tooltip edges appear around series data points, enabling adjustments to the tooltip frame color for clarity, emphasis, or matching visual themes, ensuring consistent styling across all series tooltips in financial or stock data visualizations. This setting is useful for developers needing to define, modify, or override the default tooltip frame color to enhance chart readability, distinguish data points, or apply brand colors to interactive tooltip borders in series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30692,6 +35012,11 @@ The border configuration options.
 ### seriesDefaults.tooltip.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+
+<div class="meta-api-description">
+Adjust or configure the thickness, thickness level, weight, or size of the border line surrounding individual data series tooltips in a stock chart to enhance visibility, emphasis, or separation between tooltip content and background, including setting, controlling, or customizing tooltip border width, line thickness, stroke thickness, or outline weight for clearer display of hover information on chart series, series-specific tooltip styling, and visual boundary adjustments for interactive data points in financial or stock market visualizations.
+</div>
 
 #### Example
 
@@ -30721,6 +35046,11 @@ The border configuration options.
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+
+<div class="meta-api-description">
+Control and customize the tooltip text color for chart series, enabling you to configure, set, or override the default appearance of tooltip labels with any CSS color value, match or differentiate from series label colors, adjust font hues for better visibility or branding, style tooltip text dynamically for stock or financial charts, and fine-tune display colors to enhance readability across various data series and themes in interactive chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30746,6 +35076,11 @@ The text color of the tooltip. The default is the same as the series labels colo
 ### seriesDefaults.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
  The tooltip font.
+
+
+<div class="meta-api-description">
+Configure and customize the font style, size, weight, and family for tooltips displayed on chart series to control and enhance the appearance of tooltip text in financial or stock charts. Enable precise styling and formatting of series tooltip fonts using standard CSS font strings, allowing developers to set, adjust, or override default fonts for better readability, branding consistency, and visual clarity in interactive chart tooltips. Adjust tooltip typography, including font weight, font style, font family, and font size, for improved user experience when hovering over data series in time series or financial data visualizations.
+</div>
 
 #### Example
 
@@ -30773,6 +35108,11 @@ The text color of the tooltip. The default is the same as the series labels colo
 
 The tooltip format.
 
+
+<div class="meta-api-description">
+Configure and customize the display format of data point values within stock chart series tooltips, including setting, adjusting, or controlling how numeric, date, or textual information appears in hover labels or pop-up hints across chart series. Enable developers to specify formatting patterns for tooltip content such as number formats, date/time formats, currency symbols, precision, or custom strings to tailor the tooltip’s appearance dynamically during chart initialization or runtime. Ideal for scenarios involving formatting series hover information, label customization, tooltip template modifications, and enhancing readability and clarity of data visualization tooltips in financial or time series charts.
+</div>
+
 #### Example
 
 ```pseudo
@@ -30783,6 +35123,11 @@ The tooltip format.
 ### seriesDefaults.tooltip.padding `Number|Object`
 
 The padding of the tooltip.
+
+
+<div class="meta-api-description">
+Adjust spacing inside stock chart series tooltips by configuring the padding or inner margin around the tooltip content, controlling the whitespace or buffer area to improve readability and visual clarity. Developers often seek ways to set or customize tooltip padding, manage space inside hover info boxes, increase or decrease the distance between tooltip text and its border, configure tooltip appearance for better UX, and control layout of informational overlays on data points within financial or time-series charts. This setting is relevant for styling, spacing, and customization of the tooltip container to enhance the presentation of series data highlights.
+</div>
 
 #### Example
 
@@ -30805,6 +35150,11 @@ Template variables:
 *   **series** - the data series
 *   **dataItem** - the original data item used to construct the point.
         Will be null if binding to array.
+
+
+<div class="meta-api-description">
+Control and customize the default tooltip content for chart series by defining custom templates that format or render point values, categories, series information, and underlying data items; configure tooltip appearance and data presentation with template markup or text, including dynamic variables such as value, category, series name, and the original data object, to tailor how tooltips display essential information in stock charts and ensure flexible, context-rich user interactions across different data bindings and series defaults.
+</div>
 
 #### Example
 
@@ -30839,6 +35189,11 @@ Template variables:
 
  A value indicating if the tooltip should be displayed.
 
+
+<div class="meta-api-description">
+Toggle the visibility of hover tooltips for data series points on stock charts, enabling or disabling interactive tooltip displays when hovering over series elements, controlling whether point details appear on mouseover, configuring tooltip show or hide behavior for all series by default, managing series tooltip enablement, and setting the presence of informational popups that appear on chart series points to enhance data readability or reduce visual clutter depending on user preference.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -30863,6 +35218,11 @@ Template variables:
 ### subtitle `Object|String`
 
 The chart subtitle configuration options or text.
+
+
+<div class="meta-api-description">
+Configure and set the subtitle text or label beneath financial and stock charts, specifying plain text or detailed options for content, formatting, style customization, alignment control, visibility toggling, and appearance adjustments during chart initialization or dynamic updates. Customize subtitles for stock or trading charts, including text content, font styles, positioning, display settings, and visibility preferences to enhance chart annotation and presentation.
+</div>
 
 #### Example - set the chart title and subtitle as a string
     <div id="chart"></div>
@@ -30898,6 +35258,11 @@ The alignment of the subtitle.
 
 By default, the subtitle has the same alignment as the title.
 
+
+<div class="meta-api-description">
+Control or configure the horizontal positioning, placement, or alignment of subtitle text in stock charts or financial graphs, enabling users to set the subtitle alignment to center, left, or right for customized label presentation or layout. Adjust, set, or enable subtitle text alignment to match or differ from the main title, controlling how the subtitle is visually aligned horizontally within chart interfaces, dashboards, or data visualizations. Manage subtitle text justification, orientation, or placement for improved readability, styling, and user interface consistency in stock chart components or financial data displays.
+</div>
+
 #### Example - configure the chart title and subtitle alignment
     <div id="chart"></div>
     <script>
@@ -30917,6 +35282,11 @@ By default, the subtitle has the same alignment as the title.
 
 The background color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or configure the subtitle background color of a stock chart by setting any valid CSS color value such as hex codes, RGB, or other color formats to change the fill behind the subtitle area. This enables controlling the visual styling of the subtitle overlay, matching chart themes, enhancing readability with contrasting backgrounds, or customizing the appearance for branding or design preferences. Developers can enable or modify the subtitle panel’s backdrop color to align with user interface aesthetics, improve visibility, or create cohesive visual presentations within financial or data visualization charts.
+</div>
+
 #### Example - configure the chart subtitle alignment
     <div id="chart"></div>
     <script>
@@ -30934,6 +35304,11 @@ The background color of the subtitle. Accepts a valid CSS color string, includin
 ### subtitle.border `Object`
 
 The border of the subtitle.
+
+
+<div class="meta-api-description">
+Customize and configure the subtitle border of stock charts by setting visual attributes like border color, thickness, line style such as solid or dashed, outline appearance, stroke width, and border design to control the subtitle’s framing or edging for enhanced chart labeling, styling, and presentation, enabling precise adjustment of outline aesthetics around subtitle text in financial or data visualization charts.
+</div>
 
 #### Example - set the chart subtitle border
 
@@ -30956,6 +35331,11 @@ The border of the subtitle.
 ### subtitle.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or customize the subtitle border color for financial charts by specifying any valid CSS color format such as hex codes, RGB values, or color names to match branding, theme styling, or visual preferences; configure the border appearance around chart subtitles, control color schemes for enhanced readability, and set precise color attributes to differentiate subtitle boundaries in stock or time series visualizations.
+</div>
 
 #### Example - set the chart subtitle border color
 
@@ -30989,6 +35369,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Configure or customize the style and pattern of the subtitle border line on charts by adjusting the border line type with dash, dotted, dashed-dot patterns, or solid lines; control visual appearance with options like dashed, dash-dot, dot, long dash, long dash with dots, or solid border styles to create specific subtitle border effects, set or enable various border line styles to emphasize or distinguish subtitle areas in stock or data charts, define border dash patterns such as dashed, dotted, dash-dot, long dash, or solid lines for subtitle borders to enhance clarity and design in chart visualizations.
+</div>
+
 #### Example - set the chart subtitle border dash type
 
     <div id="chart"></div>
@@ -31011,6 +35396,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust the thickness or pixel width of the outline surrounding subtitle text in stock charts by configuring border size, enabling setting or controlling the subtitle’s border thickness to make the edge more or less prominent, customize or modify the subtitle border width in pixels to emphasize or minimize the subtitle frame, change the subtitle's outline thickness for visual styling or clarity, enable, increase, decrease, or set the border line width of the subtitle area in graphs or charts.
+</div>
+
 #### Example - set the chart subtitle border width
 
     <div id="chart"></div>
@@ -31032,6 +35422,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the subtitle. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Configure or customize the subtitle text color using any valid CSS color format such as named colors, hexadecimal codes, RGB, RGBA, HSL, or HSLA to control the subtitle appearance and seamlessly integrate themes or styling preferences for charts. Enable precise subtitle color adjustments for visual distinction, branding, readability, or UI consistency by setting color values flexibly through dynamic inputs or static color codes. This supports developers looking to style chart subtitles with exact color definitions, adapt subtitle themes, or override default color schemes in web or data visualization environments.
+</div>
+
 #### Example - set the subtitle color as a hex string
 
     <div id="chart"></div>
@@ -31050,6 +35445,11 @@ The text color of the subtitle. Accepts a valid CSS color string, including hex 
 ### subtitle.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font of the title.
+
+
+<div class="meta-api-description">
+Customize and control the subtitle text appearance in stock charts by configuring font properties such as typeface, size, weight, style (italic, normal), color, and line spacing; set or update subtitle fonts using standard CSS font strings or detailed font attribute objects including fontFamily, fontSize, fontWeight, fontStyle, color, and lineHeight to achieve precise text styling and visual consistency in chart subtitles.
+</div>
 
 #### Example - set the chart title and subtitle font
 
@@ -31070,6 +35470,11 @@ The font of the title.
 
 The margin of the subtitle. A numeric value will set all margins.
 
+
+<div class="meta-api-description">
+Adjust the outer spacing or padding surrounding a chart subtitle to control how much empty space appears around the subtitle text in a stock or financial chart. Customize or set the margin distance uniformly or individually on all sides to manage the subtitle's position and separation from other chart elements, ensuring clear visual hierarchy and balanced layout. Enable fine-tuning of subtitle outer gaps by specifying numeric margin values for top, bottom, left, and right spacing, helping to position or separate subtitle text from the chart body or axis labels with precise control over layout aesthetics and whitespace.
+</div>
+
 #### Example - set the chart subtitle margin as a number
 
     <div id="chart"></div>
@@ -31088,6 +35493,11 @@ The margin of the subtitle. A numeric value will set all margins.
 ### subtitle.margin.bottom `Number` *(default: 0)*
 
 The bottom margin of the subtitle.
+
+
+<div class="meta-api-description">
+Adjust the bottom margin or spacing below the StockChart subtitle to control vertical distance, set padding or gap between the subtitle and the chart or elements below, manage layout alignment, prevent overlap with other components, customize subtitle positioning, modify the bottom offset or clearance beneath the subtitle text, configure subtitle margin spacing during chart setup for precise visual arrangement and improved readability within stock or financial charts.
+</div>
 
 #### Example - set the chart subtitle bottom margin
 
@@ -31110,6 +35520,11 @@ The bottom margin of the subtitle.
 
 The left margin of the subtitle.
 
+
+<div class="meta-api-description">
+Adjust the horizontal position and left-side spacing of the chart subtitle by configuring margin settings to control how much space appears on the left edge of the subtitle in stock charts, enabling precise layout adjustments, fine-tuning subtitle alignment, padding, or indentation, shifting the subtitle horizontally, and customizing subtitle placement relative to the chart area during rendering or initialization.
+</div>
+
 #### Example - set the chart subtitle left margin
 
     <div id="chart"></div>
@@ -31130,6 +35545,11 @@ The left margin of the subtitle.
 ### subtitle.margin.right `Number` *(default: 0)*
 
 The right margin of the subtitle.
+
+
+<div class="meta-api-description">
+Control and customize the horizontal spacing between a chart subtitle and the right edge by setting the right margin or padding for subtitles in stock charts; adjust alignment, layout, and whitespace between the subtitle text and chart boundaries to optimize visual balance and positioning on the right side, managing subtitle offset, indentation, or gap through configuration during initialization or runtime to fine-tune subtitle placement and improve readability and design consistency in stock or financial charting interfaces.
+</div>
 
 #### Example - set the chart series subtitle right margin
 
@@ -31152,6 +35572,11 @@ The right margin of the subtitle.
 
 The top margin of the subtitle.
 
+
+<div class="meta-api-description">
+Adjust spacing above the chart subtitle by setting the top margin to control vertical distance, enabling precise layout adjustments, alignment tuning, and avoidance of overlaps with elements positioned higher on the chart, useful for customizing subtitle placement, configuring subtitle padding, managing subtitle spacing, and refining overall chart presentation during initialization or styling.
+</div>
+
 #### Example - set the chart subtitle top margin
 
     <div id="chart"></div>
@@ -31173,6 +35598,11 @@ The top margin of the subtitle.
 
 The padding of the subtitle. A numeric value will set all margins.
 
+
+<div class="meta-api-description">
+Configure and control the spacing or margin around the subtitle in stock charts, set uniform padding values to adjust inner spacing for subtitle layout, customize how much space surrounds subtitles to improve chart readability and visual arrangement, manage subtitle margins to optimize chart appearance, adjust subtitle spacing settings during chart initialization, define consistent padding for subtitles in financial or stock data visualizations, fine-tune subtitle layout by setting numeric margin values, enable precise control over subtitle positioning by modifying inner spacing, set padding to influence subtitle distance from other chart elements, customize subtitle whitespace for better design and clarity in stock chart rendering.
+</div>
+
 #### Example - set the chart subtitle padding as a number
 
     <div id="chart"></div>
@@ -31191,6 +35621,11 @@ The padding of the subtitle. A numeric value will set all margins.
 ### subtitle.padding.bottom `Number` *(default: 0)*
 
 The bottom padding of the subtitle.
+
+
+<div class="meta-api-description">
+Control and customize the bottom spacing or padding beneath the StockChart subtitle to create vertical separation between the subtitle text and the main chart area or other UI elements, enabling adjustments for layout fine-tuning, visual clarity, and spacing consistency. Set, configure, or modify the distance below the subtitle to optimize appearance, improve readability, and manage how close or far the subtitle sits relative to the chart or surrounding content by specifying the bottom padding or margin during chart setup or styling adjustments.
+</div>
 
 #### Example - set the chart subtitle bottom padding
 
@@ -31213,6 +35648,11 @@ The bottom padding of the subtitle.
 
 The left padding of the subtitle.
 
+
+<div class="meta-api-description">
+Configure subtitle left padding to control horizontal spacing and alignment of chart subtitles, enabling adjustment of subtitle offset, left margin, or indentation within stock charts. Customize subtitle positioning, horizontal padding, left side spacing, or margin to refine subtitle layout and alignment, ensuring precise control over subtitle placement and spacing relative to the chart area or container. Adjust subtitle left padding for layout tweaks, alignment control, or horizontal offset in financial charts and stock visualizations.
+</div>
+
 #### Example - set the chart subtitle left padding
 
     <div id="chart"></div>
@@ -31234,6 +35674,11 @@ The left padding of the subtitle.
 
 The right padding of the subtitle.
 
+
+<div class="meta-api-description">
+Adjust the horizontal right spacing or margin next to subtitle text in stock charts to customize layout, alignment, and visual spacing; configure, set, or control the right padding, right offset, or gap on the subtitle area for precise positioning, fine-tune subtitle indentation, or move the subtitle container rightwards within the chart interface during initialization or runtime layout adjustments.
+</div>
+
 #### Example - set the chart subtitle right padding
 
     <div id="chart"></div>
@@ -31254,6 +35699,11 @@ The right padding of the subtitle.
 ### subtitle.padding.top `Number` *(default: 0)*
 
 The top padding of the subtitle.
+
+
+<div class="meta-api-description">
+Adjust or configure the vertical spacing above the subtitle in stock chart layouts by setting the top padding or margin, control the distance between the subtitle and elements above it to fine-tune alignment, customize subtitle positioning for better visual hierarchy, manage whitespace or gaps at the top of chart subtitles, define or increase padding to separate subtitles from chart headers or other components, enable precise layout adjustments affecting subtitle top margin, set or modify the upper padding area around subtitles to improve readability and design consistency, control subtitle offset from the top edge in stock charts, adjust spacing for subtitles above chart content for clearer presentation.
+</div>
 
 #### Example - set the chart subtitle top padding
 
@@ -31281,6 +35731,11 @@ The position of the subtitle.
 
 By default, the subtitle is placed in the same position as the title.
 
+
+<div class="meta-api-description">
+Adjust vertical alignment or placement of the chart subtitle relative to the main title, enabling configuration of subtitle position to appear above (“top”) or below (“bottom”) the title text, controlling layout order during chart setup, customizing subtitle orientation for improved readability or emphasis, setting subtitle vertical positioning to suit design preferences, aligning subtitle and title in stacked or reversed arrangements, managing subtitle placement with respect to title for UI clarity, configuring subtitle location in relation to title for visual hierarchy, controlling subtitle positioning in initial chart rendering to affect text layering and flow.
+</div>
+
 #### Example - set the chart subtitle position
 
     <div id="chart"></div>
@@ -31303,6 +35758,11 @@ The text of the chart subtitle. You can also set the text directly for a title w
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
+
+<div class="meta-api-description">
+Configure or update the secondary heading or subtitle text displayed below the main chart title, including setting custom strings for the subtitle area with support for multiline formatting using line breaks ("\n"), enabling control over the smaller descriptive text on stock or financial charts, adjusting subtitle content dynamically, specifying subheading labels beneath the primary title, and managing text that provides additional contextual information or descriptions under the main heading in various chart display options.
+</div>
+
 #### Example - set the chart subtitle text
 
     <div id="chart"></div>
@@ -31321,6 +35781,11 @@ The text of the chart subtitle. You can also set the text directly for a title w
 ### subtitle.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the subtitle. By default the subtitle will be displayed.
+
+
+<div class="meta-api-description">
+Toggle the display or visibility of the chart subtitle, enabling developers to show, hide, enable, disable, or control the subtitle’s presence in stock or financial charts, with options to configure this feature during setup or dynamically adjust subtitle visibility in order to customize chart annotations, headings, labels, or supplementary text that appears beneath the main chart title.
+</div>
 
 #### Example - hide the subtitle
 
@@ -31342,6 +35807,11 @@ If set to `true` the chart will display the subtitle. By default the subtitle wi
 
 The chart theme. This can be either a built-in theme or "sass".
 When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+
+<div class="meta-api-description">
+Control and customize the visual style of stock charts by selecting a predefined theme or enabling Sass-based styling for advanced design flexibility, allowing configuration of chart colors, fonts, and layouts through theme names or by linking to Sass variables for dynamic theming, styling adjustments, appearance customization, and seamless integration of custom design systems within financial or stock market data visualizations.
+</div>
 
 #### Example
 
@@ -31378,6 +35848,11 @@ The supported values are:
 
 The chart title configuration options or text.
 
+
+<div class="meta-api-description">
+Set, configure, or customize the main heading or title text of a stock chart by specifying plain text or detailed options that control appearance, formatting, display settings, and layout of the chart’s top label. Manage how the primary heading appears, update or style the chart’s title dynamically or during setup, and adjust text content, font, visibility, alignment, and other visual aspects to match user interface or branding requirements for financial or stock data visualizations.
+</div>
+
 #### Example
     <div id="stock-chart"></div>
     <script>
@@ -31397,6 +35872,11 @@ The chart title configuration options or text.
 ### title.align `String`*(default: "center")*
 
  The alignment of the title.
+
+
+<div class="meta-api-description">
+Set or adjust the horizontal alignment and positioning of the chart title text including options for left, center, or right placement to match layout preferences, style requirements, or visual hierarchy needs, enabling control over where the title appears across the top of stock charts and allowing configuration of title justification for clearer presentation and better integration with surrounding elements.
+</div>
 
 #### Example
 
@@ -31434,6 +35914,11 @@ The text is aligned to the right.
 
  The background color of the title.
 
+
+<div class="meta-api-description">
+Adjust or specify the background color behind the chart title using customizable fill options that support CSS color formats like hex, RGB, RGBA, and named colors to ensure the title stands out against the chart area, blend seamlessly with branding themes, enhance readability, highlight the chart header, or create visual contrast and emphasis for improved user interface design and styling control.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31458,6 +35943,11 @@ The text is aligned to the right.
 
 The border of the title.
 
+
+<div class="meta-api-description">
+Configure and customize the outline or edge of a chart title by adjusting border properties such as color, width, thickness, dash or stroke style, and overall appearance of the title's perimeter. Control how the title boundary looks through settings that define the border style, enabling you to set solid or dashed lines, border color schemes, thickness levels, and visual highlight effects for chart or graph headings. Enable styling options to enhance or emphasize the title frame in stock charts, finance charts, or data visualizations by controlling the title's edge presentation and aesthetic details.
+</div>
+
 #### Example
 
 ```pseudo
@@ -31479,6 +35969,11 @@ The border of the title.
 ### title.border.color `String`*(default: "black")*
 
  The color of the border.
+
+
+<div class="meta-api-description">
+Control and customize the chart header outline by setting the border color of the title using CSS color values, enabling developers to configure, style, and adjust the appearance of the title's border for enhanced visual distinction, theming, or branding in stock charts. This feature supports design flexibility by allowing you to define the title border hue, color tone, or outline shade, ensuring the chart header stands out or blends with the UI, suitable for tasks like setting border colors, enabling custom title styling, or adjusting aesthetics in financial data visualization components.
+</div>
 
 #### Example
 
@@ -31505,6 +36000,11 @@ The border of the title.
 ### title.border.dashType `String`*(default: "solid")*
 
  The dash type of the border.
+
+
+<div class="meta-api-description">
+Configure and control the stroke pattern or dash style of a chart title border, enabling customization of border lines by setting solid, dashed, dotted, or various dash patterns to enhance visual styling and highlight the title area. Enable different border line styles around the title, including changing the border from continuous lines to segmented or dashed sequences for clearer emphasis or design variation. Adjust, set, or customize the border pattern of a chart’s heading to suit UI preferences, branding, or visual clarity, specifying how the border line appears with options like dash arrays, dash types, or stroke pattern variations.
+</div>
 
 #### Example
 
@@ -31561,6 +36061,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, width, or weight of the chart title border to emphasize, highlight, or subtly frame the StockChart header by setting a numeric value that controls how thick or thin the outline or border around the chart title appears, enabling customization of the title’s visual prominence, line thickness, edge boldness, or surrounding stroke size for better design, readability, or aesthetic emphasis in the chart interface.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31587,6 +36092,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
  The font of the title.
 
+
+<div class="meta-api-description">
+Configure and customize the font settings for the chart’s main heading, including adjusting typeface family, font size, weight, style, and color to control the appearance of the title text on stock or financial charts. Enable precise styling options to set or change the font properties for chart titles during initialization or runtime, allowing seamless integration with your design system and ensuring clear, readable, and visually consistent headings. Whether you need to specify bold, italic, large, small fonts, or different colors for headings, this setting supports detailed font control to enhance chart title presentation and match branding or UI requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31611,6 +36121,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The text color of the title. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the main heading text color of stock or financial charts using any valid CSS color format like hex codes, RGB, or named colors to enhance visual contrast, match branding guidelines, adjust themes, or improve readability of chart titles. Enable precise styling of chart header text, set font colors dynamically, modify title appearance according to dark or light modes, and configure color settings to ensure the chart’s title integrates seamlessly with the overall UI design and user interface theme preferences.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31634,6 +36149,11 @@ The text color of the title. Accepts a valid CSS color string, including hex and
 ### title.description `String`
 
 The accessible description of the Chart. The description is announced by screen readers when the Chart is focused.
+
+
+<div class="meta-api-description">
+Configure and set the textual description or alternative text for the chart’s title to enhance accessibility and screen reader support, enabling assistive technologies to announce meaningful information about the chart’s content when focused, improving ARIA compliance, providing descriptive labels for visually impaired users, and allowing customization of the spoken description to clarify chart context, content, and purpose during navigation or keyboard interaction.
+</div>
 
 #### Example - set the chart description
 
@@ -31664,6 +36184,11 @@ The accessible description of the Chart. The description is announced by screen 
 
  The margin of the title.
 
+
+<div class="meta-api-description">
+Configure and customize the spacing around the chart title by setting margins that control the distance between the title text and surrounding elements, including top, right, bottom, and left padding or gaps. This enables precise adjustment of the title's position for improved layout, alignment, and visual clarity in chart headers, supporting use cases such as preventing overlap, improving readability, managing whitespace, and fine-tuning the chart appearance during setup or dynamic updates. Control title offsets and manage header spacing flexibly to ensure consistent and appealing presentation across different screen sizes and design requirements.
+</div>
+
 #### Example
 
 ```pseudo
@@ -31689,6 +36214,11 @@ The accessible description of the Chart. The description is announced by screen 
 
  The padding of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the spacing, margin, or whitespace around the chart title to control the gap between the main heading text and the edges of the chart area, enabling customization of title layout, alignment, and visual separation from other chart elements by increasing or decreasing the padding space around the title for improved readability or design purposes.
+</div>
+
 #### Example
 
 ```pseudo
@@ -31713,6 +36243,11 @@ The accessible description of the Chart. The description is announced by screen 
 ### title.position `String`*(default: "top")*
 
  The position of the title.
+
+
+<div class="meta-api-description">
+Control and configure the placement and alignment of the chart’s main heading or title relative to the stock chart area, setting its position to the top, bottom, left, or right to adjust layout, visual hierarchy, and overall presentation. Enable precise title positioning to customize chart appearance, manage label arrangement, and improve readability and user interface design by specifying where the heading appears around the chart container. Adjust and set the title’s location for better chart aesthetics, UX, or presentation needs, controlling spatial orientation of the main header in dynamic or static stock chart displays.
+</div>
 
 #### Example
 
@@ -31752,6 +36287,11 @@ The title is positioned on the bottom.
 
 The title of the chart. You can also set the text directly for a title with default options.
 
+
+<div class="meta-api-description">
+Configure, set, or update the heading text displayed at the top of stock charts, enabling dynamic changes, localization, or programmatic control of the chart’s main title label. This includes specifying custom strings, modifying or binding the chart’s title text for clearer data visualization, dashboard labeling, or user interface customization in financial or stock market graph components. Enable easy adjustment of the chart heading to reflect specific data contexts, user preferences, or live updates in stock chart interfaces.
+</div>
+
 #### Example
 
 ```pseudo
@@ -31772,6 +36312,11 @@ The title of the chart. You can also set the text directly for a title with defa
 
  The visibility of the title.
 
+
+<div class="meta-api-description">
+Set or toggle the visibility of the chart header or title in stock or financial charts, enabling showing or hiding the main chart label, headline, or heading in configuration options for clear presentation control, display settings, or user interface customization.
+</div>
+
 #### Example
 
 ```pseudo
@@ -31787,6 +36332,11 @@ The title of the chart. You can also set the text directly for a title with defa
 ### tooltip `Object`
 
 The data point tooltip configuration options.
+
+
+<div class="meta-api-description">
+Control and customize interactive data point popups for stock charts including enabling or disabling hover tooltips, formatting displayed values, applying custom templates or content per data item, adjusting popup position and visibility, and binding data fields to tooltip layouts to tailor how detailed information appears when users hover over or select points on financial or time series charts.
+</div>
 
 #### Example
 
@@ -31811,6 +36361,11 @@ The data point tooltip configuration options.
 
 The background color of the tooltip. The default is determined from the series color.
 
+
+<div class="meta-api-description">
+Customize the tooltip background color for stock charts by setting a fill color using CSS formats like hex, rgb, rgba, or named colors to enhance tooltip visibility, contrast, and readability against data series; configure, override, or control the tooltip’s background fill to improve user interface clarity, highlight data points, or match chart themes, ensuring the tooltip stands out or blends appropriately with the chart’s color scheme when hovering over series values.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31834,6 +36389,11 @@ The background color of the tooltip. The default is determined from the series c
 ### tooltip.border `Object`
 
 The border configuration options.
+
+
+<div class="meta-api-description">
+Configure and customize the tooltip border appearance by setting the color, width, and dash or solid line style to control the outline around chart tooltips, enabling precise visual distinction, matching chart themes or branding, enhancing tooltip emphasis, adjusting border thickness and style for clarity, creating dashed or solid outlines, refining tooltip boundaries for better readability, and tailoring the hover or focus tooltip frame to improve user interaction and visual consistency across stock or financial charts.
+</div>
 
 #### Example
 
@@ -31862,6 +36422,11 @@ The border configuration options.
 
  The color of the border.
 
+
+<div class="meta-api-description">
+Adjusting or configuring the border color of tooltip outlines on data point hover in charts, enabling customization of tooltip edges or frames to align with chart styling, setting or changing the stroke color around tooltip boxes in stock or financial charts, controlling the color of the outline that appears around tooltips on graphs, modifying tooltip frame colors for enhanced visual integration, selecting or specifying the color used for the border of popup information boxes on chart data points, personalizing the border hue for tooltip panels in time series or candlestick visualizations, customizing the outline shade around hover tooltips to improve readability or branding consistency, changing the color of the lines enclosing tooltip content in interactive stock charts, and configuring the stroke attribute for tooltip borders to ensure consistent UI coloring in chart interfaces.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31887,6 +36452,11 @@ The border configuration options.
 ### tooltip.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+
+<div class="meta-api-description">
+Adjust or configure the thickness, width, stroke, or outline size of tooltip borders to customize the appearance, emphasis, and visual styling of tooltips within stock charts or financial data visualizations. Enable control over how prominent, bold, thin, or subtle the tooltip border appears by setting or modifying the border thickness during component setup, initialization, or runtime styling, affecting the user interface for better clarity, highlight, or focus on tooltip content in time series and charting applications.
+</div>
 
 #### Example
 
@@ -31914,6 +36484,11 @@ The border configuration options.
 
 The text color of the tooltip. The default is the same as the series labels color.
 
+
+<div class="meta-api-description">
+Adjust or define the tooltip text color in interactive stock charts to enhance visibility, readability, or align with brand color schemes by configuring CSS-compatible color values such as hex codes, RGB, RGBA, or named colors; control and customize the appearance of data point hover labels and info boxes to ensure clear, contrasting text display across various themes and backgrounds, enabling fine-tuned styling for tooltip text in financial or time series visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -31937,6 +36512,11 @@ The text color of the tooltip. The default is the same as the series labels colo
 ### tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
  The tooltip font.
+
+
+<div class="meta-api-description">
+Control and customize the tooltip text style in financial or stock charts by setting font family, size, weight, and style for tooltip labels and values, enabling adjustments to tooltip typography, appearance, readability, and text formatting. Enable configuring text fonts in chart tooltips to match branding or UI design, support scaling for clarity, adjust boldness or italics for emphasis, and ensure consistent visual presentation of dynamic stock data hints, popups, or hover text in interactive chart elements.
+</div>
 
 #### Example
 
@@ -31962,6 +36542,11 @@ The text color of the tooltip. The default is the same as the series labels colo
 
 The tooltip format.
 
+
+<div class="meta-api-description">
+Configure the way tooltip values appear in stock charts by setting custom text formats that control numeric precision, decimal places, date and time display, currency symbols, percentage signs, and other value representations. Customize or enable detailed tooltip value formatting using format strings, placeholders, and templates to adjust number formatting, date styles, and textual layout within hover tooltips, allowing precise control over how stock prices, volumes, or timestamps are presented in chart tooltips. Adjust tooltip display for clearer, localized, or customized value representations during user interactions, supporting both simple and complex formatting scenarios in financial or time series charts.
+</div>
+
 #### Example
 
 ```pseudo
@@ -31972,6 +36557,11 @@ The tooltip format.
 ### tooltip.padding `Number|Object`
 
 The padding of the tooltip.
+
+
+<div class="meta-api-description">
+Control and customize the inner spacing or margin inside chart tooltips to enhance readability, adjust layout aesthetics, increase the interactive touch or hit area around tooltip content, and fine-tune padding between tooltip text and its border for optimal display in stock or financial chart visualizations. This setting enables configuring how much space surrounds the tooltip information to improve clarity, user interaction, and overall presentation on various screen sizes and devices.
+</div>
 
 #### Example
 
@@ -31995,6 +36585,11 @@ Template variables:
 *   **series** - the data series
 *   **dataItem** - the original data item used to construct the point.
         Will be null if binding to array.
+
+
+<div class="meta-api-description">
+Customize or configure dynamic tooltip content in stock charts by setting templates that format point values, display category names, reference data series, or include original data items for each data point; control tooltip appearance and information shown through template variables like value, category, series, and underlying data, enabling personalized labels, custom formatting, or contextual details on hover or interaction for enhanced data visualization and user experience.
+</div>
 
 #### Example
 
@@ -32026,6 +36621,11 @@ Template variables:
 
 A value indicating if the tooltip should be displayed.
 
+
+<div class="meta-api-description">
+Enable or disable the display of data point tooltips on hover or selection in stock charts, controlling whether contextual information about specific data points appears or remains hidden during user interaction, with options to show, hide, toggle, or configure tooltip visibility for enhanced chart readability and interactivity.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32048,6 +36648,11 @@ A value indicating if the tooltip should be displayed.
 ### tooltip.shared `Boolean`*(default: false)*
 
 A value indicating if the tooltip should be shared.
+
+
+<div class="meta-api-description">
+Enable or configure a unified tooltip that displays combined values from multiple data series at the same horizontal position on a chart, allowing aggregation of information into one shared popup instead of individual tooltips per series, useful for comparing related data points simultaneously, toggling between joint or separate tooltip displays, controlling hover behavior to show consolidated details across series, merging tooltip content for synchronized data insights, and customizing how chart data from different series is presented together on mouseover or focus events.
+</div>
 
 #### Example
 
@@ -32084,6 +36689,11 @@ Template variables:
 *   **points** - the category points
 *   **category** - the category name
 
+
+<div class="meta-api-description">
+Configure a unified tooltip layout that combines data from multiple series into a single display for each category or data point, enabling consolidated hover information, multi-series data comparison, and synchronized tooltip content across charts. This shared tooltip template can be customized to merge or aggregate values, labels, and metadata from all relevant series at a specific category or x-axis position, supporting scenarios like combined data summaries, comparative insights, and dynamic rendering of multiple data points in one cohesive overlay. It facilitates setting a centralized tooltip design that improves clarity for multi-line or multi-series charts, allowing developers to control, define, and customize combined tooltip content, labels, and contextual information for grouped categories or points.
+</div>
+
 #### Example
 
     <div id="chart"></div>
@@ -32118,6 +36728,11 @@ Template variables:
 
 A value indicating if transition animations should be played.
 
+
+<div class="meta-api-description">
+Control the animation effects and smooth visual transitions when updating chart data, refreshing series or points, or redrawing axes in stock charts by enabling or disabling transition effects. Manage, set, or configure animated transitions on stock chart updates, toggling whether animations play during dynamic changes or data refreshes. Optimize performance or enhance visual feedback by activating or deactivating animated scaling, movement, or morphing effects for chart elements when the graph refreshes or updates.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32138,6 +36753,11 @@ A value indicating if transition animations should be played.
 ### valueAxis `Array`
 
 The value axis configuration options.
+
+
+<div class="meta-api-description">
+Adjust numeric axis settings including scale type, minimum and maximum limits, major and minor tick intervals, label formatting, axis titles, gridline visibility, crosshair display, and visual styling for charts rendering continuous numeric data; control axis scaling, range boundaries, labeling styles, and interactive guides to customize vertical or horizontal value axes for stock or time series charts, enabling precise control over how data values are represented, formatted, and highlighted on graphical displays.
+</div>
 
 #### Example
 
@@ -32170,6 +36790,11 @@ Value indicies at which the category axes cross the value axis. (Only for array)
 
 Date at which the category axis crosses this axis. (Only for date)
 
+
+<div class="meta-api-description">
+Control the point where the category axis intersects or crosses the value axis in a stock chart by specifying a numeric position, index positions, or specific dates; customize and set the crossing value using numerical values, arrays of indices, or date formats to align axes precisely, define axis intersection points, adjust chart layout by moving axes intersection, position category and value axes crossing dynamically by date or index, and configure axis crossing alignment in financial charts for better data visualization and axis control.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32193,6 +36818,11 @@ Date at which the category axis crosses this axis. (Only for date)
 
 The background color of the axis.
 
+
+<div class="meta-api-description">
+Adjust or configure the background color behind the vertical or value axis in stock or financial charts to enhance visual contrast, improve readability of axis labels and grid lines, customize the display area behind value indicators, set or modify axis background shading for better clarity in data visualization, control the axis panel’s background tone or color fill in chart components, and enable styling options that distinguish the value axis region in trading or stock market graph presentations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32215,6 +36845,11 @@ The background color of the axis.
 ### valueAxis.color `String`
 
 Color to apply to all axis elements.
+
+
+<div class="meta-api-description">
+Adjust the color and appearance of the value axis including axis lines, tick marks, labels, and related elements by configuring and applying CSS color values such as hex codes, RGB, RGBA, or named colors to customize the visual style of the chart’s vertical scale, enhance readability, match branding or theme colors, control axis highlight, and ensure consistent styling across all components on the chart’s value axis.
+</div>
 
 #### Example
 
@@ -32240,6 +36875,11 @@ Individual color settings for line and labels take priority. Any valid CSS color
 ### valueAxis.labels `Object`
 
 Configures the axis labels.
+
+
+<div class="meta-api-description">
+Control and customize numeric axis labels on stock charts by setting label text content, formats, templates, or visual functions, adjusting rotation angles, skipping or stepping intervals, toggling visibility, and styling font properties including size, color, margin, and padding for precise appearance and readability of value axis labels in financial or data visualization charts.
+</div>
 
 #### Example
 
@@ -32268,6 +36908,11 @@ Configures the axis labels.
 The background color of the labels. Any valid CSS color string will work here, including
 hex and rgb
 
+
+<div class="meta-api-description">
+Control and customize the background color behind the value axis labels in stock charts by configuring the label shading, fill, or backdrop using any standard CSS color format such as hexadecimal, RGB, or named colors; adjust, set, or modify label backgrounds to enhance readability or match chart themes, style axis label backgrounds, enable or disable color fills behind numeric axis markers, and apply color overlays to axis label areas for clearer data visualization and better UI customization during chart setup or runtime changes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32292,6 +36937,11 @@ hex and rgb
 ### valueAxis.labels.border `Object`
 
 The border of the labels.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of numerical axis labels by setting the border color, width, dash style, or disabling the outline entirely to style label edges on stock or financial charts. Adjust label stroke properties to highlight, hide, or match the axis label borders with chart themes, enabling fine-tuned visual emphasis, contrast, or blending for value axis text in time series, stock price, or data visualization graphs. This setting supports configuring label outlines to improve readability, highlight data scales, and align label borders with overall chart design aesthetics using configurable border thickness, color customization, and line dash patterns.
+</div>
 
 #### Example
 
@@ -32322,6 +36972,11 @@ The border of the labels.
 The color of the border. Any valid CSS color string will work here, including
 hex and rgb.
 
+
+<div class="meta-api-description">
+Adjusting the color of the borders around numeric labels on the vertical axis of a stock chart, customizing the outline hue of value axis labels, setting or configuring the border color using standard CSS color formats including hex codes, RGB values, or named colors, controlling the visual style of the value axis label edges for clearer distinction or branding, enabling changes to the label border appearance for enhanced readability or thematic matching on financial or data visualization charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32348,6 +37003,11 @@ hex and rgb.
 ### valueAxis.labels.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Customize the style of the border lines around value axis labels in stock charts by specifying border patterns such as solid, dashed, dotted, or dash-dot to control label outlines, enabling configuration of label border stroke styles for better visual distinction, setting up label edge effects, and adjusting label border line types for enhanced chart readability or design preferences during chart initialization or setup.
+</div>
 
 #### Example
 
@@ -32404,6 +37064,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, width, or size of the border surrounding the labels on the vertical or value axis in stock or financial charts, controlling visual emphasis, label prominence, label border line weight, and spacing around value axis labels for improved readability and styling; useful for setting pixel-based border size, customizing label outlines, enhancing chart axis label appearance, and managing label border thickness on value or Y-axis in stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32431,6 +37096,11 @@ The width of the border.
 
 The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize the color of numerical axis labels on financial charts to enhance visibility, adjust text appearance, or align with branding by setting the color using any valid CSS format like hex codes, RGB, RGBA, HSL values, or color names, enabling control over label readability, styling, and thematic consistency in stock or value-based charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32455,6 +37125,11 @@ The text color of the labels. Any valid CSS color string will work here, includi
 ### valueAxis.labels.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
+
+
+<div class="meta-api-description">
+Control and customize the typography, font style, font family, font size, font weight, and font style of numerical axis labels on stock charts, including setting CSS font properties to adjust the appearance of value axis labels, enabling developers to configure text styling for axis numbers, price labels, or value markers in chart initialization or dynamically.
+</div>
 
 #### Example
 
@@ -32481,6 +37156,11 @@ The font style of the labels.
 
 The format of the labels.
 
+
+<div class="meta-api-description">
+Adjust and customize the appearance and formatting of numeric or date values displayed on vertical axis labels in stock or financial charts by setting format patterns, templates, or culture-sensitive strings such as decimal, currency, percentage, or date/time formats; configure how numbers round, show decimals, include thousand separators, or adapt to locale-specific conventions by applying formatting tokens or expressions similar to .NET and Kendo UI style patterns, enabling precise control over label display, data readability, and axis value presentation in trading, finance, or time series visualizations.
+</div>
+
 #### Example
 
 ```pseudo
@@ -32499,6 +37179,11 @@ The format of the labels.
 
 The margin of the labels.
 
+
+<div class="meta-api-description">
+Adjust or configure the outer spacing, padding, or margin around value axis labels on financial or stock charts to control label layout, spacing consistency, and text positioning, enabling customization of label separation from the axis line, improving readability and preventing overlap or clutter in chart visualizations by setting label margins or gaps during chart setup or rendering.
+</div>
+
 #### Example
 
 ```pseudo
@@ -32515,6 +37200,11 @@ The margin of the labels.
 Mirrors the axis labels and ticks.
 If the labels are normally on the left side of the axis,
 mirroring the axis will render them to the right.
+
+
+<div class="meta-api-description">
+Control the positioning and orientation of value axis labels and tick marks in stock charts by flipping or mirroring them to the opposite side, enabling customization of axis label placement such as moving labels and ticks from left to right or right to left along the vertical axis. This feature supports configuring mirrored axis labels, reversing label sides, toggling label alignment for clearer visualization, adjusting how numeric values appear on chart axes, and customizing label layout to optimize readability and chart aesthetics in financial or stock data visualizations.
+</div>
 
 #### Example
 
@@ -32547,6 +37237,11 @@ mirroring the axis will render them to the right.
 
 The padding of the labels.
 
+
+<div class="meta-api-description">
+Adjust, set, and configure the spacing or padding around value axis labels on stock charts to control their distance from axis ticks, lines, or nearby elements, enabling precise label positioning and layout customization. Enable fine-tuning of label margins to prevent overlap, improve readability, and manage white space around numeric or value indicators on financial graphs, charts, or data visualizations. Customize label offsets and padding to ensure clear separation from chart components, axis markers, or gridlines in stock market or trading chart interfaces, allowing developers to control label alignment, spacing, and visual presentation.
+</div>
+
 #### Example
 
 ```pseudo
@@ -32561,6 +37256,11 @@ The padding of the labels.
 ### valueAxis.labels.rotation `Number`*(default: 0)*
 
 The rotation angle of the labels.
+
+
+<div class="meta-api-description">
+Adjust the angle or tilt of numerical axis labels to enhance readability and avoid overlapping text on charts, enabling control over label orientation for crowded scales, lengthy values, formatted numbers, or tightly spaced ticks. This setting lets developers configure how vertical axis labels are rotated or slanted to optimize display clarity, prevent clutter, and improve visual presentation of data points with long or complex labels on value axes.
+</div>
 
 #### Example
 
@@ -32594,6 +37294,11 @@ The rotation angle of the labels.
 Number of labels to skip.
 Skips rendering the first n labels.
 
+
+<div class="meta-api-description">
+Control the display of numeric or value axis labels by skipping a specified number of initial labels to reduce clutter, manage overcrowded or overlapping labels, configure label visibility on charts, hide the first N labels to improve readability, enable selective omission of early axis markings, set how many initial axis labels to exclude for clearer data visualization, customize axis label frequency by ignoring the first labels, optimize label spacing on value or Y axes, suppress early labels to prevent congestion, and adjust axis annotations for better chart presentation.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32626,6 +37331,11 @@ Skips rendering the first n labels.
 
 Label rendering step.
 Every n-th label is rendered where n is the step
+
+
+<div class="meta-api-description">
+Configure how often value axis labels appear on a chart by setting the interval for label rendering, enabling control over label frequency to reduce overlap or clutter on the axis. Adjust the skip count to display every nth label along the value axis, allowing fine-tuning of label density, spacing, and visibility for clearer data presentation. This setting can be used to enable or disable labels selectively, optimize chart readability by controlling label repetition, or manage label rendering cadence on financial or stock visualizations.
+</div>
 
 #### Example
 
@@ -32663,6 +37373,11 @@ Template variables:
 
 *   **value** - the value
 
+
+<div class="meta-api-description">
+Customize, format, control, or set value axis labels with flexible templates to dynamically display numeric or date values on financial or stock charts, enabling precise labeling, styling, or personalization of axis text using variables like actual axis values, numeric data points, or custom expressions to create tailored label formats, enhancing readability and data representation on chart scales, including options to define patterns, text formats, or conditional label displays for value-based axes in stock or financial visualizations.
+</div>
+
 #### Example
 
     <div id="chart"></div>
@@ -32694,6 +37409,11 @@ Template variables:
 
 The visibility of the labels.
 
+
+<div class="meta-api-description">
+Show or hide numeric or date labels on the value axis by enabling or disabling axis label visibility, controlling whether the vertical scale’s numeric or time-based tick marks display readable labels, toggling label rendering on charts, configuring axis annotations, adjusting visibility of value axis text, managing label appearance on price or value scales, setting labels on or off to customize chart readability, and controlling display of axis legends or tags commonly used for data points, values, timestamps, or numerical markers on stock or financial charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32724,6 +37444,11 @@ The visibility of the labels.
 ### valueAxis.line `Object`
 
 Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
+
+
+<div class="meta-api-description">
+Adjust and style the vertical value axis line on financial or stock charts by configuring its stroke color, thickness, dash pattern, and visibility to control how the axis boundary and tick marks appear, including major and minor tick placement and formatting, while excluding grid line modifications; customize axis line visuals to match chart themes, improve readability, highlight data ranges, or visually differentiate chart elements through flexible line styling options and axis boundary control.
+</div>
 
 #### Example
 
@@ -32759,6 +37484,11 @@ Configures the axis line. This will also affect the major and minor ticks, but n
 The color of the line. This will also effect the major and minor ticks, but
 not the grid lines.
 
+
+<div class="meta-api-description">
+Adjust or customize the color of the vertical value axis line and its corresponding major and minor tick marks on a stock or financial chart, enabling control over axis stroke color separate from grid lines, useful for styling, theming, or improving chart readability and visual differentiation of axis elements from other chart components like grid or background.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32789,6 +37519,11 @@ not the grid lines.
 ### valueAxis.line.dashType `String`*(default: "solid")*
 
 The dash type of the line.
+
+
+<div class="meta-api-description">
+Configure or customize the appearance and style of the vertical or value axis line on a stock or financial chart by setting its stroke pattern, including solid, dashed, dotted, or other dash styles to control how the axis line is rendered visually. Adjust or enable different line patterns for axis strokes to match design preferences, improve chart readability, highlight particular data layouts, or create distinct visual separations along the value scale. Control, set, or modify the dash type or stroke style of the chart’s value axis line to achieve precise graphical customization and enhance the visual aesthetics of stock, financial, or time series data charts.
+</div>
 
 #### Example
 
@@ -32849,6 +37584,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The visibility of the line.
 
+
+<div class="meta-api-description">
+Toggle visibility of the vertical value axis line on financial or stock charts, enabling developers to show, hide, or configure the display of the axis line for better clarity or minimalistic design in data visualizations. This setting controls whether the numeric scale line along the value axis appears, allowing adjustment of axis line rendering, axis line visibility, or axis border display in stock or time-series chart configurations. Use this to manage axis line presence for improved chart readability, customization of chart axis styling, or when simplifying chart visuals by hiding the value axis boundary line.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32881,6 +37621,11 @@ The visibility of the line.
 The width of the line. This will also effect the major and minor ticks, but
 not the grid lines.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, stroke width, or line weight of the numeric or value axis line in stock charts and financial graphs, including controlling the thickness of major and minor tick marks on the value axis while leaving grid line thickness unchanged, enabling customization of axis lines for better visual clarity, emphasis, or styling in chart presentations and data visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32912,6 +37657,11 @@ not the grid lines.
 
 Configures the major grid lines. These are the lines that are an extension of the major ticks through the
 body of the chart.
+
+
+<div class="meta-api-description">
+Customize and configure the primary grid lines that extend from main axis ticks across the chart area, controlling their visibility, color, width, line style, dash pattern, spacing, and alignment to enhance the value axis presentation in stock or financial charts, enabling precise control over major grid appearance and behavior for clearer data visualization and tailored chart layouts.
+</div>
 
 #### Example
 
@@ -32946,6 +37696,11 @@ body of the chart.
 
 The color of the lines.
 
+
+<div class="meta-api-description">
+Customize and control the color of major grid lines along the value axis in stock or financial charts to enhance visual clarity, adjust grid line styling for thematic consistency, emphasize or de-emphasize axis divisions, set or configure the appearance of primary value axis grid boundaries, and manage the coloring to improve readability or highlight data segmentation on the vertical scale of the chart.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -32976,6 +37731,11 @@ The color of the lines.
 ### valueAxis.majorGridLines.visible `Boolean`*(default: true)*
 
 The visibility of the lines.
+
+
+<div class="meta-api-description">
+Control the display or removal of primary grid lines along the value or Y-axis in stock charts to enhance chart clarity, enable or disable axis reference lines for better data visualization, customize showing major grid lines on the value axis to improve readability or declutter the chart, toggle visibility of key horizontal grid markers that align with value intervals, configure whether these prominent grid lines appear to aid in comparing stock prices or financial data trends, adjust the appearance of main grid lines for clearer axis scaling, set visibility to true or false to either render or hide the major horizontal grid lines that assist in interpreting chart values, manipulate the presentation of significant value axis grid guides to suit analytic or presentation preferences, and manage the presence of major grid lines on the vertical scale for improved understanding of numerical data ranges in stock price charts.
+</div>
 
 #### Example
 
@@ -33008,6 +37768,11 @@ The visibility of the lines.
 
 The width of the lines.
 
+
+<div class="meta-api-description">
+Adjusting the thickness or weight of primary vertical or horizontal grid lines on a stock or financial chart axis, controlling how bold or prominent major grid lines appear for better visual clarity, customizing line width or stroke size to enhance the readability of value axis grid markers, setting or configuring numeric values to increase or decrease major grid line thickness, and managing the appearance of grid boundaries on chart axes to emphasize key intervals or divisions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33038,6 +37803,11 @@ The width of the lines.
 ### valueAxis.majorGridLines.step `Number` *(default: 1)*
 
 The step of the value axis major grid lines.
+
+
+<div class="meta-api-description">
+Adjust spacing and intervals of primary grid lines along a chart’s value axis by configuring the step size or gap between major grid lines, controlling how frequently vertical or horizontal reference lines appear, setting numeric increments to space grid lines evenly, managing grid line density or frequency for enhanced readability and data visualization, defining how often these lines are rendered to improve scale interpretation or axis segmentation on financial or stock charts.
+</div>
 
 #### Example
 
@@ -33071,6 +37841,11 @@ The step of the value axis major grid lines.
 
 The skip of the value axis major grid lines.
 
+
+<div class="meta-api-description">
+Adjust, configure, control, or set the spacing and density of major grid lines on a chart’s value axis by skipping a specified number of lines between each rendered grid line, enabling customization to reduce visual clutter, improve readability, handle dense numeric ranges or many tick marks, and optimize the axis presentation for clearer data visualization and better chart interpretation in stock or time-series charts with scaling and interval adjustments.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33102,6 +37877,11 @@ The skip of the value axis major grid lines.
 ### valueAxis.majorTicks `Object`
 
 The major ticks of the axis.
+
+
+<div class="meta-api-description">
+Customize the primary tick marks on a chart’s value axis by setting spacing intervals, toggling their visibility, and adjusting the appearance and labeling of major ticks to control how data points align and are visually segmented along the axis. Configure major grid lines, define tick frequency, show or hide tick labels, and fine-tune axis intervals to enhance chart readability and data analysis. Set or adjust the main tick markers on numerical axes, control their intervals and display style, and manage how the axis value indicators appear within stock or financial charts.
+</div>
 
 #### Example
 
@@ -33137,6 +37917,11 @@ The major ticks of the axis.
 
 The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.
 
+
+<div class="meta-api-description">
+Adjust or configure the length, size, or pixel length of major tick marks or major tick lines on the value axis of a stock chart or financial graph, controlling how long these primary scale indicators appear on the chart's value or Y axis; useful for customizing visibility, readability, or spacing of tick marks, setting the thickness or extension length of major interval markers on price, data, or numeric axes, and fine-tuning chart appearance by enabling control over major tick mark dimensions.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33167,6 +37952,11 @@ The axis major tick size. This is the length of the line in pixels that is drawn
 ### valueAxis.majorTicks.visible `Boolean`*(default: true)*
 
 The visibility of the major ticks.
+
+
+<div class="meta-api-description">
+Configure the visibility of major tick marks along the value axis in stock or financial charts by enabling or disabling the display of primary ticks, allowing precise control over axis tick rendering for customization, clarity, or simplification of chart readings. Adjust or toggle the presence of large interval ticks on vertical numerical scales to show or hide key reference points in data visualization, controlling the appearance of main axis markers for better readability, data emphasis, or stylistic preferences in stock trend graphs.
+</div>
 
 #### Example
 
@@ -33199,6 +37989,11 @@ The visibility of the major ticks.
 
 The color of the value axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or set the color of the main tick marks along the value axis in stock charts, enabling control over the appearance of major scale lines to highlight or theme the data visualization; configurable using any valid CSS color format such as hexadecimal, RGB, or named colors, allowing you to adjust, style, or theme axis tick lines for better readability, contrast, or visual emphasis on chart scales.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33230,6 +38025,11 @@ The color of the value axis major ticks lines. Accepts a valid CSS color string,
 
 The width of the major ticks in pixels.
 
+
+<div class="meta-api-description">
+Adjust the thickness, size, or stroke width of the main or primary tick marks on the value axis of stock or financial charts, enabling customization of the major gridline or tick mark boldness in pixels for clearer data visualization, enhanced readability, tailored axis styling, and precise control over the prominence of numeric axis indicators or scaling lines on the vertical value scale.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33260,6 +38060,11 @@ The width of the major ticks in pixels.
 ### valueAxis.majorTicks.step `Number` *(default: 1)*
 
 The step of the value axis major ticks.
+
+
+<div class="meta-api-description">
+Adjust the frequency and spacing of major tick marks along the value axis in stock charts by setting the numeric interval that controls how often these primary ticks appear. Customize, configure, or control the distance between value axis labels or grid lines to increase or decrease major tick steps, enabling precise tuning of visual data intervals, axis segmentation, or scale granularity for clearer chart readability and tailored axis presentation.
+</div>
 
 #### Example
 
@@ -33293,6 +38098,11 @@ The step of the value axis major ticks.
 
 The skip of the value axis major ticks.
 
+
+<div class="meta-api-description">
+Adjust the frequency of major tick marks on the chart’s value axis by setting how many ticks to skip or omit between displayed ticks, enabling control over tick density and spacing to prevent clutter or enhance readability; this includes options to show every tick, every other tick, or customize intervals by specifying an integer value that determines how often major ticks appear along the axis, useful for fine-tuning axis labeling, scaling, and visual clarity in stock or financial chart presentations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33325,6 +38135,11 @@ The skip of the value axis major ticks.
 
 The interval between major divisions.
 
+
+<div class="meta-api-description">
+Control and configure the spacing or interval between major tick marks and labels on the value axis of a stock chart, enabling precise adjustment of axis granularity, grid line distribution, numeric scale divisions, and data segmentation. Set or customize the major unit to define how frequently major divisions appear along the value axis, influencing chart readability, scale intervals, and axis labeling frequency in financial or time series visualizations. Adjusting this parameter helps manage axis scaling, tick mark density, and grid alignment for clearer representation of numerical data ranges or stock price movements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33354,6 +38169,11 @@ The interval between major divisions.
 
 The maximum value of the axis.
 This is often used in combination with the **min** configuration option.
+
+
+<div class="meta-api-description">
+Control and configure the maximum limit of the vertical value axis range by setting the upper bound for displayed data points, enabling fixed or dynamic scaling of chart values, adjusting the highest value shown on the value axis, defining axis scale limits to restrict or extend the visible data range, setting maximum thresholds for the axis to customize chart display, specifying the top boundary for numerical axis measurements, managing axis scaling for better visualization, and combining with minimum axis settings to lock or adjust the value range on stock or financial charts.
+</div>
 
 #### Example
 
@@ -33385,6 +38205,11 @@ This is often used in combination with the **min** configuration option.
 The minimum value of the axis.
 This is often used in combination with the **max** configuration option.
 
+
+<div class="meta-api-description">
+Set or configure the minimum limit, lower bound, or starting point of a chart’s numeric value axis to control the scale’s floor, preventing automatic resizing or scaling below this threshold, enabling fixed axis ranges, setting custom minimum values for stock, financial, or data visualization charts, defining lower axis boundaries to clamp or constrain displayed data, controlling zoom or data range start, and adjusting axis range settings for better data focus or comparison.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33414,6 +38239,11 @@ This is often used in combination with the **max** configuration option.
 
 Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
 body of the chart.
+
+
+<div class="meta-api-description">
+Customize, enable, disable, or style the fine grid lines tied to the minor tick marks on the vertical axis of financial or stock charts, controlling how subtle reference lines appear or vanish across the value scale. Adjust line visibility, color, width, dash styles, or toggling of these auxiliary grid lines that help in granular data reading and precise value alignment on stock or time-series charts. Configure minor grid line aesthetics and presence on the Y-axis to enhance chart clarity, support detailed data analysis, and improve visual guidance for users examining stock price fluctuations or value distributions.
+</div>
 
 #### Example
 
@@ -33450,6 +38280,11 @@ The color of the lines.
 
 Note that this has no effect if the visibility of the minor grid lines is not set to **true**.
 
+
+<div class="meta-api-description">
+Control and customize the color of the secondary grid lines on a stock chart’s value axis, specifying any CSS-compatible color format such as hexadecimal, RGB, RGBA, or named colors to enhance chart readability or match branding. Adjusting the visual styling of minor grid lines involves setting their color to create subtle or distinct separations on the value axis, supporting use cases like highlighting minor ticks, improving data visualization clarity, or designing chart themes. This setting enables fine-tuning the appearance of less prominent grid lines beneath major value axis markers, helping developers configure, style, or theme stock chart axes with precise control over secondary grid line coloring when enabled and visible.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33481,6 +38316,11 @@ Note that this has no effect if the visibility of the minor grid lines is not se
 ### valueAxis.minorGridLines.dashType `String`*(default: "solid")*
 
 The dash type of the minor grid lines.
+
+
+<div class="meta-api-description">
+Adjusting the stroke pattern or style of the minor grid lines on a chart’s value axis can be controlled by configuring the dash pattern or dash style, allowing customization of the dashed, dotted, or solid appearance of these lines. Developers often seek to set or configure the dash type for minor grid lines to improve readability, emphasize chart details, control visual styling, or differentiate grid elements with specific dash arrays or stroke patterns. This includes changing line patterns such as dashed, dotted, short dashes, long dashes, or custom dash sequences for clearer chart visualization and enhanced styling in stock or financial charting components.
+</div>
 
 #### Example
 
@@ -33545,6 +38385,11 @@ Note that minor grid lines are not visible by default, therefore none of these s
 
 The visibility of the lines.
 
+
+<div class="meta-api-description">
+Control the display of secondary or minor grid lines along the value axis in stock charts by enabling or disabling their visibility, allowing customization of the chart background to show or hide finer grid intervals for better data readability, precision, and visual clarity; toggle the presence of smaller ticks or subtle grid marks that appear between major value markers to suit preferences for detailed value scaling, axis segmentation, and enhanced visual guides in financial or time series data visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33578,6 +38423,11 @@ The width of the lines.
 
 Note that this settings has no effect if the visibility of the minor grid lines is not set to **true**.
 
+
+<div class="meta-api-description">
+Adjust the thickness or line width of the smaller grid lines appearing on the value axis in stock charts, enabling control over the minor grid line pixel size for enhanced chart readability, precision, and styling when enabled, including options to configure, set, customize, or modify the slim grid divider lines that appear between major tick marks for detailed axis scaling and visual guidance on financial or data plots.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33609,6 +38459,11 @@ Note that this settings has no effect if the visibility of the minor grid lines 
 ### valueAxis.minorGridLines.step `Number` *(default: 1)*
 
 The step of the value axis minor grid lines.
+
+
+<div class="meta-api-description">
+Adjust the spacing or interval between minor grid lines on the vertical value axis of a stock or financial chart to control how often these smaller grid markers appear, enabling precise configuration of minor tick frequency, setting the numeric step between grid lines, customizing chart scale granularity, fine-tuning axis grid density, or defining the incremental step size for minor grid lines.
+</div>
 
 #### Example
 
@@ -33643,6 +38498,11 @@ The step of the value axis minor grid lines.
 
 The skip of the value axis minor grid lines.
 
+
+<div class="meta-api-description">
+Adjust the frequency or spacing of minor grid lines on a chart’s value axis by configuring how many lines to skip between each rendered minor grid line, enabling control over visual density, reducing clutter, customizing grid intervals, managing minor tick marks, setting skip counts to omit certain grid lines, or defining intervals for grid line rendering to enhance readability and chart appearance.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33675,6 +38535,11 @@ The skip of the value axis minor grid lines.
 ### valueAxis.minorTicks `Object`
 
 The minor ticks of the axis.
+
+
+<div class="meta-api-description">
+Control and customize the small tick marks between major value axis points on financial or stock charts, including enabling or disabling minor ticks, adjusting their frequency, spacing, visibility, and styling on the chart’s value axis scale; configure how subtle reference marks appear between main numeric labels to enhance data readability, set intervals for minor graduations, and modify their appearance to fit different charting needs, such as improving axis granularity, fine-tuning visual cues for price movements, or tailoring axis details for better data visualization in time series or stock market analysis.
+</div>
 
 #### Example
 
@@ -33710,6 +38575,11 @@ The minor ticks of the axis.
 
 The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.
 
+
+<div class="meta-api-description">
+Adjust, configure, or set the length of minor tick marks on the vertical value axis of a stock chart by specifying the pixel size to control how long each minor tick line appears, enabling customization of axis detail, tick density visualization, and precise styling of minor grid marks for better readability or aesthetic preferences in financial or data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33741,6 +38611,11 @@ The axis minor tick size. This is the length of the line in pixels that is drawn
 ### valueAxis.minorTicks.color `String` *(default: "black")*
 
 The color of the value axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust the color of minor tick marks along the value axis in financial or time series charts by specifying any valid CSS color format such as hex, rgb, or named colors to customize or enhance visibility, contrast, and styling consistency with the overall chart theme, enabling control over subtle grid lines or minor intervals for clearer data presentation, visual alignment, or theming preferences in stock or data visualization interfaces.
+</div>
 
 #### Example
 
@@ -33774,6 +38649,11 @@ The color of the value axis minor ticks lines. Accepts a valid CSS color string,
 
 The width of the minor ticks in pixels.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, size, or pixel width of minor tick marks on the value axis in stock or financial charts, enabling control over how thin or thick the small subdivision ticks appear on the vertical scale. Set the minor grid or axis marker width to customize the visual density, fine-tune chart readability, and enhance axis detail by specifying numeric width values for minor tick lines on value axes. Control graphical line thickness or stroke size for minor ticks on the y-axis to improve clarity, precision, and styling in interactive or static stock market, candle, or time series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33806,6 +38686,11 @@ The width of the minor ticks in pixels.
 
 The visibility of the minor ticks.
 
+
+<div class="meta-api-description">
+Control the display of minor tick marks or smaller subdivisions along the numeric or value axis in charts, enabling or disabling the visibility of these finer grid lines for adjusting axis detail levels, customization of axis granularity, visual density tuning, and improved readability of chart data points by showing or hiding minor interval markers, ticks, or scale hints on the axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33836,6 +38721,11 @@ The visibility of the minor ticks.
 ### valueAxis.minorTicks.step `Number` *(default: 1)*
 
 The step of the value axis minor ticks.
+
+
+<div class="meta-api-description">
+Control the spacing or interval between minor tick marks on a chart’s value axis by setting the numeric step size to adjust the frequency and distribution of minor ticks; configure how closely minor tick marks appear to increase or decrease axis granularity, fine-tune the incremental distance between small division marks on the value scale, customize the minor tick intervals for precise axis detail, enable adjustments to the spacing of minor grid lines or tick marks for better data resolution or readability on stock or financial charts, and specify the numeric increment that governs the placement of minor ticks along the value axis.
+</div>
 
 #### Example
 
@@ -33869,6 +38759,11 @@ The step of the value axis minor ticks.
 ### valueAxis.minorTicks.skip `Number` *(default: 0)*
 
 The skip of the value axis minor ticks.
+
+
+<div class="meta-api-description">
+Control and customize the frequency and spacing of minor tick marks along the vertical value axis in stock or financial charts by specifying how many minor ticks to skip or omit between visible marks, enabling precise adjustment of axis granularity, tick density, and chart readability on numeric or time-based scales. Adjust the interval of small tick indicators to fine-tune label distribution, improve axis clarity, reduce clutter, and configure minor tick rendering rate for enhanced visual analysis of stock price movements, financial data, or value series in interactive charting tools. This setting is useful for dynamically enabling, disabling, or spacing minor ticks to match zoom levels, scale ranges, or user preferences in axis design and display.
+</div>
 
 #### Example
 
@@ -33904,6 +38799,11 @@ The skip of the value axis minor ticks.
 The interval between minor divisions.
 It defaults to 1/5th of the majorUnit.
 
+
+<div class="meta-api-description">
+Adjust or configure the interval between minor tick marks, grid lines, and axis subdivisions along a chart’s value axis to control the density and spacing of finer-scale labels and visual subdivisions for better precision, zooming, or detailed data segmentation. Set, enable, or modify the minor scale intervals or subdivisions to customize how detailed the grid and ticks appear on the value axis, tuning the granularity of axis markings for stock charts or other numeric data visualizations. Control the frequency and spacing of small ticks and gridlines below major units to enhance readability, precision, and fine scaling between major axis divisions, including adjusting the default proportion relative to major axis steps during chart setup or initialization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33932,6 +38832,11 @@ It defaults to 1/5th of the majorUnit.
 ### valueAxis.name `Object`*(default: "primary")*
 
 The unique axis name.
+
+
+<div class="meta-api-description">
+Configure or assign a unique identifier or label to a value axis used in stock or financial charts to enable precise referencing, binding, or mapping of data series to that specific axis during chart setup, runtime adjustments, or series configuration. This identifier helps link series with the correct vertical scale, supports multiple axes management, and is essential for targeting axes programmatically in stock chart visualizations, axis synchronization, dynamic updates, and customized rendering scenarios.
+</div>
 
 #### Example
 
@@ -33962,6 +38867,11 @@ The unique axis name.
 
 Prevents the automatic axis range from snapping to 0.
 
+
+<div class="meta-api-description">
+Configure the numeric axis to prevent automatic inclusion of zero in the visible value range, enabling tighter scaling and more precise zooming on datasets without zero baselines. Control axis snapping behavior to set narrow or custom ranges that focus on data variation rather than spanning from zero, improving detail and clarity in charts where the baseline isn’t zero. Enable or disable zero anchoring on value axes to fine-tune the visual range, avoid unnecessary padding, and enhance the display of data with non-zero minimums, supporting precise scaling and range control for stock charts or any numeric axis visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -33991,6 +38901,11 @@ Prevents the automatic axis range from snapping to 0.
 
 The name of the pane that the axis should be rendered in.
 The axis will be rendered in the first (default) pane if not set.
+
+
+<div class="meta-api-description">
+Control and configure the placement of the value axis within a multi-pane stock chart layout by specifying the target pane or section where the axis should appear. Set or assign the axis to a particular pane name to organize and customize axis rendering when working with multiple panes, enabling precise alignment and visualization of axis scales across separate chart segments. Adjust or define which pane the value axis belongs to in order to manage axis positioning, control layout distribution, and ensure consistent axis display in complex multi-pane financial or stock data visualizations.
+</div>
 
 #### Example
 
@@ -34024,6 +38939,11 @@ The axis will be rendered in the first (default) pane if not set.
 ### valueAxis.plotBands `Array`
 
 The plot bands of the value axis.
+
+
+<div class="meta-api-description">
+Enable customization of numeric ranges on the chart’s value axis by specifying shaded or highlighted segments using configurable boundaries, colors, and labels to visually mark specific value intervals. This includes setting up ranges to emphasize or differentiate certain numeric spans, controlling the appearance of axis segments through arrays of range objects with from/to limits, and adding descriptive labels for better data interpretation. Configure, define, or manage axis bands or shaded zones for value indicators, numeric thresholds, or highlighted areas to improve clarity in stock charts or other vertical scale visualizations.
+</div>
 
 #### Example
 
@@ -34059,6 +38979,11 @@ The plot bands of the value axis.
 
 The start position of the plot band in axis units.
 
+
+<div class="meta-api-description">
+Set or configure the starting point, lower limit, or initial boundary of a highlighted range, colored band, or plot band on a chart's numeric or value axis; adjust the initial position or from-coordinate to define where the marked range begins along the axis scale, often paired with an ending value or "to" setting to control the span of the emphasis region on stock charts, financial graphs, data visualizations, or time series plots with axis-based highlighting.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34090,6 +39015,11 @@ The start position of the plot band in axis units.
 
 The end position of the plot band in axis units.
 
+
+<div class="meta-api-description">
+Specify the endpoint or boundary of a highlighted range or plot band on a stock chart's value axis, controlling where the shaded area finishes based on the axis scale. Configure or set the final value position to define the extent of the plot band, enabling customization of axis range highlighting, boundary limits, or cutoff points in terms of axis units or data values. Adjust the end limit for visual emphasis on specific value segments within the chart, controlling where the plot band stops along the value axis scale.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34120,6 +39050,11 @@ The end position of the plot band in axis units.
 ### valueAxis.plotBands.color `String`
 
 The color of the plot band.
+
+
+<div class="meta-api-description">
+Customize and control the background fill color of shaded regions or highlighted ranges on a chart’s value axis, enabling configuration of axis plot bands with specific colors to emphasize particular numeric intervals, value segments, or data thresholds through setting the fill, sector shading, or colored bands on the vertical scale for clearer visualization and focus.
+</div>
 
 #### Example
 
@@ -34153,6 +39088,11 @@ The color of the plot band.
 ### valueAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
+
+
+<div class="meta-api-description">
+Adjust and configure the transparency, translucency, or opacity level of value axis plot bands in stock or financial charts to highlight, dim, fade, or visually emphasize specific value ranges or data intervals, controlling how clearly these bands appear on the chart background and enabling customization of the plot band’s visibility for better data visualization, readability, or focus within time series or stock price graphs.
+</div>
 
 #### Example
 
@@ -34189,6 +39129,11 @@ The opacity of the plot band.
 Reverses the axis direction -
 values increase from right to left and from top to bottom.
 
+
+<div class="meta-api-description">
+Control the direction and orientation of numeric or value scales in charts by flipping or reversing the axis so that values increase opposite the default direction, such as right to left in horizontal layouts or top to bottom in vertical layouts, enabling inverted, mirrored, or right-to-left (RTL) axis displays, customizing chart value flow, reversing axis order for flipped data visualizations, and setting axis direction to match right-to-left reading patterns or specialized graph layouts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34217,6 +39162,11 @@ values increase from right to left and from top to bottom.
 ### valueAxis.title `Object`
 
 The title of the value axis.
+
+
+<div class="meta-api-description">
+Configure the label or header text for the vertical numeric axis on stock charts, enabling customization of the Y-axis title or value axis description for clearer data representation. This feature supports setting, controlling, or defining the wording shown along the value axis to improve readability, axis identification, and chart annotation, commonly referred to as Y-axis label, value axis header, or numeric axis title. It’s useful for developers needing to customize axis titles in financial or stock market visualizations, including use cases like renaming, adjusting, or specifying axis text to match chart context or data semantics.
+</div>
 
 #### Example
 
@@ -34251,6 +39201,11 @@ The title of the value axis.
 The background color of the title. Any valid CSS color string will work here, including
 hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the background color behind the label or title text of the vertical scale axis in stock charts by specifying any valid CSS color formats such as hex codes, rgb, rgba, hsl, or common color names; useful for styling, enhancing readability, highlighting, or theming the value axis title area in financial or data visualization charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34282,6 +39237,11 @@ hex and rgb.
 ### valueAxis.title.border `Object`
 
 The border of the title.
+
+
+<div class="meta-api-description">
+Configure and customize the border styling around the vertical value axis label in stock charts, including options to set border color, thickness, dash patterns, corner rounding, stroke style, and other visual attributes that define the outline of the value axis title to enhance readability and align with your chart’s design and theme preferences during setup or runtime adjustments.
+</div>
 
 #### Example
 
@@ -34318,6 +39278,11 @@ The border of the title.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Set or customize the outline, stroke, or border color around the value axis title in stock or financial charts to improve visual contrast, highlight axis labels, match color themes, or enhance readability; configure and control the color of the frame or edge around axis titles to ensure consistent styling, distinct separation, or thematic alignment in chart visualizations and data axis labeling.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34351,6 +39316,11 @@ The color of the border.
 ### valueAxis.title.border.dashType `String`*(default: "solid")*
 
 The dash type of the border.
+
+
+<div class="meta-api-description">
+Customize the border style of the value axis title for stock charts by setting solid lines, dashed lines, dotted patterns, or various dash styles to control the appearance and rendering of the axis title border; adjust the visual pattern of axis title outlines, configure dashed or dotted borders, define line styles for axis labels, and control title border patterns to enhance chart aesthetics and clarity in financial or data visualization contexts.
+</div>
 
 #### Example
 
@@ -34416,6 +39386,11 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 The width of the border.
 
+
+<div class="meta-api-description">
+Control and customize the thickness or stroke width of the border around the value axis title in stock charts, enabling developers to set and adjust the visual weight or line thickness of the axis label outline. Configure the border thickness using numeric values to increase or decrease the title’s frame weight, allowing precise styling, border line size modification, or stroke width adjustments for axis title decorations in financial or stock chart visualizations. Adjust border width properties to fine-tune the prominence or subtlety of the value axis title’s border line in chart display.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34450,6 +39425,11 @@ The width of the border.
 
 The text color of the title. Any valid CSS color string will work here, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or customize the color of the value axis title text to improve visibility, enhance contrast, align with branding guidelines, or match specific color themes using any valid CSS color format such as hex codes, RGB, RGBA, HSL, or named colors. Whether you want to set, change, configure, or control the color styling of axis titles on financial charts, stock charts, or other graph visualizations, this property enables flexible color customization to ensure clear labeling and consistent design across chart components.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34481,6 +39461,11 @@ The text color of the title. Any valid CSS color string will work here, includin
 ### valueAxis.title.font `String`*(default: "16px Arial,Helvetica,sans-serif")*
 
 The font style of the title.
+
+
+<div class="meta-api-description">
+Customize and configure the typography, font style, weight, size, family, and appearance of the value axis title text in stock charts, enabling control over axis label fonts, adjusting boldness, setting font size and typeface, styling chart axis titles, and specifying text formatting for clearer visualization and enhanced chart readability during chart initialization or dynamic updates.
+</div>
 
 #### Example
 
@@ -34514,6 +39499,11 @@ The font style of the title.
 
 The margin of the title.
 
+
+<div class="meta-api-description">
+Adjust spacing and outer margins around the value axis title in stock charts to control layout, alignment, and avoid overlap with other chart elements; configure or set margin values to fine-tune the distance between the axis title and surrounding axis labels, grid lines, or chart boundaries for precise positioning, spacing optimization, padding adjustment, and visual clarity in financial or data visualization contexts.
+</div>
+
 #### Example
 
 ```pseudo
@@ -34529,6 +39519,11 @@ The margin of the title.
 
 The padding of the title.
 
+
+<div class="meta-api-description">
+Adjust or configure the spacing and padding around the vertical value axis label or title on a stock chart to control its distance from axis labels, tick marks, and chart boundaries, enabling precise alignment, layout tuning, and visual balance of the value axis header or caption area. Customize or set the margin-like padding to position the vertical axis heading text for better readability, aesthetic placement, or to prevent overlapping with chart elements, ticks, or data labels on financial or stock charts. Adjust or fine-tune the axis title spacing, indentation, or buffer space on the value scale side to enhance clarity, spacing consistency, and overall chart presentation in stock or time-series data visualization.
+</div>
+
 #### Example
 
 ```pseudo
@@ -34543,6 +39538,11 @@ The padding of the title.
 ### valueAxis.title.position `String`*(default: "center")*
 
 The position of the title.
+
+
+<div class="meta-api-description">
+Set or adjust the placement and alignment of the numeric axis label or title in a stock chart, enabling configuration of its position relative to the value axis such as top, bottom, left, or right, to control how and where the axis title appears within the chart layout, including options to position the label for clarity, aesthetics, or readability when customizing chart axis titles during initialization or runtime.
+</div>
 
 #### Example
 
@@ -34596,6 +39596,11 @@ The axis title is positioned on the left (applicable to horizontal axis).
 
 The rotation angle of the title.
 
+
+<div class="meta-api-description">
+Adjust the angle or orientation of the value axis label or title on a stock or financial chart by setting or configuring its rotation, tilt, or text direction to improve layout, visibility, readability, and presentation; control the title’s degree of rotation during chart setup to customize axis label alignment, direction, angle, or placement for better clarity and design in stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34628,6 +39633,11 @@ The rotation angle of the title.
 
 The text of the title.
 
+
+<div class="meta-api-description">
+Configure, set, or update the label or heading displayed on the vertical axis of a stock or financial chart, controlling the exact wording or title text shown on the value axis or y-axis to customize axis labels, titles, captions, or descriptions for clearer data representation, relevant for adjusting axis headers, naming the scale, or defining the vertical axis title in stock visualizations and financial data charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34658,6 +39668,11 @@ The text of the title.
 ### valueAxis.title.visible `Boolean`*(default: true)*
 
 The visibility of the title.
+
+
+<div class="meta-api-description">
+toggle display of numerical axis label on financial charts, show or hide value axis title, enable or disable axis heading visibility, set boolean flag to render or suppress axis text on stock or time series charts, control axis label presence for value or price scale, manage visibility of axis captions in data visualization, configure showing axis titles for stock charts, determine whether axis headers appear alongside value axis, customize appearance by enabling or removing axis title text, control labeling of chart’s vertical value axis for clarity or minimalism.
+</div>
 
 #### Example
 
@@ -34691,6 +39706,11 @@ The visibility of the title.
 
 The visibility of the axis.
 
+
+<div class="meta-api-description">
+Control the visibility of the vertical value axis on the stock chart by enabling or disabling its display, showing or hiding the numerical scale, toggling axis labels and tick marks, configuring whether the value axis appears alongside the chart data, managing layout space reserved for axis elements, setting the axis to be visible or hidden during chart setup, adjusting how the chart presents its value measurements, and deciding if the value scale axis is rendered or omitted for clearer or more compact visualization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34719,6 +39739,11 @@ The visibility of the axis.
 ### valueAxis.crosshair `Object`
 
 The crosshair configuration options.
+
+
+<div class="meta-api-description">
+Configure and control the precise inspection feature on the value axis of financial or stock charts by enabling or disabling the crosshair indicator, customizing its visual style including color, line thickness, and dash patterns, adjusting how it snaps to data points for accuracy, and tailoring tooltip display with specific content and formatting options to enhance data readability and user interaction during analysis or chart navigation, applicable for setting up clear reference lines, detailed value tracking, and improving user feedback on dynamic chart interfaces.
+</div>
 
 #### Example
 
@@ -34753,6 +39778,11 @@ The crosshair configuration options.
 
 The color of the crosshair.
 
+
+<div class="meta-api-description">
+Configure or customize the color of the value axis crosshair line in stock or financial charts to enhance visibility, match theme colors, or improve user interface clarity when hovering over data points. Control and set the crosshair line’s color on the vertical value axis to highlight precise values, support interactive chart analysis, and ensure consistent styling with the overall chart design by specifying any valid color value for the crosshair indicator. Adjust the vertical axis crosshair hue, tint, or shade for better differentiation, user experience, and seamless integration with chart themes and data visualization settings.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34784,6 +39814,11 @@ The color of the crosshair.
 ### valueAxis.crosshair.width `Number`
 
 The width of the crosshair.
+
+
+<div class="meta-api-description">
+Adjust or configure the thickness, weight, or line width of the crosshair displayed on the value axis in financial charts or stock graphs to control its visibility, prominence, or emphasis when hovering or interacting with the value scale; modify the crosshair line's size, boldness, or stroke width to enhance precision, clarity, or visual focus on price levels or data points along the vertical axis during stock chart analysis or interactive exploration.
+</div>
 
 #### Example
 
@@ -34817,6 +39852,11 @@ The width of the crosshair.
 
 The opacity of the crosshair.
 
+
+<div class="meta-api-description">
+Adjust or configure the transparency level, alpha, or opacity of a chart’s vertical or value-axis crosshair to change its visibility, clarity, or emphasis against plotted data, series, or indicators. Enable, set, or control how faint, translucent, semi-transparent, or solid the value-axis crosshair appears on stock, financial, or time-series charts to enhance readability, highlight or mute the crosshair line on the Y-axis, and provide a numeric or percentage-based transparency setting for visual customization.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34848,6 +39888,11 @@ The opacity of the crosshair.
 ### valueAxis.crosshair.dashType `Number`
 
 The dash type of the crosshair.
+
+
+<div class="meta-api-description">
+Set or customize the pattern and style of the crosshair line on the value axis for clearer visual separation, including configuring dashed, dotted, solid, or mixed stroke types to enhance chart readability, adjust crosshair appearance, modify line dash sequences, control the crosshair stroke style, and enable distinct crosshair visuals on stock or financial charts.
+</div>
 
 #### Example
 
@@ -34881,6 +39926,11 @@ The dash type of the crosshair.
 
 The dash type of the crosshair.
 
+
+<div class="meta-api-description">
+Control the visibility of the vertical or horizontal crosshair line on the value axis in stock or financial charts, enabling or disabling crosshair display for precise data point tracking; customize its appearance, including dash style, line patterns, and whether the crosshair appears when hovering or interacting with the axis to enhance chart readability, set or toggle crosshair visibility dynamically, and adjust visual cues for detailed axis value inspection during analysis or real-time data exploration.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34911,6 +39961,11 @@ The dash type of the crosshair.
 ### valueAxis.crosshair.tooltip `Object`
 
 The crosshair tooltip configuration options.
+
+
+<div class="meta-api-description">
+Configure and customize the tooltip displayed on the value axis crosshair of a stock or financial chart, including setting its visibility, formatting numeric or date values, applying custom templates or styles, controlling the content shown when hovering over the axis, enabling or disabling the crosshair tooltip display, adjusting text, appearance, and dynamic updates for precise data insight, and tailoring how users see value axis information during interactive chart crosshair navigation.
+</div>
 
 #### Example
 
@@ -34948,6 +40003,11 @@ The crosshair tooltip configuration options.
 
 The background color of the tooltip.
 
+
+<div class="meta-api-description">
+Control and customize the background color of the tooltip that appears alongside the value axis crosshair in stock charts, enabling enhancement of tooltip visibility, contrast, and readability during chart interactions, crosshair movements, or data point highlighting. This setting is useful for adjusting the tooltip backdrop to improve legibility against various chart styles, themes, or color schemes, and can be configured to tailor visual appearance for dynamic tooltip displays when hovering or tracking values along the price or value axis.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -34982,6 +40042,11 @@ The background color of the tooltip.
 ### valueAxis.crosshair.tooltip.border `Object`
 
 The border configuration options.
+
+
+<div class="meta-api-description">
+Customize and configure the border styling of the value axis crosshair tooltip in stock charts, including setting the outline color, thickness, corner radius, dash pattern, and other visual attributes to enhance tooltip visibility, match themes, or emphasize the crosshair indicator. Control how the tooltip border appears around the value axis crosshair for better UI clarity, enabling developers to adjust border design, style, line type, and dimensions for tailored chart interactions and improved data point highlighting on stock or time series charts.
+</div>
 
 #### Example
 
@@ -35021,6 +40086,11 @@ The border configuration options.
 
 The color of the border.
 
+
+<div class="meta-api-description">
+Customize or set the border color of the crosshair tooltip along the value axis in financial or stock charts, enabling control over the outline appearance of tooltips that appear when hovering or inspecting data points on the value axis. Adjust, style, or define the color of the border around the tooltip that tracks the value axis crosshair, enhancing visual clarity, theme consistency, or user interface design in stock, candlestick, or time series charts. Enable developers to configure the tooltip’s border hue to improve readability, highlight selected values, or match branding colors in dynamic charting environments where precise value identification is required.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -35057,6 +40127,11 @@ The color of the border.
 ### valueAxis.crosshair.tooltip.border.width `Number`*(default: 0)*
 
 The width of the border.
+
+
+<div class="meta-api-description">
+Set or adjust the thickness, width, or stroke size of the border around the crosshair tooltip on a chart's value axis to customize visual emphasis or styling. Control, configure, or modify the border thickness of the tooltip outlining the crosshair for better visibility or design preferences on stock or financial charts. Enable or change the tooltip border line width to make the crosshair highlight more or less prominent during data inspection or interactive charting.
+</div>
 
 #### Example
 
@@ -35095,6 +40170,11 @@ The width of the border.
 
 The text color of the tooltip.
 
+
+<div class="meta-api-description">
+Adjust or customize the text color of the crosshair tooltip on a chart's value axis to enhance visibility, improve readability, or maintain consistent styling with the overall chart design; configure or control the label color displayed when hovering over the value axis crosshair, including setting specific colors, themes, or contrasting hues to match user interface preferences or accessibility requirements.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -35129,6 +40209,11 @@ The text color of the tooltip.
 ### valueAxis.crosshair.tooltip.font `String`*(default: "12px Arial,Helvetica,sans-serif")*
 
 The tooltip font.
+
+
+<div class="meta-api-description">
+Customize and configure the font style for the value axis crosshair tooltip on financial or stock charts by setting font family, size, weight, style, and color to control text appearance for better readability and visual clarity; adjust typography settings to enhance tooltip display during crosshair hover on the value axis, enabling tailored font design choices such as bold, italic, or color changes to match chart themes or user interface requirements.
+</div>
 
 #### Example
 
@@ -35165,6 +40250,11 @@ The tooltip font.
 
 The tooltip format.
 
+
+<div class="meta-api-description">
+Configure and customize the display format of crosshair tooltips on the vertical value axis in stock or financial charts, enabling precise control over how numeric data, including decimals, currency figures, and date/time values, appear when hovering or crosshairs intersect. Enable formatted tooltips by setting patterns or format strings to tailor the presentation of measurements, timestamps, and financial values for clearer data interpretation, chart readability, and user interaction. Control formatting such as decimal places, currency symbols, date formats, time stamps, and numeric precision in crosshair overlays that track values dynamically along the value axis in interactive stock or time series charts.
+</div>
+
 #### Example
 
 ```pseudo
@@ -35175,6 +40265,11 @@ The tooltip format.
 ### valueAxis.crosshair.tooltip.padding `Number|Object`
 
 The padding of the tooltip.
+
+
+<div class="meta-api-description">
+Adjust the inner spacing, margins, or padding inside the value axis crosshair tooltip to control the space around text and content for improved readability and layout customization during chart rendering. Configure, set, or fine-tune the padding to manage tooltip content spacing, inner offsets, and text margins within crosshair tooltips on the value axis, ensuring better visual clarity and alignment in stock or financial charts. This setting helps tailor tooltip appearance by increasing or decreasing the distance around information displayed when hovering over the value axis in interactive chart components.
+</div>
 
 #### Example
 
@@ -35193,6 +40288,11 @@ The tooltip template.
 Template variables:
 
 *   **value** - the point value (either a number or an object)
+
+
+<div class="meta-api-description">
+Customize and control the content displayed in the crosshair tooltip on a stock or financial chart’s value axis, enabling configuration of dynamic tooltip layouts for precise data point highlighting and formatting. Set or define templates for showing exact numerical values, object properties, or customized labels when hovering over the chart’s value axis crosshair. Enable tailored tooltip presentations that support varied data representations, fine-tune display during zoom or pan interactions, and adjust the tooltip content to reflect real-time data points or aggregated values. Configure and manipulate tooltip templates to enhance user interaction, clarity, and visual feedback for deep data inspection on time series or stock price axes.
+</div>
 
 #### Example
 
@@ -35225,6 +40325,11 @@ Template variables:
 ### valueAxis.crosshair.tooltip.visible `Boolean`*(default: false)*
 
 A value indicating if the tooltip should be displayed.
+
+
+<div class="meta-api-description">
+Control the visibility of the value axis crosshair tooltip on stock charts by enabling or disabling the display of dynamic tooltips that appear when hovering over or interacting with the value axis crosshair indicator. Configure whether to show or hide the floating information box that provides detailed value data along the value axis, useful for enhancing readability and precise data point identification in financial or stock market visualizations. Adjust settings to toggle the presence of this tooltip feature, allowing developers to set up clear, interactive value axis crosshair markers with optional pop-up hints during chart initialization or runtime based on boolean flags controlling tooltip visibility.
+</div>
 
 #### Example
 
@@ -35259,6 +40364,11 @@ A value indicating if the tooltip should be displayed.
 ### valueAxis.notes `Object`
 
 The value axis notes configuration.
+
+
+<div class="meta-api-description">
+Configure, customize, or control annotations, labels, callouts, or markers attached to the numeric scale or value axis of a stock chart, enabling adding, positioning, styling, or managing visual notes that highlight specific data points, values, or thresholds on the axis during chart setup or initialization for enhanced readability, context, or emphasis in financial or data visualization charts.
+</div>
 
 #### Example
 
@@ -35300,6 +40410,11 @@ The position of the value axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+
+<div class="meta-api-description">
+Set or adjust the placement of annotation labels or notes along the vertical axis of a stock or financial chart, specifying whether to position notes above, below, to the left side, or the right side of the value axis, enabling customization of label orientation and alignment for clearer data presentation, allowing developers to control note location on chart axes for enhanced visibility, readability, and user interface layout in financial or stock chart visualizations.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -35334,6 +40449,11 @@ The position of the value axis note.
 ### valueAxis.notes.icon `Object`
 
 The icon of the notes.
+
+
+<div class="meta-api-description">
+Control and customize the appearance of visual markers or icons for annotations and notes on the value axis of financial or stock charts by setting or configuring the icon style, including replacing default markers with custom images, CSS classes, inline templates, or icon configuration objects; enables you to style, bind, or specify axis note icons consistently to highlight data points, enable customized annotations, alter marker visuals, and create tailored note indicators on charts for enhanced data visualization and user interaction.
+</div>
 
 #### Example
 
@@ -35374,6 +40494,11 @@ The icon of the notes.
 
 The background color of the notes icon.
 
+
+<div class="meta-api-description">
+Customize or configure the background fill color behind value axis note icons in financial or stock charts to enhance icon visibility, theme consistency, or visual contrast by setting any valid CSS color format such as hex codes, RGB, RGBA, or named colors; control the icon backdrop on the value axis notes area for better emphasis, readability, or style alignment in stock chart visualizations.
+</div>
+
 #### Example - set the value axis notes icon background
 
     <div id="chart"></div>
@@ -35396,6 +40521,11 @@ The background color of the notes icon.
 ### valueAxis.notes.icon.border `Object`
 
 The border of the icon.
+
+
+<div class="meta-api-description">
+Customize and control the outline appearance of note icons on the value axis in stock charts, including setting the border color, thickness, style, and edge details for icon borders or outlines. Adjust, configure, or style the note icon edges to enhance visibility, define icon frames, or modify the icon border rendering on value axes. Enable or change the note icon outline properties to highlight, differentiate, or decorate notes associated with value axis data points, ensuring clear visualization and distinct icon border designs.
+</div>
 
 #### Example - set the value axis notes icon border
 
@@ -35423,6 +40553,11 @@ The border of the icon.
 
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Set or customize the border color of note icons on a chart’s value axis using any valid CSS color format such as hex codes, RGB, RGBA, or color names to control the outline appearance or styling of annotation markers along the vertical scale, enabling visual distinction, highlighting, or matching theme designs for data points, notes, or alerts on stock or financial charts.
+</div>
+
 #### Example - set the value axis notes icon border color
 
     <div id="chart"></div>
@@ -35449,6 +40584,11 @@ The border color of the icon.
 
 The border width of the icon.
 
+
+<div class="meta-api-description">
+Adjust or set the thickness, size, or weight of the border around note icons on the value axis of stock charts, controlling how prominent or subtle the outlines appear on annotations or markers. Customize, configure, or modify the border width of icons tied to value axis notes to enhance visual clarity, highlight important data points, or style the chart’s note elements. Enable thicker, thinner, or tailored border lines around note icons on axis labels for better emphasis or subtlety in financial or stock chart visualizations.
+</div>
+
 #### Example - set the value axis notes icon border width
 
     <div id="chart"></div>
@@ -35474,6 +40614,11 @@ The border width of the icon.
 ### valueAxis.notes.icon.size `Number`
 
 The size of the icon.
+
+
+<div class="meta-api-description">
+Adjust, configure, or control the dimensions, scale, and size of icons representing notes or markers on a chart's value axis, enabling customization of their visual prominence, icon footprint, marker scale, and rendered size to enhance clarity, visibility, or subtlety in stock chart annotations, note icon scaling, and axis marker sizing.
+</div>
 
 #### Example - set the value axis notes icon size
 
@@ -35504,6 +40649,11 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+
+<div class="meta-api-description">
+Customize the shape of markers or icons displayed on value axis notes in stock charts by selecting or configuring shapes such as circle, square, triangle, or cross to control how note indicators appear along the value axis; this setting is useful for changing or enabling distinct visual markers for annotations, highlights, or data points on the chart’s value axis, allowing you to set, adjust, or control icon types for note markers that assist in distinguishing note annotations in stock or financial data visualizations.
+</div>
+
 #### Example - set the value axis notes icon shape
 
     <div id="chart"></div>
@@ -35527,6 +40677,11 @@ The supported values are:
 
 The icon visibility.
 
+
+<div class="meta-api-description">
+Toggle visibility of note icons or markers on the value axis of stock charts, enabling or disabling annotation symbols to highlight specific data points, control the display of note markers for value axis labels, configure whether icons for notes appear on the axis in financial or stock data visualizations, show or hide graphical indicators that denote notes or comments on the chart’s value scale, enable or disable note icons for emphasizing important values, customize the presence of value axis notes symbols during chart setup, and manage annotations visibility to improve clarity or reduce clutter on stock or financial charts.
+</div>
+
 #### Example - set the value axis notes icon visibility
 
     <div id="chart"></div>
@@ -35549,6 +40704,11 @@ The icon visibility.
 ### valueAxis.notes.label `Object`
 
 The label of the notes.
+
+
+<div class="meta-api-description">
+Set and customize the text, formatting, appearance, position, visibility, and template of labels for annotations or notes displayed on the value axis of a financial or stock chart; control how note labels appear, whether to show or hide them, adjust styling, apply custom text or templates, and configure label placement along the value axis for enhanced chart annotation clarity and presentation.
+</div>
 
 #### Example
 
@@ -35589,6 +40749,11 @@ The label of the notes.
 
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or configure the background color, fill, or shading of labels attached to value axis notes in stock charts, enabling control over label backdrop appearance with any valid CSS color format such as hex codes, RGB, RGBA, or named colors. Adjust, set, or change the note label backgrounds along the value axis for enhanced chart readability, styling, or UI theming, supporting flexible customization of annotation highlight colors, contrast, and visual emphasis on stock chart axis markers or data notes.
+</div>
+
 #### Example - set the value axis label background
 
     <div id="chart"></div>
@@ -35611,6 +40776,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 ### valueAxis.notes.label.border `Object`
 
 The border of the label.
+
+
+<div class="meta-api-description">
+Customize and style the outline or edge of labels on notes attached to the value axis in stock charts, including setting border color, thickness, dash patterns, and other visual properties to enhance readability and match chart themes, enabling developers to configure or adjust the note label borders on vertical axes for improved aesthetic control, annotation clarity, and visual distinction within financial or stock data visualizations.
+</div>
 
 #### Example - set the value axis label border
 
@@ -35638,6 +40808,11 @@ The border of the label.
 ### valueAxis.notes.label.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Control and customize the border color of labels on the value axis notes in stock charts, enabling setting, configuring, or changing the outline color for annotations or notes displayed along the value axis using any CSS color format such as hex, RGB, or named colors, allowing developers to style, highlight, or differentiate note labels with colored borders for improved visual clarity or matching design requirements in financial or data visualization charts.
+</div>
 
 #### Example - set the value axis label border color
 
@@ -35674,6 +40849,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Customize the border style of chart axis note labels by setting various dash patterns to control line appearance, including dashed, dotted, dash-dot, long dash, long dash-dot, long dash-dot-dot, and solid lines, enabling precise control over visual styling and line patterns for axis annotations, borders, or label outlines on value axes in stock charts.
+</div>
+
 #### Example - set the value axis label border dash type
 
     <div id="chart"></div>
@@ -35700,6 +40880,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Adjust the thickness or visibility of the outline around labels on the vertical value axis notes in stock charts by setting the border width in pixels, enabling customization of label edges for emphasis or subtlety, controlling label border size to highlight or remove outlines, toggling border presence by increasing or setting width to zero to hide, and configuring label frames on the value axis notes to enhance readability or styling in financial or stock market chart visualizations.
+</div>
+
 #### Example - set the value axis label border width
 
     <div id="chart"></div>
@@ -35725,6 +40910,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Control and customize the color of axis note labels on financial charts by setting the text color for annotations on the value axis, enabling designers and developers to specify any valid CSS color format such as hex, RGB, RGBA, HSL, or named colors to style note labels dynamically, adjust visual emphasis on value axis markers, configure axis annotation label colors for better readability or branding, and enable color customization during chart setup or initialization to enhance clarity and match UI themes or accessibility needs.
+</div>
+
 #### Example - set the value axis label color as a hex string
 
     <div id="chart"></div>
@@ -35747,6 +40937,11 @@ The text color of the label. Accepts a valid CSS color string, including hex and
 ### valueAxis.notes.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the label.
+
+
+<div class="meta-api-description">
+Adjust and customize the typography, font family, size, weight, style, color, and line-height of the value axis note labels on a stock chart to match visual themes or branding requirements. Configure and control text appearance for axis notes to enhance readability, styling consistency, and overall chart design by specifying font settings such as CSS font strings, enabling developers to set bold, italic, color changes, or precise sizing for annotated values on the chart’s vertical axis. This feature supports precise text formatting for annotations, notes, or labels on the value axis, ensuring the chart’s note labels align with custom styles, themes, or accessibility preferences.
+</div>
 
 #### Example - set the chart series label font
 
@@ -35775,6 +40970,11 @@ The fields which can be used in the template are:
 
 * value - the value value
 
+
+<div class="meta-api-description">
+Customize, configure, or control the rendering and formatting of labels on value axis notes in financial or stock charts by defining templates that enable dynamic text, HTML markup, number formatting, and data binding based on axis values. This includes setting up custom label layouts, injecting rich content, templating note labels with variables like numerical values, and tailoring the display of annotations or markers along the chart’s vertical scale to match user-defined styles, formats, or data-driven content. Adjust how note labels appear on the value axis to suit presentation needs, support localization, or enhance readability through programmable template strings or functions.
+</div>
+
 #### Example - set the value axis notes label template as a string
 
     <div id="chart"></div>
@@ -35797,6 +40997,11 @@ The fields which can be used in the template are:
 ### valueAxis.notes.label.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the value axis notes label. By default the value axis notes label are visible.
+
+
+<div class="meta-api-description">
+Toggle the visibility of annotation labels or notes displayed on the value axis of a stock chart, enabling or disabling axis note labels, showing or hiding value axis annotations, configuring whether to render or suppress labels linked to axis notes, controlling the display of textual markers or comments on the chart's vertical scale, managing the appearance of descriptive labels that highlight specific data points along the value axis, setting visibility options to enable axis note tags for data interpretation or to hide them for cleaner visuals, adjusting annotation label presence to customize chart clarity and emphasis on value-axis remarks.
+</div>
 
 #### Example - hide the value axis notes label
 
@@ -35821,6 +41026,11 @@ If set to `true` the chart will display the value axis notes label. By default t
 
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Configure the angle or degree of rotation for note labels displayed along the numerical or value axis in stock or financial charts, enabling tilted, slanted, or angled label presentation for better readability or space management in data visualizations. Adjusting rotation helps control the orientation of annotations, notes, or labels tied to the value axis in stock price charts, candlestick charts, or time series graphs, allowing customization of how axis notes appear when displaying detailed information or alerts. This setting is useful for developers seeking to enable label rotation, set label angle, or control note orientation on the value axis in dynamic charting applications and dashboards.
+</div>
+
 #### Example - rotate the value axis notes label
 
     <div id="chart"></div>
@@ -35843,6 +41053,11 @@ The rotation angle of the label. By default the label are not rotated.
 ### valueAxis.notes.label.format `String` *(default: "{0}")*
 
 The format used to display the notes label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
+
+
+<div class="meta-api-description">
+Control and customize the display format of annotation labels on the value axis of a stock chart, including formatting numbers, dates, currency values, or custom text strings for notes and markers. Configure the presentation style using format strings compatible with kendo.format syntax, enabling precise control over numeric, date, or textual representations with placeholders for dynamic axis values. Enable setting custom formats to adjust how axis note labels render data types, supporting diverse developer needs to tailor financial or time series chart annotations for clearer visualization and readability.
+</div>
 
 #### Example - set the value axis notes label format
 
@@ -35869,6 +41084,11 @@ The position of the labels.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+
+<div class="meta-api-description">
+Configure the placement of annotation labels on chart value axes by setting the label position relative to marker icons, enabling control over whether text appears inside or outside the note icon on stock or financial charts; adjust label alignment to customize how notes or annotations are displayed alongside data points on the value axis for enhanced readability and visualization clarity.
+</div>
 
 #### Example
 
@@ -35906,6 +41126,11 @@ The position of the labels.
 ### valueAxis.notes.line `Object`
 
 The line of the notes.
+
+
+<div class="meta-api-description">
+Customize and control the appearance and styling of connector lines attached to value axis annotations or notes on financial or stock charts, including settings for line color, thickness, style, visibility, and rendering behavior. Configure how the lines linking data point notes to the vertical axis display, adjusting visual characteristics such as stroke, dash patterns, and rendering effects to highlight or differentiate axis commentary in stock or value-based chart visualizations. Enable options to style and fine-tune the connector lines between axis labels and notes on the value axis, supporting various use cases like emphasizing stock price milestones or financial event annotations within chart data presentations.
+</div>
 
 #### Example
 
@@ -35945,6 +41170,11 @@ The line of the notes.
 
 The line width of the notes.
 
+
+<div class="meta-api-description">
+Adjust and customize the thickness, weight, or width of lines for annotation notes or markers on the value axis in financial or stock charts; control the visual prominence, line stroke, or border size of value axis notes, enabling you to set, define, or style how thick or thin the lines around notes appear, helping highlight or de-emphasize annotations in chart visualizations related to stock data, price points, or value trends.
+</div>
+
 #### Example - set the value axis notes line width
 
     <div id="chart"></div>
@@ -35967,6 +41197,11 @@ The line width of the notes.
 ### valueAxis.notes.line.color `String`
 
 The line color of the notes.
+
+
+<div class="meta-api-description">
+Customize or configure the color of note connector lines on the value axis of stock charts, enabling control over visual distinction or theme matching for annotations, markers, or notes linked to axis values by setting any CSS-compatible color format such as hex codes, RGB, RGBA, or named colors, useful for styling, theming, highlighting, or differentiating annotations along the vertical axis in financial or stock chart visualizations.
+</div>
 
 #### Example - set the value axis notes color width
 
@@ -35991,6 +41226,11 @@ The line color of the notes.
 
 The length of the connecting lines in pixels.
 
+
+<div class="meta-api-description">
+Adjust and configure the length of connector lines linking value axis annotations or notes on stock charts by specifying the pixel distance, enabling precise control over note positioning, spacing, and visual alignment; set or customize how far these lines extend from the value axis labels to improve clarity, annotation readability, and chart aesthetics, accommodating different layouts, highlight needs, or annotation styles in financial data visualization scenarios.
+</div>
+
 #### Example - set the value axis notes color width
 
     <div id="chart"></div>
@@ -36013,6 +41253,11 @@ The length of the connecting lines in pixels.
 ### valueAxis.notes.data `Array`
 
 The items of the notes.
+
+
+<div class="meta-api-description">
+Configure a set of annotations or markers on the value axis of a financial or stock chart by providing an array of note objects that specify individual points with customizable values, text labels, icons, positions, and visual styling. Enable adding, controlling, or updating highlight notes, data markers, or reference points along the vertical axis to emphasize specific data values, important thresholds, or events. Support for configuring annotations that appear on the value axis, including positioning, icons, labels, and custom visuals tailored to display context-relevant information or alerts on stock or financial charts.
+</div>
 
 #### Example
 
@@ -36047,6 +41292,11 @@ The items of the notes.
 ### valueAxis.notes.data.value `Object`
 
 The value of the note.
+
+
+<div class="meta-api-description">
+Configure or set the specific data value on the value axis to position annotations, markers, or notes precisely at a desired point in a stock or financial chart, enabling customization of labels or callouts anchored to exact numeric values or data points along the vertical scale; control placement of notes by specifying the exact axis value for highlighting, marking, or commenting on chart elements related to stock prices, indicators, or time series data.
+</div>
 
 #### Example
 
@@ -36087,6 +41337,11 @@ The position of the value axis note.
 * "left" - The note is positioned on the left.
 * "right" - The note is positioned on the right.
 
+
+<div class="meta-api-description">
+Adjust, configure, or set the placement of annotations, labels, or notes along the value axis in a stock chart to appear above, below, left, or right side of the axis line or data points, enabling precise control over note positioning for clearer visualization, layout customization, or emphasizing specific values in financial or time-series charts.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -36121,6 +41376,11 @@ The position of the value axis note.
 ### valueAxis.notes.data.icon `Object`
 
 The icon of the note.
+
+
+<div class="meta-api-description">
+Customize or configure the symbol, marker, or image used for data annotations or data notes on the value axis in a stock chart, enabling control over the visual icons representing specific data points, highlights, or callouts. Adjust, set, or change the appearance of note indicators, data point markers, or annotation icons on the vertical axis to enhance readability, highlight key values, or personalize chart data representations with varied symbols or custom images.
+</div>
 
 #### Example
 
@@ -36161,6 +41421,11 @@ The icon of the note.
 
 The background color of the note icon.
 
+
+<div class="meta-api-description">
+Customize the background color of annotation icons on the value axis to highlight data markers, enabling control over the visual styling of note icons with flexible CSS color formats such as hex codes, RGB, RGBA, HSL, or named colors. Adjust, set, or configure the icon backdrop color to enhance visibility of notes, data annotations, or remarks on the chart’s value axis, ensuring clear emphasis and consistent theme matching across different color schemes and user preferences.
+</div>
+
 #### Example - set the value axis note icon background
 
     <div id="chart"></div>
@@ -36185,6 +41450,11 @@ The background color of the note icon.
 ### valueAxis.notes.data.icon.border `Object`
 
 The border of the icon.
+
+
+<div class="meta-api-description">
+Customize and control the outline styling of note icons placed along the value axis in financial or stock chart visualizations by configuring properties like border color, stroke width, dash pattern, and overall icon edge appearance. Developers can set, adjust, or enable the icon’s border details to enhance visual clarity, design consistency, or highlight specific data annotations on value axes, fine-tuning how note markers appear and stand out. This functionality supports use cases such as defining stroke thickness, changing border colors for emphasis, creating dashed or solid outlines around annotation icons, and managing these styles programmatically during chart setup or dynamic updates.
+</div>
 
 #### Example - set the value axis note icon border
 
@@ -36214,6 +41484,11 @@ The border of the icon.
 
 The border color of the icon.
 
+
+<div class="meta-api-description">
+Adjust or customize the outline color surrounding data point note icons on the value axis in stock charts, including setting the border appearance of annotations or markers with specific CSS colors like hex codes, RGB values, or color names to visually coordinate notes with chart series styles, themes, or user interface color schemes, enabling control over highlight borders for data labels, callouts, or informational icons on chart axes in financial or time series visualizations.
+</div>
+
 #### Example - set the value axis note icon border color
 
     <div id="chart"></div>
@@ -36242,6 +41517,11 @@ The border color of the icon.
 
 The border width of the icon.
 
+
+<div class="meta-api-description">
+Adjust and control the thickness, width, or size of the border or outline around data icons used as notes on the value axis of stock charts, enabling customization of icon edge emphasis, highlight intensity, or stroke weight for clearer visualization of annotations and markers on the value axis in financial or stock data visualizations.
+</div>
+
 #### Example - set the value axis note icon border width
 
     <div id="chart"></div>
@@ -36269,6 +41549,11 @@ The border width of the icon.
 ### valueAxis.notes.data.icon.size `Number`
 
 The size of the icon.
+
+
+<div class="meta-api-description">
+Adjust or configure the size, scale, or dimensions of icons representing data-point annotations or markers on the value axis of financial or stock charts, enabling control over the visual prominence, visibility, or emphasis of note indicators. Users might want to increase or decrease the icon size for readability, highlight key data points, customize appearance, or manage clutter on time series or value-based chart axes, controlling marker visuals to fit design preferences, data density, or accessibility requirements in stock or financial chart visualizations.
+</div>
 
 #### Example - set the value axis note icon size
 
@@ -36301,6 +41586,11 @@ The supported values are:
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
 
+
+<div class="meta-api-description">
+Configure and customize the shape or style of markers representing data notes on the vertical axis of stock or financial charts, enabling selection among various icon types such as circles, squares, triangles, and crosses to differentiate data points or annotations visually; set, control, or adjust the note icon shape for data highlighting, marker appearance, or graphical distinction on the value axis in charting libraries and visualization tools.
+</div>
+
 #### Example - set the value axis note icon shape
 
     <div id="chart"></div>
@@ -36326,6 +41616,11 @@ The supported values are:
 
 The icon visibility.
 
+
+<div class="meta-api-description">
+Control the visibility of data note icons on the value axis of a stock chart by enabling or disabling display of annotation markers, toggling note symbols on or off for clearer visualization, configuring whether icons appear alongside data notes, managing visual indicators for axis-related comments or flags, setting boolean flags to show or hide note icons in chart components, adjusting annotation icon presence for clarity or minimalism, customizing the display of markers linked to value axis annotations, and defining inclusion of graphical symbols connected to data remarks on stock value scales.
+</div>
+
 #### Example - set the value axis note icon visibility
 
     <div id="chart"></div>
@@ -36350,6 +41645,11 @@ The icon visibility.
 ### valueAxis.notes.data.label `Object`
 
 The label of the note.
+
+
+<div class="meta-api-description">
+Customize or set the text label for individual data notes displayed on a chart's vertical value axis, enabling control over the note's annotation content, text binding, or custom labeling for data points on the value axis in stock or financial charts. Adjust, configure, or customize the note text shown alongside value markers to enhance data visualization, highlight specific points, or provide detailed descriptions directly on the chart axis. Manage how labels appear for annotations tied to value axis data, including setting, editing, or updating note text for clarity, emphasis, or contextual information in stock chart visualizations.
+</div>
 
 #### Example
 
@@ -36390,6 +41690,11 @@ The label of the note.
 
 The background color of the label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Adjust or set the background color, fill, or shading of data note labels on the vertical value axis in stock charts to enhance visibility, contrast, readability, or highlight annotations; customize label backgrounds using any CSS color format such as hexadecimal, RGB, or named colors to improve the display of axis data notes, configure label styling for clearer presentation, or modify the color behind numeric or textual notes shown on the value axis in financial or stock market visualizations.
+</div>
+
 #### Example - set the value axis note label background
 
     <div id="chart"></div>
@@ -36414,6 +41719,11 @@ The background color of the label. Accepts a valid CSS color string, including h
 ### valueAxis.notes.data.label.border `Object`
 
 The border of the label.
+
+
+<div class="meta-api-description">
+Configure the outline styling of data note labels on the value axis in stock charts by setting border properties such as color, width, and style to customize the note label's frame or edge appearance; control the visual border around axis annotations, adjust label borders for better visibility, enhance note label outlines, and define border styling to highlight or separate labels on the value axis with flexible options for design and emphasis in financial or stock chart visualizations.
+</div>
 
 #### Example - set the value axis note label border
 
@@ -36443,6 +41753,11 @@ The border of the label.
 ### valueAxis.notes.data.label.border.color `String` *(default: "black")*
 
 The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+
+<div class="meta-api-description">
+Adjust or customize the outline color of data note labels on the numerical value axis in stock charts, enabling control over border appearance using any valid CSS color format such as hex codes or RGB values. This feature supports styling, configuring, setting, or changing label borders to enhance visibility or match design themes, offering flexibility to define stroke, edge, or frame colors around data annotation text on the chart axis. Users often search for ways to style note label borders, control label outlines, or set border colors on the value axis of time series or financial charts.
+</div>
 
 #### Example - set the value axis note label border color
 
@@ -36481,6 +41796,11 @@ The following dash types are supported:
 * "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
 * "solid" - a solid line
 
+
+<div class="meta-api-description">
+Control and configure the border dash style for value axis note data labels in stock charts by setting patterns such as dashed lines, dash-dot sequences, dotted lines, long dashes, long dash with dots, long dash with dot-dot repeats, or solid continuous lines. Adjusting the label border appearance enables customization of note highlights, enhancing chart readability with various line styles including dash, dashDot, dot, longDash, longDashDot, longDashDotDot, and solid borders. Enable styling of note label borders with different dash patterns to visually differentiate annotations on the value axis in financial or stock market charts.
+</div>
+
 #### Example - set the value axis note label border dash type
 
     <div id="chart"></div>
@@ -36509,6 +41829,11 @@ The following dash types are supported:
 
 The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
 
+
+<div class="meta-api-description">
+Control or configure the thickness, size, or width in pixels of the border around data labels on value axis notes within a stock chart, enabling adjustment of label border visibility, emphasis, or styling to highlight or hide outlines around the data points’ textual labels; adjust border thickness settings to make labels stand out or blend in on the chart’s value axis notes for clearer data visualization or custom appearance.
+</div>
+
 #### Example - set the value axis note label border width
 
     <div id="chart"></div>
@@ -36536,6 +41861,11 @@ The width of the border in pixels. By default the border width is set to zero wh
 
 The text color of the note label. Accepts a valid CSS color string, including hex and rgb.
 
+
+<div class="meta-api-description">
+Customize or configure the color of labels on data notes within the value axis of stock charts by setting text colors using CSS-compatible formats like hex codes, RGB, or color names, enabling control over the appearance of annotation labels, note markers, or data point labels on chart axes to enhance visual differentiation, highlight specific notes, or match theme colors during chart setup or dynamic rendering.
+</div>
+
 #### Example - set the value axis note label color as a hex string
 
     <div id="chart"></div>
@@ -36560,6 +41890,11 @@ The text color of the note label. Accepts a valid CSS color string, including he
 ### valueAxis.notes.data.label.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the note label.
+
+
+<div class="meta-api-description">
+Control and customize the typography, font family, size, weight, and style of annotation labels on the vertical value axis in stock charts to enhance readability and match overall chart design; configure font settings for data point notes or markers to improve label clarity, appearance, and consistency with the chart's visual style, enabling precise adjustment of text formatting for value axis annotations or notes.
+</div>
 
 #### Example - set the value axis note label font
 
@@ -36590,6 +41925,11 @@ The fields which can be used in the template are:
 
 * value - the axis value
 
+
+<div class="meta-api-description">
+Adjust and personalize data label rendering for notes on the value axis of financial or stock charts by setting customizable templates that define how note labels appear, format numeric or text content, control output styling with HTML, and display axis data values dynamically. Enable tailored label design for axis notes, including conditional formatting, variable insertion like axis values, and advanced control over presentation and text output for improved clarity and visualization on numeric scales such as stock price or value axes. This facilitates configuring, shaping, and fine-tuning note label appearance to match specific UI or reporting requirements, supporting queries about customizing chart axis annotations, formatting note labels, and embedding dynamic data within financial chart displays.
+</div>
+
 #### Example - set the value axis note label template as a string
 
     <div id="chart"></div>
@@ -36614,6 +41954,11 @@ The fields which can be used in the template are:
 ### valueAxis.notes.data.label.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the value axis notes label. By default the value axis notes label are visible.
+
+
+<div class="meta-api-description">
+Control the visibility of data note labels on the value axis in stock or financial charts by enabling or disabling the display of notes, annotations, or value markers along the vertical axis. This setting manages whether labels for data points, comments, or contextual notes tied to the value scale appear or remain hidden when configuring or customizing chart annotations, axis labeling, notes visibility, or data point descriptors in stock chart visualizations and financial graph interfaces.
+</div>
 
 #### Example - hide the value axis note label
 
@@ -36640,6 +41985,11 @@ If set to `true` the chart will display the value axis notes label. By default t
 
 The rotation angle of the label. By default the label are not rotated.
 
+
+<div class="meta-api-description">
+Control and customize the angle or tilt of annotation labels on the vertical axis of stock charts, enabling rotation of value axis note data labels to improve clarity, alignment, or visual presentation. Adjust the orientation or set a specific rotation degree for axis note labels to enhance readability, avoid overlap, or fit design preferences in financial or stock market charts. Configure label rotation to change the label angle, enabling angled, slanted, or rotated annotations on the value axis for better data visualization and customizable label positioning.
+</div>
+
 #### Example - rotate the value axis note label
 
     <div id="chart"></div>
@@ -36665,6 +42015,11 @@ The rotation angle of the label. By default the label are not rotated.
 
 The format used to display the note label. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the axis value.
 
+
+<div class="meta-api-description">
+Customize and control the formatting of note labels on the value axis of stock charts by specifying numeric, date, or custom string patterns with placeholders that insert axis values; configure how annotations or notes display their content including prefixes, suffixes, and precise formatting for values on the vertical axis, enabling tailored label appearances through format strings that embed actual data points in various representations for clear, readable chart insights.
+</div>
+
 #### Example - set the value axis note label format
 
     <div id="chart"></div>
@@ -36689,6 +42044,11 @@ The format used to display the note label. Uses [kendo.format](/api/framework/ke
 ### valueAxis.notes.data.label.text `String`
 
 The label note text.
+
+
+<div class="meta-api-description">
+Customize and control the text content displayed as labels for data point annotations on the vertical value axis of a stock or financial chart, enabling personalized note messages, descriptions, or values attached to specific data points along the value scale; configure, set, or enable custom labeling for data notes on the axis to highlight, explain, or emphasize key values, trends, or markers in time series or stock price visualizations within chart initialization or update processes.
+</div>
 
 #### Example - set the value axis label note text
 
@@ -36717,6 +42077,11 @@ The position of the value axis note label.
 
 * "inside" - the label is positioned inside of the icon.
 * "outside" - the label is positioned outside of the icon.
+
+
+<div class="meta-api-description">
+Control or adjust the placement and alignment of labels attached to notes on the value axis in stock charts, allowing users to set label positions relative to note icons such as inside, outside, or adjacent placement. Configure how informational labels appear on axis annotations, enabling customization of label location for clarity or design preferences in financial or data visualization charts. Enable setting label alignment for notes on the value axis to appear within the icon area or outside it, enhancing readability, emphasis, or styling of chart annotations in dashboards, graph visualizations, or analytical tools. Customize label positioning on value axis markers to optimize presentation and user interface in stock or time series charts.
+</div>
 
 #### Example
 
@@ -36754,6 +42119,11 @@ The position of the value axis note label.
 ### valueAxis.notes.data.line `Object`
 
 The line of the note.
+
+
+<div class="meta-api-description">
+Customize and control the appearance of connector lines for value axis notes in stock charts by adjusting stroke color, thickness, dash patterns, transparency, and toggling visibility to style note connectors or outlines on data annotations; configure line styling for axis notes, data point markers, or callouts, enabling developers to set or modify the visual presentation of annotation lines on the value axis to enhance readability and distinction during chart initialization or dynamic updates.
+</div>
 
 #### Example
 
@@ -36793,6 +42163,11 @@ The line of the note.
 
 The line width of the note.
 
+
+<div class="meta-api-description">
+Adjust or configure the thickness, stroke width, or line weight of annotation lines and note indicators along the value axis in stock charts, enabling control over how bold or subtle the data note lines appear for clearer visual emphasis or lighter presentation in financial or time-series chart visualizations.
+</div>
+
 #### Example - set the value axis note line width
 
     <div id="chart"></div>
@@ -36818,6 +42193,11 @@ The line width of the note.
 
 The line color of the note.
 
+
+<div class="meta-api-description">
+Adjust or configure the color, shade, hue, or tint of connector lines linking annotations, markers, or notes on the vertical or value axis of stock or financial charts, enabling control over line appearance through any valid CSS color formats such as named colors, hexadecimal codes, RGB, or RGBA values to style data note lines, connectors, or indicators effectively for visual highlighting, customization, or theming in charting components.
+</div>
+
 #### Example - set the value axis note color width
 
     <div id="chart"></div>
@@ -36842,6 +42222,11 @@ The line color of the note.
 ### valueAxis.notes.data.line.length `Number`
 
 The length of the connecting lines in pixels.
+
+
+<div class="meta-api-description">
+Adjust and configure the length or distance of connector lines linking data callouts, annotations, or notes to their corresponding points along the value axis in stock charts, controlling how far these leader lines extend in pixels to fine-tune visual clarity, alignment, and spacing between data labels and their axis values, enabling precise customization of annotation connectors on financial or time series charts.
+</div>
 
 #### Example - set the value axis note color width
 
@@ -36869,6 +42254,11 @@ The length of the connecting lines in pixels.
 ### navigator `kendo.dataviz.Navigator`
 
 A reference to the Stock Chart built-in [navigator](/api/javascript/dataviz/navigator) instance (the lower widget pane). Obtain the instance to call the available [navigator methods](/api/javascript/dataviz/navigator).
+
+
+<div class="meta-api-description">
+Control and customize the interactive stock chart navigator panel that displays the overview timeline or lower pane, enabling programmatic adjustment of the visible date range, zoom, selection window, or highlighted data series to focus on specific segments of the stock data; configure the navigator viewport, slider, and series dynamically after chart setup to integrate responsive filtering, timeline navigation, or synchronized updates with other chart components.
+</div>
 
 #### Example
 
@@ -36908,6 +42298,11 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 > This method does not remove the widget element from DOM.
 
+
+<div class="meta-api-description">
+Release resources and clean up by calling the method to disable the stock chart, detach all event listeners, remove stored data attributes to prevent memory leaks, and trigger cleanup routines of any nested components or child widgets before the chart is removed from the page; this process prepares the chart for safe disposal without deleting the underlying DOM element, ensuring efficient memory management and preventing lingering event handlers or data attachments.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -36937,6 +42332,11 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 Exports the chart as an image.
 
 Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/stock-chart#methods-exportImage)
+
+
+<div class="meta-api-description">
+Save, download, capture, or share chart visuals as image files or data URIs by exporting the chart rendering to a picture format, enabling easy embedding, saving to disk, generating exportable images from chart output, creating snapshots or downloadable snapshots of stock or financial charts, converting dynamic chart graphics into static image representations, and producing export images for sharing or further processing via programmatic methods to extract chart visuals.
+</div>
 
 #### Example
 
@@ -36988,6 +42388,11 @@ Exports the chart as a PDF file.
 
 Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/stock-chart#methods-exportPDF)
 
+
+<div class="meta-api-description">
+Generate, create, save, download, or export a chart or stock chart as a PDF file to share, print, archive, or store chart data in portable document format; enable PDF output, trigger PDF generation or export functionality for charts, including financial or stock visualizations, to capture chart images in PDF files after rendering or initialization, supporting scenarios like report creation, offline access, or presentation-ready exports.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -37031,6 +42436,11 @@ Parameters for the exported PDF file.
 Exports the chart as an SVG document.
 
 Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/stock-chart#methods-exportSVG)
+
+
+<div class="meta-api-description">
+Generate or retrieve the vector-based SVG markup for a stock or financial chart to save, download, embed in web pages, print high-quality scalable graphics, export chart visuals as standalone SVG files, serialize chart rendering into SVG format, convert rendered charts to SVG text for server-side processing, share chart imagery without rasterization, or programmatically capture chart output for use in reports, presentations, or further editing.
+</div>
 
 #### Example
 
@@ -37077,6 +42487,11 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Repaints the chart using the currently loaded data.
 
+
+<div class="meta-api-description">
+Trigger an immediate visual update or repaint of the stock chart to reflect changes in data, series configurations, options, or visuals without reloading or fetching new data; control or force a refresh of chart axes, series plots, legends, and overall rendering to instantly apply dynamic updates, modifications, or adjustments to the displayed stock data visualization in real time.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -37106,6 +42521,11 @@ Repaints the chart using the currently loaded data.
 
 Reloads the data and renders the chart.
 
+
+<div class="meta-api-description">
+Update, reload, or refresh the stock chart visualization to reflect any changes in underlying data by reloading the data source and redrawing series, axes, and plot areas without recreating the entire chart instance. Enable programmatic or external data updates to instantly re-render and sync the chart display, ensuring charts show current, accurate information after data modifications, data source rebinding, or dynamic update scenarios where real-time or on-demand chart refresh is required. This method supports triggering chart refreshes after changing data programmatically or via user interactions, ensuring the visual elements stay current with underlying data changes.
+</div>
+
 #### Example
 
     <div id="stock-chart"></div>
@@ -37134,6 +42554,11 @@ Reloads the data and renders the chart.
 ### resize
 
 Adjusts the chart layout to match the size of the container.
+
+
+<div class="meta-api-description">
+Adjust or update the chart’s layout and dimensions to fit new container sizes, resize or refresh the chart display following DOM or CSS changes, reflow axes, plot areas, and series for responsive design, force redrawing and recalculation of visual elements when the chart container changes size, handle dynamic resizing or scaling of stock or financial charts after layout modifications, programmatically update chart size to match parent or container adjustments, enable responsive resizing ensuring chart visuals adapt smoothly to screen or element resizing, call or trigger redraws and layout adjustments on demand to maintain correct chart proportions after UI changes, control chart dimension recalculations for accurate rendering after resizing events.
+</div>
 
 #### Example
 
@@ -37170,6 +42595,11 @@ Defines whether the widget should proceed with resizing even if the element dime
 ### setDataSource
 
 Sets the data source of the widget.
+
+
+<div class="meta-api-description">
+Update or switch the chart's underlying data dynamically by configuring, providing, or replacing the data input source with a new dataset, whether passing an existing data structure, a configuration object, or raw array data, enabling real-time data binding, refreshing visuals, updating series and axes, and reloading the chart content programmatically without reinitializing the component.
+</div>
 
 #### Example
 
@@ -37208,6 +42638,11 @@ The data source to which the widget should be bound.
 ### setOptions
 
 Sets the widget options. Changes are cumulative.
+
+
+<div class="meta-api-description">
+Modify or update chart configurations dynamically by setting or merging new options incrementally into an existing stock chart setup at runtime, enabling flexible adjustment, customization, or incremental changes to chart appearance, data series, axis settings, styles, or interactive features without resetting the entire chart configuration, allowing cumulative updates, partial option overrides, and combining new parameters with previously established settings for seamless real-time chart control and fine-tuned visualization adjustments.
+</div>
 
 #### Example
 
@@ -37253,6 +42688,11 @@ Both programs provide command-line interface suitable for server-side processing
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/stock-chart/methods/exportsvg), but will remain fully functional.
 
+
+<div class="meta-api-description">
+Generate or retrieve the scalable vector graphic (SVG) markup of a financial or stock chart as a complete, standalone SVG string for exporting, embedding, or converting the chart to vector images, HTML content, PDFs, or other graphical formats; enable saving visual chart data for offline use, server-side processing, or integration with tools supporting SVG input such as Inkscape and ImageMagick, with compatibility for legacy and updated export workflows.
+</div>
+
 #### Returns
 `String` the SVG representation of the chart.
 
@@ -37283,6 +42723,11 @@ Both programs provide command-line interface suitable for server-side processing
 Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 > This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/stock-chart/methods/exportimage).
+
+
+<div class="meta-api-description">
+Generate or retrieve a PNG snapshot or image export of a financial or stock chart encoded as a base64 data URL for embedding in web pages, downloading, sharing, or uploading to a server, enabling use cases like creating chart previews, exporting chart visuals programmatically, converting chart content into image formats for reports or presentations, obtaining image-based chart representations for display in image tags or new browser tabs, handling chart export workflows, and managing image capture of dynamic stock data visualizations, including retrieving chart images without direct file downloads.
+</div>
 
 #### Returns
 
@@ -37337,6 +42782,11 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
 
 Fires when an axis label is clicked.
 
+
+<div class="meta-api-description">
+Detect and respond to user clicks or taps on chart axis labels to enable custom interactions such as selecting data points, triggering drilldown views, displaying detailed tooltips or information panels, controlling default click actions, handling label identification on time or value axes, configuring event-driven behaviors for axis label taps, managing user input on x-axis or y-axis labels, intercepting label clicks for navigation or filtering, and customizing responses to axis label selection within financial or stock chart visualizations.
+</div>
+
 #### Example
 
     function onAxisLabelClick(e) {
@@ -37379,6 +42829,11 @@ The widget instance which fired the event.
 Fires when the chart has received data from the data source
 and is about to render it.
 
+
+<div class="meta-api-description">
+Trigger actions, hooks, or callbacks when the stock chart data finishes loading and is ready to render, enabling dynamic updates, data validation, transformation, or synchronization before drawing the chart. Set event listeners to react to incoming data from the source, adjust series, axes, or annotations, initiate further data requests, refresh UI elements, or apply custom processing immediately after data retrieval but prior to rendering. Control and respond to the timing of data readiness in real time, ensuring preparations and modifications occur at the optimal moment before visual output, supporting scenarios like data manipulation, update chaining, or conditional rendering based on freshly loaded datasets.
+</div>
+
 #### Example
 
     function onDataBound(e) {
@@ -37390,6 +42845,11 @@ and is about to render it.
 Fires when the user has used the mouse or a swipe gesture to drag the chart.
 
 The drag operation can be aborted by calling `e.preventDefault()`.
+
+
+<div class="meta-api-description">
+Detect when a user initiates dragging or swiping on the stock chart to start interactive panning, selection, or navigation actions, capturing the drag start event with contextual data. Enable event listeners that trigger at the beginning of a drag gesture via mouse or touch input, providing hooks to customize or abort the drag operation by preventing default behavior. Support detecting drag initiation for implementing custom user interactions, gesture controls, or preventing default drag effects to control chart movement, zooming, or selection workflows. This event enables handling and responding precisely at drag start to configure, enable, intercept, or customize interactive gestures on financial or data visualization charts.
+</div>
 
 #### Example - subscribe to the "dragStart" event during initialization
 
@@ -37434,6 +42894,11 @@ The widget instance which fired the event.
 ### drag
 
 Fires as long as the user is dragging the chart using the mouse or swipe gestures.
+
+
+<div class="meta-api-description">
+Detect continuous user dragging activity on stock charts through mouse or touch swipe gestures, enabling real-time tracking of pointer movement, live updates to indicators or overlays, interactive panning, dynamic chart adjustments during drag operations, and custom behavior implementations that respond to ongoing drag events for smooth, responsive data visualization manipulation and user interaction monitoring.
+</div>
 
 #### Example - subscribe to the "drag" event during initialization
 
@@ -37482,6 +42947,11 @@ The widget instance which fired the event.
 
 Fires when the user stops dragging the chart.
 
+
+<div class="meta-api-description">
+Detect when a user completes dragging or panning a stock chart, capturing the moment the drag action ends to trigger updates like refreshing axis ranges, syncing multiple charts, loading new data for the visible area, saving the final viewport position, or adjusting UI elements based on user interaction. This event helps enable handling drag completion, stopping pan gestures, reacting to chart movement finishes, and managing updates tied to user-controlled navigation or viewport changes for stock or financial charts.
+</div>
+
 #### Example - subscribe to the "dragEnd" event during initialization
 
     <div id="stock-chart"></div>
@@ -37527,6 +42997,11 @@ The widget instance which fired the event.
 Fires when an legend item is clicked, before the selected series visibility is toggled.
 Can be cancelled.
 
+
+<div class="meta-api-description">
+Detect or handle user interactions with chart legend entries, capture clicks on legend items to control or override default series visibility toggling behavior, intercept and customize response to legend selection events before visibility changes occur, enable preventing or modifying automatic show/hide of chart series triggered by legend clicks, implement custom logic for displaying or hiding data series based on legend interactions, respond to user clicks on legend labels to manage chart data presentation dynamically, control and customize event handling for legend item selection in stock or financial charts, intercept and cancel default actions associated with legend item clicks to tailor interactive chart behavior, monitor and manipulate legend click events for advanced user interface control and conditional series visibility, manage clickable legend elements to customize or disable default toggling effects in interactive data visualizations.
+</div>
+
 #### Example - prevent toggling the series visibility on legend item click
     function onLegendItemClick(e) {
         e.preventDefault();
@@ -37566,6 +43041,11 @@ The widget instance which fired the event.
 
 Fires when an legend item is hovered.
 
+
+<div class="meta-api-description">
+Detect pointer hover interactions on chart legend entries to enable dynamic responses like highlighting associated data series, displaying tooltip details, triggering custom UI changes, or updating visual states when users mouse over or touch legend items. Capture and handle hover events on legend components to implement interactive feedback, analytics tracking, or context-sensitive behaviors that link legend entry focus with chart data emphasis, visual cues, or information reveals. Configure event listeners or handlers to respond when users point, hover, or roll over legend items in stock or financial charts, enhancing user experience through responsive styling, informational popups, or series highlighting based on pointer position over legend elements.
+</div>
+
 #### Example
 
     function onLegendItemHover(e) {
@@ -37601,6 +43081,11 @@ The widget instance which fired the event.
 ### legendItemLeave
 
 Fires when the cursor leaves a legend item.
+
+
+<div class="meta-api-description">
+Detecting and handling when the mouse pointer or cursor leaves or moves away from a legend entry, enabling custom interaction responses such as removing highlights, hiding tooltips, resetting visual styles, updating the user interface, managing hover state transitions, controlling related application logic after user exits a legend item, tracking pointer exit events from chart legends, reacting to mouse out or leave actions on legend components, and supporting dynamic UI adjustments triggered by the end of pointer focus on chart legend elements.
+</div>
 
 #### Example - subscribe to the "legendItemLeave" event during initialization
 
@@ -37658,6 +43143,11 @@ The name of the series.
 Fired when the user clicks one of the notes.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+
+<div class="meta-api-description">
+Detect and respond to user interactions such as clicks or taps on annotations, notes, or markers within financial charts or stock graphs to trigger custom actions like displaying detailed information, opening pop-up dialogs, navigating to related data views, or executing bespoke event handling code. Capture note interaction events to enable building interactive, dynamic chart features that allow developers to listen for user input on chart annotations, customize behavior on annotation clicks, access chart instance methods and properties within event handlers, and integrate responsive UI elements tied to specific note selections or user gestures on stock or time series visualizations.
+</div>
 
 #### Example - subscribe to the "noteClick" event during initialization
 
@@ -37725,6 +43215,11 @@ Fired when the user hovers one of the notes.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+
+<div class="meta-api-description">
+Detect and handle pointer or mouse hover interactions specifically over annotation notes in stock or financial charts to trigger custom actions such as highlighting notes, displaying additional information, updating UI elements dynamically, or executing logic upon user cursor movement over chart notes or markers, enabling responsive feedback and detailed data presentation in interactive financial visualizations when the user moves or hovers the mouse over note elements within the stock chart component.
+</div>
+
 #### Example - subscribe to the "noteHover" event during initialization
 
     <div id="stock-chart"></div>
@@ -37791,6 +43286,11 @@ Fired when the cursor leaves a note.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+
+<div class="meta-api-description">
+Detect when the mouse pointer or cursor exits an annotation or note area within a stock chart component to trigger actions like hiding tooltips, resetting hover highlights, updating interface states, or responding to pointer leave events on chart notes or markers. Capture user interactions involving leaving or moving away from chart annotations, control UI changes upon pointer exit from notes, manage hover end events for stock chart callouts, and handle events related to pointer or mouse leave on chart annotations for dynamic interface updates.
+</div>
+
 #### Example - subscribe to the "noteLeave" event during initialization
 
     <div id="stock-chart"></div>
@@ -37855,6 +43355,11 @@ The note visual element.
 
 Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
 
+
+<div class="meta-api-description">
+Customize and control drawing custom graphics, overlays, annotations, or visual elements synchronized with pane rendering in stock charts during initial rendering, panning, zooming, or exporting. Enable integration of custom SVG or HTML visuals triggered by pane redraw events to enhance chart panes with dynamic, interactive, or data-driven overlays that respond to user interactions or export actions. Configure event-driven rendering hooks to inject or update pane-specific content aligned with chart rendering lifecycles, providing flexible and synchronized visual augmentation for financial or time series data panes.
+</div>
+
 #### Example - subscribe to the "paneRender" event during initialization
 
     <div id="stock-chart"></div>
@@ -37902,6 +43407,11 @@ The widget instance which fired the event.
 
 Fires when plot area is clicked.
 
+
+<div class="meta-api-description">
+Capture and manage user interactions by detecting clicks on the chart's plotting region, enabling developers to configure custom click handlers, trigger drill-down actions, select data points, implement interactive features, or respond dynamically to user input within the chart area. This event-driven approach supports listening for plot area clicks to facilitate custom responses, event handling, or interface behavior modifications based on user engagement with the chart visualization.
+</div>
+
 #### Example
 
     function onPlotAreaClick(e) {
@@ -37939,6 +43449,11 @@ The widget instance which fired the event.
 ### plotAreaHover
 
 Fired when the user hovers the plot area.
+
+
+<div class="meta-api-description">
+Detect and respond to pointer hover or mouseover events within the chart plotting region, enabling custom interactive behaviors like showing tooltips, highlighting specific data series, updating external user interface elements dynamically, or executing bespoke code triggered by cursor movement over the chart area. Capture relevant event details such as original mouse or pointer events, plot coordinates, and other contextual data to configure, control, customize, or enhance user interactions and visual feedback inside the chart’s main graphical plotting zone during mouse or pointer hover actions.
+</div>
 
 #### Example - subscribe to the "plotAreaHover" event during initialization
 
@@ -38003,6 +43518,11 @@ The widget instance which fired the event.
 
 Fired when the cursor leaves the plotArea.
 
+
+<div class="meta-api-description">
+Detect when the mouse pointer, cursor, or touch input exits or leaves the chart plotting area boundary to trigger actions like hiding tooltips, disabling crosshair overlays, canceling hover states, stopping interactive highlights, or responding to pointer-out events on stock or financial charts. Capture events signaling the pointer moving away from the plot region to handle user interactions, reset UI elements, or update chart behavior based on cursor exit from the data visualization area.
+</div>
+
 #### Example - subscribe to the "plotAreaLeave" event during initialization
 
     <div id="stock-chart"></div>
@@ -38040,6 +43560,11 @@ Can be used, for example, to remove loading indicators. Changes to options will 
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+
+<div class="meta-api-description">
+Detect when a stock or financial chart finishes loading and is ready to display, triggering actions like removing loading spinners, initiating animations, adding overlays, or manipulating DOM elements before the chart is visually rendered. Capture the event signaling chart readiness to run custom scripts, update UI elements after data is processed but before final paint, or synchronize external components with the chart’s initial render cycle. Useful for developers looking to hook into chart rendering lifecycle events to control timing for dynamic effects, interface updates, or integration with other page elements once the chart setup and data binding complete, without affecting configuration changes during this phase.
+</div>
+
 #### Example - subscribe to the "render" event during initialization
 
     <div id="stock-chart"></div>
@@ -38076,6 +43601,11 @@ The widget instance which fired the event.
 Fired when the user modifies the selection.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+
+<div class="meta-api-description">
+Detect and respond to changes in chart selection by capturing user interactions that modify the current selected data range or points within a financial or stock chart interface, enabling execution of custom functions when selection areas are adjusted or updated. This includes monitoring selection updates, reacting to user-driven selection changes to trigger UI updates, filter datasets, synchronize charts, or initiate data loading processes dynamically upon selection modification, with access to the component instance context to coordinate stateful or interactive behaviors tied to user selection events on stock or time series charts.
+</div>
 
 #### Example - subscribe to the "select" event during initialization
 
@@ -38128,6 +43658,11 @@ Fired when the user completes modifying the selection.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+
+<div class="meta-api-description">
+Detect when users finish changing or adjusting the selected range on a stock chart, trigger actions once selection modifications complete, respond to selection end events to update user interfaces, save or persist the chosen time span or date window, load or reload data after selection changes, capture the moment selection adjustments stop for interactive charts, hook into events signaling selection completion, access chart component state or methods during selection end callbacks, control behaviors after users finalize range selection, enable event handling for selection range modifications on financial or time series charts.
+</div>
+
 #### Event Data
 
 ##### e.axis `Object`
@@ -38174,6 +43709,11 @@ Fired when the user starts modifying the axis selection.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+
+<div class="meta-api-description">
+Capture the moment when a user initiates or begins adjusting the selection area on a chart’s axis, detecting when axis range selection starts, so you can track, monitor, or trigger actions at the start of user-driven zooming, panning, or range highlighting interactions; respond to user input by listening for drag or click events that signal the initial selection adjustment on chart axes, enabling dynamic updates, custom event handling, or behavioral modifications tied to the start of axis selection changes.
+</div>
+
 #### Event Data
 
 ##### e.axis `Object`
@@ -38217,6 +43757,11 @@ The last selected category is at index [to - 1] unless the axis is justified. In
 ### seriesClick
 
 Fires when chart series are clicked.
+
+
+<div class="meta-api-description">
+Detect and respond to user clicks on chart data series with event handling that captures which series and data point were clicked, accesses detailed event information including original mouse events, and enables dynamic updates, custom interactions, highlighting, drill-downs, tooltips, or state changes based on user engagement with the chart's visual series elements.
+</div>
 
 #### Example
 
@@ -38270,6 +43815,11 @@ The widget instance which fired the event.
 
 Fires when chart series are hovered.
 
+
+<div class="meta-api-description">
+Detect and handle user pointer or mouse hover interactions over chart series in stock or financial charts, enabling dynamic responses such as highlighting data series, showing or customizing tooltips, triggering callbacks on point or series hover, updating UI elements based on hovered data, responding to mouseover or pointer events on chart segments, capturing event context with series and data point details, and managing interactive behaviors when users move cursors over charts for enhanced data exploration and visualization feedback.
+</div>
+
 #### Example
 
     function onSeriesHover(e) {
@@ -38321,6 +43871,11 @@ The widget instance which fired the event.
 ### seriesOver
 
 Fired when the cursor is over the chart series.
+
+
+<div class="meta-api-description">
+Detect or listen for mouse hover, pointer over, or cursor events on chart data series within a stock or financial chart to trigger reactions like highlighting, tooltip display, or updating linked interface elements when the user moves the cursor onto specific series lines or bars; capture series-focused hover interactions to enable dynamic responses such as visual emphasis, contextual information popups, or external component updates based on series mouseover or pointer positioning within the stock chart visualization.
+</div>
 
 #### Event Data
 
@@ -38395,6 +43950,11 @@ The data point value.
 ### seriesLeave
 
 Fired when the cursor leaves a chart series.
+
+
+<div class="meta-api-description">
+Detect when the user’s cursor, pointer, or mouse leaves a chart series area to trigger actions such as disabling highlights, hiding tooltips, resetting or updating UI elements, managing focus or hover states, handling pointer exit events on data series, controlling visual feedback when leaving a stock chart segment, responding to mouseout or mouseleave on chart components, configuring event handlers for pointer departure from series, and enabling custom logic execution when interaction with a specific data series ends.
+</div>
 
 #### Event Data
 
@@ -38472,6 +44032,11 @@ Fires when the user has used the mousewheel to zoom the chart.
 
 The zoom operation can be aborted by calling `e.preventDefault()`.
 
+
+<div class="meta-api-description">
+Detect, handle, or intercept mouse wheel zoom actions on financial or stock charts, capturing the initial moment when zooming starts to enable controlling, customizing, or disabling zoom behavior through event interception or cancellation; monitor zoom initiation, configure zoom response, prevent default zooming, or override mouse wheel scale adjustments to manage how users interact with zoom gestures on time series or data visualizations.
+</div>
+
 #### Event Data
 
 ##### e.axisRanges `Object`
@@ -38510,6 +44075,11 @@ The widget instance which fired the event.
 ### zoom
 
 Fires as long as the user is zooming the chart using the mousewheel.
+
+
+<div class="meta-api-description">
+Detect and respond to real-time zoom interactions on stock or financial charts when users scroll or pinch to zoom, capturing continuous zoom events that fire repeatedly during user input to track zoom level changes, update visual indicators, synchronize chart views, or trigger dynamic UI updates as zooming progresses, enabling control and monitoring of live zoom gestures on interactive time series or candlestick data charts across mousewheel, touchpad, or gesture inputs.
+</div>
 
 #### Event Data
 

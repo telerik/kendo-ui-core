@@ -22,6 +22,11 @@ Stores nested settings and notifies an (optional) observer of changes.
 ### options `Object`
 The initial values of all options.
 
+
+<div class="meta-api-description">
+Set initial configuration values, define default settings, configure startup options, prepopulate parameters, initialize with custom or partial options, pass initial property values, control default behaviors, supply constructor parameters for presets, establish base settings before use, and customize starting options for the drawing or graphical component setup.
+</div>
+
 #### Example
 
     <script>
@@ -52,6 +57,11 @@ with a single argument containing two fields:
 * field - The fully qualified field name
 * value - The new field value
 
+
+<div class="meta-api-description">
+Configure notifications for changes in drawing options by assigning a listener, observer, or callback object to monitor updates on the options storage. Enable reactive handling or event-driven responses whenever any option or configuration property is modified, triggering a method with details about the specific field name and its updated value. This setup supports observing state changes, tracking option adjustments, and implementing custom behaviors when drawing-related settings are altered, facilitating dynamic updates, option synchronization, or change detection through a handler that receives field identifiers and corresponding new values.
+</div>
+
 #### Example
 
     <script>
@@ -79,6 +89,11 @@ with a single argument containing two fields:
 ### get
 Gets the value of the specified option.
 
+
+<div class="meta-api-description">
+Retrieve or access stored configuration values, settings, or parameters from a component’s options or settings storage by specifying the desired option key or name. This method enables reading stored runtime options, styles, preferences, or configuration data, allowing developers to query, fetch, or obtain the current value of particular settings, properties, or flags within the drawing or UI component’s options collection. Whether you want to get, access, read, or inspect a specific configuration option by its identifier or key, this function provides direct retrieval of stored values for use in conditional logic, dynamic adjustments, or inspection of component state.
+</div>
+
 #### Example - retrieving an option value
     <script>
         var options = new kendo.drawing.OptionsStore({
@@ -105,6 +120,11 @@ Must be a fully qualified name (e.g. "foo.bar") for nested options.
 
 ### set
 Sets the value of the specified option.
+
+
+<div class="meta-api-description">
+Change or update a configuration setting dynamically by specifying an option name and its new value, enabling runtime modification of component behavior or settings without reinitialization. Adjust, override, or modify individual configuration options on the fly by calling a method that sets or updates the stored parameters, supporting use cases like toggling features, updating preferences, or controlling component state through targeted updates to option keys. This enables flexible control, quick changes, and programmatic configuration management within an options storage system.
+</div>
 
 #### Example - retrieving an option value
     <script>

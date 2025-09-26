@@ -26,6 +26,11 @@ A circle with set center and radius.
 ### center `Array|kendo.geometry.Point`
 The center point of the circle
 
+
+<div class="meta-api-description">
+Set or configure the placement of a circle by defining its central point coordinates during the creation or initialization phase, enabling precise positioning, alignment, or spatial calculations within a drawing or graphical coordinate system. Specify the origin, anchor point, or center location at construction to control where the circle appears, supporting tasks like geometry setup, layout design, or coordinate-based manipulation right when the shape is instantiated. This central positioning can be adjusted or set to establish reference points for calculations, alignments, or graphical layout from the start of the circle’s lifecycle.
+</div>
+
 #### Example - Set circle's coordinates
 
     <div id="diagram"></div>
@@ -84,6 +89,11 @@ The center point of the circle
 
 ### radius `Number`
 The radius of the circle
+
+
+<div class="meta-api-description">
+Set or configure the size, scale, or extent of a circle shape by specifying the radius value that determines the distance from the circle’s center point to its outer edge; control the circle’s dimensions during creation or initialization, adjust the circular boundary or circumference based on a non-negative numeric parameter, define how large or small the circular geometry appears within drawing or graphic components, and customize the radius setting to influence rendering size, shape scaling, or spatial footprint in vector or graphical contexts.
+</div>
 
 #### Example - Set circle's radius
 
@@ -147,6 +157,11 @@ The radius of the circle
 
 The location of the circle center.
 
+
+<div class="meta-api-description">
+Control the position or placement of a circle shape by specifying its central point coordinates, center location, or origin within a drawing or graphic component. Configure the circle’s location using coordinate pairs such as x and y values, a point object, or any positional data that defines the circle’s midpoint or centroid. Enable setting, adjusting, or moving where the circle is rendered by defining the exact center point or focal position, supporting various coordinate formats or spatial references to precisely place the circle in a 2D drawing context.
+</div>
+
 #### Example
 
     <script>
@@ -163,6 +178,11 @@ The location of the circle center.
 ### radius `Number`
 
 The radius of the circle.
+
+
+<div class="meta-api-description">
+Adjust or retrieve the distance from the center point to the edge of a circular shape by configuring or accessing its size parameter, controlling the circle's dimensions dynamically within drawing or graphical components. Enable runtime updates or queries of the circle's radius, set or modify the radius value to scale the circle smoothly, and use this measurement to influence layout, rendering, or interaction boundaries in coordinate-based systems. The radius represents the linear measure defining the circle's spatial extent, useful for geometry calculations, size adjustments, and visual representation changes in graphics or UI frameworks.
+</div>
 
 #### Example
 
@@ -183,6 +203,11 @@ The radius of the circle.
 
 Returns the bounding box of this circle after applying the
 specified transformation matrix.
+
+
+<div class="meta-api-description">
+Calculate or retrieve the bounding rectangle of a circle after applying a transformation matrix for tasks like collision detection, layout positioning, hit-testing, viewport culling, clipping, or rendering calculations; this function enables configuring precise bounding box dimensions by setting or enabling transformations to determine the updated spatial footprint, optimize collision boundaries, perform hit area detection, or adjust layouts based on rotated, scaled, or translated circles for graphics, UI elements, or game objects.
+</div>
 
 #### Parameters
 
@@ -216,6 +241,11 @@ Transformation matrix to apply.
 
 Creates a new instance with the same center and radius.
 
+
+<div class="meta-api-description">
+Create an exact duplicate of a circular shape with identical center coordinates and radius, enabling you to copy, replicate, or reuse circle geometries separately without affecting the original; this supports cloning circle objects, generating new instances for independent transformations, modifications, or drawing operations where preserving the source shape is essential.
+</div>
+
 #### Returns
 
 `kendo.geometry.Circle` A new Circle instance with the same center and radius.
@@ -241,6 +271,11 @@ Creates a new instance with the same center and radius.
 ### equals
 
 Compares this circle with another instance.
+
+
+<div class="meta-api-description">
+Check if two circle shapes or geometries are identical by comparing their size, position, and attributes to determine geometric equality; use this method to test, match, verify, or control equivalence of circle objects within drawing, shape comparison, geometry validation, or graphical operations when detecting duplicates, overlaps, or matching circle features across datasets or visual components.
+</div>
 
 #### Parameters
 
@@ -271,6 +306,11 @@ The circle to compare with.
 
 Gets the circle center location.
 
+
+<div class="meta-api-description">
+Retrieve the coordinates of a circle’s central point to perform tasks like positioning elements, aligning shapes, calculating offsets, determining bounding areas, handling hit-testing, or implementing collision detection by accessing the geometric center point of a circular shape. This can be used to extract the exact center location for transformations such as translations and rotations, for aligning graphical components or UI elements precisely, for spatial calculations including center-based offsets and boundary checks, and for detecting interactions or overlaps based on the circle’s midpoint. Developers searching for ways to get the middle position, centroid, or anchor point of a circle to manipulate or analyze its spatial properties will find this functionality essential.
+</div>
+
 #### Returns
 
 `kendo.geometry.Point` The location of the circle center.
@@ -292,6 +332,11 @@ Gets the circle center location.
 
 Gets the circle radius.
 
+
+<div class="meta-api-description">
+Accessing or retrieving the radius length, size measurement, or numeric value of a circular shape for purposes such as layout adjustments, rendering dimensions, collision detection, hit-testing, geometric calculations, animation scaling, exporting metrics, or comparing circular dimensions; obtaining the current radius used internally by a geometric circle representation to determine its extent, boundary, or spatial coverage within visual components or graphic computations.
+</div>
+
 #### Returns
 
 `Number` The radius of the circle.
@@ -311,6 +356,11 @@ Gets the circle radius.
 ### pointAt
 
 Gets the location of a point on the circle's circumference at a given angle.
+
+
+<div class="meta-api-description">
+Calculate or retrieve coordinates on a circle’s edge at a specific angle for tasks like positioning objects, visual drawing, vector math, or collision detection by determining the (x,y) point along the circumference relative to the center. Use angle-based queries to find exact locations on circular paths for graphics rendering, geometric computations, or spatial calculations, enabling precise control over points on a round shape for design, layout, or interaction purposes.
+</div>
 
 #### Parameters
 
@@ -350,6 +400,11 @@ Negative values or values greater than 360 will be normalized.
 
 Sets the location of the circle center.
 
+
+<div class="meta-api-description">
+Change, update, or move the center position of a circle shape by specifying new coordinates, points, or location objects to reset or redefine its central point during runtime or after initial setup, enabling dynamic repositioning, layout adjustments, and geometry control for circular elements.
+</div>
+
 #### Parameters
 
 ##### value `kendo.geometry.Point|Array`
@@ -385,6 +440,11 @@ The new center Point or equivalent [x, y] array.
 ### setRadius
 
 Sets the circle radius.
+
+
+<div class="meta-api-description">
+Adjust or update the size, radius, or diameter of a circular geometry shape dynamically, programmatically define or modify the circle's dimensions at runtime by specifying a numeric radius value, control or configure the scaling or resizing of a circle object on the fly, change circle size parameters in real-time for rendering updates, modify geometric properties such as radius to influence shape calculations and visual representation, set or override the circle’s boundary measurement after creation, enable dynamic transformations related to the circle’s extent, apply precise radius adjustments for layout, graphics, or geometry computations, manipulate circular dimensions during execution to affect rendering or collision detection, define or reset the radius length to control the circle’s spatial footprint within an environment.
+</div>
 
 #### Parameters
 

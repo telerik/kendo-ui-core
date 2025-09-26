@@ -27,6 +27,11 @@ Draws a rectangle with set geometry, fill and stroke.
 ### geometry `kendo.geometry.Rect`
 The geometric object that defines the rectangle origin and size.
 
+
+<div class="meta-api-description">
+Set or configure the initial position and size of a rectangle by specifying coordinates and dimensions, including origin points and width and height values, to control the bounds, layout, and placement of the shape during creation or drawing operations. Define geometric properties such as the x and y origin, overall size, bounding box, or frame dimensions to establish the rectangle's spatial parameters, initialize layout constraints, or manage shape positioning through geometry input. Enable precise setup of rectangular area coordinates and measurement when instantiating shapes, controlling visual boundaries, spatial layout, or graphical composition by supplying detailed geometric configuration for defining origin and extent.
+</div>
+
 #### Example - creating a rect
 
     <div id="surface"></div>
@@ -49,6 +54,11 @@ The geometric object that defines the rectangle origin and size.
 
 ### options `Object`
 The configuration options.
+
+
+<div class="meta-api-description">
+Set up initial size, position, styling, and configuration parameters when creating a rectangular drawing shape by passing an options object during construction; customize appearance, layout coordinates, dimensions, visual styles, and other startup properties to control how the rectangle renders and behaves from the moment it is instantiated, enabling flexible setup of default attributes and appearance settings for vector shape creation.
+</div>
 
 #### Example - creating a rect
 
@@ -76,6 +86,11 @@ The configuration options.
 The element clipping path.
 Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
 
+
+<div class="meta-api-description">
+Control, define, or set a clipping path to mask, crop, or restrict the visible region of a rectangle or drawing area by specifying custom shape boundaries, trim or hide content rendered outside designated paths, enable clipping or masking of graphical elements to control which portions appear visible, configure element clipping for precise rendering restrictions, and manage visibility edges of rectangular shapes within drawing components or graphical elements.
+</div>
+
 #### Example
 
     <div id="surface"></div>
@@ -101,6 +116,11 @@ Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip
 The element cursor.
 Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
 
+
+<div class="meta-api-description">
+Control and customize the mouse pointer appearance over a drawable rectangular area by setting the interactive cursor style, such as pointer, move, default, or any CSS cursor type, to indicate different interaction modes during drawing, dragging, hovering, or selection within the drawing interface, enabling clear visual feedback for user actions and precise cursor behavior configuration on the rectangular drawing region.
+</div>
+
 #### Example
 
     <div id="surface"></div>
@@ -120,6 +140,11 @@ Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cu
 
 ### fill `kendo.drawing.FillOptions`
 The fill options of the shape.
+
+
+<div class="meta-api-description">
+Set or adjust the fill style, color, opacity level, gradient shading, image overlay, or pattern design for a rectangle shape within a drawing or graphic component, enabling control over the visual background, paint, texture, or fill effect applied to the shape's interior area, including specifying solid colors, semi-transparent fills, linear or radial gradients, custom image fills, or repeating patterns to customize and style the shape’s appearance in rendering or graphic layouts.
+</div>
 
 #### Example
 
@@ -144,6 +169,11 @@ The fill options of the shape.
 The element opacity.
 Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
+
+<div class="meta-api-description">
+Adjust the transparency level or alpha of a shape or rectangle within a drawing area by setting its opacity value, controlling how visible or see-through the rendered shape appears; configure translucency, blending, fade effects, or partial visibility using a numeric opacity factor typically ranging between fully transparent and fully opaque to customize visual transparency and layering for graphics, UI elements, or design components.
+</div>
+
 #### Example
 
     <div id="surface"></div>
@@ -163,6 +193,11 @@ Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-o
 
 ### stroke `kendo.drawing.StrokeOptions`
 The stroke options of the shape.
+
+
+<div class="meta-api-description">
+Set, customize, or control the outline appearance of a rectangular shape’s border including stroke color, thickness, dash patterns, transparency, and other style attributes to define how the rectangle edge is visually rendered or highlighted in drawings, shapes, or UI components. Adjust the border stroke to enable solid, dashed, dotted, or custom stroke styles, manage border visibility and opacity, and fine-tune the thickness for precise visual effects and styling consistent with design or drawing requirements.
+</div>
 
 #### Example
 
@@ -187,6 +222,11 @@ The stroke options of the shape.
 ### tooltip `kendo.drawing.TooltipOptions`
 The tooltip options of the shape.
 
+
+<div class="meta-api-description">
+Customize and control the tooltip text, appearance, template, position, visibility triggers, delay timings, and show or hide behavior for rectangle shapes in drawing tools, enabling configuration of content display, dynamic templates, placement options like top or bottom, mouse or focus activation, automatic hide delays, and full control over when and how tooltips appear on shapes within graphics or diagramming components.
+</div>
+
 #### Example
 
     <div id="surface"></div>
@@ -209,6 +249,11 @@ The tooltip options of the shape.
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
+
+
+<div class="meta-api-description">
+Control and modify the position, rotation, size scaling, and skewing of a rectangular drawing area by applying transformation matrices or lists to adjust its coordinate space. Enable movement, rotation angles, resizing, distortion, or complex combined transforms on a drawing rectangle by setting or configuring the transformation properties affecting its rendering and layout. Adjust translation coordinates, apply rotation degrees, scale factors, or skew parameters to dynamically reshape or reposition the graphical rectangle within its container or canvas. Customize or animate the spatial orientation and scale of a drawing box by defining transformation sequences or matrix operations to control how the shape is transformed visually and spatially.
+</div>
 
 #### Example
 
@@ -233,6 +278,11 @@ Inherited from [Element.transform](/api/javascript/drawing/element#configuration
 ### visible `Boolean`
 A flag, indicating if the element is visible.
 Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
+
+
+<div class="meta-api-description">
+Control the display or concealment of the rectangular drawing element by enabling or disabling its visibility, allowing you to toggle the shape’s presence on the canvas, show or hide graphical rectangles, and manage whether the shape is rendered or excluded from rendering and user interaction such as hit-testing. Adjust visibility settings to configure rendering behavior, manage UI element display states, toggle graphical overlays, enable or disable hit detection on the rectangle, and control whether the shape participates in input events or rendering cycles by setting its visibility to true or false.
+</div>
 
 #### Example
 
@@ -262,6 +312,11 @@ Inherited from [Element.visible](/api/javascript/drawing/element#configuration-v
 Returns the bounding box of the element with transformations applied.
 Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
 
+
+<div class="meta-api-description">
+Retrieve or calculate the precise axis-aligned bounding box of a transformed rectangle, including its position and dimensions after applying all transformations such as translation, rotation, scaling, and inherited parent transformations; this method outputs the adjusted coordinates and size values (x, y, width, height) within the drawing space, enabling developers to determine the exact spatial boundaries, collision areas, or layout constraints of graphic elements regardless of their current orientation or scale, supporting use cases like hit-testing, layout calculation, rendering optimization, or geometric queries.
+</div>
+
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with transformations applied.
 
@@ -287,6 +342,11 @@ Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
 ### clip
 Gets or sets the element clipping path.
 Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
+
+
+<div class="meta-api-description">
+control, configure, or retrieve the clipping region or mask of a rectangular drawing area, including setting a new clipping path or obtaining the current mask shape; enable or update the visible area by applying clipping boundaries, manage the visible portion through clip paths, manipulate or query the clipped region of a drawable rectangle, adjust or read the masking shape to restrict rendering, and customize how content is visually constrained within rectangular drawing elements using clipping masks or paths.
+</div>
 
 #### Parameters
 
@@ -323,6 +383,11 @@ The element clipping path.
 Returns the bounding box of the element with clipping and transformations applied.
 Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
 
+
+<div class="meta-api-description">
+Retrieve the precise visible bounding box coordinates of a drawn element after applying all clipping regions, masks, and transformations like scaling, rotation, or translation to accurately measure layout dimensions, detect overlaps or collisions, and export or analyze the element’s final rendered position and size within the drawing or graphics context. This method enables calculation of the element's adjusted bounding rectangle considering all visual modifiers, enabling tasks such as layout validation, hit-testing, spatial queries, or exporting clipped geometry coordinates from complex drawings or vector graphic components.
+</div>
+
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
 
@@ -350,6 +415,11 @@ Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-cli
 
 ### containsPoint
 Returns true if the shape contains the specified point.
+
+
+<div class="meta-api-description">
+Check whether a specific coordinate or point lies within the boundaries of a rectangular shape to enable hit testing, pointer collision detection, spatial queries, or interaction handling with shapes; this includes determining if a screen position, mouse click, touch point, or coordinate intersects, overlaps, or is contained inside the rectangle area for interactive graphics, UI element hit areas, or collision logic in drawing or canvas components.
+</div>
 
 #### Parameters
 
@@ -382,6 +452,11 @@ The point that should be checked.
 
 ### geometry
 Gets or sets the rectangle geometry.
+
+
+<div class="meta-api-description">
+Configure or retrieve rectangular boundaries, rectangle size, position, or dimensions programmatically by accessing or updating the geometry of a drawing rectangle shape. Control, read, or set the rectangle’s coordinates and bounds for layout adjustments, rendering updates, spatial calculations, or collision detection by manipulating the rectangle area or geometry data. Enable getting or setting the rectangle frame, bounding box, or geometric properties to dynamically modify the placement and size of rectangular drawing elements within your code.
+</div>
 
 #### Parameters
 
@@ -416,6 +491,11 @@ The new geometry to use.
 
 ### fill
 Sets the shape [fill](/api/javascript/drawing/rect#configuration-fill).
+
+
+<div class="meta-api-description">
+Configure or update the fill style of a rectangle shape within a drawing context by applying solid colors, gradient transitions, image textures, or repeating pattern fills to modify its visual appearance dynamically; this method enables control over shape coloring, enables runtime changes to fills, supports various fill configurations, and allows setting or replacing backgrounds of rectangular drawing elements for customization, styling, or theming purposes.
+</div>
 
 #### Parameters
 
@@ -452,6 +532,11 @@ Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
+
+<div class="meta-api-description">
+Adjust, configure, or retrieve the transparency level of a graphical element by setting or getting its opacity value, typically as a decimal between zero and one, affecting both fill and stroke visibility uniformly. Control how translucent or solid the shape appears in drawing operations, enabling dynamic updates to element alpha or transparency for layering, fading, or visual effects. Use this property to modulate element see-through intensity, toggle visibility fade, or fine-tune the overall element transparency, reflecting changes immediately or querying current opacity state. Manage and query the alpha blend factor for graphical components to create overlays, highlight effects, or subtle visibility adjustments in vector graphics.
+</div>
+
 #### Parameters
 
 ##### opacity `Number`
@@ -484,6 +569,11 @@ The element opacity. Ranges from 0 (completely transparent) to 1 (completely opa
 
 ### stroke
 Sets the shape [stroke](/api/javascript/drawing/rect#configuration-stroke).
+
+
+<div class="meta-api-description">
+Adjust, update, or configure the outline, border, or edge styling of a rectangular drawing shape by setting stroke properties like color, thickness, dash patterns, opacity, and other stroke attributes dynamically after creation, enabling developers to control and customize shape borders, outlines, and line styles programmatically through methods that apply new stroke settings instantly for visual customization and design adjustments.
+</div>
 
 #### Parameters
 
@@ -521,6 +611,11 @@ The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to s
 Gets or sets the transformation of the element.
 Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
 
+
+<div class="meta-api-description">
+Accessing or modifying the transformation matrix, affine transform, or coordinate system of a drawing element to control its scale, rotation, translation, position, or skew for rendering and interaction purposes, enabling retrieval of the current transformation state or applying a new transform to change how the drawing rectangle is displayed or manipulated within the drawing component or graphical interface.
+</div>
+
 #### Parameters
 
 ##### transform `kendo.geometry.Transformation`
@@ -555,6 +650,11 @@ The transformation to apply to the element.
 ### visible
 Gets or sets the visibility of the element.
 Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
+
+
+<div class="meta-api-description">
+Control or check the display status of a rectangle shape within the drawing interface by setting or retrieving its visibility state, enabling toggling between visible and hidden modes, managing rendering presence, responding to user interaction availability, conditionally showing or hiding graphical elements, configuring display flags, and querying if the shape is currently rendered on screen or concealed in the drawing context.
+</div>
 
 #### Parameters
 

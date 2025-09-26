@@ -34,6 +34,11 @@ The anchor point of this segment.
 
 If no control points are defined the path will pass through this point.
 
+
+<div class="meta-api-description">
+Set or configure the anchor point for a path segment to control where the segment passes through or ends within a drawing or vector graphic component, enabling alignment, connection, or positioning of segment endpoints by specifying the key coordinate used as the reference point; this can be used to define segment placement precisely, move endpoints to desired locations, link segments smoothly, or adjust path shapes by setting or adjusting the anchor parameter or coordinate value that the segment path follows or terminates at.
+</div>
+
 #### Example
 
     <div id="surface"></div>
@@ -58,6 +63,11 @@ If no control points are defined the path will pass through this point.
 
 ### controlIn `kendo.geometry.Point` *optional*
 The first curve control point of this segment, if any.
+
+
+<div class="meta-api-description">
+Configure or retrieve the initial control point for the incoming Bezier curve of a segment during creation, enabling setting or accessing the first handle that shapes the segment's starting curve. This includes defining, specifying, or reading the incoming curve control handle, adjusting the segment’s entry point tangents, or initializing the start control point of a segment’s bezier path. Common tasks involve controlling the smoothness, direction, or position of the segment’s incoming curve by setting constructor parameters for initial control handles or handles that influence the segment’s start curvature and flow.
+</div>
 
 #### Example
 
@@ -86,6 +96,11 @@ The first curve control point of this segment, if any.
 
 ### controlOut `kendo.geometry.Point` *optional*
 The second curve control point of this segment, if any.
+
+
+<div class="meta-api-description">
+Specify or configure the outgoing control handle point for a path segment’s Bézier curve to shape or control the curve’s exit direction and smoothness, set or adjust the second control point used when drawing or customizing the outgoing curve segment, enable precise manipulation of curve handles to influence the path’s flow and curvature, define or control the outgoing tangent or handle for vector graphics or diagram segments to achieve smooth transitions and exact path shaping, customize how a segment’s curve departs by setting control points as part of segment construction for detailed curve editing and bezier path smoothing.
+</div>
 
 #### Example
 
@@ -117,6 +132,11 @@ The second curve control point of this segment, if any.
 Gets or sets the segment anchor point.
 
 The setter returns the current Segment to allow chaining.
+
+
+<div class="meta-api-description">
+Control or retrieve the attachment point, pivot, or connection location of a line or segment within a diagram or graphical component, enabling precise positioning, alignment, or modification of where segments join or rotate. Configure the anchor position to set or update how segments connect or pivot on nodes or shapes, adjust the origin point for segment transformations, or query the current anchor to determine the exact point of attachment. Methods to get or set the anchor coordinate support chaining and allow dynamic control over segment linking behavior, connection hotspots, or pivot references in graphical flowchart, diagramming, or vector drawing contexts.
+</div>
 
 #### Parameters
 
@@ -158,6 +178,11 @@ Gets or sets the first curve control point of this segment.
 
 The setter returns the current Segment to allow chaining.
 
+
+<div class="meta-api-description">
+Access, retrieve, modify, or update the incoming control point of a segment's curve in vector drawing or path manipulation tasks, enabling fine-tuned adjustment or dynamic setting of the segment's entry control handle for bezier curves, smoothing, or shape editing workflows. This function facilitates reading the first control handle of a path segment or setting it programmatically, supporting method chaining for streamlined updates when customizing or animating vector paths, curves, anchors, or graphic components. Use cases include configuring curve control points, controlling tangent vectors, or precisely shaping bezier segments by getting and setting the initial incoming handle.
+</div>
+
 #### Parameters
 
 ##### value `kendo.geometry.Point`
@@ -196,6 +221,11 @@ The new control point.
 Gets or sets the second curve control point of this segment.
 
 The setter returns the current Segment to allow chaining.
+
+
+<div class="meta-api-description">
+Accessing or modifying the second control point of a curve segment's outgoing handle for precise curve shaping, configuring or retrieving the handle position that defines the segment's tangent and curvature, setting or getting the coordinate of the segment's second control handle to adjust Bezier curve geometry, manipulating the curve control point for smooth transitions and editing path contours, enabling updates to the curve's control vector for refined path drawing, obtaining or assigning the segment's outbound control point to control curve shape and flow, adjusting or querying the handle that influences the segment's outgoing curve direction, managing the second control handle parameters to customize curve tension or curvature, controlling or reading the second anchor handle position to fine-tune segment curve behavior, and chaining calls after setting the curve control point for streamlined segment geometry editing.
+</div>
 
 #### Parameters
 

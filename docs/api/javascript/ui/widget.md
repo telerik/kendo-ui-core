@@ -15,6 +15,11 @@ The element, from which the widget is initialized. Depending on the widget, it m
 
 See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more information.
 
+
+<div class="meta-api-description">
+Retrieve or access the original DOM node, root element, or wrapper tied to a UI component instance to enable direct manipulation, querying, or binding of events after widget setup; configure or interact with the source HTML element underlying controls like date pickers, dropdowns, autocomplete inputs, editors, or upload elements, whether they render as visible or hidden nodes, for tasks such as attaching listeners, changing attributes, triggering updates, or customizing behavior at the base element level.
+</div>
+
 #### Example
 
     <div id="myWindow">...window content...</div>
@@ -35,6 +40,11 @@ The outermost element, which is part of the widget. Depending on the widget and 
 
 See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more information.
 
+
+<div class="meta-api-description">
+Access or reference the outermost container element or wrapper around a UI component to inspect, manipulate, or interact with the component’s main DOM node after it has been rendered or initialized. This outer wrapper element can be used to control styling, event handling, or layout adjustments and may differ from the core element depending on the initialization context, such as when a component is initialized from different HTML tags. Developers often need to get, set, or query the parent container of a widget or control for tasks like customizing appearance, managing event propagation, or performing dynamic DOM operations on the component’s surrounding element or container node.
+</div>
+
 #### Example
 
     <div id="myWindow">...window content...</div>
@@ -51,6 +61,11 @@ See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more informa
 ### bind
 
 Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable#bind) section of the `kendo.Observable` API reference.
+
+
+<div class="meta-api-description">
+Connect or register event listeners, handlers, or callbacks to user interface elements to respond to specific widget event triggers, monitor interaction data, intercept or modify default event processing, handle multiple event subscriptions on the same UI component, receive access to the originating component’s state and event payload, set up reactive programming patterns, enable dynamic responses to user actions or system events, and control event propagation and behavior through custom functions tied to event names.
+</div>
 
 #### Example
 
@@ -72,6 +87,11 @@ Attaches a handler to an event. Examples and more info can be found in the [bind
 
 Prepares the widget for safe removal from the DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
+
+<div class="meta-api-description">
+Remove and clean up interactive UI components by detaching event listeners, clearing data attributes to prevent memory leaks, and recursively disposing of nested child widgets or components to fully release resources and avoid residual references. Enable safe component teardown or destruction in web interfaces by stopping internal event handling, unbinding jQuery data, and triggering cleanup routines for all nested elements, ensuring optimized DOM manipulation and resource management during dynamic UI updates or widget lifecycle termination.
+</div>
+
 #### Example
 
     <div id="dialog"></div>
@@ -92,6 +112,11 @@ Prepares the widget for safe removal from the DOM. Detaches all event handlers a
 
 Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/javascript/observable/methods/one) section of the
 `kendo.Observable` API reference.
+
+
+<div class="meta-api-description">
+configure single-use event handlers that trigger only once on the first event occurrence, set callbacks that automatically detach after running to prevent repeated execution, bind one-time listeners on components or widgets for actions that should happen just once without manual removal, enable event handlers that fire a single time and then unregister themselves for efficient event management, implement single-invocation event binding to handle unique or initial events without lingering listeners or memory leaks, control execution of event callbacks with automatic unbinding after the initial trigger to streamline event-driven behavior, attach handlers that respond to the next emitted event exactly once, support one-off event response mechanisms for interactions or state changes that occur a single time during component lifecycle.
+</div>
 
 #### Example
 
@@ -120,6 +145,11 @@ Attaches a handler to an event. The handler is executed only once. Examples and 
 ### resize
 
 Readjusts the layout of the widget. For more information, refer to the article on [responsive web design](/styles-and-layout/using-kendo-in-responsive-web-pages).
+
+
+<div class="meta-api-description">
+Trigger layout recalculation and resizing to update component dimensions, rearrange child elements, and refresh responsive visuals after dynamic content changes, container resizing, DOM updates, showing or hiding elements, or CSS modifications. Enable programmatic adjustment of widget measurements and layout without full reinitialization, ensuring accurate rendering and alignment during UI updates, responsive design scenarios, and container visibility toggling. This method helps you control and enforce immediate layout correction and element repositioning in response to any runtime changes affecting component size or structure.
+</div>
 
 #### Example
 
@@ -153,6 +183,11 @@ Allows changing the widget configuration after initialization. Depending on the 
 
 > In some cases, the `setOptions` method can recreate and rebind the widget instance. Calling `setOptions` in an event handler or the respective widget is not recommended and can cause an endless loop or a JavaScript error.
 
+
+<div class="meta-api-description">
+Change or update widget settings, adjust component configuration dynamically, modify runtime options, alter parameters after initialization, reconfigure widget behavior on the fly, set or reset configuration properties, apply new options to existing widgets, control component properties during execution, dynamically enable or disable features, configure or override component settings without reloading, update UI widget options programmatically, manage widget customization after creation, avoid infinite loops when changing settings in event handlers, handle components that may recreate or rebind upon option changes.
+</div>
+
 #### Parameters
 
 ##### newOptions `Object`
@@ -184,6 +219,11 @@ The options to be changed or added.
 Executes all handlers attached to the given event. More info can be found in the [trigger](/api/javascript/observable/methods/trigger) section of the
 `kendo.Observable` API reference.
 
+
+<div class="meta-api-description">
+Invoke or fire events programmatically to execute all event handlers registered for a specific event on a widget or component, enabling manual triggering of event callbacks, simulating user interactions, calling bound event listeners, and controlling event flow by firing or dispatching events through code without direct user input, useful for testing, automation, or custom event sequencing within user interface elements.
+</div>
+
 #### Example
 
     <div id="slider"></div>
@@ -213,6 +253,11 @@ Executes all handlers attached to the given event. More info can be found in the
 
 Remove a previously attached event handler. More info can be found in the [unbind](/api/javascript/observable/methods/unbind) section of the
 `kendo.Observable` API reference.
+
+
+<div class="meta-api-description">
+Stop or remove event handlers from UI components by detaching or unsubscribing event listeners, disable widget reactions to specific events, control or cancel event callbacks previously attached, manage event binding lifecycle by unregistering handlers, dynamically turn off event responses to prevent code execution on certain triggers, handle unsubscription from observable events, and manipulate event-driven behaviors by disabling or unbinding functions tied to widget events.
+</div>
 
 #### Example
 

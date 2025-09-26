@@ -15,6 +15,11 @@ Represents the Kendo UI DropTargetArea widget. Inherits from [DropTarget](/api/j
 
  Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
 
+
+<div class="meta-api-description">
+Control and configure drag-and-drop acceptance by assigning groups to draggable elements and drop zones, enabling filtering and restriction of which draggable items can be dropped in specific target areas. Grouping allows scoping drag sources and drop targets so that only items with matching group identifiers are accepted, supporting use cases like segmented drag-and-drop, selective dropping, connecting sets of draggable components to compatible drop zones, managing allowed drag targets, filtering draggables by category, and enforcing drag restrictions. This enables managing drag scope, selective drop acceptance, group-based drag constraints, and organizing drag-and-drop relationships by setting or matching group attributes or tags.
+</div>
+
 #### Example
 
     <p>Area accepts only draggable elements from orange group</p>
@@ -83,6 +88,11 @@ Represents the Kendo UI DropTargetArea widget. Inherits from [DropTarget](/api/j
 
  Selector to filter the drop targets in the area. Every matched element acts as a drop target and fires events on the DropTargetArea. **Specifying the filter is mandatory.**
 
+
+<div class="meta-api-description">
+Control which elements inside a drop target zone accept dragged items by setting a selector filter that defines allowed drop targets, enabling configuration through CSS or jQuery selectors to specify which child elements respond to drag-and-drop actions, manage event triggering on matched elements within the drop area, and restrict drops only to designated targets by filtering elements based on selectors to enable precise drop target customization and interaction handling.
+</div>
+
 #### Example
 
     <p>Area accepts only draggable elements from orange group</p>
@@ -140,6 +150,11 @@ Represents the Kendo UI DropTargetArea widget. Inherits from [DropTarget](/api/j
 
 Fired when draggable moves over one of the drop targets.
 The `dragenter` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
+
+
+<div class="meta-api-description">
+Detect when a draggable element enters or moves over a designated drop target area to trigger custom behaviors or logic, capturing pointer positions, target elements, and original event details whenever a drag operation overlaps the drop zone. Track drag movements, monitor when a draggable intersects with the drop target boundary, handle event data such as mouse coordinates and underlying elements during drag-and-drop interactions, and enable custom responses to the dragging entering the drop target region. Capture and process the event fired as draggable items transition over drop zones to implement interactive dragenter event handling with access to full event metadata for precise control and updated pointer tracking.
+</div>
 
 #### Example - modify the hint element on dragenter
 
@@ -213,6 +228,11 @@ The current Draggable element.
 Fired when draggable moves out of one of the drop targets.
 The `dragleave` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
 
+
+<div class="meta-api-description">
+Detect and handle when a draggable element exits or leaves a drop target area, enabling you to monitor drag-and-drop interactions, cancel pending drop operations, update visual cues or UI feedback, and execute logic when the dragged item moves away from or out of defined drop zones. This event supports tracking drag movements, managing the drag lifecycle, controlling drop validity, responding to dragover changes, and integrating with mouse or pointer events for dynamic user interface updates and interaction control during drag-and-drop workflows.
+</div>
+
 #### Example - modify the hint element on dragenter
 
     <div id="area">
@@ -284,6 +304,11 @@ The current Draggable element.
 
 Fired when draggable is dropped over one of the drop targets.
 The `drop` event represents a jQuery `mouseup` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
+
+
+<div class="meta-api-description">
+Detect when a draggable element is released over a drop zone by handling the drop action event, capturing the moment an item is dropped onto a target to enable drag and drop interactions such as moving elements, accepting or rejecting drops, triggering UI updates, or running custom logic; supports capturing precise event details like mouse position, target identification, and event metadata to control drop behavior and respond to user actions involving draggable release within drop areas during drag and drop operations.
+</div>
 
 #### Example - modify the dropTarget and draggable element on successful drop
 

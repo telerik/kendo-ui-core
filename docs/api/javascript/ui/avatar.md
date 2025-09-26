@@ -15,6 +15,11 @@ Represents the Kendo UI Avatar widget. Inherits from [Widget](/api/javascript/ui
 
 A text description of the Avatar image. When `type="image"` is configured this value will be used to populate the `alt` attribute of the `<img>` element.
 
+
+<div class="meta-api-description">
+Set or customize the alternative text description for user profile pictures or avatar images to enhance accessibility, support screen readers, improve semantic labeling, and boost SEO by defining descriptive alt attributes on rendered image elements. Enable meaningful textual representation of avatar photos, icons, or user images to assist visually impaired users and provide clear context in various assistive technologies or search indexing scenarios. Control, define, or update the alt text for image-based avatars to ensure proper accessibility compliance and descriptive annotation of profile imagery.
+</div>
+
 #### Example
 
     <div id="avatar"></div>
@@ -29,6 +34,11 @@ A text description of the Avatar image. When `type="image"` is configured this v
 ### border `Boolean` *(default: false)*
 
 Specifies whether the avatar should render border around its container element. Default is `false`.
+
+
+<div class="meta-api-description">
+Control the visibility of a border or frame around a user avatar image, enabling or disabling a surrounding outline to create a defined edge or highlight. Configure whether the avatar displays a visible border ring or none, toggling the outline effect to emphasize, highlight, or separate the avatar from backgrounds. Set, enable, or disable a border/frame around profile pictures, user icons, or avatar containers to customize appearance, including options for framed or borderless avatar presentation in UI components.
+</div>
 
 #### Example
 
@@ -45,6 +55,11 @@ Specifies whether the avatar should render border around its container element. 
 
 Adds additional custom classes to the Avatar container element.
 
+
+<div class="meta-api-description">
+Customize or override the styling of the avatar container by adding one or multiple CSS classes, enabling developers to set custom styles, apply themes, adjust appearance, or target the avatar element for testing and DOM manipulation. This feature supports configuring and controlling the visual presentation through additional class names, making it easy to implement style tweaks, CSS overrides, and selectors for automated testing or precise customization of the root avatar element.
+</div>
+
 #### Example
 
     <div id="avatar"></div>
@@ -58,6 +73,11 @@ Adds additional custom classes to the Avatar container element.
 ### fillMode `String` *(default: 'solid')*
 
 Specifies the appearance fill style of the Avatar. The available values are `"outline"`, `"solid"` (default), and `"none"`.
+
+
+<div class="meta-api-description">
+control avatar appearance by setting fill style to outline for border-only visuals, solid for a fully colored background, or none for transparent fill; customize avatar fill mode to switch between hollow, filled, or empty backgrounds, enabling different visual emphasis on profile images or icons; adjust avatar rendering fill options to change how the avatar's interior is displayed, suitable for diverse UI themes or design preferences; configure avatar background fill behavior to toggle between visible borders, solid colors, or no fill effect to match styling needs or theme integration.
+</div>
 
 #### Example
 
@@ -74,6 +94,11 @@ Specifies the appearance fill style of the Avatar. The available values are `"ou
 
 Specifies an icon name to be used if the avatar `type` is set to `icon`. For a list of available icon names, please refer to the [Web Font Icons article](/styles-and-layout/icons-web).
 
+
+<div class="meta-api-description">
+Specify or set the icon glyph, symbol, or character to display inside an avatar or user icon by naming the font icon or web font icon identifier; customize or control which icon or icon font appears when using icon-based avatars, enable or configure specific font-based glyphs inside avatar placeholders, provide the icon name string or font icon reference to render symbols, pictograms, or font icons within avatar components or user profiles.
+</div>
+
 #### Example
 
     <div id="avatar"></div>
@@ -87,6 +112,11 @@ Specifies an icon name to be used if the avatar `type` is set to `icon`. For a l
 ### image `String`
 
 Specifies an image URL or dataURL that would be used to populate the `src` attribute of the avatar `<img>` element.
+
+
+<div class="meta-api-description">
+Configure or bind the avatar profile picture by specifying an image URL, base64 dataURL, or inline image source to dynamically display user photos or icons within the avatar element. Enable setting or updating the avatar’s picture from remote hosts or embedded image data, controlling the image source for user profiles, account icons, or identity representations in your application interface. Support various image formats and sources by linking or assigning URLs, data strings, or encoded images to render personalized avatar visuals seamlessly.
+</div>
 
 #### Example
 
@@ -103,6 +133,11 @@ Specifies an image URL or dataURL that would be used to populate the `src` attri
 
 Could be one of the predefined shapes available for the widget container: `"full"` (default), `"small"`, `"medium"`, `"large"`, or `"none"`.
 
+
+<div class="meta-api-description">
+Adjust or configure the avatar’s shape and corner radius by controlling how rounded or squared the avatar container appears, enabling settings for fully circular, slightly rounded, moderately rounded, heavily rounded, or sharp square styles. This property lets you set or customize avatar geometry with options ranging from no rounding and different degrees of corner curves to fully round circular avatars, supporting variations in profile picture display, user interface design preferences, avatar border styling, and shape control for consistent or unique visual identity.
+</div>
+
 #### Example
 
     <div id="avatar"></div>
@@ -117,6 +152,11 @@ Could be one of the predefined shapes available for the widget container: `"full
 
 The Avatar allows you to set predefined sizes. The available size values are `"small"`, `"medium"` (default), `"large"`, or `"none"`.
 
+
+<div class="meta-api-description">
+Control and configure the avatar's display dimensions by setting its scale, adjusting predefined size options such as small, medium, large, or disabling the avatar visibility with none. Enable quick, consistent avatar sizing for user profile pictures, icons, or placeholders by selecting from standard dimension presets to maintain uniform UI appearance and responsive design. Customize avatar scaling, resize the user image, and manage visual footprint within interfaces for streamlined, adaptive presentation of graphical identity elements.
+</div>
+
 #### Example
 
     <div id="avatar"></div>
@@ -130,6 +170,11 @@ The Avatar allows you to set predefined sizes. The available size values are `"s
 ### style `Object`
 
 Sets additional CSS styles to the Avatar container element.
+
+
+<div class="meta-api-description">
+Control and customize the visual appearance, design, and layout by applying inline CSS styles, enabling adjustment of spacing, borders, colors, margins, padding, background, and overall formatting on the avatar container element. Configure, override, or extend default component styles to match branding, themes, user interface requirements, or unique appearance preferences, allowing flexible styling, custom layouts, and precise visual tweaks directly through CSS properties embedded in the avatar’s outer wrapper.
+</div>
 
 #### Example
 
@@ -146,6 +191,11 @@ Sets additional CSS styles to the Avatar container element.
 ### text `String`
 
 Will be used to populated Avatar content when its type is set to `text`
+
+
+<div class="meta-api-description">
+Configure or update the string label displayed inside an avatar when using text-based avatars, allowing dynamic control over the visible characters or initials shown, supporting programmatic changes, data binding, and customization of the avatar’s text content for user icons, profile placeholders, or identity representation in UI components.
+</div>
 
 #### Example
 
@@ -174,6 +224,11 @@ The Avatar allows you to specify predefined theme colors for background of its c
     - "inverse" - Applies coloring based on inverted theme color.
     - "none" - Does not apply theme color class.
 
+
+<div class="meta-api-description">
+Set or customize the background color of avatar containers by selecting from a variety of predefined theme color options such as primary, base, secondary, tertiary, info, success, warning, error, dark, light, inverse, or none. Control the visual style, adjust theme CSS classes, inherit colors from parent elements, enable different intents like alerts or statuses, and configure the avatar appearance to match branding or UI themes by applying or disabling specific color themes. This includes options to inherit colors automatically, disable theme-based coloring, or emphasize semantic states, allowing developers to tailor avatar visuals flexibly through theme color settings.
+</div>
+
 #### Example
 
     <div id="avatar"></div>
@@ -187,6 +242,11 @@ The Avatar allows you to specify predefined theme colors for background of its c
 ### type `String` *(default: 'text')*
 
 Could be one of the three predefined types for the widget: `icon`, `image`, or `text` (default).
+
+
+<div class="meta-api-description">
+Configure the avatar display mode to control how user representation appears, choosing between showing an icon symbol, rendering a profile image or photo, or displaying text such as initials or characters. Enable switching between visual types like image-based avatars, icon placeholders, or textual initials for user profiles, identity badges, or UI elements that require flexible avatar content rendering. Adjust avatar rendering behavior to show graphical icons, personalized pictures, or alphanumeric initials depending on context, user data, or design preferences to customize user representation and interface appearance.
+</div>
 
 #### Example
 

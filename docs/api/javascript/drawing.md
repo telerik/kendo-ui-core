@@ -14,6 +14,11 @@ Helper functions declared in the kendo.drawing namespace.
 
 Aligns drawing elements x axis position to a given rectangle.
 
+
+<div class="meta-api-description">
+Control horizontal alignment of drawing elements by configuring their x-axis position relative to a target rectangle, enabling snapping or repositioning shapes for consistent left, center, or right alignment across one or multiple objects. Set or update element coordinates to match the horizontal placement of a reference boundary, useful for arranging, aligning, or redistributing graphics in layouts. This method supports precise movement, alignment correction, and consistent horizontal grouping of drawn shapes or components after modifications or dynamic updates.
+</div>
+
 #### Parameters
 
 ##### elements `Array`
@@ -54,6 +59,11 @@ Converts the given DOM element to a [Drawing API](/framework/drawing/overview) s
 The operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 
 The promise will be resolved with the root [Group](/api/javascript/drawing/group) of the scene.
+
+
+<div class="meta-api-description">
+Transform or render a live HTML or DOM element into a vector graphics scene, enabling asynchronous conversion of webpage content, HTML structures, or UI elements into a manipulatable drawing graph, with a promise-based interface to handle the result once ready, allowing inspection, traversal, or modification of the scene’s group hierarchy and node structure, supporting workflows that require capturing DOM visuals, integrating HTML with canvas or SVG representations, or dynamically generating graphics from existing page elements.
+</div>
 
 #### Parameters
 
@@ -212,6 +222,11 @@ The promise will be resolved with a PNG image encoded as a [Data URI](https://de
 >
 > Scene images must be of same origin or [CORS-enabled](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image).
 
+
+<div class="meta-api-description">
+Export drawing elements or groups as PNG images by generating a rasterized snapshot positioned at the origin with dimensions matching the selected content, enabling asynchronous exporting for saving, downloading, embedding, or displaying within web applications. This method supports converting vector or grouped canvas drawings into base64-encoded Data URIs ideal for image sources, file downloads, or further processing, while ensuring cross-origin restrictions like CORS compliance are considered for seamless export and use in different contexts. Whether you want to capture, serialize, share, or create downloadable PNG snapshots of visual elements, this approach handles image export, promise-based asynchronous workflows, and image encoding for broad compatibility.
+</div>
+
 #### Parameters
 
 ##### group `kendo.drawing.Group`
@@ -322,6 +337,11 @@ The promise will be resolved with a PDF file encoded as a [Data URI](https://dev
 
 > Scene images must be of same origin or [CORS-enabled](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image).
 
+
+<div class="meta-api-description">
+Export or save multiple drawing elements as a PDF file with precise control over positioning and dimensions, enabling asynchronous export that returns a promise resolving to a PDF encoded data URI. Use this to generate downloadable PDF documents from groups of shapes, layers, or scene components, ensuring same-origin or CORS-enabled resources are handled properly. Configure PDF output size, coordinate alignment at the origin, and embed vector or raster graphics for printing or sharing, supporting workflows for file exporting, document generation, and data serialization in web or app environments.
+</div>
+
 #### Parameters
 
 ##### group `kendo.drawing.Group`
@@ -361,6 +381,11 @@ The export operation is asynchronous and returns a [promise](https://api.jquery.
 
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
+
+<div class="meta-api-description">
+Generate or create an SVG file from a chosen set of vector shapes or drawing elements, enabling exporting, saving, or downloading scalable vector graphics as a standalone document; configure the output to position the graphic at the top-left corner coordinates [0, 0] with dimensions matching the selected group, handle asynchronous operations that return promises resolving to SVG content encoded as a data URI for embedding or further processing, support workflows for exporting drawings, converting canvas elements to SVG, extracting vector markup, and obtaining SVG representations programmatically.
+</div>
+
 #### Parameters
 
 ##### group `kendo.drawing.Group`
@@ -398,6 +423,11 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Scales uniformly an element so that it fits in a given rectangle. No scaling will be applied if the element is already small enough to fit in the rectangle.
 
+
+<div class="meta-api-description">
+Scale and resize graphical elements or shapes uniformly to precisely fit within a specified rectangle or bounding box while preserving their original aspect ratio, enabling proportional adjustment without distortion, controlling element dimensions to match target sizes, ensuring shapes or groups maintain their scale integrity inside defined areas, adjusting size while preventing enlargement if already fitting, configuring element scaling to optimize layout or design space, setting scale factors for graphics to conform to container bounds, enabling responsive resizing of visual components to fit designated frames or regions, and managing uniform scaling for consistent appearance across variable display sizes or design constraints.
+</div>
+
 #### Parameters
 
 ##### element `kendo.drawing.Element`
@@ -434,6 +464,11 @@ The rectangle in which the elements should be fitted.
 
 Stacks drawing elements horizontally.
 
+
+<div class="meta-api-description">
+Control horizontal arrangement or layout of drawing elements by stacking shapes, groups, or paths side-by-side along the x-axis in document order; configure sequential placement, alignment, or distribution of child components for composing horizontal sequences, enabling adjacent positioning of elements in a drawing or graphic composition, useful for arranging elements in a line, aligning multiple drawing parts horizontally, or managing the order and spacing of grouped visual objects.
+</div>
+
 #### Parameters
 
 ##### elements `Array`
@@ -462,6 +497,11 @@ An array with the drawing elements that should be stacked.
 ### vAlign
 
 Aligns drawing elements y axis position to a given rectangle.
+
+
+<div class="meta-api-description">
+Adjust vertical positioning, set or control y-axis alignment, and align drawing elements relative to a specified rectangular boundary by configuring vertical placement within a given container or coordinate space. Enable precise vertical alignment of graphical components by programmatically setting their y-coordinates to match, center, top-align, bottom-align, or distribute elements inside or along the vertical edges of a defined rectangle or layout area. Use vertical alignment techniques to position shapes, images, or drawing objects consistently with a referenced boundary, supporting dynamic repositioning and layout adjustments in graphical compositions or user interfaces.
+</div>
 
 #### Parameters
 
@@ -501,6 +541,11 @@ Specifies how should the elements be aligned. The supported values are:
 
 Stacks drawing elements vertically.
 
+
+<div class="meta-api-description">
+Stack multiple graphic or drawing elements vertically in a single column by arranging child components from top to bottom in a sequential vertical layout, enabling grouping, alignment, and collective transformations of stacked elements, configuring vertical stacking order, composing elements in a columnar fashion, controlling layout flow for multiple visual items, and organizing content with top-down stacking to simplify relative positioning and combined manipulations.
+</div>
+
 #### Parameters
 
 ##### elements `Array`
@@ -529,6 +574,11 @@ An array with the drawing elements that should be stacked.
 ### vWrap
 
 Stacks drawing elements vertically. Multiple stacks will be used if the elements height exceeds the given rectangle height.
+
+
+<div class="meta-api-description">
+Arrange and control vertical stacking of elements within a confined area by enabling top-to-bottom flow that dynamically creates new columns when content height exceeds the container, supporting vertical wrapping, multi-column layouts, tiled arrangements, content overflow handling, column-based element distribution, layout organization in vertical direction, responsive vertical flow of items, and automatic column creation for stacked graphical or UI components.
+</div>
 
 #### Parameters
 
@@ -574,6 +624,11 @@ The rectangle in which the elements should be wrapped.
 ### wrap
 
 Stacks drawing elements horizontally. Multiple stacks will be used if the elements width exceeds the given rectangle width.
+
+
+<div class="meta-api-description">
+Arrange shapes or drawing elements horizontally inside a bounded area by stacking them left to right, automatically wrapping overflow elements onto new lines or rows when their combined widths surpass the container’s width; control layout flow, line wrapping, flow layout, multi-row stacking, horizontal stacking, overflow handling, wrap drawing elements, position shapes within a rectangle, flow elements dynamically in drawing or graphics components, set elements to wrap within bounds, and reorganize shapes to fit space constraints in visual layouts.
+</div>
 
 #### Parameters
 

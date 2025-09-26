@@ -13,6 +13,11 @@ Represents a bitmap image loaded from source URL.
 
 The height of the image.
 
+
+<div class="meta-api-description">
+Adjust or specify the vertical size, image height, or picture dimension of a diagram or visual component to control how tall the image appears when rendered, influencing layout, scaling, display height, pixel height, and overall vertical spacing for diagrams, flowcharts, or graphical elements in a user interface.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -32,6 +37,11 @@ The height of the image.
 ### width `Number`
 
 The width of the image.
+
+
+<div class="meta-api-description">
+Control and adjust the horizontal size or width dimension of images within diagram layouts to manage spacing, scale visuals, resize pictures, set image boundaries, fine-tune image proportions, constrain image width for responsive design, customize image fitting inside diagram shapes, configure visual element sizing, and optimize image placement for anchors and connection paths.
+</div>
 
 #### Example
 
@@ -53,6 +63,11 @@ The width of the image.
 
 The X position of the top-left corner of the element.
 
+
+<div class="meta-api-description">
+Adjust the horizontal position or X coordinate of an image or visual element within a diagram, canvas, or graphical layout by specifying its left-edge placement to control or reposition the element’s top-left corner along the X-axis, enabling precise alignment, movement, or configuration of the image’s left boundary within the diagram workspace or rendering area.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -73,6 +88,11 @@ The X position of the top-left corner of the element.
 
 The Y position of the top-left corner of the element.
 
+
+<div class="meta-api-description">
+Control or configure the vertical placement, top-to-bottom position, or Y coordinate of an image within a diagram or graphical layout, enabling precise movement, alignment, repositioning, or adjustment of the element’s top-left corner for custom layouts, element stacking, spatial arrangement, or dynamic interface designs that require setting vertical offsets, coordinates, or positions within diagrams and visual components.
+</div>
+
 #### Example
 
     <div id="diagram"></div>
@@ -92,6 +112,11 @@ The Y position of the top-left corner of the element.
 ### source `String`
 
 The source URL of the image.
+
+
+<div class="meta-api-description">
+Set, configure, or update the image URL or path that defines which picture an image shape in a diagram will display, including absolute or relative links, enabling dynamic binding, image source changes, and controlling the visual content loaded within diagram components for customized or programmatic image rendering.
+</div>
 
 #### Example
 
@@ -114,6 +139,11 @@ The source URL of the image.
 ### drawingElement `kendo.drawing.Image`
 
 The drawing element used to draw the image.
+
+
+<div class="meta-api-description">
+Access, modify, customize, or replace the underlying graphical object responsible for rendering an image within a diagram or canvas, enabling direct control over its visual appearance, transformations, animations, styles, event handling, and interactions with the drawing primitive that displays the image content as part of vector graphics or diagram rendering workflows.
+</div>
 
 #### Example
 
@@ -139,6 +169,11 @@ The drawing element used to draw the image.
 
 ### position
 Get or sets the element position.
+
+
+<div class="meta-api-description">
+Retrieve or modify the coordinates or placement of an image within a diagram to control its exact location, adjust alignment, update layout positioning, move or animate the image element programmatically, set or get its spatial properties, reposition images interactively or via code, access current image location data, and manage the image’s position dynamically for layout adjustments or animation effects in diagrams.
+</div>
 
 #### Example
 
@@ -174,6 +209,11 @@ The origin of the element.
 
 ### rotate
 Rotates the element with the specified parameters.
+
+
+<div class="meta-api-description">
+Rotate or turn a diagram image element programmatically by specifying the rotation angle, controlling the pivot point or center of rotation, and optionally animating the rotation transformation to change orientation dynamically. Configure image rotation to update or set the direction of the diagram element in response to code logic, user interactions, touch gestures, or animation sequences, enabling flexible adjustment of visual presentation, orientation alignment, and interactive transformations within graphical interfaces or diagramming tools.
+</div>
 
 #### Example
 
@@ -211,6 +251,11 @@ The center of rotation.
 
 ### visible
 Gets or sets the visibility of the current element.
+
+
+<div class="meta-api-description">
+Control, set, query, or toggle the visibility state of image elements within a diagram, enabling you to programmatically show or hide images, determine if they are currently visible with true or false responses, dynamically update rendering based on visibility changes, bind visibility to events or conditions, and manage display preferences in diagrams through visibility settings or boolean flags.
+</div>
 
 #### Example
 
