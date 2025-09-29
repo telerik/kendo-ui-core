@@ -30,14 +30,13 @@ The generic settings of the Telerik {{ site.framework }} MCP server are:
 * Type: `stdio` (standard input/output transport)
 * Command: `npx` (the MCP server works through an npm package)
 * Arguments: `-y`
-* Server name: `telerik-aspnetcorehtml-assistant` for HtmlHelper and `telerik-aspnetcorehtml-assistant` for TagHelper
+* Server name: `telerik-aspnetcorehtml-assistant` for HtmlHelper and `telerik-aspnetcoretag-assistant` for TagHelper
 
 You also need to add your [Telerik licence key](slug:installation_license_key_aspnetcore) as an `env` parameter in the `mcp.json` file. There are two options:
 
 * (recommended) Use a `TELERIK_LICENSE_PATH` argument and point to the location of your Telerik license file.
 * Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key](slug:installation_license_key_aspnetcore#license-key-updates) when necessary.
 
-> * Do not use underscores (`_`) in the MCP server name in the MCP `.json` file, due to potential compatibility issues with some MCP clients, such as Visual Studio.
 > * Some MCP clients expect the MCP servers to be listed under a `servers` JSON key, while others expect `mcpServers`.
 > * Some MCP clients expect an `mcp.json` file, while others like Visual Studio 2022 expect an `.mcp.json` file.
 
@@ -149,7 +148,7 @@ This enables you to call the respective MCP Server with the `#telerik-aspnetcore
 
 #### Global Configuration
 
-To add the Telerik MCP Servers [globally for VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-user-configuration), run the **MCP: Open User Configuration** command from the Command Palette and add the above content to the automatically created `mcp.json` file in your user folder. 
+To add the Telerik MCP Servers [globally for VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-user-configuration), run the **MCP: Open User Configuration** command from the Command Palette and add the above content to the automatically created `mcp.json` file in your user folder.
 
 Alternatively, manually create an `mcp.json` file with the above content in your user folder.
 
@@ -259,7 +258,7 @@ The following list describes how your prompts may look like:
 
 You can use the Telerik {{ site.framework }} MCP server with local large language models (LLM). For example, run your local model through [Ollama](https://ollama.com) and use a third-party package such as [MCP-LLM Bridge](https://github.com/patruff/ollama-mcp-bridge) to connect the model to the Telerik MCP server. This will allow you to use the Telerik AI Coding Assistant without a cloud-based AI model.
 
-## See Also 
+## See Also
 
 * [Telerik {{ site.framework }} AI Coding Assistant Intended Use](slug:overview_ai#intended-use)
 * [Telerik {{ site.framework }} AI Coding Assistant Recommendations](slug:overview_ai#recommendations)
