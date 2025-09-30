@@ -2116,7 +2116,7 @@ Defines the connections configuration.
 
 
 <div class="meta-api-description">
-Configure connection creation, styling, routing, editing, and serialization within a diagram or flowchart environment by setting defaults, behaviors, and interaction controls for links and connectors. Enable precise control over how connections are formed, styled, routed through the canvas, respond to selection and hover events, and bind data for customized appearance and user interaction. Set up initial parameters to manage link behaviors such as creation triggers, visual styles, editable points, serialization formats, and dynamic responses during user interaction to tailor diagram connections effectively.
+Configure connection creation, styling, routing, editing, and serialization within a diagram or flowchart environment by setting defaults, behaviors, and interaction controls for links and connectors. Enable precise control over how connections are formed, styled, routed through the canvas, respond to selection and hover events, and bind data for customized appearance and user interaction. Set up initial parameters to manage link behaviors such as creation triggers, visual styles, editable points, serialization formats, and dynamic responses during user interaction to tailor diagram connections effectively. Connect and link two or more shapes together.
 </div>
 
 #### Example - configuring the Diagram connections
@@ -11472,7 +11472,7 @@ Defines the shape options.
 
 
 <div class="meta-api-description">
-Define and customize shape templates for diagrams by specifying shape types, geometry, default visual styles like fill, stroke, size, connection points, and editable attributes to control how diagram nodes appear and connect; configure and set default shape properties, add custom shapes, adjust styling and connectivity options to ensure consistent node appearance and behavior within diagramming tools.
+Define and customize shapes for diagrams by specifying shape types, geometry, default visual styles like fill, stroke, size, connection points, and editable attributes to control how diagram nodes appear and connect; configure and set default shape properties, add custom shapes, adjust styling and connectivity options to ensure consistent node appearance and behavior within diagramming tools.
 </div>
 
 #### Example
@@ -14534,11 +14534,24 @@ Configure and define the visual style and semantic role of shapes within diagram
 
 ### shapes.visual `Function`
 
-A function returning a visual element to render for this shape. For more information, refer to [`visual`](/api/javascript/dataviz/ui/diagram#configuration-shapeDefaults.visual).
+A function returning a visual element to render for this shape.
+
+The following primitives can be used to construct a composite visual:
+
+* [Circle](/api/javascript/dataviz/diagram/circle)
+* [Rectangle](/api/javascript/dataviz/diagram/rectangle)
+* [Path](/api/javascript/dataviz/diagram/path)
+* [Line](/api/javascript/dataviz/diagram/line)
+* [Polyline](/api/javascript/dataviz/diagram/polyline)
+* [TextBlock](/api/javascript/dataviz/diagram/text_block)
+* [Image](/api/javascript/dataviz/diagram/image)
+* [Layout](/api/javascript/dataviz/diagram/layout)
+
+> The origin of the visual bounding box has to be `(0, 0)`. If you have a complex path which coordinates cannot be easily adjusted, then position the element as demonstrated in [this](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/adjust-path-origin) example.
 
 
 <div class="meta-api-description">
-Customize or override shape rendering by configuring a function that returns a visual element to control how diagram shapes are drawn at runtime, enabling custom drawing, HTML-based visuals, dynamic visual updates, or replacing default render logic; this supports advanced rendering customization, hooking into rendering lifecycles, implementing bespoke visuals, and adapting shape appearance through programmable functions or callbacks.
+Customize or override shape rendering and appearance by configuring a function that returns a visual element to control how diagram shapes are drawn at runtime, enabling custom drawing, HTML-based visuals, dynamic visual updates, or replacing default render logic; this supports advanced rendering customization, hooking into rendering lifecycles, implementing bespoke visuals, and adapting shape appearance through programmable functions or callbacks. Create and render custom shapes.
 </div>
 
 #### Example - applying a custom visual to a single shape

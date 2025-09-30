@@ -3205,7 +3205,7 @@ The category axis configuration options.
 
 
 <div class="meta-api-description">
-Set and customize the categorical axis of a chart by defining explicit category values or binding a category data field, adjusting label appearance including text, rotation, and positioning, managing tick marks and grid lines for clarity, configuring axis titles for context, controlling scale settings such as base units for date-based categories, and aligning interactive elements like crosshairs and tooltips for precise data reading and enhanced visualization.
+Set and customize the categorical axis of a chart by defining explicit category values or binding a category data field, adjusting label appearance including text, rotation, and positioning, managing tick marks and grid lines for clarity, configuring axis titles for context, controlling scale settings such as base units for date-based categories, and aligning interactive elements like crosshairs and tooltips for precise data reading and enhanced visualization. Split, organize and combine the data by categorizing it.
 </div>
 
 #### Example - configure the category axis as an object
@@ -21362,9 +21362,10 @@ A function that creates the drilldown series for a given point.
 The function should accept a single parameter, the point `drilldownField` value.
 The function should return a series configuration object or a `Promise` that resolves to one.
 
+**Important** - The function must return exactly one series object. Returning an array of series is not supported.
 
 <div class="meta-api-description">
-Configure dynamic drilldown functionality for charts by defining a factory function that generates or retrieves detailed series data when users interact with specific data points, enabling customized or asynchronous loading of series configurations based on the drilldown key or field associated with the selected point, supporting both synchronous returns of series options and promises for fetching or constructing series definitions on demand to enhance interactive data exploration and layered visualization.
+Configure dynamic drill down functionality for charts by defining a factory function that generates or retrieves detailed series data when users interact with specific data points, enabling customized or asynchronous loading of series configurations based on the drilldown key or field associated with the selected point, supporting both synchronous returns of series options and promises for fetching or constructing series definitions on demand to enhance interactive data exploration and layered visualization.
 </div>
 
 #### Example - use the chart series drilldownSeriesFactory function to implement dynamic drilldown
@@ -22549,7 +22550,7 @@ Configure the data binding for a chart series to specify the field that holds th
 
 ### series.q1Field `String` *(default: "q1")*
 
-The data item field which contains the series q1 value.
+The data item field which contains the series q1 value. This configuration is available only for `box plot` charts.
 
 
 <div class="meta-api-description">
@@ -22848,7 +22849,7 @@ Specify or configure the data field used to define median values within a chart 
 
 ### series.q3Field `String` *(default: "q3")*
 
-The data item field which contains the series q3 value.
+The data item field which contains the series q3 value. This configuration is available only for `box plot` charts.
 
 
 <div class="meta-api-description">
@@ -30608,20 +30609,664 @@ The supported values are:
 * [`verticalRangeArea`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
 * [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
+Different chart types expect data in specific formats:
+
+- **Simple values**: `[1, 2, 3, 4]` - Line, Area, Column, Bar
+- **Category-value objects**: `[{category: "A", value: 10}]` - Pie, Donut, Funnel, Pyramid
+- **Two-value arrays**: `[[x, y], [x, y]]` - Scatter, Range charts
+- **Three-value arrays**: `[[x, y, size]]` - Bubble charts
+- **Four-value arrays**: `[[open, high, low, close]]` - Candlestick, OHLC
+- **Five-value arrays**: `[[min, q1, median, q3, max]]` - Box Plot
+- **Target-current objects**: `[{current: 750, target: 1000}]` - Bullet charts
 
 <div class="meta-api-description">
 Configure and set the visualization style for chart data series by selecting or changing the graph type such as area, bar, bubble, line, pie, scatter, waterfall, box plot, candlestick, funnel, heatmap, trendlines (linear, exponential, logarithmic, power, polynomial, moving average), polar charts, radar charts, range charts, and other specialized chart formats; adjust rendering behaviors, axis layouts, interactive features, and visual representations to match different data storytelling needs, enabling control over data plotting methods, graph appearance, and series interactivity in various charting scenarios and user interfaces.
 </div>
 
-#### Example - set the chart series type
+#### Example - area chart
 
-    <div id="chart"></div>
+    <div id="area-chart"></div>
     <script>
-    $("#chart").kendoChart({
+    $("#area-chart").kendoChart({
+      series: [{
+        type: "area",
+        data: [1, 2, 3, 4, 5]
+      }],
+      categoryAxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May"]
+      }
+    });
+    </script>
+
+#### Example - bar chart
+
+    <div id="bar-chart"></div>
+    <script>
+    $("#bar-chart").kendoChart({
+      series: [{
+        type: "bar", 
+        data: [10, 20, 30, 40, 50]
+      }],
+      categoryAxis: {
+        categories: ["A", "B", "C", "D", "E"]
+      }
+    });
+    </script>
+
+#### Example - bubble chart
+
+    <div id="bubble-chart"></div>
+    <script>
+    $("#bubble-chart").kendoChart({
+      series: [{
+        type: "bubble",
+        data: [
+          [10, 20, 5], 
+          [15, 25, 8], 
+          [20, 30, 12]
+        ]
+      }],
+      xAxis: { title: { text: "X Values" } },
+      yAxis: { title: { text: "Y Values" } }
+    });
+    </script>
+
+#### Example - bullet chart
+
+    <div id="bullet-chart"></div>
+    <script>
+    $("#bullet-chart").kendoChart({
+      series: [{
+        type: "bullet",
+        data: [
+          { current: 750, target: 1000 },
+          { current: 650, target: 900 }
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Product A", "Product B"]
+      }
+    });
+    </script>
+
+#### Example - candlestick chart
+
+    <div id="candlestick-chart"></div>
+    <script>
+    $("#candlestick-chart").kendoChart({
+      series: [{
+        type: "candlestick",
+        data: [
+          [100, 110, 95, 105],
+          [105, 115, 100, 110],
+          [110, 120, 105, 115]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Day 1", "Day 2", "Day 3"]
+      }
+    });
+    </script>
+
+#### Example - column chart
+
+    <div id="column-chart"></div>
+    <script>
+    $("#column-chart").kendoChart({
+      series: [{
+        type: "column",
+        data: [5, 10, 15, 20, 25]
+      }],
+      categoryAxis: {
+        categories: ["Q1", "Q2", "Q3", "Q4", "Q5"]
+      }
+    });
+    </script>
+
+#### Example - donut chart
+
+    <div id="donut-chart"></div>
+    <script>
+    $("#donut-chart").kendoChart({
+      series: [{
+        type: "donut",
+        data: [
+          { category: "Desktop", value: 40 },
+          { category: "Mobile", value: 35 },
+          { category: "Tablet", value: 25 }
+        ]
+      }]
+    });
+    </script>
+
+#### Example - exponential trendline
+
+    <div id="exponential-trendline-chart"></div>
+    <script>
+    $("#exponential-trendline-chart").kendoChart({
+      series: [{
+        name: "series1",
+        type: "column",
+        data: [2, 4, 8, 16, 32]
+      }, {
+        type: "exponentialTrendline",
+        for: "series1"
+      }],
+      categoryAxis: {
+        categories: ["1", "2", "3", "4", "5"]
+      }
+    });
+    </script>
+
+#### Example - funnel chart
+
+    <div id="funnel-chart"></div>
+    <script>
+    $("#funnel-chart").kendoChart({
+      series: [{
+        type: "funnel",
+        data: [
+          { category: "Visitors", value: 1000 },
+          { category: "Leads", value: 500 },
+          { category: "Customers", value: 100 }
+        ]
+      }]
+    });
+    </script>
+
+#### Example - heatmap chart
+
+    <div id="heatmap-chart"></div>
+    <script>
+    $("#heatmap-chart").kendoChart({
+      series: [{
+        type: "heatmap",
+        data: [
+          ["A", "X", 10],
+          ["A", "Y", 20],
+          ["B", "X", 15],
+          ["B", "Y", 25]
+        ]
+      }],
+      xAxis: {
+        categories: ["A", "B"]
+      },
+      yAxis: {
+        categories: ["X", "Y"] 
+      }
+    });
+    </script>
+
+#### Example - horizontal waterfall chart
+
+    <div id="horizontal-waterfall-chart"></div>
+    <script>
+    $("#horizontal-waterfall-chart").kendoChart({
+      series: [{
+        type: "horizontalWaterfall",
+        data: [100, 50, -30, 20, -10]
+      }],
+      categoryAxis: {
+        categories: ["Start", "+Revenue", "-Costs", "+Profit", "-Loss"]
+      }
+    });
+    </script>
+
+#### Example - line chart
+
+    <div id="line-chart"></div>
+    <script>
+    $("#line-chart").kendoChart({
       series: [{
         type: "line",
-        data: [1, 2, 3]
+        data: [2, 4, 6, 8, 10]
+      }],
+      categoryAxis: {
+        categories: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
+      }
+    });
+    </script>
+
+#### Example - linear trendline
+
+    <div id="linear-trendline-chart"></div>
+    <script>
+    $("#linear-trendline-chart").kendoChart({
+      series: [{
+        name: "series1",
+        type: "column",
+        data: [10, 15, 12, 18, 20]
+      }, {
+        type: "linearTrendline",
+        for: "series1"
+      }],
+      categoryAxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May"]
+      }
+    });
+    </script>
+
+#### Example - logarithmic trendline
+
+    <div id="logarithmic-trendline-chart"></div>
+    <script>
+    $("#logarithmic-trendline-chart").kendoChart({
+      series: [{
+        name: "series1",
+        type: "scatter",
+        data: [[1, 0], [10, 1], [100, 2], [1000, 3]]
+      }, {
+        type: "logarithmicTrendline",
+        for: "series1"
+      }],
+      xAxis: { type: "log" },
+      yAxis: { type: "numeric" }
+    });
+    </script>
+
+#### Example - moving average trendline
+
+    <div id="moving-average-trendline-chart"></div>
+    <script>
+    $("#moving-average-trendline-chart").kendoChart({
+      series: [{
+        name: "series1",
+        type: "column",
+        data: [10, 12, 8, 15, 18, 14, 16, 20, 25, 22]
+      }, {
+        type: "movingAverageTrendline",
+        for: "series1",
+        period: 3
+      }],
+      categoryAxis: {
+        categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+      }
+    });
+    </script>
+
+#### Example - ohlc chart
+
+    <div id="ohlc-chart"></div>
+    <script>
+    $("#ohlc-chart").kendoChart({
+      series: [{
+        type: "ohlc",
+        data: [
+          [100, 110, 95, 105],
+          [105, 115, 100, 110],
+          [110, 120, 105, 115]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Period 1", "Period 2", "Period 3"]
+      }
+    });
+    </script>
+
+#### Example - pie chart
+
+    <div id="pie-chart"></div>
+    <script>
+    $("#pie-chart").kendoChart({
+      series: [{
+        type: "pie",
+        data: [
+          { category: "Chrome", value: 65 },
+          { category: "Firefox", value: 20 },
+          { category: "Safari", value: 15 }
+        ]
       }]
+    });
+    </script>
+
+#### Example - polar area chart
+
+    <div id="polar-area-chart"></div>
+    <script>
+    $("#polar-area-chart").kendoChart({
+      series: [{
+        type: "polarArea",
+        data: [
+          [10, 10],
+          [30, 20],
+          [50, 30],
+          [70, 20],
+          [90, 10]
+        ]
+      }]
+    });
+    </script>
+
+#### Example - polar line chart
+
+    <div id="polar-line-chart"></div>
+    <script>
+    $("#polar-line-chart").kendoChart({
+      series: [{
+        type: "polarLine",
+        data: [
+          [0, 0],
+          [15, 2],
+          [30, 4],
+          [45, 6],
+          [60, 8]
+        ]
+      }]
+    });
+    </script>
+
+#### Example - polar scatter chart
+
+    <div id="polar-scatter-chart"></div>
+    <script>
+    $("#polar-scatter-chart").kendoChart({
+      series: [{
+        type: "polarScatter",
+        data: [
+          [0, 10], 
+          [90, 20], 
+          [180, 15], 
+          [270, 25]
+        ]
+      }]
+    });
+    </script>
+
+#### Example - polynomial trendline
+
+    <div id="polynomial-trendline-chart"></div>
+    <script>
+    $("#polynomial-trendline-chart").kendoChart({
+      series: [{
+        name: "series1",
+        type: "column",
+        data: [1, 4, 9, 16, 25, 16, 9, 4, 1]
+      }, {
+        type: "polynomialTrendline",
+        for: "series1",
+        order: 2
+      }],
+      categoryAxis: {
+        categories: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      }
+    });
+    </script>
+
+#### Example - power trendline
+
+    <div id="power-trendline-chart"></div>
+    <script>
+    $("#power-trendline-chart").kendoChart({
+      series: [{
+        name: "series1",
+        type: "scatter",
+        data: [[1, 1], [2, 4], [3, 9], [4, 16]]
+      }, {
+        type: "powerTrendline",
+        for: "series1"
+      }],
+      xAxis: { title: { text: "X" } },
+      yAxis: { title: { text: "X²" } }
+    });
+    </script>
+
+#### Example - pyramid chart
+
+    <div id="pyramid-chart"></div>
+    <script>
+    $("#pyramid-chart").kendoChart({
+      series: [{
+        type: "pyramid",
+        data: [
+          { category: "Level 1", value: 100 },
+          { category: "Level 2", value: 75 },
+          { category: "Level 3", value: 50 }
+        ]
+      }]
+    });
+    </script>
+
+#### Example - radar area chart
+
+    <div id="radar-area-chart"></div>
+    <script>
+    $("#radar-area-chart").kendoChart({
+      series: [{
+        type: "radarArea",
+        data: [10, 15, 20, 25, 30]
+      }],
+      categoryAxis: {
+        categories: ["Speed", "Reliability", "Comfort", "Safety", "Efficiency"]
+      }
+    });
+    </script>
+
+#### Example - radar column chart
+
+    <div id="radar-column-chart"></div>
+    <script>
+    $("#radar-column-chart").kendoChart({
+      series: [{
+        type: "radarColumn",
+        data: [5, 10, 15, 20, 12]
+      }],
+      categoryAxis: {
+        categories: ["A", "B", "C", "D", "E"]
+      }
+    });
+    </script>
+
+#### Example - radar line chart
+
+    <div id="radar-line-chart"></div>
+    <script>
+    $("#radar-line-chart").kendoChart({
+      series: [{
+        type: "radarLine",
+        data: [8, 12, 16, 20, 14]
+      }],
+      categoryAxis: {
+        categories: ["Performance", "Quality", "Design", "Value", "Support"]
+      }
+    });
+    </script>
+
+#### Example - range area chart
+
+    <div id="range-area-chart"></div>
+    <script>
+    $("#range-area-chart").kendoChart({
+      series: [{
+        type: "rangeArea",
+        data: [
+          [5, 15], 
+          [10, 25], 
+          [15, 35], 
+          [20, 40]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr"]
+      }
+    });
+    </script>
+
+#### Example - range bar chart
+
+    <div id="range-bar-chart"></div>
+    <script>
+    $("#range-bar-chart").kendoChart({
+      series: [{
+        type: "rangeBar",
+        data: [
+          [10, 30], 
+          [15, 35], 
+          [20, 50], 
+          [25, 45]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Product A", "Product B", "Product C", "Product D"]
+      }
+    });
+    </script>
+
+#### Example - range column chart
+
+    <div id="range-column-chart"></div>
+    <script>
+    $("#range-column-chart").kendoChart({
+      series: [{
+        type: "rangeColumn",
+        data: [
+          [20, 40], 
+          [25, 50], 
+          [30, 60], 
+          [35, 65]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Q1", "Q2", "Q3", "Q4"]
+      }
+    });
+    </script>
+
+#### Example - scatter chart
+
+    <div id="scatter-chart"></div>
+    <script>
+    $("#scatter-chart").kendoChart({
+      series: [{
+        type: "scatter",
+        data: [
+          [10, 20], 
+          [15, 25], 
+          [20, 30], 
+          [25, 35]
+        ]
+      }],
+      xAxis: { title: { text: "X Axis" } },
+      yAxis: { title: { text: "Y Axis" } }
+    });
+    </script>
+
+#### Example - scatter line chart
+
+    <div id="scatterline-chart"></div>
+    <script>
+    $("#scatterline-chart").kendoChart({
+      series: [{
+        type: "scatterLine",
+        data: [
+          [1, 10], 
+          [2, 20], 
+          [3, 30], 
+          [4, 25]
+        ]
+      }],
+      xAxis: { title: { text: "X Values" } },
+      yAxis: { title: { text: "Y Values" } }
+    });
+    </script>
+
+#### Example - vertical area chart
+
+    <div id="vertical-area-chart"></div>
+    <script>
+    $("#vertical-area-chart").kendoChart({
+      series: [{
+        type: "verticalArea",
+        data: [10, 20, 30, 25, 15]
+      }],
+      categoryAxis: {
+        categories: ["A", "B", "C", "D", "E"]
+      }
+    });
+    </script>
+
+#### Example - vertical box plot chart
+
+    <div id="vertical-boxplot-chart"></div>
+    <script>
+    $("#vertical-boxplot-chart").kendoChart({
+      series: [{
+        type: "verticalBoxPlot",
+        data: [
+          [5, 15, 20, 25, 35],
+          [10, 18, 25, 30, 40]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Dataset 1", "Dataset 2"]
+      }
+    });
+    </script>
+
+#### Example - vertical bullet chart
+
+    <div id="vertical-bullet-chart"></div>
+    <script>
+    $("#vertical-bullet-chart").kendoChart({
+      series: [{
+        type: "verticalBullet",
+        data: [
+          { current: 750, target: 1000 },
+          { current: 650, target: 900 }
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Metric A", "Metric B"]
+      }
+    });
+    </script>
+
+#### Example - vertical line chart
+
+    <div id="vertical-line-chart"></div>
+    <script>
+    $("#vertical-line-chart").kendoChart({
+      series: [{
+        type: "verticalLine",
+        data: [5, 10, 15, 20, 25]
+      }],
+      categoryAxis: {
+        categories: ["Point 1", "Point 2", "Point 3", "Point 4", "Point 5"]
+      }
+    });
+    </script>
+
+#### Example - vertical range area chart
+
+    <div id="vertical-range-area-chart"></div>
+    <script>
+    $("#vertical-range-area-chart").kendoChart({
+      series: [{
+        type: "verticalRangeArea",
+        data: [
+          [10, 25], 
+          [15, 30], 
+          [20, 35], 
+          [25, 40]
+        ]
+      }],
+      categoryAxis: {
+        categories: ["Period 1", "Period 2", "Period 3", "Period 4"]
+      }
+    });
+    </script>
+
+#### Example - waterfall chart
+
+    <div id="waterfall-chart"></div>
+    <script>
+    $("#waterfall-chart").kendoChart({
+      series: [{
+        type: "waterfall",
+        data: [100, 50, -30, 20, -10]
+      }],
+      categoryAxis: {
+        categories: ["Start", "+Income", "-Expenses", "+Bonus", "-Tax"]
+      }
     });
     </script>
 
@@ -36062,11 +36707,43 @@ The default type of the series.
 
 The supported values are:
 
-* area
-* bar
-* bubble
-* bullet
-* candlestick
+* [`area`](/controls/charts/chart-types/area-charts)
+* [`bar`](/controls/charts/chart-types/bar-charts)
+* [`bubble`](/controls/charts/chart-types/bubble-charts)
+* [`bullet`](/controls/charts/chart-types/bullet-charts)
+* [`candlestick`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
+* [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`funnel`](/controls/charts/chart-types/funnel-charts)
+* [`pyramid`](/controls/charts/chart-types/pyramid-charts)
+* [`heatmap`](/controls/charts/chart-types/heatmap)
+* [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
+* [`line`](/controls/charts/chart-types/line-charts)
+* [`linearTrendline`](/controls/charts/elements/trendlines)
+* [`exponentialTrendline`](/controls/charts/elements/trendlines)
+* [`logarithmicTrendline`](/controls/charts/elements/trendlines)
+* [`powerTrendline`](/controls/charts/elements/trendlines)
+* [`polynomialTrendline`](/controls/charts/elements/trendlines)
+* [`movingAverageTrendline`](/controls/charts/elements/trendlines)
+* [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`pie`](/controls/charts/chart-types/pie-charts)
+* [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
+* [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
+* [`polarScatter`](https://demos.telerik.com/kendo-ui/polar-charts/polar-scatter)
+* [`radarArea`](https://demos.telerik.com/kendo-ui/radar-charts/radar-area)
+* [`radarColumn`](https://demos.telerik.com/kendo-ui/radar-charts/radar-column)
+* [`radarLine`](https://demos.telerik.com/kendo-ui/radar-charts/index)
+* [`rangeArea`](https://demos.telerik.com/kendo-ui/range-area-charts/index)
+* [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
+* [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
+* [`scatter`](/controls/charts/chart-types/scatter-charts)
+* [`scatterLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
+* [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
+* [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
+* [`verticalLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
+* [`verticalRangeArea`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 
 <div class="meta-api-description">
@@ -36087,29 +36764,6 @@ Configure the default visualization style for all chart series, controlling the 
         }
     });
     </script>
-* column
-* donut
-* funnel
-* pyramid
-* line
-* ohlc
-* pie
-* polarArea
-* polarLine
-* polarScatter
-* radarArea
-* radarColumn
-* radarLine
-* rangeArea
-* rangeBar
-* rangeColumn
-* scatter
-* scatterLine
-* waterfall
-* verticalArea
-* verticalBullet
-* verticalLine
-* verticalRangeArea
 
 ### seriesDefaults.tooltip `Object`
 
@@ -60389,23 +61043,6 @@ Manage and configure the runtime data object feeding the chart, enabling inspect
     });
     var chart = $("#chart").data("kendoChart");
     chart.dataSource.add({ value: 2 });
-    </script>
-
-#### Example - update a data item in the data source
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 }
-      ]
-    });
-    var grid = $("#grid").data("kendoGrid");
-    var data = grid.dataSource.at(0);
-    data.set("name", "John Doe");
     </script>
 
 #### Example - remove a data item from the data source

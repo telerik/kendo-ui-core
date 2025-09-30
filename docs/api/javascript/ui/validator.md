@@ -115,7 +115,18 @@ Customize, override, or configure validation feedback by defining, setting, or r
 
 ### rules `Object`
 
-Set of custom validation rules. Those rules will extend the [built-in ones](/framework/validator/overview#default-validation-rules).
+Set of custom validation rules. Those rules will extend the [built-in ones](/documentation/controls/validator/rules).
+
+Default rules:
+
+- **required** - The rule requires that the element has a value.
+- **pattern** - The rule constrains the value to match a specific regular expression.
+- **max** - The rule constrains the maximum numeric values that can be entered.
+- **min** - The rule constrains the minimum numeric values that can be entered.
+- **step** - When used in combination with the min and max attributes, constrains the granularity of the values that can be entered.
+- **url** - The rule constrains the value to a valid URL format.
+- **email** - The rule constrains the value to a valid email format.
+- **date** - The rule constrains the value to a valid date format. 
 
 
 <div class="meta-api-description">
@@ -124,36 +135,21 @@ Configure, define, or extend input, field, and form validation by setting custom
 
 #### Example
 
-    <form id="myform">
-        <input name="username" /> <br />
-        <input name="age" type="number" /> <br />
-        <button>Validate</button>
+    <form class="myValidator">
+      <p><input type="number" name="age" min="0" max="100" step="5"></p>
+      <p><input type="url" name="WebAddress" placeholder="http://example.com" ></p>
+      <button id="validate" class="k-button k-primary" type="button">Validate</button>
     </form>
 
     <script>
-        $("#myform").kendoValidator({
-            rules: {
-                minLength: function(input) {
-                    if (input.is("[name=username]")) {
-                        return input.val().length >= 3;
-                    }
-                    return true;
-                },
-                adultAge: function(input) {
-                    if (input.is("[name=age]")) {
-                        return parseInt(input.val()) >= 18;
-                    }
-                    return true;
-                }
-            },
-            messages: {
-                minLength: "Username must be at least 3 characters",
-                adultAge: "Age must be 18 or older"
-            }
-        });
+      $('#validate').click(function(){
+        var validator = $(".myValidator").kendoValidator({
+        }).data("kendoValidator");
+        validator.validate();
+      })
     </script>
 
-#### Defining custom rules
+#### Example - defining custom rules
 
     <form id="myform">
         <input name="username"/> <br />

@@ -4645,6 +4645,9 @@ Configure, enable, or set custom CSS stylesheets to inject and apply specific st
 A collection of tools that are used to interact with the Editor.
 Tools may be switched on by specifying their name.
 Custom tools and tools that require configuration are defined as objects.
+The tools property can be a matrix - array of arrays. When defined in this manner, the tools in each internal array are grouped together.
+
+> The matrix approach (grouping of tools) works only with tools that are of type button. It does not work for the 'Font and color' tools.
 
 The available editor commands are:
 
@@ -4738,8 +4741,6 @@ Configure and customize the interactive editing tools available within the edito
         ]
       });
     </script>
-
-> Grouping of tools works as expected only for tools of type "button".
 
 ### tools.name `String`
 

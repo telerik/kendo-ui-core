@@ -137,11 +137,10 @@ Manage, bind, and control the underlying data of a form's inputs, enabling readi
 
 ### items `Array`
 
-A JavaScript array that contains the Form's items configuration.
-
+A JavaScript array that contains the Form's items configuration. It enables you to specify things such as the type of input(editor) and validation rules for the input.
 
 <div class="meta-api-description">
-Configure the form layout and content by specifying an array of field definitions, input controls, editor settings, labels, and grouping details to control the arrangement and rendering of form elements, inputs, controls, or nested sections; set up form structure, input fields, UI components, and layout organization through an array of item configurations to customize how forms display and organize data entry controls and groups.
+Configure the form layout and content by specifying an array of field definitions, input controls, editor settings, labels, and grouping details to control the arrangement and rendering of form elements, inputs, controls, or nested sections; set up form structure, input fields, UI components, and layout organization through an array of item configurations to customize how forms display and organize data entry controls and groups. Control, customize, change and update the validation and input types of each element inside the form.
 </div>
 
 #### Example
@@ -242,7 +241,7 @@ Link form inputs to model attributes by assigning specific data fields and input
 
 ### items.editor `String|Function`
 
-Defines the editor widget type. Available options are:
+Defines the editor widget type. The valid options are as follows:
 
 * DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
@@ -250,9 +249,13 @@ Defines the editor widget type. Available options are:
 * Editor widget - "Editor"
 * Upload widget - "Upload"
 
+**Important** - The casing of the editor must be exactly as shown, `combobox` is not the same as `ComboBox`.
+
+For any other input, specify the editor as a function that returns the HTML of the element which you wish to render.
+
 
 <div class="meta-api-description">
-Configure and control which input or editing component is used to render form items by specifying types such as dropdown selectors, autocomplete fields, combo boxes, multiselect lists, date pickers including datetime and time inputs, various text inputs like text boxes, text areas, numeric fields, masked inputs, radio groups, checkboxes, switches, sliders, rating controls, color pickers with multiple styles, signature pads, OTP inputs, rich text editors, file uploaders, and hidden fields. Enable customization of item editors by setting or changing editor components for diverse input scenarios including single or multiple selections, date and time entry, rich text editing, numeric and masked input formats, color selection, binary toggles, rating scales, signature capture, and secure or hidden inputs, supporting a wide range of UI element configurations and user interaction patterns. Adjust and specify editor component types to match developer needs for form item interaction modes, input styles, component behavior, UI controls, and user input validation contexts across dropdown-based selectors, calendar and temporal input controls, text and numeric data entry fields, multi-option selectors, color and graphical input tools, secure input methods, and file upload mechanisms.
+Configure and control which input or editing component is used to render form items by specifying types such as dropdown selectors, autocomplete fields, combo boxes, multiselect lists, date pickers including datetime and time inputs, various text inputs like text boxes, text areas, numeric fields, masked inputs, radio groups, checkboxes, switches, sliders, rating controls, color pickers with multiple styles, signature pads, OTP inputs, rich text editors, file uploaders, and hidden fields. Enable customization of item editors by setting or changing editor components for diverse input scenarios including single or multiple selections, date and time entry, rich text editing, numeric and masked input formats, color selection, binary toggles, rating scales, signature capture, and secure or hidden inputs, supporting a wide range of UI element configurations and user interaction patterns. Adjust and specify items.editor component types to match developer needs for form item interaction modes, input styles, component behavior, UI controls, and user input validation contexts across dropdown-based selectors, calendar and temporal input controls, text and numeric data entry fields, multi-option selectors, color and graphical input tools, secure input methods, and file upload mechanisms.
 </div>
 
 #### Example - define editor as string
@@ -396,11 +399,11 @@ Set or customize the input widget or editor used for individual form fields by s
 
 ### items.validation `Object`
 
-Specified the validation rules for the field.
+Specifies the validation rules for the field. Refer to the [Validator Component](/documentation/controls/validator/rules) for additional information about the rules.
 
 
 <div class="meta-api-description">
-Set, configure, or customize field-level validation rules, constraints, and input checks within form items to control data accuracy, enforce required formats, enable conditional validations, apply custom error criteria, handle input validation logic, and ensure that user entries meet specified validation parameters or business rules during form initialization or dynamic updates.
+Set, configure, or customize field-level validation rules, constraints, and input checks within form items to control data accuracy, enforce required formats, enable conditional validations, apply custom error criteria, handle input validation logic, and ensure that user entries meet specified validation parameters or business rules during form initialization or dynamic updates. Configure validations such as min, max, email, password, url and more.
 </div>
 
 #### Example - use built-in validation rules
