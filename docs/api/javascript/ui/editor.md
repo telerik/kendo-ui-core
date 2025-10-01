@@ -251,7 +251,7 @@ Configure and customize the AI prompt tool's suggestion list in the editor side 
     </script>
 
 
-### ai.aiPrompt.commands `Array`
+### ai.commands `Array`
 
 Defines the shared fast commands for the side panel AI Prompt tool and the inline popup prompt tool. The commands are displayed in the side panel AI Prompt view and the context menu of the inline popup tool.
 

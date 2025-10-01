@@ -23627,6 +23627,39 @@ Adjusting the thickness, stroke width, or line weight for highlighted or hovered
     });
     </script>
 
+### series.highlight.markers
+
+The markers configuration of the series highlight.
+
+<div class="meta-api-description">
+Configure and customize data point markers within highlighted chart series by controlling marker appearance, styling, size, color, border properties, and visual emphasis when series are hovered, selected, or focused, enabling precise control over marker highlights in line charts, scatter plots, area charts, and other series types that display individual data points. Adjust marker highlight settings to enhance interactivity, improve data point visibility during user interaction, set marker emphasis styles, control point indicator appearance on highlight states, and customize how markers respond visually to selection or hover events for better chart readability and user experience.
+</div>
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          type: "roundedRect"
+        },
+        highlight: {
+          markers: {
+            border: {
+              color: 'blue',
+              width: 2
+            },
+            color: 'red'
+          }
+        },
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
 ### series.highlight.markers.border
 
 The border of the highlighted markers.

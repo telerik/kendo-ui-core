@@ -1407,12 +1407,6 @@ The key codes are especially helpful in keydown, keyup and keypress event handle
 
 A range of useful supported by the current browser capabilities and features.
 
-
-<div class="meta-api-description">
-Detect and verify browser capabilities including support for touch input, CSS transforms, SVG and Canvas rendering, CSS transitions, pointer events, and other key features to adapt application behavior dynamically based on environment. Enable feature detection and runtime checks for device and browser properties to conditionally configure UI components, handle compatibility issues, switch between input event models, and optimize performance by identifying available client-side functionalities. This supports use cases like enabling touch gestures, fallback rendering options, responsive design adjustments, and conditional event handling depending on browser and device support.
-</div>
-
-
 <div class="meta-api-description">
 Configure and control feature detection settings, capability queries, environment compatibility checks, and support options for various platforms and browsers. Enable or disable specific supports, customize adaptive behaviors based on detected features, manage fallback strategies for unsupported environments, and control how application functionality responds to differing runtime capabilities. Adjust detection mechanisms for device, browser, and API supports to ensure smooth operation and compatibility, improve responsiveness to platform differences, and fine-tune feature availability or polyfill application according to current support status.
 </div>
@@ -1434,31 +1428,165 @@ Configure and control feature detection settings, capability queries, environmen
     $("#support-info").html(html);
     </script>
 
-#### support
-
-##### touch `Boolean`
+### support.touch `Boolean`
 Return true if the browser supports touch events.
 
-##### pointers `Boolean`
+<div class="meta-api-description">
+Detect touch capabilities and enable touch-based interactions by checking whether the browser environment supports touch events, finger gestures, tap actions, swipe motions, and multi-touch functionality, allowing developers to configure touch-friendly interfaces, enable mobile optimizations, implement gesture handlers, control touch responsiveness, and adapt user experience for touchscreen devices including smartphones, tablets, and touch-enabled laptops or monitors.
+</div>
+
+#### Example
+
+    <script>
+    if (kendo.support.touch) {
+        console.log("Touch events are supported");
+        // Enable touch-specific features
+    } else {
+        console.log("Touch events are not supported");
+        // Use mouse events instead
+    }
+    </script>
+
+### support.pointers `Boolean`
 Return true if the browser supports pointer events (IE10 and Metro apps currently).
 
-##### scrollbar `Function`
+<div class="meta-api-description">
+Identify unified input support for pointer events that handle mouse, touch, pen, and stylus interactions through a single event model, enabling cross-device compatibility, consistent input handling, multi-modal interaction support, and simplified event management for applications that need to work seamlessly across desktop, mobile, and hybrid devices with various input methods including cursor movement, touch gestures, and pressure-sensitive drawing.
+</div>
+
+#### Example
+
+    <script>
+    if (kendo.support.pointers) {
+        console.log("Pointer events are supported");
+        // Use pointer events for unified input handling
+    } else {
+        console.log("Pointer events are not supported");
+        // Fall back to touch and mouse events
+    }
+    </script>
+
+### support.scrollbar `Function`
 Checks for the browser scrollbar width, returns scrollbar width in pixels, 0 if no scrollbars available (e.g. in mobile).
 
-##### hasHW3D `Boolean`
+<div class="meta-api-description">
+Measure and calculate scrollbar dimensions to adjust layout spacing, account for browser chrome variations, handle responsive design calculations, control content positioning, manage overflow containers, and ensure consistent visual alignment by determining the pixel width of native scrollbars which varies across operating systems, browsers, and device types, supporting precise layout adjustments and preventing content shifting or misalignment issues.
+</div>
+
+#### Example
+
+    <script>
+    var scrollbarWidth = kendo.support.scrollbar();
+    console.log("Scrollbar width: " + scrollbarWidth + "px");
+    
+    // Adjust layout based on scrollbar width
+    if (scrollbarWidth > 0) {
+        $("#content").css("margin-right", scrollbarWidth + "px");
+    }
+    </script>
+
+### support.hasHW3D `Boolean`
 Return true if the browser supports 3D transitions and transforms.
 
-##### hasNativeScrolling `Boolean`
+<div class="meta-api-description">
+Enable hardware-accelerated 3D transformations and CSS transitions by detecting browser support for three-dimensional rendering capabilities, GPU acceleration, perspective effects, rotation matrices, translation depth, and transform3d properties, allowing developers to implement smooth animations, optimize performance through hardware acceleration, create immersive visual effects, and enhance user interfaces with modern 3D graphics while providing fallbacks for unsupported environments.
+</div>
+
+#### Example
+
+    <script>
+    if (kendo.support.hasHW3D) {
+        console.log("3D transforms are supported");
+        // Use 3D transforms for smooth animations
+        $("#element").css("transform", "translateZ(0)");
+    } else {
+        console.log("3D transforms are not supported");
+        // Use 2D transforms instead
+    }
+    </script>
+
+### support.hasNativeScrolling `Boolean`
 Returns true if the browser supports overflow-scrolling CSS property (currently only iOS 5+).
 
-##### devicePixelRatio `Number` *(default: 1)*
+<div class="meta-api-description">
+Activate momentum scrolling and native touch scrolling behavior by detecting support for webkit-overflow-scrolling CSS property, enabling smooth kinetic scrolling effects, natural deceleration, bounce effects, and optimized touch interactions primarily on iOS devices, allowing developers to enhance mobile user experience with fluid scrolling containers, eliminate scroll lag, and provide native-feeling scroll behavior in web applications.
+</div>
+
+#### Example
+
+    <script>
+    if (kendo.support.hasNativeScrolling) {
+        console.log("Native scrolling is supported");
+        // Apply momentum scrolling
+        $("#scrollable").css("-webkit-overflow-scrolling", "touch");
+    } else {
+        console.log("Native scrolling is not supported");
+        // Use custom scrolling implementation
+    }
+    </script>
+
+### support.devicePixelRatio `Number` *(default: 1)*
 Returns the current device's Device to Pixel Ratio. Doesn't work in Windows Phone 8, where IE10 doesn't support it.
 
-##### placeholder `Boolean`
+<div class="meta-api-description">
+Optimize visual quality for high-density displays by accessing the device pixel ratio that indicates screen resolution scaling, retina display support, DPI settings, and pixel density multipliers, enabling adaptive image loading, crisp graphics rendering, responsive design adjustments, and enhanced visual fidelity on high-resolution screens including 4K monitors, retina displays, and mobile devices with varying pixel densities.
+</div>
+
+#### Example
+
+    <script>
+    var ratio = kendo.support.devicePixelRatio;
+    console.log("Device pixel ratio: " + ratio);
+    
+    // Adjust image quality for high DPI displays
+    if (ratio > 1) {
+        $("img").each(function() {
+            var src = $(this).attr("src");
+            $(this).attr("src", src.replace(".jpg", "@2x.jpg"));
+        });
+    }
+    </script>
+
+### support.placeholder `Boolean`
 Returns `true` if the browser supports input placeholders.
 
-##### zoomLevel `Number` *(default: 1)*
+<div class="meta-api-description">
+Implement input field hints and form guidance by detecting native placeholder attribute support, enabling watermark text, input suggestions, field descriptions, and user assistance within form controls, allowing developers to provide contextual help, improve form usability, display example values, and guide user input while ensuring compatibility across browsers with appropriate fallbacks for older environments.
+</div>
+
+#### Example
+
+    <script>
+    if (kendo.support.placeholder) {
+        console.log("Placeholder is supported");
+        // Use native placeholder
+        $("#input").attr("placeholder", "Enter your name");
+    } else {
+        console.log("Placeholder is not supported");
+        // Implement custom placeholder
+        $("#input").val("Enter your name").addClass("placeholder");
+    }
+    </script>
+
+### support.zoomLevel `Number` *(default: 1)*
 Returns the current zoom level on a mobile browser (returns 1 on desktop).
+
+<div class="meta-api-description">
+Adapt interface scaling and responsive behavior by detecting mobile browser zoom levels, viewport scaling, pinch-to-zoom states, and user magnification settings, enabling dynamic layout adjustments, touch target optimization, font size scaling, and user accessibility accommodations while maintaining usability across different zoom states and ensuring consistent user experience regardless of magnification preferences or visual accessibility needs.
+</div>
+
+#### Example
+
+    <script>
+    var zoomLevel = kendo.support.zoomLevel;
+    console.log("Current zoom level: " + zoomLevel);
+    
+    // Adjust UI elements based on zoom level
+    if (zoomLevel > 1) {
+        $("#toolbar").addClass("zoomed-in");
+        console.log("User has zoomed in");
+    }
+    </script>
 
 ### support.mobileOS `Object`
 Returns a number of properties that identify the current mobile browser. Parses navigator.userAgent to do it. False on desktop.
@@ -1498,17 +1626,69 @@ Identify the current mobile operating system and device type during runtime by a
     $("#mobile-info").html(html);
     </script>
 
-#### support.mobileOS
-##### device `String`
+### support.mobileOS.device `String`
 Returns the current mobile device identifier, can be "fire", "android", "iphone", "ipad", "meego", "webos", "blackberry", "playbook", "wp", "windows".
 
-##### tablet `String` *(default: false)*
+<div class="meta-api-description">
+Identify specific mobile device types and hardware platforms by detecting device identifiers for smartphones, tablets, e-readers, and mobile operating systems, enabling targeted optimizations, device-specific features, platform adaptations, and customized user experiences across iPhone, iPad, Android devices, Kindle Fire, BlackBerry, Windows Phone, and other mobile platforms with appropriate styling, functionality, and performance adjustments.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS) {
+        console.log("Device: " + mobileOS.device);
+        
+        if (mobileOS.device === "iphone" || mobileOS.device === "ipad") {
+            console.log("Running on iOS device");
+            // Apply iOS-specific styling
+        }
+    }
+    </script>
+
+### support.mobileOS.tablet `String` *(default: false)*
 Returns the current tablet identifier or false if the current device is not a tablet, can be "fire", "ipad", "playbook" or false.
 
-##### browser `String` *(default: "default")*
+<div class="meta-api-description">
+Differentiate tablet devices from smartphones and desktop computers by detecting large-screen mobile devices, enabling tablet-optimized layouts, touch-friendly interfaces, expanded navigation patterns, and device-appropriate user experiences for iPad, Android tablets, Kindle Fire, BlackBerry PlayBook, and other tablet form factors with considerations for screen size, orientation, and touch interaction patterns.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS && mobileOS.tablet) {
+        console.log("Running on tablet: " + mobileOS.tablet);
+        // Apply tablet-specific layout
+        $("body").addClass("tablet-layout");
+    } else {
+        console.log("Not running on a tablet");
+    }
+    </script>
+
+### support.mobileOS.browser `String` *(default: "default")*
 Returns the current browser identifier or "default" if the browser is the native one, can be "omini", "omobile", "firefox", "mobilesafari", "webkit", "ie", "default".
 
-##### name `String`
+<div class="meta-api-description">
+Detect mobile browser engines and applications to enable browser-specific optimizations, feature detection, rendering adjustments, and compatibility handling for Mobile Safari, Firefox Mobile, Opera Mini, Chrome Mobile, Internet Explorer Mobile, and native WebView components, allowing developers to implement browser-specific workarounds, performance optimizations, and feature polyfills based on mobile browsing environment.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS) {
+        console.log("Mobile browser: " + mobileOS.browser);
+        
+        if (mobileOS.browser === "mobilesafari") {
+            console.log("Running in Mobile Safari");
+            // Apply Safari-specific workarounds
+        }
+    }
+    </script>
+
+### support.mobileOS.name `String`
 Returns the current os name identifier, can be "ios", "android", "blackberry", "windows", "webos", "meego". For convenience a property with the os name is also initialized,
 for instance:
 
@@ -1516,13 +1696,70 @@ for instance:
         // Do something in Android
     }
 
-##### majorVersion `String`
+<div class="meta-api-description">
+Identify mobile operating systems and platform environments by detecting iOS, Android, BlackBerry, Windows Phone, WebOS, and MeeGo systems, enabling operating system specific features, platform optimizations, native integrations, API access patterns, and user interface adaptations while providing convenient boolean properties for quick platform checks and conditional logic based on mobile OS capabilities and limitations.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS) {
+        console.log("OS name: " + mobileOS.name);
+        
+        // Use convenience properties
+        if (mobileOS.ios) {
+            console.log("Running on iOS");
+        } else if (mobileOS.android) {
+            console.log("Running on Android");
+        }
+    }
+    </script>
+
+### support.mobileOS.majorVersion `String`
 The current OS major version, e.g. "5" in iOS 5.1.
 
-##### minorVersion `String`
+<div class="meta-api-description">
+Access primary operating system version numbers for feature detection, API availability checks, compatibility testing, and version-specific optimizations across mobile platforms, enabling developers to implement progressive enhancement, feature gates, deprecation handling, and platform-specific functionality based on major OS releases like iOS 7, Android 4, or Windows Phone 8 with appropriate fallbacks and version targeting.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS) {
+        console.log("Major version: " + mobileOS.majorVersion);
+        
+        if (mobileOS.ios && parseInt(mobileOS.majorVersion) >= 7) {
+            console.log("iOS 7 or higher detected");
+            // Use features available in iOS 7+
+        }
+    }
+    </script>
+
+### support.mobileOS.minorVersion `String`
 The current OS minor versions, e.g. "1.1" in iOS 5.1.1.
 
-##### flatVersion `Number`
+<div class="meta-api-description">
+Detect detailed operating system version information including point releases, security updates, and incremental improvements to enable precise compatibility checking, bug-specific workarounds, feature availability testing, and granular version targeting for mobile platforms with consideration for patch levels, security updates, and incremental feature additions across iOS, Android, and other mobile operating systems.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS) {
+        console.log("Minor version: " + mobileOS.minorVersion);
+        console.log("Full version: " + mobileOS.majorVersion + "." + mobileOS.minorVersion);
+        
+        // Check for specific version requirements
+        if (mobileOS.android && mobileOS.majorVersion === "4" && parseFloat(mobileOS.minorVersion) >= 4) {
+            console.log("Android 4.4+ detected");
+        }
+    }
+    </script>
+
+### support.mobileOS.flatVersion `Number`
 A convenience property to allow easier version checks, for instance:
 
     var os = kendo.support.mobileOS;
@@ -1530,11 +1767,69 @@ A convenience property to allow easier version checks, for instance:
         // Do something in iOS 4.x
     }
 
-##### appMode `Boolean`
+<div class="meta-api-description">
+Simplify version comparisons and range checking through numeric version representation that enables mathematical operations, greater-than-less-than comparisons, version ranges, and conditional logic for mobile operating system versions, allowing developers to implement feature detection, compatibility checks, and version-based functionality without complex string parsing or version number manipulation.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS) {
+        console.log("Flat version: " + mobileOS.flatVersion);
+        
+        // Easy version range checking
+        if (mobileOS.ios && mobileOS.flatVersion >= 800) {
+            console.log("iOS 8.0 or higher");
+            // Enable modern iOS features
+        } else if (mobileOS.android && mobileOS.flatVersion >= 440) {
+            console.log("Android 4.4 or higher");
+            // Enable modern Android features
+        }
+    }
+    </script>
+
+### support.mobileOS.appMode `Boolean`
 Returns true if running in application mode - pinned to desktop in iOS or running in PhoneGap/WebView.
 
-##### cordova `Boolean`
+<div class="meta-api-description">
+Detect standalone web application mode, home screen installations, and native app containers by identifying when applications run outside browser chrome, in fullscreen mode, through PhoneGap wrappers, WebView components, or as progressive web apps, enabling native-like experiences, hiding browser UI elements, optimizing for app-style navigation, and providing seamless integration with device capabilities.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS && mobileOS.appMode) {
+        console.log("Running in app mode");
+        // Hide browser chrome, adjust layout for full screen
+        $("body").addClass("app-mode");
+    } else {
+        console.log("Running in browser");
+    }
+    </script>
+
+### support.mobileOS.cordova `Boolean`
 Returns true if running in a Cordova/PhoneGap/Telerik AppBuilder application.
+
+<div class="meta-api-description">
+Identify hybrid mobile application environments and cross-platform development frameworks by detecting Cordova, PhoneGap, or Telerik AppBuilder containers, enabling access to native device APIs, camera functionality, file systems, contacts, geolocation, and platform-specific features while maintaining web-based development approaches and ensuring proper initialization of hybrid app capabilities and device event handling.
+</div>
+
+#### Example
+
+    <script>
+    var mobileOS = kendo.support.mobileOS;
+    if (mobileOS && mobileOS.cordova) {
+        console.log("Running in Cordova/PhoneGap app");
+        // Enable device APIs, adjust for hybrid app environment
+        document.addEventListener("deviceready", function() {
+            console.log("Cordova device ready");
+        });
+    } else {
+        console.log("Not running in Cordova");
+    }
+    </script>
 
 ### support.browser `Object`
 Convenience replacement for the now deprecated jQuery.browser. It returns an object with the browser identifier initialized as a boolean property and a version.
@@ -1581,9 +1876,28 @@ Detect or identify the user’s browser type, vendor, and exact version number t
         // IE11 will return this one: { "msie": true, "version": 11 }
     </script>
 
-#### support.browser
-##### version `Number`
+### support.browser.version `Number`
 The current browser major version, e.g. "7" in Internet Explorer 7.
+
+<div class="meta-api-description">
+Access browser version numbers for compatibility checking, feature detection, and progressive enhancement by identifying major release versions across Internet Explorer, Chrome, Firefox, Safari, Edge, and other browsers, enabling version-specific optimizations, polyfill applications, deprecation warnings, and targeted functionality based on browser capabilities, API support, and known limitations or improvements in specific browser releases.
+</div>
+
+#### Example
+
+    <script>
+    var browser = kendo.support.browser;
+    console.log("Browser version: " + browser.version);
+    
+    // Check for specific browser versions
+    if (browser.msie && browser.version < 9) {
+        console.log("Old Internet Explorer detected");
+        // Show upgrade message or apply polyfills
+    } else if (browser.chrome && browser.version >= 50) {
+        console.log("Modern Chrome detected");
+        // Use latest features
+    }
+    </script>
 
 ### version `String`
 
