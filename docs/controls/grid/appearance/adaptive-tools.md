@@ -439,7 +439,6 @@ The following configuration options provide additional control over the appearan
 
 ## See Also
 
-* [Adaptive Tools jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/adaptive-tools)
-* [Adaptive Tools Editing jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/adaptive-tools-editing)
+* [Adaptive Mode jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/adaptive-mode)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

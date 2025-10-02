@@ -63,7 +63,7 @@ The following table lists the available symbologies and their specifications sup
            <td>optional (Mod. 43)</td>
         </tr>
         <tr>
-           <td><a href="http://www.barcodeisland.com/code93.phtml">Code 93</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_93">Code 93</a></td>
            <td>[0-9];[A-Z];[SPACE . + - / % $]</td>
            <td>variable</td>
            <td>2 check digits</td>
@@ -105,7 +105,7 @@ The following table lists the available symbologies and their specifications sup
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://www.barcodeisland.com/code11.phtml">Code 11</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_11">Code 11</a></td>
            <td>[0-9]; [-]</td>
            <td>variable</td>
            <td>1 or 2 based on length</td>

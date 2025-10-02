@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I include custom [FontAwesome](http://fortawesome.github.io/Font-Awesome/) icons in the Kendo UI for jQuery Menu?
+How can I include custom [FontAwesome](https://github.com/FortAwesome/Font-Awesome) icons in the Kendo UI for jQuery Menu?
 
 ## Solution
 

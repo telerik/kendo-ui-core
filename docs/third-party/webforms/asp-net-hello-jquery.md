@@ -273,7 +273,6 @@ Run the application. Fill in a **First name** and **Last name** value. Click the
 
 To get a further and exhaustive understanding of [jQuery](https://jquery.com/), it is highly recommended that you go through the [30 Days To Learn jQuery](http://tutsplus.com/course/30-days-to-learn-jquery/) course on [TutsPlus](http://tutsplus.com/). After finishing this set of learning screencasts for [jQuery](https://jquery.com/), you are not only going to feel extremely comfortable with the library, but also have vastly accelerated your overall skills in HTML5 development.
 
-The code from this module can be downloaded from the [GitHub repository course](https://github.com/telerik/html5-dev-for-aspnet-devs).
 
 ## See Also
 

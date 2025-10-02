@@ -69,7 +69,7 @@ The ListView encapsulates operations for adding, removing, selecting, and editin
         });
     });
 
-The template you define for the inline editing of items may include other Kendo UI components. For more information, refer to [demo on defining a series of components for editing an item](https://demos.telerik.com/kendo-ui/web/listview/editing.html).
+The template you define for the inline editing of items may include other Kendo UI components. For more information, refer to [demo on defining a series of components for editing an item](https://demos.telerik.com/kendo-ui/listview/editing).
 
 ![Kendo UI for jQuery ListView Item editing](../../images/listview-item-editing.png)
 

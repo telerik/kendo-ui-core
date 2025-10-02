@@ -38,7 +38,6 @@ To install the Telerik {{ site.framework }} Copilot extension:
 ## Usage
 
 > When switching between tasks and files, start a new session in a new chat window to avoid polluting the context with irrelevant or outdated information.
-
 To use the Telerik {{ site.framework }} Copilot extension:
 
 1. Open the GitHub Copilot chat window in your [Copilot-enabled app](https://docs.github.com/en/copilot/building-copilot-extensions/about-building-copilot-extensions#supported-clients-and-ides).
@@ -69,7 +68,6 @@ The following list describes how your prompts may look like:
   * &quot;`@telerikaspnetcoretag` Show me sample code for a {{ site.product }} Grid with virtual scrolling for the rows and columns.&quot;
 
 >tip Visit the [Telerik {{ site.framework }} Prompt Library](slug:ai_prompt_library) for more sample prompts.
-
 ## Usage Limits
 
 @[template](/_contentTemplates/core/ai-coding-assistant.md#number-of-requests)

@@ -1,21 +1,22 @@
 ---
 title: Overview
-page_title: Telerik ASP.NET Core AI Tooling Overview
+page_title: Telerik {{ site.framework }} AI Tooling Overview
 description: "Learn about the AI-powered developer tools that integrate with your IDE or code editor for greater productivity and enhanced developer experience."
 slug: overview_ai
 position: 1
 ---
 
+{% if site.core %}
+    {% assign telerik_product_url = "aspnet-core-ui" %}
+{% else %}
+    {% assign telerik_product_url = "aspnet-mvc" %}
+{% endif %}
+
 # Telerik {{ site.framework }} AI Coding Assistant Overview
 
-The Telerik {{ site.framework }} AI Coding Assistant improves your developer experience and increases your productivity when implementing {{ site.framework }} apps that include {{ site.product }}. The coding assistant is an AI code generator that provides proprietary context to AI models in order to produce higher quality code samples with the [{{ site.product }} components](https://www.telerik.com/aspnet-core-ui) and API.
+The Telerik {{ site.framework }} AI Coding Assistant improves your developer experience and increases your productivity when implementing {{ site.framework }} apps that include {{ site.product }}. The coding assistant is an AI code generator that provides proprietary context to AI models in order to produce higher quality code samples with the [{{ site.product }} components](https://www.telerik.com/{{ telerik_product_url }}) and API.
 
-The AI Coding Assistant is integrated in:
-
-* [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)&mdash;A powerful tool for running complex or multi-step prompts that integrates with any MCP-enabled client.
-* [Telerik {{ site.framework }} GitHub Copilot Extension](slug:ai_copilot_extension)&mdash;A Copilot add-on for fast initial code generation, basic component configuration, and detailed explanations within Copilot-enabled IDEs.
-
-You can combine both integrations for even more powerful results.
+The AI Coding Assistant is integrated in [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)&mdash;A powerful tool for running complex or multi-step prompts that integrates with any MCP-enabled client.
 
 > We recommend the [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server) for:
 > * **Agent** mode when using Visual Studio
@@ -26,7 +27,7 @@ You can combine both integrations for even more powerful results.
 To use the Telerik {{ site.framework }} AI Coding Assistant, you need:
 
 * A [Telerik user account](https://www.telerik.com/account/).
-* An active [DevCraft or {{ site.product }} license](https://www.telerik.com/purchase/aspnet-core-ui) or a [{{ site.product }} trial](https://www.telerik.com/aspnet-core-ui).
+* An active [DevCraft or {{ site.product }} license](https://www.telerik.com/purchase/{{ telerik_product_url }}) or a [{{ site.product }} trial](https://www.telerik.com/{{ telerik_product_url }}).
 * An [{{ site.framework }} application that includes {{ site.product }}](slug:overview_aspnetmvc6_aspnetmvc).
 
 ## Intended Use
@@ -73,7 +74,8 @@ Access to the Telerik {{ site.framework }} AI Coding Assistant depends on your [
     * Reactivating the same trial for a new release does not grant additional requests.
     * Designed for evaluating the feature before purchasing.
 
-> All Telerik AI tools share a single request limit for your Telerik account. For example, the [Telerik {{ site.framework }} Copilot extension](slug:ai_copilot_extension) and the [Telerik {{ site.framework }} MCP server](slug:ai_mcp_server) both take up from the same usage quota.
+> All Telerik AI tools share a single request limit for your Telerik account. For example, requests made through the Telerik {{ site.framework }} MCP server are counted toward the same overall usage quota.
+
 > When using the Telerik {{ site.framework }} MCP server, one prompt may trigger several requests, depending on the prompt complexity.
 
 ## Privacy
@@ -96,5 +98,4 @@ Read the full guide in the dedicated [DPL AI Coding Assistant article](https://d
 ## Next Steps
 
 * Add the [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server) to an MCP-enabled client.
-* Install the [Telerik {{ site.framework }} GitHub Copilot Extension](slug:ai_copilot_extension).
 * Explore the [Telerik {{ site.framework }} Prompt Library](slug:ai_prompt_library).

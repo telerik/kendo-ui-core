@@ -15,7 +15,7 @@ To enable the adaptive mode, set the `adaptiveMode` option to `true`:
 
 <demo metaUrl="pager/adaptive-mode/" height="600"></demo>
 
-For details on related breaking changes introduced in this release, refer to the [Breaking Changes in 2025 Releases article](({% slug breakingchanges2025_kendoui %})).
+For details on related breaking changes introduced in this release, refer to the [Breaking Changes in 2025 Releases article]({% slug breakingchanges2025_kendoui %}).
 
 ## Responsive vs. Adaptive Mode
 

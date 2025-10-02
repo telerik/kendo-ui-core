@@ -82,5 +82,5 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 ## See Also
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
-* [Appearance Demo of the DateRangePicker](https://demos.telerik.com/kendo-ui/daternagepicker/appearance)
+* [Appearance Demo of the DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/appearance)
 * [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)

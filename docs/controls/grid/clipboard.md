@@ -126,7 +126,7 @@ The following example demonstrates how to subscribe to the `paste` event.
 ## See Also
 
 * [Copy to Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
-* [Paste from Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/paste-to-excel)
+* [Paste from Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/paste-from-excel)
 * [Select and Export to Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/selection-export)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

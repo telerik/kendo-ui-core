@@ -62494,6 +62494,80 @@ The configuration object for the series to drill down into.
     chart.bind("drilldown", onDrilldown);
     </script>
 
+#### Example - complete example of the "drilldown" event
+
+    <nav id="breadcrumb"></nav>
+    <div id="chart"></div>
+    <script>
+      var vehiclesByModel = {
+        Tesla: [
+          {
+            model: "Model 3",
+            count: 225350,
+          },
+          {
+            model: "Model Y",
+            count: 40159,
+          },
+        ],
+        VW: [
+          {
+            model: "ID.3",
+            count: 60274,
+          },
+          {
+            model: "ID.4",
+            count: 20302,
+          },
+        ],
+      };
+
+      var vehiclesByMake = [
+        {
+          company: "Tesla",
+          count: 314159,
+        },
+        {
+          company: "VW",
+          count: 112645,
+        },
+      ];
+
+      function drilldownByModel(make) {
+        const data = vehiclesByModel[make];
+        if (data) {
+          return {
+            type: "column",
+            name: make + " Sales by Model",
+            data,
+            field: "count",
+            categoryField: "model",
+          };
+        }
+      }
+
+      $("#chart").kendoChart({
+        drilldown: function (e) {
+          console.log(e);
+        },
+        series: [
+          {
+            type: "column",
+            name: "Battery EVs registered in 2022",
+            data: vehiclesByMake,
+            field: "count",
+            categoryField: "company",
+            drilldownField: "company",
+            drilldownSeriesFactory: drilldownByModel,
+          },
+        ],
+      });
+
+      $("#breadcrumb").kendoChartBreadcrumb({
+        chart: "#chart",
+      });
+    </script>
+
 ### drilldownLevelChange
 
 Fires when the drill-down level has changed.

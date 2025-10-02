@@ -120,5 +120,5 @@ The option affects the `span` element for the Switch handle:
 ## See Also
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
-* [Styling Demo of the Switch](https://demos.telerik.com/kendo-ui/switch/styling)
+* [Appearance Demo of the Switch](https://demos.telerik.com/kendo-ui/switch/appearance)
 * [JavaScript API Reference of the Switch](/api/javascript/ui/switch)

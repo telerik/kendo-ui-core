@@ -132,5 +132,5 @@ The changes are applied to the `span.k-multiselect` wrapping element and to the 
 ## See Also
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
-* [Styling Demo of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/styling)
+* [Appearance Demo of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/appearance)
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)

@@ -44,6 +44,5 @@ Raster maps are divided into images (tiles) for serving over the web. Tiles are 
 
 ## See Also
 
-* [Bing Tile Layer in the Map (Demo)](https://demos.telerik.com/kendo-ui/map/bing)
 * [Bubble Tile Layer in the Map (Demo)](https://demos.telerik.com/kendo-ui/map/bubble-layer)
 * [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

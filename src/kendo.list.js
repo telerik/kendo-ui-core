@@ -173,7 +173,8 @@ export const __meta__ = {
             size: "medium",
             messages: {
                 "noData": "No data found.",
-                "clear": "clear"
+                "clear": "clear",
+                "filterInputPlaceholder": "Filter"
             },
             adaptiveMode: "none"
         },
@@ -308,7 +309,7 @@ export const __meta__ = {
             if (this._isFilterEnabled()) {
                 this.filterInput = $('<input class="k-input-inner" type="text" />')
                     .attr({
-                        placeholder: this.element.attr("placeholder") || "Filter",
+                        placeholder: this.element.attr("placeholder") || this.options.messages.filterInputPlaceholder,
                         title: this.options.filterTitle || this.element.attr("title"),
                         role: "searchbox",
                         "aria-label": this.options.filterTitle,

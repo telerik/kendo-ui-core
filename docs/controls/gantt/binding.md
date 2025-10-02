@@ -54,7 +54,7 @@ The following example demonstrates how to initialize a Gantt with two tasks and 
 
 ## Binding to Remote Data
 
-You can bind the Gantt to a remote service which will return, create, update, or delete Gantt tasks and dependencies. The [online Kendo UI Gantt demos](https://demos.telerik.com/kendo-ui/web/gantt/) use a demo remote service which returns sample Gantt tasks and dependencies. To support cross-domain requests, the remote service uses [JSONP](https://en.wikipedia.org/wiki/JSONP).
+You can bind the Gantt to a remote service which will return, create, update, or delete Gantt tasks and dependencies. The [online Kendo UI Gantt demos](https://demos.telerik.com/kendo-ui/gantt/index) use a demo remote service which returns sample Gantt tasks and dependencies. To support cross-domain requests, the remote service uses [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
 > If the service you use resides in the same domain as your website, use JSON instead. For more information on cross-domain requests, refer to [this article]({% slug corsdatafetching_anotherdomain_datasourcecomponent %}).
 

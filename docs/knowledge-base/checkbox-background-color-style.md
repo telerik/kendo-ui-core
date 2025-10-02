@@ -134,4 +134,4 @@ The following example demonstrates how to render a list of CheckBoxes with a new
 
 ## See Also
 
-* [Demo on Styling CheckBoxes](https://demos.telerik.com/kendo-ui/styling/checkboxes)
+* [Demo on CheckBoxes Appearance](https://demos.telerik.com/kendo-ui/checkbox/appearance)

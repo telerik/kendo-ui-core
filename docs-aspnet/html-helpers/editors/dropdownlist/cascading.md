@@ -23,7 +23,7 @@ The following actions occur during the initialization of the child DropDownList.
 * Searches for the parent DropDownList object. If the result is `null`, the cascading functionality is omitted.
 * Listens for changes of the parent value. If the parent does not have a value, the child DropDownList is disabled. If the parent DropDownList has a value, the child is enabled and the data is filtered. 
 
-The following example demonstrates the parameters of the request.
+The following example demonstrates the parameters of the request. By default, the DropDownList will initiate a [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET) request method.
 
         filter[logic]: and
         filter[filters][0][field]: parentID
@@ -120,7 +120,7 @@ The following example demonstrates how to configure the cascading functionality 
         using (var northwind = GetContext())
         {
             return Json(northwind.Categories
-                .Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }).ToList());
+                .Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }).ToList(){% if site.mvc %}, JsonRequestBehavior.AllowGet  {% endif %});
         }
     }
 
@@ -135,7 +135,104 @@ The following example demonstrates how to configure the cascading functionality 
                 products = products.Where(p => p.CategoryID == categories);
             }
 
-            return Json(products.Select(p => new { ProductID = p.ProductID, ProductName = p.ProductName }).ToList());
+            return Json(products.Select(p => new { ProductID = p.ProductID, ProductName = p.ProductName }).ToList(){% if site.mvc %}, JsonRequestBehavior.AllowGet  {% endif %});
+        }
+    }
+```
+
+> As of the 2025 Q4 Release, the DropDownList will send an additional `cascadeFrom` parameter within the request's payload. This is applicable in scenarios where the [`Data()`](/api/kendo.mvc.ui.fluent/crudoperationbuilder#datasystemstring) configuration method is not explicitly invoked.
+
+The following example demonstrates how to configure the cascading functionality for the {{ site.product_short }} DropDownList, by using the `cascadeFrom` request parameter:
+
+```HtmlHelper
+    <h4>Categories:</h4>
+    @(Html.Kendo().DropDownList()
+              .Name("categories")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select category...")
+              .DataTextField("CategoryName")
+              .DataValueField("CategoryId")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("Cascading_GetCategories", "DropDownList");
+                  });
+              })
+    )
+
+    <h4 style="margin-top: 2em;">Products:</h4>
+    @(Html.Kendo().DropDownList()
+              .Name("products")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select product...")
+              .DataTextField("ProductName")
+              .DataValueField("ProductID")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("Cascading_GetProducts", "DropDownList");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("categories")
+    )
+```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="categories"
+                    datatextfield="ContactName"
+                    datavaluefield="CustomerID"
+                    option-label="Select category...">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Cascading_GetCategories", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+
+<kendo-dropdownlist name="products"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    option-label="Select product..."
+                    enable="false"
+                    auto-bind="false"
+                    cascade-from="categories">
+
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("Cascading_GetProducts", "DropDownList")"/>
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
+
+```Controller
+    public JsonResult Cascading_GetCategories()
+    {
+        using (var northwind = GetContext())
+        {
+            return Json(northwind.Categories
+                .Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }).ToList() {% if site.mvc %}, JsonRequestBehavior.AllowGet  {% endif %});
+        }
+    }
+
+    public JsonResult Cascading_GetProducts(int? cascadeFrom)
+    {
+        using (var northwind = GetContext())
+        {
+            var products = northwind.Products.AsQueryable();
+
+            if (cascadeFrom != null)
+            {
+                products = products.Where(p => p.CategoryID == cascadeFrom);
+            }
+
+            return Json(products.Select(p => new { ProductID = p.ProductID, ProductName = p.ProductName }).ToList() {% if site.mvc %}, JsonRequestBehavior.AllowGet  {% endif %});
         }
     }
 ```

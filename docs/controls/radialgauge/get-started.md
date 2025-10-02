@@ -228,7 +228,7 @@ Here, you will specify the [`colors of the scale ranges`](/api/javascript/datavi
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the RadialGauge](https://demos.telerik.com/kendo-ui/radialgauge/index)
+* [Demo Page for the RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/index)
 
 ## See Also 
 

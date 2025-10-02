@@ -156,8 +156,9 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
     </kendo-grid>
 ```
 
->tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} AI Coding Assistant](slug://overview_ai) and the available [Grid-related prompts](slug:ai_prompt_library#grid).
 {% endif %}
+
+>tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} AI Coding Assistant](slug://overview_ai) and the available [Grid-related prompts](slug:ai_prompt_library#grid).
 
 ## Functionality and Features
 

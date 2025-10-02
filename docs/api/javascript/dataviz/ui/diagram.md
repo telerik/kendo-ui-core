@@ -856,7 +856,8 @@ Control and customize the outline color of connector end caps, arrowheads, or li
         connectionDefaults: {
             endCap: {
                 stroke: {
-                    color: "purple"
+                    color: "purple",
+                    width: 2
                 },
                 type: "ArrowEnd"
             }
@@ -898,7 +899,9 @@ Set or customize the dash pattern style of connection endpoint strokes with opti
         connectionDefaults: {
             endCap: {
                 stroke: {
-                    dashType: "dash"
+                    dashType: "dash",
+                    color: "red",
+                    width: 2
                 },
                 type: "ArrowEnd"
             }
@@ -930,7 +933,8 @@ Adjust the thickness, weight, or stroke width of the outline for connection end 
         connectionDefaults: {
             endCap: {
                 stroke: {
-                    width: 3
+                    width: 3,
+                    color: "red"
                 },
                 type: "ArrowEnd"
             }
@@ -979,6 +983,156 @@ The supported values are:
 * "none": no cap
 * "ArrowEnd": a filled arrow
 * "FilledCircle": a filled circle
+
+### connectionDefaults.endCap.path `String`
+
+The SVG path data for the arrow marker. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Define custom arrow shapes by specifying SVG path data for connection end caps, enabling the creation of specialized arrowheads or markers beyond the built-in types. Configure custom vector graphics for connection terminators using standard SVG path notation to create unique visual indicators, directional markers, or stylized connection endpoints that match specific design requirements or visual themes in diagrams.
+</div>
+
+#### Example - using custom SVG path for end cap
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          endCap: {
+            type: "ArrowEnd",
+            path: "M 0,0 L 10,5 L 0,10 z"
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.endCap.anchor `Object`
+
+The anchor point of the arrow marker. This is the point where the marker will be positioned relative to the line. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Control the positioning and alignment of custom arrow markers by defining the anchor point coordinates that determine how the marker aligns with the connection line endpoint. Set precise registration points for custom SVG path markers to ensure proper visual alignment and positioning of arrowheads or custom terminators relative to the connection line, enabling accurate marker placement and visual consistency.
+</div>
+
+#### Example - setting custom anchor point for end cap
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          endCap: {
+            type: "ArrowEnd",
+            anchor: { x: 5, y: 5 }
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.endCap.anchor.x `Number`
+
+The x-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the horizontal position of the arrow marker anchor point to control how custom end cap markers align with connection lines. Define the x-coordinate value that determines the horizontal offset for marker positioning, enabling precise control over marker alignment and visual registration with connection endpoints in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          endCap: {
+            type: "ArrowEnd",
+            anchor: { x: 8, y: 5 }
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.endCap.anchor.y `Number`
+
+The y-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the vertical position of the arrow marker anchor point to control how custom end cap markers align with connection lines. Define the y-coordinate value that determines the vertical offset for marker positioning, enabling precise control over marker alignment and visual registration with connection endpoints in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          endCap: {
+            type: "ArrowEnd",
+            anchor: { x: 5, y: 8 }
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.endCap.radius `Number` *(default: 4)*
+
+The radius of the filled circle marker. Applies when the type is "FilledCircle".
+
+
+<div class="meta-api-description">
+Configure the size of circular end cap markers by setting the radius value for filled circle terminators on diagram connections. Control the diameter and visual prominence of circular connection endpoints, enabling customization of circle marker size to match design requirements, improve visibility, or ensure consistent styling across diagram connections when using circular end caps.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          endCap: {
+            type: "FilledCircle",
+            radius: 8
+          }
+        }
+      });
+    </script>
 
 ### connectionDefaults.fromConnector `String` *(default: "Auto")*
 
@@ -1076,7 +1230,7 @@ Control and customize the visual appearance of links or connections when a point
         ],
         connectionDefaults: {
           hover: {
-            stroke: {color: "red"}
+            stroke: {color: "red", width: 2}
           },
           stroke: {
             color: "#979797",
@@ -1138,7 +1292,8 @@ Customize or control the color applied to connection lines or edges when hoverin
         connectionDefaults: {
             hover: {
                 stroke: {
-                    color: "#FF0000"
+                    color: "#FF0000",
+                    width: 2
                 }
             }
         },
@@ -1477,7 +1632,8 @@ Customize the outline color, stroke color, or border color of selection handles 
           selection: {
             handles: {
               stroke: {
-                color: "#333"
+                color: "#333",
+                width: 2
               }
             }
           }
@@ -1776,7 +1932,8 @@ Control or customize the outline color of the starting point of connectors, conf
         connectionDefaults: {
             startCap: {
                 stroke: {
-                    color: "purple"
+                    color: "purple",
+                    width: 2,
                 },
                 type: "ArrowStart"
             }
@@ -1818,7 +1975,9 @@ Configure, set, or control the stroke dash pattern for the starting cap of conne
         connectionDefaults: {
             startCap: {
                 stroke: {
-                    dashType: "dash"
+                    dashType: "dash",
+                    color: "red",
+                    width: 2
                 },
                 type: "ArrowStart"
             }
@@ -1850,7 +2009,8 @@ Adjust the thickness, weight, or width of the line stroke at the starting point 
         connectionDefaults: {
             startCap: {
                 stroke: {
-                    width: 3
+                    width: 3,
+                    color: "red"
                 },
                 type: "ArrowStart"
             }
@@ -1898,6 +2058,156 @@ Customize the initial shape or marker at the start of a diagram connection line,
             { from: "1", to: "2" }
         ]
     });
+    </script>
+
+### connectionDefaults.startCap.path `String`
+
+The SVG path data for the arrow marker. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Define custom arrow shapes by specifying SVG path data for connection start caps, enabling the creation of specialized arrowheads or markers beyond the built-in types. Configure custom vector graphics for connection terminators using standard SVG path notation to create unique visual indicators, directional markers, or stylized connection endpoints that match specific design requirements or visual themes in diagrams.
+</div>
+
+#### Example - using custom SVG path for start cap
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          startCap: {
+            type: "ArrowStart",
+            path: "M 0,0 L 10,5 L 0,10 z"
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.startCap.anchor `Object`
+
+The anchor point of the arrow marker. This is the point where the marker will be positioned relative to the line. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Control the positioning and alignment of custom arrow markers by defining the anchor point coordinates that determine how the marker aligns with the connection line start point. Set precise registration points for custom SVG path markers to ensure proper visual alignment and positioning of arrowheads or custom terminators relative to the connection line, enabling accurate marker placement and visual consistency.
+</div>
+
+#### Example - setting custom anchor point for start cap
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          startCap: {
+            type: "ArrowStart",
+            anchor: { x: 5, y: 5 }
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.startCap.anchor.x `Number`
+
+The x-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the horizontal position of the arrow marker anchor point to control how custom start cap markers align with connection lines. Define the x-coordinate value that determines the horizontal offset for marker positioning, enabling precise control over marker alignment and visual registration with connection start points in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          startCap: {
+            type: "ArrowStart",
+            anchor: { x: 8, y: 5 }
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.startCap.anchor.y `Number`
+
+The y-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the vertical position of the arrow marker anchor point to control how custom start cap markers align with connection lines. Define the y-coordinate value that determines the vertical offset for marker positioning, enabling precise control over marker alignment and visual registration with connection start points in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          startCap: {
+            type: "ArrowStart",
+            anchor: { x: 5, y: 8 }
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.startCap.radius `Number` *(default: 4)*
+
+The radius of the filled circle marker. Applies when the type is "FilledCircle".
+
+
+<div class="meta-api-description">
+Configure the size of circular start cap markers by setting the radius value for filled circle terminators on diagram connections. Control the diameter and visual prominence of circular connection start points, enabling customization of circle marker size to match design requirements, improve visibility, or ensure consistent styling across diagram connections when using circular start caps.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          startCap: {
+            type: "FilledCircle",
+            radius: 8
+          }
+        }
+      });
     </script>
 
 ### connectionDefaults.stroke `Object`
@@ -1963,7 +2273,8 @@ Control and customize the default line or stroke color for connectors, links, ed
     $("#diagram").kendoDiagram({
         connectionDefaults: {
             stroke: {
-                color: "#FF6600"
+                color: "#FF6600",
+                width: 2
             }
         },
         shapes: [
@@ -1992,7 +2303,8 @@ Adjust or configure the thickness, weight, or width of lines connecting nodes in
     $("#diagram").kendoDiagram({
         connectionDefaults: {
             stroke: {
-                width: 3
+                width: 3,
+                color: "red"
             }
         },
         shapes: [
@@ -2003,6 +2315,69 @@ Adjust or configure the thickness, weight, or width of lines connecting nodes in
             { from: "1", to: "2" }
         ]
     });
+    </script>
+
+### connectionDefaults.stroke.lineCap `String`
+
+Defines the line cap style of the stroke. Supported values are "butt", "round", and "square".
+
+
+<div class="meta-api-description">
+Control the appearance of connection line endpoints by setting the line cap style, which determines how the ends of strokes are rendered. Configure stroke termination styles to achieve different visual effects—butt caps create flat endings, round caps add circular endings, and square caps extend beyond the line with rectangular endings, enabling precise control over connection line presentation and visual consistency.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2" }
+        ],
+        connectionDefaults: {
+          stroke: {
+            color: "blue",
+            width: 5,
+            lineCap: "round"
+          }
+        }
+      });
+    </script>
+
+### connectionDefaults.stroke.lineJoin `String`
+
+Defines the line join style of the stroke. Supported values are "bevel", "miter", and "round".
+
+
+<div class="meta-api-description">
+Control the appearance of connection line corners and joints by setting the line join style, which determines how stroke segments connect at corners. Configure stroke junction styles to achieve different visual effects—bevel joins create flat-cut corners, miter joins create sharp pointed corners, and round joins create smooth curved corners, enabling precise control over connection line corner appearance and visual consistency.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          { from: "1", to: "2", points: [{ x: 110, y: 50 }] }
+        ],
+        connectionDefaults: {
+          stroke: {
+            color: "blue",
+            width: 8,
+            lineJoin: "round"
+          },
+          type: "polyline"
+        }
+      });
     </script>
 
 ### connectionDefaults.toConnector `String` *(default: "Auto")*
@@ -2110,6 +2485,55 @@ Configure and customize the way diagram connections are rendered and routed by s
       });
     </script>
 
+### connectionDefaults.cornerRadius `Number` *(default: 0)*
+
+Defines the corner radius of the connection.
+
+
+<div class="meta-api-description">
+Configure and customize the rounding of connection line corners by setting the corner radius value to create smooth, rounded corners instead of sharp angles at connection path joints, enabling visual polish and improved diagram aesthetics while controlling the degree of curvature applied to connection bends and turns in flowcharts, network diagrams, or organizational charts.
+</div>
+
+#### Example - setting connection corner radius
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          {
+            id:"1",
+            content:{
+              text: "State 1"
+            },
+            x: 20,
+            y: 20
+          },
+          {
+            id:"2",
+            content: {
+              text: "State 2"
+            },
+            x: 300,
+            y: 100
+          }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            points: [
+              {x: 150, y: 20},
+              {x: 150, y: 150}
+            ],
+            type: "polyline"
+          }
+        ],
+        connectionDefaults: {
+          cornerRadius: 5
+        }
+      });
+    </script>
+
 ### connections `Array`
 
 Defines the connections configuration.
@@ -2150,7 +2574,8 @@ Configure connection creation, styling, routing, editing, and serialization with
             	text: "Step 1"
             },
             stroke: {
-            	color: "#33ccff"
+            	color: "#33ccff",
+              width: 2
             }
           }
         ]
@@ -2818,6 +3243,7 @@ Adjust or configure the color of the stroke or outline for connection end caps, 
             type: "ArrowEnd",
             stroke: {
               color: "#333"
+              width: 2
             }
           }
         }]
@@ -2859,7 +3285,8 @@ Control and customize the stroke pattern, style, and appearance of connection en
             type: "ArrowEnd",
             stroke: {
               color: "#333",
-              dashType: "dash"
+              dashType: "dash",
+              width: 2
             }
           }
         }]
@@ -2934,6 +3361,154 @@ Configure and customize the visual style of connection endpoints by setting the 
     });
     </script>
 
+### connections.endCap.path `String`
+
+The SVG path data for the arrow marker. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Define custom arrow shapes by specifying SVG path data for connection end caps, enabling the creation of specialized arrowheads or markers beyond the built-in types. Configure custom vector graphics for connection terminators using standard SVG path notation to create unique visual indicators, directional markers, or stylized connection endpoints that match specific design requirements or visual themes in diagrams.
+</div>
+
+#### Example - using custom SVG path for end cap
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "ArrowEnd",
+            path: "M 0 0 L 10 5 L 0 10 Z"
+          }
+        }]
+    });
+    </script>
+
+### connections.endCap.anchor `Object`
+
+The anchor point of the arrow marker. This is the point where the marker will be positioned relative to the line. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Control the positioning and alignment of custom arrow markers by defining the anchor point coordinates that determine how the marker aligns with the connection line endpoint. Set precise registration points for custom SVG path markers to ensure proper visual alignment and positioning of arrowheads or custom terminators relative to the connection line, enabling accurate marker placement and visual consistency.
+</div>
+
+#### Example - setting custom anchor point for end cap
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "ArrowEnd",
+            path: "M 0 0 L 10 5 L 0 10 Z",
+            anchor: { x: 5, y: 5 }
+          }
+        }]
+    });
+    </script>
+
+### connections.endCap.anchor.x `Number`
+
+The x-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the horizontal position of the arrow marker anchor point to control how custom end cap markers align with connection lines. Define the x-coordinate value that determines the horizontal offset for marker positioning, enabling precise control over marker alignment and visual registration with connection endpoints in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "ArrowEnd",
+            path: "M 0 0 L 10 5 L 0 10 Z",
+            anchor: { x: 8 }
+          }
+        }]
+    });
+    </script>
+
+### connections.endCap.anchor.y `Number`
+
+The y-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the vertical position of the arrow marker anchor point to control how custom end cap markers align with connection lines. Define the y-coordinate value that determines the vertical offset for marker positioning, enabling precise control over marker alignment and visual registration with connection endpoints in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "ArrowEnd",
+            path: "M 0 0 L 10 5 L 0 10 Z",
+            anchor: { y: 5 }
+          }
+        }]
+    });
+    </script>
+
+### connections.endCap.radius `Number` *(default: 4)*
+
+The radius of the filled circle marker. Applies when the type is "FilledCircle".
+
+
+<div class="meta-api-description">
+Configure the size of circular end cap markers by setting the radius value for filled circle terminators on diagram connections. Control the diameter and visual prominence of circular connection endpoints, enabling customization of circle marker size to match design requirements, improve visibility, or ensure consistent styling across diagram connections when using circular end caps.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "FilledCircle",
+            radius: 8
+          }
+        }]
+    });
+    </script>
+
 ### connections.from `Object|String|Number`
 
 Defines the source of the connection. You can set this property to a value matching a shape id or to an object with XY-coordinates.
@@ -2994,6 +3569,10 @@ Adjust, set, or control the horizontal starting position or x-coordinate of a co
     <div id="diagram"></div>
     <script>
     $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
         connections: [{
           from: { x: 100, y: 100 },
           to: { x: 300, y: 100 }
@@ -3015,6 +3594,10 @@ Set or adjust the vertical position of the starting point for connections betwee
     <div id="diagram"></div>
     <script>
     $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
         connections: [{
           from: { x: 100, y: 100 },
           to: { x: 300, y: 150 }
@@ -4155,6 +4738,130 @@ Control and customize the shape or style of the starting endpoint for a connecti
     });
     </script>
 
+### connections.startCap.path `String`
+
+The SVG path data for the arrow marker. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Define custom arrow shapes by specifying SVG path data for connection start caps, enabling the creation of specialized arrowheads or markers beyond the built-in types. Configure custom vector graphics for connection terminators using standard SVG path notation to create unique visual indicators, directional markers, or stylized connection endpoints that match specific design requirements or visual themes in diagrams.
+</div>
+
+#### Example - using custom SVG path for start cap
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            startCap: {
+              type: "ArrowStart",
+              path: "M 0 0 L 10 5 L 0 10 Z"
+            }
+        }]
+    });
+    </script>
+
+### connections.startCap.anchor `Object`
+
+The anchor point of the arrow marker. This is the point where the marker will be positioned relative to the line. Applies when the type is "ArrowEnd" or "ArrowStart".
+
+
+<div class="meta-api-description">
+Control the positioning and alignment of custom arrow markers by defining the anchor point coordinates that determine how the marker aligns with the connection line start point. Set precise registration points for custom SVG path markers to ensure proper visual alignment and positioning of arrowheads or custom terminators relative to the connection line, enabling accurate marker placement and visual consistency.
+</div>
+
+#### Example - setting custom anchor point for start cap
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+          startCap: {
+            type: "ArrowStart",
+            path: "M 0 0 L 10 5 L 0 10 Z",
+            anchor: { x: 5, y: 5 }
+          }
+        }]
+    });
+    </script>
+
+### connections.startCap.anchor.x `Number`
+
+The x-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the horizontal position of the arrow marker anchor point to control how custom start cap markers align with connection lines. Define the x-coordinate value that determines the horizontal offset for marker positioning, enabling precise control over marker alignment and visual registration with connection start points in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+          startCap: {
+            type: "ArrowStart",
+            path: "M 0 0 L 10 5 L 0 10 Z",
+            anchor: { x: 8 }
+          }
+        }]
+    });
+    </script>
+
+### connections.startCap.anchor.y `Number`
+
+The y-coordinate of the anchor point.
+
+
+<div class="meta-api-description">
+Set the vertical position of the arrow marker anchor point to control how custom start cap markers align with connection lines. Define the y-coordinate value that determines the vertical offset for marker positioning, enabling precise control over marker alignment and visual registration with connection start points in custom arrow configurations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+          startCap: {
+            type: "ArrowStart",
+            path: "M 0 0 L 10 5 L 0 10 Z",
+            anchor: { y: 5 }
+          }
+        }]
+    });
+    </script>
+
+### connections.startCap.radius `Number` *(default: 4)*
+
+The radius of the filled circle marker. Applies when the type is "FilledCircle".
+
+
+<div class="meta-api-description">
+Configure the size of circular start cap markers by setting the radius value for filled circle terminators on diagram connections. Control the diameter and visual prominence of circular connection start points, enabling customization of circle marker size to match design requirements, improve visibility, or ensure consistent styling across diagram connections when using circular start caps.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connections: [{
+          startCap: {
+            type: "FilledCircle",
+            radius: 8
+          }
+        }]
+    });
+    </script>
+
 ### connections.stroke `Object`
 
 Defines the stroke configuration.
@@ -4245,6 +4952,64 @@ Adjust or configure the thickness, weight, or width of lines connecting shapes o
             color: "#333",
             width: 3
           }
+        }]
+    });
+    </script>
+
+### connections.stroke.lineCap `String`
+
+Defines the line cap style of the stroke. Supported values are "butt", "round", and "square".
+
+
+<div class="meta-api-description">
+Control the appearance of connection line endpoints by setting the line cap style, which determines how the ends of strokes are rendered. Configure stroke termination styles to achieve different visual effects—butt caps create flat endings, round caps add circular endings, and square caps extend beyond the line with rectangular endings, enabling precise control over connection line presentation and visual consistency.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            stroke: {
+              lineCap: "round",
+              width: 4
+            }
+        }]
+    });
+    </script>
+
+### connections.stroke.lineJoin `String`
+
+Defines the line join style of the stroke. Supported values are "bevel", "miter", and "round".
+
+
+<div class="meta-api-description">
+Control the appearance of connection line corners and joints by setting the line join style, which determines how stroke segments connect at corners. Configure stroke junction styles to achieve different visual effects—bevel joins create flat-cut corners, miter joins create sharp pointed corners, and round joins create smooth curved corners, enabling precise control over connection line corner appearance and visual consistency.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            stroke: {
+              lineJoin: "round",
+              width: 4
+            }
         }]
     });
     </script>
@@ -4425,6 +5190,74 @@ Control and customize connection routing styles between endpoints by selecting r
               {x: 150, y: 150}
             ],
             type: "polyline"
+          }
+        ]
+      });
+    </script>
+
+### connections.cornerRadius `Number` *(default: 0)*
+
+Defines the corner radius of the connection.
+
+
+<div class="meta-api-description">
+Configure and customize the rounding of individual connection line corners by setting the corner radius value to create smooth, rounded corners instead of sharp angles at connection path joints, enabling visual polish and improved diagram aesthetics while controlling the degree of curvature applied to specific connection bends and turns in flowcharts, network diagrams, or organizational charts.
+</div>
+
+#### Example - setting connection corner radius
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "State 1" }, x: 20, y: 20 },
+          { id:"2", content: { text: "State 2" }, x: 300, y: 100 }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            points: [
+              {x: 150, y: 20},
+              {x: 150, y: 150}
+            ],
+            type: "polyline",
+            cornerRadius: 10
+          }
+        ]
+      });
+    </script>
+
+### connections.dataItem `Object`
+
+Defines the connection dataItem.
+
+
+<div class="meta-api-description">
+Bind or associate custom data objects with individual diagram connections to enable data-driven functionality, templating, and dynamic behavior. Store additional metadata, properties, or business logic with connections for use in templates, event handlers, or data binding scenarios, allowing connections to carry contextual information beyond their visual representation.
+</div>
+
+#### Example - using dataItem with connections
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes:[
+          { id:"1", content: { text: "Start" }, x: 20, y: 20 },
+          { id:"2", content: { text: "End" }, x: 200, y: 20 }
+        ],
+        connections:[
+          {
+            from: "1",
+            to: "2",
+            dataItem: {
+              name: "Primary Connection",
+              priority: "high",
+              type: "workflow"
+            },
+            content: {
+              template: "#= dataItem.name #"
+            }
           }
         ]
       });
@@ -9698,6 +10531,325 @@ Configure the default text displayed inside diagram shapes, enabling static labe
     });
     </script>
 
+### shapeDefaults.content.lineSpacing `Number`
+
+The spacing between lines of text in the shape.
+
+
+<div class="meta-api-description">
+Control the vertical spacing between text lines within shape content to improve readability and adjust text layout density. Configure line spacing to optimize text presentation, ensure appropriate visual separation between text lines, and customize the vertical text flow within shape boundaries for enhanced content clarity and professional appearance.
+</div>
+
+#### Example - setting line spacing
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "First Line\nSecond Line\nThird Line",
+            lineSpacing: 1.5
+          },
+          width: 120,
+          height: 80
+        },
+        shapes: [
+          { x: 50, y: 50 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.textWrap `String` *(default: "nowrap")*
+
+Configures the text wrapping behavior in the shape. Supported values are "nowrap" and "wrap".
+
+
+<div class="meta-api-description">
+Control how text content behaves when it exceeds the shape boundaries by configuring text wrapping options. Enable automatic text wrapping to fit content within shape dimensions or disable wrapping to maintain single-line text presentation. Configure text flow behavior to optimize content display, prevent text overflow, and ensure appropriate text presentation within shape constraints.
+</div>
+
+#### Example - enabling text wrapping
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "This is a long text that will wrap within the shape boundaries",
+            textWrap: "wrap"
+          },
+          width: 100,
+          height: 80
+        },
+        shapes: [
+          { x: 50, y: 50 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.padding `Number|Object`
+
+The padding of the shape content.
+
+
+<div class="meta-api-description">
+Configure inner spacing around shape content by setting padding values to control the distance between shape borders and internal content. Set uniform padding with a single number value or specify individual padding for each side using an object with top, right, bottom, and left properties to fine-tune content positioning and improve visual presentation.
+</div>
+
+#### Example - setting uniform padding
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Padded Content",
+            padding: 15
+          },
+          fill: { color: "lightblue" },
+          stroke: { color: "blue" }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 120, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.padding.top `Number`
+
+The top padding of the shape content.
+
+
+<div class="meta-api-description">
+Set the spacing between the top border of the shape and its content, controlling the vertical offset from the upper edge. Configure top padding to adjust content positioning, improve visual balance, and ensure appropriate spacing between shape boundaries and internal content elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Top Padded",
+            padding: { top: 20, right: 5, bottom: 5, left: 5 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 100, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.padding.right `Number`
+
+The right padding of the shape content.
+
+
+<div class="meta-api-description">
+Set the spacing between the right border of the shape and its content, controlling the horizontal offset from the right edge. Configure right padding to adjust content positioning, improve visual balance, and ensure appropriate spacing between shape boundaries and internal content elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Right Padded",
+            padding: { top: 5, right: 20, bottom: 5, left: 5 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 120, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.padding.bottom `Number`
+
+The bottom padding of the shape content.
+
+
+<div class="meta-api-description">
+Set the spacing between the bottom border of the shape and its content, controlling the vertical offset from the lower edge. Configure bottom padding to adjust content positioning, improve visual balance, and ensure appropriate spacing between shape boundaries and internal content elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Bottom Padded",
+            padding: { top: 5, right: 5, bottom: 20, left: 5 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 100, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.padding.left `Number`
+
+The left padding of the shape content.
+
+
+<div class="meta-api-description">
+Set the spacing between the left border of the shape and its content, controlling the horizontal offset from the left edge. Configure left padding to adjust content positioning, improve visual balance, and ensure appropriate spacing between shape boundaries and internal content elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Left Padded",
+            padding: { top: 5, right: 5, bottom: 5, left: 20 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 120, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.relativePadding `Number|Object`
+
+The relative padding of the shape content e.g. `0.03` means 3% of the shape width/height.
+
+
+<div class="meta-api-description">
+Configure proportional inner spacing around shape content using percentage-based padding values relative to shape dimensions. Set relative padding to maintain consistent content spacing that scales with shape size, enabling responsive content positioning that adapts to different shape dimensions while preserving proportional spacing relationships.
+</div>
+
+#### Example - setting relative padding
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Relative Padding",
+            relativePadding: 0.1
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 150, height: 80 },
+          { x: 250, y: 50, width: 100, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.relativePadding.top `Number`
+
+The relative top padding of the shape content.
+
+
+<div class="meta-api-description">
+Set proportional spacing between the top border of the shape and its content using a percentage value relative to shape height. Configure relative top padding to maintain consistent vertical spacing that scales with shape dimensions, ensuring proportional content positioning across different shape sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Top Relative",
+            relativePadding: { top: 0.2, right: 0.05, bottom: 0.05, left: 0.05 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 120, height: 80 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.relativePadding.right `Number`
+
+The relative right padding of the shape content.
+
+
+<div class="meta-api-description">
+Set proportional spacing between the right border of the shape and its content using a percentage value relative to shape width. Configure relative right padding to maintain consistent horizontal spacing that scales with shape dimensions, ensuring proportional content positioning across different shape sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Right Relative",
+            relativePadding: { top: 0.05, right: 0.2, bottom: 0.05, left: 0.05 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 140, height: 60 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.relativePadding.bottom `Number`
+
+The relative bottom padding of the shape content.
+
+
+<div class="meta-api-description">
+Set proportional spacing between the bottom border of the shape and its content using a percentage value relative to shape height. Configure relative bottom padding to maintain consistent vertical spacing that scales with shape dimensions, ensuring proportional content positioning across different shape sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Bottom Relative",
+            relativePadding: { top: 0.05, right: 0.05, bottom: 0.2, left: 0.05 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 120, height: 80 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.content.relativePadding.left `Number`
+
+The relative left padding of the shape content.
+
+
+<div class="meta-api-description">
+Set proportional spacing between the left border of the shape and its content using a percentage value relative to shape width. Configure relative left padding to maintain consistent horizontal spacing that scales with shape dimensions, ensuring proportional content positioning across different shape sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          content: {
+            text: "Left Relative",
+            relativePadding: { top: 0.05, right: 0.05, bottom: 0.05, left: 0.2 }
+          }
+        },
+        shapes: [
+          { x: 50, y: 50, width: 140, height: 60 }
+        ]
+      });
+    </script>
+
 ### shapeDefaults.editable `Boolean|Object` *(default: true)*
 
 Defines the shape editable options.
@@ -11466,6 +12618,136 @@ Control and configure the initial vertical position and default y-coordinate off
     });
     </script>
 
+### shapeDefaults.cornerRadius `Number` *(default: 0)*
+
+Defines the corner radius of the shape.
+
+
+<div class="meta-api-description">
+Configure and customize the rounding of shape corners by setting the corner radius value to create smooth, rounded corners instead of sharp rectangular edges, enabling visual polish and improved diagram aesthetics while controlling the degree of curvature applied to shape boundaries for enhanced visual appeal in diagrams, flowcharts, or organizational charts.
+</div>
+
+#### Example - setting shape corner radius
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          cornerRadius: 10,
+          fill: { color: "lightblue" },
+          width: 100,
+          height: 60
+        },
+        shapes: [
+          { content: { text: "Rounded Shape" }, x: 50, y: 50 }
+        ]
+      });
+    </script>
+
+### shapeDefaults.center `Object`
+
+Defines the center position of the shape. Applicable for the circle shape.
+
+
+<div class="meta-api-description">
+Set the center coordinates for circular shapes by defining the central point position within the diagram coordinate system. Configure the central positioning point for circle shapes to control their placement and ensure accurate geometric rendering of circular elements in diagrams, enabling precise control over circle positioning and alignment.
+</div>
+
+#### Example - setting circle center
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          type: "circle",
+          center: { x: 100, y: 100 },
+          radius: 40,
+          fill: { color: "lightgreen" }
+        },
+        shapes: [
+          { content: { text: "Circle" } }
+        ]
+      });
+    </script>
+
+### shapeDefaults.center.x `Number`
+
+The x-coordinate of the center.
+
+
+<div class="meta-api-description">
+Set the horizontal position of the circle shape center point by defining the x-coordinate value that determines the central position along the horizontal axis. Control the horizontal placement of circular shapes within the diagram coordinate system for precise positioning and alignment of circle elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          type: "circle",
+          center: { x: 150, y: 100 },
+          radius: 30,
+          fill: { color: "orange" }
+        },
+        shapes: [
+          { content: { text: "Centered" } }
+        ]
+      });
+    </script>
+
+### shapeDefaults.center.y `Number`
+
+The y-coordinate of the center.
+
+
+<div class="meta-api-description">
+Set the vertical position of the circle shape center point by defining the y-coordinate value that determines the central position along the vertical axis. Control the vertical placement of circular shapes within the diagram coordinate system for precise positioning and alignment of circle elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          type: "circle",
+          center: { x: 100, y: 150 },
+          radius: 35,
+          fill: { color: "purple" }
+        },
+        shapes: [
+          { content: { text: "Circle" } }
+        ]
+      });
+    </script>
+
+### shapeDefaults.radius `Number`
+
+Defines the radius of the shape. Applicable for the circle shape.
+
+
+<div class="meta-api-description">
+Configure the size of circular shapes by setting the radius value that determines the distance from the center to the edge of the circle. Control the diameter and visual scale of circular elements in diagrams, enabling customization of circle size to match design requirements, improve visibility, or ensure consistent sizing across diagram shapes when using circular geometry.
+</div>
+
+#### Example - setting circle radius
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapeDefaults: {
+          type: "circle",
+          radius: 50,
+          fill: { color: "pink" },
+          stroke: { color: "red", width: 2 }
+        },
+        shapes: [
+          { content: { text: "Large Circle" }, x: 100, y: 100 }
+        ]
+      });
+    </script>
+
 ### shapes `Array`
 
 Defines the shape options.
@@ -13198,6 +14480,283 @@ Control and configure the text or label displayed inside diagram shapes, includi
       });
     </script>
 
+### shapes.content.lineSpacing `Number`
+
+The line spacing of the content text.
+
+
+<div class="meta-api-description">
+Control the vertical spacing between lines of text within shape content areas, enabling adjustment of line height and text density for better readability and visual formatting of multi-line text content in diagram shapes. Configure line spacing to optimize text layout, improve readability, and ensure proper text flow within shape boundaries.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Line 1\nLine 2\nLine 3",
+            lineSpacing: 1.5
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.textWrap `String`
+
+Configures the text wrapping behavior in the shape. Supported values are "nowrap" and "wrap".
+
+
+<div class="meta-api-description">
+Control how text content behaves when it exceeds the shape boundaries by configuring text wrapping options. Enable automatic text wrapping to fit content within shape dimensions or disable wrapping to maintain single-line text presentation. Configure text flow behavior to optimize content display, prevent text overflow, and ensure appropriate text presentation within shape constraints.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "This is a long text that should wrap within the shape",
+            textWrap: "wrap"
+          },
+          width: 120
+        }]
+    });
+    </script>
+
+### shapes.content.padding `Object|Number`
+
+The padding of the content.
+
+
+<div class="meta-api-description">
+Control the internal spacing around text content within shapes by setting padding values, enabling proper text positioning and visual separation from shape boundaries. Configure padding to improve text readability, prevent content from touching shape edges, and ensure consistent text layout within diagram shapes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Padded Text",
+            padding: 10
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.padding.top `Number`
+
+The top padding of the content.
+
+
+<div class="meta-api-description">
+Set the top internal spacing for text content within shapes, controlling the distance between the shape's top edge and the content text. Configure top padding to ensure proper vertical positioning and spacing of text elements within shape boundaries.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Top Padded Text",
+            padding: { top: 15 }
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.padding.right `Number`
+
+The right padding of the content.
+
+
+<div class="meta-api-description">
+Set the right internal spacing for text content within shapes, controlling the distance between the shape's right edge and the content text. Configure right padding to ensure proper horizontal positioning and spacing of text elements within shape boundaries.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Right Padded Text",
+            padding: { right: 15 }
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.padding.bottom `Number`
+
+The bottom padding of the content.
+
+
+<div class="meta-api-description">
+Set the bottom internal spacing for text content within shapes, controlling the distance between the shape's bottom edge and the content text. Configure bottom padding to ensure proper vertical positioning and spacing of text elements within shape boundaries.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Bottom Padded Text",
+            padding: { bottom: 15 }
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.padding.left `Number`
+
+The left padding of the content.
+
+
+<div class="meta-api-description">
+Set the left internal spacing for text content within shapes, controlling the distance between the shape's left edge and the content text. Configure left padding to ensure proper horizontal positioning and spacing of text elements within shape boundaries.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Left Padded Text",
+            padding: { left: 15 }
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.relativePadding `Object|Number`
+
+The relative padding of the content as a percentage of the shape size.
+
+
+<div class="meta-api-description">
+Control the internal spacing around text content within shapes using percentage-based padding values relative to the shape dimensions, enabling responsive text positioning that scales with shape size. Configure relative padding to maintain consistent text layout proportions regardless of shape size variations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Relative Padded Text",
+            relativePadding: 0.1  // 10% of shape size
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.relativePadding.top `Number`
+
+The top relative padding of the content as a percentage.
+
+
+<div class="meta-api-description">
+Set the top internal spacing for text content as a percentage of the shape height, enabling responsive vertical positioning that adjusts with shape size changes. Configure relative top padding to maintain proportional text positioning within shapes of varying sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Top Relative Padded",
+            relativePadding: { top: 0.15 }  // 15% of shape height
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.relativePadding.right `Number`
+
+The right relative padding of the content as a percentage.
+
+
+<div class="meta-api-description">
+Set the right internal spacing for text content as a percentage of the shape width, enabling responsive horizontal positioning that adjusts with shape size changes. Configure relative right padding to maintain proportional text positioning within shapes of varying sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Right Relative Padded",
+            relativePadding: { right: 0.15 }  // 15% of shape width
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.relativePadding.bottom `Number`
+
+The bottom relative padding of the content as a percentage.
+
+
+<div class="meta-api-description">
+Set the bottom internal spacing for text content as a percentage of the shape height, enabling responsive vertical positioning that adjusts with shape size changes. Configure relative bottom padding to maintain proportional text positioning within shapes of varying sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Bottom Relative Padded",
+            relativePadding: { bottom: 0.15 }  // 15% of shape height
+          }
+        }]
+    });
+    </script>
+
+### shapes.content.relativePadding.left `Number`
+
+The left relative padding of the content as a percentage.
+
+
+<div class="meta-api-description">
+Set the left internal spacing for text content as a percentage of the shape width, enabling responsive horizontal positioning that adjusts with shape size changes. Configure relative left padding to maintain proportional text positioning within shapes of varying sizes.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          content: {
+            text: "Left Relative Padded",
+            relativePadding: { left: 0.15 }  // 15% of shape width
+          }
+        }]
+    });
+    </script>
+
 ### shapes.editable `Boolean|Object` *(default: true)*
 
 Defines the shape editable options.
@@ -13944,6 +15503,140 @@ Control and configure the default vertical dimension or height of shapes when th
       });
     </script>
 
+### shapes.cornerRadius `Number` *(default: 0)*
+
+Defines the corner radius of the shape.
+
+
+<div class="meta-api-description">
+Configure and customize the rounding of shape corners by setting the corner radius value to create smooth, rounded corners instead of sharp angles on rectangles and other shape types, enabling visual polish and improved diagram aesthetics while controlling the degree of curvature applied to shape corners for enhanced appearance in flowcharts, network diagrams, or organizational charts.
+</div>
+
+#### Example - setting shape corner radius
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          type: "rectangle",
+          cornerRadius: 10,
+          content: { text: "Rounded Rectangle" }
+        }]
+    });
+    </script>
+
+### shapes.center `Object`
+
+The center point of the shape.
+
+
+<div class="meta-api-description">
+Define the center coordinates of a shape to control its positioning and placement within the diagram canvas. Set precise center point values for shape positioning, enabling accurate placement and alignment of shapes within the diagram layout, supporting both programmatic positioning and visual design requirements.
+</div>
+
+#### Example - setting shape center point
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          center: { x: 150, y: 100 },
+          content: { text: "Centered Shape" }
+        }]
+    });
+    </script>
+
+### shapes.center.x `Number`
+
+The x-coordinate of the shape center.
+
+
+<div class="meta-api-description">
+Set the horizontal position of the shape center point to control precise placement within the diagram canvas. Define the x-coordinate value for shape positioning, enabling accurate horizontal alignment and layout control for shapes within the diagram coordinate system.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          center: { x: 200 },
+          content: { text: "Shape" }
+        }]
+    });
+    </script>
+
+### shapes.center.y `Number`
+
+The y-coordinate of the shape center.
+
+
+<div class="meta-api-description">
+Set the vertical position of the shape center point to control precise placement within the diagram canvas. Define the y-coordinate value for shape positioning, enabling accurate vertical alignment and layout control for shapes within the diagram coordinate system.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          center: { y: 150 },
+          content: { text: "Shape" }
+        }]
+    });
+    </script>
+
+### shapes.radius `Number`
+
+The radius of circular shapes.
+
+
+<div class="meta-api-description">
+Configure the radius value for circular shapes and rounded elements within diagrams, controlling the size and curvature of circle shapes, rounded rectangles, or other curved geometric elements. Set precise radius measurements to define the scale and appearance of circular diagram components, enabling consistent sizing and visual styling of rounded shapes and elements.
+</div>
+
+#### Example - setting circle radius
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          type: "circle",
+          radius: 30,
+          content: { text: "Circle" }
+        }]
+    });
+    </script>
+
+### shapes.dataItem `Object`
+
+The data item associated with the shape.
+
+
+<div class="meta-api-description">
+Associate data objects with shapes to enable data binding, templating, and dynamic content rendering within diagram elements. Configure shape data items to support data-driven diagrams, dynamic content updates, and template-based shape rendering, allowing shapes to display and interact with underlying data models or datasets.
+</div>
+
+#### Example - using data items with shapes
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          id: "1",
+          dataItem: { name: "Process A", status: "active" },
+          content: { text: "#= dataItem.name #" }
+        }]
+    });
+    </script>
+
 ### shapes.hover `Object`
 
 Defines the `hover` configuration.
@@ -14468,6 +16161,52 @@ Adjust or set the thickness, weight, or width of a shape’s border, outline, or
             stroke: {
                 width: 3
             }
+        }]
+    });
+    </script>
+
+### shapes.stroke.lineCap `String`
+
+Defines the line cap style of the stroke. Supported values are "butt", "round", and "square".
+
+
+<div class="meta-api-description">
+Control the appearance of shape stroke endpoints by setting the line cap style, which determines how the ends of strokes are rendered. Configure stroke termination styles to achieve different visual effects—butt caps create flat endings, round caps add circular endings, and square caps extend beyond the line with rectangular endings, enabling precise control over shape stroke presentation and visual consistency.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          stroke: {
+            lineCap: "round",
+            width: 4
+          }
+        }]
+    });
+    </script>
+
+### shapes.stroke.lineJoin `String`
+
+Defines the line join style of the stroke. Supported values are "bevel", "miter", and "round".
+
+
+<div class="meta-api-description">
+Control the appearance of shape stroke corners and joints by setting the line join style, which determines how stroke segments connect at corners. Configure stroke junction styles to achieve different visual effects—bevel joins create flat-cut corners, miter joins create sharp pointed corners, and round joins create smooth curved corners, enabling precise control over shape stroke corner appearance and visual consistency.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+          stroke: {
+            lineJoin: "round",
+            width: 4
+          }
         }]
     });
     </script>

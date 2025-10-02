@@ -188,7 +188,7 @@ By default, the CircularGauge does not render content in the center. To add cont
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the CircularGauge](https://demos.telerik.com/kendo-ui/circulargauge/index)
+* [Demo Page for the CircularGauge](https://demos.telerik.com/kendo-ui/circular-gauge/index)
 
 ## See Also 
 

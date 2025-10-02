@@ -13,6 +13,7 @@ The following table lists the Kendo UI for jQuery and Kendo UI Sass themes versi
 
 | kendo UI for jQuery | Kendo UI Sass Themes |
 |:---         |:---                     |
+| Kendo UI 2025.3.1002 (2025.3.1002) | @progress/kendo-theme-bootstrap@12.0.1<br>@progress/kendo-theme-classic@12.0.1<br>@progress/kendo-theme-default@12.0.1<br>@progress/kendo-theme-fluent@12.0.1<br>@progress/kendo-theme-material@12.0.1 |
 | Kendo UI 2025.3.825 (2025.3.825) | @progress/kendo-theme-bootstrap@12.0.0<br>@progress/kendo-theme-classic@12.0.0<br>@progress/kendo-theme-default@12.0.0<br>@progress/kendo-theme-fluent@12.0.0<br>@progress/kendo-theme-material@12.0.0 |
 | Kendo UI 2025.3.812 (Q3 2025.3.812) | @progress/kendo-theme-bootstrap@11.3.2<br>@progress/kendo-theme-classic@11.3.2<br>@progress/kendo-theme-default@11.3.2<br>@progress/kendo-theme-fluent@11.3.2<br>@progress/kendo-theme-material@11.3.2 |
 | Kendo UI 2025.2.702 (2025.2.702) | @progress/kendo-theme-bootstrap@11.0.2<br>@progress/kendo-theme-classic@11.0.2<br>@progress/kendo-theme-default@11.0.2<br>@progress/kendo-theme-fluent@11.0.2<br>@progress/kendo-theme-material@11.0.2 |

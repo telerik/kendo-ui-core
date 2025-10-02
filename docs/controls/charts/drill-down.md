@@ -342,5 +342,5 @@ To implement a custom drilldown navigation:
 
 ## See Also
 
-* [Drilldown Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-drilldown/index)
+* [Drilldown Chart (Demo)](https://demos.telerik.com/kendo-ui/drilldown-charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

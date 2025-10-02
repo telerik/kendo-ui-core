@@ -55,7 +55,7 @@ The following example demonstrates how to build a static placeholder.
 
 ## Positioning by Axis
 
-By default, the Sortable uses the mouse cursor to determine the place of the drop placeholder. This means that if the mouse cursor is not over a sortable item, the placeholder will not be repositioned. If the `axis` is set to `"x"` or `"y"`, the Sortable will start operating in movement by axis mode. The component will use only the `x` or `y` coordinate of the mouse cursor to determine the position of the placeholder. The axis mode is useful when dragging is restricted within a container. For a runnable example, refer to the [demo on constraints](https://demos.telerik.com/kendo-ui/web/sortable/constraints.html).
+By default, the Sortable uses the mouse cursor to determine the place of the drop placeholder. This means that if the mouse cursor is not over a sortable item, the placeholder will not be repositioned. If the `axis` is set to `"x"` or `"y"`, the Sortable will start operating in movement by axis mode. The component will use only the `x` or `y` coordinate of the mouse cursor to determine the position of the placeholder. The axis mode is useful when dragging is restricted within a container. For a runnable example, refer to the [demo on constraints](https://demos.telerik.com/kendo-ui/sortable/constraints).
 
 ## See Also
 

@@ -17,5 +17,5 @@ D
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/web/filemanager/keyboard-navigation.html)
+* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)

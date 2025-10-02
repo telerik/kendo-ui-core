@@ -185,7 +185,7 @@ By default, the ArcGauge does not render content in the center. To add content a
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the ArcGauge](https://demos.telerik.com/kendo-ui/arcgauge/index)
+* [Demo Page for the ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)
 
 ## See Also 
 
