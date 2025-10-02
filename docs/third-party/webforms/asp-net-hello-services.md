@@ -18,7 +18,6 @@ This tutorial will walk you through the creation of RESTful services with ASP.NE
 
 This module will cover how to create a RESTful service with [ASP.NET Web API](https://www.asp.net/web-api), and how to consume that service in JSON format with jQuery. There is also a very quick primer on the concept of REST and JSON, as well as a good look at using the [IE F12 Developer Tools](https://msdn.microsoft.com/en-US/library/gg589512%28v=vs.85%29.aspx) to debug your application.
 
-All code used in this module can be downloaded from the [GitHub project course](https://github.com/telerik/html5-dev-for-aspnet-devs). Feel free to download the finished product, or follow the screencast or the written content.
 
 ## Screencast
 
@@ -621,11 +620,6 @@ Press `F5` to run the application. Press `F12` to open the Developer Tools. Swit
 
 ![Kendo UI for jQuery Finally](../../images/webforms/hello-services-finally.png)
 
-## Further Reading
-
-Web API is a maturing library and is baked into the official release of MVC 4 onwards. For now, the following screencasts should help you become quite familiar with using Web API in MVC 4. For detailed information on how to do this, see [Web API With MVC 4 Screencast Series](http://weblogs.asp.net/jgalloway/archive/2012/03/16/asp-net-web-api-screencast-series-with-downloadable-sample-code-part-1.aspx).
-
-The complete application used in this project is available on the [GitHub site course](https://github.com/telerik/html5-dev-for-aspnet-devs).
 
 ## See Also
 

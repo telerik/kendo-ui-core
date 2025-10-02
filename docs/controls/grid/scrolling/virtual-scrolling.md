@@ -66,7 +66,7 @@ There are several requirements that are needed for the Virtual Scrolling to func
  * The Grid must have a defined [`height`](/api/javascript/ui/grid/configuration/height).
  * The Grid must be visible when it is initialized.
  * The DataSource must have a defined [`pageSize`](/api/javascript/data/datasource/configuration/pagesize).
- * The DataSource must have a defined [`total`](/api/javascript/data/datasource/configuration/schema#schematotal) when [Remote Binding]((https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data)) is used.
+ * The DataSource must have a defined [`total`](/api/javascript/data/datasource/configuration/schema#schematotal) when [Remote Binding](https://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) is used.
 
 Additional information about the limitations of virtual scrolling can be found in the [Known Limitations](#known-limitations) section of the article.
 

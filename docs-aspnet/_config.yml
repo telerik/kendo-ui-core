@@ -787,13 +787,13 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2025.3.825"
+cdnVersion: "2025.3.1002"
 
 ## The themes CDN used
-themesCdnVersion: "12.0.0"
+themesCdnVersion: "12.0.1"
 
 ## The MVC Core version used
-mvcCoreVersion: "2025.3.825"
+mvcCoreVersion: "2025.3.1002"
 
 productCode: UIASPCORE
 

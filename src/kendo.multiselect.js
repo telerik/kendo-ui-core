@@ -352,6 +352,24 @@ export const __meta__ = {
             that._ariaLabel(that._focused);
         },
 
+         _updateSelectedVirtualDataItemsIndexes: function() {
+            const that = this;
+            const listView = that.listView;
+            const selectedIndexes = listView?._selectedIndexes;
+            const selectedItems = listView?._selectedDataItems;
+            const customOptions = that?._customOptions || {};
+            const optionsMap = that._optionsMap || {};
+
+            if (selectedIndexes && selectedItems) {
+                selectedIndexes.forEach((_, index) => {
+                    const field = that.options.dataValueField;
+                    const dataItem = selectedItems[index];
+                    const newIdx = optionsMap[dataItem[field]];
+                    customOptions[dataItem[field]] = newIdx !== undefined ? newIdx : customOptions[dataItem[field]];
+                });
+            }
+        },
+
         _activateItem: function() {
             if (this.popup.visible()) {
                 List.fn._activateItem.call(this);
@@ -748,6 +766,10 @@ export const __meta__ = {
 
             that.popup.position();
             that._updateItemFocus();
+
+            if (that.options?.virtual?.mapValueTo === 'dataItem') {
+                that._updateSelectedVirtualDataItemsIndexes();
+            }
 
             if (that._touchScroller) {
                 that._touchScroller.reset();

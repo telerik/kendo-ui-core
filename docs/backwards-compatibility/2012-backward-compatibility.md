@@ -99,7 +99,6 @@ All arrows have been renamed to better reflect their direction and size. For exa
 	.k-i-seek-e
 ```
 
-For more information, refer to the [demo on styling icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 **Popup**
 

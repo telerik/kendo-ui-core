@@ -40,7 +40,7 @@ Action buttons follow the **Button** specification.
 
 ## Resources
 
-[ARIA practices Modal Dialog Example](https://www.w3.org/WAI/ARIA/apg/example-index/dialog-modal/dialog)
+[ARIA practices Modal Dialog Example](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
 
 ## Section 508
 

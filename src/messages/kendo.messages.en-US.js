@@ -1730,7 +1730,8 @@ if (kendo.ui.List) {
     kendo.ui.List.prototype.options.messages =
     $.extend(true, kendo.ui.List.prototype.options.messages,{
       "clear": "clear",
-      "noData": "No data found."
+      "noData": "No data found.",
+      "filterInputPlaceholder": "Filter",
     });
 }
 
@@ -1770,7 +1771,8 @@ if (kendo.ui.DropDownTree) {
         "singleTag": "item(s) selected",
         "clear": "clear",
         "deleteTag": "delete",
-        "noData": "No data found."
+        "noData": "No data found.",
+        "filterInputPlaceholder": "Filter"
     });
 }
 

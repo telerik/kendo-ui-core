@@ -39,6 +39,6 @@ For a complete list of all supported key combinations, refer to the [Pager's Key
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Grid]({% slug overview_accessibility_support_kendoui %})

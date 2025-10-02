@@ -30,9 +30,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-mvc
   framework: "ASP.NET MVC"
   framework_short: "MVC"
-  cdnVersion: "2025.3.825"
-  themesCdnVersion: "12.0.0"
-  mvcCoreVersion: "2025.3.825"
+  cdnVersion: "2025.3.1002"
+  themesCdnVersion: "12.0.1"
+  mvcCoreVersion: "2025.3.1002"
   platform: aspnet-mvc
   core: false
   mvc: true
@@ -137,7 +137,7 @@ demos:
           colors: ['#323130', '#0078D4', '#ffffff']
 
 markdown-replacements:
-- pattern: "```(\\r?\\n[ ]*)+((?<liquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
+- pattern: "```(\\r?\\n[ ]*)+(?=(?<followedBy>\\{%|\\r?\\n[ ]*```(?!prompt)))((?<liquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
   replacement: "```$<liquid>$<additionalLiquid>$<nextBlock>"
 - pattern: "```(?<lang>(HtmlHelper|View|TagHelper))\\s*?(?<newLine>\\r?\\n)"
   replacement: "```Razor $<lang>$<newLine>"
@@ -166,7 +166,6 @@ excluded-files:
 - "**/installation/adding-client-side-resources/using-libman.md"
 - "**/vs-integration/snippets.md"
 - "**/vs-code-integration/*"
-- "**/ai/*"
 - "**/asp-net-mvc-3.md"
 - "**/asp-net-mvc-4.md"
 - "**/troubleshoot/troubleshooting-net8.md"
@@ -217,6 +216,7 @@ excluded-files:
 - "**/knowledge-base/grid-azure-empty-cells.md"
 - "**/razor-page.md"
 - "**/razor-pages.md"
+- "**/ai/copilot-extension.md"
 
 meta:
   "*/accessibility":
@@ -453,7 +453,7 @@ meta:
     title: Appearance
   backwards-compatibility:
     title: Breaking Changes
-    position: 15
+    position: 16
   cloud-integration/google-cloud:
     title: Google Cloud
     position: 4
@@ -465,21 +465,24 @@ meta:
     position: 2
   cloud-integration:
     title: Cloud Integration
-    position: 14
+    position: 15
   integration-with-other-telerik-products:
     title: Integration with Other Telerik Products
-    position: 13
+    position: 14
   deployment:
     title: Deployment
-    position: 12
+    position: 13
   security:
     title: Security
-    position: 11
+    position: 12
   accessibility:
     title: Accessibility
-    position: 10
+    position: 11
   globalization:
     title: Globalization
+    position: 10
+  ai:
+    title: AI Coding Assistant
     position: 9
   styles-and-layout/less-themes:
     title: LESS Themes

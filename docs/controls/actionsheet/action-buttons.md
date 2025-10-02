@@ -138,5 +138,5 @@ The example below demonstrates all alignments:
 
 ## See Also
 
-* [Orientation of the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/orientation)
+* [Overview of the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/index)
 * [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)

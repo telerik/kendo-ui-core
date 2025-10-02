@@ -20,10 +20,10 @@ Kendo UI InlineAIPrompt supports the following keyboard shortcuts:
 | `Up/Down Arrows`       | Navigates to the next/previous item in the commands menu.|
 | `Right/Left Arrows`       | Opens/closes item group in the commands menu.|
 
-For a complete example, refer to the [demo on keyboard navigation of the InlineAIPrompt](https://demos.telerik.com/kendo-ui/inlineaiprompt/keyboard-navigation).
+For a complete example, refer to the [demo on keyboard navigation of the InlineAIPrompt](https://demos.telerik.com/kendo-ui/inline-aiprompt/keyboard-navigation).
 
 ## See Also
 
-* [Keyboard Navigation by the InlineAIPrompt (Demo)](https://demos.telerik.com/kendo-ui/inlineaiprompt/keyboard-navigation)
+* [Keyboard Navigation by the InlineAIPrompt (Demo)](https://demos.telerik.com/kendo-ui/inline-aiprompt/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the InlineAIPrompt]({% slug jquery_inlineaiprompt_accessibility %})

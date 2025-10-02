@@ -10,7 +10,7 @@ position: 3
 
 The InlineAIPrompt provides template options that enable you to customize the rendering of its output content.
 
-For a complete example, refer to the [demo on customizing the InlineAIPrompt templates](https://demos.telerik.com/kendo-ui/inlineaiprompt/templates).
+For a complete example, refer to the [demo on customizing the InlineAIPrompt templates](https://demos.telerik.com/kendo-ui/inline-aiprompt/templates).
 
 ## Response Template
 

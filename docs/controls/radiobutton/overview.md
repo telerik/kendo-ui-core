@@ -24,7 +24,6 @@ The RadioButton allows you to provide radiobutton functionality to `<input />` e
 
 * [Getting Started with the Kendo UI RadioButton for jQuery]({% slug getting_started_kendoui_radiobutton_widget %})
 * [Overview of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/index)
-* [Using the API of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/api)
 
 ## See Also
 

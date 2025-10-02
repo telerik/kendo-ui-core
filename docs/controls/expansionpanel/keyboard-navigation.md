@@ -10,7 +10,7 @@ position: 4
 
 The Kendo UI ExpansionPanel provides keyboard navigation that is always available and requires no configuration.
 
-For a complete example, refer to the [demo on using the keyboard navigation of the ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionanel/keyboard-navigation).  
+For a complete example, refer to the [demo on using the keyboard navigation of the ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/keyboard-navigation).  
 
 
 ## See Also

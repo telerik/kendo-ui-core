@@ -116,7 +116,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |TextBox	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textbox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/textbox/accessibility/overview)|
 |TileLayout	   |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)| [Documentation](https://docs.telerik.com/kendo-ui/controls/tilelayout/accessibility/overview)|
 |TimeDurationPicker	   |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/timedurationpicker)| [Documentation](https://docs.telerik.com/kendo-ui/controls/timedurationpicker/accessibility/overview)|
-|TimeLine	   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline)| [Documentation](https://docs.telerik.com/kendo-ui/controls/actionsheet/accessibility/overview)|
+|TimeLine	   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline-vertical)| [Documentation](https://docs.telerik.com/kendo-ui/controls/actionsheet/accessibility/overview)|
 |TimePicker	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)| [Documentation](https://docs.telerik.com/kendo-ui/controls/timepicker/accessibility/overview)|
 |ToggleButton  |AAA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)| [Documentation](https://demos.telerik.com/kendo-ui/accessibility/togglebutton)|
 |ToolBar	   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/toolbar)| [Documentation](https://docs.telerik.com/kendo-ui/controls/toolbar/accessibility/overview)|

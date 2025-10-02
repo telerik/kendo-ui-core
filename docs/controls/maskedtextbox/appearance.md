@@ -10,7 +10,7 @@ position: 3
 
 In this article, you will find information about the styling options and rendering of the Kendo UI MaskedTextBox.
 
-For a live example, visit the [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/styling).
+For a live example, visit the [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/appearance).
 
 ## Options
 

@@ -37,7 +37,7 @@ How can I use Fontawesome icons in the Kendo UI for jQuery ToolBar?
 
 ## Solution
 
-The example below demonstrates how to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as Kendo UI ToolBar sprite icons.
+The example below demonstrates how to use [FontAwesome icons](https://github.com/FortAwesome/Font-Awesome) as Kendo UI ToolBar sprite icons.
 
 
 ```dojo

@@ -231,7 +231,7 @@ The LinearGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the LinearGauge](https://demos.telerik.com/kendo-ui/lineargauge/index)
+* [Demo Page for the LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 
 ## See Also 
 

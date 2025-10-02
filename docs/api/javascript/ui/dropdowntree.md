@@ -1282,6 +1282,24 @@ Customize, translate, or localize the text displayed when a single tag is select
         });
     </script>
 
+### messages.filterInputPlaceholder `String` *(default: "Filter")*
+
+The text message shown in the filter input.
+
+#### Example - customize filterInputPlaceholder message
+
+    <input id="dropdowntree" />
+    <script>
+        $("#dropdowntree").kendoDropDownTree({
+            dataSource: [],
+            filter: "contains",
+            messages: {
+                filterInputPlaceholder: "Placeholder for filtering."
+            }
+        });
+    </script>
+
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.

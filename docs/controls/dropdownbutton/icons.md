@@ -26,7 +26,7 @@ To visually enhance the DropDownButton, use any of the following approaches:
 Background icons are applied through the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The DropDownButton can either:
 * Automatically render the `span` element.
 * Use an existing `span` element&mdash;Possible only if the element has a `k-sprite` CSS class or a `k-icon` CSS class (if you use the `icon` property).
-The difference between the `icon` and `spriteCssClass` properties is that `icon` is intended for use with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
+The difference between the `icon` and `spriteCssClass` properties is that `icon` is intended for use with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [Telerik and Kendo UI Design System Icons List](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
 
 The following example demonstrates how to use icons in the DropDownButton component:
 

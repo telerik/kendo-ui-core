@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2025.3.825
+// Type definitions for Kendo UI Professional v2025.3.1002
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -5211,6 +5211,7 @@ declare namespace kendo.ui {
         value?: string | undefined;
         valuePrimitive?: boolean | undefined;
         virtual?: boolean | DropDownListVirtual | undefined;
+        messages?: DropDownListMessages | undefined;
         change?(e: DropDownListChangeEvent): void;
         close?(e: DropDownListCloseEvent): void;
         dataBound?(e: DropDownListDataBoundEvent): void;
@@ -5223,6 +5224,11 @@ declare namespace kendo.ui {
         sender: DropDownList;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DropDownListMessages {
+        noData?: string | undefined;
+        filterInputPlaceholder?: string | undefined;
     }
 
     interface DropDownListChangeEvent extends DropDownListEvent {
@@ -5312,6 +5318,7 @@ declare namespace kendo.ui {
         clear?: string | undefined;
         deleteTag?: string | undefined;
         singleTag?: string | undefined;
+        filterInputPlaceholder?: string | undefined;
     }
 
     interface DropDownTreePopup {
@@ -15283,7 +15290,7 @@ declare namespace kendo.drawing {
     }
 
 
-    interface FillOptions  {
+      interface FillOptions  {
 
 
 
@@ -19188,6 +19195,50 @@ declare namespace kendo.dataviz.ui {
         destroy(): void;
     }
 
+    type DiagramStrokeDashType =
+        | "dash"
+        | "dashDot"
+        | "dot"
+        | "longDash"
+        | "longDashDot"
+        | "longDashDotDot"
+        | "solid";
+
+
+    interface DiagramFill {
+        color?: string;
+        opacity?: number;
+    }
+
+    interface DiagramStroke {
+        color?: string;
+        dashType?: DiagramStrokeDashType;
+        width?: number;
+        lineCap?: 'butt' | 'round' | 'square';
+        lineJoin?: 'bevel' | 'miter' | 'round';
+    }
+
+    interface BringIntoViewOptions {
+        align?: string;
+        animate?: boolean;
+    }
+
+    interface ShapeConnector {
+        name?: string;
+        description?: string;
+        position?: (shape: any) => any;
+        width?: number;
+        height?: number;
+        fill?: string | DiagramFill;
+        stroke?: string | DiagramStroke;
+        hover?: ShapeConnectorHover;
+    }
+
+    interface ShapeConnectorHover {
+        fill?: string | DiagramFill;
+        stroke?: string | DiagramStroke;
+    }
+
     class Diagram extends kendo.ui.Widget {
 
         static fn: Diagram;
@@ -19211,7 +19262,7 @@ declare namespace kendo.dataviz.ui {
         addShape(obj: any, undoable: boolean): kendo.dataviz.diagram.Shape;
         alignShapes(direction: string): void;
         boundingBox(items: any): kendo.dataviz.diagram.Rect;
-        bringIntoView(obj: any, options: any): void;
+        bringIntoView(obj: any, options?: BringIntoViewOptions): void;
         cancelEdit(): void;
         clear(): void;
         connect(source: any, target: any, options: any): void;
@@ -19250,9 +19301,9 @@ declare namespace kendo.dataviz.ui {
         saveAsPdf(): JQueryPromise<any>;
         saveEdit(): void;
         select(): any;
-        select(elements: kendo.dataviz.diagram.Connection, options: any): void;
-        select(elements: kendo.dataviz.diagram.Shape, options: any): void;
-        select(elements: any, options: any): void;
+        select(elements: kendo.dataviz.diagram.Connection, options?: any): void;
+        select(elements: kendo.dataviz.diagram.Shape, options?: any): void;
+        select(elements: any, options?: any): void;
         selectAll(): void;
         selectArea(rect: kendo.dataviz.diagram.Rect): void;
         setConnectionsDataSource(dataSource: kendo.data.DataSource): void;
@@ -19353,6 +19404,7 @@ declare namespace kendo.dataviz.ui {
     interface DiagramConnectionDefaultsStroke {
         color?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
     }
 
     interface DiagramConnectionDefaults {
@@ -19367,6 +19419,7 @@ declare namespace kendo.dataviz.ui {
         stroke?: DiagramConnectionDefaultsStroke | undefined;
         toConnector?: string | undefined;
         type?: string | undefined;
+        cornerRadius?: number | undefined;
     }
 
     interface DiagramConnectionContent {
@@ -19394,7 +19447,7 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramConnectionEndCapStroke {
         color?: string | undefined;
-        dashType?: string | undefined;
+        dashType?: string | DiagramStrokeDashType | undefined;
         width?: number | undefined;
     }
 
@@ -19402,6 +19455,10 @@ declare namespace kendo.dataviz.ui {
         fill?: string | DiagramConnectionEndCapFill | undefined;
         stroke?: string | DiagramConnectionEndCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: { x: number, y: number} | undefined;
+        radius?: number | undefined;
+        position?: string | undefined;
     }
 
     interface DiagramConnectionFrom {
@@ -19447,7 +19504,7 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramConnectionStartCapStroke {
         color?: string | undefined;
-        dashType?: string | undefined;
+        dashType?: string | DiagramStrokeDashType | undefined;
         width?: number | undefined;
     }
 
@@ -19455,11 +19512,17 @@ declare namespace kendo.dataviz.ui {
         fill?: string | DiagramConnectionStartCapFill | undefined;
         stroke?: string | DiagramConnectionStartCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: { x: number, y: number} | undefined;
+        radius?: number | undefined;
+        position?: string | undefined;
     }
 
     interface DiagramConnectionStroke {
         color?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
     }
 
     interface DiagramConnectionTo {
@@ -19481,6 +19544,7 @@ declare namespace kendo.dataviz.ui {
         to?: string | DiagramConnectionTo | undefined;
         toConnector?: string | undefined;
         type?: string | undefined;
+        cornerRadius?: number | undefined;
     }
 
     interface DiagramEditableDragSnap {
@@ -19588,6 +19652,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface DiagramPannable {
+        enabled?: boolean | undefined;
         key?: string | undefined;
     }
 
@@ -19707,6 +19772,10 @@ declare namespace kendo.dataviz.ui {
         fontWeight?: string | undefined;
         template?: string|Function | undefined;
         text?: string | undefined;
+        lineSpacing?: number | undefined;
+        textWrap?: string | undefined;
+        padding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
+        relativePadding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
     }
 
     interface DiagramShapeDefaultsEditableTool {
@@ -19781,6 +19850,9 @@ declare namespace kendo.dataviz.ui {
         width?: number | undefined;
         x?: number | undefined;
         y?: number | undefined;
+        cornerRadius?: number | undefined;
+        center?: { x: number; y: number } | undefined;
+        radius?: number | undefined;
     }
 
     interface DiagramShapeConnectorDefaultsFill {
@@ -19863,8 +19935,12 @@ declare namespace kendo.dataviz.ui {
         fontSize?: number | undefined;
         fontStyle?: string | undefined;
         fontWeight?: string | undefined;
-        template?: string|Function | undefined;
+        template?: string | Function | undefined;
         text?: string | undefined;
+        lineSpacing?: number | undefined;
+        textWrap?: string | undefined;
+        padding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
+        relativePadding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
     }
 
     interface DiagramShapeEditableTool {
@@ -19915,6 +19991,8 @@ declare namespace kendo.dataviz.ui {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
     }
 
     interface DiagramShape {
@@ -19937,6 +20015,10 @@ declare namespace kendo.dataviz.ui {
         width?: number | undefined;
         x?: number | undefined;
         y?: number | undefined;
+        cornerRadius?: number | undefined;
+        center?: { x: number; y: number } | undefined;
+        radius?: number | undefined;
+        dataItem?: any;
     }
 
     interface DiagramExportImageOptions {
@@ -20102,7 +20184,6 @@ declare namespace kendo.dataviz.ui {
         point?: kendo.dataviz.diagram.Point | undefined;
         zoom?: number | undefined;
     }
-
 
     class LinearGauge extends kendo.ui.Widget {
 
@@ -25246,12 +25327,6 @@ declare namespace kendo.dataviz.diagram {
         hover?: ShapeConnectorDefaultsHover | undefined;
         fill?: string | ShapeConnectorDefaultsFill | undefined;
         stroke?: string | ShapeConnectorDefaultsStroke | undefined;
-    }
-
-    interface ShapeConnector {
-        name?: string | undefined;
-        description?: string | undefined;
-        position?: Function | undefined;
     }
 
     interface ShapeContent {

@@ -41,7 +41,7 @@ For more information, refer to:
 ## See Also
 
 * [WCAG 2.2 Support by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/index)
-* [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/navigation.html)
+* [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/keyboard-navigation)
 * [Keyboard Navigation by the Chart]({% slug keynav_kendoui_charts_widget %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

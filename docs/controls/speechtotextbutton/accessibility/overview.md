@@ -62,8 +62,7 @@ The SpeechToTextButton has been tested with the following screen readers and bro
 ### Automated Testing
 The SpeechToTextButton has been tested with [axe-core](https://github.com/dequelabs/axe-core).
 ### Test Example
-A live test example of the SpeechToTextButton component could be found here: https://demos.telerik.com/kendo-ui/accessibility/speechtotextbutton
+A live test example of the SpeechToTextButton component could be found here: https://demos.telerik.com/kendo-ui/speechtotextbutton/index
 ## See Also
-* [Keyboard Navigation by the SpeechToTextButton (Demo)](https://demos.telerik.com/kendo-ui/speechtotextbutton/keyboard-navigation)
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})
 * [Keyboard Support in Kendo UI for jQuery]({%slug overview_accessibility_support_kendoui%}#keyboard-navigation)

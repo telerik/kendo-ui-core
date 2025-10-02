@@ -10,7 +10,7 @@ slug: visualstudiointellisense_integration_kendoui
 
 Kendo UI provides Intelligent code completion for Visual Studio (VS) by using an additional `vsdoc` or `intellisense` JavaScript file.
 
-The approach was initially described in Scott Guthrie's blog post [jQuery IntelliSense in VS 2008](http://weblogs.asp.net/scottgu/archive/2008/11/21/jquery-intellisense-in-vs-2008.aspx). Kendo UI Visual Studio IntelliSense is integrated in Visual Studio 2008 SP1 or later versions and it also works with Visual Web Developer (free).
+The approach was initially described in Scott Guthrie's blog post [jQuery IntelliSense in VS 2008](https://weblogs.asp.net/scottgu/jquery-intellisense-in-vs-2008/). Kendo UI Visual Studio IntelliSense is integrated in Visual Studio 2008 SP1 or later versions and it also works with Visual Web Developer (free).
 
 For versions of Visual Studio prior to Visual Studio 2017, refer to the [section on installation](#installation).
 

@@ -30,7 +30,7 @@ The Kendo UI for jQuery Sankey Diagram includes the following customizable eleme
 
 ## Next Steps
 
-* [Basic Usage of the Sankey Diagram (Demo)](https://demos.telerik.com/kendo-ui/sankey-chart/index)
+* [Overview of the Sankey Diagram (Demo)](https://demos.telerik.com/kendo-ui/sankey-charts/index)
 
 ## See Also
 

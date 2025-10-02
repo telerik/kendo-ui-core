@@ -1221,7 +1221,8 @@ if (kendo.ui.List) {
     kendo.ui.List.prototype.options.messages =
     $.extend(true, kendo.ui.List.prototype.options.messages,{
       "clear": "изчисти",
-      "noData": "Няма налични опции."
+      "noData": "Няма налични опции.",
+      "filterInputPlaceholder": "Филтър"
     });
 }
 
@@ -1261,7 +1262,8 @@ if (kendo.ui.DropDownTree) {
         "singleTag": "избрана/и опция/и",
         "clear": "изчисти",
         "deleteTag": "премахни",
-        "noData": "Няма налични опции."
+        "noData": "Няма налични опции.",
+        "filterInputPlaceholder": "Филтър"
     });
 }
 

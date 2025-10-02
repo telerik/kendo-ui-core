@@ -154,6 +154,8 @@ The TaskBoard uses two different data source instances for its columns and cards
 For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
 
 The following example demonstrates how to configure the data source of the columns.
+
+```
     var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     columns: {
         transport: {
@@ -185,8 +187,11 @@ The following example demonstrates how to configure the data source of the colum
             }
         }
     }
+```
 
 The following example demonstrates how to configure the data source of the cards.
+
+```
     var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     
     dataSource: {
@@ -221,6 +226,7 @@ The following example demonstrates how to configure the data source of the cards
             }
         }
     }
+```
 
 
 ### Setting the Editable Option

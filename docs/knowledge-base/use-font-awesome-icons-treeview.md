@@ -37,7 +37,7 @@ How can I use FontAwesome icons in the Kendo UI for jQuery TreeView?
 
 ## Solution
 
-The following example demonstrates how to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as TreeView sprite icons.
+The following example demonstrates how to use [FontAwesome icons](https://github.com/FortAwesome/Font-Awesome) as TreeView sprite icons.
 
 ```dojo
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">

@@ -1,6 +1,6 @@
 ---
 title: Prompt Library
-page_title: Telerik ASP.NET Core Prompt Library
+page_title: Telerik {{ site.framework }} Prompt Library
 description: Explore the extensive collection of prompts that you can use with the Telerik {{ site.framework }} AI Coding Assistant.
 slug: ai_prompt_library
 position: 4
@@ -18,23 +18,25 @@ This collection of prompts is not exhaustive and the Telerik {{ site.framework }
 
 ## How to Use the Prompts
 
-All prompts in this library target the [MCP Server](slug:ai_mcp_server) through the `#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant` handle. Make sure that you have installed and enabled either the Telerik {{ site.framework }} HtmlHelpers or Telerik {{ site.framework }} TagHelpers MCP Server before attempting to run the prompts.
+All prompts in this library target the [MCP Server](slug:ai_mcp_server) through the {% if site.mvc %}`#telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant`{% endif %} handle. Make sure that you have installed and enabled {% if site.core %}either{% endif %} the Telerik {{ site.framework }} HtmlHelpers {% if site.core %}or Telerik {{ site.framework }} TagHelpers{% endif %} MCP Server before attempting to run the prompts.
 
 1. Browse the prompt library to find a prompt that suits your needs.
-2. Copy the prompt text (including the `#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcorehtml-assistant` handle, based on the used HtmlHelper or TagHelper synax).
-3. (Optional) Customize the prompt as needed for your specific use case but keep the `#telerik_aspnetcore{syntax type}_assistant` handle.<br/>When modifying the prompts, make sure the changes comply with the [intended use](slug:overview_ai#intended-use) and the [recommendations](slug:overview_ai#recommendations) for the AI Coding Assistant.
+2. Copy the prompt text (including the {% if site.mvc %}`#telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`#telerik-aspnetcorehtml-assistant` or `#telerik-aspnetcoretag-assistant`{% endif %} handle, based on the used HtmlHelper {% if site.core %}or TagHelper{% endif %} synax).
+3. (Optional) Customize the prompt as needed for your specific use case but keep the {% if site.mvc %}`#telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`#telerik_aspnetcore{syntax type}_assistant`{% endif %} handle.<br/>When modifying the prompts, make sure the changes comply with the [intended use](slug:overview_ai#intended-use) and the [recommendations](slug:overview_ai#recommendations) for the AI Coding Assistant.
 4. Run the prompt against the [MCP Server](slug:ai_mcp_server).
 
 >warning Always double-check the code and solutions proposed by any AI-powered tool before applying them to your project.
 
+{% if site.core %}
 >caption Use with the Copilot Extension
-
 To run the provided prompts in the [Telerik {{ site.framework }} GitHub Copilot Extension](slug:ai_copilot_extension) (without the MCP Server installed), modify the prompts to use the `@telerikaspnetcorehtml` or `@telerikaspnetcoretag` handle instead.
+{% endif %}
 
 ## Component-Specific Prompts
 
 This section provides prompt ideas for the most popular and complex {{ site.product }} components.
 
+{% if site.core %}
 ### Grid
 
 The [{{ site.product }} Grid](slug:htmlhelpers_grid_aspnetcore_overview) lets you create responsive, accessible, and customizable {{ site.framework }} applications that require the displaying and management of large datasets.
@@ -2351,12 +2353,526 @@ public class PersonModel
 ```
 
 </div>
+{% endif %}
+
+{% if site.mvc %}
+
+### Grid
+
+The [{{ site.product }} Grid](slug:htmlhelpers_grid_aspnetcore_overview) lets you create responsive, accessible, and customizable {{ site.framework }} applications that require the displaying and management of large datasets.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
+
+```prompt Basic Grid
+#telerik-aspnetmvc-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality.
+```
+```C# Output
+// output placeholder
+```
+
+```prompt Filtering
+#telerik-aspnetmvc-assistant Implement a Grid with filter row functionality. Show how to set up default filter operators for text, numeric, and date columns.
+```
+```C# Output
+// View
+@(Html.Kendo().Grid<Employee>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.Name)
+            .Filterable(ftb => ftb.Cell(cell => cell.Operator("startswith")));
+        columns.Bound(e => e.Age)
+            .Filterable(ftb => ftb.Cell(cell => cell.Operator("eq")));
+        columns.Bound(e => e.HireDate)
+            .Filterable(ftb => ftb.Cell(cell => cell.Operator("gte")));
+    })
+    .Filterable(filterable => filterable
+        .Mode(GridFilterMode.Row)
+        .Operators(operators => operators
+            .ForString(str => str.Clear()
+                .StartsWith("Starts with")
+                .IsEqualTo("Is equal to")
+                .IsNotEqualTo("Is not equal to"))
+            .ForNumber(num => num.Clear()
+                .IsEqualTo("Equal to")
+                .IsGreaterThan("Greater than")
+                .IsLessThan("Less than"))
+            .ForDate(date => date.Clear()
+                .IsEqualTo("Equal to")
+                .IsGreaterThanOrEqualTo("After or equal to")
+                .IsLessThanOrEqualTo("Before or equal to"))
+        )
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("Employees_Read", "Home"))
+    )
+)
+```
+
+```prompt Export
+#telerik-aspnetmvc-assistant Add Excel and PDF export functionality to a Grid.
+```
+```C# Output
+// View
+@(Html.Kendo().Grid<Employee>()
+    .Name("grid")
+    .ToolBar(toolbar =>
+    {
+        toolbar.Excel();
+        toolbar.Pdf();
+    })
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.EmployeeID);
+        columns.Bound(e => e.Name);
+        columns.Bound(e => e.Position);
+        columns.Bound(e => e.Salary);
+    })
+    .Scrollable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+        .Read(read => read.Action("Employees_Read", "Home"))
+    )
+)
+```
+
+```prompt Virtualization
+#telerik-aspnetmvc-assistant Set up a Grid with virtual scrolling to handle large datasets efficiently.
+```
+```C# Output
+// View
+@(Html.Kendo().Grid<Employee>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.EmployeeID).Width(100);
+        columns.Bound(e => e.Name).Width(200);
+        columns.Bound(e => e.Position).Width(150);
+        columns.Bound(e => e.Salary).Width(120);
+    })
+    .Scrollable(s => s.Virtual(GridVirtualizationMode.Rows))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(100)
+        .Read(read => read.Action("Employees_Read", "Home"))
+    )
+)
+```
+
+```prompt Column Templates
+#telerik-aspnetmvc-assistant Create a Grid that bind to a Model and has 3 columns: Name, Age, Status, and StartDate. The Name column must use a client template with the Name and Age values. The StartDate column must be displayed in format "dd/MM/yyyy". The Status column must display "Active" if its value is "true" and "Inactive" if its value is "false".
+```
+```C# Output
+// View
+@model IEnumerable<Employee>
+@(Html.Kendo().Grid<Employee>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.Name)
+            .Title("Name & Age")
+            .ClientTemplate("#= Name # (Age: #= Age #)");
+        columns.Bound(e => e.Age)
+            .Title("Age");
+        columns.Bound(e => e.Status)
+            .Title("Status")
+            .ClientTemplate("#= Status ? 'Active' : 'Inactive' #");
+        columns.Bound(e => e.StartDate)
+            .Title("Start Date")
+            .Format("{0:dd/MM/yyyy}");
+    })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("Employees_Read", "Home"))
+    )
+)
+```
+
+</div>
+
+### Charts
+
+The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a comprehensive charting solution for data visualization with multiple chart types and customization options.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
+
+```prompt Basic Chart
+#telerik-aspnetmvc-assistant Create a basic Chart that displays quarterly sales data. Use a column series bound to Sales, with categories bound to Quarter. Add a title and legend.
+```
+```C# Output
+// output placeholder
+```
+
+```prompt Multiple Series
+#telerik-aspnetmvc-assistant Create a Chart with two line series, one bound to Revenue and the other bound to Expenses. Categories must be the months. Show a legend and a title.
+```
+```C# Output
+// View
+@model IEnumerable<ChartDataPoint>
+@(Html.Kendo().Chart<ChartDataPoint>()
+    .Name("chartRevenueExpenses")
+    .Title("Monthly Revenue vs Expenses")
+    .Legend(true)
+    .Series(series =>
+    {
+        series.Line("Revenue", "Month").Name("Revenue");
+        series.Line("Expenses", "Month").Name("Expenses");
+    })
+    .CategoryAxis(axis => axis
+        .Categories(new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" })
+        .Title("Month")
+    )
+    .ValueAxis(axis => axis
+        .Title("Amount ($)")
+    )
+)
+// Model
+public class ChartDataPoint
+{
+    public string Month { get; set; }
+    public double Revenue { get; set; }
+    public double Expenses { get; set; }
+}
+```
+
+
+```prompt Pie Chart
+#telerik-aspnetmvc-assistant Create a Pie Chart that displays market share data. The series must be bound to Value and categorized by Company. Show labels with percentages.
+```
+```C# Output
+// View
+@model IEnumerable<MarketShareData>
+@(Html.Kendo().Chart<MarketShareData>()
+    .Name("chartMarketShare")
+    .Title("Market Share Distribution")
+    .Legend(true)
+    .Series(series =>
+    {
+        series.Pie("Value", "Company")
+            .Labels(labels => labels
+                .Visible(true)
+                .Template("#= Company #: #= kendo.format('{0:p}', percentage) #")
+            );
+    })
+)
+// Model
+public class MarketShareData
+{
+    public string Company { get; set; }
+    public double Value { get; set; }
+}
+```
+
+
+```prompt Donut Chart
+#telerik-aspnetmvc-assistant Create a Donut Chart to display budget allocation by Department. Series bound to Amount, category Department. Show labels with percentages inside.
+```
+```C# Output
+// View
+@model IEnumerable<BudgetAllocation>
+@(Html.Kendo().Chart<BudgetAllocation>()
+    .Name("chartBudgetDonut")
+    .Title("Budget Allocation by Department")
+    .Legend(true)
+    .Series(series =>
+    {
+        series.Donut(b => b.Amount, b => b.Department)
+            .Labels(labels => labels
+                .Visible(true)
+                .Position(ChartPieLabelsPosition.Center)
+                .Template("#= Department #: #= kendo.format('{0:p}', percentage) #")
+            );
+    })
+)
+// Model
+public class BudgetAllocation
+{
+    public string Department { get; set; }
+    public double Amount { get; set; }
+}
+```
+
+```prompt Scatter Chart
+#telerik-aspnetmvc-assistant Create a Scatter Chart that plots Age versus Income from a Population model. X axis numeric Age, Y axis numeric Income.
+```
+```C# Output
+// View
+@model IEnumerable<Population>
+@(Html.Kendo().Chart<Population>()
+    .Name("chartScatterAgeIncome")
+    .Title("Age vs Income Scatter Chart")
+    .Legend(true)
+    .Series(series =>
+    {
+        series.Scatter(p => p.Age, p => p.Income)
+            .Name("Population");
+    })
+    .CategoryAxis(axis => axis
+        .Numeric()
+        .Title("Age")
+    )
+    .ValueAxis(axis => axis
+        .Numeric()
+        .Title("Income")
+    )
+)
+// Model
+public class Population
+{
+    public int Age { get; set; }
+    public double Income { get; set; }
+}
+```
+
+</div>
+
+### DatePicker
+
+The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) component allows users to select dates from a calendar pop-up or by typing in a date input field. It supports features such as date formatting, validation, min/max date restrictions, and integration with forms.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
+
+```prompt DatePicker
+#telerik-aspnetmvc-assistant Create a DatePicker named birthDate with format MM/dd/yyyy.
+```
+```C# Output
+// View
+@(Html.Kendo().DatePicker()
+    .Name("birthDate")
+    .Format("MM/dd/yyyy")
+)
+```
+
+```prompt DateRangePicker
+#telerik-aspnetmvc-assistant Create a DateRangePicker named orderRange with start and end inputs. Use format MM/dd/yyyy and show week numbers.
+```
+```C# Output
+// View
+@(Html.Kendo().DateRangePicker()
+    .Name("orderRange")
+    .Format("MM/dd/yyyy")
+    .WeekNumber(true)
+)
+```
+
+```prompt DateTimePicker
+#telerik-aspnetmvc-assistant Create a DateTimePicker named meetingDate with format MM/dd/yyyy hh:mm tt and 30-minute intervals.
+```
+```C# Output
+// View
+@(Html.Kendo().DateTimePicker()
+    .Name("meetingDate")
+    .Format("MM/dd/yyyy hh:mm tt")
+    .Interval(30)
+)
+```
+
+</div>
+
+### Form
+
+The [{{ site.product }} Form](slug:htmlhelpers_form_aspnetcore_overview) provides a variety of built-in options and features to generate and manage forms in your application.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
+
+```prompt Form Layout
+#telerik-aspnetmvc-assistant Create a Form with grid layout of 2 columns and gutter 20. Items: FirstName, LastName, Email, Phone as TextBoxes. Enable validation summary.
+```
+```C# Output
+// View
+@model PersonModel
+
+@(Html.Kendo().Form<PersonModel>()
+    .Name("contactForm")
+    .Layout("grid")
+    .Grid(grid => grid
+        .Cols(2)
+        .Gutter(20)
+    )
+    .Items(items =>
+    {
+        items.Add()
+            .Field(f => f.FirstName)
+            .Label(l => l.Text("First Name"))
+            .Editor(e => e.TextBox());
+
+        items.Add()
+            .Field(f => f.LastName)
+            .Label(l => l.Text("Last Name"))
+            .Editor(e => e.TextBox());
+
+        items.Add()
+            .Field(f => f.Email)
+            .Label(l => l.Text("Email"))
+            .Editor(e => e.TextBox());
+
+        items.Add()
+            .Field(f => f.Phone)
+            .Label(l => l.Text("Phone"))
+            .Editor(e => e.TextBox());
+    })
+    .Validatable(validatable => validatable
+        .ValidationSummary(true)
+        .ValidateOnBlur(true)
+    )
+)
+```
+
+```csharp
+// Model
+public class PersonModel
+{
+    [Required(ErrorMessage = "First Name is required")]
+    public string FirstName { get; set; }
+
+    [Required(ErrorMessage = "Last Name is required")]
+    public string LastName { get; set; }
+
+    [Required(ErrorMessage = "Email is required")]
+    [EmailAddress(ErrorMessage = "Please enter a valid email address")]
+    public string Email { get; set; }
+
+    [Required(ErrorMessage = "Phone is required")]
+    [Phone(ErrorMessage = "Please enter a valid phone number")]
+    public string Phone { get; set; }
+}
+```
+
+```prompt Form Validation
+#telerik-aspnetmvc-assistant Create a Form bound to RegisterViewModel with fields Username, Password, ConfirmPassword, and Email. Add validation with custom error messages and a Submit button.
+```
+```C# Output
+// View
+@model RegisterViewModel
+
+@(Html.Kendo().Form<RegisterViewModel>()
+    .Name("registerForm")
+    .Items(items =>
+    {
+        items.Add()
+            .Field(f => f.Username)
+            .Label(l => l.Text("Username"))
+            .Editor(e => e.TextBox());
+
+        items.Add()
+            .Field(f => f.Password)
+            .Label(l => l.Text("Password"))
+            .Editor(e => e.TextBox().HtmlAttributes(new { type = "password" }));
+
+        items.Add()
+            .Field(f => f.ConfirmPassword)
+            .Label(l => l.Text("Confirm Password"))
+            .Editor(e => e.TextBox().HtmlAttributes(new { type = "password" }));
+
+        items.Add()
+            .Field(f => f.Email)
+            .Label(l => l.Text("Email"))
+            .Editor(e => e.TextBox());
+    })
+    .Validatable(validatable => validatable
+        .ValidationSummary(true)
+        .ValidateOnBlur(true)
+    )
+    .Messages(m => m.Submit("Register"))
+)
+
+// Model
+public class RegisterViewModel
+{
+    [Required(ErrorMessage = "Username is required")]
+    public string Username { get; set; }
+
+    [Required(ErrorMessage = "Password is required")]
+    [MinLength(6, ErrorMessage = "Password must be at least 6 characters")]
+    public string Password { get; set; }
+
+    [Required(ErrorMessage = "Confirm Password is required")]
+    [Compare("Password", ErrorMessage = "Passwords do not match")]
+    public string ConfirmPassword { get; set; }
+
+    [Required(ErrorMessage = "Email is required")]
+    [EmailAddress(ErrorMessage = "Please enter a valid email address")]
+    public string Email { get; set; }
+}
+```
+
+```prompt Form Editors
+#telerik-aspnetmvc-assistant Create a Form with DropDownList Country, DatePicker BirthDate, and NumericTextBox Age. Enable validation and add a Submit button styled as primary.
+```
+```C# Output
+// View
+@model PersonFormModel
+
+@(Html.Kendo().Form<PersonFormModel>()
+    .Name("personForm")
+    .Items(items =>
+    {
+        items.Add()
+            .Field(f => f.Country)
+            .Label(l => l.Text("Country"))
+            .Editor(e => e.DropDownList()
+                .OptionLabel("Select country...")
+                .BindTo(new[]
+                {
+                    new { Text = "USA", Value = "USA" },
+                    new { Text = "Canada", Value = "Canada" },
+                    new { Text = "UK", Value = "UK" },
+                    new { Text = "Germany", Value = "Germany" },
+                    new { Text = "France", Value = "France" }
+                })
+                .DataTextField("Text")
+                .DataValueField("Value")
+            );
+
+        items.Add()
+            .Field(f => f.BirthDate)
+            .Label(l => l.Text("Birth Date"))
+            .Editor(e => e.DatePicker()
+                .Format("MM/dd/yyyy")
+            );
+
+        items.Add()
+            .Field(f => f.Age)
+            .Label(l => l.Text("Age"))
+            .Editor(e => e.NumericTextBox()
+                .Format("n0")
+                .Min(0)
+                .Max(120)
+            );
+    })
+    .Validatable(validatable => validatable
+        .ValidationSummary(true)
+        .ValidateOnBlur(true)
+    )
+    .Messages(m => m.Submit("Submit"))
+    .ButtonsTemplate("<button type='submit' class='k-button k-button-solid-primary'>Submit</button>")
+)
+
+// Model
+public class PersonFormModel
+{
+    [Required(ErrorMessage = "Country is required")]
+    public string Country { get; set; }
+
+    [Required(ErrorMessage = "Birth Date is required")]
+    [DataType(DataType.Date)]
+    public DateTime? BirthDate { get; set; }
+
+    [Required(ErrorMessage = "Age is required")]
+    [Range(0, 120, ErrorMessage = "Age must be between 0 and 120")]
+    public int? Age { get; set; }
+}
+```
+
+</div>
+{% endif %}
 
 ## See Also
 
 * [Telerik {{ site.framework }} AI Coding Assistant Overview](slug:overview_ai)
 * [Telerik {{ site.framework }} AI Coding Assistant Intended Use](slug:overview_ai#intended-use)
-* [Telerik {{ site.framework }} Extension for GitHub Copilot](slug:ai_copilot_extension)
 * [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)
 
 <style>
