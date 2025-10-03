@@ -3242,7 +3242,7 @@ Adjust or configure the color of the stroke or outline for connection end caps, 
           endCap: {
             type: "ArrowEnd",
             stroke: {
-              color: "#333"
+              color: "#333",
               width: 2
             }
           }
@@ -4220,11 +4220,6 @@ Customize or configure the outline color, border color, or stroke tint of select
               stroke: {
                 color: "#ff6358"
               }
-            }
-          }
-        }]
-    });
-    </script>
             }
           }
         }]

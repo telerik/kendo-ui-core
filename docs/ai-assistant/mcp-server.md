@@ -35,7 +35,7 @@ The generic settings of the Kendo UI for jQuery MCP server are:
 You also need to add your [Telerik licence key]({% slug using-license-file %}) as an `env` parameter in the `mcp.json` file. There are two options:
 
 * (recommended) Use a `TELERIK_LICENSE_PATH` argument and point to the location of your Telerik license file.
-* Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key]({% slug using-license-file#installing-or-updating-the-license-key %}) when necessary.
+* Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key]({% slug using-license-file %}#installing-or-updating-the-license-key) when necessary.
 
 ### VSCode
 
@@ -132,7 +132,7 @@ The following list describes how your prompts may look like:
 
 ## Usage Limits
 
-A Telerik [Subscription license](https://www.telerik.com/purchase/faq/licensing-purchasing) is recommended in order to use the Kendo UI for jQuery AI Coding Assistant without restrictions. Perpetual license holders and trial users can make a [limited number of requests per year]({% slug ai_coding_assistant_overview#usage-limits %}).
+A Telerik [Subscription license](https://www.telerik.com/purchase/faq/licensing-purchasing) is recommended in order to use the Kendo UI for jQuery AI Coding Assistant without restrictions. Perpetual license holders and trial users can make a [limited number of requests per year]({% slug ai_coding_assistant_overview %}#usage-limits).
 
 ## Connect to Local AI Model
 
@@ -140,5 +140,5 @@ You can use the Kendo UI for jQuery MCP server with local large language models 
 
 ## See Also
 
-* [Kendo UI for jQuery AI Coding Assistant Intended Use]({% slug ai_coding_assistant_overview#intended-use %})
-* [Kendo UI for jQuery AI Coding Assistant Recommendations]({% slug ai_coding_assistant_overview#recommendations %})
+* [Kendo UI for jQuery AI Coding Assistant Intended Use]({% slug ai_coding_assistant_overview %}#intended-use)
+* [Kendo UI for jQuery AI Coding Assistant Recommendations]({% slug ai_coding_assistant_overview %}#recommendations)
