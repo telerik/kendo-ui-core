@@ -201,6 +201,9 @@ navigation:
     "controls/sortable/integration":
         title: "Integration"
         position: 6
+    "ai-assistant":
+        title: "AI Coding Assistant"
+        position: 5
     "framework":
         title: "Shared Utilities"
         position: 5
