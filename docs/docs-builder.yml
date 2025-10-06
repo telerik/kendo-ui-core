@@ -2094,5 +2094,8 @@ redirects:
 - from: ^/web/grid/appearance$
   to: /controls/grid/appearance/height
 
+- from: ^/controls/([^/]+)/?$
+  to: /controls/$1/overview
+
 - from: ^/controls/grid/appearance$
   to: /controls/grid/appearance/height

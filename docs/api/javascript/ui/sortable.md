@@ -431,6 +431,29 @@ Control dragging behavior by specifying CSS selectors to exclude certain child e
         });
     </script>
 
+### navigatable `Boolean`*(default: false)*
+
+If set to true, the user can navigate the widget with the keyboard. By default, keyboard navigation is disabled.
+
+
+<div class="meta-api-description">
+Enable, activate, or allow keyboard navigation, keyboard controls, or arrow key movement for sortable lists, sortable components, or draggable items, letting users interact, reorder, move, or traverse items using the keyboard instead of a mouse, support accessibility, tabbing, focus management, and keyboard shortcuts, configure keyboard support for sorting, and control whether users can use keys to navigate or rearrange sortable elements.
+</div>
+
+#### Example - Sortable with navigatable enabled
+
+    <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
+
+    <script>
+        $("#sortable").kendoSortable({
+            navigatable: true,
+        });
+    </script>
+
 ### placeholder `Function | String | jQuery`
 
 Provides a way for customization of the sortable item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.

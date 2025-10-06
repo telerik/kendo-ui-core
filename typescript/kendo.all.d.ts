@@ -11704,6 +11704,7 @@ declare namespace kendo.ui {
         hint?: Function|string|JQuery | undefined;
         holdToDrag?: boolean | undefined;
         ignore?: string | undefined;
+        navigatable?: boolean | undefined;
         placeholder?: Function|string|JQuery | undefined;
         start?(e: SortableStartEvent): void;
         move?(e: SortableMoveEvent): void;
