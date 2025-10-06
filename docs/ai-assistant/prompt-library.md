@@ -45,6 +45,8 @@ If you want to run these prompts only through a generic AI chat (e.g., GitHub Co
 
 This section provides examples of general questions related to Kendo UI for jQuery.
 
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
+
 ```prompt Setup New Project
 #kendo-jquery-assistant Create a simple HTML page that utilizes Kendo UI for jQuery and add a Grid with sample local data.
 ```
@@ -57,13 +59,16 @@ This section provides examples of general questions related to Kendo UI for jQue
 ```js
 ```
 
+</div>
+
 ## Component-Specific Prompts
 
 Below are grouped prompt ideas for popular and feature‑rich Kendo UI for jQuery components.
 
----
 ### Grid
 The [Kendo UI for jQuery Grid]({% slug overview_kendoui_grid_widget %}) renders tabular data with rich interactivity (sorting, filtering, grouping, editing, export, virtualization, and more).
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Grid
 #kendo-jquery-assistant Create a Kendo UI for jQuery Grid that displays employees with fields: id, name, position, salary. Enable sorting and paging. Use inline dummy data (array of objects). Page size 10.
@@ -101,8 +106,12 @@ The [Kendo UI for jQuery Grid]({% slug overview_kendoui_grid_widget %}) renders 
 ```js
 ```
 
+</div>
+
 ### TreeList
 The [Kendo UI for jQuery TreeList]({% slug overview_kendoui_treelist_widget %}) enables you to display self-referencing tabular data and allows you to sort, filter, and edit data.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic TreeList
 #kendo-jquery-assistant Create a Kendo UI for jQuery TreeList showing hierarchical employees (Id, Name, Title, ReportsTo). Enable sorting and expand all nodes on load.
@@ -116,8 +125,12 @@ The [Kendo UI for jQuery TreeList]({% slug overview_kendoui_treelist_widget %}) 
 ```js
 ```
 
+</div>
+
 ### Chart
 The [Kendo UI for jQuery Charts]({% slug overview_kendoui_charts_widget %}) provide a comprehensive charting solution for data visualization with multiple chart types and customization options.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Multiple Charts
 #kendo_jquery_assistant Create three different charts to give different visual demonstration of the 8 most air polluted cities in the world.
@@ -143,8 +156,12 @@ The [Kendo UI for jQuery Charts]({% slug overview_kendoui_charts_widget %}) prov
 ```js
 ```
 
+</div>
+
 ### Scheduler
 The [Kendo UI for jQuery Scheduler]({% slug overview_kendoui_scheduler_widget %}) enables you to create calendar and scheduling applications with multiple view types and rich editing capabilities.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Scheduler
 #kendo_jquery_assistant Create a page that contains a basic Scheduler component with 3 views - day, month and week.
@@ -164,9 +181,13 @@ The [Kendo UI for jQuery Scheduler]({% slug overview_kendoui_scheduler_widget %}
 ```js
 ```
 
+</div>
+
 ### Editor
 
 The [Kendo UI for jQuery Editor]({% slug overview_kendoui_editor_widget %}) provides a rich text editing experience with support for various content types, including text, images, and tables. It includes features like formatting, styling, and content manipulation.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Editor
 #kendo_jquery_assistant Add an Editor to the page. Add only 5 tools in the Editor.
@@ -180,10 +201,12 @@ The [Kendo UI for jQuery Editor]({% slug overview_kendoui_editor_widget %}) prov
 ```js
 ```
 
+</div>
 
 ### ComboBox
 The [Kendo UI for jQuery ComboBox]({% slug overview_kendoui_combobox_widget %}) allows you to display a single selection from a list of choices, and provides virtualization and customization through templates.
 
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic ComboBox
 #kendo-jquery-assistant Create a ComboBox bound to an inline array of products with fields id and name. Placeholder "Select product". Filter contains.
@@ -197,8 +220,12 @@ The [Kendo UI for jQuery ComboBox]({% slug overview_kendoui_combobox_widget %}) 
 ```js
 ```
 
+</div>
+
 ### DropDownList
 The [Kendo UI for jQuery DropDownList]({% slug overview_kendoui_dropdownlist_widget %}) allows you to display a single selection from a list of choices, and provides virtualization and customization through templates.
+
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic ComboBox
 #kendo-jquery-assistant Create a DropDownList with category data and include a default "Select category..." option.
@@ -212,9 +239,12 @@ The [Kendo UI for jQuery DropDownList]({% slug overview_kendoui_dropdownlist_wid
 ```js
 ```
 
+</div>
+
 ### MultiSelect
 The [Kendo UI for jQuery MultiSelect]({% slug overview_kendoui_multiselect_widget %}) allows you to display a multiple selection from a list of choices. It provides virtualization and customization through templates.
 
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic MultiSelect
 #kendo-jquery-assistant Create a MultiSelect with an array of product objects.
@@ -228,9 +258,12 @@ The [Kendo UI for jQuery MultiSelect]({% slug overview_kendoui_multiselect_widge
 ```js
 ```
 
+</div>
+
 ### DatePicker
 The [Kendo UI for jQuery DatePicker]({% slug overview_kendoui_datepicker_widget %}) enables you to select a date from a calendar or through a direct input.
 
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt DatePicker with Default Value
 #kendo-jquery-assistant Render a DatePicker with a default selected date.
@@ -258,9 +291,12 @@ The [Kendo UI for jQuery DatePicker]({% slug overview_kendoui_datepicker_widget 
 ```js
 ```
 
+</div>
+
 ### Form
 The [Kendo UI for jQuery Form]({% slug overview_kendoui_form_widget %}) provides a variety of built-in options and features to generate and manage forms in your application.
 
+<div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Validation
 #kendo-jquery-assistant Create a Form with required validation on FirstName and Email. Enable ValidationSummary.
@@ -274,6 +310,14 @@ The [Kendo UI for jQuery Form]({% slug overview_kendoui_form_widget %}) provides
 ```js
 ```
 
+</div>
+
 ## See Also
 * [Intended Use & Recommendations]({% slug ai_coding_assistant_overview %})
 * [MCP Server Usage]({% slug kendo_jquery_mcp_server %})
+
+<style>
+.d-print-none button:nth-child(2) {
+  display: none !important; /* Hides the 'js' button */
+}
+</style>

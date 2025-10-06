@@ -20,7 +20,8 @@ You can configure the Menu items by specifying an array of objects, where each o
 | `imageUrl`   | String    | The URL of an image to display as an icon.                                  |
 | `items`      | Array     | An array of child items (submenus).                                         |
 | `enabled`    | Boolean   | If set to `false`, the item will be disabled.                               |
-| `cssClass`   | String    | A custom CSS class to apply to the item.                                    | 
+| `cssClass`   | String    | A custom CSS class to apply to the item.                                    |
+| `attr`       | Object    | Add attributes with specified values.                                        |
 
 ## Setting the Text
 

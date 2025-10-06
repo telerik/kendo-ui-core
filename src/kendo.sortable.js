@@ -1,4 +1,3 @@
-
 import "./kendo.draganddrop.js";
 
 export const __meta__ = {
@@ -13,7 +12,15 @@ export const __meta__ = {
         Widget = kendo.ui.Widget,
         outerWidth = kendo._outerWidth,
         outerHeight = kendo._outerHeight,
+        keys = kendo.keys,
 
+        NS = ".kendoSortable",
+
+        KEYDOWN = "keydown" + NS,
+        FOCUS = "focus" + NS,
+        BLUR = "blur" + NS,
+        REFSORTABLEITEM = "ref-sortable-item",
+        REFSORTABLEITEM_ATTR = "[" + REFSORTABLEITEM + "]",
         START = "start",
         BEFORE_MOVE = "beforeMove",
         MOVE = "move",
@@ -59,6 +66,14 @@ export const __meta__ = {
             }
 
             that.draggable = that._createDraggable();
+            that._assignRefAttribute();
+            if (that.options.navigatable) {
+                that._attatchNavigatableHandlers();
+
+                const firstItem = that._items().first();
+                that._toggleTabIndex(firstItem);
+                that._items().find(":kendoFocusable").attr("tabindex", -1);
+            }
         },
 
         events: [
@@ -75,6 +90,7 @@ export const __meta__ = {
             hint: null,
             placeholder: null,
             filter: DEFAULT_FILTER,
+            navigatable: false,
             holdToDrag: false,
             disabled: null,
             container: null,
@@ -89,7 +105,173 @@ export const __meta__ = {
             allowTouchActions: false,
         },
 
+        _attatchNavigatableHandlers: function() {
+            const that = this;
+            that._keydownHandler = that._keydown.bind(that);
+            that._blurHandler = that._blur.bind(that);
+            that._focusHandler = that._focus.bind(that);
+            that.element.on(KEYDOWN, REFSORTABLEITEM_ATTR, that._keydownHandler)
+                .on(BLUR, REFSORTABLEITEM_ATTR, that._blurHandler)
+                .on(FOCUS, REFSORTABLEITEM_ATTR, that._focusHandler);
+        },
+
+        _focus: function(e) {
+            const that = this;
+            if ($(e.target).is(REFSORTABLEITEM_ATTR)) {
+                that._toggleFocus($(e.target));
+            }
+        },
+
+        _toggleTabIndex: function(target) {
+            const that = this;
+            const items = that._items();
+
+            if (items.length) {
+                items.attr("tabindex", -1);
+                target.attr("tabindex", 0);
+            }
+        },
+
+        _toggleFocus: function(target) {
+            const that = this;
+            const items = that._items();
+
+            if (items.length) {
+                items.removeClass("k-focus");
+                target.addClass("k-focus");
+            }
+        },
+
+        _swap: function(target, swapWith, direction) {
+            const that = this;
+
+            if (swapWith.length) {
+                swapWith[direction](target);
+                that._toggleTabIndex(target);
+                target.trigger("focus");
+            }
+        },
+
+        _navigate: function(direction, target) {
+            const that = this;
+            const item = direction === "next" ? target.next() : target.prev();
+            if (item.length) {
+                that._toggleTabIndex(item);
+                item.trigger("focus");
+            }
+        },
+
+        _keydown: function(e) {
+            const that = this,
+                  key = e.keyCode,
+                  target = $(e.target),
+                  next = target.next(),
+                  prev = target.prev(),
+                  focusable = target.find(":kendoFocusable");
+            var handled = false;
+
+            if (that._lastFocusedSortableItem) {
+                if (key === keys.LEFT || key === keys.UP || key === keys.RIGHT || key === keys.DOWN) {
+                    return;
+                }
+                if (key === keys.TAB) {
+                    const shiftKey = e.shiftKey;
+                    const container = that._lastFocusedSortableItem;
+                    const innerElements = container.find(":kendoFocusable");
+                    const firstInnerElement = innerElements.first();
+                    const lastInnerElement = innerElements.last();
+
+                    if (!innerElements.length) {
+                        return;
+                    };
+                    if (!shiftKey && target.is(lastInnerElement)) {
+                        e.preventDefault();
+                        firstInnerElement.focus();
+                        handled = true;
+                    };
+                    if (shiftKey && target.is(firstInnerElement)) {
+                        e.preventDefault();
+                        lastInnerElement.focus();
+                        handled = true;
+                    };
+                }
+            };
+            if (key == keys.RIGHT || key == keys.DOWN) {
+                if (e.ctrlKey) {
+                    that._swap(target, next, "after");
+                } else if (target.is(REFSORTABLEITEM_ATTR) && !target.is(that._items().last())) {
+                    that._navigate("next", target);
+                }
+                handled = true;
+            }
+            if (key == keys.LEFT || key == keys.UP) {
+                if (e.ctrlKey) {
+                    that._swap(target, prev, "before");
+                } else if (target.is(REFSORTABLEITEM_ATTR) && !target.is(that._items().first())) {
+                    that._navigate("prev", target);
+                }
+                handled = true;
+            }
+            if (key == keys.ENTER) {
+                that._lastFocusedSortableItem = target;
+                if (!focusable.length) {
+                    return;
+                }
+                target.find(":kendoFocusable").attr("tabindex", 0);
+                target.removeClass("k-focus");
+                target.attr("tabindex", -1);
+                focusable.first().trigger("focus");
+                handled = true;
+            }
+            if (key == keys.ESC) {
+                let closestSortableItem = that._lastFocusedSortableItem;
+
+                if (!closestSortableItem) {
+                    closestSortableItem = target.closest(REFSORTABLEITEM_ATTR);
+                }
+
+                if (!closestSortableItem.length) {
+                    return;
+                }
+
+                that.element.find(":kendoFocusable").attr("tabindex", -1);
+                that._toggleTabIndex(closestSortableItem);
+                closestSortableItem.trigger("focus");
+
+                if (that._lastFocusedSortableItem) {
+                    delete that._lastFocusedSortableItem;
+                }
+                handled = true;
+            }
+            if (handled) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        },
+
+        _blur: function(e) {
+            $(e.target).removeClass("k-focus");
+        },
+
+        _detatchNavigatableHandlers: function() {
+            const that = this;
+            if (that.options.navigatable) {
+                that.element.off(NS);
+                that._keydownHandler = null;
+                that._blurHandler = null;
+                that._focusHandler = null;
+            }
+        },
+
+        _assignRefAttribute: function() {
+            const that = this;
+            const items = that._items();
+
+            items.attr(REFSORTABLEITEM, "");
+        },
+
         destroy: function() {
+            this._detatchNavigatableHandlers();
             this.draggable.destroy();
             Widget.fn.destroy.call(this);
         },
