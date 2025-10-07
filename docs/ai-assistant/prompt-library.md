@@ -318,6 +318,6 @@ The [Kendo UI for jQuery Form]({% slug overview_kendoui_form_widget %}) provides
 
 <style>
 .d-print-none button:nth-child(2) {
-  display: none !important; /* Hides the 'js' button */
+  display: none !important;
 }
 </style>
