@@ -5691,7 +5691,8 @@ Control the display of numeric pagination buttons in hierarchical or tree-struct
         });
     </script>
 
-### pageable.adaptiveMode `String`*(default: "none")*
+### pageable.adaptiveMode `String` *(default: "none")*
+
 Specifies a value whether the page sizes dropdown will be adaptive. Possible values are:
 
 * `none` - The current page.

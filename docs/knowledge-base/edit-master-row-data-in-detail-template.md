@@ -54,7 +54,7 @@ The following example demonstrates how to edit records in a child Grid.
           }
         },
         change: function (e) {
-          if (e.field && e.field.indexOf("Orders.results") >= 0) {
+          if (e.field && e.field.indexOf("Orders") >= 0) {
             preventBinding = true;
           }
         },
@@ -99,7 +99,7 @@ The following example demonstrates how to edit records in a child Grid.
 
 function detailInit(e) {
   var findByID = function (id) {
-    return e.data.Orders.results.find(function(item){
+    return e.data.Orders.find(function(item){
       return item.OrderID == id;
     });
   };
@@ -108,7 +108,7 @@ function detailInit(e) {
     dataSource: {
       transport: {
         read: function (options) {
-          options.success(e.data.Orders.results.toJSON());
+          options.success(e.data.Orders.toJSON());
         },
         update: function (options) {
           var data = options.data,
@@ -126,7 +126,7 @@ function detailInit(e) {
           var parentItem = findByID(options.data.OrderID);
           preventBinding = true;
 
-          e.data.Orders.results.remove(parentItem);
+          e.data.Orders.remove(parentItem);
 
           options.success();
         },
