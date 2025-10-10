@@ -136,15 +136,16 @@ The following example demonstrates how to create a menu functionality based on a
               value: input.value
             };
           });
-          if (fieldFilters.length) {
+          if (fieldFilters.length > 0) {
             removeFiltersForField(filter, field);
             filter.filters.push({
               logic: "or",
-              filters: fieldFilters
+              filters: fieldFilters,
             });
             dataSource.filter(filter);
+          } else if (fieldFilters.length == 0) {
+            dataSource.filter([]);
           }
-          popup.close();
         });
       }
 
