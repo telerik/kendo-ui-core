@@ -1,5 +1,6 @@
 (function($, undefined) {
 
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {
@@ -33,6 +34,25 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "Is ongelijk aan",
     "startswith": "Begint met"
   }
+});
+}
+
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages = 
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages, {
+    "checkAll": "Selecteer alles",
+    "isNull": "is leeg",
+    "clearAll": "Wis alle",
+    "clear": "Wis",
+    "filter": "Filter",
+    "search": "Zoek",
+    "cancel": "Annuleer",
+    "selectedItemsFormat": "{0} optie(s) geselecteerd",
+    "done": "Klaar",
+    "into": "in",
+    "buttonTitle": "{0} filter kolom instellingen"
 });
 }
 
@@ -76,14 +96,30 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
-$.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "columns": "Kolommen",
-  "settings": "Kolom instellingen",
-  "done": "Gereed",
-  "sortAscending": "Sorteer Oplopend",
-  "sortDescending": "Sorteer Aflopend",
-  "lock": "Slot",
-  "unlock": "Ontsluiten"
+$.extend(true, kendo.ui.ColumnMenu.prototype.options.messages, {
+    "sortAscending": "Sorteer oplopend",
+    "sortDescending": "Sorteer aflopend",
+    "filter": "Filter",
+    "clearAllFilters": "Alle filters wissen",
+    "column": "Kolom",
+    "columns": "Kolommen",
+    "columnVisibility": "Kolom zichtbaarheid",
+    "clear": "Wissen",
+    "cancel": "Annuleren",
+    "done": "Klaar",
+    "settings": "Wijzig kolom instellingen",
+    "lock": "Kolom vergrendelen",
+    "unlock": "Kolom ontgrendelen",
+    "stick": "Kolom vastzetten",
+    "unstick": "Kolom losmaken",
+    "setColumnPosition": "Stel kolom positie in",
+    "apply": "Toepassen",
+    "reset": "Resetten",
+    "buttonTitle": "{0} bewerk kolom instellingen",
+    "movePrev": "Naar vorige positie",
+    "moveNext": "Naar volgende positie",
+    "groupColumn": "Kolom aan groepering toevoegen",
+    "ungroupColumn": "Kolom uit groepering halen"
 });
 }
 
@@ -149,14 +185,14 @@ if (kendo.ui.FileBrowser) {
 kendo.ui.FileBrowser.prototype.options.messages =
 $.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
   "uploadFile": "Upload",
-  "orderBy": "Arrange by",
-  "orderByName": "Name",
-  "orderBySize": "Size",
-  "directoryNotFound": "A directory with this name was not found.",
-  "emptyFolder": "Empty Folder",
-  "deleteFile": 'Are you sure you want to delete "{0}"?',
-  "invalidFileType": "The selected file \"{0}\" is not valid. Supported file types are {1}.",
-  "overwriteFile": "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
+  "orderBy": "Sorteren op",
+  "orderByName": "Naam",
+  "orderBySize": "Grootte",
+  "directoryNotFound": "De map met deze naam is niet gevonden.",
+  "emptyFolder": "Lege map",
+  "deleteFile": 'Weet u zeker dat u "{0}" wilt verwijderen?',
+  "invalidFileType": "Het gekozen bestand \"{0}\" is niet ondersteund. Ondersteunde bestandstypen zijn {1}.",
+  "overwriteFile": "Een bestand met de naam \"{0}\" bestaat al in de huidige map. Wilt u deze overschrijven?",
   "dropFilesHere": "Sleep bestanden hier naar toe om te uploaden",
   "search": "Zoek"
 });
@@ -249,8 +285,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annuleren",
   "clear": "Filter wissen",
   "filter": "Filter",
-  "info": "Toon items met waarde:",
-  "title": "Toon items met waarde",
+  "info": "Toon regels met waarde:",
+  "title": "Toon regels met waarde",
   "isFalse": "is niet waar",
   "isTrue": "is waar",
   "operator": "Operator",
@@ -273,24 +309,59 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
 
 if (kendo.ui.Grid) {
 kendo.ui.Grid.prototype.options.messages =
-$.extend(true, kendo.ui.Grid.prototype.options.messages,{
-  "commands": {
-    "canceledit": "Annuleren",
-    "cancel": "Wijzigingen annuleren",
-    "create": "Item toevoegen",
-    "destroy": "Verwijderen",
-    "edit": "Bewerken",
-    "excel": "Export naar Excel",
-    "pdf": "Export naar PDF",
-    "save": "Wijzigingen opslaan",
-    "select": "Selecteren",
-    "update": "Bijwerken"
-  },
-  "editable": {
-    "cancelDelete": "Annuleren",
-    "confirmation": "Weet u zeker dat u dit item wilt verwijderen?",
-    "confirmDelete": "Verwijderen"
-  }
+$.extend(true, kendo.ui.Grid.prototype.options.messages, {
+    "noRecords": "Geen regels beschikbaar",
+    "expandCollapseColumnHeader": "",
+    "groupHeader": "Gebruik ctrl + space om te groeperen",
+    "ungroupHeader": "Gebruik ctrl + space om uit de groepering te halen",
+    "itemsSelected": "geselecteerde regels",
+    "dragHandleLabel": "Regel slepen",
+    "toolbarLabel": "grid toolbar",
+    "groupingHeaderLabel": "grid groepering kop",
+    "filterCellTitle": "filter cel",
+    "commands": {
+        "canceledit": "Annuleren",
+        "cancel": "Wijzigingen annuleren",
+        "create": "Regel toevoegen",
+        "destroy": "Verwijderen",
+        "edit": "Bewerken",
+        "excel": "Exporteer naar Excel",
+        "pdf": "Exporteer naar PDF",
+        "save": "Wijzigingen opslaan",
+        "select": "Selecteren",
+        "update": "Bijwerken",
+        "search": "Zoeken...",
+        "columns": "Kolommen",
+        "selectRow": "Selecteer regel",
+        "selectAllRows": "Alle regels",
+        "clearSelection": "Alles deselecteren",
+        "copySelection": "Selectie kopiëren",
+        "copySelectionNoHeaders": "Selectie kopiëren (zonder headers)",
+        "paste": "Plakken (gebruik CTRL/⌘ + V)",
+        "reorderRow": "Regel hersorteren",
+        "reorderRowUp": "Omhoog",
+        "reorderRowDown": "Omlaag",
+        "reorderRowTop": "Bovenaan",
+        "reorderRowBottom": "Onderaan",
+        "exportPdf": "Exporteer naar PDF",
+        "exportExcel": "Exporteer naar Excel",
+        "exportToExcelAll": "Alles",
+        "exportToExcelSelection": "Selectie",
+        "exportToExcelSelectionNoHeaders": "Selectie (zonder headers)",
+        "sortAsc": "Sorteer oplopend",
+        "sortDesc": "Sorteer aflopen",
+        "moveGroupPrevious": "Verplaats vorige",
+        "moveGroupNext": "Verplaats volgende"
+    },
+    "editable": {
+        "cancelDelete": "Annuleren",
+        "confirmation": "Weet u zeker dat u deze regel wilt verwijderen?",
+        "confirmDelete": "Verwijderen"
+    },
+    "loader": {
+        "loading": "Laden...",
+        "exporting": "Exporteren..."
+    }
 });
 }
 
@@ -309,10 +380,10 @@ if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "Alle",
-  "display": "items {0} - {1} van {2}",
-  "empty": "Geen items om te tonen",
+  "display": "regels {0} - {1} van {2}",
+  "empty": "Geen regels om te tonen",
   "first": "Ga naar eerste pagina",
-  "itemsPerPage": "items per pagina",
+  "itemsPerPage": "regels per pagina",
   "last": "Ga naar laatste pagina",
   "next": "Ga naar volgende pagina",
   "of": "van {0}",
