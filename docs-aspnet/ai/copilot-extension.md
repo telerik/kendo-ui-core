@@ -10,6 +10,10 @@ position: 3
 
 The Telerik {{ site.framework }} [GitHub Copilot](https://github.com/features/copilot) extension provides proprietary context for the [{{ site.product }} components](https://www.telerik.com/aspnet-core-ui). The extension works as an {{ site.framework }} AI code generator and can help you reach new levels of developer productivity. You can get useful tips and generate tailored code snippets that include {{ site.product }} HtmlHelper and TagHelper components, along with their APIs.
 
+>caution [Microsoft is sunsetting GitHub Copilot extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps) on November 10th, 2025, in favor of the Model Context Protocol (MCP) standard.
+>
+> From that date, the Telerik and Kendo UI AI Coding Assistants will be available exclusively through our [MCP server](slug:ai_mcp_server), ensuring you continue to enjoy the same powerful capabilities that are delivered by a modern, open, and officially recommended standard.
+
 ## Prerequisites
 
 To use the Telerik GitHub Copilot extension for {{ site.framework }}, you need:
@@ -24,8 +28,8 @@ To use the Telerik GitHub Copilot extension for {{ site.framework }}, you need:
 To install the Telerik {{ site.framework }} Copilot extension:
 
 1. Install the GitHub Apps:
-    * For HtmlHelper components, go to the [TelerikASPNetCoreHtml GitHub App](https://github.com/apps/telerikaspnetcorehtml) page and click the **Install** button. 
-    * For TagHelper components, go to the [TelerikASPNetCoreTag GitHub App](https://github.com/apps/telerikaspnetcoretag) page and click the **Install** button. 
+    * For HtmlHelper components, go to the [TelerikASPNetCoreHtml GitHub App](https://github.com/apps/telerikaspnetcorehtml) page and click the **Install** button.
+    * For TagHelper components, go to the [TelerikASPNetCoreTag GitHub App](https://github.com/apps/telerikaspnetcoretag) page and click the **Install** button.
 
 1. You will see a list that includes your GitHub account and all GitHub organizations that you are part of. Normally, select your GitHub account.
 1. Click the **Install &amp; Authorize** button. This will authorize the GitHub Copilot extension to integrate with your GitHub account.
@@ -72,7 +76,7 @@ The following list describes how your prompts may look like:
 
 @[template](/_contentTemplates/core/ai-coding-assistant.md#number-of-requests)
 
-## See Also 
+## See Also
 
 * [Telerik {{ site.framework }} AI Coding Assistant Intended Use](slug:overview_ai#intended-use)
 * [Telerik {{ site.framework }} AI Coding Assistant Recommendations](slug:overview_ai#recommendations)
