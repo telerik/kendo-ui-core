@@ -63,5 +63,5 @@ The following Grid configuration ensures that it will be possible to scroll colu
 {% endif %}
 * [Implementing Sticky Columns in the Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns)
 * [Knowledge Base](/knowledge-base)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API](/api/grid)

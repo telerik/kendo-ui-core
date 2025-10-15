@@ -16,7 +16,14 @@ position: 1
 
 The Telerik {{ site.framework }} AI Coding Assistant improves your developer experience and increases your productivity when implementing {{ site.framework }} apps that include {{ site.product }}. The coding assistant is an AI code generator that provides proprietary context to AI models in order to produce higher quality code samples with the [{{ site.product }} components](https://www.telerik.com/{{ telerik_product_url }}) and API.
 
-The AI Coding Assistant is integrated in [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)&mdash;A powerful tool for running complex or multi-step prompts that integrates with any MCP-enabled client.
+The AI Coding Assistant is integrated in:
+
+ * [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)&mdash;A powerful tool for running complex or multi-step prompts that integrates with any MCP-enabled client.
+ * [Telerik {{ site.framework }} GitHub Copilot Extension](slug:ai_copilot_extension) (deprecated)&mdash;A Copilot add-on for fast initial code generation, basic component configuration, and detailed explanations within Copilot-enabled IDEs.
+
+>caution [Microsoft is sunsetting GitHub Copilot extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps) on November 10th, 2025, in favor of the Model Context Protocol (MCP) standard.
+>
+> From that date, the Telerik and Kendo UI AI Coding Assistants will be available exclusively through our [MCP server](slug:ai_mcp_server), ensuring you continue to enjoy the same powerful capabilities that are delivered by a modern, open, and officially recommended standard.
 
 > We recommend the [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server) for:
 > * **Agent** mode when using Visual Studio

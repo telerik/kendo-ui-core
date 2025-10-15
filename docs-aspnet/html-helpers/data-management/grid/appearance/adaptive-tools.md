@@ -451,8 +451,11 @@ To delete a specified record, the user must first select the row, then click the
 {% endif %}
 
 ## See Also
-
-* [{{ site.framework }} Grid Overview](https://www.telerik.com/{{ site.platform }}/grid)
+{% if site.core %}
+* [{{ site.framework }} Grid Overview](https://www.telerik.com/aspnet-core-ui/grid)
+{% else %}
+* [{{ site.framework }} Grid Overview](https://www.telerik.com/aspnet-mvc/grid)
+{% endif %}
 * [Adaptive Tools Demo](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-tools)
 * [Adaptive Tools Editing Demo](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-editing)
 * [Server-Side API](/api/grid)
