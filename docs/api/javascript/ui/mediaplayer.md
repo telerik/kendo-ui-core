@@ -167,6 +167,7 @@ Configure or customize media player language settings by supplying a collection 
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -181,6 +182,7 @@ Configure or customize media player language settings by supplying a collection 
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### messages.pause `String`
 
@@ -193,6 +195,7 @@ Customize and translate the tooltip text shown on the pause button in media play
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -202,6 +205,7 @@ Customize and translate the tooltip text shown on the pause button in media play
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### messages.play `String`
 
@@ -214,6 +218,7 @@ Customize or localize the Play button tooltip text in a media player interface, 
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -223,6 +228,7 @@ Customize or localize the Play button tooltip text in a media player interface, 
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### messages.mute `String`
 
@@ -235,6 +241,7 @@ Set or customize the tooltip, hover text, or label that appears when users mouse
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -244,6 +251,7 @@ Set or customize the tooltip, hover text, or label that appears when users mouse
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### messages.unmute `String`
 
@@ -256,6 +264,7 @@ Set, customize, or configure the tooltip, hover text, label, or accessible descr
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -265,6 +274,7 @@ Set, customize, or configure the tooltip, hover text, label, or accessible descr
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### messages.quality `String`
 
@@ -277,6 +287,7 @@ Customize or set the tooltip text, label, or description for the media player's 
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -286,6 +297,7 @@ Customize or set the tooltip text, label, or description for the media player's 
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### messages.fullscreen `String`
 
@@ -298,6 +310,7 @@ Set or customize the tooltip, hover text, or button label for the fullscreen con
 
 #### Example
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -307,6 +320,7 @@ Set or customize the tooltip, hover text, or button label for the fullscreen con
         media: { title: "Kendo UI for jQuery: Welcome and Overview", source: "https://www.youtube.com/watch?v=UbkbVBNYZMc" }
     });
     </script>
+```
 
 ### mute `Boolean` *(default: false)*
 
@@ -319,6 +333,7 @@ Manage audio output settings to enable or disable sound during media playback, s
 
 #### Example - enable fullscreen
 
+```pseudo
     <div id="mediaplayer"></div>
     <script>
     $("#mediaplayer").kendoMediaPlayer({
@@ -326,6 +341,7 @@ Manage audio output settings to enable or disable sound during media playback, s
         media: { title: "Digital Transformation: A New Way of Thinking", source: "https://www.youtube.com/watch?v=gNlya720gbk" }
     });
     </script>
+```
 
 ### navigatable `Boolean` *(default: false)*
 
