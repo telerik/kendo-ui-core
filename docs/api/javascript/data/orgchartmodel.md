@@ -26,8 +26,8 @@ Configure the field that holds profile images, photos, or avatar URLs within you
     <script>
     var dataSource = new kendo.data.OrgChartDataSource({
         data: [
-            { id: 1, name: "John Smith", title: "CEO", avatar: "https://demos.telerik.com/kendo-ui/content/web/orgchart/people/1.jpg", parentId: null },
-            { id: 2, name: "Jane Doe", title: "CTO", avatar: "https://demos.telerik.com/kendo-ui/content/web/orgchart/people/2.jpg", parentId: 1 }
+            { id: 1, name: "John Smith", title: "CEO", avatar: "https://demos.telerik.com/kendo-ui/content/web/treelist/people/1.jpg", parentId: null },
+            { id: 2, name: "Jane Doe", title: "CTO", avatar: "https://demos.telerik.com/kendo-ui/content/web/treelist/people/3.jpg", parentId: 1 }
         ],
         schema: {
             model: {
@@ -45,6 +45,7 @@ Configure the field that holds profile images, photos, or avatar URLs within you
     });
 
     $("#orgchart").kendoOrgChart({
+        height:800,
         dataSource: dataSource,
         template: (data) => `
             <div class='k-card-body'>

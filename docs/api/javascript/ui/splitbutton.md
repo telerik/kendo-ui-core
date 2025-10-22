@@ -376,8 +376,7 @@ Specifies the image of the item.
 Set or configure the visual icon, picture, or image source URL displayed next to or alongside a menu item within a split button control, enabling the inclusion of graphics, symbols, or thumbnails for individual menu entries to enhance UI clarity, support customization, and improve user recognition; supports setting image paths, URLs, or icon links for items in split buttons, allowing developers to add illustrative images, icons, or visual markers paired with menu text labels in dropdown or split menu components.
 </div>
 
-#### Example
-
+```pseudo
     <button id="splitButton">Command</button>
     <script>
         $("#splitButton").kendoSplitButton({
@@ -388,6 +387,7 @@ Set or configure the visual icon, picture, or image source URL displayed next to
             ]
         });
     </script>
+```
 
 ### items.spriteCssClass `String`
 

@@ -484,6 +484,7 @@ Control the option to create or prevent a dedicated embedded frame within the ma
 
 #### Example - loading the full page
 
+```pseudo
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
@@ -491,6 +492,7 @@ Control the option to create or prevent a dedicated embedded frame within the ma
       iframe: true
     });
     </script>
+```
 
 ### height `Number | String`
 

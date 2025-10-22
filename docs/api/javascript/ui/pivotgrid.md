@@ -515,7 +515,15 @@ Control automatic triggering of the print dialog or print preview immediately af
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
@@ -552,7 +560,15 @@ Control the inclusion or exclusion of hyperlinks when exporting a pivot grid to 
                     catalog: "Adventure Works DW 2008R2",
                     cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: {
+                    url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
             }
         }
     });
