@@ -827,10 +827,21 @@ export const __meta__ = {
 
         _toggleScrollButtons: function(scrollElement, backwardBtn, forwardBtn, horizontal) {
             const neededSpace = this._getNeededSpaceForChildren(scrollElement, horizontal);
-            const elementSpace = horizontal ? kendo._outerWidth(this.element) : kendo._outerHeight(this.element);
+            const elementSpace = horizontal ? kendo._outerWidth(scrollElement) : kendo._outerHeight(scrollElement);
+            const toggle = neededSpace > elementSpace;
 
-            backwardBtn.toggle(neededSpace > elementSpace);
-            forwardBtn.toggle(neededSpace > elementSpace);
+            const popup = scrollElement.closest(".k-popup").data("kendoPopup");
+
+            backwardBtn.toggle(toggle);
+            forwardBtn.toggle(toggle);
+
+            if (!toggle && horizontal) {
+                scrollElement?.height(neededSpace);
+                scrollElement?.css("overflow", "visible");
+                popup?.element.height(neededSpace);
+                popup?.wrapper.height(neededSpace);
+                popup?.position();
+            }
 
             const currentScroll = horizontal ? kendo.scrollLeft(scrollElement) : scrollElement.scrollTop();
             const elementIsPopup = scrollElement.is(popupSelector) || scrollElement.parent().is(childAnimationContainerSelector);
@@ -1418,7 +1429,7 @@ export const __meta__ = {
                 scrollTop = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollTop"),
                 bottomScrollbar = window.innerHeight - windowHeight,
                 maxHeight = windowHeight + bottomScrollbar,
-                canFit = maxHeight + scrollTop > popupOuterHeight + popupOffsetTop;
+                canFit = Math.floor(maxHeight + scrollTop) >= Math.floor(popupOuterHeight + popupOffsetTop);
 
             if (!canFit) {
                 let popupViewportGap = windowHeight * 0.05, // 5% gap from the viewport.
@@ -2836,7 +2847,7 @@ export const __meta__ = {
             var scrollLeft = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollLeft");
             var shadow = kendo.getShadows(popupElement);
             var maxWidth = windowWidth - shadow.left - shadow.right;
-            var canFit = maxWidth + scrollLeft > popupOuterWidth + popupOffsetLeft;
+            var canFit = Math.floor(maxWidth + scrollLeft) >= Math.floor(popupOuterWidth + popupOffsetLeft);
 
             if (!canFit) {
                 popups.css({ overflow: "hidden", width: (maxWidth - popupOffsetLeft + scrollLeft) + "px" });

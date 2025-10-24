@@ -19205,39 +19205,9 @@ declare namespace kendo.dataviz.ui {
         | "longDashDotDot"
         | "solid";
 
-
-    interface DiagramFill {
-        color?: string;
-        opacity?: number;
-    }
-
-    interface DiagramStroke {
-        color?: string;
-        dashType?: DiagramStrokeDashType;
-        width?: number;
-        lineCap?: 'butt' | 'round' | 'square';
-        lineJoin?: 'bevel' | 'miter' | 'round';
-    }
-
     interface BringIntoViewOptions {
         align?: string;
         animate?: boolean;
-    }
-
-    interface ShapeConnector {
-        name?: string;
-        description?: string;
-        position?: (shape: any) => any;
-        width?: number;
-        height?: number;
-        fill?: string | DiagramFill;
-        stroke?: string | DiagramStroke;
-        hover?: ShapeConnectorHover;
-    }
-
-    interface ShapeConnectorHover {
-        fill?: string | DiagramFill;
-        stroke?: string | DiagramStroke;
     }
 
     class Diagram extends kendo.ui.Widget {
@@ -19990,7 +19960,7 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramShapeStroke {
         color?: string | undefined;
-        dashType?: string | undefined;
+        dashType?: string | DiagramStrokeDashType | undefined;
         width?: number | undefined;
         lineCap?: string | undefined;
         lineJoin?: string | undefined;
@@ -25328,6 +25298,12 @@ declare namespace kendo.dataviz.diagram {
         hover?: ShapeConnectorDefaultsHover | undefined;
         fill?: string | ShapeConnectorDefaultsFill | undefined;
         stroke?: string | ShapeConnectorDefaultsStroke | undefined;
+    }
+
+    interface ShapeConnector {
+        name?: string | undefined;
+        description?: string | undefined;
+        position?: Function | undefined;
     }
 
     interface ShapeContent {
