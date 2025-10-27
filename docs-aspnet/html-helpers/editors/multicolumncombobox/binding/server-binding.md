@@ -1,43 +1,47 @@
 ---
-title:  Server Binding
-page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
+title:  Local Binding
+page_title: Local Binding
+description: "Learn how to bind the {{ site.product }}   MultiColumnComboBox component to a local dataset."
 previous_url: /helpers/editors/multicolumncombobox/binding/server-binding
 slug: htmlhelpers_multicolumncombobox_serverbinding_aspnetcore
-position: 4
+position: 2
 ---
 
-# Server Binding
+# Local Binding
 
-Local data is the data that is available on the client when the MultiColumnComboBox is initialized.
+Local data binding refers to binding the MultiColumnComboBox component to a dataset that is prepared on the server and made available during the initial page rendering. The data is retrieved server-side (from a database, service, or other data source) and then passed to the view, where the `BindTo()` method accepts the `IEnumerable` collection.
 
-You can bind the MultiColumnComboBox locally on the server by passing the appropriate collection to the component's `BindTo()` method.
+The local data binding approach is often used when dealing with small to medium-sized datasets since all records are available when the page is loaded. Also, when the client-side filtering of the MultiColumnComboBox is enabled and the complete dataset can be accessed on the client, no additional server requests are needed, which provides fast and responsive user interactions. However, for large datasets, consider using [Ajax data binding]({% slug htmlhelpers_multicolumncombobox_ajaxbinding_aspnetcore %}) to avoid increased initial page load times and memory usage.
+
+To configure the MultiColumnComboBox for local data binding, follow the next steps:
 
 1. Pass the data to the view through `ViewData`.
 
-        public ActionResult Index()
+    ```C#
+    public ActionResult Index()
+    {
+        ViewData["products"] = GetProducts();
+
+        return View(new ProductViewModel
         {
-            ViewData["products"] = GetProducts();
+            ProductID = 4,
+            ProductName = "ProductName4"
+        });
+    }
 
-            return View(new ProductViewModel
-            {
-                ProductID = 4,
-                ProductName = "ProductName4"
-            });
-        }
-
-        private static IEnumerable<ProductViewModel> GetProducts()
+    private static IEnumerable<ProductViewModel> GetProducts()
+    {
+        var products = Enumerable.Range(1, 2000).Select(i => new ProductViewModel
         {
-            var products = Enumerable.Range(0, 2000).Select(i => new ProductViewModel
-            {
-                ProductID = i,
-                ProductName = "ProductName" + i
-            });
+            ProductID = i,
+            ProductName = "ProductName" + i
+        });
 
-            return products;
-        }
+        return products;
+    }
+    ```
 
-1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
+1. Add the MultiColumnComboBox to the view and bind it to the data collection that is saved in the `ViewData`.
 
     ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
@@ -47,7 +51,7 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
             .DataTextField("ProductName")
             .Columns(columns =>
             {
-                columns.Add().Field("ProductName").Title("Product Name").Width("200px")
+                columns.Add().Field("ProductName").Title("Product Name").Width("200px");
                 columns.Add().Field("ProductID").Title("Product ID").Width("200px");
             })
             .BindTo((System.Collections.IEnumerable)ViewData["products"])
@@ -76,5 +80,9 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
 
 ## See Also
 
-* [Ajax Data Binding by the MultiColumnComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/serverfiltering)
-* [Server-Side API](/api/multicolumncombobox)
+* [Basic Usage of the MultiColumnComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/basic-usage)
+* [Ajax Data Binding]({% slug htmlhelpers_multicolumncombobox_ajaxbinding_aspnetcore %})
+* [Server-Side API of the MultiColumnComboBox HtmlHelper](/api/multicolumncombobox)
+{% if site.core %}
+* [Server-Side API of the MultiColumnComboBox TagHelper](/api/taghelpers/multicolumncombobox)
+{% endif %}

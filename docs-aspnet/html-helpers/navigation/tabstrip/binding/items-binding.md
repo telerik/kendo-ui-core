@@ -9,32 +9,32 @@ position: 2
 
 # Items Binding
 
-The TabStrip enables you to manually define the properties of each item.
+The TabStrip allows you to declare its items and the properties of each item within the helper declaration.
 
-1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc6_aspnetmvc %}).
-1. Create a new action method which renders the view.
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-1. Add a TabStrip.
+The following example demonstrates how to configure the TabStrip items using the `Items()` configuration.
 
 ```HtmlHelper
-    @(Html.Kendo().TabStrip()
-        .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip.
-        .Items(items =>
-        {
-             items.Add().Text("Item 1"); // Add item with text "Item1".
-            items.Add().Text("Item 2"); // Add item with text "Item2".
-        })
-    )
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip HTML element.
+    .Items(items =>
+    {
+        items.Add().Text("Item 1")
+        .Selected(true)
+        .Icon("gear")
+        .Content(@<text>
+                <p>Item 1 content.</p>
+            </text>);
+        items.Add().Text("Item 2")
+        .Icon("user-outline")
+        .Content(@<text>
+                <p>Item 2 content.</p>
+            </text>);
+    })
+)
 ```
 
 ## See Also
 
-* [Basic Usage of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip)
-* [Using the API of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip/api)
-* [TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/tabstripbuilder)
-* [TabStrip Server-Side API](/api/tabstrip)
+* [Basic Usage of the TabStrip for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip)
+* [Using the API of the TabStrip for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip/api)
+* [Server-Side API of the TabStrip](/api/tabstrip)

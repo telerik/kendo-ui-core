@@ -4,12 +4,12 @@ page_title: Local Binding
 description: "Learn how to implement Local Binding with Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/data-management/grid/binding/server-binding
 slug: htmlhelpers_grid_aspnetcore_localbinding
-position: 3
+position: 1
 ---
 
 # Local Binding
 
-When configured for local binding, the Grid for {{ site.framework }} will serialize the data as part of its data source and will perform all data operations, such as paging, sorting, filtering, grouping, and aggregating, on the client.
+When configured for local binding, the Grid serializes the data as part of its `DataSource` and performs all data operations, such as paging, sorting, filtering, grouping, and aggregating, on the client.
 
 For a runnable example, refer to the [demo on local binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding).  
 

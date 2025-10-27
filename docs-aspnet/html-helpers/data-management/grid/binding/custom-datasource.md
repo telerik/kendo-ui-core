@@ -1,9 +1,9 @@
 ---
-title: Grid Custom DataSource
+title: Custom DataSource
 page_title: Custom DataSource of the Grid Component
 description: "Get started with Telerik UI for ASP.NET MVC and use the CustomDataSource builder for the Grid component."
 slug: grid_customdatasource_aspnetmvc
-position: 4
+position: 3
 ---
 
 # Custom DataSource

@@ -112,5 +112,7 @@ You can configure the DropDownList to get its data from a remote source by makin
     
 ## See Also
 
-* [ASP.NET {{ site.framework_short }} DropDownList from database]({%slug htmlhelpers_dropdownlist_ajaxbinding_aspnetcore %})
-* [Server-Side API](/api/dropdownlist)
+* [Server-Side API of the DropDownList HtmlHelper](/api/dropdownlist)
+{% if site.core %}
+* [Server-Side API of the DropDownList TagHelper](/api/taghelpers/dropdownlist)
+{% endif %}

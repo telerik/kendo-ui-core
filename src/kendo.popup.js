@@ -185,7 +185,6 @@ export const __meta__ = {
         _animationClose: function() {
             var that = this;
             var location = that.wrapper.data(LOCATION);
-
             that.wrapper.hide();
 
             if (location) {
@@ -198,6 +197,10 @@ export const __meta__ = {
 
             that._closing = false;
             that._trigger(DEACTIVATE);
+            // This fixes an issue with aria-hidden error - https://github.com/telerik/kendo-ui-core/issues/8096
+            setTimeout(function() {
+                that.element.attr("aria-hidden", true);
+            }, 0);
         },
 
         destroy: function() {
@@ -416,10 +419,6 @@ export const __meta__ = {
             if (that.visible()) {
                 wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).hide());
 
-                if ($(document.activeElement).parents(".k-list-filter").length) {
-                    $(document.activeElement).blur();
-                }
-
                 that._toggleResize(false);
 
                 if (that._closing || that._trigger(CLOSE)) {
@@ -465,8 +464,6 @@ export const __meta__ = {
                 if (skipEffects) {
                     that._animationClose();
                 }
-
-                that.element.attr("aria-hidden", true);
             }
         },
 

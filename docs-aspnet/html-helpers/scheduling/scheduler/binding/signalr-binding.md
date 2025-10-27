@@ -3,7 +3,7 @@ title: SignalR Binding
 page_title: SignalR Binding
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for SignalR Binding."
 slug: htmlhelpers_scheduler_signalr_binding_aspnetcore
-position: 4
+position: 5
 ---
 
 # SignalR Binding

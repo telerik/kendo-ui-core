@@ -4,7 +4,7 @@ page_title: Ajax Binding
 description: "Learn how to implement Ajax binding with the Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/grid/ajax-binding, /helpers/data-management/grid/binding/ajax-binding
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
-position: 4
+position: 2
 ---
 
 # Ajax Binding

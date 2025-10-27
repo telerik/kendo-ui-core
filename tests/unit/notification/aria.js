@@ -1,3 +1,4 @@
+import { asyncTest } from '../../helpers/unit/async-utils.js';
 import { createNotification } from '../../helpers/unit/notification-utils.js';
 
 let notification;
@@ -66,7 +67,7 @@ describe("Notification WAI-ARIA", function() {
         assert.equal(element.attr("aria-hidden"), "true");
     });
 
-    it("Notification popup has aria-hidden set to 'true'", function() {
+    asyncTest("Notification popup has aria-hidden set to 'true'", function(done) {
         notification = createNotification({
             button: true
         });
@@ -76,7 +77,9 @@ describe("Notification WAI-ARIA", function() {
         let element = $(".k-notification");
         notification.hide();
 
-        assert.equal(element.attr("aria-hidden"), "true");
+        setTimeout(() => {
+            done(() => assert.equal(element.attr("aria-hidden"), "true"));
+        }, 10);
     });
 
     it("Notification popup has aria-hidden set to 'false'", function() {

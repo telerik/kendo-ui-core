@@ -3,7 +3,7 @@ title: Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI AutoComplete component for {{ site.framework }}."
 slug: modelbinding_autocomplete_aspnetmvc
-position: 5
+position: 4
 ---
 
 # Model Binding

@@ -1,150 +1,158 @@
 ---
-title:  Server Binding
-page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI PanelBar component for {{ site.framework }}."
+title:  Local Binding
+page_title: Local Binding
+description: "Learn how to bind the {{ site.product }} PanelBar component to a local dataset."
 previous_url: /helpers/navigation/panelbar/binding/model-binding
 slug: htmlhelpers_panelbar_serverbinding_aspnetcore
-position: 2
+position: 3
 ---
 
-# Server Binding
+# Local Binding
 
-Local data is the data that is available on the client when the PanelBar is initialized.
+Local data binding refers to binding the PanelBar component to a dataset that is prepared on the server and made available during the initial page rendering. The data is retrieved server-side (from a database, service, or other data source) and then passed to the view, where the `BindTo()` method accepts the `IEnumerable` collection.
 
-You can bind the PanelBar locally on the server by passing the appropriate collection to the component's `BindTo()` method.
+The local data binding approach is often used when dealing with small to medium-sized datasets since all records are available when the page is loaded. Also, the complete dataset can be accessed on the client without additional server requests. However, for large datasets, consider using [Ajax data binding]({% slug htmlhelpers_panelbar_ajaxbinding_aspnetcore %}) to avoid increased initial page load times and load the items on demand.
 
-1. Pass the data to the view through `ViewData`.
+To configure the PanelBar for local data binding, follow the next steps:
+
+1. Pass the data collection to the view through `ViewData`.
 
     ```C# HtmlHelper_Controller
-        public ActionResult Index()
-        {
-            ViewBag.panelbarData = GetData();
-            return View();
-        }
+    public ActionResult Index()
+    {
+        ViewBag.panelbarData = GetData();
+        return View();
+    }
 
-        private IEnumerable<PanelBarItemModel> GetData()
-        {
-            List<PanelBarItemModel> data = new List<PanelBarItemModel>
-                {
-                    new PanelBarItemModel
-                    {
-                        Text = "Furniture",
-                        Items = new List<PanelBarItemModel>
-                        {
-                            new PanelBarItemModel()
-                            {
-                                Text = "Tables & Chairs"
-                            },
-                            new PanelBarItemModel
-                            {
-                                 Text = "Sofas"
-                            },
-                            new PanelBarItemModel
-                            {
-                                 Text = "Occasional Furniture"
-                            }
-                        }
-                    },
-                    new PanelBarItemModel
-                    {
-                        Text = "Decor",
-                        Items = new List<PanelBarItemModel>
-                        {
-                            new PanelBarItemModel()
-                            {
-                                Text = "Bed Linen"
-                            },
-                            new PanelBarItemModel
-                            {
-                                 Text = "Curtains & Blinds"
-                            },
-                            new PanelBarItemModel
-                            {
-                                 Text = "Carpets"
-                            }
-                        }
-                    }
-                };
-            return data;
-        }
-     ```
-    {% if site.core %}
-    ```C# TagHelper_Controller
-        using Kendo.Mvc.TagHelpers;
-        
-        public ActionResult Index()
-        {
-            ViewBag.panelbarData = GetData();
-            return View();
-        }
-    
-        private IEnumerable<PanelBarItemBase> GetData()
-        {
-            List<PanelBarItemBase> data = new List<PanelBarItemBase>
+    private IEnumerable<PanelBarItemModel> GetData()
+    {
+        List<PanelBarItemModel> data = new List<PanelBarItemModel>
             {
-                new PanelBarItemBase
+                new PanelBarItemModel
                 {
                     Text = "Furniture",
-                    Items = new List<PanelBarItemBase>
+                    Items = new List<PanelBarItemModel>
                     {
-                        new PanelBarItemBase()
+                        new PanelBarItemModel()
                         {
                             Text = "Tables & Chairs"
                         },
-                        new PanelBarItemBase
+                        new PanelBarItemModel
                         {
-                             Text = "Sofas"
+                                Text = "Sofas"
                         },
-                        new PanelBarItemBase
+                        new PanelBarItemModel
                         {
-                             Text = "Occasional Furniture"
+                                Text = "Occasional Furniture"
                         }
                     }
                 },
-                new PanelBarItemBase
+                new PanelBarItemModel
                 {
                     Text = "Decor",
-                    Items = new List<PanelBarItemBase>
+                    Items = new List<PanelBarItemModel>
                     {
-                        new PanelBarItemBase()
+                        new PanelBarItemModel()
                         {
                             Text = "Bed Linen"
                         },
-                        new PanelBarItemBase
+                        new PanelBarItemModel
                         {
-                             Text = "Curtains & Blinds"
+                                Text = "Curtains & Blinds"
                         },
-                        new PanelBarItemBase
+                        new PanelBarItemModel
                         {
-                             Text = "Carpets"
+                                Text = "Carpets"
                         }
                     }
                 }
             };
-            return data;
-        }
+        return data;
+    }
+     ```
+    {% if site.core %}
+    ```C# TagHelper_Controller
+    using Kendo.Mvc.TagHelpers;
+    
+    public ActionResult Index()
+    {
+        ViewBag.panelbarData = GetData();
+        return View();
+    }
+
+    private IEnumerable<PanelBarItemBase> GetData()
+    {
+        List<PanelBarItemBase> data = new List<PanelBarItemBase>
+        {
+            new PanelBarItemBase
+            {
+                Text = "Furniture",
+                Items = new List<PanelBarItemBase>
+                {
+                    new PanelBarItemBase()
+                    {
+                        Text = "Tables & Chairs"
+                    },
+                    new PanelBarItemBase
+                    {
+                            Text = "Sofas"
+                    },
+                    new PanelBarItemBase
+                    {
+                            Text = "Occasional Furniture"
+                    }
+                }
+            },
+            new PanelBarItemBase
+            {
+                Text = "Decor",
+                Items = new List<PanelBarItemBase>
+                {
+                    new PanelBarItemBase()
+                    {
+                        Text = "Bed Linen"
+                    },
+                    new PanelBarItemBase
+                    {
+                            Text = "Curtains & Blinds"
+                    },
+                    new PanelBarItemBase
+                    {
+                            Text = "Carpets"
+                    }
+                }
+            }
+        };
+        return data;
+    }
     ```
     {% endif %}
 
 1. Add the PanelBar to the view and bind it to the data that is saved in the `ViewData`.
 
     ```HtmlHelper
-        @using Kendo.Mvc.UI.Fluent
+    @using Kendo.Mvc.UI.Fluent
 
-        @(Html.Kendo().PanelBar()
-            .Name("panelbar")
-            .BindTo((IEnumerable<PanelBarItemModel>)ViewBag.panelbarData)
-        )
+    @(Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .BindTo((IEnumerable<PanelBarItemModel>)ViewBag.panelbarData)
+    )
     ```
     {% if site.core %}
     ```TagHelper
-        <kendo-panelbar name="panelbar" bind-to="ViewBag.panelbarData">
-        </kendo-panelbar>
+    @addTagHelper *, Kendo.Mvc
+    @using Kendo.Mvc.TagHelpers
+    @using Kendo.Mvc.UI.Fluent
+
+    <kendo-panelbar name="panelbar" bind-to="@(IEnumerable<PanelBarItemBase>)ViewBag.panelbarData">
+    </kendo-panelbar>
     ```
     {% endif %}
 
 ## See Also
 
-* [Ajax Data Binding by the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/remote-data-binding)
-* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
-* [Server-Side API](/api/panelbar)
+* [Local Data Binding by the PanelBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/local-data-binding)
+* [Server-Side API of the PanelBar HtmlHelper](/api/panelbar)
+{% if site.core %}
+* [Server-Side API of the PanelBar TagHelper](/api/taghelpers/panelbar)
+{% endif %}

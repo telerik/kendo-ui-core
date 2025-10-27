@@ -118,14 +118,15 @@ describe("kendo.ui.ActionSheet WAI-ARIA", function() {
 
     asyncTest("ActionSheet has aria-hidden='true'", function(done) {
         createInstance({
-            close: function() {
-                TimerUtils.advanceTimer(1);
-                done(() => assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-hidden"), "true"));
-            },
         });
 
         instance.open();
+
+        TimerUtils.advanceTimer(10);
         instance.close();
+
+        TimerUtils.advanceTimer(10);
+        done(() => assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-hidden"), "true"));
     });
 
     asyncTest("ActionSheet has aria-hidden='false'", function(done) {

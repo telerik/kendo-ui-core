@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Telerik UI MultiSelect for {{ site.framework }} in a RazorPages application."
 slug: htmlhelpers_multiselect_razorpage_aspnetcore
-position: 3
+position: 7
 ---
 
 # MultiSelect in Razor Pages

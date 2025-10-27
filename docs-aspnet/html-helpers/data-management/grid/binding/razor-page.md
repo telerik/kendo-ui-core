@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Grid for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_gridhelper_aspnetcore
-position: 2
+position: 11
 ---
 
 # Grid in Razor Pages

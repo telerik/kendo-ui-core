@@ -1,31 +1,55 @@
 ---
 title: Overview
-page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI Gantt component for {{ site.framework }}."
+page_title: Telerik UI Gantt Documentation | Data Binding Overview  
+description: "Learn how to bind data to the {{ site.product }} Gantt using various data binding approaches."
 previous_url: /helpers/scheduling/gantt/server-binding, /helpers/scheduling/gantt/binding
 slug: htmlhelpers_gantt_databinding
 position: 0
 ---
 
-# Data Binding
+# Data Binding Overview
 
-The Gantt provides a set of options for binding it to data.
+The {{ site.product }} Gantt provides flexible data binding capabilities that allow you to visualize project schedules and task dependencies from various data sources. You can choose the appropriate binding method based on your application architecture and data requirements.
 
-{% if site.has_cta_panels == true %}
-{% include cta-panel-introduction.html %}
+{% if site.core %}
+@[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 {% endif %}
 
-The supported data-binding approaches are:
+## Data Binding Approaches
 
-* [Ajax binding]({% slug htmlhelpers_gantt_ajaxbinding_aspnetcore %})
-* [Server binding]({% slug htmlhelpers_gantt_serverbinding_aspnetcore %})
+The Gantt supports the following data binding methods:
+
+### Local Data Binding
+
+Bind the Gantt to a local dataset by passing an arbitrary model directly within the boundaries of the component. This approach is optimal for:
+- Small to medium-sized datasets that can be loaded in memory.
+- Static data that does not require frequent updates.
+- Scenarios where all data is available at render time.
+
+For detailed implementation instructions, refer to the [Local Data Binding]({% slug htmlhelpers_gantt_serverbinding_aspnetcore %}) documentation.
+
+### Remote Data Binding
+
+Connect the Gantt to a remote endpoint using AJAX operations. This enables:
+- Dynamic data loading with paging, sorting, and filtering.
+- Real-time updates of task progress and dependencies from external sources.
+- Improved performance with large event datasets through server-side processing.
+
+For more information and examples, refer to the [Remote Data Binding]({% slug htmlhelpers_gantt_ajaxbinding_aspnetcore %}) documentation.
+
 {% if site.core %}
-* [Razor Pages binding]({% slug htmlhelpers_gantt_razorpage_aspnetcore %})
+## Data Binding in Razor Pages
+
+You can seamlessly integrate the Gantt component into Razor Pages applications. All the [data binding approaches](#data-binding-approaches) described above can be configured within Razor Pages scenarios.
+
+The component supports both HtmlHelper and TagHelper syntax, and allows you to send the anti-forgery token when connecting to remote endpoints to ensure secure data operations.
+
+For detailed implementation instructions, refer to the [Gantt in Razor Pages]({% slug htmlhelpers_gantt_razorpage_aspnetcore %}) article.
 {% endif %}
 
 ## Model Requirements
 
-The model that binds to the Gantt extends the `IGanttTask` and the `IGanttDependency` interfaces, whith the following properties: 
+The model that binds to the Gantt extends the `IGanttTask` and the `IGanttDependency` interfaces, with the following properties: 
 
 ```IGanttTask
     public interface IGanttTask
@@ -47,9 +71,19 @@ The model that binds to the Gantt extends the `IGanttTask` and the `IGanttDepend
     }
 ```
 
+## Key Considerations
+
+When selecting a data binding approach for the Gantt, evaluate the following factors:
+
+* **Performance**&mdash;Local binding offers faster initial rendering for smaller project schedules, while remote binding with enabled server operations provides better performance with large datasets through on-demand loading and server-side processing.
+* **Data volume**&mdash;Local binding works well for small to medium-sized project schedules that can be loaded in memory, while large project schedules with numerous tasks and dependencies are better handled with remote binding and server-side filtering.
+* **CRUD operations**&mdash;Remote binding enables full task management capabilities including creating, updating, and deleting tasks and dependencies, while local binding provides read-only project visualization.
+* **Real-time collaboration**&mdash;Remote binding is essential for multi-user scenarios requiring live project updates, task progress tracking, and dependency changes from team members.
+* **Security**&mdash;Remote binding provides better control over data access, user permissions, and project data validation compared to the local binding.
+
 ## See Also
 
-* [Server-Side API](/api/gantt)
+* [Server-Side API of the Gantt HtmlHelper](/api/gantt)
 {% if site.core %}
-* [Server-Side TagHelper API](/api/taghelpers/gantt)
+* [Server-Side API of the Gantt TagHelper](/api/taghelpers/gantt)
 {% endif %}
