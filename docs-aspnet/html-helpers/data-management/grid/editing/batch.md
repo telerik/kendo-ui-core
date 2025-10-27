@@ -350,7 +350,7 @@ To define a custom editor for a specified column:
 
 For a live example, visit the [Custom Editing Demo of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom).
 
-For more use-cases and information on the column editor templates, refer to the [Editor Templates documentation]({% slug editortemplates_grid_aspnetcore %}).
+For more use-cases and information on the column editor templates, refer to the [Editor Templates documentation]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}).
 
 ## See Also
 

@@ -297,7 +297,7 @@ To define a custom editor for a specified field in the popup form:
     }
     ```
 
-For more use cases and information on the column editor templates, refer to the [Editor Templates documentation]({% slug editortemplates_grid_aspnetcore %}).
+For more use cases and information on the column editor templates, refer to the [Editor Templates documentation]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}).
 
 ### Custom Popup Editor Template
 

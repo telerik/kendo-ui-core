@@ -1,13 +1,13 @@
 ---
-title: Custom Data Binding
-page_title: Custom Data Binding
+title: Custom Binding
+page_title: Custom Binding
 description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI DropDownList component for {{ site.framework }}."
 previous_url: /helpers/editors/dropdownlist/binding/custom-binding
 slug: htmlhelpers_dropdownlist_todatasourceresultbinding_aspnetcore
 position: 4
 ---
 
-# Custom Data Binding
+# Custom Binding
 
 You can configure the Telerik UI DropDownList for data binding to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 

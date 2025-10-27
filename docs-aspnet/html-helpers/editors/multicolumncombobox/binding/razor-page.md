@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MultiColumnComboBox component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_multicolumncombobox_razorpage_aspnetcore
-position: 3
+position: 7
 ---
 
 # MultiColumnComboBox in Razor Pages

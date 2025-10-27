@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: ASP.NET Core DropDownList Razor Pages | Telerik UI for ASP.NET Core
 description: "Find out how to configure the ASP.NET Core DropDownList component in a Razor Pages scenario."
 slug: htmlhelpers_dropdownlist_razorpage_aspnetcore
-position: 3
+position: 6
 ---
 
 # DropDownList in Razor Pages

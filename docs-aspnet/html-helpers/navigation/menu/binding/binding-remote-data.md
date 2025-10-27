@@ -1,13 +1,13 @@
 ---
-title:  Binding to Remote Data
-page_title: Binding to Remote Data
+title:  Remote Data Binding
+page_title: Remote Binding
 description: "Learn how to bind to remote data with Telerik UI Menu component for {{ site.framework }}."
 previous_url: /helpers/navigation/menu/binding/remote-data
 slug: htmlhelpers_menu_bindingremotedata_aspnetcore
-position: 3
+position: 4
 ---
 
-# Binding to Remote Data
+# Remote Data Binding
 
 Remote data binding enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
 

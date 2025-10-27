@@ -91,7 +91,7 @@ An exception that templates can be used only with field access, property access,
 For more information on how to resolve this issue, refer to the following resources:
 * [Popup editing in the Telerik UI for ASP.NET MVC Grid HtmlHelper (demo)](https://demos.telerik.com/aspnet-mvc/grid/editing-popup)
 * [Binding to a DataTable by the Telerik UI for ASP.NET MVC Grid HtmlHelper (how-to online example)](/helpers/grid/how-to/Binding/grid-bind-to-datatable)
-* [Editor templates in the Telerik UI for ASP.NET MVC Grid HtmlHelper]({% slug editortemplates_grid_aspnetcore %})&mdash;use a separate editor template for each data field.
+* [Editor templates in the Telerik UI for ASP.NET MVC Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_editing_overview %})&mdash;use a separate editor template for each data field.
 * [The TemplateName setting in the Telerik UI for ASP.NET MVC Grid HtmlHelper](/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it
 to set a single edit form template for the whole edit form.
 {% endif %}

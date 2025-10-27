@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI TabStrip component for {{ site.framework }} in a Razor Page."
+previous_url: /html-helpers/navigation/tabstrip/razor-page
 slug: htmlhelpers_tabstrip_aspnetcore_razor_page
 position: 7
 ---

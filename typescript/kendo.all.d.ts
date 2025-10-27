@@ -7671,11 +7671,13 @@ declare namespace kendo.ui {
         text?: string | undefined;
         icon?: string | undefined;
         command?: string | undefined;
+        items?: GridContextMenuItem[] | undefined;
     }
 
     interface GridContextMenu extends ContextMenuOptions {
         body?: GridContextMenuItem[] | undefined;
-        head?:GridContextMenuItem[] | undefined;
+        head?: GridContextMenuItem[] | undefined;
+        groups?: GridContextMenuItem[] | undefined;
     }
 
     interface GridToolbarOptions{

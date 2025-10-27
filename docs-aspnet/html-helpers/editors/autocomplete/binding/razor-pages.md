@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI AutoComplete component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_autocomplete_razorpage_aspnetcore
-position: 3
+position: 5
 ---
 
 # AutoComplete in Razor Pages

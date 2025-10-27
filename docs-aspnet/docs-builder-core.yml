@@ -17,6 +17,7 @@ no-results-image-path: ./images/ninja-no-results.svg
 img-max-width: 100%
 table-layout: fixed
 pdf-cover-png-path: ./images/pdf-cover.png
+gitLastCommitDateEnabled: true
 
 cta-overview: The @Subject component is part of @ProductLink, a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial.
 cta-intro: "@ProductLink is a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial."
@@ -202,7 +203,7 @@ excluded-files:
 - "**/html-helpers/navigation/menu/binding/sitemap-binding.md"
 - "**/html-helpers/navigation/panelbar/binding/sitemap-binding.md"
 - "**/html-helpers/navigation/panelbar/security-trimming.md"
-- "**/html-helpers/navigation/tabstrip/binding/*"
+- "**/html-helpers/navigation/tabstrip/binding/sitemap-binding.md"
 - "**/html-helpers/navigation/tabstrip/security-trimming.md"
 - "**/html-helpers/navigation/tabstrip/forms.md"
 - "**/html-helpers/navigation/treeview/security-trimming.md"

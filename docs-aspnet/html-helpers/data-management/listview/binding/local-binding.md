@@ -3,18 +3,12 @@ title: Local Binding
 page_title: Local Binding
 description: "Learn how to implement Local Binding with Telerik UI ListView component for {{ site.framework }}."
 slug: htmlhelpers_listview_aspnetcore_localbinding
-position: 3
+position: 1
 ---
 
 # Local Binding
 
-When configured for local binding, the ListView for {{ site.framework }} will serialize the data as part of its data source and will perform the majority of its operations on the client-side such as:
-
-* Filtering
-* Sorting
-* Paging
-
-This binding approach is beneficial if read-only data needs to be employed in the UI.
+When configured for local binding, the ListView serializes the data as part of its `DataSource` and performs all data operations, such as paging, sorting, and filtering, on the client. This binding approach is beneficial if read-only data needs to be employed in the UI.
 
 For a runnable example, refer to the [demo on local binding of the ListView](https://demos.telerik.com/{{ site.platform }}/listview/local-data-binding).  
 

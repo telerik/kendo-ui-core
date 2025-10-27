@@ -12,11 +12,12 @@ position: 5
 You can configure a MultiColumnComboBox to use virtualization.
 
 > * For the virtualization to work properly, define the widths of all columns in pixels.
-> * The MultiColumnComboBox supports server binding to primitive or an enum value types only.
+> * The MultiColumnComboBox supports model binding to primitive or an enum value types only.
 
 1. Create the `Read` and `ValueMapper` actions.
 
-        {% if site.core %}
+    {% if site.core %}
+    ```C#
         public IActionResult Index()
         {
             return View(new ProductViewModel
@@ -64,7 +65,9 @@ You can configure a MultiColumnComboBox to use virtualization.
 
             return products;
         }
-        {% else %}
+    ```
+    {% else %}
+    ```C#
         public ActionResult Index()
         {
             return View(new ProductViewModel
@@ -112,7 +115,8 @@ You can configure a MultiColumnComboBox to use virtualization.
 
             return products;
         }
-        {% endif %}
+    ```
+    {% endif %}
 
 1. Add the MultiColumnComboBox to the view and configure it to use virtualization.
 
@@ -148,6 +152,7 @@ You can configure a MultiColumnComboBox to use virtualization.
                     });
             })
             .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+        )
     ```
     {% if site.core %}
     ```TagHelper

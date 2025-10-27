@@ -3,7 +3,7 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI PanelBar component for {{ site.framework }} in a Razor Pages application with an example on how to configure its remote binding DataSource."
 slug: htmlhelpers_panelbar_razorpage_aspnetcore
-position: 5
+position: 6
 ---
 
 # PanelBar in Razor Pages
