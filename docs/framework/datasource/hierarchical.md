@@ -240,11 +240,7 @@ If you have a way of fetching data that cannot be achieved through the default [
           // [additional processing here]
 
           $.ajax({
-<<<<<<< HEAD
-            url: "https://demos.telerik.com/service/v2/core/employees",
-=======
             url: "https://demos.telerik.com/service/v2/core/Employees",
->>>>>>> 8f27c13c7d (chore: update docs examples to new service)
             data: { EmployeeId: id },
             success: function(result) {
               // Notify the data source that the request succeeded.
