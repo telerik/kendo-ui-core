@@ -27,13 +27,15 @@ I examined the [Drawer Hierarchy](https://demos.telerik.com/kendo-ui/drawer/hier
 
 To achieve the desired scenario: 
 
-1. Create a function that will be used to add menus and submenus to the Drawer configuration.
+1. Create a function that will be used to add menus and submenus to the Drawer configuration. Use the `data-level` attribute to specify the hierarchy level of each item instead of adding `k-i-none` spans for indentation.
 1. Attach a handler to the [`itemClick`](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer/events/itemclick) event of the Drawer.
 1. The logic of the `itemClick` event will either expand or collapse the children of the menu that was clicked.
     - The `collapseAll` function collapses every descendant of the clicked menu.
     - The `getParentsRecursively` function retrieves all of the parents of the clicked submenu.
 1. Attach a handler to the [`hide`](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer/events/hide) event of the Drawer.
 1. The logic of the `hide` event will collapse all of the submenus.
+
+> **Note:** The hierarchy levels are determined by the Kendo themes and currently support levels from `0` to `5`. If no `data-level` attribute is specified, the Drawer will automatically set it to `0`.
 
 The following example demonstrates the full implementation of the approach.
 
@@ -182,18 +184,13 @@ The following example demonstrates the full implementation of the approach.
         icon - specifies an icon for the element.
         level - specifies the level on which the element is located. Example - Getting Started, Overview, Most Popular - level 0, Getting Started->Supported Themes - level 1, Getthing Started->Supported Themes->About Kendo UI - level 2, etc.
 
-        The level logic is used for indentation of the sub-menu items.
+        The level is specified using the data-level attribute for proper indentation of the sub-menu items.
         */
       function addItem(id, title, parent, isParent, icon, level) {
-        // Create the <li> element 
-        let liStart = `<li data-role='drawer-item' ${parent ? 'class=hidden' : ''} data-parent='${parent}' data-is-parent='${isParent}'>`;
+        // Create the <li> element with data-level attribute for hierarchy
+        let liStart = `<li data-role='drawer-item' ${parent ? 'class=hidden' : ''} data-parent='${parent}' data-is-parent='${isParent}' ${level > 0 ? `data-level='${level}'` : ''}>`;
         let liEnd = "</li>";
         let element = "";
-
-        // Check the level of nesting and add that many indentations for the submenu.
-        for(let i=0; i<level; i++) {
-          element += "<span class='k-icon k-i-none'></span>";
-        }
 
         // Add the element with its title and id.
         element += `<span class='k-icon ${icon}'></span><span class='k-item-text' data-id='${id}'>${title}</span>`;

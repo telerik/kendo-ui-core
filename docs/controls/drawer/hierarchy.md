@@ -14,47 +14,48 @@ The Kendo UI Drawer provides the built-in functionality to create a hierarchical
 
 To utilize the hierarchy functionality of the Kendo UI Drawer:
 
-1. Add list elements with data-role attribute `drawer-item` and class `hidden` to the drawer [`template`](/api/javascript/ui/drawer/configuration/template).
+1. Add list elements with data-role attribute `drawer-item` and class `hidden` to the drawer [`template`](/api/javascript/ui/drawer/configuration/template). Use the `data-level` attribute to specify the hierarchy level of each item.
 
     ```javascript
     $("#drawer").kendoDrawer({
-    template: "<ul> \
-                <li data-role='drawer-item' class='k-selected'><span class='k-icon k-i-information'></span><span class='k-item-text' data-id='GettingStarted'>Getting Started</span><span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></span></li> \
-                <li data-role='drawer-separator'></li> \
-                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-question'></span><span class='k-item-text' data-id='Kendo'>About Kendo UI</span></li> \
-                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-palette'></span><span class='k-item-text' data-id='ThemeSupport'>Supported Themes</span></li> \
-                <li data-role='drawer-separator'></li> \
-                <li data-role='drawer-item'><span class='k-icon k-i-zoom'></span><span class='k-item-text' data-id='Overview'>Overview</span><span class='k-spacer'></span><span class='k-icon k-i-arrow-chevron-right'></li> \
-                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-js'></span><span class='k-item-text' data-id='About'>About Kendo</span></li> \
-                <li data-role='drawer-item' class='hidden'><span class='k-icon k-i-none'></span><span class='k-icon k-i-style-builder'></span><span class='k-item-text' data-id='All'>All Kendo Components</span></li> \
-                <li data-role='drawer-separator'></li> \
-                <li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='k-item-text' data-id='Popular'>Most popular components</span></li> \
-              </ul>"
+     template: `<ul>
+        <li data-role='drawer-item' data-level='0'>${kendo.ui.icon("info-circle")}<span class='k-item-text' data-id='GettingStarted'>Getting Started</span><span class='k-spacer'></span><span class='k-drawer-toggle'>${kendo.ui.icon("chevron-right")}</span></li>
+        <li data-role='drawer-separator'></li>
+        <li data-role='drawer-item' data-level='1' class='k-hidden'>${kendo.ui.icon("question-circle")}<span class='k-item-text' data-id='Kendo'>About Kendo UI</span></li>
+        <li data-role='drawer-item' data-level='1' class='k-hidden'>${kendo.ui.icon("palette")}<span class='k-item-text' data-id='ThemeSupport'>Supported Themes</span></li>
+        <li data-role='drawer-separator'></li>
+        <li data-role='drawer-item' data-level='0' class='k-selected'>${kendo.ui.icon("search")}<span class='k-item-text' data-id='Overview'>Overview</span><span class='k-spacer'></span><span class='k-drawer-toggle'>${kendo.ui.icon("chevron-down")}</span></li>
+        <li data-role='drawer-item' data-level='1'>${kendo.ui.icon("js")}<span class='k-item-text' data-id='About'>About Kendo</span></li>
+        <li data-role='drawer-item' data-level='1'>${kendo.ui.icon("building-blocks")}</span><span class='k-item-text' data-id='All'>All Kendo Components</span></li>
+        <li data-role='drawer-separator'></li>
+        <li data-role='drawer-item' data-level='0'>${kendo.ui.icon("star")}<span class='k-item-text' data-id='Popular'>Most popular components</span></li>
+      </ul>`,
     });
     ```
+
+    The hierarchy levels are determined by the Kendo themes and currently support levels from `0` to `5`. If no `data-level` attribute is specified, the Drawer will automatically set it to `0`. Setting `data-level='6'` or higher will have no visual effect as only levels 0-5 are styled by the themes.
 
 1. In the [`itemClick`](/api/javascript/ui/drawer/events/itemclick) event of the drawer handle the expansion and collapse of the hierarchical items.
 
     ```javascript
     $("#drawer").kendoDrawer({
-        itemClick: function (e) {
+        itemClick: (e) => {
             if (!e.item.hasClass("k-drawer-separator")) {
                 var drawerContainer = e.sender.drawerContainer;
-                var expandIcon = e.item.find("span.k-i-arrow-chevron-right");
-                var collapseIcon = e.item.find("span.k-i-arrow-chevron-down");
-                drawerContainer.find("#drawer-content > div").addClass("hidden");
-                drawerContainer.find("#drawer-content").find("#" + e.item.find(".k-item-text").attr("data-id")).removeClass("hidden");
+                var expandIcon = e.item.find("span.k-svg-i-chevron-right");
+                var collapseIcon = e.item.find("span.k-svg-i-chevron-down");
+                drawerContainer.find("#drawer-content > div").addClass("k-hidden");
+                drawerContainer.find("#drawer-content").find("#" + e.item.find(".k-item-text").attr("data-id")).removeClass("k-hidden");
 
-                /* If the expandIcon is visible, the sub-items are hidden. Clicking on the icon should remove the hidden class and reveal the items.*/
                 if (expandIcon.length) {
-                    e.item.nextAll(".k-drawer-item:not(.k-drawer-separator):lt(2)").removeClass("hidden");
-                    expandIcon.removeClass("k-i-arrow-chevron-right").addClass("k-i-arrow-chevron-down");
+                    e.item.nextAll(".k-drawer-item:not(.k-drawer-separator):lt(2)").removeClass("k-hidden");
+                    expandIcon.replaceWith(kendo.ui.icon("chevron-down"));
                 }
 
                 /* If the collapseIcon is visible, the sub-items are visible. Clicking on the icon should add the hidden class and hide the items. */
                 if (collapseIcon.length) {
-                    e.item.nextAll(".k-drawer-item:not(.k-drawer-separator):lt(2)").addClass("hidden");
-                    collapseIcon.addClass("k-i-arrow-chevron-right").removeClass("k-i-arrow-chevron-down");
+                    e.item.nextAll(".k-drawer-item:not(.k-drawer-separator):lt(2)").addClass("k-hidden");
+                    collapseIcon.replaceWith(kendo.ui.icon("chevron-right"));
                 }
             }
         }
