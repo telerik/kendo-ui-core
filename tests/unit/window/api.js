@@ -547,7 +547,7 @@ describe("api", function() {
         let firstWindow = createWindow(),
             secondWindow = createWindow();
 
-        wrapper(secondWindow).css("zIndex", 10012);
+        wrapper(secondWindow).css("zIndex", 11512);
 
         firstWindow.toFront();
 
