@@ -865,7 +865,7 @@ export const __meta__ = {
             let numericSize = kendo.parseFloat(size);
 
             if (isPercentageSize(size)) {
-                numericSize = (containerSize * numericSize / 100);
+                numericSize = (containerSize * numericSize);
             }
 
             return numericSize;
