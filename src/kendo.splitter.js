@@ -574,6 +574,7 @@ export const __meta__ = {
                     sizedPanesCount++;
                     sizedPanesWidth += size;
                     panesSizes.push(size);
+                    element.css(sizingProperty, "");
                     element.css(PANE_SIZING_PROP, size + PX);
                     return size;
                 });
@@ -607,7 +608,8 @@ export const __meta__ = {
                 }).last();
 
                 if (lastNonCollapsedPane.length) {
-                    lastNonCollapsedPane[sizingProperty](totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
+                    const expandTotal = (totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
+                    lastNonCollapsedPane.css(PANE_SIZING_PROP, expandTotal);
                 }
             }
 
