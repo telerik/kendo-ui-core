@@ -190,7 +190,7 @@ The example below illustrates how to bind the Editor to a Model property that is
 | [Tools]({% slug htmlhelpers_editor_tools_aspnetcore %})| The Editor allows you to enable a large set of built-in text editing tools. You can also add your custom tools. |
 | [Pasting content]({% slug htmlhelpers_editor_pasting_aspnetcore %})| The users can paste content from HTML and Microsoft Word documents into the Editor.|
 | [Serializing and deserializing content]({% slug htmlhelpers_editor_serialize_aspnetcore %})| You can configure custom definitions for serializing and deserializing of the Editor's content.|
-| [Image browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})| The Editor allows the user to insert an image by browsing a list of predefined files and directories.|
+| [Image and File Browser]({% slug htmlhelpers_editor_image_browser_aspnetcore %})| The Editor allows the user to insert images and files by browsing a list of predefined files and directories.|
 | [Immutable elements]({% slug htmlhelpers_editor_immutable_aspnetcore %})| By using the immutable feature, the Editor allows you to add HTML elements that cannot be edited by the user.|
 | [CRUD operations]({% slug htmlhelpers_crud_editor_aspnetcore %})| The Editor docs and demos demonstrate how to save, read, update, and delete text content in a database.|
 | [Styling the content]({% slug htmlhelpers_editor_styling_aspnetcore %})| You can choose between the default styling options for the Editor's content or add your custom styles.|
