@@ -761,6 +761,41 @@ The original draggable's drag event data.
         });
     </script>
 
+### navigate
+
+Fired when `navigatable` is enabled and the user changes focus between enabled items or when swapping them using the keyboard navigation.
+
+> Important: This event does not expose the `e.action` and `e.draggableEvent` properties. They are only accessible when using the mouse.
+
+
+<div class="meta-api-description">
+Detect and respond to keyboard navigation events when users traverse or move focus between sortable items using arrow keys, tab navigation, or keyboard controls, enabling developers to track focus changes, implement custom keyboard interaction behavior, handle accessibility requirements, monitor item selection during keyboard navigation, trigger actions when focus shifts between elements, support keyboard-only users, and customize responses to keyboard-driven focus management within sortable lists or components.
+</div>
+
+#### Event Data
+
+##### e.item `jQuery`
+
+The element that is focused.
+
+#### Example
+
+    <ul id="sortable">
+        <li>Item1</li>
+        <li>Item2</li>
+        <li>Item3</li>
+    </ul>
+
+    <script>
+        $("#sortable").kendoSortable({
+            navigatable: true,
+            navigate: function(e) {
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+                console.log("The " + e.item + "item is focused.");
+            }
+        });
+    </script>
+
 ### cancel
 
 Fires when item sorting is canceled by pressing the Escape key.

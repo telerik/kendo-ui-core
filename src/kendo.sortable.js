@@ -26,6 +26,7 @@ export const __meta__ = {
         MOVE = "move",
         END = "end",
         CHANGE = "change",
+        NAVIGATE = "navigate",
         CANCEL = "cancel",
 
         ACTION_SORT = "sort",
@@ -67,12 +68,22 @@ export const __meta__ = {
 
             that.draggable = that._createDraggable();
             that._assignRefAttribute();
+            const items = that._items();
+
+            items.filter(that.options.disabled).attr("aria-disabled", true);
+            items.not(that.options.disabled).attr("aria-disabled", false);
+            items.attr("role", "listitem");
+            that.element.attr("role", "list");
+            items.each(function(index, element) {
+                element.setAttribute("aria-label", `${element.textContent.trim()}, ${element.getAttribute("aria-disabled") === "true" ? "disabled" : "enabled"}`);
+            });
+
             if (that.options.navigatable) {
                 that._attatchNavigatableHandlers();
 
-                const firstItem = that._items().first();
+                const firstItem = items.first();
                 that._toggleTabIndex(firstItem);
-                that._items().find(":kendoFocusable").attr("tabindex", -1);
+                items.find(":kendoFocusable").attr("tabindex", -1);
             }
         },
 
@@ -82,6 +93,7 @@ export const __meta__ = {
             MOVE,
             END,
             CHANGE,
+            NAVIGATE,
             CANCEL
         ],
 
@@ -117,8 +129,12 @@ export const __meta__ = {
 
         _focus: function(e) {
             const that = this;
-            if ($(e.target).is(REFSORTABLEITEM_ATTR)) {
+            const target = $(e.target);
+            if (target.is(REFSORTABLEITEM_ATTR)) {
                 that._toggleFocus($(e.target));
+                if (!that._preventNavigate) {
+                    that.trigger(NAVIGATE, { item: $(e.target) });
+                }
             }
         },
 
@@ -145,20 +161,35 @@ export const __meta__ = {
         _swap: function(target, swapWith, direction) {
             const that = this;
 
+            if (target.is(that.options.disabled)) {
+                return;
+            }
+
             if (swapWith.length) {
                 swapWith[direction](target);
+                const oldIndex = direction === "after" ? that.indexOf(target) - 1 : that.indexOf(target) + 1;
+                const newIndex = that.indexOf(target);
                 that._toggleTabIndex(target);
                 target.trigger("focus");
+
+                this.trigger(CHANGE, { item: target , oldIndex: oldIndex , newIndex: newIndex, action: ACTION_SORT });
             }
         },
 
         _navigate: function(direction, target) {
             const that = this;
-            const item = direction === "next" ? target.next() : target.prev();
-            if (item.length) {
-                that._toggleTabIndex(item);
-                item.trigger("focus");
+            let item = target;
+
+            item = (direction === "next") ? item.next(REFSORTABLEITEM_ATTR) : item.prev(REFSORTABLEITEM_ATTR);
+
+            if (!item.length) {
+                return false;
             }
+
+            that._toggleTabIndex(item);
+            item.trigger("focus");
+
+            return item;
         },
 
         _keydown: function(e) {
@@ -168,7 +199,10 @@ export const __meta__ = {
                   next = target.next(),
                   prev = target.prev(),
                   focusable = target.find(":kendoFocusable");
-            var handled = false;
+            let handled = false;
+            let newTarget;
+
+            that._preventNavigate = false;
 
             if (that._lastFocusedSortableItem) {
                 if (key === keys.LEFT || key === keys.UP || key === keys.RIGHT || key === keys.DOWN) {
@@ -185,12 +219,10 @@ export const __meta__ = {
                         return;
                     };
                     if (!shiftKey && target.is(lastInnerElement)) {
-                        e.preventDefault();
                         firstInnerElement.focus();
                         handled = true;
                     };
                     if (shiftKey && target.is(firstInnerElement)) {
-                        e.preventDefault();
                         lastInnerElement.focus();
                         handled = true;
                     };
@@ -198,21 +230,28 @@ export const __meta__ = {
             };
             if (key == keys.RIGHT || key == keys.DOWN) {
                 if (e.ctrlKey) {
+                    that._preventNavigate = true;
                     that._swap(target, next, "after");
+                    handled = true;
                 } else if (target.is(REFSORTABLEITEM_ATTR) && !target.is(that._items().last())) {
-                    that._navigate("next", target);
+                    newTarget = that._navigate("next", target);
+                    handled = newTarget;
                 }
-                handled = true;
             }
             if (key == keys.LEFT || key == keys.UP) {
                 if (e.ctrlKey) {
+                    that._preventNavigate = true;
                     that._swap(target, prev, "before");
+                    handled = true;
                 } else if (target.is(REFSORTABLEITEM_ATTR) && !target.is(that._items().first())) {
-                    that._navigate("prev", target);
+                    newTarget = that._navigate("prev", target);
+                    handled = newTarget;
                 }
-                handled = true;
             }
             if (key == keys.ENTER) {
+                if (target.is(that.options.disabled) || target.find('input').length === 0) {
+                    return;
+                }
                 that._lastFocusedSortableItem = target;
                 if (!focusable.length) {
                     return;
@@ -224,6 +263,7 @@ export const __meta__ = {
                 handled = true;
             }
             if (key == keys.ESC) {
+                that._preventNavigate = true;
                 let closestSortableItem = that._lastFocusedSortableItem;
 
                 if (!closestSortableItem) {

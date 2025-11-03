@@ -11712,6 +11712,7 @@ declare namespace kendo.ui {
         move?(e: SortableMoveEvent): void;
         end?(e: SortableEndEvent): void;
         change?(e: SortableChangeEvent): void;
+        navigate?(e: SortableNavigateEvent): void;
         cancel?(e: SortableCancelEvent): void;
     }
     interface SortableEvent {
@@ -11746,6 +11747,10 @@ declare namespace kendo.ui {
         oldIndex?: number | undefined;
         newIndex?: number | undefined;
         draggableEvent?: any;
+    }
+
+    interface SortableNavigateEvent extends SortableEvent {
+        item?: JQuery | undefined;
     }
 
     interface SortableCancelEvent extends SortableEvent {

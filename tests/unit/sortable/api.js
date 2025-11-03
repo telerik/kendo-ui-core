@@ -1,5 +1,6 @@
 import '@progress/kendo-ui/src/kendo.sortable.js';
 import { press, move, release } from '../../helpers/unit/general-utils.js';
+import { asyncTest } from "../../helpers/unit/async-utils.js";
 
 let element;
 
