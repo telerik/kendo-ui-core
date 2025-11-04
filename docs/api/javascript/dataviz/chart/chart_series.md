@@ -16,7 +16,7 @@ Gets or sets the series data.
 
 
 <div class="meta-api-description">
-Accessing or modifying the data points displayed in a chart series can be done by retrieving the current dataset or updating it with new values to control what is rendered on the chart. This functionality supports reading the existing data used for plotting or dynamically setting a fresh collection of data items that define the series visualization. Developers might need to fetch the current series values for analysis or reset, change, or refresh the displayed data to reflect different metrics, feeds, or user input. This method enables programmatic data access and manipulation for fine-tuning, refreshing, or customizing the graphical representation of series points within charts.
+How do I update the data points in a Kendo UI chart series? Accessing or modifying the data points displayed in a chart series can be done by retrieving the current dataset or updating it with new values to control what is rendered on the chart. This functionality supports reading the existing data used for plotting or dynamically setting a fresh collection of data items that define the series visualization. Developers might need to fetch the current series values for analysis or reset, change, or refresh the displayed data to reflect different metrics, feeds, or user input. This method enables programmatic data access and manipulation for fine-tuning, refreshing, or customizing the graphical representation of series points within charts.
 </div>
 
 #### Parameters
@@ -41,7 +41,7 @@ Finds a series [point](/api/javascript/dataviz/chart/chart_point). The method ac
 
 
 <div class="meta-api-description">
-Search for a specific data point within a chart series by applying a custom condition or filter function, enabling you to scan through all points to identify one that matches criteria such as specific values, thresholds, or properties; set up a predicate or callback function to evaluate each point individually and return the first point that satisfies the logic, halting further search upon a successful match, useful for pinpointing data entries, filtering points based on dynamic conditions, or retrieving targeted chart elements efficiently within series data collections.
+How do I find a specific data point in a Kendo UI chart series based on certain conditions? Search for a specific data point within a chart series by applying a custom condition or filter function, enabling you to scan through all points to identify one that matches criteria such as specific values, thresholds, or properties; set up a predicate or callback function to evaluate each point individually and return the first point that satisfies the logic, halting further search upon a successful match, useful for pinpointing data entries, filtering points based on dynamic conditions, or retrieving targeted chart elements efficiently within series data collections.
 </div>
 
 #### Parameters
@@ -65,7 +65,7 @@ Gets or sets the series data.
 
 
 <div class="meta-api-description">
-Accessing and modifying data points in a chart series, retrieving current data arrays, updating or setting new collections of points programmatically, changing series data dynamically, getting or setting chart data programmatically after initialization, manipulating the series data for visual refresh, configuring data points for live updates, controlling data collections within a chart series, replacing series points with new datasets, extracting or assigning series data for rendering changes.
+How do I update data points in a Kendo UI chart series programmatically? Accessing and modifying data points in a chart series, retrieving current data arrays, updating or setting new collections of points programmatically, changing series data dynamically, getting or setting chart data programmatically after initialization, manipulating the series data for visual refresh, configuring data points for live updates, controlling data collections within a chart series, replacing series points with new datasets, extracting or assigning series data for rendering changes.
 </div>
 
 #### Parameters
@@ -87,7 +87,7 @@ Toggles the highlight for the entire series or for specific [point(s)](/api/java
 
 
 <div class="meta-api-description">
-Control visual emphasis or highlighting for entire data series or specific points within a chart, enabling dynamic toggling of highlight states to programmatically set, enable, disable, or switch emphasis on series or individual data points, useful for interactive charts, user-driven highlighting, data point selection feedback, or conditional visual focus changes in chart components.
+How do I dynamically highlight specific points in a Kendo UI chart? Control visual emphasis or highlighting for entire data series or specific points within a chart, enabling dynamic toggling of highlight states to programmatically set, enable, disable, or switch emphasis on series or individual data points, useful for interactive charts, user-driven highlighting, data point selection feedback, or conditional visual focus changes in chart components.
 </div>
 
 #### Parameters
@@ -118,7 +118,7 @@ Toggles the visibility for the entire series or for specific point(s).
 
 
 <div class="meta-api-description">
-Change or switch the display state of chart series or individual data points by enabling, disabling, showing, or hiding entire series or selected points within graphical charts, controlling visibility programmatically in response to user interactions, legend selections, dynamic data updates, or custom logic to manage which parts of a chart are visible or concealed at runtime, including toggling on and off series or points after chart initialization to reflect real-time changes or user preferences.
+How do I toggle visibility of individual data points in a Kendo UI chart? Change or switch the display state of chart series or individual data points by enabling, disabling, showing, or hiding entire series or selected points within graphical charts, controlling visibility programmatically in response to user interactions, legend selections, dynamic data updates, or custom logic to manage which parts of a chart are visible or concealed at runtime, including toggling on and off series or points after chart initialization to reflect real-time changes or user preferences.
 </div>
 
 #### Parameters

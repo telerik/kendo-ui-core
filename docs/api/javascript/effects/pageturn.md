@@ -51,7 +51,7 @@ The axis of the page turn. Supported axes are `"horizontal"` and `"vertical"`.
 
 
 <div class="meta-api-description">
-Set or configure the animation direction for page-turn effects, flipping pages horizontally or vertically by specifying orientation parameters for transitions, page flip animations, or layout-sensitive effects. Control whether pages turn along the horizontal axis or vertical axis, enabling customization of visual flow, animation direction, and interactive page transitions. Adjust or enable horizontal versus vertical page flip animations to match design needs and user interface requirements involving directional page transitions.
+How do I configure the animation direction for page-turn effects in Kendo UI? Set or configure the animation direction for page-turn effects, flipping pages horizontally or vertically by specifying orientation parameters for transitions, page flip animations, or layout-sensitive effects. Control whether pages turn along the horizontal axis or vertical axis, enabling customization of visual flow, animation direction, and interactive page transitions. Adjust or enable horizontal versus vertical page flip animations to match design needs and user interface requirements involving directional page transitions.
 </div>
 
 #### Example
@@ -74,7 +74,7 @@ The initially visible element in the container.
 
 
 <div class="meta-api-description">
-Configure the initial visible element or front face displayed when starting a page-turn animation, enabling control over which child component or page is shown first, set the starting view for flipbook or page flip effects, define the initial content or face rendered inside the container, specify the default front page or element for animation startup, and control the initial state or visible face when initializing page turn interactions or components.
+How to set the initial visible element in Kendo UI page turn effect? Configure the initial visible element or front face displayed when starting a page-turn animation, enabling control over which child component or page is shown first, set the starting view for flipbook or page flip effects, define the initial content or face rendered inside the container, specify the default front page or element for animation startup, and control the initial state or visible face when initializing page turn interactions or components.
 </div>
 
 #### Example
@@ -95,7 +95,7 @@ The finally visible element in the container.
 
 
 <div class="meta-api-description">
-Control or configure which element or component is shown or revealed as the final visible page after a page-turn animation finishes, specifying the ending target inside a container during initialization, setting the back-facing or hidden element that becomes visible once the transition completes, determining which content or view appears after flipping pages or performing a page-turn effect, adjusting the initial visibility state to define what the user sees at the conclusion of the animated page turn, managing the end result element displayed when starting or setting up the page-turn interaction.
+What is the purpose of the "back" parameter in Kendo UI effects? Control or configure which element or component is shown or revealed as the final visible page after a page-turn animation finishes, specifying the ending target inside a container during initialization, setting the back-facing or hidden element that becomes visible once the transition completes, determining which content or view appears after flipping pages or performing a page-turn effect, adjusting the initial visibility state to define what the user sees at the conclusion of the animated page turn, managing the end result element displayed when starting or setting up the page-turn interaction.
 </div>
 
 #### Example

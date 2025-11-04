@@ -22,7 +22,7 @@ The schema configuration of the TreeListDataSource.
 
 
 <div class="meta-api-description">
-Define and configure the structure and interpretation of hierarchical or nested data for tree-like data sources, including how to specify unique identifiers, parent-child relationships, field mappings, data types, default values, parsing logic, and transformation functions to correctly model and bind complex nested datasets for tree components. Control schema setup for processing raw nested data, mapping hierarchical relationships with id and parentId, managing field definitions, enforcing data typing, customizing parsing and data transformation workflows, and setting field-level configurations to accurately represent and manipulate tree-structured data models in interactive UI elements.
+How do I set up the schema for tree-like data in a Kendo UI TreeList? Define and configure the structure and interpretation of hierarchical or nested data for tree-like data sources, including how to specify unique identifiers, parent-child relationships, field mappings, data types, default values, parsing logic, and transformation functions to correctly model and bind complex nested datasets for tree components. Control schema setup for processing raw nested data, mapping hierarchical relationships with id and parentId, managing field definitions, enforcing data typing, customizing parsing and data transformation workflows, and setting field-level configurations to accurately represent and manipulate tree-structured data models in interactive UI elements.
 </div>
 
 #### Example
@@ -57,7 +57,7 @@ The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel
 
 
 <div class="meta-api-description">
-Configure and define the data structure, item fields, unique identifiers, default values, and validation rules that shape and control hierarchical data binding in tree or nested list views. Set up or customize the model schema to manage how nested or parent-child items are interpreted, validated, and displayed in a tree-like data grid, including mapping data fields to control item types, relationships, and consistency. Enable schema-driven data validation and field configuration for complex hierarchical datasets used in tree lists, outline data shape for robust binding, and control item identity and relationships within nested data structures.
+How do I configure data validation for nested items in a Kendo UI TreeList? Configure and define the data structure, item fields, unique identifiers, default values, and validation rules that shape and control hierarchical data binding in tree or nested list views. Set up or customize the model schema to manage how nested or parent-child items are interpreted, validated, and displayed in a tree-like data grid, including mapping data fields to control item types, relationships, and consistency. Enable schema-driven data validation and field configuration for complex hierarchical datasets used in tree lists, outline data shape for robust binding, and control item identity and relationships within nested data structures.
 </div>
 
 #### Example
@@ -89,7 +89,7 @@ Loads the child nodes of a model.
 
 
 <div class="meta-api-description">
-Fetch or retrieve child nodes dynamically, enabling lazy-loading or on-demand loading of hierarchical data structures; configure or trigger loading of children for a specific parent node or model within a tree or nested list, update and populate the children collection programmatically, control the asynchronous fetching process of child elements, handle partial data loading in tree views or data grids, implement expandable node loading, refresh or update node children state after data retrieval, manage hierarchical data fetching logic, and set up automatic or manual loading of child nodes to optimize performance and data rendering in tree components.
+How do I enable lazy-loading of child nodes in a Kendo UI TreeList? Fetch or retrieve child nodes dynamically, enabling lazy-loading or on-demand loading of hierarchical data structures; configure or trigger loading of children for a specific parent node or model within a tree or nested list, update and populate the children collection programmatically, control the asynchronous fetching process of child elements, handle partial data loading in tree views or data grids, implement expandable node loading, refresh or update node children state after data retrieval, manage hierarchical data fetching logic, and set up automatic or manual loading of child nodes to optimize performance and data rendering in tree components.
 </div>
 
 #### Parameters
@@ -141,7 +141,7 @@ Child nodes for model.
 
 
 <div class="meta-api-description">
-Access or retrieve the immediate child nodes or nested items of a given data model within a hierarchical tree structure, enabling iteration, inspection, updating, or rebinding of subordinate records or rows; use this method to manage, manipulate, or render direct descendants, child collections, nested data entries, or hierarchical relationships when working with tree-like data sources, expanding or collapsing branches, traversing descendants, or dynamically modifying child elements linked to a parent model in a TreeList or similar nested data frameworks.
+How do I access child records in a TreeList using Kendo UI for jQuery? Access or retrieve the immediate child nodes or nested items of a given data model within a hierarchical tree structure, enabling iteration, inspection, updating, or rebinding of subordinate records or rows; use this method to manage, manipulate, or render direct descendants, child collections, nested data entries, or hierarchical relationships when working with tree-like data sources, expanding or collapsing branches, traversing descendants, or dynamically modifying child elements linked to a parent model in a TreeList or similar nested data frameworks.
 </div>
 
 #### Parameters
@@ -185,7 +185,7 @@ Return all root nodes.
 
 
 <div class="meta-api-description">
-Get the top-level elements, root or parentless nodes, from a hierarchical tree data structure to access, iterate through, select, render, update, or initialize user interfaces with only the highest level items before loading children or expanding branches. Extract the initial layer of nodes from a tree data source, retrieve all root nodes as objects for manipulating or displaying the base elements in tree lists, hierarchical views, or navigation trees. Enable fetching or controlling first-tier nodes in nested data models to manage hierarchy root-level selections, batch updates, or preloading steps in tree components and data trees.
+How do I get the top-level elements in a Kendo UI TreeList? Get the top-level elements, root or parentless nodes, from a hierarchical tree data structure to access, iterate through, select, render, update, or initialize user interfaces with only the highest level items before loading children or expanding branches. Extract the initial layer of nodes from a tree data source, retrieve all root nodes as objects for manipulating or displaying the base elements in tree lists, hierarchical views, or navigation trees. Enable fetching or controlling first-tier nodes in nested data models to manage hierarchy root-level selections, batch updates, or preloading steps in tree components and data trees.
 </div>
 
 #### Returns
@@ -222,7 +222,7 @@ The parent of given node.
 
 
 <div class="meta-api-description">
-Retrieve or access the immediate parent node of a given tree or hierarchical data element to navigate, traverse, or query ancestor relationships within nested data structures, enabling hierarchical lookups, lineage tracing, node re-parenting, updating parent-child links, or managing tree data connections and parent references in complex data lists or trees.
+How do I access the parent node of an item in a Kendo UI TreeList? Retrieve or access the immediate parent node of a given tree or hierarchical data element to navigate, traverse, or query ancestor relationships within nested data structures, enabling hierarchical lookups, lineage tracing, node re-parenting, updating parent-child links, or managing tree data connections and parent references in complex data lists or trees.
 </div>
 
 #### Parameters
@@ -266,7 +266,7 @@ The hierarchical level of the node.
 
 
 <div class="meta-api-description">
-Retrieve or calculate the depth, nesting level, or hierarchy tier of a specific tree node to understand its position within a hierarchical data structure, enabling indentation control, conditional styling, dynamic formatting, or logic branching based on how deeply nested an item is; supports queries to determine parent-child relations, node levels, or hierarchy depths for tree data visualization, manipulation, or structural analysis in tree or list components.
+How do I get the level of a specific node in a Kendo UI TreeList? Retrieve or calculate the depth, nesting level, or hierarchy tier of a specific tree node to understand its position within a hierarchical data structure, enabling indentation control, conditional styling, dynamic formatting, or logic branching based on how deeply nested an item is; supports queries to determine parent-child relations, node levels, or hierarchy depths for tree data visualization, manipulation, or structural analysis in tree or list components.
 </div>
 
 #### Parameters

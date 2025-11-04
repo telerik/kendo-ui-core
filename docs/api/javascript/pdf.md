@@ -22,7 +22,7 @@ Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig [CSS `@fon
 
 
 <div class="meta-api-description">
-Configure and map TrueType font files (.ttf) locations to enable embedding custom fonts in generated PDF documents, control font embedding by specifying font file paths, set font resources for PDF creation, support defining multiple font mappings safely for consistent font usage across exports, enable usage of local or same-origin TrueType fonts in PDF output, handle font embedding when automatic CSS @font-face extraction is unavailable or cross-origin restrictions prevent stylesheet font loading, support only .ttf font format and ensure fonts are loaded from the same domain or via CORS to embed them correctly in PDF generation processes.
+How do I configure custom fonts for PDF generation in Kendo UI? Configure and map TrueType font files (.ttf) locations to enable embedding custom fonts in generated PDF documents, control font embedding by specifying font file paths, set font resources for PDF creation, support defining multiple font mappings safely for consistent font usage across exports, enable usage of local or same-origin TrueType fonts in PDF output, handle font embedding when automatic CSS @font-face extraction is unavailable or cross-origin restrictions prevent stylesheet font loading, support only .ttf font format and ensure fonts are loaded from the same domain or via CORS to embed them correctly in PDF generation processes.
 </div>
 
 #### Parameters

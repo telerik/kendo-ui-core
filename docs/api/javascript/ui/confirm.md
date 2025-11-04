@@ -17,7 +17,7 @@ Defines the text of the labels that are shown within the confirm dialog. Used pr
 
 
 <div class="meta-api-description">
-Customize and localize confirmation dialog button labels, control the text displayed for confirm and cancel actions, set or override default messages in confirmation prompts, configure user-facing approval or dismissal text, and manage multi-language support for confirm dialog messages to tailor button captions and labels according to different languages or contexts.
+How do I customize the button labels in Kendo UI's confirm dialog? Customize and localize confirmation dialog button labels, control the text displayed for confirm and cancel actions, set or override default messages in confirmation prompts, configure user-facing approval or dismissal text, and manage multi-language support for confirm dialog messages to tailor button captions and labels according to different languages or contexts.
 </div>
 
 #### Example
@@ -38,7 +38,7 @@ The title of the OK button.
 
 
 <div class="meta-api-description">
-Customize, configure, or set the confirmation dialog button label, accept button text, or positive action label to match different languages, locales, or user interface preferences, enabling localization, internationalization, and custom button wording in confirmation prompts, approval dialogs, or user acknowledgment interfaces.
+How to customize the confirmation dialog button label in Kendo UI for jQuery? Customize, configure, or set the confirmation dialog button label, accept button text, or positive action label to match different languages, locales, or user interface preferences, enabling localization, internationalization, and custom button wording in confirmation prompts, approval dialogs, or user acknowledgment interfaces.
 </div>
 
 #### Example
@@ -58,7 +58,7 @@ The title of the Cancel button.
 
 
 <div class="meta-api-description">
-Customize, configure, or change the text label, title, or caption of the Cancel button in confirmation dialogs, pop-ups, alerts, or prompts to support localization, translation, user interface personalization, or modifying default cancel messages for better user understanding and consistency across different languages, regions, and application settings.
+How can I change the default cancel button text in Kendo UI confirmation dialogs? Customize, configure, or change the text label, title, or caption of the Cancel button in confirmation dialogs, pop-ups, alerts, or prompts to support localization, translation, user interface personalization, or modifying default cancel messages for better user understanding and consistency across different languages, regions, and application settings.
 </div>
 
 #### Example
@@ -83,7 +83,7 @@ Customize, configure, or change the text label, title, or caption of the Cancel 
 
 
 <div class="meta-api-description">
-Await and handle the user's confirmation response as a promise or deferred object, capturing whether the user accepted or canceled via resolved or rejected outcomes. Enable processing of the confirm dialog result asynchronously by attaching success and failure callbacks, using promise chaining, or integrating with jQuery.when to control flow based on user approval or dismissal. Capture and respond to user confirmation, toggle actions, or dialog results programmatically with asynchronous event handling patterns, ensuring seamless integration with both success and cancellation scenarios in UI workflows.
+How to handle the result of a Kendo UI confirm dialog in my jQuery application? Await and handle the user's confirmation response as a promise or deferred object, capturing whether the user accepted or canceled via resolved or rejected outcomes. Enable processing of the confirm dialog result asynchronously by attaching success and failure callbacks, using promise chaining, or integrating with jQuery.when to control flow based on user approval or dismissal. Capture and respond to user confirmation, toggle actions, or dialog results programmatically with asynchronous event handling patterns, ensuring seamless integration with both success and cancellation scenarios in UI workflows.
 </div>
 
 #### Example

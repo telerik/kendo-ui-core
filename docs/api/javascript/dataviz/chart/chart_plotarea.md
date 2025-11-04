@@ -16,7 +16,7 @@ The drawing MultiPath used to draw the background.
 
 
 <div class="meta-api-description">
-Customize and configure the chart’s plot area background by accessing and modifying the underlying drawing path or shape that forms the background visual element, enabling control over fills, strokes, shapes, and path segments to create custom backgrounds or effects; this includes inspecting and editing the graphical components used to render the plot area's backdrop, changing colors, patterns, or replacing the entire background with custom vector shapes, and adjusting visual elements programmatically to tailor the chart’s background appearance precisely.
+How to customize the background of a Kendo UI chart's plot area? Customize and configure the chart’s plot area background by accessing and modifying the underlying drawing path or shape that forms the background visual element, enabling control over fills, strokes, shapes, and path segments to create custom backgrounds or effects; this includes inspecting and editing the graphical components used to render the plot area's backdrop, changing colors, patterns, or replacing the entire background with custom vector shapes, and adjusting visual elements programmatically to tailor the chart’s background appearance precisely.
 </div>
 
 #### Example
@@ -61,7 +61,7 @@ The drawing group used to draw the plot area.
 
 
 <div class="meta-api-description">
-customize plot area rendering control access drawing group for chart plot area modify visual element for chart drawing low-level graphic layer for chart area configure chart plot visuals enhance chart rendering customize hit-testing in chart plot adjust chart drawing group after initialization control graphic objects within chart plot area manipulate visual components of chart background rendering customize or override chart plot visuals for advanced drawing or interaction programming
+How to customize the appearance of the chart plot area in Kendo UI for jQuery? customize plot area rendering control access drawing group for chart plot area modify visual element for chart drawing low-level graphic layer for chart area configure chart plot visuals enhance chart rendering customize hit-testing in chart plot adjust chart drawing group after initialization control graphic objects within chart plot area manipulate visual components of chart background rendering customize or override chart plot visuals for advanced drawing or interaction programming
 </div>
 
 #### Example

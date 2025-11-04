@@ -13,7 +13,7 @@ Sets the height of the rectangle.
 
 
 <div class="meta-api-description">
-Set or adjust the vertical size, height, or top-to-bottom dimension of a rectangle shape within a diagram or graphical layout, specifying or controlling how tall the shape appears, affects rendering scale, positioning, alignment, and layout measurements. Use this property to define or modify the shape’s vertical extent, bounding box height, or height attribute when initializing or updating graphical elements, controlling layout spacing and visual proportions in diagrams or interfaces.
+How do I adjust the height of a rectangle shape in Kendo UI for jQuery Diagram component? Set or adjust the vertical size, height, or top-to-bottom dimension of a rectangle shape within a diagram or graphical layout, specifying or controlling how tall the shape appears, affects rendering scale, positioning, alignment, and layout measurements. Use this property to define or modify the shape’s vertical extent, bounding box height, or height attribute when initializing or updating graphical elements, controlling layout spacing and visual proportions in diagrams or interfaces.
 </div>
 
 #### Example
@@ -42,7 +42,7 @@ Sets the width of the rectangle.
 
 
 <div class="meta-api-description">
-Adjust, set, or configure the horizontal size, width, or breadth of a rectangle shape within a diagram or graphical layout to control shape dimensions, spacing, alignment, and rendering size. Manage the rectangle’s horizontal measurement to influence positioning, resizing, layout consistency, visual scaling, or component initialization, enabling precise shape sizing for design, interface arrangement, or graphical display purposes.
+How do I set the width of a rectangle in Kendo UI Diagram? Adjust, set, or configure the horizontal size, width, or breadth of a rectangle shape within a diagram or graphical layout to control shape dimensions, spacing, alignment, and rendering size. Manage the rectangle’s horizontal measurement to influence positioning, resizing, layout consistency, visual scaling, or component initialization, enabling precise shape sizing for design, interface arrangement, or graphical display purposes.
 </div>
 
 #### Example
@@ -71,7 +71,7 @@ The x-coordinate of the top-left corner of the rectangle.
 
 
 <div class="meta-api-description">
-Control or adjust the horizontal position of a rectangle within a diagram by setting or retrieving its x-coordinate, which defines the left edge's placement on the canvas. This numeric value enables precise placement, movement, alignment, or animation of shapes along the horizontal axis, allowing developers to configure initial positions or dynamically update the rectangle’s left boundary during runtime for layout adjustments, drag-and-drop functionality, or coordinate-based positioning within graphical diagrams and UI elements.
+How do I set or get the x-coordinate of a rectangle in Kendo UI Diagram? Control or adjust the horizontal position of a rectangle within a diagram by setting or retrieving its x-coordinate, which defines the left edge's placement on the canvas. This numeric value enables precise placement, movement, alignment, or animation of shapes along the horizontal axis, allowing developers to configure initial positions or dynamically update the rectangle’s left boundary during runtime for layout adjustments, drag-and-drop functionality, or coordinate-based positioning within graphical diagrams and UI elements.
 </div>
 
 #### Example
@@ -100,7 +100,7 @@ The y-coordinate of the top-left corner of the rectangle.
 
 
 <div class="meta-api-description">
-Set or adjust the vertical position of a rectangle within a diagram by controlling its y-coordinate or top edge placement, enabling precise vertical alignment, movement, or animation of shapes along the diagram's vertical axis using numeric values. Whether you need to move, position, offset, shift, or arrange rectangles up and down inside the diagram's coordinate framework, this setting governs vertical placement and enables dynamic control over rectangle height positioning, vertical layout adjustments, or coordinate-based vertical transformations.
+How do I set the vertical position of a rectangle in a Kendo UI diagram? Set or adjust the vertical position of a rectangle within a diagram by controlling its y-coordinate or top edge placement, enabling precise vertical alignment, movement, or animation of shapes along the diagram's vertical axis using numeric values. Whether you need to move, position, offset, shift, or arrange rectangles up and down inside the diagram's coordinate framework, this setting governs vertical placement and enables dynamic control over rectangle height positioning, vertical layout adjustments, or coordinate-based vertical transformations.
 </div>
 
 #### Example
@@ -131,7 +131,7 @@ Get or sets the element position.
 
 
 <div class="meta-api-description">
-Retrieve or update the location and size of a rectangular shape within a diagram by accessing or modifying its bounding box coordinates, including x and y positions as well as width and height dimensions. Enable repositioning or resizing of diagram elements by setting new coordinates or dimensions, or obtain the current placement and scale of these rectangular components to adjust layouts, handle drag-and-drop movements, dynamically control shapes’ properties, or synchronize visual elements. This method supports reading the current bounds or programmatically moving and scaling rectangles within diagram interfaces, supporting flexible spatial manipulation and precise control of shape sizes and positions.
+How do I change the position of a rectangle in a Kendo UI Diagram? Retrieve or update the location and size of a rectangular shape within a diagram by accessing or modifying its bounding box coordinates, including x and y positions as well as width and height dimensions. Enable repositioning or resizing of diagram elements by setting new coordinates or dimensions, or obtain the current placement and scale of these rectangular components to adjust layouts, handle drag-and-drop movements, dynamically control shapes’ properties, or synchronize visual elements. This method supports reading the current bounds or programmatically moving and scaling rectangles within diagram interfaces, supporting flexible spatial manipulation and precise control of shape sizes and positions.
 </div>
 
 #### Parameters
@@ -174,7 +174,7 @@ Rotates the element with the specified parameters.
 
 
 <div class="meta-api-description">
-Rotate or adjust the angle, orientation, or rotation transform of a rectangular diagram element dynamically or programmatically; set, apply, or update the element’s rotation state at runtime for design alignment, user interaction adjustments, layout modifications, or visual transformation of shapes; control the geometric rotation to modify the diagram's rectangle appearance instantly based on specified degrees, radians, or rotation parameters to change element direction or angle within a graphical interface.
+How can I dynamically change the rotation of a rectangular diagram element in Kendo UI? Rotate or adjust the angle, orientation, or rotation transform of a rectangular diagram element dynamically or programmatically; set, apply, or update the element’s rotation state at runtime for design alignment, user interaction adjustments, layout modifications, or visual transformation of shapes; control the geometric rotation to modify the diagram's rectangle appearance instantly based on specified degrees, radians, or rotation parameters to change element direction or angle within a graphical interface.
 </div>
 
 #### Parameters
@@ -224,7 +224,7 @@ Gets or sets the visibility of the current element.
 
 
 <div class="meta-api-description">
-Control, check, or modify whether a rectangular shape in a diagram is displayed or hidden by setting or retrieving its visibility status; this functionality lets developers programmatically toggle the display of rectangles, query their current visible state, enable or disable rendering of specific diagram elements, manage shape appearance dynamically, and conditionally show or hide shapes using boolean toggles or visibility flags.
+How to show or hide rectangles in Kendo UI diagram? Control, check, or modify whether a rectangular shape in a diagram is displayed or hidden by setting or retrieving its visibility status; this functionality lets developers programmatically toggle the display of rectangles, query their current visible state, enable or disable rendering of specific diagram elements, manage shape appearance dynamically, and conditionally show or hide shapes using boolean toggles or visibility flags.
 </div>
 
 #### Parameters

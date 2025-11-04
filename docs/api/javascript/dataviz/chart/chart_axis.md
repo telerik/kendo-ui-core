@@ -16,7 +16,7 @@ Returns an object with the axis minimum and maximum values.
 
 
 <div class="meta-api-description">
-Retrieve or access the numeric span, minimum and maximum bounds, or value range of chart axes to programmatically get axis scaling limits, data extent, or coordinate boundaries; use this method for reading axis limits for synchronized multi-axis charts, setting dynamic annotations, adjusting graph scaling, or comparing data intervals without altering the chart display; obtain the axis numerical extents as numeric min and max values to analyze, align, calibrate, or control axis dimensions and ranges in chart rendering and visualization workflows.
+How to get the range of a Kendo UI chart axis? Retrieve or access the numeric span, minimum and maximum bounds, or value range of chart axes to programmatically get axis scaling limits, data extent, or coordinate boundaries; use this method for reading axis limits for synchronized multi-axis charts, setting dynamic annotations, adjusting graph scaling, or comparing data intervals without altering the chart display; obtain the axis numerical extents as numeric min and max values to analyze, align, calibrate, or control axis dimensions and ranges in chart rendering and visualization workflows.
 </div>
 
 #### Returns
@@ -35,7 +35,7 @@ Returns a slot based on the specified from and to values.
 
 
 <div class="meta-api-description">
-Determine the axis segment or coordinate range corresponding to a specific value interval by inputting start and end points to map numerical or categorical data intervals onto chart axis segments. This enables finding exact axis positions, aligning visual annotations, calculating layout slots, converting data ranges into axis coordinates, and dynamically controlling how value spans relate to chart segments for purposes such as positioning, highlighting regions, or synchronizing multiple chart elements along the axis.
+How can I map data intervals onto chart axis segments using Kendo UI ChartAxis's slot method? Determine the axis segment or coordinate range corresponding to a specific value interval by inputting start and end points to map numerical or categorical data intervals onto chart axis segments. This enables finding exact axis positions, aligning visual annotations, calculating layout slots, converting data ranges into axis coordinates, and dynamically controlling how value spans relate to chart segments for purposes such as positioning, highlighting regions, or synchronizing multiple chart elements along the axis.
 </div>
 
 #### Parameters
@@ -65,7 +65,7 @@ Returns the value corresponding to the passed surface point.
 
 
 <div class="meta-api-description">
-Convert screen coordinates or plot area points into corresponding data values along a chart axis by mapping input positions like mouse clicks, touch events, or tooltip locations to axis scales; this enables precise hit testing, data extraction from interactive events, custom annotations aligned with data units, and transforming visual coordinates into meaningful axis values while accounting for axis type, scaling, and transformations to accurately translate between surface pixels and underlying chart data.
+How to convert mouse click coordinates into actual data values on a Kendo UI chart axis? Convert screen coordinates or plot area points into corresponding data values along a chart axis by mapping input positions like mouse clicks, touch events, or tooltip locations to axis scales; this enables precise hit testing, data extraction from interactive events, custom annotations aligned with data units, and transforming visual coordinates into meaningful axis values while accounting for axis type, scaling, and transformations to accurately translate between surface pixels and underlying chart data.
 </div>
 
 #### Parameters
@@ -87,7 +87,7 @@ Returns an object with the minimum and maximum point value associated with the a
 
 
 <div class="meta-api-description">
-Get or obtain the numeric minimum and maximum limits defining the range or scale of a chart axis, retrieve the current axis boundaries or extent, access the computed lower and upper values of an axis for scaling, fetching axis min/max for zoom controls or synchronization of multiple charts, extracting axis range data to align series or adjust visible scope, reading numeric boundaries for axis scaling, determining axis value limits for dynamic updates or user interactions, querying current axis scale span to harmonize chart elements or validate data bounds, obtaining axis min and max values for calculations involving chart layout or zooming, retrieving the axis numeric interval endpoints to analyze or programmatically modify visual data representation.
+How to get the minimum and maximum values of a chart axis in Kendo UI for jQuery? Get or obtain the numeric minimum and maximum limits defining the range or scale of a chart axis, retrieve the current axis boundaries or extent, access the computed lower and upper values of an axis for scaling, fetching axis min/max for zoom controls or synchronization of multiple charts, extracting axis range data to align series or adjust visible scope, reading numeric boundaries for axis scaling, determining axis value limits for dynamic updates or user interactions, querying current axis scale span to harmonize chart elements or validate data bounds, obtaining axis min and max values for calculations involving chart layout or zooming, retrieving the axis numeric interval endpoints to analyze or programmatically modify visual data representation.
 </div>
 
 #### Returns `Object`

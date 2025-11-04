@@ -15,7 +15,7 @@ Exposes a jQuery plug-in that will handle the widget creation and attach its cli
 
 
 <div class="meta-api-description">
-Registering and configuring a jQuery plugin for custom UI components to control element initialization, setup options, handle creation logic, bind client-side component instances to elements using data attributes, enable access and manipulation via jQuery’s .data() method, support plugin initialization, customization, component instance retrieval, and interaction after setup, allowing developers to create, initialize, and manage component lifecycle within jQuery-based interfaces.
+How do I register a custom jQuery plugin with Kendo UI? Registering and configuring a jQuery plugin for custom UI components to control element initialization, setup options, handle creation logic, bind client-side component instances to elements using data attributes, enable access and manipulation via jQuery’s .data() method, support plugin initialization, customization, component instance retrieval, and interaction after setup, allowing developers to create, initialize, and manage component lifecycle within jQuery-based interfaces.
 </div>
 
 #### Example
@@ -65,7 +65,7 @@ The method displays a semi-transparent background and an animated GIF. It is des
 
 
 <div class="meta-api-description">
-Configure or control visual busy indicators that display a translucent overlay with animated or static loading visuals to signal ongoing asynchronous tasks such as remote data fetching, AJAX calls, or network operations. Enable, set, or toggle semi-transparent overlays showing spinner animations or loading icons that inform users of background processing, handling UI blocking states, progress feedback during remote calls, or busy states while awaiting server responses. Manage loading overlays with theme-aware styling, options to show or hide animated GIFs or fallback static images, and address browser behavior affecting animation during intensive main-thread activity or slow rendering scenarios to improve user perception of asynchronous loading and operation progress.
+How to display a loading animation with Kendo UI progress bar? Configure or control visual busy indicators that display a translucent overlay with animated or static loading visuals to signal ongoing asynchronous tasks such as remote data fetching, AJAX calls, or network operations. Enable, set, or toggle semi-transparent overlays showing spinner animations or loading icons that inform users of background processing, handling UI blocking states, progress feedback during remote calls, or busy states while awaiting server responses. Manage loading overlays with theme-aware styling, options to show or hide animated GIFs or fallback static images, and address browser behavior affecting animation during intensive main-thread activity or slow rendering scenarios to improve user perception of asynchronous loading and operation progress.
 </div>
 
 #### Parameters
@@ -253,7 +253,7 @@ To set the global iconType use `kendo.setDefaults('iconType', 'font');` method b
 
 
 <div class="meta-api-description">
-Generate or retrieve the HTML string markup for an icon to insert into web pages, templates, or the DOM, supporting both scalable vector graphics (SVG) and font-based icons depending on the configured global icon style. Control, switch, or set icon formats between SVG or font icons programmatically or via defaults to influence how icons render across your UI components. Obtain icon markup as a string for use in custom rendering, dynamic content insertion, or template customization with flexibility in icon type selection and integration in web applications.
+How do I generate HTML markup for icons in Kendo UI? Generate or retrieve the HTML string markup for an icon to insert into web pages, templates, or the DOM, supporting both scalable vector graphics (SVG) and font-based icons depending on the configured global icon style. Control, switch, or set icon formats between SVG or font icons programmatically or via defaults to influence how icons render across your UI components. Obtain icon markup as a string for use in custom rendering, dynamic content insertion, or template customization with flexibility in icon type selection and integration in web applications.
 </div>
 
 #### Parameters

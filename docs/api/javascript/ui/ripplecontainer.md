@@ -20,7 +20,7 @@ A JavaScript array that contains the RippleContainer's elements configuration. W
 
 
 <div class="meta-api-description">
-Control and customize where the ripple animation appears by specifying a list or array of target elements to apply the ripple effect, enabling precise scoping to buttons, checkboxes, radio buttons, list items, or any configured elements, allowing developers to enable, restrict, or configure ripple animations on selected DOM elements rather than having the effect automatically on all supported controls, offering flexibility to set, limit, or target ripple visuals on specific components for interactive feedback customization.
+How to specify target elements for ripple animation in Kendo UI? Control and customize where the ripple animation appears by specifying a list or array of target elements to apply the ripple effect, enabling precise scoping to buttons, checkboxes, radio buttons, list items, or any configured elements, allowing developers to enable, restrict, or configure ripple animations on selected DOM elements rather than having the effect automatically on all supported controls, offering flexibility to set, limit, or target ripple visuals on specific components for interactive feedback customization.
 </div>
 
 #### Example - initialize RippleContainer for buttons only

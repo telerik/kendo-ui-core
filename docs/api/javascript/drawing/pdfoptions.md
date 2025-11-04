@@ -18,7 +18,7 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 
 <div class="meta-api-description">
-configure automatic print dialog on PDF load control automatic printing trigger print preview popup immediately after PDF rendering enable or disable print prompt on document open manage print dialog behavior when loading PDF in drawing control auto-launch of system print window upon PDF display set print dialog auto-trigger for PDF viewer control print preview popup timing for PDF documents adjust automatic print dialog activation on PDF open toggle print dialog prompt when PDF finishes loading manage print dialog visibility during PDF rendering in drawing interface
+How to disable automatic print dialog when loading PDF in Kendo UI for jQuery drawing control? configure automatic print dialog on PDF load control automatic printing trigger print preview popup immediately after PDF rendering enable or disable print prompt on document open manage print dialog behavior when loading PDF in drawing control auto-launch of system print window upon PDF display set print dialog auto-trigger for PDF viewer control print preview popup timing for PDF documents adjust automatic print dialog activation on PDF open toggle print dialog prompt when PDF finishes loading manage print dialog visibility during PDF rendering in drawing interface
 </div>
 
 #### Example
@@ -50,7 +50,7 @@ The creator of the PDF document.
 
 
 <div class="meta-api-description">
-Configure or modify the PDF document's author or creator metadata string during export from drawing or graphic components, enabling setting, updating, or retrieving the creator information embedded within the PDF file properties. This functionality supports controlling the metadata tag that identifies the document creator, author name, or originator details for generated PDFs, useful for customizing or automating document identification, tracking, and metadata management in export workflows.
+How to set creator information in PDF exported from Kendo UI drawing component? Configure or modify the PDF document's author or creator metadata string during export from drawing or graphic components, enabling setting, updating, or retrieving the creator information embedded within the PDF file properties. This functionality supports controlling the metadata tag that identifies the document creator, author name, or originator details for generated PDFs, useful for customizing or automating document identification, tracking, and metadata management in export workflows.
 </div>
 
 #### Example
@@ -82,7 +82,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
 
 
 <div class="meta-api-description">
-Configure or override the PDF file creation date and timestamp embedded in the document metadata by setting or specifying the exact date and time for the generated PDF file, controlling document creation timestamps, modifying or customizing the file’s date attribute, adjusting or defining the PDF generation datetime, setting the creation time to a specific JavaScript Date value, controlling metadata dates, customizing the embedded date field, enabling accurate document date tracking, and managing timestamp information within the PDF output.
+How to set custom date in Kendo UI for jQuery PDF generation? Configure or override the PDF file creation date and timestamp embedded in the document metadata by setting or specifying the exact date and time for the generated PDF file, controlling document creation timestamps, modifying or customizing the file’s date attribute, adjusting or defining the PDF generation datetime, setting the creation time to a specific JavaScript Date value, controlling metadata dates, customizing the embedded date field, enabling accurate document date tracking, and managing timestamp information within the PDF output.
 </div>
 
 #### Example
@@ -115,7 +115,7 @@ By default, the images are exported at their full resolution.
 
 
 <div class="meta-api-description">
-Set or adjust the image resolution and quality in exported PDFs by specifying the dots-per-inch (DPI) value for embedded images, enabling control over image sharpness, clarity, and file size during PDF generation. Configure the image export DPI to enforce a fixed resolution regardless of source image properties, optimize output visuals for printing or screen display by scaling image dpi, or reduce PDF file size by lowering image dpi settings. This option helps customize the pixel density of images inside PDFs created through drawing or export components, supporting use cases like high-quality print export, performance tuning, or balanced quality-size trade-offs.
+How to set image resolution in exported PDFs with Kendo UI for jQuery drawingapi? Set or adjust the image resolution and quality in exported PDFs by specifying the dots-per-inch (DPI) value for embedded images, enabling control over image sharpness, clarity, and file size during PDF generation. Configure the image export DPI to enforce a fixed resolution regardless of source image properties, optimize output visuals for printing or screen display by scaling image dpi, or reduce PDF file size by lowering image dpi settings. This option helps customize the pixel density of images inside PDFs created through drawing or export components, supporting use cases like high-quality print export, performance tuning, or balanced quality-size trade-offs.
 </div>
 
 #### Example
@@ -149,7 +149,7 @@ Specifies the quality of the images within the exported file, from 0 to 1.
 
 
 <div class="meta-api-description">
-Adjust image compression quality for JPEG images when exporting drawings to PDF by setting or retrieving the compression level as a value between 0 and 1, where higher numbers increase image clarity and detail but also result in larger PDF file sizes; control the balance between image fidelity and file size for exported graphics, optimize visual quality in exported documents, configure JPEG compression ratio, set image quality for PDF export, manage file size versus visual sharpness, and fine-tune export image settings for drawings.
+How to set JPEG image quality when exporting Kendo UI drawings to PDF? Adjust image compression quality for JPEG images when exporting drawings to PDF by setting or retrieving the compression level as a value between 0 and 1, where higher numbers increase image clarity and detail but also result in larger PDF file sizes; control the balance between image fidelity and file size for exported graphics, optimize visual quality in exported documents, configure JPEG compression ratio, set image quality for PDF export, manage file size versus visual sharpness, and fine-tune export image settings for drawings.
 </div>
 
 #### Example
@@ -183,7 +183,7 @@ If set to true all PNG images contained in the exported file will be kept in PNG
 
 
 <div class="meta-api-description">
-Control the preservation of PNG image quality, transparency, and original file format when exporting drawings or graphics to PDF by embedding PNG files directly instead of converting them to other formats. Enable or disable the retention of PNG images in their native format within PDF exports to avoid loss of fidelity, maintain transparent backgrounds, and ensure accurate image reproduction. Adjust settings to keep embedded PNGs intact during PDF generation for better image clarity, transparency support, and precise visual output. This option is useful for configuring image export behavior, maintaining original raster image properties, and optimizing PDF content with unaltered PNG graphics.
+How do I preserve PNG image quality when exporting to PDF with Kendo UI for jQuery? Control the preservation of PNG image quality, transparency, and original file format when exporting drawings or graphics to PDF by embedding PNG files directly instead of converting them to other formats. Enable or disable the retention of PNG images in their native format within PDF exports to avoid loss of fidelity, maintain transparent backgrounds, and ensure accurate image reproduction. Adjust settings to keep embedded PNGs intact during PDF generation for better image clarity, transparency support, and precise visual output. This option is useful for configuring image export behavior, maintaining original raster image properties, and optimizing PDF content with unaltered PNG graphics.
 </div>
 
 #### Example
@@ -216,7 +216,7 @@ Specifies the keywords of the exported PDF file.
 
 
 <div class="meta-api-description">
-Set or update the searchable metadata terms, keywords, tags, or phrases embedded in a PDF file generated from drawings to improve document indexing, searchability, content discovery, and metadata customization, enabling control over the PDF’s keyword properties for better organization, retrieval, and classification in exported files.
+How to customize keywords in PDFs generated from drawings using Kendo UI for jQuery? Set or update the searchable metadata terms, keywords, tags, or phrases embedded in a PDF file generated from drawings to improve document indexing, searchability, content discovery, and metadata customization, enabling control over the PDF’s keyword properties for better organization, retrieval, and classification in exported files.
 </div>
 
 #### Example
@@ -248,7 +248,7 @@ Set to `true` to reverse the paper dimensions if needed such that width is the l
 
 
 <div class="meta-api-description">
-Enable or configure landscape orientation for PDF export by setting the page layout to use wider horizontal dimensions instead of the default vertical portrait style, allowing control over the page orientation, paper size reversal, and layout formatting to ensure drawings or documents print and display correctly with width as the dominant edge on exported PDFs.
+How do I set landscape orientation for PDF export in Kendo UI drawingapi? Enable or configure landscape orientation for PDF export by setting the page layout to use wider horizontal dimensions instead of the default vertical portrait style, allowing control over the page orientation, paper size reversal, and layout formatting to ensure drawings or documents print and display correctly with width as the dominant edge on exported PDFs.
 </div>
 
 #### Example
@@ -285,7 +285,7 @@ units are "mm", "cm", "in" and "pt" (default).
 
 
 <div class="meta-api-description">
-Set or adjust export margins for PDF files generated from drawings, specifying distances around page content using numbers or strings with units such as millimeters, centimeters, inches, or points. Control page border spacing, page padding, printable area edges, and layout margins by entering values like plain numbers interpreted as points or styled strings like "10mm" or "0.5in" to customize PDF page boundaries when exporting vector graphics or drawings. Configure, define, or customize printable margins and page offsets to ensure proper whitespace and alignment in exported PDFs.
+How do I adjust the margins in PDF files generated by the Kendo UI drawingapi? Set or adjust export margins for PDF files generated from drawings, specifying distances around page content using numbers or strings with units such as millimeters, centimeters, inches, or points. Control page border spacing, page padding, printable area edges, and layout margins by entering values like plain numbers interpreted as points or styled strings like "10mm" or "0.5in" to customize PDF page boundaries when exporting vector graphics or drawings. Configure, define, or customize printable margins and page offsets to ensure proper whitespace and alignment in exported PDFs.
 </div>
 
 #### Example
@@ -344,7 +344,7 @@ Supported values:
 
 
 <div class="meta-api-description">
-Configure, set, or control the PDF export paper dimensions by specifying standard paper sizes like A0 through A10, B0 through B10, C0 through C10, Executive, Folio, Legal, Letter, or Tabloid, or by defining custom width and height using numeric or string-based units including points, inches, centimeters, or millimeters; enable automatic sizing to fit content dimensions where 1 pixel corresponds to 1/72 inch, allowing flexible adjustment of PDF page layout, page format, document size, printable area, and output scale for exporting vector or raster drawings, ensuring precise control over PDF page measurements for drawing exports.
+How to set custom paper size for PDF export in Kendo UI drawingapi? Configure, set, or control the PDF export paper dimensions by specifying standard paper sizes like A0 through A10, B0 through B10, C0 through C10, Executive, Folio, Legal, Letter, or Tabloid, or by defining custom width and height using numeric or string-based units including points, inches, centimeters, or millimeters; enable automatic sizing to fit content dimensions where 1 pixel corresponds to 1/72 inch, allowing flexible adjustment of PDF page layout, page format, document size, printable area, and output scale for exporting vector or raster drawings, ensuring precise control over PDF page measurements for drawing exports.
 </div>
 
 #### Example - set the paper size of the PDF document
@@ -384,7 +384,7 @@ Sets the subject of the PDF file.
 
 
 <div class="meta-api-description">
-Configure the PDF document subject metadata to customize or set the descriptive subject field embedded within exported PDF files, control the PDF's subject property for identification and categorization, specify or update the metadata tag for PDF export, assign a meaningful subject label that appears in document properties, and manage the exported PDF's metadata content related to the subject for better searchability and organization when generating PDFs from drawing or design components.
+How to set custom subject metadata in exported PDF files using Kendo UI drawingapi? Configure the PDF document subject metadata to customize or set the descriptive subject field embedded within exported PDF files, control the PDF's subject property for identification and categorization, specify or update the metadata tag for PDF export, assign a meaningful subject label that appears in document properties, and manage the exported PDF's metadata content related to the subject for better searchability and organization when generating PDFs from drawing or design components.
 </div>
 
 #### Example
@@ -416,7 +416,7 @@ Sets the title of the PDF file.
 
 
 <div class="meta-api-description">
-Configure or set the document title metadata for the exported PDF file when converting or saving drawings, graphics, or components to PDF format, enabling control over the file’s title property visible in PDF viewers and document info. Adjust or update the PDF output’s title field for identification, indexing, searchability, and proper labeling of generated PDF documents, ensuring the exported file carries the desired descriptive title metadata used for document management, display, or printing purposes.
+How to set title metadata for PDF exports in Kendo UI drawingapi? Configure or set the document title metadata for the exported PDF file when converting or saving drawings, graphics, or components to PDF format, enabling control over the file’s title property visible in PDF viewers and document info. Adjust or update the PDF output’s title field for identification, indexing, searchability, and proper labeling of generated PDF documents, ensuring the exported file carries the desired descriptive title metadata used for document management, display, or printing purposes.
 </div>
 
 #### Example

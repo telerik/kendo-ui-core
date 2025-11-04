@@ -18,7 +18,7 @@ Gets or sets the Navigator selected date range.
 
 
 <div class="meta-api-description">
-Configure, retrieve, update, or control the current date range selection programmatically to synchronize date intervals with other UI elements like calendars, custom date pickers, or saved state restoration by using methods that allow getting or setting the selected date span dynamically, enabling applications to read user-selected periods, apply preset ranges, change selections through code, manage time intervals, or integrate date range controls seamlessly across components for consistent temporal data filtering and display.
+How do I dynamically change the selected date range in a Kendo UI Stock Chart? Configure, retrieve, update, or control the current date range selection programmatically to synchronize date intervals with other UI elements like calendars, custom date pickers, or saved state restoration by using methods that allow getting or setting the selected date span dynamically, enabling applications to read user-selected periods, apply preset ranges, change selections through code, manage time intervals, or integrate date range controls seamlessly across components for consistent temporal data filtering and display.
 </div>
 
 #### Example

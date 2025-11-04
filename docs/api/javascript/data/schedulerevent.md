@@ -19,7 +19,7 @@ The optional event description.
 
 
 <div class="meta-api-description">
-Add or set detailed text notes, descriptions, agendas, contextual information, or annotations for scheduling events to enhance event clarity, improve searchability, support filtering, tooltips, display in editors, provide extra metadata, enable exporting with richer content, and facilitate quick identification or retrieval of events based on descriptive text, keywords, or human-readable summaries.
+How can I add notes to a scheduling event in Kendo UI for jQuery? Add or set detailed text notes, descriptions, agendas, contextual information, or annotations for scheduling events to enhance event clarity, improve searchability, support filtering, tooltips, display in editors, provide extra metadata, enable exporting with richer content, and facilitate quick identification or retrieval of events based on descriptive text, keywords, or human-readable summaries.
 </div>
 
 #### Example - set the description of an event
@@ -40,7 +40,7 @@ The date at which the scheduler event ends. The `end` date is mandatory.
 
 
 <div class="meta-api-description">
-Specify or configure the event's finishing time, end date, or completion timestamp to define when the scheduled activity or appointment concludes, enabling accurate calculation of duration, rendering of time slots, setting of event boundaries, and proper display within calendars or scheduling interfaces. This finishing point is essential for managing event timing, duration computation, slot allocation, end time adjustments, and handling scheduling periods, ensuring precise control over event lifecycles, including start-to-end intervals and time-based planning.
+How do I specify the end date of an event in Kendo UI for jQuery Scheduler? Specify or configure the event's finishing time, end date, or completion timestamp to define when the scheduled activity or appointment concludes, enabling accurate calculation of duration, rendering of time slots, setting of event boundaries, and proper display within calendars or scheduling interfaces. This finishing point is essential for managing event timing, duration computation, slot allocation, end time adjustments, and handling scheduling periods, ensuring precise control over event lifecycles, including start-to-end intervals and time-based planning.
 </div>
 
 #### Example - set the end date of an event
@@ -62,7 +62,7 @@ The complete list of the supported timezones is available in the [List of IANA t
 
 
 <div class="meta-api-description">
-Set or configure the timezone for the ending time of scheduled events to ensure accurate time display and conversion across different regions, handle scenarios where event end times cross multiple timezones, override default timezone settings for event conclusions, specify any standard IANA timezone identifier for precise localization, control how event ending moments are interpreted and rendered in calendar or scheduling applications, manage timezone offsets for event finish times, adapt event end timestamps for users in diverse geographic areas, support correct time calculations when events stretch across global time boundaries, and enable fine-tuning of event completion times for better scheduling accuracy and clarity.
+How to set timezone for event end time in Kendo UI Scheduler? Set or configure the timezone for the ending time of scheduled events to ensure accurate time display and conversion across different regions, handle scenarios where event end times cross multiple timezones, override default timezone settings for event conclusions, specify any standard IANA timezone identifier for precise localization, control how event ending moments are interpreted and rendered in calendar or scheduling applications, manage timezone offsets for event finish times, adapt event end timestamps for users in diverse geographic areas, support correct time calculations when events stretch across global time boundaries, and enable fine-tuning of event completion times for better scheduling accuracy and clarity.
 </div>
 
 #### Example - set the end timezone of an event
@@ -83,7 +83,7 @@ The mandatory unique identifier of the event.
 
 
 <div class="meta-api-description">
-Assign a unique identifier to each scheduled event to enable precise referencing, retrieval, updating, or deletion of specific tasks while ensuring no duplicate events occur within the scheduling system; configure and control event identities to manage, track, or manipulate individual scheduler entries reliably through distinct, mandatory IDs that prevent conflicts and facilitate event management workflows.
+How to assign a unique ID to each event in the Kendo UI Scheduler? Assign a unique identifier to each scheduled event to enable precise referencing, retrieval, updating, or deletion of specific tasks while ensuring no duplicate events occur within the scheduling system; configure and control event identities to manage, track, or manipulate individual scheduler entries reliably through distinct, mandatory IDs that prevent conflicts and facilitate event management workflows.
 </div>
 
 #### Example - set the identifier of an event
@@ -105,7 +105,7 @@ If set to `true` the event is "all day". By default events are not all day.
 
 
 <div class="meta-api-description">
-Configure events to span an entire day by enabling all-day scheduling, setting appointments or calendar entries to occupy the full 24-hour period without specific start or end times. Control or mark events as whole-day occurrences, ensuring that the date range covers a single day rather than specific hours, useful for vacations, holidays, or full-day tasks. Set or toggle boolean flags to indicate all-day status, affecting how events display and interact with time ranges. Manage calendar entries to appear as all-day without time increments, handling cases where start and end times align on the same date to signal full-day duration. Adjust scheduling logic for events that require no hourly detail but need to block out a full calendar day.
+How do I make Kendo UI Scheduler events span an entire day? Configure events to span an entire day by enabling all-day scheduling, setting appointments or calendar entries to occupy the full 24-hour period without specific start or end times. Control or mark events as whole-day occurrences, ensuring that the date range covers a single day rather than specific hours, useful for vacations, holidays, or full-day tasks. Set or toggle boolean flags to indicate all-day status, affecting how events display and interact with time ranges. Manage calendar entries to appear as all-day without time increments, handling cases where start and end times align on the same date to signal full-day duration. Adjust scheduling logic for events that require no hourly detail but need to block out a full calendar day.
 </div>
 
 #### Example - create all day event
@@ -130,7 +130,7 @@ The recurrence exceptions. A list of comma separated dates formatted using the `
 
 
 <div class="meta-api-description">
-Exclude or skip specific instances from a repeating or recurring calendar event by defining exception dates in a standardized UTC timestamp format. Control which occurrences are omitted from a series by setting a list of date-time strings in the international ISO-like format for precise exclusion of single or multiple events. Customize and manage exceptions to repetitive schedules by specifying one or more exact occurrence dates to be ignored, enabling refined control over which repeated events appear or do not show up in a scheduling or calendar application. Use comma-separated date parameters formatted as year-month-day and time in coordinated universal time (UTC) to precisely configure event recurrence exceptions and prevent certain repetitions.
+How can I exclude specific instances from a recurring calendar event in Kendo UI Scheduler? Exclude or skip specific instances from a repeating or recurring calendar event by defining exception dates in a standardized UTC timestamp format. Control which occurrences are omitted from a series by setting a list of date-time strings in the international ISO-like format for precise exclusion of single or multiple events. Customize and manage exceptions to repetitive schedules by specifying one or more exact occurrence dates to be ignored, enabling refined control over which repeated events appear or do not show up in a scheduling or calendar application. Use comma-separated date parameters formatted as year-month-day and time in coordinated universal time (UTC) to precisely configure event recurrence exceptions and prevent certain repetitions.
 </div>
 
 #### Example - set recurrence exceptions
@@ -159,7 +159,7 @@ The `id` of the recurrence parent event. Required for events that are recurrence
 
 
 <div class="meta-api-description">
-Identify or reference the original recurring event when managing exceptions in a repeating schedule by linking an exception instance to its parent event using a unique identifier, enabling developer control over modifications, updates, or overrides of specific occurrences within a recurring series, configuring exception relationships, tracking changes to repeated events, and ensuring correct event correlation in calendar scheduling or event management systems.
+How do I link an exception event to its original recurring event in a Kendo UI Scheduler? Identify or reference the original recurring event when managing exceptions in a repeating schedule by linking an exception instance to its parent event using a unique identifier, enabling developer control over modifications, updates, or overrides of specific occurrences within a recurring series, configuring exception relationships, tracking changes to repeated events, and ensuring correct event correlation in calendar scheduling or event management systems.
 </div>
 
 #### Example - set recurrence exceptions
@@ -188,7 +188,7 @@ The recurrence rule describing the recurring pattern of the event. The format fo
 
 
 <div class="meta-api-description">
-Set up repeating event schedules by configuring recurrence patterns using standard iCalendar RRULE strings compliant with RFC 5545, enabling control over daily, weekly, monthly, or custom repeating intervals, frequencies, and exceptions within the calendar events. Support for defining complex repeating rules like every nth day, specific weekdays, end dates, counts, or infinite recurrences, useful for automating event repetition without manual entry. Ideal for developers needing to enable, customize, and manage event recurrence systematically using widely supported recurrence syntax for scheduling, calendar integrations, and time-based automation workflows.
+How to set up recurring events in Kendo UI Scheduler using iCalendar RRULE strings? Set up repeating event schedules by configuring recurrence patterns using standard iCalendar RRULE strings compliant with RFC 5545, enabling control over daily, weekly, monthly, or custom repeating intervals, frequencies, and exceptions within the calendar events. Support for defining complex repeating rules like every nth day, specific weekdays, end dates, counts, or infinite recurrences, useful for automating event repetition without manual entry. Ideal for developers needing to enable, customize, and manage event recurrence systematically using widely supported recurrence syntax for scheduling, calendar integrations, and time-based automation workflows.
 </div>
 
 #### Example - set the recurrence rule
@@ -208,7 +208,7 @@ The date at which the scheduler event starts. The `start` date is mandatory.
 
 
 <div class="meta-api-description">
-Define, configure, or retrieve the starting date and time that marks the beginning of an event within a scheduling system, enabling event timing control, sorting by start times, binding date values for dynamic updates, calculating event durations, detecting conflicts or overlaps between events, synchronizing schedules, and setting precise starting points for calendar entries or appointments.
+How do I set the start date of an event in a Kendo UI Scheduler? Define, configure, or retrieve the starting date and time that marks the beginning of an event within a scheduling system, enabling event timing control, sorting by start times, binding date values for dynamic updates, calculating event durations, detecting conflicts or overlaps between events, synchronizing schedules, and setting precise starting points for calendar entries or appointments.
 </div>
 
 #### Example - set the start date of an event
@@ -230,7 +230,7 @@ The complete list of the supported timezones is available in the [List of IANA t
 
 
 <div class="meta-api-description">
-Configure or specify the timezone for an event’s start date or time, enabling precise control over when an event begins regardless of the global or default calendar timezone settings. Adjust the start date’s timezone using IANA timezone identifiers to ensure accurate scheduling, conversions, or display of start times across different regions or user locales. Set or override event start time context to match particular time zones for events that may span multiple timezones or require exact time localization independently from the system or component-wide timezone configuration. Enable scheduling of events with distinct start time zones, handling scenarios like meetings across timezones, recurring events with local start times, or timezone-aware start time calculations. Control and manage event start time offsets, align start timestamps to specific geographic or regional time zones, and support timezone-sensitive scheduling logic using well-known international timezone codes.
+How to set the timezone for an event's start date in Kendo UI Scheduler? Configure or specify the timezone for an event’s start date or time, enabling precise control over when an event begins regardless of the global or default calendar timezone settings. Adjust the start date’s timezone using IANA timezone identifiers to ensure accurate scheduling, conversions, or display of start times across different regions or user locales. Set or override event start time context to match particular time zones for events that may span multiple timezones or require exact time localization independently from the system or component-wide timezone configuration. Enable scheduling of events with distinct start time zones, handling scenarios like meetings across timezones, recurring events with local start times, or timezone-aware start time calculations. Control and manage event start time offsets, align start timestamps to specific geographic or regional time zones, and support timezone-sensitive scheduling logic using well-known international timezone codes.
 </div>
 
 #### Example - set the end timezone of an event
@@ -251,7 +251,7 @@ The title of the event which is displayed by the scheduler widget.
 
 
 <div class="meta-api-description">
-Configure or set the text label, display name, subject, or caption for calendar events and appointments in scheduling views, enabling editing, binding, or updating of event titles, labels, or names programmatically or through data models to control how event information is shown within calendar or scheduler interfaces.
+How do I set the title of an event in a Kendo UI Scheduler? Configure or set the text label, display name, subject, or caption for calendar events and appointments in scheduling views, enabling editing, binding, or updating of event titles, labels, or names programmatically or through data models to control how event information is shown within calendar or scheduler interfaces.
 </div>
 
 #### Example - set the title of an event
@@ -273,7 +273,7 @@ The optional event description.
 
 
 <div class="meta-api-description">
-Add or set a customizable text summary, detailed notes, or descriptive information to scheduled events to provide context, explanations, or metadata that can be shown in event views, tooltips, popups, search filtering, exports, or integrated within custom event handling and user interfaces.
+How to add notes or descriptions to events in Kendo UI Scheduler? Add or set a customizable text summary, detailed notes, or descriptive information to scheduled events to provide context, explanations, or metadata that can be shown in event views, tooltips, popups, search filtering, exports, or integrated within custom event handling and user interfaces.
 </div>
 
 #### Example - get the event description
@@ -296,7 +296,7 @@ The date at which the scheduler event ends.
 
 
 <div class="meta-api-description">
-Control or retrieve the ending date and time of a scheduled event, set or update the finish timestamp to define event duration, manage event timing, perform sorting or filtering of events based on their completion, calculate how long events last, display end times in scheduling interfaces, and handle overlapping or conflicting appointments by adjusting or reading event conclusion details.
+How to set the end time of an event in a Kendo Scheduler? Control or retrieve the ending date and time of a scheduled event, set or update the finish timestamp to define event duration, manage event timing, perform sorting or filtering of events based on their completion, calculate how long events last, display end times in scheduling interfaces, and handle overlapping or conflicting appointments by adjusting or reading event conclusion details.
 </div>
 
 #### Example - get the event end date
@@ -318,7 +318,7 @@ The timezone of the `end` date.
 
 
 <div class="meta-api-description">
-Specify or configure the timezone for an event’s ending moment to control how the scheduler displays or calculates the event’s finish time across different time zones, allowing adjustments for localization, daylight saving offsets, or cross-regional scheduling; set or manage the timezone context tied to the event’s end timestamp for accurate interpretation, conversion, comparison, or display in calendar views, ensuring events ending in one region reflect the correct time in another, and enabling precise alignment of end times when users query, filter, or manipulate scheduled tasks considering varied geographic or system time zones.
+How do I set the timezone for an event's end time in the Kendo UI Scheduler? Specify or configure the timezone for an event’s ending moment to control how the scheduler displays or calculates the event’s finish time across different time zones, allowing adjustments for localization, daylight saving offsets, or cross-regional scheduling; set or manage the timezone context tied to the event’s end timestamp for accurate interpretation, conversion, comparison, or display in calendar views, ensuring events ending in one region reflect the correct time in another, and enabling precise alignment of end times when users query, filter, or manipulate scheduled tasks considering varied geographic or system time zones.
 </div>
 
 #### Example - get the event end timezone
@@ -341,7 +341,7 @@ The unique identifier of the event.
 
 
 <div class="meta-api-description">
-Access and manage unique event identifiers within a scheduler system to retrieve, match, update, delete, or synchronize individual scheduled items; configure or query events by their distinct keys to ensure precise control over event handling, integration with backend systems, and maintaining consistent data models, enabling developers to accurately reference specific calendar entries, tasks, or appointments through a unique event ID field for efficient event tracking and manipulation.
+How do I uniquely identify events in my Kendo UI Scheduler? Access and manage unique event identifiers within a scheduler system to retrieve, match, update, delete, or synchronize individual scheduled items; configure or query events by their distinct keys to ensure precise control over event handling, integration with backend systems, and maintaining consistent data models, enabling developers to accurately reference specific calendar entries, tasks, or appointments through a unique event ID field for efficient event tracking and manipulation.
 </div>
 
 #### Example - get the event id
@@ -363,7 +363,7 @@ If set to `true` the event is "all day".
 
 
 <div class="meta-api-description">
-Control or detect whether a calendar event spans the full day by setting or checking a flag that designates it as an all-day appointment, enabling scheduling systems to differentiate between timed events and those occupying an entire day slot, which influences display rendering, availability calculations, and event filtering for full-day versus timed meetings or tasks.
+How to determine if a Kendo UI Scheduler event spans the entire day? Control or detect whether a calendar event spans the full day by setting or checking a flag that designates it as an all-day appointment, enabling scheduling systems to differentiate between timed events and those occupying an entire day slot, which influences display rendering, availability calculations, and event filtering for full-day versus timed meetings or tasks.
 </div>
 
 #### Example - get the event isAllDay field
@@ -385,7 +385,7 @@ The recurrence exceptions. A list of comma separated dates formatted using the `
 
 
 <div class="meta-api-description">
-Configure or modify excluded dates for recurring calendar events by managing exception dates in the recurrence pattern, specifying individual dates or times to skip within a repeating series, handling exceptions in UTC date-time format to omit specific occurrences from scheduled repeats, setting or updating a list of excluded dates in recurring event schedules, managing date exceptions for repeated events to control which instances do not appear, excluding certain instances in a series of calendar events through formatted date strings, adjusting recurring event patterns by defining skip dates in standardized UTC timestamp formats, controlling exceptions in event recurrence rules to precisely customize which repeated events are omitted or ignored.
+How do I exclude specific dates from recurring events in a Kendo UI Scheduler? Configure or modify excluded dates for recurring calendar events by managing exception dates in the recurrence pattern, specifying individual dates or times to skip within a repeating series, handling exceptions in UTC date-time format to omit specific occurrences from scheduled repeats, setting or updating a list of excluded dates in recurring event schedules, managing date exceptions for repeated events to control which instances do not appear, excluding certain instances in a series of calendar events through formatted date strings, adjusting recurring event patterns by defining skip dates in standardized UTC timestamp formats, controlling exceptions in event recurrence rules to precisely customize which repeated events are omitted or ignored.
 </div>
 
 #### Example - get the event recurrence exception field
@@ -408,7 +408,7 @@ The `id` of the recurrence parent event.
 
 
 <div class="meta-api-description">
-Link individual event instances to their original recurring series by storing the parent event identifier, enabling control over recurring schedules, managing exceptions, updating or deleting single occurrences without affecting the entire repeating event, tracking and referencing parent events, associating occurrences with series, configuring recurrence exceptions, and handling updates specific to one instance within a recurring pattern.
+How do I link recurring event instances to their parent event in a Kendo UI Scheduler? Link individual event instances to their original recurring series by storing the parent event identifier, enabling control over recurring schedules, managing exceptions, updating or deleting single occurrences without affecting the entire repeating event, tracking and referencing parent events, associating occurrences with series, configuring recurrence exceptions, and handling updates specific to one instance within a recurring pattern.
 </div>
 
 #### Example - get the event recurrence parent id
@@ -438,7 +438,7 @@ The recurrence rule describing the recurring pattern of the event.
 
 
 <div class="meta-api-description">
-Set, configure, or modify repeating event schedules using a recurrence pattern string based on the iCalendar RRULE standard, enabling control over event frequency, intervals, specific days, months, counts, or end dates for repeated occurrences; this supports creating, updating, serializing, and managing recurring events with customizable repeat rules and handling exceptions separately.
+How do I set up recurring events with specific repeat rules in Kendo UI Scheduler? Set, configure, or modify repeating event schedules using a recurrence pattern string based on the iCalendar RRULE standard, enabling control over event frequency, intervals, specific days, months, counts, or end dates for repeated occurrences; this supports creating, updating, serializing, and managing recurring events with customizable repeat rules and handling exceptions separately.
 </div>
 
 #### Example - get the event recurrence rule
@@ -461,7 +461,7 @@ The date at which the scheduler event starts.
 
 
 <div class="meta-api-description">
-Control or retrieve the starting date and time of a scheduling event to define when the event begins, enabling sorting, filtering, or repositioning of events based on their start timestamp; configure or access the event's commencement moment to manage timelines, adjust schedules, set event durations, or synchronize with calendars by manipulating the initial time marker that determines event placement and sequencing within scheduling systems.
+How do I set the start time of an event in Kendo UI Scheduler? Control or retrieve the starting date and time of a scheduling event to define when the event begins, enabling sorting, filtering, or repositioning of events based on their start timestamp; configure or access the event's commencement moment to manage timelines, adjust schedules, set event durations, or synchronize with calendars by manipulating the initial time marker that determines event placement and sequencing within scheduling systems.
 </div>
 
 #### Example - get the event start date
@@ -482,7 +482,7 @@ The timezone of the `start` date.
 
 
 <div class="meta-api-description">
-Set or retrieve the timezone designation associated with the beginning time of a scheduled event to control how start times are interpreted, displayed, converted between zones, compared across different time contexts, serialized for data exchange, and managed during rendering or conflict resolution. Enable configuring the start date’s time zone setting for accurate time calculation, cross-timezone synchronization, event overlap detection, calendar display adjustment, and proper communication with external systems handling event timestamps. Adjust or query the start period’s time zone info to support correct scheduling in multi-region scenarios, time conversions for user interface updates, consistency in date comparisons, and precision when exporting or importing event details.
+How do I set the timezone for a scheduled event in Kendo UI Scheduler? Set or retrieve the timezone designation associated with the beginning time of a scheduled event to control how start times are interpreted, displayed, converted between zones, compared across different time contexts, serialized for data exchange, and managed during rendering or conflict resolution. Enable configuring the start date’s time zone setting for accurate time calculation, cross-timezone synchronization, event overlap detection, calendar display adjustment, and proper communication with external systems handling event timestamps. Adjust or query the start period’s time zone info to support correct scheduling in multi-region scenarios, time conversions for user interface updates, consistency in date comparisons, and precision when exporting or importing event details.
 </div>
 
 #### Example - get the event start timezone
@@ -505,7 +505,7 @@ The title of the event which is displayed by the scheduler widget.
 
 
 <div class="meta-api-description">
-Set, get, or update the human-readable label or name for scheduled events, event titles, or calendar entries, enabling display, editing, and binding of event names, captions, or text labels within scheduling, calendar, or timeline views to control how events appear visually across different interfaces and UI components.
+How do I set the title of an event in a Kendo UI Scheduler? Set, get, or update the human-readable label or name for scheduled events, event titles, or calendar entries, enabling display, editing, and binding of event names, captions, or text labels within scheduling, calendar, or timeline views to control how events appear visually across different interfaces and UI components.
 </div>
 
 #### Example - get the event title
@@ -531,7 +531,7 @@ Defines a new `SchedulerEvent` type using the provided options.
 
 
 <div class="meta-api-description">
-Add or create custom event types for a scheduling system by defining new event schemas, registering event categories, configuring custom event fields, setting default values, mapping event data structures, extending or customizing the event model at runtime or initialization, enabling tailored event definitions, and controlling event type behavior for calendar, timeline, or resource scheduling applications.
+How do I define custom event types for Kendo UI Scheduler? Add or create custom event types for a scheduling system by defining new event schemas, registering event categories, configuring custom event fields, setting default values, mapping event data structures, extending or customizing the event model at runtime or initialization, enabling tailored event definitions, and controlling event type behavior for calendar, timeline, or resource scheduling applications.
 </div>
 
 #### Parameters
@@ -602,7 +602,7 @@ Clones the scheduler event.
 
 
 <div class="meta-api-description">
-Create an exact duplicate of a calendar or scheduling event object to replicate all its details without affecting the original, enabling safe modifications, editing copies, cloning events for temporary changes, generating new events from existing ones, copying event data for updates, or making backup instances before saving changes. This process helps in scenarios like event duplication, event copying for adjustments, creating altered versions without overwriting, and managing multiple similar scheduled entries by cloning their properties efficiently.
+How do I clone an event in the Kendo UI Scheduler to create a copy with all its details? Create an exact duplicate of a calendar or scheduling event object to replicate all its details without affecting the original, enabling safe modifications, editing copies, cloning events for temporary changes, generating new events from existing ones, copying event data for updates, or making backup instances before saving changes. This process helps in scenarios like event duplication, event copying for adjustments, creating altered versions without overwriting, and managing multiple similar scheduled entries by cloning their properties efficiently.
 </div>
 
 #### Parameters
@@ -654,7 +654,7 @@ Returns the scheduler event length in milliseconds.
 
 
 <div class="meta-api-description">
-Retrieve the length or length of time an event spans in milliseconds using a method that calculates the total duration of a calendar or schedule event, useful for measuring event length, computing time intervals, comparing event spans, summarizing durations, controlling UI elements based on event length, determining elapsed milliseconds, or extracting precise event time spans from scheduling data.
+How do I get the total duration of an event in milliseconds using Kendo UI Scheduler? Retrieve the length or length of time an event spans in milliseconds using a method that calculates the total duration of a calendar or schedule event, useful for measuring event length, computing time intervals, comparing event spans, summarizing durations, controlling UI elements based on event length, determining elapsed milliseconds, or extracting precise event time spans from scheduling data.
 </div>
 
 #### Returns
@@ -681,7 +681,7 @@ Expands the event for a specific period based on the `recurrenceRule` option.
 
 
 <div class="meta-api-description">
-Generate or retrieve all individual instances or occurrences of a repeating calendar or scheduling event within a specified date range or timeframe by expanding the recurring pattern based on recurrence rules, allowing you to enumerate, list, render, edit, or manage each occurrence separately for display or manipulation, enabling queries to extract expanded event instances, handle recurrence expansions, and support event iteration, occurrence extraction, recurrence expansion, and scheduling visualization for repeating events within defined start and end boundaries.
+How to expand recurring events in Kendo UI Scheduler within a specific date range? Generate or retrieve all individual instances or occurrences of a repeating calendar or scheduling event within a specified date range or timeframe by expanding the recurring pattern based on recurrence rules, allowing you to enumerate, list, render, edit, or manage each occurrence separately for display or manipulation, enabling queries to extract expanded event instances, handle recurrence expansions, and support event iteration, occurrence extraction, recurrence expansion, and scheduling visualization for repeating events within defined start and end boundaries.
 </div>
 
 #### Parameters
@@ -722,7 +722,7 @@ Updates the scheduler event.
 
 
 <div class="meta-api-description">
-Modify or change existing calendar or Scheduler event details dynamically by applying updates to event properties, refreshing the event display, and synchronizing changes with the underlying data source and change tracking system. This functionality enables programmatic editing, altering event fields, triggering automatic re-rendering, updating event models post-initialization, and ensuring the Scheduler or calendar interface reflects the latest event information with full data-binding and event change notifications.
+How do I dynamically update an existing event in Kendo UI Scheduler after initialization? Modify or change existing calendar or Scheduler event details dynamically by applying updates to event properties, refreshing the event display, and synchronizing changes with the underlying data source and change tracking system. This functionality enables programmatic editing, altering event fields, triggering automatic re-rendering, updating event models post-initialization, and ensuring the Scheduler or calendar interface reflects the latest event information with full data-binding and event change notifications.
 </div>
 
 #### Parameters
@@ -753,7 +753,7 @@ Checks whether the event is equal to or longer then twenty four hours.
 
 
 <div class="meta-api-description">
-Check if a scheduled event spans multiple days, lasts 24 hours or more, or extends beyond a single day by using methods to detect multi-day durations; determine event length to apply conditional logic for rendering extended event styles, headers, multi-day labels, or scheduling adjustments based on whether an event is full-day or covers consecutive days, useful for filtering, displaying, or managing overlapping events and planning calendar views that require distinguishing between single-day and multi-day occurrences.
+How do I determine if an event in my Kendo UI Scheduler lasts more than one day? Check if a scheduled event spans multiple days, lasts 24 hours or more, or extends beyond a single day by using methods to detect multi-day durations; determine event length to apply conditional logic for rendering extended event styles, headers, multi-day labels, or scheduling adjustments based on whether an event is full-day or covers consecutive days, useful for filtering, displaying, or managing overlapping events and planning calendar views that require distinguishing between single-day and multi-day occurrences.
 </div>
 
 #### Returns
@@ -780,7 +780,7 @@ Checks whether the event is a recurrence exception.
 
 
 <div class="meta-api-description">
-Check if a calendar or scheduler event is an exception to a recurring series by detecting whether it is an edited, modified, skipped, or deleted occurrence that deviates from its original recurrence pattern. This helps identify altered or overridden instances within repeating events for filtering, conditional rendering, special handling, synchronization, exporting, or skipping specific dates that break from the main schedule. Determine if events break the recurrence rule, represent changes to repeating occurrences, or need unique processing compared to regular recurring entries by using methods to evaluate exception status, override states, or recurrence discrepancies, returning a true or false result.
+How do I check if a recurring event in Kendo UI for jQuery Scheduler is an exception to its original recurrence pattern? Check if a calendar or scheduler event is an exception to a recurring series by detecting whether it is an edited, modified, skipped, or deleted occurrence that deviates from its original recurrence pattern. This helps identify altered or overridden instances within repeating events for filtering, conditional rendering, special handling, synchronization, exporting, or skipping specific dates that break from the main schedule. Determine if events break the recurrence rule, represent changes to repeating occurrences, or need unique processing compared to regular recurring entries by using methods to evaluate exception status, override states, or recurrence discrepancies, returning a true or false result.
 </div>
 
 #### Returns
@@ -808,7 +808,7 @@ Checks whether the event is an occurrence part of a recurring series.
 
 
 <div class="meta-api-description">
-Determine whether an event instance belongs to a single occurrence within a recurring pattern or if it represents a master event or standalone item by checking its recurrence status, useful for distinguishing individual repeated appointments from full series in scheduling, filtering events based on repetition, managing edits or deletions of specific occurrences versus entire recurring sets, identifying recurrence exceptions, controlling display or logic for occurrences versus series masters, verifying event repetition state, and handling recurring event elements programmatically across scheduling applications.
+How can I tell if an event in my Kendo UI Scheduler is a single occurrence or part of a recurring series? Determine whether an event instance belongs to a single occurrence within a recurring pattern or if it represents a master event or standalone item by checking its recurrence status, useful for distinguishing individual repeated appointments from full series in scheduling, filtering events based on repetition, managing edits or deletions of specific occurrences versus entire recurring sets, identifying recurrence exceptions, controlling display or logic for occurrences versus series masters, verifying event repetition state, and handling recurring event elements programmatically across scheduling applications.
 </div>
 
 #### Returns
@@ -836,7 +836,7 @@ Checks whether the event is part of a recurring series.
 
 
 <div class="meta-api-description">
-Check if a scheduled event repeats regularly or is part of a recurring sequence to enable conditional rendering, editing, or deleting of individual occurrences versus the entire series, manage exceptions within repeating events, and distinguish between master events and single instances for accurate updates and display logic. This functionality helps detect recurring patterns, control recurrence rules, identify series membership, and implement logic for repeat event handling, series exception management, and event recurrence verification in calendar or scheduling applications.
+How can I check if a scheduled event is recurring in Kendo UI for jQuery Scheduler? Check if a scheduled event repeats regularly or is part of a recurring sequence to enable conditional rendering, editing, or deleting of individual occurrences versus the entire series, manage exceptions within repeating events, and distinguish between master events and single instances for accurate updates and display logic. This functionality helps detect recurring patterns, control recurrence rules, identify series membership, and implement logic for repeat event handling, series exception management, and event recurrence verification in calendar or scheduling applications.
 </div>
 
 #### Returns
@@ -874,7 +874,7 @@ Checks whether the event is the head of a recurring series.
 
 
 <div class="meta-api-description">
-Check if a calendar or scheduling event is the primary or main instance of a recurring pattern, identify the master occurrence in a series to distinguish between the initial event and its repetitions, determine whether an event triggers updates or deletions for the whole recurring series versus just one occurrence or an exception, enable differentiation between the original repeated meeting and its exceptions, configure logic to handle recurring event heads, detect if an event controls the entire series for modifications, find out whether the event is the starting point in repeated event chains, decide on editing rules for single or multiple occurrences, and manage recurring schedules by confirming if an event serves as the anchor or primary event in a recurrence sequence.
+How to check if a recurring Kendo UI Scheduler event is the main instance in a series? Check if a calendar or scheduling event is the primary or main instance of a recurring pattern, identify the master occurrence in a series to distinguish between the initial event and its repetitions, determine whether an event triggers updates or deletions for the whole recurring series versus just one occurrence or an exception, enable differentiation between the original repeated meeting and its exceptions, configure logic to handle recurring event heads, detect if an event controls the entire series for modifications, find out whether the event is the starting point in repeated event chains, decide on editing rules for single or multiple occurrences, and manage recurring schedules by confirming if an event serves as the anchor or primary event in a recurrence sequence.
 </div>
 
 #### Returns
@@ -902,7 +902,7 @@ Converts the scheduler event to a event occurrence. Method will remove `recurren
 
 
 <div class="meta-api-description">
-Convert recurring calendar events into individual single event instances for editing, updating, saving, or sending by extracting a specific occurrence from a repeating series. Enable transforming complex recurring events into standalone occurrences with unique identifiers, removing recurrence rules and exceptions while preserving a reference to the original series, allowing developers to manage exceptions, customize single event edits, serialize occurrences independently, and handle updates without affecting the whole recurring pattern. Control and manipulate individual event instances derived from multi-occurrence schedules for flexible calendar event modification, binding, or persistence in scheduling applications.
+How to convert recurring events into individual instances in Kendo UI Scheduler? Convert recurring calendar events into individual single event instances for editing, updating, saving, or sending by extracting a specific occurrence from a repeating series. Enable transforming complex recurring events into standalone occurrences with unique identifiers, removing recurrence rules and exceptions while preserving a reference to the original series, allowing developers to manage exceptions, customize single event edits, serialize occurrences independently, and handle updates without affecting the whole recurring pattern. Control and manipulate individual event instances derived from multi-occurrence schedules for flexible calendar event modification, binding, or persistence in scheduling applications.
 </div>
 
 #### Parameters

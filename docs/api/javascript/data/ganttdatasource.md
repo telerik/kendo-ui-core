@@ -20,7 +20,7 @@ The schema configuration of the GanttDataSource.
 
 
 <div class="meta-api-description">
-Configure how incoming raw task and dependency data is parsed, mapped, and transformed into the Gantt chart structure by specifying data readers for lists and totals, setting up models that link server response fields to task attributes such as IDs, start and end dates, parent-child relationships, durations, and dependencies, enabling custom parsing logic to handle various data formats or preprocess responses, and controlling error handling during data interpretation to ensure accurate rendering and synchronization of tasks and links within the timeline visualization.
+How do I configure the data schema for my Kendo UI Gantt chart to correctly map incoming task and dependency data? Configure how incoming raw task and dependency data is parsed, mapped, and transformed into the Gantt chart structure by specifying data readers for lists and totals, setting up models that link server response fields to task attributes such as IDs, start and end dates, parent-child relationships, durations, and dependencies, enabling custom parsing logic to handle various data formats or preprocess responses, and controlling error handling during data interpretation to ensure accurate rendering and synchronization of tasks and links within the timeline visualization.
 </div>
 
 #### Example
@@ -63,7 +63,7 @@ Note that if the `parentId` type is `number`, its `defaultValue` should be set t
 
 
 <div class="meta-api-description">
-Configure the data structure and schema for tasks in a Gantt chart, specifying how to map task properties, assign data types, set unique identifiers, and define default values for each task field. Control the modeling of project tasks to ensure proper interpretation, synchronization, and hierarchy management within the timeline, including handling parent-child relationships and nullable parent ID values. Customize the underlying task data format, field mappings, and defaults to fit various data sources and enable accurate scheduling, dependencies, and progress tracking in project visualizations. Adjust and define the task model shape to support different data types, key fields, and structural conventions essential for timeline displays and project plan representation.
+How to configure data structure for tasks in Kendo UI Gantt chart? Configure the data structure and schema for tasks in a Gantt chart, specifying how to map task properties, assign data types, set unique identifiers, and define default values for each task field. Control the modeling of project tasks to ensure proper interpretation, synchronization, and hierarchy management within the timeline, including handling parent-child relationships and nullable parent ID values. Customize the underlying task data format, field mappings, and defaults to fit various data sources and enable accurate scheduling, dependencies, and progress tracking in project visualizations. Adjust and define the task model shape to support different data types, key fields, and structural conventions essential for timeline displays and project plan representation.
 </div>
 
 #### Example - configure the data source model schema
@@ -126,7 +126,7 @@ Returns a list of all child tasks. The search is recursive.
 
 
 <div class="meta-api-description">
-Retrieve all descendant sub-tasks or child tasks recursively from a specified parent task within a hierarchical Gantt structure, enabling traversal through every nested level to obtain a complete list or array of subtasks for iterating, updating, filtering, aggregating, or analyzing the full subordinate task hierarchy in project scheduling or task management scenarios.
+How can I retrieve all child tasks recursively from a specific parent task in my Kendo Gantt widget? Retrieve all descendant sub-tasks or child tasks recursively from a specified parent task within a hierarchical Gantt structure, enabling traversal through every nested level to obtain a complete list or array of subtasks for iterating, updating, filtering, aggregating, or analyzing the full subordinate task hierarchy in project scheduling or task management scenarios.
 </div>
 
 #### Parameters
@@ -225,7 +225,7 @@ Returns a list of all direct child tasks.
 
 
 <div class="meta-api-description">
-Retrieve or access the direct child tasks, immediate subtasks, or first-level descendants of a given parent task within a Gantt chart or task hierarchy. Enable fetching, iterating, updating, or managing only the immediate children nodes for purposes such as task dependency tracking, hierarchy traversal, nested task aggregation, subtree operations, or parent-child relationship handling within project schedules. Useful for extracting direct subtasks, controlling task trees, or processing immediate elements in a multi-level Gantt data structure.
+How to get immediate subtasks of a parent task in Kendo UI Gantt chart? Retrieve or access the direct child tasks, immediate subtasks, or first-level descendants of a given parent task within a Gantt chart or task hierarchy. Enable fetching, iterating, updating, or managing only the immediate children nodes for purposes such as task dependency tracking, hierarchy traversal, nested task aggregation, subtree operations, or parent-child relationship handling within project schedules. Useful for extracting direct subtasks, controlling task trees, or processing immediate elements in a multi-level Gantt data structure.
 </div>
 
 #### Parameters
@@ -319,7 +319,7 @@ Returns the level of the task in the hierarchy. `0` for root-level tasks.
 
 
 <div class="meta-api-description">
-Determine the hierarchical depth or nesting level of a task within a project timeline by retrieving its numeric indentation or layer position, where zero represents a top-level task and larger numbers signify increasingly nested subtasks. This method helps to identify parent-child relationships, manage task grouping, enable conditional display based on hierarchy, calculate depth for styling or structural organization, and dynamically assess task positioning within a multi-level task tree or timeline view. Use it to control visual indentation, create hierarchical indexes, parse task dependencies, or facilitate filtering and rendering logic based on task tiers in any Gantt chart or project management data source.
+How do I get the indentation level of a task in a Kendo UI Gantt chart? Determine the hierarchical depth or nesting level of a task within a project timeline by retrieving its numeric indentation or layer position, where zero represents a top-level task and larger numbers signify increasingly nested subtasks. This method helps to identify parent-child relationships, manage task grouping, enable conditional display based on hierarchy, calculate depth for styling or structural organization, and dynamically assess task positioning within a multi-level task tree or timeline view. Use it to control visual indentation, create hierarchical indexes, parse task dependencies, or facilitate filtering and rendering logic based on task tiers in any Gantt chart or project management data source.
 </div>
 
 #### Parameters
@@ -369,7 +369,7 @@ Returns the parent task of a certain task.
 
 
 <div class="meta-api-description">
-Retrieve or access the immediate parent or superior task within a hierarchical Gantt chart structure to navigate, inspect, or manipulate task relationships, dependencies, and hierarchies. Enable traversing up the task tree, finding a parent task for any given child task, controlling task lineage, managing parent-child associations, or querying ancestor tasks for updating, linking, or hierarchical organization. This method supports looking up, identifying, or working with parent tasks in project schedules, task dependency chains, or structured task lists.
+How to get parent task in Kendo UI Gantt chart? Retrieve or access the immediate parent or superior task within a hierarchical Gantt chart structure to navigate, inspect, or manipulate task relationships, dependencies, and hierarchies. Enable traversing up the task tree, finding a parent task for any given child task, controlling task lineage, managing parent-child associations, or querying ancestor tasks for updating, linking, or hierarchical organization. This method supports looking up, identifying, or working with parent tasks in project schedules, task dependency chains, or structured task lists.
 </div>
 
 #### Parameters
@@ -450,7 +450,7 @@ Returns a list of all tasks that have the same parent.
 
 
 <div class="meta-api-description">
-Retrieve tasks that share the same parent task, fetch sibling tasks within a hierarchical Gantt structure, get arrays of tasks grouped by common parent for iteration, filtering, batch processing, or analysis, identify tasks on the same level under a parent in project timelines, gather related tasks for updates or inspection, obtain sibling task collections to manage dependencies or statuses together, query task groups sharing a parent node in task trees, extract sibling elements for synchronized changes or bulk operations in Gantt charts, and access peer tasks connected by their hierarchical parent relationship.
+How do I get sibling tasks in my Kendo Gantt chart? Retrieve tasks that share the same parent task, fetch sibling tasks within a hierarchical Gantt structure, get arrays of tasks grouped by common parent for iteration, filtering, batch processing, or analysis, identify tasks on the same level under a parent in project timelines, gather related tasks for updates or inspection, obtain sibling task collections to manage dependencies or statuses together, query task groups sharing a parent node in task trees, extract sibling elements for synchronized changes or bulk operations in Gantt charts, and access peer tasks connected by their hierarchical parent relationship.
 </div>
 
 #### Parameters
@@ -508,7 +508,7 @@ Returns a list of all child Gantt tasks, ordered by their hierarchical index (De
 
 
 <div class="meta-api-description">
-Retrieve a hierarchical list or array of all visible child tasks organized in depth-first order from the project’s task data, excluding any subtasks hidden under collapsed parent tasks, enabling traversal, mapping, updating, rendering, or processing tasks according to their nested structure while respecting task expansion states and hierarchical order for Gantt chart or project timeline views.
+How do I get a hierarchical list of all visible child tasks in my Gantt chart? Retrieve a hierarchical list or array of all visible child tasks organized in depth-first order from the project’s task data, excluding any subtasks hidden under collapsed parent tasks, enabling traversal, mapping, updating, rendering, or processing tasks according to their nested structure while respecting task expansion states and hierarchical order for Gantt chart or project timeline views.
 </div>
 
 #### Parameters
@@ -657,7 +657,7 @@ Updates a Gantt task.
 
 
 <div class="meta-api-description">
-Modify, change, or update existing task records within a project timeline or Gantt chart data set by applying new details such as adjusted start and end dates, duration changes, task dependencies, or other task attributes; control and synchronize task state updates to ensure the project schedule reflects the latest modifications by sending revised field values to the task collection or data source, enabling editing, rescheduling, and dependency management for tasks within project management and visualization tools.
+How to update existing tasks in Kendo UI Gantt chart? Modify, change, or update existing task records within a project timeline or Gantt chart data set by applying new details such as adjusted start and end dates, duration changes, task dependencies, or other task attributes; control and synchronize task state updates to ensure the project schedule reflects the latest modifications by sending revised field values to the task collection or data source, enabling editing, rescheduling, and dependency management for tasks within project management and visualization tools.
 </div>
 
 #### Parameters

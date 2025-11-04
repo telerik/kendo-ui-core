@@ -61,7 +61,7 @@ The current element which will be hidden when the transition ends.
 
 
 <div class="meta-api-description">
-Control the element or outgoing component that should be hidden, removed, or transitioned out once a replace animation or transition finishes, specifying the target for concealment or DOM removal as part of the setup phase, enabling precise management of which visible content disappears or updates when the replace effect completes, letting you configure, set, or define the exiting element to be hidden or discarded after the transition ends.
+What is the purpose of specifying `FXReplace.current` in a Kendo UI effects configuration? Control the element or outgoing component that should be hidden, removed, or transitioned out once a replace animation or transition finishes, specifying the target for concealment or DOM removal as part of the setup phase, enabling precise management of which visible content disappears or updates when the replace effect completes, letting you configure, set, or define the exiting element to be hidden or discarded after the transition ends.
 </div>
 
 #### Example
@@ -82,7 +82,7 @@ The transition class name. Passing `swap` will result in `k-fx-swap` class set t
 
 
 <div class="meta-api-description">
-Set or customize the CSS class applied during element replacement animations to control visual transitions, enabling use of default swap animation classes like k-fx-swap or custom class names for tailored animation effects; configure or specify transition classes to manage how the container element animates during content swaps, replacement, or visual changes with smooth or custom CSS-driven transitions.
+How can I customize the animation class in Kendo UI's FXReplace? Set or customize the CSS class applied during element replacement animations to control visual transitions, enabling use of default swap animation classes like k-fx-swap or custom class names for tailored animation effects; configure or specify transition classes to manage how the container element animates during content swaps, replacement, or visual changes with smooth or custom CSS-driven transitions.
 </div>
 
 #### Example

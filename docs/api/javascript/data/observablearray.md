@@ -65,7 +65,7 @@ An unsigned, 32-bit integer that specifies the number of items in an `Observable
 
 
 <div class="meta-api-description">
-Retrieve or check the number of elements contained in a dynamic, observable list or collection, enabling queries for the current count, size, or total items tracked within an array-like structure that supports real-time updates; commonly used to access the quantity of elements for conditional logic, loops, validations, or display purposes by reading a numeric value representing how many entries exist, useful in scenarios requiring monitoring collection length, item counts, or capacity without manual iteration or external counting methods.
+How do I get the current number of items in a Kendo UI observable array? Retrieve or check the number of elements contained in a dynamic, observable list or collection, enabling queries for the current count, size, or total items tracked within an array-like structure that supports real-time updates; commonly used to access the quantity of elements for conditional logic, loops, validations, or display purposes by reading a numeric value representing how many entries exist, useful in scenarios requiring monitoring collection length, item counts, or capacity without manual iteration or external counting methods.
 </div>
 
 #### Example - iterate over an ObservableArray
@@ -86,7 +86,7 @@ Attaches an event handler for the specified event.
 
 
 <div class="meta-api-description">
-Configure and attach event listeners or handlers on dynamic data collections to detect changes, updates, modifications, or custom event triggers in real time. Enable subscribing, connecting, or listening to specific events with callback functions that receive event details or arguments, supporting multiple handlers per event. Set up event monitoring after data initialization to track insertions, deletions, edits, or any data mutation and respond programmatically through event binding or listener registration methods.
+How do I set up event listeners to detect changes in a Kendo UI for jQuery observable array? Configure and attach event listeners or handlers on dynamic data collections to detect changes, updates, modifications, or custom event triggers in real time. Enable subscribing, connecting, or listening to specific events with callback functions that receive event details or arguments, supporting multiple handlers per event. Set up event monitoring after data initialization to track insertions, deletions, edits, or any data mutation and respond programmatically through event binding or listener registration methods.
 </div>
 
 #### Example - subscribe to an event
@@ -116,7 +116,7 @@ Empties the array.
 
 
 <div class="meta-api-description">
-Clear all elements from a dynamic or observable list, reset the array length to zero, remove every item from the collection, and ensure that any data bindings or UI components detect the change immediately. Enable resetting or clearing the contents of a reactive or observable array to start fresh before adding new data, repopulating the list, or resetting the data source state. Use this function to trigger updates and change notifications for components relying on the array’s current items, effectively emptying the collection and removing all stored values. This method supports controlling or managing array content changes programmatically, clearing out all entries at once, and preparing observable collections for new data.
+How do I clear all elements from an ObservableArray in Kendo UI for jQuery? Clear all elements from a dynamic or observable list, reset the array length to zero, remove every item from the collection, and ensure that any data bindings or UI components detect the change immediately. Enable resetting or clearing the contents of a reactive or observable array to start fresh before adding new data, repopulating the list, or resetting the data source state. Use this function to trigger updates and change notifications for components relying on the array’s current items, effectively emptying the collection and removing all stored values. This method supports controlling or managing array content changes programmatically, clearing out all entries at once, and preparing observable collections for new data.
 </div>
 
 #### Example - working with empty method
@@ -135,7 +135,7 @@ Executes a callback function for every single item in the array and returns `tru
 
 
 <div class="meta-api-description">
-Check if all elements in a reactive or observable list fulfill a specific condition by running a test function on each entry, returning true only when every item passes the test, or false immediately if any item does not meet the criteria; this process quickly evaluates items in sequence, supports validation, filtering, and condition checks on data collections, and mimics standard array methods used to ensure uniform compliance across arrays, lists, or observable data structures by applying a predicate function that receives each element, its position, and the entire collection for versatile, efficient verification scenarios.
+How do I use the every method in Kendo UI's observable array to check if all items meet a certain condition? Check if all elements in a reactive or observable list fulfill a specific condition by running a test function on each entry, returning true only when every item passes the test, or false immediately if any item does not meet the criteria; this process quickly evaluates items in sequence, supports validation, filtering, and condition checks on data collections, and mimics standard array methods used to ensure uniform compliance across arrays, lists, or observable data structures by applying a predicate function that receives each element, its position, and the entire collection for versatile, efficient verification scenarios.
 </div>
 
 #### Parameters 
@@ -167,7 +167,7 @@ Executes a callback function for every single item in the array and returns only
 
 
 <div class="meta-api-description">
-Filter a dynamic list or data collection by applying a custom condition or predicate function to each element, creating a new array of items that meet specific criteria. Enable searching, filtering, or narrowing down data sets within observable or reactive arrays based on custom logic, callbacks, or test functions. Use for selectively retrieving elements from a live data source, producing filtered views, or updating UI components by controlling which items match given conditions, similar to standard array filtering but applied to observable collections with real-time updates.
+How do I use the `filter` method in Kendo UI for jQuery to select specific items from an observable array? Filter a dynamic list or data collection by applying a custom condition or predicate function to each element, creating a new array of items that meet specific criteria. Enable searching, filtering, or narrowing down data sets within observable or reactive arrays based on custom logic, callbacks, or test functions. Use for selectively retrieving elements from a live data source, producing filtered views, or updating UI components by controlling which items match given conditions, similar to standard array filtering but applied to observable collections with real-time updates.
 </div>
 
 #### Parameters 
@@ -197,7 +197,7 @@ Find the first elements in an array that passes the callback testing function. A
 
 
 <div class="meta-api-description">
-Search, retrieve, or identify the initial item within a data collection or array-like structure that meets specific conditions, criteria, or a test function by applying a predicate callback to evaluate each element sequentially; supports queries to find the first matching record, entry, or object based on custom logic or filters, returning the matched element or undefined if none matches, mimicking standard array searching methods, enabling developers to locate targeted data efficiently within collections or data sources using customizable matching functions.
+How do I find the first item in my Kendo UI DataSource that matches a specific condition using the find method? Search, retrieve, or identify the initial item within a data collection or array-like structure that meets specific conditions, criteria, or a test function by applying a predicate callback to evaluate each element sequentially; supports queries to find the first matching record, entry, or object based on custom logic or filters, returning the matched element or undefined if none matches, mimicking standard array searching methods, enabling developers to locate targeted data efficiently within collections or data sources using customizable matching functions.
 </div>
 
 #### Parameters 
@@ -227,7 +227,7 @@ The method executes the callback function for every single item in the array. An
 
 
 <div class="meta-api-description">
-Execute a function on each element in a collection by iterating through all items sequentially, applying a callback that receives the current item, its index, and the entire array to enable looping, element inspection, updating values, or triggering side effects without producing a returned array. Use this method to perform actions like updating, processing, or handling elements individually in observable or data-bound arrays, configure per-item operations during data iteration, and control flow without transformation, similar to the standard forEach behavior in arrays.
+How to iterate through items in an ObservableArray with Kendo UI for jQuery? Execute a function on each element in a collection by iterating through all items sequentially, applying a callback that receives the current item, its index, and the entire array to enable looping, element inspection, updating values, or triggering side effects without producing a returned array. Use this method to perform actions like updating, processing, or handling elements individually in observable or data-bound arrays, configure per-item operations during data iteration, and control flow without transformation, similar to the standard forEach behavior in arrays.
 </div>
 
 #### Parameters 
@@ -257,7 +257,7 @@ Returns the index in the Array at which the item can be found. An equivalent of 
 
 
 <div class="meta-api-description">
-Find the zero-based position or index of a specific item within an observable list or array to identify where it appears, enabling you to locate, update, remove, or manipulate elements based on their position. This search function mimics standard array index lookup, returning the numeric index if the item exists or -1 if not, useful for tracking items in reactive collections, data sources, or dynamic lists when you need to reference elements by their order or presence in the structure.
+How do I find the index of an item in a Kendo UI for jQuery data source observable array? Find the zero-based position or index of a specific item within an observable list or array to identify where it appears, enabling you to locate, update, remove, or manipulate elements based on their position. This search function mimics standard array index lookup, returning the numeric index if the item exists or -1 if not, useful for tracking items in reactive collections, data sources, or dynamic lists when you need to reference elements by their order or presence in the structure.
 </div>
 
 #### Parameters
@@ -285,7 +285,7 @@ Joins all items of an `ObservableArray` into a string. An equivalent of [`Array.
 
 
 <div class="meta-api-description">
-Combine or concatenate elements of a dynamic, change-tracking collection into one unified string by configuring or calling a join operation that merges all array items, optionally specifying custom separators or delimiters, enabling serialization, string formatting, or display of observable list contents as a single concatenated output, similar to standard array join functionality but tailored for reactive or observable data structures used in data binding scenarios.
+How to concatenate elements of an observable array in Kendo UI for jQuery? Combine or concatenate elements of a dynamic, change-tracking collection into one unified string by configuring or calling a join operation that merges all array items, optionally specifying custom separators or delimiters, enabling serialization, string formatting, or display of observable list contents as a single concatenated output, similar to standard array join functionality but tailored for reactive or observable data structures used in data binding scenarios.
 </div>
 
 #### Parameters
@@ -308,7 +308,7 @@ The method executes the callback function for every single item in the array and
 
 
 <div class="meta-api-description">
-Convert or transform elements from an observable collection into a new standard JavaScript array by applying a function to each item, enabling mapping over the data stream or reactive list without modifying the original. This method processes every element with a callback receiving the current item, its index, and the entire array, producing a fresh array of results similar to standard array mapping. Useful for extracting, projecting, or reshaping data from observable arrays, supporting functional transformations, iteration with indexes, and returning mapped values while preserving immutability of the source collection.
+How to transform data in an observable array using map method? Convert or transform elements from an observable collection into a new standard JavaScript array by applying a function to each item, enabling mapping over the data stream or reactive list without modifying the original. This method processes every element with a callback receiving the current item, its index, and the entire array, producing a fresh array of results similar to standard array mapping. Useful for extracting, projecting, or reshaping data from observable arrays, supporting functional transformations, iteration with indexes, and returning mapped values while preserving immutability of the source collection.
 </div>
 
 #### Parameters 
@@ -343,7 +343,7 @@ Gets the parent of the array if such a parent exists.
 
 
 <div class="meta-api-description">
-Accessing the parent or container of a nested array within a hierarchical data structure enables navigating and managing collections, determining the array’s owner or parent node, retrieving the enclosing collection for traversal or inspection, controlling relationships between nested arrays and their containers, exploring parent-child links in observable collections, setting or querying the origin of a sub-array within complex data sources, and handling bindings or updates that depend on knowing an array’s containing group or parent collection.
+How to access the parent array of an item in a Kendo UI for jQuery observable collection? Accessing the parent or container of a nested array within a hierarchical data structure enables navigating and managing collections, determining the array’s owner or parent node, retrieving the enclosing collection for traversal or inspection, controlling relationships between nested arrays and their containers, exploring parent-child links in observable collections, setting or querying the origin of a sub-array within complex data sources, and handling bindings or updates that depend on knowing an array’s containing group or parent collection.
 </div>
 
 #### Returns
@@ -370,7 +370,7 @@ Removes the last item from an array and returns that item. An equivalent of [`Ar
 
 
 <div class="meta-api-description">
-Remove and retrieve the last element from an observable or reactive array-like collection by popping the final item, similar to the native Array pop method, enabling efficient removal of the tail element while automatically updating bound data sources or UI components. This method triggers change notifications or events indicating removal actions, allowing you to handle updates, synchronize state, or respond to modifications in real-time. Whether you want to delete the last entry, get the last value, or manage dynamic collections reactively, using this approach supports event-driven updates and item tracking when modifying observable lists or arrays.
+How do I remove and retrieve the last element from a Kendo UI observable array using the pop method? Remove and retrieve the last element from an observable or reactive array-like collection by popping the final item, similar to the native Array pop method, enabling efficient removal of the tail element while automatically updating bound data sources or UI components. This method triggers change notifications or events indicating removal actions, allowing you to handle updates, synchronize state, or respond to modifications in real-time. Whether you want to delete the last entry, get the last value, or manage dynamic collections reactively, using this approach supports event-driven updates and item tracking when modifying observable lists or arrays.
 </div>
 
 #### Returns
@@ -396,7 +396,7 @@ Appends the given items to the array and returns the new length of the array. An
 
 
 <div class="meta-api-description">
-Add one or multiple elements to the end of an observable array, similar to standard array push functions, while automatically wrapping complex objects to make them reactive or observable; receive the new total count of items and trigger change notifications or events indicating added items, allowing for dynamic updates, monitoring, or binding scenarios where detecting item additions, handling observable collections, adjusting data sources, and reacting to changes in array length or content is needed in reactive programming or UI frameworks.
+How do I add multiple items to an observable array in a Kendo UI data source? Add one or multiple elements to the end of an observable array, similar to standard array push functions, while automatically wrapping complex objects to make them reactive or observable; receive the new total count of items and trigger change notifications or events indicating added items, allowing for dynamic updates, monitoring, or binding scenarios where detecting item additions, handling observable collections, adjusting data sources, and reacting to changes in array length or content is needed in reactive programming or UI frameworks.
 </div>
 
 #### Returns
@@ -439,7 +439,7 @@ Executes a callback function for every single item in the array and returns the 
 
 
 <div class="meta-api-description">
-Aggregate an observable collection into a single result by applying a function that combines each element from left to right, processing every item without skipping, with options to set an initial accumulator value. Enable custom aggregation, accumulation, folding, or summarizing of array-like data structures by executing a callback that receives the running total, current element, index, and full array during iteration. Use patterns like reducing, folding, accumulating, summarizing, or calculating totals, sums, averages, or transformations over observable lists with control over initial values and order of processing.
+How do I aggregate data in an observable array using Kendo UI's reduce method? Aggregate an observable collection into a single result by applying a function that combines each element from left to right, processing every item without skipping, with options to set an initial accumulator value. Enable custom aggregation, accumulation, folding, or summarizing of array-like data structures by executing a callback that receives the running total, current element, index, and full array during iteration. Use patterns like reducing, folding, accumulating, summarizing, or calculating totals, sums, averages, or transformations over observable lists with control over initial values and order of processing.
 </div>
 
 #### Parameters 
@@ -469,7 +469,7 @@ Executes a callback function for every single item in the array and returns the 
 
 
 <div class="meta-api-description">
-Perform a right-to-left accumulation or reduction over an array-like data source by executing a function that combines each item starting from the last element moving to the first, enabling folding or aggregating values in reverse order with the ability to specify an initial accumulator value; this supports scenarios like reverse iteration, backward data processing, right-to-left folding, or computing summaries by traversing elements from the end to the beginning with a callback receiving the accumulator, current item, index, and full collection.
+How to aggregate data in Kendo UI from right-to-left using reduceRight method? Perform a right-to-left accumulation or reduction over an array-like data source by executing a function that combines each item starting from the last element moving to the first, enabling folding or aggregating values in reverse order with the ability to specify an initial accumulator value; this supports scenarios like reverse iteration, backward data processing, right-to-left folding, or computing summaries by traversing elements from the end to the beginning with a callback receiving the accumulator, current item, index, and full collection.
 </div>
 
 #### Parameters 
@@ -499,7 +499,7 @@ Removes the specified item from an array.
 
 
 <div class="meta-api-description">
-Delete or eliminate a particular element from a dynamic list or collection that is tracked and updated in real-time, enabling removal by directly specifying the item instance to efficiently modify and synchronize the underlying data array or data source. This method supports operations such as purging entries, extracting objects from observable lists, filtering out unwanted elements, updating reactive collections, and managing state changes by referencing and removing targeted items within a monitored array structure. It is ideal for developers seeking to control, clear, or adjust precise items in a live-bound dataset or observable data stream by invoking removal through item identity rather than index or value comparison.
+How do I remove an item from an observable array in Kendo UI? Delete or eliminate a particular element from a dynamic list or collection that is tracked and updated in real-time, enabling removal by directly specifying the item instance to efficiently modify and synchronize the underlying data array or data source. This method supports operations such as purging entries, extracting objects from observable lists, filtering out unwanted elements, updating reactive collections, and managing state changes by referencing and removing targeted items within a monitored array structure. It is ideal for developers seeking to control, clear, or adjust precise items in a live-bound dataset or observable data stream by invoking removal through item identity rather than index or value comparison.
 </div>
 
 #### Parameters 
@@ -527,7 +527,7 @@ Returns a single-level deep copy of a portion of an array. An equivalent of [`Ar
 
 
 <div class="meta-api-description">
-Extract a shallow copy of a segment or portion of a data collection by creating a new array that duplicates selected elements without altering the original array, enabling safe slicing, copying subarrays, or retrieving subsets of data sources similarly to standard JavaScript array slicing methods. This functionality supports use cases like cloning parts of an observable list, obtaining fixed snapshots, performing non-destructive partial reads, and converting observable structures into plain arrays for manipulation or iteration while preserving immutability and ensuring the original observable data remains unchanged.
+How do I safely clone a subset of items from an ObservableArray in Kendo UI for jQuery? Extract a shallow copy of a segment or portion of a data collection by creating a new array that duplicates selected elements without altering the original array, enabling safe slicing, copying subarrays, or retrieving subsets of data sources similarly to standard JavaScript array slicing methods. This functionality supports use cases like cloning parts of an observable list, obtaining fixed snapshots, performing non-destructive partial reads, and converting observable structures into plain arrays for manipulation or iteration while preserving immutability and ensuring the original observable data remains unchanged.
 </div>
 
 #### Parameters
@@ -555,7 +555,7 @@ Executes a callback function for every single item in the array and returns `tru
 
 
 <div class="meta-api-description">
-Check if any element in a dynamic or reactive array satisfies a specific condition by running a predicate function that tests each item until one returns true, enabling quick existence checks, conditional filtering, or validation scenarios that short-circuit as soon as a matching element is found, similar to JavaScript’s native array methods for evaluating whether at least one entry meets given criteria.
+How do I check if at least one item in my Kendo UI datasource meets a certain condition? Check if any element in a dynamic or reactive array satisfies a specific condition by running a predicate function that tests each item until one returns true, enabling quick existence checks, conditional filtering, or validation scenarios that short-circuit as soon as a matching element is found, similar to JavaScript’s native array methods for evaluating whether at least one entry meets given criteria.
 </div>
 
 #### Parameters 
@@ -587,7 +587,7 @@ Changes an `ObservableArray` by adding new items while removing old items. An eq
 
 
 <div class="meta-api-description">
-Insert, delete, or replace elements at a specified index within a collection while managing dynamic updates to the data set, mimicking array splice behavior with real-time change notifications. Control collection modifications by adding or removing multiple entries simultaneously, trigger events that signal additions and removals with detailed information about affected items, and perform fine-grained updates for responsive data sources. Enable efficient patching, editing, or reshaping of observable lists, supporting operations like batch insertions, deletions, or replacements with event-driven reactions that track and expose the exact changes applied to the array. Use cases include modifying elements in reactive data structures, updating UI-bound lists, or handling mutable collections with monitored change feeds.
+How do I use the splice method in Kendo UI for jQuery to dynamically update my data source with real-time change notifications? Insert, delete, or replace elements at a specified index within a collection while managing dynamic updates to the data set, mimicking array splice behavior with real-time change notifications. Control collection modifications by adding or removing multiple entries simultaneously, trigger events that signal additions and removals with detailed information about affected items, and perform fine-grained updates for responsive data sources. Enable efficient patching, editing, or reshaping of observable lists, supporting operations like batch insertions, deletions, or replacements with event-driven reactions that track and expose the exact changes applied to the array. Use cases include modifying elements in reactive data structures, updating UI-bound lists, or handling mutable collections with monitored change feeds.
 </div>
 
 #### Returns
@@ -627,7 +627,7 @@ Removes the first item from an `ObvservableArray` and returns that item. An equi
 
 
 <div class="meta-api-description">
-Remove and retrieve the first element from a dynamic list or observable collection, enabling extraction and manipulation of the initial item while triggering update or change notifications, similar to standard array shift operations; use to shift elements forward, control list contents by removing the head item, react to removals with event-driven programming, and handle mutable sequences where detecting and responding to removals of the first entry is needed.
+How to remove and retrieve the first element from a Kendo UI for jQuery data source? Remove and retrieve the first element from a dynamic list or observable collection, enabling extraction and manipulation of the initial item while triggering update or change notifications, similar to standard array shift operations; use to shift elements forward, control list contents by removing the head item, react to removals with event-driven programming, and handle mutable sequences where detecting and responding to removals of the first entry is needed.
 </div>
 
 #### Returns
@@ -651,7 +651,7 @@ Returns a JavaScript `Array` object which represents the contents of the `Observ
 
 
 <div class="meta-api-description">
-Convert an observable collection into a plain JavaScript array for serialization, native array manipulation, or data transmission by extracting the raw array contents detached from observability and change tracking. Enable exporting observable data to standard arrays compatible with JSON serialization, native array methods like map or filter, or server communication, ensuring the output is a simple, unwrapped Array object that can be processed, stored, or transferred without observable overhead. This process supports transforming reactive or observable collections into standard, non-reactive arrays suitable for JSON.stringify, API requests, or any operation requiring a conventional array structure.
+How do I convert an observable collection to a plain JavaScript array for serialization? Convert an observable collection into a plain JavaScript array for serialization, native array manipulation, or data transmission by extracting the raw array contents detached from observability and change tracking. Enable exporting observable data to standard arrays compatible with JSON serialization, native array methods like map or filter, or server communication, ensuring the output is a simple, unwrapped Array object that can be processed, stored, or transferred without observable overhead. This process supports transforming reactive or observable collections into standard, non-reactive arrays suitable for JSON.stringify, API requests, or any operation requiring a conventional array structure.
 </div>
 
 #### Example - return the raw array representation
@@ -674,7 +674,7 @@ Adds one or more items to the beginning of an `ObservableArray` and returns the 
 
 
 <div class="meta-api-description">
-Add one or multiple elements to the front of a dynamic array or observable list, inserting new items at the start index zero and shifting existing entries forward, while returning the updated length; this operation triggers change notifications or events indicating an add action with details about inserted elements, enabling reactive updates, synchronization, or data binding scenarios where prepending data is required, mimicking standard array unshift behavior for easy integration and event-driven patterns.
+How do I add elements to the front of an observable list in Kendo UI for jQuery? Add one or multiple elements to the front of a dynamic array or observable list, inserting new items at the start index zero and shifting existing entries forward, while returning the updated length; this operation triggers change notifications or events indicating an add action with details about inserted elements, enabling reactive updates, synchronization, or data binding scenarios where prepending data is required, mimicking standard array unshift behavior for easy integration and event-driven patterns.
 </div>
 
 #### Returns
@@ -706,7 +706,7 @@ Fires when the items of the `ObservableArray` change.
 
 
 <div class="meta-api-description">
-Detect updates to collections or arrays when items are added, removed, replaced, reordered, or mutated by listening for change notifications or events on data sources, enabling synchronization of UI elements, state management, real-time updates, or triggering callbacks on collection modifications. Respond to any additions, deletions, reorderings, or changes within observable lists or data arrays to keep interfaces in sync, maintain data integrity, persist changes, or perform side effects whenever the underlying data structure changes dynamically. Monitor mutable collections for change events to react to mutations, detect updates, handle item replacements, and manage state consistently across applications.
+How do I detect changes to my Kendo UI data source? Detect updates to collections or arrays when items are added, removed, replaced, reordered, or mutated by listening for change notifications or events on data sources, enabling synchronization of UI elements, state management, real-time updates, or triggering callbacks on collection modifications. Respond to any additions, deletions, reorderings, or changes within observable lists or data arrays to keep interfaces in sync, maintain data integrity, persist changes, or perform side effects whenever the underlying data structure changes dynamically. Monitor mutable collections for change events to react to mutations, detect updates, handle item replacements, and manage state consistently across applications.
 </div>
 
 #### Event Data

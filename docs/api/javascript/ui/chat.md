@@ -17,7 +17,7 @@ Enables or disables message collapsing functionality for expandable messages. Wh
 
 
 <div class="meta-api-description">
-Enable or disable automatic collapsing of lengthy chat messages to manage vertical space and enhance readability in conversation views, allowing users to toggle expanded or condensed message formats; configure whether long text entries appear truncated with a clickable option to reveal the complete content or display fully expanded messages by default, optimizing chat interfaces for cleaner, more compact presentation and improved user experience with overflow control and expandable message handling.
+How do I control automatic message collapsing in Kendo UI Chat? Enable or disable automatic collapsing of lengthy chat messages to manage vertical space and enhance readability in conversation views, allowing users to toggle expanded or condensed message formats; configure whether long text entries appear truncated with a clickable option to reveal the complete content or display fully expanded messages by default, optimizing chat interfaces for cleaner, more compact presentation and improved user experience with overflow control and expandable message handling.
 </div>
 
 #### Example
@@ -56,7 +56,7 @@ Defines the collection of actions that will be rendered in the context menu for 
 
 
 <div class="meta-api-description">
-Set or customize file attachment options in chat interfaces by defining available file-related commands like download, delete, preview, open, or share within context menus. Control or configure the set of user actions applicable to files embedded in chat messages, including buttons with custom labels, icons, event handlers, or callbacks. Enable, modify, or adjust file operation menus for attachments in conversational UI components by specifying which interactions users can perform on files, such as viewing previews, removing attachments, saving files locally, or triggering custom functions when interacting with file items.
+How do I customize file attachment options in Kendo UI for jQuery chat interfaces? Set or customize file attachment options in chat interfaces by defining available file-related commands like download, delete, preview, open, or share within context menus. Control or configure the set of user actions applicable to files embedded in chat messages, including buttons with custom labels, icons, event handlers, or callbacks. Enable, modify, or adjust file operation menus for attachments in conversational UI components by specifying which interactions users can perform on files, such as viewing previews, removing attachments, saving files locally, or triggering custom functions when interacting with file items.
 </div>
 
 #### Example
@@ -100,7 +100,7 @@ Defines the icon class for the context menu action. The icon appears next to the
 
 
 <div class="meta-api-description">
-Customize or configure the icon displayed for file-related actions within chat message context menus by specifying a CSS icon class, enabling control over the visual appearance of file operation buttons or menu items next to their text labels, supporting settings during component initialization to change, set, or update the icon representation for file actions such as download, upload, preview, or share within chat interfaces.
+How to customize file action icons in Kendo UI chat component? Customize or configure the icon displayed for file-related actions within chat message context menus by specifying a CSS icon class, enabling control over the visual appearance of file operation buttons or menu items next to their text labels, supporting settings during component initialization to change, set, or update the icon representation for file actions such as download, upload, preview, or share within chat interfaces.
 </div>
 
 #### Example
@@ -134,7 +134,7 @@ Defines the name identifier for the context menu action. This is used internally
 
 
 <div class="meta-api-description">
-Set or configure a unique identifier or label for actions within a chat context menu to enable detection, handling, and differentiation of which menu item or command was triggered during event processing or interaction logic. This facilitates recognizing specific user selections, customizing command responses, associating action callbacks, and managing context-sensitive operations by assigning distinct names or keys to individual chat menu options, thereby supporting precise control and tracking of user-initiated commands or menu choices in chat interfaces.
+How do I set unique names for actions in a Kendo UI chat context menu? Set or configure a unique identifier or label for actions within a chat context menu to enable detection, handling, and differentiation of which menu item or command was triggered during event processing or interaction logic. This facilitates recognizing specific user selections, customizing command responses, associating action callbacks, and managing context-sensitive operations by assigning distinct names or keys to individual chat menu options, thereby supporting precise control and tracking of user-initiated commands or menu choices in chat interfaces.
 </div>
 
 #### Example
@@ -168,7 +168,7 @@ Defines the display text for the context menu action. This text is shown to user
 
 
 <div class="meta-api-description">
-Customize or set the display label, caption, or text for file context menu actions within chat interfaces, enabling localization, text overrides, dynamic string binding, or changing menu item wording for file-related options in chat components. Adjust, configure, or control the names and labels shown in file action menus to suit language preferences, customize UI text, or provide contextual and user-specific menu item descriptions within chat environments.
+How do I customize the file action menu labels in a Kendo UI Chat component? Customize or set the display label, caption, or text for file context menu actions within chat interfaces, enabling localization, text overrides, dynamic string binding, or changing menu item wording for file-related options in chat components. Adjust, configure, or control the names and labels shown in file action menus to suit language preferences, customize UI text, or provide contextual and user-specific menu item descriptions within chat environments.
 </div>
 
 #### Example
@@ -202,7 +202,7 @@ Controls whether the Chat will automatically fetch data from the data source whe
 
 
 <div class="meta-api-description">
-Configure automatic or manual data loading and binding for chat message retrieval by enabling or disabling the initial fetch from the data source upon component setup, allowing control over when messages are loaded, whether to preload conversations automatically, manage deferred loading scenarios, trigger manual data fetches to populate chat content, or preconfigure the data source before binding, useful for optimizing data flow, controlling network requests, and customizing message synchronization behavior in chat interfaces.
+How to configure automatic data loading for Kendo UI chat messages? Configure automatic or manual data loading and binding for chat message retrieval by enabling or disabling the initial fetch from the data source upon component setup, allowing control over when messages are loaded, whether to preload conversations automatically, manage deferred loading scenarios, trigger manual data fetches to populate chat content, or preconfigure the data source before binding, useful for optimizing data flow, controlling network requests, and customizing message synchronization behavior in chat interfaces.
 </div>
 
 #### Example
@@ -238,6 +238,22 @@ Configure automatic or manual data loading and binding for chat message retrieva
     setTimeout(function() {
         chat.dataSource.fetch();
     }, 2000);
+
+### autoAssignId `Boolean` *(default: true)*
+
+Enables or disables automatic assignment of a unique ID to each message posted in the chat. When enabled, messages without an explicit ID will be assigned a generated unique identifier.
+
+This option should be set to `false` if the chat is configured to work with a remote data source and the messages are created on the server. In that case, the *id* should be assigned on the server itself.
+
+<div class="meta-api-description">
+Control whether the Chat component automatically generates and assigns a unique identifier to each message when posting, ensuring every message has a distinct ID for tracking, referencing, and operations such as updates or deletions. Set to true to enable automatic ID assignment for new messages, or false to require explicit IDs in message objects. Useful for integration scenarios where message identity must be managed or preserved across systems.
+</div>
+
+#### Example
+
+    $("#chat").kendoChat({
+        autoAssignId: false // disables automatic ID assignment
+    });
     </script>
 
 ### authorId `String|Number`
@@ -246,7 +262,7 @@ Specifies the unique identifier of the current user. If not set, a GUID will be 
 
 
 <div class="meta-api-description">
-Set or configure the unique identifier for the current user to distinguish their messages in chat interfaces, enabling control over message alignment and styling based on user identity. Assign or customize the user ID as a string or number to mark messages as authored by oneself, facilitating differentiation between your own messages and others’, and ensuring correct rendering such as right-aligned for own messages and left-aligned for others. Handle scenarios including automatic ID generation if not explicitly set, user-specific message highlighting, message ownership detection, and filtering or grouping conversations by sender identity within chat components or real-time messaging systems.
+How do I set the authorId in Kendo UI chat to right-align my own messages? Set or configure the unique identifier for the current user to distinguish their messages in chat interfaces, enabling control over message alignment and styling based on user identity. Assign or customize the user ID as a string or number to mark messages as authored by oneself, facilitating differentiation between your own messages and others’, and ensuring correct rendering such as right-aligned for own messages and left-aligned for others. Handle scenarios including automatic ID generation if not explicitly set, user-specific message highlighting, message ownership detection, and filtering or grouping conversations by sender identity within chat components or real-time messaging systems.
 </div>
 
 #### Example
@@ -284,7 +300,7 @@ Specifies the field name in the data source from which the message author's uniq
 
 
 <div class="meta-api-description">
-Configure the field that identifies the unique author or user ID within message data to link messages with specific user profiles, accounts, or avatars, enabling matching, binding, or mapping of chat messages to their respective senders by specifying the data attribute that holds the author's identifier, user key, or sender ID. This setting supports associating messages with user identity data for personalization, filtering, or display purposes in chat interfaces, helping developers control which property in the message payload corresponds to the message author or sender for accurate user-message association and rendering.
+How do I configure Kendo UI chat to match messages with user profiles? Configure the field that identifies the unique author or user ID within message data to link messages with specific user profiles, accounts, or avatars, enabling matching, binding, or mapping of chat messages to their respective senders by specifying the data attribute that holds the author's identifier, user key, or sender ID. This setting supports associating messages with user identity data for personalization, filtering, or display purposes in chat interfaces, helping developers control which property in the message payload corresponds to the message author or sender for accurate user-message association and rendering.
 </div>
 
 #### Example
@@ -307,7 +323,7 @@ Specifies the field name in the data source from which the alt text for the auth
 
 
 <div class="meta-api-description">
-Configure or set the alternative text for avatar images by specifying the data field that holds descriptive text for author profile pictures, enabling screen reader support, accessibility labels, and custom alt attributes for user avatars in messaging or chat interfaces. Control and map image alternative text dynamically from your message data source, improving assistive technology compatibility, accessibility compliance, and descriptive content presentation for user profile visuals. Adjust or bind avatar image alt descriptions using customizable data properties to enhance usability and accessibility in chat or conversation UIs.
+How do I dynamically set alternative text for author images in my Kendo UI Chat widget? Configure or set the alternative text for avatar images by specifying the data field that holds descriptive text for author profile pictures, enabling screen reader support, accessibility labels, and custom alt attributes for user avatars in messaging or chat interfaces. Control and map image alternative text dynamically from your message data source, improving assistive technology compatibility, accessibility compliance, and descriptive content presentation for user profile visuals. Adjust or bind avatar image alt descriptions using customizable data properties to enhance usability and accessibility in chat or conversation UIs.
 </div>
 
 #### Example
@@ -338,7 +354,7 @@ Specifies the field name in the data source from which the URL for the author's 
 
 
 <div class="meta-api-description">
-Set or specify the data source field that holds the URL for each message sender’s avatar image to enable displaying user profile pictures alongside chat messages; control, configure, or map the author image link by defining the field name containing the avatar path, profile photo URL, user image reference, or sender’s picture location so that chat interfaces can retrieve and render the correct visual identity for message authors from your dataset.
+How do I set up the author image URL field in my Kendo UI chat widget? Set or specify the data source field that holds the URL for each message sender’s avatar image to enable displaying user profile pictures alongside chat messages; control, configure, or map the author image link by defining the field name containing the avatar path, profile photo URL, user image reference, or sender’s picture location so that chat interfaces can retrieve and render the correct visual identity for message authors from your dataset.
 </div>
 
 #### Example
@@ -368,7 +384,7 @@ Specifies the field name in the data source from which the author's display name
 
 
 <div class="meta-api-description">
-Specify or configure the data attribute or key that holds the sender's display name, user name, or author identifier within your chat or messaging data source to enable the system to correctly retrieve, display, and show readable participant names in chat conversations and message threads. This includes mapping the user display label, nickname, or any string field associated with the message author for proper rendering, enabling user-friendly sender identification, controlling which data property represents the message creator, and supporting customization of author name fields during integration or initialization of chat components.
+How do I configure the author name field in Kendo UI Chat? Specify or configure the data attribute or key that holds the sender's display name, user name, or author identifier within your chat or messaging data source to enable the system to correctly retrieve, display, and show readable participant names in chat conversations and message threads. This includes mapping the user display label, nickname, or any string field associated with the message author for proper rendering, enabling user-friendly sender identification, controlling which data property represents the message creator, and supporting customization of author name fields during integration or initialization of chat components.
 </div>
 
 #### Example
@@ -397,7 +413,7 @@ The data source configuration or instance that contains the Chat messages. The d
 
 
 <div class="meta-api-description">
-Configure and connect message retrieval and synchronization by setting up data sources that handle loading, sorting, updating, and rendering chat messages with text content, authorship details, timestamps, and additional metadata; this enables dynamic message fetching, real-time updates, message CRUD management, and seamless integration of message streams through customizable data inputs or data source instances for chat interfaces.
+How to configure data sources for dynamic message loading in Kendo UI Chat? Configure and connect message retrieval and synchronization by setting up data sources that handle loading, sorting, updating, and rendering chat messages with text content, authorship details, timestamps, and additional metadata; this enables dynamic message fetching, real-time updates, message CRUD management, and seamless integration of message streams through customizable data inputs or data source instances for chat interfaces.
 </div>
 
 #### Example
@@ -445,7 +461,7 @@ Specifies the text direction of the Chat. Supported values are "ltr" (left-to-ri
 
 
 <div class="meta-api-description">
-Set or control the text direction and user interface alignment of chat elements to support left-to-right or right-to-left reading flows, enable localization for languages with different writing directions, adjust message display orientation, configure bidirectional text handling, switch UI layout from LTR to RTL or vice versa, manage chat content alignment for internationalization, customize text flow in chat components, and support diverse language scripts and cultural formatting preferences.
+How do I set the direction of text in Kendo UI Chat to support languages with different writing directions? Set or control the text direction and user interface alignment of chat elements to support left-to-right or right-to-left reading flows, enable localization for languages with different writing directions, adjust message display orientation, configure bidirectional text handling, switch UI layout from LTR to RTL or vice versa, manage chat content alignment for internationalization, customize text flow in chat components, and support diverse language scripts and cultural formatting preferences.
 </div>
 
 #### Example
@@ -484,7 +500,7 @@ Enables or disables file attachment functionality in the message input.
 
 
 <div class="meta-api-description">
-Control enabling or disabling file upload features within chat messages, configure whether users can attach documents, images, or other files through the chat input, set permissions to permit, block, or restrict file sharing in conversations, manage attachment capabilities during chat session setup, toggle file inclusion options for messaging interfaces, handle file input activation within chat components, adjust settings to allow or prevent users from sending attachments, customize chat input behavior regarding file submission, enable or disable drag-and-drop or browse-to-upload file functions, and govern user ability to include various file types within chat communications.
+How to enable file uploads in Kendo UI Chat messages? Control enabling or disabling file upload features within chat messages, configure whether users can attach documents, images, or other files through the chat input, set permissions to permit, block, or restrict file sharing in conversations, manage attachment capabilities during chat session setup, toggle file inclusion options for messaging interfaces, handle file input activation within chat components, adjust settings to allow or prevent users from sending attachments, customize chat input behavior regarding file submission, enable or disable drag-and-drop or browse-to-upload file functions, and govern user ability to include various file types within chat communications.
 </div>
 
 #### Example
@@ -523,7 +539,7 @@ Specifies the field name in the data source from which the array of files attach
 
 
 <div class="meta-api-description">
-Configure the field name that identifies or maps to the list of file attachments, message files, or file metadata arrays within messaging data sources to enable message attachment handling, reading, displaying, or processing in chat components, supporting binding and integration with various message attachment structures and formats for file payloads associated with each chat message.
+How do I configure Kendo UI chat to handle file attachments? Configure the field name that identifies or maps to the list of file attachments, message files, or file metadata arrays within messaging data sources to enable message attachment handling, reading, displaying, or processing in chat components, supporting binding and integration with various message attachment structures and formats for file payloads associated with each chat message.
 </div>
 
 #### Example
@@ -555,7 +571,7 @@ The template that is used to render the files in the message box when selected.
 
 
 <div class="meta-api-description">
-Control and customize how file attachments appear within chat messages by specifying a template that defines the layout, including file icons, names, previews, or interactive elements; configure the presentation of uploaded files using custom markup, HTML, or templating approaches to tailor the display of attached documents, images, or other media within chat interfaces, enabling enhanced visual control over attachment rendering and user interaction in messaging environments.
+How to customize the appearance of file attachments in Kendo UI Chat? Control and customize how file attachments appear within chat messages by specifying a template that defines the layout, including file icons, names, previews, or interactive elements; configure the presentation of uploaded files using custom markup, HTML, or templating approaches to tailor the display of attached documents, images, or other media within chat interfaces, enabling enhanced visual control over attachment rendering and user interaction in messaging environments.
 </div>
 
 #### Example
@@ -601,7 +617,7 @@ Defines the collection of items that will be rendered in the Chat header. Each i
 
 
 <div class="meta-api-description">
-Configure and customize the top section of the chat interface by setting the arrangement and content of elements displayed above messages, including buttons, icons, titles, avatars, menus, or custom components. Control which controls and visual items appear in the chat header, define header elements similar to app bar items, manage interactive items like menus or actions, and tailor the header layout to include various components such as user avatars, navigation icons, or custom templates displayed above the message list. Adjust header controls for chat UI, specifying collections of interactive or static items to shape the chat’s top bar appearance and functionality.
+How do I customize the top section of the Kendo UI chat interface with header items? Configure and customize the top section of the chat interface by setting the arrangement and content of elements displayed above messages, including buttons, icons, titles, avatars, menus, or custom components. Control which controls and visual items appear in the chat header, define header elements similar to app bar items, manage interactive items like menus or actions, and tailor the header layout to include various components such as user avatars, navigation icons, or custom templates displayed above the message list. Adjust header controls for chat UI, specifying collections of interactive or static items to shape the chat’s top bar appearance and functionality.
 </div>
 
 #### Example
@@ -644,7 +660,7 @@ Sets the height of the Chat component.
 
 
 <div class="meta-api-description">
-Adjust or set the vertical dimension, height, or size of the chat interface to fit different layouts, containers, or responsive designs, including fixed pixel values, percentages, or CSS units; configure scrolling behavior by controlling the component’s height to enable content overflow, embed chat windows within other UI elements, customize chat area size dynamically, resize chat boxes for better UX, manage vertical space allocation, and specify heights using numeric pixels or CSS-style strings for seamless integration and layout control.
+How do I set the height of the chat interface in Kendo UI for jQuery? Adjust or set the vertical dimension, height, or size of the chat interface to fit different layouts, containers, or responsive designs, including fixed pixel values, percentages, or CSS units; configure scrolling behavior by controlling the component’s height to enable content overflow, embed chat windows within other UI elements, customize chat area size dynamically, resize chat boxes for better UX, manage vertical space allocation, and specify heights using numeric pixels or CSS-style strings for seamless integration and layout control.
 </div>
 
 #### Example
@@ -683,7 +699,7 @@ Specifies the field name in the data source from which the unique identifier for
 
 
 <div class="meta-api-description">
-Specify or configure the unique identifier field for messages in chat data to enable message tracking, synchronization, and update matching; set the key or property name that holds each message’s ID so the chat system can correctly identify, compare, control, and maintain distinct messages during rendering, data binding, or real-time updates.
+How do I set up unique identifiers for messages in a Kendo UI Chat control? Specify or configure the unique identifier field for messages in chat data to enable message tracking, synchronization, and update matching; set the key or property name that holds each message’s ID so the chat system can correctly identify, compare, control, and maintain distinct messages during rendering, data binding, or real-time updates.
 </div>
 
 #### Example
@@ -712,7 +728,7 @@ Specifies the field name in the data source that indicates whether a message has
 
 
 <div class="meta-api-description">
-Configure the field name that the chat system uses to identify messages marked as deleted, enabling control over how deleted or removed messages are recognized, displayed, filtered, or handled without modifying the original data. This setting allows you to specify which data property indicates a message’s deleted status for rendering, conditional formatting, filtering out deleted content, or triggering specific actions based on deletion state, supporting use cases like soft-delete flags, message visibility toggling, and custom deleted message logic within chat interfaces.
+What is the property used to identify deleted messages in Kendo UI Chat? Configure the field name that the chat system uses to identify messages marked as deleted, enabling control over how deleted or removed messages are recognized, displayed, filtered, or handled without modifying the original data. This setting allows you to specify which data property indicates a message’s deleted status for rendering, conditional formatting, filtering out deleted content, or triggering specific actions based on deletion state, supporting use cases like soft-delete flags, message visibility toggling, and custom deleted message logic within chat interfaces.
 </div>
 
 #### Example
@@ -742,7 +758,7 @@ Specifies the field name in the data source that indicates whether a message is 
 
 
 <div class="meta-api-description">
-Configure or specify the data attribute or field that identifies whether a chat message is pinned, enabling filtering, sorting, displaying, managing, or toggling pinned messages within chat interfaces and components. Control and bind the property that marks messages as favorites, important, or pinned, facilitating UI logic, conditional rendering, search queries, or message state management based on pin status captured from your data source or message payload. Set or map the indicator for pinned or prioritized messages to support features like pinning, highlighting, or quick access in chat applications and real-time messaging layouts.
+How to configure pinned message field in Kendo UI Chat widget? Configure or specify the data attribute or field that identifies whether a chat message is pinned, enabling filtering, sorting, displaying, managing, or toggling pinned messages within chat interfaces and components. Control and bind the property that marks messages as favorites, important, or pinned, facilitating UI logic, conditional rendering, search queries, or message state management based on pin status captured from your data source or message payload. Set or map the indicator for pinned or prioritized messages to support features like pinning, highlighting, or quick access in chat applications and real-time messaging layouts.
 </div>
 
 #### Example
@@ -772,7 +788,7 @@ Specifies the field name in the data source that indicates whether a message is 
 
 
 <div class="meta-api-description">
-Configure or set the field name that tracks typing status within message data to enable real-time typing indicators, control or update typing state dynamically tied to chat messages, detect when users are actively composing messages, bind or map typing flags from data sources, manage or monitor live typing activity, synchronize typing indicators with message updates, and implement responsive typing feedback based on message field values indicating current typing states.
+How do I configure the typing field in my Kendo UI Chat component? Configure or set the field name that tracks typing status within message data to enable real-time typing indicators, control or update typing state dynamically tied to chat messages, detect when users are actively composing messages, bind or map typing flags from data sources, manage or monitor live typing activity, synchronize typing indicators with message updates, and implement responsive typing feedback based on message field values indicating current typing states.
 </div>
 
 #### Example
@@ -808,7 +824,7 @@ Defines the collection of actions that will be rendered in the context menu for 
 
 
 <div class="meta-api-description">
-Control, customize, and configure the set of interactive commands or operations available in a chat message’s context menu, including adding new actions, removing default options, rearranging the order of reply, copy, pin, delete, or other message commands, enabling personalized or dynamic message handling, tailoring message command menus during initialization by supplying custom action objects or mixing default and custom actions, adjusting the behavior and appearance of context menus for messages to suit user interface requirements, managing message interaction options like replies, copying text, pinning important messages, or deleting messages through a flexible configurable actions collection.
+How to customize the context menu in Kendo UI chat messages? Control, customize, and configure the set of interactive commands or operations available in a chat message’s context menu, including adding new actions, removing default options, rearranging the order of reply, copy, pin, delete, or other message commands, enabling personalized or dynamic message handling, tailoring message command menus during initialization by supplying custom action objects or mixing default and custom actions, adjusting the behavior and appearance of context menus for messages to suit user interface requirements, managing message interaction options like replies, copying text, pinning important messages, or deleting messages through a flexible configurable actions collection.
 </div>
 
 #### Example - Using default actions
@@ -884,7 +900,7 @@ Defines the icon class for the context menu action.
 
 
 <div class="meta-api-description">
-Configure or customize the icon displayed for message context menu actions in chat interfaces by specifying CSS class names, enabling control over font icons or custom styling for message action buttons, setting or overriding default icons during chat component setup, adjusting the visual representation of interactive message options, and tailoring message action icons to match branding or UI themes through flexible CSS class assignment.
+How do I customize the icon for message actions in a Kendo UI chat component? Configure or customize the icon displayed for message context menu actions in chat interfaces by specifying CSS class names, enabling control over font icons or custom styling for message action buttons, setting or overriding default icons during chat component setup, adjusting the visual representation of interactive message options, and tailoring message action icons to match branding or UI themes through flexible CSS class assignment.
 </div>
 
 #### Example
@@ -925,7 +941,7 @@ Defines the name identifier for the context menu action.
 
 
 <div class="meta-api-description">
-Define or configure a unique action identifier for chat context menu options to track user selections, link actions to event handlers or command logic, reference specific message actions in callbacks, differentiate multiple chat actions during updates, and manage chat message interaction controls effectively through customizable action names.
+How do I uniquely identify actions in Kendo UI chat context menus? Define or configure a unique action identifier for chat context menu options to track user selections, link actions to event handlers or command logic, reference specific message actions in callbacks, differentiate multiple chat actions during updates, and manage chat message interaction controls effectively through customizable action names.
 </div>
 
 #### Example
@@ -966,7 +982,7 @@ Defines the display text for the context menu action.
 
 
 <div class="meta-api-description">
-Customize or localize the label text displayed for actions in a chat message context menu, enabling control over right-click menu options, setting custom action names, defining or translating menu item labels, and configuring the text shown for message interaction buttons within chat interfaces.
+How to customize right-click menu options in Kendo UI chat messages? Customize or localize the label text displayed for actions in a chat message context menu, enabling control over right-click menu options, setting custom action names, defining or translating menu item labels, and configuring the text shown for message interaction buttons within chat interfaces.
 </div>
 
 #### Example
@@ -1007,7 +1023,7 @@ The template used to render message groups.
 
 
 <div class="meta-api-description">
-Control and customize the display and layout of clustered or grouped chat messages by configuring templates that define how message collections, headers, avatars, timestamps, and conversation threads appear together. Enable customization of message group rendering using template strings or functions to adjust grouping style, display author info, aggregate timestamps, cluster messages visually, format chat bubbles, and modify the structure of combined message blocks for chat interfaces, conversation threads, or instant messaging features.
+How to customize the display of grouped chat messages in Kendo UI for jQuery? Control and customize the display and layout of clustered or grouped chat messages by configuring templates that define how message collections, headers, avatars, timestamps, and conversation threads appear together. Enable customization of message group rendering using template strings or functions to adjust grouping style, display author info, aggregate timestamps, cluster messages visually, format chat bubbles, and modify the structure of combined message blocks for chat interfaces, conversation threads, or instant messaging features.
 </div>
 
 #### Example
@@ -1059,7 +1075,7 @@ The template used to render message references (replies and pinned messages).
 
 
 <div class="meta-api-description">
-Control and customize the display of referenced messages such as replies and pinned items within chat interfaces by configuring templates that define the structure, layout, and content of message references. Enable adjustment of appearance, inline previews, contextual metadata display, and formatting of quoted or linked messages to tailor how users see replies and referenced content in conversations. Set or modify message reference layouts to improve user experience in chat applications by controlling visual rendering, embedded details, and summary snippets of replied or pinned messages.
+How can I customize the display of referenced messages in a Kendo UI chat interface? Control and customize the display of referenced messages such as replies and pinned items within chat interfaces by configuring templates that define the structure, layout, and content of message references. Enable adjustment of appearance, inline previews, contextual metadata display, and formatting of quoted or linked messages to tailor how users see replies and referenced content in conversations. Set or modify message reference layouts to improve user experience in chat applications by controlling visual rendering, embedded details, and summary snippets of replied or pinned messages.
 </div>
 
 #### Example
@@ -1112,7 +1128,7 @@ Allows localization of the strings that are used in the component.
 
 
 <div class="meta-api-description">
-Control and customize user interface text, labels, prompts, and message strings within chat components by setting localized content for different languages and regions, enabling dynamic replacement or configuration of messages, interface wording, and textual elements to match user locale preferences, support internationalization, translation, and adaptation of chat UI wording, including custom error messages, button labels, system prompts, and conversational text across multiple locales.
+How do I customize message strings in a Kendo UI chat component for different languages? Control and customize user interface text, labels, prompts, and message strings within chat components by setting localized content for different languages and regions, enabling dynamic replacement or configuration of messages, interface wording, and textual elements to match user locale preferences, support internationalization, translation, and adaptation of chat UI wording, including custom error messages, button labels, system prompts, and conversational text across multiple locales.
 </div>
 
 #### Example
@@ -1154,7 +1170,7 @@ The text for the download all files button.
 
 
 <div class="meta-api-description">
-Configure or customize the text label, caption, or display string for the button that lets users download all chat messages or conversation history at once, enabling control over the button wording, language localization, interface text, or UI prompt for bulk export, retrieve, save, or download-all functionality within chat applications or messaging components.
+How to customize the download all button label in Kendo UI Chat? Configure or customize the text label, caption, or display string for the button that lets users download all chat messages or conversation history at once, enabling control over the button wording, language localization, interface text, or UI prompt for bulk export, retrieve, save, or download-all functionality within chat applications or messaging components.
 </div>
 
 #### Example
@@ -1190,7 +1206,7 @@ The title and aria-label for the file attachment button.
 
 
 <div class="meta-api-description">
-Customize the label, title, and accessible aria-label for the file upload or attach button within chat interfaces, enabling control over button text, screen reader descriptions, and user interface prompts related to attaching files, documents, or media in messaging features, useful for localization, accessibility enhancements, and user experience adjustments in chat components.
+How do I customize the label for the file upload button in Kendo UI Chat? Customize the label, title, and accessible aria-label for the file upload or attach button within chat interfaces, enabling control over button text, screen reader descriptions, and user interface prompts related to attaching files, documents, or media in messaging features, useful for localization, accessibility enhancements, and user experience adjustments in chat components.
 </div>
 
 #### Example
@@ -1212,7 +1228,7 @@ The aria-label for the message list container.
 
 
 <div class="meta-api-description">
-Set or customize the accessible label for the chat message list container to support screen readers and improve localization, enabling developers to provide descriptive aria-labels for messages display, chat conversation content, message history sections, or chat log areas. Configure or control the assistive technology label text for the message list to enhance accessibility compliance and support multiple languages for users relying on screen readers or other accessibility tools in chat interfaces.
+How to set an accessible label for the chat message list container in Kendo UI? Set or customize the accessible label for the chat message list container to support screen readers and improve localization, enabling developers to provide descriptive aria-labels for messages display, chat conversation content, message history sections, or chat log areas. Configure or control the assistive technology label text for the message list to enhance accessibility compliance and support multiple languages for users relying on screen readers or other accessibility tools in chat interfaces.
 </div>
 
 #### Example
@@ -1244,7 +1260,7 @@ The text displayed when another user's message has been deleted.
 
 
 <div class="meta-api-description">
-Customize or configure the notification text displayed in chat interfaces when messages from other users are removed or deleted, control how deleted messages from participants appear with tailored placeholder text, set alternative wording for alerts indicating that someone else’s chat message was removed, enable personalized or localized phrases signaling another user’s message deletion, and manage how chat conversations indicate that peer messages have been erased or retracted by others.
+How to customize notification text for other deleted messages in Kendo UI Chat? Customize or configure the notification text displayed in chat interfaces when messages from other users are removed or deleted, control how deleted messages from participants appear with tailored placeholder text, set alternative wording for alerts indicating that someone else’s chat message was removed, enable personalized or localized phrases signaling another user’s message deletion, and manage how chat conversations indicate that peer messages have been erased or retracted by others.
 </div>
 
 #### Example
@@ -1277,7 +1293,7 @@ The placeholder text displayed in the message input field.
 
 
 <div class="meta-api-description">
-Set or customize the input field’s placeholder text in chat interfaces to display localized, user-friendly prompts or hints for typing messages, enabling configuration of placeholder content that guides users on what to enter in chat message boxes, supporting multiple languages and dynamic text placeholders for enhanced user experience and clarity in messaging input areas.
+How do I set the placeholder text for messages in a Kendo UI chat interface? Set or customize the input field’s placeholder text in chat interfaces to display localized, user-friendly prompts or hints for typing messages, enabling configuration of placeholder content that guides users on what to enter in chat message boxes, supporting multiple languages and dynamic text placeholders for enhanced user experience and clarity in messaging input areas.
 </div>
 
 #### Example
@@ -1318,7 +1334,7 @@ The text displayed when the user deletes their own message.
 
 
 <div class="meta-api-description">
-Control the display text or notification shown in a chat interface when a user deletes their own message, customize how deleted messages appear, set or configure the placeholder or alert for self-deleted messages, manage text visibility or replacement for user-initiated message deletions, enable editing of the message deletion text shown to oneself after removing a message, handle display content for self-message removal events, adjust or override default messages indicating your own message was deleted in chat conversations.
+How do I customize the notification when a user deletes their own message in Kendo UI Chat? Control the display text or notification shown in a chat interface when a user deletes their own message, customize how deleted messages appear, set or configure the placeholder or alert for self-deleted messages, manage text visibility or replacement for user-initiated message deletions, enable editing of the message deletion text shown to oneself after removing a message, handle display content for self-message removal events, adjust or override default messages indicating your own message was deleted in chat conversations.
 </div>
 
 #### Example
@@ -1350,7 +1366,7 @@ The title and aria-label for the send button.
 
 
 <div class="meta-api-description">
-Control and customize the chat interface send button text, including the visible label and accessibility aria-label, by setting localized messages or translations for the button’s title and screen reader description, enabling internationalization and user-specific language support for sending messages, updating the send button’s displayed caption, tooltip, or accessibility attributes, and configuring the send action prompts shown to end users in various languages or locales.
+How do I customize the send button text in Kendo UI chat interface? Control and customize the chat interface send button text, including the visible label and accessibility aria-label, by setting localized messages or translations for the button’s title and screen reader description, enabling internationalization and user-specific language support for sending messages, updating the send button’s displayed caption, tooltip, or accessibility attributes, and configuring the send action prompts shown to end users in various languages or locales.
 </div>
 
 #### Example
@@ -1391,7 +1407,7 @@ The title and aria-label for the speech-to-text button.
 
 
 <div class="meta-api-description">
-Customize, translate, or configure the display text and accessibility label for the voice input toggle in chat interfaces, enabling localization and control over the button's title and ARIA attributes to support speech-to-text functionality, voice recognition activation, microphone button labeling, screen reader-friendly descriptions, and multilingual user interface adaptation for conversational or real-time dictation features.
+How do I customize the voice input toggle button in Kendo UI Chat? Customize, translate, or configure the display text and accessibility label for the voice input toggle in chat interfaces, enabling localization and control over the button's title and ARIA attributes to support speech-to-text functionality, voice recognition activation, microphone button labeling, screen reader-friendly descriptions, and multilingual user interface adaptation for conversational or real-time dictation features.
 </div>
 
 #### Example
@@ -1413,7 +1429,7 @@ The title and aria-label for the button that unpins a pinned message.
 
 
 <div class="meta-api-description">
-Control the text displayed on the button used to unpin or remove pinned messages in chat interfaces, including setting accessibility labels like aria-label for better screen reader support, configuring the button’s title attribute for tooltip or hover text, customizing or localizing the button description for user interface clarity, enabling precise control over the pin removal action’s accessible naming, and adjusting how the close or unpin button is announced or described in assistive technologies.
+How do I customize the text on the pinned message close button in Kendo UI chat? Control the text displayed on the button used to unpin or remove pinned messages in chat interfaces, including setting accessibility labels like aria-label for better screen reader support, configuring the button’s title attribute for tooltip or hover text, customizing or localizing the button description for user interface clarity, enabling precise control over the pin removal action’s accessible naming, and adjusting how the close or unpin button is announced or described in assistive technologies.
 </div>
 
 #### Example
@@ -1446,7 +1462,7 @@ The title and aria-label for the button that removes a reply reference when comp
 
 
 <div class="meta-api-description">
-Customize or localize the close button used to remove or dismiss a chat reply message by configuring its tooltip title and accessibility label, including options to set ARIA attributes for improved screen reader support, enabling control over how reply removal buttons are labeled, described, or announced in chat interfaces for better usability, internationalization, and accessibility compliance.
+How do I customize the close button for replying to a message in Kendo UI Chat widget? Customize or localize the close button used to remove or dismiss a chat reply message by configuring its tooltip title and accessibility label, including options to set ARIA attributes for improved screen reader support, enabling control over how reply removal buttons are labeled, described, or announced in chat interfaces for better usability, internationalization, and accessibility compliance.
 </div>
 
 #### Example
@@ -1478,7 +1494,7 @@ The title and aria-label for the button that opens the context menu for file att
 
 
 <div class="meta-api-description">
-Control and customize the label, title, or accessible aria-label for the file attachment menu button within chat interfaces, enabling configuration of the context menu’s button text and screen reader description for file uploads, attachment options, or file selection controls in messaging environments.
+How do I customize the button text for the file attachment menu in Kendo UI Chat? Control and customize the label, title, or accessible aria-label for the file attachment menu button within chat interfaces, enabling configuration of the context menu’s button text and screen reader description for file uploads, attachment options, or file selection controls in messaging environments.
 </div>
 
 #### Example
@@ -1515,7 +1531,7 @@ The template used to render individual messages.
 
 
 <div class="meta-api-description">
-Customize message rendering by setting templates or layouts for chat messages, enabling control over how individual messages display avatars, timestamps, attachments, text, and other content elements; configure message appearance, structure, styling, or formatting within the chat interface to create personalized, dynamic message presentations or custom components for chat bubbles, message items, or conversation flows.
+How can I customize the appearance of messages in Kendo UI Chat? Customize message rendering by setting templates or layouts for chat messages, enabling control over how individual messages display avatars, timestamps, attachments, text, and other content elements; configure message appearance, structure, styling, or formatting within the chat interface to create personalized, dynamic message presentations or custom components for chat bubbles, message items, or conversation flows.
 </div>
 
 #### Example
@@ -1559,7 +1575,7 @@ The format string used to display message timestamps.
 
 
 <div class="meta-api-description">
-Customize the display format of message timestamps by specifying preferred date and time patterns to control how times appear in chat messages; adjust, set, or configure timestamp layouts using standard or custom format strings like hours and minutes, full date, or shorthand notations to tailor the time presentation on messages, enabling precise control over chat timestamp appearance for localization, readability, or style preferences.
+How do I customize the time format in Kendo UI chat messages? Customize the display format of message timestamps by specifying preferred date and time patterns to control how times appear in chat messages; adjust, set, or configure timestamp layouts using standard or custom format strings like hours and minutes, full date, or shorthand notations to tailor the time presentation on messages, enabling precise control over chat timestamp appearance for localization, readability, or style preferences.
 </div>
 
 #### Example
@@ -1598,7 +1614,7 @@ Defines the collection of actions that will be rendered in the message toolbar.
 
 
 <div class="meta-api-description">
-Control and customize the message input toolbar by configuring, setting, or modifying the available buttons, icons, controls, actions, commands, and their order for chat interfaces, including adding custom or built-in toolbar buttons, defining click handlers, arranging toolbar actions, enabling specific message tools, and tailoring toolbar functionality to match user needs or application requirements.
+How can I customize the buttons in the message toolbar of a Kendo UI chat interface? Control and customize the message input toolbar by configuring, setting, or modifying the available buttons, icons, controls, actions, commands, and their order for chat interfaces, including adding custom or built-in toolbar buttons, defining click handlers, arranging toolbar actions, enabling specific message tools, and tailoring toolbar functionality to match user needs or application requirements.
 </div>
 
 #### Example
@@ -1640,7 +1656,7 @@ Defines the icon class for the toolbar action.
 
 
 <div class="meta-api-description">
-Set or customize the visual icon in chat message toolbar actions by specifying CSS class names or custom glyph identifiers, including font icon libraries like Font Awesome or Kendo UI, SVG-based icons, sprite icons, or any CSS-based icon styling. Control and configure the appearance of toolbar action icons during chat initialization, enabling developers to apply, change, or override icon sets, customize message action visuals, swap default icons with custom designs, and manage icon styling independently from labels or functionality to integrate consistent or branded iconography within chat interfaces.
+How do I customize the icon in Kendo UI Chat message toolbar actions? Set or customize the visual icon in chat message toolbar actions by specifying CSS class names or custom glyph identifiers, including font icon libraries like Font Awesome or Kendo UI, SVG-based icons, sprite icons, or any CSS-based icon styling. Control and configure the appearance of toolbar action icons during chat initialization, enabling developers to apply, change, or override icon sets, customize message action visuals, swap default icons with custom designs, and manage icon styling independently from labels or functionality to integrate consistent or branded iconography within chat interfaces.
 </div>
 
 #### Example
@@ -1681,7 +1697,7 @@ Defines the text for the toolbar action.
 
 
 <div class="meta-api-description">
-Set or customize the text labels, captions, or titles for message toolbar actions in chat interfaces to enable localization, internationalization, translation, or modification of button text, action names, commands, or menu options within chat toolbars, supporting different languages, regional settings, and personalized wording for chat interaction controls.
+How do I customize the button text in Kendo UI chat message toolbar actions? Set or customize the text labels, captions, or titles for message toolbar actions in chat interfaces to enable localization, internationalization, translation, or modification of button text, action names, commands, or menu options within chat toolbars, supporting different languages, regional settings, and personalized wording for chat interaction controls.
 </div>
 
 #### Example
@@ -1717,7 +1733,7 @@ Defines the name identifier for the toolbar action.
 
 
 <div class="meta-api-description">
-Configure or define a unique identifier for actions within the message toolbar of a chat interface, enabling developers to reference, bind event handlers, map commands, apply custom styles, target specific toolbar buttons, or programmatically control and customize the behavior of chat toolbar actions. This naming setting facilitates precise interaction management, action tracking, command assignment, and styling control within chat components, making it easier to link code logic or UI customization to specific message toolbar elements.
+How do I set a unique identifier for actions in the Kendo UI chat message toolbar? Configure or define a unique identifier for actions within the message toolbar of a chat interface, enabling developers to reference, bind event handlers, map commands, apply custom styles, target specific toolbar buttons, or programmatically control and customize the behavior of chat toolbar actions. This naming setting facilitates precise interaction management, action tracking, command assignment, and styling control within chat components, making it easier to link code logic or UI customization to specific message toolbar elements.
 </div>
 
 #### Example
@@ -1758,7 +1774,7 @@ Controls the width mode of messages. Supported values are "standard" and "full".
 
 
 <div class="meta-api-description">
-Adjust or configure the width and layout behavior of chat message bubbles to control how wide each message appears within the chat interface, enabling options to constrain messages to typical bubble sizes or expand them to fill the entire container horizontally; this setting supports toggling between standard fixed-width message displays and full-width stretching for flexible, responsive chat layouts, useful for customizing message appearance, alignment, and visual spacing in messaging UIs or chat applications.
+How can I configure chat messages to expand beyond standard bubble sizes in a Kendo UI Chat widget? Adjust or configure the width and layout behavior of chat message bubbles to control how wide each message appears within the chat interface, enabling options to constrain messages to typical bubble sizes or expand them to fill the entire container horizontally; this setting supports toggling between standard fixed-width message displays and full-width stretching for flexible, responsive chat layouts, useful for customizing message appearance, alignment, and visual spacing in messaging UIs or chat applications.
 </div>
 
 #### Example
@@ -1799,7 +1815,7 @@ Controls whether HTML sanitization is skipped when rendering message content. Wh
 
 
 <div class="meta-api-description">
-Control whether chat messages render raw or rich HTML by disabling automatic HTML entity encoding; enable skipping sanitization to allow displaying pre-formatted HTML content or HTML generated by markdown processors without being escaped, facilitating custom HTML rendering and styling within chat interfaces. Configure this setting to bypass default message sanitization for trusted content sources or when you have implemented your own input validation and sanitizing mechanisms, preventing entity encoding that would otherwise transform characters like <, >, and & into safe text. Ideal for developers wanting to render embedded HTML, advanced formatting, or third-party HTML outputs inside chat messages while managing security risks and ensuring content integrity through manual sanitization or trusted input validation. This option is crucial for use cases involving rich text, HTML injection prevention strategies, content rendering control, and safe display of complex message formatting within chat applications.
+How to disable HTML entity encoding in Kendo UI Chat for custom HTML rendering? Control whether chat messages render raw or rich HTML by disabling automatic HTML entity encoding; enable skipping sanitization to allow displaying pre-formatted HTML content or HTML generated by markdown processors without being escaped, facilitating custom HTML rendering and styling within chat interfaces. Configure this setting to bypass default message sanitization for trusted content sources or when you have implemented your own input validation and sanitizing mechanisms, preventing entity encoding that would otherwise transform characters like <, >, and & into safe text. Ideal for developers wanting to render embedded HTML, advanced formatting, or third-party HTML outputs inside chat messages while managing security risks and ensuring content integrity through manual sanitization or trusted input validation. This option is crucial for use cases involving rich text, HTML injection prevention strategies, content rendering control, and safe display of complex message formatting within chat applications.
 </div>
 
 #### Example
@@ -1838,7 +1854,7 @@ Specifies the field name in the data source that contains the ID of the message 
 
 
 <div class="meta-api-description">
-Configure the field used to identify which message a reply corresponds to in order to create and display threaded conversations, link messages in reply chains, enable parent-child message relationships, map reply references from server or local data sources by specifying the reply ID field name, control message threading behavior, set or customize reply linking by pointing to the message ID field that represents the replied message within your chat data structure.
+How do I configure the field that identifies which message a reply corresponds to in Kendo UI Chat? Configure the field used to identify which message a reply corresponds to in order to create and display threaded conversations, link messages in reply chains, enable parent-child message relationships, map reply references from server or local data sources by specifying the reply ID field name, control message threading behavior, set or customize reply linking by pointing to the message ID field that represents the replied message within your chat data structure.
 </div>
 
 #### Example
@@ -1875,7 +1891,7 @@ Enables or disables speech-to-text functionality in the message input.
 
 
 <div class="meta-api-description">
-Enable or disable voice dictation and speech recognition in chat message inputs to convert spoken words into text, supporting hands-free communication, voice-to-text transcription, speech input configuration, accessible and hands-free messaging, real-time audio-to-text conversion, controlling microphone-based text entry, speech-enabled chat interfaces, voice command transcription within the chat composer, and managing voice input for seamless message composition.
+How do I enable voice-to-text transcription in Kendo UI Chat messages? Enable or disable voice dictation and speech recognition in chat message inputs to convert spoken words into text, supporting hands-free communication, voice-to-text transcription, speech input configuration, accessible and hands-free messaging, real-time audio-to-text conversion, controlling microphone-based text entry, speech-enabled chat interfaces, voice command transcription within the chat composer, and managing voice input for seamless message composition.
 </div>
 
 #### Example
@@ -1914,7 +1930,7 @@ Enables or disables scrollable behavior for suggested actions.
 
 
 <div class="meta-api-description">
-Enable or disable scrolling for the list of suggested actions in chat interfaces to manage overflowing buttons or options, enhance usability on small or constrained screens, control how users navigate through multiple recommendations or quick replies, set scroll behavior to improve accessibility and user interaction with dynamic or lengthy suggested response lists, configure the chat action area to be fixed or scrollable depending on layout needs, handle situations with numerous actionable items appearing in chat suggestions, adjust UI responsiveness to maintain smooth navigation through suggested commands or options within messaging components.
+How to enable scrolling in Kendo UI chat suggested actions on small screens? Enable or disable scrolling for the list of suggested actions in chat interfaces to manage overflowing buttons or options, enhance usability on small or constrained screens, control how users navigate through multiple recommendations or quick replies, set scroll behavior to improve accessibility and user interaction with dynamic or lengthy suggested response lists, configure the chat action area to be fixed or scrollable depending on layout needs, handle situations with numerous actionable items appearing in chat suggestions, adjust UI responsiveness to maintain smooth navigation through suggested commands or options within messaging components.
 </div>
 
 #### Example
@@ -1955,7 +1971,7 @@ The template used to render suggested actions. The `k-suggestions` class must be
 
 
 <div class="meta-api-description">
-Customize the presentation and interaction of suggested replies, quick actions, or clickable options by providing a template or HTML markup that controls the layout, styling, and user interface elements such as buttons, chips, or list items. Enable custom formatting, arrangement, and behavior for chat suggestion components by setting up a structured template with appropriate CSS classes and attributes to modify how suggested actions appear and function within conversational or chat-based interfaces. Configure and tailor the rendering of suggestion elements to match custom UI requirements for action prompts, ensuring interactive elements are properly grouped and styled for seamless integration in chat workflows.
+How to customize the layout of suggested actions in Kendo UI Chat widget? Customize the presentation and interaction of suggested replies, quick actions, or clickable options by providing a template or HTML markup that controls the layout, styling, and user interface elements such as buttons, chips, or list items. Enable custom formatting, arrangement, and behavior for chat suggestion components by setting up a structured template with appropriate CSS classes and attributes to modify how suggested actions appear and function within conversational or chat-based interfaces. Configure and tailor the rendering of suggestion elements to match custom UI requirements for action prompts, ensuring interactive elements are properly grouped and styled for seamless integration in chat workflows.
 </div>
 
 #### Example
@@ -1999,7 +2015,7 @@ Defines the collection of suggested messages that users can quickly select. Thes
 
 
 <div class="meta-api-description">
-Enable quick-reply buttons or suggested message options that offer users predefined, common, or contextually relevant responses beneath the chat input field, allowing fast selection and automatic insertion for streamlined messaging, configurable as clickable shortcuts to improve user interaction, response speed, and message flow within chat interfaces.
+How to enable quick reply buttons in Kendo UI for jQuery Chat widget? Enable quick-reply buttons or suggested message options that offer users predefined, common, or contextually relevant responses beneath the chat input field, allowing fast selection and automatic insertion for streamlined messaging, configurable as clickable shortcuts to improve user interaction, response speed, and message flow within chat interfaces.
 </div>
 
 #### Example
@@ -2036,7 +2052,7 @@ The text of the suggestion.
 
 
 <div class="meta-api-description">
-Configure or set the visible label, displayed string, or message content for suggestion items, quick replies, chat autocomplete options, or interactive prompts in chat interfaces. Control how suggestion texts, reply buttons, dynamic hints, or autofill choices appear within chat components by specifying the exact string shown to users. Enable customization of suggestion labels, message snippets, or quick-reply text displayed in suggestion lists or chat UI elements to tailor user interaction and improve conversational flow.
+How to customize the text displayed for suggestion items in Kendo UI chat interfaces? Configure or set the visible label, displayed string, or message content for suggestion items, quick replies, chat autocomplete options, or interactive prompts in chat interfaces. Control how suggestion texts, reply buttons, dynamic hints, or autofill choices appear within chat components by specifying the exact string shown to users. Enable customization of suggestion labels, message snippets, or quick-reply text displayed in suggestion lists or chat UI elements to tailor user interaction and improve conversational flow.
 </div>
 
 #### Example
@@ -2085,7 +2101,7 @@ Enables or disables scrollable behavior for message suggestions.
 
 
 <div class="meta-api-description">
-Control or configure chat message suggestion overflow by enabling scrollable behavior for the suggestions list, allowing users to scroll through suggested responses or completions when the number of items exceeds the visible area. Enable or disable scrolling in message suggestion containers to prevent the list from expanding indefinitely and to improve user experience in chat interfaces with many suggestions. Adjust behavior for suggestion visibility, manage display overflow, customize interaction with message completions, and set scrolling preferences for suggestions shown in chat components.
+How to enable scrolling in Kendo UI chat message suggestions? Control or configure chat message suggestion overflow by enabling scrollable behavior for the suggestions list, allowing users to scroll through suggested responses or completions when the number of items exceeds the visible area. Enable or disable scrolling in message suggestion containers to prevent the list from expanding indefinitely and to improve user experience in chat interfaces with many suggestions. Adjust behavior for suggestion visibility, manage display overflow, customize interaction with message completions, and set scrolling preferences for suggestions shown in chat components.
 </div>
 
 #### Example
@@ -2123,7 +2139,7 @@ The template used to render message suggestions. The individual suggestion eleme
 
 
 <div class="meta-api-description">
-Customize how message suggestions appear in chat interfaces by setting up a tailored HTML template that controls the layout, styling, and behavior of suggestion items. Enable configuring or overriding the default rendering of suggestion lists by providing markup that includes necessary classes and attributes for each suggestion element and the surrounding container. Control the formatting, add custom attributes, event listeners, or interactive elements to suggestion entries in chat components, allowing fine-tuning of appearance, user interaction, and data binding for suggested messages or auto-complete options. Modify, style, or extend suggestion displays during chat initialization to deliver personalized user experiences and dynamic suggestion content presentation.
+How do I customize the appearance of message suggestions in a Kendo UI chat interface? Customize how message suggestions appear in chat interfaces by setting up a tailored HTML template that controls the layout, styling, and behavior of suggestion items. Enable configuring or overriding the default rendering of suggestion lists by providing markup that includes necessary classes and attributes for each suggestion element and the surrounding container. Control the formatting, add custom attributes, event listeners, or interactive elements to suggestion entries in chat components, allowing fine-tuning of appearance, user interaction, and data binding for suggested messages or auto-complete options. Modify, style, or extend suggestion displays during chat initialization to deliver personalized user experiences and dynamic suggestion content presentation.
 </div>
 
 #### Example
@@ -2180,7 +2196,7 @@ Returning **null** or an empty string will hide the time breaks from the chat.
 
 
 <div class="meta-api-description">
-Control and customize the appearance of date separators between chat message groups by providing a function or template that generates HTML for timestamps, allowing full flexibility in formatting date and time displays based on message data, including options to show relative dates like today or yesterday, absolute dates for older messages, or completely hide time breaks by returning null or empty values, enabling developers to configure, override, and fine-tune timestamp rendering logic according to custom design, localization, or user experience requirements within chat interfaces.
+How can I customize the timestamp format in Kendo UI Chat? Control and customize the appearance of date separators between chat message groups by providing a function or template that generates HTML for timestamps, allowing full flexibility in formatting date and time displays based on message data, including options to show relative dates like today or yesterday, absolute dates for older messages, or completely hide time breaks by returning null or empty values, enabling developers to configure, override, and fine-tune timestamp rendering logic according to custom design, localization, or user experience requirements within chat interfaces.
 </div>
 
 #### Example
@@ -2239,7 +2255,7 @@ Specifies the field name in the data source from which the message text content 
 
 
 <div class="meta-api-description">
-Specify or configure the field name within your data structure or dataset that holds the actual message content, enabling the chat interface to extract, display, bind, or read text messages dynamically from arrays, lists, or data source objects during rendering or data processing. This setting controls how message text is identified, mapped, or retrieved from each data item when showing conversation threads, supporting customization for various data formats, property names, or backend APIs to ensure the chat component correctly interprets and presents chat message strings in diverse integration scenarios.
+How do I configure the chat interface to extract message content from my data array? Specify or configure the field name within your data structure or dataset that holds the actual message content, enabling the chat interface to extract, display, bind, or read text messages dynamically from arrays, lists, or data source objects during rendering or data processing. This setting controls how message text is identified, mapped, or retrieved from each data item when showing conversation threads, supporting customization for various data formats, property names, or backend APIs to ensure the chat component correctly interprets and presents chat message strings in diverse integration scenarios.
 </div>
 
 #### Example
@@ -2268,7 +2284,7 @@ Specifies the field name in the data source from which the message timestamp wil
 
 
 <div class="meta-api-description">
-Control how message times are identified by setting or configuring the specific data field that contains timestamp information, enabling accurate display, sorting, filtering, and handling of chat messages by their sent or received times. Set the time key, map time attributes, define which property represents message time, or specify the field used for time-based operations and ordering within messaging or chat interfaces to ensure proper chronological arrangement and temporal context.
+How do I configure the timestamp field in Kendo UI Chat to display message times accurately? Control how message times are identified by setting or configuring the specific data field that contains timestamp information, enabling accurate display, sorting, filtering, and handling of chat messages by their sent or received times. Set the time key, map time attributes, define which property represents message time, or specify the field used for time-based operations and ordering within messaging or chat interfaces to ensure proper chronological arrangement and temporal context.
 </div>
 
 #### Example
@@ -2297,7 +2313,7 @@ Sets the width of the Chat component.
 
 
 <div class="meta-api-description">
-Adjust or configure the horizontal dimension, size, or width of the chat interface to control layout, placement, or responsiveness within containers, including setting fixed, percentage, or dynamic widths during initialization or runtime to manage how the chat component appears, scales, or adapts across different screen sizes or parent elements for precise UI arrangement and design flexibility.
+How do I set the width of the Kendo UI chat component? Adjust or configure the horizontal dimension, size, or width of the chat interface to control layout, placement, or responsiveness within containers, including setting fixed, percentage, or dynamic widths during initialization or runtime to manage how the chat component appears, scales, or adapts across different screen sizes or parent elements for precise UI arrangement and design flexibility.
 </div>
 
 #### Example
@@ -2338,7 +2354,7 @@ Clears all messages from the view without affecting the data source.
 
 
 <div class="meta-api-description">
-Clear all visible chat messages from the user interface or chat window without deleting or altering the original message data, message list, or server-stored conversations, enabling developers to reset the chat display, refresh the visible message history, temporarily hide message threads, or force a re-render of the chat view after dynamic updates or programmatic changes to message data, controls to clear rendered messages while keeping message objects and data intact, useful for managing chat UI state, refreshing message displays, hiding chat content temporarily, or updating visible messages without affecting stored chat records.
+How to clear all chat messages from the Kendo UI Chat widget without deleting them permanently? Clear all visible chat messages from the user interface or chat window without deleting or altering the original message data, message list, or server-stored conversations, enabling developers to reset the chat display, refresh the visible message history, temporarily hide message threads, or force a re-render of the chat view after dynamic updates or programmatic changes to message data, controls to clear rendered messages while keeping message objects and data intact, useful for managing chat UI state, refreshing message displays, hiding chat content temporarily, or updating visible messages without affecting stored chat records.
 </div>
 
 #### Example
@@ -2381,7 +2397,7 @@ Clears the currently pinned message from the chat.
 
 
 <div class="meta-api-description">
-Clear or unpin the currently pinned message in a chat interface by removing the pinned status from the active message, resetting pinned content, freeing up the pinned message slot, and updating the chat display so no message appears pinned. Enable programmatic control to unpin, remove, reset, or clear pinned messages in messaging or chat UI components, allowing developers to manage pinned message state dynamically during conversations or interactions.
+How do I programmatically unpin a message in Kendo UI Chat? Clear or unpin the currently pinned message in a chat interface by removing the pinned status from the active message, resetting pinned content, freeing up the pinned message slot, and updating the chat display so no message appears pinned. Enable programmatic control to unpin, remove, reset, or clear pinned messages in messaging or chat UI components, allowing developers to manage pinned message state dynamically during conversations or interactions.
 </div>
 
 #### Example
@@ -2425,7 +2441,7 @@ Clears the current reply state, removing any active reply context.
 
 
 <div class="meta-api-description">
-Cancel or reset any active message reply mode to stop quoting or replying to messages, clear reply indicators or reply metadata, remove any reply context from the chat input or composer, revert the chat interface to normal messaging state, enable sending new standalone messages instead of replies, deactivate or clear reply selection, disable reply mode, and ensure subsequent messages are treated as fresh messages without inherited reply references or quoted content.
+How do I cancel message reply mode in Kendo UI Chat? Cancel or reset any active message reply mode to stop quoting or replying to messages, clear reply indicators or reply metadata, remove any reply context from the chat input or composer, revert the chat interface to normal messaging state, enable sending new standalone messages instead of replies, deactivate or clear reply selection, disable reply mode, and ensure subsequent messages are treated as fresh messages without inherited reply references or quoted content.
 </div>
 
 #### Example
@@ -2468,7 +2484,7 @@ Gets the data item (Message object) associated with a jQuery message element.
 
 
 <div class="meta-api-description">
-Access or retrieve the message object, message data, or underlying data model tied to a specific chat message element or DOM node in a chat interface; fetch or map the original data item, conversation message, or data structure linked to a rendered message element for reading message content, inspecting message properties, synchronizing message status, or manipulating the message’s bound data within chat components or frameworks using selectors or references to message elements.
+How can I access the underlying data model of a specific chat message in Kendo UI Chat? Access or retrieve the message object, message data, or underlying data model tied to a specific chat message element or DOM node in a chat interface; fetch or map the original data item, conversation message, or data structure linked to a rendered message element for reading message content, inspecting message properties, synchronizing message status, or manipulating the message’s bound data within chat components or frameworks using selectors or references to message elements.
 </div>
 
 #### Parameters
@@ -2526,7 +2542,7 @@ Destroys the Chat component and cleans up all resources.
 
 
 <div class="meta-api-description">
-Remove or delete a chat instance entirely from the webpage by fully cleaning up associated resources, including eliminating all user interface elements, detaching event listeners, stopping ongoing timers and network calls, unsubscribing from data streams, and resetting internal states to avoid memory leaks or lingering processes. This method ensures complete teardown and disposal of chat components, preventing residual references, allowing developers to safely clear and remove chat objects, disable chat functionality, and manage lifecycle or cleanup operations for chat widgets without leftover side effects.
+How do I properly remove a chat instance from my webpage with Kendo UI for jQuery? Remove or delete a chat instance entirely from the webpage by fully cleaning up associated resources, including eliminating all user interface elements, detaching event listeners, stopping ongoing timers and network calls, unsubscribing from data streams, and resetting internal states to avoid memory leaks or lingering processes. This method ensures complete teardown and disposal of chat components, preventing residual references, allowing developers to safely clear and remove chat objects, disable chat functionality, and manage lifecycle or cleanup operations for chat widgets without leftover side effects.
 </div>
 
 #### Example
@@ -2569,7 +2585,7 @@ Gets the file data item associated with a jQuery file element within a message.
 
 
 <div class="meta-api-description">
-Retrieve, access, or obtain the underlying file object linked to a chat message attachment by passing the file’s element representation, enabling inspection of its metadata, fetching download URLs, managing file data, controlling attachment actions such as removal or download, and programmatically interacting with files embedded within chat messages through element references, file handlers, or data objects associated with attached files in messaging interfaces.
+How can I access the file data associated with a chat message attachment using the Kendo UI for jQuery API? Retrieve, access, or obtain the underlying file object linked to a chat message attachment by passing the file’s element representation, enabling inspection of its metadata, fetching download URLs, managing file data, controlling attachment actions such as removal or download, and programmatically interacting with files embedded within chat messages through element references, file handlers, or data objects associated with attached files in messaging interfaces.
 </div>
 
 #### Parameters
@@ -2639,7 +2655,7 @@ Gets a message by its unique identifier (UID).
 
 
 <div class="meta-api-description">
-Fetch or retrieve a single chat message using its unique identifier, allowing access to the exact message data by ID, message UID lookup, or message key for purposes like reading, editing, updating, referencing, or navigating to a particular message within a conversation thread or chat interface. This method supports precise message retrieval by unique ID across chat histories, enabling developers to query, modify, or highlight individual messages based on identifiers.
+How do I retrieve a specific chat message in Kendo UI Chat by its unique identifier? Fetch or retrieve a single chat message using its unique identifier, allowing access to the exact message data by ID, message UID lookup, or message key for purposes like reading, editing, updating, referencing, or navigating to a particular message within a conversation thread or chat interface. This method supports precise message retrieval by unique ID across chat histories, enabling developers to query, modify, or highlight individual messages based on identifiers.
 </div>
 
 #### Parameters
@@ -2699,7 +2715,7 @@ Gets the current user's unique identifier.
 
 
 <div class="meta-api-description">
-Retrieve the unique identifier or user ID of the current active user to track message ownership, sender identity, user presence, or auditing purposes, enabling integration with authentication systems, backend services, or user-specific data retrieval; obtain the current user’s ID to associate messages, set sender metadata, verify user identity, or manage session-based actions within chat or messaging interfaces.
+How do I get the unique ID of the current user in a Kendo UI chat application? Retrieve the unique identifier or user ID of the current active user to track message ownership, sender identity, user presence, or auditing purposes, enabling integration with authentication systems, backend services, or user-specific data retrieval; obtain the current user’s ID to associate messages, set sender metadata, verify user identity, or manage session-based actions within chat or messaging interfaces.
 </div>
 
 #### Returns
@@ -2745,7 +2761,7 @@ Posts a new message to the chat and renders it. The message will be automaticall
 
 
 <div class="meta-api-description">
-Send a new chat message, add text or content to the conversation flow, push updates to the chat window instantly, display user messages in real-time, post and render messages dynamically in the chat interface, append chat entries with timestamps and author identification, enable message posting with immediate visual feedback, push messages as the current user into the chat stream, update conversation logs by sending and showing new chat content right away, control online chat message posting and display with automatic user attribution and time tagging.
+How do I dynamically post messages in the Kendo UI chat interface? Send a new chat message, add text or content to the conversation flow, push updates to the chat window instantly, display user messages in real-time, post and render messages dynamically in the chat interface, append chat entries with timestamps and author identification, enable message posting with immediate visual feedback, push messages as the current user into the chat stream, update conversation logs by sending and showing new chat content right away, control online chat message posting and display with automatic user attribution and time tagging.
 </div>
 
 #### Parameters
@@ -2800,7 +2816,7 @@ Removes a message from the chat by marking it as deleted.
 
 
 <div class="meta-api-description">
-Control message deletion and moderation within chat conversations by marking individual messages as removed or hidden, enabling features like content moderation, message hiding, or updating chat UI to reflect deleted items. Configure or trigger removal of chat messages after initialization to update message status, support moderation workflows, filter out inappropriate content, manage visibility of specific chat entries, and ensure real-time synchronization of message removal across participants. This functionality supports use cases such as hiding offensive messages, moderating conversations dynamically, or programmatically managing message states in chat interfaces.
+How to delete specific messages in a Kendo UI chat control? Control message deletion and moderation within chat conversations by marking individual messages as removed or hidden, enabling features like content moderation, message hiding, or updating chat UI to reflect deleted items. Configure or trigger removal of chat messages after initialization to update message status, support moderation workflows, filter out inappropriate content, manage visibility of specific chat entries, and ensure real-time synchronization of message removal across participants. This functionality supports use cases such as hiding offensive messages, moderating conversations dynamically, or programmatically managing message states in chat interfaces.
 </div>
 
 #### Parameters
@@ -2857,7 +2873,7 @@ Scrolls the chat view to the bottom to show the latest messages.
 
 
 <div class="meta-api-description">
-Automatically scroll chat interface or conversation window to the latest message, enabling programmatic control over message view positioning to keep the newest content visible after adding messages, loading chat history, opening the chat window, or updating conversations; use scroll commands or functions to jump to the bottom of message lists, maintain real-time chat updates, ensure the interface shows most recent conversations without manual scrolling, and provide consistent user experience with automatic viewport adjustment to the newest chat entries.
+How do I programmatically scroll to the bottom of a Kendo UI chat interface? Automatically scroll chat interface or conversation window to the latest message, enabling programmatic control over message view positioning to keep the newest content visible after adding messages, loading chat history, opening the chat window, or updating conversations; use scroll commands or functions to jump to the bottom of message lists, maintain real-time chat updates, ensure the interface shows most recent conversations without manual scrolling, and provide consistent user experience with automatic viewport adjustment to the newest chat entries.
 </div>
 
 #### Example
@@ -2909,7 +2925,7 @@ Sets a new data source for the Chat component.
 
 
 <div class="meta-api-description">
-Update or change the source of messages displayed in a chat interface dynamically by configuring, setting, or replacing the data input at runtime. This method enables binding chat content to various data formats such as JavaScript arrays, data source objects, or configuration settings, allowing live refreshes, reloads, or message feed reconnections without restarting the component. It supports adjusting, switching, or resetting message origins to control real-time updates, handle incoming data changes, or refresh the conversation stream effortlessly after initialization.
+How do I dynamically update the data source in Kendo UI for jQuery chat component? Update or change the source of messages displayed in a chat interface dynamically by configuring, setting, or replacing the data input at runtime. This method enables binding chat content to various data formats such as JavaScript arrays, data source objects, or configuration settings, allowing live refreshes, reloads, or message feed reconnections without restarting the component. It supports adjusting, switching, or resetting message origins to control real-time updates, handle incoming data changes, or refresh the conversation stream effortlessly after initialization.
 </div>
 
 #### Parameters
@@ -2935,7 +2951,7 @@ Sets new options for the Chat component and reinitializes components as needed.
 
 
 <div class="meta-api-description">
-Modify chat settings dynamically by configuring or updating options, adjusting layout and behavior, changing data bindings, reinitializing internal components, applying new parameters to the active chat instance, enabling runtime customization, reconfiguring chat appearance and interactions without full component reload, controlling chat functionality on the fly, refreshing chat internals with updated configurations, and setting or overriding chat parameters after initialization to reflect immediate changes.
+How do I update chat settings dynamically using Kendo UI's setOptions method? Modify chat settings dynamically by configuring or updating options, adjusting layout and behavior, changing data bindings, reinitializing internal components, applying new parameters to the active chat instance, enabling runtime customization, reconfiguring chat appearance and interactions without full component reload, controlling chat functionality on the fly, refreshing chat internals with updated configurations, and setting or overriding chat parameters after initialization to reflect immediate changes.
 </div>
 
 #### Parameters
@@ -2990,7 +3006,7 @@ Toggles the send button generating state, showing a loading indicator.
 
 
 <div class="meta-api-description">
-Control the send button’s loading or busy state during asynchronous message sending or preparation by toggling its visible progress indicator, enabling or disabling the button to prevent multiple submissions, synchronizing UI feedback with ongoing network operations, managing user experience by showing a generating or working animation, and avoiding duplicate sends by dynamically updating the button’s active or disabled status while chat messages are being processed or sent.
+How to control the visibility of the send button's progress indicator during asynchronous message sending in Kendo UI Chat? Control the send button’s loading or busy state during asynchronous message sending or preparation by toggling its visible progress indicator, enabling or disabling the button to prevent multiple submissions, synchronizing UI feedback with ongoing network operations, managing user experience by showing a generating or working animation, and avoiding duplicate sends by dynamically updating the button’s active or disabled status while chat messages are being processed or sent.
 </div>
 
 #### Parameters
@@ -3042,7 +3058,7 @@ Updates an existing message with new data.
 
 
 <div class="meta-api-description">
-Modify or edit the content, metadata, or fields of an existing chat message by updating message data, enabling replacement or merging of message properties, controlling message updates, refreshing or re-rendering messages in the chat interface, handling message edits, and synchronizing updated message state within the chat component to reflect changes instantly.
+How do I update an existing chat message in Kendo UI for jQuery? Modify or edit the content, metadata, or fields of an existing chat message by updating message data, enabling replacement or merging of message properties, controlling message updates, refreshing or re-rendering messages in the chat interface, handling message edits, and synchronizing updated message state within the chat component to reflect changes instantly.
 </div>
 
 #### Parameters
@@ -3107,7 +3123,7 @@ Fired when the user types in the message input field.
 
 
 <div class="meta-api-description">
-Capture and handle user typing activity within chat input fields to monitor message composition in real time, enabling features like showing typing indicators, validating or limiting input characters, controlling send button activation, implementing input debouncing for autosave or draft updates, tracking text changes as users type, managing dynamic UI feedback based on ongoing input, detecting keystrokes to update message content state, and triggering immediate responses whenever text is entered or modified in chat message editors.
+How do I handle user typing activity within Kendo UI chat input fields? Capture and handle user typing activity within chat input fields to monitor message composition in real time, enabling features like showing typing indicators, validating or limiting input characters, controlling send button activation, implementing input debouncing for autosave or draft updates, tracking text changes as users type, managing dynamic UI feedback based on ongoing input, detecting keystrokes to update message content state, and triggering immediate responses whenever text is entered or modified in chat message editors.
 </div>
 
 #### Event Data
@@ -3135,7 +3151,7 @@ The `postMessage` method do not trigger this event.
 
 
 <div class="meta-api-description">
-Intercept outgoing chat messages before sending to modify content, cancel delivery, or manage requests to stop message generation; detect when a message is about to be sent to alter the payload, set custom metadata, halt sending, or handle interruptions such as aborting ongoing message creation; control or customize message dispatch behavior by capturing send triggers, adjusting outgoing text or data, preventing sending actions, and responding to user or system-initiated stop send commands; enable dynamic modification and cancellation of messages prior to transmission within chat workflows.
+How do I modify outgoing chat messages in Kendo UI before they're sent? Intercept outgoing chat messages before sending to modify content, cancel delivery, or manage requests to stop message generation; detect when a message is about to be sent to alter the payload, set custom metadata, halt sending, or handle interruptions such as aborting ongoing message creation; control or customize message dispatch behavior by capturing send triggers, adjusting outgoing text or data, preventing sending actions, and responding to user or system-initiated stop send commands; enable dynamic modification and cancellation of messages prior to transmission within chat workflows.
 </div>
 
 #### Event Data
@@ -3268,7 +3284,7 @@ Fired when a user clicks on a suggested message or action. This event is useful 
 
 
 <div class="meta-api-description">
-Capture and process user interactions with suggested messages or actions in chat interfaces, enabling detection of clicks on suggestions to execute custom logic, insert chosen text, send predefined replies, or trigger related workflows. Configure event handlers to monitor selection of autocomplete options, recommendation taps, quick reply choices, or inline action picks, allowing control over default behaviors, engagement tracking, suggestion data retrieval, dynamic navigation, and contextual side effects within conversational UI components.
+How do I handle clicks on suggested messages in a Kendo UI Chat widget? Capture and process user interactions with suggested messages or actions in chat interfaces, enabling detection of clicks on suggestions to execute custom logic, insert chosen text, send predefined replies, or trigger related workflows. Configure event handlers to monitor selection of autocomplete options, recommendation taps, quick reply choices, or inline action picks, allowing control over default behaviors, engagement tracking, suggestion data retrieval, dynamic navigation, and contextual side effects within conversational UI components.
 </div>
 
 #### Event Data
@@ -3351,7 +3367,7 @@ Fired when a pinned message is unpinned. This event is triggered when a user cli
 
 
 <div class="meta-api-description">
-Listen for events when a pinned message is removed or unpinned from the chat interface, detect user actions that unpin or close pinned messages, capture triggers related to unpinning messages, handle updates or changes when pinned chat items are dismissed, configure event handlers for pinned message removal, detect when users click to unpin or close pinned messages, respond to unpinning interactions within chat components, track unpin events for managing pinned message state, control behavior triggered by removing pinned messages, and listen to actions that clear or deactivate pinned chat messages.
+How to listen for events when a pinned message is removed from Kendo UI chat interface? Listen for events when a pinned message is removed or unpinned from the chat interface, detect user actions that unpin or close pinned messages, capture triggers related to unpinning messages, handle updates or changes when pinned chat items are dismissed, configure event handlers for pinned message removal, detect when users click to unpin or close pinned messages, respond to unpinning interactions within chat components, track unpin events for managing pinned message state, control behavior triggered by removing pinned messages, and listen to actions that clear or deactivate pinned chat messages.
 </div>
 
 #### Event Data
@@ -3404,7 +3420,7 @@ Fired when a toolbar action is executed on a message. This event allows you to h
 
 
 <div class="meta-api-description">
-Capture and respond to user interactions with chat message toolbar buttons, enabling detection of toolbar actions triggered on messages. Configure event handlers to intercept clicks or commands from message toolbar controls, manage custom toolbar operations, execute functions based on specific toolbar button presses, update message status, or open dialogs dynamically in reaction to toolbar input. This event delivers details about the invoked toolbar action and the associated chat message for precise control over toolbar-driven behaviors, supporting scenarios like command execution, UI updates, message edits, or interaction tracking within chat interfaces.
+How can I detect when a user clicks on a message toolbar button in a Kendo UI Chat widget? Capture and respond to user interactions with chat message toolbar buttons, enabling detection of toolbar actions triggered on messages. Configure event handlers to intercept clicks or commands from message toolbar controls, manage custom toolbar operations, execute functions based on specific toolbar button presses, update message status, or open dialogs dynamically in reaction to toolbar input. This event delivers details about the invoked toolbar action and the associated chat message for precise control over toolbar-driven behaviors, supporting scenarios like command execution, UI updates, message edits, or interaction tracking within chat interfaces.
 </div>
 
 #### Event Data
@@ -3457,7 +3473,7 @@ Fired when a file context menu action is executed. This event allows you to hand
 
 
 <div class="meta-api-description">
-Capture and respond to user actions on file attachments within chat interfaces, intercepting context menu selections such as previewing, downloading, deleting, sharing, or managing files attached to messages. Enable customizing behavior when users interact with attachment menus, control file upload or download triggers, update message or attachment states dynamically, handle or override default file menu operations, and implement tailored workflows for file management in chat conversations through event handling of file menu interactions.
+How to customize file menu actions in Kendo UI chat interface? Capture and respond to user actions on file attachments within chat interfaces, intercepting context menu selections such as previewing, downloading, deleting, sharing, or managing files attached to messages. Enable customizing behavior when users interact with attachment menus, control file upload or download triggers, update message or attachment states dynamically, handle or override default file menu operations, and implement tailored workflows for file management in chat conversations through event handling of file menu interactions.
 </div>
 
 #### Event Data
@@ -3519,7 +3535,7 @@ Fired when a message context menu action is executed. This event allows you to h
 
 
 <div class="meta-api-description">
-Capture and respond to user interactions with chat message context menus by detecting when context menu actions occur, enabling you to handle commands triggered from message menus, intercept and process menu item selections, execute custom logic tied to message options, update the state or properties of messages based on user choices, and control UI behavior related to message-specific commands or menu actions within chat interfaces.
+How do I handle context menu actions in the Kendo UI for jQuery chat widget? Capture and respond to user interactions with chat message context menus by detecting when context menu actions occur, enabling you to handle commands triggered from message menus, intercept and process menu item selections, execute custom logic tied to message options, update the state or properties of messages based on user choices, and control UI behavior related to message-specific commands or menu actions within chat interfaces.
 </div>
 
 #### Event Data
@@ -3573,7 +3589,7 @@ Fired when a download action is triggered, either from the "Download All" button
 
 
 <div class="meta-api-description">
-Intercept and manage file download actions initiated within chat interfaces, including downloads triggered by buttons like "Download All" or individual file menu commands, enabling detection and handling of user download events, access to event data such as source triggers and file metadata, customization of download workflows, logging of download activity, and control over how chat-related downloads are processed or responded to during interaction.
+How to manage file downloads in Kendo UI chat interface? Intercept and manage file download actions initiated within chat interfaces, including downloads triggered by buttons like "Download All" or individual file menu commands, enabling detection and handling of user download events, access to event data such as source triggers and file metadata, customization of download workflows, logging of download activity, and control over how chat-related downloads are processed or responded to during interaction.
 </div>
 
 #### Event Data

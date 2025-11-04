@@ -15,7 +15,7 @@ The configuration of this gradient.
 
 
 <div class="meta-api-description">
-Configure and set up gradient visual styles and parameters during creation by passing a configuration object that controls gradient color stops, directions, transitions, blending modes, and other gradient properties for drawing or rendering components. Enable defining initial gradient attributes such as colors, opacity, stops, angles, and spread methods right at instantiation to customize and initialize gradients with desired appearance settings, supporting use cases like linear, radial, or conic gradient setups through constructor parameters. Adjust, customize, or control gradient behavior and appearance when creating graphic or canvas elements by specifying all relevant options in one configuration input.
+How to set gradient options for Kendo UI drawingapi? Configure and set up gradient visual styles and parameters during creation by passing a configuration object that controls gradient color stops, directions, transitions, blending modes, and other gradient properties for drawing or rendering components. Enable defining initial gradient attributes such as colors, opacity, stops, angles, and spread methods right at instantiation to customize and initialize gradients with desired appearance settings, supporting use cases like linear, radial, or conic gradient setups through constructor parameters. Adjust, customize, or control gradient behavior and appearance when creating graphic or canvas elements by specifying all relevant options in one configuration input.
 </div>
 
 #### Example
@@ -45,7 +45,7 @@ Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradi
 
 
 <div class="meta-api-description">
-Configure and manage the color stops within a gradient effect, enabling you to set, update, reorder, customize, or define the exact positions and colors that create smooth or complex transitions in backgrounds, fills, or shading. Control gradient points by modifying the collection of color markers, whether using simple color objects or specialized stop instances, to adjust blending, intensity, placement, and order of multiple hues for precise gradient design and visual styling. Adjust color transitions, change stop locations, rearrange stop sequence, or insert new colors to tailor gradients for UI components, graphics, or any visual element requiring dynamic color blending.
+How to reorder color stops in a Kendo UI gradient effect? Configure and manage the color stops within a gradient effect, enabling you to set, update, reorder, customize, or define the exact positions and colors that create smooth or complex transitions in backgrounds, fills, or shading. Control gradient points by modifying the collection of color markers, whether using simple color objects or specialized stop instances, to adjust blending, intensity, placement, and order of multiple hues for precise gradient design and visual styling. Adjust color transitions, change stop locations, rearrange stop sequence, or insert new colors to tailor gradients for UI components, graphics, or any visual element requiring dynamic color blending.
 </div>
 
 #### Example
@@ -76,7 +76,7 @@ Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
-Control and customize the sequence of color stops that define smooth or dramatic color transitions in gradients by adding, removing, reordering, or iterating through an array of stop points representing color and position pairs; configure how colors blend across the gradient by managing these intermediate points dynamically at runtime or for editing and serialization purposes, enabling precise adjustment of gradient shading, color distribution, and visual effects for backgrounds, fills, or UI elements.
+How do I reorder color stops in a Kendo UI gradient? Control and customize the sequence of color stops that define smooth or dramatic color transitions in gradients by adding, removing, reordering, or iterating through an array of stop points representing color and position pairs; configure how colors blend across the gradient by managing these intermediate points dynamically at runtime or for editing and serialization purposes, enabling precise adjustment of gradient shading, color distribution, and visual effects for backgrounds, fills, or UI elements.
 </div>
 
 #### Example
@@ -110,7 +110,7 @@ The configuration options of the gradient.
 
 
 <div class="meta-api-description">
-Adjust and customize gradient settings including gradient type selection like linear or radial, editing color stops and their positions or offsets, controlling spread methods and applying transforms to modify orientation or scale. Enable dynamic gradient configuration after initialization, access serialization-ready properties for rendering pipelines, and fine-tune visual gradient parameters within drawing components by reading or updating options that govern gradient appearance, transitions, layout, stops, and transformation effects for graphics rendering and UI design.
+How do I customize gradient settings in Kendo UI for jQuery drawingapi? Adjust and customize gradient settings including gradient type selection like linear or radial, editing color stops and their positions or offsets, controlling spread methods and applying transforms to modify orientation or scale. Enable dynamic gradient configuration after initialization, access serialization-ready properties for rendering pipelines, and fine-tune visual gradient parameters within drawing components by reading or updating options that govern gradient appearance, transitions, layout, stops, and transformation effects for graphics rendering and UI design.
 </div>
 
 #### Example
@@ -144,7 +144,7 @@ Adds a color stop to the gradient.
 
 
 <div class="meta-api-description">
-Add or insert color stops at specific positions within a gradient to control the color transitions and smooth interpolation across fills, configure gradient color points dynamically by specifying colors and offsets, update or build color gradients with precise stop placements, set intermediate colors along a gradient path for visual effects, manage or modify gradient stops composition for seamless blending between colors, define color markers in gradients to achieve smooth color shifts, customize gradient fill transitions by adding or adjusting color points, control gradient shading by positioning stops with designated colors and offsets, fine-tune color interpolation in gradients through incremental stop additions, manipulate gradient color stops for dynamic and interactive visual styling.
+How do I add color stops to a gradient in Kendo UI for jQuery? Add or insert color stops at specific positions within a gradient to control the color transitions and smooth interpolation across fills, configure gradient color points dynamically by specifying colors and offsets, update or build color gradients with precise stop placements, set intermediate colors along a gradient path for visual effects, manage or modify gradient stops composition for seamless blending between colors, define color markers in gradients to achieve smooth color shifts, customize gradient fill transitions by adding or adjusting color points, control gradient shading by positioning stops with designated colors and offsets, fine-tune color interpolation in gradients through incremental stop additions, manipulate gradient color stops for dynamic and interactive visual styling.
 </div>
 
 #### Example
@@ -200,7 +200,7 @@ Removes a color stop from the gradient.
 
 
 <div class="meta-api-description">
-Remove or delete a specific color stop from a gradient definition to dynamically modify gradients in drawings, adjust or update gradient stop collections at runtime, eliminate particular color points or stops from gradients affecting shapes, control gradient color transitions by removing stops, and enable changing or configuring gradients by deleting existing color stops for real-time visual updates and customization in graphic rendering.
+How to dynamically remove a specific color stop from a Kendo UI gradient definition? Remove or delete a specific color stop from a gradient definition to dynamically modify gradients in drawings, adjust or update gradient stop collections at runtime, eliminate particular color points or stops from gradients affecting shapes, control gradient color transitions by removing stops, and enable changing or configuring gradients by deleting existing color stops for real-time visual updates and customization in graphic rendering.
 </div>
 
 #### Example

@@ -17,7 +17,7 @@ Specifies if the Tooltip will be hidden when the mouse leaves the target element
 
 
 <div class="meta-api-description">
-Manage the behavior of tooltip visibility by configuring automatic hiding when the cursor moves away from the target element or keeping the tooltip visible until manually closed; options include enabling or disabling auto-hide, controlling whether the tooltip disappears on mouse leave, showing a close button inside the tooltip for manual dismissal, setting delays before the tooltip appears even if the mouse is no longer hovering, and customizing how and when tooltips appear or persist based on hover events and timeout settings to suit various interactive UI scenarios requiring persistent or temporary tooltip display.
+How to configure Kendo UI tooltip to automatically hide when mouse leaves target element? Manage the behavior of tooltip visibility by configuring automatic hiding when the cursor moves away from the target element or keeping the tooltip visible until manually closed; options include enabling or disabling auto-hide, controlling whether the tooltip disappears on mouse leave, showing a close button inside the tooltip for manual dismissal, setting delays before the tooltip appears even if the mouse is no longer hovering, and customizing how and when tooltips appear or persist based on hover events and timeout settings to suit various interactive UI scenarios requiring persistent or temporary tooltip display.
 </div>
 
 #### Example - preventing the Tooltip from closing automatically
@@ -40,7 +40,7 @@ A collection of `{Animation}` objects which are used to change the default anima
 
 
 <div class="meta-api-description">
-Control and customize tooltip show and hide animations, transitions, or effects by enabling, disabling, or overriding default open and close animation behaviors using configurable animation objects. Adjust or set animation sequences, toggle smooth appearance and disappearance effects, manage tooltip fade-ins, slide-ins, or other visual transitions, customize animation timing and style, or completely turn off all tooltip animations and motion effects for performance or user experience preferences.
+How to customize the animation of a Kendo UI for jQuery tooltip? Control and customize tooltip show and hide animations, transitions, or effects by enabling, disabling, or overriding default open and close animation behaviors using configurable animation objects. Adjust or set animation sequences, toggle smooth appearance and disappearance effects, manage tooltip fade-ins, slide-ins, or other visual transitions, customize animation timing and style, or completely turn off all tooltip animations and motion effects for performance or user experience preferences.
 </div>
 
 #### Example - disabling animations
@@ -63,7 +63,7 @@ The animation that will be used when the Tooltip closes.
 
 
 <div class="meta-api-description">
-Customize the behavior and appearance of the tooltip hide transition by configuring or disabling the closing animation effect, adjusting animation duration, easing curves, or controlling how the tooltip smoothly disappears, fades out, or instantly closes upon dismissal, enabling developers to fine-tune or remove animations for tooltip closing events, manage visual feedback when the tooltip hides, and set parameters for animated or instant tooltip dismissal effects.
+How to disable closing animation in Kendo UI tooltip? Customize the behavior and appearance of the tooltip hide transition by configuring or disabling the closing animation effect, adjusting animation duration, easing curves, or controlling how the tooltip smoothly disappears, fades out, or instantly closes upon dismissal, enabling developers to fine-tune or remove animations for tooltip closing events, manage visual feedback when the tooltip hides, and set parameters for animated or instant tooltip dismissal effects.
 </div>
 
 #### Example - setting the close animation
@@ -90,7 +90,7 @@ The effect that will be used for closing the Tooltip.
 
 
 <div class="meta-api-description">
-Adjust and customize the closing animation or transition effect for tooltip popups by selecting different visual styles such as fade out, slide away, zoom out, or other disappearance effects to control how tooltips vanish when dismissed, blurred, or closed; configure the exit animation behavior, set smooth or quick transitions, and manage the visual feedback for tooltip hiding to match UI responsiveness or experience preferences.
+How to customize closing animation for Kendo UI tooltip? Adjust and customize the closing animation or transition effect for tooltip popups by selecting different visual styles such as fade out, slide away, zoom out, or other disappearance effects to control how tooltips vanish when dismissed, blurred, or closed; configure the exit animation behavior, set smooth or quick transitions, and manage the visual feedback for tooltip hiding to match UI responsiveness or experience preferences.
 </div>
 
 #### Example - setting the close animation effect
@@ -117,7 +117,7 @@ Defines the duration of the close animation.
 
 
 <div class="meta-api-description">
-Control and configure the length of the tooltip hide animation duration, adjust the timing for how fast or slow the tooltip dismisses, set the transition period for closing effects, customize the animation speed when the tooltip disappears, manage the delay or rapidity of tooltip closure, tune the fade-out or slide-away duration when hiding the tooltip, modify the closing animation length to enhance user experience, specify smoothness and speed of tooltip exit animations, control the speed of closing transitions for tooltips, and set how long the tooltip remains visible before fully closing during the animation phase.
+How to adjust the hide animation duration of Kendo UI tooltip? Control and configure the length of the tooltip hide animation duration, adjust the timing for how fast or slow the tooltip dismisses, set the transition period for closing effects, customize the animation speed when the tooltip disappears, manage the delay or rapidity of tooltip closure, tune the fade-out or slide-away duration when hiding the tooltip, modify the closing animation length to enhance user experience, specify smoothness and speed of tooltip exit animations, control the speed of closing transitions for tooltips, and set how long the tooltip remains visible before fully closing during the animation phase.
 </div>
 
 #### Example - setting the duration of the close animation
@@ -144,7 +144,7 @@ The animation that will be used when the Tooltip opens.
 
 
 <div class="meta-api-description">
-Customize the appearance and behavior of opening animations for tooltips by configuring animation types such as fade, slide, or other effects, adjusting timing parameters like duration and easing curves, setting how tooltips smoothly enter the view, enabling or disabling transition styles, and fine-tuning animation sequences to control the tooltip's reveal experience during hover, focus, or programmatic show events for enhanced UI feedback and visual engagement.
+How do I customize the opening animation of a Kendo UI tooltip? Customize the appearance and behavior of opening animations for tooltips by configuring animation types such as fade, slide, or other effects, adjusting timing parameters like duration and easing curves, setting how tooltips smoothly enter the view, enabling or disabling transition styles, and fine-tuning animation sequences to control the tooltip's reveal experience during hover, focus, or programmatic show events for enhanced UI feedback and visual engagement.
 </div>
 
 #### Example - setting the open animation
@@ -172,7 +172,7 @@ The effect that will be used for opening the Tooltip.
 
 
 <div class="meta-api-description">
-Customize and configure the animation effect used when a tooltip appears or opens, including setting entrance transitions like fade, slide, bounce, or other custom visual effects to control the tooltip’s opening behavior, enable smooth or dynamic animations, adjust how the tooltip transitions into view, and manage the appearance style during tooltip activation or display.
+How do I customize the animation effect when a Kendo UI tooltip opens? Customize and configure the animation effect used when a tooltip appears or opens, including setting entrance transitions like fade, slide, bounce, or other custom visual effects to control the tooltip’s opening behavior, enable smooth or dynamic animations, adjust how the tooltip transitions into view, and manage the appearance style during tooltip activation or display.
 </div>
 
 #### Example - setting the open animation effect
@@ -199,7 +199,7 @@ Defines the duration of the open animation.
 
 
 <div class="meta-api-description">
-Adjust the delay or speed at which a tooltip becomes visible by configuring the opening animation time or duration to customize how quickly the tooltip shows up after user interaction, enabling control over tooltip fade-in, transition timing, or animation speed to enhance responsiveness and improve user experience through precise timing of the tooltip’s appearance.
+How to set the animation duration for opening a Kendo UI tooltip? Adjust the delay or speed at which a tooltip becomes visible by configuring the opening animation time or duration to customize how quickly the tooltip shows up after user interaction, enabling control over tooltip fade-in, transition timing, or animation speed to enhance responsiveness and improve user experience through precise timing of the tooltip’s appearance.
 </div>
 
 #### Example - setting the duration of the open animation
@@ -228,7 +228,7 @@ The text or the function whose result will be shown within the Tooltip. By defau
 
 
 <div class="meta-api-description">
-Set or customize the tooltip display text by configuring static strings or dynamic callback functions that generate content at runtime, enabling rich, context-sensitive tooltips that can override default titles or attributes, support retrieving element data such as titles for flexible display, and allow embedding HTML or scripts while requiring sanitation of unsafe code; this feature supports use cases like dynamic label generation, conditional tooltip messages, interactive info panels, or replacing default browser tooltips with tailored content.
+How to customize the content of a Kendo UI tooltip? Set or customize the tooltip display text by configuring static strings or dynamic callback functions that generate content at runtime, enabling rich, context-sensitive tooltips that can override default titles or attributes, support retrieving element data such as titles for flexible display, and allow embedding HTML or scripts while requiring sanitation of unsafe code; this feature supports use cases like dynamic label generation, conditional tooltip messages, interactive info panels, or replacing default browser tooltips with tailored content.
 </div>
 
 #### Example - extracting the content from the target element content
@@ -272,7 +272,7 @@ Specifies a URL or a request option from which the Tooltip will load its content
 
 
 <div class="meta-api-description">
-Load or fetch external HTML content into a tooltip by specifying a URL or request configuration that retrieves remote data, enabling dynamic embedding or loading of web pages and resources inside tooltip elements; control how external pages are displayed, including automatic iframe creation for protocol-based URLs, with options to configure, set, or customize loading behavior, content sourcing, and integration of external content within tooltips for enhanced interactivity and context-aware UI components.
+How do I load external HTML content into a Kendo UI tooltip? Load or fetch external HTML content into a tooltip by specifying a URL or request configuration that retrieves remote data, enabling dynamic embedding or loading of web pages and resources inside tooltip elements; control how external pages are displayed, including automatic iframe creation for protocol-based URLs, with options to configure, set, or customize loading behavior, content sourcing, and integration of external content within tooltips for enhanced interactivity and context-aware UI components.
 </div>
 
 #### Example - loading content from a remote URL
@@ -299,7 +299,7 @@ Specifies if the Tooltip callout will be displayed.
 
 
 <div class="meta-api-description">
-Manage the display of the small pointer or arrow that visually links a tooltip to its target element by enabling or disabling the callout indicator; configure whether the tooltip shows a directional arrow, callout pointer, or connector triangle pointing to the reference element, controlling the presence or absence of this visual cue to improve user understanding or customize tooltip appearance.
+How do I display a callout indicator in Kendo UI tooltip? Manage the display of the small pointer or arrow that visually links a tooltip to its target element by enabling or disabling the callout indicator; configure whether the tooltip shows a directional arrow, callout pointer, or connector triangle pointing to the reference element, controlling the presence or absence of this visual cue to improve user understanding or customize tooltip appearance.
 </div>
 
 #### Example - hiding the callout of the Tooltip
@@ -324,7 +324,7 @@ Specifies a selector for the elements within the container which will display th
 
 
 <div class="meta-api-description">
-Configure or control which child elements within a container activate or show the tooltip by setting a selector or filter that delegates tooltip functionality only to matching descendants, enabling scoped tooltip display on specific nested elements without relying on the container itself. This approach supports binding tooltips selectively to targeted elements, fine-tuning tooltip triggering based on element selectors or filters while excluding elements by controlling the activation scope inside complex component structures. Use filtering or element targeting to manage tooltip visibility on particular children, enabling precise tooltip delegation and filtering within hierarchical DOM trees or nested components.
+How do I configure Kendo UI tooltip to only show on specific child elements? Configure or control which child elements within a container activate or show the tooltip by setting a selector or filter that delegates tooltip functionality only to matching descendants, enabling scoped tooltip display on specific nested elements without relying on the container itself. This approach supports binding tooltips selectively to targeted elements, fine-tuning tooltip triggering based on element selectors or filters while excluding elements by controlling the activation scope inside complex component structures. Use filtering or element targeting to manage tooltip visibility on particular children, enabling precise tooltip delegation and filtering within hierarchical DOM trees or nested components.
 </div>
 
 #### Example - showing a Tooltip only for strong elements in a text
@@ -348,7 +348,7 @@ Explicitly states whether a content `iframe` will be created.
 
 
 <div class="meta-api-description">
-Control the creation and inclusion of an isolated iframe within tooltips to enable or disable sandboxed browsing contexts for tooltip content, customize whether tooltip displays render inside separate iframe elements for isolation or embed content directly without an iframe, configure tooltip content encapsulation through iframes to improve security, styling separation, or interactive behavior, and set options to toggle iframe usage based on context needs or performance considerations when displaying dynamic, external, or complex tooltip content.
+How to enable sandboxed iframe in Kendo UI tooltip? Control the creation and inclusion of an isolated iframe within tooltips to enable or disable sandboxed browsing contexts for tooltip content, customize whether tooltip displays render inside separate iframe elements for isolation or embed content directly without an iframe, configure tooltip content encapsulation through iframes to improve security, styling separation, or interactive behavior, and set options to toggle iframe usage based on context needs or performance considerations when displaying dynamic, external, or complex tooltip content.
 </div>
 
 #### Example
@@ -367,7 +367,7 @@ The height (in pixels) of the Tooltip.
 
 
 <div class="meta-api-description">
-Control or configure the vertical size of a tooltip by setting its height in pixels, enabling precise adjustment of tooltip dimensions for better content fitting, overflow management, and layout constraints; specify a numeric pixel value to set the tooltip’s total vertical height or limit its size to ensure consistent appearance across different screen elements or UI components.
+How do I adjust the size of a Kendo UI tooltip? Control or configure the vertical size of a tooltip by setting its height in pixels, enabling precise adjustment of tooltip dimensions for better content fitting, overflow management, and layout constraints; specify a numeric pixel value to set the tooltip’s total vertical height or limit its size to ensure consistent appearance across different screen elements or UI components.
 </div>
 
 #### Example - setting the height of the Tooltip
@@ -390,7 +390,7 @@ The width (in pixels) of the Tooltip.
 
 
 <div class="meta-api-description">
-Control and configure the fixed pixel width or size of tooltip elements to enforce consistent tooltip dimensions, prevent automatic resizing, set or limit tooltip box width within the user interface, customize tooltip size for uniform layout, and standardize tooltip appearance by specifying exact width values to maintain design consistency across various screen elements and components.
+How do I set a fixed width for Kendo UI tooltips? Control and configure the fixed pixel width or size of tooltip elements to enforce consistent tooltip dimensions, prevent automatic resizing, set or limit tooltip box width within the user interface, customize tooltip size for uniform layout, and standardize tooltip appearance by specifying exact width values to maintain design consistency across various screen elements and components.
 </div>
 
 #### Example - setting the width of the Tooltip
@@ -421,7 +421,7 @@ The supported values are:
 
 
 <div class="meta-api-description">
-Adjust or configure where a tooltip appears in relation to the associated element, enabling placement above, below, left, right, or centered over the target. Control tooltip alignment, orientation, or positioning to improve UI clarity, visibility, or user interaction by specifying options like top, bottom, left, right, or center placement. Customize tooltip display location, anchor point, or relative positioning to suit layouts, avoid overlap, or enhance accessibility and user experience with flexible directional settings.
+How do I configure the position of a tooltip in Kendo UI for jQuery? Adjust or configure where a tooltip appears in relation to the associated element, enabling placement above, below, left, right, or centered over the target. Control tooltip alignment, orientation, or positioning to improve UI clarity, visibility, or user interaction by specifying options like top, bottom, left, right, or center placement. Customize tooltip display location, anchor point, or relative positioning to suit layouts, avoid overlap, or enhance accessibility and user experience with flexible directional settings.
 </div>
 
 #### Example - setting the position of the Tooltip
@@ -444,7 +444,7 @@ Specifies the delay (in milliseconds) before the Tooltip shows. This option is i
 
 
 <div class="meta-api-description">
-Configure the delay time in milliseconds before a tooltip is displayed after a user hovers or moves the mouse over an element, enabling control over how long to wait before showing the tooltip on hover or mouseenter events; this timing can be adjusted or disabled for instant display when triggering the tooltip via click or focus actions, allowing customization of tooltip appearance latency, hover delay, mouseover wait time, and interaction-based display timing.
+How do I adjust the delay time for Kendo UI tooltip to show after hovering over an element? Configure the delay time in milliseconds before a tooltip is displayed after a user hovers or moves the mouse over an element, enabling control over how long to wait before showing the tooltip on hover or mouseenter events; this timing can be adjusted or disabled for instant display when triggering the tooltip via click or focus actions, allowing customization of tooltip appearance latency, hover delay, mouseover wait time, and interaction-based display timing.
 </div>
 
 #### Example - setting the show delay
@@ -473,7 +473,7 @@ The supported values are:
 
 
 <div class="meta-api-description">
-Configure how and when a tooltip appears by setting the event that triggers its display, including options to show the tooltip on mouse hover, click interaction, or keyboard focus. Enable or control tooltip visibility based on user actions such as mouseenter, click events, or focus states, allowing customization of tooltip activation to improve accessibility, user interaction design, or specific UI behavior requirements. Adjust the trigger mechanism to match different input methods or interaction patterns, including pointer devices and keyboard navigation, to optimize tooltip responsiveness and user experience.
+How do I configure my Kendo UI tooltip to show on mouse hover? Configure how and when a tooltip appears by setting the event that triggers its display, including options to show the tooltip on mouse hover, click interaction, or keyboard focus. Enable or control tooltip visibility based on user actions such as mouseenter, click events, or focus states, allowing customization of tooltip activation to improve accessibility, user interaction design, or specific UI behavior requirements. Adjust the trigger mechanism to match different input methods or interaction patterns, including pointer devices and keyboard navigation, to optimize tooltip responsiveness and user experience.
 </div>
 
 #### Example - setting the event on which the Tooltip will be shown
@@ -510,7 +510,7 @@ Specifies the delay (in milliseconds) before the Tooltip is hidden.
 
 
 <div class="meta-api-description">
-Set or configure the duration in milliseconds for automatic hiding or dismissal of a tooltip, control how long the tooltip stays visible before disappearing, adjust the delay timer determining when the tooltip vanishes, enable timeout settings to automatically close the tooltip after a specified period, manage or customize the visibility timeout for tooltips to optimize user experience by specifying how long the tooltip remains on screen before hiding, control the lifespan or display interval of the tooltip pop-up, set the hide delay or timeout duration for tooltips that appear on hover or focus, configure automatic tooltip disappearance timing based on elapsed milliseconds, fine-tune the tooltip display duration for interactive UI elements, and control the period after which the tooltip will be hidden without user action.
+How do I set up a tooltip to automatically hide after 5 seconds in Kendo UI for jQuery? Set or configure the duration in milliseconds for automatic hiding or dismissal of a tooltip, control how long the tooltip stays visible before disappearing, adjust the delay timer determining when the tooltip vanishes, enable timeout settings to automatically close the tooltip after a specified period, manage or customize the visibility timeout for tooltips to optimize user experience by specifying how long the tooltip remains on screen before hiding, control the lifespan or display interval of the tooltip pop-up, set the hide delay or timeout duration for tooltips that appear on hover or focus, configure automatic tooltip disappearance timing based on elapsed milliseconds, fine-tune the tooltip display duration for interactive UI elements, and control the period after which the tooltip will be hidden without user action.
 </div>
 
 #### Example - setting the hide delay
@@ -533,7 +533,7 @@ Specifies the offset (in pixels) between the Tooltip and the anchor. If the `cal
 
 
 <div class="meta-api-description">
-Adjust spacing or distance between a tooltip and its target element by specifying pixel values to control how far the tooltip appears from the anchor point or callout arrow, enabling precise positioning for hover popups, info bubbles, label offsets, or contextual hints, with options to configure whether the gap is measured from the tooltip's content box or the callout pointer to fine-tune placement, prevent overlap, or customize visual alignment in user interfaces and interactive components.
+How do I adjust the spacing between my Kendo UI tooltip and its target element? Adjust spacing or distance between a tooltip and its target element by specifying pixel values to control how far the tooltip appears from the anchor point or callout arrow, enabling precise positioning for hover popups, info bubbles, label offsets, or contextual hints, with options to configure whether the gap is measured from the tooltip's content box or the callout pointer to fine-tune placement, prevent overlap, or customize visual alignment in user interfaces and interactive components.
 </div>
 
 #### Example - setting the Tooltip offset
@@ -558,7 +558,7 @@ Contains the Kendo UI [`Popup`](/api/javascript/ui/popup) instance which manages
 
 
 <div class="meta-api-description">
-Configure tooltip display control, including visibility toggling, dynamic placement, styling customization, and interactive show or hide behavior through the underlying popup handler. Manage tooltip positioning with precision, apply custom CSS or inline styles to the popup container or wrapper elements, and utilize methods such as open, close, and toggle to programmatically control when and where tooltip content appears. Enable developers to set attributes, adjust layout options, and dynamically manage tooltip rendering for enhanced user interaction and visual presentation.
+How can I control when my Kendo UI tooltip appears using JavaScript? Configure tooltip display control, including visibility toggling, dynamic placement, styling customization, and interactive show or hide behavior through the underlying popup handler. Manage tooltip positioning with precision, apply custom CSS or inline styles to the popup container or wrapper elements, and utilize methods such as open, close, and toggle to programmatically control when and where tooltip content appears. Enable developers to set attributes, adjust layout options, and dynamically manage tooltip rendering for enhanced user interaction and visual presentation.
 </div>
 
 #### Example
@@ -585,7 +585,7 @@ Shows the Tooltip for a specific target.
 
 
 <div class="meta-api-description">
-Programmatically trigger or enable the display of a tooltip for a specific element, selector, or jQuery object, allowing dynamic control to show tooltip popups based on custom events, user interactions, or scripted conditions. Configure or set tooltips to appear on demand without requiring hover or focus, controlling popup visibility, positioning, and content retrieval for any DOM target element or CSS selector through code. This method provides flexible, manual activation of tooltip overlays in applications needing precise timing or event-driven tooltip display functionality.
+How can I programmatically show a tooltip in Kendo UI for jQuery? Programmatically trigger or enable the display of a tooltip for a specific element, selector, or jQuery object, allowing dynamic control to show tooltip popups based on custom events, user interactions, or scripted conditions. Configure or set tooltips to appear on demand without requiring hover or focus, controlling popup visibility, positioning, and content retrieval for any DOM target element or CSS selector through code. This method provides flexible, manual activation of tooltip overlays in applications needing precise timing or event-driven tooltip display functionality.
 </div>
 
 #### Example - showing the Tooltip for the target element
@@ -613,7 +613,7 @@ Hides the Tooltip.
 
 
 <div class="meta-api-description">
-Control and manage the visibility of on-screen tooltips by programmatically dismissing or hiding them through code, allowing for dynamic closing of any currently displayed tooltip triggered by user actions or automated show commands, enabling developers to set, enable, or disable tooltip appearance, manage tooltip lifecycle events, or suppress visible tooltip popups on demand from scripts or event handlers to ensure flexible, code-driven interaction with floating contextual information elements.
+How to programmatically close an on-screen tooltip in Kendo UI for jQuery? Control and manage the visibility of on-screen tooltips by programmatically dismissing or hiding them through code, allowing for dynamic closing of any currently displayed tooltip triggered by user actions or automated show commands, enabling developers to set, enable, or disable tooltip appearance, manage tooltip lifecycle events, or suppress visible tooltip popups on demand from scripts or event handlers to ensure flexible, code-driven interaction with floating contextual information elements.
 </div>
 
 #### Example - manually closing the Tooltip
@@ -644,7 +644,7 @@ Refreshes the content of the Tooltip.
 
 
 <div class="meta-api-description">
-Update or re-render a visible tooltip dynamically when its target element’s data, content, or bindings change by invoking a method that forces the tooltip to refresh its displayed content, including recalculating templates, re-evaluating content functions, fetching updated data from remote or dynamic sources, and instantly applying any changes to the tooltip after initialization or at runtime.
+How do I update the content of a visible Kendo UI tooltip dynamically? Update or re-render a visible tooltip dynamically when its target element’s data, content, or bindings change by invoking a method that forces the tooltip to refresh its displayed content, including recalculating templates, re-evaluating content functions, fetching updated data from remote or dynamic sources, and instantly applying any changes to the tooltip after initialization or at runtime.
 </div>
 
 #### Example - forcing the refreshing of the Tooltip content
@@ -678,7 +678,7 @@ Gets the current target of the Tooltip.
 
 
 <div class="meta-api-description">
-Access or obtain the current element, node, or CSS selector where the tooltip is anchored or bound, enabling developers to identify, inspect, or dynamically fetch the attached target element for conditionally updating, handling events, or controlling which UI component triggers or displays the tooltip content at runtime. This method supports programmatic retrieval of the tooltip’s active reference element for interactive adjustments, event-driven checks, or debugging the tooltip's linkage in the DOM.
+How do I get the current target element of a Kendo UI tooltip? Access or obtain the current element, node, or CSS selector where the tooltip is anchored or bound, enabling developers to identify, inspect, or dynamically fetch the attached target element for conditionally updating, handling events, or controlling which UI component triggers or displays the tooltip content at runtime. This method supports programmatic retrieval of the tooltip’s active reference element for interactive adjustments, event-driven checks, or debugging the tooltip's linkage in the DOM.
 </div>
 
 #### Example - getting the current target of the tooltip
@@ -722,7 +722,7 @@ Fires when an AJAX request for the content completes.
 
 
 <div class="meta-api-description">
-Detect when dynamic or asynchronous content loading for a tooltip finishes, enabling responses to completed data retrieval such as updating the tooltip display, refreshing or replacing content, triggering callbacks, handling AJAX or fetch results, inspecting returned data, and executing follow-up actions after remote data is loaded and rendered in the tooltip interface.
+How do I know when dynamic content in a Kendo UI tooltip has finished loading? Detect when dynamic or asynchronous content loading for a tooltip finishes, enabling responses to completed data retrieval such as updating the tooltip display, refreshing or replacing content, triggering callbacks, handling AJAX or fetch results, inspecting returned data, and executing follow-up actions after remote data is loaded and rendered in the tooltip interface.
 </div>
 
 #### Example - subscribing to the contentLoad event during initialization
@@ -776,7 +776,7 @@ Fires when a Tooltip is shown.
 
 
 <div class="meta-api-description">
-Trigger custom code or execute functions when a tooltip appears on screen, listen for the tooltip becoming visible, handle tooltip show events, respond instantly when a tooltip is displayed, capture event details upon tooltip activation, update tooltip content dynamically on show, log or track tooltip visibility, initiate UI changes or animations when a tooltip is revealed, control behavior tied to tooltip appearance, detect and act on tooltip popup events in real time.
+How do I listen for a Kendo UI tooltip to appear on screen? Trigger custom code or execute functions when a tooltip appears on screen, listen for the tooltip becoming visible, handle tooltip show events, respond instantly when a tooltip is displayed, capture event details upon tooltip activation, update tooltip content dynamically on show, log or track tooltip visibility, initiate UI changes or animations when a tooltip is revealed, control behavior tied to tooltip appearance, detect and act on tooltip popup events in real time.
 </div>
 
 #### Example - subscribing to the show event during initialization
@@ -842,7 +842,7 @@ Fires when a Tooltip is hidden.
 
 
 <div class="meta-api-description">
-Detect and respond to tooltip closure by handling events triggered when the tooltip is hidden or dismissed, enabling execution of cleanup tasks, UI state updates, follow-up actions, or custom logic after the tooltip disappears. Capture and process event details related to tooltip hiding, listen for tooltip close events, monitor visibility changes, and manage tooltip lifecycle events to synchronize application behavior or perform resource cleanup after tooltip components are removed from view.
+How do I handle the event when a Kendo UI tooltip is hidden? Detect and respond to tooltip closure by handling events triggered when the tooltip is hidden or dismissed, enabling execution of cleanup tasks, UI state updates, follow-up actions, or custom logic after the tooltip disappears. Capture and process event details related to tooltip hiding, listen for tooltip close events, monitor visibility changes, and manage tooltip lifecycle events to synchronize application behavior or perform resource cleanup after tooltip components are removed from view.
 </div>
 
 #### Example - subscribing to the hide event during initialization
@@ -886,7 +886,7 @@ Fires before an AJAX request starts. Note that this event is triggered only when
 
 
 <div class="meta-api-description">
-Capture and handle outgoing AJAX calls triggered right before dispatch, enabling interception of request details such as URL, headers, payload, and timeout parameters to modify or inspect them dynamically. Useful for customizing AJAX request options, injecting additional data, altering headers, toggling timeouts, or integrating pre-request logic specifically for tooltip-generated network calls made via AJAX rather than iframe. Triggered when an AJAX request initiates, this event allows developers to monitor, adjust, or cancel requests programmatically prior to transmission, supporting scenarios like request debugging, authentication token insertion, or request throttling in tooltip interactions.
+How can I intercept and modify tooltip-generated AJAX requests before they're sent? Capture and handle outgoing AJAX calls triggered right before dispatch, enabling interception of request details such as URL, headers, payload, and timeout parameters to modify or inspect them dynamically. Useful for customizing AJAX request options, injecting additional data, altering headers, toggling timeouts, or integrating pre-request logic specifically for tooltip-generated network calls made via AJAX rather than iframe. Triggered when an AJAX request initiates, this event allows developers to monitor, adjust, or cancel requests programmatically prior to transmission, supporting scenarios like request debugging, authentication token insertion, or request throttling in tooltip interactions.
 </div>
 
 #### Example - subscribing to the requestStart event during initialization
@@ -952,7 +952,7 @@ Fires when an AJAX request for content fails.
 
 
 <div class="meta-api-description">
-Handle tooltip content load failures by detecting error events triggered when AJAX requests for tooltip content fail, enabling you to catch load errors, implement fallback messages, log error information, execute retry mechanisms, or perform custom error handling by accessing event details about the failed request. This supports managing tooltip content errors, troubleshooting AJAX load problems, reacting to fetch failures, customizing user feedback on errors, and controlling tooltip display under network or content retrieval issues.
+How to handle errors when loading tooltip content with AJAX requests in Kendo UI for jQuery? Handle tooltip content load failures by detecting error events triggered when AJAX requests for tooltip content fail, enabling you to catch load errors, implement fallback messages, log error information, execute retry mechanisms, or perform custom error handling by accessing event details about the failed request. This supports managing tooltip content errors, troubleshooting AJAX load problems, reacting to fetch failures, customizing user feedback on errors, and controlling tooltip display under network or content retrieval issues.
 </div>
 
 #### Example - subscribing to the error event during initialization

@@ -21,7 +21,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
 
 <div class="meta-api-description">
-Control and customize how alternating rows appear in hierarchical or tree-structured data grids by setting custom row templates that override default table row rendering for every other data item; define unique HTML row structures using <tr> elements with appropriate data binding attributes like unique identifiers, apply alternate styling classes such as "k-alt" for zebra striping effects, and configure row appearance for better visual distinction in nested tables or TreeList components with alternating row designs, ensuring consistent mapping between data items and their respective UI rows through the required data attributes and enabling tailored display of different types of data within hierarchical lists.
+How do I customize alternating row templates in Kendo UI for jQuery TreeList? Control and customize how alternating rows appear in hierarchical or tree-structured data grids by setting custom row templates that override default table row rendering for every other data item; define unique HTML row structures using <tr> elements with appropriate data binding attributes like unique identifiers, apply alternate styling classes such as "k-alt" for zebra striping effects, and configure row appearance for better visual distinction in nested tables or TreeList components with alternating row designs, ensuring consistent mapping between data items and their respective UI rows through the required data attributes and enabling tailored display of different types of data within hierarchical lists.
 </div>
 
 #### Example - specify alternating row template as a function
@@ -89,7 +89,7 @@ If set to `false`, the TreeList will not bind to the specified DataSource during
 
 
 <div class="meta-api-description">
-Configure initial data fetch behavior, prevent automatic or premature loading, delay binding of hierarchical data grids until explicit triggers like data source changes occur, control when tree or list components connect to their data providers, disable immediate server requests on initialization, manage synchronization between multiple UI elements sharing one remote dataset, enable deferred or conditional data binding strategies, optimize network usage by postponing data retrieval, set or toggle automatic data connection at startup, and control lazy loading or manual refresh actions in tree-structured data displays.
+How to prevent automatic data binding in Kendo UI TreeList on initial load? Configure initial data fetch behavior, prevent automatic or premature loading, delay binding of hierarchical data grids until explicit triggers like data source changes occur, control when tree or list components connect to their data providers, disable immediate server requests on initialization, manage synchronization between multiple UI elements sharing one remote dataset, enable deferred or conditional data binding strategies, optimize network usage by postponing data retrieval, set or toggle automatic data connection at startup, and control lazy loading or manual refresh actions in tree-structured data displays.
 </div>
 
 #### Example - disabling automatic binding
@@ -136,7 +136,7 @@ The configuration of the TreeList columns whcih represents an array of JavaScrip
 
 
 <div class="meta-api-description">
-Configure, customize, and control the display of columns within a hierarchical data grid by specifying column order, binding fields, and detailed settings using an array of objects or field names; manage which data fields appear as columns, how they are arranged, and their initialization parameters to tailor the tree-structured list’s columns for sorting, filtering, or visibility, enabling flexible column definitions through fully configured objects or simple field identifiers to match data schema and UI needs in dynamic or static configurations.
+How do I configure the columns in my Kendo UI TreeList? Configure, customize, and control the display of columns within a hierarchical data grid by specifying column order, binding fields, and detailed settings using an array of objects or field names; manage which data fields appear as columns, how they are arranged, and their initialization parameters to tailor the tree-structured list’s columns for sorting, filtering, or visibility, enabling flexible column definitions through fully configured objects or simple field identifiers to match data schema and UI needs in dynamic or static configurations.
 </div>
 
 #### Example - specifyinging the columns of the TreeList as an array of strings
@@ -179,7 +179,7 @@ The HTML attributes of the table cell (`<td>`) that is rendered for the column.
 
 
 <div class="meta-api-description">
-Set and customize HTML attributes on table cells within grid columns to control cell styling, add CSS classes, data attributes, ARIA roles, inline styles, or other custom properties. Enable cell-level customization by configuring cell attributes dynamically, including handling reserved JavaScript keywords like "class" by quoting attribute names. Adjust and apply additional markup options for individual grid column cells to enhance accessibility, styling, or data-binding by specifying attributes on the column’s rendered <td> elements in a tree-structured list or grid view.
+How to add custom CSS classes to individual table cells in a Kendo UI TreeList column? Set and customize HTML attributes on table cells within grid columns to control cell styling, add CSS classes, data attributes, ARIA roles, inline styles, or other custom properties. Enable cell-level customization by configuring cell attributes dynamically, including handling reserved JavaScript keywords like "class" by quoting attribute names. Adjust and apply additional markup options for individual grid column cells to enhance accessibility, styling, or data-binding by specifying attributes on the column’s rendered <td> elements in a tree-structured list or grid view.
 </div>
 
 #### Example - specifyinging the column HTML attributes
@@ -218,7 +218,7 @@ The columns which will be rendered as child columns under this group column head
 
 
 <div class="meta-api-description">
-Configure nested or child columns within grouped headers in hierarchical data grids by defining a nested columns array inside a column group setup. Enable multi-level column grouping with child columns arranged under parent group headers, controlling the structure and appearance of grouped sections in tree or hierarchical grid views. Set up non-data-bound sub-columns that support basic settings like titles and locking behavior, allowing structured, grouped columns in tree-based lists or grids during initialization without dynamic data binding. Achieve organized column grouping, control group layout, and manage locked or titled child columns beneath higher-level column groups for better visual hierarchy and grouping in complex grid or tree list UIs.
+How to configure child columns in a TreeList grouped header? Configure nested or child columns within grouped headers in hierarchical data grids by defining a nested columns array inside a column group setup. Enable multi-level column grouping with child columns arranged under parent group headers, controlling the structure and appearance of grouped sections in tree or hierarchical grid views. Set up non-data-bound sub-columns that support basic settings like titles and locking behavior, allowing structured, grouped columns in tree-based lists or grids during initialization without dynamic data binding. Achieve organized column grouping, control group layout, and manage locked or titled child columns beneath higher-level column groups for better visual hierarchy and grouping in complex grid or tree list UIs.
 </div>
 
 #### Example - setting the column group column for displaying multicolumn headers
@@ -266,7 +266,7 @@ Custom commands are supported by specifying the [`click`](/api/javascript/ui/tre
 
 
 <div class="meta-api-description">
-Control and customize action buttons within TreeList columns to perform tasks like editing rows, adding child elements, deleting items, or triggering personalized operations through click event handlers. Easily enable built-in commands such as switching rows to inline or popup edit modes, creating child records beneath parent rows, or removing data entries, while supporting custom command definitions by assigning unique command names and custom click logic. Configure action columns to manage row-level editing and hierarchical data manipulation, integrate CRUD operations seamlessly, set up interactive buttons for editing or data changes, and tailor command behavior in editable trees to fit various data interaction and UI scenarios. Handle command visibility, behavior customization, and dynamic row modifications through flexible command column settings that respond to editing states and data source configurations.
+How to customize command buttons in a TreeList column? Control and customize action buttons within TreeList columns to perform tasks like editing rows, adding child elements, deleting items, or triggering personalized operations through click event handlers. Easily enable built-in commands such as switching rows to inline or popup edit modes, creating child records beneath parent rows, or removing data entries, while supporting custom command definitions by assigning unique command names and custom click logic. Configure action columns to manage row-level editing and hierarchical data manipulation, integrate CRUD operations seamlessly, set up interactive buttons for editing or data changes, and tailor command behavior in editable trees to fit various data interaction and UI scenarios. Handle command visibility, behavior customization, and dynamic row modifications through flexible command column settings that respond to editing states and data source configurations.
 </div>
 
 #### Example - setting the command as an array of strings
@@ -357,7 +357,7 @@ The CSS class that is applied to the command button.
 
 
 <div class="meta-api-description">
-Apply custom CSS classes, styles, or icon fonts to action buttons within TreeList columns to customize appearance, control button layout, enable targeting with CSS selectors, configure button styling, set class names for command elements, and adjust visual design of interactive column buttons.
+How do I customize the appearance of action buttons in a Kendo UI TreeList column using CSS classes? Apply custom CSS classes, styles, or icon fonts to action buttons within TreeList columns to customize appearance, control button layout, enable targeting with CSS selectors, configure button styling, set class names for command elements, and adjust visual design of interactive column buttons.
 </div>
 
 #### Example - setting the CSS class of the command
@@ -395,7 +395,7 @@ Specifies the icon's name of the command button.
 
 
 <div class="meta-api-description">
-Customize, specify, or set the graphic or symbol shown on command buttons within hierarchical or tree-structured data grids, enabling control over button visuals by defining icon names, glyphs, or CSS-based images. This includes configuring command button appearances, changing icons dynamically or statically, binding icon sources to data or expressions, and modifying the visual indicators used for commands like edit, delete, or custom actions within tree list columns. Adjust button styling and icon representation to enhance user interface clarity and functionality in tree or nested list views.
+How do I customize the icons for command buttons in a Kendo UI TreeList column? Customize, specify, or set the graphic or symbol shown on command buttons within hierarchical or tree-structured data grids, enabling control over button visuals by defining icon names, glyphs, or CSS-based images. This includes configuring command button appearances, changing icons dynamically or statically, binding icon sources to data or expressions, and modifying the visual indicators used for commands like edit, delete, or custom actions within tree list columns. Adjust button styling and icon representation to enhance user interface clarity and functionality in tree or nested list views.
 </div>
 
 #### Example - setting the CSS class of the command icon
@@ -428,7 +428,7 @@ The CSS class that is applied to the icon span of the command button.
 
 
 <div class="meta-api-description">
-Customize the icon appearance in command buttons within hierarchical data grids by assigning CSS classes to control button icons, enabling the use of custom visuals, font-based icons, unique styling, or thematic adjustments for command column icons; allows setting or adjusting the styling, class names, or icon graphics on command buttons in tree-structured lists, supporting flexible UI theming, icon overrides, and visual customization of actionable items in tree or expandable data views.
+How can I customize the icon appearance in command buttons within my Kendo UI TreeList? Customize the icon appearance in command buttons within hierarchical data grids by assigning CSS classes to control button icons, enabling the use of custom visuals, font-based icons, unique styling, or thematic adjustments for command column icons; allows setting or adjusting the styling, class names, or icon graphics on command buttons in tree-structured lists, supporting flexible UI theming, icon overrides, and visual customization of actionable items in tree or expandable data views.
 </div>
 
 #### Example - setting the CSS class of the command icon
@@ -461,7 +461,7 @@ The JavaScript function that is executed when the user clicks the command button
 
 
 <div class="meta-api-description">
-Manage user interactions with command buttons in hierarchical or tree-structured lists by defining custom JavaScript functions that execute upon button clicks, enabling developers to respond to click events with access to event data and control event flow. This includes configuring event handlers that receive event objects, allowing prevention of default actions or stopping propagation, while providing contextual access to the component instance for manipulating tree list methods, properties, or triggering dynamic behaviors based on user command interactions within the tree structure or nested data presentations.
+How do I handle click events on command buttons in a Kendo UI TreeList? Manage user interactions with command buttons in hierarchical or tree-structured lists by defining custom JavaScript functions that execute upon button clicks, enabling developers to respond to click events with access to event data and control event flow. This includes configuring event handlers that receive event objects, allowing prevention of default actions or stopping propagation, while providing contextual access to the component instance for manipulating tree list methods, properties, or triggering dynamic behaviors based on user command interactions within the tree structure or nested data presentations.
 </div>
 
 #### Example - handling the click event of the custom command button
@@ -500,7 +500,7 @@ The name of the command. Commands can be built-in ("edit", "createChild" and "de
 
 
 <div class="meta-api-description">
-Control and configure the action identifier for row commands within hierarchical grid structures, enabling built-in operations like editing, adding child items, or deleting rows, as well as custom command strings for triggering specific behaviors; use this to set or customize command triggers, associate button actions with row commands, define command attributes for event handling, specify command types for data manipulation, and implement custom row-level interactions by assigning unique command names or identifiers.
+How do I customize the command identifier for row operations in a Kendo UI TreeList? Control and configure the action identifier for row commands within hierarchical grid structures, enabling built-in operations like editing, adding child items, or deleting rows, as well as custom command strings for triggering specific behaviors; use this to set or customize command triggers, associate button actions with row commands, define command attributes for event handling, specify command types for data manipulation, and implement custom row-level interactions by assigning unique command names or identifiers.
 </div>
 
 #### Example - setting the command name
@@ -532,7 +532,7 @@ The text that is displayed by the command button. If not set, the [`name`](/api/
 
 
 <div class="meta-api-description">
-Configure or customize the label text displayed on command buttons within a hierarchical data grid or tree list, controlling the visible button captions or titles in action columns, including options to set custom button names, override default labels, show icon-only buttons with no text by using empty strings, and manage how command buttons are rendered in tree structure tables, enabling precise control over button appearances, captions, and user interface elements for commands embedded in column definitions.
+How to customize command button labels in a Kendo UI TreeList? Configure or customize the label text displayed on command buttons within a hierarchical data grid or tree list, controlling the visible button captions or titles in action columns, including options to set custom button names, override default labels, show icon-only buttons with no text by using empty strings, and manage how command buttons are rendered in tree structure tables, enabling precise control over button appearances, captions, and user interface elements for commands embedded in column definitions.
 </div>
 
 #### Example - customizing the text of the command
@@ -570,7 +570,7 @@ If set to `true` a draghandle will be rendered and the user could reorder the ro
 
 
 <div class="meta-api-description">
-Control whether rows can be reordered by dragging a handle within the column, enabling interactive drag-and-drop for rearranging rows visually; configure drag handles to allow client-side only row sorting, reorder items directly in the interface through mouse or touch drag gestures without affecting server data order, enable or disable drag functionality for columns to customize user interaction with tree or list data, and set up intuitive row dragging for reordering within hierarchical or tabular views.
+How can I enable drag-and-drop row reordering in my Kendo UI TreeList? Control whether rows can be reordered by dragging a handle within the column, enabling interactive drag-and-drop for rearranging rows visually; configure drag handles to allow client-side only row sorting, reorder items directly in the interface through mouse or touch drag gestures without affecting server data order, enable or disable drag functionality for columns to customize user interaction with tree or list data, and set up intuitive row dragging for reordering within hierarchical or tabular views.
 </div>
 
 #### Example
@@ -621,7 +621,7 @@ The JavaScript function that is executed when the cell or row is about to be ope
 
 
 <div class="meta-api-description">
-Control whether individual cells or entire rows in a grid or tree list can be edited based on dynamic conditions by configuring a function that runs before editing starts, allowing enabling or disabling inline editing per column using custom logic, expressions, or rules; this makes it possible to selectively set edit permissions, toggle cell edits, manage editable states, and customize when editors appear depending on row data, user roles, or application state, supporting granular interactive behavior for data entry and modification within tabular components.
+How to enable editing in specific cells of Kendo UI TreeList based on custom logic? Control whether individual cells or entire rows in a grid or tree list can be edited based on dynamic conditions by configuring a function that runs before editing starts, allowing enabling or disabling inline editing per column using custom logic, expressions, or rules; this makes it possible to selectively set edit permissions, toggle cell edits, manage editable states, and customize when editors appear depending on row data, user roles, or application state, supporting granular interactive behavior for data entry and modification within tabular components.
 </div>
 
 #### Example - conditionally editing a cell
@@ -659,7 +659,7 @@ When used as `String`, defines the editor widget type. For further info check th
 
 
 <div class="meta-api-description">
-Configure and customize the editing interface for individual columns within hierarchical or tree-structured grid components by defining custom input controls, editors, or widgets that render inside specified containers, enabling precise control over in-cell editing experiences. This includes creating editors tied to specific data fields with matching name attributes, implementing validation manually by adding necessary validation attributes or integrating with validation frameworks, and adjusting validation error tooltips for consistent display when using custom widgets. Supports specifying editor types as strings to select predefined input widgets, allowing developers to set, enable, or control editing UIs tailored to complex data models, field validation, keyboard interaction, and user input scenarios in hierarchical data grids.
+How do I customize the editing interface for specific columns in a Kendo UI TreeList? Configure and customize the editing interface for individual columns within hierarchical or tree-structured grid components by defining custom input controls, editors, or widgets that render inside specified containers, enabling precise control over in-cell editing experiences. This includes creating editors tied to specific data fields with matching name attributes, implementing validation manually by adding necessary validation attributes or integrating with validation frameworks, and adjusting validation error tooltips for consistent display when using custom widgets. Supports specifying editor types as strings to select predefined input widgets, allowing developers to set, enable, or control editing UIs tailored to complex data models, field validation, keyboard interaction, and user input scenarios in hierarchical data grids.
 </div>
 
 #### Parameters
@@ -808,7 +808,7 @@ Defines the widget configuration when one is initialized as editor for the colum
 
 
 <div class="meta-api-description">
-Set or customize the input controls and editing behavior for individual columns within hierarchical data grids, configuring how editors like text boxes, dropdowns, or custom components appear and function when modifying cell values. Enable control over editor settings such as validation rules, formatting options, placeholder text, and interactive features to tailor editing experiences at the column level in tree-structured tables. Adjust or fine-tune the properties of inline editors, including component-specific parameters or dynamic editor configurations, ensuring seamless data entry, form integration, and user-friendly editing workflows within nested or expandable grid views.
+How to customize editor settings for individual columns in a Kendo UI TreeList? Set or customize the input controls and editing behavior for individual columns within hierarchical data grids, configuring how editors like text boxes, dropdowns, or custom components appear and function when modifying cell values. Enable control over editor settings such as validation rules, formatting options, placeholder text, and interactive features to tailor editing experiences at the column level in tree-structured tables. Adjust or fine-tune the properties of inline editors, including component-specific parameters or dynamic editor configurations, ensuring seamless data entry, form integration, and user-friendly editing workflows within nested or expandable grid views.
 </div>
 
 #### Example
@@ -855,7 +855,7 @@ If set to `true`, the column value will be HTML-encoded before it is displayed. 
 
 
 <div class="meta-api-description">
-Configure the rendering of TreeList column content to either sanitize by encoding HTML entities or show raw HTML markup, controlling whether column values are escaped to prevent HTML injection attacks or displayed with full formatting and embedded tags. Enable or disable automatic HTML encoding to secure data display or allow inclusion of rich content, customize column output by toggling escaping of special characters versus rendering literal HTML, and manage how displayed values handle HTML strings for safe or enhanced visualization, supporting scenarios requiring either protection against malicious scripts or direct insertion of markup within table columns.
+How do I prevent HTML injection attacks in my Kendo UI TreeList columns? Configure the rendering of TreeList column content to either sanitize by encoding HTML entities or show raw HTML markup, controlling whether column values are escaped to prevent HTML injection attacks or displayed with full formatting and embedded tags. Enable or disable automatic HTML encoding to secure data display or allow inclusion of rich content, customize column output by toggling escaping of special characters versus rendering literal HTML, and manage how displayed values handle HTML strings for safe or enhanced visualization, supporting scenarios requiring either protection against malicious scripts or direct insertion of markup within table columns.
 </div>
 
 #### Example - preventing HTML encoding
@@ -884,7 +884,7 @@ If set to `true`, the column will show the icons that are used for expanding and
 
 
 <div class="meta-api-description">
-Configure the visibility and behavior of expand and collapse icons within a TreeList column to enable toggling child rows, managing hierarchical or nested data navigation, controlling row expansion states, and visually organizing parent-child relationships in tabular views. This setting governs whether a column supports interactive expand/collapse controls for displaying or hiding nested sub-rows, facilitating hierarchical data browsing, customizing expandable columns, and disabling command functionality in columns used to expand tree nodes.
+How do I control expandable columns in Kendo UI for jQuery TreeList? Configure the visibility and behavior of expand and collapse icons within a TreeList column to enable toggling child rows, managing hierarchical or nested data navigation, controlling row expansion states, and visually organizing parent-child relationships in tabular views. This setting governs whether a column supports interactive expand/collapse controls for displaying or hiding nested sub-rows, facilitating hierarchical data browsing, customizing expandable columns, and disabling command functionality in columns used to expand tree nodes.
 </div>
 
 #### Example - making the second column expandable
@@ -913,7 +913,7 @@ The field to which the column is bound. The value of this field is displayed by 
 
 
 <div class="meta-api-description">
-Set or configure the data source attribute that a hierarchical grid column displays, mapping the column to a specific data model property or key, often referred to as the field or data field, enabling binding to object properties, JSON keys, or record attributes; control which underlying data property populates each column cell, specifying valid property names or identifiers composed of letters, numbers, underscores, or dollar signs, and ensuring proper linkage between tree or nested data structures and their visual column representation for filtering, sorting, or display purposes.
+How do I map a Kendo UI TreeList column to a specific data model property using the `field` property? Set or configure the data source attribute that a hierarchical grid column displays, mapping the column to a specific data model property or key, often referred to as the field or data field, enabling binding to object properties, JSON keys, or record attributes; control which underlying data property populates each column cell, specifying valid property names or identifiers composed of letters, numbers, underscores, or dollar signs, and ensuring proper linkage between tree or nested data structures and their visual column representation for filtering, sorting, or display purposes.
 </div>
 
 #### Example - specifyinging the column field
@@ -941,7 +941,7 @@ for all columns when filtering is enabled through the [`filterable`](/api/javasc
 
 
 <div class="meta-api-description">
-Enable or disable filtering options on individual columns in a hierarchical data grid, configure or customize per-column filter menus, control visibility of filter dropdowns for each column, manage filter settings and UI elements for column-specific search or data refinement, specify custom filter configurations or presets for columns, toggle filtering capabilities on a per-column basis, set filters to appear or be hidden in tree-structured lists, adjust filter menu behavior and interface for granular data filtering, fine-tune column filter controls for tailored data queries, and customize how users can apply filters to columns within nested or grouped data presentations.
+How do I enable filtering on specific columns in a Kendo UI TreeList widget? Enable or disable filtering options on individual columns in a hierarchical data grid, configure or customize per-column filter menus, control visibility of filter dropdowns for each column, manage filter settings and UI elements for column-specific search or data refinement, specify custom filter configurations or presets for columns, toggle filtering capabilities on a per-column basis, set filters to appear or be hidden in tree-structured lists, adjust filter menu behavior and interface for granular data filtering, fine-tune column filter controls for tailored data queries, and customize how users can apply filters to columns within nested or grouped data presentations.
 </div>
 
 #### Example - disabling filtering
@@ -969,7 +969,7 @@ Can be set to a JavaScript object which represents the filter cell configuration
 
 
 <div class="meta-api-description">
-Control and customize individual column filter cells in a hierarchical grid or tree list when applying row-based filtering, enabling configuration of filter input types, custom templates, filter operators, and header cell behavior through a JavaScript object. Adjust or set filter UI components per column, tailor filter conditions, define dropdowns or text inputs for filtering, and manage filter presentation to refine filtering experience column-wise in nested data structures or tree grids when filtering is applied at the row level.
+How do I customize filter cells in a TreeList when applying row-based filtering? Control and customize individual column filter cells in a hierarchical grid or tree list when applying row-based filtering, enabling configuration of filter input types, custom templates, filter operators, and header cell behavior through a JavaScript object. Adjust or set filter UI components per column, tailor filter conditions, define dropdowns or text inputs for filtering, and manage filter presentation to refine filtering experience column-wise in nested data structures or tree grids when filtering is applied at the row level.
 </div>
 
 #### Example - cell filtering options
@@ -1011,7 +1011,7 @@ If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascr
 
 
 <div class="meta-api-description">
-Configure or customize the autocomplete data source used in a tree list column’s string filter by setting a specific data collection, array, or existing data source instance to control which items appear during filtering; set up independent or separate data sources for filter input suggestions to avoid conflicts with the main data collection, bind filtering UI elements to custom datasets or remote data sources, and enable precise control over autocomplete options in column filters by linking them to different objects, arrays, or preconfigured data source instances.
+How do I configure the data source for filtering in a TreeList column? Configure or customize the autocomplete data source used in a tree list column’s string filter by setting a specific data collection, array, or existing data source instance to control which items appear during filtering; set up independent or separate data sources for filter input suggestions to avoid conflicts with the main data collection, bind filtering UI elements to custom datasets or remote data sources, and enable precise control over autocomplete options in column filters by linking them to different objects, arrays, or preconfigured data source instances.
 </div>
 
 #### Example - custom cell filter autocomplete dataSource
@@ -1053,7 +1053,7 @@ Specifies the name of the field which will provide the text representation for t
 
 
 <div class="meta-api-description">
-Configure which field supplies the suggestion text in AutoComplete dropdowns within TreeList filter cells, especially when filtering string-type columns using a custom data source; control the displayed filter suggestions by setting the text field to customize autocomplete behavior, override the default bound column field for filter inputs, enable fine-tuned filtering interfaces by specifying the data property that populates filter cell autocomplete lists, and adjust which data attribute appears in the suggestions to improve user search accuracy within TreeList filtering scenarios.
+How do I customize the autocomplete suggestions in Kendo UI TreeList filter cells? Configure which field supplies the suggestion text in AutoComplete dropdowns within TreeList filter cells, especially when filtering string-type columns using a custom data source; control the displayed filter suggestions by setting the text field to customize autocomplete behavior, override the default bound column field for filter inputs, enable fine-tuned filtering interfaces by specifying the data property that populates filter cell autocomplete lists, and adjust which data attribute appears in the suggestions to improve user search accuracy within TreeList filtering scenarios.
 </div>
 
 #### Example - Using custom dataSource and providing dataTextField option
@@ -1095,7 +1095,7 @@ Specifies the delay of the AutoComplete widget which will provide the suggest fu
 
 
 <div class="meta-api-description">
-Set or configure the debounce time delay in milliseconds for how long the system waits after typing input before showing autocomplete suggestions in filter cells of a tree list column, controlling when and how quickly the filter dropdown or suggestions appear during string-based filtering, managing the responsiveness and timing of autocomplete or suggestion popups to optimize user experience during column filtering, adjusting or tuning the wait interval before filter options or search suggestions are triggered following user input in filter fields.
+How do I configure the delay for filter dropdown suggestions in a Kendo UI TreeList column? Set or configure the debounce time delay in milliseconds for how long the system waits after typing input before showing autocomplete suggestions in filter cells of a tree list column, controlling when and how quickly the filter dropdown or suggestions appear during string-based filtering, managing the responsiveness and timing of autocomplete or suggestion popups to optimize user experience during column filtering, adjusting or tuning the wait interval before filter options or search suggestions are triggered following user input in filter fields.
 </div>
 
 #### Example - Specifying delay option for the AutoComplete widget used to make suggestions while filtering.
@@ -1137,7 +1137,7 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 
 <div class="meta-api-description">
-Control and configure the width or size of filter input fields within tree-list column headers, setting explicit pixel values or CSS widths to align filter boxes with their respective columns before initialization or widget transformation, enabling precise customization of filter cell input dimensions for consistent layout and responsive design in hierarchical data grids, tables, or tree structures.
+How to set input width for filterable cells in TreeList column headers? Control and configure the width or size of filter input fields within tree-list column headers, setting explicit pixel values or CSS widths to align filter boxes with their respective columns before initialization or widget transformation, enabling precise customization of filter cell input dimensions for consistent layout and responsive design in hierarchical data grids, tables, or tree structures.
 </div>
 
 #### Example - Specifying inputWidth option for the filter cell of a column
@@ -1175,7 +1175,7 @@ Specifies the AutoComplete `filter` option. The possible values are the same as 
 
 
 <div class="meta-api-description">
-Configure the filtering behavior for autocomplete suggestions within tree list column filter cells by specifying how input matches options, including options to start with, end with, or contain specific text. Enable case-insensitive searches by default with "contains" or customize filtering to be case-sensitive or use alternative matching logic through custom filter functions. Adjust suggestion filtering independently of overall column filtering operators to control autocomplete results, support flexible search patterns, partial matches, substring searches, prefix matching, suffix matching, and tailor user input matching and filtering experience inside filter dropdowns or cells.
+How do I configure the filtering behavior for autocomplete suggestions in a TreeList column filter cell? Configure the filtering behavior for autocomplete suggestions within tree list column filter cells by specifying how input matches options, including options to start with, end with, or contain specific text. Enable case-insensitive searches by default with "contains" or customize filtering to be case-sensitive or use alternative matching logic through custom filter functions. Adjust suggestion filtering independently of overall column filtering operators to control autocomplete results, support flexible search patterns, partial matches, substring searches, prefix matching, suffix matching, and tailor user input matching and filtering experience inside filter dropdowns or cells.
 </div>
 
 #### Example - Specifying suggestionOperator option for the filter cell of a column
@@ -1210,7 +1210,7 @@ Specifies the minLength option of the AutoComplete widget when column is of type
 
 
 <div class="meta-api-description">
-Control the minimum number of characters a user must type in a filter input to activate or display autocomplete suggestions, set thresholds to delay or optimize filtering behavior on string columns, configure when type-ahead or dropdown suggestions appear during filtering to reduce unnecessary search queries or API calls, set a character count limit before filter options appear, manage filter input responsiveness and autocomplete activation for text-based columns, adjust the minimum input length that triggers suggestion lists in filtering interfaces, define how many characters are required before filter autocomplete starts providing matches, optimize filtering performance by limiting early or premature search triggers, enable granular control over filtering suggestion delays and lookups in list or tree table components.
+How do I set the minimum number of characters required to trigger filter suggestions in a Kendo UI TreeList column? Control the minimum number of characters a user must type in a filter input to activate or display autocomplete suggestions, set thresholds to delay or optimize filtering behavior on string columns, configure when type-ahead or dropdown suggestions appear during filtering to reduce unnecessary search queries or API calls, set a character count limit before filter options appear, manage filter input responsiveness and autocomplete activation for text-based columns, adjust the minimum input length that triggers suggestion lists in filtering interfaces, define how many characters are required before filter autocomplete starts providing matches, optimize filtering performance by limiting early or premature search triggers, enable granular control over filtering suggestion delays and lookups in list or tree table components.
 </div>
 
 #### Example - Specifying minLength of the AutoComplete widget when using filter cell.
@@ -1245,7 +1245,7 @@ When set to false the TreeList will not render the cell filtering widget for tha
 
 
 <div class="meta-api-description">
-Control visibility and activation of individual column cell filters within hierarchical data grids by enabling or disabling per-cell filtering inputs, allowing configuration to show or hide filter widgets inside specific columns, manage interactive filtering controls on a per-column basis in tree-structured lists, customize or turn off inline cell filter editors to simplify or restrict user filtering options at the column cell level, configure fine-grained filtering behaviors to prevent rendering of cell filter inputs within columns, adjust interface elements to enable, disable, or hide cell-based filter widgets in nested data views, manage per-column filtering capabilities for cell-level interaction in tree list structures, set filters at the cell granularity to be active or inactive depending on UI requirements or filtering needs.
+How to enable filtering on individual cells in Kendo UI TreeList column? Control visibility and activation of individual column cell filters within hierarchical data grids by enabling or disabling per-cell filtering inputs, allowing configuration to show or hide filter widgets inside specific columns, manage interactive filtering controls on a per-column basis in tree-structured lists, customize or turn off inline cell filter editors to simplify or restrict user filtering options at the column cell level, configure fine-grained filtering behaviors to prevent rendering of cell filter inputs within columns, adjust interface elements to enable, disable, or hide cell-based filter widgets in nested data views, manage per-column filtering capabilities for cell-level interaction in tree list structures, set filters at the cell granularity to be active or inactive depending on UI requirements or filtering needs.
 </div>
 
 #### Example - Disable the cell filtering for a specific column.
@@ -1282,7 +1282,7 @@ Specifies the default operator that will be used for the cell filtering.
 
 
 <div class="meta-api-description">
-Control and configure the default comparison operator for filtering values within individual cells of a hierarchical data grid or tree list, enabling selection of operators like equals, not equals, contains, starts with, or ends with to customize how cell-level filtering behaves by default during initial setup or runtime adjustments, supporting scenarios where you want precise control over filter matching criteria inside tree structures, grids, or tables, including configuring default search conditions, adjusting filter logic, and setting comparison types for cell filtering in nested or parent-child data presentations, while distinguishing this from operators used for autocomplete suggestion filtering.
+How do I set the default operator for filtering in individual cells of a Kendo UI TreeList? Control and configure the default comparison operator for filtering values within individual cells of a hierarchical data grid or tree list, enabling selection of operators like equals, not equals, contains, starts with, or ends with to customize how cell-level filtering behaves by default during initial setup or runtime adjustments, supporting scenarios where you want precise control over filter matching criteria inside tree structures, grids, or tables, including configuring default search conditions, adjusting filter logic, and setting comparison types for cell filtering in nested or parent-child data presentations, while distinguishing this from operators used for autocomplete suggestion filtering.
 </div>
 
 #### Example - Specifying default operator for cell filtering.
@@ -1317,7 +1317,7 @@ Specifies whether to show or hide the DropDownList with the operators.
 
 
 <div class="meta-api-description">
-Control the visibility and enablement of filter operator dropdowns within tree list column cells, configuring whether users can see or hide the operator selector such as "equals," "contains," or "starts with" when applying filters in hierarchical data grids. Configure, toggle, or disable the operator list or dropdown in cell-level filtering interfaces of tree-structured data tables, enabling precise control over filter criteria input, operator selector presentation, filter UI customization, and user interaction for column-based searches and filters within nested data displays. Adjust the filter mode to show, hide, or manage operator controls dynamically for enhanced column filter behavior in tree list components.
+How do I control visibility of filter operator dropdowns in Kendo UI TreeList column cells? Control the visibility and enablement of filter operator dropdowns within tree list column cells, configuring whether users can see or hide the operator selector such as "equals," "contains," or "starts with" when applying filters in hierarchical data grids. Configure, toggle, or disable the operator list or dropdown in cell-level filtering interfaces of tree-structured data tables, enabling precise control over filter criteria input, operator selector presentation, filter UI customization, and user interaction for column-based searches and filters within nested data displays. Adjust the filter mode to show, hide, or manage operator controls dynamically for enhanced column filter behavior in tree list components.
 </div>
 
 #### Example - Hide the operators dropdownlist for cell filtering.
@@ -1359,7 +1359,7 @@ populated at the time the template function is called, if the TreeList uses remo
 
 
 <div class="meta-api-description">
-Control and customize the filter input cell in a hierarchical tree list column by injecting custom rendering logic, enabling the use of tailored editors like autocomplete, dropdowns, or other interactive components, and modifying or replacing the default filter input element. Implement a JavaScript function to dynamically generate or override filter inputs, leveraging a unique-value data source for populating suggestions or options, supporting scenarios such as local and remote data binding, value filtering, dynamic dropdown content, input customization, and integration with third-party components for advanced filtering UI within tree-structured tabular data views.
+How do I customize the filter input cell in my Kendo UI TreeList column to use a dropdown with remote data? Control and customize the filter input cell in a hierarchical tree list column by injecting custom rendering logic, enabling the use of tailored editors like autocomplete, dropdowns, or other interactive components, and modifying or replacing the default filter input element. Implement a JavaScript function to dynamically generate or override filter inputs, leveraging a unique-value data source for populating suggestions or options, supporting scenarios such as local and remote data binding, value filtering, dynamic dropdown content, input customization, and integration with third-party components for advanced filtering UI within tree-structured tabular data views.
 </div>
 
 #### Example - Using template for the filter cell
@@ -1405,7 +1405,7 @@ The property is identical to [`filterable.operators`](filterable.operators), but
 
 
 <div class="meta-api-description">
-Control and customize filtering options for individual columns by setting specific filter operators that override global defaults, enabling tailored filter types such as string, numeric, or date operators per column; configure, enable, or adjust comparison operations, filter conditions, and operator sets at the column level for precise filtering behavior, supporting use cases like column-specific search criteria, custom filter logic, or advanced filtering scenarios in hierarchical data grids or tree structures.
+How to customize filtering operators for individual columns in Kendo UI TreeList? Control and customize filtering options for individual columns by setting specific filter operators that override global defaults, enabling tailored filter types such as string, numeric, or date operators per column; configure, enable, or adjust comparison operations, filter conditions, and operator sets at the column level for precise filtering behavior, supporting use cases like column-specific search criteria, custom filter logic, or advanced filtering scenarios in hierarchical data grids or tree structures.
 </div>
 
 #### Example - Set custom filterable operators
@@ -1445,7 +1445,7 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
 
 
 <div class="meta-api-description">
-Control and customize the filter menu interface in TreeList columns by specifying or configuring the filtering UI element, including selecting specific filter widgets through their role identifiers or initializing them via JavaScript functions, enabling developers to set, change, or override how filter controls appear and behave in the column filter menus, integrate custom filter components, switch filter widget types, and tailor the interactive filtering experience using role-based widget references or custom initializer code.
+How to customize filter UI in Kendo TreeList columns? Control and customize the filter menu interface in TreeList columns by specifying or configuring the filtering UI element, including selecting specific filter widgets through their role identifiers or initializing them via JavaScript functions, enabling developers to set, change, or override how filter controls appear and behave in the column filter menus, integrate custom filter components, switch filter widget types, and tailor the interactive filtering experience using role-based widget references or custom initializer code.
 </div>
 
 #### Example - specifyinging the filter UI as a string
@@ -1528,7 +1528,7 @@ The following fields can be used in the template:
 
 
 <div class="meta-api-description">
-Configure and customize the footer content for columns in a hierarchical data grid by defining templates that render dynamic HTML or text, enabling display and binding of aggregate calculations like averages, counts, maximum, minimum, and sums. Enable flexible footer cell rendering with aggregate value placeholders to summarize data, control summary information presentation, and incorporate calculated metrics into footers using templating engines for tailored output in tree or grouped tabular structures. Adjust, set, or control footer templates to show totals, summaries, or custom formatted results based on aggregate functions for hierarchical list components.
+How to customize footer content in a TreeList column using the `footerTemplate` property? Configure and customize the footer content for columns in a hierarchical data grid by defining templates that render dynamic HTML or text, enabling display and binding of aggregate calculations like averages, counts, maximum, minimum, and sums. Enable flexible footer cell rendering with aggregate value placeholders to summarize data, control summary information presentation, and incorporate calculated metrics into footers using templating engines for tailored output in tree or grouped tabular structures. Adjust, set, or control footer templates to show totals, summaries, or custom formatted results based on aggregate functions for hierarchical list components.
 </div>
 
 #### Example - specifyinging a column footer template
@@ -1564,7 +1564,7 @@ The format that is applied to the value before it is displayed. Takes the `{0:fo
 
 
 <div class="meta-api-description">
-Customize and control the display format of values within hierarchical table columns by setting patterns for numbers, currencies, dates, or personalized templates. Enable configuring numeric precision, currency symbols, date and time layouts, or complex formatting strings to shape how data appears in each cell. Support standard and custom formatting expressions to tailor output for financial data, timestamps, percentages, and other specialized value presentations, ensuring consistent and readable visual representation across tree-structured lists. Adjust cell content appearance dynamically using flexible, developer-friendly format specifiers similar to string interpolation or templating functions, suitable for diverse localization and data presentation needs.
+How to customize the display format of values in Kendo UI TreeList columns? Customize and control the display format of values within hierarchical table columns by setting patterns for numbers, currencies, dates, or personalized templates. Enable configuring numeric precision, currency symbols, date and time layouts, or complex formatting strings to shape how data appears in each cell. Support standard and custom formatting expressions to tailor output for financial data, timestamps, percentages, and other specialized value presentations, ensuring consistent and readable visual representation across tree-structured lists. Adjust cell content appearance dynamically using flexible, developer-friendly format specifiers similar to string interpolation or templating functions, suitable for diverse localization and data presentation needs.
 </div>
 
 #### Example - specifyinging the column format string
@@ -1594,7 +1594,7 @@ The HTML attributes of the table header cell (`<th>`) that is rendered for the c
 
 
 <div class="meta-api-description">
-Configure table header cell attributes in a tree list component by setting custom HTML properties such as CSS classes, inline styles, data attributes, ARIA labels, accessibility tags, and other custom or standard HTML attributes on column headers. Control, customize, or enhance header cells with attributes like class names, data-* properties, ARIA roles, and style rules to tailor appearance, behavior, and accessibility of column headers. Enable adding semantic, styling, or metadata attributes to header cells, support quoting JavaScript reserved keywords as attribute names, and easily manage header customization for sorting indicators, themes, accessibility compliance, and dynamic styling in tabular tree structures.
+How do I add custom CSS classes to column headers in a Kendo UI TreeList component? Configure table header cell attributes in a tree list component by setting custom HTML properties such as CSS classes, inline styles, data attributes, ARIA labels, accessibility tags, and other custom or standard HTML attributes on column headers. Control, customize, or enhance header cells with attributes like class names, data-* properties, ARIA roles, and style rules to tailor appearance, behavior, and accessibility of column headers. Enable adding semantic, styling, or metadata attributes to header cells, support quoting JavaScript reserved keywords as attribute names, and easily manage header customization for sorting indicators, themes, accessibility compliance, and dynamic styling in tabular tree structures.
 </div>
 
 #### Example - specifyinging column header HTML attributes
@@ -1629,7 +1629,7 @@ The [`template`](/api/javascript/kendo/methods/template) which renders the colum
 
 
 <div class="meta-api-description">
-Control and customize the column header content in a TreeList by defining a header template that supports HTML markup, custom bindings, inline elements, and dynamic rendering of icons, badges, styles, or classes, allowing flexible formatting beyond default text titles. Enable or set custom header designs for sorting-enabled columns where headers are wrapped with interactive links, ensuring templates use inline elements only. Adjust header appearance by injecting custom templates to display additional visuals or complex layouts in column headers, supporting sorting interactions and dynamic content updates in grid lists.
+How do I customize the header template in Kendo UI TreeList to include HTML markup? Control and customize the column header content in a TreeList by defining a header template that supports HTML markup, custom bindings, inline elements, and dynamic rendering of icons, badges, styles, or classes, allowing flexible formatting beyond default text titles. Enable or set custom header designs for sorting-enabled columns where headers are wrapped with interactive links, ensuring templates use inline elements only. Adjust header appearance by injecting custom templates to display additional visuals or complex layouts in column headers, supporting sorting interactions and dynamic content updates in grid lists.
 </div>
 
 #### Example - defining the column header template as a string
@@ -1656,7 +1656,7 @@ The pixel screen width below which the column will be hidden. The setting takes 
 
 
 <div class="meta-api-description">
-Control the visibility of a data grid or tree list column based on viewport or screen width by setting a minimum pixel threshold that hides columns responsively on smaller screens, mobile devices, or narrow windows. Configure, enable, or set columns to disappear automatically beneath a specified screen width to optimize layouts, improve usability, and manage adaptive or responsive design in tables. Manage column responsiveness, control display rules for narrow displays, and override static hidden settings to ensure columns show only at or above certain device widths, supporting flexible, context-aware user interfaces.
+How to set minimum screen width for column visibility in Kendo UI TreeList? Control the visibility of a data grid or tree list column based on viewport or screen width by setting a minimum pixel threshold that hides columns responsively on smaller screens, mobile devices, or narrow windows. Configure, enable, or set columns to disappear automatically beneath a specified screen width to optimize layouts, improve usability, and manage adaptive or responsive design in tables. Manage column responsiveness, control display rules for narrow displays, and override static hidden settings to ensure columns show only at or above certain device widths, supporting flexible, context-aware user interfaces.
 </div>
 
 #### Example - hiding columns when the screen is smaller than a given width
@@ -1682,7 +1682,7 @@ If set to `true` the treelist will render a select column with checkboxes in eac
 
 
 <div class="meta-api-description">
-Configure multi-row selection by enabling checkbox columns within a hierarchical data grid or tree-like list, allowing users to check individual items or toggle all visible entries with a header checkbox. Control row selection behavior by adding interactive selection controls that support selecting multiple rows simultaneously, such as enabling selectable checkboxes per row, implementing bulk select/deselect functionality, and managing selection state in nested or paged data structures. Set up selection columns to allow users to efficiently pick and manipulate multiple entries within a tree or list interface using familiar checkbox inputs.
+How can I enable multi-row selection in my Kendo UI TreeList? Configure multi-row selection by enabling checkbox columns within a hierarchical data grid or tree-like list, allowing users to check individual items or toggle all visible entries with a header checkbox. Control row selection behavior by adding interactive selection controls that support selecting multiple rows simultaneously, such as enabling selectable checkboxes per row, implementing bulk select/deselect functionality, and managing selection state in nested or paged data structures. Set up selection columns to allow users to efficiently pick and manipulate multiple entries within a tree or list interface using familiar checkbox inputs.
 </div>
 
 #### Example
@@ -1709,7 +1709,7 @@ If set to `true` and sorting is enabled, the user can click the column header an
 
 
 <div class="meta-api-description">
-Enable or disable sorting functionality on individual columns by controlling whether clicking the column header triggers sorting by that column’s data field, including options to activate or deactivate sortable headers, configure per-column click-to-sort behavior, manage user interactions for ascending or descending order toggling, customize header sortability in hierarchical tree list views, and selectively restrict sorting capabilities on specific columns while maintaining overall sorting settings for the entire tree or grid structure.
+How do I make specific columns in my Kendo UI TreeList sortable? Enable or disable sorting functionality on individual columns by controlling whether clicking the column header triggers sorting by that column’s data field, including options to activate or deactivate sortable headers, configure per-column click-to-sort behavior, manage user interactions for ascending or descending order toggling, customize header sortability in hierarchical tree list views, and selectively restrict sorting capabilities on specific columns while maintaining overall sorting settings for the entire tree or grid structure.
 </div>
 
 #### Example - disabling sorting
@@ -1742,7 +1742,7 @@ A JavaScript function for comparing the values.
 
 
 <div class="meta-api-description">
-Customize sorting behavior in hierarchical data tables by defining a JavaScript comparison function that controls the ordering of column values, enabling tailored sorting logic such as locale-sensitive string comparison, case-insensitive sorting, custom numeric or date ordering, handling null or undefined values gracefully, and implementing specialized or complex sorting algorithms beyond default behavior to ensure precise data arrangement based on specific application needs.
+How to customize sorting behavior in Kendo UI TreeList with a custom comparison function? Customize sorting behavior in hierarchical data tables by defining a JavaScript comparison function that controls the ordering of column values, enabling tailored sorting logic such as locale-sensitive string comparison, case-insensitive sorting, custom numeric or date ordering, handling null or undefined values gracefully, and implementing specialized or complex sorting algorithms beyond default behavior to ensure precise data arrangement based on specific application needs.
 </div>
 
 #### Example - defining the custom compare function
@@ -1785,7 +1785,7 @@ Each table row consists of table cells (`<td>`) which represent the TreeList col
 
 
 <div class="meta-api-description">
-Control and customize the rendering of each cell in a hierarchical table column by configuring dynamic templates, enabling custom formatting, raw HTML injection, or computed markup using functions or template engines. Adjust how data fields display within table cells by setting personalized cell content, applying custom rendering logic, formatting values with code or markup snippets, and overriding default HTML encoding of field values. Enable flexible and programmable cell output in tree-structured grid columns to meet diverse UI needs, including injecting inline HTML, formatting values on a per-row basis, and using templating syntax for granular cell customization.
+How can I customize the rendering of each cell in a Kendo UI TreeList column? Control and customize the rendering of each cell in a hierarchical table column by configuring dynamic templates, enabling custom formatting, raw HTML injection, or computed markup using functions or template engines. Adjust how data fields display within table cells by setting personalized cell content, applying custom rendering logic, formatting values with code or markup snippets, and overriding default HTML encoding of field values. Enable flexible and programmable cell output in tree-structured grid columns to meet diverse UI needs, including injecting inline HTML, formatting values on a per-row basis, and using templating syntax for granular cell customization.
 </div>
 
 #### Example - setting the template as a string (wrapping the column value in HTML)
@@ -1842,7 +1842,7 @@ The text that is displayed in the column header cell. If not set, the TreeList u
 
 
 <div class="meta-api-description">
-Set or customize the header label text displayed at the top of a TreeList column, control what title or caption appears in the column header cell, configure column headings with specific names or labels, override default field names by specifying custom header text for clearer identification, assign descriptive titles to columns for improved readability, enable renaming or labeling of columns in hierarchical or grid-style data presentations, define column header captions to match user terminology, specify the text shown to represent a column’s contents in the header area, control and set the label that identifies each column’s data field, and adjust or personalize column header titles to better organize and display tree-structured tabular information.
+How do I customize the header label in a Kendo UI TreeList column? Set or customize the header label text displayed at the top of a TreeList column, control what title or caption appears in the column header cell, configure column headings with specific names or labels, override default field names by specifying custom header text for clearer identification, assign descriptive titles to columns for improved readability, enable renaming or labeling of columns in hierarchical or grid-style data presentations, define column header captions to match user terminology, specify the text shown to represent a column’s contents in the header area, control and set the label that identifies each column’s data field, and adjust or personalize column header titles to better organize and display tree-structured tabular information.
 </div>
 
 #### Example - setting the title of the column
@@ -1869,7 +1869,7 @@ The width of the column. Numeric values are treated as pixels.
 
 
 <div class="meta-api-description">
-Control and configure fixed or consistent column widths in hierarchical or tree-structured data tables by specifying numeric pixel values, enabling precise layout and sizing of table columns during initialization or dynamic rendering. Adjust, set, or lock individual column sizes to maintain uniform appearance, optimize space, and manage visual structure of expandable or nested data grids with columns in tree list or similar UI components. Use precise width settings to shape column layouts, enable fixed dimensions, and customize the presentation of multilevel tabular data.
+How do I set fixed column widths in a Kendo UI TreeList? Control and configure fixed or consistent column widths in hierarchical or tree-structured data tables by specifying numeric pixel values, enabling precise layout and sizing of table columns during initialization or dynamic rendering. Adjust, set, or lock individual column sizes to maintain uniform appearance, optimize space, and manage visual structure of expandable or nested data grids with columns in tree list or similar UI components. Use precise width settings to shape column layouts, enable fixed dimensions, and customize the presentation of multilevel tabular data.
 </div>
 
 #### Example - setting the column width as a string
@@ -1916,7 +1916,7 @@ If set to `true`, the TreeList will not display the column. By default, all colu
 
 
 <div class="meta-api-description">
-Control the visibility of individual columns by configuring them to be hidden or shown in hierarchical grid or tree structures, enabling developers to set, toggle, or manage which columns appear in the interface, customize layouts by selectively displaying or concealing data fields, adjust column display programmatically or via initialization settings, and tailor the presentation of tabular hierarchical data by hiding unnecessary or optional columns to optimize user experience and interface clarity.
+How to hide specific columns in a Kendo UI TreeList using JavaScript? Control the visibility of individual columns by configuring them to be hidden or shown in hierarchical grid or tree structures, enabling developers to set, toggle, or manage which columns appear in the interface, customize layouts by selectively displaying or concealing data fields, adjust column display programmatically or via initialization settings, and tailor the presentation of tabular hierarchical data by hiding unnecessary or optional columns to optimize user experience and interface clarity.
 </div>
 
 #### Example - hiding columns
@@ -1943,7 +1943,7 @@ If set to `true`, the TreeList will select all child rows upon parent row select
 
 
 <div class="meta-api-description">
-Enable hierarchical checkbox selection where choosing a parent node automatically includes all its descendant child rows, allowing configuration to cascade selections throughout nested tree structures, manage group selection propagation, set checkbox behavior for parent-child relationships, control multi-level selection dependencies, synchronize selection states between parent and leaf nodes, implement cascading or recursive selection logic in tree data grids, and customize how selecting one item affects its entire subtree in hierarchical checkboxes.
+How can I enable hierarchical checkbox selection in Kendo UI TreeList? Enable hierarchical checkbox selection where choosing a parent node automatically includes all its descendant child rows, allowing configuration to cascade selections throughout nested tree structures, manage group selection propagation, set checkbox behavior for parent-child relationships, control multi-level selection dependencies, synchronize selection states between parent and leaf nodes, implement cascading or recursive selection logic in tree data grids, and customize how selecting one item affects its entire subtree in hierarchical checkboxes.
 </div>
 
 #### Example
@@ -1970,7 +1970,7 @@ If set to `true`, the TreeList will display the column in the column menu. By de
 
 
 <div class="meta-api-description">
-Control the inclusion of specific columns in the interactive column menu within a hierarchical data grid, enabling developers to enable, show, hide, toggle visibility, or access column-specific actions and settings through a user-accessible menu; configure whether columns appear in dropdown menus that manage column visibility and features, customize which fields or data-bound columns are available for user interaction and dynamic display adjustments, and set options to manage column-level controls in tree-structured data tables for enhanced user interface customization and flexible column management.
+How can I customize the columns shown in the menu of a Kendo UI TreeList? Control the inclusion of specific columns in the interactive column menu within a hierarchical data grid, enabling developers to enable, show, hide, toggle visibility, or access column-specific actions and settings through a user-accessible menu; configure whether columns appear in dropdown menus that manage column visibility and features, customize which fields or data-bound columns are available for user interaction and dynamic display adjustments, and set options to manage column-level controls in tree-structured data tables for enhanced user interface customization and flexible column management.
 </div>
 
 #### Example - hiding a column from the column menu
@@ -1999,7 +1999,7 @@ If set to `true`, the TreeList will display the column as locked (frozen).
 
 
 <div class="meta-api-description">
-Control or configure fixed columns in hierarchical or tree-structured tables to keep key data visible while scrolling horizontally, enabling column freezing, pinning, or locking to ensure certain columns remain static and on-screen during navigation; adjust settings to freeze columns at initialization so important fields stay constantly displayed regardless of user scroll position in TreeList or similar grid components.
+How to lock columns in Kendo UI TreeList so they stay visible while scrolling? Control or configure fixed columns in hierarchical or tree-structured tables to keep key data visible while scrolling horizontally, enabling column freezing, pinning, or locking to ensure certain columns remain static and on-screen during navigation; adjust settings to freeze columns at initialization so important fields stay constantly displayed regardless of user scroll position in TreeList or similar grid components.
 </div>
 
 #### Example - displaying locked columns
@@ -2030,7 +2030,7 @@ prevent the user from locking or unlocking this column while using the user inte
 
 
 <div class="meta-api-description">
-Control whether a column’s locked or fixed position in a hierarchical list or grid can be changed by users, enabling or disabling the ability to toggle, lock, or unlock columns interactively in the tree or list interface, ensuring certain columns stay permanently pinned to the left or right side without user modification of their locked state or freezing behavior, useful for configuring immovable columns when customizing or restricting user column locking and unlocking actions in UI layouts.
+Can I disable column locking in Kendo UI TreeList? Control whether a column’s locked or fixed position in a hierarchical list or grid can be changed by users, enabling or disabling the ability to toggle, lock, or unlock columns interactively in the tree or list interface, ensuring certain columns stay permanently pinned to the left or right side without user modification of their locked state or freezing behavior, useful for configuring immovable columns when customizing or restricting user column locking and unlocking actions in UI layouts.
 </div>
 
 #### Example - setting locked columns
@@ -2059,7 +2059,7 @@ If set to `true`, the user can resize columns by dragging their header borders. 
 
 
 <div class="meta-api-description">
-Enable dynamic adjustment of column widths in hierarchical or tree-structured data grids by allowing users to drag and resize column edges interactively. Configure columns to be resizable or fixed, control user ability to modify column size on the fly, customize the flexibility of table headers, support manual column width changes, and toggle interactive column resizing for better layout control and responsive design in data tables with nested rows.
+How to enable column resizing in Kendo UI TreeList widget? Enable dynamic adjustment of column widths in hierarchical or tree-structured data grids by allowing users to drag and resize column edges interactively. Configure columns to be resizable or fixed, control user ability to modify column size on the fly, customize the flexibility of table headers, support manual column width changes, and toggle interactive column resizing for better layout control and responsive design in data tables with nested rows.
 </div>
 
 #### Example - enabling column resizing
@@ -2088,7 +2088,7 @@ If set to `true`, the user can reorder the columns by dragging their header cell
 
 
 <div class="meta-api-description">
-Enable dynamic column rearrangement in hierarchical data grids by allowing users to drag and drop header cells to reorder columns interactively at runtime, providing customizable ordering, adjustable column positions, and user-controlled layout modifications within tree-structured lists or tables for improved interface flexibility and personalized data views.
+How can I enable users to reorder columns in my Kendo UI TreeList dynamically? Enable dynamic column rearrangement in hierarchical data grids by allowing users to drag and drop header cells to reorder columns interactively at runtime, providing customizable ordering, adjustable column positions, and user-controlled layout modifications within tree-structured lists or tables for improved interface flexibility and personalized data views.
 </div>
 
 #### Example - enabling column reordering
@@ -2117,7 +2117,7 @@ If set to `true`, the TreeList displays the column menu when the user clicks the
 
 
 <div class="meta-api-description">
-Enable or configure a customizable menu that appears when clicking the icon in a column header within a TreeList or grid, allowing users to toggle column visibility, apply sorting, and manage filtering options on individual columns; this feature supports dynamic control over column display and data manipulation by setting it to true or providing specific settings, commonly used for interactive column management, user-driven sorting, filtering, and layout customization in tabular data interfaces.
+How to enable column menu in Kendo UI TreeList? Enable or configure a customizable menu that appears when clicking the icon in a column header within a TreeList or grid, allowing users to toggle column visibility, apply sorting, and manage filtering options on individual columns; this feature supports dynamic control over column display and data manipulation by setting it to true or providing specific settings, commonly used for interactive column management, user-driven sorting, filtering, and layout customization in tabular data interfaces.
 </div>
 
 #### Example - enabling the column menu
@@ -2145,7 +2145,7 @@ If set to `true`, the column menu allows the user to select (show and hide) Tree
 
 
 <div class="meta-api-description">
-Control the ability to show or hide columns through the column menu by enabling or disabling column selection and visibility toggles in hierarchical or tree-structured lists; configure whether users can access checkboxes in the menu to dynamically display or hide specific columns, manage column visibility settings interactively, and customize the user interface to allow or restrict column toggling options for better data presentation and user control over which columns appear in the tree list display.
+How to enable column selection and visibility toggles in a hierarchical TreeList? Control the ability to show or hide columns through the column menu by enabling or disabling column selection and visibility toggles in hierarchical or tree-structured lists; configure whether users can access checkboxes in the menu to dynamically display or hide specific columns, manage column visibility settings interactively, and customize the user interface to allow or restrict column toggling options for better data presentation and user control over which columns appear in the tree list display.
 </div>
 
 #### Example - disabling the showing or hiding of the columns by using the column menu
@@ -2177,7 +2177,7 @@ If set to `true`, the column menu will allow the user to filter the TreeList. By
 
 
 <div class="meta-api-description">
-Control the ability to activate or deactivate filtering options directly within each column’s menu in hierarchical or tree-structured data grids, allowing users to apply, enable, disable, or customize filters per column through the column menu interface, supporting scenarios like activating filter input fields, toggling filter visibility on individual columns, enabling granular data filtering from tree list headers, setting up per-column filter controls, and configuring interactive filtering options accessible from the column menu to refine visible data subsets dynamically.
+How to enable filtering options in each column's menu in a Kendo UI TreeList widget? Control the ability to activate or deactivate filtering options directly within each column’s menu in hierarchical or tree-structured data grids, allowing users to apply, enable, disable, or customize filters per column through the column menu interface, supporting scenarios like activating filter input fields, toggling filter visibility on individual columns, enabling granular data filtering from tree list headers, setting up per-column filter controls, and configuring interactive filtering options accessible from the column menu to refine visible data subsets dynamically.
 </div>
 
 #### Example - disabling column menu filtering
@@ -2210,7 +2210,7 @@ If set to `true`, the column menu will allow the user to sort the TreeList by th
 
 
 <div class="meta-api-description">
-Control whether sorting options appear in the column's dropdown menu, enabling or disabling the ability to sort data directly from the column menu controls, configure the display of sort commands for individual columns, set sorting availability through the column context menu while still allowing header-click sorting when menu sorting is disabled, toggle sortable menu features on or off during grid or treelist setup, customize user interaction for sorting via menu versus header clicks, adjust whether users can activate sorting through column menus, enable sorting commands in menu interfaces for specific fields, manage sorting behavior in grid column menus to refine UX sorting options, configure if the column menu includes sort ascending and descending commands, and control sorting functionality exposed in column context menus independent from header sorting capabilities.
+How do I control sorting options in the column menu of Kendo UI TreeList? Control whether sorting options appear in the column's dropdown menu, enabling or disabling the ability to sort data directly from the column menu controls, configure the display of sort commands for individual columns, set sorting availability through the column context menu while still allowing header-click sorting when menu sorting is disabled, toggle sortable menu features on or off during grid or treelist setup, customize user interaction for sorting via menu versus header clicks, adjust whether users can activate sorting through column menus, enable sorting commands in menu interfaces for specific fields, manage sorting behavior in grid column menus to refine UX sorting options, configure if the column menu includes sort ascending and descending commands, and control sorting functionality exposed in column context menus independent from header sorting capabilities.
 </div>
 
 #### Example - disabling the sorting of the column menu
@@ -2242,7 +2242,7 @@ The text messages that is played in the column menu. Use it to customize or loca
 
 
 <div class="meta-api-description">
-Customize and localize the text strings displayed in the column menu of a hierarchical data grid, enabling configuration of menu labels, messages, prompts, and interface wording to support different languages, branding, or user interface preferences in tree-structured grid columns, including adjustments to column menu item descriptions, notifications, and contextual messages within expandable and collapsible tree grid menus.
+How to customize column menu messages in Kendo UI TreeList? Customize and localize the text strings displayed in the column menu of a hierarchical data grid, enabling configuration of menu labels, messages, prompts, and interface wording to support different languages, branding, or user interface preferences in tree-structured grid columns, including adjustments to column menu item descriptions, notifications, and contextual messages within expandable and collapsible tree grid menus.
 </div>
 
 #### Example - customizing column menu messages
@@ -2280,7 +2280,7 @@ The text message that is displayed for the column selection menu item.
 
 
 <div class="meta-api-description">
-Customize or configure the text label for the column selection item in the hierarchical grid column menu, control the display wording for choosing which columns to show or hide, enable localization or personalization of the menu's columns option, set or override the default columns menu text for enhanced clarity or user interface customization, adjust the label for the dropdown that manages column visibility within a tree-structured list or grid component.
+How to customize the column selection item label in Kendo UI TreeList's hierarchical grid column menu? Customize or configure the text label for the column selection item in the hierarchical grid column menu, control the display wording for choosing which columns to show or hide, enable localization or personalization of the menu's columns option, set or override the default columns menu text for enhanced clarity or user interface customization, adjust the label for the dropdown that manages column visibility within a tree-structured list or grid component.
 </div>
 
 #### Example - setting the column selection message
@@ -2312,7 +2312,7 @@ The text message that is displayed for the filter menu item.
 
 
 <div class="meta-api-description">
-Customize the label, wording, or text shown for the filter option, filter command, or filtering entry within a column menu, column header dropdown, or context menu of a hierarchical grid or tree-structured list, enabling developers to localize, rename, or tailor the filter action display in the columns’ interactive menu, filter control, or column options panel for better user interface clarity, accessibility, or multilingual support when configuring or modifying column filtering UI in tree-like data grids.
+How can I customize the label for the filter option in a TreeList column menu? Customize the label, wording, or text shown for the filter option, filter command, or filtering entry within a column menu, column header dropdown, or context menu of a hierarchical grid or tree-structured list, enabling developers to localize, rename, or tailor the filter action display in the columns’ interactive menu, filter control, or column options panel for better user interface clarity, accessibility, or multilingual support when configuring or modifying column filtering UI in tree-like data grids.
 </div>
 
 #### Example - setting the filter message
@@ -2346,7 +2346,7 @@ The text message that is displayed for the Move to next position column menu ite
 
 
 <div class="meta-api-description">
-Customize or configure the label, text, or caption for the action that moves a column to the next position within a column menu in a hierarchical grid or tree list interface. Enable control over the wording used for navigation commands such as "move to next," "shift column right," or "advance column placement" in column menus, dropdowns, or toolbar options. Adapt or localize the text string for user interface elements that handle rearranging or repositioning columns sequentially, supporting various phrasing like moving columns forward, shifting columns to the next slot, or changing column order in tree-structured tabular data displays.
+How do I customize the "move to next" label in Kendo UI TreeList column menu? Customize or configure the label, text, or caption for the action that moves a column to the next position within a column menu in a hierarchical grid or tree list interface. Enable control over the wording used for navigation commands such as "move to next," "shift column right," or "advance column placement" in column menus, dropdowns, or toolbar options. Adapt or localize the text string for user interface elements that handle rearranging or repositioning columns sequentially, supporting various phrasing like moving columns forward, shifting columns to the next slot, or changing column order in tree-structured tabular data displays.
 </div>
 
 #### Example
@@ -2376,7 +2376,7 @@ The text message that is displayed for the Move to previous position column menu
 
 
 <div class="meta-api-description">
-Set or customize the label, title, or text displayed for the column menu option that moves a column to the previous position, reorder columns by shifting left or prior order, control menu item wording for moving columns earlier in the sequence, adjust the move-to-previous or shift-column-left command text to fit localization, UX preferences, or custom interface language, modify the prompt for column position rearrangement controls to indicate moving columns backward or up in the column list, configure the user interface string for moving columns to an earlier place within a grid or tree table structure.
+How to customize the "Move to Previous" column menu option in Kendo UI TreeList? Set or customize the label, title, or text displayed for the column menu option that moves a column to the previous position, reorder columns by shifting left or prior order, control menu item wording for moving columns earlier in the sequence, adjust the move-to-previous or shift-column-left command text to fit localization, UX preferences, or custom interface language, modify the prompt for column position rearrangement controls to indicate moving columns backward or up in the column list, configure the user interface string for moving columns to an earlier place within a grid or tree table structure.
 </div>
 
 #### Example
@@ -2406,7 +2406,7 @@ The text message that is displayed for the menu item which performs the ascendin
 
 
 <div class="meta-api-description">
-Customize or set the label, text, or caption displayed for the option that sorts data in ascending order within a tree list column menu, including how to change, modify, or localize the ascending sort menu item text, adjust the wording for sorting ascending, enable or configure ascending order sorting prompts, control the user interface text that triggers sorting from lowest to highest or A to Z in hierarchical grid column menus, and tailor the ascending sort menu terminology to fit different languages, user preferences, or application themes.
+How to change the text for the "Sort Ascending" option in a Kendo UI TreeList column menu? Customize or set the label, text, or caption displayed for the option that sorts data in ascending order within a tree list column menu, including how to change, modify, or localize the ascending sort menu item text, adjust the wording for sorting ascending, enable or configure ascending order sorting prompts, control the user interface text that triggers sorting from lowest to highest or A to Z in hierarchical grid column menus, and tailor the ascending sort menu terminology to fit different languages, user preferences, or application themes.
 </div>
 
 #### Example - setting the message for the ascending sort mode
@@ -2440,7 +2440,7 @@ The text message that is displayed for the menu item which performs the descendi
 
 
 <div class="meta-api-description">
-Customize or configure the label, text, or message shown for descending sort options in column menus, control how the sort descending command appears in tree-like data grids, set the display wording for sorting columns from highest to lowest, adjust or change the prompt or tooltip text related to sorting data in descending order within hierarchical table structures, modify the description or string shown when enabling reverse or descending sort in column menus, define the phrasing or terminology for sorting columns descending in grid or list components with expandable rows, tailor the interface text for descending sorting choices in column headers, control how descending sort instructions or labels are presented in expandable tables, set or change the language displayed for ordering data from largest to smallest in tree-structured list controls.
+How do I change the label for the "sort descending" command in a Kendo UI TreeList column menu? Customize or configure the label, text, or message shown for descending sort options in column menus, control how the sort descending command appears in tree-like data grids, set the display wording for sorting columns from highest to lowest, adjust or change the prompt or tooltip text related to sorting data in descending order within hierarchical table structures, modify the description or string shown when enabling reverse or descending sort in column menus, define the phrasing or terminology for sorting columns descending in grid or list components with expandable rows, tailor the interface text for descending sorting choices in column headers, control how descending sort instructions or labels are presented in expandable tables, set or change the language displayed for ordering data from largest to smallest in tree-structured list controls.
 </div>
 
 #### Example - setting the message for the descending sort mode
@@ -2474,7 +2474,7 @@ The text message that is displayed in the menu header.
 
 
 <div class="meta-api-description">
-Customize or localize the header text displayed in the column menu of a hierarchical tree list, control or configure the label for the column options or settings menu, set the title or prompt that appears at the top of the column menu interface, adjust the text shown in the column menu header for different languages or custom terminology, enable modification of the column menu header caption to fit UI preferences or localization needs.
+How to customize column menu header in Kendo UI TreeList? Customize or localize the header text displayed in the column menu of a hierarchical tree list, control or configure the label for the column options or settings menu, set the title or prompt that appears at the top of the column menu interface, adjust the text shown in the column menu header for different languages or custom terminology, enable modification of the column menu header caption to fit UI preferences or localization needs.
 </div>
 
 #### Example - setting the message for the menu header
@@ -2508,7 +2508,7 @@ The text message that is displayed in the column menu when locking a column.
 
 
 <div class="meta-api-description">
-Customize, configure, or localize the text label, message, or prompt displayed in the column menu for locking columns within a hierarchical or tree-structured list. Enable setting or changing the lock option wording, menu item text, UI strings, or localization for the column lock feature to support different languages, user preferences, or interface customization when controlling column locking behavior in tree data grids.
+How do I customize the lock column menu message in a Kendo UI TreeList? Customize, configure, or localize the text label, message, or prompt displayed in the column menu for locking columns within a hierarchical or tree-structured list. Enable setting or changing the lock option wording, menu item text, UI strings, or localization for the column lock feature to support different languages, user preferences, or interface customization when controlling column locking behavior in tree data grids.
 </div>
 
 #### Example - setting the messages for locking a column
@@ -2542,7 +2542,7 @@ The text message that is displayed in the column menu for unlocking a column.
 
 
 <div class="meta-api-description">
-Customize or localize the text label displayed for the option to unlock or release a column in a hierarchical data grid or tree-structured list, enabling developers to configure the wording shown in the column menu when users want to make a previously locked column movable or editable, supporting multilingual interfaces and adapting the unlock action terminology for different languages or UI contexts where column unlocking, releasing, or enabling free movement is required.
+How do I customize the "unlock" option in a TreeList column menu? Customize or localize the text label displayed for the option to unlock or release a column in a hierarchical data grid or tree-structured list, enabling developers to configure the wording shown in the column menu when users want to make a previously locked column movable or editable, supporting multilingual interfaces and adapting the unlock action terminology for different languages or UI contexts where column unlocking, releasing, or enabling free movement is required.
 </div>
 
 #### Example - setting the message for unlocking a column
@@ -2579,7 +2579,7 @@ The data source of the widget which is used to render table rows. Can be a JavaS
 
 
 <div class="meta-api-description">
-Set or configure the hierarchical data input for rendering rows in a tree-structured list, supporting local arrays, nested objects, existing data source instances, or configuration objects to control data binding, loading, and hierarchy representation. Enable binding to various types of hierarchical data sets including JavaScript arrays, data source configurations, or pre-existing data source instances, allowing flexible integration of data models in tree list components. Control how hierarchical or nested data collections populate the tree view, including using built-in or custom data sources, passing raw data arrays, or referencing external data provider instances for dynamic or static hierarchical data visualization.
+How to configure data source for hierarchical data in Kendo UI TreeList? Set or configure the hierarchical data input for rendering rows in a tree-structured list, supporting local arrays, nested objects, existing data source instances, or configuration objects to control data binding, loading, and hierarchy representation. Enable binding to various types of hierarchical data sets including JavaScript arrays, data source configurations, or pre-existing data source instances, allowing flexible integration of data models in tree list components. Control how hierarchical or nested data collections populate the tree view, including using built-in or custom data sources, passing raw data arrays, or referencing external data provider instances for dynamic or static hierarchical data visualization.
 </div>
 
 #### Example - setting the dataSource as a JavaScript object
@@ -2677,7 +2677,7 @@ The supported string values are:
 
 
 <div class="meta-api-description">
-Configure data editing capabilities for hierarchical or tree-structured data grids by enabling or disabling user modifications, setting detailed editing options via objects, or specifying edit modes such as inline editing directly in rows, popup dialog-based editing, or editing within individual cells. Control how users interact with the data by activating edit commands tied to specific columns, handle create, read, update, and delete operations through proper data source setup, and customize the editing experience to fit user interface requirements for seamless modification of nested or parent-child record structures. This includes toggling editable states, defining edit triggers, opting for modal or inline input methods, and ensuring data persistence through CRUD configuration.
+How to enable editing in Kendo UI TreeList component? Configure data editing capabilities for hierarchical or tree-structured data grids by enabling or disabling user modifications, setting detailed editing options via objects, or specifying edit modes such as inline editing directly in rows, popup dialog-based editing, or editing within individual cells. Control how users interact with the data by activating edit commands tied to specific columns, handle create, read, update, and delete operations through proper data source setup, and customize the editing experience to fit user interface requirements for seamless modification of nested or parent-child record structures. This includes toggling editable states, defining edit triggers, opting for modal or inline input methods, and ensuring data persistence through CRUD configuration.
 </div>
 
 #### Example - enabling editing
@@ -2792,7 +2792,7 @@ The supported edit modes are:
 
 
 <div class="meta-api-description">
-Configure or set the editing mode for hierarchical data grids to control whether users can edit entire rows inline, through popup dialogs, or directly within individual cells; enable different editing experiences such as inline editing that modifies whole rows within the list, popup editing that opens a separate dialog for row details, or incell editing where cells become editable on click or focus, all requiring integration with editing commands or controls to activate these modes effectively.
+How can I configure inline editing in a Kendo UI TreeList widget? Configure or set the editing mode for hierarchical data grids to control whether users can edit entire rows inline, through popup dialogs, or directly within individual cells; enable different editing experiences such as inline editing that modifies whole rows within the list, popup editing that opens a separate dialog for row details, or incell editing where cells become editable on click or focus, all requiring integration with editing commands or controls to activate these modes effectively.
 </div>
 
 #### Example - specifyinging the inline edit mode
@@ -2852,7 +2852,7 @@ Enables the drag-and-drop UI of rows between parents.
 
 
 <div class="meta-api-description">
-Control drag-and-drop functionality for rearranging hierarchical data by enabling row movement, reparenting, and transfer within a tree-structured list or grid. Configure interactive row dragging to reorder items visually, change parent-child relationships dynamically, and facilitate node relocation across different branches or levels. Set options to activate or deactivate move operations during initialization, supporting user-driven restructuring of nested data with intuitive drag interfaces, row repositioning, and hierarchical modifications in tree views.
+How to enable drag-and-drop functionality in Kendo UI TreeList? Control drag-and-drop functionality for rearranging hierarchical data by enabling row movement, reparenting, and transfer within a tree-structured list or grid. Configure interactive row dragging to reorder items visually, change parent-child relationships dynamically, and facilitate node relocation across different branches or levels. Set options to activate or deactivate move operations during initialization, supporting user-driven restructuring of nested data with intuitive drag interfaces, row repositioning, and hierarchical modifications in tree views.
 </div>
 
 #### Example - using the drag-and-drop functionality for editing the row parent node
@@ -2899,7 +2899,7 @@ If set to `true` (default), when there is a drag column for the items in the Tre
 
 
 <div class="meta-api-description">
-Control row reordering in hierarchical or nested lists by enabling or disabling click-based move interactions as an alternative to drag-and-drop, allowing users to reorder items via sequential clicks (click, move, click) rather than drag gestures; configure settings to turn on or off this click-driven item rearrangement, especially useful when drag handles or drag columns are present, supporting use cases that prefer keyboard-friendly, accessible, or simplified movement of rows within tree or list data structures without relying solely on dragging motions.
+How do I enable click-to-move row reordering in a TreeList with Kendo UI for jQuery? Control row reordering in hierarchical or nested lists by enabling or disabling click-based move interactions as an alternative to drag-and-drop, allowing users to reorder items via sequential clicks (click, move, click) rather than drag gestures; configure settings to turn on or off this click-driven item rearrangement, especially useful when drag handles or drag columns are present, supporting use cases that prefer keyboard-friendly, accessible, or simplified movement of rows within tree or list data structures without relying solely on dragging motions.
 </div>
 
 #### Example
@@ -2950,7 +2950,7 @@ Enables reordering of rows via a drag-and-drop UI.
 
 
 <div class="meta-api-description">
-Enable drag-and-drop row rearrangement within a TreeList or hierarchical grid, allowing users to move and reorder items or nodes visually by dragging to new positions; configure drag reorder functionality to control dynamic reordering, item repositioning, interactive sorting, and custom row ordering workflows in tree-structured lists or nested data views.
+How do I enable drag-and-drop row reordering in a Kendo UI TreeList widget? Enable drag-and-drop row rearrangement within a TreeList or hierarchical grid, allowing users to move and reorder items or nodes visually by dragging to new positions; configure drag reorder functionality to control dynamic reordering, item repositioning, interactive sorting, and custom row ordering workflows in tree-structured lists or nested data views.
 </div>
 
 #### Example - using the drag-and-drop functionality for editing the row parent node
@@ -3004,7 +3004,7 @@ the field to which it has to bind the each editor. Alternatively, use [MVVM](/fr
 
 
 <div class="meta-api-description">
-Configure and customize popup editor templates for tree-structured grid components by defining custom HTML markup or MVVM bindings that bind individual editable fields to specific input elements, enabling tailored form layouts, complex field editors, and per-column controls within popup editing interfaces, including the ability to integrate Kendo UI widgets using data-role attributes for enhanced UI customization and dynamic editing experiences in hierarchical data grids.
+How can I customize the popup editor template in a Kendo UI TreeList component to match my specific form layout needs? Configure and customize popup editor templates for tree-structured grid components by defining custom HTML markup or MVVM bindings that bind individual editable fields to specific input elements, enabling tailored form layouts, complex field editors, and per-column controls within popup editing interfaces, including the ability to integrate Kendo UI widgets using data-role attributes for enhanced UI customization and dynamic editing experiences in hierarchical data grids.
 </div>
 
 #### Example - customizing the popup editor
@@ -3129,7 +3129,7 @@ Configures the Kendo UI Window instance which is used when the TreeList edit mod
 
 
 <div class="meta-api-description">
-Configure and customize the popup dialog or modal window used for editing items when in popup edit mode, including setting the title, dimensions, modal behavior, animations, action buttons, templates, and appearance of the edit form. Control and tailor the editing interface window's settings like size, layout, animation effects, modal overlay, toolbar actions, and content templates to enhance user interaction and editing experience within a TreeList or similar hierarchical data grid. Adjust the popup editor's visual and functional properties to enable, disable, or personalize the edit dialog’s look and behavior, ensuring seamless integration and intuitive editing workflows during popup mode.
+How do I customize the popup edit window in Kendo UI TreeList? Configure and customize the popup dialog or modal window used for editing items when in popup edit mode, including setting the title, dimensions, modal behavior, animations, action buttons, templates, and appearance of the edit form. Control and tailor the editing interface window's settings like size, layout, animation effects, modal overlay, toolbar actions, and content templates to enhance user interaction and editing experience within a TreeList or similar hierarchical data grid. Adjust the popup editor's visual and functional properties to enable, disable, or personalize the edit dialog’s look and behavior, ensuring seamless integration and intuitive editing workflows during popup mode.
 </div>
 
 #### Example - configuring the Window in the popup edit mode
@@ -3186,7 +3186,7 @@ Configures the Excel export settings of the TreeList.
 
 
 <div class="meta-api-description">
-Control exporting hierarchical grid or tree-structured data to Excel by configuring Excel export options such as setting the output filename, customizing worksheet names, defining column visibility and formatting, including or excluding child nodes and nested data, managing paging and filtering during export, applying workbook-level settings like proxies or templates, and enabling fine-tuning of export behaviors to match desired Excel output, sheet structure, and file organization for exporting trees, lists, or complex data grids to spreadsheets in various export scenarios.
+How do I configure Excel export options for hierarchical data in Kendo UI TreeList? Control exporting hierarchical grid or tree-structured data to Excel by configuring Excel export options such as setting the output filename, customizing worksheet names, defining column visibility and formatting, including or excluding child nodes and nested data, managing paging and filtering during export, applying workbook-level settings like proxies or templates, and enabling fine-tuning of export behaviors to match desired Excel output, sheet structure, and file organization for exporting trees, lists, or complex data grids to spreadsheets in various export scenarios.
 </div>
 
 #### Example
@@ -3215,7 +3215,7 @@ If set to `true` the TreeList will export all pages of data. By default the Tree
 
 
 <div class="meta-api-description">
-Enable exporting all data rows to an Excel file instead of just the current visible page by configuring the option to include every record from all pages during export, allowing full dataset export across pagination boundaries, supporting use cases where users want to export complete data rather than partial or paged views, controlling whether the export captures only the current subset versus the entire data source, setting or toggling export scope for Excel downloads to handle multi-page data structures in hierarchical or tree-like lists, ensuring comprehensive export output regardless of pagination, managing full versus partial data export for spreadsheet generation, setting export modes to include all records or simply the displayed page when exporting to Excel formats.
+How to export all TreeList pages to Excel instead of just the current page? Enable exporting all data rows to an Excel file instead of just the current visible page by configuring the option to include every record from all pages during export, allowing full dataset export across pagination boundaries, supporting use cases where users want to export complete data rather than partial or paged views, controlling whether the export captures only the current subset versus the entire data source, setting or toggling export scope for Excel downloads to handle multi-page data structures in hierarchical or tree-like lists, ensuring comprehensive export output regardless of pagination, managing full versus partial data export for spreadsheet generation, setting export modes to include all records or simply the displayed page when exporting to Excel formats.
 </div>
 
 #### Example - export all pages of data
@@ -3262,7 +3262,7 @@ Specifies the file name of the exported Excel file.
 
 
 <div class="meta-api-description">
-Set or customize the name of the exported Excel file when saving or downloading data from the hierarchical grid, manage the default or dynamic filename for the Excel (.xlsx) export, specify or control the workbook's output file name to ensure meaningful or user-friendly titles during export operations, enable naming conventions for exported spreadsheets, adjust or configure the export file's identification for downloadable Excel workbooks generated from the tree-structured data list component.
+How to set custom filename for exported Excel file in TreeList Kendo UI component? Set or customize the name of the exported Excel file when saving or downloading data from the hierarchical grid, manage the default or dynamic filename for the Excel (.xlsx) export, specify or control the workbook's output file name to ensure meaningful or user-friendly titles during export operations, enable naming conventions for exported spreadsheets, adjust or configure the export file's identification for downloadable Excel workbooks generated from the tree-structured data list component.
 </div>
 
 #### Example - setting the default Excel file name
@@ -3305,7 +3305,7 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
 
 
 <div class="meta-api-description">
-Control whether column filters are included or excluded in the Excel export generated from the TreeList, enabling or disabling filter controls within the exported spreadsheet. Configure the export to show, set, or remove column-level filtering options directly inside the Excel file without impacting the interactive filtering behavior of the TreeList itself. Adjust settings to embed filter dropdowns, searchable filters, or disable them in the output Excel document, affecting only the static export representation rather than the live UI filtering capabilities.
+How to control column filters in TreeList Excel export? Control whether column filters are included or excluded in the Excel export generated from the TreeList, enabling or disabling filter controls within the exported spreadsheet. Configure the export to show, set, or remove column-level filtering options directly inside the Excel file without impacting the interactive filtering behavior of the TreeList itself. Adjust settings to embed filter dropdowns, searchable filters, or disable them in the output Excel document, affecting only the static export representation rather than the live UI filtering capabilities.
 </div>
 
 #### Example - enabling filtering in the output Excel file
@@ -3348,7 +3348,7 @@ If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/
 
 
 <div class="meta-api-description">
-Control export behavior for Excel files by enabling or disabling proxy routing during file generation, allowing the developer to force the exported Excel content to pass through a specified proxy URL regardless of browser capabilities, or to permit direct local file saving without proxy interception. Configure settings to either route export data through a server-side proxy for improved compatibility and security or to save Excel files directly on the client side, managing how export requests are handled, transmitted, and saved. Adjust export handling to enable proxy forwarding to a designated endpoint or bypass it for native browser file saving, supporting scenarios involving export content delivery, server load balancing, cross-origin restrictions, and file saving workflows. Set options to control whether Excel export streams use proxy URLs, influence save paths, override local storage capabilities, and determine the routing method for exported spreadsheet data within the TreeList component.
+How can I control Excel export behavior in Kendo UI TreeList to always route through a proxy server? Control export behavior for Excel files by enabling or disabling proxy routing during file generation, allowing the developer to force the exported Excel content to pass through a specified proxy URL regardless of browser capabilities, or to permit direct local file saving without proxy interception. Configure settings to either route export data through a server-side proxy for improved compatibility and security or to save Excel files directly on the client side, managing how export requests are handled, transmitted, and saved. Adjust export handling to enable proxy forwarding to a designated endpoint or bypass it for native browser file saving, supporting scenarios involving export content delivery, server load balancing, cross-origin restrictions, and file saving workflows. Set options to control whether Excel export streams use proxy URLs, influence save paths, override local storage capabilities, and determine the routing method for exported spreadsheet data within the TreeList component.
 </div>
 
 #### Example
@@ -3384,7 +3384,7 @@ The proxy will receive a POST request with the following parameters in the reque
 
 
 <div class="meta-api-description">
-Configure or specify a server endpoint URL to act as a proxy for delivering exported Excel files when direct client-side saving is unsupported or restricted by browsers like IE9 or Safari, enabling seamless file downloads by posting base64 encoded spreadsheet content, MIME type, and designated filenames to a server-side handler that streams the decoded file back with appropriate content-disposition headers for attachment; this setup supports scenarios requiring secure, cross-browser compatible Excel exports, custom filename control, and backend processing to facilitate file delivery otherwise blocked by local file system limitations or older browser constraints.
+How do I enable Excel export in Kendo UI TreeList when using IE9? Configure or specify a server endpoint URL to act as a proxy for delivering exported Excel files when direct client-side saving is unsupported or restricted by browsers like IE9 or Safari, enabling seamless file downloads by posting base64 encoded spreadsheet content, MIME type, and designated filenames to a server-side handler that streams the decoded file back with appropriate content-disposition headers for attachment; this setup supports scenarios requiring secure, cross-browser compatible Excel exports, custom filename control, and backend processing to facilitate file delivery otherwise blocked by local file system limitations or older browser constraints.
 </div>
 
 #### Example - setting the server proxy URL
@@ -3427,7 +3427,7 @@ If set to `true`, the user can filter the data source by using the TreeList filt
 
 
 <div class="meta-api-description">
-Control the ability to enable or disable interactive filtering of columns in a hierarchical data grid, allowing users to search, filter, or narrow down displayed data through filter menus or customizable filter options, including configuring filter behavior, enabling filter input fields, setting filter modes, and applying multi-column filters within a tree-structured list.
+How do I enable filtering in a Kendo UI TreeList column? Control the ability to enable or disable interactive filtering of columns in a hierarchical data grid, allowing users to search, filter, or narrow down displayed data through filter menus or customizable filter options, including configuring filter behavior, enabling filter input fields, setting filter modes, and applying multi-column filters within a tree-structured list.
 </div>
 
 #### Example - enabling and configuring filtering
@@ -3500,7 +3500,7 @@ If set to `true`, the filter menu will allow the user to input a second criteria
 
 
 <div class="meta-api-description">
-Enable configuring additional filter criteria in the column filter menu to allow users to apply multiple conditions or complex filtering logic such as combining filters with AND/OR operators, setting up advanced multi-rule filters, entering more than one search term or value directly in the UI, enhancing data narrowing capabilities, supporting compound filter expressions, and controlling layered or sequential filtering within tree-structured lists or grids.
+How to configure advanced filter criteria in Kendo UI TreeList's column filter menu? Enable configuring additional filter criteria in the column filter menu to allow users to apply multiple conditions or complex filtering logic such as combining filters with AND/OR operators, setting up advanced multi-rule filters, entering more than one search term or value directly in the UI, enhancing data narrowing capabilities, supporting compound filter expressions, and controlling layered or sequential filtering within tree-structured lists or grids.
 </div>
 
 #### Example - disabling the extra filtering criteria
@@ -3529,7 +3529,7 @@ The text messages that are displayed in the filter menu. Use it to customize or 
 
 
 <div class="meta-api-description">
-Control and personalize filter menu labels and text in hierarchical data grids by customizing, overriding, or localizing filter messages for tree-structured lists, enabling tailored filter prompts, instructions, and options display, and adjusting language or terminology in filter dropdowns and search fields within nested or grouped data views.
+How can I customize filter messages in my Kendo UI TreeList? Control and personalize filter menu labels and text in hierarchical data grids by customizing, overriding, or localizing filter messages for tree-structured lists, enabling tailored filter prompts, instructions, and options display, and adjusting language or terminology in filter dropdowns and search fields within nested or grouped data views.
 </div>
 
 #### Example - customizing the filter menu messages
@@ -3563,7 +3563,7 @@ The text of the option which represents the `AND` logical operation.
 
 
 <div class="meta-api-description">
-Customize or configure the label, text, or display name shown for the logical "and" operator within tree-based or hierarchical list filtering interfaces, enabling control over how conjunctions between multiple filter conditions are presented or localized in user interfaces, filter dialogs, or query builders, including adjusting wording for clarity, translation, or UI consistency in combinational filter expressions.
+How to change the label for the "and" operator in a Kendo UI TreeList filter? Customize or configure the label, text, or display name shown for the logical "and" operator within tree-based or hierarchical list filtering interfaces, enabling control over how conjunctions between multiple filter conditions are presented or localized in user interfaces, filter dialogs, or query builders, including adjusting wording for clarity, translation, or UI consistency in combinational filter expressions.
 </div>
 
 #### Example - setting the AND message
@@ -3594,7 +3594,7 @@ The text of the button which clears the filter.
 
 
 <div class="meta-api-description">
-Customize, localize, or set the label and text displayed on the clear filter button within hierarchical or tree-structured lists, enabling control over UI messaging for clearing applied filters, resetting filter inputs, or removing search criteria in tree data grids, allowing developers to adjust wording to match language preferences, user interface terminology, or accessibility requirements for filter clearing actions in data presentations and interactive filtering scenarios.
+How do I customize the clear filter button label in a Kendo UI TreeList? Customize, localize, or set the label and text displayed on the clear filter button within hierarchical or tree-structured lists, enabling control over UI messaging for clearing applied filters, resetting filter inputs, or removing search criteria in tree data grids, allowing developers to adjust wording to match language preferences, user interface terminology, or accessibility requirements for filter clearing actions in data presentations and interactive filtering scenarios.
 </div>
 
 #### Example - setting the clear message
@@ -3625,7 +3625,7 @@ The text of the button which applies the filter.
 
 
 <div class="meta-api-description">
-Customize or translate the text label on the filter apply button in hierarchical data grids or tree-structured lists, enabling localization or modification of filter action prompts, button captions, or UI text related to applying filters in tree lists, grids, or nested data views, supporting internationalization, user interface text configuration, and adaptive language settings for filter controls in interactive tree table components.
+How do I change the text on the filter apply button in a Kendo UI TreeList? Customize or translate the text label on the filter apply button in hierarchical data grids or tree-structured lists, enabling localization or modification of filter action prompts, button captions, or UI text related to applying filters in tree lists, grids, or nested data views, supporting internationalization, user interface text configuration, and adaptive language settings for filter controls in interactive tree table components.
 </div>
 
 #### Example - setting the filter message
@@ -3656,7 +3656,7 @@ The text of the information message on top of the filter menu.
 
 
 <div class="meta-api-description">
-Set or customize the informational text displayed at the top of a filter menu in hierarchical or tree-structured data grids, enabling developers to configure, modify, or replace default filter guidance messages, hints, or instructions shown above filter input fields in tree list components, facilitating clearer user prompts for applying or using filtering options, messages related to filter criteria, or contextual help for searching and sorting nested data views.
+How to change the text above filter input fields in a Kendo UI TreeList? Set or customize the informational text displayed at the top of a filter menu in hierarchical or tree-structured data grids, enabling developers to configure, modify, or replace default filter guidance messages, hints, or instructions shown above filter input fields in tree list components, facilitating clearer user prompts for applying or using filtering options, messages related to filter criteria, or contextual help for searching and sorting nested data views.
 </div>
 
 #### Example - setting the info message
@@ -3687,7 +3687,7 @@ The text that is rendered for the `title` attribute of the filter menu form.
 
 
 <div class="meta-api-description">
-Customize or configure the filter menu form's title text in hierarchical or tree-structured data grids to support localization, set or change the accessible name of the filtering interface, enable setting descriptive tooltips or labels for filter dialogs in tree lists, control the display text shown in filter controls for nested data views, modify or translate the filter form heading to improve usability and clarity in data filtering interfaces, and localize or adapt the filter menu title attribute to different languages and contexts within tree-based data presentations.
+How to customize the title of the filter menu in a TreeList component? Customize or configure the filter menu form's title text in hierarchical or tree-structured data grids to support localization, set or change the accessible name of the filtering interface, enable setting descriptive tooltips or labels for filter dialogs in tree lists, control the display text shown in filter controls for nested data views, modify or translate the filter form heading to improve usability and clarity in data filtering interfaces, and localize or adapt the filter menu title attribute to different languages and contexts within tree-based data presentations.
 </div>
 
 #### Example
@@ -3717,7 +3717,7 @@ The text of the radio button for `false` values. Displayed when the user filters
 
 
 <div class="meta-api-description">
-Customize or configure the label, text, or caption displayed for false Boolean filter options in hierarchical or tree-structured data grids, enabling control over how "false" values appear in filter selection menus, radio buttons, or toggles when filtering by Boolean fields within tree list components, filterable columns, or checkbox states across nested row data.
+How to customize the label for false Boolean filter options in Kendo UI TreeList? Customize or configure the label, text, or caption displayed for false Boolean filter options in hierarchical or tree-structured data grids, enabling control over how "false" values appear in filter selection menus, radio buttons, or toggles when filtering by Boolean fields within tree list components, filterable columns, or checkbox states across nested row data.
 </div>
 
 #### Example - setting the isFalse message
@@ -3757,7 +3757,7 @@ The text of the radio button for `true` values. Displayed when the user filters 
 
 
 <div class="meta-api-description">
-Customize or configure the text label displayed for the true option in Boolean field filters within hierarchical or tree-structured data grids, including setting, controlling, or enabling the radio button captions that represent "true" values during filtering operations on tree lists, boolean property searches, or data grids with nested entries, ensuring clarity for filtering controls in user interfaces that handle true/false or yes/no conditions in complex data views.
+How to customize the "True" label in TreeList Boolean filters? Customize or configure the text label displayed for the true option in Boolean field filters within hierarchical or tree-structured data grids, including setting, controlling, or enabling the radio button captions that represent "true" values during filtering operations on tree lists, boolean property searches, or data grids with nested entries, ensuring clarity for filtering controls in user interfaces that handle true/false or yes/no conditions in complex data views.
 </div>
 
 #### Example - setting the isTrue message
@@ -3797,7 +3797,7 @@ The text of the option which represents the `OR` logical operation.
 
 
 <div class="meta-api-description">
-Customize, localize, or configure the text that appears for logical OR conditions in filter prompts, messages, or labels within hierarchical data grids, tree lists, or nested filtering interfaces; control the wording shown when users combine multiple filter criteria using OR operators, adapt filter logic language for internationalization, translation, or regional settings, and adjust user-facing filter messages to clarify alternative filtering options or selectable conditions in tree-structured data views.
+How to customize OR filter condition text in Kendo UI TreeList? Customize, localize, or configure the text that appears for logical OR conditions in filter prompts, messages, or labels within hierarchical data grids, tree lists, or nested filtering interfaces; control the wording shown when users combine multiple filter criteria using OR operators, adapt filter logic language for internationalization, translation, or regional settings, and adjust user-facing filter messages to clarify alternative filtering options or selectable conditions in tree-structured data views.
 </div>
 
 #### Example - setting the or message
@@ -3838,7 +3838,7 @@ This will cause one additional read request per string column. The AutoComplete 
 
 
 <div class="meta-api-description">
-Control how filtering is enabled in hierarchical data grids, allowing configuration to show filter inputs either as an additional row below the headers for direct inline filtering, within column header menus requiring a filter icon click, or both simultaneously, enabling users to set up filters via header rows, dropdown menu filters, or combined filtering interfaces. This setup supports inline filtering controls, menu-based filter dropdowns, and hybrid modes, impacting data loading by duplicating data sources for autocomplete filters on string columns without paging, and facilitating flexible user-driven filtering experiences through both filter row inputs and column menu selections.
+How to configure filtering in hierarchical data grids with Kendo UI TreeList? Control how filtering is enabled in hierarchical data grids, allowing configuration to show filter inputs either as an additional row below the headers for direct inline filtering, within column header menus requiring a filter icon click, or both simultaneously, enabling users to set up filters via header rows, dropdown menu filters, or combined filtering interfaces. This setup supports inline filtering controls, menu-based filter dropdowns, and hybrid modes, impacting data loading by duplicating data sources for autocomplete filters on string columns without paging, and facilitating flexible user-driven filtering experiences through both filter row inputs and column menu selections.
 </div>
 
 #### Example - set mode option to use both "menu" and "row" modes simultaneously
@@ -3871,7 +3871,7 @@ The text of the filter operators that are displayed in the filter menu.
 
 
 <div class="meta-api-description">
-Control and customize the text labels for filter operators in hierarchical list filtering menus, enabling you to configure, rename, or override comparison operators such as equals, contains, starts with, ends with, greater than, less than, and more, to tailor filter criteria options across multiple data tree components or grid filters. Adjust or replace default operator names used in filtering menus to match specific language, terminology, localization needs, or user preferences, ensuring consistent and recognizable filter controls when searching, sorting, or applying conditional queries within nested or tree-structured data views. This setup optimizes filtering interfaces by allowing developers to set global or individual operator labels that appear in filter dropdowns to enhance usability, customization, and clarity in dynamic, tree-formatted data filtering scenarios.
+How do I customize the operator labels in a TreeList filter menu? Control and customize the text labels for filter operators in hierarchical list filtering menus, enabling you to configure, rename, or override comparison operators such as equals, contains, starts with, ends with, greater than, less than, and more, to tailor filter criteria options across multiple data tree components or grid filters. Adjust or replace default operator names used in filtering menus to match specific language, terminology, localization needs, or user preferences, ensuring consistent and recognizable filter controls when searching, sorting, or applying conditional queries within nested or tree-structured data views. This setup optimizes filtering interfaces by allowing developers to set global or individual operator labels that appear in filter dropdowns to enhance usability, customization, and clarity in dynamic, tree-formatted data filtering scenarios.
 </div>
 
 #### Example - overriding the filterable options in multiple TreeLists
@@ -3930,7 +3930,7 @@ In the following example, only the `Contains...` and `Starts with...` operators 
 
 
 <div class="meta-api-description">
-Customize, modify, or set the available string filter operations and their labels for filtering text columns in a hierarchical data grid or tree structure, controlling which filtering options appear such as contains, starts with, ends with, equals, or excludes and how these options are labeled in dropdown menus, enabling tailored filtering experiences by including or omitting specific operators to match user search preferences and filtering needs for string values in tree or hierarchical list views.
+How do I customize the filter options for string columns in a Kendo UI TreeList? Customize, modify, or set the available string filter operations and their labels for filtering text columns in a hierarchical data grid or tree structure, controlling which filtering options appear such as contains, starts with, ends with, equals, or excludes and how these options are labeled in dropdown menus, enabling tailored filtering experiences by including or omitting specific operators to match user search preferences and filtering needs for string values in tree or hierarchical list views.
 </div>
 
 #### Example - setting the string operators
@@ -3968,7 +3968,7 @@ The text of the `eq` (equal to) filter operator.
 
 
 <div class="meta-api-description">
-Configure or customize the label text for the string equality filter option used in filtering data within hierarchical or tree-structured lists, enabling localization or renaming of the "equals" operator in filter dropdowns. Adjust or define the displayed name for exact match string comparisons, control how the "equal to" string operator appears in user interfaces for filtering tree or nested data, and manage the terminology presented when setting up string filters that check for precise equality in tree list filters. This supports internationalization, custom phrasing, and UI consistency for string equality filter controls in hierarchical data grids or tree list components.
+How do I customize the "equals" filter option label in a Kendo UI TreeList? Configure or customize the label text for the string equality filter option used in filtering data within hierarchical or tree-structured lists, enabling localization or renaming of the "equals" operator in filter dropdowns. Adjust or define the displayed name for exact match string comparisons, control how the "equal to" string operator appears in user interfaces for filtering tree or nested data, and manage the terminology presented when setting up string filters that check for precise equality in tree list filters. This supports internationalization, custom phrasing, and UI consistency for string equality filter controls in hierarchical data grids or tree list components.
 </div>
 
 #### Example
@@ -4000,7 +4000,7 @@ The text of the `ne` (not equal to) filter operator.
 
 
 <div class="meta-api-description">
-Customize or localize the label, caption, or text shown for the "not equal" string filter operator in hierarchical or tree-structured data grids, enabling control over the display wording for inequality filtering conditions, adjusting or setting the operator text for string-based filtering where values are filtered by excluding matches, supporting localization, translation, or personalized phrasing of the not-equal string filter option in tree list components.
+How to customize the "not equal" filter operator label in Kendo UI TreeList? Customize or localize the label, caption, or text shown for the "not equal" string filter operator in hierarchical or tree-structured data grids, enabling control over the display wording for inequality filtering conditions, adjusting or setting the operator text for string-based filtering where values are filtered by excluding matches, supporting localization, translation, or personalized phrasing of the not-equal string filter option in tree list components.
 </div>
 
 #### Example
@@ -4032,7 +4032,7 @@ The text of the `isnull` filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the label text for the filter operator that identifies null or missing string values within hierarchical data grids or tree-structured lists, enabling developers to control how the "is null" string condition appears in filtering options, set user interface language or terminology for filtering by empty or non-existent string entries, manage filter comparison operators for strings checking the presence or absence of data, and tailor the filter operator wording for better clarity in tree list filtering scenarios.
+How do I customize the "is null" filter option in a Kendo UI TreeList? Customize or configure the label text for the filter operator that identifies null or missing string values within hierarchical data grids or tree-structured lists, enabling developers to control how the "is null" string condition appears in filtering options, set user interface language or terminology for filtering by empty or non-existent string entries, manage filter comparison operators for strings checking the presence or absence of data, and tailor the filter operator wording for better clarity in tree list filtering scenarios.
 </div>
 
 #### Example
@@ -4064,7 +4064,7 @@ The text of the `isnotnull` filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the label, text, or display name for the string filter operator that checks for non-empty, non-null, or existing string values within a column filter interface, enabling control over how "is not null," "has value," or "string is present" operators appear and are presented to users in filtering options.
+How do I customize the label for the "is not null" filter operator in a TreeList column? Customize or configure the label, text, or display name for the string filter operator that checks for non-empty, non-null, or existing string values within a column filter interface, enabling control over how "is not null," "has value," or "string is present" operators appear and are presented to users in filtering options.
 </div>
 
 #### Example
@@ -4096,7 +4096,7 @@ The text of the `isempty` filter operator.
 
 
 <div class="meta-api-description">
-Customize the display text or label for the string filter operator that checks for empty or blank values within filtering interfaces, allowing definition or localization of the "is empty" condition used in search, filtering, query builders, or UI elements that enable setting criteria based on whether a string is empty, null, or has no content, helping users configure, rename, or modify the prompt shown for empty string matching in tree or hierarchical list filters.
+How to customize the "is empty" string filter operator in Kendo UI TreeList? Customize the display text or label for the string filter operator that checks for empty or blank values within filtering interfaces, allowing definition or localization of the "is empty" condition used in search, filtering, query builders, or UI elements that enable setting criteria based on whether a string is empty, null, or has no content, helping users configure, rename, or modify the prompt shown for empty string matching in tree or hierarchical list filters.
 </div>
 
 #### Example
@@ -4128,7 +4128,7 @@ The text of the `isnotempty` filter operator.
 
 
 <div class="meta-api-description">
-Set or customize the label, text, or display name for the "is not empty" string filter option used in filtering lists or tree structures, enabling clear identification when filtering to exclude empty or blank string values, configuring filter operators for string data to detect non-empty entries, adjusting filter labels in user interfaces to clarify the "not empty" condition, specifying how the filter prompt or operator name appears for non-blank string checks in data grids, lists, or tree-like data presentations, and controlling the descriptive text shown for string filters that match any value except empty or null strings.
+How do I customize the "is not empty" filter option in a Kendo UI TreeList? Set or customize the label, text, or display name for the "is not empty" string filter option used in filtering lists or tree structures, enabling clear identification when filtering to exclude empty or blank string values, configuring filter operators for string data to detect non-empty entries, adjusting filter labels in user interfaces to clarify the "not empty" condition, specifying how the filter prompt or operator name appears for non-blank string checks in data grids, lists, or tree-like data presentations, and controlling the descriptive text shown for string filters that match any value except empty or null strings.
 </div>
 
 #### Example
@@ -4160,7 +4160,7 @@ The text of the `startswith` filter operator.
 
 
 <div class="meta-api-description">
-Set or customize the localized text, label, or display name for the string filter operation that checks if text begins with a specified sequence in a hierarchical or tree-structured list. Adjust, configure, or define how the "starts with" filter option appears in user interfaces, including changing language, translation, or wording to match localization needs or specific terminology preferences when filtering string data by prefix or initial characters.
+How do I customize the "starts with" filter option in a Kendo UI TreeList? Set or customize the localized text, label, or display name for the string filter operation that checks if text begins with a specified sequence in a hierarchical or tree-structured list. Adjust, configure, or define how the "starts with" filter option appears in user interfaces, including changing language, translation, or wording to match localization needs or specific terminology preferences when filtering string data by prefix or initial characters.
 </div>
 
 #### Example
@@ -4192,7 +4192,7 @@ The text of the `contains` filter operator.
 
 
 <div class="meta-api-description">
-Customize or set the label and text shown for the string "contains" filter option in tree-structured list filtering interfaces, enabling control over how substring matching, inclusion checks, partial text searches, or filtering by contained values appear in dropdowns or filter menus when users look to apply text-based filters that search for entries containing specific substrings, words, or phrases within hierarchical data views.
+How do I customize the "contains" filter option in a Kendo UI TreeList widget? Customize or set the label and text shown for the string "contains" filter option in tree-structured list filtering interfaces, enabling control over how substring matching, inclusion checks, partial text searches, or filtering by contained values appear in dropdowns or filter menus when users look to apply text-based filters that search for entries containing specific substrings, words, or phrases within hierarchical data views.
 </div>
 
 #### Example
@@ -4224,7 +4224,7 @@ The text of the `doesnotcontain` filter operator.
 
 
 <div class="meta-api-description">
-Control and customize the display text or label for the string filter operator that excludes results containing specific substrings in hierarchical or tree-structured data grids, enabling localized or translated phrasing for "does not contain" filtering in tree lists, allowing filtering options where users can search for entries that do not include certain words or characters, supporting various languages and regional settings to tailor the filter operator’s wording to user preferences or internationalization needs in tree-like data views.
+How to customize the "does not contain" filter operator label in a Kendo UI TreeList? Control and customize the display text or label for the string filter operator that excludes results containing specific substrings in hierarchical or tree-structured data grids, enabling localized or translated phrasing for "does not contain" filtering in tree lists, allowing filtering options where users can search for entries that do not include certain words or characters, supporting various languages and regional settings to tailor the filter operator’s wording to user preferences or internationalization needs in tree-like data views.
 </div>
 
 #### Example
@@ -4256,7 +4256,7 @@ The text of the `endswith` filter operator.
 
 
 <div class="meta-api-description">
-Customize, configure, or set the text label, name, or caption shown for string filter options that check if values end with specific characters, suffixes, or substrings in hierarchical or tree-structured lists. Control how the suffix matching filter operation is presented, displayed, or named to match user interfaces that involve searching, filtering, or querying data entries based on string endings, tail matches, postfix conditions, or pattern suffixes in tree list components or complex nested data grids.
+How to customize the label for the "ends with" filter operator in Kendo UI TreeList? Customize, configure, or set the text label, name, or caption shown for string filter options that check if values end with specific characters, suffixes, or substrings in hierarchical or tree-structured lists. Control how the suffix matching filter operation is presented, displayed, or named to match user interfaces that involve searching, filtering, or querying data entries based on string endings, tail matches, postfix conditions, or pattern suffixes in tree list components or complex nested data grids.
 </div>
 
 #### Example
@@ -4292,7 +4292,7 @@ In the following example, only the `Equal to...` and `Not equal to...` operators
 
 
 <div class="meta-api-description">
-Customize and control numeric filter operators for columns with number data, adjusting which comparison options like equals, not equals, greater than, less than, or other numeric conditions appear in filter dropdowns for TreeList or similar grid components, enabling tailored numeric filtering criteria, filtering logic configuration, operator label adjustments, and precise control over available number-based filter comparisons and expressions to match user queries for setting or enabling specific numeric filter operations in data tables or interactive lists.
+How to customize numeric filter operators in Kendo UI TreeList? Customize and control numeric filter operators for columns with number data, adjusting which comparison options like equals, not equals, greater than, less than, or other numeric conditions appear in filter dropdowns for TreeList or similar grid components, enabling tailored numeric filtering criteria, filtering logic configuration, operator label adjustments, and precise control over available number-based filter comparisons and expressions to match user queries for setting or enabling specific numeric filter operations in data tables or interactive lists.
 </div>
 
 #### Example - setting the number operators
@@ -4336,7 +4336,7 @@ The text of the `eq` (equal to) filter operator.
 
 
 <div class="meta-api-description">
-Adjust or translate the label text for the numeric equality filter operator, enabling customization of the "equal to" condition in number column filters, modifying the caption or name developers see when setting up filters that check if values are exactly equal, configuring filter UI operators for numbers, localizing or changing filter operator names, controlling how equal-to comparisons appear in filter dropdowns or menus in data grids or tree lists.
+How do I customize the "equal to" filter operator label in a number column of my Kendo UI TreeList? Adjust or translate the label text for the numeric equality filter operator, enabling customization of the "equal to" condition in number column filters, modifying the caption or name developers see when setting up filters that check if values are exactly equal, configuring filter UI operators for numbers, localizing or changing filter operator names, controlling how equal-to comparisons appear in filter dropdowns or menus in data grids or tree lists.
 </div>
 
 #### Example
@@ -4368,7 +4368,7 @@ The text of the `ne` (not equal to) filter operator.
 
 
 <div class="meta-api-description">
-Configure or customize the label and text displayed for the "not equal to" numeric filter operator in hierarchical or tree-structured data lists, enabling users to set, change, or localize the wording used to exclude matching numbers during filtering, support differentiation of numeric criteria excluding equal values, and control how numeric inequality filtering expressions appear in tree data grids or lists.
+How do I customize the "not equal to" filter operator label in a TreeList? Configure or customize the label and text displayed for the "not equal to" numeric filter operator in hierarchical or tree-structured data lists, enabling users to set, change, or localize the wording used to exclude matching numbers during filtering, support differentiation of numeric criteria excluding equal values, and control how numeric inequality filtering expressions appear in tree data grids or lists.
 </div>
 
 #### Example
@@ -4400,7 +4400,7 @@ The text of the `isnull` filter operator.
 
 
 <div class="meta-api-description">
-Configure or customize the display text for the "is null" condition in numeric filtering within hierarchical list controls, enabling setting, localizing, or translating the label that identifies when numeric fields have no value or are empty, supporting searches related to filtering numbers by null, empty, undefined, missing, or blank conditions in tree-structured data views with customizable operator names.
+How to customize the "is null" condition label in Kendo UI TreeList numeric filtering? Configure or customize the display text for the "is null" condition in numeric filtering within hierarchical list controls, enabling setting, localizing, or translating the label that identifies when numeric fields have no value or are empty, supporting searches related to filtering numbers by null, empty, undefined, missing, or blank conditions in tree-structured data views with customizable operator names.
 </div>
 
 #### Example
@@ -4432,7 +4432,7 @@ The text of the `isnotnull` filter operator.
 
 
 <div class="meta-api-description">
-Adjust, customize, or localize the label and text that represent the "is not null" numeric filter condition in hierarchical or tree-structured list components, enabling developers to set, change, or control how number filters exclude null or empty values, modify filtering operators for numeric data to recognize non-null entries, and tailor filter operator names for better clarity or translation in filtering interfaces that use number-based conditions excluding nulls.
+How do I customize the "is not null" filter operator in a Kendo UI TreeList? Adjust, customize, or localize the label and text that represent the "is not null" numeric filter condition in hierarchical or tree-structured list components, enabling developers to set, change, or control how number filters exclude null or empty values, modify filtering operators for numeric data to recognize non-null entries, and tailor filter operator names for better clarity or translation in filtering interfaces that use number-based conditions excluding nulls.
 </div>
 
 #### Example
@@ -4464,7 +4464,7 @@ The text of the `gte` (greater than or equal to) filter operator.
 
 
 <div class="meta-api-description">
-Configure or customize the label text displayed for numeric filters that use "greater than or equal to" comparison in data grids or tree lists, enabling developers to set, change, or localize the operator’s wording for numeric filtering criteria, number-based filtering options, or conditional expressions that filter records where values are equal to or exceed a specified threshold, supporting personalization and UI flexibility for numeric filter operators involving comparisons like >= in grid or tree data structures.
+How to customize the label for "greater than or equal to" filter in Kendo UI TreeList? Configure or customize the label text displayed for numeric filters that use "greater than or equal to" comparison in data grids or tree lists, enabling developers to set, change, or localize the operator’s wording for numeric filtering criteria, number-based filtering options, or conditional expressions that filter records where values are equal to or exceed a specified threshold, supporting personalization and UI flexibility for numeric filter operators involving comparisons like >= in grid or tree data structures.
 </div>
 
 #### Example
@@ -4496,7 +4496,7 @@ The text of the `gt` (greater than) filter operator.
 
 
 <div class="meta-api-description">
-Set or customize the label text for the numeric filter operator that filters values greater than a specified number in hierarchical or tree-structured lists, adjusting how the "greater than" condition appears in filter menus, column filters, or search interfaces; ideal for localization, changing default operator names, or tailoring filter UI wording for numeric comparisons involving greater-than criteria, enabling control over filter operator display text in number-based filtering scenarios.
+How to customize the "greater than" operator label in Kendo UI TreeList? Set or customize the label text for the numeric filter operator that filters values greater than a specified number in hierarchical or tree-structured lists, adjusting how the "greater than" condition appears in filter menus, column filters, or search interfaces; ideal for localization, changing default operator names, or tailoring filter UI wording for numeric comparisons involving greater-than criteria, enabling control over filter operator display text in number-based filtering scenarios.
 </div>
 
 #### Example
@@ -4528,7 +4528,7 @@ The text of the `lte` (less than or equal to) filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the label, caption, or display text for the numeric "less than or equal to" filter operator in hierarchical grid or tree-structured data lists, enabling control over how the "lte" comparison option appears in filtering interfaces and menus for number-based filtering criteria within data trees or nested list components.
+How do I customize the label for the "less than or equal to" filter operator in a Kendo UI TreeList? Customize or configure the label, caption, or display text for the numeric "less than or equal to" filter operator in hierarchical grid or tree-structured data lists, enabling control over how the "lte" comparison option appears in filtering interfaces and menus for number-based filtering criteria within data trees or nested list components.
 </div>
 
 #### Example
@@ -4560,7 +4560,7 @@ The text of the `lt` (less than) filter operator.
 
 
 <div class="meta-api-description">
-Customize, configure, or set the label and display text for the "less than" operator in numeric filtering controls within hierarchical data grids or tree structures, enabling tailored wording for number comparison filters, adjusting operator names for filtering columns with numeric values, modifying or localizing the "less than" condition in number-based filter menus, and controlling how "lt" numeric filter operators appear in user interfaces for filtering data by values smaller than a given number.
+How do I customize the "less than" operator label in a Kendo UI TreeList numeric filter? Customize, configure, or set the label and display text for the "less than" operator in numeric filtering controls within hierarchical data grids or tree structures, enabling tailored wording for number comparison filters, adjusting operator names for filtering columns with numeric values, modifying or localizing the "less than" condition in number-based filter menus, and controlling how "lt" numeric filter operators appear in user interfaces for filtering data by values smaller than a given number.
 </div>
 
 #### Example
@@ -4596,7 +4596,7 @@ In the following example, only the `Is before...` and `Is after...` operators wi
 
 
 <div class="meta-api-description">
-Customize, set, or control the available filter operators for date columns in tree-like lists, specifying which comparison options like before, after, equal to, or not equal to appear in the date filtering dropdown. Enable, disable, or configure operator labels and filter choices to tailor date-based filtering behavior, determining which date conditions users can select when filtering data by date values, such as greater than, less than, on or before, or between specific dates. Adjust, define, or limit the visible date filter operations to streamline user input and refine filtering UI for hierarchical or tabular data structures.
+How do I customize the date filter operators in Kendo UI TreeList? Customize, set, or control the available filter operators for date columns in tree-like lists, specifying which comparison options like before, after, equal to, or not equal to appear in the date filtering dropdown. Enable, disable, or configure operator labels and filter choices to tailor date-based filtering behavior, determining which date conditions users can select when filtering data by date values, such as greater than, less than, on or before, or between specific dates. Adjust, define, or limit the visible date filter operations to streamline user input and refine filtering UI for hierarchical or tabular data structures.
 </div>
 
 #### Example - setting the date operators
@@ -4640,7 +4640,7 @@ The text of the `eq` (equal to) filter operator.
 
 
 <div class="meta-api-description">
-Customize, localize, or translate the label text used for the date equality filter operator in tree list or hierarchical data grids, enabling control over how "equals date," "date is equal to," or "filter by exact date" conditions appear in filtering UI, ensuring date comparison operators reflect localized terms, date-specific equality checks, or customized date filter labels across different languages, regions, or interface settings for enhanced user understanding and precise date-based filtering criteria.
+How to customize the date equality filter operator label in Kendo UI TreeList? Customize, localize, or translate the label text used for the date equality filter operator in tree list or hierarchical data grids, enabling control over how "equals date," "date is equal to," or "filter by exact date" conditions appear in filtering UI, ensuring date comparison operators reflect localized terms, date-specific equality checks, or customized date filter labels across different languages, regions, or interface settings for enhanced user understanding and precise date-based filtering criteria.
 </div>
 
 #### Example
@@ -4672,7 +4672,7 @@ The text of the `ne` (not equal to) filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the label, wording, or text display for the "not equal to" date filter operator within the TreeList filter settings, enabling control over how the date inequality comparison appears in filtering interfaces, search conditions, or date-based criteria that exclude specific date values by setting custom operator names or synonyms for date filtering functionality.
+How do I customize the "not equal to" date filter operator label in Kendo UI TreeList? Customize or configure the label, wording, or text display for the "not equal to" date filter operator within the TreeList filter settings, enabling control over how the date inequality comparison appears in filtering interfaces, search conditions, or date-based criteria that exclude specific date values by setting custom operator names or synonyms for date filtering functionality.
 </div>
 
 #### Example
@@ -4704,7 +4704,7 @@ The text of the `isnull` filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the text label, caption, or placeholder shown for filter options that check if a date value is empty, missing, null, undefined, or has no timestamp in hierarchical or tree-structured data grids. Control how date-based null checks, existence filters, and blank date searches appear in filter operator dropdowns, enabling intuitive UI for date filters that detect absence or nullity of date fields when users set conditions or build queries within tree list components.
+How do I customize the label for date filter option "is null" in a Kendo UI TreeList component? Customize or configure the text label, caption, or placeholder shown for filter options that check if a date value is empty, missing, null, undefined, or has no timestamp in hierarchical or tree-structured data grids. Control how date-based null checks, existence filters, and blank date searches appear in filter operator dropdowns, enabling intuitive UI for date filters that detect absence or nullity of date fields when users set conditions or build queries within tree list components.
 </div>
 
 #### Example
@@ -4736,7 +4736,7 @@ The text of the `isnotnull` filter operator.
 
 
 <div class="meta-api-description">
-Configure and customize the label or text displayed for date filters that check for non-empty, non-null, or existing date values within hierarchical or tree-structured lists, enabling users to control how "is not null" date filter options appear, modify default filter operator wording, adjust filter expressions targeting dates that are present or defined, and set user-friendly or localized labels for filtering out null or missing date entries in tree grid or TreeList filtering interfaces.
+How to customize "is not null" date filter label in Kendo UI TreeList? Configure and customize the label or text displayed for date filters that check for non-empty, non-null, or existing date values within hierarchical or tree-structured lists, enabling users to control how "is not null" date filter options appear, modify default filter operator wording, adjust filter expressions targeting dates that are present or defined, and set user-friendly or localized labels for filtering out null or missing date entries in tree grid or TreeList filtering interfaces.
 </div>
 
 #### Example
@@ -4768,7 +4768,7 @@ The text of the `gte` (greater than or equal to) filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the label, keyword, or text string representing the "greater than or equal to" condition for date filtering in hierarchical or tree-structured data grids, enabling you to specify, set, or localize the operators used to filter dates that are on or after a certain value in tree list or data table components, supporting queries for filtering dates with conditions like "on or later than," "from this date forward," "after or equal to," or "dates greater or equal," allowing flexible control over the phrasing related to date comparison filters in complex data views.
+How do I customize the "greater than or equal to" operator label in Kendo UI TreeList date filtering? Customize or configure the label, keyword, or text string representing the "greater than or equal to" condition for date filtering in hierarchical or tree-structured data grids, enabling you to specify, set, or localize the operators used to filter dates that are on or after a certain value in tree list or data table components, supporting queries for filtering dates with conditions like "on or later than," "from this date forward," "after or equal to," or "dates greater or equal," allowing flexible control over the phrasing related to date comparison filters in complex data views.
 </div>
 
 #### Example
@@ -4800,7 +4800,7 @@ The text of the `gt` (greater than) filter operator.
 
 
 <div class="meta-api-description">
-Customize or configure the label, text, or wording shown for the “greater than” date filter option in tree list or grid components, enabling control over how users see or interact with date filtering criteria set to include dates after a specified value, supporting user interface localization, readability, and filtering precision for date comparisons, time-based filtering rules, and query operators that check if dates exceed a given threshold.
+How do I customize the "greater than" date filter label in a Kendo UI TreeList? Customize or configure the label, text, or wording shown for the “greater than” date filter option in tree list or grid components, enabling control over how users see or interact with date filtering criteria set to include dates after a specified value, supporting user interface localization, readability, and filtering precision for date comparisons, time-based filtering rules, and query operators that check if dates exceed a given threshold.
 </div>
 
 #### Example
@@ -4832,7 +4832,7 @@ The text of the "lte" (less than or equal to) filter operator.
 
 
 <div class="meta-api-description">
-Configure or customize the label text for the "less than or equal to" date filter operator in filter menus and filter rows, enabling control over how the date comparison operator "lte" appears in filtering interfaces, including setting display text, modifying operator labels, adjusting filter expressions for dates with less than or equal comparison, and tailoring filter UI terminology for date range conditions using strings to represent "less than or equal to" date constraints.
+How do I customize the "less than or equal to" filter operator in Kendo UI TreeList? Configure or customize the label text for the "less than or equal to" date filter operator in filter menus and filter rows, enabling control over how the date comparison operator "lte" appears in filtering interfaces, including setting display text, modifying operator labels, adjusting filter expressions for dates with less than or equal comparison, and tailoring filter UI terminology for date range conditions using strings to represent "less than or equal to" date constraints.
 </div>
 
 #### Example
@@ -4864,7 +4864,7 @@ The text of the `lt` (less than) filter operator.
 
 
 <div class="meta-api-description">
-Configure or customize the label and user interface text for the date comparison operator representing "less than," "before," or "earlier than" in date filtering within a hierarchical or tree-structured data grid. Control the phrasing shown to users when applying a filter to find records with dates prior to a specified value, enabling setting, changing, or localizing the text that corresponds to date filters that check if a date is less than a target date. Adjust how the system presents the "date is before," "date earlier than," or "date less than" filtering criterion for enhanced clarity, usability, or language support in complex data lists or tree list components.
+How to customize the label for the "less than" date filter operator in a Kendo UI TreeList? Configure or customize the label and user interface text for the date comparison operator representing "less than," "before," or "earlier than" in date filtering within a hierarchical or tree-structured data grid. Control the phrasing shown to users when applying a filter to find records with dates prior to a specified value, enabling setting, changing, or localizing the text that corresponds to date filters that check if a date is less than a target date. Adjust how the system presents the "date is before," "date earlier than," or "date less than" filtering criterion for enhanced clarity, usability, or language support in complex data lists or tree list components.
 </div>
 
 #### Example
@@ -4896,7 +4896,7 @@ The height of the TreeList. Numeric values are treated as pixels.
 
 
 <div class="meta-api-description">
-Adjust or configure the vertical dimension, overall height, or pixel size of a hierarchical list or tree grid component to control its rendered space, fixed height, maximum height, or layout alignment; set numeric values to define the container’s height in pixels for proper display, scrolling behavior, visual constraints, or fitting within user interface areas and parent containers, ensuring consistent vertical sizing in tree data structures or expandable list views.
+How do I set the height of my Kendo UI TreeList component? Adjust or configure the vertical dimension, overall height, or pixel size of a hierarchical list or tree grid component to control its rendered space, fixed height, maximum height, or layout alignment; set numeric values to define the container’s height in pixels for proper display, scrolling behavior, visual constraints, or fitting within user interface areas and parent containers, ensuring consistent vertical sizing in tree data structures or expandable list views.
 </div>
 
 #### Example - setting the height as a number
@@ -4939,7 +4939,7 @@ Defines the text of the command buttons that are shown within the TreeList. Used
 
 
 <div class="meta-api-description">
-Customize, configure, or override the default command button labels such as edit, delete, save, cancel, or any custom actions displayed in hierarchical grid controls or tree-structured lists. Enable localized, translated, or personalized button texts to tailor the interface language for different regions, support multi-language applications, modify command labels for better user clarity, adjust UI text for editing and managing tree nodes, and control the display of action buttons within tree-like data views or hierarchical data grids. This encompasses setting custom, internationalized, or context-specific strings for all command buttons related to node operations in tree components.
+How can I customize the button labels in my Kendo UI TreeList component? Customize, configure, or override the default command button labels such as edit, delete, save, cancel, or any custom actions displayed in hierarchical grid controls or tree-structured lists. Enable localized, translated, or personalized button texts to tailor the interface language for different regions, support multi-language applications, modify command labels for better user clarity, adjust UI text for editing and managing tree nodes, and control the display of action buttons within tree-like data views or hierarchical data grids. This encompasses setting custom, internationalized, or context-specific strings for all command buttons related to node operations in tree components.
 </div>
 
 #### Example - changing the messages
@@ -4979,7 +4979,7 @@ Defines the text for the command buttons that are used across the widget.
 
 
 <div class="meta-api-description">
-Adjust or localize button labels and command text within hierarchical data grids to change default action captions, customize UI commands, rename buttons for sorting, editing, deleting, adding, or other tree list operations, and configure the display language or phrasing of command buttons in a tree view or expandable list interface.
+How do I customize the button labels in Kendo UI TreeList? Adjust or localize button labels and command text within hierarchical data grids to change default action captions, customize UI commands, rename buttons for sorting, editing, deleting, adding, or other tree list operations, and configure the display language or phrasing of command buttons in a tree view or expandable list interface.
 </div>
 
 #### Example - setting the command button messages
@@ -5015,7 +5015,7 @@ Defines the text of the **Cancel** button that discards the changes during editi
 
 
 <div class="meta-api-description">
-Customize, set, or translate the text label for the Cancel button that discards or reverts changes while editing rows or items within a hierarchical or tree-structured data grid, enabling localization, multiple language support, and user interface customization for canceling edits in tree-like editable lists or grids.
+How to change the Cancel edit button text in a Kendo UI TreeList? Customize, set, or translate the text label for the Cancel button that discards or reverts changes while editing rows or items within a hierarchical or tree-structured data grid, enabling localization, multiple language support, and user interface customization for canceling edits in tree-like editable lists or grids.
 </div>
 
 #### Example - setting the text of the **Cancel** button
@@ -5043,7 +5043,7 @@ Defines the text of the **Add new record** button that adds new data rows.
 
 
 <div class="meta-api-description">
-Control and customize the label text for the button that adds new entries or records in hierarchical data grids, enabling localization, language translation, or custom naming conventions for create, add, insert, or new record actions within tree-structured lists or tables. Adjust the displayed prompts, captions, or command button text used to initiate adding child or parent nodes in nested or expandable data views to match various languages, UI preferences, or user workflows.
+How do I customize the "Create" button label in a Kendo UI TreeList? Control and customize the label text for the button that adds new entries or records in hierarchical data grids, enabling localization, language translation, or custom naming conventions for create, add, insert, or new record actions within tree-structured lists or tables. Adjust the displayed prompts, captions, or command button text used to initiate adding child or parent nodes in nested or expandable data views to match various languages, UI preferences, or user workflows.
 </div>
 
 #### Example - setting the text of the **Add new record** button
@@ -5072,7 +5072,7 @@ Defines the text of the **Add child record** button that adds new child data row
 
 
 <div class="meta-api-description">
-Customize, configure, or set the label, caption, or text displayed on the button that adds a new child record or item within a hierarchical or tree-structured list interface, enabling localization, translation, or modification of the "add child," "create child node," "insert child entry," or similar command text for multi-language support and user interface adaptability in tree or nested data views.
+How do I customize the "Add Child" button label in a Kendo UI TreeList? Customize, configure, or set the label, caption, or text displayed on the button that adds a new child record or item within a hierarchical or tree-structured list interface, enabling localization, translation, or modification of the "add child," "create child node," "insert child entry," or similar command text for multi-language support and user interface adaptability in tree or nested data views.
 </div>
 
 #### Example - setting the text of the **Add child record** button
@@ -5101,7 +5101,7 @@ Defines the text of the **Delete** button that deletes a data row.
 
 
 <div class="meta-api-description">
-Set or customize the text label for delete buttons in data grids or table rows, control the wording shown on removal or deletion commands, configure the display text for row deletion actions, change or localize the label used when a user deletes an entry, adjust button captions for removing data entries, modify or set the command text that triggers data row deletion in hierarchical or tabular UI components.
+How to customize the delete button text in Kendo UI TreeList? Set or customize the text label for delete buttons in data grids or table rows, control the wording shown on removal or deletion commands, configure the display text for row deletion actions, change or localize the label used when a user deletes an entry, adjust button captions for removing data entries, modify or set the command text that triggers data row deletion in hierarchical or tabular UI components.
 </div>
 
 #### Example - setting the text of the **Delete** button
@@ -5129,7 +5129,7 @@ Defines the text of the **Edit** button that shows the editable fields for the r
 
 
 <div class="meta-api-description">
-Customize the label or text displayed on the edit button within tree-structured data grids that enables row editing or inline modification of fields, allowing developers to configure, change, localize, or override the default edit command text for interactive editing interfaces, including setting custom button captions, tooltips, or action names to control user prompts for modifying hierarchical list entries or tree grid items dynamically.
+How do I change the default edit button label in a Kendo UI TreeList? Customize the label or text displayed on the edit button within tree-structured data grids that enables row editing or inline modification of fields, allowing developers to configure, change, localize, or override the default edit command text for interactive editing interfaces, including setting custom button captions, tooltips, or action names to control user prompts for modifying hierarchical list entries or tree grid items dynamically.
 </div>
 
 #### Example - setting the text of the **Edit** button
@@ -5157,7 +5157,7 @@ Defines the text of the **Save Changes** button that saves modifed data rows.
 
 
 <div class="meta-api-description">
-Customize or configure the text label, caption, or title for the save changes button that commits edited or modified rows in a hierarchical or tree-like data grid, enabling control over the save command button’s displayed name, text content, or messaging prompt to suit localization, branding, or user interface preferences when saving updates or changes within nested list or tree table components.
+How do I customize the save button in Kendo UI TreeList to display a specific label? Customize or configure the text label, caption, or title for the save changes button that commits edited or modified rows in a hierarchical or tree-like data grid, enabling control over the save command button’s displayed name, text content, or messaging prompt to suit localization, branding, or user interface preferences when saving updates or changes within nested list or tree table components.
 </div>
 
 #### Example - setting the text of the **save Changes** button
@@ -5186,7 +5186,7 @@ Allows the customization of the placeholder text in the treelist search panel.
 
 
 <div class="meta-api-description">
-Customize or configure the placeholder text, hint, prompt, or default input message shown in the search box or search panel for hierarchical or tree-structured data lists, enabling control over the search input’s descriptive text to guide users when filtering, querying, or finding items within nested data views; adjust or set the search field’s placeholder label, tooltip, or hint in tree list components to improve user interface clarity or localization for search queries within hierarchical grids, trees, or structured data displays.
+How to change the default search message in Kendo UI TreeList? Customize or configure the placeholder text, hint, prompt, or default input message shown in the search box or search panel for hierarchical or tree-structured data lists, enabling control over the search input’s descriptive text to guide users when filtering, querying, or finding items within nested data views; adjust or set the search field’s placeholder label, tooltip, or hint in tree list components to improve user interface clarity or localization for search queries within hierarchical grids, trees, or structured data displays.
 </div>
 
 #### Example
@@ -5214,7 +5214,7 @@ Defines the text of the **Cancel Changes** button that cancels all data modifica
 
 
 <div class="meta-api-description">
-Configure or customize the text label, caption, or display name for the cancel or undo action button that reverts, discards, or cancels all changes, edits, or modifications made to data entries in a hierarchical or tree-structured list interface, enabling control over the wording shown to users for the button that aborts current edits and restores original data.
+How do I change the cancel button text in a Kendo UI TreeList? Configure or customize the text label, caption, or display name for the cancel or undo action button that reverts, discards, or cancels all changes, edits, or modifications made to data entries in a hierarchical or tree-structured list interface, enabling control over the wording shown to users for the button that aborts current edits and restores original data.
 </div>
 
 #### Example - setting the text of the **Cancel Changes** button
@@ -5243,7 +5243,7 @@ Defines the text of the **Export to Excel** button that exports the widget data 
 
 
 <div class="meta-api-description">
-Customize or localize the label text for the export to Excel button in hierarchical or tree-structured data components, enabling configuration of the Excel export command’s display name, adapting UI button captions, controlling multilingual or localized button text for exporting grid or treelist views to Excel formats, setting or changing the command label shown on Excel export actions in data tables and trees, and managing user-facing strings related to exporting hierarchical data to spreadsheet files.
+How to customize the export to Excel button label in Kendo UI TreeList? Customize or localize the label text for the export to Excel button in hierarchical or tree-structured data components, enabling configuration of the Excel export command’s display name, adapting UI button captions, controlling multilingual or localized button text for exporting grid or treelist views to Excel formats, setting or changing the command label shown on Excel export actions in data tables and trees, and managing user-facing strings related to exporting hierarchical data to spreadsheet files.
 </div>
 
 #### Example - setting the text of the **Export to Excel** button
@@ -5271,7 +5271,7 @@ Defines the text of the **Export to PDF** button that exports the widget data in
 
 
 <div class="meta-api-description">
-Customize or configure the export to PDF button label, modify the displayed text for exporting tabular or hierarchical data structures to PDF format, set or change the command name associated with generating PDF exports from tree list views, control the wording of the PDF export action, update the button caption or tooltip for PDF output, enable localization or personalization of the export command text when saving or printing data as PDF files from hierarchical data grids or tree-based lists.
+How to customize the export to PDF button label in a Kendo UI TreeList? Customize or configure the export to PDF button label, modify the displayed text for exporting tabular or hierarchical data structures to PDF format, set or change the command name associated with generating PDF exports from tree list views, control the wording of the PDF export action, update the button caption or tooltip for PDF output, enable localization or personalization of the export command text when saving or printing data as PDF files from hierarchical data grids or tree-based lists.
 </div>
 
 #### Example - setting the text of the **Export to PDF** button
@@ -5299,7 +5299,7 @@ Defines the text of the **Update** button that applies the changes during editin
 
 
 <div class="meta-api-description">
-Change or customize the label text, caption, or wording of the update button used for saving, applying, confirming, or submitting edits in editable grids or hierarchical lists; modify the text shown on buttons for updating, saving changes, confirming edits, or committing modifications in tree-like data structures to fit localization, UI preferences, or specific terminology.
+How do I customize the label for the update button in a Kendo UI TreeList? Change or customize the label text, caption, or wording of the update button used for saving, applying, confirming, or submitting edits in editable grids or hierarchical lists; modify the text shown on buttons for updating, saving changes, confirming edits, or committing modifications in tree-like data structures to fit localization, UI preferences, or specific terminology.
 </div>
 
 #### Example - setting the text of the **Update** button
@@ -5328,7 +5328,7 @@ Defines the text of the **Loading...** message when the widget loads its root-le
 
 
 <div class="meta-api-description">
-Configure or customize the text, label, or message displayed during the loading state while hierarchical data, root-level nodes, or parent items are being fetched, rendered, or initialized in a tree or list view. Control the prompt, placeholder, or status message for the asynchronous loading phase to improve user feedback, such as setting custom loading indicators, progress messages, notifications, or spinner text that appears while expanding, retrieving, or populating the top-level items in a tree structure component. Adjust or override default loading messages to enhance user experience when data is still being loaded in a tree list or hierarchical grid interface.
+How to customize the loading message in Kendo UI TreeList component? Configure or customize the text, label, or message displayed during the loading state while hierarchical data, root-level nodes, or parent items are being fetched, rendered, or initialized in a tree or list view. Control the prompt, placeholder, or status message for the asynchronous loading phase to improve user feedback, such as setting custom loading indicators, progress messages, notifications, or spinner text that appears while expanding, retrieving, or populating the top-level items in a tree structure component. Adjust or override default loading messages to enhance user experience when data is still being loaded in a tree list or hierarchical grid interface.
 </div>
 
 #### Example - setting the text of the **Loading...** button
@@ -5370,7 +5370,7 @@ Defines the text of **No records to display** message when the widget does not s
 
 
 <div class="meta-api-description">
-Customize or configure the displayed text, notification, or placeholder shown when a hierarchical data grid, tree list, or table component has no rows, empty data, or no records to display; control the empty state message for localization, internationalization, or customized user feedback in tree-structured lists or grids that lack data entries.
+How can I customize the message when a Kendo UI TreeList has no rows? Customize or configure the displayed text, notification, or placeholder shown when a hierarchical data grid, tree list, or table component has no rows, empty data, or no records to display; control the empty state message for localization, internationalization, or customized user feedback in tree-structured lists or grids that lack data entries.
 </div>
 
 #### Example - setting the text of the **No records to display** button
@@ -5392,7 +5392,7 @@ Defines the text of **Request failed** message when the widget fails to load its
 
 
 <div class="meta-api-description">
-Set or customize the error message, alert text, or notification displayed when a data request, server call, or loading operation for root-level items in a tree or hierarchical list fails, crashes, or returns an error; control, configure, or change the failure message shown in the UI when the initial load of parent nodes or top-level data does not succeed, enabling developers to define clear communication for request failures, load errors, or data retrieval issues within tree-structured components.
+What is TreeList.messages.requestFailed used for in Kendo UI? Set or customize the error message, alert text, or notification displayed when a data request, server call, or loading operation for root-level items in a tree or hierarchical list fails, crashes, or returns an error; control, configure, or change the failure message shown in the UI when the initial load of parent nodes or top-level data does not succeed, enabling developers to define clear communication for request failures, load errors, or data retrieval issues within tree-structured components.
 </div>
 
 #### Example - setting the text of the **Request failed** button
@@ -5424,7 +5424,7 @@ Defines the text of **Retry** message for the button which triggers the reloadin
 
 
 <div class="meta-api-description">
-Customize, localize, or change the text label of the retry button used to reload or refresh root-level data or items in hierarchical or tree-style list controls, enabling control over retry prompts, button captions, or messages that prompt users to attempt loading data again after failures or errors.
+How can I change the retry button label in a Kendo UI TreeList? Customize, localize, or change the text label of the retry button used to reload or refresh root-level data or items in hierarchical or tree-style list controls, enabling control over retry prompts, button captions, or messages that prompt users to attempt loading data again after failures or errors.
 </div>
 
 #### Example - setting the text of the **Retry** button
@@ -5456,7 +5456,7 @@ If set to `true`, the user can navigate the widget with the keyboard. By default
 
 
 <div class="meta-api-description">
-Configure keyboard navigation to allow users to move through tree-structured grid rows and individual cells using arrow keys, Tab, Enter, or keyboard controls, enabling accessible and efficient traversal of hierarchical data without a mouse, supporting focus management, cell selection, and keyboard-driven interactions for improved usability and accessibility in data tables or tree lists.
+How to enable keyboard navigation in Kendo UI TreeList? Configure keyboard navigation to allow users to move through tree-structured grid rows and individual cells using arrow keys, Tab, Enter, or keyboard controls, enabling accessible and efficient traversal of hierarchical data without a mouse, supporting focus management, cell selection, and keyboard-driven interactions for improved usability and accessibility in data tables or tree lists.
 </div>
 
 #### Example - enabling keyboard navigation
@@ -5486,7 +5486,7 @@ If set to `true`, the TreeList displays a pager. By default, paging is disabled.
 
 
 <div class="meta-api-description">
-Control and configure client-side pagination for hierarchical data grids by enabling page navigation controls, setting custom page sizes, and managing the display of rows across multiple pages. Adjust paging behavior, configure pager appearance, navigate between data pages within tree-structured lists, and implement client-only paging where all records are preloaded. Customize and set page size parameters either in the paging configuration or data source, handle page events, and optimize user interaction with multi-level grid data spanning different pages. Enable or disable pagination, tailor pager functionality, and refine how tree table data is segmented and accessed across discrete pages without server-side processing.
+How do I implement client-side pagination in a Kendo UI TreeList control? Control and configure client-side pagination for hierarchical data grids by enabling page navigation controls, setting custom page sizes, and managing the display of rows across multiple pages. Adjust paging behavior, configure pager appearance, navigate between data pages within tree-structured lists, and implement client-only paging where all records are preloaded. Customize and set page size parameters either in the paging configuration or data source, handle page events, and optimize user interaction with multi-level grid data spanning different pages. Enable or disable pagination, tailor pager functionality, and refine how tree table data is segmented and accessed across discrete pages without server-side processing.
 </div>
 
 #### Example - enabling paging
@@ -5562,7 +5562,7 @@ If set to `false` the TreeList will toggle the pager visibility as follows:
 
 
 <div class="meta-api-description">
-Control or configure pagination visibility in hierarchical data grids by enabling or disabling always showing the pagination controls regardless of data length, allowing the pager to appear only when the number of items exceeds the page size, dynamically toggling display based on data source changes such as filtering, inserting, or deleting entries, setting whether the pager is persistently visible or conditionally rendered when the dataset meets or exceeds the specified page size, managing page navigation UI presence in tree-structured lists to optimize user experience by showing or hiding pagination controls depending on total item count and page size settings.
+How to always show pagination in Kendo UI TreeList regardless of data length? Control or configure pagination visibility in hierarchical data grids by enabling or disabling always showing the pagination controls regardless of data length, allowing the pager to appear only when the number of items exceeds the page size, dynamically toggling display based on data source changes such as filtering, inserting, or deleting entries, setting whether the pager is persistently visible or conditionally rendered when the dataset meets or exceeds the specified page size, managing page navigation UI presence in tree-structured lists to optimize user experience by showing or hiding pagination controls depending on total item count and page size settings.
 </div>
 
 #### Example - hiding the pager if the total number of items is less than the pageSize value
@@ -5597,7 +5597,7 @@ The number of data items which will be displayed in the TreeList.
 
 
 <div class="meta-api-description">
-Control the number of rows or data items displayed per page in a hierarchical or tree-structured list by specifying the page size with an integer value. Adjust pagination settings to configure how many entries appear on each page when browsing large datasets in a tree view. Enable or set the items-per-page count for efficient navigation and data loading, ensuring this setting is applied before binding the data source. Manage page length, limit visible nodes per page, and optimize user experience for scenarios requiring segmented or paged presentation of tree-structured data without conflicting with pre-existing data sources.
+How do I adjust the number of rows displayed per page in a Kendo UI TreeList? Control the number of rows or data items displayed per page in a hierarchical or tree-structured list by specifying the page size with an integer value. Adjust pagination settings to configure how many entries appear on each page when browsing large datasets in a tree view. Enable or set the items-per-page count for efficient navigation and data loading, ensuring this setting is applied before binding the data source. Manage page length, limit visible nodes per page, and optimize user experience for scenarios requiring segmented or paged presentation of tree-structured data without conflicting with pre-existing data sources.
 </div>
 
 #### Example - setting the page size
@@ -5629,7 +5629,7 @@ If set to `true`, the pager will display buttons for going to the first, previou
 
 
 <div class="meta-api-description">
-Control the visibility and functionality of pagination navigation buttons such as first, previous, next, and last within a data grid or tree list to enable seamless browsing through paged content. Developers often look to configure, toggle, or disable these navigation controls to customize user interface pagination behavior, improve user experience for navigating large datasets, set preferences for showing or hiding page navigation buttons, or manage how users move between paged views. Common scenarios include enabling quick jumps to the first or last page, controlling stepwise page transitions, configuring page navigation UI elements, and customizing pagination controls for web or app data lists.
+How to disable previousNext buttons in Kendo UI TreeList? Control the visibility and functionality of pagination navigation buttons such as first, previous, next, and last within a data grid or tree list to enable seamless browsing through paged content. Developers often look to configure, toggle, or disable these navigation controls to customize user interface pagination behavior, improve user experience for navigating large datasets, set preferences for showing or hiding page navigation buttons, or manage how users move between paged views. Common scenarios include enabling quick jumps to the first or last page, controlling stepwise page transitions, configuring page navigation UI elements, and customizing pagination controls for web or app data lists.
 </div>
 
 #### Example - hiding the first, previous, next, and last page navigation buttons
@@ -5664,7 +5664,7 @@ If set to `true`, the pager will display buttons for navigating to specific page
 
 
 <div class="meta-api-description">
-Control the display of numeric pagination buttons in hierarchical or tree-structured data lists to allow direct navigation to specific pages, enabling users to click on page numbers for quick access, configure numeric page selectors versus input fields, toggle between numbered page links and other pager styles, manage pagination navigation UI elements for paged data views within tree lists, and customize page jumping methods for better user interaction with multi-page data presentations.
+How to enable numeric page numbers in Kendo UI TreeList pager? Control the display of numeric pagination buttons in hierarchical or tree-structured data lists to allow direct navigation to specific pages, enabling users to click on page numbers for quick access, configure numeric page selectors versus input fields, toggle between numbered page links and other pager styles, manage pagination navigation UI elements for paged data views within tree lists, and customize page jumping methods for better user interaction with multi-page data presentations.
 </div>
 
 #### Example - hiding the numeric pager buttons
@@ -5700,7 +5700,7 @@ Specifies a value whether the page sizes dropdown will be adaptive. Possible val
 
 
 <div class="meta-api-description">
-Configure how the pagination page size selector dynamically adjusts or adapts based on the total pages or current page, controlling which options for page size and navigation appear in the pagination UI. Enable responsive or adaptive behavior for page size dropdowns, customize visibility of page size choices depending on total pages or current page context, and manage user interaction with page sizing controls in a paginated tree or list structure. Adjust settings to optimize pagination controls, set adaptive modes like none or auto, and control how page size options are presented for efficient navigation and data display.
+How to configure adaptive pagination for Kendo UI TreeList when total pages exceed a certain number? Configure how the pagination page size selector dynamically adjusts or adapts based on the total pages or current page, controlling which options for page size and navigation appear in the pagination UI. Enable responsive or adaptive behavior for page size dropdowns, customize visibility of page size choices depending on total pages or current page context, and manage user interaction with page sizing controls in a paginated tree or list structure. Adjust settings to optimize pagination controls, set adaptive modes like none or auto, and control how page size options are presented for efficient navigation and data display.
 </div>
 
 #### Example
@@ -5729,7 +5729,7 @@ The maximum number of buttons that are displayed in the numeric pager. If more p
 
 
 <div class="meta-api-description">
-Configure the maximum number of numeric pagination buttons displayed in a hierarchical data grid or tree-style list to control how many page links users see at once, enabling customization of pager button count, enabling ellipsis or dots to indicate additional hidden pages, managing page navigation controls, setting limits on visible page numbers to improve usability or UI compactness, and adjusting pager behavior when total pages exceed the visible button count.
+How to set the maximum number of pagination buttons in a Kendo UI TreeList? Configure the maximum number of numeric pagination buttons displayed in a hierarchical data grid or tree-style list to control how many page links users see at once, enabling customization of pager button count, enabling ellipsis or dots to indicate additional hidden pages, managing page navigation controls, setting limits on visible page numbers to improve usability or UI compactness, and adjusting pager behavior when total pages exceed the visible button count.
 </div>
 
 #### Example - setting the pager button count
@@ -5764,7 +5764,7 @@ If set to `true`, the pager will display an `input` element which allows the use
 
 
 <div class="meta-api-description">
-Control and configure direct page number input in a hierarchical data grid pager to quickly jump to any page by typing the desired page, enabling fast navigation without clicking through pagination controls, supporting scenarios where users need to enter specific page numbers for immediate access, allowing input-driven paging as an alternative to numeric or button-based page selectors, and providing options to set, enable, or toggle a pager input field for efficient page transitions in complex tree-structured lists.
+How do I enable page number input in Kendo UI TreeList pager? Control and configure direct page number input in a hierarchical data grid pager to quickly jump to any page by typing the desired page, enabling fast navigation without clicking through pagination controls, supporting scenarios where users need to enter specific page numbers for immediate access, allowing input-driven paging as an alternative to numeric or button-based page selectors, and providing options to set, enable, or toggle a pager input field for efficient page transitions in complex tree-structured lists.
 </div>
 
 #### Example - showing the pager input
@@ -5797,7 +5797,7 @@ If set to `true`, the pager will display a drop-down which allows the user to pi
 
 
 <div class="meta-api-description">
-Configure the paging control to include a dropdown menu for selecting the number of rows or items shown per page, enabling users to adjust page length dynamically by choosing from predefined page size options, which can be specified as an array of numeric values or include a special 'all' option to display all records at once; this feature lets you toggle, customize, or override default page sizes and set initial values reflecting the current data source page size, supporting flexible pagination controls, user-driven page sizing, adjustable rows per page, and total record count display settings.
+How do I customize the page sizes dropdown in Kendo UI TreeList? Configure the paging control to include a dropdown menu for selecting the number of rows or items shown per page, enabling users to adjust page length dynamically by choosing from predefined page size options, which can be specified as an array of numeric values or include a special 'all' option to display all records at once; this feature lets you toggle, customize, or override default page sizes and set initial values reflecting the current data source page size, supporting flexible pagination controls, user-driven page sizing, adjustable rows per page, and total record count display settings.
 </div>
 
 #### Example - showing the drop-down list for the page size
@@ -5855,7 +5855,7 @@ If set to `true`, the pager will display the **Refresh** button. Clicking the **
 
 
 <div class="meta-api-description">
-Configure or enable a refresh button within the pager area of a hierarchical data grid or tree list, allowing users to manually trigger data reloads or updates by clicking a refresh control in the pagination section. This setting controls the visibility and functionality of the refresh action integrated with the paging interface, useful for scenarios requiring explicit data refresh without reloading the entire page or grid. Ideal for dynamically updating displayed data in paginated tree structures, controlling user-initiated reloads, and ensuring the latest content is fetched on demand from server or data source while maintaining paging state.
+How to enable refresh button in Kendo UI TreeList pager area? Configure or enable a refresh button within the pager area of a hierarchical data grid or tree list, allowing users to manually trigger data reloads or updates by clicking a refresh control in the pagination section. This setting controls the visibility and functionality of the refresh action integrated with the paging interface, useful for scenarios requiring explicit data refresh without reloading the entire page or grid. Ideal for dynamically updating displayed data in paginated tree structures, controlling user-initiated reloads, and ensuring the latest content is fetched on demand from server or data source while maintaining paging state.
 </div>
 
 #### Example - showing the **Refresh** button
@@ -5888,7 +5888,7 @@ If set to `false`, the pager will not be responsive. By default, the pager is re
 
 
 <div class="meta-api-description">
-Enable or disable adaptive paging layouts that automatically adjust the pagination controls based on container size or viewport width, allowing dynamic resizing, responsive navigation, or fixed pagination behavior for scrollable data grids, tables, or tree structures with variable display widths. Configure whether the page navigation adapts fluidly to device screen dimensions, shrinks or expands pagination elements for mobile, desktop, or embedded views, and control the user interface responsiveness of data pagination components in hierarchical lists or tabular trees.
+How do I enable adaptive paging layouts for my Kendo UI TreeList? Enable or disable adaptive paging layouts that automatically adjust the pagination controls based on container size or viewport width, allowing dynamic resizing, responsive navigation, or fixed pagination behavior for scrollable data grids, tables, or tree structures with variable display widths. Configure whether the page navigation adapts fluidly to device screen dimensions, shrinks or expands pagination elements for mobile, desktop, or embedded views, and control the user interface responsiveness of data pagination components in hierarchical lists or tabular trees.
 </div>
 
 #### Example - showing the responsive button
@@ -5921,7 +5921,7 @@ If set to `true`, the pager will display information about the current page and 
 
 
 <div class="meta-api-description">
-Control the display of paging details such as showing or hiding the current page number, total item count, and page summary in a paginated data grid or TreeList component. Enable or disable informational text that indicates which page is active and how many data entries exist, configuring whether users see a summary of pagination status while navigating through pages. Adjust this setting during setup to toggle visibility of paging info elements, like page indices, overall row counts, total pages, or summary messages, helping to customize user interface feedback for page navigation and data overview.
+How to show page number and total item count in a Kendo UI TreeList component? Control the display of paging details such as showing or hiding the current page number, total item count, and page summary in a paginated data grid or TreeList component. Enable or disable informational text that indicates which page is active and how many data entries exist, configuring whether users see a summary of pagination status while navigating through pages. Adjust this setting during setup to toggle visibility of paging info elements, like page indices, overall row counts, total pages, or summary messages, helping to customize user interface feedback for page navigation and data overview.
 </div>
 
 #### Example
@@ -5973,7 +5973,7 @@ The text messages that are displayed in the pager. Use this option to customize 
 
 
 <div class="meta-api-description">
-Control and customize pagination text labels, configure localized pager messages, set custom navigation button names, override default page number wording, adjust displayed text for pages, enable multilingual pager captions, tailor navigation prompts, modify labels for page controls, localize paging interface strings, and manage the wording shown in list pagination controls for a seamless user experience across various languages and interfaces.
+How do I customize the pagination labels in Kendo UI TreeList? Control and customize pagination text labels, configure localized pager messages, set custom navigation button names, override default page number wording, adjust displayed text for pages, enable multilingual pager captions, tailor navigation prompts, modify labels for page controls, localize paging interface strings, and manage the wording shown in list pagination controls for a seamless user experience across various languages and interfaces.
 </div>
 
 #### Example
@@ -6009,7 +6009,7 @@ Contains the following placeholders:
 
 
 <div class="meta-api-description">
-Customize or configure pager display text in hierarchical data grids by setting formatted strings with placeholders for first item index, last item index, and total record count using templating or format strings; control the pagination label appearance, enable localization or internationalization, and adjust how page summaries and item ranges are shown within a tree-structured list or grid interface to match desired UI text, messages, or language preferences.
+How can I customize the pager display text in a hierarchical data grid using Kendo UI for jQuery TreeList? Customize or configure pager display text in hierarchical data grids by setting formatted strings with placeholders for first item index, last item index, and total record count using templating or format strings; control the pagination label appearance, enable localization or internationalization, and adjust how page summaries and item ranges are shown within a tree-structured list or grid interface to match desired UI text, messages, or language preferences.
 </div>
 
 #### Example - setting the display pager message
@@ -6044,7 +6044,7 @@ The text that is displayed when the TreeList is empty.
 
 
 <div class="meta-api-description">
-Set or customize the message, text, or label shown when a hierarchical or tree-like list has no data, control the empty state notification, configure the placeholder text for an empty data grid or tree structure, define what users see when there are no records to display, enable custom empty messages in pageable or paginated tree lists, specify user-facing text indicating no results or no items found in tree views, adjust the default empty content message for data-bound tree components, and manage empty page messages to improve UX during no-data scenarios in tree-structured datasets.
+How do I customize the message shown when my Kendo UI TreeList is empty? Set or customize the message, text, or label shown when a hierarchical or tree-like list has no data, control the empty state notification, configure the placeholder text for an empty data grid or tree structure, define what users see when there are no records to display, enable custom empty messages in pageable or paginated tree lists, specify user-facing text indicating no results or no items found in tree views, adjust the default empty content message for data-bound tree components, and manage empty page messages to improve UX during no-data scenarios in tree-structured datasets.
 </div>
 
 #### Example - setting the empty pager message
@@ -6079,7 +6079,7 @@ The label that is displayed before the pager input.
 
 
 <div class="meta-api-description">
-Customize or configure the label or text shown before the paging input box in hierarchical data grids or tree list components, enabling developers to define, change, or set the prompt or message that appears next to the page number input for better user guidance, localization, or UI clarity in paginated views and navigation controls within tree-structured tabular data presentations.
+How to customize the paging message in Kendo UI TreeList? Customize or configure the label or text shown before the paging input box in hierarchical data grids or tree list components, enabling developers to define, change, or set the prompt or message that appears next to the page number input for better user guidance, localization, or UI clarity in paginated views and navigation controls within tree-structured tabular data presentations.
 </div>
 
 #### Example - setting the label before the pager input
@@ -6115,7 +6115,7 @@ The label that is displayed before the pager input. Uses [`kendo.format`](/api/j
 
 
 <div class="meta-api-description">
-Customize or configure the label text shown before the page number input in a paginated tree grid or hierarchical list control, including setting dynamic messages that display total pages using placeholders or formatted strings, enabling control over pager UI text such as "of N pages," adjusting localization or language-specific pager labels, and formatting or replacing default page count indicators for user navigation feedback in hierarchical data views.
+How to customize "of X pages" label in Kendo UI TreeList pager? Customize or configure the label text shown before the page number input in a paginated tree grid or hierarchical list control, including setting dynamic messages that display total pages using placeholders or formatted strings, enabling control over pager UI text such as "of N pages," adjusting localization or language-specific pager labels, and formatting or replacing default page count indicators for user navigation feedback in hierarchical data views.
 </div>
 
 #### Example - setting the label after the pager input
@@ -6151,7 +6151,7 @@ The label that is displayed after the drop-down list for the page size.
 
 
 <div class="meta-api-description">
-Customize or set the text label displayed next to the page size selector, control or configure the wording that appears after the pagination dropdown, adjust the phrase shown by the page items selector in a data grid or list, modify the description or message that indicates how many items are shown per page, or localize and personalize the message linked to the page-size chooser in tree-structured or grid views.
+How do I customize the items per page message in Kendo UI TreeList? Customize or set the text label displayed next to the page size selector, control or configure the wording that appears after the pagination dropdown, adjust the phrase shown by the page items selector in a data grid or list, modify the description or message that indicates how many items are shown per page, or localize and personalize the message linked to the page-size chooser in tree-structured or grid views.
 </div>
 
 #### Example - setting the label after the drop-down list for the page size
@@ -6187,7 +6187,7 @@ The tooltip of the button which goes to the first page.
 
 
 <div class="meta-api-description">
-Control and customize the tooltip text or hover label displayed on the navigation button that jumps directly to the initial or first page in paginated hierarchical or tree-structured data views. This includes setting, updating, localizing, or configuring the message shown on the "go to first page" control within pageable, paginated grids or tree lists, enhancing user guidance and accessibility when users need to quickly return to the start of multi-page datasets or hierarchical listings.
+How to customize the "Go to First Page" message in a Kendo UI TreeList? Control and customize the tooltip text or hover label displayed on the navigation button that jumps directly to the initial or first page in paginated hierarchical or tree-structured data views. This includes setting, updating, localizing, or configuring the message shown on the "go to first page" control within pageable, paginated grids or tree lists, enhancing user guidance and accessibility when users need to quickly return to the start of multi-page datasets or hierarchical listings.
 </div>
 
 #### Example - setting the Tooltip of the first page button
@@ -6222,7 +6222,7 @@ The tooltip of the button which goes to the last page.
 
 
 <div class="meta-api-description">
-Customize or configure the tooltip text, label, or hover message for the last page navigation button in a pageable TreeList or grid to support localization, internationalization, or user interface text customization, enabling control over how the last-page button’s description appears when users navigate through paged data sets.
+How do I customize the last page navigation button's tooltip in a Kendo UI TreeList? Customize or configure the tooltip text, label, or hover message for the last page navigation button in a pageable TreeList or grid to support localization, internationalization, or user interface text customization, enabling control over how the last-page button’s description appears when users navigate through paged data sets.
 </div>
 
 #### Example - setting the Tooltip of the last page button
@@ -6257,7 +6257,7 @@ The tooltip of the button which goes to the next page.
 
 
 <div class="meta-api-description">
-Customize or localize the tooltip text displayed on the pagination next button within hierarchical data grids or tree list controls, enabling developers to set or override the default label, hint, or mouse-over description for navigating to the next page of items, ensuring support for multiple languages, customized user interfaces, and accessibility improvements related to paging controls in tree-structured or nested lists.
+How do I customize the tooltip for the next button in a TreeList's pagination? Customize or localize the tooltip text displayed on the pagination next button within hierarchical data grids or tree list controls, enabling developers to set or override the default label, hint, or mouse-over description for navigating to the next page of items, ensuring support for multiple languages, customized user interfaces, and accessibility improvements related to paging controls in tree-structured or nested lists.
 </div>
 
 #### Example - setting the Tooltip of the next page button
@@ -6292,7 +6292,7 @@ The tooltip of the button which goes to the previous page.
 
 
 <div class="meta-api-description">
-Configure or customize the tooltip text, label, or hover message for the previous page button in pageable tree list navigation, enabling localization, translation, or setting descriptive text that appears when users hover over the backward page control, supporting internationalization and enhancing user interface clarity for paging backwards in hierarchical grids or lists.
+How to customize previous page button tooltip in Kendo UI TreeList? Configure or customize the tooltip text, label, or hover message for the previous page button in pageable tree list navigation, enabling localization, translation, or setting descriptive text that appears when users hover over the backward page control, supporting internationalization and enhancing user interface clarity for paging backwards in hierarchical grids or lists.
 </div>
 
 #### Example - setting the Tooltip of the previous page button
@@ -6327,7 +6327,7 @@ The tooltip of the **Refresh** button.
 
 
 <div class="meta-api-description">
-Customize, configure, or localize the tooltip text, hover text, or button label shown on the refresh control within a paginated tree list or pageable grid interface, enabling developers to set descriptive, accessible, and context-specific strings that appear when users hover over or focus on the refresh button to reload or update the current page of hierarchical or tabular data.
+How can I customize the tooltip for the refresh button in a Kendo UI TreeList? Customize, configure, or localize the tooltip text, hover text, or button label shown on the refresh control within a paginated tree list or pageable grid interface, enabling developers to set descriptive, accessible, and context-specific strings that appear when users hover over or focus on the refresh button to reload or update the current page of hierarchical or tabular data.
 </div>
 
 #### Example - setting the Tooltip of the **Refresh** button
@@ -6363,7 +6363,7 @@ The tooltip of the **...** (ellipsis) button which appears when the number of pa
 
 
 <div class="meta-api-description">
-Customize or configure the tooltip text, label, or message displayed on the pagination ellipsis button when navigating through multiple pages, particularly when the total pages exceed the visible button count, enabling control over user interface hints, pagination prompts, or "more pages" indicators in hierarchical or tree-structured list components.
+How do I customize the "more pages" message in a Kendo UI TreeList? Customize or configure the tooltip text, label, or message displayed on the pagination ellipsis button when navigating through multiple pages, particularly when the total pages exceed the visible button count, enabling control over user interface hints, pagination prompts, or "more pages" indicators in hierarchical or tree-structured list components.
 </div>
 
 #### Example - setting the Tooltip of the ellipsis button
@@ -6400,7 +6400,7 @@ Configures the PDF export settings of the TreeList.
 
 
 <div class="meta-api-description">
-Configure and customize exporting hierarchical or tabular data structures to PDF, including setting file names, page dimensions like paper size and orientation (portrait or landscape), adjusting margins and scaling to fit content, repeating headers across pages for clarity, and managing proxy settings for network environments. Enable precise control over PDF output formatting, such as specifying export options for page layout, printing preferences, and network configurations to ensure seamless, tailored generation of PDF documents from complex tree or list data presentations.
+How to export TreeList data as a PDF with custom page layout and margins? Configure and customize exporting hierarchical or tabular data structures to PDF, including setting file names, page dimensions like paper size and orientation (portrait or landscape), adjusting margins and scaling to fit content, repeating headers across pages for clarity, and managing proxy settings for network environments. Enable precise control over PDF output formatting, such as specifying export options for page layout, printing preferences, and network configurations to ensure seamless, tailored generation of PDF documents from complex tree or list data presentations.
 </div>
 
 #### Example
@@ -6434,7 +6434,7 @@ Exports all TreeList pages, starting from the first one.
 
 
 <div class="meta-api-description">
-Control exporting all data rows across multiple pages of a hierarchical or multi-page list to PDF by enabling full document export, configure output to include every page from the first to the last in the generated PDF, set options to capture complete tree or list content during PDF generation regardless of pagination, ensure exporting entire datasets without limiting to visible or current pages, manage pagination handling to produce one cohesive PDF of all pages, support comprehensive PDF export including all nested or paged items, adjust settings to toggle full versus partial content export in PDF, handle large multi-page structures in PDF output, and utilize compression techniques to prevent browser crashes when exporting large PDFs.
+How to export all pages of a TreeList to PDF? Control exporting all data rows across multiple pages of a hierarchical or multi-page list to PDF by enabling full document export, configure output to include every page from the first to the last in the generated PDF, set options to capture complete tree or list content during PDF generation regardless of pagination, ensure exporting entire datasets without limiting to visible or current pages, manage pagination handling to produce one cohesive PDF of all pages, support comprehensive PDF export including all nested or paged items, adjust settings to toggle full versus partial content export in PDF, handle large multi-page structures in PDF output, and utilize compression techniques to prevent browser crashes when exporting large PDFs.
 </div>
 
 #### Example - export all pages
@@ -6481,7 +6481,7 @@ The author of the PDF document.
 
 
 <div class="meta-api-description">
-Control or configure the PDF author metadata embedded during export, specifying the document creator name to ensure PDF viewers, indexing systems, search tools, and printed or shared files recognize and display the author information properly, enabling customization of author details in generated PDF files from hierarchical or tree-structured data exports.
+How do I set the author metadata in a PDF exported from a Kendo UI TreeList? Control or configure the PDF author metadata embedded during export, specifying the document creator name to ensure PDF viewers, indexing systems, search tools, and printed or shared files recognize and display the author information properly, enabling customization of author details in generated PDF files from hierarchical or tree-structured data exports.
 </div>
 
 #### Example - setting the author
@@ -6526,7 +6526,7 @@ Specifies if the Print dialog should be opened immediately after loading the doc
 
 
 <div class="meta-api-description">
-Control whether a PDF export from a TreeList triggers the print dialog automatically upon loading, enabling or disabling automatic printing prompts when generating or exporting PDF documents, configuring the behavior of print preview popups, setting up automatic print dialogs in PDF viewers during export, managing user prompts for printing PDFs created from data grids or tree structures, adjusting export settings to initiate printing workflows instantly after PDF generation, handling compatibility with PDF reader applications that may block or restrict automatic print dialogs, controlling whether to open print previews or send print commands programmatically after exporting hierarchical data to PDF format.
+How do I automatically print PDFs generated from my Kendo UI TreeList control? Control whether a PDF export from a TreeList triggers the print dialog automatically upon loading, enabling or disabling automatic printing prompts when generating or exporting PDF documents, configuring the behavior of print preview popups, setting up automatic print dialogs in PDF viewers during export, managing user prompts for printing PDFs created from data grids or tree structures, adjusting export settings to initiate printing workflows instantly after PDF generation, handling compatibility with PDF reader applications that may block or restrict automatic print dialogs, controlling whether to open print previews or send print commands programmatically after exporting hierarchical data to PDF format.
 </div>
 
 #### Example
@@ -6554,7 +6554,7 @@ Control whether a PDF export from a TreeList triggers the print dialog automatic
 
 
 <div class="meta-api-description">
-Control inclusion or exclusion of clickable hyperlinks in TreeList PDF exports by setting options to avoid or disable link generation, configure boolean flags to enable or prevent embedding active URLs, specify CSS selectors to omit or ignore certain hyperlinks during PDF creation, manage how links appear or function in exported documents, control hyperlink activation, and customize linked content handling in exported PDFs for better output formatting and link suppression as needed.
+How to prevent clickable links from appearing in TreeList PDF exports using Kendo UI for jQuery? Control inclusion or exclusion of clickable hyperlinks in TreeList PDF exports by setting options to avoid or disable link generation, configure boolean flags to enable or prevent embedding active URLs, specify CSS selectors to omit or ignore certain hyperlinks during PDF creation, manage how links appear or function in exported documents, control hyperlink activation, and customize linked content handling in exported PDFs for better output formatting and link suppression as needed.
 </div>
 
 #### Example
@@ -6582,7 +6582,7 @@ The creator of the PDF document.
 
 
 <div class="meta-api-description">
-Specify or customize the author or creator metadata for PDF documents generated from hierarchical or tree-structured data exports, enabling control over the PDF's "Creator" information field when configuring or initializing export settings; set, define, or change the document creator string to label who generated the PDF output, support identifying the source application or author in exported reports, and manage PDF metadata for proper attribution and tracking in document workflows involving tree-like data exports.
+How to set creator metadata for PDFs exported from Kendo UI TreeList? Specify or customize the author or creator metadata for PDF documents generated from hierarchical or tree-structured data exports, enabling control over the PDF's "Creator" information field when configuring or initializing export settings; set, define, or change the document creator string to label who generated the PDF output, support identifying the source application or author in exported reports, and manage PDF metadata for proper attribution and tracking in document workflows involving tree-like data exports.
 </div>
 
 #### Example - setting the creator
@@ -6626,7 +6626,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
 
 
 <div class="meta-api-description">
-Control or customize the creation date and time metadata embedded in exported PDF documents from hierarchical or tree-structured lists by setting or overriding the default timestamp with a specific JavaScript Date object, enabling precise configuration of document creation timestamps for PDF metadata, digital stamping, or archival purposes in TreeList exports.
+How do I customize the date in Kendo UI TreeList exported PDFs? Control or customize the creation date and time metadata embedded in exported PDF documents from hierarchical or tree-structured lists by setting or overriding the default timestamp with a specific JavaScript Date object, enabling precise configuration of document creation timestamps for PDF metadata, digital stamping, or archival purposes in TreeList exports.
 </div>
 
 #### Example - setting the date
@@ -6670,7 +6670,7 @@ Specifies the file name of the exported PDF file.
 
 
 <div class="meta-api-description">
-Control and specify the output file name for PDF exports generated from tree-structured lists or hierarchical data views, enabling customization of the PDF download filename when saving or exporting content. Configure or set the exported document’s filename to organize, identify, or standardize the PDF files created from data grids or tree list components. This customization supports scenarios like automating export workflows, defining naming conventions, controlling saved PDF titles, and ensuring clarity and consistency for downloaded hierarchical data snapshots.
+How do I customize the file name when exporting a tree list to PDF in Kendo UI for jQuery? Control and specify the output file name for PDF exports generated from tree-structured lists or hierarchical data views, enabling customization of the PDF download filename when saving or exporting content. Configure or set the exported document’s filename to organize, identify, or standardize the PDF files created from data grids or tree list components. This customization supports scenarios like automating export workflows, defining naming conventions, controlling saved PDF titles, and ensuring clarity and consistency for downloaded hierarchical data snapshots.
 </div>
 
 #### Example - setting the default PDF file name
@@ -6714,7 +6714,7 @@ If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/
 
 
 <div class="meta-api-description">
-Control whether PDF exports from a tree-structured data list are sent through a server proxy URL regardless of browser capabilities to save files locally, enabling overriding default local saving behavior by forcing export data to be uploaded via a proxy endpoint, useful for centralized processing, access control, or compliance needs when generating downloadable PDFs from hierarchical data components.
+How do I force Kendo UI TreeList PDF exports to go through a proxy URL? Control whether PDF exports from a tree-structured data list are sent through a server proxy URL regardless of browser capabilities to save files locally, enabling overriding default local saving behavior by forcing export data to be uploaded via a proxy endpoint, useful for centralized processing, access control, or compliance needs when generating downloadable PDFs from hierarchical data components.
 </div>
 
 #### Example
@@ -6743,7 +6743,7 @@ Specifies the quality of the images within the exported file, from 0 to 1.
 
 
 <div class="meta-api-description">
-Adjust the quality setting for JPEG images embedded in exported PDF files to manage the balance between image clarity and file size, allowing configuration of compression levels from low to high fidelity by specifying a value between 0 and 1; this enables control over output image sharpness, compression strength, PDF image resolution, and overall document size optimization when saving TreeList data as PDFs.
+How do I control the image quality in PDF exports for a Kendo UI TreeList? Adjust the quality setting for JPEG images embedded in exported PDF files to manage the balance between image clarity and file size, allowing configuration of compression levels from low to high fidelity by specifying a value between 0 and 1; this enables control over output image sharpness, compression strength, PDF image resolution, and overall document size optimization when saving TreeList data as PDFs.
 </div>
 
 #### Example
@@ -6771,7 +6771,7 @@ If set to true all PNG images contained in the exported file will be kept in PNG
 
 
 <div class="meta-api-description">
-Control whether PNG images within exported PDF files retain their original PNG format or are converted to other image types when exporting hierarchical or tree-structured lists to PDF. Enable or disable preserving embedded PNG graphics exactly as-is during export to maintain image quality, transparency, or resolution. Configure the export process to keep PNGs intact in the final PDF output rather than converting to JPEG or other formats, supporting scenarios where users want to preserve image fidelity, transparency layers, or detailed graphics embedded within exported tree or list data. This setting affects how embedded bitmap images are handled in PDF exports of structured data displays, ensuring original PNG images stay as PNGs to avoid quality degradation or format changes.
+How to keep PNG images intact when exporting TreeList data to PDF? Control whether PNG images within exported PDF files retain their original PNG format or are converted to other image types when exporting hierarchical or tree-structured lists to PDF. Enable or disable preserving embedded PNG graphics exactly as-is during export to maintain image quality, transparency, or resolution. Configure the export process to keep PNGs intact in the final PDF output rather than converting to JPEG or other formats, supporting scenarios where users want to preserve image fidelity, transparency layers, or detailed graphics embedded within exported tree or list data. This setting affects how embedded bitmap images are handled in PDF exports of structured data displays, ensuring original PNG images stay as PNGs to avoid quality degradation or format changes.
 </div>
 
 #### Example
@@ -6799,7 +6799,7 @@ Specifies the keywords of the exported PDF file.
 
 
 <div class="meta-api-description">
-Configure, set, or embed searchable keywords, metadata tags, or index terms into exported PDF files to enhance discoverability and search engine optimization within PDFs generated from hierarchical or tabular data components. Enable custom PDF metadata entries such as keyword strings, searchable descriptors, content tags, or indexing terms to improve PDF viewer search functionality, text retrieval, and content filtering for TreeList- or grid-based exports. Control PDF export properties to include relevant search keywords, terms, or labels that facilitate quick access, filtering, and semantic search across exported documents created from complex data structures.
+How do I add searchable keywords to PDF exports from a Kendo UI TreeList component? Configure, set, or embed searchable keywords, metadata tags, or index terms into exported PDF files to enhance discoverability and search engine optimization within PDFs generated from hierarchical or tabular data components. Enable custom PDF metadata entries such as keyword strings, searchable descriptors, content tags, or indexing terms to improve PDF viewer search functionality, text retrieval, and content filtering for TreeList- or grid-based exports. Control PDF export properties to include relevant search keywords, terms, or labels that facilitate quick access, filtering, and semantic search across exported documents created from complex data structures.
 </div>
 
 #### Example - setting the keywords
@@ -6843,7 +6843,7 @@ If set to `true`, reverses the paper dimensions in such a way that the width bec
 
 
 <div class="meta-api-description">
-Control PDF export orientation to switch the page layout to landscape mode by adjusting paper dimensions so the width is greater than height, enabling horizontal page layout when exporting or printing tabular or hierarchical data views; configure, enable, or set landscape orientation for PDF output to flip page orientation from portrait to landscape for wider data presentation in documents.
+How to set landscape orientation for PDF export in Kendo UI TreeList? Control PDF export orientation to switch the page layout to landscape mode by adjusting paper dimensions so the width is greater than height, enabling horizontal page layout when exporting or printing tabular or hierarchical data views; configure, enable, or set landscape orientation for PDF output to flip page orientation from portrait to landscape for wider data presentation in documents.
 </div>
 
 #### Example - enabling the landscape mode
@@ -6894,7 +6894,7 @@ The supported units are:
 
 
 <div class="meta-api-description">
-Adjust or configure page margins for PDF export from TreeList to control layout spacing and printable areas with flexible units like millimeters, centimeters, inches, or points. Customize or set margin sizes to refine page formatting, print boundaries, and content alignment when saving TreeList data as PDF files. Manage printable margins in various measurement units to optimize page setup, document appearance, and export precision for TreeList-generated PDFs.
+How do I adjust the margins for a PDF export from a Kendo UI TreeList? Adjust or configure page margins for PDF export from TreeList to control layout spacing and printable areas with flexible units like millimeters, centimeters, inches, or points. Customize or set margin sizes to refine page formatting, print boundaries, and content alignment when saving TreeList data as PDF files. Manage printable margins in various measurement units to optimize page setup, document appearance, and export precision for TreeList-generated PDFs.
 </div>
 
 #### Example - setting the margins
@@ -6943,7 +6943,7 @@ The bottom margin. Numbers are considered as `pt` units.
 
 
 <div class="meta-api-description">
-Set or configure the bottom page margin when exporting data grids or tree structures to PDF to adjust the spacing between the page content and the bottom edge, controlling page layout, content padding, and preventing cutoff or overlap at the page base. Customize, define, or specify the margin size in points to influence PDF pagination, white space, and overall document formatting during export processes for hierarchical or tabular data presentations.
+How do I set the bottom margin when exporting a tree structure to PDF with Kendo UI TreeList? Set or configure the bottom page margin when exporting data grids or tree structures to PDF to adjust the spacing between the page content and the bottom edge, controlling page layout, content padding, and preventing cutoff or overlap at the page base. Customize, define, or specify the margin size in points to influence PDF pagination, white space, and overall document formatting during export processes for hierarchical or tabular data presentations.
 </div>
 
 #### Example
@@ -6973,7 +6973,7 @@ The left margin. Numbers are considered as `pt` units.
 
 
 <div class="meta-api-description">
-Adjust or configure the left page margin size for PDF exports of hierarchical or tabular data, set the left whitespace or padding on the page when printing or saving grid, tree, or list structures as PDF, control the left-hand spacing to manage page layout and prevent content cutoff on the left side, specify or define margin width in points to customize output formatting, enable precise positioning of exported data in PDFs by setting left margin measurements, manage printable area boundaries on the left edge during PDF generation for tree or list views, control horizontal offset or indentation when exporting structured data to PDF formats.
+How do I adjust the left margin size when exporting a TreeList to PDF? Adjust or configure the left page margin size for PDF exports of hierarchical or tabular data, set the left whitespace or padding on the page when printing or saving grid, tree, or list structures as PDF, control the left-hand spacing to manage page layout and prevent content cutoff on the left side, specify or define margin width in points to customize output formatting, enable precise positioning of exported data in PDFs by setting left margin measurements, manage printable area boundaries on the left edge during PDF generation for tree or list views, control horizontal offset or indentation when exporting structured data to PDF formats.
 </div>
 
 #### Example
@@ -7003,7 +7003,7 @@ The right margin. Numbers are considered as `pt` units.
 
 
 <div class="meta-api-description">
-Adjust or configure the right page margin in PDF exports to manage page layout, control the whitespace on the right side, set precise spacing in points for proper pagination, customize document formatting for TreeList data, fine-tune export appearance by defining the right boundary margin, enable setting numeric values for right margin size in PDF output, control page edge spacing during PDF generation, influence page breaking and alignment by modifying right margin parameters, optimize export layout by configuring right-side padding in PDFs, set right margin measurements to format TreeList content accurately in exported PDF files.
+How do I adjust the right margin in PDF exports for a Kendo UI TreeList? Adjust or configure the right page margin in PDF exports to manage page layout, control the whitespace on the right side, set precise spacing in points for proper pagination, customize document formatting for TreeList data, fine-tune export appearance by defining the right boundary margin, enable setting numeric values for right margin size in PDF output, control page edge spacing during PDF generation, influence page breaking and alignment by modifying right margin parameters, optimize export layout by configuring right-side padding in PDFs, set right margin measurements to format TreeList content accurately in exported PDF files.
 </div>
 
 #### Example
@@ -7033,7 +7033,7 @@ The top margin. Numbers are considered as `pt` units.
 
 
 <div class="meta-api-description">
-Adjust or set the upper page margin spacing when exporting hierarchical or tree-structured data to PDF format, enabling customization of top whitespace or padding in points, millimeters, or standard units to control how much blank space appears at the top edge of PDF pages, useful for aligning headers, avoiding content clipping, or meeting print layout specifications during PDF generation from a data tree component or structured list.
+How do I adjust the top margin when exporting data from a TreeList to PDF? Adjust or set the upper page margin spacing when exporting hierarchical or tree-structured data to PDF format, enabling customization of top whitespace or padding in points, millimeters, or standard units to control how much blank space appears at the top edge of PDF pages, useful for aligning headers, avoiding content clipping, or meeting print layout specifications during PDF generation from a data tree component or structured list.
 </div>
 
 #### Example
@@ -7075,7 +7075,7 @@ The supported values are:
 
 
 <div class="meta-api-description">
-Set or customize the page dimensions, layout, or paper size for exporting PDF documents from hierarchical or tree-structured data, specifying standard paper formats like A4, A3, or custom dimensions in points, inches, centimeters, or millimeters; control the output page width and height precisely for printing, layout consistency, and formatting, including flexible options to define exact sizes as numeric arrays or unit-based strings, enable auto-sizing based on content dimensions, and adjust scaling to ensure pixel-to-point accuracy for professional PDF export and page setup in tree or list data presentations.
+How to set custom paper size for exporting PDF from Kendo UI TreeList? Set or customize the page dimensions, layout, or paper size for exporting PDF documents from hierarchical or tree-structured data, specifying standard paper formats like A4, A3, or custom dimensions in points, inches, centimeters, or millimeters; control the output page width and height precisely for printing, layout consistency, and formatting, including flexible options to define exact sizes as numeric arrays or unit-based strings, enable auto-sizing based on content dimensions, and adjust scaling to ensure pixel-to-point accuracy for professional PDF export and page setup in tree or list data presentations.
 </div>
 
 #### Example - setting a custom paper size
@@ -7125,7 +7125,7 @@ The proxy will receive a POST request with the following parameters in the reque
 
 
 <div class="meta-api-description">
-Configure or set a server-side proxy URL to stream or deliver exported PDF files through a backend endpoint, enabling file downloads especially in browsers like Internet Explorer 9 and earlier or Safari that cannot save files locally; this includes posting base64-encoded PDF content, content type, and filename to a proxy service that returns the decoded PDF with appropriate content-disposition headers for attachment, supporting use cases for file streaming, proxy-based PDF delivery, server upload handling, managing file transfer limitations on older browsers, and ensuring reliable PDF export and download workflows through backend URL endpoints.
+How to enable file downloads in Internet Explorer 9 and earlier with Kendo UI for jQuery TreeList? Configure or set a server-side proxy URL to stream or deliver exported PDF files through a backend endpoint, enabling file downloads especially in browsers like Internet Explorer 9 and earlier or Safari that cannot save files locally; this includes posting base64-encoded PDF content, content type, and filename to a proxy service that returns the decoded PDF with appropriate content-disposition headers for attachment, supporting use cases for file streaming, proxy-based PDF delivery, server upload handling, managing file transfer limitations on older browsers, and ensuring reliable PDF export and download workflows through backend URL endpoints.
 </div>
 
 #### Example - setting the server proxy URL
@@ -7169,7 +7169,7 @@ A name or keyword whcih indicates where to display the document that was returne
 
 
 <div class="meta-api-description">
-Configure where the exported TreeList PDF is displayed by specifying a target such as a new window, iframe, or named frame for rendering the PDF output. Control or set the display destination for proxy-generated PDF files, enabling inline viewing within the page or directing the PDF to open in a separate tab, embedded frame, or custom container. Adjust output behavior to manage whether the PDF is shown embedded inline, downloaded, or rendered in an external window or frame, using relevant target keywords or names to control presentation and user interaction with exported PDF documents.
+How do I customize where my TreeList PDF is displayed in Kendo UI for jQuery? Configure where the exported TreeList PDF is displayed by specifying a target such as a new window, iframe, or named frame for rendering the PDF output. Control or set the display destination for proxy-generated PDF files, enabling inline viewing within the page or directing the PDF to open in a separate tab, embedded frame, or custom container. Adjust output behavior to manage whether the PDF is shown embedded inline, downloaded, or rendered in an external window or frame, using relevant target keywords or names to control presentation and user interaction with exported PDF documents.
 </div>
 
 #### Example - opening the generated document in a new window
@@ -7215,7 +7215,7 @@ Sets the subject of the PDF file.
 
 
 <div class="meta-api-description">
-Configure or set the PDF document's subject metadata, control the file's subject string visible in PDF viewers, specify or customize the document property that describes the content theme during export or initialization, adjust the PDF subject tag to reflect report purpose, enable setting descriptive metadata for TreeList exports, define the subject information embedded in the PDF file for identification, update or assign the PDF subject attribute to enhance document context or classification before exporting the hierarchy data, control the text shown in the PDF properties under the subject field to improve searchability and organization.
+How do I customize the subject metadata in Kendo UI TreeList PDF exports? Configure or set the PDF document's subject metadata, control the file's subject string visible in PDF viewers, specify or customize the document property that describes the content theme during export or initialization, adjust the PDF subject tag to reflect report purpose, enable setting descriptive metadata for TreeList exports, define the subject information embedded in the PDF file for identification, update or assign the PDF subject attribute to enhance document context or classification before exporting the hierarchy data, control the text shown in the PDF properties under the subject field to improve searchability and organization.
 </div>
 
 #### Example - setting the subject
@@ -7259,7 +7259,7 @@ Sets the title of the PDF file.
 
 
 <div class="meta-api-description">
-Configure the exported PDF document title or metadata when saving or downloading hierarchical grid data as a PDF file, enabling setting, customizing, or controlling the printable document name, file title, or PDF viewer header that identifies the export output, useful for labeling, organizing, or distinguishing TreeList or hierarchical data exports, allowing developers to specify the document title shown in PDF readers, print jobs, or file properties to reflect content context, user preferences, or branding.
+How to set custom title for PDF export in Kendo UI TreeList? Configure the exported PDF document title or metadata when saving or downloading hierarchical grid data as a PDF file, enabling setting, customizing, or controlling the printable document name, file title, or PDF viewer header that identifies the export output, useful for labeling, organizing, or distinguishing TreeList or hierarchical data exports, allowing developers to specify the document title shown in PDF readers, print jobs, or file properties to reflect content context, user preferences, or branding.
 </div>
 
 #### Example - setting the title
@@ -7305,7 +7305,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. By de
 
 
 <div class="meta-api-description">
-Customize or control the rendering and visual layout of each individual row within hierarchical, tree-structured data grids or tables, enabling developers to define, configure, or set custom templates or HTML structures to replace default table rows. This includes overriding the default row rendering behavior, providing custom markup or components for rows, specifying row templates that ensure proper data binding by associating unique identifiers or data attributes with each row element for selection, editing, mapping to data source entries, and other data manipulation tasks. Common use cases involve personalizing row appearance, injecting dynamic content, and controlling row structure in TreeList or similar grid-based hierarchical UI components.
+How to customize row appearance in Kendo UI TreeList? Customize or control the rendering and visual layout of each individual row within hierarchical, tree-structured data grids or tables, enabling developers to define, configure, or set custom templates or HTML structures to replace default table rows. This includes overriding the default row rendering behavior, providing custom markup or components for rows, specifying row templates that ensure proper data binding by associating unique identifiers or data attributes with each row element for selection, editing, mapping to data source entries, and other data manipulation tasks. Common use cases involve personalizing row appearance, injecting dynamic content, and controlling row structure in TreeList or similar grid-based hierarchical UI components.
 </div>
 
 #### Example - specify row template as a function
@@ -7370,7 +7370,7 @@ If set to `true`, the TreeList will display a scrollbar when the total row heigh
 
 
 <div class="meta-api-description">
-Control whether the TreeList shows scrollbars by enabling or disabling scrolling when the content overflows the visible area, affecting vertical and horizontal navigation; configure scrolling behavior to handle large datasets with automatic scrollbars or disable scrolling for improved accessibility, fixed layouts, or to prevent header and data section separation, allowing developers to set, toggle, or customize scroll functionality, overflow handling, and layout responsiveness in hierarchical grid views.
+How do I enable scrolling in Kendo UI TreeList when content overflows? Control whether the TreeList shows scrollbars by enabling or disabling scrolling when the content overflows the visible area, affecting vertical and horizontal navigation; configure scrolling behavior to handle large datasets with automatic scrollbars or disable scrolling for improved accessibility, fixed layouts, or to prevent header and data section separation, allowing developers to set, toggle, or customize scroll functionality, overflow handling, and layout responsiveness in hierarchical grid views.
 </div>
 
 #### Example - disabling scrolling
@@ -7411,7 +7411,7 @@ Configures the Kendo UI TreeList search bar settings.
 
 
 <div class="meta-api-description">
-Configure and customize a data grid search feature to let users quickly filter and query rows by typing keywords or phrases, including enabling or disabling the search input field, setting placeholder or hint text, defining which columns or fields are searchable, choosing filter operators like contains or equals, controlling case sensitivity during searches, adjusting debounce timing to limit rapid input processing, and managing the visibility of clear buttons to reset the search input for improved user interaction and efficient data retrieval within tree or hierarchical list structures.
+How to customize the search feature in Kendo UI TreeList? Configure and customize a data grid search feature to let users quickly filter and query rows by typing keywords or phrases, including enabling or disabling the search input field, setting placeholder or hint text, defining which columns or fields are searchable, choosing filter operators like contains or equals, controlling case sensitivity during searches, adjusting debounce timing to limit rapid input processing, and managing the visibility of clear buttons to reset the search input for improved user interaction and efficient data retrieval within tree or hierarchical list structures.
 </div>
 
 #### Example
@@ -7440,7 +7440,7 @@ Defines a list of fields which will be included in the search. If values for the
 
 
 <div class="meta-api-description">
-Customize and limit searchable columns by specifying an array of data field names to control which fields are included in search and filtering operations, enabling precise matching of column values; if no specific fields are set, the search defaults to all columns, allowing configuration to focus or broaden search scope, filter by selected data properties, restrict searches to particular attributes, enable targeted search within designated columns, set search fields explicitly, and manage which dataset fields are queried during text matching or filtering processes in tabular or hierarchical data views.
+How do I restrict Kendo UI TreeList search to specific columns? Customize and limit searchable columns by specifying an array of data field names to control which fields are included in search and filtering operations, enabling precise matching of column values; if no specific fields are set, the search defaults to all columns, allowing configuration to focus or broaden search scope, filter by selected data properties, restrict searches to particular attributes, enable targeted search within designated columns, set search fields explicitly, and manage which dataset fields are queried during text matching or filtering processes in tabular or hierarchical data views.
 </div>
 
 #### Example - specify which fields will be included in the search
@@ -7477,7 +7477,7 @@ Can also be set to the following string values:
 
 
 <div class="meta-api-description">
-Enable or configure user interaction for selecting items within a hierarchical data grid, allowing control over whether users can pick individual rows or single cells, as well as support single or multiple selection modes. This feature covers enabling row selection, cell selection, multiple row or cell selection, toggling selection capabilities on or off, managing user click behavior to highlight or choose specific parts of a tree-structured list, and customizing how users can highlight data entries or cells within a nested table or tree table. It supports use cases such as activating selection for picking one or many rows, choosing individual cells for editing or copying, setting selection modes for single or multiple items, and controlling whether selection persists during user navigation or interaction.
+How do I enable multiple row selection in Kendo UI TreeList widget? Enable or configure user interaction for selecting items within a hierarchical data grid, allowing control over whether users can pick individual rows or single cells, as well as support single or multiple selection modes. This feature covers enabling row selection, cell selection, multiple row or cell selection, toggling selection capabilities on or off, managing user click behavior to highlight or choose specific parts of a tree-structured list, and customizing how users can highlight data entries or cells within a nested table or tree table. It supports use cases such as activating selection for picking one or many rows, choosing individual cells for editing or copying, setting selection modes for single or multiple items, and controlling whether selection persists during user navigation or interaction.
 </div>
 
 #### Example - setting selectable as a Boolean
@@ -7522,7 +7522,7 @@ If set to `true`, the user is able to sort the TreeList by clicking the column h
 
 
 <div class="meta-api-description">
-Control the ability to activate or configure interactive sorting of columns in a hierarchical or tree-structured data grid, allowing users to click on column headers to sort rows ascending or descending. Enable or disable sortable column headers, define custom sorting behaviors, specify sorting modes, or set initial sorting states programmatically. Manage user-driven column sorting by toggling header click interactions, setting sorting parameters via configuration objects, or controlling multi-column sorting preferences in expandable tree lists or nested data views.
+How do I enable sorting in a Kendo UI TreeList column? Control the ability to activate or configure interactive sorting of columns in a hierarchical or tree-structured data grid, allowing users to click on column headers to sort rows ascending or descending. Enable or disable sortable column headers, define custom sorting behaviors, specify sorting modes, or set initial sorting states programmatically. Manage user-driven column sorting by toggling header click interactions, setting sorting parameters via configuration objects, or controlling multi-column sorting preferences in expandable tree lists or nested data views.
 </div>
 
 #### Example - enabling sorting
@@ -7549,7 +7549,7 @@ If set to `true`, the user can get the TreeList in its unsorted state by clickin
 
 
 <div class="meta-api-description">
-Enable or disable the ability for users to toggle sorting on columns by clicking headers, including clearing or removing active sort orders to revert the list to an unsorted state, controlling whether clicking a sorted column header resets sorting or maintains a fixed sorted view, configuring interactive column sorting behavior with options to allow unsorting, cancel sorting, reset order, or prevent toggling sort state in a tree-structured list or table interface.
+How can I allow users to unsort TreeList columns by clicking headers? Enable or disable the ability for users to toggle sorting on columns by clicking headers, including clearing or removing active sort orders to revert the list to an unsorted state, controlling whether clicking a sorted column header resets sorting or maintains a fixed sorted view, configuring interactive column sorting behavior with options to allow unsorting, cancel sorting, reset order, or prevent toggling sort state in a tree-structured list or table interface.
 </div>
 
 #### Example - preventing unsorting
@@ -7581,7 +7581,7 @@ The sort mode. If set to `single`, the user can sort by one column at a time. If
 
 
 <div class="meta-api-description">
-Control sorting behavior in hierarchical or nested lists, enabling single-column sorting to organize data by one attribute at a time or multi-column sorting to sort by several fields simultaneously; configure how users can order tree-structured data, manage sorting priorities across columns, set sorting modes to single or multiple criteria, and customize sorting interaction in expandable or collapsible tree views.
+How to set sorting behavior for hierarchical data in Kendo UI TreeList? Control sorting behavior in hierarchical or nested lists, enabling single-column sorting to organize data by one attribute at a time or multi-column sorting to sort by several fields simultaneously; configure how users can order tree-structured data, manage sorting priorities across columns, set sorting modes to single or multiple criteria, and customize sorting interaction in expandable or collapsible tree views.
 </div>
 
 #### Example - allowing the multiple column sort mode
@@ -7623,7 +7623,7 @@ Control sorting behavior in hierarchical or nested lists, enabling single-column
 
 
 <div class="meta-api-description">
-Configure and customize the toolbar of a hierarchical data grid or tree-like list by specifying how it is displayed and which built-in or custom commands appear, enabling options such as adding new items, exporting data to Excel or PDF formats, integrating a search panel, or controlling overflow behavior. Adjust toolbar rendering using string templates, template functions, arrays of command definitions, or detailed configuration objects that allow binding custom actions, extending functionality, and controlling layout overflow to tailor the user interaction and visual presentation of actions like create, export, and search within a tree-structured list interface.
+How do I customize the toolbar in Kendo UI for jQuery TreeList component? Configure and customize the toolbar of a hierarchical data grid or tree-like list by specifying how it is displayed and which built-in or custom commands appear, enabling options such as adding new items, exporting data to Excel or PDF formats, integrating a search panel, or controlling overflow behavior. Adjust toolbar rendering using string templates, template functions, arrays of command definitions, or detailed configuration objects that allow binding custom actions, extending functionality, and controlling layout overflow to tailor the user interaction and visual presentation of actions like create, export, and search within a tree-structured list interface.
 </div>
 
 #### Example - configuring the TreeList toolbar as a string template
@@ -7755,7 +7755,7 @@ The `click` handler of the toolbar command. Used for custom toolbar commands.
 
 
 <div class="meta-api-description">
-Configure or customize toolbar button click actions, set event handlers for toolbar command interactions, define functions that run when toolbar commands are clicked, handle or control toolbar button events, enable custom logic execution on toolbar command clicks, manage toolbar action callbacks, trigger component methods through toolbar clicks, implement event-driven responses for toolbar buttons, program toolbar command click handlers, and define behavior for user interactions with toolbar controls.
+How to customize toolbar button click actions in Kendo UI TreeList? Configure or customize toolbar button click actions, set event handlers for toolbar command interactions, define functions that run when toolbar commands are clicked, handle or control toolbar button events, enable custom logic execution on toolbar command clicks, manage toolbar action callbacks, trigger component methods through toolbar clicks, implement event-driven responses for toolbar buttons, program toolbar command click handlers, and define behavior for user interactions with toolbar controls.
 </div>
 
 #### Example - specifying the name of the command
@@ -7789,7 +7789,7 @@ Specifies the icon's name that will be rendered inside the toolbar button. When 
 
 
 <div class="meta-api-description">
-Configure or set a custom icon for toolbar buttons within a hierarchical or tree-structured list interface to visually represent commands, actions, or features; control the appearance by specifying icon names that integrate font icons, sprite icons, or symbolic graphics inside toolbar buttons for better user recognition and usability; enable adding graphical markers, symbols, or icons dynamically to toolbars in tree views, allowing developers to customize command buttons with distinctive visual elements for enhanced navigation and interaction cues.
+How do I set a custom icon for toolbar buttons in my TreeList? Configure or set a custom icon for toolbar buttons within a hierarchical or tree-structured list interface to visually represent commands, actions, or features; control the appearance by specifying icon names that integrate font icons, sprite icons, or symbolic graphics inside toolbar buttons for better user recognition and usability; enable adding graphical markers, symbols, or icons dynamically to toolbars in tree views, allowing developers to customize command buttons with distinctive visual elements for enhanced navigation and interaction cues.
 </div>
 
 #### Example - specifying the name of the command
@@ -7815,7 +7815,7 @@ A class name that will be rendered inside the toolbar button. When you set this 
 
 
 <div class="meta-api-description">
-Configure or set a custom icon for toolbar buttons in a hierarchical tree list interface by assigning CSS class names that render icon fonts or styled elements within toolbar commands; control visual indicators or graphical representations in toolbar items by specifying classes that dynamically insert styled spans or iconography inside buttons, enabling enhanced customization of toolbar commands, visual styling of tree list toolbars, and integration of custom icons through class-based styling techniques.
+How do I customize the icons in my Kendo UI TreeList toolbar? Configure or set a custom icon for toolbar buttons in a hierarchical tree list interface by assigning CSS class names that render icon fonts or styled elements within toolbar commands; control visual indicators or graphical representations in toolbar items by specifying classes that dynamically insert styled spans or iconography inside buttons, enabling enhanced customization of toolbar commands, visual styling of tree list toolbars, and integration of custom icons through class-based styling techniques.
 </div>
 
 #### Example - specifying the name of the command
@@ -7841,7 +7841,7 @@ The name of the toolbar command. Can be either a built-in ("create", "excel", or
 
 
 <div class="meta-api-description">
-Configure or set the identifier for toolbar commands within a hierarchical grid interface, enabling customization and control over toolbar buttons by specifying built-in commands like create, export to Excel, or PDF, or by defining custom command strings to target specific buttons via data attributes for styling, event handling, or initialization purposes in interactive tree-structured data lists.
+How to customize toolbar buttons in Kendo UI TreeList? Configure or set the identifier for toolbar commands within a hierarchical grid interface, enabling customization and control over toolbar buttons by specifying built-in commands like create, export to Excel, or PDF, or by defining custom command strings to target specific buttons via data attributes for styling, event handling, or initialization purposes in interactive tree-structured data lists.
 </div>
 
 #### Example - specifying the name of the command
@@ -7876,7 +7876,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 
 <div class="meta-api-description">
-Control and customize the rendering of toolbar commands within hierarchical list components by specifying custom templates or markup that replace default buttons, enabling developers to configure toolbar buttons with personalized HTML, dynamic data bindings, icons, labels, and interactive content. Adjust or override toolbar item appearances in tree-structured data views by providing templates that support flexible UI elements for commands, allowing customization of button rendering, command presentation, icon inclusion, label changes, and dynamic behavior within toolbar toolkits associated with hierarchical list interfaces.
+How do I customize the rendering of toolbar commands in Kendo UI TreeList component? Control and customize the rendering of toolbar commands within hierarchical list components by specifying custom templates or markup that replace default buttons, enabling developers to configure toolbar buttons with personalized HTML, dynamic data bindings, icons, labels, and interactive content. Adjust or override toolbar item appearances in tree-structured data views by providing templates that support flexible UI elements for commands, allowing customization of button rendering, command presentation, icon inclusion, label changes, and dynamic behavior within toolbar toolkits associated with hierarchical list interfaces.
 </div>
 
 #### Example - set the template as a function
@@ -7941,7 +7941,7 @@ The text that is displayed by the command button. If not set, the TreeList will 
 
 
 <div class="meta-api-description">
-Customize the label or text displayed on toolbar buttons within a hierarchical list or tree view interface, enabling developers to specify custom command captions, button titles, or control the text string shown on action buttons for clearer user interaction. This includes setting personalized names, captions, or labels for toolbar commands, overriding default identifiers or internal button names to enhance UI clarity, accessibility, and localization by defining explicit text values instead of relying on automatic or preset command names.
+How do I customize the text on toolbar buttons in a Kendo UI TreeList? Customize the label or text displayed on toolbar buttons within a hierarchical list or tree view interface, enabling developers to specify custom command captions, button titles, or control the text string shown on action buttons for clearer user interaction. This includes setting personalized names, captions, or labels for toolbar commands, overriding default identifiers or internal button names to enhance UI clarity, accessibility, and localization by defining explicit text values instead of relying on automatic or preset command names.
 </div>
 
 #### Example - specifying the text for the command button
@@ -7975,7 +7975,7 @@ A JavaScript array that contains the ToolBar's commands configuration.
 
 
 <div class="meta-api-description">
-Control and customize the toolbar commands, buttons, and controls within a hierarchical data grid or tree-structured list by defining the set, sequence, and configuration of toolbar items using an array of command definitions. Enable, arrange, add, remove, or configure toolbar actions like buttons, menus, or commands that appear above or within the tree-view list interface, supporting flexible command customization and ordering to enhance user interaction with expandable, collapsible, or editable tree data grids. Adjust toolbar options to tailor user experience, streamline actions, and manage toolbar controls dynamically for hierarchical data presentations.
+How do I customize the toolbar items in my Kendo UI TreeList control? Control and customize the toolbar commands, buttons, and controls within a hierarchical data grid or tree-structured list by defining the set, sequence, and configuration of toolbar items using an array of command definitions. Enable, arrange, add, remove, or configure toolbar actions like buttons, menus, or commands that appear above or within the tree-view list interface, supporting flexible command customization and ordering to enhance user interaction with expandable, collapsible, or editable tree data grids. Adjust toolbar options to tailor user experience, streamline actions, and manage toolbar controls dynamically for hierarchical data presentations.
 </div>
 
 #### Example
@@ -8007,7 +8007,7 @@ The `click` handler of the toolbar command. Used for custom toolbar commands.
 
 
 <div class="meta-api-description">
-Configure custom toolbar button click handlers in tree list interfaces to run specific logic when toolbar commands are activated, handling user interactions by setting callbacks that receive event details including the original DOM event and component context, enabling developers to execute actions such as CRUD operations, open dialogs, modify or prevent default behaviors, respond to toolbar command clicks dynamically, and integrate custom command functionality within toolbar items of hierarchical grid or tree components.
+How do I handle click events on custom toolbar buttons in a Kendo UI TreeList? Configure custom toolbar button click handlers in tree list interfaces to run specific logic when toolbar commands are activated, handling user interactions by setting callbacks that receive event details including the original DOM event and component context, enabling developers to execute actions such as CRUD operations, open dialogs, modify or prevent default behaviors, respond to toolbar command clicks dynamically, and integrate custom command functionality within toolbar items of hierarchical grid or tree components.
 </div>
 
 #### Example
@@ -8045,7 +8045,7 @@ Specifies the icon's name that will be rendered inside the toolbar button. When 
 
 
 <div class="meta-api-description">
-Specify or configure the icon displayed within a toolbar button of a TreeList, enabling customization or enhancement of toolbar commands by setting the icon’s name, symbol, or identifier. Control the visual representation of buttons by adding graphic elements, symbols, or glyphs inside toolbar items, including setting icons for both built-in and custom toolbar commands, embedding icons by name or key, and adjusting toolbar button visuals for better user interface clarity, appearance, or branding. Use cases include enabling or changing toolbar button images, icons, symbols, or glyphs dynamically through configuration, tailoring toolbar controls with specific iconography, and managing toolbar button elements for improved navigation and usability in TreeList components.
+How to customize icon in TreeList toolbar using Kendo UI for jQuery? Specify or configure the icon displayed within a toolbar button of a TreeList, enabling customization or enhancement of toolbar commands by setting the icon’s name, symbol, or identifier. Control the visual representation of buttons by adding graphic elements, symbols, or glyphs inside toolbar items, including setting icons for both built-in and custom toolbar commands, embedding icons by name or key, and adjusting toolbar button visuals for better user interface clarity, appearance, or branding. Use cases include enabling or changing toolbar button images, icons, symbols, or glyphs dynamically through configuration, tailoring toolbar controls with specific iconography, and managing toolbar button elements for improved navigation and usability in TreeList components.
 </div>
 
 #### Example
@@ -8080,7 +8080,7 @@ A class name that will be rendered inside the toolbar button. When you set this 
 
 
 <div class="meta-api-description">
-Configure or customize toolbar buttons in a hierarchical list component by assigning icon styles through CSS class names, enabling the display of font icons or image-based visuals inside toolbar commands. This feature supports adding visual indicators or symbols to toolbar buttons, allowing developers to control and enhance toolbar appearance by embedding icon classes that inject styled span elements within buttons. Useful for enabling, setting, or styling icons in tree-structured list toolbars, this approach facilitates seamless integration of custom icon fonts or CSS-driven graphics in toolbar controls for improved UI clarity and user interaction.
+How can I customize the icon class for toolbar buttons in a Kendo UI TreeList component? Configure or customize toolbar buttons in a hierarchical list component by assigning icon styles through CSS class names, enabling the display of font icons or image-based visuals inside toolbar commands. This feature supports adding visual indicators or symbols to toolbar buttons, allowing developers to control and enhance toolbar appearance by embedding icon classes that inject styled span elements within buttons. Useful for enabling, setting, or styling icons in tree-structured list toolbars, this approach facilitates seamless integration of custom icon fonts or CSS-driven graphics in toolbar controls for improved UI clarity and user interaction.
 </div>
 
 #### Example
@@ -8114,7 +8114,7 @@ The name of the toolbar command. Can be either a built-in ("create", "excel", or
 
 
 <div class="meta-api-description">
-Configure and control toolbar button actions in hierarchical data views by assigning command identifiers or custom labels that link buttons to built-in functions like creating new entries, exporting to Excel, or saving as PDF, while enabling the setup of personalized commands using string names that act as references within event handlers or scripts, facilitating the triggering and management of specific toolbar operations through data-command attributes tied to each button element.
+How to configure custom button actions in Kendo UI TreeList? Configure and control toolbar button actions in hierarchical data views by assigning command identifiers or custom labels that link buttons to built-in functions like creating new entries, exporting to Excel, or saving as PDF, while enabling the setup of personalized commands using string names that act as references within event handlers or scripts, facilitating the triggering and management of specific toolbar operations through data-command attributes tied to each button element.
 </div>
 
 #### Example
@@ -8146,7 +8146,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
 
 
 <div class="meta-api-description">
-Customize toolbar commands in a tree list by defining templates to render buttons, icons, or fully personalized HTML content within the toolbar area, enabling developers to set, configure, or override default command appearances with Kendo UI templates or custom HTML strings. This supports injecting dynamic markup, configuring toolbar controls, implementing custom action buttons, and styling toolbar items beyond standard buttons, providing flexible ways to embed interactive elements, icons, or complex layouts in the tree list toolbar region.
+How do I customize toolbar commands in Kendo UI TreeList? Customize toolbar commands in a tree list by defining templates to render buttons, icons, or fully personalized HTML content within the toolbar area, enabling developers to set, configure, or override default command appearances with Kendo UI templates or custom HTML strings. This supports injecting dynamic markup, configuring toolbar controls, implementing custom action buttons, and styling toolbar items beyond standard buttons, providing flexible ways to embed interactive elements, icons, or complex layouts in the tree list toolbar region.
 </div>
 
 #### Example
@@ -8185,7 +8185,7 @@ The text that is displayed by the command button. If not set, the TreeList will 
 
 
 <div class="meta-api-description">
-Customize, configure, or set the text label displayed on toolbar buttons within a TreeList interface, enabling control over command button captions, names, or titles. Adjust button text to match specific commands, localize labels for different languages, modify default or preset button names, and tailor the display text for better user understanding, interface clarity, or branding purposes. Supports changing command names, captions, or visible text on toolbar controls to fit varied application requirements, user preferences, or internationalization needs.
+How do I change the text label on a TreeList toolbar button? Customize, configure, or set the text label displayed on toolbar buttons within a TreeList interface, enabling control over command button captions, names, or titles. Adjust button text to match specific commands, localize labels for different languages, modify default or preset button names, and tailor the display text for better user understanding, interface clarity, or branding purposes. Supports changing command names, captions, or visible text on toolbar controls to fit varied application requirements, user preferences, or internationalization needs.
 </div>
 
 #### Example
@@ -8215,7 +8215,7 @@ Specifies [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow
 
 
 <div class="meta-api-description">
-Control and configure the toolbar's handling of excess or overflowing items within hierarchical list interfaces, enabling developers to set behaviors for responsive layouts such as collapsing toolbar buttons, managing the appearance and functionality of a "More" dropdown or overflow popup, customizing how toolbar items reorder, hide, or group when space is limited, and adjusting overflow strategies to optimize usability and accessibility on different screen sizes or container widths.
+How do I handle overflowing toolbar items in Kendo UI TreeList? Control and configure the toolbar's handling of excess or overflowing items within hierarchical list interfaces, enabling developers to set behaviors for responsive layouts such as collapsing toolbar buttons, managing the appearance and functionality of a "More" dropdown or overflow popup, customizing how toolbar items reorder, hide, or group when space is limited, and adjusting overflow strategies to optimize usability and accessibility on different screen sizes or container widths.
 </div>
 
 #### Example
@@ -8256,7 +8256,7 @@ Defines the overflow mode. The available options are:
 
 
 <div class="meta-api-description">
-Configure how toolbar buttons or items behave when they exceed the visible width in a hierarchical list interface, enabling control over overflow handling by setting modes that either move excess elements into a dropdown menu, allow horizontal scrolling to reveal hidden tools, group items into expandable or collapsible sections for better organization, or disable overflow management altogether which may result in clipped or hidden toolbar items; this covers scenarios such as enabling smooth access to toolbar actions on limited screen space, customizing user interface responsiveness, managing tool visibility in complex nested lists, and deciding between scrollable toolbars versus condensed menus for optimal user experience.
+How do I handle overflow in Kendo UI TreeList toolbar items? Configure how toolbar buttons or items behave when they exceed the visible width in a hierarchical list interface, enabling control over overflow handling by setting modes that either move excess elements into a dropdown menu, allow horizontal scrolling to reveal hidden tools, group items into expandable or collapsible sections for better organization, or disable overflow management altogether which may result in clipped or hidden toolbar items; this covers scenarios such as enabling smooth access to toolbar actions on limited screen space, customizing user interface responsiveness, managing tool visibility in complex nested lists, and deciding between scrollable toolbars versus condensed menus for optimal user experience.
 </div>
 
 #### Example
@@ -8296,7 +8296,7 @@ Defines the visibility of scroll buttons when `mode` is `"scroll"`. The availabl
 
 
 <div class="meta-api-description">
-Control the visibility and behavior of navigation or scroll buttons for toolbar overflow in tree lists when using scroll mode, enabling options to always display, hide completely, or show buttons automatically only when scrolling is necessary; configure how to enable or disable scroll navigation, toggle button presence during overflow scenarios, set toolbar controls for managing horizontal or vertical overflow in lists or grids, and adjust user interface elements for improved navigation through overflowing content areas with customizable button visibility settings.
+How do I control scroll buttons in a tree list toolbar when using Kendo UI for jQuery? Control the visibility and behavior of navigation or scroll buttons for toolbar overflow in tree lists when using scroll mode, enabling options to always display, hide completely, or show buttons automatically only when scrolling is necessary; configure how to enable or disable scroll navigation, toggle button presence during overflow scenarios, set toolbar controls for managing horizontal or vertical overflow in lists or grids, and adjust user interface elements for improved navigation through overflowing content areas with customizable button visibility settings.
 </div>
 
 #### Example
@@ -8337,7 +8337,7 @@ Defines the placement of scroll buttons. The available options are:
 
 
 <div class="meta-api-description">
-Configure the placement of toolbar overflow scroll buttons in the TreeList interface, enabling control over whether scrolling controls appear at the beginning, the end, or simultaneously on both edges of the toolbar; options include positioning scroll buttons only at the start, only at the end, or splitting them to show on both sides, which can be set during initialization to customize user navigation and improve toolbar scrolling behavior in lists with overflow content.
+How do I configure the scroll buttons in Kendo UI TreeList toolbar to appear at both ends of the overflow? Configure the placement of toolbar overflow scroll buttons in the TreeList interface, enabling control over whether scrolling controls appear at the beginning, the end, or simultaneously on both edges of the toolbar; options include positioning scroll buttons only at the start, only at the end, or splitting them to show on both sides, which can be set during initialization to customize user navigation and improve toolbar scrolling behavior in lists with overflow content.
 </div>
 
 #### Example
@@ -8375,7 +8375,7 @@ Specifies the distance (in pixels) the toolbar scrolls when a scroll button is c
 
 
 <div class="meta-api-description">
-Control the horizontal scroll amount or increment for toolbar overflow navigation by setting how many pixels the toolbar content moves when clicking overflow scroll buttons, enabling adjustment of scroll step size, scroll distance, or scroll offset to customize navigation through hidden or overflowed toolbar items, configuring the scroll shift for overflow areas, fine-tuning how far the toolbar shifts per user scroll action, adjusting scroll increments to improve toolbar usability and access to functions beyond visible boundaries.
+How can I adjust the scroll distance of my Kendo UI TreeList toolbar overflow navigation? Control the horizontal scroll amount or increment for toolbar overflow navigation by setting how many pixels the toolbar content moves when clicking overflow scroll buttons, enabling adjustment of scroll step size, scroll distance, or scroll offset to customize navigation through hidden or overflowed toolbar items, configuring the scroll shift for overflow areas, fine-tuning how far the toolbar shifts per user scroll action, adjusting scroll increments to improve toolbar usability and access to functions beyond visible boundaries.
 </div>
 
 #### Example
@@ -8416,7 +8416,7 @@ The columns of the TreeList that are initialized from the [`columns`](/api/javas
 
 
 <div class="meta-api-description">
-Control and interact with the collection of column definitions used in a hierarchical data grid, enabling retrieval or adjustment of properties such as column fields, headers, labels, widths, templates, and metadata at runtime; access and modify individual column configurations dynamically to inspect or update aspects like display names, data bindings, formatting, visibility, and layout within the tree-structured table, supporting scenarios for customizing columns after initialization, managing column settings programmatically, and synchronizing column schema with user interface elements.
+How can I dynamically change the display name of a column in my Kendo UI TreeList? Control and interact with the collection of column definitions used in a hierarchical data grid, enabling retrieval or adjustment of properties such as column fields, headers, labels, widths, templates, and metadata at runtime; access and modify individual column configurations dynamically to inspect or update aspects like display names, data bindings, formatting, visibility, and layout within the tree-structured table, supporting scenarios for customizing columns after initialization, managing column settings programmatically, and synchronizing column schema with user interface elements.
 </div>
 
 #### Example - iterating the TreeList columns
@@ -8449,7 +8449,7 @@ The jQuery object which represents the TreeList `table` element.
 
 
 <div class="meta-api-description">
-Retrieve the rendered HTML table element as a jQuery object to enable querying DOM nodes, attaching event handlers, manipulating table rows and cells, measuring element dimensions, customizing styling, integrating third-party jQuery plugins, performing virtual scrolling optimizations, or implementing custom DOM updates within hierarchical tree grid structures.
+How can I access the HTML table element in a Kendo UI TreeList to attach event handlers? Retrieve the rendered HTML table element as a jQuery object to enable querying DOM nodes, attaching event handlers, manipulating table rows and cells, measuring element dimensions, customizing styling, integrating third-party jQuery plugins, performing virtual scrolling optimizations, or implementing custom DOM updates within hierarchical tree grid structures.
 </div>
 
 #### Example
@@ -8478,7 +8478,7 @@ The jQuery object which represents the table body. Contains all TreeList table r
 
 
 <div class="meta-api-description">
-Access and manipulate the table body element containing all TreeList rows to query, traverse, or update rows dynamically after initialization using jQuery selectors and methods; control row selection, bind event handlers to rows, modify row content or structure, perform DOM traversal and updates, and handle interactive behaviors within the table body for advanced customization and real-time changes in hierarchical data grids.
+How do I access and manipulate the table body in a Kendo UI TreeList? Access and manipulate the table body element containing all TreeList rows to query, traverse, or update rows dynamically after initialization using jQuery selectors and methods; control row selection, bind event handlers to rows, modify row content or structure, perform DOM traversal and updates, and handle interactive behaviors within the table body for advanced customization and real-time changes in hierarchical data grids.
 </div>
 
 #### Example
@@ -8507,7 +8507,7 @@ The jQuery object which represents the TreeList table header element.
 
 
 <div class="meta-api-description">
-Accessing and controlling the table header element in a TreeList or similar grid component involves manipulating the header DOM node, enabling developers to query header cells, modify header content, add or remove CSS classes, attach event listeners for interactions like clicks or hovers, measure header dimensions such as height, and dynamically update or customize the header layout. This includes tasks like configuring header styling, enabling custom header behavior, controlling header cell access for responsive adjustments, and integrating event-driven header modifications using jQuery or equivalent DOM manipulation techniques in table-based UI components.
+How do I access the header element in a Kendo UI TreeList? Accessing and controlling the table header element in a TreeList or similar grid component involves manipulating the header DOM node, enabling developers to query header cells, modify header content, add or remove CSS classes, attach event listeners for interactions like clicks or hovers, measure header dimensions such as height, and dynamically update or customize the header layout. This includes tasks like configuring header styling, enabling custom header behavior, controlling header cell access for responsive adjustments, and integrating event-driven header modifications using jQuery or equivalent DOM manipulation techniques in table-based UI components.
 </div>
 
 #### Example
@@ -8536,7 +8536,7 @@ The jQuery object which represents the TreeList `content` element which holds th
 
 
 <div class="meta-api-description">
-Retrieve or access the scrollable area or container element of a hierarchical list or tree structure for purposes such as measuring dimensions, handling scroll events, customizing scroll behavior, or manipulating the visible content area dynamically. This property provides a way to control, query, or interact with the scrollable region of a tree-style data display when scrolling is enabled, enabling developers to manage scroll position, trigger events on scroll changes, calculate viewport size, or implement custom scroll functionality on the main content pane of a nested or expandable list component.
+How do I access the scrollable area of a Kendo UI TreeList component? Retrieve or access the scrollable area or container element of a hierarchical list or tree structure for purposes such as measuring dimensions, handling scroll events, customizing scroll behavior, or manipulating the visible content area dynamically. This property provides a way to control, query, or interact with the scrollable region of a tree-style data display when scrolling is enabled, enabling developers to manage scroll position, trigger events on scroll changes, calculate viewport size, or implement custom scroll functionality on the main content pane of a nested or expandable list component.
 </div>
 
 #### Example
@@ -8566,7 +8566,7 @@ The jQuery object which represents the TreeList locked `header` element. Availab
 
 
 <div class="meta-api-description">
-Access and manipulate the locked header element of a TreeList or grid component when columns are fixed or frozen, enabling interaction with the locked header's DOM structure for querying, styling, attaching event listeners, measuring size and layout, or dynamically updating its appearance and behavior. This locked header access supports developers in controlling fixed column headers for consistent UI during scrolling, including retrieving the jQuery or DOM node representing the locked header for customized event handling, styling adjustments, dimension calculations, and other direct manipulations within grids or tables that implement column locking or freezing functionality.
+How to access the locked header in Kendo UI TreeList? Access and manipulate the locked header element of a TreeList or grid component when columns are fixed or frozen, enabling interaction with the locked header's DOM structure for querying, styling, attaching event listeners, measuring size and layout, or dynamically updating its appearance and behavior. This locked header access supports developers in controlling fixed column headers for consistent UI during scrolling, including retrieving the jQuery or DOM node representing the locked header for customized event handling, styling adjustments, dimension calculations, and other direct manipulations within grids or tables that implement column locking or freezing functionality.
 </div>
 
 #### Example
@@ -8595,7 +8595,7 @@ The jQuery object which represents the TreeList locked `table` element. Availabl
 
 
 <div class="meta-api-description">
-Access and control the locked columns section or locked pane of a TreeList to measure dimensions, update styles, attach event listeners, or manipulate the locked portion’s DOM element representing the fixed columns table. Retrieve, customize, or interact with the locked part of the grid or table via a jQuery object reference to the locked columns area, enabling developers to programmatically query, style, or respond to events within the fixed locked columns section of a hierarchical or tabular data structure when locked columns are enabled or configured.
+How can I access and manipulate the locked columns section of a Kendo UI TreeList? Access and control the locked columns section or locked pane of a TreeList to measure dimensions, update styles, attach event listeners, or manipulate the locked portion’s DOM element representing the fixed columns table. Retrieve, customize, or interact with the locked part of the grid or table via a jQuery object reference to the locked columns area, enabling developers to programmatically query, style, or respond to events within the fixed locked columns section of a hierarchical or tabular data structure when locked columns are enabled or configured.
 </div>
 
 #### Example
@@ -8624,7 +8624,7 @@ The jQuery object which represents the TreeList locked `content` element. Availa
 
 
 <div class="meta-api-description">
-Control and interact with the frozen or locked columns area in a TreeList by accessing the specific DOM element representing the locked content section, enabling developers to attach event listeners, measure dimensions, modify visual elements, synchronize scrolling behavior between locked and unlocked sections, and perform dynamic updates or customizations related to locked panes in tabular or grid components with frozen columns.
+How to access and customize the locked columns area in a Kendo UI TreeList? Control and interact with the frozen or locked columns area in a TreeList by accessing the specific DOM element representing the locked content section, enabling developers to attach event listeners, measure dimensions, modify visual elements, synchronize scrolling behavior between locked and unlocked sections, and perform dynamic updates or customizations related to locked panes in tabular or grid components with frozen columns.
 </div>
 
 #### Example
@@ -8655,7 +8655,7 @@ Adds an empty data item to the TreeList. In inline edit mode, appends a table ro
 
 
 <div class="meta-api-description">
-Insert a new blank row or data item into a hierarchical tree list or grid for immediate editing, enabling users to add entries directly by appending an editable row inline or triggering a popup editor window, supporting workflows that require dynamically adding and modifying data within tree-structured tables, grids, or lists, with event-driven editing states that notify when the row is activated for input, allowing configuration of inline or modal editing experiences and initiating the creation of new tree nodes or list records interactively.
+How to dynamically add a new row to a Kendo UI TreeList with jQuery? Insert a new blank row or data item into a hierarchical tree list or grid for immediate editing, enabling users to add entries directly by appending an editable row inline or triggering a popup editor window, supporting workflows that require dynamically adding and modifying data within tree-structured tables, grids, or lists, with event-driven editing states that notify when the row is activated for input, allowing configuration of inline or modal editing experiences and initiating the creation of new tree nodes or list records interactively.
 </div>
 
 #### Parameters
@@ -8788,7 +8788,7 @@ Applies the minimum possible width for the specified column so that all the text
 
 
 <div class="meta-api-description">
-Automatically adjust or resize a table column, grid column, or tree list column width to fit its content or text without truncation or wrapping by calling a method that intelligently recalculates and sets the optimal minimum column width based on the longest cell or header value. This feature helps in dynamically sizing columns after data updates, user interactions, or layout changes to enhance readability, streamline presentation, and maintain a clean responsive table or tree structure. It supports use cases like auto-sizing columns on load, resizing to content programmatically, improving UI clarity, and controlling column widths to prevent horizontal scrolling or clipped text in hierarchical or tabular data displays.
+How do I automatically adjust column widths in a Kendo UI TreeList to fit its content? Automatically adjust or resize a table column, grid column, or tree list column width to fit its content or text without truncation or wrapping by calling a method that intelligently recalculates and sets the optimal minimum column width based on the longest cell or header value. This feature helps in dynamically sizing columns after data updates, user interactions, or layout changes to enhance readability, streamline presentation, and maintain a clean responsive table or tree structure. It supports use cases like auto-sizing columns on load, resizing to content programmatically, improving UI clarity, and controlling column widths to prevent horizontal scrolling or clipped text in hierarchical or tabular data displays.
 </div>
 
 #### Parameters
@@ -8860,7 +8860,7 @@ Cancels any pending changes in the data source. Deleted data items are restored,
 
 
 <div class="meta-api-description">
-undo unsaved edits clear pending modifications revert added deleted or updated items reset hierarchical data changes rollback local changes discard unsynced edits before saving cancel pending insertions deletions and updates restore original data state reset TreeList modifications discard local edits before sync revert back to original hierarchical data state cancelChanges method for undoing changes in TreeList data source
+How do I undo unsaved edits in Kendo UI TreeList? undo unsaved edits clear pending modifications revert added deleted or updated items reset hierarchical data changes rollback local changes discard unsynced edits before saving cancel pending insertions deletions and updates restore original data state reset TreeList modifications discard local edits before sync revert back to original hierarchical data state cancelChanges method for undoing changes in TreeList data source
 </div>
 
 #### Example - canceling all changes
@@ -8890,7 +8890,7 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
 
 
 <div class="meta-api-description">
-Terminate or abort row editing session in a hierarchical list or tree grid, discard any unsaved modifications, revert cell or field changes to original data, exit edit mode for the active editable entry, cancel current row updates, rollback edits without saving, stop inline editing on a specific node or item, reset row data during editing, undo changes within the editing context of a single row, prevent committing partial or unwanted edits in a tree-structured data view.
+How to cancel row editing in Kendo UI TreeList widget? Terminate or abort row editing session in a hierarchical list or tree grid, discard any unsaved modifications, revert cell or field changes to original data, exit edit mode for the active editable entry, cancel current row updates, rollback edits without saving, stop inline editing on a specific node or item, reset row data during editing, undo changes within the editing context of a single row, prevent committing partial or unwanted edits in a tree-structured data view.
 </div>
 
 #### Example - canceling editing
@@ -8959,7 +8959,7 @@ Depending on the current selection [mode](/api/javascript/ui/treelist#configurat
 
 
 <div class="meta-api-description">
-Remove or reset all selected rows or cells in a hierarchical table or grid by programmatically clearing the current selection state, regardless of whether the selection mode is single, multiple, rows, or cells; effectively disabling, deselecting, or unchecking any highlighted items or focused nodes to reset the visual selection without altering the underlying data structure or content, enabling developers to control, erase, or update selection programmatically in tree or list views.
+How to programmatically clear selected rows in Kendo UI TreeList? Remove or reset all selected rows or cells in a hierarchical table or grid by programmatically clearing the current selection state, regardless of whether the selection mode is single, multiple, rows, or cells; effectively disabling, deselecting, or unchecking any highlighted items or focused nodes to reset the visual selection without altering the underlying data structure or content, enabling developers to control, erase, or update selection programmatically in tree or list views.
 </div>
 
 #### Example - clearing selection
@@ -8993,7 +8993,7 @@ Stops editing the table cell which is in edit mode. Requires the incell [edit mo
 
 
 <div class="meta-api-description">
-End or stop editing the current cell in a tree-structured list or table by programmatically closing the active cell editor, enabling control over finishing in-cell editing sessions, managing keyboard or automated input flows, validating changes, updating focus, or shifting interaction to other interface elements. This action supports workflows where users or code need to finalize edits within cells before moving on, applying keyboard navigation, or triggering validations, especially when editing mode is enabled for direct cell modifications. Control and terminate cell editing dynamically to ensure seamless data entry completion, focus management, and integration with keyboard-driven navigation or programmatic updates in hierarchical grid or tree list interfaces.
+How do I programmatically close the editor in a Kendo UI TreeList cell? End or stop editing the current cell in a tree-structured list or table by programmatically closing the active cell editor, enabling control over finishing in-cell editing sessions, managing keyboard or automated input flows, validating changes, updating focus, or shifting interaction to other interface elements. This action supports workflows where users or code need to finalize edits within cells before moving on, applying keyboard navigation, or triggering validations, especially when editing mode is enabled for direct cell modifications. Control and terminate cell editing dynamically to ensure seamless data entry completion, focus management, and integration with keyboard-driven navigation or programmatic updates in hierarchical grid or tree list interfaces.
 </div>
 
 #### Parameters
@@ -9036,7 +9036,7 @@ This method collapses the row that is passed as a parameter.
 
 
 <div class="meta-api-description">
-Programmatically close or hide child rows within a hierarchical dataset by collapsing a specific parent entry, enabling control over the expanded or collapsed state of tree structures, managing nested data visibility, dynamically folding branches, toggling row expansion for user interactions, configuring hierarchical display to streamline complex lists, setting rows to a collapsed state to improve readability, controlling row expansion programmatically, and responding to user-driven or automated commands that require folding tree nodes or hiding child elements within a nested or expandable list.
+How to programmatically collapse child rows in a Kendo UI TreeList? Programmatically close or hide child rows within a hierarchical dataset by collapsing a specific parent entry, enabling control over the expanded or collapsed state of tree structures, managing nested data visibility, dynamically folding branches, toggling row expansion for user interactions, configuring hierarchical display to streamline complex lists, setting rows to a collapsed state to improve readability, controlling row expansion programmatically, and responding to user-driven or automated commands that require folding tree nodes or hiding child elements within a nested or expandable list.
 </div>
 
 #### Parameters
@@ -9078,7 +9078,7 @@ Returns the data item to which the specified table row is bound.
 
 
 <div class="meta-api-description">
-Retrieve the original data object linked to a particular row within a hierarchical or tree-structured list, enabling access, modification, or inspection of the underlying model tied to that row element. This method supports scenarios like reading row data for custom display, updating values for inline editing, syncing selection state with data models, mapping DOM elements or row indices back to their bound data entries, and controlling row-level data operations by connecting visual rows to their source objects. Use cases include extracting or setting data for tree nodes, manipulating hierarchical data on user interaction, or linking UI elements to their corresponding dataset items in structured grid or tree views.
+How do I access the original data object linked to a specific row in a Kendo UI TreeList? Retrieve the original data object linked to a particular row within a hierarchical or tree-structured list, enabling access, modification, or inspection of the underlying model tied to that row element. This method supports scenarios like reading row data for custom display, updating values for inline editing, syncing selection state with data models, mapping DOM elements or row indices back to their bound data entries, and controlling row-level data operations by connecting visual rows to their source objects. Use cases include extracting or setting data for tree nodes, manipulating hierarchical data on user interaction, or linking UI elements to their corresponding dataset items in structured grid or tree views.
 </div>
 
 #### Parameters
@@ -9120,7 +9120,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 
 <div class="meta-api-description">
-Clear all event listeners, release resources, detach data attributes, and recursively clean up nested components to safely dismantle a hierarchical grid or tree view widget without removing its DOM element, preventing memory leaks and ensuring proper disposal of child controls and event handlers in complex UI trees.
+How do I safely remove a hierarchical Kendo UI TreeList widget from my page? Clear all event listeners, release resources, detach data attributes, and recursively clean up nested components to safely dismantle a hierarchical grid or tree view widget without removing its DOM element, preventing memory leaks and ensuring proper disposal of child controls and event handlers in complex UI trees.
 </div>
 
 #### Example - safely removing the TreeList from the DOM
@@ -9152,7 +9152,7 @@ Switches the specified table cell in edit mode. Requires the incell [edit mode](
 
 
 <div class="meta-api-description">
-Programmatically enable or trigger editing mode for a specific cell within a hierarchical grid or table, opening the in-cell editor to allow user input, set focus automatically, and start direct editing; useful for controlling cell editing state via code, enabling inline editing in tree-structured lists or data grids, activating cell editors on demand, handling edit initiation events, and managing in-cell edit interactions dynamically within nested row collections.
+How can I programmatically enable editing for a specific cell in my Kendo UI TreeList? Programmatically enable or trigger editing mode for a specific cell within a hierarchical grid or table, opening the in-cell editor to allow user input, set focus automatically, and start direct editing; useful for controlling cell editing state via code, enabling inline editing in tree-structured lists or data grids, activating cell editors on demand, handling edit initiation events, and managing in-cell edit interactions dynamically within nested row collections.
 </div>
 
 #### Parameters
@@ -9187,7 +9187,7 @@ Switches the specified table row to edit mode. Fires the [`edit`](/api/javascrip
 
 
 <div class="meta-api-description">
-Programmatically initiate inline editing for a specific row in a hierarchical or tree-structured table by switching the row into edit mode, enabling modification of its cell values and activating editors for user input. Enable dynamic control over row editing, trigger editing states directly, integrate with custom edit and save workflows, and handle events related to starting edits on expandable or nested rows within tree-like data grids. Manage, configure, set, or enable row-level editing programmatically in complex grid components supporting hierarchical data and inline cell modifications.
+How do I programmatically edit a specific row in a Kendo UI TreeList? Programmatically initiate inline editing for a specific row in a hierarchical or tree-structured table by switching the row into edit mode, enabling modification of its cell values and activating editors for user input. Enable dynamic control over row editing, trigger editing states directly, integrate with custom edit and save workflows, and handle events related to starting edits on expandable or nested rows within tree-like data grids. Manage, configure, set, or enable row-level editing programmatically in complex grid components supporting hierarchical data and inline cell modifications.
 </div>
 
 #### Parameters
@@ -9262,7 +9262,7 @@ Expands the row.
 
 
 <div class="meta-api-description">
-Open or reveal hidden child rows within a hierarchical grid or tree-structured list by programmatically expanding collapsed parent rows. Use commands, functions, or triggers to control row expansion state, dynamically display nested data entries, respond to user clicks or interactions by unfolding specific tree nodes, and update the interface to show child elements on demand. Enable, set, or toggle expansion for tree branches, branches with children, or hierarchical dataset items, facilitating navigation, drilling down into details, or managing visibility of nested rows after loading or data updates.
+How to programmatically expand collapsed parent rows in Kendo UI TreeList? Open or reveal hidden child rows within a hierarchical grid or tree-structured list by programmatically expanding collapsed parent rows. Use commands, functions, or triggers to control row expansion state, dynamically display nested data entries, respond to user clicks or interactions by unfolding specific tree nodes, and update the interface to show child elements on demand. Enable, set, or toggle expansion for tree branches, branches with children, or hierarchical dataset items, facilitating navigation, drilling down into details, or managing visibility of nested rows after loading or data updates.
 </div>
 
 #### Parameters
@@ -9334,7 +9334,7 @@ Use this method if you want to save the state of the Treelist into a variable. I
 
 
 <div class="meta-api-description">
-Retrieve the current configuration and data state of a hierarchical grid or tree table component, capturing all enabled or disabled settings and the active data source snapshot for purposes such as saving, exporting, restoring, duplicating, inspecting, or synchronizing component options and data state in your application. Access the full set of runtime parameters, control flags, data contents, and customization states to programmatically extract or persist the entire tree list setup for debugging, state management, dynamic reconfiguration, or serialization, supporting workflows that require comprehensive state snapshots or selective option retrieval from the tree-structured data grid.
+How do I get the current configuration of a Kendo UI TreeList component? Retrieve the current configuration and data state of a hierarchical grid or tree table component, capturing all enabled or disabled settings and the active data source snapshot for purposes such as saving, exporting, restoring, duplicating, inspecting, or synchronizing component options and data state in your application. Access the full set of runtime parameters, control flags, data contents, and customization states to programmatically extract or persist the entire tree list setup for debugging, state management, dynamic reconfiguration, or serialization, supporting workflows that require comprehensive state snapshots or selective option retrieval from the tree-structured data grid.
 </div>
 
 #### Example
@@ -9365,7 +9365,7 @@ Retrieve the current configuration and data state of a hierarchical grid or tree
 
 
 <div class="meta-api-description">
-Find or access the rendered HTML element corresponding to a specific data item within a hierarchical or tree-structured list, enabling actions like retrieving the DOM node for a given data model, locating rows or cells tied to particular data entries, manipulating or updating content dynamically, attaching event listeners directly to associated elements, measuring element dimensions or layout for customization, or performing targeted DOM operations on tree data items. This method supports developers looking to programmatically interact with the visual representation of hierarchical data by mapping data models to their precise HTML elements in the tree view.
+How do I access the HTML element of a specific data item in a Kendo UI TreeList? Find or access the rendered HTML element corresponding to a specific data item within a hierarchical or tree-structured list, enabling actions like retrieving the DOM node for a given data model, locating rows or cells tied to particular data entries, manipulating or updating content dynamically, attaching event listeners directly to associated elements, measuring element dimensions or layout for customization, or performing targeted DOM operations on tree data items. This method supports developers looking to programmatically interact with the visual representation of hierarchical data by mapping data models to their precise HTML elements in the tree view.
 </div>
 
 #### Parameters
@@ -9411,7 +9411,7 @@ Obtains an array of the DOM elements which correspond to the data items from the
 
 
 <div class="meta-api-description">
-Retrieve or access the rendered row elements or DOM nodes associated with each data item displayed in a hierarchical or tree-structured list, enabling direct manipulation, measurement, event binding, or synchronization between the visual rows and the underlying ordered data source or view; this functionality supports extracting the exact DOM elements that represent each data entry for custom UI updates, interaction handling, or precise alignment with the current data ordering and structure.
+How do I access the DOM elements of each item in a Kendo UI TreeList? Retrieve or access the rendered row elements or DOM nodes associated with each data item displayed in a hierarchical or tree-structured list, enabling direct manipulation, measurement, event binding, or synchronization between the visual rows and the underlying ordered data source or view; this functionality supports extracting the exact DOM elements that represent each data entry for custom UI updates, interaction handling, or precise alignment with the current data ordering and structure.
 </div>
 
 #### Example
@@ -9444,7 +9444,7 @@ Renders all table rows by using the current data items.
 
 
 <div class="meta-api-description">
-Trigger an immediate update or redraw of all TreeList rows to reflect the latest in-memory data changes, refresh the visual row templates, reapply custom row formatting, and re-render the entire table markup dynamically without resetting or reloading the component instance; useful for forcing the UI to synchronize with programmatic data updates, template modifications, or any runtime changes that require the visible grid or hierarchical list to display fresh, current information instantly.
+How do I update Kendo UI TreeList rows in real-time when data changes programmatically? Trigger an immediate update or redraw of all TreeList rows to reflect the latest in-memory data changes, refresh the visual row templates, reapply custom row formatting, and re-render the entire table markup dynamically without resetting or reloading the component instance; useful for forcing the UI to synchronize with programmatic data updates, template modifications, or any runtime changes that require the visible grid or hierarchical list to display fresh, current information instantly.
 </div>
 
 #### Example - refreshing the widget
@@ -9477,7 +9477,7 @@ Removes the specified table row from the TreeList. Also removes the correspondin
 
 
 <div class="meta-api-description">
-Delete or remove a specific row or entry from a hierarchical or tree-structured data table, eliminating both the visible row and its underlying dataset from the component’s source. Enable row deletion or removal operations on tree list or tree grid views, controlling data pruning, row elimination, or item removal in nested or parent-child table structures. Trigger update events or callbacks after deleting rows to handle UI refresh, data synchronization, or cleanup tasks in dynamic table interfaces. Handle row removal requests programmatically to manage tree data structures, prune entries, or update the user interface when rows are removed from tree-like data representations.
+How to delete a row from a Kendo UI TreeList component? Delete or remove a specific row or entry from a hierarchical or tree-structured data table, eliminating both the visible row and its underlying dataset from the component’s source. Enable row deletion or removal operations on tree list or tree grid views, controlling data pruning, row elimination, or item removal in nested or parent-child table structures. Trigger update events or callbacks after deleting rows to handle UI refresh, data synchronization, or cleanup tasks in dynamic table interfaces. Handle row removal requests programmatically to manage tree data structures, prune entries, or update the user interface when rows are removed from tree-like data representations.
 </div>
 
 #### Parameters
@@ -9548,7 +9548,7 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/tr
 
 
 <div class="meta-api-description">
-Trigger or initiate exporting the hierarchical TreeList data to an Excel spreadsheet file programmatically, enabling developers to start the client-side download of Excel exports on demand, control or automate Excel file generation from the grid or tree structure, handle export events like excelExport, and ensure the export process integrates smoothly with user interactions to avoid browser popup blockers by firing the export operation in response to user actions such as button clicks or UI commands.
+How can I programmatically export TreeList data to an Excel file in Kendo UI for jQuery? Trigger or initiate exporting the hierarchical TreeList data to an Excel spreadsheet file programmatically, enabling developers to start the client-side download of Excel exports on demand, control or automate Excel file generation from the grid or tree structure, handle export events like excelExport, and ensure the export process integrates smoothly with user interactions to avoid browser popup blockers by firing the export operation in response to user actions such as button clicks or UI commands.
 </div>
 
 #### Example - manually initiating the Excel export
@@ -9577,7 +9577,7 @@ Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](
 
 
 <div class="meta-api-description">
-Export or convert hierarchical grid data to a PDF document, trigger file download, generate a printable PDF version of a tree-structured list, initiate asynchronous PDF export with progress tracking, handle PDF export events and callbacks, configure saving or exporting tree-like data tables to PDF format, ensure download starts after user interaction to bypass browser popup blockers, programmatically save or export displayed tree data as PDF file format from client-side interactions.
+How to export tree-like data from Kendo UI TreeList as a PDF? Export or convert hierarchical grid data to a PDF document, trigger file download, generate a printable PDF version of a tree-structured list, initiate asynchronous PDF export with progress tracking, handle PDF export events and callbacks, configure saving or exporting tree-like data tables to PDF format, ensure download starts after user interaction to bypass browser popup blockers, programmatically save or export displayed tree data as PDF file format from client-side interactions.
 </div>
 
 #### Returns
@@ -9608,7 +9608,7 @@ Saves any pending changes by calling the [`sync`](/api/javascript/data/datasourc
 
 
 <div class="meta-api-description">
-Commit or persist all pending edits, including creates, updates, and deletions, by invoking a method that synchronizes the in-memory TreeList changes with the underlying data source. This operation can be triggered to apply batched modifications, ensuring that additions, modifications, or removals are saved and propagated correctly, while also enabling custom actions or UI updates through post-save event handling. Control, trigger, or enable saving of all queued data changes from the TreeList component to the server or storage, integrating with synchronization processes and allowing hooks for after-save logic and interface refresh.
+How to save pending edits in Kendo UI TreeList component? Commit or persist all pending edits, including creates, updates, and deletions, by invoking a method that synchronizes the in-memory TreeList changes with the underlying data source. This operation can be triggered to apply batched modifications, ensuring that additions, modifications, or removals are saved and propagated correctly, while also enabling custom actions or UI updates through post-save event handling. Control, trigger, or enable saving of all queued data changes from the TreeList component to the server or storage, integrating with synchronization processes and allowing hooks for after-save logic and interface refresh.
 </div>
 
 #### Example - saving changes
@@ -9638,7 +9638,7 @@ Switches the table row which is in edit mode and saves any changes that are made
 
 
 <div class="meta-api-description">
-Trigger saving or committing changes made during inline row editing within hierarchical or tree-structured tables, finalize or end row edit mode to apply user modifications, switch editable rows back to display or view mode, persist updated data entered by users in tree list or nested table rows, execute functions that capture and handle edited row data, signal or fire events upon completion of row editing operations, control inline editing workflows for complex data grids with parent-child relationships, enable programmatic confirmation of row edits in tree-like data presentations, update and save changes to individual rows during interactive editing sessions.
+How to save changes made during inline editing in a Kendo UI TreeList? Trigger saving or committing changes made during inline row editing within hierarchical or tree-structured tables, finalize or end row edit mode to apply user modifications, switch editable rows back to display or view mode, persist updated data entered by users in tree list or nested table rows, execute functions that capture and handle edited row data, signal or fire events upon completion of row editing operations, control inline editing workflows for complex data grids with parent-child relationships, enable programmatic confirmation of row edits in tree-like data presentations, update and save changes to individual rows during interactive editing sessions.
 </div>
 
 #### Example - saving a row
@@ -9708,7 +9708,7 @@ Gets or sets the table rows (or cells) which are selected.
 
 
 <div class="meta-api-description">
-Retrieve or modify the selected rows or cells within a hierarchical table or tree grid, enabling queries for current selections without parameters and updating or setting specific rows or cells programmatically; manage selection states, highlight user-chosen elements, handle multi-selection scenarios, synchronize selection with external controls, toggle selection modes, and control interactive selection behavior in tree-structured data displays.
+How do I programmatically select rows in a Kendo UI TreeList? Retrieve or modify the selected rows or cells within a hierarchical table or tree grid, enabling queries for current selections without parameters and updating or setting specific rows or cells programmatically; manage selection states, highlight user-chosen elements, handle multi-selection scenarios, synchronize selection with external controls, toggle selection modes, and control interactive selection behavior in tree-structured data displays.
 </div>
 
 #### Parameters
@@ -9805,7 +9805,7 @@ Sets the data source of the widget.
 
 
 <div class="meta-api-description">
-Configure or update the hierarchical data displayed in a tree or nested list structure by dynamically setting or changing the underlying data source during runtime, enabling the component to refresh, reload, or rebind with new datasets, arrays, or data configurations to reflect changes in data hierarchy, structure, or content immediately without full reinitialization, supporting tasks like replacing data collections, updating nested items, modifying tree nodes, or resetting the data model for dynamic user interfaces that require flexible and reactive data binding.
+How do I dynamically update the data in my Kendo UI TreeList component? Configure or update the hierarchical data displayed in a tree or nested list structure by dynamically setting or changing the underlying data source during runtime, enabling the component to refresh, reload, or rebind with new datasets, arrays, or data configurations to reflect changes in data hierarchy, structure, or content immediately without full reinitialization, supporting tasks like replacing data collections, updating nested items, modifying tree nodes, or resetting the data model for dynamic user interfaces that require flexible and reactive data binding.
 </div>
 
 #### Parameters
@@ -9861,7 +9861,7 @@ When `setOptions` is called, the Treelist widget will be destroyed and recreated
 
 
 <div class="meta-api-description">
-Update, restore, or reconfigure hierarchical grid settings dynamically by applying new or saved configurations to adjust features, enable or disable specific options, or reload the component state from a previously captured snapshot. Control or modify runtime TreeList behavior by resetting its entire setup, including toggling features or applying complete saved states, while ensuring proper handling of remote data refresh and avoiding recursive data-binding loops. Manage serialization challenges when storing or reapplying settings that include event handlers or functions by customizing save/load processes or reattaching functions after deserialization to maintain interactive behaviors. Use this method for programmatically controlling, resetting, or initializing complex multi-option grid arrangements in applications that require live updates, feature toggling, state restoration, or reloading configurations from storage or earlier snapshots.
+How do I dynamically update TreeList grid settings in Kendo UI for jQuery? Update, restore, or reconfigure hierarchical grid settings dynamically by applying new or saved configurations to adjust features, enable or disable specific options, or reload the component state from a previously captured snapshot. Control or modify runtime TreeList behavior by resetting its entire setup, including toggling features or applying complete saved states, while ensuring proper handling of remote data refresh and avoiding recursive data-binding loops. Manage serialization challenges when storing or reapplying settings that include event handlers or functions by customizing save/load processes or reattaching functions after deserialization to maintain interactive behaviors. Use this method for programmatically controlling, resetting, or initializing complex multi-option grid arrangements in applications that require live updates, feature toggling, state restoration, or reloading configurations from storage or earlier snapshots.
 </div>
 
 #### Example - set `reorderable` feature of the TreeList to true
@@ -9913,7 +9913,7 @@ Shows the specified column.
 
 
 <div class="meta-api-description">
-Control and modify column visibility dynamically within a hierarchical data grid by enabling, revealing, or displaying specific columns after initial rendering; programmatically set which columns appear or become visible using identifiers to update headers and row contents accordingly, allowing real-time column toggling, conditional display based on user actions, interaction-based column showing, and flexible adjustments to the tree-structured list’s column presentation without re-initializing the entire grid.
+How can I dynamically hide or show specific columns in a Kendo UI for jQuery TreeList grid after it has been initialized? Control and modify column visibility dynamically within a hierarchical data grid by enabling, revealing, or displaying specific columns after initial rendering; programmatically set which columns appear or become visible using identifiers to update headers and row contents accordingly, allowing real-time column toggling, conditional display based on user actions, interaction-based column showing, and flexible adjustments to the tree-structured list’s column presentation without re-initializing the entire grid.
 </div>
 
 #### Parameters
@@ -9974,7 +9974,7 @@ Hides the specified column.
 
 
 <div class="meta-api-description">
-Programmatically hide or remove a specific column from the tree or grid display dynamically at runtime by specifying the column through field name, index, or object reference to exclude it from rendering and the visible columns view while keeping it in the underlying configuration; control column visibility, toggle display of columns on the fly, configure which columns are shown or hidden in the hierarchical list or tree grid UI, and enable dynamic column hiding to customize and manage the visible dataset within the tree structure without affecting the overall column setup.
+How can I programmatically hide a specific column in my Kendo UI TreeList? Programmatically hide or remove a specific column from the tree or grid display dynamically at runtime by specifying the column through field name, index, or object reference to exclude it from rendering and the visible columns view while keeping it in the underlying configuration; control column visibility, toggle display of columns on the fly, configure which columns are shown or hidden in the hierarchical list or tree grid UI, and enable dynamic column hiding to customize and manage the visible dataset within the tree structure without affecting the overall column setup.
 </div>
 
 #### Parameters
@@ -10035,7 +10035,7 @@ Locks (freezes) a column and allows the user to see it at all times when scrolli
 
 
 <div class="meta-api-description">
-Freeze or pin a specific column in a hierarchical or tree-structured grid to keep it fixed and always visible when scrolling horizontally, enabling users to maintain focus on important columns such as identifiers, indexes, or action buttons while navigating through other data columns; control column locking to enhance readability, configure persistent column visibility, enable locked columns for better data comparison, set fixed columns during sideways navigation, and programmatically manage column freeze behavior in tree-style tabular data views.
+How to pin specific columns in Kendo UI TreeList for horizontal scrolling? Freeze or pin a specific column in a hierarchical or tree-structured grid to keep it fixed and always visible when scrolling horizontally, enabling users to maintain focus on important columns such as identifiers, indexes, or action buttons while navigating through other data columns; control column locking to enhance readability, configure persistent column visibility, enable locked columns for better data comparison, set fixed columns during sideways navigation, and programmatically manage column freeze behavior in tree-style tabular data views.
 </div>
 
 #### Parameters
@@ -10076,7 +10076,7 @@ Unlocks (unfreezes) a column.
 
 
 <div class="meta-api-description">
-Control the scrolling behavior of columns by unlocking or unfreezing previously fixed or pinned columns so they scroll horizontally with other columns, re-enable normal column resizing, repositioning, and layout recalculations, and manage locked columns by toggling their fixed status to restore full movement and scrolling in hierarchical or tree-structured tabular data displays.
+How do I enable scrolling in previously fixed columns of a Kendo UI TreeList control? Control the scrolling behavior of columns by unlocking or unfreezing previously fixed or pinned columns so they scroll horizontally with other columns, re-enable normal column resizing, repositioning, and layout recalculations, and manage locked columns by toggling their fixed status to restore full movement and scrolling in hierarchical or tree-structured tabular data displays.
 </div>
 
 #### Parameters
@@ -10117,7 +10117,7 @@ Changes the position of the specified column.
 
 
 <div class="meta-api-description">
-Move or shift columns within a TreeList dynamically by specifying which column to relocate and the new target position, enabling programmatic control over column order, header placement, and overall grid layout rearrangement during runtime. Adjust column sequences, reorder headers, change column positions, and customize the visual or logical arrangement of columns on the fly using methods that manipulate column indexes and positions within the TreeList or similar grid structures.
+How can I programmatically reorder columns in a Kendo UI TreeList? Move or shift columns within a TreeList dynamically by specifying which column to relocate and the new target position, enabling programmatic control over column order, header placement, and overall grid layout rearrangement during runtime. Adjust column sequences, reorder headers, change column positions, and customize the visual or logical arrangement of columns on the fly using methods that manipulate column indexes and positions within the TreeList or similar grid structures.
 </div>
 
 #### Parameters
@@ -10162,7 +10162,7 @@ Fires when the user tries to edit or creates a data item before the editor is cr
 
 
 <div class="meta-api-description">
-Intercept attempts to initiate editing or creating data entries before the editor interface appears, enabling control over edit or create actions by applying custom validation, conditional logic, or cancellation of modifications in hierarchical data views. Detect and manage user interactions that start data editing processes, control whether edits or new item additions proceed, prevent unauthorized changes, validate user permissions, enforce business rules before entry updates, and configure pre-edit checks in tree-structured grids. This event triggers only when editing capabilities are enabled, allowing developers to inject logic that can block, allow, or modify editing workflows dynamically.
+How to cancel editing in Kendo UI TreeList widget? Intercept attempts to initiate editing or creating data entries before the editor interface appears, enabling control over edit or create actions by applying custom validation, conditional logic, or cancellation of modifications in hierarchical data views. Detect and manage user interactions that start data editing processes, control whether edits or new item additions proceed, prevent unauthorized changes, validate user permissions, enforce business rules before entry updates, and configure pre-edit checks in tree-structured grids. This event triggers only when editing capabilities are enabled, allowing developers to inject logic that can block, allow, or modify editing workflows dynamically.
 </div>
 
 #### Event Data
@@ -10208,7 +10208,7 @@ Fires when the user clicks the **Cancel** button (in inline or popup [edit mode]
 
 
 <div class="meta-api-description">
-Detect, listen for, or respond to when editing changes are canceled, aborted, or reverted in hierarchical grid or tree list interfaces, including user actions like clicking cancel buttons, closing popup editors, stopping inline edits, or aborting modifications; manage cleanup tasks, undo UI updates, discard unsaved user input, intercept edit cancelation events, handle rollback actions, and control edit lifecycle interruptions within tree-structured data editing components and nested item lists where edits may be stopped or dismissed.
+How do I detect when editing changes are canceled in a Kendo UI TreeList? Detect, listen for, or respond to when editing changes are canceled, aborted, or reverted in hierarchical grid or tree list interfaces, including user actions like clicking cancel buttons, closing popup editors, stopping inline edits, or aborting modifications; manage cleanup tasks, undo UI updates, discard unsaved user input, intercept edit cancelation events, handle rollback actions, and control edit lifecycle interruptions within tree-structured data editing components and nested item lists where edits may be stopped or dismissed.
 </div>
 
 #### Event Data
@@ -10283,7 +10283,7 @@ Fires when the incell edit mode is used and the cell will be closed. The event i
 
 
 <div class="meta-api-description">
-Detect when an editable cell in a tree-structured data grid finishes editing or is about to close its editor, enabling actions such as validation, saving changes, updating the underlying data model or user interface, logging modifications, triggering post-edit workflows, or initiating asynchronous processes just before the cell editor disappears. This event occurs after users commit or cancel edits in a tree list or hierarchical grid, providing a hook for developers to configure behaviors tied to the lifecycle of cell editing, such as listening for cell edit closures, controlling edit finalization, or responding to in-place edit completion.
+How do I handle cell close event in Kendo UI TreeList? Detect when an editable cell in a tree-structured data grid finishes editing or is about to close its editor, enabling actions such as validation, saving changes, updating the underlying data model or user interface, logging modifications, triggering post-edit workflows, or initiating asynchronous processes just before the cell editor disappears. This event occurs after users commit or cancel edits in a tree list or hierarchical grid, providing a hook for developers to configure behaviors tied to the lifecycle of cell editing, such as listening for cell edit closures, controlling edit finalization, or responding to in-place edit completion.
 </div>
 
 #### Event Data
@@ -10340,7 +10340,7 @@ Fires when the user selects a table row or cell in the TreeList. The event handl
 
 
 <div class="meta-api-description">
-Detect and respond to user selection changes in hierarchical or tabular data views, handling events triggered when users select rows, cells, or change the current selection. Enable event listeners or handlers to capture selection updates, synchronize selection state with underlying data models, manage row or cell highlights, and perform actions based on selection events. Control, track, or configure how selection changes propagate, integrate with component APIs for accessing or modifying selected items, and respond dynamically to user interactions involving selection within tree-structured lists or grids.
+How do I detect selection changes in my Kendo UI TreeList component? Detect and respond to user selection changes in hierarchical or tabular data views, handling events triggered when users select rows, cells, or change the current selection. Enable event listeners or handlers to capture selection updates, synchronize selection state with underlying data models, manage row or cell highlights, and perform actions based on selection events. Control, track, or configure how selection changes propagate, integrate with component APIs for accessing or modifying selected items, and respond dynamically to user interactions involving selection within tree-structured lists or grids.
 </div>
 
 #### Event Data
@@ -10419,7 +10419,7 @@ Fires when an item is about to be collapsed. The event handler function context 
 
 
 <div class="meta-api-description">
-Capture and handle events triggered before a tree or hierarchical list item collapses, enabling developers to intercept collapsing actions to execute custom code, update the user interface, validate or modify data, synchronize state, or prevent collapse dynamically. This event-driven mechanism provides hooks to monitor when nodes or tree branches are about to close, offering access to component context to perform logic such as conditional collapsing, UI refreshes, asynchronous operations, or interaction coordination in tree structures, expandable lists, or nested item views.
+How can I prevent tree items from collapsing in Kendo UI for jQuery TreeList? Capture and handle events triggered before a tree or hierarchical list item collapses, enabling developers to intercept collapsing actions to execute custom code, update the user interface, validate or modify data, synchronize state, or prevent collapse dynamically. This event-driven mechanism provides hooks to monitor when nodes or tree branches are about to close, offering access to component context to perform logic such as conditional collapsing, UI refreshes, asynchronous operations, or interaction coordination in tree structures, expandable lists, or nested item views.
 </div>
 
 #### Event Data
@@ -10486,7 +10486,7 @@ Fires before the widget binds to its data source. The event handler function con
 
 
 <div class="meta-api-description">
-Configure or hook into the pre-data binding phase to run custom logic, modify data requests, intercept or adjust parameters, control loading states, synchronize external or related components, or trigger actions just before data attaches to the tree list structure; handle events firing right before data population, with access to the component context to inspect data, update request arguments, enable loading indicators, or integrate state updates for dynamic data handling, refresh workflows, and fine-tuned data source coordination in hierarchical grid or tree view components.
+How can I customize the data binding in Kendo UI TreeList before it populates the tree structure? Configure or hook into the pre-data binding phase to run custom logic, modify data requests, intercept or adjust parameters, control loading states, synchronize external or related components, or trigger actions just before data attaches to the tree list structure; handle events firing right before data population, with access to the component context to inspect data, update request arguments, enable loading indicators, or integrate state updates for dynamic data handling, refresh workflows, and fine-tuned data source coordination in hierarchical grid or tree view components.
 </div>
 
 #### Event Data
@@ -10549,7 +10549,7 @@ Fires when the widget is bound to data from its data source. The event handler f
 
 
 <div class="meta-api-description">
-Trigger actions, execute custom code, or run callbacks immediately after the hierarchical data grid completes loading, refreshing, sorting, paging, or filtering data, enabling dynamic UI updates, row manipulation, event handler attachment, or plugin initialization whenever the underlying dataset changes. Detect when the tree-structured list finalizes its data fetch or refresh cycle to modify the interface, respond to data changes, or implement post-bind logic with access to the component instance context. Control behaviors that depend on the data being fully loaded and rendered, such as updating row content, reapplying styles, or hooking into user interactions right after data operations complete on the tree data view.
+When does Kendo UI TreeList trigger its dataBound event? Trigger actions, execute custom code, or run callbacks immediately after the hierarchical data grid completes loading, refreshing, sorting, paging, or filtering data, enabling dynamic UI updates, row manipulation, event handler attachment, or plugin initialization whenever the underlying dataset changes. Detect when the tree-structured list finalizes its data fetch or refresh cycle to modify the interface, respond to data changes, or implement post-bind logic with access to the component instance context. Control behaviors that depend on the data being fully loaded and rendered, such as updating row content, reapplying styles, or hooking into user interactions right after data operations complete on the tree data view.
 </div>
 
 #### Event Data
@@ -10608,7 +10608,7 @@ The widget instance which fired the event.
 
 
 <div class="meta-api-description">
-Detect when a drag action begins within a hierarchical list or tree structure to capture user attempts to move or reorder items, allowing you to validate permissions, cancel dragging, customize behavior, or intercept item drag initiation before it proceeds; control or prevent the drag operation by calling event methods to stop item movement, monitor drag triggers, and manage drag lifecycle events in tree or nested list components.
+How do I prevent a drag action from starting in Kendo UI TreeList? Detect when a drag action begins within a hierarchical list or tree structure to capture user attempts to move or reorder items, allowing you to validate permissions, cancel dragging, customize behavior, or intercept item drag initiation before it proceeds; control or prevent the drag operation by calling event methods to stop item movement, monitor drag triggers, and manage drag lifecycle events in tree or nested list components.
 </div>
 
 ##### e.source `kendo.data.TreeListModel`
@@ -10709,7 +10709,7 @@ The model of the source row.
 
 
 <div class="meta-api-description">
-Capture and handle ongoing drag actions, mouse movements, and pointer positions within hierarchical list components to enable real-time updates, custom feedback, or interactive UI changes during item drag operations. Manage continuous drag tracking events, monitor drag progress, respond dynamically as users move draggable elements, and create tailored drag-and-drop experiences by processing repeated drag event notifications for tree or multi-level list structures. This supports configuring drag motion listeners, controlling drag interaction flows, and integrating fine-grained handling of pointer movement throughout dragging sequences in nested or tree-based lists.
+How do I capture ongoing drag actions in a Kendo UI TreeList component? Capture and handle ongoing drag actions, mouse movements, and pointer positions within hierarchical list components to enable real-time updates, custom feedback, or interactive UI changes during item drag operations. Manage continuous drag tracking events, monitor drag progress, respond dynamically as users move draggable elements, and create tailored drag-and-drop experiences by processing repeated drag event notifications for tree or multi-level list structures. This supports configuring drag motion listeners, controlling drag interaction flows, and integrating fine-grained handling of pointer movement throughout dragging sequences in nested or tree-based lists.
 </div>
 
 #### Event Data
@@ -10895,7 +10895,7 @@ Pre-defined status classes are:
 
 
 <div class="meta-api-description">
-Capture when a drag-and-drop action finishes on a hierarchical tree or list structure to detect node reordering, item moving, or tree data changes, enabling you to respond after the model updates by saving changes, refreshing the interface, validating or syncing data, handling drop completions, or triggering post-move logic within the component’s context. This event supports monitoring drag operations completion for lists or trees, managing item repositioning, and updating underlying data models accordingly to implement drag end handlers, reorder listeners, or update workflows after moving nodes or items in nested or flat collections.
+How do I handle drag-and-drop actions in Kendo UI TreeList to update data after reordering nodes? Capture when a drag-and-drop action finishes on a hierarchical tree or list structure to detect node reordering, item moving, or tree data changes, enabling you to respond after the model updates by saving changes, refreshing the interface, validating or syncing data, handling drop completions, or triggering post-move logic within the component’s context. This event supports monitoring drag operations completion for lists or trees, managing item repositioning, and updating underlying data models accordingly to implement drag end handlers, reorder listeners, or update workflows after moving nodes or items in nested or flat collections.
 </div>
 
 #### Event Data
@@ -11010,7 +11010,7 @@ The widget instance which fired the event.
 
 
 <div class="meta-api-description">
-Handle or customize behavior when dragging and dropping items or rows within a hierarchical or tree-structured list, detect when a user releases a dragged element to drop it into a new position, intercept or cancel move actions by preventing default drop behavior, control how and when rows are rearranged through drag-and-drop operations, listen for changes triggered by dropping nodes, respond to drag-and-drop completion events, manage item repositioning in tree or list structures, enable drop event handlers to update application state or validate drop targets, override default drag-and-drop behavior to implement custom logic during item drops, and trigger callbacks when users drop list entries to reorder or modify the tree data structure.
+How do I customize the behavior when dragging and dropping items in a Kendo UI TreeList? Handle or customize behavior when dragging and dropping items or rows within a hierarchical or tree-structured list, detect when a user releases a dragged element to drop it into a new position, intercept or cancel move actions by preventing default drop behavior, control how and when rows are rearranged through drag-and-drop operations, listen for changes triggered by dropping nodes, respond to drag-and-drop completion events, manage item repositioning in tree or list structures, enable drop event handlers to update application state or validate drop targets, override default drag-and-drop behavior to implement custom logic during item drops, and trigger callbacks when users drop list entries to reorder or modify the tree data structure.
 </div>
 
 #### Event Data
@@ -11141,7 +11141,7 @@ Fires when the user edits or creates a data item. The event handler function con
 
 
 <div class="meta-api-description">
-Respond to user interactions for modifying or adding items within a hierarchical grid or tree-structured list by capturing when editing starts on existing entries or when new entries are created, enabling inspection of the updated data model, validation processes, initialization of custom input fields or editors, and controlling edit workflows through event-driven handlers bound to the tree-like data display component instance.
+How do I detect when editing starts on an existing item in a Kendo UI TreeList? Respond to user interactions for modifying or adding items within a hierarchical grid or tree-structured list by capturing when editing starts on existing entries or when new entries are created, enabling inspection of the updated data model, validation processes, initialization of custom input fields or editors, and controlling edit workflows through event-driven handlers bound to the tree-like data display component instance.
 </div>
 
 #### Event Data
@@ -11278,7 +11278,7 @@ Fires when the user clicks the **Export to Excel** toolbar button.
 
 
 <div class="meta-api-description">
-Listen for export to Excel actions triggered by clicking the export button in the TreeList toolbar to run custom code or intercept the export process, enabling validation, data preparation, progress indicators, or custom export workflows. Capture when users initiate Excel export from the grid interface to control, modify, or extend the export behavior programmatically. Detect and handle export events to integrate pre-export logic such as data checks, asynchronous operations, UI feedback for export progress, or conditional cancellation before the spreadsheet file is generated and downloaded. Facilitate hooking into the export lifecycle to customize how and when data is exported in Excel format, including modifying content, enforcing rules, or chaining additional functions upon export initiation.
+How can I intercept and customize the Excel export process in a Kendo UI TreeList component? Listen for export to Excel actions triggered by clicking the export button in the TreeList toolbar to run custom code or intercept the export process, enabling validation, data preparation, progress indicators, or custom export workflows. Capture when users initiate Excel export from the grid interface to control, modify, or extend the export behavior programmatically. Detect and handle export events to integrate pre-export logic such as data checks, asynchronous operations, UI feedback for export progress, or conditional cancellation before the spreadsheet file is generated and downloaded. Facilitate hooking into the export lifecycle to customize how and when data is exported in Excel format, including modifying content, enforcing rules, or chaining additional functions upon export initiation.
 </div>
 
 #### Event Data
@@ -11352,7 +11352,7 @@ Fires when an item is about to be expanded. The event handler function context (
 
 
 <div class="meta-api-description">
-Detect, handle, or intercept when a tree node, row, or item within a hierarchical list is about to expand or open, enabling developers to execute custom logic, validations, or dynamic data loading right before the expansion occurs. This event triggers before showing child nodes or nested data in a tree structure, allowing control over the expansion action, cancelation, or modification of behavior during node unfolding or row expansion. It’s useful for configuring pre-expansion checks, loading remote data on demand, or customizing UI interactions tied to expanding branches in tree or list views.
+How to cancel tree node expansion in Kendo UI TreeList? Detect, handle, or intercept when a tree node, row, or item within a hierarchical list is about to expand or open, enabling developers to execute custom logic, validations, or dynamic data loading right before the expansion occurs. This event triggers before showing child nodes or nested data in a tree structure, allowing control over the expansion action, cancelation, or modification of behavior during node unfolding or row expansion. It’s useful for configuring pre-expansion checks, loading remote data on demand, or customizing UI interactions tied to expanding branches in tree or list views.
 </div>
 
 #### Event Data
@@ -11418,7 +11418,7 @@ Fires when the TreeList filter menu is initialized. The event handler function c
 
 
 <div class="meta-api-description">
-Control and customize the initialization of filter menus in hierarchical or tree-structured data grids, intercepting filter menu creation to modify menu items, adjust filtering operators, add custom filtering logic, or bind event handlers dynamically during setup to tailor filtering interfaces in tree list components. Enable configuration, customization, extension, or enhancement of filtering UI elements, operators, and options when filter menus are generated in data tree grids, supporting scenarios like dynamic operator changes, custom filter templates, or integrating advanced filter behaviors at filter menu creation time within tree or hierarchical list views.
+How to customize filter menu creation in Kendo UI TreeList component? Control and customize the initialization of filter menus in hierarchical or tree-structured data grids, intercepting filter menu creation to modify menu items, adjust filtering operators, add custom filtering logic, or bind event handlers dynamically during setup to tailor filtering interfaces in tree list components. Enable configuration, customization, extension, or enhancement of filtering UI elements, operators, and options when filter menus are generated in data tree grids, supporting scenarios like dynamic operator changes, custom filter templates, or integrating advanced filter behaviors at filter menu creation time within tree or hierarchical list views.
 </div>
 
 #### Event Data
@@ -11506,7 +11506,7 @@ Fires when the TreeList filter menu is opened. The event handler function contex
 
 
 <div class="meta-api-description">
-Detect when the filter dropdown or filter menu becomes visible in the grid or list to trigger custom code for initializing filter inputs, loading dynamic filter data, setting default filter values, updating interface elements, controlling UI state changes, or running logic at the exact moment the filter panel opens; capture events that signal filter controls activation, menu display, or filter editor visibility within a tree-structured data list or table component to customize filtering behavior and respond to user interactions during filter menu activation.
+How to detect when filter menu is open in Kendo UI TreeList? Detect when the filter dropdown or filter menu becomes visible in the grid or list to trigger custom code for initializing filter inputs, loading dynamic filter data, setting default filter values, updating interface elements, controlling UI state changes, or running logic at the exact moment the filter panel opens; capture events that signal filter controls activation, menu display, or filter editor visibility within a tree-structured data list or table component to customize filtering behavior and respond to user interactions during filter menu activation.
 </div>
 
 #### Event Data
@@ -11575,7 +11575,7 @@ Fires  when the user clicks the **Export to PDF** toolbar button.
 
 
 <div class="meta-api-description">
-Detect user interactions with export to PDF commands in hierarchical data views, capturing clicks on export buttons to initiate custom workflows for PDF output. Enable event-driven control over PDF export from tree-structured lists, allowing validation, modification, cancellation, replacement, or extension of the export process. Support use cases such as intercepting PDF generation triggers, customizing exported content, conditionally blocking default PDF creation, or integrating alternative PDF generation methods when users request PDF exports from tree-based data displays. Control PDF export button activation events to tailor the PDF output behavior programmatically during export operations on tree-like data grids or lists.
+How to intercept PDF export trigger in Kendo UI TreeList widget? Detect user interactions with export to PDF commands in hierarchical data views, capturing clicks on export buttons to initiate custom workflows for PDF output. Enable event-driven control over PDF export from tree-structured lists, allowing validation, modification, cancellation, replacement, or extension of the export process. Support use cases such as intercepting PDF generation triggers, customizing exported content, conditionally blocking default PDF creation, or integrating alternative PDF generation methods when users request PDF exports from tree-based data displays. Control PDF export button activation events to tailor the PDF output behavior programmatically during export operations on tree-like data grids or lists.
 </div>
 
 #### Event Data
@@ -11644,7 +11644,7 @@ Fires when the user clicks the **Destroy** command button. The event handler fun
 
 
 <div class="meta-api-description">
-Handle user-initiated deletions or removals by triggering custom logic, validation, cleanup, or UI refresh when a delete or destroy action is performed on a hierarchical or tree-structured list. Detect and respond to removal commands or delete button clicks to update data models, confirm deletions, or synchronize state changes in tree or grid components. Enable event-driven processing for node or item deletion in tree views, allowing developers to intercept remove actions, execute callbacks, and manage component lifecycle events related to item removal or destruction. Control, customize, or extend functionality on item deletion events to maintain integrity, validation, or perform side effects upon removal commands in nested or hierarchical data structures.
+How to handle item removal in Kendo UI TreeList? Handle user-initiated deletions or removals by triggering custom logic, validation, cleanup, or UI refresh when a delete or destroy action is performed on a hierarchical or tree-structured list. Detect and respond to removal commands or delete button clicks to update data models, confirm deletions, or synchronize state changes in tree or grid components. Enable event-driven processing for node or item deletion in tree views, allowing developers to intercept remove actions, execute callbacks, and manage component lifecycle events related to item removal or destruction. Control, customize, or extend functionality on item deletion events to maintain integrity, validation, or perform side effects upon removal commands in nested or hierarchical data structures.
 </div>
 
 #### Event Data
@@ -11781,7 +11781,7 @@ Fires when a data item is saved. The event handler function context (available t
 
 
 <div class="meta-api-description">
-Detect when an item is saved or updated in a hierarchical or tree-structured list to trigger custom actions such as refreshing data, updating the interface, syncing changes, or executing side effects upon save operations; listen for save events, handle save callbacks, manage data persistence notifications, respond to save confirmations, and integrate save event handlers for dynamic UI updates and state management after saving entries in nested data structures.
+How to detect save events in Kendo UI TreeList component? Detect when an item is saved or updated in a hierarchical or tree-structured list to trigger custom actions such as refreshing data, updating the interface, syncing changes, or executing side effects upon save operations; listen for save events, handle save callbacks, manage data persistence notifications, respond to save confirmations, and integrate save event handlers for dynamic UI updates and state management after saving entries in nested data structures.
 </div>
 
 #### Event Data
@@ -11912,7 +11912,7 @@ Fires when the user clicks the **Save** command button. The event handler functi
 
 
 <div class="meta-api-description">
-Detect and respond to save actions triggered by user interaction with tree structure editing interfaces, capturing all pending modifications, edits, or changes requiring validation and confirmation before final submission; control workflows involving collecting unsaved changes, running data validation checks, and enabling customized save operations such as server updates or local persistence, with access to component-level context for managing state and implementing handlers that control how and when edits are committed or rolled back during save command execution.
+How do I handle pending changes in Kendo UI TreeList when user interactions trigger save actions? Detect and respond to save actions triggered by user interaction with tree structure editing interfaces, capturing all pending modifications, edits, or changes requiring validation and confirmation before final submission; control workflows involving collecting unsaved changes, running data validation checks, and enabling customized save operations such as server updates or local persistence, with access to component-level context for managing state and implementing handlers that control how and when edits are committed or rolled back during save command execution.
 </div>
 
 #### Event Data
@@ -11982,7 +11982,7 @@ Fires when the user shows a column. The event handler function context (availabl
 
 
 <div class="meta-api-description">
-Detect when a previously hidden column becomes visible in a hierarchical or tree-structured data grid to update the user interface, save or persist visibility settings, adjust column sizes, recalculate layout, or trigger custom behavior upon column reveal actions. Capture or listen for events signaling that a user has enabled, displayed, or toggled the visibility of data grid columns, useful for dynamically controlling column presentation, reacting to user interface changes, and managing column display state in tree or nested list components.
+How do I detect when a hidden column becomes visible in a Kendo UI TreeList? Detect when a previously hidden column becomes visible in a hierarchical or tree-structured data grid to update the user interface, save or persist visibility settings, adjust column sizes, recalculate layout, or trigger custom behavior upon column reveal actions. Capture or listen for events signaling that a user has enabled, displayed, or toggled the visibility of data grid columns, useful for dynamically controlling column presentation, reacting to user interface changes, and managing column display state in tree or nested list components.
 </div>
 
 #### Event Data
@@ -12053,7 +12053,7 @@ Fires when the user hides a column. The event handler function context (availabl
 
 
 <div class="meta-api-description">
-Detect and respond to column hiding actions triggered by users in hierarchical data grids or tree-structured lists, enabling you to capture events when a column is hidden, execute custom code to update interfaces, save or persist column visibility states, adjust layouts dynamically, and handle event data with access to the component instance for seamless state management and UI synchronization upon column visibility changes.
+How do I capture column hiding events in Kendo UI TreeList? Detect and respond to column hiding actions triggered by users in hierarchical data grids or tree-structured lists, enabling you to capture events when a column is hidden, execute custom code to update interfaces, save or persist column visibility states, adjust layouts dynamically, and handle event data with access to the component instance for seamless state management and UI synchronization upon column visibility changes.
 </div>
 
 #### Event Data
@@ -12124,7 +12124,7 @@ Fires when the user changes the order of a column. The event handler function co
 
 
 <div class="meta-api-description">
-Capture, handle, or listen for column reorder actions in hierarchical grid or tree list interfaces when users drag, move, or rearrange column positions, enabling developers to detect column order changes, track user preferences, save updated layouts, trigger callbacks on column movement, respond to column drag-and-drop events, synchronize UI updates after columns are shifted, implement validation or conditional logic based on new column arrangements, and programmatically access or manipulate the component state during or after columns are reordered.
+How do I detect column reordering in a Kendo UI TreeList? Capture, handle, or listen for column reorder actions in hierarchical grid or tree list interfaces when users drag, move, or rearrange column positions, enabling developers to detect column order changes, track user preferences, save updated layouts, trigger callbacks on column movement, respond to column drag-and-drop events, synchronize UI updates after columns are shifted, implement validation or conditional logic based on new column arrangements, and programmatically access or manipulate the component state during or after columns are reordered.
 </div>
 
 #### Event Data
@@ -12201,7 +12201,7 @@ Fires when the user resizes a column. The event handler function context (availa
 
 
 <div class="meta-api-description">
-Detect, handle, or listen for changes when a user adjusts, modifies, drags, or resizes a column width in a hierarchical TreeList or grid interface to dynamically update layout, save or persist column size preferences, synchronize UI elements, or trigger responsive behavior immediately during or after the column resize action; monitor column width changes in real time for custom reactions, including adjusting adjacent columns, reflowing content, or storing state, with event callbacks tied to the TreeList component that provide access to column resize details and interaction context.
+How do I detect when a user resizes a column in a Kendo UI TreeList? Detect, handle, or listen for changes when a user adjusts, modifies, drags, or resizes a column width in a hierarchical TreeList or grid interface to dynamically update layout, save or persist column size preferences, synchronize UI elements, or trigger responsive behavior immediately during or after the column resize action; monitor column width changes in real time for custom reactions, including adjusting adjacent columns, reflowing content, or storing state, with event callbacks tied to the TreeList component that provide access to column resize details and interaction context.
 </div>
 
 #### Event Data
@@ -12278,7 +12278,7 @@ Fires when the column menu is initialized. The event handler function context (a
 
 
 <div class="meta-api-description">
-Listen for the event triggered when the column header menu is created in a TreeList or grid to customize, modify, or intercept its initialization, allowing developers to add, remove, or adjust menu items, commands, and actions before the menu is shown. Use event handlers to dynamically control column menu behavior, access or inspect menu elements at runtime, customize context menus, or override default options during menu setup. This supports scenarios like adding custom commands, enabling or disabling selections, injecting additional features, or altering the menu structure programmatically when users interact with column headers.
+How can I customize the column header menu in Kendo UI TreeList? Listen for the event triggered when the column header menu is created in a TreeList or grid to customize, modify, or intercept its initialization, allowing developers to add, remove, or adjust menu items, commands, and actions before the menu is shown. Use event handlers to dynamically control column menu behavior, access or inspect menu elements at runtime, customize context menus, or override default options during menu setup. This supports scenarios like adding custom commands, enabling or disabling selections, injecting additional features, or altering the menu structure programmatically when users interact with column headers.
 </div>
 
 #### Event Data
@@ -12365,7 +12365,7 @@ Fires when the column menu is opened. The event handler function context (availa
 
 
 <div class="meta-api-description">
-Trigger actions or execute custom code when a column menu in a hierarchical data grid or TreeList component becomes visible, enabling detection of menu opening events, responding dynamically to user interactions with column headers, accessing event details like clicked column info, and manipulating or retrieving component state within the handler function context. This event supports handling scenarios such as controlling menu visibility, customizing menu behavior on open, reacting to column menu activation, integrating additional logic for column filtering, sorting, or grouping triggers, and interfacing with the TreeList methods or properties during menu display.
+What triggers when a column menu opens in a Kendo UI TreeList? Trigger actions or execute custom code when a column menu in a hierarchical data grid or TreeList component becomes visible, enabling detection of menu opening events, responding dynamically to user interactions with column headers, accessing event details like clicked column info, and manipulating or retrieving component state within the handler function context. This event supports handling scenarios such as controlling menu visibility, customizing menu behavior on open, reacting to column menu activation, integrating additional logic for column filtering, sorting, or grouping triggers, and interfacing with the TreeList methods or properties during menu display.
 </div>
 
 #### Event Data
@@ -12438,7 +12438,7 @@ Fires when the user lock a column. The event handler function context (available
 
 
 <div class="meta-api-description">
-Detect and respond to user actions locking columns within hierarchical or tree-structured data grids by capturing column lock events, enabling developers to trigger custom functions when columns become fixed or frozen, control UI updates reflecting locked column states, save or restore column positions and locked statuses, synchronize locking behavior across multiple related components or views, handle user interactions that pin or freeze columns for better data visibility, and apply logic to manage dynamic locking or unlocking of columns in complex tabular data presentations.
+How do I detect when columns in my Kendo UI TreeList get locked by the user? Detect and respond to user actions locking columns within hierarchical or tree-structured data grids by capturing column lock events, enabling developers to trigger custom functions when columns become fixed or frozen, control UI updates reflecting locked column states, save or restore column positions and locked statuses, synchronize locking behavior across multiple related components or views, handle user interactions that pin or freeze columns for better data visibility, and apply logic to manage dynamic locking or unlocking of columns in complex tabular data presentations.
 </div>
 
 #### Event Data
@@ -12509,7 +12509,7 @@ Fires when the user unlock a column. The event handler function context (availab
 
 
 <div class="meta-api-description">
-Detect when a user unlocks or unlocks a column in a hierarchical data grid or tree view, triggering custom actions such as updating the interface, saving column order or state, controlling column locking behavior, responding to changes in column lock status, handling dynamic unlocking events, enabling reactive UI updates after a column lock is removed, responding to user interactions with locked or unlocked columns, managing state persistence upon column unlock, and integrating custom event-driven logic tied to unlocking columns within tree-structured lists or data tables.
+How to detect when a user unlocks a column in a TreeList? Detect when a user unlocks or unlocks a column in a hierarchical data grid or tree view, triggering custom actions such as updating the interface, saving column order or state, controlling column locking behavior, responding to changes in column lock status, handling dynamic unlocking events, enabling reactive UI updates after a column lock is removed, responding to user interactions with locked or unlocked columns, managing state persistence upon column unlock, and integrating custom event-driven logic tied to unlocking columns within tree-structured lists or data tables.
 </div>
 
 #### Event Data

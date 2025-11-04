@@ -33,7 +33,7 @@ The target element to transfer to.
 
 
 <div class="meta-api-description">
-Set or configure the destination element for a visual transfer animation by specifying the target as an HTML element, CSS selector, or jQuery object, enabling control over where the animated effect moves or transitions, supporting use cases like animating movement toward dynamic elements, linking animations between components, directing visual focus during UI changes, or coordinating effects across page elements through element references, selectors, or DOM nodes.
+How do I configure the target element for a visual transfer animation in Kendo UI? Set or configure the destination element for a visual transfer animation by specifying the target as an HTML element, CSS selector, or jQuery object, enabling control over where the animated effect moves or transitions, supporting use cases like animating movement toward dynamic elements, linking animations between components, directing visual focus during UI changes, or coordinating effects across page elements through element references, selectors, or DOM nodes.
 </div>
 
 #### Example

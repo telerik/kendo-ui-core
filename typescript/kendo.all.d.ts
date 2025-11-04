@@ -3558,6 +3558,7 @@ declare namespace kendo.ui {
 
     interface ChatOptions {
         name?: string | undefined;
+        autoAssignId?: boolean | undefined;
         allowMessageCollapse?: boolean | undefined;
         fileActions?: ChatMenuAction[] | undefined;
         autoBind?: boolean | undefined;

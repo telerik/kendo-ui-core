@@ -23,7 +23,7 @@ Specifying 'none', 'transparent' or '' (empty string) will clear the fill.
 
 
 <div class="meta-api-description">
-Configure and control the fill color of drawing shapes using various CSS color formats, including named colors like red, hex RGB codes such as #ff0000, and rgb() function values like rgb(255, 0, 0), enabling precise color customization or transparency effects by specifying values like none, transparent, or empty strings to clear fills; this field supports setting, adjusting, enabling, or disabling fill paints, and facilitates dynamic paint changes, color overrides, and fill styling for shapes in graphical contexts.
+How do I customize the fill color of shapes in a Kendo UI drawing using different CSS formats? Configure and control the fill color of drawing shapes using various CSS color formats, including named colors like red, hex RGB codes such as #ff0000, and rgb() function values like rgb(255, 0, 0), enabling precise color customization or transparency effects by specifying values like none, transparent, or empty strings to clear fills; this field supports setting, adjusting, enabling, or disabling fill paints, and facilitates dynamic paint changes, color overrides, and fill styling for shapes in graphical contexts.
 </div>
 
 #### Example
@@ -48,7 +48,7 @@ The fill opacity. Ranges from 0 (completely transparent) to 1 (completely opaque
 
 
 <div class="meta-api-description">
-Adjust or configure the transparency level, alpha value, or fill opacity for shapes, drawings, or graphical components by specifying a numeric value from fully transparent (0) to fully opaque (1), enabling control over translucency, semi-transparent overlays, color blending with RGBA, or solid fill appearance for visual elements.
+How to set transparency level for shapes in Kendo UI drawingapi? Adjust or configure the transparency level, alpha value, or fill opacity for shapes, drawings, or graphical components by specifying a numeric value from fully transparent (0) to fully opaque (1), enabling control over translucency, semi-transparent overlays, color blending with RGBA, or solid fill appearance for visual elements.
 </div>
 
 #### Example

@@ -22,7 +22,7 @@ The x coordinate of the point.
 
 
 <div class="meta-api-description">
-Set or configure the horizontal position, x coordinate, or X-axis value of a geometric point during creation, initialization, or instantiation for use in layout arrangement, rendering placement, hit testing, spatial calculations, or coordinate system positioning; define, assign, specify, or provide the numeric horizontal location of a point within 2D space to control geometry points precisely along the horizontal axis.
+How do I set the x-coordinate of a point in a Kendo UI drawing? Set or configure the horizontal position, x coordinate, or X-axis value of a geometric point during creation, initialization, or instantiation for use in layout arrangement, rendering placement, hit testing, spatial calculations, or coordinate system positioning; define, assign, specify, or provide the numeric horizontal location of a point within 2D space to control geometry points precisely along the horizontal axis.
 </div>
 
 #### Example
@@ -39,7 +39,7 @@ The y coordinate of the point.
 
 
 <div class="meta-api-description">
-Set or configure the vertical position, vertical coordinate, or Y-axis value of a point when creating or positioning shapes within a drawing or graphic layout, enabling precise control over vertical alignment, placement, or transformation of points in 2D coordinate systems, canvases, or drawing components. This parameter is used to specify, adjust, or control how high or low a point appears in a graphical context by defining its Y value during shape construction or manipulation.
+How to set the vertical position of a point in Kendo UI drawingapi? Set or configure the vertical position, vertical coordinate, or Y-axis value of a point when creating or positioning shapes within a drawing or graphic layout, enabling precise control over vertical alignment, placement, or transformation of points in 2D coordinate systems, canvases, or drawing components. This parameter is used to specify, adjust, or control how high or low a point appears in a graphical context by defining its Y value during shape construction or manipulation.
 </div>
 
 #### Example
@@ -58,7 +58,7 @@ The x coordinate of the point.
 
 
 <div class="meta-api-description">
-Control, access, or modify the horizontal position, x coordinate, or left-right placement of a point within graphical shapes, drawings, or geometric computations, enabling developers to get, set, or update the point’s horizontal value for accurate rendering, layout adjustments, spatial calculations, or positioning in 2D graphics and vector-based designs.
+What is the x coordinate of a point in Kendo UI drawing api? Control, access, or modify the horizontal position, x coordinate, or left-right placement of a point within graphical shapes, drawings, or geometric computations, enabling developers to get, set, or update the point’s horizontal value for accurate rendering, layout adjustments, spatial calculations, or positioning in 2D graphics and vector-based designs.
 </div>
 
 #### Example
@@ -75,7 +75,7 @@ The y coordinate of the point.
 
 
 <div class="meta-api-description">
-Set or retrieve the vertical position or Y coordinate of a point within graphical shapes or drawings, control the point's placement along the vertical axis, adjust or access the Y value in coordinate geometry for precise layout, manipulate the height or depth positioning on a canvas or shape, define or read the up-and-down location in 2D drawing components, modify or query vertical point data when configuring points in shapes or graphics, update the vertical coordinate for alignment or animation, get or set the Y axis value to control positioning within visual elements.
+How do I set the vertical position of a point in Kendo UI drawing shapes? Set or retrieve the vertical position or Y coordinate of a point within graphical shapes or drawings, control the point's placement along the vertical axis, adjust or access the Y value in coordinate geometry for precise layout, manipulate the height or depth positioning on a canvas or shape, define or read the up-and-down location in 2D drawing components, modify or query vertical point data when configuring points in shapes or graphics, update the vertical coordinate for alignment or animation, get or set the Y axis value to control positioning within visual elements.
 </div>
 
 #### Example
@@ -94,7 +94,7 @@ Creates a Point instance from various parameters.
 
 
 <div class="meta-api-description">
-Generate or construct point objects from different input formats including separate x and y coordinates, coordinate pairs or arrays, objects with x and y properties, or other point-like structures, producing normalized point instances suitable for drawing, rendering, or graphical calculations. Enable flexible creation or conversion of diverse coordinate representations into consistent point data for geometry processing, spatial calculations, or canvas operations. Configure, instantiate, or transform various coordinate inputs into uniform point entities optimized for graphics applications.
+How to convert different coordinate formats to Kendo UI's normalized point object? Generate or construct point objects from different input formats including separate x and y coordinates, coordinate pairs or arrays, objects with x and y properties, or other point-like structures, producing normalized point instances suitable for drawing, rendering, or graphical calculations. Enable flexible creation or conversion of diverse coordinate representations into consistent point data for geometry processing, spatial calculations, or canvas operations. Configure, instantiate, or transform various coordinate inputs into uniform point entities optimized for graphics applications.
 </div>
 
 #### Parameters
@@ -140,7 +140,7 @@ Returns a new Point with the minimum x and y coordinates of all Point arguments.
 
 
 <div class="meta-api-description">
-Calculate or obtain the point with the minimum x and y coordinates from multiple points, extracting the smallest horizontal and vertical values to generate a new position representing either the top-left corner, the minimal bounding coordinate, or the clamped intersection of coordinate sets; this operation supports merging points, determining boundary limits, combining coordinate data, setting positional constraints, or identifying the lowest coordinate pair from various inputs.
+How to get the top-left corner of multiple points in Kendo UI for jQuery? Calculate or obtain the point with the minimum x and y coordinates from multiple points, extracting the smallest horizontal and vertical values to generate a new position representing either the top-left corner, the minimal bounding coordinate, or the clamped intersection of coordinate sets; this operation supports merging points, determining boundary limits, combining coordinate data, setting positional constraints, or identifying the lowest coordinate pair from various inputs.
 </div>
 
 #### Returns
@@ -165,7 +165,7 @@ Returns a new Point with the maximum x and y coordinates of all Point arguments.
 
 
 <div class="meta-api-description">
-Calculate the top-right or maximum coordinate point by comparing multiple points to find the highest x and y values combined, generating a new point representing the upper-right boundary without altering the original points; useful for determining bounding boxes, maximum extents, or limits when working with sets of coordinates, positions, or shapes in graphical or spatial computations where you need to aggregate or combine points to find the farthest right and top location across various coordinate inputs.
+How to find the top-right coordinate point among multiple points in Kendo UI for jQuery? Calculate the top-right or maximum coordinate point by comparing multiple points to find the highest x and y values combined, generating a new point representing the upper-right boundary without altering the original points; useful for determining bounding boxes, maximum extents, or limits when working with sets of coordinates, positions, or shapes in graphical or spatial computations where you need to aggregate or combine points to find the farthest right and top location across various coordinate inputs.
 </div>
 
 #### Returns
@@ -190,7 +190,7 @@ Returns the Point with minimum x and y coordinates.
 
 
 <div class="meta-api-description">
-Calculate or retrieve the coordinate with the lowest x and y values from a geometry set to find the top-left corner, minimum bounds, smallest extent, or minimal coordinate point useful for bounding boxes, collision checks, layout positioning, normalization, or spatial calculations by identifying the minimal coordinate point from a collection of points or geometries.
+How do I find the minimum bounds of a geometry in Kendo UI for jQuery? Calculate or retrieve the coordinate with the lowest x and y values from a geometry set to find the top-left corner, minimum bounds, smallest extent, or minimal coordinate point useful for bounding boxes, collision checks, layout positioning, normalization, or spatial calculations by identifying the minimal coordinate point from a collection of points or geometries.
 </div>
 
 #### Returns
@@ -215,7 +215,7 @@ Returns the Point with maximum x and y coordinates.
 
 
 <div class="meta-api-description">
-Retrieve the point with the highest x and y coordinates by calculating the maximum values across all points in the shape or geometry, enabling you to determine the extreme upper-right boundary or largest coordinate for layout, bounding box calculations, spatial analysis, or positioning tasks. This function identifies the farthest point along both horizontal and vertical axes, useful for controlling geometry bounds, setting layout limits, defining maximum extents, or extracting the top-right corner coordinate from complex shapes or collections of points.
+How to find the furthest point in a Kendo UI geometry? Retrieve the point with the highest x and y coordinates by calculating the maximum values across all points in the shape or geometry, enabling you to determine the extreme upper-right boundary or largest coordinate for layout, bounding box calculations, spatial analysis, or positioning tasks. This function identifies the farthest point along both horizontal and vertical axes, useful for controlling geometry bounds, setting layout limits, defining maximum extents, or extracting the top-right corner coordinate from complex shapes or collections of points.
 </div>
 
 #### Returns
@@ -242,7 +242,7 @@ Creates a new instance with the same coordinates.
 
 
 <div class="meta-api-description">
-Create an exact duplicate of a coordinate point with the same x and y values to copy, replicate, or clone positions for independent modifications, transformations, translations, or comparisons without affecting the original point. This enables developers to generate new instances of geometry points for scenarios requiring separate editing, coordinate manipulation, or spatial operations while preserving the original data. The method supports use cases like duplicating drawing points, cloning locations for adjustments, or managing multiple versions of coordinates independently.
+How do I duplicate a point's coordinates in Kendo UI for jQuery drawingapi? Create an exact duplicate of a coordinate point with the same x and y values to copy, replicate, or clone positions for independent modifications, transformations, translations, or comparisons without affecting the original point. This enables developers to generate new instances of geometry points for scenarios requiring separate editing, coordinate manipulation, or spatial operations while preserving the original data. The method supports use cases like duplicating drawing points, cloning locations for adjustments, or managing multiple versions of coordinates independently.
 </div>
 
 #### Returns
@@ -267,7 +267,7 @@ Calculates the distance to another point.
 
 
 <div class="meta-api-description">
-Calculate or determine the straight-line distance, Euclidean distance, or spatial gap between one geometric point and another coordinate pair or point object for measuring proximity, spacing, or distance in drawing and geometric computations, enabling distance calculation, geometric measurements, nearest neighbor finding, coordinate distance evaluation, or spatial analysis within coordinate units.
+How do I calculate the Euclidean distance between two points in a Kendo UI drawing? Calculate or determine the straight-line distance, Euclidean distance, or spatial gap between one geometric point and another coordinate pair or point object for measuring proximity, spacing, or distance in drawing and geometric computations, enabling distance calculation, geometric measurements, nearest neighbor finding, coordinate distance evaluation, or spatial analysis within coordinate units.
 </div>
 
 #### Parameters
@@ -297,7 +297,7 @@ Compares this point with another instance.
 
 
 <div class="meta-api-description">
-Check if two spatial points share identical coordinates, compare point positions for equality, validate or match geometry locations by assessing coordinate pairs, verify if one point overlaps or equals another in a drawing or graphical context, test for coordinate equivalence, determine whether points are the same exact location, confirm if two points align precisely, compare coordinate values for positional sameness, or use coordinate comparison to identify matching spots in geometric layouts.
+How do I check if two points in my Kendo UI drawing have identical coordinates? Check if two spatial points share identical coordinates, compare point positions for equality, validate or match geometry locations by assessing coordinate pairs, verify if one point overlaps or equals another in a drawing or graphical context, test for coordinate equivalence, determine whether points are the same exact location, confirm if two points align precisely, compare coordinate values for positional sameness, or use coordinate comparison to identify matching spots in geometric layouts.
 </div>
 
 #### Parameters
@@ -328,7 +328,7 @@ Gets the x coordinate value.
 
 
 <div class="meta-api-description">
-Retrieve the horizontal coordinate or x value of a point’s position to determine its left-right placement, enable precise alignment, calculate transformations, perform hit testing, measure geometry layouts, extract numeric x-position data, or adjust rendering and serialization based on a point’s location in 2D space.
+How do I get the x-coordinate of a point in Kendo UI's drawingapi? Retrieve the horizontal coordinate or x value of a point’s position to determine its left-right placement, enable precise alignment, calculate transformations, perform hit testing, measure geometry layouts, extract numeric x-position data, or adjust rendering and serialization based on a point’s location in 2D space.
 </div>
 
 #### Returns
@@ -351,7 +351,7 @@ Gets the y coordinate value.
 
 
 <div class="meta-api-description">
-Retrieve the vertical position, y coordinate, or height value of a point in a geometric shape or drawing object by accessing or extracting its numeric vertical component, get the second coordinate representing elevation or north-south position, obtain the y-axis value, or query the spatial point’s vertical location for layout, rendering, mapping, or graphical computations where reading or using the point’s vertical numeric data is required after the point instance or geometry object exists.
+How do I get the y-coordinate of a point in Kendo UI's drawingapi geometry object? Retrieve the vertical position, y coordinate, or height value of a point in a geometric shape or drawing object by accessing or extracting its numeric vertical component, get the second coordinate representing elevation or north-south position, obtain the y-axis value, or query the spatial point’s vertical location for layout, rendering, mapping, or graphical computations where reading or using the point’s vertical numeric data is required after the point instance or geometry object exists.
 </div>
 
 #### Returns
@@ -374,7 +374,7 @@ Moves the point to the specified x and y coordinates.
 
 
 <div class="meta-api-description">
-Adjusting or updating a point's position by setting new x and y coordinates, translating or relocating a point within a drawing or graphic surface, controlling or changing the spatial location of a point in coordinate space, repositioning a geometric point element interactively or programmatically, moving a point’s internal coordinates to new values to reflect changes in layout or design, configuring point placement by shifting coordinates to desired locations, modifying the position of a drawing element by assigning fresh x and y values, enabling coordinate-based repositioning of points in graphics or mapping contexts, recalculating and applying new spatial positions for points within 2D canvas environments, and dynamically translating points to updated coordinates for visual or programmatic adjustments.
+How do I update the position of a point in a Kendo UI drawing using the move method? Adjusting or updating a point's position by setting new x and y coordinates, translating or relocating a point within a drawing or graphic surface, controlling or changing the spatial location of a point in coordinate space, repositioning a geometric point element interactively or programmatically, moving a point’s internal coordinates to new values to reflect changes in layout or design, configuring point placement by shifting coordinates to desired locations, modifying the position of a drawing element by assigning fresh x and y values, enabling coordinate-based repositioning of points in graphics or mapping contexts, recalculating and applying new spatial positions for points within 2D canvas environments, and dynamically translating points to updated coordinates for visual or programmatic adjustments.
 </div>
 
 #### Parameters
@@ -408,7 +408,7 @@ Rotates the point around the given center.
 
 
 <div class="meta-api-description">
-Rotate a two-dimensional coordinate or point around a chosen pivot or center by a specified angle to compute new positions for rendering, transforming shapes, rotating paths, performing geometric calculations, or adjusting coordinates for hit-testing and interaction. This operation enables setting rotation angles, enabling coordinate transformations, applying rotational math to points in drawing contexts, adjusting positions dynamically, and controlling orientation in 2D space for graphics, UI elements, or computational geometry tasks.
+How do I rotate a GeometryPoint in Kendo UI for jQuery? Rotate a two-dimensional coordinate or point around a chosen pivot or center by a specified angle to compute new positions for rendering, transforming shapes, rotating paths, performing geometric calculations, or adjusting coordinates for hit-testing and interaction. This operation enables setting rotation angles, enabling coordinate transformations, applying rotational math to points in drawing contexts, adjusting positions dynamically, and controlling orientation in 2D space for graphics, UI elements, or computational geometry tasks.
 </div>
 
 #### Parameters
@@ -444,7 +444,7 @@ Rounds the point coordinates to the specified number of fractional digits.
 
 
 <div class="meta-api-description">
-Round or adjust coordinate precision for points by configuring the number of decimal places in point coordinates, control or normalize geometry coordinates for comparison, serialization, display, or drawing purposes, set fractional digit precision for coordinates to reduce noise or improve consistency when working with spatial data points, enable rounding of point coordinate values to a defined decimal accuracy, and format geometry points by limiting coordinate decimals to streamline data processing, rendering, or equality checks.
+How can I round coordinate precision for points in Kendo UI for jQuery? Round or adjust coordinate precision for points by configuring the number of decimal places in point coordinates, control or normalize geometry coordinates for comparison, serialization, display, or drawing purposes, set fractional digit precision for coordinates to reduce noise or improve consistency when working with spatial data points, enable rounding of point coordinate values to a defined decimal accuracy, and format geometry points by limiting coordinate decimals to streamline data processing, rendering, or equality checks.
 </div>
 
 #### Parameters
@@ -474,7 +474,7 @@ Scales the point coordinates along the x and y axis.
 
 
 <div class="meta-api-description">
-Adjust or transform a point's position by resizing its coordinates along horizontal and vertical axes, enabling uniform or non-uniform scaling effects such as zooming, stretching, shrinking, or geometric transformations. Configure scale factors to multiply the x and y values for precise control over spatial adjustments, coordinate manipulation, resizing operations, or dynamic scaling in graphical computations, map coordinates manipulation, or geometry transformations within applications that require flexible scaling of 2D points.
+How do I apply uniform scaling to a point in Kendo UI for jQuery using the GeometryPoint.scale method? Adjust or transform a point's position by resizing its coordinates along horizontal and vertical axes, enabling uniform or non-uniform scaling effects such as zooming, stretching, shrinking, or geometric transformations. Configure scale factors to multiply the x and y values for precise control over spatial adjustments, coordinate manipulation, resizing operations, or dynamic scaling in graphical computations, map coordinates manipulation, or geometry transformations within applications that require flexible scaling of 2D points.
 </div>
 
 #### Parameters
@@ -509,7 +509,7 @@ The callee coordinates will remain unchanged.
 
 
 <div class="meta-api-description">
-Create a scaled duplicate of a point’s coordinates without altering the original location by generating a new point with multiplied x and y values based on a scale factor, enabling non-destructive transformations, cloning, resizing, vector scaling, coordinate adjustments, and manipulation in graphics, drawing, or geometric computations while preserving the initial point data for safe reuse and comparison.
+How do I create a scaled copy of a point's coordinates in Kendo UI for jQuery without modifying the original location? Create a scaled duplicate of a point’s coordinates without altering the original location by generating a new point with multiplied x and y values based on a scale factor, enabling non-destructive transformations, cloning, resizing, vector scaling, coordinate adjustments, and manipulation in graphics, drawing, or geometric computations while preserving the initial point data for safe reuse and comparison.
 </div>
 
 #### Parameters
@@ -544,7 +544,7 @@ Sets the x coordinate to a new value.
 
 
 <div class="meta-api-description">
-Adjust, update, or modify the horizontal position or x-coordinate of a point object in geometry by setting a new numeric value, enabling control over the point’s location on the x-axis for dynamic geometry updates, repositioning, coordinate manipulation, or recalculations in spatial operations, map rendering, graphical transformations, or any scenario requiring programmatic control over the point’s horizontal placement within a coordinate system.
+How do I update the x-coordinate of a point in Kendo UI's drawingapi? Adjust, update, or modify the horizontal position or x-coordinate of a point object in geometry by setting a new numeric value, enabling control over the point’s location on the x-axis for dynamic geometry updates, repositioning, coordinate manipulation, or recalculations in spatial operations, map rendering, graphical transformations, or any scenario requiring programmatic control over the point’s horizontal placement within a coordinate system.
 </div>
 
 #### Parameters
@@ -574,7 +574,7 @@ Sets the y coordinate to a new value.
 
 
 <div class="meta-api-description">
-Update, modify, or change the vertical coordinate of a point by setting its y value to a new number, enabling repositioning or adjusting the location along the y-axis within geometric structures. This functionality supports dynamic geometry manipulation, coordinate editing, and spatial data updates by directly altering the y position of a point in place, suitable for interactive mapping, coordinate systems, geometry transformations, and programmatic location adjustments.
+How do I update the y-coordinate of a point in Kendo UI for jQuery? Update, modify, or change the vertical coordinate of a point by setting its y value to a new number, enabling repositioning or adjusting the location along the y-axis within geometric structures. This functionality supports dynamic geometry manipulation, coordinate editing, and spatial data updates by directly altering the y position of a point in place, suitable for interactive mapping, coordinate systems, geometry transformations, and programmatic location adjustments.
 </div>
 
 #### Parameters
@@ -604,7 +604,7 @@ Returns the point coordinates as an [x, y] array.
 
 
 <div class="meta-api-description">
-Convert or extract point coordinates into a numeric array or tuple for use in calculations, data serialization, JSON formatting, API parameters, or mathematical operations, enabling easy access to the x and y values as a simple ordered pair or list for spatial data processing, geometry manipulation, coordinate transformations, vector math, or passing concise numeric representations of points between functions and services.
+How can I extract x and y coordinates from a Kendo UI GeometryPoint object? Convert or extract point coordinates into a numeric array or tuple for use in calculations, data serialization, JSON formatting, API parameters, or mathematical operations, enabling easy access to the x and y values as a simple ordered pair or list for spatial data processing, geometry manipulation, coordinate transformations, vector math, or passing concise numeric representations of points between functions and services.
 </div>
 
 #### Parameters
@@ -636,7 +636,7 @@ Formats the point value to a string.
 
 
 <div class="meta-api-description">
-Convert a geometric point's coordinates into a human-readable string format for display, logging, debugging, serialization, or output purposes, enabling easy visualization and textual representation of coordinate data, formatting point values to a concise string form that can be used in UI elements, console logs, or data export scenarios where a simple, clear depiction of location or position is required.
+How do I convert a Kendo UI geometric point to a human-readable string? Convert a geometric point's coordinates into a human-readable string format for display, logging, debugging, serialization, or output purposes, enabling easy visualization and textual representation of coordinate data, formatting point values to a concise string form that can be used in UI elements, console logs, or data export scenarios where a simple, clear depiction of location or position is required.
 </div>
 
 #### Parameters
@@ -676,7 +676,7 @@ The current coordinates will be overriden.
 
 
 <div class="meta-api-description">
-Adjusting a point's location by applying geometric changes such as rotation, scaling, translation, or custom matrix transformations, this method modifies the coordinates directly, enabling users to reposition, rotate, resize, or transform points within drawings and graphics by overwriting existing coordinates with the new calculated values in place.
+How do I rotate a point in a Kendo UI drawing? Adjusting a point's location by applying geometric changes such as rotation, scaling, translation, or custom matrix transformations, this method modifies the coordinates directly, enabling users to reposition, rotate, resize, or transform points within drawings and graphics by overwriting existing coordinates with the new calculated values in place.
 </div>
 
 #### Parameters
@@ -709,7 +709,7 @@ The callee coordinates will remain unchanged.
 
 
 <div class="meta-api-description">
-Generate a new point with applied transformations such as rotation, scaling, or translation without altering the original coordinates, enabling immutable coordinate manipulation, functional-style operations on points, cloning and transforming points safely for drawing or graphics calculations, obtaining transformed copies to preserve original data integrity, applying matrix transformations to a duplicate point for coordinate adjustments, performing non-destructive geometric transformations for rendering or spatial computations, creating modified point instances that reflect transformation results while keeping source points unchanged, and handling coordinate transformations in a way that supports pure functions and avoids side effects.
+How do I create a new point in Kendo UI for jQuery with applied transformations like rotation and scaling? Generate a new point with applied transformations such as rotation, scaling, or translation without altering the original coordinates, enabling immutable coordinate manipulation, functional-style operations on points, cloning and transforming points safely for drawing or graphics calculations, obtaining transformed copies to preserve original data integrity, applying matrix transformations to a duplicate point for coordinate adjustments, performing non-destructive geometric transformations for rendering or spatial computations, creating modified point instances that reflect transformation results while keeping source points unchanged, and handling coordinate transformations in a way that supports pure functions and avoids side effects.
 </div>
 
 #### Parameters
@@ -742,7 +742,7 @@ Translates the point along the x and y axis.
 
 
 <div class="meta-api-description">
-Shift or move a point's position by applying horizontal and vertical offsets, adjust the x and y coordinates to reposition shapes or graphical elements, translate points to new locations using specified delta values, apply coordinate transformations for points in vector graphics or geometry contexts, control point displacement along axes for path manipulation and drawing adjustments, set or update point positions by adding x and y increments, enable coordinate translation for repositioning geometric points in 2D space, modify point placement relative to original coordinates for shape transformations and layout changes.
+How do I change the position of a point in Kendo UI using the translate method? Shift or move a point's position by applying horizontal and vertical offsets, adjust the x and y coordinates to reposition shapes or graphical elements, translate points to new locations using specified delta values, apply coordinate transformations for points in vector graphics or geometry contexts, control point displacement along axes for path manipulation and drawing adjustments, set or update point positions by adding x and y increments, enable coordinate translation for repositioning geometric points in 2D space, modify point placement relative to original coordinates for shape transformations and layout changes.
 </div>
 
 #### Parameters
@@ -776,7 +776,7 @@ Translates the point by using a Point instance as a vector of translation.
 
 
 <div class="meta-api-description">
-Shift or move a point by applying a translation vector defined by another point’s X and Y coordinates to reposition geometric points, adjust coordinates, translate locations, perform 2D spatial transformations, offset points by given horizontal and vertical amounts, update point positions based on vector input, control point displacement using coordinate offsets, and manipulate geometric shapes through point translation with flexible vector-based movement.
+How to shift a point's coordinates in Kendo UI for jQuery using the translateWith method? Shift or move a point by applying a translation vector defined by another point’s X and Y coordinates to reposition geometric points, adjust coordinates, translate locations, perform 2D spatial transformations, offset points by given horizontal and vertical amounts, update point positions based on vector input, control point displacement using coordinate offsets, and manipulate geometric shapes through point translation with flexible vector-based movement.
 </div>
 
 #### Parameters

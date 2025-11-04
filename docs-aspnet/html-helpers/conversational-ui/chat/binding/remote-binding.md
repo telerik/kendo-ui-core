@@ -30,6 +30,8 @@ When the Chat is configured for remote data binding, you must specify the follow
 
 ## Ajax Data Binding
 
+> If the `AutoAssignId()` configuration method is set to `false`, the *Id* field should be assigned on the server-side.
+
 To configure the Chat for Ajax data binding, follow these steps:
 
 1. Create a controller action that returns the chat messages when the DataSource triggers a `Read` request.
@@ -164,6 +166,7 @@ To configure the Chat for Ajax data binding, follow these steps:
         .Height("600px")
         .Width("400px")
         .AuthorId("1")
+        .AutoAssignId(false)
         .TextField("Text")
         .AuthorNameField("AuthorName")
         .FilesField("Files")

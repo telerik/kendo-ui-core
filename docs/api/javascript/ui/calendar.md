@@ -18,7 +18,7 @@ Enables the user to select an end date that is before the start date. This optio
 
 
 <div class="meta-api-description">
-Enable or control reverse date range selection in a calendar or date picker, allowing users to select an end date earlier than the start date when choosing date ranges. Configure, set, or allow backward selection of date intervals, support flexible date span input including reversed start and end dates, and manage user interaction for selecting ranges that flow from later to earlier dates in range-enabled calendars or scheduling components. This setting handles reverse chronological date selections, bidirectional range picking, and non-linear date spans when range selection is active.
+How do I enable reverse date selection in Kendo UI calendar widget? Enable or control reverse date range selection in a calendar or date picker, allowing users to select an end date earlier than the start date when choosing date ranges. Configure, set, or allow backward selection of date intervals, support flexible date span input including reversed start and end dates, and manage user interaction for selecting ranges that flow from later to earlier dates in range-enabled calendars or scheduling components. This setting handles reverse chronological date selections, bidirectional range picking, and non-linear date spans when range selection is active.
 </div>
 
 #### Example - enable reverse selection
@@ -41,7 +41,7 @@ Enable or control reverse date range selection in a calendar or date picker, all
 
 
 <div class="meta-api-description">
-Configure display format for century selection cells in a calendar interface, choosing between showing full decade ranges such as "2000-2009" and "2010-2019" or condensed single starting years like "2000" and "2010"; adjust presentation style to toggle between detailed span views or concise year markers, enabling customization of how broader time periods are visualized in calendar navigation, decade grouping, or century overview modes.
+How do I customize the display of century selection cells in Kendo UI for jQuery calendar widget? Configure display format for century selection cells in a calendar interface, choosing between showing full decade ranges such as "2000-2009" and "2010-2019" or condensed single starting years like "2000" and "2010"; adjust presentation style to toggle between detailed span views or concise year markers, enabling customization of how broader time periods are visualized in calendar navigation, decade grouping, or century overview modes.
 </div>
 
 #### Example - render the short version of the century cells
@@ -63,7 +63,7 @@ Configure display format for century selection cells in a calendar interface, ch
 
 
 <div class="meta-api-description">
-Select or set the calendar's visual style, toggling between traditional classic layouts or updated modern appearances, customize the calendar's look and feel during setup, switch rendering modes for a standard or refreshed user interface, control calendar themes for classic versus contemporary display options, configure the calendar to present either the familiar classic design or a sleek, new modern style, enable different calendar skins or presentation types to match user preferences or branding, adjust visual presentation for calendar widgets to appear classic or modern, tailor calendar rendering to provide either a conventional or innovative look at initialization.
+What are my options for customizing the visual style of a Kendo UI calendar? Select or set the calendar's visual style, toggling between traditional classic layouts or updated modern appearances, customize the calendar's look and feel during setup, switch rendering modes for a standard or refreshed user interface, control calendar themes for classic versus contemporary display options, configure the calendar to present either the familiar classic design or a sleek, new modern style, enable different calendar skins or presentation types to match user preferences or branding, adjust visual presentation for calendar widgets to appear classic or modern, tailor calendar rendering to provide either a conventional or innovative look at initialization.
 </div>
 
 #### Example - specify modern component type
@@ -81,7 +81,7 @@ Specifies the culture info used by the component. A valid kendo culture file mus
 
 
 <div class="meta-api-description">
-Set or change the language, regional settings, and localization preferences for date formats, month and day names, first day of the week, and calendar UI text by specifying culture identifiers like "de-DE" or other locale codes, enabling support for internationalization, multilingual calendars, culturally accurate display of dates, control over local time representation, and integration with corresponding culture scripts to ensure correct formatting and cultural conventions are applied throughout the calendar interface.
+How do I set the language for my Kendo UI Calendar widget? Set or change the language, regional settings, and localization preferences for date formats, month and day names, first day of the week, and calendar UI text by specifying culture identifiers like "de-DE" or other locale codes, enabling support for internationalization, multilingual calendars, culturally accurate display of dates, control over local time representation, and integration with corresponding culture scripts to ensure correct formatting and cultural conventions are applied throughout the calendar interface.
 </div>
 
 #### Example - specify a culture
@@ -99,7 +99,7 @@ Set or change the language, regional settings, and localization preferences for 
 
 
 <div class="meta-api-description">
-Control which specific dates appear and how they are displayed in the calendar by supplying a list or array of date values that influence the month view rendering. Configure custom day rendering, highlight particular days, enable dynamic styling, or modify behavior for selected dates when generating the monthly calendar layout. Set or customize visible days, apply special formatting, or inject custom markup on designated dates to tailor the calendar’s appearance and interaction during month rendering. Adjust, filter, or enhance how individual dates are presented within the month, supporting scenarios such as marking events, disabling days, or showing special content for certain dates.
+How can I customize the display of specific dates in a Kendo UI calendar widget? Control which specific dates appear and how they are displayed in the calendar by supplying a list or array of date values that influence the month view rendering. Configure custom day rendering, highlight particular days, enable dynamic styling, or modify behavior for selected dates when generating the monthly calendar layout. Set or customize visible days, apply special formatting, or inject custom markup on designated dates to tailor the calendar’s appearance and interaction during month rendering. Adjust, filter, or enhance how individual dates are presented within the month, supporting scenarios such as marking events, disabling days, or showing special content for certain dates.
 </div>
 
 #### Example - specify a list of dates
@@ -129,7 +129,7 @@ settings are available for the **depth** value:
 
 
 <div class="meta-api-description">
-Set or configure the navigation level for date selection controls to display and restrict browsing through individual days, months, entire years, or broader time spans like decades and centuries, controlling how deeply users can drill down or zoom out within date pickers or calendar interfaces. Enable or adjust the visible calendar views ranging from daily grids, monthly overviews, yearly selections, decade ranges, or century timelines, specifying how far forward or backward in time users can navigate, browse, or pick dates, while managing the minimum and maximum navigable time scopes in scheduling, event planning, or date input widgets.
+How do I set the navigation level for date selection controls in Kendo UI calendar? Set or configure the navigation level for date selection controls to display and restrict browsing through individual days, months, entire years, or broader time spans like decades and centuries, controlling how deeply users can drill down or zoom out within date pickers or calendar interfaces. Enable or adjust the visible calendar views ranging from daily grids, monthly overviews, yearly selections, decade ranges, or century timelines, specifying how far forward or backward in time users can navigate, browse, or pick dates, while managing the minimum and maximum navigable time scopes in scheduling, event planning, or date input widgets.
 </div>
 
 #### Example - set navigation depth of the calendar
@@ -147,7 +147,7 @@ An array or function that will be used to determine which dates to be disabled i
 
 
 <div class="meta-api-description">
-Prevent picking or selecting specific dates in the calendar by configuring disabled dates through lists or custom logic, such as arrays of dates or functions that evaluate each date to block certain days, disable weekends, holidays, or dynamic rules to restrict date selection, control availability by setting which dates cannot be chosen, filter out dates programmatically, and manage allowed or disallowed calendar days based on fixed dates or conditional checks.
+How can I prevent certain dates from being selected in a Kendo UI calendar widget? Prevent picking or selecting specific dates in the calendar by configuring disabled dates through lists or custom logic, such as arrays of dates or functions that evaluate each date to block certain days, disable weekends, holidays, or dynamic rules to restrict date selection, control availability by setting which dates cannot be chosen, filter out dates programmatically, and manage allowed or disallowed calendar days based on fixed dates or conditional checks.
 </div>
 
 #### Example - specify an array of days to be disabled
@@ -199,7 +199,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 
 <div class="meta-api-description">
-Control the display and customization of the calendar’s bottom section by enabling, disabling, or setting a custom template to render the footer area. Adjust, hide, or configure the footer content according to specific needs, including removing the footer entirely or replacing it with a personalized layout or component. Manage the calendar’s footer visibility, modify footer rendering with custom templates, and tailor the footer output to fit user interface requirements, supporting varied use cases such as hiding default text or injecting specialized elements at the calendar’s base.
+How can I customize the footer of a Kendo UI calendar control? Control the display and customization of the calendar’s bottom section by enabling, disabling, or setting a custom template to render the footer area. Adjust, hide, or configure the footer content according to specific needs, including removing the footer entirely or replacing it with a personalized layout or component. Manage the calendar’s footer visibility, modify footer rendering with custom templates, and tailor the footer output to fit user interface requirements, supporting varied use cases such as hiding default text or injecting specialized elements at the calendar’s base.
 </div>
 
 #### Example - specify footer template as a function
@@ -229,7 +229,7 @@ Control the display and customization of the calendar’s bottom section by enab
 
 
 <div class="meta-api-description">
-Configure and control the pattern or string format used to interpret, parse, and convert date and time values from textual inputs into actual Date objects, enabling consistent handling of various date and time representations, customizing how date strings are read and understood, managing the conversion of input values to standard date/time formats, setting or specifying the parsing rules for user-provided date or time entries, and ensuring accurate and reliable processing of different date formats during value assignments or input normalization in calendar-related operations.
+How do I configure Kendo UI calendar to parse date strings in a custom format? Configure and control the pattern or string format used to interpret, parse, and convert date and time values from textual inputs into actual Date objects, enabling consistent handling of various date and time representations, customizing how date strings are read and understood, managing the conversion of input values to standard date/time formats, setting or specifying the parsing rules for user-provided date or time entries, and ensuring accurate and reliable processing of different date formats during value assignments or input normalization in calendar-related operations.
 </div>
 
 #### Example - specify a custom date format
@@ -247,7 +247,7 @@ Configure and control the pattern or string format used to interpret, parse, and
 
 
 <div class="meta-api-description">
-Set the upper limit for date selection or navigation to restrict users from choosing or moving beyond a specific maximum date on a calendar interface, controlling and bounding the latest possible date visible or selectable, preventing selection of future dates past a set threshold, limiting date pickers to a final allowed date, configuring the calendar’s maximum date boundary to enforce date constraints and disable navigation to later days, ensuring date inputs do not exceed a defined maximum cutoff or endpoint.
+How to set a maximum date limit on a Kendo UI calendar widget? Set the upper limit for date selection or navigation to restrict users from choosing or moving beyond a specific maximum date on a calendar interface, controlling and bounding the latest possible date visible or selectable, preventing selection of future dates past a set threshold, limiting date pickers to a final allowed date, configuring the calendar’s maximum date boundary to enforce date constraints and disable navigation to later days, ensuring date inputs do not exceed a defined maximum cutoff or endpoint.
 </div>
 
 #### Example - specify the maximum date
@@ -265,7 +265,7 @@ Allows localization of the strings that are used in the widget.
 
 
 <div class="meta-api-description">
-Customize, adapt, or translate the text labels and user interface strings displayed in calendar components for different languages, regions, or cultural contexts by configuring localized messages, text content, UI wording, date and time format strings, tooltips, button labels, prompts, error messages, or display texts; control multilingual support, internationalization, localization settings, string overrides, language customization, and message templates to ensure the calendar UI matches user preferences, locale-specific terminology, or application language requirements.
+How do I customize the text labels in Kendo UI Calendar? Customize, adapt, or translate the text labels and user interface strings displayed in calendar components for different languages, regions, or cultural contexts by configuring localized messages, text content, UI wording, date and time format strings, tooltips, button labels, prompts, error messages, or display texts; control multilingual support, internationalization, localization settings, string overrides, language customization, and message templates to ensure the calendar UI matches user preferences, locale-specific terminology, or application language requirements.
 </div>
 
 #### Example
@@ -286,7 +286,7 @@ Allows customization of the week column header text. Set the value to make the w
 
 
 <div class="meta-api-description">
-Control and customize the text displayed in the week column header of a calendar interface to improve accessibility and readability, enabling you to set descriptive, clear, and context-specific labels for week columns, support localization, adjust header wording for screen readers, tailor calendar headings to various user needs, and enhance semantic clarity for better user experience and compliance with accessibility guidelines.
+How can I customize the week column header in Kendo UI Calendar to make it more accessible for screen readers? Control and customize the text displayed in the week column header of a calendar interface to improve accessibility and readability, enabling you to set descriptive, clear, and context-specific labels for week columns, support localization, adjust header wording for screen readers, tailor calendar headings to various user needs, and enhance semantic clarity for better user experience and compliance with accessibility guidelines.
 </div>
 
 #### Example
@@ -307,7 +307,7 @@ Allows customization of the "Navigate to " text that would be used for `title` a
 
 
 <div class="meta-api-description">
-Set and customize the calendar header label, title text, and the navigation button’s display to switch or go back to a parent or previous calendar view, enabling control over header navigation labels, button text for moving between views, and configuring how users navigate through calendar hierarchies or summaries.
+How do I customize calendar navigation labels and buttons in Kendo UI for jQuery? Set and customize the calendar header label, title text, and the navigation button’s display to switch or go back to a parent or previous calendar view, enabling control over header navigation labels, button text for moving between views, and configuring how users navigate through calendar hierarchies or summaries.
 </div>
 
 #### Example
@@ -328,7 +328,7 @@ Allows customization of names of the views used in the `title` attribute of the 
 
 
 <div class="meta-api-description">
-Customize and control the display labels or titles used in calendar navigation headers and parent view buttons, enabling you to set, rename, or adjust the navigation hierarchy names seen in calendar interfaces, parent view identifiers, and header tooltips. This includes configuring parent view options, modifying navigation breadcrumbs, changing top-level view names, and personalizing calendar parent navigation captions or titles for clearer user understanding and tailored interface navigation experience.
+How to customize parent view names in Kendo UI calendar navigation? Customize and control the display labels or titles used in calendar navigation headers and parent view buttons, enabling you to set, rename, or adjust the navigation hierarchy names seen in calendar interfaces, parent view identifiers, and header tooltips. This includes configuring parent view options, modifying navigation breadcrumbs, changing top-level view names, and personalizing calendar parent navigation captions or titles for clearer user understanding and tailored interface navigation experience.
 </div>
 
 #### Example
@@ -353,7 +353,7 @@ Allows customization of parent view name used in the `title` attribute of the Ca
 
 
 <div class="meta-api-description">
-Adjust or configure the display label, header text, or title attribute shown for the monthly calendar view, control how the month view’s parent name or heading appears in tooltips or UI elements, set or override the default naming for the month section in calendar components, localize or customize the month view identifier or descriptor that appears as the parent view label, manage and change the calendar's month view title attribute for accessibility or clarity in the user interface.
+How do I customize the month view title in Kendo UI for jQuery Calendar component? Adjust or configure the display label, header text, or title attribute shown for the monthly calendar view, control how the month view’s parent name or heading appears in tooltips or UI elements, set or override the default naming for the month section in calendar components, localize or customize the month view identifier or descriptor that appears as the parent view label, manage and change the calendar's month view title attribute for accessibility or clarity in the user interface.
 </div>
 
 #### Example
@@ -376,7 +376,7 @@ Allows customization of parent view name used in the `title` attribute of the Ca
 
 
 <div class="meta-api-description">
-Control or customize the localized label, name, or display text of the main calendar view when showing a year overview, enabling you to set, configure, or adjust how the Year view is referenced in titles, tooltips, or accessibility attributes within calendar components, including modifying parent view names or headings for year-based navigation and display contexts.
+How can I customize the year view label in Kendo UI calendar? Control or customize the localized label, name, or display text of the main calendar view when showing a year overview, enabling you to set, configure, or adjust how the Year view is referenced in titles, tooltips, or accessibility attributes within calendar components, including modifying parent view names or headings for year-based navigation and display contexts.
 </div>
 
 #### Example
@@ -399,7 +399,7 @@ Allows customization of parent view name used in the `title` attribute of the Ca
 
 
 <div class="meta-api-description">
-Customize or configure the label, title text, or display name for the decade view in calendar components, controlling how the parent view is presented or named when showing a ten-year span; adjust or set the decade header, caption, or identifier used as a tooltip or accessibility title in calendar navigation for better clarity, localization, or user interface labeling in decade-level calendar views.
+How do I customize the label for the decade view in a Kendo UI calendar? Customize or configure the label, title text, or display name for the decade view in calendar components, controlling how the parent view is presented or named when showing a ten-year span; adjust or set the decade header, caption, or identifier used as a tooltip or accessibility title in calendar navigation for better clarity, localization, or user interface labeling in decade-level calendar views.
 </div>
 
 #### Example
@@ -422,7 +422,7 @@ Allows customization of the text of the Today button present in the widget in it
 
 
 <div class="meta-api-description">
-Customize or set the label, text, or caption displayed on the Today button within calendar interfaces, enabling you to change, override, or localize the default wording for the current day control in various calendar views or widgets. Adjust, configure, or personalize the displayed text for the button that jumps to the present date, supporting different languages, formats, or custom user interface terminology in scheduling, date pickers, or time management components.
+How do I change the label on the "Today" button in a Kendo UI calendar widget? Customize or set the label, text, or caption displayed on the Today button within calendar interfaces, enabling you to change, override, or localize the default wording for the current day control in various calendar views or widgets. Adjust, configure, or personalize the displayed text for the button that jumps to the present date, supporting different languages, formats, or custom user interface terminology in scheduling, date pickers, or time management components.
 </div>
 
 #### Example
@@ -443,7 +443,7 @@ Customize or set the label, text, or caption displayed on the Today button withi
 
 
 <div class="meta-api-description">
-Control the earliest selectable or viewable date in date pickers or calendar components by defining a minimum boundary to restrict navigation and selection to that starting date or any date after it, enabling developers to set the lowest date limit, disable past dates, block dates before a cutoff, enforce earliest allowed dates, and ensure users cannot pick or scroll to dates prior to the specified minimum range.
+How do I restrict dates in a Kendo UI calendar component to only those after a certain minimum date? Control the earliest selectable or viewable date in date pickers or calendar components by defining a minimum boundary to restrict navigation and selection to that starting date or any date after it, enabling developers to set the lowest date limit, disable past dates, block dates before a cutoff, enforce earliest allowed dates, and ensure users cannot pick or scroll to dates prior to the specified minimum range.
 </div>
 
 #### Example - specify the minimum date
@@ -462,7 +462,7 @@ Control the earliest selectable or viewable date in date pickers or calendar com
 
 
 <div class="meta-api-description">
-Configure and customize the appearance and content of individual day cells within the monthly calendar view by specifying templates or rendering logic that inject custom HTML, bind dynamic data like dates, events, or counts, and display visual indicators or markers for each day, enabling control over daily cells’ layout, style, and interactive elements for month-based calendar displays or event scheduling interfaces.
+How to customize individual day cells in Kendo UI calendar's monthly view? Configure and customize the appearance and content of individual day cells within the monthly calendar view by specifying templates or rendering logic that inject custom HTML, bind dynamic data like dates, events, or counts, and display visual indicators or markers for each day, enabling control over daily cells’ layout, style, and interactive elements for month-based calendar displays or event scheduling interfaces.
 </div>
 
 #### Example
@@ -486,7 +486,7 @@ Configure and customize the appearance and content of individual day cells withi
 
 
 <div class="meta-api-description">
-Customize or control the display of day cells in a calendar’s month view by defining a content template or rendering logic that overrides the default day numbers, enabling personalized layouts, dynamic content, or conditional formatting within specific date ranges or constraints during calendar initialization, allowing developers to set, configure, or enable custom month cell visuals, content injection, or templating for each calendar day while respecting minimum and maximum date boundaries.
+How can I customize the content of each day in a Kendo UI calendar's month view? Customize or control the display of day cells in a calendar’s month view by defining a content template or rendering logic that overrides the default day numbers, enabling personalized layouts, dynamic content, or conditional formatting within specific date ranges or constraints during calendar initialization, allowing developers to set, configure, or enable custom month cell visuals, content injection, or templating for each calendar day while respecting minimum and maximum date boundaries.
 </div>
 
 #### Example - specify cell template as a string
@@ -529,7 +529,7 @@ Customize or control the display of day cells in a calendar’s month view by de
 
 
 <div class="meta-api-description">
-Control and customize how week numbers or week cells appear in a monthly calendar view by configuring templates or custom render functions that define the content and layout for each week's display, allowing display of calculated week numbers, first dates of weeks, or any tailored data for weekly segments; this enables developers to set, modify, render, or override default week columns in calendar month layouts with dynamic, data-driven templates for flexible presentation of weekly information, including showing custom labels, calculations, or styling for weeks within a monthly calendar grid.
+How to customize week numbers in Kendo UI Calendar control? Control and customize how week numbers or week cells appear in a monthly calendar view by configuring templates or custom render functions that define the content and layout for each week's display, allowing display of calculated week numbers, first dates of weeks, or any tailored data for weekly segments; this enables developers to set, modify, render, or override default week columns in calendar month layouts with dynamic, data-driven templates for flexible presentation of weekly information, including showing custom labels, calculations, or styling for weeks within a monthly calendar grid.
 </div>
 
 #### Example - specify week number template as a string
@@ -561,7 +561,7 @@ Control and customize how week numbers or week cells appear in a monthly calenda
 
 
 <div class="meta-api-description">
-Control how day cells that are outside the allowed date range appear in the calendar month view by customizing their display, defining or setting templates for out-of-bound dates, handling disabled or inactive days beyond minimum and maximum limits, configuring empty or placeholder cells for invalid or unavailable dates, managing visual representation of dates that fall outside the permitted range, and adjusting how the calendar renders days that are not selectable due to range restrictions.
+How do I customize empty cells in Kendo UI for jQuery Calendar month view? Control how day cells that are outside the allowed date range appear in the calendar month view by customizing their display, defining or setting templates for out-of-bound dates, handling disabled or inactive days beyond minimum and maximum limits, configuring empty or placeholder cells for invalid or unavailable dates, managing visual representation of dates that fall outside the permitted range, and adjusting how the calendar renders days that are not selectable due to range restrictions.
 </div>
 
 #### Example - specify an empty cell template as a string
@@ -581,7 +581,7 @@ By default user is able to select a single date. The property can also be set to
 
 
 <div class="meta-api-description">
-Enable or configure date selection modes in a calendar interface, including single date picking, multiple non-contiguous date selections, or continuous date range selection for choosing intervals. Adjust how users can click, tap, or highlight dates—whether selecting one day, multiple individual days, or a block of dates in sequence—supporting scenarios like booking periods, marking multiple events, or highlighting availability spans. Control interactive date choice behavior for calendar components to facilitate single date picks, multi-date selections, or start-to-end range picking for scheduling and event planning.
+How to enable multiple date selection in Kendo UI Calendar widget? Enable or configure date selection modes in a calendar interface, including single date picking, multiple non-contiguous date selections, or continuous date range selection for choosing intervals. Adjust how users can click, tap, or highlight dates—whether selecting one day, multiple individual days, or a block of dates in sequence—supporting scenarios like booking periods, marking multiple events, or highlighting availability spans. Control interactive date choice behavior for calendar components to facilitate single date picks, multi-date selections, or start-to-end range picking for scheduling and event planning.
 </div>
 
 #### Example - enable the multiple selection
@@ -603,7 +603,7 @@ Specifies which dates to be selected when the calendar is initialized.
 
 
 <div class="meta-api-description">
-Set, initialize, or predefine one or multiple dates to be highlighted, chosen, or selected by default in a calendar or date picker component during startup or load, enabling features like default date selections, reminders, event markers, or initial highlighted days. Configure preselected calendar days, control initial date highlights, enable multiple date selections on load, and apply default chosen dates automatically when the calendar appears. Use this for loading specific dates upfront, setting predefined date ranges or points, initializing selections for user guidance, or marking important calendar entries before user interaction, especially in contexts requiring multiple dates chosen simultaneously.
+How do I set default selected dates in Kendo UI calendar? Set, initialize, or predefine one or multiple dates to be highlighted, chosen, or selected by default in a calendar or date picker component during startup or load, enabling features like default date selections, reminders, event markers, or initial highlighted days. Configure preselected calendar days, control initial date highlights, enable multiple date selections on load, and apply default chosen dates automatically when the calendar appears. Use this for loading specific dates upfront, setting predefined date ranges or points, initializing selections for user guidance, or marking important calendar entries before user interaction, especially in contexts requiring multiple dates chosen simultaneously.
 </div>
 
 #### Example - set two dates to be selected upon calendar initialization
@@ -623,7 +623,7 @@ If set to `true` a week of the year will be shown on the left side of the calend
 
 
 <div class="meta-api-description">
-Show or hide week numbers on a calendar view, configure the calendar to display the week of the year alongside dates, enable numbering of weeks to track weekly schedules or planning, set calendar options to present ISO or regional week counts, control whether each calendar row includes a visible indicator of the current week number, toggle week numbering on or off for clearer date context during timeline management or event organization, include or exclude week indexes for better alignment with business or project cycles, customize calendar visualization to highlight week breakdowns, and adjust settings for presenting sequential week identifiers within the calendar interface.
+How do I show week numbers on a Kendo UI calendar? Show or hide week numbers on a calendar view, configure the calendar to display the week of the year alongside dates, enable numbering of weeks to track weekly schedules or planning, set calendar options to present ISO or regional week counts, control whether each calendar row includes a visible indicator of the current week number, toggle week numbering on or off for clearer date context during timeline management or event organization, include or exclude week indexes for better alignment with business or project cycles, customize calendar visualization to highlight week breakdowns, and adjust settings for presenting sequential week identifiers within the calendar interface.
 </div>
 
 #### Example - enable the week of the year option
@@ -647,7 +647,7 @@ The following settings are available for the **start** value:
 
 
 <div class="meta-api-description">
-Control and customize the default initial display mode of a calendar interface, specifying whether users first see the monthly days grid, an overview of all months in a year, a range of years spanning a decade, or a broader century view with multiple decades; configure or set the starting calendar view, enabling application developers to define the initial focus or zoom level shown on load, toggle between different temporal granularities, and tailor the calendar’s opening display to user preferences or application requirements such as monthly schedules, yearly planning, decade comparisons, or century overviews.
+How can I set the initial view of a Kendo UI calendar to show multiple years at once? Control and customize the default initial display mode of a calendar interface, specifying whether users first see the monthly days grid, an overview of all months in a year, a range of years spanning a decade, or a broader century view with multiple decades; configure or set the starting calendar view, enabling application developers to define the initial focus or zoom level shown on load, toggle between different temporal granularities, and tailor the calendar’s opening display to user preferences or application requirements such as monthly schedules, yearly planning, decade comparisons, or century overviews.
 </div>
 
 #### Example - specify the initial view, which calendar renders
@@ -665,7 +665,7 @@ Control and customize the default initial display mode of a calendar interface, 
 
 
 <div class="meta-api-description">
-Configure, access, or update the currently selected date on the calendar control to programmatically set, retrieve, or bind the chosen day, allowing initialization or dynamic changes to the calendar’s active or highlighted date. Enable date selection management, handle user picks, control default or current dates, and synchronize the calendar’s selection state with your application logic by getting or setting this date value.
+How do I programmatically set the selected date on a Kendo UI calendar? Configure, access, or update the currently selected date on the calendar control to programmatically set, retrieve, or bind the chosen day, allowing initialization or dynamic changes to the calendar’s active or highlighted date. Enable date selection management, handle user picks, control default or current dates, and synchronize the calendar’s selection state with your application logic by getting or setting this date value.
 </div>
 
 #### Example - specify the selected value of the widget
@@ -683,7 +683,7 @@ Specifies an initial range selection. This option is available only when the [`s
 
 
 <div class="meta-api-description">
-Set or configure an initial continuous date interval, defining both start and end dates to preselect a range when the calendar opens, enabling users to view or adjust a preset date span. Control default date range selection, initialize a calendar with a predefined interval, specify beginning and ending dates for ranges, customize calendar opening state with selected periods, apply selectable date ranges, enable continuous date interval presets, and manage initial multi-day selections within calendars that support range-based selection modes.
+How do I preselect a date range in Kendo UI Calendar when it opens? Set or configure an initial continuous date interval, defining both start and end dates to preselect a range when the calendar opens, enabling users to view or adjust a preset date span. Control default date range selection, initialize a calendar with a predefined interval, specify beginning and ending dates for ranges, customize calendar opening state with selected periods, apply selectable date ranges, enable continuous date interval presets, and manage initial multi-day selections within calendars that support range-based selection modes.
 </div>
 
 #### Example - specify the selected range of the component
@@ -701,7 +701,7 @@ Specifies the start date of the range selection.
 
 
 <div class="meta-api-description">
-Set or configure the initial starting date for selecting a range of dates, control or update the "from" date in a date picker or calendar component, define the earliest day in a continuous range selection, programmatically specify the beginning boundary for multi-day selections, initialize or adjust the initial date to start a date interval, manage the first date in date range inputs or filters, control the anchor date when selecting consecutive days, set the opening date for periods or time spans, enable precise control over the first day when users pick date ranges, and customize or override the starting point in calendar-based range selections.
+How do I set the start date for selecting a range of dates in Kendo UI calendar? Set or configure the initial starting date for selecting a range of dates, control or update the "from" date in a date picker or calendar component, define the earliest day in a continuous range selection, programmatically specify the beginning boundary for multi-day selections, initialize or adjust the initial date to start a date interval, manage the first date in date range inputs or filters, control the anchor date when selecting consecutive days, set the opening date for periods or time spans, enable precise control over the first day when users pick date ranges, and customize or override the starting point in calendar-based range selections.
 </div>
 
 #### Example
@@ -722,7 +722,7 @@ Specifies the end date of the range selection.
 
 
 <div class="meta-api-description">
-Configure or set the ending boundary of a selectable date range in a calendar component to define how dates are highlighted, restricted, or limited within a range selection. Control the final date limit for date pickers, scheduling tools, or calendar widgets by specifying the maximum date in a range including start and end points for date intervals, periods, or event durations. Adjust, customize, or define range limits for date selections, date span boundaries, or calendar date intervals in user interfaces that involve selecting multiple consecutive days or timed events.
+How do I set the maximum date limit for date range selection in a Kendo UI calendar? Configure or set the ending boundary of a selectable date range in a calendar component to define how dates are highlighted, restricted, or limited within a range selection. Control the final date limit for date pickers, scheduling tools, or calendar widgets by specifying the maximum date in a range including start and end points for date intervals, periods, or event durations. Adjust, customize, or define range limits for date selections, date span boundaries, or calendar date intervals in user interfaces that involve selecting multiple consecutive days or timed events.
 </div>
 
 #### Example
@@ -746,7 +746,7 @@ When this configuration is enabled, the calendar will render days from the previ
 
 
 <div class="meta-api-description">
-Enable displaying days from the previous and next months within the current calendar grid, showing adjacent month dates in the calendar view to provide continuous date context, overlap month boundaries, or see trailing and leading days beyond the current month; control whether days outside the current month are visible in the calendar, configure showing extra dates for better navigation or visual continuity, toggle visibility of neighboring month days inside the monthly calendar layout, and ensure compatibility with selection modes by disabling this feature during range selection to avoid conflicts.
+How to show days from previous and next months in Kendo UI for jQuery calendar control? Enable displaying days from the previous and next months within the current calendar grid, showing adjacent month dates in the calendar view to provide continuous date context, overlap month boundaries, or see trailing and leading days beyond the current month; control whether days outside the current month are visible in the calendar, configure showing extra dates for better navigation or visual continuity, toggle visibility of neighboring month days inside the monthly calendar layout, and ensure compatibility with selection modes by disabling this feature during range selection to avoid conflicts.
 </div>
 
 #### Example - Hide dates from the other months
@@ -766,7 +766,7 @@ Gets currently focused date.
 
 
 <div class="meta-api-description">
-Obtain or access the active date currently highlighted or selected within a calendar interface or component, enabling retrieval of the focused day, month, or year to read the present calendar state, compare dates, update user interface elements, synchronize with other date-based APIs, and manage or track the current temporal context without requiring input parameters or configurations.
+How do I get the currently selected date in Kendo UI Calendar widget? Obtain or access the active date currently highlighted or selected within a calendar interface or component, enabling retrieval of the focused day, month, or year to read the present calendar state, compare dates, update user interface elements, synchronize with other date-based APIs, and manage or track the current temporal context without requiring input parameters or configurations.
 </div>
 
 #### Returns
@@ -790,7 +790,7 @@ Prepares the **Calendar** for safe removal from DOM. Detaches all event handlers
 
 
 <div class="meta-api-description">
-Clean up and dispose calendar resources by removing event listeners, unbinding handlers, releasing memory by clearing associated data attributes, and tearing down child components safely to prevent leaks and dangling references; ensure all internal and nested widget event bindings are detached and resources are freed before removing or replacing calendar elements in the DOM, facilitating proper destruction without deleting the calendar element itself.
+What happens when I call Calendar.destroy() in Kendo UI for jQuery? Clean up and dispose calendar resources by removing event listeners, unbinding handlers, releasing memory by clearing associated data attributes, and tearing down child components safely to prevent leaks and dangling references; ensure all internal and nested widget event bindings are detached and resources are freed before removing or replacing calendar elements in the DOM, facilitating proper destruction without deleting the calendar element itself.
 </div>
 
 #### Example
@@ -809,7 +809,7 @@ Gets/Sets the max value of the calendar.
 
 
 <div class="meta-api-description">
-Control, retrieve, or set the highest allowable date or limit within a calendar or date picker component to restrict user selection or navigation beyond a specific upper bound, enabling developers to enforce maximum date constraints, retrieve current maximum settings, define cutoffs for date inputs, configure date limits, or programmatically adjust the latest selectable date to prevent exceeding predefined thresholds.
+How to set maximum date in Kendo UI calendar widget? Control, retrieve, or set the highest allowable date or limit within a calendar or date picker component to restrict user selection or navigation beyond a specific upper bound, enabling developers to enforce maximum date constraints, retrieve current maximum settings, define cutoffs for date inputs, configure date limits, or programmatically adjust the latest selectable date to prevent exceeding predefined thresholds.
 </div>
 
 #### Parameters
@@ -850,7 +850,7 @@ Gets/Sets the min value of the calendar.
 
 
 <div class="meta-api-description">
-Configure or retrieve the earliest permissible date boundary to limit calendar navigation and selection to dates from that minimum onwards, enabling control over the calendar’s lower date range by setting or accessing the minimum allowed date value, restricting user interaction and date picking to on or after a specified start date while supporting queries to fetch the current minimum limit or update it dynamically within the calendar component.
+How do I set the minimum date limit for a Kendo UI calendar component? Configure or retrieve the earliest permissible date boundary to limit calendar navigation and selection to dates from that minimum onwards, enabling control over the calendar’s lower date range by setting or accessing the minimum allowed date value, restricting user interaction and date picking to on or after a specified start date while supporting queries to fetch the current minimum limit or update it dynamically within the calendar component.
 </div>
 
 #### Parameters
@@ -891,7 +891,7 @@ Navigates to view.
 
 
 <div class="meta-api-description">
-Programmatically change or control the calendar’s current display by setting a specific date, view mode, or timeframe such as month, week, or day, allowing dynamic navigation, automated updates, switching calendar views, focusing on particular dates, updating visible content, and enabling custom date selection or view transitions through code.
+How to programmatically change the current date in Kendo UI for jQuery calendar widget? Programmatically change or control the calendar’s current display by setting a specific date, view mode, or timeframe such as month, week, or day, allowing dynamic navigation, automated updates, switching calendar views, focusing on particular dates, updating visible content, and enabling custom date selection or view transitions through code.
 </div>
 
 #### Parameters
@@ -921,7 +921,7 @@ Navigates to the lower view.
 
 
 <div class="meta-api-description">
-Control calendar view drill-down to navigate programmatically from broader to more detailed time spans such as year to month, month to week, or week to day, enabling dynamic transition to deeper levels in the calendar hierarchy, customize navigation behaviors, implement stepwise zoom or focus on finer intervals, handle user interactions that require moving into specific dates or periods, and adjust the displayed timeframe to a smaller, detailed perspective through code-driven commands.
+How do I use the navigateDown method in Kendo UI for jQuery to drill down from year view to month view in a calendar? Control calendar view drill-down to navigate programmatically from broader to more detailed time spans such as year to month, month to week, or week to day, enabling dynamic transition to deeper levels in the calendar hierarchy, customize navigation behaviors, implement stepwise zoom or focus on finer intervals, handle user interactions that require moving into specific dates or periods, and adjust the displayed timeframe to a smaller, detailed perspective through code-driven commands.
 </div>
 
 #### Parameters
@@ -947,7 +947,7 @@ Navigates to the future.
 
 
 <div class="meta-api-description">
-Control advancing the calendar view forward in time by programmatically moving to the next day, week, month, or future period based on the current display; enable automatic or custom navigation to future dates, shift the visible date range ahead, trigger forward movement on calendar components, update the timeline to upcoming intervals, or synchronize external controls to show later calendar periods dynamically.
+How can I use Kendo UI's calendar navigateToFuture method to move to a future date? Control advancing the calendar view forward in time by programmatically moving to the next day, week, month, or future period based on the current display; enable automatic or custom navigation to future dates, shift the visible date range ahead, trigger forward movement on calendar components, update the timeline to upcoming intervals, or synchronize external controls to show later calendar periods dynamically.
 </div>
 
 #### Example
@@ -967,7 +967,7 @@ Navigates to the past.
 
 
 <div class="meta-api-description">
-Shift or move the calendar display to earlier dates, go back in time, navigate to previous days, weeks, or months, programmatically control the calendar to view past time periods, rewind the calendar view, step backward through dates, update the calendar to show a prior date range, enable backward navigation in scheduling or timeline interfaces, scroll or jump to previous calendar intervals.
+How do I programmatically move the Kendo UI calendar to show past dates? Shift or move the calendar display to earlier dates, go back in time, navigate to previous days, weeks, or months, programmatically control the calendar to view past time periods, rewind the calendar view, step backward through dates, update the calendar to show a prior date range, enable backward navigation in scheduling or timeline interfaces, scroll or jump to previous calendar intervals.
 </div>
 
 #### Example
@@ -987,7 +987,7 @@ Navigates to the upper view.
 
 
 <div class="meta-api-description">
-Control or trigger navigation within a calendar interface to move from a detailed view to a broader one, such as stepping up from a month view to a year overview, zooming out or drilling up in the calendar hierarchy, updating the displayed date range and current view to a parent or higher-level time granularity, enabling seamless transitions from detailed dates to larger time spans, toggling or programmatically setting calendar views to their next higher levels, managing calendar navigation flow, and adjusting displayed periods for wider context or summary overviews.
+How do I navigate up to a higher calendar view in Kendo UI? Control or trigger navigation within a calendar interface to move from a detailed view to a broader one, such as stepping up from a month view to a year overview, zooming out or drilling up in the calendar hierarchy, updating the displayed date range and current view to a parent or higher-level time granularity, enabling seamless transitions from detailed dates to larger time spans, toggling or programmatically setting calendar views to their next higher levels, managing calendar navigation flow, and adjusting displayed periods for wider context or summary overviews.
 </div>
 
 #### Example
@@ -1009,7 +1009,7 @@ Gets/Sets the selected dates for the calendar.
 
 
 <div class="meta-api-description">
-Retrieve, update, or manage multiple selected dates in a calendar interface by getting the currently chosen date array or setting new selections with JavaScript Date objects; control, synchronize, or programmatically initialize multi-date picking, reading, or changing selections in UI components configured for multiple selectable dates.
+How do I retrieve or update multiple selected dates in a Kendo UI calendar widget? Retrieve, update, or manage multiple selected dates in a calendar interface by getting the currently chosen date array or setting new selections with JavaScript Date objects; control, synchronize, or programmatically initialize multi-date picking, reading, or changing selections in UI components configured for multiple selectable dates.
 </div>
 
 #### Example - gets the selected dates of the widget
@@ -1046,7 +1046,7 @@ Gets/Sets the selected range for the calendar.
 
 
 <div class="meta-api-description">
-Programmatically retrieve or update the currently selected date range in a calendar interface, enabling control over date range selection, setting or getting the active highlighted period, managing or synchronizing chosen dates, configuring or binding date ranges, dynamically adjusting selection intervals, and handling date span selection changes for UI consistency and interaction.
+How do I set a date range selection in Kendo UI calendar widget? Programmatically retrieve or update the currently selected date range in a calendar interface, enabling control over date range selection, setting or getting the active highlighted period, managing or synchronizing chosen dates, configuring or binding date ranges, dynamically adjusting selection intervals, and handling date span selection changes for UI consistency and interaction.
 </div>
 
 #### Parameters
@@ -1098,7 +1098,7 @@ Gets/Sets the value of the calendar.
 
 
 <div class="meta-api-description">
-Retrieve or update the currently selected date in the calendar widget by getting the current selection, setting a new date using Date objects or date strings, controlling the focused day, changing the visible calendar view programmatically, configuring or reading the chosen date, dynamically adjusting the selected date value, accessing or modifying the calendar’s active date, and managing date input or output through code to handle user selections, automated date changes, date parsing, and synchronization with other components.
+How do I set a new date in a Kendo UI calendar widget using JavaScript? Retrieve or update the currently selected date in the calendar widget by getting the current selection, setting a new date using Date objects or date strings, controlling the focused day, changing the visible calendar view programmatically, configuring or reading the chosen date, dynamically adjusting the selected date value, accessing or modifying the calendar’s active date, and managing date input or output through code to handle user selections, automated date changes, date parsing, and synchronization with other components.
 </div>
 
 #### Parameters
@@ -1143,7 +1143,7 @@ Gets an instance of the current view used by the calendar.
 
 
 <div class="meta-api-description">
-Access and control the current calendar display mode or layout by obtaining the active view instance, enabling tasks such as querying the visible date range, customizing navigation controls, adjusting rendering behavior, inspecting or modifying view state and configuration, interacting with the calendar’s presentation layer, invoking view-specific functions or APIs, and programmatically manipulating elements tied to the timeline, day, week, or month displays. This encompasses retrieving and working with the live calendar view to tailor user interactions, implement custom UI changes, or extend functionality at the view level within the calendar interface.
+How to access and manipulate the current view in Kendo UI Calendar? Access and control the current calendar display mode or layout by obtaining the active view instance, enabling tasks such as querying the visible date range, customizing navigation controls, adjusting rendering behavior, inspecting or modifying view state and configuration, interacting with the calendar’s presentation layer, invoking view-specific functions or APIs, and programmatically manipulating elements tied to the timeline, day, week, or month displays. This encompasses retrieving and working with the live calendar view to tailor user interactions, implement custom UI changes, or extend functionality at the view level within the calendar interface.
 </div>
 
 #### Returns
@@ -1169,7 +1169,7 @@ Fires when the selected date is changed.
 
 
 <div class="meta-api-description">
-Detect and respond to updates when a user selects or changes a date in a calendar component, triggering event handlers to capture date modifications, synchronize state or data models, validate chosen dates, update user interface elements dynamically, and execute custom logic or callbacks upon date selection changes. Enable monitoring and reacting to calendar date changes, handling selection updates, managing user interactions with date pickers, and integrating date change notifications for seamless state control and validation in scheduling or event-driven applications.
+How do I trigger an event when a user selects or changes a date in a Kendo UI calendar? Detect and respond to updates when a user selects or changes a date in a calendar component, triggering event handlers to capture date modifications, synchronize state or data models, validate chosen dates, update user interface elements dynamically, and execute custom logic or callbacks upon date selection changes. Enable monitoring and reacting to calendar date changes, handling selection updates, managing user interactions with date pickers, and integrating date change notifications for seamless state control and validation in scheduling or event-driven applications.
 </div>
 
 #### Example - subscribe to the "change" event during initialization
@@ -1206,7 +1206,7 @@ Fires when calendar navigates.
 
 
 <div class="meta-api-description">
-Detect or handle calendar date changes, view switches, month navigation, or programmatic updates by capturing navigation events that signal when the displayed timeframe or calendar perspective shifts. Track user-driven or API-triggered moves across calendar months, weeks, days, or custom views to respond to transitions, update UI, load relevant data, or adjust settings based on new target dates and view modes. Monitor navigation activity reflecting any movement to different calendar intervals, enabling reactions to changes in the presented timeframe, whether through clicks, API calls, or automated navigation commands.
+How to detect when calendar view changes in Kendo UI? Detect or handle calendar date changes, view switches, month navigation, or programmatic updates by capturing navigation events that signal when the displayed timeframe or calendar perspective shifts. Track user-driven or API-triggered moves across calendar months, weeks, days, or custom views to respond to transitions, update UI, load relevant data, or adjust settings based on new target dates and view modes. Monitor navigation activity reflecting any movement to different calendar intervals, enabling reactions to changes in the presented timeframe, whether through clicks, API calls, or automated navigation commands.
 </div>
 
 #### Example - subscribe to the "navigate" event during initialization

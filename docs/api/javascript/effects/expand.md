@@ -41,7 +41,7 @@ The direction in which the element will be expanded. Either `horizontal` or `ver
 
 
 <div class="meta-api-description">
-Control and configure the expansion animation axis by specifying whether the effect should grow or collapse horizontally or vertically, enabling smooth transitions that animate either the element’s width or height based on developer preference; set and customize expansion direction for UI components by choosing horizontal expansion to manipulate width or vertical expansion to adjust height, ensuring flexible layout animations along a single axis for expanding or collapsing interfaces.
+How do I control the direction of expansion in Kendo UI effects? Control and configure the expansion animation axis by specifying whether the effect should grow or collapse horizontally or vertically, enabling smooth transitions that animate either the element’s width or height based on developer preference; set and customize expansion direction for UI components by choosing horizontal expansion to manipulate width or vertical expansion to adjust height, ensuring flexible layout animations along a single axis for expanding or collapsing interfaces.
 </div>
 
 #### Example

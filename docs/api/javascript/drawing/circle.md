@@ -28,7 +28,7 @@ The geometric object that defines the circle center and radius.
 
 
 <div class="meta-api-description">
-Set or provide the geometric definition specifying the circle's center point and radius to control the position, size, and shape of the circle during creation or rendering. Configure the initial spatial parameters defining circle geometry for layout, drawing, or visualization purposes. Enable precise control over circle center coordinates and radius as input when instantiating or constructing a circle element for consistent placement, scaling, or interactive manipulation. Supply or define the core circle shape attributes upfront to influence how the component calculates and displays the circular area based on radius and center point data.
+How do I set the center point and radius of a circle in Kendo UI for jQuery Drawing API? Set or provide the geometric definition specifying the circle's center point and radius to control the position, size, and shape of the circle during creation or rendering. Configure the initial spatial parameters defining circle geometry for layout, drawing, or visualization purposes. Enable precise control over circle center coordinates and radius as input when instantiating or constructing a circle element for consistent placement, scaling, or interactive manipulation. Supply or define the core circle shape attributes upfront to influence how the component calculates and displays the circular area based on radius and center point data.
 </div>
 
 #### Example - creating a circle
@@ -49,7 +49,7 @@ The configuration options.
 
 
 <div class="meta-api-description">
-Configure circle shape settings during creation by specifying appearance attributes, styling parameters, visual customization options, and behavior controls within the initialization input or constructor argument. Customize circle element properties such as radius, color, stroke, fill, opacity, and interaction features at the time of instantiation to tailor drawing component circles with precise layout, style, and functional details. Enable or adjust circle configuration dynamically via options provided when building or setting up a shape to influence rendering, event handling, and display characteristics immediately upon construction.
+How to customize circle appearance in Kendo UI Drawing API? Configure circle shape settings during creation by specifying appearance attributes, styling parameters, visual customization options, and behavior controls within the initialization input or constructor argument. Customize circle element properties such as radius, color, stroke, fill, opacity, and interaction features at the time of instantiation to tailor drawing component circles with precise layout, style, and functional details. Enable or adjust circle configuration dynamically via options provided when building or setting up a shape to influence rendering, event handling, and display characteristics immediately upon construction.
 </div>
 
 #### Example - Log in the console the circle options object
@@ -75,7 +75,7 @@ Inherited from [Element.clip](/api/javascript/drawing/element/configuration/clip
 
 
 <div class="meta-api-description">
-Control or configure shape masking, cropping, and boundary constraints on circular drawings by defining clipping paths or masks that limit the visible rendering area. Enable or set complex clip shapes, paths, or region references to restrict drawing to custom boundaries, trim visuals, create intersection-based visibility, or mask certain parts of circle elements. Adjust clipping regions for the circle shape to achieve partial renders, masks, or intricate crop effects, supporting user scenarios involving visible area limitation, shape intersection, and constrained rendering on circular graphical objects.
+How do I restrict the visible area of a circular drawing in Kendo UI for jQuery? Control or configure shape masking, cropping, and boundary constraints on circular drawings by defining clipping paths or masks that limit the visible rendering area. Enable or set complex clip shapes, paths, or region references to restrict drawing to custom boundaries, trim visuals, create intersection-based visibility, or mask certain parts of circle elements. Adjust clipping regions for the circle shape to achieve partial renders, masks, or intricate crop effects, supporting user scenarios involving visible area limitation, shape intersection, and constrained rendering on circular graphical objects.
 </div>
 
 #### Example
@@ -110,7 +110,7 @@ Inherited from [Element.cursor](/api/javascript/drawing/element/configuration/cu
 
 
 <div class="meta-api-description">
-Control and customize the appearance of the mouse pointer when hovering over or interacting with circular shapes in drawing or canvas components by specifying any valid CSS cursor style, enabling developers to change the pointer icon to common states like pointer, crosshair, grab, move, or custom cursor styles for enhanced user interaction and visual feedback on circle elements within graphical interfaces.
+How do I change the cursor shape when hovering over a circular shape in Kendo UI Drawing? Control and customize the appearance of the mouse pointer when hovering over or interacting with circular shapes in drawing or canvas components by specifying any valid CSS cursor style, enabling developers to change the pointer icon to common states like pointer, crosshair, grab, move, or custom cursor styles for enhanced user interaction and visual feedback on circle elements within graphical interfaces.
 </div>
 
 #### Example
@@ -136,7 +136,7 @@ The fill options of the shape.
 
 
 <div class="meta-api-description">
-Configure and customize the fill appearance of a circle shape including solid colors, gradients, patterns, opacity levels, image fills, and other fill styles to control the interior rendering and visual presentation of circular shapes in drawing or graphics components, enabling developers to set, change, or enable various fill options such as color strings, gradient stops, transparency, textures, or image sources to achieve the desired look and visual effects for circles in vector graphics, canvas, or UI elements.
+How can I change the fill color of a circle in Kendo UI for jQuery drawingapi? Configure and customize the fill appearance of a circle shape including solid colors, gradients, patterns, opacity levels, image fills, and other fill styles to control the interior rendering and visual presentation of circular shapes in drawing or graphics components, enabling developers to set, change, or enable various fill options such as color strings, gradient stops, transparency, textures, or image sources to achieve the desired look and visual effects for circles in vector graphics, canvas, or UI elements.
 </div>
 
 #### Example
@@ -165,7 +165,7 @@ Inherited from [Element.opacity](/api/javascript/drawing/element/configuration/o
 
 
 <div class="meta-api-description">
-Adjust the transparency level, alpha value, or visual opacity of a circle shape for rendering effects, enabling control over how see-through, translucent, or fully opaque the circle appears in graphics or UI. Set or configure the alpha channel intensity, fade the circle for layering or highlighting, and manipulate the visibility or blending of the circular element in custom drawings, animations, or user interface components. Modify the circle's transparency to achieve desired visual emphasis, background blending, or subtlety in design, using standard opacity semantics consistent with base elements supporting alpha transparency, translucency, and rendering behavior.
+How do I adjust the transparency of a circle shape in Kendo UI for jQuery? Adjust the transparency level, alpha value, or visual opacity of a circle shape for rendering effects, enabling control over how see-through, translucent, or fully opaque the circle appears in graphics or UI. Set or configure the alpha channel intensity, fade the circle for layering or highlighting, and manipulate the visibility or blending of the circular element in custom drawings, animations, or user interface components. Modify the circle's transparency to achieve desired visual emphasis, background blending, or subtlety in design, using standard opacity semantics consistent with base elements supporting alpha transparency, translucency, and rendering behavior.
 </div>
 
 #### Example
@@ -191,7 +191,7 @@ The stroke options of the shape.
 
 
 <div class="meta-api-description">
-Customize the circle's border by setting stroke options including color, thickness, transparency, dash styles, and other outline attributes to control the circle’s edge appearance, border styling, line patterns, stroke opacity, and width for precise rendering, enabling developers to adjust how the circle's outline looks in drawings, shapes, or vector graphic components.
+How do I customize the border of a circle in Kendo UI drawingapi? Customize the circle's border by setting stroke options including color, thickness, transparency, dash styles, and other outline attributes to control the circle’s edge appearance, border styling, line patterns, stroke opacity, and width for precise rendering, enabling developers to adjust how the circle's outline looks in drawings, shapes, or vector graphic components.
 </div>
 
 #### Example
@@ -221,7 +221,7 @@ The tooltip options of the shape.
 
 
 <div class="meta-api-description">
-Control and customize tooltip content, display behavior, positioning, formatting, templates, and event handling for circle shapes in drawing components, enabling you to set visibility triggers, update tooltip text dynamically, configure show and hide callbacks, adjust placement relative to the shape, and tailor appearance or interactivity for circle tooltips during initialization or runtime.
+How to customize tooltip content for circle shapes in Kendo UI drawing component? Control and customize tooltip content, display behavior, positioning, formatting, templates, and event handling for circle shapes in drawing components, enabling you to set visibility triggers, update tooltip text dynamically, configure show and hide callbacks, adjust placement relative to the shape, and tailor appearance or interactivity for circle tooltips during initialization or runtime.
 </div>
 
 #### Example
@@ -251,7 +251,7 @@ Inherited from [Element.transform](/api/javascript/drawing/element/configuration
 
 
 <div class="meta-api-description">
-Control the geometric transformation of a circle shape by configuring translation, rotation, scaling, shearing, or applying a custom transformation matrix to adjust position, orientation, size, or skew during rendering. Enable dynamic manipulation of the circle’s spatial properties through transformation settings such as translate, rotate, scale, or shear, or use matrix input for complex composite transformations, supporting initialization and runtime updates for flexible visual adjustments and animation effects related to circle placement and shape modification.
+How can I adjust the position and size of a circle in Kendo UI for jQuery's Drawing API? Control the geometric transformation of a circle shape by configuring translation, rotation, scaling, shearing, or applying a custom transformation matrix to adjust position, orientation, size, or skew during rendering. Enable dynamic manipulation of the circle’s spatial properties through transformation settings such as translate, rotate, scale, or shear, or use matrix input for complex composite transformations, supporting initialization and runtime updates for flexible visual adjustments and animation effects related to circle placement and shape modification.
 </div>
 
 #### Example
@@ -282,7 +282,7 @@ Inherited from [Element.visible](/api/javascript/drawing/element/configuration/v
 
 
 <div class="meta-api-description">
-Control the visibility and rendering of a circle shape within a drawing or graphics component by toggling its display on or off. Enable or disable whether the circle appears on the canvas, set visibility flags to show or hide the shape dynamically, manage rendering states for graphical elements, and configure display settings that determine if the circle is drawn or remains hidden in the user interface. Adjust visibility attributes to control drawing presence, visibility toggling, and graphical element rendering behavior in visual components or custom shapes.
+How do I control the visibility of a circle shape in Kendo UI drawingapi? Control the visibility and rendering of a circle shape within a drawing or graphics component by toggling its display on or off. Enable or disable whether the circle appears on the canvas, set visibility flags to show or hide the shape dynamically, manage rendering states for graphical elements, and configure display settings that determine if the circle is drawn or remains hidden in the user interface. Adjust visibility attributes to control drawing presence, visibility toggling, and graphical element rendering behavior in visual components or custom shapes.
 </div>
 
 #### Example
@@ -316,7 +316,7 @@ Inherited from [Element.bbox](/api/javascript/drawing/element/methods/bbox)
 
 
 <div class="meta-api-description">
-Retrieve the bounding box or enclosing rectangle for a transformed circle shape including all applied changes like translation, rotation, scaling, skewing, and other geometric transformations to get the exact axis-aligned coordinates for layout, collision detection, hit-testing, or exporting precise geometry boundaries after transformations are applied. This method provides the calculated outer bounds of the transformed circle element to help with spatial calculations, overlap checks, rendering adjustments, and accurate frame or container sizing in graphical or UI contexts.
+How to get the exact bounding box of a transformed circle in Kendo UI drawingapi? Retrieve the bounding box or enclosing rectangle for a transformed circle shape including all applied changes like translation, rotation, scaling, skewing, and other geometric transformations to get the exact axis-aligned coordinates for layout, collision detection, hit-testing, or exporting precise geometry boundaries after transformations are applied. This method provides the calculated outer bounds of the transformed circle element to help with spatial calculations, overlap checks, rendering adjustments, and accurate frame or container sizing in graphical or UI contexts.
 </div>
 
 #### Returns
@@ -349,7 +349,7 @@ Inherited from [Element.clip](/api/javascript/drawing/element/methods/clip)
 
 
 <div class="meta-api-description">
-Configure or retrieve the clipping region or mask applied to a circular drawing element to control which parts of the shape are visible or hidden when rendered, enabling setting, updating, or querying the clip area with custom SVG clipPath elements or other graphic masks for precise visibility control, boundary definitions, masking effects, and element visibility in vector graphics or drawing contexts.
+How to control which parts of a circular drawing element in Kendo UI are visible or hidden? Configure or retrieve the clipping region or mask applied to a circular drawing element to control which parts of the shape are visible or hidden when rendered, enabling setting, updating, or querying the clip area with custom SVG clipPath elements or other graphic masks for precise visibility control, boundary definitions, masking effects, and element visibility in vector graphics or drawing contexts.
 </div>
 
 #### Parameters
@@ -396,7 +396,7 @@ Inherited from [Element.clippedBBox](/api/javascript/drawing/element/methods/cli
 
 
 <div class="meta-api-description">
-Calculate or retrieve the visible bounding rectangle or box of a circle shape after applying all transformations like scale, rotation, translation, or custom matrix transforms and any clipping masks or paths, enabling precise measurement, layout positioning, collision detection, hit testing, or exporting accurate element boundaries in drawing or graphics workflows.
+How do I get the visible bounding box of a circle in Kendo UI for jQuery after applying transformations? Calculate or retrieve the visible bounding rectangle or box of a circle shape after applying all transformations like scale, rotation, translation, or custom matrix transforms and any clipping masks or paths, enabling precise measurement, layout positioning, collision detection, hit testing, or exporting accurate element boundaries in drawing or graphics workflows.
 </div>
 
 #### Returns
@@ -435,7 +435,7 @@ Returns true if the shape contains the specified point.
 
 
 <div class="meta-api-description">
-Check if a given coordinate, position, or point lies within a circular shape, detect if a click, tap, touch, pointer location, or collision intersects the circle area, determine inclusion of specific x and y values inside circle boundaries, perform hit testing or collision detection on circular drawings or shapes, verify whether input events fall inside or outside the circle region for interactive elements, and enable accurate response to user interactions like clicks, drags, touches, or collision overlaps by testing point containment within a circle.
+How do I check if a point is within a circular shape in Kendo UI for jQuery? Check if a given coordinate, position, or point lies within a circular shape, detect if a click, tap, touch, pointer location, or collision intersects the circle area, determine inclusion of specific x and y values inside circle boundaries, perform hit testing or collision detection on circular drawings or shapes, verify whether input events fall inside or outside the circle region for interactive elements, and enable accurate response to user interactions like clicks, drags, touches, or collision overlaps by testing point containment within a circle.
 </div>
 
 #### Parameters
@@ -472,7 +472,7 @@ Gets or sets the circle geometry.
 
 
 <div class="meta-api-description">
-Retrieve or set the circle’s geometric data to inspect, modify, or update its shape programmatically, including configuring radius, center coordinates, boundary definitions, or geometric parameters used for rendering, collision detection, hit-testing, transformation, and serialization within the drawing component. Access current shape properties or assign new geometry objects to adjust the circle form dynamically, control spatial characteristics, and enable precise manipulation of the circle’s outline, size, and position through code.
+How do I access and modify the geometric properties of a circle in Kendo UI's drawing component? Retrieve or set the circle’s geometric data to inspect, modify, or update its shape programmatically, including configuring radius, center coordinates, boundary definitions, or geometric parameters used for rendering, collision detection, hit-testing, transformation, and serialization within the drawing component. Access current shape properties or assign new geometry objects to adjust the circle form dynamically, control spatial characteristics, and enable precise manipulation of the circle’s outline, size, and position through code.
 </div>
 
 #### Parameters
@@ -513,7 +513,7 @@ Sets the shape [fill](/api/javascript/drawing/circle/configuration/fill).
 
 
 <div class="meta-api-description">
-Set or update a circle shape’s fill style by applying solid colors, gradients, opacity levels, patterns, or image fills to customize the visual appearance dynamically. Configure and control circle fill properties with options for gradient stops, transparency, color formats, and texture overlays to achieve various design effects in real time. Enable dynamic fill changes on circular shapes for visual styling, color updates, gradient transitions, or pattern fills during runtime to match UI themes or animations.
+How can I dynamically change the fill style of a circle in Kendo UI for jQuery? Set or update a circle shape’s fill style by applying solid colors, gradients, opacity levels, patterns, or image fills to customize the visual appearance dynamically. Configure and control circle fill properties with options for gradient stops, transparency, color formats, and texture overlays to achieve various design effects in real time. Enable dynamic fill changes on circular shapes for visual styling, color updates, gradient transitions, or pattern fills during runtime to match UI themes or animations.
 </div>
 
 #### Parameters
@@ -558,7 +558,7 @@ If set, the stroke and fill opacity will be multiplied by the element opacity.
 
 
 <div class="meta-api-description">
-Adjust or retrieve the transparency level of a circular drawing element by configuring its opacity or alpha value to make the shape more transparent or fully opaque, with the ability to programmatically control visual clarity and see-through effects, affecting both stroke and fill visibility by modulating their opacity intensity; useful for developers seeking to set, modify, or animate transparency, blending levels, or alpha channels for circle graphics in various rendering or UI scenarios.
+How to set transparency level of circular drawing element in Kendo UI for jQuery? Adjust or retrieve the transparency level of a circular drawing element by configuring its opacity or alpha value to make the shape more transparent or fully opaque, with the ability to programmatically control visual clarity and see-through effects, affecting both stroke and fill visibility by modulating their opacity intensity; useful for developers seeking to set, modify, or animate transparency, blending levels, or alpha channels for circle graphics in various rendering or UI scenarios.
 </div>
 
 #### Parameters
@@ -598,7 +598,7 @@ Sets the shape [stroke](/api/javascript/drawing/circle/configuration/stroke).
 
 
 <div class="meta-api-description">
-Modify or update the outline style of a circle shape dynamically by configuring stroke color, thickness, opacity, dash patterns, line caps, joins, and other border attributes to customize the circle's border appearance in real-time, enabling developers to set or change the circle’s border look, style, or shape outline instantly with detailed control over stroke properties, including solid or dashed lines and transparency adjustments.
+How do I change the border color of a circle shape in Kendo UI for jQuery? Modify or update the outline style of a circle shape dynamically by configuring stroke color, thickness, opacity, dash patterns, line caps, joins, and other border attributes to customize the circle's border appearance in real-time, enabling developers to set or change the circle’s border look, style, or shape outline instantly with detailed control over stroke properties, including solid or dashed lines and transparency adjustments.
 </div>
 
 #### Parameters
@@ -644,7 +644,7 @@ Inherited from [Element.transform](/api/javascript/drawing/element/methods/trans
 
 
 <div class="meta-api-description">
-Accessing or modifying the geometric transformations such as translation, rotation, scaling, or applying a custom transformation matrix on a graphic element is done by setting or retrieving its transform state; developers often seek to control or read the current spatial adjustments, update positioning, orient the shape differently, scale it dynamically, or override with explicit transformation matrices for precise rendering effects or animations, involving commands to get current transformation details or to apply new transform values programmatically to change the display or interaction behavior of visual components.
+How to apply custom transformation matrix to Kendo UI DrawingCircle element? Accessing or modifying the geometric transformations such as translation, rotation, scaling, or applying a custom transformation matrix on a graphic element is done by setting or retrieving its transform state; developers often seek to control or read the current spatial adjustments, update positioning, orient the shape differently, scale it dynamically, or override with explicit transformation matrices for precise rendering effects or animations, involving commands to get current transformation details or to apply new transform values programmatically to change the display or interaction behavior of visual components.
 </div>
 
 #### Parameters
@@ -689,7 +689,7 @@ Inherited from [Element.visible](/api/javascript/drawing/element/methods/visible
 
 
 <div class="meta-api-description">
-Control the visibility state of a circle shape within a drawing or graphics component by retrieving, toggling, enabling, disabling, showing, or hiding its display on the screen, programmatically managing whether the circle element is rendered or not, adjusting visibility settings, and dynamically setting or querying if the circle is visible in the current view or UI layer to modify rendering behavior and user interface appearance during runtime.
+How do I toggle the visibility of a circle shape in Kendo UI drawing? Control the visibility state of a circle shape within a drawing or graphics component by retrieving, toggling, enabling, disabling, showing, or hiding its display on the screen, programmatically managing whether the circle element is rendered or not, adjusting visibility settings, and dynamically setting or querying if the circle is visible in the current view or UI layer to modify rendering behavior and user interface appearance during runtime.
 </div>
 
 #### Parameters

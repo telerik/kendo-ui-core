@@ -16,7 +16,7 @@ The constructor of the filter.
 
 
 <div class="meta-api-description">
-Initialize and create a dynamic filtering mechanism for spreadsheet data by configuring and setting up filter criteria, rules, or conditions dynamically within a spreadsheet environment; enable, instantiate, or set up the filter component to apply, evaluate, or modify data filtering based on custom options, parameters, or configurations that govern how dynamic filters respond to spreadsheet content changes or user interactions, effectively managing filter state, behavior, and criteria programmatically for advanced data querying and manipulation scenarios.
+How do I initialize dynamic filtering in Kendo UI for jQuery spreadsheet component? Initialize and create a dynamic filtering mechanism for spreadsheet data by configuring and setting up filter criteria, rules, or conditions dynamically within a spreadsheet environment; enable, instantiate, or set up the filter component to apply, evaluate, or modify data filtering based on custom options, parameters, or configurations that govern how dynamic filters respond to spreadsheet content changes or user interactions, effectively managing filter state, behavior, and criteria programmatically for advanced data querying and manipulation scenarios.
 </div>
 
 #### Parameters

@@ -30,7 +30,7 @@ The configuration options.
 
 
 <div class="meta-api-description">
-Set or customize the initial configuration of a drawing path by specifying geometry, drawing commands, stroke styles, fill colors, opacity levels, transformations, custom attributes, and behavior settings during the creation of a vector or canvas drawing component. This option enables control over path initialization parameters to define appearance, shape, visual effects, and interactive properties right at instantiation, supporting use cases like setting line styles, applying transformations, configuring fills and strokes, and embedding custom metadata or behavior controls within newly created drawing elements.
+How do I customize the initial configuration of a drawing path in Kendo UI for jQuery? Set or customize the initial configuration of a drawing path by specifying geometry, drawing commands, stroke styles, fill colors, opacity levels, transformations, custom attributes, and behavior settings during the creation of a vector or canvas drawing component. This option enables control over path initialization parameters to define appearance, shape, visual effects, and interactive properties right at instantiation, supporting use cases like setting line styles, applying transformations, configuring fills and strokes, and embedding custom metadata or behavior controls within newly created drawing elements.
 </div>
 
 #### Example - create and draw a path
@@ -69,7 +69,7 @@ Create a curve from the given arc.
 
 
 <div class="meta-api-description">
-Convert arcs into editable or renderable path curves for drawing by generating path segments from arc shapes or parameters, enabling seamless transformation of circular or elliptical arc geometries into vector drawing paths. This conversion supports rendering curved segments derived from arcs, facilitates manipulating arc shapes as path curves, allows editing of arc-based drawings, and enables serialization or modification by translating arc definitions into drawable vector paths within graphics or drawing components. Use this method to create path data that follows arc contours for applications requiring precise control over curved geometry representation and manipulation in vector-based graphics environments.
+How to convert arcs into editable path curves in Kendo UI for jQuery drawingapi? Convert arcs into editable or renderable path curves for drawing by generating path segments from arc shapes or parameters, enabling seamless transformation of circular or elliptical arc geometries into vector drawing paths. This conversion supports rendering curved segments derived from arcs, facilitates manipulating arc shapes as path curves, allows editing of arc-based drawings, and enables serialization or modification by translating arc definitions into drawable vector paths within graphics or drawing components. Use this method to create path data that follows arc contours for applications requiring precise control over curved geometry representation and manipulation in vector-based graphics environments.
 </div>
 
 #### Example
@@ -113,7 +113,7 @@ Create a straight path from the given points.
 
 
 <div class="meta-api-description">
-Generate a path by connecting an ordered list of coordinate points with straight line segments to create polylines or multi-segment shapes, enabling programmatic construction of continuous paths from arrays of x,y positions, configuring drawing sequences that trace points in order, setting up paths from point collections, and building linked line paths for vector graphics or shape outlines.
+How do I create a path in Kendo UI with an array of x,y coordinates? Generate a path by connecting an ordered list of coordinate points with straight line segments to create polylines or multi-segment shapes, enabling programmatic construction of continuous paths from arrays of x,y positions, configuring drawing sequences that trace points in order, setting up paths from point collections, and building linked line paths for vector graphics or shape outlines.
 </div>
 
 #### Example
@@ -158,7 +158,7 @@ Create a straight path from the given rectangle.
 
 
 <div class="meta-api-description">
-Generate a geometric path that outlines a rectangular area by configuring or creating a shape that follows the exact edges of a given rectangle, enabling rendering, hit detection, or exporting by tracing straight line segments along the rectangle’s boundaries; this method or function is used to convert rectangle coordinates or dimensions into a drawable vector path with precise angular corners, supporting use cases like drawing frames, defining clickable regions, or exporting rectangular outlines as shapes.
+How to create a vector path from a rectangle in Kendo UI for jQuery? Generate a geometric path that outlines a rectangular area by configuring or creating a shape that follows the exact edges of a given rectangle, enabling rendering, hit detection, or exporting by tracing straight line segments along the rectangle’s boundaries; this method or function is used to convert rectangle coordinates or dimensions into a drawable vector path with precise angular corners, supporting use cases like drawing frames, defining clickable regions, or exporting rectangular outlines as shapes.
 </div>
 
 #### Example
@@ -202,7 +202,7 @@ Parses a path encoded in [SVG Path Data format](https://www.w3.org/TR/SVG/paths.
 
 
 <div class="meta-api-description">
-Convert or import SVG path strings into drawable vector shapes by parsing SVG Path Data commands such as moveto, lineto, horizontal and vertical lines, cubic and quadratic Bézier curves, smooth curves, arcs, and closepath instructions, enabling you to translate and manipulate complex SVG geometry into rendering commands for shape construction, shape updates, or dynamic path generation within graphics or vector drawing applications.
+How can I convert SVG path strings into drawable shapes in Kendo UI for jQuery? Convert or import SVG path strings into drawable vector shapes by parsing SVG Path Data commands such as moveto, lineto, horizontal and vertical lines, cubic and quadratic Bézier curves, smooth curves, arcs, and closepath instructions, enabling you to translate and manipulate complex SVG geometry into rendering commands for shape construction, shape updates, or dynamic path generation within graphics or vector drawing applications.
 </div>
 
 #### Example - Parse an SVG path
@@ -241,7 +241,7 @@ Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip
 
 
 <div class="meta-api-description">
-Control, define, or set a clipping region, mask, or shape to restrict or constrain the visible area of a drawing path or graphic element, enabling masking effects, clipping boundaries, or partial rendering of shapes by specifying clipping paths or regions, and adjusting how elements are cropped or limited within visual contours or masks for precise rendering control and customized layout visibility.
+How do I set a clipping region for a Kendo UI drawing path? Control, define, or set a clipping region, mask, or shape to restrict or constrain the visible area of a drawing path or graphic element, enabling masking effects, clipping boundaries, or partial rendering of shapes by specifying clipping paths or regions, and adjusting how elements are cropped or limited within visual contours or masks for precise rendering control and customized layout visibility.
 </div>
 
 #### Example
@@ -280,7 +280,7 @@ Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cu
 
 
 <div class="meta-api-description">
-Set or customize the mouse cursor appearance when hovering over a drawing path or graphical element to enhance user interaction, including options like pointer, move, grab, or default cursors, enabling control over hover states, pointer affordances, and user feedback during drag, select, or clickable actions on visual components within a drawing or canvas environment.
+How to change cursor shape when hovering over a drawing path in Kendo UI for jQuery? Set or customize the mouse cursor appearance when hovering over a drawing path or graphical element to enhance user interaction, including options like pointer, move, grab, or default cursors, enabling control over hover states, pointer affordances, and user feedback during drag, select, or clickable actions on visual components within a drawing or canvas environment.
 </div>
 
 #### Example
@@ -308,7 +308,7 @@ The fill options of the shape.
 
 
 <div class="meta-api-description">
-Control and customize the interior appearance of vector shapes by setting fill colors, opacity levels, gradients, and pattern fills; adjust fill styling to define the shape’s solid color, transparent areas, multi-color gradients, or repeated textures, enabling styling configurations at initialization or dynamically to style shapes with defined fill options that affect how enclosed areas render visually within graphic or drawing components.
+How to set different fill colors for vector shapes in Kendo UI DrawingPath? Control and customize the interior appearance of vector shapes by setting fill colors, opacity levels, gradients, and pattern fills; adjust fill styling to define the shape’s solid color, transparent areas, multi-color gradients, or repeated textures, enabling styling configurations at initialization or dynamically to style shapes with defined fill options that affect how enclosed areas render visually within graphic or drawing components.
 </div>
 
 #### Example
@@ -342,7 +342,7 @@ Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-o
 
 
 <div class="meta-api-description">
-Adjust the transparency or visibility of a graphic path by configuring its opacity level, controlling how see-through or solid the drawing appears with values ranging from fully transparent to completely opaque; this setting influences the path's transparency intensity, blending, alpha level, and overall visual prominence in rendering, enabling effects such as fading, dimming, or highlighting specific vector shapes by setting opacity between zero and one.
+How do I set the transparency of a graphic path in Kendo UI for jQuery? Adjust the transparency or visibility of a graphic path by configuring its opacity level, controlling how see-through or solid the drawing appears with values ranging from fully transparent to completely opaque; this setting influences the path's transparency intensity, blending, alpha level, and overall visual prominence in rendering, enabling effects such as fading, dimming, or highlighting specific vector shapes by setting opacity between zero and one.
 </div>
 
 #### Example
@@ -375,7 +375,7 @@ The stroke options of the shape.
 
 
 <div class="meta-api-description">
-Control the outline appearance of a shape by configuring stroke color, thickness, opacity, dash or solid line styles, and other border details to customize how a path’s edge is drawn in vector graphics or drawing components. Adjust and style the shape’s boundary by setting stroke properties like outline color intensity, line width scaling, transparency levels, dashed or continuous line patterns, and edge decorations to achieve specific visual effects. Enable fine-tuning of the path’s border styling including customizable stroke attributes such as color codes, pixel widths, opacity percentages, and stroke dash arrays to modify thickness, style, and visibility of the shape’s contour. Manage the stroke configuration that affects path outlines for creating custom borders, shadows, highlights, or sketches by adjusting relevant graphic parameters related to the perimeter line. Define and tune the graphical outline of vector shapes by manipulating stroke settings to set precise color fills, weight dimensions, opacity thresholds, and repeated dash sequences for enhanced visual presentation in drawings or UI elements.
+How do I customize the stroke properties of a shape in Kendo UI for jQuery's DrawingPath component? Control the outline appearance of a shape by configuring stroke color, thickness, opacity, dash or solid line styles, and other border details to customize how a path’s edge is drawn in vector graphics or drawing components. Adjust and style the shape’s boundary by setting stroke properties like outline color intensity, line width scaling, transparency levels, dashed or continuous line patterns, and edge decorations to achieve specific visual effects. Enable fine-tuning of the path’s border styling including customizable stroke attributes such as color codes, pixel widths, opacity percentages, and stroke dash arrays to modify thickness, style, and visibility of the shape’s contour. Manage the stroke configuration that affects path outlines for creating custom borders, shadows, highlights, or sketches by adjusting relevant graphic parameters related to the perimeter line. Define and tune the graphical outline of vector shapes by manipulating stroke settings to set precise color fills, weight dimensions, opacity thresholds, and repeated dash sequences for enhanced visual presentation in drawings or UI elements.
 </div>
 
 #### Example
@@ -408,7 +408,7 @@ The tooltip options of the shape.
 
 
 <div class="meta-api-description">
-Customize hover text, tooltip content, popups, and tooltip behavior for vector paths or shapes, controlling display options such as custom labels, rich text, templates, positioning on hover or focus, appearance styling, and show or hide triggers within drawing components or graphical elements, enabling configuration of interactive informational overlays that appear when users mouse over or tap on drawn paths or shapes.
+How to customize tooltip for a vector path in Kendo UI DrawingPath? Customize hover text, tooltip content, popups, and tooltip behavior for vector paths or shapes, controlling display options such as custom labels, rich text, templates, positioning on hover or focus, appearance styling, and show or hide triggers within drawing components or graphical elements, enabling configuration of interactive informational overlays that appear when users mouse over or tap on drawn paths or shapes.
 </div>
 
 #### Example
@@ -439,7 +439,7 @@ Inherited from [Element.transform](/api/javascript/drawing/element#configuration
 
 
 <div class="meta-api-description">
-Adjust, set, or configure geometric modifications like translation, rotation, scaling, skewing, or matrix-based transforms to alter a vector path’s position, orientation, size, or shape within a drawing or graphical component. Enable movement shifts, angle rotations, resizing, distortion, or combined matrix transformation controls for path elements, supporting initialization settings and runtime updates to manage layout, alignment, or visual adjustments in graphic rendering and UI vector manipulation contexts.
+How to apply transformations to a vector path in Kendo UI for jQuery drawingapi? Adjust, set, or configure geometric modifications like translation, rotation, scaling, skewing, or matrix-based transforms to alter a vector path’s position, orientation, size, or shape within a drawing or graphical component. Enable movement shifts, angle rotations, resizing, distortion, or combined matrix transformation controls for path elements, supporting initialization settings and runtime updates to manage layout, alignment, or visual adjustments in graphic rendering and UI vector manipulation contexts.
 </div>
 
 #### Example
@@ -479,7 +479,7 @@ Inherited from [Element.visible](/api/javascript/drawing/element#configuration-v
 
 
 <div class="meta-api-description">
-Control the display status of a drawing path by toggling its visibility to show or hide it, enabling or disabling rendering on the canvas and determining whether the path is interactive for hit-testing and affects layout calculations. Adjust the visibility flag to manage the presence of the graphical element in the user interface, control whether it is drawn or excluded during rendering cycles, and configure its participation in event detection or spatial arrangement, supporting use cases for conditional rendering, dynamic UI updates, layer management, and interactive element control.
+How do I control the visibility of a drawing path in Kendo UI for jQuery? Control the display status of a drawing path by toggling its visibility to show or hide it, enabling or disabling rendering on the canvas and determining whether the path is interactive for hit-testing and affects layout calculations. Adjust the visibility flag to manage the presence of the graphical element in the user interface, control whether it is drawn or excluded during rendering cycles, and configure its participation in event detection or spatial arrangement, supporting use cases for conditional rendering, dynamic UI updates, layer management, and interactive element control.
 </div>
 
 #### Example
@@ -520,7 +520,7 @@ A collection of the path [segments](/api/javascript/drawing/segment).
 
 
 <div class="meta-api-description">
-Manipulate and control vector shapes by accessing and modifying the collection of path segments within a drawing component, enabling you to dynamically read, iterate through, add, remove, reorder, or update individual geometric segments to alter the shape, structure, or geometry of the path during runtime or after initialization. This supports tasks like editing vector outlines, customizing shapes programmatically, managing segment sequences, and adjusting path contours for real-time drawing updates, shape transformations, or interactive graphic modifications.
+How can I dynamically add new segments to an existing drawing path in Kendo UI for jQuery? Manipulate and control vector shapes by accessing and modifying the collection of path segments within a drawing component, enabling you to dynamically read, iterate through, add, remove, reorder, or update individual geometric segments to alter the shape, structure, or geometry of the path during runtime or after initialization. This supports tasks like editing vector outlines, customizing shapes programmatically, managing segment sequences, and adjusting path contours for real-time drawing updates, shape transformations, or interactive graphic modifications.
 </div>
 
 #### Example
@@ -554,7 +554,7 @@ Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
 
 
 <div class="meta-api-description">
-Calculate or retrieve the axis-aligned bounding rectangle that fully contains a shape or path after all transformations like translation, rotation, scaling, and skewing are applied, enabling measurement of the visual dimensions and position of vector graphics elements for purposes such as hit-testing, collision detection, clipping regions, layout alignment, exporting geometry data, or determining rendered size and coordinates in a transformed coordinate space.
+How to get bounding box of transformed vector graphics in Kendo UI? Calculate or retrieve the axis-aligned bounding rectangle that fully contains a shape or path after all transformations like translation, rotation, scaling, and skewing are applied, enabling measurement of the visual dimensions and position of vector graphics elements for purposes such as hit-testing, collision detection, clipping regions, layout alignment, exporting geometry data, or determining rendered size and coordinates in a transformed coordinate space.
 </div>
 
 #### Example
@@ -588,7 +588,7 @@ Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
 
 
 <div class="meta-api-description">
-Configure, apply, retrieve, update, or remove clipping masks and clip paths to control element rendering boundaries by setting or getting shape-based clip regions that constrain visual output to specified paths, enabling precise clipping behavior for graphical elements, mask adjustments, path-based rendering limits, clip region management, or inspecting current clipping states in vector graphics or drawing contexts.
+How do I set up clipping in Kendo UI for jQuery's drawingapi? Configure, apply, retrieve, update, or remove clipping masks and clip paths to control element rendering boundaries by setting or getting shape-based clip regions that constrain visual output to specified paths, enabling precise clipping behavior for graphical elements, mask adjustments, path-based rendering limits, clip region management, or inspecting current clipping states in vector graphics or drawing contexts.
 </div>
 
 #### Example
@@ -633,7 +633,7 @@ Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-cli
 
 
 <div class="meta-api-description">
-Retrieve the final visible bounding rectangle of a path after applying all clipping regions and transformations to determine the exact on-screen area it occupies, enabling calculations for hit testing, collision detection, layout positioning, rendering boundaries, or graphic export dimensions. This method helps identify precise clipped bounds of vector shapes for interactive elements, visual overlays, or spatial computations in graphics programming, facilitating accurate measurement and control of the displayed drawable region adjusted by any clipping masks or coordinate changes.
+How to get the visible bounding rectangle of a path in Kendo UI for jQuery after applying clipping regions? Retrieve the final visible bounding rectangle of a path after applying all clipping regions and transformations to determine the exact on-screen area it occupies, enabling calculations for hit testing, collision detection, layout positioning, rendering boundaries, or graphic export dimensions. This method helps identify precise clipped bounds of vector shapes for interactive elements, visual overlays, or spatial computations in graphics programming, facilitating accurate measurement and control of the displayed drawable region adjusted by any clipping masks or coordinate changes.
 </div>
 
 #### Example
@@ -675,7 +675,7 @@ Closes the path by linking the current end point with the start point.
 
 
 <div class="meta-api-description">
-Close the current vector drawing path by connecting the last point to the first point to create a closed shape essential for filling, hit-testing, stroking, exporting, or performing boolean geometry operations; configure paths to automatically link endpoints with straight segments when missing, finalize open subpaths into closed loops for shape completion, enable shape closure in vector graphics workflows, set path closure for rendering complete filled polygons, and control how open paths become sealed shapes for accurate interactive hit detection and geometric calculations.
+How do I close a vector drawing path in Kendo UI for jQuery to create a filled shape? Close the current vector drawing path by connecting the last point to the first point to create a closed shape essential for filling, hit-testing, stroking, exporting, or performing boolean geometry operations; configure paths to automatically link endpoints with straight segments when missing, finalize open subpaths into closed loops for shape completion, enable shape closure in vector graphics workflows, set path closure for rendering complete filled polygons, and control how open paths become sealed shapes for accurate interactive hit detection and geometric calculations.
 </div>
 
 #### Example - Draw a closed path
@@ -704,7 +704,7 @@ Returns true if the shape contains the specified point.
 
 
 <div class="meta-api-description">
-Check if a specific coordinate or point lies within a shape’s boundaries, enabling hit testing, collision detection, or interactive input recognition such as mouse clicks, touch events, or pointer locations inside graphical paths. This functionality helps identify whether a given position falls inside a vector path, shape area, or drawn contour, supporting use cases like user interaction, selecting or activating visual elements, detecting overlaps with drawn objects, and spatial queries on complex shapes. It can be configured to analyze points against any drawable path or geometry to confirm containment or intersection for interactive graphics, UI elements, or game development hit areas.
+How to check if a point is within a shape's boundaries using Kendo UI drawingapi? Check if a specific coordinate or point lies within a shape’s boundaries, enabling hit testing, collision detection, or interactive input recognition such as mouse clicks, touch events, or pointer locations inside graphical paths. This functionality helps identify whether a given position falls inside a vector path, shape area, or drawn contour, supporting use cases like user interaction, selecting or activating visual elements, detecting overlaps with drawn objects, and spatial queries on complex shapes. It can be configured to analyze points against any drawable path or geometry to confirm containment or intersection for interactive graphics, UI elements, or game development hit areas.
 </div>
 
 #### Example
@@ -752,7 +752,7 @@ A quadratic Bézier curve (with one control point) can be plotted by making the 
 
 
 <div class="meta-api-description">
-Create or extend vector paths by adding smooth cubic Bézier curves defined through two control points and a destination point, enabling detailed shape construction, curved segments, and complex outlines; use this method to draw cubic or approximate quadratic Bézier curves by configuring control handles for intricate path manipulation, custom curve drawing, or precise vector graphics path control within drawing APIs.
+How do I add smooth curved lines to a vector path using the Kendo UI Drawing API? Create or extend vector paths by adding smooth cubic Bézier curves defined through two control points and a destination point, enabling detailed shape construction, curved segments, and complex outlines; use this method to draw cubic or approximate quadratic Bézier curves by configuring control handles for intricate path manipulation, custom curve drawing, or precise vector graphics path control within drawing APIs.
 </div>
 
 #### Example - Draw a curved path
@@ -789,7 +789,7 @@ Sets the shape [fill](/api/javascript/drawing/path#configuration-fill).
 
 
 <div class="meta-api-description">
-Set or update the fill appearance of a shape or path by configuring its fill style, color, pattern, gradient, or opacity; adjust or customize the visual fill properties dynamically or at runtime to control the shape’s interior rendering, apply solid fills, gradient fills, image fills, or transparency settings, and modify how shapes are visually filled in your drawing, shape layer, or vector graphic environment with flexible fill options.
+How do I dynamically change the fill color of a shape in Kendo UI's drawing API? Set or update the fill appearance of a shape or path by configuring its fill style, color, pattern, gradient, or opacity; adjust or customize the visual fill properties dynamically or at runtime to control the shape’s interior rendering, apply solid fills, gradient fills, image fills, or transparency settings, and modify how shapes are visually filled in your drawing, shape layer, or vector graphic environment with flexible fill options.
 </div>
 
 #### Example
@@ -828,7 +828,7 @@ Draws a straight line to the specified absolute coordinates.
 
 
 <div class="meta-api-description">
-Draw or extend vector shapes by adding straight line segments from the current drawing point to specific absolute coordinates, using commands that connect points with x and y values to create linear paths; this method lets developers configure, set, or control precise line segments within a path, enabling construction of complex shapes by linking points sequentially, supporting path updates for further drawing instructions such as moving the cursor, adding curves, arcs, or closing shapes in a vector graphics system.
+How can I use the lineTo method to add straight line segments in Kendo UI for jQuery? Draw or extend vector shapes by adding straight line segments from the current drawing point to specific absolute coordinates, using commands that connect points with x and y values to create linear paths; this method lets developers configure, set, or control precise line segments within a path, enabling construction of complex shapes by linking points sequentially, supporting path updates for further drawing instructions such as moving the cursor, adding curves, arcs, or closing shapes in a vector graphics system.
 </div>
 
 #### Example - Draw a straight path
@@ -868,7 +868,7 @@ Clears all existing segments and moves the starting point to the specified absol
 
 
 <div class="meta-api-description">
-Reset the current shape or path by clearing all previous points and repositioning the starting point to specific absolute coordinates using a function that moves the drawing cursor to a new location defined by x and y values, effectively setting the origin for further drawing commands or segments and enabling control over where the next lines or shapes begin within a graphical canvas or coordinate system.
+How do I reset the current shape in Kendo UI for jQuery's DrawingPath? Reset the current shape or path by clearing all previous points and repositioning the starting point to specific absolute coordinates using a function that moves the drawing cursor to a new location defined by x and y values, effectively setting the origin for further drawing commands or segments and enabling control over where the next lines or shapes begin within a graphical canvas or coordinate system.
 </div>
 
 #### Example - Set the path start coordinates
@@ -912,7 +912,7 @@ If set, the stroke and fill opacity will be multiplied by the element opacity.
 
 
 <div class="meta-api-description">
-Control the transparency level of vector shapes by configuring the opacity to adjust how see-through or solid a drawing path appears when rendering. Retrieve the current transparency value or dynamically change it at runtime to make entire shape outlines and fills more or less transparent, blending stroke and fill opacity with overall element opacity. Enable precise visual layering by setting or getting the opacity value on drawing elements, influencing how rendered graphics combine transparency effects. Adjust, update, or query the alpha level for shape rendering to achieve effects like fading, overlay control, or visibility tuning of path strokes and fills in graphics programming.
+How can I adjust the transparency level of vector shapes in a Kendo UI drawing path? Control the transparency level of vector shapes by configuring the opacity to adjust how see-through or solid a drawing path appears when rendering. Retrieve the current transparency value or dynamically change it at runtime to make entire shape outlines and fills more or less transparent, blending stroke and fill opacity with overall element opacity. Enable precise visual layering by setting or getting the opacity value on drawing elements, influencing how rendered graphics combine transparency effects. Adjust, update, or query the alpha level for shape rendering to achieve effects like fading, overlay control, or visibility tuning of path strokes and fills in graphics programming.
 </div>
 
 #### Example
@@ -958,7 +958,7 @@ Sets the shape [stroke](/api/javascript/drawing/path#configuration-stroke).
 
 
 <div class="meta-api-description">
-Adjust or modify the outline styling of a shape by configuring its stroke color, thickness, dash patterns, or line style, enabling dynamic updates to shape borders and edges; control and set the path’s contour appearance, update stroke properties on existing shapes, customize outline visuals such as solid or dashed lines, and apply new stroke configurations to change how the shape’s perimeter is drawn or rendered after creation.
+How do I change the color of a shape's outline in Kendo UI for jQuery? Adjust or modify the outline styling of a shape by configuring its stroke color, thickness, dash patterns, or line style, enabling dynamic updates to shape borders and edges; control and set the path’s contour appearance, update stroke properties on existing shapes, customize outline visuals such as solid or dashed lines, and apply new stroke configurations to change how the shape’s perimeter is drawn or rendered after creation.
 </div>
 
 #### Example
@@ -1002,7 +1002,7 @@ Inherited from [Element.transform](/api/javascript/drawing/element#methods-trans
 
 
 <div class="meta-api-description">
-Adjust, set, or retrieve the geometric transformation applied to a drawing path including rotation, scaling, translation, or matrix-based manipulation to control positioning and appearance, enabling programmatic updates or animations that affect rendering, hit testing, grouping, and layout of vector shapes; supports reading the current transform or applying new transformation objects or matrices to dynamically modify path geometry and spatial properties within graphical elements.
+How can I rotate a drawing path in Kendo UI for jQuery using the transform method? Adjust, set, or retrieve the geometric transformation applied to a drawing path including rotation, scaling, translation, or matrix-based manipulation to control positioning and appearance, enabling programmatic updates or animations that affect rendering, hit testing, grouping, and layout of vector shapes; supports reading the current transform or applying new transformation objects or matrices to dynamically modify path geometry and spatial properties within graphical elements.
 </div>
 
 #### Example
@@ -1055,7 +1055,7 @@ Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible
 
 
 <div class="meta-api-description">
-Control, toggle, set, or retrieve the visibility status of a drawing path or graphic element on the canvas, including enabling or disabling its display, checking if it is currently shown or hidden, managing its visibility state programmatically, updating rendering based on visible or invisible conditions, and handling show/hide functionality for paths or shapes within drawing surfaces or graphical interfaces.
+How do I toggle the visibility of a drawing path in Kendo UI for jQuery? Control, toggle, set, or retrieve the visibility status of a drawing path or graphic element on the canvas, including enabling or disabling its display, checking if it is currently shown or hidden, managing its visibility state programmatically, updating rendering based on visible or invisible conditions, and handling show/hide functionality for paths or shapes within drawing surfaces or graphical interfaces.
 </div>
 
 #### Example

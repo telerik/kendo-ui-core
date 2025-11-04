@@ -20,7 +20,7 @@ The filters which are applied over the data items. It applies the filter to all 
 
 
 <div class="meta-api-description">
-Control applying search criteria and filtering conditions to hierarchical or tree-structured data sources to display only nodes that match specific filters along with their parent or ancestor nodes up to the root, enabling refined views, filtered results, or subsets based on custom predicates or expressions; supports client-side filtering over loaded data nodes with the option to enable server-side filtering for scalable, dynamic queries, facilitating partial data loading, ancestor tracing, hierarchical filtering, or cascading search within nested collections or multi-level data structures.
+How can I apply filters to hierarchical data in Kendo UI's HierarchicalDataSource? Control applying search criteria and filtering conditions to hierarchical or tree-structured data sources to display only nodes that match specific filters along with their parent or ancestor nodes up to the root, enabling refined views, filtered results, or subsets based on custom predicates or expressions; supports client-side filtering over loaded data nodes with the option to enable server-side filtering for scalable, dynamic queries, facilitating partial data loading, ancestor tracing, hierarchical filtering, or cascading search within nested collections or multi-level data structures.
 </div>
 
 #### Example - set a single filter
@@ -134,7 +134,7 @@ The schema configuration. See the [`DataSource.schema` configuration](/api/frame
 
 
 <div class="meta-api-description">
-Define and customize the structure and format of hierarchical data by setting up schema configurations that control how nested data is parsed, mapped, and transformed; specify model definitions, field mappings, data accessors, total count retrieval, parsing logic, and rules for interpreting complex or tree-like datasets, enabling precise control over data shape, format validation, and extraction of hierarchical relationships to support flexible data binding, loading, and processing in nested data sources.
+How do I customize the structure of hierarchical data in a Kendo UI HierarchicalDataSource? Define and customize the structure and format of hierarchical data by setting up schema configurations that control how nested data is parsed, mapped, and transformed; specify model definitions, field mappings, data accessors, total count retrieval, parsing logic, and rules for interpreting complex or tree-like datasets, enabling precise control over data shape, format validation, and extraction of hierarchical relationships to support flexible data binding, loading, and processing in nested data sources.
 </div>
 
 #### Example
@@ -175,7 +175,7 @@ The data item (model) configuration. See the [`DataSource.schema.model` configur
 
 
 <div class="meta-api-description">
-Configure the structure and organization of hierarchical data items by defining the data model, including field mappings, unique identifiers, default values, and relationships between parent and child nodes to enable tree traversal and manipulation. Set up nested data schemas, specify node properties, manage hierarchical collections, and control how tree-like data is interpreted and iterated, supporting scenarios like defining child nodes, node types, and hierarchical keys within complex datasets for seamless integration with tree data sources. Enable precise control over hierarchical data formats, node schema definitions, and nested data relationships to support dynamic, searchable, and navigable tree data structures for user interfaces or data processing.
+How do I configure the data model for a hierarchical Kendo UI DataSource? Configure the structure and organization of hierarchical data items by defining the data model, including field mappings, unique identifiers, default values, and relationships between parent and child nodes to enable tree traversal and manipulation. Set up nested data schemas, specify node properties, manage hierarchical collections, and control how tree-like data is interpreted and iterated, supporting scenarios like defining child nodes, node types, and hierarchical keys within complex datasets for seamless integration with tree data sources. Enable precise control over hierarchical data formats, node schema definitions, and nested data relationships to support dynamic, searchable, and navigable tree data structures for user interfaces or data processing.
 </div>
 
 #### Example - use a custom model
@@ -222,7 +222,7 @@ Specifies whether the model might have children and might be loaded. Applicable 
 
 
 <div class="meta-api-description">
-Determine if data items contain child nodes by setting or detecting whether records have descendants, enabling control over expandable views, lazy loading, tree structures, and rendering of toggle icons. Configure, define, or query the presence of child elements within hierarchical or nested data models to manage dynamic loading, conditional expansion states, and UI indicators for expandable lists, trees, or menus in data-driven applications.
+How to determine if data items in my Kendo UI hierarchical datasource have child nodes? Determine if data items contain child nodes by setting or detecting whether records have descendants, enabling control over expandable views, lazy loading, tree structures, and rendering of toggle icons. Configure, define, or query the presence of child elements within hierarchical or nested data models to manage dynamic loading, conditional expansion states, and UI indicators for expandable lists, trees, or menus in data-driven applications.
 </div>
 
 #### Example - map the hasChildren field to another field
@@ -304,7 +304,7 @@ For static HierarchicalDataSource (local data), this field may be a `String` and
 
 
 <div class="meta-api-description">
-Configure how child nodes are retrieved, loaded, or linked within hierarchical or tree-structured data by specifying a data source for nested items, either through a DataSource instance, a remote fetch configuration, custom loading logic, or by naming a local field that contains child records; this controls the fetching, binding, and organization of children in remote, static, or dynamic hierarchical datasets while avoiding naming conflicts with reserved terms.
+How do I configure child nodes in my Kendo UI HierarchicalDataSource? Configure how child nodes are retrieved, loaded, or linked within hierarchical or tree-structured data by specifying a data source for nested items, either through a DataSource instance, a remote fetch configuration, custom loading logic, or by naming a local field that contains child records; this controls the fetching, binding, and organization of children in remote, static, or dynamic hierarchical datasets while avoiding naming conflicts with reserved terms.
 </div>
 
 #### Example - specify a children field
@@ -402,7 +402,7 @@ Gets or sets the filter configuration. It applies the filter to all loaded nodes
 
 
 <div class="meta-api-description">
-Configure or apply filters to hierarchical or tree-structured data to display nodes that match specific criteria along with their ancestor nodes up to the root, enabling filtered views that include matching entries and their parent paths within loaded data; control, set, or retrieve filter settings for hierarchical datasets to dynamically search, query, or view nested items based on text, values, or conditions, ensuring contextual parent-child visibility while excluding unloaded nodes from filtering operations.
+How do I apply filters to hierarchical data in Kendo UI for jQuery? Configure or apply filters to hierarchical or tree-structured data to display nodes that match specific criteria along with their ancestor nodes up to the root, enabling filtered views that include matching entries and their parent paths within loaded data; control, set, or retrieve filter settings for hierarchical datasets to dynamically search, query, or view nested items based on text, values, or conditions, ensuring contextual parent-child visibility while excluding unloaded nodes from filtering operations.
 </div>
 
 #### Parameters
@@ -485,7 +485,7 @@ Fires when data is changed. In addition to the [standard `change` event](/api/fr
 
 
 <div class="meta-api-description">
-Detect and respond to updates and modifications in nested or multi-level data collections by capturing change signals emitted during any data alterations, including additions, deletions, or edits within parent or child data layers; enable monitoring hierarchical or tree-structured data changes by subscribing to events that provide detailed context about which child or sub-source triggered the update, allowing developers to track, control, and react to dynamic data changes across nested datasets or complex data hierarchies in real time.
+How can I detect changes in nested data collections with Kendo UI's HierarchicalDataSource? Detect and respond to updates and modifications in nested or multi-level data collections by capturing change signals emitted during any data alterations, including additions, deletions, or edits within parent or child data layers; enable monitoring hierarchical or tree-structured data changes by subscribing to events that provide detailed context about which child or sub-source triggered the update, allowing developers to track, control, and react to dynamic data changes across nested datasets or complex data hierarchies in real time.
 </div>
 
 #### Event Data

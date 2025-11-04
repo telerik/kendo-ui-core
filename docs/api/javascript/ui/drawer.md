@@ -18,7 +18,7 @@ Specifies if the Drawer will be automatically collapsed when an item is clicked.
 
 
 <div class="meta-api-description">
-Control the behavior of a side panel to automatically hide, collapse, or close when a navigation link or menu item is selected, enabling smooth click or touch interactions. Configure whether the navigation drawer or menu panel should shrink, fold, or retract itself after user selection to improve user experience on mobile or desktop interfaces requiring dynamic panel visibility control. Manage settings to enable or disable the automatic hiding or collapsing action triggered by user navigation input, optimizing for responsive design and streamlined navigation workflows.
+How to automatically collapse Kendo UI for jQuery Drawer after navigation link is clicked? Control the behavior of a side panel to automatically hide, collapse, or close when a navigation link or menu item is selected, enabling smooth click or touch interactions. Configure whether the navigation drawer or menu panel should shrink, fold, or retract itself after user selection to improve user experience on mobile or desktop interfaces requiring dynamic panel visibility control. Manage settings to enable or disable the automatic hiding or collapsing action triggered by user navigation input, optimizing for responsive design and streamlined navigation workflows.
 </div>
 
 #### Example
@@ -43,7 +43,7 @@ Specifies if the Drawer will be expanded by default.
 
 
 <div class="meta-api-description">
-Control the initial open or closed state of a side panel, sidebar, or navigation drawer by setting it to expand or collapse when the interface loads. Configure the default visibility, enable the drawer to start opened or closed at initialization, set whether the sidebar or menu is expanded automatically, and manage the default layout by specifying if the panel should be shown or hidden on component startup. Adjust the property to control if the drawer appears expanded by default, ensuring the user interface reflects the desired initial accessibility and navigation display.
+How do I control the initial state of a Kendo UI for jQuery navigation drawer? Control the initial open or closed state of a side panel, sidebar, or navigation drawer by setting it to expand or collapse when the interface loads. Configure the default visibility, enable the drawer to start opened or closed at initialization, set whether the sidebar or menu is expanded automatically, and manage the default layout by specifying if the panel should be shown or hidden on component startup. Adjust the property to control if the drawer appears expanded by default, ensuring the user interface reflects the desired initial accessibility and navigation display.
 </div>
 
 #### Example
@@ -66,7 +66,7 @@ The position of the drawer. Can be `left` (default) or `right`.
 
 
 <div class="meta-api-description">
-Set or configure the side from which a sliding panel, drawer, or sidebar appears, controlling whether it opens, anchors, docks, or slides in from the left or right edge of the screen or container; useful for positioning user interface panels, navigation menus, or overlay components by specifying their entry or attachment side, adjusting placement or alignment to left or right directions to match layout requirements or user preferences.
+How do I set the position of a Kendo UI drawer to open from the left or right side? Set or configure the side from which a sliding panel, drawer, or sidebar appears, controlling whether it opens, anchors, docks, or slides in from the left or right edge of the screen or container; useful for positioning user interface panels, navigation menus, or overlay components by specifying their entry or attachment side, adjusting placement or alignment to left or right directions to match layout requirements or user preferences.
 </div>
 
 #### Example
@@ -91,7 +91,7 @@ Determines how the Kendo UI Drawer will interact with the associated content. Th
 
 
 <div class="meta-api-description">
-Configure how a sliding panel or sidebar interacts with the main content by choosing between overlaying the content with a semi-transparent layer or pushing and resizing the content area to make room for the panel. Control whether the panel appears on top of the existing content with dimming effects or shifts the layout to display alongside the content, affecting the viewport's size and visible space. Enable, set, or adjust the behavior of a side menu, drawer, or sidebar to either float above the page elements with a modal effect or slide in while compressing or repositioning the adjacent content area for responsive and interactive UI layouts. Customize the display mode to determine if the navigation drawer overlaps or shares screen real estate with the main application view, impacting user accessibility and interface responsiveness.
+How does the mode property affect the interaction between the drawer panel and main content in Kendo UI for jQuery? Configure how a sliding panel or sidebar interacts with the main content by choosing between overlaying the content with a semi-transparent layer or pushing and resizing the content area to make room for the panel. Control whether the panel appears on top of the existing content with dimming effects or shifts the layout to display alongside the content, affecting the viewport's size and visible space. Enable, set, or adjust the behavior of a side menu, drawer, or sidebar to either float above the page elements with a modal effect or slide in while compressing or repositioning the adjacent content area for responsive and interactive UI layouts. Customize the display mode to determine if the navigation drawer overlaps or shares screen real estate with the main application view, impacting user accessibility and interface responsiveness.
 </div>
 
 #### Example
@@ -117,7 +117,7 @@ If set to `true` the use could navigate the widget using the keyboard navigation
 
 
 <div class="meta-api-description">
-Control keyboard interaction with the sliding panel by enabling or disabling keyboard-based navigation, allowing users to move focus within the drawer using keys like Tab, arrow keys, or other keyboard inputs; configure, activate, or set keyboard focus control to improve accessibility, support tabbing through elements inside the drawer, and handle keyboard-driven navigation flows within the component, ensuring keyboard users can seamlessly interact with drawer content by toggling navigation capabilities on or off.
+How do I enable keyboard navigation in Kendo UI for jQuery Drawer control? Control keyboard interaction with the sliding panel by enabling or disabling keyboard-based navigation, allowing users to move focus within the drawer using keys like Tab, arrow keys, or other keyboard inputs; configure, activate, or set keyboard focus control to improve accessibility, support tabbing through elements inside the drawer, and handle keyboard-driven navigation flows within the component, ensuring keyboard users can seamlessly interact with drawer content by toggling navigation capabilities on or off.
 </div>
 
 #### Example
@@ -144,7 +144,7 @@ Specifies the drawer's content.
 
 
 <div class="meta-api-description">
-Customize the sliding panel content by defining a template or template function that controls the HTML structure, layout, and dynamic data binding inside the drawer or side menu, enabling replacement of default areas with personalized markup, custom components, or rendering expressions during setup, configuration, or runtime to tailor the appearance and behavior of the drawer content.
+How do I customize the content of the Kendo UI Drawer? Customize the sliding panel content by defining a template or template function that controls the HTML structure, layout, and dynamic data binding inside the drawer or side menu, enabling replacement of default areas with personalized markup, custom components, or rendering expressions during setup, configuration, or runtime to tailor the appearance and behavior of the drawer content.
 </div>
 
 #### Example
@@ -170,7 +170,7 @@ Specifies the minimum height for the drawer in push mode. The overlay mode takes
 
 
 <div class="meta-api-description">
-Set or configure the minimum vertical height constraint to control the smallest size a sliding panel or sidebar occupies on the screen during expanded or partial display in push mode, ensuring consistent layout and smooth transitions while preventing collapse below a set threshold, with override behavior where full screen overlay mode ignores this limit and stretches the panel to fill the entire page height.
+How do I set the minimum height of a Kendo UI Drawer in jQuery? Set or configure the minimum vertical height constraint to control the smallest size a sliding panel or sidebar occupies on the screen during expanded or partial display in push mode, ensuring consistent layout and smooth transitions while preventing collapse below a set threshold, with override behavior where full screen overlay mode ignores this limit and stretches the panel to fill the entire page height.
 </div>
 
 #### Example
@@ -197,7 +197,7 @@ Enables or configures the mini mode for the Kendo UI Drawer. This is a compact v
 
 
 <div class="meta-api-description">
-Control or configure a compact or collapsed sidebar display that minimizes the navigation panel to icons only, enabling space-saving layouts and streamlined user interfaces; toggle or set a minimized drawer view that hides text labels and shows only icons for items, customize how the drawer appears when collapsed, define mini mode behavior with simple true/false settings or detailed object configurations to adjust the appearance and rendering of the minimized navigation panel, enable a slim or condensed sidebar that conserves screen space while maintaining access to key navigation icons.
+How to enable a minimized drawer view in Kendo UI for jQuery? Control or configure a compact or collapsed sidebar display that minimizes the navigation panel to icons only, enabling space-saving layouts and streamlined user interfaces; toggle or set a minimized drawer view that hides text labels and shows only icons for items, customize how the drawer appears when collapsed, define mini mode behavior with simple true/false settings or detailed object configurations to adjust the appearance and rendering of the minimized navigation panel, enable a slim or condensed sidebar that conserves screen space while maintaining access to key navigation icons.
 </div>
 
 #### Example
@@ -222,7 +222,7 @@ Defines a specific width for the Kendo UI Drawer when in mini mode.
 
 
 <div class="meta-api-description">
-Adjust the compact navigation panel width to control how narrow or wide the drawer appears when minimized or collapsed, enabling customization of the sidebar’s slim mode size for responsive designs, mini drawer layouts, or slim navigation bars. Configure or set the minimized panel’s visible width to balance space usage and accessibility, controlling the narrow sidebar width in collapsed, small, or mini mode for responsive user interfaces and compact navigation controls.
+How do I adjust the width of the minimized drawer in Kendo UI for jQuery? Adjust the compact navigation panel width to control how narrow or wide the drawer appears when minimized or collapsed, enabling customization of the sidebar’s slim mode size for responsive designs, mini drawer layouts, or slim navigation bars. Configure or set the minimized panel’s visible width to balance space usage and accessibility, controlling the narrow sidebar width in collapsed, small, or mini mode for responsive user interfaces and compact navigation controls.
 </div>
 
 #### Example
@@ -249,7 +249,7 @@ Defines a specific template for the Kendo UI Drawer when in mini mode.
 
 
 <div class="meta-api-description">
-Customize the collapsed drawer view by specifying custom templates or content to control exactly what markup, layout, and bindings appear when the navigation drawer is minimized or in mini mode, enabling tailored display, alternate icons, compact menus, or simplified interfaces during drawer collapse, with options to configure rendering behavior, override default mini layouts, or set specialized visuals and components for reduced sidebar states.
+How to customize the collapsed view of Kendo UI for jQuery Drawer? Customize the collapsed drawer view by specifying custom templates or content to control exactly what markup, layout, and bindings appear when the navigation drawer is minimized or in mini mode, enabling tailored display, alternate icons, compact menus, or simplified interfaces during drawer collapse, with options to configure rendering behavior, override default mini layouts, or set specialized visuals and components for reduced sidebar states.
 </div>
 
 #### Example
@@ -294,7 +294,7 @@ If set to `false`, swiping the associated content will not activate the drawer. 
 
 
 <div class="meta-api-description">
-Enable or disable the ability to open a side panel or navigation drawer using swipe gestures, controlling whether users can reveal the drawer by swiping from the screen edge or within the app view. Configure gesture recognition for opening the drawer, manage swipe interactions to prevent accidental activation, and handle platform-specific behaviors like side-swipe navigation on iOS Safari or other touch-enabled browsers. Adjust settings to require swipes from specific areas or completely disable swipe-to-open functionality to control how and when the drawer becomes visible, ensuring consistent user experience across devices and interaction patterns.
+How to disable swipe-to-open navigation drawer in Kendo UI for jQuery? Enable or disable the ability to open a side panel or navigation drawer using swipe gestures, controlling whether users can reveal the drawer by swiping from the screen edge or within the app view. Configure gesture recognition for opening the drawer, manage swipe interactions to prevent accidental activation, and handle platform-specific behaviors like side-swipe navigation on iOS Safari or other touch-enabled browsers. Adjust settings to require swipes from specific areas or completely disable swipe-to-open functionality to control how and when the drawer becomes visible, ensuring consistent user experience across devices and interaction patterns.
 </div>
 
 #### Example
@@ -319,7 +319,7 @@ Defines a specific width for the Kendo UI Drawer when expanded.
 
 
 <div class="meta-api-description">
-Adjust or configure the expanded size, width, or overall dimension of a sliding panel or sidebar to control layout and spacing in user interfaces, enabling customization of the panel’s visual width, setting fixed or specific widths, modifying the expanded drawer size, resizing side menus or navigation drawers, managing how wide the drawer appears when open, and tailoring the horizontal space the panel occupies to fit design or UI requirements.
+How do I set a fixed width for a Kendo UI Drawer? Adjust or configure the expanded size, width, or overall dimension of a sliding panel or sidebar to control layout and spacing in user interfaces, enabling customization of the panel’s visual width, setting fixed or specific widths, modifying the expanded drawer size, resizing side menus or navigation drawers, managing how wide the drawer appears when open, and tailoring the horizontal space the panel occupies to fit design or UI requirements.
 </div>
 
 #### Example
@@ -348,7 +348,7 @@ Prepares the **Drawer** for safe removal from DOM. Detaches all event handlers a
 
 
 <div class="meta-api-description">
-Remove or clean up a sliding panel or menu component by detaching event listeners, clearing internal data and references, and properly disposing of nested or child UI components to prevent memory leaks and lingering handlers without deleting the element from the page structure. Handle teardown, disable, or reset interactive sidebar elements safely by releasing associated events, cleaning stored metadata, and invoking destruction routines on embedded widgets, ensuring efficient resource management and avoiding residual bindings while keeping the DOM intact.
+What happens when I call the destroy method on a Kendo UI Drawer component? Remove or clean up a sliding panel or menu component by detaching event listeners, clearing internal data and references, and properly disposing of nested or child UI components to prevent memory leaks and lingering handlers without deleting the element from the page structure. Handle teardown, disable, or reset interactive sidebar elements safely by releasing associated events, cleaning stored metadata, and invoking destruction routines on embedded widgets, ensuring efficient resource management and avoiding residual bindings while keeping the DOM intact.
 </div>
 
 #### Example
@@ -377,7 +377,7 @@ Hide the Drawer
 
 
 <div class="meta-api-description">
-Programmatically close, collapse, or hide a side panel or overlay menu to control its visibility dynamically, including toggling a drawer UI component after setup in response to navigation events, user interactions, or adaptive/responsive layout changes. Enable developers to set, trigger, or manage the hidden state of slide-out panels or menus on demand, allowing automatic or manual concealment of sidebar panels through code commands for user interface control and state transitions.
+How do I programmatically hide a Kendo UI Drawer component? Programmatically close, collapse, or hide a side panel or overlay menu to control its visibility dynamically, including toggling a drawer UI component after setup in response to navigation events, user interactions, or adaptive/responsive layout changes. Enable developers to set, trigger, or manage the hidden state of slide-out panels or menus on demand, allowing automatic or manual concealment of sidebar panels through code commands for user interface control and state transitions.
 </div>
 
 #### Example
@@ -410,7 +410,7 @@ Show the Drawer
 
 
 <div class="meta-api-description">
-Trigger the drawer to open or slide into view programmatically by invoking a function that makes the drawer visible, initiates its configured animations, positioning, sliding mode, or expansion behavior, and activates any linked open events or callbacks; enable or set drawer visibility dynamically from code to control its appearance on demand after initialization, supporting use cases like toggling, showing, or programmatically expanding side panels, navigation drawers, or overlay menus.
+How can I programmatically show a Kendo UI drawer? Trigger the drawer to open or slide into view programmatically by invoking a function that makes the drawer visible, initiates its configured animations, positioning, sliding mode, or expansion behavior, and activates any linked open events or callbacks; enable or set drawer visibility dynamically from code to control its appearance on demand after initialization, supporting use cases like toggling, showing, or programmatically expanding side panels, navigation drawers, or overlay menus.
 </div>
 
 #### Example
@@ -446,7 +446,7 @@ Fired when the Kendo UI Drawer is about to be hidden. The event can be prevented
 
 
 <div class="meta-api-description">
-Detect or intercept the moment just before a sliding panel, sidebar, or drawer UI element closes or hides, enabling execution of custom logic, cancellation, or prevention of the hide or close action by listening for or handling an event triggered prior to the component disappearing or collapsing. This event allows developers to control, stop, block, or abort the closing transition based on conditions, user input, or state, providing hooks for validation, prompts, or cleanup before the drawer or overlay vanishes from view.
+How can I prevent a Kendo UI for jQuery Drawer from hiding programmatically? Detect or intercept the moment just before a sliding panel, sidebar, or drawer UI element closes or hides, enabling execution of custom logic, cancellation, or prevention of the hide or close action by listening for or handling an event triggered prior to the component disappearing or collapsing. This event allows developers to control, stop, block, or abort the closing transition based on conditions, user input, or state, providing hooks for validation, prompts, or cleanup before the drawer or overlay vanishes from view.
 </div>
 
 #### Example
@@ -481,7 +481,7 @@ Fires before the Kendo UI Drawer is revealed. The event can be prevented by call
 
 
 <div class="meta-api-description">
-Intercept or control the process of opening a sidebar or slide-out panel by handling events triggered just before it becomes visible, enabling you to run validation checks, execute asynchronous logic, enforce permissions, modify component state, or block automatic opening through event cancellation techniques, preventing the panel from revealing until certain conditions are met, such as user authentication, feature toggles, or dynamic validations before displaying the drawer interface.
+How to prevent Kendo UI Drawer from showing until user is authenticated? Intercept or control the process of opening a sidebar or slide-out panel by handling events triggered just before it becomes visible, enabling you to run validation checks, execute asynchronous logic, enforce permissions, modify component state, or block automatic opening through event cancellation techniques, preventing the panel from revealing until certain conditions are met, such as user authentication, feature toggles, or dynamic validations before displaying the drawer interface.
 </div>
 
 #### Example
@@ -509,7 +509,7 @@ Fires when user clicks on item from the Kendo UI Drawer.
 
 
 <div class="meta-api-description">
-Detect and respond to user clicks on navigation or menu items within a sidebar or drawer interface by capturing item selection events, enabling custom logic execution, application state updates, route navigation, or prevention of default actions when an item is tapped or pressed. This interaction event delivers detailed information about the selected menu entry and the original click event, supporting access to item metadata and DOM event properties for tailored handling of drawer menu actions, item activation callbacks, or intercepting clicks for conditional behaviors in interfaces with slide-out panels or navigation drawers.
+How to prevent default action when an item is clicked in a Kendo UI Drawer? Detect and respond to user clicks on navigation or menu items within a sidebar or drawer interface by capturing item selection events, enabling custom logic execution, application state updates, route navigation, or prevention of default actions when an item is tapped or pressed. This interaction event delivers detailed information about the selected menu entry and the original click event, supporting access to item metadata and DOM event properties for tailored handling of drawer menu actions, item activation callbacks, or intercepting clicks for conditional behaviors in interfaces with slide-out panels or navigation drawers.
 </div>
 
 #### Example
@@ -540,7 +540,7 @@ Holds information about the current state of the Drawer. If it is currently open
 
 
 <div class="meta-api-description">
-Determine if the sidebar panel or sliding drawer is currently open or closed, track its visibility state as a boolean toggle, monitor and respond to changes in drawer display status, check whether the navigation or options drawer is shown or hidden at runtime, access and observe the drawer’s open state to control UI behavior, detect when to render or hide content based on the drawer being active or inactive, enable conditional logic driven by whether the drawer is expanded or collapsed, read real-time visibility flags for side menus or panel overlays, and integrate state checks for toggling interface elements dependent on drawer presence.
+How to check if Kendo UI Drawer is currently open in jQuery? Determine if the sidebar panel or sliding drawer is currently open or closed, track its visibility state as a boolean toggle, monitor and respond to changes in drawer display status, check whether the navigation or options drawer is shown or hidden at runtime, access and observe the drawer’s open state to control UI behavior, detect when to render or hide content based on the drawer being active or inactive, enable conditional logic driven by whether the drawer is expanded or collapsed, read real-time visibility flags for side menus or panel overlays, and integrate state checks for toggling interface elements dependent on drawer presence.
 </div>
 
 #### Example - get the current Drawer state

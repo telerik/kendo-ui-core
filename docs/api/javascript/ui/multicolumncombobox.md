@@ -18,7 +18,7 @@ Specifies the adaptive rendering of the component. The supported values are: `no
 
 
 <div class="meta-api-description">
-Enable or disable automatic responsive layout adjustments for multi-column dropdowns to adapt rendering and layout based on screen size, container resizing, or device orientation changes; configure whether the component dynamically modifies columns, width, and presentation to optimize usability on smaller screens, mobile devices, or fluid containers by setting responsive behavior modes that control adaptive rendering, layout scaling, and element rearrangement for variable viewport environments and flexible UI contexts.
+How do I make Kendo UI MultiColumnComboBox adapt its layout to different screen sizes? Enable or disable automatic responsive layout adjustments for multi-column dropdowns to adapt rendering and layout based on screen size, container resizing, or device orientation changes; configure whether the component dynamically modifies columns, width, and presentation to optimize usability on smaller screens, mobile devices, or fluid containers by setting responsive behavior modes that control adaptive rendering, layout scaling, and element rearrangement for variable viewport environments and flexible UI contexts.
 </div>
 
 #### Example
@@ -46,7 +46,7 @@ Allows customization of the title's text in the adaptive view of the component.
 
 
 <div class="meta-api-description">
-Configure the text shown as the header or title in the responsive or compact view of a multi-column combo box, enabling customization of the adaptive layout’s display string, setting or controlling the title label when the component dynamically switches to its mobile-friendly or condensed version, adjusting the displayed header in adaptive or collapsed modes, and defining the string used as the top label in narrow or small-screen presentations of multi-column dropdown selectors.
+How to customize the title in Kendo UI's MultiColumnComboBox when it switches to a compact view? Configure the text shown as the header or title in the responsive or compact view of a multi-column combo box, enabling customization of the adaptive layout’s display string, setting or controlling the title label when the component dynamically switches to its mobile-friendly or condensed version, adjusting the displayed header in adaptive or collapsed modes, and defining the string used as the top label in narrow or small-screen presentations of multi-column dropdown selectors.
 </div>
 
 #### Example
@@ -75,7 +75,7 @@ Allows customization of the subtitle's text in the adaptive view of the componen
 
 
 <div class="meta-api-description">
-Configure or customize the subtitle text that appears when a multi-column dropdown or combo box switches to a compact, adaptive, or mobile-responsive view, enabling control over the caption or secondary label shown in collapsed or narrow layouts to improve clarity and user guidance. Adjust or set the displayed subtitle for responsive modes, adaptive interfaces, or smaller screen presentations, ensuring the caption fits condensed or simplified versions of multi-field selection components. This feature supports tailored messaging or prompts when the control shifts from full desktop views to adaptive, compact, or mobile formats.
+How do I customize the subtitle in a Kendo UI MultiColumnComboBox for adaptive views? Configure or customize the subtitle text that appears when a multi-column dropdown or combo box switches to a compact, adaptive, or mobile-responsive view, enabling control over the caption or secondary label shown in collapsed or narrow layouts to improve clarity and user guidance. Adjust or set the displayed subtitle for responsive modes, adaptive interfaces, or smaller screen presentations, ensuring the caption fits condensed or simplified versions of multi-field selection components. This feature supports tailored messaging or prompts when the control shifts from full desktop views to adaptive, compact, or mobile formats.
 </div>
 
 #### Example
@@ -105,7 +105,7 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 
 <div class="meta-api-description">
-Control and customize the opening and closing transitions of dropdown suggestion popups with options to enable, disable, or tailor animation effects for smoother or instant visual changes; configure transition timing, enable fade, slide, or other effects for multi-column dropdowns, or turn off all animations for immediate popup display without any opening or closing motions.
+How can I customize the animation effects for the dropdown suggestions in my MultiColumnComboBox? Control and customize the opening and closing transitions of dropdown suggestion popups with options to enable, disable, or tailor animation effects for smoother or instant visual changes; configure transition timing, enable fade, slide, or other effects for multi-column dropdowns, or turn off all animations for immediate popup display without any opening or closing motions.
 </div>
 
 #### Example - disable open and close animations
@@ -161,7 +161,7 @@ The animation played when the suggestion popup is closed. Configures the closing
 
 
 <div class="meta-api-description">
-Configure and customize the closing animations for dropdown suggestion popups including effects like fade-out, slide, or zoom, control animation duration, easing, timing, and transitions for smooth or rapid popup disappearance, set how suggestion lists collapse or hide after selection or dismissal, enable or disable closing animation effects, adjust visual feedback when closing multi-column dropdown menus, tailor user experience by modifying animation styles and speeds for popup closure, handle animation callbacks or triggers when hiding autocomplete or combo box suggestions, and optimize interactive UI responsiveness on popup close events.
+How to configure closing animation effects in Kendo UI MultiColumnComboBox? Configure and customize the closing animations for dropdown suggestion popups including effects like fade-out, slide, or zoom, control animation duration, easing, timing, and transitions for smooth or rapid popup disappearance, set how suggestion lists collapse or hide after selection or dismissal, enable or disable closing animation effects, adjust visual feedback when closing multi-column dropdown menus, tailor user experience by modifying animation styles and speeds for popup closure, handle animation callbacks or triggers when hiding autocomplete or combo box suggestions, and optimize interactive UI responsiveness on popup close events.
 </div>
 
 #### Example - configure the close animation
@@ -196,7 +196,7 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 
 <div class="meta-api-description">
-Control and customize the closing animation effects for dropdowns or combo boxes by specifying one or multiple animation types such as fade, slide, or other transition effects to enhance the visual closing behavior. Configure how the component smoothly exits or hides with various animation sequences by setting effect names, enabling dynamic and visually appealing close transitions, adjusting or combining multiple animations to tailor the user interface interactions during the close action of list or combo box elements.
+How can I customize the closing animation effects in Kendo UI MultiColumnComboBox? Control and customize the closing animation effects for dropdowns or combo boxes by specifying one or multiple animation types such as fade, slide, or other transition effects to enhance the visual closing behavior. Configure how the component smoothly exits or hides with various animation sequences by setting effect names, enabling dynamic and visually appealing close transitions, adjusting or combining multiple animations to tailor the user interface interactions during the close action of list or combo box elements.
 </div>
 
 #### Example
@@ -228,7 +228,7 @@ The duration of the close animation in milliseconds.
 
 
 <div class="meta-api-description">
-Control and customize the duration of the dropdown close animation timing in milliseconds for a multi-column combo box or similar UI component, enabling you to speed up, slow down, set, adjust, configure, or fine-tune how fast the popup or menu hides or closes. Manage animation close speed, transition length, timing, and delay to create smooth or rapid hide effects, allowing developers to tailor the closing motion for enhanced user experience and responsive interface behavior.
+How can I adjust the close animation duration of my MultiColumnComboBox widget? Control and customize the duration of the dropdown close animation timing in milliseconds for a multi-column combo box or similar UI component, enabling you to speed up, slow down, set, adjust, configure, or fine-tune how fast the popup or menu hides or closes. Manage animation close speed, transition length, timing, and delay to create smooth or rapid hide effects, allowing developers to tailor the closing motion for enhanced user experience and responsive interface behavior.
 </div>
 
 #### Example
@@ -260,7 +260,7 @@ The animation played when the suggestion popup is opened.
 
 
 <div class="meta-api-description">
-Configure and customize the opening animation effects for suggestion dropdowns in multi-column combo boxes, including settings to enable, disable, or adjust the popup appearance, transition style, duration, easing methods, and visual entrance behavior when suggestion lists are triggered, allowing control over how dropdown suggestions animate into view across various user interface interactions and scenarios.
+How can I customize the animation effect when opening the suggestion dropdown in a Kendo UI MultiColumnComboBox? Configure and customize the opening animation effects for suggestion dropdowns in multi-column combo boxes, including settings to enable, disable, or adjust the popup appearance, transition style, duration, easing methods, and visual entrance behavior when suggestion lists are triggered, allowing control over how dropdown suggestions animate into view across various user interface interactions and scenarios.
 </div>
 
 #### Example - configure the open animation
@@ -295,7 +295,7 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 
 <div class="meta-api-description">
-Configure and customize dropdown opening animations by specifying one or more visual effects such as fade, slide, or other transition styles to enhance the MultiColumnComboBox user experience; control how the dropdown appears with combined or individual animations, set animation sequences, enable smooth or dynamic opening effects, and adjust the animation behavior for dropdown menus with multiple columns by defining effect names separated by spaces, enabling tailored visual feedback for interactive combo box controls.
+How do I customize the animation effects for opening the dropdown in a Kendo UI MultiColumnComboBox? Configure and customize dropdown opening animations by specifying one or more visual effects such as fade, slide, or other transition styles to enhance the MultiColumnComboBox user experience; control how the dropdown appears with combined or individual animations, set animation sequences, enable smooth or dynamic opening effects, and adjust the animation behavior for dropdown menus with multiple columns by defining effect names separated by spaces, enabling tailored visual feedback for interactive combo box controls.
 </div>
 
 #### Example
@@ -327,7 +327,7 @@ The duration of the open animation in milliseconds.
 
 
 <div class="meta-api-description">
-Control and customize the duration of the dropdown opening animation to enhance user interface responsiveness and fluidity, specifying the speed at which multi-column selection lists smoothly appear. Adjust or configure how quickly the dropdown menu expands or unfolds by setting the animation timing in milliseconds, enabling fine-tuning of UI behavior for better visual feedback during selection. Optimize how the combo box transitions into view, balancing between faster instant display or slower, elegant opening sequences to match application style and user experience preferences. Enable or set the exact length of the open animation effect on multi-column dropdown components to influence perceived performance and usability when expanding list options.
+How to set the animation duration for opening the dropdown in a Kendo UI MultiColumnComboBox? Control and customize the duration of the dropdown opening animation to enhance user interface responsiveness and fluidity, specifying the speed at which multi-column selection lists smoothly appear. Adjust or configure how quickly the dropdown menu expands or unfolds by setting the animation timing in milliseconds, enabling fine-tuning of UI behavior for better visual feedback during selection. Optimize how the combo box transitions into view, balancing between faster instant display or slower, elegant opening sequences to match application style and user experience preferences. Enable or set the exact length of the open animation effect on multi-column dropdown components to influence perceived performance and usability when expanding list options.
 </div>
 
 #### Example
@@ -359,7 +359,7 @@ Controls whether to bind the widget to the data source on initialization.
 
 
 <div class="meta-api-description">
-Configure whether the control loads and binds data automatically on initialization or waits for manual trigger, enabling delayed data fetching, lazy loading, or conditional data binding in dropdowns with multiple columns, allowing developers to manage when and how the data source connects to the UI, control initial data retrieval, optimize performance by preventing eager loading, and customize when to populate options programmatically or via user interaction.
+How do I configure Kendo UI MultiColumnComboBox to load data automatically on initialization? Configure whether the control loads and binds data automatically on initialization or waits for manual trigger, enabling delayed data fetching, lazy loading, or conditional data binding in dropdowns with multiple columns, allowing developers to manage when and how the data source connects to the UI, control initial data retrieval, optimize performance by preventing eager loading, and customize when to populate options programmatically or via user interaction.
 </div>
 
 #### Example
@@ -388,7 +388,7 @@ Use it to set the Id of the parent MultiColumnComboBox widget.
 
 
 <div class="meta-api-description">
-Configure dependent dropdowns by linking one multi-column combo box to another using cascading relationships, enabling dynamic filtering where the child combo box automatically updates its options based on the selection made in the parent control. Control data dependencies between multiple combo boxes, set hierarchical filters for cascading dropdowns, and establish linked lists where selecting a value in one box influences the available choices in another. Enable interconnected combo boxes that respond interactively to user input, synchronize selections across related components, and implement cascading data-driven filtering by referencing parent selections for seamless dependent data presentation.
+How do I link two MultiColumnComboBox controls for cascading relationships in Kendo UI? Configure dependent dropdowns by linking one multi-column combo box to another using cascading relationships, enabling dynamic filtering where the child combo box automatically updates its options based on the selection made in the parent control. Control data dependencies between multiple combo boxes, set hierarchical filters for cascading dropdowns, and establish linked lists where selecting a value in one box influences the available choices in another. Enable interconnected combo boxes that respond interactively to user input, synchronize selections across related components, and implement cascading data-driven filtering by referencing parent selections for seamless dependent data presentation.
 </div>
 
 #### Example
@@ -434,7 +434,7 @@ Defines the field to be used to filter the data source. If not defined the [pare
 
 
 <div class="meta-api-description">
-Configure dependent dropdowns by specifying a parent field to filter child options dynamically, enabling cascading selections, linked filters, dynamic option population, and data source restriction based on another field’s value; control which parent field filters the child list for synchronized lookups, conditional option loading, or hierarchical data entry scenarios to create responsive, interconnected dropdown menus that update based on prior selections and support advanced relational filtering setups.
+How do I enable dependent dropdowns in Kendo UI MultiColumnComboBox using the cascadeFromField property? Configure dependent dropdowns by specifying a parent field to filter child options dynamically, enabling cascading selections, linked filters, dynamic option population, and data source restriction based on another field’s value; control which parent field filters the child list for synchronized lookups, conditional option loading, or hierarchical data entry scenarios to create responsive, interconnected dropdown menus that update based on prior selections and support advanced relational filtering setups.
 </div>
 
 #### Example
@@ -480,7 +480,7 @@ Defines the parent field to be used to retain value from. This value will be use
 
 
 <div class="meta-api-description">
-Control cascading data filtering by linking a child dropdown or multi-column combo box to a specific parent field's value, enabling dynamic filtering based on the parent's selected data; configure which parent field to pull for filtering or default to the parent's main value to create dependent dropdowns, filtered lists, or linked selection widgets that update automatically according to the parent record's current field, supporting scenarios like chained dropdowns, hierarchical data filtering, and context-sensitive data presentation.
+How do I link a MultiColumnComboBox to filter data based on its parent field's value in Kendo UI? Control cascading data filtering by linking a child dropdown or multi-column combo box to a specific parent field's value, enabling dynamic filtering based on the parent's selected data; configure which parent field to pull for filtering or default to the parent's main value to create dependent dropdowns, filtered lists, or linked selection widgets that update automatically according to the parent record's current field, supporting scenarios like chained dropdowns, hierarchical data filtering, and context-sensitive data presentation.
 </div>
 
 #### Example
@@ -518,7 +518,7 @@ Applicable to a parent MultiColumnComboBox in a cascading scenario. If set to `t
 
 
 <div class="meta-api-description">
-Control cascading behavior in linked multi-column dropdowns when entering custom or typed-in values in the parent field, enabling or disabling child dropdown updates based on user-defined input rather than only predefined selections; configure whether child lists refresh dynamically or remain inactive when the parent’s value is manually typed, supporting scenarios with custom entries, dependent dropdown updates, conditional filtering, and managing child field responsiveness tied to parent custom input changes, while considering linkage through matching data fields or unset cascade parameters in complex data-driven UI components.
+How to control cascading behavior in linked MultiColumnComboBox when entering custom values? Control cascading behavior in linked multi-column dropdowns when entering custom or typed-in values in the parent field, enabling or disabling child dropdown updates based on user-defined input rather than only predefined selections; configure whether child lists refresh dynamically or remain inactive when the parent’s value is manually typed, supporting scenarios with custom entries, dependent dropdown updates, conditional filtering, and managing child field responsiveness tied to parent custom input changes, while considering linkage through matching data fields or unset cascade parameters in complex data-driven UI components.
 </div>
 
 #### Example
@@ -557,7 +557,7 @@ Defines the columns rendered in the table of the MultiColumnComboBox.
 
 
 <div class="meta-api-description">
-Set or customize the dropdown table layout by specifying which data fields, headers, titles, widths, formats, templates, and display options appear in each column of a multi-column selection list. Control, define, or configure the visible columns, their order, formatting, and presentation within a complex dropdown menu to tailor the data view, optimize user selection experience, and manage how bound data is rendered or formatted inside a multi-field combo box interface. Adjust column settings during initialization to enable precise control over headings, widths, text templates, and display behavior for multi-field dropdown lists with customizable columns.
+How do I customize the columns in a Kendo UI MultiColumnComboBox? Set or customize the dropdown table layout by specifying which data fields, headers, titles, widths, formats, templates, and display options appear in each column of a multi-column selection list. Control, define, or configure the visible columns, their order, formatting, and presentation within a complex dropdown menu to tailor the data view, optimize user selection experience, and manage how bound data is rendered or formatted inside a multi-field combo box interface. Adjust column settings during initialization to enable precise control over headings, widths, text templates, and display behavior for multi-field dropdown lists with customizable columns.
 </div>
 
 #### Example
@@ -584,7 +584,7 @@ Defines the field for the column.
 
 
 <div class="meta-api-description">
-Set or configure the data field, property name, or key that links a specific column to the corresponding data source attribute, enabling control over which data value, object property, or field appears in that column within multi-column dropdowns or combo boxes. Manage binding between columns and data item fields, specifying the exact property or attribute name from the source data objects or records to display, filter, or sort by in complex lists, tables, or selector controls with multiple data columns. Customize, assign, or map column content dynamically by indicating which source property each column represents, supporting scenarios like showing user names, IDs, dates, or other structured data fields in combo box columns.
+How to specify the data field for each column in a Kendo UI MultiColumnComboBox? Set or configure the data field, property name, or key that links a specific column to the corresponding data source attribute, enabling control over which data value, object property, or field appears in that column within multi-column dropdowns or combo boxes. Manage binding between columns and data item fields, specifying the exact property or attribute name from the source data objects or records to display, filter, or sort by in complex lists, tables, or selector controls with multiple data columns. Customize, assign, or map column content dynamically by indicating which source property each column represents, supporting scenarios like showing user names, IDs, dates, or other structured data fields in combo box columns.
 </div>
 
 #### Example
@@ -611,7 +611,7 @@ Defines the text of the column title in the header.
 
 
 <div class="meta-api-description">
-Set or customize the header text, label, or title for individual columns in a multi-column dropdown or combo box to define and display specific column names, captions, or headings that describe the data shown in each column. Configure or control the visible header labels for columns during setup or dynamically adjust the column titles to improve clarity, user interface organization, and data categorization within multi-column list controls or dropdown menus.
+How do I customize the column headers in a Kendo UI MultiColumnComboBox? Set or customize the header text, label, or title for individual columns in a multi-column dropdown or combo box to define and display specific column names, captions, or headings that describe the data shown in each column. Configure or control the visible header labels for columns during setup or dynamically adjust the column titles to improve clarity, user interface organization, and data categorization within multi-column list controls or dropdown menus.
 </div>
 
 #### Example
@@ -638,7 +638,7 @@ Renders a template for the column.
 
 
 <div class="meta-api-description">
-Configure custom cell rendering in multi-column dropdown lists by defining templates using HTML markup, Kendo template strings, or callback functions that generate dynamic content for each column’s cells. Enable formatting, injecting HTML, binding data fields from the dropdown’s rows, and customizing how individual cells display with flexible templates to control layout and appearance in multi-column combo boxes. Set, customize, or control cell templates to tailor column rendering, apply conditional formatting, or embed complex markup and dynamic values in dropdown cells for better visualization and user interaction.
+How to customize cell rendering in Kendo UI MultiColumnComboBox dropdown lists? Configure custom cell rendering in multi-column dropdown lists by defining templates using HTML markup, Kendo template strings, or callback functions that generate dynamic content for each column’s cells. Enable formatting, injecting HTML, binding data fields from the dropdown’s rows, and customizing how individual cells display with flexible templates to control layout and appearance in multi-column combo boxes. Set, customize, or control cell templates to tailor column rendering, apply conditional formatting, or embed complex markup and dynamic values in dropdown cells for better visualization and user interaction.
 </div>
 
 #### Example
@@ -665,7 +665,7 @@ Renders a template for the column header.
 
 
 <div class="meta-api-description">
-Customize the column headers in a multi-column dropdown by controlling header layout with templates that can include HTML, icons, dynamic data, or custom content using template strings, functions, or references; configure header appearance, content formatting, and visual elements to tailor each column’s header dynamically, enabling flexible presentation and enhanced user interface design for multi-column selection components.
+How do I customize the column headers in a Kendo UI MultiColumnComboBox? Customize the column headers in a multi-column dropdown by controlling header layout with templates that can include HTML, icons, dynamic data, or custom content using template strings, functions, or references; configure header appearance, content formatting, and visual elements to tailor each column’s header dynamically, enabling flexible presentation and enhanced user interface design for multi-column selection components.
 </div>
 
 #### Example
@@ -692,7 +692,7 @@ The width of the column. Numeric values are treated as pixels.
 
 
 <div class="meta-api-description">
-Adjust or configure the width, size, or pixel dimensions of columns in a multi-column dropdown or combo box to control layout, formatting, and appearance when displaying lists or tables with multiple fields. Set fixed or dynamic column widths to optimize space, improve readability, customize multi-field selection components, or create responsive interfaces that require specifying exact pixel sizes or proportional sizing for columns inside combo boxes or list controls. This is useful for developers needing precise control over column sizing when binding data sources, designing UI elements with multiple columns, or managing column layout and spacing in dropdown menus or multi-column selectors.
+How to set fixed column widths in Kendo UI MultiColumnComboBox? Adjust or configure the width, size, or pixel dimensions of columns in a multi-column dropdown or combo box to control layout, formatting, and appearance when displaying lists or tables with multiple fields. Set fixed or dynamic column widths to optimize space, improve readability, customize multi-field selection components, or create responsive interfaces that require specifying exact pixel sizes or proportional sizing for columns inside combo boxes or list controls. This is useful for developers needing precise control over column sizing when binding data sources, designing UI elements with multiple columns, or managing column layout and spacing in dropdown menus or multi-column selectors.
 </div>
 
 #### Example
@@ -719,7 +719,7 @@ Unless this options is set to `false`, a button will appear when hovering the wi
 
 
 <div class="meta-api-description">
-Enable or disable a hover-activated clear button that appears within a multi-column dropdown to quickly reset or clear the selected item or value; this control manages showing a clickable icon that removes the current selection, refreshes the input to empty, and fires change or update events, providing an easy way for users to clear their choices or input without manually deleting text, configurable to show or hide based on developer preference for selection clearing functionality.
+How can I enable or disable the clear button in a Kendo UI MultiColumnComboBox? Enable or disable a hover-activated clear button that appears within a multi-column dropdown to quickly reset or clear the selected item or value; this control manages showing a clickable icon that removes the current selection, refreshes the input to empty, and fires change or update events, providing an easy way for users to clear their choices or input without manually deleting text, configurable to show or hide based on developer preference for selection clearing functionality.
 </div>
 
 #### Example - disable the clear button
@@ -742,7 +742,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 
 <div class="meta-api-description">
-Configure, connect, or bind the dropdown list values to various data inputs including JavaScript arrays, objects, or pre-existing data source instances; enable populating multiple columns by setting the data source to raw arrays, structured objects, or external data provider instances, ensuring flexible integration whether supplying fresh datasets or leveraging already initialized data sources for dynamic list content in multi-column dropdown components.
+How to configure the data source for a MultiColumnComboBox? Configure, connect, or bind the dropdown list values to various data inputs including JavaScript arrays, objects, or pre-existing data source instances; enable populating multiple columns by setting the data source to raw arrays, structured objects, or external data provider instances, ensuring flexible integration whether supplying fresh datasets or leveraging already initialized data sources for dynamic list content in multi-column dropdown components.
 </div>
 
 #### Example - set dataSource as a JavaScript object
@@ -814,7 +814,7 @@ The field of the data item that provides the text content of the list items. The
 
 
 <div class="meta-api-description">
-Specify or configure the field from the data source that provides the display text for entries in a multi-column dropdown or combo box, enabling filtering and search operations based on that text value; control which property of data items is shown as the visible label in selection lists, bind filtering and search queries to this particular data field, and pair this text field configuration with corresponding value fields to ensure proper data binding and user-friendly display in searchable, filterable dropdown components.
+What is the purpose of setting the dataTextField property in a MultiColumnComboBox? Specify or configure the field from the data source that provides the display text for entries in a multi-column dropdown or combo box, enabling filtering and search operations based on that text value; control which property of data items is shown as the visible label in selection lists, bind filtering and search queries to this particular data field, and pair this text field configuration with corresponding value fields to ensure proper data binding and user-friendly display in searchable, filterable dropdown components.
 </div>
 
 #### Example - set the dataTextField
@@ -843,7 +843,7 @@ The field of the data item that provides the value of the widget.
 
 
 <div class="meta-api-description">
-Configure which data field acts as the key or identifier representing the selected item’s underlying value in a multi-column dropdown, enabling precise control over the bound value used in forms, data binding, selection logic, or submission processes. This setting specifies the unique value field or ID from the data source used internally or for integrations, often paired with the displayed text field to differentiate what the user sees from what the app processes. Adjusting the value field supports scenarios like retrieving item keys, linking to database IDs, managing selection states, or customizing how selections map to backend data structures and form variables.
+What is the dataValueField property used for in a Kendo UI MultiColumnComboBox? Configure which data field acts as the key or identifier representing the selected item’s underlying value in a multi-column dropdown, enabling precise control over the bound value used in forms, data binding, selection logic, or submission processes. This setting specifies the unique value field or ID from the data source used internally or for integrations, often paired with the displayed text field to differentiate what the user sees from what the app processes. Adjusting the value field supports scenarios like retrieving item keys, linking to database IDs, managing selection states, or customizing how selections map to backend data structures and form variables.
 </div>
 
 #### Example - set the dataValueField
@@ -870,7 +870,7 @@ The delay in milliseconds between a keystroke and when the widget displays the p
 
 
 <div class="meta-api-description">
-Adjust the input pause duration or debounce interval before triggering search, lookup, or filter actions in a multi-column dropdown or combo box component; configure how long the system waits after user typing stops to initiate dynamic suggestions, typeahead results, or popup displays, effectively managing input throttling, reducing excessive server calls, smoothing rapid keystrokes, controlling request frequency, and enhancing UI responsiveness and performance during data filtering or autocomplete operations.
+How do I configure the delay before triggering search in a Kendo UI MultiColumnComboBox? Adjust the input pause duration or debounce interval before triggering search, lookup, or filter actions in a multi-column dropdown or combo box component; configure how long the system waits after user typing stops to initiate dynamic suggestions, typeahead results, or popup displays, effectively managing input throttling, reducing excessive server calls, smoothing rapid keystrokes, controlling request frequency, and enhancing UI responsiveness and performance during data filtering or autocomplete operations.
 </div>
 
 #### Example - set the delay
@@ -898,7 +898,7 @@ The width of the dropdown. Numeric values are treated as pixels.
 
 
 <div class="meta-api-description">
-Set or control the width of dropdown menus, adjust popup list size, define fixed pixel widths for dropdowns, customize how wide selection lists appear, configure the horizontal span of multi-column combo boxes, specify exact numeric width for dropdown panels, enable precise sizing of popup lists, manage dropdown menu dimensions, determine the visual width of combo box lists, and tailor the open dropdown box size to fit content or design requirements.
+How do I set the width of the dropdown menu in a MultiColumnComboBox? Set or control the width of dropdown menus, adjust popup list size, define fixed pixel widths for dropdowns, customize how wide selection lists appear, configure the horizontal span of multi-column combo boxes, specify exact numeric width for dropdown panels, enable precise sizing of popup lists, manage dropdown menu dimensions, determine the visual width of combo box lists, and tailor the open dropdown box size to fit content or design requirements.
 </div>
 
 #### Example - set the dropdown width as a string
@@ -945,7 +945,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 
 <div class="meta-api-description">
-Control whether a multi-column combo box or dropdown allows user interaction, input, editing, or selection, enabling or disabling the component’s ability to accept keyboard or mouse input, toggle user edits, block or permit typing, and manage interactivity for forms, UI elements, or dynamic selection lists, including options to set the input to readonly, locked, inactive, or enabled states for flexible user control over data entry and selection behaviors.
+How do I disable user interaction in a Kendo UI MultiColumnComboBox? Control whether a multi-column combo box or dropdown allows user interaction, input, editing, or selection, enabling or disabling the component’s ability to accept keyboard or mouse input, toggle user edits, block or permit typing, and manage interactivity for forms, UI elements, or dynamic selection lists, including options to set the input to readonly, locked, inactive, or enabled states for flexible user control over data entry and selection behaviors.
 </div>
 
 #### Example - disable the widget
@@ -973,7 +973,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 
 <div class="meta-api-description">
-Control search input behavior to require a minimum number of characters before filtering results, ensuring the dropdown list only updates or displays matches after reaching a specified length; configure to prevent showing the entire item list when clearing or deleting search text, enforce input thresholds to limit premature or empty searches, enable continuous filtering based on character count, set conditions to avoid resetting or expanding the selection list excessively, and manage dynamic search responsiveness by requiring a minimum input length before results appear or update in multi-column dropdowns.
+How do I prevent the MultiColumnComboBox from showing all items when searching for less than a certain number of characters? Control search input behavior to require a minimum number of characters before filtering results, ensuring the dropdown list only updates or displays matches after reaching a specified length; configure to prevent showing the entire item list when clearing or deleting search text, enforce input thresholds to limit premature or empty searches, enable continuous filtering based on character count, set conditions to avoid resetting or expanding the selection list excessively, and manage dynamic search responsiveness by requiring a minimum input length before results appear or update in multi-column dropdowns.
 </div>
 
 #### Example - enforce minLength
@@ -1015,7 +1015,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 
 <div class="meta-api-description">
-Configure the visual styling of color fills for dropdown items and interface elements with options to apply no fill, solid colors, flat fills, or outlined borders, enabling control over how color rendering and appearance are managed in multi-column combo boxes or similar selection controls. Adjust color application modes for item backgrounds, borders, and highlights by setting fill styles that affect overall UI aesthetics and user interaction feedback, including disabling fills, displaying fully solid fills, applying flat color fields, or outlining items for emphasis or clarity in lists and dropdown menus.
+How do I customize the color fill style in a Kendo UI MultiColumnComboBox? Configure the visual styling of color fills for dropdown items and interface elements with options to apply no fill, solid colors, flat fills, or outlined borders, enabling control over how color rendering and appearance are managed in multi-column combo boxes or similar selection controls. Adjust color application modes for item backgrounds, borders, and highlights by setting fill styles that affect overall UI aesthetics and user interaction feedback, including disabling fills, displaying fully solid fills, applying flat color fields, or outlining items for emphasis or clarity in lists and dropdown menus.
 </div>
 
 #### Example - sets the fillMode
@@ -1044,7 +1044,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 
 <div class="meta-api-description">
-Configure filtering modes to control how suggestions are matched and displayed based on the current input value, enabling search behaviors like matching entries that start with, end with, or contain specific substrings. Adjust settings to enable or disable filtering for string-based data sources or specific text fields within data arrays, allowing precise control over dynamic suggestion narrowing, autocomplete filtering, substring matching, prefix matching, and suffix matching. This setting controls search behavior in dropdowns or combo boxes with multi-column data, focusing on textual matching patterns such as starts with, ends with, or contains to refine user input results automatically.
+How to configure filtering modes in Kendo UI MultiColumnComboBox? Configure filtering modes to control how suggestions are matched and displayed based on the current input value, enabling search behaviors like matching entries that start with, end with, or contain specific substrings. Adjust settings to enable or disable filtering for string-based data sources or specific text fields within data arrays, allowing precise control over dynamic suggestion narrowing, autocomplete filtering, substring matching, prefix matching, and suffix matching. This setting controls search behavior in dropdowns or combo boxes with multi-column data, focusing on textual matching patterns such as starts with, ends with, or contains to refine user input results automatically.
 </div>
 
 #### Example - set the filter
@@ -1072,7 +1072,7 @@ Enables multicolumn filtering.
 
 
 <div class="meta-api-description">
-Specify and configure which data fields or columns to include for filtering and searching within a multi-column dropdown or combo box, enabling multi-field search, column-specific filtering, dynamic filtering criteria setup, and targeted data matching across several attributes or properties simultaneously to refine selection results based on multiple searchable columns or fields in complex datasets.
+How do I configure multi-field filtering in a Kendo UI MultiColumnComboBox? Specify and configure which data fields or columns to include for filtering and searching within a multi-column dropdown or combo box, enabling multi-field search, column-specific filtering, dynamic filtering criteria setup, and targeted data matching across several attributes or properties simultaneously to refine selection results based on multiple searchable columns or fields in complex datasets.
 </div>
 
 #### Example
@@ -1101,7 +1101,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the fixed 
 
 
 <div class="meta-api-description">
-Customize and control the rendering of sticky or fixed group headers in a multi-column dropdown or combo box, enabling configuration of group header templates, setting custom labels, injecting HTML markup, displaying additional information beyond default group values, and tailoring how grouped items are presented during scrolling or selection. This feature supports modifying the appearance and content of group headers that remain visible, allowing developers to enable personalized group title displays, enhance UI clarity with rich formatting, configure fixed or persistent group indicators, and adjust grouping visuals for complex data lists or categorized dropdowns.
+How to customize the group headers in Kendo UI MultiColumnComboBox? Customize and control the rendering of sticky or fixed group headers in a multi-column dropdown or combo box, enabling configuration of group header templates, setting custom labels, injecting HTML markup, displaying additional information beyond default group values, and tailoring how grouped items are presented during scrolling or selection. This feature supports modifying the appearance and content of group headers that remain visible, allowing developers to enable personalized group title displays, enhance UI clarity with rich formatting, configure fixed or persistent group indicators, and adjust grouping visuals for complex data lists or categorized dropdowns.
 </div>
 
 #### Example
@@ -1134,7 +1134,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the footer
 
 
 <div class="meta-api-description">
-Customize the dropdown footer by configuring a custom template to control the content and layout shown at the bottom of multi-column dropdown lists, enabling dynamic HTML or template-based rendering for summaries, actions, or additional information. This can be set during initialization or updated dynamically, allowing developers to define flexible footer sections that integrate component data context, support template syntax for binding or referencing internal fields, and enhance user interfaces with tailored footer content, summaries, buttons, or messages below dropdown items in complex combo box or select controls.
+How do I customize the footer of the MultiColumnComboBox dropdown list in Kendo UI for jQuery? Customize the dropdown footer by configuring a custom template to control the content and layout shown at the bottom of multi-column dropdown lists, enabling dynamic HTML or template-based rendering for summaries, actions, or additional information. This can be set during initialization or updated dynamically, allowing developers to define flexible footer sections that integrate component data context, support template syntax for binding or referencing internal fields, and enhance user interfaces with tailored footer content, summaries, buttons, or messages below dropdown items in complex combo box or select controls.
 </div>
 
 #### Parameters
@@ -1169,7 +1169,7 @@ Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/W
 
 
 <div class="meta-api-description">
-Configure the virtual keyboard type displayed when entering text by setting the input mode or inputmethod for keyboard control, including options like numeric, email, search, or text input types; control which on-screen keyboard or input method editor appears when the input field gains focus, enabling customization of input behavior and improving user experience on touch devices and virtual keyboards within multi-column dropdown or combo box inputs.
+How do I customize the on-screen keyboard in Kendo UI MultiColumnComboBox? Configure the virtual keyboard type displayed when entering text by setting the input mode or inputmethod for keyboard control, including options like numeric, email, search, or text input types; control which on-screen keyboard or input method editor appears when the input field gains focus, enabling customization of input behavior and improving user experience on touch devices and virtual keyboards within multi-column dropdown or combo box inputs.
 </div>
 
 #### Example
@@ -1197,7 +1197,7 @@ Adds a label before the input. If the input has no `id` attribute, a generated `
 
 
 <div class="meta-api-description">
-Set or customize the descriptive text or caption displayed before a multi-column dropdown input to improve accessibility, form labeling, and user guidance by specifying the label content as a plain string or dynamic function that controls the label’s displayed HTML; configure identifiers automatically assigned to synchronize labels with inputs, enabling setting, enabling, controlling, or customizing input captions, form labels, accessible text, descriptive headings, or prompts for multi-column selection fields in various user interfaces.
+How to customize the label in a Kendo UI MultiColumnComboBox? Set or customize the descriptive text or caption displayed before a multi-column dropdown input to improve accessibility, form labeling, and user guidance by specifying the label content as a plain string or dynamic function that controls the label’s displayed HTML; configure identifiers automatically assigned to synchronize labels with inputs, enabling setting, enabling, controlling, or customizing input captions, form labels, accessible text, descriptive headings, or prompts for multi-column selection fields in various user interfaces.
 </div>
 
 #### Example - create a label from a string
@@ -1238,7 +1238,7 @@ Sets the inner HTML of the label.
 
 
 <div class="meta-api-description">
-Customize or set the displayed label content for a multi-column combo box by providing HTML strings, enabling rich, formatted text, inline markup, or dynamic updates to the label. This supports configuring, binding, or altering the label's inner content with custom HTML elements, styles, or templates to control how the label appears in dropdowns or selection controls. Use this to define personalized, styled labels with embedded tags, react to data changes, or implement interactive label formatting within combo box interfaces.
+How to customize the content of a MultiColumnComboBox label in Kendo UI for jQuery? Customize or set the displayed label content for a multi-column combo box by providing HTML strings, enabling rich, formatted text, inline markup, or dynamic updates to the label. This supports configuring, binding, or altering the label's inner content with custom HTML elements, styles, or templates to control how the label appears in dropdowns or selection controls. Use this to define personalized, styled labels with embedded tags, react to data changes, or implement interactive label formatting within combo box interfaces.
 </div>
 
 #### Example - create a label from a string
@@ -1285,7 +1285,7 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 
 
 <div class="meta-api-description">
-Enable or configure floating label UI behavior for input elements where the label dynamically shifts position when the input is focused or contains a value, allowing users to set, toggle, or control floating labels that wrap the input field for clearer form interactions, visual feedback, and enhanced UX; this feature supports managing label animations, syncing label states with input focus or value changes, handling edge cases where programmatic value changes do not emit focus or blur events, and requires explicit refresh calls to update the floating label display when input values change without user interaction, ensuring consistent label positioning and visibility across form states and dynamic input updates.
+How to enable floating labels in Kendo UI MultiColumnComboBox? Enable or configure floating label UI behavior for input elements where the label dynamically shifts position when the input is focused or contains a value, allowing users to set, toggle, or control floating labels that wrap the input field for clearer form interactions, visual feedback, and enhanced UX; this feature supports managing label animations, syncing label states with input focus or value changes, handling edge cases where programmatic value changes do not emit focus or blur events, and requires explicit refresh calls to update the floating label display when input values change without user interaction, ensuring consistent label positioning and visibility across form states and dynamic input updates.
 </div>
 
 #### Example - create a label from a string
@@ -1312,7 +1312,7 @@ The [template](/api/javascript/kendo/methods/template) used to render the groups
 
 
 <div class="meta-api-description">
-Control and customize the rendering of group headers in multi-column dropdowns by specifying custom templates or layouts for grouped items, enabling the display of personalized content, HTML structures, or styled text for each group label. Configure how group headings appear within grouped list components, set unique designs beyond default group values, and tailor the visual presentation of grouped data sections in combo boxes or select inputs by defining custom group header templates. Adjust group header appearance with custom formatting, templates, or dynamic content to enhance the user interface of hierarchical or categorized dropdown selections.
+How to customize group header appearance in Kendo UI MultiColumnComboBox? Control and customize the rendering of group headers in multi-column dropdowns by specifying custom templates or layouts for grouped items, enabling the display of personalized content, HTML structures, or styled text for each group label. Configure how group headings appear within grouped list components, set unique designs beyond default group values, and tailor the visual presentation of grouped data sections in combo boxes or select inputs by defining custom group header templates. Adjust group header appearance with custom formatting, templates, or dynamic content to enhance the user interface of hierarchical or categorized dropdown selections.
 </div>
 
 #### Example
@@ -1345,7 +1345,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
 
 
 <div class="meta-api-description">
-Adjust or configure the vertical dimension, height, or popup size of a multi-column dropdown suggestion list, control the visible area or maximum number of rows shown in the autocomplete or combo box popup, set or limit the suggestion box height in pixels to manage scrolling or visibility of options, specify the pixel height for the dropdown menu to optimize user interface layout or appearance, define how tall the dropdown list appears when showing multiple columns of selectable items in a combo box component.
+How do I set the height of the popup in a Kendo UI MultiColumnComboBox? Adjust or configure the vertical dimension, height, or popup size of a multi-column dropdown suggestion list, control the visible area or maximum number of rows shown in the autocomplete or combo box popup, set or limit the suggestion box height in pixels to manage scrolling or visibility of options, specify the pixel height for the dropdown menu to optimize user interface layout or appearance, define how tall the dropdown list appears when showing multiple columns of selectable items in a combo box component.
 </div>
 
 #### Example - set the height
@@ -1363,7 +1363,7 @@ If set to `true` the first suggestion will be automatically highlighted.
 
 
 <div class="meta-api-description">
-Enable or disable automatic preselection and visual highlighting of the initial dropdown suggestion in multi-column combo boxes to control keyboard navigation, focus management, default item emphasis, and user interaction behavior. Configure whether the first item in the suggestions list is automatically selected or left unhighlighted for streamlined input, keyboard accessibility, or manual selection workflows. Adjust settings to manage initial focus states, improve usability by spotlighting default options, and customize dropdown focus behavior according to interface needs.
+How to automatically select and highlight the first item in a Kendo UI MultiColumnComboBox dropdown? Enable or disable automatic preselection and visual highlighting of the initial dropdown suggestion in multi-column combo boxes to control keyboard navigation, focus management, default item emphasis, and user interaction behavior. Configure whether the first item in the suggestions list is automatically selected or left unhighlighted for streamlined input, keyboard accessibility, or manual selection workflows. Adjust settings to manage initial focus states, improve usability by spotlighting default options, and customize dropdown focus behavior according to interface needs.
 </div>
 
 #### Example - set highlightFirst
@@ -1381,7 +1381,7 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
 
 
 <div class="meta-api-description">
-Enable or disable case sensitivity for filtering and matching text input in dropdowns or combo boxes, controlling whether search queries should treat uppercase and lowercase letters as equivalent or distinct. Configure case-insensitive or case-sensitive comparison methods to influence how user input matches against list items, suggestions, or options, affecting autocomplete behavior, search filtering, and text matching precision. Adjust settings to control whether searches ignore letter casing in user interfaces that display multiple columns, enabling more flexible or strict input matching scenarios across various dropdown and selection components.
+What is the effect of setting `ignoreCase` to true in a MultiColumnComboBox? Enable or disable case sensitivity for filtering and matching text input in dropdowns or combo boxes, controlling whether search queries should treat uppercase and lowercase letters as equivalent or distinct. Configure case-insensitive or case-sensitive comparison methods to influence how user input matches against list items, suggestions, or options, affecting autocomplete behavior, search filtering, and text matching precision. Adjust settings to control whether searches ignore letter casing in user interfaces that display multiple columns, enabling more flexible or strict input matching scenarios across various dropdown and selection components.
 </div>
 
 #### Example - disable case-insensitive suggestions
@@ -1399,7 +1399,7 @@ The index of the initially selected item. The index is `0` based.
 
 
 <div class="meta-api-description">
-Control the default selected item by specifying the zero-based position or numeric index to preselect an entry when initializing a multi-column dropdown or combo box, setting which option appears highlighted or chosen first, configuring initial selection state, enabling default choice setup, presetting the active item on load, and defining which list element is active by default in multi-column selection controls and combo box interfaces.
+How do I preselect an item in a Kendo UI MultiColumnComboBox by index? Control the default selected item by specifying the zero-based position or numeric index to preselect an entry when initializing a multi-column dropdown or combo box, setting which option appears highlighted or chosen first, configuring initial selection state, enabling default choice setup, presetting the active item on load, and defining which list element is active by default in multi-column selection controls and combo box interfaces.
 </div>
 
 #### Example - select second item
@@ -1425,7 +1425,7 @@ The text messages displayed in the widget. Use this option to customize or local
 
 
 <div class="meta-api-description">
-Adjust, customize, configure, or localize the user interface text, labels, prompts, and messages displayed in combo boxes with multiple columns, enabling the setting or overriding of default strings, phrases, or UI wording to fit different languages, dialects, or application-specific terminology, including translations, custom prompts, error messages, placeholders, and other textual elements within multi-column selection dropdowns.
+How do I customize error messages in Kendo UI MultiColumnComboBox? Adjust, customize, configure, or localize the user interface text, labels, prompts, and messages displayed in combo boxes with multiple columns, enabling the setting or overriding of default strings, phrases, or UI wording to fit different languages, dialects, or application-specific terminology, including translations, custom prompts, error messages, placeholders, and other textual elements within multi-column selection dropdowns.
 </div>
 
 #### Example - customize MultiColumnComboBox messages
@@ -1451,7 +1451,7 @@ The text message when hovering the input clear button.
 
 
 <div class="meta-api-description">
-Customize or localize the tooltip text displayed on the clear input button of a multi-column dropdown or combobox, enabling control over the hover message that appears when users move their cursor over the clear/reset icon. Set, change, or translate the clear button's tooltip for better user guidance, accessibility, or multilingual support in combo boxes with multiple columns, ensuring the hover prompt matches different languages, phrasing preferences, or UI conventions in searchable dropdown inputs with clear/reset functionality.
+How do I customize the tooltip for the clear button in a Kendo UI MultiColumnComboBox? Customize or localize the tooltip text displayed on the clear input button of a multi-column dropdown or combobox, enabling control over the hover message that appears when users move their cursor over the clear/reset icon. Set, change, or translate the clear button's tooltip for better user guidance, accessibility, or multilingual support in combo boxes with multiple columns, ensuring the hover prompt matches different languages, phrasing preferences, or UI conventions in searchable dropdown inputs with clear/reset functionality.
 </div>
 
 #### Example - customize clear message
@@ -1476,7 +1476,7 @@ The text message shown in the noDataTemplate when no data is available in the wi
 
 
 <div class="meta-api-description">
-Display or customize the message shown in a dropdown or list interface when no matching items, entries, or data rows are available to select or show in multi-column or complex combo boxes, enabling personalized or localized placeholders, alerts, or empty state notifications for users searching or filtering data with no results found, empty lists, or unavailable content situations in dropdown controls or autocomplete widgets.
+How do I customize the message when there's no data in a Kendo UI MultiColumnComboBox dropdown? Display or customize the message shown in a dropdown or list interface when no matching items, entries, or data rows are available to select or show in multi-column or complex combo boxes, enabling personalized or localized placeholders, alerts, or empty state notifications for users searching or filtering data with no results found, empty lists, or unavailable content situations in dropdown controls or autocomplete widgets.
 </div>
 
 #### Example - customize noData message
@@ -1500,7 +1500,7 @@ The minimum number of characters the user must type before a search is performed
 
 
 <div class="meta-api-description">
-Set or configure the minimum number of characters required before initiating a search or filtering results in a multi-column dropdown or combo box, controlling when autocomplete, typeahead, or incremental search begins based on user input length. Adjust this threshold to delay or optimize search queries for large datasets, prevent excessive backend calls or UI updates, and fine-tune when suggestions or filtered lists appear as users type. This setting helps manage performance and user experience by specifying how many characters must be entered before triggering data fetching or filtering logic in searchable dropdown components.
+What is the minimum number of characters required to trigger autocomplete in a Kendo UI MultiColumnComboBox? Set or configure the minimum number of characters required before initiating a search or filtering results in a multi-column dropdown or combo box, controlling when autocomplete, typeahead, or incremental search begins based on user input length. Adjust this threshold to delay or optimize search queries for large datasets, prevent excessive backend calls or UI updates, and fine-tune when suggestions or filtered lists appear as users type. This setting helps manage performance and user experience by specifying how many characters must be entered before triggering data fetching or filtering logic in searchable dropdown components.
 </div>
 
 #### Example - set minLength
@@ -1521,7 +1521,7 @@ The noData template receives the widget itself as a part of the data argument. T
 
 
 <div class="meta-api-description">
-Configure custom messages, markup, or templates to display when a dropdown, searchable list, or combo box returns no matching items or the data source is empty, enabling tailored "no results found" feedback or placeholders. Enable or set fallback UI content that replaces typical empty state views in multi-column selection components or autocomplete controls, using string templates, functions, or dynamic rendering methods to customize the empty state. Control how the interface responds and what is shown when queries yield zero matches, supporting empty data templates that trigger the result popup with alternative content, messaging, or custom layouts that appear on empty searches or when data is missing. Customize the no-data feedback experience in multi-column combo boxes, autocomplete fields, or filterable dropdowns by defining a reusable template or function for displaying personalized empty results, empty list indicators, or user-friendly prompts when no options are available.
+How do I customize the "no results found" message in a Kendo UI MultiColumnComboBox? Configure custom messages, markup, or templates to display when a dropdown, searchable list, or combo box returns no matching items or the data source is empty, enabling tailored "no results found" feedback or placeholders. Enable or set fallback UI content that replaces typical empty state views in multi-column selection components or autocomplete controls, using string templates, functions, or dynamic rendering methods to customize the empty state. Control how the interface responds and what is shown when queries yield zero matches, supporting empty data templates that trigger the result popup with alternative content, messaging, or custom layouts that appear on empty searches or when data is missing. Customize the no-data feedback experience in multi-column combo boxes, autocomplete fields, or filterable dropdowns by defining a reusable template or function for displaying personalized empty results, empty list indicators, or user-friendly prompts when no options are available.
 </div>
 
 #### Example - specify noDataTemplate as a string
@@ -1542,7 +1542,7 @@ The hint displayed by the widget when it is empty. Not set by default.
 
 
 <div class="meta-api-description">
-Set or customize the placeholder text, hint, or prompt shown inside an empty multi-column combo box or dropdown input to guide users before selection, including configuring default placeholder content, updating the temporary instructional text dynamically, displaying example values or input suggestions, and controlling what appears in the input area when no option is selected or typed.
+How to customize the placeholder text in Kendo UI MultiColumnComboBox? Set or customize the placeholder text, hint, or prompt shown inside an empty multi-column combo box or dropdown input to guide users before selection, including configuring default placeholder content, updating the temporary instructional text dynamically, displaying example values or input suggestions, and controlling what appears in the input area when no option is selected or typed.
 </div>
 
 #### Example - specify placeholder option
@@ -1578,7 +1578,7 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
 
 
 <div class="meta-api-description">
-Control and customize the dropdown panel or popup window for a multi-column combobox including its opening and closing animations, overlay container placement, size adjustments, positioning relative to the input field, and behavior upon creation or user interaction; configure popup appearance, alignment, animation effects, containment element, and responsive display attributes to tailor how the popup list of selectable items is presented and behaves within the user interface, enabling flexible management of dropdown rendering, visibility triggers, and styling through detailed option settings.
+How to customize the dropdown panel animation in a Kendo UI MultiColumnComboBox? Control and customize the dropdown panel or popup window for a multi-column combobox including its opening and closing animations, overlay container placement, size adjustments, positioning relative to the input field, and behavior upon creation or user interaction; configure popup appearance, alignment, animation effects, containment element, and responsive display attributes to tailor how the popup list of selectable items is presented and behaves within the user interface, enabling flexible management of dropdown rendering, visibility triggers, and styling through detailed option settings.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1610,7 +1610,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 
 <div class="meta-api-description">
-Control or configure the insertion point of dropdown popups by specifying a container element through a CSS or jQuery selector to append or render the popup dynamically in the DOM, enabling customization of where multi-column dropdown menus or combo box lists appear on the page, managing popup placement to avoid layout issues, setting a specific parent element for rendering the popup to handle z-index, overflow, or positioning concerns, directing where menus or overlay panels attach to the document structure for better control over popup behavior and appearance in complex layouts.
+How can I customize where my Kendo UI MultiColumnComboBox dropdown appears on the page? Control or configure the insertion point of dropdown popups by specifying a container element through a CSS or jQuery selector to append or render the popup dynamically in the DOM, enabling customization of where multi-column dropdown menus or combo box lists appear on the page, managing popup placement to avoid layout issues, setting a specific parent element for rendering the popup to handle z-index, overflow, or positioning concerns, directing where menus or overlay panels attach to the document structure for better control over popup behavior and appearance in complex layouts.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1653,7 +1653,7 @@ The available "x" positions are:
 
 
 <div class="meta-api-description">
-Control and configure the dropdown popup’s positioning and alignment relative to its anchor element by specifying vertical and horizontal anchor points using combined "y x" coordinates, enabling precise placement and attachment of the popup such as top-left, bottom-center, center-right, or any mix of vertical (top, center, bottom) and horizontal (left, center, right) origins for customized dropdown alignment, anchoring, attachment, and spatial control of multi-column selection popups.
+How do I position the dropdown popup of a MultiColumnComboBox? Control and configure the dropdown popup’s positioning and alignment relative to its anchor element by specifying vertical and horizontal anchor points using combined "y x" coordinates, enabling precise placement and attachment of the popup such as top-left, bottom-center, center-right, or any mix of vertical (top, center, bottom) and horizontal (left, center, right) origins for customized dropdown alignment, anchoring, attachment, and spatial control of multi-column selection popups.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1696,7 +1696,7 @@ The available "x" positions are:
 
 
 <div class="meta-api-description">
-Configure precise popup alignment by setting the vertical and horizontal attachment points between the dropdown menu and its anchor element, enabling control over popup positioning such as top, bottom, or center vertically, and left, center, or right horizontally. Adjust how the popup appears relative to the trigger element by defining coordinate pairs or keywords for vertical alignment including top, center, and bottom, combined with horizontal placement options like left, center, and right, to achieve exact overlay or adjacent display. Enable fine-tuned position control for dropdown or autocomplete popups by specifying anchor attachment points using space-separated vertical and horizontal values, allowing developers to set popup origin alignment for consistent UI layouts, responsive designs, and custom dropdown placements. This supports tailored interaction patterns where the popup can open above, below, or aligned with the anchor horizontally and vertically, facilitating complex interface requirements and avoiding clipping or overflow issues. Ideal for configuring popup attachment, dropdown positioning, menu placement, overlay alignment, and managing how floating panels appear in relation to anchor components.
+How can I precisely position a dropdown menu in relation to its trigger element using Kendo UI's MultiColumnComboBox? Configure precise popup alignment by setting the vertical and horizontal attachment points between the dropdown menu and its anchor element, enabling control over popup positioning such as top, bottom, or center vertically, and left, center, or right horizontally. Adjust how the popup appears relative to the trigger element by defining coordinate pairs or keywords for vertical alignment including top, center, and bottom, combined with horizontal placement options like left, center, and right, to achieve exact overlay or adjacent display. Enable fine-tuned position control for dropdown or autocomplete popups by specifying anchor attachment points using space-separated vertical and horizontal values, allowing developers to set popup origin alignment for consistent UI layouts, responsive designs, and custom dropdown placements. This supports tailored interaction patterns where the popup can open above, below, or aligned with the anchor horizontally and vertically, facilitating complex interface requirements and avoiding clipping or overflow issues. Ideal for configuring popup attachment, dropdown positioning, menu placement, overlay alignment, and managing how floating panels appear in relation to anchor components.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1739,7 +1739,7 @@ The configuration for the prefix adornment of the component.
 
 
 <div class="meta-api-description">
-Set or customize a visual prefix, adornment, or leading element displayed before the input field in a multi-column combo box, enabling control over its icon, text label, template design, styling, or interactive behavior; configure how the prefix appears, what content it shows, how it responds to user actions, and how it integrates with the input to enhance user interface clarity, branding, or input context.
+How to customize the visual prefix in a Kendo UI MultiColumnComboBox? Set or customize a visual prefix, adornment, or leading element displayed before the input field in a multi-column combo box, enabling control over its icon, text label, template design, styling, or interactive behavior; configure how the prefix appears, what content it shows, how it responds to user actions, and how it integrates with the input to enhance user interface clarity, branding, or input context.
 </div>
 
 #### Example - specify prefix adornment configuration
@@ -1772,7 +1772,7 @@ Defines the name for an existing icon in a Kendo UI theme or SVG content
 
 
 <div class="meta-api-description">
-Set or customize a leading icon for input fields by configuring a prefix icon using either predefined theme icon names or custom SVG markup, enabling the display of icons before text input in dropdowns or combo boxes; control icon appearance to enhance UI elements in multi-column selection components, support icon prefixes for better user interaction, and integrate scalable vector icons to visually augment input controls with flexible icon sources.
+How can I add an icon to the input field of a MultiColumnComboBox? Set or customize a leading icon for input fields by configuring a prefix icon using either predefined theme icon names or custom SVG markup, enabling the display of icons before text input in dropdowns or combo boxes; control icon appearance to enhance UI elements in multi-column selection components, support icon prefixes for better user interaction, and integrate scalable vector icons to visually augment input controls with flexible icon sources.
 </div>
 
 #### Example - specify prefix adornment icon
@@ -1805,7 +1805,7 @@ The [template](/api/javascript/kendo/methods/template) for the prefix adornment 
 
 
 <div class="meta-api-description">
-Customize or configure the prefix element, static content, or adornment displayed before the input field by defining HTML templates, template strings, or rendering functions to control how the MultiColumnComboBox prefix appears; set, modify, or provide custom markup or templating for the prefix area on component initialization to enable tailored prefixes, icons, symbols, or labels that precede user input, facilitating visual customization, branding, or UI enhancements for the input prefix section.
+How do I customize the prefix element in a Kendo UI MultiColumnComboBox? Customize or configure the prefix element, static content, or adornment displayed before the input field by defining HTML templates, template strings, or rendering functions to control how the MultiColumnComboBox prefix appears; set, modify, or provide custom markup or templating for the prefix area on component initialization to enable tailored prefixes, icons, symbols, or labels that precede user input, facilitating visual customization, branding, or UI enhancements for the input prefix section.
 </div>
 
 #### Example - specify prefix adornment template
@@ -1838,7 +1838,7 @@ If set to `false`, the prefix adornment will not have a separator.
 
 
 <div class="meta-api-description">
-Adjust and configure the visual boundary or dividing line appearing between the prefix adornment and the input field within multi-column dropdowns or combo boxes, enabling toggling, showing, hiding, or removing the separator line or divider after prefix elements, controlling how prefixes visually separate from user input, customizing user interface styling related to prefix delimiters or spacing in combo inputs, managing the display of separator characters or lines that segment prefix decorations from text input areas, and setting flags or options to enable or disable these prefix-to-input separators for clearer interaction and visual distinction in combo box components.
+How do I remove the separator line between prefix adornment and input field in Kendo UI MultiColumnComboBox? Adjust and configure the visual boundary or dividing line appearing between the prefix adornment and the input field within multi-column dropdowns or combo boxes, enabling toggling, showing, hiding, or removing the separator line or divider after prefix elements, controlling how prefixes visually separate from user input, customizing user interface styling related to prefix delimiters or spacing in combo inputs, managing the display of separator characters or lines that segment prefix decorations from text input areas, and setting flags or options to enable or disable these prefix-to-input separators for clearer interaction and visual distinction in combo box components.
 </div>
 
 #### Example - specify prefix adornment separator
@@ -1878,7 +1878,7 @@ Sets a value controlling the border radius. Can also be set to the following str
 
 
 <div class="meta-api-description">
-Adjust the corner curvature or border radius of dropdown inputs using numeric values or semantic presets like none, small, medium, large, and full to customize the roundness of combo box corners, control UI styling consistency, configure border shape, enable rounded edges, set corner radius for form elements, and modify the appearance of multi-column selection lists with flexible corner styling options.
+How do I customize the corner curvature of dropdown inputs in a MultiColumnComboBox using numeric values or semantic presets? Adjust the corner curvature or border radius of dropdown inputs using numeric values or semantic presets like none, small, medium, large, and full to customize the roundness of combo box corners, control UI styling consistency, configure border shape, enable rounded edges, set corner radius for form elements, and modify the appearance of multi-column selection lists with flexible corner styling options.
 </div>
 
 #### Example - sets the rounded value
@@ -1911,7 +1911,7 @@ Sets a value controlling size of the component. Can also be set to the following
 
 
 <div class="meta-api-description">
-Adjust the component’s overall dimensions, visual scale, and spacing by setting size options such as small, medium, large, or none, enabling control over the appearance, padding, and layout density of multi-column dropdowns, combo boxes, or selection lists to optimize interface compactness, readability, and user experience across various design needs or responsive layouts.
+How do I adjust the size of a Kendo UI MultiColumnComboBox? Adjust the component’s overall dimensions, visual scale, and spacing by setting size options such as small, medium, large, or none, enabling control over the appearance, padding, and layout density of multi-column dropdowns, combo boxes, or selection lists to optimize interface compactness, readability, and user experience across various design needs or responsive layouts.
 </div>
 
 #### Example - sets a size
@@ -1939,7 +1939,7 @@ The configuration for the suffix adornment of the component.
 
 
 <div class="meta-api-description">
-Customize and control trailing elements for input fields by adding suffixes like icons, badges, buttons, or interactive controls at the end of dropdown or combobox inputs. Enable configuration of suffix content, appearance, actions, and accessibility features to tailor the user interface with trailing adornments that enhance input components’ functionality and visual style. Set or modify trailing decorations during initialization to attach additional interactive or informative elements that appear after the main input text, supporting use cases such as inline actions, status indicators, or supplemental icons in multi-column dropdown menus or combo boxes.
+How to customize the trailing elements in Kendo UI MultiColumnComboBox input fields? Customize and control trailing elements for input fields by adding suffixes like icons, badges, buttons, or interactive controls at the end of dropdown or combobox inputs. Enable configuration of suffix content, appearance, actions, and accessibility features to tailor the user interface with trailing adornments that enhance input components’ functionality and visual style. Set or modify trailing decorations during initialization to attach additional interactive or informative elements that appear after the main input text, supporting use cases such as inline actions, status indicators, or supplemental icons in multi-column dropdown menus or combo boxes.
 </div>
 
 #### Example - specify suffix adornment configuration
@@ -1972,7 +1972,7 @@ Defines the name for an existing icon in a Kendo UI theme or SVG content
 
 
 <div class="meta-api-description">
-Set or customize the suffix icon shown in a multi-column combo box input by specifying an icon source, including predefined theme icon names or custom inline SVG content, enabling replacement or addition of the default suffix symbol; control, configure, or change the suffix visual element with either built-in theme glyphs or personalized SVG icons to enhance component appearance, support icon rendering, and tailor UI elements for selection inputs with flexible icon options and suffix decoration.
+How do I change the default suffix icon in a Kendo UI MultiColumnComboBox? Set or customize the suffix icon shown in a multi-column combo box input by specifying an icon source, including predefined theme icon names or custom inline SVG content, enabling replacement or addition of the default suffix symbol; control, configure, or change the suffix visual element with either built-in theme glyphs or personalized SVG icons to enhance component appearance, support icon rendering, and tailor UI elements for selection inputs with flexible icon options and suffix decoration.
 </div>
 
 #### Example - specify suffix adornment icon
@@ -2005,7 +2005,7 @@ The [template](/api/javascript/kendo/methods/template) for the suffix adornment 
 
 
 <div class="meta-api-description">
-Customize the suffix area of a multi-column dropdown by configuring templates that control rendering of icons, badges, formatted text, or dynamic content bound to data. Enable custom suffix displays, set suffix adornments with templates, and integrate complex markup or visual elements after dropdown items. Control how suffix regions appear in combo boxes using flexible templating for enhanced UI, including badges, indicators, or specialized icons. Use suffix templates to embed styled content or data-driven suffix components adjacent to multi-column selections for a tailored user experience.
+How can I customize the suffix area in Kendo UI MultiColumnComboBox? Customize the suffix area of a multi-column dropdown by configuring templates that control rendering of icons, badges, formatted text, or dynamic content bound to data. Enable custom suffix displays, set suffix adornments with templates, and integrate complex markup or visual elements after dropdown items. Control how suffix regions appear in combo boxes using flexible templating for enhanced UI, including badges, indicators, or specialized icons. Use suffix templates to embed styled content or data-driven suffix components adjacent to multi-column selections for a tailored user experience.
 </div>
 
 #### Example - specify suffix adornment template
@@ -2038,7 +2038,7 @@ If set to `false`, the suffix adornment will not have a separator.
 
 
 <div class="meta-api-description">
-Customize the appearance of the dividing line or separator between the main input field and the suffix or trailing element in dropdown inputs or combo boxes, enabling you to show or hide the visual boundary that separates the input area from suffix icons, labels, or adornments. Configure whether to display a visual divider or remove it to create seamless integration of suffix elements, enhancing visual grouping, UI clarity, or compactness. Control, enable, disable, set, or adjust the separator line between input text and trailing adornments to refine design and user interface layout in combo box components that support multiple columns or suffix indicators.
+How do I customize the separator line in Kendo UI's MultiColumnComboBox? Customize the appearance of the dividing line or separator between the main input field and the suffix or trailing element in dropdown inputs or combo boxes, enabling you to show or hide the visual boundary that separates the input area from suffix icons, labels, or adornments. Configure whether to display a visual divider or remove it to create seamless integration of suffix elements, enhancing visual grouping, UI clarity, or compactness. Control, enable, disable, set, or adjust the separator line between input text and trailing adornments to refine design and user interface layout in combo box components that support multiple columns or suffix indicators.
 </div>
 
 #### Example - specify suffix adornment separator
@@ -2072,7 +2072,7 @@ If set to `true` the widget will automatically use the first suggestion as its v
 
 
 <div class="meta-api-description">
-Enable automatic selection and filling of the first matching suggestion in a multi-column dropdown or combo box, allowing the input to auto-complete or auto-fill based on the top matched item from a list while typing. Configure the component to dynamically suggest and pre-fill the best or first possible option, facilitating quick selection, search-as-you-type behavior, or predictive text input by automatically setting the earliest matching suggestion as the current value. This setting helps control whether the UI preselects, auto-suggests, or auto-populates the initial best match to speed up user input and streamline data entry in multi-column selector controls.
+How to enable auto-suggest in Kendo UI MultiColumnComboBox? Enable automatic selection and filling of the first matching suggestion in a multi-column dropdown or combo box, allowing the input to auto-complete or auto-fill based on the top matched item from a list while typing. Configure the component to dynamically suggest and pre-fill the best or first possible option, facilitating quick selection, search-as-you-type behavior, or predictive text input by automatically setting the earliest matching suggestion as the current value. This setting helps control whether the UI preselects, auto-suggests, or auto-populates the initial best match to speed up user input and streamline data entry in multi-column selector controls.
 </div>
 
 #### Example - enable automatic suggestion
@@ -2103,7 +2103,7 @@ clear the selected value but keep the custom text.
 
 
 <div class="meta-api-description">
-Control whether user-entered custom text in a multi-column combo box synchronizes automatically with the selected value, enabling configurations to set typed input as the current selection or maintain the input without updating the selection; adjust settings to either apply typed custom entries as chosen values or preserve the text independently while clearing any existing selection, addressing scenarios of input binding, form value synchronization, editable dropdown behavior, and dynamic selection updates in user interfaces.
+How does Kendo UI MultiColumnComboBox handle user-entered custom text synchronization with selected value? Control whether user-entered custom text in a multi-column combo box synchronizes automatically with the selected value, enabling configurations to set typed input as the current selection or maintain the input without updating the selection; adjust settings to either apply typed custom entries as chosen values or preserve the text independently while clearing any existing selection, addressing scenarios of input binding, form value synchronization, editable dropdown behavior, and dynamic selection updates in user interfaces.
 </div>
 
 #### Example - disable automatic sync between value and text
@@ -2125,7 +2125,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 
 <div class="meta-api-description">
-Configure or customize the popup header content for a multi-column dropdown by setting static HTML markup to define a fixed header template, allowing insertion of plain text or multiple HTML elements wrapped inside a single container tag for consistent rendering. Control how the header displays above the list items in dropdowns without dynamic data binding or template models, enabling fixed headers for columns or labels using raw HTML structures. Adjust or set static header layouts for multi-column combo boxes where the header is not dynamically generated but rather specified as constant content, suitable for scenarios requiring custom headers with text or multiple elements inside a single wrapper tag to ensure proper formatting and appearance.
+How can I customize the header content in a Kendo UI MultiColumnComboBox dropdown? Configure or customize the popup header content for a multi-column dropdown by setting static HTML markup to define a fixed header template, allowing insertion of plain text or multiple HTML elements wrapped inside a single container tag for consistent rendering. Control how the header displays above the list items in dropdowns without dynamic data binding or template models, enabling fixed headers for columns or labels using raw HTML structures. Adjust or set static header layouts for multi-column combo boxes where the header is not dynamically generated but rather specified as constant content, suitable for scenarios requiring custom headers with text or multiple elements inside a single wrapper tag to ensure proper formatting and appearance.
 </div>
 
 #### Example - specify headerTemplate as a string
@@ -2153,7 +2153,7 @@ The text of the widget used when the `autoBind` is set to `false`.
 
 
 <div class="meta-api-description">
-Set or configure the initial visible input text in a dropdown or combo box before data loading or binding occurs, enabling preset placeholder or default strings when results are not yet fetched, useful for showing a specific value or prompt during asynchronous data retrieval or delayed population, allowing control over the displayed input content prior to data binding, and supporting scenarios where you want to predefine or inject default input text in multi-column dropdowns or autocomplete components before the actual list data becomes available.
+How to set default text in Kendo UI MultiColumnComboBox before data loading? Set or configure the initial visible input text in a dropdown or combo box before data loading or binding occurs, enabling preset placeholder or default strings when results are not yet fetched, useful for showing a specific value or prompt during asynchronous data retrieval or delayed population, allowing control over the displayed input content prior to data binding, and supporting scenarios where you want to predefine or inject default input text in multi-column dropdowns or autocomplete components before the actual list data becomes available.
 </div>
 
 #### Example - specify text of the widget
@@ -2172,7 +2172,7 @@ The value of the widget.
 
 
 <div class="meta-api-description">
-Accessing or modifying the selected item in a multi-column dropdown list, retrieving or assigning the chosen option programmatically for forms, data binding, or dynamic updates, controlling which item is active or highlighted within a complex list control featuring multiple fields per entry, setting or reading the current selection value in a searchable or filterable combo box with columns, synchronizing selection states between UI components and underlying data models, initializing or updating the chosen element in a grid-like dropdown interface to reflect user input or application logic changes.
+How do I access or update the selected item in a Kendo UI MultiColumnComboBox? Accessing or modifying the selected item in a multi-column dropdown list, retrieving or assigning the chosen option programmatically for forms, data binding, or dynamic updates, controlling which item is active or highlighted within a complex list control featuring multiple fields per entry, setting or reading the current selection value in a searchable or filterable combo box with columns, synchronizing selection states between UI components and underlying data models, initializing or updating the chosen element in a grid-like dropdown interface to reflect user input or application logic changes.
 </div>
 
 #### Example - specify value of the widget
@@ -2200,7 +2200,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 
 <div class="meta-api-description">
-Configure selection binding behavior to determine whether the underlying model or state receives the primitive value or the entire selected item object from a multi-column dropdown component, enabling control over how initial null values and subsequent user choices update the data model, whether you want just the raw selection key or the full detailed record assigned, supporting scenarios where you need either simplified scalar assignments or complex object references from user selections in forms or data-bound interfaces.
+How to configure the MultiColumnComboBox in Kendo UI for jQuery to send the selected item's raw value instead of its entire object? Configure selection binding behavior to determine whether the underlying model or state receives the primitive value or the entire selected item object from a multi-column dropdown component, enabling control over how initial null values and subsequent user choices update the data model, whether you want just the raw selection key or the full detailed record assigned, supporting scenarios where you need either simplified scalar assignments or complex object references from user selections in forms or data-bound interfaces.
 </div>
 
 #### Example - specify that the View-Model field should be updated with the selected item value
@@ -2237,7 +2237,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
 
 
 <div class="meta-api-description">
-Optimize rendering large datasets and enhance performance using virtual scrolling techniques by configuring item height and custom value mapping for seamless component virtualization; control efficient loading, reduce lag, enable dynamic rendering, and implement scalable list virtualization to handle thousands of entries while maintaining smooth scrolling, improved memory usage, and faster response times in dropdowns or multi-column selectors.
+How do I optimize performance in Kendo UI's MultiColumnComboBox when dealing with large datasets? Optimize rendering large datasets and enhance performance using virtual scrolling techniques by configuring item height and custom value mapping for seamless component virtualization; control efficient loading, reduce lag, enable dynamic rendering, and implement scalable list virtualization to handle thousands of entries while maintaining smooth scrolling, improved memory usage, and faster response times in dropdowns or multi-column selectors.
 </div>
 
 #### Example
@@ -2274,7 +2274,7 @@ If the developer does not specify one, the framework will automatically set `ite
 
 
 <div class="meta-api-description">
-Configure or specify a fixed height for each item or row in a virtualized dropdown or list to ensure accurate measurement, consistent rendering, smooth scrolling, and proper recycling of elements in large datasets; set or adjust the uniform item row height to optimize performance when displaying multiple columns or combo box entries, with the option to rely on automatic height calculation based on theme and font size if no explicit height is provided, enabling predictable virtualization behavior and correct visual alignment across all list items in dynamic or data-heavy user interfaces.
+What is the itemHeight property in Kendo UI MultiColumnComboBox for? Configure or specify a fixed height for each item or row in a virtualized dropdown or list to ensure accurate measurement, consistent rendering, smooth scrolling, and proper recycling of elements in large datasets; set or adjust the uniform item row height to optimize performance when displaying multiple columns or combo box entries, with the option to rely on automatic height calculation based on theme and font size if no explicit height is provided, enabling predictable virtualization behavior and correct visual alignment across all list items in dynamic or data-heavy user interfaces.
 </div>
 
 #### Example
@@ -2314,7 +2314,7 @@ For more information, refer to the [article on virtualization]({% slug virtualiz
 
 
 <div class="meta-api-description">
-Configure how virtualization maps selected values in a multi-column combo box control by setting whether the value resolution uses the item’s index position or the actual data object, enabling customization of the value-to-item association during virtual scrolling or lazy loading scenarios. Control or switch between mapping values to data indexes versus mapping directly to data items or objects, influencing how the combo box handles virtualization and value lookup for performance optimization and data binding. Adjust the way virtualized selection, value matching, or value resolution occurs by selecting either positional index mapping or mapping to the exact data entry, affecting search, filtering, and rendering within large datasets. Enable or set virtualization value mapping modes to control how selected values correspond to underlying data during on-demand loading or virtual rendering inside multi-column dropdown components.
+How does the Kendo UI MultiColumnComboBox handle virtualization value mapping? Configure how virtualization maps selected values in a multi-column combo box control by setting whether the value resolution uses the item’s index position or the actual data object, enabling customization of the value-to-item association during virtual scrolling or lazy loading scenarios. Control or switch between mapping values to data indexes versus mapping directly to data items or objects, influencing how the combo box handles virtualization and value lookup for performance optimization and data binding. Adjust the way virtualized selection, value matching, or value resolution occurs by selecting either positional index mapping or mapping to the exact data entry, affecting search, filtering, and rendering within large datasets. Enable or set virtualization value mapping modes to control how selected values correspond to underlying data during on-demand loading or virtual rendering inside multi-column dropdown components.
 </div>
 
 #### Example
@@ -2361,7 +2361,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 
 <div class="meta-api-description">
-Configure custom mapping of selected values to corresponding data indexes during virtualization or remote data fetching, enabling synchronization of initial or programmatically set values with unloaded data items; implement functions to match incoming keys or selected entries to their positions within remote datasets, supporting scenarios where values are not locally available and must be resolved dynamically through index lookup or server-side mapping in combo box components handling large, virtualized data sources.
+How do I map selected values to their corresponding data indexes in a Kendo UI MultiColumnComboBox with virtualization? Configure custom mapping of selected values to corresponding data indexes during virtualization or remote data fetching, enabling synchronization of initial or programmatically set values with unloaded data items; implement functions to match incoming keys or selected entries to their positions within remote datasets, supporting scenarios where values are not locally available and must be resolved dynamically through index lookup or server-side mapping in combo box components handling large, virtualized data sources.
 </div>
 
 #### Example - MultiColumnComboBox widget with a virtualized list
@@ -2506,7 +2506,7 @@ The [data source](/api/javascript/data/datasource) of the widget. Configured via
 
 
 <div class="meta-api-description">
-Access, bind, or monitor the active data collection connected to a multi-column combo box component, including the current dataset whether sourced from a local array, remote API, or data source object instance; track real-time updates and changes within the existing data without swapping the entire source object, enabling synchronization with the UI, observing underlying data for filtering, sorting, or display purposes, and controlling data binding states dynamically while noting that replacing the entire collection requires a dedicated method rather than direct assignment.
+How do I access and bind data to a Kendo UI MultiColumnComboBox? Access, bind, or monitor the active data collection connected to a multi-column combo box component, including the current dataset whether sourced from a local array, remote API, or data source object instance; track real-time updates and changes within the existing data without swapping the entire source object, enabling synchronization with the UI, observing underlying data for filtering, sorting, or display purposes, and controlling data binding states dynamically while noting that replacing the entire collection requires a dedicated method rather than direct assignment.
 </div>
 
 #### Example - add a data item to the data source
@@ -2533,7 +2533,7 @@ A jQuery object of the visible input element, where the user types.
 
 
 <div class="meta-api-description">
-Access and manipulate the visible editable text field within a multi-column dropdown or combo box control, enabling direct interaction with the input element to read or update its value, attach or handle events like focus or change, control cursor selection or text attributes, and integrate with jQuery methods for dynamic UI behavior after component setup.
+How do I access the input field in a Kendo UI MultiColumnComboBox? Access and manipulate the visible editable text field within a multi-column dropdown or combo box control, enabling direct interaction with the input element to read or update its value, attach or handle events like focus or change, control cursor selection or text attributes, and integrate with jQuery methods for dynamic UI behavior after component setup.
 </div>
 
 #### Example - get input element
@@ -2552,7 +2552,7 @@ An object, which holds the options of the widget.
 
 
 <div class="meta-api-description">
-Configure or retrieve the current settings and parameters of a multi-column dropdown selector, including data sources, column definitions, display templates, filtering criteria, popup positioning, rendering options, and user interaction controls. Enable dynamic customization, access or update the data binding, control visual structure and layout, adjust filtering behavior, and manipulate popup or dropdown appearance and interactivity on the fly, supporting programmatic inspection and runtime modification of all available component features and display options within a composite selection interface.
+How to configure data source for Kendo UI MultiColumnComboBox? Configure or retrieve the current settings and parameters of a multi-column dropdown selector, including data sources, column definitions, display templates, filtering criteria, popup positioning, rendering options, and user interaction controls. Enable dynamic customization, access or update the data binding, control visual structure and layout, adjust filtering behavior, and manipulate popup or dropdown appearance and interactivity on the fly, supporting programmatic inspection and runtime modification of all available component features and display options within a composite selection interface.
 </div>
 
 #### Example - get options of the widget
@@ -2571,7 +2571,7 @@ A jQuery object of the drop-down list element.
 
 
 <div class="meta-api-description">
-Retrieve or manipulate the drop-down list element as a jQuery object to customize or control the multi-column combo box options, enabling event handling, DOM queries or modifications, styling adjustments, focus and keyboard management, dimension measurement, and seamless integration with third-party plugins or custom behaviors after initialization.
+How can I customize the dropdown list of my Kendo UI MultiColumnComboBox? Retrieve or manipulate the drop-down list element as a jQuery object to customize or control the multi-column combo box options, enabling event handling, DOM queries or modifications, styling adjustments, focus and keyboard management, dimension measurement, and seamless integration with third-party plugins or custom behaviors after initialization.
 </div>
 
 #### Example - get list element
@@ -2590,7 +2590,7 @@ A jQuery object of the `ul` element, which holds the available options.
 
 
 <div class="meta-api-description">
-Access or manipulate the list container element that holds all selectable options in a multi-column dropdown, enabling direct queries, dynamic updates, attaching event listeners, scrolling control, measurement of list dimensions, and applying custom styles or attributes to the options display area; useful for customizing behavior, enhancing interaction, or modifying the dropdown’s options panel through scripting or styling in a jQuery-compatible way.
+How do I manipulate the dropdown list in a Kendo UI MultiColumnComboBox? Access or manipulate the list container element that holds all selectable options in a multi-column dropdown, enabling direct queries, dynamic updates, attaching event listeners, scrolling control, measurement of list dimensions, and applying custom styles or attributes to the options display area; useful for customizing behavior, enhancing interaction, or modifying the dropdown’s options panel through scripting or styling in a jQuery-compatible way.
 </div>
 
 #### Example - get ul element
@@ -2612,7 +2612,7 @@ Closes the widget popup.
 
 
 <div class="meta-api-description">
-Trigger closing or dismissing the dropdown menu, programmatically hide the popup or overlay, end user interaction with list items, control the visibility of multi-column dropdowns, close combo boxes after selection or cancellation, terminate open popup state, manage dropdown closing dynamically during navigation or data updates, disable or hide the popup programmatically, collapse expanded component lists, and reset or finalize the combo box state by closing its popup through code execution.
+How do I programmatically close the dropdown menu in a Kendo UI MultiColumnComboBox? Trigger closing or dismissing the dropdown menu, programmatically hide the popup or overlay, end user interaction with list items, control the visibility of multi-column dropdowns, close combo boxes after selection or cancellation, terminate open popup state, manage dropdown closing dynamically during navigation or data updates, disable or hide the popup programmatically, collapse expanded component lists, and reset or finalize the combo box state by closing its popup through code execution.
 </div>
 
 #### Example - close the suggestion popup
@@ -2644,7 +2644,7 @@ Returns the data item at the specified index. If the index is not specified, the
 
 
 <div class="meta-api-description">
-Access the underlying data object or model entry tied to a specific row index or the current selected item in a multi-column dropdown component, enabling retrieval of data records for display, editing, or manipulation; retrieve data by row position or based on the active selection index to extract fields, properties, or entire objects for programmatic use, dynamic rendering, or conditional logic related to list items or selected entries in the combo box.
+How do I access data for a specific row in Kendo UI MultiColumnComboBox? Access the underlying data object or model entry tied to a specific row index or the current selected item in a multi-column dropdown component, enabling retrieval of data records for display, editing, or manipulation; retrieve data by row position or based on the active selection index to extract fields, properties, or entire objects for programmatic use, dynamic rendering, or conditional logic related to list items or selected entries in the combo box.
 </div>
 
 #### Parameters
@@ -2693,7 +2693,7 @@ Prepares the **MultiColumnComboBox** for safe removal from DOM. Detaches all eve
 
 
 <div class="meta-api-description">
-Clean up and safely remove all event listeners, data attributes, and nested child components tied to a MultiColumnComboBox instance to prevent memory leaks and free up resources before eliminating or detaching the widget from the DOM. This operation fully disposes the component’s internal state, including child widgets, unregisters event handlers, clears associated jQuery data, and prepares the component for garbage collection without physically removing its DOM element, enabling developers to manage lifecycle events, avoid memory bloat, and perform controlled teardown or dynamic UI updates.
+What happens when I call destroy on a MultiColumnComboBox widget? Clean up and safely remove all event listeners, data attributes, and nested child components tied to a MultiColumnComboBox instance to prevent memory leaks and free up resources before eliminating or detaching the widget from the DOM. This operation fully disposes the component’s internal state, including child widgets, unregisters event handlers, clears associated jQuery data, and prepares the component for garbage collection without physically removing its DOM element, enabling developers to manage lifecycle events, avoid memory bloat, and perform controlled teardown or dynamic UI updates.
 </div>
 
 #### Example
@@ -2711,7 +2711,7 @@ Enables or disables the widget.
 
 
 <div class="meta-api-description">
-Activate or deactivate the interactive state of a multi-column combo box control to control user access and input capabilities, allowing you to set or unset whether the dropdown can be opened, items can be selected, or the component responds to user interactions, enabling dynamic control over form validation, input handling, or UI state changes in your application at runtime.
+How to programmatically disable dropdown opening in a Kendo UI MultiColumnComboBox? Activate or deactivate the interactive state of a multi-column combo box control to control user access and input capabilities, allowing you to set or unset whether the dropdown can be opened, items can be selected, or the component responds to user interactions, enabling dynamic control over form validation, input handling, or UI state changes in your application at runtime.
 </div>
 
 #### Parameters
@@ -2737,7 +2737,7 @@ Focuses the widget.
 
 
 <div class="meta-api-description">
-Set or programmatically move keyboard focus to the dropdown input to enable user interaction, activate keyboard navigation, or handle accessibility requirements by focusing the component’s primary input field; control focus on the multi-column selection control through code to ensure it receives input attention, trigger focus events, or prepare for user typing and selection without manual clicks.
+How do I programmatically focus the MultiColumnComboBox dropdown input in jQuery? Set or programmatically move keyboard focus to the dropdown input to enable user interaction, activate keyboard navigation, or handle accessibility requirements by focusing the component’s primary input field; control focus on the multi-column selection control through code to ensure it receives input attention, trigger focus events, or prepare for user typing and selection without manual clicks.
 </div>
 
 #### Example - focus the widget
@@ -2755,7 +2755,7 @@ Obtains an Array of the DOM elements, which correspond to the data items from th
 
 
 <div class="meta-api-description">
-Access or get the array of current rendered DOM elements representing the displayed data entries in a multi-column dropdown or combo box, reflecting all applied filters, sorting, and paging, so you can manipulate, measure, or bind event handlers to the visible rows or items; retrieve the live set of list elements corresponding to the underlying data source view for purposes like customization, interaction enhancement, or dynamic updates in UI components showing tabular or hierarchical dropdown data.
+How do I access the current list items in a Kendo UI MultiColumnComboBox? Access or get the array of current rendered DOM elements representing the displayed data entries in a multi-column dropdown or combo box, reflecting all applied filters, sorting, and paging, so you can manipulate, measure, or bind event handlers to the visible rows or items; retrieve the live set of list elements corresponding to the underlying data source view for purposes like customization, interaction enhancement, or dynamic updates in UI components showing tabular or hierarchical dropdown data.
 </div>
 
 #### Returns
@@ -2792,7 +2792,7 @@ Opens the popup.
 
 
 <div class="meta-api-description">
-Programmatically trigger, display, or show the dropdown list or options popup for a multi-column combobox or dropdown control without user clicking, enabling developers to open, activate, or reveal the selection list on demand such as after initialization, via button clicks, focus events, or custom logic, allowing control over when the option menu or popup is presented in a UI component to facilitate automated or dynamic dropdown display.
+How do I programmatically open the dropdown list in a Kendo UI MultiColumnComboBox? Programmatically trigger, display, or show the dropdown list or options popup for a multi-column combobox or dropdown control without user clicking, enabling developers to open, activate, or reveal the selection list on demand such as after initialization, via button clicks, focus events, or custom logic, allowing control over when the option menu or popup is presented in a UI component to facilitate automated or dynamic dropdown display.
 </div>
 
 #### Example
@@ -2825,7 +2825,7 @@ Toggles the readonly state of the widget. When the widget is readonly it doesn't
 
 
 <div class="meta-api-description">
-Control whether users can edit or type input into a multi-column dropdown or combo box while keeping its selected value intact and included in form submissions, toggling read-only mode on or off at runtime to prevent modifications but still send the value with forms, distinguishing from disabled state where input is blocked and value excluded; configure, enable, set, or disable the read-only state dynamically to manage user interaction, input prevention, form data integrity, and readonly versus disabled behavior in complex UI components with multiple columns.
+How to make Kendo UI MultiColumnComboBox read-only but still submit its value with form? Control whether users can edit or type input into a multi-column dropdown or combo box while keeping its selected value intact and included in form submissions, toggling read-only mode on or off at runtime to prevent modifications but still send the value with forms, distinguishing from disabled state where input is blocked and value excluded; configure, enable, set, or disable the read-only state dynamically to manage user interaction, input prevention, form data integrity, and readonly versus disabled behavior in complex UI components with multiple columns.
 </div>
 
 #### Parameters
@@ -2849,7 +2849,7 @@ Refresh the popup by rendering all items again.
 
 
 <div class="meta-api-description">
-Trigger an update to reload or refresh the dropdown list so the displayed items, templates, or data bindings reflect the latest changes; force rerendering of all rows, rebuild the popup content dynamically, sync the dropdown with current data sources, reapply templates, reset visuals, refresh list elements, and ensure the multi-column combo box popup shows the most up-to-date information after data modifications or UI updates.
+How to refresh dropdown list in Kendo MultiColumnComboBox after data modifications? Trigger an update to reload or refresh the dropdown list so the displayed items, templates, or data bindings reflect the latest changes; force rerendering of all rows, rebuild the popup content dynamically, sync the dropdown with current data sources, reapply templates, reset visuals, refresh list elements, and ensure the multi-column combo box popup shows the most up-to-date information after data modifications or UI updates.
 </div>
 
 #### Example - refresh the popup items
@@ -2881,7 +2881,7 @@ Searches the data source for the provided value and displays any matches as sugg
 
 
 <div class="meta-api-description">
-Configure programmatic search, filter, or autocomplete in a multi-column dropdown component by triggering lookup and suggestion rendering based on user input or given values, enabling typeahead or dynamic filtering of list items from the configured data source, opening dropdown suggestions that match the search term, controlling how entries are matched and displayed for rapid selection and input assistance in interfaces requiring multi-field lookup or advanced filtering scenarios.
+How do I enable programmatic search in a Kendo UI MultiColumnComboBox? Configure programmatic search, filter, or autocomplete in a multi-column dropdown component by triggering lookup and suggestion rendering based on user input or given values, enabling typeahead or dynamic filtering of list items from the configured data source, opening dropdown suggestions that match the search term, controlling how entries are matched and displayed for rapid selection and input assistance in interfaces requiring multi-field lookup or advanced filtering scenarios.
 </div>
 
 #### Parameters
@@ -2948,7 +2948,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
 
 
 <div class="meta-api-description">
-Retrieve or set the selected item or index in a multi-column dropdown list, enabling control over the current choice by specifying an item, index, or conditional predicate; supports selecting options programmatically and updating the displayed text and internal value, though predicate-based selection is limited when virtualization is active due to partial data views. This method does not automatically fetch data if the list is unbound or lazy-loaded and does not trigger change events, so manual event firing may be needed to synchronize view models or bindings. Useful for configuring, enabling, or controlling the selected entry in complex dropdowns with multiple columns, supporting precise item selection, updating display values, and handling scenarios involving virtualization, deferred data loading, or reactive UI updates.
+How do I programmatically select an item in a Kendo UI MultiColumnComboBox? Retrieve or set the selected item or index in a multi-column dropdown list, enabling control over the current choice by specifying an item, index, or conditional predicate; supports selecting options programmatically and updating the displayed text and internal value, though predicate-based selection is limited when virtualization is active due to partial data views. This method does not automatically fetch data if the list is unbound or lazy-loaded and does not trigger change events, so manual event firing may be needed to synchronize view models or bindings. Useful for configuring, enabling, or controlling the selected entry in complex dropdowns with multiple columns, supporting precise item selection, updating display values, and handling scenarios involving virtualization, deferred data loading, or reactive UI updates.
 </div>
 
 #### Parameters
@@ -3063,7 +3063,7 @@ Sets the dataSource of an existing MultiColumnComboBox and rebinds it.
 
 
 <div class="meta-api-description">
-Configure or update the dropdown list by setting a new data source using an array, data source instance, or configuration object to refresh, reload, or replace the underlying items dynamically; this triggers immediate rebinding, updates displayed values, applies sorting and filtering rules from the updated data set, and ensures the multi-column dropdown reflects the latest data changes for responsive, programmable control over the displayed list content and filtering behavior.
+How do I update the items in a Kendo MultiColumnComboBox? Configure or update the dropdown list by setting a new data source using an array, data source instance, or configuration object to refresh, reload, or replace the underlying items dynamically; this triggers immediate rebinding, updates displayed values, applies sorting and filtering rules from the updated data set, and ensures the multi-column dropdown reflects the latest data changes for responsive, programmable control over the displayed list content and filtering behavior.
 </div>
 
 #### Parameters
@@ -3102,7 +3102,7 @@ Sets the value of the widget to the specified argument and visually selects the 
 
 
 <div class="meta-api-description">
-Programmatically set or update the input value of a multi-column dropdown or autocomplete field and visually highlight or select the text for quick replacement, editing, or copying by using a method to input, suggest, or autofill values dynamically after initialization; control the displayed text focus and selection for enhanced keyboard navigation, user interaction, or automated value setting in combobox or input components.
+How can I programmatically set the input value in a Kendo UI MultiColumnComboBox? Programmatically set or update the input value of a multi-column dropdown or autocomplete field and visually highlight or select the text for quick replacement, editing, or copying by using a method to input, suggest, or autofill values dynamically after initialization; control the displayed text focus and selection for enhanced keyboard navigation, user interaction, or automated value setting in combobox or input components.
 </div>
 
 #### Parameters
@@ -3164,7 +3164,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
 
 
 <div class="meta-api-description">
-Get or set the visible text of a multi-column dropdown that allows selecting items by matching displayed text or entering custom, unmatched values; configure or update the displayed string dynamically while controlling whether the selection binds automatically to the data source, handle cases where no matching item exists by treating the input as free text, manage text changes programmatically without triggering automatic change events that affect model-view bindings, and manually fire change events when synchronization with data models or event listeners is needed.
+How to dynamically set the visible text of a Kendo UI MultiColumnComboBox dropdown? Get or set the visible text of a multi-column dropdown that allows selecting items by matching displayed text or entering custom, unmatched values; configure or update the displayed string dynamically while controlling whether the selection binds automatically to the data source, handle cases where no matching item exists by treating the input as free text, manage text changes programmatically without triggering automatic change events that affect model-view bindings, and manually fire change events when synchronization with data models or event listeners is needed.
 </div>
 
 #### Parameters
@@ -3205,7 +3205,7 @@ Opens or closes the widget popup.
 
 
 <div class="meta-api-description">
-Programmatically open or close a dropdown list, show or hide the popup panel, toggle visibility of a multi-column selector, control dropdown state through code, manage combo box popup display based on custom triggers, enable or disable the popup from scripts, handle focus or keyboard events to display or conceal the list, dynamically set dropdown visibility without user clicks, switch the popup panel open or closed in response to application logic, and manipulate the display of multi-column combo boxes via method calls.
+How can I programmatically open or close the dropdown list in a Kendo UI MultiColumnComboBox? Programmatically open or close a dropdown list, show or hide the popup panel, toggle visibility of a multi-column selector, control dropdown state through code, manage combo box popup display based on custom triggers, enable or disable the popup from scripts, handle focus or keyboard events to display or conceal the list, dynamically set dropdown visibility without user clicks, switch the popup panel open or closed in response to application logic, and manipulate the display of multi-column combo boxes via method calls.
 </div>
 
 #### Parameters
@@ -3270,7 +3270,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
 
 
 <div class="meta-api-description">
-Programmatically retrieve or assign the current selection of a multi-column combo box control by getting or setting its value directly, with support for pre-fetching data when unbound and automatically clearing any active filters to restore the full data set for accurate selection updates; this method updates the value silently without triggering change events or model bindings, so manual event triggering is often required to notify observers or MVVM frameworks, enabling developers to control, configure, set, update, or manipulate the selected item, choice, or data entry within multi-column dropdown components with precision across diverse usage scenarios.
+How do I programmatically retrieve the selected value in a Kendo UI MultiColumnComboBox control? Programmatically retrieve or assign the current selection of a multi-column combo box control by getting or setting its value directly, with support for pre-fetching data when unbound and automatically clearing any active filters to restore the full data set for accurate selection updates; this method updates the value silently without triggering change events or model bindings, so manual event triggering is often required to notify observers or MVVM frameworks, enabling developers to control, configure, set, update, or manipulate the selected item, choice, or data entry within multi-column dropdown components with precision across diverse usage scenarios.
 </div>
 
 #### Parameters
@@ -3318,7 +3318,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect and respond to user-driven selection or input updates in a multi-column dropdown interface by capturing interactive value changes triggered by direct user actions, such as selecting or modifying choices, including updates cascaded from parent controls; track only user-initiated modifications, ignoring programmatic or API-driven alterations, to enable dynamic reactions to real-time user input, configure change listeners or handlers focused on genuine user edits, and manage event handling within the context of the component instance to synchronize UI responses, form validations, or related behaviors based on when users actively alter the selected values in complex dropdown collections.
+How do I detect when a user selects an item in a MultiColumnComboBox control using jQuery Kendo UI? Detect and respond to user-driven selection or input updates in a multi-column dropdown interface by capturing interactive value changes triggered by direct user actions, such as selecting or modifying choices, including updates cascaded from parent controls; track only user-initiated modifications, ignoring programmatic or API-driven alterations, to enable dynamic reactions to real-time user input, configure change listeners or handlers focused on genuine user edits, and manage event handling within the context of the component instance to synchronize UI responses, form validations, or related behaviors based on when users actively alter the selected values in complex dropdown collections.
 </div>
 
 #### Event Data
@@ -3381,7 +3381,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect when a multi-column combo box dropdown or popup closes, enabling you to handle events triggered by the overlay or dropdown hiding, perform cleanup tasks, update component state, track user interactions or analytics, respond to close actions, and access component methods or properties during the event to synchronize UI changes or reset values after the list or menu is dismissed.
+How do I handle the close event of Kendo UI MultiColumnComboBox? Detect when a multi-column combo box dropdown or popup closes, enabling you to handle events triggered by the overlay or dropdown hiding, perform cleanup tasks, update component state, track user interactions or analytics, respond to close actions, and access component methods or properties during the event to synchronize UI changes or reset values after the list or menu is dismissed.
 </div>
 
 #### Event Data
@@ -3442,7 +3442,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Trigger actions or execute custom logic after the dropdown completes loading, binding, or refreshing data from its data source, enabling dynamic updates to the user interface, setting focus on specific items, manipulating the rendered elements, or responding when the list of options is fully populated and displayed. Detect when data is fully loaded and rendered to programmatically update components, run callbacks on data load, control element focus post-refresh, or perform DOM changes after rebinding or refreshing list items. Use event-driven responses to changes in the data set, such as after fetching, loading new data, or re-rendering the visible options in a multi-column dropdown or combo box interface.
+How do I execute custom logic after the MultiColumnComboBox has finished loading its data? Trigger actions or execute custom logic after the dropdown completes loading, binding, or refreshing data from its data source, enabling dynamic updates to the user interface, setting focus on specific items, manipulating the rendered elements, or responding when the list of options is fully populated and displayed. Detect when data is fully loaded and rendered to programmatically update components, run callbacks on data load, control element focus post-refresh, or perform DOM changes after rebinding or refreshing list items. Use event-driven responses to changes in the data set, such as after fetching, loading new data, or re-rendering the visible options in a multi-column dropdown or combo box interface.
 </div>
 
 #### Event Data
@@ -3503,7 +3503,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Capture and customize how filtering operates when searching or narrowing down items in a multi-column dropdown by intercepting events triggered before data filtering begins; control or modify search terms, filter predicates, and matching logic dynamically, apply custom filtering algorithms, adjust or cancel automatic filtering processes, respond to user input changes or filter parameter updates, and access the component instance to manage filter context, enabling advanced control over which items are displayed during dropdown filtering or autocomplete queries.
+How to customize filtering in Kendo UI MultiColumnComboBox? Capture and customize how filtering operates when searching or narrowing down items in a multi-column dropdown by intercepting events triggered before data filtering begins; control or modify search terms, filter predicates, and matching logic dynamically, apply custom filtering algorithms, adjust or cancel automatic filtering processes, respond to user input changes or filter parameter updates, and access the component instance to manage filter context, enabling advanced control over which items are displayed during dropdown filtering or autocomplete queries.
 </div>
 
 #### Event Data
@@ -3605,7 +3605,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect when the dropdown or popup menu is triggered or opened in a multicolumn combo box to execute custom code for automatic input focus, initializing data fetching or loading, updating UI state, managing layout changes, or responding to user interactions when the selection list becomes visible, enabling event-driven control tied to the component instance for dynamic interface adjustments and behavior tracking as soon as the list expands or the user activates the dropdown panel.
+How can I detect when the dropdown menu is opened in a Kendo UI MultiColumnComboBox? Detect when the dropdown or popup menu is triggered or opened in a multicolumn combo box to execute custom code for automatic input focus, initializing data fetching or loading, updating UI state, managing layout changes, or responding to user interactions when the selection list becomes visible, enabling event-driven control tied to the component instance for dynamic interface adjustments and behavior tracking as soon as the list expands or the user activates the dropdown panel.
 </div>
 
 #### Event Data
@@ -3666,7 +3666,7 @@ Fired when an item from the popup is selected by the user either with mouse/tap 
 
 
 <div class="meta-api-description">
-Detect and handle user item selection actions from a multi-column dropdown or combo box, capturing events triggered by mouse clicks, touch taps, or keyboard navigation when a user picks an option from the list; enable responding to those selections by executing custom logic like updating interfaces, retrieving the chosen value, or initiating follow-up processes, while noting that automatic or programmatic changes to the selected item do not trigger this event detection or callback.
+How do I detect when a user selects an item from a Kendo UI MultiColumnComboBox? Detect and handle user item selection actions from a multi-column dropdown or combo box, capturing events triggered by mouse clicks, touch taps, or keyboard navigation when a user picks an option from the list; enable responding to those selections by executing custom logic like updating interfaces, retrieving the chosen value, or initiating follow-up processes, while noting that automatic or programmatic changes to the selected item do not trigger this event detection or callback.
 </div>
 
 #### Event Data
@@ -3763,7 +3763,7 @@ Fired when the value of the widget is changed via API or user interaction.
 
 
 <div class="meta-api-description">
-Handle changes when a selection or input value updates in a multi-column dropdown or combo box component, triggering events to synchronize dependent user interface elements, refresh data models, run validation checks, cascade updates to linked controls, propagate selected values, or execute custom logic on value changes caused by user interaction or programmatic API calls, enabling dynamic data loading and coordinated UI behavior.
+How do I handle changes in a MultiColumnComboBox when its selection or input value updates? Handle changes when a selection or input value updates in a multi-column dropdown or combo box component, triggering events to synchronize dependent user interface elements, refresh data models, run validation checks, cascade updates to linked controls, propagate selected values, or execute custom logic on value changes caused by user interaction or programmatic API calls, enabling dynamic data loading and coordinated UI behavior.
 </div>
 
 #### Event Data

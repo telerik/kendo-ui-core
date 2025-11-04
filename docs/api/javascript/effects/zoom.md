@@ -40,7 +40,7 @@ The direction of the effect. Accepted values are `"in"` or `"out"`.
 
 
 <div class="meta-api-description">
-Set or configure the zoom animation direction to control whether the effect expands by zooming in or contracts by zooming out, specifying movement preferences such as inward zoom or outward shrink, adjusting the zoom behavior on initialization, determining scaling transitions, toggling zoom growth or reduction, and enabling directional control for animation scaling from either closer or farther perspectives.
+How do I configure Kendo UI's FXZoom effect to zoom in/out? Set or configure the zoom animation direction to control whether the effect expands by zooming in or contracts by zooming out, specifying movement preferences such as inward zoom or outward shrink, adjusting the zoom behavior on initialization, determining scaling transitions, toggling zoom growth or reduction, and enabling directional control for animation scaling from either closer or farther perspectives.
 </div>
 
 #### Example
@@ -68,7 +68,7 @@ Sets the initial **scale** value of the element.
 
 
 <div class="meta-api-description">
-Configure the initial zoom scale factor to define how much an element is enlarged or reduced at the start of a zoom animation, allowing you to set, programmatically adjust, or initialize the starting magnification level with values where 1 represents actual size, values greater than 1 indicate zooming in or scaling up, and values less than 1 correspond to zooming out or scaling down, enabling precise control over the initial visual presentation, animation start point, or transformation magnitude for effects involving resizing, scaling, or zoom transitions on elements.
+How can I programmatically set the initial zoom scale factor for a Kendo UI effect? Configure the initial zoom scale factor to define how much an element is enlarged or reduced at the start of a zoom animation, allowing you to set, programmatically adjust, or initialize the starting magnification level with values where 1 represents actual size, values greater than 1 indicate zooming in or scaling up, and values less than 1 correspond to zooming out or scaling down, enabling precise control over the initial visual presentation, animation start point, or transformation magnitude for effects involving resizing, scaling, or zoom transitions on elements.
 </div>
 
 #### Example
@@ -111,7 +111,7 @@ Sets the initial **scale** value of the element.
 
 
 <div class="meta-api-description">
-Set or adjust the numeric zoom scaling factor to define the element’s initial size during zoom animations, enabling precise control over zoom levels such as doubling size with scale 2, displaying original size at scale 1, or zooming out to smaller sizes like 0.1; configure, control, or customize zoom scale, magnification, scaling factor, or initial visual zoom to manage how much the element is enlarged or reduced when applying zoom effects.
+How do I adjust the zoom scaling factor in Kendo UI's effects to display my element at a specific size during animations? Set or adjust the numeric zoom scaling factor to define the element’s initial size during zoom animations, enabling precise control over zoom levels such as doubling size with scale 2, displaying original size at scale 1, or zooming out to smaller sizes like 0.1; configure, control, or customize zoom scale, magnification, scaling factor, or initial visual zoom to manage how much the element is enlarged or reduced when applying zoom effects.
 </div>
 
 #### Example

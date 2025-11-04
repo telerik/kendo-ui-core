@@ -293,10 +293,11 @@ export const __meta__ = {
 
         setOptions: function(options) {
             let that = this,
-            isComponentTypeChanged;
+            isComponentTypeChanged = false;
 
-            isComponentTypeChanged = options.componentType ? true : false;
-
+            if (options.componentType) {
+                isComponentTypeChanged = options.componentType !== that.options.componentType;
+            }
             normalize(options);
 
             options.disableDates = getDisabledExpr(options.disableDates);
@@ -338,13 +339,13 @@ export const __meta__ = {
 
             that.navigate();
 
+            let value = parse(options.value || that.options.value || that._value, options.format, options.culture);
             if (isComponentTypeChanged) {
-                let value = parse(that.options.value, options.format, options.culture);
                 that._current = new DATE(+restrictValue(value, options.min, options.max));
                 that._cell = null;
                 that._table = null;
-                that.value(value);
             }
+            that.value(value);
 
             if (options.weekNumber) {
                 that.element.addClass('k-week-number');

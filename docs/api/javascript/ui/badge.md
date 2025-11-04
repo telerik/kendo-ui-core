@@ -30,7 +30,7 @@ Note: when using align, make sure the badge container has [css position](https:/
 
 
 <div class="meta-api-description">
-Control or customize the placement and positioning of a badge relative to its container by aligning it to specific corners such as top-left, top-right, bottom-left, or bottom-right, with automatic adjustments for right-to-left (RTL) layouts. Adjust, set, or configure the badge alignment for precise corner positioning within a parent element, ensuring the container supports CSS positioning and overflow visibility. Enable developers to position badges dynamically in various UI contexts by specifying alignment preferences that work seamlessly with overall badge positioning settings, catering to different layout directions, corner anchoring, or overlay requirements.
+How do I adjust the position of a Kendo UI badge in relation to its container? Control or customize the placement and positioning of a badge relative to its container by aligning it to specific corners such as top-left, top-right, bottom-left, or bottom-right, with automatic adjustments for right-to-left (RTL) layouts. Adjust, set, or configure the badge alignment for precise corner positioning within a parent element, ensuring the container supports CSS positioning and overflow visibility. Enable developers to position badges dynamically in various UI contexts by specifying alignment preferences that work seamlessly with overall badge positioning settings, catering to different layout directions, corner anchoring, or overlay requirements.
 </div>
 
 #### Example
@@ -53,7 +53,7 @@ Specifies whether or not to render additional "cutout" border around the badge.
 
 
 <div class="meta-api-description">
-Control the presence of a decorative outline or border around a UI badge element, enabling or disabling an extra cutout-style edge to enhance visual separation, emphasis, or highlight. Configure, toggle, set, or adjust this border feature during component setup to influence badge appearance, styling, accentuation, and focus. Ideal for developers seeking to customize badge visuals with options to add or remove a distinct outline or trim that highlights badges within interfaces or design systems.
+How to enable or disable the decorative border around a Kendo UI for jQuery badge element? Control the presence of a decorative outline or border around a UI badge element, enabling or disabling an extra cutout-style edge to enhance visual separation, emphasis, or highlight. Configure, toggle, set, or adjust this border feature during component setup to influence badge appearance, styling, accentuation, and focus. Ideal for developers seeking to customize badge visuals with options to add or remove a distinct outline or trim that highlights badges within interfaces or design systems.
 </div>
 
 #### Example
@@ -74,7 +74,7 @@ Specifies how themeColor is applied to a badge. Valid options are `solid` (defau
 
 
 <div class="meta-api-description">
-Adjust the visual style or appearance of a badge by choosing between a solid filled background or an outlined design that colors the border and text, enabling customization of how the main theme color is applied. This setting lets you configure the badge’s fill style, switch between filled backgrounds and transparent or outline-only looks, control whether the badge uses a full color fill or just colored edges and typography, and set the style to solid or outline to match branding or UI preferences.
+What is Kendo UI badge fillMode property used for? Adjust the visual style or appearance of a badge by choosing between a solid filled background or an outlined design that colors the border and text, enabling customization of how the main theme color is applied. This setting lets you configure the badge’s fill style, switch between filled backgrounds and transparent or outline-only looks, control whether the badge uses a full color fill or just colored edges and typography, and set the style to solid or outline to match branding or UI preferences.
 </div>
 
 #### Example
@@ -95,7 +95,7 @@ See [web font icons help article](/styles-and-layout/icons-web) for more details
 
 
 <div class="meta-api-description">
-Configure or enable an icon within a badge by specifying a predefined Kendo theme icon name or supplying custom SVG content to customize the badge's visual indicator, controlling how an icon is displayed inside the badge element using web font icons or inline SVG, allowing for flexible icon integration, styling, and dynamic rendering within user interface badges for status indicators, notifications, or markers.
+How do I customize the icon in a Kendo UI badge? Configure or enable an icon within a badge by specifying a predefined Kendo theme icon name or supplying custom SVG content to customize the badge's visual indicator, controlling how an icon is displayed inside the badge element using web font icons or inline SVG, allowing for flexible icon integration, styling, and dynamic rendering within user interface badges for status indicators, notifications, or markers.
 </div>
 
 #### Example
@@ -115,7 +115,7 @@ If `text` is a number, it will cap that number.
 
 
 <div class="meta-api-description">
-Limit, restrict, or cap the numeric value shown in badges or notifications by setting a maximum threshold to control how large numbers appear, preventing overflow or clutter when displaying counts, quantities, or numeric indicators. Configure the maximum displayed number to ensure that if the actual count exceeds this limit, the badge shows the capped value instead, supporting clearer user interfaces for counts, notifications, alerts, or messages by controlling visibility and formatting of numeric badges in UI components. Adjust or set upper bounds for badge numbers, counter limits, or value thresholds to manage numeric visualizations within badges or notification elements.
+How to limit the numeric value in Kendo UI badges? Limit, restrict, or cap the numeric value shown in badges or notifications by setting a maximum threshold to control how large numbers appear, preventing overflow or clutter when displaying counts, quantities, or numeric indicators. Configure the maximum displayed number to ensure that if the actual count exceeds this limit, the badge shows the capped value instead, supporting clearer user interfaces for counts, notifications, alerts, or messages by controlling visibility and formatting of numeric badges in UI components. Adjust or set upper bounds for badge numbers, counter limits, or value thresholds to manage numeric visualizations within badges or notification elements.
 </div>
 
 #### Example
@@ -143,7 +143,7 @@ Note: position configuration, other than `inline`, requires the badge to be alig
 
 
 <div class="meta-api-description">
-Set or adjust the placement and alignment of a notification badge in relation to its container, controlling whether the badge appears inside the container next to text, fully inside but offset, centered on the container edge, or completely outside the bounds. This position setting supports flexible configuration for badge location such as inline placement beside content, edge alignment where the badge center aligns with container boundaries, or full inside/outside positioning depending on visual design needs. Developers often seek ways to customize badge display, specify badge anchor points, control badge offsets, or toggle badge overlay relative to container edges or text elements, ensuring the badge placement matches UI layout requirements and enhances visibility or aesthetics.
+How can I adjust the position of a notification badge in Kendo UI for jQuery? Set or adjust the placement and alignment of a notification badge in relation to its container, controlling whether the badge appears inside the container next to text, fully inside but offset, centered on the container edge, or completely outside the bounds. This position setting supports flexible configuration for badge location such as inline placement beside content, edge alignment where the badge center aligns with container boundaries, or full inside/outside positioning depending on visual design needs. Developers often seek ways to customize badge display, specify badge anchor points, control badge offsets, or toggle badge overlay relative to container edges or text elements, ensuring the badge placement matches UI layout requirements and enhances visibility or aesthetics.
 </div>
 
 #### Example
@@ -166,7 +166,7 @@ Specifies the size of the badge. Valid options are `small`, `medium`, `large` an
 
 
 <div class="meta-api-description">
-Control the shape and size of a badge or label element by configuring its corner curvature and overall dimensions, enabling options for subtle rounded corners, moderate rounding, large rounded edges, or fully pill-shaped designs; adjust compactness and smoothness of curves to fit UI requirements, set visual styles ranging from minimal rounding to completely rounded badges, customize corner radius and sizing for badges, labels, or tags to achieve small, medium, large, or fully rounded appearances, and tailor the visual compactness and roundness to match design themes or accessibility preferences.
+How do I control the shape of a Kendo UI badge? Control the shape and size of a badge or label element by configuring its corner curvature and overall dimensions, enabling options for subtle rounded corners, moderate rounding, large rounded edges, or fully pill-shaped designs; adjust compactness and smoothness of curves to fit UI requirements, set visual styles ranging from minimal rounding to completely rounded badges, customize corner radius and sizing for badges, labels, or tags to achieve small, medium, large, or fully rounded appearances, and tailor the visual compactness and roundness to match design themes or accessibility preferences.
 </div>
 
 #### Example
@@ -188,7 +188,7 @@ Specifies the size of the badge. Valid options are `small`, `medium` and `large`
 
 
 <div class="meta-api-description">
-Adjust the visual scale or dimension of a badge component to configure its display size, enabling developers to set the badge as small, medium, or large for different user interface densities, emphasis levels, accessibility needs, or layout consistency; control, enable, or specify compact, default, or prominent badge sizing to fit various design requirements, emphasis priorities, and responsive UI scaling preferences.
+How do I adjust the size of a Kendo UI badge component? Adjust the visual scale or dimension of a badge component to configure its display size, enabling developers to set the badge as small, medium, or large for different user interface densities, emphasis levels, accessibility needs, or layout consistency; control, enable, or specify compact, default, or prominent badge sizing to fit various design requirements, emphasis priorities, and responsive UI scaling preferences.
 </div>
 
 #### Example
@@ -209,7 +209,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the content
 
 
 <div class="meta-api-description">
-Control and customize badge appearance by defining a template that formats and binds data dynamically, enabling tailored HTML output and flexible content rendering for badges, including modifying displayed values, adjusting markup structure, and applying custom data-driven layouts or styles.
+How to customize badge appearance with Kendo UI for jQuery? Control and customize badge appearance by defining a template that formats and binds data dynamically, enabling tailored HTML output and flexible content rendering for badges, including modifying displayed values, adjusting markup structure, and applying custom data-driven layouts or styles.
 </div>
 
 #### Example - string template
@@ -247,7 +247,7 @@ The text of the badge. Valid input includes `string`, `number` or `object` with 
 
 
 <div class="meta-api-description">
-Control and customize the visible label or content of a badge by setting the displayed text, which can be a string, number, or any object convertible to a string representation, enabling flexible formatting and dynamic updates to the badge's content or caption to reflect status, counts, notifications, or descriptive tags.
+How to customize the content of a Kendo UI badge control? Control and customize the visible label or content of a badge by setting the displayed text, which can be a string, number, or any object convertible to a string representation, enabling flexible formatting and dynamic updates to the badge's content or caption to reflect status, counts, notifications, or descriptive tags.
 </div>
 
 #### Example
@@ -282,7 +282,7 @@ Specifies the theme color of the component. Valid options are
 
 
 <div class="meta-api-description">
-Set or customize the badge color styling by configuring theme colors such as primary, secondary, tertiary, info, success, warning, error, dark, light, or inverse to match semantic palettes or inherit colors from surrounding elements. Control visual emphasis, notification status, highlight importance, or blend badges seamlessly with backgrounds by choosing options that enable coloring based on light, dark, default surface, or no color for subtle integration. Enable adaptive color schemes, apply contextual color codes for alerts or statuses, and configure badges to reflect theme luminance for contrasting visibility or minimal distraction in UI design.
+How do I set the color of a Kendo UI badge element using themeColor? Set or customize the badge color styling by configuring theme colors such as primary, secondary, tertiary, info, success, warning, error, dark, light, or inverse to match semantic palettes or inherit colors from surrounding elements. Control visual emphasis, notification status, highlight importance, or blend badges seamlessly with backgrounds by choosing options that enable coloring based on light, dark, default surface, or no color for subtle integration. Enable adaptive color schemes, apply contextual color codes for alerts or statuses, and configure badges to reflect theme luminance for contrasting visibility or minimal distraction in UI design.
 </div>
 
 #### Example
@@ -322,7 +322,7 @@ If set to false the badge will not be displayed.
 
 
 <div class="meta-api-description">
-Control the display and visibility of the badge element by toggling its presence with show, hide, enable, disable, render, or suppress options; set visibility flags or boolean conditions to dynamically manage whether the badge appears, supports conditional rendering scenarios, controls UI indicators, and allows programmers to switch badge visibility on or off based on logic or user interaction.
+How can I control the visibility of a Kendo UI badge element using jQuery? Control the display and visibility of the badge element by toggling its presence with show, hide, enable, disable, render, or suppress options; set visibility flags or boolean conditions to dynamically manage whether the badge appears, supports conditional rendering scenarios, controls UI indicators, and allows programmers to switch badge visibility on or off based on logic or user interaction.
 </div>
 
 #### Example
@@ -347,7 +347,7 @@ Hides the badge.
 
 
 <div class="meta-api-description">
-Control the visibility of a badge indicator by dynamically hiding or concealing its visual marker through programmatic methods to remove or toggle the badge display during runtime, enabling developers to update or manage UI elements conditionally, hide notification dots, disable indicator visibility, or switch badge presence on demand whenever the application state requires suppressing or restoring the badge icon.
+How do I programmatically hide a Kendo UI badge indicator? Control the visibility of a badge indicator by dynamically hiding or concealing its visual marker through programmatic methods to remove or toggle the badge display during runtime, enabling developers to update or manage UI elements conditionally, hide notification dots, disable indicator visibility, or switch badge presence on demand whenever the application state requires suppressing or restoring the badge icon.
 </div>
 
 #### Example
@@ -368,7 +368,7 @@ Sets or gets the icon of the badge.
 
 
 <div class="meta-api-description">
-Configure, update, or retrieve the visual icon displayed on a badge dynamically during runtime, enabling developers to programmatically set a new icon or get the current icon state for conditional rendering, data binding, interactive UI changes, or real-time visual feedback. This supports use cases such as changing badge symbols based on app state, toggling icons in response to user actions, accessing the icon value for logic decisions, or dynamically customizing UI elements to reflect notifications, statuses, or alerts.
+How do I dynamically change the icon on a Kendo UI badge? Configure, update, or retrieve the visual icon displayed on a badge dynamically during runtime, enabling developers to programmatically set a new icon or get the current icon state for conditional rendering, data binding, interactive UI changes, or real-time visual feedback. This supports use cases such as changing badge symbols based on app state, toggling icons in response to user actions, accessing the icon value for logic decisions, or dynamically customizing UI elements to reflect notifications, statuses, or alerts.
 </div>
 
 #### Parameters
@@ -397,7 +397,7 @@ Sets / gets the badge rounding. See [`badge.options.rounded`](/api/javascript/ui
 
 
 <div class="meta-api-description">
-Control or retrieve the corner radius and roundness of badge elements programmatically, enabling dynamic adjustment of badge corner styles, configuring rounded corners, toggling or setting the curvature of badges, customizing or querying the current corner roundness or radius on badge components, modifying visual badge edges at runtime, and managing the degree of corner rounding for UI badges via code.
+How do I round the corners of a Kendo UI badge element programmatically? Control or retrieve the corner radius and roundness of badge elements programmatically, enabling dynamic adjustment of badge corner styles, configuring rounded corners, toggling or setting the curvature of badges, customizing or querying the current corner roundness or radius on badge components, modifying visual badge edges at runtime, and managing the degree of corner rounding for UI badges via code.
 </div>
 
 #### Parameters
@@ -428,7 +428,7 @@ Modifies the initial configuration of the badge
 
 
 <div class="meta-api-description">
-Modify or update the configuration settings of an existing badge dynamically by changing its appearance, text, behavior, or initialization parameters without needing to recreate or reinitialize the badge component; this method enables runtime adjustments, allowing developers to set, configure, or control badge properties on the fly, such as updating labels, styles, visibility, or interaction features, to reflect new requirements or user actions seamlessly within an application.
+How do I dynamically change the appearance of an existing Kendo UI badge? Modify or update the configuration settings of an existing badge dynamically by changing its appearance, text, behavior, or initialization parameters without needing to recreate or reinitialize the badge component; this method enables runtime adjustments, allowing developers to set, configure, or control badge properties on the fly, such as updating labels, styles, visibility, or interaction features, to reflect new requirements or user actions seamlessly within an application.
 </div>
 
 #### Parameters
@@ -459,7 +459,7 @@ Shows the badge.
 
 
 <div class="meta-api-description">
-Programmatically display or reveal hidden badges, notification counts, status indicators, or visual markers by enabling the badge element’s visibility dynamically after initialization, controlling when badges appear or become visible in the user interface, toggling hidden states to visible, showing badge components on demand, and manipulating badge display through method calls that update or change visibility in the DOM.
+How can I programmatically show hidden badges in Kendo UI for jQuery? Programmatically display or reveal hidden badges, notification counts, status indicators, or visual markers by enabling the badge element’s visibility dynamically after initialization, controlling when badges appear or become visible in the user interface, toggling hidden states to visible, showing badge components on demand, and manipulating badge display through method calls that update or change visibility in the DOM.
 </div>
 
 #### Example
@@ -481,7 +481,7 @@ Sets / gets the text of the badge.
 
 
 <div class="meta-api-description">
-Set, update, modify, or retrieve the visible label, caption, or displayed text of a badge dynamically during runtime, enabling developers to programmatically control the badge’s content for real-time changes, conditional logic, event handling, UI updates, accessibility verification, or data binding scenarios. This method supports changing or reading the badge text on the fly, fetching the current label for logic decisions, or adjusting the display based on user interaction or system state, ensuring flexible and dynamic text management within user interfaces.
+How can I dynamically update the text of a Kendo UI badge using jQuery? Set, update, modify, or retrieve the visible label, caption, or displayed text of a badge dynamically during runtime, enabling developers to programmatically control the badge’s content for real-time changes, conditional logic, event handling, UI updates, accessibility verification, or data binding scenarios. This method supports changing or reading the badge text on the fly, fetching the current label for logic decisions, or adjusting the display based on user interaction or system state, ensuring flexible and dynamic text management within user interfaces.
 </div>
 
 #### Parameters
@@ -508,7 +508,7 @@ Sets or gets the theme color of the badge.
 
 
 <div class="meta-api-description">
-Configure, modify, or retrieve the visual theme color of badge elements dynamically to control appearance and styling during runtime, including setting new color values, reading current theme hues, customizing badge highlights programmatically, adjusting palette or color schemes on the fly, querying the present color state, toggling theme shades, and seamlessly integrating color updates within application workflows or UI refresh cycles.
+How to dynamically change the color of a Kendo UI badge element? Configure, modify, or retrieve the visual theme color of badge elements dynamically to control appearance and styling during runtime, including setting new color values, reading current theme hues, customizing badge highlights programmatically, adjusting palette or color schemes on the fly, querying the present color state, toggling theme shades, and seamlessly integrating color updates within application workflows or UI refresh cycles.
 </div>
 
 #### Parameters

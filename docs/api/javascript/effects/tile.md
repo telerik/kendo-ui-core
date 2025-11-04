@@ -55,7 +55,7 @@ The direction to which the sliding will occur.
 
 
 <div class="meta-api-description">
-Specify or configure the sliding direction for a tile’s animation behavior during initialization, controlling the flow and orientation of content transitions such as slide in, slide out, left to right, right to left, up, down, or diagonal movements; adjust or set the entry and exit animation paths, enable directional control for effects, and define how content animates within a component to customize motion behavior and visual flow in user interfaces.
+How do I set the sliding direction for a Kendo UI tile's animation? Specify or configure the sliding direction for a tile’s animation behavior during initialization, controlling the flow and orientation of content transitions such as slide in, slide out, left to right, right to left, up, down, or diagonal movements; adjust or set the entry and exit animation paths, enable directional control for effects, and define how content animates within a component to customize motion behavior and visual flow in user interfaces.
 </div>
 
 #### Example
@@ -84,7 +84,7 @@ The element to slide out of the view.
 
 
 <div class="meta-api-description">
-Control the outgoing element that slides or animates out of view during tile transitions by specifying a reference object such as a DOM element, CSS selector, or jQuery object; set or configure which outgoing tile or component should animate away, enabling smooth exit animations for elements when transitioning or replacing visual tiles, allowing developers to define and target the specific element that moves offscreen during UI animations or dynamic content swaps.
+How do I animate away a specific tile in Kendo UI for jQuery? Control the outgoing element that slides or animates out of view during tile transitions by specifying a reference object such as a DOM element, CSS selector, or jQuery object; set or configure which outgoing tile or component should animate away, enabling smooth exit animations for elements when transitioning or replacing visual tiles, allowing developers to define and target the specific element that moves offscreen during UI animations or dynamic content swaps.
 </div>
 
 #### Example

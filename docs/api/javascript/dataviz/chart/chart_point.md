@@ -16,7 +16,7 @@ The point category value. Available only for categorical points(Bar, Line, etc.)
 
 
 <div class="meta-api-description">
-Access and manipulate the category or group label associated with data points in charts such as bars or lines, enabling users to read, set, filter, group, sort, or label points based on their categorical values; useful for axis labeling, organizing data by category, applying filters to specific groups, controlling data classification in visualizations, and managing how chart points correspond to named categories or groupings.
+How do I set the category label for each data point in a Kendo UI chart? Access and manipulate the category or group label associated with data points in charts such as bars or lines, enabling users to read, set, filter, group, sort, or label points based on their categorical values; useful for axis labeling, organizing data by category, applying filters to specific groups, controlling data classification in visualizations, and managing how chart points correspond to named categories or groupings.
 </div>
 
 #### Example
@@ -43,7 +43,7 @@ The point dataItem.
 
 
 <div class="meta-api-description">
-Retrieve or update the underlying data record associated with a specific chart point, enabling you to read original source values, bind or modify data tied to visual elements, handle events using the raw data object, and dynamically render or customize templates based on the data entry linked to each point in the chart series or dataset.
+How do I access the underlying data for a specific chart point in Kendo UI Chart? Retrieve or update the underlying data record associated with a specific chart point, enabling you to read original source values, bind or modify data tied to visual elements, handle events using the raw data object, and dynamically render or customize templates based on the data entry linked to each point in the chart series or dataset.
 </div>
 
 #### Example
@@ -77,7 +77,7 @@ The point value represented as a percentage value. Available only for donut, pie
 
 
 <div class="meta-api-description">
-Access the relative portion or share of a data point within charts like pie, donut, or 100% stacked charts by retrieving its value expressed as a percentage of the total. This enables calculating and displaying how much each slice, segment, or point contributes to the overall dataset, useful for dynamic labels, tooltips, legends, comparisons of proportional sizes, or formatting fractional representations. Whether you want to show percentage values, compare parts to wholes, or analyze distribution and composition in visualizations, you can extract and use the point's fractional share to represent its share of the whole in charts that aggregate to 100%.
+How to get percentage values from pie chart data points in Kendo UI for jQuery? Access the relative portion or share of a data point within charts like pie, donut, or 100% stacked charts by retrieving its value expressed as a percentage of the total. This enables calculating and displaying how much each slice, segment, or point contributes to the overall dataset, useful for dynamic labels, tooltips, legends, comparisons of proportional sizes, or formatting fractional representations. Whether you want to show percentage values, compare parts to wholes, or analyze distribution and composition in visualizations, you can extract and use the point's fractional share to represent its share of the whole in charts that aggregate to 100%.
 </div>
 
 #### Example
@@ -108,7 +108,7 @@ The sum of point values since the last "runningTotal" [summary point](/api/javas
 
 
 <div class="meta-api-description">
-Calculate or retrieve the cumulative sum or running total of values at a specific point in a waterfall chart, enabling tracking of progressive aggregation or sequential sums between intermediate summary steps, often used to monitor ongoing totals, cumulative metrics, or incremental changes in data series, applicable primarily to waterfall chart points where each data entry contributes to a continuous rolling total or sum since the last reset or summary marker.
+How to calculate cumulative sum of values in Kendo UI Waterfall Chart? Calculate or retrieve the cumulative sum or running total of values at a specific point in a waterfall chart, enabling tracking of progressive aggregation or sequential sums between intermediate summary steps, often used to monitor ongoing totals, cumulative metrics, or incremental changes in data series, applicable primarily to waterfall chart points where each data entry contributes to a continuous rolling total or sum since the last reset or summary marker.
 </div>
 
 #### Example
@@ -141,7 +141,7 @@ The sum of all previous series values. Available for waterfall series points.
 
 
 <div class="meta-api-description">
-Calculate or access the cumulative sum, running total, or aggregated value of preceding data points in a waterfall chart series to track progressive totals, accumulated amounts, or step-wise aggregations. Enable retrieval or computation of the ongoing total for each point in sequential data visualization, supporting analysis of how individual values contribute to a cumulative progression or final aggregation within charting or data series representations.
+How do I calculate the cumulative sum in a Kendo UI chart? Calculate or access the cumulative sum, running total, or aggregated value of preceding data points in a waterfall chart series to track progressive totals, accumulated amounts, or step-wise aggregations. Enable retrieval or computation of the ongoing total for each point in sequential data visualization, supporting analysis of how individual values contribute to a cumulative progression or final aggregation within charting or data series representations.
 </div>
 
 #### Example
@@ -174,7 +174,7 @@ The point value.
 
 
 <div class="meta-api-description">
-Access and modify the numerical or categorical data associated with individual chart points to define plotting coordinates, control the data values driving series calculations, customize axis alignment, influence label content and tooltip information, and adjust aggregation or summary computations within data visualizations. This includes setting or retrieving point values that determine placement on graphs, influence how series data updates, and affect how interactive elements like tooltips or labels display context-sensitive information, enabling control over data-driven rendering and analytical calculations in charts.
+How do I access and modify data values associated with individual chart points in a Kendo UI Chart? Access and modify the numerical or categorical data associated with individual chart points to define plotting coordinates, control the data values driving series calculations, customize axis alignment, influence label content and tooltip information, and adjust aggregation or summary computations within data visualizations. This includes setting or retrieving point values that determine placement on graphs, influence how series data updates, and affect how interactive elements like tooltips or labels display context-sensitive information, enabling control over data-driven rendering and analytical calculations in charts.
 </div>
 
 #### Example
@@ -202,7 +202,7 @@ The Kendo Drawing element used to draw the point.
 
 
 <div class="meta-api-description">
-Access and modify the graphical element representing a chart data point, enabling customization of its appearance by inspecting or replacing the rendering shape, applying custom styles, animations, or hit-testing logic; configure, control, or override the underlying drawing object used to visualize points within charts for advanced visual tweaks, rendering adjustments, and interactive effects in data visualizations.
+How do I customize the appearance of individual data points in a Kendo UI chart? Access and modify the graphical element representing a chart data point, enabling customization of its appearance by inspecting or replacing the rendering shape, applying custom styles, animations, or hit-testing logic; configure, control, or override the underlying drawing object used to visualize points within charts for advanced visual tweaks, rendering adjustments, and interactive effects in data visualizations.
 </div>
 
 #### Example

@@ -17,7 +17,7 @@ Defines if the widget is initially enabled or disabled. By default, it is enable
 
 
 <div class="meta-api-description">
-Configure the initial interactivity and accessibility of button collections by enabling or disabling user input and keyboard focus, controlling whether buttons respond to clicks or remain inert, setting the component’s active or disabled visual states, managing usability and access by toggling enabled or disabled modes, adjusting whether button sets accept user actions or block them with a disabled appearance, and determining if the group is receptive to user interaction at startup or locked to prevent input.
+How do I enable interactivity in Kendo UI ButtonGroup? Configure the initial interactivity and accessibility of button collections by enabling or disabling user input and keyboard focus, controlling whether buttons respond to clicks or remain inert, setting the component’s active or disabled visual states, managing usability and access by toggling enabled or disabled modes, adjusting whether button sets accept user actions or block them with a disabled appearance, and determining if the group is receptive to user interaction at startup or locked to prevent input.
 </div>
 
 #### Example
@@ -40,7 +40,7 @@ Defines the initially selected Button (zero based index).
 
 
 <div class="meta-api-description">
-Control or specify the initially active, selected, or default button within a group by setting its zero-based position or order, enabling configuration of which button is highlighted or enabled on load, allowing synchronization of initial UI state, preselecting options, setting default choices, managing initial focus or activation within button collections or tabs, and defining starting selection for user interfaces that require controlled or predetermined button activation on initialization.
+How do I set the initially active button in a Kendo UI ButtonGroup? Control or specify the initially active, selected, or default button within a group by setting its zero-based position or order, enabling configuration of which button is highlighted or enabled on load, allowing synchronization of initial UI state, preselecting options, setting default choices, managing initial focus or activation within button collections or tabs, and defining starting selection for user interfaces that require controlled or predetermined button activation on initialization.
 </div>
 
 #### Example
@@ -67,7 +67,7 @@ Defines the selection type. Allows the following values:
 
 
 <div class="meta-api-description">
-Configure user interaction modes for a group of buttons to specify whether one button can be selected at a time, multiple buttons can be toggled simultaneously, or none can be selected, effectively turning the buttons into independent clickable controls without selection state. Adjust settings to enable single-choice selection typical for radio button behavior, allow multi-choice selection similar to checkboxes, or completely disable selection for use cases requiring non-selectable interactive buttons. This controls selection behavior, toggle modes, multiple or single active states, and clickable grouping preferences for user interfaces involving grouped button components.
+How to configure Kendo UI ButtonGroup to allow multiple button selections at once? Configure user interaction modes for a group of buttons to specify whether one button can be selected at a time, multiple buttons can be toggled simultaneously, or none can be selected, effectively turning the buttons into independent clickable controls without selection state. Adjust settings to enable single-choice selection typical for radio button behavior, allow multi-choice selection similar to checkboxes, or completely disable selection for use cases requiring non-selectable interactive buttons. This controls selection behavior, toggle modes, multiple or single active states, and clickable grouping preferences for user interfaces involving grouped button components.
 </div>
 
 #### Example
@@ -90,7 +90,7 @@ A JavaScript array that contains the ButtonGroup's items configuration.
 
 
 <div class="meta-api-description">
-Define and customize a collection of interactive buttons by supplying an array of objects that specify each button’s label, icon, assigned value, whether it is enabled or disabled, custom templates, and event handlers for clicks. Manage the button set dynamically to add new buttons, remove existing ones, rearrange their order, or bind data-driven configurations at startup or runtime. Control the visual and functional aspects of each button in a group through structured configuration, supporting scenarios like toggling states, customizing appearance, handling user interactions, and integrating with application logic.
+How do I customize the buttons in a Kendo UI ButtonGroup? Define and customize a collection of interactive buttons by supplying an array of objects that specify each button’s label, icon, assigned value, whether it is enabled or disabled, custom templates, and event handlers for clicks. Manage the button set dynamically to add new buttons, remove existing ones, rearrange their order, or bind data-driven configurations at startup or runtime. Control the visual and functional aspects of each button in a group through structured configuration, supporting scenarios like toggling states, customizing appearance, handling user interactions, and integrating with application logic.
 </div>
 
 #### Example - initialize ButtonGroup with items
@@ -114,7 +114,7 @@ Specifies the HTML attributes of a ButtonGroup item.
 
 
 <div class="meta-api-description">
-Configure custom HTML attributes for each button or item within a group by assigning unique IDs, CSS classes, data attributes, ARIA roles and properties for accessibility, inline styles, or any standard or custom HTML attributes to individual elements. This enables precise control over element identification, styling, event targeting, accessibility enhancements, and data binding by specifying attribute name-value pairs as objects, including handling cases where attribute names clash with JavaScript keywords through quoting. Users often seek to customize button elements, manage dynamic attributes, implement accessibility compliance, add metadata, or apply specific styles on a per-item basis within grouped controls.
+How can I add custom attributes to individual buttons within a Kendo UI ButtonGroup widget? Configure custom HTML attributes for each button or item within a group by assigning unique IDs, CSS classes, data attributes, ARIA roles and properties for accessibility, inline styles, or any standard or custom HTML attributes to individual elements. This enables precise control over element identification, styling, event targeting, accessibility enhancements, and data binding by specifying attribute name-value pairs as objects, including handling cases where attribute names clash with JavaScript keywords through quoting. Users often seek to customize button elements, manage dynamic attributes, implement accessibility compliance, add metadata, or apply specific styles on a per-item basis within grouped controls.
 </div>
 
 #### Example - adding custom class to a button
@@ -141,7 +141,7 @@ If set to true a default overlay badge will be displayed. If set to a string, an
 
 
 <div class="meta-api-description">
-Configure overlay badges on individual buttons within a group to display status indicators, notifications, or labels by enabling default badges with simple flags, setting custom text badges for descriptive overlays, or applying advanced configurations using detailed badge options and properties. Customize and control badge appearance, content, visibility, and behavior for button elements, supporting use cases like showing unread counts, alerts, status markers, or other contextual information on grouped button controls. Adjust badges dynamically through boolean flags, strings, or complex objects to tailor how badges appear and respond in interactive button collections.
+How to add custom badges to individual buttons in a ButtonGroup control? Configure overlay badges on individual buttons within a group to display status indicators, notifications, or labels by enabling default badges with simple flags, setting custom text badges for descriptive overlays, or applying advanced configurations using detailed badge options and properties. Customize and control badge appearance, content, visibility, and behavior for button elements, supporting use cases like showing unread counts, alerts, status markers, or other contextual information on grouped button controls. Adjust badges dynamically through boolean flags, strings, or complex objects to tailor how badges appear and respond in interactive button collections.
 </div>
 
 #### Example - Various badge settings
@@ -183,7 +183,7 @@ Specifies position of the badge relative to button. Valid position options are: 
 
 
 <div class="meta-api-description">
-Adjust badge placement on buttons within a group by configuring alignment options to position indicators at corners such as top-left, top-right, bottom-left, or bottom-right relative to each button; control exact badge locations using alignment settings combined with position properties to fine-tune how badges appear on grouped buttons, enabling developers to set, align, or control notification dots, counters, or status badges around button elements in various corner positions for clear visual cues and UI customization.
+How to align badges in Kendo UI ButtonGroup? Adjust badge placement on buttons within a group by configuring alignment options to position indicators at corners such as top-left, top-right, bottom-left, or bottom-right relative to each button; control exact badge locations using alignment settings combined with position properties to fine-tune how badges appear on grouped buttons, enabling developers to set, align, or control notification dots, counters, or status badges around button elements in various corner positions for clear visual cues and UI customization.
 </div>
 
 #### Example
@@ -219,7 +219,7 @@ Specifies wether or not to render additional "cutout" border around the badge.
 
 
 <div class="meta-api-description">
-Control the visual separation between badges and buttons by enabling or disabling an additional cutout border around badges in grouped buttons, allowing customization of badge outlines, toggling distinct border styles to highlight or isolate badges within button groups, adjusting the appearance of badge edges to create spacing or emphasis, and setting options to include or exclude this decorative cutout effect for clearer distinction in user interfaces.
+How to add a cutout border around badges in Kendo UI ButtonGroup? Control the visual separation between badges and buttons by enabling or disabling an additional cutout border around badges in grouped buttons, allowing customization of badge outlines, toggling distinct border styles to highlight or isolate badges within button groups, adjusting the appearance of badge edges to create spacing or emphasis, and setting options to include or exclude this decorative cutout effect for clearer distinction in user interfaces.
 </div>
 
 #### Example
@@ -253,7 +253,7 @@ Specifies the structure of a badge. Valid options are `solid` (default) and `out
 
 
 <div class="meta-api-description">
-Control the appearance of badges on grouped buttons by configuring whether badges display with a solid filled background or a transparent outlined style; customize badge fill modes to toggle between full color fill or subtle border outlines on badges within button collections, enabling customization of badge visibility and emphasis through fill styles such as solid or outlined variants during component setup or runtime styling adjustments.
+How to make badges in a Kendo UI ButtonGroup display with a solid filled background instead of an outlined style? Control the appearance of badges on grouped buttons by configuring whether badges display with a solid filled background or a transparent outlined style; customize badge fill modes to toggle between full color fill or subtle border outlines on badges within button collections, enabling customization of badge visibility and emphasis through fill styles such as solid or outlined variants during component setup or runtime styling adjustments.
 </div>
 
 #### Example
@@ -287,7 +287,7 @@ Defines the name for an existing icon in a Kendo UI theme or SVG content. The ic
 
 
 <div class="meta-api-description">
-Set or customize the icon displayed within a badge on items in a button group by specifying a theme icon name or providing custom SVG markup, enabling control over badge visuals with recognizable Kendo UI theme glyphs or personalized SVG graphics, supporting icon configuration inside badge elements for enhanced UI indicators or notifications, including options to input existing icon names or raw SVG content to appear consistently in badges alongside buttons, suitable for developers seeking to configure, enable, or change badge iconography within grouped button interfaces.
+How do I customize the icon within a badge in Kendo UI ButtonGroup? Set or customize the icon displayed within a badge on items in a button group by specifying a theme icon name or providing custom SVG markup, enabling control over badge visuals with recognizable Kendo UI theme glyphs or personalized SVG graphics, supporting icon configuration inside badge elements for enhanced UI indicators or notifications, including options to input existing icon names or raw SVG content to appear consistently in badges alongside buttons, suitable for developers seeking to configure, enable, or change badge iconography within grouped button interfaces.
 </div>
 
 #### Example
@@ -319,7 +319,7 @@ If `text` is a number, it will cap that number.
 
 
 <div class="meta-api-description">
-Control and configure the maximum numeric value displayed on button badges or counters, setting upper limits to cap large numbers shown on item badges within button groups, managing overflow or truncation of numeric indicators, restricting badge counts to a defined maximum threshold to prevent excessively large or cluttered numeric displays, enabling concise and readable notification dots or badges by specifying maximum allowed numbers, customizing and limiting badge number displays on interactive button elements when the text content represents numeric counts or indicators.
+How do I prevent button badges from showing extremely large numbers in Kendo UI ButtonGroup? Control and configure the maximum numeric value displayed on button badges or counters, setting upper limits to cap large numbers shown on item badges within button groups, managing overflow or truncation of numeric indicators, restricting badge counts to a defined maximum threshold to prevent excessively large or cluttered numeric displays, enabling concise and readable notification dots or badges by specifying maximum allowed numbers, customizing and limiting badge number displays on interactive button elements when the text content represents numeric counts or indicators.
 </div>
 
 #### Example
@@ -355,7 +355,7 @@ Note: position configuration, other than `inline` requires the badge to be align
 
 
 <div class="meta-api-description">
-Control and customize the placement of notification badges on button edges within a group, enabling developers to set badge positions as inline with the button label, aligned along the button’s edge, placed inside the button boundaries, or displayed outside the button perimeter. Adjusting badge location supports different UI designs, helps highlight status indicators distinctly, and can be combined with badge alignment settings to fine-tune vertical or horizontal positioning relative to each button’s shape and layout. This flexibility allows configuring badge placement for visibility, style consistency, and responsive design across various interface scenarios where badges indicate counts, alerts, or statuses on grouped buttons.
+How do I control the position of notification badges in a Kendo UI ButtonGroup? Control and customize the placement of notification badges on button edges within a group, enabling developers to set badge positions as inline with the button label, aligned along the button’s edge, placed inside the button boundaries, or displayed outside the button perimeter. Adjusting badge location supports different UI designs, helps highlight status indicators distinctly, and can be combined with badge alignment settings to fine-tune vertical or horizontal positioning relative to each button’s shape and layout. This flexibility allows configuring badge placement for visibility, style consistency, and responsive design across various interface scenarios where badges indicate counts, alerts, or statuses on grouped buttons.
 </div>
 
 #### Example
@@ -400,7 +400,7 @@ Valid options are `rectangle`, `rounded`, `pill`, `circle`, `dot`.
 
 
 <div class="meta-api-description">
-Set or customize the geometric form and visual style of badges on grouped buttons or menu items by selecting from shapes such as rectangle, rounded corners, pill-shaped, circular, or small dot indicators to configure numeric counters, status indicators, minimal notification dots, or alert symbols; adjust badge outlines, contours, and overall appearance to match design requirements, apply shapes that convey priority or state, and control how badges visually represent counts or statuses across button collections and interactive UI elements.
+How do I customize the shape of badges in a Kendo UI ButtonGroup? Set or customize the geometric form and visual style of badges on grouped buttons or menu items by selecting from shapes such as rectangle, rounded corners, pill-shaped, circular, or small dot indicators to configure numeric counters, status indicators, minimal notification dots, or alert symbols; adjust badge outlines, contours, and overall appearance to match design requirements, apply shapes that convey priority or state, and control how badges visually represent counts or statuses across button collections and interactive UI elements.
 </div>
 
 #### Example
@@ -447,7 +447,7 @@ Specifies the size of the badge. Valid options are `small`, `medium` and `large`
 
 
 <div class="meta-api-description">
-Adjust the size, scale, or dimensions of badges displayed on individual buttons within a grouped button interface, controlling their visual prominence, spacing, and overall appearance by setting the badge to small, medium, or large variants; customize the badge sizing to fit design requirements, enhance user interface clarity, and ensure consistent indicator sizing across button elements in button groups.
+How do I adjust the size of badges in a Kendo UI ButtonGroup? Adjust the size, scale, or dimensions of badges displayed on individual buttons within a grouped button interface, controlling their visual prominence, spacing, and overall appearance by setting the badge to small, medium, or large variants; customize the badge sizing to fit design requirements, enhance user interface clarity, and ensure consistent indicator sizing across button elements in button groups.
 </div>
 
 #### Example
@@ -488,7 +488,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the content
 
 
 <div class="meta-api-description">
-Customize or configure dynamic badges on ButtonGroup elements by setting a template that controls the badge content rendering using Kendo templates, enabling insertion of HTML, item-specific data, conditional logic, icons, counts, or custom markup to display personalized, data-driven, or context-sensitive badge visuals on buttons within a group.
+How do I customize the badge content on Kendo UI ButtonGroup items using a template? Customize or configure dynamic badges on ButtonGroup elements by setting a template that controls the badge content rendering using Kendo templates, enabling insertion of HTML, item-specific data, conditional logic, icons, counts, or custom markup to display personalized, data-driven, or context-sensitive badge visuals on buttons within a group.
 </div>
 
 #### Example
@@ -524,7 +524,7 @@ The text of the badge. Valid input includes `string`, `number` or `object` with 
 
 
 <div class="meta-api-description">
-Set or update the badge label, counter, or status text displayed on group buttons by configuring the badge content as a string, numeric value, or any object convertible to text, enabling dynamic indicators, notifications, counts, or status markers within button collections to customize or reflect real-time information in a concise format.
+How do I set the badge text in a Kendo UI ButtonGroup? Set or update the badge label, counter, or status text displayed on group buttons by configuring the badge content as a string, numeric value, or any object convertible to text, enabling dynamic indicators, notifications, counts, or status markers within button collections to customize or reflect real-time information in a concise format.
 </div>
 
 #### Example
@@ -562,7 +562,7 @@ Specifies the color of the component. Valid options are `inherit`, `default`, `p
 
 
 <div class="meta-api-description">
-Control and customize the visual color of badges associated with individual buttons in a group by configuring the badge's color scheme using semantic color tokens such as default, primary, secondary, tertiary, info, success, warning, error, dark, light, inverted, or inherit; this enables setting, changing, or theming badge colors for status indicators, alerts, notifications, or highlights on buttons within a button group to match application design, state, or user context.
+How do I set custom colors for badges in a Kendo UI button group? Control and customize the visual color of badges associated with individual buttons in a group by configuring the badge's color scheme using semantic color tokens such as default, primary, secondary, tertiary, info, success, warning, error, dark, light, inverted, or inherit; this enables setting, changing, or theming badge colors for status indicators, alerts, notifications, or highlights on buttons within a button group to match application design, state, or user context.
 </div>
 
 #### Example
@@ -610,7 +610,7 @@ If set to false the badge will not be displayed.
 
 
 <div class="meta-api-description">
-Control visibility of notification badges, indicators, counts, or status markers on individual buttons within a group by enabling or disabling the display of badges on button items. Adjust settings to show or hide visual badges on buttons that indicate alerts, messages, or statuses, allowing dynamic toggling of badge appearance for grouped buttons. Manage badge rendering to either display or suppress notification dots, counters, or status symbols on button elements within a toolbar or navigation set, providing flexible control over badge visibility per button item in a button group context.
+How to show/hide badges on individual buttons in a ButtonGroup? Control visibility of notification badges, indicators, counts, or status markers on individual buttons within a group by enabling or disabling the display of badges on button items. Adjust settings to show or hide visual badges on buttons that indicate alerts, messages, or statuses, allowing dynamic toggling of badge appearance for grouped buttons. Manage badge rendering to either display or suppress notification dots, counters, or status symbols on button elements within a toolbar or navigation set, providing flexible control over badge visibility per button item in a button group context.
 </div>
 
 #### Example
@@ -644,7 +644,7 @@ Specifies if a button is enabled.
 
 
 <div class="meta-api-description">
-Toggle individual button interactivity, activate or deactivate specific buttons, control button clickability, enable or disable keyboard focus on buttons, manage selection state of each button programmatically or through configuration, customize which buttons respond to user input by setting button enabled status, configure interactive states per button in a group, allow or block user actions on particular buttons, dynamically set buttons as active or inactive, control user access to buttons in UI components.
+How can I enable or disable individual buttons within a Kendo UI ButtonGroup? Toggle individual button interactivity, activate or deactivate specific buttons, control button clickability, enable or disable keyboard focus on buttons, manage selection state of each button programmatically or through configuration, customize which buttons respond to user input by setting button enabled status, configure interactive states per button in a group, allow or block user actions on particular buttons, dynamically set buttons as active or inactive, control user access to buttons in UI components.
 </div>
 
 #### Example
@@ -666,7 +666,7 @@ Defines the name of an existing icon in a Kendo theme.
 
 
 <div class="meta-api-description">
-Configure or assign icons to individual buttons within a grouped set, enabling the display of built-in theme icons by specifying icon names as strings for each button element; control and customize button visuals by setting icon properties to include predefined graphic symbols, standard iconography, or theme-based icons to enhance UI clarity and user interaction in grouped button components.
+How to set icons for individual buttons in a Kendo UI ButtonGroup component? Configure or assign icons to individual buttons within a grouped set, enabling the display of built-in theme icons by specifying icon names as strings for each button element; control and customize button visuals by setting icon properties to include predefined graphic symbols, standard iconography, or theme-based icons to enhance UI clarity and user interaction in grouped button components.
 </div>
 
 #### Example
@@ -689,7 +689,7 @@ Allows the usage of custom icons. Defines CSS classes which are to be applied to
 
 
 <div class="meta-api-description">
-Apply one or multiple CSS class names to customize icons within grouped buttons, enabling the integration of icon fonts like Font Awesome, SVG styling helpers, sprite classes, or any custom icon design by assigning class selectors that target the icon container element inside button groups. Customize, set, or control icons visually by adding style classes, define custom graphical representations in button collections, and implement precise icon theming or branding for interactive button items with flexible CSS class attachments.
+How to customize icons in a Kendo UI ButtonGroup using CSS class names? Apply one or multiple CSS class names to customize icons within grouped buttons, enabling the integration of icon fonts like Font Awesome, SVG styling helpers, sprite classes, or any custom icon design by assigning class selectors that target the icon container element inside button groups. Customize, set, or control icons visually by adding style classes, define custom graphical representations in button collections, and implement precise icon theming or branding for interactive button items with flexible CSS class attachments.
 </div>
 
 #### Example
@@ -712,7 +712,7 @@ If set, the ButtonGroup will render an image with the specified URL in the butto
 
 
 <div class="meta-api-description">
-Set or configure button images by specifying the URL to display custom icons, pictures, or graphical content inside button group items, enabling buttons with embedded images, icons, or visual elements loaded from external links, useful for adding icons, logos, avatars, or custom illustrations within button components for enhanced UI and visual recognition in menus or toolbars.
+How to set custom images in ButtonGroup items using a URL? Set or configure button images by specifying the URL to display custom icons, pictures, or graphical content inside button group items, enabling buttons with embedded images, icons, or visual elements loaded from external links, useful for adding icons, logos, avatars, or custom illustrations within button components for enhanced UI and visual recognition in menus or toolbars.
 </div>
 
 #### Example
@@ -735,7 +735,7 @@ Specifies if a button is initially selected.
 
 
 <div class="meta-api-description">
-Control which button in a group is initially active, selected, highlighted, or toggled on when the interface loads by setting the initial selection state within the button collection or array. Configure or set specific items as chosen, enabled, or active by default to reflect preselected options, default highlights, or initial button states in a grouped control, allowing developers to preset user interface elements to indicate the default or starting selection in a collection of buttons. This influences which button appears pressed, selected, or checked on initialization, supporting default selection, preselection, initial states, and toggle control in button arrays or grouped controls.
+How do I set an initial selection state in Kendo UI ButtonGroup? Control which button in a group is initially active, selected, highlighted, or toggled on when the interface loads by setting the initial selection state within the button collection or array. Configure or set specific items as chosen, enabled, or active by default to reflect preselected options, default highlights, or initial button states in a grouped control, allowing developers to preset user interface elements to indicate the default or starting selection in a collection of buttons. This influences which button appears pressed, selected, or checked on initialization, supporting default selection, preselection, initial states, and toggle control in button arrays or grouped controls.
 </div>
 
 #### Example
@@ -757,7 +757,7 @@ Specifies the text of the ButtonGroup item.
 
 
 <div class="meta-api-description">
-Configure the visible label or caption for a button within a grouped set, allowing you to define or change the display text shown on individual buttons, including support for plain strings or localized translations. This setting controls the user-facing text on each button element inside a button group component, enabling you to customize, update, or localize the button titles or names that users see in the interface. Adjust or set the button text to match different languages, provide contextual or descriptive labels, and ensure clarity and accessibility for grouped interactive elements.
+How do I customize the button text in a Kendo UI ButtonGroup? Configure the visible label or caption for a button within a grouped set, allowing you to define or change the display text shown on individual buttons, including support for plain strings or localized translations. This setting controls the user-facing text on each button element inside a button group component, enabling you to customize, update, or localize the button titles or names that users see in the interface. Adjust or set the button text to match different languages, provide contextual or descriptive labels, and ensure clarity and accessibility for grouped interactive elements.
 </div>
 
 #### Example
@@ -779,7 +779,7 @@ Specifies if text field of the ButtonGroup item should be encoded.
 
 
 <div class="meta-api-description">
-Configure whether the text content of group buttons is encoded or rendered as raw HTML, controlling HTML encoding to enable or disable HTML tags inside button labels, allowing injection-safe display of literal tags, raw HTML rendering, escaped character entities, or sanitized text within button group items. This setting manages text encoding behavior for button labels to enable showing HTML content, escaping HTML characters, preventing code injection, customizing label display, and controlling how special characters or HTML elements appear in button text fields.
+How to prevent HTML injection in Kendo UI ButtonGroup labels? Configure whether the text content of group buttons is encoded or rendered as raw HTML, controlling HTML encoding to enable or disable HTML tags inside button labels, allowing injection-safe display of literal tags, raw HTML rendering, escaped character entities, or sanitized text within button group items. This setting manages text encoding behavior for button labels to enable showing HTML content, escaping HTML characters, preventing code injection, customizing label display, and controlling how special characters or HTML elements appear in button text fields.
 </div>
 
 #### Example
@@ -801,7 +801,7 @@ Controls how the color is applied to the buttons in the Group. Valid values are:
 
 
 <div class="meta-api-description">
-Adjust button color styling modes including solid fill, outlined borders, flat appearance, link-style text, or no color fill to customize button visuals within grouped controls; set, configure, enable, or control how color is applied to buttons with options for fully colored backgrounds, bordered outlines, minimalist flat designs, hyperlink-like text styles, or disabling color application altogether.
+How do I change the appearance of buttons in a Kendo UI ButtonGroup? Adjust button color styling modes including solid fill, outlined borders, flat appearance, link-style text, or no color fill to customize button visuals within grouped controls; set, configure, enable, or control how color is applied to buttons with options for fully colored backgrounds, bordered outlines, minimalist flat designs, hyperlink-like text styles, or disabling color application altogether.
 </div>
 
 #### Example
@@ -824,7 +824,7 @@ Controls what border radius is applied to first and last button. Valid values ar
 
 
 <div class="meta-api-description">
-Control and customize the corner curvature or border radius of the first and last buttons within a button group by setting styles like small, medium, large, full, or none rounding. Adjust or configure rounded edges to achieve various button shapes such as slightly curved, pill-shaped, fully circular corners, or sharp square corners when initializing button groups. Enable or disable corner rounding for grouped buttons for design consistency or unique UI styling, controlling how button edges appear visually on both ends of the group interface. Manage the appearance of button borders through configurable corner radius options affecting only the outermost buttons to create cohesive or distinct visual button group layouts.
+How to control corner curvature in Kendo UI ButtonGroup buttons? Control and customize the corner curvature or border radius of the first and last buttons within a button group by setting styles like small, medium, large, full, or none rounding. Adjust or configure rounded edges to achieve various button shapes such as slightly curved, pill-shaped, fully circular corners, or sharp square corners when initializing button groups. Enable or disable corner rounding for grouped buttons for design consistency or unique UI styling, controlling how button edges appear visually on both ends of the group interface. Manage the appearance of button borders through configurable corner radius options affecting only the outermost buttons to create cohesive or distinct visual button group layouts.
 </div>
 
 #### Example
@@ -847,7 +847,7 @@ Controls the overall physical size of all buttons in the Group. Valid values are
 
 
 <div class="meta-api-description">
-Adjust and configure the overall size, scale, and visual density of grouped buttons by setting dimensions such as small, medium, large, or disabling sizing with none, enabling control over button height, width, padding, and compactness for consistent interface design, responsive layouts, and user experience customization.
+How can I adjust the size of grouped buttons in a Kendo UI ButtonGroup? Adjust and configure the overall size, scale, and visual density of grouped buttons by setting dimensions such as small, medium, large, or disabling sizing with none, enabling control over button height, width, padding, and compactness for consistent interface design, responsive layouts, and user experience customization.
 </div>
 
 #### Example
@@ -870,7 +870,7 @@ Controls the main color applied to the buttons in the Group. Valid values are:  
 
 
 <div class="meta-api-description">
-Adjust or set the primary color scheme, style, or emphasis of multiple buttons grouped together by configuring the main theme color to customize visual appearance, highlight importance, or match branding. Options include standard color categories like base, primary, secondary, tertiary, info, success, warning, error states, dark and light themes, inverse palettes, or disabling color with none. Useful for controlling button group aesthetics, theming button states, enabling consistent UI color coding, and applying contextual or semantic colors to grouped interactive elements. This enables developers to define or override default colors, switch between preset tones, or style grouped buttons collectively for uniform design language and user interface clarity.
+How do I change the default color of a button group in Kendo UI for jQuery? Adjust or set the primary color scheme, style, or emphasis of multiple buttons grouped together by configuring the main theme color to customize visual appearance, highlight importance, or match branding. Options include standard color categories like base, primary, secondary, tertiary, info, success, warning, error states, dark and light themes, inverse palettes, or disabling color with none. Useful for controlling button group aesthetics, theming button states, enabling consistent UI color coding, and applying contextual or semantic colors to grouped interactive elements. This enables developers to define or override default colors, switch between preset tones, or style grouped buttons collectively for uniform design language and user interface clarity.
 </div>
 
 #### Example
@@ -901,7 +901,7 @@ Gets or sets the badge of a button within the ButtonGroup. This method supports 
 
 
 <div class="meta-api-description">
-Manage button badges dynamically by retrieving current badge text, setting or updating badge values with strings or numbers, creating new badges if absent, removing badges entirely by passing false, and retaining zero as a legitimate badge value; control badge presence and content on individual buttons within a group, enabling flexible badge manipulation, customization, display toggling, and state querying for notification counts, alerts, or label indicators across interface components.
+How do I dynamically update badge values in a Kendo UI ButtonGroup component? Manage button badges dynamically by retrieving current badge text, setting or updating badge values with strings or numbers, creating new badges if absent, removing badges entirely by passing false, and retaining zero as a legitimate badge value; control badge presence and content on individual buttons within a group, enabling flexible badge manipulation, customization, display toggling, and state querying for notification counts, alerts, or label indicators across interface components.
 </div>
 
 #### Parameters
@@ -944,7 +944,7 @@ Get the currently selected Button.
 
 
 <div class="meta-api-description">
-Retrieve or get the currently active, selected, or highlighted button within a group or collection, enabling access to the chosen button element for checking its selection status, triggering updates, applying focus, handling user interactions, executing conditional operations depending on the selected item, or managing state based on the current choice in a set of buttons.
+How to get currently selected button in Kendo UI ButtonGroup? Retrieve or get the currently active, selected, or highlighted button within a group or collection, enabling access to the chosen button element for checking its selection status, triggering updates, applying focus, handling user interactions, executing conditional operations depending on the selected item, or managing state based on the current choice in a set of buttons.
 </div>
 
 #### Returns
@@ -977,7 +977,7 @@ Prepares the **ButtonGroup** for safe removal from DOM. Detaches all event handl
 
 
 <div class="meta-api-description">
-remove event listeners and handlers from a button group component, clear all associated data attributes to prevent memory leaks, safely release resources of nested or child UI components, perform cleanup operations before deleting or disposing of button group widgets, prepare interactive button containers for efficient garbage collection, detach event bindings and related data for proper teardown, control and manage the lifecycle by explicitly cleaning up without deleting DOM elements, enable safe disposal of grouped buttons and nested widgets to maintain application performance and prevent memory issues, unset event bindings and remove stored metadata linked to grouped button controls, finalize and reset UI button group interactions and state prior to removal or replacement.
+How do I properly remove event listeners from a Kendo UI ButtonGroup component? remove event listeners and handlers from a button group component, clear all associated data attributes to prevent memory leaks, safely release resources of nested or child UI components, perform cleanup operations before deleting or disposing of button group widgets, prepare interactive button containers for efficient garbage collection, detach event bindings and related data for proper teardown, control and manage the lifecycle by explicitly cleaning up without deleting DOM elements, enable safe disposal of grouped buttons and nested widgets to maintain application performance and prevent memory issues, unset event bindings and remove stored metadata linked to grouped button controls, finalize and reset UI button group interactions and state prior to removal or replacement.
 </div>
 
 #### Example
@@ -1005,7 +1005,7 @@ Enables or disables the widget.
 
 
 <div class="meta-api-description">
-Toggle or set the interactive state of a group of buttons dynamically by enabling or disabling user input and interaction, controlling whether the buttons within the group respond to clicks, taps, or other actions, programmatically activating or deactivating the entire button collection to manage usability, availability, or access based on application logic, user permissions, or workflow status, and switching between enabled and disabled states that visually indicate interactivity or inactivity for the button set.
+How do I disable user input for all buttons in a Kendo UI ButtonGroup? Toggle or set the interactive state of a group of buttons dynamically by enabling or disabling user input and interaction, controlling whether the buttons within the group respond to clicks, taps, or other actions, programmatically activating or deactivating the entire button collection to manage usability, availability, or access based on application logic, user permissions, or workflow status, and switching between enabled and disabled states that visually indicate interactivity or inactivity for the button set.
 </div>
 
 #### Parameters
@@ -1040,7 +1040,7 @@ Select a Button.
 
 
 <div class="meta-api-description">
-Programmatically set or change which button is selected within a group of buttons without requiring user clicks, enabling automated control over button states, selection updates, or active choices in UI button groups; configure the selection state directly from code, trigger selection changes silently without firing user interaction events, or manually invoke events to simulate user selection, supporting scenarios where developers need to control button group options dynamically, update active buttons through scripts, or manage selection logic without user input.
+How to programmatically select an item in Kendo UI ButtonGroup? Programmatically set or change which button is selected within a group of buttons without requiring user clicks, enabling automated control over button states, selection updates, or active choices in UI button groups; configure the selection state directly from code, trigger selection changes silently without firing user interaction events, or manually invoke events to simulate user selection, supporting scenarios where developers need to control button group options dynamically, update active buttons through scripts, or manage selection logic without user input.
 </div>
 
 #### Parameters
@@ -1075,7 +1075,7 @@ Fires when a Button is selected.
 
 
 <div class="meta-api-description">
-Detect and respond to user interactions when a button within a group is clicked or chosen by capturing selection events or changes, enabling developers to trigger custom actions like updating state, syncing with data models, handling form inputs, toggling UI components, tracking analytics, or executing callbacks upon button press or selection changes within a set of grouped buttons.
+How do I detect when a button is selected in a ButtonGroup? Detect and respond to user interactions when a button within a group is clicked or chosen by capturing selection events or changes, enabling developers to trigger custom actions like updating state, syncing with data models, handling form inputs, toggling UI components, tracking analytics, or executing callbacks upon button press or selection changes within a set of grouped buttons.
 </div>
 
 #### Example - get the index of the currently selected Button

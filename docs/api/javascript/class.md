@@ -16,7 +16,7 @@ An alias to the [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 
 
 <div class="meta-api-description">
-Accessing or invoking inherited methods, calling or overriding shared prototype functions, manipulating or inspecting base class properties, extending or modifying prototype behavior, controlling or customizing inherited functions, referencing or working with superclass methods, enabling or configuring base functionality reuse, exploring or altering class inheritance features, managing prototype chains, and implementing or adapting parent class behaviors are supported through a mechanism that provides direct access to the class prototype for class inheritance management and base method invocation.
+How do I access inherited methods in Kendo UI for jQuery? Accessing or invoking inherited methods, calling or overriding shared prototype functions, manipulating or inspecting base class properties, extending or modifying prototype behavior, controlling or customizing inherited functions, referencing or working with superclass methods, enabling or configuring base functionality reuse, exploring or altering class inheritance features, managing prototype chains, and implementing or adapting parent class behaviors are supported through a mechanism that provides direct access to the class prototype for class inheritance management and base method invocation.
 </div>
 
 #### Example - use the prototype to call base methods
@@ -53,7 +53,7 @@ Extends an existing class with new methods.
 
 
 <div class="meta-api-description">
-Extend classes by creating subclasses that add, override, or customize methods and properties to modify or enhance existing functionality, enabling inheritance, method overriding, prototype augmentation, behavior extension, class derivation, subclass creation, mixin integration, and maintaining base class features while introducing new or altered behaviors in the derived class structure.
+How to create custom subclasses with Kendo UI jQuery? Extend classes by creating subclasses that add, override, or customize methods and properties to modify or enhance existing functionality, enabling inheritance, method overriding, prototype augmentation, behavior extension, class derivation, subclass creation, mixin integration, and maintaining base class features while introducing new or altered behaviors in the derived class structure.
 </div>
 
 #### Returns

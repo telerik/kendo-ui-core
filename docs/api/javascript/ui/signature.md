@@ -18,7 +18,7 @@ Gets or sets the background color of the signature.
 
 
 <div class="meta-api-description">
-Set, configure, or modify the background color behind drawn strokes in a signature input area using CSS color values such as hex codes, RGB/RGBA values, or named colors to personalize the canvas appearance; retrieve or read this background color dynamically during runtime to detect or respond to changes, control the visual backdrop for signatures, and ensure consistent styling in user interfaces where handwritten input is captured or displayed.
+How can I change the background color in a Kendo UI signature input area? Set, configure, or modify the background color behind drawn strokes in a signature input area using CSS color values such as hex codes, RGB/RGBA values, or named colors to personalize the canvas appearance; retrieve or read this background color dynamically during runtime to detect or respond to changes, control the visual backdrop for signatures, and ensure consistent styling in user interfaces where handwritten input is captured or displayed.
 </div>
 
 #### Example
@@ -36,7 +36,7 @@ The stroke color of the signature.
 
 
 <div class="meta-api-description">
-Adjust the stroke color for drawing lines in signature input areas by specifying any valid CSS color format such as hex codes, RGB, RGBA, HSL, or named colors to customize the appearance of pen strokes, ink lines, or digital sign shapes. Control, set, or configure the drawing or pen color dynamically during initialization or runtime to achieve desired signature line colors, ink hues, or stylus effects in digital signature widgets, components, or drawing canvases.
+How can I change the color of lines drawn in a Kendo UI signature input area? Adjust the stroke color for drawing lines in signature input areas by specifying any valid CSS color format such as hex codes, RGB, RGBA, HSL, or named colors to customize the appearance of pen strokes, ink lines, or digital sign shapes. Control, set, or configure the drawing or pen color dynamically during initialization or runtime to achieve desired signature line colors, ink hues, or stylus effects in digital signature widgets, components, or drawing canvases.
 </div>
 
 #### Example
@@ -54,7 +54,7 @@ If set to `false`, the widget will be disabled and will not allow user input. Th
 
 
 <div class="meta-api-description">
-Control the ability to activate or deactivate user interaction with the signature input area, allowing or preventing drawing, signing, and input via mouse, touch, or keyboard events; toggle whether the signature field is responsive to user actions, enable or disable input functionality to accept or block handwritten input or digital signatures, control interactivity for capturing user scribbles or sign gestures, and manage whether the component accepts user input for signature capture in forms or applications.
+How do I enable user interaction with the Kendo UI signature input area? Control the ability to activate or deactivate user interaction with the signature input area, allowing or preventing drawing, signing, and input via mouse, touch, or keyboard events; toggle whether the signature field is responsive to user actions, enable or disable input functionality to accept or block handwritten input or digital signatures, control interactivity for capturing user scribbles or sign gestures, and manage whether the component accepts user input for signature capture in forms or applications.
 </div>
 
 #### Example - disable the widget
@@ -77,7 +77,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 
 <div class="meta-api-description">
-Set the stroke and shape color rendering style for signatures by choosing how fill is applied, including options to enable solid color filling, flat shading without depth, outline-only rendering without fill, or disabling color rendering entirely. Control stroke and shape visualization by configuring fill modes to achieve filled, flat, outlined, or transparent appearances, allowing customization of signature color presentation, fill style, and rendering effects for different visual preferences or UI themes. Adjust signature drawing color application, fill style configuration, and appearance settings for strokes and shapes using fill rendering options such as solid fill, flat color, outline-only, or no fill, optimizing visual clarity and stylistic control.
+How to change signature color rendering style in Kendo UI for jQuery? Set the stroke and shape color rendering style for signatures by choosing how fill is applied, including options to enable solid color filling, flat shading without depth, outline-only rendering without fill, or disabling color rendering entirely. Control stroke and shape visualization by configuring fill modes to achieve filled, flat, outlined, or transparent appearances, allowing customization of signature color presentation, fill style, and rendering effects for different visual preferences or UI themes. Adjust signature drawing color application, fill style configuration, and appearance settings for strokes and shapes using fill rendering options such as solid fill, flat color, outline-only, or no fill, optimizing visual clarity and stylistic control.
 </div>
 
 #### Example - sets the fillMode
@@ -95,7 +95,7 @@ Determines the height of the signature in pixels.
 
 
 <div class="meta-api-description">
-Adjust or configure the vertical dimension, height, or pixel size of a signature input area or drawing space to control how much visible canvas is available for user drawing, signature capture, or touch input. Enable setting, changing, or customizing the signature pad’s vertical size or drawing region height in pixels to fit various UI layouts, ensuring appropriate rendering space and responsive input area for signature capture, drawing apps, or touch-based interfaces requiring a configurable height or vertical dimension.
+How do I set the height of a Kendo UI signature input area? Adjust or configure the vertical dimension, height, or pixel size of a signature input area or drawing space to control how much visible canvas is available for user drawing, signature capture, or touch input. Enable setting, changing, or customizing the signature pad’s vertical size or drawing region height in pixels to fit various UI layouts, ensuring appropriate rendering space and responsive input area for signature capture, drawing apps, or touch-based interfaces requiring a configurable height or vertical dimension.
 </div>
 
 #### Example - sets the height
@@ -113,7 +113,7 @@ A value indicating whether the dotted line should be displayed in the background
 
 
 <div class="meta-api-description">
-Control the visibility of the background alignment guide or dotted grid in signature or drawing components to enable or disable visual aids, such as dotted or dashed lines, that help users align their strokes accurately; configure whether the signature pad shows or hides the faint guide lines behind the canvas for better precision or a cleaner interface, adjusting visual cues for drawing, sketching, or signing by toggling the presence of alignment markers or background patterns.
+How do I hide the alignment guide in Kendo UI signature component? Control the visibility of the background alignment guide or dotted grid in signature or drawing components to enable or disable visual aids, such as dotted or dashed lines, that help users align their strokes accurately; configure whether the signature pad shows or hides the faint guide lines behind the canvas for better precision or a cleaner interface, adjusting visual cues for drawing, sketching, or signing by toggling the presence of alignment markers or background patterns.
 </div>
 
 #### Example - sets the hideLine
@@ -131,7 +131,7 @@ Specifies the label that will be rendered on the `k-signature-canvas` element of
 
 
 <div class="meta-api-description">
-Configure or set the accessible name, aria-label, or descriptive text for the signature drawing area to improve screen reader support and accessibility on the signature canvas element. Enable custom labeling of the signature input surface to assist users relying on assistive technologies, enhance accessibility metadata, and provide clear, semantic descriptions for voiceover, JAWS, NVDA, or other screen readers. Control how the interactive signature pad is announced by accessibility tools by specifying the text label or accessible description associated with the signature canvas region.
+How do I set the accessible label for the signature drawing area in Kendo UI for jQuery? Configure or set the accessible name, aria-label, or descriptive text for the signature drawing area to improve screen reader support and accessibility on the signature canvas element. Enable custom labeling of the signature input surface to assist users relying on assistive technologies, enhance accessibility metadata, and provide clear, semantic descriptions for voiceover, JAWS, NVDA, or other screen readers. Control how the interactive signature pad is announced by accessibility tools by specifying the text label or accessible description associated with the signature canvas region.
 </div>
 
 #### Example
@@ -149,7 +149,7 @@ A value indicating whether the component can be maximized
 
 
 <div class="meta-api-description">
-Control whether the signature interface can be expanded or maximized to fill its container by enabling or disabling resize functionality, allowing users to toggle full-screen view or restrict component growth; configure maximize options, enable or disable the maximize button or action, adjust user ability to enlarge the signature area, set expandable states for better usability, and manage whether the component supports interactive resizing or fixed dimensions.
+How to make a signature interface in Kendo UI maximizable? Control whether the signature interface can be expanded or maximized to fill its container by enabling or disabling resize functionality, allowing users to toggle full-screen view or restrict component growth; configure maximize options, enable or disable the maximize button or action, adjust user ability to enlarge the signature area, set expandable states for better usability, and manage whether the component supports interactive resizing or fixed dimensions.
 </div>
 
 #### Example - sets the hideLine
@@ -167,7 +167,7 @@ Defines a value indicating the scaling size of the popup signature pad
 
 
 <div class="meta-api-description">
-Control the zoom level, scaling factor, or resize amount of a popup signature canvas or drawing area to adjust how large or small the signature input appears on various devices, screens, or display densities; configure the popup size for signature capture, signature pad scaling, or signature window dimensions to ensure optimal user interaction, visibility, and responsiveness on high-resolution, mobile, or desktop environments.
+How can I adjust the size of the signature popup in Kendo UI for jQuery to fit different screen sizes? Control the zoom level, scaling factor, or resize amount of a popup signature canvas or drawing area to adjust how large or small the signature input appears on various devices, screens, or display densities; configure the popup size for signature capture, signature pad scaling, or signature window dimensions to ensure optimal user interaction, visibility, and responsiveness on high-resolution, mobile, or desktop environments.
 </div>
 
 #### Example - sets the hideLine
@@ -185,7 +185,7 @@ If set to `true`, the widget will be readonly and will not allow user input. The
 
 
 <div class="meta-api-description">
-Prevent user interaction, editing, drawing, or signing input by configuring the signature component to a non-interactive, locked, or read-only mode; enable or set this property to true to disable all user changes, restrict input, turn off editing capabilities, stop signature modifications, or make the signature display static without accepting drawing or touch input, ensuring the component is immutable, unchangeable, or non-editable during initialization or runtime.
+How to make Kendo UI signature component read-only? Prevent user interaction, editing, drawing, or signing input by configuring the signature component to a non-interactive, locked, or read-only mode; enable or set this property to true to disable all user changes, restrict input, turn off editing capabilities, stop signature modifications, or make the signature display static without accepting drawing or touch input, ensuring the component is immutable, unchangeable, or non-editable during initialization or runtime.
 </div>
 
 #### Example - make the widget readonly
@@ -208,7 +208,7 @@ Sets a value controlling the border radius. Can also be set to the following str
 
 
 <div class="meta-api-description">
-Adjust the corner style and curvature of a signature or avatar component by setting the corner radius, border-radius value, or predefined roundness levels such as small, medium, large, or none. Customize or control the rounded edges to achieve smooth, sharp, or subtle corner shapes, configure the shape's softness or angularity, and tailor the component's visual style by enabling or setting specific numerical radius values or named presets for border rounding during initialization or runtime.
+How can I adjust the corner style of a signature component in Kendo UI for jQuery? Adjust the corner style and curvature of a signature or avatar component by setting the corner radius, border-radius value, or predefined roundness levels such as small, medium, large, or none. Customize or control the rounded edges to achieve smooth, sharp, or subtle corner shapes, configure the shape's softness or angularity, and tailor the component's visual style by enabling or setting specific numerical radius values or named presets for border rounding during initialization or runtime.
 </div>
 
 #### Example
@@ -231,7 +231,7 @@ Sets a value controlling size of the component. Can also be set to the following
 
 
 <div class="meta-api-description">
-Adjust the visual scale or dimensions of the signature element by specifying a numeric dimension or selecting from preset size options like small, medium, large, or none, enabling developers to customize the signature’s rendered width and height, control its compactness or prominence, scale the signature component up or down, set exact pixel or unit sizes for precise layout fitting, and toggle visibility by setting size to none for hiding the signature area.
+How can I adjust the size of my signature element in Kendo UI for jQuery? Adjust the visual scale or dimensions of the signature element by specifying a numeric dimension or selecting from preset size options like small, medium, large, or none, enabling developers to customize the signature’s rendered width and height, control its compactness or prominence, scale the signature component up or down, set exact pixel or unit sizes for precise layout fitting, and toggle visibility by setting size to none for hiding the signature area.
 </div>
 
 #### Example
@@ -249,7 +249,7 @@ A value indicating whether to smoothen out the signature lines.
 
 
 <div class="meta-api-description">
-Control the stroke smoothing or line stabilization when capturing signatures to reduce jitter, shakiness, or jagged edges in handwritten input, enabling smoother, more fluid, and natural-looking signature lines by adjusting the smoothing effect or enabling stabilization features within the signature capture component to produce polished, refined strokes that better mimic real pen movements and improve the overall visual quality of digital signatures.
+How do I reduce jitter in handwritten signatures using Kendo UI for jQuery? Control the stroke smoothing or line stabilization when capturing signatures to reduce jitter, shakiness, or jagged edges in handwritten input, enabling smoother, more fluid, and natural-looking signature lines by adjusting the smoothing effect or enabling stabilization features within the signature capture component to produce polished, refined strokes that better mimic real pen movements and improve the overall visual quality of digital signatures.
 </div>
 
 #### Example - create not smooth lines
@@ -267,7 +267,7 @@ Defines how wide will the stroke be.
 
 
 <div class="meta-api-description">
-Adjust the thickness or width of pen strokes when drawing signatures to create fine, delicate lines or bold, prominent marks; configure or set stroke thickness for precise control over line weight, pen size, or brush width in signature capture, enabling customization of how thick or thin the drawn lines appear, suitable for detailed signature input or heavier, more visible strokes in digital handwriting or drawing contexts.
+How to adjust stroke thickness in Kendo UI signature control? Adjust the thickness or width of pen strokes when drawing signatures to create fine, delicate lines or bold, prominent marks; configure or set stroke thickness for precise control over line weight, pen size, or brush width in signature capture, enabling customization of how thick or thin the drawn lines appear, suitable for detailed signature input or heavier, more visible strokes in digital handwriting or drawing contexts.
 </div>
 
 #### Example
@@ -285,7 +285,7 @@ A string value representing a Base64-encoded PNG image
 
 
 <div class="meta-api-description">
-Configure, retrieve, store, or transmit a signature image represented as a Base64-encoded PNG string, enabling saving, uploading, binding, displaying, previewing, or sending captured handwritten signatures in various formats and applications. This facilitates persistent storage, API integration, image previews, data binding, and seamless handling of digital signature content within forms, documents, or workflows.
+How do I get the captured signature image as a Base64-encoded PNG string using the Kendo UI Signature widget? Configure, retrieve, store, or transmit a signature image represented as a Base64-encoded PNG string, enabling saving, uploading, binding, displaying, previewing, or sending captured handwritten signatures in various formats and applications. This facilitates persistent storage, API integration, image previews, data binding, and seamless handling of digital signature content within forms, documents, or workflows.
 </div>
 
 #### Example - specify value of the widget
@@ -303,7 +303,7 @@ Determines the width of the signature in pixels.
 
 
 <div class="meta-api-description">
-Adjust the horizontal dimension, pixel width, or canvas size of a digital signature input area to control its layout, rendering scale, and drawing space; set or configure the width in pixels to determine how wide the signature surface appears, affecting signature capture scaling and presentation within UI components, ensuring proper sizing for user input, visual alignment, and responsive design of signature pads or canvases.
+How do I adjust the width of the signature input area in Kendo UI for jQuery? Adjust the horizontal dimension, pixel width, or canvas size of a digital signature input area to control its layout, rendering scale, and drawing space; set or configure the width in pixels to determine how wide the signature surface appears, affecting signature capture scaling and presentation within UI components, ensuring proper sizing for user input, visual alignment, and responsive design of signature pads or canvases.
 </div>
 
 #### Example - sets the width
@@ -323,7 +323,7 @@ Closes the popup of the component.
 
 
 <div class="meta-api-description">
-Control the user interface by programmatically closing or dismissing the signature capture popup, hiding the signing dialog instantly without requiring user action, enabling you to manage the display flow, end or interrupt signature input sessions, automate popup dismissal after initialization, resume the normal app layout, or trigger subsequent processes and logic once the signature component is no longer visible.
+How to programmatically close the Kendo UI signature popup in jQuery? Control the user interface by programmatically closing or dismissing the signature capture popup, hiding the signing dialog instantly without requiring user action, enabling you to manage the display flow, end or interrupt signature input sessions, automate popup dismissal after initialization, resume the normal app layout, or trigger subsequent processes and logic once the signature component is no longer visible.
 </div>
 
 #### Example - destroy  the widget
@@ -346,7 +346,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 
 <div class="meta-api-description">
-Enable complete cleanup and resource release for signature or drawing components by invoking a method that detaches event listeners, removes associated data attributes, and triggers recursive destruction of any nested or child UI elements to prevent memory leaks and ensure efficient teardown without physically removing the component's DOM element, supporting safe disposal, component lifecycle management, event unbinding, and hierarchical resource cleanup in interactive web applications.
+How to completely remove and clean up Kendo UI signature component resources? Enable complete cleanup and resource release for signature or drawing components by invoking a method that detaches event listeners, removes associated data attributes, and triggers recursive destruction of any nested or child UI elements to prevent memory leaks and ensure efficient teardown without physically removing the component's DOM element, supporting safe disposal, component lifecycle management, event unbinding, and hierarchical resource cleanup in interactive web applications.
 </div>
 
 #### Example - destroy  the widget
@@ -364,7 +364,7 @@ Enables or disables the widget.
 
 
 <div class="meta-api-description">
-Control toggling of user input acceptance and signature capture dynamically by enabling or disabling the signature component without resetting or reinitializing it, allowing you to activate or deactivate the ability for users to sign through method calls like enabling or disabling interaction, input, or capture functionality on demand after setup.
+How to dynamically enable or disable user signature capture in Kendo UI for jQuery? Control toggling of user input acceptance and signature capture dynamically by enabling or disabling the signature component without resetting or reinitializing it, allowing you to activate or deactivate the ability for users to sign through method calls like enabling or disabling interaction, input, or capture functionality on demand after setup.
 </div>
 
 #### Parameters
@@ -399,7 +399,7 @@ Opens the popup of the component.
 
 
 <div class="meta-api-description">
-Trigger, invoke, or programmatically display the signature input popup or UI on demand by calling the open method after initialization to show the signature capture interface, enable users to start signing with the digital signature component dynamically, activate the signature modal or dialog through code without parameters, and control the visibility or rendering of the signature pad automatically from scripts or event handlers.
+How do I programmatically show the signature capture interface in Kendo UI? Trigger, invoke, or programmatically display the signature input popup or UI on demand by calling the open method after initialization to show the signature capture interface, enable users to start signing with the digital signature component dynamically, activate the signature modal or dialog through code without parameters, and control the visibility or rendering of the signature pad automatically from scripts or event handlers.
 </div>
 
 #### Example - destroy  the widget
@@ -417,7 +417,7 @@ Toggles the readonly state of the widget. When the widget is readonly it doesn't
 
 
 <div class="meta-api-description">
-Control the ability to enable or disable user input and drawing on a digital signature interface by setting it into a non-editable or readonly mode, managing interaction dynamically at runtime to lock or unlock input, prevent drawing or mark entry, and toggle between editable and locked states based on application logic or user permissions, allowing developers to programmatically inhibit or allow signature capture, disable input fields, restrict user interaction with the signing area, and switch modes to accommodate workflow events or validation requirements.
+How to make Kendo UI signature control read-only? Control the ability to enable or disable user input and drawing on a digital signature interface by setting it into a non-editable or readonly mode, managing interaction dynamically at runtime to lock or unlock input, prevent drawing or mark entry, and toggle between editable and locked states based on application logic or user permissions, allowing developers to programmatically inhibit or allow signature capture, disable input fields, restrict user interaction with the signing area, and switch modes to accommodate workflow events or validation requirements.
 </div>
 
 #### Parameters
@@ -452,7 +452,7 @@ Removes the current value from the widget
 
 
 <div class="meta-api-description">
-Clear, erase, or reset the drawn signature to an empty, blank state by removing all existing strokes and stored input without destroying or uninitializing the signature capture area, allowing you to set, update, or rebind new signature data, restart signature input, clear prior user annotations, and prepare the signature field for fresh input or re-capture at runtime or via code.
+How do I clear a drawn signature in Kendo UI for jQuery? Clear, erase, or reset the drawn signature to an empty, blank state by removing all existing strokes and stored input without destroying or uninitializing the signature capture area, allowing you to set, update, or rebind new signature data, restart signature input, clear prior user annotations, and prepare the signature field for fresh input or re-capture at runtime or via code.
 </div>
 
 #### Example - destroy  the widget
@@ -472,7 +472,7 @@ Gets or sets the value of the widget. The value is a Base64-encoded PNG image
 
 
 <div class="meta-api-description">
-Retrieve or assign the current drawn signature image by configuring, getting, or setting its value as a Base64-encoded PNG string, enabling seamless export, import, saving, loading, or restoring of signature data for storage, transmission, or integration with backend systems, signature capture, image serialization, digital signing processes, or user authentication workflows using methods to handle encoded signature image data efficiently.
+How do I get or set the drawn signature image in Kendo UI for jQuery? Retrieve or assign the current drawn signature image by configuring, getting, or setting its value as a Base64-encoded PNG string, enabling seamless export, import, saving, loading, or restoring of signature data for storage, transmission, or integration with backend systems, signature capture, image serialization, digital signing processes, or user authentication workflows using methods to handle encoded signature image data efficiently.
 </div>
 
 #### Parameters
@@ -504,7 +504,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect and handle user modifications to signature input such as drawing, erasing, or editing strokes by capturing events triggered when the signature content changes, enabling real-time validation, saving updates, or refreshing the interface whenever the signature is altered, adjusted, or manipulated by user actions within the signature input component, ensuring you can react immediately to edits, input changes, or stroke modifications for dynamic user interaction and data processing.
+How do I detect changes to a signature input in Kendo UI? Detect and handle user modifications to signature input such as drawing, erasing, or editing strokes by capturing events triggered when the signature content changes, enabling real-time validation, saving updates, or refreshing the interface whenever the signature is altered, adjusted, or manipulated by user actions within the signature input component, ensuring you can react immediately to edits, input changes, or stroke modifications for dynamic user interaction and data processing.
 </div>
 
 #### Example - subscribe to the "change" event after initialization
@@ -525,7 +525,7 @@ Fired when the value popup of the component is changed
 
 
 <div class="meta-api-description">
-Detect when a signature input or drawing panel closes or finishes editing to trigger actions, listen for changes in signature value, respond to popup dismissal or modification events, handle updates after signature completion or cancellation, synchronize signature data on closing, capture final signature input events, enable callbacks when signature editing ends, monitor and react to signature dialog or overlay closure, and update application state based on user finishing or altering the signature input component.
+What event is triggered when a Kendo UI signature closes or finishes editing? Detect when a signature input or drawing panel closes or finishes editing to trigger actions, listen for changes in signature value, respond to popup dismissal or modification events, handle updates after signature completion or cancellation, synchronize signature data on closing, capture final signature input events, enable callbacks when signature editing ends, monitor and react to signature dialog or overlay closure, and update application state based on user finishing or altering the signature input component.
 </div>
 
 #### Example - subscribe to the "close" event after initialization
@@ -548,7 +548,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect when a user modifies or changes a signature input, trigger custom code or event handlers upon user edits to signature fields, listen for signature updates to validate user input, synchronize data models in response to signature changes, execute functions on signature value changes, control user interaction with signature components, update related interface elements dynamically when signatures are altered, handle events signaling signature alterations for form validation or UI refresh, respond programmatically to user-drawn or updated signatures, and capture live changes to signature data for reactive application behavior or data binding.
+How to detect user modifications in Kendo UI signature input field? Detect when a user modifies or changes a signature input, trigger custom code or event handlers upon user edits to signature fields, listen for signature updates to validate user input, synchronize data models in response to signature changes, execute functions on signature value changes, control user interaction with signature components, update related interface elements dynamically when signatures are altered, handle events signaling signature alterations for form validation or UI refresh, respond programmatically to user-drawn or updated signatures, and capture live changes to signature data for reactive application behavior or data binding.
 </div>
 
 #### Example - subscribe to the "open" event after initialization

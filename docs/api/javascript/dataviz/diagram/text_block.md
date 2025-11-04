@@ -16,7 +16,7 @@ The text color of the text block.
 
 
 <div class="meta-api-description">
-Specify or customize the text color, font color, or foreground color of labels, captions, annotations, or any textual content within diagram text blocks by setting color properties, styling text appearance with CSS color values such as named colors, hexadecimal codes, RGB, or RGBA formats, and controlling how text elements are visually rendered or highlighted in diagrams.
+How to change the color of text in a Kendo UI diagram? Specify or customize the text color, font color, or foreground color of labels, captions, annotations, or any textual content within diagram text blocks by setting color properties, styling text appearance with CSS color values such as named colors, hexadecimal codes, RGB, or RGBA formats, and controlling how text elements are visually rendered or highlighted in diagrams.
 </div>
 
 #### Example - setting a color to the text
@@ -58,7 +58,7 @@ The font family of the text block.
 
 
 <div class="meta-api-description">
-Customize the text appearance by specifying the typeface or font stack to control how text is rendered, including setting custom fonts, fallback options, web fonts, or standard CSS font families to adjust typography, choose specific fonts for readability or branding, and manage font rendering in text display components.
+How to customize font type in Kendo UI Diagram's TextBlock? Customize the text appearance by specifying the typeface or font stack to control how text is rendered, including setting custom fonts, fallback options, web fonts, or standard CSS font families to adjust typography, choose specific fonts for readability or branding, and manage font rendering in text display components.
 </div>
 
 #### Example - setting a font family to the text
@@ -100,7 +100,7 @@ The font size of the text block.
 
 
 <div class="meta-api-description">
-Adjust or configure the size of text characters, control text scale, set font dimensions, modify typography size for readability, increase or decrease text legibility and spacing, enable resizing of text within a block, customize font height for layout design, control how large or small text appears, fine-tune text presentation through scalable font settings, and manage visual text proportions in user interfaces.
+How do I set the font size in a Kendo UI diagram TextBlock? Adjust or configure the size of text characters, control text scale, set font dimensions, modify typography size for readability, increase or decrease text legibility and spacing, enable resizing of text within a block, customize font height for layout design, control how large or small text appears, fine-tune text presentation through scalable font settings, and manage visual text proportions in user interfaces.
 </div>
 
 #### Example - setting font size to the text
@@ -142,7 +142,7 @@ The font style of the text block.
 
 
 <div class="meta-api-description">
-Control and customize text appearance by adjusting font styling options such as normal, italic, or oblique to change text slant, emphasize content, enable styling variations, configure text formatting, set emphasis styles, apply slanted or tilted fonts, manage text aesthetics, toggle between standard and cursive-like font presentations, and fine-tune how text is rendered or displayed within drawing or UI components.
+How can I change the font slant of a TextBlock in a diagram? Control and customize text appearance by adjusting font styling options such as normal, italic, or oblique to change text slant, emphasize content, enable styling variations, configure text formatting, set emphasis styles, apply slanted or tilted fonts, manage text aesthetics, toggle between standard and cursive-like font presentations, and fine-tune how text is rendered or displayed within drawing or UI components.
 </div>
 
 #### Example - setting font style to the text
@@ -184,7 +184,7 @@ The font weight of the text block.
 
 
 <div class="meta-api-description">
-Control and adjust the thickness or intensity of text rendering by specifying font weight options like bold, normal, or light, enabling customization of text appearance in user interfaces. Configure, set, or modify the weight or stroke of fonts to emphasize or de-emphasize text, manage font boldness, or style text elements with heavier or lighter strokes for readability, design consistency, or accessibility within text components or blocks. Enable boldface, lightface, or regular weight styles to highlight, differentiate, or harmonize textual content across applications or layouts, supporting dynamic styling based on user preference or context.
+How do I make the font weight of my Kendo UI TextBlock bold? Control and adjust the thickness or intensity of text rendering by specifying font weight options like bold, normal, or light, enabling customization of text appearance in user interfaces. Configure, set, or modify the weight or stroke of fonts to emphasize or de-emphasize text, manage font boldness, or style text elements with heavier or lighter strokes for readability, design consistency, or accessibility within text components or blocks. Enable boldface, lightface, or regular weight styles to highlight, differentiate, or harmonize textual content across applications or layouts, supporting dynamic styling based on user preference or context.
 </div>
 
 #### Example - setting font weight to the text
@@ -226,7 +226,7 @@ The height of the text block.
 
 
 <div class="meta-api-description">
-Adjust vertical dimensions, set or configure the text container height, control text block sizing for layout and rendering in drawing components, influence text wrapping behavior, manage clipping boundaries, customize vertical alignment space, define vertical limits for multiline or single-line text elements, optimize reserved vertical space for text display, regulate height to prevent overflow or truncation, and tailor text area height within graphical or drawing contexts to fit various content lengths and design constraints.
+How do I set the height of a TextBlock in a Kendo UI diagram component? Adjust vertical dimensions, set or configure the text container height, control text block sizing for layout and rendering in drawing components, influence text wrapping behavior, manage clipping boundaries, customize vertical alignment space, define vertical limits for multiline or single-line text elements, optimize reserved vertical space for text display, regulate height to prevent overflow or truncation, and tailor text area height within graphical or drawing contexts to fit various content lengths and design constraints.
 </div>
 
 #### Example - setting height to the text
@@ -269,7 +269,7 @@ The content of the text block.
 
 
 <div class="meta-api-description">
-Control, update, or retrieve the displayed text content or visible string within a UI text element, enabling dynamic changes, binding data sources, setting labels, customizing inline text, or replacing the shown characters in real time for user interfaces, text display areas, or content placeholders.
+How do I update the text content in a Kendo UI diagram's TextBlock? Control, update, or retrieve the displayed text content or visible string within a UI text element, enabling dynamic changes, binding data sources, setting labels, customizing inline text, or replacing the shown characters in real time for user interfaces, text display areas, or content placeholders.
 </div>
 
 #### Example - setting the content of the text block
@@ -310,7 +310,7 @@ The width of the text block.
 
 
 <div class="meta-api-description">
-Configure or set the horizontal dimension or size of a text container to control layout placement, text alignment, wrapping behavior, and how text fits within user interfaces or components. Adjust the width to influence text flow, enforce fixed or flexible dimensions, manage multiline wrapping, overwrite default sizing, or tailor display areas in UI design and layout arrangements. Control and customize the horizontal space used by text elements for responsive design, content formatting, or visual arrangement in various frameworks and development environments.
+How do I set the width of a TextBlock in Kendo UI for jQuery? Configure or set the horizontal dimension or size of a text container to control layout placement, text alignment, wrapping behavior, and how text fits within user interfaces or components. Adjust the width to influence text flow, enforce fixed or flexible dimensions, manage multiline wrapping, overwrite default sizing, or tailor display areas in UI design and layout arrangements. Control and customize the horizontal space used by text elements for responsive design, content formatting, or visual arrangement in various frameworks and development environments.
 </div>
 
 #### Example - setting width to the text block
@@ -353,7 +353,7 @@ The X position of the top-left corner of the text block.
 
 
 <div class="meta-api-description">
-Control or configure the horizontal placement, position, or alignment of a text element’s left edge or top-left corner along the X-axis, enabling precise movement, offset, or layout adjustment of text blocks within a user interface or graphical surface. Adjust, set, or define the horizontal coordinate, left position, or X value to position text content exactly where needed across various layouts or designs.
+How do I adjust the horizontal position of a text element in a Kendo UI diagram? Control or configure the horizontal placement, position, or alignment of a text element’s left edge or top-left corner along the X-axis, enabling precise movement, offset, or layout adjustment of text blocks within a user interface or graphical surface. Adjust, set, or define the horizontal coordinate, left position, or X value to position text content exactly where needed across various layouts or designs.
 </div>
 
 #### Example - setting position to the text block
@@ -394,7 +394,7 @@ The Y position of the top-left corner of the text block.
 
 
 <div class="meta-api-description">
-Adjust or configure the vertical placement, positioning, or alignment of a text element by setting its top-left corner’s Y coordinate within the layout or UI component, enabling control over where text appears vertically, shifting text blocks up or down, moving labels or captions vertically, and managing vertical text alignment or offset within container boundaries or coordinate spaces.
+How do I adjust the vertical position of a text element in Kendo UI Diagram? Adjust or configure the vertical placement, positioning, or alignment of a text element by setting its top-left corner’s Y coordinate within the layout or UI component, enabling control over where text appears vertically, shifting text blocks up or down, moving labels or captions vertically, and managing vertical text alignment or offset within container boundaries or coordinate spaces.
 </div>
 
 #### Example - setting position to the text block
@@ -437,7 +437,7 @@ The drawing element used to draw the text.
 
 
 <div class="meta-api-description">
-Control and customize the core graphical element responsible for rendering text within a drawing or visual component, enabling direct access to the underlying instance that manages text display. Configure, modify, or retrieve rendering properties, apply transformations such as scaling or rotation, and attach event handlers or custom logic to dynamically influence text appearance and behavior. This facilitates fine-grained manipulation of text rendering, interactions, graphical updates, and modifications at the element level inside drawing environments or visual UI components.
+How do I customize the graphical element for rendering text in a Kendo UI diagram? Control and customize the core graphical element responsible for rendering text within a drawing or visual component, enabling direct access to the underlying instance that manages text display. Configure, modify, or retrieve rendering properties, apply transformations such as scaling or rotation, and attach event handlers or custom logic to dynamically influence text appearance and behavior. This facilitates fine-grained manipulation of text rendering, interactions, graphical updates, and modifications at the element level inside drawing environments or visual UI components.
 </div>
 
 #### Example - accessing the text block drawing element
@@ -482,7 +482,7 @@ Gets or sets the text block content.
 
 
 <div class="meta-api-description">
-Access or modify the text displayed in a drawing or UI element by retrieving the current string content or updating it dynamically; this feature lets you get the existing text value, change or overwrite the visible text, refresh or re-render the display with new strings, control and manipulate the textual content on the fly, set the text programmatically, enable live updates of text blocks, read current labels or captions, and handle text changes within graphical or drawing components.
+How do I update the text displayed in a Kendo UI diagram? Access or modify the text displayed in a drawing or UI element by retrieving the current string content or updating it dynamically; this feature lets you get the existing text value, change or overwrite the visible text, refresh or re-render the display with new strings, control and manipulate the textual content on the fly, set the text programmatically, enable live updates of text blocks, read current labels or captions, and handle text changes within graphical or drawing components.
 </div>
 
 #### Parameters
@@ -532,7 +532,7 @@ Get or sets the element position.
 
 
 <div class="meta-api-description">
-Retrieve or update the x and y coordinates of a text element on a canvas or diagram by accessing or setting its position, enabling precise control over placement and movement of text blocks within graphical layouts or UI components; supports getting current location data or assigning new coordinates to reposition, adjust alignment, or move text elements programmatically based on numeric values, coordinate objects, or point representations, facilitating dynamic layout adjustments, animations, or interaction-driven repositioning in visual interfaces.
+How do I change the position of a text element in my Kendo UI diagram? Retrieve or update the x and y coordinates of a text element on a canvas or diagram by accessing or setting its position, enabling precise control over placement and movement of text blocks within graphical layouts or UI components; supports getting current location data or assigning new coordinates to reposition, adjust alignment, or move text elements programmatically based on numeric values, coordinate objects, or point representations, facilitating dynamic layout adjustments, animations, or interaction-driven repositioning in visual interfaces.
 </div>
 
 #### Parameters
@@ -579,7 +579,7 @@ Rotates the element with the specified parameters.
 
 
 <div class="meta-api-description">
-Change, set, or update the text orientation by programmatically applying rotation transforms to text elements, enabling dynamic control over angle adjustments for text display, including immediate rotation changes, animated rotations, transforming text layout direction, rotating text blocks in UI elements, modifying text alignment through rotation, configuring text angles for custom presentation, controlling text spin or tilt in user interfaces, applying rotation effects to text for design or interaction purposes, and integrating rotation transformations within animation sequences or runtime updates.
+How can I dynamically rotate text in a Kendo UI diagram? Change, set, or update the text orientation by programmatically applying rotation transforms to text elements, enabling dynamic control over angle adjustments for text display, including immediate rotation changes, animated rotations, transforming text layout direction, rotating text blocks in UI elements, modifying text alignment through rotation, configuring text angles for custom presentation, controlling text spin or tilt in user interfaces, applying rotation effects to text for design or interaction purposes, and integrating rotation transformations within animation sequences or runtime updates.
 </div>
 
 #### Parameters
@@ -632,7 +632,7 @@ Gets or sets the visibility of the current element.
 
 
 <div class="meta-api-description">
-Control or query the display state of elements within a diagram by toggling visibility on or off, retrieving whether items are currently shown or hidden, programmatically setting visibility flags, enabling or disabling render of text or graphic components, checking if elements are visible, or dynamically adjusting element display during runtime to manage what parts of the diagram are seen or concealed based on boolean states or conditional logic.
+How do I toggle visibility on/off for elements in a Kendo UI diagram using the `visible` method? Control or query the display state of elements within a diagram by toggling visibility on or off, retrieving whether items are currently shown or hidden, programmatically setting visibility flags, enabling or disabling render of text or graphic components, checking if elements are visible, or dynamically adjusting element display during runtime to manage what parts of the diagram are seen or concealed based on boolean states or conditional logic.
 </div>
 
 #### Parameters

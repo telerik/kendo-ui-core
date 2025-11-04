@@ -15,7 +15,7 @@ Renders the **View** element in the element specified by the selector
 
 
 <div class="meta-api-description">
-Control rendering of a user interface component by specifying the target container where a view or element should appear, dynamically mounting or injecting UI elements into a chosen DOM selector, enabling precise placement and display management of content within a page or application layout, configuring views to show inside particular containers, setting the insertion point of views, directing where elements render at runtime, and managing layout composition by rendering components into custom or specific parts of the document structure.
+How to specify where my Kendo UI view should appear on the page using spa.showIn? Control rendering of a user interface component by specifying the target container where a view or element should appear, dynamically mounting or injecting UI elements into a chosen DOM selector, enabling precise placement and display management of content within a page or application layout, configuring views to show inside particular containers, setting the insertion point of views, directing where elements render at runtime, and managing layout composition by rendering components into custom or specific parts of the document structure.
 </div>
 
 #### Example

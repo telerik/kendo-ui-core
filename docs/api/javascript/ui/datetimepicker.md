@@ -19,7 +19,7 @@ The adaptive rendering of the DateTimePicker provides consistency to the custome
 
 
 <div class="meta-api-description">
-Control how the date and time selector adjusts its appearance and behavior for various devices by enabling or disabling adaptive rendering, allowing automatic optimization of layout, styling, and touch interactions for small screens and mobile devices, or retaining standard non-adaptive display; configure to support responsive design, improve usability on phones and tablets, customize interface adaptation modes, and ensure seamless user experience across different viewport sizes and input methods.
+How can I enable adaptive rendering for Kendo UI DateTimePicker to optimize its layout on mobile devices? Control how the date and time selector adjusts its appearance and behavior for various devices by enabling or disabling adaptive rendering, allowing automatic optimization of layout, styling, and touch interactions for small screens and mobile devices, or retaining standard non-adaptive display; configure to support responsive design, improve usability on phones and tablets, customize interface adaptation modes, and ensure seamless user experience across different viewport sizes and input methods.
 </div>
 
 #### Example
@@ -37,7 +37,7 @@ Allows customization of the title's text in the adaptive view of the component.
 
 
 <div class="meta-api-description">
-Set or customize the header text displayed in responsive or mobile views for date and time selection interfaces to provide clear, concise, localized, or context-aware titles that improve user understanding and interface clarity, enabling control over how the picker’s title appears on small screens or adaptive layouts by configuring or overriding default labels in different languages or usage scenarios.
+How do I customize the title on a Kendo UI date time picker in responsive mode? Set or customize the header text displayed in responsive or mobile views for date and time selection interfaces to provide clear, concise, localized, or context-aware titles that improve user understanding and interface clarity, enabling control over how the picker’s title appears on small screens or adaptive layouts by configuring or overriding default labels in different languages or usage scenarios.
 </div>
 
 #### Example
@@ -56,7 +56,7 @@ Allows customization of the subtitle's text in the adaptive view of the componen
 
 
 <div class="meta-api-description">
-Customize or set the subtitle text shown in responsive or mobile layouts of date and time pickers, enabling control over adaptive views, small-screen subtitles, localized or custom subtitle labels, modifying the secondary text displayed when switching to compact or adaptive modes, configuring subtitle content for narrow or mobile interfaces, and tailoring the brief descriptive text shown in condensed date/time selection components.
+How can I customize the subtitle in Kendo UI DateTimePicker's adaptive layout? Customize or set the subtitle text shown in responsive or mobile layouts of date and time pickers, enabling control over adaptive views, small-screen subtitles, localized or custom subtitle labels, modifying the secondary text displayed when switching to compact or adaptive modes, configuring subtitle content for narrow or mobile interfaces, and tailoring the brief descriptive text shown in condensed date/time selection components.
 </div>
 
 #### Example
@@ -78,7 +78,7 @@ Configures the opening and closing animations of the popups. Setting the `animat
 
 
 <div class="meta-api-description">
-Configure how date and time selection popups open and close by enabling, disabling, or customizing the transition animations for smoother or immediate display effects. Adjust animation settings to control popup appearance behavior, such as enabling fade, slide, or instant opening and closing without delays. Set or disable animation to optimize user experience, responsiveness, or performance in date and time picker interfaces. Manage popup reveal and hide effects with animation toggles, ensuring the control opens and closes either with visual transitions or instantly, depending on your UI preferences, timing requirements, or user interaction design.
+How do I customize the animation of my Kendo UI datetimepicker popup? Configure how date and time selection popups open and close by enabling, disabling, or customizing the transition animations for smoother or immediate display effects. Adjust animation settings to control popup appearance behavior, such as enabling fade, slide, or instant opening and closing without delays. Set or disable animation to optimize user experience, responsiveness, or performance in date and time picker interfaces. Manage popup reveal and hide effects with animation toggles, ensuring the control opens and closes either with visual transitions or instantly, depending on your UI preferences, timing requirements, or user interaction design.
 </div>
 
 #### Example - disable open and close animations
@@ -114,7 +114,7 @@ The animation played when a popup is closed.
 
 
 <div class="meta-api-description">
-Control and customize the closing animation or transition effect when a date and time selection popup is dismissed, enabling developers to define or configure how the popup disappears, including setting animation styles, durations, easing functions, or supplying custom animation effects for smooth, visually appealing closing behavior on interactive date/time pickers, dropdowns, or modal popups.
+How do I customize the animation when closing a Kendo UI DateTimePicker popup? Control and customize the closing animation or transition effect when a date and time selection popup is dismissed, enabling developers to define or configure how the popup disappears, including setting animation styles, durations, easing functions, or supplying custom animation effects for smooth, visually appealing closing behavior on interactive date/time pickers, dropdowns, or modal popups.
 </div>
 
 #### Example - configure the close animation
@@ -139,7 +139,7 @@ The effect(s) to use when playing the close animation. Multiple effects should b
 
 
 <div class="meta-api-description">
-Set or customize the closing animation effects for a datetime picker widget by specifying one or multiple visual transition names that define how the picker hides or closes, enabling control over the exit animations, fade outs, slide transitions, or other visual effects during the closing sequence; configure the animation behavior by listing one or more effects separated by spaces to create smooth, combined closing motions and enhance user interface interaction with the date/time selector's dismissal.
+How to customize closing animation effects in Kendo UI datetimepicker? Set or customize the closing animation effects for a datetime picker widget by specifying one or multiple visual transition names that define how the picker hides or closes, enabling control over the exit animations, fade outs, slide transitions, or other visual effects during the closing sequence; configure the animation behavior by listing one or more effects separated by spaces to create smooth, combined closing motions and enhance user interface interaction with the date/time selector's dismissal.
 </div>
 
 #### Example
@@ -161,7 +161,7 @@ The duration of the close animation in milliseconds.
 
 
 <div class="meta-api-description">
-Set and customize the duration of the closing animation for date and time picker popups or calendars by specifying the length of the close transition in milliseconds, enabling control over animation speed to make the closing effect faster or slower according to user interface preferences, transition timing adjustments, smoothness customization, or performance tuning for date/time selection components.
+How can I customize the closing animation duration for Kendo UI datetimepicker? Set and customize the duration of the closing animation for date and time picker popups or calendars by specifying the length of the close transition in milliseconds, enabling control over animation speed to make the closing effect faster or slower according to user interface preferences, transition timing adjustments, smoothness customization, or performance tuning for date/time selection components.
 </div>
 
 #### Example
@@ -184,7 +184,7 @@ The animation played when the popup is opened.
 
 
 <div class="meta-api-description">
-Set and customize the opening animation effect for popup components like date and time selectors, enabling control over transition styles, animation types, durations, easing functions, and delays to enhance user interface interactions and visual feedback when popups appear. Adjust or configure how popup windows animate into view, including fade, slide, zoom, or other transition effects, and fine-tune timing and motion parameters for seamless opening animations on interactive datetime inputs or similar UI elements.
+How to customize the opening animation effect for Kendo UI DateTimePicker popup? Set and customize the opening animation effect for popup components like date and time selectors, enabling control over transition styles, animation types, durations, easing functions, and delays to enhance user interface interactions and visual feedback when popups appear. Adjust or configure how popup windows animate into view, including fade, slide, zoom, or other transition effects, and fine-tune timing and motion parameters for seamless opening animations on interactive datetime inputs or similar UI elements.
 </div>
 
 #### Example - configure the open animation
@@ -209,7 +209,7 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 
 <div class="meta-api-description">
-Configure and customize popup opening animations by setting one or more named animation effects that control how the DateTimePicker or similar dropdown elements visually appear when triggered, enabling smooth, combined, or sequenced animated transitions; this includes specifying multiple effects separated by spaces to enhance user interface interactivity, control entrance motion styles, and tailor the display behavior of calendar or time selection popups with supported animation types.
+How do I customize the opening animation effects of the Kendo UI DateTimePicker? Configure and customize popup opening animations by setting one or more named animation effects that control how the DateTimePicker or similar dropdown elements visually appear when triggered, enabling smooth, combined, or sequenced animated transitions; this includes specifying multiple effects separated by spaces to enhance user interface interactivity, control entrance motion styles, and tailor the display behavior of calendar or time selection popups with supported animation types.
 </div>
 
 #### Example
@@ -231,7 +231,7 @@ The duration of the open animation in milliseconds.
 
 
 <div class="meta-api-description">
-Control and customize the length of the popup opening animation in date and time selectors by setting the duration of how long the opening animation runs, specifying the time in milliseconds to adjust the speed or smoothness of the appearance effect, enabling developers to configure animation timing, transition duration, fade-in speed, or popup reveal intervals for enhanced UI responsiveness and user experience when activating or displaying date and time pickers or similar popup components.
+How can I adjust the duration of the animation when opening a Kendo UI DateTimePicker? Control and customize the length of the popup opening animation in date and time selectors by setting the duration of how long the opening animation runs, specifying the time in milliseconds to adjust the speed or smoothness of the appearance effect, enabling developers to configure animation timing, transition duration, fade-in speed, or popup reveal intervals for enhanced UI responsiveness and user experience when activating or displaying date and time pickers or similar popup components.
 </div>
 
 #### Example
@@ -258,7 +258,7 @@ Control and customize the length of the popup opening animation in date and time
 
 
 <div class="meta-api-description">
-Customize or configure dynamic accessible labels for focused calendar cells in date and time pickers by using template-based ARIA attributes, enabling developers to set or control screen reader announcements for selected dates, months, or years, generate contextual aria-label strings based on the current focus, value types, or text representations, and improve accessibility by providing tailored spoken feedback for calendar navigation, date selection, or time input components.
+How do I customize the screen reader announcements in my Kendo UI DateTimePicker widget? Customize or configure dynamic accessible labels for focused calendar cells in date and time pickers by using template-based ARIA attributes, enabling developers to set or control screen reader announcements for selected dates, months, or years, generate contextual aria-label strings based on the current focus, value types, or text representations, and improve accessibility by providing tailored spoken feedback for calendar navigation, date selection, or time input components.
 </div>
 
 #### Example
@@ -276,7 +276,7 @@ If this property is enabled and you have configured `min` and/or `max` values, a
 
 
 <div class="meta-api-description">
-Automatically constrain, clamp, or limit user-entered date and time inputs to predefined minimum and maximum boundaries, ensuring values typed outside the allowed range are adjusted to the nearest valid limit; this setting controls automatic correction of out-of-range date or time entries when manual date input is enabled, useful for enforcing date or time restrictions, preventing invalid input, and maintaining consistent value boundaries during user interaction or form submission.
+How do I prevent users from entering invalid dates in a Kendo UI DateTimePicker? Automatically constrain, clamp, or limit user-entered date and time inputs to predefined minimum and maximum boundaries, ensuring values typed outside the allowed range are adjusted to the nearest valid limit; this setting controls automatic correction of out-of-range date or time entries when manual date input is enabled, useful for enforcing date or time restrictions, preventing invalid input, and maintaining consistent value boundaries during user interaction or form submission.
 </div>
 
 #### Example - prevent automatic value adjustments
@@ -298,7 +298,7 @@ Sets a value that indicates whether to automatically correct the segment when ou
 
 
 <div class="meta-api-description">
-Enable automatic correction or auto-fix of individual date or time segments when editing values interactively, allowing seamless adjustment of out-of-range parts during keyboard input or segmented edits, ensuring that hours, minutes, days, or months automatically snap to valid ranges without manual validation; use this to handle input constraints dynamically and improve user experience when typing or modifying partial date/time entries with segment-based controls.
+How to automatically correct date/time parts when editing with Kendo UI DateTimePicker? Enable automatic correction or auto-fix of individual date or time segments when editing values interactively, allowing seamless adjustment of out-of-range parts during keyboard input or segmented edits, ensuring that hours, minutes, days, or months automatically snap to valid ranges without manual validation; use this to handle input constraints dynamically and improve user experience when typing or modifying partial date/time entries with segment-based controls.
 </div>
 
 #### Example - sets the autoCorrectParts
@@ -320,7 +320,7 @@ Enable automatic correction or auto-fix of individual date or time segments when
 
 
 <div class="meta-api-description">
-Set or customize the appearance and visual style of a date and time selector interface by choosing between traditional, classic layouts or modern, updated themes, enabling control over the UI rendering mode, design style, or component look to match user interface preferences, switch rendering modes at initialization, apply different visual themes or skins for datetime pickers, and configure how the date/time selection control displays within your application.
+How do I customize the appearance of a DateTimePicker in Kendo UI for jQuery? Set or customize the appearance and visual style of a date and time selector interface by choosing between traditional, classic layouts or modern, updated themes, enabling control over the UI rendering mode, design style, or component look to match user interface preferences, switch rendering modes at initialization, apply different visual themes or skins for datetime pickers, and configure how the date/time selection control displays within your application.
 </div>
 
 #### Example - specify modern component type
@@ -338,7 +338,7 @@ Specifies the culture info used by the component. A valid kendo culture file mus
 
 
 <div class="meta-api-description">
-Set or customize the date and time input to match specific regional or international formats by specifying locale, language, culture, or regional settings; control how dates and times are displayed, parsed, formatted, and localized including language-specific month names, day names, date separators, and calendar conventions; enable support for various cultural preferences and formatting standards such as those used in different countries, time zones, or language packs; configure cultural context to ensure correct date representation and validation in forms, UI components, or localization workflows; adapt date-time input for multilingual applications, internationalization (i18n), or global audience support by defining culture information that affects parsing rules and display style.
+How to set culture for Kendo UI DateTimePicker? Set or customize the date and time input to match specific regional or international formats by specifying locale, language, culture, or regional settings; control how dates and times are displayed, parsed, formatted, and localized including language-specific month names, day names, date separators, and calendar conventions; enable support for various cultural preferences and formatting standards such as those used in different countries, time zones, or language packs; configure cultural context to ensure correct date representation and validation in forms, UI components, or localization workflows; adapt date-time input for multilingual applications, internationalization (i18n), or global audience support by defining culture information that affects parsing rules and display style.
 </div>
 
 #### Example - specify a culture
@@ -356,7 +356,7 @@ Set or customize the date and time input to match specific regional or internati
 
 
 <div class="meta-api-description">
-Configure the date entry mode for selecting or editing dates and times by enabling or disabling a masked, keyboard-friendly input format that supports culture-aware date and time values, allowing users to type dates with validation and formatting assistance or alternatively use a free-text editor for flexible manual input. Adjust the control to switch between structured date input fields with input masking for easier date editing via keyboard and locale-sensitive formats or unstructured free-text editing that permits any date/time entry style, enabling customization of how end users interact with date and time values during editing, including toggling between guided, format-enforced date typing and unrestricted manual input.
+How to configure DateTimePicker to allow free-text date entry instead of structured input? Configure the date entry mode for selecting or editing dates and times by enabling or disabling a masked, keyboard-friendly input format that supports culture-aware date and time values, allowing users to type dates with validation and formatting assistance or alternatively use a free-text editor for flexible manual input. Adjust the control to switch between structured date input fields with input masking for easier date editing via keyboard and locale-sensitive formats or unstructured free-text editing that permits any date/time entry style, enabling customization of how end users interact with date and time values during editing, including toggling between guided, format-enforced date typing and unrestricted manual input.
 </div>
 
 #### Example
@@ -375,7 +375,7 @@ All dates, which match the date portion of the selected date will be used to re-
 
 
 <div class="meta-api-description">
-Configure or set a collection of specific dates to highlight or activate within a calendar interface, enabling custom rendering of month cells and dynamically adjusting available time selections based on chosen days. Control date lists to mark special, disabled, or selectable dates, ensuring calendar views reflect custom schedules, events, or constraints, while synchronizing date selections with corresponding time options for accurate time slot availability and interaction. This capability supports scenarios requiring tailored date highlighting, dynamic updates of time slots as date selections change, and integration of special date-based logic into calendar and time-picker components.
+How do I configure specific dates to be highlighted in a Kendo UI DateTimePicker calendar? Configure or set a collection of specific dates to highlight or activate within a calendar interface, enabling custom rendering of month cells and dynamically adjusting available time selections based on chosen days. Control date lists to mark special, disabled, or selectable dates, ensuring calendar views reflect custom schedules, events, or constraints, while synchronizing date selections with corresponding time options for accurate time slot availability and interaction. This capability supports scenarios requiring tailored date highlighting, dynamic updates of time slots as date selections change, and integration of special date-based logic into calendar and time-picker components.
 </div>
 
 #### Example - specify a list of dates
@@ -431,7 +431,7 @@ settings are available for the **depth** value:
 
 
 <div class="meta-api-description">
-Control and limit calendar navigation levels by configuring the visible date selection scope such as day, month, year, decade, or century views; specify how deep users can drill down in date pickers by setting boundaries for calendar display, enabling filtering or restricting available date ranges based on granularities like month view, year overview, decade spans, or century groupings; configure navigation depth to prevent scrolling beyond specified time units and synchronize initial display levels with allowed navigation depth to ensure consistent user interface behavior when selecting dates or periods.
+How can I limit navigation levels in the Kendo UI DateTimePicker? Control and limit calendar navigation levels by configuring the visible date selection scope such as day, month, year, decade, or century views; specify how deep users can drill down in date pickers by setting boundaries for calendar display, enabling filtering or restricting available date ranges based on granularities like month view, year overview, decade spans, or century groupings; configure navigation depth to prevent scrolling beyond specified time units and synchronize initial display levels with allowed navigation depth to ensure consistent user interface behavior when selecting dates or periods.
 </div>
 
 #### Example - set navigation depth of the calendar popup
@@ -449,7 +449,7 @@ An array or function that will be used to determine which dates to be disabled f
 
 
 <div class="meta-api-description">
-Prevent selection of specific calendar dates by configuring the ability to block, exclude, or mark certain days as unavailable or disabled in date-pickers. Enable disabling individual dates using arrays of exact dates or dynamic functions that evaluate each date to determine if it should be selectable, allowing developers to customize which dates users can pick, filter out holidays, weekends, or any undesired dates, restrict input to allowed days only, and control date availability in scheduling, booking, or form interfaces.
+How can I prevent certain dates from being selected in a Kendo UI DateTimePicker? Prevent selection of specific calendar dates by configuring the ability to block, exclude, or mark certain days as unavailable or disabled in date-pickers. Enable disabling individual dates using arrays of exact dates or dynamic functions that evaluate each date to determine if it should be selectable, allowing developers to customize which dates users can pick, filter out holidays, weekends, or any undesired dates, restrict input to allowed days only, and control date availability in scheduling, booking, or form interfaces.
 </div>
 
 #### Example - specify an array of days to be disabled
@@ -501,7 +501,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 
 <div class="meta-api-description">
-Set or configure the maximum selectable time limit, control the latest time displayed in a time picker or scheduling component, restrict time selection to a defined upper boundary, prevent users from choosing times beyond a specified threshold, customize or adjust the end range for time options shown in date and time inputs, enforce an upper bound on time choices for time-based UI controls, limit the available times in time selection interfaces to a certain cutoff point, define the last allowable time for appointment, event, or booking selectors, manage or cap the final time displayed in time pickers, and configure time input widgets to exclude times later than a set limit.
+How to set the latest time limit for selection in a Kendo UI DateTimePicker? Set or configure the maximum selectable time limit, control the latest time displayed in a time picker or scheduling component, restrict time selection to a defined upper boundary, prevent users from choosing times beyond a specified threshold, customize or adjust the end range for time options shown in date and time inputs, enforce an upper bound on time choices for time-based UI controls, limit the available times in time selection interfaces to a certain cutoff point, define the last allowable time for appointment, event, or booking selectors, manage or cap the final time displayed in time pickers, and configure time input widgets to exclude times later than a set limit.
 </div>
 
 #### Example - specify the start time for the TimeView
@@ -524,7 +524,7 @@ Sets a value controlling how the color is applied. Can also be set to the follow
 
 
 <div class="meta-api-description">
-Configure or customize the color fill style for date and time selection components by setting how buttons, accents, and input fields display colors, enabling options to apply no color fill, solid color blocks, flat color layers, or outlined color borders. Adjust the appearance of interactive elements within a date picker or time picker interface by choosing different fill modes that control color intensity, style, and visual emphasis, providing flexibility for UI theming, highlighting active inputs, or defining button backgrounds with solid, flat, outlined, or transparent (none) color fills. This setting influences the visual styling of elements in date/time widgets to match design preferences and improve clarity or emphasis in user interactions.
+How do I customize the color fill style in a Kendo UI DateTimePicker? Configure or customize the color fill style for date and time selection components by setting how buttons, accents, and input fields display colors, enabling options to apply no color fill, solid color blocks, flat color layers, or outlined color borders. Adjust the appearance of interactive elements within a date picker or time picker interface by choosing different fill modes that control color intensity, style, and visual emphasis, providing flexibility for UI theming, highlighting active inputs, or defining button backgrounds with solid, flat, outlined, or transparent (none) color fills. This setting influences the visual styling of elements in date/time widgets to match design preferences and improve clarity or emphasis in user interactions.
 </div>
 
 #### Example - sets the fillMode
@@ -542,7 +542,7 @@ Configure or customize the color fill style for date and time selection componen
 
 
 <div class="meta-api-description">
-Customize or hide the calendar footer area of a date and time picker by supplying a custom template, such as HTML content, buttons, or summary information, or disable the footer entirely to remove it from rendering. Control footer visibility, enable custom footer layouts, configure footer content presentation, and manage footer display options within date/time selection interfaces to tailor the calendar’s bottom section for enhanced user interaction or simplified designs.
+How can I customize the footer of the Kendo UI datetimepicker? Customize or hide the calendar footer area of a date and time picker by supplying a custom template, such as HTML content, buttons, or summary information, or disable the footer entirely to remove it from rendering. Control footer visibility, enable custom footer layouts, configure footer content presentation, and manage footer display options within date/time selection interfaces to tailor the calendar’s bottom section for enhanced user interaction or simplified designs.
 </div>
 
 #### Example - specify footer template as a function
@@ -574,7 +574,7 @@ For more information on date and time formats please refer to [Date Formatting](
 
 
 <div class="meta-api-description">
-Customize, configure, or set the date and time display style, input format, and parsing rules for date pickers, datetime input fields, or calendar controls using flexible date/time patterns, formatting strings, or templates that handle user input, output rendering, localization, and parsing accuracy. Enable control over how timestamps, dates, and times appear and are interpreted, supporting both standard and custom formats, ensuring consistent representation, input validation, and user-friendly date/time handling across applications.
+How do I customize the date display format in Kendo UI DateTimePicker? Customize, configure, or set the date and time display style, input format, and parsing rules for date pickers, datetime input fields, or calendar controls using flexible date/time patterns, formatting strings, or templates that handle user input, output rendering, localization, and parsing accuracy. Enable control over how timestamps, dates, and times appear and are interpreted, supporting both standard and custom formats, ensuring consistent representation, input validation, and user-friendly date/time handling across applications.
 </div>
 
 #### Example - specify a custom date format
@@ -593,7 +593,7 @@ Specifies the [`inputmode` attribute](https://developer.mozilla.org/en-US/docs/W
 
 
 <div class="meta-api-description">
-Control and configure the type of on-screen keyboard or virtual keypad that appears when entering date and time input, enabling specific input modes such as numeric, decimal, telephone, email, text, or search keyboards to optimize user typing experience, handle keyboard layouts, customize input behavior for mobile and desktop devices, set input restrictions or enhancement for easier data entry, and improve form usability by determining which keyboard should show based on the context of the input field.
+How can I customize the on-screen keyboard for a date and time input in Kendo UI DateTimePicker? Control and configure the type of on-screen keyboard or virtual keypad that appears when entering date and time input, enabling specific input modes such as numeric, decimal, telephone, email, text, or search keyboards to optimize user typing experience, handle keyboard layouts, customize input behavior for mobile and desktop devices, set input restrictions or enhancement for easier data entry, and improve form usability by determining which keyboard should show based on the context of the input field.
 </div>
 
 #### Example
@@ -611,7 +611,7 @@ Adds a label before the datetimepicker. If the datetimepicker has no `id` attrib
 
 
 <div class="meta-api-description">
-Set or customize the text or dynamic content that appears as a label before a date and time selector component by providing a static string or a function that returns HTML or text, enabling control over labeling, accessibility with associated input IDs, customizable captions, prompts, or titles linked to the date/time input, allowing developers to configure, update, or generate labels dynamically for user interface clarity and better user experience with date and time input fields.
+How do I customize the label in Kendo UI DateTimePicker component? Set or customize the text or dynamic content that appears as a label before a date and time selector component by providing a static string or a function that returns HTML or text, enabling control over labeling, accessibility with associated input IDs, customizable captions, prompts, or titles linked to the date/time input, allowing developers to configure, update, or generate labels dynamically for user interface clarity and better user experience with date and time input fields.
 </div>
 
 #### Example - create a label from a string
@@ -644,7 +644,7 @@ Sets the inner HTML of the label.
 
 
 <div class="meta-api-description">
-Set or customize the text, formatted content, icons, or HTML markup displayed inside a date-time picker label, enabling control over the label’s inner content or innerHTML for styling, embedding symbols, adding rich text, or injecting custom elements during initialization or configuration of the date and time input label display.
+How can I customize the content displayed inside a Kendo UI DateTimePicker label? Set or customize the text, formatted content, icons, or HTML markup displayed inside a date-time picker label, enabling control over the label’s inner content or innerHTML for styling, embedding symbols, adding rich text, or injecting custom elements during initialization or configuration of the date and time input label display.
 </div>
 
 #### Example - create a label from a string
@@ -683,7 +683,7 @@ To overcome this behavior, manually invoke the `refresh` method of the Floating 
 
 
 <div class="meta-api-description">
-Control whether the input label floats above the date-time picker field by enabling or disabling floating label behavior, allowing the label to move or stay fixed based on user focus or whether a date-time value is entered; configure the floating label wrapper for dynamic label positioning to improve form clarity, set floating labels to show or hide depending on input interaction, and manage or refresh label state programmatically to handle focus changes or value updates that do not fire typical focus events, ensuring seamless label animation and consistent visual cues in date and time selection inputs.
+How do I make the date-time picker input label float above the field in Kendo UI for jQuery? Control whether the input label floats above the date-time picker field by enabling or disabling floating label behavior, allowing the label to move or stay fixed based on user focus or whether a date-time value is entered; configure the floating label wrapper for dynamic label positioning to improve form clarity, set floating labels to show or hide depending on input interaction, and manage or refresh label state programmatically to handle focus changes or value updates that do not fire typical focus events, ensuring seamless label animation and consistent visual cues in date and time selection inputs.
 </div>
 
 #### Example - create a floating label
@@ -707,7 +707,7 @@ Specifies the interval between values in the popup list.
 
 
 <div class="meta-api-description">
-Adjust or configure the time step size, granularity, or increments for time selection in a date-time picker or dropdown, controlling how often times appear in the list, with options to specify intervals in minutes or detailed durations using hours, minutes, and seconds; customize or modify the interval to set time slots, define dropdown time ranges, enable precise time spacing, set step intervals for classic styles as numeric minutes, or use an object format for modern components to fine-tune time increments in scheduling, booking, or time input interfaces.
+How can I adjust the time step size in Kendo UI's DateTimePicker component to make it show times every 15 minutes? Adjust or configure the time step size, granularity, or increments for time selection in a date-time picker or dropdown, controlling how often times appear in the list, with options to specify intervals in minutes or detailed durations using hours, minutes, and seconds; customize or modify the interval to set time slots, define dropdown time ranges, enable precise time spacing, set step intervals for classic styles as numeric minutes, or use an object format for modern components to fine-tune time increments in scheduling, booking, or time input interfaces.
 </div>
 
 #### Example - specify a time interval for the classic component type
@@ -739,7 +739,7 @@ Adjust or configure the time step size, granularity, or increments for time sele
 
 
 <div class="meta-api-description">
-Set or configure the latest permissible date to restrict calendar navigation and selection, defining the maximum date boundary for date pickers that prevents users from choosing or browsing beyond a certain day, enabling control over allowed months and date ranges either at setup or dynamically, useful for limiting input to a cutoff date, expiry, deadline, or maximum scheduling window.
+How do I restrict the date selection in a Kendo UI DateTimePicker to prevent users from choosing dates after a certain day? Set or configure the latest permissible date to restrict calendar navigation and selection, defining the maximum date boundary for date pickers that prevents users from choosing or browsing beyond a certain day, enabling control over allowed months and date ranges either at setup or dynamically, useful for limiting input to a cutoff date, expiry, deadline, or maximum scheduling window.
 </div>
 
 #### Example - specify the maximum date
@@ -757,7 +757,7 @@ Allows localization of the strings that are used in the widget.
 
 
 <div class="meta-api-description">
-Customize and localize the text, labels, placeholders, and displayed strings within date and time selection components to enable translations, change default wording, override UI messages, adapt interface language, set custom prompts, or configure text elements for internationalization, localization, or user-specific language preferences in date-time pickers and calendar controls.
+How do I customize the text in Kendo UI's DateTimePicker component? Customize and localize the text, labels, placeholders, and displayed strings within date and time selection components to enable translations, change default wording, override UI messages, adapt interface language, set custom prompts, or configure text elements for internationalization, localization, or user-specific language preferences in date-time pickers and calendar controls.
 </div>
 
 #### Example
@@ -778,7 +778,7 @@ Allows customization of the week column header text in the Calendar. Set the val
 
 
 <div class="meta-api-description">
-Customize or set the week column header text in the calendar or date picker interface to improve accessibility, localization, or user interface clarity by configuring labels, headers, or displayed text for the weekly column; control or override default weekday column titles, adjust week index headers, or specify custom strings to enhance screen reader support, internationalization, or visual guidance in date selection components and calendar views.
+How do I customize the week column header in Kendo UI DateTimePicker? Customize or set the week column header text in the calendar or date picker interface to improve accessibility, localization, or user interface clarity by configuring labels, headers, or displayed text for the weekly column; control or override default weekday column titles, adjust week index headers, or specify custom strings to enhance screen reader support, internationalization, or visual guidance in date selection components and calendar views.
 </div>
 
 #### Example
@@ -799,7 +799,7 @@ The messages that DateInput uses.  Use it to customize or localize the placehold
 
 
 <div class="meta-api-description">
-Customize and localize date and time input placeholders by configuring message settings that control each segment such as day, month, year, hour, minute, and second. Enable tailored prompts or hints for date and time entry fields to improve user guidance in forms, adapt placeholders for different languages or regions, set custom labels or text for date/time input components, and adjust localization strings to match various cultural formats. This supports flexible user interface text customization for date/time selectors, helping developers control how date and time parts are presented during input across diverse locales and applications.
+How can I customize the date input placeholder in Kendo UI DateTimePicker? Customize and localize date and time input placeholders by configuring message settings that control each segment such as day, month, year, hour, minute, and second. Enable tailored prompts or hints for date and time entry fields to improve user guidance in forms, adapt placeholders for different languages or regions, set custom labels or text for date/time input components, and adjust localization strings to match various cultural formats. This supports flexible user interface text customization for date/time selectors, helping developers control how date and time parts are presented during input across diverse locales and applications.
 </div>
 
 #### Example - customize column menu messages
@@ -828,7 +828,7 @@ The placeholder for the years part.
 
 
 <div class="meta-api-description">
-Customize or configure the placeholder text for the year input field in a date and time picker, enabling control over the displayed hint or default text prompting users to enter or select the year value; this helps specify and localize the year input prompt, set custom labels, modify placeholder hints for year selection, and tailor the user interface to guide users in entering the year during date input processes.
+How do I change the default placeholder text for the year input field in a Kendo UI DateTimePicker? Customize or configure the placeholder text for the year input field in a date and time picker, enabling control over the displayed hint or default text prompting users to enter or select the year value; this helps specify and localize the year input prompt, set custom labels, modify placeholder hints for year selection, and tailor the user interface to guide users in entering the year during date input processes.
 </div>
 
 #### Example
@@ -850,7 +850,7 @@ The placeholder for the months part.
 
 
 <div class="meta-api-description">
-Configure or customize the month placeholder text in date input fields within date and time picker components to support localization, internationalization, and multilingual user interfaces; set, update, or control the default month label, prompt, or hint shown in calendar date selectors, input placeholders, or UI elements to match user locale preferences, regional date formats, or language-specific month names for improved clarity and accessibility in date selection controls.
+How can I customize the month placeholder text in Kendo UI DateTimePicker? Configure or customize the month placeholder text in date input fields within date and time picker components to support localization, internationalization, and multilingual user interfaces; set, update, or control the default month label, prompt, or hint shown in calendar date selectors, input placeholders, or UI elements to match user locale preferences, regional date formats, or language-specific month names for improved clarity and accessibility in date selection controls.
 </div>
 
 #### Example
@@ -872,7 +872,7 @@ The placeholder for the day of the month part.
 
 
 <div class="meta-api-description">
-Configure the placeholder text for the day field in date and time picker inputs, customize or set the day-of-month prompt or hint shown to users when entering a date, control the day input placeholder label, adjust or localize the day segment placeholder in date selectors, and modify the day part display text for date input components to enhance user guidance during date entry.
+How to customize the day input placeholder label in Kendo UI DateTimePicker? Configure the placeholder text for the day field in date and time picker inputs, customize or set the day-of-month prompt or hint shown to users when entering a date, control the day input placeholder label, adjust or localize the day segment placeholder in date selectors, and modify the day part display text for date input components to enhance user guidance during date entry.
 </div>
 
 #### Example
@@ -894,7 +894,7 @@ The placeholder for the day of the week part.
 
 
 <div class="meta-api-description">
-Set or customize the placeholder text for the day of the week field in date input controls, configure how weekday prompts appear in date pickers, control the display of day names or abbreviations in calendar inputs, adjust or localize the day-of-week placeholder for scheduling or date selection components, enable developers to define placeholder labels for weekdays in date selection interfaces, change or set the default weekday hint text for date-time inputs, support internationalization or personalization of day labels in date input widgets, specify or override the text shown where users enter or view the day of the week in date/time pickers.
+How can I customize the weekday placeholder in a Kendo UI DateTimePicker widget? Set or customize the placeholder text for the day of the week field in date input controls, configure how weekday prompts appear in date pickers, control the display of day names or abbreviations in calendar inputs, adjust or localize the day-of-week placeholder for scheduling or date selection components, enable developers to define placeholder labels for weekdays in date selection interfaces, change or set the default weekday hint text for date-time inputs, support internationalization or personalization of day labels in date input widgets, specify or override the text shown where users enter or view the day of the week in date/time pickers.
 </div>
 
 #### Example
@@ -916,7 +916,7 @@ The placeholder for the hours part.
 
 
 <div class="meta-api-description">
-Configure or customize the placeholder text, hint, or label displayed in the hours input field of date and time selection components, enabling control over the hour part prompt, the default text that appears when users enter hour values, setting the placeholder for the hour field in date-time pickers, adjusting the displayed guide within the hour input box, or defining the example or empty text shown to users for hour input during date and time entry.
+How do I customize the hour input placeholder in Kendo UI DateTimePicker? Configure or customize the placeholder text, hint, or label displayed in the hours input field of date and time selection components, enabling control over the hour part prompt, the default text that appears when users enter hour values, setting the placeholder for the hour field in date-time pickers, adjusting the displayed guide within the hour input box, or defining the example or empty text shown to users for hour input during date and time entry.
 </div>
 
 #### Example
@@ -938,7 +938,7 @@ The placeholder for the minutes part.
 
 
 <div class="meta-api-description">
-Customize or configure the placeholder text for the minute input in time selection interfaces, including setting localized or translated minute prompts, adjusting minute field placeholders in date and time pickers, controlling how minute values are hinted or displayed in input forms, enabling clear minute entry guidance in time selectors, and modifying minute input placeholders for enhanced user experience in scheduling, time setting, or calendar controls.
+How do I customize the placeholder for the minute input in a Kendo UI DateTimePicker? Customize or configure the placeholder text for the minute input in time selection interfaces, including setting localized or translated minute prompts, adjusting minute field placeholders in date and time pickers, controlling how minute values are hinted or displayed in input forms, enabling clear minute entry guidance in time selectors, and modifying minute input placeholders for enhanced user experience in scheduling, time setting, or calendar controls.
 </div>
 
 #### Example
@@ -960,7 +960,7 @@ The placeholder for the seconds part.
 
 
 <div class="meta-api-description">
-Set or customize the placeholder text for seconds input in date and time selection interfaces, enabling localization and internationalization of the seconds field in date-time pickers; adjust, translate, or configure the seconds prompt or hint text shown to users while entering time, supporting varied language settings and user interface customization for second-level time input.
+How do I customize the placeholder text for seconds input in a Kendo UI DateTimePicker? Set or customize the placeholder text for seconds input in date and time selection interfaces, enabling localization and internationalization of the seconds field in date-time pickers; adjust, translate, or configure the seconds prompt or hint text shown to users while entering time, supporting varied language settings and user interface customization for second-level time input.
 </div>
 
 #### Example
@@ -982,7 +982,7 @@ The placeholder for the AM/PM part.
 
 
 <div class="meta-api-description">
-Customize or configure the AM/PM placeholder text for time input fields in date and time pickers, enabling localization or customization of the day period indicator to match different languages, regions, or user preferences. Adjust, set, or override the default AM/PM labels, day part markers, or meridian indicators shown in date-time selection UI components, ensuring that the period of day display is clear and appropriately localized for user interfaces, forms, or scheduling apps.
+How to customize the AM/PM placeholder text in Kendo UI DateTimePicker widget? Customize or configure the AM/PM placeholder text for time input fields in date and time pickers, enabling localization or customization of the day period indicator to match different languages, regions, or user preferences. Adjust, set, or override the default AM/PM labels, day part markers, or meridian indicators shown in date-time selection UI components, ensuring that the period of day display is clear and appropriately localized for user interfaces, forms, or scheduling apps.
 </div>
 
 #### Example
@@ -1004,7 +1004,7 @@ Customize or configure the AM/PM placeholder text for time input fields in date 
 
 
 <div class="meta-api-description">
-Set the earliest selectable or visible date in a calendar or date picker control to restrict past date navigation, control minimum allowed dates for scheduling, limit user input to dates not before a specific day, configure the start boundary or lower limit for date selection, enforce date constraints to disallow picking dates before a given threshold, enable setting the earliest date users can view or choose, define the minimum date range to prevent selecting outdated or invalid past dates.
+How do I prevent users from selecting dates before a specific day using Kendo UI for jQuery's DateTimePicker? Set the earliest selectable or visible date in a calendar or date picker control to restrict past date navigation, control minimum allowed dates for scheduling, limit user input to dates not before a specific day, configure the start boundary or lower limit for date selection, enforce date constraints to disallow picking dates before a given threshold, enable setting the earliest date users can view or choose, define the minimum date range to prevent selecting outdated or invalid past dates.
 </div>
 
 #### Example - specify the minimum date
@@ -1022,7 +1022,7 @@ Set the earliest selectable or visible date in a calendar or date picker control
 
 
 <div class="meta-api-description">
-Customize calendar day cells with templates that control the display, formatting, styling, and content of individual dates in a month view calendar component. Enable setting or modifying how each day appears, including dynamic rendering, conditional formatting, and personalized cell layouts to tailor the monthly calendar experience. Configure month grid cells for custom visuals, enhanced date representation, or interactive elements within a monthly calendar picker interface.
+How do I customize the display of individual dates in a month view calendar with Kendo UI for jQuery? Customize calendar day cells with templates that control the display, formatting, styling, and content of individual dates in a month view calendar component. Enable setting or modifying how each day appears, including dynamic rendering, conditional formatting, and personalized cell layouts to tailor the monthly calendar experience. Configure month grid cells for custom visuals, enhanced date representation, or interactive elements within a monthly calendar picker interface.
 </div>
 
 #### Example
@@ -1042,7 +1042,7 @@ Customize calendar day cells with templates that control the display, formatting
 
 
 <div class="meta-api-description">
-Customize and control the appearance and content of in-range month cells within a calendar's month view by configuring templates, HTML markup, or dynamic data bindings, enabling developers to tailor cell rendering, format dates differently, inject custom components or styles, and adjust the display of selectable months in date-picking interfaces for enhanced user experience and precise visual customization in calendar widgets.
+How to customize in-range month cells within a Kendo UI datetimepicker calendar? Customize and control the appearance and content of in-range month cells within a calendar's month view by configuring templates, HTML markup, or dynamic data bindings, enabling developers to tailor cell rendering, format dates differently, inject custom components or styles, and adjust the display of selectable months in date-picking interfaces for enhanced user experience and precise visual customization in calendar widgets.
 </div>
 
 #### Example - specify cell template as a string
@@ -1072,7 +1072,7 @@ Customize and control the appearance and content of in-range month cells within 
 
 
 <div class="meta-api-description">
-Control and customize the rendering of week number cells in the month view calendar by setting a template that defines how each week's cell displays, enabling developers to format or replace the default week number with custom content. This includes configuring the display of the computed week of the year, leveraging data such as the first date of the week and the numeric week identifier for showing week start dates, implementing ISO week calculations, or tailoring the visual presentation of weeks within calendar grids. Ideal for scenarios where you want to override default week numbering, format weeks differently, highlight specific weeks, or add contextual information to the weekly cells in date picker components.
+How can I customize week number display in the Kendo UI datetimepicker calendar? Control and customize the rendering of week number cells in the month view calendar by setting a template that defines how each week's cell displays, enabling developers to format or replace the default week number with custom content. This includes configuring the display of the computed week of the year, leveraging data such as the first date of the week and the numeric week identifier for showing week start dates, implementing ISO week calculations, or tailoring the visual presentation of weeks within calendar grids. Ideal for scenarios where you want to override default week numbering, format weeks differently, highlight specific weeks, or add contextual information to the weekly cells in date picker components.
 </div>
 
 #### Example - specify week number template as a string
@@ -1103,7 +1103,7 @@ The template used for rendering cells in the calendar "month" view, which are ou
 
 
 <div class="meta-api-description">
-Customize rendering or styling of calendar cells for days outside the allowed minimum and maximum date range in a month view, including options to set placeholders, disable date selection, control appearance of out-of-range dates, apply custom templates or HTML content, configure how invalid or unavailable days appear, and enable visual differentiation or masking of dates not selectable within the calendar grid.
+How to customize calendar cells for out-of-range dates in a month view of Kendo UI DateTimePicker? Customize rendering or styling of calendar cells for days outside the allowed minimum and maximum date range in a month view, including options to set placeholders, disable date selection, control appearance of out-of-range dates, apply custom templates or HTML content, configure how invalid or unavailable days appear, and enable visual differentiation or masking of dates not selectable within the calendar grid.
 </div>
 
 #### Example - specify an empty cell template as a string
@@ -1135,7 +1135,7 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
 
 
 <div class="meta-api-description">
-Configure and control the popup behavior and appearance of the date and time selection interface, including how the calendar or clock dropdown opens, closes, animates, and anchors relative to input elements or containers. Enable customization of popup positioning on screen, animation effects for smooth transitions, anchoring points to attach the popup correctly, and specification of the container element where the dropdown renders. Manage overlay behaviors, control popup opening triggers, and set options to fine-tune the UI experience for date and time pickers, ensuring adaptable dropdown placement and interaction in various layouts and responsive designs.
+How do I customize the popup behavior of the Kendo UI DateTimePicker widget? Configure and control the popup behavior and appearance of the date and time selection interface, including how the calendar or clock dropdown opens, closes, animates, and anchors relative to input elements or containers. Enable customization of popup positioning on screen, animation effects for smooth transitions, anchoring points to attach the popup correctly, and specification of the container element where the dropdown renders. Manage overlay behaviors, control popup opening triggers, and set options to fine-tune the UI experience for date and time pickers, ensuring adaptable dropdown placement and interaction in various layouts and responsive designs.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1157,7 +1157,7 @@ Defines a jQuery selector that will be used to find a container element, where t
 
 
 <div class="meta-api-description">
-Configure or set the container element where the popup calendar or time selector appears by specifying a jQuery selector or DOM element to control the placement of date and time picker overlays. Enable precise control over where the popup dropdown or overlay appends in the DOM, such as attaching to a specific parent, container, or element outside the default flow. Adjust or customize popup insertion points for better layout management, avoid clipping, or fix z-index stacking issues by defining a target node for appending the DateTimePicker’s popup interface during initialization or runtime.
+How do I customize where the popup calendar of Kendo UI DateTimePicker appears? Configure or set the container element where the popup calendar or time selector appears by specifying a jQuery selector or DOM element to control the placement of date and time picker overlays. Enable precise control over where the popup dropdown or overlay appends in the DOM, such as attaching to a specific parent, container, or element outside the default flow. Adjust or customize popup insertion points for better layout management, avoid clipping, or fix z-index stacking issues by defining a target node for appending the DateTimePicker’s popup interface during initialization or runtime.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1190,7 +1190,7 @@ The available "x" positions are:
 
 
 <div class="meta-api-description">
-Control and customize the position of a popup or dropdown relative to its anchor element by specifying vertical and horizontal alignment options such as top, center, bottom for vertical placement and left, center, right for horizontal placement, enabling precise adjustment of where the popup appears on screen, useful for configuring UI elements like date pickers, dropdown menus, or tooltips to open in varied positions like bottom left, top right, center center, or other combinations to fit different layout or design requirements.
+How do I customize the popup position of my Kendo UI DateTimePicker control? Control and customize the position of a popup or dropdown relative to its anchor element by specifying vertical and horizontal alignment options such as top, center, bottom for vertical placement and left, center, right for horizontal placement, enabling precise adjustment of where the popup appears on screen, useful for configuring UI elements like date pickers, dropdown menus, or tooltips to open in varied positions like bottom left, top right, center center, or other combinations to fit different layout or design requirements.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1224,7 +1224,7 @@ The available "x" positions are:
 
 
 <div class="meta-api-description">
-Adjust or configure the alignment and placement of a popup relative to its anchor by specifying vertical and horizontal attachment points such as top, center, bottom combined with left, center, or right. Control where a dropdown, floating panel, or overlay appears by setting its position in terms of vertical and horizontal anchors to align precisely with reference elements, enabling customization of popup positioning like bottom left, top right, center center, and other combinations. Enable fine-tuned control over popup origin and attachment for date pickers or other UI elements, allowing positioning flexibility in layouts, responsive designs, or user interface customization scenarios.
+How can I adjust the position of the datetimepicker popup in Kendo UI for jQuery? Adjust or configure the alignment and placement of a popup relative to its anchor by specifying vertical and horizontal attachment points such as top, center, bottom combined with left, center, or right. Control where a dropdown, floating panel, or overlay appears by setting its position in terms of vertical and horizontal anchors to align precisely with reference elements, enabling customization of popup positioning like bottom left, top right, center center, and other combinations. Enable fine-tuned control over popup origin and attachment for date pickers or other UI elements, allowing positioning flexibility in layouts, responsive designs, or user interface customization scenarios.
 </div>
 
 #### Example - append the popup to a specific element
@@ -1258,7 +1258,7 @@ If set to `true` a week of the year will be shown on the left side of the calend
 
 
 <div class="meta-api-description">
-Enable or configure displaying week numbers alongside calendar dates to show the week-of-year indicator next to each week in date selection components, including options to toggle visibility, customize the display format, or apply templates for personalized week number rendering. This control helps users view or select dates with associated ISO or custom week numbers, supports showing week indices on the left margin of calendars or pickers, and assists with scheduling or date navigation by highlighting the ordinal week sequence within a year. Adjust, show, or hide week count labels in date pickers or calendars to enhance temporal context and improve date-related interactions.
+How to show week numbers in Kendo UI DateTimePicker? Enable or configure displaying week numbers alongside calendar dates to show the week-of-year indicator next to each week in date selection components, including options to toggle visibility, customize the display format, or apply templates for personalized week number rendering. This control helps users view or select dates with associated ISO or custom week numbers, supports showing week indices on the left margin of calendars or pickers, and assists with scheduling or date navigation by highlighting the ordinal week sequence within a year. Adjust, show, or hide week count labels in date pickers or calendars to enhance temporal context and improve date-related interactions.
 </div>
 
 #### Example - enable the week of the year option
@@ -1279,7 +1279,7 @@ Enable or configure displaying week numbers alongside calendar dates to show the
 
 
 <div class="meta-api-description">
-Configure custom date and time input parsing by specifying multiple format patterns to interpret user-entered or programmatically set values, enabling flexible recognition of various date/time string formats with prioritized strictness levels; if no custom parse formats are configured, default date and time display formats are used as fallbacks, ensuring reliable date/time parsing, validation, and conversion for diverse input styles and formats.
+How do I configure custom date and time parsing in Kendo UI DateTimePicker? Configure custom date and time input parsing by specifying multiple format patterns to interpret user-entered or programmatically set values, enabling flexible recognition of various date/time string formats with prioritized strictness levels; if no custom parse formats are configured, default date and time display formats are used as fallbacks, ensuring reliable date/time parsing, validation, and conversion for diverse input styles and formats.
 </div>
 
 #### Example
@@ -1304,7 +1304,7 @@ Sets a value controlling the border radius. Can also be set to the following str
 
 
 <div class="meta-api-description">
-Adjust or configure the corner radius, border curvature, or rounded edges of a date and time selection interface by specifying numeric values or predefined options such as none, small, medium, large, or full; customize the smoothness or sharpness of corners for UI components like date pickers, datetime selectors, or input controls to match design requirements, control visual styling, set border radius for rounded corners, enable or disable corner rounding, and manage the appearance from squared to fully circular edges in user interface elements.
+How can I adjust the rounded corners of a Kendo UI DateTimePicker? Adjust or configure the corner radius, border curvature, or rounded edges of a date and time selection interface by specifying numeric values or predefined options such as none, small, medium, large, or full; customize the smoothness or sharpness of corners for UI components like date pickers, datetime selectors, or input controls to match design requirements, control visual styling, set border radius for rounded corners, enable or disable corner rounding, and manage the appearance from squared to fully circular edges in user interface elements.
 </div>
 
 #### Example - sets the rounded value
@@ -1327,7 +1327,7 @@ Sets a value controlling size of the component. Can also be set to the following
 
 
 <div class="meta-api-description">
-Adjust the visual scale, density, and spacing of the date and time selector interface to make it more compact, spacious, prominent, or minimal within your application layout. Configure or set size options such as small, medium, large, or none to control the component’s overall footprint, appearance, and arrangement according to your UI needs. Enable scaling for tighter or more relaxed layouts, customize the component's dimensions, and control how it fits visually with other interface elements for flexible display and responsive design.
+How do I adjust the size of the Kendo UI DateTimePicker control? Adjust the visual scale, density, and spacing of the date and time selector interface to make it more compact, spacious, prominent, or minimal within your application layout. Configure or set size options such as small, medium, large, or none to control the component’s overall footprint, appearance, and arrangement according to your UI needs. Enable scaling for tighter or more relaxed layouts, customize the component's dimensions, and control how it fits visually with other interface elements for flexible display and responsive design.
 </div>
 
 #### Example - sets the rounded value
@@ -1351,7 +1351,7 @@ Adjust the visual scale, density, and spacing of the date and time selector inte
 
 
 <div class="meta-api-description">
-Control the initial calendar view or default zoom level when opening a date and time selection interface by configuring the starting display mode, choosing to begin with daily month view, monthly year overview, yearly decade spread, or decade-level century range; set or customize the initial calendar navigation focus to show days, months, years, or decades upon opening, enabling developers to define how the calendar is first presented and which time scale users see first, such as month grid, year list, decade range, or century decades overview, to improve usability based on context or user preference.
+How do I set the initial calendar view for Kendo UI DateTimePicker? Control the initial calendar view or default zoom level when opening a date and time selection interface by configuring the starting display mode, choosing to begin with daily month view, monthly year overview, yearly decade spread, or decade-level century range; set or customize the initial calendar navigation focus to show days, months, years, or decades upon opening, enabling developers to define how the calendar is first presented and which time scale users see first, such as month grid, year list, decade range, or century decades overview, to improve usability based on context or user preference.
 </div>
 
 #### Example - specify the initial view, which calendar renders
@@ -1369,7 +1369,7 @@ Control the initial calendar view or default zoom level when opening a date and 
 
 
 <div class="meta-api-description">
-Limit the earliest selectable or visible time in a time picker control to restrict available time slots shown in a dropdown or time selection list, enabling configuration of the minimum time users can choose or view in scheduling interfaces. This controls the starting point of time options presented in time pickers, time selectors, or datetime input fields, ensuring users cannot pick or see times before a specified hour, minute, or timestamp. Developers can set a minimum time boundary or configure a start time cutoff to filter or constrain time ranges dynamically in calendar widgets, appointment schedulers, or time selection components.
+How can I set a minimum time boundary in a Kendo UI datetimepicker widget? Limit the earliest selectable or visible time in a time picker control to restrict available time slots shown in a dropdown or time selection list, enabling configuration of the minimum time users can choose or view in scheduling interfaces. This controls the starting point of time options presented in time pickers, time selectors, or datetime input fields, ensuring users cannot pick or see times before a specified hour, minute, or timestamp. Developers can set a minimum time boundary or configure a start time cutoff to filter or constrain time ranges dynamically in calendar widgets, appointment schedulers, or time selection components.
 </div>
 
 #### Example - specify the start time for the TimeView
@@ -1387,7 +1387,7 @@ Limit the earliest selectable or visible time in a time picker control to restri
 
 
 <div class="meta-api-description">
-Control and customize the display of time options in a date and time selection dropdown by setting the time display pattern, enabling formats like 12-hour with AM/PM or 24-hour military time, adjusting hour and minute presentation styles, configuring time strings using standard or Kendo-specific format patterns, specifying how times appear in picker lists, and defining custom time formatting to match user locale or application requirements for showing hours, minutes, and meridiem indicators precisely.
+How do I customize the time format in Kendo UI DateTimePicker? Control and customize the display of time options in a date and time selection dropdown by setting the time display pattern, enabling formats like 12-hour with AM/PM or 24-hour military time, adjusting hour and minute presentation styles, configuring time strings using standard or Kendo-specific format patterns, specifying how times appear in picker lists, and defining custom time formatting to match user locale or application requirements for showing hours, minutes, and meridiem indicators precisely.
 </div>
 
 #### Example
@@ -1405,7 +1405,7 @@ Control and customize the display of time options in a date and time selection d
 
 
 <div class="meta-api-description">
-Configure, set, retrieve, or update the current date and time selection in a date-time input control, enabling initialization of default values, programmatic changes, accessing or binding the chosen timestamp, synchronizing user input with form data, validating selected dates, and managing state for date and time pickers or calendar widgets.
+How do I set the initial date and time value in a Kendo UI DateTimePicker control? Configure, set, retrieve, or update the current date and time selection in a date-time input control, enabling initialization of default values, programmatic changes, accessing or binding the chosen timestamp, synchronizing user input with form data, validating selected dates, and managing state for date and time pickers or calendar widgets.
 </div>
 
 #### Example
@@ -1424,7 +1424,7 @@ An object, which holds the [`configuration options`](/api/javascript/ui/datetime
 
 
 <div class="meta-api-description">
-Configure and customize the date and time selector by accessing and modifying its runtime settings, enabling developers to dynamically change initialization parameters such as appearance, validation rules, format options, localization settings, and behavioral aspects during execution. Adjust or read properties to control how date and time inputs are displayed and validated, update locale preferences, toggle formats between date and time, manage input restrictions, and dynamically alter UI and functional configurations without recreating the component. This enables flexible programmatic control over date/time picker options to suit various runtime requirements, user preferences, and application contexts.
+How do I dynamically change the format options of a Kendo UI DateTimePicker control? Configure and customize the date and time selector by accessing and modifying its runtime settings, enabling developers to dynamically change initialization parameters such as appearance, validation rules, format options, localization settings, and behavioral aspects during execution. Adjust or read properties to control how date and time inputs are displayed and validated, update locale preferences, toggle formats between date and time, manage input restrictions, and dynamically alter UI and functional configurations without recreating the component. This enables flexible programmatic control over date/time picker options to suit various runtime requirements, user preferences, and application contexts.
 </div>
 
 #### Example - get options of the component
@@ -1445,7 +1445,7 @@ Closes the calendar or the time drop-down list.
 
 
 <div class="meta-api-description">
-Programmatically hide or dismiss an open calendar or time selection popup in a date-time picker control, closing overlays, drop-downs, or popups to return user focus to the input field; enable automatic or manual closing after selection, validation, focus shifts, keyboard interactions, or custom event handling to control visibility and user experience within date and time input components.
+How to programmatically close the datetime picker calendar in jQuery Kendo UI? Programmatically hide or dismiss an open calendar or time selection popup in a date-time picker control, closing overlays, drop-downs, or popups to return user focus to the input field; enable automatic or manual closing after selection, validation, focus shifts, keyboard interactions, or custom event handling to control visibility and user experience within date and time input components.
 </div>
 
 #### Parameters
@@ -1490,7 +1490,7 @@ Prepares the **DateTimePicker** for safe removal from DOM. Detaches all event ha
 
 
 <div class="meta-api-description">
-clean up and safely remove all event listeners, data associations, and child widget instances linked to a date and time picker control to prevent memory leaks and resource retention before detaching or disposing of it from the web page, including unlinking Kendo UI subordinate components and releasing their resources without deleting the underlying HTML element itself, ensuring proper teardown and enabling reset or reinitialization scenarios for date/time selection widgets.
+What happens when I call the destroy method on my Kendo UI DateTimePicker widget? clean up and safely remove all event listeners, data associations, and child widget instances linked to a date and time picker control to prevent memory leaks and resource retention before detaching or disposing of it from the web page, including unlinking Kendo UI subordinate components and releasing their resources without deleting the underlying HTML element itself, ensuring proper teardown and enabling reset or reinitialization scenarios for date/time selection widgets.
 </div>
 
 #### Example
@@ -1511,7 +1511,7 @@ Enables or disables a DateTimePicker.
 
 
 <div class="meta-api-description">
-Toggle the interactive state of the date and time selection control by enabling or disabling user input and focusability programmatically through method calls that activate or deactivate keyboard and mouse interactions, allowing developers to control whether users can edit, select, or change date and time values by setting the control to enabled or disabled dynamically at runtime.
+How do I programmatically enable or disable user interaction with the Kendo UI DateTimePicker control? Toggle the interactive state of the date and time selection control by enabling or disabling user input and focusability programmatically through method calls that activate or deactivate keyboard and mouse interactions, allowing developers to control whether users can edit, select, or change date and time values by setting the control to enabled or disabled dynamically at runtime.
 </div>
 
 #### Parameters
@@ -1550,7 +1550,7 @@ Toggles the readonly state of the widget. When the widget is readonly it doesn't
 
 
 <div class="meta-api-description">
-Control or toggle the input field to be non-editable while still submitting its selected value within forms, enabling you to set the date and time picker as read-only or locked to prevent user changes but include its data during form submission, differentiating from disabled states where input is blocked and excluded from form posts, useful for scenarios requiring display-only date and time values that must be sent with the form, configuring the picker to accept no direct input yet retain its value in data handling and submission workflows.
+How can I make my date and time picker non-editable but still include its value in form submission? Control or toggle the input field to be non-editable while still submitting its selected value within forms, enabling you to set the date and time picker as read-only or locked to prevent user changes but include its data during form submission, differentiating from disabled states where input is blocked and excluded from form posts, useful for scenarios requiring display-only date and time values that must be sent with the form, configuring the picker to accept no direct input yet retain its value in data handling and submission workflows.
 </div>
 
 #### Parameters
@@ -1587,7 +1587,7 @@ Gets or sets the maximum value of the DateTimePicker.
 
 
 <div class="meta-api-description">
-Configure or retrieve the upper limit for selectable date and time values, control the maximum allowed date/time to restrict user input beyond a certain cutoff, set or update the latest permissible date dynamically, enforce date/time boundaries by defining a maximum threshold, prevent selection of dates or times above a specified limit, adjust this limit at runtime or initialization to ensure valid ranges, combine with minimum constraints to create date/time intervals, manage allowed date ranges for scheduling, limit future date entries, and govern date/time picker selections with precise maximum value settings.
+How do I set a maximum date/time limit for user input in a Kendo UI DateTimePicker control? Configure or retrieve the upper limit for selectable date and time values, control the maximum allowed date/time to restrict user input beyond a certain cutoff, set or update the latest permissible date dynamically, enforce date/time boundaries by defining a maximum threshold, prevent selection of dates or times above a specified limit, adjust this limit at runtime or initialization to ensure valid ranges, combine with minimum constraints to create date/time intervals, manage allowed date ranges for scheduling, limit future date entries, and govern date/time picker selections with precise maximum value settings.
 </div>
 
 #### Parameters
@@ -1631,7 +1631,7 @@ Gets or sets the minimum value of the DateTimePicker.
 
 
 <div class="meta-api-description">
-Set or retrieve the earliest selectable date and time limit for a date and time selector, controlling the minimum allowed input by specifying a exact date object or a compatible date string. Enable restricting user selection to dates and times on or after a specific threshold to enforce validation rules, filter available options, disable earlier dates and times, or define the lower bound of the selectable range. This function facilitates configuring, adjusting, or querying the starting point for date/time input constraints in interactive date-time controls.
+How do I set the minimum allowed date in Kendo UI's DateTimePicker widget? Set or retrieve the earliest selectable date and time limit for a date and time selector, controlling the minimum allowed input by specifying a exact date object or a compatible date string. Enable restricting user selection to dates and times on or after a specific threshold to enforce validation rules, filter available options, disable earlier dates and times, or define the lower bound of the selectable range. This function facilitates configuring, adjusting, or querying the starting point for date/time input constraints in interactive date-time controls.
 </div>
 
 #### Parameters
@@ -1675,7 +1675,7 @@ Opens the calendar or the time drop-down list.
 
 
 <div class="meta-api-description">
-Programmatically trigger or activate the calendar popup or time selection dropdown to display the date and time picker interface dynamically, enabling the UI to open and focus for user input after initialization, useful for automatically showing the date/time selector, controlling visibility through code, or invoking the picker on demand within applications requiring explicit display of date or time selection components.
+How can I programmatically open the Kendo UI DateTimePicker calendar popup in jQuery? Programmatically trigger or activate the calendar popup or time selection dropdown to display the date and time picker interface dynamically, enabling the UI to open and focus for user input after initialization, useful for automatically showing the date/time selector, controlling visibility through code, or invoking the picker on demand within applications requiring explicit display of date or time selection components.
 </div>
 
 #### Parameters
@@ -1721,7 +1721,7 @@ When setOptions is called, the DateTimePicker widget will be destroyed and recre
 
 
 <div class="meta-api-description">
-Change, update, or reconfigure date and time picker settings dynamically during runtime by modifying options such as enabling or disabling features, adjusting display formats, switching between date or time modes, customizing behavior, or altering selectable ranges. Control and apply new configurations after initialization without restarting the whole application, causing the component to rebuild and reflect updated parameters immediately. Implement runtime setting adjustments, live option updates, feature toggling, and on-the-fly customization of the date/time input interface.
+How do I dynamically change date and time settings in a Kendo UI DateTimePicker widget? Change, update, or reconfigure date and time picker settings dynamically during runtime by modifying options such as enabling or disabling features, adjusting display formats, switching between date or time modes, customizing behavior, or altering selectable ranges. Control and apply new configurations after initialization without restarting the whole application, causing the component to rebuild and reflect updated parameters immediately. Implement runtime setting adjustments, live option updates, feature toggling, and on-the-fly customization of the date/time input interface.
 </div>
 
 #### Parameters
@@ -1754,7 +1754,7 @@ Toggles the calendar or the time drop-down list.
 
 
 <div class="meta-api-description">
-Control the visibility of date and time selection popups by programmatically opening, closing, or toggling the calendar or time dropdown, enabling dynamic display of picker interfaces in response to user input, keyboard shortcuts, or event-driven triggers, allowing seamless switching and interactive management of date/time picker overlays and dropdown components without manual user clicks or UI state changes.
+How to programmatically show/hide Kendo UI DateTimePicker calendar or time dropdown? Control the visibility of date and time selection popups by programmatically opening, closing, or toggling the calendar or time dropdown, enabling dynamic display of picker interfaces in response to user input, keyboard shortcuts, or event-driven triggers, allowing seamless switching and interactive management of date/time picker overlays and dropdown components without manual user clicks or UI state changes.
 </div>
 
 #### Parameters
@@ -1798,7 +1798,7 @@ Gets or sets the value of the DateTimePicker.
 
 
 <div class="meta-api-description">
-Retrieve or set the selected date and time of a date-time input control programmatically, enabling dynamic reading, updating, or binding of the current date/time value. This method supports getting the active date and time without parameters or assigning a new date/time value to modify the displayed selection, useful for syncing, controlling, or automating date/time inputs in code. It covers use cases such as accessing the current timestamp, changing the chosen date/time on user interaction programmatically, resetting or presetting date/time entries, and integrating date/time values with other components or data models.
+How can I dynamically get or set the selected date and time in a Kendo UI DateTimePicker control using jQuery? Retrieve or set the selected date and time of a date-time input control programmatically, enabling dynamic reading, updating, or binding of the current date/time value. This method supports getting the active date and time without parameters or assigning a new date/time value to modify the displayed selection, useful for syncing, controlling, or automating date/time inputs in code. It covers use cases such as accessing the current timestamp, changing the chosen date/time on user interaction programmatically, resetting or presetting date/time entries, and integrating date/time values with other components or data models.
 </div>
 
 #### Parameters
@@ -1860,7 +1860,7 @@ Triggered when the underlying value of a DateTimePicker is changed.
 
 
 <div class="meta-api-description">
-Detect and respond to updates whenever the date or time selection is modified, either by user input or programmatic changes, enabling real-time validation, synchronization with other interface components, or triggering data refreshes and custom event handling on value change events from date/time input controls.
+How do I detect changes to the selected date/time in a Kendo DateTimePicker? Detect and respond to updates whenever the date or time selection is modified, either by user input or programmatic changes, enabling real-time validation, synchronization with other interface components, or triggering data refreshes and custom event handling on value change events from date/time input controls.
 </div>
 
 #### Event Data
@@ -1903,7 +1903,7 @@ Fires when the calendar or the time drop-down list is closed
 
 
 <div class="meta-api-description">
-Trigger actions when a calendar or time selection popup closes, enabling detection of when a date or time picker dropdown is dismissed or hidden, to run cleanup tasks, validate inputs, update UI state, set focus, synchronize related elements, or handle post-selection logic after closing date and time selection components, capture events signaling the closure of date or time pickers for custom handlers and interface updates.
+How do I handle when a Kendo UI DateTimePicker's calendar selection popup is closed? Trigger actions when a calendar or time selection popup closes, enabling detection of when a date or time picker dropdown is dismissed or hidden, to run cleanup tasks, validate inputs, update UI state, set focus, synchronize related elements, or handle post-selection logic after closing date and time selection components, capture events signaling the closure of date or time pickers for custom handlers and interface updates.
 </div>
 
 #### Event Data
@@ -1950,7 +1950,7 @@ Fires when the calendar or the time drop-down list is opened
 
 
 <div class="meta-api-description">
-Detect when a date and time selector or calendar popup becomes visible, triggering actions such as adjusting user interface layout, loading deferred or on-demand data, setting keyboard or screen reader focus, tracking user interactions for analytics, or executing custom code whenever the date/time picker control’s calendar panel or time dropdown is shown or opened. This event captures the moment the date selector or time dropdown is displayed, enabling handling of UI changes, lazy loading, focus management, analytics recording, or any behavior tied to the visibility of date and time selection interfaces.
+When is a Kendo UI DateTimePicker's calendar panel or time dropdown considered visible for triggering events? Detect when a date and time selector or calendar popup becomes visible, triggering actions such as adjusting user interface layout, loading deferred or on-demand data, setting keyboard or screen reader focus, tracking user interactions for analytics, or executing custom code whenever the date/time picker control’s calendar panel or time dropdown is shown or opened. This event captures the moment the date selector or time dropdown is displayed, enabling handling of UI changes, lazy loading, focus management, analytics recording, or any behavior tied to the visibility of date and time selection interfaces.
 </div>
 
 #### Event Data

@@ -15,7 +15,7 @@ The location latitude in decimal degrees.
 
 
 <div class="meta-api-description">
-Specify or configure the geographic north–south coordinate using decimal degrees to position map elements such as markers, centers, or pins during initialization or setup. Enable setting the latitude value for locations to control map centering, adjust placement of map features based on geographic coordinates, and define spatial positioning in terms of latitude when creating or configuring maps. Use this parameter to control the y-axis coordinate on the globe for accurate placement and geographic reference in various mapping, navigation, and geolocation scenarios.
+How do I set the latitude value for map elements in Kendo UI? Specify or configure the geographic north–south coordinate using decimal degrees to position map elements such as markers, centers, or pins during initialization or setup. Enable setting the latitude value for locations to control map centering, adjust placement of map features based on geographic coordinates, and define spatial positioning in terms of latitude when creating or configuring maps. Use this parameter to control the y-axis coordinate on the globe for accurate placement and geographic reference in various mapping, navigation, and geolocation scenarios.
 </div>
 
 #### Example
@@ -30,7 +30,7 @@ The location longitude in decimal degrees.
 
 
 <div class="meta-api-description">
-Set or specify geographic longitude in decimal degrees when creating a location object or configuring map positioning, centering map views by longitude coordinates, defining marker placements with precise longitude values, initializing longitude as a parameter during location or map component setup, controlling east-west geographic positioning using decimal longitude for spatial context, inputting longitude degrees to locate points on maps, or establishing exact longitude settings in mapping applications and geographic data structures.
+How to set geographic longitude when creating a Kendo UI map? Set or specify geographic longitude in decimal degrees when creating a location object or configuring map positioning, centering map views by longitude coordinates, defining marker placements with precise longitude values, initializing longitude as a parameter during location or map component setup, controlling east-west geographic positioning using decimal longitude for spatial context, inputting longitude degrees to locate points on maps, or establishing exact longitude settings in mapping applications and geographic data structures.
 </div>
 
 #### Example
@@ -48,7 +48,7 @@ Creates a Location instance from various input types.
 
 
 <div class="meta-api-description">
-Transform diverse geographical coordinates, including raw numbers, arrays, or structured objects, into standardized location objects compatible with mapping components. Enable parsing, normalization, and conversion of various input formats from user inputs, APIs, or existing data into a unified coordinate representation for location-based rendering or processing. Configure and generate location instances from mixed data types, ensuring compatibility and consistency across mapping tools, geolocation features, and coordinate transformations within applications.
+How do I convert raw geographical coordinates into a standardized location object using Kendo UI for jQuery? Transform diverse geographical coordinates, including raw numbers, arrays, or structured objects, into standardized location objects compatible with mapping components. Enable parsing, normalization, and conversion of various input formats from user inputs, APIs, or existing data into a unified coordinate representation for location-based rendering or processing. Configure and generate location instances from mixed data types, ensuring compatibility and consistency across mapping tools, geolocation features, and coordinate transformations within applications.
 </div>
 
 #### Example
@@ -85,7 +85,7 @@ Creates a Location instance from an [longitude, latitude] array.
 
 
 <div class="meta-api-description">
-Convert a longitude and latitude pair or coordinates array into a geographical location object that can be used for map interactions such as centering the map view, panning, adding markers, geocoding, reverse geocoding, or other spatial computations. This transformation from raw longitude-latitude data into a usable location entity supports precise positioning, navigation tasks, coordinate conversions, map annotations, and integration with mapping services requiring standardized location formats, enabling developers to handle geographic points effectively within various map APIs and location-based applications.
+How do I convert longitude and latitude coordinates into a usable location object for Kendo UI map interactions? Convert a longitude and latitude pair or coordinates array into a geographical location object that can be used for map interactions such as centering the map view, panning, adding markers, geocoding, reverse geocoding, or other spatial computations. This transformation from raw longitude-latitude data into a usable location entity supports precise positioning, navigation tasks, coordinate conversions, map annotations, and integration with mapping services requiring standardized location formats, enabling developers to handle geographic points effectively within various map APIs and location-based applications.
 </div>
 
 #### Example
@@ -110,7 +110,7 @@ Creates a Location instance from an [latitude, longitude] array.
 
 
 <div class="meta-api-description">
-Create or generate a location object, point, or coordinate from numeric latitude and longitude values provided as an array or pair, enabling setting map center points, placing markers, converting geographic coordinates into usable location instances, transforming GPS or degree coordinates into location objects for mapping, geospatial positioning, or coordinate-based calculations, and supporting input formats where latitude comes before longitude for mapping components, navigation, or spatial data handling.
+How do I create a location object from latitude and longitude coordinates in Kendo UI for jQuery? Create or generate a location object, point, or coordinate from numeric latitude and longitude values provided as an array or pair, enabling setting map center points, placing markers, converting geographic coordinates into usable location instances, transforming GPS or degree coordinates into location objects for mapping, geospatial positioning, or coordinate-based calculations, and supporting input formats where latitude comes before longitude for mapping components, navigation, or spatial data handling.
 </div>
 
 #### Example
@@ -137,7 +137,7 @@ The location latitude in decimal degrees.
 
 
 <div class="meta-api-description">
-Retrieve or bind the geographic latitude coordinate in decimal degrees for a map location, GPS point, or spatial data set, enabling access to the north-south position for mapping, geolocation, coordinate systems, navigation, or location-based services; control, read, or configure the latitude value from fields representing geographic positions within mapping, GPS tracking, or geospatial applications.
+How do I retrieve the latitude value from a Kendo UI map location? Retrieve or bind the geographic latitude coordinate in decimal degrees for a map location, GPS point, or spatial data set, enabling access to the north-south position for mapping, geolocation, coordinate systems, navigation, or location-based services; control, read, or configure the latitude value from fields representing geographic positions within mapping, GPS tracking, or geospatial applications.
 </div>
 
 #### Example
@@ -156,7 +156,7 @@ The location longitude in decimal degrees.
 
 
 <div class="meta-api-description">
-Specify, obtain, configure, or update the longitude value in decimal degrees for a geographic point to position markers accurately, center maps on a specific horizontal coordinate, calculate distances between points, or manage geospatial data. This longitude setting is essential for placing locations east or west, adjusting map views based on horizontal coordinates, performing navigation calculations, and integrating location-based services that require precise east-west positioning. Accessing or modifying this longitude coordinate enables control over map centering, marker placement, route planning, geofencing, and spatial analysis in mapping applications.
+How do I set the longitude value for a marker in Kendo UI map? Specify, obtain, configure, or update the longitude value in decimal degrees for a geographic point to position markers accurately, center maps on a specific horizontal coordinate, calculate distances between points, or manage geospatial data. This longitude setting is essential for placing locations east or west, adjusting map views based on horizontal coordinates, performing navigation calculations, and integrating location-based services that require precise east-west positioning. Accessing or modifying this longitude coordinate enables control over map centering, marker placement, route planning, geofencing, and spatial analysis in mapping applications.
 </div>
 
 #### Example
@@ -178,7 +178,7 @@ Creates a new instance with the same coordinates.
 
 
 <div class="meta-api-description">
-Duplicate or copy a geographical coordinate point or position without altering the original data, enabling the creation of an independent Location object with identical latitude and longitude values. This operation supports scenarios where you need to replicate coordinates for calculations, transformations, or modifications without impacting the source location, useful for cloning position data, copying geospatial points, or creating backup instances of coordinate information while ensuring the original remains intact and unchanged.
+How can I duplicate a geographical location in Kendo UI for jQuery without altering the original data? Duplicate or copy a geographical coordinate point or position without altering the original data, enabling the creation of an independent Location object with identical latitude and longitude values. This operation supports scenarios where you need to replicate coordinates for calculations, transformations, or modifications without impacting the source location, useful for cloning position data, copying geospatial points, or creating backup instances of coordinate information while ensuring the original remains intact and unchanged.
 </div>
 
 #### Example
@@ -203,7 +203,7 @@ to the given destination in meters.
 
 
 <div class="meta-api-description">
-Calculate or determine the shortest distance over the Earth's surface between two geographic points, compute the direct geodesic or great-circle distance from one location to another, measure the precise distance in meters between coordinates, find the minimal spherical distance for navigation or mapping purposes, convert geographic points into the shortest travel path estimation, enable distance calculation between latitude and longitude positions, set or retrieve the straight-line surface distance avoiding route paths, control or query for accurate earth curvature distance in meters, obtain spatial separation metrics between origin and target locations, and perform geographic spatial distance measurement using spherical geometry calculations.
+How can I calculate the shortest distance between two geographic points using Kendo UI for jQuery's map component? Calculate or determine the shortest distance over the Earth's surface between two geographic points, compute the direct geodesic or great-circle distance from one location to another, measure the precise distance in meters between coordinates, find the minimal spherical distance for navigation or mapping purposes, convert geographic points into the shortest travel path estimation, enable distance calculation between latitude and longitude positions, set or retrieve the straight-line surface distance avoiding route paths, control or query for accurate earth curvature distance in meters, obtain spatial separation metrics between origin and target locations, and perform geographic spatial distance measurement using spherical geometry calculations.
 </div>
 
 #### Example
@@ -233,7 +233,7 @@ Finds a destination at the given distance and bearing from this location.
 
 
 <div class="meta-api-description">
-Calculate or determine the geographic endpoint given a starting coordinate by specifying how far and in what direction to travel; this functionality enables finding destination points based on distance and bearing inputs, useful for mapping routes, navigation waypoints, geospatial positioning, coordinate projection, distance-based location lookup, computing target points along a path, or determining endpoint coordinates from an origin location by setting travel distance and heading or angle parameters.
+How can I use the `distanceTo` method to calculate a destination point on a map given a starting coordinate? Calculate or determine the geographic endpoint given a starting coordinate by specifying how far and in what direction to travel; this functionality enables finding destination points based on distance and bearing inputs, useful for mapping routes, navigation waypoints, geospatial positioning, coordinate projection, distance-based location lookup, computing target points along a path, or determining endpoint coordinates from an origin location by setting travel distance and heading or angle parameters.
 </div>
 
 #### Example
@@ -264,7 +264,7 @@ Compares this location with another instance.
 
 
 <div class="meta-api-description">
-Compare two geographic coordinate points for equality, check if one location matches another, determine whether positions share identical latitude and longitude values, perform coordinate equality tests for map markers or GPS points, verify if two geographic locations are the same, enable position comparison for deduplication or updates in mapping contexts, control spatial equivalence of coordinates, test if locations correspond exactly, and confirm whether pairs of Location objects represent identical places.
+How do I compare two map locations for equality in Kendo UI? Compare two geographic coordinate points for equality, check if one location matches another, determine whether positions share identical latitude and longitude values, perform coordinate equality tests for map markers or GPS points, verify if two geographic locations are the same, enable position comparison for deduplication or updates in mapping contexts, control spatial equivalence of coordinates, test if locations correspond exactly, and confirm whether pairs of Location objects represent identical places.
 </div>
 
 #### Example
@@ -292,7 +292,7 @@ Rounds the location coordinates to the specified number of fractional digits.
 
 
 <div class="meta-api-description">
-Adjust coordinate precision by rounding latitude and longitude or x and y values to a set number of decimal places, enabling control over decimal digits for consistent comparison, normalization, storage efficiency, and cleaner UI display of spatial data. This method helps round geographic or Cartesian coordinates to specified fractional digits, supporting use cases like minimizing floating-point variance, standardizing location data formats, optimizing data size, and improving visual readability in mapping applications. It’s useful when you need to configure or set precision for location data rounding, coordinate truncation, or digit control in any mapping or geospatial context.
+How to round geographic coordinates in Kendo UI map for better storage efficiency? Adjust coordinate precision by rounding latitude and longitude or x and y values to a set number of decimal places, enabling control over decimal digits for consistent comparison, normalization, storage efficiency, and cleaner UI display of spatial data. This method helps round geographic or Cartesian coordinates to specified fractional digits, supporting use cases like minimizing floating-point variance, standardizing location data formats, optimizing data size, and improving visual readability in mapping applications. It’s useful when you need to configure or set precision for location data rounding, coordinate truncation, or digit control in any mapping or geospatial context.
 </div>
 
 #### Example
@@ -319,7 +319,7 @@ Returns the location coordinates as an [lat, lng] array.
 
 
 <div class="meta-api-description">
-Convert geographic coordinates or location points to a numeric array with latitude and longitude values in order, enabling retrieval of location data as a simple [lat, lng] array format for serialization, exporting to mapping services, binding to data structures, calculating distances, or integrating with geospatial APIs. This method supports transforming coordinate objects into standardized arrays useful for location handling in maps, geolocation processing, coordinate conversions, and spatial computations.
+How do I convert geographic coordinates to a numeric array with latitude and longitude values in Kendo UI for jQuery? Convert geographic coordinates or location points to a numeric array with latitude and longitude values in order, enabling retrieval of location data as a simple [lat, lng] array format for serialization, exporting to mapping services, binding to data structures, calculating distances, or integrating with geospatial APIs. This method supports transforming coordinate objects into standardized arrays useful for location handling in maps, geolocation processing, coordinate conversions, and spatial computations.
 </div>
 
 #### Example
@@ -342,7 +342,7 @@ Returns the location coordinates formatted as '{lat},{lng}'.
 
 
 <div class="meta-api-description">
-Convert geographic coordinates from a location or map object into a concise, comma-separated string format that includes latitude and longitude in decimal degrees, preserving exact values and signs for use in URLs, display labels, data serialization, coordinate formatting, geocoding input, location sharing, and extracting compact positional information in string form. This functionality supports generating standardized coordinate strings for mapping, location APIs, and any scenario requiring a simple textual representation of geographic points with precise decimal notation and coordinate ordering from latitude to longitude.
+How do I convert geographic coordinates to a comma-separated string in Kendo UI for jQuery? Convert geographic coordinates from a location or map object into a concise, comma-separated string format that includes latitude and longitude in decimal degrees, preserving exact values and signs for use in URLs, display labels, data serialization, coordinate formatting, geocoding input, location sharing, and extracting compact positional information in string form. This functionality supports generating standardized coordinate strings for mapping, location APIs, and any scenario requiring a simple textual representation of geographic points with precise decimal notation and coordinate ordering from latitude to longitude.
 </div>
 
 #### Example
@@ -364,7 +364,7 @@ Wraps the latitude and longitude to fit into the [0, 90] and [0, 180] range.
 
 
 <div class="meta-api-description">
-Control and adjust geographic coordinates by normalizing or wrapping latitude and longitude values to fit within valid ranges, handle coordinate overflow across poles or the International Date Line, ensure locations remain numerically correct and consistent during binding or conversion processes, manage wrapping of geographic positions that exceed normal bounds, and configure location data to stay within standard geographic limits for mapping, geospatial calculations, coordinate transformation, and location-based services.
+How do I prevent my Kendo UI map from wrapping latitude/longitude values when they exceed valid ranges? Control and adjust geographic coordinates by normalizing or wrapping latitude and longitude values to fit within valid ranges, handle coordinate overflow across poles or the International Date Line, ensure locations remain numerically correct and consistent during binding or conversion processes, manage wrapping of geographic positions that exceed normal bounds, and configure location data to stay within standard geographic limits for mapping, geospatial calculations, coordinate transformation, and location-based services.
 </div>
 
 #### Example

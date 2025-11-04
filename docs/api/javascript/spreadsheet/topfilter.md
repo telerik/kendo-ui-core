@@ -16,7 +16,7 @@ The constructor of the filter.
 
 
 <div class="meta-api-description">
-Instantiate, initialize, set up, or create a filter instance programmatically for a spreadsheet or data grid by configuring its initial state, preparing internal settings, enabling filter functionality, and constructing the filter object to manage or apply top-level filtering operations, including initializing all necessary parameters to control filtering behavior before using its methods or APIs.
+How do I initialize a Kendo UI top filter instance programmatically? Instantiate, initialize, set up, or create a filter instance programmatically for a spreadsheet or data grid by configuring its initial state, preparing internal settings, enabling filter functionality, and constructing the filter object to manage or apply top-level filtering operations, including initializing all necessary parameters to control filtering behavior before using its methods or APIs.
 </div>
 
 #### Parameters

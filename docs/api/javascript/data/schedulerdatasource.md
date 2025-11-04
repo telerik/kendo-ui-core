@@ -23,7 +23,7 @@ The schema configuration of the SchedulerDataSource.
 
 
 <div class="meta-api-description">
-Configure event data structure and parsing rules for scheduling systems by defining data models, field mappings, unique identifiers, date and string types, custom parse functions, and handling nested or complex event objects to control how events are loaded, validated, and interpreted within calendar or scheduler components. Enable precise control over event data format, validation methods, data transformation, and field correspondence for accurate schedule rendering and interaction by setting up mapping schemas that dictate how raw event input is converted into structured and typed scheduling items, supporting diverse input formats and ensuring consistent event handling.
+How do I configure the event data structure for my Kendo UI Scheduler with a custom schema? Configure event data structure and parsing rules for scheduling systems by defining data models, field mappings, unique identifiers, date and string types, custom parse functions, and handling nested or complex event objects to control how events are loaded, validated, and interpreted within calendar or scheduler components. Enable precise control over event data format, validation methods, data transformation, and field correspondence for accurate schedule rendering and interaction by setting up mapping schemas that dictate how raw event input is converted into structured and typed scheduling items, supporting diverse input formats and ensuring consistent event handling.
 </div>
 
 #### Example
@@ -58,7 +58,7 @@ The model configuration of the SchedulerDataSource. See [SchedulerEvent](/api/fr
 
 
 <div class="meta-api-description">
-Define and customize the structure and mapping of event records in the Scheduler’s data source by setting the event model schema, including specifying field names, types, default values, unique identifiers, and mapping fields like start time, end time, title, and recurrence. Control how event data is parsed, converted, and synchronized for accurate reading and writing within the Scheduler, enabling configuration, customization, or adjustment of event record formats, field bindings, and data transformations to fit diverse scheduling data models and user requirements.
+How do I customize the event model schema in Kendo UI Scheduler's data source? Define and customize the structure and mapping of event records in the Scheduler’s data source by setting the event model schema, including specifying field names, types, default values, unique identifiers, and mapping fields like start time, end time, title, and recurrence. Control how event data is parsed, converted, and synchronized for accurate reading and writing within the Scheduler, enabling configuration, customization, or adjustment of event record formats, field bindings, and data transformations to fit diverse scheduling data models and user requirements.
 </div>
 
 #### Example - configure the data source model schema
@@ -127,7 +127,7 @@ The complete list of the supported timezones is available in the [List of IANA t
 
 
 <div class="meta-api-description">
-Configure and control how event start and end dates are interpreted, converted, and normalized across different time zones by setting the data source timezone or overriding the default system or scheduler time zone settings. Manage time zone handling for scheduling data, adjust for global user locations, handle conversions between event local times and UTC, and ensure consistent date and time calculations regardless of the server or client environment. Enable specifying or changing the time zone context for calendar events, support IANA time zone identifiers for accurate international time management, and customize how scheduling data aligns with various geographical and daylight saving time rules.
+How to configure time zone handling for scheduling data in Kendo UI Scheduler? Configure and control how event start and end dates are interpreted, converted, and normalized across different time zones by setting the data source timezone or overriding the default system or scheduler time zone settings. Manage time zone handling for scheduling data, adjust for global user locations, handle conversions between event local times and UTC, and ensure consistent date and time calculations regardless of the server or client environment. Enable specifying or changing the time zone context for calendar events, support IANA time zone identifiers for accurate international time management, and customize how scheduling data aligns with various geographical and daylight saving time rules.
 </div>
 
 #### Example - configure the data source model
@@ -206,7 +206,7 @@ Expands all recurring events in the data and returns a list of events for a spec
 
 
 <div class="meta-api-description">
-Generate individual event occurrences from recurring schedules within a specified date range by expanding recurrence patterns into concrete event instances; configure, retrieve, or filter all expanded events for specific time intervals, fully unfolding recurring rules into a collection of discrete occurrences to facilitate rendering, processing, querying, or binding only the events active during a desired period.
+How can I expand recurring events in Kendo UI Scheduler for a specific date range? Generate individual event occurrences from recurring schedules within a specified date range by expanding recurrence patterns into concrete event instances; configure, retrieve, or filter all expanded events for specific time intervals, fully unfolding recurring rules into a collection of discrete occurrences to facilitate rendering, processing, querying, or binding only the events active during a desired period.
 </div>
 
 #### Parameters

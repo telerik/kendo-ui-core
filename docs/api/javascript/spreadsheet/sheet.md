@@ -16,7 +16,7 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
 
 
 <div class="meta-api-description">
-Configure and connect spreadsheet sheets to external data sources or database tables to enable dynamic loading, syncing, updating, and real-time data binding of rows and cells; control and access the linked data for programmatic reading, modifying, synchronizing, or refreshing content within sheets, ensuring seamless integration with underlying datasets, live data feeds, or APIs for automated updates and data-driven spreadsheet management.
+How do I configure dynamic data loading for a Kendo UI spreadsheet sheet? Configure and connect spreadsheet sheets to external data sources or database tables to enable dynamic loading, syncing, updating, and real-time data binding of rows and cells; control and access the linked data for programmatic reading, modifying, synchronizing, or refreshing content within sheets, ensuring seamless integration with underlying datasets, live data feeds, or APIs for automated updates and data-driven spreadsheet management.
 </div>
 
 #### Example
@@ -51,7 +51,7 @@ Adds a new drawing to this sheet.
 
 
 <div class="meta-api-description">
-Add, insert, or embed shapes, images, annotations, or graphics onto a sheet programmatically by creating and attaching new visual elements to the sheet’s drawing layer. Enable adding new drawings that can be accessed, modified, or managed using drawing-related functions and APIs, supporting dynamic placement, editing, and control of embedded objects or visual overlays within the spreadsheet. Control embedding of custom images, diagrams, or annotations as part of the sheet content through automation or scripting interfaces.
+How can I programmatically add custom shapes, images, or annotations to a Kendo UI spreadsheet? Add, insert, or embed shapes, images, annotations, or graphics onto a sheet programmatically by creating and attaching new visual elements to the sheet’s drawing layer. Enable adding new drawings that can be accessed, modified, or managed using drawing-related functions and APIs, supporting dynamic placement, editing, and control of embedded objects or visual overlays within the spreadsheet. Control embedding of custom images, diagrams, or annotations as part of the sheet content through automation or scripting interfaces.
 </div>
 
 #### Parameters
@@ -98,7 +98,7 @@ Clears the filters for the passed column index. If an array is passed, `clearFil
 
 
 <div class="meta-api-description">
-Clear or reset filters on spreadsheet columns by removing any applied filtering criteria using column indexes, supporting clearing filters for single or multiple columns at once, enabling removal of active filter settings to restore original data views, managing and disabling column-specific filtering configurations, and controlling filtered data display by resetting one or more specified columns’ filter states.
+How do I remove filters from specific columns in Kendo UI spreadsheet using the clearFilter method? Clear or reset filters on spreadsheet columns by removing any applied filtering criteria using column indexes, supporting clearing filters for single or multiple columns at once, enabling removal of active filter settings to restore original data views, managing and disabling column-specific filtering configurations, and controlling filtered data display by resetting one or more specified columns’ filter states.
 </div>
 
 #### Parameters
@@ -137,7 +137,7 @@ Gets or sets the width of the column at the given index.
 
 
 <div class="meta-api-description">
-Retrieve or set the width of a specific column by its index to control or modify column size dynamically during runtime, allowing programmatic adjustment of layout, resizing columns individually, customizing or configuring column widths, managing grid or spreadsheet column dimensions, changing column width by position, and enabling flexible column size updates within the sheet structure for responsive or precise layout control.
+How do I dynamically adjust the width of a specific column in a Kendo UI spreadsheet by its index? Retrieve or set the width of a specific column by its index to control or modify column size dynamically during runtime, allowing programmatic adjustment of layout, resizing columns individually, customizing or configuring column widths, managing grid or spreadsheet column dimensions, changing column width by position, and enabling flexible column size updates within the sheet structure for responsive or precise layout control.
 </div>
 
 #### Parameters
@@ -172,7 +172,7 @@ Greatly improves performance when calling multiple methods that change the sheet
 
 
 <div class="meta-api-description">
-Optimize multiple updates to a spreadsheet or tabular interface by grouping changes to avoid repetitive event triggers, allowing batch execution of state modifications that suppress individual update notifications and emit a single consolidated change event after all actions complete, improving performance and reducing UI refresh overhead by applying multiple edits, configurations, or state changes in one operation without intermediate redraws or event firing.
+How can I optimize updates to a Kendo UI spreadsheet by grouping multiple changes? Optimize multiple updates to a spreadsheet or tabular interface by grouping changes to avoid repetitive event triggers, allowing batch execution of state modifications that suppress individual update notifications and emit a single consolidated change event after all actions complete, improving performance and reducing UI refresh overhead by applying multiple edits, configurations, or state changes in one operation without intermediate redraws or event firing.
 </div>
 
 #### Parameters
@@ -210,7 +210,7 @@ Deletes the contents of the column at the provided index and shifts the remainin
 
 
 <div class="meta-api-description">
-Remove a specific column by index from a spreadsheet, clearing its cells and shifting all subsequent columns and data leftward to maintain layout continuity, enabling tasks such as deleting columns, adjusting sheet structure, updating cell positions, reordering data, modifying columns dynamically, or managing spreadsheet content by eliminating unwanted vertical sections.
+How do I dynamically remove a column from a Kendo UI spreadsheet by its index? Remove a specific column by index from a spreadsheet, clearing its cells and shifting all subsequent columns and data leftward to maintain layout continuity, enabling tasks such as deleting columns, adjusting sheet structure, updating cell positions, reordering data, modifying columns dynamically, or managing spreadsheet content by eliminating unwanted vertical sections.
 </div>
 
 #### Parameters
@@ -241,7 +241,7 @@ Deletes the contents of the row at the provided index and shifts the remaining c
 
 
 <div class="meta-api-description">
-Delete a specific row by index to remove its data and shift all rows below upward, effectively closing the gap and reflowing the sheet’s content; this operation enables programmatic removal of rows, clearing row contents, adjusting row positions after row deletion, managing spreadsheet data updates, dynamically controlling row structures, and handling row-based modifications such as removing empty or unwanted rows and reorganizing sheet layout.
+How do I programmatically remove rows from a Kendo UI spreadsheet? Delete a specific row by index to remove its data and shift all rows below upward, effectively closing the gap and reflowing the sheet’s content; this operation enables programmatic removal of rows, clearing row contents, adjusting row positions after row deletion, managing spreadsheet data updates, dynamically controlling row structures, and handling row-based modifications such as removing empty or unwanted rows and reorganizing sheet layout.
 </div>
 
 #### Parameters
@@ -282,7 +282,7 @@ Loads the sheet from an object in the format defined in the [sheet configuration
 
 
 <div class="meta-api-description">
-Import, load, or merge spreadsheet data and sheet settings from JSON structures that match the sheet configuration schema, enabling dynamic updates or initial population of a single sheet’s cells, formatting, and layout within a spreadsheet component. Control how cell values, formulas, styles, and metadata integrate or overwrite existing sheet content without altering the overall spreadsheet framework, ensuring the imported JSON matches predefined row and column limits to avoid size conflicts. Facilitate seamless synchronization, data restoration, or partial updates by applying JSON-based configurations directly into a sheet instance while preserving sheet dimensions and preventing resizing, supporting workflows such as syncing external data, restoring saved sheets, or incrementally modifying individual sheets inside a larger workbook structure.
+How do I merge spreadsheet data from JSON into a Kendo UI Spreadsheet component using the `fromJSON` method? Import, load, or merge spreadsheet data and sheet settings from JSON structures that match the sheet configuration schema, enabling dynamic updates or initial population of a single sheet’s cells, formatting, and layout within a spreadsheet component. Control how cell values, formulas, styles, and metadata integrate or overwrite existing sheet content without altering the overall spreadsheet framework, ensuring the imported JSON matches predefined row and column limits to avoid size conflicts. Facilitate seamless synchronization, data restoration, or partial updates by applying JSON-based configurations directly into a sheet instance while preserving sheet dimensions and preventing resizing, supporting workflows such as syncing external data, restoring saved sheets, or incrementally modifying individual sheets inside a larger workbook structure.
 </div>
 
 #### Parameters
@@ -359,7 +359,7 @@ Gets or sets the amount of frozen columns displayed by the sheet.
 
 
 <div class="meta-api-description">
-Control or retrieve the number of columns fixed or pinned on the left side of a data grid or spreadsheet to stay visible while scrolling horizontally, enabling dynamic locking or unlocking of columns for consistent header or key data display, adjusting frozen column counts in response to layout or content updates, synchronizing visible locked columns with UI state or custom functionality, and configuring how many columns remain static during navigation to improve user interface clarity and data comparison across wide datasets.
+How do I set the number of frozen columns in a Kendo UI spreadsheet widget? Control or retrieve the number of columns fixed or pinned on the left side of a data grid or spreadsheet to stay visible while scrolling horizontally, enabling dynamic locking or unlocking of columns for consistent header or key data display, adjusting frozen column counts in response to layout or content updates, synchronizing visible locked columns with UI state or custom functionality, and configuring how many columns remain static during navigation to improve user interface clarity and data comparison across wide datasets.
 </div>
 
 #### Parameters
@@ -392,7 +392,7 @@ Gets or sets the amount of frozen rows displayed by the sheet.
 
 
 <div class="meta-api-description">
-Control, set, or retrieve the count of top rows that remain fixed or locked in place when scrolling vertically within a spreadsheet or grid interface, enabling users to freeze header rows or important top sections for constant visibility. Configure how many leading rows stay static at the sheet’s top during navigation, adjust or query the number of frozen rows to maintain persistent row visibility, lock specific rows from scrolling off-screen, and dynamically update the layout to enable or disable row freezing for improved data readability and interface usability. Enable programmatic access to manage, modify, or get the currently locked top rows that stay visible, supporting use cases like static headers, prominent row locking, or controlling vertical scroll behavior in tabular data structures.
+How to freeze top rows in Kendo UI spreadsheet? Control, set, or retrieve the count of top rows that remain fixed or locked in place when scrolling vertically within a spreadsheet or grid interface, enabling users to freeze header rows or important top sections for constant visibility. Configure how many leading rows stay static at the sheet’s top during navigation, adjust or query the number of frozen rows to maintain persistent row visibility, lock specific rows from scrolling off-screen, and dynamically update the layout to enable or disable row freezing for improved data readability and interface usability. Enable programmatic access to manage, modify, or get the currently locked top rows that stay visible, supporting use cases like static headers, prominent row locking, or controlling vertical scroll behavior in tabular data structures.
 </div>
 
 #### Parameters
@@ -425,7 +425,7 @@ Hides the column at the provided index.
 
 
 <div class="meta-api-description">
-Programmatically hide or conceal specific columns by index in a spreadsheet or grid component to dynamically control column visibility, manage layout adjustments, toggle column display based on user interactions or application conditions, enable hiding certain data columns for user interface customization, configure which columns are shown or hidden at runtime, set column visibility states by position, and update the sheet layout to reflect these changes automatically.
+How to programmatically hide specific columns in Kendo UI spreadsheet component by index? Programmatically hide or conceal specific columns by index in a spreadsheet or grid component to dynamically control column visibility, manage layout adjustments, toggle column display based on user interactions or application conditions, enable hiding certain data columns for user interface customization, configure which columns are shown or hidden at runtime, set column visibility states by position, and update the sheet layout to reflect these changes automatically.
 </div>
 
 #### Parameters
@@ -456,7 +456,7 @@ Hides the row at the provided index.
 
 
 <div class="meta-api-description">
-Control the visibility of individual rows by specifying their index to hide or conceal a particular row from display within a sheet or grid component, enabling dynamic hiding of rows for filtering, conditional display, or user interface adjustments with programmatic control to toggle row visibility on and off using index-based row targeting for granular row management and presentation control.
+How can I hide a specific row in a Kendo UI spreadsheet by its index? Control the visibility of individual rows by specifying their index to hide or conceal a particular row from display within a sheet or grid component, enabling dynamic hiding of rows for filtering, conditional display, or user interface adjustments with programmatic control to toggle row visibility on and off using index-based row targeting for granular row management and presentation control.
 </div>
 
 #### Parameters
@@ -487,7 +487,7 @@ Inserts a new, empty column at the provided index. The contents of the spreadshe
 
 
 <div class="meta-api-description">
-Add or insert a new blank column at a specified index within a spreadsheet, shifting all existing columns and their contents to the right to make space; control column insertion position, enable column addition without overwriting, manage spreadsheet structure by adding columns dynamically, adjust table layouts by inserting columns at any point, and modify sheet data by pushing existing cells rightward when expanding columns.
+How do I insert a new column in Kendo UI spreadsheet at a specific index? Add or insert a new blank column at a specified index within a spreadsheet, shifting all existing columns and their contents to the right to make space; control column insertion position, enable column addition without overwriting, manage spreadsheet structure by adding columns dynamically, adjust table layouts by inserting columns at any point, and modify sheet data by pushing existing cells rightward when expanding columns.
 </div>
 
 #### Parameters
@@ -518,7 +518,7 @@ Inserts a new, empty row at the provided index. The contents of the spreadsheet 
 
 
 <div class="meta-api-description">
-Insert a new blank row at a specified position within a spreadsheet or table, enabling developers to add rows dynamically without overwriting existing content, shift all rows downward starting from a certain index, control and configure row injection in grid-like data structures, create space in data sheets or tables by adding empty rows at chosen locations, and manage row insertion to update layouts while preserving current cell values and formatting.
+How to dynamically add rows in Kendo UI spreadsheet without overwriting existing data? Insert a new blank row at a specified position within a spreadsheet or table, enabling developers to add rows dynamically without overwriting existing content, shift all rows downward starting from a certain index, control and configure row injection in grid-like data structures, create space in data sheets or tables by adding empty rows at chosen locations, and manage row insertion to update layouts while preserving current cell values and formatting.
 </div>
 
 #### Parameters
@@ -553,7 +553,7 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 
 
 <div class="meta-api-description">
-Access or retrieve a specific block or area of cells from a spreadsheet sheet using various range identifiers, coordinates, or addresses to read data, update cell values, select multiple cells, apply styles or formatting, modify content, iterate through cells, control cell regions, or use range-related functions for batch operations. Enable extracting a subset of the sheet’s grid for manipulation, transformation, bulk editing, or targeted cell processing by specifying ranges via A1 notation, row and column indexes, or named ranges, supporting tasks like data input, selection, applying styling, and calling further methods that operate on cell collections within a spreadsheet tab.
+How do I select multiple cells in a Kendo UI Spreadsheet using their A1 notation? Access or retrieve a specific block or area of cells from a spreadsheet sheet using various range identifiers, coordinates, or addresses to read data, update cell values, select multiple cells, apply styles or formatting, modify content, iterate through cells, control cell regions, or use range-related functions for batch operations. Enable extracting a subset of the sheet’s grid for manipulation, transformation, bulk editing, or targeted cell processing by specifying ranges via A1 notation, row and column indexes, or named ranges, supporting tasks like data input, selection, applying styling, and calling further methods that operate on cell collections within a spreadsheet tab.
 </div>
 
 #### Parameters
@@ -611,7 +611,7 @@ Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
 
 
 <div class="meta-api-description">
-Delete or detach a specific drawing element that was previously added to a sheet or canvas, enabling control over graphical overlays, removing visual objects, clearing or updating drawings by reference, undoing or managing added illustrations dynamically, programmatically eliminating shapes or annotations from the drawing layer, handling removal of graphical components after initialization, modifying or resetting drawings via stored drawing instances, and managing visual content on sheets by specifying and removing particular drawing objects.
+How to programmatically remove a drawing from a Kendo UI for jQuery spreadsheet sheet? Delete or detach a specific drawing element that was previously added to a sheet or canvas, enabling control over graphical overlays, removing visual objects, clearing or updating drawings by reference, undoing or managing added illustrations dynamically, programmatically eliminating shapes or annotations from the drawing layer, handling removal of graphical components after initialization, modifying or resetting drawings via stored drawing instances, and managing visual content on sheets by specifying and removing particular drawing objects.
 </div>
 
 #### Parameters
@@ -653,7 +653,7 @@ or columns that are to be removed will be discarded.
 
 
 <div class="meta-api-description">
-Adjust grid or table size by setting the number of rows and columns, enable resizing to expand or shrink the spreadsheet layout dynamically, control sheet dimensions to fit specific row and column counts, configure grid capacity to increase or decrease available cells, handle data truncation when reducing size by removing overflowing rows or columns, update sheet structure for custom row and column adjustments, manage grid resizing for layout optimization or data fitting, modify sheet area to accommodate new dimensions, set spreadsheet size to predefined or dynamic values, and perform layout recalculations when changing the number of rows and columns to scale or limit the sheet accordingly.
+How do I resize a Kendo UI spreadsheet to dynamically fit my data? Adjust grid or table size by setting the number of rows and columns, enable resizing to expand or shrink the spreadsheet layout dynamically, control sheet dimensions to fit specific row and column counts, configure grid capacity to increase or decrease available cells, handle data truncation when reducing size by removing overflowing rows or columns, update sheet structure for custom row and column adjustments, manage grid resizing for layout optimization or data fitting, modify sheet area to accommodate new dimensions, set spreadsheet size to predefined or dynamic values, and perform layout recalculations when changing the number of rows and columns to scale or limit the sheet accordingly.
 </div>
 
 #### Parameters
@@ -684,7 +684,7 @@ Gets or sets the height of the row at the given index.
 
 
 <div class="meta-api-description">
-Adjust or retrieve the vertical size, height, or spacing of a specific row by its index in a spreadsheet or data grid, enabling programmatic control over row dimensions to customize layout, improve readability, modify spacing between rows, set print formatting, or dynamically resize rows based on content, with functions to query current row height or update it directly by specifying row position and new height value.
+How to change row height in Kendo UI spreadsheet? Adjust or retrieve the vertical size, height, or spacing of a specific row by its index in a spreadsheet or data grid, enabling programmatic control over row dimensions to customize layout, improve readability, modify spacing between rows, set print formatting, or dynamically resize rows based on content, with functions to query current row height or update it directly by specifying row position and new height value.
 </div>
 
 #### Parameters
@@ -719,7 +719,7 @@ Returns a range with the current active selection.
 
 
 <div class="meta-api-description">
-access the currently selected cells or active range within a spreadsheet or grid interface, retrieve selection coordinates or boundaries, identify which cells are highlighted or chosen by the user, read cell spans or merged areas within the selection, programmatically get or update the user's current selection range, persist or store the active selection state for later use, obtain details about the highlighted cell group for processing or manipulation, track which part of the sheet is focused or selected during runtime, enable selection-based features or actions by fetching the selection data, and control or query the current selection range dynamically in the sheet component environment.
+How do I programmatically get the currently selected cells in a Kendo UI for jQuery spreadsheet? access the currently selected cells or active range within a spreadsheet or grid interface, retrieve selection coordinates or boundaries, identify which cells are highlighted or chosen by the user, read cell spans or merged areas within the selection, programmatically get or update the user's current selection range, persist or store the active selection state for later use, obtain details about the highlighted cell group for processing or manipulation, track which part of the sheet is focused or selected during runtime, enable selection-based features or actions by fetching the selection data, and control or query the current selection range dynamically in the sheet component environment.
 </div>
 
 #### Returns
@@ -750,7 +750,7 @@ Binds the sheet to a DataSource instance. For more information on the data-bindi
 
 
 <div class="meta-api-description">
-Configure and attach a data source to a spreadsheet sheet to dynamically load, bind, and synchronize tabular data, enabling interactive operations such as sorting, filtering, paging, and real-time updates of rows and columns by connecting to existing data collections or data sources; set or update the underlying data provider to control spreadsheet content and behavior based on external or in-memory datasets, integrating with data-binding workflows and enhancing data management within spreadsheet components through declarative or programmatic data source linkage.
+How do I dynamically load data into a Kendo UI Spreadsheet sheet using setDataSource? Configure and attach a data source to a spreadsheet sheet to dynamically load, bind, and synchronize tabular data, enabling interactive operations such as sorting, filtering, paging, and real-time updates of rows and columns by connecting to existing data collections or data sources; set or update the underlying data provider to control spreadsheet content and behavior based on external or in-memory datasets, integrating with data-binding workflows and enhancing data management within spreadsheet components through declarative or programmatic data source linkage.
 </div>
 
 #### Parameters
@@ -839,7 +839,7 @@ Gets or sets a flag indicating if the grid lines should be visible.
 
 
 <div class="meta-api-description">
-Set, retrieve, toggle, or control visibility of grid lines in spreadsheet or sheet components, enabling dynamic show or hide of cell grid outlines, configuring boolean flags to display or suppress grid borders for better readability or clean layouts, adjusting grid line appearance programmatically or interactively during runtime, managing visual cell separators to customize sheet presentation, and querying current grid line state to determine if cell boundaries are visible or hidden.
+How do I control grid line visibility in Kendo UI spreadsheet component? Set, retrieve, toggle, or control visibility of grid lines in spreadsheet or sheet components, enabling dynamic show or hide of cell grid outlines, configuring boolean flags to display or suppress grid borders for better readability or clean layouts, adjusting grid line appearance programmatically or interactively during runtime, managing visual cell separators to customize sheet presentation, and querying current grid line state to determine if cell boundaries are visible or hidden.
 </div>
 
 #### Parameters
@@ -870,7 +870,7 @@ Serializes the sheet in the format defined in the [sheet configuration](/api/jav
 
 
 <div class="meta-api-description">
-Convert or serialize a spreadsheet’s current state, including configuration, data, and settings, into a JSON format for saving, exporting, backing up, syncing, or transferring between applications and servers, enabling recreation, restoration, duplication, or synchronization of the sheet’s structure and content across different environments or sessions.
+How do I serialize a Kendo UI Spreadsheet's current state to JSON for saving or syncing? Convert or serialize a spreadsheet’s current state, including configuration, data, and settings, into a JSON format for saving, exporting, backing up, syncing, or transferring between applications and servers, enabling recreation, restoration, duplication, or synchronization of the sheet’s structure and content across different environments or sessions.
 </div>
 
 #### Example - Serialize the sheet as JSON
@@ -908,7 +908,7 @@ Shows the hidden column at the provided index. Does not have any effect if the c
 
 
 <div class="meta-api-description">
-Reveal or restore a hidden column by specifying its index to programmatically make columns visible again after being hidden, control column visibility dynamically, toggle hidden columns back into view, enable showing previously collapsed or concealed columns, manage and update column display states based on user interactions or application logic, reinstate column visibility after hiding, and handle scenarios where columns need to be unhidden within grid or sheet components.
+How do I programmatically make a hidden column visible again in Kendo UI for jQuery? Reveal or restore a hidden column by specifying its index to programmatically make columns visible again after being hidden, control column visibility dynamically, toggle hidden columns back into view, enable showing previously collapsed or concealed columns, manage and update column display states based on user interactions or application logic, reinstate column visibility after hiding, and handle scenarios where columns need to be unhidden within grid or sheet components.
 </div>
 
 #### Parameters
@@ -942,7 +942,7 @@ Shows the hidden row at the provided index. Does not have any effect if the row 
 
 
 <div class="meta-api-description">
-Reveal or restore visibility of specific hidden rows in a spreadsheet or grid by specifying their index, enabling row unhide functionality to make previously concealed rows visible again, controlling row display states, toggling hidden rows back to shown status, adjusting grid or sheet views to expose selected rows, managing row visibility programmatically without affecting other rows, setting or enabling individual row visibility, showing rows that were hidden by index, and handling display toggles for rows within tabular data structures.
+How can I unhide specific rows in my Kendo UI spreadsheet by index? Reveal or restore visibility of specific hidden rows in a spreadsheet or grid by specifying their index, enabling row unhide functionality to make previously concealed rows visible again, controlling row display states, toggling hidden rows back to shown status, adjusting grid or sheet views to expose selected rows, managing row visibility programmatically without affecting other rows, setting or enabling individual row visibility, showing rows that were hidden by index, and handling display toggles for rows within tabular data structures.
 </div>
 
 #### Parameters
@@ -978,7 +978,7 @@ Fires when the configuration or the data of the sheet change.
 
 
 <div class="meta-api-description">
-Monitor and respond to updates or modifications in spreadsheet data, configuration settings, or user inputs within a sheet environment. Detect changes triggered by user edits, programmatic updates, autosave events, or configuration alterations and enable event-driven handling for validation, synchronization, re-rendering, or dynamic update workflows. Listen for data mutations, property adjustments, or interactive changes to trigger custom logic that keeps sheet content current and consistent across different states or components. Configure event handlers to capture and process real-time modifications in sheet data models, settings, or user-driven changes for seamless integration and responsive app behavior.
+How can I monitor changes to data in Kendo UI spreadsheet? Monitor and respond to updates or modifications in spreadsheet data, configuration settings, or user inputs within a sheet environment. Detect changes triggered by user edits, programmatic updates, autosave events, or configuration alterations and enable event-driven handling for validation, synchronization, re-rendering, or dynamic update workflows. Listen for data mutations, property adjustments, or interactive changes to trigger custom logic that keeps sheet content current and consistent across different states or components. Configure event handlers to capture and process real-time modifications in sheet data models, settings, or user-driven changes for seamless integration and responsive app behavior.
 </div>
 
 #### Event Data

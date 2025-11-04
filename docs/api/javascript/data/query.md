@@ -20,7 +20,7 @@ The array of data items.
 
 
 <div class="meta-api-description">
-Configure the input dataset as an array of objects or primitives to serve as raw in-memory data for operations like filtering, sorting, grouping, aggregation, or querying within data manipulation tools. Enable setting or supplying a structured collection of items directly in code to control how the system processes and transforms data without external sources. Use this to define the initial data context, passing arrays that drive queries, data sources, or analytical functions supporting dynamic data workflows and custom data handling scenarios.
+How do I configure an in-memory dataset for Kendo UI data manipulation tools? Configure the input dataset as an array of objects or primitives to serve as raw in-memory data for operations like filtering, sorting, grouping, aggregation, or querying within data manipulation tools. Enable setting or supplying a structured collection of items directly in code to control how the system processes and transforms data without external sources. Use this to define the initial data context, passing arrays that drive queries, data sources, or analytical functions supporting dynamic data workflows and custom data handling scenarios.
 </div>
 
 #### Example - creating a kendo.data.Query instance
@@ -42,7 +42,7 @@ Returns the internal data collection
 
 
 <div class="meta-api-description">
-Retrieve all query results as a complete list or array of raw data entries for easy inspection, iteration, or transformation; convert query output into a simple collection to access underlying records, generate full datasets, extract items for processing, or manipulate the raw data without additional wrappers or stream processing.
+How to retrieve all data from a Kendo UI Data Source as an array? Retrieve all query results as a complete list or array of raw data entries for easy inspection, iteration, or transformation; convert query output into a simple collection to access underlying records, generate full datasets, extract items for processing, or manipulate the raw data without additional wrappers or stream processing.
 </div>
 
 #### Returns
@@ -69,7 +69,7 @@ Skip a given amount it items
 
 
 <div class="meta-api-description">
-Configure query result pagination by defining how many records to omit at the beginning of a data retrieval operation, enabling offset control to return items starting from a specific index. Use this to skip a defined number of entries when fetching data, allowing precise control over batch processing, page navigation, or selective querying. Adjust the query to ignore a set count of initial results for scenarios such as paginated displays, infinite scrolling, or partial dataset retrieval, ensuring flexible chaining with other query modifiers like limits or filters. This method supports incrementally bypassing records in datasets to refine the selection window or implement custom paging and data slicing strategies.
+How do I use Kendo UI's Query.skip method to skip a certain number of records when retrieving data? Configure query result pagination by defining how many records to omit at the beginning of a data retrieval operation, enabling offset control to return items starting from a specific index. Use this to skip a defined number of entries when fetching data, allowing precise control over batch processing, page navigation, or selective querying. Adjust the query to ignore a set count of initial results for scenarios such as paginated displays, infinite scrolling, or partial dataset retrieval, ensuring flexible chaining with other query modifiers like limits or filters. This method supports incrementally bypassing records in datasets to refine the selection window or implement custom paging and data slicing strategies.
 </div>
 
 #### Parameters
@@ -104,7 +104,7 @@ Take a given amount it items
 
 
 <div class="meta-api-description">
-Control the maximum number of results retrieved from a data query by specifying a limit or count, enabling pagination, limiting result sets for top-n filtering, or constraining how many items are returned from a query operation. Configure the query to fetch up to a specified number of entries, effectively slicing or restricting data output without immediately executing data retrieval. Common use cases include setting page sizes, performing limit operations, controlling batch sizes, and combining with offset or skip parameters to build efficient paged queries, top result filters, or partial result views in data-access patterns.
+How do I limit the number of records retrieved from a Kendo UI data query using the `take` method? Control the maximum number of results retrieved from a data query by specifying a limit or count, enabling pagination, limiting result sets for top-n filtering, or constraining how many items are returned from a query operation. Configure the query to fetch up to a specified number of entries, effectively slicing or restricting data output without immediately executing data retrieval. Common use cases include setting page sizes, performing limit operations, controlling batch sizes, and combining with offset or skip parameters to build efficient paged queries, top result filters, or partial result views in data-access patterns.
 </div>
 
 #### Parameters
@@ -139,7 +139,7 @@ Maps over the data items
 
 
 <div class="meta-api-description">
-Configure how to transform, map, or project data items in a query by applying a selector function or projection that converts each element to a new form or shape; control the mapping of query results, enable chaining of transformations on data collections, set custom selection logic to produce derived datasets from source queries, and extract or reshape data during query operations to create new collections with altered or filtered content suitable for further querying or binding.
+How to transform data items in a Kendo UI for jQuery query using the select method? Configure how to transform, map, or project data items in a query by applying a selector function or projection that converts each element to a new form or shape; control the mapping of query results, enable chaining of transformations on data collections, set custom selection logic to produce derived datasets from source queries, and extract or reshape data during query operations to create new collections with altered or filtered content suitable for further querying or binding.
 </div>
 
 #### Parameters
@@ -173,7 +173,7 @@ Returns a copy of the list sorted according to the direction
 
 
 <div class="meta-api-description">
-Sort or organize collections, datasets, or query results by specifying ascending, descending, or custom directions without altering the original data. Configure sorting criteria to order lists, arrays, or query outputs safely while preserving immutability, enabling developers to arrange, rank, or sequence items efficiently in different scenarios such as data display, filtering, or processing. Control the sorting behavior dynamically to retrieve ordered copies of data from various sources, supporting use cases requiring stable, non-destructive sorting operations on query results or collections.
+How to sort data in a Kendo UI DataSource using the order method? Sort or organize collections, datasets, or query results by specifying ascending, descending, or custom directions without altering the original data. Configure sorting criteria to order lists, arrays, or query outputs safely while preserving immutability, enabling developers to arrange, rank, or sequence items efficiently in different scenarios such as data display, filtering, or processing. Control the sorting behavior dynamically to retrieve ordered copies of data from various sources, supporting use cases requiring stable, non-destructive sorting operations on query results or collections.
 </div>
 
 #### Parameters
@@ -216,7 +216,7 @@ Returns a copy of the list filtered according to the expression
 
 
 <div class="meta-api-description">
-Control how to narrow down or restrict collections by applying conditions, predicates, callback functions, or filter expressions to generate a subset or filtered copy without modifying the original list or data set. Enable filtering of queries based on criteria, expressions, or functions to retrieve only items matching specific rules, supporting composition with other query operations, and allowing developers to specify constraints, selections, or where-like clauses for refined data retrieval and dynamic filtering of collections.
+How can I use filter in Kendo UI for jQuery to only retrieve records from my DataSource that match specific conditions? Control how to narrow down or restrict collections by applying conditions, predicates, callback functions, or filter expressions to generate a subset or filtered copy without modifying the original list or data set. Enable filtering of queries based on criteria, expressions, or functions to retrieve only items matching specific rules, supporting composition with other query operations, and allowing developers to specify constraints, selections, or where-like clauses for refined data retrieval and dynamic filtering of collections.
 </div>
 
 #### Parameters
@@ -257,7 +257,7 @@ Returns a copy of the list grouped according to the descriptor
 
 
 <div class="meta-api-description">
-Organize or categorize a list of items into nested or hierarchical clusters based on single or multiple criteria, enabling grouping by key, field, property, or attribute to create structured summaries or segmented views without modifying the original dataset. This function supports grouping by various descriptors or conditions, allowing developers to produce grouped copies of collections for UI display, reporting, or data aggregation purposes, including multi-level groupings, categorization by properties, and preparing grouped results for data sources or visual components. It helps in configuring grouped data sets, controlling grouping logic, and generating grouped data snapshots that maintain immutability while reflecting complex hierarchical group structures.
+How do I group data in my Kendo UI for jQuery grid by multiple fields using the `groupBy` method? Organize or categorize a list of items into nested or hierarchical clusters based on single or multiple criteria, enabling grouping by key, field, property, or attribute to create structured summaries or segmented views without modifying the original dataset. This function supports grouping by various descriptors or conditions, allowing developers to produce grouped copies of collections for UI display, reporting, or data aggregation purposes, including multi-level groupings, categorization by properties, and preparing grouped results for data sources or visual components. It helps in configuring grouped data sets, controlling grouping logic, and generating grouped data snapshots that maintain immutability while reflecting complex hierarchical group structures.
 </div>
 
 #### Parameters
@@ -296,7 +296,7 @@ Executes the specified operations over the data items
 
 
 <div class="meta-api-description">
-Apply filtering, sorting, grouping, and other complex query operations on collections by configuring and running the sequence of data transformations, enabling users to control data manipulation workflows, execute tailored queries on datasets, retrieve refined or aggregated results, perform dynamic data processing for UI binding or backend logic, and customize how data items are selected, ordered, or grouped within applications that handle filtering, sorting, grouping, or complex query tasks.
+How do I apply filtering and sorting to my Kendo UI data source using the process method? Apply filtering, sorting, grouping, and other complex query operations on collections by configuring and running the sequence of data transformations, enabling users to control data manipulation workflows, execute tailored queries on datasets, retrieve refined or aggregated results, perform dynamic data processing for UI binding or backend logic, and customize how data items are selected, ordered, or grouped within applications that handle filtering, sorting, grouping, or complex query tasks.
 </div>
 
 #### Parameters

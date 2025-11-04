@@ -53,7 +53,7 @@ The configuration of this LinearGradient.
 
 
 <div class="meta-api-description">
-Configure and control the linear gradient effect by specifying gradient parameters such as color stops, offset positions, angles or direction, and transparency levels during initialization. Enable custom gradient setups by providing a detailed configuration object that defines colors, their placements, opacity settings, and the orientation or angle of the gradient for precise rendering in drawing components. Set, customize, and fine-tune linear gradient properties upfront to achieve specific visual transitions, smooth color blending, and directional shading effects in graphic or drawing contexts. Adjust gradient stops, their offsets, and the overall gradient direction or opacity to tailor background fills, overlays, or shapes with linear color progressions when creating or instantiating linear gradients.
+How do I configure options for a linear gradient in Kendo UI drawingapi? Configure and control the linear gradient effect by specifying gradient parameters such as color stops, offset positions, angles or direction, and transparency levels during initialization. Enable custom gradient setups by providing a detailed configuration object that defines colors, their placements, opacity settings, and the orientation or angle of the gradient for precise rendering in drawing components. Set, customize, and fine-tune linear gradient properties upfront to achieve specific visual transitions, smooth color blending, and directional shading effects in graphic or drawing contexts. Adjust gradient stops, their offsets, and the overall gradient direction or opacity to tailor background fills, overlays, or shapes with linear color progressions when creating or instantiating linear gradients.
 </div>
 
 #### Example
@@ -94,7 +94,7 @@ Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradi
 
 
 <div class="meta-api-description">
-Configure the sequence and positioning of colors within a linear gradient by specifying an array of color stops, each defining a particular color and its relative position along the gradient axis. Control smooth or sharp transitions between colors, manage gradient color points as objects or gradient stop instances, set precise offsets for gradual blending effects, and customize the overall gradient flow and appearance by ordering or adjusting multiple colors along the linear path. Enable fine-tuned color segmentation, step changes, or seamless fades in linear color gradients, suitable for gradient backgrounds, buttons, or vector graphics styling.
+How do I control the sequence and positioning of colors in a linear gradient with Kendo UI's drawing API? Configure the sequence and positioning of colors within a linear gradient by specifying an array of color stops, each defining a particular color and its relative position along the gradient axis. Control smooth or sharp transitions between colors, manage gradient color points as objects or gradient stop instances, set precise offsets for gradual blending effects, and customize the overall gradient flow and appearance by ordering or adjusting multiple colors along the linear path. Enable fine-tuned color segmentation, step changes, or seamless fades in linear color gradients, suitable for gradient backgrounds, buttons, or vector graphics styling.
 </div>
 
 #### Example
@@ -132,7 +132,7 @@ Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
-Configure and control the sequence of color points in a linear gradient by setting, updating, adding, removing, or rearranging color stop positions and corresponding colors to manipulate how colors blend and transition smoothly along a gradient axis; define precise color anchors, customize gradient segments, adjust color interpolation stops, and manage an ordered collection of color markers to achieve desired visual effects with gradient stops.
+How do I control the sequence of color points in a linear gradient using the Kendo UI for jQuery API? Configure and control the sequence of color points in a linear gradient by setting, updating, adding, removing, or rearranging color stop positions and corresponding colors to manipulate how colors blend and transition smoothly along a gradient axis; define precise color anchors, customize gradient segments, adjust color interpolation stops, and manage an ordered collection of color markers to achieve desired visual effects with gradient stops.
 </div>
 
 #### Example
@@ -173,7 +173,7 @@ Inherited from [Gradient.addStop](/api/javascript/drawing/gradient/methods/addst
 
 
 <div class="meta-api-description">
-Add or insert color stops in a linear gradient to control the exact positions and sequencing of colors within a gradient fill, enabling precise customization of color blending, smooth or sharp transitions, multi-stop color arrangements, and detailed gradient shaping for drawing or rendering graphics. This method is useful for configuring gradient color points, adjusting interpolation between colors, layering multiple color stops, setting gradient transition stops in order, and fine-tuning visual effects in vector or canvas-based drawing contexts.
+How to add color stops in a Kendo UI linear gradient? Add or insert color stops in a linear gradient to control the exact positions and sequencing of colors within a gradient fill, enabling precise customization of color blending, smooth or sharp transitions, multi-stop color arrangements, and detailed gradient shaping for drawing or rendering graphics. This method is useful for configuring gradient color points, adjusting interpolation between colors, layering multiple color stops, setting gradient transition stops in order, and fine-tuning visual effects in vector or canvas-based drawing contexts.
 </div>
 
 #### Example
@@ -225,7 +225,7 @@ Gets or sets the end point of the gradient.
 
 
 <div class="meta-api-description">
-Control or modify the direction and endpoint coordinates of a linear gradient by retrieving or setting its termination point to adjust gradient orientation, animate smooth color transitions, dynamically update gradient geometry, programmatically calculate layout boundaries based on gradient end positions, or customize the flow and angle of color blending in drawing or UI components.
+How do I adjust the direction of a linear gradient in Kendo UI for jQuery? Control or modify the direction and endpoint coordinates of a linear gradient by retrieving or setting its termination point to adjust gradient orientation, animate smooth color transitions, dynamically update gradient geometry, programmatically calculate layout boundaries based on gradient end positions, or customize the flow and angle of color blending in drawing or UI components.
 </div>
 
 #### Example
@@ -278,7 +278,7 @@ Gets or sets the start point of the gradient.
 
 
 <div class="meta-api-description">
-Control, configure, or set the starting position or origin coordinates of a linear gradient fill or background, adjust where the gradient begins on a component or element, retrieve or modify the initial point from which gradient color transitions originate, enable precise starting point placement for CSS, design, or animation workflows, dynamically update or read gradient origin values during rendering, customize the gradient’s beginning location to affect visual flow or directional color blending, define or get the coordinates for the gradient start to influence how colors fade, reposition the linear gradient’s start point programmatically for responsive or interactive designs, manage or animate the entry point of color gradients in graphics or UI elements with fine control over initial coordinates.
+How do I set the starting point of a linear gradient in Kendo UI? Control, configure, or set the starting position or origin coordinates of a linear gradient fill or background, adjust where the gradient begins on a component or element, retrieve or modify the initial point from which gradient color transitions originate, enable precise starting point placement for CSS, design, or animation workflows, dynamically update or read gradient origin values during rendering, customize the gradient’s beginning location to affect visual flow or directional color blending, define or get the coordinates for the gradient start to influence how colors fade, reposition the linear gradient’s start point programmatically for responsive or interactive designs, manage or animate the entry point of color gradients in graphics or UI elements with fine control over initial coordinates.
 </div>
 
 #### Example
@@ -332,7 +332,7 @@ Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient/methods/re
 
 
 <div class="meta-api-description">
-delete or remove specific color stops from a linear gradient sequence in drawing or styling components, enabling dynamic modification of gradient color transitions, stops, entries, or fills at runtime; control and update gradient definitions programmatically by eliminating one or more gradient points to customize visual appearance, adjust color distributions, and refine fill effects during execution or after initialization without recreating the entire gradient structure.
+How do I dynamically remove color stops from a linear gradient in Kendo UI for jQuery? delete or remove specific color stops from a linear gradient sequence in drawing or styling components, enabling dynamic modification of gradient color transitions, stops, entries, or fills at runtime; control and update gradient definitions programmatically by eliminating one or more gradient points to customize visual appearance, adjust color distributions, and refine fill effects during execution or after initialization without recreating the entire gradient structure.
 </div>
 
 #### Example

@@ -15,7 +15,7 @@ The North West extreme location.
 
 
 <div class="meta-api-description">
-Define or initialize the map’s visible area, region, or bounds by specifying the upper-left or northwest corner coordinates during map setup or initialization, enabling control over the map’s initial viewport, geographic extent, boundary limits, or spatial coverage using location coordinates or geographic points.
+How do I set the initial viewport of a Kendo UI map with jQuery? Define or initialize the map’s visible area, region, or bounds by specifying the upper-left or northwest corner coordinates during map setup or initialization, enabling control over the map’s initial viewport, geographic extent, boundary limits, or spatial coverage using location coordinates or geographic points.
 </div>
 
 #### Example
@@ -37,7 +37,7 @@ The South East extreme location.
 
 
 <div class="meta-api-description">
-Specify or configure the geographic bounding box’s south-east corner coordinates or location for map boundary definition, enabling control over the map’s lower-right or south-eastern extremes when setting spatial limits, defining the extent area, or initializing the map view with a precise south-east boundary point, including setting or adjusting map coverage, coordinate ranges, or spatial extents focused on the south-east edge during map or extent construction tasks.
+What is the purpose of the se parameter in Kendo UI for jQuery's map configuration? Specify or configure the geographic bounding box’s south-east corner coordinates or location for map boundary definition, enabling control over the map’s lower-right or south-eastern extremes when setting spatial limits, defining the extent area, or initializing the map view with a precise south-east boundary point, including setting or adjusting map coverage, coordinate ranges, or spatial extents focused on the south-east edge during map or extent construction tasks.
 </div>
 
 #### Example
@@ -64,7 +64,7 @@ Creates a Location instance.
 
 
 <div class="meta-api-description">
-Generate or instantiate a coordinate or geographic point object for mapping or spatial calculations by creating a new location or position instance, enabling precise definition of points, centers, vertices, or coordinates to use with map interfaces, geometry operations, geospatial APIs, or spatial data manipulation. This method helps set, build, or configure coordinate objects for use in mapping functions, spatial analysis, or location-based computations, supporting tasks like defining map points, geometry vertices, or central positions within spatial datasets.
+How do I create a new location object for Kendo UI mapping? Generate or instantiate a coordinate or geographic point object for mapping or spatial calculations by creating a new location or position instance, enabling precise definition of points, centers, vertices, or coordinates to use with map interfaces, geometry operations, geospatial APIs, or spatial data manipulation. This method helps set, build, or configure coordinate objects for use in mapping functions, spatial analysis, or location-based computations, supporting tasks like defining map points, geometry vertices, or central positions within spatial datasets.
 </div>
 
 #### Example
@@ -112,7 +112,7 @@ The North West extreme location.
 
 
 <div class="meta-api-description">
-Configure or retrieve the top-left coordinate representing the northwest corner of a map’s visible boundary, enabling precise control over geographic bounding boxes, map viewport extents, or spatial area limits defined by latitude and longitude or point objects. Access or update the map’s northwest edge position to set or read the bounding rectangle, control map panning limits, adjust visible regions, or dynamically modify the upper-left geographic point within the current map extent for geospatial calculations, viewport adjustments, or boundary checks.
+How do I set the northwest corner of my Kendo UI map's visible boundary? Configure or retrieve the top-left coordinate representing the northwest corner of a map’s visible boundary, enabling precise control over geographic bounding boxes, map viewport extents, or spatial area limits defined by latitude and longitude or point objects. Access or update the map’s northwest edge position to set or read the bounding rectangle, control map panning limits, adjust visible regions, or dynamically modify the upper-left geographic point within the current map extent for geospatial calculations, viewport adjustments, or boundary checks.
 </div>
 
 #### Example
@@ -139,7 +139,7 @@ The South East extreme location.
 
 
 <div class="meta-api-description">
-Accessing or retrieving the south-east corner coordinate, lower-right point, or bottom-right location of a geographical extent or bounding box for maps, areas, or spatial data; configuring or querying the extreme south-east boundary, corner, or coordinate for map extents, viewport limits, spatial ranges, or geographic regions; extracting longitude and latitude values defining the bottom-right edge or south-east bounds for mapping components, geographic information systems, or spatial extent calculations; obtaining the farthest south-east position or lower-right coordinate for display, zoom, pan, clipping, or geographic region definitions.
+How to get the south-east corner coordinate of a map extent using Kendo UI for jQuery? Accessing or retrieving the south-east corner coordinate, lower-right point, or bottom-right location of a geographical extent or bounding box for maps, areas, or spatial data; configuring or querying the extreme south-east boundary, corner, or coordinate for map extents, viewport limits, spatial ranges, or geographic regions; extracting longitude and latitude values defining the bottom-right edge or south-east bounds for mapping components, geographic information systems, or spatial extent calculations; obtaining the farthest south-east position or lower-right coordinate for display, zoom, pan, clipping, or geographic region definitions.
 </div>
 
 #### Example
@@ -169,7 +169,7 @@ Tests if a location is contained within the extent.
 
 
 <div class="meta-api-description">
-Check if a geographic coordinate or location falls within the boundaries of a defined rectangular area or bounding box on a map, enabling point-in-rectangle testing, spatial containment verification, and geographic hit detection by returning true or false outcomes. This functionality supports tasks like validating if coordinates lie inside specified map extents, filtering points based on spatial inclusion, bounding area checks, and spatial queries to confirm if positions are inside or outside a given extent region in mapping and GIS applications.
+How do I check if a point is inside a specific map extent using the Kendo UI for jQuery Extent.contains method? Check if a geographic coordinate or location falls within the boundaries of a defined rectangular area or bounding box on a map, enabling point-in-rectangle testing, spatial containment verification, and geographic hit detection by returning true or false outcomes. This functionality supports tasks like validating if coordinates lie inside specified map extents, filtering points based on spatial inclusion, bounding area checks, and spatial queries to confirm if positions are inside or outside a given extent region in mapping and GIS applications.
 </div>
 
 #### Example
@@ -208,7 +208,7 @@ Tests if any of the locations is contained within the extent.
 
 
 <div class="meta-api-description">
-Check if at least one coordinate, location, or point from a collection intersects, lies inside, or overlaps a defined spatial boundary or bounding box, enabling geospatial validation, filtering of coordinate arrays, quick containment testing, boundary inclusion checks, or spatial short-circuit operations to confirm presence within an area; useful for validating if any points fall within, inside, or are contained by geographic extents, rectangles, or map regions.
+How do I check if any points in my collection intersect with a defined spatial boundary using Kendo UI for jQuery? Check if at least one coordinate, location, or point from a collection intersects, lies inside, or overlaps a defined spatial boundary or bounding box, enabling geospatial validation, filtering of coordinate arrays, quick containment testing, boundary inclusion checks, or spatial short-circuit operations to confirm presence within an area; useful for validating if any points fall within, inside, or are contained by geographic extents, rectangles, or map regions.
 </div>
 
 #### Example
@@ -249,7 +249,7 @@ Returns the center of the extent.
 
 
 <div class="meta-api-description">
-Retrieve or calculate the central coordinate, midpoint, or geographic center of a bounding box, extent, or map area for positioning, centering, aligning, or focusing map views; use this method to get the exact center point for panning, zooming, setting map center, adjusting viewports, or feeding location data into geospatial operations and map control functions.
+How do I calculate the center point of a map view in Kendo UI for jQuery? Retrieve or calculate the central coordinate, midpoint, or geographic center of a bounding box, extent, or map area for positioning, centering, aligning, or focusing map views; use this method to get the exact center point for panning, zooming, setting map center, adjusting viewports, or feeding location data into geospatial operations and map control functions.
 </div>
 
 #### Example
@@ -281,7 +281,7 @@ Grows the extent, if required, to contain the specified location.
 
 
 <div class="meta-api-description">
-Expand or enlarge a geographical bounding box, area, or map extent by incorporating a specific point or coordinate, automatically adjusting the boundaries only if the location lies outside the current limits, while avoiding unnecessary changes when the point is already within the existing range. Enable dynamic resizing, update spatial boundaries, include additional locations, control map view extents to cover new coordinates, and ensure the visible or tracked area encompasses desired positions without altering internal points or shrinking the range. This functionality supports adding points to geographic extents, modifying bounding boxes on the fly, and managing the spatial scope of map components or geospatial queries.
+How to dynamically expand a Kendo UI map extent to include new points while avoiding unnecessary changes? Expand or enlarge a geographical bounding box, area, or map extent by incorporating a specific point or coordinate, automatically adjusting the boundaries only if the location lies outside the current limits, while avoiding unnecessary changes when the point is already within the existing range. Enable dynamic resizing, update spatial boundaries, include additional locations, control map view extents to cover new coordinates, and ensure the visible or tracked area encompasses desired positions without altering internal points or shrinking the range. This functionality supports adding points to geographic extents, modifying bounding boxes on the fly, and managing the spatial scope of map components or geospatial queries.
 </div>
 
 #### Example
@@ -318,7 +318,7 @@ Grows the extent, if required, to contain all specified locations.
 
 
 <div class="meta-api-description">
-Expand or extend the current map view to encompass all specified coordinates or locations by adjusting the bounding box or viewport so every target point is included within the visible area; merge multiple extents, automatically grow the map boundaries, fit all markers or places into the displayed region, control viewport size dynamically to include a set of geographic points, aggregate locations into a single visible extent, and update map coverage to ensure no location lies outside the current view.
+How do I use Kendo UI map's includeAll method to adjust the viewport size dynamically? Expand or extend the current map view to encompass all specified coordinates or locations by adjusting the bounding box or viewport so every target point is included within the visible area; merge multiple extents, automatically grow the map boundaries, fit all markers or places into the displayed region, control viewport size dynamically to include a set of geographic points, aggregate locations into a single visible extent, and update map coverage to ensure no location lies outside the current view.
 </div>
 
 #### Example
@@ -360,7 +360,7 @@ Returns the four extreme locations of the extent.
 
 
 <div class="meta-api-description">
-Retrieve the four corner points or extreme locations of a geographic area or bounding box to calculate boundaries, fit map views, place markers precisely at edges, perform spatial comparisons, or determine minimum and maximum coordinates for mapping and geospatial computations. Access, extract, or get the extent corners for tasks involving rectangle bounds, coordinate limits, area edges, or boundary calculations in map rendering, view fitting, and spatial analysis workflows.
+How do I get the corner points of a geographic area using Kendo UI map extent.edges method? Retrieve the four corner points or extreme locations of a geographic area or bounding box to calculate boundaries, fit map views, place markers precisely at edges, perform spatial comparisons, or determine minimum and maximum coordinates for mapping and geospatial computations. Access, extract, or get the extent corners for tasks involving rectangle bounds, coordinate limits, area edges, or boundary calculations in map rendering, view fitting, and spatial analysis workflows.
 </div>
 
 #### Example
@@ -394,7 +394,7 @@ Returns the four extreme locations of the extent as an array.
 
 
 <div class="meta-api-description">
-Convert or extract the four corner coordinates, boundary points, or extreme locations of a geographic or map extent into an array format for use in exporting data, performing geometric calculations, bounding box comparisons, serialization, or supplying precise corner coordinates to mapping tools, spatial transformations, or coordinate-based operations within mapping libraries or GIS applications.
+How do I convert a map extent into an array for spatial calculations in Kendo UI? Convert or extract the four corner coordinates, boundary points, or extreme locations of a geographic or map extent into an array format for use in exporting data, performing geometric calculations, bounding box comparisons, serialization, or supplying precise corner coordinates to mapping tools, spatial transformations, or coordinate-based operations within mapping libraries or GIS applications.
 </div>
 
 #### Example
@@ -429,7 +429,7 @@ Tests if the given extent overlaps with this instance.
 
 
 <div class="meta-api-description">
-Check if one geographic area or bounding box intersects, overlaps, or spatially collides with another extent by verifying whether two ranges, coordinates, or viewports share common space. Useful for detecting overlapping map regions, controlling layer visibility based on spatial intersection, managing bounding box collisions, filtering spatial data within intersecting areas, or confirming if two spatial extents overlap using boolean responses for conditional logic and viewport adjustments.
+How to check if two map regions overlap in Kendo UI using JavaScript? Check if one geographic area or bounding box intersects, overlaps, or spatially collides with another extent by verifying whether two ranges, coordinates, or viewports share common space. Useful for detecting overlapping map regions, controlling layer visibility based on spatial intersection, managing bounding box collisions, filtering spatial data within intersecting areas, or confirming if two spatial extents overlap using boolean responses for conditional logic and viewport adjustments.
 </div>
 
 #### Example

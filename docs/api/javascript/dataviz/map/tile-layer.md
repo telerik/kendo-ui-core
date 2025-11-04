@@ -15,7 +15,7 @@ The owner Map widget.
 
 
 <div class="meta-api-description">
-Specify or configure the parent map component to bind or attach a tile layer during its creation or setup, enabling the tile layer to inherit, access, or interact with the map’s APIs, rendering context, state, or lifecycle for proper initialization and synchronized display. This connection allows setting the owner map when constructing or instantiating the layer, linking map controls, map state management, map rendering, and tile management, ensuring the layer operates within the map’s environment and can respond to map events or updates from the start.
+How do I set up a tile layer to inherit from the map's rendering context in Kendo UI for jQuery? Specify or configure the parent map component to bind or attach a tile layer during its creation or setup, enabling the tile layer to inherit, access, or interact with the map’s APIs, rendering context, state, or lifecycle for proper initialization and synchronized display. This connection allows setting the owner map when constructing or instantiating the layer, linking map controls, map state management, map rendering, and tile management, ensuring the layer operates within the map’s environment and can respond to map events or updates from the start.
 </div>
 
 #### Example
@@ -37,7 +37,7 @@ The layer options.
 
 
 <div class="meta-api-description">
-Set up and customize map tile layers by defining source options, rendering controls, loading strategies, display parameters, and initialization settings during creation; configure how tiles are fetched, displayed, refreshed, and managed within map components by specifying layer sources, enabling or disabling caching, zoom levels, tile grid options, opacity, visibility toggles, update intervals, and loading priorities as constructor inputs to tailor map tile behavior and appearance.
+How do I customize tile layer behavior in Kendo UI map? Set up and customize map tile layers by defining source options, rendering controls, loading strategies, display parameters, and initialization settings during creation; configure how tiles are fetched, displayed, refreshed, and managed within map components by specifying layer sources, enabling or disabling caching, zoom levels, tile grid options, opacity, visibility toggles, update intervals, and loading priorities as constructor inputs to tailor map tile behavior and appearance.
 </div>
 
 #### Example
@@ -64,7 +64,7 @@ The owner Map widget.
 
 
 <div class="meta-api-description">
-Retrieve or reference the parent map object or instance associated with a specific tile layer to interact with the overall map container holding that layer, enabling operations like accessing map properties, invoking map functions, managing map events, controlling layer visibility, adjusting layer order relative to other layers, and manipulating map view parameters such as panning and zooming within the context of the displayed map environment.
+How do I access the map properties associated with a specific tile layer in Kendo UI? Retrieve or reference the parent map object or instance associated with a specific tile layer to interact with the overall map container holding that layer, enabling operations like accessing map properties, invoking map functions, managing map events, controlling layer visibility, adjusting layer order relative to other layers, and manipulating map view parameters such as panning and zooming within the context of the displayed map environment.
 </div>
 
 #### Example
@@ -98,7 +98,7 @@ The URL template for tile layer. Template variables:
 
 
 <div class="meta-api-description">
-Set or customize the URL pattern for fetching map tile images by specifying dynamic templates that include variables such as tile x and y coordinates, zoom levels, and optional subdomains to optimize tile server requests; control how map tiles are loaded by configuring URL structures, enabling developers to define or modify tile URL schemes, generate tile request endpoints dynamically, incorporate coordinate placeholders, handle multi-subdomain distribution for load balancing, and tailor tile fetching behavior for mapping applications or custom tile servers.
+How to customize URL pattern for fetching map tiles in Kendo UI Map widget? Set or customize the URL pattern for fetching map tile images by specifying dynamic templates that include variables such as tile x and y coordinates, zoom levels, and optional subdomains to optimize tile server requests; control how map tiles are loaded by configuring URL structures, enabling developers to define or modify tile URL schemes, generate tile request endpoints dynamically, incorporate coordinate placeholders, handle multi-subdomain distribution for load balancing, and tailor tile fetching behavior for mapping applications or custom tile servers.
 </div>
 
 #### Example
@@ -123,7 +123,7 @@ Alternating between different subdomains allows more requests to be executed in 
 
 
 <div class="meta-api-description">
-Configure multiple hostnames or domain prefixes to enable parallel loading and faster retrieval of map tiles by distributing requests across various subdomains. Control, set, or customize the list of sub-domain strings used to fetch tile images, improving performance through concurrent network connections, load balancing tile requests among different servers, and optimizing map rendering speed. Enable domain sharding or multi-host loading strategies to increase tile request throughput and reduce bottlenecks during tile fetching.
+How to configure subdomains for parallel loading of map tiles in Kendo UI for jQuery? Configure multiple hostnames or domain prefixes to enable parallel loading and faster retrieval of map tiles by distributing requests across various subdomains. Control, set, or customize the list of sub-domain strings used to fetch tile images, improving performance through concurrent network connections, load balancing tile requests among different servers, and optimizing map rendering speed. Enable domain sharding or multi-host loading strategies to increase tile request throughput and reduce bottlenecks during tile fetching.
 </div>
 
 #### Example
@@ -146,7 +146,7 @@ The tile size in pixels.
 
 
 <div class="meta-api-description">
-Adjust the pixel dimensions or resolution of individual map tiles by specifying the size used when rendering and fetching tiles, enabling customization of tile layout, image clarity, zoom detail, and loading strategies for map display. This setting influences how tile images are requested from servers and how they appear visually, affecting map performance and visual fidelity across different zoom levels or device screens. Control, set, or configure tile pixel size to optimize tile rendering, tile requests, and overall map tile appearance and behavior.
+How do I adjust the size of individual map tiles in Kendo UI for jQuery? Adjust the pixel dimensions or resolution of individual map tiles by specifying the size used when rendering and fetching tiles, enabling customization of tile layout, image clarity, zoom detail, and loading strategies for map display. This setting influences how tile images are requested from servers and how they appear visually, affecting map performance and visual fidelity across different zoom levels or device screens. Control, set, or configure tile pixel size to optimize tile rendering, tile requests, and overall map tile appearance and behavior.
 </div>
 
 #### Example
@@ -172,7 +172,7 @@ Shows the layer, if not visible.
 
 
 <div class="meta-api-description">
-Reveal or display a previously hidden map tile layer programmatically, enable visibility for map layers that are currently turned off or hidden, control the appearance of dynamic or toggled layers by showing them on the map, restore tile layers after they have been hidden or removed, activate rendering of specific map tile layers without affecting those already visible, manage visibility state changes for tile overlays, configure displaying of map sections on demand, set layers to be visible again after being disabled, toggle on map tiles dynamically through code, and programmatically control when geographic tile content appears in mapping applications.
+How do I programmatically show a hidden map tile layer using Kendo UI for jQuery? Reveal or display a previously hidden map tile layer programmatically, enable visibility for map layers that are currently turned off or hidden, control the appearance of dynamic or toggled layers by showing them on the map, restore tile layers after they have been hidden or removed, activate rendering of specific map tile layers without affecting those already visible, manage visibility state changes for tile overlays, configure displaying of map sections on demand, set layers to be visible again after being disabled, toggle on map tiles dynamically through code, and programmatically control when geographic tile content appears in mapping applications.
 </div>
 
 #### Example
@@ -204,7 +204,7 @@ Hides the layer, if visible.
 
 
 <div class="meta-api-description">
-Control the visibility of a map tile layer by hiding it without deleting or destroying the layer, enabling you to toggle display on and off, pause rendering to improve performance, temporarily remove the map tiles from view while preserving their state for future reactivation, manage layer visibility dynamically during runtime, and seamlessly switch between visible and hidden states for overlays or base layers without reloading or rebuilding the layer data.
+How can I temporarily hide a map tile layer in Kendo UI for jQuery without removing it? Control the visibility of a map tile layer by hiding it without deleting or destroying the layer, enabling you to toggle display on and off, pause rendering to improve performance, temporarily remove the map tiles from view while preserving their state for future reactivation, manage layer visibility dynamically during runtime, and seamlessly switch between visible and hidden states for overlays or base layers without reloading or rebuilding the layer data.
 </div>
 
 #### Example

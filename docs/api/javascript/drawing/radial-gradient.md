@@ -54,7 +54,7 @@ The configuration of this RadialGradient.
 
 
 <div class="meta-api-description">
-Set up and customize a radial gradient during creation by specifying configuration parameters such as color stops, gradient center coordinates, radius size, focal point positioning, transformation effects like rotation or scaling, and opacity levels. This covers initializing gradient fill properties for drawing or rendering tasks, controlling visual appearance, blending, and spatial distribution of colors in circular or elliptical patterns, enabling precise gradient design, styling, and animation effects when constructing gradient objects.
+How do I set up a radial gradient in Kendo UI for jQuery? Set up and customize a radial gradient during creation by specifying configuration parameters such as color stops, gradient center coordinates, radius size, focal point positioning, transformation effects like rotation or scaling, and opacity levels. This covers initializing gradient fill properties for drawing or rendering tasks, controlling visual appearance, blending, and spatial distribution of colors in circular or elliptical patterns, enabling precise gradient design, styling, and animation effects when constructing gradient objects.
 </div>
 
 #### Example
@@ -96,7 +96,7 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 
 
 <div class="meta-api-description">
-Adjust or configure the focal point of a circular or elliptical gradient by setting the center coordinates within the shape, using normalized values from zero to one to specify the horizontal and vertical position relative to the bounding box; control where the gradient radiates from, center the radial color spread, define offset points for gradient origin, and position the gradient emphasis precisely by specifying x and y values as fractions between the top-left corner (0,0) and bottom-right corner (1,1) of the shape’s area.
+How do I set the center point of a radial gradient in Kendo UI for jQuery? Adjust or configure the focal point of a circular or elliptical gradient by setting the center coordinates within the shape, using normalized values from zero to one to specify the horizontal and vertical position relative to the bounding box; control where the gradient radiates from, center the radial color spread, define offset points for gradient origin, and position the gradient emphasis precisely by specifying x and y values as fractions between the top-left corner (0,0) and bottom-right corner (1,1) of the shape’s area.
 </div>
 
 #### Example
@@ -130,7 +130,7 @@ The radius of the radial gradient relative to the shape bounding box.
 
 
 <div class="meta-api-description">
-Adjust or configure the radial gradient's size, scale, or spread inside a shape by setting how far the color radiates outward from the center toward the edges in relation to the shape's bounding box. Control the extent, radius, or distance the gradient covers to customize the gradient effect, influence visual focus, or fine-tune the gradient's coverage area within circular or elliptical shapes. This property enables scaling, expanding, shrinking, or defining the gradient's reach dynamically for various shapes and layouts to achieve precise color transitions and desired visual impact.
+How do I adjust the size of a radial gradient in Kendo UI for jQuery? Adjust or configure the radial gradient's size, scale, or spread inside a shape by setting how far the color radiates outward from the center toward the edges in relation to the shape's bounding box. Control the extent, radius, or distance the gradient covers to customize the gradient effect, influence visual focus, or fine-tune the gradient's coverage area within circular or elliptical shapes. This property enables scaling, expanding, shrinking, or defining the gradient's reach dynamically for various shapes and layouts to achieve precise color transitions and desired visual impact.
 </div>
 
 #### Example
@@ -165,7 +165,7 @@ Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradi
 
 
 <div class="meta-api-description">
-Configure and control color transitions in radial gradients by specifying an array of color stops, enabling precise placement and blending of colors at various offsets within the gradient. Customize color points using objects or gradient stop instances to set exact positions and hues, allowing fine-tuned control over gradient appearance, smoothness, and color interpolation. Manage multiple color markers to create complex radial color blends, adjust color offsets, define gradient progression, and tailor the radial gradient’s color distribution for visual effects, backgrounds, and UI designs.
+How to specify color stops for a radial gradient in Kendo UI drawingapi? Configure and control color transitions in radial gradients by specifying an array of color stops, enabling precise placement and blending of colors at various offsets within the gradient. Customize color points using objects or gradient stop instances to set exact positions and hues, allowing fine-tuned control over gradient appearance, smoothness, and color interpolation. Manage multiple color markers to create complex radial color blends, adjust color offsets, define gradient progression, and tailor the radial gradient’s color distribution for visual effects, backgrounds, and UI designs.
 </div>
 
 #### Example
@@ -204,7 +204,7 @@ Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 
 <div class="meta-api-description">
-Adjust, configure, or customize the sequence and positions of multiple color points within a circular gradient by adding, removing, reordering, or editing the collection of color stops to achieve precise radial color blending effects, gradient transitions, and smooth color shifts. Manage arrays or lists of color markers, set stop positions, control opacity and color intensity, and fine-tune the radial gradient’s visual progression by working with individual gradient stop elements to alter the pattern, colors, and stops distribution dynamically at runtime or design time.
+How do I customize the color stops in a Kendo UI RadialGradient? Adjust, configure, or customize the sequence and positions of multiple color points within a circular gradient by adding, removing, reordering, or editing the collection of color stops to achieve precise radial color blending effects, gradient transitions, and smooth color shifts. Manage arrays or lists of color markers, set stop positions, control opacity and color intensity, and fine-tune the radial gradient’s visual progression by working with individual gradient stop elements to alter the pattern, colors, and stops distribution dynamically at runtime or design time.
 </div>
 
 #### Example
@@ -245,7 +245,7 @@ Inherited from [Gradient.addStop](/api/javascript/drawing/gradient#methods-addSt
 
 
 <div class="meta-api-description">
-Add or insert color stops dynamically to configure a radial gradient's color transitions, control stop positions, adjust blending points, and customize smooth radial fills for drawing or graphics rendering. Enable precise gradient control by appending multiple color stops, managing color mixing, setting gradient offsets, and modifying gradient stops during runtime or setup to achieve desired visual effects and smooth color blends within circular or elliptical gradients.
+How do I dynamically add color stops to a radial gradient in Kendo UI for jQuery? Add or insert color stops dynamically to configure a radial gradient's color transitions, control stop positions, adjust blending points, and customize smooth radial fills for drawing or graphics rendering. Enable precise gradient control by appending multiple color stops, managing color mixing, setting gradient offsets, and modifying gradient stops during runtime or setup to achieve desired visual effects and smooth color blends within circular or elliptical gradients.
 </div>
 
 #### Example
@@ -297,7 +297,7 @@ Gets or sets the center point of the gradient.
 
 
 <div class="meta-api-description">
-Control and configure the focal origin point of a radial gradient fill by retrieving or setting its center position, enabling adjustments to where the gradient's color radiates from within a shape or component. This includes positioning the gradient focus dynamically, modifying the starting point of the color spread, adjusting or querying the central coordinate used by radial fills, and customizing how the gradient's center aligns within the area for effects like shifting, centering, or animating the gradient origin. Whether you need to get the current center coordinates or assign a new location for the radial effect, this method supports flexible manipulation of the gradient’s core point to achieve precise visual styling, shading direction, or focus control in UI design or graphical rendering.
+How do I control the focal point of a radial gradient fill in Kendo UI for jQuery? Control and configure the focal origin point of a radial gradient fill by retrieving or setting its center position, enabling adjustments to where the gradient's color radiates from within a shape or component. This includes positioning the gradient focus dynamically, modifying the starting point of the color spread, adjusting or querying the central coordinate used by radial fills, and customizing how the gradient's center aligns within the area for effects like shifting, centering, or animating the gradient origin. Whether you need to get the current center coordinates or assign a new location for the radial effect, this method supports flexible manipulation of the gradient’s core point to achieve precise visual styling, shading direction, or focus control in UI design or graphical rendering.
 </div>
 
 #### Example
@@ -351,7 +351,7 @@ Gets or sets the radius of the gradient.
 
 
 <div class="meta-api-description">
-Accessing or modifying the size of a gradient's circular spread or scaling the radial pattern's extent involves retrieving the current radius or defining a new numeric value to adjust the gradient's reach and appearance. Developers often look to query the present radius dimension for calculations or dynamically set a specific radius to control the gradient's expansion, resizing, or animation, enabling precise control over how far the color transitions radiate from the center in a radial gradient effect. This includes reading the existing spread value, updating it for visual adjustments, or programmatically animating the scale of the radial gradient to achieve smooth resizing or responsive design changes.
+How do I set or get the radius of a radial gradient in Kendo UI for jQuery? Accessing or modifying the size of a gradient's circular spread or scaling the radial pattern's extent involves retrieving the current radius or defining a new numeric value to adjust the gradient's reach and appearance. Developers often look to query the present radius dimension for calculations or dynamically set a specific radius to control the gradient's expansion, resizing, or animation, enabling precise control over how far the color transitions radiate from the center in a radial gradient effect. This includes reading the existing spread value, updating it for visual adjustments, or programmatically animating the scale of the radial gradient to achieve smooth resizing or responsive design changes.
 </div>
 
 #### Example
@@ -403,7 +403,7 @@ Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient#methods-re
 
 
 <div class="meta-api-description">
-Delete or eliminate a specific color stop from a radial gradient’s color stops array or collection, enabling dynamic removal, modification, or management of gradient colors and stops in runtime or after initialization; remove individual stops, control gradient color points, adjust or manipulate radial gradient segments programmatically, update or change the gradient color scheme by deleting selected gradient color stops, manage gradient color transitions by removing stops to customize or fine-tune radial color effects.
+How do I dynamically remove a color stop from a radial gradient in Kendo UI for jQuery? Delete or eliminate a specific color stop from a radial gradient’s color stops array or collection, enabling dynamic removal, modification, or management of gradient colors and stops in runtime or after initialization; remove individual stops, control gradient color points, adjust or manipulate radial gradient segments programmatically, update or change the gradient color scheme by deleting selected gradient color stops, manage gradient color transitions by removing stops to customize or fine-tune radial color effects.
 </div>
 
 #### Example

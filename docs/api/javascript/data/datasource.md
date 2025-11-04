@@ -25,7 +25,7 @@ Introduced in the Kendo UI 2019 R1 SP1 (2019.1.220) release.
 
 
 <div class="meta-api-description">
-Control filtering behavior to enable or disable recognition of diacritic and accent marks during search and filter operations, allowing culture-sensitive matching of accented characters such as "é" versus "e" based on specified locale settings like Turkish, Spanish, or French. Configure language-aware filtering that respects or folds accents in text queries, supporting scenarios like case-insensitive searches with single-language accent rules while preventing mixed-language conflicts. Adjust settings to fine-tune search results for internationalization, accent-insensitive or accent-sensitive filtering, partial and exact matches considering language-specific characters, and customize text filtering behavior that differentiates or ignores diacritics according to cultural norms and developer-defined locale preferences.
+How do I configure accent folding filtering in Kendo UI DataSource for culture-sensitive matching of accented characters? Control filtering behavior to enable or disable recognition of diacritic and accent marks during search and filter operations, allowing culture-sensitive matching of accented characters such as "é" versus "e" based on specified locale settings like Turkish, Spanish, or French. Configure language-aware filtering that respects or folds accents in text queries, supporting scenarios like case-insensitive searches with single-language accent rules while preventing mixed-language conflicts. Adjust settings to fine-tune search results for internationalization, accent-insensitive or accent-sensitive filtering, partial and exact matches considering language-specific characters, and customize text filtering behavior that differentiates or ignores diacritics according to cultural norms and developer-defined locale preferences.
 </div>
 
 #### Example - use the accentFoldingFiltering
@@ -65,7 +65,7 @@ The supported aggregates are:
 
 
 <div class="meta-api-description">
-Set or control aggregate functions such as average, count, sum, minimum, and maximum calculations for numeric, string, or date fields during data processing to compute totals, averages, record counts, smallest or largest values, either client-side or server-side aggregation, enabling dynamic summary statistics, data grouping results, and real-time computed metrics for display, binding, filtering, or reporting purposes within the data component.
+How to calculate averages and totals client-side with Kendo UI DataSource aggregate function? Set or control aggregate functions such as average, count, sum, minimum, and maximum calculations for numeric, string, or date fields during data processing to compute totals, averages, record counts, smallest or largest values, either client-side or server-side aggregation, enabling dynamic summary statistics, data grouping results, and real-time computed metrics for display, binding, filtering, or reporting purposes within the data component.
 </div>
 
 #### Example - specify aggregates
@@ -103,7 +103,7 @@ The supported aggregates are:
 
 
 <div class="meta-api-description">
-Configure summary calculations for data fields by specifying aggregation operations such as totals, counts, averages, maximum, or minimum values within a data set. Enable or set the type of summary function to compute group or global aggregates, allowing control over how data is summarized and rolled up during queries or reports. Use aggregation keywords like average, count, max, min, and sum to define the mathematical operation applied to data fields for generating concise metrics, statistical summaries, or overview calculations in datasets and collections.
+How do I configure summary calculations for data fields in Kendo UI DataSource using aggregate operations? Configure summary calculations for data fields by specifying aggregation operations such as totals, counts, averages, maximum, or minimum values within a data set. Enable or set the type of summary function to compute group or global aggregates, allowing control over how data is summarized and rolled up during queries or reports. Use aggregation keywords like average, count, max, min, and sum to define the mathematical operation applied to data fields for generating concise metrics, statistical summaries, or overview calculations in datasets and collections.
 </div>
 
 #### Example - specify an aggregate function
@@ -131,7 +131,7 @@ The data item field which will be used to calculate the aggregates.
 
 
 <div class="meta-api-description">
-Specify or set the particular data field or key from your dataset that should be used for performing aggregation operations such as sum, average, minimum, maximum, or other summary statistics; control, configure, or select the target property within each data item that aggregation functions will process, enabling filtering, grouping, or summarized calculation based on that specific attribute or column name in the data source.
+How do I specify which field in my data source to use for aggregation operations with Kendo UI DataSource? Specify or set the particular data field or key from your dataset that should be used for performing aggregation operations such as sum, average, minimum, maximum, or other summary statistics; control, configure, or select the target property within each data item that aggregation functions will process, enabling filtering, grouping, or summarized calculation based on that specific attribute or column name in the data source.
 </div>
 
 #### Example - specify an aggregate field
@@ -159,7 +159,7 @@ If set to `true`, the data source would automatically save any changed data item
 
 
 <div class="meta-api-description">
-Enable automatic saving or syncing of modified data entries within a data collection or database by configuring an option that controls whether changes are immediately persisted without manual intervention. This setting can be toggled to automatically apply updates, inserts, or deletes as soon as data modifications occur, supporting seamless data consistency and reducing the need for explicit save or sync commands. Ideal for scenarios where continuous data synchronization is required, it allows developers to control or configure auto-saving, automatic data persistence, instant update propagation, and real-time synchronization behavior in data-bound components or data sources.
+How to enable automatic saving of modified data in Kendo UI DataSource? Enable automatic saving or syncing of modified data entries within a data collection or database by configuring an option that controls whether changes are immediately persisted without manual intervention. This setting can be toggled to automatically apply updates, inserts, or deletes as soon as data modifications occur, supporting seamless data consistency and reducing the need for explicit save or sync commands. Ideal for scenarios where continuous data synchronization is required, it allows developers to control or configure auto-saving, automatic data persistence, instant update propagation, and real-time synchronization behavior in data-bound components or data sources.
 </div>
 
 #### Example - enable auto sync
@@ -195,7 +195,7 @@ makes an HTTP request for every CRUD operation.
 
 
 <div class="meta-api-description">
-Control how to combine multiple create, update, and delete actions into a single server request to optimize network usage and reduce HTTP calls during data synchronization; configure batching to send multiple CRUD operations together in one payload, customize how changes are grouped and transmitted, adjust request formats for create, update, or destroy operations, set options to prevent separate API calls for each data modification, and manage payloads using parameter mapping to efficiently handle bulk data updates and minimize server round-trips during data source synchronization.
+How to combine multiple create, update, and delete actions in a single server request with Kendo UI DataSource? Control how to combine multiple create, update, and delete actions into a single server request to optimize network usage and reduce HTTP calls during data synchronization; configure batching to send multiple CRUD operations together in one payload, customize how changes are grouped and transmitted, adjust request formats for create, update, or destroy operations, set options to prevent separate API calls for each data modification, and manage payloads using parameter mapping to efficiently handle bulk data updates and minimize server round-trips during data source synchronization.
 </div>
 
 #### Example - enable the batch mode
@@ -236,7 +236,7 @@ Can be set to a string value if the [`schema.type`](/api/javascript/data/datasou
 
 
 <div class="meta-api-description">
-Set or bind the collection of data items or records managed by the source, supporting local arrays, JSON objects, or XML strings for loading and syncing data. Configure or supply datasets as flat arrays or complex models, enabling integration with observable objects, data models, or custom schema types. Control the initial or dynamic data input for data management, collection binding, local or in-memory data loading, and ensure compatibility with structured data formats while avoiding field name conflicts with reserved terms. This property is essential for feeding raw data, collections, or serialized strings into the data handling layer for operations like sorting, filtering, and model mapping.
+How do I set data for a Kendo UI DataSource? Set or bind the collection of data items or records managed by the source, supporting local arrays, JSON objects, or XML strings for loading and syncing data. Configure or supply datasets as flat arrays or complex models, enabling integration with observable objects, data models, or custom schema types. Control the initial or dynamic data input for data management, collection binding, local or in-memory data loading, and ensure compatibility with structured data formats while avoiding field name conflicts with reserved terms. This property is essential for feeding raw data, collections, or serialized strings into the data handling layer for operations like sorting, filtering, and model mapping.
 </div>
 
 #### Example - set the data items of a data source
@@ -292,7 +292,7 @@ The filters which are applied over the data items. By default, no filter is appl
 
 
 <div class="meta-api-description">
-Configure criteria to limit or restrict the data returned or displayed by controlling which records meet specific conditions through filter settings, enabling client-side or server-side filtering depending on whether serverFiltering is enabled, allowing for dynamic, customizable data queries, selective retrieval, or constrained datasets based on property values, expressions, or rules applied during data source initialization to enhance data management, search precision, or visibility within applications.
+How do I configure filtering in my Kendo UI DataSource? Configure criteria to limit or restrict the data returned or displayed by controlling which records meet specific conditions through filter settings, enabling client-side or server-side filtering depending on whether serverFiltering is enabled, allowing for dynamic, customizable data queries, selective retrieval, or constrained datasets based on property values, expressions, or rules applied during data source initialization to enhance data management, search precision, or visibility within applications.
 </div>
 
 #### Example - set a single filter
@@ -401,7 +401,7 @@ The data item field to which the filter operator is applied.
 
 
 <div class="meta-api-description">
-Specify or configure the target data property or attribute that a filter condition applies to within a data source, enabling selection of fields by name or nested path using dot notation so filtering operations, comparisons, or queries can be performed on that specific data element; this includes setting which item property to evaluate when filtering data collections, controlling which field the filter operator matches against, and directing filters to particular keys, subfields, or nested object properties for precise data querying and manipulation.
+How do I specify which data field in my Kendo UI DataSource to apply a filter condition to? Specify or configure the target data property or attribute that a filter condition applies to within a data source, enabling selection of fields by name or nested path using dot notation so filtering operations, comparisons, or queries can be performed on that specific data element; this includes setting which item property to evaluate when filtering data collections, controlling which field the filter operator matches against, and directing filters to particular keys, subfields, or nested object properties for precise data querying and manipulation.
 </div>
 
 #### Example - set the filter field
@@ -429,7 +429,7 @@ The filter will ignore the casing of the value by default.
 
 
 <div class="meta-api-description">
-Configure case-insensitive filtering to match text strings without considering uppercase or lowercase differences, enabling searches that ignore letter casing for equality, containment, prefix, and other string comparisons. Control whether filtering operations treat input as case-sensitive or case-insensitive, allowing flexible string matching and search behavior regardless of character case variations in data queries or filtering conditions. Adjust filter behavior to enable robust string matching across different case formats, improving search, filter, and query precision in collection or data source operations.
+How can I make Kendo UI's DataSource filter case-insensitive? Configure case-insensitive filtering to match text strings without considering uppercase or lowercase differences, enabling searches that ignore letter casing for equality, containment, prefix, and other string comparisons. Control whether filtering operations treat input as case-sensitive or case-insensitive, allowing flexible string matching and search behavior regardless of character case variations in data queries or filtering conditions. Adjust filter behavior to enable robust string matching across different case formats, improving search, filter, and query precision in collection or data source operations.
 </div>
 
 #### Example - set the filter ignoreCase
@@ -457,7 +457,7 @@ The nested filter expressions. Supports the same options as [`filter`](/api/java
 
 
 <div class="meta-api-description">
-Configure complex, nested filtering queries by combining multiple conditions and logical operators to create advanced, multi-level filters for data sources. Enable grouping of filter expressions, apply compound criteria, and build recursive, hierarchical filter structures that support unlimited nesting and dynamic condition chaining. Control and customize filter trees to refine data retrieval, define intricate query logic, and implement multi-condition data filtering with and/or operators for tailored dataset querying and advanced data source filtering workflows.
+How to configure complex filtering in Kendo UI DataSource? Configure complex, nested filtering queries by combining multiple conditions and logical operators to create advanced, multi-level filters for data sources. Enable grouping of filter expressions, apply compound criteria, and build recursive, hierarchical filter structures that support unlimited nesting and dynamic condition chaining. Control and customize filter trees to refine data retrieval, define intricate query logic, and implement multi-condition data filtering with and/or operators for tailored dataset querying and advanced data source filtering workflows.
 </div>
 
 #### Example - set nested filters
@@ -501,7 +501,7 @@ The supported values are:
 
 
 <div class="meta-api-description">
-Control how multiple filter conditions combine by configuring the logical operator between filter expressions, enabling either all conditions to be required for a match (AND logic) or allowing matches if any condition is true (OR logic), useful for setting up complex data queries, refining search criteria, toggling filter combination modes, specifying conjunction or disjunction in filter sets, adjusting filter evaluation strategy, and customizing how multiple filter rules apply when querying or searching data sources.
+How does the Kendo UI DataSource logic property control filter combinations in a data query? Control how multiple filter conditions combine by configuring the logical operator between filter expressions, enabling either all conditions to be required for a match (AND logic) or allowing matches if any condition is true (OR logic), useful for setting up complex data queries, refining search criteria, toggling filter combination modes, specifying conjunction or disjunction in filter sets, adjusting filter evaluation strategy, and customizing how multiple filter rules apply when querying or searching data sources.
 </div>
 
 #### Example - set the filter logic
@@ -560,7 +560,7 @@ The last eight are supported only for string fields.
 
 
 <div class="meta-api-description">
-Specify or configure the comparison method, operator, or condition that determines how filter criteria match or compare data values during querying or filtering operations, including equality, inequality, null checks, greater than or less than comparisons, and various string-specific matches like starts with, ends with, contains, or their negations, enabling flexible control over filtering logic, value matching, and conditional data selection in data sources with options for numeric, string, and null-inclusive comparisons.
+What is the comparison method used in Kendo UI DataSource filtering operations? Specify or configure the comparison method, operator, or condition that determines how filter criteria match or compare data values during querying or filtering operations, including equality, inequality, null checks, greater than or less than comparisons, and various string-specific matches like starts with, ends with, contains, or their negations, enabling flexible control over filtering logic, value matching, and conditional data selection in data sources with options for numeric, string, and null-inclusive comparisons.
 </div>
 
 #### Example - set the filter operator
@@ -590,7 +590,7 @@ The value to which the [`field`](/api/javascript/data/datasource#configuration-f
 
 
 <div class="meta-api-description">
-Specify or configure the filter comparison value used to match data items against a specific field, ensuring the value type aligns with the field data type for accurate filtering; control and adjust filter behavior by setting this comparison input alongside operators to define criteria for inclusion or exclusion of records, while remembering that newline characters within the filter value are automatically stripped before evaluation, affecting matches with multiline data fields.
+How do I configure the value for filtering data with Kendo UI's DataSource? Specify or configure the filter comparison value used to match data items against a specific field, ensuring the value type aligns with the field data type for accurate filtering; control and adjust filter behavior by setting this comparison input alongside operators to define criteria for inclusion or exclusion of records, while remembering that newline characters within the filter value are automatically stripped before evaluation, affecting matches with multiline data fields.
 </div>
 
 #### Example - specify the filter value
@@ -620,7 +620,7 @@ The grouping configuration of the data source. If set, the data items will be gr
 
 
 <div class="meta-api-description">
-Organize and categorize data items by configuring grouping settings that enable logical clusters based on specified fields and custom ordering, supporting multiple grouping levels to control how data collections are partitioned and displayed. This grouping functionality can be activated or disabled, applied client-side by default, or delegated to the server when server-side grouping is enabled, allowing flexible management of grouped datasets, sorting within groups, and hierarchical data presentation. Search for ways to enable grouping, set grouping descriptors, control field-based grouping criteria, handle multi-level groups, manage grouped views, implement client or server grouping modes, and customize data grouping behaviors across data collections or sources.
+How to enable server-side grouping in Kendo UI DataSource? Organize and categorize data items by configuring grouping settings that enable logical clusters based on specified fields and custom ordering, supporting multiple grouping levels to control how data collections are partitioned and displayed. This grouping functionality can be activated or disabled, applied client-side by default, or delegated to the server when server-side grouping is enabled, allowing flexible management of grouped datasets, sorting within groups, and hierarchical data presentation. Search for ways to enable grouping, set grouping descriptors, control field-based grouping criteria, handle multi-level groups, manage grouped views, implement client or server grouping modes, and customize data grouping behaviors across data collections or sources.
 </div>
 
 #### Example - set a group as an object
@@ -709,7 +709,7 @@ The supported aggregates are:
 
 
 <div class="meta-api-description">
-Configure or set aggregation functions like sum, average, count, min, and max to calculate group-level summaries when grouping data; control which aggregate metrics are computed per group for totals, counts, or other statistical summaries by specifying one or more aggregation operations in the grouping configuration, enabling grouped data to display calculated values such as averages, sums, minimums, maximums, or counts within each group.
+How do I calculate sums, averages, etc. in Kendo UI for jQuery data grouping? Configure or set aggregation functions like sum, average, count, min, and max to calculate group-level summaries when grouping data; control which aggregate metrics are computed per group for totals, counts, or other statistical summaries by specifying one or more aggregation operations in the grouping configuration, enabling grouped data to display calculated values such as averages, sums, minimums, maximums, or counts within each group.
 </div>
 
 #### Example - set the group aggregates
@@ -758,7 +758,7 @@ The supported aggregates are:
 
 
 <div class="meta-api-description">
-Configure how grouped data is summarized by specifying summary calculations such as average, count, maximum, minimum, or sum for fields within data collections during grouping operations. Enable setting aggregation methods to compute group-level statistics, control how grouped values are computed or combined, choose summary functions to analyze data segments, and adjust group summary calculations dynamically for data processing, reporting, or visualization tasks that require customized roll-up values or summarized insights.
+How do I configure aggregation methods in Kendo UI for jQuery's DataSource grouping feature? Configure how grouped data is summarized by specifying summary calculations such as average, count, maximum, minimum, or sum for fields within data collections during grouping operations. Enable setting aggregation methods to compute group-level statistics, control how grouped values are computed or combined, choose summary functions to analyze data segments, and adjust group summary calculations dynamically for data processing, reporting, or visualization tasks that require customized roll-up values or summarized insights.
 </div>
 
 #### Example - specify an aggregate function
@@ -792,7 +792,7 @@ The data item field which will be used to calculate the aggregates.
 
 
 <div class="meta-api-description">
-Specify the exact data field or property to aggregate when performing grouping and summary calculations, enabling control over which dataset attribute is used for computing totals, averages, counts, sums, or other aggregate functions; this setting helps target specific data columns or properties for aggregation during grouped queries, summaries, or statistics computations, allowing configuration of aggregation operations on precise fields within the data source.
+How do I specify which field to aggregate when using the `group.aggregates` setting in Kendo UI DataSource? Specify the exact data field or property to aggregate when performing grouping and summary calculations, enabling control over which dataset attribute is used for computing totals, averages, counts, sums, or other aggregate functions; this setting helps target specific data columns or properties for aggregation during grouped queries, summaries, or statistics computations, allowing configuration of aggregation operations on precise fields within the data source.
 </div>
 
 #### Example - specify an aggregate field
@@ -826,7 +826,7 @@ A JavaScript function which is used to compare the groups (refer to [`sort.compa
 
 
 <div class="meta-api-description">
-Control or customize the order of grouped data by defining a function to compare and sort group objects, enabling tailored group sorting logic beyond default behavior, adjust group ordering in data grouping scenarios, set custom comparison functions to organize grouped entries, implement specific rules or criteria for sorting groups in a dataset, configure group-level sorting with JavaScript comparator functions similar to array sorting callbacks, define how groups should be ranked or prioritized when aggregating or grouping data collections, override default group order by supplying custom comparison logic, enable precise control over group sequence in grouped views or data sources.
+How can I customize the sorting of groups in my Kendo UI DataSource? Control or customize the order of grouped data by defining a function to compare and sort group objects, enabling tailored group sorting logic beyond default behavior, adjust group ordering in data grouping scenarios, set custom comparison functions to organize grouped entries, implement specific rules or criteria for sorting groups in a dataset, configure group-level sorting with JavaScript comparator functions similar to array sorting callbacks, define how groups should be ranked or prioritized when aggregating or grouping data collections, override default group order by supplying custom comparison logic, enable precise control over group sequence in grouped views or data sources.
 </div>
 
 #### Example - use a custom function to compare the groups in the DataSource
@@ -884,7 +884,7 @@ The default sort order is ascending.
 
 
 <div class="meta-api-description">
-Control and configure the sorting direction of grouped data entries, enabling arrangement of grouped items in either ascending or descending order based on developer preferences or UI requirements. Adjust how grouped records are ordered within data collections or sources to support custom sorting logic, toggling between ascending (lowest to highest) and descending (highest to lowest) sequences for grouped elements. Change group sorting order to enable, set, or control display and processing order of items within grouped datasets, supporting scenarios where sorting direction impacts data visualization, filtering, or aggregation. This feature is useful for developers needing to specify, enforce, or modify the order in which grouped data clusters appear or operate, enhancing the ability to manage sorted groupings dynamically and intuitively.
+How to control the sorting direction of grouped data in Kendo UI DataSource? Control and configure the sorting direction of grouped data entries, enabling arrangement of grouped items in either ascending or descending order based on developer preferences or UI requirements. Adjust how grouped records are ordered within data collections or sources to support custom sorting logic, toggling between ascending (lowest to highest) and descending (highest to lowest) sequences for grouped elements. Change group sorting order to enable, set, or control display and processing order of items within grouped datasets, supporting scenarios where sorting direction impacts data visualization, filtering, or aggregation. This feature is useful for developers needing to specify, enforce, or modify the order in which grouped data clusters appear or operate, enhancing the ability to manage sorted groupings dynamically and intuitively.
 </div>
 
 #### Example - sort the groups in descending order
@@ -915,7 +915,7 @@ The data item field to group by.
 
 
 <div class="meta-api-description">
-Organize or categorize data entries by specifying a particular key or attribute within each record, enabling grouping based on a chosen field such as a category name, date, or any data property, to support functionalities like sorting, filtering, grouping queries, or display segmentation both locally and on remote data sources. This grouping control facilitates configuring which data column or property values to cluster by, allowing developers to set, enable, or customize how data items are aggregated or partitioned within collections, lists, tables, or grids according to field values.
+How do I group data in Kendo UI DataSource using a specific field? Organize or categorize data entries by specifying a particular key or attribute within each record, enabling grouping based on a chosen field such as a category name, date, or any data property, to support functionalities like sorting, filtering, grouping queries, or display segmentation both locally and on remote data sources. This grouping control facilitates configuring which data column or property values to cluster by, allowing developers to set, enable, or customize how data items are aggregated or partitioned within collections, lists, tables, or grids according to field values.
 </div>
 
 #### Example - set the field
@@ -949,7 +949,7 @@ When set to true, dataSource treats groups as items during pagination.
 
 
 <div class="meta-api-description">
-Control how pagination works with grouped data by configuring whether pages contain entire groups instead of individual rows, allowing you to enable or disable group-based paging, adjust page size calculations to count groups as single items, manage page navigation that reflects grouped entries, set paging behavior for datasets where grouping is applied, and handle scenarios where you want to paginate by grouped sections rather than separate records within those groups.
+How does Kendo UI's groupPaging option affect page navigation with grouped data? Control how pagination works with grouped data by configuring whether pages contain entire groups instead of individual rows, allowing you to enable or disable group-based paging, adjust page size calculations to count groups as single items, manage page navigation that reflects grouped entries, set paging behavior for datasets where grouping is applied, and handle scenarios where you want to paginate by grouped sections rather than separate records within those groups.
 </div>
 
 #### Example
@@ -981,7 +981,7 @@ If set to `true`, the original `Array` used as [`data`](/api/javascript/data/dat
 
 
 <div class="meta-api-description">
-Control whether sorting modifies the original JavaScript array directly or works on a copy, enabling in-place sorting of local data arrays to optimize memory use and performance by mutating the source array during sort operations; this option is useful when you want to avoid extra copies, manage local dataset sorting behavior, or configure sort operations to affect the exact array instance passed as data rather than a cloned version, supporting scenarios where maintaining or tracking references to the sorted array is important in applications handling client-side data manipulation.
+How does Kendo UI's inPlaceSort property affect memory use when sorting local data arrays? Control whether sorting modifies the original JavaScript array directly or works on a copy, enabling in-place sorting of local data arrays to optimize memory use and performance by mutating the source array during sort operations; this option is useful when you want to avoid extra copies, manage local dataset sorting behavior, or configure sort operations to affect the exact array instance passed as data rather than a cloned version, supporting scenarios where maintaining or tracking references to the sorted array is important in applications handling client-side data manipulation.
 </div>
 
 #### Example
@@ -1016,7 +1016,7 @@ The offline storage key or custom offline storage implementation.
 
 
 <div class="meta-api-description">
-Control and configure offline data caching by setting the storage method for data persistence when the application is offline, enabling the use of either a predefined storage key or a custom storage implementation for saving data locally, managing offline access, data synchronization, and ensuring data availability without network connectivity through configurable offline storage options integrated with the data source initialization process.
+How do I configure offline data caching in Kendo UI DataSource? Control and configure offline data caching by setting the storage method for data persistence when the application is offline, enabling the use of either a predefined storage key or a custom storage implementation for saving data locally, managing offline access, data synchronization, and ensuring data availability without network connectivity through configurable offline storage options integrated with the data source initialization process.
 </div>
 
 #### Example - set an offline storage key
@@ -1061,7 +1061,7 @@ The page of data which the data source will return when the [`view`](/api/javasc
 
 
 <div class="meta-api-description">
-Control or configure which segment or page of data is retrieved or displayed when querying a data collection, enabling pagination either on the client side or remotely by specifying the current page index for data requests, coordinating with server-side paging if enabled, managing data slicing, fetching specific data portions, navigating through paged datasets, setting page number for data retrieval, and handling pagination state during data operations or view updates.
+How do I set the current page index for client-side pagination in Kendo UI DataSource? Control or configure which segment or page of data is retrieved or displayed when querying a data collection, enabling pagination either on the client side or remotely by specifying the current page index for data requests, coordinating with server-side paging if enabled, managing data slicing, fetching specific data portions, navigating through paged datasets, setting page number for data retrieval, and handling pagination state during data operations or view updates.
 </div>
 
 #### Example - set the current page
@@ -1094,7 +1094,7 @@ The number of data items per page. The property has no default value. Therefore,
 
 
 <div class="meta-api-description">
-Configure the number of items retrieved per page when fetching data, enabling pagination by specifying how many records to load at once for client-side or server-side data fetching. Control page length, set page limits, adjust batch sizes, define record counts per request, or enable paged data loading with customizable page size for efficient data display or processing. Manage paginated queries, control data slicing in UI components, and optimize data retrieval by setting the quantity of items returned in each data page or chunk.
+How do I set the number of items retrieved per page in Kendo UI's data source? Configure the number of items retrieved per page when fetching data, enabling pagination by specifying how many records to load at once for client-side or server-side data fetching. Control page length, set page limits, adjust batch sizes, define record counts per request, or enable paged data loading with customizable page size for efficient data display or processing. Manage paginated queries, control data slicing in UI components, and optimize data retrieval by setting the quantity of items returned in each data page or chunk.
 </div>
 
 #### Example - set the page size
@@ -1127,7 +1127,7 @@ The configuration used to parse the remote service response.
 
 
 <div class="meta-api-description">
-Configure how to read, interpret, and extract data from remote server responses by defining mappings for response fields such as data arrays, total counts, error messages, or metadata; enable setting custom parsing logic, field names, functions, or data models to transform and map incoming API payloads, JSON structures, or service responses into usable formats, control how response content is mapped to data items and metadata like totals and errors, and customize parsing rules to handle varied API formats, nested objects, or error handling within the data source integration.
+How to map data from a remote server response in Kendo UI DataSource? Configure how to read, interpret, and extract data from remote server responses by defining mappings for response fields such as data arrays, total counts, error messages, or metadata; enable setting custom parsing logic, field names, functions, or data models to transform and map incoming API payloads, JSON structures, or service responses into usable formats, control how response content is mapped to data items and metadata like totals and errors, and customize parsing rules to handle varied API formats, nested objects, or error handling within the data source integration.
 </div>
 
 #### Example - specify the schema of the remote service
@@ -1212,7 +1212,7 @@ The aggregate results should have the following format:
 
 
 <div class="meta-api-description">
-Configure the parsing and mapping of server-returned aggregate summaries such as sum, min, max, count, or custom aggregates by specifying the response field or providing a function that extracts and transforms aggregated data from the server response into a structured JavaScript object keyed by field names and aggregate types; this setup supports scenarios where server-side aggregation is enabled, facilitating retrieval and integration of calculated totals, counts, minimums, maximums, or other statistical summaries into the client data source for filtering, display, or further processing.
+How do I configure Kendo UI DataSource to handle server-returned aggregate summaries? Configure the parsing and mapping of server-returned aggregate summaries such as sum, min, max, count, or custom aggregates by specifying the response field or providing a function that extracts and transforms aggregated data from the server response into a structured JavaScript object keyed by field names and aggregate types; this setup supports scenarios where server-side aggregation is enabled, facilitating retrieval and integration of calculated totals, counts, minimums, maximums, or other statistical summaries into the client data source for filtering, display, or further processing.
 </div>
 
 #### Example - set the aggregates as a string
@@ -1253,7 +1253,7 @@ The field from the server response which contains the data items. Can be set to 
 
 
 <div class="meta-api-description">
-Configure how to extract or select the main data items from a server response by specifying the response field name containing the data array or by providing a custom function that processes the response and returns the data elements; this setting helps control which part of the server's returned payload is used as the data source content, supporting flexible mapping from various response shapes, enabling developers to define or transform the data set to be consumed while handling JSON or other formats, especially when manual extraction or reshaping of the data items is required, except when data grouping is managed server-side where this extraction step is bypassed.
+How do I configure Kendo UI's DataSource to extract data from a server response? Configure how to extract or select the main data items from a server response by specifying the response field name containing the data array or by providing a custom function that processes the response and returns the data elements; this setting helps control which part of the server's returned payload is used as the data source content, supporting flexible mapping from various response shapes, enabling developers to define or transform the data set to be consumed while handling JSON or other formats, especially when manual extraction or reshaping of the data items is required, except when data grouping is managed server-side where this extraction step is bypassed.
 </div>
 
 #### Returns
@@ -1352,7 +1352,7 @@ The field from the server response which contains server-side errors. Can be set
 
 
 <div class="meta-api-description">
-Configure error detection and handling for server responses by specifying how to identify error information within the returned data structure, either by naming the response field containing errors, such as "errors," or by providing a custom function that extracts error details from the raw server reply. Enable automatic triggering of error events when the designated error field is found and includes error messages or objects, allowing developers to capture and respond to server-side issues efficiently. Control and customize error parsing, processing, and event notification for server responses in data fetching scenarios, supporting varied formats of error representation and flexible integration with error management workflows. Adjust detection logic to map specific error-containing fields or transform raw server responses into standardized error arrays or objects for consistent error reporting and handling within data-driven components.
+How to configure Kendo UI DataSource to detect errors in server responses? Configure error detection and handling for server responses by specifying how to identify error information within the returned data structure, either by naming the response field containing errors, such as "errors," or by providing a custom function that extracts error details from the raw server reply. Enable automatic triggering of error events when the designated error field is found and includes error messages or objects, allowing developers to capture and respond to server-side issues efficiently. Control and customize error parsing, processing, and event notification for server responses in data fetching scenarios, supporting varied formats of error representation and flexible integration with error management workflows. Adjust detection logic to map specific error-containing fields or transform raw server responses into standardized error arrays or objects for consistent error reporting and handling within data-driven components.
 </div>
 
 #### Specify the error field as a string
@@ -1447,7 +1447,7 @@ The result should have the following format:
 
 
 <div class="meta-api-description">
-Configure or control how hierarchical grouping information from server responses maps into the data source by specifying the response field containing grouped data or by defining a custom extractor function that processes the server payload and returns an array of group objects structured with aggregate summaries, group field identifiers, subgroup presence flags, nested items or subgroups, and group key values; support for multi-level nested groups includes consistent schema shapes for aggregates per field with respective aggregation function results, fields identifying grouping criteria, boolean indicators for subgroups, arrays of subordinate groups or raw data items, and group values, enabling features like server-side grouping, complex nested group handling, and aggregation mapping for client-side rendering or data manipulation within any server grouping-enabled data pipeline or query response transformation workflow.
+How do I configure Kendo UI's DataSource to handle hierarchical grouping data from a server response? Configure or control how hierarchical grouping information from server responses maps into the data source by specifying the response field containing grouped data or by defining a custom extractor function that processes the server payload and returns an array of group objects structured with aggregate summaries, group field identifiers, subgroup presence flags, nested items or subgroups, and group key values; support for multi-level nested groups includes consistent schema shapes for aggregates per field with respective aggregation function results, fields identifying grouping criteria, boolean indicators for subgroups, arrays of subordinate groups or raw data items, and group values, enabling features like server-side grouping, complex nested group handling, and aggregation mapping for client-side rendering or data manipulation within any server grouping-enabled data pipeline or query response transformation workflow.
 </div>
 
 #### Example - set the groups as a string
@@ -1492,7 +1492,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
 
 
 <div class="meta-api-description">
-Define and customize the structure, attributes, and behavior of individual data entries within a data collection by setting up fields, identifiers, default values, validation rules, and custom methods to control creation and data integrity; configure schema models dynamically using object definitions or leverage existing model instances to shape how data records are initialized, validated, and managed, enabling precise control over data item formats, data source modeling, and record lifecycle customization in data-driven applications.
+How do I customize data entry structure in Kendo UI DataSource? Define and customize the structure, attributes, and behavior of individual data entries within a data collection by setting up fields, identifiers, default values, validation rules, and custom methods to control creation and data integrity; configure schema models dynamically using object definitions or leverage existing model instances to shape how data records are initialized, validated, and managed, enabling precise control over data item formats, data source modeling, and record lifecycle customization in data-driven applications.
 </div>
 
 #### Example - set the model as a JavaScript object
@@ -1564,7 +1564,7 @@ Executed before the server response is used. Use it to preprocess or parse the s
 
 
 <div class="meta-api-description">
-Transform, preprocess, normalize, or extract and modify raw server response data before it is handled by the data source, enabling control over the server payload by parsing, filtering, mapping fields, reshaping nested results, or restructuring incoming data for consistent consumption, allowing configuration to intercept and adjust raw API or backend output into the desired format for downstream processing or display.
+How do I modify raw server response data in Kendo UI for jQuery? Transform, preprocess, normalize, or extract and modify raw server response data before it is handled by the data source, enabling control over the server payload by parsing, filtering, mapping fields, reshaping nested results, or restructuring incoming data for consistent consumption, allowing configuration to intercept and adjust raw API or backend output into the desired format for downstream processing or display.
 </div>
 
 #### Parameters
@@ -1617,7 +1617,7 @@ The field from the server response which contains the total number of data items
 
 
 <div class="meta-api-description">
-Specify or customize how to extract the total number of data items from server responses for accurate pagination and item counting, including setting a response field name or providing a callback function to determine total count dynamically; configure total counts for server-driven paging scenarios or structured response data where total results aren’t directly inferred, supporting cases where total items need to be read separately from data arrays or nested response properties, enabling control over paging indicators, result summaries, and total record calculations regardless of whether data comes as plain arrays, complex objects, or requires custom logic to compute total items.
+How to set up total count for server-driven paging in Kendo UI DataSource? Specify or customize how to extract the total number of data items from server responses for accurate pagination and item counting, including setting a response field name or providing a callback function to determine total count dynamically; configure total counts for server-driven paging scenarios or structured response data where total results aren’t directly inferred, supporting cases where total items need to be read separately from data arrays or nested response properties, enabling control over paging indicators, result summaries, and total record calculations regardless of whether data comes as plain arrays, complex objects, or requires custom logic to compute total items.
 </div>
 
 #### Returns
@@ -1667,7 +1667,7 @@ By default, the schema interprets the server response as JSON.
 
 
 <div class="meta-api-description">
-Configure the expected format of server responses to enable parsing and processing of remote data or API results, including setting the response type as JSON or XML to handle AJAX calls and dynamic data binding. Enables control over how incoming payloads are interpreted by specifying whether the data structure is JSON-based or XML-based, allowing for correct extraction and mapping of data fields from diverse server responses. Useful for adjusting data source parsing behavior, handling various content types, managing API response formats, and ensuring accurate reading of remote data sets in different serialization formats.
+How do I configure my Kendo UI DataSource to parse JSON responses from a server? Configure the expected format of server responses to enable parsing and processing of remote data or API results, including setting the response type as JSON or XML to handle AJAX calls and dynamic data binding. Enables control over how incoming payloads are interpreted by specifying whether the data structure is JSON-based or XML-based, allowing for correct extraction and mapping of data fields from diverse server responses. Useful for adjusting data source parsing behavior, handling various content types, managing API response formats, and ensuring accurate reading of remote data sets in different serialization formats.
 </div>
 
 #### Example - use XML data
@@ -1709,7 +1709,7 @@ For more information and tips about client and server data operations, refer to 
 
 
 <div class="meta-api-description">
-Enable remote or server-side aggregation to delegate summary calculations like sum, average, count, min, max, and other group-level aggregates to the backend service or database instead of performing these computations on the client. This setting helps optimize data processing by offloading aggregate calculations to the server, reducing client CPU usage and improving performance when working with large datasets or paged data. Use this to control whether aggregates are computed remotely or locally, and set up the proper schema or query configuration to support server aggregation. Ideal for scenarios where you want centralized data summarization, scalable aggregation, cloud-enabled computations, or want to configure whether the client or server handles total, subtotal, and grouped aggregate results.
+How to enable server-side aggregation in Kendo UI for jQuery DataSource? Enable remote or server-side aggregation to delegate summary calculations like sum, average, count, min, max, and other group-level aggregates to the backend service or database instead of performing these computations on the client. This setting helps optimize data processing by offloading aggregate calculations to the server, reducing client CPU usage and improving performance when working with large datasets or paged data. Use this to control whether aggregates are computed remotely or locally, and set up the proper schema or query configuration to support server aggregation. Ideal for scenarios where you want centralized data summarization, scalable aggregation, cloud-enabled computations, or want to configure whether the client or server handles total, subtotal, and grouped aggregate results.
 </div>
 
 #### Example - enable server aggregates
@@ -1748,7 +1748,7 @@ For more information and tips about client and server data operations, refer to 
 
 
 <div class="meta-api-description">
-Control whether filtering is performed on the server by configuring remote data filtering, enabling server-side filtering instead of client-side processing, sending filter criteria in requests so that the backend applies them according to specified logic and operators; set filtering to true to delegate filter operations to the server, customize filter parameter formats via parameter mapping, handle complex filter expressions including nested conditions and multiple fields, and optimize data retrieval by offloading filter computations to the server side rather than the client.
+How to configure server-side filtering in Kendo UI DataSource? Control whether filtering is performed on the server by configuring remote data filtering, enabling server-side filtering instead of client-side processing, sending filter criteria in requests so that the backend applies them according to specified logic and operators; set filtering to true to delegate filter operations to the server, customize filter parameter formats via parameter mapping, handle complex filter expressions including nested conditions and multiple fields, and optimize data retrieval by offloading filter computations to the server side rather than the client.
 </div>
 
 #### Example - enable server filtering
@@ -1780,7 +1780,7 @@ For more information and tips about client and server data operations, refer to 
 
 
 <div class="meta-api-description">
-Configure remote data grouping by enabling server-side grouping to delegate grouping logic and criteria to a backend service, optimizing performance for large datasets or paged data. Control how group configurations are sent with requests, customize request parameter formats for grouping through mappings, and switch between server-managed grouping and default client-side grouping. Adjust request payloads to match backend expectations for grouped data retrieval, control grouping directions and fields in API calls, handle mixed scenarios with combined client and server operations, and optimize data loading strategies by offloading group sorting and aggregation to remote servers.
+How to implement server-side grouping in Kendo UI DataSource for large datasets? Configure remote data grouping by enabling server-side grouping to delegate grouping logic and criteria to a backend service, optimizing performance for large datasets or paged data. Control how group configurations are sent with requests, customize request parameter formats for grouping through mappings, and switch between server-managed grouping and default client-side grouping. Adjust request payloads to match backend expectations for grouped data retrieval, control grouping directions and fields in API calls, handle mixed scenarios with combined client and server operations, and optimize data loading strategies by offloading group sorting and aggregation to remote servers.
 </div>
 
 #### Example - enable server grouping
@@ -1818,7 +1818,7 @@ For a runnable example with enabled server paging, you can visit [the Grid remot
 
 
 <div class="meta-api-description">
-Enable remote or server-side pagination by configuring data fetching to delegate page calculation, page size, item skipping, and data slicing to the backend service instead of performing paging locally on the client. Control the number of items per page, current page number, and offsets such as skip and take parameters sent to the server, allowing precise control over remote data retrieval and avoiding client memory overload. Customize or map paging query parameters to fit backend API requirements, ensuring correct total data count is handled through schema configuration. Use terms like remote pagination, server paging, backend data slicing, skip and take logic, pageSize settings, parameter mapping, and data virtualization for optimized searches related to paged data loading, virtual scrolling, and efficient large dataset handling.
+How to configure remote pagination in Kendo UI for jQuery DataSource? Enable remote or server-side pagination by configuring data fetching to delegate page calculation, page size, item skipping, and data slicing to the backend service instead of performing paging locally on the client. Control the number of items per page, current page number, and offsets such as skip and take parameters sent to the server, allowing precise control over remote data retrieval and avoiding client memory overload. Customize or map paging query parameters to fit backend API requirements, ensuring correct total data count is handled through schema configuration. Use terms like remote pagination, server paging, backend data slicing, skip and take logic, pageSize settings, parameter mapping, and data virtualization for optimized searches related to paged data loading, virtual scrolling, and efficient large dataset handling.
 </div>
 
 #### Example - enable server paging
@@ -1868,7 +1868,7 @@ For more information and tips about client and server data operations, refer to 
 
 
 <div class="meta-api-description">
-Control whether sorting is performed on the server or client side by enabling remote sorting logic, configure data queries to delegate sorting of items to the backend service instead of local processing, set sorting preferences to allow server-driven order based on fields and directions such as ascending or descending, customize how sorting parameters are sent with requests using conventions like nested field and direction keys or alternative formats via parameter mapping, optimize data operations by deciding if the server handles sorting tasks to reduce client load or supports complex sorting scenarios, toggle between client and server sorting modes for efficient handling of large datasets or real-time backend order updates.
+How do I configure Kendo UI for jQuery to sort data on the server-side? Control whether sorting is performed on the server or client side by enabling remote sorting logic, configure data queries to delegate sorting of items to the backend service instead of local processing, set sorting preferences to allow server-driven order based on fields and directions such as ascending or descending, customize how sorting parameters are sent with requests using conventions like nested field and direction keys or alternative formats via parameter mapping, optimize data operations by deciding if the server handles sorting tasks to reduce client load or supports complex sorting scenarios, toggle between client and server sorting modes for efficient handling of large datasets or real-time backend order updates.
 </div>
 
 #### Example - enable server sorting
@@ -1891,7 +1891,7 @@ The sort order which will be applied over the data items. By default, the data i
 
 
 <div class="meta-api-description">
-Control how data items are ordered by configuring sorting criteria, specifying one or multiple fields to sort by, and setting ascending or descending directions to organize results. Enable or disable client-side sorting versus server-side sorting when applicable, customize sort descriptors to prioritize fields, and manage result arrangement based on different property values. This covers use cases such as applying multi-field sorting rules, adjusting sort order dynamically, and ensuring data is displayed in a preferred sequence through configurable sorting options.
+How to enable client-side sorting in Kendo UI DataSource? Control how data items are ordered by configuring sorting criteria, specifying one or multiple fields to sort by, and setting ascending or descending directions to organize results. Enable or disable client-side sorting versus server-side sorting when applicable, customize sort descriptors to prioritize fields, and manage result arrangement based on different property values. This covers use cases such as applying multi-field sorting rules, adjusting sort order dynamically, and ensuring data is displayed in a preferred sequence through configurable sorting options.
 </div>
 
 #### Example - sort the data items
@@ -1944,7 +1944,7 @@ The supported values are:
 
 
 <div class="meta-api-description">
-Configure or control the sorting direction for data queries, enabling ascending or descending order arrangements for data source results, datasets, or collections. Set, update, change, or apply sort direction to organize, filter, or display data in ascending (asc) or descending (desc) sequence, supporting sorting preferences, programmatic adjustments, or UI-driven order toggling to manage sorted outputs, results, or data views effectively.
+How do I set the sorting direction for my Kendo UI data source to ascending order? Configure or control the sorting direction for data queries, enabling ascending or descending order arrangements for data source results, datasets, or collections. Set, update, change, or apply sort direction to organize, filter, or display data in ascending (asc) or descending (desc) sequence, supporting sorting preferences, programmatic adjustments, or UI-driven order toggling to manage sorted outputs, results, or data views effectively.
 </div>
 
 #### Example - specify the sort order (direction)
@@ -1971,7 +1971,7 @@ The field by which the data items are sorted.
 
 
 <div class="meta-api-description">
-Control and configure the sorting behavior by selecting the specific data attribute, key, or property used to order items within a data collection, enabling sorting by fields such as names, dates, or custom record properties. Set, change, or define which field or data column governs the sort sequence to customize record ordering by any relevant data property or key, allowing for tailored ascending or descending arrangements based on user-defined fields, attributes, or identifiers in the dataset. Adjust and specify the sorting criteria by naming the data property that acts as the sort key, optimizing how records are prioritized or organized according to chosen data fields or values.
+How do I specify which field to sort by in a Kendo UI DataSource? Control and configure the sorting behavior by selecting the specific data attribute, key, or property used to order items within a data collection, enabling sorting by fields such as names, dates, or custom record properties. Set, change, or define which field or data column governs the sort sequence to customize record ordering by any relevant data property or key, allowing for tailored ascending or descending arrangements based on user-defined fields, attributes, or identifiers in the dataset. Adjust and specify the sorting criteria by naming the data property that acts as the sort key, optimizing how records are prioritized or organized according to chosen data fields or values.
 </div>
 
 #### Example - specify the sort field
@@ -1998,7 +1998,7 @@ Function which can be used for custom comparing of the DataSource items.
 
 
 <div class="meta-api-description">
-Customize the sorting behavior by defining a comparison function that determines the order of items based on your own criteria, enabling tailored sorting logic such as locale-sensitive ordering, nested property sorting, multi-field comparison, or complex rules for data initialization sequences. Control how data items are arranged by setting a function that receives two elements and returns a negative, zero, or positive number to dictate their relative ranking, allowing for flexible, precise sorting mechanisms beyond default alphabetical or numerical order and supporting advanced use cases like case-insensitive sorting, hierarchical data ordering, or custom value prioritization.
+How to customize sorting behavior in Kendo UI's DataSource widget? Customize the sorting behavior by defining a comparison function that determines the order of items based on your own criteria, enabling tailored sorting logic such as locale-sensitive ordering, nested property sorting, multi-field comparison, or complex rules for data initialization sequences. Control how data items are arranged by setting a function that receives two elements and returns a negative, zero, or positive number to dictate their relative ranking, allowing for flexible, precise sorting mechanisms beyond default alphabetical or numerical order and supporting advanced use cases like case-insensitive sorting, hierarchical data ordering, or custom value prioritization.
 </div>
 
 #### Example - use a custom compare function to compare items in the DataSource
@@ -2049,7 +2049,7 @@ Local data sources are bound to a JavaScript array via the [`data`](/api/javascr
 
 
 <div class="meta-api-description">
-Configure how data is loaded, saved, fetched, or updated by specifying remote endpoints, URLs, HTTP methods like GET, POST, PUT, DELETE, custom headers, and request parameters, or by implementing custom read, create, update, and delete logic for data transport. Control integration with RESTful services, AJAX calls, or any external data sources, enabling connectivity to remote servers or defining in-memory or local array sources. Adjust data retrieval, saving behaviors, syncing, and service connection settings, including how to set up requests, handle responses, and customize data flow between client and server endpoints in both synchronous and asynchronous ways.
+How to configure remote endpoints for data loading in Kendo UI DataSource transport? Configure how data is loaded, saved, fetched, or updated by specifying remote endpoints, URLs, HTTP methods like GET, POST, PUT, DELETE, custom headers, and request parameters, or by implementing custom read, create, update, and delete logic for data transport. Control integration with RESTful services, AJAX calls, or any external data sources, enabling connectivity to remote servers or defining in-memory or local array sources. Adjust data retrieval, saving behaviors, syncing, and service connection settings, including how to set up requests, handle responses, and customize data flow between client and server endpoints in both synchronous and asynchronous ways.
 </div>
 
 #### Example - specify the remote service configuration
@@ -2077,7 +2077,7 @@ The object can contain all the available [`jQuery.ajax`](https://api.jquery.com/
 
 
 <div class="meta-api-description">
-Configure and control how multiple create, read, update, and delete operations are combined and sent together as a single batch HTTP request when working with OData v4 services, enabling efficient bulk data modifications. Customize the batch request transport by setting options like URL endpoints, HTTP method types, data formats, content headers, authentication tokens, request timeouts, caching behavior, data serialization, and callbacks for handling success or error responses. Enable precise control over Ajax parameters and hooks to tailor batch processing, optimize network traffic, implement request retries, or modify headers before sending grouped CRUD actions in one network call for improved OData v4 batch data handling.
+How do I configure the batch transport for my Kendo UI DataSource to handle multiple CRUD operations as a single OData v4 request? Configure and control how multiple create, read, update, and delete operations are combined and sent together as a single batch HTTP request when working with OData v4 services, enabling efficient bulk data modifications. Customize the batch request transport by setting options like URL endpoints, HTTP method types, data formats, content headers, authentication tokens, request timeouts, caching behavior, data serialization, and callbacks for handling success or error responses. Enable precise control over Ajax parameters and hooks to tailor batch processing, optimize network traffic, implement request retries, or modify headers before sending grouped CRUD actions in one network call for improved OData v4 batch data handling.
 </div>
 
 #### Example
@@ -2123,7 +2123,7 @@ If set to a function, the data source will invoke it and use the result as the U
 
 
 <div class="meta-api-description">
-Set or configure the endpoint URL for sending batch requests using OData v4 services, control or customize the batch operation URL for grouped or combined data updates, enable dynamic or static batch request URLs including functional URL generation for batched CRUD operations, specify the OData v4 batch processing endpoint for efficient multiple request handling, support custom routing for batch API calls, adjust the batch transport URL to optimize bulk data submission or querying, manage batch transport URLs for OData v4 in batch request mode, and define or programmatically determine the URL target used when batching multiple OData requests together.
+How to configure the batch URL for OData v4 services in Kendo UI DataSource transport? Set or configure the endpoint URL for sending batch requests using OData v4 services, control or customize the batch operation URL for grouped or combined data updates, enable dynamic or static batch request URLs including functional URL generation for batched CRUD operations, specify the OData v4 batch processing endpoint for efficient multiple request handling, support custom routing for batch API calls, adjust the batch transport URL to optimize bulk data submission or querying, manage batch transport URLs for OData v4 in batch request mode, and define or programmatically determine the URL target used when batching multiple OData requests together.
 </div>
 
 #### Example
@@ -2166,7 +2166,7 @@ Specifies if the transport caches the result from `read` requests. The query par
 
 
 <div class="meta-api-description">
-Control caching behavior for client-side data retrieval to prevent repeated network calls by storing responses in memory based on request parameters; configure enabling or disabling of automatic in-memory cache for fetch or read operations to optimize performance, reduce duplicate server queries, and speed up data loading by reusing previous results until a page reload clears the cache.
+How do I prevent repeated network calls with Kendo UI's DataSource? Control caching behavior for client-side data retrieval to prevent repeated network calls by storing responses in memory based on request parameters; configure enabling or disabling of automatic in-memory cache for fetch or read operations to optimize performance, reduce duplicate server queries, and speed up data loading by reusing previous results until a page reload clears the cache.
 </div>
 
 #### Example - specify the remote service configuration
@@ -2215,7 +2215,7 @@ If the value of `transport.create` is a string, the data source uses this string
 
 
 <div class="meta-api-description">
-Configure how new data records are saved by setting up the mechanism for submitting newly added items, including specifying the endpoint URL for creating entries, customizing AJAX options for the create request, or providing a custom function to handle the creation process. This setup supports defining how new records are transmitted to remote services, enabling actions like adding new database entries through automated HTTP calls, fine-tuning request parameters, or implementing custom transport logic that replaces default AJAX behavior, ensuring consistent data submission and retrieval of the newly created items with their unique identifiers returned from the server. This is essential for controlling create operations in data synchronization workflows and requires uniform configuration style across all CRUD operations for coherent handling of data persistence.
+How to configure Kendo UI DataSource to submit new records using a specific endpoint URL? Configure how new data records are saved by setting up the mechanism for submitting newly added items, including specifying the endpoint URL for creating entries, customizing AJAX options for the create request, or providing a custom function to handle the creation process. This setup supports defining how new records are transmitted to remote services, enabling actions like adding new database entries through automated HTTP calls, fine-tuning request parameters, or implementing custom transport logic that replaces default AJAX behavior, ensuring consistent data submission and retrieval of the newly created items with their unique identifiers returned from the server. This is essential for controlling create operations in data synchronization workflows and requires uniform configuration style across all CRUD operations for coherent handling of data persistence.
 </div>
 
 #### Example - set the create remote service
@@ -2288,7 +2288,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control browser caching behavior for create request operations by configuring cache settings to disable or enable caching of HTTP HEAD and GET requests, preventing stale data transmission during resource creation or submission. Manage and customize how GET requests append unique timestamp parameters to avoid browser or intermediary caches from returning outdated responses, ensuring fresh data interactions when sending new resource requests. Adjust cache control for transport layers to support appropriate caching strategies, including disabling cache for JSONP requests by default and configuring AJAX request cache handling for create operations within data source workflows. Enable fine-tuned cache management for create actions to prevent unintended reuse of old data while facilitating efficient data exchange and synchronization in web applications.
+How do I prevent browser caching when creating data in Kendo UI's DataSource transport? Control browser caching behavior for create request operations by configuring cache settings to disable or enable caching of HTTP HEAD and GET requests, preventing stale data transmission during resource creation or submission. Manage and customize how GET requests append unique timestamp parameters to avoid browser or intermediary caches from returning outdated responses, ensuring fresh data interactions when sending new resource requests. Adjust cache control for transport layers to support appropriate caching strategies, including disabling cache for JSONP requests by default and configuring AJAX request cache handling for create operations within data source workflows. Enable fine-tuned cache management for create actions to prevent unintended reuse of old data while facilitating efficient data exchange and synchronization in web applications.
 </div>
 
 #### Example - enable request caching
@@ -2310,7 +2310,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
 
 
 <div class="meta-api-description">
-Set or customize the HTTP Content-Type header for create requests when sending data to a server, including options to specify JSON payloads with "application/json" or traditional form data with "application/x-www-form-urlencoded"; control the format of the create operation’s request body, adjust headers for API compatibility, configure content type to match server expectations, and manage how new records are posted in AJAX or RESTful interactions.
+How to set the content type for create requests in Kendo UI DataSource? Set or customize the HTTP Content-Type header for create requests when sending data to a server, including options to specify JSON payloads with "application/json" or traditional form data with "application/x-www-form-urlencoded"; control the format of the create operation’s request body, adjust headers for API compatibility, configure content type to match server expectations, and manage how new records are posted in AJAX or RESTful interactions.
 </div>
 
 #### Example - set a content type
@@ -2334,7 +2334,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Include extra custom fields, parameters, or name/value pairs to send alongside create requests when performing remote data creation operations; configure additional data payload for server-side handling, append custom parameters to the create transport call, control what supplementary information is posted during creation, integrate extra key-value pairs to pass alongside remote inserts, customize request body content for create actions without conflicting with reserved keywords such as sorting, filtering, paging, or grouping options commonly used in data operations.
+How to add custom fields to Kendo UI DataSource create request? Include extra custom fields, parameters, or name/value pairs to send alongside create requests when performing remote data creation operations; configure additional data payload for server-side handling, append custom parameters to the create transport call, control what supplementary information is posted during creation, integrate extra key-value pairs to pass alongside remote inserts, customize request body content for create actions without conflicting with reserved keywords such as sorting, filtering, paging, or grouping options commonly used in data operations.
 </div>
 
 #### Example - send additional parameters as an object
@@ -2379,7 +2379,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control and configure the expected response format or content type for create operations in data source transports, enabling proper parsing and handling of server responses when creating new records or resources. Set or specify common data formats like JSON, JSONP, or other jQuery.ajax supported types to ensure correct interpretation of server feedback during create requests. Enable customization of accepted return data types to handle asynchronous create calls, define how to process response payloads, and manage data serialization formats for create transport in data operations. Adjust or set the dataType for create requests to match server response formats, facilitating seamless integration and data exchange workflows.
+How to set the expected response format for create operations in Kendo UI DataSource transport? Control and configure the expected response format or content type for create operations in data source transports, enabling proper parsing and handling of server responses when creating new records or resources. Set or specify common data formats like JSON, JSONP, or other jQuery.ajax supported types to ensure correct interpretation of server feedback during create requests. Enable customization of accepted return data types to handle asynchronous create calls, define how to process response payloads, and manage data serialization formats for create transport in data operations. Adjust or set the dataType for create requests to match server response formats, facilitating seamless integration and data exchange workflows.
 </div>
 
 #### Example - set the data type to JSON
@@ -2405,7 +2405,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Set or configure the HTTP method used for create operations in data interactions with RESTful services, enabling you to specify request types such as POST, GET, PUT, or DELETE when sending new data to an endpoint; this option is essential for controlling how data is submitted during create actions, affects request behavior in AJAX calls, can be overridden or ignored in cases like JSONP which strictly uses GET, and is useful for managing API communications, altering HTTP verbs, customizing CRUD request methods, and ensuring proper server-side handling of create requests.
+What HTTP method should I use for creating new data with Kendo UI's DataSource transport? Set or configure the HTTP method used for create operations in data interactions with RESTful services, enabling you to specify request types such as POST, GET, PUT, or DELETE when sending new data to an endpoint; this option is essential for controlling how data is submitted during create actions, affects request behavior in AJAX calls, can be overridden or ignored in cases like JSONP which strictly uses GET, and is useful for managing API communications, altering HTTP verbs, customizing CRUD request methods, and ensuring proper server-side handling of create requests.
 </div>
 
 #### Example - set the HTTP verb of the request
@@ -2429,7 +2429,7 @@ If set to a function, the data source will invoke it and use the result as the U
 
 
 <div class="meta-api-description">
-Configure the target URL or endpoint for sending new record creation requests, enabling customization of where data is posted or submitted when adding entries. This setting supports specifying a fixed string URL or a dynamic function that returns a URL, allowing control over create operations' destination in data synchronization workflows, API integrations, and backend communication for inserting new items. Developers commonly seek ways to define, set, update, or customize the create request endpoint, control the destination URL for POST operations, handle dynamic URL generation for create calls, or direct the data insertion process to specific servers or services.
+How do I specify the URL for creating new records with Kendo UI DataSource transport? Configure the target URL or endpoint for sending new record creation requests, enabling customization of where data is posted or submitted when adding entries. This setting supports specifying a fixed string URL or a dynamic function that returns a URL, allowing control over create operations' destination in data synchronization workflows, API integrations, and backend communication for inserting new items. Developers commonly seek ways to define, set, update, or customize the create request endpoint, control the destination URL for POST operations, handle dynamic URL generation for create calls, or direct the data insertion process to specific servers or services.
 </div>
 
 #### Example - specify the URL as a string
@@ -2500,7 +2500,7 @@ If the value of `transport.destroy` is a string, the data source uses this strin
 
 
 <div class="meta-api-description">
-Configure delete request handling for data removal operations by specifying how to send HTTP DELETE or removal calls, including options to set custom URLs for delete endpoints, provide AJAX request parameters like headers or content type, supply callback functions to override default request behavior, and control whether to use functions, plain URL strings, or full AJAX configurations consistently with other CRUD operations to ensure uniform request handling and integration with client-server synchronization workflows.
+How do I configure delete request handling in Kendo UI DataSource? Configure delete request handling for data removal operations by specifying how to send HTTP DELETE or removal calls, including options to set custom URLs for delete endpoints, provide AJAX request parameters like headers or content type, supply callback functions to override default request behavior, and control whether to use functions, plain URL strings, or full AJAX configurations consistently with other CRUD operations to ensure uniform request handling and integration with client-server synchronization workflows.
 </div>
 
 #### Example - set the destroy remote service
@@ -2587,7 +2587,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control browser caching behavior for deletion or destroy HTTP requests by enabling or disabling cache prevention mechanisms, ensuring that destroy operations do not retrieve stale or cached responses; configure settings to append unique timestamps to GET requests or adjust transport options to avoid unwanted cache hits during resource removal or destruction calls, which is particularly relevant when managing HTTP HEAD or GET methods and handling cache invalidation strategies to maintain fresh server state and prevent interference from browser or proxy caches during delete operations.
+How to prevent browser caching during destroy operations in Kendo UI DataSource transport? Control browser caching behavior for deletion or destroy HTTP requests by enabling or disabling cache prevention mechanisms, ensuring that destroy operations do not retrieve stale or cached responses; configure settings to append unique timestamps to GET requests or adjust transport options to avoid unwanted cache hits during resource removal or destruction calls, which is particularly relevant when managing HTTP HEAD or GET methods and handling cache invalidation strategies to maintain fresh server state and prevent interference from browser or proxy caches during delete operations.
 </div>
 
 #### Example - enable request caching
@@ -2609,7 +2609,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
 
 
 <div class="meta-api-description">
-Set or customize the HTTP Content-Type header used when sending delete or destroy requests from a data source, specifying the format of the request payload such as JSON, form URL-encoded, or other MIME types; configure how the body of HTTP DELETE requests is encoded, enabling options like application/json or application/x-www-form-urlencoded to match server expectations, control request content-type headers during resource deletion, and adjust serialization formats for API compatibility and proper handling of destroy operations.
+How do I set the content type for delete requests in a Kendo UI DataSource? Set or customize the HTTP Content-Type header used when sending delete or destroy requests from a data source, specifying the format of the request payload such as JSON, form URL-encoded, or other MIME types; configure how the body of HTTP DELETE requests is encoded, enabling options like application/json or application/x-www-form-urlencoded to match server expectations, control request content-type headers during resource deletion, and adjust serialization formats for API compatibility and proper handling of destroy operations.
 </div>
 
 #### Example - set the content type
@@ -2633,7 +2633,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Configure extra custom parameters and key-value pairs sent with delete or destroy requests to remote servers, enabling you to add additional data during removal operations without conflicting with reserved server-side keywords like sorting, filtering, paging, or grouping; this setting helps control what information is included in AJAX calls for resource deletion, allowing developers to extend or customize the payload for server communication during data destruction actions.
+How do I pass custom data with delete requests to a remote server using Kendo UI DataSource transport? Configure extra custom parameters and key-value pairs sent with delete or destroy requests to remote servers, enabling you to add additional data during removal operations without conflicting with reserved server-side keywords like sorting, filtering, paging, or grouping; this setting helps control what information is included in AJAX calls for resource deletion, allowing developers to extend or customize the payload for server communication during data destruction actions.
 </div>
 
 #### Example - send additional parameters as an object
@@ -2678,7 +2678,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control the format of server responses when deleting data through AJAX by specifying the expected response type such as JSON, JSONP, or other supported data formats. Configure how the client processes or parses server replies after a delete operation, enabling proper handling of different content types returned by remote endpoints. This setting helps manage response parsing behavior during remote data removals, API calls for deleting records, and integration with back-end services that deliver various payload types like JSON or script. Adjust the response content type to ensure compatibility with asynchronous delete requests and AJAX transport mechanisms.
+How do I configure the Kendo UI DataSource to handle JSON responses when deleting data via AJAX? Control the format of server responses when deleting data through AJAX by specifying the expected response type such as JSON, JSONP, or other supported data formats. Configure how the client processes or parses server replies after a delete operation, enabling proper handling of different content types returned by remote endpoints. This setting helps manage response parsing behavior during remote data removals, API calls for deleting records, and integration with back-end services that deliver various payload types like JSON or script. Adjust the response content type to ensure compatibility with asynchronous delete requests and AJAX transport mechanisms.
 </div>
 
 #### Example - set the data type to JSON
@@ -2704,7 +2704,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Configure or set the HTTP request method used for delete, destroy, or removal operations sent to the server, controlling whether the request uses POST, GET, PUT, or DELETE verbs for data deletion calls. Adjust or specify the HTTP verb for server-side destroy actions, influencing how the data source issues delete commands, with defaults typically to GET unless overridden. This setting governs the method to trigger remove, erase, or destroy requests over HTTP while noting that JSONP data types will always enforce GET requests regardless of configuration. Customize or control the HTTP method for server-side deletion processes, managing transport-level request behavior for resource removal.
+How to configure the HTTP request method for delete operations in Kendo UI DataSource transport? Configure or set the HTTP request method used for delete, destroy, or removal operations sent to the server, controlling whether the request uses POST, GET, PUT, or DELETE verbs for data deletion calls. Adjust or specify the HTTP verb for server-side destroy actions, influencing how the data source issues delete commands, with defaults typically to GET unless overridden. This setting governs the method to trigger remove, erase, or destroy requests over HTTP while noting that JSONP data types will always enforce GET requests regardless of configuration. Customize or control the HTTP method for server-side deletion processes, managing transport-level request behavior for resource removal.
 </div>
 
 #### Example
@@ -2728,7 +2728,7 @@ If set to a function, the data source will invoke it and use the result as the U
 
 
 <div class="meta-api-description">
-Configure the URL or function for the endpoint that handles deletion requests, enabling control over where and how records are removed remotely; define, set, customize, or override the destroy request path or callback to specify the target API route for delete operations, supporting dynamic URL generation or static endpoint assignment for record destruction, delete actions, data removal, or resource cleanup in a remote data service.
+How to configure the delete endpoint for Kendo UI DataSource transport? Configure the URL or function for the endpoint that handles deletion requests, enabling control over where and how records are removed remotely; define, set, customize, or override the destroy request path or callback to specify the target API route for delete operations, supporting dynamic URL generation or static endpoint assignment for record destruction, delete actions, data removal, or resource cleanup in a remote data service.
 </div>
 
 #### Example - specify the URL as a string
@@ -2823,7 +2823,7 @@ transport: {
 
 
 <div class="meta-api-description">
-Customize, serialize, or transform outgoing request data into various formats like JSON strings, URL-encoded data, or custom payloads before sending to APIs by controlling how request parameters are encoded and mapped; handle serialization for create, read, update, and delete operations with options to convert, encode, or reshape parameters according to server requirements, enabling encoding strategies such as JSON.stringify, form data encoding, or custom structures, while ensuring compatibility with custom data functions and maintaining the original input, supporting use cases where developers need to adjust request payloads dynamically, configure parameter mapping logic, or implement specialized data formatting for remote data services.
+How to serialize request data in Kendo UI DataSource using parameterMap? Customize, serialize, or transform outgoing request data into various formats like JSON strings, URL-encoded data, or custom payloads before sending to APIs by controlling how request parameters are encoded and mapped; handle serialization for create, read, update, and delete operations with options to convert, encode, or reshape parameters according to server requirements, enabling encoding strategies such as JSON.stringify, form data encoding, or custom structures, while ensuring compatibility with custom data functions and maintaining the original input, supporting use cases where developers need to adjust request payloads dynamically, configure parameter mapping logic, or implement specialized data formatting for remote data services.
 </div>
 
 #### Parameters
@@ -2944,7 +2944,7 @@ The function invoked during transport initialization which sets up push notifica
 
 
 <div class="meta-api-description">
-Configure real-time data updates by enabling server push connections such as WebSocket, Server-Sent Events, or SignalR within your data handling layer, allowing automatic subscription to live data feeds, registering event handlers, sending acknowledgments, and streaming pushed messages directly into your data set; set up and control a single initialization function to manage persistent connection channels for instant synchronization, live updates, push notifications, and reactive data flow without polling or manual refresh.
+How do I enable real-time data updates with WebSocket in Kendo UI DataSource? Configure real-time data updates by enabling server push connections such as WebSocket, Server-Sent Events, or SignalR within your data handling layer, allowing automatic subscription to live data feeds, registering event handlers, sending acknowledgments, and streaming pushed messages directly into your data set; set up and control a single initialization function to manage persistent connection channels for instant synchronization, live updates, push notifications, and reactive data flow without polling or manual refresh.
 </div>
 
 #### Parameters
@@ -3049,7 +3049,7 @@ If the value of `transport.read` is a string, the data source uses this string a
 
 
 <div class="meta-api-description">
-Configure loading data from remote HTTP endpoints by specifying request parameters, URLs, or custom functions to control how data items are fetched, using jQuery.ajax options for HTTP requests except overriding success and error callbacks. This setup supports passing detailed ajax settings, providing URLs as strings for REST calls, or utilizing custom read functions for advanced asynchronous operations. Ensure consistent use of either functions or objects/strings across all transport actions like read, create, update, or delete to maintain uniform request configurations when fetching data from APIs, web services, or remote servers.
+How to configure read transport in Kendo UI DataSource? Configure loading data from remote HTTP endpoints by specifying request parameters, URLs, or custom functions to control how data items are fetched, using jQuery.ajax options for HTTP requests except overriding success and error callbacks. This setup supports passing detailed ajax settings, providing URLs as strings for REST calls, or utilizing custom read functions for advanced asynchronous operations. Ensure consistent use of either functions or objects/strings across all transport actions like read, create, update, or delete to maintain uniform request configurations when fetching data from APIs, web services, or remote servers.
 </div>
 
 #### Example - set the read remote service
@@ -3123,7 +3123,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control the prevention of browser caching for data retrieval requests by disabling cache, ensuring that GET and HEAD requests bypass stored responses by automatically appending unique timestamp parameters to URLs to force fresh data loading. This setting affects how read operations manage cache behavior, enabling developers to configure cache busting for AJAX calls, HTTP fetches, or JSONP requests, and is useful for scenarios requiring up-to-date data, avoiding stale responses, or managing cache headers and query string modifications to ensure real-time information retrieval during client-server interactions.
+How to prevent browser caching in Kendo UI DataSource read operations? Control the prevention of browser caching for data retrieval requests by disabling cache, ensuring that GET and HEAD requests bypass stored responses by automatically appending unique timestamp parameters to URLs to force fresh data loading. This setting affects how read operations manage cache behavior, enabling developers to configure cache busting for AJAX calls, HTTP fetches, or JSONP requests, and is useful for scenarios requiring up-to-date data, avoiding stale responses, or managing cache headers and query string modifications to ensure real-time information retrieval during client-server interactions.
 </div>
 
 #### Example - enable request caching
@@ -3145,7 +3145,7 @@ The content-type HTTP header sent to the server. The default is `"application/x-
 
 
 <div class="meta-api-description">
-Set, configure, or specify the HTTP Content-Type header for read operations when fetching data from a server, including options to send JSON payloads, form-encoded data, or custom content types; control request headers for AJAX calls, REST API reads, and web service interactions by adjusting how the data payload is encoded or formatted, enabling compatibility with various backend endpoints and data serialization formats, useful for managing content negotiation, ensuring proper server parsing, and customizing request headers in data retrieval scenarios.
+How do I set the content type for read operations in Kendo UI's DataSource? Set, configure, or specify the HTTP Content-Type header for read operations when fetching data from a server, including options to send JSON payloads, form-encoded data, or custom content types; control request headers for AJAX calls, REST API reads, and web service interactions by adjusting how the data payload is encoded or formatted, enabling compatibility with various backend endpoints and data serialization formats, useful for managing content negotiation, ensuring proper server parsing, and customizing request headers in data retrieval scenarios.
 </div>
 
 #### Example - set content type
@@ -3169,7 +3169,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Configure additional parameters or custom data to send along with remote data fetch requests, including static values or dynamically generated fields such as authentication tokens, search queries, filters, or custom flags for each read operation in the data transport layer. Enable passing extra query parameters or payload data to remote services, customize request payloads without interfering with default sorting, filtering, paging, or grouping keywords, control how additional request details are sent during data retrieval, and dynamically inject or attach metadata, filters, or operational parameters to enhance or tailor server-side data queries in asynchronous read operations.
+How to add custom data to Kendo UI DataSource read requests? Configure additional parameters or custom data to send along with remote data fetch requests, including static values or dynamically generated fields such as authentication tokens, search queries, filters, or custom flags for each read operation in the data transport layer. Enable passing extra query parameters or payload data to remote services, customize request payloads without interfering with default sorting, filtering, paging, or grouping keywords, control how additional request details are sent during data retrieval, and dynamically inject or attach metadata, filters, or operational parameters to enhance or tailor server-side data queries in asynchronous read operations.
 </div>
 
 #### Example - send additional parameters as an object
@@ -3218,7 +3218,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Configure or specify the expected format of server responses during data retrieval or AJAX read operations, including common types like JSON or JSONP, to control how the client parses, handles, and processes incoming data payloads from remote endpoints; set or adjust the response data format to match server output and ensure proper deserialization when loading, fetching, or requesting data asynchronously, enabling compatibility with various data interchange formats and tailoring response parsing behavior for seamless integration with RESTful services, APIs, or remote data sources.
+What is the dataType property in Kendo UI DataSource used for? Configure or specify the expected format of server responses during data retrieval or AJAX read operations, including common types like JSON or JSONP, to control how the client parses, handles, and processes incoming data payloads from remote endpoints; set or adjust the response data format to match server output and ensure proper deserialization when loading, fetching, or requesting data asynchronously, enabling compatibility with various data interchange formats and tailoring response parsing behavior for seamless integration with RESTful services, APIs, or remote data sources.
 </div>
 
 #### Example - set the data type to JSON
@@ -3244,7 +3244,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Configure or specify the HTTP method for fetching or synchronizing data, including options like GET, POST, PUT, or DELETE, to control how read operations communicate with the server; this setting determines the request verb used during data loading, allows overriding default GET behavior, and is essential for RESTful integration or API interaction, while noting that JSONP requests always use GET regardless of the configured method.
+How do I configure the HTTP method for reading data from a server with Kendo UI DataSource? Configure or specify the HTTP method for fetching or synchronizing data, including options like GET, POST, PUT, or DELETE, to control how read operations communicate with the server; this setting determines the request verb used during data loading, allows overriding default GET behavior, and is essential for RESTful integration or API interaction, while noting that JSONP requests always use GET regardless of the configured method.
 </div>
 
 #### Example - set the HTTP verb of the request
@@ -3268,7 +3268,7 @@ If set to a function, the data source will invoke it and use the result as the U
 
 
 <div class="meta-api-description">
-Configure or set the endpoint URL for retrieving data remotely by specifying a static URL string or dynamically generating the URL with a function at request time, enabling flexible control over where read operations fetch data from, supporting scenarios like API integration, dynamic query construction, and conditional request routing.
+How do I configure the URL for reading data remotely in a Kendo UI DataSource? Configure or set the endpoint URL for retrieving data remotely by specifying a static URL string or dynamically generating the URL with a function at request time, enabling flexible control over where read operations fetch data from, supporting scenarios like API integration, dynamic query construction, and conditional request routing.
 </div>
 
 #### Example - specify URL as a string
@@ -3315,7 +3315,7 @@ It is recommended to get familiar with the SignalR [JavaScript API](https://www.
 
 
 <div class="meta-api-description">
-Configure real-time data synchronization by connecting your data source to a SignalR hub, enabling live updates through SignalR transport with options to set up the connection promise, map server-side method invocations, define client-side callbacks, and handle push notifications or live binding scenarios. This setup supports scenarios like enabling live data feeds, real-time event handling, instant data refreshes, seamless server-to-client communication, and integrating SignalR for asynchronous update delivery in web applications. Users often look to control, enable, or customize SignalR connections for dynamic, live data streaming, event-driven APIs, and interactive UI components requiring up-to-date information without polling.
+How to configure SignalR transport in Kendo UI DataSource for real-time data updates? Configure real-time data synchronization by connecting your data source to a SignalR hub, enabling live updates through SignalR transport with options to set up the connection promise, map server-side method invocations, define client-side callbacks, and handle push notifications or live binding scenarios. This setup supports scenarios like enabling live data feeds, real-time event handling, instant data refreshes, seamless server-to-client communication, and integrating SignalR for asynchronous update delivery in web applications. Users often look to control, enable, or customize SignalR connections for dynamic, live data streaming, event-driven APIs, and interactive UI components requiring up-to-date information without polling.
 </div>
 
 #### Example
@@ -3386,7 +3386,7 @@ Specifies the client-side CRUD methods of the SignalR hub.
 
 
 <div class="meta-api-description">
-Configure and control real-time synchronization for create, read, update, and delete operations by defining client-side SignalR hub method handlers that respond to server push events, enabling live data updates and instant CRUD data binding. Map SignalR hub callbacks to functions or handlers that automatically trigger data source updates upon server-initiated messages, supporting push-based live data management, event-driven data refresh, and seamless integration of server-sent events for interactive, real-time applications. This setup allows enabling, setting, or customizing real-time data flow, reactive updates, and CRUD operation handlers tied directly to SignalR hub client methods.
+How to configure SignalR client method handlers for real-time data updates in Kendo UI DataSource? Configure and control real-time synchronization for create, read, update, and delete operations by defining client-side SignalR hub method handlers that respond to server push events, enabling live data updates and instant CRUD data binding. Map SignalR hub callbacks to functions or handlers that automatically trigger data source updates upon server-initiated messages, supporting push-based live data management, event-driven data refresh, and seamless integration of server-sent events for interactive, real-time applications. This setup allows enabling, setting, or customizing real-time data flow, reactive updates, and CRUD operation handlers tied directly to SignalR hub client methods.
 </div>
 
 #### Example
@@ -3426,7 +3426,7 @@ Specifies the name of the client-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure real-time data creation by setting the client-side SignalR hub method name responsible for adding new records, enabling instant communication and synchronization when inserting data items through the transport layer. This setup lets applications invoke, call, or bind create operations dynamically over SignalR connections, supporting use cases like live updates, push-based record creation, and seamless integration of client-server messaging for new data entries, ensuring efficient real-time interaction and data flow with customizable hub method names.
+How to configure SignalR for creating new records in a Kendo UI DataSource? Configure real-time data creation by setting the client-side SignalR hub method name responsible for adding new records, enabling instant communication and synchronization when inserting data items through the transport layer. This setup lets applications invoke, call, or bind create operations dynamically over SignalR connections, supporting use cases like live updates, push-based record creation, and seamless integration of client-server messaging for new data entries, ensuring efficient real-time interaction and data flow with customizable hub method names.
 </div>
 
 #### Example
@@ -3465,7 +3465,7 @@ Specifies the name of the client-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure real-time deletion by setting the client-side SignalR hub method for removing or destroying data items within the data source, enabling synchronization of delete or remove actions instantly across connected clients, mapping client operations to server-side SignalR methods for live data removal, specifying how delete commands trigger SignalR hub calls during transport, and controlling dynamic data updates by linking remove or destroy actions to real-time SignalR messaging for seamless record deletion.
+How to configure SignalR data removal in Kendo UI DataSource transport? Configure real-time deletion by setting the client-side SignalR hub method for removing or destroying data items within the data source, enabling synchronization of delete or remove actions instantly across connected clients, mapping client operations to server-side SignalR methods for live data removal, specifying how delete commands trigger SignalR hub calls during transport, and controlling dynamic data updates by linking remove or destroy actions to real-time SignalR messaging for seamless record deletion.
 </div>
 
 #### Example
@@ -3504,7 +3504,7 @@ Specifies the name of the client-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure or set the client-side SignalR hub method name used for retrieving data items, specifying the exact client method the data source calls to fetch or read data from the SignalR connection; control which hub function the real-time data source invokes to receive data streams or messages, ensuring the method signature matches the expected parameters for seamless data retrieval via SignalR transport, useful during initialization to enable live updates, data syncing, or streaming data from server to client applications.
+What is the client-side SignalR hub method I should use for reading data with a Kendo UI DataSource transport? Configure or set the client-side SignalR hub method name used for retrieving data items, specifying the exact client method the data source calls to fetch or read data from the SignalR connection; control which hub function the real-time data source invokes to receive data streams or messages, ensuring the method signature matches the expected parameters for seamless data retrieval via SignalR transport, useful during initialization to enable live updates, data syncing, or streaming data from server to client applications.
 </div>
 
 #### Example
@@ -3543,7 +3543,7 @@ Specifies the name of the client-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure real-time data synchronization by specifying the client-side method name for handling live update messages via SignalR, enabling seamless data item changes pushed from the server to the client, ensuring the method name and signature align between client and server to receive and process update events correctly, supporting scenarios like dynamic data refresh, push updates, live synchronization, and reactive data binding within applications using SignalR transport mechanisms.
+What is the client-side method name for handling live update messages via SignalR in Kendo UI for jQuery DataSource? Configure real-time data synchronization by specifying the client-side method name for handling live update messages via SignalR, enabling seamless data item changes pushed from the server to the client, ensuring the method name and signature align between client and server to receive and process update events correctly, supporting scenarios like dynamic data refresh, push updates, live synchronization, and reactive data binding within applications using SignalR transport mechanisms.
 </div>
 
 #### Example
@@ -3582,7 +3582,7 @@ The SignalR hub object returned by the `createHubProxy` method (or `signalR.HubC
 
 
 <div class="meta-api-description">
-Configure real-time data synchronization and live updates by connecting to a SignalR hub instance or proxy object, enabling server push notifications and continuous data refresh. Enable or set the hub connection for receiving immediate data changes, live event streaming, and instant server-client communication using classic SignalR proxies or ASP.NET Core SignalR HubConnection objects. Use this to control live data feeds, push-based updates, instant synchronization, and real-time event handling for dynamic data loading scenarios. Establish persistent SignalR connections to stream data changes automatically from the server to the client without polling, supporting live dashboards, interactive applications, and instant user notifications.
+How do I connect to a SignalR hub using Kendo UI for jQuery's DataSource transport? Configure real-time data synchronization and live updates by connecting to a SignalR hub instance or proxy object, enabling server push notifications and continuous data refresh. Enable or set the hub connection for receiving immediate data changes, live event streaming, and instant server-client communication using classic SignalR proxies or ASP.NET Core SignalR HubConnection objects. Use this to control live data feeds, push-based updates, instant synchronization, and real-time event handling for dynamic data loading scenarios. Establish persistent SignalR connections to stream data changes automatically from the server to the client without polling, supporting live dashboards, interactive applications, and instant user notifications.
 </div>
 
 #### Example
@@ -3616,7 +3616,7 @@ The promise returned by the `start` method of the SignalR connection. The `promi
 
 
 <div class="meta-api-description">
-Configure the asynchronous start or initialization of a real-time communication link by supplying the promise or deferred object returned when establishing a SignalR connection, ensuring that data loading, synchronization, remote data operations, and real-time updates are delayed until the connection is fully established and ready. Enable control over the timing and coordination of data binding and interaction with real-time hubs by setting or providing the connection startup's promise or completion token, allowing applications to await successful connection before proceeding with data queries, updates, or message handling. This mechanism supports scenarios where developers need to guarantee that the underlying SignalR connection is active and stable before triggering any subsequent data source actions or synchronization workflows.
+How to delay Kendo UI data loading until SignalR connection is established? Configure the asynchronous start or initialization of a real-time communication link by supplying the promise or deferred object returned when establishing a SignalR connection, ensuring that data loading, synchronization, remote data operations, and real-time updates are delayed until the connection is fully established and ready. Enable control over the timing and coordination of data binding and interaction with real-time hubs by setting or providing the connection startup's promise or completion token, allowing applications to await successful connection before proceeding with data queries, updates, or message handling. This mechanism supports scenarios where developers need to guarantee that the underlying SignalR connection is active and stable before triggering any subsequent data source actions or synchronization workflows.
 </div>
 
 #### Example
@@ -3656,7 +3656,7 @@ Specifies the server-side CRUD methods of the SignalR hub.
 
 
 <div class="meta-api-description">
-Configure real-time data synchronization and live updates by linking server-side SignalR hub methods with CRUD operations such as create, read, update, and delete, enabling seamless mapping of backend hub method names to frontend data actions for dynamic data handling, binding SignalR server methods to enable automatic data refresh, setting up method mappings for efficient data manipulation over SignalR connections, controlling how client operations invoke server hub functions for synchronizing data changes, and integrating server-driven event handling with data transport workflows for responsive applications using SignalR hubs.
+How do I map SignalR server methods to CRUD operations in Kendo UI DataSource? Configure real-time data synchronization and live updates by linking server-side SignalR hub methods with CRUD operations such as create, read, update, and delete, enabling seamless mapping of backend hub method names to frontend data actions for dynamic data handling, binding SignalR server methods to enable automatic data refresh, setting up method mappings for efficient data manipulation over SignalR connections, controlling how client operations invoke server hub functions for synchronizing data changes, and integrating server-driven event handling with data transport workflows for responsive applications using SignalR hubs.
 </div>
 
 #### Example
@@ -3696,7 +3696,7 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure the setting to specify or customize the server-side hub method name used for creating new data entries via SignalR in data transport operations, enabling control over how create actions in CRUD workflows are invoked remotely, supporting patterns like setting the method to call for adding or inserting items through real-time SignalR connections, specifying the exact server endpoint for create commands, managing the invocation name for creating records over SignalR, and tailoring the hub method used during create requests in live data synchronization scenarios.
+How do I specify the SignalR server method for creating new data entries in Kendo UI DataSource transport operations? Configure the setting to specify or customize the server-side hub method name used for creating new data entries via SignalR in data transport operations, enabling control over how create actions in CRUD workflows are invoked remotely, supporting patterns like setting the method to call for adding or inserting items through real-time SignalR connections, specifying the exact server endpoint for create commands, managing the invocation name for creating records over SignalR, and tailoring the hub method used during create requests in live data synchronization scenarios.
 </div>
 
 #### Example
@@ -3733,7 +3733,7 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure or specify the server-side SignalR hub method name responsible for handling delete or remove operations on data, enabling real-time remote deletion through SignalR transport integration; use this setting to control how and which server method is invoked for CRUD destroy actions, ensuring that remote data removal is properly triggered and synchronized, supporting scenarios where you need to set, enable, or customize the server delete handler method within real-time hub communication for efficient data source removals.
+How to specify server-side method for delete operations in Kendo UI DataSource with SignalR transport? Configure or specify the server-side SignalR hub method name responsible for handling delete or remove operations on data, enabling real-time remote deletion through SignalR transport integration; use this setting to control how and which server method is invoked for CRUD destroy actions, ensuring that remote data removal is properly triggered and synchronized, supporting scenarios where you need to set, enable, or customize the server delete handler method within real-time hub communication for efficient data source removals.
 </div>
 
 #### Example
@@ -3773,7 +3773,7 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Specify or configure the server-side SignalR hub method name used to read, load, fetch, or retrieve data items remotely through real-time communication; set, control, or enable the exact hub function or server method invocation for data binding, loading, or querying from the server to the client, supporting scenarios where the data source calls a specific SignalR method to pull or synchronize data dynamically via the hub connection.
+How do I specify the SignalR hub method to use for reading data in a Kendo UI DataSource? Specify or configure the server-side SignalR hub method name used to read, load, fetch, or retrieve data items remotely through real-time communication; set, control, or enable the exact hub function or server method invocation for data binding, loading, or querying from the server to the client, supporting scenarios where the data source calls a specific SignalR method to pull or synchronize data dynamically via the hub connection.
 </div>
 
 #### Example
@@ -3810,7 +3810,7 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 
 <div class="meta-api-description">
-Configure or set the server-side SignalR hub method name responsible for updating data items, enabling real-time data synchronization and updates via SignalR transport. Developers can specify or control which hub function handles update operations, allowing push or live update mechanisms between client and server. This setting connects the data source's update actions with the appropriate SignalR method, supporting custom hub method names, real-time data changes, and seamless data updates over WebSocket or SignalR connections. It covers scenarios involving live data editing, server communication, and reactive data transport where controlling the update procedural binding to the SignalR hub is needed.
+How do I configure Kendo UI DataSource to use SignalR for real-time data updates? Configure or set the server-side SignalR hub method name responsible for updating data items, enabling real-time data synchronization and updates via SignalR transport. Developers can specify or control which hub function handles update operations, allowing push or live update mechanisms between client and server. This setting connects the data source's update actions with the appropriate SignalR method, supporting custom hub method names, real-time data changes, and seamless data updates over WebSocket or SignalR connections. It covers scenarios involving live data editing, server communication, and reactive data transport where controlling the update procedural binding to the SignalR hub is needed.
 </div>
 
 #### Example
@@ -3904,7 +3904,7 @@ The `transport.create`, `transport.update`, and `transport.delete` operations wi
 
 
 <div class="meta-api-description">
-Control how create, update, and delete actions are aggregated and sent together in one batch request when using custom data fetching, enabling bulk saving, combined CRUD operations, and customized synchronization logic by implementing a single handler function that processes changed data models, merges modifications, handles server responses, and overrides default atomic create/update/delete calls to efficiently manage data transactions in batch mode with flexible batch processing, batch syncing, and unified update submission workflows.
+How do I aggregate create, update, and delete actions in a batch request using Kendo UI's DataSource transport submit? Control how create, update, and delete actions are aggregated and sent together in one batch request when using custom data fetching, enabling bulk saving, combined CRUD operations, and customized synchronization logic by implementing a single handler function that processes changed data models, merges modifications, handles server responses, and overrides default atomic create/update/delete calls to efficiently manage data transactions in batch mode with flexible batch processing, batch syncing, and unified update submission workflows.
 </div>
 
 #### Parameters
@@ -3990,7 +3990,7 @@ If the value of `transport.update` is a string, the data source uses this string
 
 
 <div class="meta-api-description">
-Configure or customize how updated data records are sent to remote services via HTTP update requests, controlling AJAX parameters such as URL endpoints, HTTP methods, headers, content types, request payloads, and data formats for saving changes; options include specifying the update request as a function for full custom request handling or as a URL string for default calls, ensuring consistency with other CRUD operation configurations and enabling precise control over remote update behaviors, headers, and request timing while integrating with common AJAX setups for server synchronization and data persistence.
+How to configure update requests for Kendo UI DataSource? Configure or customize how updated data records are sent to remote services via HTTP update requests, controlling AJAX parameters such as URL endpoints, HTTP methods, headers, content types, request payloads, and data formats for saving changes; options include specifying the update request as a function for full custom request handling or as a URL string for default calls, ensuring consistency with other CRUD operation configurations and enabling precise control over remote update behaviors, headers, and request timing while integrating with common AJAX setups for server synchronization and data persistence.
 </div>
 
 #### Example - specify update as a string
@@ -4062,7 +4062,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control preventing browser caching for update requests in data operations by disabling cache, ensuring fresh data on each update call by appending unique timestamps or cache-busters to GET and HEAD request URLs. Manage how update data transports handle caching behavior, including enabling or turning off automatic cache prevention for network fetches, overcoming default cache policies, and avoiding stale data responses during asynchronous data updates. Configure cache settings for update HTTP requests to force server round-trips and avoid client-side caching interference, applicable especially to GET, HEAD, and JSONP types, ensuring real-time data consistency during update operations.
+How do I prevent browser caching for update requests in Kendo UI Data Source? Control preventing browser caching for update requests in data operations by disabling cache, ensuring fresh data on each update call by appending unique timestamps or cache-busters to GET and HEAD request URLs. Manage how update data transports handle caching behavior, including enabling or turning off automatic cache prevention for network fetches, overcoming default cache policies, and avoiding stale data responses during asynchronous data updates. Configure cache settings for update HTTP requests to force server round-trips and avoid client-side caching interference, applicable especially to GET, HEAD, and JSONP types, ensuring real-time data consistency during update operations.
 </div>
 
 #### Example - enable request caching
@@ -4085,7 +4085,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Set or configure the HTTP Content-Type header for update operations to control how the request payload is formatted or encoded, including options like JSON format or form URL encoding, specifying MIME types such as application/json or application/x-www-form-urlencoded, adjusting header content type for AJAX update requests, defining payload encoding methods for server communication during data updates, and managing how data is sent over HTTP for effective content negotiation and correct parsing on the server side.
+How do I set the content type for update operations in Kendo UI DataSource? Set or configure the HTTP Content-Type header for update operations to control how the request payload is formatted or encoded, including options like JSON format or form URL encoding, specifying MIME types such as application/json or application/x-www-form-urlencoded, adjusting header content type for AJAX update requests, defining payload encoding methods for server communication during data updates, and managing how data is sent over HTTP for effective content negotiation and correct parsing on the server side.
 </div>
 
 #### Example - set content type
@@ -4109,7 +4109,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Include additional custom parameters, fields, metadata, or contextual information such as authentication tokens, form values, or extra data when sending update requests to a remote server; control which auxiliary data is transmitted alongside update operations without interfering with reserved system keywords used for sorting, paging, filtering, or grouping, enabling flexible configuration of request payloads to enhance server-side processing and authorization during data synchronization or CRUD operations.
+How to include extra data in Kendo UI DataSource update request? Include additional custom parameters, fields, metadata, or contextual information such as authentication tokens, form values, or extra data when sending update requests to a remote server; control which auxiliary data is transmitted alongside update operations without interfering with reserved system keywords used for sorting, paging, filtering, or grouping, enabling flexible configuration of request payloads to enhance server-side processing and authorization during data synchronization or CRUD operations.
 </div>
 
 #### Example - send additional parameters as an object
@@ -4154,7 +4154,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Control the expected response format or data type for server update operations, specifying how update requests handle and interpret returned data such as JSON, JSONP, XML, or other content types, enabling configuration of transport protocols, response parsing, and integration with asynchronous calls or AJAX settings to manage server responses during data updates.
+What is the expected response format for server update operations in Kendo UI DataSource? Control the expected response format or data type for server update operations, specifying how update requests handle and interpret returned data such as JSON, JSONP, XML, or other content types, enabling configuration of transport protocols, response parsing, and integration with asynchronous calls or AJAX settings to manage server responses during data updates.
 </div>
 
 #### Example - set the data type to JSON
@@ -4180,7 +4180,7 @@ Refer to the [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) documentation f
 
 
 <div class="meta-api-description">
-Configure the HTTP method or verb used when sending update requests to the server, enabling control over whether updates are sent as POST, GET, PUT, or DELETE operations, which affects how the server interprets and processes changes; common use cases include choosing POST for creating or modifying resources, PUT for idempotent updates, or DELETE for removals, while GET is typically avoided for updates but may be used when necessary; the method selection can be customized or overridden depending on AJAX settings, JSONP limitations that enforce GET, or specific API requirements, allowing developers to set, customize, or control the HTTP request type for data synchronization, server communication, and RESTful interactions in client-server data exchange scenarios.
+What HTTP method should I use for updating data in Kendo UI's DataSource? Configure the HTTP method or verb used when sending update requests to the server, enabling control over whether updates are sent as POST, GET, PUT, or DELETE operations, which affects how the server interprets and processes changes; common use cases include choosing POST for creating or modifying resources, PUT for idempotent updates, or DELETE for removals, while GET is typically avoided for updates but may be used when necessary; the method selection can be customized or overridden depending on AJAX settings, JSONP limitations that enforce GET, or specific API requirements, allowing developers to set, customize, or control the HTTP request type for data synchronization, server communication, and RESTful interactions in client-server data exchange scenarios.
 </div>
 
 #### Example - set the HTTP verb of the request
@@ -4203,7 +4203,7 @@ If set to a function, the data source will invoke it and use the result as the U
 
 
 <div class="meta-api-description">
-Configure the endpoint URL for updating data records, enabling specification of a static address or dynamic function-generated URL where update requests are sent, allowing customization of request targets, controlling how and where update operations connect, supporting both fixed and programmatically determined update service paths for flexible API integration, managing data modification URLs, and dynamically setting or overriding update destinations during data source operations.
+How to configure the update URL for Kendo UI DataSource? Configure the endpoint URL for updating data records, enabling specification of a static address or dynamic function-generated URL where update requests are sent, allowing customization of request targets, controlling how and where update operations connect, supporting both fixed and programmatically determined update service paths for flexible API integration, managing data modification URLs, and dynamically setting or overriding update destinations during data source operations.
 </div>
 
 #### Example - specify URL as a string
@@ -4271,7 +4271,7 @@ odata version 4
 
 
 <div class="meta-api-description">
-Configure or select the communication protocol for connecting and transferring data with the data source, enabling predefined setups for OData version 2 or version 4, as well as real-time data synchronization through SignalR; this setting controls the underlying transport mechanism and data schema format, facilitating integration scenarios like RESTful OData queries, partial OData v4 support, or live updates using SignalR, and is key for developers wanting to set, enable, or switch between these standard protocols to ensure proper data exchange and schema compatibility across web services or real-time applications.
+What is the purpose of setting the type property in a Kendo UI DataSource? Configure or select the communication protocol for connecting and transferring data with the data source, enabling predefined setups for OData version 2 or version 4, as well as real-time data synchronization through SignalR; this setting controls the underlying transport mechanism and data schema format, facilitating integration scenarios like RESTful OData queries, partial OData v4 support, or live updates using SignalR, and is key for developers wanting to set, enable, or switch between these standard protocols to ensure proper data exchange and schema compatibility across web services or real-time applications.
 </div>
 
 #### Example - enable OData support
@@ -4299,7 +4299,7 @@ Appends a data item to the data source.
 
 
 <div class="meta-api-description">
-Insert or append a new record, data item, or entry into a data collection or dataset at runtime by adding plain objects, JSON records, or existing model instances to the end of an in-memory array or data source dynamically; configure, enable, or trigger data addition to update UI components, lists, grids, or tables with fresh content, supporting use cases for runtime data injection, incremental loading, or live updates without replacing the entire dataset.
+How do I dynamically add new records to my Kendo UI data source? Insert or append a new record, data item, or entry into a data collection or dataset at runtime by adding plain objects, JSON records, or existing model instances to the end of an in-memory array or data source dynamically; configure, enable, or trigger data addition to update UI components, lists, grids, or tables with fresh content, supporting use cases for runtime data injection, incremental loading, or live updates without replacing the entire dataset.
 </div>
 
 #### Parameters
@@ -4363,7 +4363,7 @@ Gets or sets the aggregate configuration.
 
 
 <div class="meta-api-description">
-Set, change, or retrieve summary computations such as sum, average, count, or other aggregate functions on specific data fields within a data source, enabling configuration of how data is grouped, summarized, or rolled up; access existing summary settings or define new aggregation rules by specifying summary types for columns to control data aggregation output and computations dynamically.
+How do I calculate summary statistics on specific columns in my Kendo UI DataSource? Set, change, or retrieve summary computations such as sum, average, count, or other aggregate functions on specific data fields within a data source, enabling configuration of how data is grouped, summarized, or rolled up; access existing summary settings or define new aggregation rules by specifying summary types for columns to control data aggregation output and computations dynamically.
 </div>
 
 #### Parameters
@@ -4421,7 +4421,7 @@ Returns the aggregate results.
 
 
 <div class="meta-api-description">
-Retrieve or access summary statistics such as sums, counts, minimums, maximums, averages, or other aggregate calculations derived from your data set whether filtered or sorted. Obtain real-time computed aggregate results, including those calculated at group levels when data grouping is applied. Extract client-side aggregation outputs reflecting current data state after transformations, enabling reading of totals, counts, averages, or custom aggregate summaries. Fetch dynamically updated summary metrics corresponding to configured aggregate functions on datasets or grouped entries, supporting use cases involving on-the-fly calculation of aggregate values in data processing, charting, or reporting scenarios.
+How to access sum of filtered data in Kendo UI DataSource? Retrieve or access summary statistics such as sums, counts, minimums, maximums, averages, or other aggregate calculations derived from your data set whether filtered or sorted. Obtain real-time computed aggregate results, including those calculated at group levels when data grouping is applied. Extract client-side aggregation outputs reflecting current data state after transformations, enabling reading of totals, counts, averages, or custom aggregate summaries. Fetch dynamically updated summary metrics corresponding to configured aggregate functions on datasets or grouped entries, supporting use cases involving on-the-fly calculation of aggregate values in data processing, charting, or reporting scenarios.
 </div>
 
 #### Returns
@@ -4455,7 +4455,7 @@ Returns the data item at the specified index. The index is zero-based.
 
 
 <div class="meta-api-description">
-Retrieve or access a specific data entry by index position within a data collection by specifying a zero-based numeric index to obtain the item located at that exact position, enabling targeted access to elements based on their ordered placement in lists, arrays, or datasets, supporting use cases like fetching items at known positions, indexing into data structures, or extracting entries by numeric offset.
+How do I access a specific item in my Kendo UI DataSource by its index position? Retrieve or access a specific data entry by index position within a data collection by specifying a zero-based numeric index to obtain the item located at that exact position, enabling targeted access to elements based on their ordered placement in lists, arrays, or datasets, supporting use cases like fetching items at known positions, indexing into data structures, or extracting entries by numeric offset.
 </div>
 
 #### Parameters
@@ -4495,7 +4495,7 @@ Cancels any pending changes in the data source. Deleted data items are restored,
 
 
 <div class="meta-api-description">
-Revert all unsaved modifications and discard local edits by rolling back data item updates, deletions, and additions to their original states, effectively resetting any temporary changes, restoring deleted records, removing newly added items, undoing updated fields back to initial values, and resetting unique identifiers, supporting scenarios where you need to cancel or abort batch edits, undo changes in a data collection, reset modified data models, discard transactional edits, or rollback user input before saving, with event notifications triggered upon complete reversion of all changes but not for individual record undos.
+How do I revert unsaved modifications in Kendo UI DataSource using the cancelChanges method? Revert all unsaved modifications and discard local edits by rolling back data item updates, deletions, and additions to their original states, effectively resetting any temporary changes, restoring deleted records, removing newly added items, undoing updated fields back to initial values, and resetting unique identifiers, supporting scenarios where you need to cancel or abort batch edits, undo changes in a data collection, reset modified data models, discard transactional edits, or rollback user input before saving, with event notifications triggered upon complete reversion of all changes but not for individual record undos.
 </div>
 
 #### Parameters
@@ -4577,7 +4577,7 @@ Compare with the [`view`](/api/javascript/data/datasource/methods/view) method, 
 
 
 <div class="meta-api-description">
-Retrieve, set, load, update, or replace the complete collection of items managed by a data source, whether from local arrays or remote services, including reading raw data responses, binding new datasets, or inspecting current contents; handle underlying arrays or server responses with automatic wrapping into observable or model objects, support grouped data retrieval for server-side grouping scenarios, manage type-correct parsed data such as JavaScript Date and Number objects, and distinguish from filtered or paged views by accessing the full unfiltered, unsorted, or ungrouped data items directly for comprehensive data manipulation, synchronization, and inspection in data-driven applications.
+How do I retrieve and update data in Kendo UI's DataSource? Retrieve, set, load, update, or replace the complete collection of items managed by a data source, whether from local arrays or remote services, including reading raw data responses, binding new datasets, or inspecting current contents; handle underlying arrays or server responses with automatic wrapping into observable or model objects, support grouped data retrieval for server-side grouping scenarios, manage type-correct parsed data such as JavaScript Date and Number objects, and distinguish from filtered or paged views by accessing the full unfiltered, unsorted, or ungrouped data items directly for comprehensive data manipulation, synchronization, and inspection in data-driven applications.
 </div>
 
 #### Parameters
@@ -4660,7 +4660,7 @@ Reads the data items from a remote service (if the [`transport`](/api/javascript
 
 
 <div class="meta-api-description">
-Retrieve or update the dataset dynamically by invoking the fetching mechanism that triggers data loading from remote APIs when configured with transport endpoints or reads from local JavaScript arrays if data is provided inline, enabling refreshes, initial data pulls, and control over when and how records are retrieved either once or with subsequent calls, accommodating server-driven and client-based data sourcing setups, managing asynchronous requests, synchronous local reads, and ensuring consistent data availability for components or applications requiring up-to-date or reactive content updates.
+How do I update data in my Kendo UI DataSource using jQuery? Retrieve or update the dataset dynamically by invoking the fetching mechanism that triggers data loading from remote APIs when configured with transport endpoints or reads from local JavaScript arrays if data is provided inline, enabling refreshes, initial data pulls, and control over when and how records are retrieved either once or with subsequent calls, accommodating server-driven and client-based data sourcing setups, managing asynchronous requests, synchronous local reads, and ensuring consistent data availability for components or applications requiring up-to-date or reactive content updates.
 </div>
 
 #### Parameters
@@ -4732,7 +4732,7 @@ A list of the supported operators you can find in this filter [operator configur
 
 
 <div class="meta-api-description">
-Configure, set, or retrieve filtering criteria to control which data items are included or excluded during data queries or binding operations, enabling precise selection of records using single or multiple filter conditions, complex filter objects, or arrays of filters with various operators for customized data filtering, querying, or searching within data sources.
+How do I configure filtering criteria for my Kendo UI DataSource? Configure, set, or retrieve filtering criteria to control which data items are included or excluded during data queries or binding operations, enabling precise selection of records using single or multiple filter conditions, complex filter objects, or arrays of filters with various operators for customized data filtering, querying, or searching within data sources.
 </div>
 
 #### Parameters
@@ -4787,7 +4787,7 @@ Gets the data item (model) with the specified [`id`](/api/javascript/data/model#
 
 
 <div class="meta-api-description">
-Retrieve or fetch a specific data record, item, or model instance by its unique identifier or ID, enabling lookup, find, or get operations within a data source, collection, or dataset; supports querying by model ID when a data schema with model definitions is configured, with considerations for pagination such as fetching only from the current page when server-side paging is active, controlling whether the data retrieval targets local cache or requires additional server queries, and allowing developers to access individual entries efficiently by key or primary ID in contexts like database queries, REST API calls, or data-binding scenarios.
+How to fetch a specific data record by its unique identifier in Kendo UI for jQuery? Retrieve or fetch a specific data record, item, or model instance by its unique identifier or ID, enabling lookup, find, or get operations within a data source, collection, or dataset; supports querying by model ID when a data schema with model definitions is configured, with considerations for pagination such as fetching only from the current page when server-side paging is active, controlling whether the data retrieval targets local cache or requires additional server queries, and allowing developers to access individual entries efficiently by key or primary ID in contexts like database queries, REST API calls, or data-binding scenarios.
 </div>
 
 #### Parameters
@@ -4825,7 +4825,7 @@ Gets the data item (model) with the specified [`uid`](/api/javascript/data/model
 
 
 <div class="meta-api-description">
-Find, fetch, or retrieve a single data record, entry, or model from a data collection or source by specifying its unique identifier, UID, or key. Locate a specific dataset element for accessing, updating, deleting, or linking to user interface components using unique IDs or keys. Search or query databases, data sources, or collections for exact item matches by unique identifiers, enabling precise data manipulation, retrieval, or UI binding based on unique record keys or IDs.
+How do I retrieve a specific data record from my Kendo UI DataSource using its unique identifier? Find, fetch, or retrieve a single data record, entry, or model from a data collection or source by specifying its unique identifier, UID, or key. Locate a specific dataset element for accessing, updating, deleting, or linking to user interface components using unique IDs or keys. Search or query databases, data sources, or collections for exact item matches by unique identifiers, enabling precise data manipulation, retrieval, or UI binding based on unique record keys or IDs.
 </div>
 
 #### Parameters
@@ -4869,7 +4869,7 @@ Gets or sets the grouping configuration.
 
 
 <div class="meta-api-description">
-configure or retrieve data grouping settings to organize records by specific fields, customize grouping directions such as ascending or descending, apply multiple group criteria simultaneously, control aggregated calculations within groups, update or reset grouping configurations dynamically, trigger data refreshes or re-evaluations upon grouping changes, access current grouping descriptors, manage hierarchical or multi-level grouping for data sets, enable or disable grouping features programmatically, and integrate grouping logic for sorting, filtering, or summarizing large collections effectively.
+How do I configure data grouping settings in Kendo UI for jQuery? configure or retrieve data grouping settings to organize records by specific fields, customize grouping directions such as ascending or descending, apply multiple group criteria simultaneously, control aggregated calculations within groups, update or reset grouping configurations dynamically, trigger data refreshes or re-evaluations upon grouping changes, access current grouping descriptors, manage hierarchical or multi-level grouping for data sets, enable or disable grouping features programmatically, and integrate grouping logic for sorting, filtering, or summarizing large collections effectively.
 </div>
 
 #### Parameters
@@ -4936,7 +4936,7 @@ Checks if the data items have changed.
 
 
 <div class="meta-api-description">
-Check or verify if the underlying data collection has unsaved modifications, edits, updates, deletions, or newly added records by invoking a method to detect changes before syncing or committing data. This detection helps control data synchronization workflows, enables conditional saving, and supports checking for dirty, dirty state, or modified entities since the last update, ensuring that you can query for any inserted, updated, or removed items programmatically. It requires entity identification via an ID field to accurately track changes and distinguish between unchanged and modified data states.
+How do I determine if there are unsaved modifications in a Kendo UI DataSource? Check or verify if the underlying data collection has unsaved modifications, edits, updates, deletions, or newly added records by invoking a method to detect changes before syncing or committing data. This detection helps control data synchronization workflows, enables conditional saving, and supports checking for dirty, dirty state, or modified entities since the last update, ensuring that you can query for any inserted, updated, or removed items programmatically. It requires entity identification via an ID field to accurately track changes and distinguish between unchanged and modified data states.
 </div>
 
 #### Returns
@@ -4969,7 +4969,7 @@ Gets the index of the specified data item.
 
 
 <div class="meta-api-description">
-Locate the position or index of a specific data item within a collection or data source, enabling you to search, find, identify, or retrieve the zero-based location of an element by matching its reference, object, or model instance. This supports common tasks such as determining where an item exists in a list, checking if an entry is present, comparing positions, finding indexes for updating, removing, or manipulating entries within datasets, collections, arrays, or data structures used in applications or code.
+How to find the index of a specific data item in Kendo UI DataSource? Locate the position or index of a specific data item within a collection or data source, enabling you to search, find, identify, or retrieve the zero-based location of an element by matching its reference, object, or model instance. This supports common tasks such as determining where an item exists in a list, checking if an entry is present, comparing positions, finding indexes for updating, removing, or manipulating entries within datasets, collections, arrays, or data structures used in applications or code.
 </div>
 
 #### Parameters
@@ -5005,7 +5005,7 @@ Inserts a data item in the data source at the specified index.
 
 
 <div class="meta-api-description">
-Add or insert an item, record, or model instance into a data collection at a precise position or index, enabling control over where new data appears within an array, list, or data source structure; this method supports adding plain objects or model instances directly into a dataset so that bound UI components, lists, or iterations immediately update to include the item at the specified location, facilitating dynamic data manipulation like inserting entries before or after certain elements while maintaining index-specific placement in collections.
+How to insert a new item into a Kendo UI DataSource at a specific index? Add or insert an item, record, or model instance into a data collection at a precise position or index, enabling control over where new data appears within an array, list, or data source structure; this method supports adding plain objects or model instances directly into a dataset so that bound UI components, lists, or iterations immediately update to include the item at the specified location, facilitating dynamic data manipulation like inserting entries before or after certain elements while maintaining index-specific placement in collections.
 </div>
 
 #### Parameters
@@ -5047,7 +5047,7 @@ Gets or sets the online state of the data source.
 
 
 <div class="meta-api-description">
-Control and check the connectivity status for remote data operations, enabling toggling between online and offline modes to manage synchronization, remote reads, and writes; retrieve the current connection state as a boolean or set the connection to active or inactive to ensure proper handling of data access and synchronization workflows when working with remote sources or APIs, facilitating conditional logic for network availability, offline support, and dynamic switching between connected and disconnected modes for data syncing and remote communication.
+How to check if Kendo UI data source is online using JavaScript? Control and check the connectivity status for remote data operations, enabling toggling between online and offline modes to manage synchronization, remote reads, and writes; retrieve the current connection state as a boolean or set the connection to active or inactive to ensure proper handling of data access and synchronization workflows when working with remote sources or APIs, facilitating conditional logic for network availability, offline support, and dynamic switching between connected and disconnected modes for data syncing and remote communication.
 </div>
 
 #### Parameters
@@ -5122,7 +5122,7 @@ Gets or sets the offline state of the data source.
 
 
 <div class="meta-api-description">
-Configure, enable, disable, or check offline mode for data caching and synchronization management by programmatically setting or retrieving the current offline state to control data availability when disconnected. Use simple method calls to toggle offline caching, switch between online and offline modes, inspect whether offline support is active, manage data operations without network connection, and optimize component behavior for offline access or sync control. This functionality supports queries for the current offline status and commands to activate or deactivate offline mode for efficient data handling during network interruptions or offline scenarios.
+How to toggle offline mode in Kendo UI DataSource? Configure, enable, disable, or check offline mode for data caching and synchronization management by programmatically setting or retrieving the current offline state to control data availability when disconnected. Use simple method calls to toggle offline caching, switch between online and offline modes, inspect whether offline support is active, manage data operations without network connection, and optimize component behavior for offline access or sync control. This functionality supports queries for the current offline status and commands to activate or deactivate offline mode for efficient data handling during network interruptions or offline scenarios.
 </div>
 
 #### Parameters
@@ -5182,7 +5182,7 @@ Gets or sets the current page.
 
 
 <div class="meta-api-description">
-Control or retrieve the current page index in paginated data sets by getting or setting the active page number, enabling navigation through pages, switching to a specific data segment, managing pagination state, triggering data reloads for a chosen page, updating the view to show a particular slice of data, handling page changes programmatically, and integrating page controls with custom logic to display or request distinct pages dynamically in a data-driven application.
+How do I change the current page in Kendo UI DataSource? Control or retrieve the current page index in paginated data sets by getting or setting the active page number, enabling navigation through pages, switching to a specific data segment, managing pagination state, triggering data reloads for a chosen page, updating the view to show a particular slice of data, handling page changes programmatically, and integrating page controls with custom logic to display or request distinct pages dynamically in a data-driven application.
 </div>
 
 #### Parameters
@@ -5234,7 +5234,7 @@ Gets or sets the current page size.
 
 
 <div class="meta-api-description">
-Control or configure the number of items, records, or entries shown on each page in data pagination systems; retrieve the current page size count or set and update the page length dynamically by specifying a numeric value to influence how many results appear per page; manage pagination limits, page item counts, page length adjustments, and customize how many rows or data points display in paged views for seamless navigation through datasets.
+How do I set the number of items to display per page in a Kendo UI data grid? Control or configure the number of items, records, or entries shown on each page in data pagination systems; retrieve the current page size count or set and update the page length dynamically by specifying a numeric value to influence how many results appear per page; manage pagination limits, page item counts, page length adjustments, and customize how many rows or data points display in paged views for seamless navigation through datasets.
 </div>
 
 #### Parameters
@@ -5287,7 +5287,7 @@ Appends the specified data items to the data source without marking them as "new
 
 
 <div class="meta-api-description">
-Add or append records directly into a data collection without marking them as new, bypassing change tracking and avoiding automatic synchronization with remote servers or APIs; this enables inserting data silently without triggering create events, prevents the system from treating the added items as pending remote updates, and allows manual control over when and how data is synced or flagged, useful for bulk imports, offline caching, or initializing data sets without network communication or replication.
+How do I add records to a Kendo UI DataSource without triggering create events? Add or append records directly into a data collection without marking them as new, bypassing change tracking and avoiding automatic synchronization with remote servers or APIs; this enables inserting data silently without triggering create events, prevents the system from treating the added items as pending remote updates, and allows manual control over when and how data is synced or flagged, useful for bulk imports, offline caching, or initializing data sets without network communication or replication.
 </div>
 
 #### Parameters
@@ -5341,7 +5341,7 @@ Removes the specified data items from the data source without marking them as "r
 
 
 <div class="meta-api-description">
-Control local deletion of data items instantly without syncing or marking them as removed, enabling you to erase entries from the data source silently and prevent remote updates or any "removed" state tracking. Configure data removal that bypasses synchronization triggers, allowing silent, immediate deletion of records or entries locally without affecting the backend or remote datasets. Manage local data cleanup by forcibly deleting items without pushing changes, avoiding replicated deletions or sync conflicts, and disabling automatic propagation of removals to external services. Use this method to silently purge or discard data entries client-side, skipping any remote synchronization or state changes that occur with standard removal operations.
+How to silently remove data items from Kendo UI DataSource without pushing changes to remote server? Control local deletion of data items instantly without syncing or marking them as removed, enabling you to erase entries from the data source silently and prevent remote updates or any "removed" state tracking. Configure data removal that bypasses synchronization triggers, allowing silent, immediate deletion of records or entries locally without affecting the backend or remote datasets. Manage local data cleanup by forcibly deleting items without pushing changes, avoiding replicated deletions or sync conflicts, and disabling automatic propagation of removals to external services. Use this method to silently purge or discard data entries client-side, skipping any remote synchronization or state changes that occur with standard removal operations.
 </div>
 
 #### Parameters
@@ -5404,7 +5404,7 @@ Appends the specified data items to the data source without marking them as "new
 
 
 <div class="meta-api-description">
-Add or append data entries to a local collection without marking them as new or triggering synchronization or remote updates, enabling you to insert records quietly without queuing them for persistence or syncing with backend services, allowing offline or temporary additions that remain local and unsynced; this method differs from standard insert operations which typically flag new data for syncing or remote storage, providing control over when data changes are propagated to external servers or databases.
+How to add data silently to a Kendo UI for jQuery DataSource without triggering sync? Add or append data entries to a local collection without marking them as new or triggering synchronization or remote updates, enabling you to insert records quietly without queuing them for persistence or syncing with backend services, allowing offline or temporary additions that remain local and unsynced; this method differs from standard insert operations which typically flag new data for syncing or remote storage, providing control over when data changes are propagated to external servers or databases.
 </div>
 
 #### Parameters
@@ -5444,7 +5444,7 @@ Moves the specified data items to the data source without marking them as "new".
 
 
 <div class="meta-api-description">
-Transfer or relocate existing data records into a data collection while maintaining their unique identities and avoiding triggering new creation flags or server-side insert events; perform client-side moves of items within a dataset to reposition or update entries without registering them as newly created or changing their status on the backend; handle local data realignment, migration, or reordering in the application's memory without affecting server persistence or causing unintended synchronization of order changes; enable seamless updating or rearranging of records by pushing or moving them within the in-memory data source to keep consistency and prevent server-side creation markers while supporting client-only adjustments to data positioning.
+How to move existing data records in a Kendo UI DataSource without triggering server-side insert events? Transfer or relocate existing data records into a data collection while maintaining their unique identities and avoiding triggering new creation flags or server-side insert events; perform client-side moves of items within a dataset to reposition or update entries without registering them as newly created or changing their status on the backend; handle local data realignment, migration, or reordering in the application's memory without affecting server persistence or causing unintended synchronization of order changes; enable seamless updating or rearranging of records by pushing or moving them within the in-memory data source to keep consistency and prevent server-side creation markers while supporting client-only adjustments to data positioning.
 </div>
 
 #### Parameters
@@ -5486,7 +5486,7 @@ Updates the specified data items without marking them as "dirty". The data sourc
 
 
 <div class="meta-api-description">
-Update or append individual data entries within a data collection without triggering change tracking or marking items as modified, enabling silent local updates that do not synchronize with remote servers; this method lets you insert new entries if no matching identifier is found, differs from typical set or save operations that sync changes remotely, and is useful for controlling local data state, managing partial updates, avoiding automatic server communication, and handling data mutations without affecting synchronization or marking records as changed.
+How to silently update local data in Kendo UI without synchronizing with remote servers? Update or append individual data entries within a data collection without triggering change tracking or marking items as modified, enabling silent local updates that do not synchronize with remote servers; this method lets you insert new entries if no matching identifier is found, differs from typical set or save operations that sync changes remotely, and is useful for controlling local data state, managing partial updates, avoiding automatic server communication, and handling data mutations without affecting synchronization or marking records as changed.
 </div>
 
 #### Parameters
@@ -5555,7 +5555,7 @@ This method is useful when you need to modify several parameters of the data req
 
 
 <div class="meta-api-description">
-Execute complex queries and control data retrieval by running a customizable query operation on the data source, enabling dynamic filtering, sorting, grouping, aggregation, and paging parameters. Configure or update multiple request options simultaneously such as filters, sorts, groups, aggregates, and pagination to optimize data fetching and reduce multiple network calls into a single, efficient query execution. Enable flexible query modifications on both local data collections and remote services through HTTP requests, supporting combined query parameter adjustments to fetch, refresh, or reset data views according to new criteria while managing or resetting existing descriptors as needed to tailor the data response precisely.
+How can I dynamically filter data in a Kendo UI for jQuery DataSource using the query method? Execute complex queries and control data retrieval by running a customizable query operation on the data source, enabling dynamic filtering, sorting, grouping, aggregation, and paging parameters. Configure or update multiple request options simultaneously such as filters, sorts, groups, aggregates, and pagination to optimize data fetching and reduce multiple network calls into a single, efficient query execution. Enable flexible query modifications on both local data collections and remote services through HTTP requests, supporting combined query parameter adjustments to fetch, refresh, or reset data views according to new criteria while managing or resetting existing descriptors as needed to tailor the data response precisely.
 </div>
 
 #### Parameters
@@ -5648,7 +5648,7 @@ Reads data items from a [remote/custom transport](/framework/datasource/crud) (i
 
 
 <div class="meta-api-description">
-Retrieve, fetch, load, or refresh data items from a remote server, API endpoint, custom transport, or local JavaScript array source by invoking or configuring the data retrieval method; control how data is requested or reloaded, handle data synchronization, update collections dynamically, enable pulling fresh data on demand, manage offline scenarios where remote calls do not occur, and adapt data fetching strategies when using built-in transport settings or customized data sources for flexible, real-time, or batch loading of datasets.
+How to refresh data in Kendo UI DataSource using the read method? Retrieve, fetch, load, or refresh data items from a remote server, API endpoint, custom transport, or local JavaScript array source by invoking or configuring the data retrieval method; control how data is requested or reloaded, handle data synchronization, update collections dynamically, enable pulling fresh data on demand, manage offline scenarios where remote calls do not occur, and adapt data fetching strategies when using built-in transport settings or customized data sources for flexible, real-time, or batch loading of datasets.
 </div>
 
 #### Parameters
@@ -5705,7 +5705,7 @@ Removes the specified data item from the data source.
 
 
 <div class="meta-api-description">
-Remove or delete items, records, or models from the in-memory collection or data array managed by a data source, enabling local removal of specific data entries; this action often involves configuring or invoking removal functions to update or manipulate datasets, with options to persist changes remotely via synchronization or syncing with a backend server, handling use cases for deleting records, clearing models, removing data entries, or updating client-side collections before optionally syncing to persist deletions in databases or APIs.
+How do I delete items from a Kendo UI DataSource in-memory collection? Remove or delete items, records, or models from the in-memory collection or data array managed by a data source, enabling local removal of specific data entries; this action often involves configuring or invoking removal functions to update or manipulate datasets, with options to persist changes remotely via synchronization or syncing with a backend server, handling use cases for deleting records, clearing models, removing data entries, or updating client-side collections before optionally syncing to persist deletions in databases or APIs.
 </div>
 
 #### Parameters
@@ -5743,7 +5743,7 @@ Gets the current skip parameter of the dataSource. The skip parameter indicates 
 
 
 <div class="meta-api-description">
-Retrieve or configure the numeric offset for data pagination, controlling how many items are bypassed when loading a new page or segment of data. This numeric skip parameter is essential for implementing paging strategies such as server-side paging, infinite scroll, virtual scroll, chunked loading, or any scenario that requires determining the current page position, calculating offsets, or fetching subsets of data based on how many records to omit at the beginning. Use this to manage data slices, adjust data windows, or compute skip counts for queries and load operations.
+How to configure server-side paging in Kendo UI for jQuery with DataSource.skip method? Retrieve or configure the numeric offset for data pagination, controlling how many items are bypassed when loading a new page or segment of data. This numeric skip parameter is essential for implementing paging strategies such as server-side paging, infinite scroll, virtual scroll, chunked loading, or any scenario that requires determining the current page position, calculating offsets, or fetching subsets of data based on how many records to omit at the beginning. Use this to manage data slices, adjust data windows, or compute skip counts for queries and load operations.
 </div>
 
 #### Returns
@@ -5771,7 +5771,7 @@ Gets or sets the sort order which will be applied over the data items.
 
 
 <div class="meta-api-description">
-Configure, set, or retrieve the sorting criteria and order for collections of data items, enabling control over how data is ordered by one or multiple fields or properties, supporting sorting strategies like ascending, descending, custom comparators, multi-level sorting, dynamic reorder, or updating sort preferences at runtime to influence data presentation, filtering, and search results based on specific attribute sequences or user-defined priority rules.
+How to implement sorting in Kendo UI DataSource? Configure, set, or retrieve the sorting criteria and order for collections of data items, enabling control over how data is ordered by one or multiple fields or properties, supporting sorting strategies like ascending, descending, custom comparators, multi-level sorting, dynamic reorder, or updating sort preferences at runtime to influence data presentation, filtering, and search results based on specific attribute sequences or user-defined priority rules.
 </div>
 
 #### Parameters
@@ -5828,7 +5828,7 @@ The `sync` method will request the remote service if:
 
 
 <div class="meta-api-description">
-Control data synchronization processes to push local additions, updates, and deletions to a remote server or API by enabling sync operations that handle create, update, and destroy actions conditionally based on configured transport methods; configure syncing to flush changes only for newly created, modified, or removed records, initiate data persistence through remote calls, and manage synchronization workflows that ensure local modifications are consistently reflected in the backend system with create/update/delete support as set in transport options.
+How do I programmatically push local data changes to a remote server using Kendo UI for jQuery's DataSource? Control data synchronization processes to push local additions, updates, and deletions to a remote server or API by enabling sync operations that handle create, update, and destroy actions conditionally based on configured transport methods; configure syncing to flush changes only for newly created, modified, or removed records, initiate data persistence through remote calls, and manage synchronization workflows that ensure local modifications are consistently reflected in the backend system with create/update/delete support as set in transport options.
 </div>
 
 #### Returns
@@ -5876,7 +5876,7 @@ Gets the total number of data items. Uses [`schema.total`](/api/javascript/data/
 
 
 <div class="meta-api-description">
-Retrieve or calculate the complete total count of data items or records from a data source for tasks like pagination, reporting, or display of item quantities, supporting both local and remote data fetching scenarios. This method helps in controlling and obtaining accurate overall record counts, enabling queries for total elements, server-side total extraction using schemas, and accurate page calculations by fetching or computing the aggregate number of entries regardless of client or server data origins. It supports scenarios including total record retrieval, count summaries, server-returned totals for pagination controls, and dynamic total count access to manage data views and navigation.
+How to calculate total records in Kendo UI DataSource? Retrieve or calculate the complete total count of data items or records from a data source for tasks like pagination, reporting, or display of item quantities, supporting both local and remote data fetching scenarios. This method helps in controlling and obtaining accurate overall record counts, enabling queries for total elements, server-side total extraction using schemas, and accurate page calculations by fetching or computing the aggregate number of entries regardless of client or server data origins. It supports scenarios including total record retrieval, count summaries, server-returned totals for pagination controls, and dynamic total count access to manage data views and navigation.
 </div>
 
 #### Returns
@@ -5905,7 +5905,7 @@ Gets the number of available pages.
 
 
 <div class="meta-api-description">
-Calculate or determine the total number of pages available based on the overall data record count and the configured page size to enable pagination controls, manage page navigation, set or validate current page indexes, drive pager interfaces, fetch specific pages, or implement page count calculations for data-driven components handling large datasets.
+How do I get the total number of pages in a Kendo UI DataSource when using pagination? Calculate or determine the total number of pages available based on the overall data record count and the configured page size to enable pagination controls, manage page navigation, set or validate current page indexes, drive pager interfaces, fetch specific pages, or implement page count calculations for data-driven components handling large datasets.
 </div>
 
 #### Returns
@@ -5937,7 +5937,7 @@ To ensure that data is available this method should be used within the [`change`
 
 
 <div class="meta-api-description">
-Access or retrieve the subset of data items currently displayed after applying paging, filtering, sorting, or grouping operations, enabling you to get only the visible records based on the current data state or view configuration. This includes dynamically fetching the displayed page’s data, filtered or sorted results, and grouped entries as per the active user interactions or data source settings, as opposed to retrieving the full dataset across all pages. This method is commonly used to handle visible data updates during change events, fetch cycles, or to synchronize UI elements with the current data presentation, supporting use cases like paginated views, client-side filtering, sorting controls, grouped data displays, and data virtualization scenarios where only a subset of the entire dataset is rendered or manipulated at any given time.
+How to get only the visible records in Kendo UI DataSource after applying filtering and sorting? Access or retrieve the subset of data items currently displayed after applying paging, filtering, sorting, or grouping operations, enabling you to get only the visible records based on the current data state or view configuration. This includes dynamically fetching the displayed page’s data, filtered or sorted results, and grouped entries as per the active user interactions or data source settings, as opposed to retrieving the full dataset across all pages. This method is commonly used to handle visible data updates during change events, fetch cycles, or to synchronize UI elements with the current data presentation, supporting use cases like paginated views, client-side filtering, sorting controls, grouped data displays, and data virtualization scenarios where only a subset of the entire dataset is rendered or manipulated at any given time.
 </div>
 
 #### Returns
@@ -6006,7 +6006,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect or handle updates and modifications in the data set by listening to events triggered when data changes occur, including when new data is loaded from local arrays or remote services, when items are inserted, updated, removed, or when data is reorganized through paging, sorting, filtering, or grouping; configure custom callbacks, event handlers, or listeners that respond dynamically to any content alterations in the data source, enabling developers to react to data lifecycle events, synchronize views, trigger UI refreshes, or perform actions tied to data mutations while maintaining context within the current data source instance.
+How do I detect when data changes in Kendo UI's DataSource? Detect or handle updates and modifications in the data set by listening to events triggered when data changes occur, including when new data is loaded from local arrays or remote services, when items are inserted, updated, removed, or when data is reorganized through paging, sorting, filtering, or grouping; configure custom callbacks, event handlers, or listeners that respond dynamically to any content alterations in the data source, enabling developers to react to data lifecycle events, synchronize views, trigger UI refreshes, or perform actions tied to data mutations while maintaining context within the current data source instance.
 </div>
 
 #### Event Data
@@ -6082,7 +6082,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Manage and respond to failed remote data requests with access to server error information, enabling detection of network issues, HTTP failures, or API errors during data fetching. Capture and handle error events triggered when remote service calls fail, supporting implementation of retries, error logging, recovery procedures, and custom error processing. Utilize context-aware error handlers that provide detailed server response errors if defined in the schema, facilitating debugging and graceful handling of server-side validation or response errors for remote data operations.
+How do I handle errors in Kendo UI for jQuery's remote data requests? Manage and respond to failed remote data requests with access to server error information, enabling detection of network issues, HTTP failures, or API errors during data fetching. Capture and handle error events triggered when remote service calls fail, supporting implementation of retries, error logging, recovery procedures, and custom error processing. Utilize context-aware error handlers that provide detailed server response errors if defined in the schema, facilitating debugging and graceful handling of server-side validation or response errors for remote data operations.
 </div>
 
 #### Event Data
@@ -6129,7 +6129,7 @@ Fired when the data source receives a push notification or the `pushCreate`, `pu
 
 
 <div class="meta-api-description">
-Handle real-time data updates, live synchronization, and immediate change notifications for data sources by reacting to push events that signal new records, updates, or deletions, enabling you to process incoming change data, merge or refresh records seamlessly, keep UI components or application state consistent with remote or collaborative modifications, and trigger automatic updates or bindings refreshes to maintain an up-to-date interface during data pushCreate, pushUpdate, or pushDestroy actions.
+How can I handle data updates in Kendo UI DataSource with real-time push events? Handle real-time data updates, live synchronization, and immediate change notifications for data sources by reacting to push events that signal new records, updates, or deletions, enabling you to process incoming change data, merge or refresh records seamlessly, keep UI components or application state consistent with remote or collaborative modifications, and trigger automatic updates or bindings refreshes to maintain an up-to-date interface during data pushCreate, pushUpdate, or pushDestroy actions.
 </div>
 
 #### Event Data
@@ -6186,7 +6186,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Detect when a remote data request finishes to trigger custom logic such as inspecting server responses, updating user interface elements, handling asynchronous data load completion, processing metadata from results, managing callbacks after remote service calls, or reacting to the end of fetch operations; this event activates after external data fetching concludes and allows methods tied to the original data source instance to be accessed within event handlers, enabling control over post-request workflows, error handling, or UI refresh based on server replies, with attention to the fact that local data operations do not provide server response details during this event.
+What event is triggered when a remote data request finishes in Kendo UI's DataSource widget? Detect when a remote data request finishes to trigger custom logic such as inspecting server responses, updating user interface elements, handling asynchronous data load completion, processing metadata from results, managing callbacks after remote service calls, or reacting to the end of fetch operations; this event activates after external data fetching concludes and allows methods tied to the original data source instance to be accessed within event handlers, enabling control over post-request workflows, error handling, or UI refresh based on server replies, with attention to the fact that local data operations do not provide server response details during this event.
 </div>
 
 #### Event Data
@@ -6287,7 +6287,7 @@ It is possible to prevent the remote request. To achieve this, execute `e.preven
 
 
 <div class="meta-api-description">
-Intercept or hook into the moment before any remote data fetch or service call is initiated to modify, cancel, or conditionally block outgoing requests, especially read operations, by running custom logic or validations; control, prevent, or stop data retrieval actions programmatically by listening for request start triggers, handling pre-request events, and applying cancellation with event prevention methods to manage or override fetching behavior dynamically in data-driven applications.
+How to cancel a Kendo UI DataSource read operation before it starts? Intercept or hook into the moment before any remote data fetch or service call is initiated to modify, cancel, or conditionally block outgoing requests, especially read operations, by running custom logic or validations; control, prevent, or stop data retrieval actions programmatically by listening for request start triggers, handling pre-request events, and applying cancellation with event prevention methods to manage or override fetching behavior dynamically in data-driven applications.
 </div>
 
 #### Event Data
@@ -6371,7 +6371,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 
 <div class="meta-api-description">
-Trigger callbacks or run custom logic immediately after all pending data changes are successfully saved and synchronized with the server by detecting when the data source completes its synchronization process, including handling cases where you want to respond once remote requests finish, confirm that locally modified data items are persisted, track completion of batch updates, or react to data save events in client-server interactions, enabling you to set event handlers that execute upon save completion, update confirmations, and data syncing operations within data-bound applications.
+How do I run custom logic after all pending data changes are saved in Kendo UI DataSource? Trigger callbacks or run custom logic immediately after all pending data changes are successfully saved and synchronized with the server by detecting when the data source completes its synchronization process, including handling cases where you want to respond once remote requests finish, confirm that locally modified data items are persisted, track completion of batch updates, or react to data save events in client-server interactions, enabling you to set event handlers that execute upon save completion, update confirmations, and data syncing operations within data-bound applications.
 </div>
 
 #### Event Data
@@ -6443,7 +6443,7 @@ Creates a data source instance using the specified configuration. If the configu
 
 
 <div class="meta-api-description">
-Generate or initialize a data source from various inputs including configuration objects, arrays, or existing data source instances to set up, bind, or reuse data effectively in data source components; this method handles normalization by returning a consistent data source instance whether starting from raw configurations or reusing previously created sources, enabling flexible creation, setup, reuse, conversion, and binding of data sources across different contexts and configurations.
+How do I create a data source instance with Kendo UI for jQuery? Generate or initialize a data source from various inputs including configuration objects, arrays, or existing data source instances to set up, bind, or reuse data effectively in data source components; this method handles normalization by returning a consistent data source instance whether starting from raw configurations or reusing previously created sources, enabling flexible creation, setup, reuse, conversion, and binding of data sources across different contexts and configurations.
 </div>
 
 #### Returns
