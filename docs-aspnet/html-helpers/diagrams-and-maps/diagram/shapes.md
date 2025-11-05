@@ -3,7 +3,7 @@ title: Shapes
 page_title: Shapes
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} and use its shape configuration options."
 slug: htmlhelpers_diagram_aspnetcore_shapes_connections
-position: 5
+position: 7
 ---
 
 # Shapes
@@ -46,21 +46,21 @@ You can initialize the Shapes using the `Shapes` method of the Diagram HtmlHelpe
 {% if site.core %}
 ```TagHelper
             <shapes>
-                <shape id="1" 
-                              flowchart-shape-type="FlowchartShapeType.Terminator" 
-                              x="218" 
-                              y="50" 
-                              width="300" 
+                <shape id="1"
+                              flowchart-shape-type="FlowchartShapeType.Terminator"
+                              x="218"
+                              y="50"
+                              width="300"
                               height="100">
                     <content text="Start" />
                     <fill color="#CFE2FF" />
                     <stroke color="#9EC5FE" width="4" />
                 </shape>
-                <shape id="2" 
-                              flowchart-shape-type="FlowchartShapeType.Process" 
-                              x="268" 
-                              y="218" 
-                              width="150" 
+                <shape id="2"
+                              flowchart-shape-type="FlowchartShapeType.Process"
+                              x="268"
+                              y="218"
+                              width="150"
                               height="100">
                     <content text="Define Requirements" />
                     <fill color="#E2D9F3" />

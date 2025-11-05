@@ -74,7 +74,7 @@ The following example demonstrates how to customize the DropDownList by referenc
                     datatextfield="ContactName"
                     datavaluefield="CustomerID"
                     template="<span><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>">
-    
+
     <datasource>
         <transport>
             <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
@@ -293,6 +293,8 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 ## Option Label Template
 
 The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has been set. Use `OptionLabelTemplate` if you want to customize the markup of the optionLabel.
+
+> If the `OptionLabel` is defined as an object, the object must contain the model properties corresponding to the `DataValueField` and `DataTextField` options. For example, `OptionLabel(new { ContactName = "Select address", CustomerID = 0 })`. Otherwise, the component will show `undefined`.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownList()

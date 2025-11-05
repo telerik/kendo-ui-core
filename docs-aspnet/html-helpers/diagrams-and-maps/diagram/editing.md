@@ -3,7 +3,7 @@ title: Editing
 page_title: Editing
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} and learn how to enable its editing functionality."
 slug: htmlhelpers_diagram_aspnetcore_editing
-position: 3
+position: 4
 ---
 
 # Editing
@@ -105,7 +105,7 @@ To enable the editing functionality of the Diagram:
             </connections-datasource>
         </kendo-diagram>
     ```
-    
+
     {% endif %}
 ## Model Fields
 

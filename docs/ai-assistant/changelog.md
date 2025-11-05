@@ -10,6 +10,13 @@ position: 3
 
 Learn about the latest changes, improvements and bug fixes in the Kendo UI for jQuery AI Coding Assistant. The updates are structured in a chronological order with the newest ones appearing first.
 
+## November, 2025 Changelog
+
+### Highlights
+
+- Refined the mcp tool's output formatting to better align with Claude Sonnet 4/4.5 best practices, improving the LLM's ability to follow the exact provided instructions more closely.
+- Added an icons reference to the assistant's context so it recommends only supported Kendo UI icons.
+
 ## October, 2025 Changelog
 
 ### Highlights

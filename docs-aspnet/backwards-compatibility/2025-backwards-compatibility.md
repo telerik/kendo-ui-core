@@ -20,6 +20,21 @@ The DateRangePicker will be initialized through a root `span` element.
 | -----------                    | -----------                      |
 | `<div class="k-daterangepicker"></div>`    | `<span class="k-daterangepicker"></span>` |
 
+### Rendering Changes
+
+**Map**
+
+The positional CSS classes used for Map controls (attribution, navigator, and zoom) have been updated to align with modern CSS practices:
+
+| Old Classes | New Class |
+| ----------- | --------- |
+| `k-pos-top k-pos-left` | `k-top-start` |
+| `k-pos-top k-pos-right` | `k-top-end` |
+| `k-pos-bottom k-pos-left` | `k-bottom-start` |
+| `k-pos-bottom k-pos-right` | `k-bottom-end` |
+
+These classes are applied to the control wrapper elements based on the `position` configuration of the Map controls (attribution, navigator, and zoom). The API values for the position property (`topLeft`, `topRight`, `bottomLeft`, `bottomRight`) remain unchanged.
+
 ## {{ site.product }} Q3 2025 (2025.3.825)
 
 ### Chat

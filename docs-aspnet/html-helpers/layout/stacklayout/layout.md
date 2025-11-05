@@ -104,6 +104,15 @@ The `VerticalAlign` configuraiton controls the alignment of the items in the Sta
 
 By default, the items will be stretched, taking all the available space.
 
+To switch from horizontal to vertical orientation (or vice versa) after the component’s initialization, toggle the `k-hstack` and `k-vstack` classes:
+
+```JS
+    <script>
+        $("#stacklayout").toggleClass("k-hstack").toggleClass("k-vstack"); //Horizontal-to-vertical change.
+    </script>
+```
+
+
 ## See Also
 
 * [Overview of the StackLayout (Demo)](https://demos.telerik.com/{{ site.platform }}/stacklayout/index)

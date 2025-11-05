@@ -21,7 +21,7 @@ The following actions occur during the initialization of the child DropDownList.
 
 * Checks if the `CascadeFrom` property is defined. If not, the cascading is disabled.
 * Searches for the parent DropDownList object. If the result is `null`, the cascading functionality is omitted.
-* Listens for changes of the parent value. If the parent does not have a value, the child DropDownList is disabled. If the parent DropDownList has a value, the child is enabled and the data is filtered. 
+* Listens for changes of the parent value. If the parent does not have a value, the child DropDownList is disabled. If the parent DropDownList has a value, the child is enabled and the data is filtered.
 
 The following example demonstrates the parameters of the request. By default, the DropDownList will initiate a [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET) request method.
 
@@ -33,6 +33,7 @@ The following example demonstrates the parameters of the request. By default, th
 To send additional data through the request, use the [`Data()`](/api/kendo.mvc.ui.fluent/crudoperationbuilder#datasystemstring) method and provide the name of a JavaScript function that returns an object with the additional data.
 
 > * The cascading functionality works only when you define the `CascadeFrom` property and initialize the parent DropDownList.
+> * When the cascading DropDownList binds to remote data, ensure server filtering is enabled and the filtering logic is implemented on the server.
 > * The filter operator is always `"eq"`. To filter the data, the child DropDownList uses the `DataValueField` option of the parent DropDownList.
 
 The following example demonstrates how to configure the cascading functionality for the {{ site.product_short }} DropDownList:

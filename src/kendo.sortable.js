@@ -70,15 +70,21 @@ export const __meta__ = {
             that._assignRefAttribute();
             const items = that._items();
 
-            items.filter(that.options.disabled).attr("aria-disabled", true);
-            items.not(that.options.disabled).attr("aria-disabled", false);
-            items.attr("role", "listitem");
-            that.element.attr("role", "list");
-            items.each(function(index, element) {
-                element.setAttribute("aria-label", `${element.textContent.trim()}, ${element.getAttribute("aria-disabled") === "true" ? "disabled" : "enabled"}`);
-            });
-
             if (that.options.navigatable) {
+                items.filter(that.options.disabled).attr("aria-disabled", true);
+                items.not(that.options.disabled).attr("aria-disabled", false);
+
+                if (!that.element.attr("role")) {
+                    that.element.attr("role", "list");
+                };
+                items.each(function(index, item) {
+                    const itemRoleAttr = item.getAttribute("role");
+                    if (!itemRoleAttr) {
+                        item.setAttribute("role", "listitem");
+                    };
+                    item.setAttribute("aria-label", `${item.textContent.trim()}, ${item.getAttribute("aria-disabled") === "true" ? "disabled" : "enabled"}`);
+                });
+
                 that._attatchNavigatableHandlers();
 
                 const firstItem = items.first();

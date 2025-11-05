@@ -8,7 +8,7 @@ position: 4
 
 # Ajax Data Binding
 
-The PanelBar provides support for remote data binding by using a `DataSource` configuration object. 
+The PanelBar provides support for remote data binding by using a `DataSource` configuration object.
 
 When using remote data binding, the PanelBar implements lazy loading for hierarchical data. When an item is expanded, its child items are requested from the server through an additional Read request. The `id` of the expanded item is sent as a parameter in the Read request, allowing the server to filter and return only the relevant child items back to the PanelBar. This approach ensures optimal performance by loading data on-demand as users navigate through the hierarchy.
 
@@ -91,6 +91,37 @@ public ActionResult Read_PanelBarData(int? id)
 
     return Json(result, JsonRequestBehavior.AllowGet);
 }
+```
+{% endif %}
+
+>tip By default, the PanelBar shows an expand icon if the dataItem has a property named `hasChildren` and it evaluates to `true`. You can either ensure data is mapped as demonstrated above, or configure the mapping through the `DataSource` configuration.
+
+```HtmlHelper
+    @(Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .DataTextField("Name")
+        .DataSource(dataSource => dataSource
+            .Read(read => read
+                .Action("Read_PanelBarData", "Home")
+            )
+            .Model(m=> {
+                m.HasChildren("HasNestedItemsField");
+            })
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-panelbar name="panelbar" datatextfield="Name">
+        <hierarchical-datasource>
+            <transport>
+                <read url="@Url.Action("Read_PanelBarData", "Home")" />
+            </transport>
+            <schema>
+                <hierarchical-model has-children="HasNestedItemsfield" />
+            </schema>
+        </hierarchical-datasource>
+    </kendo-panelbar>
 ```
 {% endif %}
 

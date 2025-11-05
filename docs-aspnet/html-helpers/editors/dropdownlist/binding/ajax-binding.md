@@ -9,11 +9,11 @@ position: 3
 
 # Ajax Binding
 
-In this article you will learn how to bind a DropDownList in ASP.NET Core from a database. 
+In this article, you will learn how to set up the DropDownList component to load its options from a database.
 
-You can configure the Telerik UI DropDownList for Ajax binding to the Northwind **Products** table which uses Linq to SQL.
+You can configure the DropDownList for Ajax binding to the Northwind **Products** table, which uses LINQ to SQL. The DropDownList component expects to receive a collection of items from the specified remote endpoint.
 
-> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data as json.
+> The `ToDataSourceResult()` extension method modifies the structure of the result, and the component is not able to bind to it. In this case, either return a simple array of data as JSON or define a custom `DataSource` with `Schema()` configuration that specifies the field that holds the collection of data items in the response.
 
 1. Create an action method which renders the view.
 

@@ -99,6 +99,12 @@ The following example demonstrates how to define the Form.
 ```
 {% endif %}
 
+{% if site.mvc %}
+
+Similar to the [`Html.BeginForm`](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.html.formextensions.beginform?view=aspnet-mvc-5.2#system-web-mvc-html-formextensions-beginform(system-web-mvc-htmlhelper)), the Form component generates a `<form>` HTML element. The `form` element has a `POST` method and the submit request is processed by the respective action method for the view. You can customize these options through the `HtmlAttributes()` method: `HtmlAttributes(new { action = @Url.Action("MyAction","MyController"), method = "POST" })`.
+
+{% endif %}
+
 ## Functionality and Features
 
 |Feature|Description|

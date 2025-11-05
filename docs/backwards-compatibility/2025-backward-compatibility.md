@@ -12,6 +12,23 @@ position: 0
 This article lists the breaking or important changes in the 2025 releases of Kendo UI. For the complete list of changes in the UI components, see the [product release history](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
 
+## Kendo UI 2025 Q4
+
+### Rendering Changes
+
+**Map**
+
+The positional CSS classes used for Map controls (attribution, navigator, and zoom) have been updated to align with modern CSS practices:
+
+| Old Classes | New Class |
+| ----------- | --------- |
+| `k-pos-top k-pos-left` | `k-top-start` |
+| `k-pos-top k-pos-right` | `k-top-end` |
+| `k-pos-bottom k-pos-left` | `k-bottom-start` |
+| `k-pos-bottom k-pos-right` | `k-bottom-end` |
+
+These classes are applied to the control wrapper elements based on the `position` configuration of the Map controls (attribution, navigator, and zoom). The API values for the position property (`topLeft`, `topRight`, `bottomLeft`, `bottomRight`) remain unchanged.
+
 ## Kendo UI 2025 Q3
 
 **Chat**

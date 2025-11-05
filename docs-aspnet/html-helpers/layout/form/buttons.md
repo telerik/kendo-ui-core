@@ -6,13 +6,24 @@ slug: form_aspnetcore_buttons
 position: 7
 ---
 
+{% if site.core %}
+    {% assign ButtonsTemplateViewType = "IHtmlContent templateView" %}
+{% else %}
+    {% assign ButtonsTemplateViewType = "MvcHtmlString templateView" %}
+{% endif %}
+
 # Buttons
 
-The Buttons functionality of the {{ site.product }} Form allows you to alter both the Submit and Clear buttons.
+By default, the Form renders **Submit** and **Clear** buttons. To customize the default buttons, use the following customization options:
+
+| Option | Description | When to Use |
+|--------|-------------|-------------|
+| [Templates](#setting-the-buttons-template) | Specify a custom template for rendering the Form buttons | When you need complete control over buttons appearance, layout, or behavior |
+| [**Clear** Button Visibility](#toggling-the-clear-button) | Toggles the visibility of the default **Clear** button | When you want to hide the default **Clear** button or implement a custom clearing functionality |
 
 ## Setting the Buttons Template
 
-The Form allows you to specify a template which will be used for the rendering of the Form buttons.
+The Form allows you to specify a template that will render of the Form **Submit** and **Clear** buttons. You can use any of the available [`ButtonsTemplate*`](/api/form) overloads{% if site.core %} or the `<buttons-template>` child tag or [`buttons-template*`](/api/taghelpers/form) TagHelper attributes{% endif %}.
 
 ```HtmlHelper
      @(Html.Kendo().Form()
