@@ -238,6 +238,7 @@ How to configure automatic data loading for Kendo UI chat messages? Configure au
     setTimeout(function() {
         chat.dataSource.fetch();
     }, 2000);
+    </script>
 
 ### autoAssignId `Boolean` *(default: true)*
 
@@ -246,12 +247,15 @@ Enables or disables automatic assignment of a unique ID to each message posted i
 This option should be set to `false` if the chat is configured to work with a remote data source and the messages are created on the server. In that case, the *id* should be assigned on the server itself.
 
 <div class="meta-api-description">
-Control whether the Chat component automatically generates and assigns a unique identifier to each message when posting, ensuring every message has a distinct ID for tracking, referencing, and operations such as updates or deletions. Set to true to enable automatic ID assignment for new messages, or false to require explicit IDs in message objects. Useful for integration scenarios where message identity must be managed or preserved across systems.
+How do I prevent the automatic assignment of message ids when the user sends them? Control whether the Chat component automatically generates and assigns a unique identifier to each message when posting, ensuring every message has a distinct ID for tracking, referencing, and operations such as updates or deletions. Set to true to enable automatic ID assignment for new messages, or false to require explicit IDs in message objects. Useful for integration scenarios where message identity must be managed or preserved across systems.
 </div>
 
 #### Example
 
+    <div id="chat"></div>
+    <script>
     $("#chat").kendoChat({
+        authorId: "user1",
         autoAssignId: false // disables automatic ID assignment
     });
     </script>

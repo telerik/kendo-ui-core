@@ -94,7 +94,7 @@ The Timeline has been tested with the following screen readers and browsers comb
 ### Automated Testing
 The Timeline has been tested with [axe-core](https://github.com/dequelabs/axe-core).
 ### Test Example
-A live test example of the Timeline component could be found here: https://demos.telerik.com/kendo-ui/accessibility/timeline-vertical
+A live test example of the Timeline component could be found here: https://demos.telerik.com/kendo-ui/accessibility/timeline
 ## See Also
 * [Keyboard Navigation by the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
 * [Keyboard Navigation by the Timeline]({% slug keynav_timeline_jquery %})

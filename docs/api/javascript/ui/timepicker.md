@@ -1528,7 +1528,15 @@ How can I programmatically open the time selection dropdown in a Kendo UI TimePi
 
 ### setOptions
 
-Changes the initial TimePicker configuration. **Will be included in Q3 2013 SP1. Currently available in Q3 2013 internal builds only.**
+Changes the initial TimePicker configuration. 
+
+**Value Behavior**
+
+When `setOptions` is called, the value resolution follows a priority order:
+
+- **Explicit value in setOptions**: If the `options` parameter contains a `value` property, this value takes precedence and updates the component's current value.
+- **Initial value exists**: If the `options` parameter does not contain a `value` property, and the component was initialized with a `value`, the component reverts to the initial value, discarding any user-selected or programmatically set value.
+- **No initial value**: If the `options` parameter does not contain a `value` property, and the component was initialized without a `value`, the component preserves the current value.
 
 
 <div class="meta-api-description">
@@ -1540,6 +1548,7 @@ How do I dynamically change the time format in a Kendo UI TimePicker widget? Cha
 ##### options `Object`
 
 The new configuration options.
+
 
 #### Example
 

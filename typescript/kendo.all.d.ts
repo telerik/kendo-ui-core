@@ -7212,6 +7212,7 @@ declare namespace kendo.ui {
         hideColumn(column: string): void;
         hideColumn(column: any): void;
         hideColumn(column: any[]): void;
+        handleAIResponse(response: GridAIResponse): void;
         items(): any;
         lockColumn(column: number): void;
         lockColumn(column: string): void;
@@ -7249,6 +7250,147 @@ declare namespace kendo.ui {
 
     }
 
+    interface GridAISelectionDescriptor {
+        logicalOperator?: number | undefined;
+        filters?: kendo.data.DataSourceFilterItem[] | undefined;
+        cells?: { [key: string]: any } | undefined;
+    }
+
+    interface GridAIHighlightDescriptor {
+        logicalOperator?: number | undefined;
+        filters?: kendo.data.DataSourceFilterItem[] | undefined;
+        cells?: { [key: string]: any } | undefined;
+    }
+
+    interface GridAICommandBase {
+        type: string;
+        message?: string | undefined;
+    }
+
+    interface GridSortCommand extends GridAICommandBase {
+        type: "GridSort";
+        sort: kendo.data.DataSourceSortItem;
+    }
+
+    interface GridClearSortCommand extends GridAICommandBase {
+        type: "GridClearSort";
+    }
+
+    interface GridFilterCommand extends GridAICommandBase {
+        type: "GridFilter";
+        filter: kendo.data.DataSourceFilterItem;
+    }
+
+    interface GridClearFilterCommand extends GridAICommandBase {
+        type: "GridClearFilter";
+    }
+
+    interface GridGroupCommand extends GridAICommandBase {
+        type: "GridGroup";
+        group: kendo.data.DataSourceGroupItem;
+    }
+
+    interface GridUngroupCommand extends GridAICommandBase {
+        type: "GridUngroup";
+    }
+
+    interface GridSelectCommand extends GridAICommandBase {
+        type: "GridSelect";
+        select: GridAISelectionDescriptor;
+    }
+
+    interface GridClearSelectCommand extends GridAICommandBase {
+        type: "GridClearSelect";
+    }
+
+    interface GridHighlightCommand extends GridAICommandBase {
+        type: "GridHighlight";
+        highlight: GridAIHighlightDescriptor;
+    }
+
+    interface GridClearHighlightCommand extends GridAICommandBase {
+        type: "GridClearHighlight";
+    }
+
+    interface GridColumnHideCommand extends GridAICommandBase {
+        type: "GridColumnHide";
+        id: string;
+    }
+
+    interface GridColumnShowCommand extends GridAICommandBase {
+        type: "GridColumnShow";
+        id: string;
+    }
+
+    interface GridColumnResizeCommand extends GridAICommandBase {
+        type: "GridColumnResize";
+        id: string;
+        size: number | string;
+    }
+
+    interface GridColumnLockCommand extends GridAICommandBase {
+        type: "GridColumnLock";
+        id: string;
+    }
+
+    interface GridColumnUnlockCommand extends GridAICommandBase {
+        type: "GridColumnUnlock";
+        id: string;
+    }
+
+    interface GridColumnReorderCommand extends GridAICommandBase {
+        type: "GridColumnReorder";
+        id: string;
+        position?: number | undefined;
+        index?: number | undefined;
+    }
+
+    interface GridPageCommand extends GridAICommandBase {
+        type: "GridPage";
+        page: number;
+    }
+
+    interface GridPageSizeCommand extends GridAICommandBase {
+        type: "GridPageSize";
+        pageSize: number;
+    }
+
+    interface GridExportPDFCommand extends GridAICommandBase {
+        type: "GridExportPDF";
+        fileName?: string | undefined;
+    }
+
+    interface GridExportExcelCommand extends GridAICommandBase {
+        type: "GridExportExcel";
+        fileName?: string | undefined;
+    }
+
+    type GridAICommand = 
+        | GridSortCommand
+        | GridClearSortCommand
+        | GridFilterCommand
+        | GridClearFilterCommand
+        | GridGroupCommand
+        | GridUngroupCommand
+        | GridSelectCommand
+        | GridClearSelectCommand
+        | GridHighlightCommand
+        | GridClearHighlightCommand
+        | GridColumnHideCommand
+        | GridColumnShowCommand
+        | GridColumnResizeCommand
+        | GridColumnLockCommand
+        | GridColumnUnlockCommand
+        | GridColumnReorderCommand
+        | GridPageCommand
+        | GridPageSizeCommand
+        | GridExportPDFCommand
+        | GridExportExcelCommand;
+
+    interface GridAIResponse {
+        commands?: GridAICommand[] | undefined;
+        message?: string | undefined;
+    }
     interface GridAllowCopy {
         delimeter?: string|any | undefined;
     }

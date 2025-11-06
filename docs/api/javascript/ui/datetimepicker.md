@@ -1719,6 +1719,14 @@ Sets the options of the DateTimePicker. Use this method if you want to enable/di
 
 When setOptions is called, the DateTimePicker widget will be destroyed and recreated.
 
+**Value Behavior**
+
+When `setOptions` is called, the value resolution follows a priority order:
+
+- **Explicit value in setOptions**: If the `options` parameter contains a `value` property, this value takes precedence and updates the component's current value.
+- **Initial value exists**: If the `options` parameter does not contain a `value` property, and the component was initialized with a `value`, the component reverts to the initial value, discarding any user-selected or programmatically set value.
+- **No initial value**: If the `options` parameter does not contain a `value` property, and the component was initialized without a `value`, the component preserves the current value.
+
 
 <div class="meta-api-description">
 How do I dynamically change date and time settings in a Kendo UI DateTimePicker widget? Change, update, or reconfigure date and time picker settings dynamically during runtime by modifying options such as enabling or disabling features, adjusting display formats, switching between date or time modes, customizing behavior, or altering selectable ranges. Control and apply new configurations after initialization without restarting the whole application, causing the component to rebuild and reflect updated parameters immediately. Implement runtime setting adjustments, live option updates, feature toggling, and on-the-fly customization of the date/time input interface.
@@ -1731,6 +1739,7 @@ Changes the initial DateTimePicker configuration.
 ##### options `Object`
 
 The new configuration options.
+
 
 #### Example - update the minimum date that the calendar can show
 

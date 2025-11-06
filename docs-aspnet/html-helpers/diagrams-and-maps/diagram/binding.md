@@ -284,8 +284,8 @@ To create a network of visuals and customize the appearance of the Diagram, set 
 
 ## Next Steps
 
-* [Customize Diagram Appearance]({% slug htmlhelpers_diagram_aspnetcore_shapes %})
-* [Handle Diagram Events]({% slug htmlhelpers_diagram_events %})
+* [Customize Diagram Appearance]({% slug htmlhelpers_diagram_aspnetcore_shapes_connections %})
+* [Handle Diagram Events]({% slug diagram_events %})
 * [Configure Diagram Layout]({% slug htmlhelpers_diagram_aspnetcore_layout %})
 
 ## See Also

@@ -42,7 +42,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 ## Resources
 
-[ARIA practices Modal Dialog Example](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+[ARIA practices Modal Dialog Example](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)
 
 ## Section 508
 

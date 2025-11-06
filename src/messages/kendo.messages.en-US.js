@@ -769,8 +769,10 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   },
   "ai": {
     "outputPlaceholder": "No AI output available",
-    "success": "Operation is successful. Data is:",
+    "success": "Data is:",
     "error": "Operation is not successful. Error:",
+    "invalidSelection": "This selection mode is not currently enabled. Please enable the appropriate selection option in the grid configuration.",
+    "promptPlaceholder": "Enter your AI prompt here...",
   }
 });
 }

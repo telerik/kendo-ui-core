@@ -1595,7 +1595,15 @@ How can I programmatically open the Kendo UI date picker calendar? Trigger or in
 
 ### setOptions
 
-Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatePicker configuration fields](/api/javascript/ui/datepicker#configuration).
+Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatePicker configuration fields](/api/javascript/ui/datepicker#configuration). 
+
+**Value Behavior**
+
+When `setOptions` is called, the value resolution follows a priority order:
+
+- **Explicit value in setOptions**: If the `options` parameter contains a `value` property, this value takes precedence and updates the component's current value.
+- **Initial value exists**: If the `options` parameter does not contain a `value` property, and the component was initialized with a `value`, the component reverts to the initial value, discarding any user-selected or programmatically set value.
+- **No initial value**: If the `options` parameter does not contain a `value` property, and the component was initialized without a `value`, the component preserves the current value.
 
 
 <div class="meta-api-description">
@@ -1607,6 +1615,7 @@ How can I dynamically change the date format for a Kendo UI DatePicker after it'
 ##### options `Object`
 
 The new configuration options.
+
 
 #### Example
 

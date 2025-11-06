@@ -2839,7 +2839,7 @@ How do I intercept prompt requests in a Kendo UI Grid to handle AI interactions?
     });
     </script>
 
-### promptResponse
+### ai.aiAssistant.promptResponse
 
 Triggered when the AI service response is received. The response data is available through the event argument. Triggered only when the `serviceUrl` option is set.
 
@@ -14722,6 +14722,81 @@ How to customize error message for AI-driven operations in Kendo UI Grid? Set or
     });
     </script>
 
+### messages.ai.invalidSelection `String`
+
+Defines the text to be displayed when an invalid selection is made for AI operations. Used primarily for localization.
+
+
+<div class="meta-api-description">
+Configure or customize the validation message, warning text, or notification shown to users when they attempt AI-powered grid operations with improper, incorrect, or incompatible data selections, enabling developers to set, modify, or localize error prompts for invalid selection states in AI features, control feedback messages for unsupported AI actions on selected grid rows or cells, adjust warning labels for selection-based AI constraints, and tailor user guidance when AI functionality cannot proceed due to selection issues or limitations within data grid AI assistants.
+</div>
+
+#### Example - change the invalid selection message for ai features
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       selectable: "multiple, cell",
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       messages: {
+        ai: {
+          invalidSelection: "Please select valid data for this AI operation."
+        }
+       },
+       height: 550
+    });
+    </script>
+
+### messages.ai.promptPlaceholder `String`
+
+Defines the placeholder text displayed in the AI prompt input field. Used primarily for localization.
+
+
+<div class="meta-api-description">
+Customize, configure, or set the hint text, placeholder prompt, or default input message shown in AI-driven grid prompt fields or input areas, enabling control over the guidance text displayed when users interact with AI assistant features, adjust prompt placeholder wording for different languages, locales, or user preferences, modify the instructional text that appears in empty AI input boxes, and tailor the placeholder message to provide clear direction or examples for AI-powered grid queries, commands, or natural language interactions within data grid AI interfaces.
+</div>
+
+#### Example - change the prompt placeholder for ai features
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+       columns: [
+         { field: "name" },
+         { field: "age" },
+         { command: "destroy" }
+       ],
+       dataSource: [
+         { name: "Jane Doe", age: 30 },
+         { name: "John Doe", age: 33 }
+       ],
+       toolbar: ["aiAssistant"],
+       filterable: true,
+       ai: {
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+       },
+       messages: {
+        ai: {
+          promptPlaceholder: "Ask AI to help with your data..."
+        }
+       },
+       height: 550
+    });
+    </script>
+
 ### messages.commands `Object`
 
 Defines the text of the command buttons that are shown within the Grid. Used primarily for localization.
@@ -21311,6 +21386,222 @@ How can I retrieve the selected records in a Kendo UI grid using JavaScript? Ret
         }
 
      </script>
+
+### handleAIResponse
+
+Processes and applies AI-generated commands to the Grid. Use this method when implementing custom AI service integrations or when working with backend AI implementations.
+
+The method automatically executes Grid operations based on commands returned from AI services. The Grid's built-in AI Assistant uses this method internally, and you can use it directly when implementing custom AI integrations.
+
+<div class="meta-api-description">
+Process and execute AI-generated grid commands from custom or backend AI services, enabling seamless integration with AI implementations that translate natural language prompts into structured grid operations; automatically apply sorting, filtering, grouping, selection, highlighting, column manipulation, paging, and export commands returned from AI endpoints; support server-side AI integrations, custom AI assistants, or Telerik AI service packages by consuming standardized command response formats and executing corresponding grid API operations without manual parsing or translation.
+</div>
+
+#### Parameters
+
+##### response `Object`
+
+The AI service response object containing commands to execute.
+
+##### response.message `String` *(optional)*
+
+An optional message to display in the AI Assistant output view when using the built-in AI Assistant.
+
+##### response.commands `Array`
+
+An array of command objects. Each command must have a `type` property and corresponding parameters.
+
+> **Note:** Column identification uses the `uid` property from the column configuration. When sending column information to your AI service, include the `uid` for each column to enable column-specific commands.
+>
+> Each command can include an optional `message` property that will be displayed in the AI Assistant output view when using the built-in AI Assistant.
+
+- `GridSort` - Apply sorting to a column (requires [sortable](/api/javascript/ui/grid/configuration/sortable) to be enabled)
+  ```javascript
+  { type: "GridSort", sort: { field: "columnName", dir: "asc" }, message: "sort message" }
+  ```
+- `GridClearSort` - Clear all sorting (requires [sortable](/api/javascript/ui/grid/configuration/sortable) to be enabled)
+  ```javascript
+  { type: "GridClearSort", message: "clear sort message" }
+  ```
+
+- `GridFilter` - Apply filtering (requires [filterable](/api/javascript/ui/grid/configuration/filterable) to be enabled)
+  ```javascript
+  { type: "GridFilter", filter: { field: "columnName", operator: "eq", value: "someValue" }, message: "filter message" }
+  ```
+- `GridClearFilter` - Clear all filters (requires [filterable](/api/javascript/ui/grid/configuration/filterable) to be enabled)
+  ```javascript
+  { type: "GridClearFilter", message: "clear filter message" }
+  ```
+
+- `GridGroup` - Apply grouping (requires [groupable](/api/javascript/ui/grid/configuration/groupable) to be enabled)
+  ```javascript
+  { type: "GridGroup", group: { field: "columnName", dir: "asc" }, message: "group message" }
+  ```
+- `GridUngroup` - Clear grouping (requires [groupable](/api/javascript/ui/grid/configuration/groupable) to be enabled)
+  ```javascript
+  { type: "GridUngroup", message: "clear group message" }
+  ```
+
+- `GridSelect` - Select rows based on filter criteria (requires [selectable](/api/javascript/ui/grid/configuration/selectable) to be enabled)
+  ```javascript
+  {
+    type: "GridSelect",
+    selection: {
+      logicalOperator: 0,
+      filters: [
+        { field: "Name", operator: "contains", value: "Alice" }
+      ],
+      cells: {}
+    },
+    message: "select message"
+  }
+  ```
+- `GridClearSelect` - Clear selection (requires [selectable](/api/javascript/ui/grid/configuration/selectable) to be enabled)
+  ```javascript
+  { type: "GridClearSelect", message: "clear select message" }
+  ```
+
+- `GridHighlight` - Highlight rows based on filter criteria
+  ```javascript
+  {
+    type: "GridHighlight",
+    highlight: {
+      logicalOperator: 0,
+      filters: [
+        { field: "Age", operator: "gte", value: 30 }
+      ],
+      cells: {}
+    },
+    message: "highlight message"
+  }
+  ```
+- `GridClearHighlight` - Clear highlighting
+  ```javascript
+  { type: "GridClearHighlight", message: "clear highlight message" }
+  ```
+
+- `GridColumnHide` - Hide a column
+  ```javascript
+  { type: "GridColumnHide", id: "column-uid", message: "column hidden message" }
+  ```
+- `GridColumnShow` - Show a hidden column
+  ```javascript
+  { type: "GridColumnShow", id: "column-uid", message: "column shown message" }
+  ```
+- `GridColumnResize` - Resize a column (requires [resizable](/api/javascript/ui/grid/configuration/resizable) to be enabled)
+  ```javascript
+  { type: "GridColumnResize", id: "column-uid", size: "20%", message: "column resize message" }
+  ```
+- `GridColumnLock` - Lock a column
+  ```javascript
+  { type: "GridColumnLock", id: "column-uid", message: "column locked message" }
+  ```
+- `GridColumnUnlock` - Unlock a column
+  ```javascript
+  { type: "GridColumnUnlock", id: "column-uid", message: "column unlocked message" }
+  ```
+- `GridColumnReorder` - Reorder a column (requires [reorderable](/api/javascript/ui/grid/configuration/reorderable) to be enabled)
+  ```javascript
+  { type: "GridColumnReorder", id: "column-uid", position: 2, message: "column moved message" }
+  ```
+
+- `GridPage` - Navigate to a specific page (requires [pageable](/api/javascript/ui/grid/configuration/pageable) to be enabled)
+  ```javascript
+  { type: "GridPage", page: 2, message: "page changed message" }
+  ```
+- `GridPageSize` - Change page size
+  ```javascript
+  { type: "GridPageSize", pageSize: 25, message: "pageSize changed message" }
+  ```
+
+- `GridExportPDF` - Export to PDF (requires PDF export configuration)
+  ```javascript
+  { type: "GridExportPDF", fileName: "report.pdf", message: "pdf export message" }
+  ```
+- `GridExportExcel` - Export to Excel (requires Excel export configuration)
+  ```javascript
+  { type: "GridExportExcel", fileName: "report.xlsx", message: "excel export message" }
+  ```
+
+> When using the built-in Grid AI Assistant (configured via the [`ai`](/api/javascript/ui/grid/configuration/ai) option), the Grid automatically sends column metadata to your AI service and processes responses using `handleAIResponse`. For custom integrations, you'll need to call this method manually with properly formatted command objects.
+>
+> The Grid only executes commands for features that are enabled.
+
+#### Example - integrate with backend AI service
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" },
+          { field: "city" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30, city: "New York" },
+          { name: "John Doe", age: 33, city: "London" },
+          { name: "Sam Smith", age: 25, city: "Paris" },
+          { name: "Emily White", age: 28, city: "Berlin" }
+        ],
+        sortable: true,
+        filterable: true,
+        toolbar: [{
+          template: '<input id="aiPrompt" class="k-input k-input-md k-rounded-md" placeholder="Ask AI to manipulate the grid..." style="width: 300px; margin-right: 10px;" />' +
+                    '<button id="askAI" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Apply</button>'
+        }]
+      });
+
+      var grid = $("#grid").data("kendoGrid");
+
+      $("#askAI").on("click", function() {
+        var prompt = $("#aiPrompt").val();
+        
+        if (!prompt) {
+          return;
+        }
+
+        $.ajax({
+          url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            "role": "user",
+            "contents": [{
+                "$type": "text",
+                "text": prompt
+            }],
+            "columns": grid.columns.map((col, idx) => {
+                let colType;
+
+                if (col.selectable) {
+                    colType = "checkbox";
+                } else if (col.command) {
+                    colType = "command";
+                } else if (col.draggable) {
+                    colType = "draggable";
+                }
+
+                const colConfig = { ...col, "id": `${col.uid}` };
+
+                if (colType) {
+                  colConfig.type = colType;
+                }
+
+                return colConfig;
+              })
+          }),
+          success: function(response) {
+            grid.handleAIResponse(response);
+            $("#aiPrompt").val("");
+          },
+          error: function(xhr) {
+            alert("AI service error: " + xhr.responseText);
+          }
+        });
+      });
+    </script>
+
+
 
 ### hideColumn
 

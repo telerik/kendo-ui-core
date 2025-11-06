@@ -45,7 +45,7 @@ If the tree supports the load-more functionality, the **Load More** button is re
 
 ## Resources
 
-[WAI-ARIA Authoring Practices: File Directory Treeview Example](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/examples/treeview-1b/)
+[WAI-ARIA Authoring Practices: File Directory Treeview Example](https://www.w3.org/WAI/ARIA/apg/example-index/treeview/treeview-1/treeview-1a.html)
 
 ## Section 508
 

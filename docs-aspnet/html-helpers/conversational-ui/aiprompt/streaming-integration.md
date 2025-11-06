@@ -8,7 +8,7 @@ position: 5
 
 # Streaming AI Integration
 
-Connecting the AIPrompt component to a streaming AI chat client service is a common scenario. 
+Connecting the AIPrompt component to a streaming AI chat client service is a common scenario.
 
 In this article, you will build a practical, end-to-end example that wires the AIPrompt to a lightweight AI chat client, which opens a chat session, sends the user prompt, and streams the model's response into the Output view.
 
@@ -219,8 +219,8 @@ To creare an AI chat serivce that connects to the AIPrompt, follow the next step
     ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    <kendo-aiprompt name="aiprompt" active-view="0" 
-        on-prompt-request="onPromptRequest" 
+    <kendo-aiprompt name="aiprompt" active-view="0"
+        on-prompt-request="onPromptRequest"
         on-prompt-request-cancel="onPromptRequestCancel">
         <!-- Additional configuration. -->
     </kendo-aiprompt>
@@ -230,7 +230,8 @@ To creare an AI chat serivce that connects to the AIPrompt, follow the next step
     <script src="~/ai-chat-service.js"></script>
     <script>
         const apiClient = new AIChatClient({
-            apiBaseUrl: 'https://{{AI service endpoint}}', // for example, "https://demos.telerik.com/service/v2/ai".
+            // Replace with your AI service endpoint (for example, "https://api.yourdomain.com/ai").
+            apiBaseUrl: "https://demos.telerik.com/service/v2/ai",
             defaultHeaders: { 'Content-Type': 'application/json' },
             aiId: kendo.guid()
         });
@@ -278,7 +279,7 @@ To creare an AI chat serivce that connects to the AIPrompt, follow the next step
         }
     </script>
     ```
-    
+
 For the complete example, visit the [Overview Demo of the AIPrompt component](https://demos.telerik.com/{{ site.platform }}/aiprompt).
 
 ## See Also
