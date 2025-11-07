@@ -1145,4 +1145,12 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
           assert.isOk(multiSelect.wrapper.attr("aria-readonly", false));
           assert.equal(multiSelect.options.readonly, false);
      });
+
+     it("readonly method sets input to readonly", function() {
+        let multiSelect = new MultiSelect(select);
+        multiSelect.readonly(true);
+        multiSelect.input.focus();
+
+        assert.include(["readonly", "true"], multiSelect.input.attr("readonly"));
+    });
 });

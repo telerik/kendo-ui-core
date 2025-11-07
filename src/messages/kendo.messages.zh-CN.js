@@ -1583,15 +1583,6 @@
             });
     }
 
-    if (kendo.chat.ChatView) {
-        kendo.chat.ChatView.prototype.options.messages =
-            $.extend(true, kendo.chat.ChatView.prototype.options.messages, {
-                "isTyping": " 正在输入...",
-                "areTyping": " 正在输入...",
-                "and": " 和 "
-            });
-    }
-
     /* Switch messages */
     if (kendo.ui.Switch) {
         kendo.ui.Switch.prototype.options.messages =

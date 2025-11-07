@@ -236,6 +236,16 @@ export const __meta__ = {
             Select.fn.destroy.call(that);
         },
 
+        _isEnabled: function() {
+            const that = this;
+            const element = that.element;
+
+            const isReadonly = element.prop(READONLY) || Boolean(that.element.attr("readonly"));
+            const isDisabled = element.prop(DISABLED) || Boolean(that.element.attr("disabled"));
+
+            return !isDisabled && !isReadonly;
+        },
+
         _popup: function() {
             const that = this;
             Select.fn._popup.call(this);
@@ -343,16 +353,18 @@ export const __meta__ = {
         },
 
         _arrowClick: function() {
-            this._toggle();
+            const that = this;
+
+            if (that._isEnabled()) {
+                that._toggle();
+            } else {
+                that._toggle(false);
+            }
         },
 
         _inputFocus: function() {
             const that = this;
-            if (that._hasActionSheet()) {
-                that.input.attr("readonly", true);
-            } else if (!that.options.readonly) {
-                that.input.removeAttr("readonly");
-            }
+
             that.wrapper.addClass(FOCUSED);
             that._placeholder(false);
         },

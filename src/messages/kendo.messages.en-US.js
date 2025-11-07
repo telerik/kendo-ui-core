@@ -1796,10 +1796,19 @@ if (kendo.ui.MultiSelect) {
 if (kendo.ui.Chat) {
     kendo.ui.Chat.prototype.options.messages =
     $.extend(true, kendo.ui.Chat.prototype.options.messages,{
-        "messageListLabel": "Message list",
-        "placeholder": "Type a message...",
-        "toggleButton": "Toggle toolbar",
-        "sendButton": "Send message"
+      "messageListLabel": "Message list",
+      "placeholder": "Type a message...",
+      "sendButton": "Send message",
+      "speechToTextButton": "Toggle speech to text",
+      "fileButton": "Attach file",
+      "downloadAll": "Download all",
+      "selfMessageDeleted": "You removed this message.",
+      "otherMessageDeleted": "This message was removed by its sender.",
+      "stopGeneration": "Stop generation",
+      "messageBoxLabel": "Type your message here",
+      "pinnedMessageCloseButton": "Unpin message",
+      "replyMessageCloseButton": "Remove reply",
+      "fileMenuButton": "File menu"
     });
 }
 

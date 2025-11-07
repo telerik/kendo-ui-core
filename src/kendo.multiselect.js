@@ -459,11 +459,6 @@ export const __meta__ = {
 
         _inputFocus: function() {
             const that = this;
-            if (that._hasActionSheet()) {
-                that.input.attr("readonly", true);
-            } else if (!that.options.readonly) {
-                that.input.removeAttr("readonly");
-            }
             that._placeholder(false, true);
             that.wrapper.addClass(FOCUSEDCLASS);
         },

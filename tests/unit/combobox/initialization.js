@@ -1433,5 +1433,13 @@ import { stub } from '../../helpers/unit/stub.js';
              assert.isOk(combobox.wrapper.attr("aria-readonly", false));
              assert.equal(combobox.options.readonly, false);
         });
+
+        it("readonly method sets input to readonly", function() {
+            let combobox = new ComboBox(input);
+            combobox.readonly(true);
+            combobox.input.focus();
+
+            assert.include(["readonly", "true"], combobox.input.attr("readonly"));
+        });
 });
 

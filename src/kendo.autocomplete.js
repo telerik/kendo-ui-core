@@ -103,14 +103,10 @@ export const __meta__ = {
                 .on("input" + ns, that._search.bind(that))
                 .on("paste" + ns, that._search.bind(that))
                 .on("focus" + ns, function(e) {
-                    if (that._hasActionSheet()) {
-                        that.element.attr("readonly", true);
-                    } else if (!that.options.readonly) {
-                        that.element.removeAttr("readonly");
-                    }
                     that._prev = that._accessor();
                     that._oldText = that._prev;
                     that._placeholder(false);
+
                     wrapper.addClass(FOCUSED);
                 })
                 .on("focusout" + ns, function(ev) {
@@ -214,7 +210,13 @@ export const __meta__ = {
 
             that._unboundClick = true;
             that.element
-                .on("click", function() { that.popup.toggle(); });
+                .on("click", function() {
+                    if (that._isEnabled()) {
+                        that.popup.toggle();
+                    } else {
+                        that.popup.close();
+                    }
+                });
 
             if (that.filterInput) {
                 that.filterInput
@@ -229,26 +231,23 @@ export const __meta__ = {
                     });
 
                 that.popup.bind("activate", () => {
-                    // that.wrapper.off("focusout");
                     that.filterInput.val(that.element.val());
                     that.filterInput.trigger("focus");
                 });
                 that.popup.bind("deactivate", () => {
-                    // that.wrapper.on("focusout", function(ev) {
-                    //     if ((that.filterInput && ev.relatedTarget === that.filterInput[0]) || !that.wrapper.hasClass(FOCUSED)) {
-                    //         return;
-                    //     }
-
-                    //     that._change();
-                    //     that._placeholder();
-                    //     that.close();
-                    //     that.wrapper.removeClass(FOCUSED);
-                    // });
-
-                    // that.wrapper.focus();
                     that.element.trigger("focus");
                 });
             }
+        },
+
+        _isEnabled: function() {
+            const that = this;
+            const element = that.element;
+
+            const isReadonly = element.prop(READONLY) || Boolean(that.element.attr("readonly"));
+            const isDisabled = element.prop(DISABLED) || Boolean(that.element.attr("disabled"));
+
+            return !isDisabled && !isReadonly;
         },
 
         _onCloseButtonPressed: function() {
@@ -720,6 +719,9 @@ export const __meta__ = {
             that._last = key;
 
             if (key === keys.DOWN) {
+                if (!that._isEnabled()) {
+                    return;
+                }
                 if (visible) {
                     this._move(current ? "focusNext" : "focusFirst");
                 } else if (that.value()) {
@@ -737,6 +739,9 @@ export const __meta__ = {
                 }
                 e.preventDefault();
             } else if (key === keys.ESC ) {
+                if (!that._isEnabled()) {
+                    return;
+                }
                 if (visible) {
                     e.preventDefault();
                     that.close();
