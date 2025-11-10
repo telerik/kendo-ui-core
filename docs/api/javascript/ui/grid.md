@@ -21437,9 +21437,9 @@ An array of command objects. Each command must have a `type` property and corres
   ```javascript
   { type: "GridGroup", group: { field: "columnName", dir: "asc" }, message: "group message" }
   ```
-- `GridUngroup` - Clear grouping (requires [groupable](/api/javascript/ui/grid/configuration/groupable) to be enabled)
+- `GridClearGroup` - Clear grouping (requires [groupable](/api/javascript/ui/grid/configuration/groupable) to be enabled)
   ```javascript
-  { type: "GridUngroup", message: "clear group message" }
+  { type: "GridClearGroup", message: "clear group message" }
   ```
 
 - `GridSelect` - Select rows based on filter criteria (requires [selectable](/api/javascript/ui/grid/configuration/selectable) to be enabled)

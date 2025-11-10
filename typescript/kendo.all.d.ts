@@ -7290,8 +7290,8 @@ declare namespace kendo.ui {
         group: kendo.data.DataSourceGroupItem;
     }
 
-    interface GridUngroupCommand extends GridAICommandBase {
-        type: "GridUngroup";
+    interface GridClearGroup extends GridAICommandBase {
+        type: "GridClearGroup";
     }
 
     interface GridSelectCommand extends GridAICommandBase {

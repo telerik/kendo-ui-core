@@ -13,7 +13,7 @@ The AI Assistant interprets user requests and automatically applies the correspo
 
 ## AI Assistant Tool Basic Set Up
 
-> The desired data operations ([`filterable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/filterable), [`sortable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/sortable), [`groupable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/groupable)) must be enabled for the Grid, so that the AI Assistant can perform them on the Grid data.
+> The desired data operations ([`filterable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/filterable), [`sortable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/sortable), [`groupable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/groupable), [`selectable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/selectable), [`reorderable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/reorderable), [`pageable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/pageable), and [`resizable`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/resizable)) must be enabled for the Grid, so that the AI Assistant can perform them on the Grid data.
 
 To configure the Grid's AI Assistant toolbar tool:
 
@@ -23,6 +23,10 @@ To configure the Grid's AI Assistant toolbar tool:
     sortable: true,
     filterable: true,
     groupable: true,
+    selectable: true,
+    reorderable: true,
+    pageable: true,
+    resizable: true
   ```
 
 2. Enable the `aiAssistant` tool in the Grid's [toolbar](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/grid/configuration/toolbar):
@@ -91,6 +95,9 @@ The following example demonstrates a Grid with AI Assistant functionality that p
             sortable: true,
             filterable: true,
             groupable: true,
+            selectable:true, 
+            reorderable: true,
+            resizable: true, 
             pageable: {
               input: true,
               numeric: false,
@@ -164,6 +171,91 @@ The examples below represent sample responses for the basic data operations:
       "messages": [
         "Grouped by the field AccountType in descending order."
       ]
+    }
+  ```
+
+- Selecting&mdash;Accepts an array of objects representing the rows that match the criteria.
+
+  ```
+    {
+      "commands": [
+          {
+              "select": {
+                  "logic": "and",
+                  "filters": [
+                      {
+                          "field": "Fee",
+                          "operator": "gt",
+                          "value": 10
+                      }
+                  ],
+                  "cells": {}
+              },
+              "type": "GridSelect",
+              "message": "Row is selected if its field \u0027Fee\u0027 is greater than 10"
+          }
+      ],
+      "message": null
+    }
+  ```
+
+- Resizing&mdash;Accepts an array of objects defining the field that is to be resized.
+
+  ```
+    {
+      "commands": [
+          {
+              "size": "250px",
+              "id": "62ac50e3-80c2-4bab-a720-d21db7a56f3c",
+              "type": "GridColumnResize",
+              "message": "Column \u002762ac50e3-80c2-4bab-a720-d21db7a56f3c\u0027 resized to 250px width."
+          }
+      ],
+      "message": null
+    }
+  ```
+
+- Paging&mdash;Accepts an array of objects defining either the page size you wish to set, or the page you wish to navigate to.
+
+  ```
+    {
+      "commands": [
+          {
+              "pageSize": 25,
+              "type": "GridPageSize",
+              "message": "Changed page size to 25 items per page."
+          }
+      ],
+      "message": null
+    }
+  ```
+
+  ```
+    {
+      "commands": [
+          {
+              "page": 2,
+              "type": "GridPage",
+              "message": "Changed to page 2."
+          }
+      ],
+      "message": null
+    }
+  ```
+
+- Reordering&mdash;Accepts an array of objects containing information about the column you wish to reorder, and its new position.
+
+  ```
+    {
+      "commands": [
+          {
+              "position": 2,
+              "id": "961a4381-c882-4364-a700-010ac99f3022",
+              "type": "GridColumnReorder",
+              "message": "Column \u0027961a4381-c882-4364-a700-010ac99f3022\u0027 moved to position 3."
+          }
+      ],
+      "message": null
     }
   ```
 
@@ -248,6 +340,9 @@ This property allows you to add [`promptSuggestions`](https://www.telerik.com/ke
               height: 550,
               scrollable: true,
               sortable: true,
+              selectable: true,
+              resizable: true,
+              reorderable: true,
               filterable: true,
               groupable: true,
               pageable: {
