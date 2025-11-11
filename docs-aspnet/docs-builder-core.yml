@@ -32,7 +32,7 @@ liquid:
   framework: "ASP.NET Core"
   framework_short: "Core"
   cdnVersion: "2025.4.1111"
-  themesCdnVersion: "12.2.2"
+  themesCdnVersion: "12.2.3"
   mvcCoreVersion: "2025.4.1111"
   platform: aspnet-core
   core: true
