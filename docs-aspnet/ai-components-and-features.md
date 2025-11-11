@@ -45,7 +45,7 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Process data using the intelligent AI capabilities of the {{ site.product }} Grid.">
     </article-card>
     <article-card
-        href="slug://ai_toolbar_tool_core_grid"
+        href="slug://ai_toolbar_tool_core_grid#row-highlighting"
         src="./images/aicomponents/AI_Data_Highlight_Light_Large.svg"
         title="AI Data Highlight"
         subTitle="Smart Data Grid Feature"

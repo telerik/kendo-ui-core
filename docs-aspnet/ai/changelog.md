@@ -11,6 +11,14 @@ position: 5
 
 Learn about the latest changes, improvements and bug fixes in the Telerik UI for {{ site.framework }} AI Coding Assistant. The updates are structured in a chronological order with the newest ones appearing first.
 
+## October, 2025 Changelog
+
+### Highlights
+
+- Improved APIs for public members for better discovery by the LLM.
+- Refined output formatting of the MCP tool to improve the ability of the LLM to follow the exact provided instructions more closely.
+- Enhanced the MCP tool's instructions to provide more accurate output.
+
 {% if site.core %}
 ## August, 2025 Changelog
 {% endif %}

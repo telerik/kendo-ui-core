@@ -49,6 +49,22 @@ To configure the Grid's AI Assistant toolbar tool:
 
 The `ai.service` defines the endpoint where your natural language queries will be processed. It must point to your custom AI service that can understand your domain-specific data and business logic.
 
+### Row Highlighting
+ 
+One of the key features of the AI Assistant toolbar tool is the ability to visually highlight Grid rows based on natural language prompts. When users enter prompts containing the word **highlight**, the Grid automatically processes the request and applies visual highlighting to the matching data.
+ 
+The highlighting functionality enables users to quickly identify and visualize data patterns without having to manually configure filters or complex search criteria. The AI service interprets the natural language request and determines which rows must be highlighted based on the specified conditions.
+ 
+Common highlighting use cases include:
+ 
+- **Conditional highlighting**&mdash;"Highlight rows where age is above 60" will visually emphasize all rows meeting that criteria.
+- **Date-based highlighting**&mdash;"Highlight all admissions after July 15th, 2024" will mark rows with dates matching the condition.
+- **Status-based highlighting**&mdash;"Highlight rows with critical patients" will emphasize rows based on status values.
+- **Numeric range highlighting**&mdash;"Highlight risk scores between 30% and 50%" will highlight rows within the specified range.
+- **Clear highlighting**&mdash;"Clear highlighting" will remove all applied highlighting effects.
+ 
+Users can combine highlighting with other data operations like filtering, sorting, and grouping.
+
 ## AI Service Integration
 
 The AI Assistant toolbar tool supports two main integration approaches depending on how you want to handle AI service communication:

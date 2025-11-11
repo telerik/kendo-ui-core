@@ -17,46 +17,92 @@ The AI Assistant interprets user requests and automatically applies the correspo
 
 To configure the Grid's AI Assistant toolbar tool:
 
-1. Set up data binding in the Grid and enable the required data operations that the AI should control:
+1. Set up data binding in the Grid and enable the required data operations that the AI must control:
 
-```Razor
-  -  .Filterable()
-  -  .Groupable()
-  -  .Scrollable()
-```
-
-2. Enable the `AiAssistant` tool in the Grid's [`toolbar`](https://www.telerik.com/{{ site.platform }}/documentation/html-helpers/data-management/grid/toolbar):
-
-```HtmlHelper
-    .ToolBar(t =>
-    {
-        t.AIAssistant();
-    })
-```
-{% if site.core %}
-```TagHelper
-    <toolbar>
-        <toolbar-button name="aiAssistant"></toolbar-button>
-    </toolbar>
-```
-{% endif %}
-
-3. Configure the `Service` property to point to your custom AI service endpoint:
-
-```HtmlHelper
-    .AI(ai => ai
-        .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
+    ```HtmlHelper
+    @(Html.Kendo().Grid<PatientRecord>()
+      .Name("grid")
+      .Filterable()
+      .Groupable()
+      .Sortable()
+      ... // Additional configuration options.
     )
-```
-{% if site.core %}
-```TagHelper
-    <ai>
-        <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-    </ai>
-```
-{% endif %}
+    ```
+    {% if site.core %}
+    ```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-grid name="grid">
+        <filterable enabled="true"/>
+        <groupable enabled="true"/>
+        <sortable enabled="true"/>
+        <!-- Additional configuration options. -->
+    </kendo-grid>
+    ```
+    {% endif %}
+
+2. Enable the `AiAssistant()` tool in the [Grid's toolbar](slug://htmlhelpers_grid_aspnetcore_toolbar):
+
+    ```HtmlHelper
+    @(Html.Kendo().Grid<PatientRecord>()
+      .Name("grid")   
+      .ToolBar(t =>
+      {
+            t.AIAssistant();
+      })
+      ... // Additional configuration options.
+    )
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="aiAssistant"></toolbar-button>
+        </toolbar>
+        <!-- Additional configuration options. -->
+    </kendo-grid>
+    ```
+    {% endif %}
+
+3. Configure the `Service` option to point to the AI service endpoint:
+
+    ```HtmlHelper
+    @(Html.Kendo().Grid<PatientRecord>()
+      .Name("grid")   
+      .AI(ai => ai
+          .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
+      )
+      ... // Additional configuration options.
+    )
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-grid name="grid">
+      <ai>
+          <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+      </ai>
+      <!-- Additional configuration options. -->
+    </kendo-grid>
+    ```
+    {% endif %}
 
 The AI service defines the endpoint where your natural language queries will be processed. It must point to your custom AI service that can understand your domain-specific data and business logic.
+
+### Row Highlighting
+
+One of the key features of the AI Assistant toolbar tool is the ability to visually highlight Grid rows based on natural language prompts. When users enter prompts containing the word **highlight**, the Grid automatically processes the request and applies visual highlighting to the matching data.
+
+The highlighting functionality enables users to quickly identify and visualize data patterns without having to manually configure filters or complex search criteria. The AI service interprets the natural language request and determines which rows must be highlighted based on the specified conditions.
+
+Common highlighting use cases include:
+
+- Conditional highlighting&mdash;**Highlight rows where age is above 60** will visually emphasize all rows meeting that criteria.
+- Date-based highlighting&mdash;**Highlight all admissions after July 15th, 2024** will mark rows with dates matching the condition.
+- Status-based highlighting&mdash;**Highlight rows with critical patients** will emphasize rows based on status values.
+- Numeric range highlighting&mdash;**Highlight risk scores between 30% and 50%** will highlight rows within the specified range.
+- Clear highlighting&mdash;**Clear highlighting** will remove all applied highlighting effects.
+
+Users can combine highlighting with other data operations like filtering, sorting, and grouping.
 
 ## AI Service Integration
 
@@ -201,54 +247,54 @@ The examples below represent sample responses for the basic data operations:
 
 - Filtering&mdash;Accepts an object with filter conditions and logic operators.
 
-  ```
-    {
-      "filter": {
-        "logic": "and",
-        "filters": [
-          {
-            "field": "Currency",
-            "operator": "eq",
-            "value": "USD"
-          }
-        ]
-      },
-      "messages": [
-        "Filtered by the field Currency with the value equal to USD"
+  ```JSON
+  {
+    "filter": {
+      "logic": "and",
+      "filters": [
+        {
+          "field": "Currency",
+          "operator": "eq",
+          "value": "USD"
+        }
       ]
-    }
+    },
+    "messages": [
+      "Filtered by the field Currency with the value equal to USD"
+    ]
+  }
   ```
 
 - Sorting&mdash;Accepts an array of objects specifying field names and sort directions.
 
-  ```
-    {
-      "sort": [
-        {
-          "field": "Amount",
-          "dir": "desc"
-        }
-      ],
-      "messages": [
-        "Sorted by the field Amount in descending order."
-      ]
-    }
+  ```JSON
+  {
+    "sort": [
+      {
+        "field": "Amount",
+        "dir": "desc"
+      }
+    ],
+    "messages": [
+      "Sorted by the field Amount in descending order."
+    ]
+  }
   ```
 
 - Grouping&mdash;Accepts an array of objects defining the fields to group by.
 
-  ```
-    {
-      "group": [
-        {
-          "field": "AccountType",
-          "dir": "desc"
-        }
-      ],
-      "messages": [
-        "Grouped by the field AccountType in descending order."
-      ]
-    }
+  ```JSON
+  {
+    "group": [
+      {
+        "field": "AccountType",
+        "dir": "desc"
+      }
+    ],
+    "messages": [
+      "Grouped by the field AccountType in descending order."
+    ]
+  }
   ```
 
 ### Manual Integration
@@ -262,7 +308,6 @@ When the response from the service is received, you can utilize the `PromptRespo
 In the AI Assistant configuration, you can handle all events provided by the integrated AIPrompt component. 
 
 These event details allow you to implement fully customized AI service communication while maintaining access to the Grid context and user input.
-
 
 ## Customization Options
 
@@ -293,19 +338,19 @@ This property allows you to add PromptSuggestions tailored to your specific use 
 ```
 {% if site.core %}
 ```TagHelper
-    <ai>
-        <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-        <ai-assistant prompt-suggestions='new[] {
-                              "Sort by Amount descending",
-                              "Group by account type",
-                              "Show only failed transactions",
-                              "Filter where currency is USD",
-                              "Display withdrawals over 800 after 15th September 2024",
-                              "Clear filtering",
-                              "Clear grouping"
-                          }'>
-        </ai-assistant>
-    </ai>
+  <ai>
+      <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+      <ai-assistant prompt-suggestions='new[] {
+          "Sort by Amount descending",
+          "Group by account type",
+          "Show only failed transactions",
+          "Filter where currency is USD",
+          "Display withdrawals over 800 after 15th September 2024",
+          "Clear filtering",
+          "Clear grouping"
+      }'>
+      </ai-assistant>
+  </ai>
 ```
 {% endif %}
 
@@ -316,27 +361,26 @@ You can also customize the appearance of the [Window](https://www.telerik.com/{{
 To achieve this, use the `AIAssistantWindow` property, which allows you to control the positioning and visual appearance of the Window to match your application's design and requirements.
 
 ```HtmlHelper
-    .AI(ai => ai
-        .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
-        .AIAssistantWindow(ws => ws.Width(500).Height(460))
-    )
+.AI(ai => ai
+    .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
+    .AIAssistantWindow(ws => ws.Width(500).Height(460))
+)
 ```
 {% if site.core %}
 ```TagHelper
-    <ai>
-        <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-        <ai-assistant-window width="500" height="460"></ai-assistant-window>
-    </ai>
+<ai>
+    <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+    <ai-assistant-window width="500" height="460"></ai-assistant-window>
+</ai>
 ```
 {% endif %}
-
 
 ## Suggested Links
 
 {% if site.core %}
 * [ASP.NET Core Grid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
-* [Knowledge Base Section](/knowledge-base)
-* [Server-Side API](/api/grid)
-* [AI Toolbar Tool in Telerik UI Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar)
+* [AI Toolbar Tool of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar)
+* [AI Row Highlighting by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar-highlight)
 * [AIPrompt Overview Documentation](https://www.telerik.com/{{ site.platform }}/documentation/html-helpers/conversational-ui/aiprompt/overview)
+* [Server-Side API](/api/grid)
