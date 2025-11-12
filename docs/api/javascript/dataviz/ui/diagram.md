@@ -877,9 +877,18 @@ How to set default color for connector end caps in Kendo UI diagram? Control and
 Defines the line cap style of the stroke. Supported values are "butt", "round", and "square".
 
 
+<div class="meta-api-description">
+How do I customize the line cap style of the stroke on connection end caps in a Kendo UI diagram? Control the appearance of how connection end cap strokes terminate or end by setting the line cap style to butt for flat endings, round for circular endings, or square for extended rectangular endings, enabling precise visual customization of stroke termination points on diagram connection end caps, endpoint decorations, arrowhead outlines, or terminal cap lines to match design requirements and improve connector clarity in diagrams, flowcharts, or visual graphs.
+</div>
+
 ### connectionDefaults.endCap.stroke.lineJoin `String`
 
 Defines the line join style of the stroke. Supported values are "bevel", "miter", and "round".
+
+
+<div class="meta-api-description">
+How do I customize the line join style of the stroke on connection end caps in a Kendo UI diagram? Control the appearance of how connection end cap strokes connect or meet at corners by setting the line join style to bevel for flat-cut corners, miter for sharp pointed corners, or round for smooth curved corners, enabling precise visual customization of stroke junction points on diagram connection end caps, endpoint decorations, arrowhead corners, or terminal cap corners to match design requirements and improve connector clarity in diagrams, flowcharts, or visual graphs.
+</div>
 
 ### connectionDefaults.endCap.stroke.dashType `String`
 
