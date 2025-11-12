@@ -12,31 +12,31 @@ position: 60
 
 Progress maintains the Telerik NuGet Feed for registered users and all Kendo UI for jQuery official releases and service packs are published there as well.
 
-> The NuGet v2 server at `https://nuget.telerik.com/nuget` will be sunset in November 2024.
->
-> The new v3 protocol offers faster package searches and restores, improved security, and more reliable infrastructure.
->
-> To redirect your feed to the NuGet v3 protocol, all you have to do is to change your NuGet package source URL to `https://nuget.telerik.com/v3/index.json`.
-
 > As of R3 2023 the Kendo UI bundles do not include the jQuery library in their `js` directories and you can [`download jQuery using NuGet package manager`](https://subscription.packtpub.com/book/web-development/9781782173113/1/ch01lvl1sec12/using-nuget-package-manager-to-download-jquery) or use other source for the jQuery library.
 
-## 1. Choose the Required Package
+
+## 1. Generate a NuGet API Key
+
+@[template](/_contentTemplates/nuget-apikey.md#generate-nuget-api-key)
+
+## 2. Choose the Required Package
 
 The Telerik NuGet Feed provides the following Kendo UI for jQuery packages:
 
 * `KendoUIProfessional`&mdash;The commercial Kendo UI for jQuery version.
 * `KendoUICore`&mdash;The open-source Kendo UI distribution which contains only the open-sourced components.
 
-## 2. Register the Feed on Your System
+## 3. Register the Feed on Your System
 
 To add the Telerik NuGet feed as a package source on your machine and access the packages, use either of the following approaches:
 
 * [Use the NuGet CLI](#add-the-feed-with-the-nuget-cli).
 * [Use the UI provided from Visual Studio for configuring authenticated NuGet feeds](#add-the-feed-with-the-nuget-package-manager).
 
-The following video summarizes the steps for adding the Telerik NuGet feed to your NuGet sources.
+Regardless of how you set up the Telerik NuGet feed, you must first [generate a NuGet API key](#1-generate-a-nuget-api-key) needed for the authentication.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/c3m_BLMXNDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>warning Never hard-code your Telerik NuGet API keys in a `NuGet.Config` file in a GitHub repository, Docker image, or any location that may be accessed by unauthorized parties. An API key is valuable and bad actors can use it to access the NuGet packages that are licensed under your account. A credentials abuse can lead to a review of the affected Telerik account.
+
 
 ### Add the Feed with the NuGet CLI
 
@@ -44,23 +44,14 @@ To register the Telerik NuGet Feed on your system by using the [NuGet CLI](http:
 
 1. Download the [latest NuGet executable](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe).
 1. Open a command prompt and change the path to where the `nuget.exe` is downloaded.
-1. The command from the following example stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
+1. Execute the command:
 
-    ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password"
-    ```
+   ```SH
+   NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "api-key" -Password "YOUR-NUGET-API-KEY" -StorePasswordInClearText
+   ```
 
-    If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text.
-
-    ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
-    ```
-
-    If you have already stored a token instead of storing the credentials as clear text, you can update the definition in the `%AppData%\NuGet\NuGet.config` file by using the following command:
-
-    ```
-        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
-    ```
+    The command adds the Telerik NuGet source, uses your NuGet API key for authentication, and stores the API key in plain text in the global config file (in `%AppData%\NuGet\NuGet.config`).
+    
 
 ### Add the Feed with the NuGet Package Manager
 
@@ -73,7 +64,13 @@ To register the Telerik NuGet Feed on your system by using the NuGet package man
     ![Kendo UI for jQuery Resources](../../images/add-nuget-package-source.png)
 
 1. Select the **Browse** list of packages.
-1. Enter your Telerik credentials in the Windows Authentication dialog. As a result, all of the packages that are licensed to the user account are now available in Visual Studio Package Manager.
+1. In the Windows authentication prompt:
+
+   5.1. Enter `api-key` in the **User Name** field.
+
+   5.2. Enter your [NuGet API key](#1-generate-a-nuget-api-key) in the **Password** field.
+
+   5.3. Check the **Remember My Password** checkbox.
 
 ## 3. Install the Packages
 

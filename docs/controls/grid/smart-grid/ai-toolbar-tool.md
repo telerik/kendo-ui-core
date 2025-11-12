@@ -398,6 +398,6 @@ To achieve this, use the [`ai.aiassistantwindow`]https://www.telerik.com/kendo-j
 ## Suggested Links
 
 * [JavaScript API Reference of the Kendo UI for jQuery Grid](/api/javascript/ui/grid)
-* [AI Toolbar Tool in Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/ai-toolbar)
+* [AI Toolbar Assistant in Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/ai-toolbar)
 * [AI Toolbar Tool - Highlight in Kendo UI for jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/ai-toolbar)
 * [AIPrompt Overview Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/aiprompt/overview)

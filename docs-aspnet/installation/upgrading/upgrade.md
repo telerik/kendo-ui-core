@@ -94,8 +94,7 @@ The project will be upgraded to the latest {{ site.product }} version.
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
 
-> The `NuGet package` and the required [`client-side resources`]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) must have identical versions.
-
+@[template](/_contentTemplates/general-info.md#identical-versions-note-core)
 
 {% else %}
 
@@ -116,7 +115,8 @@ The project will be upgraded to the latest {{ site.product }} version.
 
    * If the scripts and styles are referenced locally, download the JavaScript and CSS files from the Telerik website and then copying them in your project. For the detailed step-by-step procedure, refer to the [Using Local Files]({% slug using_local_client_side_resources%}) article.
 
-> The `Kendo.Mvc.dll` and the required [`client-side resources`]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) must have identical versions.
+@[template](/_contentTemplates/general-info.md#identical-versions-note-mvc)
+
 {% endif %}
 
 ## Switching to a Developer License [Deprecated]

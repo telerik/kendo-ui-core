@@ -1,118 +1,116 @@
 ---
 title: Restoring NuGet Packages in CI
 page_title: Restoring NuGet Packages in CI
-description: "Get started with {{ site.product }} and use NuGet Keys to authenticate with the Telerik NuGet server and restore packages in your CI or desktop environment."
+description: "Get started with {{ site.product }} and use API Keys to authenticate with the Telerik NuGet server and restore packages in your CI or desktop environment."
 previous_url: /installation/nuget-keys
 slug: nuget_keys
-position: 10
+position: 3
 ---
 
 # Restoring NuGet Packages in Your CI Workflow
 
-This article provides an overview of the most popular approaches for using token-based authentication to restore Telerik NuGet packages in your CI (Continuous Integration) workflow.
+This article describes how to use token-based authentication for the Telerik NuGet feed. You will learn how to create and use NuGet API keys to restore Telerik NuGet packages in your Continuous Integration (CI) workflow.
 
-The Telerik NuGet server allows you to authenticate by using two methods:
+When you need to restore the [Telerik NuGet packages]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#list-of-provided-packages) as part of your CI, using API Keys provides a secure way to authenticate. This method does not require you to provide your Telerik credentials anywhere in the CI workflow. An API key has a limited scope and can be used only with the Telerik NuGet server. If any of your API Keys is compromised, you can quickly delete it and create a new one.
 
-* Basic authentication by providing your Telerik user name and password.
-* Token-based authentication by providing a NuGet Key.
+## Generating API Keys
 
-When you need to restore Telerik NuGet packages as part of your CI, using NuGet keys is the more secure way to authenticate. This method does not require you to provide your Telerik username and password anywhere in the CI workflow.
+@[template](/_contentTemplates/get-started.md#generate-nuget-api-key)
 
-Unlike your Telerik credentials, a NuGet Key has a limited scope and can be used only with the Telerik NuGet server. If any of your NuGet keys is compromised, you can quickly delete it and create a new one.
+## Storing API Keys
 
-## Generating NuGet Keys
+>warning Never check in NuGet API keys with your source code or leave them publicly visible in plain text (for example, in a `NuGet.Config` file). An API key is valuable and bad actors can use it to access the NuGet packages that are licensed under your account. A key abuse can lead to a review of the affected Telerik account.
 
-1. Go to the [**Manage NuGet Keys**](https://www.telerik.com/account/downloads/nuget-keys) page in your Telerik account.
+To protect the API key, store it as a secret environment variable. The exact store steps depend on your workflow and environment:
 
-    ![{{ site.product_short }} Manage NuGet Keys](../images/manage-nuget-keys.png)
+* In GitHub Actions, save the key as a [GitHub Actions Secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions).
+* In Azure DevOps, save the key as a [secret Azure DevOps pipeline variable](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables). If you use an Azure DevOps Service connection instead of secret environment variables, enter `api-key` in the username field and the API key as the password in the **New NuGet service connection** form editor.
+* In Docker images, save the key as a [Docker secret](https://docs.docker.com/tags/secrets/).
 
-1. To create a new key, select the **Generate New Key** button.
+For more details on storing and protecting your API key, check the [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys) blog post by Lance McCarthy.
 
-1. Enter a name for the NuGet Key, and then select **Generate Key**.
+The examples below assume that the secret environment variable name is `TELERIK_NUGET_KEY`.
 
-1. To copy the key, select **Copy and Close**. Once you close the window, you can no longer copy the generated key. For security reasons, the **NuGet Keys** page displays only a portion of the key.
+## Using API Keys
 
-    ![{{ site.product_short }} Copy Generated NuGet Key](../images/copy-nuget-key.png)
+{% if site.core %}
+There are two common ways to use a [stored API key](#storing-api-keys) with the Telerik NuGet server during a build:
 
-## Storing a NuGet Key
+* [Use a NuGet.Config file](#using-a-nuget-config-file)
+* [Use only CLI commands](#using-net-cli-commands)
 
-> Never check in a NuGet Key with your source code or leave it publicly visible in plain text, for example, as a raw key value in a `nuget.config` file. A NuGet Key is valuable as bad actors can use it to access the NuGet packages that are licensed under your account. A potential key abuse could lead to a review of the affected account.
+For more information on how to use API keys in a build, check the [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys) blog post by Lance McCarthy.
 
-To protect the NuGet Key, store it as a secret environment variable. The exact steps depend on your workflow:
+### Using a NuGet.Config File
 
-* In GitHub Actions, save the key as a GitHub Actions Secret. Go to **Settings** > **Security** > **Secrets** > **Actions** > **Add new secret**.
+In your `NuGet.Config` file, set the `Username` value to `api-key` and the `ClearTextPassword` value to an environment variable name:
 
-* In Azure DevOps Classic, save the key as a secret pipeline variable. Go to the **Variables** tab and then select **Pipeline variables**.
+```XML
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <packageSources>
+    <clear />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="TelerikOnlineFeed" value="https://nuget.telerik.com/v3/index.json" protocolVersion="3" />
+  </packageSources>
+  <packageSourceCredentials>
+    <TelerikOnlineFeed>
+      <add key="Username" value="api-key" />
+      <add key="ClearTextPassword" value="%TELERIK_NUGET_KEY%" />
+    </TelerikOnlineFeed>
+  </packageSourceCredentials>
+</configuration>
+```
 
-* In Azure DevOps YAML pipelines, save the key as a secret variable as well. Click the YAML editor's **Variables** button and complete the **New variable** form.
+### Using .NET CLI Commands
 
-If you use Azure DevOps Service connection instead of secret environment variables, enter `api-key` in the username filed and the NuGet Key as the password in the **New NuGet service connection** form editor.
-
-For more details on storing and protecting your NuGet Key, check the [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys) blog post by Lance McCarthy.
-
-## Using a NuGet Key
-
-There are two popular ways to use the Telerik NuGet server in a build:
-
-* [Using a nuget.config file with your projects](#using-a-nugetconfig-file-with-your-projects)
-
-* [Using only CLI commands](#using-only-cli-commands) (requires .NET Core 3.1 SDK or newer)
-
-For more information on how to use NuGet keys in a build, check the [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys) blog post by Lance McCarthy.
-
-### Using a nuget.config File with Your Projects
-
-1. In your `nuget.config` file, set the `Username` value to `api-key` and the `ClearTextPassword` value to an environment variable name:
-
-    ```xml
-        <configuration>
-        <packageSources>
-            <clear/>
-            <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
-            <add key="MyTelerikFeed" value="https://nuget.telerik.com/v3/index.json" protocolVersion="3"/>
-        </packageSources>
-        <packageSourceCredentials>
-            <MyTelerikFeed>
-            <add key="Username" value="api-key" />
-            <add key="ClearTextPassword" value="%MY_API_KEY%" />
-            </MyTelerikFeed>
-        </packageSourceCredentials>
-        ...
-        </configuration>
-    ```
-
-1. Set the `MY_API_KEY` environment variable by using the value of your pipeline/workflow secret.
-
-The exact steps to set the `MY_API_KEY` environment variable depend on your workflow. For more details, refer to the [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys) blog post by Lance McCarthy.
-
-### Using Only CLI Commands
-
-You can use the CLI `add source` (or `update source`) command to set the credentials of a package source. This CLI approach is applicable if your CI system doesn't support default environment variable secrets or if you do not use a custom `nuget.config`. Using the CLI requires installing .NET Core 3.1 SDK or newer. 
+You can use the .NET CLI `add source` or `update source` commands to set the credentials of a package source. This CLI approach is applicable if your CI system does not support [environment variable secrets](#storing-api-keys) or if you do not [use a custom `NuGet.Config`](#using-a-nugetconfig-file).
 
 * To set the credentials in Azure DevOps:
 
-    ```batch
-    dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '$(TELERIK_NUGET_KEY)' --configfile './nuget.config' --store-password-in-clear-text
+    ```SH
+    dotnet nuget add source 'https://nuget.telerik.com/v3/index.json' --name 'TelerikOnlineFeed' --username 'api-key' --password '$(TELERIK_NUGET_KEY)' --configfile './NuGet.Config' --store-password-in-clear-text
     ```
 
 * To set the credentials in GitHub Actions:
 
-    ```batch
-    dotnet nuget add source 'MyTelerikFeed' --source 'https://nuget.telerik.com/v3/index.json' --username 'api-key' --password '${{ secrets.TELERIK_NUGET_KEY }}' --configfile './nuget.config' --store-password-in-clear-text
+    ```SH
+    dotnet nuget add source 'https://nuget.telerik.com/v3/index.json' --name 'TelerikOnlineFeed' --username 'api-key' --password '${{ "{{secrets.TELERIK_NUGET_KEY}}" }}' --configfile './NuGet.Config' --store-password-in-clear-text
     ```
+{% else %}
+To use a [stored API key](#storing-api-keys) with the Telerik NuGet server in your `NuGet.Config` file, set the `Username` value to `api-key` and the `ClearTextPassword` value to an environment variable name:
 
-## Additional Resources
+```XML
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <packageSources>
+    <clear />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="TelerikOnlineFeed" value="https://nuget.telerik.com/v3/index.json" protocolVersion="3" />
+  </packageSources>
+  <packageSourceCredentials>
+    <TelerikOnlineFeed>
+      <add key="Username" value="api-key" />
+      <add key="ClearTextPassword" value="%TELERIK_NUGET_KEY%" />
+    </TelerikOnlineFeed>
+  </packageSourceCredentials>
+</configuration>
+```
+{% endif %}
 
-If you just start using the Telerik NuGet server in your CI or inter-department workflows, check the two blog posts below. You will learn about the various use cases and find practical implementation details.
+## Complete CI/CD Setup
 
-* [Azure DevOps and Telerik NuGet Packages](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
+In a complete CI/CD workflow for {{ site.product }} apps, you typically need to set up two types of authentication:
 
-* [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys)
+* **NuGet Package Restoration** (covered in this article)&mdash;Use `TELERIK_NUGET_KEY` to authenticate with the Telerik NuGet server and restore packages.
+* **License Activation**&mdash;Use `TELERIK_LICENSE` or `TELERIK_LICENSE_PATH` to activate your Telerik license during build. See [Telerik License Key in CI/CD Environment]({% slug deployment_license_key_aspnetcore %}) for details.
+
+Both secrets are required for a successful CI/CD build.
 
 ## See Also
 
-* [Set Up Private NuGet Feed for Azure](https://docs.telerik.com/{{ site.platform }}/knowledge-base/setup-private-nuget-feed-azure)
-
-* [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-
-* [Scaffolding the {{ site.product }} Project]({% slug scaffolding_aspnetcore %})
+* [Telerik License Key in CI/CD Environment]({% slug deployment_license_key_aspnetcore %})
+* [Telerik NuGet Feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
+* [CI, CD, Build Server Setup]({% slug deployment_ci_cd_build %})
+* [Azure DevOps and Telerik NuGet Packages](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
+* [Announcing NuGet Keys](https://www.telerik.com/blogs/announcing-nuget-keys)

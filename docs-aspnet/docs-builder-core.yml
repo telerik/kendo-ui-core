@@ -717,9 +717,6 @@ meta:
     title: Data Management
   html-helpers/datasource:
     title: Data Source
-  ai-components-and-features:
-    title: AI Components & Features
-    position: 7
   html-helpers:
     title: Components
     position: 8

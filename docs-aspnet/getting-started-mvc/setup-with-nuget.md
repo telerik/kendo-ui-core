@@ -14,13 +14,13 @@ This article demonstrates how to add Telerik UI components to an ASP.NET MVC Web
 To get up and running with the project:
 
 1. [Check the prerequisites](#prerequisites)
-1. [Create the ASP.NET MVC Web Application](#creating-the-application)
+1. [Create an ASP.NET MVC Web Application](#creating-the-application)
+1. [Install a license key](#installing-a-license-key).
 1. [Add the Telerik NuGet Feed to Visual Studio](#adding-the-telerik-nuget-feed-to-visual-studio)
-1. [Install the UI for ASP.NET MVC NuGet package](#installing-the-nuget-package)
-1. [Include the Telerik UI for ASP.NET MVC client-side resources](#including-the-client-side-resources)
-1. [Initialize the HtmlHelper](#initializing-the-htmlhelper)
+1. [Install the {{ site.product }} NuGet package](#installing-the-nuget-package)
+1. [Include the client-side resources](#including-the-client-side-resources)
+1. [Add a component](#adding-a-telerik-ui-component).
 1. [Build and run the application](#building-and-running-the-application)
-1. [Add a license file to your app](#adding-your-license-file)
 
 ## Prerequisites
 
@@ -34,37 +34,27 @@ To get up and running with the project:
 
 ## Creating the Application
 
-If you already have an existing project and you want to add Telerik UI for ASP.NET MVC to the application, skip this section and continue with [adding the Telerik NuGet](#adding-the-telerik-nuget-feed-to-visual-studio).
+If you already have an existing project and you want to add Telerik UI for ASP.NET MVC to the application, skip this section and continue with [installing a license key](#installing-a-license-key).
 
 1. Open Visual Studio 2019 for Windows and select **Create a new project**.
 1. Select **ASP.NET Web Application (.NET Framework)** and click **Next**.
 1. Set a name and location for the project and click **Create**.
 1. Select **MVC** and click **Create**.
 
+## Installing a License Key
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-version)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-manual-steps)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-know-more-link)
+
 ## Adding the Telerik NuGet Feed to Visual Studio
 
-Telerik maintains a NuGet feed with official UI ASP.NET MVC releases and service packs. These packages are available for registered users with active licenses.
+>tip If you have already configured the Telerik NuGet feed in Visual Studio, jump to [install the NuGet package](#installing-the-nuget-package).
 
->tip If you have already configured the Telerik NuGet feed in Visual Studio, jump to [Installing the NuGet Package](#installing-the-nuget-package).
+@[template](/_contentTemplates/get-started.md#add-nuget-feed)
 	
-### Adding the Telerik NuGet Feed
-
-The easiest way to add the Telerik NuGet feed to Visual Studio is to use the Progress Control Panel:
-
-1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/). 
-
-	![{{ site.product_short }} Download Progress Control Panel](../getting-started-mvc/images/download-control-panel.png)
-	
-1. Run the Progress Control Panel exe.
-
-1. On the Login screen, check the **set up Telerik NuGet package source** option.
-
-	![{{ site.product_short }} Set Up Nuget on Progress Control Panel Login](../getting-started-mvc/images/login-control-panel.png)
-	
-	If you miss to set up the Nuget Feed on login, go to the Progress Control Panel options and scroll to **Nuget Settings**. Enter your Telerik credentials and click the **Save and Close** button.
-
-	![{{ site.product_short }} Set Up Nuget on Progress Control Panel options](../getting-started-mvc/images/nuget-control-panel-options.png)
-
 ## Installing the NuGet Package
 
 Once you configure Visual Studio to access the Telerik NuGet server, you can add NuGet package with the Telerik UI components to the project:
@@ -85,9 +75,9 @@ Once you configure Visual Studio to access the Telerik NuGet server, you can add
 
 @[template](/_contentTemplates/mvc/add-client-side-resources.md#including-client-side-resources)
 
-## Initializing the HtmlHelper 
+## Adding a Telerik UI Component
 
-Perform the steps below to initialize the HtmlHelper:
+To define a [Grid component]({% slug htmlhelpers_grid_aspnetcore_overview%}), follow the next steps:
 
 1. Create a model in the `Models` folder of the application.
 
@@ -101,8 +91,8 @@ Perform the steps below to initialize the HtmlHelper:
 	}
 	```
 
-1. Open the `~/Views/Home/Index.cshtml` view or, if using ASPX, the `Index.aspx` file.
-1. Add a Kendo UI Grid HtmlHelper.
+1. Open the `~/Views/Home/Index.cshtml` view (if using ASPX, the `Index.aspx` file).
+1. Define a Telerik UI Grid HtmlHelper.
 
     ```Razor
         <div class="text-center">
@@ -123,16 +113,15 @@ Perform the steps below to initialize the HtmlHelper:
 			)
 		</div>
     ```
-1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult` extension method in the next step.
+1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult()` extension method in the next step.
 
 	```C#
 	using Kendo.Mvc.Extensions;
 	using Kendo.Mvc.UI;
+	using TelerikMvcApp1.Models;
 	```
 
-Additionally, import the namespace for the model that you created in step 1.
-
-1. In the `HomeController.cs`, add a new action method which will return the data as JSON. The Grid makes Ajax requests to this action.
+1. In the `HomeController.cs`, add a new Action method that returns the Grid data as JSON. The Grid makes Ajax requests to this Action method.
 
 	```C#
 	public ActionResult Select([DataSourceRequest]DataSourceRequest request)
@@ -155,12 +144,6 @@ Additionally, import the namespace for the model that you created in step 1.
 Press `CTRL+F5` to build and run the application. As a result, the following sample page is created.
 
 ![{{ site.product_short }} Sample page](../getting-started-mvc/images/sample-page.png)
-
-## Adding Your License File
-
-Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Telerik license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message]({% slug troubleshooting-license-key-errors %}) in the browser's console.
-
-To generate your license file and add it to your application, follow the instructions in the [Installing a License File]({% slug installation_license_key_aspnetcore %}) article.
 
 ## Next Steps
 

@@ -10,12 +10,14 @@ position: 1
 
 This article explains some concepts and how to troubleshoot the most common errors related to setting up the Telerik NuGet packages for automated builds, CI and CD.
 
-Sections in this article:
+> To successfully set up a CI/CD environment for {{ site.framework }} apps, also refer to the article about [Telerik license keys in CI/CD]({% slug deployment_license_key_aspnetcore %}).
 
+Sections in this article:
 
 * [Basics](#basics)
 * [Azure DevOps Pipelines](#azure-devops-pipelines)
 * [GitHub Secrets](#github-secrets)
+* [Docker](#docker)
 
 ## Basics
 
@@ -23,7 +25,7 @@ Often enough, you would want to set up Continuous Integration and/or Continuous 
 
 There are a couple of common ways people implement CI/CD automated builds.
 
-* You can [restore the Telerik NuGet packages]({%slug nuget_keys%}) by downloading them from the Telerik NuGet server. You can achieve this by using the more secure token-based authentication with the Telerik NuGet server. If you prefer the basic authentication with a username and password, you can use your own credentials (or the credentials of the license holder, depending on how your licenses are set up) in the `nuget.config` of the build machine/pipeline. In this case, make sure that your credentials are encrypted when you add the Telerik feed source through the CLI. Alternatively, you can copy an encrypted version from your own local config if you have one. See more on setting up the [Telerik Private NuGet feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}).
+* You can [restore the Telerik NuGet packages]({%slug nuget_keys%}) by downloading them from the Telerik NuGet server using token-based authentication with a [NuGet API key](https://www.telerik.com/account/downloads/api-keys). This is the recommended secure approach for CI/CD environments. See more on setting up the [Telerik Private NuGet feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%}).
 
 * Creating a local folder (for example, on a shared network drive or other suitable location accessible only by your builds and team) that holds the `.nupkg` files we provide (you can download them from your telerik.com account, or from your local installation - both [automated]({%slug msi_install_aspnetmvc6_aspnetmvc%}) and from the zip archive).
 
@@ -32,86 +34,112 @@ You must protect your credentials and/or the Telerik packages and ensure they ar
 
 ## Azure DevOps Pipelines
 
-When using Azure pipelines, we encourage you to review the following resource on setting things up:
+When using Azure pipelines, we encourage you to review the following resources on setting things up:
 
-* [Set Up Private NuGet Feed for Azure]({%slug howto_setupprivatefeedazure_aspnetcore%})
+* Blog post: [Azure DevOps and Telerik NuGet Packages](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
+* Sample Repo and Video Tutorial: [Telerik DevOpsExamples by Lance McCarthy](https://github.com/LanceMcCarthy/DevOpsExamples)
 
-* Sample Repo and Video Tutorial: [Telerik DevOpsExamples by LanceMcCarthy](https://github.com/LanceMcCarthy/DevOpsExamples)
+There are a couple of common questions and issues:
 
->caption There are a couple of common questions and issues:
+* Obtaining credentials&mdash;See the points above for either using your own credentials, or using a shared package source.
+* Telerik feed not being found&mdash;The most common reason for a problem is that the path to the `NuGet.Config` file is wrong (it must, by default, be at the root level).
+* An `index.json not found` error can occur from many root causes. If you have successfully authenticated, this error usually means that the feed was not able to be searched or connected to. A common reason is an incorrect feed URL, such as including a trailing slash&mdash;Correct: `https://nuget.telerik.com/v3/index.json` and Incorrect: `https://nuget.telerik.com/v3/index.json/`.
 
-* Obtaining credentials - see the points above for either using your own credentials, or using a shared package source.
-
-* Telerik feed not being found - the most common reason for a problem is that the path to the `nuget.config` file is wrong (it should, by default, be at the root level).
-
-* An `index.json not found` error can occur from many root causes. If you have successfully authenticated, this error usually means that the feed wasn't able to be searched or connected to. A common reason is an incorrect feed URL, such as including a trailing slash - Correct: `https://nuget.telerik.com/v3/index.json` and Incorrect: `https://nuget.telerik.com/v3/index.json/`.
-
->caption A few things to double check to ensure correct setup:
+A few things to double check to ensure correct setup:
 
 * The Service connection is using Basic Authentication and the URL is correct (`https://nuget.telerik.com/v3/index.json` exactly, no trailing slash).
-
 * That Service Connection is selected as the credentials source.
-
 * The credentials being used have a {{ site.product_short }} license.
-
-* Make sure that you use `dotnet restore` and not `nuget restore` in your pipeline step.
-
+{% if site.core %}
+* Ensure that you use `dotnet restore` and not `nuget restore` in your pipeline step.
+{% endif %}
 
 ## GitHub Secrets
 
-In some cases, [GitHub Secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) are used to store credentials that you would later have to consume from the `nuget.config` file in order to connect to the Telerik feed in your GitHub Actions workflows.
+For GitHub Actions workflows, use NuGet API keys for secure authentication with the Telerik NuGet server. See [Restoring NuGet Packages in Your CI Workflow]({% slug nuget_keys %}) for detailed instructions.
 
-A way to pass them along is to mark them as environment variables. You can find an example in the [DevOpsExamples repo by Lance McCarthy](https://github.com/LanceMcCarthy/DevOpsExamples). Here follow the two relevant extracts.
+To set up API key authentication:
 
->caption Example of setting GitHub Secrets into Environment Variables for Telerik Login
-
-````YAML
-jobs:
-  build:
-    runs-on: windows-latest
-
-    env:
-      TELERIK_USERNAME: ${ { secrets.MyTelerikAccountUsername } }  # remove the space between the brackets
-      TELERIK_PASSWORD: ${ { secrets.MyTelerikAccountPassword } }  # remove the space between the brackets
-
-````
-
->tip Even though you are copying secrets into Environment Variables on the runner, Github Actions will continue to treat the values as protected string and mask the values in all output.
-
-Finally, you need a `nuget.config` file that lists the Telerik server in the `packageSources`, as well as an accompanying `packageSourceCredentials` that uses those named environment variables for the `Username` and `ClearTextPassword` keys.
-
->caption Example of Using Environment Variables in NuGet.config
-
-````XML
-<packageSources>
-  <clear />
-  <add key="NuGet" value="https://api.nuget.org/v3/index.json" />
-  <add key="TelerikFeed" value="https://nuget.telerik.com/v3/index.json" />
-</packageSources>
-<packageSourceCredentials>
-  <TelerikFeed>
-    <add key="Username" value="%TELERIK_USERNAME%" />
-    <add key="ClearTextPassword" value="%TELERIK_PASSWORD%" />
-  </TelerikFeed>
-</packageSourceCredentials>
-````
+1. [Generate a NuGet API key](https://www.telerik.com/account/downloads/api-keys) from your Telerik account.
+1. Store it as a [GitHub Actions Secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions) named `TELERIK_NUGET_KEY`.
+1. Use the API key in your workflow as shown in [Restoring NuGet Packages in Your CI Workflow]({% slug nuget_keys %}#using-api-keys).
 
 >warning GitHub does not allow secrets to be used in workflows that have been [triggered by a pull request event](https://docs.github.com/en/actions/reference/events-that-trigger-workflows). In such a case, the runner will not be able to authenticate with the Telerik NuGet server and the job will expectedly fail.
 
+## Docker
 
+When building or restoring {{ site.framework }} apps in Docker, the crucial steps are:
+
+1. Have a `NuGet.Config` file in the project or solution folder. The file can [define the Telerik NuGet feed]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#setup-with-nugetconfig), but without the credentials.
+1. Copy the `NuGet.Config` file together with the `.csproj` file(s) to the Docker image.
+1. [Add](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source) or [update](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-update-source) the Telerik NuGet feed with the [stored Telerik NuGet credentials (secrets)]({% slug nuget_keys %}). When specifying the `NuGet.Config` file location, note that file names are case-sensitive on Unix systems.
+1. Restore or build the app.
+
+{% if site.core %}
+The following code is the build portion of a sample `Dockerfile` that builds a .NET 8 ASP.NET Core app. The `dotnet restore` command is executed from the `src` folder of the Docker image (where the `NuGet.Config` is copied), so that the `NuGet.Config` file can be used to restore all projects in the solution.
+
+```SH
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy the project file to restore
+COPY ["MyAspNetCoreApp/MyAspNetCoreApp.csproj", "MyAspNetCoreApp/"]
+
+# Copy the NuGet.Config file without the Telerik credentials to /src
+COPY ["NuGet.Config", "."]
+
+# Update the Telerik NuGet source and add credentials from your secrets storage
+RUN dotnet nuget update source "TelerikFeed" --username ... --password ... --configfile "./NuGet.Config" --store-password-in-clear-text
+
+# Restore the NuGet packages for the ASP.NET Core app
+RUN dotnet restore "./MyAspNetCoreApp/MyAspNetCoreApp.csproj"
+
+# Copy the whole ASP.NET Core app
+COPY . .
+
+# Build the app
+WORKDIR "/src/MyAspNetCoreApp"
+RUN dotnet build "./MyAspNetCoreApp.csproj" -c Release -o /app/build
+```
+{% else %}
+The following code is the build portion of a sample `Dockerfile` that builds a .NET Framework 4.8 ASP.NET MVC app. The `nuget.exe restore` command is executed from the `src` folder of the Docker image (where the `NuGet.Config` is copied), so that the `NuGet.Config` file can be used to restore all packages for the project. The `nuget.exe` tool must be downloaded first as it is not included in the SDK image by default.
+
+```SH
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019 AS build
+WORKDIR /src
+
+# Download nuget.exe (required for .NET Framework)
+RUN powershell -Command "Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe"
+
+# Copy the project file to restore
+COPY ["MyMvcApp/MyMvcApp.csproj", "MyMvcApp/"]
+COPY ["MyMvcApp/packages.config", "MyMvcApp/"]
+
+# Copy the NuGet.Config file without the Telerik credentials to /src
+COPY ["NuGet.Config", "."]
+
+# Update the Telerik NuGet source and add credentials from your secrets storage
+RUN nuget.exe sources update -Name "TelerikFeed" -username ... -password ... -ConfigFile "./NuGet.Config" --store-password-in-clear-text
+
+# Restore the NuGet packages for the ASP.NET MVC app
+RUN nuget.exe restore "./MyMvcApp/MyMvcApp.csproj"
+
+# Copy the whole app
+COPY . .
+
+# Build the app
+WORKDIR "/src/MyMvcApp"
+RUN msbuild "./MyMvcApp.csproj" /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath=C:\app\build
+```
+{% endif %}
 
 ## Further Reading
 
-You may find useful the following Microsoft articles on securing your NuGet feed setup and supply chain as general best practices:
-
-* [Lock down your dependencies using configurable trust policies - Blog Post](https://devblogs.microsoft.com/nuget/lock-down-your-dependencies-using-configurable-trust-policies/)
-
-* [How to Scan NuGet Packages for Security Vulnerabilities - Blog Post](https://devblogs.microsoft.com/nuget/how-to-scan-nuget-packages-for-security-vulnerabilities/)
-
-* [Best practices for a secure software supply chain - MSDN docs](https://docs.microsoft.com/en-us/nuget/concepts/security-best-practices)
+@[template](/_contentTemplates/issues-and-warnings.md#nuget-security-links)
 
 ## See Also
 
+* [Install License Key in CI/CD Environment]({%slug deployment_license_key_aspnetcore%})
 * [Blog Post: Azure DevOps and Telerik NuGet Packages](https://www.telerik.com/blogs/azure-devops-and-telerik-nuget-packages)
 * [DevOpsExamples repo by Lance McCarthy](https://github.com/LanceMcCarthy/DevOpsExamples)
 * [Setup of the Telerik Online Private NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%})
