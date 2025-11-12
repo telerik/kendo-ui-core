@@ -306,7 +306,7 @@ navigation:
         position: 60
      "html-helpers":
         title: "Components"
-        position: 7
+        position: 8
      "html-helpers/datasource":
         title: "Data Source"
      "html-helpers/data-management":
@@ -487,7 +487,7 @@ navigation:
         title: "PDFViewer"
      "styles-and-layout":
         title: "Styles and Appearance"
-        position: 8
+        position: 9
      "styles-and-layout/sass-themes":
         title: "SASS Themes"
         position: 2
@@ -495,8 +495,8 @@ navigation:
         title: "LESS Themes"
         position: 3
      "ai":
-        title: "AI Coding Assistant"
-        position: 9
+        title: "AI Tools"
+        position: 3
      "globalization":
         title: "Globalization"
         position: 10

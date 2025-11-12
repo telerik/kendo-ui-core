@@ -50,7 +50,7 @@ For a full list of the `.NET Core` requirements, see [.NET Core dependencies and
 {% else %}
 {{ site.product }} supports Visual Studio 2019 and later. The supported development environments also include:
 
-* [.NET Framework v4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
+* [.NET Framework v4.6.2](https://learn.microsoft.com/en-us/dotnet/framework/install/versions-and-dependencies#net-framework-462) and later.
 * [ASP.NET MVC 5](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started).
 * [IIS](https://www.iis.net/) 5 and later.
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx).

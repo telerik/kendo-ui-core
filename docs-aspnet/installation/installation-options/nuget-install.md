@@ -19,33 +19,32 @@ This article describes how to configure your system for the Telerik NuGet source
 >tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug setupwithnuget_aspnetmvc%}) to add Telerik UI to the project.
 {% endif %}
 
-## Setting Up the Telerik NuGet Feed
+## Generate a NuGet API Key
+
+@[template](/_contentTemplates/get-started.md#generate-nuget-api-key)
+
+## Set Up the Telerik NuGet Feed
 
 The Telerik NuGet feed allows you instant access to various Telerik and Kendo packages that you can install in your project. You can access either the latest or older versions of the suites.
 
-Before you can use the Telerik NuGet Feed as a **Package source**, you must configure your machine by utilizing any of the following methods:
+Before you can use the Telerik NuGet feed as a **Package source**, you must configure your machine by utilizing any of the following methods:
 
-* [Use the NuGet Package Manager in Visual Studio](#setup-with-the-nuget-package-manager).
+* [Use the NuGet Package Manager in Visual Studio](#setup-with-the-nuget-package-manager)
+{% if site.core %}
+* [Use the .NET CLI](#setup-with-net-cli)
+{% else %}
+* [Use NuGet CLI](#setup-with-nuget-cli)
+{% endif %}
+* [Edit the `NuGet.Config` file](#setup-with-nugetconfig)
+* [Use the Progress Control Panel application](#setup-with-the-progress-control-panel-application)
 
-* [Use the Progress Control Panel application](#setup-with-the-progress-control-panel-application).
+Regardless of how you set up the Telerik NuGet feed, you must first [generate a NuGet API key](#generate-a-nuget-api-key) needed for the authentication.
 
-* [Use NuGet CLI](#setup-with-nuget-cli).
-
-* [Edit the `nuget.config` file](#setup-with-nugetconfig).
-
-> The NuGet v2 server at `https://nuget.telerik.com/nuget` will be sunset in November 2024.
->
-> The new v3 protocol offers faster package searches and restores, improved security, and more reliable infrastructure.
->
-> To redirect your feed to the NuGet v3 protocol, all you have to do is to change your NuGet package source URL to `https://nuget.telerik.com/v3/index.json`.
+>warning Never hard-code your Telerik NuGet API keys in a `NuGet.Config` file in a GitHub repository, Docker image, or any location that may be accessed by unauthorized parties. An API key is valuable and bad actors can use it to access the NuGet packages that are licensed under your account. A credentials abuse can lead to a review of the affected Telerik account.
 
 ### Setup with the NuGet Package Manager
 
-The following video demonstrates how to add the Telerik NuGet feed through the NuGet Package Manager tool in Visual Studio. Scroll below the video to find the required steps.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dJo1Ij4CcIY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-To configure the Telerik NuGet feed in Visual Studio:
+Refer to the [Microsoft documentation about using packages in Visual Studio](https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio), or follow the steps below for Visual Studio on Windows.
 
 1. Open Visual Studio.
 
@@ -79,24 +78,49 @@ The next steps describe how to authenticate your local NuGet instance and displa
 
 1. Click on the **Browse** tab to see the available packages.
 
-1. Enter your Telerik credentials in the Windows Authentication dialog.
+1. In the Windows authentication prompt:
+
+   6.1. Enter `api-key` in the **User Name** field.
+
+   6.2. Enter your [NuGet API key](#generate-a-nuget-api-key) in the **Password** field.
+
+   6.3. Check the **Remember My Password** checkbox.
 
 1. In the Visual Studio Package Manager, you will see all packages that are licensed to your user account.
 
-### Setup with the Progress Control Panel Application
+> If you experience issues, see the [NuGet Feed Troubleshooting](slug:troubleshooting_telerik_nuget) article.
 
-You can use the <a href="https://www.telerik.com/try/control-panel" target="_blank">Progress Control Panel application</a> to configure the Telerik NuGet. The Control Panel has an option that you can select, and it will configure the Visual Studio Package Manager to use the Telerik NuGet feed.
 {% if site.core %}
-Refer to the [NuGet feed setup section]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}#adding-the-telerik-nuget-feed) in the First Steps article for step-by-step instructions.
+### Setup with .NET CLI
+
+To add the Telerik NuGet package source with the .NET CLI, use the [`dotnet nuget add source`](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source) command. The command shown below creates or updates a `NuGet.Config` file for you, so you do not have to [edit it manually](#setup-with-nugetconfig):
+
+* The command adds the Telerik NuGet source, uses your [NuGet API key](#generate-a-nuget-api-key) for authentication, and stores the API key in plain text in the [global config file](https://learn.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior#config-file-locations-and-uses).
+* The backslashes `\` enable multi-line commands for better readability in terminals that support them.
+
+>caption Use the .NET CLI to add the Telerik NuGet source
+
+```SH
+dotnet nuget add source https://nuget.telerik.com/v3/index.json \
+--name TelerikOnlineFeed \
+--username api-key \
+--password <YOUR-NUGET-API-KEY> \
+--store-password-in-clear-text
+```
+
+If you have already stored the Telerik package source, you can update the configuration with the command below.
+
+>caption Use the .NET CLI to update the Telerik NuGet source
+
+```SH
+dotnet nuget update source "TelerikOnlineFeed" \
+--source "https://nuget.telerik.com/v3/index.json" \
+--username api-key \
+--password <YOUR-NUGET-API-KEY> \
+--store-password-in-clear-text
+```
 {% else %}
-Refer to the [Getting Started article]({% slug setupwithnuget_aspnetmvc %}#adding-the-telerik-nuget-feed) for step-by-step instructions.
-{% endif %}
-
 ### Setup with NuGet CLI
-
-The following video demonstrates how to add the Telerik NuGet feed by using the NuGet CLI or directly editing the `nuget.config` file. Scroll below the video to find the required steps.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/c3m_BLMXNDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 To add the Telerik NuGet feed by using the NuGet CLI:
 
@@ -104,61 +128,70 @@ To add the Telerik NuGet feed by using the NuGet CLI:
 1. Open a command prompt and change the path to where the `nuget.exe` was downloaded.
 1. Execute the command:
 
-   ```
-   NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password"
-   ```
-
-   The above command stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
-
-If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text:
-
-   ```
-   NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+   ```SH
+   NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "api-key" -Password "YOUR-NUGET-API-KEY" -StorePasswordInClearText
    ```
 
-If you have already stored a token instead of storing the credentials as clear text, you can update the definition in the `%AppData%\NuGet\NuGet.config` file by using the following command:
+    The command adds the Telerik NuGet source, uses your NuGet API key for authentication, and stores the API key in plain text in the global config file (in `%AppData%\NuGet\NuGet.config`).
 
+    > If you experience connection issues with encrypted credentials, the `-StorePasswordInClearText` parameter ensures the credentials are stored in clear text for reliable authentication.
+
+    If you have already stored the Telerik package source, you can update the definition in the `%AppData%\NuGet\NuGet.config` file by using the following command:
+
+   ```SH
+   NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "api-key" -Password "YOUR-NUGET-API-KEY" -StorePasswordInClearText
    ```
-   NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
-   ```
+{% endif %}
 
-### Setup with nuget.config
+### Setup with NuGet.Config
 
-An alternative way to add the Telerik NuGet feed is to directly edit the `nuget.config` file. For more details about this config file, see [Microsoft's dedicated article](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesources).
+NuGet package sources and other settings are stored in a `NuGet.Config` file. You can read more about the file structure in the Microsoft article [NuGet.Config Reference](https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file).
 
-To learn more about how this configuration works, see the [Common NuGet Configurations](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior#creating-a-new-config-file) article.
+Ensure you are familiar with how such configurations work. Refer to [Common NuGet Configurations](https://learn.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior) for details about the possible file locations and how multiple `NuGet.Config` files work.
 
-To use a `nuget.config` file for the Telerik feed, you need to:
+To edit a `NuGet.Config` file and add the Telerik feed, you need to:
 
-1. Ensure you have the relevant config file: `%AppData%\NuGet\NuGet.Config`. You can create a new one by via the [dotnet new command](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) by calling `dotnet new nugetconfig`.
+1. Ensure you are editing the [correct and desired config file](https://learn.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior#config-file-locations-and-uses). {% if site.core %}You can also create a new one with the [`dotnet new nugetconfig` command](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new).{% endif %}
 
-2. Add the Telerik feed to the `nuget.config` file, and make sure to use plain-text credentials because the .NET Core NuGet tooling does not fully support encrypted credentials. Here is an example of how your config file can look like:
+2. Add the Telerik package source to the config file. For the authentication, use your [NuGet API key](#generate-a-nuget-api-key) as a password and `api-key` as a username. Add the API key in plain text, because the NuGet tooling does not fully support encrypted credentials. Here is an example of how your `NuGet.Config` file can look like:
 
-    ```XML
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-         <packageSources>
-            <!--To inherit the global NuGet package sources remove the <clear/> line below -->
-            <clear />
-            <add key="nuget" value="https://api.nuget.org/v3/index.json" />
-            <add key="telerik" value="https://nuget.telerik.com/v3/index.json" />
-         </packageSources>
-         <packageSourceCredentials>
-            <telerik>
-              <add key="Username" value="your telerik account email" />
-              <add key="ClearTextPassword" value="your plain text password" />
-           </telerik>
-         </packageSourceCredentials>
-        </configuration>
-    ```
+```XML
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <packageSources>
+    <!--To inherit the global NuGet package sources remove the <clear/> line below -->
+    <clear />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+    <add key="TelerikOnlineFeed" value="https://nuget.telerik.com/v3/index.json" />
+    </packageSources>
+    <packageSourceCredentials>
+    <TelerikOnlineFeed>
+        <add key="Username" value="api-key" />
+        <add key="ClearTextPassword" value="YOUR-NUGET-API-KEY" />
+    </TelerikOnlineFeed>
+    </packageSourceCredentials>
+</configuration>
+```
 
-Refer to the [Telerik NuGet feed instructional video](https://youtu.be/c3m_BLMXNDk?t=129) for more details.
+### Setup with the Progress Control Panel Application
 
-## Installing the NuGet Packages
+You can use the <a href="https://www.telerik.com/try/control-panel" target="_blank">Progress Control Panel application</a> to configure the Telerik NuGet. The Control Panel has an option that you can select, and it will configure the Visual Studio Package Manager to use the Telerik NuGet feed.
+
+## Install Telerik NuGet Packages
 
 After setting up the Telerik NuGet package source, install the [packages](#list-of-provided-packages) either through the [Package Manager Dialog](https://docs.nuget.org/consume/package-manager-dialog) or the [Package Manager Console](http://docs.nuget.org/Consume/Package-Manager-Console).
 
-The NuGet packages allow you to use the Telerik UI {% if site.core %}Tag Helpers and HTML Helpers{% else %} HTML Helpers {% endif %} in your application. For the UI components to render correctly, you must also provide the required [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+The NuGet packages enable you to use Telerik UI {% if site.core %}Tag Helpers and HTML Helpers{% else %} HTML Helpers {% endif %} in your application. To ensure proper component rendering, you must also include the necessary [client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}).
+
+To install a particular {{ site.product }} version:
+
+1. Choose the desired package from the [NuGet package manager](https://docs.nuget.org/consume/package-manager-dialog).
+2. In the right panel, pick a **Version** from the dropdown menu.
+{% if site.core %}
+     ![{{ site.product_short }} Installing a specified package version](../images/core-install-package-version.png)
+{% else %}
+     ![{{ site.product_short }} Installing a specified package version](../images/mvc-install-package-version.png)
+{% endif %}
 
 >tip To check the status of the Progress Live Services, like Telerik NuGet, Kendo UI CDN, Kendo UI Dojo playground and others, visit the [Progress<sup>®</sup> Telerik<sup>®</sup> Live Services Status Page](http://status.telerik.com/).
 
@@ -195,44 +228,23 @@ To [use a local NuGet feed](https://learn.microsoft.com/en-us/nuget/hosting-pack
 >As of the R3 2022 release, NuGet packages for MVC 3 and MVC 4 are no longer provided for Telerik UI for ASP.NET MVC.
 {% endif %}
 
-## Telerik NuGet Packages Installation
 
-To install a specific {{ site.product }} version:
 
-1. Select the package in the [NuGet package manager](https://docs.nuget.org/consume/package-manager-dialog).
-1. In the right pane, select a **Version** from the dropdown list.
+## Troubleshooting
+
+If you experience any issues while configuring or using the Telerik NuGet feed, refer to the [NuGet Troubleshooting]({% slug troubleshooting_telerik_nuget %}) article.
+
+## Next Steps
 
 {% if site.core %}
-	 ![{{ site.product_short }} Installing a specified package version](../images/core-install-package-version.png)
+Once you have the Telerik NuGet source set up, follow the instructions to [create a {{ site.product }} app]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}).
 {% else %}
-	 ![{{ site.product_short }} Installing a specified package version](../images/mvc-install-package-version.png)
+Once you have the Telerik NuGet source set up, follow the instructions to [create a {{ site.product }} app]({% slug setupwithnuget_aspnetmvc %}).
 {% endif %}
-1. Install a [Telerik license key](#installing-your-license-key).
-
-For more information on the list of the provided Kendo UI packages, refer to the article on [installing Kendo UI for jQuery with NuGet](https://docs.telerik.com/kendo-ui/intro/installation/nuget-install).
-
-## Installing Your License Key
-
-@[template](/_contentTemplates/licensing-templates.md#license-key-version)
-
-@[template](/_contentTemplates/licensing-templates.md#license-key-manual-steps)
-
-@[template](/_contentTemplates/licensing-templates.md#license-key-know-more-link)
-
-
-## Troubleshooting Issues with NuGet
-
-If you experience any issues while configuring or using the Telerik NuGet server, check the dedicated [Telerik NuGet Troubleshooting]({% slug troubleshooting_telerik_nuget %}) article.
 
 ## Further Reading
 
-To learn more about securing your NuGet feed setup and supply chain, check the following Microsoft articles with general best practices:
-
-* [Lock down your dependencies using configurable trust policies - Blog Post](https://devblogs.microsoft.com/nuget/lock-down-your-dependencies-using-configurable-trust-policies/)
-
-* [How to Scan NuGet Packages for Security Vulnerabilities - Blog Post](https://devblogs.microsoft.com/nuget/how-to-scan-nuget-packages-for-security-vulnerabilities/)
-
-* [Best practices for a secure software supply chain - MSDN docs](https://docs.microsoft.com/en-us/nuget/concepts/security-best-practices)
+@[template](/_contentTemplates/issues-and-warnings.md#nuget-security-links)
 
 ## See Also
 
