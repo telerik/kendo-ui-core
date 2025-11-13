@@ -29,7 +29,7 @@ describe('AiTransport tests', () => {
             contentType: 'application/json',
             data: '{}',
             success: instance.success.bind(instance),
-            error: instance.error
+            error: instance.error.bind(instance)
         };
         const setupSpy = vi.spyOn(instance, 'setup').mockReturnValue(data);
 
