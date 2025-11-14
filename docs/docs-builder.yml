@@ -764,6 +764,9 @@ meta:
   intro:
     title: Getting Started
     position: 3
+  ai-components:
+    title: AI Components & Features
+    position: 4
   knowledge-base:
     title: Knowledge Base
     relativeUrl: /knowledge-base
