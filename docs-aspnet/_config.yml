@@ -304,6 +304,9 @@ navigation:
      "troubleshoot":
         title: "Troubleshooting"
         position: 60
+     "ai-components-and-features":
+        title: "AI Components & Features"
+        position: 7
      "html-helpers":
         title: "Components"
         position: 8

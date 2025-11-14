@@ -609,7 +609,7 @@ export const __meta__ = {
 
                 if (lastNonCollapsedPane.length) {
                     const expandTotal = (totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
-                    lastNonCollapsedPane.css(PANE_SIZING_PROP, expandTotal);
+                    lastNonCollapsedPane.css(PANE_SIZING_PROP, expandTotal + PX);
                 }
             }
 
