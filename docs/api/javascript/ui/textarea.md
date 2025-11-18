@@ -553,7 +553,7 @@ How to set maximum rows for a Kendo UI jQuery textarea? Control and limit the ma
     <textarea id="description"></textarea>
     <script>
         $("#description").kendoTextArea({
-            autoResize: true,
+            resize: "auto",
             maxRows: 5
         })
     </script>
