@@ -1,12 +1,12 @@
 ---
-title: MCP Server
-page_title: Kendo UI for jQuery MCP Server
+title: Getting Started
+page_title: Getting Started with the Kendo UI for jQuery Coding Assistant
 description: "Learn how to add and use the MCP Server as a Kendo UI for jQuery AI coding assistant and code generator for better developer productivity. The Kendo UI for jQuery MCP server provides proprietary context about Kendo UI for jQuery components to AI-powered software."
 slug: kendo_jquery_mcp_server
 position: 2
 ---
 
-# Kendo UI for jQuery AI MCP Server
+# Getting Started with the Kendo UI for jQuery AI Coding Assistant
 
 The Kendo UI for jQuery [MCP Server](https://modelcontextprotocol.io/docs/getting-started/intro) lets you interact with AI and reach new levels of developer productivity. The MCP server provides proprietary context to AI-powered IDEs, apps and tools. You can use the Kendo UI for jQuery MCP server for AI code generation and ask about Kendo UI for jQuery components, features, or general usage. You can successfully prompt more complex questions and tasks, and generate tailored code that includes Kendo UI for jQuery components and API.
 

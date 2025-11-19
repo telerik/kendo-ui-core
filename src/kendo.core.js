@@ -879,7 +879,7 @@ function pad(number, digits, end) {
             }),
             parseDate: (value, fmt) => kendo.parseExactDate(value, fmt),
             toString: (value, fmt) => toString(value, fmt),
-            format: (fmt, ...values) => kendo.format(fmt, values)
+            format: (fmt, ...values) => kendo.format(fmt, ...values)
         };
     }
 
