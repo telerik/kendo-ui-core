@@ -277,7 +277,7 @@ Defines the item classes (the `li` element).
 
 
 <div class="meta-api-description">
-How do I customize the CSS class of the root breadcrumb item in a Kendo UI chart? Customize or define custom CSS classes, style selectors, or class names applied to the root breadcrumb list item in charts, enabling control over the root <li> element's appearance or behavior, including configuring, setting, or assigning class attributes for targeted styling, scripting, or theming of the top-level breadcrumb node in chart navigation or hierarchical displays.
+How do I customize the CSS class of the root breadcrumb item in a Kendo UI chart? Customize or define custom CSS classes, style selectors, or class names applied to the root breadcrumb list item in charts, enabling control over the root list item element's appearance or behavior, including configuring, setting, or assigning class attributes for targeted styling, scripting, or theming of the top-level breadcrumb node in chart navigation or hierarchical displays.
 </div>
 
 #### Example

@@ -31,7 +31,7 @@ How can I use the batch edit mode of the Kendo UI Grid when binding to oData?
 
 Use a third-party library. To submit the actual request, the following example uses [Batch.js library by Pavel Volgarev](https://github.com/volpav/batchjs). For more information, refer to [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the oData 3.0 documentation.
 
-> The scenario uses an experimental `transport.submit` Data Source option. It is not yet included as an officially supported API call.
+> The example is outdated. You can review the [jQuery Grid Batch Editing OData-v4 Demo](https://demos.telerik.com/kendo-ui/grid/odatav4) demonstrating how to configure the Grid for `odata-v4` and batch editing.
 
 ```
     <div id="grid"></div>

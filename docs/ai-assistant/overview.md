@@ -52,18 +52,18 @@ Your access to the Kendo UI for jQuery AI Coding Assistant depends on your [Tele
 
 * Subscription License:
   * A Subscription is the primary license that grants full access to the AI Coding Assistant.
-  * Includes a virtually unlimited number of requests, with a fair use threshold of 300 requests per day.
   * Best for ongoing and high-volume usage.
-* Perpetual License (Limited Access):
-  * Perpetual licenses include limited access of 50 requests per year.
-  * Intended for exploring and trying out the AI Coding Assistant.
-  * For continued or higher-volume access, upgrade to a Subscription license.
+* Perpetual License:
+  * Perpetual licenses do not include access to the AI Coding Assistant.
+  * To use the AI Coding Assistant, start a 30-day trial.
 * Trial License:
-  * Trial licenses include 300 requests per trial per year.
-  * Reactivating the same trial for a new release does not grant additional requests.
+  * Trial licenses include a 30-day trial for the AI Coding Assistant.
+  * New users automatically receive the trial when they start a trial for the product.
   * Designed for evaluating the feature before purchasing.
 
 > When using the Kendo jQuery MCP server, one prompt may trigger several requests, depending on the prompt complexity.
+
+> All Telerik AI tools share a the same fair usage quota for your Telerik account. For example, the [AI Coding Assistant]({% slug ai_coding_assistant_overview %}) and the Agentic UI Generator both take up from the same usage quota.
 
 ## Privacy
 
@@ -79,5 +79,5 @@ Make sure to also get familiar with the terms and privacy policy of your selecte
 
 ## Next Steps
 
-* Add the [Kendo UI for jQuery MCP Server]({% slug kendo_jquery_mcp_server %}) to an MCP-enabled client.
+* Getting Started with the [Kendo UI for jQuery Coding Assistant]({% slug kendo_jquery_mcp_server %}).
 * Check out the latest [updates for the Kendo UI for jQuery Coding Assistant]({% slug ai_coding_assistant_changelog %}).

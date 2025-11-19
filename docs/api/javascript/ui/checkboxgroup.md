@@ -236,7 +236,7 @@ Determines whether the checkbox label content should be rendered as an HTML stri
 
 
 <div class="meta-api-description">
-How to prevent XSS attacks in Kendo UI checkbox group labels? Control how checkbox group option labels handle HTML content by configuring whether item labels are rendered as raw HTML with markup like <strong> interpreted or encoded as plain text to prevent HTML injection and show literal tags. Enable or disable HTML rendering, sanitize label content, manage security concerns around markup injection, switch between displaying styled labels versus safe text, and configure encoding to safeguard against XSS risks while customizing label presentation in checkbox lists. Adjust rendering modes to interpret, escape, or display label code literally, ensuring proper display and protection based on application needs.
+How to prevent XSS attacks in Kendo UI checkbox group labels? Control how checkbox group option labels handle HTML content by configuring whether item labels are rendered as raw HTML with markup like strong tag interpreted or encoded as plain text to prevent HTML injection and show literal tags. Enable or disable HTML rendering, sanitize label content, manage security concerns around markup injection, switch between displaying styled labels versus safe text, and configure encoding to safeguard against XSS risks while customizing label presentation in checkbox lists. Adjust rendering modes to interpret, escape, or display label code literally, ensuring proper display and protection based on application needs.
 </div>
 
 #### Example

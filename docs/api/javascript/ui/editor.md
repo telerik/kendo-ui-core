@@ -3570,7 +3570,7 @@ Converts MS Word pasted content into HTML lists.
 
 
 <div class="meta-api-description">
-How to convert Microsoft Word lists to HTML in Kendo UI Editor? Transform pasted content from Microsoft Word into clean, semantic HTML lists by enabling or configuring the conversion of Word list formats into proper ordered and unordered list elements. Control how nested lists, bullet points, and numbered lists from pasted Word documents are parsed, cleaned, and normalized into standard HTML <ol> and <ul> structures, ensuring consistent list formatting and markup after copy-pasting. Adjust or enable list recognition and conversion during paste operations to manage list markers, nested hierarchy, and overall cleanup of list content originating from Word or similar rich text sources.
+How to convert Microsoft Word lists to HTML in Kendo UI Editor? Transform pasted content from Microsoft Word into clean, semantic HTML lists by enabling or configuring the conversion of Word list formats into proper ordered and unordered list elements. Control how nested lists, bullet points, and numbered lists from pasted Word documents are parsed, cleaned, and normalized into standard HTML ordered list and unordered list structures, ensuring consistent list formatting and markup after copy-pasting. Adjust or enable list recognition and conversion during paste operations to manage list markers, nested hierarchy, and overall cleanup of list content originating from Word or similar rich text sources.
 </div>
 
 #### Example
@@ -4578,7 +4578,7 @@ Indicates whether inline scripts will be serialized and posted to the server.
 
 
 <div class="meta-api-description">
-How to prevent inline JavaScript from being posted when using the Kendo Editor? Enable or disable the inclusion and serialization of inline script tags and JavaScript code within the editor content when saving or submitting data, controlling whether embedded <script> elements are preserved or stripped out during content processing and posting to the server, with implications for managing embedded scripting, code injection, and security considerations such as cross-site scripting prevention requiring additional server-side sanitization and content filtering measures to safely handle scripts embedded in editor input.
+How to prevent inline JavaScript from being posted when using the Kendo Editor? Enable or disable the inclusion and serialization of inline script tags and JavaScript code within the editor content when saving or submitting data, controlling whether embedded script elements are preserved or stripped out during content processing and posting to the server, with implications for managing embedded scripting, code injection, and security considerations such as cross-site scripting prevention requiring additional server-side sanitization and content filtering measures to safely handle scripts embedded in editor input.
 </div>
 
 #### Example

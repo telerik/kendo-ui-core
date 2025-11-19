@@ -35,6 +35,8 @@ The following example demonstrates the parameters of this request.
 
 To initialize a cascading MultiColumnComboBox, use the following example.
 
+```dojo
+
     <label for="categories">Categories</label>
     <input id="categories"/>
 
@@ -78,6 +80,7 @@ To initialize a cascading MultiColumnComboBox, use the following example.
         }).data("kendoMultiColumnComboBox");
       })
     </script>
+```
 
 ## See Also
 

@@ -21,7 +21,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the alterna
 
 
 <div class="meta-api-description">
-How do I customize alternating row templates in Kendo UI for jQuery TreeList? Control and customize how alternating rows appear in hierarchical or tree-structured data grids by setting custom row templates that override default table row rendering for every other data item; define unique HTML row structures using <tr> elements with appropriate data binding attributes like unique identifiers, apply alternate styling classes such as "k-alt" for zebra striping effects, and configure row appearance for better visual distinction in nested tables or TreeList components with alternating row designs, ensuring consistent mapping between data items and their respective UI rows through the required data attributes and enabling tailored display of different types of data within hierarchical lists.
+How do I customize alternating row templates in Kendo UI for jQuery TreeList? Control and customize how alternating rows appear in hierarchical or tree-structured data grids by setting custom row templates that override default table row rendering for every other data item; define unique HTML row structures using table row elements with appropriate data binding attributes like unique identifiers, apply alternate styling classes such as "k-alt" for zebra striping effects, and configure row appearance for better visual distinction in nested tables or TreeList components with alternating row designs, ensuring consistent mapping between data items and their respective UI rows through the required data attributes and enabling tailored display of different types of data within hierarchical lists.
 </div>
 
 #### Example - specify alternating row template as a function
@@ -179,7 +179,7 @@ The HTML attributes of the table cell (`<td>`) that is rendered for the column.
 
 
 <div class="meta-api-description">
-How to add custom CSS classes to individual table cells in a Kendo UI TreeList column? Set and customize HTML attributes on table cells within grid columns to control cell styling, add CSS classes, data attributes, ARIA roles, inline styles, or other custom properties. Enable cell-level customization by configuring cell attributes dynamically, including handling reserved JavaScript keywords like "class" by quoting attribute names. Adjust and apply additional markup options for individual grid column cells to enhance accessibility, styling, or data-binding by specifying attributes on the column’s rendered <td> elements in a tree-structured list or grid view.
+How to add custom CSS classes to individual table cells in a Kendo UI TreeList column? Set and customize HTML attributes on table cells within grid columns to control cell styling, add CSS classes, data attributes, ARIA roles, inline styles, or other custom properties. Enable cell-level customization by configuring cell attributes dynamically, including handling reserved JavaScript keywords like "class" by quoting attribute names. Adjust and apply additional markup options for individual grid column cells to enhance accessibility, styling, or data-binding by specifying attributes on the column’s rendered table data cell elements in a tree-structured list or grid view.
 </div>
 
 #### Example - specifyinging the column HTML attributes

@@ -17,6 +17,8 @@ Learn about the latest changes, improvements and bug fixes in the Kendo UI for j
 - Refined the mcp tool's output formatting to better align with Claude Sonnet 4/4.5 best practices, improving the LLM's ability to follow the exact provided instructions more closely.
 - Added an icons reference to the assistant's context so it recommends only supported Kendo UI icons.
 
+> [Microsoft sunset GitHub Copilot extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps) on November 10, 2025, in favor of the Model Context Protocol (MCP) standard.
+
 ## October, 2025 Changelog
 
 ### Highlights
