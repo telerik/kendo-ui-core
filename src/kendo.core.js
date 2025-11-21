@@ -5307,19 +5307,20 @@ function pad(number, digits, end) {
         }
     };
 
-    kendo.removeAttribute = function(element, attribute, value) {
-        var current = element.attr(attribute) || "";
-
-        element.attr(attribute, current.replace(value, "").trim());
+    kendo.removeAttribute = function(element, attribute) {
+        element.removeAttr(attribute);
     };
 
     kendo.toggleAttribute = function(element, attribute, value) {
-        var current = element.attr(attribute) || "";
+        const doesNotHaveAttribute = (element.attr(attribute) || "").indexOf(value) < 0;
+        const disabledReadonly = ["disabled", "readonly"].indexOf(attribute) > -1;
 
-        if (current.indexOf(value) < 0) {
+        if (doesNotHaveAttribute && !disabledReadonly) {
+            kendo.addAttribute(element, attribute, value);
+        } else if (disabledReadonly && value) {
             kendo.addAttribute(element, attribute, value);
         } else {
-            kendo.removeAttribute(element, attribute, value);
+            kendo.removeAttribute(element, attribute);
         }
     };
 
