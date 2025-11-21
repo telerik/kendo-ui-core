@@ -14,6 +14,7 @@ export const __meta__ = {
         Widget = ui.Widget,
         CHANGE = "change",
         DISABLED = "disabled",
+        KDISABLED = "k-disabled",
         CHECKED = "checked";
 
     var ToggleInputBase = Widget.extend({
@@ -67,7 +68,8 @@ export const __meta__ = {
         },
 
         enable: function(enable) {
-            var element = this.element;
+            const element = this.element;
+            const label = this.wrapper.siblings("label[for='" + element.attr("id") + "']");
 
             if (typeof enable == "undefined") {
                 enable = true;
@@ -75,11 +77,9 @@ export const __meta__ = {
 
             this.options.enabled = enable;
 
-            if (enable) {
-                element.prop(DISABLED, false);
-            } else {
-                element.attr(DISABLED, DISABLED);
-            }
+            kendo.toggleAttribute(element, DISABLED, !enable);
+            kendo.toggleClass(element, KDISABLED, null, !enable);
+            kendo.toggleClass(label, KDISABLED, null, !enable);
         },
 
         toggle: function() {
