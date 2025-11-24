@@ -2,7 +2,7 @@
 title: Changelog
 page_title: Telerik {{ site.framework }} AI Coding Assistant Changelog
 description: "Find out about the latest changes and improvements in the {{ site.framework }} AI Coding Assistant."
-previous_url: /ai/release-notes
+previous_url: /ai/release-notes, /ai/copilot-extension
 slug: ai_coding_assistant_release_notes_aspnet
 position: 5
 ---
@@ -10,6 +10,14 @@ position: 5
 # Telerik {{ site.framework }} AI Coding Assistant Changelog
 
 Learn about the latest changes, improvements and bug fixes in the Telerik UI for {{ site.framework }} AI Coding Assistant. The updates are structured in a chronological order with the newest ones appearing first.
+
+{% if site.core %}
+## November, 2025 Changelog
+
+> [Microsoft has deprecated GitHub Copilot extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps) on November 10th, 2025, in favor of the Model Context Protocol (MCP) standard.
+>
+> From that date, the Telerik and Kendo UI AI Coding Assistants will be available exclusively through our [MCP server](slug:ai_mcp_server), ensuring you continue to enjoy the same powerful capabilities that are delivered by a modern, open, and officially recommended standard.
+{% endif %}
 
 ## October, 2025 Changelog
 

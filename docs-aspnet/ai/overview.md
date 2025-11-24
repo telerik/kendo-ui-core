@@ -15,19 +15,9 @@ position: 1
 # Telerik {{ site.framework }} AI Coding Assistant Overview
 
 The Telerik {{ site.framework }} AI Coding Assistant improves your developer experience and increases your productivity when implementing {{ site.framework }} apps that include {{ site.product }}. The coding assistant is an AI code generator that provides proprietary context to AI models in order to produce higher quality code samples with the [{{ site.product }} components](https://www.telerik.com/{{ telerik_product_url }}) and API.
-{% if site.core %}
-The AI Coding Assistant is integrated in:
 
- * [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)&mdash;A powerful tool for running complex or multi-step prompts that integrates with any MCP-enabled client.
-
- * [Telerik {{ site.framework }} GitHub Copilot Extension](slug:ai_copilot_extension) (deprecated)&mdash;A Copilot add-on for fast initial code generation, basic component configuration, and detailed explanations within Copilot-enabled IDEs.
-
->caution [Microsoft is sunsetting GitHub Copilot extensions](https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps) on November 10th, 2025, in favor of the Model Context Protocol (MCP) standard.
->
-> From that date, the Telerik and Kendo UI AI Coding Assistants will be available exclusively through our [MCP server](slug:ai_mcp_server), ensuring you continue to enjoy the same powerful capabilities that are delivered by a modern, open, and officially recommended standard.
-{% else %}
 The AI Coding Assistant is integrated in [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server)&mdash;A powerful tool for running complex or multi-step prompts that integrates with any MCP-enabled client.
-{% endif %}
+
 > We recommend the [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server) for:
 > * **Agent** mode when using Visual Studio
 > * Both **Ask** and **Agent** modes when using Visual Studio Code
@@ -69,20 +59,20 @@ Access to the Telerik {{ site.framework }} AI Coding Assistant depends on your [
 * Subscription License
 
     * A Subscription is the primary license that grants full access to the AI Coding Assistant.
-    * Includes a virtually unlimited number of requests, with a fair use threshold of 300 requests per day.
+    * Includes a virtually unlimited number of requests, with a fair use threshold.
     * Best for ongoing and high-volume usage.
 
 * Perpetual License (Limited Access)
 
-    * Perpetual licenses include limited access of 50 requests per year.
-    * Intended for exploring and trying out the AI Coding Assistant.
-    * For continued or higher-volume access, upgrade to a Subscription license.
+    * Perpetual license holders have no access to the AI Coding Assistant by default.
+    * You can start a 30-day AI Tools trial to access the AI Coding Assistant.
+    * After the trial expires, access is no longer available unless the [Perpetual license is converted to a Subscription license](https://www.telerik.com/account/support-center/contact-us/account-support).
 
 * Trial License
 
-    * Trial licenses include 300 requests per trial per year.
     * Reactivating the same trial for a new release does not grant additional requests.
     * Designed for evaluating the feature before purchasing.
+    * New users will start a trial automatically.
 
 > All Telerik AI tools share a single request limit for your Telerik account. For example, requests made through the Telerik {{ site.framework }} MCP server are counted toward the same overall usage quota.
 
