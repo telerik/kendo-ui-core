@@ -27,11 +27,6 @@ All prompts in this library target the [MCP Server](slug:ai_mcp_server) through 
 
 >warning Always double-check the code and solutions proposed by any AI-powered tool before applying them to your project.
 
-{% if site.core %}
->caption Use with the Copilot Extension
-To run the provided prompts in the [Telerik {{ site.framework }} GitHub Copilot Extension](slug:ai_copilot_extension) (without the MCP Server installed), modify the prompts to use the `@telerikaspnetcorehtml` or `@telerikaspnetcoretag` handle instead.
-{% endif %}
-
 ## Component-Specific Prompts
 
 This section provides prompt ideas for the most popular and complex {{ site.product }} components.
