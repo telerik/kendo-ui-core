@@ -830,18 +830,8 @@ export const __meta__ = {
             const elementSpace = horizontal ? kendo._outerWidth(scrollElement) : kendo._outerHeight(scrollElement);
             const toggle = neededSpace > elementSpace;
 
-            const popup = scrollElement.closest(".k-popup").data("kendoPopup");
-
             backwardBtn.toggle(toggle);
             forwardBtn.toggle(toggle);
-
-            if (!toggle && horizontal) {
-                scrollElement?.height(neededSpace);
-                scrollElement?.css("overflow", "visible");
-                popup?.element.height(neededSpace);
-                popup?.wrapper.height(neededSpace);
-                popup?.position();
-            }
 
             const currentScroll = horizontal ? kendo.scrollLeft(scrollElement) : scrollElement.scrollTop();
             const elementIsPopup = scrollElement.is(popupSelector) || scrollElement.parent().is(childAnimationContainerSelector);

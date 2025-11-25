@@ -232,4 +232,26 @@ describe("menu scrollable", function() {
         assert.isOk(menu.element.prev().is(".k-menu-scroll-button-prev"));
         assert.isOk(menu.element.next().is(".k-menu-scroll-button-next"));
     });
+
+    it("does not add unnecessary inline height to the element", function() {
+        menuElement.remove();
+        Mocha.fixture.append('<ul id="menu"></ul>');
+        menuElement = $("#menu");
+
+        let menuItems = [
+            { title: "Item 1" },
+            { title: "Item 2" },
+            { title: "Item 3" }
+        ];
+
+        menu = menuElement.kendoMenu({
+            dataSource: menuItems.concat(menuItems).concat(menuItems),
+            dataTextField: "title",
+            scrollable: {
+                distance: 40
+            }
+        }).data("kendoMenu");
+
+        assert.equal(menu.element[0].style.height, "");
+    });
 });
