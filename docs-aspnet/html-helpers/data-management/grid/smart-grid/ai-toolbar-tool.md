@@ -380,7 +380,7 @@ To achieve this, use the `AIAssistantWindow` property, which allows you to contr
 {% if site.core %}
 * [ASP.NET Core Grid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
-* [AI Toolbar Tool of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar)
+* [AI Toolbar Assistant of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar)
 * [AI Row Highlighting by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar-highlight)
 * [AIPrompt Overview Documentation](https://www.telerik.com/{{ site.platform }}/documentation/html-helpers/conversational-ui/aiprompt/overview)
 * [Server-Side API](/api/grid)
