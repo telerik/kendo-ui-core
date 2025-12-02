@@ -762,54 +762,54 @@ export const __meta__ = {
                     text: (view[idx] && view[idx].text) || text(view[idx]),
                 };
 
-                if (options.tabTemplate) {
+                if (options?.tabTemplate) {
                     tab.model = view[idx];
                     tab.template = options.tabTemplate;
                 }
 
-                if (options.dataEncodedField) {
+                if (options?.dataEncodedField) {
                     tab.encoded = encoded(view[idx]);
                 }
 
-                if (options.dataContentField) {
+                if (options?.dataContentField) {
                     tab.content = content(view[idx]);
                 }
 
-                if (options.dataContentUrlField) {
+                if (options?.dataContentUrlField) {
                     tab.contentUrl = contentUrl(view[idx]);
                 }
 
-                if (options.dataUrlField) {
+                if (options?.dataUrlField) {
                     tab.url = url(view[idx]);
                 }
 
-                if (options.dataImageUrlField) {
+                if (options?.dataImageUrlField) {
                     tab.imageUrl = image(view[idx]);
                 }
 
-                if (options.dataSpriteCssClass) {
+                if (options?.dataSpriteCssClass) {
                     tab.spriteCssClass = sprite(view[idx]);
                 }
 
-                if (view[idx].actions) {
+                if (view[idx]?.actions) {
                     const actions = typeof view[idx].actions === 'object' ? Array.from(view[idx].actions) : view[idx].actions;
                     tab.actions = actions;
                 }
 
-                if (icon(view[idx]) || view[idx].iconClass) {
+                if (icon(view[idx]) || view[idx]?.iconClass) {
                     tab.icon = icon(view[idx]);
                     tab.iconClass = view[idx].iconClass;
                     tab.iconPosition = iconPosition(view[idx]) ?? 'before';
                 }
 
-                tab.enabled = view[idx].enabled;
-                tab.closable = view[idx].closable ?? options.closable;
+                tab.enabled = view[idx]?.enabled;
+                tab.closable = view[idx]?.closable ?? options.closable;
 
                 if (pristineData) {
-                    tab.attributes = pristineData[idx].attributes;
+                    tab.attributes = pristineData[idx]?.attributes;
                 }
 
-                if (view[idx].content) {
+                if (view[idx]?.content) {
                     tab.content = view[idx].content;
                 }
 
