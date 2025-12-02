@@ -8,8 +8,15 @@ let Observable = kendo.Observable,
     m = dataviz.map;
 
 export const MapMock = Observable.extend({
-    init: function() {
-        this.element = $("<div class='k-map'></div>").appendTo(Mocha.fixture);
+    init: function(options) {
+        this.options = options || {};
+
+        if (options && options.element) {
+            this.element = $(options.element);
+        } else {
+            this.element = $("<div class='k-map'></div>").appendTo(Mocha.fixture);
+        }
+
         this.scrollElement = $("<div id='scroll-element'></div>").appendTo(this.element);
         this.options = {};
         this._zoom = 3;

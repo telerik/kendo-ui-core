@@ -763,4 +763,19 @@ describe("initialization", function() {
         assert.isOk(notification.element.find(".k-notification-actions .k-notification-close-action .k-icon").length);
     });
 
+    it("Notification should have z-index of 12000", function() {
+        notification = createNotification({
+            position: { pinned: true, top: 300, left: 400 },
+            autoHideAfter: 0
+        });
+
+        notification.show("This notification should be ABOVE the window overlay.");
+
+        let notificationElement = $(".k-notification").last();
+        let notificationContainer = notificationElement.closest(".k-animation-container");
+        let notificationZIndex = parseInt(notificationContainer.css("z-index"), 10);
+
+        assert.equal(notificationZIndex, 12000, "Notification z-index should be 12000");
+    });
+
 });
