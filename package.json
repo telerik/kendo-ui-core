@@ -57,6 +57,7 @@
     "yargs": "~3.27.0"
   },
   "overrides": {
+    "js-yaml": "4.1.1",
     "chokidar": "^3.0.0",
     "braces": "~3.0.3",
     "glob-stream": "^8.0.0",
