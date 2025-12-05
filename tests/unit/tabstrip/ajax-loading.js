@@ -77,7 +77,7 @@ let tabstripSetup = function() {
 };
 
 function getRootItem(index) {
-    return div.find('.k-item').eq(index);
+    return div.find('.k-tabstrip-item').eq(index);
 }
 
 describe('tabstrip ajax loading', function() {

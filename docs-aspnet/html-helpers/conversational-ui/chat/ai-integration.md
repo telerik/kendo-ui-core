@@ -16,7 +16,7 @@ In this article, you will build a practical, end-to-end example that demonstrate
 
 To create an AI chat service that connects to the Chat, follow the steps below:
 
-> The example uses a Telerik-hosted AI service for demonstration purposes only. For production applications, you can implement your own AI service that understands your specific domain, data, and business requirements.
+> The example uses a Telerik-hosted AI service for demonstration purposes only. For production applications, you can implement your own AI service that understands your specific domain, data, and business requirements. For a runnable example with an established OpenAI backend integration, visit our <a target="_blank"  href="https://github.com/telerik/ui-for-aspnet-core-examples">GitHub Core Examples repository.
 
 1. Add references to the AI service client and the required formatting libraries for enhanced message display:
 

@@ -6105,7 +6105,6 @@ The current [`jqXHR`](https://api.jquery.com/Types/#jqXHR).
 
 #### Example - subscribe to the error event after initialization
 
-```pseudo
     <script>
     function dataSource_error(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -6121,7 +6120,6 @@ The current [`jqXHR`](https://api.jquery.com/Types/#jqXHR).
     dataSource.bind("error", dataSource_error);
     dataSource.fetch();
     </script>
-```
 
 ### push
 

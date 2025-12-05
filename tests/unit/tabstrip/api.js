@@ -5,7 +5,7 @@ let isRaised, isActivateRaised;
 let argsCheck = false;
 
 function getRootItem(index) {
-    return $('#tabstrip').find('.k-item').eq(index);
+    return $('#tabstrip').find('.k-tabstrip-item').eq(index);
 }
 
 function getTabStrip(selector) {
@@ -36,13 +36,13 @@ describe('tabstrip api', function() {
         Mocha.fixture.append(
             ' <div class="k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
             '    <ul class="k-reset k-tabstrip-items">' +
-            '        <li class="k-item k-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
-            '        <li class="k-item"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
-            '        <li class="k-item"><a class="k-link" href="#tabstrip-3">ASP.NET AJAX</a></li>' +
-            '        <li class="k-item"><a class="k-link" href="#tabstrip-4">OpenAccess ORM</a></li>' +
-            '        <li class="k-item"><a class="k-link" href="#tabstrip-5">Reporting</a></li>' +
-            '        <li class="k-item"><a class="k-link" href="#tabstrip-6">Sitefinity ASP.NET CMS</a></li>' +
-            '        <li class="k-item"><a class="k-link" href="http://www.google.com">Sitefinity ASP.NET CMS</a></li>' +
+            '        <li class="k-tabstrip-item k-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
+            '        <li class="k-tabstrip-item"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
+            '        <li class="k-tabstrip-item"><a class="k-link" href="#tabstrip-3">ASP.NET AJAX</a></li>' +
+            '        <li class="k-tabstrip-item"><a class="k-link" href="#tabstrip-4">OpenAccess ORM</a></li>' +
+            '        <li class="k-tabstrip-item"><a class="k-link" href="#tabstrip-5">Reporting</a></li>' +
+            '        <li class="k-tabstrip-item"><a class="k-link" href="#tabstrip-6">Sitefinity ASP.NET CMS</a></li>' +
+            '        <li class="k-tabstrip-item"><a class="k-link" href="http://www.google.com">Sitefinity ASP.NET CMS</a></li>' +
             '    </ul>' +
             '    <div class="k-content k-active" id="tabstrip-1" style="display: block;">' +
             '        <ul>' +
@@ -107,15 +107,15 @@ describe('tabstrip api', function() {
             '</div>' +
             '<div id="parent-tabstrip" class="k-tabstrip k-header" style="visibility: hidden; position: absolute;">' +
             '    <ul class="k-reset k-tabstrip-items">' +
-            '        <li class="k-item">Tab 1</li>' +
-            '        <li class="k-item k-active">Tab 2</li>' +
+            '        <li class="k-tabstrip-item">Tab 1</li>' +
+            '        <li class="k-tabstrip-item k-active">Tab 2</li>' +
             '    </ul>' +
             '    <div id="parent-tabstrip-1" class="k-content">foo</div>' +
             '    <div id="parent-tabstrip-2" class="k-content" style="display: block;">' +
             '        <div id="child-tabstrip" class="k-tabstrip k-header">' +
             '            <ul class="k-reset k-tabstrip-items">' +
-            '                <li class="k-item">foo</li>' +
-            '                <li class="k-item k-active">bar</li>' +
+            '                <li class="k-tabstrip-item">foo</li>' +
+            '                <li class="k-tabstrip-item k-active">bar</li>' +
             '            </ul>' +
             '            <div id="child-tabstrip-1">foo</div>' +
             '            <div id="child-tabstrip-2" style="display: block;">bar</div>' +
@@ -348,19 +348,19 @@ describe('tabstrip api', function() {
     it('insertAfter regenerates tabs and content IDs', function() {
         let tabStrip = $("<div id='tabstrip'><ul><li>Tab 1</li><li>Tab 2</li></ul><div>Content 1</div><div>Content 2</div></div>").kendoTabStrip().data("kendoTabStrip");
 
-        assert.equal(tabStrip.wrapper.find(".k-item").length, 2);
-        assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
-        assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
+        assert.equal(tabStrip.wrapper.find(".k-tabstrip-item").length, 2);
+        assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[0].id, "tabstrip-tab-1");
+        assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[1].id, "tabstrip-tab-2");
         assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
         assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
 
         try {
             tabStrip.insertAfter({ text: "new", content: "inserted" }, "li:last-child");
 
-            assert.equal(tabStrip.wrapper.find(".k-item").length, 3);
-            assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
-            assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
-            assert.equal(tabStrip.wrapper.find(".k-item")[2].id, "tabstrip-tab-3");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item").length, 3);
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[0].id, "tabstrip-tab-1");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[1].id, "tabstrip-tab-2");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[2].id, "tabstrip-tab-3");
 
             assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
             assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
@@ -435,19 +435,19 @@ describe('tabstrip api', function() {
     it('insertBefore regenerates tabs and content IDs', function() {
         let tabStrip = $("<div id='tabstrip'><ul><li>Tab 1</li><li>Tab 2</li></ul><div>Content 1</div><div>Content 2</div></div>").kendoTabStrip().data("kendoTabStrip");
 
-        assert.equal(tabStrip.wrapper.find(".k-item").length, 2);
-        assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
-        assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
+        assert.equal(tabStrip.wrapper.find(".k-tabstrip-item").length, 2);
+        assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[0].id, "tabstrip-tab-1");
+        assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[1].id, "tabstrip-tab-2");
         assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
         assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");
 
         try {
             tabStrip.insertBefore({ text: "new", content: "inserted" }, "li:first-child");
 
-            assert.equal(tabStrip.wrapper.find(".k-item").length, 3);
-            assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
-            assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
-            assert.equal(tabStrip.wrapper.find(".k-item")[2].id, "tabstrip-tab-3");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item").length, 3);
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[0].id, "tabstrip-tab-1");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[1].id, "tabstrip-tab-2");
+            assert.equal(tabStrip.wrapper.find(".k-tabstrip-item")[2].id, "tabstrip-tab-3");
 
             assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[0].id, "tabstrip-1");
             assert.equal(tabStrip.wrapper.find(".k-tabstrip-content")[1].id, "tabstrip-2");

@@ -1194,22 +1194,29 @@ import "./kendo.html.button.js";
             },
 
             toFront: function(e, avoidFocus) {
-                var that = this,
+                let that = this,
                     wrapper = that.wrapper,
                     currentWindow = wrapper[0],
                     containmentContext = that.containment && !that._isPinned,
                     openAnimation = this._animationOptions("open"),
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex,
-                    target = (e && e.target) || null;
+                    target = (e && e.target) || null,
+                    parentZIndex = 0;
 
                 $(KWINDOW).each(function(i, element) {
-                    var windowObject = $(element),
+                    let windowObject = $(element),
                         zIndexNew = windowObject.css(ZINDEX),
                         contentElement = windowObject.children(KWINDOWCONTENT);
 
+                    parentZIndex = Math.max(parentZIndex, +windowObject.parent().css(ZINDEX) || 0);
+
                     if (!isNaN(zIndexNew)) {
                         zIndex = Math.max(+zIndexNew, zIndex);
+
+                        if (parentZIndex) {
+                            zIndex = Math.max(parentZIndex, zIndex);
+                        }
                     }
 
                     wrapper.data("isFront", element == currentWindow);

@@ -49,7 +49,7 @@ describe("tabstrip keyboard navigation", function() {
 
         div.focus();
         setTimeout(function() {
-            let first = div.find(".k-item:first");
+            let first = div.find(".k-tabstrip-item:first");
             done(() => assert.isOk(first.hasClass("k-focus")));
         }, 150);
     });
@@ -61,7 +61,7 @@ describe("tabstrip keyboard navigation", function() {
         div.focus();
         document.activeElement.blur();
 
-        let first = div.find(".k-item:first");
+        let first = div.find(".k-tabstrip-item:first");
         assert.isOk(!first.hasClass("k-focus"));
     });
 
@@ -76,7 +76,7 @@ describe("tabstrip keyboard navigation", function() {
                 keyCode: keys.DOWN
             });
 
-            let item = div.find(".k-item").eq(1);
+            let item = div.find(".k-tabstrip-item").eq(1);
             done(() => {
                 assert.isOk(item.hasClass("k-focus"));
                 assert.isOk(item.hasClass("k-active"));
@@ -89,7 +89,7 @@ describe("tabstrip keyboard navigation", function() {
         addItems(3);
 
         let tabstrip = div.data("kendoTabStrip");
-        tabstrip.enable(div.find(".k-item").eq(1), false);
+        tabstrip.enable(div.find(".k-tabstrip-item").eq(1), false);
 
         div.focus();
 
@@ -99,8 +99,8 @@ describe("tabstrip keyboard navigation", function() {
                 keyCode: keys.DOWN
             });
 
-            let item = div.find(".k-item").eq(1);
-            let lastItem = div.find(".k-item:last");
+            let item = div.find(".k-tabstrip-item").eq(1);
+            let lastItem = div.find(".k-tabstrip-item:last");
             done(() => {
                 assert.isOk($(item).hasClass("k-focus"));
                 assert.isOk(!lastItem.hasClass("k-active"));
@@ -116,14 +116,14 @@ describe("tabstrip keyboard navigation", function() {
         div.focus();
 
         setTimeout(function() {
-            tabstrip._current(div.find(".k-item:last"));
+            tabstrip._current(div.find(".k-tabstrip-item:last"));
 
             tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.RIGHT
             });
 
-            done(() => assert.isOk(div.find(".k-item:first").hasClass("k-active")));
+            done(() => assert.isOk(div.find(".k-tabstrip-item:first").hasClass("k-active")));
         }, 150);
     });
 
@@ -134,7 +134,7 @@ describe("tabstrip keyboard navigation", function() {
         tabstrip.disable(tabstrip.items()[1]);
         div.focus();
         setTimeout(function() {
-            tabstrip.activateTab(div.find(".k-item:first"));
+            tabstrip.activateTab(div.find(".k-tabstrip-item:first"));
 
             tabstrip.tabGroup.trigger({
                 type: "keydown",
@@ -146,7 +146,7 @@ describe("tabstrip keyboard navigation", function() {
                 keyCode: keys.LEFT
             });
 
-            done(() => assert.equal(div.find(".k-item:first").attr("aria-hidden"), undefined));
+            done(() => assert.equal(div.find(".k-tabstrip-item:first").attr("aria-hidden"), undefined));
         }, 150);
     });
 
@@ -157,14 +157,14 @@ describe("tabstrip keyboard navigation", function() {
         let tabstrip = div.data("kendoTabStrip");
         div.focus();
         setTimeout(function() {
-            tabstrip._current(div.find(".k-item:last"));
+            tabstrip._current(div.find(".k-tabstrip-item:last"));
 
             tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.UP
             });
 
-            done(() => assert.isOk(div.find(".k-item:first").hasClass("k-active")));
+            done(() => assert.isOk(div.find(".k-tabstrip-item:first").hasClass("k-active")));
         }, 150);
     });
 
@@ -180,7 +180,7 @@ describe("tabstrip keyboard navigation", function() {
                 keyCode: keys.LEFT
             });
 
-            done(() => assert.isOk(div.find(".k-item:last").hasClass("k-active")));
+            done(() => assert.isOk(div.find(".k-tabstrip-item:last").hasClass("k-active")));
         }, 150);
 
     });
@@ -330,16 +330,16 @@ describe("tabstrip keyboard navigation", function() {
         div.focus();
         setTimeout(function() {
             let tabstrip = div.data("kendoTabStrip");
-            tabstrip.enable(div.find(".k-item").eq(1), false);
-            tabstrip._current(div.find(".k-item:last"));
+            tabstrip.enable(div.find(".k-tabstrip-item").eq(1), false);
+            tabstrip._current(div.find(".k-tabstrip-item:last"));
 
             tabstrip.tabGroup.trigger({
                 type: "keydown",
                 keyCode: keys.UP
             });
 
-            let firstItem = div.find(".k-item:first");
-            let item = div.find(".k-item").eq(1);
+            let firstItem = div.find(".k-tabstrip-item:first");
+            let item = div.find(".k-tabstrip-item").eq(1);
 
             done(() => {
                 assert.isOk(item.hasClass("k-focus"));
@@ -353,7 +353,7 @@ describe("tabstrip keyboard navigation", function() {
         addItems(3);
 
         let tabstrip = div.data("kendoTabStrip"),
-            item = div.find(".k-item:last");
+            item = div.find(".k-tabstrip-item:last");
 
         div.focus();
         setTimeout(function() {
@@ -373,7 +373,7 @@ describe("tabstrip keyboard navigation", function() {
         addItems(3);
 
         let tabstrip = div.data("kendoTabStrip"),
-            item = div.find(".k-item:last");
+            item = div.find(".k-tabstrip-item:last");
 
         div.focus();
         setTimeout(function() {
@@ -393,7 +393,7 @@ describe("tabstrip keyboard navigation", function() {
         addItems(3);
 
         let tabstrip = div.data("kendoTabStrip"),
-            item = div.find(".k-item").eq(1);
+            item = div.find(".k-tabstrip-item").eq(1);
 
         div.focus();
         setTimeout(function() {
@@ -404,13 +404,13 @@ describe("tabstrip keyboard navigation", function() {
     });
 
     asyncTest("prevents default action event", function(done) {
-        div = $('<div class="k-tabstrip" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
+        div = $('<div class="k-tabstrip" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-tabstrip-item k-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-tabstrip-item"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
         let tabstrip = new kendo.ui.TabStrip(div);
         div.focus();
         setTimeout(function() {
             tabstrip.tabGroup.children().eq(1).attr("data-animating", true);
 
-            done(() => assert.equal(tabstrip._click(div.find(".k-item").eq(1)), true));
+            done(() => assert.equal(tabstrip._click(div.find(".k-tabstrip-item").eq(1)), true));
         }, 150);
     });
 
@@ -430,7 +430,7 @@ describe("tabstrip keyboard navigation", function() {
             text: 'Tab 2'
         });
 
-        tabStripHtml.find(".k-item:first").trigger("click");
+        tabStripHtml.find(".k-tabstrip-item:first").trigger("click");
 
         assert.equal(ts.tabGroup[0], document.activeElement);
 
@@ -450,7 +450,7 @@ describe("tabstrip keyboard navigation", function() {
 
         ts.append({
             encoded: false,
-            content: '<p><span class="k-item"><input id="input1" /></span></p>',
+            content: '<p><span class="k-tabstrip-item"><input id="input1" /></span></p>',
             text: 'Tab 2'
         });
 
