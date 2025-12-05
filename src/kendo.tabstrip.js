@@ -58,8 +58,8 @@ export const __meta__ = {
         FOCUSEDSTATE = "k-focus",
         HOVERSTATE = "k-hover",
         DOM_DATASOURCE_EMPTY = "EMPTY_URL",
-        NAVIGATABLEITEMS = ".k-item.k-tabstrip-item:not(." + DISABLEDSTATE + ")",
-        KEYBOARDNAVIGATABLEITEMS = ".k-item.k-tabstrip-item",
+        NAVIGATABLEITEMS = ".k-tabstrip-item:not(." + DISABLEDSTATE + ")",
+        KEYBOARDNAVIGATABLEITEMS = ".k-tabstrip-item",
         HOVERABLEITEMS = ".k-tabstrip-items > " + NAVIGATABLEITEMS + ":not(." + ACTIVESTATE + ")",
         DEFAULTDISTANCE = 200,
         ARIA_HIDDEN = "aria-hidden",
@@ -95,7 +95,7 @@ export const __meta__ = {
 
         rendering = {
             wrapperCssClass: function(group, item) {
-                var result = ["k-item", "k-tabstrip-item"],
+                var result = ["k-tabstrip-item"],
                     index = item.index;
 
                 const classAttributes = (item.attributes && item.attributes.class) || "";
@@ -190,7 +190,7 @@ export const __meta__ = {
     }
 
     function updateFirstLast(tabGroup) {
-        const tabs = tabGroup.children(".k-item.k-tabstrip-item");
+        const tabs = tabGroup.children(".k-tabstrip-item");
 
         tabs.filter(".k-first:not(:first-child)").removeClass(FIRST);
         tabs.filter(".k-last:not(:last-child)").removeClass(LAST);
@@ -1065,7 +1065,7 @@ export const __meta__ = {
             const that = this;
             const target = $(e.currentTarget);
 
-            const tab = target.closest('.k-item');
+            const tab = target.closest('.k-tabstrip-item');
 
             if (tab.hasClass(ACTIVESTATE)) {
 
@@ -1539,7 +1539,7 @@ export const __meta__ = {
             var that = this;
 
             if (that._contentUrls.length) {
-                that.tabGroup.children(".k-item.k-tabstrip-item")
+                that.tabGroup.children(".k-tabstrip-item")
                     .each(function(index, item) {
                         var url = that._contentUrls[index];
 
@@ -1548,7 +1548,7 @@ export const __meta__ = {
                         }
                     });
             } else {
-                that._contentUrls.length = that.tabGroup.find("li.k-item.k-tabstrip-item").length;
+                that._contentUrls.length = that.tabGroup.find("li.k-tabstrip-item").length;
             }
         },
 
@@ -1763,7 +1763,7 @@ export const __meta__ = {
             }
 
             that.sortable = new kendo.ui.Sortable(that.tabGroup, {
-                filter: "li.k-item.k-tabstrip-item",
+                filter: "li.k-tabstrip-item",
                 axis,
                 holdToDrag: isHidden,
                 allowTouchActions: isHidden,
@@ -1771,7 +1771,7 @@ export const __meta__ = {
                 hint: el => `<div id='hint' class='k-tabstrip k-tabstrip-${position}'>
                                 <div class= 'k-tabstrip-items-wrapper k-hstack'>
                                     <ul class='k-tabstrip-items k-reset'>
-                                        <li class='k-item k-tabstrip-item k-first k-active'>${el.html()}</li>
+                                        <li class='k-tabstrip-item k-first k-active'>${el.html()}</li>
                                     </ul>
                                 </div>
                             </div>`,
@@ -1887,7 +1887,7 @@ export const __meta__ = {
             that.tabWrapper.addClass(isHorizontal ? 'k-hstack' : 'k-vstack');
             that.tabGroup.addClass('k-tabstrip-items k-reset');
 
-            tabs = that.tabGroup.find("li").addClass("k-item k-tabstrip-item");
+            tabs = that.tabGroup.find("li").addClass("k-tabstrip-item");
 
             if (tabs.length) {
                 activeItem = tabs.filter("." + ACTIVESTATE).index();
@@ -1920,7 +1920,7 @@ export const __meta__ = {
         _updateContentElements: function(isInitialUpdate) {
             var that = this,
                 contentUrls = that._contentUrls,
-                items = that.tabGroup.children(".k-item.k-tabstrip-item"),
+                items = that.tabGroup.children(".k-tabstrip-item"),
                 contentElements = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)"),
                 _elementId = that._elementId.bind(that);
 
