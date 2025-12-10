@@ -396,6 +396,45 @@ How to specify the field that holds image URLs for TreeView node icons? Specify 
     });
     </script>
 
+### dataIconField `String|Array` *(default: null)*
+
+Sets the field of the data item that provides the icon name of the nodes.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.
+
+
+<div class="meta-api-description">
+Control or configure icon rendering for TreeView nodes by specifying the data source field(s) that contain icon names, supporting both single string field names or arrays for hierarchical levels, enabling dynamic icon display based on data properties with fallback behavior for unmatched levels, useful for customizing node appearance with Kendo UI icons by linking node data fields to icon identifiers.
+</div>
+
+#### Example - specify custom icon field
+
+    <div id="treeview"></div>
+    <script>
+    var items = [
+      { text: "Documents", iconName: "folder" },
+      { text: "Report.pdf", iconName: "file-pdf" }
+    ];
+    $("#treeview").kendoTreeView({
+      dataIconField: "iconName",
+      dataSource: items
+    });
+    </script>
+
+#### Example - specify different icon fields for different levels
+
+    <div id="treeview"></div>
+    <script>
+    var items = [
+      { text: "Root", rootIcon: "folder", items: [
+        { text: "Child", childIcon: "file" }
+      ] }
+    ];
+    $("#treeview").kendoTreeView({
+      dataIconField: ["rootIcon", "childIcon"],
+      dataSource: items
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
 The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance.

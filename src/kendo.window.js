@@ -1034,8 +1034,6 @@ import "./kendo.html.button.js";
                     if (!wrapper.is(VISIBLE)) {
                         contentElement.css(OVERFLOW, HIDDEN);
 
-                        that.wrapper.find(TITLEBAR_BUTTONSSELECTOR).addClass("k-button-flat");
-
                         wrapper.css({ display: "inline-flex" });
                         wrapper.kendoStop().kendoAnimate({
                             effects: showOptions.effects,
@@ -1129,14 +1127,26 @@ import "./kendo.html.button.js";
 
                     this._removeOverlay();
 
-                    // Prevent close animation from stopping
-                    that.wrapper.find(TITLEBAR_BUTTONSSELECTOR).removeClass("k-button-flat");
+                    // Prevent close animation from stopping due to button's CSS transition
+                    // The transitionend event from buttons can bubble up and prematurely end the animation
+                    const buttons = that.wrapper.find(TITLEBAR_BUTTONSSELECTOR);
+                    buttons.css("transition", "none");
+
+                    const stopButtonTransitionEndBubbling = function(e) {
+                        e.stopPropagation();
+                    };
+
+                    buttons.on("transitionend", stopButtonTransitionEndBubbling);
 
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
-                        complete: this._deactivate.bind(this)
+                        complete: function() {
+                            buttons.off("transitionend", stopButtonTransitionEndBubbling);
+                            buttons.css("transition", "");
+                            that._deactivate();
+                        }
                     });
                     $(window).off(MODAL_NS);
                 }

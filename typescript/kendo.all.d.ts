@@ -14717,6 +14717,7 @@ declare namespace kendo.ui {
         dataImageUrlField?: string | undefined;
         dataSource?: any|any|kendo.data.HierarchicalDataSource | undefined;
         dataSpriteCssClassField?: string | undefined;
+        dataIconField?: string | undefined;
         dataTextField?: string|any | undefined;
         dataUrlField?: string | undefined;
         dragAndDrop?: boolean | TreeViewDragAndDrop | undefined;
