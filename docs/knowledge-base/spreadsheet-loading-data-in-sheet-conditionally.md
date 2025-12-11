@@ -7,6 +7,7 @@ slug: spreadsheet-loading-data-in-sheet-conditionally
 tags: spreadsheet
 ticketid: 1428399
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

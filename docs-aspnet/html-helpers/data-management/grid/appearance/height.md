@@ -2,6 +2,7 @@
 title: Height
 page_title: Height
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to apply different heights to the Grid."
+components: ["grid"]
 slug: height_aspnetcore_grid
 position: 1
 ---

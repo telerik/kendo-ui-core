@@ -2,6 +2,7 @@
 title: Disabled Dates
 page_title: Disabled Dates
 description: "Learn how to disable dates in the Telerik UI MultiViewCalendar component for {{ site.framework }}."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/disable-dates
 slug: disabled_dates_multiviewcalendar_htmlhelper_aspnetcore
 position: 6

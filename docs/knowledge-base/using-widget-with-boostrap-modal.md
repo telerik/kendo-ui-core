@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI MultiSelect widget with a Bootstrap 
 previous_url: /controls/editors/multiselect/how-to/using-widget-with-boostrap-modal, /controls/editors/multiselect/how-to/integration/using-widget-with-boostrap-modal
 slug: howto_use_multiselect_with_bootstrap_modal_window_multiselect
 tags: telerik, kendo, jquery, multiselect, use, with, bootstrap, modal, windows
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

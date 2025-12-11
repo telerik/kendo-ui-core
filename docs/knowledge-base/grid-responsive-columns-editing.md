@@ -6,8 +6,8 @@ page_title: Use editing with responsive columns template - Kendo UI for jQuery D
 slug: grid-responsive-columns-editing
 tags: grid, responsive, column, columns, editing, template
 res_type: kb
+components: ["grid"]
 ticketid: 1476323
-component: grid
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: grid-sort-column-checkbox-header
 tags: grid, sort, header, checkbox, template, prevent, enable
 ticketid: 1141908
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

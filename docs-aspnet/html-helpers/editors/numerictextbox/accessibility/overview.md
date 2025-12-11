@@ -2,6 +2,7 @@
 title: Overview
 page_title: NumericTextBox Documentation | NumericTextBox Accessibility
 description: "Get started with the {{ site.product }} NumericTextBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["numerictextbox"]
 slug: htmlhelpers_numerictextbox_accessibility
 position: 1
 ---

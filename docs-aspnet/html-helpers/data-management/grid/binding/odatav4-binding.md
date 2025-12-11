@@ -2,6 +2,7 @@
 title: OData-v4 Binding
 page_title: OData-v4 Binding
 description: "Learn how to implement OData-v4 binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/odatav4-binding
 slug: htmlhelpers_grid_aspnetcore_odatav4-binding
 position: 8

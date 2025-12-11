@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Splitter Documentation - Getting Started with the Splitter
 description: "Get started with the jQuery Splitter by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["splitter"]
 slug: getting_started_kendoui_splitter_component
 position: 1
 ---

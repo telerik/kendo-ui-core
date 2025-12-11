@@ -6,7 +6,7 @@ page_title: Add Command to Display Comments - Kendo UI TaskBoard for jQuery
 slug: taskboard_add_custom_command_comment
 tags: taskboard, card, custom, command
 res_type: kb
-component: taskboard
+components: ["taskboard"]
 ---
 
 ## Environment

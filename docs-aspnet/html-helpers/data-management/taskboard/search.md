@@ -2,6 +2,7 @@
 title: Search Tool
 page_title: Search Tool
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn how to enable the search tool to search through its cards."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_search
 position: 6
 ---

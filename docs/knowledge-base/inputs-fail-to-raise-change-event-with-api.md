@@ -6,7 +6,7 @@ slug: inputs_fail_to_raise_change_event_with_api
 tags: telerik, kendoui, jquery, troubleshooting, input, widgets, fail, to, raise, change, event, using, api
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ImageEditor component for {{ site.framework }}."
+components: ["imageeditor"]
 slug: htmlhelpers_imageeditor_aspnetcore
 position: 0
 ---

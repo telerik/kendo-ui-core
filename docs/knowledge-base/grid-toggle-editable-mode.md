@@ -6,6 +6,7 @@ page_title: Toggle Grid's editable mode - Kendo UI for jQuery Data Grid
 slug: grid-toggle-editable-mode
 tags: grid, toolbar, editable, toggle, edit
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

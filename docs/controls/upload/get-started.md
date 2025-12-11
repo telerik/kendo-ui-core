@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Upload Documentation - Getting Started with the Upload
 description: "Get started with the jQuery Upload by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["upload"]
 slug: getting_started_kendoui_upload_widget
 position: 1
 ---

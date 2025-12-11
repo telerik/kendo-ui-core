@@ -7,7 +7,7 @@ slug: dropdownlist-reloading-options-in-scheduler-edit-form
 tags: kendoui, kendo, dropdownlist, scheduler, edit, data, options, change
 ticketid: 1118178
 res_type: kb
-component: dropdownlist
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: CI, CD, Build Server
 page_title: CI, CD, Build Server
 description: CI, CD, Build Server setup involving the {{ site.product }}.
+components: ["general"]
 slug: deployment_ci_cd_build
 position: 1
 ---

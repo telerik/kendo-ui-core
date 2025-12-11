@@ -2,6 +2,7 @@
 title: Customization
 page_title: Less Themes Customization
 description: "Learn how you can customize the Telerik UI for {{ site.framework }} Less themes."
+components: ["general"]
 slug: less_themes_customization_aspnetmvc6_aspnetmvc
 position: 2
 ---

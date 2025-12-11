@@ -6,6 +6,7 @@ page_title: How To Add Tooltips to Form Item Labels in Kendo UI Forms
 slug: how-to-add-tooltips-to-kendo-ui-form-item-labels
 tags: kendo-ui, form, tooltip, user-interface
 res_type: kb
+components: ["tooltip"]
 ticketid: 1654168
 ---
 

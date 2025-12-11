@@ -7,6 +7,7 @@ slug: react-grid-wrapper-kendo-widgets-in-column-template
 tags: react, reactjs, grid, column template, widgets, controls, components, render, show
 ticketid: 1149333
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

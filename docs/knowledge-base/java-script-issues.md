@@ -7,7 +7,7 @@ slug: troubleshooting_javascript_errors_kendoui
 tags: telerik, kendoui, jquery, troubleshooting, javascript, errors, issues
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

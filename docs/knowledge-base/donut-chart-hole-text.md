@@ -5,9 +5,9 @@ description: "Learn how to place some text in the center of a Kendo UI Donut Cha
 previous_url: /controls/charts/how-to/donut-chart-hole-text, /controls/charts/how-to/appearance/donut-chart-hole-text
 slug: howto_placetextinthecentre_donutcharts
 tags: chart, place, text, donut, center
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

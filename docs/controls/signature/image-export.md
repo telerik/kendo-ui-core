@@ -2,6 +2,7 @@
 title: Image Export
 page_title: jQuery Signature Documentation - Signature Image Export
 description: "Learn how to export the Kendo UI for jQuery Signature control as a PNG file."
+components: ["signature"]
 slug: image_export_kendoui_signature_widget
 position: 4
 ---

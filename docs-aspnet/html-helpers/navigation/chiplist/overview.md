@@ -2,6 +2,7 @@
 title: Overview
 page_title: ChipList Overview
 description: "Try now the Telerik UI for {{ site.framework }} ChipList component representing a container element for two or more Chip components, and delivering various styling options and features such as enabling the single and multiple user selection, and more."
+components: ["chiplist"]
 slug: htmlhelpers_chiplist_aspnetcore_overview
 position: 1
 ---

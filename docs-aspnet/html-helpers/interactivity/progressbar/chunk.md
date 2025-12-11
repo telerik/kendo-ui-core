@@ -2,6 +2,7 @@
 title: Chunk
 page_title: Chunk
 description: "Learn how to set the state of the Telerik UI ProgressBar component for {{ site.framework }} in chunks or partitions."
+components: ["progressbar"]
 slug: progressbar_chunk
 position: 5
 ---

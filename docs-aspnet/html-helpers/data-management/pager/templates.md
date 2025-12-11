@@ -2,6 +2,7 @@
 title: Templates
 page_title: Pager Templates
 description: "Get started with the {{ site.framework }} Pager and learn about its templating options."
+components: ["pager"]
 slug: templates_pager_aspnet
 position: 5
 ---

@@ -4,10 +4,10 @@ page_title: Create ColumnMenu Tool in the ToolBar - Kendo UI for jQuery ToolBar
 description: "Learn how to create a custom tool in the ToolBar similar to the Kendo UI for jQuery Grid ColumnMenu."
 slug: toolbar-column-menu
 tags: custom, toolbar, grid, column, menu
-component: toolbar
 ticketid: 1654347
 type: how-to
 res_type: kb
+components: ["toolbar"]
 ---
 
 ## Environment

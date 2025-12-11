@@ -2,6 +2,7 @@
 title: Images
 page_title: Timeline Images
 description: "Adding images in the Telerik UI Timeline component for {{ site.framework }}."
+components: ["timeline"]
 previous_url: /helpers/navigation/timeline/images
 slug: images_htmlhelpers_timeline_aspnetcore
 position: 4

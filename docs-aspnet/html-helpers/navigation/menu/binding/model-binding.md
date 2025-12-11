@@ -2,6 +2,7 @@
 title:  Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 previous_url: /helpers/navigation/menu/binding/model-binding
 slug: htmlhelpers_menu_modelbinding_aspnetcore
 position: 3

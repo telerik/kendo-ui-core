@@ -2,6 +2,7 @@
 title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI ButtonGroup component for {{ site.framework }} in a Razor Page."
+components: ["buttongroup"]
 slug: htmlhelpers_buttongroup_razorpage_aspnetcore
 position: 8
 ---
@@ -12,16 +13,13 @@ Razor Pages is an alternative to the MVC pattern that makes page-focused coding 
 
 You can seamlessly integrate the Telerik UI ButtonGroup for {{ site.framework }} in Razor Pages applications.
 
-This article describes how to configure the ButtonGroup component in a Razor Pages scenario.
+This article describes how to use the ButtonGroup component in a Razor Pages scenario.
 
 For the complete project, refer to the [ButtonGroup in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ButtonGroup/ButtonGroupIndex.cshtml).
 
 ```HtmlHelper
 @page
-@model Telerik.Examples.RazorPages.Pages.ButtonGroup.ButtonGroupIndexModel
-@{
-	ViewData["Title"] = "ButtonGroupIndex";
-}
+@model ButtonGroupIndexModel
 
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @Html.AntiForgeryToken()
@@ -40,14 +38,21 @@ For the complete project, refer to the [ButtonGroup in Razor Pages example](http
 )
 ```
 ```TagHelper
-        <kendo-buttongroup name="player"
-                            on-select="onSelect">
-                <buttongroup-items>
-                    <item text="Month"></item>
-                    <item text="Quarter"></item>
-                    <item text="Year"></item>
-                </buttongroup-items>
-        </kendo-buttongroup>
+@page
+@model ButtonGroupIndexModel
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
+
+<h1>ButtonGroupIndex</h1>
+
+<kendo-buttongroup name="buttonGroup" on-select="onSelect">
+    <buttongroup-items>
+        <item text="Month"></item>
+        <item text="Quarter"></item>
+        <item text="Year"></item>
+    </buttongroup-items>
+</kendo-buttongroup>
 ```
 ```JS script
 <script>
@@ -57,16 +62,19 @@ For the complete project, refer to the [ButtonGroup in Razor Pages example](http
 </script>
 ```
 ```C# PageModel
-    public class ButtonGroupIndexModel : PageModel
+public class ButtonGroupIndexModel : PageModel
+{
+    public void OnGet()
     {
-        public void OnGet()
-        {
 
-        }
     }
+}
 ```
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [ButtonGroup Overview]({% slug htmlhelpers_buttongroup_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the ButtonGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/buttongroup)
+* [Server-Side HtmlHelper API of the ButtonGroup](/api/buttongroup)
+* [Server-Side TagHelper API of the ButtonGroup](/api/taghelpers/buttongroup)
+* [Knowledge Base Section](/knowledge-base)

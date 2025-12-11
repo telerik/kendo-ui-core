@@ -2,6 +2,7 @@
 title: Sizing
 page_title: Telerik UI Grid component for {{ site.framework }} Documentation - Sizing
 description: "Get started with the Telerik UI Grid for {{ site.framework }} and learn about its sizing options."
+components: ["grid"]
 slug: sizing_grid
 position: 7
 ---

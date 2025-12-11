@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TabStrip Documentation - TabStrip Overview
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to initialize the widget and use its events."
+components: ["tabstrip"]
 slug: overview_kendoui_tabstrip_widget
 position: 0
 ---

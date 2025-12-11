@@ -2,6 +2,7 @@
 title: Group Templates
 page_title: Group Templates
 description: "Learn how to customize the group rows when the data of the Telerik UI Grid for ASP.NET MVC is grouped."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/templating/group-templates
 slug: group_templates_grid_aspnetcore
 position: 5

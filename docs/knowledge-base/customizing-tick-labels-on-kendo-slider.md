@@ -7,6 +7,7 @@ meta_title: Customizing Tick Labels on Kendo UI for jQuery Slider
 slug: customizing-tick-labels-on-kendo-slider
 tags: kendo-ui-for-jquery, slider, labels, ticks, customization
 res_type: kb
+components: ["slider"]
 ticketid: 528111
 ---
 

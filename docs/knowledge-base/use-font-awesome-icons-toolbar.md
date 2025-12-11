@@ -5,9 +5,9 @@ description: "Learn how to use FontAwesome icons in the Kendo UI for jQuery Tool
 slug: howto_usefontawesomeicons_toolbar
 previous_url: /controls/navigation/toolbar/how-to/use-font-awesome-icons
 tags: telerik, kendo, jquery, toolbar, use, fontawesome, icons
-component: toolbar
 type: how-to
 res_type: kb
+components: ["toolbar"]
 ---
 
 ## Environment

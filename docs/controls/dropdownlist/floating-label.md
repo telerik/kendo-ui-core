@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: jQuery DropDownList Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery DropDownList component."
+components: ["dropdownlist"]
 slug: floating_label_kendoui_dropdownlist_widget
 position: 10
 ---

@@ -2,6 +2,7 @@
 title: Amazon S3
 page_title: Amazon S3 (Amazon Simple Storage Service)
 description: "Learn how to use the Telerik UI for {{ site.framework }} Upload component, to upload files to a bucket in Amazon S3"
+components: ["general"]
 slug: aws_s3_storage_aspnetcore
 position: 3
 ---

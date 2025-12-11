@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CheckBoxGroup Documentation - Getting Started with the CheckBoxGroup
 description: "Get started with the jQuery CheckBoxGroup by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["checkboxgroup"]
 slug: getting_started_kendoui_checkboxgroup_widget
 position: 2
 ---

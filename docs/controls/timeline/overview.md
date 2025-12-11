@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Timeline Documentation - Timeline Overview
 description: "Get started with the jQuery Timeline by Kendo UI and learn how to initialize the component and use its events."
+components: ["timeline"]
 slug: overview_kendoui_timeline_widget
 position: 1
 ---

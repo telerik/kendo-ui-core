@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MediaPlayer Documentation - MediaPlayer Accessibility
 description: "Get started with the jQuery MediaPlayer by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["mediaplayer"]
 slug: jquery_mediaplayer_accessibility
 position: 1
 ---

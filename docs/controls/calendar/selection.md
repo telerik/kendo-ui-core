@@ -2,6 +2,7 @@
 title: Selection
 page_title: jQuery Calendar Documentation - Selection
 description: "Get started with the jQuery Calendar by Kendo UI and implement single, multiple, range-date, and week selections."
+components: ["calendar"]
 slug: selection_kendoui_calendar
 position: 7
 ---

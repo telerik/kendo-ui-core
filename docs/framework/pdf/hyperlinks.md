@@ -2,6 +2,7 @@
 title: Disabling Hyperlinks
 page_title: Disabling Hyperlinks - Kendo UI Drawing Library
 description: "Prevent the default behavior and disable hyperlinks when you export content in PDF with the Kendo UI Drawing library."
+components: ["general"]
 previous_url: /framework/drawing/drawing-dom#hyperlinks
 slug: hyperlinks_drawing
 position: 8

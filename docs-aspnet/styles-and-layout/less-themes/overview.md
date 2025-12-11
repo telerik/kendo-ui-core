@@ -2,6 +2,7 @@
 title: Overview
 page_title: Less Themes Overview
 description: "Learn about the Telerik UI for {{ site.framework }} Less themes."
+components: ["general"]
 slug: less_themes_overview_aspnetmvc6_aspnetmvc
 position: 1
 ---

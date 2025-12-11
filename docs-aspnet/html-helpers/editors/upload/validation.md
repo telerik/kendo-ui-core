@@ -2,6 +2,7 @@
 title: File Validation
 page_title: File Validation
 description: "Learn how to configure file validation on the client before it has been uploaded using the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 slug: htmlhelpers_upload_validation_aspnetcore
 position: 7
 ---

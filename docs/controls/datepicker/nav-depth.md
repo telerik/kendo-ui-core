@@ -2,6 +2,7 @@
 title: Start View and Selection Depth
 page_title: jQuery DatePicker Documentation - Start View and Selection Depth
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to define the start view and control the navigation depth of the widget."
+components: ["datepicker"]
 slug: navdepth_datepicker
 position: 6
 ---

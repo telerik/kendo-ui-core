@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items of the BottomNavigation component."
+components: ["bottomnavigation"]
 slug: htmlhelpers_items_bottomnavigation_aspnetcore
 position: 2
 ---

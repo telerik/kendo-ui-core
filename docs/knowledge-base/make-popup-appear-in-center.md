@@ -5,9 +5,9 @@ description: "Learn how to align the a popup to always appear in the center of a
 slug: howto_makepopupcenter_window
 previous_url: /controls/layout/window/how-to/make-popup-appear-in-center
 tags: telerik, kendo, jquery, window, render, popup, in, the, center, of, the
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

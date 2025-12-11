@@ -6,6 +6,7 @@ page_title: How to Add Multiple Footers in Kendo UI Grid Without Using Grouping
 slug: how-to-add-multiple-footers-kendo-ui-grid
 tags: grid, footer, kendo ui, multiple footers, customization
 res_type: kb
+components: ["grid"]
 ticketid: 1661610
 ---
 

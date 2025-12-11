@@ -7,6 +7,7 @@ meta_title: Triggering Dependency Line Deletion Dialog with Delete Key in Kendo 
 slug: delete-key-trigger-dependency-line-dialog-kendo-ui-jquery-gantt
 tags: gantt, kendo-ui-for-jquery, dependencyDestroy, delete-key, keyboard-navigation
 res_type: kb
+components: ["gantt"]
 ticketid: 1684404
 ---
 

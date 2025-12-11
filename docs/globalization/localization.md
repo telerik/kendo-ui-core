@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization - Kendo UI Globalization
 description: "Learn how to use the Kendo UI localization files in order to change the default messages of widgets."
+components: ["general"]
 previous_url: /framework/localization/overview, /localization
 slug: overview_localization_kendoui
 position: 3

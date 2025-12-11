@@ -2,6 +2,7 @@
 title: Installing with NPM
 page_title: Installing with NPM
 description: "Get started with {{ site.product }} and install NPM packages of the helpers."
+components: ["general"]
 previous_url: /getting-started/installation/npm
 slug: npmpackages_core
 position: 9

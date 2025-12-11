@@ -2,6 +2,7 @@
 title: Binding
 page_title: Binding
 description: "Learn how to implement data binding with Telerik UI CheckBoxGroup component for {{ site.framework }}."
+components: ["checkboxgroup"]
 slug: htmlhelpers_checkboxgroup_binding_aspnetcore
 position: 2
 ---

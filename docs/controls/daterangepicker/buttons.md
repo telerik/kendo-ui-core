@@ -2,6 +2,7 @@
 title: DateRangePicker Buttons
 page_title: jQuery DateRangePicker Documentation - DateRangePicker Buttons
 description: "Check the available buttons in the Kendo UI for jQuery DateRangePicker."
+components: ["daterangepicker"]
 slug: buttons_daterangepicker
 position: 8
 ---

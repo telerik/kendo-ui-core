@@ -5,9 +5,9 @@ description: "Learn how to use the ASMX service with CRUD operations in the Kend
 previous_url: /controls/data-management/grid/how-to/Editing/grid-web-service---crud
 slug: howto_crud_web_service_grid
 tags: grid, use, asmx, service, crud, operations
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

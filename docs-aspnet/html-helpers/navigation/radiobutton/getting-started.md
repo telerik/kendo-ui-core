@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} RadioButton component by following a complete step-by-step tutorial."
+components: ["radiobutton"]
 slug: aspnetcore_radiobutton_getting_started
 position: 1
 ---

@@ -8,6 +8,7 @@ position:
 tags: column, custom, position, label, chart, top left, corner, series.labels, series
 ticketid: 1455103
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

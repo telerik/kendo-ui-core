@@ -2,6 +2,7 @@
 title: Upgrading Telerik UI
 page_title: Upgrading Telerik UI
 description: "Upgrade your current version of {{ site.product }} and switch from a trial to a developer license."
+components: ["general"]
 previous_url: /upgrade, /installation-mvc/upgrading/upgrade
 slug: upgrade_aspnetcore
 position: 1

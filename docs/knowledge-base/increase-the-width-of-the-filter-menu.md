@@ -8,7 +8,7 @@ previous_url: /knowledge-base/how-to-increase-the-width-of-the-filter-menu
 tags: grid, filter, width
 ticketid: 1133304
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

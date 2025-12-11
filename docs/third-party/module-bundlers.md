@@ -2,6 +2,7 @@
 title: Module Bundlers
 page_title: Module Bundlers - Kendo UI Third-Party Tools
 description: "Learn how to use the @progress/kendo-ui package with modern module bundlers like webpack, rollup, esbuild, and Vite's dev server)."
+components: ["general"]
 slug: module_bundlers_integration_kendoui
 ---
 

@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Explore the export options of the Telerik UI ArcGauge component for {{ site.framework }}."
+components: ["arcgauge"]
 slug: export_arcgaugehelper_aspnetcore
 position: 4
 ---

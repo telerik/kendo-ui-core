@@ -7,6 +7,7 @@ slug: howto_deletemultiplerowsatonce_gridaspnetmv
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

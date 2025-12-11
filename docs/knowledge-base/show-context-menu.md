@@ -5,9 +5,9 @@ description: "Learn how to show a context menu for the Kendo UI TreeList rows."
 slug: howto_showcontextmenu_treelist
 previous_url: /controls/data-management/treelist/how-to/show-context-menu, /controls/navigation/menu/how-to/show-context-menu-in-treelist
 tags: kendo, jquery, treelist, show, context, menu
-component: treelist
 type: how-to
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

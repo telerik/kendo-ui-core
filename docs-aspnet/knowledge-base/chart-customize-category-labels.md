@@ -6,6 +6,7 @@ page_title: Customizing Bar Chart Category Axis Labels
 slug: chart-customize-category-labels
 tags: chart, align, bar, label, y, axis, category, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

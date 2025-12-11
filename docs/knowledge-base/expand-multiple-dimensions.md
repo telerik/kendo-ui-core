@@ -5,9 +5,9 @@ description: "Learn how to expand multiple column dimensions by using the dataBo
 previous_url: /controls/data-management/pivotgrid/how-to/expand-multiple-dimensions, /controls/data-management/pivotgrid/how-to/dimensions/expand-multiple-dimensions
 slug: howto_expand_multiple_column_dimensions_pivotgrid
 tags: kendoui, pivotgrid, access, mdx, query
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Plotting a Threshold Line in a DrillDown Series Chart
 slug: drilldown-chart-plot-threshold-line
 tags: chart, drilldown, plotband, threshold-line, series
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 <table>

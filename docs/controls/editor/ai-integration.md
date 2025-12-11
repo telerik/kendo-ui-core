@@ -2,6 +2,7 @@
 title: AI Integration
 page_title: jQuery Editor Documentation - AI Integration
 description: "Get familiar with the AI capabilities of the Kendo UI for jQuery Editor."
+components: ["editor"]
 slug: ai_integration_kendoui_editor
 position: 15
 ---

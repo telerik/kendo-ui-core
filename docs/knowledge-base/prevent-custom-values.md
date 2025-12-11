@@ -5,9 +5,9 @@ description: "Learn how to prevent adding custom values to a Kendo UI ComboBox c
 previous_url: /controls/editors/combobox/how-to/prevent-custom-values, /controls/editors/combobox/how-to/customize/prevent-custom-values
 slug: howto_prevent_adding_custom_values_combobox
 tags: telerik, kendo, jquery, combobox, prevent, adding, custom, values
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

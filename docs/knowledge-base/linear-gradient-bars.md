@@ -5,9 +5,9 @@ description: "Learn how to use linear gradients as background in bars when worki
 previous_url: /controls/charts/how-to/linear-gradient-bars
 slug: howto_uselineargradient_inbars_charts
 tags: chart, customize, themes
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

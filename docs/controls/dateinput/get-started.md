@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DateInput Documentation - Getting Started with the DateInput
 description: "Get started with the jQuery DateInput by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dateinput"]
 slug: getting_started_kendoui_dateinput_component
 position: 2
 ---

@@ -7,6 +7,7 @@ slug: make-tilelayout-columns-responsive-tilelayout
 tags: kendo, jquery, tilelayout, responsive, columns
 ticketid: 1580279
 res_type: kb
+components: ["tilelayout"]
 ---
 
 ## Environment

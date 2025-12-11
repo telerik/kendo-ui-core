@@ -2,6 +2,7 @@
 title: Animations
 page_title: Animations
 description: "Learn how to configure the animations for the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_animations_aspnetcore
 position: 10
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ChartWizard Documentation - Getting Started with the ChartWizard
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chartwizard"]
 slug: getting_started_kendoui_chartwizard_component
 position: 2
 ---

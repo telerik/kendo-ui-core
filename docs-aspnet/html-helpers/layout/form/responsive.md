@@ -2,6 +2,7 @@
 title: Responsive Form
 page_title: Responsive Form
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn how to build responsive forms using the grid layout configuration."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_responsive
 position: 8
 ---

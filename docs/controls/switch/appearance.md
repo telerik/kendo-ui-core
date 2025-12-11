@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Switch Documentation - Switch Appearance
 description: "Learn how to apply different styling options to the Switch widget."
+components: ["switch"]
 slug: appearance_kendoui_switch_widget
 position: 3
 ---

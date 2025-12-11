@@ -2,6 +2,7 @@
 title: Printing
 page_title: jQuery Scheduler Documentation - Printing
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to print its visible content."
+components: ["scheduler"]
 slug: printing_kendoui_scheduler
 position: 6
 ---

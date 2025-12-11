@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} MediaPlayer by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["mediaplayer"]
 previous_url: /helpers/media/mediaplayer/accessibility/keyboard-navigation
 slug: htmlhelpers_mediaplayer_accessibility_keyboard_navigation_aspnetcore
 position: 2

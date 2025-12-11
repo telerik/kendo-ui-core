@@ -2,6 +2,7 @@
 title: Using a Project Template
 page_title: Using a Project Template
 description: "Learn how to use the Telerik Visual Studio Extensions to create a new project with the Telerik UI for ASP.NET Core components."
+components: ["general"]
 slug: gettingstarted_project_template 
 position: 4
 permalink: /getting-started/first-steps-vs-extensions

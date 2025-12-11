@@ -5,9 +5,9 @@ description: "Learn how to save the scroll position of the Kendo UI TabStrip con
 slug: howto_savecontentscrollposition_tabstrip
 previous_url: /controls/navigation/tabstrip/how-to/save-content-scroll-position
 tags: telerik, kendo, jquery, tabstrip, save, content, scroll, position
-component: tabstrip
 type: how-to
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

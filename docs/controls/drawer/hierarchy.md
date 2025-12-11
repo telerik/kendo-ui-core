@@ -2,6 +2,7 @@
 title: Hierarchy
 page_title: jQuery Drawer Documentation - Hierarchy
 description: "Get started with the jQuery Drawer by Kendo UI and find out how to use it's hierarchy functionality."
+components: ["drawer"]
 slug: hierarchy_kendoui_drawer
 position: 5
 ---

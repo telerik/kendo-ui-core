@@ -7,6 +7,7 @@ meta_title: Avoid Accidental Data Overwrite with Drag-and-Copy in Kendo UI Sprea
 slug: prevent-data-overwrite-drag-and-copy-kendo-ui-spreadsheet
 tags: kendo-ui-for-jquery, spreadsheet, changing-event, autofill, drag-and-copy, data-overwrite
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1700019
 ---
 

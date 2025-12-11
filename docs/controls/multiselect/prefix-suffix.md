@@ -2,6 +2,7 @@
 title: Prefix and Suffix
 page_title: jQuery MultiSelect Documentation - Prefix and Suffix
 description: "Learn how to add custom items as prefix and suffix adornments to enhance the user interface interactivity when using the Kendo UI for jQuery MultiSelect."
+components: ["multiselect"]
 slug: prefix_suffix_multiselect
 position: 13
 ---

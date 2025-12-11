@@ -7,6 +7,7 @@ slug: grid-persist-custom-styles-cancel
 tags: grid, cancel, persist, styles
 ticketid: 1600921
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

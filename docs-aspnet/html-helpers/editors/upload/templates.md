@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn how to use templates to customize the appearance of the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 slug: htmlhelpers_upload_templates_aspnetcore
 position: 9
 ---

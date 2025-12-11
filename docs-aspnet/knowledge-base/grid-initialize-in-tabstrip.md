@@ -6,6 +6,7 @@ page_title: Initialize the Grid in a TabStrip
 slug: grid-initialize-in-tabstrip
 tags: grid, initialize, tabstrip
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

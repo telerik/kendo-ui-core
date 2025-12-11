@@ -2,6 +2,7 @@
 title: PivotConfiguratorV2
 page_title: PivotConfiguratorV2 Overview
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and learn how to create and configure the PivotConfiguratorV2 Configurator."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_configurator
 position: 5
 ---

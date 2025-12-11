@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Learn how to configure the server-side validation when using the Telerik UI Captcha component for {{ site.framework }}."
+components: ["captcha"]
 slug: htmlhelpers_captcha_validation
 position: 3
 ---

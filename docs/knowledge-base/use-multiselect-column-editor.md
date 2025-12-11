@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI MultiSelect for a column editor in t
 previous_url: /controls/data-management/grid/how-to/Editing/use-multiselect-column-editor
 slug: howto_use_multiselect_column_editor
 tags: use, multiselect, column, editor, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

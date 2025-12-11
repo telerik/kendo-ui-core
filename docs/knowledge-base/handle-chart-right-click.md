@@ -5,9 +5,9 @@ description: "Learn how to handle the right click in Kendo UI Charts."
 previous_url: /controls/charts/how-to/handle-chart-right-click, /controls/charts/how-to/interaction/handle-chart-right-click
 slug: howto_handlerightclick_charts
 tags: chart, handle, right, clicks
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

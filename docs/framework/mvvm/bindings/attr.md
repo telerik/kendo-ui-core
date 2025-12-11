@@ -2,6 +2,7 @@
 title: Attribute
 page_title: Attribute Binding - Kendo UI MVVM
 description: "Learn how to populate and update DOM element attributes from the View-Model fields or methods through the attr binding in Kendo UI MVVM."
+components: ["mvvm"]
 slug: attributebinding_mvvm_kendoui
 ---
 

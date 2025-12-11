@@ -2,6 +2,7 @@
 title: Resources
 page_title: Resources
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its resources."
+components: ["scheduler"]
 previous_url: /helpers/scheduling/scheduler/mvc-scheduler-resources
 slug: htmlhelpers_scheduler_resources_aspnetcore
 position: 4

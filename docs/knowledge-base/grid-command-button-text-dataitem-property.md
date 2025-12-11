@@ -7,6 +7,7 @@ slug: grid-command-button-text-dataitem-property
 tags: grid, command, button, custom, text, value, dataitem, property, data, item
 ticketid: 1157637
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

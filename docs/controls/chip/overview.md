@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Chip Documentation - Chip Overview
 description: "Try now the Kendo UI for jQuery Chip component delivering a styled clickable UI functionality with arbitrary content."
+components: ["chip"]
 slug: overview_kendoui_chip_widget
 position: 1
 ---

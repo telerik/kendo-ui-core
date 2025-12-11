@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Circular ProgressBar component for {{ site.framework }}."
+components: ["circularprogressbar"]
 slug: htmlhelpers_circular_progressbar_aspnetcore
 position: 0
 ---

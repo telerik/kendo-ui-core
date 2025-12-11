@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/validate-timeslot-against-rec
 slug: scheduler-validate-timeslot-against-recurrence-rules
 tags: scheduler, timeslot, validate, recurrence, rules, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

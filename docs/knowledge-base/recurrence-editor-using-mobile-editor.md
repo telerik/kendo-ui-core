@@ -5,9 +5,9 @@ description: "Learn how to create a recurrence editor by using a mobile editor a
 previous_url: /controls/scheduling/scheduler/how-to/recurrence-editor-using-mobile-editor, /controls/scheduling/scheduler/how-to/editing/recurrence-editor-using-mobile-editor
 slug: howto_createrecurrenceeditor_byusingmobileeditor_scheduler
 tags: telerik, kendo, jquery, scheduler, create, recurrence, editor, using, with, mobile, editor 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

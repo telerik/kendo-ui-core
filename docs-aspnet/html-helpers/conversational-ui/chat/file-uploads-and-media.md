@@ -2,6 +2,7 @@
 title: File Uploads and Media
 page_title: Telerik UI Chat Documentation - File Uploads and Media
 description: "Learn how to enable file uploads, media sharing, and speech-to-text functionality in the Telerik UI for {{ site.framework }} Chat component."
+components: ["chat"]
 slug: htmlhelpers_files_and_media_chat
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: AngularJS Directives Overview | AngularJS Directives
 description: "Learn more about the AngularJS integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
+components: ["general"]
 previous_url: /using-kendo-with-angularjs, /AngularJS/introduction
 slug: angularjs_integration_directives
 position: 1

@@ -7,6 +7,7 @@ slug: chart-add-trend-line
 tags: chart, trendline, average, mean, sampling
 ticketid: 1163517
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

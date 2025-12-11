@@ -5,9 +5,9 @@ description: "Learn how to reset expand/collapse state and fetch the data again 
 previous_url: /controls/data-management/pivotgrid/how-to/reset-expand-state, /controls/data-management/pivotgrid/how-to/dimensions/reset-expand-state
 slug: howto_reset_expand_state_pivotgrid
 tags: kendoui, pivotgrid, reset, expand, state
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

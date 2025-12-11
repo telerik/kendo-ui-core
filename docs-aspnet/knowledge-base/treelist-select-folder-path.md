@@ -7,6 +7,7 @@ slug: treelist-select-folder-path
 tags: treelist, hierarchical, folder, path, tree
 ticketid: 1558365
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

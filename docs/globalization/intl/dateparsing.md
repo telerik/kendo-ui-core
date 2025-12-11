@@ -2,6 +2,7 @@
 title: Date Parsing
 page_title: Date Parsing - Kendo UI Globalization
 description: "Learn how to convert a specified string to a date object using the Kendo UI culture specific settings."
+components: ["general"]
 previous_url: /framework/globalization/dateparsing
 slug: dateparsing_kendoui_globalization
 position: 4

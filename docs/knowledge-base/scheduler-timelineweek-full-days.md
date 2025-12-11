@@ -7,6 +7,7 @@ slug: scheduler-timelineweek-full-days
 tags: scheduler, timelineweek
 ticketid: 1141234
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

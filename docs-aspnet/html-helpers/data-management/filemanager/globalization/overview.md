@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI FileManager component for {{ site.framework }} and learn about the globalization options it supports."
+components: ["filemanager"]
 slug: globalization_filemanager_aspnetcore
 position: 1
 ---

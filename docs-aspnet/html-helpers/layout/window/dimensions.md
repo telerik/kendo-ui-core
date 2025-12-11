@@ -2,6 +2,7 @@
 title: Dimensions
 page_title: Dimensions
 description: "Learn how to configure the dimensions of the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_dimensions_aspnetcore
 position: 2
 ---

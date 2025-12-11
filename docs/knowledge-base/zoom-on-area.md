@@ -5,9 +5,9 @@ description: "Learn how to center the Kendo UI Map view on a specified area."
 slug: howto_zoomonarea_map
 previous_url: /controls/diagrams-and-maps/map/how-to/zoom-on-area
 tags: kendo, jquery, map, zoom, on, area
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

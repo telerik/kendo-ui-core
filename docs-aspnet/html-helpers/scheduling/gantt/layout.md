@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout
 description: "Learn more about the layout of the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: htmlhelpers_gantt_layout_aspnetcore
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Import and Export of Documents
 page_title: Import and Export of Documents
 description: "Import and export different types of documents with the Telerik UI Editor for ASP.NET MVC."
+components: ["editor"]
 slug: overview_importexportdpl_aspnetmvc
 position: 11
 ---

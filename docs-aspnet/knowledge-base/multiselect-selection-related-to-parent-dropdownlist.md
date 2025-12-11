@@ -6,6 +6,7 @@ page_title: Using MultiSelect in a Window Related to DropDownList Item
 slug: multiselect-selection-related-to-parent-dropdownlist
 tags: multiselect, dropdownlist, window, selection, relation
 res_type: kb
+components: ["general"]
 component: dropdownlist
 ---
 

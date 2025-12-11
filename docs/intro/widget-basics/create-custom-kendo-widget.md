@@ -3,6 +3,7 @@ title: Creating Custom Components
 page_title: Creating Custom Components - Working with Components 
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
 description: "Get started with Kendo UI for jQuery and create your own components by inheriting from the base Kendo UI widget class."
+components: ["general"]
 slug: createcustomkendouiwidgets_gettingstarted
 position: 7
 ---

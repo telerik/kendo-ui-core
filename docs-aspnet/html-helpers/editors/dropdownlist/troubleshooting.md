@@ -2,6 +2,7 @@
 title: Troubleshooting
 page_title: Troubleshooting
 description: "Learn about the solutions of common issues that may occur while working with {{ site.product }} DropDownList."
+components: ["dropdownlist"]
 slug: troubleshoot_dropdownlist_aspnetcore
 position: 20
 ---

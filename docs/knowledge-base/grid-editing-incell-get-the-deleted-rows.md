@@ -7,6 +7,7 @@ slug: grid-editing-incell-get-the-deleted-rows
 tags: grid, editable, get, obtain, deleted, destroyed, rows, items, pending, changes, incell, editing
 ticketid: 1343481
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

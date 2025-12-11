@@ -6,7 +6,7 @@ page_title: Create Filter Widgets with Multiple Filter Criteria - Kendo UI for j
 slug: grid-multiple-filter-criterion
 tags: grid, multiple, filter, filters, criterion, extra, more, filtering, filtratrion, many
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

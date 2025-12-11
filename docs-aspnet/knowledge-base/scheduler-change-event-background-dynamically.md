@@ -6,6 +6,7 @@ slug: scheduler-change-event-background
 tags: background, change, databound, scheduler, telerik, core, mvc, wrappers,
 ticketid: 1642965
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

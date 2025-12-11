@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI CheckBox HtmlHelper for {{ site.framework }}."
+components: ["checkbox"]
 slug: checkbox_appearance
 position: 2
 ---

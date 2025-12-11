@@ -2,6 +2,7 @@
 title: Customization
 page_title: Customization - Sass Themes
 description: "Learn how to create a custom theme for you application and alter the default appearance of the Kendo UI for jQuery components"
+components: ["general"]
 slug: sassbasedthemes_customization_kendoui
 position: 2
 ---

@@ -5,9 +5,9 @@ description: "Learn how to calculate the content width of a Kendo UI for jQuery 
 slug: howto_calculatetooltipcontentlength_tooltip
 previous_url: /controls/layout/tooltip/how-to/calculate-tooltip-width
 tags: telerik, kendo, jquery, tooltip, calculate, content, width 
-component: tooltip
 type: how-to
 res_type: kb
+components: ["tooltip"]
 ---
 
 ## Environment

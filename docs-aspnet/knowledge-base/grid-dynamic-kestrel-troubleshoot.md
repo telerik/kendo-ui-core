@@ -6,6 +6,7 @@ page_title: Dynamic Grid Missing on the Page after .NET Core Update
 slug: grid-dynamic-kestrel-troubleshoot
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, dynamic, kestrel, 3.1
 res_type: kb
+components: ["general"]
 ticketid: 1450544
 component: grid
 ---

@@ -2,6 +2,7 @@
 title: Toolbar
 page_title: jQuery Grid Documentation - Toolbar
 description: "Learn how to configure the Toolbar of the Kendo UI for jQuery Grid."
+components: ["grid"]
 slug: toolbar_kendoui_grid_widget
 position: 19
 ---

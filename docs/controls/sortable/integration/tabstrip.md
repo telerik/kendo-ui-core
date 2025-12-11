@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: jQuery Sortable Documentation - TabStrip Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the component with the Kendo UI TabStrip."
+components: ["sortable"]
 previous_url: /controls/sortable/integration-tabstrip
 slug: integrationwith_tabstrip_sortable_widget
 ---

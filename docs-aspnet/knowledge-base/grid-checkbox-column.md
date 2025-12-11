@@ -6,6 +6,7 @@ page_title: Binding and Editing Boolean Checkbox {{ site.product }} Grid Columns
 slug: grid-checkbox-column
 tags: grid, chechbox, inputs, column, always, editable, dataItem, boolean, row
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -6,6 +6,7 @@ page_title: Keyboard Navigation Issue in Grid | Kendo UI Grid
 slug: keyboard-navigation-issue-grid-kendo-ui
 tags: grid, kendo ui, keyboard navigation, sticky columns, first column, workaround
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

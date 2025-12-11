@@ -6,7 +6,7 @@ page_title: Change Grid Columns Width - Kendo UI for jQuery Data Grid
 slug: grid-pdf-export-change-column-widths
 tags: grid, column, width, pdf, export
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

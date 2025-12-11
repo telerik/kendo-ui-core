@@ -8,15 +8,13 @@ position: 2
 
 # Chart in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Chart for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Chart for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_charts_databinding_aspnetcore %}) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the Chart component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [Chart in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Chart/ChartRemoteBinding.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 The most flexible form of data binding is to use the [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component. To bind the Chart to a data set received from a remote endpoint within a Razor Pages application, follow the next steps:
 
@@ -29,7 +27,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
         @(Html.Kendo().Chart<ElectricityProduction>()
             .Name("chart")
             .DataSource(ds => ds
-                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
             )
             ...
         )
@@ -41,7 +39,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
         <kendo-chart name="chart">
             <datasource>
                 <transport>
-                    <read type="post" url="/Index?handler=Read" data="forgeryToken"/>
+                    <read type="post" url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                 </transport>
             </datasource>
             <!--Other configuration-->
@@ -81,6 +79,8 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static List<ElectricityProduction> production;
 
         public void OnGet()
@@ -99,6 +99,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
         {
             return new JsonResult(production);
         }
+    }
     ```
     ```Model
         public class ElectricityProduction
@@ -110,7 +111,9 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             public int Wind { get; set; }
         }
     ```
-    
+
+For the complete project, refer to the [Chart in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Chart/ChartRemoteBinding.cshtml).
+
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)

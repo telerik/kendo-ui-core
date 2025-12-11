@@ -5,9 +5,9 @@ description: "Learn how to preselect items in a Kendo UI DropDownList component.
 previous_url: /controls/editors/dropdownlist/how-to/preselect-items, /controls/editors/combobox/how-to/selection/preselect-items, /controls/editors/dropdownlist/how-to/selection/preselect-items
 slug: howto_preselect_items_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, preselect, items
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to customize the appearance of legend items in Kendo UI 
 previous_url: /controls/charts/how-to/legend-with-checkboxes, /controls/charts/how-to/appearance/legend-with-checkboxes
 slug: howto_displaycheckboxes_nexttolegenditems_charts
 tags: chart, display, chackboxes, next, to, legend, items
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: dropdownlist-with-embedded-table
 tags: dropdownlist, table
 ticketid: 1137036
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment

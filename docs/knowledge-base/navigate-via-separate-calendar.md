@@ -5,9 +5,9 @@ description: "Navigate the Kendo UI for jQuery Scheduler widget with a separate 
 previous_url: /controls/scheduling/scheduler/how-to/navigate-via-separate-calendar, /controls/scheduling/scheduler/how-to/interaction/navigate-via-separate-calendar
 slug: howto_navigate_the_scheduler_via_separate_calendar_scheduler
 tags: telerik, kendo, jquery, scheduler, navigate, in, the, with, a, separate, calendar 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

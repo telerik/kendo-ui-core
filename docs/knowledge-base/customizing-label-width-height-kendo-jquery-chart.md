@@ -7,6 +7,7 @@ meta_title: Customizing Label Width or Height in Kendo UI Chart CategoryAxis
 slug: customizing-label-width-height-kendo-jquery-chart
 tags: chart, kendo-ui-for-jquery, categoryaxis, labels, template
 res_type: kb
+components: ["chart"]
 ticketid: 1640462
 ---
 

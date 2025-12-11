@@ -7,7 +7,7 @@ slug: troubleshooting_chart_widget
 type: troubleshooting
 tags: chart, troubleshoot, common, issues
 res_type: kb
-component: chart
+components: ["chart"]
 ---
 
 ## Environment

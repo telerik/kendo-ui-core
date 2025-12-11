@@ -2,6 +2,7 @@
 title: Ajax Binding
 page_title: Ajax Binding
 description: "Learn how to implement Ajax Binding with Telerik UI MultiColumnComboBox component for {{ site.framework }}."
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/binding/ajax-binding
 slug: htmlhelpers_multicolumncombobox_ajaxbinding_aspnetcore
 position: 3

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TabStrip component for {{ site.framework }}."
+components: ["tabstrip"]
 slug: events_tabstrip_aspnetcore
 position: 6
 ---

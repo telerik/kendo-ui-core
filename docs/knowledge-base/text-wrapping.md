@@ -5,9 +5,9 @@ description: "Learn how to use the layout element to wrap text in the Kendo UI D
 slug: howto_wraptext_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/text-wrapping
 tags: kendo, jquery, diagram, wrap, text
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

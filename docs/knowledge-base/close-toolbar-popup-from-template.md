@@ -5,9 +5,9 @@ description: "Learn how to close the Kendo UI for jQuery ToolBar popup manually.
 slug: howto_closetoolbarpopupmanually_toolbar
 previous_url: /controls/navigation/toolbar/how-to/close-toolbar-popup-from-template
 tags: telerik, kendo, jquery, toolbar, close, popup, manually
-component: toolbar
 type: how-to
 res_type: kb
+components: ["toolbar"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Avatar Documentation - Keyboard Navigation
 description: "Get started with the jQuery Avatar by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["avatar"]
 slug: keynav_avatar_jquery
 position: 2
 ---

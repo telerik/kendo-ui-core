@@ -7,6 +7,7 @@ slug: grid-toolbar-bottom-position-placement
 tags: grid, toolbar, bottom, position, placement
 ticketid: 1120199
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to use CRUD operations when the Kendo UI Grid widget for
 previous_url: /controls/data-management/grid/how-to/Editing/grid-bound-to-page-methods
 slug: howto_use_crud_boundto_web_methods_grid
 tags: grid, crud, operations, bind, bound, web, methods
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

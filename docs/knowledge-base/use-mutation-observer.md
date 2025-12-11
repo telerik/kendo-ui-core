@@ -5,9 +5,9 @@ description: "Learn how to use the MutationObserver to add a red border and hide
 previous_url: /framework/validator/how-to/use-mutation-observer, /controls/editors/validator/how-to/use-mutation-observer
 slug: howto_usemutationobserver_addborderandhidetooltip_validator
 tags: telerik, kendo, jquery, validator, use, mutationobserver, add, border, hide, tooltip
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

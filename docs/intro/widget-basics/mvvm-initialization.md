@@ -3,6 +3,7 @@ title: Initializing with MVVM
 page_title: Initializing with MVVM - Working with Components 
 previous_url: /framework/data-attribute-initialization, /intro/widget-basics/data-attribute-initialization
 description: "Get started with Kendo UI for jQuery and initialize and configure the components by using the MVVM pattern"
+components: ["general"]
 slug: mvvm_initialization_kendoui
 position: 3
 ---

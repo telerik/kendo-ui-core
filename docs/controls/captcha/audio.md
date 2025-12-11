@@ -2,6 +2,7 @@
 title: Audio Content
 page_title: Audio Content
 description: "Learn how to configure the audio provider for the Kendo UI Captcha."
+components: ["captcha"]
 slug: audio_kendoui_captcha_widget
 position: 4
 ---

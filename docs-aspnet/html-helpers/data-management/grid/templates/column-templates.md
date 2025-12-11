@@ -2,6 +2,7 @@
 title: Column Templates
 page_title: Column Templates
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to customize the way the column displays its value."
+components: ["grid"]
 slug: column_templates_aspnetcore_grid
 position: 2
 ---

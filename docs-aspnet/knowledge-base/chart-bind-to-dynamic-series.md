@@ -7,6 +7,7 @@ previous_url: /html-helpers/charts/how-to/create-dynamic-series, /helpers/charts
 slug: chart-bind-to-dynamic-series
 tags: chart, databound, dynamic, series
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

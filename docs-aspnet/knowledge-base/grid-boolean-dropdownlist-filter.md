@@ -6,6 +6,7 @@ page_title: Filtering Boolean Grid Column with DropDownList
 slug: grid-boolean-dropdownlist-filter
 tags: grid, dropdownlist, filter, boolean, column, true, false
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

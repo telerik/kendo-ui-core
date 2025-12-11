@@ -5,9 +5,9 @@ description: "Learn how to validate radio buttons with only one error message in
 previous_url: /framework/validator/how-to/validate-radio-buttons, /controls/editors/validator/how-to/validate-radio-buttons
 slug: howto_validateradiowithonemessage_validator
 tags: telerik, kendo, jquery, validator, validate, radio, buttons, with, only, one, error, message
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

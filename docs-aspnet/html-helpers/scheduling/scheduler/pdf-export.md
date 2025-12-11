@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PDF Export
 description: "Export the Telerik UI Scheduler for {{ site.framework }} to PDF."
+components: ["scheduler"]
 slug: pdfexport_schedulerhelper_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about its features and how to initialize the component."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_overview
 position: 0
 ---

@@ -7,6 +7,7 @@ slug: listview-drag-drop-sortable-items
 tags: kendo, kendo-ui, listview, sortable, drag, drop, drag-drop, droptarget, draggable
 ticketid: 1163175
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

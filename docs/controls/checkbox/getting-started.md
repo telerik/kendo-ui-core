@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CheckBox Documentation - Getting Started with the CheckBox
 description: "Get started with the jQuery CheckBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["checkbox"]
 slug: getting_started_kendoui_checkbox_widget
 position: 2
 ---

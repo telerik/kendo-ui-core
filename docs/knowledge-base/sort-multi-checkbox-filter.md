@@ -5,9 +5,9 @@ description: "Learn how to sort the multiple checkbox filter while using the Ken
 previous_url: /controls/data-management/grid/how-to/sort-multi-checkbox-filter, /kendo-mvc/web/grid/how-to/sort-multi-checkbox-filter, /kendo-ui-mvc/controls/data-management/grid/how-to/sort-multi-checkbox-filter, /controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter
 slug: howto_sort_multiple_checkbox_filter_grid
 tags: sort, multiple, checkbox, filter, using, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

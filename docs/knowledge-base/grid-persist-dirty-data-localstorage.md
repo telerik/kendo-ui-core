@@ -7,7 +7,7 @@ slug: grid-persist-dirty-data-localstorage
 tags: grid, dirty, editing, localstorage, persist
 ticketid: 1147441
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

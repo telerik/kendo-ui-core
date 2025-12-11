@@ -2,23 +2,24 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI TaskBoard for {{ site.framework }} in a Razor Pages application."
+components: ["taskboard"]
 slug: razorpages_taskboard_aspnetcore
 position: 11
 ---
 
 # TaskBoard in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI TaskBoard for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI TaskBoard for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_taskboard_aspnetcore_databinding %}) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the TaskBoard component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-## Getting Started
+## Binding to Remote Data
 
 To configure the CRUD operations of the TaskBoard DataSource within a Razor Pages application, follow the next steps:
 
-1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` in the [`Columns`](/api/kendo.mvc.ui.fluent/taskboardbuilder#columnssystemaction) and TaskBoard configurations . The URL in each of these options must refer to the method name in the `PageModel`.
+1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` and [`Columns`](/api/kendo.mvc.ui.fluent/taskboardbuilder#columnssystemaction) configurations for the tasks and columns. The URL in each of these options must refer to the method name in the `PageModel`.
 
     ```HtmlHelper
         @page
@@ -33,10 +34,10 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
             .Columns(dataSource => dataSource
                 .Ajax()
                 .Model(model => model.Id(p => p.ID))
-                .Read(r => r.Url("/Index?handler=Editing_Columns_Read").Data("forgeryToken"))
-                .Create(r => r.Url("/Index?handler=Editing_Columns_Create").Data("forgeryToken"))
-                .Update(r => r.Url("/Index?handler=Editing_Columns_Update").Data("forgeryToken"))
-                .Destroy(r => r.Url("/Index?handler=Editing_Columns_Destroy").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Editing_Columns_Read")).Data("forgeryToken"))
+                .Create(r => r.Url(Url.Page("Index", "Editing_Columns_Create")).Data("forgeryToken"))
+                .Update(r => r.Url(Url.Page("Index", "Editing_Columns_Update")).Data("forgeryToken"))
+                .Destroy(r => r.Url(Url.Page("Index", "Editing_Columns_Destroy")).Data("forgeryToken"))
             )
             .DataTitleField("Title")
             .DataStatusField("OwnerID")
@@ -46,10 +47,10 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
             .DataSource(dataSource => dataSource
                 .Ajax()
                 .Model(model => model.Id(p => p.TaskID))
-                .Read(r => r.Url("/Index?handler=Tasks_Read").Data("forgeryToken"))
-                .Create(r => r.Url("/Index?handler=Tasks_Create").Data("forgeryToken"))
-                .Update(r => r.Url("/Index?handler=Tasks_Update").Data("forgeryToken"))
-                .Destroy(r => r.Url("/Index?handler=Tasks_Destroy").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Tasks_Read")).Data("forgeryToken"))
+                .Create(r => r.Url(Url.Page("Index", "Tasks_Create")).Data("forgeryToken"))
+                .Update(r => r.Url(Url.Page("Index", "Tasks_Update")).Data("forgeryToken"))
+                .Destroy(r => r.Url(Url.Page("Index", "Tasks_Destroy")).Data("forgeryToken"))
             )
         )
     ```
@@ -77,10 +78,10 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
                         </model>
                     </schema>
                     <transport>
-                        <read url="/Index?handler=Editing_Columns_Read" data="forgeryToken"/>
-                        <update url="/Index?handler=Editing_Columns_Update" data="forgeryToken"//>
-                        <create url="/Index?handler=Editing_Columns_Create" data="forgeryToken"//>
-                        <destroy url="/Index?handler=Editing_Columns_Destroy" data="forgeryToken"//>
+                        <read url="@Url.Page("Index", "Editing_Columns_Read")" data="forgeryToken"/>
+                        <update url="@Url.Page("Index", "Editing_Columns_Update")" data="forgeryToken"/>
+                        <create url="@Url.Page("Index", "Editing_Columns_Create")" data="forgeryToken"/>
+                        <destroy url="@Url.Page("Index", "Editing_Columns_Destroy")" data="forgeryToken"/>
                     </transport>
                 </datasource>
             </taskboard-columns>
@@ -98,10 +99,10 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
                     </model>
                 </schema>
                 <transport>
-                    <read url="/Index?handler=Tasks_Read" data="forgeryToken"/>
-                    <update url="/Index?handler=Tasks_Update" data="forgeryToken" />
-                    <create url="/Index?handler=Tasks_Create" data="forgeryToken"/>
-                    <destroy url="/Index?handler=Tasks_Destroy" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Tasks_Read")" data="forgeryToken"/>
+                    <update url="@Url.Page("Index", "Tasks_Update")" data="forgeryToken" />
+                    <create url="@Url.Page("Index", "Tasks_Create")" data="forgeryToken"/>
+                    <destroy url="@Url.Page("Index", "Tasks_Destroy")" data="forgeryToken"/>
                 </transport>
             </datasource>
         </kendo-taskboard>
@@ -152,7 +153,8 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
     ```C# Index.cshtml.cs
-
+    public class IndexModel : PageModel
+    {
         private ISchedulerEventService<TaskViewModel> taskService;
         public const string SessionKeyID = "ID";
         private List<Column> columns = GetColumns() as List<Column>;
@@ -244,6 +246,7 @@ To configure the CRUD operations of the TaskBoard DataSource within a Razor Page
             };
             return taskBoardColumns;
         }
+    }
     ```
     ```Model
         using Kendo.Mvc.UI;

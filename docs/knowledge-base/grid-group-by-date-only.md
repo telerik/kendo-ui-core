@@ -7,6 +7,7 @@ slug: grid-group-by-date-only
 tags: ignore, group, grouping, time, datetime, grid
 ticketid: 1140806
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

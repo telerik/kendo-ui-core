@@ -7,7 +7,7 @@ slug: diagram-custom-edit-form
 tags: diagram, editing, template
 ticketid: 1139504
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

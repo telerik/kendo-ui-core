@@ -2,6 +2,7 @@
 title: Default State
 page_title: Default State
 description: "Learn how to enable and use the default state functionality of the Telerik UI ExpansionPanel component for {{ site.framework }}"
+components: ["expansionpanel"]
 slug: state_htmlhelpers_expansionpanel_aspnetcore
 position: 2
 ---

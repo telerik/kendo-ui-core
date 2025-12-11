@@ -5,9 +5,9 @@ description: "Learn how to create a Kendo UI Stock Chart by using AngularJS."
 previous_url: /controls/charts/stockchart/how-to/stock-chart-using-angular, /controls/charts/how-to/various/stock-chart-using-angular
 slug: howto_createstockcharts_angularjs
 tags: chart, customize, themes
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

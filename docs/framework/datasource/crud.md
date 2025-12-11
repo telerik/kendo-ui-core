@@ -2,6 +2,7 @@
 title: CRUD Data Operations
 page_title: CRUD Data Operations - Kendo UI for jQuery DataSource
 description: "Learn how to use the Kendo UI for jQuery DataSource component for the create, read, update, and destroy (CRUD) data operations of your JavaScript components."
+components: ["datasource"]
 slug: cruddataoperations_kendoui_datasourcecomponent
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Resources
 page_title: Resources
 description: "Use resources in the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: htmlhelpers_gantt_resources_aspnetcore
 position: 6
 ---

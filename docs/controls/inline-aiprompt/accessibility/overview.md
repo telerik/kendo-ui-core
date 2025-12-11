@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery InlineAIPrompt Documentation - InlineAIPrompt Accessibility
 description: "Get started with the jQuery InlineAIPrompt and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["inlineaiprompt"]
 slug: jquery_inlineaiprompt_accessibility
 position: 1
 ---

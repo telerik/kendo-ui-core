@@ -7,6 +7,7 @@ meta_title: Handling Data Integrity Issues While Pasting Values Containing ":" i
 slug: prevent-time-format-conversion-spreadsheet-kendo-ui-jquery
 tags: spreadsheet,kendo-ui-for-jquery,paste,event,time-format,cell-formatting
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1701828
 ---
 

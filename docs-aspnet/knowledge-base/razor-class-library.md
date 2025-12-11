@@ -6,6 +6,7 @@ page_title: Using Telerik UI HtmlHelpers and TagHelpers in a Razor Class Library
 slug: razor-class-library
 tags: rcl, razor, core, telerik, htmlhelpers, taghelpers
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

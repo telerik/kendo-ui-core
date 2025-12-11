@@ -5,9 +5,9 @@ description: "Learn how to filter the Kendo UI for jQuery Grid by using the Kend
 previous_url: /controls/data-management/grid/how-to/autocomplete-suggestions-by-current-grid-filter.html, /controls/data-management/grid/how-to/filtering/autocomplete-suggestions-by-current-grid-filter
 slug: howto_autocomplete_suggestions_by_current_grid_filter
 tags: grid, autocomplete, suggestions, filter
-component: grid
 type: how-to
 res_type: kb
+components: ["autocomplete"]
 ---
 
 ## Environment

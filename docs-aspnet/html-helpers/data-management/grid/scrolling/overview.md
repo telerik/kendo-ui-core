@@ -2,6 +2,7 @@
 title: Overview
 page_title: Scrolling Overview
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to configure the scrolling functionality of the component."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_scrolling
 position: 1
 ---

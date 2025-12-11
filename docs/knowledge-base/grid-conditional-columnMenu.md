@@ -6,7 +6,7 @@ page_title: Show columnMenu Options for Specific Columns - Kendo UI for jQuery D
 slug: grid-conditional-columnMenu
 tags: grid, columnMenu, columns
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

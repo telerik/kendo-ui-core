@@ -7,7 +7,7 @@ slug: persist-combobox-selection
 tags: persisting, selected, item, combobox
 ticketid: 1116339
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

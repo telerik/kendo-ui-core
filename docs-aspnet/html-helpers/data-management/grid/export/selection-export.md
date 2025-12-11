@@ -2,6 +2,7 @@
 title: Selection & Export
 page_title: Selection & Export
 description: "With Telerik UI Grid for {{ site.framework }} you can enable users to select specific cells and export them to Excel or Telerik UI Chart"
+components: ["grid"]
 slug: exportingselection_gridhelper_aspnetcore
 position: 6
 ---

@@ -7,6 +7,7 @@ slug: grid-display-different-aggregate-group-header
 tags: grid, aggregate, group, header, different, column, sum, average
 ticketid: 1168063
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

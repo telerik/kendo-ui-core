@@ -2,6 +2,7 @@
 title: Scrolling
 page_title: jQuery ContextMenu Documentation - Scrolling
 description: "Get started with the jQuery ContextMenu by Kendo UI and enable the scrolling functionality of the widget."
+components: ["menu"]
 slug: scrolling_kendoui_contextmenu
 position: 5
 ---

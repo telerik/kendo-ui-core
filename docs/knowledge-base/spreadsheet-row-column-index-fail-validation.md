@@ -7,7 +7,7 @@ slug: spreadsheet-row-column-index-fail-validation
 tags: kendo ui, spreadsheet, row, column, validation
 ticketid: 1534253
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

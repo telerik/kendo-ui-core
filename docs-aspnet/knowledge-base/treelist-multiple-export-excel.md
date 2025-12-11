@@ -7,6 +7,7 @@ previous_url: /helpers/data-management/treelist/how-to/multiple-grid-export, /ht
 slug: howto_exportmultipletoexcel_treelistaspnetmvc
 tags: treelist, multiple, export, excel, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

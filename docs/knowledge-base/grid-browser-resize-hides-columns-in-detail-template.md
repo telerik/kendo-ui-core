@@ -7,6 +7,7 @@ slug: grid-browser-resize-hides-columns-in-detail-template
 tags: grid, hierarchy, collapse, expand, hide, columns, column, detail, template
 ticketid: 1358601
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

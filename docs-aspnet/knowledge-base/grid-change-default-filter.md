@@ -6,6 +6,7 @@ page_title: How to Change Default Filter Operator in Telerik UI Grid
 slug: grid-change-default-filter
 tags: grid, asp.net core, search, filter, default, contains, equal to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

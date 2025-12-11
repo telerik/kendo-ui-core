@@ -2,6 +2,7 @@
 title: Expand Modes
 page_title: jQuery PanelBar Documentation - Expand Modes
 description: "Get started with the jQuery PanelBar by Kendo UI and use its ingle or multiple expand mode."
+components: ["panelbar"]
 slug: expandmode_kendoui_panelbar
 position: 3
 ---

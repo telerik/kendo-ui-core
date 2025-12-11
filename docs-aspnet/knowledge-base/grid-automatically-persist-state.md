@@ -6,6 +6,7 @@ page_title: Persist State Automatically - {{ site.product }} Data Grid
 slug: grid-automatically-persist-state
 tags: grid, state, persisting, persist, automatic, leave, page, save, restore, changes, options, keep, recreate, retain, load
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

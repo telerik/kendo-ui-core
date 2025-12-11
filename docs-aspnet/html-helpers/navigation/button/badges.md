@@ -2,6 +2,7 @@
 title: Badge Button
 page_title: Badge Button
 description: "Include a badge and enhance the meaning of the text content of the Telerik UI Button component for {{ site.framework }}."
+components: ["button"]
 slug: badges_button_aspnetcore
 position: 4
 ---

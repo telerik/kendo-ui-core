@@ -2,6 +2,7 @@
 title: Content
 page_title: Content
 description: "Use the options for loading and configuring the content of the Telerik UI Tooltip component for {{ site.framework }}."
+components: ["tooltip"]
 previous_url: /helpers/layout/tooltip/content
 slug: htmlhelpers_tooltip_aspnetcore_content
 position: 2

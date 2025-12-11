@@ -5,9 +5,9 @@ description: "Learn how to reload the data of the Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/force-reload, /controls/data-management/pivotgrid/how-to/dimensions/force-reload
 slug: howto_force_data_source_reload_pivotgrid
 tags: kendoui, pivotgrid, reload, data, source, forcefully
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

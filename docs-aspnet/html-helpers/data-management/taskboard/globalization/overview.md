@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization Overview
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about the globalization options it supports."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_globalization
 position: 1
 ---

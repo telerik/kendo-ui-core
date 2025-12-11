@@ -5,9 +5,9 @@ description: "Learn how to use different editors based on the dataItem property 
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-editors-based-on-data-item-property
 slug: howto_use_editors_basedon_dataitem_property_grid
 tags: use, editors, basedon, dataitem, property, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

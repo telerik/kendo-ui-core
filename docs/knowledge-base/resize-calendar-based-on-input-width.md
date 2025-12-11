@@ -5,9 +5,9 @@ description: "Learn how to resize the nested calendar based on the width of the 
 slug: howto_use_resize_calendar_basedon_input_width_datepicker
 previous_url: /controls/editors/datepicker/how-to/resize-calendar-based-on-input-width
 tags: kendo, jquery, datepicker, resise, calendar, based, on, input, width
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

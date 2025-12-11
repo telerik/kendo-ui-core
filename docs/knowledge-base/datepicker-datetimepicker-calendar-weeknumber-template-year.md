@@ -7,6 +7,7 @@ slug: datepicker-datetimepicker-calendar-weeknumber-template-year
 tags: datepicker, datetimepicker, weeknumber, template, year, week, number, calendar
 ticketid: 1409114
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: ListView Load More Items Button
 slug: listview-load-more-button
 tags: kendo, kendo-ui, listview, load, more, fetch, paging
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

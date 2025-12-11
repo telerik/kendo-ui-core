@@ -2,6 +2,7 @@
 title: Show Other Month Days
 page_title: Show Other Month Days
 description: "Get started with the Telerik UI MultiViewCalendar component for {{ site.framework }} Show Other Month Days Functionality."
+components: ["multiviewcalendar"]
 slug: htmlhelpers_show_other_month_days_multiviewcalendar_aspnetcore
 position: 8
 ---

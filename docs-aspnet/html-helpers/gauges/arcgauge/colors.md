@@ -2,6 +2,7 @@
 title: Colors
 page_title: Colors
 description: "Learn how to set the Colors of the Telerik UI ArcGauge component for {{ site.framework }}."
+components: ["arcgauge"]
 slug: colors_arcgaugehelper_aspnetcore
 position: 3
 ---

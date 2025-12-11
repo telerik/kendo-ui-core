@@ -2,6 +2,7 @@
 title: Scrolling to a Specific Item
 page_title: Scrolling to a Specific Item
 description: "Learn more about the programmatic scrolling to specific items with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: scrolling_to_item_aspnetcore_grid
 position: 4
 ---

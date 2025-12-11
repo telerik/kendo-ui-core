@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started with the Chip
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Chip component by following the complete step-by-step tutorial."
+components: ["chip"]
 slug: chip_getting_started
 position: 1
 ---

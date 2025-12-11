@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Tooltip Documentation - Getting Started with the Tooltip
 description: "Get started with the jQuery Tooltip by Kendo UI and learn how to initialize the widget."
+components: ["tooltip"]
 slug: getting_started_kendoui_tooltip_widget
 position: 1
 ---

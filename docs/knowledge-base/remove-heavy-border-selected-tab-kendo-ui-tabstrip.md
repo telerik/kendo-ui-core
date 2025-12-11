@@ -6,6 +6,7 @@ page_title: Removing Focus Border from Selected Tab in Kendo UI TabStrip
 slug: remove-heavy-border-selected-tab-kendo-ui-tabstrip
 tags: kendo-ui, tabstrip, focus, border, css
 res_type: kb
+components: ["tabstrip"]
 ticketid: 1682162
 ---
 

@@ -5,9 +5,9 @@ description: "Learn how to resize the columns of the Kendo UI Grid for jQuery by
 previous_url: /controls/data-management/grid/how-to/AngularJS/resize-columns-from-button
 slug: howto_resize_columnsfrom_abutton_grid
 tags: resize, columns, using, custom, button, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

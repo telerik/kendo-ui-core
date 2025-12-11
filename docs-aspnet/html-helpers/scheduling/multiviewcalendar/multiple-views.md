@@ -2,6 +2,7 @@
 title: Multiple Views
 page_title: Multiple Views
 description: "Control the visible date ranges in the Telerik UI MultiViewCalendar and manage the number of its horizontally rendered views."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/multiple-views
 slug: multiple_views_multiviewcalendar_htmlhelper_aspnetcore
 position: 3

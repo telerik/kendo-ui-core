@@ -7,7 +7,7 @@ slug: change-the-min-value-of-the-valueaxis-dynamically
 tags: chart, valueaxis, min, dynamically
 ticketid: 1125680
 res_type: kb
-component: charts
+components: ["chart"]
 ---
 
 ## Environment

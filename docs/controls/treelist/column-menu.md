@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: jQuery TreeList Documentation - Column Menu
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to enable its column menu."
+components: ["treelist"]
 slug: columnmenu_kendoui_treelist_widget
 position: 12
 ---

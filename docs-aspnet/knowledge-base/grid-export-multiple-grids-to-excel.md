@@ -8,6 +8,7 @@ slug: excel-export-multiple-grids
 position:
 tags: grid, export, excel, multiple
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

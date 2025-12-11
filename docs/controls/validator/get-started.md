@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Validator Documentation - Getting Started with the Validator
 description: "Get started with the jQuery Validator by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["validator"]
 slug: getting_started_kendoui_validator_widget
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Internationalization
 page_title: Internationalization
 description: "Get started with the {{ site.product_short }} FileManager and learn about the options it supports for parsing and formatting of dates and numbers."
+components: ["filemanager"]
 slug: intl_aspnetcore_filemanager
 position: 2
 ---

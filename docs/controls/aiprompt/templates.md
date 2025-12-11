@@ -2,6 +2,7 @@
 title: Prompt Suggestion Template
 page_title: jQuery AIPrompt Documentation - AIPrompt Suggestion Template
 description: "Learn about how to use Kendo UI Prompt Suggestion Template with the jQuery AIPrompt"
+components: ["aiprompt"]
 slug: templates_aiprompt_component
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Dragging and Dropping of Files
 page_title: Dragging and Dropping of Files
 description: "Learn about the file drag and drop functionality of the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 slug: htmlhelpers_upload_drag_drop_aspnetcore
 position: 4
 ---

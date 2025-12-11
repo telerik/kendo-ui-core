@@ -2,6 +2,7 @@
 title: Pointers
 page_title: Pointers
 description: "Learn the Options of the Pointers of the Telerik UI RadialGauge component for {{ site.framework }}."
+components: ["radialgauge"]
 slug: pointers_radialgaugehelper_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Using LibMan
 page_title: Using LibMan
 description: "Learn how to add the Kendo client-side web assets in a Telerik UI for ASP.NET Core project by using LibMan and WebPack."
+components: ["general"]
 slug: using_libman
 position: 4
 ---

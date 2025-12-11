@@ -6,8 +6,8 @@ page_title: Dynamically Change the Grid Column Header - Kendo UI for jQuery Data
 slug: grid-dynamic-column-headers
 tags: grid, dynamically, column, header, dynamic, title, change, update, multi
 res_type: kb
+components: ["grid"]
 ticketid: 1147997
-component: grid
 ---
 
 ## Environment

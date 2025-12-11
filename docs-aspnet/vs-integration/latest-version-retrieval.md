@@ -2,6 +2,7 @@
 title: Downloading New Versions
 page_title: Downloading New Versions
 description: "Learn how to keep your projects updated when using {{ site.product }}."
+components: ["installerandvsextensions"]
 previous_url: /getting-started/vs-integration/latest-version-retrieval, /installation/vs-integration/latest-version-retrieval, /vs-integration-mvc/latest-version-retrieval
 slug: latestversionretrieval_visualstudio_aspnetcore
 position: 27

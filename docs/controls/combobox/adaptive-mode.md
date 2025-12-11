@@ -2,6 +2,7 @@
 title: Adaptive Mode
 page_title: Adaptive Mode
 description: "Learn how to configure adaptive mode for the Kendo UI for jQuery ComboBox component."
+components: ["combobox"]
 slug: combobox_adaptive_mode_kendo
 position: 12
 ---

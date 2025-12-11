@@ -2,6 +2,7 @@
 title: Checked
 page_title: Checked Binding - Kendo UI MVVM
 description: "Learn how to change the behavior of a checkbox or a radio button based on the value from the View-Model in Kendo UI MVVM."
+components: ["mvvm"]
 slug: checkedbinding_mvvm_kendoui
 ---
 

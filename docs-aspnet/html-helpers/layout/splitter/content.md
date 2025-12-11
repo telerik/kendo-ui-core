@@ -2,6 +2,7 @@
 title:  Content
 page_title: Set the content for the Splitter.
 description: "An example on how to set the content for  the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: htmlhelpers_splitter_content_aspnetcore
 position: 7
 ---

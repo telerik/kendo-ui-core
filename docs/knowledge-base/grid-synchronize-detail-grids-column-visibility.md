@@ -7,6 +7,7 @@ slug: grid-show-hide-columns-in-all-detail-grids
 tags: grid, hierarchy, columns, column-menu
 ticketid: 1157518
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

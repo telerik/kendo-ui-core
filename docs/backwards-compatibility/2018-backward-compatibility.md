@@ -3,6 +3,7 @@ title: 2018 Releases
 page_title: 2018 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2019."
 slug: breakingchanges2018_kendoui
+components: ["general"]
 position: 7
 ---
 

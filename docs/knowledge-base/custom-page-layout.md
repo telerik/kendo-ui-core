@@ -5,9 +5,9 @@ description: "Learn how to customize the page layout of the Kendo UI Grid for jQ
 previous_url: /framework/drawing/how-to/custom-page-layout, /kendo-mvc/controls/data-management/grid/how-to/pdf-export/custom-page-layout, /controls/data-management/grid/how-to/pdf-export/custom-page-layout
 slug: howto_customize_page_layout_pdf_grid
 tags: grid, custom, page, layout
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

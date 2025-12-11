@@ -7,7 +7,7 @@ slug: grid-adjust-popup-size
 tags: grid, popup, edit, editor, window, size, width, height, dimensions
 ticketid: 1144949
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

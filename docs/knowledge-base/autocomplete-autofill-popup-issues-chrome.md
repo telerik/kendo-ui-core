@@ -7,7 +7,7 @@ slug: troubleshooting_autocomplete_widget
 tags: telerik, progress, kendoui, autocomplete, chrome, browser, performs, cause, autofill, popup, issues
 type: troubleshooting
 res_type: kb
-component: autocomplete
+components: ["autocomplete"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: datepicker-parse-dates-greater-than-2029
 tags: datepicker, date, parse, 1930, 2029, greater, correct, parseformat, after, century
 ticketid: 1141658
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

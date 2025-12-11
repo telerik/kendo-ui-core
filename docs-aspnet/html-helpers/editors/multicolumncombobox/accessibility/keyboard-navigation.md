@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} MultiColumnComboBox and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["multicolumncombobox"]
 slug: keynav_aspnetcore_multicolumncombobox
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Palettes
 page_title: Palettes
 description: "Learn more about the color palettes of the Telerik UI for {{ site.framework }} ColorPicker."
+components: ["colorpicker"]
 slug: palettes_colorpicker
 position: 6
 ---

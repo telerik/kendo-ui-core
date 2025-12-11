@@ -7,6 +7,7 @@ slug: grid-collapse-rows-on-expand
 tags: grid, hierarchy, collapse, expand
 ticketid: 1141804
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

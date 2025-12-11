@@ -6,7 +6,7 @@ slug: unknown_json_datasource_transport_type_error
 tags: telerik, kendoui, jquery, troubleshooting, unknown, json, datasource, transport, type, warning, occurs
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

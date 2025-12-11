@@ -2,6 +2,7 @@
 title: Modes of Operation
 page_title: Modes of Operation
 description: "Learn about the synchronous and the asynchronous modes of operation of the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 previous_url: /helpers/editors/upload/modes
 slug: htmlhelpers_upload_modes_of_operation_aspnetcore
 position: 2

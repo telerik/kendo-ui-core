@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery BottomNavigation Documentation - Getting Started with the BottomNavigation
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["bottomnavigation"]
 slug: getting_started_kendoui_bottomnavigation_component
 position: 2
 ---

@@ -7,6 +7,7 @@ previous-url: helpers/navigation/treeview/how-to/bind-to-xml
 slug: treeview-bind-to-xml
 tags: treeview, xml, binding
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

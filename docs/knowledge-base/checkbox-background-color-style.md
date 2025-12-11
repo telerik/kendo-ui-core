@@ -7,6 +7,7 @@ slug: checkbox-background-color-style
 tags: checkbox, background, color, style
 ticketid: 1140909
 res_type: kb
+components: ["checkbox"]
 ---
 
 ## Environment

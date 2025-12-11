@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Filter component for {{ site.framework }}."
+components: ["filter"]
 slug: events_filter_aspnetcore
 position: 6
 ---

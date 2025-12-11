@@ -5,9 +5,9 @@ description: "Learn how to reorder rows in a child Grid using the Kendo UI Sorta
 previous_url: /controls/interactivity/sortable/how-to/reorder-child-grid-rows, /controls/interactivity/sortable/how-to/reorder-nested-grid-rows
 slug: howto_reorderrowsinnestedgrid_sortable
 tags: telerik, kendo, jquery, sortable, reorder, rows, in, nested, grids
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

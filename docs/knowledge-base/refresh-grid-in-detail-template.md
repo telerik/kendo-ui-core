@@ -5,9 +5,9 @@ description: "Learn how to refresh a child grid in a detail template by using ex
 previous_url: /controls/data-management/grid/how-to/Templates/refresh-grid-in-detail-template
 slug: howto_refresh_gridin_detail_template_grid
 tags: refresh, child, grid, detail, template, via, external, button
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

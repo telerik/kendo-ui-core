@@ -2,6 +2,7 @@
 title: Row Reordering
 page_title: Row Reordering
 description: "Learn more about the dragging features of the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: htmlhelpers_gantt_row_reorder_aspnetcore
 position: 7
 ---

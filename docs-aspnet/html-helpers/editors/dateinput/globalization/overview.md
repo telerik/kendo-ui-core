@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI DateInput for {{ site.framework }} and learn about the globalization options it supports."
+components: ["dateinput"]
 slug: globalization_dateinput_aspnetcore
 position: 1
 ---

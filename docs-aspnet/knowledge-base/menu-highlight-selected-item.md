@@ -6,6 +6,7 @@ slug: menu-selected-item-highlight
 tags: menu, item, items, selected, highlight
 component: menu
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

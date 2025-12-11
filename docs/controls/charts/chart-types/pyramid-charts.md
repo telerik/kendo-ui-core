@@ -2,6 +2,7 @@
 title: Pyramid Charts
 page_title: jQuery Chart Documentation - Pyramid Charts
 description: "Learn how to create a Kendo UI Pyramid Chart and use the different options it provides."
+components: ["chart"]
 slug: pyramidcharts_widget
 ---
 

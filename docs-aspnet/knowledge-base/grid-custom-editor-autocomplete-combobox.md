@@ -6,6 +6,7 @@ page_title: Use AutoComplete as Custom Column Editor
 slug: grid-custom-editor-autocomplete-combobox
 tags: aspnet, mvc, grid, custom, editor, autocomplete, combobox,
 res_type: kb
+components: ["general"]
 component: grid, autocomplete, 
 ---
 

@@ -7,6 +7,7 @@ slug: grid-filter-hidden-group-column
 tags: grid, filter, grouping, hidden column
 ticketid: 1149209
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

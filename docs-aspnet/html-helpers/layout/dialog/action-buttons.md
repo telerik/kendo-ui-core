@@ -2,6 +2,7 @@
 title: Action Buttons
 page_title: Action Buttons
 description: "Learn about the Action Buttons of the Telerik UI Dialog component for {{ site.framework }}."
+components: ["dialog"]
 slug: action_buttons_dialoghelper_aspnetcore
 position: 3
 ---

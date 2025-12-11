@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ActionSheet Documentation - Getting Started with the ActionSheet
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["actionsheet"]
 slug: getting_started_kendoui_actionsheet_widget
 position: 1
 ---

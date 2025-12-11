@@ -7,6 +7,7 @@ slug: grid-show-base64-image
 tags: grid, image, base64, encoded, cell, template, show, display
 ticketid: 1149817
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

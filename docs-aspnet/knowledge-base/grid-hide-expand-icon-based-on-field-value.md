@@ -5,6 +5,7 @@ type: how-to
 page_title: Hide the Expand Icon for the Detail Template Based on a Model Value - {{ site.product }} Data Grid
 tags: grid, expand, collapse, hierarchy, detailTemplate, core, mvc, telerik, hierarchy, icon
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

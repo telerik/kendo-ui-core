@@ -6,6 +6,7 @@ page_title: Grid restore filters when search input is cleared - Kendo UI for jQu
 slug: grid-clear-search-restores-previously-applied-filters
 tags: grid, search, input, panel, filters, clear, persist, restore
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Get started with the Kendo UI TreeList for jQuery and learn how to configure its select functionality."
+components: ["treelist"]
 slug: selection_kendoui_treelist
 position: 10
 ---

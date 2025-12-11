@@ -6,6 +6,7 @@ page_title: How to Combine Buttons and Checkboxes in Kendo UI for jQuery DropDow
 slug: how-to-combine-buttons-and-checkboxes-kendo-ui-dropdownlist
 tags: kendo-ui, jquery, dropdownlist, button, checkbox
 res_type: kb
+components: ["toolbar"]
 ticketid: 1677682
 ---
 

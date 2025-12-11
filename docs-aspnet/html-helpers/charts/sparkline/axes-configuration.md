@@ -2,6 +2,7 @@
 title: Axes Configuration
 page_title: Axes Configuration
 description: "Learn how to configure the axes in the Telerik UI Sparkline component for {{ site.framework }}."
+components: ["sparkline"]
 slug: axesconfig_sparklines_aspnetcore
 position: 4
 ---

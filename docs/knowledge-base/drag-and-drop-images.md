@@ -5,9 +5,9 @@ description: "Learn how drag and drop images in the Kendo UI Editor component."
 previous_url: /controls/editors/editor/how-to/drag-and-drop-images, /controls/editors/editor/how-to/customize/drag-and-drop-images
 slug: howto_drag_and_drop_images_editor
 tags: telerik, kendo, jquery, editor, drag, and, drop, images
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

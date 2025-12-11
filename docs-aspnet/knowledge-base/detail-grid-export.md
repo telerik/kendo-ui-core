@@ -7,6 +7,7 @@ tags: grid, export, detail, grids
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

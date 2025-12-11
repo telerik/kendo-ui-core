@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Draggable Documentation - Getting Started with the Draggable
 description: "Get started with the jQuery Draggable by Kendo UI and learn how to create and initialize the component."
+components: ["draganddrop"]
 slug: getting_started_kendoui_draggable_widget
 position: 1
 ---

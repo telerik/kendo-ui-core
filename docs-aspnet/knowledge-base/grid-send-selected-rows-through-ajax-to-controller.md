@@ -7,6 +7,7 @@ slug: grid-send-selected-rows-through-ajax-to-controller
 tags: grid, selected, rows, ajax, controller, server
 ticketid: 1579778
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

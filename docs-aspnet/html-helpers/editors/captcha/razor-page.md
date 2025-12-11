@@ -2,25 +2,25 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Captcha component for {{ site.framework }} in a Razor Page."
+components: ["captcha"]
 slug: htmlhelpers_captcha_razorpage_aspnetcore
 position: 8
 ---
 
 # Captcha in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Captcha for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Captcha for {{ site.framework }} in Razor Pages applications.
-
-This article showcases how to configure the Captcha component in a Razor Pages scenario.
-
-For the complete project, refer to the [Captcha in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Captcha/CaptchaIndex.cshtml).
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
 ## Getting Started
 
 To set up the Captcha for a Razor Pages scenario, you need to configure the server-side handler methods that will validate the user's input. The URL in these methods must refer to the name of the `PageModel`. From there, to further configure your application's backend, refer to the [Validation](https://docs.telerik.com/aspnet-core/html-helpers/editors/captcha/validation) article.
 
 ```HtmlHelper
+    @page
+    @model CaptchaIndexModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 
     @{
@@ -175,3 +175,12 @@ To set up the Captcha for a Razor Pages scenario, you need to configure the serv
     }
 ```
 
+For the complete project, refer to the [Captcha in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Captcha/CaptchaIndex.cshtml).
+
+## See Also
+
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Captcha](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/captcha)
+* [Server-Side HtmlHelper API of the Captcha](/api/captcha)
+* [Server-Side TagHelper API of the Captcha](/api/taghelpers/captcha)
+* [Knowledge Base Section](/knowledge-base)

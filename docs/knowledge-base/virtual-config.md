@@ -5,9 +5,9 @@ description: "Learn how to define the virtual configuration option of the Kendo 
 slug: howto_define_virtual_option_combobox
 previous_url: /controls/editors/combobox/how-to/mvvm/virtual-config
 tags: telerik, kendo, jquery, combobox, define, virtual, confoguration, declaratively
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

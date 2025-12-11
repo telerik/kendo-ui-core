@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI DropDownList component for {{ site.framework }} and its features like virtualization, grouping, data binding options, and more."
+components: ["dropdownlist"]
 previous_url: /helpers/html-helpers/dropdownlist, /helpers/editors/dropdownlist/overview
 slug: htmlhelpers_dropdownlist_aspnetcore
 position: 0

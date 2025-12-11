@@ -6,6 +6,7 @@ type: how-to
 slug: drag-drop-empty-grid
 tags: kendo, jquery, datagrid, grid, drag, drop, empty, row
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

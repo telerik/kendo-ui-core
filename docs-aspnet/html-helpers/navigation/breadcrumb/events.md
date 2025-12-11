@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Breadcrumb component for {{ site.framework }}."
+components: ["breadcrumb"]
 slug: events_breadcrumb
 position: 6
 ---

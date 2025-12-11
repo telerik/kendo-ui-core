@@ -2,6 +2,7 @@
 title: Row Drag and Drop
 page_title: Row Drag and Drop
 description: "Learn how to enable the drag and drop functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_row_drag_drop_grid
 position: 19
 ---

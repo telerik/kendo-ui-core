@@ -5,9 +5,9 @@ description: "Learn how to create custom editors in the Kendo UI Data Grid by us
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-custom-editor
 slug: howto_create_custom_editors_grid
 tags: grid, create, custom, editors, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

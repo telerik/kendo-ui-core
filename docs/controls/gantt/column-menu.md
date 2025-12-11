@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: jQuery Gantt Documentation - Column Menu
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to enable its column menu."
+components: ["gantt"]
 slug: columnmenu_kendoui_gantt_widget
 position: 8
 ---

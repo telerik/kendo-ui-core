@@ -2,6 +2,7 @@
 title: PDF
 page_title: PDF Export
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to export a Telerik UI PivotGrid component for {{ site.framework }} to PDF."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_pdfexport
 position: 2
 ---

@@ -6,7 +6,7 @@ slug: popup_not_offset_correctly_ie
 tags: telerik, kendoui, jquery, troubleshooting, widget, popup, offset, not, offset, correctly, internet, explorer
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

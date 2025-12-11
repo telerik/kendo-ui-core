@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI Switch HtmlHelper for {{ site.framework }}."
+components: ["switch"]
 slug: switch_appearance
 position: 2
 ---

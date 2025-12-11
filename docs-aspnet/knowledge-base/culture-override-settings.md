@@ -5,6 +5,7 @@ description: Learn how to change Telerik UI for {{ site.framework }} culture num
 slug: culture-override-settings
 tags: culture, numeric, numbers, override, numberFormat, currency, percent
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

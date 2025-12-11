@@ -2,6 +2,7 @@
 title: Data Source Integration
 page_title: Data Source Integration | AngularJS Directives
 description: "Learn more about the interaction between Kendo UI DataSource and AngularJS scope to take full advantage of AngularJS integration into Kendo UI controls."
+components: ["general"]
 previous_url: /AngularJS/data-source
 slug: datasource_updates_angularjs_directives
 position: 4

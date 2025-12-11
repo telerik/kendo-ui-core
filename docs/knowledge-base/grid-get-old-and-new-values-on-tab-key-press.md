@@ -8,6 +8,7 @@ position:
 tags: grid, cell, tab, old, new, values, batch
 ticketid: 1433308
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

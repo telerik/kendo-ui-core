@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Wizard Documentation - Wizard Overview
 description: "Get started with the jQuery Wizard by Kendo UI and learn about the component's capabilities."
+components: ["wizard"]
 slug: overview_wizard_widget
 position: 0
 ---

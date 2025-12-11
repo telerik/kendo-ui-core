@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI Gantt Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} Gantt using various data binding approaches."
+components: ["gantt"]
 previous_url: /helpers/scheduling/gantt/server-binding, /helpers/scheduling/gantt/binding
 slug: htmlhelpers_gantt_databinding
 position: 0

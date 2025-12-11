@@ -6,6 +6,7 @@ page_title: How to Set Pattern Style and Color in Excel Export - Kendo UI Grid
 slug: set-pattern-style-color-excel-export-kendo-ui-grid
 tags: kendo-ui, grid, excel-export, pattern-style, color
 res_type: kb
+components: ["grid"]
 ticketid: 1651731
 ---
 

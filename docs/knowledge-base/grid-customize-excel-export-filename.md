@@ -7,7 +7,7 @@ slug: grid-customize-excel-export-filename
 tags: grid, excel, export, datetime, customize, customize
 ticketid: 1130491
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

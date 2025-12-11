@@ -7,6 +7,7 @@ slug: dropdownlist-filter-multiple-properties
 tags: dropdownlist, filter, multiple, properties
 ticketid: 1569491
 res_type: kb
+components: ["general"]
 component: dropdownlist
 ---
 

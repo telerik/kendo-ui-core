@@ -7,6 +7,7 @@ slug: grid-custom-pager-placed-outside
 tags: grid, pager, custom, input, numeric, outside
 ticketid: 1570031
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

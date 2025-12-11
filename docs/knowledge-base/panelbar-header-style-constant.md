@@ -8,6 +8,7 @@ position:
 tags: panelbar, header, style, state, hover, selected, focused, css, background
 ticketid: 1445766
 res_type: kb
+components: ["panelbar"]
 ---
 
 ## Environment

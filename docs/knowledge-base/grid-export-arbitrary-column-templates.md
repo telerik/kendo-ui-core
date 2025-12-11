@@ -6,7 +6,7 @@ page_title: Export to Excel Grids with Many Template Columns and HTML Content in
 slug: grid-export-arbitrary-column-templates
 tags: grid, export, excel, templates
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to create custom date validation in a Kendo UI DateTimeP
 slug: howto_validate_custom_dates_datetimepicker
 previous_url: /controls/editors/datetimepicker/how-to/custom-date-validation
 tags: telerik, kendo, jquery, datetimepicker, validate, custom, dates
-component: datetimepicker
 type: how-to
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ---
 
 ## Environment

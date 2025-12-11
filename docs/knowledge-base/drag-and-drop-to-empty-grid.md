@@ -4,9 +4,9 @@ page_title: Drag and Drop Rows to an Empty Grid - Kendo UI for jQuery Data Grid
 description: "Learn how to drag and drop rows between two Kendo UI Data Grids for jQuery when on of the Grids is empty."
 slug: howto_dragand_drop_rows_toan_empty_grid
 tags: grid, drag, drop, rows, between, empty
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

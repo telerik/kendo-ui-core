@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Breadcrumb Documentation - Getting Started with the Breadcrumb
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["breadcrumb"]
 slug: getting_started_kendoui_Breadcrumb_component
 position: 2
 ---

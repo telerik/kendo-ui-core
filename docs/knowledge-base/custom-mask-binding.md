@@ -5,9 +5,9 @@ description: "Learn how to set the Kendo UI MaskedTextBox masks by using a custo
 slug: howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox
 previous_url: /controls/editors/maskedtextbox/how-to/MVVM/custom-mask-binding
 tags: telerik, kendo, jquery, maskedtextbox, customize, masks, through, mvvm, binding
-component: maskedtextbox
 type: how-to
 res_type: kb
+components: ["maskedtextbox"]
 ---
 
 ## Environment

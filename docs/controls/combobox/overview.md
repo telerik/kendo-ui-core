@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ComboBox Documentation - ComboBox Overview
 description: "Try now the Kendo UI for jQuery ComboBox component covering everything from binding it to local arrays of data and remote data services, grouping its data and filter it on the server, using templates to customize its content and layout to virtualizing its records and loading them on demand, implementing cascading ComboBoxes and offering a comprehensive set of options for styling its appearance."
+components: ["combobox"]
 slug: overview_kendoui_combobox_widget
 position: 2
 ---

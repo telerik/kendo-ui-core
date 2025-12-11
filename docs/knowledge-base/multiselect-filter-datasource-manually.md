@@ -5,9 +5,9 @@ description: "Learn how to manually filter the DataSource instance in the Kendo 
 previous_url: /controls/editors/multiselect/how-to/filter-datasource-manually, /controls/editors/multiselect/how-to/filtering/filter-datasource-manually
 slug: howto_filter_datasource_manually_multiselect
 tags: telerik, kendo, jquery, multiselect, filter, data, source, instance, manually
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

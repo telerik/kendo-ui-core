@@ -2,6 +2,7 @@
 title: Widths
 page_title: jQuery Grid Documentation - Column Widths
 description: "Get started with the jQuery Grid by Kendo UI and learn how to modify its column widths."
+components: ["grid"]
 previous_url: /appearance/columns/widths, /appearance/height#column-widths
 slug: column_widths_kendoui_grid_widget
 position: 1

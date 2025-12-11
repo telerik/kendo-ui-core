@@ -7,6 +7,7 @@ slug: scale-diagram-to-fit-container-upon-resizing
 tags: diagram, scale, resize
 ticketid: 1492478
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

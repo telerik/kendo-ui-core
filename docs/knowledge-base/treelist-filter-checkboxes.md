@@ -7,6 +7,7 @@ slug: treelist-filter-checkboxes
 tags: treelist, filter, menu, checkbox
 ticketid: 1610040
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

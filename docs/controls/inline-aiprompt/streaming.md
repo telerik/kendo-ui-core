@@ -2,6 +2,7 @@
 title: Streaming
 page_title: jQuery InlineAIPrompt Documentation - InlineAIPrompt Streaming
 description: "Learn how to implement real-time AI response streaming with Kendo UI for Kendo UI for jQuery's InlineAIPrompt component."
+components: ["inlineaiprompt"]
 slug: streaming_inlineaiprompt
 position: 10
 ---

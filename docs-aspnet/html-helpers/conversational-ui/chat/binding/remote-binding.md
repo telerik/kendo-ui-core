@@ -2,6 +2,7 @@
 title: Remote Binding
 page_title: Telerik UI Chat Documentation | Remote Data Binding
 description: "Learn how to bind the Telerik UI for {{ site.framework }} Chat component to data received from a remote endpoint."
+components: ["chat"]
 slug: htmlhelpers_remotebinding_chat
 position: 3
 ---

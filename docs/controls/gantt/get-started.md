@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Gantt Documentation - Getting Started with the Gantt
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to create and initialize the component."
+components: ["gantt"]
 slug: getting_started_kendoui_gantt_widget
 position: 1
 ---

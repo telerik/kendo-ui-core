@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Local Binding
 description: "Learn how to bind the {{ site.product }} AutoComplete component to a local dataset."
+components: ["autocomplete"]
 previous_url: /helpers/editors/autocomplete/binding/server-binding
 slug: htmlhelpers_autocomplete_serverbinding_aspnetcore
 position: 1

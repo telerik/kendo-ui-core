@@ -2,6 +2,7 @@
 title: Downloading the Bundles
 page_title: Downloading the Bundles - Download and Installation 
 description: "Get started with Kendo UI for jQuery and learn how to host the library in your project by downloading the bundles."
+components: ["general"]
 slug: hosting_kendoui
 position: 20
 ---

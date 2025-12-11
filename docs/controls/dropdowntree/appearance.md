@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery DropDownTree Documentation - Appearance
 description: "Get started with the jQuery DropDownTree by Kendo UI and set the width of the list and popup of the widget."
+components: ["dropdowntree"]
 slug: appearance_kendoui_dropdowntree
 position: 7
 ---

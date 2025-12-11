@@ -5,9 +5,9 @@ description: "Learn how to set a different start weekday in the Kendo UI for jQu
 previous_url: /controls/scheduling/scheduler/how-to/set-differnt-start-week-day, /controls/scheduling/scheduler/how-to/various/set-differnt-start-week-day
 slug: howto_setdifferent_startweekday_scheduler
 tags: telerik, kendo, jquery, scheduler, set, a, different, start, weekday 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

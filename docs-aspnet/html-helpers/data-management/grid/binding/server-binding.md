@@ -2,6 +2,7 @@
 title: Server Binding
 page_title: Server Binding - Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn how to implement server binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
+components: ["grid"]
 previous_url: /helpers/grid/server-binding, /helpers/data-management/grid/server-binding
 slug: serverbinding_grid_aspnetmvc
 position: 4

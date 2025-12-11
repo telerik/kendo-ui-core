@@ -2,6 +2,7 @@
 title: Overview
 page_title: MVVM Bindings Overview - Kendo UI MVVM
 description: "Learn more about the different bindings that the Kendo UI for jQuery MVVM provides."
+components: ["mvvm"]
 slug: overview_mvvmbindings_kendoui
 position: 0
 ---

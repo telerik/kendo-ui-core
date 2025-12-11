@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items in the AppBar component for {{ site.framework }}."
+components: ["appbar"]
 slug: htmlhelpers_appbar_aspnetcore_items
 position: 2
 ---

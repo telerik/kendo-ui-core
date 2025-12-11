@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Telerik UI Chat Documentation | Local Data Binding
 description: "Learn how to bind the {{ site.product }} Chat component to a local data collection."
+components: ["chat"]
 slug: htmlhelpers_localbinding_chat
 position: 2
 ---

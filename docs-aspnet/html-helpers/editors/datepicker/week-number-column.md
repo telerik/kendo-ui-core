@@ -2,6 +2,7 @@
 title: Week Number Column
 page_title: Week Number Column
 description: "Get started with the {{ site.product }} DatePicker and learn how to render a column for the number of weeks within the current month."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_weeknumbercolumn
 position: 7
 ---

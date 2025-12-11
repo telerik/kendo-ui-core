@@ -7,6 +7,7 @@ slug: treelist-checkbox-column-in-mvc
 tags: treelist, checkbox
 ticketid: 1141320
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

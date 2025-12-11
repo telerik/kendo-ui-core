@@ -7,6 +7,7 @@ slug: combobox-tooltip-selected-item
 tags: combobox, tooltip, selected
 ticketid: 1143333  
 res_type: kb
+components: ["tooltip"]
 ---
 
 ## Environment

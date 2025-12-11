@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn the basics when working with the BottomNavigation component for {{ site.framework }}."
+components: ["bottomnavigation"]
 slug: htmlhelpers_templates_bottomnavigation_aspnetcore
 position: 4
 ---

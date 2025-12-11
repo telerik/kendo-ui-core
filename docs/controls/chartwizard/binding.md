@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery ChartWizard Documentation - Data Binding
 description: "Get started with the jQuery ChartWizard by Kendo UI and bind the widget to local or remote data and provide its suggestions."
+components: ["chartwizard"]
 slug: databinding_kendoui_chartwizard
 position: 3
 ---

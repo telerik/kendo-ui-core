@@ -2,6 +2,7 @@
 title: Getting Started with Telerik REPL
 page_title: Getting Started with Telerik REPL
 description: "Explore the features of the Telerik REPL server playground tool and learn how to use them when experimenting with the Telerik UI components."
+components: ["general"]
 slug: getting_started_repl_aspnetcore
 permalink: /getting-started/repl/repl-getting-started
 position: 2

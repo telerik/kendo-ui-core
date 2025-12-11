@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery DateInput Documentation - DateInput Localization
 description: "Get started with the jQuery DateInput by Kendo UI and translate its text messages for different culture locales."
+components: ["dateinput"]
 slug: localization_kendoui_dateinput
 position: 2
 ---

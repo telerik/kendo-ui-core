@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Configure the prompt, output, and commands views of the Telerik UI for {{ site.framework }} AIPrompt component."
+components: ["aiprompt"]
 slug: htmlhelpers_views_aiprompt
 position: 2
 ---

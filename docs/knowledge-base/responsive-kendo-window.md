@@ -7,6 +7,7 @@ slug: responsive-kendo-window
 tags: kendo, window, responsive, adaptive, percent, size
 ticketid: 1362958
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Calendar component for {{ site.framework }} provides a styled UI Calendar."
+components: ["calendar"]
 previous_url: /helpers/scheduling/calendar/overview
 slug: htmlhelpers_overview_calendarhelper_aspnetcore
 position: 0

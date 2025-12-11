@@ -2,6 +2,7 @@
 title: Forms Integration
 page_title: Forms Integration
 description: "Learn how to use forms in the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 previous_url: /helpers/layout/window/using-forms-in-window
 slug: htmlhelpers_window_forms_aspnetcore
 position: 7

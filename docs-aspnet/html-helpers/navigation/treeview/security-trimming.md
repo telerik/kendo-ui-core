@@ -2,6 +2,7 @@
 title: Security Trimming
 page_title: Security Trimming
 description: "Use the built-in security trimming functionality of the Telerik UI TreeView HtmlHelper for ASP.NET MVC."
+components: ["treeview"]
 previous_url: /helpers/navigation/treeview/security-trimming
 slug: securitytrimmings_treeviewhelper_aspnetmvc
 position: 9

@@ -2,6 +2,7 @@
 title: React
 page_title: React - Kendo UI Third-Party Tools
 description: "Learn how to use Kendo UI components in React applications."
+components: ["general"]
 previous_url: /React2
 slug: reactsupport_integration_kendoui
 ---

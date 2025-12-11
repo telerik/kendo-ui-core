@@ -2,6 +2,7 @@
 title: Reordering
 page_title: Kendo UI for jQuery TileLayout Documentation - TileLayout reordering
 description: "Learn how to enable and use the reordering functionality of the Kendo UI for jQuery TileLayout."
+components: ["tilelayout"]
 slug: reordering_kendoui_tilelayout_widget
 position: 2
 ---

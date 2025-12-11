@@ -5,9 +5,9 @@ description: "Learn how to measure tags in the header and modify their captions 
 previous_url: /controls/data-management/pivotgrid/how-to/modify-measure-tag-caption, /controls/data-management/pivotgrid/how-to/appearance/modify-measure-tag-caption
 slug: howto_modify_measure_tag_captions_pivotgrid
 tags: pivotgrid, modify, captions, of, measure, tag
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

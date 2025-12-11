@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery AIPrompt Documentation - AIPrompt Accessibility
 description: "Get started with the jQuery AIPrompt and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["aiprompt"]
 slug: jquery_aiprompt_accessibility
 position: 1
 ---

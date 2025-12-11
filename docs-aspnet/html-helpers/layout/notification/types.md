@@ -2,6 +2,7 @@
 title: Types
 page_title: Types
 description: "Use the built-in types of the Telerik UI Notification component for ASP.NET MVC."
+components: ["notification"]
 previous_url: /helpers/layout/notification/types
 slug: types_notificatiomhelper_aspnetmvc
 position: 2

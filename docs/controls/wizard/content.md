@@ -2,6 +2,7 @@
 title: Content
 page_title: jQuery Wizard Documentation - Wizard Content
 description: "Get started with the jQuery Wizard by Kendo UI and learn how to set its content."
+components: ["wizard"]
 slug: content_wizard_widget
 position: 3
 ---

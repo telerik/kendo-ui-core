@@ -7,6 +7,7 @@ slug: dialog-icon-title-confirm-css
 tags: dialog, icon, title, confirm, css
 ticketid: 1173051
 res_type: kb
+components: ["dialog"]
 ---
 
 ## Environment

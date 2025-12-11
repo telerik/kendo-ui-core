@@ -6,8 +6,8 @@ type: how-to
 slug: grid-search-highlight-rows
 tags: telerik, kendoui, kendo, grid, search, highlight, row
 res_type: kb
+components: ["grid"]
 ticketid: 1446645
-component: grid
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: TypeScript
 page_title: TypeScript - Kendo UI Third-Party Tools
 description: "Learn how to enable strongly-typed access to the Kendo UI components and their configuration."
+components: ["general"]
 previous_url: /howto/typescript/overview, /typescript
 slug: typescript_integration_kendoui
 ---
@@ -27,7 +28,12 @@ You can optionally include the latest jQuery TypeScript definition file as well.
 
 ### Using NPM
 
-Since the Kendo UI TypeScript definitions are available in the [DefinitelyTyped](http://definitelytyped.org/) project, they are also available as an [npm package](https://www.npmjs.com/package/@types/kendo-ui). To include them in your project, run the `npm install --save @types/kendo-ui` command.
+When you install Kendo UI for jQuery through NPM, the package already includes all TypeScript definition files. No additional installation is required. After running:
+```
+    npm install --save @progress/kendo-ui
+
+```
+the TypeScript definitions (including all.d.ts) are available directly inside the installed NPM package.
 
 ## Features
 

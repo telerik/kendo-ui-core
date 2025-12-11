@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PDF Export
 description: "Export the Telerik UI Gantt for {{ site.framework }} to PDF."
+components: ["gantt"]
 slug: htmlhelpers_gantt_pdf_export_aspnetcore
 position: 5
 ---

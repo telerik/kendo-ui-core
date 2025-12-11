@@ -5,9 +5,9 @@ description: "Learn how to initialize the Grid inside the Kendo UI PanelBar by r
 slug: initialize_thegrid_panelbar_widget
 previous_url: /controls/navigation/panelbar/how-to/initiliaze-grid-in-panelbar
 tags: telerik, kendo, jquery, panelbar, initialize, grid
-component: panelbar
 type: how-to
 res_type: kb
+components: ["panelbar"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ToolBar Documentation - Getting Started with the ToolBar
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to create and initialize the component."
+components: ["toolbar"]
 slug: getting_started_kendoui_toolbar
 position: 1
 ---

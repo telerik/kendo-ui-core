@@ -6,6 +6,7 @@ page_title: Bind the Grid for ASP.NET Core with AJAX
 slug: grid-ajax-binding
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, ajax, binding, ajax-binding
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

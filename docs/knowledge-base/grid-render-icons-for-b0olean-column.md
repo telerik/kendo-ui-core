@@ -6,8 +6,8 @@ page_title: Rendering Icons in a Boolean Column - Kendo UI for jQuery Data Grid
 slug: grid-render-icons-boolean-column
 tags: grid, template, icons, boolean, columns
 res_type: kb
+components: ["grid"]
 ticketid: 1589622
-component: grid
 ---
 
 ## Environment

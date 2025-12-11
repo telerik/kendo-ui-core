@@ -7,6 +7,7 @@ slug: grid-virtual-scrolling-with-persist-single-selection
 tags: grid, selection, virtual
 ticketid: 1139830
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,19 +2,18 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI PivotGrid component for {{ site.framework }} in a Razor Pages application."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_razorpage_aspnetcore
 position: 8
 ---
 
 # PivotGrid in Razor Pages 
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI PivotGrid for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI PivotGrid for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the PivotGrid component in a Razor Pages scenario.
-
-## Getting Started
+## Binding to Remote Data
 
 The following example demonstrates how to configure the PivotGrid in a Razor Pages scenario and bind it to a remote data collection.
 
@@ -30,36 +29,37 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
                .Name("configurator")
                .Filterable(true)
                .Height(500)
-           )
+            )
         
-           @(Html.Kendo().PivotGrid<CustomerViewModel>()
-               .Name("pivotgrid")
-               .Configurator("#configurator")
-               .ColumnWidth(120)
-               .Filterable(true)
-               .Height(500)
-               .DataSource(dataSource => dataSource
-               .Ajax()
-               .Transport(transport => transport.Read(r => r.Url("/Index?handler=Read").Data("forgeryToken")))
-                   .Schema(schema => schema
-                       .Cube(cube => cube
-                           .Dimensions(dimensions => {
-                               dimensions.Add(model => model.ContactName).Caption("All Contacts");
-                               dimensions.Add(model => model.CompanyName).Caption("All Companies");
-                               dimensions.Add(model => model.Country).Caption("All Countries");
-                               dimensions.Add(model => model.ContactTitle).Caption("All Titles");
-                           })
-                           .Measures(measures => measures.Add("Contacts Count").Field(model => model.CustomerID).AggregateName("count"))
-                       ))
-                   .Columns(columns =>
-                   {
-                       columns.Add("Country").Expand(true);
-                       columns.Add("CompanyName");
-                   })
-                   .Rows(rows => rows.Add("ContactTitle").Expand(true))
-                   .Measures(measures => measures.Values("Contacts Count"))
-               )
-           )
+            @(Html.Kendo().PivotGrid<CustomerViewModel>()
+                .Name("pivotgrid")
+                .Configurator("#configurator")
+                .ColumnWidth(120)
+                .Filterable(true)
+                .Height(500)
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Transport(transport => transport.Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken")))
+                    .Schema(schema => schema
+                        .Cube(cube => cube
+                            .Dimensions(dimensions => {
+                                dimensions.Add(model => model.ContactName).Caption("All Contacts");
+                                dimensions.Add(model => model.CompanyName).Caption("All Companies");
+                                dimensions.Add(model => model.Country).Caption("All Countries");
+                                dimensions.Add(model => model.ContactTitle).Caption("All Titles");
+                            })
+                            .Measures(measures => measures.Add("Contacts Count").Field(model => model.CustomerID).AggregateName("count"))
+                        )
+                    )
+                    .Columns(columns =>
+                    {
+                        columns.Add("Country").Expand(true);
+                        columns.Add("CompanyName");
+                    })
+                    .Rows(rows => rows.Add("ContactTitle").Expand(true))
+                    .Measures(measures => measures.Values("Contacts Count"))
+                )
+            )
         </div>
     ```
     ```TagHelper
@@ -68,40 +68,40 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
         @using Kendo.Mvc.UI
 
         <div class="k-pivotgrid-wrapper">
-            <kendo-pivotdatasource type="PivotDataSourceType.Custom" name="pivotSource">
-        <columns>
-            <pivot-datasource-column name="Country" expand="true"></pivot-datasource-column>
-            <pivot-datasource-column name="CompanyName"></pivot-datasource-column>
-        </columns>
-        <rows>
-            <row name="ContactTitle" expand="true"></row>
-        </rows>
-        <!-- Add configuration for "data", "total", and "errors" if the DataSource type is "aspnetmvc-ajax" -->
-        <schema data="Data" Total="Total" Errors="Errors"> 
-            <cube>
-                <dimensions>
-                    <dimension name="ContactName" caption="All Contact" />
-                    <dimension name="CompanyName" caption="All Companies" />
-                    <dimension name="Country" caption="All Countries" />
-                    <dimension name="ContactTitle" caption="All Titles" />
-                </dimensions>
-                <measures>
-                    <measure name="Contacts Count" field="CustomerID" aggregate="count" />
-                </measures>
-            </cube>
-        </schema>
-        <measures values='new string[] {"Contacts Count"}'></measures>
-        <transport>
-            <!-- Set the "content-type", so the request is sent in the expected format. -->
-            <read url="/Index?handler=Read" datatype="json" data="forgeryToken" content-type="application/x-www-form-urlencoded" type="POST" />
-        </transport>
-    </kendo-pivotdatasource>
+            <kendo-pivotdatasource type=@(PivotDataSourceType.Ajax) name="pivotSource">
+                <columns>
+                    <pivot-datasource-column name="Country" expand="true"></pivot-datasource-column>
+                    <pivot-datasource-column name="CompanyName"></pivot-datasource-column>
+                </columns>
+                <rows>
+                    <row name="ContactTitle" expand="true"></row>
+                </rows>
+                <!-- Add configuration for "data", "total", and "errors" if the DataSource type is "aspnetmvc-ajax" -->
+                <schema type="json" data="Data" Total="Total" Errors="Errors"> 
+                    <cube>
+                        <dimensions>
+                            <dimension name="ContactName" caption="All Contact" />
+                            <dimension name="CompanyName" caption="All Companies" />
+                            <dimension name="Country" caption="All Countries" />
+                            <dimension name="ContactTitle" caption="All Titles" />
+                        </dimensions>
+                        <measures>
+                            <measure name="Contacts Count" field="CustomerID" aggregate="count" />
+                        </measures>
+                    </cube>
+                </schema>
+                <measures values='new string[] {"Contacts Count"}'></measures>
+                <transport>
+                    <!-- Set the "content-type", so the request is sent in the expected format. -->
+                    <read url="@Url.Page("Index","Read")" datatype="json" data="forgeryToken" content-type="application/json" type="POST" />
+                </transport>
+            </kendo-pivotdatasource>
 
-    <kendo-pivotconfigurator name="configurator" datasource-id="pivotSource" filterable="true" height="570">
-    </kendo-pivotconfigurator>
+            <kendo-pivotconfigurator name="configurator" datasource-id="pivotSource" filterable="true" height="570">
+            </kendo-pivotconfigurator>
 
-    <kendo-pivotgrid name="pivotgrid" column-width="120" datasource-id="pivotSource" filterable="true" height="570">
-    </kendo-pivotgrid>
+            <kendo-pivotgrid name="pivotgrid" column-width="120" datasource-id="pivotSource" filterable="true" height="570">
+            </kendo-pivotgrid>
         </div>
     ```
     
@@ -138,6 +138,8 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static IList<CustomerViewModel> customers;
 
         public void OnGet(string culture)
@@ -167,6 +169,7 @@ The following example demonstrates how to configure the PivotGrid in a Razor Pag
         {
             return new JsonResult(customers.ToDataSourceResult(request));
         }
+    }
     ```
     ```Model
        public class CustomerViewModel

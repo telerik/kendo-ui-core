@@ -7,6 +7,7 @@ slug: grid-conditional-properties
 position: 
 tags: grid, definition
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

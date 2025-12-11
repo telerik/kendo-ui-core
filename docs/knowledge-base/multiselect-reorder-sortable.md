@@ -6,8 +6,8 @@ page_title: Drag and Drop to Reorder Selected Items and Popup Items Using Sortab
 slug: multiselect-reorder-sortable
 tags: multiselect, reorder, sortable, drag, drop
 res_type: kb
+components: ["multiselect"]
 ticketid: 1543097
-component: multiselect
 ---
 
 ## Environment

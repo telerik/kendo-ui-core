@@ -7,7 +7,7 @@ slug: date-format-excel-export-grid
 tags: grid, excel, export, format, date, cells
 ticketid: 1133130
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

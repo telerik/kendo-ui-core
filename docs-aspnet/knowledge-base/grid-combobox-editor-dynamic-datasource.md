@@ -6,6 +6,7 @@ page_title: Implementing a Dynamic ComboBox Editor in the Grid
 slug: grid-combobox-editor-dynamic-datasource
 tags: aspnet, mvc, ComboBox, editor, kendo-ui, grid, datasource, model, dynamic, value
 res_type: kb
+components: ["general"]
 ticketid: 1142217
 component: grid, datasource
 ---

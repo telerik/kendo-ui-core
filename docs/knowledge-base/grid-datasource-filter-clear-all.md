@@ -7,6 +7,7 @@ slug: grid-datasource-filter-clear-all
 tags: grid, datasource, filter, clear, all
 ticketid: 1167921
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

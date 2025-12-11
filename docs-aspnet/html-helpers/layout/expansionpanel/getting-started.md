@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ExpansionPanel component by following a complete step-by-step tutorial."
+components: ["expansionpanel"]
 slug: expansionpanel_getting_started
 position: 1
 ---

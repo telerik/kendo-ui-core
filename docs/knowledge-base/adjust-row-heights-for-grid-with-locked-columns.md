@@ -5,9 +5,9 @@ description: "Learn how to adjust the height of the rows when the columns are lo
 previous_url: /controls/data-management/grid/how-to/AngularJS/adjust-row-heights-for-grid-with-locked-columns
 slug: howto_adjust_row_heights_template_locked_columns_grid
 tags: grid, adjust, row, height, locked
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

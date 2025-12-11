@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI DropDownList for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: appearance_dropdownlist_aspnetcore
 position: 3
 ---

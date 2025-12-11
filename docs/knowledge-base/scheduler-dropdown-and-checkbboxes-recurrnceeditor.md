@@ -6,7 +6,7 @@ page_title: Use DropDownList for RecurrenceEditor and Checkboxes for Week Days S
 slug: scheduler-dropdown-and-checkbboxes-recurrnceeditor
 tags: recurrence, recurrenceeditor, scheduler, editor, dropdownlist, checkboxes
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

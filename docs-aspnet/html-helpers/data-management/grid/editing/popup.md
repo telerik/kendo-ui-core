@@ -2,6 +2,7 @@
 title: Popup
 page_title: Popup
 description: "Define commands and set the edit mode to configure the Telerik UI Grid component for {{ site.framework }} for Popup editing."
+components: ["grid"]
 slug: popupediting_grid_aspnetcore
 position: 3
 ---

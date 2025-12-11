@@ -2,6 +2,7 @@
 title: Group
 page_title: Group ToolBar Command Type
 description: "Get started with the Telerik UI ToolBar for {{ site.framework }} and learn how to configure and use the Group command type."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_group_aspnetcore
 ---
 

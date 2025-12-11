@@ -5,9 +5,9 @@ description: "Learn how to add Kendo UI controls to a custom event editor in a K
 previous_url: /kendo-mvc/web/scheduler/how-to/add-control-to-customeditor, /controls/scheduling/scheduler/how-to/add-control-to-customeditor, /controls/scheduling/scheduler/how-to/editing/add-control-to-customeditor
 slug: howto_add_controlsto_custom_event_editor_scheduler
 tags: telerik, kendo, jquery, scheduler, add, controls, to, the, custom, event, editor
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

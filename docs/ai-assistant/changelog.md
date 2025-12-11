@@ -3,6 +3,7 @@ title: Changelog
 page_title: Kendo UI for jQuery AI Coding Assistant Changelog
 description: "Find out about the latest changes and improvements in the jQuery AI Coding Assistant." 
 slug: ai_coding_assistant_changelog
+components: ["aicodingassistant"]
 position: 3
 ---
 

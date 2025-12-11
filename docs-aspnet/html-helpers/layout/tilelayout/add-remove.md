@@ -2,6 +2,7 @@
 title: Add or Remove Tiles
 page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Add/Remove
 description: "Learn the basics of the The Telerik UI TileLayout component for {{ site.framework }} add/remove functionality."
+components: ["tilelayout"]
 slug: htmlhelpers_aspnet_tilelayout_add_remove
 position: 5
 ---

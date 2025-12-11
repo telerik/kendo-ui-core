@@ -5,9 +5,9 @@ description: "Learn how to link markers to locations in a Kendo UI Map component
 slug: howto_linkmarkertolocation_map
 previous_url: /controls/diagrams-and-maps/map/how-to/link-marker-to-location
 tags: kendo, jquery, map, link, markers, to, locations
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

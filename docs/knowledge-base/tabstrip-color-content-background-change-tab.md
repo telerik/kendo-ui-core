@@ -7,6 +7,7 @@ slug: tabstrip-color-content-background-same-tab
 tags: tabstrip, color, content, background, same, tab
 ticketid: 1364933
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

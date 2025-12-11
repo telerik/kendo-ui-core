@@ -2,6 +2,7 @@
 title: State Persistence
 page_title: State Persistence
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and persist the state of the widget."
+components: ["grid"]
 slug: persiststate_grid_aspnetcore
 position: 14
 ---

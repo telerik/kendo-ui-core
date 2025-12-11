@@ -7,6 +7,7 @@ meta_title: Programmatically Validate Rows in Kendo UI for jQuery Grid
 slug: programmatically-validate-rows-kendo-ui-jquery-grid
 tags: kendo-ui-for-jquery, grid, validation, data-source
 res_type: kb
+components: ["grid"]
 ticketid: 1688346
 ---
 

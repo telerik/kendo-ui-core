@@ -7,6 +7,7 @@ previous_url: /how-to/use-with-requirejs-mvc
 slug: mvc-with-requirejs
 tags: requirejs, telerik, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

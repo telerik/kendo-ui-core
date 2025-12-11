@@ -6,6 +6,7 @@ slug: map-add-routes
 tags: map, add, routes, markers, location, core, mvc, telerik
 component: map
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

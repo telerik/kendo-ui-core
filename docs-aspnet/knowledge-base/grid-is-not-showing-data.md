@@ -7,6 +7,7 @@ slug: grid-is-not-showing-data
 tags: grid, data, core, aspnet, not showing, binding, loading, empty, no items, records, returned
 ticketid: 1112718
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

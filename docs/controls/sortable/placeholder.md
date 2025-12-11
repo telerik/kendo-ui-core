@@ -2,6 +2,7 @@
 title: Placeholder
 page_title: jQuery Sortable Documentation - Placeholder
 description: "Get started with the jQuery Sortable by Kendo UI and manage the placeholder of the component."
+components: ["sortable"]
 slug: placeholder_kendoui_sortable
 position: 5
 ---

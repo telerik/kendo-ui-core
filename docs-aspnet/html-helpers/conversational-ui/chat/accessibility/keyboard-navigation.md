@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} Chat by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["chat"]
 slug: keynav_aspnetcore_chat
 position: 2
 ---

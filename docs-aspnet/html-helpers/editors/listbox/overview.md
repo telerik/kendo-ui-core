@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ListBox component for {{ site.framework }}."
+components: ["listbox"]
 previous_url: /helpers/html-helpers/listbox, /helpers/editors/listbox/overview
 slug: htmlhelpers_listbox_aspnetcore
 position: 0

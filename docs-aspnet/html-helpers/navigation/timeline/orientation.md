@@ -2,6 +2,7 @@
 title: Orientation
 page_title: Timeline Orientation
 description: "See how to control the orientation of the Telerik UI Timeline component for {{ site.framework }}."
+components: ["timeline"]
 previous_url: /helpers/navigation/timeline/orientation
 slug: orientation_htmlhelpers_timeline_aspnetcore
 position: 5

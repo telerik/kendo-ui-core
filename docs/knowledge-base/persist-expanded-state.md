@@ -5,9 +5,9 @@ description: "Learn how to persist the expanded nodes in a cookie and restore th
 slug: howto_persistexpandedstate_treeview
 previous_url: /controls/navigation/treeview/how-to/integration/persist-expanded-state
 tags: telerik, kendo, jquery, treeview, persist, the, expanded, state
-component: treeview 
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

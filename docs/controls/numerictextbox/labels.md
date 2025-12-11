@@ -2,6 +2,7 @@
 title: Labels
 page_title: jQuery Labels for NumericTextBox Documentation
 description: "Learn how to create and initialize Labels for the Numeric TextBox."
+components: ["numerictextbox"]
 slug: labels_numerictextbox
 position: 4
 ---

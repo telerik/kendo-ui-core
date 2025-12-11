@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI Calendar for {{ site.framework }} and translate its messages for different culture locales."
+components: ["calendar"]
 slug: localization_calendar_aspnetcore
 position: 2
 ---

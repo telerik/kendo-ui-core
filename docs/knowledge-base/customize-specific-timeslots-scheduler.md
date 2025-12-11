@@ -7,7 +7,7 @@ slug: customize-specific-timeslots-scheduler
 tags: kendoui, kendo, scheduler, customize, style, disable
 ticketid: 1119501
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

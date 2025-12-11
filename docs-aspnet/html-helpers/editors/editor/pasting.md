@@ -2,6 +2,7 @@
 title: Pasting
 page_title: Pasting Content
 description: "Learn how to control the pasting behavior of the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_pasting_aspnetcore
 position: 4
 ---

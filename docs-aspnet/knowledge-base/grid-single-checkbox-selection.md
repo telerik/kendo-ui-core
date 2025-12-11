@@ -6,6 +6,7 @@ page_title: Limit the Selection to a Single Row
 slug: grid-singe-checkbox-selection
 tags: grid, checkbox, single, select, one, row, only
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

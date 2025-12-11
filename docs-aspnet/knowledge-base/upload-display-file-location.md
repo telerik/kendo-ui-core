@@ -7,6 +7,7 @@ slug: upload-display-file-location
 tags: upload, display, file, location, link
 ticketid: 1628324
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

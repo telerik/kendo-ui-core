@@ -7,6 +7,7 @@ slug: chart-show-empty-pie-when-no-data
 tags: chart, pie, empty, blank, no data
 ticketid: 1167421
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

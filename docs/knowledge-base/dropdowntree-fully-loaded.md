@@ -6,7 +6,7 @@ page_title: Identify when the DropDownTree is Fully Loaded - Kendo UI DropDownTr
 slug: dropdowntree-fully-loaded
 tags: kendo, kendo-ui, dropdowntree, databound, loaded, last-databound
 res_type: kb
-component: dropdowntree
+components: ["dropdowntree"]
 ---
 
 ## Environment

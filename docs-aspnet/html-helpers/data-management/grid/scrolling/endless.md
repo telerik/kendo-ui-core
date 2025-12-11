@@ -2,6 +2,7 @@
 title: Endless Scrolling
 page_title: Endless Scrolling
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} supporting endless scrolling mode suitable for displaying large number of items."
+components: ["grid"]
 slug: endless_scrolling_aspnetcore_grid
 position: 3
 ---

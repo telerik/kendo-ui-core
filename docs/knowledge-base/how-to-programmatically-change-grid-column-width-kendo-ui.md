@@ -6,6 +6,7 @@ page_title: How to Adjust Column Widths Programmatically in Kendo UI Grid
 slug: how-to-programmatically-change-grid-column-width-kendo-ui
 tags: grid, kendo ui, column width, setoptions, javascript
 res_type: kb
+components: ["grid"]
 ticketid: 1666957
 ---
 

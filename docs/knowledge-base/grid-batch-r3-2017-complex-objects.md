@@ -5,6 +5,7 @@ type: troubleshooting
 page_title: Editing Complex Objects with Batch Edit Mode Throws an Error in the R3 2017 Release - Kendo UI for jQuery Data Grid
 slug: grid-batch-r3-2017-complex-objects
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to select the first item from the popup on a TAB keypres
 previous_url: /controls/editors/multiselect/how-to/select-on-tab, /controls/editors/multiselect/how-to/selection/select-on-tab
 slug: howto_select_thefirst_itemon_tab_multiselect
 tags: telerik, kendo, jquery, multiselect, select, first, item, on, tab
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

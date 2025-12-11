@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the adaptive behavior of the the Telerik UI MaskedTextBox component for {{ site.framework }}."
+components: ["maskedtextbox"]
 slug: adaptiveness_maskedtextbox
 position: 6
 ---

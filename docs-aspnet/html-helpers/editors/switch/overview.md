@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Switch for {{ site.framework }}."
+components: ["switch"]
 previous_url: /helpers/editors/switch/overview
 slug: overview_switchhelper_aspnetcore
 position: 0

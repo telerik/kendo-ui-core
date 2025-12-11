@@ -2,6 +2,7 @@
 title: Excel
 page_title: jQuery PivotGrid Documentation - Excel Export
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to export a Kendo UI PivotGrid to Excel."
+components: ["pivotgrid"]
 slug: excelexport_functionality_pivotgrid
 position: 1
 ---

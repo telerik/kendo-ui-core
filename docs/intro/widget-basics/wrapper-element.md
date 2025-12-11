@@ -2,6 +2,7 @@
 title: Component DOM Element References
 page_title: Component DOM Element References - Working with Components 
 description: "Get started with Kendo UI for jQuery and obtain a reference to the wrapper and element DOM elements provided by each the components."
+components: ["general"]
 previous_url: /framework/widgets/wrapper-element
 slug: widgetwrapperandelement_references_gettingstarted
 position: 1

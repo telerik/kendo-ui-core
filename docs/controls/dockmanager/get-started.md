@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DockManager Documentation - Getting Started with the DockManager
 description: "Get started with the jQuery DockManager by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dockmanager"]
 slug: getting_started_kendoui_dockmanager_component
 position: 1
 ---

@@ -8,6 +8,7 @@ position:
 tags: additional, DataSource, Controller, View, DataSourceResult, data, pass, return, Grid, Scheduler
 ticketid: 1611997
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to customize the content of days with no events in a Ken
 previous_url: /controls/scheduling/scheduler/how-to/customize-no-events-days-content, /controls/scheduling/scheduler/how-to/various/customize-no-events-days-content
 slug: howto_customize_no_events_days_content_scheduler
 tags: telerik, kendo, jquery, scheduler, customize, the, content, of, noevents, days 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

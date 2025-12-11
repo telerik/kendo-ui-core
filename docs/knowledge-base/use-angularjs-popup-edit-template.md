@@ -5,9 +5,9 @@ description: "Learn how to use the popup editor template of the Kendo UI Grid wi
 previous_url: /controls/data-management/grid/how-to/AngularJS/use-angularjs-popup-edit-template
 slug: howto_use_angularin_popup_editor_templates_grid
 tags: use, angularjs, popup, editor, templates, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

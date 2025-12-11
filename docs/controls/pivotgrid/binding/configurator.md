@@ -2,6 +2,7 @@
 title: PivotConfigurator
 page_title: jQuery PivotGrid Documentation - PivotConfigurator Overview
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the Kendo UI PivotGrid Configurator."
+components: ["pivotgrid"]
 slug: overview_kendoui_pivotconfigurator_pivotgridwidget
 position: 4
 ---

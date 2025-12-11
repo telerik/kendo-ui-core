@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI TabStrip component for {{ site.framework }} in a Razor Page."
+components: ["tabstrip"]
 previous_url: /html-helpers/navigation/tabstrip/razor-page
 slug: htmlhelpers_tabstrip_aspnetcore_razor_page
 position: 7
@@ -9,58 +10,98 @@ position: 7
 
 # TabStrip in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI ColorPicker for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI TabStrip for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug tabstrip_databinding_aspnetmvc %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the TabStrip component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [TabStrip in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/TabStrip/TabStripIndex.cshtml).
+## Binding to Remote Data
+
+The following example shows how to configure the TabStrip for remote data binding with AJAX content loading in a Razor Pages application.
 
 ```HtmlHelper
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
+@page
+@model IndexModel
 
-    <div class="wrapper">
-        @(Html.Kendo().TabStrip()
-            .Name("tabstrip")
-            .Items(tabstrip =>
-            {
-                tabstrip.Add().Text("Dimensions & Weights")
-                    .Selected(true)
-                    .LoadContentFrom(Url.Content("~/Content/TabStrip/ajaxContent1.html"));
-                tabstrip.Add().Text("Engine")
-                    .LoadContentFrom(Url.Content("~/Content/TabStrip/ajaxContent2.html"));
-                tabstrip.Add().Text("Chassis")
-                    .LoadContentFrom(Url.Content("~/Content/TabStrip/ajaxContent3.html"));
-            })
-        )
-    </div>
-	
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
+
+<div class="wrapper">
+    @(Html.Kendo().TabStrip()
+        .Name("tabstrip")
+        .Items(tabstrip =>
+        {
+            tabstrip.Add().Text("Tab1").Selected(true)
+            .LoadContentFrom(Url.Page("Index", "Tab1"))
+            .Data("additionalData");
+
+            tabstrip.Add().Text("Tab2")
+            .LoadContentFrom(Url.Page("Index", "Tab2"));
+        })
+    )
+</div>
+
+<script>  
+    function additionalData() {     
+        return {
+            myParam: "myValue"
+        }
+    }
+</script>
 ```
 {% if site.core %}
 ```TagHelper
+@page
+@model IndexModel
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
+
 <kendo-tabstrip name="tabstrip">
     <items>
-        <tabstrip-item text="Dimensions & Weights"
-                       selected="true"
-                       content-url="@Url.Content("~/Content/TabStrip/ajaxContent1.html")">
+        <tabstrip-item text="Tab1"
+            selected="true"
+            content-url="@Url.Page("Index", "Tab1")" data="additionalData">
         </tabstrip-item>
-        <tabstrip-item text="Engine"
-                        content-url="@Url.Content("~/Content/TabStrip/ajaxContent2.html")">
-        </tabstrip-item>
-        <tabstrip-item text="Chassis "
-                       content-url="@Url.Content("~/Content/TabStrip/ajaxContent3.html")">
+        <tabstrip-item text="Tab2" content-url="@Url.Page("Index", "Tab2")">
         </tabstrip-item>
     </items>
 </kendo-tabstrip>
+
+<script>  
+    function additionalData() {     
+        return {
+            myParam: "myValue"
+        }
+    }
+</script>
 ```
 {% endif %}
 ```C# PageModel
-	
+public class IndexModel : PageModel
+{
     public void OnGet()
     {
-
     }
-    
+
+    public PartialViewResult OnGetTab1(string myParam)
+    {
+        return Partial("_Tab1", myParam);
+    }
+
+    public PartialViewResult OnGetTab2()
+    {
+        return Partial("_Tab2");
+    }
+}
 ```
+
+For the complete project, refer to the [TabStrip in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/TabStrip/TabStripIndex.cshtml).
+
+## See Also
+
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the TabStrip](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/tabstrip)
+* [Server-Side HtmlHelper API of the TabStrip](/api/tabstrip)
+* [Server-Side TagHelper API of the TabStrip](/api/taghelpers/tabstrip)

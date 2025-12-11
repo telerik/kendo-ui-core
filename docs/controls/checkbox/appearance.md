@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery CheckBox Documentation - CheckBox Appearance
 description: "Get started with the jQuery CheckBox by Kendo UI and learn how to customize the appearance of the widget."
+components: ["checkbox"]
 previous_url: /styles-and-layout/checkbox-radiobutton
 slug: appearance_checkbox_widget
 position: 4

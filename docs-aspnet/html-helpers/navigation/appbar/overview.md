@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI AppBar component for {{ site.framework }}."
+components: ["appbar"]
 slug: htmlhelpers_appbar_aspnetcore_overview
 position: 0
 ---

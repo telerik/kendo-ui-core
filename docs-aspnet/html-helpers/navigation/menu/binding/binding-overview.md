@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI Menu Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} Menu using various data binding approaches."
+components: ["menu"]
 previous_url: /helpers/navigation/menu/binding/overview
 slug: htmlhelpers_menu_databinding_aspnetcore
 position: 1

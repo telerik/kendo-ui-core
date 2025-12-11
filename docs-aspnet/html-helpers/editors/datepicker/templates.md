@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Get started with the {{ site.product }} DatePicker and learn how to customize its templates."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_templates
 position: 9
 ---

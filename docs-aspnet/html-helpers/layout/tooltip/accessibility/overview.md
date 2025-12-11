@@ -2,6 +2,7 @@
 title: Overview
 page_title: Tooltip Documentation | Tooltip Accessibility
 description: "Get started with the {{ site.product }} Tooltip and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["tooltip"]
 slug: htmlhelpers_tooltip_accessibility
 position: 1
 ---

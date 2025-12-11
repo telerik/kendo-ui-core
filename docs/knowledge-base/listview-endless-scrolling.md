@@ -6,7 +6,7 @@ page_title: Enable Endless Scrolling of Remote Data - Kendo UI ListView for jQue
 slug: listview-endless-scrolling
 tags: listview, list, view, endless, infinite, scroll, remote, data
 res_type: kb
-component: listview
+components: ["listview"]
 ---
 
 ## Environment

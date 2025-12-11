@@ -2,6 +2,7 @@
 title: Suggestions
 page_title: jQuery Chat Documentation - Suggestions
 description: "Learn how to implement message suggestions and suggested actions in the Kendo UI for jQuery Chat component to provide quick response options for users."
+components: ["chat"]
 slug: suggestions_kendoui_chat
 position: 6
 ---

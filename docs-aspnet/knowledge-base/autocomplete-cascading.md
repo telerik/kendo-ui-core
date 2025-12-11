@@ -6,6 +6,7 @@ page_title: Cascading AutoComplete
 slug: autocomplete-cascading
 tags: autocomplete, cascading, model, binding, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

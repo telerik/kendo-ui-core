@@ -2,6 +2,7 @@
 title: State Persistence
 page_title: State Persistence
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and persist the state of the widget."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_persiststate
 position: 9
 ---

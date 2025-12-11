@@ -6,7 +6,7 @@ page_title: Configure Custom Filter for ForeignKey Column - Kendo UI for jQuery 
 slug: grid-custom-filter-with-foreignkey-column
 tags: kendoui, kendo, grid, filtering, foreign key, custom filtering
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

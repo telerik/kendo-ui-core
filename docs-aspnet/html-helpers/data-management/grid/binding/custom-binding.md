@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding
 description: "Learn how to implement custom binding with Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/grid/custom-binding, /helpers/data-management/grid/custom-binding, /helpers/data-management/grid/binding/custom-binding
 slug: custombinding_grid_aspnetmvc
 position: 4

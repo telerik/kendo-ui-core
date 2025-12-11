@@ -7,6 +7,7 @@ slug: grid-navigate-virtual-scrolling-up-down-arrows
 tags: grid, virtual, scrolling, arrows, keyboard, navigate
 ticketid: 1156118
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

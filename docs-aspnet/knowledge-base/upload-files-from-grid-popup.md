@@ -7,6 +7,7 @@ slug: upload-files-from-grid-popup
 tags: upload, file, grid, popup, editor, template, core, mvc, telerik
 previous_url: /helpers/editors/upload/how-to/upload-files-from-grid, /html-helpers/editors/upload/how-to/upload-files-from-grid
 res_type: kb
+components: ["general"]
 component: upload
 ---
 

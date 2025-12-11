@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Right-to-Left Support
 description: "Get started with the Telerik UI ListBox for {{ site.framework }} and learn about the RTL supports it provides."
+components: ["listbox"]
 slug: htmlhelpers_listbox_rtl_aspnetcore
 position: 3
 ---

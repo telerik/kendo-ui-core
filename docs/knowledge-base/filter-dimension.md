@@ -5,9 +5,9 @@ description: "Learn how to filter a dimension in a Kendo UI PivotGrid component.
 previous_url: /controls/data-management/pivotgrid/how-to/filter-dimension, /controls/data-management/pivotgrid/how-to/filtering/filter-dimension
 slug: howto_filter_dimensions_pivotgrid
 tags: kendoui, pivotgrid, filter, dimensions
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

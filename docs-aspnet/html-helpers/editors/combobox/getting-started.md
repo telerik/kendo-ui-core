@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ComboBox component by following a complete step-by-step tutorial."
+components: ["combobox"]
 slug: aspnetcore_combobox_getting_started
 position: 1
 ---

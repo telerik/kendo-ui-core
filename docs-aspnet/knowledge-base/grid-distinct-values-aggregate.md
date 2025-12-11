@@ -6,6 +6,7 @@ page_title: Displaying the count of distinct values in Grid column footer templa
 slug: grid-distinct-values-aggregate
 tags: grid, count, distinct, values, aggregate, footer, template, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to implement row numbers in the Kendo UI Grid for jQuery
 previous_url: /controls/data-management/grid/how-to/Templates/add-row-numbers
 slug: howto_addrownumbers_grid
 tags: grid, row, numbers, kendoui, jquery
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

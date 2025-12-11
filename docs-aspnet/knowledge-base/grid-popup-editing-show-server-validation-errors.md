@@ -7,6 +7,7 @@ slug: grid-popup-editing-show-server-validation-errors
 tags: grid, popup, editing, validation, server, prevent, closing, ignore
 ticketid: 1417523
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

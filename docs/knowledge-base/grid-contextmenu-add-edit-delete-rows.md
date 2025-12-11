@@ -7,6 +7,7 @@ slug: grid-contextmenu-add-edit-delete-rows
 tags: grid, add, edit, delete, contextmenu
 ticketid: 1142072
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

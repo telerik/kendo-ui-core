@@ -2,6 +2,7 @@
 title: Overview
 page_title: Chip Overview
 description: "Discover the Telerik UI Chip component for {{ site.framework }} that provides icons and a roster of appearances."
+components: ["chip"]
 slug: htmlhelpers_chip_aspnetcore_overview
 position: 0
 ---

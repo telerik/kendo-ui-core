@@ -8,6 +8,7 @@ position:
 tags: grid, pdf, export, external, customize, header, footer, variable, content, template
 ticketid: 1407533
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

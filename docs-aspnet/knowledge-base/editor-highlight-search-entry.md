@@ -6,6 +6,7 @@ page_title: Highlight a Search Entry in the Editor Content
 slug: editor-highlight-search-entry
 tags: editor, highlight, search, entry, grid, window
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

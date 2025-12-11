@@ -7,6 +7,7 @@ slug: upload-display-directory-name-with-filesize
 tags: upload, directory, folder, name, file, size
 ticketid: 1548109
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

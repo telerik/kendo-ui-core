@@ -6,6 +6,7 @@ page_title: Configuring the PDFViewer component to use PDF.js version 4.x.x
 slug: pdfviewer-pdfjs-script-workarounds
 tags: pdfviewer, pdf.js, version, 4.x.x, processing, script
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

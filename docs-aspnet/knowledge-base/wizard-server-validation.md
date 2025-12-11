@@ -7,6 +7,7 @@ slug: wizard-server-validation
 tags: wizard, validation
 ticketid: 1524438
 res_type: kb
+components: ["general"]
 component: wizard
 ---
 

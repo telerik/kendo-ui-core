@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: Excel Export
 description: "Export the Telerik UI Grid for {{ site.framework }} to Excel."
+components: ["grid"]
 previous_url: /html-helpers/data-management/grid/excel-export, /helpers/data-management/grid/excel-export
 slug: excelexport_gridhelper_aspnetcore
 position: 2

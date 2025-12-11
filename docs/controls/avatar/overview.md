@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Avatar Documentation - Avatar Overview
 description: "Get started with the jQuery Avatar by Kendo UI and learn how to create and initialize the widget."
+components: ["avatar"]
 slug: overview_kendoui_avatar_widget
 position: 1
 ---

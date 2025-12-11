@@ -7,6 +7,7 @@ slug: grid-toggle-font-style
 tags: grid, toggle, font, style, body
 ticketid: 1154127
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

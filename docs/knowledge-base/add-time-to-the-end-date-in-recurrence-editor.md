@@ -5,9 +5,9 @@ description: "Add more time to the end date of a recurrent event in a Kendo UI f
 previous_url: /controls/scheduling/scheduler/how-to/add-time-to-the-end-date-in-recurrence-editor, /controls/scheduling/scheduler/how-to/editing/add-time-to-the-end-date-in-recurrence-editor
 slug: howto_add_time_to_the_end_date_of_a_recurring_event_scheduler
 tags: telerik, kendo, jquery, scheduler, add, time, to, the, end, date, of, recurring, events
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

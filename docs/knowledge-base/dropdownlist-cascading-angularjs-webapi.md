@@ -7,6 +7,7 @@ slug: dropdownlist-cascading-angularjs-webapi
 tags: kendo, kendoui, dropdownlist, cascading, webapi, transport, datasource, angularjs
 ticketid: 1142461
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

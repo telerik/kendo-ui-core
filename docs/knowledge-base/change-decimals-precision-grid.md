@@ -7,7 +7,7 @@ slug: change-decimals-precision-grid
 tags: grid, filtering, numbers, decimals
 ticketid: 1131251, 1125621
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ListView Documentation - ListView Overview
 description: "Learn about the jQuery ListView by Kendo UI and see the features it supports."
+components: ["listview"]
 slug: overview_kendoui_listview_widget
 position: 0
 ---

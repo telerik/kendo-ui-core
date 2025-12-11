@@ -7,6 +7,7 @@ slug: grid-remove-spinners-from-the-grid-numerictextbox-editor
 tags: grid, numerictextbox, spinners
 ticketid: 1142901
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

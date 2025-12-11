@@ -7,6 +7,7 @@ meta_title: Automatic Scrolling for Kendo UI for jQuery TaskBoard During Drag-an
 slug: automatic-scrolling-taskboard-drag-drop
 tags: taskboard,kendo ui for jquery,scrolling,drag-and-drop,move-event,scrollleft
 res_type: kb
+components: ["taskboard"]
 ticketid: 1703783
 ---
 

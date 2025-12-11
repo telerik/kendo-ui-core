@@ -7,6 +7,7 @@ slug: grid-foreign-key-column-virtualization
 tags: grid, foreign, editor, key, virtualization, combo, virtual
 ticketid: 1418905, 1406973
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

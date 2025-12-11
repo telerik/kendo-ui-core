@@ -4,10 +4,10 @@ page_title: Recursively Load All Child Items - Kendo UI for jQuery HierarchicalD
 description: "Learn how to recursively load all child items of the Kendo UI HierarchicalDataSource for jQuery."
 slug: recursively_load_child_items_hierarchicaldatasource
 tags: hierarchicaldatasource, recursively, child, items
-component: hierarchicaldatasource
 type: how-to
 ticketid: 1524867
 res_type: kb
+components: ["hierarchicaldatasource"]
 ---
 
 ## Environment

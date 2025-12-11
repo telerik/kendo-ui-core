@@ -2,6 +2,7 @@
 title: Interval
 page_title: Telerik UI DateTimePicker for {{ site.framework }} Documentation - Interval
 description: "Get familiar with the Telerik UI DateTimePicker component for {{ site.framework }} and how to set its interval feature."
+components: ["datetimepicker"]
 slug: htmlhelpers_datetimepicker_interval_aspnetcore
 position: 9
 ---

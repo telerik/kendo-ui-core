@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ChipList Documentation - Getting Started with the ChipList
 description: "Get started with the jQuery ChipList by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chiplist"]
 slug: getting_started_kendoui_chiplist_widget
 position: 2
 ---

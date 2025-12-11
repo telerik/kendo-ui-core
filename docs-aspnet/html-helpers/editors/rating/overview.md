@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Rating component for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/overview
 slug: htmlhelpers_rating_aspnetcore_overview
 position: 0

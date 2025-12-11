@@ -7,6 +7,7 @@ slug: grid-format-of-the-response-with-server-grouping
 tags: grid, server, grouping
 ticketid: 1138311
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

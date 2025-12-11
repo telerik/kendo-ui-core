@@ -6,7 +6,7 @@ slug: editor_ipad_expands_not_scrollable
 tags: telerik, progress, kendoui, jquery, editor, expands, ipad, not, scrollable
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

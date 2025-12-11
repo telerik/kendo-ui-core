@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: TabStrip Integration
 description: "Learn how to reorder TabStrip items when using the Telerik UI Sortable component for {{ site.framework }}."
+components: ["sortable"]
 slug: htmlhelpers_sortable_aspnetcore_integration_tabstrip
 position: 3
 ---

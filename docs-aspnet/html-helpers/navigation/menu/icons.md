@@ -2,6 +2,7 @@
 title: Icons
 page_title: Telerik UI Menu component for {{ site.framework }} Documentation - Icons
 description: "Learn how you can display icons in the items of the {{ site.product }} Menu."
+components: ["menu"]
 slug: htmlhelpers_menu_icons
 position: 6
 ---

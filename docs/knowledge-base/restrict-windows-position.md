@@ -5,9 +5,9 @@ description: "Learn how to restrict the movement of a Kendo UI Window to a certa
 slug: howto_restrictpositioning_window
 previous_url: /controls/layout/window/how-to/restrict-windows-position
 tags: telerik, kendo, jquery, window, restrict, the, positioning, of 
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery Filter Documentation - Localization
 description: "Get started with the jQuery Filter by Kendo UI and learn how to localize the text of its filter operators."
+components: ["filter"]
 slug: localization_kendoui_filter_widget
 position: 2
 ---

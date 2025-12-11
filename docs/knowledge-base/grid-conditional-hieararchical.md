@@ -7,6 +7,7 @@ slug: grid-conditional-hieararchical
 tags: grid, hierarchy, hiararchical, conditonal, hide, show
 ticketid: 1153473
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

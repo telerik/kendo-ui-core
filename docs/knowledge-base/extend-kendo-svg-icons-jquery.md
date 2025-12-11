@@ -6,6 +6,7 @@ page_title: How to Add Custom SVG Icons to Kendo UI for jQuery
 slug: extend-kendo-svg-icons-jquery
 tags: kendo, ui, jquery, svg, icons, custom, extend
 res_type: kb
+components: ["general"]
 ticketid: 1670081
 ---
 

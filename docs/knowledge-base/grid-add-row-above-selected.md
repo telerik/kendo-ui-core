@@ -7,7 +7,7 @@ slug: grid-add-row-above-selected
 tags: grid, add, row
 ticketid: 1554656
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to disable a cascading child Kendo UI ComboBox."
 previous_url: /controls/editors/combobox/how-to/disable-child-combo, /controls/editors/combobox/how-to/cascade/disable-child-combo
 slug: howto_disable_child_cascading_combobox
 tags: telerik, kendo, jquery, combobox, disable, cascading, for, children
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

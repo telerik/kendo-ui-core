@@ -7,6 +7,7 @@ slug: grid-header-indeterminate-checkbox
 position: 
 tags: grid, header, checkbox, select, indeterminate, prop, status
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

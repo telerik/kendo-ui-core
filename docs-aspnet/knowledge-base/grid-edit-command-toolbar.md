@@ -5,6 +5,7 @@ page_title: Placing Edit or Update Buttons to Grid Toolbar
 slug: grid-edit-command-toolbar
 tags: grid, toolbar, edit, update, command, template, custom, replace, move, core, mvc, telerik, component, wrapper
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

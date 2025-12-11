@@ -6,6 +6,7 @@ page_title: Configure Custom Grid DataSource
 slug: grid-custom-datasource
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, datasource, custom, custom-datasource
 res_type: kb
+components: ["general"]
 component: grid, datasource
 ---
 

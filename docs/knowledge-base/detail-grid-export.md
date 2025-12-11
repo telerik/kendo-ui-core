@@ -5,9 +5,9 @@ description: "Get started with Kendo UI for jQuery enabling you to export to Exc
 previous_url: /controls/data-management/grid/how-to/excel/detail-grid-export
 slug: howto_exportto_excel_masterand_detail_grid
 tags: grid, export, detail, grids
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

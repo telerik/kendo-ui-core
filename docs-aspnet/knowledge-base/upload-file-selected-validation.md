@@ -5,6 +5,7 @@ description: An example on how to validate whether a file is selected for upload
 type: how-to
 ticketid: 1547435
 res_type: kb
+components: ["general"]
 component: upload
 ---
 

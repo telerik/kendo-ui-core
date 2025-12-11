@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MultiColumnComboBox Documentation - MultiColumnComboBox Overview
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["multicolumncombobox"]
 slug: overview_kendoui_multicolumncombobox_widget
 position: 1
 ---

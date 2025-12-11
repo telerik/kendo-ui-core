@@ -7,6 +7,7 @@ slug: scheduler-agenda-view-sort-events-descending
 tags: kendo, kendo-ui, scheduler, agenda, sort, events, descending
 ticketid: 1153690
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

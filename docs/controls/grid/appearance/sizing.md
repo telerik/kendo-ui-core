@@ -2,6 +2,7 @@
 title: Sizing
 page_title: jQuery Grid Documentation - Sizing
 description: "Get started with the jQuery Grid by Kendo UI and learn about its sizing options."
+components: ["grid"]
 slug: sizing_kendoui_grid
 position: 7
 ---

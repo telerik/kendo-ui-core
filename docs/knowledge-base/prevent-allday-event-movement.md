@@ -5,9 +5,9 @@ description: "Learn how to prevent event movement if users try to drop it outsid
 previous_url: /controls/scheduling/scheduler/how-to/prevent-allday-event-movement, /controls/scheduling/scheduler/how-to/editing/prevent-allday-event-movement
 slug: howto_preventmovingalldayevents_fromalldayheader_scheduler
 tags: telerik, kendo, jquery, scheduler, prevent, moving, allday, events, outside, the, header 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

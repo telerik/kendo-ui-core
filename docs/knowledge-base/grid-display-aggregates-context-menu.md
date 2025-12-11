@@ -7,7 +7,7 @@ slug: grid-display-aggregates-context-menu
 tags: grid, contextmenu, aggregates, custom, command
 ticketid: 1607509 
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

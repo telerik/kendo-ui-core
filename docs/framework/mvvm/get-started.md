@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started - Kendo UI for jQuery MVVM
 description: "Get started with the jQuery MVVM pattern by Kendo UI and learn how to bind elements to models."
+components: ["mvvm"]
 slug: getting_started_kendoui_mvvm
 position: 1
 ---

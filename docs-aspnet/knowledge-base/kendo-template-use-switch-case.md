@@ -7,6 +7,7 @@ slug: kendo-template-use-switch-case
 tags: listview, kendo, template, ClientTemplate, conditional, switch, server, viewbag
 ticketid: 1406311
 res_type: kb
+components: ["general"]
 component: listview
 ---
 

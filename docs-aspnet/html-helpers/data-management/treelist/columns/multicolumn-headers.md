@@ -2,6 +2,7 @@
 title: Multi-Column Headers
 page_title: Multi-Column Headers
 description: "Learn how to apply the multi-column header feature to the Telerik UI TreeList component for {{ site.framework }}."
+components: ["treelist"]
 previous_url: /html-helpers/data-management/treelist/multicolumn-headers, /helpers/data-management/treelist/multicolumn-headers
 slug: multicolumn_aspnetcore_treelist_helper
 position: 3

@@ -7,6 +7,7 @@ slug: chart-set-series-type-by-point-property
 tags: chart, series, type, dataitem, property, set
 ticketid: 1155950
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

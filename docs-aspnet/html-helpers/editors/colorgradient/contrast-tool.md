@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: Contrast Tool
 description: "Learn more about the contrast tool provided by the Telerik UI ColorGradient component for {{ site.framework }}."
+components: ["colorgradient"]
 slug: htmlhelpers_contrast_tool_colorgradient
 position: 3
 ---

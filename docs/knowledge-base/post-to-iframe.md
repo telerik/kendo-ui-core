@@ -5,9 +5,9 @@ description: "Learn how to post to the iframe content of the Kendo UI Window."
 slug: howto_posttoiframe_window
 previous_url: /controls/layout/window/how-to/post-to-iframe
 tags: telerik, kendo, jquery, window, post, to, the, iframe, content, of
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

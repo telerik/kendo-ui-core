@@ -6,6 +6,7 @@ page_title: Passing a Parameter Dynamically to an Action Button of the Dialog
 slug: dialog-dynamic-action-parameter
 tags: dialog, dynamic, parameter, action, button, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

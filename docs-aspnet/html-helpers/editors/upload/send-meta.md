@@ -2,6 +2,7 @@
 title: Metadata
 page_title: Metadata
 description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 previous_url: /helpers/editors/upload/metadata
 slug: htmlhelpers_upload_send_meta_aspnetcore
 position: 6

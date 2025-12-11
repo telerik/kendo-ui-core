@@ -7,6 +7,7 @@ slug: grid-filter-icon-to-left
 previous_url: /knowledge-base/grid_filter_icon_to_left
 tags: Grid, Filter icon, Left position
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

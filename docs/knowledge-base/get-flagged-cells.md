@@ -5,9 +5,9 @@ description: "Learn how to get all flagged cells in a Kendo UI for jQuery Spread
 slug: howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget
 previous_url: /controls/data-management/spreadsheet/how-to/get-flagged-cells
 tags: kendo, jquery, spreadsheet, get, flagged, cells, containing, invalid, values
-component: spreadsheet
 type: how-to
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

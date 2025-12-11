@@ -8,6 +8,7 @@ position:
 tags: column, space, stack, white space, separate, chart, 100%, stacked, progressbar
 ticketid: 1454711
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

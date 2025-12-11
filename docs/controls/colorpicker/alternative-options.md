@@ -2,6 +2,7 @@
 title: Alternative Options
 page_title: jQuery ColorPicker Alternative Options Documentation - Alternative Options with the ColorPicker
 description: Learn about the alternative options of the jQuery ColorPicker by Kendo UI."
+components: ["colorpicker"]
 slug: getting_started_kendoui_alternativeoptions_component
 position: 7
 ---

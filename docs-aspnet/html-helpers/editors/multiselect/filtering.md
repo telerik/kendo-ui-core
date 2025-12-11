@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Learn how to filter data on the server for the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 slug: htmlhelpers_multiselect_filtering_aspnetcore
 position: 5
 ---

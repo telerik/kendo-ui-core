@@ -6,6 +6,7 @@ page_title: Implementing Color Coding for Recurring Events in Kendo UI Scheduler
 slug: color-coding-recurring-appointments-kendo-ui-scheduler
 tags: kendo-ui,scheduler,recurring-events,color-coding,eventtemplate,occurrencesinrange
 res_type: kb
+components: ["scheduler"]
 ticketid: 1686851
 ---
 

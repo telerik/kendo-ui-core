@@ -6,6 +6,7 @@ page_title: How to Implement "Select All" Checkbox in Kendo UI MultiSelect
 slug: how-to-add-select-all-multiselect
 tags: kendo-ui, multiselect, select-all, headertemplate, tagmode
 res_type: kb
+components: ["multiselect"]
 ticketid: 1666066
 ---
 

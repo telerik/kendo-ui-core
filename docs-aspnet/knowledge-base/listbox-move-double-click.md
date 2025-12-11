@@ -6,6 +6,7 @@ page_title: ListBox Move elements on double click
 slug: listbox-move-double-click
 tags: listbox, list, box, double, click, transfer, items
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

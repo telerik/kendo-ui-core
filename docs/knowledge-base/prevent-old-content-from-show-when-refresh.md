@@ -7,6 +7,7 @@ slug: window-prevent-old-content-from-show
 tags: window, load, content, old, flicker, refresh, ajax
 ticketid: 1413198
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

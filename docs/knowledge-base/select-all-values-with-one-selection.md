@@ -5,9 +5,9 @@ description: "Learn how to create a dataItem that holds an all- value that will 
 previous_url: /controls/editors/multiselect/how-to/select-all-values-with-one-selection, /controls/editors/multiselect/how-to/selection/select-all-values-with-one-selection
 slug: howto_select_allvalues_witha_single_selection_multiselect
 tags: telerik, kendo, jquery, multiselect, select, all, values, with, single, one, selection
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

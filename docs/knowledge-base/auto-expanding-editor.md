@@ -5,9 +5,9 @@ description: "Learn how to make the Kendo UI for jQuery Editor control automatic
 previous_url: /controls/editors/editor/how-to/auto-expanding-editor, /controls/editors/editor/how-to/appearance/auto-expanding-editor
 slug: howto_make_the_editor_auto_expanding_editor
 tags: telerik, kendo, jquery, editor, create, auto, expanding, editors
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

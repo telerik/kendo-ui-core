@@ -5,9 +5,9 @@ description: "Learn how to restrict rows reordering in the Kendo UI Grid for jQu
 previous_url: /controls/data-management/grid/how-to/reorderable-grid-restricted-rows-sortable, /controls/data-management/grid/how-to/integration/reorderable-grid-restricted-rows-sortable
 slug: howto_restrictreordergridrowssortable_grid
 tags: create, reorderable, grids, with, restricted, rows, using, sortable
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

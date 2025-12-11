@@ -2,6 +2,7 @@
 title: Multiple Sources
 page_title: Multiple Sources
 description: "Add multiple sources to the same video in the Telerik UI MediaPlayer for {{ site.framework }}."
+components: ["mediaplayer"]
 previous_url: /html-helpers/media/mediaplayer/features, /helpers/media/mediaplayer/multiple-sources
 slug: htmlhelpers_mediaplayer_multiplesources_aspnetcore
 position: 2

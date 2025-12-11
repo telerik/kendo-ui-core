@@ -2,6 +2,7 @@
 title: Calendar Types
 page_title: Calendar Types
 description: "Get started with the {{ site.product }} DatePicker and learn how to work around the default calendar type implementation and simulate other calendar types."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_calendartypes
 position: 6
 ---

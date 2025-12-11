@@ -5,9 +5,9 @@ description: "Learn how to auto-size the popup height in a Kendo UI for jQuery C
 previous_url: /controls/editors/combobox/how-to/bypass-boundary-detection, /controls/editors/combobox/how-to/customize/bypass-boundary-detection
 slug: howto_bypass_boudary_detection_combobox
 tags: telerik, kendo, jquery, combobox, bypass, boudary, detection
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

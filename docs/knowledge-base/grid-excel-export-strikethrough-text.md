@@ -6,6 +6,7 @@ type: how-to
 slug: grid-excel-export-strikethrough-text
 tags: grid, excel, export, text, decoration, strike, strikethrough
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

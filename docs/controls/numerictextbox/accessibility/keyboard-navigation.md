@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery NumericTextBox Documentation - Keyboard Navigation
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["numerictextbox"]
 slug: keynav_numerictextbox
 position: 2
 ---

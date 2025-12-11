@@ -7,6 +7,7 @@ slug: form-dynamic-items
 tags: form, dynamic, items, fields
 ticketid: 1562665
 res_type: kb
+components: ["general"]
 component: form
 ---
 

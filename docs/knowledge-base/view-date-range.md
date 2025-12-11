@@ -5,9 +5,9 @@ description: "Learn how to retrieve the date range of the current Kendo UI for j
 previous_url: /controls/scheduling/scheduler/how-to/view-date-range, /controls/scheduling/scheduler/how-to/various/view-date-range
 slug: howto_retrievecurrent_viewdaterange_scheduler
 tags: telerik, kendo, jquery, scheduler, retrieve, the, current, view, date, range 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

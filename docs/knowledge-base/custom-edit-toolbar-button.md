@@ -5,9 +5,9 @@ description: "Learn how to create a custom Edit button by using AngularJS in the
 previous_url: /controls/data-management/grid/how-to/AngularJS/custom-edit-toolbar-button
 slug: howto_create_custom_edit_buttons_grid
 tags: grid, create, custom, edit, buttons
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

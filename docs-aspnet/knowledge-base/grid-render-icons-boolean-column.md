@@ -6,6 +6,7 @@ page_title: Rendering an Icon for a Boolean Column in the Data Grid
 slug: grid-render-icons-boolean-column
 tags: grid, template, icons, boolean, columns, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

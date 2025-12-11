@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI ComboBox Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} ComboBox using various data binding approaches."
+components: ["combobox"]
 previous_url: /helpers/editors/combobox/binding/overview
 slug: htmlhelpers_combobox_databinding_aspnetcore
 position: 1

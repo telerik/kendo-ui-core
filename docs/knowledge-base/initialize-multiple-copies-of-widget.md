@@ -7,6 +7,7 @@ slug: initialize-multiple-copies-of-widget
 tags: initialize, multiple, copies, widget, declare, instance, initialization, declaration, copying, control
 ticketid: 1168945
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

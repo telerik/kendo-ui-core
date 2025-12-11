@@ -1,6 +1,7 @@
 ---
 title: AI Toolbar Assistant
 description: "Learn how to use the AI Assistant Toolbar Tool in the Kendo UI for jQuery Grid to interact with your data using natural language prompts."
+components: ["grid"]
 slug: ai_toolbar_tool_kendoui_grid
 position: 1
 ---

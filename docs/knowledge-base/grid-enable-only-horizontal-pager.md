@@ -8,6 +8,7 @@ position:
 tags: grid, pager, responsive, horizontal
 ticketid: 1445455
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

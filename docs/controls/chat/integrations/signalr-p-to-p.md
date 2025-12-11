@@ -2,6 +2,7 @@
 title: Peer-to-Peer Chat
 page_title: jQuery Chat Documentation - Peer-to-Peer Chat
 description: "Get started with the jQuery Chat by Kendo UI and learn how to create a peer-to-peer Chat UI with ASP.NET Core SignalR."
+components: ["chat"]
 previous_url: /controls/chat/signalr-p-to-p
 slug: peertopeerp_chat_kendoui
 ---

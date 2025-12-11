@@ -2,6 +2,7 @@
 title: Load on Demand
 page_title: jQuery DropDownTree Documentation - Load on Demand
 description: "Get started with the jQuery DropDownTree by Kendo UI and learn how to enable load on demand for improved performance with large hierarchical datasets."
+components: ["dropdowntree"]
 slug: loadondemand_dropdowntree_widget
 position: 3
 ---

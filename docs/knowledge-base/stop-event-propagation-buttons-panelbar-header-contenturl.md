@@ -7,6 +7,7 @@ meta_title: Prevent Navigation from Buttons in PanelBar Header with contentUrl
 slug: stop-event-propagation-buttons-panelbar-header-contenturl
 tags: panelbar,kendo-ui-for-jquery,contenturl,event-propagation,custom-buttons
 res_type: kb
+components: ["panelbar"]
 ticketid: 1703405
 ---
 

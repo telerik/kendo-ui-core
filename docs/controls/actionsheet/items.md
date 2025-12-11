@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery ActionSheet Documentation - Items
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to configure the items of the widget."
+components: ["actionsheet"]
 slug: items_actionsheet_widget
 position: 2
 ---

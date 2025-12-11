@@ -2,6 +2,7 @@
 title: Model Binding
 page_title: Model Binding
 description: "Implement model binding in the Telerik UI RadioButton for {{ site.framework }}."
+components: ["radiobutton"]
 previous_url: /helpers/navigation/radiobutton/model-binding
 slug: modelbinding_radiobutton_aspnetcore
 position: 5

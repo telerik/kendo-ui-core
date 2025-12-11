@@ -5,9 +5,9 @@ description: "Learn how to show a loading indicator while the data of a Kendo UI
 previous_url: /controls/charts/how-to/show-overlay-while-loading, /controls/charts/how-to/appearance/show-overlay-while-loading
 slug: howto_showoverlaywhileloading_charts
 tags: chart, show, overlay, while, loading
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

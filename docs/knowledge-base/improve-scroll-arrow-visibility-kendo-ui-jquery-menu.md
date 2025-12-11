@@ -7,6 +7,7 @@ meta_title: Improve Scroll Arrow Visibility in Kendo UI for jQuery Menu
 slug: improve-scroll-arrow-visibility-kendo-ui-jquery-menu
 tags: kendo-ui-for-jquery, menu, scroll, visibility, css, javascript
 res_type: kb
+components: ["menu"]
 ticketid: 1696902
 ---
 

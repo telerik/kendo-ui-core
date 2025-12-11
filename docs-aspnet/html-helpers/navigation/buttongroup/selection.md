@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Restrict the number of selectable Buttons within the Telerik UI ButtonGroup component for {{ site.framework }}."
+components: ["buttongroup"]
 previous_url: /helpers/navigation/buttongroup/selection
 slug: selection_buttongroup_aspnetcore
 position: 5

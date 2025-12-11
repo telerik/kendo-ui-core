@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} featuring built-in DataSource options which allow you to bind the Diagram to remote data."
+components: ["diagram"]
 slug: htmlhelpers_diagram_aspnetcore_binding
 previous_url: /helpers/diagrams-and-maps/diagram/binding/binding
 position: 2

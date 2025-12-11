@@ -4,10 +4,10 @@ page_title: Position DropDownList Popup in PanelBar Content - Kendo UI for jQuer
 description: "Learn how to position DropDownList popup in the content of the Kendo UI PanelBar for jQuery."
 slug: dropdownlist-popup-in-panelbar-content
 tags: panelbar, content, dropdownlist, popup
-component: panelbar
 type: how-to
 ticketid: 1594859
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

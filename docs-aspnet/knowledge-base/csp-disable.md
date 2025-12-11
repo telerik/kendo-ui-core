@@ -6,6 +6,7 @@ page_title: Disable CSP in Projects
 slug: csp-disable
 tags: aspnet, core, dotnet-core, sample, project, csp, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Description

@@ -2,6 +2,7 @@
 title: Override Theme Styles
 page_title: Override Theme Styles
 description: "General rules of thumb to override {{ site.product_short }} themes."
+components: ["general"]
 slug: themes-override
 position: 4
 ---

@@ -5,9 +5,9 @@ description: "Learn how to prevent page navigation while in edit mode of the Ken
 previous_url: /controls/data-management/grid/how-to/Editing/grid-prevent-navigation-when-in-editing-mode
 slug: howto_prevent_page_navigation_inedit_mode_grid
 tags: grid, prevent, page, navigation, edit, mode
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

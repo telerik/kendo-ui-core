@@ -7,7 +7,7 @@ slug: grid-popup-editor-remove-animation
 tags: grid, popup, editor, animation
 ticketid: 1135955
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

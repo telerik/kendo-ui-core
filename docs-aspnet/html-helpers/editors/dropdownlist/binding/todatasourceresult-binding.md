@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding
 description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/binding/custom-binding
 slug: htmlhelpers_dropdownlist_todatasourceresultbinding_aspnetcore
 position: 4

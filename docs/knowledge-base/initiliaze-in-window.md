@@ -5,9 +5,9 @@ description: "Learn how to initialize the jQuery Grid by Kendo UI inside a Windo
 previous_url: /controls/data-management/grid/how-to/initiliaze-in-window, /controls/data-management/grid/how-to/hidden/initiliaze-in-window
 slug: howto_initializegridinwindow_grid
 tags: grid, initialize, window, resize, dimensions, container
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

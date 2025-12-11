@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery Upload Documentation - Templates
 description: "Get started with the jQuery Upload by Kendo UI and learn how to use templates when working with the widget."
+components: ["upload"]
 slug: templates_upload
 position: 7
 ---

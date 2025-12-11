@@ -7,7 +7,7 @@ slug: reorder-grid-rows-using-buttons
 tags: grid, reordering, items
 ticketid: 1112024
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: inline-edit-with-custom-button-template
 tags: inline, edit, delete, custom, button, template, commands, grid
 ticketid: 1133582
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

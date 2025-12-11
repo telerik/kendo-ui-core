@@ -7,6 +7,7 @@ previous_url: /helpers/editors/dropdownlist/how-to/cascading-in-grid, /html-help
 slug: howto_handlecascadingddlsingrid_ddlaspnetmvc
 tags: dropdownlist, grid, cascading
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

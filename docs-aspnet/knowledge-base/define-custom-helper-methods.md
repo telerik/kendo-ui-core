@@ -5,6 +5,7 @@ description: Learn how to define custom HtmlHelper methods in the Telerik UI for
 slug: define-custom-helper-methods
 tags: grid, html, helper, custom, mvc, telerik, pageable, boolean, column, component
 res_type: kb
+components: ["general"]
 ---
 
 

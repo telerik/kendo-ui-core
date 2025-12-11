@@ -2,6 +2,7 @@
 title: Hierarchical Grouping
 page_title: Hierarchical Grouping
 description: "Learn how to enable the hierarchical grouping of the Telerik UI for {{ site.framework }} Scheduler resources."
+components: ["scheduler"]
 slug: scheduler_resources_grouping_hierarchical
 position: 5
 ---

@@ -6,6 +6,7 @@ page_title: Displaying ContextMenu Commands for Files Only in {{ site.product }}
 slug: filemanager-displaying-contextmenu-commands-for-files-only-in-listview
 tags: filemanager, asp.net mvc, asp.net core, contextmenu, commands, files, folders, listview
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

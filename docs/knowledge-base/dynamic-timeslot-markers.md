@@ -6,7 +6,7 @@ page_title: Define Custom Time Ruler Indicators in Gantt - Kendo UI Gantt for jQ
 slug: custom-time-ruler-indicators-in-gantt
 tags: time, ruler, indicators, gantt
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

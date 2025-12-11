@@ -2,6 +2,7 @@
 title: Aggregates
 page_title: Aggregates
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and group its data by using aggregate functions."
+components: ["grid"]
 slug: aggregates_aspnetcore_grid
 position: 2
 ---

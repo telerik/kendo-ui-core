@@ -2,6 +2,7 @@
 title: Overview
 page_title: ListView Documentation | ListView Accessibility
 description: "Get started with the {{ site.product }} ListView and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["listview"]
 slug: htmlhelpers_listview_accessibility
 position: 1
 ---

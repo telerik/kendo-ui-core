@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the ActionSheet component."
+components: ["actionsheet"]
 slug: htmlhelpers_events_actionsheet_aspnetcore
 position: 3
 ---

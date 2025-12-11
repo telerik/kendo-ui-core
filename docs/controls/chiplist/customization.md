@@ -2,6 +2,7 @@
 title: Customization
 page_title: jQuery ChipList Documentation - ChipList Customization
 description: "Try now the Kendo UI for jQuery ChipList and learn how to customize it by defining avatars and custom attributes."
+components: ["chiplist"]
 slug: customization_kendoui_chiplist_widget
 position: 4
 ---

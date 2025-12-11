@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI MultiSelect as an editor for comma-s
 previous_url: /controls/data-management/grid/how-to/Editing/use-multiselect-as-custom-editor, /controls/editors/multiselect/how-to/use-multiselect-as-custom-editor-in-grid, /controls/editors/multiselect/how-to/integration/use-multiselect-as-custom-editor-in-grid
 slug: howto_usemultiselectascustomeditor_grid
 tags: use, multiselect, custom, editor, grid, csv, string, fields
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

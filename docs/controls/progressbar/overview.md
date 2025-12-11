@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ProgressBar Documentation - ProgressBar Overview
 description: "Get started with the jQuery ProgressBar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["progressbar"]
 slug: overview_kendoui_progressbar_widget
 position: 0
 ---

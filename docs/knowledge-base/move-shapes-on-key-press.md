@@ -5,9 +5,9 @@ description: "Learn how to move the shapes of a Kendo UI Diagram by pressing the
 slug: howto_move_shapes_with_arrow_keys
 previous_url: /controls/diagrams-and-maps/diagram/how-to/move-shapes-on-key-press
 tags: kendo, jquery, diagram, move, shapes, with, arrow, keys
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

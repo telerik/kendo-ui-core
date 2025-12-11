@@ -2,6 +2,7 @@
 title: Day Template
 page_title: Day Template
 description: "Customize the rendered day for the month view in the Telerik UI Calendar component for {{ site.framework }}."
+components: ["calendar"]
 slug: htmlhelpers_daytemplate_calendar_aspnetcore
 position: 3
 ---

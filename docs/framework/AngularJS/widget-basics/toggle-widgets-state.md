@@ -2,6 +2,7 @@
 title: Enabling and Disabling Widgets
 page_title: Working with State Changes | AngularJS Directives
 description: "Learn how to enable and disable widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#working-with-state-changes
 slug: angularjs_enable_disable
 position: 7

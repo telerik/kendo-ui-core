@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its validation configuration."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_validation
 position: 9
 ---

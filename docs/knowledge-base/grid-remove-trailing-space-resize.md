@@ -7,7 +7,7 @@ slug: grid-remove-trailing-space-resize
 tags: grid, resize, column, empty, space, blank, trailing, size, zero, width
 ticketid: 1084792
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

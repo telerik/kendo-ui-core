@@ -5,9 +5,9 @@ description: "Learn how to display the Delete confirmation as a button instead o
 previous_url: /controls/data-management/grid/how-to/Editing/display-delete-confirmation-buttons-command-column
 slug: howto_display_delete_confirmation_buttons_command_column
 tags: grid, show, delete, confirmation, button, command, column
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

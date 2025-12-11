@@ -6,6 +6,7 @@ page_title: Show Confirmation Popup When User Leaves the Page with Unsaved Grid 
 slug: grid-show-popup-on-change-before-leave-page
 tags: grid, inline, editing, detect, unsaved, change, popup, dialog, prompt, user, confirmation, core, mvc, telerik
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -7,7 +7,7 @@ slug: editor-custom-insert-symbol-tool
 tags: editor, custom, tool, insert, symbol
 ticketid: 1141847
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

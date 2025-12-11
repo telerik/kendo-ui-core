@@ -7,6 +7,7 @@ slug: timepicker-change-order-and-start
 tags: timepicker, start, order, change, time, picker, list
 ticketid: 1153029
 res_type: kb
+components: ["timepicker"]
 ---
 
 ## Environment

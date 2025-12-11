@@ -2,6 +2,7 @@
 title: ButtonGroup
 page_title: ButtonGroup ToolBar Command Type
 description: "Get started with the Telerik UI ToolBar for {{ site.framework }} and learn how to configure and use the ButtonGroup command type."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_buttongroup_aspnetcore
 ---
 

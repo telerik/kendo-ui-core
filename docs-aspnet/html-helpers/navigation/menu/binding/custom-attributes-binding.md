@@ -2,6 +2,7 @@
 title:  Custom Attributes Binding
 page_title: Custom Attributes Binding
 description: "Learn how to bind custom attributes from the server-side with the Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 slug: custom-attributes-binding
 position: 6
 ---

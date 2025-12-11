@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI NumericTextBox HtmlHelper for {{ site.framework }}."
+components: ["numerictextbox"]
 slug: numerictextbox_appearance
 position: 2
 ---

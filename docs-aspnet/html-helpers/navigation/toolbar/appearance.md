@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI ToolBar HtmlHelper for {{ site.framework }}."
+components: ["toolbar"]
 slug: toolbar_appearance
 position: 2
 ---

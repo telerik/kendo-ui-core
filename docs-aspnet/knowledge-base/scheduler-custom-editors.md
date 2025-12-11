@@ -7,6 +7,7 @@ previous_url: /html-helpers/scheduling/scheduler/how-to/custom-editor
 slug: scheduler-custom-editors
 tags: scheduler, custom, editors, template, events, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

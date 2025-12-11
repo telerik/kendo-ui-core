@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation Troubleshooting
 description: "Learn about the solutions of issues that may occur while using the Kendo UI Validator or jQuery client-side validation."
+components: ["general"]
 slug: troubleshooting_validation_aspnetmvc
 position: 6
 ---

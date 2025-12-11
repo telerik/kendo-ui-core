@@ -6,6 +6,7 @@ page_title: How to Customize Marker Colors in Kendo UI Map
 slug: how-to-change-marker-colors-kendo-ui-map
 tags: kendo, ui, map, markers, color, customization
 res_type: kb
+components: ["map"]
 ticketid: 1675893
 ---
 

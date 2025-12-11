@@ -7,6 +7,7 @@ slug: treeview-expand-node-parents-by-text
 tags: treeview
 ticketid: 1153697  
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

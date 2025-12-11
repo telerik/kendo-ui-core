@@ -3,20 +3,17 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Filter for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_filterhelper_aspnetcore
-position: 2
+components: ["filter"]
+position: 7
 ---
 
 # Filter in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Filter for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Filter for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the Filter component in a Razor Pages scenario.
-
-For the complete project, refer to the [Filter in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Filter/FilterBinding.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 To bind the Filter DataSource to a data set received from a remote endpoint within a Razor Pages application, follow the next steps:
 
@@ -154,6 +151,8 @@ To bind the Filter DataSource to a data set received from a remote endpoint with
             public string Country { get; set; }
         }
     ```
+
+For the complete project, refer to the [Filter in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Filter/FilterBinding.cshtml).
 
 ## See Also
 

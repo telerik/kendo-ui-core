@@ -2,6 +2,7 @@
 title: Creating New Projects
 page_title: Creating New Projects
 description: "Learn how to create a new {{ site.product }} application."
+components: ["installerandvsextensions"]
 previous_url: /getting-started/vs-integration/new-project-wizard, /installation/vs-integration/new-project-wizard, /vs-integration-mvc/new-project-wizard
 slug: newprojectwizards_visualstudio_aspnetcore
 position: 5

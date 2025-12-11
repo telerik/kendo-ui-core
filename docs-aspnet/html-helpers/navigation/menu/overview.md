@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Try now the Telerik UI Menu component for {{ site.framework }} providing built-in data-binding and customization options, a ContextMenu, and support for various accessibility standards."
+components: ["menu"]
 previous_url: /helpers/html-helpers/menu, /helpers/navigation/menu/overview
 slug: htmlhelpers_menu_aspnetcore
 position: 0

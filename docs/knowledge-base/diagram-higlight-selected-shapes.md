@@ -7,7 +7,7 @@ slug: diagram-highlight-selected-shapes
 tags: diagram, selection, shapes
 ticketid: 1338877
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

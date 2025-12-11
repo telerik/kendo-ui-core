@@ -7,7 +7,7 @@ slug: integrate-editor-in-dialog
 tags: integrate, editor, dialog
 ticketid: 1118201
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

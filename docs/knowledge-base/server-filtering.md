@@ -5,9 +5,9 @@ description: "Learn how to filter events between the start and the end of the cu
 previous_url: /controls/scheduling/scheduler/how-to/server-filtering, /controls/scheduling/scheduler/how-to/filtering/server-filtering
 slug: howto_server_filtering
 tags: telerik, kendo, jquery, scheduler, filter, events, on, the, server, between, start, end, of, current, view
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

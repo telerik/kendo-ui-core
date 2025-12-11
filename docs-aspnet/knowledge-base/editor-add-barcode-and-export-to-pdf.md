@@ -7,6 +7,7 @@ slug: editor-add-barcode-and-export-to-pdf
 tags: editor, barcode, export, pdf
 ticketid: 1528213
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

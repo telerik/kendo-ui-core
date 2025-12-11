@@ -6,6 +6,7 @@ page_title: Setting Custom Colors for the Chart Series
 slug: chart-set-custom-color-for-each-chart-series
 tags: mvc, core, chart, custom, color, series
 res_type: kb
+components: ["general"]
 component: chart
 ---
 

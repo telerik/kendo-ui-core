@@ -2,6 +2,7 @@
 title: Part 2 - Hello Services
 page_title: Part 2 - Hello Services - Kendo UI Third-Party Frameworks
 description: "Learn how to install the ASP.NET Web API, create services, supporting CRUD operations, and debug Web API Services."
+components: ["general"]
 previous_url: /third-party/tutorials/webforms/asp-net-hello-services
 slug: part2_halloservices_aspnetwebforms_tutorials
 position: 2

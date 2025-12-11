@@ -2,6 +2,7 @@
 title: DataSource Binding
 page_title: jQuery TabStrip Documentation - DataSource Binding
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to bind it to a dataSource."
+components: ["tabstrip"]
 slug: datasource_binding_tabstrip
 position: 6
 ---

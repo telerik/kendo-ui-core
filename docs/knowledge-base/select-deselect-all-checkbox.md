@@ -5,9 +5,9 @@ description: "Learn how to select or deselect all rows in the Kendo UI Grid for 
 previous_url: /controls/data-management/grid/how-to/Selection/select-deselect-all-checkbox
 slug: howto_select_deselect_all_rowswith_checkboxes_grid
 tags: select, deselect, all, grid, rows, with, selectall, header, checkbox
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

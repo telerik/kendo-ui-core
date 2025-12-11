@@ -5,9 +5,9 @@ description: "Learn how to export the Agenda view of the Kendo UI for jQuery Sch
 previous_url: /controls/scheduling/scheduler/how-to/agenda-view-pdf-export-with-paging, /controls/scheduling/scheduler/how-to/export/agenda-view-pdf-export-with-paging
 slug: howto_implement_pdf_export_inagenda_view_scheduler
 tags: telerik, kendo, jquery, scheduler, export, agenda, view, with, paging, in, pdf
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

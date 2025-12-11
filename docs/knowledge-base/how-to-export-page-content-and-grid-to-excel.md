@@ -6,6 +6,7 @@ page_title: How to Export Page Elements and Kendo UI Grid to Excel in a Unified 
 slug: how-to-export-page-content-and-grid-to-excel
 tags: kendo ui for jquery, grid, export, excel, excelexport
 res_type: kb
+components: ["grid"]
 ticketid: 1678881
 ---
 

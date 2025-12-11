@@ -6,7 +6,7 @@ page_title: Get the Current Time - Kendo UI MediaPlayer for jQuery
 slug: mediaplayer-get-current-time
 tags: mediaplayer, current, time, seek, get, position, seconds, played, elapsed
 res_type: kb
-component: menu
+components: ["menu"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI Grid Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} Grid using various data binding approaches."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/overview
 slug: htmlhelpers_grid_aspnetcore_binding_overview
 position: 0

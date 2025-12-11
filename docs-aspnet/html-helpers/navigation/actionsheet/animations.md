@@ -2,6 +2,7 @@
 title: Animations
 page_title: ActionSheet Documentation - Animations
 description: "Learn how to control the animations in the Telerik UI ActionSheet component for {{ site.framework }}."
+components: ["actionsheet"]
 slug: htmlhelpers_animations_actionsheet
 position: 4
 ---

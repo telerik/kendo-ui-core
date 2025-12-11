@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Captcha Documentation - Captcha Overview
 description: "Get started with the jQuery Captcha by Kendo UI and learn how to initialize the widget."
+components: ["captcha"]
 slug: overview_kendoui_captcha_widget
 position: 0
 ---

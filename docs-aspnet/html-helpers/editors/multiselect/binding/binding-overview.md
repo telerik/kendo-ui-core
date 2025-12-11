@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI MultiSelect Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} MultiSelect using various data binding approaches."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/binding/overview
 slug: htmlhelpers_multiselect_databinding_aspnetcore
 position: 1

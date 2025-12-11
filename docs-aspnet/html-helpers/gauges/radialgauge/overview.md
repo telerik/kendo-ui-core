@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI RadialGauge component for {{ site.framework }} and learn how to initialize and configure the component."
+components: ["radialgauge"]
 previous_url: /helpers/gauges/radialgauge/overview
 slug: overview_radialgaugehelper_aspnetcore
 position: 0

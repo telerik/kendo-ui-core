@@ -7,6 +7,7 @@ slug: grid-export-pdf-without-toolbar-pager
 tags: grid, export, pdf, toolbar, pager, ignore, exclude, columnmenu, column, menu, filter, icon
 ticketid: 1143253
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

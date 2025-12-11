@@ -7,6 +7,7 @@ slug: editor-new-line-on-enter
 tags: editor, new, line, br, paragraph, enter, press, key, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/add-new-line-on-enter, /html-helpers/editors/editor/how-to/add-new-line-on-enter
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

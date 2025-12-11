@@ -7,6 +7,7 @@ slug: grid-remove-filter-row-operators
 tags: grid, remove, filter, filter row, row, operator
 ticketid: 1171789
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

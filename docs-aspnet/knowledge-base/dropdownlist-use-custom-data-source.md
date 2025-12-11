@@ -7,6 +7,7 @@ previous_url: /helpers/editors/dropdownlist/how-to/use-custom-data-source, /html
 slug: howto_usecustomdatasource_bindtodatasourceoutput_ddlaspnetmvc
 tags: dropdownlist, custom, datasource, bind
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -4,9 +4,9 @@ page_title: Add Custom Checkbox Filter on Top of the Default Filter Menu- Kendo 
 description: "Learn how to add a checkbox filter menu functionality in the Kendo UI for jQuery Data Grid component."
 slug: create_custom_checkbox_filter_menu__over_default_filter_grid
 tags: grid, create, checkbox, filter, menu, custom, kendoui, jquery
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

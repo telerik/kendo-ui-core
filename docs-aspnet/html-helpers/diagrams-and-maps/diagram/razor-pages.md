@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Diagram for {{ site.framework }} in a RazorPages application."
+components: ["diagram"]
 slug: razorpages_diagramhelper_aspnetcore
 previous_url: /helpers/diagrams-and-maps/diagram/binding/razor-pages
 position: 3
@@ -9,22 +10,25 @@ position: 3
 
 # Diagram in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name).
+This article describes how to seamlessly integrate and configure the Telerik UI Diagram for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Diagram for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_diagram_aspnetcore_binding %}) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the Diagram component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [Diagram in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Diagram/DiagramEditing.cshtml).
+## Binding to Remote Data
 
-## Getting Started
+To configure the CRUD operations of the Diagram within a Razor Pages application, follow the next steps:
 
-To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
-
-1. Setup CRUD URLs in the `DataSource` and `ConnectionsDataSource` along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
+1. Setup CRUD URLs in the `DataSource` and `ConnectionsDataSource` configurations along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
 
     ```HtmlHelper
-        .DataSource(d => d
+        @page
+        @model DiagramEditingModel
+
+        @(Html.Kendo().Diagram<OrgDiagramShape, OrgDiagramConnection>()
+          .Name("diagram")
+            .DataSource(d => d
               .ShapeDataSource()
               .Model(m =>
               {
@@ -33,10 +37,10 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
                   m.Field(s => s.JobTitle);
                   m.Field(s => s.Color);
               })
-              .Read(r => r.Url("/Diagram/DiagramEditing?handler=ReadShapes").Data("forgeryToken"))
-              .Create(r => r.Url("/Diagram/DiagramEditing?handler=CreateShape").Data("forgeryToken"))
-              .Destroy(r => r.Url("/Diagram/DiagramEditing?handler=DestroyShape").Data("forgeryToken"))
-              .Update(r => r.Url("/Diagram/DiagramEditing?handler=UpdateShape").Data("forgeryToken"))
+              .Read(r => r.Url(Url.Page("DiagramEditing", "ReadShapes")).Data("forgeryToken"))
+              .Create(r => r.Url(Url.Page("DiagramEditing", "CreateShape")).Data("forgeryToken"))
+              .Destroy(r => r.Url(Url.Page("DiagramEditing", "DestroyShape")).Data("forgeryToken"))
+              .Update(r => r.Url(Url.Page("DiagramEditing", "UpdateShape")).Data("forgeryToken"))
           )
           .ConnectionsDataSource(d => d
               .Model(m =>
@@ -46,21 +50,26 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
                   m.From(c => c.FromShapeId);
                   m.To(c => c.ToShapeId);
               })
-              .Read(r => r.Url("/Diagram/DiagramEditing?handler=ReadConnections").Data("forgeryToken"))
-              .Create(r => r.Url("/Diagram/DiagramEditing?handler=CreateConnection").Data("forgeryToken"))
-              .Destroy(r => r.Url("/Diagram/DiagramEditing?handler=DestroyConnection").Data("forgeryToken"))
-              .Update(r => r.Url("/Diagram/DiagramEditing?handler=UpdateConnection").Data("forgeryToken"))
+              .Read(r => r.Url(Url.Page("DiagramEditing", "ReadConnections")).Data("forgeryToken"))
+              .Create(r => r.Url(Url.Page("DiagramEditing", "CreateConnection")).Data("forgeryToken"))
+              .Destroy(r => r.Url(Url.Page("DiagramEditing", "DestroyConnection")).Data("forgeryToken"))
+              .Update(r => r.Url(Url.Page("DiagramEditing", "UpdateConnection")).Data("forgeryToken"))
           )
+          ... // Additional configuration options.
+        )
     ```
     {% if site.core %}
     ```TagHelper
+        @page
+        @model DiagramEditingModel
+
         <kendo-diagram name="diagram">
             <hierarchical-datasource server-operation="false" type="DataSourceTagHelperType.Ajax">
                 <transport>
-                    <read url="@Url.Page("DiagramData", "ReadShapes")" />
-                    <create url="@Url.Page("DiagramData", "CreateShape")" />
-                    <destroy url="@Url.Page("DiagramData", "DestroyShape")" />
-                    <update url="@Url.Page("DiagramData", "UpdateShape")" />
+                    <read url="@Url.Page("DiagramEditing", "ReadShapes")" data="forgeryToken"/>
+                    <create url="@Url.Page("DiagramEditing", "CreateShape")" data="forgeryToken"/>
+                    <destroy url="@Url.Page("DiagramEditing", "DestroyShape")" data="forgeryToken"/>
+                    <update url="@Url.Page("DiagramEditing", "UpdateShape")" data="forgeryToken"/>
                 </transport>
                 <schema>
                     <hierarchical-model id="Id">
@@ -74,10 +83,10 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
             </hierarchical-datasource>
             <connections-datasource server-operation="false" type="DataSourceTagHelperType.Ajax">
                 <transport>
-                    <read url="@Url.Page("DiagramData", "ReadShapes")" />
-                    <create url="@Url.Page("DiagramData", "CreateShape")" />
-                    <destroy url="@Url.Page("DiagramData", "DestroyShape")" />
-                    <update url="@Url.Page("DiagramData", "UpdateShape")" />
+                    <read url="@Url.Page("DiagramEditing", "ReadShapes")" data="forgeryToken"/>
+                    <create url="@Url.Page("DiagramEditing", "CreateShape")" data="forgeryToken"/>
+                    <destroy url="@Url.Page("DiagramEditing", "DestroyShape")" data="forgeryToken"/>
+                    <update url="@Url.Page("DiagramEditing", "UpdateShape")" data="forgeryToken"/>
                 </transport>
                 <schema>
                     <model id="id">
@@ -94,10 +103,11 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
                     </model>
                 </schema>
             </connections-datasource>
-
+            <!-- Additional configuration options. -->
         </kendo-diagram>
     ```
     {% endif %}
+
 1. Add an AntiForgeryToken on top of the `RazorPage`.
 
     ```cshtml
@@ -116,8 +126,9 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
     ```
 1. Within the `.cs` file, introduce ActionMethod for each of the CRUD operations.
 
-
-    ```csharp
+    ```C# DiagramEditing.cshtml.cs
+    public class DiagramEditingModel : PageModel
+    {
         public JsonResult OnPostReadShapes([DataSourceRequest] DataSourceRequest request)
         {
             return new JsonResult(DiagramShapes.ToDataSourceResult(request));
@@ -144,7 +155,10 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
 
             return new JsonResult(new[] { shape }.ToDataSourceResult(request, ModelState));
         }
+    }
     ```
+
+For the complete project, refer to the [Diagram in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Diagram/DiagramEditing.cshtml).
 
 ## See Also
 

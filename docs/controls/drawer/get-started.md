@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Drawer Documentation - Getting Started with the Drawer
 description: "Get started with the jQuery Drawer by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["drawer"]
 slug: getting_started_kendoui_drawer_component
 position: 1
 ---

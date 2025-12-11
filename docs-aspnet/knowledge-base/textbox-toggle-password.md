@@ -6,6 +6,7 @@ page_title: Show and Hide a Password in a TextBox
 slug: textbox-toggle-password
 tags: texbox, password, show, hide, toggle, preview
 res_type: kb
+components: ["general"]
 component: textbox
 ---
 

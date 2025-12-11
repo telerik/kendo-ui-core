@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/drag-and-drop, /html-helpers/
 slug: scheduler-drag-and-drop-from-grid
 tags: scheduler, drag, drop, events, grid, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

@@ -2,6 +2,7 @@
 title: Types
 page_title: jQuery Notification Documentation - Types
 description: "Get started with the jQuery Notification by Kendo UI and use the built-in types of the widget."
+components: ["notification"]
 slug: types_kendoui_notification
 position: 2
 ---

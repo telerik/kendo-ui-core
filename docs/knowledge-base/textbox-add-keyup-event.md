@@ -6,6 +6,7 @@ page_title: Add Keyup event to textBox - Kendo UI TextBox for jQuery
 slug: textbox-keyup-event
 tags: textbox, keyup, event
 res_type: kb
+components: ["textbox"]
 ---
 
 ## Environment

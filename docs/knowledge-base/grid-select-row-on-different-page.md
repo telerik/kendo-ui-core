@@ -7,7 +7,7 @@ slug: grid-select-row-on-different-page
 tags: grid, selection, paging
 ticketid: 1408857
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

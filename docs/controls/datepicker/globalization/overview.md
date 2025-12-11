@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery DatePicker Documentation - DatePicker Globalization
 description: "Get started with the jQuery DatePicker by Kendo UI and learn about the globalization options it supports."
+components: ["datepicker"]
 slug: globalization_datepicker
 position: 1
 ---

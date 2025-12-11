@@ -6,6 +6,7 @@ page_title: Filter Bool Columns on Click - Kendo UI for jQuery Data Grid
 slug: grid-filter-boolean-fields-on-click
 tags: grid, filter, bool, boolean, fields, on click, radio, radiobuttons
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

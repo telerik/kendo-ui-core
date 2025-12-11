@@ -7,6 +7,7 @@ previous_url: /helpers/diagrams-and-maps/map/how-to/bind-map-to-model, /html-hel
 slug: howto_bindtomodel_map
 tags: map, bind, model, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

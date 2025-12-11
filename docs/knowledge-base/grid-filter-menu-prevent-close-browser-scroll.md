@@ -7,7 +7,7 @@ slug: grid-filter-menu-prevent-close-browser-scroll
 tags: grid, filtering, menu, popup, prevent, close, scroll
 ticketid: 1147708
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

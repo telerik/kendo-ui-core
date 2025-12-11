@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DateInput component for {{ site.framework }}."
+components: ["datepicker"]
 slug: events_datepicker
 position: 12
 ---

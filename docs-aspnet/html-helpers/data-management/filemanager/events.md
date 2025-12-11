@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI FileManager component for {{ site.framework }}."
+components: ["filemanager"]
 slug: events_filemanager_aspnetcore
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 previous_url: /helpers/editors/colorpicker/overview
 slug: overview_colorpickerhelper_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: Pie Charts
 page_title: jQuery Chart Documentation - Pie Charts
 description: "Learn how to create a Kendo UI Pie Chart and specify its point value, category label, and other properties."
+components: ["chart"]
 slug: pietypecharts_widget
 ---
 

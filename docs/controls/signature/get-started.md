@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Signature Documentation - Getting Started with the Signature
 description: "Get started with the jQuery Signature by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["signature"]
 slug: getting_started_kendoui_signature_widget
 position: 1
 ---

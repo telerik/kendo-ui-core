@@ -2,6 +2,7 @@
 title: Quick Actions
 page_title: Telerik UI Chat Documentation - Quick Actions
 description: "Learn how to configure and use message suggestions and suggested actions in the {{ site.product }} Chat component to provide quick response options for users."
+components: ["chat"]
 slug: htmlhelpers_quick_actions_chat
 position: 6
 ---

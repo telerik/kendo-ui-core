@@ -8,65 +8,77 @@ position: 5
 
 # RadioGroup in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI RadioGroup for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI RadioGroup for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_radiogroup_binding_aspnetcore %}) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the RadioGroup component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [RadioGroup in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/RadioGroup/RadioGroupIndex.cshtml).
+## Binding to a PageModel Property
 
-```HtmlHelper
-    @page
-    @model Telerik.Examples.RazorPages.Pages.RadioGroup.RadioGroupIndexModel
+To bind the RadioGroup to a property from the `PageModel`, follow the next steps:
 
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
+1. Add a property to the `PageModel` that must bind to the RadioGroup.
 
-    <h1>RadioGroup</h1>
-
-    @(Html.Kendo().RadioGroup()
-            .Name("radiogroup")
-            .Items(i =>
-            {
-                i.Add().Label("Phone (SMS)").Value("1");
-                i.Add().Label("E-mail").Value("2");
-                i.Add().Label("None").Value("3");
-            })
-            .Value("1")
-    )
-```
-{% if site.core %}
-```TagHelper
-    @page
-    @model Telerik.Examples.RazorPages.Pages.RadioGroup.RadioGroupIndexModel
-
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
-
-    <h1>RadioGroup</h1>
-    
-    <kendo-radiogroup name="radiogroup" 
-                      radio-name="radiogroup" 
-                      value="1">
-          <kendo-radiogroup-items>
-              <kendo-radiogroup-item label="Phone (SMS)" value="1"></kendo-radiogroup-item>
-              <kendo-radiogroup-item label="E-mail" value="2"></kendo-radiogroup-item>
-              <kendo-radiogroup-item label="None" value="3"></kendo-radiogroup-item>
-          </kendo-radiogroup-items>
-    </kendo-radiogroup>
-```
-{% endif %}
-```C# PageModel
-	public class RadioGroupIndexModel : PageModel
+    ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
     {
+        [BindProperty]
+        public string PreferredContact { get; set; }
+
         public void OnGet()
         {
+            PreferredContact = "email"; // Set default selection.
         }
     }
-```
+    ```
+
+1. Declare the `PageModel` at the top of the page.
+
+    ```Razor
+        @page
+        @model IndexModel
+    ```
+
+1. Bind the RadioGroup to the property using the `RadioGroupFor()` configuration.
+
+    ```HtmlHelper
+    @page
+    @model IndexModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+    
+    @(Html.Kendo().RadioGroupFor(model => model.PreferredContact)
+        .Items(items =>
+        {
+            items.Add().Label("Phone (SMS)").Value("phone");
+            items.Add().Label("E-mail").Value("email");
+            items.Add().Label("None").Value("na");
+        })
+    )
+    ```
+    ```TagHelper
+    @page
+    @model IndexModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-radiogroup for="PreferredContact">
+        <kendo-radiogroup-items>
+            <kendo-radiogroup-item value="phone" label="Phone (SMS)"></kendo-radiogroup-item>
+            <kendo-radiogroup-item value="email" label="E-mail"></kendo-radiogroup-item>
+            <kendo-radiogroup-item value="na" label="None"></kendo-radiogroup-item>
+        </kendo-radiogroup-items>
+    </kendo-radiogroup>
+    ```
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [RadioGroup Overview]({% slug htmlhelpers_radiogroup_aspnetcore_overview %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the RadioGroup](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/radiogroup)
+* [Server-Side HtmlHelper API of the RadioGroup](/api/radiogroup)
+* [Server-Side TagHelper API of the RadioGroup](/api/taghelpers/radiogroup)
+* [Knowledge Base Section](/knowledge-base)

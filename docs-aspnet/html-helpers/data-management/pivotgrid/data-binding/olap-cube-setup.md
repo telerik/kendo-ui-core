@@ -2,6 +2,7 @@
 title: OLAP Cube Setup
 page_title: OLAP Cube Setup
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to set up the OLAP cube when working with the Telerik UI PivotGrid component for {{ site.framework }}."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_olap_cube_setup
 position: 3
 ---

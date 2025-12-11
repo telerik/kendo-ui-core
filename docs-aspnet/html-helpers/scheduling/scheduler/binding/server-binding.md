@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Local Binding
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to bind it to a local dataset."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_serverbinding_aspnetcore
 position: 1
 ---

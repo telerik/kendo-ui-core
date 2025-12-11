@@ -6,6 +6,7 @@ page_title: How to Customize Form Field Height and Row Gutter in Kendo UI for jQ
 slug: customize-form-field-height-row-gutter-kendo-ui-jquery
 tags: kendo-ui-for-jquery, form, css, style, layout
 res_type: kb
+components: ["form"]
 ticketid: 1673075
 ---
 

@@ -2,6 +2,7 @@
 title: Checked RadioButton
 page_title: Checked RadioButton
 description: "Enable the checked or unchecked state of the Telerik UI RadioButton for {{ site.framework }}."
+components: ["radiobutton"]
 previous_url: /helpers/navigation/radiobutton/checked-state
 slug: checkedstate_radiobutton_aspnetcore
 position: 3

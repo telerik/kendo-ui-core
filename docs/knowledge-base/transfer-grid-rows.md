@@ -5,9 +5,9 @@ description: "Learn how to move a row from one Grid to another using the Kendo U
 slug: howto_transfergridrows_sortable
 previous_url: /controls/interactivity/sortable/how-to/transfer-grid-rows
 tags: telerik, kendo, jquery, sortable, transfer, grid, rows
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

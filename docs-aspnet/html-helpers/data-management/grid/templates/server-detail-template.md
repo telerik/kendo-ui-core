@@ -2,6 +2,7 @@
 title: Server Detail Templates
 page_title: Server Detail Templates
 description: "Set the detail template used during server binding of the Kendo UI Grid for ASP.NET MVC."
+components: ["grid"]
 previous_url: /helpers/grid/server-detail-template, /helpers/data-management/grid/templating/server-detail-template
 slug: servertemplates_grid_aspnetmvc
 position: 4.5

@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery TreeList Documentation - Data Binding
 description: "Get started with the jQuery TreeList by Kendo UI and bind the component to local or remote data."
+components: ["treelist"]
 slug: databinding_kendoui_treelist
 position: 2
 ---

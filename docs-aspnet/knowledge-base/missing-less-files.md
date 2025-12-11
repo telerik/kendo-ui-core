@@ -5,6 +5,7 @@ page_title: Missing Less files
 slug: missing-less-files
 tags: less, missing, files, structure, upgrade, troubleshoot, application
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

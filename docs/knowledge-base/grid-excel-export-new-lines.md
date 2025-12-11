@@ -6,6 +6,7 @@ page_title: Export Data with Line Breaks to Excel - Kendo UI for jQuery Data Gri
 slug: grid-excel-export-new-lines
 tags: grid, excel, export, new lines
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

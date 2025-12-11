@@ -2,6 +2,7 @@
 title: Cascading ComboBoxes
 page_title: Cascading ComboBoxes
 description: "Learn about the Cascading option of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 slug: htmlhelpers_combobox_cascading_aspnetcore
 position: 6
 ---

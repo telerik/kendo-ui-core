@@ -2,6 +2,7 @@
 title: Troubleshooting
 page_title: Troubleshooting
 description: "Troubleshoot common issues with the {{ site.product }} Visual Studio extensions."
+components: ["installerandvsextensions"]
 previous_url: /getting-started/vs-integration/troubleshooting, /installation/vs-integration/troubleshooting, /vs-integration-mvc/troubleshooting
 slug: troubleshooting_visualstudio_aspnetcore
 position: 30

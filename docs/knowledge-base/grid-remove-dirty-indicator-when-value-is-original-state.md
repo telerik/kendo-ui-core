@@ -7,6 +7,7 @@ slug: grid-remove-dirty-indicator-when-value-is-original-state
 tags: grid, dirty, editing, batch
 ticketid: 1156822
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

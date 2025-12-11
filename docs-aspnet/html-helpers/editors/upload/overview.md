@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 previous_url: /helpers/html-helpers/upload, /helpers/editors/upload/overview
 slug: htmlhelpers_upload_aspnetcore
 position: 0

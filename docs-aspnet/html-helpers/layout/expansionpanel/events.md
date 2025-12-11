@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ExpansionPanel component for {{ site.framework }}."
+components: ["expansionpanel"]
 slug: events_expansionpanel
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MultiSelect Documentation - Getting Started with the MultiSelect
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["multiselect"]
 slug: getting_started_kendoui_multiselect_widget
 position: 1
 ---

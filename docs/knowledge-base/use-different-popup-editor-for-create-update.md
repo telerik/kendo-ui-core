@@ -5,9 +5,9 @@ description: "Learn how to use different popup editors for create and update ope
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-popup-editor-for-create-update
 slug: howto_use_different_poup_editors_for_create_update_operations
 tags: use, various, popup, editors, grid, create, update, operations
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

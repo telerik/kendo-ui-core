@@ -6,6 +6,7 @@ page_title: Perform CRUD Operations - Kendo UI MulticolumnComboBox for ASP.NET M
 slug: multicolumncombobox-crud-operations-custom-buttons
 ticketid: 1364943
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

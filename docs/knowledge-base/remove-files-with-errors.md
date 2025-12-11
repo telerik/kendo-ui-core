@@ -5,9 +5,9 @@ description: "Learn how to remove files with errors using the Kendo UI Upload co
 slug: howto_remove_files_with_errors
 previous_url: /controls/editors/upload/how-to/remove-files-with-errors
 tags: telerik, kendo, jquery, upload, remove, files, for, upload, with, errors
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

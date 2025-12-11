@@ -2,6 +2,7 @@
 title: Orientation
 page_title: Orientation
 description: "Learn how to set the Orientation of the Telerik UI ProgressBar component for {{ site.framework }}."
+components: ["progressbar"]
 slug: progressbar_orientation
 position: 4
 ---

@@ -7,7 +7,7 @@ slug: listbox-get-index-of-item-on-add
 tags: listbox, datasource
 ticketid: 1140370
 res_type: how-to
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

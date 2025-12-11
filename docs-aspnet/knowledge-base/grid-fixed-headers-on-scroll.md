@@ -6,6 +6,7 @@ page_title: Creating Fixed Headers on Scroll
 slug: grid-fixed-headers-on-scroll
 tags: aspnet, mvc, grid, fixed, headers, on, scroll
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -5,9 +5,9 @@ description: "Learn how to preselect items by using MVVM in the Kendo UI Multise
 previous_url: /controls/editors/multiselect/how-to/preselect-items-using-mvvm, /controls/editors/multiselect/how-to/selection/preselect-items-using-mvvm
 slug: howto_preselect_items_byusing_mvvm_binding_multiselect
 tags: telerik, kendo, jquery, multiselect, preselect, items, by, using, mvvm, binding
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

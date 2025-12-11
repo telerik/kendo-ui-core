@@ -2,6 +2,7 @@
 title: Remote Binding
 page_title: Remote Binding
 description: "Learn how to implement Remote Binding with Telerik UI FileManager component for {{ site.framework }}."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_remotebinding
 position: 2
 ---

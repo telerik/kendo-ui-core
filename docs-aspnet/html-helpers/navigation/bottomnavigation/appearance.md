@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the BottomNavigation component for {{ site.framework }}."
+components: ["bottomnavigation"]
 slug: htmlhelpers_appearance_bottomnavigation_aspnetcore
 position: 3
 ---

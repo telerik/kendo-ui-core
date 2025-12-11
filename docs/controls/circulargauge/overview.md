@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery CircularGauge Documentation - CircularGauge Overview
 description: "Get started with the jQuery CircularGauge by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["circulargauge"]
 slug: overview_kendoui_circulargaugewidget
 position: 1
 ---

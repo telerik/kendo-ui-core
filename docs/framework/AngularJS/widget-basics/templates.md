@@ -2,6 +2,7 @@
 title: Template Directives
 page_title: Template Directives | AngularJS Directives
 description: "Learn more about the AngularJS templates integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#using-template-directives
 slug: angularjs_integration_templates
 position: 6

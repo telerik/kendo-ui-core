@@ -2,6 +2,7 @@
 title: Checkboxes
 page_title: Checkboxes
 description: "Learn about the checkboxes functionality of the Telerik UI TreeView component for {{ site.framework }}."
+components: ["treeview"]
 slug: htmlhelpers_treeview_checkboxes_aspnetcore
 position: 7
 ---

@@ -5,9 +5,9 @@ description: "Learn how to select a row of the Kendo UI jQuery Grid with a check
 previous_url: /controls/data-management/grid/how-to/Selection/grid-selection-checkbox
 slug: howto_make_selection_checkbox_column_grid
 tags: grid, make, preserve, selection, checkbox, column, get, ids, selected, items
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

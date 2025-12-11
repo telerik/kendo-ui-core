@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery MultiColumnComboBox Documentation - Keyboard Navigation
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["multicolumncombobox"]
 slug: keynav_kendoui_multicolumncombobox_widget
 position: 2
 ---

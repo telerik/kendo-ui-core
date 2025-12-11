@@ -2,6 +2,7 @@
 title: Sorting and Filtering
 page_title: Spreadsheet Sorting and Filtering
 description: "Learn how to configure the sorting and filtering functionality of the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_sorting_filtering_aspnetcore
 position: 6
 ---

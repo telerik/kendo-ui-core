@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ButtonGroup Documentation - ButtonGroup Overview
 description: "Get started with the jQuery ButtonGroup by Kendo UI, initialize single or multiple buttons, and reference existing Button instances."
+components: ["buttongroup"]
 slug: overview_kendoui_buttongroup_widget
 position: 0
 ---

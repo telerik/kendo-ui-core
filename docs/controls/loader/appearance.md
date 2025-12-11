@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Loader Documentation - Appearance
 description: "Get started with the jQuery Loader by Kendo UI and set its size, type and themeColor configurations."
+components: ["loader"]
 slug: appearance_kendoui_loader
 position: 2
 ---

@@ -5,9 +5,9 @@ description: "Learn how to use different date formats for the Kendo UI for jQuer
 previous_url: /controls/scheduling/scheduler/how-to/using-different-date-formats, /controls/scheduling/scheduler/how-to/various/using-different-date-formats
 slug: howto_usedifferentdateformats_scheduler
 tags: telerik, kendo, jquery, scheduler, use, different, date, formats 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

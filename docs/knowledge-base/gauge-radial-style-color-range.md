@@ -7,6 +7,7 @@ slug: gauge-radial-style-color-range
 tags: gauge, radial, style, color, range
 ticketid: 1110105
 res_type: kb
+components: ["radialgauge"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Placeholder
 page_title: Placeholder
 description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn how to customize the placeholder."
+components: ["sortable"]
 slug: htmlhelpers_sortable_aspnetcore_placeholder
 position: 5
 ---

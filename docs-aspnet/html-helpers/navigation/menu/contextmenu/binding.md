@@ -2,6 +2,7 @@
 title: Binding
 page_title: Data Binding
 description: "Learn the basics approaches for binding the Telerik UI ContextMenu component for {{ site.framework }}."
+components: ["menu"]
 slug: htmlhelpers_contextmenu_databinding_aspnetcore
 position: 2
 ---

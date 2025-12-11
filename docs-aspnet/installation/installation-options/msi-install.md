@@ -2,6 +2,7 @@
 title: Installing with the MSI Installer
 page_title: Installing with the MSI Installer for Windows
 description: "Get started with {{ site.product }} and install the components with the Windows MSI Installer Package."
+components: ["general"]
 previous_url: /getting-started/installation/msi-install, /installation-mvc/msi-install, /installation/msi-install
 slug: msi_install_aspnetmvc6_aspnetmvc
 position: 3

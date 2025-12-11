@@ -7,6 +7,7 @@ slug: dropdownlist-alternate-color-items
 tags: dropdownlist, dropdown, list, items, color, alternate, background
 ticketid: 1141949
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

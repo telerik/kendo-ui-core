@@ -5,9 +5,9 @@ description: "Learn how to use a custom event template to render events with spe
 previous_url: /controls/scheduling/scheduler/how-to/event-custom-background-color, /controls/scheduling/scheduler/how-to/appearance/event-custom-background-color
 slug: howto_use_custom_event_templatewith_specific_background_color_scheduler
 tags: telerik, kendo, jquery, scheduler, use, custom, event, template, with, specific, background, color 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: troubleshoot_bower_storing_credentials
 tags: troubleshooting, bower, credentials
 type: troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

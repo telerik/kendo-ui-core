@@ -2,6 +2,7 @@
 title: Creating Azure account
 page_title: Creating Azure Account
 description: "Start using {{ site.product }} with Azure by creating an Microsoft Azure account."
+components: ["general"]
 slug: azure_getting_started_aspnetcore
 position: 1
 ---

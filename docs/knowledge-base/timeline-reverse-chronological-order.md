@@ -6,6 +6,7 @@ page_title: Timeline Display of Events in Reverse Chronological Order - Kendo UI
 slug: timeline-reverse-chronological-order
 tags: timeline, events, chronological, order, sort, reverse, descending
 res_type: kb
+components: ["timeline"]
 ---
 
 ## Environment

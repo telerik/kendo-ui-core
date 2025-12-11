@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Captcha Documentation | Captcha Accessibility
 description: "Get started with the jQuery Captcha by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["captcha"]
 slug: jquery_captcha_accessibility
 position: 1
 ---

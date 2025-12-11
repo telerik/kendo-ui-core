@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ContextMenu Documentation - ContextMenu Overview
 description: "Get started with the jQuery ContextMenu by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["menu"]
 previous_url: /controls/menu/contextmenu
 slug: overview_kendoui_contextmenu_widget
 position: 1

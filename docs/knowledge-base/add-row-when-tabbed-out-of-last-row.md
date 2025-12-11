@@ -5,9 +5,9 @@ description: "Learn how to add a new row to the Kendo UI Grid for jQuery when th
 previous_url: /controls/data-management/grid/how-to/Editing/add-row-when-tabbed-out-of-last-row
 slug: howto_add_new_rows_when_tabbingoutof_thelast_one_grid
 tags: grid, rows, tabbing
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

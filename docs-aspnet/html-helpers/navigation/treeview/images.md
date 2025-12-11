@@ -2,6 +2,7 @@
 title: Images
 page_title: Images
 description: "Learn how to enhance the items of the Telerik UI for {{ site.framework }} TreeView by adding images and sprites."
+components: ["treeview"]
 slug: htmlhelpers_treeview_images
 position: 5
 ---

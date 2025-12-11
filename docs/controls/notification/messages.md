@@ -2,6 +2,7 @@
 title: Messages
 page_title: jQuery Notification Documentation - Messages
 description: "Get started with the jQuery Notification by Kendo UI and set the position and stacking of its messages."
+components: ["notification"]
 slug: positionstacking_kendoui_notification
 position: 3
 ---

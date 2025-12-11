@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started - Kendo UI for jQuery PDF Export
 description: "Get started with the jQuery PDF Export by Kendo UI and learn how to export the content of a page to PDF."
+components: ["general"]
 slug: getting_started_kendoui_pdf_export
 position: 1
 ---

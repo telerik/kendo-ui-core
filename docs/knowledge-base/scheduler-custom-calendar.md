@@ -7,6 +7,7 @@ slug: scheduler-custom-calendar
 tags: kendo, kendo-ui, scheduler, calendar, custom-calendar, calendar-template
 ticketid: 1143694
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

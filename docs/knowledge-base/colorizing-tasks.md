@@ -5,9 +5,9 @@ description: "Learn how to colorize tasks in the Kendo UI for jQuery Gantt compo
 slug: howto_colorize_tasks_gantt
 previous_url: /controls/scheduling/gantt/how-to/colorizing-tasks
 tags: telerik, kendo, jquery, gantt, colorize, tasks
-component: gantt
 type: how-to
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

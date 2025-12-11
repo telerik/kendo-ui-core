@@ -7,6 +7,7 @@ previous_url: /knowledge-base/how-to-use-context-menu-over-grid-row
 slug: use-context-menu-over-grid-row
 ticketid: 1114321
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

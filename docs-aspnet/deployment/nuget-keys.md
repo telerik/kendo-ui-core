@@ -2,6 +2,7 @@
 title: Restoring NuGet Packages in CI
 page_title: Restoring NuGet Packages in CI
 description: "Get started with {{ site.product }} and use API Keys to authenticate with the Telerik NuGet server and restore packages in your CI or desktop environment."
+components: ["general"]
 previous_url: /installation/nuget-keys
 slug: nuget_keys
 position: 3

@@ -5,9 +5,9 @@ description: "Learn how to add a Close button to a modal Kendo UI for jQuery Win
 slug: howto_addclosebutton_insidemodalwindows_window
 previous_url: /controls/layout/window/how-to/add-close-button
 tags: telerik, kendo, jquery, window, add, close, button, inside, modal, windows
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} ImageEditor and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["imageeditor"]
 slug: keynav_aspnetcore_imageeditor
 position: 2
 ---

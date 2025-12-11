@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Learn how to group data in the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/grouping
 slug: htmlhelpers_multiselect_grouping_aspnetcore
 position: 6

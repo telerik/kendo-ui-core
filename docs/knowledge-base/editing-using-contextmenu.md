@@ -5,9 +5,9 @@ description: "Learn how to edit the Kendo UI for jQuery Scheduler by using the K
 previous_url: /aspnet/web/scheduler/how-to/editing-using-contextmenu, /controls/scheduling/scheduler/how-to/editing-using-contextmenu, /controls/scheduling/scheduler/how-to/editing/editing-using-contextmenu
 slug: howto_edit_using_kendouicontextmenu_scheduler
 tags: telerik, kendo, jquery, scheduler, edit, with, using, the, contextmenu 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

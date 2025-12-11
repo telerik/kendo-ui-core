@@ -2,6 +2,7 @@
 title: Export
 page_title: Exporting the Map to PDF, SVG, and PNG
 description: "Configure the export functionality of the Telerik UI Map component for {{ site.framework }} and print out its content to PDF, SVG, and PNG formats by using the available configurations of the Kendo UI Drawing graphics library."
+components: ["map"]
 slug: export_map_aspnetcore
 position: 2
 ---

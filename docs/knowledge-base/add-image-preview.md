@@ -5,9 +5,9 @@ description: "Learn how to add an image preview to a file with the Kendo UI for 
 slug: howto_add_image_preview
 previous_url: /controls/editors/upload/how-to/add-image-preview
 tags: telerik, kendo, jquery, upload, add, image, preview, before, uploading, files
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

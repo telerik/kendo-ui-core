@@ -6,6 +6,7 @@ slug: upload-copy-paste-file
 tags: telerik, upload, copy, paste, files
 component: upload
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

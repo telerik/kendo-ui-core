@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery Grid Documentation - Grid Localization
 description: "Get started with the jQuery Grid by Kendo UI and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+components: ["grid"]
 slug: localization_kendoui_grid_widget
 position: 3
 ---

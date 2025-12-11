@@ -5,9 +5,9 @@ description: "Learn how to add a custom Delete confirmation dialog to the ListVi
 slug: add_custom_delete_confirmation_dialog
 previous_url: /controls/data-management/listview/how-to/custom-delete-confirmation
 tags: listview, add, custom, confirmation, dialog
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

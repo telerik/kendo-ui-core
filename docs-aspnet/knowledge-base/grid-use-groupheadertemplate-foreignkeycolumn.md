@@ -7,6 +7,7 @@ slug: howto_usegroupheadertemplate_foreignkeycolumn_gridaspnetmv
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Spreadsheet Documentation - Spreadsheet Overview
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to initialize and configure the component."
+components: ["spreadsheet"]
 slug: overview_spreadsheet_widget
 position: 1
 ---

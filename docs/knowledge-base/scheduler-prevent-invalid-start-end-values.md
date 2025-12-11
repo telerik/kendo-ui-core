@@ -6,7 +6,7 @@ page_title: Prevent invalid start/end date values in the Scheduler popup editor 
 slug: scheduler-start-end-invalid-input
 tags: scheduler, start, end, inputs, readonly, datepickers
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

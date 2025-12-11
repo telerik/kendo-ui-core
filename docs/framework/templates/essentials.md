@@ -2,6 +2,7 @@
 title: Essentials
 page_title: Templates Essentials and Implementation Specifics - Kendo UI Templates
 description: "Learn how to implement the hash template syntax, render raw and HTML-encoded values, and handle external templates and expressions when working with the Kendo UI for jQuery Templates component."
+components: ["general"]
 slug: essentials_templates
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Window component for {{ site.framework }} enables users to select multiple items, supports local and remote data binding, and provides templates for easier customization."
+components: ["window"]
 previous_url: /helpers/html-helpers/window, /helpers/layout/window/overview
 slug: htmlhelpers_window_aspnetcore
 position: 0

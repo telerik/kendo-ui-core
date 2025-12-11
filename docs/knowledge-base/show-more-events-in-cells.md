@@ -5,9 +5,9 @@ description: "Learn how to show more events in view cells in a Kendo UI for jQue
 previous_url: /controls/scheduling/scheduler/how-to/show-more-events-in-cells, /controls/scheduling/scheduler/how-to/appearance/show-more-events-in-cells
 slug: howto_showmoreevents_inviewcells_scheduler
 tags: telerik, kendo, jquery, scheduler, show, more, events, in, view, cells 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

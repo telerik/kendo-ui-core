@@ -2,6 +2,7 @@
 title: Disabled RadioButton
 page_title: Disabled RadioButton
 description: "Enable or disable the Telerik UI RadioButton for {{ site.framework }}."
+components: ["radiobutton"]
 previous_url: /helpers/navigation/radiobutton/disabled-state
 slug: disabledstate_radiobutton_aspnetcore
 position: 4

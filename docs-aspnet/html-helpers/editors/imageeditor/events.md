@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ImageEditor component for {{ site.framework }}."
+components: ["imageeditor"]
 slug: events_imageeditor_aspnetcore
 position: 3
 ---

@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI Tooltip for the Kendo UI TreeMap til
 previous_url: /controls/charts/treemap/how-to/show-treemap-tooltip, /controls/charts/how-to/integration/show-treemap-tooltip
 slug: howto_showtreemaptooltip_treemap
 tags: chart, show, tooltip, in, treemap
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

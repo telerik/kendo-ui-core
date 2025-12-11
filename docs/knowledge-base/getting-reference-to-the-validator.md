@@ -5,9 +5,9 @@ description: "Learn how to get a reference to the built-in Kendo UI Validator by
 previous_url: /controls/scheduling/scheduler/how-to/getting-reference-to-the-validator, /controls/scheduling/scheduler/how-to/validation/getting-reference-to-the-validator
 slug: howto_get_referencetothe_builtin_validator_scheduler
 tags: telerik, kendo, jquery, scheduler, get, a, reference, to, the, builtin, validator 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: treelist-copy-selection
 tags: treelist, allowCopy, selection, copy
 ticketid: 1161545
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

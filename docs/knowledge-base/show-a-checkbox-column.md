@@ -5,9 +5,9 @@ description: "Learn how to show a checkbox column bound to the item model in a K
 slug: howto_showcheckboxcolumn_treelist
 previous_url: /controls/data-management/treelist/how-to/show-a-checkbox-column
 tags: kendo, jquery, treelist, show, a, checkbox, column
-component: treelist
 type: how-to
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

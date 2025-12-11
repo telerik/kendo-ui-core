@@ -7,6 +7,7 @@ slug: progressbar-format-value
 tags: progressbar, format, value, grid, column
 ticketid: 1652206
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

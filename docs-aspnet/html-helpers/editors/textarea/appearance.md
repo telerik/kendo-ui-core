@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI TextArea HtmlHelper for {{ site.framework }}."
+components: ["textarea"]
 slug: textarea_appearance
 position: 2
 ---

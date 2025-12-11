@@ -7,6 +7,7 @@ meta_title: No Data Overlay for Kendo UI for jQuery Stock Chart
 slug: overlay-no-data-message-stock-chart-kendo-ui-jquery
 tags: kendo-ui,jquery,chart,stockchart,no-data-overlay,progress
 res_type: kb
+components: ["stockchart"]
 ticketid: 1643498
 ---
 

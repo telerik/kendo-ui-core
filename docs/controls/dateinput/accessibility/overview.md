@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery DateInput Documentation | DateInput Accessibility
 description: "Get started with the jQuery DateInput by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["dateinput"]
 slug: jquery_dateinput_accessibility
 position: 1
 ---

@@ -5,9 +5,9 @@ description: "Learn how to set the caret position in a Kendo UI Editor component
 previous_url: /controls/editors/editor/how-to/set-caret-position-using-javascript, /controls/editors/editor/how-to/customize/set-caret-position-using-javascript
 slug: howto_set_caret_position_editor
 tags: telerik, kendo, jquery, editor, set, caret, positions
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

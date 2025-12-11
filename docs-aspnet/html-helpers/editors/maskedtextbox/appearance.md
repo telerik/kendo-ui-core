@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI MaskedTextBox for {{ site.framework }}."
+components: ["maskedtextbox"]
 slug: appearance_maskedtextbox
 position: 2
 ---

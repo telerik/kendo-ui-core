@@ -6,8 +6,8 @@ page_title: Add and Remove Columns Dynamically and Persist Their Settings - Kend
 slug: grid-dynamically-add-remove-columns-persist-settings
 tags: grid, dynamically, columns, add, persist, settings
 res_type: kb
+components: ["grid"]
 ticketid: 1593817
-component: grid
 ---
 
 ## Environment

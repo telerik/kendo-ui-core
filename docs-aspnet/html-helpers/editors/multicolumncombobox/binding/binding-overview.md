@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI MultiColumnComboBox Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} MultiColumnComboBox using various data binding approaches."
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/binding/overview
 slug: htmlhelpers_multicolumncombobox_databinding_aspnetcore
 position: 1

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Dialog component by following a complete step-by-step tutorial."
+components: ["dialog"]
 slug: getting_started_dialog
 position: 1
 ---

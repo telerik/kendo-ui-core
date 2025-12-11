@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: Excel Export Troubleshooting
 description: "Learn about the solutions of common issues that may occur while exporting the Grid to Excel in ASP.NET MVC applications."
+components: ["grid"]
 slug: excelissues_gridhelper_aspnetmvc
 position: 2
 ---

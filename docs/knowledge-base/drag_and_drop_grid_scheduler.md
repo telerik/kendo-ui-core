@@ -5,9 +5,9 @@ description: "Learn how to drag and drop items between Kendo UI Grid and Kendo U
 previous_url: /controls/scheduling/scheduler/how-to/drag_and_drop_grid_scheduler, /controls/scheduling/scheduler/how-to/interaction/drag_and_drop_grid_scheduler
 slug: drag_and_drop_between_grid_and_scheduler
 tags: telerik, kendo, jquery, scheduler, drag, ad, drop, between, the, grid 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

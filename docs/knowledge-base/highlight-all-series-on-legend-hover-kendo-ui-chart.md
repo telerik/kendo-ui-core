@@ -6,6 +6,7 @@ page_title: How to Highlight All Series in Grouped and Stacked Bar Chart on Lege
 slug: highlight-all-series-on-legend-hover-kendo-ui-chart
 tags: kendo ui, chart, bar chart, legend, hover, highlight, grouped, stacked
 res_type: kb
+components: ["chart"]
 ticketid: 723491
 ---
 

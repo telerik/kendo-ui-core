@@ -2,6 +2,7 @@
 title:  Ajax Binding
 page_title: Ajax Data Binding
 description: "Learn how to implement Ajax Binding with Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: htmlhelpers_panelbar_ajaxbinding_aspnetcore
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Popover Documentation | Popover Accessibility
 description: "Get started with the {{ site.product }} Popover and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["popover"]
 slug: htmlhelpers_popover_accessibility
 position: 1
 ---

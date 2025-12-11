@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} TreeView and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["treeview"]
 slug: keynav_aspnetcore_treeview
 position: 2
 ---

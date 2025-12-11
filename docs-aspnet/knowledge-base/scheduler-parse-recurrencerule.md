@@ -6,6 +6,7 @@ page_title: Parse Scheduler RecurrenceRule with ical.net
 slug: scheduler-parse-recurrencerule
 tags: aspnet, core, dotnet-core, scheduler, parse, recurrence, recurrencerule, ical
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

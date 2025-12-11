@@ -2,6 +2,7 @@
 title: Customization
 page_title: Customization - Less Themes
 description: "Learn how to customize the Kendo UI Less themes."
+components: ["general"]
 slug: less_themes_customization_kendoui
 position: 2
 ---

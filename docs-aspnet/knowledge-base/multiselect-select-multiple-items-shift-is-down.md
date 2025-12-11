@@ -6,6 +6,7 @@ page_title: Selecting MultiSelect Items When Holding Shift Button
 slug: multiselect-select-multiple-items-shift-is-down
 tags: multiselect, select, many, items, when, shift, key, button, hold
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

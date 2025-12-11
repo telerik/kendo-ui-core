@@ -7,7 +7,7 @@ slug: group-columns-which-are-bound-to-object
 tags: grid, group, custom
 ticketid: 1116551
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

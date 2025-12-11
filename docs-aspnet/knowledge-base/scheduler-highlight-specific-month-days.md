@@ -6,6 +6,7 @@ page_title: Dynamically Highlighting Specified Dates within the Month View of th
 slug: scheduler-highlight-specific-month-days
 tags: scheduler, highlight, dates, month, view, slots, dynamically, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

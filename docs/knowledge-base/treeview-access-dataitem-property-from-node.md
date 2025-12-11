@@ -7,6 +7,7 @@ slug: treeview-access-dataitem-property-from-node
 tags: treeview, access, dataitem, data, item, property, node, id
 ticketid: 1158103
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

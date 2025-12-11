@@ -2,6 +2,7 @@
 title: Event Handlers
 page_title: Event Handling | AngularJS Directives
 description: "Learn more about handling Kendo UI widget events in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#setting-event-handlers
 slug: angularjs_widget_events
 position: 4

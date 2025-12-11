@@ -8,6 +8,7 @@ position:
 tags: change, icon, datepicker
 ticketid: 1434944
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

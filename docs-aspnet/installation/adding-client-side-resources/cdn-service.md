@@ -2,6 +2,7 @@
 title: Using CDN
 page_title: Using CDN
 description: "Get started with {{ site.product }} and install the helpers by using the Telerik UI CDN services."
+components: ["general"]
 previous_url: /getting-started/installation/cdn-service, /installation/cdn-service, /installation-mvc/adding-client-side-resources/cdn-service
 slug: cdnservices_core
 position: 2

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Grid component by following a complete step-by-step tutorial."
+components: ["grid"]
 slug: grid_aspnetcore_get_started
 position: 1
 ---

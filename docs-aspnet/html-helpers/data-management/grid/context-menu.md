@@ -2,6 +2,7 @@
 title: Context Menu
 page_title: Context Menu
 description: "Learn how to enable and configure the Context Menu of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: grid_aspnetcore_contextmenu
 position: 16
 ---

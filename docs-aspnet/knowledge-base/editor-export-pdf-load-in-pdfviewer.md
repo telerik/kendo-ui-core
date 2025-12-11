@@ -6,6 +6,7 @@ page_title: Export PDF file from an Editor and Load it into a PDFViewer
 slug: editor-export-pdf-load-in-pdfviewer
 tags: editor, pdfviewer, export, pdf
 res_type: kb
+components: ["general"]
 ticketid: 1581592
 component: editor, pdfviewer
 ---

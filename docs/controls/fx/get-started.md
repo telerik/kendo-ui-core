@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery FX Documentation - Getting Started with the FX
 description: "Get started with the jQuery FX by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["effects"]
 slug: getting_started_kendoui_fx_component
 position: 2
 ---

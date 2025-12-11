@@ -6,6 +6,7 @@ slug: handling-license-file-name-changes
 tags: license,key,file,name,2025,change
 published: True
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

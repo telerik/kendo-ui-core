@@ -6,6 +6,7 @@ page_title: Create Copies of Grid Rows
 slug: grid-create-a-copy-of-the-row
 tags: grid, copy, row
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

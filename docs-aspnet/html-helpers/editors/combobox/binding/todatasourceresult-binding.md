@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding
 description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 previous_url: /helpers/editors/combobox/binding/custom-binding
 slug: htmlhelpers_combobox_todatasourceresultbinding_aspnetcore
 position: 4

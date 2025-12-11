@@ -7,6 +7,7 @@ slug: treelist-drag-and-scroll-mobile
 tags: treelist, android, ios, mobile, drag, drop, scroll
 ticketid: 1179396
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

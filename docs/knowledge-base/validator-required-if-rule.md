@@ -6,6 +6,7 @@ slug: validator-required-if-rule
 tags: validator, required, required if, required-if, validation, conditional
 ticketid: 1384728
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

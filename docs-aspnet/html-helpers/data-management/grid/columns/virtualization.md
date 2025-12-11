@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Column Virtualization
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable its column virtualization."
+components: ["grid"]
 slug: columnvirtualization_aspnet_grid
 ---
 

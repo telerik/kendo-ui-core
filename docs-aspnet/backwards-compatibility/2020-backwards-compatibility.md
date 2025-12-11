@@ -2,6 +2,7 @@
 title: 2020 Releases
 page_title: 2020 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2020."
+components: ["general"]
 slug: breakingchanges_2020
 position: 6
 ---

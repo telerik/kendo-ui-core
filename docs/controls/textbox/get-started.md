@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TextBox Documentation - Getting Started with the TextBox
 description: "Get started with the jQuery TextBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["textbox"]
 slug: getting_started_kendoui_textbox_widget
 position: 1
 ---

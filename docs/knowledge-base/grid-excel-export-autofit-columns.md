@@ -7,7 +7,7 @@ slug: grid-excel-export-autofit-columns
 tags: excel, export, grid, autofit, autowidth, columns, kendo
 ticketid: 1137653
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

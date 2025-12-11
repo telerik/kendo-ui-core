@@ -6,7 +6,7 @@ page_title: Show Spinning Icon - Kendo UI Button for jQuery
 slug: show-spinning-icon-in-button
 tags: icon, spinning, button
 res_type: kb
-component: button
+components: ["button"]
 ---
 
 ## Environment

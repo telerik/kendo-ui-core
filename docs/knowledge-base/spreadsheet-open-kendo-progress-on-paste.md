@@ -7,6 +7,7 @@ slug: spreadsheet-open-kendo-progress-on-paste
 tags: kendo, kendoui, spreadsheet, paste, progress, loader, loading
 ticketid: 1142807
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

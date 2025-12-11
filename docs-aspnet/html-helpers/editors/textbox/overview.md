@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI TextBox component for {{ site.framework }} enables user input and its appearance matches the general Telerik theme of the page."
+components: ["textbox"]
 slug: htmlhelpers_overview_textbox
 position: 0
 ---

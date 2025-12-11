@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Button component for {{ site.framework }} in a Razor Page."
+components: ["menu"]
 slug: htmlhelpers_contextmenu_razorpage_aspnetcore
 position: 3
 ---

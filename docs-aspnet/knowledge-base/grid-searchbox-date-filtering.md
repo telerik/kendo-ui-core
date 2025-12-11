@@ -6,6 +6,7 @@ page_title: Filter the Grid Data by a DateTime Field with the Search Tool
 slug: grid-searchbox-date-filtering
 tags: grid, search, box, date, time, field, filter, data, schema, parse
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

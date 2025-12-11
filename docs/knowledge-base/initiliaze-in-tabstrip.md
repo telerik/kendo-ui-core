@@ -5,9 +5,9 @@ description: "Learn how to initialize the jQuery Grid by Kendo UI inside a TabSt
 previous_url: /controls/data-management/grid/how-to/hidden/initiliaze-in-tabstrip
 slug: howto_initializegridintabstrip_grid
 tags: grid, intialize, tabstrip, resize, dimensions, container
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

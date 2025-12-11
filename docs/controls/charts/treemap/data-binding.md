@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery TreeMap Documentation - Data Binding
 description: "Get started with the jQuery TreeMap by Kendo UI and learn how to bind it to data."
+components: ["chart"]
 slug: databinding_treemap_widget
 position: 2
 ---

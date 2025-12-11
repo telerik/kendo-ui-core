@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn about the globalization options it supports."
+components: ["filter"]
 previous_url: /helpers/data-management/filter/globalization/overview
 slug: globalization_filter_aspnetcore
 position: 1

@@ -7,6 +7,7 @@ slug: grid-sort-multi-check-filter
 tags: grid, filter, multi, multi-filter, multi-checkbox, checkbox, not sorted
 ticketid: 1579381
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

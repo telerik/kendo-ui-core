@@ -2,6 +2,7 @@
 title: Overview
 page_title: Stepper Documentation | Stepper Accessibility
 description: "Get started with the {{ site.product }} Stepper and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["stepper"]
 slug: htmlhelpers_stepper_accessibility
 position: 1
 ---

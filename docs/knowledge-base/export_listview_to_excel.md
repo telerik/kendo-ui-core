@@ -4,10 +4,10 @@ page_title: Export ListView to Excel - Kendo UI for jQuery ListView
 description: "Learn how to export the Kendo UI ListView for jQuery to Excel."
 slug: export_listview_to_excel
 tags: listview, export, excel
-component: listview
 type: how-to
 ticketid: 1619053
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Set Column Width After Data Binding | Kendo UI Spreadsheet
 slug: spreadsheet-set-column-width-after-data-binding
 tags: kendo-ui, spreadsheet, column-width, data-binding
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

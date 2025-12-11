@@ -6,6 +6,7 @@ page_title: Prevent User Input in a {{ site.product }} Wizard Step
 slug: wizard-readonly-inputs
 tags: wizard, readonly, disable, step, prevent, input, review, overlay
 res_type: kb
+components: ["general"]
 component: wizard
 ---
 

@@ -6,6 +6,7 @@ page_title: Showing a Validation Summary in a Dialog
 slug: dialog-validation-summary
 tags: mvc, core, dialog, validation, summary
 res_type: kb
+components: ["general"]
 component: dialog
 ---
 

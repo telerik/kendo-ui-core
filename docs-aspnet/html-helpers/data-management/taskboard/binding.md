@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and bind the component to local or remote data."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_databinding
 position: 2
 ---

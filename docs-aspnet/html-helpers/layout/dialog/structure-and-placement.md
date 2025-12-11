@@ -2,6 +2,7 @@
 title: HTML Structure and DOM Placement
 page_title: HTML Structure and DOM Placement
 description: "Learn about the HTML Structure and DOM Placement of the Telerik UI Dialog component for {{ site.framework }}."
+components: ["dialog"]
 slug: structure_and_placement_dialoghelper_aspnetcore
 position: 2
 ---

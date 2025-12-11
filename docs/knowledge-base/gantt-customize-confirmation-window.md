@@ -7,7 +7,7 @@ slug: gantt-customize-confirmation-window
 tags: gantt, custom, delete, window, dialog
 ticketid: 1528478
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

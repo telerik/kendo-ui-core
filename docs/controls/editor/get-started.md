@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Editor Documentation - Getting Started with the jQuery Editor
 description: "Get started with the jQuery Editor by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["editor"]
 slug: getting_started_kendoui_editor_widget
 position: 2
 ---

@@ -4,9 +4,9 @@ page_title: Create a ScrollView-based Canvas with Bootstrap Cards - Kendo UI Scr
 description: "Learn how to create a canvas with Bootstrap cards in the Kendo UI ScrollView for jQuery."
 slug: howto_create_canvas_scrollview
 tags: canvas, cards, scrollview
-component: scrollview
 type: how-to
 res_type: kb
+components: ["scrollview"]
 ---
 
 ## Environment

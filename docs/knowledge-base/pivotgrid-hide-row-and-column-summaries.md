@@ -7,6 +7,7 @@ slug: pivotgrid-hide-row-and-column-summaries
 tags: pivot, pivotgrid, hide, summary, column, row, databound, remove, footer, last column, last row
 ticketid: 1413666
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

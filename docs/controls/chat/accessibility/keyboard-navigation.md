@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Chat Documentation - Keyboard Navigation
 description: "Get started with the Kendo UI for jQuery Chat and learn about the component keyboard navigation functionality."
+components: ["chat"]
 slug: keynav_kendoui_chat
 position: 2
 ---

@@ -7,6 +7,7 @@ slug: dropdownlist-filter-child-collection-cascading
 tags: dropdownlist, filter, child, collection, cascading, datavaluefield, parent, datafield
 ticketid: 1412636
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

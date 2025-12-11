@@ -7,6 +7,7 @@ slug: chart-persist-series-visibility-after-calling-setoptions
 tags: chart, series, visible, visibility, persist, setoptions, options, togglevisibility, toggle
 ticketid: 1549189
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

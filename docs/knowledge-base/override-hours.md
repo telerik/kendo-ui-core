@@ -5,9 +5,9 @@ description: "Learn how to override hours in the popup of the Kendo UI DateTimeP
 slug: howto_override_hours_inpopup_datetimepicker
 previous_url: /controls/editors/datetimepicker/how-to/override-hours
 tags: telerik, kendo, jquery, datetimepicker, override, hours, in, popup
-component: datetimepicker
 type: how-to
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ---
 
 ## Environment

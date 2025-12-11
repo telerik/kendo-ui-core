@@ -2,6 +2,7 @@
 title: AI Integration
 page_title: Telerik UI Chat Documentation - AI Integration
 description: "Connect the Telerik UI for {{ site.framework }} Chat to a streaming AI chat service to create intelligent conversational experiences."
+components: ["chat"]
 slug: htmlhelpers_ai_integration_chat
 position: 3
 ---

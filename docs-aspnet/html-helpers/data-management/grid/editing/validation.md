@@ -2,6 +2,7 @@
 title: Validation
 page_title: Grid Validation
 description: "Built-in validation in the {{ site.product }} Grid and how to customize the validation behavior."
+components: ["grid"]
 slug: htmlhelpers_grid_validation
 position: 5
 ---

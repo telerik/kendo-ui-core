@@ -2,6 +2,7 @@
 title: Selection Mode
 page_title: jQuery ChipList Documentation - ChipList Selection Mode
 description: "Learn how to set different selection modes for the Kendo UI for jQuery ChipList component."
+components: ["chiplist"]
 slug: selection_mode_kendoui_chiplist_widget
 position: 3
 ---

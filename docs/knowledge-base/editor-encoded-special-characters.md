@@ -7,7 +7,7 @@ slug: editor-encoded-special-characters
 tags: editor, encoded, special, characters, value, decoded
 ticketid: 1141113
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

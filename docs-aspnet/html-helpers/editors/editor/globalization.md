@@ -2,6 +2,7 @@
 title: Globalization
 page_title: Globalization
 description: "Learn about the globalization options of the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_globalization_aspnetcore
 position: 16
 ---

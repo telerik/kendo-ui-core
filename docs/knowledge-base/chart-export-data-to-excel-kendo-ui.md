@@ -6,6 +6,7 @@ page_title: Exporting Chart Data to Excel - Kendo UI Chart
 slug: chart-export-data-to-excel-kendo-ui
 tags: kendo ui, chart, export, excel
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

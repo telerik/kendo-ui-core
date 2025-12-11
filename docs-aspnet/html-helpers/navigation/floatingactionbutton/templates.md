@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn the basics when working with the Telerik UI FloatingActionButton component for {{ site.framework }}."
+components: ["floatingactionbutton"]
 slug: htmlhelpers_templates_floatingactionbutton_aspnetcore
 position: 4
 ---

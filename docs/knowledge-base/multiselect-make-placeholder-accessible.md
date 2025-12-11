@@ -6,7 +6,7 @@ page_title: Make MultiSelect Placeholder Accessible - Kendo UI MultiSelect for j
 slug: multiselect-make-placeholder-accessible
 tags: multiselect, placeholder, accessible, screen, readers
 res_type: kb
-component: multiselect
+components: ["multiselect"]
 ---
 
 ## Environment

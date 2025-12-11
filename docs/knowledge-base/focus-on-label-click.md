@@ -5,9 +5,9 @@ description: "Learn how to focus the Kendo UI NumericTextBox widget when the lab
 slug: howto_focus_widgeton_label_click_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/focus-on-label-click
 tags: telerik, kendo, jquery, numerictextbox, focus, on, label, click
-component: numerictextbox
 type: how-to
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

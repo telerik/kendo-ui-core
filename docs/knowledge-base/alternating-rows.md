@@ -5,9 +5,9 @@ description: "Learn how to configure the background color for alternating rows i
 previous_url: /controls/data-management/grid/how-to/excel/alternating-rows
 slug: howto_configure_color_alternating_rows_grid
 tags: grid, color, alternating, rows
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

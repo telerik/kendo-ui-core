@@ -7,6 +7,7 @@ meta_title: Add Week Numbers to Scheduler Timeline and Month Views in Kendo UI f
 slug: show-week-number-scheduler-timeline-month-views
 tags: scheduler, kendo-ui-for-jquery, timeline-view, month-view, week-number, customization
 res_type: kb
+components: ["scheduler"]
 ticketid: 990097
 ---
 

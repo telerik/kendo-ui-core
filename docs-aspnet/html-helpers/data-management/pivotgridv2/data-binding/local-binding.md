@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Local Binding
 description: "Get started with the PivotGridV2 for {{ site.framework }} and learn how to bind it to a local data."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_localbinding
 position: 4
 ---

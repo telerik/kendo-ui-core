@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to how to use the default views and create custom views in the widget."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_views_aspnetcore
 position: 3
 ---

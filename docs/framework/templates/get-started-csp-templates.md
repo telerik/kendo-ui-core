@@ -2,6 +2,7 @@
 title: Getting Started with CSP Templates
 page_title: Getting Started with Content Security Policy (CSP) Templates - Kendo UI Templates
 description: "Learn about the Content Security Policy (CSP) templates and how to implement and use them when working with Kendo UI for jQuery."
+components: ["general"]
 slug: csp_templates
 position: 1
 ---

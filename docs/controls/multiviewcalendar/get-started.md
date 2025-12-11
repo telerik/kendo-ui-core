@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MultiViewCalendar Documentation - Getting Started with the MultiViewCalendar
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["multiviewcalendar"]
 slug: getting_started_kendoui_multiviewcalendar_component
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI for {{ site.framework }} FileManager component and learn how to create, initialize, and enable the widget."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_overview
 position: 0
 ---

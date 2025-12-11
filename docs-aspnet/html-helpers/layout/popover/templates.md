@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the content in the Telerik UI PopOver component for {{ site.framework }}."
+components: ["popover"]
 slug: htmlhelpers_templates_popover
 position: 2
 ---

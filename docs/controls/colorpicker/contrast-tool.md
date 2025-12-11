@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: ColorPicker Documentation - ColorPicker Contrast Tool
 description: "Check out the Contrast Tool in the ColorPicker."
+components: ["colorpicker"]
 slug: contrast_tool_kendoui_colorpicker_widget
 position: 5
 ---

@@ -2,19 +2,16 @@
 title:  Razor Page
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI for {{ site.framework }} FileManager component for remote binding in a Razor Page scenario using CRUD Operations."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_razorpage_aspnetcore
-position: 1
+position: 3
 ---
 
 # FileManager in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI FileManager for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI FileManager for {{ site.framework }} in Razor Pages applications.
-
-This article describes how to configure the FileManager component in a Razor Pages scenario.
-
-For the complete project, refer to the [FileManager in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/FileManager/FileManagerIndex.cshtml).
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
 ## Getting Started
 
@@ -32,22 +29,22 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
                 {
                     ds.Read(operation => operation
                     .Type(HttpVerbs.Post)
-                    .Url("/Index?handler=FileManagerRead")
+                    .Url(Url.Page("Index", "FileManagerRead"))
                     .Data("forgeryToken")
                 );
                 ds.Destroy(operation => operation
                     .Type(HttpVerbs.Post)
-                    .Url("/Index?handler=FileManagerDestroy")
+                    .Url(Url.Page("Index", "FileManagerDestroy"))
                     .Data("forgeryToken")
                 );
                 ds.Create(operation => operation
                     .Type(HttpVerbs.Post)
-                    .Url("/Index?handler=FileManagerCreate")
+                    .Url(Url.Page("Index", "FileManagerCreate"))
                     .Data("forgeryToken")
                 );
                 ds.Update(operation => operation
                     .Type(HttpVerbs.Post)
-                    .Url("/Index?handler=FileManagerUpdate")
+                    .Url(Url.Page("Index", "FileManagerUpdate"))
                     .Data("forgeryToken")
                 );
             })
@@ -58,13 +55,13 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
         @page
         @model IndexModel
 
-        <kendo-filemanager name="filemanager" upload-url="/Index?handler=FileManagerUpload">
+        <kendo-filemanager name="filemanager" upload-url="@Url.Page("Index", "FileManagerUpload")">
             <filemanager-datasource>
                 <transport>
-                    <read url="/Index?handler=FileManagerRead" data="forgeryToken" type="POST" />
-                    <destroy url="/Index?handler=FileManagerDestroy" data="forgeryToken" type="POST" />
-                    <create url="/Index?handler=FileManagerCreate" data="forgeryToken" type="POST" />
-                    <update url="/Index?handler=FileManagerUpdate" data="forgeryToken" type="POST" />
+                    <read url="@Url.Page("Index", "FileManagerRead")" data="forgeryToken" type="POST" />
+                    <destroy url="@Url.Page("Index", "FileManagerDestroy")" data="forgeryToken" type="POST" />
+                    <create url="@Url.Page("Index", "FileManagerCreate")" data="forgeryToken" type="POST" />
+                    <update url="@Url.Page("Index", "FileManagerUpdate")" data="forgeryToken" type="POST" />
                 </transport>
             </filemanager-datasource>
         </kendo-filemanager>
@@ -102,7 +99,8 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
     ```C# Index.cshtml.cs
-
+    public class IndexModel : PageModel
+    {
         public IndexModel(IWebHostEnvironment hostingEnvironment)
         {
             HostingEnvironment = hostingEnvironment;
@@ -179,7 +177,10 @@ To configure the CRUD operations in the FileManager within a Razor Pages applica
             newEntry = RenameEntry(entry);
             return new JsonResult(VirtualizePath(newEntry));
         }
+    }
     ```
+
+For the complete project, refer to the [FileManager in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/FileManager/FileManagerIndex.cshtml).
 
 ## See Also
 

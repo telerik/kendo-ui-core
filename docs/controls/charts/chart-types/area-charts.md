@@ -2,6 +2,7 @@
 title: Area Charts
 page_title: jQuery Chart Documentation - Area Charts
 description: "Learn how to define Kendo UI Area Charts."
+components: ["chart"]
 slug: areacharts_widget
 ---
 

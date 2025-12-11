@@ -5,9 +5,9 @@ description: "Learn how to create custom editor in the detail template of the Ke
 previous_url: /controls/data-management/grid/how-to/Templates/detail-template-editor
 slug: howto_create_custom_editorin_detail_template_grid
 tags: grid, create, custom, editor, detail, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to use dates inside the row template of the Kendo UI Gri
 previous_url: /controls/data-management/grid/how-to/Templates/row-template-using-dates
 slug: howto_use_dates_inside_row_template_grid
 tags: use, dates, inside, row, template, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 previous_url: /helpers/html-helpers/spreadsheet, /helpers/data-management/spreadsheet/overview
 slug: htmlhelpers_spreadsheet_aspnetcore
 position: 0

@@ -7,7 +7,7 @@ slug: drawing-draw-signature-and-export-svg
 tags: kendo, kendo-ui, drawing, path, geometry, svg, signature
 ticketid: 1144186
 res_type: kb
-component: drawing
+components: ["drawing"]
 ---
 
 ## Environment

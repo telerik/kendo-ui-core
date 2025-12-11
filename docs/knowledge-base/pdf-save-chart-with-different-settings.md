@@ -5,9 +5,9 @@ description: "Learn how to apply changes, visible only in the exported PDF."
 previous_url: /controls/charts/how-to/pdf-save-chart-with-different-settings, /charts/how-to/export/pdf-save-chart-with-different-settings
 slug: howto_apply_settings_for_PDF_only_charts
 tags: chart, apply, settings, for, exported, pdf, only
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

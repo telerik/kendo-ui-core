@@ -4,10 +4,10 @@ page_title: MultiSelect for Row Filtering with Menu Multi Checkbox Filtering - K
 description: "Learn how to set a Kendo UI MultiSelect for row filtering of the Kendo UI Grid and Make it Work in Combination with Menu Multi Checkbox Filtering."
 slug: howto_use_multiselect_forrow_filtering__incombination_withmenu_chechbox_filter_grid
 tags: use, multiselect, grid, row, filtering, menu, checkbox
-component: grid
 type: how-to
 ticketid: 1544503
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

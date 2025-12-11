@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ColorPalette Documentation - Keyboard Navigation
 description: "Get started with the jQuery ColorPalette by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["colorpalette"]
 slug: keynav_colorpalette_jquery
 position: 2
 ---

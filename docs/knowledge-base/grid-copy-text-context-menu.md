@@ -6,7 +6,7 @@ page_title: Copy Text in Cells with Context Menu - Kendo UI for jQuery Data Grid
 slug: grid-copy-text-context-menu
 tags: kendoui, kendo, grid, column, content, copy, menu, selection
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

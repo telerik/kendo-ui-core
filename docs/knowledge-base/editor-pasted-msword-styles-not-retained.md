@@ -6,7 +6,7 @@ slug: editor_msword_styles_not_retained
 tags: telerik, progress, kendoui, jquery, editor, pasted, msword, styles, not, retained 
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

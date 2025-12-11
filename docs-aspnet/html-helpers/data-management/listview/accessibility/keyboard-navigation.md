@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable keyboard navigation."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_navigation
 position: 6
 ---

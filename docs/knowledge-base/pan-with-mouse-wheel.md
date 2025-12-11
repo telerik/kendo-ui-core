@@ -5,9 +5,9 @@ description: "Learn how to pan the Kendo UI Diagram with the mouse wheel."
 slug: howto_pan_with_mouse_wheel
 previous_url: /controls/diagrams-and-maps/diagram/how-to/pan-with-mouse-wheel
 tags: kendo, jquery, diagram, pan, with, mouse, wheel
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

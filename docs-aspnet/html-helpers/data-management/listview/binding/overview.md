@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI ListView Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} ListView using various data binding approaches."
+components: ["listview"]
 slug: htmlhelpers_databinding_overview_listview
 position: 0
 ---

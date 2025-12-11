@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Badge component for {{ site.framework }}."
+components: ["badge"]
 slug: overview_badgehelper_aspnetcore
 position: 0
 ---

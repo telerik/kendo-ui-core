@@ -1,6 +1,7 @@
 ---
 title: NuGet Source
 description: "Learn how to handle various issues that may occur when you work with the {{ site.product }} library and the NuGet installation approach."
+components: ["general"]
 page_title: Troubleshooting Telerik NuGet Feed Issues
 slug: troubleshooting_telerik_nuget
 tags: telerik, nuget, source, core, mvc, troubleshooting, installation

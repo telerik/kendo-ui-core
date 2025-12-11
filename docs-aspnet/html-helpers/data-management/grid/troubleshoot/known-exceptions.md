@@ -2,6 +2,7 @@
 title: Known Exceptions
 page_title: Known Exceptions Troubleshooting
 description: "Learn about the known exceptions you might come across while working with Kendo UI Grid for ASP.NET MVC."
+components: ["grid"]
 slug: knownexceptions_gridhelper_aspnetmvc
 position: 3
 ---

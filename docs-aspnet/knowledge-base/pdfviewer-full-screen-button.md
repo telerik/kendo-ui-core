@@ -6,6 +6,7 @@ page_title: Full Screen Button in PDFViewer
 slug: pdfviewer-full-screen-button
 tags: pdfviewer, full screen, button, open, file
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

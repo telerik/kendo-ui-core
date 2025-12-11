@@ -7,7 +7,7 @@ slug: dropdownlist-filter-multiple-properties
 tags: dropdownlist
 ticketid: 1138305
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ActionSheet Documentation - Keyboard Navigation
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["actionsheet"]
 slug: keynav_actionsheet_jquery
 position: 2
 ---

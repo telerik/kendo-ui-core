@@ -6,6 +6,7 @@ page_title: Color Alternating Rows of Excel Export
 slug: grid-export-color-alternating-rows
 tags: grid, export, excel, color, alternating, rows
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

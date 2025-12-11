@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: Editor PDF Export
 description: "Learn about the export capabilities of the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_pfd_export_aspnetcore
 position: 14
 ---

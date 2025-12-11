@@ -2,6 +2,7 @@
 title: Action Buttons
 page_title: ActionSheet Documentation - Action Buttons
 description: "Learn how to control the Action Buttons alignment and orientation in the Telerik UI ActionSheet component for {{ site.framework }}."
+components: ["actionsheet"]
 slug: htmlhelpers_actionbuttons_actionsheet
 position: 3
 ---

@@ -6,7 +6,7 @@ page_title: Filter Menu Items in AngularJS - Kendo UI Menu for jQuery
 slug: menu-angularjs-filter-items
 tags: menu, angularjs, filter, items
 res_type: kb
-component: menu
+components: ["menu"]
 ---
 
 ## Environment

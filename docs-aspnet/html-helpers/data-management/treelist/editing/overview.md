@@ -2,6 +2,7 @@
 title: Overview
 page_title: Editing Overview
 description: "Learn how to configure the Telerik UI TreeList component for {{ site.framework }} and enable CRUD operations."
+components: ["treelist"]
 previous_url: /helpers/data-management/treelist/editing
 slug: editing_aspnetcore_treelist_helper
 position: 1

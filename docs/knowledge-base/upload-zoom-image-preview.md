@@ -4,9 +4,9 @@ page_title: Open the Preview of the Images in External Dialog on Click - jQuery 
 description: "Learn how to open the image preview in external dialog on click in Kendo UI for jQuery Upload component."
 slug: hupload-zoom-image-preview
 tags: upload, image, preview, zoom, dialog, window
-component: upload
 type: how-to
 res_type: kb
+components: ["upload", "window"]
 ---
 
 ## Environment

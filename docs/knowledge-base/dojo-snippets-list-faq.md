@@ -5,6 +5,7 @@ description: "What happened with the Telerik Dojo accounts?"
 slug: dojo_snippets_list
 tags: dojo, faq, account, accounts, snippet, snippets, list
 res_type: kb
+components: ["general"]
 ---
 
 ## Description

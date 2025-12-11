@@ -7,6 +7,7 @@ slug: grid-popup-editing-show-validation-summary
 tags: grid, popup, editing, validation, tooltip, summary, list, instead, remove
 ticketid: 1411276
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

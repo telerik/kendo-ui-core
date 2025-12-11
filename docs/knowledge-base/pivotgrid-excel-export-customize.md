@@ -7,6 +7,7 @@ slug: pivotgrid-excel-export-customize
 tags: pivot, pivotgrid, excel, export, custom, cells, border, background, align
 ticketid: 1146696
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

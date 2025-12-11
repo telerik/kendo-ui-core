@@ -6,6 +6,7 @@ page_title: Sending Additional Form Data in the Grid
 slug: grid-send-form-data
 tags: grid, form, read, fetch, send, additional, data, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

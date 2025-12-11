@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn how to implement its editing functionality."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_editing
 position: 3
 ---

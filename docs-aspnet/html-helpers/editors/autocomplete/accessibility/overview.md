@@ -2,6 +2,7 @@
 title: Overview
 page_title: AutoComplete Documentation | AutoComplete Accessibility
 description: "Get started with the {{ site.product }} AutoComplete and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["autocomplete"]
 slug: htmlhelpers_autocomplete_accessibility
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: PivotConfigurator
 page_title: PivotConfigurator Overview
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to create and configure the Telerik UI PivotGrid Configurator."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_configurator
 position: 4
 ---

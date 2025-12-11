@@ -2,6 +2,7 @@
 title: No Data Template
 page_title: No Data Template
 description: "Learn how to use the No Data Template of the Kendo UI for jQuery Chart."
+components: ["chart"]
 slug: kendo_charts_no_data_template
 position: 8
 ---

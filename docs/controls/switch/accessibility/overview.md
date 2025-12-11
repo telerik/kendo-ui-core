@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Switch Documentation | Switch Accessibility
 description: "Get started with the jQuery Switch by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["switch"]
 slug: jquery_switch_accessibility
 position: 1
 ---

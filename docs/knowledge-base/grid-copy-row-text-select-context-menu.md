@@ -7,6 +7,7 @@ slug: grid-copy-row-text-select-context-menu
 tags: grid, copy, row, text, select, context, menu
 ticketid: 1407108
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

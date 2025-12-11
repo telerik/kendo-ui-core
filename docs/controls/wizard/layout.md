@@ -2,6 +2,7 @@
 title: Layout
 page_title: jQuery Wizard Documentation - Wizard Layout
 description: "Get started with the jQuery Wizard by Kendo UI and manage its appearance."
+components: ["wizard"]
 slug: layout_wizard_widget
 position: 4
 ---

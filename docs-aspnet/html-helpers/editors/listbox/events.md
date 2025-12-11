@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ListBox component for {{ site.framework }}."
+components: ["listbox"]
 slug: events_listbox
 position: 6
 ---

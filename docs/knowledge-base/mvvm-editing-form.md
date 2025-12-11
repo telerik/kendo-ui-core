@@ -5,9 +5,9 @@ description: "Learn how to edit data in a Kendo UI for jQuery Window by using MV
 previous_url: /web/window/how-to/mvvm-editing-form, /controls/layout/window/how-to/MVVM/mvvm-editing-form
 slug: howto_usemvvmbinding_forwindowdataediting_mvvm_window
 tags: telerik, kendo, jquery, window, use, mvvm, for, data, editing
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

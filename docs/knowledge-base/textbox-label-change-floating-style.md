@@ -7,6 +7,7 @@ slug: textbox-label-change-floating-style
 tags: textbox, floating, style, before, after, empty, filled
 ticketid: 1498326
 res_type: kb
+components: ["textbox"]
 ---
 
 ## Environment

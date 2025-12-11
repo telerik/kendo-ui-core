@@ -2,6 +2,7 @@
 title: Adding New Items
 page_title: jQuery DropDownList Documentation - Adding New Items
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to add new items."
+components: ["dropdownlist"]
 slug: newitems_dropdownlist_widget
 position: 7
 ---

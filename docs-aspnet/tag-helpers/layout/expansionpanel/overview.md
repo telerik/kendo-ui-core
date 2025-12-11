@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ExpansionPanel TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["expansionpanel"]
 previous_url: /helpers/expansionpanel, /helpers/tag-helpers/expansionpanel
 slug: taghelpers_expansionpanel_aspnetcore
 position: 1

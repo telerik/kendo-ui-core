@@ -7,6 +7,7 @@ slug: validate-compare-attribute
 tags: form, validate, compare, attribute, validator, client, unobtrusive
 ticketid: 1584229
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

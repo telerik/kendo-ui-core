@@ -2,6 +2,7 @@
 title: DateInput Integration
 page_title: DateInput Integration
 description: "Get started with the Telerik UI DateTimePicker for ASP.NET and learn how to integrate it with the Telerik UI DateInput."
+components: ["datetimepicker"]
 slug: dateinputintegration_datetimepicker_aspnetcore
 position: 9
 ---

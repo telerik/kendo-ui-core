@@ -2,6 +2,7 @@
 title: Layers
 page_title: jQuery Map Documentation - Layers
 description: "Get started with the jQuery Map by Kendo UI and configure its tile layers."
+components: ["map"]
 slug: maplayers_mapwidget
 position: 2
 ---

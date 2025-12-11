@@ -2,6 +2,7 @@
 title: Overview
 page_title: Editor Documentation | Editor Accessibility
 description: "Get started with the {{ site.product }} Editor and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["editor"]
 slug: htmlhelpers_editor_accessibility
 position: 1
 ---

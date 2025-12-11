@@ -7,6 +7,7 @@ slug: grid-checked-select-column-by-default
 tags: grid, select, column, checked, checkbox, checkboxes, default
 ticketid: 1147197
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

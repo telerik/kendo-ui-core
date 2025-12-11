@@ -5,9 +5,9 @@ description: "Learn how to make the Kendo UI ComboBox widget open when the `onfo
 previous_url: /controls/editors/combobox/how-to/open-on-focus, /controls/editors/combobox/how-to/customize/open-on-focus
 slug: howto_open_onfocus_combobox
 tags: telerik, kendo, jquery, combobox, open, when, onfocus, is, triggered
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

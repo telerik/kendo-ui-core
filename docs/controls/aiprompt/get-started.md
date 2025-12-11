@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery AIPrompt Documentation - Getting Started with the AIPrompt
 description: "Get started with the jQuery AIPrompt by Kendo UI and learn how to create the component."
+components: ["aiprompt"]
 slug: getting_started_kendoui_aiprompt_component
 position: 1
 ---

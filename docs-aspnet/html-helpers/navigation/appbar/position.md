@@ -2,6 +2,7 @@
 title: Positioning
 page_title: Positioning
 description: "Learn how to configure the position of the AppBar component for {{ site.framework }}."
+components: ["appbar"]
 slug: htmlhelpers_appbar_aspnetcore_position
 position: 3
 ---

@@ -6,6 +6,7 @@ page_title: Match AutoComplete Filter to Selected Operator in Grid - Kendo UI fo
 slug: grid-match-autocomplete-filter-to-operator
 tags: grid, filter, autocomplete, dynamic, change, option, operator
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

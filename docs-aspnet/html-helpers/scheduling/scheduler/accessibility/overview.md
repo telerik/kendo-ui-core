@@ -2,6 +2,7 @@
 title: Overview
 page_title: Scheduler Documentation | Scheduler Accessibility
 description: "Get started with the {{ site.product }} Scheduler and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_accessibility
 position: 1
 ---

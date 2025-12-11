@@ -7,6 +7,7 @@ slug: grid-editing-upload-in-popup
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, popup, upload, custom, files
 ticketid: 1364607
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

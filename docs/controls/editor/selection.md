@@ -2,6 +2,7 @@
 title: Selection
 page_title: jQuery Editor Documentation - Selection
 description: "Get started with the jQuery Editor by Kendo UI and set the desired selections."
+components: ["editor"]
 previous_url: /controls/editor/working-with-selection
 slug: set_selections_editor_widget
 position: 6

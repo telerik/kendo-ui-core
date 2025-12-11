@@ -7,6 +7,7 @@ slug: filter-custom-editor-server-filtering
 tags: filter, custom, editor, server, filtering, autocomplete
 ticketid: 1629421
 res_type: kb
+components: ["general"]
 component: filter
 ---
 

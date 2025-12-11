@@ -2,6 +2,7 @@
 title: Adding Telerik UI through NuGet
 page_title: Adding Telerik UI through NuGet
 description: "Create a sample project in Visual Studio, and configure Telerik UI for ASP.NET MVC with the Telerik NuGet."
+components: ["general"]
 slug: setupwithnuget_aspnetmvc
 position: 2
 permalink: /getting-started/setup-with-nuget

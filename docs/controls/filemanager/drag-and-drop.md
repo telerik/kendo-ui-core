@@ -2,6 +2,7 @@
 title: Drag and Drop
 page_title: jQuery FileManager Documentation - Drag and Drop in FileManager
 description: "Understand how the Drag and Drop functionality in the FileManager enable you to manage the files"
+components: ["filemanager"]
 slug: dragndrop_kendoui_filemanager_widget
 position: 4
 ---

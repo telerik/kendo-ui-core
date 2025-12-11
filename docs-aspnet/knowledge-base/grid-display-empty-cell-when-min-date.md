@@ -6,6 +6,7 @@ page_title: Display an Empty String When the Value is Min Date
 slug: grid-date-min-field
 tags: grid, date, datetime, min, value, empty
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

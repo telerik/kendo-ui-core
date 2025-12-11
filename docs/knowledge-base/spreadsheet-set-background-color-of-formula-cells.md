@@ -7,6 +7,7 @@ slug: spreadsheet-set-background-color-of-formula-cells
 tags: spreadsheet, formula, range, cells, after, initialization
 ticketid: 1402148
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

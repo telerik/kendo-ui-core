@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization Overview
 description: "Learn how to define the current culture in the process of globalization when working with {{ site.product }}."
+components: ["general"]
 previous_url: /getting-started/globalization
 slug: overview_globalization_core
 position: 1

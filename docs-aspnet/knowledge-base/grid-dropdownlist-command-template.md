@@ -7,6 +7,7 @@ slug: grid-dropdownlist-command-template
 tags: grid, column, template, dropdownlist, command, custom
 ticketid: 1575207
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

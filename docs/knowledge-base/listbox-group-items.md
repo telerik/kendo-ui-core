@@ -7,7 +7,7 @@ slug: listbox-group-items
 tags: listbox, group, items
 ticketid: 1342501
 res_type: how-to
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

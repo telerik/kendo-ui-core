@@ -7,6 +7,7 @@ meta_title: How to Update Nested JSON Properties in Kendo UI for jQuery Grid
 slug: updating-nested-properties-kendo-ui-jquery-grid
 tags: kendo-ui-for-jquery, grid, save-event, nested-properties, model-set
 res_type: kb
+components: ["grid"]
 ticketid: 1698964
 ---
 

@@ -6,6 +6,7 @@ page_title: Show Characters Count When Editing a Field in a Row
 slug: grid-on-edit-input-characters-count
 tags: grid, editing, characters, count, show, edit, input
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

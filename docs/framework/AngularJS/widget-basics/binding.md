@@ -2,6 +2,7 @@
 title: Scope Bindings
 page_title: Model and Value Binding | AngularJS Directives
 description: "Learn more about the AngularJS bindings integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#applying-scope-bindings
 slug: angularjs_value_model_binding
 position: 5

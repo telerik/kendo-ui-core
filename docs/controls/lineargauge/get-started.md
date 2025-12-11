@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery LinearGauge Documentation - Getting Started with the LinearGauge
 description: "Get started with the jQuery LinearGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["lineargauge"]
 slug: getting_started_kendoui_lineargauge_component
 position: 2
 ---

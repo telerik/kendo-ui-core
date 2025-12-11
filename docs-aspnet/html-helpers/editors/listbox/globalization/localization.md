@@ -2,6 +2,7 @@
 title: Localization
 page_title: ListBox Localization
 description: "Get started with the Telerik UI ListBox component for {{ site.framework }} and learn about the localization options it supports."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/globalization/localization
 slug: htmlhelpers_listbox_localization_aspnetcore
 position: 2

@@ -5,9 +5,9 @@ description: "Learn how to format date values in dimension labels in the Kendo U
 previous_url: /controls/data-management/pivotgrid/how-to/format-dates, /controls/data-management/pivotgrid/how-to/appearance/format-dates
 slug: howto_format_date_query_pivotgrid
 tags: pivotgrid, format, dates, in, dimension, labels
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

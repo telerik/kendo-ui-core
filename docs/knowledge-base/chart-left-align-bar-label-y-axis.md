@@ -7,6 +7,7 @@ slug: chart-left-align-bar-label-y-axis
 tags: chart, left, align, bar, label, y, axis
 ticketid: 1407464
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

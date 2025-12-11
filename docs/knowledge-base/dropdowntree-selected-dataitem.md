@@ -7,7 +7,7 @@ slug: dropdowntree-selected-dataitem
 tags: dropdowntree, treeview, selected, dataitem
 ticketid: 1554596
 res_type: kb
-component: dropdowntree
+components: ["dropdowntree"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Loader Documentation - Loader Accessibility
 description: "Get started with the jQuery Loader by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["loader"]
 slug: jquery_loader_accessibility
 position: 1
 ---

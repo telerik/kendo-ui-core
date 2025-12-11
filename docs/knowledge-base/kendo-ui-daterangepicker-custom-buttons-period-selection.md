@@ -6,6 +6,7 @@ page_title: Custom Buttons for Selecting Periods in Kendo UI DateRangePicker
 slug: kendo-ui-daterangepicker-custom-buttons-period-selection
 tags: kendo-ui, daterangepicker, buttons, period-selection, custom-ranges
 res_type: kb
+components: ["daterangepicker"]
 ticketid: 1688253
 ---
 

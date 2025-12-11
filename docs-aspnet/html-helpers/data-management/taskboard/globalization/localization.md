@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about the localization options it supports."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_localization_overview
 position: 2
 ---

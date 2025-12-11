@@ -6,6 +6,7 @@ page_title: How to Scroll on Click in Kendo UI Menu
 slug: prevent-scroll-on-hover-kendo-ui-menu
 tags: kendo ui, menu, scroll, hover, custom scrolling
 res_type: kb
+components: ["button"]
 ticketid: 1662811
 ---
 

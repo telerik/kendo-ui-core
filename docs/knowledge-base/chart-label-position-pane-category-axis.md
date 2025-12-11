@@ -7,6 +7,7 @@ slug: chart-label-position-pane-category-axis
 tags: chart, label, position, pane, category, axis
 ticketid: 1411207
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

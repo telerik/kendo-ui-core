@@ -7,7 +7,7 @@ slug: grid-add-new-item-when-filter-applied
 tags: grid, insert, add, new, item, filter, visible, record
 ticketid: 1141908
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

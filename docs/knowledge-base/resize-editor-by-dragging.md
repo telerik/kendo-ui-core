@@ -5,9 +5,9 @@ description: "Learn how to resize the Kendo UI for jQuery Editor widget by dragg
 previous_url: /controls/editors/editor/how-to/resize-editor-by-dragging, /controls/editors/editor/how-to/appearance/resize-editor-by-dragging
 slug: howto_resize_the_editor_by_dragging_editor
 tags: telerik, kendo, jquery, editor, resize, by, dragging
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

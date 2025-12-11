@@ -7,6 +7,7 @@ slug: checkbox-styling-right-side
 tags: checkbox, styling, right, label, to the right, input
 ticketid: 1141307
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

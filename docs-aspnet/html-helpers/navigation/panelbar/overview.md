@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI PanelBar component for {{ site.framework }} and its built-in features like data binding, accssibility, and support for various expand modes."
+components: ["panelbar"]
 previous_url: /helpers/html-helpers/panelbar, /helpers/navigation/panelbar/overview
 slug: htmlhelpers_panelbar_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: Overview
 page_title: DateRangePicker Documentation | DateRangePicker Accessibility
 description: "Get started with the {{ site.product }} DateRangePicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["daterangepicker"]
 slug: htmlhelpers_daterangepicker_accessibility
 position: 1
 ---

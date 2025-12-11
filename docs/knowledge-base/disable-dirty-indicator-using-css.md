@@ -7,7 +7,7 @@ slug: disable-dirty-indicator-using-css
 tags: dirty, indicator, grid, disable, css
 ticketid: 1136481
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

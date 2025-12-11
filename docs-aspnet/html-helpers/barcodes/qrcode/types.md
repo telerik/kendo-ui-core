@@ -2,6 +2,7 @@
 title: QR Code Types
 page_title: QR Code Types
 description: "Explore the different overlay types of Telerik UI QRCode component for {{ site.framework }}."
+components: ["qrcode"]
 slug: types_qrcodehelper_aspnetcore
 position: 3
 ---

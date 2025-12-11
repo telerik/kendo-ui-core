@@ -7,6 +7,7 @@ slug: grid-apply-filter-parent-child
 tags: grid, filter, parent, child, hierarchy, detail
 ticketid: 1573560
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

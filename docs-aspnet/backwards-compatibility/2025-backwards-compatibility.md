@@ -2,6 +2,7 @@
 title: 2025 Releases
 page_title: 2025 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2025."
+components: ["general"]
 slug: breakingchanges_2025
 position: 1
 ---

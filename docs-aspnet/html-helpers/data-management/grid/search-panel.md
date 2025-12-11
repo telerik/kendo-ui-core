@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: Search Panel
 description: "Learn how to enable the searching functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_searchpanel
 previous_url: /helpers/html-helpers/grid/features/searching, /html-helpers/data-management/grid/features/searching
 position: 13

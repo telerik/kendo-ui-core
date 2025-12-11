@@ -6,6 +6,7 @@ page_title: Changing Grid Height When Using Frozen Columns
 slug: grid-change-height-when-using-frozen-columns
 tags: aspnet, mvc, grid, change, height, when, using, frozen, columns, locked
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

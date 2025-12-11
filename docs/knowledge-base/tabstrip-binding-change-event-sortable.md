@@ -6,6 +6,7 @@ page_title: How to Bind Change Event to Sortable TabStrip in Kendo UI
 slug: tabstrip-binding-change-event-sortable
 tags: kendo ui, tabstrip, sortable, change event
 res_type: kb
+components: ["sortable"]
 ---
 ## Environment
 | Product | Version |

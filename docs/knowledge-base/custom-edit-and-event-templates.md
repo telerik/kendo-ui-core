@@ -5,9 +5,9 @@ description: "Learn how to create and use custom templates for the events and th
 previous_url: /asp.net/mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /kendo-mvc/controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /controls/scheduling/scheduler/how-to/custom-edit-and-event-templates, /controls/scheduling/scheduler/how-to/editing/custom-edit-and-event-templates
 slug: howto_customize_editand_event_templates_scheduler
 tags: telerik, kendo, jquery, scheduler, customize, edit, and, events, templates 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

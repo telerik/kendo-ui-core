@@ -7,6 +7,7 @@ slug: scheduler-adaptive-rendering-month-view-comprehensive-events
 tags: scheduler, month view, adaptive rendering, events, tooltip, interactive
 ticketid: 1631720
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

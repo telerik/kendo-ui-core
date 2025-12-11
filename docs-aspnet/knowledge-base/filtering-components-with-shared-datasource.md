@@ -6,6 +6,7 @@ page_title: Filtering Components Independently that Use a Shared DataSource
 slug: filtering-components-with-shared-datasource
 tags: DataSource, shared, filtering, widgets, components, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

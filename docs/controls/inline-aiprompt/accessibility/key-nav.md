@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery InlineAIPrompt Documentation - Keyboard Navigation
 description: "Get started with the jQuery InlineAIPrompt by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["inlineaiprompt"]
 slug: keynav_inlineaiprompt_jquery
 position: 2
 ---

@@ -6,6 +6,7 @@ page_title: How to Implement Sort Event Handling in Kendo UI Spreadsheet
 slug: how-to-capture-sort-events-in-kendo-ui-spreadsheet
 tags: kendo-ui, spreadsheet, event-handling, sorting
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1669478
 ---
 

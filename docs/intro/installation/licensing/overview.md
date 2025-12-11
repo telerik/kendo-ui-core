@@ -2,6 +2,7 @@
 title: Overview of the Licensing Methods in Kendo UI for jQuery
 page_title: Overview of the Licensing Methods in Kendo UI for jQuery - Download and Installation
 description: "Get started with Kendo UI for jQuery and learn about the licensing methods and how to acquire the library from the NPM distribution channel and register the script license file."
+components: ["general"]
 slug: licensing-overview
 previous_url: /intro/installation/using-license-code
 published: True

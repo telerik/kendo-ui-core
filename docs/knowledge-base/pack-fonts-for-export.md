@@ -5,9 +5,9 @@ description: "Learn how to transform the content during export while applying th
 slug: howto_packfontsforpdfexport_drawingapi
 previous_url: /framework/drawing/how-to/pack-fonts-for-export
 tags: telerik, kendo, jquery, drawing, api, library, pack, fonts, for, pdf, export 
-component: drawing
 type: how-to
 res_type: kb
+components: ["drawing"]
 ---
 
 ## Environment

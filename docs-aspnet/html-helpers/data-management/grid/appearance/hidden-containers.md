@@ -2,6 +2,7 @@
 title: Hidden Containers
 page_title: Hidden Containers
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when initializing it in a hidden container."
+components: ["grid"]
 slug: hidden_containers_aspnetcore_grid
 position: 4
 ---

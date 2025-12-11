@@ -2,6 +2,7 @@
 title: Prefix and Suffix
 page_title: jQuery TextArea Documentation - Prefix and Suffix
 description: "Learn how to add custom items as prefix and suffix adornments to enhance the user interface interactivity when using the Kendo UI for jQuery TextArea."
+components: ["textarea"]
 slug: prefix_suffix_textarea
 position: 4
 ---

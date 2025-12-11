@@ -6,6 +6,7 @@ type: how-to
 slug: grid-paste-data-from-excel-batch-edit
 tags: grid, excel, copy, paste, multiple, rows, batch, edit, crud, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

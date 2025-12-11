@@ -5,9 +5,9 @@ description: "Learn how to create cascading Kendo UI MultiSelect widgets."
 previous_url: /controls/editors/multiselect/how-to/cascading-multiselects, /controls/editors/multiselect/how-to/cascade/cascading-multiselects
 slug: howto_create_cascading_widgets_multiselect
 tags: telerik, kendo, jquery, multiselect, create, cascading, multiselects
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

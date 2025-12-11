@@ -5,9 +5,9 @@ description: "Learn how to increase the width of the popup edit form and the tex
 previous_url: /controls/data-management/grid/how-to/Editing/change-popup-edit-form-width-layout
 slug: howto_increase_popup_edit_formand_textbox_grid
 tags: grid, increase, popup, edit, form, textbox, width
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

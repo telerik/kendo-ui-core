@@ -2,6 +2,7 @@
 title: Panes
 page_title: jQuery Splitter Documentation - Panes
 description: "Get started with the jQuery Splitter by Kendo UI and set its panes."
+components: ["splitter"]
 slug: panes_kendoui_splitter
 position: 3
 ---

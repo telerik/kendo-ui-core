@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Scheduler Documentation - Getting Started with the Scheduler
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to create and initialize the component."
+components: ["scheduler"]
 slug: getting_started_kendoui_scheduler_widget
 position: 1
 ---

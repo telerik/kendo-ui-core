@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery Button Documentation - Button Localization
 description: "Get started with the jQuery Button by Kendo UI and translate its messages for different culture locales."
+components: ["button"]
 slug: localization_button
 position: 3
 ---

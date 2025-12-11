@@ -5,9 +5,9 @@ description: "Learn how to draw freely on the surface of a Kendo UI Chart with s
 previous_url: /controls/charts/how-to/draw-on-scatter-plots, /controls/charts/how-to/appearance/draw-on-scatter-plots
 slug: howto_drawonscatterplotssurface_charts
 tags: chart, draw, scatter, plots, surface
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

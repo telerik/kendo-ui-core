@@ -7,6 +7,7 @@ slug: scheduler-grid-editable-template
 tags: kendo, kendoui, scheduler, grid, edit, template
 ticketid: 1539603
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

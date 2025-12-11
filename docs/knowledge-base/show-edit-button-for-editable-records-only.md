@@ -5,9 +5,9 @@ description: "Learn how to show edit buttons only for the editable records of th
 previous_url: /controls/data-management/grid/how-to/Editing/show-edit-button-for-editable-records-only
 slug: howto_show_editfor_editable_records_only_grid
 tags: show, edit, buttons, editable, records, only
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

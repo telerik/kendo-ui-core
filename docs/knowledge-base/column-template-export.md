@@ -5,9 +5,9 @@ description: "Learn how to use column template as the value of a corresponding c
 previous_url: /mvc/controls/data-management/grid/how-to/excel/column-template-export, /controls/data-management/grid/how-to/excel/column-template-export
 slug: howto_use_column_template_grid
 tags: grid, use, column, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

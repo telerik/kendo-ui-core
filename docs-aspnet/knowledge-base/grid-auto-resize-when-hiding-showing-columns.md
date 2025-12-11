@@ -6,6 +6,7 @@ page_title: Resizing When Hiding or Showing Columns
 slug: grid-auto-resize-when-hiding-showing-columns
 tags: grid, auto, resize, when, hiding, showing, columns, match, width
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment 

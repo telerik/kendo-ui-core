@@ -2,6 +2,7 @@
 title: Steps
 page_title: Steps
 description: "Learn how to configure the steps of the widget."
+components: ["stepper"]
 slug: htmlhelpers_stepper_aspnetcore_steps
 position: 2
 ---

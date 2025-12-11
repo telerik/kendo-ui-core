@@ -2,6 +2,7 @@
 title: Compatibility
 page_title: Compatibility
 description: "Learn about the compatibility of the Kendo UI SASS Themes and the {{ site.product }} versions."
+components: ["general"]
 slug: sass_themes_compatibility_aspnetmvc6_aspnetmvc
 position: 5
 ---

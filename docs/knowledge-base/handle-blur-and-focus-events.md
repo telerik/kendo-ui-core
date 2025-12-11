@@ -5,9 +5,9 @@ description: "Learn how to handle the blur and the focus events of a Kendo UI Ed
 previous_url: /controls/editors/editor/how-to/handle-blur-and-focus-events, /controls/editors/editor/how-to/appearance/handle-blur-and-focus-events
 slug: howto_handleblurandfocusevents_editor
 tags: telerik, kendo, jquery, editor, handle, blur, focus, events
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

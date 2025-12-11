@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TreeList Documentation - TreeList Overview
 description: "Try now the Kendo UI for jQuery TreeList component providing sorting, filtering, and data editing capabilities."
+components: ["treelist"]
 slug: overview_kendoui_treelist_widget
 position: 0
 ---

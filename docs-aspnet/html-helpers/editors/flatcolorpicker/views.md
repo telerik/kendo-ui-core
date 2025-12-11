@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Review the available views in the FlatColorPicker."
+components: ["flatcolorpicker"]
 slug: htmlhelpers_views_flatcolorpickerhelper_aspnetcore
 position: 2
 ---

@@ -6,6 +6,7 @@ slug: export_grid_links_to_excel
 tags: grid, export, excel, links, hyperlink, hyperlinks, link, url, wrappers, telerik
 component: grid
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

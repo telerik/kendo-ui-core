@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Grid Documentation - Keyboard Navigation
 description: "Get started with the jQuery Grid by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["grid"]
 slug: keynav_kendoui_grid_widget
 position: 2
 ---

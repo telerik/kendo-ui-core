@@ -7,6 +7,7 @@ slug: gantt-expand-collapse-alltasks
 tags: kendo, kendoui, gantt, expand, collapse, all, tasks, button, click
 ticketid: 1142128
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

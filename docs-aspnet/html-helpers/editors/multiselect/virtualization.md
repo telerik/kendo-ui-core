@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Virtualization
 description: "Learn how to setup the Virtualization feature of the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/virtualization
 slug: htmlhelpers_multiselect_virtualization_aspnetcore
 position: 5

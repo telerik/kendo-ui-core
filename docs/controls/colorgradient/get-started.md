@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ColorGradient Documentation - Getting Started with the ColorGradient
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn how to create and initialize the component."
+components: ["colorgradient"]
 slug: getting_started_kendoui_colorgradient_widget
 position: 2
 ---

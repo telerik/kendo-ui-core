@@ -5,9 +5,9 @@ description: "Learn how to implement stable sorting in Google Chrome with the Ke
 previous_url: /controls/data-management/grid/how-to/stable-sort-chrome, /controls/data-management/grid/how-to/sorting/stable-sort-chrome
 slug: howto_implement_stable_sortin_chrome_grid
 tags: implement, stable, sorting, grid, chrome
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

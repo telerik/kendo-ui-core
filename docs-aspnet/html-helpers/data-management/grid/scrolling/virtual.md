@@ -2,6 +2,7 @@
 title: Virtual Scrolling
 page_title: Virtual Scrolling
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable virtual scrolling as an alternative to paging."
+components: ["grid"]
 slug: virtual_scrolling_aspnetcore_grid
 position: 2
 ---

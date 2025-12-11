@@ -7,6 +7,7 @@ slug: chart-title-empty-line-different-fonts
 tags: chart, title, font, subtitle
 ticketid: 1141221
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

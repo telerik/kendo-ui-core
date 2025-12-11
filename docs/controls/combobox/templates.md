@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery ComboBox Documentation - Templates
 description: "Get started with the jQuery ComboBox by Kendo UI and use the item, header, footer, and no-data templates to organize its data."
+components: ["combobox"]
 slug: templates_kendoui_combobox
 position: 6
 ---

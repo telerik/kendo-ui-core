@@ -2,6 +2,7 @@
 title: Remote Data
 page_title: jQuery Grid Documentation - Remote Data
 description: "Get started with the jQuery Grid by Kendo UI featuring a built-in DataSource which allows you to bind the Grid to remote data."
+components: ["grid"]
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
 position: 3

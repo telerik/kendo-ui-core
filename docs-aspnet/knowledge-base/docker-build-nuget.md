@@ -7,6 +7,7 @@ previous_url: /aspnet-mvc/knowledge-base/docker-build-nuget
 slug: docker-build-nuget
 tags: docker, dockerfile, nuget, nuget-config, packages, dotnet, restore
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

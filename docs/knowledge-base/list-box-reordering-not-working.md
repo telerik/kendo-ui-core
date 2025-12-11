@@ -7,7 +7,7 @@ slug: list-box-reordering-not-working
 tags: listbox, reorder
 ticketid: 1112413
 res_type: kb
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

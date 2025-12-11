@@ -6,7 +6,7 @@ slug: browser-memory-usage-increases
 tags: telerik, kendoui, jquery, troubleshooting, memory, leaks, browser, usage, increases, over, time
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

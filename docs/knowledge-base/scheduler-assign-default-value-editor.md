@@ -8,6 +8,7 @@ position:
 tags: scheduler, assign, default, value, dropdownlist, popup, editor, form, none, remove, hide, nullable, defaultvalue, schema, model
 ticketid: 1426081
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

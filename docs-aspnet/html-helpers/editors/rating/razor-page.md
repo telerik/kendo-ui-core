@@ -3,23 +3,26 @@ title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Rating component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_rating_razorpage_aspnetcore
+components: ["rating"]
 position: 9
 ---
 
 # Rating in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Rating for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Rating for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the Rating component in a Razor Pages scenario.
+## Binding to Local Data
 
-For the complete project, refer to the [Rating in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Rating/RatingIndex.cshtml).
+The following example demonstrates how to configure the Rating options and value based on properties from the `PageModel`.
 
 ```HtmlHelper
+    @page
+    @model RatingIndexModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
-	
 	
 	@(Html.Kendo().Rating()
 		.Name("ratingHalf")
@@ -28,23 +31,29 @@ For the complete project, refer to the [Rating in Razor Pages example](https://g
 		.Value(Model.Value)
 		.Precision(Model.Precision)
 	)
-	
 ```
 ```TagHelper
+    @page
+    @model RatingIndexModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+	@Html.AntiForgeryToken()
+
     <kendo-rating name="ratingHalf"
-                min="@Model.Min"
-                max="@Model.Max"
-                value="@Model.Value"
-                precision="@Model.Precision">
+        min="@Model.Min"
+        max="@Model.Max"
+        value="@Model.Value"
+        precision="@Model.Precision">
     </kendo-rating>
 ```
 ```C# PageModel
-	
+public class RatingIndexModel : PageModel
+{
 	public string Precision { get; set; }
     public int Min { get; set; }
     public int Max { get; set; }
-
     public double Value { get; set; }
+
     public void OnGet()
     {
         Min = 1;
@@ -52,10 +61,16 @@ For the complete project, refer to the [Rating in Razor Pages example](https://g
         Precision = "half";
         Value = 7.5;
     }
+}
 ```
+
+For the complete project, refer to the [Rating in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Rating/RatingIndex.cshtml).
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [Rating Overview]({% slug htmlhelpers_rating_aspnetcore_overview %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Rating](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/rating)
+* [Server-Side HtmlHelper API of the Rating](/api/rating)
+* [Server-Side TagHelper API of the Rating](/api/taghelpers/rating)
+* [Knowledge Base Section](/knowledge-base)
 

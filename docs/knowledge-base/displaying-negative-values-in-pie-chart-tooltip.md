@@ -6,6 +6,7 @@ page_title: How to Show Negative Values in Pie Chart Tooltips
 slug: displaying-negative-values-in-pie-chart-tooltip
 tags: chart,pie-chart,tooltip,template,negative-values
 res_type: kb
+components: ["chart"]
 ticketid: 1687022
 ---
 

@@ -2,6 +2,7 @@
 title: Ajax Binding
 page_title: Ajax Data Binding
 description: "Learn how to asynchronously load the tab content of the {{ site.product }} TabStrip using Ajax binding."
+components: ["tabstrip"]
 slug: htmlhelpers_tabstrip_ajaxbinding
 position: 4
 ---

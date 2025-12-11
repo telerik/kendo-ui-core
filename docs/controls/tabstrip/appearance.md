@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery TabStrip Documentation - TabStrip Appearance
 description: "Learn how to apply different styling options to the TabStrip component."
+components: ["tabstrip"]
 slug: appearance_kendoui_tabstrip_widget
 position: 7
 ---

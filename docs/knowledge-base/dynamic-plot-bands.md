@@ -5,9 +5,9 @@ description: "Learn how to create dynamic plot bands for Kendo UI Charts."
 previous_url: /controls/charts/how-to/dynamic-plot-bands, /controls/charts/how-to/appearance/dynamic-plot-bands
 slug: howto_createdynamicplotbands_charts
 tags: chart, create, dynamic, plot, bands
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

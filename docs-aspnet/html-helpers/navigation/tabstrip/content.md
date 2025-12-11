@@ -2,6 +2,7 @@
 title: Tab Content
 page_title: Tab Content
 description: "Use the options for loading and configuring the tab content of the Telerik UI TabStrip component for {{ site.framework }}."
+components: ["tabstrip"]
 slug: htmlhelpers_tabstrip_aspnetcore_content
 position: 3
 ---

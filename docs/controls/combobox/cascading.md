@@ -2,6 +2,7 @@
 title: Cascading ComboBoxes
 page_title: jQuery ComboBox Documentation - Cascading ComboBoxes
 description: "Get started with the jQuery ComboBox by Kendo UI and implement cascading ComboBoxes."
+components: ["combobox"]
 slug: cascading_kendoui_combobox_widget
 position: 9
 ---

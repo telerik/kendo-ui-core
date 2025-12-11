@@ -5,9 +5,9 @@ description: "Learn how to use checkboxes inside the column menu of the Kendo UI
 previous_url: /controls/data-management/grid/how-to/column-menu-using-checkboxes, /controls/data-management/grid/how-to/various/column-menu-using-checkboxes
 slug: howto_use_checkboxes_inside_column_menu_grid
 tags: grid, checkbox, inside, column, menu
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

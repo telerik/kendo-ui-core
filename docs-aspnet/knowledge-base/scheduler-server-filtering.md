@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/server-filtering, /html-helpe
 slug: scheduler-server-filtering
 tags: scheduler, server, filter, events, dates, ranges, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

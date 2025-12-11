@@ -5,9 +5,9 @@ description: "Learn how to create range filtering in the Kendo UI Grid for jQuer
 previous_url: /controls/data-management/grid/how-to/use-range-slider-in-filter-menu, /controls/data-management/grid/how-to/filtering/use-range-slider-in-filter-menu
 slug: howto_gridfiltering_rangefilteringwithslider_grid
 tags: use, create, grid, filtering, rangeslider
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

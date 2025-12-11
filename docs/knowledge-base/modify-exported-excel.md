@@ -5,9 +5,9 @@ description: "Learn how to modify the generated Excel file from a Kendo UI Pivot
 previous_url: /controls/data-management/pivotgrid/how-to/modify-exported-excel, /controls/data-management/pivotgrid/how-to/export/modify-exported-excel
 slug: howto_modify_exported_excel_files_pivotgrid
 tags: kendoui, pivotgrid, modify, exported, excel, files
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

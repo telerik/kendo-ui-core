@@ -6,6 +6,7 @@ page_title: Show Markers at Specific Intervals in Kendo UI Chart Series
 slug: configuring-series-marker-intervals-kendo-ui-chart
 tags: kendo-ui-chart,series-markers,marker-intervals,visible-function
 res_type: kb
+components: ["chart"]
 ticketid: 1689932
 ---
 

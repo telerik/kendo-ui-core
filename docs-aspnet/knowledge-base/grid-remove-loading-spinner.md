@@ -6,6 +6,7 @@ page_title: Hide the Grid Loading Spinner
 slug: grid-remove-loading-spinner
 tags: grid, remove, loading, spinner
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

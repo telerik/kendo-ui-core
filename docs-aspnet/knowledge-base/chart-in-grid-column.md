@@ -7,6 +7,7 @@ previous_url: /helpers/charts/how-to/use-chart-in-ajax-grid-column, /html-helper
 slug: chart-in-grid-column
 tags: chart, grid, column, template
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

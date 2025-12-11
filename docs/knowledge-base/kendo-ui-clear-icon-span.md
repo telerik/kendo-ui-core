@@ -7,6 +7,7 @@ meta_title: How to Add Kendo UI Clear Icon to Span Element
 slug: kendo-ui-clear-icon-span
 tags: kendo-ui,jquery,icon,svg-icons,clear-icon
 res_type: kb
+components: ["general"]
 ticketid: 1702898
 ---
 

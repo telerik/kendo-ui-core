@@ -2,6 +2,7 @@
 title: Week Numbers
 page_title: jQuery Calendar Documentation - Week Numbers
 description: "Get started with the jQuery Calendar by Kendo UI and define its first rendered view."
+components: ["calendar"]
 slug: weeknum_kendoui_calendar
 position: 6
 ---

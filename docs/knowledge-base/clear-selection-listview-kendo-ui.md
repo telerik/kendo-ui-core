@@ -6,6 +6,7 @@ page_title: How to Deselect ListView Items on Empty Space Click in Kendo UI
 slug: clear-selection-listview-kendo-ui
 tags: kendo-ui, listview, clear, selection, deselect, click, empty, space
 res_type: kb
+components: ["listview"]
 category: knowledge-base
 ticketid: 1652797
 ---

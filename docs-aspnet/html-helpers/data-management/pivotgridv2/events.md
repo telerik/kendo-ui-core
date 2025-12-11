@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI for {{ site.framework }} PivotGridV2 component."
+components: ["pivotgridv2"]
 slug: htmlhelpers_events_pivotgridv2_aspnetcore
 position: 7
 ---

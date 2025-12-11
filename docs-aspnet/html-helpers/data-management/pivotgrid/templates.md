@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn about the provided templating options."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_templates
 position: 5
 ---

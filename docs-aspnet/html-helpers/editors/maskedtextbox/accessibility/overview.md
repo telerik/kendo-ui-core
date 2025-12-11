@@ -2,6 +2,7 @@
 title: Overview
 page_title: MaskedTextBox Documentation | MaskedTextBox Accessibility
 description: "Get started with the {{ site.product }} MaskedTextBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["maskedtextbox"]
 slug: htmlhelpers_maskedtextbox_accessibility
 position: 1
 ---

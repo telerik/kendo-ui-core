@@ -2,6 +2,7 @@
 title: Setting Up Your License Key
 page_title: Setting Up Your License Key File
 description: Learn how to create and install a Telerik license key file, which is required during application building and deployment.
+components: ["general"]
 slug: installation_license_key_aspnetcore
 tags: installation, license, key
 position: 0

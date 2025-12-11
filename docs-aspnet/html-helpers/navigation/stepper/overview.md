@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Stepper component for {{ site.framework }} provides a styled UI component for progressive handling of workflow."
+components: ["stepper"]
 slug: htmlhelpers_stepper_aspnetcore_overview
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: PDF Export Overview - Kendo UI PDF Export
 description: "Learn about the Kendo UI PDF Export."
+components: ["general"]
 slug: pdfderawingexport_drawingapi
 position: 0
 ---

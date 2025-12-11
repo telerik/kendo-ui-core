@@ -2,6 +2,7 @@
 title: ECMAScript Modules
 page_title: ECMAScript Modules
 description: "Get started with {{ site.product }} and learn about the ECMAScript modules provided in the library."
+components: ["general"]
 slug: core_ecmascript_overview
 position: 6
 ---

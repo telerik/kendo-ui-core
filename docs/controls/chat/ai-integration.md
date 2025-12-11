@@ -2,6 +2,7 @@
 title: AI Integration
 page_title: jQuery Chat Documentation - AI Integration
 description: "Connect the Kendo UI for jQuery Chat to a streaming AI chat service to create intelligent conversational experiences."
+components: ["chat"]
 slug: ai_integration_kendoui_chat
 position: 5
 ---

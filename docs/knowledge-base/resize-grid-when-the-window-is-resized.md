@@ -5,9 +5,9 @@ description: "Learn how to resize and expand it to 100% height when the parent c
 previous_url: /controls/data-management/grid/how-to/Layout/resize-grid-when-the-window-is-resized
 slug: howto_resize_whenthe_windowis_resized_grid
 tags: resize, expand, grids, 100%, height, when, parent, container, browser, window, resized
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

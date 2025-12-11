@@ -7,6 +7,7 @@ slug: grid-load-last-page
 tags: grid, pager, page
 ticketid: 1149264
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

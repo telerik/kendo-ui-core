@@ -2,6 +2,7 @@
 title: Items Binding
 page_title: Items Binding
 description: "Manually define the properties of each item in the Telerik UI Menu component for {{ site.framework }} by using the items builder."
+components: ["menu"]
 slug: itemsbinding_menu_aspnetmvc
 position: 2
 ---

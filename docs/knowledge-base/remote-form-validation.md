@@ -5,9 +5,9 @@ description: "Learn how to validate the form on the server by using the Kendo UI
 slug: howto_remote_validation
 previous_url: /controls/editors/validator/how-to/remote-form-validation
 tags: telerik, kendo, jquery, validator, implement, remote, form, validation
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

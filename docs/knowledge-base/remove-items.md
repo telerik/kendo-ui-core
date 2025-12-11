@@ -5,9 +5,9 @@ description: "Learn how to remove items from a Kendo UI DropDownList component."
 previous_url: /controls/editors/dropdownlist/how-to/remove-items, /controls/editors/dropdownlist/how-to/editing/remove-items
 slug: howto_remove_items_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, remove, items
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

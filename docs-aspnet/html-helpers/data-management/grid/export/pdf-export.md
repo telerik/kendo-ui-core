@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PDF Export
 description: "Export the Telerik UI Grid for {{ site.framework }} to PDF."
+components: ["grid"]
 slug: pdfexport_gridhelper_aspnetcore
 position: 3
 ---

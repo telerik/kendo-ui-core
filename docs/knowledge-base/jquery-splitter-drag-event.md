@@ -6,6 +6,7 @@ page_title: Tracking Drag Events with the jQuery Splitter Component
 slug: jquery-splitter-drag-event
 tags: splitter, kendo-ui, jquery, drag-event, draggable
 res_type: kb
+components: ["splitter"]
 ticketid: 1689930
 ---
 

@@ -6,7 +6,7 @@ page_title: Scroll the Last Column into View - Kendo UI for jQuery Data Grid
 slug: grid-scroll-to-last-column
 tags: kendoui, kendo, grid, column, scroll, view, move
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

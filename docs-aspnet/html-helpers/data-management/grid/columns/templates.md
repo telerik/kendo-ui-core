@@ -2,6 +2,7 @@
 title: Templates
 page_title: Template Columns
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} supporting template columns."
+components: ["grid"]
 slug: htmlhelper_grid_template_columns
 position: 4
 ---

@@ -5,9 +5,9 @@ description: "Learn how to show the tooltip of a Kendo UI Chart on seriesClick."
 previous_url: /controls/charts/how-to/show-tooltip-on-click, /controls/charts/how-to/interaction/show-tooltip-on-click
 slug: howto_tooltiponseriesclick_charts
 tags: chart, show, tooltip, on, seriesclick
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

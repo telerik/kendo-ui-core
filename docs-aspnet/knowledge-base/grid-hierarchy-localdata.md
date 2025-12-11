@@ -6,6 +6,7 @@ page_title: Grid Hierarchy with Local Data
 slug: grid-hierarchy-localdata
 tags: grid, hierarchy, asp, core, local data
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

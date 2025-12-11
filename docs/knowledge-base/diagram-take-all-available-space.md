@@ -7,6 +7,7 @@ slug: diagram-take-all-available-space
 tags: diagram, resize, adjust, stretch, fit, space, available, width, container, expand
 ticketid: 1146668
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

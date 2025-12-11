@@ -6,6 +6,7 @@ page_title: Change Columns Width during PDF Exporting
 slug: grid-change-columns-width-during-pdf-export
 tags: aspnet, mvc, grid, change, columns, width, during, pdf, export, exporting
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -6,6 +6,7 @@ page_title: How to Disable Column Reordering in Kendo UI Grid Column Menu
 slug: disable-column-reordering-kendo-ui-grid
 tags: kendo-ui, grid, column-menu, column-reordering, javascript, set-column-position
 res_type: kb
+components: ["grid"]
 ticketid: 1660343
 ---
 

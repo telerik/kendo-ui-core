@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: Telerik UI DateInput for {{ site.framework }} Documentation - Automatic Correction
 description: "Get familiar with the Telerik UI DateInput component for {{ site.framework }} and how to use its auto-correct feature."
+components: ["dateinput"]
 slug: htmlhelpers_dateinput_autocorrect_aspnetcore
 position: 7
 ---

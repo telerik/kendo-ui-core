@@ -2,6 +2,7 @@
 title: Overview
 page_title: Data Binding Overview
 description: "Learn about the OLAP cube configuration and how to set up the Telerik UI for {{ site.framework }} PivotGrid component for online and flat data locally and remotely."
+components: ["pivotgrid"]
 slug: databinding_pivotgridhelper_aspnetcore
 position: 1
 ---

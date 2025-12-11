@@ -6,7 +6,7 @@ slug: scheduler_multiple_requests_remote_service
 tags: telerik, progress, kendoui, scheduler, multiple, create, destroy, update, requests, to, remote, service
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

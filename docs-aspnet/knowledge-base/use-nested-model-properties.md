@@ -7,6 +7,7 @@ tags: use, nested, model, properties, grid
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

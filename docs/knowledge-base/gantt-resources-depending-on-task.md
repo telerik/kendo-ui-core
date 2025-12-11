@@ -7,6 +7,7 @@ slug: gantt-resources-depending-on-task
 tags: kendo, kendoui, gantt, resources, assignments, dynamic, task-specific
 ticketid: 1146251
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

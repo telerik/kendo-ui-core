@@ -2,6 +2,7 @@
 title: Calendar Other Month Days
 page_title: jQuery Calendar Documentation - Calendar Other Month Days
 description: "Learn how you can show or hide the days from the previous and next months in the Kendo UI for jQuery Calendar."
+components: ["calendar"]
 slug: other_month_days_calendar
 position: 11
 ---

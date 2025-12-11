@@ -2,6 +2,7 @@
 title: Custom Commands
 page_title: Custom Column Commands
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to implement custom commands for handling its column records."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_custom_command
 position: 6
 ---

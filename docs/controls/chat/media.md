@@ -2,6 +2,7 @@
 title: File Uploads and Media
 page_title: jQuery Chat Documentation - File Uploads and Media
 description: "Learn how to enable file uploads, media sharing, and speech-to-text functionality in the Kendo UI for jQuery Chat component."
+components: ["chat"]
 slug: media_kendoui_chat
 position: 7
 ---

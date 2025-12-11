@@ -7,6 +7,7 @@ slug: stepper-broken-progressbar-when-used-with-side-bar
 tags: stepper, progress, bar, progressBar, extend, beyond, expanding, collapsing, vertical, menu
 ticketid: 1545635
 res_type: kb
+components: ["general"]
 component: stepper
 ---
 

@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Local Binding
 description: "Learn how to configure the Telerik UI Gantt for {{ site.framework }} to bind to a local dataset."
+components: ["gantt"]
 slug: htmlhelpers_gantt_serverbinding_aspnetcore
 position: 1
 ---

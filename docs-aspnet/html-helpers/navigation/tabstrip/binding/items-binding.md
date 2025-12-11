@@ -2,6 +2,7 @@
 title: Items Binding
 page_title: Items Binding
 description: "Manually define the properties of each item in the Telerik UI TabStrip HtmlHelper for ASP.NET MVC by using the items builder."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/binding/items-binding
 slug: itemsbinding_tabstrip_aspnetmvc
 position: 2

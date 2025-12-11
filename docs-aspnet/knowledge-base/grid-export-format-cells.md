@@ -6,6 +6,7 @@ page_title: Format Cells of Excel Export
 slug: grid-export-format-cells
 tags: grid, export, excel, format, cells
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

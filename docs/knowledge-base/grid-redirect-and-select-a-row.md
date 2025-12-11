@@ -6,7 +6,7 @@ page_title: Select a row from a Grid in another page - Kendo UI for jQuery Data 
 slug: grid-redirect-and-select-a-row
 tags: grid, redirect, navigate, new, page, select, row
 res_type: how-to
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

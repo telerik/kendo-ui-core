@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/lock-edited-events-with-signa
 slug: scheduler-lock-edited-events-with-signalr-datasource-local-hub
 tags: scheduler, signalr, datasource, local, hub, lock, events, edit, real-time, push-notifications, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

@@ -2,6 +2,7 @@
 title: Font Icons
 page_title: Font Icons
 description: "Learn more about what icon fonts are and how to define, implement, and render the available Telerik UI Font Icons out of the supported list."
+components: ["general"]
 slug: webfonticons_aspnetmvc6_aspnetmvc
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Client Detail Templates
 page_title: Client Detail Templates
 description: "Set the detail template used during Ajax binding of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/templating/client-detail-template
 slug: clientdetailtemplate_grid_aspnetcore
 position: 4

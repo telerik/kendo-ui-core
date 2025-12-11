@@ -7,6 +7,7 @@ meta_title: Addressing Kendo UI for jQuery Form Layout Issues for Different Orie
 slug: kendo-form-orientation-layout-fix  
 tags: kendo ui for jquery, form, orientation, layout, css  
 res_type: kb  
+components: ["form"]
 ticketid: 1700945
 ---
 

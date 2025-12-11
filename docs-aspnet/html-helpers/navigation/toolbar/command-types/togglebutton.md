@@ -2,6 +2,7 @@
 title: ToggleButton
 page_title: ToggleButton ToolBar Command Type
 description: "Get started with the Telerik UI ToolBar for {{ site.framework }} and learn how to configure and use the ToggleButton command type."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_togglebutton_aspnetcore
 ---
 

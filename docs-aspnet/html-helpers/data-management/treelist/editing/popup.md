@@ -2,6 +2,7 @@
 title: Popup
 page_title: Popup Editing
 description: "Define commands and set the edit mode to configure the Telerik UI TreeList component for {{ site.framework }} for popup editing."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_popup_editing
 position: 4
 ---

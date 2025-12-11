@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI for {{ site.framework }} Dialog component and its features like custom action buttons and built-in customization options."
+components: ["dialog"]
 previous_url: /helpers/layout/dialog/overview
 slug: overview_dialoghelper_aspnetcore
 position: 0

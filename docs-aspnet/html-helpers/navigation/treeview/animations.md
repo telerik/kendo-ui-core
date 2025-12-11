@@ -2,6 +2,7 @@
 title: Animations
 page_title: Animations
 description: "Learn how to configure the animation options when working with the Telerik UI TreeView for {{ site.framework }}."
+components: ["treeview"]
 slug: htmlhelpers_treeview_animations_aspnetcore
 position: 3
 ---

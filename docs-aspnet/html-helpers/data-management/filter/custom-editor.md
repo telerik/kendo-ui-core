@@ -2,6 +2,7 @@
 title: Custom Editor
 page_title: Custom Editor
 description: "Learn how to use a specific editor for the Telerik UI Filter component for {{ site.framework }}."
+components: ["filter"]
 slug: htmlhelpers_filter_aspnetcore_custom_editor
 position: 4
 ---

@@ -6,7 +6,7 @@ page_title: Place DatePicker in the Toolbar | AngularJS Kendo UI Gantt
 slug: gantt-angularjs-inject-datepicker-in-tooblar
 tags: kendo, kendoui, gantt, angular, angularjs, datepicker, toolbar, inject, insert-picker
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

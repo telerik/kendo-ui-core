@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Learn filtering capabilities of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 slug: htmlhelpers_combobox_filtering_aspnetcore
 position: 5
 ---

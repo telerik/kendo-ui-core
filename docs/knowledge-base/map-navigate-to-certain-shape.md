@@ -7,7 +7,7 @@ slug: map-navigate-to-certain-shape
 tags: map, kendo, shape, ui, navigate, zoom, programmatically
 ticketid: 1140119
 res_type: kb
-component: map
+components: ["map"]
 ---
 
 ## Environment

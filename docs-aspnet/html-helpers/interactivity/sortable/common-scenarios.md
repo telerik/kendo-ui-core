@@ -2,6 +2,7 @@
 title: Common Scenarios
 page_title: Common Scenarios
 description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn check out the common scenarios."
+components: ["sortable"]
 slug: htmlhelpers_sortable_aspnetcore_common_scenarios
 position: 8
 ---

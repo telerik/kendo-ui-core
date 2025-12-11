@@ -7,6 +7,7 @@ slug: grid-third-party-angularjs-template
 tags: grid, angularjs, column template, third party, editor, compile
 ticketid: 1086179
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

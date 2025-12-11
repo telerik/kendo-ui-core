@@ -7,6 +7,7 @@ tags: telerik, dropdownlist, remove, items, datasource
 component: dropdownlist
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

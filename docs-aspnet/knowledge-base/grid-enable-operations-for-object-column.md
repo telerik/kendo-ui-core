@@ -6,6 +6,7 @@ page_title: Enable Grid Operations for Compound Object Column
 slug: grid-enable-operations-for-object-column
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, columns, operations, filtering, sorting
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -5,9 +5,9 @@ description: "Learn how to select multiple rows with checkboxes in the Kendo UI 
 previous_url: /controls/data-management/grid/how-to/Selection/select-multiple-rows-with-checkboxes
 slug: howto_select_multiple_rowswith_checkboxes_grid
 tags: select, multiple, rows, checkboxes, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

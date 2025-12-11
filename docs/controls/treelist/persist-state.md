@@ -2,6 +2,7 @@
 title: State Persistence
 page_title: jQuery TreeList Documentation - State Persistence
 description: "Get started with the jQuery TreeList by Kendo UI and persist the state of the component."
+components: ["treelist"]
 slug: persiststate_kendoui_treelist_widget
 position: 11
 ---

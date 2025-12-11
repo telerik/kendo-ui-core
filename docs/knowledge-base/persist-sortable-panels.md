@@ -6,7 +6,7 @@ page_title: Persist the Same Rendering of Panels - Kendo UI Sortable for jQuery
 slug: persist-sortable-panels
 tags: sortable, panels, persist, order, state
 res_type: kb
-component: sortable
+components: ["sortable"]
 ---
 
 ## Environment

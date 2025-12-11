@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery Chat Documentation - Templates
 description: "Learn about the template customization options available in the Kendo UI for jQuery Chat component."
+components: ["chat"]
 slug: templates_kendoui_chat
 position: 5
 ---

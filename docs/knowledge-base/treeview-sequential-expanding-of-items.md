@@ -6,6 +6,7 @@ page_title: Sequentially Expand Items with loadOnDemand - Kendo UI TreeView for 
 slug: treeview-sequentially-expand-items-with-loadondemand
 tags: kendo, kendo-ui, treeview, sequentially, expand, items, loadondemand
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

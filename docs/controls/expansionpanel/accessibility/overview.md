@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ExpansionPanel Documentation | ExpansionPanel Accessibility
 description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["expansionpanel"]
 slug: jquery_expansionpanel_accessibility
 position: 1
 ---

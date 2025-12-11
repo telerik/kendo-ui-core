@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding
 description: "Learn the binding options for the Telerik UI TreeView component for {{ site.framework }}."
+components: ["treeview"]
 previous_url: /helpers/navigation/treeview/ajax-binding
 slug: htmlhelpers_treeview_binding_aspnetcore
 position: 2

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI BottomNavigation component for {{ site.framework }} that provides built-in configuration options for its items and appearance."
+components: ["bottomnavigation"]
 slug: htmlhelpers_bottomnavigation_aspnetcore
 position: 1
 ---

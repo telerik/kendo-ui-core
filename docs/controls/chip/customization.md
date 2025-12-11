@@ -2,6 +2,7 @@
 title: Customization
 page_title: jQuery Chip Documentation - Chip Customization
 description: "Try now the Kendo UI for jQuery Chip component and learn how to customize it by configuring its icons and avatars."
+components: ["chip"]
 slug: customization_kendoui_chip_widget
 position: 3
 ---

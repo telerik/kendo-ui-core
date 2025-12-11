@@ -2,6 +2,7 @@
 title: Button
 page_title: Button ToolBar Command Type
 description: "Get started with the Telerik UI ToolBar for {{ site.framework }} and learn how to configure and use the Button command type."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_button_aspnetcore
 ---
 

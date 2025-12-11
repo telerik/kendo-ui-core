@@ -2,6 +2,7 @@
 title: Webpack
 page_title: Webpack - Kendo UI Third-Party Tools
 description: "Package Kendo UI with Webpack."
+components: ["general"]
 slug: webpacksupport_integration_kendoui
 ---
 

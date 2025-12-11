@@ -7,7 +7,7 @@ slug: grid-user-defined-row-styles
 tags: grid, user, selected, defined, value, background, hover, rows, colorpicker, dynamic. color
 ticketid: 1425657
 res_type: kb
-component: grid, colorpicker
+components: ["grid"]
 ---
 
 ## Environment

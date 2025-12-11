@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery MediaPlayer Documentation - MediaPlayer Localization
 description: "Get started with the jQuery MediaPlayer by Kendo UI and translate its messages for different culture locales."
+components: ["mediaplayer"]
 slug: localization_mediaplayer_jquery
 position: 2
 ---

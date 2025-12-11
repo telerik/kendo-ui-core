@@ -2,6 +2,7 @@
 title: Timezones
 page_title: Timezones
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its timezone."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_timezones_aspnetcore
 position: 5
 ---

@@ -6,6 +6,7 @@ type: how-to
 slug: imageeditor-rotate-image
 tags: progress, telerik, aspnet, mvc, core, imageeditor, image, rotate, edit
 res_type: kb
+components: ["general"]
 component: imageeditor
 ---
 

@@ -6,6 +6,7 @@ page_title: How to Sync Selection Between ListView Items and Checkboxes in Kendo
 slug: how-to-sync-listview-selection-with-checkboxes-kendo-ui
 tags: kendo-ui, listview, checkboxes, selection, javascript
 res_type: kb
+components: ["listview"]
 ticketid: 1668686
 ---
 

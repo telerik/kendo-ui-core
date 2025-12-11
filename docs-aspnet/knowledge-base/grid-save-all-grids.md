@@ -6,6 +6,7 @@ slug: grid-save-all-grids
 tags: grid, all, save, changes, core, mvc, telerik
 component: grid
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

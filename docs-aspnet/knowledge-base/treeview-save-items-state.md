@@ -7,6 +7,7 @@ previous-url: /helpers/navigation/treeview/how-to/save-items-state, /html-helper
 slug: treeview-save-items-state
 tags: save, treeview, item, state
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

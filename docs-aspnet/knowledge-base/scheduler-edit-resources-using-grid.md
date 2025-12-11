@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/scheduler-resource-editing, /
 slug: scheduler-edit-resources-using-grid
 tags: scheduler, edit, resources, grid, custom, editor, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

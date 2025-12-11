@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Filter component and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["filter"]
 slug: keynav_filter_aspnetcore
 position: 2
 ---

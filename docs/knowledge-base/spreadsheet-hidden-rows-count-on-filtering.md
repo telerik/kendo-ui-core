@@ -7,6 +7,7 @@ slug: spreadsheet-hidden-rows-count-on-filtering
 tags: spreadsheet
 ticketid: 1083716  
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

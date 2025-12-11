@@ -2,6 +2,7 @@
 title: AI Integration
 page_title: AI Integration
 description: "Learn how to utilize the AI Prompt integration in the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_ai_integration_aspnetcore
 position: 5
 ---

@@ -6,7 +6,7 @@ page_title: Show Specific Repeat Options in Recurrence Editor - Kendo UI Schedul
 slug: scheduler-show-specific-options-in-recurrence-editor
 tags: kendo, kendoui, scheduler, recurrence, editor, show, hide, repeat
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI Signature for {{ site.framework }} Documentation - Signature Overview
 description: "The Telerik UI Signature component for {{ site.framework }} provides a styled UI element that enables the user to create handwritten signatures."
+components: ["signature"]
 slug: overview_telerikui_signature_component
 position: 0
 ---

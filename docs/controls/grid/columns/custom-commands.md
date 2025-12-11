@@ -2,6 +2,7 @@
 title: Custom Commands
 page_title: jQuery Grid Documentation - Custom Column Commands
 description: "Get started with the jQuery Grid by Kendo UI and learn how to implement custom commands for handling its column records."
+components: ["grid"]
 slug: customcommands_kendoui_grid_widget
 position: 8
 ---

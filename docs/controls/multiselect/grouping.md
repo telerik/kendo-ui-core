@@ -2,6 +2,7 @@
 title: Grouping
 page_title: jQuery MultiSelect Documentation - Grouping
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to configure its grouping functionality."
+components: ["multiselect"]
 slug: grouping_kendoui_multiselect_widget
 position: 4
 ---

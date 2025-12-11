@@ -2,6 +2,7 @@
 title: Stacked Display Mode
 page_title: jQuery Grid Documentation - Stacked Display Mode
 description: "Learn how to configure and use the Stacked Display Mode in the jQuery Grid by Kendo UI."
+components: ["grid"]
 slug: stacked_display_mode_kendoui_grid_widget
 position: 6
 ---

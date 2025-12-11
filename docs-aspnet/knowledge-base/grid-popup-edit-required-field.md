@@ -6,6 +6,7 @@ page_title: Dynamically change if a field is required in PopUp Edit Mode of a Te
 slug: grid-popup-edit-required-field
 tags: grid, dropdownlist, popup, required
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

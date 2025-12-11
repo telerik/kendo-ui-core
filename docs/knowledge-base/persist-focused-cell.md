@@ -5,9 +5,9 @@ description: "Learn how to persist a focused cell in the Kendo UI Grid for jQuer
 previous_url: /controls/data-management/grid/how-to/Editing/persist-focused-cell
 slug: howto_persist_focused_grid_cell_grid
 tags: persist, focused, grid, cells, after, rebind
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

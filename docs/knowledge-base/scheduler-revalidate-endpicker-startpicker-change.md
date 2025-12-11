@@ -7,6 +7,7 @@ slug: scheduler-revalidate-endpicker-startpicker-change
 tags: kendo, kendoui, scheduler, validate, datetimepicker, start, end
 ticketid: 1419532
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

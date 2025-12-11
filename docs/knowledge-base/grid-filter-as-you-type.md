@@ -5,9 +5,9 @@ description: "Learn how to filter the jQuery Grid by Kendo UI on the fly, as the
 previous_url: /controls/data-management/grid/how-to/grid-filter-as-you-type, /web/grid/how-to/grid-filter-as-you-type, /controls/data-management/grid/how-to/filtering/grid-filter-as-you-type
 slug: howto_filter_gridas_you_type_grid
 tags: grid, filter, typing, row, textbox
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

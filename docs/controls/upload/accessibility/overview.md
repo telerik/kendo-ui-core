@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Upload Documentation | Upload Accessibility
 description: "Get started with the jQuery Upload by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["upload"]
 slug: jquery_upload_accessibility
 position: 1
 ---

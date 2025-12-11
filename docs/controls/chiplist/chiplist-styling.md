@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery ChipList Documentation - Appearance
 description: "Learn how to apply different styling options to the ChipList widget."
+components: ["chiplist"]
 slug: chiplist_styling_widget
 position: 5
 ---

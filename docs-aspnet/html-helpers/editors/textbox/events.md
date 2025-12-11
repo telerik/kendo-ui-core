@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TextBox component for {{ site.framework }}."
+components: ["textbox"]
 slug: events_textbox_aspnetcore
 position: 7
 ---

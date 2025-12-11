@@ -5,9 +5,9 @@ description: "Learn how to dynamically calculate the height of the Kendo UI for 
 previous_url: /controls/scheduling/scheduler/how-to/dynamic-calc-of-height-in-mobile, /controls/scheduling/scheduler/how-to/appearance/dynamic-calc-of-height-in-mobile
 slug: howto_calculate_scheduler_height_dunamically_onmobile_scheduler
 tags: telerik, kendo, jquery, scheduler, calculate, height, dynamically, on, mobile 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

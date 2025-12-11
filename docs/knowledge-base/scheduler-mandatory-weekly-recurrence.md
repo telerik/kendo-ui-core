@@ -6,7 +6,7 @@ page_title: Make the Weekly Recurrence Option Mandatory in the Hierarchy Schedul
 slug: scheduler-weekly-recurrence-mandatory
 tags: kendo, jquery, scheduler, recurrence rule, editor, mandatory
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

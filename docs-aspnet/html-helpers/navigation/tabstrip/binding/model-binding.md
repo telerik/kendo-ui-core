@@ -2,6 +2,7 @@
 title: Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI TabStrip HtmlHelper for ASP.NET MVC."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/binding/model-binding
 slug: modelbinding_tabstrip_aspnetmvc
 position: 3

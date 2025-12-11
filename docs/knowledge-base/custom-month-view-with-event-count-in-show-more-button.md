@@ -5,9 +5,9 @@ description: "Learn how to inherit some of the built-in views and implement spec
 previous_url: /controls/scheduling/scheduler/how-to/custom-month-view-with-event-count-in-show-more-button, /controls/scheduling/scheduler/how-to/custom-views/custom-month-view-with-event-count-in-show-more-button
 slug: howto_create_custom_monthview_eventcount_showmore_button_scheduler
 tags: telerik, kendo, jquery, scheduler, create, custom, month, views, with, event, count, in, the, show, more, button
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

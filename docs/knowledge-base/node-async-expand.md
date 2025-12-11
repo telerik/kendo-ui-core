@@ -5,9 +5,9 @@ description: "Learn how to asynchronously expand the selected node of the Kendo 
 previous_url: /controls/navigation/treeview/how-to/nodes/node-async-expand
 slug: howto_asynchronous_expand_selected_node
 tags: telerik, kendo, jquery, treeview, expand, selected, nodes, asynchronously
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

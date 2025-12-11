@@ -5,9 +5,9 @@ description: "Learn how to create a Kendo UI for jQuery Scheduler on the client 
 previous_url: /controls/scheduling/scheduler/how-to/sync-with-batch, /controls/scheduling/scheduler/how-to/binding/sync-with-batch
 slug: howto_create_a_scheduler_on_the_client_and_sync_with_batch_scheduler
 tags: telerik, kendo, jquery, scheduler, create, on, the, client, and, sync, with, batch  
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

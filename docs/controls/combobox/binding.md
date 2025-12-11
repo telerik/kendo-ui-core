@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery ComboBox Documentation - Data Binding
 description: "Get started with the jQuery ComboBox by Kendo UI and bind the component to local or remote data."
+components: ["combobox"]
 slug: databinding_kendoui_combobox
 position: 3
 ---

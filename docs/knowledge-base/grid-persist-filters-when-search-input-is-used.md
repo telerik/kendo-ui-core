@@ -6,8 +6,8 @@ type: how-to
 slug: grid-persist-filters-when-search-input-is-used
 tags: telerik, kendoui, kendo, grid, search, panel, combine, menu, persist, filters, searching
 res_type: kb
+components: ["grid"]
 ticketid: 1552584
-component: grid
 ---
 
 ## Environment

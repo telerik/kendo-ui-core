@@ -5,9 +5,9 @@ description: "Learn how to initialize a Kendo UI for jQuery Grid inside a Kendo 
 slug: initialize_thegrid_window_widget
 previous_url: /controls/layout/window/how-to/initiliaze-grid-in-window
 tags: telerik, kendo, jquery, window, initialize, the, grid
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 slug: events_combobox_aspnetcore
 position: 9
 ---

@@ -2,6 +2,7 @@
 title: Column Templates
 page_title: jQuery Grid Documentation - Column Templates
 description: "Get started with the jQuery Grid by Kendo UI and learn how to customize the way the column displays its value."
+components: ["grid"]
 slug: column_templates_kendoui_grid_widget
 position: 3
 ---

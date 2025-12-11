@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery LinearGauge Documentation - LinearGauge Overview
 description: "Get started with the jQuery LinearGauge by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["lineargauge"]
 slug: overview_kendoui_lineargauge_widget
 position: 1
 ---

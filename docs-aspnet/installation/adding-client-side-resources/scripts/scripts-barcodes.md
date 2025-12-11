@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Barcodes
 page_title: Individual Scripts for Barcodes
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Barcodes"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-barcodes, /getting-started-core/scripts/scripts-barcodes, /installation/scripts/scripts-barcodes
 slug: script_filesfor_barcodes_widgets
 ---

@@ -2,6 +2,7 @@
 title: InCell
 page_title: InCell Grid Editing Mode
 description: "Enable InCell edit mode and batch updates in Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: batchediting_grid_aspnetcore
 position: 4
 ---

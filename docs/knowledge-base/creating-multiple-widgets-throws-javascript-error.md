@@ -6,7 +6,7 @@ slug: creating_multiple_widgets_javascript_error
 tags: telerik, kendoui, jquery, troubleshooting, creating, multiple, widgets, throws, javascript, error
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

@@ -8,6 +8,7 @@ position:
 tags: grid, button, toolbar
 ticketid: 1461293
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

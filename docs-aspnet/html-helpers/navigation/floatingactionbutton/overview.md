@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Try now the Telerik UI FloatingActionButton component for {{ site.framework }} providing various alignment options for its items and complete control over its appearance."
+components: ["floatingactionbutton"]
 slug: htmlhelpers_floatingactionbutton_aspnetcore
 position: 0
 ---

@@ -7,7 +7,7 @@ slug: grid-row-template-detail-template-angularjs
 tags: grid, angular, js, angularjs, directive, template, row, detail, rowTemplate, detailTemplate
 ticketid: 1179134
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

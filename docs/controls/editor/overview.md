@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Editor Documentation - Editor Overview
 description: "Try now the Kendo UI for jQuery Editor component covering everything from setting its state to read-only and configuring its current mode of operation to implementing a number of action tools, adding selection and pasting for the content, and using an image browser and format painter."
+components: ["editor"]
 slug: overview_kendoui_editor_widget
 position: 1
 ---

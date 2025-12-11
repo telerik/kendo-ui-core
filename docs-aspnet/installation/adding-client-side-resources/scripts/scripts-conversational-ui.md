@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Conversational UI
 page_title: Individual Scripts for Conversational UI
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Conversational UI"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-conversational-ui, /installation/scripts/scripts-conversational-ui
 slug: script_filesfor_conversationalui_widgets
 ---

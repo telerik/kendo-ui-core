@@ -5,9 +5,9 @@ description: "Bind a container to an extended ObservableObject with default valu
 slug: howto_bindacontainertoanextended_observableobjectwithdefaultvalues_mvvm
 previous_url: /framework/mvvm/how-to/extend-observable-object
 tags: telerik, kendo, jquery, mvvm, pattern, architecture, bind, container, to, extended, observableobject, with, default, values
-component: mvvm pattern
 type: how-to
 res_type: kb
+components: ["mvvm pattern"]
 ---
 
 ## Environment

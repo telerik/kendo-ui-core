@@ -2,6 +2,7 @@
 title: Label
 page_title: Label
 description: "Learn how to configure the label of the Telerik UI CheckBoxGroup for {{ site.framework }}."
+components: ["checkboxgroup"]
 slug: htmlhelpers_checkboxgroup_aspnetcore_label
 position: 3
 ---

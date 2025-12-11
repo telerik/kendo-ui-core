@@ -2,6 +2,7 @@
 title: Toggle Edit Mode
 page_title: Toggle Edit Mode
 description: "Learn how to toggle the edit mode of the Telerik UI for {{ site.framework }} Grid."
+components: ["grid"]
 position: 7
 slug: toggle_edit_mode_grid
 ---

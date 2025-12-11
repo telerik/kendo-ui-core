@@ -2,6 +2,7 @@
 title: Selection
 page_title: jQuery ListView Documentation - Selection
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement its selection functionality."
+components: ["listview"]
 slug: selection_kendoui_listview
 position: 4
 ---

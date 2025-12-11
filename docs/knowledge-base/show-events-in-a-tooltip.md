@@ -5,9 +5,9 @@ description: "Learn how to show the events of a Kendo UI for jQuery Scheduler in
 previous_url: /controls/scheduling/scheduler/how-to/show-events-in-a-tooltip, /controls/scheduling/scheduler/how-to/appearance/show-events-in-a-tooltip
 slug: howto_show_events_in_a_kendo_ui_tooltip_scheduler
 tags: telerik, kendo, jquery, scheduler, show, events, in, a, tooltip 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ type: how-to
 slug: howto_setupprivatefeedazure_aspnetcore
 tags: aspnet, core, mvc, nuget, azure, artifacts
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

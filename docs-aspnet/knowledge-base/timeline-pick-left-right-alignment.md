@@ -6,6 +6,7 @@ type: how-to
 slug: timeline-pick-left-right-alignment
 tags: progress, telerik, aspnet, mvc, core, form, cancel, button
 res_type: kb
+components: ["general"]
 component: form
 ---
 

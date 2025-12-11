@@ -7,6 +7,7 @@ slug: treeview-update-selected-node
 tags: treeview, troubleshooting
 ticketid: 1556946  
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

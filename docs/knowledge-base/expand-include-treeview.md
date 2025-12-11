@@ -5,9 +5,9 @@ description: "Learn how to access the TreeView with the Include Fields items and
 previous_url: /controls/data-management/pivotgrid/how-to/expand-include-treeview, /controls/data-management/pivotgrid/how-to/dimensions/expand-include-treeview
 slug: howto_expand_include_fields_treeview_pivotgrid
 tags: kendoui, pivotgrid, expand, treeview, with, include, fields, items
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

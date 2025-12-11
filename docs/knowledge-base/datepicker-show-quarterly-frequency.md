@@ -7,6 +7,7 @@ slug: datepicker-show-quarterly-frequency
 tags: datepicker, quarterly, frequency
 ticketid: 1153900
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

@@ -8,6 +8,7 @@ position:
 tags: form, dropdownlist, enum, bind, populate
 ticketid: 1601481
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

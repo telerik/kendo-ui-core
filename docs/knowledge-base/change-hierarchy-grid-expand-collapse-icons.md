@@ -7,7 +7,7 @@ slug: update-hierarchy-grid-expand-collapse-icons
 tags: jquery, grid, hierarchy, expand, collapse, icons, add, text, kendo grid
 ticketid: 1586958
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

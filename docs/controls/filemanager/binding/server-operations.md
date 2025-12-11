@@ -2,6 +2,7 @@
 title: Server Operations
 page_title: jQuery FileManager Documentation - Server Operations in FileManager
 description: "Get understanding in the Server Operations in FileManager."
+components: ["filemanager"]
 slug: serveroperations_kendoui_filemanager_widget
 published: false
 position: 3

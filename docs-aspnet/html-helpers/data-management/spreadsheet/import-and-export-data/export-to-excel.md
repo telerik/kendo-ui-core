@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: Excel Export
 description: "Learn how to export to an Excel file in the browser using the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_export_to_excel_aspnetcore
 position: 2
 ---

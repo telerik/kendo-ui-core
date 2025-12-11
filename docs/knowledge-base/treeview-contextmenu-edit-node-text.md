@@ -6,6 +6,7 @@ page_title: Edit Node Text through Context Menu - Kendo UI TreeView for jQuery
 slug: treeview-contextmenu-edit-node-text
 tags: kendo, kendo-ui, treeview, contextmenu, edit, node, text
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

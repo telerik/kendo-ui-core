@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Breadcrumb component for {{ site.framework }} that provides features like icons, path editing, and numerous built-in configuration options"
+components: ["breadcrumb"]
 slug: htmlhelpers_breadcrumb_aspnetcore_overview
 position: 0
 ---

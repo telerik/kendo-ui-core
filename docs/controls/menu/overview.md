@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Menu Documentation - Menu Overview
 description: "Try now the Kendo UI for jQuery Menu component covering everything from supported local and remote data binding scenarios and predefined animations to providing settings for configuring the behavior of its items and a comprehensive set of options for styling its appearance."
+components: ["menu"]
 slug: overview_kendoui_menu_widget
 position: 0
 ---

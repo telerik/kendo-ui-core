@@ -7,6 +7,7 @@ meta_title: Correctly Identifying Parent Node on Drag-and-Drop in jQuery TreeVie
 slug: retrieve-parent-node-on-drop-jquery-treeview
 tags: treeview, drop, parentnode, dropPosition, destinationNode
 res_type: kb
+components: ["treeview"]
 ticketid: 1692918
 ---
 

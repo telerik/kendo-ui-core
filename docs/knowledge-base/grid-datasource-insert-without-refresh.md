@@ -7,6 +7,7 @@ slug: grid-datasource-insert-without-refresh
 tags: grid, datasource, insert, change, rebind
 ticketid: 1142171
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Export Options
 page_title: jQuery ChartWizard Documentation - Export Options
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn more about how you can export the chart to different formats."
+components: ["chartwizard"]
 slug: export_kendoui_chartwizard
 position: 4
 ---

@@ -3,6 +3,7 @@ comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE 
 title: Media
 page_title: Individual Scripts for Media - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Media"
+components: ["general"]
 slug: script_filesfor_media_widgets
 ---
 

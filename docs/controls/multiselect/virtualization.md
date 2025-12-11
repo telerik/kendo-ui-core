@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: jQuery MultiSelect Documentation - Virtualization
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to implement its virtualization functionality."
+components: ["multiselect"]
 slug: virtualization_kendoui_multiselect_widget
 position: 6
 ---

@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Badge Appearance
 description: "Learn how to customize the appearance of the Telerik UI Badge HtmlHelper for {{ site.framework }}."
+components: ["badge"]
 slug: appearance_badge_aspnetcore
 position: 2
 ---

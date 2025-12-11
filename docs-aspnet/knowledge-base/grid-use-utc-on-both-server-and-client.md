@@ -6,6 +6,7 @@ page_title: Use UTC in Both Client and Server Grids
 slug: grid-use-utc-on-server-and-client
 tags: grid, utc, format, datetime, client, server
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -2,6 +2,7 @@
 title: Customization
 page_title: Customization
 description: "Learn how to create a custom theme for you application and alter the default appearance of the {{ site.product }} components."
+components: ["general"]
 slug: sassbasedthemes_customization_telerikui
 position: 2
 ---

@@ -2,6 +2,7 @@
 title:  Ajax Binding
 page_title: Ajax Binding
 description: "Learn how to implement Ajax Binding with Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["dropdowntree"]
 previous_url: /helpers/editors/dropdowntree/ajax-binding
 slug: htmlhelpers_dropdowntree_ajaxbinding_aspnetcore
 position: 4

@@ -7,6 +7,7 @@ slug: datepicker-global-min-max-range
 tags: datepicker, global, min, max, range
 ticketid: 1341901
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

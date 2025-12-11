@@ -7,7 +7,7 @@ slug: spreadsheet-custom-cell-editor-popup
 tags: spreadsheet, custom, editor, cell, popup
 ticketid: 1115323
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ page_title: Create a Table with Borders - Kendo UI Editor for jQuery
 slug: editor-create-table-borders
 tags: editor, table, create, borders
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

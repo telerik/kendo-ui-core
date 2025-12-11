@@ -2,6 +2,7 @@
 title: ECMAScript Modules
 page_title: ECMAScript Modules - Download and Installation 
 description: "Get started with Kendo UI for jQuery and learn about the ECMAScript modules provided in the library."
+components: ["general"]
 slug: kendoui_ecmascript_overview
 position: 10
 ---

@@ -6,6 +6,7 @@ page_title: How to Trigger Search on Enter Key Press in Kendo UI Grid with Serve
 slug: customize-search-kendo-grid-toolbar-enter-key
 tags: kendo ui, grid, search, toolbar, serverfiltering, enter key, keydown event
 res_type: kb
+components: ["grid"]
 ticketid: 1668767
 ---
 

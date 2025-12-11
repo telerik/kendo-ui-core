@@ -6,6 +6,7 @@ slug: scheduler-preserve-buttongroup-view-in-adaptive-rendering
 tags: scheduler, button, group, mobile, rendering, adaptive ,core, mvc, telerik, view, calendar
 component: scheduler
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

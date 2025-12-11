@@ -7,6 +7,7 @@ slug: grid-group-remove-footer-header-one-record
 tags: grid, group, groupFooterTemplate, groupHeaderTemplate
 ticketid: 1143117
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

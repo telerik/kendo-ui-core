@@ -7,6 +7,7 @@ slug: get-checked-treeview-nodes-in-post
 tags: treeview, node, checked, checkbox, name, post, query, unique
 ticketid: 1363907, 1363212, 1364154
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

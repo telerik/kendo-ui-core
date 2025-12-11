@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom DataSource Binding of the ListView Component
 description: "Learn how to configure the {{ site.product }} ListView for custom data bidning."
+components: ["listview"]
 slug: listview_customdatasource_aspnetmvc
 position: 4
 ---

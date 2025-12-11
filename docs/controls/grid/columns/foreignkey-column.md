@@ -2,6 +2,7 @@
 title: ForeignKey Column
 page_title: jQuery Grid Documentation - ForeignKey Column
 description: "Get started with the jQuery Grid by Kendo UI and learn how to set up the ForeignKey column."
+components: ["grid"]
 slug: foreignkeycolumn_kendoui_grid_widget
 position: 10
 ---

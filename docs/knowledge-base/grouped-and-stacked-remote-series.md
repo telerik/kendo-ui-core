@@ -5,9 +5,9 @@ description: "Learn how to bind a Kendo UI Chart with multiple stack groups to r
 previous_url: /controls/charts/how-to/grouped-and-stacked-remote-series
 slug: howto_stackedgroupedseriesremote_charts
 tags: chart, create, stacked, grouped, series, bound, to, remote, data
-component: chart
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

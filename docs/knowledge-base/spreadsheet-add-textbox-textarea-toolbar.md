@@ -6,6 +6,7 @@ page_title: How to Add a TextBox or TextArea to the Kendo UI Spreadsheet Toolbar
 slug: spreadsheet-add-textbox-textarea-toolbar
 tags: kendo-ui, spreadsheet, toolbar, textbox, textarea
 res_type: kb
+components: ["textbox"]
 ---
 
 ## Environment

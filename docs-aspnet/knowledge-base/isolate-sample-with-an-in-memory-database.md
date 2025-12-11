@@ -6,6 +6,7 @@ page_title: Isolate Sample with an InMemory Database Provider
 slug: isolate-sample-with-an-in-memory-database
 tags: aspnet, core, dotnet-core, sample, project, repl, memory, database, in, entity, framework
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery FileManager Documentation - FileManager Overview
 description: "Get started with the jQuery FileManager by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["filemanager"]
 slug: overview_kendoui_filemanager_widget
 position: 0
 ---

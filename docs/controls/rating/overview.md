@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Rating Documentation - Rating Overview
 description: "Get started with the jQuery Rating by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["rating"]
 slug: overview_kendoui_rating_widget
 position: 0
 ---

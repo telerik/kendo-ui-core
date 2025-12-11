@@ -7,6 +7,7 @@ slug: grid-foreign-key-custom-editor-radio-buttons
 tags: grid, foreign, editor, key, radio, buttons, custom, editor
 ticketid: 1402074
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -7,6 +7,7 @@ slug: invalid-template-during-localization
 tags: invalid, template, error, using, localization, templates  
 ticketid: 1146274
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

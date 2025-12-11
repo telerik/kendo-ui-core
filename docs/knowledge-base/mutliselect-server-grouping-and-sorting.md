@@ -7,6 +7,7 @@ slug: mutliselect-server-grouping-and-sorting
 tags: kendo, kendoui, MVC, multiselect, grouping, sorting
 ticketid: 1161764
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

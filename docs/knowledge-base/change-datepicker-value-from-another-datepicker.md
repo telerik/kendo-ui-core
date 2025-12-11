@@ -5,9 +5,9 @@ description: "Learn how to change a DatePicker value from another DatePicker in 
 previous_url: /controls/data-management/grid/how-to/Editing/change-datepicker-value-from-another-datepicker
 slug: howto_change_datepicker_value_from_another_datepicker_grid
 tags: grid, datepicker, value, another
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

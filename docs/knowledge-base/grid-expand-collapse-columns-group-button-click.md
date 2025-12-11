@@ -7,6 +7,7 @@ slug: grid-expand-collapse-columns-group-button-click
 tags: grid, multi-column, headers, expand, collapse, columns
 ticketid: 1158853
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

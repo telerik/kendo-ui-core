@@ -5,9 +5,9 @@ description: "Learn how to make the inline Editor toolbar always visible."
 previous_url: /controls/editors/editor/how-to/make-inline-editor-toolbar-always-visible, /controls/editors/editor/how-to/appearance/make-inline-editor-toolbar-always-visible
 slug: howto_make_inline_editor_toolbar_always_visible
 tags: telerik, kendo, jquery, editor, make, inline, toolbar, always, visible
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

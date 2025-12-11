@@ -6,8 +6,8 @@ page_title: Dynamically Calculate Aggregates in the Grid - Kendo UI for jQuery D
 slug: grid-dynamic-aggregates
 tags: grid, dynamically, column, header, dynamic, aggregate, menu, footer, update, refresh, calculate
 res_type: kb
+components: ["grid"]
 ticketid: 1471295
-component: grid
 ---
 
 ## Environment

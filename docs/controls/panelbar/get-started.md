@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PanelBar Documentation - Getting Started with the PanelBar
 description: "Get started with the jQuery PanelBar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["panelbar"]
 slug: getting_started_kendoui_panelbar_component
 position: 1
 ---

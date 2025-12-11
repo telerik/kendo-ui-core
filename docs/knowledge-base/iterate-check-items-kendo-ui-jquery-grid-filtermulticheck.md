@@ -6,6 +6,7 @@ page_title: Programmatically Check Items in Kendo UI for jQuery Grid FilterMulti
 slug: iterate-check-items-kendo-ui-jquery-grid-filtermulticheck
 tags: kendo, ui, jquery, grid, filtermulticheck, iterate, check, items
 res_type: kb
+components: ["grid"]
 ticketid: 1682081
 ---
 

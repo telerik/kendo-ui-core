@@ -6,6 +6,7 @@ page_title: Preventing Selection of First Level Options in DropDownTree | Kendo 
 slug: dropdowntree-prevent-selection-first-level-options
 tags: dropdowntree, checkboxes, selection, first level
 res_type: kb
+components: ["dropdowntree"]
 ---
 ## Environment
 | Product | Version |

@@ -2,6 +2,7 @@
 title: Planned vs Actual
 page_title: jQuery Gantt Documentation - Planned vs Actual
 description: "Get started with the jQuery Gantt by Kendo UI and learn more about how it displays planned and actual dates."
+components: ["gantt"]
 slug: planned_vs_actual_kendoui_gantt
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Operation Modes
 page_title: jQuery Stepper Documentation
 description: "Get started with the jQuery Stepper by Kendo UI and configure its mode of operation."
+components: ["stepper"]
 slug: modes_stepper_widget
 position: 4
 ---

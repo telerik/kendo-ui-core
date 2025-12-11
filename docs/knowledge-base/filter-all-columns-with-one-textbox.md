@@ -6,7 +6,7 @@ page_title: Filter All Columns with Single Textbox - Kendo UI for jQuery Data Gr
 slug: filter-all-columns-with-one-textbox
 tags: grid, filter, all, columns, single, input, textbox, one, global, search, entire, whole
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

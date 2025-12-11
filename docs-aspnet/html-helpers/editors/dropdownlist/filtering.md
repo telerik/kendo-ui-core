@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Learn how to filter data on the server for the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_serverfiltering_aspnetcore
 position: 4
 ---

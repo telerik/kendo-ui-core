@@ -7,6 +7,7 @@ slug: grid-popup-editing-show-validation-summary
 tags: kendoui, grid, edit, popup, validation, summary 
 ticketid: 1607760
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

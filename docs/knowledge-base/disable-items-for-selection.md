@@ -5,9 +5,9 @@ description: "Learn how to disable items for selection within a Kendo UI DropDow
 previous_url: /controls/editors/dropdownlist/how-to/disable-items-for-selection, /controls/editors/dropdownlist/how-to/selection/disable-items-for-selection
 slug: howto_disable_items_for_selection_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, disable, items, for, selection
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

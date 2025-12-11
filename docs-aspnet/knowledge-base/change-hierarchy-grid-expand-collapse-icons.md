@@ -6,6 +6,7 @@ page_title: Updating and Adding Text to the Expand and Collapse Icons in the Hie
 slug: update-hierarchy-grid-expand-collapse-icons
 tags: telerik, grid, hierarchy, expand, collapse, icons, add, text, rows
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

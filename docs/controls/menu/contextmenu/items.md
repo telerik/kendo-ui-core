@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery ContextMenu Documentation - Items
 description: "Get started with the jQuery ContextMenu by Kendo UI and configure the items of the widget."
+components: ["menu"]
 slug: items_kendoui_contextmenu
 position: 4
 ---

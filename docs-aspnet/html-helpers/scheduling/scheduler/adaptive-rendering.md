@@ -2,6 +2,7 @@
 title: Adaptive Rendering
 page_title: Adaptive Rendering
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its adaptive rendering."
+components: ["scheduler"]
 previous_url: /helpers/scheduling/scheduler/adaptive-rendering
 slug: htmlhelpers_scheduler_adaptiverendering_aspnetcore
 position: 6

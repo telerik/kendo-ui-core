@@ -7,6 +7,7 @@ slug: treeview-bind-to-data-troubleshooting
 tags: treeview, troubleshooting
 ticketid: 1141952  
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

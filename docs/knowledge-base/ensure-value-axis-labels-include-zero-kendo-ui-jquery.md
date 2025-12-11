@@ -7,6 +7,7 @@ meta_title: How to Ensure Value Axis Labels Include Zero in Kendo UI for jQuery 
 slug: ensure-value-axis-labels-include-zero-kendo-ui-jquery
 tags: kendo-ui-for-jquery,chart,value-axis,labels,majorunit
 res_type: kb
+components: ["chart"]
 ticketid: 1639809
 ---
 

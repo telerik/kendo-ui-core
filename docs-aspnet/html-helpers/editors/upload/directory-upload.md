@@ -2,6 +2,7 @@
 title: Directory Upload
 page_title: Directory Upload
 description: "Learn how to enable the Directry upload feature of the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 slug: htmlhelpers_upload_directory_aspnetcore
 position: 9
 ---

@@ -6,6 +6,7 @@ page_title: Customizing Grid Text Across the Whole Component - Kendo UI Grid for
 slug: grid-customize-text
 tags: grid, customize, text, kendo
 res_type: kb
+components: ["grid"]
 ---
 ## Environment
 | Product | Version |

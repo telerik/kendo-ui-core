@@ -5,9 +5,9 @@ description: "Learn how to update the aggregates shown by the Kendo UI jQuery Gr
 previous_url: /controls/data-management/grid/how-to/update-aggregates-on-change, /controls/data-management/grid/how-to/various/update-aggregates-on-change
 slug: howto_update_aggregatesonchange_grid
 tags: update, aggregates, when, value, changes, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

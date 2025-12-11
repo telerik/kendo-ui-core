@@ -7,6 +7,7 @@ previous_url: /helpers/layout/window/how-to/update-dialog-ajax-forms, /html-help
 slug: grid-add-item-from-window
 tags: window, grid, item, create, new
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

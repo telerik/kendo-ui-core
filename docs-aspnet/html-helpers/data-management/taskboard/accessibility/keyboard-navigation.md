@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_keynav
 position: 2
 ---

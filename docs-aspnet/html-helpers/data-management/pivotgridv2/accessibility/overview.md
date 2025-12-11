@@ -2,6 +2,7 @@
 title: Overview
 page_title: PivotGridV2 Documentation | PivotGridV2 Accessibility
 description: "Get started with the {{ site.product }} PivotGridV2 and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_accessibility
 position: 1
 ---

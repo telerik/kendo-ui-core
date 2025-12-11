@@ -7,6 +7,7 @@ slug: grid-prevent-columns-reordering
 tags: grid, columns, reorder
 ticketid: 1138136
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

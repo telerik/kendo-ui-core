@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery MultiSelect Documentation - Templates
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to customize its item, value, header, footer, and no-data templates."
+components: ["multiselect"]
 slug: templates_multiselect
 position: 8
 ---

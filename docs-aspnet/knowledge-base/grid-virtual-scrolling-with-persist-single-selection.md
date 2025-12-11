@@ -6,6 +6,7 @@ page_title: Persist Single-Row Selection in Grid with Virtual Scrolling
 slug: grid-virtual-scrolling-persist-row-selection
 tags: grid, virtual, scrolling, virtualization, persist, selection
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

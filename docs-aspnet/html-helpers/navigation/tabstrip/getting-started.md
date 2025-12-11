@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} TabStrip component by following a complete step-by-step tutorial."
+components: ["tabstrip"]
 slug: aspnetcore_tabstrip_getting_started
 position: 1
 ---

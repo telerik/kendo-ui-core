@@ -7,6 +7,7 @@ previous_url: /helpers/editors/datepicker/how-to/masked-date-picker-grid, /html-
 slug: howto_create_masked_datepickers_datepickaspnetmvc
 tags: datepicker, mask, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

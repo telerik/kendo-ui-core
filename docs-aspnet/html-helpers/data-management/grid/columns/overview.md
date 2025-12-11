@@ -2,6 +2,7 @@
 title: Overview
 page_title: Columns Overview
 description: "An overview the Telerik UI Grid component for {{ site.framework }} columns options."
+components: ["grid"]
 slug: htmlhelper_gridcolumns
 position: 1
 ---

@@ -5,9 +5,9 @@ description: "Learn how to build custom dataSource of the Kendo UI Grid for jQue
 previous_url: /controls/data-management/grid/how-to/Editing/build-datasource-with-currying-for-a-custom-editor
 slug: howto_build_custom_datasourcefor_custom_editor_grid
 tags: grid, custom, datasource, editor
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

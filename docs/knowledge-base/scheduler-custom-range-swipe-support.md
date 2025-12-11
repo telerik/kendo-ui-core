@@ -6,6 +6,7 @@ page_title: Scheduler Custom Range View and Swipe Support - Kendo UI Scheduler f
 slug: scheduler-custom-range-swipe
 tags: scheduler, custom, view, kendo, swipe, mobile
 res_type: kb
+components: ["scheduler"]
 ---
 ## Environment
 | Product | Version |

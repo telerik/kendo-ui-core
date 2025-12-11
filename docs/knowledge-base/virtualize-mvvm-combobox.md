@@ -8,7 +8,7 @@ slug: virtualize-mvvm-combobox
 tags: kendoui, kendo, kendo, kendoui, combobox, mvvm, virtualization
 ticketid: 1121707
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

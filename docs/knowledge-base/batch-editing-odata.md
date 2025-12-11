@@ -5,9 +5,9 @@ description: "Learn how to implement batch editing when binding the Kendo UI Gri
 previous_url: /controls/data-management/grid/how-to/Editing/batch-editing-odata
 slug: howto_batch_editing_odata_grid
 tags: grid, batch, editing, odata
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

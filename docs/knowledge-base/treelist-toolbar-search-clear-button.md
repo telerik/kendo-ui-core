@@ -7,6 +7,7 @@ slug: treelist-toolbar-search-clear-button
 tags: search, clear, button, treelist, panel
 ticketid: 1499021
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

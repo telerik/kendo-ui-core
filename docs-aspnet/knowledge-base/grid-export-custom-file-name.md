@@ -6,6 +6,7 @@ page_title: Customize The Excel Filename of the Grid
 slug: grid-export-custom-file-name
 tags: grid, export, custom, file, name, excel
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

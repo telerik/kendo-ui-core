@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Editor component by following a complete step-by-step tutorial."
+components: ["editor"]
 slug: aspnetcore_editor_getting_started
 position: 1
 ---

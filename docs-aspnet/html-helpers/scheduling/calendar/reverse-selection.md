@@ -2,6 +2,7 @@
 title: Reverse Selection
 page_title: Reverse Selection
 description: "Enable the Reverse Selection when working with the Telerik UI Calendar component for {{ site.framework }}."
+components: ["calendar"]
 slug: htmlhelpers_reverse_selection_calendar_aspnetcore
 position: 9
 ---

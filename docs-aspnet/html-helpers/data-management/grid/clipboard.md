@@ -2,6 +2,7 @@
 title: Clipboard
 page_title: Clipboard Support
 description: "Learn how to enable the clipboard functionality of the Telerik UI Grid for {{ site.framework }} that allows you to copy and paste content from Excel to the Grid and vice-versa."
+components: ["grid"]
 slug: htmlhelpers_grid_clipboard
 position: 24
 ---

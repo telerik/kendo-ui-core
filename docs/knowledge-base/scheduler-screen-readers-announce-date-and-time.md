@@ -7,6 +7,7 @@ slug: scheduler-screen-readers-announce-date-and-time
 tags: kendo-ui, kendo, scheduler, screen-reader, slot
 ticketid: 1159317
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery MaskedTextBox Documentation - MaskedTextBox Appearance
 description: "Learn how to apply different styling options to the MaskedTextBox widget."
+components: ["maskedtextbox"]
 slug: maskedtextbox_appearance
 position: 3
 ---

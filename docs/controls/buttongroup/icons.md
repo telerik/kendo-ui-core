@@ -2,6 +2,7 @@
 title: Icon ButtonGroup
 page_title: jQuery ButtonGroup Documentation - Icon ButtonGroup
 description: "Get started with the jQuery ButtonGroup by Kendo UI and accommodate an icon and enhance the meaning of its text content."
+components: ["buttongroup"]
 slug: icon_kendoui_buttongroup
 position: 3
 ---

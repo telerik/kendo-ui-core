@@ -7,6 +7,7 @@ slug: dialog-on-treeview-node
 tags: dialog, treeview, node
 ticketid: 1139187
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

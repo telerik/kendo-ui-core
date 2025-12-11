@@ -5,9 +5,9 @@ description: "Learn how to clone (copy) the selected node and its children in a 
 slug: howto_clonenodeandchildren_treeview
 previous_url: /controls/navigation/treeview/how-to/editing/clone-node-and-children
 tags: telerik, kendo, jquery, treeview, clone, node, and, its, children
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

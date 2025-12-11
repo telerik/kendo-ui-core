@@ -7,7 +7,7 @@ slug: grid-excel-export-formulas
 tags: excel, export, grid, formula, formulas, column, create, include, calculate, add, sum, total
 ticketid: 1433998
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

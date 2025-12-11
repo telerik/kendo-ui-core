@@ -6,6 +6,7 @@ page_title: Visual Studio Code Extension Issues
 slug: vs-code-extension-issues
 tags: vscode, extension, troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

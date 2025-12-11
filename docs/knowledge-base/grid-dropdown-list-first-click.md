@@ -7,7 +7,7 @@ slug: grid-dropdown-list-first-click
 tags: show, list, dropdown, dropdownlist, grid, first, click, single
 ticketid: 1087864
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

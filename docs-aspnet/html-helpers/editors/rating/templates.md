@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn how to configure the templates of the Telerik UI Rating for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/templates
 slug: htmlhelpers_rating_aspnetcore_templates
 position: 6

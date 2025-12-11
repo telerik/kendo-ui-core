@@ -5,9 +5,9 @@ description: "Learn how to handle double-clicking on events conditionally based 
 previous_url: /controls/scheduling/scheduler/how-to/conditionally-handle-doubleclicking-on-events, /controls/scheduling/scheduler/how-to/editing/conditionally-handle-doubleclicking-on-events
 slug: howto_conditionally_handle_doubleclicking_events_scheduler
 tags: telerik, kendo, jquery, scheduler, handle, double, click, on, events, conditionally, based, on, the, view, name
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

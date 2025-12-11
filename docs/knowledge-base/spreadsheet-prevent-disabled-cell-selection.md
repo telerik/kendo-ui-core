@@ -7,6 +7,7 @@ slug: spreadsheet-prevent-selection-disabled-cells
 tags: kendo, kendo-ui, spreadsheet, prevent, selection
 ticketid: 1152738
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

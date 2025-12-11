@@ -7,6 +7,7 @@ slug: grid-remove-the-grid-loading-indicator
 tags: grid, loading, hide
 ticketid: 1141398
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

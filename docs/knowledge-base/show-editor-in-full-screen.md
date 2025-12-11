@@ -5,9 +5,9 @@ description: "Learn how to show the Kendo UI Editor widget in full screen."
 previous_url: /controls/editors/editor/how-to/show-editor-in-full-screen, /controls/editors/editor/how-to/appearance/show-editor-in-full-screen
 slug: howto_show_infull_screen_editor
 tags: telerik, kendo, jquery, editor, show, in, full, screen, mode
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

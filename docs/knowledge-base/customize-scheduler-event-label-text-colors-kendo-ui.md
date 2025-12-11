@@ -6,6 +6,7 @@ page_title: How to Customize Scheduler Event Text Colors Based on the Resource i
 slug: customize-scheduler-event-label-text-colors-kendo-ui
 tags: scheduler, event, label, text, color, customization, kendo-ui
 res_type: kb
+components: ["scheduler"]
 ticketid: 1653968
 ---
 

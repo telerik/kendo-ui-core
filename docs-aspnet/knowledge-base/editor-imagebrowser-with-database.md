@@ -7,6 +7,7 @@ slug: editor-imagebrowser-with-database
 tags: editor, image, store, database, sql, browser, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/database-with-imagebrowser, /html-helpers/editors/editor/how-to/database-with-imagebrowser
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

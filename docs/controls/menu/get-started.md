@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Menu Documentation - Getting Started with the Menu
 description: "Get started with the jQuery Menu by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["menu"]
 slug: getting_started_kendoui_menu_widget
 position: 1
 ---

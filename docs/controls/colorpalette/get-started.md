@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ColorPalette Documentation - Getting Started with the ColorPalette
 description: "Get started with the jQuery ColorPalette by Kendo UI and learn how to create and initialize the component."
+components: ["colorpalette"]
 slug: getting_started_kendoui_colorpalette_widget
 position: 2
 ---

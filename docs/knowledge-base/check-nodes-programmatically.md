@@ -5,9 +5,9 @@ description: "Learn how to check the checkbox of a Kendo UI for jQuery TreeView 
 previous_url: /web/treeview/how-to/check-nodes-programatically, /controls/navigation/treeview/how-to/binding/check-nodes-programmatically
 slug: howto_checknodeprogramatically_treeview
 tags: telerik, kendo, jquery, treeview, check, nodes, programmatically
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

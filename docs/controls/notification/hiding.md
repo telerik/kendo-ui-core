@@ -2,6 +2,7 @@
 title: Hiding
 page_title: jQuery Notification Documentation - Hiding
 description: "Get started with the jQuery Notification by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["notification"]
 slug: hidingw_kendoui_notification
 position: 4
 ---

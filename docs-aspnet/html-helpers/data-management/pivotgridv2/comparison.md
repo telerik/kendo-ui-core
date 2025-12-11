@@ -2,6 +2,7 @@
 title: Comparison
 page_title: Comparison
 description: "Learn about the differences between the old and the new version of the Telerik UI PivotGrid HtmlHelper for {{ site.framework }}."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_comparison
 position: 4
 ---

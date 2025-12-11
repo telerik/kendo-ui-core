@@ -2,6 +2,7 @@
 title: Video Onboarding
 page_title: Video Onboarding
 description: "Get started with {{ site.product_short }} by following a step-by-step video tutorial on developing a real-life project."
+components: ["general"]
 slug: virtualclass_uiformvc
 position: 5
 previous_url: /getting-started/virtual-classroom-mvc, /virtual-classroom

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ColorGradient Documentation - Keyboard Navigation
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["colorgradient"]
 slug: keynav_colorgradient_jquery
 position: 2
 ---

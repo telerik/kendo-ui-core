@@ -7,6 +7,7 @@ slug: grid-prevent-text-wrapping-in-the-grid
 tags: grid, wrap, prevent
 ticketid: 1141418
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

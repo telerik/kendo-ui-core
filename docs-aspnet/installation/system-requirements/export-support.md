@@ -2,6 +2,7 @@
 title: Export Support
 page_title: Export Support
 description: "Get started with {{ site.product }} and learn about the versions of the Pako and JSZip libraries supported by the library and used for PDF and Excel export."
+components: ["general"]
 previous_url: /getting-started/prerequisites/export-support, /compatibility/export-support, /installation-mvc/system-requirements/export-support
 slug: exportsupport_core
 position: 5

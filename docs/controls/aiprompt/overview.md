@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery AIPrompt Documentation - AIPrompt Overview
 description: "Get started with the jQuery AIPrompt by Kendo UI and learn how to initialize the widget."
+components: ["aiprompt"]
 slug: overview_kendoui_aiprompt_component
 position: 0
 ---

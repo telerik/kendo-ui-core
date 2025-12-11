@@ -2,6 +2,7 @@
 title: Modes
 page_title: jQuery CircularProgressBar Modes Documentation - CircularProgressBar Modes
 description: "Learn about the modes of the Kendo UI for jQuery CircularProgressBar component."
+components: ["circularprogressbar"]
 slug: modes_kendoui_circularprogressbar_widget
 position: 4
 ---

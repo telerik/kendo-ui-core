@@ -2,6 +2,7 @@
 title: License Key Errors
 page_title: Telerik License Key Errors
 description: Troubleshooting Telerik license key errors when using {{ site.product }}.
+components: ["general"]
 slug: troubleshooting-license-key-errors
 tags: license, key, error, troubleshooting
 position: 2

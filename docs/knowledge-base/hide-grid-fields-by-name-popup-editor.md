@@ -7,6 +7,7 @@ meta_title: How to Hide Specific Grid Fields by Field Name in Popup Editor
 slug: hide-grid-fields-by-name-popup-editor
 tags: grid, kendo-ui-for-jquery, popup-editor, editable, fields
 res_type: kb
+components: ["grid"]
 ticketid: 1674334
 ---
 

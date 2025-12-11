@@ -5,9 +5,9 @@ description: "Learn how to dynamically change the language of the Kendo UI for j
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-dynamic-language-change
 slug: howto_dynamic_language_change
 tags: grid, change, languages, dynamically, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

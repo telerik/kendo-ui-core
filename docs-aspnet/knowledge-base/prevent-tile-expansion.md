@@ -5,6 +5,7 @@ page_title: Prevent automatic TileLayout tile expansion
 slug: prevent-tile-expansion
 tags: tilelayout, tile, expand, resize, css, style, min-content, grid-auto-rows
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

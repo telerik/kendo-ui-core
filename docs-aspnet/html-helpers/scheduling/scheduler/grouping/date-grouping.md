@@ -2,6 +2,7 @@
 title: Date Grouping
 page_title: Date Grouping
 description: "Learn how to group the resources of the Telerik UI for {{ site.framework }} Scheduler by date."
+components: ["scheduler"]
 slug: scheduler_resources_grouping_date
 position: 6
 ---

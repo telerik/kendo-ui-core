@@ -5,9 +5,9 @@ description: "Learn how to implement custom editing in the `agenda` view of a Ke
 previous_url: /controls/scheduling/scheduler/how-to/custom-editing-in-agenda-view, /controls/scheduling/scheduler/how-to/editing/custom-editing-in-agenda-view
 slug: howto_implement_custom_editing_inagenda_view_scheduler
 tags: telerik, kendo, jquery, scheduler, implement, custom, editing, in, the, agenda, view 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

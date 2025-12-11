@@ -3,6 +3,7 @@ comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE 
 title: Navigation
 page_title: Individual Scripts for Navigation - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Navigation"
+components: ["general"]
 slug: script_filesfor_navigation_widgets
 ---
 

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Captcha Documentation | Captcha Accessibility
 description: "Get started with the {{ site.product }} Captcha and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["captcha"]
 slug: htmlhelpers_captcha_accessibility
 position: 1
 ---

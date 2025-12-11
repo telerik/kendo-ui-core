@@ -6,6 +6,7 @@ page_title: How to Persist Kendo UI Filter Options for User Sessions
 slug: storing-and-rebinding-kendo-ui-filter-options
 tags: kendo ui, filter, getoptions, setoptions, localstorage, jquery
 res_type: kb
+components: ["filter"]
 ticketid: 1656799
 ---
 

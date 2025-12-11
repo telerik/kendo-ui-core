@@ -7,7 +7,7 @@ slug: scheduler-mark-holidays-in-month-view
 tags: kendo, scheduler, month-view, holidays, slots
 ticketid: 1116454
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

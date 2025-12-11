@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI TabStrip Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} TabStrip using various data binding approaches."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/binding/overview
 slug: tabstrip_databinding_aspnetmvc
 position: 1

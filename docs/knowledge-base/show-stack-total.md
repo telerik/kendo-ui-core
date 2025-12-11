@@ -5,9 +5,9 @@ description: "Learn how to place a label with the stack total on top of column o
 previous_url: /controls/charts/how-to/various/show-stack-total
 slug: howto_showtotalstacked_charts
 tags: chart, total, sum, for, stacked, series
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Wizard Documentation | Wizard Accessibility
 description: "Get started with the {{ site.product }} Wizard and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["wizard"]
 slug: htmlhelpers_wizard_accessibility
 position: 1
 ---

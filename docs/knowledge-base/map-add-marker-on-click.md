@@ -7,6 +7,7 @@ slug: map-add-marker-on-click
 position:
 tags: map, add, markers, on, click, location, marker
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

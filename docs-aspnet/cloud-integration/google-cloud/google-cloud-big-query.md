@@ -2,6 +2,7 @@
 title: Google Cloud Big Query
 page_title: Google Cloud Big Query
 description: "Learn how to bind the Telerik UI for {{ site.framework }} Grid to data that is served through Google Cloud Big Query."
+components: ["general"]
 slug: google_cloud_big_query_aspnetmvc6_aspnetmvc
 position: 2
 ---

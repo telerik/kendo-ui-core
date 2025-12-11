@@ -5,9 +5,9 @@ description: "Learn how to preserve the dirty indicator in the incell editing mo
 previous_url: /controls/data-management/grid/how-to/Editing/preserve-the-dirty-indicator-in-incell-editing-and-client-operations
 slug: howto_preserve_dirty_indicator_incell_editing_client_operations_grid
 tags: preserve, dirty, indicator, grid, incell, edit, mode, client, operations
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

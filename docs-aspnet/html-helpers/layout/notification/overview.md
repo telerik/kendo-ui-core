@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Notification component for {{ site.framework }} provides a styled UI element with arbitrary content which can display information to the user on various occasions."
+components: ["notification"]
 previous_url: /helpers/html-helpers/notification, /helpers/layout/notification/overview
 slug: htmlhelpers_notification_aspnetcore
 position: 0

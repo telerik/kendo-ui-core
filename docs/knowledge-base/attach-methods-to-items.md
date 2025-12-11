@@ -5,9 +5,9 @@ description: "Learn how to attach methods to data items at different levels of t
 slug: howto_attache_methodsto_dataitems_treeview
 previous_url: /controls/navigation/treeview/how-to/templates/attach-methods-to-items
 tags: telerik, kendo, jquery, treeview, atach, methods, to, data, items
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

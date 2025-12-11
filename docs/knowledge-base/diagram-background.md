@@ -6,6 +6,7 @@ page_title: Add a Background to the Kendo UI Diagram - Kendo UI Diagram for jQue
 slug: diagram-background
 tags: diagram, color, image, background, gradient
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

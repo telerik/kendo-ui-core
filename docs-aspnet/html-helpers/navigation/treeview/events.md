@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TreeView component for {{ site.framework }}."
+components: ["treeview"]
 slug: events_treeview_aspnetcore
 position: 10
 ---

@@ -5,6 +5,7 @@ description: "Learn how to always display the entire decimal portion in the Tele
 slug: numerictextbox-keep-trailing-zeros
 tags: numerictextbox, html, helper, custom, mvc, telerik, zero, trailing, decimal, portion, float
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ slug: editor_formatting_bomchars_editable_area
 tags: telerik, progress, kendoui, jquery, editor, formatting, renders, shows, bom, chars, editable, area
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

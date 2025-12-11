@@ -6,7 +6,7 @@ page_title: Merge Table Cells - Kendo UI Editor for jQuery
 slug: editor-merge-table-cells
 tags: editor, table, merge, cells
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

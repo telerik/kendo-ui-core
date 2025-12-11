@@ -5,9 +5,9 @@ description: "Learn how to show the current progress of each CRUD operation in t
 previous_url: /controls/data-management/grid/how-to/show-progress-CRUD-operation, /aspnet-mvc/helpers/grid/how-to/use-grid-with-progressbar-crud-operations, /controls/data-management/grid/how-to/Editing/show-progress-CRUD-operation
 slug: howto_show_progress_CRUD_operation
 tags: show, progress, grid, crud, operations
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

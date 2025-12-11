@@ -2,6 +2,7 @@
 title: Adding Your Script License Key [Using the Script License Key]
 page_title: Using the Script License Key - Download and Installation
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library by adding your script license key."
+components: ["general"]
 slug: using-license-code
 published: True
 position: 2

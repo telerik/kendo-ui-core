@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Wizard Documentation | Wizard Accessibility
 description: "Get started with the jQuery Wizard by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["wizard"]
 slug: jquery_wizard_accessibility
 position: 1
 ---

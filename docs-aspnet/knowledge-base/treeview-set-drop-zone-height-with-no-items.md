@@ -8,6 +8,7 @@ position:
 tags: treeview, empty, drop zone
 ticketid: 1448470
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

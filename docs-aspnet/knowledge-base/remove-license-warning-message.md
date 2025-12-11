@@ -5,6 +5,7 @@ page_title: Removing the Kendo License Warning
 slug: remove-license-warning-message
 tags: license, warning, core, aspnet, mvc, message, upgrade, troubleshoot, application
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

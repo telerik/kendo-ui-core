@@ -6,6 +6,7 @@ page_title: Enable Sorting, Filtering, and Grouping for a Column Bound to an Obj
 slug: enable-operations-for-object-column
 tags: grid, object, column, operations, drop, down, filtering, sorting, grouping
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

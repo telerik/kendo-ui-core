@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: Telerik UI TimePicker for {{ site.framework }} Documentation - Automatic Correction
 description: "Get familiar with the Telerik UI TimePicker component for {{ site.framework }} and how to use its auto-correct feature."
+components: ["timepicker"]
 slug: htmlhelpers_timepicker_autocorrect_aspnetcore
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI Scheduler Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} Scheduler using various data binding approaches."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_databinding
 position: 0
 ---

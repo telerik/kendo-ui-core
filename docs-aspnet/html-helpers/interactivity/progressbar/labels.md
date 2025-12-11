@@ -2,6 +2,7 @@
 title: Labels
 page_title: Labels
 description: "Learn how to set the Labels of the Telerik UI ProgressBar component for {{ site.framework }}."
+components: ["progressbar"]
 slug: progressbar_labels
 position: 3
 ---

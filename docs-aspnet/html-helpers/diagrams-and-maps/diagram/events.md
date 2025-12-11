@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Diagram component for {{ site.framework }}."
+components: ["diagram"]
 slug: diagram_events
 position: 6
 ---

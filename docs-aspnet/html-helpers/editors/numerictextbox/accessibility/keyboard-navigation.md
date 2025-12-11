@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["numerictextbox"]
 slug: keynav_numerictextbox_aspnetcore
 position: 2
 ---

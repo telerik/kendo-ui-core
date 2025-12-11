@@ -2,6 +2,7 @@
 title: Scroll Modes
 page_title: Scrolling
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable its scrolling functionality."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_scrolling
 position: 7
 ---

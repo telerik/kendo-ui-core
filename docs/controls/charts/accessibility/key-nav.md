@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Chart Documentation - Keyboard Navigation
 description: "Get started with the jQuery Chart by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["chart"]
 slug: keynav_kendoui_charts_widget
 position: 2
 ---

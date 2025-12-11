@@ -6,6 +6,7 @@ page_title: Change the color of the highlighted row in Gantt
 slug: gantt-highlight-hovered-row
 tags: gantt, hover, change, color
 res_type: kb
+components: ["general"]
 ticketid: 1538429
 component: gantt
 ---

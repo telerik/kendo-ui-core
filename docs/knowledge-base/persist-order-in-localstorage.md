@@ -5,9 +5,9 @@ description: "Learn how to save the order in localStorage and restore it on page
 slug: howto_persistoderinlocalstorage_sortable
 previous_url: /controls/interactivity/sortable/how-to/persist-order-in-localstorage
 tags: telerik, kendo, jquery, sortable, persist, order, in, localstorage
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

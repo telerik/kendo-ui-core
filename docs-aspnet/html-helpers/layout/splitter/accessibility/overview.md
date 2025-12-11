@@ -2,6 +2,7 @@
 title: Overview
 page_title: Splitter Documentation | Splitter Accessibility
 description: "Get started with the {{ site.product }} Splitter and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["splitter"]
 slug: htmlhelpers_splitter_accessibility
 position: 1
 ---

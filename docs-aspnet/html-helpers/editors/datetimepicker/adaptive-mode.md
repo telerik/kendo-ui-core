@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the adaptive behavior of the the Telerik UI DateTimePicker component for {{ site.framework }}."
+components: ["datetimepicker"]
 slug: htmlhelpers_datetimepicker_adaptive_mode_aspnetcore
 position: 5
 ---

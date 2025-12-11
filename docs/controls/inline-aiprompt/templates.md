@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery InlineAIPrompt Documentation - InlineAIPrompt Template
 description: "Learn about how to use Kendo UI Prompt Response Template with the jQuery InlineAIPrompt"
+components: ["inlineaiprompt"]
 slug: templates_inlineaiprompt_component
 position: 3
 ---

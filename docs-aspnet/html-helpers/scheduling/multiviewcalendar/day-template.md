@@ -2,6 +2,7 @@
 title: Day Template
 page_title: Day Template
 description: "Customize the content of each cell by using cell templates when working with the Telerik UI MultiViewCalendar component for {{ site.framework }}."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/day-template
 slug: day_template_multiviewcalendar_htmlhelper_aspnetcore
 position: 5

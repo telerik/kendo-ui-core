@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Slider component by following a complete step-by-step tutorial."
+components: ["slider"]
 slug: slider_getting_started
 position: 1
 ---

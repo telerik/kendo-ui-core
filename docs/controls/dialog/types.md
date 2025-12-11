@@ -2,6 +2,7 @@
 title: Predefined Types
 page_title: jQuery Dialog Documentation - Predefined Types
 description: "Get started with the jQuery Dialog by Kendo UI and use the predefined Dialog types."
+components: ["dialog"]
 slug: types_kendoui_dialog
 position: 3
 ---

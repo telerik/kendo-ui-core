@@ -8,6 +8,7 @@ position:
 tags: menu, contextmenu, scroll, buttons, remove, hide, navigation
 ticketid: 1442750
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

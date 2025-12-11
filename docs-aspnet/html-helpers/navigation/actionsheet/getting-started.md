@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ActionSheet component by following a complete step-by-step tutorial."
+components: ["actionsheet"]
 slug: action_sheet_getting_started
 position: 1
 ---

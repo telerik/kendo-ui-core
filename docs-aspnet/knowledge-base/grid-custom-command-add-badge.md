@@ -7,6 +7,7 @@ tags: telerik, grid, custom, command, add, badge
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

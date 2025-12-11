@@ -2,6 +2,7 @@
 title: Compliance
 page_title: Accessibility Compliance
 description: "Compliance with the accessibility standards and requirements in the Kendo UI for jQuery suite."
+components: ["general"]
 slug: section508_wcag21_accessibility_support
 tags: kendoui,jquery,accessibility,standards,compliance
 published: True

@@ -6,7 +6,7 @@ page_title: Send Anti-Forgery Token with Grid Requests in ASP.NET Core and ASP.N
 slug: grid-send-antiforgery-token
 tags: kendoui, kendo, grid, core, mvc, anti, forgery, token, antiforgery, send, antiforgerytoken
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

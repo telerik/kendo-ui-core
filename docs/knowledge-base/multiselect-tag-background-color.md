@@ -6,6 +6,7 @@ page_title: Applying Full Background Color to MultiSelect Tags in Progress® Ken
 slug: multiselect-tag-background-color
 tags: multiselect, kendo ui, tagtemplate, styling, javascript, events
 res_type: kb
+components: ["multiselect"]
 ticketid: 1688326
 ---
 

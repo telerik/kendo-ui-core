@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ProgressBar component for {{ site.framework }}."
+components: ["progressbar"]
 slug: progressbar_events
 position: 6
 ---

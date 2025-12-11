@@ -6,6 +6,7 @@ page_title: Modify minorTickCount in Kendo Scheduler
 slug: scheduler-refresh-minortickcount
 tags: scheduler, view, minorTickCount, setOptions, kendo ui
 res_type: kb
+components: ["scheduler"]
 ticketid: 1689609
 ---
 

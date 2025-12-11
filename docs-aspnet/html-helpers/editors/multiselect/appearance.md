@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI MultiSelect for {{ site.framework }}."
+components: ["multiselect"]
 slug: appearance_multiselect
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Captcha Documentation - Getting Started with the Captcha
 description: "Get started with the jQuery Captcha by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["captcha"]
 slug: getting_started_kendoui_captcha_widget
 position: 1
 ---

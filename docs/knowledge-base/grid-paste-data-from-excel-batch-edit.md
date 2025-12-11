@@ -7,7 +7,7 @@ slug: grid-paste-data-from-excel-batch-edit
 tags: grid, excel, copy, paste, multiple, rows, batch, edit, crud
 ticketid: 1133411
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

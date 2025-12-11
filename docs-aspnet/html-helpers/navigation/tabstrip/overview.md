@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI TabStrip component for {{ site.framework }} enables users to categorize content in different views for tidier visualization."
+components: ["tabstrip"]
 previous_url: /helpers/html-helpers/tabstrip, /helpers/navigation/tabstrip/overview
 slug: htmlhelpers_tabstrip_aspnetcore
 position: 0

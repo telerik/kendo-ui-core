@@ -8,6 +8,7 @@ position:
 tags: grid, async, action, method
 ticketid: 1455424
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to add Google WebFonts in the Kendo UI for jQuery Editor
 previous_url: /controls/editors/editor/how-to/add-google-web-fonts-to-editor, /controls/editors/editor/how-to/appearance/add-google-web-fonts-to-editor
 slug: howto_add_google_webfonts_editor
 tags: telerik, kendo, jquery, editor, add, google, webfonts
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

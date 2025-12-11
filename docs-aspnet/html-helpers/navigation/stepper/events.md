@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Stepper component for {{ site.framework }}."
+components: ["stepper"]
 slug: stepper_events
 position: 6
 ---

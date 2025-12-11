@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Timeline component by following a complete step-by-step tutorial."
+components: ["timeline"]
 slug: aspnetcore_timeline_getting_started
 position: 1
 ---

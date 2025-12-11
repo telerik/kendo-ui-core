@@ -5,9 +5,9 @@ description: "Learn how to programmatically change the order of all Kendo UI for
 slug: howto_sortchildnodes_treeview
 previous_url: /controls/navigation/treeview/how-to/binding/sort-child-nodes
 tags: telerik, kendo, jquery, treeview, sort, child, nodes
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

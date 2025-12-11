@@ -2,6 +2,7 @@
 title: Animations
 page_title: jQuery ContextMenu Documentation - Animations
 description: "Get started with the jQuery ContextMenu by Kendo UI and configure the animations of the widget."
+components: ["menu"]
 slug: animations_kendoui_contextmenu
 position: 3
 ---

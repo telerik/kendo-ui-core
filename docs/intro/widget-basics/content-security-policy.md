@@ -2,6 +2,7 @@
 title: Content Security Policy
 page_title: Content Security Policy - Working with Components 
 description: "Learn more about the Content Security Policy (CSP) mode and how to work with it in Kendo UI for jQuery controls."
+components: ["general"]
 slug: troubleshooting_content_security_policy_kendoui
 previous_url: /troubleshoot/content-security-policy
 position: 70

@@ -2,6 +2,7 @@
 title: Adaptive Mode
 page_title: Adaptive Mode
 description: "Learn how to configure the adaptive behavior of the the Telerik UI ColorPickеr component for {{ site.framework }}."
+components: ["colorpicker"]
 slug: htmlhelpers_colorpicker_adaptive_mode_aspnetcore
 position: 7
 ---

@@ -6,6 +6,7 @@ page_title: Customize Gantt Chart Tooltip to Show Dates Without Time in Kendo UI
 slug: hide-time-gantt-chart-tooltip-kendo-ui-jquery
 tags: kendo, ui, jquery, gantt, chart, tooltip, date, format
 res_type: kb
+components: ["gantt"]
 ticketid: 1630677
 ---
 

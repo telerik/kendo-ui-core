@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ExpansionPanel Documentation - Keyboard Navigation
 description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["expansionpanel"]
 slug: keynav_kendoui_expansionpanel_widget
 position: 4
 ---

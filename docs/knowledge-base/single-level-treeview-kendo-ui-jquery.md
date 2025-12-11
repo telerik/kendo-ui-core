@@ -6,6 +6,7 @@ page_title: How to Implement a Single-Level TreeView in Kendo UI for jQuery
 slug: single-level-treeview-kendo-ui-jquery
 tags: kendo-ui-for-jquery, treeview, single-level, hierarchy
 res_type: kb
+components: ["treeview"]
 ticketid: 1683570
 ---
 

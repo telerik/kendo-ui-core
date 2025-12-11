@@ -5,9 +5,9 @@ description: "Learn how to use CRUD operations when the Kendo UI Grid for jQuery
 previous_url: /controls/data-management/grid/how-to/Editing/grid-bound-to-asp-net-mvc-action-methods---crud-operations
 slug: howto_use_crud_operationswith_apsnet_action_methods_bound_grid
 tags: grid, crud, operations, aspnet, mvc, action, methods, bind
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

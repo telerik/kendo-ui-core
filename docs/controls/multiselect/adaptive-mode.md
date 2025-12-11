@@ -2,6 +2,7 @@
 title: Adaptive Mode
 page_title: Adaptive Mode
 description: "Learn how to configure adaptive mode for the Kendo UI for jQuery MultiSelect component."
+components: ["multiselect"]
 slug: multiselect_adaptive_mode_kendo
 position: 14
 ---

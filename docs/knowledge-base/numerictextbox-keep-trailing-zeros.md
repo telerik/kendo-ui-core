@@ -7,6 +7,7 @@ slug: numerictextbox-keep-trailing-zeros
 tags: numeric, numerictextbox, preserve, keep, trailing, zeros, rounding, decimals, round
 ticketid: 1161653
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

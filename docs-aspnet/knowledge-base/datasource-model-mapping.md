@@ -8,6 +8,7 @@ position:
 tags: DataSource, DataSourceRequest, attribute, map, properties, View Model, EF Core entity, SortDescriptor, FilterDescriptor
 ticketid: 1601637
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

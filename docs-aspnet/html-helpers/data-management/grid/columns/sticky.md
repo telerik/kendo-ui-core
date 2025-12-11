@@ -2,6 +2,7 @@
 title: Sticky
 page_title: Sticky Columns
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} (Demo) supporting sticky columns that are scrollable, yet, visible at all times while the user scrolls the Grid horizontally."
+components: ["grid"]
 slug: htmlhelper_grid_sticky_columns
 position: 4
 ---

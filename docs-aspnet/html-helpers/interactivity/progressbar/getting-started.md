@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ProgressBar component by following a complete step-by-step tutorial."
+components: ["progressbar"]
 slug: getting_started_progressbar
 position: 2
 ---

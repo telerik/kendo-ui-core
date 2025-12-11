@@ -7,7 +7,7 @@ slug: grid-page-size-all-in-asp-core
 tags: grid, pagesize, asp, core, all
 ticketid: 1115286
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

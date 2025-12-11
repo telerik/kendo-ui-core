@@ -7,6 +7,7 @@ slug: grid-prevent-editing-when-editing
 tags: grid, editing, prevent
 ticketid: 1168745
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

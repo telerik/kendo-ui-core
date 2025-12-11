@@ -7,6 +7,7 @@ slug: multiselect-checkbox-items
 tags: multiselect, dropdownlist, checkbox , custom, template, item, mvc, core
 ticketid: 1662766
 res_type: kb
+components: ["general"]
 component: MultiSelect
 ---
 

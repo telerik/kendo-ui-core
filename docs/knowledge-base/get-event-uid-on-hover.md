@@ -5,9 +5,9 @@ description: "Learn how to get the UID of events on hover in the Kendo UI for jQ
 previous_url: /controls/scheduling/scheduler/how-to/get-event-uid-on-hover, /controls/scheduling/scheduler/how-to/editing/get-event-uid-on-hover
 slug: howto_get_the_uid_of_an_event_on_hover_scheduler
 tags: telerik, kendo, jquery, scheduler, get, the, uid, of, event, on, hover 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

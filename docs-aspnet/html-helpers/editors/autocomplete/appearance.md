@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI AutoComplete for {{ site.framework }}."
+components: ["autocomplete"]
 slug: appearance_autocomplete_aspnetcore
 position: 3
 ---

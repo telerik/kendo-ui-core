@@ -2,39 +2,40 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Gantt component for {{ site.framework }} in a Razor Page."
+components: ["gantt"]
 slug: htmlhelpers_gantt_razorpage_aspnetcore
 position: 3
 ---
 
 # Gantt in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Loader for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Gantt for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_gantt_databinding %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the Gantt component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [Gantt in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Gantt).
-
-## Getting Started
+## Binding to Remote Data
 
 To configure the CRUD operations of the Gantt DataSource within a Razor Pages application, follow the next steps:
 
-1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` in the [`DataSource`](/api/kendo.mvc.ui.fluent/ganttbuilder#datasourcesystemaction) configuration. The URL in each of these options must refer to the method name in the `PageModel`.
+1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configurations for the tasks and dependencies. The URL in each of these options must refer to the method name in the `PageModel`.
 
-```HtmlHelper
+    ```HtmlHelper
     @page
     @model IndexModel
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
+
     @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
         .Name("gantt")
         .Columns(columns =>
         {
-            columns.Bound(c => c.TaskID).Title("ID").Width(80);
-            columns.Bound(c => c.Title).Width(250).Editable(true).Sortable(true);
-            columns.Bound(c => c.Start).Width(150).Editable(true).Sortable(true);
-            columns.Bound(c => c.End).Width(150).Editable(true).Sortable(true);
+            columns.Bound(c => c.TaskID).Title("ID").Width(50);
+            columns.Bound(c => c.Title).Editable(true).Sortable(true);
+            columns.Group(g =>
+            {
+                g.Bound(c => c.Start).Width(100).Editable(true).Sortable(true);
+                g.Bound(c => c.End).Width(100).Editable(true).Sortable(true);
+            }).Title("Timings");
         })
         .Views(views =>
         {
@@ -52,12 +53,11 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
                 m.Id(f => f.TaskID);
                 m.ParentId(f => f.ParentID);
                 m.Field(f => f.Expanded).DefaultValue(true);
-                m.Field<string>(f=>f.TaskID);
             })
-            .Read(r => r.Url("/Gantt/GanttIndex?handler=Read").Data("forgeryToken"))
-            .Create(r => r.Url("/Gantt/GanttIndex?handler=Create").Data("forgeryToken"))
-            .Update(r => r.Url("/Gantt/GanttIndex?handler=Update").Data("forgeryToken"))
-            .Destroy(r => r.Url("/Gantt/GanttIndex?handler=Destroy").Data("forgeryToken"))
+            .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
+            .Create(r => r.Url(Url.Page("Index", "Create")).Data("forgeryToken"))
+            .Update(r => r.Url(Url.Page("Index", "Update")).Data("forgeryToken"))
+            .Destroy(r => r.Url(Url.Page("Index", "Destroy")).Data("forgeryToken"))
         )
         .DependenciesDataSource(d => d
             .Model(m =>
@@ -66,28 +66,24 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
                 m.PredecessorId(f => f.PredecessorID);
                 m.SuccessorId(f => f.SuccessorID);
             })
-            .Read(r => r.Url("/Gantt/GanttIndex?handler=DependenciesRead").Data("forgeryToken"))
+            .Read(r => r.Url(Url.Page("Index", "DependenciesRead")).Data("forgeryToken"))
+            .Create(r => r.Url(Url.Page("Index", "DependenciesCreate")).Data("forgeryToken"))
+            .Update(r => r.Url(Url.Page("Index", "DependenciesUpdate")).Data("forgeryToken"))
+            .Destroy(r => r.Url(Url.Page("Index", "DependenciesDestroy")).Data("forgeryToken"))
         )
     )
-    <script>
-        function forgeryToken() {
-            return kendo.antiForgeryTokens();
-        }
-    </script>
-```
-
-```TagHelper
+    ```
+    ```TagHelper
     @page
     @model IndexModel
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
     @addTagHelper *, Kendo.Mvc
-    <kendo-gantt snap="false" height="700" show-work-days="false" show-work-hours="false" name="gantt">
-    	<columns>
-    	 	<gantt-column  field="TaskID" title="ID" width="50px">
-    	 	</gantt-column>
-    		<gantt-column editable="true" field="title" title="Title" width="255px">
-    	 	</gantt-column>
+    
+    <kendo-gantt name="gantt" snap="false" height="700" show-work-days="false" show-work-hours="false">
+        <columns>
+            <gantt-column  field="TaskID" title="ID" width="50px">
+            </gantt-column>
+            <gantt-column editable="true" field="title" title="Title" width="255px">
+            </gantt-column>
             <gantt-column title="Timings">
                 <columns>
                     <gantt-column field="start" editable="true" title="Start Date" width="100">
@@ -98,19 +94,19 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
                     </gantt-column>
                 </columns>
             </gantt-column>
-    	</columns>
-    	<views>
-    	 	<gantt-view type="GanttViewType.Day">
-    	 	</gantt-view>
-    	 	<gantt-view selected="true" type="GanttViewType.Week">
-    	 	</gantt-view>
-    	 	<gantt-view type="GanttViewType.Month">
-    	 	</gantt-view>
-    	</views>
-    	<gantt-datasource type="DataSourceTagHelperType.Ajax">
-    	 	<schema data="Data" total="Total" errors="Errors">
-    			 <model id="TaskID" parent-id="">
-    				 <fields>
+        </columns>
+        <views>
+            <gantt-view type="GanttViewType.Day">
+            </gantt-view>
+            <gantt-view selected="true" type="GanttViewType.Week">
+            </gantt-view>
+            <gantt-view type="GanttViewType.Month">
+            </gantt-view>
+        </views>
+        <gantt-datasource type="DataSourceTagHelperType.Ajax">
+            <schema data="Data" total="Total" errors="Errors">
+                <model id="TaskID" parent-id="">
+                    <fields>
                         <field name="TaskID" type="number"></field>
                         <field name="parentId" from="ParentID" type="number" default-value="null"></field>
                         <field name="title" from="Title" type="string"></field>
@@ -121,19 +117,22 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
                         <field name="percentComplete" from="PercentComplete" type="number"></field>
                         <field name="orderId" from="OrderId" type="number"></field>
                     </fields>
-    			 </model>
-    	 	</schema>
-    	 	<transport >
-    	 	 	<read  url="@Url.Action("Basic_Usage_ReadTasks","Gantt")" />
-    	 	</transport>
-    	</gantt-datasource>
-    	<dependency-datasource name="dependencies" type="DataSourceTagHelperType.Ajax">
-                <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
-                    <update url="/Index?handler=Update" data="forgeryToken" />
-                    <create url="/Index?handler=Create" data="forgeryToken"/>
-                    <destroy url="/Index?handler=Destroy" data="forgeryToken"/>
-                </transport>
+                </model>
+            </schema>
+            <transport>
+                <read url="@Url.Page("Index","Read")" data="forgeryToken"/>
+                <update url="@Url.Page("Index","Update")" data="forgeryToken"/>
+                <create url="@Url.Page("Index","Create")" data="forgeryToken"/>
+                <destroy url="@Url.Page("Index","Destroy")" data="forgeryToken"/>
+            </transport>
+        </gantt-datasource>
+        <dependency-datasource name="dependencies" type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Page("Index", "DependenciesRead")" data="forgeryToken"/>
+                <update url="@Url.Page("Index", "DependenciesUpdate")" data="forgeryToken" />
+                <create url="@Url.Page("Index", "DependenciesCreate")" data="forgeryToken"/>
+                <destroy url="@Url.Page("Index", "DependenciesDestroy")" data="forgeryToken"/>
+            </transport>
             <schema>
                 <model id="DependencyID">
                     <fields>
@@ -146,7 +145,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
             </schema>
         </dependency-datasource>
     </kendo-gantt>
-```
+    ```
 
 1. Add an `AntiForgeryToken` at the top of the page.
     ```
@@ -174,6 +173,7 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
         </script>
     ```
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
+
     ```C# Index.cshtml.cs
         public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
         {
@@ -238,7 +238,98 @@ To configure the CRUD operations of the Gantt DataSource within a Razor Pages ap
             return new JsonResult(new[] { dependency }.ToDataSourceResult(request, ModelState));
         }
     ```
+    ```C# TaskViewModel
+    using Kendo.Mvc.UI;
+    using System.ComponentModel.DataAnnotations;
+
+    public class TaskViewModel : IGanttTask
+    {
+        public int TaskID { get; set; }
+        public int? ParentID { get; set; }
+        public string Title { get; set; }
+
+        private DateTime start;
+        [Display(Name ="Start Time")]
+        [DisplayFormat(DataFormatString="{0:MM/dd/yyyy}")]
+        public DateTime Start
+        {
+            get
+            {
+                return start;
+            }
+            set
+            {
+                start = value.ToUniversalTime();
+            }
+        }
+
+        private DateTime end;
+        [Display(Name = "End Time")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime End
+        {
+            get
+            {
+                return end;
+            }
+            set
+            {
+                end = value.ToUniversalTime();
+            }
+        }
+
+        private DateTime plannedStart;
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime PlannedStart
+        {
+            get
+            {
+                return plannedStart;
+            }
+            set
+            {
+                plannedStart = value.ToUniversalTime();
+            }
+        }
+
+        private DateTime plannedEnd;
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime PlannedEnd
+        {
+            get
+            {
+                return plannedEnd;
+            }
+            set
+            {
+                plannedEnd = value.ToUniversalTime();
+            }
+        }
+
+        public string TeamLead { get; set; }
+        public bool Summary { get; set; }
+        public bool Expanded { get; set; }
+        public decimal PercentComplete { get; set; }
+        public int OrderId { get; set; }
+    }
+    ```
+    ```C# DependencyViewModel
+    using System;
+    using Kendo.Mvc.UI;
+
+    public class DependencyViewModel : IGanttDependency
+    {
+        public int DependencyID { get; set; }
+        public int PredecessorID { get; set; }
+        public int SuccessorID { get; set; }
+        public DependencyType Type { get; set; }
+    }
+    ```
+
+For the complete project, refer to the [Gantt in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Gantt).
+
 ## See Also
+
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 * [Client-Side API of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
 * [Server-Side HtmlHelper API of the Gantt](/api/gantt)

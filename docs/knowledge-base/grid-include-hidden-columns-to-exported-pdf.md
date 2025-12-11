@@ -6,7 +6,7 @@ page_title: Export Hidden Columns in PDF - Kendo UI for jQuery Data Grid
 slug: grid-include-hidden-columns-to-exported-pdf
 tags: grid, export, pdf, iclude, hidden, column, columns, exported, file, add, insert
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

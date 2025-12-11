@@ -6,6 +6,7 @@ page_title: How to Export Grid Rows to Excel with Group Paging
 slug: export-grid-rows-excel-group-paging
 tags: grid, export, excel, group paging
 res_type: kb
+components: ["grid"]
 ---
 ## Environment
 | Product | Version |

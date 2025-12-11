@@ -6,6 +6,7 @@ page_title: Changing the Time Zone of the Scheduler
 slug: scheduler-change-timezone
 tags: scheduler, timezone, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

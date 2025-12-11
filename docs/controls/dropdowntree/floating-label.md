@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: jQuery DropDownTree Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery DropDownTree component."
+components: ["dropdowntree"]
 slug: floating_label_kendoui_dropdowntree_widget
 position: 8
 ---

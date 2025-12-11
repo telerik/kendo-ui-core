@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: Telerik UI DateTimePicker for {{ site.framework }} Documentation - Automatic Correction
 description: "Get familiar with the Telerik UI DateTimePicker component for {{ site.framework }} and how to use its auto-correct feature."
+components: ["datetimepicker"]
 slug: htmlhelpers_datetimepicker_autocorrect_aspnetcore
 position: 7
 ---

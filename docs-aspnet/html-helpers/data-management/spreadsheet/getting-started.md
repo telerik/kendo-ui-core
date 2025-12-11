@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Spreadsheet component by following a complete step-by-step tutorial."
+components: ["spreadsheet"]
 slug: spreadsheet_getting_started
 position: 1
 ---

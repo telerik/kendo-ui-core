@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: DatePicker Right-to-Left Support
 description: "Get started with the jQuery DatePicker by Kendo UI and learn about the RTL supports it provides."
+components: ["datepicker"]
 slug: rtl_datepicker_aspnetcore
 position: 3
 ---

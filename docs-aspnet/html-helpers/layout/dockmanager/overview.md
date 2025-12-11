@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI DockManager component for {{ site.framework }}."
+components: ["dockmanager"]
 slug: overview_dockmanagerhelper_aspnetcore
 position: 0
 ---

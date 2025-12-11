@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery Spreadsheet Documentation - Spreadsheet Localization
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to localize its border palette, color picker, dialog, menu, toolbar, and view text messages in your project."
+components: ["spreadsheet"]
 previous_url: /controls/spreadsheet/localization-spreadsh/localization, /controls/spreadsheet/localization-spreadsh/messages-border-palette, /controls/spreadsheet/localization-spreadsh/messages-colorpicker, /controls/spreadsheet/localization-spreadsh/messages-dialogs, /controls/spreadsheet/localization-spreadsh/messages-filter-menu, /controls/spreadsheet/localization-spreadsh/messages-toolbar, /controls/spreadsheet/localization-spreadsh/messages-view
 slug: localization_ofmessages_spreadsheet_widget
 position: 1

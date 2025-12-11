@@ -6,7 +6,7 @@ page_title: Remove Filters - Kendo UI for jQuery Data Grid
 slug: grid-remove-filters
 tags: grid, filters, remove, dataSource, toolbar
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

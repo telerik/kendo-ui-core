@@ -2,6 +2,7 @@
 title: SignalR Binding
 page_title: SignalR Binding
 description: "Learn the basics of SignalR Binding when working with the Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_signalrbinding
 previous_url: /helpers/html-helpers/grid/signalr-binding
 position: 6

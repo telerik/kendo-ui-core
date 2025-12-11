@@ -6,6 +6,7 @@ page_title: Resolving Grid Column Display Issues in .NET 9 Azure App Services De
 slug: grid-azure-empty-cells
 tags: kendo-ui, grid, asp.net-core, asp.net-mvc, azure-app-services, .net9, deployment, bound-null
 res_type: kb
+components: ["general"]
 ticketid: 1679003
 ---
 

@@ -2,6 +2,7 @@
 title: Cell Formatting
 page_title: Spreadsheet
 description: "Learn how to format cells in the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_formatting_aspnetcore
 position: 4
 ---

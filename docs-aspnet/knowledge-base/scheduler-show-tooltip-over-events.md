@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/show-tooltip-with-additional-
 slug: scheduler-show-tooltip-over-events
 tags: scheduler, tooltip, hover, events, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

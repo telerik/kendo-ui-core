@@ -6,6 +6,7 @@ page_title: Skip noneditable columns when using keyboard navigation - Kendo UI f
 slug: grid-tabkey-navigation-exclude-noneditable-columns
 tags: grid, keyboard, navigation, editable, cell, skip, tab, tabkey
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

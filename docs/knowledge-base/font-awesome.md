@@ -5,9 +5,9 @@ description: "Learn how to embed custom fonts while working with the Kendo UI Dr
 slug: howto_embedfontawesome_inexportedpdf_drawingapi
 previous_url: /framework/drawing/how-to/font-awesome
 tags: telerik, kendo, jquery, drawing, library, api, embed, fontawesome, icons, in, exported, pdf
-component: drawing
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: ToolBar
 page_title: ToolBar
 description: "Learn how to configure the ToolBar of the Telerik UI TreeList for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_ToolBar
 position: 10
 ---

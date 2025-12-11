@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to manage the appearance of the Telerik UI ChipList component for {{ site.framework }} and apply its various styling options."
+components: ["chiplist"]
 slug: htmlhelpers_chiplist_aspnetcore_appearance
 position: 3
 ---

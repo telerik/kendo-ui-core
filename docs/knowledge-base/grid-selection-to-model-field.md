@@ -5,9 +5,9 @@ description: "Learn how to select a row with a checkbox column that is bound to 
 previous_url: /controls/data-management/grid/how-to/Selection/grid-selection-to-model-field
 slug: howto_bind_selection_to_model_field
 tags: grid, bind, selection, model, field, checkbox, column
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

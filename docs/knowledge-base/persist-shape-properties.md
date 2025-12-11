@@ -5,9 +5,9 @@ description: "Learn how to persist Shape properties in the Kendo UI Diagram comp
 slug: howto_persistshapeproperties_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/persist-shape-properties
 tags: kendo, jquery, diagram, persist, shape, properties
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

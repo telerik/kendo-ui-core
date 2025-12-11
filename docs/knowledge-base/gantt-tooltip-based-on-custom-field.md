@@ -7,7 +7,7 @@ slug: gantt-tooltip-based-on-custom-field
 tags: gantt, show, tooltip, different, task, field, custom, datasource
 ticketid: 1142071
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

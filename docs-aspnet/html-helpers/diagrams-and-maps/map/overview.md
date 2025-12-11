@@ -2,6 +2,7 @@
 title: Overview
 page_title: Map Overview
 description: "Learn the basics when working with the Telerik UI Map component for {{ site.framework }}."
+components: ["map"]
 previous_url: /helpers/html-helpers/map, /helpers/diagrams-and-maps/map/overview
 slug: htmlhelpers_map_aspnetcore
 position: 0

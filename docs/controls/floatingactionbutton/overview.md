@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery FloatingActionButton Documentation
 description: "Get started with the jQuery FloatingActionButton by Kendo UI and learn how to initialize the widget."
+components: ["floatingactionbutton"]
 slug: overview_kendoui_floatingactionbutton_widget
 position: 1
 ---

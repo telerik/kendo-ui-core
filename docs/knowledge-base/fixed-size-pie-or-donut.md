@@ -5,9 +5,9 @@ description: "Learn how to create fixed-size Pie or Donut Kendo UI Charts."
 previous_url: /controls/charts/how-to/fixed-size-pie-or-donut, /controls/charts/how-to/appearance/fixed-size-pie-or-donut
 slug: howto_fixedsizepiedonut_charts
 tags: chart, create, fixed-size pie, donut
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

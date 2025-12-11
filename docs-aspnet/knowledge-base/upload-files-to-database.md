@@ -7,6 +7,7 @@ slug: upload-files-to-database
 tags: upload, file, database, core, mvc, telerik
 previous_url: /helpers/editors/upload/how-to/upload-files-to-a-database, /html-helpers/editors/upload/how-to/upload-files-to-a-database
 res_type: kb
+components: ["general"]
 component: upload
 ---
 

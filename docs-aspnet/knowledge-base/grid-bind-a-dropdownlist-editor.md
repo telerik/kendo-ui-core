@@ -7,6 +7,7 @@ previous_url: /knowledge-base/how-to-bind-a-dropdownlist-editor-aspnet-core-grid
 slug: grid-bind-a-dropdownlist-editor
 tags: aspnet, core, kendo, grid, editor, dropdownlist,custom,editing, inline, incell, howto, bind, model
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

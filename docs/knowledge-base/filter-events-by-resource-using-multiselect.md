@@ -5,9 +5,9 @@ description: "Learn how to filter events by the resource in the Kendo UI for jQu
 previous_url: /controls/scheduling/scheduler/how-to/filter-events-by-resource-using-multiselect, /controls/scheduling/scheduler/how-to/filtering/filter-events-by-resource-using-multiselect
 slug: howto_filter_eventsby_resourceusing_multiselect_scheduler
 tags: telerik, kendo, jquery, scheduler, filter, events, by, resources, with, using, the, multiselect 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

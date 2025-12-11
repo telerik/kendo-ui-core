@@ -5,9 +5,9 @@ description: "Learn how to set the Kendo UI TreeMap widget tiles color from the 
 previous_url: /controls/charts/treemap/how-to/set-header-color, /controls/charts/how-to/appearance/set-header-color
 slug: howto_setheaderitemscolor_treemap
 tags: chart, treemap, set, header, items, color
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

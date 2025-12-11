@@ -7,6 +7,7 @@ meta_title: Change ContextMenu Item Text in Kendo UI for jQuery Grid
 slug: change-contextmenu-item-text-kendo-ui-jquery-grid
 tags: grid, kendo ui for jquery, contextmenu, reorderrow, text change
 res_type: kb
+components: ["grid"]
 ticketid: 1703712
 ---
 

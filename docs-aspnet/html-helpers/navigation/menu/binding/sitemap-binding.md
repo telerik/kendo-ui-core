@@ -2,6 +2,7 @@
 title: Sitemap Binding
 page_title: Sitemap Binding
 description: "Set a sitemap to create the items of the Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 slug: sitemapbinding_menu_aspnetmvc
 position: 7
 ---

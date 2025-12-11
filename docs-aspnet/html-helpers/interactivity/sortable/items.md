@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Disable, filter, and drag items within containers and between lists when working with the Telerik UI Sortable component for {{ site.framework }}."
+components: ["sortable"]
 slug: htmlhelpers_sortable_aspnetcore_items
 position: 3
 ---

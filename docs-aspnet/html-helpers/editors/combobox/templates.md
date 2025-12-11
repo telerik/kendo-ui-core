@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 slug: htmlhelpers_combobox_templates_aspnetcore
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery DropDownButton Documentation - Keyboard Navigation
 description: "Get started with the jQuery DropDownButton by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["dropdownbutton"]
 slug: keynav_kendoui_dropdownbutton_widget
 position: 2
 ---

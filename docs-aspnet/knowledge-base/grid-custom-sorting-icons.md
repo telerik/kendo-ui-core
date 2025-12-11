@@ -6,6 +6,7 @@ page_title: Customizing the Grid Column Sorting Icons
 slug: grid-custom-sorting-icons
 tags: grid, sorting, icons, columns, header, template
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

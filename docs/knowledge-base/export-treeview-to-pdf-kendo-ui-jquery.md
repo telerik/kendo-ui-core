@@ -6,6 +6,7 @@ page_title: How to Export Kendo UI for jQuery TreeView Data to PDF
 slug: export-treeview-to-pdf-kendo-ui-jquery
 tags: kendo, treeview, export, pdf, drawing, drawdom
 res_type: kb
+components: ["treeview"]
 ticketid: 1679577
 ---
 

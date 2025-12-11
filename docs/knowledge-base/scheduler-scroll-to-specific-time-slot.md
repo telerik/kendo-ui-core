@@ -6,7 +6,7 @@ page_title: Scroll to Specific Time Slots in AngularJS - Kendo UI Scheduler for 
 slug: scheduler-scroll-to-specific-time-slot
 tags: scroll, time, slot, specific, scheduler, angular, angularjs
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

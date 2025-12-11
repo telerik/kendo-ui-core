@@ -7,7 +7,7 @@ slug: grid-dropdown-editor-readonly
 tags: grid, dropdownlist, readonly, editor
 ticketid: 1133104
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

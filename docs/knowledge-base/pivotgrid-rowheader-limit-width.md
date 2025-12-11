@@ -7,6 +7,7 @@ slug: pivotgrid-rowheader-limit-width
 tags: pivot, pivotgrid, width, compact, column, row, header, rowheader, limit, resize, reduce
 ticketid: 1474913, 1157675
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to show a custom placeholder on blur in the Kendo UI Mas
 slug: howto_show_custom_placeholderon_blur_maskedtextbox
 previous_url: /controls/editors/maskedtextbox/how-to/custom-placeholder
 tags: telerik, kendo, jquery, maskedtextbox, show, render, custom, placeholder, on, blur
-component: maskedtextbox
 type: how-to
 res_type: kb
+components: ["maskedtextbox"]
 ---
 
 ## Environment

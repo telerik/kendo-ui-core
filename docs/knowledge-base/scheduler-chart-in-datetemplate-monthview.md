@@ -6,7 +6,7 @@ page_title: Inject Chart in the DateTemplate of the Month View - Kendo UI Schedu
 slug: scheduler-chart-in-datetemplate-monthview
 tags: kendo, kendo-ui, scheduler, chart, datetemplate, month-view, hide
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

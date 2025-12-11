@@ -6,7 +6,7 @@ slug: editor_popup_readonly_firefox
 tags: telerik, progress, kendoui, jquery, editor, popup, redonly, firefox 
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

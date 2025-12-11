@@ -7,6 +7,7 @@ slug: grid-dynamic
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, operations, caption, title, dynamic, datatype, razor, page
 ticketid: 1455029, 1497302, 1479749, 1478314, 1455574
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

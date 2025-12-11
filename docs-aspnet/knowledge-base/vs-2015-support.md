@@ -7,6 +7,7 @@ previous_url: /getting-started/prerequisites/vs-2015-support, /compatibility/vs-
 slug: vs2015support_core
 tags: vs2015, support
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

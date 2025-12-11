@@ -2,6 +2,7 @@
 title: Captcha Server-side Provider
 page_title: Captcha Server-side Provider
 description: "Learn how to configure the server-side provider for the Telerik UI Captcha component for {{ site.framework }}."
+components: ["captcha"]
 slug: htmlhelpers_captcha_provider
 position: 2
 ---

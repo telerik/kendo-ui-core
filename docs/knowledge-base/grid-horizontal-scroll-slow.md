@@ -8,6 +8,7 @@ position:
 tags: grid, scroll, horizontal, moving, slow, not, working, scrollbar
 ticketid: 1149398
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

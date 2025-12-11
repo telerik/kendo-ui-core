@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery CheckBoxGroup Documentation - CheckBoxGroup Accessibility
 description: "Get started with the jQuery CheckBoxGroup and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["checkboxgroup"]
 slug: jquery_checkboxgroup_accessibility
 position: 1
 ---

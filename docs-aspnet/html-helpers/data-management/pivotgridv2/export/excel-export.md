@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: PivotGridV2 Excel Export
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and learn how to export it to Excel."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_excelexport
 position: 0
 ---

@@ -6,6 +6,7 @@ page_title: Display a Kendo UI for jQuery Wizard in a Dialog Component
 slug: wizard-show-in-dialog
 tags: wizard, dialog, kendoui, jquery, display
 res_type: kb
+components: ["dialog"]
 ---
 
 ## Environment

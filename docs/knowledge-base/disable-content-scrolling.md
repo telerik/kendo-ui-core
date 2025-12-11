@@ -5,9 +5,9 @@ description: "Learn how to disable the content scrolling of the Kendo UI for jQu
 slug: howto_disablecontentscrolling_tabstrip
 previous_url: /controls/navigation/tabstrip/how-to/disable-content-scrolling
 tags: telerik, kendo, jquery, tabstrip, disable, content, scrolling
-component: tabstrip
 type: how-to
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

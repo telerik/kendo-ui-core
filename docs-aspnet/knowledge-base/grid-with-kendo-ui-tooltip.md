@@ -7,6 +7,7 @@ tags: grid, show, display, tooltip, column, records
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

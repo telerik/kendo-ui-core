@@ -6,7 +6,7 @@ page_title: Implement Calculated Columns from Multiple Fields in a Grid with the
 slug: grid-calculated-column-with-batch-editing
 tags: grid, batch, incell, calculated
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

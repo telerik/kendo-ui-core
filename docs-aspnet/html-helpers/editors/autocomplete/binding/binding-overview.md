@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI AutoComplete Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} AutoComplete using various data binding approaches."
+components: ["autocomplete"]
 previous_url: /helpers/editors/autocomplete/binding/overview
 slug: htmlhelpers_autocomplete_databinding_aspnetcore
 position: 0

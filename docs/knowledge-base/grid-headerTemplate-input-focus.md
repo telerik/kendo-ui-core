@@ -7,6 +7,7 @@ slug: grid-headerTemplate-input-focus
 tags: grid, headerTemplate, input, focus
 ticketid: 1138938
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

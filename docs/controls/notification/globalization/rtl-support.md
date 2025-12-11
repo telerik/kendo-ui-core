@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: jQuery Notification Documentation - Notification Right-to-Left Support
 description: "Get started with the jQuery Notification by Kendo UI and learn about the RTL supports it provides."
+components: ["notification"]
 slug: rtl_kendoui_notification
 position: 2
 ---

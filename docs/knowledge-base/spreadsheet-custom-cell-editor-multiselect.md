@@ -7,7 +7,7 @@ slug: spreadsheet-custom-cell-editor-multiselect
 tags: spreadsheet, custom, editor, cell, popup, multiselect
 ticketid: 1626834
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

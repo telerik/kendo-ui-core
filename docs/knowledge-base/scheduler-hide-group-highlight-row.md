@@ -6,6 +6,7 @@ page_title: Group Scheduler by Multiple Groups, Hide First Group and Highlight f
 slug: scheduler-hide-group-highlight-row
 tags: kendo, kendo-ui, scheduler
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

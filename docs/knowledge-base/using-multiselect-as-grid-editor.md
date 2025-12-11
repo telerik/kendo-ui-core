@@ -6,6 +6,7 @@ page_title: Using MultiSelect as a Grid Editor
 slug: using-multiselect-as-grid-editor
 tags: grid, multiselect, editor, kendo-ui, custom-editor
 res_type: kb
+components: ["grid", "multiselect"]
 ticketid: 1689532
 ---
 

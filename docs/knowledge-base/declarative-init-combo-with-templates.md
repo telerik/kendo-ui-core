@@ -5,9 +5,9 @@ description: "Learn how to declaratively initialize a Kendo UI ComboBox with tem
 previous_url: /controls/editors/combobox/how-to/declarative-init-combo-with-templates, /controls/editors/combobox/how-to/mvvm/declarative-init-combo-with-templates
 slug: howto_declaratively_initialize_with_templates_combobox
 tags: telerik, kendo, jquery, combobox, initialize, with, templates, declaratively
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

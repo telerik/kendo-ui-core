@@ -2,6 +2,7 @@
 title: Content Alignment
 page_title: Content Alignment
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to align the cell content, the column header, and the column footer."
+components: ["grid"]
 slug: cell_alignment_aspnet_grid
 position: 11
 ---

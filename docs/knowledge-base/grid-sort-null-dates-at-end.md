@@ -7,6 +7,7 @@ slug: grid-sort-null-dates-bottom
 position: 
 tags: grid, sort, sorting, null, bottom, show, end, ascending, descending, order, values, element, last
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -8,6 +8,7 @@ position:
 tags: treeview, checkbox, model
 ticketid: 1450295
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

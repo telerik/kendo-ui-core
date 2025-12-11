@@ -2,6 +2,7 @@
 title: Delayed Widget Initialization
 page_title: Delayed Widget Initialization | AngularJS Directives
 description: "Learn how to delay the initialization of Kendo UI widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#delaying-widget-initialization
 slug: angularjs_delayed_initialization
 position: 2

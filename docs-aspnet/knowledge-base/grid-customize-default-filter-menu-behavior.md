@@ -7,6 +7,7 @@ slug: grid-customize-default-filter-menu-behavior
 tags: grid, filter, menu, value, persist, input
 ticketid: 1579319
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

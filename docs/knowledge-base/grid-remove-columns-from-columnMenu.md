@@ -7,6 +7,7 @@ slug: grid-remove-columns-from-columnmenu
 tags: Grid, ColumnMenu, Columns
 ticketid: 1131816
 res_type: kb
+components: ["grid"]
 ---
 
 > **Deprecated** The functionality is available from the API. Check [`column.menu`](/api/javascript/ui/grid/configuration/columns.menu) configuration of the Grid.

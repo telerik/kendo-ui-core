@@ -7,6 +7,7 @@ previous_url: /helpers/data-management/grid/how-to/editing/grid-incell-editing-c
 slug: grid-cascading-dropdownlists
 tags: grid, core, mvc, cascading, dropdownlist, incell, inline, popup, editing, mode
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

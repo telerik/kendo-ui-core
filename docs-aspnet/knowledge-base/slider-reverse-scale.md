@@ -7,6 +7,7 @@ slug: slider-reverse-scale
 tags: slider, reverse, scale, decrement, steps
 ticketid: 1672392
 res_type: kb
+components: ["general"]
 component: slider
 ---
 

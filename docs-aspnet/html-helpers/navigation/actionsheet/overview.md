@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the features and functionalities of the Telerik UI ActionSheet component for {{ site.framework }}. Learn how to initialize and configure the ActionSheet control." 
+components: ["actionsheet"]
 slug: htmlhelpers_actionsheet_aspnetcore
 position: 0
 ---

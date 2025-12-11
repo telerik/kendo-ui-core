@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: ColorPalette Documentation - Keyboard Navigation
 description: "Get started with the {{ site.platform }} ColorPalette by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["colorpalette"]
 slug: keynav_colorpalette_aspnet
 position: 2
 ---

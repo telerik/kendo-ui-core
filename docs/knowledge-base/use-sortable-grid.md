@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid
 previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid, /web/sortable/how-to/angularjs-reorder-grid-rows, /controls/interactivity/sortable/how-to/use-sortable-grid
 slug: howto_usesortablewithgrid_inincellediting_sortable
 tags: telerik, kendo, jquery, sortable, reorder, rows, in, grids
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

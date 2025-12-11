@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Charts Documentation - Charts Accessibility
 description: "Get started with the jQuery Charts by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["chart"]
 slug: jquery_chart_accessibility
 position: 1
 ---

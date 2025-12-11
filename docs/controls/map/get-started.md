@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Map Documentation - Getting Started with the Map
 description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["map"]
 slug: getting_started_kendoui_map_component
 position: 1
 ---

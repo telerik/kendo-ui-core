@@ -5,9 +5,9 @@ description: "Learn how to zoom the Kendo UI Map on double click."
 slug: howto_zoomondblclick_map
 previous_url: /controls/diagrams-and-maps/map/how-to/zoom-on-dblclick
 tags: kendo, jquery, map, zoom, on, double, click
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Group the data in the Telerik UI MultiColumnComboBox component for {{ site.framework }}"
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/grouping
 slug: grouping_multicolumncombobox_aspnetmvc
 position: 6

@@ -2,6 +2,7 @@
 title: jQuery Support
 page_title: jQuery Support - Support and Distribution 
 description: "Get started with Kendo UI for jQuery and learn about the jQuery version support which is delivered by the Kendo UI for jQuery library."
+components: ["general"]
 previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites, /technical-requirements
 slug: jquerysupport_kendoui
 position: 3

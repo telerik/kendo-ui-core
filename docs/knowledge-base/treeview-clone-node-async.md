@@ -6,6 +6,7 @@ page_title: Clone TreeView Nodes and All Their Children - Kendo UI TreeView for 
 slug: treeview-clone-node-async
 tags: kendo, kendo-ui, treeview, clone, node, all, children
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

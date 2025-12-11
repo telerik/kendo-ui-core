@@ -6,6 +6,7 @@ page_title: How to Limit Decimal Places and Allow Specific Values in Grid Numeri
 slug: restrict-decimals-allow-values-kendo-ui-grid-jquery
 tags: kendo-ui, grid, jquery, decimal, rounding, negative-values, null-values
 res_type: kb
+components: ["grid"]
 ticketid: 1679520
 ---
 

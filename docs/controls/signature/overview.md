@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Signature Documentation - Signature Overview
 description: "Try now the Kendo UI for jQuery Signature component enabling the user to create handwritten signatures and providing image export, form integration, and a set of styling options."
+components: ["signature"]
 slug: overview_kendoui_signature_widget
 position: 0
 ---

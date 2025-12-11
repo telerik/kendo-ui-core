@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Pager component for {{ site.framework }}."
+components: ["pager"]
 slug: htmlhelpers_pager_aspnet_overview
 position: 0
 ---

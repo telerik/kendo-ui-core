@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding
 description: "Learn the basics when working with the Telerik UI TreeList component for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["treelist"]
 slug: databinding_treelist_aspnetcore
 position: 1
 ---

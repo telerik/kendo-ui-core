@@ -6,6 +6,7 @@ slug: upload-file-confirmation-dialog
 tags: upload, dialog, confirmation, file, telerik, core, mvc
 ticketid: 1660745
 res_type: kb
+components: ["general"]
 component: upload
 ---
 

@@ -7,6 +7,7 @@ previous_url: /helpers/editors/multiselect/how-to/use-multiselect-filter-in-grid
 slug: grid-multiselect-as-filter
 tags: multiselect, grid, filter, items, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid, multiselect
 ---
 

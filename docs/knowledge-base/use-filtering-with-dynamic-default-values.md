@@ -5,9 +5,9 @@ description: "Learn how to use dynamic default field values in the jQuery Grid b
 previous_url: /controls/data-management/grid/how-to/use-filtering-with-dynamic-default-values, /controls/data-management/grid/how-to/filtering/use-filtering-with-dynamic-default-values
 slug: howto_gridfiltering_dynamicdefaultvalues_grid
 tags: use, grid, filtering, dynamic, default, values
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI DropDownTree Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} DropDownTree using various data binding approaches."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_databinding_aspnetcore
 position: 1
 ---

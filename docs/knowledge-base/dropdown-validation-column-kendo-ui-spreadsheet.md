@@ -6,6 +6,7 @@ page_title: How to Set Dropdown Validation for Entire Columns in Kendo UI Spread
 slug: dropdown-validation-column-kendo-ui-spreadsheet
 tags: spreadsheet, kendo-ui, validation, column, dropdown
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1689145
 ---
 

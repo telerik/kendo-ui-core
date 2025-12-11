@@ -5,9 +5,9 @@ description: "Select the first event in the agenda view of a Kendo UI for jQuery
 previous_url: /controls/scheduling/scheduler/how-to/select-the-first-event-in-agenda-view, /controls/scheduling/scheduler/how-to/various/select-the-first-event-in-agenda-view
 slug: howto_select_the_first_event_in_agenda_view_scheduler
 tags: telerik, kendo, jquery, scheduler, select, the, first, event, in, agenda, view 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

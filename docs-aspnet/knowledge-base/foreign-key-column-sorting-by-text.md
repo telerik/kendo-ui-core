@@ -7,6 +7,7 @@ tags: grid, enable, foreignkey, column, sort, text
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

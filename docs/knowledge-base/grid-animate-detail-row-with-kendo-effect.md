@@ -7,6 +7,7 @@ slug: grid-animate-detail-row-with-kendo-effect
 tags: grid, aniamte, detail, row, detailrow, effect, slide in, fade, expand
 ticketid: 540440
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

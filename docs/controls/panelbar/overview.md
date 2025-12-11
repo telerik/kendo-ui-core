@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery PanelBar Documentation - PanelBar Overview
 description: "Try now the Kendo UI for jQuery PanelBar component supporting options for binding it to local arrays or remote data, setting its single or multiple node expansion modes, displaying animations, and more."
+components: ["panelbar"]
 slug: overview_kendoui_panelbar_widget
 position: 0
 ---

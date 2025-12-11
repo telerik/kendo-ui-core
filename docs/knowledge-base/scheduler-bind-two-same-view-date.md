@@ -7,6 +7,7 @@ slug: scheduler-bind-two-same-view-date
 tags: scheduler, bind, two, same, view, date
 ticketid: 1156354
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title:  Local Binding
 page_title: Local Binding
 description: "Learn how to bind the {{ site.product }} MultiSelect component to a local dataset."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/binding/server-binding
 slug: htmlhelpers_multiselect_serverbinding_aspnetcore
 position: 2

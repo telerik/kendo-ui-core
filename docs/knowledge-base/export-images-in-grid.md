@@ -4,9 +4,9 @@ page_title: Export images in grid - Kendo UI for jQuery Data Grid
 description: "Learn how to include images in the exported xlsx file."
 slug: export-images-in-grid
 tags: grid, images, excel, export
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

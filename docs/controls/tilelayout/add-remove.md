@@ -2,6 +2,7 @@
 title: Add or Remove Tiles
 page_title: Kendo UI for jQuery TileLayout Documentation - TileLayout Add/Remove
 description: "Learn how to enable and use the reordering functionality of the Kendo UI for jQuery TileLayout."
+components: ["tilelayout"]
 slug: add_remove_kendoui_tilelayout_widget
 position: 5
 ---

@@ -5,9 +5,9 @@ description: "Learn how to create an external editor form in a Kendo UI for jQue
 previous_url: /asp-mvc/controls/scheduling/scheduler/how-to/external-editor-form, /controls/scheduling/scheduler/how-to/external-editor-form, /controls/scheduling/scheduler/how-to/editing/external-editor-form
 slug: howto_create_external_editor_form_scheduler
 tags: telerik, kendo, jquery, scheduler, create, external, editor, form
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery DateTimePicker Documentation - DateTimePicker Overview
 description: "Try now the Kendo UI for jQuery DateTimePicker component covering everything from disabling and selecting dates and time slots, setting its start dates and navigation depth, configuring validations rules, and allowing you to modify its rendering, calendar type, and date and time formats."
+components: ["datetimepicker"]
 slug: overview_kendoui_datetimepicker_widget
 position: 0
 ---

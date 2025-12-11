@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: jQuery TreeList Documentation - Search Panel | Kendo UI
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to enable search panel to search through its data."
+components: ["treelist"]
 slug: searchpanel_kendoui_treelist_widget
 position: 8
 ---

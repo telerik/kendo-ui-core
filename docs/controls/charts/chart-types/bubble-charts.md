@@ -2,6 +2,7 @@
 title: Bubble Charts
 page_title: jQuery Chart Documentation - Bubble Charts
 description: "Learn how to create a Kendo UI Bubble Chart to visualize data points and how to set its properties."
+components: ["chart"]
 slug: bubblecharts_widget
 ---
 

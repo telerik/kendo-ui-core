@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Pager Documentation - Getting Started with the Pager
 description: "Get started with the jQuery Pager by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["pager"]
 slug: getting_started_kendoui_pager_widget
 position: 1
 ---

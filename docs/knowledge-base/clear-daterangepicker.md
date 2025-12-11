@@ -5,6 +5,7 @@ type: how-to
 page_title: Clear the Selection of the DateRangePicker - Kendo UI DateRangePicker for jQuery
 slug: clear-daterangepicker
 res_type: kb
+components: ["daterangepicker"]
 ---
 
 ## Environment

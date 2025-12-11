@@ -2,6 +2,7 @@
 title: Date Editing
 page_title: Date Editing
 description: "Learn the basic date editing when working with the Telerik UI DateInput component for {{ site.framework }}."
+components: ["dateinput"]
 slug: dateinput_date_editing
 position: 2
 ---

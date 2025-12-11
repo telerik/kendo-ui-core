@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Stepper Documentation
 description: "Get started with the jQuery Stepper by Kendo UI and manage its appearance."
+components: ["stepper"]
 slug: appearance_stepper_widget
 position: 5
 ---

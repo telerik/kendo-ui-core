@@ -6,6 +6,7 @@ page_title: Ensuring Focusability of Kendo Grid Filter Inputs within Bootstrap M
 slug: kendo-grid-filter-input-focus-bootstrap-modal
 tags: kendo-ui, grid, bootstrap, modal, filter, focus, accessibility, tabindex
 res_type: kb
+components: ["grid"]
 ticketid: 1670448
 ---
 

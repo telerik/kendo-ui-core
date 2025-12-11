@@ -2,6 +2,7 @@
 title: Expand Modes
 page_title: Expand Modes
 description: "Use the single or multiple expand mode in the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 previous_url: /helpers/navigation/panelbar/expand-modes
 slug: htmlhelpers_panelbar_expandmodes_aspnetcore
 position: 2

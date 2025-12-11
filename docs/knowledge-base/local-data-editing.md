@@ -5,9 +5,9 @@ description: "Learn how to implement editing with local data in a Kendo UI Diagr
 slug: howto_editlocaladata_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/local-data-editing
 tags: kendo, jquery, diagram, implement, local, data, editing
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

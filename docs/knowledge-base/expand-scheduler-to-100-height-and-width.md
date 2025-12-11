@@ -5,9 +5,9 @@ description: "Learn how to expand a Kendo UI for jQuery Scheduler widget to a wi
 previous_url: /controls/scheduling/scheduler/how-to/expand-scheduler-to-100-height-and-width, /controls/scheduling/scheduler/how-to/appearance/expand-scheduler-to-100-height-and-width
 slug: howto_expand_scheduler_to100percent_widthandheight_scheduler
 tags: telerik, kendo, jquery, scheduler, expand, to, 100%, height, and, width 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

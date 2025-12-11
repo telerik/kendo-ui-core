@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} DateInput component by following a complete step-by-step tutorial."
+components: ["dateinput"]
 slug: dateinput_getting_started
 position: 1
 ---

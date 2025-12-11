@@ -2,6 +2,7 @@
 title: License Key
 page_title: Setting Up Your Telerik License Key in CI/CD
 description: Learn how to create and install a Telerik license key file in continuous integration and continuous delivery (CI/CD) workflows and environments.
+components: ["general"]
 slug: deployment_license_key_aspnetcore
 position: 2
 ---

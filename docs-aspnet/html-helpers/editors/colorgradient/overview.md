@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorGradient component for {{ site.framework }}."
+components: ["colorgradient"]
 slug: htmlhelpers_overview_colorgradient
 position: 0
 ---

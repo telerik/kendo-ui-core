@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery ListBox Documentation - Data Binding
 description: "Get started with the jQuery ListBox by Kendo UI and bind the widget to local data arrays or remote data services."
+components: ["listbox"]
 slug: databinding_kendoui_listbox_widget
 position: 2
 ---

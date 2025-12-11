@@ -2,6 +2,7 @@
 title: Drilldown
 page_title: jQuery Chart Documentation - Drilldown
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure drilldown charts."
+components: ["chart"]
 slug: drilldown_charts_widget
 position: 5
 ---

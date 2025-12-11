@@ -2,6 +2,7 @@
 title: Data Series
 page_title: jQuery Chart Documentation - Data Series
 description: "Get started with the jQuery Chart by Kendo UI and learn how to plot one or more specified data series."
+components: ["chart"]
 previous_url: /controls/charts/series
 slug: seriestypeofcharts_widget
 ---

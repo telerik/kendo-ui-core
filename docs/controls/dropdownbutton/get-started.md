@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DropDownButton Documentation - Getting Started with the DropDownButton
 description: "Get started with the jQuery DropDownButton by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dropdownbutton"]
 slug: getting_started_kendoui_dropdownbutton_widget
 position: 1
 ---

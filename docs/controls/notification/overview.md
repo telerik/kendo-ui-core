@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Notification Documentation - Notification Overview
 description: "Try now the Kendo UI for jQuery Notification component providing built-in types, and options for setting its messages and customizing its behavior and content through the available templates."
+components: ["notification"]
 slug: overview_kendoui_notification_widget
 position: 0
 ---

@@ -5,9 +5,9 @@ description: "Learn how to get a reference to the ImageBrowser and FileBrowser c
 previous_url: /controls/editors/editor/how-to/get-reference-to-imagebrowser-child-widgets, /controls/editors/editor/how-to/integration/get-reference-to-imagebrowser-child-widgets
 slug: howto_get_referenceto_child_widgets_editor
 tags: telerik, kendo, jquery, editor, get, reference, to, child, widgets
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

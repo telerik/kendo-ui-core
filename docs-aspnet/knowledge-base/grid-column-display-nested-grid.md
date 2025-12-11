@@ -6,6 +6,7 @@ page_title: Displaying a Nested Grid in a Grid Column Template
 slug: grid-column-display-nested-grid
 tags: grid, column, template, nested, grid, button, toggle
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

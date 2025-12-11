@@ -2,6 +2,7 @@
 title: Overview
 page_title: DropDownTree Documentation | DropDownTree Accessibility
 description: "Get started with the {{ site.product }} DropDownTree and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_accessibility
 position: 1
 ---

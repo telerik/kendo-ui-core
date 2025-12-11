@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Rating Documentation - Getting Started with the Rating
 description: "Get started with the jQuery Rating by Kendo UI and learn how to create and initialize the component."
+components: ["rating"]
 slug: getting_started_kendoui_rating_widget
 position: 1
 ---

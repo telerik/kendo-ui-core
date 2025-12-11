@@ -5,9 +5,9 @@ description: "Learn how to collapse a row that was previously expanded when the 
 previous_url: /controls/data-management/grid/how-to/Layout/allow-a-single-expanded-row-only
 slug: howto_allowonlyasingleexpandedrow_grid
 tags: grid, single, row, master, expand
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

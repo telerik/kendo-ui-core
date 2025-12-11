@@ -2,6 +2,7 @@
 title: Spacer
 page_title: Spacer ToolBar Command Type
 description: "Learn how to use the spacer command type when working with the Telerik UI ToolBar component for {{ site.framework }}."
+components: ["toolbar"]
 slug: spacer_toolbar_aspnetcore
 ---
 

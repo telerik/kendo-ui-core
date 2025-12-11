@@ -2,6 +2,7 @@
 title: Scatter Charts
 page_title: jQuery Chart Documentation - Scatter Charts
 description: "Learn how to create a Kendo UI Scatter Chart and use the different options it provides."
+components: ["chart"]
 slug: scattercharts_widget
 position: 3
 ---

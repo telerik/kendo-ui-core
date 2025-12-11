@@ -2,6 +2,7 @@
 title: Storing Data as JSON
 page_title: jQuery Spreadsheet Documentation - Storing Data as JSON
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn about the data persistence options in the Kendo UI Spreadsheet component."
+components: ["spreadsheet"]
 slug: loadand_saveas_json_spreadsheet_widget
 position: 1
 ---

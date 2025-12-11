@@ -8,6 +8,7 @@ position:
 tags: grid, row, filtering, multiselect, multi, multiple checkboxes
 ticketid: 1626077
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

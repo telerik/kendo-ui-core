@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery FileManager Documentation | FileManager Accessibility
 description: "Get started with the jQuery FileManager by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["filemanager"]
 slug: jquery_filemanager_accessibility
 position: 1
 ---

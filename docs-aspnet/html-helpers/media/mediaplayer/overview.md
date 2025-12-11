@@ -2,6 +2,7 @@
 title: Overview
 page_title: MediaPlayer Overview
 description: "The Telerik UI MediaPlayer component for {{ site.framework }} provides a styled UI video and audio player."
+components: ["mediaplayer"]
 previous_url: /helpers/html-helpers/mediaplayer, /helpers/media/mediaplayer/overview
 slug: htmlhelpers_mediaplayer_aspnetcore
 position: 0

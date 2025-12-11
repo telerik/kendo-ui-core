@@ -5,9 +5,9 @@ description: "Learn how to fix the selected value of the Kendo UI ColorPicker wh
 slug: colorpicker_fix_selected_value_when_shown
 previous_url: /controls/editors/colorpicker/how-to/fix-selected-value-when-shown
 tags: telerik, kendo, jquery, colorpicker, fix, value, when, showing, dynamically
-component: colorpicker
 type: how-to
 res_type: kb
+components: ["colorpicker"]
 ---
 
 ## Environment

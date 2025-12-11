@@ -7,7 +7,7 @@ slug: export-the-grid-to-excel-only-after-confirmation
 tags: grid, excel, export
 ticketid: 1117057
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

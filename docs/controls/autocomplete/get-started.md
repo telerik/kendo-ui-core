@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery AutoComplete Documentation - Getting Started with the AutoComplete
 description: "Get started with the jQuery AutoComplete by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["autocomplete"]
 slug: getting_started_kendoui_autocomplete_component
 position: 1
 ---

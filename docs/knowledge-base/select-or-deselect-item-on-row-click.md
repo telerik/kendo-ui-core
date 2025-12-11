@@ -6,7 +6,7 @@ page_title: Select or Deselect Items on Row Click - Kendo UI for jQuery Data Gri
 slug: select-or-deselect-item-on-row-click
 tags: grid, selection, remove, deselect, unselect, select, row, click, multiple, persist
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

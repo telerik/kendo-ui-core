@@ -2,6 +2,7 @@
 title: Playlists
 page_title: Playlists
 description: "Learn how to configure the playlist of the Telerik UI MediaPlayer component for {{ site.framework }}."
+components: ["mediaplayer"]
 slug: htmlhelpers_mediaplayer_playlists_aspnetcore
 position: 3
 ---

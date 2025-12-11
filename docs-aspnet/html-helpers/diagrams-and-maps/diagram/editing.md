@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} and learn how to enable its editing functionality."
+components: ["diagram"]
 slug: htmlhelpers_diagram_aspnetcore_editing
 position: 4
 ---

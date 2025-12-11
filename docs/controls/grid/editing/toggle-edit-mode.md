@@ -2,6 +2,7 @@
 title: Toggling Edit Mode
 page_title: jQuery Grid Documentation - Toggle Edit Mode
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and learn how to toggle editing capabilities."
+components: ["grid"]
 slug: toggle_edit_mode_grid
 position: 6
 ---

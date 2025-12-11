@@ -2,6 +2,7 @@
 title: Output Actions
 page_title: Telerik UI AIPrompt Documentation - Output Actions
 description: "Configure built-in and custom actions that can be applied to the generated output of the Telerik UI for {{ site.framework }} AIPrompt component."
+components: ["aiprompt"]
 slug: htmlhelpers_output_actions_aiprompt
 position: 3
 ---

@@ -7,6 +7,7 @@ slug: stached-chart-labels-above-series-bars
 tags: kendo, jquery, chart, series, labels, stacked, above
 ticketid: 1596023
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

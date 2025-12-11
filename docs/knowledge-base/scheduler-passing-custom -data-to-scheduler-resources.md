@@ -8,6 +8,7 @@ position: 0
 tags: kendo, kendo-ui, scheduler, groupheadertemplate, datasource, resources
 ticketid: 1428228
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

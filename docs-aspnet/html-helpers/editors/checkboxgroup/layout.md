@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout
 description: "Learn how to configure the layout of the Telerik UI CheckBoxGroup for {{ site.framework }}."
+components: ["checkboxgroup"]
 slug: htmlhelpers_checkboxgroup_aspnetcore_layout
 position: 3
 ---

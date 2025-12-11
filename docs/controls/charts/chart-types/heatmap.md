@@ -2,6 +2,7 @@
 title: Heatmap
 page_title: jQuery Chart Documentation - Heatmap
 description: "Learn how to create a Kendo UI Heatmap and use the different options it provides."
+components: ["chart"]
 slug: heatmapcharts_widget
 position: 12
 ---

@@ -7,6 +7,7 @@ slug: chart-z-index
 tags: chart, z-index
 ticketid: 1492618
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

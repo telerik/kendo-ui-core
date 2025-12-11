@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn more about the Telerik UI Responsive Panel component for {{ site.framework }}, and use it in your project."
+components: ["responsivepanel"]
 previous_url: /helpers/html-helpers/responsivepanel, /helpers/navigation/responsivepanel/overview
 slug: htmlhelpers_responsivepanel_aspnetcore
 position: 0

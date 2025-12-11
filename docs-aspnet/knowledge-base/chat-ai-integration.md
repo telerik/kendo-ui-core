@@ -6,6 +6,7 @@ page_title: Telerik UI Chat AI Integration for {{ site.product }}
 slug: chat-ai-integration
 tags: chat, ai, openai, azure, assistant, messages, kendochat
 res_type: kb
+components: ["general"]
 component: chat
 ---
 

@@ -2,6 +2,7 @@
 title: Prefix and Suffix
 page_title: jQuery MaskedTextBox Documentation - Prefix and Suffix
 description: "Learn how to add custom items as prefix and suffix adornments to enhance the user interface interactivity when using the Kendo UI for jQuery MaskedTextBox."
+components: ["maskedtextbox"]
 slug: prefix_suffix_maskedtextbox
 position: 5
 ---

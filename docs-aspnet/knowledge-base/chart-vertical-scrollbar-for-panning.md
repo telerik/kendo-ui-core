@@ -6,6 +6,7 @@ page_title: Using a Vertical Scrollbar to Pan a Chart
 slug: chart-vertical-scrollbar-for-panning
 tags: chart, vertical, scrollbar, panning
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 <table>

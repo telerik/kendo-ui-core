@@ -6,6 +6,7 @@ page_title: Changing Hover Color of Grid Rows
 slug: grid-rows-hover-color
 tags: grid, rows, hover, color, locked, frozen, columns, table, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

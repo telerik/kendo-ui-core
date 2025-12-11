@@ -5,9 +5,9 @@ description: "Learn how to render custom symbols on Kendo UI Map Bubble layers."
 slug: howto_rendercustomsymbols_forbubblelayers_map
 previous_url: /controls/diagrams-and-maps/map/how-to/custom-bubble-layer-symbols
 tags: kendo, jquery, map, add, custom, symbols, for, bubble, layers
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to filter a Telerik UI PivotGrid component for {{ site.framework }}."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_filtering
 position: 3
 ---

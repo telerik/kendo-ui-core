@@ -2,6 +2,7 @@
 title: Scale
 page_title: Scale
 description: "Learn how to configure the Scale options of the Telerik UI CircularGauge component for {{ site.framework }}."
+components: ["circulargauge"]
 slug: scale_circulargaugehelper_aspnetcore
 position: 2
 ---

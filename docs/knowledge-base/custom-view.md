@@ -5,9 +5,9 @@ description: "Learn how to inherit some of the built-in views and implement spec
 previous_url: /controls/scheduling/scheduler/how-to/custom-view, /controls/scheduling/scheduler/how-to/custom-views/custom-view
 slug: howto_create_custom_view_inheriting_builtinview_scheduler
 tags: telerik, kendo, jquery, scheduler, create, custom, views, inheriting, builtin 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

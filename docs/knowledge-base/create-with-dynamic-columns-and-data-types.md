@@ -5,9 +5,9 @@ description: "Learn how to create a Kendo UI jQuery Grid with column and data fi
 previous_url: /controls/data-management/grid/how-to/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/various/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/binding/create-with-dynamic-columns-and-data-types
 slug: howto_createdynamiccolumnsdatatypes_grid
 tags: grid, create, dynamic, columns, data, types
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

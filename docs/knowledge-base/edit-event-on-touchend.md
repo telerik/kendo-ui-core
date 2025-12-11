@@ -5,9 +5,9 @@ description: "Learn how to edit an event in a Kendo UI for jQuery Scheduler widg
 previous_url: /controls/scheduling/scheduler/how-to/edit-event-on-touchend, /controls/scheduling/scheduler/how-to/editing/edit-event-on-touchend
 slug: howto_edit_records_using_touchendonmobile_scheduler
 tags: telerik, kendo, jquery, scheduler, edit, records, on, touchend 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

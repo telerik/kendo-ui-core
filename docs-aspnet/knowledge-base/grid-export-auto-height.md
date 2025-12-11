@@ -5,6 +5,7 @@ page_title: Auto Height for rows of Excel Export
 slug: grid-export-cell-auto-height
 tags: grid, export, excel, format, cells, height, auto-height, core, mvc, telerik
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -7,6 +7,7 @@ slug: grid-excel-export-server
 ticketid: 1107641
 tags: grid, excel, export, RadSpreadStreamProcessing, server, server-side, large, data set
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

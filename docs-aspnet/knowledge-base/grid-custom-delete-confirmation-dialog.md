@@ -6,6 +6,7 @@ page_title: Customize the Delete Confirmation Dialog
 slug: grid-custom-delete-confirmation-dialog
 tags: mvc, core, grid, custom, delete, confirmation, dialog
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Rating component by following a complete step-by-step tutorial."
+components: ["rating"]
 slug: getting_started_rating
 position: 1
 ---

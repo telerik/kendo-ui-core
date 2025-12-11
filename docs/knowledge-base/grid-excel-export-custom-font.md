@@ -7,7 +7,7 @@ slug: grid-excel-export-custom-font
 tags: excel, export, grid, font, font-family, row, font-size
 ticketid: 1137653
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

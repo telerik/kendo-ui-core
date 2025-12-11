@@ -7,7 +7,7 @@ slug: prevent-submission-of-missing-value
 tags: combobox, prevent, submit, submission, value, missing, not, present, datasource
 ticketid: 1133314
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ page_title: Display Selected Ranges in Tooltips - Kendo UI Spreadsheet for jQuer
 slug: spreadsheet_display_selected_ranges_tooltip
 tags: spreadsheet, tooltip, selected, range
 res_type: kb
-component: spreadsheet, tooltip
+components: ["spreadsheet"]
 ---
 
 ## Environment

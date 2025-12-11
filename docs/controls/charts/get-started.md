@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Chart Documentation - Getting Started with the Chart
 description: "Get started with the jQuery Chart by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chart"]
 slug: getting_started_kendoui_chart_widget
 position: 1
 ---

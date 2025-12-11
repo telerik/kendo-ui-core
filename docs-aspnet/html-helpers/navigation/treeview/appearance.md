@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI TreeView for {{ site.framework }}."
+components: ["treeview"]
 slug: appearance_treeview
 position: 3
 ---

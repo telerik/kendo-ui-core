@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI for {{ site.framework }} PopOver component and its features like custom action buttons and built-in customization options."
+components: ["popover"]
 slug: htmlhelpers_overview_popover
 position: 0
 ---

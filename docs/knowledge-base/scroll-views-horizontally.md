@@ -5,9 +5,9 @@ description: "Learn how to scroll the Kendo UI for jQuery Scheduler views horizo
 previous_url: /controls/scheduling/scheduler/how-to/scroll-views-horizontally, /controls/scheduling/scheduler/how-to/scrolling/scroll-views-horizontally
 slug: howto_scroll_views_horizontally_scheduler
 tags: telerik, kendo, jquery, scheduler, scroll, views, horizontally 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

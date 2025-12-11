@@ -4,9 +4,9 @@ page_title: Export Links To Excel - Kendo UI for jQuery Grid
 description: "Learn how to export links to Excel in the Kendo UI for jQuery Grid."
 slug: export_grid_links_to_excel
 tags: grid, export, excel, links, hyperlink, hyperlinks, link, url
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

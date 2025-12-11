@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout
 description: "Get started with the Telerik UI Form TagHelper for {{ site.framework }} and learn about the layouts it supports."
+components: ["form"]
 slug: taghelpers_form_aspnetcore_layout
 position: 4
 ---

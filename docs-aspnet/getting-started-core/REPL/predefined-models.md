@@ -2,6 +2,7 @@
 title: Predefined Models for REPL
 page_title: Predefined Models for REPL
 description: "Familiarize yourself with the predefined models available in the Telerik REPL tool."  
+components: ["general"]
 slug: using_predefined_models_repl_aspnetcore
 permalink: /getting-started/repl/predefined-models
 position: 4

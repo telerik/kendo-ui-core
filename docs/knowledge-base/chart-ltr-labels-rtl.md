@@ -7,6 +7,7 @@ slug: chart-ltr-labels-rtl
 tags: chart, ltr, rtl, labels,alignment
 ticketid: 1493757
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about the layouts it supports."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_layout
 position: 5
 ---

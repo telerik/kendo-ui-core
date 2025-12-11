@@ -5,9 +5,9 @@ description: "Learn how to implement a free-form drawing surface while working w
 slug: howto_freeformdrawing_drawingapi
 previous_url: /framework/drawing/how-to/free-form-drawing
 tags: telerik, kendo, jquery, drawing, api, library, enable, implement, free, drawing
-component: drawing
 type: how-to
 res_type: kb
+components: ["drawing"]
 ---
 
 ## Environment

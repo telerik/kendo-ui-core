@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Issues Troubleshooting
 description: "Learn about the solutions of common issues that may occur while working with Telerik UI for ASP.NET MVC."
+components: ["general"]
 previous_url: /troubleshooting
 slug: troubleshooting_aspnetmvc
 position: 1

@@ -6,7 +6,7 @@ page_title: Display Whitespaces in Cells - Kendo UI for jQuery Data Grid
 slug: grid-display-multiple-spaces-in-cells
 tags: grid, spaces, multiple, display, show, keep, whitespaces, intervals
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

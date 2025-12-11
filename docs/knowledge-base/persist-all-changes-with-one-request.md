@@ -5,9 +5,9 @@ description: "Learn how to persist all changes in a Kendo UI for jQuery Schedule
 previous_url: /controls/scheduling/scheduler/how-to/persist-all-changes-with-one-request, /controls/scheduling/scheduler/how-to/binding/persist-all-changes-with-one-request
 slug: howto_persist_all_changes_with_a_single_request_scheduler
 tags: telerik, kendo, jquery, scheduler, persist, all, changes, with, one, request 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

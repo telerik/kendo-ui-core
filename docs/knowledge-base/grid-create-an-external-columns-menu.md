@@ -8,6 +8,7 @@ position:
 tags: grid, columns, menu
 ticketid: 1063371
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

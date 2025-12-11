@@ -6,6 +6,7 @@ page_title: How to Get the Current View Date Range in a Kendo UI Calendar
 slug: get-current-view-date-range-kendo-ui-calendar
 tags: kendo-ui, calendar, date-range, view, javascript
 res_type: kb
+components: ["calendar"]
 ticketid: 1660926
 ---
 

@@ -2,6 +2,7 @@
 title: Create the Main Page
 page_title: Create the Main Page - Music Store Dashboard Tutorial
 description: "Learn how to create the Kendo UI Music Store Dashboard main page by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: createthemainpage_muscistoredashboard_aspnetmvc
 position: 3
 ---

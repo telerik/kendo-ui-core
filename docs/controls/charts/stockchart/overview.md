@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Charts Documentation - StockChart Overview
 description: "Get started with the jQuery StockChart by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chart"]
 slug: overview_kendoui_stockcharts
 position: 1
 ---

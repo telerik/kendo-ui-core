@@ -2,6 +2,7 @@
 title: Remote Data
 page_title: jQuery FileManager Documentation - Remote Binding in FileManager
 description: "Get understanding in the Remote Binding in FileManager."
+components: ["filemanager"]
 slug: remotedata_kendoui_filemanager_widget
 position: 2
 ---

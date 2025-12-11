@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TimePicker Documentation - TimePicker Overview
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["timepicker"]
 slug: overview_kendoui_timepicker_widget
 position: 0
 ---

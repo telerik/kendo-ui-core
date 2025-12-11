@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ListView component for {{ site.framework }}."
+components: ["listview"]
 previous_url: /helpers/html-helpers/listview, /helpers/data-management/listview/overview, /helpers/data-management/listview/configuration
 slug: htmlhelpers_listview_aspnetcore
 position: 0

@@ -5,9 +5,9 @@ description: "Learn how to expand the Kendo UI Grid for jQuery when it is locate
 previous_url: /controls/data-management/grid/how-to/Layout/expand-grid-to-match-tabstrip-height-within-splitter-pane, /controls/layout/splitter/how-to/expand-grid-to-match-tabstrip-height-split-pane, /controls/navigation/tabstrip/how-to/expand-grid-to-match-height-within-splitter-pane
 slug: howto_expandtomatchtabstripinsplitter_grid
 tags: grid, expand, match, height, tabstrip, container, splitter, pane
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

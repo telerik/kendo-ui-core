@@ -6,6 +6,7 @@ type: how-to
 slug: drawer-multi-level-hierarchy
 ticketid: 1560679
 res_type: kb
+components: ["drawer"]
 ---
 
 ## Environment

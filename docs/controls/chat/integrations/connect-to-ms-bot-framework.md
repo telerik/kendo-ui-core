@@ -2,6 +2,7 @@
 title: Microsoft Bot Framework
 page_title: jQuery Chat Documentation - Microsoft Bot Framework
 description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat component to the Microsoft Bot Framework."
+components: ["chat"]
 previous_url: /controls/chat/connect-to-ms-bot-framework
 slug: connect_to_ms_bot_framework
 ---

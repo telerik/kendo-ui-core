@@ -2,6 +2,7 @@
 title: Custom Actions
 page_title: Custom Actions
 description: "Learn how to set custom user actions the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_customactions_aspnetcore
 position: 9
 ---

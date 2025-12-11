@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started - Kendo UI for jQuery Drawing
 description: "Get started with the jQuery Drawing by Kendo UI and learn how to create visual elements."
+components: ["drawingapi"]
 previous_url: /framework/drawing/dom-elements/basic-shapes, /framework/drawing/basic-shapes
 slug: getting_started_kendoui_drawing
 position: 1

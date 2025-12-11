@@ -2,6 +2,7 @@
 title: Comments
 page_title: Spreadsheet
 description: "Define comments in cells in a Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_comments_aspnetcore
 position: 2
 ---

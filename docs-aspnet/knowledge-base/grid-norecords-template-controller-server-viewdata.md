@@ -7,6 +7,7 @@ slug: grid-norecords-template-controller-server-viewdata
 tags: grid, norecords, template, controller, server, viewdata
 ticketid: 1398515
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

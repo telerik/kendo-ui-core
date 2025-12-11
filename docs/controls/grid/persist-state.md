@@ -2,6 +2,7 @@
 title: State Persistence
 page_title: jQuery Grid Documentation - State Persistence
 description: "Get started with the jQuery Grid by Kendo UI and persist the state of the component."
+components: ["grid"]
 slug: persiststate_kendoui_grid_widget
 position: 11
 ---

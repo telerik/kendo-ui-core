@@ -5,9 +5,9 @@ description: "Learn how to clone events on Ctrl + move in the Kendo UI for jQuer
 previous_url: /controls/scheduling/scheduler/how-to/clone-events-on-ctrl-and-click, /controls/scheduling/scheduler/how-to/editing/clone-events-on-ctrl-and-click
 slug: howto_clone_eventson_ctrlplus_move_scheduler
 tags: telerik, kendo, jquery, scheduler, clone, copy, events, on, ctrl, and, plus, move 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

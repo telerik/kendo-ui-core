@@ -7,6 +7,7 @@ meta_title: Prevent Grid Row Collapse When Using Kendo UI for jQuery Form in det
 slug: prevent-grid-row-collapse-kendo-jquery-form-detailinit
 tags: kendo-ui-for-jquery, form, grid, detailinit, databound, detailexpand, detailcollapse
 res_type: kb
+components: ["grid"]
 ticketid: 1698866
 ---
 

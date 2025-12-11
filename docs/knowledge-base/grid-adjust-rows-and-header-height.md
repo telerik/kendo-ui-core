@@ -7,6 +7,7 @@ slug: grid-adjust-rows-and-header-height
 tags: grid, row, rows, header, smaller, size, adjust, css
 ticketid: 1151240
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

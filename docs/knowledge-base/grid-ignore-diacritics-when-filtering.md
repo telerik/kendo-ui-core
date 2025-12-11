@@ -7,7 +7,7 @@ slug: grid-ignore-diacritics-when-filtering
 tags: jquery, grid, diacritic, diacritics, accented, character, ignore, filter, row, autocomplete
 ticketid: 1585165
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

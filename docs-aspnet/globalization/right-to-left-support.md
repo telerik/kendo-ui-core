@@ -2,6 +2,7 @@
 title: Right-to-Left Support
 page_title: Right-to-Left Support
 description: "Learn more about the Accessibility features related to bidirectional languages, supported by {{ site.product }}."
+components: ["general"]
 slug: overview_rtlsupport_core
 position: 2
 ---

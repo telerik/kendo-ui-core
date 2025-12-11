@@ -6,7 +6,7 @@ page_title: Responsive Pager for SASS Themes - Kendo UI Pager for jQuery
 slug: pager-responsive-numbers-sass-themes
 tags: kendo, pager, responsive, dropdown, numbers, bootstrap, default
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

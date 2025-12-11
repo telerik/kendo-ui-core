@@ -2,6 +2,7 @@
 title: Animations
 page_title: Kendo UI for jQuery ActionSheet Documentation - Animations
 description: "Get started with the Kendo UI for jQuery ActionSheet and learn how to control the animations when opening or closing the component."
+components: ["actionsheet"]
 slug: animations_actionsheet_widget
 position: 5
 ---

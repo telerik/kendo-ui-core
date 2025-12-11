@@ -7,6 +7,7 @@ slug: grid-add-scroll-shadow
 tags: grid, shadow
 ticketid: 1365055
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

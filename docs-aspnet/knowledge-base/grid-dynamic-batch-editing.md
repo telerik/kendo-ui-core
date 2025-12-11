@@ -6,6 +6,7 @@ page_title: Create a Dynamic Grid with Batch Editing
 slug: grid-dynamic-batch-editing
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, custom, popup, template, dynamic, datatable
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

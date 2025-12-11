@@ -2,6 +2,7 @@
 title: Colors
 page_title: jQuery CircularProgressBar Colors Documentation - CircularProgressBar Colors
 description: "Learn how to set different colors based on the value of the Kendo UI for jQuery CircularProgressBar component."
+components: ["circularprogressbar"]
 slug: colors_kendoui_circularprogressbar_widget
 position: 3
 ---

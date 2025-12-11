@@ -8,7 +8,7 @@ tags: grid, hierarchical, window, details
 previous_url: /knowledge-base/how-to-show-details-in-window-from-hierarchical-grid
 ticketid: 1132144
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

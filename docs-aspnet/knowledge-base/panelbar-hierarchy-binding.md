@@ -7,6 +7,7 @@ previous-url: /helpers/navigation/panelbar/how-to/use-hierarchy-binding, /html-h
 slug: panelbar-hierarchy-binding
 tags: panelbar, hierarchy, binding
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

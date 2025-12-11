@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: gantt_events
 position: 10
 ---

@@ -5,9 +5,9 @@ description: "Learn how to implement stable sorting for grouped data in Google C
 previous_url: /controls/data-management/grid/how-to/sorting/stable-sort-chrome-grouping
 slug: howto_implement_stable_sortwithgroupingin_chrome_grid
 tags: implement, stable, sorting, for, grouped, data, grid, chrome
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

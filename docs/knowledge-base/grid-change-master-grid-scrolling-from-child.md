@@ -7,6 +7,7 @@ slug: grid-change-master-grid-scrolling-from-child
 tags: grid, scrolling, master, child, hierarchy, navigation
 ticketid: 1160388
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

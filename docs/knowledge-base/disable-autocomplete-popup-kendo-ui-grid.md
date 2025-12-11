@@ -6,6 +6,7 @@ page_title: How to Disable AutoComplete Popup in Kendo UI Grid Filter Row
 slug: disable-autocomplete-popup-kendo-ui-grid
 tags: kendo ui, grid, autocomplete, filter row, disable popup
 res_type: kb
+components: ["autocomplete", "grid"]
 ticketid: 1683935
 ---
 

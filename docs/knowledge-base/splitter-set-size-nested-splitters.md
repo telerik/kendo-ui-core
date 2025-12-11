@@ -7,7 +7,7 @@ slug: splitter-set-size-nested-splitters
 tags: kendo ui, splitter, pane, size, nested
 ticketid: 1528267
 res_type: kb
-component: tooltip
+components: ["splitter"]
 ---
 
 ## Environment

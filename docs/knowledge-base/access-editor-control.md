@@ -5,9 +5,9 @@ description: "Learn how to access an editor control in the edit event handler of
 previous_url: /controls/data-management/grid/how-to/Editing/access-editor-control
 slug: howto_access_editor_controlsin_edit_events_grid
 tags: grid, editor, edit, events
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

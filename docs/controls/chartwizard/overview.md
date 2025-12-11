@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ChartWizard Documentation - ChartWizard Overview
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["chartwizard"]
 slug: overview_kendoui_chartwizard_widget
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Grid component for {{ site.framework }} providing everything from paging, sorting, filtering, editing, and grouping to exporting to PDF and Excel."
+components: ["grid"]
 previous_url: /helpers/html-helpers/grid, /helpers/data-management/grid/overview, /helpers/data-management/grid/configuration
 slug: htmlhelpers_grid_aspnetcore_overview
 position: 0

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Drawer component for {{ site.framework }} that provides various display and interaction modes, item templates, and support for hierarchical structures."
+components: ["drawer"]
 previous_url: /helpers/navigation/drawer/overview
 slug: htmlhelpers_drawer_aspnetcore
 position: 0

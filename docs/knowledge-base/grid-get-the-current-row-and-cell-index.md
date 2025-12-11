@@ -7,6 +7,7 @@ slug: grid-get-the-current-row-and-cell-index
 tags: grid, cell, index, row, current, position, tap, touch, click
 ticketid: 1148726
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

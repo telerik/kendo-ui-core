@@ -2,6 +2,7 @@
 title: Stacked Display Mode
 page_title: Stacked Display Mode
 description: "Learn how to enable and configure the Stacked Layout mode of the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_stacked_layout
 position: 27
 ---

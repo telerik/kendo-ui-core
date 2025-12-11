@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI MaskedTextBox for {{ site.framework }}."
+components: ["maskedtextbox"]
 previous_url: /helpers/html-helpers/maskedtextbox, /helpers/editors/maskedtextbox/overview
 slug: htmlhelpers_maskedtextbox_aspnetcore
 position: 0

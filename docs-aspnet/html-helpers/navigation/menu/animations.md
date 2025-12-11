@@ -2,6 +2,7 @@
 title: Animations
 page_title: Animations
 description: "Learn about the Telerik UI for {{ site.framework }} Menu animation options."
+components: ["menu"]
 slug: animations_menu
 position: 4
 ---

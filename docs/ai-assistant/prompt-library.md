@@ -3,6 +3,7 @@ title: Prompt Library
 page_title: Kendo UI for jQuery Prompt Library
 description: Explore a collection of ready-to-use prompt ideas you can run with the Kendo UI for jQuery AI Coding Assistant (MCP Server) to quickly scaffold components and configurations.
 slug: ai_prompt_library
+components: ["aicodingassistant"]
 position: 4
 ---
 

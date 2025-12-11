@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its features and how to initialize the component."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_overview
 position: 1
 ---

@@ -7,6 +7,7 @@ meta_title: Implementing DropDownTree Checkboxes for Grid Filtering
 slug: dropdown-tree-checkboxes-grid-filtering
 tags: dropdown-tree,kendo-ui-for-jquery,grid,filtering,checkboxes,checkall
 res_type: kb
+components: ["grid"]
 ticketid: 1701162
 ---
 

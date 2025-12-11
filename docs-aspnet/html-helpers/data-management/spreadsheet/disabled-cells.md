@@ -2,6 +2,7 @@
 title: Disabled Cells
 page_title: Spreadsheet Disabled Cells
 description: "Learn how to enable and disable cells for the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_disabled_cells_aspnetcore
 position: 8
 ---

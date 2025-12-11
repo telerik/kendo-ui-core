@@ -6,6 +6,7 @@ type: how-to
 slug: grid-excel-export-each-group-in-a-separate-sheet
 tags: grid, group, export, excel, sheet, separate, individual, page, rows
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

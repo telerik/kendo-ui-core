@@ -5,9 +5,9 @@ description: "Learn how to create left-to-right gradients with three-color value
 previous_url: /controls/charts/how-to/create-left-to-right-gradient-multi-color-values, /controls/charts/how-to/appearance/create-left-to-right-gradient-multi-color-values
 slug: howto_creategradientleftrightmulticolors_charts
 tags: chart, create, multi-color, values, left-to-right
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

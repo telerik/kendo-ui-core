@@ -5,9 +5,9 @@ description: "Learn how to cascade the Kendo UI MultiSelect widget from a Kendo 
 previous_url: /controls/editors/multiselect/how-to/cascade-from-ddl, /controls/editors/dropdownlist/how-to/cascade-multiselect-from-ddl, /controls/editors/dropdownlist/how-to/cascade/cascade-multiselect-from-ddl
 slug: howto_cascade_froma_dropdownlist_multiselect
 tags: telerik, kendo, jquery, multiselect, cascade, from, dropdownlists
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

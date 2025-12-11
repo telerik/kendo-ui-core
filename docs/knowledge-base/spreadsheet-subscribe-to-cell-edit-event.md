@@ -7,6 +7,7 @@ slug: spreadsheet-subscribe-to-cell-edit-event
 tags: kendo, kendo-ui, spreadsheet, subscribe, cell, edit, event
 ticketid: 1154659
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

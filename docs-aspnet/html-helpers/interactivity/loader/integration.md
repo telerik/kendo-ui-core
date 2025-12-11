@@ -2,6 +2,7 @@
 title: Integration
 page_title: Integration
 description: "Integrating The Telerik UI Loader component for {{ site.framework }}."
+components: ["loader"]
 slug: htmlhelpers_loader_aspnetcore_integration
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Calendar Documentation - Getting Started with the Calendar
 description: "Get started with the jQuery Calendar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["calendar"]
 slug: getting_started_kendoui_calendar_component
 position: 1
 ---

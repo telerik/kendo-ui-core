@@ -2,6 +2,7 @@
 title: Operation Modes
 page_title: Operation Modes
 description: "Learn how to configuration the operation mode of the widget."
+components: ["stepper"]
 slug: htmlhelpers_stepper_aspnetcore_operation_modes
 position: 5
 ---

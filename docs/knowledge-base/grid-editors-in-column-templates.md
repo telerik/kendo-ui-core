@@ -5,9 +5,9 @@ description: "Learn how to edit the Kendo UI Grid for jQuery by using a column t
 previous_url: /controls/data-management/grid/how-to/Editing/grid-editors-in-column-templates
 slug: howto_render_editor_column_template_grid
 tags: grid, editor, render, column, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

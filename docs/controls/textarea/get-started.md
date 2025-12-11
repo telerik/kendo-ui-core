@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TextArea Documentation - Getting Started with the TextArea
 description: "Get started with the jQuery TextArea by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["textarea"]
 slug: getting_started_kendoui_textarea
 position: 1
 ---

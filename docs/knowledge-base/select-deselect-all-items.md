@@ -5,9 +5,9 @@ description: "Learn how to select or deselect all items in the Kendo UI MultiSel
 previous_url: /controls/editors/multiselect/how-to/select-deselect-all-items, /controls/editors/multiselect/how-to/selection/select-deselect-all-items
 slug: howto_select_and_deselect_allitems_multiselect
 tags: telerik, kendo, jquery, multiselect, select, or, deselect, all, items
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

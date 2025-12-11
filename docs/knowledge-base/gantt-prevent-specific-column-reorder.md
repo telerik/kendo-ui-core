@@ -6,7 +6,7 @@ page_title: Prevent Specific Columns Reorder in the Gantt
 slug: gantt-prevent-column-reorder
 tags: kendo, jquery, gantt, prevent, column, reorder
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

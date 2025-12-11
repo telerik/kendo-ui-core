@@ -3,6 +3,7 @@ comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE 
 title: Data Management Components
 page_title: Individual Scripts for Data Management Components - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Data Management Components"
+components: ["general"]
 slug: script_filesfor_datamanagement_widgets
 ---
 

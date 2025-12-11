@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ToolBar Documentation - Keyboard Navigation
 description: "Get started with the Kendo UI for jQuery ToolBar and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["toolbar"]
 slug: keynav_kendoui_toolbar
 position: 2
 ---

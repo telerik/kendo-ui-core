@@ -2,6 +2,7 @@
 title: Restoring NuGet Packages in CI
 page_title: Restoring NuGet Packages in CI - Download and Installation 
 description: "Get started with Kendo UI for jQuery and use API Keys to authenticate with the Telerik NuGet server and restore packages in your CI or desktop environment."
+components: ["general"]
 slug: kendoui_nuget_keys
 position: 65
 ---

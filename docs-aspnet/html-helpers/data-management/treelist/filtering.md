@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Learn how to enable the filtering functionality of the Telerik UI TreeList for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_filtering
 position: 5
 ---

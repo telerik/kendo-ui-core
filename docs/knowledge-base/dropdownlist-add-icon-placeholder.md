@@ -6,7 +6,7 @@ page_title: Add an icon in the DropDownList placeholder - Kendo UI DropDownList 
 slug: dropdownlist-add-icon-placeholder
 tags: kendoui, kendo, dropdownlist, icon, placeholder
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment

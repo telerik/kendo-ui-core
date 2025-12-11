@@ -2,6 +2,7 @@
 title: OData-v4 Binding
 page_title: OData-v4 Binding
 description: "Learn how to implement OData-v4 binding with the Telerik UI TreeList component for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_odatav4-binding
 position: 8
 ---

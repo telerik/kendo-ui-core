@@ -8,6 +8,7 @@ position:
 tags: change, modify, font, messages, placeholder, chat
 ticketid: 1440042
 res_type: kb
+components: ["chat"]
 ---
 
 ## Environment

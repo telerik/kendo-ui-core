@@ -7,6 +7,7 @@ slug: view-only-spreadsheet-widget
 tags: kendo, spreadsheet, view, view-only, read-only, hide
 ticketid: 1362798, 1356967
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

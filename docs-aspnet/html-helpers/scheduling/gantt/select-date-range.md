@@ -2,6 +2,7 @@
 title: Select Date Range
 page_title: Date Range
 description: "Learn more about how set the date range of the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: htmlhelpers_gantt_select_date_range_aspnetcore
 position: 9
 ---

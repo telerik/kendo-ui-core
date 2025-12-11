@@ -5,9 +5,9 @@ description: "Learn how to use draggable components with enabled multi-selection
 previous_url: /controls/data-management/grid/how-to/draggable-elements-in-grid-with-multiple-selection, /controls/data-management/grid/how-to/various/draggable-elements-in-grid-with-multiple-selection
 slug: howto_use_draggable_elements_multiselection_enabled_grid
 tags: grid, draggable, elements, multiple, selectin, drag
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

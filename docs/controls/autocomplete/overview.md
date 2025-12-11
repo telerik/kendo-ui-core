@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery AutoComplete Documentation - AutoComplete Overview
 description: "Try now the Kendo UI for jQuery AutoComplete component providing data-binding capabilities, grouping and serevr filtering features, options for customizing its behavior and appearance through the available templates as well as options for virtualizing and loading its content on demand."
+components: ["autocomplete"]
 slug: overview_kendoui_autocomplete_widget
 position: 0
 ---

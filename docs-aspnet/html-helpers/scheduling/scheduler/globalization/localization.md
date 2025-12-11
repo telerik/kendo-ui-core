@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI Scheduler component for {{ site.framework }} and translate its messages for different culture locales."
+components: ["scheduler"]
 slug: localization_scheduler
 position: 3
 ---

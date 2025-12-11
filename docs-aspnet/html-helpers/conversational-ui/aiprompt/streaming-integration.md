@@ -2,6 +2,7 @@
 title: Streaming AI Integration
 page_title: Telerik UI AIPrompt Documentation - Streaming AI Integration
 description: "Connect the Telerik UI for {{ site.framework }} AIPrompt to a streaming AI chat service to display AI responses in the Output view."
+components: ["aiprompt"]
 slug: htmlhelpers_streaming_integration_aiprompt
 position: 5
 ---

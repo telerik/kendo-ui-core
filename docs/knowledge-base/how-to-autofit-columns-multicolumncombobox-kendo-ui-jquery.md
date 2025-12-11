@@ -6,6 +6,7 @@ page_title: How to Autofit Columns in MultiColumnComboBox
 slug: how-to-autofit-columns-multicolumncombobox-kendo-ui-jquery
 tags: kendo-ui-for-jquery, multicolumncombobox, scrollbar, columns, configuration
 res_type: kb
+components: ["combobox"]
 ticketid: 1683335
 ---
 

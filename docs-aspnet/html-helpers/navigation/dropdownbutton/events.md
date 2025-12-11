@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DropDownButton component for {{ site.framework }}."
+components: ["dropdownbutton"]
 slug: events_dropdownbutton
 position: 5
 ---

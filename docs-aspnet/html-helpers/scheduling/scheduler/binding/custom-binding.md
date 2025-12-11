@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for Custom binding."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_custombinding_aspnetcore
 position: 3
 ---

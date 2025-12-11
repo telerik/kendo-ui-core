@@ -7,6 +7,7 @@ meta_title: Dynamically Position Pie Chart Slice Labels in Kendo UI for jQuery
 slug: dynamically-position-pie-chart-slice-labels
 tags: kendo-ui-for-jquery,chart,labels,series.labels.visual,pie-chart
 res_type: kb
+components: ["chart"]
 ticketid: 1641371
 ---
 

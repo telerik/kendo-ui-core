@@ -2,6 +2,7 @@
 title: Hierarchy
 page_title: Hierarchy
 description: "Find out how to create an item hierarchy using the Telerik UI Drawer component for {{ site.framework }}."
+components: ["drawer"]
 slug: hierarchy_drawer_aspnetcore
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Stepper Documentation - Getting Started with the Stepper
 description: "Get started with the jQuery Stepper by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["stepper"]
 slug: getting_started_kendoui_stepper_widget
 position: 1
 ---

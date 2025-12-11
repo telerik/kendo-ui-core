@@ -5,9 +5,9 @@ description: "Learn how to restyle the row border width in a Kendo UI for jQuery
 previous_url: /controls/scheduling/scheduler/how-to/re-style-row-border-width, /controls/scheduling/scheduler/how-to/appearance/re-style-row-border-width
 slug: howto_restyle_row_border_width_scheduler
 tags: telerik, kendo, jquery, scheduler, restyle, width, of, row, borders 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

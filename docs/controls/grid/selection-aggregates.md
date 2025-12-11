@@ -2,6 +2,7 @@
 title: Selection Aggregates
 page_title: jQuery Grid Documentation - Selection Aggregates
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable selection aggregates that allow users to see precalculated aggregates when they select cells or rows in the Grid table."
+components: ["grid"]
 slug: selection_aggregates_kendoui_grid_component
 position: 11
 ---

@@ -5,9 +5,9 @@ description: "Learn how to update the end time of an event on click in a Kendo U
 previous_url: /controls/scheduling/scheduler/how-to/update-event-end-time-on-click, /controls/scheduling/scheduler/how-to/editing/update-event-end-time-on-click
 slug: howto_update_event_end_time_on_click_scheduler
 tags: telerik, kendo, jquery, scheduler, update, the, end, time, of, events, on, click 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

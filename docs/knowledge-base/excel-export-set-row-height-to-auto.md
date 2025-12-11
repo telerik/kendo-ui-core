@@ -7,6 +7,7 @@ slug: excel-export-set-row-height-to-auto
 tags: workbook, excel, export, rows, wrapped, cells, auto, adjust
 ticketid: 1142435
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI DateInput for {{ site.framework }} and format the date for different culture locales."
+components: ["dateinput"]
 slug: localization_dateinput_aspnetcore
 position: 2
 ---

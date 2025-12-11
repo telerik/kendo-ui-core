@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CircularProgressBar Documentation - Getting Started with the CircularProgressBar
 description: "Get started with the jQuery CircularProgressBar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["circularprogressbar"]
 slug: getting_started_kendoui_circularprogressbar_widget
 position: 2
 ---

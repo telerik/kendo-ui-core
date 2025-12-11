@@ -5,9 +5,9 @@ description: "Learn how to insert new items into a resource DataSource in a Kend
 previous_url: /controls/scheduling/scheduler/how-to/add-items-to-resource-datasource, /controls/scheduling/scheduler/how-to/binding/add-items-to-resource-datasource
 slug: howto_insert_items_in_resource_datasource_scheduler
 tags: telerik, kendo, jquery, scheduler, insert, new, items, into, resource, datasource
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

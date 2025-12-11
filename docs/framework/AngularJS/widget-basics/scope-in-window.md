@@ -2,6 +2,7 @@
 title: Accessing Scope in Windows
 page_title: Accessing the AngularJS Scope in a Window | AngularJS Directives
 description: "Learn how to deal with different scopes of widgets in AngularJS applications."
+components: ["general"]
 slug: angularjs_window_scope
 previous_url: /framework/AngularJS/introduction#placing-widgets-in-windows
 position: 8

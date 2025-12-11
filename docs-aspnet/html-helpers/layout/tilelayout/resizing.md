@@ -2,6 +2,7 @@
 title: Resizing
 page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Resizing
 description: "Learn how to enable and use the resizing functionality of the Telerik UI TileLayout component for {{ site.framework }}."
+components: ["tilelayout"]
 slug: htmlhelpers_aspnet_tilelayout_resizing
 position: 3
 ---

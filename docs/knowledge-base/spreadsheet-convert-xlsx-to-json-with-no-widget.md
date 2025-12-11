@@ -6,7 +6,7 @@ page_title: Convert XLSX Data to JSON - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-convert-xlsx-to-json-with-no-widget
 tags: kendo, kendoui, spreadsheet, xlsx, json, workbook
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

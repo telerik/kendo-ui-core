@@ -5,9 +5,9 @@ description: "Troubleshoot any issues that might occur while editing the data of
 previous_url: /controls/data-management/grid/editing/troubleshooting
 slug: edittroubleshoot_kendoui_grid_widget
 tags: grid, editing, troubleshooting
-component: grid
 type: troubleshooting
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

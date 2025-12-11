@@ -5,9 +5,9 @@ description: "Learn how to hide the vertical scrollbar when you do not need it i
 previous_url: /controls/data-management/grid/how-to/Layout/hide-scrollbar-when-not-needed
 slug: howto_hide_vertical_scrollbar_grid
 tags: grid, hide, vertical, scrollbar, when, not, needed
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

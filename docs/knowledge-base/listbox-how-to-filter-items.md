@@ -6,7 +6,7 @@ page_title: Filter Items to Match the Search Conditions - Kendo UI ListBox for j
 slug: listbox-how-to-filter-items
 tags: listbox, filter, search, contains, items
 res_type: kb
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

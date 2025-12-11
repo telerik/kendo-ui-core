@@ -7,6 +7,7 @@ meta_title: How to Customize Star Colors in Kendo UI for jQuery Rating
 slug: customize-star-colors-kendo-ui-jquery-rating
 tags: kendo-ui-for-jquery,rating,templates,customization,theme-color,svg-icons
 res_type: kb
+components: ["rating"]
 ticketid: 1701972
 ---
 

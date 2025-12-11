@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Learn how to configure the selection functionality of the Telerik UI Rating for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/selection
 slug: htmlhelpers_rating_aspnetcore_selection
 position: 2

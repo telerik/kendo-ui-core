@@ -2,6 +2,7 @@
 title: Adaptive Mode
 page_title: Adaptive Mode
 description: "Learn how to configure the adaptive behavior of the the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_adaptive_mode_aspnetcore
 position: 5
 ---

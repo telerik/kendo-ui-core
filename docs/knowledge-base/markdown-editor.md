@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI Editor widget and customize it to ge
 previous_url: /controls/editors/editor/how-to/markdown-editor, /controls/editors/editor/how-to/customize/markdown-editor
 slug: howto_create_markdown_editor
 tags: telerik, kendo, jquery, editor, create, markdown, editors
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

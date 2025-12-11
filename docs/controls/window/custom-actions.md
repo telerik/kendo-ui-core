@@ -2,6 +2,7 @@
 title: Custom Actions
 page_title: jQuery Window Documentation - Custom Actions
 description: "Get started with the jQuery Window by Kendo UI and learn how to set custom user actions."
+components: ["window"]
 slug: customactions_window
 position: 5
 ---

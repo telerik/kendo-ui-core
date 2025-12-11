@@ -3,6 +3,7 @@ comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE 
 title: Server-Side Wrappers
 page_title: Individual Scripts for Server-Side Wrappers - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Server-Side Wrappers"
+components: ["general"]
 slug: script_filesfor_serverside_wrappers
 ---
 

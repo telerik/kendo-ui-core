@@ -7,7 +7,7 @@ slug: retrieve-visible-grid-columns-data-with-select-odata-parameter
 tags: retrieve, visible, columns, data, $select, odata
 ticketid: 1138950
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

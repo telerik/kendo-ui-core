@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Learn how to configure the icons of the items and the delimiters of the widget."
+components: ["stepper"]
 slug: htmlhelpers_stepper_aspnetcore_icons
 position: 3
 ---

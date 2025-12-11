@@ -2,6 +2,7 @@
 title: Custom Functions
 page_title: Spreadsheet
 description: "Learn how to make your own JavaScript functions in the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_custom_functions_aspnetcore
 position: 3
 ---

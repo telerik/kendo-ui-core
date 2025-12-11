@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DateTimePicker component for {{ site.framework }}."
+components: ["datetimepicker"]
 slug: events_datetimepicker_aspnetcore
 position: 16
 ---

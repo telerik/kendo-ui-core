@@ -6,7 +6,7 @@ slug: combobox_repetitive_requests_filtering_aspnet
 tags: telerik, progress, kendoui, combobox, performs, repetitive, requests, while, filtering, aspnet
 type: troubleshooting
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

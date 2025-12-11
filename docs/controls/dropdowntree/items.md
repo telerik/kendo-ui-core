@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery DropDownTree Documentation - Items
 description: "Get started with the jQuery DropDownTree by Kendo UI and set its item properties."
+components: ["dropdowntree"]
 slug: items_kendoui_dropdowntree
 position: 5
 ---

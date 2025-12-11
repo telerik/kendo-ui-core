@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Slider Documentation | Slider Accessibility
 description: "Get started with the jQuery Slider by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["slider"]
 slug: jquery_slider_accessibility
 position: 1
 ---

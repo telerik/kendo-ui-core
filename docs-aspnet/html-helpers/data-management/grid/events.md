@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: grid_events
 position: 26
 ---

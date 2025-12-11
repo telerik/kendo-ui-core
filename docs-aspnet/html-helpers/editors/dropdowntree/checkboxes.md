@@ -2,6 +2,7 @@
 title: Checkboxes
 page_title: Checkboxes
 description: "Learn about the checkboxes functionality of the Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_checkboxes_aspnetcore
 position: 3
 ---

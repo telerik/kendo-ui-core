@@ -7,6 +7,7 @@ slug: window-prevent-drag-on-pinned
 tags: window, pinned, action, drag, prevent, default
 ticketid: 
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

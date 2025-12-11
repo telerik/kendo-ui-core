@@ -3,6 +3,7 @@ title: 2025 Releases
 page_title: 2025 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2024."
 slug: breakingchanges2025_kendoui
+components: ["general"]
 position: 0
 ---
 

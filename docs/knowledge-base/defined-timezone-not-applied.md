@@ -6,7 +6,7 @@ slug: scheduler_defined_timezone_not_applied
 tags: telerik, progress, kendoui, scheduler, defined, timezone, not, applied  
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

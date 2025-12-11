@@ -5,9 +5,9 @@ description: "Learn how to create a Kendo UI MultiSelect with checkboxes."
 previous_url: /controls/editors/multiselect/how-to/checkbox-item-template, /controls/editors/multiselect/how-to/templates/checkbox-item-template
 slug: howto_checkbox_custom_item_template_multiselect
 tags: telerik, kendo, jquery, multiselect, create, checkbox, custom, item, templates
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

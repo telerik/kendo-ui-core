@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Chat component for {{ site.framework }}."
+components: ["chat"]
 slug: events_chat_aspnetcore
 position: 9
 ---

@@ -6,6 +6,7 @@ page_title: Create DropDownList in Node Template - Kendo UI TreeView for jQuery
 slug: treeview-dropdown-in-template
 tags: kendo, kendo-ui, treeview, dropdownlist, template
 res_type: kb
+components: ["treeview"]
 ticketid: 1176714
 ---
 

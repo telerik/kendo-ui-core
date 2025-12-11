@@ -6,6 +6,7 @@ page_title: Preventing the User from Removing the Initial Grid Groups, Changing 
 slug: grid-prevent-grouping
 tags: grid, prevent, initial, groups, order, remove, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

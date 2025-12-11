@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RadialGauge Documentation - Getting Started with the RadialGauge
 description: "Get started with the jQuery RadialGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["radialgauge"]
 slug: getting_started_kendoui_radialgauge_component
 position: 2
 ---

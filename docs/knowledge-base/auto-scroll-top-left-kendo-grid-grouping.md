@@ -6,6 +6,7 @@ page_title: How to Automatically Scroll to the Top Left Corner in Kendo UI Grid 
 slug: auto-scroll-top-left-kendo-grid-grouping
 tags: kendo, ui, grid, autoscroll, grouping, javascript
 res_type: kb
+components: ["grid"]
 ticketid: 1664400
 ---
 

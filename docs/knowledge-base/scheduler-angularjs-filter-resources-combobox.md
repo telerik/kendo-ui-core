@@ -7,6 +7,7 @@ slug: scheduler-angularjs-filter-resources-combobox
 tags: kendo, kendo-ui, scheduler, resources, combobox, angularjs
 ticketid: 1158749
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

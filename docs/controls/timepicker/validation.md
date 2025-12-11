@@ -2,6 +2,7 @@
 title: Validation
 page_title: jQuery TimePicker Documentation - Validation
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to implement validation rules for its input value."
+components: ["timepicker"]
 slug: validation_kendoui_timepicker
 position: 5
 ---

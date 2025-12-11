@@ -7,7 +7,7 @@ slug: dialog-close-on-pressing-enter
 tags: dialog, close, pressing, enter, key
 ticketid: 1129150
 res_type: kb
-component: dialog
+components: ["dialog"]
 ---
 
 ## Environment

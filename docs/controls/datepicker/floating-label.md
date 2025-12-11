@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: jQuery DatePicker Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery DatePicker component."
+components: ["datepicker"]
 slug: floating_label_kendoui_datepicker_widget
 position: 13
 ---

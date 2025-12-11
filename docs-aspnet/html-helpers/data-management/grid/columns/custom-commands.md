@@ -2,6 +2,7 @@
 title: Custom Commands
 page_title: Custom Column Commands
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to implement custom commands for handling its column records."
+components: ["grid"]
 slug: customcommands_aspnetcore_grid
 position: 9
 ---

@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Learn how to group data in the Telerik UI ComboBox component for {{ site.framework }} works."
+components: ["combobox"]
 previous_url: /helpers/editors/combobox/grouping
 slug: htmlhelpers_combobox_grouping_aspnetcore
 position: 3

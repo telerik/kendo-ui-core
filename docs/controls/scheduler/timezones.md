@@ -2,6 +2,7 @@
 title: Timezones
 page_title: jQuery Scheduler Documentation - Timezones
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to configure its timezones."
+components: ["scheduler"]
 slug: timezones_kendoui_scheduler_widget
 position: 5
 ---

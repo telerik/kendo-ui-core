@@ -7,6 +7,7 @@ slug: grid-persist-checkbox-filter-external-datasource
 tags: kendoui, jquery, data, grid, persist, multi, checkbox, filter, external, datasource
 ticketid: 1580564
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

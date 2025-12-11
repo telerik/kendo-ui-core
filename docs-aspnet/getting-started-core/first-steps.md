@@ -2,6 +2,7 @@
 title: First Steps on Windows
 page_title: First Steps with VS for Windows
 description: "Create a sample project that uses the Telerik UI components for ASP.NET Core (ASP.NET Core MVC application) in Visual Studio for Windows."
+components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started, /getting-started/getting-started, /getting-started/first-steps-default-project
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1

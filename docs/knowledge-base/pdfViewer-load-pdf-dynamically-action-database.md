@@ -7,6 +7,7 @@ slug: pdfViewer-load-pdf-dynamically-action-database
 tags: pdfviewer, load, pdf, server, dynamically
 ticketid: 1418499, 1418533
 res_type: kb
+components: ["pdfviewer"]
 ---
 
 ## Environment

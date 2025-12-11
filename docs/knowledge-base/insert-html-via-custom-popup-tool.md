@@ -5,9 +5,9 @@ description: "Learn how to insert HTML content via custom Kendo UI Editor tools.
 previous_url: /controls/editors/editor/how-to/insert-html-via-custom-popup-tool, /controls/editors/editor/how-to/customize/insert-html-via-custom-popup-tool
 slug: howto_insert_html_content_custom_popup_tool_editor
 tags: telerik, kendo, jquery, editor, insert, html, content, through, custom, popup, tools
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

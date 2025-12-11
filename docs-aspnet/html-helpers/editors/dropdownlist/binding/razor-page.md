@@ -2,21 +2,20 @@
 title:  Razor Pages
 page_title: ASP.NET Core DropDownList Razor Pages | Telerik UI for ASP.NET Core
 description: "Find out how to configure the ASP.NET Core DropDownList component in a Razor Pages scenario."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_razorpage_aspnetcore
 position: 6
 ---
 
 # DropDownList in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_dropdownlist_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describeshow to configure the DropDownList component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [DropDownList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownList/DropDownListCrudOps.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers the most versatile data binding approach. To connect the DropDownList to a dataset retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
@@ -30,7 +29,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
         .DataSource(source =>
         {
             source.Read(read => read
-                .Url("/Index?handler=Read").Data("forgeryToken"));
+                .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
         })
     )
     ```
@@ -41,7 +40,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
         datavaluefield="OrderID">
         <datasource>
             <transport>
-                <read url="/Index?handler=Read" data="forgeryToken"/>
+                <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
             </transport>
         </datasource>
     </kendo-dropdownlist>
@@ -81,7 +80,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
                 .DataSource(source =>
                 {
                     source.Read(read => read
-                        .Url("/Index?handler=Read").Data("dataFunction"))
+                        .Url(Url.Page("Index", "Read")).Data("dataFunction"))
                         .ServerFiltering(true);
                 })
             )
@@ -100,7 +99,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
                 filter="FilterType.Contains">
                 <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
                     <transport>
-                        <read url="/Index?handler=Read" data="dataFunction"/>
+                        <read url="@Url.Page("Index", "Read")" data="dataFunction"/>
                     </transport>
                 </datasource>
             </kendo-dropdownlist>
@@ -127,7 +126,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
     ```C# PageModel
         public class IndexModel : PageModel
         {
-            public JsonResult OnGetRead(string filterValue)
+            public JsonResult OnGetRead()
             {
                 var dropdownListData = new List<OrderViewModel>();
                 // Populate the collection with the DropDownList data.
@@ -163,12 +162,14 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             }
         }
     ```
+For the complete project, refer to the [DropDownList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownList/DropDownListCrudOps.cshtml).
 
-## Binding the DropDownList to a PageModel Property
 
-To bind the DropDownList to a property from the PageModel, follow the next steps:
+## Binding to a PageModel Property
 
-1. Add a property to the PageModel that must bind to the DropDownList.
+To bind the DropDownList to a property from the `PageModel`, follow the next steps:
+
+1. Add a property to the `PageModel` that must bind to the DropDownList.
 
     ```C# PageModel
     public class IndexModel : PageModel
@@ -179,6 +180,13 @@ To bind the DropDownList to a property from the PageModel, follow the next steps
         public void OnGet()
         {
             OrderID = 2; // Assign a value to the "OrderID" property, if needed.
+        }
+
+        public JsonResult OnGetRead(string filterValue)
+        {
+            var dropdownListData = new List<OrderViewModel>();
+            // Populate the collection with the DropDownList data.
+            return new JsonResult(dropdownListData);
         }
     }
     ```
@@ -205,7 +213,7 @@ To bind the DropDownList to a property from the PageModel, follow the next steps
             .DataSource(source =>
             {
                 source.Read(read => read
-                    .Url("/Index?handler=Read").Data("forgeryToken"));
+                    .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
             })
         )
     ```
@@ -222,7 +230,7 @@ To bind the DropDownList to a property from the PageModel, follow the next steps
             datavaluefield="OrderID">
             <datasource>
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                 </transport>
             </datasource>
         </kendo-combobox>

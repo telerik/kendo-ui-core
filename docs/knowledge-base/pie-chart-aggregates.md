@@ -5,9 +5,9 @@ description: "Learn how to aggregate data in Kendo UI Pie Charts."
 previous_url: /controls/charts/how-to/pie-chart-aggregates, /controls/charts/how-to/various/pie-chart-aggregates
 slug: howto_aggregatedata_piecharts
 tags: chart, aggregate, pie, data
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

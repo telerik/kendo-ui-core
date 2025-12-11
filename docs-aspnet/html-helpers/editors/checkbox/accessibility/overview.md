@@ -2,6 +2,7 @@
 title: Overview
 page_title: CheckBox Documentation | CheckBox Accessibility
 description: "Get started with the {{ site.product }} CheckBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["checkbox"]
 slug: htmlhelpers_checkbox_accessibility
 position: 1
 ---

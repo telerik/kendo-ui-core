@@ -2,6 +2,7 @@
 title: Images
 page_title: Images
 description: "Learn how to include images and sprite icons in the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: htmlhelpers_panelbar_images_aspnetcore
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Interval
 page_title: jQuery DateTimePicker Documentation - Interval
 description: "Get familiar with the jQuery DateTimePicker by Kendo UI component and how to set its interval feature."
+components: ["datetimepicker"]
 slug: interval_kendoui_datetimepicker
 position: 9
 ---

@@ -2,6 +2,7 @@
 title: Multiple Pointers
 page_title: jQuery LinearGauge Documentation - Multiple Pointers
 description: "Get started with the jQuery LinearGauge by Kendo UI and highlight multiple values by rendering multiple pointers."
+components: ["lineargauge"]
 slug: pointers_kendoui_lineargauge
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Read-Only Editor
 page_title: jQuery Editor Documentation - Read-Only Editor
 description: "Get started with the jQuery Editor by Kendo UI and set the component in its read-only state."
+components: ["editor"]
 slug: readonly_kendoui_editor_widget
 position: 3
 ---

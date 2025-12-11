@@ -2,6 +2,7 @@
 title: Views 
 page_title: jQuery AIPrompt Documentation - AIPrompt Views
 description: "Learn about how to set the views of the jQuery AIPrompt"
+components: ["aiprompt"]
 slug: views_aiprompt_component
 position: 2
 ---

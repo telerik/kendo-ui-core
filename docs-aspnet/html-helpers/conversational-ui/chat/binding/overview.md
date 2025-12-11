@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI Chat Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} Chat using various data binding approaches."
+components: ["chat"]
 slug: htmlhelpers_databinding_overview_chat
 position: 1
 ---

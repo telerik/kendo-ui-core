@@ -7,6 +7,7 @@ previous-url: /helpers/navigation/treeview/how-to/expand-node-async, /html-helpe
 slug: treeview-expand-node-async
 tags: treeview, async, node, expand
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: buttongroup-on-multiple-rows
 tags: button, buttongroup, multiple, rows
 ticketid: 1149689
 res_type: kb
+components: ["button"]
 ---
 
 ## Environment

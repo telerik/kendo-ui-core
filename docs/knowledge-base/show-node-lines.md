@@ -5,9 +5,9 @@ description: "Learn how to show lines between the nodes of the Kendo UI for jQue
 slug: howto_showlinesbetweennodes_treeview
 previous_url: /controls/navigation/treeview/how-to/appearance/show-node-lines
 tags: telerik, kendo, jquery, treeview, show, lines, between, nodes
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

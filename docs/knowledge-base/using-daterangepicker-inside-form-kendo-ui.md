@@ -6,6 +6,7 @@ page_title: Using DateRangePicker Inside Form | Kendo UI
 slug: using-daterangepicker-inside-form-kendo-ui
 tags: form, daterangepicker, date range, custom editor
 res_type: kb
+components: ["daterangepicker"]
 ---
 ## Environment
 | Product | Version |

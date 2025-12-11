@@ -7,6 +7,7 @@ slug: preview-pdf-export-api-in-viewer
 tags: pdf,viewer,export,preview,api,generate,download
 ticketid: 1412617
 res_type: kb
+components: ["pdfviewer"]
 ---
 
 ## Environment

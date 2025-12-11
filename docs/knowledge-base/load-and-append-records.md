@@ -5,9 +5,9 @@ description: "Learn how to load and append more records as the user scrolls down
 previous_url: /controls/data-management/grid/how-to/load-and-append-records, /controls/data-management/grid/how-to/binding/load-and-append-records
 slug: howto_loadand_append_morerecords_while_scrollingdown_grid
 tags: grid, load, append, records, while, scrolling
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

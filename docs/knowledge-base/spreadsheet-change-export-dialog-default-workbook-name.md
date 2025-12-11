@@ -7,7 +7,7 @@ slug: spreadsheet-change-export-dialog-default-workbook-name
 tags: workbook, default, name, change, spreadsheet
 ticketid: 1140511
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

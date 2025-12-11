@@ -6,7 +6,7 @@ page_title: Keep Popup Open - Kendo UI for jQuery Data Grid
 slug: grid-prevent-popup-close-on-edit
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Editor and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["editor"]
 slug: keynav_aspnetcore_editor
 position: 2
 ---

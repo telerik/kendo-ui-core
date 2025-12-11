@@ -6,7 +6,7 @@ page_title: Use Different Editor Based on the Column Value - Kendo UI for jQuery
 slug: grid-different-editor-based-on-column-value
 tags: grid, different, condition, editor, value, data, type, dynamic
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

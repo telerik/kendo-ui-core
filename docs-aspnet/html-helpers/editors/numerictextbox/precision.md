@@ -2,6 +2,7 @@
 title: Input Restrictions
 page_title: Input Restrictions
 description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn how to control the precision of the entered number and restrict the value to a specific range."
+components: ["numerictextbox"]
 slug: input_restrictions_numerictextbox_aspnetcore
 position: 4
 ---

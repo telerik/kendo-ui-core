@@ -2,6 +2,7 @@
 title: Form Integration
 page_title: jQuery Upload Documentation - Form Integration
 description: "Learn how to use the Upload as a Form item editor in Kendo UI jQuery Upload component."
+components: ["upload"]
 slug: form_integration_upload_component
 position: 9
 ---

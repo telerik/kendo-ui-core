@@ -6,6 +6,7 @@ type: how-to
 slug: grid-row-number
 tags: progress, telerik, aspnet, mvc, core, grid, add, row, numbers
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

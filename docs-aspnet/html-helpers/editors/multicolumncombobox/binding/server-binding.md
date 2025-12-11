@@ -2,6 +2,7 @@
 title:  Local Binding
 page_title: Local Binding
 description: "Learn how to bind the {{ site.product }}   MultiColumnComboBox component to a local dataset."
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/binding/server-binding
 slug: htmlhelpers_multicolumncombobox_serverbinding_aspnetcore
 position: 2

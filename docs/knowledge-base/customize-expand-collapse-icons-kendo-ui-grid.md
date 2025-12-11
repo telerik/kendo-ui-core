@@ -6,6 +6,7 @@ page_title: How to Customize Expand/Collapse SVG Icons in Kendo UI Grid Hierarch
 slug: customize-expand-collapse-icons-kendo-ui-grid
 tags: kendo ui, grid, hierarchy, expand, collapse, css, databound, detailexpand, detailcollapse
 res_type: kb
+components: ["grid"]
 ticketid: 1687918
 ---
 

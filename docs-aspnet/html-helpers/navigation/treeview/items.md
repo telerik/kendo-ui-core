@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn about the item properties in the Telerik UI TreeView component for {{ site.framework }}."
+components: ["treeview"]
 slug: htmlhelpers_treeview_items_aspnetcore
 position: 4
 ---

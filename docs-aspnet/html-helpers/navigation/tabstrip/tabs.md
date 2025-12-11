@@ -2,6 +2,7 @@
 title: Tabs
 page_title: Tabs
 description: "Configure the tabs of the Telerik UI TabStrip component for {{ site.framework }}."
+components: ["tabstrip"]
 slug: htmlhelpers_tabstrip_aspnetcore_tabs
 position: 2
 ---

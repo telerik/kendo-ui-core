@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Drawer Documentation - Keyboard Navigation
 description: "Get started with the jQuery Drawer by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["drawer"]
 slug: keynav_drawer_jquery
 position: 2
 ---

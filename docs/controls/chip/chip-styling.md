@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Chip Documentation - Appearance
 description: "Learn how to apply different styling options to the Chip widget."
+components: ["chip"]
 slug: chip_styling_widget
 position: 4
 ---

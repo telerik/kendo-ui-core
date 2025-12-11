@@ -2,6 +2,7 @@
 title: Icon ButtonGroup
 page_title: Icon ButtonGroup
 description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ButtonGroup component for {{ site.framework }}."
+components: ["buttongroup"]
 previous_url: /helpers/navigation/buttongroup/icons
 slug: icons_buttongroup_aspnetcore
 position: 3

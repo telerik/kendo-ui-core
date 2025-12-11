@@ -2,6 +2,7 @@
 title: GraphQL Binding
 page_title: GraphQL Binding
 description: "Learn how to implement GraphQL binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/graphql-binding
 slug: htmlhelpers_grid_aspnetcore_graphql-binding
 position: 10

@@ -2,6 +2,7 @@
 title: Highlight Ongoing Events
 page_title: Highlight Ongoing Events
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to highlight ongoing events."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_ongoing_events_aspnetcore
 position: 7
 ---

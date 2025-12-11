@@ -7,6 +7,7 @@ tags: grid, customize, confirmation, window
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

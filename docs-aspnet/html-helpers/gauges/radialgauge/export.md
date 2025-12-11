@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Learn the Export Options of the Telerik UI RadialGauge component for {{ site.framework }}."
+components: ["radialgauge"]
 slug: export_radialgaugehelper_aspnetcore
 position: 4
 ---

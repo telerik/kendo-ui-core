@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Calendar Documentation - Calendar Overview
 description: "Try now the Kendo UI for jQuery Calendar component that renders a graphical calendar."
+components: ["calendar"]
 slug: overview_kendoui_calendar_widget
 position: 0
 ---

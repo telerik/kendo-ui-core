@@ -6,7 +6,7 @@ page_title: Cancel Selection in AngularJS If Not Confirmed - Kendo UI DropDownLi
 slug: dropdownlist-cancel-select-if-not-confirmed
 tags: kendoui, kendo, angular, angularjs, dropdownlist, dialog, cancel-select, cancel, confirm
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment

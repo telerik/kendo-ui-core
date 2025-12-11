@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery DropDownList Documentation - Templates
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to customize its item, value, header, footer, and no-data templates."
+components: ["dropdownlist"]
 slug: templates_dropdownlist_widget
 position: 6
 ---

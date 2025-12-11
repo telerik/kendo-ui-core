@@ -2,6 +2,7 @@
 title: Create a Sample Application with Kendo UI for jQuery and Vite
 page_title: Create a Sample Application with Vite | Kendo UI for jQuery
 description: "A guide on how to set up a project with Vite and Kendo UI for jQuery."
+components: ["general"]
 slug: getting_started_vite
 position: 10
 ---

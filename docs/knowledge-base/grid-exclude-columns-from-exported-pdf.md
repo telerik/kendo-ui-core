@@ -6,7 +6,7 @@ page_title: Exclude Certain Columns from the Exported PDF File - Kendo UI for jQ
 slug: grid-exclude-columns-from-exported-pdf
 tags: grid, export, pdf, exclude, remove, column, columns, exported, file,
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

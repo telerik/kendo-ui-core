@@ -5,9 +5,9 @@ description: "Learn how to add an icon or a plain image to a custom tool in the 
 previous_url: /controls/editors/editor/how-to/add-icon-custom-tool, /controls/editors/editor/how-to/appearance/add-icon-custom-tool
 slug: howto_add_add_icon_custom_tool
 tags: telerik, kendo, jquery, editor, add, icon, image, to, custom, tool
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

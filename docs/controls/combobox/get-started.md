@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ComboBox Documentation - Getting Started with the ComboBox
 description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["combobox"]
 slug: getting_started_kendoui_combobox_widget
 position: 1
 ---

@@ -7,6 +7,7 @@ meta_title: Configuring DateRangePicker to Show Only One Month
 slug: daterangepicker-show-one-month
 tags: daterangepicker, kendo-ui-for-jquery, open-event, multiviewcalendar, views
 res_type: kb
+components: ["daterangepicker"]
 ticketid: 1699094
 ---
 

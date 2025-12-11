@@ -5,9 +5,9 @@ description: "Learn how to move the group label on top of the items in a Kendo U
 previous_url: /controls/editors/dropdownlist/how-to/group-label-on-top-of-the-items, /controls/editors/dropdownlist/how-to/appearance/group-label-on-top-of-the-items
 slug: howto_move_group_label_ontopof_items_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, move, group, labels, on, top, of, items
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

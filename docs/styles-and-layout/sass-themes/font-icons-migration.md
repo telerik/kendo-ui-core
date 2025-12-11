@@ -2,6 +2,7 @@
 title: Migrating Font Icons to SVG
 page_title: Migrating from Font Icons to SVG Icons
 description: "Learn how to migrate from font icons to SVG icons when using the Kendo UI components."
+components: ["general"]
 slug: webfonticons_migration_kendoui_desktopwidgets
 position: 8
 ---

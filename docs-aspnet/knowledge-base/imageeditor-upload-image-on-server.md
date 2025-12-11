@@ -7,6 +7,7 @@ slug: imageeditor-upload-image-on-server
 tags: imageeditor, image, upload, server
 ticketid: 1654940
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

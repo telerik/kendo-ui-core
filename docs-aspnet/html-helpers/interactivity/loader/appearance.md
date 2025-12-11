@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn the basics when working with the Telerik UI Loader component for {{ site.framework }} set its size, type and themeColor configurations."
+components: ["loader"]
 slug: htmlhelpers_loader_aspnetcore_appearance
 position: 2
 ---

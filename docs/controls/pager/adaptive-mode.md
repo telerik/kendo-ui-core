@@ -2,6 +2,7 @@
 title: Adaptive Mode
 page_title: jQuery Pager Documentation - Adaptive Mode
 description: "Learn about the adaptive mode of the jQuery Pager by Kendo UI and how it enhances the responsive behavior of the component."
+components: ["pager"]
 slug: adaptivemode_kendoui_pager_widget
 ---
 

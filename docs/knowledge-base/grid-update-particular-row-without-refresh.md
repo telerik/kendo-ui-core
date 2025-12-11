@@ -6,7 +6,7 @@ page_title: Refresh the Content of a Row Only - Kendo UI for jQuery Data Grid
 slug: grid-update-particular-row-without-refresh
 tags: grid, row, update, render
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

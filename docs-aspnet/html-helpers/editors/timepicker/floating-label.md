@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: Floating Label
 description: "Learn how to initialize a floating label for the Telerik UI TimePicker component for {{ site.framework }}."
+components: ["timepicker"]
 slug: htmlhelpers_timepicker_floatinglabel_aspnetcore
 position: 7
 ---

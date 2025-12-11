@@ -2,6 +2,7 @@
 title: Overview
 page_title: DateInput Documentation | DateInput Accessibility
 description: "Get started with the {{ site.product }} DateInput and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["dateinput"]
 slug: htmlhelpers_dateinput_accessibility
 position: 1
 ---

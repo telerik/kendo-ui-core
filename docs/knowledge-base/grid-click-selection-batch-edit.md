@@ -7,6 +7,7 @@ slug: grid-click-selection-batch-edit
 tags: single, row, selection, grid, batch, edit, mode
 ticketid: 1125960
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

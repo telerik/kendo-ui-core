@@ -2,6 +2,7 @@
 title:  Panes
 page_title: Panes.
 description: "Get started witht the Telerik UI Splitter component for {{ site.framework }} and learn how to configure the panes behavior."
+components: ["splitter"]
 slug: htmlhelpers_splitter_panes_aspnetcore
 position: 2
 ---

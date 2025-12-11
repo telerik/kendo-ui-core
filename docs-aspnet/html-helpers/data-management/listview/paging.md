@@ -2,6 +2,7 @@
 title: Paging
 page_title: Paging
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable its paging functionality."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_paging
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Tools
 page_title: Telerik UI Chat Documentation - Tools
 description: "Learn how to configure message actions and interactive tools in the Telerik UI for {{ site.framework }} Chat component."
+components: ["chat"]
 slug: htmlhelpers_tools_chat
 position: 4
 ---

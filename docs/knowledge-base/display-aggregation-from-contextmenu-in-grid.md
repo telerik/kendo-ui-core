@@ -4,10 +4,10 @@ page_title: Display Aggregation from ContextMenu in Grid - Kendo UI for jQuery G
 description: "Learn how to display specific aggregation from a ContextMenu in the Kendo UI Grid for jQuery."
 slug: display-aggregation-from-contextmenu-in-grid
 tags: grid, contextmenu, aggregation
-component: grid
 type: how-to
 ticketid: 1607509
 res_type: kb
+components: ["grid", "menu"]
 ---
 
 ## Environment

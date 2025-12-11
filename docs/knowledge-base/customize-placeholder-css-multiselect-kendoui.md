@@ -6,6 +6,7 @@ page_title: How to Customize Placeholder CSS in Kendo UI MultiSelect
 slug: customize-placeholder-css-multiselect-kendoui
 tags: kendo ui, multiselect, css, customization, placeholder, style
 res_type: kb
+components: ["multiselect"]
 ticketid: 1670626
 ---
 

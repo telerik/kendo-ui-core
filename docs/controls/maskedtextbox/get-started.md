@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MaskedTextBox Documentation - Getting Started with the MaskedTextBox
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["maskedtextbox"]
 slug: getting_started_kendoui_maskedtextbox
 position: 1
 ---

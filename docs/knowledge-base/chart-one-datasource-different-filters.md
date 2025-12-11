@@ -7,6 +7,7 @@ slug: chart-one-datasource-different-filters
 tags: fetch, same, data, apply, different, chart, instances
 ticketid: 1424758
 res_type: kb
+components: ["datasource"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ page_title: Use Both Standard and Checkbox Selection - Kendo UI for jQuery Data 
 slug: grid-use-both-standard-and-checkbox-selection
 tags: grid, selection, checkbox, standard, select, both, click, unselect, deselect
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

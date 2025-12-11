@@ -7,6 +7,7 @@ slug: grid-multiselect-share-selection
 tags: grid, multiselect, selection
 ticketid: 1144164
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

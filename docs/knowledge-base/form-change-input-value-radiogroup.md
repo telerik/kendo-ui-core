@@ -7,6 +7,7 @@ slug: form-change-input-value-radiogroup
 tags: form, input, value, radiogroup
 ticketid: 1578406
 res_type: kb
+components: ["form"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Deployment Overview
 description: Troubleshooting deployment issues involving the {{ site.product_short }} suite.
+components: ["general"]
 slug: deployment_overview
 position: 0
 ---

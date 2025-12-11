@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI DropDownButton HtmlHelper for {{ site.framework }}."
+components: ["dropdownbutton"]
 slug: htmlhelpers_dropdownbutton_aspnetcore_appearance
 position: 3
 ---

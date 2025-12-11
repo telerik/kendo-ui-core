@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Scheduler Documentation - Scheduler Overview
 description: "Try now the Kendo UI for jQuery Scheduler component covering everything from data binding and resources to templates."
+components: ["scheduler"]
 slug: overview_kendoui_scheduler_widget
 position: 0
 ---

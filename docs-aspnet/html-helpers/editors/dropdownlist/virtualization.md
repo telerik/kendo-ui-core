@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Virtualization
 description: "Learn how to set up the virtualization feature of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/virtualization
 slug: htmlhelpers_dropdownlist_virtualization_aspnetcore
 position: 5

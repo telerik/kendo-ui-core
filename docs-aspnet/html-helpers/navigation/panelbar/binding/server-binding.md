@@ -2,6 +2,7 @@
 title:  Local Binding
 page_title: Local Binding
 description: "Learn how to bind the {{ site.product }} PanelBar component to a local dataset."
+components: ["panelbar"]
 previous_url: /helpers/navigation/panelbar/binding/model-binding
 slug: htmlhelpers_panelbar_serverbinding_aspnetcore
 position: 3

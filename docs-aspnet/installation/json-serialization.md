@@ -2,6 +2,7 @@
 title: JSON Serialization
 page_title: JSON Serialization
 description: "How to configure JSON Serialization when working with Grid and other data-bound components."
+components: ["general"]
 previous_url: /getting-started/prerequisites/environment-support, /getting-started/prerequisites/json-serialization, /compatibility/json-serialization
 slug: jsonserialization_core
 position: 5

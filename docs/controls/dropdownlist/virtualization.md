@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: jQuery DropDownList Documentation - Virtualization
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to implement its virtualization functionality."
+components: ["dropdownlist"]
 slug: virtualization_kendoui_ddl_widget
 position: 5
 ---

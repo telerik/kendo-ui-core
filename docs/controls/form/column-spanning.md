@@ -2,6 +2,7 @@
 title: Column Spanning
 page_title: Kendo UI for jQuery Form Documentation - Column Spanning
 description: "Learn how to configure column spanning for responsive form layouts in the Kendo UI for jQuery Form."
+components: ["form"]
 slug: colspan_form_widget
 position: 8
 ---

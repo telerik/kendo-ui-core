@@ -3,20 +3,19 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI ListBox for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_listBoxhelper_aspnetcore
+components: ["listbox"]
 position: 5
 ---
 
 # ListBox in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI ListBox for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI ListBox for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_listbox_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the ListBox component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [ListBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListBox/ListBoxBinding.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers the most versatile data binding approach. To connect the ListBox to a data set retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
@@ -44,7 +43,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             );
         })
         .DataSource(ds => ds
-            .Read(r => r.Url("/Index?handler=ReadOptional").Data("forgeryToken"))
+            .Read(r => r.Url(Url.Page("Index", "ReadOptional")).Data("forgeryToken"))
         )
         .ConnectWith("selected")
     )
@@ -75,7 +74,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
         <kendo-listbox name="optional" datatextfield="Text" datavaluefield="Value" connect-with="selected">
             <datasource>
                 <transport>
-                    <read url="/Index?handler=ReadOptional" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "ReadOptional")" data="forgeryToken"/>
                 </transport>
             </datasource>
             <toolbar position="ListBoxToolbarPosition.Right" tools="tools"/>
@@ -116,6 +115,8 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static IList<SelectListItem> items;
 
         public void OnGet()
@@ -135,9 +136,12 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
         {
             return new JsonResult(items);
         }
+    }
     ```
 
-## Binding the ListBox to a PageModel Property
+For the complete project, refer to the [ListBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListBox/ListBoxBinding.cshtml).
+
+## Binding to a PageModel Property
 
 To bind the ListBox to a property from the `PageModel`, follow the next steps:
 

@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Local Binding
 description: "Learn how to implement Local Binding with Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/server-binding
 slug: htmlhelpers_grid_aspnetcore_localbinding
 position: 1

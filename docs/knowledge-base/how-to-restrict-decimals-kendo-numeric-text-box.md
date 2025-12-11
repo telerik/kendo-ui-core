@@ -6,6 +6,7 @@ page_title: How to Make Kendo UI NumericTextBox Accept Only Integers
 slug: how-to-restrict-decimals-kendo-numeric-text-box
 tags: kendo, ui, numeric, textbox, integer, decimal, restrict
 res_type: kb
+components: ["textbox"]
 ticketid: 1662969
 ---
 

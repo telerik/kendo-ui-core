@@ -7,6 +7,7 @@ slug: editor-autoresizing-in-grid-template
 tags: grid, editor, template
 ticketid: 1140080  
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

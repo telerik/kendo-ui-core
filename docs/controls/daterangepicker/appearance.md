@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery DateRangePicker Documentation - DateRangePicker Appearance
 description: "Learn how to apply different styling options to the DateRangePicker widget."
+components: ["daterangepicker"]
 slug: appearance_kendoui_daterangepicker_widget
 position: 2
 ---

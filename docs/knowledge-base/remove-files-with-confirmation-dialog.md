@@ -5,9 +5,9 @@ description: "Learn how to display a custom confirmation dialog when removing fi
 slug: howto_remove_files_with_confirmation
 previous_url: /controls/editors/upload/how-to/remove-files-with-confirmation-dialog
 tags: telerik, kendo, jquery, upload, remove, files, using, confirmation, dialog
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

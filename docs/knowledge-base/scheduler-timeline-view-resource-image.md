@@ -7,6 +7,7 @@ slug: scheduler-timeline-view-resource-image
 tags: scheduler, timeline, view, resource, add, image
 ticketid: 1155292
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

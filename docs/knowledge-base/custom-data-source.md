@@ -5,9 +5,9 @@ description: "Learn how to customize the data source options for PDF export of t
 previous_url: /controls/data-management/grid/how-to/pdf-export/custom-data-source
 slug: howto_customize_data_source_pdf_grid
 tags: grid, customize, datasource
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

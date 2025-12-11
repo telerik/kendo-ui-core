@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ListView Documentation | ListView Accessibility
 description: "Get started with the jQuery ListView by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["listview"]
 slug: jquery_listview_accessibility
 position: 1
 ---

@@ -7,6 +7,7 @@ meta_title: Changing Outlier Colors in Kendo UI for jQuery Scatter Chart
 slug: changing-outlier-colors-scatter-chart-kendo-jquery
 tags: chart,kendo ui for jquery,scatter,outliers,series,color
 res_type: kb
+components: ["chart"]
 ticketid: 1642200
 ---
 

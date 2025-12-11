@@ -7,6 +7,7 @@ slug: grid-pagesize-change-event
 tags: grid, page, size, pagesize, dropdown, event, change, capture
 ticketid: 1167416
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: How to Zoom into the Last 30 Days on a Kendo UI Chart
 slug: how-to-display-chart-data-zoomed-to-last-30-days
 tags: kendo ui, chart, zoom, categoryaxis, date, data visualization
 res_type: kb
+components: ["chart"]
 ticketid: 1627452
 ---
 

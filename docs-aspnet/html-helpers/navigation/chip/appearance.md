@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to manage the appearance of the Telerik UI Chip component for {{ site.framework }} and apply its various styling options."
+components: ["chip"]
 slug: htmlhelpers_chip_aspnetcore_appearance
 position: 2
 ---

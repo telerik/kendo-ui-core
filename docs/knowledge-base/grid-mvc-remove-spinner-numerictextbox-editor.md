@@ -7,7 +7,7 @@ slug: grid-mvc-remove-spinner-numerictextbox-editor
 tags: NumericTextBox, spinners, editor, remove
 ticketid: 1132419, 1134869
 res_type: kb
-component: numerictextbox
+components: ["grid"]
 ---
 
 ## Environment

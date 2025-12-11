@@ -2,6 +2,7 @@
 title: SplitButton
 page_title: jQuery ToolBar Documentation - SplitButton Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the SplitButton command type."
+components: ["toolbar"]
 previous_url: /controls/toolbar/splitbutton
 slug: splitbutton_toolbar_widget
 ---

@@ -5,9 +5,9 @@ description: "Learn how to disable resizing for specific columns in the Kendo UI
 previous_url: /controls/data-management/grid/how-to/Layout/disable-column-resize-for-specific-columns
 slug: howto_disable_column_resizing_grid
 tags: grid, disable, resizing, specific, columns
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

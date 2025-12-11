@@ -5,9 +5,9 @@ description: "Learn how to customize the tables cells and rows styles of the Ken
 previous_url: /controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /asp-mvc/controls/data-management/grid/how-to/style-rows-cells-based-on-data-item-values, /controls/data-management/grid/how-to/Layout/style-rows-cells-based-on-data-item-values
 slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 tags: customize, grid, rows, cells, basedon, data, item, value
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to blur the input in a Kendo UI ComboBox after an option
 previous_url: /controls/editors/combobox/how-to/blur-on-select, /controls/editors/combobox/how-to/customize/blur-on-select
 slug: howto_blur_after_select_combobox
 tags: telerik, kendo, jquery, combobox, blur, after, selection
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

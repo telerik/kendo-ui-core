@@ -7,6 +7,7 @@ previous_url: /helpers/editors/dropdownlist/how-to/cascading-and-virtualization,
 slug: howto_cascadeddlenabledvirtualization_ddlaspnetmvc
 tags: dropdownlist, cascade, virtualization
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

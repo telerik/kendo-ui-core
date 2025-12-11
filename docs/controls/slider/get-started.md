@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Slider Documentation - Getting Started with the Slider
 description: "Get started with the jQuery Slider by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["slider"]
 slug: getting_started_kendoui_slider_widget
 position: 1
 ---

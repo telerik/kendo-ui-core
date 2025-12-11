@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use filtering in the Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_templates_aspnetcore
 position: 6
 ---

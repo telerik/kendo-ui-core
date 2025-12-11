@@ -7,6 +7,7 @@ slug: chart-series-keyboard-navigation
 tags: chart, series, accessibility, keyboard, navigation, aria, label, screenreader, reader, screen
 ticketid: 1497415
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: chat-markdown
 tags: chat, markdown, kendo ui
 ticketid: 1411881
 res_type: kb
+components: ["chat"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: grid-center-edit-popup-on-browser-resize
 tags: grid, popup, edit, kendo, resize, browser, modal, re-size, window, re-center
 ticketid: 1138443
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

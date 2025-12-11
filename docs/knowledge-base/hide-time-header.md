@@ -5,9 +5,9 @@ description: "Learn how to hide the time headers of the day, week, and workWeek 
 previous_url: /controls/scheduling/scheduler/how-to/hide-time-header, /controls/scheduling/scheduler/how-to/appearance/hide-time-header
 slug: howto_hide_time_headers_scheduler
 tags: telerik, kendo, jquery, scheduler, hide, time, headers
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

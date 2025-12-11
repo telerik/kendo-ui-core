@@ -6,6 +6,7 @@ page_title: How to Disable Grid Header Keyboard Navigation in Kendo UI Grid
 slug: disable-grid-header-keyboard-navigation-kendo-ui-grid
 tags: grid, kendo ui, keyboard navigation, header, disable
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

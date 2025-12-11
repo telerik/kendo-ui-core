@@ -2,6 +2,7 @@
 title: Actions
 page_title: Timeline Actions
 description: "Action links in the Telerik UI Timeline component for {{ site.framework }}."
+components: ["timeline"]
 previous_url: /helpers/navigation/timeline/actions
 slug: actions_htmlhelpers_timeline_aspnetcore
 position: 3

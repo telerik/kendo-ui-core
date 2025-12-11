@@ -2,6 +2,7 @@
 title: Component Types
 page_title: jQuery TimePicker Documentation - TimePicker Component Types
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to enable the modern component type."
+components: ["timepicker"]
 slug: componenttypes_timepicker
 position: 6
 ---

@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: Telerik UI DateRangePicker for {{ site.framework }} Documentation - Automatic Correction
 description: "Get familiar with the Telerik UI DateRangePicker component for {{ site.framework }} and how to use its auto-correct feature."
+components: ["daterangepicker"]
 slug: htmlhelpers_daterangepicker_autocorrect_aspnetcore
 position: 7
 ---

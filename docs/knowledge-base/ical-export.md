@@ -5,9 +5,9 @@ description: "Learn how to extract Kendo UI for jQuery Scheduler events to an .i
 previous_url: /controls/scheduling/scheduler/how-to/ical-export, /controls/scheduling/scheduler/how-to/export/ical-export
 slug: howto_exportto_ical_scheduler
 tags: telerik, kendo, jquery, scheduler, export, to, ical 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

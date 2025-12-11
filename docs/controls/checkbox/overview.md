@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery CheckBox Documentation - CheckBox Overview
 description: "Get started with the jQuery CheckBox by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["checkbox"]
 slug: overview_kendoui_checkbox_widget
 position: 1
 ---

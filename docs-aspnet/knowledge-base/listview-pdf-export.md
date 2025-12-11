@@ -6,6 +6,7 @@ page_title: Export All ListView Pages to PDF
 slug: listview-pdf-export
 tags: listview, pdf, export, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

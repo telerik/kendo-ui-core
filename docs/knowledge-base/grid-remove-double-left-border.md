@@ -7,6 +7,7 @@ slug: grid-remove-double-left-border
 tags: grid, columns, border
 ticketid: 1347080
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

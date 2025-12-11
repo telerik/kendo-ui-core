@@ -2,6 +2,7 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn how to use the keyboard navigation functionality of the Telerik UI Timeline component for {{ site.framework }}."
+components: ["timeline"]
 previous_url: /html-helpers/navigation/timeline/keyboard-navigation
 slug: htmlhelpers_timeline_keyboardnavigation_aspnetcore
 position: 2

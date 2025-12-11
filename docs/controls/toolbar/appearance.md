@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery ToolBar Documentation - Appearance
 description: "Get started with the jQuery ToolBar by Kendo UI and control its appearance."
+components: ["toolbar"]
 slug: appearance_kendoui_toolbar
 position: 5
 ---

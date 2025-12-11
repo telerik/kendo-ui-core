@@ -2,6 +2,7 @@
 title: Remote Binding Markers
 page_title: Remote Binding Markers
 description: "Learn how to bind the markers to remote data when working with the Telerik UI Map component for {{ site.framework }}."
+components: ["map"]
 slug: htmlhelpers_map_remote_binding_markers
 position: 1
 ---

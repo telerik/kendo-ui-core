@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ToolBar component for {{ site.framework }}."
+components: ["toolbar"]
 previous_url: /helpers/html-helpers/toolbar, /helpers/navigation/toolbar/overview
 slug: htmlhelpers_toolbar_aspnetcore
 position: 0

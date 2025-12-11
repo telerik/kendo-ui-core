@@ -7,6 +7,7 @@ slug: appbar-menu-overflow
 tags: appbar, menu, overflow
 ticketid: 1498194
 res_type: kb
+components: ["appbar"]
 ---
 
 ## Environment

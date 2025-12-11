@@ -5,9 +5,9 @@ description: "Learn how to nest editors inside event templates and update the un
 previous_url: /controls/scheduling/scheduler/how-to/editors-inside-event-template, /controls/scheduling/scheduler/how-to/editing/editors-inside-event-template
 slug: howto_nest_editorsinside_event_templates_scheduler
 tags: telerik, kendo, jquery, scheduler, nest, editors, inside, event, templates 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

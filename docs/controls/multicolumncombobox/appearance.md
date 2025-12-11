@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery MultiColumnComboBox Documentation - MultiColumnComboBox Appearance
 description: "Learn how to apply different styling options to the MultiColumnComboBox widget."
+components: ["multicolumncombobox"]
 slug: appearance_kendoui_multicolumncombobox_widget
 position: 10
 ---

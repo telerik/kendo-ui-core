@@ -2,6 +2,7 @@
 title: Upgrade Troubleshooting
 page_title: Upgrade Troubleshooting
 description: "Learn how to troubleshoot your application if you encounter any issues when upgrading to new {{ site.product }} versions."
+components: ["general"]
 slug: upgrade_aspnetcore_troubleshooting
 position: 3
 ---

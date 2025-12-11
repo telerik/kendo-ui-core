@@ -4,9 +4,9 @@ page_title: Convert DataSource Filters to SQL Expression
 description: "Learn how to convert regular and nested filters to SQL expressions."
 slug: datasource-convert-to-sql-expression
 tags: telerik, kendo, jquery, grid, datasource, sql, expression, scheduler, treelist, where, filter, filters
-component: datasource
 type: how-to
 res_type: kb
+components: ["datasource"]
 ---
 
 ## Environment

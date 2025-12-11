@@ -2,6 +2,7 @@
 title: Views
 page_title: Views 
 description: "Get familiar with Grid and Thumbs Views in the Telerik UI FileManager for {{ site.framework }}."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_views
 position: 4
 ---

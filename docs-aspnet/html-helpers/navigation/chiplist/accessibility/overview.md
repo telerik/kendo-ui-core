@@ -2,6 +2,7 @@
 title: Overview
 page_title: ChipList Documentation | ChipList Accessibility
 description: "Get started with the {{ site.product }} ChipList and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["chiplist"]
 slug: htmlhelpers_chiplist_accessibility
 position: 1
 ---

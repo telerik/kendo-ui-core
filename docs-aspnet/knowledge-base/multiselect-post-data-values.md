@@ -7,6 +7,7 @@ slug: multiselect-post-data-values
 tags: multiselect, submit, data, post, cotroller
 ticketid: 1381199, 1381623
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

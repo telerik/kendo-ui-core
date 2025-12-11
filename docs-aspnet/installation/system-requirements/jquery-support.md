@@ -2,6 +2,7 @@
 title: jQuery Support
 page_title: jQuery Support
 description: "Get started with {{ site.product }} and learn which jQuery versions are supported by the component library."
+components: ["general"]
 previous_url: /getting-started/prerequisites/jquery-support, /compatibility/jquery-support, /installation-mvc/system-requirements/jquery-support
 slug: jquerysupport_core
 position: 2

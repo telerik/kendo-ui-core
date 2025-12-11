@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Avatar Documentation - Getting Started with the Avatar
 description: "Get started with the jQuery Avatar by Kendo UI and learn how to create and initialize the component in a few easy steps."
+components: ["avatar"]
 slug: getting_started_kendoui_avatar_component
 position: 2
 ---

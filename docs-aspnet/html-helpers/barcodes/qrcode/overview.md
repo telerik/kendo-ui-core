@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI QRCode component for {{ site.framework }}."
+components: ["qrcode"]
 previous_url: /helpers/barcodes/qrcode/overview
 slug: overview_qrcodehelper_aspnetcore
 position: 0

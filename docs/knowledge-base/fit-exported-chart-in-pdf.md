@@ -5,9 +5,9 @@ description: "Learn how to explode a clicked segment in a Kendo UI Pie Chart."
 previous_url: /controls/charts/how-to/fit-exported-chart-in-pdf, /controls/charts/how-to/export/fit-exported-chart-in-pdf
 slug: howto_fitpdfexportedcharttopage_charts
 tags: chart, fit, pdf, export, to, page
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

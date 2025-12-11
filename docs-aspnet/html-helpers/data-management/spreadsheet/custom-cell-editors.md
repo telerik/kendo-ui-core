@@ -2,6 +2,7 @@
 title: Custom Cell Editors
 page_title: Spreadsheet Custom Cell Editors
 description: "Learn how to implement custom cell editors for the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore
 position: 9
 ---

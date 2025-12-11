@@ -2,6 +2,7 @@
 title: Cascading DropDownLists
 page_title: Cascading DropDownLists
 description: "Learn how to implement a series of two or more Telerik UI DropDownList component for {{ site.framework }} and cascade them."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_cascading_aspnetcore
 position: 6
 ---

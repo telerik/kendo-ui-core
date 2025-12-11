@@ -6,6 +6,7 @@ page_title: Scheduler Server Filtering - Kendo UI Scheduler for jQuery
 slug: scheduler-server-filtering
 tags: scheduler, server, filtering, kendo, datasource
 res_type: kb
+components: ["scheduler"]
 ---
 ## Environment
 | Product | Version |

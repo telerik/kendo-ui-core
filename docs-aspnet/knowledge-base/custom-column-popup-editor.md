@@ -6,6 +6,7 @@ page_title: Adding Custom Column Popup Editor
 slug: custom-column-popup-editor
 tags: mvc, grid, editing, custom editor, popup, button, editor
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

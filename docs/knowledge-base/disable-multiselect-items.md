@@ -7,7 +7,7 @@ slug: disabled-items-multiselect
 tags: multiselect, disabled, items, options, prevent, selection
 ticketid: 1363148
 res_type: kb
-component: multiselect
+components: ["multiselect"]
 ---
 
 ## Environment

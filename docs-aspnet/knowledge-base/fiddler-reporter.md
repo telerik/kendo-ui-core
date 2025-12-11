@@ -6,6 +6,7 @@ page_title: Fiddler Everywhere Reporter
 slug: fiddler-reporter
 tags: capture, web, traffic, fiddler, everywhere, reporter, record, video
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

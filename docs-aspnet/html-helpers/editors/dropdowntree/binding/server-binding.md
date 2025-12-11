@@ -2,6 +2,7 @@
 title:  Local Binding
 page_title: Local Binding
 description: "Learn how to bind the {{ site.product }} DropDownTree component to a local dataset."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_serverbinding_aspnetcore
 position: 3
 ---

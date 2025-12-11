@@ -2,6 +2,7 @@
 title: Editing
 page_title: jQuery ListView Documentation - Editing
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement its editing functionality."
+components: ["listview"]
 slug: editing_kendoui_listview
 position: 3
 ---

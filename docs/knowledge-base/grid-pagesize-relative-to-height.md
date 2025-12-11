@@ -7,6 +7,7 @@ slug: grid-pagesize-relative-to-height
 tags: grid, page, size, pagesize, height, adjust
 ticketid: 1156556
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

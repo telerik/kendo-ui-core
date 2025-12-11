@@ -2,6 +2,7 @@
 title: Internationalization
 page_title: Internationalization
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
+components: ["grid"]
 slug: intl_aspnetcore_grid
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TreeList Documentation - Editing Overview
 description: "Get started with the jQuery TreeList by Kendo UI and enable CRUD operations."
+components: ["treelist"]
 previous_url: /controls/treelist/editing
 slug: editing_kendoui_treelist_widget
 position: 1

@@ -2,6 +2,7 @@
 title: Migrating Font Icons to SVG
 page_title: Migrating Font Icons to SVG Icons
 description: "Learn how to migrate from font icons to SVG icons when using the {{ site.product }} UI components."
+components: ["general"]
 slug: font_icons_migration
 position: 8
 ---

@@ -7,6 +7,7 @@ slug: grid-scroll-selected-row
 tags: grid, scroll, select
 ticketid: 1141172
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Icons
 page_title: jQuery Menu Documentation - Icons
 description: "Learn how you can show icons in the Menu from a field in the dataSource."
+components: ["menu"]
 slug: icons_kendoui_menu
 position: 6
 ---

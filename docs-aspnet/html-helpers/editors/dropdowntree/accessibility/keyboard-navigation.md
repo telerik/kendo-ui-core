@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} DropDownTree and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["dropdowntree"]
 slug: keynav_aspnetcore_dropdowntree
 position: 2
 ---

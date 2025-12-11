@@ -6,6 +6,7 @@ previous_url: /helpers/navigation/menu/how-to/grid-hierarchy-with-dynamic-model-
 slug: menu-item-click-open-window
 tags: menu, window, open, select, item, ajax
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

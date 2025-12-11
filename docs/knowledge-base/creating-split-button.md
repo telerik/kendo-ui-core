@@ -5,9 +5,9 @@ description: "Learn how to create a Split button in the Kendo UI Menu component.
 slug: howto_createa_split_button_menu
 previous_url: /controls/navigation/menu/how-to/creating-split-button
 tags: telerik, kendo, jquery, menu, create, a, split, button
-component: menu
 type: how-to
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

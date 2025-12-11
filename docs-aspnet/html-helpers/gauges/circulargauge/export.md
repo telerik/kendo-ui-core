@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Learn how to use the Export Options of the Telerik UI Circular Gauge component for {{ site.framework }}."
+components: ["circulargauge"]
 slug: export_circulargaugehelper_aspnetcore
 position: 4
 ---

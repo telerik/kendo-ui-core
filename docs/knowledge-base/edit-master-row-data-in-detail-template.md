@@ -5,9 +5,9 @@ description: "Learn how to edit records in hierarchical Kendo UI Grid widgets fo
 previous_url: /controls/data-management/grid/how-to/Editing/edit-master-row-data-in-detail-template
 slug: howto_edit_recordsin_children_grid
 tags: grid, edit, records, child, hierarchy
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

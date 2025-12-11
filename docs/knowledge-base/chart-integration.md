@@ -5,9 +5,9 @@ description: "Learn how to integrate a Kendo UI PivotGrid component with a Kendo
 slug: howto_integratewith_kendoui_chart_pivotgrid
 previous_url: /controls/charts/how-to/binding/bind-chart-to-pivotgrid-data, /controls/data-management/pivotgrid/how-to/chart-integration, /controls/charts/how-to/integration/pivotgrid-chart-integration
 tags: kendoui, pivotgrid, integrate, with, kendo, chart
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: How to Remove PDF Export Option from Spreadsheet in Kendo UI
 slug: remove-pdf-export-option-spreadsheet-kendo-ui
 tags: how-to, spreadsheet, export, PDF, Kendo UI
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

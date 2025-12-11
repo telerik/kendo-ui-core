@@ -2,6 +2,7 @@
 title: Modes of Operation
 page_title: jQuery Upload Documentation - Modes of Operation
 description: "Get started with the jQuery Upload by Kendo UI and learn how to upload files in its synchronous or asynchronous mode of operation."
+components: ["upload"]
 slug: modes_upload_widget
 position: 4
 ---

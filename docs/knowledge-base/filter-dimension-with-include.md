@@ -5,9 +5,9 @@ description: "Learn how to use the include operator to filter the data in a Kend
 previous_url: /controls/data-management/pivotgrid/how-to/filter-dimension-with-include, /controls/data-management/pivotgrid/how-to/filtering/filter-dimension-with-include
 slug: howto_use_include_operator_pivotgrid
 tags: kendoui, pivotgrid, filter, using, the, include, operator
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

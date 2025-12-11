@@ -7,6 +7,7 @@ meta_title: How to Dynamically Update Popover Content in Kendo UI for jQuery
 slug: dynamically-refresh-kendo-jquery-popover-body
 tags: kendo-ui-for-jquery, popover, dynamic-content, refresh-body, setOptions, show-event
 res_type: kb
+components: ["popover"]
 ticketid: 1692487
 ---
 

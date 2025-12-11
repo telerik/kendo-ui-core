@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the adaptive behavior of the the Telerik UI TimePicker component for {{ site.framework }}."
+components: ["timepicker"]
 slug: htmlhelpers_timepicker_adaptive_mode_aspnetcore
 position: 5
 ---

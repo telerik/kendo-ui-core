@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Virtualization
 description: "Implement virtualization in a model-bound Telerik UI AutoComplete component for {{ site.framework }}."
+components: ["autocomplete"]
 previous_url: /helpers/editors/autocomplete/virtualization
 slug: virtualization_autocomplete_aspnetcore
 position: 4

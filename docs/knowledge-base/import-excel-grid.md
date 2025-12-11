@@ -6,7 +6,7 @@ type: how-to
 slug: import-export-excel-grid
 tags: grid, excel, xlsx, spreadsheet, import, export, edit
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

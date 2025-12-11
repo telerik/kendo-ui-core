@@ -5,9 +5,9 @@ description: "Learn how to sort dimensions in a Kendo UI PivotGrid component."
 previous_url: /controls/data-management/pivotgrid/how-to/sort-dimension, /controls/data-management/pivotgrid/how-to/sorting/sort-dimension
 slug: howto_sort_dimensions_pivotgrid
 tags: kendoui, pivotgrid, sort, dimensions
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

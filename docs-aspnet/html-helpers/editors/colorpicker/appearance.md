@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI ColorPicker for {{ site.framework }}."
+components: ["colorpicker"]
 slug: appearance_colorpicker_aspnetcore
 position: 2
 ---

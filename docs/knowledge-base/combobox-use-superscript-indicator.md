@@ -6,7 +6,7 @@ page_title: Use Subscript Indicators - Kendo UI ComboBox for jQuery
 slug: combobox-use-subscript-indicators
 tags: subscript, indicators, combobox
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

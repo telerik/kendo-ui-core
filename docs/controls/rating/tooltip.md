@@ -2,6 +2,7 @@
 title: Tooltip
 page_title: jQuery Rating Documentation - Tooltip
 description: "Get started with the jQuery Rating by Kendo UI and learn how to configure the tooltip of the widget."
+components: ["rating"]
 slug: tooltip_rating_widget
 position: 5
 ---

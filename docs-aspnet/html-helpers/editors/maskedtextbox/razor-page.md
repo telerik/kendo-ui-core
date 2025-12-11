@@ -3,20 +3,17 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI MaskedTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_maskedtextboxhelper_aspnetcore
+components: ["maskedtextbox"]
 position: 8
 ---
 
 # MaskedTextBox in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI MaskedTextBox for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI MaskedTextBox for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the MaskedTextBox component in a Razor Pages scenario.
-
-For the complete project, refer to the [MaskedTextBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MaskedTextBox/MaskedTextBoxEditing.cshtml).
-
-## Binding the MaskedTextBox to a PageModel Property
+## Binding to a PageModel Property
 
 To bind the MaskedTextBox to a property from the `PageModel`, follow the next steps:
 
@@ -27,8 +24,7 @@ To bind the MaskedTextBox to a property from the `PageModel`, follow the next st
         @model IndexModel
     ```
 
-1. Declare the widget either in a form or as a stand-alone widget:
-
+1. Declare the component either in a form or as a stand-alone component:
 
     ```HtmlHelper
         @page
@@ -40,8 +36,8 @@ To bind the MaskedTextBox to a property from the `PageModel`, follow the next st
         <form method="post">
             <label for="phone_number">Phone number:</label>
             @(Html.Kendo().MaskedTextBoxFor(c=>c.PhoneNumber)
-                        .Mask("(999) 000-0000")
-                )
+                .Mask("(999) 000-0000")
+            )
             <br />
             <input type="submit" name="name" value="Submit Form" />
         </form>
@@ -57,7 +53,7 @@ To bind the MaskedTextBox to a property from the `PageModel`, follow the next st
 
         <form method="post">
             <label for="phone_number">Phone number:</label>
-            <kendo-maskedtextbox for="PhoneNumber" mask="(999) 000-0000" >
+            <kendo-maskedtextbox for="PhoneNumber" mask="(999) 000-0000">
             </kendo-maskedtextbox>
             <br />
             <input type="submit" name="name" value="Submit Form" />
@@ -84,6 +80,8 @@ To bind the MaskedTextBox to a property from the `PageModel`, follow the next st
             }
         }
     ```
+
+For the complete project, refer to the [MaskedTextBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MaskedTextBox/MaskedTextBoxEditing.cshtml).
 
 ## See Also
 

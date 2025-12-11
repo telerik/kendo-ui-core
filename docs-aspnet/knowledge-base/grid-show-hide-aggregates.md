@@ -6,6 +6,7 @@ page_title: Show or Hide Grid Aggregates
 slug: grid-show-hide-aggregates
 tags: mvc, core, grid, show, hide, aggregates
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -7,7 +7,7 @@ slug: grid-checkbox-selection-row-click-select
 tags: grid, checkbox selection, kendo ui
 ticketid: 1144198
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

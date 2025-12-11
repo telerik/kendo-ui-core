@@ -7,7 +7,7 @@ slug: troubleshooting_common_issues_combobox_kendoui
 tags: telerik, progress, kendoui, combobox, selected, item, lost, when, bound, to, shared, datasource
 type: troubleshooting
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

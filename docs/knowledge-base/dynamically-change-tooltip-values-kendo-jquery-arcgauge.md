@@ -7,6 +7,7 @@ meta_title: Update Tooltip Values Based on ArcGauge Values in Kendo UI for jQuer
 slug: dynamically-change-tooltip-values-kendo-jquery-arcgauge
 tags: kendo-ui, jquery, arcgauge, tooltip, dynamic-tooltip, refresh-method
 res_type: kb
+components: ["arcgauge"]
 ticketid: 1696114
 ---
 

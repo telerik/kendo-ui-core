@@ -6,7 +6,7 @@ page_title: Filter Only Leaf Nodes DropDownTree - Kendo UI DropDownTree for jQue
 slug: dropdowntree-filter-only-leaf-nodes
 tags: kendo, kendoui, dropdowntree, filter
 res_type: kb
-component: dropdowntree
+components: ["dropdowntree"]
 ---
 
 ## Environment

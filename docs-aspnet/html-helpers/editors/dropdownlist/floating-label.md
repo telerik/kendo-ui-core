@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: Floating Label
 description: "Learn how to initialize a floating label for the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_floatinglabel_aspnetcore
 position: 7
 ---

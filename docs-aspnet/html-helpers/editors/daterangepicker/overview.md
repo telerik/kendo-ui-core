@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the  DateRangePicker component for {{ site.framework }}."
+components: ["daterangepicker"]
 previous_url: /helpers/html-helpers/daterangepicker, /helpers/editors/daterangepicker/overview
 slug: htmlhelpers_daterangepicker_aspnetcore
 position: 0

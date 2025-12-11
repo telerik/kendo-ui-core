@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI DateRangePicker TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["daterangepicker"]
 slug: taghelpers_daterangepicker_aspnetcore
 position: 1
 ---

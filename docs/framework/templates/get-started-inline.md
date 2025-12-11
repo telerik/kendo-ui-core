@@ -2,6 +2,7 @@
 title: Getting Started with Inline Templates 
 page_title: Getting Started with Inline Templates - Kendo UI for jQuery Templates 
 description: "Get started with the jQuery Templates by Kendo UI and learn how to create and compile an inline template and display the returned HTML result."
+components: ["general"]
 slug: getting_started_inline_templates
 position: 2
 ---

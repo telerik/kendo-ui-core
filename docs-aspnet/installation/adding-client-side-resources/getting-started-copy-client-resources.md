@@ -2,6 +2,7 @@
 title: Overview
 page_title: Providing Client-Side Resources
 description: "Get started with {{ site.product }} and learn about the different ways of copying the client-side resources into a Telerik UI for ASP.NET Core project."
+components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-vscode, /mvc-6/getting-started-vscode, /getting-started/getting-started-copy-client-resources, /getting-started/installation/getting-started-copy-client-resources, /installation/getting-started-copy-client-resources, installation-mvc/adding-client-side-resources/getting-started-copy-client-resources
 slug: copyclientresources_aspnetmvc6_aspnetmvc
 position: 1

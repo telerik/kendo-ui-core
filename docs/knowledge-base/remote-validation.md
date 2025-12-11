@@ -5,9 +5,9 @@ description: "Learn how to use a remote validation in a Kendo UI or jQuery Sched
 previous_url: /controls/scheduling/scheduler/how-to/remote-validation, /controls/scheduling/scheduler/how-to/validation/remote-validation
 slug: howto_useremotevalidation_scheduler
 tags: telerik, kendo, jquery, scheduler, use, remote, validation 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

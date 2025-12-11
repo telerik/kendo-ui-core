@@ -7,6 +7,7 @@ slug: grid-editing-except-update-command
 tags: aspnet, mvc,  kendo, kendo-ui, grid, edit, operations, create, update, command, button, hide, render
 ticketid: 1382591
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI for {{ site.framework }} Responsive Panel component."
+components: ["responsivepanel"]
 slug: htmlhelpers_events_responsive_panel_aspnetcore
 position: 2
 ---

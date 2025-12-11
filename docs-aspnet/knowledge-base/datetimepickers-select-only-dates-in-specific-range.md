@@ -7,6 +7,7 @@ slug: datetimepickers-select-only-dates-in-specific-range
 tags: datetimepicker, date-selection, disable-dates, specific, date-range, restrict, rules
 ticketid: 1634938
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

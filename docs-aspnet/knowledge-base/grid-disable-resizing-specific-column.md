@@ -6,6 +6,7 @@ page_title: Disable Resizing for Specific Columns
 slug: grid-disable-resizing-specific-column
 tags: aspnet, mvc, grid, disable, resizing, for, specific, column
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

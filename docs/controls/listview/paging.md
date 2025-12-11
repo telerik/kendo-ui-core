@@ -2,6 +2,7 @@
 title: Paging
 page_title: jQuery ListView Documentation - Paging
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement a separate pager and split its content into pages."
+components: ["listview"]
 slug: paging_kendoui_listview
 position: 5
 ---

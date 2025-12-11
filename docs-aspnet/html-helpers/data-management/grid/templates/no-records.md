@@ -2,6 +2,7 @@
 title: No Records Template
 page_title: Grid No Records Template
 description: "Learn how to set a no records template in the Grid component for {{ site.framework }} if the backend does not return any data."
+components: ["grid"]
 slug: htmlhelpers_norecordstemplate_grid
 ---
 

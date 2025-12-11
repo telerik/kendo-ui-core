@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MultiSelect Documentation - MultiSelect Globalization
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn about the globalization options it supports."
+components: ["multiselect"]
 slug: globalization_multiselect
 position: 1
 ---

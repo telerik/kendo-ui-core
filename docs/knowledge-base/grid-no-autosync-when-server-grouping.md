@@ -7,6 +7,7 @@ slug: grid-no-autosync-when-server-grouping
 tags: grid, editing, grouping
 ticketid: 1145291, 1144037
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

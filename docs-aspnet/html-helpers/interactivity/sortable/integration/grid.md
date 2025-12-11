@@ -2,6 +2,7 @@
 title: Grid
 page_title: Grid Integration
 description: "Learn how to reorder Grid items when using the Telerik UI Sortable component for {{ site.framework }}."
+components: ["sortable"]
 slug: sortable_aspnetcore_integration_grid
 position: 1
 ---

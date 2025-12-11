@@ -6,7 +6,7 @@ page_title: Prevent Sorting and Filtering While Editing - Kendo UI for jQuery Da
 slug: grid-prevent-sort-filter-when-editing
 tags: grid, prevent, sort, filter, edit, create, insert
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

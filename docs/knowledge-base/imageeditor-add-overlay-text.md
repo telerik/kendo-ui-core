@@ -6,7 +6,7 @@ page_title: Create a Custom Command to Add Overlay Text in ImageEditor On Top of
 slug: imageeditor-add-overlay-text
 tags: kendo ui, imageeditor, custom, command, overlay, image
 res_type: kb
-component: imageeditor
+components: ["editor"]
 ---
 
 ## Environment

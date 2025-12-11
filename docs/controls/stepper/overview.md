@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Stepper Documentation
 description: "Get started with the jQuery Stepper by Kendo UI and learn how to initialize the widget."
+components: ["stepper"]
 slug: overview_stepper_widget
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Exporting Tabular Data to PDF
 page_title: Exporting Tabular Data to PDF - Kendo UI Drawing Library
 description: "Learn how to export a wide Kendo UI Grid into PDF."
+components: ["general"]
 slug: tabulardata_drawingapi
 position: 5
 ---

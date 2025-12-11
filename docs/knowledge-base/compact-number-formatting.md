@@ -6,6 +6,7 @@ type: how-to
 slug: compact-number-formatting
 tags: format, number, compact, thousands, millions, billions, notation, display, kendo ui for jquery, intl, internationalization
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Hierarchy
 page_title: Hierarchy
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and display its parent and child records by applying hierarchy to its structure."
+components: ["grid"]
 slug: hierarchy_grid_htmlhelper_aspnetcore
 position: 17
 ---

@@ -7,6 +7,7 @@ type: how-to
 tags: menu, navigation, url, action, link, routing
 component: menu
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

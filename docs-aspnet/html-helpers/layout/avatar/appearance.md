@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Avatar Appearance
 description: "Learn how to customize the appearance of the widget Telerik UI Avatar HtmlHelper for {{ site.framework }}."
+components: ["avatar"]
 slug: appearance_avatar_aspnetcore
 position: 2
 ---

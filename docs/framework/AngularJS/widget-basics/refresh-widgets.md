@@ -2,6 +2,7 @@
 title: Refreshing Widgets
 page_title: Refreshing Widgets upon Option Changes | AngularJS Directives
 description: "Learn how to refresh Kendo UI widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#updating-widgets-upon-option-changes
 slug: angularjs_integration_rebind
 position: 3

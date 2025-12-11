@@ -7,7 +7,7 @@ slug: listview-two-pagers
 tags: listview, paging, pager, mvc, kendo ui, two pagers
 ticketid: 1111995
 res_type: kb
-component: listview
+components: ["listview"]
 ---
 
 ## Environment

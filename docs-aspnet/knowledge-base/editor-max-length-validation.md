@@ -7,6 +7,7 @@ slug: editor-max-length-validation
 tags: editor, maxlength, max, maximum, length, text, validate, validation, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/add-max-length-validation, /html-helpers/editors/editor/how-to/add-max-length-validation
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

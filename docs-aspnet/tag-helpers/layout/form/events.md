@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Get started with the Telerik UI Form TagHelper for {{ site.framework }} and learn how to set up events."
+components: ["form"]
 slug: taghelpers_form_aspnetcore_events
 position: 5
 ---

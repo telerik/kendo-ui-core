@@ -7,6 +7,7 @@ slug: grid-show-tooltip-custom-command
 tags: grid, command, tooltip
 ticketid: 1148238
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

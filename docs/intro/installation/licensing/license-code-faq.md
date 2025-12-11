@@ -2,6 +2,7 @@
 title: Script License File FAQ
 page_title: Script License File FAQ - Download and Installation
 description: "Find answers to the most common questions related to the script license file that is required when using Kendo UI for jQuery scripts from CDN and NPM distributions."
+components: ["general"]
 slug: license-code-faq
 published: True
 previous_url: /intro/installation/license-code-faq

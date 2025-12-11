@@ -6,6 +6,7 @@ page_title: Display a LinearGauge in a Popover When Click on a Grid Cell
 slug: grid-linear-gauge-in-popover
 tags: grid, linear, gauge, popover
 res_type: kb
+components: ["general"]
 ticketid: 1571483
 component: grid, linearGauge, popover
 ---

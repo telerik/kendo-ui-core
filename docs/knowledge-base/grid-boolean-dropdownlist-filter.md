@@ -7,6 +7,7 @@ slug: grid-boolean-dropdownlist-filter
 tags: grid, boolean, filter, template, dropdownlist
 ticketid: 1403934
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

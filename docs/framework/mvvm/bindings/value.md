@@ -2,6 +2,7 @@
 title: Value
 page_title: Value Binding - Kendo UI MVVM
 description: "Learn how to keep the value of a DOM widget and the value of a View-Model field in sync by using the value binding in Kendo UI MVVM."
+components: ["mvvm"]
 slug: valuebinding_mvvm_kendoui
 ---
 

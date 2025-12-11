@@ -5,9 +5,9 @@ description: "Learn how to add custom actions to the undo-redo stack of the Kend
 slug: howto_modify_undoredo_stack
 previous_url: /controls/diagrams-and-maps/diagram/how-to/modify-undo-redo-stack
 tags: kendo, jquery, diagram, modify, undo, redo, stack
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

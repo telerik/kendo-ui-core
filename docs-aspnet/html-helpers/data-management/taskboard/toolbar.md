@@ -2,6 +2,7 @@
 title: Toolbar
 page_title: Toolbar
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn how to configure its toolbar."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_toolbar
 position: 9
 ---

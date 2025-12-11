@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn how to customize its templates."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_templates
 position: 8
 ---

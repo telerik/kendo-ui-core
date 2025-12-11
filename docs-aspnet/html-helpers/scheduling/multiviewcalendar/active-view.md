@@ -2,6 +2,7 @@
 title: Active View
 page_title: Active View
 description: "Define the first view that the Telerik UI MultiViewCalendar initially renders."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/active-view
 slug: active_view_multiviewcalendar_htmlhelper_aspnetcore
 position: 2

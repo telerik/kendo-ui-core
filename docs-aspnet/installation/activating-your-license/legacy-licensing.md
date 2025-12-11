@@ -2,6 +2,7 @@
 title: (Legacy) Setting Up Your License Before 2025 Q1
 page_title: Setting Up Your License Before 2025 Q1
 description: Learn how to create and reference a Telerik script key file, which is required during application building and deployment for older versions of the product.
+components: ["general"]
 slug: installation_legacy_licensing_aspnetcore
 tags: installation, license, key, old, legacy, script, key
 position: 1

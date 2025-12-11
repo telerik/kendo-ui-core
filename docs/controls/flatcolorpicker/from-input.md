@@ -2,6 +2,7 @@
 title: From Input
 page_title: FlatColorPicker Documentation - From Input Documentation
 description: "Learn about the alternative options of the jQuery ColorPicker by Kendo UI."
+components: ["flatcolorpicker"]
 slug: getting_started_kendoui_frominput_component
 position: 7
 ---

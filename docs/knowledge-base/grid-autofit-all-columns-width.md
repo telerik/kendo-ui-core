@@ -7,6 +7,7 @@ slug: grid-autofit-all-columns-width
 tags: grid, autofit, auto, fit, automatically, columns, width, show, all, data
 ticketid: 1148885
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

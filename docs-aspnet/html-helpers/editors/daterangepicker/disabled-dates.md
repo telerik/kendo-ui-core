@@ -2,6 +2,7 @@
 title: Disabled Dates
 page_title: Disabled Dates
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to disable specific dates."
+components: ["daterangepicker"]
 slug: disableddates_daterangepicker_aspnetcore
 position: 10
 ---

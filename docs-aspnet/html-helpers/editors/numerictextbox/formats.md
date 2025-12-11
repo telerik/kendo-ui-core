@@ -2,6 +2,7 @@
 title: Formats
 page_title: Formats
 description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn how to create currency and percentage textboxes."
+components: ["numerictextbox"]
 slug: formats_numerictextbox_aspnetcore
 position: 2
 ---

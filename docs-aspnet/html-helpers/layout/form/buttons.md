@@ -2,6 +2,7 @@
 title: Buttons
 page_title: Buttons
 description: "Get started with the Telerik UI for {{ site.framework }} Form and learn how to configure the buttons."
+components: ["form"]
 slug: form_aspnetcore_buttons
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Spreadsheet Documentation | Spreadsheet Accessibility
 description: "Get started with the {{ site.product }} Spreadsheet and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_accessibility
 position: 1
 ---

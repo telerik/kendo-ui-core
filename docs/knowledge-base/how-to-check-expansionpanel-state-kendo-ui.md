@@ -6,6 +6,7 @@ page_title: How to Check the Expansion State of a Kendo UI ExpansionPanel
 slug: how-to-check-expansionpanel-state-kendo-ui
 tags: kendo-ui, expansionpanel, jquery, state, expanded, collapsed
 res_type: kb
+components: ["expansionpanel"]
 ticketid: 1671321
 ---
 

@@ -6,6 +6,7 @@ type: how-to
 slug: grid-persist-state-and-function-references
 tags: grid, persist, state, function, reference
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

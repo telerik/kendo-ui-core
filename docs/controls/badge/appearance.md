@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Badge Documentation - Badge Appearance
 description: "Get started with the jQuery Badge by Kendo UI and learn how to customize the appearance of the widget."
+components: ["badge"]
 slug: appearance_kendoui_badge_widget
 position: 2
 ---

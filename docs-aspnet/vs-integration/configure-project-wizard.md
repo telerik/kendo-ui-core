@@ -2,6 +2,7 @@
 title: Configuring Existing Projects
 page_title: Configuring Existing Projects
 description: "Learn how to configure a {{ site.product }} application with Visual Studio."
+components: ["installerandvsextensions"]
 previous_url: /installation/vs-integration/configure-project-wizard, /getting-started/vs-integration/configure-project-wizard, /vs-integration-mvc/configure-project-wizard
 slug: projectwizardconfig_visualstudio_aspnetcore
 position: 13

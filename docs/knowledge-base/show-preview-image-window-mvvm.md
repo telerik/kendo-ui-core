@@ -5,9 +5,9 @@ description: "Learn how to show a preview of an image in a window by using MVVM 
 previous_url: /controls/data-management/grid/how-to/show-preview-image-window-mvvm, /controls/data-management/grid/how-to/various/show-preview-image-window-mvvm
 slug: howto_show_preview_image_window_MVVM
 tags: show, image, preview, window, mvvm, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

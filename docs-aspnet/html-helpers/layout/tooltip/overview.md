@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Tooltip component for {{ site.framework }}."
+components: ["tooltip"]
 previous_url: /helpers/html-helpers/tooltip, /helpers/layout/tooltip/overview
 slug: htmlhelpers_tooltip_aspnetcore
 position: 1

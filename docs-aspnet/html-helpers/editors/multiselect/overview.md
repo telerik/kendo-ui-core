@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI MultiSelect component for {{ site.framework }} enables users to select multiple items, supports local and remote data binding, and provides templates for easier customization."
+components: ["multiselect"]
 previous_url: /helpers/html-helpers/multiselect, /helpers/editors/multiselect/overview
 slug: htmlhelpers_multiselect_aspnetcore
 position: 0

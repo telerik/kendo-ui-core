@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Learn how to enable the selection functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_selection
 position: 11
 ---

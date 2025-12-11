@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Context Menu component by following a complete step-by-step tutorial."
+components: ["menu"]
 slug: context_menu_getting_started
 position: 1
 ---

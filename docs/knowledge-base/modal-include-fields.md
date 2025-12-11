@@ -5,9 +5,9 @@ description: "Learn how to make the Include fields filter window modal in a Kend
 previous_url: /controls/data-management/pivotgrid/how-to/modal-include-fields, /controls/data-management/pivotgrid/how-to/appearance/modal-include-fields
 slug: howto_make_include_fields_window_modal_pivotgrid
 tags: pivotgrid, make, include, fields, window, modal
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

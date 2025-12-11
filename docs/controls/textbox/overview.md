@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TextBox Documentation - TextBox Overview
 description: "Learn about the jQuery TextBox by Kendo UI and see the features it supports."
+components: ["textbox"]
 slug: overview_kendoui_textbox_widget
 position: 0
 ---

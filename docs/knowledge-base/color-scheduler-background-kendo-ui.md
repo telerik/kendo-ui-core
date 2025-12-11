@@ -6,6 +6,7 @@ page_title: How toSet Different Colors for Every Working Day in Scheduler Week V
 slug: color-scheduler-background-kendo-ui
 tags: kendo-ui, scheduler, color, background, working hours, customization
 res_type: kb
+components: ["scheduler"]
 ticketid: 1665622
 ---
 

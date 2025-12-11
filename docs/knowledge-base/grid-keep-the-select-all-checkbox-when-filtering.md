@@ -7,7 +7,7 @@ slug: grid-keep-the-select-all-checkbox-when-filtering
 tags: grid, selctall, multi, filter, show, check, checkbox
 ticketid: 1498839
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI BottomNavigation component for {{ site.framework }}."
+components: ["bottomnavigation"]
 slug: events_bottomnavigation
 position: 5
 ---

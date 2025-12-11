@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The {{ site.product }} suite comes with a set of built-in themes that you can choose from. Bootstrap and Material themes are also included."
+components: ["general"]
 slug: sassbasedthemes_overview
 previous_url: /styles-and-layout/sass-themes/installation, /styles-and-layout/sass-themes/browser-support, /styles-and-layout/sass-themes/swatches, /styles-and-layout/figma-kits, /styles-and-layout/sass-themes/figma-kits
 position: 1

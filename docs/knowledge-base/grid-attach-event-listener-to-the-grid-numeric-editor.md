@@ -7,6 +7,7 @@ slug: grid-attach-event-listener-to-the-grid-numeric-editor
 tags: grid, numeric, editor, event
 ticketid: 1142675
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Add the Shopping Cart
 page_title: Add the Shopping Cart - Music Store Web App Tutorial
 description: "Learn how to add the Shopping Cart feature to the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: implementshoppingcart_muscistorewebapp_aspnetmvc
 position: 7
 ---

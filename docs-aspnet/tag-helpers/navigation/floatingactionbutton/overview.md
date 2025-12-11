@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI FloatingActionButton TagHelper for ASP.NET Core."
+components: ["floatingactionbutton"]
 slug: taghelpers_floatingactionbutton_aspnetcore_overview
 position: 1
 ---

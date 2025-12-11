@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Layout
 page_title: Individual Scripts for Layout
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Layout"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-layout, /installation/scripts/scripts-layout
 slug: script_filesfor_layout_widgets
 ---

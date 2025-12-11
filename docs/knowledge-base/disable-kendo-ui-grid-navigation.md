@@ -6,6 +6,7 @@ page_title: How to Disable Kendo UI for jQuery Grid and Its Navigation
 slug: disable-kendo-ui-grid-navigation
 tags: kendo, ui, grid, disable, navigation, jquery
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

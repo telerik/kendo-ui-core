@@ -7,7 +7,7 @@ slug: gantt-task-progress-drag-handle
 tags: gantt, task, progress, drag, handle, template
 ticketid: 1107725
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

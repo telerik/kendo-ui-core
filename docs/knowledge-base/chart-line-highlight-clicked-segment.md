@@ -7,6 +7,7 @@ slug: chart-line-highlight-clicked-segment
 tags: chart, line, highlight, click, series
 ticketid: 1152454
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

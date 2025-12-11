@@ -7,6 +7,7 @@ slug: grid-group-responsive-columns
 tags: grid, responsive, grouping, column, design, min, width, minimum, media, query, columns
 ticketid: 1538994
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

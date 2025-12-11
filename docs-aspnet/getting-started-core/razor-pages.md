@@ -2,6 +2,7 @@
 title: Using Razor Pages
 page_title: Using Razor Pages
 description: "Get started with Razor Pages and Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
+components: ["general"]
 previous_url: /getting-started/razor-pages-integration, /getting-started/installation/razor-pages-integration, /compatibility/razor-pages-integration, /getting-started/helper-basics/razor-pages
 slug: razor_pages_integration_aspnetmvc6_aspnetmvc
 permalink: /getting-started/razor-pages
@@ -84,10 +85,10 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
                 }).Width(230);
             })
             .DataSource(ds => ds.Ajax()
-                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
-                .Update(u => u.Url("/Index?handler=Update").Data("forgeryToken"))
-                .Create(c => c.Url("/Index?handler=Create").Data("forgeryToken"))
-                .Destroy(d => d.Url("/Index?handler=Destroy").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
+                .Update(u => u.Url(Url.Page("Index", "Update")).Data("forgeryToken"))
+                .Create(c => c.Url(Url.Page("Index", "Create")).Data("forgeryToken"))
+                .Destroy(d => d.Url(Url.Page("Index", "Destroy")).Data("forgeryToken"))
                 .Model(m => m.Id(id => id.OrderID))
                 .PageSize(10)
             )
@@ -116,10 +117,10 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
             </columns>
             <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken" />
-                    <create url="/Index?handler=Create" data="forgeryToken" />
-                    <update url="/Index?handler=Update" data="forgeryToken" />
-                    <destroy url="/Index?handler=Destroy" data="forgeryToken" />
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken" />
+                    <create url="@Url.Page("Index", "Create")" data="forgeryToken" />
+                    <update url="@Url.Page("Index", "Update")" data="forgeryToken" />
+                    <destroy url="@Url.Page("Index", "Destroy")" data="forgeryToken" />
                 </transport>
                 <schema data="Data" total="Total" errors="Errors">
                     <model id="OrderID">
@@ -215,7 +216,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
         }
     ```
 
-## Post data from a Razor Page
+## Posting Data from a Razor Page
 
 You can post data to the PageModel by binding the model properties to ASP.NET Core Razor components that serve as  editors and submitting the entire model through a form. The example below demonstrates how to post the selected option from the [AutoComplete component]({% slug htmlhelpers_autocomplete_aspnetcore %}) to the PageModel:
 

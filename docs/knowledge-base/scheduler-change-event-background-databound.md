@@ -7,7 +7,7 @@ slug: scheduler-change-event-background-databound
 tags: background, change, databound, scheduler
 ticketid: 1494386
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

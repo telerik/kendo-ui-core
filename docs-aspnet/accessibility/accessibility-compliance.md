@@ -2,6 +2,7 @@
 title: Compliance
 page_title: Accessibility Compliance
 description: "Compliance with the accessibility standards and requirements in the {{ site.product }} suite."
+components: ["general"]
 slug: compliance_accessibility
 position: 2
 ---

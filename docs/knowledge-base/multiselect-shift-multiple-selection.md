@@ -6,8 +6,8 @@ page_title: Select Multiple Items in MultiSelect by Holding Shift Key - Kendo UI
 slug: multiselect-shift-multiple-selection
 tags: multiselect, shift, multiple, selection
 res_type: kb
+components: ["multiselect"]
 ticketid: 1540791
-component: multiselect
 ---
 
 ## Environment

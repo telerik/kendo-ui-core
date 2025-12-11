@@ -8,6 +8,7 @@ position:
 tags: datepicker, clear, footer
 ticketid: 1456583
 res_type: kb
+components: ["timepicker"]
 ---
 
 ## Environment

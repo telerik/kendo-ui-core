@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Wizard Documentation - Wizard Keyboard Navigation
 description: "Get started with the jQuery Wizard by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["wizard"]
 slug: keynav_wizard_jquery
 position: 2
 ---

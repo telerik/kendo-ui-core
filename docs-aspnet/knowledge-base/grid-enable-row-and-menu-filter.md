@@ -7,6 +7,7 @@ tags: telerik, grid, filter, row, menu, mode
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

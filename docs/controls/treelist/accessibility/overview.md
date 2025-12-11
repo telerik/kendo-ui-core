@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery TreeList Documentation | TreeList Accessibility
 description: "Get started with the jQuery TreeList by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["treelist"]
 slug: jquery_treelist_accessibility
 position: 1
 ---

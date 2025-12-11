@@ -6,6 +6,7 @@ page_title: Incorrect Drop-Down Position with Scrolled Pages
 slug: dropdown-position-incorrect-with-scroll
 ticketid: 1398729, 1387564
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

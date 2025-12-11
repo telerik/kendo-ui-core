@@ -2,6 +2,7 @@
 title: Overview
 page_title: ExpansionPanel Documentation | ExpansionPanel Accessibility
 description: "Get started with the {{ site.product }} ExpansionPanel and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["expansionpanel"]
 slug: htmlhelpers_expansionpanel_accessibility
 position: 1
 ---

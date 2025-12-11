@@ -2,6 +2,7 @@
 title: Inline
 page_title: Inline Editing
 description: "Get started with the Inline edit mode of the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: inlineediting_grid_aspnetcore
 position: 2
 ---

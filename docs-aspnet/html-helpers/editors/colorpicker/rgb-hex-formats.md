@@ -2,6 +2,7 @@
 title: RGB and HEX Formats
 page_title: RGB and HEX Formats
 description: "Learn more about the input formats of the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 slug: htmlhelpers_formats_colorpickerhelper_aspnetcore
 position: 5
 ---

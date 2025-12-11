@@ -2,6 +2,7 @@
 title: Overview
 page_title: ListBox Documentation | ListBox Accessibility
 description: "Get started with the {{ site.product }} ListBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["listbox"]
 slug: htmlhelpers_listbox_accessibility
 position: 1
 ---

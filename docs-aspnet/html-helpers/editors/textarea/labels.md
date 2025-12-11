@@ -2,6 +2,7 @@
 title: Labels
 page_title: Labels
 description: "How to add a Label to the TextArea component for {{ site.framework }}."
+components: ["textarea"]
 slug: htmlhelpers_textarea_labels
 position: 2
 ---

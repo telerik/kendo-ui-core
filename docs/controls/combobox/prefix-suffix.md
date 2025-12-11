@@ -2,6 +2,7 @@
 title: Prefix and Suffix
 page_title: jQuery ComboBox Documentation - Prefix and Suffix
 description: "Learn how to add custom items as prefix and suffix adornments to enhance the user interface interactivity when using the Kendo UI for jQuery ComboBox."
+components: ["combobox"]
 slug: prefix_suffix_combobox
 position: 11
 ---

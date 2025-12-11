@@ -7,6 +7,7 @@ previous_url: /how-to/define-custom-helper-methods-for-mvc
 slug: define-custom-helpers
 tags: grid, htmlhelper, custom, component, extend, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

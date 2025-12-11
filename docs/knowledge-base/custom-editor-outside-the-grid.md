@@ -5,9 +5,9 @@ description: "Learn how to show a custom editor, which uses the currently select
 previous_url: /controls/data-management/grid/how-to/Editing/custom-editor-outside-the-grid
 slug: howto_use_show_custom_editor_selected_item_outside_grid
 tags: grid, custom, editor, selected, item, outside
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

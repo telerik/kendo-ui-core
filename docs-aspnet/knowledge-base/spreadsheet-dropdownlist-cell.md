@@ -6,6 +6,7 @@ page_title: Adding a DropDownList in a Spreadsheet Cell
 slug: spreadsheet-dropdownlist-cell
 tags: spreadsheet, dropdown, dropdownlist, list, custom, cell, remote, server, data
 res_type: kb
+components: ["general"]
 component: spreadsheet
 ---
 

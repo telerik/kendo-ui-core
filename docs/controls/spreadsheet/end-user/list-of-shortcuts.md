@@ -2,6 +2,7 @@
 title: List of Keyboard Shortcuts
 page_title: jQuery Spreadsheet Documentation - List of Keyboard Shortcuts
 description: "Get started with the jQuery Spreadsheet by Kendo UI and check out the list of its keyboard shortcuts."
+components: ["spreadsheet"]
 slug: list_ofkeyboard_shortcuts_spreadsheet_widget
 position: 3
 ---

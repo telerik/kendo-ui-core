@@ -2,6 +2,7 @@
 title: License Activation Errors and Warnings
 page_title: Specific License Warnings and Errors When Using Kendo UI for jQuery Without a License or with an Invalid License.
 description: "Understand the license Warnings and errors when using Kendo UI for jQuery without a license or with an invalid license."
+components: ["general"]
 slug: activation-error-warnings
 previous_url: /knowledge-base/invalid-license
 published: True

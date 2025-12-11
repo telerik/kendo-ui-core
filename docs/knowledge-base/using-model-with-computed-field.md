@@ -5,9 +5,9 @@ description: "Apply source and template binding by using a Model with a computed
 slug: howto_applysourceandtemplatebinding_usingmodelcomputedfield_mvvm
 previous_url: /framework/mvvm/how-to/using-model-with-computed-field
 tags: telerik, kendo, jquery, mvvm, pattern, architecture, apply, source, template, bindings, using, model, with, computed, field
-component: mvvm pattern
 type: how-to
 res_type: kb
+components: ["mvvm pattern"]
 ---
 
 ## Environment

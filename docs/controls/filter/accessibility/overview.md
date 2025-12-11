@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery Filter Documentation | Filter Accessibility
 description: "Get started with the jQuery Filter by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["filter"]
 slug: jquery_filter_accessibility
 position: 1
 ---

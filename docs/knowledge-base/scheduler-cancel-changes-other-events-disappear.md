@@ -6,7 +6,7 @@ slug: scheduler_cancel_changes_events_disappear
 tags: telerik, progress, kendoui, scheduler, when, cancel, changes, other, events, disappear
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

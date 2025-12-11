@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: jQuery Spreadsheet Documentation - Excel Export
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to export the content of the component in an Excel file in the browser."
+components: ["spreadsheet"]
 slug: export_toexcel_spreadsheet_widget
 position: 2
 ---

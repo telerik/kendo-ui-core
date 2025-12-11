@@ -2,6 +2,7 @@
 title: Scrolling to a Specific Item
 page_title: jQuery Grid Documentation - Scrolling to an Item
 description: "Get started with the jQuery Grid by Kendo UI supporting programmatic scrolling to items."
+components: ["grid"]
 slug: scroll-to-item_kendoui_grid_component
 position: 4
 ---

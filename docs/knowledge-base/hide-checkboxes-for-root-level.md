@@ -5,9 +5,9 @@ description: "Learn how to use the checkboxes.template configuration option to h
 slug: howto_hidecheckboxesforrootlevel_treeview
 previous_url: /controls/navigation/treeview/how-to/templates/hide-checkboxes-for-root-level
 tags: telerik, kendo, jquery, treeview, hide, checkboxes, for, root, level, items
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

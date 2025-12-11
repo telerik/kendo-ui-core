@@ -7,6 +7,7 @@ meta_title: Get Data of Selected Rows in Kendo UI for jQuery Grid
 slug: get-selected-rows-data-kendo-jquery-grid-toolbar
 tags: grid, kendo-ui-for-jquery, selectable, toolbar, selected-rows
 res_type: kb
+components: ["grid"]
 ticketid: 1694348
 ---
 

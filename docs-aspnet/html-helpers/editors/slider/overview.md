@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Slider for {{ site.framework }}."
+components: ["slider"]
 previous_url: /helpers/editors/slider/overview
 slug: overview_sliderhelper_aspnetcore
 position: 0

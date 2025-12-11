@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_keynav
 position: 2
 ---

@@ -7,6 +7,7 @@ meta_title: Toggle Boolean Values on Cell Click in Kendo UI for jQuery Spreadshe
 slug: toggle-boolean-values-spreadsheet-kendo-jquery
 tags: kendo-ui-for-jquery, spreadsheet, select-event, toggle-values, boolean
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1696644
 ---
 

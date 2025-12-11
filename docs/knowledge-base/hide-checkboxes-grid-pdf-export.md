@@ -6,6 +6,7 @@ page_title: How to Hide Selectable Column Checkboxes in Grid PDF Export
 slug: hide-checkboxes-grid-pdf-export
 tags: kendo, ui, grid, jquery, pdf, export, checkbox, hide
 res_type: kb
+components: ["grid"]
 ticketid: 1675794
 ---
 

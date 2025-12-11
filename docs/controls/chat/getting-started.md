@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Chat Documentation - Getting Started with the Chat
 description: "Get started with the jQuery Chat by Kendo UI and learn how to create and initialize the component in a few easy steps."
+components: ["chat"]
 slug: getting_started_kendoui_chat_component
 position: 2
 ---

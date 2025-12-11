@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Loader Documentation - Getting Started with the Loader
 description: "Get started with the jQuery Loader by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["loader"]
 slug: getting_started_kendoui_loader_widget
 position: 1
 ---

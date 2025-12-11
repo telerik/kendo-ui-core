@@ -2,6 +2,7 @@
 title: Overview
 page_title: Editing Overview
 description: "Get started with the editing functionality of the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/editing/ajax-editing, /helpers/data-management/grid/editing/batch-editing, /helpers/data-management/grid/editing/server-editing, /helpers/data-management/grid/editing/webapi-editing, /html-helpers/data-management/grid/editing/custom, /html-helpers/data-management/grid/templates/editor-templates
 slug: htmlhelpers_grid_aspnetcore_editing_overview
 position: 1

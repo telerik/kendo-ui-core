@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik {{ site.framework }} AI Tooling Overview
 description: "Learn about the AI-powered developer tools that integrate with your IDE or code editor for greater productivity and enhanced developer experience."
+components: ["aicodingassistant"]
 slug: overview_ai
 position: 1
 ---

@@ -5,9 +5,9 @@ description: "Learn how to format the cell values of the Kendo UI Grid during Ex
 previous_url: /controls/data-management/grid/how-to/excel/cell-format
 slug: howto_format_cell_values_grid
 tags: grid, cell, values
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

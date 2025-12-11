@@ -7,7 +7,7 @@ slug: grid-tab-order-edit-frozen-columns
 tags: grid, frozen, columns, tab, order, focus, input, buttons, tabbing, tabindex
 ticketid: 1142004
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

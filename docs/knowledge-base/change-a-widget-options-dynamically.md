@@ -7,7 +7,7 @@ slug: change-a-widget-options-dynamically
 previous_url: /knowledge-base/how-to-change-a-widget-options-dinamically
 tags: grid, setoptions, dynamically, options
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-column-title-click-group
 tags: grid, column, title, click, group
 ticketid: 1072636
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

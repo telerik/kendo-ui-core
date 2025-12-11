@@ -2,6 +2,7 @@
 title: Responsive Columns
 page_title: Responsive Columns
 description: "Learn how to make the Telerik UI for {{ site.framework}} Grid columns responsive for different viewport dimensions."
+components: ["grid"]
 slug: responsive_columns_grid
 position: 12
 ---

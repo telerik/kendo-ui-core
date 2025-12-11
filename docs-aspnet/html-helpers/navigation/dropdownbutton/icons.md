@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Get started with the Telerik UI {{ site.platform }} DropDownButton and add background, image, or font icons to enhance the visualization of the widget."
+components: ["dropdownbutton"]
 slug: htmlhelpers_dropdownbutton_aspnetcore_icons
 position: 4
 ---

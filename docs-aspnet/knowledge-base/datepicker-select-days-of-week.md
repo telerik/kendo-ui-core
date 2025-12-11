@@ -8,6 +8,7 @@ component: datepicker
 type: how-to
 ticketid: 1580901
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

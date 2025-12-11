@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started with the ChipList
 description: "Get started with the Telerik UI for {{ site.framework }} and learn how to create, initialize, and enable the component by following the complete step-by-step tutorial."
+components: ["chiplist"]
 slug: chiplist_aspnetcore_get_started
 position: 2
 ---

@@ -7,6 +7,7 @@ slug: scheduler-scroll-timeline-to-event
 tags: kendo, kendoui, scheduler, timeline, scroll, select, event
 ticketid: 1141944
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

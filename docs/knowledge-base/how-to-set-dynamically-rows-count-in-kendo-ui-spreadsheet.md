@@ -6,6 +6,7 @@ page_title: How to Set Rows Count Dynamically in the Kendo UI Spreadsheet
 slug: how-to-set-dynamically-rows-count-in-kendo-ui-spreadsheet
 tags: kendo-ui, spreadsheet, rows, datasource, setdatasource, dynamically
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1683653
 ---
 

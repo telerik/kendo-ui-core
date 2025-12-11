@@ -2,6 +2,7 @@
 title: Tooltip
 page_title: Tooltip
 description: "Learn how to configure the tooltip of the Telerik UI Rating for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/tooltip
 slug: htmlhelpers_rating_aspnetcore_tooltip
 position: 5

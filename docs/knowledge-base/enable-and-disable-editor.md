@@ -5,9 +5,9 @@ description: "Learn how to enable and disable the Kendo UI Editor."
 previous_url: /controls/editors/editor/how-to/enable-and-disable-editor, /controls/editors/editor/how-to/customize/enable-and-disable-editor
 slug: howto_enable_and_disable_the_editor_editor
 tags: telerik, kendo, jquery, editor, enable, and, disable
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

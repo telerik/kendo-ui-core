@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn more about the Telerik UI RadioButton component for {{ site.framework }} and its built-in features like model binding, initially checked state, and a setting to disable the button."
+components: ["radiobutton"]
 previous_url: /helpers/navigation/radiobutton/overview
 slug: htmlhelpers_radiobutton_aspnetcore
 position: 0

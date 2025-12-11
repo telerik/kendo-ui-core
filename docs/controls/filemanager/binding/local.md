@@ -2,6 +2,7 @@
 title: Local Data
 page_title: jQuery FileManager Documentation - Local Binding in FileManager
 description: "Get understanding in the Local Binding in FileManager."
+components: ["filemanager"]
 slug: localdata_kendoui_filemanager_widget
 position: 1
 ---

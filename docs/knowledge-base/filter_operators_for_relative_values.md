@@ -4,10 +4,10 @@ page_title: Create Custom Filter Operators for Relative Values - Kendo UI for jQ
 description: "Learn how to create custom operators for relative values in the Kendo UI Filter for jQuery."
 slug: filter_operators_for_relative_values
 tags: filter, operator, relative, value
-component: filter
 type: how-to
 ticketid: 1618700
 res_type: kb
+components: ["filter"]
 ---
 
 ## Environment

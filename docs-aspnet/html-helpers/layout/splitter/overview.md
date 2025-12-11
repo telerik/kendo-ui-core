@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Splitter component for {{ site.framework }} provides a dynamic layout of resizable and collapsible panes."
+components: ["splitter"]
 previous_url: /helpers/html-helpers/splitter, /helpers/layout/splitter/overview
 slug: htmlhelpers_splitter_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn about the accessibility support that the {{ site.product }} DateInput component provides through its keyboard navigation functionality."
+components: ["dateinput"]
 slug: htmlhelpers_dateinput_accessibility_keyboardnavigation
 position: 2
 ---

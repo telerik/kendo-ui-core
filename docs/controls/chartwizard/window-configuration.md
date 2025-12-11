@@ -2,6 +2,7 @@
 title: Window Configuration
 page_title: jQuery ChartWizard Documentation - Window Configuration
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn more about the supported Window settings."
+components: ["chartwizard"]
 slug: window_kendoui_chartwizard
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI DropDownList Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} DropDownList using various data binding approaches."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/binding/overview
 slug: htmlhelpers_dropdownlist_databinding_aspnetcore
 position: 1

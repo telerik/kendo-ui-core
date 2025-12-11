@@ -2,6 +2,7 @@
 title: Start and End Time
 page_title: jQuery DateTimePicker Documentation - Start and End Time
 description: "Learn how to set the Start and End Time for the Kendo UI for jQuery DateTimePicker component."
+components: ["datetimepicker"]
 slug: start_end_time_kendoui_datetimepicker_widget
 position: 11
 ---

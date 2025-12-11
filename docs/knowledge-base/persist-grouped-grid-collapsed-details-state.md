@@ -5,9 +5,9 @@ description: "Learn how to create persist the collapsed state of grouped records
 previous_url: /controls/data-management/grid/how-to/persist-grouped-grid-collapsed-details-state, /controls/data-management/grid/how-to/state/persist-grouped-grid-collapsed-details-state
 slug: howto_persist_collapsed_stateof_grouped_records_grid
 tags: persist, collapsed, state, grid, grouped, records, data, items
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

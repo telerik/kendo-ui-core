@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery MultiViewCalendar Documentation - Keyboard Navigation
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["multiviewcalendar"]
 previous_url: /controls/multiviewcalendar/keyboard-navigation
 slug: keyboard_navigation_multiviewcalendar
 position: 2

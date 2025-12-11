@@ -6,6 +6,7 @@ page_title: Implementing Multiple Filters on One Column - Kendo UI Grid | Kendo 
 slug: implementing-multiple-filters-on-one-column-kendo-ui-grid
 tags: kendo ui, grid, filter, multiple filters, string filter, multi-filter
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

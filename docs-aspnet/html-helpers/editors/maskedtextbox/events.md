@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI MaskedTextBox component for {{ site.framework }}."
+components: ["maskedtextbox"]
 slug: events_maskedtextbox_aspnetcore
 position: 7
 ---

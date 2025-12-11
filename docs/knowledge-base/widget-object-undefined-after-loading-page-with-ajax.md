@@ -6,7 +6,7 @@ slug: widget_object_udefined_after_loading_page_ajax
 tags: telerik, kendoui, jquery, troubleshooting, error, widget, object, undefined, afetr, loading, page, with, ajax 
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

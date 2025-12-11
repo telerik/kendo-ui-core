@@ -7,7 +7,7 @@ slug: grid-custom-command-mousedown-toolbar
 tags: grid, command, toolbar, mousedown, create, save, cancel
 ticketid: 1134663
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

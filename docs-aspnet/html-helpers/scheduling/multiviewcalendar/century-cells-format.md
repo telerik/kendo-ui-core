@@ -2,6 +2,7 @@
 title: Century Cells Format
 page_title: Century Cells Format
 description: "Get started with the Telerik UI MultiViewCalendar component for {{ site.framework }} Century Cell Formats Functionality"
+components: ["multiviewcalendar"]
 slug: htmlhelpers_century_cells_format_multiviewcalendar_aspnetcore
 position: 7
 ---

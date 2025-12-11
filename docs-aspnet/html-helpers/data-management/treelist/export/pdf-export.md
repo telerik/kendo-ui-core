@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PDF Export
 description: "Export the Telerik UI TreeList for {{ site.framework }} to PDF."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_pdfexport
 position: 3
 ---

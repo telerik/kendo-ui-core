@@ -6,6 +6,7 @@ page_title: How to Include Multiple Icons in a Kendo UI Button
 slug: how-to-add-multiple-icons-kendo-ui-button
 tags: kendo-ui, jquery, button, icons, svg, iconclass
 res_type: kb
+components: ["button"]
 ticketid: 1672719
 ---
 

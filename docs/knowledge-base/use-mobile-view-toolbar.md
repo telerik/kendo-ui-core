@@ -5,9 +5,9 @@ description: "Learn how to use the mobile view of the Kendo UI for jQuery ToolBa
 slug: howto_usemobileview_toolbar
 previous_url: /controls/navigation/toolbar/how-to/use-mobile-view-toolbar
 tags: telerik, kendo, jquery, toolbar, use, the, mobile, view
-component: toolbar
 type: how-to
 res_type: kb
+components: ["toolbar"]
 ---
 
 ## Environment

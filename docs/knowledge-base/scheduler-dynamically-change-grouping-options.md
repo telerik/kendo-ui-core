@@ -6,7 +6,7 @@ page_title: Dynamically Change Grouping Resources - Kendo UI Scheduler for jQuer
 slug: scheduler-dynamically-change-grouping-options
 tags: kendo, kendoui, scheduler, grouping, resources, dynamic, change
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

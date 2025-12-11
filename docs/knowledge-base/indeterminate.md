@@ -5,9 +5,9 @@ description: "Learn how to set the indeterminate state of the Kendo UI Switch."
 slug: howto_set_indeterminate_state_switch
 previous_url: /controls/editors/switch/how-to/indeterminate
 tags: telerik, kendo, jquery, switch, set, indeterminate, state
-component: switch
 type: how-to
 res_type: kb
+components: ["switch"]
 ---
 
 ## Environment

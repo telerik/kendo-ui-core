@@ -5,9 +5,9 @@ description: "Learn how to sort the categories in a grouped Kendo UI Chart."
 previous_url: /controls/charts/how-to/sort-category-groups, /controls/charts/how-to/sorting/sort-category-groups
 slug: howto_sortcategorisinagroupedchart_charts
 tags: chart, sort, categories, in, grouped, charts
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

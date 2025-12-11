@@ -6,7 +6,7 @@ page_title: Conditionally Change the Appearance of Grid Cells - Kendo UI Grid fo
 slug: conditionally-change-cell-styles-in-grid
 tags: grid, style, template, condition, color, different, core, htmlhelper, mvc, widget
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

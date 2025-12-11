@@ -5,9 +5,9 @@ description: "Learn how to use it with the Kendo UI Sortable widget either in ed
 previous_url: /controls/data-management/grid/how-to/use-grid-sortable-reorder, /controls/data-management/grid/how-to/Editing/use-grid-sortable-reorder
 slug: howto_usegridandsortable_grid
 tags: reorder, grid, rows, using, sortable, editable, noneditable, modes
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,7 +5,7 @@ description: "Learn how to keep the editor template after restoring Grid options
 type: how-to
 tags: kendo, ui, grid, persist, editor, template, setOptions, getOptions, restore
 res_type: kb
-component: grid
+components: ["grid"]
 slug: howto_persist_editor_template__while_restoring_state
 ---
 

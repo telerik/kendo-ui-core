@@ -7,6 +7,7 @@ slug: grid-include-hidden-columns-in-excel-export
 tags: grid, include, hidden, columns, export, excel, visible, hidden
 ticketid: 1160554
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

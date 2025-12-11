@@ -5,9 +5,9 @@ description: "Learn how to display time on the value axis of categorical Kendo U
 previous_url: /controls/charts/how-to/display-time-on-value-axis, /controls/charts/how-to/various/display-time-on-value-axis
 slug: howto_displaytimeonvalueaxis_charts
 tags: chart, display, time, on, value, axis
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

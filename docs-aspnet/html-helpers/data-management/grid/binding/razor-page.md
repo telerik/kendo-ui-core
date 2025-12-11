@@ -3,20 +3,19 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Grid for {{ site.framework }} in a Razor Pages application."
 slug: razorpages_gridhelper_aspnetcore
+components: ["grid"]
 position: 11
 ---
 
 # Grid in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Grid for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Grid for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_grid_aspnetcore_binding_overview %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the Grid component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [Grid in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Grid/GridCrudOperations.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 To configure the CRUD operations of the Grid DataSource within a Razor Pages application, follow the next steps:
 
@@ -47,10 +46,10 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
             .HtmlAttributes(new { style = "height:430px;" })
             .DataSource(ds => ds
                 .Ajax()
-                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
-                .Update(u => u.Url("/Index?handler=Update").Data("forgeryToken"))
-                .Create(c => c.Url("/Index?handler=Create").Data("forgeryToken"))
-                .Destroy(d => d.Url("/Index?handler=Destroy").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
+                .Update(u => u.Url(Url.Page("Index", "Update")).Data("forgeryToken"))
+                .Create(c => c.Url(Url.Page("Index", "Create")).Data("forgeryToken"))
+                .Destroy(d => d.Url(Url.Page("Index", "Destroy")).Data("forgeryToken"))
                 .Model(m => m.Id(id => id.OrderID))
                 .PageSize(10)
             )
@@ -74,10 +73,10 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
                     </model>
                 </schema>
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
-                    <update url="/Index?handler=Update" data="forgeryToken"/>
-                    <create url="/Index?handler=Create" data="forgeryToken"/>
-                    <destroy url="/Index?handler=Destroy" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
+                    <update url="@Url.Page("Index", "Update")" data="forgeryToken"/>
+                    <create url="@Url.Page("Index", "Create")" data="forgeryToken"/>
+                    <destroy url="@Url.Page("Index", "Destroy")" data="forgeryToken"/>
                 </transport>
             </datasource>
             <columns>
@@ -133,6 +132,8 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static IList<OrderViewModel> orders;
 
         public void OnGet()
@@ -177,6 +178,7 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
 
             return new JsonResult(new[] { order }.ToDataSourceResult(request, ModelState));
         }
+    }
     ```
     ```Model
         public class OrderViewModel
@@ -190,8 +192,9 @@ To configure the CRUD operations of the Grid DataSource within a Razor Pages app
             public string ShipName { get; set; }
         }
     ```
+For the complete project, refer to the [Grid in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Grid/GridCrudOperations.cshtml).
 
-## Binding the Grid to a PageModel Property
+## Binding to a PageModel Property
 
 To bind the Grid to a property from the `PageModel`, follow the next steps:
 

@@ -8,6 +8,7 @@ position:
 tags: grid, pdf, export, change, value, only, hidden, content, column, data, template
 ticketid: 1430735
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

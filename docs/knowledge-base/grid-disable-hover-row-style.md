@@ -8,6 +8,7 @@ position:
 tags: grid, row, hover, disable, prevent, style
 ticketid: 1436153
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

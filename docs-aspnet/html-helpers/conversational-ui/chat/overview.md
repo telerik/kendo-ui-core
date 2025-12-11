@@ -2,6 +2,7 @@
 title: Overview
 page_title: Chat Overview
 description: "Learn the basics when working with the Telerik UI Chat component for {{ site.framework }}."
+components: ["chat"]
 previous_url: /helpers/html-helpers/chat, /helpers/conversational-ui/chat/overview, /html-helpers/conversational-ui/chat/toolbar
 slug: htmlhelpers_chat_aspnetcore
 position: 0

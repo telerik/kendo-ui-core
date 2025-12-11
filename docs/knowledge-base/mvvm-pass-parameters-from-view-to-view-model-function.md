@@ -7,7 +7,7 @@ slug: mvvm-pass-parameters-from-view-to-view-model-function
 tags: kendo, kendoui, mvvm, pass-parameters, visible, invisible
 ticketid: 1138171
 res_type: kb
-component: mvvm
+components: ["mvvm"]
 ---
 
 ## Environment

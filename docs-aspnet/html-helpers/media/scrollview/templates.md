@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Get started with the Telerik UI ScrollView component for {{ site.framework }} and learn how to use templates for configuring its items."
+components: ["scrollview"]
 slug: htmlhelpers_scrollview_aspnetcore_templates
 position: 2
 ---

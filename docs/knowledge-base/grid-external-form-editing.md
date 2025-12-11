@@ -5,9 +5,9 @@ description: "Learn how to edit records through an external form in the Kendo UI
 previous_url: /controls/data-management/grid/how-to/Editing/grid-external-form-editing
 slug: howto_edit_records_using_external_forms_grid
 tags: grid, records, external, forms
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

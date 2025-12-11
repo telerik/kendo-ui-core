@@ -2,6 +2,7 @@
 title: Output Actions
 page_title: Kendo UI AIPrompt Documentation - Output Actions
 description: "Configure built-in and custom actions that can be applied to the generated output of the Kendo UI UI for jQuery AIPrompt component."
+components: ["aiprompt"]
 slug: output_actions_kendoui_aiprompt
 position: 4
 ---

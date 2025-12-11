@@ -7,6 +7,7 @@ previous_url: /helpers/editors/multiselect/how-to/use-strongly-typed-posted-with
 slug: multiselect-form-post-strongly-typed
 tags: multiselect, form, post, model, strongly-typed, strongly, typed, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: multiselect
 ---
 

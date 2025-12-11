@@ -6,6 +6,7 @@ page_title: How to Customize Grouping Field Template in Scheduler with Custom HT
 slug: customize-grouping-field-template-scheduler
 tags: kendo-ui, scheduler, groupheadertemplate, custom-html, customization
 res_type: kb
+components: ["scheduler"]
 ticketid: 1671258
 ---
 

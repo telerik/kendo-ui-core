@@ -4,10 +4,10 @@ page_title: Limit the Number of Columns at a Time Using the Column Menu - Kendo 
 description: "Learn how to disable column items in the Column menu when a max number of columns is already shown"
 slug: howto_limit_max_number_columns_visible_grid
 tags: grid, limit, columns, visible, show, hide
-component: chart
 ticketid: 1572191
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

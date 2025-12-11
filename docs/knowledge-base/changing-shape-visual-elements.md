@@ -5,9 +5,9 @@ description: "Learn how to find a particular element from the shape visual and d
 slug: howto_changeshapevisualelements_dynamically_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/changing-shape-visual-elements
 tags: kendo, jquery, diagram, change, shape visual, elements, dynamically
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

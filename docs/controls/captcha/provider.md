@@ -2,6 +2,7 @@
 title: Captcha Server-side Provider
 page_title: Captcha Server-side Provider
 description: "Learn how to configure the server-side provider for the Kendo UI Captcha."
+components: ["captcha"]
 slug: provider_kendoui_captcha_widget
 position: 2
 ---

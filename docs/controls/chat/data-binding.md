@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Chat Documentation - Data Binding
 description: "Learn how to bind data to the Kendo UI for jQuery Chat component using standard arrays and custom data models."
+components: ["chat"]
 slug: databinding_kendoui_chat
 position: 2
 ---

@@ -7,6 +7,7 @@ slug: editor-extend-hyperlink-command-custom-class
 tags: kendo, kendo-ui, editor, extend, hyperlink, command
 ticketid: 1556683
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Reverse Selection
 page_title: Reverse Selection
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to control the selection behavior of the component."
+components: ["daterangepicker"]
 slug: reverse_selection_daterangepicker_aspnetcore
 position: 8
 ---

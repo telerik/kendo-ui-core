@@ -2,6 +2,7 @@
 title: Getting Started 
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Circular Gauge component by following a complete step-by-step tutorial."
+components: ["circulargauge"]
 slug: circulargauge_getting_started
 position: 1
 ---

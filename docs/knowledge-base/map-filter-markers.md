@@ -7,6 +7,7 @@ slug: map-filter-markers
 previous_url: /knowledge-base/map_filter_markers
 tags: map, filter, markers
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Form Documentation | Form Accessibility
 description: "Get started with the {{ site.product }} Form and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["form"]
 slug: htmlhelpers_form_accessibility
 position: 1
 ---

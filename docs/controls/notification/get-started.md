@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Notification Documentation - Getting Started with the Notification
 description: "Get started with the jQuery Notification by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["notification"]
 slug: getting_started_kendoui_notification_component
 position: 1
 ---

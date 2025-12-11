@@ -6,6 +6,7 @@ page_title: Show Confirmation for Dragged and Dropped Items - Kendo UI TreeList 
 slug: treelist-show-confirmation-on-drop
 ticketid: 1130225
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

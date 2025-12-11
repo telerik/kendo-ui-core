@@ -7,6 +7,7 @@ slug: treelist-load-and-expand-one-level-of-data
 ticketid: 1627637
 tags: treelist, expand, partial, read, request, node, root, level, initially, load, only, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

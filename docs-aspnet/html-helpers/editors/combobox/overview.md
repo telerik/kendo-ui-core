@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI ComboBox component for {{ site.framework }} and its features like the built-in virtualization, customization, grouping and filtering."
+components: ["combobox"]
 previous_url: /helpers/html-helpers/combobox, /helpers/editors/combobox/overview
 slug: htmlhelpers_combobox_aspnetcore
 position: 0

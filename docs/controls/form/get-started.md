@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Form Documentation - Getting Started with the Form
 description: "Get started with the jQuery Form by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["form"]
 slug: getting_started_kendoui_form_widget
 position: 1
 ---

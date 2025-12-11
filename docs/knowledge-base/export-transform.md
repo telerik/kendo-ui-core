@@ -5,9 +5,9 @@ description: "Learn how to transform the content during export while applying th
 slug: howto_applytransformationsduringexport_drawingapi
 previous_url: /framework/drawing/how-to/export-transform
 tags: telerik, kendo, jquery, drawing, api, library, apply, transformations, during, export
-component: drawing
 type: how-to
 res_type: kb
+components: ["drawing"]
 ---
 
 ## Environment

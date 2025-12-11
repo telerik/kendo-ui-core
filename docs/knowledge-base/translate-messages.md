@@ -5,9 +5,9 @@ description: "Learn how to translate the messages of a Kendo UI PivotGrid compon
 previous_url: /controls/data-management/pivotgrid/how-to/translate-messages, /controls/data-management/pivotgrid/how-to/localization/translate-messages
 slug: howto_translate_pivotgrid_messages_pivotgrid
 tags: kendoui, pivotgrid, translate, messages
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

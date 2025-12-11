@@ -2,6 +2,7 @@
 title: Encoding
 page_title: Encoding
 description: "Get started with the Telerik UI QRCode component for {{ site.framework }} and use its supported encoding conventions."
+components: ["qrcode"]
 slug: encoding_qrcode_aspnetcore_helper
 position: 2
 ---

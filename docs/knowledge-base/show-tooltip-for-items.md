@@ -5,9 +5,9 @@ description: "Learn how to show details for Kendo UI DropDownList items by using
 previous_url: /controls/editors/dropdownlist/how-to/show-tooltip-for-items, /controls/editors/dropdownlist/how-to/appearance/show-tooltip-for-items, /controls/layout/tooltip/how-to/kendoui-tooltip-in-dropdownlist
 slug: howto_show_list_items_details_in_tooltip_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, show, item, details, in, tooltip
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

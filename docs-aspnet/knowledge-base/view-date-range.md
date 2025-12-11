@@ -6,6 +6,7 @@ slug: view-date-range
 tags: telerik, kendo, core, mvc, scheduler, retrieve, the, current, view, date, range, calendar 
 component: scheduler
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

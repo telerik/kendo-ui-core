@@ -5,9 +5,9 @@ description: "Learn how to show labels over nested rings of a Kendo UI Donut Cha
 previous_url: /controls/charts/how-to/show-labels-for-inner-ring-donut, /controls/charts/how-to/appearance/show-labels-for-inner-ring-donut
 slug: howto_showlabelsovernesteddonuts_charts
 tags: chart, show, labels, over, nested, donuts
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ meta_title: Selecting Grid Rows with Right-Click in Kendo UI for jQuery
 slug: selecting-grid-rows-right-click-kendo-ui-jquery
 tags: kendo ui for jquery, grid, selectable, row selection, right-click
 res_type: kb
+components: ["grid"]
 ticketid: 1673320
 ---
 

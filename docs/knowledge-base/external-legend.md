@@ -5,9 +5,9 @@ description: "Learn how to render the Kendo UI Charts legend items as HTML eleme
 previous_url: /controls/charts/how-to/external-legend, /controls/charts/how-to/appearance/external-legend
 slug: howto_externallegend_charts
 tags: chart, render, external, legends
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

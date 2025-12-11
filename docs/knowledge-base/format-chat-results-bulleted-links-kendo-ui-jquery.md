@@ -7,6 +7,7 @@ meta_title: How to Format Chat Search Results as Bulleted Links in Kendo UI for 
 slug: format-chat-results-bulleted-links-kendo-ui-jquery
 tags: kendo ui for jquery, chat, messagetemplate, links, open-in-new-tab
 res_type: kb
+components: ["chat"]
 ticketid: 1700697
 ---
 

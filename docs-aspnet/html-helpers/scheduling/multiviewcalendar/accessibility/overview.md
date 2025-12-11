@@ -2,6 +2,7 @@
 title: Overview
 page_title: MultiViewCalendar Documentation | MultiViewCalendar Accessibility
 description: "Get started with the {{ site.product }} MultiViewCalendar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["multiviewcalendar"]
 slug: htmlhelpers_multiviewcalendar_accessibility
 position: 1
 ---

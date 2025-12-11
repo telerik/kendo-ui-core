@@ -2,6 +2,7 @@
 title: Editing
 page_title: jQuery Breadcrumb Documentation - Editing
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn how to enable editing and alter the Breadcrumb value."
+components: ["breadcrumb"]
 slug: editing_breadcrumb_widget
 position: 5
 ---

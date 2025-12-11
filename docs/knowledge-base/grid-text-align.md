@@ -6,7 +6,7 @@ page_title: Grid Cells Text Alignment - Kendo UI for jQuery Data Grid
 slug: grid-change-cells-text-alignment
 tags: grid, cells, text, align
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

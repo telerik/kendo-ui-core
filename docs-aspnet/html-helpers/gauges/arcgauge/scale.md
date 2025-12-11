@@ -2,6 +2,7 @@
 title: Scale
 page_title: Scale
 description: "Learn the Options of the Scale of the Telerik UI ArcGauge component for {{ site.framework }}."
+components: ["arcgauge"]
 slug: scale_arcgaugehelper_aspnetcore
 position: 2
 ---

@@ -7,6 +7,7 @@ slug: grid-bulk-edit
 tags: grid, edit, dialog, textarea, radiogroup, kendoui, jquery
 ticketid: 1597711
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

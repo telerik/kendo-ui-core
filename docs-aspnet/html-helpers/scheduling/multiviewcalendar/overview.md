@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI MultiViewCalendar component for {{ site.framework }} provides a styled UI Calendar with the capability of displaying multiple Views at the same time."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/overview
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore
 position: 0

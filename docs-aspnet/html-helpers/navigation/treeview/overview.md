@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI TreeView component for {{ site.framework }} displays items in a tree-shape hierarchy, supports local and remote data binding, and provides templates for easier customization."
+components: ["treeview"]
 previous_url: /helpers/html-helpers/treeview, /helpers/navigation/treeview/overview
 slug: htmlhelpers_treeview_aspnetcore
 position: 0

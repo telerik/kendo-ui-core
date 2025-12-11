@@ -6,6 +6,7 @@ page_title:  Filtering and Editing a ForeignKey Column Bound to an Enum Field in
 slug: grid-foreign-key-enum-field
 tags: grid, foreign, key, enum, field, filter, edit, dropdownlist, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

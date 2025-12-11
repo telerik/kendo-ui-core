@@ -7,6 +7,7 @@ slug: set-multiselect-background-from-tooltip-with-colorpalette
 tags: multiselect, tags, change, background, color, tooltip, colorpalette
 ticketid: 1487280
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

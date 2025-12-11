@@ -4,10 +4,10 @@ page_title: Add Duration Field in the Editable Template for Scheduler Events- Ke
 description: "Learn how to add a duration field in the editable template for the events of the Kendo UI Scheduler for jQuery."
 slug: scheduler_event_duration_field_in_editable_template
 tags: scheduler, duration, event, editable, template
-component: scheduler
 type: how-to
 ticketid: 1613931
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

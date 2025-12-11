@@ -6,7 +6,7 @@ page_title: Highlight Work Hours - Kendo UI Scheduler for jQuery
 slug: scheduler-highlight-work-hours
 tags: highlight, work, hours, scheduler
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

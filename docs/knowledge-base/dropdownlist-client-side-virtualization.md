@@ -7,6 +7,7 @@ slug: dropdownlist-client-side-virtualization
 tags: dropdownlist, virtualization
 ticketid: 1150272  
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

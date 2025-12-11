@@ -2,6 +2,7 @@
 title: Azure Blob Storage
 page_title: Azure Blob Storage
 description: "Learn how to use the Telerik UI for {{ site.framework }} Upload component, to upload files to Azure Blob Storage"
+components: ["general"]
 slug: azure_blob_storage_aspnetcore
 position: 3
 ---

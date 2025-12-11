@@ -6,6 +6,7 @@ type: how-to
 slug: form-cancel-button
 tags: progress, telerik, aspnet, mvc, core, add, integrate, implement, form, cancel, button
 res_type: kb
+components: ["general"]
 component: form
 ---
 

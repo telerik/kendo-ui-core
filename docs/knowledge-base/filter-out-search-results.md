@@ -5,9 +5,9 @@ description: "Learn how to search for tree nodes and show them along with their 
 slug: howto_filetroutserachresults_treeview
 previous_url: /controls/navigation/treeview/how-to/filtering/filter-out-search-results
 tags: telerik, kendo, jquery, treeview, filter, out, search, results
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

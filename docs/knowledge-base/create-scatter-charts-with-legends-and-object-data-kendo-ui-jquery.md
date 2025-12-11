@@ -6,6 +6,7 @@ page_title: How to Create Scatter Charts with Legends and Object Data in Kendo U
 slug: create-scatter-charts-with-legends-and-object-data-kendo-ui-jquery
 tags: kendo, ui, jquery, chart, scatter, legends, object, data, datasource, color
 res_type: kb
+components: ["chart"]
 ticketid: 1682349
 ---
 

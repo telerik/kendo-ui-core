@@ -5,9 +5,9 @@ description: "Learn how to make the selection in a Kendo UI DropDownList widget 
 previous_url: /controls/editors/dropdownlist/how-to/make-dropdownlist-required, /controls/editors/dropdownlist/how-to/selection/make-dropdownlist-required
 slug: howto_make_dropdownlist_required
 tags: telerik, kendo, jquery, dropdownlist, make, selection, required
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

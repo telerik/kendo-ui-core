@@ -6,7 +6,7 @@ page_title: Generate Model Dynamically - Kendo UI for jQuery Data Grid
 slug: grid-generate-model-from-data
 tags: grid, data, model, dynamic, columns, generate
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

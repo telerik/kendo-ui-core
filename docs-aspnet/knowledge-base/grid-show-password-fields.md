@@ -6,6 +6,7 @@ slug: grid-show-password-fields
 tags: grid, all, password, field, symbols, core, mvc, telerik
 component: grid
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

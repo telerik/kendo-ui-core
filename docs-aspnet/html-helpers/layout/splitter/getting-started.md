@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Splitter component by following a complete step-by-step tutorial."
+components: ["splitter"]
 slug: aspnetcore_splitter_getting_started
 position: 1
 ---

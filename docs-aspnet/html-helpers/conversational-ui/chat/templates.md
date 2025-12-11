@@ -2,6 +2,7 @@
 title: Templates
 page_title: Telerik UI Chat Documentation - Templates
 description: "Learn about the template customization options available in the Telerik UI for {{ site.framework }} Chat component."
+components: ["chat"]
 slug: htmlhelpers_templates_chat
 position: 7
 ---

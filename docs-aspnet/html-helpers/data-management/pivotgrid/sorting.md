@@ -2,6 +2,7 @@
 title: Sorting
 page_title: Sorting
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to sort a Telerik UI PivotGrid component for {{ site.framework }}."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_sorting
 position: 4
 ---

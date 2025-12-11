@@ -7,7 +7,7 @@ slug: disable-days-calendar-scheduler
 tags: kendo, kendoui, scheduler, disable, days, calendar, popup
 ticketid: 1134481
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: treelist-load-and-expand-one-level-of-data
 ticketid: 1148152
 tags: treelist, expand, partial, read, request, node, root, level, initially, load, only
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

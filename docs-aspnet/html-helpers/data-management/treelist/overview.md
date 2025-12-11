@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI TreeList component for {{ site.framework }}."
+components: ["treelist"]
 previous_url: /helpers/html-helpers/treelist, /helpers/data-management/treelist/overview
 slug: htmlhelpers_treelist_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: Auto-Resizing to Content
 page_title: Auto-Resizing to Content
 description: "Learn how to expand the Splitter to fit the content inside it using the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: htmlhelpers_expand_splitter_to_content_aspnetcore
 position: 3
 ---

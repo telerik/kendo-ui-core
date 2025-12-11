@@ -5,9 +5,9 @@ description: "Learn how to serialize form data with the Kendo UI Upload componen
 slug: howto_serialize_form_data_upload
 previous_url: /controls/editors/upload/how-to/serialize-form-data
 tags: telerik, kendo, jquery, upload, serialize, form, data, during, async, upload
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

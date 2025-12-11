@@ -7,6 +7,7 @@ slug: mediaplayer-upload-and-play-video-file
 tags: mediaplayer, media, video, upload, play, player
 ticketid: 1360372
 res_type: kb
+components: ["mediaplayer"]
 ---
 
 ## Environment

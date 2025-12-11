@@ -3,6 +3,7 @@ title: Overview
 page_title: Get Started with the Kendo UI for jQuery AI Coding Assistant
 description: "Learn about the AI-powered coding assistant that integrates with your code editor for greated productivity." 
 slug: ai_coding_assistant_overview
+components: ["aicodingassistant"]
 position: 1
 ---
 

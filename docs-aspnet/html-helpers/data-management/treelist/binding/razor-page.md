@@ -3,22 +3,21 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI TreeList component for {{ site.framework }} configured for remote data in a Razor Pages application."
 slug: htmlhelpers_treelist_razorpage_aspnetcore
+components: ["treelist"]
 position: 2
 ---
 
 # TreeList in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI TreeList for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI TreeList for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug databinding_treelist_aspnetcore %}) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the TreeList component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [TreeList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/TreeList/TreeListCrudOperations.cshtml).
+## Binding to Remote Data
 
-## Getting Started
-
-To configure the CRUD operations of the TreeList DataSource within a Razor Pages application, follow the next steps:
+To bind the TreeList to a data set received from a remote endpoint within a Razor Pages application, follow the next steps:
 
 1. Configure the `Create`, `Read`, `Update`, and `Delete` methods of the `DataSource` instance. The URL in each option must refer to the method name in the `PageModel`. Also, set the `Id` field in the `Model()` configuration of the `DataSource`. It is mandatory for the `Create`, `Update`, `Delete` operations.
 
@@ -48,10 +47,10 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
             })
             .Editable()
             .DataSource(dataSource => dataSource
-                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
-                .Update(u => u.Url("/Index?handler=Update").Data("forgeryToken"))
-                .Create(c => c.Url("/Index?handler=Create").Data("forgeryToken"))
-                .Destroy(d => d.Url("/Index?handler=Destroy").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
+                .Update(u => u.Url(Url.Page("Index", "Update")).Data("forgeryToken"))
+                .Create(c => c.Url(Url.Page("Index", "Create")).Data("forgeryToken"))
+                .Destroy(d => d.Url(Url.Page("Index", "Destroy")).Data("forgeryToken"))
                 .Model(m =>
                 {
                     m.Id(f => f.EmployeeId); // Provide the Id property of the model.
@@ -90,10 +89,10 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
             <editable enabled="true"/>
             <treelist-datasource>
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
-                    <update url="/Index?handler=Update" data="forgeryToken"/>
-                    <create url="/Index?handler=Create" data="forgeryToken"/>
-                    <destroy url="/Index?handler=Destroy" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
+                    <update url="@Url.Page("Index", "Update")" data="forgeryToken"/>
+                    <create url="@Url.Page("Index", "Create")" data="forgeryToken"/>
+                    <destroy url="@Url.Page("Index", "Destroy")" data="forgeryToken"/>
                 </transport>
                 <schema data="Data" total="Total" errors="Errors">
                     <treelist-model id="EmployeeId" parent-id="ReportsTo" expanded="true">
@@ -143,6 +142,8 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         private static IList<EmployeeDirectoryModel> employees;
 
         public void OnGet()
@@ -218,6 +219,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
 
             return new JsonResult(new[] { employee }.ToTreeDataSourceResult(request, ModelState));
         }
+    }
     ```
     ```Model
         public class EmployeeDirectoryModel
@@ -241,6 +243,7 @@ To configure the CRUD operations of the TreeList DataSource within a Razor Pages
             public bool hasChildren { get; set; }
         }
     ```
+For the complete project, refer to the [TreeList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/TreeList/TreeListCrudOperations.cshtml).
 
 ## See Also
 

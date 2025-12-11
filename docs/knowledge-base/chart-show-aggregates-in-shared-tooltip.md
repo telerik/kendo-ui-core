@@ -6,6 +6,7 @@ page_title: Custom Shared Chart tooltip with aggregates - Kendo UI Chart for jQu
 slug: chart-show-aggregates-in-shared-tooltip
 tags: chart, shared, tooltip, sum, aggregates, sharedTooltip, template, sum, total
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

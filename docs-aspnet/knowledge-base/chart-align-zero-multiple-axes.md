@@ -7,6 +7,7 @@ slug: chart-align-zero-multiple-axes
 tags: telerik, chart, align, zero, multiple, axes, value
 component: chart
 res_type: kb
+components: ["general"]
 ---
 
 

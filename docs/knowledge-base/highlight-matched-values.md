@@ -5,9 +5,9 @@ description: "Learn how to highlight matched values from the Kendo UI for jQuery
 previous_url: /controls/editors/autocomplete/how-to/highlight-matched-values, /controls/editors/autocomplete/how-to/appearance/highlight-matched-values
 slug: howto_highlight_matched_values_autocomplete
 tags: telerik, kendo, jquery, autocomplete, highlight, matched, values, of, user, suggestions
-component: autocomplete
 type: how-to
 res_type: kb
+components: ["autocomplete"]
 ---
 
 ## Environment

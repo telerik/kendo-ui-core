@@ -7,6 +7,7 @@ tags: telerik, dateinput, messages, datetimepicker, placeholder
 component: datetimepicker
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

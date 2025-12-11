@@ -3,6 +3,7 @@ title: Getting Started
 page_title: Getting Started with the Kendo UI for jQuery Coding Assistant
 description: "Learn how to add and use the MCP Server as a Kendo UI for jQuery AI coding assistant and code generator for better developer productivity. The Kendo UI for jQuery MCP server provides proprietary context about Kendo UI for jQuery components to AI-powered software."
 slug: kendo_jquery_mcp_server
+components: ["aicodingassistant"]
 position: 2
 ---
 

@@ -6,6 +6,7 @@ page_title: Remove Trailing Space When Resizing Grid Columns
 slug: grid-remove-trailing-space-when-resizing-columns
 tags: aspnet, mvc, grid, remove, avoid, trailing, spaces, blank, resizing, columns
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

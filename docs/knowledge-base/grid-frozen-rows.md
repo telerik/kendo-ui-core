@@ -6,7 +6,7 @@ page_title: Freeze Rows - Kendo UI for jQuery Data Grid
 slug: grid-frozen-rows
 tags: grid, frozen rows, frozen, row, data item, model, freeze, unfreeze, pin, unpin, dynamically
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

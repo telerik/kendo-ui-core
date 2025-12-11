@@ -6,6 +6,7 @@ page_title: How to Export Filtered Data Including All Pages in Kendo UI for jQue
 slug: export-filtered-data-kendo-ui-jquery-grid
 tags: kendo, ui, jquery, grid, export, excel, filter, all pages
 res_type: kb
+components: ["grid"]
 ticketid: 1684843
 ---
 

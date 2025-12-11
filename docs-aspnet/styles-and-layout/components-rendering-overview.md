@@ -2,6 +2,7 @@
 title: Components Rendering
 page_title: Components Rendering Overview
 description: "Learn about the rendering of the {{ site.product }} components and their appearance options."
+components: ["general"]
 slug: components_rendering_overview
 position: 0
 ---

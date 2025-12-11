@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: Contrast Tool
 description: "Learn more about the contrast tool for the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 slug: htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore
 position: 4
 ---

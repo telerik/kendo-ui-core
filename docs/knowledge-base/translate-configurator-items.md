@@ -5,9 +5,9 @@ description: "Learn how to access PivotConfigurator TreeView widget and rename t
 previous_url: /controls/data-management/pivotgrid/how-to/translate-configurator-items, /controls/data-management/pivotgrid/how-to/localization/translate-configurator-items
 slug: howto_translate_pivotconfigurator_messages_pivotgrid
 tags: kendoui, pivotgrid, translate, pivotconfigurator, messages
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

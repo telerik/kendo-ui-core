@@ -7,6 +7,7 @@ slug: grid-mvvm-empty-norecords-template
 tags: grid, mvvm, empty, norecords, template
 ticketid: 1123131
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

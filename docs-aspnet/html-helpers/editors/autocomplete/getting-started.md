@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} AutoComplete component by following a complete step-by-step tutorial."
+components: ["autocomplete"]
 slug: aspnetcore_autocomplete_getting_started
 position: 1
 ---

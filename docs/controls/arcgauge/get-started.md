@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ArcGauge Documentation - Getting Started with the ArcGauge
 description: "Get started with the jQuery ArcGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["arcgauge"]
 slug: getting_started_kendoui_arcgauge_component
 position: 2
 ---

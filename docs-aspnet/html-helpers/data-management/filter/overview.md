@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Filter component for {{ site.framework }}."
+components: ["filter"]
 previous_url: /helpers/data-management/filter/overview
 slug: htmlhelpers_filter_aspnetcore_overview
 position: 0

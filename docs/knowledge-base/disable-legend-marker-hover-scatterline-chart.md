@@ -7,6 +7,7 @@ meta_title: Disable Legend Marker Hover in Scatterline Chart When Markers Are Hi
 slug: disable-legend-marker-hover-scatterline-chart
 tags: kendo-ui-for-jquery, chart, scatterline, legend, markers, highlight
 res_type: kb
+components: ["chart"]
 ticketid: 1641339
 ---
 

@@ -7,6 +7,7 @@ tags: customize, grid, rows, cells, basedon, data, item, value
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

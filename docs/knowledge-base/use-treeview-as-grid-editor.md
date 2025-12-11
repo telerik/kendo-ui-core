@@ -5,9 +5,9 @@ description: "Learn how to use TreeView as an editor in the Kendo UI Grid for jQ
 previous_url: /controls/data-management/grid/how-to/Editing/use-treeview-as-grid-editor, /controls/navigation/treeview/how-to/integration/use-treeview-as-editor-grid
 slug: howto_usethe_treeview_aseditor_grid
 tags: use, treeview, custom, editor, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

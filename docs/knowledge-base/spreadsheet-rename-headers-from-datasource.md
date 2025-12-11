@@ -6,7 +6,7 @@ page_title: Rename the Default Headers When Using DataSource - Kendo UI Spreadsh
 slug: spreadsheet-rename-headers-from-datasource
 tags: kendo, kendoui, spreadsheet, datasource, headers
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

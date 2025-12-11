@@ -6,6 +6,7 @@ page_title: Navigating Through Hierarchical Grid Rows with Tab Key
 slug: grid-navigate-hierarchy-rows
 tags: grid, keyboard-navigation, hierarchy, rows, navigatable, tab-key, expanding, arrows
 res_type: kb
+components: ["general"]
 ticketid: 1637778
 ---
 

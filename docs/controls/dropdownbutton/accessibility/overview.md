@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery DropDownButton Documentation | DropDownButton Accessibility
 description: "Get started with the jQuery DropDownButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["dropdownbutton"]
 slug: jquery_dropdownbutton_accessibility
 position: 1
 ---

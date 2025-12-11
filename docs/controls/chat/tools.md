@@ -2,6 +2,7 @@
 title: Tools
 page_title: jQuery Chat Documentation - Tools
 description: "Learn how to configure message actions and interactive tools in the Kendo UI for jQuery Chat component."
+components: ["chat"]
 slug: tools_kendoui_chat
 position: 4
 ---

@@ -6,6 +6,7 @@ slug: howto_changethemeontheclient
 previous_url: /styles-and-layout/client-side-theme-change
 tags: change, theme, client, dropdown
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

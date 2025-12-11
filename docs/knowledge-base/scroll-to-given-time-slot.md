@@ -5,9 +5,9 @@ description: "Learn how to scroll to a given time slot by using JavaScript in a 
 previous_url: /controls/scheduling/scheduler/how-to/scroll_to_given_time_slot, /controls/scheduling/scheduler/how-to/scrolling/scroll_to_given_time_slot
 slug: scroll_to_given_time_slot
 tags: telerik, kendo, jquery, scheduler, scroll, to, a, given, specific, timeslot 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-display-hidden-values-in-details
 tags: grid, responsive, details
 ticketid: 1180379
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

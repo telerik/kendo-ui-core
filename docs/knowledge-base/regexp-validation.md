@@ -5,9 +5,9 @@ description: "Learn how to create RegExp-based validation rules in a Kendo UI Sp
 slug: howto_regexp_based_validation
 previous_url: /controls/data-management/spreadsheet/how-to/regexp-validation
 tags: kendo, jquery, spreadsheet, create, custom, regexp, based, validation, rules
-component: spreadsheet
 type: how-to
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

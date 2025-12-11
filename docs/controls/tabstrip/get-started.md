@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TabStrip Documentation - Getting Started with the TabStrip
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to initialize the component."
+components: ["tabstrip"]
 slug: getting_started_kendoui_tabstrip_widget
 position: 1
 ---

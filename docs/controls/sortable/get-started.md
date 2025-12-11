@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Sortable Documentation - Getting Started with the Sortable
 description: "Get started with the jQuery Sortable by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["sortable"]
 slug: getting_started_kendoui_sortable_widget
 position: 1
 ---

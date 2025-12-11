@@ -7,6 +7,7 @@ slug: numerictextbox-arrows-not-in-wrong-position
 tags: numerictextbox, arrows, not, in, wrong, position, style, textbox, k-textbox
 ticketid: 1405455
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

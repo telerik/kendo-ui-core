@@ -7,7 +7,7 @@ slug: maskedtextbox-does-not-allow-input-with-maxlength-attribute
 tags: maskedtextbox, input, prevents, kendo, maxlength, attribute, length, update, bug
 ticketid: 1116721
 res_type: kb
-component: maskedtextbox
+components: ["maskedtextbox"]
 ---
 
 ## Environment

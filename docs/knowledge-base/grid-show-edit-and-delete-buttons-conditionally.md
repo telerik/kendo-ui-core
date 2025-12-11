@@ -7,6 +7,7 @@ slug: grid-show-edit-and-delete-buttons-conditionally
 tags: grid, condition, hide, buttons, update, delete, destroy, column
 ticketid: 1143185
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

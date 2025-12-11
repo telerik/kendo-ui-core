@@ -5,9 +5,9 @@ description: "Learn how to disable the mouse-wheel zoom in a Kendo UI Map compon
 slug: howto_disablemousezoom_map
 previous_url: /controls/diagrams-and-maps/map/how-to/disable-mousewheel-zoom
 tags: kendo, jquery, map, disable, mousewheel, zoom
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

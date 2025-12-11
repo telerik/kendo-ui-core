@@ -2,23 +2,24 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Form component for {{ site.framework }} in a Razor Page."
+components: ["form"]
 slug: htmlhelpers_form_razorpage_aspnetcore
 position: 12
 ---
 
 # Form in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Form for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Form for {{ site.framework }} in Razor Pages applications.
-
-This article describes how to configure the Form component in a Razor Pages scenario.
-
-When a complex model is used, which is the case with the Razor Page scenario, the Form needs to have the FormData configuration set. As the Form makes a POST request antiforgery token needs to be added. This can be achieved, for example, by appending a hidden input to the Form.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
 ## Standard Form Submit
 
-By default, when the View containing the Form is loaded, clicking on the Submit button will fire the client-side validation of the Form component. Once all of the Form fields are filled and the user clicks on the Submit button the form will be submitted and the page will reload to display the server validation messages from the page model, if any.
+By default, when the View containing the Form is loaded, clicking on the Submit button will fire the client-side validation of the Form component. Once all of the Form fields are filled and the user clicks on the **Submit** button the form will be submitted and the page will reload to display the server validation messages from the page model, if any.
+
+When a complex model is used, as in the Razor Page scenario, the Form needs the `FormData()` configuration set.
+
+Also, since the Form makes a POST request, the antiforgery token must be included in the request. This can be achieved, for example, by appending a hidden input to the Form.
 
 See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
@@ -126,6 +127,8 @@ See the implementation details in the example below, and for the full project wi
 ## Submitting the Form with Ajax
 
 When the Form is submitted with ajax, the default submit event of the component is prevented, thus forcing the manual implementation of the submit behavior. In this case, an ajax request is sent to a specific end-point on Submit click, without reloading the page and client-side validation will work as expected. However, for server validation, as the page is not reloaded and the page model data is not changed, the Telerik Validator attached to the Form has no way of knowing what the server response is. For this reason, the ajax request callback can be used to notify the user of the status of the server validation. If the server end-point is returning validation errors related to the Form fields the error callback can be used to iterate over the response errors and create a visual representation in the UI. In a similar way the success callback can be used to notify the user of a succesful Form submission.
+
+When a complex model is used, as in the Razor Page scenario, the Form needs the `FormData()` configuration set.
 
 See the implementation details in the example below, where the JSON errors are appended to the validation summary and it is toggled it in the ajax success and error callbacks. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
@@ -332,5 +335,8 @@ See the implementation details in the example below, where the JSON errors are a
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [Form Overview]({% slug htmlhelpers_form_aspnetcore_overview %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Form](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/form)
+* [Server-Side HtmlHelper API of the Form](/api/form)
+* [Server-Side TagHelper API of the Form](/api/taghelpers/form)
+* [Knowledge Base Section](/knowledge-base)

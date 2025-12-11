@@ -7,6 +7,7 @@ slug: chart-hide-navigator-during-export
 tags: chart, navigator, hide, export, exclude, excel, pdf, image
 ticketid: 1157749
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

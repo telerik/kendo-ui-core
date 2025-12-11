@@ -2,6 +2,7 @@
 title: Click
 page_title: Click Binding - Kendo UI MVVM
 description: "Learn how to automatically trigger the attached methods once the user clicks the target DOM element by using the click binding in Kendo UI MVVM."
+components: ["mvvm"]
 slug: clickbinding_mvvm_kendoui
 ---
 

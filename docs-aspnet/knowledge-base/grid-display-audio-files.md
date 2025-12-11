@@ -6,6 +6,7 @@ page_title: Displaying Audio Files within the Grid
 slug: grid-display-audio-files
 tags: mvc, core, grid, display, audio, files
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

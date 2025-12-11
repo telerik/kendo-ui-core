@@ -7,6 +7,7 @@ meta_title: Adding Select All Option and Displaying Single Tag in Kendo UI Multi
 slug: kendo-ui-jquery-multiselect-select-all-option-single-tag
 tags: multiselect, kendo-ui-for-jquery, select-all, headertemplate, tagmode, tagtemplate
 res_type: kb
+components: ["multiselect"]
 ticketid: 1700218
 ---
 

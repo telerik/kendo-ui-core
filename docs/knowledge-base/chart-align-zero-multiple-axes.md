@@ -6,6 +6,7 @@ type: how-to
 slug: chart-align-zero-multiple-axes
 tags: chart, align, zero, multiple, axes
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

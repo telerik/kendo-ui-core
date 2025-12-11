@@ -7,6 +7,7 @@ slug: arc-gauge-set-size
 tags: archgauge, set, size
 ticketid: 1418725
 res_type: kb
+components: ["arcgauge"]
 ---
 
 ## Environment

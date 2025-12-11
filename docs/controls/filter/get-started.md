@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Filter Documentation - Getting Started with the Filter
 description: "Get started with the jQuery Filter by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["filter"]
 slug: getting_started_kendoui_filter_widget
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Drawer component by following a complete step-by-step tutorial."
+components: ["drawer"]
 slug: drawer_getting_started
 position: 1
 ---

@@ -7,6 +7,7 @@ slug: dynamic-forms-from-json-file
 tags: form, dynamic, read, json, file, editors
 ticketid: 1629362
 res_type: kb
+components: ["general"]
 component: form
 ---
 

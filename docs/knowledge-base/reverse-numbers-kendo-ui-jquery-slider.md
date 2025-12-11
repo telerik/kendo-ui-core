@@ -7,6 +7,7 @@ meta_title: How to Reverse Numbers on a Kendo UI for jQuery Vertical Slider
 slug: reverse-numbers-kendo-ui-jquery-slider
 tags: kendo-ui-for-jquery, slider, vertical-slider, value-mapping
 res_type: kb
+components: ["slider"]
 ticketid: 1695653
 ---
 

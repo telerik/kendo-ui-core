@@ -2,6 +2,7 @@
 title: Colors
 page_title: Colors
 description: "Learn how to set the colors of the Telerik UI Circular Gauge component for {{ site.framework }}."
+components: ["circulargauge"]
 slug: colors_circulargaugehelper_aspnetcore
 position: 3
 ---

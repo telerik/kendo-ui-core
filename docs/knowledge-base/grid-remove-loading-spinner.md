@@ -7,6 +7,7 @@ slug: grid-remove-loading-spinner
 tags: grid, spinner, loading
 ticketid: 1138280
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Useful Tips
 page_title: Security and Validation Useful Tips
 description: "Get started with Telerik UI for {{ site.framework }} and learn the fundamentals for XSS and CSRF attacks."
+components: ["general"]
 slug: aspnetcore_security_gettingstarted
 previous_url: /getting-started/helper-basics/security-and-validation, /html-helpers/helper-basics/security-and-validation
 position: 2

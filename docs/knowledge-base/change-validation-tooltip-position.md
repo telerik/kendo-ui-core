@@ -5,9 +5,9 @@ description: "Learn how to change the validation message position in a popup edi
 previous_url: /controls/data-management/grid/how-to/Editing/change-validation-tooltip-position
 slug: howto_change_validation_message_position_grid
 tags: grid, validation, message, position
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI FlatColorPicker component for {{ site.framework }} provides a styled UI color selector."
+components: ["flatcolorpicker"]
 previous_url: /helpers/editors/flatcolorpicker/overview
 slug: overview_flatcolorpickerhelper_aspnetcore
 position: 0

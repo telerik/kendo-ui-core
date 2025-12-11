@@ -7,6 +7,7 @@ slug: grid-blink-cell
 tags: grid, blink, cell, highlight, background, color, css
 ticketid: 1156788
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: How to Add Dynamic Image Count Badges to Buttons in Kendo UI for jQu
 slug: dynamic-image-count-in-buttons-kendo-ui-jquery-grid
 tags: kendo, ui, jquery , grid, button, dynamic, image, count, badge
 res_type: kb
+components: ["grid"]
 ticketid: 1672491
 ---
 

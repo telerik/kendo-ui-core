@@ -6,7 +6,7 @@ type: how-to
 slug: change-multiselect-tag-background
 tags: multiselect, tag, change, background, tooltip, colorpalette
 res_type: kb
-component: multi-select
+components: ["multiselect"]
 ---
 
 ## Environment

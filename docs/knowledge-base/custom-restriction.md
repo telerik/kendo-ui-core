@@ -5,9 +5,9 @@ description: "Learn how to create a custom restriction for the events of the Ken
 previous_url: /controls/scheduling/scheduler/how-to/custom-restriction, /controls/scheduling/scheduler/how-to/editing/custom-restriction
 slug: howto_create_custom_restrivtions_scheduler
 tags: telerik, kendo, jquery, scheduler, create, custom, restrictions 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

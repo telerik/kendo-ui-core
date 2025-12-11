@@ -7,7 +7,7 @@ slug: scheduler-mobile-show-contextmenu
 tags: scheduler, show, context, menu, mobile, tap, contextmenu
 ticketid: 1137382
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

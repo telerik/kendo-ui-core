@@ -7,6 +7,7 @@ slug: listbox-use-angular-ng-click
 tags: listbox, angularjs, ng-click, angular, template, directive, jQuery, compile
 ticketid: 1146854
 res_type: kb
+components: ["listbox"]
 ---
 
 ## Environment

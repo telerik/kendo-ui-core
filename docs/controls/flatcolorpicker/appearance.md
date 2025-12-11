@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery FlatColorPicker Documentation - Appearance
 description: "Learn how to apply different styling options to the FlatColorPicker component."
+components: ["flatcolorpicker"]
 slug: appearance_kendoui_flatcolorpicker
 position: 5
 ---

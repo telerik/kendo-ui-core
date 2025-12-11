@@ -2,6 +2,7 @@
 title: Grid Integration
 page_title: Grid Integration | AngularJS Directives
 description: "Learn the tips and tricks about how to use Kendo UI Grid widget in AngularJS."
+components: ["general"]
 previous_url: /AngularJS/the-grid-widget
 slug: grid_settings_angularjs_directives
 position: 4

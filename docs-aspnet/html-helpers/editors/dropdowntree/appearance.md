@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI DropDownTree for {{ site.framework }}."
+components: ["dropdowntree"]
 slug: appearance_dropdowntree
 position: 3
 ---

@@ -6,7 +6,7 @@ page_title: Duplicate Pager - Kendo UI for jQuery Data Grid
 slug: grid-show-pager-top-bottom
 tags: grid, pager, duplicate, top, bottom, multiply, clone
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

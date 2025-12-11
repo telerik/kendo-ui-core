@@ -2,6 +2,7 @@
 title:  Remote Data Binding
 page_title: Remote Binding
 description: "Learn how to bind to remote data with Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 previous_url: /helpers/navigation/menu/binding/remote-data
 slug: htmlhelpers_menu_bindingremotedata_aspnetcore
 position: 4

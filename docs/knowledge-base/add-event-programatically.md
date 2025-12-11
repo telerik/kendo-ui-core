@@ -5,9 +5,9 @@ description: "Learn how to programmatically add an event to the Kendo UI for jQu
 previous_url: /aspnetmvc/controls/scheduling/scheduler/how-to/add-event-programatically, /controls/scheduling/scheduler/how-to/add-event-programatically, /controls/scheduling/scheduler/how-to/editing/add-event-programatically
 slug: howto_add_events_programatically_scheduler
 tags: telerik, kendo, jquery, scheduler, add, events, programmatically
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

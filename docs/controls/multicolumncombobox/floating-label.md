@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: jQuery MultiColumnComboBox Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery MultiColumnComboBox component."
+components: ["multicolumncombobox"]
 slug: floating_label_kendoui_multicolumncombobox_widget
 position: 11
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TaskBoard Documentation - Getting Started with the TaskBoard
 description: "Get started with the jQuery TaskBoard by Kendo UI and learn how to create and initialize the component."
+components: ["taskboard"]
 slug: getting_started_kendoui_taskboard_widget
 position: 2
 ---

@@ -7,7 +7,7 @@ slug: check-listview-item-selected
 tags: listview, item, selected, check
 ticketid: 1134915
 res_type: kb
-component: listview
+components: ["listview"]
 ---
 
 ## Environment

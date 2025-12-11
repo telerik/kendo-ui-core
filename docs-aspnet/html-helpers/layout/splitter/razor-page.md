@@ -1,23 +1,25 @@
 ---
-title:  Razor Page
-page_title: Configure the Splitter in a Razor Page.
+title:  Razor Pages
+page_title: Razor Pages
 description: "An example on how to configure the Telerik UI Splitter component for {{ site.framework }} in a Razor Page."
+components: ["splitter"]
 slug: htmlhelpers_splitter_razorpage_aspnetcore
 position: 6
 ---
 
-# Razor Page
+# Splitter in Razor Pages
 
-This article describes how to configure the Telerik UI Splitter for {{ site.framework }} in a RazorPages scenario.
+Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
 
-See the Splitter configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+You can seamlessly integrate the Telerik UI Splitter for {{ site.framework }} in Razor Pages applications.
+
+This article describes how to configure the Splitter component in a Razor Pages scenario.
+
+For the complete project, refer to the [Splitter in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
 ```HtmlHelper
     @page
-    @model Telerik.Examples.RazorPages.Pages.Splitter.SplitterIndexModel
-    @{
-    	ViewData["Title"] = "SplitterIndex";
-    }
+    @model SplitterIndexModel
 
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -111,10 +113,7 @@ See the Splitter configuration in the example below, and for the full project wi
 {% if site.core %}
 ```TagHelper
     @page
-    @model Telerik.Examples.RazorPages.Pages.Splitter.SplitterIndexModel
-    @{
-    	ViewData["Title"] = "SplitterIndex";
-    }
+    @model SplitterIndexModel
 
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -181,16 +180,19 @@ See the Splitter configuration in the example below, and for the full project wi
 ```
 {% endif %}
 ```C# PageModel
-    public class SplitterIndexModel : PageModel
+public class SplitterIndexModel : PageModel
+{
+    public void OnGet()
     {
-        public void OnGet()
-        {
 
-        }
     }
+}
 ```
 
 ## See Also
 
-* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [Splitter Overview]({% slug htmlhelpers_splitter_aspnetcore %})
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Splitter](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/splitter)
+* [Server-Side HtmlHelper API of the Splitter](/api/splitter)
+* [Server-Side TagHelper API of the Splitter](/api/taghelpers/splitter)
+* [Knowledge Base Section](/knowledge-base)

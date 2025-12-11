@@ -6,6 +6,7 @@ page_title: Adding 'Select-All' Checkbox in Grid Footer
 slug: grid-select-all-in-footer
 tags: grid, checkbox, select, footer, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

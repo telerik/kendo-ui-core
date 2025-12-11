@@ -2,6 +2,7 @@
 title: Angular
 page_title: Angular - Kendo UI Third-Party Tools
 description: "Learn how to use Kendo UI components in an Angular Application."
+components: ["general"]
 previous_url: /angular2
 slug: angular2support_integration_kendoui
 ---

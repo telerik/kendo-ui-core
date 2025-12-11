@@ -2,6 +2,7 @@
 title: Changelog
 page_title: Telerik {{ site.framework }} AI Coding Assistant Changelog
 description: "Find out about the latest changes and improvements in the {{ site.framework }} AI Coding Assistant."
+components: ["aicodingassistant"]
 previous_url: /ai/release-notes, /ai/copilot-extension
 slug: ai_coding_assistant_release_notes_aspnet
 position: 5

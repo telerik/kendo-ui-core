@@ -6,6 +6,7 @@ page_title: ListView Popup Editor
 slug: listview-popup-editor
 tags: kendo, kendo-ui, listview, popup, edit, editor
 res_type: kb
+components: ["popup"]
 ---
 
 ## Environment

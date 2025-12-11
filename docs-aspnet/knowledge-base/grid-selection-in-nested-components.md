@@ -7,6 +7,7 @@ slug: grid-selection-in-nested-components
 tags: grid, wizard, window, hierarchy, selection
 ticketid: 1582155
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

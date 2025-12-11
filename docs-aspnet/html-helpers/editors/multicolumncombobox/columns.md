@@ -2,6 +2,7 @@
 title: Columns
 page_title: Columns
 description: "Set the column width and other settings in the  MultiColumnComboBox component for {{ site.framework }}."
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/columns
 slug: columns_multicolumncombobox_aspnetcore
 position: 4

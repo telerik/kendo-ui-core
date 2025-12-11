@@ -8,6 +8,7 @@ position:
 tags: map, zoom
 ticketid: 1453772
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

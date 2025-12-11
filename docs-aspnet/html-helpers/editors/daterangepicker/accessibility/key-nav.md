@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["daterangepicker"]
 slug: keynav_daterangepicker_aspnetcore
 position: 2
 ---

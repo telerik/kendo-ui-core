@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI MultiColumnComboBox for {{ site.framework }}."
+components: ["multicolumncombobox"]
 slug: appearance_multicolumncombobox
 position: 3
 ---

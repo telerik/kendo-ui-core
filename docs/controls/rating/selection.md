@@ -2,6 +2,7 @@
 title: Selection
 page_title: jQuery Rating Documentation - Selection
 description: "Get started with the jQuery Rating by Kendo UI and learn how to configure the selection behavior of the items."
+components: ["rating"]
 slug: selection_rating_widget
 position: 2
 ---

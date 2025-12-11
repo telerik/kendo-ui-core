@@ -7,6 +7,7 @@ slug: checkbox-list-post
 tags: get, selected, checkboxes, server
 ticketid: 1413275
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

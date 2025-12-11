@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery Menu Documentation - Items
 description: "Get started with the jQuery Menu by Kendo UI and configure the items of the component."
+components: ["menu"]
 slug: items_kendoui_menu
 position: 4
 ---

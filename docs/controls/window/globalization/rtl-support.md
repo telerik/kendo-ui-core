@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: jQuery Window Documentation - Window Right-to-Left Support
 description: "Get started with the jQuery Window by Kendo UI and learn about the RTL supports it provides."
+components: ["window"]
 slug: rtl_window
 position: 3
 ---

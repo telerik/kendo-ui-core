@@ -2,6 +2,7 @@
 title: Navigation
 page_title: Navigation
 description: "Learn how to use the Navigation configuration of the widget."
+components: ["breadcrumb"]
 slug: htmlhelpers_breadcrumb_aspnetcore_navigation
 position: 5
 ---

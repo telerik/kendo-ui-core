@@ -1,6 +1,7 @@
 ---
 title: Telerik Smart Extensions
 description: "Getting Started with Telerik.AI.SmartComponents.Extensions"
+components: ["grid"]
 slug: smart_ext_kendoui_grid
 position: 5
 ---

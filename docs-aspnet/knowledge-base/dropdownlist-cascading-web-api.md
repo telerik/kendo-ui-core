@@ -7,6 +7,7 @@ previous_url: /helpers/editors/dropdownlist/how-to/cascading-web-api, /html-help
 slug: howto_cascadeddlusingwebapiservice_ddlaspnetmvc
 tags: dropdownlist, cascade, webapi, service, combobox
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

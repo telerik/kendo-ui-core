@@ -2,6 +2,7 @@
 title: Getting Started with Local Data
 page_title: Getting Started with Local Data Binding - Kendo UI for jQuery DataSource
 description: "Get started with the jQuery DataSource component by Kendo UI and learn how to bind and configure local data in your JavaScript widgets."
+components: ["datasource"]
 slug: getting_started_kendoui_local_data_binding
 position: 2
 ---

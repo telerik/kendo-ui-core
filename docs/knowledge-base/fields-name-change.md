@@ -5,9 +5,9 @@ description: "Learn how to change the field names in a Kendo UI PivotGrid compon
 slug: howto_change_pivotgrid_fields_names_pivotgrid
 previous_url: /controls/data-management/pivotgrid/how-to/fields-name-change, /controls/data-management/pivotgrid/how-to/appearance/fields-name-change
 tags: pivotgrid, change, field, names
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

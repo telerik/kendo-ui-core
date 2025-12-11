@@ -6,6 +6,7 @@ page_title: How to Lock TaskBoard Items in Kendo UI for Preventing Movement
 slug: how-to-lock-taskboard-items-kendo-ui
 tags: kendo-ui, taskboard, lock, prevent, move, drag
 res_type: kb
+components: ["taskboard"]
 ticketid: 1672436
 ---
 

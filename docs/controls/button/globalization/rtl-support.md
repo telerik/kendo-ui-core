@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: jQuery Button Documentation - Button Right-to-Left Support
 description: "Get started with the jQuery Button by Kendo UI and learn about the RTL supports it provides."
+components: ["button"]
 slug: rtl_button
 position: 3
 ---

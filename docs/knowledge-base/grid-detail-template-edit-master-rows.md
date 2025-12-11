@@ -7,6 +7,7 @@ slug: grid-detail-template-edit-master-rows
 tags: grid, detail, template, editing
 ticketid: 1139115
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

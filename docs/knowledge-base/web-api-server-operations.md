@@ -5,9 +5,9 @@ description: "Learn how to implement the server-side data operations of paging, 
 previous_url: /controls/data-management/grid/how-to/web-api-server-operations, /controls/data-management/grid/how-to/binding/web-api-server-operations
 slug: howto_use_webapi_withserverside_operations_grid
 tags: use, webapi, grid, serverside, data, operations, paging, sorting, filtering, crud, edit, editing, editable
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

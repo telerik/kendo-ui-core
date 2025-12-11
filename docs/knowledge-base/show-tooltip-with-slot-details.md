@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI for jQuery Tooltip to show slot deta
 previous_url: /controls/scheduling/scheduler/how-to/show-tooltip-with-slot-details, /controls/scheduling/scheduler/how-to/appearance/show-tooltip-with-additional-information-over-events
 slug: howto_showtooltipwith_additionalinformation_overslots_scheduler
 tags: telerik, kendo, jquery, scheduler, show, a, tooltip, with, slot, details 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

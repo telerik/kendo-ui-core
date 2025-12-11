@@ -2,6 +2,7 @@
 title: Overview
 page_title: VS Integration Overview
 description: "Learn how to enhance your experience in developing web applications with {{ site.product_long }}."
+components: ["installerandvsextensions"]
 previous_url: /getting-started/vs-integration/introduction, /installation/vs-integration/introduction, /vs-integration-mvc/introduction
 slug: overview_visualstudio_aspnetcore
 position: 1

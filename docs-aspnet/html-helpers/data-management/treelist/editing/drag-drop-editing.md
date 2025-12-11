@@ -2,6 +2,7 @@
 title: Drag-and-Drop
 page_title: Editing by Dragging and Dropping
 description: "Learn how to enable the drag-and-drop editing of the Telerik UI TreeList component for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_drag_drop_editing
 position: 5
 ---

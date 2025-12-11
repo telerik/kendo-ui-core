@@ -6,6 +6,7 @@ slug: restore_fails_core_mvc_vs2015
 tags: progress, kendoui, jquery, restore, fails, aspnet, core, rc, projects, vs2015, bower, installation
 type: troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 

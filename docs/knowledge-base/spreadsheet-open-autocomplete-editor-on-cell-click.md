@@ -7,7 +7,7 @@ slug: spreadsheet-open-autocomplete-editor-on-cell-click
 tags: kendo, kendo-ui, spreadsheet, custom, editor, cell, popup, autocomplete, open-on-click
 ticketid: 1143980
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

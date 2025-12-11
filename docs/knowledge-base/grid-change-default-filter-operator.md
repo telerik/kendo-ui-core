@@ -7,7 +7,7 @@ slug: grid-change-default-filter-operator
 tags: grid, filter, filtering, change, default, operator, menu
 ticketid: 1147525
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

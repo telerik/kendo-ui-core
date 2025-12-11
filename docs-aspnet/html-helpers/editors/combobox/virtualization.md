@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Virtualization
 description: "Learn how to setup the Virtualization feature of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 previous_url: /helpers/editors/combobox/virtualization
 slug: htmlhelpers_combobox_virtualization_aspnetcore
 position: 5

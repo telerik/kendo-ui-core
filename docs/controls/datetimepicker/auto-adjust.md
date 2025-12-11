@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: jQuery DateTimePicker Documentation - Automatic Correction
 description: "Get familiar with the autocorrect feature of the jQuery DateTimePicker by Kendo UI, and learn how to disable it."
+components: ["datetimepicker"]
 slug: autocorrect_kendoui_datetimepicker
 position: 12
 ---

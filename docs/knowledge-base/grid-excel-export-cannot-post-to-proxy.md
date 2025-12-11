@@ -7,7 +7,7 @@ slug: grid-excel-export-cannot-post-to-proxy
 tags: excel, export, grid, proxy, issue, cannot, post, limitation, server, webconfig, iis
 ticketid: 1349739
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

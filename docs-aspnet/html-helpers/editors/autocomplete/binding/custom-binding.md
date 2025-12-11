@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding
 description: "Learn how to implement custom binding with Telerik UI AutoComplete component for {{ site.framework }}."
+components: ["autocomplete"]
 previous_url: /helpers/editors/autocomplete/binding/custom-binding
 slug: custombinding_autocomplete_aspnetmvc
 position: 3

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MultiSelect Documentation - MultiSelect Overview
 description: "Try now the Kendo UI for jQuery MultiSelect component covering everything from binding it to local arrays of data and remote data services, grouping its data and filter it on the server, using templates to customize its content and layout to virtualizing its records and loading them on demand, implementing a summary tag mode and offering a comprehensive set of options for styling its appearance."
+components: ["multiselect"]
 slug: overview_kendoui_multiselect_widget
 position: 2
 ---

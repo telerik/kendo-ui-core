@@ -6,6 +6,7 @@ page_title: Updating Grid Cell Dynamically based on the Values of Multiple Cells
 slug: grid-update-cell-dynamically-based-on-other-cells
 tags: grid, incell, editable, dynamically, automatically, cell, calculation, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ticketid: 1629412
 component: grid
 ---

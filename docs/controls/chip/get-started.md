@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Chip Documentation - Getting Started with the Chip
 description: "Get started with the jQuery Chip by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chip"]
 slug: getting_started_kendoui_chip_widget
 position: 2
 ---

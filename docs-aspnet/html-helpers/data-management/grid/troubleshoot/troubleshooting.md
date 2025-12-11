@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Troubleshooting Issues
 description: "Learn about the solutions of common issues that may occur while working with the {{ site.product }} Grid."
+components: ["grid"]
 slug: troubleshoot_gridhelper_aspnetmvc
 position: 1
 ---

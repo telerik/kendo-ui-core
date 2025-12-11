@@ -2,6 +2,7 @@
 title: Creating Maps
 page_title: jQuery Map Documentation - Creating Maps
 description: "Get started with the jQuery Diagram by Kendo UI, process and transform maps from external sources, and use them with the Map component."
+components: ["map"]
 slug: mapauthoring_mapwidget
 position: 3
 ---

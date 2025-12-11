@@ -2,6 +2,7 @@
 title: Paging
 page_title: Paging
 description: "Get started with the Telerik UI ScrollView component for {{ site.framework }} and learn how to enable its paging functionality."
+components: ["scrollview"]
 slug: htmlhelpers_scrollview_aspnetcore_paging
 position: 3
 ---

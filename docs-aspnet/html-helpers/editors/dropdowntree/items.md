@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn about the item properties in the Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_items_aspnetcore
 position: 5
 ---

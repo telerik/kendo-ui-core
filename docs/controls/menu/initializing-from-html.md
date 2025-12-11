@@ -2,6 +2,7 @@
 title: Initializing from HTML
 page_title: jQuery Menu Documentation - Initializing from HTML Markup
 description: "Get started with the jQuery Menu by Kendo UI and learn about the alternative way to initialize the component from HTML."
+components: ["menu"]
 slug: html_kendoui_menu_component
 position: 2
 ---

@@ -5,9 +5,9 @@ description: "Learn how to show or hide different parts of the editor template b
 previous_url: /controls/scheduling/scheduler/how-to/modify-editor-when-event-is-new, /controls/scheduling/scheduler/how-to/editing/modify-editor-when-event-is-new
 slug: howto_modifyeditortemplate_wheneventisnew_scheduler
 tags: telerik, kendo, jquery, scheduler, modify, editor, templates, on, when, adding, new, events 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

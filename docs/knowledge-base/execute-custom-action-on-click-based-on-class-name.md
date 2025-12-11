@@ -5,9 +5,9 @@ description: "Learn how to execute a custom click action depending on the class 
 slug: howto_execute_custom_click_actions_basedon_classnames_menu
 previous_url: /controls/navigation/menu/how-to/execute-custom-action-on-click-based-on-class-name
 tags: telerik, kendo, jquery, menu, execute, custom, click, actions, based, on, class, name
-component: menu
 type: how-to
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

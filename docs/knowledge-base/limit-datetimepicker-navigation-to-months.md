@@ -5,9 +5,9 @@ description: "Learn how to limit the Kendo UI DateTimePicker navigation to month
 slug: howto_limit_navigation_tomonths_datetimepicker
 previous_url: /controls/editors/datetimepicker/how-to/limit-datetimepicker-navigation-to-months
 tags: telerik, kendo, jquery, datetimepicker, limit, restrict, navigation, to, months, only
-component: datetimepicker
 type: how-to
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ---
 
 ## Environment

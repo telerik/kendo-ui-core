@@ -5,9 +5,9 @@ description: "Learn how to include FontAwesome icons in Kendo UI Chart labels."
 previous_url: /controls/charts/how-to/font-awesome-icons, /controls/charts/how-to/appearance/font-awesome-icons
 slug: howto_fontawesomeicons_charts
 tags: chart, use, fontawesome, icons, labels
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

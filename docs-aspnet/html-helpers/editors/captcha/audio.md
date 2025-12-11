@@ -2,6 +2,7 @@
 title: Audio Content
 page_title: Audio Content
 description: "Learn how to configure the audio provider for the Telerik UI Captcha component for {{ site.framework }}."
+components: ["captcha"]
 slug: htmlhelpers_captcha_audio
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Stepper and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["stepper"]
 slug: keynav_aspnetcore_stepper
 position: 2
 ---

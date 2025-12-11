@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout - Kendo UI Single-Page Application
 description: "Learn how to handle the Layout class in a Kendo UI Single-Page Application."
+components: ["spa"]
 slug: layout_kendoui_singlepageapplication
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Alignment
 page_title: Alignment
 description: "Learn about the alignment options of the Telerik UI FloatingActionButton component for {{ site.framework }} and learn how to configure the positioning of the widget."
+components: ["floatingactionbutton"]
 slug: htmlhelpers_alignment_floatingactionbutton_aspnetcore
 position: 2
 ---

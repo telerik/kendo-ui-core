@@ -5,9 +5,9 @@ description: "Learn how to create a checkbox filter menu functionality in the co
 previous_url: /controls/data-management/grid/how-to/checkbox-filter-menu, /web/grid/how-to/checkbox-filter-menu, /controls/data-management/grid/how-to/filtering/checkbox-filter-menu
 slug: howto_create_checkbox_filter_menu_grid
 tags: grid, create, checkbox, filter, menu
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

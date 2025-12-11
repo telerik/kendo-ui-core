@@ -7,6 +7,7 @@ slug: datepicker-send-datetime-in-post-request
 tags: datepicker, mvc, asp.net, date, picker, datetime, post, request, not, string
 ticketid: 1160064
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

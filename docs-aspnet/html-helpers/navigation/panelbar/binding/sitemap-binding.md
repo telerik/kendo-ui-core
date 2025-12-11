@@ -2,6 +2,7 @@
 title: Sitemap Binding
 page_title: Sitemap Binding
 description: "Set a sitemap to create the items of the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: sitemapbinding_panelbarhelper_aspnetmvc
 position: 5
 ---

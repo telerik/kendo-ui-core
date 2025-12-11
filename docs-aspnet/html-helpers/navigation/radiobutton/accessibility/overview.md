@@ -2,6 +2,7 @@
 title: Overview
 page_title: RadioButton Documentation | RadioButton Accessibility
 description: "Get started with the {{ site.product }} RadioButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["radiobutton"]
 slug: htmlhelpers_radiobutton_accessibility
 position: 1
 ---

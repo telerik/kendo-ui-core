@@ -7,6 +7,7 @@ slug: grid-expanding-inner-grouped-rows
 tags: filter, grid, group, expand
 ticketid: 1145080
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

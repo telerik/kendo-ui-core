@@ -7,7 +7,7 @@ slug: troubleshooting_upload_widget
 tags: telerik, progress, kendoui, jquery, upload, select, button, partially, visible, has, no, text
 type: troubleshooting
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

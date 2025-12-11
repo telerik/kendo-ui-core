@@ -5,9 +5,9 @@ description: "Learn how to use a custom culture script in the Kendo UI NumericTe
 slug: howto_use_custom_culture_script_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/use-custom-culture
 tags: telerik, kendo, jquery, numerictextbox, use, custom, culture, script
-component: numerictextbox
 type: how-to
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ page_title: Transform Kendo UI Grid into Property Grid - Kendo UI for jQuery Dat
 slug: property-grid
 tags: grid, property, mobile, vertical, change, orientation
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

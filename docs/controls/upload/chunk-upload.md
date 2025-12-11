@@ -2,6 +2,7 @@
 title: File Processing
 page_title: jQuery Upload Documentation - File Processing
 description: "Get started with the jQuery Upload by Kendo UI and learn how to persist the initially selected files, upload batches of files, and do a chunk upload for files selected through multiple requests."
+components: ["upload"]
 slug: chunkupload_upload_widget
 position: 3
 ---

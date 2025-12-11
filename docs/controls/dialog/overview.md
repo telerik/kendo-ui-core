@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Dialog Documentation - Dialog Overview
 description: "Try now the Kendo UI for jQuery Dialog component covering everything from supporting basic operations and predefined dialog types to providing action buttons and print settings for the user, and a comprehensive set of options for styling its appearance."
+components: ["dialog"]
 previous_url: /web/dialog/overview, /getting-started/web/dialog/overview
 slug: overview_kendoui_dialog_widget
 position: 0

@@ -5,9 +5,9 @@ description: "Learn how to custyomize markers on a Kendo UI Map component."
 slug: howto_customizemarkersonmap_map
 previous_url: /controls/diagrams-and-maps/map/how-to/custom-markers
 tags: kendo, jquery, map, customize, markers
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

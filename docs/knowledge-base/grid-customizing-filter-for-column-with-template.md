@@ -6,6 +6,7 @@ page_title: Customizing Filter for Column with Template
 slug: grid-customizing-filter-for-column-with-template
 tags: kendo ui, grid, filter, template
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

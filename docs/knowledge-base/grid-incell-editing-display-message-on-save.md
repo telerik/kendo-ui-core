@@ -7,6 +7,7 @@ slug: grid-incell-editing-display-message-on-save
 tags: grid, incell, edit, save, warning, message, leave, cell
 ticketid: 1145326
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

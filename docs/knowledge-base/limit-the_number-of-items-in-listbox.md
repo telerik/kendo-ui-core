@@ -8,7 +8,7 @@ previous_url: /knowledge-base/how_to_limit_the_number_of_items_in_listBox
 tags: listbox, limit
 ticketid: 1130658
 res_type: kb
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

@@ -4,10 +4,10 @@ page_title: Insert New Column When Exporting Grid to Excel - Kendo UI for jQuery
 description: "Learn how to insert new column when exporting Kendo UI Grid for jQuery to Excel."
 slug: grid_insert_new_column_with_excel_export
 tags: grid, new, column, excel, export
-component: grid
 type: how-to
 ticketid: 1604782
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

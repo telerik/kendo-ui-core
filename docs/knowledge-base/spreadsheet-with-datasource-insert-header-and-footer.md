@@ -7,6 +7,7 @@ slug: spreadsheet-with-datasource-insert-header-and-footer
 tags: kendo, kendoui, spreadsheet, datasource, footer, header
 ticketid: 1140923
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

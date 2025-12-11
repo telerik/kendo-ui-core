@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Learn the basics when working with the Telerik UI Grid TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["grid"]
 slug: editing_grid_aspnetcore
 position: 3
 ---

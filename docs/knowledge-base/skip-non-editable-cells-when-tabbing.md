@@ -5,9 +5,9 @@ description: "Learn how to skip non-editable cells when tabbing in the Kendo UI 
 previous_url: /controls/data-management/grid/how-to/Editing/skip-non-editable-cells-when-tabbing
 slug: howto_skip_noneditable_cells_when_tabbing_grid
 tags: skip, noneditable, grid, cells, when, tabbing
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

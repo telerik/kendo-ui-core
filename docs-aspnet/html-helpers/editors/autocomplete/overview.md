@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn more about the Telerik UI AutoComplete component for {{ site.framework }} and its various features like virtualization, data binding options, and accessibility support."
+components: ["autocomplete"]
 previous_url: /helpers/html-helpers/autocomplete, /helpers/editors/autocomplete/overview
 slug: htmlhelpers_autocomplete_aspnetcore
 position: 0

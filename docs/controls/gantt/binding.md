@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Gantt Documentation - Data Binding
 description: "Get started with the jQuery Gantt by Kendo UI and bind the component to local data arrays or remote data services."
+components: ["gantt"]
 slug: databinding_kendoui_gantt
 position: 3
 ---

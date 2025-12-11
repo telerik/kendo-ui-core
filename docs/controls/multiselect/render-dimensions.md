@@ -2,6 +2,7 @@
 title: Rendering and Dimensions
 page_title: jQuery MultiSelect Documentation - Rendering and Dimensions
 description: "Get started with the jQuery MultiSelect by Kendo UI and configure its layout and the rendering of its elements."
+components: ["multiselect"]
 slug: rendering_multiselect
 position: 12
 ---

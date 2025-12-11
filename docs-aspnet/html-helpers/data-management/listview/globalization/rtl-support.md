@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Right-to-Left Support
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable its RTL functionality."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_rtl
 position: 2
 ---

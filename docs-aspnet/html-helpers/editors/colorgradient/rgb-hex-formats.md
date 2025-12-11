@@ -2,6 +2,7 @@
 title: RGB and HEX Formats
 page_title: RGB and HEX Formats
 description: "Learn more about the input formats of the Telerik UI ColorGradient component for {{ site.framework }}."
+components: ["colorgradient"]
 slug: htmlhelpers_rgb_hex_formats_colorgradient
 position: 2
 ---

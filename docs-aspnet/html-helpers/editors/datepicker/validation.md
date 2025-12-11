@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Get started with the {{ site.product }} DatePicker and learn how to implement validation rules for its input value."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_validation
 position: 5
 ---

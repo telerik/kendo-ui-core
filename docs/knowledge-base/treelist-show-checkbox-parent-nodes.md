@@ -8,6 +8,7 @@ position:
 tags: checkbox, treelist, rootnode, root, parent, parentnode
 ticketid: 1445675
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

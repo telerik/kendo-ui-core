@@ -6,6 +6,7 @@ page_title: Use Scheduler SQL Server Database
 slug: scheduler-sql-server-database
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, scheduler, database, sql-server, sql
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

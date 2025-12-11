@@ -7,6 +7,7 @@ slug: grid-lock-unlock-using-toolbar
 tags: grid, lock, unlock, toolbar, column, menu
 ticketid: 1150311
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

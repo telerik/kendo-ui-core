@@ -2,6 +2,7 @@
 title: Custom
 page_title: Custom Binding - Kendo UI MVVM
 description: "Learn how to create custom bindings in Kendo UI MVVM."
+components: ["mvvm"]
 slug: custombinding_mvvm_kendoui
 ---
 

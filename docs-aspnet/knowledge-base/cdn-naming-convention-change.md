@@ -5,6 +5,7 @@ page_title: CDN Naming Convention Change
 slug: cdn-naming-convention-change
 tags: cdn, url, change, upgrade, troubleshoot, application, naming, convention
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

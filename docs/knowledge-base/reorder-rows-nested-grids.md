@@ -5,9 +5,9 @@ description: "Learn how to reorder rows in a child Grid using the Kendo UI Sorta
 previous_url: /controls/data-management/grid/how-to/reorder-rows-nested-grids, /controls/data-management/grid/how-to/Editing/reorder-rows-nested-grids
 slug: howto_reorderrowsinnestedgrid_grid
 tags: reorder, rows, nested, grids, using, sortable
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

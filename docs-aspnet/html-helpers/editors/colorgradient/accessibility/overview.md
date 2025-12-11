@@ -2,6 +2,7 @@
 title: Overview
 page_title: ColorGradient Documentation | ColorGradient Accessibility
 description: "Get started with the {{ site.product }} ColorGradient and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["colorgradient"]
 slug: htmlhelpers_colorgradient_accessibility
 position: 1
 ---

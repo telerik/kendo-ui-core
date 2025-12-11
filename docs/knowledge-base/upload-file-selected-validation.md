@@ -7,7 +7,7 @@ slug: upload-file-selected-validation
 tags: upload, file, selected, validate, validator
 ticketid: 1167714
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: export-multiple-charts-in-the-same-pdf-file
 tags: kendo ui, jquery, pdf, multiple, charts, same, file
 ticketid: 1131735
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

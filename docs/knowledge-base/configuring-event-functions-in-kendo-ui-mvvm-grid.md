@@ -6,6 +6,7 @@ page_title: Adding Event Functions to MVVM Grid Editors
 slug: configuring-event-functions-in-kendo-ui-mvvm-grid
 tags: grid, kendo-ui, mvvm, editor, dropdownlist, events
 res_type: kb
+components: ["grid"]
 ticketid: 1688929
 ---
 

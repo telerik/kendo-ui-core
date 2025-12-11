@@ -8,6 +8,7 @@ position:
 tags: kendoui, multiviewcalendar, months, full, year, view
 ticketid: 1591326
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

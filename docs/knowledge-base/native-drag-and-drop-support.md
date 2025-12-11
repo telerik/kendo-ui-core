@@ -5,9 +5,9 @@ description: "Learn how to support the search for an external item by dragging i
 previous_url: /controls/editors/combobox/how-to/native-drag-and-drop-support, /controls/editors/combobox/how-to/filtering/native-drag-and-drop-support
 slug: howto_search_items_dragging_toinput_combobox
 tags: telerik, kendo, jquery, combobox, search, for, items, by, dragging, to, input
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

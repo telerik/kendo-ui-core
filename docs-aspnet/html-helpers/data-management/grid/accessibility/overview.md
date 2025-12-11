@@ -2,6 +2,7 @@
 title: Overview
 page_title: Grid Documentation | Grid Accessibility
 description: "Get started with the {{ site.product }} Grid and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["grid"]
 slug: htmlhelpers_grid_accessibility
 position: 1
 ---

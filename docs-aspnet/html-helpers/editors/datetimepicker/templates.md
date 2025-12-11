@@ -2,6 +2,7 @@
 title: Templates
 page_title: DateTimePicker Templates
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to customize its templates."
+components: ["datetimepicker"]
 slug: templates_datetimepicker_aspnetcore
 position: 10
 ---

@@ -6,6 +6,7 @@ page_title: Transpose Data - Kendo UI for jQuery Data Grid
 slug: transposed-grid
 tags: vertical, grid, transpose, data, transposed, columns, rows, change, orientation, switch
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

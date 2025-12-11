@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery BottomNavigation Documentation - BottomNavigation Overview
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to initialize the widget."
+components: ["bottomnavigation"]
 slug: overview_kendoui_bottomnavigation_widget
 position: 1
 ---

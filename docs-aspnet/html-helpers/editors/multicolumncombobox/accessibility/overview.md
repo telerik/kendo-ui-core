@@ -2,6 +2,7 @@
 title: Overview
 page_title: MultiColumnComboBox Documentation | MultiColumnComboBox Accessibility
 description: "Get started with the {{ site.product }} MultiColumnComboBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["multicolumncombobox"]
 slug: htmlhelpers_multicolumncombobox_accessibility
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI for {{ site.framework }} Slider component."
+components: ["slider"]
 slug: events_slider
 position: 3
 ---

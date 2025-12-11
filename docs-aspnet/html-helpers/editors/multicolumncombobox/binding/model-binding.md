@@ -2,6 +2,7 @@
 title: Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI MultiColumnComboBox component for {{ site.framework }}."
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/binding/model-binding
 slug: modelbinding_multicolumncombobox_aspnetmvc
 position: 6

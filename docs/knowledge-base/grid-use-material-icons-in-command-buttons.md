@@ -7,7 +7,7 @@ slug: grid-use-material-icons
 tags: grid, editing, material-icons
 ticketid: 1139682
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

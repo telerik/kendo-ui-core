@@ -2,6 +2,7 @@
 title: Immutable Elements
 page_title: jQuery Editor Documentation - Immutable Elements
 description: "Get started with the jQuery Editor by Kendo UI and add HTML elements which cannot be edited by the user."
+components: ["editor"]
 previous_url: /controls/editor/immutable-elements
 slug: immutable_elements_editor_widget
 position: 10

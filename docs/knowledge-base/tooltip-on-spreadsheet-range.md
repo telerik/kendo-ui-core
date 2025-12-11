@@ -5,8 +5,8 @@ description: "Learn how to show a selected range from a Kendo UI Spreadsheet in 
 previous_url: /controls/data-management/spreadsheet/how-to/AngularJS/show-selected-range-in-tooltip, /controls/data-management/spreadsheet/how-to/show-selected-range-in-tooltip
 slug: tooltip_on_spreadsheet_range
 tags: spreadsheet, tooltip, range, selection
-component: tooltip, spreadsheet
 res_type: kb
+components: ["tooltip"]
 ---
 
 ## Environment

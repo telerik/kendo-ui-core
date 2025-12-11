@@ -5,9 +5,9 @@ description: "Learn how to match the visible column widths when hiding or showin
 previous_url: /controls/data-management/grid/how-to/Layout/auto-resize-grid-when-hiding-and-showing-columns
 slug: howto_resize_grid_when_hiding_columns_grid
 tags: grid, match, visible, column, width
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

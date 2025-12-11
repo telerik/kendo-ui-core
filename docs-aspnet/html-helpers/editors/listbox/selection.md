@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Get started with the {{ site.product }} ListBox and learn how enable the selection functionality."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/selection
 slug: htmlhelpers_listbox_selection_aspnetcore
 position: 5

@@ -6,6 +6,7 @@ page_title: How to Bind URLs and Titles to Kendo UI Menu Items and Open in New T
 slug: how-to-bind-urls-and-titles-to-kendo-ui-menu
 tags: kendo ui, menu, datasource, json, url, title, tooltip, new tab, window
 res_type: kb
+components: ["menu"]
 ticketid: 1669505
 ---
 

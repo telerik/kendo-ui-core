@@ -2,6 +2,7 @@
 title: Ajax Binding
 page_title: Ajax Binding
 description: "Learn how to configure the Telerik UI Gantt for {{ site.framework }} to use Ajax binding"
+components: ["gantt"]
 slug: htmlhelpers_gantt_ajaxbinding_aspnetcore
 position: 2
 ---

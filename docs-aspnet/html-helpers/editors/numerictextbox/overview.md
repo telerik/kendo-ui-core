@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI NumericTextBox component for {{ site.framework }} that allows the user to select numeric values through direct input or by using spinner buttons"
+components: ["numerictextbox"]
 previous_url: /helpers/html-helpers/numerictextbox, /helpers/editors/numerictextbox/overview
 slug: htmlhelpers_numerictextbox_aspnetcore
 position: 0

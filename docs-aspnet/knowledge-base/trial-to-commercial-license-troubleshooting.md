@@ -6,6 +6,7 @@ page_title: Removing the Trial Message
 slug: troubleshooting_trial_message
 tags: trial, troubleshooting, commercial, license
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

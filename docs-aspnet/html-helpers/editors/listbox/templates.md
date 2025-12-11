@@ -2,6 +2,7 @@
 title: Item Templates
 page_title: Item Templates
 description: "Get started with the {{ site.product }} ListBox and learn how to customize its item templates."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/templates
 slug: htmlhelpers_listbox_templates_aspnetcore
 position: 3

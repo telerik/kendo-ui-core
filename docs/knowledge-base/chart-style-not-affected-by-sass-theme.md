@@ -7,6 +7,7 @@ slug: chart-style-not-affected-by-sass-theme
 tags: chart, theme, themebuilder, style, sass
 ticketid: 1141887
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

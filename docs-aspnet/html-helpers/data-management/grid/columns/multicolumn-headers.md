@@ -2,6 +2,7 @@
 title: Multi-Column Headers
 page_title: Multi-Column Headers
 description: "The Multi-Column Header feature of the Telerik UI Grid component for {{ site.framework }} allows you to group one or more columns under a common higher-level header."
+components: ["grid"]
 slug: multicolumn_headers_aspnetcore_grid
 position: 5
 ---

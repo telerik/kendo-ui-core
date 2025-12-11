@@ -7,6 +7,7 @@ slug: map-marker-labels-from-always-shown-tooltips
 tags: map,show,always,marker,tooltip,label
 ticketid: 1412666
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

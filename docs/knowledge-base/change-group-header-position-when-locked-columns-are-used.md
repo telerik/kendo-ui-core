@@ -5,9 +5,9 @@ description: "Learn how to change the position of the group header when locked c
 previous_url: /controls/data-management/grid/how-to/Layout/change-group-header-position-when-locked-columns-are-used
 slug: howto_change_group_header_position_wthlocked_columns_grid
 tags: grid, change, group, header, position, locked, frozen, columns
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

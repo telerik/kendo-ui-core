@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI PanelBar Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} PanelBar using various data binding approaches."
+components: ["panelbar"]
 previous_url: /helpers/navigation/panelbar/binding/overview
 slug: htmlhelpers_panelbar_databinding_aspnetcore
 position: 1

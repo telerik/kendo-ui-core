@@ -2,6 +2,7 @@
 title: First Steps with CLI
 page_title: Getting Started with CLI
 description: "Create a sample project with the command-line interface on any platform with Progress Telerik UI for ASP.NET Core."
+components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /getting-started/getting-started-linux, /getting-started/getting-started-vscode, /getting-started/getting-started-cli
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
 position: 3

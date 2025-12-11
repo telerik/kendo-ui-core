@@ -6,7 +6,7 @@ page_title: Use DropDownList Widgets in the Column Templates of MVVM Grids - Ken
 slug: grid-mvvm-dropdown-template
 tags: grid, mvvm, dropdown, list, drop, down, template, client, column
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

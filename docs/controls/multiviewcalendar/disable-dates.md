@@ -2,6 +2,7 @@
 title: Disabled Dates
 page_title: jQuery MultiViewCalendar Documentation - Disabled Dates
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and disable specific dates in the component."
+components: ["multiviewcalendar"]
 slug: disabled_dates_multiviewcalendar
 position: 6
 ---

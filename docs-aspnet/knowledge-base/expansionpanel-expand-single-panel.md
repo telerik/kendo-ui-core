@@ -6,6 +6,7 @@ page_title: Expanding Single Panel at a Time When Using Multiple Expansion Panel
 slug: expansionpanel-expand-single-panel
 tags: expansion panel, expand, single, panel
 res_type: kb
+components: ["general"]
 component: ExpansionPanel
 ---
 

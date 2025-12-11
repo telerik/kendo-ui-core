@@ -6,6 +6,7 @@ page_title: Set Form field programmatically
 slug: form-set-field-programmatically
 tags: form, field, set, change
 res_type: kb
+components: ["form"]
 ---
 
 ## Environment

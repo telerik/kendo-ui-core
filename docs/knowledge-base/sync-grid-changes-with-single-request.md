@@ -5,9 +5,9 @@ description: "Learn how to send all updated, deleted, or new records of the Kend
 previous_url: /controls/data-management/grid/how-to/Editing/sync-grid-changes-with-single-request
 slug: howto_sync_all_updated_items_with_single_request
 tags: sync, grid, changes, send, updated, deleted, new, records, single, request
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

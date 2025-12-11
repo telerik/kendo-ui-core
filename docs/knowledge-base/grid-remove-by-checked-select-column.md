@@ -7,6 +7,7 @@ slug: grid-remove-by-checked-select-column
 tags: grid, select, column, check, checkbox, checkboxes, header, row, remove
 ticketid: 1147495
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

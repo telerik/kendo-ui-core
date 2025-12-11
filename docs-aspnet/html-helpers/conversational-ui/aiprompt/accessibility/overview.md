@@ -2,6 +2,7 @@
 title: Overview
 page_title: AIPrompt Documentation | AIPrompt Accessibility
 description: "Get started with the {{ site.product }} AIPrompt and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["aiprompt"]
 slug: htmlhelpers_aiprompt_accessibility
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Inline
 page_title: Inline Editing
 description: "Define commands and set the edit mode to configure the Telerik UI TreeList component for {{ site.framework }} for inline editing."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_inline_editing
 position: 3
 ---

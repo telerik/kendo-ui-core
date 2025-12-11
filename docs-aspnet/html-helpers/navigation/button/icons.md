@@ -2,6 +2,7 @@
 title: Icon Button
 page_title: Icon Button
 description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI Button component for {{ site.framework }}."
+components: ["button"]
 previous_url: /helpers/navigation/button/icons
 slug: icons_button_aspnetcore
 position: 2

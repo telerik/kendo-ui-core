@@ -6,7 +6,7 @@ slug: scripts_stylesheets_not_loading_from_cdn
 tags: telerik, kendoui, jquery, troubleshooting, scripts, stylesheets, not, loading, from, cdn 
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

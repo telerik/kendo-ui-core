@@ -7,6 +7,7 @@ slug: grid-excel-export-entire-data
 tags: grid, excel, export, whole, data, no filter, group, all pages, complete, entire
 ticketid: 1140199
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

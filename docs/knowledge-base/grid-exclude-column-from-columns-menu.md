@@ -7,6 +7,7 @@ slug: grid-exclude-column-from-columns-menu
 tags: grid, exclude, hidden, column, columns, menu
 ticketid: 1158504
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

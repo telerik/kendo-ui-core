@@ -7,6 +7,7 @@ slug: grid-hide-grouped-column
 tags: grid, hide, grouping, column
 ticketid: 1608593
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

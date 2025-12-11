@@ -7,6 +7,7 @@ slug: stepper-change-color
 tags: stepper, step, color, dynamic
 ticketid: 1576676
 res_type: kb
+components: ["general"]
 component: stepper
 ---
 

@@ -7,6 +7,7 @@ meta_title: Preventing Auto-Increment on Dragging in Kendo UI for jQuery Spreads
 slug: preventing-auto-increment-dragging-kendo-ui-jquery-spreadsheet
 tags: spreadsheet, kendo ui for jquery, autofill, changing event, custom implementation
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1700019
 ---
 

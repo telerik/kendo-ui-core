@@ -6,6 +6,7 @@ page_title: How to Conditionally Set Columns as Editable in Kendo UI for jQuery 
 slug: conditional-column-editability-kendo-ui-grid
 tags: kendo-ui, grid, jquery, editable, columns
 res_type: kb
+components: ["grid"]
 ticketid: 1649628
 ---
 

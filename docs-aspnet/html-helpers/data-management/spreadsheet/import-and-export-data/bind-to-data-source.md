@@ -2,6 +2,7 @@
 title: DataSource Binding
 page_title: DataSource Binding
 description: "Learn how to bind a sheet of a {{ site.product }} Spreadsheet to a DataSource in {{ site.framework }} applications."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore
 position: 1
 ---

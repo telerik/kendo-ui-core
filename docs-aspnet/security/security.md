@@ -2,6 +2,7 @@
 title: Overview
 page_title: Security Overview
 description: "Learn how to secure {{ site.product }} components and your web application with best practices, vulnerability reporting, and component-specific security guidelines."
+components: ["general"]
 slug: security_information_aspnetmvc6_aspnetmvc
 tags: telerik, asp, net, core, asp.net, security, mvc, xss, owasp, csp
 position: 1

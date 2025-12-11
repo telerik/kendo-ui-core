@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery AutoComplete Documentation - Data Binding
 description: "Get started with the jQuery AutoComplete by Kendo UI and bind the widget to local or remote data and provide its suggestions."
+components: ["autocomplete"]
 slug: databinding_kendoui_autocomplete
 position: 2
 ---

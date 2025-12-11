@@ -2,6 +2,7 @@
 title: ListView
 page_title: jQuery Sortable Documentation - ListView Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the component with the Kendo UI ListView."
+components: ["sortable"]
 slug: integrationwith_listview_sortable
 ---
 

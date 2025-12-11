@@ -7,6 +7,7 @@ slug: dropdownlist-icon-placeholder
 tags: dropdownlist, icon, placeholder, place, web, font
 ticketid: 1153026
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

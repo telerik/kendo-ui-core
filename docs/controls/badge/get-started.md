@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Badge Documentation | Getting Started with the Badge
 description: "Get started with the jQuery Badge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["badge"]
 slug: getting_started_kendoui_badge_widget
 position: 1
 ---

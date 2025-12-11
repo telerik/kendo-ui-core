@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn how to secure Kendo UI for jQuery components and your web application with best practices, vulnerability reporting, and component-specific security guidelines."
+components: ["general"]
 slug: security/security-information
 tags: kendoui, html, js, jquery, security, xss, owasp, csp
 published: True

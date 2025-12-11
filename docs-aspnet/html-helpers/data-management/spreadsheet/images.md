@@ -2,6 +2,7 @@
 title: Images
 page_title: Spreadsheet
 description: "Place an image in a Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_images_aspnetcore
 position: 5
 ---

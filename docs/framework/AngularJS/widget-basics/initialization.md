@@ -2,6 +2,7 @@
 title: Widget Initialization
 page_title: Initialization of Widgets | AngularJS Directives
 description: "Learn how to initialize and configure AngularJS integrated Kendo UI widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#creating-widgets
 slug: angularjs_initialization
 position: 1

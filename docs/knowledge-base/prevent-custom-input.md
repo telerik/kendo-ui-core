@@ -5,9 +5,9 @@ description: "Learn how to allow only existing values in a Kendo UI AutoComplete
 previous_url: /controls/editors/autocomplete/how-to/prevent-custom-input, /controls/editors/autocomplete/how-to/input/restrict-user-input, /controls/editors/autocomplete/how-to/input/prevent-custom-input
 slug: howto_preventcustominput_autocomplete
 tags: telerik, kendo, jquery, autocomplete, prevent, restrict, custom, user, input, allow, only, existing, values
-component: autocomplete
 type: how-to
 res_type: kb
+components: ["autocomplete"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ slug: hidden_widgets_appearance_error_issues
 tags: telerik, kendoui, jquery, troubleshooting, hidden, widget, incorrect, appearance, error, issue 
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

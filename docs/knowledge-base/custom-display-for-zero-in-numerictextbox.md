@@ -6,6 +6,7 @@ page_title: How to Customize Zero Value Display in Kendo UI NumericTextBox
 slug: custom-display-for-zero-in-numerictextbox
 tags: kendo-ui, numerictextbox, customization, format, zero
 res_type: kb
+components: ["numerictextbox"]
 ticketid: 1670959
 ---
 

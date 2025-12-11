@@ -6,6 +6,7 @@ page_title: Utilizing the ListView for Loading Items on Demand and Full-Page Scr
 slug: listview-loading-on-demand-while-page-scrolling
 tags: listview, lazy, loading, on-demand, browser, page, scrolling, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

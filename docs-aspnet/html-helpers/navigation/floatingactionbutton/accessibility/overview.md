@@ -2,6 +2,7 @@
 title: Overview
 page_title: FloatingActionButton Documentation | FloatingActionButton Accessibility
 description: "Get started with the {{ site.product }} FloatingActionButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["floatingactionbutton"]
 slug: htmlhelpers_floatingactionbutton_accessibility
 position: 1
 ---

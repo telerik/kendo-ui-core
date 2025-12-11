@@ -2,6 +2,7 @@
 title: Encoding
 page_title: jQuery QRCode Documentation - Encoding
 description: "Get started with the jQuery QRCode by Kendo UI and use its supported encoding conventions."
+components: ["qrcode"]
 slug: encoding_qrcode_widget
 position: 2
 ---

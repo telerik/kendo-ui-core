@@ -7,7 +7,7 @@ slug: editor-imageeditor-intergration
 tags: kendo, jquery, editor, imageeditor, integration, image editing
 ticketid: 1534294
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

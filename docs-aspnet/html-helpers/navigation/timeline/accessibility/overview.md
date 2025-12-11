@@ -2,6 +2,7 @@
 title: Overview
 page_title: Timeline Documentation | Timeline Accessibility
 description: "Get started with the {{ site.product }} Timeline and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["timeline"]
 slug: htmlhelpers_timeline_accessibility
 position: 1
 ---

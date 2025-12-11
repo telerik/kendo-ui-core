@@ -7,6 +7,7 @@ slug: grid-animate-resize-method
 tags: grid, animation, resize, height
 ticketid: 1151627
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

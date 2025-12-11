@@ -5,9 +5,9 @@ description: "Learn how to upload files to the OData service by using the Kendo 
 slug: howto_upload_odata
 previous_url: /controls/editors/upload/how-to/upload-odata
 tags: telerik, kendo, jquery, upload, files, to, odata, service
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

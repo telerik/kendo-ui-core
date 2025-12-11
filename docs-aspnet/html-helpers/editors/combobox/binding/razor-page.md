@@ -3,20 +3,19 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI ComboBox component for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_combobox_razorpage_aspnetcore
+components: ["combobox"]
 position: 7
 ---
 
 # ComboBox in Razor Pages 
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI ComboBox for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI ComboBox for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_combobox_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the ComboBox component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the <a href="https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ComboBox/ComboBoxCrud.cshtml" target="_blank">ComboBox in Razor Pages example</a>.
-
-## Getting Started
+## Binding to Remote Data
 
 The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers the most versatile data binding approach. To connect the ComboBox to a data set retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
@@ -33,7 +32,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
                 .DataSource(source =>
                 {
                     source.Read(read => read
-                        .Url("/Index?handler=Read").Data("forgeryToken"));
+                        .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
                 })
             )
         </div>
@@ -49,7 +48,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
                 datavaluefield="OrderID">
                 <datasource>
                     <transport>
-                        <read url="/Index?handler=Read" data="forgeryToken"/>
+                        <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                     </transport>
                 </datasource>
             </kendo-combobox>
@@ -89,7 +88,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
                 .DataSource(source =>
                 {
                     source.Read(read => read
-                        .Url("/Index?handler=Read").Data("dataFunction"))
+                        .Url(Url.Page("Index", "Read")).Data("dataFunction"))
                         .ServerFiltering(true);
                 })
             )
@@ -108,7 +107,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
                 filter="FilterType.Contains">
                 <datasource server-filtering="true">
                     <transport>
-                        <read url="/Index?handler=Read" data="dataFunction"/>
+                        <read url="@Url.Page("Index", "Read")" data="dataFunction"/>
                     </transport>
                 </datasource>
             </kendo-combobox>
@@ -171,8 +170,9 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             }
         }
     ```
+For the complete project, refer to the <a href="https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ComboBox/ComboBoxCrud.cshtml" target="_blank">ComboBox in Razor Pages example</a>.
 
-## Binding the ComboBox to a PageModel Property
+## Binding to a PageModel Property
 
 To bind the ComboBox to a property from the `PageModel`, follow the next steps:
 
@@ -212,7 +212,7 @@ To bind the ComboBox to a property from the `PageModel`, follow the next steps:
             .DataSource(source =>
             {
                 source.Read(read => read
-                    .Url("/Index?handler=Read").Data("forgeryToken"));
+                    .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
             })
         )
     ```
@@ -229,7 +229,7 @@ To bind the ComboBox to a property from the `PageModel`, follow the next steps:
             datavaluefield="OrderID">
             <datasource>
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                 </transport>
             </datasource>
         </kendo-combobox>

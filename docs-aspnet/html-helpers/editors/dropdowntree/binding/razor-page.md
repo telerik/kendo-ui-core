@@ -3,76 +3,64 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI DropDownTree component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_dropdowntree_razorpage_aspnetcore
+components: ["dropdowntree"]
 position: 5
 ---
 
 # DropDownTree in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI DropDownTree for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI DropDownTree for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_dropdowntree_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the DropDownTree component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [DropDownTree in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownTree/DropDownTreeIndex.cshtml).
+## Binding to Remote Data
 
-## Getting Started
+The most flexible form of data binding is to use the [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component. To bind the DropDownTree to a data set received from a remote endpoint within a Razor Pages application, follow the next steps:
 
-In order to set up the DropDownTree component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method hedge refer the name of the method in the pagemodel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
+1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-```HtmlHelper
-    @page
-    @model IndexModel
+    ```HtmlHelper
+        @page
+        @model DropDownTreeIndexModel
 
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-	@Html.AntiForgeryToken()	
-	
-	@(Html.Kendo().DropDownTree()		
-		.Name("dropdowntree")
-		.AutoWidth(true)
-		.DataTextField("Name")
-		.HtmlAttributes(new { style = "width: 100%" })
-		.CheckAll(true)
-		.AutoClose(false)
-		.Checkboxes(checkboxes => checkboxes
-			.CheckChildren(true)
-		)
-		.DataSource(dataSource => dataSource
-			.Custom()
-			.Transport(t => t
-				.Read(r => r.Url(Url.Page("DropDownTreeIndex", "DropDownTreeRead")).Data("forgeryToken")))
-			)
-	
-	)
-	
-	<script>
-		function forgeryToken() {
-			return kendo.antiForgeryTokens();
-		}
-	</script>
-```
-```TagHelper
-	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-	@Html.AntiForgeryToken()
+        @(Html.Kendo().DropDownTree()		
+            .Name("dropdowntree")
+            .AutoWidth(true)
+            .DataTextField("Name")
+            .HtmlAttributes(new { style = "width: 100%" })
+            .CheckAll(true)
+            .AutoClose(false)
+            .Checkboxes(checkboxes => checkboxes
+                .CheckChildren(true)
+            )
+            .DataSource(dataSource => dataSource
+                .Custom()
+                .Transport(t => t
+                    .Read(r => r.Url(Url.Page("DropDownTreeIndex", "DropDownTreeRead")).Data("forgeryToken")))
+                )
+        )
+    ```
+    ```TagHelper
+        @page
+        @model DropDownTreeIndexModel
 
-    <kendo-dropdowntree datatextfield="Name" datavaluefield="id" name="dropdowntree" auto-width="true" style="width: 100%" auto-close="false">
-        <hierarchical-datasource>
-            <schema>
-                <hierarchical-model id="id"></hierarchical-model>
-            </schema>
-            <transport>
-                <read url="@Url.Page("DropDownTreeIndex", "DropDownTreeRead")" data="forgeryToken" />
-            </transport>
-        </hierarchical-datasource>
-		<checkboxes check-children="true" enabled="true" />
-    </kendo-dropdowntree>
-
-	<script>
-		function forgeryToken() {
-			return kendo.antiForgeryTokens();
-		}
-	</script>
-```
+        <kendo-dropdowntree name="dropdowntree" style="width: 100%"
+            datatextfield="Name" 
+            auto-close="false"
+            auto-width="true">
+            <hierarchical-datasource>
+                <schema>
+                    <hierarchical-model id="id"></hierarchical-model>
+                </schema>
+                <transport>
+                    <read url="@Url.Page("DropDownTreeIndex", "DropDownTreeRead")" data="forgeryToken" />
+                </transport>
+            </hierarchical-datasource>
+            <checkboxes check-children="true" enabled="true" />
+        </kendo-dropdowntree>
+    ```
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
@@ -104,7 +92,50 @@ In order to set up the DropDownTree component bindings, you need to configure th
         </script>
     ```
 
-## Binding the DropDownTree to a PageModel Property
+1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
+
+    ```C# DropDownTreeIndex.cshtml.cs
+    public class DropDownTreeIndexModel : PageModel
+    {
+        public JsonResult OnGetDropDownTreeRead(int? id)
+        { 
+            var dropDownTreeData = result.Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
+                .Select(item => new {
+                    id = item.ID,
+                    Name = item.Name,
+                    hasChildren = item.HasChildren
+                });
+
+            return new JsonResult(dropDownTreeData);
+        }
+
+        public static IList<HierarchicalViewModel> result = new List<HierarchicalViewModel>()
+        {
+            new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent Item 1" },
+            new HierarchicalViewModel() { ID = 2, ParentID = null, HasChildren = true, Name = "Parent Item 2" },
+            new HierarchicalViewModel() { ID = 3, ParentID = null, HasChildren = true, Name = "Parent Item 3" },
+            new HierarchicalViewModel() { ID = 4, ParentID = 1, HasChildren = false, Name = "Child Item 1" },
+            new HierarchicalViewModel() { ID = 5, ParentID = 1, HasChildren = false, Name = "Child Item 2" },
+            new HierarchicalViewModel() { ID = 6, ParentID = 2, HasChildren = false, Name = "Child Item 3" },
+            new HierarchicalViewModel() { ID = 7, ParentID = 2, HasChildren = false, Name = "Child Item 4" },
+            new HierarchicalViewModel() { ID = 8, ParentID = 3, HasChildren = false, Name = "Child Item 5" },
+            new HierarchicalViewModel() { ID = 9, ParentID = 3, HasChildren = false, Name = "Child Item 6" }
+        };
+    }
+    ```
+    ```Model
+    public class HierarchicalViewModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int? ParentID { get; set; }
+        public bool HasChildren { get; set; }
+    }
+    ```
+
+For the complete project, refer to the [DropDownTree in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownTree/DropDownTreeIndex.cshtml).
+
+## Binding to a PageModel Property
 
 To bind the DropDownTree to a property from the `PageModel`, follow the next steps:
 
@@ -155,8 +186,8 @@ To bind the DropDownTree to a property from the `PageModel`, follow the next ste
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [Client-Side API of the [DropDownTree]](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
-* [Server-Side HtmlHelper API of the [DropDownTree]](/api/dropdowntree)
-* [Server-Side TagHelper API of the [DropDownTree]](/api/taghelpers/dropdowntree)
+* [Client-Side API of the DropDownTree](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree)
+* [Server-Side HtmlHelper API of the DropDownTree](/api/dropdowntree)
+* [Server-Side TagHelper API of the DropDownTree](/api/taghelpers/dropdowntree)
 * [Knowledge Base Section](/knowledge-base)
 

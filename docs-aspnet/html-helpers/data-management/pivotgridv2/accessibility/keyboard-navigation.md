@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: PivotGridV2 Keyboard Navigation
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["pivotgridv2"]
 slug: keynav_aspnetcore_pivotgridv2
 position: 2
 ---

@@ -6,6 +6,7 @@ slug: upload-add-image-preview
 tags: telerik, upload, add, image, preview, before, uploading, files
 component: upload
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to highlight Kendo UI Map shapes by a specified ID."
 slug: howto_highlightmapshapesbyid_map
 previous_url: /controls/diagrams-and-maps/map/how-to/highlight-map-shapes-by-id
 tags: kendo, jquery, map, highlight, shapes, by, id
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

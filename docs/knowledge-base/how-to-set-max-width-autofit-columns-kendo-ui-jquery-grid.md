@@ -6,6 +6,7 @@ page_title: How to Set a Max Width for AutoFit Columns in Kendo UI for jQuery Gr
 slug: how-to-set-max-width-autofit-columns-kendo-ui-jquery-grid
 tags: kendo, grid, autofitcolumn, maxwidth, resizecolumn
 res_type: kb
+components: ["grid"]
 ticketid: 1674987
 ---
 

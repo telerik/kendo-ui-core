@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Chart Documentation - Chart Overview
 description: "Try now the Kendo UI for jQuery Chart component that allows you to represent remote or local data in beautiful, professionally designed charts of any type."
+components: ["chart"]
 previous_url: /howto/add-charts-and-graphs-to-an-application, /controls/charts/chart/overview
 slug: overview_kendoui_charts_widget
 position: 0

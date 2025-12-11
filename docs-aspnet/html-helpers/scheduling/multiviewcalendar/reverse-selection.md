@@ -2,6 +2,7 @@
 title: Reverse Selection
 page_title: Reverse Selection
 description: "Learn how to enable the reverse selection feature in the Telerik UI for {{ site.framework }} MultiViewCalendar."
+components: ["multiviewcalendar"]
 slug: reverse_selection_multiviewcalendar_htmlhelper_aspnetcore
 position: 9
 ---

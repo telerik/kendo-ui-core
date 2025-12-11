@@ -2,6 +2,7 @@
 title: Common Mistakes
 page_title: Common Mistakes
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to avoid and handle the most common performance mistakes."
+components: ["grid"]
 slug: performance_htmlhelpers_grid_aspnetcore
 position: 2
 ---

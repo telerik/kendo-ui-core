@@ -2,6 +2,7 @@
 title: OS, Visual Studio, and Browser Support
 page_title: Operating System, Visual Studio and Browser Support
 description: "Get started with {{ site.product }} and learn which are the operating systems, Visual Studio versions, and Browsers that are supported by the framework components."
+components: ["general"]
 previous_url: /getting-started/prerequisites/os-support, /compatibility/os-support, /getting-started/prerequisites/visual-studio-support, /compatibility/visual-studio-support, /getting-started/prerequisites/browser-support, /compatibility/browser-support, /installation-mvc/system-requirements/browser-support.md
 slug: ossupport_core
 position: 1

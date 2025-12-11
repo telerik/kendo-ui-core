@@ -2,6 +2,7 @@
 title: Setting the Operators
 page_title: Setting the Operators
 description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn how to select its available filter operators."
+components: ["filter"]
 previous_url: /helpers/data-management/filter/operators
 slug: htmlhelpers_filter_aspnetcore_choose_operators
 position: 2

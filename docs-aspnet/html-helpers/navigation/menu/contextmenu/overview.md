@@ -2,6 +2,7 @@
 title: Overview
 page_title: ContextMenu
 description: "Learn the basics when working with the Telerik UI ContextMenu component for {{ site.framework }}."
+components: ["menu"]
 previous_url: /helpers/html-helpers/menu/contextmenu
 slug: htmlhelpers_contextmenu_aspnetcore
 position: 0

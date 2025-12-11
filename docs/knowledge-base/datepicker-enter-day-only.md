@@ -6,7 +6,7 @@ page_title: Set Date by Entering Only the Day - Kendo UI DatePicker for jQuery
 slug: datepicker-enter-day-only
 tags: kendo, datepicker, day, date, select, default, set
 res_type: kb
-component: datepicker
+components: ["datepicker"]
 ---
 
 ## Environment

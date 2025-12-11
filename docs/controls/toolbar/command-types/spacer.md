@@ -2,6 +2,7 @@
 title: Spacer
 ppage_title: jQuery ToolBar Documentation - Spacer Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Spacer command type."
+components: ["toolbar"]
 previous_url: /controls/toolbar/spacer
 slug: spacer_toolbar_widget
 ---

@@ -2,6 +2,7 @@
 title: OData Binding
 page_title: OData Binding
 description: "Learn how to implement OData binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/odata-binding
 slug: htmlhelpers_grid_aspnetcore_odata-binding
 position: 9

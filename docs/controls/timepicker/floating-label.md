@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: jQuery TimePicker Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery TimePicker component."
+components: ["timepicker"]
 slug: floating_label_kendoui_timepicker_widget
 position: 6
 ---

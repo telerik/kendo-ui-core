@@ -2,6 +2,7 @@
 title: Using a Project Template
 page_title: Using a Project Template
 description: "Create a sample project with Progress Telerik UI for ASP.NET MVC components by starting with a Telerik template on Visual Studio."
+components: ["general"]
 slug: gettingstarted_aspnetmvc
 previous_url: /getting-started/asp-net-mvc-5
 position: 1

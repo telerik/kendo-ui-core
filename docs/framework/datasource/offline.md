@@ -2,6 +2,7 @@
 title: Offline Support
 page_title: Offline Support - Kendo UI for jQuery DataSource
 description: "Learn more about the offline support the Kendo UI for jQuery framework provides when working with the DataSource component and your JavaScript widgets."
+components: ["datasource"]
 slug: offlinesupport_kendoui_datasourcecomponent
 position: 7
 ---

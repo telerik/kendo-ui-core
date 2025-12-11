@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Editors
 page_title: Individual Scripts for Editors
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Editors"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-editors, /installation/scripts/scripts-editors
 slug: script_filesfor_editors_widgets
 ---

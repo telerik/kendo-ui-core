@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Gantt and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["gantt"]
 slug: keynav_aspnetcore_gantt
 position: 2
 ---

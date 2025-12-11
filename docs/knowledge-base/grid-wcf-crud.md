@@ -5,9 +5,9 @@ description: "Learn how to use WCF service with remote CRUD operations in the Ke
 previous_url: /controls/data-management/grid/how-to/Editing/grid-wcf-crud
 slug: howto_use_wcf_service_crud_operations_grid
 tags: grid, use, wcf, service, remote, crud, operations
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

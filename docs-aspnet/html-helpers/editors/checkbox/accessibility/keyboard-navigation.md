@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} CheckBox by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["checkbox"]
 slug: keynav_aspnetcore_checkbox
 position: 2
 ---

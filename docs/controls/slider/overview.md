@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Slider Documentation - Slider Overview
 description: "Get started with the jQuery Slider by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["slider"]
 slug: overview_kendoui_slider_widget
 position: 0
 ---

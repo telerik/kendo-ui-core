@@ -2,6 +2,7 @@
 title: Sitemap Binding
 page_title: Sitemap Binding
 description: "Set a sitemap to create the items of the Telerik UI TabStrip HtmlHelper for ASP.NET MVC."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/binding/sitemap-binding
 slug: sitemapbinding_tabstrip_aspnetmvc
 position: 4

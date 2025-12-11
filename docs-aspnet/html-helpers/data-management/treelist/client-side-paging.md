@@ -2,6 +2,7 @@
 title: Paging
 page_title: Paging
 description: "Learn how to enable the client-side paging feature to the Telerik UI TreeList component for {{ site.framework }}."
+components: ["treelist"]
 slug: client_side_paging_aspnetcore_treelist_helper
 position: 5
 ---

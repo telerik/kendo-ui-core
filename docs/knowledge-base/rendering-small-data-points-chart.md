@@ -7,6 +7,7 @@ meta_title: Making Small Data Points Visible in Kendo UI Chart
 slug: rendering-small-data-points-chart
 tags: kendo-ui, chart, valueaxis, labels, dynamic-data
 res_type: kb
+components: ["chart"]
 ticketid: 1639145
 ---
 

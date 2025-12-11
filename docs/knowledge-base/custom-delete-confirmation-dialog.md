@@ -5,9 +5,9 @@ description: "Learn how to customize a confirmation dialog in the Kendo UI Grid 
 previous_url: /web/grid/how-to/Editing/grid-custom-delete-confirmation-window, /controls/data-management/grid/how-to/Editing/custom-delete-confirmation-dialog
 slug: howto_customize_delete_confirmation_dialog_grid
 tags: grid, customize, confirmation, window
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

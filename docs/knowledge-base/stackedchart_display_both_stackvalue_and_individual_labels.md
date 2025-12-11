@@ -4,10 +4,10 @@ page_title: Display Both StackValue Label and Individual Series Labels - Kendo U
 description: "Learn how to display both stackValue label and individual series labels in the Kendo UI Chart for jQuery."
 slug: stackedchart_display_both_stackvalue_and_individual_labels
 tags: stackedchart, stackvalue, series, label
-component: chart
 type: how-to
 ticketid: 1618134
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

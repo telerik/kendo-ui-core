@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the items, popup header and footer of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["autocomplete"]
 slug: htmlhelpers_autocomplete_templates_aspnetcore
 position: 3
 ---

@@ -5,9 +5,9 @@ description: "Learn how to automatically adjust the width of a Kendo UI for jQue
 previous_url: /controls/editors/dropdownlist/how-to/auto-adjust-the-width, /controls/editors/dropdownlist/how-to/appearance/auto-adjust-the-width
 slug: howto_automatically_adjust_width_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, adjust, width, automatically
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

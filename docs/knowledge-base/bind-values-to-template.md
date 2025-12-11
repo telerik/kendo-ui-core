@@ -5,9 +5,9 @@ description: "Learn how to bind values to a template by using MVVM in the Kendo 
 previous_url: /controls/editors/multiselect/how-to/bind-values-to-template, /controls/editors/multiselect/how-to/templates/bind-values-to-template
 slug: howto_bind_values_totemplate_multiselect
 tags: telerik, kendo, jquery, multiselect, bind, values, to, templates
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

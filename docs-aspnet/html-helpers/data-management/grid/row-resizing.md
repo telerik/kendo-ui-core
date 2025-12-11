@@ -2,6 +2,7 @@
 title: Row Resizing
 page_title: Row Resizing
 description: "Learn all about the Row Resizing feature of the Grid."
+components: ["grid"]
 slug: rowresize_kendoui_grid
 position: 20
 ---

@@ -2,6 +2,7 @@
 title: Scale Options
 page_title: jQuery RadialGauge Documentation - Scale Options
 description: "Get started with the jQuery RadialGauge by Kendo UI and customize the options of its scale."
+components: ["radialgauge"]
 slug: saleoptions_kendoui_radialgauge
 position: 3
 ---

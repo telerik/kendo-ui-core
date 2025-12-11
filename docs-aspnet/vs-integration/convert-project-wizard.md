@@ -2,6 +2,7 @@
 title: Adding Telerik UI to Existing Projects
 page_title: Adding Telerik UI to Existing Projects
 description: "Learn how to convert an existing {{ site.framework }} application to a {{ site.product }} application."
+components: ["installerandvsextensions"]
 previous_url: /installation/vs-integration/convert-project-wizard, /getting-started/vs-integration/convert-project-wizard, /vs-integration-mvc/convert-project-wizard
 slug: convertprojectwizard_visualstudio_aspnetcore
 position: 10

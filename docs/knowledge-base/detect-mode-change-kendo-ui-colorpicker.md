@@ -6,6 +6,7 @@ page_title: How to Detect Mode Change in Kendo UI ColorPicker
 slug: detect-mode-change-kendo-ui-colorpicker
 tags: kendo-ui,colorpicker,hex,rgb,mode-switch,events
 res_type: kb
+components: ["colorpicker"]
 ticketid: 1688006
 ---
 

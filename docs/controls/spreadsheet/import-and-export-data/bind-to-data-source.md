@@ -2,6 +2,7 @@
 title: Data Source Binding
 page_title: jQuery Spreadsheet Documentation - Data Source Binding
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to bind a sheet in the component to a Data Source."
+components: ["spreadsheet"]
 slug: bind_todata_source_spreadsheet_widget
 position: 3
 ---

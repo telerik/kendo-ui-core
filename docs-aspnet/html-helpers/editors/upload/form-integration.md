@@ -2,6 +2,7 @@
 title: Form Integration
 page_title: Form Integration
 description: "Learn how to integrate the Telerik UI for {{ site.framework }} Upload component into a Telerik UI for {{ site.framework }} Form and standard HTML form."
+components: ["upload"]
 slug: htmlhelpers_upload_form_integration
 position: 10
 ---

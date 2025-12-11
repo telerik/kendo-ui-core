@@ -6,6 +6,7 @@ slug: upload-file-and-load-in-pdfviewer
 tags: telerik, upload, file, pdf, load, pdfviewer
 component: upload
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

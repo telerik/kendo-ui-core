@@ -2,6 +2,7 @@
 title: Deployment Troubleshooting
 page_title: Deployment Troubleshooting
 description: Troubleshooting deployment issues involving the {{ site.product_short }} suite.
+components: ["general"]
 slug: deployment_troubleshooting
 position: 20
 ---

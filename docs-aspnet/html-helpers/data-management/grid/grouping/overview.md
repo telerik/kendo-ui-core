@@ -2,6 +2,7 @@
 title: Overview
 page_title: Grouping
 description: "Learn how to enable the grouping functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_grouping
 position: 1
 ---

@@ -5,9 +5,9 @@ description: "Learn how to configure a deferred value binding in a Kendo UI Comb
 previous_url: /controls/editors/combobox/how-to/deferred-value-binding, /controls/editors/combobox/how-to/mvvm/deferred-value-binding
 slug: howto_configure_deffered_value_binding_combobox
 tags: telerik, kendo, jquery, combobox, configure, deferred, value, binding
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

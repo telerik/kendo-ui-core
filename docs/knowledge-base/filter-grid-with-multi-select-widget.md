@@ -7,7 +7,7 @@ slug: filter-grid-with-multi-select-widget
 tags: kendo ui, mvc, grid, multi, select, filter, custom,
 ticketid: 1129339
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

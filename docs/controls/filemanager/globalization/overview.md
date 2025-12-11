@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery FileManager Documentation - FileManager Globalization
 description: "Get started with the jQuery FileManager by Kendo UI and learn about the globalization options it supports."
+components: ["filemanager"]
 slug: globalization_kendoui_filemanager_widget
 position: 1
 ---

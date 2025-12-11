@@ -2,6 +2,7 @@
 title: ListView
 page_title: ListView Integration
 description: "Learn how to reorder ListView items when using the Telerik UI Sortable component for {{ site.framework }}."
+components: ["sortable"]
 slug: sortable_aspnetcore_integration_listview
 position: 2
 ---

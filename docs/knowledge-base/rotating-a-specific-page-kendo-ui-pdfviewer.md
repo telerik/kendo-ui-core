@@ -6,6 +6,7 @@ page_title: How to Rotate the Current Page in Kendo UI PDFViewer
 slug: rotating-a-specific-page-kendo-ui-pdfviewer
 tags: pdfviewer, kendo, ui, rotate, page, current
 res_type: kb
+components: ["pdfviewer"]
 ticketid: 1661858
 ---
 

@@ -6,6 +6,7 @@ type: how-to
 slug: editor-access-link-popup-elements
 tags: editor, link, access
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

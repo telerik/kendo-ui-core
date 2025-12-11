@@ -5,9 +5,9 @@ description: "Learn how to use custom action icons in the Kendo UI Window."
 slug: howto_customactionicons_window
 previous_url: /controls/layout/window/how-to/use-custom-action-icons
 tags: telerik, kendo, jquery, window, use, custom, action, icons
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

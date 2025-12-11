@@ -7,6 +7,7 @@ slug: editor-custom-tool
 tags: kendo, kendo-ui, editor, tool, custom-tool
 ticketid: 1142213
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

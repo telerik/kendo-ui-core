@@ -5,9 +5,9 @@ description: "Learn how to show a context menu over the shapes of a Kendo UI Dia
 slug: howto_show_context_menu_over_shapes
 previous_url: /controls/diagrams-and-maps/diagram/how-to/show-context-menu-over-shapes
 tags: kendo, jquery, diagram, show, context, menu, over, shapes
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

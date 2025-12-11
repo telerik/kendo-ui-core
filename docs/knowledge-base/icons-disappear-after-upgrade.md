@@ -6,7 +6,7 @@ slug: icons_disappear_after_upgrade
 tags: telerik, kendoui, jquery, troubleshooting, icons, disappear, after, upgrade
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

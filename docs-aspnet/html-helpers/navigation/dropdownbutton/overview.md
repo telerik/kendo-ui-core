@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Try now the Telerik UI DropDownButton component for {{ site.framework }} offering various configuration options for its items, icons, and appearance."
+components: ["dropdownbutton"]
 previous_url: /helpers/navigation/dropdownbutton/overview
 slug: htmlhelpers_dropdownbutton_aspnetcore
 position: 1

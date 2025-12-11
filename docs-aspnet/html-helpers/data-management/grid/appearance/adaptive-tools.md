@@ -2,6 +2,7 @@
 title: Adaptive Tools
 page_title: Adaptive Tools
 description: "Learn how to enable the adaptive tools in the toolbar of the {{ site.framework }} Grid by Telerik UI."
+components: ["grid"]
 slug: adaptive_tools_gridhelper_aspnetcore
 position: 6
 ---

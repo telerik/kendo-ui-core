@@ -7,6 +7,7 @@ slug: grid-post-datasource-request-to-another-service
 tags: grid, post, DataSourceRequest, HttpClient
 ticketid: 1442001
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

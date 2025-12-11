@@ -2,6 +2,7 @@
 title: Component Types
 page_title: Telerik UI TimePicker Documentation - TimePicker Component Types
 description: "Get started with the jQuery TimePicker by Telerik UI and learn how to enable the modern component type."
+components: ["timepicker"]
 slug: htmlhelpers_componenttype_timepicker_aspnetcore
 position: 6
 ---

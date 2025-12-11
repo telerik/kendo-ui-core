@@ -5,9 +5,9 @@ description: "Learn how to create a custom MVVM binding to update the Toolbar co
 previous_url: /controls/data-management/grid/how-to/toolbar-mvvm-binding, /controls/data-management/grid/how-to/binding/toolbar-mvvm-binding
 slug: howto_update_toolbar_content_using_mvvmbinding_grid
 tags: update, toolbar, content, using, mvvm, binding
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

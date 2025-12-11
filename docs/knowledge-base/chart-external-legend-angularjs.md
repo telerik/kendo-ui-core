@@ -7,6 +7,7 @@ slug: chart-external-legend-angularjs
 tags: chart, angularjs, legend
 ticketid: 1161365
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

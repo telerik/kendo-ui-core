@@ -5,9 +5,9 @@ description: "Learn how to reorder multiple items using the Kendo UI Sortable co
 slug: howto_reordermultipleitems_sortable
 previous_url: /controls/interactivity/sortable/how-to/multiple-items-reordering
 tags: telerik, kendo, jquery, sortable, reorder, multiple, items
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

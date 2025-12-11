@@ -2,6 +2,7 @@
 title: Google DialogFlow
 page_title: jQuery Chat Documentation - Google DialogFlow
 description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat component to the Google DialogFlow."
+components: ["chat"]
 previous_url: /controls/chat/connect-to-google-dialogflow
 slug: connect_to_google_dialogflow
 ---

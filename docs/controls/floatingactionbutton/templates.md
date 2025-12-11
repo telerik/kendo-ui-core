@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery FloatingActionButton Documentation
 description: "Learn about hoe to use Kendo UI templates with the jQuery FloatingActionButton by Kendo UI"
+components: ["floatingactionbutton"]
 slug: templates_floatingactionbutton_widget
 position: 5
 ---

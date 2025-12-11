@@ -6,6 +6,7 @@ page_title: How to Export Kendo UI OrgChart to Excel
 slug: export-orgchart-to-excel-kendo-ui
 tags: kendo-ui, orgchart, excel-export, custom-solution, data-transformation
 res_type: kb
+components: ["chart"]
 ticketid: 1687278
 ---
 

@@ -6,8 +6,8 @@ page_title: Combine Search and Pager in the Grid - Kendo UI for jQuery Data Grid
 slug: grid-search-and-pager-in-a-single-row
 tags: kendoui, kendo, grid, search, panel, pager, combine, single, one, same, row
 res_type: kb
+components: ["grid"]
 ticketid: 1501208
-component: grid
 ---
 
 ## Environment

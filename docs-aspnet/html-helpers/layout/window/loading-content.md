@@ -2,6 +2,7 @@
 title: Loading Content
 page_title: Loading Content
 description: "Learn about the different ways of loading content in Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 previous_url: /helpers/layout/window/content
 slug: htmlhelpers_window_loadingcontent_aspnetcore
 position: 5

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Popover Documentation - Getting Started with the Popover
 description: "Get started with the jQuery Popover by Kendo UI and learn how to create and initialize the component."
+components: ["popover"]
 slug: getting_started_kendoui_popover
 position: 1
 ---

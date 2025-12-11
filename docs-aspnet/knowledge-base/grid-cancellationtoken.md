@@ -7,6 +7,7 @@ slug: grid-cancellationtoken
 position: 
 tags: grid, async, action, method
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

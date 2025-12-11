@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Configure the Telerik UI ListView for {{ site.framework }} for editing."
+components: ["listview"]
 previous_url: /helpers/data-management/listview/editing
 slug: htmlhelpers_listview_aspnetcore_editing
 position: 3

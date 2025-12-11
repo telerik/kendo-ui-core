@@ -5,9 +5,9 @@ description: "Learn how to implement a custom `timeline` view in a Kendo UI for 
 previous_url: /controls/scheduling/scheduler/how-to/timeline-with-dynamic-length, /controls/scheduling/scheduler/how-to/custom-views/timeline-with-dynamic-length
 slug: howto_implementcustomtimeline_withdynamiclength_scheduler
 tags: telerik, kendo, jquery, scheduler, implement, custom, timeline, views, with, dynamic, length
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: HTML
 page_title: HTML Binding - Kendo UI MVVM
 description: "Learn how to update and set the HTML of the target DOM element by changing the View-Model value in Kendo UI MVVM."
+components: ["mvvm"]
 slug: htmlbinding_mvvm_kendoui
 ---
 

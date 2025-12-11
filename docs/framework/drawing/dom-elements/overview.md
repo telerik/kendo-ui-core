@@ -2,6 +2,7 @@
 title: Overview
 page_title: Drawing DOM Elements Overview - Kendo UI Drawing Library
 description: "Learn how to draw a piece of HTML that is available in the DOM using the Kendo UI Drawing API."
+components: ["drawingapi"]
 slug: drawingofhtmlelements_drawingapi
 position: 1
 ---

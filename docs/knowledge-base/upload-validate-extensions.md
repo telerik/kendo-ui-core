@@ -7,6 +7,7 @@ slug: upload-validate-extensions
 tags: kendo, kendoui, upload, validate, submit, extension, file
 ticketid: 1138527
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

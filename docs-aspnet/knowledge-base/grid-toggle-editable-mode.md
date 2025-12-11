@@ -6,6 +6,7 @@ page_title: Toggle the Editable Mode of the Grid
 slug: grid-toggle-editable-mode
 tags: aspnet, core, kendo, kendo-ui, grid, edit, toggle, editable
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

@@ -6,7 +6,7 @@ page_title: Prevent Multiple Selection - Kendo UI Editor for jQuery
 slug: dropdowntree-prevent-multiple-selection
 tags: dropdowntree, prevent, multiple, selection
 res_type: kb
-component: dropdowntree
+components: ["dropdowntree"]
 ---
 
 ## Environment

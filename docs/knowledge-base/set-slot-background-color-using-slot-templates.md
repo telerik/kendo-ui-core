@@ -5,9 +5,9 @@ description: "Learn how to set the cell background color by using slotTemplate a
 previous_url: /controls/scheduling/scheduler/how-to/set-slot-background-color-using-slot-templates, /controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates
 slug: howto_setslotbackgroundcolor_usingslottemplates_scheduler
 tags: telerik, kendo, jquery, scheduler, set, the, slot, color, using, templates
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

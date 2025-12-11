@@ -5,9 +5,9 @@ description: "Learn how to dynamically set the DataSource in a Kendo UI DropDown
 previous_url: /controls/editors/dropdownlist/how-to/set-datasource-dynamically, /controls/editors/dropdownlist/how-to/binding/set-datasource-dynamically
 slug: howto_set_datasource_dynamically_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, set, data, source, dynamically
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: grid-add-nested-child-grids
 tags: grid, hierarchy, nested, child
 ticketid: 1528111
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

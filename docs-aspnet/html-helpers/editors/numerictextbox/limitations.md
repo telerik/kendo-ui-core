@@ -2,6 +2,7 @@
 title: Known Limitations
 page_title: Known Limitations
 description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and learn what are the known limitations of the helper."
+components: ["numerictextbox"]
 slug: limitations_numerictextbox_aspnetcore
 position: 6
 ---

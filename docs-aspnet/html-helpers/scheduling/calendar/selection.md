@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Enable the single, multiple, range-date, and week selections when working with the Telerik UI Calendar component for {{ site.framework }}."
+components: ["calendar"]
 slug: htmlhelpers_selection_calendar_aspnetcore
 position: 5
 ---

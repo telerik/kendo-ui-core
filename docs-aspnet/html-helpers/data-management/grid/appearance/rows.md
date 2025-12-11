@@ -2,6 +2,7 @@
 title: Rows
 page_title: Rows
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when configuring the behavior of its rows."
+components: ["grid"]
 slug: rows_aspnetcore_grid_widget
 position: 3
 ---

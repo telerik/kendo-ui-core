@@ -6,6 +6,7 @@ page_title: How to Use Nested Properties in Kendo UI TaskBoard
 slug: taskboard-using-nested-properties-kendo-ui-datasource
 tags: kendo ui, taskboard, nested properties, datasource
 res_type: kb
+components: ["taskboard"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Isolate Sample in REPL
 slug: repl-isolate-sample
 tags: aspnet, core, dotnet-core, sample, project, repl
 res_type: kb
+components: ["general"]
 ---
 
 

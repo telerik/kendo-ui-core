@@ -2,6 +2,7 @@
 title: Overview
 page_title: Sparkline Overview
 description: "The Telerik UI Sparkline component for {{ site.framework }} provides a compact chart component without the typical elements."
+components: ["sparkline"]
 slug: overview_sparklineshelper_aspnetcore
 position: 0
 ---

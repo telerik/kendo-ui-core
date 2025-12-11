@@ -6,6 +6,7 @@ page_title: Hide Selected Items in MultiSelect Dropdown
 slug: hide-selected-items-multiselect
 tags: multiselect,kendo-ui,open-event,filter,selected-items
 res_type: kb
+components: ["multiselect"]
 ticketid: 1686703
 ---
 

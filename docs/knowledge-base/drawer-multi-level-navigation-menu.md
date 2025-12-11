@@ -7,6 +7,7 @@ slug: drawer-multi-level-navigation-menu
 tags: telerik, kendo, jquery, drawer, create, multilevel, nav, navigation, menu 
 ticketid: 
 res_type: kb
+components: ["drawer"]
 ---
 
 ## Environment

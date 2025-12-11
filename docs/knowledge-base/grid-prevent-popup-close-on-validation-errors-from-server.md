@@ -6,7 +6,7 @@ page_title: Keep Popup Open on Server Error - Kendo UI for jQuery Data Grid
 slug: grid-prevent-popup-close-on-validation-errors-from-server
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open, validation, fail, errors
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

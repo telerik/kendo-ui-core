@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: Search Panel
 description: "Learn how to enable the searching functionality of the Telerik UI Grid for ASP.NET Core."
+components: ["grid"]
 slug: taghelpers_grid_aspnetcore_searchpanel
 position: 5
 ---

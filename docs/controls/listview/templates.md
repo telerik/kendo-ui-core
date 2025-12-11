@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery ListView Documentation - Templates
 description: "Get started with the jQuery ListView by Kendo UI and learn how to use templates for its content."
+components: ["listview"]
 slug: templates_kendoui_listview
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Prompt Library
 page_title: Telerik {{ site.framework }} Prompt Library
 description: Explore the extensive collection of prompts that you can use with the Telerik {{ site.framework }} AI Coding Assistant.
+components: ["aicodingassistant"]
 slug: ai_prompt_library
 position: 4
 ---

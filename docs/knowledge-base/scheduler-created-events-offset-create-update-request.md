@@ -6,7 +6,7 @@ slug: scheduler_created_events_offset_create_update_request
 tags: telerik, progress, kendoui, scheduler, created, events, offset, after, create, update, requests
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-default-value-in-child-grid-from-parent
 tags: aspnet, core, dotnet-core, mvc, kendo, kendo-ui, grid, child, Hierarchy, default, date, value, property, assign, pass
 ticketid: 1457037
 res_type: kb
+components: ["general"]
 component: grid, datasource
 ---
 

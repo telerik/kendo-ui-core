@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Dialog Documentation - Getting Started with the Dialog
 description: "Get started with the jQuery Dialog by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dialog"]
 slug: getting_started_kendoui_dialog_widget
 position: 1
 ---

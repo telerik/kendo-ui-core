@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery AppBar Documentation - Getting Started with the AppBar
 description: "Get started with the jQuery AppBar by Kendo UI and learn how to create the component."
+components: ["appbar"]
 slug: getting_started_kendoui_appbar_widget
 position: 1
 ---

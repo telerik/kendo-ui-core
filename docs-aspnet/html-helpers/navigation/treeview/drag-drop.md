@@ -2,6 +2,7 @@
 title: Dragging and Dropping
 page_title: TreeView Drag and Drop
 description: "Learn about the drag-and-drop functionality of the Telerik UI TreeView component for {{ site.framework }}."
+components: ["treeview"]
 slug: htmlhelpers_treeview_drag_drop_aspnetcore
 position: 6
 ---

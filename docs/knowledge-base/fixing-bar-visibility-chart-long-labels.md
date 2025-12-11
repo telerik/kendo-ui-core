@@ -7,6 +7,7 @@ meta_title: Fixing Bar Visibility in Kendo UI for jQuery Chart with Long Labels
 slug: fixing-bar-visibility-chart-long-labels
 tags: chart, kendo-ui-jquery, labels, bar-visibility, chart-margins, text-truncate, multiline-labels
 res_type: kb
+components: ["chart"]
 ticketid: 1697218
 ---
 

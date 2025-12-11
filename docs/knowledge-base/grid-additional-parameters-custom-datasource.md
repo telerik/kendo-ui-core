@@ -6,7 +6,7 @@ page_title: Pass Parameters to Custom DataSource in the Grid - Kendo UI Grid for
 slug: grid-additional-parameters-custom-datasource
 tags: grid, custom, datasource, additional, parameters
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Captcha component for {{ site.framework }} control, and learn how to start using it."
+components: ["captcha"]
 slug: htmlhelpers_captcha_overview
 position: 0
 ---

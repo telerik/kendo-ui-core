@@ -8,7 +8,7 @@ previous_url: /knowledge-base/how-to-persist-state-and-function-references
 tags: grid, persist, state, function, reference
 ticketid: 1133697
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to clear the filter of the Kendo UI ComboBox on opening 
 previous_url: /controls/editors/combobox/how-to/clear-filter-on-open, /controls/editors/combobox/how-to/filtering/clear-filter-on-open
 slug: howto_clear_filter_open_combobox
 tags: telerik, kendo, jquery, combobox, clear, filter, on, opening
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

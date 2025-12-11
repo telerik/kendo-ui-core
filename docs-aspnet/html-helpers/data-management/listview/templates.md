@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Configure the Telerik UI ListView for {{ site.framework }} to build its templates."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_templates
 position: 6
 ---

@@ -6,7 +6,7 @@ page_title: Select All Items from a Group - Kendo UI MultiSelect for jQuery
 slug: multiselect-select-all-items-from-group
 tags: multiselect, select, all, items, group
 res_type: kb
-component: multi-select
+components: ["multiselect"]
 ---
 
 ## Environment

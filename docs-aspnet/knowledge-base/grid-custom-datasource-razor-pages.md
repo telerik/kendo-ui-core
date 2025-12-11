@@ -6,6 +6,7 @@ page_title: Configure Custom Grid DataSource in Razor Pages
 slug: grid-custom-datasource-razor-ages
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, datasource, custom, custom-datasource, razor-pages, pages
 res_type: kb
+components: ["general"]
 component: grid, datasource
 ---
 

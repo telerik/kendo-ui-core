@@ -6,8 +6,8 @@ page_title: Filter hierarchy
 slug: filter-model-with-collection
 tags: filter, collection, nested, multiselect, custom, operator, grid, hierarchy, array, column
 ticketid: 1500740
-component: filter
 res_type: kb
+components: ["filter"]
 ---
 
 ## Environment

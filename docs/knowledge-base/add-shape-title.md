@@ -5,9 +5,9 @@ description: "Learn how to add titles for shapes loaded from GeoJSON in a Kendo 
 slug: howto_addhspaetitles_map
 previous_url: /controls/diagrams-and-maps/map/how-to/add-shape-title
 tags: kendo, jquery, map, add, titles, to, shapes
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

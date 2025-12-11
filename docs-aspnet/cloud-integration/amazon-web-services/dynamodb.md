@@ -2,6 +2,7 @@
 title: Amazon DynamoDB
 page_title: Amazon DynamoDB
 description: "Learn how to create an Amazon DynamoDB table, and perform CRUD operations with the Telerik UI for {{ site.framework }} Grid."
+components: ["general"]
 slug: aws_dynamodb_aspnetcore
 position: 4
 ---

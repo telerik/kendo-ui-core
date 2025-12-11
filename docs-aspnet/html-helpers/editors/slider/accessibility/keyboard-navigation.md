@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Slider and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["slider"]
 slug: keynav_aspnetcore_slider
 position: 2
 ---

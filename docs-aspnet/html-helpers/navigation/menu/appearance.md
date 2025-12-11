@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the Telerik UI Menu HtmlHelper for {{ site.framework }} rendering and appearance."
+components: ["menu"]
 slug: appearance_menu
 position: 2
 ---

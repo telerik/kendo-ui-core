@@ -2,6 +2,7 @@
 title: Chart Integration
 page_title: Chart Wizard Integration
 description: "Get started with the Telerik UI Grid for {{ site.framework }} and learn how to quickly create the a chart by using the Grid dataset."
+components: ["grid"]
 slug: htmlhelpers_grid_chart_integration
 position: 25
 ---

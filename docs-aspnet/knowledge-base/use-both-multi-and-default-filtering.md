@@ -7,6 +7,7 @@ slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, checkbox, default, menu, column
 ticketid: 1120044
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

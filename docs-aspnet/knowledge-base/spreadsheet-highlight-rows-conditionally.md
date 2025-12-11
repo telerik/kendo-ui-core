@@ -6,6 +6,7 @@ page_title: Highlight rows in the Spreadsheet conditionally
 slug: spreadsheet-highlight-rows-conditionally
 tags: mvc, core, spreadsheet, highlight, rows, condition
 res_type: kb
+components: ["general"]
 component: spreadsheet
 ---
 

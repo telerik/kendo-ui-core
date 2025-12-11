@@ -6,6 +6,7 @@ page_title: How to Restrict Sortable Columns in a Kendo UI Grid
 slug: limit-sortable-columns-kendo-grid
 tags: kendo-ui, grid, sortable, columns, restriction
 res_type: kb
+components: ["sortable"]
 ticketid: 1668366
 ---
 

@@ -5,6 +5,7 @@ description: Learn how to add an image to the shape template of the Kendo UI for
 type: how-to
 slug: add-image-in-diagram-shape-template
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

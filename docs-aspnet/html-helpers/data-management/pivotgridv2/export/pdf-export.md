@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PivotGridV2 PDF Export
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and learn how to export it to PDF."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_pdfexport
 position: 1
 ---

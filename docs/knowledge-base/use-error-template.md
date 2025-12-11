@@ -5,9 +5,9 @@ description: "Learn how to use a template to customize a tooltip in the Kendo UI
 previous_url: /framework/validator/how-to/use-error-template, /controls/editors/validator/how-to/use-error-template
 slug: howto_usetemplatestocustomizetooltips_validator
 tags: telerik, kendo, jquery, validator, use, templates, to, customize, tooltips
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

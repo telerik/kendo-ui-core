@@ -6,6 +6,7 @@ page_title: Resolve Hot Reload BrowserLink error with enabled CSP
 slug: csp-browserlink
 tags: csp, error, browserlink, hot, reload
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

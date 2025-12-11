@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} DatePicker and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_accessibility_keyboardnavigation
 position: 2
 ---

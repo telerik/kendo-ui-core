@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started - Kendo UI for jQuery Excel Export
 description: "Get started with the jQuery Excel Export by Kendo UI and learn how to generate workbooks and export them."
+components: ["general"]
 slug: getting_started_kendoui_excel_export
 position: 1
 ---

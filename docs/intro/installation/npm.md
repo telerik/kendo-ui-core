@@ -2,6 +2,7 @@
 title: Installing with NPM
 page_title: Installing with NPM - Download and Installation 
 description: "Get started with Kendo UI for jQuery and install Kendo UI Core or Kendo UI as NPM packages."
+components: ["general"]
 slug: kendoui_npm_packages_kendoui_installation
 position: 50
 ---

@@ -6,6 +6,7 @@ page_title: How to Implement Tooltips in DropDownList Items in a Grid PopUp Edit
 slug: how-to-add-tooltips-to-dropdownlist-items
 tags: kendo, ui, dropdownlist, tooltip, jquery, event handling, grid, popup
 res_type: kb
+components: ["grid"]
 ticketid: 1655113
 ---
 

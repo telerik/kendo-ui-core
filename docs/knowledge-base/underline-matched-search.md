@@ -5,9 +5,9 @@ description: "Learn how to underline a matched input-field search in a Kendo UI 
 previous_url: /controls/editors/combobox/how-to/underline-matched-search, /controls/editors/combobox/how-to/appearance/underline-matched-search
 slug: howto_underline_matched_search_combobox
 tags: telerik, kendo, jquery, combobox, underline, matched, searches
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

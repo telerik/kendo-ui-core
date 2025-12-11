@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MaskedTextBox Documentation - MaskedTextBox Overview
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["maskedtextbox"]
 slug: overview_kendoui_maskedtextbox_widget
 position: 0
 ---

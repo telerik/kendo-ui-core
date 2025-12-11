@@ -5,9 +5,9 @@ description: "Learn how to add a maxLength validation to the Kendo UI for jQuery
 previous_url: /controls/editors/editor/how-to/add-maxlength-validation, /controls/editors/editor/how-to/editing/add-maxlength-validation
 slug: howto_add_max_length_validation_editor
 tags: telerik, kendo, jquery, editor, add, maxLength, maximum, length, validation
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

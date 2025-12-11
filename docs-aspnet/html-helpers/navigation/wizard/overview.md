@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Wizard component for {{ site.framework }}."
+components: ["wizard"]
 slug: htmlhelpers_wizard_aspnetcore_overview
 position: 0
 ---

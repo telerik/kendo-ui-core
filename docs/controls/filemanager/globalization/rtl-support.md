@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: jQuery FileManager Documentation - FileManager Right-to-Left Support
 description: "Get started with the jQuery FileManager by Kendo UI and learn about the RTL supports it provides."
+components: ["filemanager"]
 slug: rtl_kendoui_filemanager_widget
 position: 4
 ---

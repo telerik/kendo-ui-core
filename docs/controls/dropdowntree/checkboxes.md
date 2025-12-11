@@ -2,6 +2,7 @@
 title: Checkboxes
 page_title: jQuery DropDownTree Documentation - Checkboxes
 description: "Get started with the jQuery DropDownTree by Kendo UI and manage the checked state of all nodes in the widget."
+components: ["dropdowntree"]
 slug: checkboxes_kendoui_dropdowntree
 position: 3
 ---

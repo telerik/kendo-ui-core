@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ButtonGroup component for {{ site.framework }}."
+components: ["buttongroup"]
 slug: events_buttongroup_aspnetcore
 position: 7
 ---

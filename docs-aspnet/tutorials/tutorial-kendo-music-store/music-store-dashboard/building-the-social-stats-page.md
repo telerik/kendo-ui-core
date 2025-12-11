@@ -2,6 +2,7 @@
 title: Create the Social Stats Page
 page_title: Create the Social Stats Page - Music Store Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store Dashboard Social Stats page by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: buildsocialstats_muscistoredashboard_aspnetmvc
 position: 5
 ---

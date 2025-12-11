@@ -7,6 +7,7 @@ slug: menu-target-attribute-new-tab-open
 tags: menu, target, attribute, new, tab, open, navigate
 ticketid: 1408587
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

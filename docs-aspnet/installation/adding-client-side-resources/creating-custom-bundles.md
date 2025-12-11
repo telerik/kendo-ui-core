@@ -2,6 +2,7 @@
 title: Creating Custom Bundles
 page_title: Creating Your Own Custom Bundles
 description: "Get started with {{ site.product }} and add only the components that you need."
+components: ["general"]
 previous_url: /getting-started/scripts/what-you-need, /installation/scripts/what-you-need, /installation-mvc/adding-client-side-resources/scripts/what-you-need, /installation/adding-client-side-resources/scripts/what-you-need
 slug: creating-custom-bundles
 position: 5

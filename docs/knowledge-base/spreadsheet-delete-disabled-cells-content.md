@@ -7,7 +7,7 @@ slug: spreadsheet-delete-disabled-cells-content
 tags: kendo, kendoui, spreadsheet, delete, disabled, cells, contextmenu
 ticketid: 1135315
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

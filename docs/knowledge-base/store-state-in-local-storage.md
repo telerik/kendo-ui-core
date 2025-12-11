@@ -6,6 +6,7 @@ slug: howto_store_state_in_local_storage
 tags: local, storage, localstorage, widgets, kendo, options, value, state, save
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

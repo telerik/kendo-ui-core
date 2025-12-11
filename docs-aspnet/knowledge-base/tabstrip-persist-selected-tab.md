@@ -6,6 +6,7 @@ page_title: Persist Selected Tab in TabStrip
 slug: tabstrip-persist-selected-tab
 tags: tabstrip, persist, selected, tab
 res_type: kb
+components: ["general"]
 ticketid: 1582045
 component: tabstrip
 ---

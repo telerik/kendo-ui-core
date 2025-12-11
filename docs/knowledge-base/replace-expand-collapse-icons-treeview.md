@@ -7,6 +7,7 @@ meta_title: Replace Expand/Collapse Arrow Icons in TreeView
 slug: replace-expand-collapse-icons-treeview
 tags: treeview, customization, icons, expand, collapse
 res_type: kb
+components: ["treeview"]
 ticketid: 1690579
 ---
 

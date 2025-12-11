@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Right-to-Left Support
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn about the RTL supports it provides."
+components: ["datetimepicker"]
 slug: rtl_datetimepicker_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Toolbar Template
 page_title: jQuery Grid Documentation - Toolbar Template
 description: "Get started with the jQuery Grid by Kendo UI and learn how to render different Toolbar content by using Kendo UI Templates."
+components: ["grid"]
 slug: toolbar_templates_kendoui_grid_component
 position: 4
 ---

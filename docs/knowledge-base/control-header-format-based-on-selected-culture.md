@@ -5,9 +5,9 @@ description: "Learn how to control the header format of the Kendo UI for jQuery 
 slug: howto_control_header_format_calendar
 previous_url: /controls/scheduling/calendar/how-to/control-header-format-based-on-selected-culture
 tags: telerik kendo, jquery, calendar, control, header, format, based, on, selected, culture
-component: calendar
 type: how-to
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Create the Search Box
 page_title: Create the Search Box - Music Store Web App Tutorial
 description: "Learn how to create the Albums Search box in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: createsearchbox_muscistorewebapp_aspnetmvc
 position: 6
 ---

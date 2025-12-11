@@ -7,6 +7,7 @@ meta_title: Retrieving Formula Results in Kendo UI for jQuery Spreadsheet
 slug: accessing-computed-cell-values-kendo-ui-jquery-spreadsheet
 tags: spreadsheet,kendo ui for jquery,batch,recalc,formula
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1696208
 ---
 

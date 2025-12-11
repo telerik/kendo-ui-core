@@ -2,6 +2,7 @@
 title: SVG Icons
 page_title: SVG Icons - Sass Themes
 description: "Learn more about what icon fonts are and how to define, implement, and render the available Kendo UI SVG Icons out of the supported list."
+components: ["general"]
 slug: svgicons_kendoui_desktopwidgets
 position: 6
 ---

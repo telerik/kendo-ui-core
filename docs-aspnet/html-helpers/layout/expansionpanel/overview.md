@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ExpansionPanel component for {{ site.framework }}."
+components: ["expansionpanel"]
 slug: htmlhelpers_expansionpanel_aspnetcore
 position: 0
 ---

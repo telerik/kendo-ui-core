@@ -7,6 +7,7 @@ slug: stock-chart-navigate-to-predefined-periods
 tags: stock-chart, zoom, navigate
 ticketid: 1364958
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

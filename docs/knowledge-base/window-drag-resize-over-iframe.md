@@ -7,6 +7,7 @@ slug: window-drag-resize-over-iframe
 tags: window, iframe, drag, resize
 ticketid:
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

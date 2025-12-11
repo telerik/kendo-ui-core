@@ -5,9 +5,9 @@ description: "Learn how to hide editors for different columns on different level
 slug: howto_hideeditfieldsondifferentlevels_treelist
 previous_url: /controls/data-management/treelist/how-to/hide-edit-fields-on-different-levels
 tags: kendo, jquery, treelist, hide, edit, fields, on, different, levels
-component: treelist
 type: how-to
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

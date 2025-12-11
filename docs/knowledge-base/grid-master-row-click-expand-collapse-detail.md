@@ -7,6 +7,7 @@ slug: grid-master-row-click-expand-collapse-detail
 tags: grid, hierarchy, click, expand, collapse
 ticketid: 1141805
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

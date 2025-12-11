@@ -6,7 +6,7 @@ page_title: Paste Only Values - Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-paste-only-values
 tags: spreadsheet, kendo, values-only, paste
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

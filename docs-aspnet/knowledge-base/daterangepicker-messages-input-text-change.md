@@ -7,6 +7,7 @@ slug: daterangepicker-messages-input-text-change
 tags: daterangepicker, messages, input, text, change, month, day, year, hour, minute, second, dayperiod, placeholder
 ticketid: 1417334
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

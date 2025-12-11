@@ -6,6 +6,7 @@ page_title: Bind the Grid to an IndexedDb storage - Kendo UI for jQuery Data Gri
 slug: grid-bound-to-indexeddb-storage
 tags: grid, crud, editable, indexeddb, edit, client, storage
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

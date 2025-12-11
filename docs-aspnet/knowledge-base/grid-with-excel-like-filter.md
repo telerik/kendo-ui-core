@@ -7,6 +7,7 @@ tags: grid, similar, excel, filter, menus, using, autocomplete, showing, results
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ticked-id: 1544703
 ---
 

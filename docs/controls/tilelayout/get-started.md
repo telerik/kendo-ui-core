@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TileLayout Documentation - Getting Started with the TileLayout
 description: "Get started with the jQuery TileLayout by Kendo UI and learn how to create and initialize the component."
+components: ["tilelayout"]
 slug: getting_started_kendoui_tilelayout_widget
 position: 1
 ---

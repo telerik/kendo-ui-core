@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery FlatColorPicker Documentation - FlatColorPicker Overview
 description: "Get started with the jQuery FlatColorPicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["flatcolorpicker"]
 slug: overview_kendoui_flatcolorpicker_widget
 position: 1
 ---

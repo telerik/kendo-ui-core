@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Loader Documentation - Loader Overview
 description: "Get started with the jQuery Loader by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["loader"]
 slug: overview_kendoui_loader_widget
 position: 0
 ---

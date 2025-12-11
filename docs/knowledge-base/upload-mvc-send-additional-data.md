@@ -7,7 +7,7 @@ slug: upload-mvc-send-additional-data
 tags: kendo, kendoui, mvc, upload, additional-parameters, send-fields
 ticketid: 1138520
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

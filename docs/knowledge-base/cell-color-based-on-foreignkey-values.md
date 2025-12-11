@@ -5,9 +5,9 @@ description: "Learn how to set the color of a text cell based on ForeignKey valu
 previous_url: /controls/data-management/grid/how-to/cell-color-based-on-foreignkey-values, /controls/data-management/grid/how-to/Layout/cell-color-based-on-foreignkey-values
 slug: howto_set_cell_color_basedon_foreignkey_values_grid
 tags: grid, cell, color, foreignkey, values
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

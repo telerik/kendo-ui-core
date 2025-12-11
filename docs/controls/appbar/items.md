@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery AppBar Documentation - Items
 description: "Learn how to configure the items in the jQuery AppBar by Kendo UI."
+components: ["appbar"]
 slug: items_kendoui_appbar_widget
 position: 2
 ---

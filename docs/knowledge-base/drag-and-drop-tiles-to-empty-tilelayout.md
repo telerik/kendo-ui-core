@@ -7,6 +7,7 @@ slug: drag-and-drop-tiles-empty-tilelayout
 tags: kendo, jquery, tilelayout, tile, drag, and, drop, empty
 ticketid: 1570416
 res_type: kb
+components: ["tilelayout"]
 ---
 
 ## Environment

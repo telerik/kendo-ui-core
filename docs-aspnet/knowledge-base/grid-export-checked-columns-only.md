@@ -7,6 +7,7 @@ tags: telerik, grid, export, checked, columns, only, rows, excel
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

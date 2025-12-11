@@ -5,9 +5,9 @@ description: "Learn how to initialize the Kendo UI Grid for jQuery in a SPA appl
 previous_url: /controls/data-management/grid/how-to/kendo-grid-in-spa-application, /controls/data-management/grid/how-to/various/kendo-grid-in-spa-application
 slug: howto_use_gridin_kendouispa_app_grid
 tags: grid, initialize, spa, apps
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

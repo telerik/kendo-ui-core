@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery TimeLine Documentation - Keyboard Navigation
 description: "Get started with the jQuery TimeLine by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["timeline"]
 slug: keynav_timeline_jquery
 position: 2
 ---

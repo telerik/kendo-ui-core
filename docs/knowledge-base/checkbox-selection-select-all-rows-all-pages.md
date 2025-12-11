@@ -6,7 +6,7 @@ page_title: Select All Rows on All Pages with a Master Checkbox - Kendo UI for j
 slug: checkbox-selection-select-all-rows-all-pages
 tags: checkbox selection, grid, kendo ui
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

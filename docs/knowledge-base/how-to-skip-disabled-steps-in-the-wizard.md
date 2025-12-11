@@ -7,6 +7,7 @@ slug: how-to-skip-disabled-steps-in-the-wizard
 tags: skip, disabled, step, wizard, kendo, jquery
 ticketid: 1479647
 res_type: kb
+components: ["wizard"]
 ---
 
 ## Environment

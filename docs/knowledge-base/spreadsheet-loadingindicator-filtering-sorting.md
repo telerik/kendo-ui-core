@@ -7,6 +7,7 @@ slug: spreadsheet-loadingindicator-filtering-sorting
 tags: kendo, kendoui, spreadsheet, filtering, sorting
 ticketid: 1575511
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

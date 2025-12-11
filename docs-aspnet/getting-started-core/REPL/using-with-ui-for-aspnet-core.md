@@ -2,6 +2,7 @@
 title: Editing the ASP.NET Core Demos in REPL
 page_title: Editing the ASP.NET Core Demos in REPL
 description: Explore the features of the Telerik REPL server playground tool and the integration with the UI for ASP.NET Core demos.
+components: ["general"]
 slug: using_repl_with_demos_aspnetcore
 permalink: /getting-started/repl/integration-with-demos
 position: 3

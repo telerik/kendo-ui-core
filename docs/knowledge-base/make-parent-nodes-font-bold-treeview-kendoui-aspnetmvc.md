@@ -6,6 +6,7 @@ page_title: How to Make Parent Nodes Font Bold in a TreeView | Kendo UI TreeView
 slug: make-parent-nodes-font-bold-treeview-kendoui-aspnetmvc
 tags: treeview, font, bold, Kendo UI, ASP.NET MVC
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

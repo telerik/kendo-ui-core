@@ -7,6 +7,7 @@ slug: grid-editable-readonly-edit-create.md
 tags: grid, editable, readonly, edit, create
 ticketid: 1168477
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

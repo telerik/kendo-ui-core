@@ -1,6 +1,7 @@
 ---
 title: Trendlines
 description: "Explore data trends by using trendlines in the Kendo UI for jQuery Chart."
+components: ["chart"]
 slug: trendlines_chart_charts
 ---
 

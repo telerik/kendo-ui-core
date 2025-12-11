@@ -6,6 +6,7 @@ page_title: Persist the State of the Kendo UI Grid alongside the Function Handle
 slug: grid-persist-state-with-functions
 tags: kendoui, jquery, data, grid, persist, state, save, options, restore, function, functions, handler, handlers
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

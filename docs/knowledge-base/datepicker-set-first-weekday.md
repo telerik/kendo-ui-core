@@ -5,9 +5,9 @@ description: "Learn how to set the default first weekday in the Kendo UI DatePic
 slug: datepicker_set_first_weekday
 previous_url: /controls/editors/datepicker/how-to/AngularJS/set-first-day-of-week
 tags: kendo, jquery, datepicker, set, day, weekday, first
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

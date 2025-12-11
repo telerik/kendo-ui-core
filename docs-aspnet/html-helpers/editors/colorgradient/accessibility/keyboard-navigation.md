@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn about the accessibility support that the {{ site.product }} ColorGradient component provides through its keyboard navigation functionality."
+components: ["colorgradient"]
 slug: keynav_colorgradient_aspnetcore
 position: 2
 ---

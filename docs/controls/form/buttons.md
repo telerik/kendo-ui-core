@@ -2,6 +2,7 @@
 title: Buttons
 page_title: Kendo UI for jQuery Form Documentation - Buttons
 description: "Get started with the Kendo UI for jQuery Form and learn how to configure the buttons."
+components: ["form"]
 slug: buttons_form_widget
 position: 7
 ---

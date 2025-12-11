@@ -2,6 +2,7 @@
 title: Create the Sales Page
 page_title: Create the Sales Page - Music Store Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store Dashboard Store Sales page by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: buildthestoressales_muscistoredashboard_aspnetmvc
 position: 4
 ---

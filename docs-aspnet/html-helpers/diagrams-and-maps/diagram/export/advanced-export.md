@@ -2,6 +2,7 @@
 title: Advanced Export
 page_title: Advanced Export
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} and learn how to set its advanced export functionality."
+components: ["diagram"]
 slug: htmlhelpers_diagram_aspnetcore_export
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI ListBox Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} ListBox using various data binding approaches."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/data-binding
 slug: htmlhelpers_listbox_databinding_aspnetcore
 position: 1

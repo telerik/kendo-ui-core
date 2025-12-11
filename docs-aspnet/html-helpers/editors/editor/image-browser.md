@@ -2,6 +2,7 @@
 title: Image and File Browser
 page_title: Telerik UI Editor Documentation |  Image and File Browser
 description: "Learn how to enable and use the image and file browsing functionality of the {{ site.product }} Editor component."
+components: ["editor"]
 previous_url: /helpers/editors/editor/image-browser
 slug: htmlhelpers_editor_image_browser_aspnetcore
 position: 7

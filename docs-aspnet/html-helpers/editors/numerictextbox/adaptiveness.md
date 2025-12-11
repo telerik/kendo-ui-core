@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the adaptive behavior of the the Telerik UI NumericTextBox component for {{ site.framework }}."
+components: ["numerictextbox"]
 slug: adaptiveness_numerictextbox
 position: 8
 ---

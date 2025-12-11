@@ -2,6 +2,7 @@
 title: Action Buttons
 page_title: Kendo UI for jQuery ActionSheet Documentation - Action Buttons
 description: "Get started with the Kendo UI for jQuery ActionSheet and learn about its action buttons orientation options."
+components: ["actionsheet"]
 slug: actionbuttons_orientation_actionsheet_widget
 position: 4
 ---

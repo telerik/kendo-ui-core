@@ -6,6 +6,7 @@ page_title: How to Add Custom Buttons to MultiCheckBox Filter in Kendo UI for An
 slug: customize-multicheckbox-filter-kendo-ui-jquery-grid
 tags: kendo-ui-for-jquery, grid, multicheckbox, filter, customize
 res_type: kb
+components: ["grid"]
 ticketid: 1681456
 ---
 

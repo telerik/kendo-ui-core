@@ -6,6 +6,7 @@ page_title: Opening Filter Dropdown to the Left Side in Kendo Grid using jQuery
 slug: opening-filter-dropdown-left-side-kendo-grid-jquery
 tags: kendo grid, filter dropdown, left side, jQuery
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

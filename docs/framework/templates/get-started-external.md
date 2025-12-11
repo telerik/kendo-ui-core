@@ -2,6 +2,7 @@
 title: Getting Started with External Templates 
 page_title: Getting Started with External Templates - Kendo UI Templates
 description: "Get started with the jQuery Templates by Kendo UI and learn how to create an external template, use it to display data, and render data based on a condition."
+components: ["general"]
 slug: getting_started_external_templates
 position: 3
 ---

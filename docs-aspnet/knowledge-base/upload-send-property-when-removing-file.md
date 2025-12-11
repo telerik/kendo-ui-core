@@ -6,6 +6,7 @@ page_title: Sending a Model Property to the Server When Removing a File from the
 slug: upload-send-property-when-removing-file
 tags: upload, asynchronous, remove, file, model, send, property, server
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 <table>

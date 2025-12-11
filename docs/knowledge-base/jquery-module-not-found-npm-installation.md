@@ -7,6 +7,7 @@ slug: troubleshoot_npm_installing
 tags: troubleshooting, jquery, module, not, found, npm, installing
 type: troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

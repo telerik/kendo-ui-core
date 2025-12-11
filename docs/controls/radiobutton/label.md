@@ -2,6 +2,7 @@
 title: Label
 page_title: jQuery RadioButton Documentation - Label
 description: "Get started with the jQuery RadioButton by Kendo UI and learn how to configure the label of the widget."
+components: ["radiobutton"]
 slug: label_radiobutton_widget
 position: 2
 ---

@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/signalr-datasource-with-serve
 slug: scheduler-signalr-datasource-with-server-filtering
 tags: scheduler, signalr, datasource, server, dates, ranges, filter, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

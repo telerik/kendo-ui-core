@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery InlineAIPrompt Documentation - Getting Started with the InlineAIPrompt
 description: "Get started with the jQuery InlineAIPrompt by Kendo UI and learn how to create the component."
+components: ["inlineaiprompt"]
 slug: getting_started_kendoui_inlineaiprompt_component
 position: 1
 ---

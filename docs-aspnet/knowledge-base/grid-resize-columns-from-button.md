@@ -6,6 +6,7 @@ page_title: Resize Columns from a Button
 slug: grid-resize-columns-from-button
 tags: aspnet, mvc, grid, resize, columns, from, button
 res_type: kb
+components: ["general"]
 component: grid, button
 ---
 

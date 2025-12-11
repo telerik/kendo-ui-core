@@ -2,6 +2,7 @@
 title: DateInput Integration
 page_title: DateInput Integration
 description: "Get started with the {{ site.product }} DatePicker and learn how to integrate it with the {{ site.product }} DateInput."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_dateinputintegration
 position: 8
 ---

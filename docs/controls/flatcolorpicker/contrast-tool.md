@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: FlatColorPicker Documentation - FlatColorPicker Contrast Tool
 description: "Check out the Contrast Tool in the FlatColorPicker."
+components: ["flatcolorpicker"]
 slug: contrast_tool_kendoui_flatcolorpicker_widget
 position: 5
 ---

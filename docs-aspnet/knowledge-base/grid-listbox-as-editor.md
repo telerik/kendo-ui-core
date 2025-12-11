@@ -6,6 +6,7 @@ page_title: Use the ListBox as an Editor in the Grid
 slug: grid-listbox-as-editor
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, listbox-editor, listbox
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

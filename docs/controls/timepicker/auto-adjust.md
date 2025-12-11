@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: jQuery TimePicker Documentation - Automatic Correction
 description: "Get familiar with the autocorrect feature of the jQuery TimePicker by Kendo UI, and learn how to disable it."
+components: ["timepicker"]
 slug: autocorrect_kendoui_timepicker
 position: 7
 ---

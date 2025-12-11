@@ -2,6 +2,7 @@
 title: ThemeBuilder
 page_title: ThemeBuilder
 description: "Learn what ThemeBuilder is and how to use it to customize the appearance of the {{ site.product }} components in your applications."
+components: ["general"]
 slug: sass_theme_builder
 previous_url: /styles-and-layout/overview
 position: 3

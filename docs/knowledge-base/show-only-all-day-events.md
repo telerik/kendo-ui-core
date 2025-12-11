@@ -5,9 +5,9 @@ description: "Learn how to show only all-day events in a Kendo UI for jQuery Sch
 previous_url: /controls/scheduling/scheduler/how-to/show-only-all-day-events, /controls/scheduling/scheduler/how-to/appearance/show-only-all-day-events
 slug: howto_showonlyalldayevents_scheduler
 tags: telerik, kendo, jquery, scheduler, show, all, day, events, only 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

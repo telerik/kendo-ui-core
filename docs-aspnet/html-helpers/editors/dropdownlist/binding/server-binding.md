@@ -2,6 +2,7 @@
 title:  Local Binding
 page_title: Local Binding
 description: "Learn how to bind the {{ site.product }} DropDownList component to a local dataset."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/binding/server-binding
 slug: htmlhelpers_dropdownlist_serverbinding_aspnetcore
 position: 2

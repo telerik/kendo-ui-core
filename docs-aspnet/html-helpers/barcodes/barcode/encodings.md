@@ -2,6 +2,7 @@
 title: Encoding
 page_title: Encoding
 description: "Get started with the Telerik UI Barcode component for {{ site.framework }} and learn more about the character set and length and check the digits of the symbologies."
+components: ["barcode"]
 slug: encodings_aspnetcore_barcode_widget
 position: 2
 ---

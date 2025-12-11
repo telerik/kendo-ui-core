@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Barcode Documentation - Getting Started with the Barcode
 description: "Get started with the jQuery Barcode by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["barcode"]
 slug: getting_started_kendoui_barcode_widget
 position: 2
 ---

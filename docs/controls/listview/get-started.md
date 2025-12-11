@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ListView Documentation - Getting Started with the ListView
 description: "Get started with the jQuery ListView by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["listview"]
 slug: getting_started_kendoui_listview_widget
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the Telerik UI FloatingActionButton TagHelper for {{ site.framework }} by setting its size, color, icon and text."
+components: ["floatingactionbutton"]
 slug: taghelpers_appearance_floatingactionbutton_aspnetcore
 position: 3
 ---

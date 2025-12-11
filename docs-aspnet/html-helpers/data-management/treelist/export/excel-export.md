@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: Excel Export
 description: "Export the Telerik UI TreeList for {{ site.framework }} to Excel."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_excelexport
 position: 2
 ---

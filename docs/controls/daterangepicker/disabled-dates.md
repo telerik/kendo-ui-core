@@ -2,6 +2,7 @@
 title: Disabled Dates
 page_title: jQuery DateRangePicker Documentation - Disabled Dates
 description: "Get started with the jQuery DateRangePicker by Kendo UI and disable specific dates in the widget."
+components: ["daterangepicker"]
 slug: disableddates_kendoui_daterangepicker
 position: 3
 ---

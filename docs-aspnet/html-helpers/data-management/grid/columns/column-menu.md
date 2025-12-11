@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: Column Menu
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to enable its column menu."
+components: ["grid"]
 slug: columnmenu_aspnet_grid
 position: 6
 ---

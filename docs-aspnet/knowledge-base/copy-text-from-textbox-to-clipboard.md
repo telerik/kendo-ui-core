@@ -5,6 +5,7 @@ page_title: Copy Text from {{ site.product }} TextBox to Clipboard
 slug: copy-text-from-textbox-to-clipboard
 tags: textbox, clipboard, copy, button, suffix, telerik, core, mvc, aspnet, kendo
 res_type: kb
+components: ["general"]
 component: textbox
 ---
 

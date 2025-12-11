@@ -5,9 +5,9 @@ description: "Learn how to use custom MVVM binders for shapes and connections in
 slug: howto_custommvvmbidinders_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/custom-mvvm-binders
 tags: kendo, jquery, diagram, use, custom, mvvm, binders, for, shapes, and, connections
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

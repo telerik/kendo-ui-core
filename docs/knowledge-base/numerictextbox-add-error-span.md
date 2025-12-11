@@ -7,6 +7,7 @@ slug: numerictextbox-add-error-span
 tags: numerictextbox, error, span, validation, notification
 ticketid: 1149027
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

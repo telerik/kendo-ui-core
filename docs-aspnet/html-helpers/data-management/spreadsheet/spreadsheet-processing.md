@@ -2,6 +2,7 @@
 title: Server-Side Processing
 page_title: Server-Side Processing
 description: "Process the data of the Telerik UI Spreadsheet by using the Telerik Document Processing library."
+components: ["spreadsheet"]
 previous_url: /helpers/data-management/spreadsheet/spreadsheet-processing
 slug: spreadsheet_processing_spreadsheet_mvc
 position: 10

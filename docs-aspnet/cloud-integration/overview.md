@@ -2,6 +2,7 @@
 title: Overview
 page_title: Cloud Integration Overview
 description: "This overview lists the articles that demonstrate how to use the {{ site.product }} suite with different cloud services."
+components: ["general"]
 slug: cloud_integration_overview_aspnetcore
 position: 1
 ---

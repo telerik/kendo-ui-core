@@ -2,6 +2,7 @@
 title: Adaptive Tools
 page_title: jQuery Grid Documentation - Adaptive Tools
 description: "Learn how to enable the adaptive tools in the toolbar of the jQuery Grid by Kendo UI."
+components: ["grid"]
 slug: adaptive_tools_kendoui_grid_component
 position: 6
 ---

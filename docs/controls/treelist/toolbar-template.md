@@ -2,6 +2,7 @@
 title: Toolbar Template
 page_title: jQuery TreeList Documentation - Toolbar Template
 description: "Get started with the jQuery TreeList by Kendo UI and learn how to render different Toolbar content by using Kendo UI Templates."
+components: ["treelist"]
 slug: toolbar_templates_kendoui_treelist_component
 position: 4
 ---

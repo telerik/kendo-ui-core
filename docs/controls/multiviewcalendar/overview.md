@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MultiViewCalendar Documentation - MultiViewCalendar Overview
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn how to initialize the component and use its events."
+components: ["multiviewcalendar"]
 slug: overview_kendoui_multiviewcalendar_widget
 position: 0
 ---

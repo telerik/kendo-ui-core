@@ -2,6 +2,7 @@
 title: Constraining the Position
 page_title: Constraining the Position
 description: "Learn how to configure the containment limits for the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_constrain_aspnetcore
 position: 4
 ---

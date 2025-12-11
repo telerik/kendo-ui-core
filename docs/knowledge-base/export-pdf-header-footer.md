@@ -5,9 +5,9 @@ description: "Learn how to create a template for the Drawing API and use it for 
 previous_url: /controls/editors/editor/how-to/export-pdf-header-footer, /controls/editors/editor/how-to/export/export-pdf-header-footer
 slug: howto_export_pdf_header_footer
 tags: telerik, kendo, jquery, editor, export, headers, footers, in, pdf
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Remote Binding
 page_title: Remote Binding
 description: "Get started with the {{ site.product }} ListBox and learn how to bind the ListBox to remote data."
+components: ["listbox"]
 slug: htmlhelpers_listbox_remote_aspnetcore
 position: 4
 ---

@@ -7,6 +7,7 @@ slug: scheduler-filter-resources-dropdown
 tags: kendo, kendoui, combobox, scheduler, filter, resources
 ticketid: 1138727
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

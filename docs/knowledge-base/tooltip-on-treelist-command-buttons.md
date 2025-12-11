@@ -7,7 +7,7 @@ slug: tooltip-on-treelist-command-buttons
 tags: kendo ui, tooltip, treelist, content
 ticketid: 1534253
 res_type: kb
-component: tooltip
+components: ["tooltip"]
 ---
 
 ## Environment

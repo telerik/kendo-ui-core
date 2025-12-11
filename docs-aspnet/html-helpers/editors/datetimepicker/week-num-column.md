@@ -2,6 +2,7 @@
 title: Week Number Column
 page_title:  DateTimePicker Week Column Number
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to render a column for the number of weeks within the current month."
+components: ["datetimepicker"]
 slug: weeknumcolumn_datetimepicker_aspnetcore
 position: 8
 ---

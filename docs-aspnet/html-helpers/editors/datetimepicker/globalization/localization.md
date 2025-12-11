@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and translate its messages for different culture locales."
+components: ["datetimepicker"]
 slug: localization_datetimepicker_aspnetcore
 position: 2
 ---

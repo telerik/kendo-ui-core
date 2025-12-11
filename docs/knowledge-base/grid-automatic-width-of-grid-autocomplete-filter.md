@@ -7,6 +7,7 @@ slug: grid-automatic-width-of-grid-autocomplete-filter
 tags: grid, filter, width, suggestions
 ticketid: 1144763
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

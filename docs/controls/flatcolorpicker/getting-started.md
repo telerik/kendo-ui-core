@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery FlatColorPicker Documentation - Getting Started with the FlatColorPicker
 description: "Get started with the jQuery FlatColorPicker by Kendo UI and learn how to create and initialize the component."
+components: ["flatcolorpicker"]
 slug: getting_started_kendoui_flatcolorpicker_widget
 position: 2
 ---

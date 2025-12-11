@@ -5,9 +5,9 @@ description: "Learn how to filter the ListView datasource based on Kendo UI Slid
 slug: howto_updatelistviewondatasitemupdate_listview
 previous_url: /controls/data-management/listview/how-to/update-widget-on-datasourceitem-update
 tags: listview, update, on, updating, datasource, item
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

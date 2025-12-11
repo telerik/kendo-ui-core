@@ -5,9 +5,9 @@ description: "Learn how to set up the Kendo UI for jQuery Scheduler widget to wo
 previous_url: /controls/scheduling/scheduler/how-to/offline-storage, /controls/scheduling/scheduler/how-to/binding/offline-storage
 slug: howto_setupthewidget_toworkoffline_scheduler
 tags: telerik, kendo, jquery, scheduler, work, with, the, offline 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

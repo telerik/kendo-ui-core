@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery InlineAIPrompt Documentation - InlineAIPrompt Overview
 description: "Get started with the jQuery InlineAIPrompt by Kendo UI and learn how to initialize the widget."
+components: ["inlineaiprompt"]
 slug: overview_kendoui_inlineaiprompt_component
 position: 0
 ---

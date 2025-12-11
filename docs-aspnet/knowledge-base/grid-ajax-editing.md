@@ -6,6 +6,7 @@ page_title: Editing an ASP.NET Core Grid with AJAX
 slug: grid-ajax-editing
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, ajax, edit, ajax-editing
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

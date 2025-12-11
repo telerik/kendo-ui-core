@@ -7,7 +7,7 @@ slug: icons-rendered-as-emojis-on-ios
 tags: icons, font, emoji, shoe, woman, man, tshirt, numerictextbox, menu, unicode, characters, render, ios, safari, mac, apple
 ticketid: 1405468, 1129136
 res_type: kb
-component: fonticons
+components: ["fonticons"]
 ---
 
 ## Environment

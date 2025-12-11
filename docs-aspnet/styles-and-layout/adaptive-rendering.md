@@ -2,6 +2,7 @@
 title: Adaptive Rendering
 page_title: Adaptive Rendering
 description: "Explore how the {{ site.product }} components that support adaptive mode are rendered based on the screen dimensions."
+components: ["general"]
 slug: adaptive_rendering
 position: 1
 ---

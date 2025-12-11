@@ -2,6 +2,7 @@
 title: Frequently Asked Questions
 page_title: Licensing Frequently Asked Questions
 description: "Learn the answers to frequently asked questions about the {{ site.product }} licensing."
+components: ["general"]
 slug: licensing-faq
 previous_url: /licensing
 position: 3

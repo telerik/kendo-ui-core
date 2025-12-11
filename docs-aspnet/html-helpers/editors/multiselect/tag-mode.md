@@ -2,6 +2,7 @@
 title: Summary-Tag Mode
 page_title: Summary-Tag Mode
 description: "Learn how to display single or multiple tags for the selected items for the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 slug: htmlhelpers_multiselect_tagmode_aspnetcore
 position: 5
 ---

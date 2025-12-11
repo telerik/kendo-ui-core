@@ -2,6 +2,7 @@
 title: Tools
 page_title: Tools
 description: "Learn which tools are available in the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_tools_aspnetcore
 position: 3
 ---

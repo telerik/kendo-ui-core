@@ -2,6 +2,7 @@
 title: Interval
 page_title: jQuery TimePicker Documentation - Interval
 description: "Get familiar with the jQuery TimePicker by Kendo UI component and how to set its interval feature."
+components: ["timepicker"]
 slug: interval_kendoui_timepicker
 position: 9
 ---

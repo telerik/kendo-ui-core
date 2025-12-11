@@ -7,6 +7,7 @@ previous_url: /helpers/editors/autocomplete/how-to/add-new-values-to-grid-with-a
 slug: howto_addnewvaluestogridrecordsautoceditor_autocompleteaspnetmv
 tags: grid, autocomplete, editor, add, new, options, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

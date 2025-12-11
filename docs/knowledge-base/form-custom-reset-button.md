@@ -6,6 +6,7 @@ page_title: Add Custom Reset Button to Form
 slug: form-custom-reset-button
 tags: form, reset, setoptions
 res_type: kb
+components: ["form"]
 ---
 
 ## Environment

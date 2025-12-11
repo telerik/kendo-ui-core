@@ -6,6 +6,7 @@ page_title: Using DateTimeOffset Model values in a DateTimePicker and Grid
 slug: datetimepicker-datetimeoffset-bind-to-model
 tags: datetimepicker, model, value, datetimeoffset, grid, filter
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

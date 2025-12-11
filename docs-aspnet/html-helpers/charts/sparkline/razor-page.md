@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI Sparkline component for {{ site.framework }} in a Razor Pages application with an example on how to configure its remote binding DataSource."
+components: ["sparkline"]
 slug: htmlhelper_sparkline_razorpages_aspnetcore
 position: 3
 ---

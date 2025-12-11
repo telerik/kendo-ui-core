@@ -5,9 +5,9 @@ description: "Learn how to add a red border and hide the tooltip in the Kendo UI
 slug: howto_addredborderandhidetooltip_validator
 previous_url: /framework/validator/how-to/add-red-border, /controls/editors/validator/how-to/add-red-border
 tags: telerik, kendo, jquery, validator, add, red, border, hide, tooltip
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PivotGrid Documentation - Getting Started with the PivotGrid
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["pivotgrid"]
 slug: getting_started_kendoui_pivotgrid_widget
 position: 1
 ---

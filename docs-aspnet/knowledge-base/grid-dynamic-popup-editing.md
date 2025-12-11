@@ -7,6 +7,7 @@ slug: grid-dynamic-popup-editing
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, custom, popup, template, dynamic, datatable
 ticketid: 1511419, 1522079
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

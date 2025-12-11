@@ -7,7 +7,7 @@ slug: gantt-show-tooltip-for-treelist-tasks
 tags: gantt, show, display, tooltip, hover, task, treelist
 ticketid: 1139636
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

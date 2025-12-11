@@ -7,6 +7,7 @@ tags: telerik, chart, no, data, message
 component: chart
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

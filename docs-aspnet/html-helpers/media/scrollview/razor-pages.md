@@ -3,20 +3,17 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the {{ site.product }} ScrollView for remote data binding using a DataSource in a Razor Page application."
 slug: htmlhelpers_scrollview_razorpage_aspnetcore
+components: ["scrollview"]
 position: 6
 ---
 
 # ScrollView in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI ScrollView for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI ScrollView for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the ScrollView component in a Razor Pages scenario.
-
-For the complete project, refer to the [ScrollView in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ScrollView/ScrollViewBinding.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers the most versatile data binding approach. To connect the ScrollView to a data set retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
@@ -105,7 +102,8 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
     ```C# Index.cshtml.cs
-
+    public class IndexModel : PageModel
+    {
         public static List<Product> ScrollViewItems { get; set; }
         
         public void OnGet()
@@ -131,6 +129,7 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
         {
             return new JsonResult(ScrollViewItems.ToDataSourceResult(request));
         }
+    }
     ```
     ```Model
         public class Product
@@ -140,6 +139,8 @@ The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers 
             public string ImageUrl { get; set; }
         }
     ```
+
+For the complete project, refer to the [ScrollView in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ScrollView/ScrollViewBinding.cshtml).
 
 ## See Also
 

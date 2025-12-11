@@ -6,7 +6,7 @@ page_title:  Persist expanded rows in Kendo Grid - Kendo UI for jQuery Data Grid
 slug: grid-persist-expanded-rows
 tags: grid, persist, detail, expand, expanded, refresh
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

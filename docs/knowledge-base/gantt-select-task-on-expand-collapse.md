@@ -7,6 +7,7 @@ slug: select-gantt-task-on-expand-collapse
 tags: kendo, kendoui, gantt, select, expand, collapse, task, icon, click
 ticketid: 1483656
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

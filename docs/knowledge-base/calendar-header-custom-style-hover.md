@@ -8,6 +8,7 @@ position:
 tags: calender, header, style, css, custom, color, background, change, hover, styling, text, hovering, icon
 ticketid: 1426434
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

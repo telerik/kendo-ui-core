@@ -7,6 +7,7 @@ slug: panelbar-load-grid-data-on-expand
 tags: grid, panelbar, item, expanded, selected
 ticketid: 1401786, 1386928
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

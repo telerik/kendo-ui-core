@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Pager Documentation - Pager Overview
 description: "Get started with the jQuery Pager by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["pager"]
 slug: overview_kendoui_pager_widget
 position: 0
 ---

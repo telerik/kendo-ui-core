@@ -2,6 +2,7 @@
 title: Calendar Century Cells Format
 page_title: jQuery Calendar Documentation - Calendar Century Cells Format
 description: "Learn the possible formats for the century cells in the Kendo UI for jQuery Calendar."
+components: ["calendar"]
 slug: century_cells_format_calendar
 position: 9
 ---

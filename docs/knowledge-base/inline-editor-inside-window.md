@@ -5,9 +5,9 @@ description: "Learn how to use an inline Kendo UI Editor inside a window."
 previous_url: /controls/editors/editor/how-to/inline-editor-inside-window, /controls/editors/editor/how-to/integration/inline-editor-inside-window
 slug: howto_use_inline_editor_inside_windows_editor
 tags: telerik, kendo, jquery, editor, use, inline, inside, window
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

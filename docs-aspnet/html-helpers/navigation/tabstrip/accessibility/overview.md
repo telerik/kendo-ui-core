@@ -2,6 +2,7 @@
 title: Overview
 page_title: TabStrip Documentation | TabStrip Accessibility
 description: "Get started with the {{ site.product }} TabStrip and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["tabstrip"]
 slug: htmlhelpers_tabstrip_accessibility
 position: 1
 ---

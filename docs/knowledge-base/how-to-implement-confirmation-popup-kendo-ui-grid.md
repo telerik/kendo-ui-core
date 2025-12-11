@@ -6,6 +6,7 @@ page_title: How to Add a Confirmation Dialog on Canceling Edit in Kendo UI Grid
 slug: how-to-implement-confirmation-popup-kendo-ui-grid
 tags: kendo ui, grid, popup editing, confirmation dialog, cancel event
 res_type: kb
+components: ["grid"]
 ticketid: 1666669
 ---
 

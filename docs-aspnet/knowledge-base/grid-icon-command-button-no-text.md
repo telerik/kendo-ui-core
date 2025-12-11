@@ -7,6 +7,7 @@ slug: grid-icon-command-button-no-text
 tags: grid, icon, command, button, no, text, edit, column
 ticketid: 1422170
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ScrollView Documentation - ScrollView Overview
 description: "Get started with the jQuery ScrollView by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["scrollview"]
 slug: overview_kendoui_scrollview_widget
 position: 1
 ---

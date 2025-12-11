@@ -6,6 +6,7 @@ page_title: How to Keep a Marker Centered in Kendo UI Map on Zoom and Pan
 slug: centering-a-marker-kendo-ui-map
 tags: kendo, ui, map, center, marker, zoom, pan
 res_type: kb
+components: ["map"]
 ticketid: 1671377
 ---
 

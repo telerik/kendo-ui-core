@@ -2,6 +2,7 @@
 title: Server Filtering
 page_title: jQuery ComboBox Documentation - Server Filtering
 description: "Get started with the jQuery ComboBox by Kendo UI and configure its server-side filtering."
+components: ["combobox"]
 slug: server_filtering_kendoui_combobox_widget
 position: 5
 ---

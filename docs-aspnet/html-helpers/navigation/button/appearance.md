@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI Button HtmlHelper for {{ site.framework }}."
+components: ["button"]
 slug: button_appearance
 position: 2
 ---

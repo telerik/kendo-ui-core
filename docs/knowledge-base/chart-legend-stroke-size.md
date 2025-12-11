@@ -7,6 +7,7 @@ slug: chart-legend-stroke-size
 tags: chart, legend, stroke, size
 ticketid: 1142102
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

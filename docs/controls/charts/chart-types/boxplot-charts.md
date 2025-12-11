@@ -2,6 +2,7 @@
 title: Box Plot Charts
 page_title: jQuery Chart Documentation - Box Plot Charts
 description: "Learn how to create a Kendo UI Box Plot Chart and configure its options."
+components: ["chart"]
 slug: chart-types-box-plot
 ---
 

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ColorPalette component for {{ site.framework }}."
+components: ["colorpalette"]
 slug: color_palette_events
 position: 3
 ---

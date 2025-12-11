@@ -7,6 +7,7 @@ slug: grid-loop-all-groups
 tags: grid, group, loop, iterate, obtain, get, all, multiple, nested, subgroups
 ticketid: 1160159
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

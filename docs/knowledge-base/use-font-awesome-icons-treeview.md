@@ -5,9 +5,9 @@ description: "Learn how to use FontAwesome icons in the Kendo UI for jQuery Tree
 slug: howto_usefontawesomeicons_treeview
 previous_url: /controls/navigation/treeview/how-to/appearance/use-font-awesome-icons
 tags: telerik, kendo, jquery, treeview, use, fontawesome, icons
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

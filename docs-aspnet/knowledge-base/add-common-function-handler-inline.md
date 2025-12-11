@@ -6,6 +6,7 @@ slug: add-common-function-handler-inline
 tags: function, parameters, event, handler, grid, button, action, inline, template, delegate, telerik, core, mvc
 ticketid: 1656801
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

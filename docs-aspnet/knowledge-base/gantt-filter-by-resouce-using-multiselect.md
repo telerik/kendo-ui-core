@@ -7,6 +7,7 @@ slug: gantt-filter-by-resource-using-multiselect
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, gantt, filter, resources, multiselect
 ticketid: 1547317
 res_type: kb
+components: ["general"]
 component: gantt
 ---
 

@@ -2,6 +2,7 @@
 title: Tools
 page_title: Tools
 description: "Learn which tools are available in the Telerik UI ImageEditor component for {{ site.framework }}."
+components: ["imageeditor"]
 slug: htmlhelpers_imageeditor_tools_aspnetcore
 position: 2
 ---

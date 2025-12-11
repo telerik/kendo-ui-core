@@ -2,6 +2,7 @@
 title: Grouping
 page_title: jQuery ComboBox Documentation - Grouping
 description: "Get started with the jQuery ComboBox by Kendo UI and group its data."
+components: ["combobox"]
 slug: grouping_kendoui_combobox_widget
 position: 4
 ---

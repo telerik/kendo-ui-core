@@ -2,6 +2,7 @@
 title: Cards
 page_title: Cards
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about its cards."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_cards
 position: 4
 ---

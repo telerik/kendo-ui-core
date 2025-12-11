@@ -2,6 +2,7 @@
 title: Overview
 page_title: Kendo UI for jQuery Form Documentation - Form Overview
 description: "Get started with the Kendo UI for jQuery Form and learn about its features and how to initialize the component."
+components: ["form"]
 slug: overview_kendoui_form_widget
 position: 0
 ---

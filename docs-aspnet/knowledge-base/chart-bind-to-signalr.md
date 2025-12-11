@@ -7,6 +7,7 @@ previous_url: /helpers/charts/how-to/binding-to-singalr, /html-helpers/charts/ho
 slug: chart-bind-to-signalr
 tags: chart, databound, signalr
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

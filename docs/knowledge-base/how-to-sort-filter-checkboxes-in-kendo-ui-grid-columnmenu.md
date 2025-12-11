@@ -6,6 +6,7 @@ page_title: How to Sort Filter Checkboxes in Kendo UI Grid ColumnMenu
 slug: how-to-sort-filter-checkboxes-in-kendo-ui-grid-columnmenu
 tags: kendo-ui, grid, sorting, filter, checkboxes, columnmenu
 res_type: kb
+components: ["grid"]
 ticketid: 1677462
 ---
 

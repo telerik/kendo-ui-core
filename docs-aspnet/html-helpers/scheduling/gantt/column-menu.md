@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: Column Menu
 description: "Get started with Telerik UI Gantt component for {{ site.framework }} and learn how to enable its column menu feature."
+components: ["gantt"]
 slug: htmlhelpers_gantt_columnmenu_aspnetcore
 position: 8
 ---

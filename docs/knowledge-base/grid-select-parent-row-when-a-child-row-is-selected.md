@@ -7,7 +7,7 @@ slug: grid-select-parent-row-when-a-child-row-is-selected
 tags: grid, selection, parent, master, child, hierarchy, checkbox, select, row, any
 ticketid: 1147793
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

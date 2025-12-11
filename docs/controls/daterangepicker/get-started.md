@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DateRangePicker Documentation - Getting Started with the DateRangePicker
 description: "Get started with the jQuery DateRangePicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["daterangepicker"]
 slug: getting_started_kendoui_daterangepicker_widget
 position: 1
 ---

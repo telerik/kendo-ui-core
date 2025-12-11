@@ -7,6 +7,7 @@ slug: grid-filter-column-with-dropdownlist
 tags: grid, filter, dropdownlist
 ticketid: 1144229
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Paging
 page_title: Paging
 description: "Learn how to enable the paging functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_paging
 position: 8
 ---

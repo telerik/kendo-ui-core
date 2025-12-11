@@ -2,6 +2,7 @@
 title: Overview
 page_title: Templates Overview
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn about the provided templating options."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_templates_overview
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Label
 page_title: Label
 description: "Learn how to configure the label of the Telerik UI Rating for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/label
 slug: htmlhelpers_rating_aspnetcore_label
 position: 4

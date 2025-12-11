@@ -7,6 +7,7 @@ slug: grid-update-cells-in-inline-edit-mode
 tags: grid, inline, edit, mode, update, cells, next, contiguous
 ticketid: 1147034
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

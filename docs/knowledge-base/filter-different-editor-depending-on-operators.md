@@ -4,10 +4,10 @@ page_title: Display Different Editors Depending on Operators - Kendo UI for jQue
 description: "Learn how to display different editors depending on the operator in the Kendo UI Filter for jQuery."
 slug: filter-different-editor-depending-on-operators
 tags: filter, editor, operator
-component: filter
 type: how-to
 ticketid: 1616662
 res_type: kb
+components: ["filter"]
 ---
 
 

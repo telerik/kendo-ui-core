@@ -7,6 +7,7 @@ slug: grid-page-size-all
 tags: grid, pagesize, asp, core, all
 ticketid: 1115286
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

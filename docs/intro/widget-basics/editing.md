@@ -2,6 +2,7 @@
 title: Editing Components
 page_title: Editing Components - Working with Components 
 description: "Get started with Kendo UI for jQuery and learn how to configure editing for editable components like the Grid, Scheduler, and ListView."
+components: ["general"]
 slug: kendoui_editing_gettingstarted
 position: 50
 ---

@@ -2,6 +2,7 @@
 title: Row Templates
 page_title: Row Templates
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to place custom content into a grid row with the help of row templates."
+components: ["grid"]
 slug: row_templates_aspnetcore_grid
 position: 3
 ---

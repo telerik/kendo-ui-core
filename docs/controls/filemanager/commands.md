@@ -2,6 +2,7 @@
 title: Commands
 page_title: jQuery FileManager Documentation - FileManager Commands
 description: "Get familiar with the Commands in the FileManager and how you can use them."
+components: ["filemanager"]
 slug: commands_kendoui_filemanager_widget
 position: 10
 ---

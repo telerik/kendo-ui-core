@@ -5,9 +5,9 @@ description: "Learn how to enable and disable the Kendo UI Drag and Drop functio
 slug: howto_enableanddisabledraggingatruntime_intercativityandux
 previous_url: /controls/editors/validator/how-to/disable-dragging-runtime
 tags: telerik, kendo, jquery, drag, and, drop, enable, and, disable, dragging, at, runtime
-component: draganddrop
 type: how-to
 res_type: kb
+components: ["draganddrop"]
 ---
 
 ## Environment

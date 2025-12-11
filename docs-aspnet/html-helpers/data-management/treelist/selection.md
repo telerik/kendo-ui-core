@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to configure its select functionality."
+components: ["treelist"]
 slug: htmlhelpers_treelist_selection
 position: 7
 ---

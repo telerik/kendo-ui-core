@@ -2,6 +2,7 @@
 title: Auto Layout
 page_title: jQuery Sankey Diagram Documentation - Auto Layout
 description: "Learn how to disable the automatic layout of the Kendo UI for jQuery Sankey Diagram, which is active by default."
+components: ["chart"]
 slug: autolayout_kendoui_sankeychart
 position: 5
 ---

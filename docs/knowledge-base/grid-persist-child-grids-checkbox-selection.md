@@ -7,6 +7,7 @@ slug: grid-persist-child-grids-checkbox-selection
 tags: grid, checkbox, selection, hierarchy, child, persist
 ticketid: 1150871
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

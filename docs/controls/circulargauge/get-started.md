@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CircularGauge Documentation - Getting Started with the CircularGauge
 description: "Get started with the jQuery CircularGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["circulargauge"]
 slug: getting_started_kendoui_circulargauge_component
 position: 2
 ---

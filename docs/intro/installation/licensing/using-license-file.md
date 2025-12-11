@@ -2,6 +2,7 @@
 title: Adding a License Key File (NPM)
 page_title: Setting Up the Kendo UI for jQuery License Key - Download and Installation by Using NMP registry
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library from the NPM distribution channel and register the script license file."
+components: ["general"]
 slug: using-license-file
 published: True
 position: 3

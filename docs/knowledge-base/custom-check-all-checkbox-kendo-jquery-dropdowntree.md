@@ -7,6 +7,7 @@ meta_title: Adding Custom "Check All" Checkbox in Kendo UI for jQuery DropDownTr
 slug: custom-check-all-checkbox-kendo-jquery-dropdowntree
 tags: dropdowntree, kendo ui for jquery, check all, filtering, open, filtering event
 res_type: kb
+components: ["dropdowntree"]
 ticketid: 1701162
 ---
 

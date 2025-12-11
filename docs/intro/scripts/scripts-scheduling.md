@@ -3,6 +3,7 @@ comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE 
 title: Scheduling
 page_title: Individual Scripts for Scheduling - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Scheduling"
+components: ["general"]
 slug: script_filesfor_scheduling_widgets
 ---
 

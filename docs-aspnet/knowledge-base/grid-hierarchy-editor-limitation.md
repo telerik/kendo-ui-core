@@ -6,6 +6,7 @@ page_title: Implementing Editor Component as Editor Template for a Child Grid
 slug: grid-hierarchy-editor-limitation
 tags: grid, editor, template, child, hierarchy
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

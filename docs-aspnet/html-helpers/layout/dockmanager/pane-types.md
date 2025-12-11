@@ -2,6 +2,7 @@
 title: Pane Types
 page_title: Pane Types
 description: "Learn how to configure different pane types for the Telerik UI DockManager component for {{ site.framework }}"
+components: ["dockmanager"]
 slug: pane_types_dockmanager_aspnetcore
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Workflow Diagram
 page_title: jQuery Diagram Documentation - Workflow Diagram
 description: "Learn how to create a workflow diagram using the Kendo UI for jQuery Diagram component."
+components: ["diagram"]
 slug: workflow_kendoui_diagram
 position: 6
 ---

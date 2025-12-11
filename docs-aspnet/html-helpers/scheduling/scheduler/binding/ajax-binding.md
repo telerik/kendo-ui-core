@@ -2,6 +2,7 @@
 title: Ajax Binding
 page_title: Ajax Binding
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for Ajax binding."
+components: ["scheduler"]
 previous_url: /helpers/scheduling/scheduler/ajax-editing
 slug: htmlhelpers_scheduler_ajaxbinding_aspnetcore
 position: 2

@@ -5,9 +5,9 @@ description: "Learn how to show a toolbar on mouse over in the Kendo UI Validato
 previous_url: /framework/validator/how-to/show-tooltip-on-mouse-over, /controls/editors/validator/how-to/show-tooltip-on-mouse-over
 slug: howto_showtooltiponmouseover_validator
 tags: telerik, kendo, jquery, validator, show, tooltip, on, mouseover
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

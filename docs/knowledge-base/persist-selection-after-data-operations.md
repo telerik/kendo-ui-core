@@ -5,9 +5,9 @@ description: "Learn how to persist row selection during data operations in a Ken
 slug: howto_persists_row_selection_listview
 previous_url: /controls/data-management/listview/how-to/persist-selection-after-data-operations
 tags: listview, persist, row, selection, during, data, operations
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

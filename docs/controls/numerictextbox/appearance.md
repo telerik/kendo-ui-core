@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery NumericTextBox Documentation - NumericTextBox Appearance
 description: "Learn how to apply different styling options to the NumericTextBox widget."
+components: ["numerictextbox"]
 slug: appearance_kendoui_numerictextbox_widget
 position: 2
 ---

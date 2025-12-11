@@ -5,9 +5,9 @@ description: "Learn how to create custom views in the Kendo UI for jQuery Gantt 
 slug: howto_create_custom_views_gantt
 previous_url: /controls/scheduling/gantt/how-to/creating-custom-view
 tags: telerik, kendo, jquery, gantt, create, custom, views
-component: gantt
 type: how-to
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

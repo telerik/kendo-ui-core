@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Learn how to use the {{ site.product }} localization files in order to change the default messages of helpers."
+components: ["general"]
 previous_url: /localization, /getting-started/localization
 slug: overview_localization_core
 position: 3

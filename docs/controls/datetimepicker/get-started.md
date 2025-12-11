@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DateTimePicker Documentation - Getting Started with the DateTimePicker
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["datetimepicker"]
 slug: getting_started_kendoui_datetimepicker_widget
 position: 1
 ---

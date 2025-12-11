@@ -5,6 +5,7 @@ description: Learn how to keep the Telerik UI for {{ site.framework }} Grid popu
 slug: grid-prevent-popup-close-on-edit
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

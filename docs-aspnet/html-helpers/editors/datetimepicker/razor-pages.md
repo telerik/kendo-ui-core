@@ -2,56 +2,20 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI DateTimePicker for {{ site.framework }} in a RazorPages application."
+components: ["datetimepicker"]
 slug: razorpages_datetimepicker_aspnetcore
 position: 17
 ---
 
 # DateTimePicker in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI DateTimePicker for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI DateTimePicker for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the DateTimePicker component in a Razor Pages scenario.
+## Binding to a PageModel Property
 
-For the complete project, refer to the [DateTimePicker in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DateTimePicker/DateTimePickerIndex.cshtml).
-
-```HtmlHelper
-@page
-
-<div>
-    <h4>Select a date range</h4>
-    @(Html.Kendo().DatePicker()
-        .Name("datepicker")
-    )
-</div>
-
-```
-{% if site.core %}
-```TagHelper
-@page
-
-<div>
-    <h4>Select a date range</h4>
-    <kendo-datepicker name="datepicker">
-    </kendo-datepicker>
-</div>
-
-```
-{% endif %}
-
-```C# PageModel
-
- public void OnGet()
- {
-
- }
-  
-```
-
-## Binding the DateTimePicker to a PageModel Property
-
-To bind the DatePicker to a property from the `PageModel`, follow the next steps:
+To bind the DateTimePicker to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that must bind to the DateTimePicker.
 

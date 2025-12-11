@@ -7,6 +7,7 @@ slug: grid-setoptions-hide-columns
 tags: grid, persist, state, columns, hide
 ticketid: 1166018
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

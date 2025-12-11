@@ -7,6 +7,7 @@ slug: spreadsheet-dynamically-increase-rows-count
 tags: spreadsheet, dynamically, rows, add, count
 ticketid: 1553835
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

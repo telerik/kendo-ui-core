@@ -7,6 +7,7 @@ slug: add-dropdownlist-item
 tags: dropdownlist, add, item, filter, datasource, custom
 ticketid: 1549484
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

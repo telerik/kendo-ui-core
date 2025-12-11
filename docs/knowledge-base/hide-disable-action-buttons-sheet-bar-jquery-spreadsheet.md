@@ -7,6 +7,7 @@ meta_title: How to Hide or Disable Action Buttons in Kendo UI for jQuery Spreads
 slug: hide-disable-action-buttons-sheet-bar-jquery-spreadsheet
 tags: kendo ui for jquery, spreadsheet, css, sheet bar, buttons
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1696460
 ---
 

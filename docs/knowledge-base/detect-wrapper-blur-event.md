@@ -5,9 +5,9 @@ description: "Learn how to detect the blur event of the Kendo UI DropDownList wr
 previous_url: /controls/editors/dropdownlist/how-to/detect-wrapper-blur-event, /controls/editors/dropdownlist/how-to/event-handling/detect-wrapper-blur-event
 slug: howto_detect_wrapper_blur_events_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, detect, wrapper, blur, events
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

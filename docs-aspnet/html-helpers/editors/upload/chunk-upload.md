@@ -2,6 +2,7 @@
 title: Chunk Upload
 page_title: Chunk Upload
 description: "Learn how to upload large files in chunks when using the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 previous_url: /helpers/editors/upload/chunk-upload
 slug: htmlhelpers_upload_chunks_aspnetcore
 position: 3

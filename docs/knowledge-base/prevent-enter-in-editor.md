@@ -4,10 +4,10 @@ page_title: Prevent Default Behavior of Enter key in Editor - Kendo UI for jQuer
 description: "Learn how to prevent the default behavior of Enter key in the Kendo UI Editor for jQuery."
 slug: prevent-enter-in-editor
 tags: editor, prevent, enter
-component: editor
 type: how-to
 ticketid: 1386798
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

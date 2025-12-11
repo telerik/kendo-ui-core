@@ -2,6 +2,7 @@
 title: Installing with NuGet
 page_title: Installing with NuGet
 description: "Learn how to install {{ site.product }} by using the NuGet packages available from the Telerik NuGet source."
+components: ["general"]
 previous_url: /getting-started/nuget-install, /getting-started/installation/nuget-install, /nuget-install, /installation-mvc/nuget-install, /installation/nuget-install
 slug: nuget_install_aspnetmvc6_aspnetmvc
 position: 4

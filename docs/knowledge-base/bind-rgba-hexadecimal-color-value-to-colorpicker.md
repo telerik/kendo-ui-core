@@ -6,7 +6,7 @@ type: how-to
 slug: bind-rgba-hexadecimal-color-value-to-colorpicker
 tags: colorpicker, mvvm, rgba, hexadecimal, color
 res_type: kb
-component: color-picker
+components: ["color-picker"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Prefix and Suffix
 page_title: Prefix and Suffix
 description: "Learn how to add custom items as prefix and suffix adornments to enhance the user interface interactivity when using the Telerik UI for {{ site.framework }} ComboBox."
+components: ["combobox"]
 slug: prefix_suffix_combobox
 position: 8
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Window Documentation - Getting Started with the Window
 description: "Get started with the jQuery Window by Kendo UI and learn how to create and initialize the widget."
+components: ["window"]
 slug: getting_started_kendoui_window_widget
 position: 1
 ---

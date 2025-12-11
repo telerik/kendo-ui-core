@@ -5,9 +5,9 @@ description: "Learn how to create and use the auto layout in the Kendo UI Data G
 previous_url: /controls/data-management/grid/how-to/Layout/auto-layout-grid
 slug: howto_create_and_use_autolayout_grid
 tags: grid, use, auto, layout
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

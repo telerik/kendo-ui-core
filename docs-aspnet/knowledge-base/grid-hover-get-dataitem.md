@@ -6,6 +6,7 @@ page_title: Handle Row Hover Event and Access Data Item in Grid
 slug: grid-hover-row-get-dataitem
 tags: grid, hover, event, datagrid, row-hover, databound, mouseenter, dataitem, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Adding Telerik UI through Local Files
 page_title: Adding Telerik UI through Local Files
 description: "Learn how to manually set up Telerik UI for ASP.NET MVC by using local files in a sample project created with Visual Studio."
+components: ["general"]
 slug: manualsetup_aspnetmvc
 position: 3
 permalink: /getting-started/manual-setup

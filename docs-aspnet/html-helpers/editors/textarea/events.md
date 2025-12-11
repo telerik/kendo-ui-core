@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TextArea component for {{ site.framework }}."
+components: ["textarea"]
 slug: events_textarea
 position: 6
 ---

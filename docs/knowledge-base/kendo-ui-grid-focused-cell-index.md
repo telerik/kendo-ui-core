@@ -6,6 +6,7 @@ page_title: Get Focused Cell Row and Column Index in Kendo UI Grid
 slug: kendo-ui-grid-focused-cell-index
 tags: kendo ui, grid, navigation, focused cell, row index, column index, keyup event
 res_type: kb
+components: ["grid"]
 ticketid: 1686693
 ---
 

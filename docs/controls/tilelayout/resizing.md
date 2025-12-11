@@ -2,6 +2,7 @@
 title: Resizing
 page_title: Kendo UI for jQuery TileLayout Documentation - TileLayout Resizing
 description: "Learn how to enable and use the resizing functionality of the Kendo UI for jQuery TileLayout."
+components: ["tilelayout"]
 slug: resizing_kendoui_tilelayout_widget
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Breaking Changes
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }}."
+components: ["general"]
 slug: breakingchanges_aspnetcore
 position: 0
 ---

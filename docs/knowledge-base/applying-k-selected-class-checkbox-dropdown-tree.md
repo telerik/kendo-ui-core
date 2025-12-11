@@ -6,6 +6,7 @@ page_title: Ensuring UI Consistency with k-selected Class in Kendo UI for jQuery
 slug: applying-k-selected-class-checkbox-dropdown-tree
 tags: kendo ui for jquery, dropdown tree, checkbox, ui consistency, k-selected class
 res_type: kb
+components: ["dropdowntree"]
 ticketid: 1689706
 ---
 

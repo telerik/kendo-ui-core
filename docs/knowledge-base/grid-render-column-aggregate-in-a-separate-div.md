@@ -7,6 +7,7 @@ slug: grid-render-column-aggregate-in-a-separate-div
 tags: grid, aggregates
 ticketid: 1148127
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

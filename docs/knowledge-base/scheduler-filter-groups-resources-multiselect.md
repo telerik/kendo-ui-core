@@ -7,6 +7,7 @@ slug: scheduler-filter-groups-resources-multiselect
 tags: kendo, kendoui, scheduler, resources, groping, show, hide, filter, multiselect
 ticketid: 1138727
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

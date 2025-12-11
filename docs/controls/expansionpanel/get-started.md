@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ExpansionPanel Documentation - Getting Started with the ExpansionPanel
 description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["expansionpanel"]
 slug: getting_started_kendoui_expansionpanel_component
 position: 2
 ---

@@ -5,9 +5,9 @@ description: "Learn how to upload files and select additional metadata with the 
 slug: howto_select_additional_metadata_upload
 previous_url: /controls/editors/upload/how-to/select-additional-metadata
 tags: telerik, kendo, jquery, upload, upload, files, and, select, additional, metadata
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

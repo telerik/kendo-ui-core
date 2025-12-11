@@ -5,9 +5,9 @@ description: "Learn how to filter values in two Kendo UI Multiselect widgets tha
 previous_url: /controls/editors/multiselect/how-to/distinct-values-in-widgets-sharing-same-data, /controls/editors/multiselect/how-to/filtering/distinct-values-in-widgets-sharing-same-data
 slug: howto_filter_valuesin_widgetswith_shared_data_multiselect
 tags: telerik, kendo, jquery, multiselect, filter, values, in, two, or, more, multiselects, share, the, same, data
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

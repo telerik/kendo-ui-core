@@ -5,6 +5,7 @@ page_title: Missing Font Icons
 slug: missing-font-icons
 tags: font, icons, backward, compatibility, upgrade, troubleshoot, application, missing
 res_type: kb
+components: ["general"]
 ---
 
 

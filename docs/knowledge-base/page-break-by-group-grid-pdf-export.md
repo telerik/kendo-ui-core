@@ -8,7 +8,7 @@ slug: page-break-by-group-grid-pdf-export
 tags: kendo, grid, pdf, export, group, page, break
 ticketid: 1120369
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Create Custom Number Editor Using NumericTextBox
 slug: grid-custom-editor-numeric-textbox
 tags: aspnet, mvc, grid, custom, editor, numerictextbox, textbox, numeric
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

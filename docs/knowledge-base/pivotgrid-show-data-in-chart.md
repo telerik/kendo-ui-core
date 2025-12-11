@@ -7,6 +7,7 @@ slug: pivotgrid-show-resize-data-in-chart
 tags: pivotgrid, chart, data, bar, column
 ticketid: 1359517
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

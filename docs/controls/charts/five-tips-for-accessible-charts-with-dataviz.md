@@ -2,6 +2,7 @@
 title: Accessibility
 page_title: Charts - Kendo UI Accessibility Support
 description: "Learn more tips and tricks how to make Kendo UI Charts accessible."
+components: ["chart"]
 slug: charts_accessibility_support
 position: 7
 ---

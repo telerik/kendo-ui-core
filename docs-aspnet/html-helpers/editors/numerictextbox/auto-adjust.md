@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: Telerik UI NumericTextBox for {{ site.framework }} Documentation - Automatic Correction
 description: "Get familiar with the Telerik UI NumericTextBox component for {{ site.framework }} and how to use its auto-correct feature."
+components: ["numerictextbox"]
 slug: htmlhelpers_numerictextbox_autocorrect_aspnetcore
 position: 7
 ---

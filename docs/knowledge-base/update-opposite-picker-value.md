@@ -5,9 +5,9 @@ description: "Learn how to update the opposite start or end picker value on mode
 previous_url: /controls/scheduling/scheduler/how-to/update-opposite-picker-value, /controls/scheduling/scheduler/how-to/editing/update-opposite-picker-value
 slug: howto_updateoppositepickervalue_onmodelchange_scheduler
 tags: telerik, kendo, jquery, scheduler, update, the, opposite, picker, value, on, model, change 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

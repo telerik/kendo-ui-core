@@ -7,6 +7,7 @@ slug: listbox-sort-items-on-add
 tags: listbox, sort, items, order, drag, add, new, drop
 ticketid: 1141126
 res_type: kb
+components: ["listbox"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Right-to-Left Support
 description: "Get started with the Telerik UI FileManager component for {{ site.framework }} and learn about the RTL supports it provides."
+components: ["filemanager"]
 slug: rtl_aspnetcore_filemanager
 position: 4
 ---

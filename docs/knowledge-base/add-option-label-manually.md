@@ -5,9 +5,9 @@ description: "Learn how to manually add an option label in the Kendo UI for jQue
 previous_url: /controls/editors/combobox/how-to/add-option-label-manually, /controls/editors/combobox/how-to/binding/add-option-label-manually
 slug: howto_add_option_label_manually_combobox
 tags: telerik, kendo, jquery, combobox, add, option, labels, manually
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

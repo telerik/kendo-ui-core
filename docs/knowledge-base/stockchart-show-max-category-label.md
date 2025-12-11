@@ -8,6 +8,7 @@ position:
 tags: stockchart, label, max, maximum, values, axis, navigation, selection, range
 ticketid: 1451074
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

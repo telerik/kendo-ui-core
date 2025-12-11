@@ -6,6 +6,7 @@ slug: change-grid-pager-to-slider
 tags: grid, pager, slider, core, mvc, telerik
 component: grid
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

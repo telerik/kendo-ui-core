@@ -2,6 +2,7 @@
 title:  Model Binding
 page_title: Model Binding
 description: "Learn how to implement Model Binding with Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/binding/model-binding
 slug: htmlhelpers_dropdownlist_modelbinding_aspnetcore
 position: 5

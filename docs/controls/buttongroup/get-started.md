@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ButtonGroup Documentation - Getting Started with the ButtonGroup
 description: "Get started with the jQuery ButtonGroup by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["buttongroup"]
 slug: getting_started_kendoui_buttongroup_widget
 position: 1
 ---

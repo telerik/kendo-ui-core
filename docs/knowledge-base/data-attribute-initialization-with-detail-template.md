@@ -5,9 +5,9 @@ description: "Learn how to initialize a Kendo UI jQuery Grid widget by using dat
 previous_url: /controls/data-management/grid/how-to/data-attribute-initialization-with-detail-template, /web/grid/how-to/data-attribute-initialization-with-detail-template, /controls/data-management/grid/how-to/Templates/data-attribute-initialization-with-detail-template
 slug: howto_initialize_data_attributewith_detail_template_grid
 tags: grid, initialize, data, attribute, detail, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

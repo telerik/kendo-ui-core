@@ -5,9 +5,9 @@ description: "Learn how to add a custom item to the data source of the Kendo UI 
 previous_url: /controls/editors/combobox/how-to/add-custom-item-to-datasource, /controls/editors/combobox/how-to/binding/add-custom-item-to-datasource
 slug: howto_add_custom_item_to_datasource
 tags: telerik, kendo, jquery, combobox, add, custom, items, to, data, source
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

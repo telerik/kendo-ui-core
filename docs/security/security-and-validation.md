@@ -2,6 +2,7 @@
 title: Useful Tips
 page_title: Security and Validation Useful Tips
 description: "Get started with Kendo UI for jQuery and learn the fundamentals for XSS and CSRF attacks."
+components: ["general"]
 slug: kendoui_security_gettingstarted
 previous_url: /intro/widget-basics/security-and-validation
 published: True

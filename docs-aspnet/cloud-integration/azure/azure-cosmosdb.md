@@ -2,6 +2,7 @@
 title: Azure CosmosDB
 page_title: Azure CosmosDB
 description: "Learn how to create an Azure CosmosDB table, and perform CRUD operations with the Telerik UI for {{ site.framework }} Grid."
+components: ["general"]
 slug: azure_cosmosdb_aspnetcore
 position: 2
 ---

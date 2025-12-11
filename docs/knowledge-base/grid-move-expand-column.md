@@ -6,7 +6,7 @@ page_title: Move the Expand Column - Kendo UI for jQuery Data Grid
 slug: grid-move-expand-column
 tags: grid, expand, detail, column, nested, hierarchy, relocate, move
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

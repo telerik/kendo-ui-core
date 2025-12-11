@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Button Documentation - Getting Started with the Button
 description: "Get started with the jQuery Button by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["button"]
 slug: getting_started_kendoui_button_widget
 position: 2
 ---

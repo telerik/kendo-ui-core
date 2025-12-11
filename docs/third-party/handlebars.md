@@ -2,6 +2,7 @@
 title: Handlebars
 page_title: Handlebars - Kendo UI Third-Party Tools
 description: "Learn how to use Kendo UI components with Handlebars templating library and enhance your web applications with dynamic templates."
+components: ["general"]
 slug: handlebars_integration_kendoui
 ---
 

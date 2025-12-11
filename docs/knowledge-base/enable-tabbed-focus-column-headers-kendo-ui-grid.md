@@ -6,6 +6,7 @@ page_title: How to Navigate to Column Headers with Tab in Kendo UI Grid
 slug: enable-tabbed-focus-column-headers-kendo-ui-grid
 tags: kendo ui, grid, keyboard navigation, tabbed focus, wcag, accessibility
 res_type: kb
+components: ["grid"]
 ticketid: 1662786
 ---
 
