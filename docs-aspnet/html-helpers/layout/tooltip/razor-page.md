@@ -17,6 +17,9 @@ This article describes how to configure the Tooltip component in a Razor Pages s
 For the complete project, refer to the [Tooltip in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Tooltip/TooltipIndex.cshtml).
 
 ```HtmlHelper
+    @page
+    @model TooltipIndexModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -54,6 +57,9 @@ For the complete project, refer to the [Tooltip in Razor Pages example](https://
 	
 ```
 ```TagHelper
+    @page
+    @model TooltipIndexModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -82,13 +88,21 @@ For the complete project, refer to the [Tooltip in Razor Pages example](https://
             <img src="@Url.Content("~/Images/ScrollViewImages/image")#=target.data('id')#.jpg" alt="#=target.data('id')#"  width="500" height="500" />
         </div>
     </script>
-	
 ```
 ```C# PageModel
-	
+public class TooltipIndexModel : PageModel
+{
     public void OnGet()
     {
 
     }
-    
+}   
 ```
+
+## See Also
+
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Tooltip](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/tooltip)
+* [Server-Side HtmlHelper API of the Tooltip](/api/tooltip)
+* [Server-Side TagHelper API of the Tooltip](/api/taghelpers/tooltip)
+* [Knowledge Base Section](/knowledge-base)

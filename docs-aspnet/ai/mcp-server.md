@@ -63,6 +63,7 @@ You also need to add your [Telerik licence key](slug:installation_license_key_as
 For detailed instructions, refer to [Use MCP servers in Visual Studio](https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers).
 
 > Early Visual Studio 17.14 versions require the Copilot Chat window to be open and active when you open a solution. Otherwise the Telerik MCP server is not used.
+> Some Visual Studio 17.14 versions might encounter an error indicating a tool name exceeds the maximum length. To resolve such scenarios you can use a shorter server name. For example `telerik-core-html-assistant` instead of `telerik-aspnetcorehtml-assistant`, or a friendly name of your choice.
 
 #### Workspace Configuration
 
@@ -327,7 +328,7 @@ To use the Telerik {{ site.framework }} MCP Server:
     * `Calling MCP tool #telerik-aspnetmvc-assistant` (in Cursor)
 
     ![MCP Server uses Telerik {{ site.framework }} AI Coding Assistant in VS Code](images/mcp-confirmation-mvc.png)
-{% endif %}  
+{% endif %}
 
 {% if site.core %}
 1. Start your prompt with `#telerik-aspnetcorehtml-assistant` / `#telerik-aspnetcoretag-assistant` (or with `#` followed by your custom server name, if set).
@@ -336,7 +337,7 @@ To use the Telerik {{ site.framework }} MCP Server:
     * `Calling MCP tool telerik-aspnetcorehtml-assistant` or `Calling MCP tool telerik-aspnetcoretag-assistant` (in Cursor)
 
     ![MCP Server uses Telerik {{ site.framework }} AI Coding Assistant in VS Code](images/mcp-confirmation.png)
-{% endif %}    
+{% endif %}
 
 1. If the Telerik MCP server is not used even though it's installed and enabled, double-check the server name in your configuration and try rephrasing your prompt using another trigger syntax from the list in step 1.
 1. If requested, grant the Telerik MCP server a permission to run for this session, workspace, or always.

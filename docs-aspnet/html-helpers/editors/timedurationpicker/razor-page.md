@@ -8,13 +8,11 @@ position: 7
 
 # TimeDurationPicker in Razor Pages 
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI TimeDurationPicker for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI TimeDurationPicker for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the TimeDurationPicker component in a Razor Pages scenario.
-
-## Binding the TimeDurationPicker to a PageModel Property
+## Binding to a PageModel Property
 
 To bind the TimeDurationPicker to a property from the `PageModel`, follow the next steps:
 
@@ -84,7 +82,7 @@ To bind the TimeDurationPicker to a property from the `PageModel`, follow the ne
 ## See Also
 
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
-* [TimeDurationPicker Overview]({% slug htmlhelpers_timedurationpickerhelper_overview %})
+* [Client-Side API of the TimeDurationPicker](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/timedurationpicker)
 * [Server-Side HtmlHelper API of the TimeDurationPicker](/api/timedurationpicker)
 * [Server-Side TagHelper API of the TimeDurationPicker](/api/taghelpers/timedurationpicker)
 * [Knowledge Base Section](/knowledge-base)

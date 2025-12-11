@@ -8,13 +8,13 @@ position: 4
 
 # Chart Wizard in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Chart Wizard for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Chart Wizard for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_databinding_overview_chartwizard %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the Chart Wizard component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-## Getting Started
+## Binding to Remote Data
 
 To connect the Chart Wizard to a data set retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
@@ -27,7 +27,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
         @(Html.Kendo().ChartWizard<Product>()
             .Name("chartwizard")
             .DataSource(dataSource => dataSource
-                .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
             )
             .DataColumns(columns =>
             {
@@ -51,7 +51,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
                     </model>
                 </schema>
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                 </transport>
             </datasource>
             <data-columns>
@@ -94,6 +94,8 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static List<Product> products;
 
         public void OnGet(string culture)
@@ -123,6 +125,7 @@ To connect the Chart Wizard to a data set retrieved from a remote endpoint in a 
                 new Product { ProductID = 456231, ProductName = "Pollo Formaggio", Quantity = 1 }
             };
         }
+    }
     ```
     ```Model
         public class Product

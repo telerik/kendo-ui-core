@@ -6,7 +6,6 @@ slug: razorpages_multiviewcalendar_aspnetcore
 position: 11
 ---
 
-
 # MultiViewCalendar in Razor Pages
 
 Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
@@ -25,7 +24,6 @@ For the complete project, refer to the [MultiViewCalendar in Razor Pages example
         @(Html.Kendo().MultiViewCalendar()
             .Name("multiViewCalendar")
         )
-
     </div>
 ```
 {% if site.core %}
@@ -37,12 +35,14 @@ For the complete project, refer to the [MultiViewCalendar in Razor Pages example
         <kendo-multiviewcalendar name="multiViewCalendar">
         </kendo-multiviewcalendar>
     </div>
-
 ```
 {% endif %}
 ```C# PageModel
-public void OnGet()
+public class IndexModel : PageModel
 {
+    public void OnGet()
+    {
+    }
 }
 ```
 

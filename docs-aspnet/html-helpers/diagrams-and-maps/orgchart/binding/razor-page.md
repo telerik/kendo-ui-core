@@ -8,13 +8,13 @@ position: 4
 
 # OrgChart in Razor Pages 
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI OrgChart for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI OrgChart for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_orgchart_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the OrgChart component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-## Getting Started
+## Binding to Remote Data
 
 To connect the OrgChart to a data set retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
@@ -27,7 +27,7 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
         @(Html.Kendo().OrgChart<OrgChartEmployeeViewModel>()
            .Name("orgchart")
            .DataSource(dataSource => dataSource
-               .Read(r => r.Url("/Index?handler=Read").Data("forgeryToken"))
+               .Read(r => r.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
                .Model(m => {
                    m.Id(f => f.ID);
                    m.ParentId(f => f.ParentID);
@@ -37,7 +37,7 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
                    m.Expanded(f=>f.Expanded);
                })
            )
-        
+        )
     ```
     ```TagHelper
         @page
@@ -47,7 +47,7 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
         <kendo-orgchart name="orgchart">
             <orgchart-datasource type="DataSourceTagHelperType.Ajax">
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken" />
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken" />
                 </transport>
                 <schema>
                     <orgchart-model id="ID" parent-id="ParentID" name="Name" title="Title" avatar="Avatar" expanded="true">
@@ -97,6 +97,8 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
 1. Within the `cshtml.cs` file, add a handler method for the Read data operation.
 
     ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static IList<OrgChartEmployeeViewModel> employees;
 
         public void OnGet(string culture)
@@ -142,6 +144,7 @@ To connect the OrgChart to a data set retrieved from a remote endpoint in a Razo
 
             return source;
         }
+    }
     ```
     ```Model
     public class OrgChartEmployeeViewModel
