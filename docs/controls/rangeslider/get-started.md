@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RangeSlider Documentation - Getting Started with the RangeSlider
 description: "Get started with the jQuery RangeSlider by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["rangeslider"]
 slug: getting_started_kendoui_rangeslider
 position: 1
 ---

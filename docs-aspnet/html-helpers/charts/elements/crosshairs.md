@@ -2,6 +2,7 @@
 title: Crosshairs
 page_title: Crosshairs
 description: "Learn how to configure the crosshairs in the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_crosshairs_aspnetcore
 ---
 

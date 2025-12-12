@@ -7213,6 +7213,7 @@ declare namespace kendo.ui {
         hideColumn(column: any): void;
         hideColumn(column: any[]): void;
         handleAIResponse(response: GridAIResponse): void;
+        getAIRequest(prompt: string): GridAIRequest;
         items(): any;
         lockColumn(column: number): void;
         lockColumn(column: string): void;
@@ -7248,6 +7249,25 @@ declare namespace kendo.ui {
         unstickColumn(column: number): void;
         unstickColumn(column: string): void;
 
+    }
+
+    interface GridAIRequestContent {
+        $type: string;
+        text: string;
+    }
+
+    interface GridAIRequestColumn {
+        id: string;
+        field?: string | undefined;
+        title?: string | undefined;
+        type?: "checkbox" | "command" | "draggable" | undefined;
+        [key: string]: any;
+    }
+
+    interface GridAIRequest {
+        role: string;
+        contents: GridAIRequestContent[];
+        columns: GridAIRequestColumn[];
     }
 
     interface GridAISelectionDescriptor {

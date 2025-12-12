@@ -2,6 +2,7 @@
 title: Fundamentals
 page_title: Fundamentals
 description: "Get started with Telerik UI for ASP.NET Core and learn the basics about the helpers."
+components: ["general"]
 slug: fundamentals_core
 previous_url: /getting-started/helper-basics/fundamentals
 position: 1

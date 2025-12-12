@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI LinearGauge component for {{ site.framework }}."
+components: ["lineargauge"]
 previous_url: /helpers/gauges/lineargauge/overview
 slug: overview_lineargaugehelper_aspnetcore
 position: 0

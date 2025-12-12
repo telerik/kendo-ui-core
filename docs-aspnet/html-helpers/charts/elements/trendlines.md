@@ -2,6 +2,7 @@
 title: Trendlines
 page_title: Trendlines
 description: "Learn how to configure a trendline in Telerik UI Charts."
+components: ["chart"]
 slug: htmlhelpers_charts_trendlines
 ---
 

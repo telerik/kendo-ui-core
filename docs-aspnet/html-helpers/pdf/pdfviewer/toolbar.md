@@ -2,6 +2,7 @@
 title: Toolbar and Tools
 page_title: Toolbar and Tools
 description: "Get started with the Telerik UI PDFViewer component for {{ site.framework }} and learn how to use and define the tools in its toolbar."
+components: ["pdfviewer"]
 previous_url: /helpers/pdf/pdfviewer/toolbar
 slug: htmlhelpers_pdfviewer_toolbar_aspnetcore
 position: 4

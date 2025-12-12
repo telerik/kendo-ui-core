@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} PropertyGrid by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["propertygrid"]
 slug: keynav_aspnetcore_propertygrid
 position: 2
 ---

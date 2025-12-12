@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI for {{ site.framework }} InlineAIPrompt component and how to initialize it."
+components: ["inlineaiprompt"]
 slug: htmlhelpers_overview_inline_aiprompt
 position: 0
 ---

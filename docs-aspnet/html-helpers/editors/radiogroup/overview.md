@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: The Telerik UI RadioGroup component for {{ site.framework }} provides a styled UI element that allows you to select a single item from a list of options.
+components: ["radiogroup"]
 slug: htmlhelpers_radiogroup_aspnetcore_overview
 position: 0
 ---

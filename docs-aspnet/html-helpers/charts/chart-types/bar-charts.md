@@ -2,6 +2,7 @@
 title: Bar Charts
 page_title: Bar Charts
 description: "Learn how to set the properties of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_aspnetcore_htmlhelper
 ---
 

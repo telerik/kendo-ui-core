@@ -2,6 +2,7 @@
 title: Overview
 page_title: Kendo UI for jQuery OrgChart Documentation - OrgChart Overview
 description: "Get started with the Kendo UI for jQuery OrgChart and learn about its features and how to initialize the widget."
+components: ["orgchart"]
 slug: overview_kendoui_orgchart_widget
 position: 0
 ---

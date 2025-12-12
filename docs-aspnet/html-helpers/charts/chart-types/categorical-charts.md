@@ -2,6 +2,7 @@
 title: Categorical Charts
 page_title: Categorical Charts
 description: "Learn the basics when working with the categorical charts in the {{ site.product }} suite."
+components: ["chart"]
 slug: htmlhelpers_categoricalcharts_aspnetcore
 position: 2
 ---

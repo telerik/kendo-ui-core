@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Get started with the Telerik UI PropertyGrid component for {{ site.framework }} and learn the available item options."
+components: ["propertygrid"]
 slug: htmlhelpers_items_propertygrid
 position: 3
 ---

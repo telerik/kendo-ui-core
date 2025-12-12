@@ -2,6 +2,7 @@
 title: Overview
 page_title: PDFViewer Documentation | PDFViewer Accessibility
 description: "Get started with the {{ site.product }} PDFViewer and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["pdfviewer"]
 slug: htmlhelpers_pdfviewer_accessibility
 position: 1
 ---

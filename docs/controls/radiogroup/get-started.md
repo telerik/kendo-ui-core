@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RadioGroup Documentation - Getting Started with the RadioGroup
 description: "Get started with the jQuery RadioGroup by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["radiogroup"]
 slug: getting_started_kendoui_radiogroup
 position: 1
 ---

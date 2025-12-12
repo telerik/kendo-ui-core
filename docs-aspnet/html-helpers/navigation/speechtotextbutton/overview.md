@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI for {{ site.framework }} SpeechToTextButton component automatically transforms voice input into written text."
+components: ["speechtotextbutton"]
 slug: htmlhelpers_overview_speechtotextbutton
 position: 0
 ---

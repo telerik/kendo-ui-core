@@ -2,6 +2,7 @@
 title: Overview
 page_title: Bar Chart Overview
 description: "Discover the Telerik UI Bar Chart component for {{ site.framework }}, and learn about its features like"
+components: ["chart"]
 slug: overview_barcharthelper_aspnetcore
 position: 0
 ---

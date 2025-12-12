@@ -2,6 +2,7 @@
 title: ListView
 page_title: ListView Overview
 description: "Learn the basics when working with the hybrid Telerik UI ListView HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobilelistview/overview, /helpers/hybrid/mobilelistview
 slug: overview_hybridlistview_aspnetmvc
 ---

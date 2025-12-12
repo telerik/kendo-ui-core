@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Kendo UI ToggleButton component for jQuery."
+components: ["togglebutton"]
 slug: events_kendoui_togglebutton
 position: 7
 ---

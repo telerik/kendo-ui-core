@@ -2,6 +2,7 @@
 title: Bar Charts Stacked Bar
 page_title: Bar Charts Stacked Bar
 description: "Learn how to use the Stacked Bar of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_aspnetcore_htmlhelper_stackedbars
 ---
 

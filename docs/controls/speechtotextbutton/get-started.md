@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery SpeechToTextButton Documentation - Getting Started with the SpeechToTextButton
 description: "Get started with the jQuery SpeechToTextButton by Kendo UI and learn how to create, initialize, and enable speech-to-text functionality."
+components: ["speechtotextbutton"]
 slug: getting_started_kendoui_speechtotextbutton_widget
 position: 2
 ---

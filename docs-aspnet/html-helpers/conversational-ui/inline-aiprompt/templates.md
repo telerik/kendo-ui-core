@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the appearance of the prompt suggestion and view items of the Telerik UI InlineAIPrompt component for {{ site.framework }}."
+components: ["inlineaiprompt"]
 slug: htmlhelpers_templates_inline_aiprompt
 position: 3
 ---

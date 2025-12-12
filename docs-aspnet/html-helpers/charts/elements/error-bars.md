@@ -2,6 +2,7 @@
 title: Error Bars
 page_title: Error Bars
 description: "Learn how to configure the error bars of Telerik UI Charts, bind them to the series data and set their value."
+components: ["chart"]
 slug: htmlhelpers_charts_errorbars_aspnetcore
 ---
 {% if site.core %}

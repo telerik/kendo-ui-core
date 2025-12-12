@@ -2,6 +2,7 @@
 title: Overview
 page_title: StockChart Overview
 description: "Learn the basics when working with the Telerik UI StockChart component for {{ site.framework }}."
+components: ["stockchart"]
 previous_url: /helpers/charts/stockchart/overview
 slug: overview_stockcharthelper_aspnetcore
 position: 0

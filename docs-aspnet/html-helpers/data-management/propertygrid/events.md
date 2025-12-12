@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI PropertyGrid component for {{ site.framework }}."
+components: ["propertygrid"]
 slug: htmlhelpers_events_propertygrid
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Ripple Container Documentation - Getting Started with the RippleContainer
 description: "Get started with the jQuery RippleContainer by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["ripplecontainer"]
 slug: getting_started_kendoui_ripple_component
 position: 1
 ---

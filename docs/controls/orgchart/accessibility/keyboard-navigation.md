@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Kendo UI for jQuery OrgChart Documentation - Keyboard Navigation
 description: "Get started with the Kendo UI for jQuery OrgChart and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["orgchart"]
 slug: keynav_kendoui_orgchart_widget
 position: 2
 ---

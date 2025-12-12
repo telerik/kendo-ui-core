@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the {{ site.framework }} GridLayout and learn about its features and how to initialize the component."
+components: ["general"]
 slug: htmlhelpers_aspnet_gridlayout_overview
 position: 1
 ---

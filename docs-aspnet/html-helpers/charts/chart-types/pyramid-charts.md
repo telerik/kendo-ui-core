@@ -2,6 +2,7 @@
 title: Pyramid Charts
 page_title: Pyramid Charts
 description: "Learn how to define and configure Telerik UI Pyramid Chart."
+components: ["chart"]
 slug: pyramidchart_aspnetcore_htmlhelper
 ---
 

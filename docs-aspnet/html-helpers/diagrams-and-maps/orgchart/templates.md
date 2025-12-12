@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the nodes of the Telerik UI OrgChart component for {{ site.framework }}."
+components: ["orgchart"]
 slug: htmlhelpers_orgchart_templates_aspnetcore
 position: 4
 ---

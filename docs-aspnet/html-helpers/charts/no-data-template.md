@@ -2,6 +2,7 @@
 title: No Data Template
 page_title: No Data Template
 description: "Learn how to use the No Data Template of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_no_data_template
 position: 6
 ---

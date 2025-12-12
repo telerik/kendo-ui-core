@@ -2,6 +2,7 @@
 title: Overview
 page_title: TimeDurationPicker Overview
 description: "Discover the Telerik UI TimeDurationPicker component for {{ site.framework }} that allows you to configure the appearance of the popup and its displayed columns."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_overview
 position: 1
 ---

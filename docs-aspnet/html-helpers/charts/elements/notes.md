@@ -2,6 +2,7 @@
 title: Notes
 page_title: Notes
 description: "Learn how to configure the notes of a Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_notes_aspnetcore
 ---
 

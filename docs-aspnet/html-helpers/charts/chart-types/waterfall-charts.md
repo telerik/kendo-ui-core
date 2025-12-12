@@ -2,6 +2,7 @@
 title: Waterfall Charts
 page_title: Waterfall Charts
 description: "Learn how to define and configure Telerik UI Waterfall Chart."
+components: ["chart"]
 slug: waterfallchart_aspnetcore_htmlhelper
 ---
 

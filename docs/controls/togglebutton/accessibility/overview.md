@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery ToggleButton Documentation | ToggleButton Accessibility
 description: "Get started with the jQuery ToggleButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["togglebutton"]
 slug: jquery_togglebutton_accessibility
 position: 1
 ---

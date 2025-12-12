@@ -2,6 +2,7 @@
 title: Gap and Spacing
 page_title: Gap and Spacing
 description: "Learn how to set Gap and Spacing of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_gap_and_spacing
 ---
 

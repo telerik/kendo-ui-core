@@ -2,6 +2,7 @@
 title: Date Axis
 page_title: Date Axis
 description: "Learn how to set the Date Axis of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_date_axis
 ---
 

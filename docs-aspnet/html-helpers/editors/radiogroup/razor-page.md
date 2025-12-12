@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the Telerik UI RadioGroup for {{ site.framework }} in RazorPages scenario."
+components: ["radiogroup"]
 slug: htmlhelpers_radiogroup_aspnetcore_razor_page
 position: 5
 ---

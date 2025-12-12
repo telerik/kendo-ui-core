@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery RangeSlider Documentation - RangeSlider Overview
 description: "Get started with the jQuery RangeSlider by Kendo UI and get familiar with its features."
+components: ["rangeslider"]
 slug: overview_kendoui_rangeslider_widget
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: RadioGroup Documentation | RadioGroup Accessibility
 description: "Get started with the {{ site.product }} RadioGroup and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["radiogroup"]
 slug: htmlhelpers_radiogroup_accessibility
 position: 1
 ---

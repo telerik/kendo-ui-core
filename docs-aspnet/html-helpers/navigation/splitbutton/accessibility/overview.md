@@ -2,6 +2,7 @@
 title: Overview
 page_title: SplitButton Documentation | SplitButton Accessibility
 description: "Get started with the {{ site.product }} SplitButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["splitbutton"]
 slug: htmlhelpers_splitbutton_accessibility
 position: 1
 ---

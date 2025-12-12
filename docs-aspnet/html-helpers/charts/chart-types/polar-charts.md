@@ -2,6 +2,7 @@
 title: Polar Charts
 page_title: Polar Charts
 description: "Learn the basics when working with the Telerik UI for {{ site.framework }} Polar Chart and its various types."
+components: ["chart"]
 slug: polarcharts_aspnetcore_htmlhelper
 ---
 

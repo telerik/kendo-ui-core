@@ -2,6 +2,7 @@
 title: Remote Binding
 page_title: Remote Data Binding
 description: "Learn how to bind the Telerik UI for {{ site.framework }} Chart Wizard component to data received from a remote endpoint."
+components: ["chartwizard"]
 slug: htmlhelpers_remotebinding_chartwizard
 position: 3
 ---

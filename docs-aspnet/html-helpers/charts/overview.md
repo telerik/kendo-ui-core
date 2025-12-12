@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 previous_url: /helpers/html-helpers/charts/charts, /helpers/html-helpers/charts, /helpers/html-helpers/charts/chart/overview, /helpers/charts/overview
 slug: htmlhelpers_charts_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: OLAP Cube Setup
 page_title: jQuery PivotGridV2 Documentation - OLAP Cube Setup
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to set up the OLAP Cube when working with the component."
+components: ["pivotgridv2"]
 slug: olap_cube_setup_pivotgridv2
 position: 3
 ---

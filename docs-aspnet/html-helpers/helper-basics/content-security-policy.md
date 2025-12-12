@@ -2,6 +2,7 @@
 title: Content Security Policy
 page_title: Content Security Policy Troubleshooting
 description: "Learn more about the Content Security Policy (CSP) mode and how to work with it in Telerik UI for {{ site.framework }} controls."
+components: ["general"]
 slug: troubleshooting_content_security_policy_aspnetmvc
 previous_url: /troubleshoot/troubleshooting-content-security-policy
 position: 10

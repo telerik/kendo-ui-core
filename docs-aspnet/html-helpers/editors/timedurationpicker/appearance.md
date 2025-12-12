@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to apply different styling options to the Telerik UI TimeDurationPicker component for {{ site.framework }}."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_appearance
 position: 4
 ---

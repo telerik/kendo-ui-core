@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Chart Wizard Documentation | Chart Wizard Local Data Binding
 description: "Learn how to bind the Telerik UI for {{ site.framework }} Chart Wizard component to a local data collection."
+components: ["chartwizard"]
 slug: htmlhelpers_localbinding_chartwizard
 position: 2
 ---

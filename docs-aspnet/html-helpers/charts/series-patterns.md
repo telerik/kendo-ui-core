@@ -2,6 +2,7 @@
 title: Chart Patterns
 page_title: Chart Patterns
 description: "Learn how to use Series Patterns of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_patterns
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the Telerik UI DataSource component for {{ site.framework }} in Razor Page scenario"
+components: ["datasource"]
 slug: htmlhelpers_datasource_aspnetcore_razor_page
 position: 10
 ---

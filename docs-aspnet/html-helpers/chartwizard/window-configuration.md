@@ -2,6 +2,7 @@
 title: Window Configuration
 page_title: Telerik UI Chart Wizard Documentation - Window Configuration
 description: "Configure the settings of the Window component that holds the Telerik UI for {{ site.framework }} Chart Wizard."
+components: ["chartwizard"]
 slug: htmlhelpers_window_chartwizard
 position: 4
 ---

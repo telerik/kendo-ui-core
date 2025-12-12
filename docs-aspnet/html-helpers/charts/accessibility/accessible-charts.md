@@ -2,6 +2,7 @@
 title: Accessible Charts
 page_title: Accessible Charts
 description: "Learn different tips and tricks on how to make the {{ site.product }} Charts accessible."
+components: ["chart"]
 previous_url: /accessibility/five-tips-for-accessible-charts-with-dataviz
 slug: accessible_charts
 position: 2

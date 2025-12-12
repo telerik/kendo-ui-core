@@ -2,6 +2,7 @@
 title: Ajax Binding
 page_title: Ajax Binding
 description: "Learn how to implement Ajax Binding with Telerik UI OrgChart component for {{ site.framework }}."
+components: ["orgchart"]
 previous_url: /helpers/editors/orgchart/binding/ajax-binding
 slug: htmlhelpers_orgchart_ajaxbinding_aspnetcore
 position: 3

@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ToggleButton component for {{ site.framework }}."
+components: ["togglebutton"]
 slug: icons_togglebutton_aspnetcore
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: DPL Processing
 page_title: DPL Processing
 description: "Learn how to use the Telerik Document Processing library in the Telerik UI PDFViewer component for {{ site.framework }}."
+components: ["pdfviewer"]
 previous_url: /helpers/pdf/pdfviewer/dpl-processing
 slug: htmlhelpers_pdfviewer_dpl_processing_aspnetcore
 position: 3

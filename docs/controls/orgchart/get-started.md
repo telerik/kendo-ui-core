@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery OrgChart Documentation - Getting Started with the OrgChart
 description: "Get started with the jQuery OrgChart by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["orgchart"]
 slug: getting_started_kendoui_orgchart_component
 position: 1
 ---

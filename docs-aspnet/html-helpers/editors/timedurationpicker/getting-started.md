@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started with the TimeDurationPicker
 description: "Get started with the Telerik UI TimeDurationPicker component for {{ site.framework }} and learn how to initialize the component, configure its columns, and handle its events."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_getting_started
 position: 2
 ---

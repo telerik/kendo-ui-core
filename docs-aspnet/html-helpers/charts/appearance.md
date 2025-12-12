@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to control the appearance of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 previous_url: /helpers/html-helpers/charts/chart/appearance
 slug: htmlhelpers_charts_appearance_aspnetcore
 position: 3

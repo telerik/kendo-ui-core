@@ -2,6 +2,7 @@
 title: Panes
 page_title: Panes
 description: "Learn how to configure the panes of a Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_panes_aspnetcore
 ---
 

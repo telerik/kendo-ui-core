@@ -2,6 +2,7 @@
 title: Area Charts
 page_title: Area Charts
 description: "Learn how to define Telerik UI Area Charts."
+components: ["chart"]
 slug: areacharts_aspnetcore_htmlhelper
 ---
 

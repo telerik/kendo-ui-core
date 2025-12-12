@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery OrgChart Documentation | OrgChart Accessibility
 description: "Get started with the jQuery OrgChart by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["orgchart"]
 slug: jquery_orgchart_accessibility
 position: 1
 ---

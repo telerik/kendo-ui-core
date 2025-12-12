@@ -2,6 +2,7 @@
 title: Binding
 page_title: Binding
 description: "Learn how to implement data binding with Telerik UI RadioGroup component for {{ site.framework }}."
+components: ["radiogroup"]
 slug: htmlhelpers_radiogroup_binding_aspnetcore
 position: 2
 ---

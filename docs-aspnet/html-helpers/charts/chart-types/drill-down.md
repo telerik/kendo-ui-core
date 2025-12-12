@@ -2,6 +2,7 @@
 title: Drilldown Charts
 page_title: Drilldown Charts
 description: "Learn the basics when working with the Drilldown Charts in the {{ site.product }} suite."
+components: ["chart"]
 slug: htmlhelpers_drilldowncharts_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Multi Axis
 page_title: Multi Axis
 description: "Learn how to set the Multi Axis of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_multi_axis
 ---
 

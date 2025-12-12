@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI OrgChart component for {{ site.framework }} in a Razor Pages application."
+components: ["orgchart"]
 slug: htmlhelpers_orgchart_razorpage_aspnetcore
 position: 4
 ---

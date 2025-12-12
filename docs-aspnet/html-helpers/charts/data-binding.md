@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding
 description: "Learn the basics about binding the Telerik UI Chart component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
+components: ["chart"]
 previous_url: /helpers/html-helpers/charts/chart/data-binding, /helpers/charts/data-binding
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 1

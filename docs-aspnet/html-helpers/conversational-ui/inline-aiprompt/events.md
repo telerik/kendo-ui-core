@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI InlineAIPrompt component for {{ site.framework }}."
+components: ["inlineaiprompt"]
 slug: htmlhelpers_events_inline_aiprompt
 position: 4
 ---

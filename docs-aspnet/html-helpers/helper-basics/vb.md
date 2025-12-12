@@ -2,6 +2,7 @@
 title: Visual Basic Syntax
 page_title: Visual Basic Syntax
 description: "Get started with Telerik UI for ASP.NET MVC and apply the proper Visual Basic syntax when using lambda expressions and anonymous types inside the helper declarations."
+components: ["general"]
 slug: visualbasic_aspnetmvc
 previous_url: /vb, /getting-started/vb, getting-started/helper-basics/vb
 position: 8

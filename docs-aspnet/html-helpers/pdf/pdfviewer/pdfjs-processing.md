@@ -2,6 +2,7 @@
 title: PDFjs Processing
 page_title: PDFjs Processing
 description: "Learn how to use PDF.js processing in the Telerik UI PDFViewer component for {{ site.framework }}."
+components: ["pdfviewer"]
 previous_url: /helpers/pdf/pdfviewer/pdfjs-processing
 slug: htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore
 position: 2

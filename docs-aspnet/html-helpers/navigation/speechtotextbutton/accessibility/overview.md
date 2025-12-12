@@ -2,6 +2,7 @@
 title: Overview
 page_title: SpeechToTextButton Documentation | SpeechToTextButton Accessibility
 description: "Get started with the {{ site.product }} SpeechToTextButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["speechtotextbutton"]
 slug: htmlhelpers_speechtotextbutton_accessibility
 position: 1
 ---

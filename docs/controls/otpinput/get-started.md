@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery OTPInput Documentation - Getting Started with the OTPInput
 description: "Get started with the jQuery OTPInput by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["otpinput"]
 slug: getting_started_kendoui_otpinput
 position: 1
 ---

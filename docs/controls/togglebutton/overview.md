@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Kendo UI ToggleButton component for jQuery that provides features like Badges, Icons, and numerous built-in configuration options."
+components: ["togglebutton"]
 slug: overview_kendoui_togglebutton
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Popup Documentation - Getting Started with the Popup
 description: "Get started with the jQuery Popup by Kendo UI and learn how to create and initialize the component."
+components: ["popup"]
 slug: getting_started_kendoui_popup_component
 position: 1
 ---

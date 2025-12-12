@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI StockChart component for {{ site.framework }}."
+components: ["stockchart"]
 slug: stockchart_events
 position: 5
 ---

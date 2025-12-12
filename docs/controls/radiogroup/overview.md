@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery RadioGroup Documentation - RadioGroup Overview
 description: "Get started with the jQuery RadioGroup by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["radiogroup"]
 slug: overview_kendoui_radiogroup_widget
 position: 0
 ---

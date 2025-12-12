@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Chart Wizard for {{ site.framework }} in a Razor Pages application."
+components: ["chartwizard"]
 slug: razorpages_chartwizard
 position: 4
 ---

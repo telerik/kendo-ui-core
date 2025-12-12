@@ -2,6 +2,7 @@
 title: Overview
 page_title: HeatMap Overview
 description: "Learn how to initialize the Telerik UI HeatMap component for {{ site.framework }} and use its events."
+components: ["heatmap"]
 slug: overview_heatmaphelper_aspnetcore
 position: 0
 ---

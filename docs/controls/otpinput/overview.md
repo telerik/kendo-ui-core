@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery OTPInput Documentation - OTPInput Overview
 description: "Try now the Kendo UI for jQuery OTPInput component and learn more about the available functionalities."
+components: ["otpinput"]
 slug: overview_kendoui_otpinput_widget
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TreeMap component for {{ site.framework }}."
+components: ["treemap"]
 slug: events_treemap_aspnetcore
 position: 3
 ---

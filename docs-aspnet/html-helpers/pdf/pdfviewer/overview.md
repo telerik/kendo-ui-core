@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn more about the Telerik UI PDFViewer component for {{ site.framework }}, and discover its built-in features like the toolbar and the supported events."
+components: ["pdfviewer"]
 previous_url: /helpers/pdf/pdfviewer/overview
 slug: htmlhelpers_pdfviewer_aspnetcore
 position: 0

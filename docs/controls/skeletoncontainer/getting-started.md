@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery SkeletonContainer Documentation - Getting Started with the SkeletonContainer
 description: "Get started with the jQuery SkeletonContainer by Kendo UI and learn how to create and initialize the component in a few easy steps."
+components: ["skeletoncontainer"]
 slug: getting_started_kendoui_skeletoncontainer_component
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Module Initialization
 page_title: Module Initialization
 description: "Learn how to enable the module initialization of the Telerik UI for {{ site.framework }} components."
+components: ["general"]
 slug: module_initialization_overview
 position: 4
 ---

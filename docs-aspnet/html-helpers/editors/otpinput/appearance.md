@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI OTPInput for {{ site.framework }}."
+components: ["otpinput"]
 slug: appearance_otpinputhelper
 position: 3
 ---

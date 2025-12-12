@@ -2,6 +2,7 @@
 title: Types
 page_title: Types
 description: "Learn about the types of DataSource that are supported by the Telerik UI DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourcetypes_aspnetcore
 position: 2
 ---

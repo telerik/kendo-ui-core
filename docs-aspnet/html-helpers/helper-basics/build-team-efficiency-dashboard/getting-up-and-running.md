@@ -2,6 +2,7 @@
 title: Build the Team Efficiency Dashboard Project - Step 1 Getting Up and Running
 page_title: Build the Team Efficiency Dashboard Project - Getting Up and Running
 description: "Build the Team Efficiency Dashboard Project - Step 1: Getting Up and Running."
+components: ["general"]
 previous_url: /tutorials/quickstart/team-efficiency/getting-up-and-running, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter1, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter2, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter3, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter4, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter5, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter6, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter7, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter8, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter9, /tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app/chapter10
 slug: gettingupandrunning_timeefficiencyapp_aspnetmvc6
 position: 1

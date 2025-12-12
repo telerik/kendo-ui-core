@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Kendo UI PropertyGrid component for jQuery that allows the users to edit and display the properties and attributes of objects."
+components: ["propertygrid"]
 slug: overview_kendoui_propertygrid
 position: 0
 ---

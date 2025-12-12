@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI SpeechToTextButton HtmlHelper for {{ site.framework }}."
+components: ["speechtotextbutton"]
 slug: speechtotextbutton_appearance
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Headers
 page_title: Headers
 description: "Learn how to set request headers in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourceheaders_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI for {{ site.framework }} PropertyGrid component and how to initialize it."
+components: ["propertygrid"]
 slug: htmlhelpers_overview_propertygrid
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Chart Wizard Documentation | Chart Wizard Keyboard Navigation
 description: "Get started with the {{ site.product_short }} Chart Wizard by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["chartwizard"]
 slug: keynav_chartwizard
 position: 2
 ---

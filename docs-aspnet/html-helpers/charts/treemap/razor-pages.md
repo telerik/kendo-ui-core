@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI TreeMap for {{ site.framework }} in a Razor Pages application."
+components: ["treemap"]
 slug: razorpages_treemap_aspnetcore
 position: 2
 ---

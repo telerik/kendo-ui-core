@@ -2,6 +2,7 @@
 title: Orientation
 page_title: jQuery RangeSlider Documentation - Orientation
 description: "Learn how to set the orientation of the jQuery RangeSlider by Kendo UI."
+components: ["rangeslider"]
 slug: orientation_rangeslider_widget
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI PDFViewer component for {{ site.framework }}."
+components: ["pdfviewer"]
 slug: events_pdfviewer_aspnetcore
 position: 6
 ---

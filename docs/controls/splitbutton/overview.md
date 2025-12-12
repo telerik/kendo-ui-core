@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery SplitButton Documentation - Overview
 description: "Get started with the jQuery SplitButton by Kendo UI and learn how to initialize it and what its key features are."
+components: ["splitbutton"]
 slug: overview_kendoui_splitbutton_widget
 position: 1
 ---

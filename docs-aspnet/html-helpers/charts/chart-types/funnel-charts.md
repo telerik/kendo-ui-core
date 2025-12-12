@@ -2,6 +2,7 @@
 title: Funnel Charts
 page_title: Funnel Charts
 description: "Learn how to define and configure Telerik UI Funnel Chart."
+components: ["chart"]
 slug: funnelchart_aspnetcore_htmlhelper
 ---
 

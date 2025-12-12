@@ -2,6 +2,7 @@
 title: Events
 page_title: Telerik UI SpeechToTextButton Documentation - Client Events
 description: "Learn how to handle the events of the Telerik UI SpeechToTextButton component for {{ site.framework }}."
+components: ["speechtotextbutton"]
 slug: speechtotextbutton_events
 position: 3
 ---

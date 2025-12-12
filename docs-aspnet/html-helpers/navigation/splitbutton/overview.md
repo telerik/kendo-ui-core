@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI SplitButton component for {{ site.framework }} provides a styled UI button with the functionality of a dropdown element."
+components: ["splitbutton"]
 previous_url: /helpers/navigation/splitbutton/overview
 slug: htmlhelpers_splitbutton_aspnetcore
 position: 0

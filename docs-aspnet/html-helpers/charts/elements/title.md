@@ -2,6 +2,7 @@
 title: Title and Subtitle
 page_title: Title and Subtitle
 description: "Learn how to control the appearance of the {{ site.product }} Charts' titles."
+components: ["chart"]
 slug: htmlhelpers_charts_title_aspnetcore
 previous_url: /html-helpers/charts/elements/title-and-legend 
 ---

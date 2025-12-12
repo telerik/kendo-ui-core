@@ -2,6 +2,7 @@
 title: Types
 page_title: Types
 description: "Learn how to configure the different types of the Telerik UI OTPInput component for {{ site.framework }}."
+components: ["otpinput"]
 slug: types_otpinputhelper
 position: 6
 ---

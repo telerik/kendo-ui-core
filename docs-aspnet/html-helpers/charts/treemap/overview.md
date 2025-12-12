@@ -2,6 +2,7 @@
 title: Overview
 page_title: TreeMap Overview
 description: "Learn the basics when working with the Telerik UI TreeMap component for {{ site.framework }}."
+components: ["treemap"]
 previous_url: /helpers/charts/treemap/overview
 slug: overview_treemaphelper_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: Bubble Charts
 page_title: Bubble Charts
 description: "Learn how to create a Telerik UI Bubble Chart for {{ site.framework }} to visualize data points and how to set its properties."
+components: ["chart"]
 slug: bubblecharts_aspnetcore_htmlhelper
 ---
 

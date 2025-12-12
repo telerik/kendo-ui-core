@@ -2,6 +2,7 @@
 title: Date Series
 page_title: Date Series
 description: "Learn how to display dates in the Telerik UI Charts for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_dateseries_aspnetcore
 ---
 {% if site.core %}

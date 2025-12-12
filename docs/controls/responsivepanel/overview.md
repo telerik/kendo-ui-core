@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ResponsivePanel Documentation - ResponsivePanel Overview
 description: "Try now the Kendo UI for jQuery ResponsivePanel component providing options for hiding parts of the page content when the user is viewing the application on a small screen."
+components: ["responsivepanel"]
 slug: overview_kendoui_responsivepanel_widget
 position: 1
 ---

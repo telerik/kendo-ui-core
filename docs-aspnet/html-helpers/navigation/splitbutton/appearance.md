@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI SplitButton HtmlHelper for {{ site.framework }}."
+components: ["splitbutton"]
 slug: htmlhelpers_splitbutton_aspnetcore_appearance
 position: 3
 ---

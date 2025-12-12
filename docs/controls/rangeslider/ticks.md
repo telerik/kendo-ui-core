@@ -2,6 +2,7 @@
 title: Ticks
 page_title: jQuery RangeSlider Documentation - Ticks
 description: "Learn how to configure the ticks of the jQuery RangeSlider by Kendo UI."
+components: ["rangeslider"]
 slug: ticks_rangeslider_widget
 position: 2
 ---

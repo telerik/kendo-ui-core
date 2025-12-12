@@ -2,6 +2,7 @@
 title: Build the Team Efficiency Dashboard Project - Step 3 Scaffolding
 page_title: Build the Team Efficiency Dashboard Project - Scaffolding
 description: "Build the Team Efficiency Dashboard Project - Step 3: Scaffolding."
+components: ["general"]
 slug: scaffolding_timeefficiencyapp_aspnetmvc6
 position: 3
 ---

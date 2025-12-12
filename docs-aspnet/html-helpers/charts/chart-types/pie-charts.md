@@ -2,6 +2,7 @@
 title: Pie Charts
 page_title: Pie Charts
 description: "Learn how to create a Telerik UI Pie Chart for {{ site.framework }} and specify its point value, category label, and other properties."
+components: ["chart"]
 slug: piecharts_aspnetcore_htmlhelper
 ---
 

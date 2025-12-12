@@ -2,6 +2,7 @@
 title: Columns
 page_title: jQuery TimeDurationPicker Documentation - TimeDurationPicker Columns
 description: "Learn how to configure the columns of the TimeDurationPicker component."
+components: ["timedurationpicker"]
 slug: columns_timedurationpicker
 position: 3
 ---

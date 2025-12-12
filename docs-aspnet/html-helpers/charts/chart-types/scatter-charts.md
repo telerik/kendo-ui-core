@@ -2,6 +2,7 @@
 title: Scatter Charts
 page_title: Scatter Charts
 description: "Learn the basics when working with the scatter charts in the {{ site.product }} suite."
+components: ["chart"]
 slug: htmlhelpers_scattercharts_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI OrgChart component for {{ site.framework }}."
+components: ["orgchart"]
 slug: htmlhelpers_orgchart_aspnetcore
 position: 0
 ---

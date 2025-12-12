@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the Telerik UI for {{ site.framework }} Chart for remote binding in Razor Pages scenario."
+components: ["chart"]
 slug: htmlhelper_chart_razorpages_aspnetcore
 position: 2
 ---

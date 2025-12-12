@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Bar Chart components by following a complete step-by-step tutorial."
+components: ["chart"]
 slug: bar_chart_getting_started
 position: 1
 ---

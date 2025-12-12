@@ -2,6 +2,7 @@
 title: Overview
 page_title: Chart Wizard Documentation | Chart Wizard Accessibility
 description: "Get started with the {{ site.product_short }} Chart Wizard by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["chartwizard"]
 slug: htmlhelpers_chartwizard_accessibility
 position: 1
 ---

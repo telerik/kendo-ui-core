@@ -2,6 +2,7 @@
 title: Columns
 page_title: Columns
 description: "Get started with the Telerik UI for {{ site.framework }} PropertyGrid and learn how to configure its columns."
+components: ["propertygrid"]
 slug: htmlhelpers_columns_propertygrid
 position: 2
 ---

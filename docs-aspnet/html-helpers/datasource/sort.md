@@ -2,6 +2,7 @@
 title: Sorting
 page_title: DataSource Sorting
 description: "Learn how to set the initial sort options in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourcesort
 ---
 

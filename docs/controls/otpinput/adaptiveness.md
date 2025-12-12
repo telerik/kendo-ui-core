@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the input mode of the Kendo UI for jQuery OTPInput component."
+components: ["otpinput"]
 slug: otpinput_input_mode_kendo
 position: 4
 ---

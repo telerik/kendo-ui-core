@@ -2,6 +2,7 @@
 title: Integration with Microsoft.Extensions.AI
 page_title: Integration with Microsoft.Extensions.AI
 description: "Learn more about integrating the Telerik UI for {{ site.framework }} components with Microsoft.Extensions.AI"
+components: ["general"]
 slug: integration_microsoft_extensions_ai
 position: 11
 ---

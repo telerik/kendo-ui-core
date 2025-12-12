@@ -2,6 +2,7 @@
 title: Form Filling
 page_title: Telerik UI PDFViewer component for {{ site.framework }}  Documentation - Form Filling
 description: "Get familiar with the Form Filling feature provided by the Telerik UI PDFViewer component for {{ site.framework }}."
+components: ["pdfviewer"]
 slug: form_filling_pdfviewer_core
 position: 5
 ---

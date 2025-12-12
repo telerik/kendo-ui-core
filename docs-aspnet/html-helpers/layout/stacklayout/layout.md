@@ -2,6 +2,7 @@
 title: Layout
 page_title: Setting Up the Layout of the {{ site.framework }} StackLayout
 description: "Learn how to configure the {{ site.framework }} StackLayout and control its appearance."
+components: ["general"]
 slug: htmlhelpers_aspnet_stacklayout_layout
 position: 2
 ---

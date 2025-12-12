@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the appearance of the items values of the Telerik UI PropertyGrid component for {{ site.framework }}."
+components: ["propertygrid"]
 slug: htmlhelpers_templates_propertygrid
 position: 4
 ---

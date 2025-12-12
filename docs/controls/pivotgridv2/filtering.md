@@ -2,6 +2,7 @@
 title: Filtering
 page_title: jQuery PivotGridV2 Documentation - Filtering
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to apply filters."
+components: ["pivotgridv2"]
 slug: filtering_kendoui_pivotgridv2
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Streaming
 page_title: Streaming
 description: "Learn how to implement real-time AI response streaming with the Telerik UI for {{ site.framework }} InlineAIPrompt component."
+components: ["inlineaiprompt"]
 slug: htmlhelpers_streaming_inline_aiprompt
 position: 2
 ---

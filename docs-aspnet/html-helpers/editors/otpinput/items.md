@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items of the Telerik UI OTPInput for {{ site.framework }}."
+components: ["otpinput"]
 slug: items_otpinputhelper
 position: 5
 ---

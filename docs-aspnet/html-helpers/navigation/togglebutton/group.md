@@ -2,6 +2,7 @@
 title: Group
 page_title: Group
 description: "Discover the Telerik UI ToggleButton component for {{ site.framework }} and learn how to group several ToggleButtons together."
+components: ["togglebutton"]
 slug: htmlhelpers_togglebutton_aspnetcore_group
 position: 3
 ---

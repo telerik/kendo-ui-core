@@ -2,6 +2,7 @@
 title: Deferred Initialization
 page_title: Deferred Initialization
 description: "Learn how to defer the initialization scripts of the Telerik UI for {{ site.framework }} components."
+components: ["general"]
 slug: deferred_initialization_overview
 position: 2
 ---

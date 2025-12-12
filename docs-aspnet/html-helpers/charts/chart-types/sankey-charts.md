@@ -2,6 +2,7 @@
 title: Sankey Diagram
 page_title: Sankey Diagram
 description: "Learn the basics when working with the sankey diagram in the {{ site.product }} suite which allows the users to create diagrams that visualize changing flows and their distribution between domains."
+components: ["chart"]
 slug: htmlhelpers_sankeycharts_aspnetcore
 position: 4
 ---

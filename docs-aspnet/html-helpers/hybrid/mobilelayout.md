@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout Overview
 description: "Learn the basics when working with the hybrid Telerik UI Layout HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobilelayout/overview, /helpers/hybrid/mobilelayout
 slug: overview_hybridlayout_aspnetmvc
 ---

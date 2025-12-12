@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["orgchart"]
 slug: orgchart_events
 position: 5
 ---

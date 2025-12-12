@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery SpeechToTextButton Documentation - Appearance
 description: "Learn how to customize the appearance of the jQuery SpeechToTextButton component."
+components: ["speechtotextbutton"]
 slug: appearance_kendoui_speechtotextbutton_widget
 position: 3
 ---

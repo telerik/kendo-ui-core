@@ -2,6 +2,7 @@
 title: Shortcuts
 page_title: TimeDurationPicker Shortcuts
 description: "Learn how to use the shortcuts of the TimeDurationPicker component for {{ site.framework }}."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_shortcuts
 position: 5
 ---

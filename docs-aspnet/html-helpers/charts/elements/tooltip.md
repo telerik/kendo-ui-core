@@ -2,6 +2,7 @@
 title: Tooltip
 page_title: Tooltip
 description: "Learn how to configure the tooltip in Telerik UI Charts, make it visible, and set its properties depending on your preferences."
+components: ["chart"]
 slug: htmlhelpers_charts_tooltip_aspnetcore
 ---
 {% if site.core %}

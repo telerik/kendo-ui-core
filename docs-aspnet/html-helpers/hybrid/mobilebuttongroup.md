@@ -2,6 +2,7 @@
 title: ButtonGroup
 page_title: ButtonGroup Overview
 description: "Learn the basics when working with the hybrid Telerik UI ButtonGroup HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobilebuttongroup/overview, /helpers/hybrid/mobilebuttongroup
 slug: overview_hybridbuttongroup_aspnetmvc
 ---

@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Learn the Export Options of the Telerik UI LinearGauge component for {{ site.framework }}."
+components: ["lineargauge"]
 slug: export_lineargaugehelper_aspnetcore
 position: 4
 ---

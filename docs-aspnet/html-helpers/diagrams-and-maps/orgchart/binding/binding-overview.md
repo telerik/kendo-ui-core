@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI OrgChart Documentation | Data Binding Overview  
 description: "Learn how to bind data to the {{ site.product }} OrgChart using various data binding approaches."
+components: ["orgchart"]
 slug: htmlhelpers_orgchart_databinding_aspnetcore
 position: 1
 ---

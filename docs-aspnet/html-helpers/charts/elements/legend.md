@@ -2,6 +2,7 @@
 title: Legend
 page_title: Legend
 description: "Learn how to control the appearance of the {{ site.product }} Charts' legend."
+components: ["chart"]
 slug: htmlhelpers_charts_legend_aspnetcore
 ---
 

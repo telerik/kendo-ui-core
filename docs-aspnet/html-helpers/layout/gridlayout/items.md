@@ -2,6 +2,7 @@
 title: Items
 page_title: GridLayout Items
 description: "Learn about the configuraiton options of the {{ site.framework }} GridLayout Items."
+components: ["general"]
 slug: htmlhelpers_aspnet_gridlayout_items
 position: 2
 ---

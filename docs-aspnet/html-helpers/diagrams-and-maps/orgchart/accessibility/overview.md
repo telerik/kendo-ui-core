@@ -2,6 +2,7 @@
 title: Overview
 page_title: OrgChart Documentation | OrgChart Accessibility
 description: "Get started with the {{ site.product }} OrgChart and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["orgchart"]
 slug: htmlhelpers_orgchart_accessibility
 position: 1
 ---

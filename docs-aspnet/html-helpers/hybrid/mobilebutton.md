@@ -2,6 +2,7 @@
 title: Button
 page_title: Button Overview
 description: "Learn the basics when working with the hybrid Telerik UI Button HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobilebutton/overview, /helpers/hybrid/mobilebutton
 slug: overview_hybridbutton_aspnetmvc
 ---

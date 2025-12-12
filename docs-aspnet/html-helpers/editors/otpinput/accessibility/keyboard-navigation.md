@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn how to use the keyboard navigation functionality of the Telerik OTPInput component for {{ site.framework }}."
+components: ["otpinput"]
 slug: keynav_otpinputhelper
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI TimeDurationPicker component for {{ site.framework }} in a Razor Pages application."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_razorpage_aspnetcore
 position: 7
 ---

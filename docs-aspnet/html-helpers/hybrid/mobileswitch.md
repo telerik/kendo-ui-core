@@ -2,6 +2,7 @@
 title: Switch
 page_title: Switch Overview
 description: "Learn the basics when working with the hybrid Telerik UI Switch HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobileswitch/overview, /helpers/hybrid/mobileswitch
 slug: overview_hybridswitch_aspnetmvc
 ---

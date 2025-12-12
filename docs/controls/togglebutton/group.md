@@ -2,6 +2,7 @@
 title: Group
 page_title: Group
 description: "Discover the Kendo UI for jQuery ToggleButton widget  and learn how to group several ToggleButtons together."
+components: ["togglebutton"]
 slug: group_kendoui_togglebutton 
 position: 3
 ---

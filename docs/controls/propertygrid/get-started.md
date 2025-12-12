@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PropertyGrid Documentation - Getting Started with the PropertyGrid
 description: "Get started with the jQuery PropertyGrid by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["propertygrid"]
 slug: getting_started_kendoui_propertygrid_widget
 position: 1
 ---

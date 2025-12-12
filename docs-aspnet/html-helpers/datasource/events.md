@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: datasource_events
 position: 5
 ---

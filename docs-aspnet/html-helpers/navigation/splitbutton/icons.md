@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Get started with the Telerik UI {{ site.platform }} SplitButton and add background, image, or font icons to enhance the visualization of the widget."
+components: ["splitbutton"]
 slug: htmlhelpers_splitbutton_aspnetcore_icons
 position: 4
 ---

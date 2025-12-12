@@ -2,6 +2,7 @@
 title: Stacked And Grouped Bar Chart
 page_title:  Stacked And Grouped Bar Chart
 description: "Learn how to use the Stacked and Grouped Bars of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_aspnetcore_htmlhelper_stacked_and_grouped_bars
 ---
 

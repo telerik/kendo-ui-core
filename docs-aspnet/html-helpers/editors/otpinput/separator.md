@@ -2,6 +2,7 @@
 title: Separator
 page_title: Separator
 description: "Learn how to configure different separators between the items of the Telerik UI OTPInput for {{ site.framework }} component."
+components: ["otpinput"]
 slug: separator_otpinputhelper
 position: 4
 ---

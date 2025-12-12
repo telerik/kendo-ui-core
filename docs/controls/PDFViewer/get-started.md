@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PDFViewer Documentation - Getting Started with the PDFViewer
 description: "Get started with the jQuery PDFViewer by Kendo UI and learn how to create and initialize the component."
+components: ["pdfviewer"]
 slug: getting_started_kendoui_pdfviewer_widget
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Learn how to validate the {{ site.product }} editors and use the Kendo UI for jQuery Validator for client-side validation."
+components: ["general"]
 slug: validation_aspnetmvc
 previous_url: /validation, /getting-started/validation, /getting-started/helper-basics/validation
 position: 5

@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery TimeDurationPicker Documentation | TimeDurationPicker Accessibility
 description: "Get started with the jQuery TimeDurationPicker by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["timedurationpicker"]
 slug: jquery_timedurationpicker_accessibility
 position: 1
 ---

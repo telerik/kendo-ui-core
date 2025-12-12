@@ -2,6 +2,7 @@
 title: Annotations
 page_title: jQuery PDFViewer Documentation - Annotations
 description: "Get familiar with the Annotations feature provided by the Kendo UI for jQuery PDFViewer."
+components: ["pdfviewer"]
 slug: annotations_pdfviewer
 position: 6
 ---

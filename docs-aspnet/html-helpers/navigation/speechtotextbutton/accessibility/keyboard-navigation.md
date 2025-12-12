@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: SpeechToTextButton Documentation | SpeechToTextButton Keyboard Navigation
 description: "Get started with the {{ site.product_short }} SpeechToTextButton by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["speechtotextbutton"]
 slug: htmlhelpers_speechtotextbutton_keynav
 position: 2
 ---

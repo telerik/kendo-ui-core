@@ -2,6 +2,7 @@
 title: Annotations
 page_title: Telerik UI PDFViewer Documentation - Annotations
 description: "Learn more about the annotations supported by the Telerik UI for {{ site.framework }} PDFViewer component."
+components: ["pdfviewer"]
 slug: annotations_pdfviewer_aspnetcore
 position: 5
 ---

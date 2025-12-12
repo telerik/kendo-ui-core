@@ -2,6 +2,7 @@
 title: Plotbands
 page_title: Plotbands
 description: "Learn how to set Plotbands of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_plotbands
 ---
 

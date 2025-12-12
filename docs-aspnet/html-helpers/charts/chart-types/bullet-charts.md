@@ -2,6 +2,7 @@
 title: Bullet Charts
 page_title: Bullet Charts
 description: "Learn how to define and configure Telerik UI Bullet Charts."
+components: ["chart"]
 slug: bulletcharts_aspnetcore_htmlhelper
 ---
 

@@ -2,6 +2,7 @@
 title: Radar Charts
 page_title: Radar Charts
 description: "Learn how to create a Telerik UI Radar Chart for {{ site.framework }}."
+components: ["chart"]
 slug: radarcharts_aspnetcore_htmlhelper
 ---
 

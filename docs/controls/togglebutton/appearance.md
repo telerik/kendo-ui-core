@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Kendo UI ToggleButton for jQuery."
+components: ["togglebutton"]
 slug: appearance_kendoui_togglebutton
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: InlineAIPrompt Documentation | InlineAIPrompt Accessibility
 description: "Get started with the {{ site.product }} InlineAIPrompt and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["inlineaiprompt"]
 slug: htmlhelpers_inline_aiprompt_accessibility
 position: 1
 ---

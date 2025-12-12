@@ -2,6 +2,7 @@
 title: Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with the Telerik UI TimeDurationPicker component for {{ site.framework }}."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_model_binding
 position: 6
 ---

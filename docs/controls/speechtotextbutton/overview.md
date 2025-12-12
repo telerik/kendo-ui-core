@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery SpeechToTextButton Documentation - SpeechToTextButton Overview
 description: "Try now the Kendo UI for jQuery SpeechToTextButton component that converts spoken words into text through a button interface."
+components: ["speechtotextbutton"]
 slug: overview_kendoui_speechtotextbutton_widget
 position: 1
 ---

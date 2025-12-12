@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: events_chart_aspnetcore
 position: 6
 ---

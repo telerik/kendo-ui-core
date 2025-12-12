@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} RadioGroup component by following a complete step-by-step tutorial."
+components: ["radiogroup"]
 slug: aspnetcore_radiogroup_getting_started
 position: 1
 ---

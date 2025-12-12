@@ -2,6 +2,7 @@
 title: Filtering
 page_title: DataSource Filtering
 description: "Learn how to set the initial filter options in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourcefilter
 ---
 

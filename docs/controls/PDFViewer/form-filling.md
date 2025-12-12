@@ -2,6 +2,7 @@
 title: Form Filling
 page_title: jQuery PDFViewer Documentation - Form Filling
 description: "Get familiar with the Form Filling feature provided by the Kendo UI for jQuery PDFViewer."
+components: ["pdfviewer"]
 slug: form_filling_pdfviewer
 position: 7
 ---

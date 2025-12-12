@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI ToggleButton component for {{ site.framework }} that provides features like Badges, Icons, and numerous built-in configuration options."
+components: ["togglebutton"]
 slug: htmlhelpers_togglebutton_aspnetcore
 position: 0
 ---

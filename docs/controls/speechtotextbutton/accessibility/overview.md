@@ -2,6 +2,7 @@
 title: Wai-Aria Support
 page_title: jQuery SpeechToTextButton Documentation | SpeechToTextButton Accessibility
 description: "Get started with the jQuery SpeechToTextButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
+components: ["speechtotextbutton"]
 slug: jquery_speechtotextbutton_accessibility
 position: 1
 ---

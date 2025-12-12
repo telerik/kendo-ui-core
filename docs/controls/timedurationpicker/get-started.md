@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TimeDurationPicker Documentation - Getting Started with the TimeDurationPicker
 description: "Get started with the jQuery TimeDurationPicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["timedurationpicker"]
 slug: getting_started_kendoui_timedurationpicker_widget
 position: 1
 ---

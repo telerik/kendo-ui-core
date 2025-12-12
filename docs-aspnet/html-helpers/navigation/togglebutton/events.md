@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ToggleButton component for {{ site.framework }}."
+components: ["togglebutton"]
 slug: events_togglebutton_aspnetcore
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI SplitButton component for {{ site.framework }}."
+components: ["splitbutton"]
 slug: events_splitbutton_aspnetcore
 position: 7
 ---

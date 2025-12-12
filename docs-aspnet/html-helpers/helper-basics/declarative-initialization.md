@@ -2,6 +2,7 @@
 title: Declarative Initialization
 page_title: Declarative Initialization
 description: "Learn how to enable the declarative initialization of the Telerik UI for {{ site.framework }} components."
+components: ["general"]
 slug: declarative_initialization_overview
 position: 3
 ---
