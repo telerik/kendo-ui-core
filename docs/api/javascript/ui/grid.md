@@ -21603,6 +21603,89 @@ An array of command objects. Each command must have a `type` property and corres
 
 
 
+### getAIRequest
+
+Returns a request configuration object that can be sent to AI services for processing natural language prompts. This method generates a standardized request format that includes the user's prompt and column metadata, which AI services can use to generate appropriate Grid commands.
+
+Use this method when implementing custom AI integrations or when you need to send Grid context to an AI service endpoint. The returned object can be serialized to JSON and sent directly to compatible AI services.
+
+<div class="meta-api-description">
+Generate AI request payload for custom AI service integration with Kendo UI Grid; create standardized request objects containing user prompts and column metadata that AI services can process to generate grid manipulation commands; enable seamless integration with backend AI endpoints, custom AI assistants, or Telerik AI service packages by providing properly formatted request data including column field names, types, and unique identifiers; simplify AI-powered grid interactions by abstracting the request format complexity and ensuring compatibility with the handleAIResponse method for processing AI-generated commands.
+</div>
+
+#### Parameters
+
+##### prompt `String`
+
+The user's natural language prompt describing the desired Grid operation (e.g., "sort by name ascending", "filter rows where age is greater than 30", "highlight all rows from New York").
+
+#### Returns
+
+`Object` A request configuration object with the following structure:
+
+- `role` - String, always set to "user"
+- `contents` - Array containing a single object with:
+  - `$type` - String, always set to "text"
+  - `text` - String, the user's prompt
+- `columns` - Array of column configuration objects, each containing:
+  - `id` - String, the column's unique identifier (uid)
+  - `field` - String, the column's data field name (if applicable)
+  - `title` - String, the column's display title (if specified)
+  - `type` - String, special column type: "checkbox" for selectable columns, "command" for command columns, "draggable" for draggable columns (only present for special columns)
+  - Additional column properties as configured in the Grid
+
+#### Example - send prompt to AI service using getAIRequest
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name", title: "Name" },
+          { field: "age", title: "Age" },
+          { field: "city", title: "City" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30, city: "New York" },
+          { name: "John Doe", age: 33, city: "London" },
+          { name: "Sam Smith", age: 25, city: "Paris" }
+        ],
+        sortable: true,
+        filterable: true,
+        toolbar: [{
+          template: '<input id="aiPrompt" class="k-input k-input-md k-rounded-md" placeholder="Ask AI..." style="width: 300px; margin-right: 10px;" />' +
+                    '<button id="askAI" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Apply</button>'
+        }]
+      });
+
+      var grid = $("#grid").data("kendoGrid");
+
+      $("#askAI").on("click", function() {
+        var prompt = $("#aiPrompt").val();
+        
+        if (!prompt) {
+          return;
+        }
+
+        // Get the AI request object with prompt and column metadata
+        var aiRequest = grid.getAIRequest(prompt);
+
+        $.ajax({
+          url: "https://sitdemos.telerik.com/service/v2/ai/grid/smart-state",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(aiRequest),
+          success: function(response) {
+            // Process the AI response to apply commands to the Grid
+            grid.handleAIResponse(response);
+            $("#aiPrompt").val("");
+          },
+          error: function(xhr) {
+            console.log("AI service error:", xhr.responseText);
+          }
+        });
+      });
+    </script>
+
 ### hideColumn
 
 Hides the specified grid column.
