@@ -4117,15 +4117,19 @@ function pad(number, digits, end) {
     };
 
     function focusable(element, isTabIndexNotNaN) {
-        var nodeName = element.nodeName.toLowerCase();
+        let nodeName = element.nodeName.toLowerCase();
+        let isFocusable;
 
-        return (/input|select|textarea|button|object/.test(nodeName) ?
-                !element.disabled :
-                nodeName === "a" ?
-                element.href || isTabIndexNotNaN :
-                isTabIndexNotNaN
-               ) &&
-            visible(element);
+        if (/input|select|textarea|button|object/.test(nodeName)) {
+            isFocusable = !element.disabled;
+        } else if (nodeName === "a") {
+            isFocusable = element.href || isTabIndexNotNaN;
+        } else {
+            // inline Editor element
+            isFocusable = isTabIndexNotNaN || (nodeName === "div" && element.contentEditable === "true");
+        }
+
+        return isFocusable && visible(element);
     }
 
     function visible(element) {

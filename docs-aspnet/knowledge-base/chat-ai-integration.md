@@ -180,22 +180,28 @@ builder.Services.AddTransient<AiService>();
 
 These configuration values define the connection details for the Azure OpenAI deployment, enabling the AiService to securely access the API without hardcoding sensitive information in the source code.
 
-```
+```json
 {
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=Samples;Trusted_Connection=True;ConnectRetryCount=0"
+  },
   "Logging": {
-    "IncludeScopes": false,
     "LogLevel": {
-      "Default": "Debug",
-      "System": "Information",
-      "Microsoft": "Information"
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
     }
   },
   "OpenAI": {
     "UseAzure": true,
+    //"ApiKey": "your-api-key",
     "ApiKey": "",
-    "Endpoint": "",
-    "DeploymentName": ""
-  }
+    //"Endpoint": "your-end-point",
+    "Endpoint": "your-end-point",
+    //"DeploymentName": "your-deployment-name",
+    "DeploymentName": "your-deployment-name"
+  },
+  "AllowedHosts": "*"
 }
 ```
 
