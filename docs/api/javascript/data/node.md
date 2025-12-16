@@ -175,6 +175,57 @@ How do I mark a node as unloaded in a hierarchical data source with Kendo UI for
     });
     </script>
 
+### loading
+
+Gets or sets the loading state of the `Node`. This flag indicates whether the node is currently in the process of loading its child items. Setting the loading flag is typically done internally during the `load` operation, but it can be accessed to check the current loading state.
+
+#### Parameters
+
+##### value `Boolean` *(optional)*
+
+The value to set. If `true`, marks the node as currently loading. If `false`, marks the node as not loading. If omitted, the method acts as a getter and returns the current loading state.
+
+#### Returns
+
+`Boolean`&mdash;The current loading state of the node when called without parameters. Returns `true` if the node is currently loading its children, `false` otherwise.
+
+<div class="meta-api-description">
+Retrieve or update the loading state of a node in a hierarchical data structure, enabling control and monitoring of asynchronous child data loading operations; check if a node is currently fetching its children, prevent duplicate load requests by verifying the loading flag before initiating new loads, manage loading indicators or spinners in UI components based on the loading state, track the progress of data operations, handle loading lifecycle events, and coordinate multiple loading operations within tree or hierarchical data sources during dynamic data retrieval scenarios.
+</div>
+
+#### Example - check loading state
+
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        transport: {
+            read: {
+                url: "https://demos.telerik.com/service/v2/core/Employees"
+            }
+        },
+      schema: {
+        model: {
+          id: "EmployeeId",
+          hasChildren: "HasEmployees"
+        }
+      }
+    });
+
+    dataSource.fetch(function() {
+      var node = dataSource.at(0);
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(node.loading()); // outputs "false" - not loading initially
+      
+      // The load method checks loading state internally to prevent duplicate loads
+      node.load(); // initiates loading, sets loading(true) internally
+      
+      // During load operation
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(node.loading()); // outputs "true" while loading
+      
+      // After load completes, loading is automatically set to false
+    });
+    </script>
+
 ### parentNode
 
 Gets the parent node.

@@ -145,6 +145,140 @@ How to set custom CSS classes for dialog action buttons in Kendo UI? Customize t
 		  }
 	  </style>
 
+### actions.themeColor `String` *(default: 'secondary')*
+
+Controls the main color applied to the action button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+
+<div class="meta-api-description">
+How do I change the color scheme of dialog action buttons in Kendo UI? Customize, configure, or set the color theme for action buttons within dialogs by selecting from predefined theme colors such as primary, secondary, error, success, warning, info, tertiary, base, dark, light, inverse, or none to match branding or indicate button purpose; control button appearance by applying semantic colors, adjusting visual prominence, highlighting destructive actions with error themes, emphasizing confirmations with primary or success colors, managing button color variants for consistent UI design, and tailoring dialog button styling to communicate action importance or context through thematic color choices.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Cancel", themeColor: "error" }
+          ]
+        });
+    </script>
+
+### actions.size `String` *(default: 'medium')*
+
+Controls the overall physical size of an action button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+
+<div class="meta-api-description">
+How do I adjust the size of action buttons in a Kendo UI dialog? Configure, customize, or set the physical dimensions and overall size of dialog action buttons by selecting from predefined size options such as small, medium, large, or none to control button scale, manage button height and padding, adjust visual weight or prominence, ensure responsive sizing across different screen sizes, optimize touch targets for accessibility, scale buttons to match interface density, and fine-tune dialog button appearance for better user experience and visual hierarchy within modal dialogs or popups.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Cancel", themeColor: "error", size: "large" }
+          ]
+        });
+    </script>
+
+### actions.rounded `String` *(default: 'medium')*
+
+Controls what border radius is applied to an action button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+
+<div class="meta-api-description">
+How can I customize the corner radius of dialog action buttons in Kendo UI? Configure, adjust, or set the border radius and corner rounding of dialog action buttons by selecting from predefined roundness levels such as small, medium, large, full (pill-shaped), or none (sharp corners) to control button shape aesthetics, match design system requirements, create pill buttons with fully rounded edges, apply subtle or pronounced corner curves, ensure consistent button styling across the interface, customize visual softness or angularity, and tailor dialog button appearance to align with branding guidelines or UI design preferences.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Cancel", themeColor: "error", rounded: "full" }
+          ]
+        });
+    </script>
+
+### actions.fillMode `String` *(default: 'solid')*
+
+Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+
+<div class="meta-api-description">
+How do I change the fill style of dialog action buttons in Kendo UI? Configure, customize, or set how color is applied to dialog action buttons by selecting from fill modes such as solid (filled background), outline (bordered with transparent background), flat (minimal styling), link (text-only appearance), or none to control button visual weight, create outlined or ghost buttons, apply subtle or prominent styling, manage button hierarchy and emphasis, enable text-like button appearances, adjust color application methods for different button roles, and customize dialog button presentation to match interface design patterns and visual priority needs.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Cancel", themeColor: "error", fillMode: "outline"}
+          ]
+        });
+    </script>
+
+### actions.icon `String`
+
+Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the action button.
+For a list of available icon names, please refer to the [List of Icons](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
+
+<div class="meta-api-description">
+How do I add icons to dialog action buttons in Kendo UI? Configure, set, or add built-in icons to dialog action buttons by specifying an icon name from the Kendo UI theme sprite library to display graphical symbols alongside or within button labels; customize button appearance by adding visual indicators such as trash, save, cancel, delete, check, or other predefined icons; enhance user interface clarity and usability by including iconography within dialog buttons using theme-provided icon sets; control which icon appears within action buttons by referencing icon names that are rendered as background images inside span elements for consistent visual presentation and improved user recognition of button actions.
+</div>
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Delete", themeColor: "error", icon: "trash" }
+          ]
+        });
+    </script>
+
+### actions.iconClass `String`
+
+Defines a CSS class - or multiple classes separated by spaced - which are applied to a `span` element inside the action button. Allows the usage of custom icons.
+
+<div class="meta-api-description">
+How can I use custom icons in Kendo UI dialog action buttons? Configure, set, or apply custom icon CSS classes to dialog action buttons by specifying one or multiple space-separated class names that control icon appearance through external icon libraries such as Font Awesome, Material Icons, or custom icon fonts; enable usage of third-party icon sets within dialog buttons by adding custom classes to span elements, allowing flexible icon integration beyond built-in Kendo UI icons; customize button iconography by applying CSS class selectors for icon fonts, SVG icons, or image-based icons, supporting diverse icon libraries and design systems for enhanced dialog button styling and visual communication.
+</div>
+
+#### Example
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [
+            { text: "OK"},
+            { text: "Archive", themeColor: "primary", iconClass: "fas fa-archive" }
+          ]
+        });
+    </script>
+
 ### animation `Boolean|Object`
 
 A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.

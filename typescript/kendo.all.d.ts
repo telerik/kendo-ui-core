@@ -864,6 +864,8 @@ declare namespace kendo.data {
         load(): void;
         loaded(value: boolean): void;
         loaded(): boolean;
+        loading(value: boolean): void;
+        loading(): boolean;
         parentNode(): Node;
     }
 
@@ -4907,6 +4909,13 @@ declare namespace kendo.ui {
         text?: string | undefined;
         action?: Function | undefined;
         primary?: boolean | undefined;
+        cssClass?: string | undefined;
+        fillMode?: string | undefined;
+        themeColor?: string | undefined;
+        size?: string | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        rounded?: string | undefined;
     }
 
     interface DialogAnimationClose {

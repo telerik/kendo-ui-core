@@ -2,13 +2,14 @@ import "./kendo.core.js";
 import "./kendo.popup.js";
 import "./kendo.textbox.js";
 import "./kendo.icons.js";
+import "./kendo.html.button.js";
 
     export const __meta__ = {
         id: "dialog",
         name: "Dialog",
         category: "web", // suite
         description: "The dialog widget is a modal popup that brings information to the user.",
-        depends: ["core", "popup", "textbox", "icons"] // dependencies
+        depends: ["core", "popup", "textbox", "icons", "html.button"] // dependencies
     };
 
     (function($, undefined) {
@@ -370,6 +371,20 @@ import "./kendo.icons.js";
                 wrapper.append(actionbar);
             },
 
+            _filteredAction: function(action) {
+                const allowedProps = [
+                    "text", "cssClass", "action", "primary", "themeColor",
+                    "size", "rounded", "fillMode", "icon", "iconClass"
+                ];
+                var filteredAction = {};
+                allowedProps.forEach(function(prop) {
+                    if (action.hasOwnProperty(prop)) {
+                        filteredAction[prop] = action[prop];
+                    }
+                });
+                return filteredAction;
+            },
+
             _addButtons: function(actionbar) {
                 var that = this,
                     actionClick = that._actionClick.bind(that),
@@ -382,6 +397,8 @@ import "./kendo.icons.js";
                 for (var i = 0; i < length; i++) {
                     action = actions[i];
                     text = that._mergeTextWithOptions(action);
+
+                    action = that._filteredAction(action);
 
                     $(templates.action(action, text))
                         .autoApplyNS(NS)
@@ -1064,7 +1081,12 @@ import "./kendo.icons.js";
 
         templates = {
             wrapper: template((options) => `<div class='k-dialog-wrapper'>${options.modal ? '<div class="k-overlay"></div>' : ''}<div class='k-window k-dialog' role='dialog'></div></div>`),
-            action: template((data, text) => `<button type='button' class='k-button k-button-md k-rounded-md k-button-solid ${data.primary ? 'k-button-solid-primary' : 'k-button-solid-base'}'><span class="k-button-text">${encode(text)}</span></button>`),
+            action: template((data, text) => {
+                if (data.primary && !data.themeColor) {
+                    data.themeColor = "primary";
+                }
+                return kendo.html.renderButton($(`<button${data.cssClass ? ` class="${data.cssClass}"` : ''}>${encode(text)}</button>`),data);
+            }),
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar k-dialog-titlebar'>" +
                     `<span class='k-window-title k-dialog-title'>${encode(title)}</span>` +

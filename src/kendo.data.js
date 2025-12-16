@@ -6290,6 +6290,8 @@ export const __meta__ = {
 
         _childrenLoaded: function() {
             this._loaded = true;
+            this._loading = false;
+            this._loadingPromise = null;
 
             this._updateChildrenField();
         },
@@ -6298,6 +6300,10 @@ export const __meta__ = {
             var options = {};
             var method = "_query";
             var children, promise;
+
+            if (this.loading()) {
+                return this._loadingPromise || $.Deferred().resolve().promise();
+            }
 
             if (this.hasChildren) {
                 this._initChildren();
@@ -6309,6 +6315,7 @@ export const __meta__ = {
                 if (!this._loaded) {
                     children._data = undefined;
                     method = "read";
+                    this.loading(true);
                 }
 
                 children.one(CHANGE, this._childrenLoaded.bind(this));
@@ -6319,6 +6326,7 @@ export const __meta__ = {
 
                 promise = children[method](options);
                 if (!this._loaded) {
+                    this._loadingPromise = promise;
                     this.trigger(ITEMLOAD, { promise: promise, node: this });
                 }
             } else {
@@ -6337,8 +6345,17 @@ export const __meta__ = {
         loaded: function(value) {
             if (value !== undefined) {
                 this._loaded = value;
+                this.loading(false);
             } else {
                 return this._loaded;
+            }
+        },
+
+        loading: function(value) {
+            if (value !== undefined) {
+                this._loading = value;
+            } else {
+                return this._loading || false;
             }
         },
 
