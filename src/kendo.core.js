@@ -2226,12 +2226,16 @@ function pad(number, digits, end) {
                 propInit = null;
             }
 
-            if (propInit &&
-                propInit !== Array && propInit !== ObservableArray && propInit !== LazyObservableArray &&
-                propInit !== DataSource && propInit !== HierarchicalDataSource && propInit !== RegExp &&
-                (!kendo.isFunction(window.ArrayBuffer) || propInit !== ArrayBuffer) && !(propValue instanceof HTMLElement)) {
+            let isRegExp = propInit?.name === 'RegExp';
+            let isArrayBuffer = propInit?.name === 'ArrayBuffer';
+            let isDate = propInit?.name === 'Date';
 
-                if (propValue instanceof Date) {
+            if (propInit &&
+                !Array.isArray(propValue) && propInit !== ObservableArray && propInit !== LazyObservableArray &&
+                propInit !== DataSource && propInit !== HierarchicalDataSource && !isRegExp &&
+                (!kendo.isFunction(window.ArrayBuffer) || !isArrayBuffer) && !(propValue instanceof HTMLElement)) {
+
+                if (isDate) {
                     destination[property] = new Date(propValue.getTime());
                 } else if (isFunction(propValue.clone)) {
                     destination[property] = propValue.clone();

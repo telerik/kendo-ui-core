@@ -144,8 +144,8 @@ describe("tabstrip initialization", function() {
             }]
         });
 
-        assert.equal(tabstrip.wrapper.find("li.k-tabstrip-item")[0].id.length, 42);
-        assert.equal(tabstrip.wrapper.find("li.k-tabstrip-item")[1].id.length, 42);
+        assert.equal(tabstrip.wrapper.find("li.k-item")[0].id.length, 42);
+        assert.equal(tabstrip.wrapper.find("li.k-item")[1].id.length, 42);
     });
 
     it("each content element has an id", function() {

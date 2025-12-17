@@ -1,10 +1,10 @@
 ---
-title: Integrating Telerik UI Grid with an AI Service
-description: "Learn how to analyze grid data dynamically using an AI backend with ASP.NET Core and Azure OpenAI."
+title: Integrating Telerik UI Grid with Smart AI Extensions
+description: "Learn how to analyze, filter, and sort Telerik UI Grid data using the built-in AI Assistant powered by Telerik Smart Extensions."
 type: how-to
-page_title: Telerik UI Grid AI Integration for {{ site.product }}
+page_title: Telerik UI Grid AI Integration with Smart Extensions for {{ site.product }}
 slug: grid-ai-integration
-tags: grid, ai, openai, azure, assistant, kendo-grid
+tags: grid, ai, smart-extensions, assistant, azure-openai
 res_type: kb
 component: grid
 ---
@@ -24,26 +24,38 @@ component: grid
 
 ## Description
 
-How can I integrate the Telerik UI Grid with an external AI service, such as Azure OpenAI, so that natural-language questions about the displayed data can be analyzed and executed automatically?
+How can I integrate the Telerik UI Grid with AI-powered natural language operations such as filtering and sorting **without implementing a custom AI pipeline**, by using the built-in **Telerik Smart Extensions**?
 
-## Solution
+This article demonstrates how to enable AI-assisted Grid interactions using the `Telerik.AI.SmartComponents.Extensions` package and the Grid’s native **AI Assistant**.
 
-To integrate the Grid with an AI backend:
-
-1. Display the data in a standard Kendo UI Grid.
-2. Capture the user's natural-language question and send it to an AI endpoint.
-3. Provide the AI with the full grid dataset in JSON format.
-4. The AI returns either:
-   - a natural-language insight, or
-   - a structured JSON command for sorting or filtering
-5. Apply the result to the Grid on the client side.
+> For a complete overview of the Smart Extensions architecture and setup, see  
+> [Telerik Smart Extensions]({% slug smart_ext_core_grid %})
 
 ---
 
-### View
-- This section defines the Grid UI and provides a text area where users can ask questions about the displayed data.
-- It includes suggestion prompts and client-side logic that submits the question along with the grid’s data to the AI endpoint.
-- Based on the AI result, the view applies sorting, filtering, or displays natural-language insights.
+## Solution Overview
+
+With Telerik Smart Extensions, the Grid can natively:
+
+- Accept natural-language instructions
+- Convert them into structured Grid operations
+- Apply filtering and sorting automatically
+- Avoid sending full datasets to the AI model
+- Use secure, tool-based AI execution
+
+The integration consists of:
+
+1. Enabling the Grid AI Assistant
+2. Sending column metadata to the AI service
+3. Letting Smart Extensions interpret AI responses
+4. Automatically applying Grid state changes
+
+---
+
+## Grid View Configuration
+
+The Grid below enables the AI Assistant directly from the toolbar.  
+No custom JavaScript parsing or manual OpenAI calls are required.
 
 ```csharp
 @{
@@ -54,6 +66,15 @@ To integrate the Grid with an AI backend:
 
 @(Html.Kendo().Grid<SaleRecord>()
     .Name("salesGrid")
+    .ToolBar(t =>
+    {
+        t.AIAssistant();
+        t.Spacer();
+        t.Custom()
+            .Name("resetChanges")
+            .Text("Reset changes")
+            .IconClass("k-icon k-i-arrow-rotate-ccw");
+    })
     .Columns(columns =>
     {
         columns.Bound(c => c.Id).Width(80);
@@ -64,328 +85,96 @@ To integrate the Grid with an AI backend:
         columns.Bound(c => c.Month);
     })
     .Scrollable(s => s.Height("300px"))
-    .DataSource(ds => ds.Ajax()
-        .Read(read => read.Url("/SmartGrid/GetSales"))
-    )
     .Sortable()
     .Filterable()
-)
-
-<div class="k-mt-4" style="color: #ffffff;">
-    <label for="instructionBox" class="k-label">Ask AI about the data:</label>
-
-    <ul style="margin-top: 5px; list-style: disc; padding-left: 20px; font-size: 14px; color: #00ffe5;">
-        <li class="ai-suggestion">Which salesperson has the highest total sales?</li>
-        <li class="ai-suggestion">What is the average units sold per region?</li>
-        <li class="ai-suggestion">Show the month with the lowest performance.</li>
-        <li class="ai-suggestion">Sort the grid by Total descending</li>
-        <li class="ai-suggestion">Filter to only show data from July</li>
-        <li class="ai-suggestion">Show only rows where Units Sold is greater than 130</li>
-        <li class="ai-suggestion">What is the total revenue by month?</li>
-        <li class="ai-suggestion">How many units did Alice sell in total?</li>
-    </ul>
-
-    @(Html.Kendo().TextArea()
-        .Name("instructionBox")
-        .Placeholder("e.g. Which region had the lowest total?")
-        .Rows(4)
-        .HtmlAttributes(new { style = "width:100%; background-color:#1f1f1f; color:white;", @class = "k-textbox" })
-        )
-
-    <div class="k-mt-2">
-        @(Html.Kendo().Button()
-                .Name("analyzeButton")
-                .Content("Analyze")
-                .ThemeColor(ThemeColor.Success)
-                .HtmlAttributes(new { onclick = "analyzeGrid()" })
-                )
-    </div>
-</div>
-
-<div id="aiResponse" class="k-mt-4">
-    <strong>AI Response:</strong>
-    <div id="aiText" style="margin-top:10px;"></div>
-</div>
-
-@section scripts {
-    <script>
-        $(document).on("click", ".ai-suggestion", function () {
-            const text = $(this).text().trim();
-            $("#instructionBox").data("kendoTextArea").value(text);
-        });
-
-        async function analyzeGrid() {
-            const grid = $("#salesGrid").data("kendoGrid");
-            const allData = grid.dataSource.view().map(item => item.toJSON());
-            const instructions = $("#instructionBox").val();
-
-            if (!instructions.trim()) {
-                alert("Please enter a question or instruction for the AI.");
-                return;
-            }
-
-            $("#aiText").html("<em>Thinking...</em>");
-
-            const response = await fetch('/SmartGrid/Analyze', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    instructions: instructions,
-                    gridJson: JSON.stringify(allData)
-                })
-            });
-
-            const result = await response.json();
-
-            try {
-                const json = JSON.parse(result.result);
-
-                if (json.action === "filter") {
-                    grid.dataSource.filter({
-                        field: json.field,
-                        operator: json.operator,
-                        value: json.value
-                    });
-                    $("#aiText").html(`<strong>Applied filter:</strong> ${json.field} ${json.operator} ${json.value}`);
-                } else if (json.action === "sort") {
-                    grid.dataSource.sort({
-                        field: json.field,
-                        dir: json.dir
-                    });
-                    $("#aiText").html(`<strong>Sorted by:</strong> ${json.field} (${json.dir})`);
-                } else {
-                    $("#aiText").text(result.result);
-                }
-            } catch {
-                $("#aiText").text(result.result);
-            }
-        }
-    </script>
-}
-
-<style>
-    textarea.k-textbox,
-    .k-input {
-        background-color: #1f1f1f;
-        color: #ffffff;
-        border-color: #444;
-    }
-
-        textarea.k-textbox::placeholder {
-            color: #888888;
-        }
-
-    #aiResponse {
-        background-color: #1f1f1f;
-        border: 1px solid #444;
-        padding: 1em;
-        border-radius: 6px;
-        margin-top: 1em;
-        color: #00ffe5;
-        font-size: 14px;
-    }
-
-        #aiResponse strong {
-            display: block;
-            margin-bottom: 6px;
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-    #aiText {
-        white-space: pre-line;
-    }
-</style>
-```
-
----
-
-### Controller
-- The controller provides the sales data to the Grid and exposes the endpoint used for AI analysis.
-- It packages the user’s question and the dataset into a request sent to the AI service.
-- The endpoint returns either a natural-language insight or a structured JSON command that the client uses to update the Grid.
-
-```csharp
-public class SmartGridController : Controller
-{
-    private readonly AiService _smartGridService;
-
-    public SmartGridController(AiService smartGridService)
-    {
-        _smartGridService = smartGridService;
-    }
-
-    public IActionResult SmartGrid()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult GetSales([DataSourceRequest] DataSourceRequest request)
-    {
-        return Json(GetFullSalesData().ToDataSourceResult(request));
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Analyze([FromBody] GridAnalysisRequest request)
-    {
-        var result = await _smartGridService.AnalyzeGridDataAsync(request.Instructions, request.GridJson);
-        return Json(new { result });
-    }
-
-    private List<SaleRecord> GetFullSalesData()
-    {
-        return new List<SaleRecord>
-        {
-            new SaleRecord { Id = 1, SalesPerson = "Alice", Region = "North", UnitsSold = 120, Total = 24000, Month = "January" },
-            new SaleRecord { Id = 2, SalesPerson = "Bob", Region = "South", UnitsSold = 80, Total = 16000, Month = "January" },
-            new SaleRecord { Id = 3, SalesPerson = "Charlie", Region = "West", UnitsSold = 150, Total = 30000, Month = "February" },
-            new SaleRecord { Id = 4, SalesPerson = "Alice", Region = "North", UnitsSold = 130, Total = 26000, Month = "February" },
-            new SaleRecord { Id = 5, SalesPerson = "Bob", Region = "South", UnitsSold = 90, Total = 18000, Month = "March" },
-            new SaleRecord { Id = 6, SalesPerson = "Charlie", Region = "West", UnitsSold = 170, Total = 34000, Month = "March" },
-            new SaleRecord { Id = 7, SalesPerson = "Alice", Region = "East", UnitsSold = 100, Total = 20000, Month = "April" },
-            new SaleRecord { Id = 8, SalesPerson = "David", Region = "South", UnitsSold = 75, Total = 15000, Month = "April" },
-            new SaleRecord { Id = 9, SalesPerson = "Eva", Region = "North", UnitsSold = 110, Total = 22000, Month = "May" },
-            new SaleRecord { Id = 10, SalesPerson = "Bob", Region = "South", UnitsSold = 95, Total = 19000, Month = "May" },
-            new SaleRecord { Id = 11, SalesPerson = "Charlie", Region = "West", UnitsSold = 160, Total = 32000, Month = "June" },
-            new SaleRecord { Id = 12, SalesPerson = "Alice", Region = "East", UnitsSold = 115, Total = 23000, Month = "June" },
-            new SaleRecord { Id = 13, SalesPerson = "David", Region = "North", UnitsSold = 105, Total = 21000, Month = "July" },
-            new SaleRecord { Id = 14, SalesPerson = "Eva", Region = "West", UnitsSold = 135, Total = 27000, Month = "July" },
-            new SaleRecord { Id = 15, SalesPerson = "Alice", Region = "East", UnitsSold = 125, Total = 25000, Month = "August" },
-            new SaleRecord { Id = 16, SalesPerson = "Charlie", Region = "South", UnitsSold = 140, Total = 28000, Month = "August" },
-            new SaleRecord { Id = 17, SalesPerson = "David", Region = "North", UnitsSold = 100, Total = 20000, Month = "September" },
-            new SaleRecord { Id = 18, SalesPerson = "Bob", Region = "West", UnitsSold = 155, Total = 31000, Month = "September" },
-            new SaleRecord { Id = 19, SalesPerson = "Eva", Region = "South", UnitsSold = 85, Total = 17000, Month = "October" },
-            new SaleRecord { Id = 20, SalesPerson = "Charlie", Region = "East", UnitsSold = 145, Total = 29000, Month = "October" }
-        };
-    }
-
-    public class GridAnalysisRequest
-    {
-        public string Instructions { get; set; }
-        public string GridJson { get; set; }
-    }
-}
-```
-
----
-
-### AI Service
-- The AI service receives both the user's question and the full dataset, enabling accurate analysis.
-- It returns either a natural-language summary or a structured JSON command for sorting or filtering.
-- This section isolates the AI logic so the controller and view remain clean and maintainable.
-
-```csharp
-public class AiService
-{
-    private readonly HttpClient _http;
-    private readonly string _apiKey;
-    private readonly string _endpoint;
-    private readonly string _deployment;
-
-    public AiService(IConfiguration config)
-    {
-        _http = new HttpClient();
-        _apiKey = config["OpenAI:ApiKey"];
-        _endpoint = config["OpenAI:Endpoint"];
-        _deployment = config["OpenAI:DeploymentName"];
-    }
-
-    private async Task<string> SendAsync(string url, object payload)
-    {
-        _http.DefaultRequestHeaders.Clear();
-        _http.DefaultRequestHeaders.Add("api-key", _apiKey);
-
-        var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
-        var response = await _http.PostAsync(url, content);
-        var text = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
-            return $"Azure OpenAI API error: {response.StatusCode}";
-
-        var json = JObject.Parse(text);
-        return json["choices"]?[0]?["message"]?["content"]?.ToString()?.Trim() ?? "";
-    }
-
-    public async Task<string> AnalyzeGridDataAsync(string instructions, string gridDataJson)
-    {
-        var systemPrompt = @"
-                        You are an AI assistant analyzing Kendo UI Grid data.
-                        
-                        You ALWAYS receive:
-                        1) The full raw data (JSON array)
-                        2) A user question
-                        
-                        RULES:
-                        1. If the user explicitly asks for filtering or sorting:
-                           Return ONLY a JSON object such as:
-                           { ""action"": ""filter"", ""field"": ""Month"", ""operator"": ""eq"", ""value"": ""July"" }
-                           or:
-                           { ""action"": ""sort"", ""field"": ""Total"", ""dir"": ""desc"" }
-                        
-                        2. For ALL OTHER QUESTIONS:
-                           Return a short natural language answer using ONLY the supplied data.
-                        
-                        No code, no markdown, no explanations.
-                        ";
-
-        var url = $"{_endpoint}openai/deployments/{_deployment}/chat/completions?api-version=2024-02-15-preview";
-        var payload = new
-        {
-            messages = new[]
+    .DataSource(ds => ds.Ajax()
+        .Model(m => m.Id(x => x.Id))
+        .Read(read => read.Url("/SmartGrid/GetSales"))
+    )
+    .AI(ai => ai
+        .Service("/SmartGrid/Analyze")
+        .AIAssistant(aiAsst => aiAsst
+            .PromptSuggestions(new[]
             {
-                new { role = "system", content = systemPrompt },
-                new { role = "user", content = $"Grid Data:\n{gridDataJson}" },
-                new { role = "user", content = $"Question:\n{instructions}" }
-            },
-            temperature = 0.3,
-            max_tokens = 1500
-        };
-
-        return await SendAsync(url, payload);
-    }
-}
+                "Sort the grid by Total descending.",
+                "Filter to only show data from July.",
+                "Show only rows where Units Sold is greater than 130."
+            })
+            .PromptTextArea(p =>
+                p.Rows(2)
+                 .Resize(TextAreaResize.Auto)
+                 .MaxRows(5)
+            )
+        )
+        .AIAssistantWindow(ws =>
+            ws.Width(558)
+              .Actions(a => a.Minimize().Close())
+        )
+    )
+)
 ```
 
 ---
 
-### Register the Service in Program.cs
+## Controller Implementation
 
-Registering the AiService in the dependency injection container allows the application to resolve it automatically in controllers that rely on it for processing AI requests.
+The controller receives a `GridAIRequest`, executes the AI tools, and returns a structured `GridAIResponse`.  
+The Grid applies the response automatically.
 
 ```csharp
-builder.Services.AddTransient<AiService>();
+[HttpPost]
+public async Task<IActionResult> Analyze([FromBody] GridAIRequest request)
+{
+    var options = new ChatOptions();
+    options.AddGridChatTools(request.Columns);
+
+    var messages = request.Contents
+        .Select(m => new Microsoft.Extensions.AI.ChatMessage(
+            ChatRole.User, m.Text))
+        .ToList();
+
+    if (_chatClient == null)
+    {
+        return StatusCode(500, "Chat service is not available.");
+    }
+
+    ChatResponse completion =
+        await _chatClient.GetResponseAsync(messages, options);
+
+    GridAIResponse response =
+        completion.ExtractGridResponse();
+
+    return new ContentResult
+    {
+        Content = System.Text.Json.JsonSerializer.Serialize(
+            response,
+            new System.Text.Json.JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            }),
+        ContentType = "application/json"
+    };
+}
 ```
 
 ---
 
-### AppSettings
+## Supported Natural Language Commands
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=Samples;Trusted_Connection=True;ConnectRetryCount=0"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
-  },
-  "OpenAI": {
-    "UseAzure": true,
-    //"ApiKey": "your-api-key",
-    "ApiKey": "",
-    //"Endpoint": "your-end-point",
-    "Endpoint": "your-end-point",
-    //"DeploymentName": "your-deployment-name",
-    "DeploymentName": "your-deployment-name"
-  },
-  "AllowedHosts": "*"
-}
-```
+The Grid AI Assistant supports:
+
+### Filtering
+- `Show only July data`
+- `Units Sold greater than 130`
+- `SalesPerson is Alice`
+
+### Sorting
+- `Sort by Total descending`
+- `Order by Units Sold ascending`
+
+### Combined Queries
+- `Show July data sorted by Total`
+- `Filter West region and sort by Units Sold`
 
 ---
 

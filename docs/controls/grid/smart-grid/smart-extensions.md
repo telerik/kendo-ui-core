@@ -31,6 +31,7 @@ Add required dependencies:
 
 ```bash
 dotnet add package Microsoft.Extensions.AI
+dotnet add package Microsoft.Extensions.AI.OpenAI
 dotnet add package Azure.AI.OpenAI
 ```
 
