@@ -32,7 +32,6 @@ export const __meta__ = {
         Select = ui.Select,
         caret = kendo.caret,
         support = kendo.support,
-        placeholderSupported = support.placeholder,
         activeElement = kendo._activeElement,
         keys = kendo.keys,
         ns = ".kendoComboBox",
@@ -117,10 +116,6 @@ export const __meta__ = {
                 if (text) {
                     that._setText(text);
                 }
-            }
-
-            if (!text) {
-                that._placeholder();
             }
 
             disabled = $(that.element).parents("fieldset").is(':disabled');
@@ -366,7 +361,6 @@ export const __meta__ = {
             const that = this;
 
             that.wrapper.addClass(FOCUSED);
-            that._placeholder(false);
         },
 
         _inputFocusout: function(e) {
@@ -396,7 +390,6 @@ export const __meta__ = {
                 return;
             }
 
-            that._placeholder();
             that._valueBeforeCascade = that._old;
 
             if (isClearButton) {
@@ -523,7 +516,6 @@ export const __meta__ = {
 
                 that._accessor(value);
                 that.input.val(text || that.input.val());
-                that._placeholder();
             } else if (that._oldIndex === -1) {
                 that._oldIndex = that.selectedIndex;
             }
@@ -745,7 +737,6 @@ export const __meta__ = {
             this._setDomInputValue(text);
             this._accessor(value !== undefined ? value : text, idx);
 
-            this._placeholder();
             this._triggerCascade();
         },
 
@@ -935,7 +926,6 @@ export const __meta__ = {
                     if (that.selectedIndex === -1 && (!listView._selectedDataItems || !listView._selectedDataItems.length)) {
                         that._accessor(value);
                         that.input.val(value);
-                        that._placeholder(true);
                     }
 
                     if (that._userTriggered) {
@@ -1101,9 +1091,7 @@ export const __meta__ = {
                 .show();
 
             input.attr(kendo.attr("skip"), true);
-            if (placeholderSupported) {
-                input.attr("placeholder", that.options.placeholder);
-            }
+            input.attr("placeholder", that.options.placeholder);
 
             if (accessKey) {
                 element.accessKey = "";
@@ -1195,41 +1183,6 @@ export const __meta__ = {
             }
         },
 
-        _placeholder: function(show) {
-            if (placeholderSupported) {
-                return;
-            }
-
-            var that = this,
-                input = that.input,
-                placeholder = that.options.placeholder,
-                value;
-
-            if (placeholder) {
-                value = that.value();
-
-                if (show === undefined) {
-                    show = !value;
-                }
-
-                input.toggleClass("k-readonly", show);
-
-                if (!show) {
-                    if (!value) {
-                        placeholder = "";
-                    } else {
-                        return;
-                    }
-                }
-
-                input.val(placeholder);
-
-                if (!placeholder && input[0] === activeElement()) {
-                    caret(input[0], 0, 0);
-                }
-            }
-        },
-
         _search: function() {
             var that = this;
 
@@ -1303,7 +1256,6 @@ export const __meta__ = {
             this._oldIndex = this.selectedIndex;
 
             this.listView.setValue(value);
-            this._placeholder();
 
             this._initialIndex = null;
             this._presetValue = true;

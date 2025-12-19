@@ -286,7 +286,6 @@ declare namespace kendo {
         hasHW3D: boolean;
         hasNativeScrolling: boolean;
         devicePixelRatio: number;
-        placeholder: boolean;
         zoomLevel: number;
         mobileOS: {
             device: string;

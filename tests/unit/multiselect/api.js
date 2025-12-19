@@ -634,7 +634,7 @@ describe("kendo.ui.MultiSelect API", function() {
             placeholder: "Name"
         });
 
-        assert.equal(multiselect.input.val(), "Name");
+        assert.equal(multiselect.input.attr("placeholder"), "Name");
     });
 
     it("accept value after source is updated", function() {

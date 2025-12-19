@@ -459,7 +459,7 @@ export const __meta__ = {
 
         _inputFocus: function() {
             const that = this;
-            that._placeholder(false, true);
+            that._placeholder();
             that.wrapper.addClass(FOCUSEDCLASS);
         },
 
@@ -475,7 +475,7 @@ export const __meta__ = {
             that.wrapper.removeClass(FOCUSEDCLASS);
             that.tagList.children(CHIP).removeClass(FOCUSEDCLASS);
 
-            that._placeholder(!that.listView.selectedDataItems()[0], true);
+            that._placeholder();
             that.close();
 
             if (that._state === FILTER) {
@@ -548,6 +548,7 @@ export const __meta__ = {
                 }
                 done();
             }
+            this._placeholder();
         },
 
         _tagListClick: function(e) {
@@ -1210,32 +1211,21 @@ export const __meta__ = {
             }
         },
 
-        _placeholder: function(show, skipCaret) {
-            var that = this;
-            var input = that.input;
-            var active = activeElement();
-            var placeholder = that.options.placeholder;
-            var inputValue = input.val();
-            var isActive = input[0] === active;
-            var caretPos = inputValue.length;
+        _placeholder: function() {
+            const that = this;
+            const input = that.input;
+            const active = activeElement();
+            const isActive = input[0] === active;
 
-            if (!isActive || that.options.autoClose || inputValue === placeholder) {
-                caretPos = 0;
-                inputValue = "";
+
+            if (this.listView.selectedDataItems().length > 0) {
+                input.removeAttr("placeholder");
+            } else {
+                input.attr("placeholder", that.options.placeholder);
             }
 
-            if (show === undefined) {
-                show = false;
-                if (input[0] !== active) {
-                    show = !that.listView.selectedDataItems()[0];
-                }
-            }
-
-            that._prev = inputValue;
-            input.toggleClass("k-readonly", show).val(show ? placeholder : inputValue);
-
-            if (isActive && !skipCaret) {
-                kendo.caret(input[0], caretPos, caretPos);
+            if (!isActive) {
+                input.val("");
             }
         },
 
@@ -1602,6 +1592,9 @@ export const __meta__ = {
                 "autocomplete": AUTOCOMPLETEVALUE,
                 "title": element[0].title
             });
+
+            input.attr("placeholder", that.options.placeholder);
+
 
             if (accessKey) {
                 that._focused.attr("accesskey", accessKey);

@@ -1081,24 +1081,6 @@ import { stub } from '../../helpers/unit/stub.js';
             $(".k-list-container").remove();
         });
 
-        asyncTest("ComboBox calls placeholder method when delayed binding is used", function(done) {
-            let combobox = input.kendoComboBox({
-                text: "Chai",
-                placeholder: "Select...",
-                autoBind: false
-            }).data("kendoComboBox");
-
-            stub(combobox, {
-                _placeholder: combobox._placeholder
-            });
-
-            setTimeout(function() {
-                combobox.dataSource.read();
-
-                done(() => assert.equal(combobox.calls("_placeholder"), 1));
-            });
-        });
-
         it("ComboBox opens the popup if noDataTemplate", function() {
             let combobox = new ComboBox(input, {
                 noDataTemplate: () => "no data"
