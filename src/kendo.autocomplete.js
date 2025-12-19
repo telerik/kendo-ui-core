@@ -28,7 +28,6 @@ export const __meta__ = {
         support = kendo.support,
         caret = kendo.caret,
         activeElement = kendo._activeElement,
-        placeholderSupported = support.placeholder,
         ui = kendo.ui,
         List = ui.List,
         keys = kendo.keys,
@@ -81,9 +80,7 @@ export const __meta__ = {
             options.placeholder = options.placeholder || element.attr("placeholder");
             options.inputMode = options.inputMode || element.attr("inputmode") || "text";
 
-            if (placeholderSupported) {
-                element.attr("placeholder", options.placeholder);
-            }
+            element.attr("placeholder", options.placeholder);
 
             that._wrapper();
             that._clearButton();
@@ -105,7 +102,6 @@ export const __meta__ = {
                 .on("focus" + ns, function(e) {
                     that._prev = that._accessor();
                     that._oldText = that._prev;
-                    that._placeholder(false);
 
                     wrapper.addClass(FOCUSED);
                 })
@@ -115,7 +111,6 @@ export const __meta__ = {
                     }
 
                     that._change();
-                    that._placeholder();
                     that.close();
                     wrapper.removeClass(FOCUSED);
                 })
@@ -131,8 +126,6 @@ export const __meta__ = {
             that._enable();
 
             that._old = that._accessor();
-
-            that._placeholder();
 
             that._initList();
 
@@ -640,7 +633,6 @@ export const __meta__ = {
 
             this._prev = text;
             this._accessor(text);
-            this._placeholder();
         },
 
         _unifySeparators: function() {
@@ -655,7 +647,6 @@ export const __meta__ = {
             this._old = this.oldText = this._accessor();
 
             this.listView.setValue(value);
-            this._placeholder();
         },
 
         _change: function() {
@@ -693,7 +684,6 @@ export const __meta__ = {
 
             if (value !== undefined) {
                 element.value = value === null ? "" : value;
-                that._placeholder();
             } else {
                 value = element.value;
 
@@ -808,44 +798,6 @@ export const __meta__ = {
                caret(this.element);
             } else if (this.options.suggest && this.listView.focus() != null) {
                 this.suggest(this.listView.focus());
-            }
-        },
-
-        _placeholder: function(show) {
-            if (placeholderSupported) {
-                return;
-            }
-
-            var that = this,
-                element = that.element,
-                placeholder = that.options.placeholder,
-                value;
-
-            if (placeholder) {
-                value = element.val();
-
-                if (show === undefined) {
-                    show = !value;
-                }
-
-                if (!show) {
-                    if (value !== placeholder) {
-                        placeholder = value;
-                    } else {
-                        placeholder = "";
-                    }
-                }
-
-                if (value === that._old && !show) {
-                    return;
-                }
-
-                element.toggleClass("k-readonly", show)
-                       .val(placeholder);
-
-                if (!placeholder && element[0] === document.activeElement) {
-                    caret(element[0], 0, 0);
-                }
             }
         },
 

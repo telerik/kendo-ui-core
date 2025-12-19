@@ -23,7 +23,6 @@ export const __meta__ = {
         activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         parse = kendo.parseFloat,
-        placeholderSupported = kendo.support.placeholder,
         getCulture = kendo.getCulture,
         CHANGE = "change",
         DISABLED = "disabled",
@@ -890,9 +889,6 @@ export const __meta__ = {
             var input = this._text;
 
             input.val(value);
-            if (!placeholderSupported && !value) {
-                input.val(this.options.placeholder);
-            }
 
             input.attr("title", this.element.attr("title") || input.val());
         },

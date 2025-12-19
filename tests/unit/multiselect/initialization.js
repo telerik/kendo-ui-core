@@ -444,7 +444,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         }, 150);
     });
 
-    asyncTest("form reset support does not remove place2older", function(done) {
+    asyncTest("form reset support does not remove placeholder", function(done) {
         populateSelect();
 
         let form = $("<form/>").appendTo(Mocha.fixture).append(select);
@@ -455,7 +455,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         form[0].reset();
 
         setTimeout(function() {
-            done(() => assert.equal(multiselect.input.val(), "Select..."));
+            done(() => assert.equal(multiselect.input.attr("placeholder"), "Select..."));
         }, 150);
     });
 

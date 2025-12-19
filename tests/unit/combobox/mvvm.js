@@ -201,28 +201,6 @@ it("value binding honors autoBind:false option when valuePrimitive is false", fu
     assert.equal(widget.text(), "bar");
 });
 
-it("value binding with autoBind:false and valuePrimitive:false sets placeholder", function() {
-    dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />');
-
-    let items = new kendo.data.ObservableArray([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
-    let observable = kendo.observable({
-        items: new kendo.data.DataSource({ data: items })
-    });
-    observable.value = items[1];
-
-    kendo.bind(dom, observable);
-
-    let widget = dom.data("kendoComboBox");
-
-    stub(widget, {
-        _placeholder: widget._placeholder
-    });
-
-    observable.set("value", null);
-
-    assert.equal(widget.calls("_placeholder"), 1);
-});
-
 it("widget sets value if source is bound even when autoBind: false is set", function() {
     dom = $('<input data-role="combobox" data-value-field="value" data-text-field="text" data-auto-bind="false" data-value-primitive="false" data-bind="value:value, source:items" />').appendTo(Mocha.fixture);
 
