@@ -1140,9 +1140,11 @@ If called without arguments, will close the ContextMenu. If passed an item, it w
 `kendo.ui.ContextMenu` Returns the ContextMenu object to support chaining.
 
 ### destroy
-Safely removes the **ContextMenu** from the DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
+Prepares the component for safe removal from the DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls the [`destroy`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/widget/methods/destroy) method of any child Kendo components.
 
-If a new ContextMenu widget should be created afterwards, use a new `<ul>` for that, as the old one no longer exists.
+If a new ContextMenu component should be created afterwards, use a new `<ul>` for that, as the old one no longer exists.
+
+> This method does not remove the component element from DOM. To do so follow the approach in [this article](https://www.telerik.com/kendo-jquery-ui/documentation/intro/widget-basics/destroy#destroying-components-automatically).
 
 
 <div class="meta-api-description">
