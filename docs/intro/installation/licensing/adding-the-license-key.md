@@ -1,5 +1,5 @@
 ---
-title: Adding Your Script License Key [Using the Script License Key]
+title: Adding Your Script License Key
 page_title: Using the Script License Key - Download and Installation
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library by adding your script license key."
 components: ["general"]
@@ -10,24 +10,30 @@ position: 2
 
 # Setting Up the License Key
 
-Follow the steps in this article to download a license key script and add it to your application.
+Follow the steps in this article to download a license key script and include a JS file containing the license snippet in your application.
 
 To add a Kendo UI license file to your application:
 
 1. Go to the [License Keys page](https://www.telerik.com/account/your-licenses/license-keys) in your Telerik account.
-2. On the `Progress® Kendo UI® for jQuery` row, click the **View key** link in the **SCRIPT KEY** column.
+2. On the `Progress® Kendo UI® for jQuery` row, click the **Script key** link in the **SCRIPT KEY** column.
 
 ![Get License Key](../images/get-license-key.png)
 
 3.  Copy the JavaScript code snippet into a new file, for example, `telerik-license.js`.
 4.  Load the script in your project, after loading the Kendo UI for jQuery scripts, but before creating any components.
 
+> **Note:**
+> - Load the `kendo.all.min.js` script before the license script. 
+> - Avoid duplicate script references.
+> - Ensure the license script is loaded exactly once after core scripts.
+
+
 You can reference the `telerik-license.js` license file by using either of the following approaches:
 
 * [Use a script reference](#use-a-script-reference)
 * [Use JS or TS Modules](#use-js-or-ts-modules)
 
-As a result, the license key will be distributed along with the scripts and this cannot be avoided. However, Progress recommends that you do not publicly announce it.
+As a result, the license script key will be distributed along with the scripts. It is safe to redistribute the key, it just unlocks the product and is required for the application to run.
 
 ## Use a Script Reference
 

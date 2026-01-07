@@ -126,7 +126,9 @@ How to enable resizing in Kendo UI FileManager component? Control and configure 
 
 ### draggable `Boolean` *(default: true)*
 
-Enables or disables the drag and drop features of the FileManager.
+Enables or disables dragging and dropping files from the FileManager view(GridView, ListView) to the TreeView and vice versa.
+
+> Drag operations are initiated only after the mouse button is held down for a minimum of 150 milliseconds.
 
 
 <div class="meta-api-description">

@@ -19,7 +19,7 @@ components: ["general"]
  </tr>
  <tr>
   <td>Product version</td>
-  <td>2025.1.227</td>
+  <td>2025.4.1217</td>
  </tr>
 </table>
 
@@ -102,7 +102,7 @@ Below are listed the two corresponding steps for you to follow.
                     for (var name in obj) {
                         var prop = obj[name];
                         if (typeof (prop) === "string" && prop.indexOf("/Date(") == 0) {
-                            obj[name] = prop.replace(/\d+/, function (n) {
+                            obj[name] = prop.replace(/-?\d+/, function (n) {
                                 var offsetMiliseconds = new Date(parseInt(n)).getTimezoneOffset() * 60000;
                                 return parseInt(n) + offsetMiliseconds
                             });

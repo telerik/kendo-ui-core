@@ -15,23 +15,27 @@ Kendo UI for jQuery requires activation through a license key for both trial and
 
 You can activate the Kendo UI for jQuery license in either of the following ways:
 
-1. [Using the script license key](#using-the-script-license-key).
-
-2. [Setting up your license key with NPM](#setting-up-your-license-key-with-npm).
+* [Using the script license key](#using-the-script-license-key).
+* [Setting up your license key with NPM](#setting-up-your-license-key-with-npm).
 
 ## Using the Script License Key
 
- In this method, you include a JavaScript license file provided by Kendo UI directly in your project. This script contains the license key and needs to be referenced in your HTML or JavaScript file.
+With this method, you include your license key as a JavaScript file and reference it directly in your project.
 
- This approach is typically used when you’re integrating Kendo UI through a [CDN (Content Delivery Network)]({% slug kendoui_cdn_services_installation %}) or if you are using the Kendo UI version that is directly downloaded as a ZIP file and added to your project.
+This approach is applicable when:
+ 
+* Using Kendo UI for jQuery versions prior to 2025.1.211.
+* Integrating Kendo UI through a [CDN (Content Delivery Network)]({% slug kendoui_cdn_services_installation %}).
+* Adding the Kendo UI script files directly to your project.
+* Using [custom script bundles]({% slug include_only_what_you_need_kendoui_scripts %}).
 
- To activate the Kendo UI for jQuery components, follow the steps in the [Adding Your Script License Key]({% slug using-license-code %}) article.
+ To activate the Kendo UI for jQuery components using this method, follow the steps in the [Adding Your Script License Key]({% slug using-license-code %}) article.
 
 ## Setting Up Your License Key With NPM
 
-When using NPM, the Kendo UI package is installed via the npm registry and integrated into your project through package management tools like `npm` or `yarn`. The license key is typically set within the `package.json` or a separate configuration file.
+When installing Kendo UI for jQuery through npm, the `@progress/kendo-licensing` package is automatically retrieved from the npm registry and added to your project using standard package managers such as npm or yarn. The role of the `@progress/kendo-licensing` package is to locate you license key file (`telerik-license.txt`) and to execute the license activation commands during the setup process.
 
-This approach is ideal for modern web development workflows, especially when working with bundlers like Webpack, and projects built using frameworks like Angular, React, or Vue.js.
+This licensing approach is well‑suited for modern development workflows, particularly when working with module bundlers (e.g., Webpack) or building applications with frameworks such as Angular, React, or Vue.js.
 
 To activate the Kendo UI for jQuery components, [download your assigned license key and install it in your project]({% slug using-license-file %}).
 
