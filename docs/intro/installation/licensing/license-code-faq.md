@@ -1,7 +1,7 @@
 ---
-title: Script License File FAQ
-page_title: Script License File FAQ - Download and Installation
-description: "Find answers to the most common questions related to the script license file that is required when using Kendo UI for jQuery scripts from CDN and NPM distributions."
+title: Frequently Asked Questions
+page_title: Licensing FAQ - Download and Installation
+description: "Find answers to the most common questions related to the licensing that is required when using Kendo UI for jQuery scripts from CDN and npm distributions."
 components: ["general"]
 slug: license-code-faq
 published: True
@@ -9,7 +9,7 @@ previous_url: /intro/installation/license-code-faq
 position: 6
 ---
 
-# Script License File: Frequently Asked Questions
+# Frequently Asked Questions
 
 This article lists the answers to the most frequently asked questions (FAQs) about working with the Kendo UI for jQuery license key.
 
@@ -19,7 +19,12 @@ Yes, the license key expires at the end of your support subscription:
 * For trial users, this is at the end of your 30-day trial.
 * For licensed developers, this is when your subscription expires.
 
-You will need to obtain and install a new license key after starting a trial, renewing a license, or upgrading a license.
+You need to download and install a new license key after:
+
+* Starting a new trial
+* Buying a new license
+* Renewing an existing license
+* Upgrading an existing license
 
 >note An expired perpetual license key is valid for all Kendo UI for jQuery versions which are published before its expiration date.
 
@@ -46,8 +51,17 @@ See the [Invalid License section]({% slug activation-error-warnings %}#invalid-l
 
 The most likely cause is that the newly installed Kendo UI for jQuery Components were released after the expiration date of your current license. To fix this issue:
 
-1. [Download a new license key]({% slug hosting_kendoui %}#downloading-the-license-key).
-2. [Activate the new license key]({% slug hosting_kendoui %}#installing-or-updating-the-license-key) in your project.
+If adding the license by using a script key:
+
+1. Renew your Kendo UI for jQuery license, if necessary.
+1. Download a [new license script key]({% slug using-license-code %}).
+1. [Add the the license as a script reference]({% slug using-license-code %}#use-a-script-reference).
+
+If adding the license by using a license key (npm):
+
+1. Renew your Kendo UI for jQuery license, if necessary.
+1. Download a [new license key file]({% slug using-license-file %}#downloading-the-license-key).
+1. [Activate the new license key]({% slug using-license-file %}#installing-or-updating-the-license-key).
 
 ## Can I use the same license key in multiple builds?
 
@@ -93,19 +107,28 @@ Using any of the Kendo UI for jQuery components distributed through the followin
 | Distribution channel | Version |
 |----------------------|----------------|
 | Kendo CDN (`kendo.cdn.telerik.com` and `cdn.kendostatic.com`) | version R3 2022 and later |
-| NPM packages (`@progress/kendo-ui`) | version R2 2022 and later |
+| npm packages (`@progress/kendo-ui`) | version R2 2022 and later |
 | Trial installation bundle | version R3 2023 and later |
 | `KendoUIProfessional.Trial` NuGet package | version R3 2023 and later |
 
 ## Are earlier versions of Kendo UI for jQuery affected?
 
-No, if you use CDN and Kendo UI for jQuery versions released prior to R3 2022 or NPM versions released prior to R2 2022, you don’t need to set up the licensing.
+No, if you use CDN and Kendo UI for jQuery versions released prior to R3 2022 or npm versions released prior to R2 2022, you don’t need to set up the licensing.
 
 >caution Do not include a license file when using Kendo UI versions prior to R3 2022. Including a license file with those versions will cause a `KendoLicensing is not defined` error.
+
+## Can I activate the license using npm if I am working with a Kendo version earlier than 2025.1.211?
+
+No. Projects that use Kendo UI versions released before `2025.1.211` cannot activate the license through npm.
+For these versions, licensing can only be activated by [referencing a JavaScript license key script]({% slug using-license-code %}).
 
 ## Will the product function without a license file?
 
 Yes, the product will continue to function without a license file. However, a warning message will appear in the browser console if a valid license file is not present. In addition, any pages that contain unlicensed Kendo UI components will receive a [banner]({% slug activation-error-warnings %}#invalid-license) and select UI components will have a [watermark]({% slug activation-error-warnings %}#invalid-license).
+
+## Will my license key be exposed in browser developer tools?
+
+Yes, when activating the license by [adding a licensing script key](({% slug using-license-code %})) to the application, the license key will be visible in the browser developer tools. However, the Script Key is safe to redistribute, it just unlocks the product and is required for the application to run.
 
 ## I have a `KendoLicensing is not defined` error in the console. What should I do?
 
@@ -129,6 +152,50 @@ If you are using Kendo UI versions after `R3 2022` and loading the required scri
         console.error('Error loading KendoUI', error);
       });
 ```
+## I am using a custom-built script from the Download Builder and activated the license via npm, but the watermark banner still appears. What should I do?
+
+When using a custom-built script (custom.min.js) generated through the [`Download Builder tool`](https://www.telerik.com/download/custom-download), the resulting bundle does not include the licensing code referenced from `node_modules`.
+Because of this, license activation through npm is not supported for custom-built bundles.
+
+To resolve the watermark banner, you can choose one of the following approaches:
+
+Option 1: Activate the license using the [JavaScript license key]({% slug using-license-code %}).
+Add the JavaScript license script file to your project to enable license activation for custom bundles.
+
+Option 2: Switch to using [`ECMAScript (ESM) modules`](https://www.telerik.com/kendo-jquery-ui/documentation/intro/installation/ecmascript ) from npm
+Instead of relying on custom-built bundles, you can transition to the ESM distribution provided via npm. This allows license activation through the @progress/kendo-licensing package.
+
+To use the ESM modules:
+
+1.Install the package:
+
+  ```shell
+  npm install --save @progress/kendo-ui
+  ```
+2. Import only the required modules, for example:
+
+  ```shell
+
+  import "@progress/kendo-ui/esm/kendo.core.js";
+  import "@progress/kendo-ui/esm/kendo.data.js";
+    // ...
+
+  import "@progress/kendo-ui/esm/kendo.spreadsheet.js"
+  ```
+
+## I have an Angular application with Kendo UI for Angular components along with Kendo UI for jQuery ones. I have difficulties activating the license. What should I do?
+
+If your project includes Kendo UI for Angular components alongside Kendo UI for jQuery components, you may encounter issues activating the license.
+In such hybrid scenarios, it is recommended to activate the license by [generating a Kendo Licensing Script Key and referencing it]({% slug using-license-code %}) before any Kendo UI components are initialized.
+
+```js
+  <script src="https://kendo.cdn.telerik.com/2025.4.1111/js/kendo.all.min.js"></script>
+  <script>
+    // you can either refer a js file, or directly place the key in a script tag as below
+    KendoLicensing.setScriptKey("yourLicenseScriptKey");
+  </script>
+```
+
 
 ## See Also
 

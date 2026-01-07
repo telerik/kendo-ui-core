@@ -374,7 +374,7 @@ The `suggestedActionsTemplate` function customizes the rendering of suggested ac
                     html += "<p class='actions-title'>Choose an option:</p>";
 
                     for (let i = 0; i < suggestions.length; i++) {
-                        html += "<button class='custom-action-btn' data-action='" + suggestions[i].text + "'>";
+                        html += "<button class='k-button k-button-md k-rounded-md custom-action-btn' data-action='" + suggestions[i].text + "'>";
                         html += "<span class='action-icon'></span>";
                         html += suggestions[i].text;
                         html += "</button>";
@@ -409,36 +409,37 @@ The `suggestedActionsTemplate` function customizes the rendering of suggested ac
 
 ### suggestionsTemplate
 
-The `suggestionsTemplate` function customizes the rendering of message suggestions that appear below the chat input area, providing users with quick reply options and commonly used phrases. These suggestions help streamline conversations by offering pre-defined responses that users can select instead of typing, which is particularly useful for customer service scenarios or repetitive interactions. 
+The `suggestionsTemplate` function customizes the rendering of message suggestions that appear near the chat input area, providing users with quick reply options and commonly used phrases. These suggestions help streamline conversations by offering pre-defined responses that users can select instead of typing, which is particularly useful for customer service scenarios or repetitive interactions. 
 
 **Parameters:**
 - `suggestions` - Array of suggestion objects with text properties
 
 ```dojo
 <div id="chat"></div>
-$("#chat").kendoChat({
-    suggestions: [
-        { text: "Yes, please" },
-        { text: "No, thanks" },
-        { text: "Tell me more" },
-        { text: "Help" }
-    ],
-    suggestionsTemplate: function(suggestions) {
-        let html = "<div class='custom-suggestions'>";
-        html += "<span class='suggestions-label'>Quick replies:</span>";
-        
-        for (let i = 0; i < suggestions.length; i++) {
-            html += "<button class='custom-suggestion-btn'>";
-            html += "<span class='suggestion-icon'>💬</span>";
-            html += suggestions[i].text;
-            html += "</button>";
+<script>
+    $("#chat").kendoChat({
+        suggestions: [
+            { text: "Yes, please" },
+            { text: "No, thanks" },
+            { text: "Tell me more" },
+            { text: "Help" }
+        ],
+        suggestionsTemplate: function(suggestions) {
+            let html = "<div class='custom-suggestions'>";
+            html += "<span class='suggestions-label'>Quick replies: </span>";
+            
+            for (let i = 0; i < suggestions.length; i++) {
+                html += "<button class='k-button k-button-md k-rounded-md'>";
+                html += "<span class='suggestion-icon'>💬</span>";
+                html += suggestions[i].text;
+                html += "</button>";
+            }
+            
+            html += "</div>";
+            return html;
         }
-        
-        html += "</div>";
-        return html;
-    }
-});
-kendo.ui.icon($(".action-icon"), { icon: 'hand' });
+    });
+</script>
 ```
 
 ## Timestamp Templates
