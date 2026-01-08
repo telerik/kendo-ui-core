@@ -183,6 +183,7 @@ The following example demonstrates the basic configuration for the Map component
 
 * [Getting Started with the Map]({% slug aspnetcore_map_getting_started %})
 * [Basic Usage of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/index)
+* [Azure Tile Layout of the Map for {{ site.framework }}]({% slug azure-tiles %})
 * [Map Events]({% slug events_map_aspnetcore %})
 
 ## See Also

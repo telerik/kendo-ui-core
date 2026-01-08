@@ -95,13 +95,17 @@ How can I have separate sheets for the rows of the master Grid and for all detai
               to: headerColumnsCount
             };
 
-            // save the workbook
-           kendo.saveAs({
-              dataURI: new kendo.ooxml.Workbook({
+             var result = new kendo.ooxml.Workbook({
                 sheets: sheets
-              }).toDataURL(),
-              fileName: "Employees and Orders.xlsx"
-            });
+              });
+              
+            // save the workbook
+            result.toDataURLAsync().then(function(dataURL) {
+                  kendo.saveAs({
+     				 dataURI: dataURL,
+     				 fileName: "Test.xlsx"
+    			  });
+             });
           });
         },
         columns: [

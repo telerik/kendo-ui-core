@@ -43,17 +43,14 @@ How can I export to Excel filtered Grid data when columns and data fields inform
 3. Use the [`saveAs`](/api/javascript/kendo/methods/saveas) method to save the generated excel file.
 
 ```dojo
-    <div id="grid" style="width:1000px;"></div>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
     <button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" onclick="exportFilteredData()">Export filtered data</button>
+    <div id="grid"></div>
 
     <script>
       var isDateField =[];
-      $.ajax({
-        url: "https://www.mocky.io/v2/5835e736110000020e0c003c"
-        success: function(result) {
-          generateGrid(result);
-        }
-      });
+      generateGrid(products);
 
       function generateGrid(response) {
         var model = generateModel(response);
@@ -63,7 +60,7 @@ How can I export to Excel filtered Grid data when columns and data fields inform
           dataSource: {
             transport:{
               read:  function(options){
-                options.success(response.data);
+                options.success(response);
               }
             },
             pageSize: 5,
@@ -81,7 +78,7 @@ How can I export to Excel filtered Grid data when columns and data fields inform
       var columnNames;
 
       function generateColumns(response){
-        columnNames = response["columns"];
+        columnNames = Object.keys(response[0]);
         return columnNames.map(function(name){
           return { field: name, format: (isDateField[name] ? "{0:D}" : "") };
         })
@@ -89,8 +86,7 @@ How can I export to Excel filtered Grid data when columns and data fields inform
 
       function generateModel(response) {
 
-        var sampleDataItem = response["data"][0];
-
+        var sampleDataItem = response[0];
         var model = {};
         var fields = {};
         for (var property in sampleDataItem) {
@@ -186,7 +182,12 @@ How can I export to Excel filtered Grid data when columns and data fields inform
           ]
         });
         // Save the file as an Excel file with the xlsx extension.
-        kendo.saveAs({dataURI: workbook.toDataURL(), fileName: "Test.xlsx"});
+        workbook.toDataURLAsync().then(function(dataURL) {
+   		 kendo.saveAs({
+          dataURI: dataURL,
+     	  fileName: "Test.xlsx"
+    	 });
+	   });
       }
     </script>
 ```

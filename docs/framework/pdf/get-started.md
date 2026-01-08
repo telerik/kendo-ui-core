@@ -164,10 +164,12 @@ You can convert the generated PDF to Data URI or a Blob. By doing so you can att
         // This form simulates an <input type="file" name="pdfFile" />.
         var form = new FormData();
         form.append("pdfFile", blob);
+        console.info(form.get("pdfFile"));
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/posturl", true);
-        xhr.send(form);
+        // Post the content to the server which can save it.
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("POST", "/posturl", true);
+        // xhr.send(form);
     });
 
     // Alternatively, you can get it as a data URL.
