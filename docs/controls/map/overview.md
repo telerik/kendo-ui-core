@@ -18,6 +18,7 @@ It also provides tile layers, shape (vector) layers, and marker layers.
 ## Functionality and Features
 
 * [Layers]({% slug maplayers_mapwidget %})&mdash;Learn the possible options to render the layers.
+* [Azure Tiles]({% slug azure-tiles %})&mdash;Learn how to integrate Azure Maps as a tile source by proxying tile requests through an ASP.NET Core backend.
 * [Creating maps]({% slug mapauthoring_mapwidget %})&mdash;You can create your own map using datasets.
 * [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)&mdash;You can configure the Map to work with Azure service.
 

@@ -62,7 +62,7 @@ var rows = [{
 })
 ```
 
-* Instantiate a kendo.ooxml.Workbook component. The workbook has an array of sheets, where you can set their width and title, and set the rows property to the already created rows array. After that, call the [`toDataURL()`](/api/javascript/ooxml/workbook/methods/todataurl) method of the workbook to get the output Excel file as a data URI. 
+* Instantiate a kendo.ooxml.Workbook component. The workbook has an array of sheets, where you can set their width and title, and set the rows property to the already created rows array. After that, call the [`toDataURLAsync()`](/api/javascript/ooxml/workbook/methods/todataurlasync) method of the workbook to get the output Excel file as a data URI. 
 
 ```js
 var workbook = new kendo.ooxml.Workbook({
@@ -82,7 +82,12 @@ var workbook = new kendo.ooxml.Workbook({
     ]
 });
 // Save the file as an Excel file with the xlsx extension.
-kendo.saveAs({ dataURI: workbook.toDataURL(), fileName: "Test.xlsx" });
+workbook.toDataURLAsync().then(function(dataURL) {
+  kendo.saveAs({
+	 dataURI: dataURL,
+	 fileName: "Test.xlsx"
+  });
+});
 ```
 The following example demonstrates a full implementation of the described approach:
 
@@ -145,7 +150,12 @@ The following example demonstrates a full implementation of the described approa
                 });
 
                 // Save the file as an Excel file with the xlsx extension.
-                kendo.saveAs({ dataURI: workbook.toDataURL(), fileName: "Test.xlsx" });
+                workbook.toDataURLAsync().then(function(dataURL) {
+                  kendo.saveAs({
+     				 dataURI: dataURL,
+     				 fileName: "Test.xlsx"
+    			  });
+                });
             })
 
             $("#listView").kendoListView({

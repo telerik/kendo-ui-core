@@ -196,15 +196,19 @@ To send the generated file to a remote service, prevent the default file saving 
             excelExport: function(e) {
                 // Prevent the default behavior which will prompt the user to save the generated file.
                 e.preventDefault();
+                
                 // Get the Excel file as a data URL.
-                var dataURL = new kendo.ooxml.Workbook(e.workbook).toDataURL();
-                // Strip the data URL prologue.
-                var base64 = dataURL.split(";base64,")[1];
-                // Post the base64 encoded content to the server which can save it.
-                $.post("/server/save", {
-                    base64: base64,
-                    fileName: "ExcelExport.xlsx"
-                });
+                new kendo.ooxml.Workbook(e.workbook).toDataURLAsync().then(function(dataURL) {
+					// Strip the data URL prologue.
+               	    var base64 = dataURL.split(";base64,")[1];
+                    console.log("Post to Server: " + base64);
+                    
+                    // Post the base64 encoded content to the server which can save it.
+                    // $.post("/server/save", {
+                    //   base64: base64,
+                    //   fileName: "ExcelExport.xlsx"
+                    //  });
+				});
             }
         });
     </script>

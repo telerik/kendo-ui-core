@@ -95,7 +95,12 @@ Here is some example logic that can be used:
               rows: rows
             }]
           });
-          kendo.saveAs({dataURI: workbook.toDataURL(), fileName: "Test.xlsx"});
+          workbook.toDataURLAsync().then(function(dataURL) {
+            kendo.saveAs({
+     		 dataURI: dataURL,
+     		 fileName: "Test.xlsx"
+    	   });
+          });
         }
 
         function generateModel(data) {

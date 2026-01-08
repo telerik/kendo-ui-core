@@ -151,9 +151,11 @@ How can I export each group in a separate Excel sheet with the Kendo UI Grid?
             let fileName = e.sender.options.excel.fileName;
 
             // Save the workbook.
-            kendo.saveAs({
-                dataURI: workbook.toDataURL(),
-                fileName: fileName
+            workbook.toDataURLAsync().then(function(dataURL) {
+              kendo.saveAs({
+     	   	 dataURI: dataURL,
+     	   	 fileName: "Test.xlsx"
+    	     });
             });
         }
     }
