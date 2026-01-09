@@ -1,5 +1,5 @@
 ---
-comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `npx gulp js-dependencies`.
 title: Diagrams and Maps
 page_title: Individual Scripts for Diagrams and Maps - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Diagrams and Maps"
@@ -14,6 +14,7 @@ The following table lists the individual script files for the Kendo UI Diagram a
 | Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Diagram](https://demos.telerik.com/kendo-ui/diagram/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
@@ -22,36 +23,55 @@ The following table lists the individual script files for the Kendo UI Diagram a
 | | kendo.mobile.scroller.js | |
 | | kendo.color.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
-| | kendo.html.base.js | |
-| | kendo.html.button.js | |
 | | kendo.button.menu.js | |
+| | kendo.html.button.js | |
 | | kendo.splitbutton.js | |
 | | kendo.dropdownbutton.js | |
+| | kendo.badge.js | |
+| | kendo.button.js | |
+| | kendo.togglebutton.js | |
+| | kendo.buttongroup.js | |
+| | kendo.data.odata.js | |
+| | kendo.menu.js | |
 | | kendo.toolbar.js | |
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.toggleinputbase.js | Editing feature (optional) |
 | | kendo.html.input.js | Editing feature (optional) |
 | | kendo.checkbox.js | Editing feature (optional) |
+| | kendo.floatinglabel.js | Editing feature (optional) |
+| | kendo.label.js | Editing feature (optional) |
+| | kendo.actionsheet.view.js | Editing feature (optional) |
+| | kendo.actionsheet.js | Editing feature (optional) |
 | | kendo.list.js | Editing feature (optional) |
 | | kendo.dropdownlist.js | Editing feature (optional) |
 | | kendo.selectable.js | Editing feature (optional) |
 | | kendo.calendar.js | Editing feature (optional) |
 | | kendo.datepicker.js | Editing feature (optional) |
-| | kendo.floatinglabel.js | Editing feature (optional) |
 | | kendo.numerictextbox.js | Editing feature (optional) |
 | | kendo.validator.js | Editing feature (optional) |
 | | kendo.binder.js | Editing feature (optional) |
+| | kendo.combobox.js | Editing feature (optional) |
+| | kendo.html.chip.js | Editing feature (optional) |
+| | kendo.html.chiplist.js | Editing feature (optional) |
+| | kendo.multiselect.js | Editing feature (optional) |
 | | kendo.editable.js | Editing feature (optional) |
 | | kendo.window.js | Editing feature (optional) |
 | | kendo.dataviz.diagram.js | |
 | [Map](https://demos.telerik.com/kendo-ui/map/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.tooltip.js | |
 | | kendo.color.js | |
 | | kendo.drawing.js | |
@@ -75,6 +95,5 @@ The following table lists the individual script files for the Kendo UI Diagram a
 + [Scripts for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Scripts for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Scripts for Media]({% slug script_filesfor_media_widgets %})
-+ [Scripts for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Scripts for Framework and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Scripts for PDF]({% slug script_filesfor_pdf %})

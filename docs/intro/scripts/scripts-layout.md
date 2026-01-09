@@ -1,5 +1,5 @@
 ---
-comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `npx gulp js-dependencies`.
 title: Layout
 page_title: Individual Scripts for Layout - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Layout"
@@ -14,18 +14,32 @@ The following table lists the individual script files for the Kendo UI component
 | Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Badge](https://demos.telerik.com/kendo-ui/badge/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.badge.js | |
 | [Dialog](https://demos.telerik.com/kendo-ui/dialog/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.floatinglabel.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.textbox.js | |
+| | kendo.html.button.js | |
 | | kendo.dialog.js | |
 | [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.expansionpanel.js | |
 | [Form](https://demos.telerik.com/kendo-ui/form/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.toggleinputbase.js | |
 | | kendo.html.base.js | |
@@ -33,23 +47,30 @@ The following table lists the individual script files for the Kendo UI component
 | | kendo.checkbox.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
-| | kendo.list.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.label.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.html.button.js | |
+| | kendo.badge.js | |
+| | kendo.button.js | |
+| | kendo.actionsheet.view.js | |
+| | kendo.actionsheet.js | |
+| | kendo.list.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.datepicker.js | |
-| | kendo.floatinglabel.js | |
 | | kendo.numerictextbox.js | |
 | | kendo.validator.js | |
 | | kendo.binder.js | |
+| | kendo.combobox.js | |
+| | kendo.html.chip.js | |
+| | kendo.html.chiplist.js | |
+| | kendo.multiselect.js | |
 | | kendo.editable.js | |
 | | kendo.autocomplete.js | DropDowns feature (optional) |
-| | kendo.combobox.js | DropDowns feature (optional) |
-| | kendo.html.chip.js | DropDowns feature (optional) |
-| | kendo.html.chiplist.js | DropDowns feature (optional) |
-| | kendo.multiselect.js | DropDowns feature (optional) |
 | | kendo.treeview.js | DropDowns feature (optional) |
 | | kendo.dropdowntree.js | DropDowns feature (optional) |
 | | kendo.multicolumncombobox.js | DropDowns feature (optional) |
@@ -62,8 +83,6 @@ The following table lists the individual script files for the Kendo UI component
 | | kendo.draganddrop.js | Inputs feature (optional) |
 | | kendo.slider.js | Inputs feature (optional) |
 | | kendo.color.js | Inputs feature (optional) |
-| | kendo.badge.js | Inputs feature (optional) |
-| | kendo.button.js | Inputs feature (optional) |
 | | kendo.textbox.js | Inputs feature (optional) |
 | | kendo.colorpicker.js | Inputs feature (optional) |
 | | kendo.inputgroupbase.js | Inputs feature (optional) |
@@ -71,38 +90,107 @@ The following table lists the individual script files for the Kendo UI component
 | | kendo.radiogroup.js | Inputs feature (optional) |
 | | kendo.checkboxgroup.js | Inputs feature (optional) |
 | | kendo.textarea.js | Inputs feature (optional) |
-| | kendo.combobox.js | Editor feature (optional) |
+| | kendo.otpinput.js | Inputs feature (optional) |
+| | kendo.progressbar.js | Upload feature (optional) |
+| | kendo.upload.js | Upload feature (optional) |
 | | kendo.draganddrop.js | Editor feature (optional) |
 | | kendo.window.js | Editor feature (optional) |
 | | kendo.color.js | Editor feature (optional) |
 | | kendo.slider.js | Editor feature (optional) |
-| | kendo.badge.js | Editor feature (optional) |
-| | kendo.button.js | Editor feature (optional) |
 | | kendo.textbox.js | Editor feature (optional) |
 | | kendo.colorpicker.js | Editor feature (optional) |
+| | kendo.button.menu.js | Editor feature (optional) |
+| | kendo.splitbutton.js | Editor feature (optional) |
+| | kendo.dropdownbutton.js | Editor feature (optional) |
+| | kendo.togglebutton.js | Editor feature (optional) |
+| | kendo.buttongroup.js | Editor feature (optional) |
+| | kendo.data.odata.js | Editor feature (optional) |
+| | kendo.menu.js | Editor feature (optional) |
+| | kendo.toolbar.js | Editor feature (optional) |
 | | kendo.editor.js | Editor feature (optional) |
 | | kendo.form.js | |
 | [Notification](https://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.notification.js | |
 | [Popover](https://demos.telerik.com/kendo-ui/popover/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.tooltip.js | |
+| | kendo.html.button.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.popover.js | |
 | [Responsive Panel](https://demos.telerik.com/kendo-ui/responsive-panel/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.responsive-panel.js | |
 | [Splitter](https://demos.telerik.com/kendo-ui/splitter/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.resizable.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.splitter.js | |
+| [TaskBoard](https://demos.telerik.com/kendo-ui/taskboard/index) | jquery.js | |
+| | kendo.licensing.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.userevents.js | |
+| | kendo.draganddrop.js | |
+| | kendo.sortable.js | |
+| | kendo.popup.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
+| | kendo.textbox.js | |
+| | kendo.html.button.js | |
+| | kendo.dialog.js | |
+| | kendo.toggleinputbase.js | |
+| | kendo.html.input.js | |
+| | kendo.checkbox.js | |
+| | kendo.label.js | |
+| | kendo.badge.js | |
+| | kendo.button.js | |
+| | kendo.actionsheet.view.js | |
+| | kendo.actionsheet.js | |
+| | kendo.list.js | |
+| | kendo.dropdownlist.js | |
+| | kendo.selectable.js | |
+| | kendo.calendar.js | |
+| | kendo.datepicker.js | |
+| | kendo.numerictextbox.js | |
+| | kendo.validator.js | |
+| | kendo.binder.js | |
+| | kendo.combobox.js | |
+| | kendo.html.chip.js | |
+| | kendo.html.chiplist.js | |
+| | kendo.multiselect.js | |
+| | kendo.editable.js | |
+| | kendo.form.js | |
+| | kendo.data.odata.js | |
+| | kendo.menu.js | |
+| | kendo.button.menu.js | |
+| | kendo.splitbutton.js | |
+| | kendo.dropdownbutton.js | |
+| | kendo.togglebutton.js | |
+| | kendo.buttongroup.js | |
+| | kendo.toolbar.js | |
+| | kendo.taskboard.js | |
 | [TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | Resizable feature (optional) |
 | | kendo.draganddrop.js | Resizable feature (optional) |
@@ -111,15 +199,23 @@ The following table lists the individual script files for the Kendo UI component
 | | kendo.draganddrop.js | Reorderable feature (optional) |
 | | kendo.tilelayout.js | |
 | [Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.tooltip.js | |
 | [Window](https://demos.telerik.com/kendo-ui/window/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.window.js | |
 
@@ -137,6 +233,5 @@ The following table lists the individual script files for the Kendo UI component
 + [Scripts for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Scripts for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Scripts for Media]({% slug script_filesfor_media_widgets %})
-+ [Scripts for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Scripts for Framework and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Scripts for PDF]({% slug script_filesfor_pdf %})

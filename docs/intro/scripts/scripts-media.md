@@ -1,5 +1,5 @@
 ---
-comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `npx gulp js-dependencies`.
 title: Media
 page_title: Individual Scripts for Media - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Media"
@@ -14,28 +14,45 @@ The following table lists the individual script files for the Kendo UI Media com
 | Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
-| | kendo.slider.js | |
 | | kendo.html.base.js | |
-| | kendo.html.button.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
+| | kendo.slider.js | |
 | | kendo.popup.js | |
 | | kendo.button.menu.js | |
+| | kendo.html.button.js | |
 | | kendo.splitbutton.js | |
 | | kendo.dropdownbutton.js | |
-| | kendo.toolbar.js | |
+| | kendo.badge.js | |
+| | kendo.button.js | |
+| | kendo.togglebutton.js | |
+| | kendo.buttongroup.js | |
 | | kendo.data.js | |
+| | kendo.data.odata.js | |
+| | kendo.menu.js | |
+| | kendo.toolbar.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.label.js | |
+| | kendo.actionsheet.view.js | |
+| | kendo.actionsheet.js | |
 | | kendo.list.js | |
 | | kendo.dropdownlist.js | |
 | | kendo.tooltip.js | |
 | | kendo.mediaplayer.js | |
 | [ScrollView](https://demos.telerik.com/kendo-ui/scrollview/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.scrollview.js | |
 
 ## See Also
@@ -52,6 +69,5 @@ The following table lists the individual script files for the Kendo UI Media com
 + [Scripts for Layout]({% slug script_filesfor_layout_widgets %})
 + [Scripts for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Scripts for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
-+ [Scripts for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Scripts for Framework and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Scripts for PDF]({% slug script_filesfor_pdf %})

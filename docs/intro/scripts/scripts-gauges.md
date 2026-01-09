@@ -1,5 +1,5 @@
 ---
-comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `npx gulp js-dependencies`.
 title: Gauges
 page_title: Individual Scripts for Gauges - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Gauges"
@@ -14,9 +14,13 @@ The following table lists the individual script files for the Kendo UI Gauges.&n
 | Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Gauge](https://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
 | | kendo.popup.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
@@ -36,6 +40,5 @@ The following table lists the individual script files for the Kendo UI Gauges.&n
 + [Scripts for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Scripts for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Scripts for Media]({% slug script_filesfor_media_widgets %})
-+ [Scripts for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Scripts for Framework and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Scripts for PDF]({% slug script_filesfor_pdf %})
