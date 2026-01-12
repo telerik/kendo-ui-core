@@ -875,3 +875,7 @@ redirects:
 
 - from: "^/tag-helpers/(.*)$"
   to: "/html-helpers/$1"
+
+- from: ^/html-helpers/([^/]+)/([^/]+)/?$
+  to: /html-helpers/$1/$2/overview
+
