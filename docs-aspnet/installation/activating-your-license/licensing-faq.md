@@ -113,6 +113,66 @@ If you are working under source control, once the file is created, it will be de
 
 You can find a Bill of Materials (BOM) and a list of the third-party software, including open-source software, in the `\LicenseAgreements\ThirdParty\NOTICE.txt` location in your Telerik controls installation folder. For example, the default location for the Q4 2024 release is `C:\Program Files (x86)\Progress\{{ site.product }} 2024 Q4\license-agreements\third-party\NOTICE.txt`. For versions prior to R2 2018 SP1, the file is called `licenses.txt`.
 
+## How does the new ASP.NET Core and MVC licensing model work?
+
+Licensing is enforced through the `Telerik.Licensing` package, which uses an MSBuild task to validate that a developer has an associated dev seat by evaluating `telerik-license.txt` in `%AppData%`. In Release builds, the build task provisions the compiled deliverables with license metadata. At runtime, checks validate that the application was compiled with a valid license. Compiled binaries do not expire after license expiration.
+
+## Why is placing the license file in %AppData% required, and how is this location discovered by MSBuild or the runtime?
+
+The `telerik-license.txt` file in `%AppData%` is the mechanism used to provision that a developer has an associated dev seat. For developers working with ASP.NET Core or MVC, `%AppData%` is the only supported location. Environment variables or alternative locations are intended only for CI or service scenarios.
+
+## Are there officially supported alternatives to %AppData% license placement (project-level, environment variables, CI secrets)?
+
+Supported alternatives exist only for CI and service scenarios. Environment variables or writing the license file outside `%AppData%` are intended solely for CI builds or service provisioning, not for local developer workstations.
+
+## Which NuGet package is required for licensing?
+
+You need the `Telerik.Licensing` package from NuGet.org. It is a utility package used to detect Telerik products and implement build-time and runtime license validation.
+
+## Why do the docs reference Telerik.UI.for.AspNet.Core / Telerik.UI.for.AspNet.Mvc5 packages that are not discoverable via NuGet search?
+
+These packages are not publicly available on NuGet.org. They are currently available only from the private `nuget.telerik.com` feed.
+
+## Should customers explicitly reference Telerik.Licensing, or should it always be resolved transitively?
+
+In simple dependency chains (exe → UI → Telerik.Licensing), transitive resolution is sufficient. In chained scenarios (exe → class library → UI → Telerik.Licensing), the build task does not propagate automatically, so `Telerik.Licensing` must be referenced explicitly in each project in the chain. Customers may also explicitly reference it to obtain fixes or new features.
+
+## What is the officially recommended licensing setup path today: automatic or manual?
+
+Install `telerik-license.txt` in `%AppData%`. In dependency chains involving class libraries, add the `Telerik.Licensing` package to each project in the chain.
+
+## What is the officially supported way to activate licensing in CI/CD pipelines?
+
+Use secure files or secrets in the CI system. A trusted developer uploads `telerik-license.txt` as a secure file. After repository checkout and before build, the file is written to disk for the build, and removed after completion.
+
+## Is there an official MSBuild target, CLI command, or script for pipeline licensing?
+
+Licensing is enforced via an MSBuild task included in `Telerik.Licensing`. There is no single mandatory approach; multiple supported approaches exist depending on the environment.
+
+## Are there validated CI/CD examples for Azure DevOps, GitHub Actions, and Jenkins?
+
+Yes. Multiple approaches are documented for Azure DevOps and GitHub Actions. The correct approach depends on the customer’s environment and requirements. There is no single universal example.
+
+## In which scenarios are script keys required instead of file/NuGet-based licensing?
+
+Script keys are required when build tasks cannot be used. Examples include: MVC/AJAX and WebForms-style projects that compile C# dynamically, WinForms plugins with custom C++ compilation, CDN or script-tag usage without licensing packages, and certain library scenarios. In most application projects, `telerik-license.txt` is sufficient.
+
+## What script-loading patterns can prevent license detection?
+
+Using `async` or `defer` attributes, or loading the licensing script before the Kendo UI scripts, can cause the licensing script to execute too early and fail detection.
+
+## Is there a recommended “safe minimum” script loading order for license detection?
+
+The script key should be loaded after the Kendo UI scripts but before the first usage of Kendo components.
+
+## Are there licensing behavior differences between pre-2023 and post-2023 builds?
+
+Licensing behavior differs due to changes in licensing enforcement and subscription handling. Version numbers themselves are not equivalent to licensing behavior.
+
+## How should Telerik.Licensing.Runtime assemblies be managed in MVC apps?
+
+In projects that cannot use build tasks (such as certain MVC/AJAX or WebForms-style scenarios), script keys must be embedded manually and `Telerik.Licensing.Runtime.dll` must be referenced explicitly. In standard NuGet-based MVC projects, runtime assemblies are handled automatically.
+
 ## Next Steps
 
 * [Set Up the Telerik NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%})
