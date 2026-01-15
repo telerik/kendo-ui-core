@@ -113,8 +113,7 @@ By default, the Grid exports only the current page of data. To export all pages,
 
 To customize the generated Excel file, use the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-* For more information on Excel export, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation) and the [Excel Export Appearance article]({% slug appearance_excelexport_kendoui %}).
-* For more information on setting the background color of alternating rows while exporting the Grid to Excel, refer to [this example]({% slug howto_configure_color_alternating_rows_grid %}).
+For a comprehensive guide on all available customization options, refer to the [Excel Export Customization]({% slug excelexport_customization_kendoui_grid %}) article.
 
 ### Exporting Right-to-Left Content
 

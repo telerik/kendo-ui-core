@@ -21,8 +21,8 @@ The Telerik {{ site.framework }} [MCP Server](https://modelcontextprotocol.io/in
 
 To use the Telerik {{ site.framework }} MCP server, you need:
 
-* [Node.js 18](https://nodejs.org/en) or a newer version.
-* A [compatible MCP client (IDE, code editor or app)](https://modelcontextprotocol.io/clients) that supports *MCP tools*.
+* [.NET 8](https://dotnet.microsoft.com/en-us/download) or a newer version.
+* A [compatible MCP client (IDE, code editor or app)](https://modelcontextprotocol.io/clients) that supports *MCP tools*. Using the latest version of the MCP client is highly recommended.
 * A [Telerik user account](https://www.telerik.com/account/).
 * An active [DevCraft or {{ site.product }} license](https://www.telerik.com/purchase/{{ telerik_product_url }}) or a [{{ site.product }} trial](https://www.telerik.com/{{ telerik_product_url}}).
 * An [{{ site.framework }} application that includes {{ site.product }}](slug:overview_aspnetmvc6_aspnetmvc).
@@ -34,30 +34,39 @@ Use the documentation of your AI-powered MCP client to add the Telerik {{ site.f
 {% if site.mvc %}
 The generic settings of the Telerik {{ site.framework }} MCP server are:
 
-* npm package name: `@progress/telerik-aspnetmvc-mcp`
-* Type: `stdio` (standard input/output transport)
-* Command: `npx` (the MCP server works through an npm package)
-* Arguments: `-y`
 * Server name: `telerik-aspnetmvc-assistant`
+* Type: `stdio` (standard input/output transport)
+* Command: `dnx` (the MCP server is distributed as a NuGet package)
+* Supported arguments: `--yes`
+* NuGet package name: `Telerik.AspNetMvc.MCP`
+* You also need to add your [Telerik licence key](slug:installation_license_key_aspnetcore) as an `env` parameter in the `mcp.json` file. Place the file at `%AppData%/Telerik/telerik-license.txt`; OR alternatively:
+    * Use a `TELERIK_LICENSE_PATH` argument and point to your Telerik license file location.
+    * Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key](slug:installation_license_key_aspnetcore#license-key-updates) when necessary.
 {% endif %}
 
 {% if site.core %}
 The generic settings of the Telerik {{ site.framework }} MCP server are:
 
-* npm package name: `@progress/telerik-aspnetcore-html-mcp` for HtmlHelper and `@progress/telerik-aspnetcore-tag-mcp` for TagHelper
-* Type: `stdio` (standard input/output transport)
-* Command: `npx` (the MCP server works through an npm package)
-* Arguments: `-y`
-* Server name: `telerik-aspnetcorehtml-assistant` for HtmlHelper and `telerik-aspnetcoretag-assistant` for TagHelper
+* Telerik {{ site.framework }} HtmlHelpers MCP Server:
+    * Server name: `telerik-aspnetcorehtml-assistant`
+    * Type: `stdio` (standard input/output transport)
+    * Command: `dnx` (the MCP server is distributed as a NuGet package)
+    * Supported arguments: `--yes`
+    * NuGet package name: `Telerik.ASPNETCoreHtml.MCP`
+* Telerik {{ site.framework }} TagHelpers MCP Server:
+    * Server name: `telerik-aspnetcoretag-assistant`
+    * Type: `stdio` (standard input/output transport)
+    * Command: `dnx`
+    * Supported arguments: `--yes`
+    * NuGet package name: `Telerik.ASPNETCoreTag.MCP`
+* You also need to add your [Telerik licence key](slug:installation_license_key_aspnetcore) as an `env` parameter in the `mcp.json` file. Place the file at `%AppData%/Telerik/telerik-license.txt`; OR alternatively:
+    * Use a `TELERIK_LICENSE_PATH` argument and point to your Telerik license file location.
+    * Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key](slug:installation_license_key_aspnetcore#license-key-updates) when necessary.
 {% endif %}
 
-You also need to add your [Telerik licence key](slug:installation_license_key_aspnetcore) as an `env` parameter in the `mcp.json` file. There are two options:
-
-* (recommended) Use a `TELERIK_LICENSE_PATH` argument and point to the location of your Telerik license file.
-* Use a `TELERIK_LICENSE` argument and paste your Telerik license key. Make sure to [update the license key](slug:installation_license_key_aspnetcore#license-key-updates) when necessary.
-
 > * Some MCP clients expect the MCP servers to be listed under a `servers` JSON key, while others expect `mcpServers`.
-> * Some MCP clients expect an `mcp.json` file, while others like Visual Studio 2022 expect an `.mcp.json` file.
+> * Some MCP clients expect an `mcp.json` file, while others like Visual Studio expect an `.mcp.json` file.
+> * Some MCP clients, including older Visual Studio versions, may not accept a server name that uses hyphens (`-`) or underscores (`_`). In such cases, update the MCP client version or use a different server name.
 
 ### Visual Studio
 
@@ -78,15 +87,11 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
     "servers": {
       "telerik-aspnetmvc-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": ["-y", "@progress/telerik-aspnetmvc-mcp@latest"],
-        "env": {
-          "TELERIK_LICENSE_PATH": "THE_PATH_TO_YOUR_LICENSE_FILE",
-          // or
-          "TELERIK_LICENSE": "YOUR_LICENSE_KEY"
-        }
+        "command": "dnx",
+        "args": ["Telerik.AspNetMvc.MCP", "--yes"]
       }
-    }
+    },
+    "inputs": []
   }
   ```
 {% endif %}
@@ -102,13 +107,11 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
     "servers": {
       "telerik-aspnetcorehtml-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": [ "-y", "@progress/telerik-aspnetcore-html-mcp@latest" ],
-        "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
-        }
+        "command": "dnx",
+        "args": ["Telerik.ASPNETCoreHtml.MCP", "--yes"]
       }
-    }
+    },
+    "inputs": []
   }
   ```
 
@@ -121,13 +124,11 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
     "servers": {
       "telerik-aspnetcoretag-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
-        "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
-        }
+        "command": "dnx",
+        "args": ["Telerik.ASPNETCoreTag.MCP", "--yes"]
       }
-    }
+    },
+    "inputs": []
   }
   ```
 {% endif %}
@@ -158,15 +159,11 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
     "servers": {
       "telerik-aspnetmvc-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": ["-y", "@progress/telerik-aspnetmvc-mcp@latest"],
-        "env": {
-          "TELERIK_LICENSE_PATH": "THE_PATH_TO_YOUR_LICENSE_FILE",
-          // or
-          "TELERIK_LICENSE": "YOUR_LICENSE_KEY"
-        }
+        "command": "dnx",
+        "args": ["Telerik.AspNetMvc.MCP", "--yes"]
       }
-    }
+    },
+    "inputs": []
   }
   ```
 {% endif %}
@@ -182,13 +179,11 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
     "servers": {
       "telerik-aspnetcorehtml-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": [ "-y", "@progress/telerik-aspnetcore-html-mcp@latest" ],
-        "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
-        }
+        "command": "dnx",
+        "args": ["Telerik.ASPNETCoreHtml.MCP", "--yes"]
       }
-    }
+    },
+    "inputs": []
   }
   ```
 
@@ -201,13 +196,11 @@ To enable the Telerik MCP Servers in a specific [workspace](https://code.visuals
     "servers": {
       "telerik-aspnetcoretag-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
-        "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
-        }
+        "command": "dnx",
+        "args": ["Telerik.ASPNETCoreTag.MCP", "--yes"]
       }
-    }
+    },
+    "inputs": []
   }
   ```
 {% endif %}
@@ -252,13 +245,8 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
     "mcpServers": {
       "telerik-aspnetmvc-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": ["-y", "@progress/telerik-aspnetmvc-mcp@latest"],
-        "env": {
-          "TELERIK_LICENSE_PATH": "THE_PATH_TO_YOUR_LICENSE_FILE",
-          // or
-          "TELERIK_LICENSE": "YOUR_LICENSE_KEY"
-        }
+        "command": "dnx",
+        "args": ["Telerik.AspNetMvc.MCP", "--yes"]
       }
     }
   }
@@ -276,11 +264,8 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
     "mcpServers": {
       "telerik-aspnetcorehtml-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": [ "-y", "@progress/telerik-aspnetcore-html-mcp@latest" ],
-        "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
-        }
+        "command": "dnx",
+        "args": ["Telerik.ASPNETCoreHtml.MCP", "--yes"]
       }
     }
   }
@@ -295,11 +280,8 @@ To enable the Telerik MCP servers in [a specific workspace](https://docs.cursor.
     "mcpServers": {
       "telerik-aspnetcoretag-assistant": {
         "type": "stdio",
-        "command": "npx",
-        "args": [ "-y", "@progress/telerik-aspnetcore-tag-mcp@latest" ],
-        "env": {
-          "TELERIK_LICENSE_PATH": "C:\\Users\\___\\AppData\\Roaming\\Telerik\\telerik-license.txt"
-        }
+        "command": "dnx",
+        "args": ["Telerik.ASPNETCoreTag.MCP", "--yes"]
       }
     }
   }
@@ -315,6 +297,78 @@ This enables you to call the respective MCP Server with the `#telerik-aspnetcore
 #### Global Configuration
 
 To add the Telerik MCP Servers [globally for Cursor](https://docs.cursor.com/context/mcp#configuration-locations), add a `.cursor` folder with the above `mcp.json` file in your user folder.
+
+### .NET 8 & 9 Local Tool Installation
+
+{% if site.mvc %}
+For .NET 8 and 9 projects, you can install the MCP server as a local tool without global installation:
+
+```bash
+dotnet tool install Telerik.AspNetMvc.MCP
+```
+
+#### MCP Configuration for .NET 8 & 9 Local Tools
+For VS Code `.vscode/mcp.json` using local tools:
+
+```JSON
+{
+  "servers": {
+    "telerik-aspnetmvc-assistant": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": ["tool", "run", "telerik-aspnetmvc-assistant"]
+    }
+  },
+  "inputs": []
+}
+```
+{% endif %}
+
+{% if site.core %}
+* Telerik.ASPNETCoreHtml.MCP:
+
+```bash
+dotnet tool install Telerik.ASPNETCoreHtml.MCP
+```
+
+#### MCP Configuration for .NET 8 & 9 Local Tools
+For VS Code `.vscode/mcp.json` using local tools:
+
+```JSON
+{
+  "servers": {
+    "telerik-aspnetcorehtml-assistant": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": ["tool", "run", "telerik-aspnetcorehtml-assistant"]
+    }
+  },
+  "inputs": []
+}
+```
+
+* Telerik.ASPNETCoreTag.MCP:
+
+```bash
+dotnet tool install Telerik.ASPNETCoreTag.MCP
+```
+
+#### MCP Configuration for .NET 8 & 9 Local Tools
+For VS Code `.vscode/mcp.json` using local tools:
+
+```JSON
+{
+  "servers": {
+    "telerik-aspnetcoretag-assistant": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": ["tool", "run", "telerik-aspnetcoretag-assistant"]
+    }
+  },
+  "inputs": []
+}
+```
+{% endif %}
 
 ## Usage
 

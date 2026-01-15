@@ -5,7 +5,7 @@ description: "Get started with the jQuery Grid by Kendo UI allowing you to selec
 components: ["grid"]
 previous_url: /print-export
 slug: printing_kendoui_grid
-position: 3
+position: 4
 ---
 
 # Printing
