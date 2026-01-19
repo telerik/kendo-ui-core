@@ -68,7 +68,8 @@ The generic settings of the Telerik {{ site.framework }} MCP server are:
 > * Some MCP clients expect an `mcp.json` file, while others like Visual Studio expect an `.mcp.json` file.
 > * Some MCP clients, including older Visual Studio versions, may not accept a server name that uses hyphens (`-`) or underscores (`_`). In such cases, update the MCP client version or use a different server name.
 
-### Visual Studio
+<TabStrip>
+<TabStripTab title="Visual Studio">
 
 For detailed instructions, refer to [Use MCP servers in Visual Studio](https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers).
 
@@ -138,8 +139,8 @@ To enable the Telerik MCP Servers in a specific {{ site.framework }} app, add a 
 To enable global automatic discovery of the Telerik MCP Servers in Visual Studio, add the above `.mcp.json` file to your user directory (`%USERPROFILE%`), for example, `C:\Users\____\.mcp.json`.
 
 > Once the Telerik MCP server is added, make sure that the {% if site.mvc %}`telerik-aspnetmvc-assistant`{% endif %}{% if site.core %}`telerik-aspnetcorehtml-assistant` or `telerik-aspnetcoretag-assistant`{% endif %} tool is [enabled (checked) in the Copilot Chat window's tool selection dropdown](https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers?view=vs-2022#configuration-example-with-github-mcp-server). This dropdown opens when clicking on a wrench icon 🔧 at the bottom of the Copilot Window. The Telerik MCP server may get disabled when starting a new chat, changing threads, or relaunching Visual Studio. This is a known issue with MCP servers in general.
-
-### VS Code
+</TabStripTab>
+<TabStripTab title="Visual Studio Code">
 
 For detailed instructions, refer to [Use MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers).
 
@@ -229,7 +230,8 @@ Also, ensure that [`chat.mcp.discovery.enabled`](vscode://settings/chat.mcp.disc
 }
 ```
 
-### Cursor
+</TabStripTab>
+<TabStripTab title="Cursor">
 
 For detailed instructions, refer to [Model Context Protocol](https://docs.cursor.com/context/mcp).
 
@@ -297,6 +299,9 @@ This enables you to call the respective MCP Server with the `#telerik-aspnetcore
 #### Global Configuration
 
 To add the Telerik MCP Servers [globally for Cursor](https://docs.cursor.com/context/mcp#configuration-locations), add a `.cursor` folder with the above `mcp.json` file in your user folder.
+
+</TabStripTab>
+</TabStrip>
 
 ### .NET 8 & 9 Local Tool Installation
 
