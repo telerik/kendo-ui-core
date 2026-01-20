@@ -1,11 +1,11 @@
 ---
 title: Refreshing Generic Textbox Tooltip and Suppressing Empty Tooltip Content
-description: Learn how to refresh a generic textbox tooltip and suppress the tooltip when its content is empty using Kendo UI for ASP.NET Core ToolTip.
+description: Learn how to refresh a generic textbox tooltip and suppress the tooltip when its content is empty using Kendo UI for {{ site.product }} Tooltip.
 type: how-to
-page_title: How to Refresh and Suppress Tooltip Content in Kendo UI for ASP.NET Core ToolTip
-meta_title: How to Refresh and Suppress Tooltip Content in Kendo UI for ASP.NET Core ToolTip
+page_title: How to Refresh and Suppress Tooltip Content in {{ site.product }} Tooltip
+meta_title: How to Refresh and Suppress Tooltip Content in {{ site.product }} Tooltip
 slug: tooltip-refresh-with-dynamic-content
-tags: tooltip, ui-for-asp.net-core, refresh, suppress, textbox
+tags: tooltip, refresh, suppress, textbox
 res_type: kb
 ticketid: 1695432
 ---
@@ -16,7 +16,7 @@ ticketid: 1695432
 <tbody>
 <tr>
 <td> Product </td>
-<td>Kendo UI for ASP.NET Core ToolTip</td>
+<td>{{ site.product }} Tooltip</td>
 </tr>
 <tr>
 <td> Version </td>
@@ -32,13 +32,13 @@ I want to create a generic tooltip for textboxes in a view and refresh the toolt
 This knowledge base article also answers the following questions:
 - How to dynamically update Kendo UI ToolTip content for a textbox?
 - How to suppress Kendo UI ToolTip when textbox content is empty?
-- How to manage tooltip visibility for textboxes in Kendo UI for ASP.NET Core?
+- How to manage tooltip visibility for textboxes in {{ site.product }}?
 
 ## Solution
 
 To achieve a dynamic refresh of the tooltip content and suppress it when the textbox content is empty, follow these steps:
 
-1. Use the `Show` and `Hide` events for the [Kendo UI for ASP.NET Core ToolTip](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/layout/tooltip/overview).
+1. Use the `Show` and `Hide` events for the [{{ site.product }} Tooltip](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/layout/tooltip/overview).
 2. Dynamically update the tooltip content based on the textbox value.
 3. Apply CSS to hide the tooltip when the textbox value is empty.
 
@@ -78,6 +78,51 @@ function ttOnHide(e) {
 }
 ```
 
+## Example
+
+```dojo
+     <input id="dropdownlist" style="width:300px" />
+     <script>
+       var ddl = $("#dropdownlist").kendoDropDownList({
+         width:300,
+         size:"small",
+         dataSource: {
+           transport: {
+             read: {
+               url: 'https://jsonplaceholder.typicode.com/users',
+               dataType: 'json'
+             }
+           }
+         },
+         dataTextField: "username",
+         dataValueField: "id"
+       }).data('kendoDropDownList');
+     
+       var tooltip = ddl.wrapper.kendoTooltip({
+         filter: ".k-input-value-text",
+         position: "right",
+         width: 200,
+         content: function () {
+           return ddl.text() || "";
+         },
+         show: function(e){
+           var el = e.sender.popup.element.find(".k-tooltip-content");
+           el.text(ddl.text() || "");
+         }
+       }).data("kendoTooltip");
+     
+       function refreshTooltip(){
+         if (tooltip && tooltip.popup && tooltip.popup.visible()) {
+           tooltip.popup.element.find(".k-tooltip-content").text(ddl.text() || "");
+         }
+       }
+     
+       ddl.bind("select", refreshTooltip);
+       ddl.bind("change", refreshTooltip);
+       ddl.bind("dataBound", refreshTooltip);
+     </script>
+```
+
 ### Additional Notes:
 
 - Ensure that the tooltip's `Position` setting does not cause focus issues for the textbox. For example, setting `TooltipPosition.Bottom` can resolve such conflicts.
@@ -85,6 +130,6 @@ function ttOnHide(e) {
 
 ## See Also
 
-- [Kendo UI for ASP.NET Core ToolTip Documentation](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/layout/tooltip/overview)
+- [Kendo UI for {{ site.product }} ToolTip Documentation](https://www.telerik.com/aspnet-core-ui/documentation/html-helpers/layout/tooltip/overview)
 - [Adding ToolTips to DropDownList](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/show-tooltip-for-items)
 - [Kendo UI Tooltip API](https://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip)
