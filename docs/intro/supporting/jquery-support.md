@@ -18,12 +18,13 @@ The Kendo UI library is based on [jQuery](https://jquery.com/).
 
 ## Supported Versions
 
-Kendo UI is compatible with jQuery 1.10.x, 2.2.x and 3.7.x. Each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released.
+Kendo UI is compatible with jQuery 1.10.x, 2.2.x, 3.7.x and 4.0.0. Each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released.
 The following table provides a list of the jQuery versions that are compatible with the major Kendo UI releases and their corresponding service packs.
 
 | Major Releases												                                         | Compatible jQuery Versions    |
 | :---															                                             | :---			         |
-| [Kendo UI 2025.4.1111 (2025 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-4-1111-(2025-q4))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2025.4.1321](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-4-1321)|4.0.0, 3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2025.4.1111 (2025 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-4-1111)|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2025.3.812 (2025 Q3)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-3-812-(2025-q3))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2025.2.520 (2025 Q2)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-2-520-(2025-q2))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2025.1.211 (2025 Q1)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-1-211-(2025-q1))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
