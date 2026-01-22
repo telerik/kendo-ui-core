@@ -322,7 +322,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
     ```HtmlHelper
         <script id="client-template" type="text/x-kendo-template">
             @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Product>()
-                    .Name("grid_#=CategoryID#") // make sure the Name is unuque
+                    .Name("grid_#=CategoryID#") // make sure the Name is unique
                     .Columns(columns =>
                     {
                         columns.Bound(product => product.ProductID);
