@@ -96,7 +96,7 @@ Customize the visual appearance of exported data including cell formats, colors,
 #### Visual Styling
 
 * [Alternating Row Colors](slug:howto_configure_color_alternating_rows_grid)—Set background colors for alternating rows to improve readability of exported data.
-* [Align Footer Cells](slug:footer-alignment)—Control the horizontal alignment of footer cells in the Excel export.
+* [Align Footer Cells](slug:howto_alignfootercells_grid)—Control the horizontal alignment of footer cells in the Excel export.
 * [Apply Custom Fonts](slug:grid-excel-export-custom-font)—Change the font family, size, and style of cells in the exported document.
 * [Strikethrough Text Styling](slug:grid-excel-export-strikethrough-text)—Add strikethrough formatting to specific cells or rows.
 * [Set Pattern Style Colors](slug:set-pattern-style-color-excel-export-kendo-ui-grid)—Apply background pattern styles and colors to cells.
@@ -112,8 +112,8 @@ Control which columns are exported and how they appear in the Excel file.
 
 #### Column Selection and Visibility
 
-* [Use Column Templates](slug:column-template-export)—Export column template values instead of raw data to maintain custom formatting.
-* [Export Selected Columns Only](slug:export-checked-columns-only)—Allow users to choose which columns to include in the export.
+* [Use Column Templates](slug:howto_use_column_template_grid)—Export column template values instead of raw data to maintain custom formatting.
+* [Export Selected Columns Only](slug:howto_export_checked_columns_only_grid)—Allow users to choose which columns to include in the export.
 * [Include Hidden Columns](slug:grid-include-hidden-columns-in-excel-export)—Export columns that are hidden in the Grid UI.
 
 #### Column Manipulation
@@ -144,13 +144,13 @@ Export complex data structures including master-detail relationships and grouped
 
 #### Master-Detail Exports
 
-* [Export Master and Detail Grids](slug:detail-grid-export)—Combine master and detail Grid data into a single Excel workbook.
+* [Export Master and Detail Grids](slug:howto_exportto_excel_masterand_detail_grid)—Combine master and detail Grid data into a single Excel workbook.
 * [Export Hierarchy to Separate Sheets](slug:grid-excel-export-hierarchy-master-and-detail-separate-sheets)—Place master and detail data on different Excel sheets for better organization.
 
 #### Grouped Data
 
 * [Export with Group Paging](slug:export-grid-rows-excel-group-paging)—Handle Excel export for grids using group paging functionality.
-* [Export Each Group to Separate Sheets](slug:grid-excel-export-each-group-in-separate-sheet)—Create individual Excel sheets for each data group.
+* [Export Each Group to Separate Sheets](slug:grid-excel-export-each-group-in-a-separate-sheet)—Create individual Excel sheets for each data group.
 
 ### Advanced Content
 
@@ -178,7 +178,7 @@ Customize the export process, file naming, and user interactions.
 
 #### Advanced Configuration
 
-* [Modify Exported Excel Document](slug:modify-exported-excel)—Apply comprehensive modifications to the workbook structure and content.
+* [Modify Exported Excel Document](slug:howto_modify_exported_excel_files_pivotgrid)—Apply comprehensive modifications to the workbook structure and content.
 * [Export Page Content with Grid](slug:how-to-export-page-content-and-grid-to-excel)—Include additional page elements and content alongside the Grid data.
 * [Server-Side Export](slug:grid-excel-export-server)—Implement Excel export processing on the server side.
 * [Handle Proxy Issues](slug:grid-excel-export-cannot-post-to-proxy)—Troubleshoot and resolve proxy server issues during export.
