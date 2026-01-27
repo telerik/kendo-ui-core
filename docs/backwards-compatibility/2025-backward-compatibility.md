@@ -89,6 +89,7 @@ The Kendo UI for jQuery 2025 Q2 release introduces changes in the rendering of a
 * The `k-grid-draggable-header` class and the `draggable=true` attribute have been added to the `k-grid-header` element when grouping or column reodering is enabled.
 * The `k-touch-action-none` class has been removed from the draggable cell elements due to the addition of the `k-grid-draggable-header`.
 * The `k-drag-cell` class (when row-reordering is enabled) has been removed from the `k-table-th` element.
+* The `k-popup-edit-form` class has been removed from the `k-window-content` element of the popup editing window.
 
 **Spreadsheet**
 

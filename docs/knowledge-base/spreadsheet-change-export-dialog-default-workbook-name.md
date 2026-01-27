@@ -12,11 +12,18 @@ components: ["spreadsheet"]
 
 ## Environment
 
+## Environment
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Spreadsheet for jQuery</td>
- </tr>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI for jQuery Spreadsheet</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.4.1217</td>
+</tr>
+</tbody>
 </table>
 
 
@@ -26,9 +33,17 @@ How can I change the default filename of the workbook which appears in the Expor
 
 ## Solution
 
-1. Attach a `click` event handler to the **Export** button of the Spreadsheet.
-1. Query the DOM and get a reference to the Window widget which contains the export form.
-1. Retrieve the corresponding ViewModel and update the `name` property value.
+To change the default workbook name in the Spreadsheet export dialog, follow these steps:
+
+1. Get a reference to the Spreadsheet Menu and bind to its [`select`](/api/javascript/ui/menu/events/select) event.
+
+2. When the File menu is selected, attach a click handler to the Export button.
+
+3. In the Export button click handler, locate the filename input in the visible export window and set its value.
+
+4. Use `unbind` before binding to prevent multiple event handlers if the File menu is opened repeatedly.
+
+Below is a runnable example that demonstrates the approach:
 
 ```dojo
 <div id="example">
@@ -36,7 +51,7 @@ How can I change the default filename of the workbook which appears in the Expor
 </div>
 
 <script>
-    var spread = $("#spreadsheet").kendoSpreadsheet({
+    $("#spreadsheet").kendoSpreadsheet({
         sheets: [{
             name: "Food Order",
             mergedCells: [
@@ -49,20 +64,33 @@ How can I change the default filename of the workbook which appears in the Expor
                 }]
             }],
         }]
-    }).getKendoSpreadsheet();
+    });
 
-    var downloadBtn = spread.element.find(".k-button-icon.k-i-download");
+    const spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    const menu = spreadsheet.element.find("div.k-menu").data("kendoMenu");
 
-    downloadBtn.parent().on("click", function(e) {
-      var exportPopup = $("body").find(".k-spreadsheet-window.k-popup-edit-form"),
-        workbookTextBox = exportPopup.find("[data-bind='value: name']").get(0),
-        formViewModel = workbookTextBox.kendoBindingTarget.source;
-
-      formViewModel.set("name", "MyCustomWorkbookName");
-    })
-  </script>
+    menu.bind("select", (e) => {
+        const isFileMenu = $(e.item).find(".k-menu-link-text").text() === "File";
+        if (!isFileMenu) {
+            return;
+        }
+      
+        const exportButton = $("button[title='Export...']").data("kendoButton");
+        // prevent multiple bindings if File is opened more than once
+        exportButton.unbind("click.exportNameChange");
+      
+        exportButton.bind("click.exportNameChange", () => {
+            const exportWindow = $(".k-window:visible");
+          
+            // Find the file name input and set custom value
+            const fileNameInput = exportWindow.find("input.k-textbox, input[data-bind='value: name']").first();
+            fileNameInput.val("MyCustomWorkbookName");
+        });
+    });
+</script>
 ```
 
 ## See Also
 
-* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+- [Kendo UI Spreadsheet Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/spreadsheet/overview)
+- [Kendo UI Spreadsheet API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/spreadsheet)

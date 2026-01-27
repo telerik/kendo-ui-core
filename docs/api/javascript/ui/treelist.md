@@ -5397,6 +5397,7 @@ What is TreeList.messages.requestFailed used for in Kendo UI? Set or customize t
 
 #### Example - setting the text of the **Request failed** button
 
+```html
     <div id="treeList"></div>
     <script>
       $("#treeList").kendoTreeList({
@@ -5417,6 +5418,7 @@ What is TreeList.messages.requestFailed used for in Kendo UI? Set or customize t
         }
       });
     </script>
+```
 
 ### messages.retry `String` *(default: "Retry")*
 
@@ -5429,6 +5431,7 @@ How can I change the retry button label in a Kendo UI TreeList? Customize, local
 
 #### Example - setting the text of the **Retry** button
 
+```html
     <div id="treeList"></div>
     <script>
       $("#treeList").kendoTreeList({
@@ -5449,6 +5452,7 @@ How can I change the retry button label in a Kendo UI TreeList? Customize, local
         }
       });
     </script>
+```
 
 ### navigatable `Boolean` *(default: false)*
 
