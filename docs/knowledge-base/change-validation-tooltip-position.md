@@ -13,18 +13,16 @@ components: ["grid"]
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
- </tr>
+<tbody>
+<tr>
+<td> Product </td>
+<td> Kendo UI for jQuery Chart </td>
+</tr>
+<tr>
+<td> Version </td>
+<td> 2025.4.1217 </td>
+</tr>
+</tbody>
 </table>
 
 ## Description
@@ -72,7 +70,7 @@ The approach relies on the following milestones:
     display: none;
   }
 
-  .k-popup-edit-form .k-input{
+  .k-window-content .k-input{
     width: 50%
   }
 </style>

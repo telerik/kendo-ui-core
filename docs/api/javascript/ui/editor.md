@@ -4742,6 +4742,26 @@ How do I customize the tools available in the Kendo UI Editor? Configure and cus
       });
     </script>
 
+#### Example - add an `insertHtml` dropdown tool for inserting snippets
+
+	<textarea id="editor" rows="10" cols="30">
+	    Put the cursor after this text and use the "Insert HTML" tool.
+	</textarea>
+    <script>
+        $(document).ready(function() {
+            $("#editor").kendoEditor({
+                tools: [
+                    { name: "insertHtml",
+                      items: [
+                          { text: "Signature", value: "<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>" },
+                          { text: "Kendo online demos", value: " <a href='//demos.telerik.com/kendo-ui'>Kendo online demos</a> " }
+                      ]
+                    }
+                ]
+            });
+        });
+    </script>
+
 ### tools.name `String`
 
 When specifying a tool as an object, a tool name is required. **Please note that "undo" and "redo" are reserved tool names.**
