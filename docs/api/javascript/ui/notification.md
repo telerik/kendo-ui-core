@@ -536,6 +536,11 @@ How can I set the width of a Kendo UI notification message in pixels? Adjust, co
 
 This is a shorthand method for [`show(data, "error")`](/api/javascript/ui/notification/methods/show)
 
+#### Parameters
+
+##### data `Object|String|Function`
+
+**Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
 <div class="meta-api-description">
 How to display error messages with Kendo UI for jQuery notification? Display or trigger error messages and alerts instantly with predefined error styling using a method that simplifies showing error notifications without manual invocation, supporting quick error toast creation for failures, warnings, exceptions, or fault reporting by passing message content or configuration objects, enabling developers to present error popups, error toasts, or alert dialogs effortlessly with consistent error visuals and behavior across applications.
@@ -558,12 +563,6 @@ How to display error messages with Kendo UI for jQuery notification? Display or 
         message: "Failed to save data"
     });
     </script>
-
-#### Parameters
-
-##### data `Object|String|Function`
-
-**Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
 ### getNotifications
 
@@ -749,6 +748,8 @@ How do I prevent XSS attacks when displaying plain-text notifications in Kendo U
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
+###### data.closeButton `Boоlean` If set to `false` the Notification will not render the close button.
+
 ##### type `String`
 
 The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
@@ -773,7 +774,26 @@ If this argument is not supplied, then `"info"` is assumed.
 
     var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
 
-    notificationWidget.showText(getNotificationMessage());
+    notificationWidget.showText({
+        closeButton: false,
+        content: "Welcome to the Application",
+        "warning"
+    });
+    </script>
+
+#### Example - Use the showText() method to show the initially hidden close button
+
+    <span id="notification"></span>
+    <script>
+        let notificationWidget = $("#notification").kendoNotification({
+            button: false,
+        }).data("kendoNotification");
+
+        notificationWidget.showText({
+            closeButton: true, //show the close button
+            content: "Welcome to the Application"
+        },
+        "warning");
     </script>
 
 ### success

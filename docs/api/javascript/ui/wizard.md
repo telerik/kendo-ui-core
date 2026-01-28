@@ -1359,7 +1359,7 @@ The [Button](/api/javascript/ui/button) instance that has been clicked in order 
 
 ##### e.forms `Array`
 
-An array of all Kendo UI [Form](/api/javascript/ui/button) widgets (if any) configured within the Wizard widget.
+An array of all Kendo UI [Form](/api/javascript/ui/form) widgets (if any) configured within the Wizard widget.
 
 #### Example
 

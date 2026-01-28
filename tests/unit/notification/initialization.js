@@ -778,4 +778,54 @@ describe("initialization", function() {
         assert.equal(notificationZIndex, 12000, "Notification z-index should be 12000");
     });
 
+      it("closeButton per-notification overrides button option", function() {
+        notification = createNotification({
+            button: false
+        });
+
+        notification.show({ content: "foo", closeButton: true });
+
+        assert.isOk($(".k-notification").find(".k-notification-actions .k-icon").is(":visible"));
+    });
+
+    it("closeButton false per-notification overrides button true option", function() {
+        notification = createNotification({
+            button: true
+        });
+
+        notification.show({ content: "foo", closeButton: false });
+
+        assert.equal($(".k-notification").find(".k-notification-actions .k-icon").length, 0);
+    });
+
+    it("notification with closeButton true adjusts position when button is false", function() {
+        notification = createNotification({
+            button: false,
+            position: { pinned: true, top: null, left: null, bottom: 20, right: 20 }
+        });
+
+        notification.show({ content: "foo", closeButton: true });
+
+        let notificationElement = $(".k-notification").last();
+        
+        // Verify the close button is rendered even though button: false at widget level
+        assert.equal(notificationElement.find(".k-notification-actions .k-icon").length, 1);
+        assert.isOk(notificationElement.hasClass("k-notification-closable"));
+    });
+
+    it("notification with closeButton false adjusts position when button is true", function() {
+        notification = createNotification({
+            button: true,
+            position: { pinned: true, top: null, left: null, bottom: 20, right: 40 }
+        });
+
+        notification.show({ content: "foo", closeButton: false });
+
+        let notificationElement = $(".k-notification").last();
+        
+        // Verify the close button is NOT rendered even though button: true at widget level
+        assert.equal(notificationElement.find(".k-notification-actions .k-icon").length, 0);
+        assert.isOk(!notificationElement.hasClass("k-notification-closable"));
+    });
+
 });

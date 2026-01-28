@@ -212,12 +212,22 @@ export const __meta__ = {
             }
         },
 
-        _showPopup: function(wrapper, options) {
+        _showPopup: function(wrapper, options, hasCloseButton) {
             var that = this,
                 autoHideAfter = options.autoHideAfter,
                 x = options.position.left,
                 y = options.position.top,
-                popup, openPopup;
+                popup, openPopup,
+                positionRight = options.position.right;
+
+            // Adjust position.right based on per-notification closeButton
+            if (hasCloseButton && positionRight === 20) {
+                // Close button present but position not adjusted
+                positionRight = 40;
+            } else if (!hasCloseButton && positionRight === 40 && options.button) {
+                // Close button not present but position was adjusted for global button
+                positionRight = 20;
+            }
 
             openPopup = $("." + that._guid + ":not(." + KHIDING + ")").last();
 
@@ -250,7 +260,7 @@ export const __meta__ = {
                 popup.open();
             } else {
                 if (x === null) {
-                    x = $(window).width() - wrapper.outerWidth() - options.position.right;
+                    x = $(window).width() - wrapper.outerWidth() - positionRight;
                 }
 
                 if (y === null) {
@@ -396,7 +406,7 @@ export const __meta__ = {
 
                 wrapper
                     .addClass(KNOTIFICATION + "-" + type)
-                    .toggleClass(KNOTIFICATION + "-closable", options.button)
+                    .toggleClass(KNOTIFICATION + "-closable", args.closeButton)
                     .attr({
                         "data-role": "alert",
                         title: options.title
@@ -404,7 +414,7 @@ export const __meta__ = {
                     .css({ width: options.width, height: options.height })
                     .append(that._getCompiled(type, safe)(args));
 
-                if (that.options.button) {
+                if (args.closeButton) {
                     wrapper.append(that.addActions("close"));
                 }
 
@@ -414,7 +424,7 @@ export const __meta__ = {
                 if ($(options.appendTo)[0]) {
                     that._showStatic(wrapper, options);
                 } else {
-                    that._showPopup(wrapper, options);
+                    that._showPopup(wrapper, options, args.closeButton);
                 }
 
                 that.trigger(SHOW, { element: wrapper });

@@ -9249,9 +9249,11 @@ declare namespace kendo.ui {
         show(data: any, type: string): void;
         show(data: string, type: string): void;
         show(data: Function, type: string): void;
+        show(data: ShowParams, type: string): void;
         showText(data: any, type: string): void;
         showText(data: string, type: string): void;
         showText(data: Function, type: string): void;
+        showText(data: ShowParams, type: string): void;
         success(data: any): void;
         success(data: string): void;
         success(data: Function): void;
@@ -9260,7 +9262,9 @@ declare namespace kendo.ui {
         warning(data: Function): void;
 
     }
-
+    interface ShowParams {
+        closeButton?: boolean | undefined;
+    }
     interface NotificationPosition {
         bottom?: number | undefined;
         left?: number | undefined;

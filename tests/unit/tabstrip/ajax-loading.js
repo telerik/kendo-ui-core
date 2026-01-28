@@ -47,7 +47,7 @@ let template = '<div id="tabstrip">' +
     '    <div></div>' +
     '</div>';
 
-let tabstripSetup = function() {
+let tabstripSetup = function(enableDOMDataSource = false) {
     div = $(template);
     div.appendTo(Mocha.fixture);
 
@@ -72,7 +72,8 @@ let tabstripSetup = function() {
                     return 'ajax-view-from-function' + localCounter + '.html';
                 }
             }
-        ]
+        ],
+        _enableDOMDataSource: enableDOMDataSource
     });
 };
 
@@ -151,6 +152,54 @@ describe('tabstrip ajax loading', function() {
         });
 
         item.click();
+    });
+});
+
+describe('tabstrip [DataSource DOM Rendering]', function() {
+    beforeEach(function() {
+        TimerUtils.initTimer();
+        $.mockjaxSettings.responseTime = 0;
+
+        $.mockjax.clear();
+
+        $.mockjax({
+            url: "ajax-view-one.html",
+            response: function() {
+                this.responseText = "<p>Content from ajax-view-one.html</p>";
+            }
+        });
+
+        $.mockjax({
+            url: "ajax-view-two.html",
+            response: function() {
+                this.responseText = "<p>Content from ajax-view-two.html</p>";
+            }
+        });
+    });
+
+    afterEach(function() {
+        TimerUtils.destroyTimer();
+        tabstrip.destroy();
+    });
+
+    it('contentUrls can be changed dynamically and loads new content', function() {
+        tabstripSetup(true);
+
+        let item = getRootItem(2);
+
+        item.find('> .k-link').trigger('click');
+        TimerUtils.advanceTimer();
+
+        let contentElement = tabstrip.element.find(".k-tabstrip-content").eq(2);
+        assert.equal(contentElement.html(), "<p>Content from ajax-view-one.html</p>");
+
+        tabstrip.options.contentUrls[2] = "ajax-view-two.html";
+        item.find('> .k-link').data('contentUrl', 'ajax-view-two.html');
+
+        tabstrip.reload(item);
+        TimerUtils.advanceTimer();
+
+        assert.equal(contentElement.html(), "<p>Content from ajax-view-two.html</p>");
     });
 });
 

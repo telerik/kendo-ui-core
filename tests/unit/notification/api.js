@@ -487,4 +487,20 @@ describe("api", function() {
 
         assert.equal($(".k-notification").length, 1);
     });
+
+    it("showText method renders close button when closeButton option is set in the message", function() {
+        notification = createNotification({
+            autoHideAfter: 0
+        });
+
+        notification.showText({
+            closeButton: true,
+            content: "Welcome to the Application"
+        }, "warning");
+
+        let notificationElement = $(".k-notification");
+
+        assert.equal(notificationElement.length, 1);
+        assert.equal(notificationElement.find(".k-notification-close-action").length, 1);
+    });
 });

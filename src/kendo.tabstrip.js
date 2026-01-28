@@ -257,9 +257,12 @@ export const __meta__ = {
 
 
             if (options._enableDOMDataSource && options.contentUrls) {
-                that._contentUrls = options.contentUrls.map(function(url) {
+
+                options.contentUrls = options.contentUrls.map(function(url) {
                     return url || DOM_DATASOURCE_EMPTY;
                 });
+
+                that._contentUrls = options.contentUrls;
 
                 that._updateContentElements(options._enableDOMDataSource);
             }
