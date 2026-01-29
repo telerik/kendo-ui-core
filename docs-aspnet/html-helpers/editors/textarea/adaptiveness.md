@@ -1,7 +1,7 @@
 ---
 title: Adaptiveness
 page_title: Adaptiveness
-description: "Learn how to configure the adaptive behavior of the the Telerik UI TextArea component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI TextArea component for {{ site.framework }}."
 components: ["textarea"]
 slug: adaptiveness_textarea
 position: 4

@@ -17,7 +17,7 @@ The `Items` represent the content of the AppBar. The [`items`](/api/javascript/u
 ## Content Items
 
 There are two approaches to using templates with **Content Items**:
-* You can use the the `template` option exposed by `contentItem` to consume and render HTML. 
+* You can use the `template` option exposed by `contentItem` to consume and render HTML. 
 * You can supply an evaluated `kendo.template` to the configuration. 
 The following example shows how to utilize both approaches:
 

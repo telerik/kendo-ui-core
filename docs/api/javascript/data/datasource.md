@@ -261,7 +261,7 @@ How do I set data for a Kendo UI DataSource? Set or bind the collection of data 
     var dataSource = new kendo.data.DataSource({
       data: '<books><book id="1"><title>Secrets of the JavaScript Ninja</title></book></books>',
       schema: {
-        // specify the the schema is XML
+        // specify the schema is XML
         type: "xml",
         // the XML element which represents a single data record
         data: "/books/book",
@@ -1676,7 +1676,7 @@ How do I configure my Kendo UI DataSource to parse JSON responses from a server?
     var dataSource = new kendo.data.DataSource({
       data: '<books><book id="1"><title>Secrets of the JavaScript Ninja</title></book></books>',
       schema: {
-        // specify the the schema is XML
+        // specify the schema is XML
         type: "xml",
         // the XML element which represents a single data record
         data: "/books/book",

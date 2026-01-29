@@ -1,7 +1,7 @@
 ---
 title: Adaptive Mode
 page_title: Adaptive Mode
-description: "Learn how to configure the adaptive behavior of the the Telerik UI Pager component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI Pager component for {{ site.framework }}."
 components: ["pager"]
 slug: htmlhelpers_pager_adaptive_mode
 position: 4

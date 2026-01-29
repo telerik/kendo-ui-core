@@ -87,7 +87,7 @@ How to set default PDF file in Kendo UI PDFViewer? Configure the initial PDF doc
 
 ### pdfjsProcessing.file.cMapUrl `String`
 
-Specifies the the URL where the predefined Adobe CMaps are located. Further info in [the PDF.js API ref](https://github.com/mozilla/pdf.js/blob/master/src/display/api.js#L117).
+Specifies the URL where the predefined Adobe CMaps are located. Further info in [the PDF.js API ref](https://github.com/mozilla/pdf.js/blob/master/src/display/api.js#L117).
 
 
 <div class="meta-api-description">

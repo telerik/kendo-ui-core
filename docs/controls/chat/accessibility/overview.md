@@ -54,7 +54,7 @@ The Chat component is a composite one and integrates the accessibility of the To
 ### ToolBar Component
 
 
-Chat Message ToolBar follows the specification for the the ToolBar component.
+Chat Message ToolBar follows the specification for the ToolBar component.
 
 [ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 

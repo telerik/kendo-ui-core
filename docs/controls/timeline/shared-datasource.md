@@ -1,7 +1,7 @@
 ---
 title: Binding to a Shared DataSource
 page_title: jQuery Timeline Documentation - Shared DataSource Binding
-description: "Learn how to bind the the Kendo UI jQuery Timeline component to a shared data source."
+description: "Learn how to bind the Kendo UI jQuery Timeline component to a shared data source."
 components: ["timeline"]
 slug: shared_datasource_kendoui_timeline_widget
 position: 7
