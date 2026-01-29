@@ -415,7 +415,7 @@ The media query that will create the [MediaQueryList instance](https://developer
         mediaQueryListener.destroy();
     </script>
 
-#### Example - Modify the default breakpoints for the the adaptive components
+#### Example - Modify the default breakpoints for the adaptive components
 
 ```dojo
     <input id="dropdownlist"/>

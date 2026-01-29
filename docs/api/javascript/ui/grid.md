@@ -7747,7 +7747,7 @@ How to make a Kendo UI Grid column visible only on large screens? Control the vi
 
 ### columns.resizable `Boolean` *(default: true)*
 
-If set to `false` the column will become non-resizable, while all the other columns remaining resizable in the the grid component.
+If set to `false` the column will become non-resizable, while all the other columns remaining resizable in the grid component.
 In order for this property to work, grid's `resizable` property must be set to `true`
 
 

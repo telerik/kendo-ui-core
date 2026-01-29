@@ -54,7 +54,7 @@ To enable multi-column sorting, set the `mode` option of `sortable` to `multiple
 
 ### Mixed-Column Sorting
 
-Mixed Sorting allows users to [single-sort](#single-column-sorting) columns by clicking their title and [multi-sort](#multi-column-sorting) columns by holding the `CTRL` key and clicking the columns' title. A single-click (without holding the the `CTRL` key) on any column un-sorts the currently sorted columns and applies single-sorting to the clicked column.
+Mixed Sorting allows users to [single-sort](#single-column-sorting) columns by clicking their title and [multi-sort](#multi-column-sorting) columns by holding the `CTRL` key and clicking the columns' title. A single-click (without holding the `CTRL` key) on any column un-sorts the currently sorted columns and applies single-sorting to the clicked column.
 
 To enable multi-column sorting, set the `mode` option of `sortable` property to `mixed`.
 

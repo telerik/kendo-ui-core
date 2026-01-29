@@ -60,7 +60,7 @@ You can include images in the Telerik UI for {{ site.framework }} PanelBar items
 
 ## Sprites
 
-You can also set sprites the the Telerik UI for {{ site.framework }} PanelBar items using the `.SpriteCssClasses()` configuration option and specifying the sprite CSS class: 
+You can also set sprites the Telerik UI for {{ site.framework }} PanelBar items using the `.SpriteCssClasses()` configuration option and specifying the sprite CSS class: 
 
 ```HtmlHelper
 @(Html.Kendo().PanelBar()

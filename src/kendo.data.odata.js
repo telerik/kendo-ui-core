@@ -366,7 +366,7 @@ export const __meta__ = {
                 update: {
                     cache: true,
                     dataType: "json",
-                    contentType: "application/json", // to inform the server the the request body is JSON encoded
+                    contentType: "application/json", // to inform the server the request body is JSON encoded
                     type: "PUT" // can be PUT or MERGE
                 },
                 create: {
@@ -467,7 +467,7 @@ export const __meta__ = {
                 update: {
                     cache: true,
                     dataType: "json",
-                    contentType: "application/json;IEEE754Compatible=true", // to inform the server the the request body is JSON encoded
+                    contentType: "application/json;IEEE754Compatible=true", // to inform the server the request body is JSON encoded
                     type: "PUT" // can be PUT or MERGE
                 },
                 create: {

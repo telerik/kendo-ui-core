@@ -58,7 +58,7 @@ The `EmployeesController` `Get` method now looks a bit different. Notice that it
     // WebAPI will respond to an HTTP GET with this method
     public Models.Response Get() {
 
-        // the the take and skip parameters off of the incoming request
+        // the take and skip parameters off of the incoming request
         int take = _request["take"] == null ? 10 : int.Parse(_request["take"]);
         int skip = _request["skip"] == null ? 0 : int.Parse(_request["skip"]);
 

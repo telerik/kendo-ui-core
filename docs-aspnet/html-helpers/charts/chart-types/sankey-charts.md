@@ -25,7 +25,7 @@ Sankey Diagram visualize its data using Nodes (items) and Links (connections). Y
 
  - [`Links`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`ColorType`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/sankey/configuration/links.colortype) of the link to either `Static`, `Source`, or `Target`. It also allows you to control the opacity and highlighting of the link.
  - [`Legend`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/legend)&mdash;Provides options to customize the appearance of the diagram legend.
- - [`Tooltip`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the the functionality of the diagram element titles.
+ - [`Tooltip`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the functionality of the diagram element titles.
 
  Here is a sample demonstration:
 

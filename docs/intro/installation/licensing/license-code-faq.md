@@ -55,7 +55,7 @@ If adding the license by using a script key:
 
 1. Renew your Kendo UI for jQuery license, if necessary.
 1. Download a [new license script key]({% slug using-license-code %}).
-1. [Add the the license as a script reference]({% slug using-license-code %}#use-a-script-reference).
+1. [Add the license as a script reference]({% slug using-license-code %}#use-a-script-reference).
 
 If adding the license by using a license key (npm):
 

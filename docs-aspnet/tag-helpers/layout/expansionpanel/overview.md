@@ -42,7 +42,7 @@ You must pass the configuration options of the ExpansionPanel TagHelper as attri
 
 ## Event Handling
 
-The below example demonstrates how the the `Expand`, `Collapse` and `Complete` events of the ExpansionPanel TagHelper can be intercepted to output messages in the console when these events are raised. They can also be hooked for customizations or to execute custom logic, if necessary.
+The below example demonstrates how the `Expand`, `Collapse` and `Complete` events of the ExpansionPanel TagHelper can be intercepted to output messages in the console when these events are raised. They can also be hooked for customizations or to execute custom logic, if necessary.
 
 ```tagHelper
 	<kendo-expansionpanel name="brazil" title="Brazil" sub-title="South America" expanded="true" on-expand="onExpand" on-collapse="onCollapse" on-complete="onComplete">

@@ -364,7 +364,7 @@ How do I adjust the size of a QR code generated with Kendo UI for jQuery? Adjust
 
 ### value `Number|String`
 
-Sets the value of the QRCode. More about the the value of the QRCode can be found in the [Encoding](/controls/qrcode/encodings) documentation article.
+Sets the value of the QRCode. More about the value of the QRCode can be found in the [Encoding](/controls/qrcode/encodings) documentation article.
 
 
 <div class="meta-api-description">

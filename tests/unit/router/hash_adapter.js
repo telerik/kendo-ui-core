@@ -110,7 +110,7 @@ describe("History hash adapter", function() {
 
     // This test should be transferred to e2e. Vitest does not support pushState properly.
     // if (kendo.support.pushState) {
-    //     it("normalizeCurrent will translate pushState to non-pushState, removing the root from the the path", function() {
+    //     it("normalizeCurrent will translate pushState to non-pushState, removing the root from the path", function() {
     //         let root = location.pathname;
 
     //         stub(adapter, {

@@ -26,7 +26,7 @@ The BottomNavigation component provides the following styling options:
 
 ### ItemFlow
 
-To control the the position of the text labels against the items, set the [`ItemFlow`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#itemflowkendomvcuibottomnavigationitemflow) option to `Vertical` or `Horizonatal`.
+To control the position of the text labels against the items, set the [`ItemFlow`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#itemflowkendomvcuibottomnavigationitemflow) option to `Vertical` or `Horizonatal`.
 
 ```HtmlHelper
     @(Html.Kendo().BottomNavigation()

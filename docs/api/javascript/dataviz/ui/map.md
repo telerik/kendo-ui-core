@@ -1087,7 +1087,7 @@ How can I configure tooltips to appear when users interact with markers on a Ken
 
 ### layerDefaults.marker.opacity `Number` *(default: 1)*
 
-The the opacity of all marker layers.
+The opacity of all marker layers.
 
 
 <div class="meta-api-description">
@@ -1184,7 +1184,7 @@ How to set default attribution text for all shape layers in Kendo UI Map? Config
 
 ### layerDefaults.shape.opacity `Number` *(default: 1)*
 
-The the opacity of all shape layers.
+The opacity of all shape layers.
 
 
 <div class="meta-api-description">
@@ -1639,7 +1639,7 @@ How do I customize the default attribution for all bubble layers in a Kendo UI M
 
 ### layerDefaults.bubble.opacity `Number` *(default: 1)*
 
-The the opacity of all bubble layers.
+The opacity of all bubble layers.
 
 
 <div class="meta-api-description">
@@ -2250,7 +2250,7 @@ How do I optimize Kendo UI map tile loading with multiple subdomains? Configure 
 
 ### layerDefaults.tile.opacity `Number` *(default: 1)*
 
-The the opacity of all tile layers.
+The opacity of all tile layers.
 
 
 <div class="meta-api-description">
@@ -2326,7 +2326,7 @@ How do I customize the attribution text on Bing map layers in Kendo UI Map? Cont
 
 ### layerDefaults.bing.opacity `Number` *(default: 1)*
 
-The the opacity of all Bing (tm) tile layers.
+The opacity of all Bing (tm) tile layers.
 
 
 <div class="meta-api-description">
@@ -3604,7 +3604,7 @@ How do I control which map layers become visible in Kendo UI based on zoom level
 
 ### layers.opacity `Number` *(default: 1)*
 
-The the opacity for the layer.
+The opacity for the layer.
 
 
 <div class="meta-api-description">
@@ -6992,7 +6992,7 @@ The parent layer instance.
 
 ##### e.shape `kendo.drawing.Element`
 
-The the shape instance.
+The shape instance.
 
 ##### e.sender `kendo.dataviz.ui.Map`
 
@@ -7194,7 +7194,7 @@ The parent layer instance.
 
 ##### e.shape `kendo.drawing.Element`
 
-The the shape instance.
+The shape instance.
 
 ##### e.sender `kendo.dataviz.ui.Map`
 
@@ -7336,7 +7336,7 @@ The parent layer instance.
 
 ##### e.shape `kendo.drawing.Element`
 
-The the shape instance.
+The shape instance.
 
 ##### e.sender `kendo.dataviz.ui.Map`
 

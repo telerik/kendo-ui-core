@@ -169,7 +169,7 @@ You can override each method and property that are defined in the list by extend
 
 
 {% if site.mvc %}
-Implementing a custom views is demonstrated in the the How-To article regarding [Implementing Custom Views](slug % howto_implementcustomviews_scheduleraspnetmvc %). 
+Implementing a custom views is demonstrated in the How-To article regarding [Implementing Custom Views](slug % howto_implementcustomviews_scheduleraspnetmvc %). 
 {% endif %} 
 
 ## See Also
