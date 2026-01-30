@@ -896,8 +896,16 @@ export const __meta__ = {
                 }
 
                 if (dataItem.text) {
-                    const text = dataItem.encoded ? kendo.htmlEncode(dataItem.text) : dataItem.text;
-                    tabText.text(text);
+                    if (dataItem.encoded) {
+                        tabText.text(kendo.htmlEncode(dataItem.text));
+                    } else {
+                        const tempDiv = $('<div>').html(dataItem.text);
+                        if (tempDiv.children().length > 0) {
+                            tabText.html(dataItem.text);
+                        } else {
+                            tabText.text(dataItem.text);
+                        }
+                    }
                 }
 
                 if (item.attr("data-content") && !dataItem.contentUrl) {
@@ -1341,10 +1349,12 @@ export const __meta__ = {
                     let data = $item.data(option);
 
                     if (option === "text" && !data) {
-                        data = $item
-                            .find(".k-link-text")
-                            .text()
-                            .trim();
+                        const linkText = $item.find(".k-link-text");
+                        if (linkText.children().length > 0) {
+                            data = linkText.html();
+                        } else {
+                            data = linkText.text().trim();
+                        }
                     }
 
                     if (option === "content" && !data) {

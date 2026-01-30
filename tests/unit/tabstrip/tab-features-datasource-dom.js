@@ -5,9 +5,7 @@
  let tabstrip;
 
  const K_DISABLED = "k-disabled";
-
- function createTabStrip() {
-    dom = $(`<div id="tabstrip-datasource-dom">
+ const DEFAULT_HTML = `<div id="tabstrip-datasource-dom">
     <ul>
         <li
             data-enabled="true"
@@ -21,7 +19,10 @@
         </li>
         <li data-encoded="true" data-enabled="false">Ajax & Tab</li>
     </ul>
-    </div>`).appendTo(document.body);
+    </div>`;
+
+ function createTabStrip(html) {
+    dom = $(html || DEFAULT_HTML).appendTo(document.body);
 
     tabstrip = new kendo.ui.TabStrip(dom, {
          _enableDOMDataSource: true
@@ -87,5 +88,33 @@ describe('TabStrip Tab Features [DataSource DOM Rendering]', function() {
             assert.equal(dom.find('.k-tabstrip-item').length, 1);
             assert.equal(dom.find('.k-tabstrip-content').length, 1);
             assert.equal(dom.find('.k-tabstrip-item').text(), 'Ajax &amp; Tab');
+    });
+
+    it('preserves HTML elements in tab text during DOM data source creation', function() {
+        const html = `<div id="tabstrip-html-content">
+            <ul>
+                <li>
+                    <a href="#" class="k-link">
+                        <span class="k-link-text">Tab with <input type="text" value="input"/> element</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="k-link">
+                        <span class="k-link-text">Plain text tab</span>
+                    </a>
+                </li>
+            </ul>
+        </div>`;
+
+        createTabStrip(html);
+
+        const firstTabLinkText = dom.find('.k-tabstrip-item').eq(0).find('.k-link-text');
+        const inputElement = firstTabLinkText.find('input');
+
+        assert.equal(inputElement.length, 1, 'Input element should be preserved');
+        assert.equal(inputElement.val(), 'input', 'Input value should be preserved');
+
+        const secondTabText = dom.find('.k-tabstrip-item').eq(1).find('.k-link-text').text().trim();
+        assert.equal(secondTabText, 'Plain text tab', 'Plain text should be preserved normally');
     });
 });
