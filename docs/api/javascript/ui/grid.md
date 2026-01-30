@@ -19044,7 +19044,7 @@ How do I configure column widths in a stacked Kendo UI grid layout? Configure th
     </script>
 
 
-### statusBarTemplate `String|Function`
+### statusBarTemplate `Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the Status Bar/Aggregates Bar.
 
