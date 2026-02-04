@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["prg-001"] = {
         name: "prg-001",
         numberFormat: {

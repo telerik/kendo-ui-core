@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["co-FR"] = {
         name: "co-FR",
         numberFormat: {

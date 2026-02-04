@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["pap-029"] = {
         name: "pap-029",
         numberFormat: {

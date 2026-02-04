@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["lag-TZ"] = {
         name: "lag-TZ",
         numberFormat: {

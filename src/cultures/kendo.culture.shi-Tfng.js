@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["shi-Tfng"] = {
         name: "shi-Tfng",
         numberFormat: {

@@ -1,13 +1,14 @@
 import "./kendo.popup.js";
 import "./kendo.data.js";
 import "./kendo.icons.js";
+import "./kendo.userevents.js";
 
 export const __meta__ = {
     id: "menu",
     name: "Menu",
     category: "web",
     description: "The Menu widget displays hierarchical data as a multi-level menu.",
-    depends: [ "popup", "data", "data.odata" ]
+    depends: [ "popup", "data", "data.odata", "userevents" ]
 };
 
 (function($, undefined) {

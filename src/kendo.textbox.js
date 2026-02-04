@@ -33,7 +33,6 @@ export const __meta__ = {
     var TextBox = Widget.extend({
         init: function(element, options) {
             var that = this;
-
             Widget.fn.init.call(that, element, options);
             options = $.extend(true, {}, options);
 

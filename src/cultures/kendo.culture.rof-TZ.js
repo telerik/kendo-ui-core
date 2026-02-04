@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["rof-TZ"] = {
         name: "rof-TZ",
         numberFormat: {

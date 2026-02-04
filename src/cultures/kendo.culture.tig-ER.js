@@ -1,4 +1,4 @@
-(function( window, undefined ) {
+﻿(function( window, undefined ) {
     kendo.cultures["tig-ER"] = {
         name: "tig-ER",
         numberFormat: {

@@ -16,6 +16,7 @@ Represents the Kendo UI MediaPlayer widget. Inherits from [Widget](/api/javascri
 
 If set to `true`, the widget will start playing the video or videos after initializing.
 
+**Note** Some browser do not allow autoplay and will block this feature. A common solution is to mute the video or disable the browser's autoplay policy.
 
 <div class="meta-api-description">
 How do I enable autoplay in Kendo UI MediaPlayer? Automatically initiate video or audio playback as soon as the media player loads or initializes without requiring manual start commands, enabling instant play, autoplay, auto-start, or immediate streaming upon component or player setup, useful for seamless media experiences, auto-triggered playback, play-on-load, or starting content without user interaction.
@@ -454,11 +455,13 @@ How do I update the media information in a Kendo UI MediaPlayer widget? Retrieve
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(mediaPlayer.media());
       // change the media loaded in the widget
-      mediaPlayer.media({
-                    title: "Responsive Website Delivers for Reeves Import Motorcars",
-                    poster: "http://img.youtube.com/vi/DYsiJRmIQZw/1.jpg",
-                    source: "https://www.youtube.com/watch?v=DYsiJRmIQZw"
-                });
+      setTimeout(function () {
+            mediaPlayer.media({
+                title: "Responsive Website Delivers for Reeves Import Motorcars",
+                poster: "http://img.youtube.com/vi/DYsiJRmIQZw/1.jpg",
+                source: "https://www.youtube.com/watch?v=DYsiJRmIQZw"
+            });
+      }, 1000);      
     </script>
 
 #### Parameters

@@ -1,4 +1,4 @@
-kendo.cultures["en-JP"] = {
+﻿kendo.cultures["en-JP"] = {
     // <language code>-<country/region code>
     name: "en-JP",
     // The "numberFormat" defines general number formatting rules.

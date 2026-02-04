@@ -47,6 +47,7 @@
     "mocha": "^10.0.0",
     "playwright": "^1.56.1",
     "require-dir": "~0.3.0",
+    "rolldown": "^1.0.0-rc.2",
     "rollup": "^2.75.6",
     "rollup-plugin-polyfill": "^4.0.0",
     "typescript": "2.3.4",
@@ -69,13 +70,12 @@
     "es5-ext": ">=0.10.63"
   },
   "scripts": {
-    "build": "npm ci && npx gulp build",
+    "build": "npm ci && npm run scripts:min",
     "test": "cd tests && npx vitest",
     "eslint": "npx eslint \"src/**/*.js\"",
-    "scripts": "npx gulp scripts",
-    "scripts:dev": "npx rollup -c rollup.dev.config.js",
-    "scripts:modules": "npx rollup -c rollup.modules.config.js",
-    "scripts:all": "npm run scripts && npm run scripts:dev && npm run scripts:modules",
+    "scripts": "npm run scripts:clean && npx rolldown -c rolldown.config.mjs",
+    "scripts:dev": "npx rolldown -c rolldown.config.dev.mjs",
+    "scripts:min": "npm run scripts:clean && npx rolldown -c rolldown.config.mjs -- --minify",
     "scripts:clean": "rm -rf dist/js && rm -rf dist/mjs && rm -rf dist/dev && rm -rf dist/cjs && rm -rf dist/esm"
   },
   "config": {

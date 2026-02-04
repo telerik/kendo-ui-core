@@ -2,6 +2,14 @@ import "./kendo.core.js";
 import "./kendo.icons.js";
 import "./kendo.button.js";
 
+export const __meta__ = {
+    id: "actionsheet.view",
+    name: "ActionSheet View",
+    category: "web",
+    description: "The ActionSheet View.",
+    depends: ["core", "icons", "button"]
+};
+
 (function($) {
     const encode = kendo.htmlEncode;
     const Widget = kendo.ui.Widget;
