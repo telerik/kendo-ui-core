@@ -44,7 +44,7 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
         var MORE_BUTTON_TEMPLATE = kendo.template(
             '<div style="width:#=width#px;left:#=left#px;top:#=top#px"' +
-            'class="k-more-events k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base"><span style="font-size:8pt; margin-top: 0;">' +
+            'class="k-more-events k-button k-button-rectangle"><span style="font-size:8pt; margin-top: 0;">' +
             '#=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
 
         function getEventCountForRange(startSlot, endSlot, rowsCount) {

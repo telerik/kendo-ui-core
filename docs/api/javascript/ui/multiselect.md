@@ -590,14 +590,15 @@ What happens when I clear the search input in a multi-select filter with enforce
     });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
-- "none"
 - "solid"
 - "flat"
 - "outline"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1385,7 +1386,7 @@ How can I customize the appearance of individual items in a Kendo UI MultiSelect
 
     <select id="multiselect" multiple="multiple"></select>
     <script id="itemTemplate" type="text/x-kendo-template">
-      <span> 
+      <span>
         #: name #
       </span>
     </script>
@@ -2191,15 +2192,16 @@ How can I make my Kendo UI MultiSelect dropdown read-only so users can't select 
     });
     </script>
 
-### rounded `String`*(default: "medium")*
+### rounded `String`*(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
-- "none"
 - "small"
 - "medium"
 - "large"
 - "full"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -2218,14 +2220,15 @@ How to set rounded corners for Kendo UI multiselect dropdowns? Adjust the border
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -2519,7 +2522,7 @@ How do I get a reference to the HTML elements of items in a Kendo MultiSelect? A
     </select>
     <script>
     var multiselect = $("#multiselect").kendoMultiSelect().data("kendoMultiSelect");
-    
+
     // Get the items
     var items = multiselect.items();
     console.log(items);

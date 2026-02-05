@@ -33,25 +33,10 @@ export const __meta__ = {
                 previouslyAddedClasses = that.wrapper.data("added-classes");
 
             stylingOptions = stylingOptions.map(function(option) {
-                var validFill;
-
-                if (option === "themeColor") {
-                    validFill = kendo.cssProperties.getValidClass({
-                        widget: options.name,
-                        propName: "fillMode",
-                        value: options.fillMode
-                    });
-
-                    if (!validFill || validFill.length === 0) {
-                        return "";
-                    }
-                }
-
                 return kendo.cssProperties.getValidClass({
                     widget: options.name,
                     propName: option,
-                    value: options[option],
-                    fill: options.fillMode
+                    value: options[option]
                 });
             });
 

@@ -208,8 +208,8 @@ export const __meta__ = {
             resizable: true,
             navigateOnTab: false,
             evaluateTemplates: false,
-            size: "medium",
-            fillMode: "solid",
+            size: undefined,
+            fillMode: undefined,
             overflow: {
                 mode: "menu", // scroll, menu, section, none
                 scrollButtons: "auto", // auto, hidden, visible

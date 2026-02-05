@@ -46,7 +46,7 @@ The example below demonstrates how to achieve the desired scenario.
 
     <!-- template used to render the dataSource's data -->
     <script id="tmp" type="text/x-kendo-template">
-        <li data-uid="#: uid #"> ID: #: ProductID # Product Name: #: ProductName # <input data-role="button" type="button" value="edit" class="edit-button k-button k-button-sm k-rounded-md k-button-solid k-button-solid-base" /></li>
+        <li data-uid="#: uid #"> ID: #: ProductID # Product Name: #: ProductName # <input data-role="button" type="button" value="edit" class="edit-button k-button k-button-sm" /></li>
     </script>
 
     <!-- kendoWindow -->
@@ -78,8 +78,8 @@ The example below demonstrates how to achieve the desired scenario.
         </li>
         <li class="buttons">
           <!-- attach the click event handlers -->
-          <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base btnSave" data-bind="events: { click: sync }">Save</button>
-          <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base btnCancel" data-bind="events: { click: cancel }">Cancel</button>
+          <button class="k-button btnSave" data-bind="events: { click: sync }">Save</button>
+          <button class="k-button btnCancel" data-bind="events: { click: cancel }">Cancel</button>
         </li>
       </ul>
     </div>

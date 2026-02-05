@@ -45,7 +45,7 @@ Once the SQL expression is generated, you can use a number of different approach
 The following example showcases the complete solution integrated with a Kendo UI Grid:
 
 ```dojo
-    <button id="get" type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary"><span class="k-button-text">Convert Filters to SQL Query</span></button>
+    <button id="get" type="button" class="k-button k-button-primary"><span class="k-button-text">Convert Filters to SQL Query</span></button>
     <div id="console" style='padding: 1em;'>
       <p>SELECT * FROM mytable</p>
       <p>WHERE <span id="console-filter" style='color: #205493;'></span></p>

@@ -867,14 +867,15 @@ How to set the accessible label for the filter input box in a Kendo UI DropDownT
         });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
-- "none"
 - "solid"
 - "flat"
 - "outline"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1710,15 +1711,16 @@ How does the Kendo UI DropDownTree valuePrimitive property affect data binding w
         kendo.bind($("#dropdowntree"), viewModel);
     </script>
 
-### rounded `String`*(default: "medium")*
+### rounded `String`*(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
-- "none"
 - "small"
 - "medium"
 - "large"
 - "full"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1739,14 +1741,15 @@ How do I adjust the corner radius of a Kendo UI DropDownTree component? Adjust c
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1797,7 +1800,7 @@ How do I bind hierarchical data to a Kendo UI dropdown tree's dataSource? Bind, 
       });
       var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
       dropdowntree.dataSource.add({ name: "Appricot" });
-      dropdowntree.open(); 
+      dropdowntree.open();
     </script>
 
 ### options `Object`
@@ -2000,7 +2003,7 @@ How can I access the rendered DOM elements of each item in a Kendo UI for jQuery
             ]}
         ]
     });
-    
+
     var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
     var items = dropdowntree.items();
     console.log("Number of items:", items.length);

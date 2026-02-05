@@ -29,13 +29,13 @@ How can I remove items from the {{ site.product }} DropDownList?
 
 ## Solution
 
-To achieve the desired scenario: 
+To achieve the desired scenario:
 
 1. Create a `button` that will be responsible for removing an item in the DropDownList.
 1. To remove an item, handle `click` event of the previously created button and use the [`.remove()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/remove) configuration method of the DropDownList's DataSource.
 
 ```Razor Index.cshtml
-    <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" id="remove">Remove Items</button>
+    <button class="k-button k-button-primary" id="remove">Remove Items</button>
 
     @(Html.Kendo().DropDownList()
          .Name("color")
@@ -62,7 +62,7 @@ To achieve the desired scenario:
 ```JS script.js
     <script>
         $("#remove").click(function() {
-           var ddl =  $("#color").data("kendoDropDownList"); // Get the reference of the DropDownList. 
+           var ddl =  $("#color").data("kendoDropDownList"); // Get the reference of the DropDownList.
 
            var oldData = ddl.dataSource.data(); // Get the DataSource's data.
 

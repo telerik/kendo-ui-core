@@ -45,7 +45,7 @@ The following example demonstrates how to use `svg` icons in the Button componen
 
 The `icon` configuration in the previous example will produce the following HTML output.
 
-	<button type="button" id="editButton" data-role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" role="button" aria-disabled="false" tabindex="0">
+	<button type="button" id="editButton" data-role="button" class="k-button" role="button" aria-disabled="false" tabindex="0">
 		<span class="k-icon k-svg-icon k-svg-i-pencil k-button-icon">
 			<svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg">
 				<path d="m334.9 86.6 45.3-45.3c12.4-12.4 32.8-12.4 45.3 0l45.3 45.3c12.4 12.4 12.4 32.8 0 45.3l-45.3 45.3zm-22.6 22.6L32 389.5V480h90.5l280.3-280.3zM99.9 412.1l-22.6-22.6 235-235 22.6 22.6z">
@@ -54,8 +54,8 @@ The `icon` configuration in the previous example will produce the following HTML
 		</span>
 		<span class="k-button-text">Edit</span>
 	</button>
-	
-	<button type="button" id="deleteButton" data-role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" role="button" aria-disabled="false" tabindex="0">
+
+	<button type="button" id="deleteButton" data-role="button" class="k-button" role="button" aria-disabled="false" tabindex="0">
 		<span class="k-icon k-svg-icon k-svg-i-trash k-button-icon">
 			<svg viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg">
 				<path d="M416 96h-96V64c0-17.6-14.4-32-32-32h-96c-17.6 0-32 14.4-32 32v32H64v64h32v288c0 17.6 14.4 32 32 32h224c17.6 0 32-14.4 32-32V160h32zM192 64h95.9l.1.1V96h-96c.1-.1.1-32.1 0-32m160 384H128.1l-.1-.1V160h32v256h32V160h32v256h32V160h32v256h32V160h32z">
@@ -67,7 +67,7 @@ The `icon` configuration in the previous example will produce the following HTML
 
 The next example demonstrates how to switch to [font icons]({% slug webfonticons_kendoui_desktopwidgets %}).
 
-```dojo	
+```dojo
     <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton"><span class="k-icon"></span>Delete</button>
@@ -91,12 +91,12 @@ The next example demonstrates how to switch to [font icons]({% slug webfonticons
 Images are applied over the `imageUrl` property and are displayed as an `img` element. The Button can automatically render the `img` element or use an existing `img` element if it has a `k-image` CSS class. To increase the accessibility of the component when you manually add an `img` element, apply an `alt` attribute.
 
 The following example demonstrates how to use the `imageUrl`.
- 
+
  ```dojo
 	<button type="button" id="imageIcon"><img class="k-image" alt="Delete" />Delete</button>
 
 	<script>
-	$(function(){ 
+	$(function(){
 
 		$("#imageIcon").kendoButton({
 			imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/snowboarding.png"

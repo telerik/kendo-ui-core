@@ -66,14 +66,15 @@ How do I enable user interaction with the Kendo UI signature input area? Control
         });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
 - "solid"
 - "flat"
 - "outline"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -197,14 +198,15 @@ How to make Kendo UI signature component read-only? Prevent user interaction, ed
         });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -220,14 +222,15 @@ How can I adjust the corner style of a signature component in Kendo UI for jQuer
         });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

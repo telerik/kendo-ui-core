@@ -1154,14 +1154,15 @@ How do I enable keyboard navigation in a Kendo UI pager? Enable or control keybo
       }
     </style>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

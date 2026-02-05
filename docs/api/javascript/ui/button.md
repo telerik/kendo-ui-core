@@ -84,9 +84,12 @@ How do I customize the visual emphasis of a button's badge by using a cutout bor
       });
     </script>
 
-### badge.fillMode `String` *(default: 'solid')*
+### badge.fillMode `String` *(default: undefined)*
 
-Specifies how theme colors apply to a badge. Valid options are `solid` (default) and `outline`.
+Sets a value controlling how the color is applied to the badge. When `undefined` (the default), the theme controls the fill mode. Can also be set to the following string values:
+
+- "solid"
+- "outline"
 
 
 <div class="meta-api-description">
@@ -193,9 +196,13 @@ How do I change the shape of a badge on a Kendo UI button? Customize and configu
       });
     </script>
 
-### badge.size  `String` *(default: 'medium')*
+### badge.size `String` *(default: undefined)*
 
-Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
+Sets a value controlling the size of the badge. When `undefined` (the default), the theme controls the size. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
 
 
 <div class="meta-api-description">
@@ -318,9 +325,11 @@ How do I programmatically enable or disable a button in Kendo UI for jQuery? Con
     </script>
 
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, and `"link"`. When `undefined` (the default), the theme controls the default fill mode.
+
+> The `"none"` value is deprecated. Use custom CSS to achieve an unstyled appearance.
 
 
 <div class="meta-api-description">
@@ -418,9 +427,11 @@ How to set an image URL for a Kendo UI button? Set or control the button's visua
         });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, and `"full"`. When `undefined` (the default), the theme controls the default border radius.
+
+> The `"none"` value is deprecated. Use custom CSS to remove border radius.
 
 
 <div class="meta-api-description">
@@ -436,9 +447,11 @@ How do I customize the border radius of a Kendo UI button? Adjust or customize b
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+Controls the overall physical size of a button. Valid values are: `"small"`, `"medium"`, and `"large"`. When `undefined` (the default), the theme controls the default size.
+
+> The `"none"` value is deprecated. Use custom CSS to customize the size.
 
 
 <div class="meta-api-description">
@@ -486,9 +499,11 @@ How do I configure sprite background images on interactive elements using Kendo 
         });
     </script>
 
-### themeColor `String` *(default: 'base')*
+### themeColor `String` *(default: undefined)*
 
-Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+Controls the main color applied to the button. Valid values are: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, and `"inverse"`. When `undefined` (the default), the theme controls the default theme color.
+
+> The `"none"` value is deprecated. Use custom CSS to remove the theme color styling.
 
 
 <div class="meta-api-description">

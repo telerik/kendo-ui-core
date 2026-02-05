@@ -73,14 +73,14 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
     {% if site.core %}
     ```C#
         public IActionResult Create()
-        {                
+        {
             return View(new OrderViewModel());
         }
     ```
     {% else %}
     ```C#
         public ActionResult Create()
-        {                
+        {
             return View(new OrderViewModel());
         }
     ```
@@ -193,13 +193,13 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
                     <label asp-for="OrderDate"></label>
                 </div>
                 <div class="editor-field">
-                    <kendo-datepicker for="OrderDate" 
+                    <kendo-datepicker for="OrderDate"
                         date-input="true">
                     </kendo-datepicker>
                     <span asp-validation-for="OrderDate"></span>
                 </div>
                 <p>
-                    <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+                    <button class="k-button k-button-primary" type="submit">Submit</button>
                 </p>
             </fieldset>
         </form>
@@ -452,7 +452,7 @@ For example, you can implement a `GreaterDateAttribute` attribute to check wheth
                     <span asp-validation-for="ShippedDate"></span>
                 </div>
                 <p>
-                    <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+                    <button class="k-button k-button-primary" type="submit">Submit</button>
                 </p>
             </fieldset>
         </form>
@@ -588,7 +588,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
 	}
 
 	public class CustomProductNameValidationAttribute : ValidationAttribute
-	{		
+	{
 		public override bool IsValid(object value)
 		{
 			var productName = (string)value;
@@ -691,11 +691,11 @@ The following example shows how to implement a `CustomProductNameValidation` att
         {
             var productName = (string) value;
             if (!string.IsNullOrEmpty(productName))
-	        {                
+	        {
 		        return Regex.IsMatch(productName, "^[A-Z]");
             }
-            return true;            
-        }        
+            return true;
+        }
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
@@ -704,7 +704,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
                 ErrorMessage = ErrorMessage,
                 ValidationType = "productnamevalidation"
             };
-        }        
+        }
     }
 ```
 ```View

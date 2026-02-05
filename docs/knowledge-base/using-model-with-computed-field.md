@@ -44,10 +44,10 @@ The following example demonstrates how to achieve the desired scenario.
     <script id="tmp" type="text/x-kendo-template">
     <div>
     <label>Quantity</label>
-    <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md k-valid" style="">
+    <span class="k-input k-textbox k-valid" style="">
     <input type="text" data-bind="value: quantity" title="value" data-role="textbox" class="k-input-inner" style="width: 100%;" />
       </span>
-      <p> 
+      <p>
       Price:
       <span data-bind="text: price"></span>
       </p>

@@ -29,7 +29,7 @@ The component allows you to customize its content through templates, to control 
 The following example demonstrates how to define a Badge.
 
 ```HtmlHelper
-    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
+    <a class="k-button">
         @(Html.Kendo().Badge()
             .Name("badge")
             .Text("42")
@@ -40,7 +40,7 @@ The following example demonstrates how to define a Badge.
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
+    <a class="k-button">
         <kendo-badge name="badge" text="42">
         </kendo-badge>
     </a>
@@ -69,9 +69,9 @@ The Badge provides a variety of options for positioning and alignment. The follo
     @addTagHelper *, Kendo.Mvc
 
     <span class='k-icon k-i-envelop'>
-        <kendo-badge name="badge" 
-            text="+2" 
-            theme-color="BadgeColor.Primary" 
+        <kendo-badge name="badge"
+            text="+2"
+            theme-color="BadgeColor.Primary"
             position="BadgePosition.Outside"
             align="BadgeAlign.TopEnd"
             rounded="Rounded.Full"
@@ -86,7 +86,7 @@ The Badge provides a variety of options for positioning and alignment. The follo
 You can customize the Badge content through the `Template()` method. This feature is useful when the Badge content depends on a specific condition, such as user permissions, the value of a global variable, or today's date.
 
 ```HtmlHelper
-    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
+    <a class="k-button">
         @(Html.Kendo().Badge()
             .Name("badge")
             .Text("42")
@@ -97,9 +97,9 @@ You can customize the Badge content through the `Template()` method. This featur
 ```
 {% if site.core %}
 ```TagHelper
-    <a class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">
-        <kendo-badge name="badge" 
-            text="42" 
+    <a class="k-button">
+        <kendo-badge name="badge"
+            text="42"
             rounded="Rounded.Full"
             template="#= this._text > 10 ? '9+' : this._text #">
         </kendo-badge>
@@ -166,7 +166,7 @@ You can integrate the Badge into other UI components. The following example demo
                          theme-color="BadgeColor.Success"
                          text="New"
                          is-in-client-template="true">
-            </kendo-badge>                         
+            </kendo-badge>
         #}#
         #if(OrderID > 10){#
             <kendo-badge name="flag#=OrderID#"

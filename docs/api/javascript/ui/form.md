@@ -198,7 +198,7 @@ How to specify the type of an item in a Kendo UI form? Configure, define, or spe
                     label: "Last Name:",
                     validation: { required: true }
                 }]
-            },{ 
+            },{
                 type: "group",
                 label: "Shipping Address",
                 items:[{
@@ -421,14 +421,14 @@ How do I set up custom validation rules for specific form fields using Kendo UI'
         },
         items: [{
           field: "Name",
-          validation: { 
+          validation: {
             required: true,
             pattern:"[a-z A-Z]+"
           },
           hint:"Only lower and upper case letters are allowed"
         }, {
           field: "Email",
-          validation: { 
+          validation: {
             required: true,
             email:true
           }
@@ -451,17 +451,17 @@ How do I set up custom validation rules for specific form fields using Kendo UI'
         },
         items: [{
             field: "Name",
-            validation: { 
+            validation: {
                 required: {
                     message: "The field is required" },
                 pattern: {
-                    value:"[a-z A-Z]+", 
+                    value:"[a-z A-Z]+",
                     message:"Invalid input"}
                 },
             hint:"Only lower and upper case letters are allowed"
         }, {
           field: "Email",
-          validation: { 
+          validation: {
             required: true,
             email:true
           }
@@ -486,7 +486,7 @@ How do I set up custom validation rules for specific form fields using Kendo UI'
           field: "Name",
         },{
           field: "Comment",
-          validation: { 
+          validation: {
             validateCommentlength:function(input){
               if (input.is("[name='Comment']") && input.val() != "") {
                 input.attr("data-validatecommentlength-msg", "Comment must be less than 150 characters");
@@ -792,7 +792,7 @@ How to set column span for form fields in Kendo UI jQuery? Set or customize the 
                 validation: { required: true },
                 colSpan: 4
             }]
-        },{ 
+        },{
             type: "group",
             label: "Shipping Address",
             layout: "grid",
@@ -868,7 +868,7 @@ How to set maximum width for column span adjustment in Kendo UI form items? Set 
                 validation: { required: true },
                 colSpan: 4
             }]
-        },{ 
+        },{
             type: "group",
             label: "Shipping Address",
             layout: "grid",
@@ -937,7 +937,7 @@ How to set minimum width threshold for Kendo UI form column span changes? Set or
                 validation: { required: true },
                 colSpan: 4
             }]
-        },{ 
+        },{
             type: "group",
             label: "Shipping Address",
             layout: "grid",
@@ -1006,7 +1006,7 @@ How to dynamically adjust the column span of form items in Kendo UI for jQuery b
                 validation: { required: true },
                 colSpan: 4
             }]
-        },{ 
+        },{
             type: "group",
             label: "Shipping Address",
             layout: "grid",
@@ -1065,7 +1065,7 @@ How do I add custom attributes to form input elements in Kendo UI for jQuery? Ad
         color:red;
       }
     </style>
- 
+
 ### items.layout `String` *(default: '')*
 
 Specify the layout of the item when `items.type` is set to "group". Valid options:
@@ -1082,7 +1082,7 @@ How do I control the layout of form items within a grouped section in Kendo UI f
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1101,27 +1101,27 @@ How do I control the layout of form items within a grouped section in Kendo UI f
                         layout: "grid",
                         grid: { cols: 1, gutter: 10},
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1140,7 +1140,7 @@ How do I customize the layout of form elements using grid properties in Kendo UI
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1159,27 +1159,27 @@ How do I customize the layout of form elements using grid properties in Kendo UI
                         layout: "grid",
                         grid: { cols: 1, gutter: 10},
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1197,7 +1197,7 @@ How to configure column settings for an embedded grid within a Kendo UI form ite
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1212,27 +1212,27 @@ How to configure column settings for an embedded grid within a Kendo UI form ite
                         layout: "grid",
                         grid: { cols: 1, gutter: 10},
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1251,7 +1251,7 @@ How do I set the maximum width for Kendo UI form grid columns to adjust responsi
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1264,7 +1264,7 @@ How do I set the maximum width for Kendo UI form grid columns to adjust responsi
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             cols: [{
                                 maxWidth: 600,
                                 value: 2
@@ -1278,31 +1278,31 @@ How do I set the maximum width for Kendo UI form grid columns to adjust responsi
                                 minWidth: 801,
                                 maxWidth: 2800,
                                 value: 4
-                            }], 
+                            }],
                             gutter: 10
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1320,7 +1320,7 @@ How to set minimum width for responsive columns in Kendo UI form grid? Configure
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1333,7 +1333,7 @@ How to set minimum width for responsive columns in Kendo UI form grid? Configure
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             cols: [{
                                 maxWidth: 600,
                                 value: 2
@@ -1347,31 +1347,31 @@ How to set minimum width for responsive columns in Kendo UI form grid? Configure
                                 minWidth: 801,
                                 maxWidth: 2800,
                                 value: 4
-                            }], 
+                            }],
                             gutter: 10
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1389,7 +1389,7 @@ How do I dynamically change the number of columns in a Kendo UI form based on it
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1402,7 +1402,7 @@ How do I dynamically change the number of columns in a Kendo UI form based on it
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             cols: [{
                                 maxWidth: 600,
                                 value: 2
@@ -1416,31 +1416,31 @@ How do I dynamically change the number of columns in a Kendo UI form based on it
                                 minWidth: 801,
                                 maxWidth: 2800,
                                 value: 4
-                            }], 
+                            }],
                             gutter: 10
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1478,7 +1478,7 @@ How to adjust the spacing between form fields in Kendo UI for jQuery? Control an
                     label: "First Name:",
                     validation: { required: true }
                 }, {
-                    field: "LastName", 
+                    field: "LastName",
                     label: "Last Name:",
                     validation: { required: true }
                 }, {
@@ -1504,7 +1504,7 @@ How do I adjust vertical spacing between rows in Kendo UI grid-based form layout
      <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1517,7 +1517,7 @@ How do I adjust vertical spacing between rows in Kendo UI grid-based form layout
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 rows: [{
                                     maxWidth: 600,
@@ -1537,27 +1537,27 @@ How do I adjust vertical spacing between rows in Kendo UI grid-based form layout
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1576,7 +1576,7 @@ How to set maximum pixel width for row gutters in Kendo UI form responsive grid 
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1589,7 +1589,7 @@ How to set maximum pixel width for row gutters in Kendo UI form responsive grid 
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 rows: [{
                                     maxWidth: 600,
@@ -1609,27 +1609,27 @@ How to set maximum pixel width for row gutters in Kendo UI form responsive grid 
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1647,7 +1647,7 @@ How do I set the minimum screen width for responsive row spacing in Kendo UI for
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1660,7 +1660,7 @@ How do I set the minimum screen width for responsive row spacing in Kendo UI for
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 rows: [{
                                     maxWidth: 600,
@@ -1680,27 +1680,27 @@ How do I set the minimum screen width for responsive row spacing in Kendo UI for
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1718,7 +1718,7 @@ How do I set vertical spacing between grid rows in Kendo UI forms? Adjust and co
 <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1731,7 +1731,7 @@ How do I set vertical spacing between grid rows in Kendo UI forms? Adjust and co
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 rows: [{
                                     maxWidth: 600,
@@ -1751,27 +1751,27 @@ How do I set vertical spacing between grid rows in Kendo UI forms? Adjust and co
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1789,7 +1789,7 @@ How do I adjust the horizontal spacing between columns in a Kendo UI form grid? 
     <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1802,7 +1802,7 @@ How do I adjust the horizontal spacing between columns in a Kendo UI form grid? 
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 cols: [{
                                     maxWidth: 600,
@@ -1822,27 +1822,27 @@ How do I adjust the horizontal spacing between columns in a Kendo UI form grid? 
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1860,7 +1860,7 @@ How do I set the maximum width for responsive grid columns in a Kendo UI form la
         <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1873,7 +1873,7 @@ How do I set the maximum width for responsive grid columns in a Kendo UI form la
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 cols: [{
                                     maxWidth: 600,
@@ -1893,27 +1893,27 @@ How do I set the maximum width for responsive grid columns in a Kendo UI form la
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -1931,7 +1931,7 @@ How to set minimum width for grid gutter columns in a Kendo UI form? Set or adju
         <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -1944,7 +1944,7 @@ How to set minimum width for grid gutter columns in a Kendo UI form? Set or adju
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 cols: [{
                                     maxWidth: 600,
@@ -1964,27 +1964,27 @@ How to set minimum width for grid gutter columns in a Kendo UI form? Set or adju
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -2002,7 +2002,7 @@ How do I set the column gap value for different breakpoints in a Kendo UI Form g
         <form id="myForm"></form>
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             $("#myForm").kendoForm({
                 formData: {
                     FirstName: "John",
@@ -2015,7 +2015,7 @@ How do I set the column gap value for different breakpoints in a Kendo UI Form g
                         type: "group",
                         label: "Personal Information",
                         layout: "grid",
-                        grid: { 
+                        grid: {
                             gutter: {
                                 cols: [{
                                     maxWidth: 600,
@@ -2035,27 +2035,27 @@ How do I set the column gap value for different breakpoints in a Kendo UI Form g
                             }
                         },
                         items: [
-                            { 
-                                field: "FirstName", 
-                                label: "First Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "FirstName",
+                                label: "First Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "LastName", 
-                                label: "Last Name:", 
-                                validation: { required: true } 
+                            {
+                                field: "LastName",
+                                label: "Last Name:",
+                                validation: { required: true }
                             },
-                            { 
-                                field: "Email", 
-                                label: "Email", 
-                                validation: { 
-                                    required: true, 
-                                    email: true 
+                            {
+                                field: "Email",
+                                label: "Email",
+                                validation: {
+                                    required: true,
+                                    email: true
                                 }
                             }
                         ]
-                    },                  
-                ],               
+                    },
+                ],
             });
         });
     </script>
@@ -2424,7 +2424,7 @@ How to arrange form fields in a grid layout using Kendo UI for jQuery? Configure
                 validation: { required: true }
             }, {
                 field: "LastName",
-                label: "Last Name:", 
+                label: "Last Name:",
                 validation: { required: true }
             }, {
                 field: "Email",
@@ -2478,7 +2478,7 @@ How to control layout and alignment of input fields in a Kendo UI form using gri
                 label: "Last Name:",
                 validation: { required: true }
             }, {
-                field: "Email", 
+                field: "Email",
                 label: "Email:",
                 validation: { required: true, email: true }
             }, {
@@ -2728,7 +2728,7 @@ How to adjust spacing between form fields in Kendo UI for jQuery? Adjust and cus
         $("#myForm").kendoForm({
             formData: {
                 FirstName: "John",
-                LastName: "Doe", 
+                LastName: "Doe",
                 Email: "john.doe@email.com",
                 Phone: "123-456-7890"
             },
@@ -3134,14 +3134,15 @@ How to set column gap in Kendo UI form grid for different screen sizes? Adjust t
         });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -3315,7 +3316,7 @@ The [Validator instance](/api/javascript/ui/validator).
 How do I programmatically trigger validation on a Kendo UI form? Control and access the validation engine that runs input checks and manages validation rules within a form, enabling programmatic triggering of validation processes, inspection and modification of validation constraints, retrieving validation outcomes, setting up or customizing validation logic, invoking validation methods directly, managing rule sets for inputs, and performing dynamic or manual validation after form setup to ensure data integrity and input correctness.
 </div>
 
-#### Example - use the validator API 
+#### Example - use the validator API
 
     <form id="myForm"></form>
 

@@ -58,9 +58,11 @@ How do I disable a SplitButton in Kendo UI for jQuery? Control whether the butto
     </script>
 
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+Controls how the color is applied to the button. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -212,15 +214,15 @@ How to assign custom click event handlers to each item in a Kendo SplitButton? T
     <script>
         $("#splitButton").kendoSplitButton({
             items: [
-                { 
-                    text: "Save", 
+                {
+                    text: "Save",
                     click: function(e) {
                         console.log("Save clicked", e);
                         alert("Document saved!");
                     }
                 },
-                { 
-                    text: "Delete", 
+                {
+                    text: "Delete",
                     click: function(e) {
                         console.log("Delete clicked", e);
                         if (confirm("Are you sure?")) {
@@ -539,9 +541,11 @@ How do I control where my Kendo UI SplitButton's popup menu is appended? Control
         });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+Controls what border radius is applied to a button. When `undefined` (the default), the theme controls the default border radius. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -561,9 +565,11 @@ How to customize corner radius for Kendo UI SplitButton? Adjust the corner radiu
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+Controls the overall physical size of a button. When `undefined` (the default), the theme controls the default size. Valid values are:  `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -828,7 +834,7 @@ How do I access individual menu items within a Kendo UI SplitButton? Retrieve or
         // Get all menu items
         var items = splitButton.items();
         console.log("Number of menu items:", items.length);
-        
+
         // Access specific item
         items.each(function(index, item) {
             console.log("Item " + index + ":", $(item).text());

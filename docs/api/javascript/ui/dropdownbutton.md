@@ -36,9 +36,11 @@ How do I make my Kendo UI dropdown button clickable? Control whether the dropdow
     </script>
 
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+Controls how the color is applied to the button. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -169,17 +171,17 @@ How can I customize individual menu items in a Kendo UI dropdown button? Customi
     <script>
         $("#dropdownbutton").kendoDropDownButton({
             items: [
-                { 
-                    text: "Save", 
-                    attributes: { 
+                {
+                    text: "Save",
+                    attributes: {
                         "data-action": "save",
                         "data-priority": "high",
                         "title": "Save the current document"
                     }
                 },
-                { 
-                    text: "Export", 
-                    attributes: { 
+                {
+                    text: "Export",
+                    attributes: {
                         "data-action": "export",
                         "class": "export-item"
                     }
@@ -203,21 +205,21 @@ How do I handle click events on specific items in a Kendo UI dropdown button? Ma
     <script>
         $("#dropdownbutton").kendoDropDownButton({
             items: [
-                { 
+                {
                     text: "New",
                     click: function(e) {
                         console.log("New file clicked");
                         alert("Creating new file...");
                     }
                 },
-                { 
+                {
                     text: "Open",
                     click: function(e) {
                         console.log("Open file clicked", e);
                         alert("Opening file dialog...");
                     }
                 },
-                { 
+                {
                     text: "Save",
                     click: function(e) {
                         console.log("Save clicked", e.item);
@@ -365,7 +367,7 @@ How do I assign unique IDs to dropdown menu items in Kendo UI for jQuery? Assign
                 { id: "duplicate-item", text: "Duplicate" }
             ]
         });
-        
+
         // Later you can access items by their id
         var dropdownbutton = $("#dropdownbutton").data("kendoDropDownButton");
         console.log("Item with id 'edit-item':", dropdownbutton.items().filter('[data-id="edit-item"]'));
@@ -386,17 +388,17 @@ How do I set an image URL for dropdown menu items in Kendo UI DropDownButton? Se
     <script>
         $("#dropdownbutton").kendoDropDownButton({
             items: [
-                { 
-                    text: "Image", 
-                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/photo.png" 
+                {
+                    text: "Image",
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/photo.png"
                 },
-                { 
-                    text: "Video", 
-                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/video.png" 
+                {
+                    text: "Video",
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/video.png"
                 },
-                { 
-                    text: "Volume", 
-                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/speaker.png" 
+                {
+                    text: "Volume",
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/16/speaker.png"
                 }
             ]
         });
@@ -560,9 +562,11 @@ How do I specify where the dropdown button popup is attached in a Kendo UI for j
         });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+Controls what border radius is applied to a button. When `undefined` (the default), the theme controls the default border radius. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -582,9 +586,11 @@ How can I customize the appearance of rounded corners for a Kendo UI dropdown bu
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+Controls the overall physical size of a button. When `undefined` (the default), the theme controls the default size. Valid values are:  `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -674,7 +680,7 @@ How do I customize the color of Kendo UI dropdown buttons? Set or customize the 
         });
     </script>
 
-### messages `Object` 
+### messages `Object`
 
 Allows localization of the strings that are used in the widget.
 
@@ -698,7 +704,7 @@ How can I customize the dropdown menu labels in Kendo UI for jQuery? Customize a
         });
     </script>
 
-### messages.labelSuffix `String` 
+### messages.labelSuffix `String`
 
 Controls the label suffix that will be used for the aria-label attribute.
 
@@ -769,7 +775,7 @@ Collection of the items to disabled/enabled.
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         button.enable(false, "#item1");
     </script>
 
@@ -784,7 +790,7 @@ Collection of the items to disabled/enabled.
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         button.enable(false, $("#item1, #item2"));
     </script>
 
@@ -813,7 +819,7 @@ Collection of the items to hide.
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         button.hide($("#item1"));
     </script>
 
@@ -842,7 +848,7 @@ Collection of the items to show.
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         button.show($("#item1"));
     </script>
 
@@ -866,7 +872,7 @@ How can I access the dropdown menu items in Kendo UI for jQuery? Access and mani
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         var items = button.items();
         console.log(items);
     </script>
@@ -891,7 +897,7 @@ How can I programmatically open a dropdown menu in Kendo UI for jQuery? Trigger 
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         button.open();
     </script>
 
@@ -915,7 +921,7 @@ How do I programmatically close a dropdown menu with Kendo UI for jQuery? Progra
             ]
         });
         var button = $("#dropdownbutton").data("kendoDropDownButton");
-        
+
         button.close();
     </script>
 
@@ -942,7 +948,7 @@ The DOM element fired the event wrapped in jQuery object.
 
 ##### e.id `String`
 
-The id of the element, which fired the event, wrapped in jQuery object. 
+The id of the element, which fired the event, wrapped in jQuery object.
 
 #### Example - subscribe to the "click" event during initialization
 
@@ -977,7 +983,7 @@ The id of the element, which fired the event, wrapped in jQuery object.
 
 ### open
 
-Fires when the menu button is opened. 
+Fires when the menu button is opened.
 
 
 <div class="meta-api-description">
@@ -1001,7 +1007,7 @@ How to detect when Kendo UI DropDownButton menu opens? Trigger custom actions or
 
 ### close
 
-Fires when the menu button is closed. 
+Fires when the menu button is closed.
 
 
 <div class="meta-api-description">

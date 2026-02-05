@@ -40,13 +40,13 @@ To achieve the desired result:
 
     <script type="text/x-kendo-template" id="template"> // ToolBar Template
         <div class="editBtnContainer">
-             <button type="button" class="k-button k-button-md k-rounded-md k-button-solid  k-button-solid-base k-grid-custom">Edit</button>          
+             <button type="button" class="k-button  k-grid-custom">Edit</button>
 
         </div>
         <div class="updateCancelContainer">
-                <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-save-command" href="\\#"> 
+                <a role="button" class="k-button    k-grid-save-command" href="\\#">
             <span class="k-icon k-i-check k-button-icon"></span>Update</a>
-            <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-cancel-command" href="\\#">
+            <a role="button" class="k-button    k-grid-cancel-command" href="\\#">
             <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
         </div>
     </script>
@@ -86,13 +86,13 @@ To achieve the desired result:
 
     <script type="text/x-kendo-template" id="template"> // ToolBar Template
         <div class="editBtnContainer">
-             <button type="button" class="k-button k-button-md k-rounded-md k-button-solid  k-button-solid-base k-grid-custom">Edit</button>          
+             <button type="button" class="k-button  k-grid-custom">Edit</button>
 
         </div>
         <div class="updateCancelContainer">
-                <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-save-command" href="\\#"> 
+                <a role="button" class="k-button    k-grid-save-command" href="\\#">
             <span class="k-icon k-i-check k-button-icon"></span>Update</a>
-            <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-cancel-command" href="\\#">
+            <a role="button" class="k-button    k-grid-cancel-command" href="\\#">
             <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
         </div>
     </script>

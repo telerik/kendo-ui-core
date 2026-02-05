@@ -72,17 +72,17 @@ describe("SplitButton intialization", function() {
         assert.equal(button.children().eq(1).text(), "Button");
     });
 
-    it("SplitButton renders buttons with default styling options", function() {
+    it("SplitButton does not render default styling classes when options are undefined", function() {
         let splitButton = new SplitButton(button, { items: defaultItems });
 
-        assert.isOk(button.hasClass("k-button-md"));
-        assert.isOk(button.hasClass("k-rounded-md"));
-        assert.isOk(button.hasClass("k-button-solid"));
-        assert.isOk(button.hasClass("k-button-solid-base"));
-        assert.isOk(button.next().hasClass("k-button-md"));
-        assert.isOk(button.next().hasClass("k-rounded-md"));
-        assert.isOk(button.next().hasClass("k-button-solid"));
-        assert.isOk(button.next().hasClass("k-button-solid-base"));
+        assert.isNotOk(button.hasClass("k-button-md"));
+        assert.isNotOk(button.hasClass("k-rounded-md"));
+        assert.isNotOk(button.hasClass("k-button-solid"));
+        assert.isNotOk(button.hasClass("k-button-base"));
+        assert.isNotOk(button.next().hasClass("k-button-md"));
+        assert.isNotOk(button.next().hasClass("k-rounded-md"));
+        assert.isNotOk(button.next().hasClass("k-button-solid"));
+        assert.isNotOk(button.next().hasClass("k-button--base"));
     });
 
     it("SplitButton renders buttons with correct styling options", function() {
@@ -97,11 +97,11 @@ describe("SplitButton intialization", function() {
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-outline-dark"));
+        assert.isOk(button.hasClass("k-button-dark"));
         assert.isOk(button.next().hasClass("k-button-sm"));
         assert.isOk(button.next().hasClass("k-rounded-sm"));
         assert.isOk(button.next().hasClass("k-button-outline"));
-        assert.isOk(button.next().hasClass("k-button-outline-dark"));
+        assert.isOk(button.next().hasClass("k-button-dark"));
     });
 
     it("SplitButton renders buttons with correct styling options after setOptions", function() {
@@ -119,19 +119,19 @@ describe("SplitButton intialization", function() {
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-outline-dark"));
+        assert.isOk(button.hasClass("k-button-dark"));
         assert.isOk(button.next().hasClass("k-button-sm"));
         assert.isOk(button.next().hasClass("k-rounded-sm"));
         assert.isOk(button.next().hasClass("k-button-outline"));
-        assert.isOk(button.next().hasClass("k-button-outline-dark"));
+        assert.isOk(button.next().hasClass("k-button-dark"));
     });
 
-    it("SplitButton renders default rounded option", function() {
+    it("SplitButton does not render default rounded option when undefined", function() {
         let splitButton = new SplitButton(button, { items: defaultItems });
 
-        assert.isOk(button.hasClass("k-rounded-md"));
-        assert.isOk(button.next().hasClass("k-rounded-md"));
-        assert.isOk(splitButton.wrapper.hasClass("k-rounded-md"));
+        assert.isNotOk(button.hasClass("k-rounded-md"));
+        assert.isNotOk(button.next().hasClass("k-rounded-md"));
+        assert.isNotOk(splitButton.wrapper.hasClass("k-rounded-md"));
     });
 
     it("SplitButton renders small rounded option", function() {

@@ -438,11 +438,11 @@ How do I link specific templates to different notification types in Kendo UI? Co
             type: "info",
             template: (data) => `<div class='info-notification'>${data.content}</div>`
         }, {
-            type: "warning",  
+            type: "warning",
             template: (data) => `<div class='warning-notification'>${data.content}</div>`
         }]
     });
-    
+
     // Show notification with specific type
     $("#notification").getKendoNotification().show("This is an info message", "info");
     </script>
@@ -472,7 +472,7 @@ How do I customize the layout of individual notifications in Kendo UI for jQuery
             </div>`
         }]
     });
-    
+
     // Show notification with custom template
     $("#notification").getKendoNotification().show({
         title: "Custom Title",
@@ -551,12 +551,12 @@ How to display error messages with Kendo UI for jQuery notification? Display or 
     <div id="notification"></div>
     <script>
     $("#notification").kendoNotification();
-    
+
     var notification = $("#notification").getKendoNotification();
-    
+
     // Show error notification with string message
     notification.error("An error occurred while processing your request");
-    
+
     // Show error notification with object data
     notification.error({
         title: "Error",
@@ -658,13 +658,13 @@ How to display an informational notification with Kendo UI for jQuery? Display, 
     <div id="notification"></div>
     <script>
     $("#notification").kendoNotification();
-    
+
     var notification = $("#notification").getKendoNotification();
-    
+
     // Show info notification with string message
     notification.info("This is an informational message");
-    
-    // Show info notification with object data  
+
+    // Show info notification with object data
     notification.info({
         title: "Information",
         message: "Your data has been saved successfully"
@@ -699,8 +699,8 @@ How do I programmatically show a notification in Kendo UI with custom animation?
 
 ##### type `String`
 
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
-If this argument is not supplied, then `"info"` is assumed.
+The notification type. Built-in types include `"info"`, `"success"`, `"warning"`,`"error"` and `"default"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
+If this argument is not supplied, then `"default"` is assumed.
 
 #### Example - Use the show method with a template and custom arguments
 
@@ -810,12 +810,12 @@ How do I trigger a success notification in Kendo UI for jQuery? Display or trigg
     <div id="notification"></div>
     <script>
     $("#notification").kendoNotification();
-    
+
     var notification = $("#notification").getKendoNotification();
-    
+
     // Show success notification with string message
     notification.success("Operation completed successfully!");
-    
+
     // Show success notification with object data
     notification.success({
         title: "Success",
@@ -843,12 +843,12 @@ How do I programmatically trigger a warning notification in Kendo UI for jQuery?
     <div id="notification"></div>
     <script>
     $("#notification").kendoNotification();
-    
+
     var notification = $("#notification").getKendoNotification();
-    
+
     // Show warning notification with string message
     notification.warning("Please review your input before proceeding");
-    
+
     // Show warning notification with object data
     notification.warning({
         title: "Warning",

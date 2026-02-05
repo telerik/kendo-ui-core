@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -47,8 +47,8 @@ Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/m
 
 ```dojo
 <div id="example">
-      <button id="expand" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'><span class='k-button-text'>Expand All</span></button>
-      <button id="collapse" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'><span class='k-button-text'>Collapse All</span></button>
+      <button id="expand" class='k-button'><span class='k-button-text'>Expand All</span></button>
+      <button id="collapse" class='k-button'><span class='k-button-text'>Collapse All</span></button>
       <div id="grid"></div>
 
       <script>

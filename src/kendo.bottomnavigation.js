@@ -76,11 +76,11 @@ export const __meta__ = {
             name: "BottomNavigation",
             positionMode: "fixed",
             items: [],
-            themeColor: "primary",
+            themeColor: undefined,
             itemFlow: "vertical",
             // Backwards compatibility, so that we keep 'fill' as a legacy option
             fillMode: null,
-            fill: "flat",
+            fill: undefined,
             shadow: false,
             border: true,
             template: null

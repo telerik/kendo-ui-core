@@ -9,7 +9,7 @@ position: 2
 
 # Getting Started with the Validator
 
-This guide demonstrates how to get up and running with the Kendo UI for jQuery Validator. 
+This guide demonstrates how to get up and running with the Kendo UI for jQuery Validator.
 
 After the completion of this guide, you will be able to achieve the following end result:
 
@@ -30,34 +30,34 @@ After the completion of this guide, you will be able to achieve the following en
 
         <input type="text" name="country" id="country" required data-required-msg="Select a country of origin"/>
         <span class="k-invalid-msg" data-for="country"></span>
-      </p> 
+      </p>
       <p>
         <label for="email">Email</label>
 
-        <input type="email" id="email" name="email" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" /> 
-      </p> 
+        <input type="email" id="email" name="email" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" />
+      </p>
       <p>
       <div class="custom">
         <label for="accept">I accept the terms of service.</label>
-        <input type="checkbox" id="accept" name="Accept" required validationMessage="Acceptance is required" />       
+        <input type="checkbox" id="accept" name="Accept" required validationMessage="Acceptance is required" />
       </div>
-      </p> 
+      </p>
 
-    <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+    <button class="k-button k-button-primary" type="submit">Submit</button>
     </form>
 
     <script>
       $(document).ready(function() {
-    
+
         $("#fullname").kendoTextBox();
         $("#email").kendoTextBox();
         $("#accept").kendoCheckBox();
         $("#country").kendoDropDownList({
           optionLabel: "-- Select a country of origin --",
           dataSource: ["Argentina", "Brazil", "Italy", "Japan", "Portugal"],
-        });    
+        });
         $("#age").kendoNumericTextBox();
-    
+
         $("#sampleForm").kendoValidator({
           validationSummary: true,
           messages: {
@@ -88,7 +88,7 @@ First, create a `<form>` element on the page that will serve as the main contain
 
 ## 2. Add Fields to the Form
 
-Add elements in the `form` where the user can fill in the data that will be validated.  
+Add elements in the `form` where the user can fill in the data that will be validated.
 
 ```html
 	<form id="sampleForm">
@@ -107,28 +107,28 @@ Add elements in the `form` where the user can fill in the data that will be vali
 
         <input type="text" name="country" id="country" required data-required-msg="Select a country of origin"/>
         <span class="k-invalid-msg" data-for="country"></span>
-      </p> 
+      </p>
       <p>
         <label for="email">Email</label>
 
-        <input type="email" id="email" name="email" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" /> 
-      </p> 
+        <input type="email" id="email" name="email" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" />
+      </p>
       <p>
       <div class="custom">
         <label for="accept">I accept the terms of service.</label>
-        <input type="checkbox" id="accept" name="Accept" required validationMessage="Acceptance is required" />       
+        <input type="checkbox" id="accept" name="Accept" required validationMessage="Acceptance is required" />
       </div>
-      </p> 
+      </p>
 
-	  <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+	  <button class="k-button k-button-primary" type="submit">Submit</button>
     </form>
 ```
 
-## 3. Initialize the Validator 
+## 3. Initialize the Validator
 
 In this step, you will initialize the Validator from the existing `<form>` element. When you initialize the component, all settings of the Validator will be provided in the initialization script statement and you have to describe its configuration in JavaScript.
 
-If other Kendo widgets are used in the form, you will also need to initialize them as well. 
+If other Kendo widgets are used in the form, you will also need to initialize them as well.
 
 ```html
 <form id="sampleForm">
@@ -136,7 +136,7 @@ If other Kendo widgets are used in the form, you will also need to initialize th
 </form>
 
 <script>
-	// The code below initializes the Kendo UI widgets that are used in the form. Using Kendo UI widgets inside the form is optional. 
+	// The code below initializes the Kendo UI widgets that are used in the form. Using Kendo UI widgets inside the form is optional.
 	$("#fullname").kendoTextBox();
     $("#email").kendoTextBox();
     $("#accept").kendoCheckBox();
@@ -145,7 +145,7 @@ If other Kendo widgets are used in the form, you will also need to initialize th
       dataSource: ["Argentina", "Brazil", "Italy", "Japan", "Portugal"],
     });
     $("#age").kendoNumericTextBox();
-	
+
     // Target the form element by using jQuery and then call the kendoValidator() method.
     $("#sampleForm").kendoValidator();
 </script>
@@ -161,8 +161,8 @@ Once the basic initialization is completed, you can start adding additional conf
   ...
 </form>
 
-<script>    
-    $("#sampleForm").kendoValidator({        
+<script>
+    $("#sampleForm").kendoValidator({
         rules: {
           fullname: function(input) {
             // The FullName must be at least three characters long.
@@ -184,9 +184,9 @@ The Validator allows you to define [custom messages]({% slug rules_kendoui_valid
 	<form id="sampleForm">
 	...
 	</form>
-	
-	<script>    
-		$("#sampleForm").kendoValidator({  
+
+	<script>
+		$("#sampleForm").kendoValidator({
 			messages: {
 				// Defines a message for the custom validation rule.
 				fullname: "The FullName must be at least 3 characters long",
@@ -206,26 +206,26 @@ The Validator allows you to define [custom messages]({% slug rules_kendoui_valid
 
 ## 6. Enable the Validation Summary
 
-Among other functionalities, the Validator provides the ability to list validation errors in a separate container. To achieve that, you can enable the [`validationSummary`]({% slug validationsummary_kendoui_validator %}) option. 
+Among other functionalities, the Validator provides the ability to list validation errors in a separate container. To achieve that, you can enable the [`validationSummary`]({% slug validationsummary_kendoui_validator %}) option.
 
 ```html
 	<form id="sampleForm">
 	...
 	</form>
-	
-	<script>    
-		$("#sampleForm").kendoValidator({        
+
+	<script>
+		$("#sampleForm").kendoValidator({
 			validationSummary: true
 		});
 	</script>
 ```
 
-## Next Steps 
+## Next Steps
 
-* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %}) 
+* [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
 * [Demo Page for the Validator](https://demos.telerik.com/kendo-ui/validator/index)
 
-## See Also 
+## See Also
 
 * [JavaScript API Reference of the Validator](/api/javascript/ui/validator)
 * [Knowledge Base Section](/knowledge-base)

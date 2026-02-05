@@ -41,7 +41,7 @@ The following example demonstrates how to use a [`click`](https://docs.telerik.c
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div id="example">
-      <input type="button" id="clearFilterButton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" value="Clear Filter" />
+      <input type="button" id="clearFilterButton" class="k-button" value="Clear Filter" />
       <br><br>
       <div id="grid"></div>
 

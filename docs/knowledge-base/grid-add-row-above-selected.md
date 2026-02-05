@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -29,7 +29,7 @@ How can I add add a row above the selected row in the Grid?
 
 2. Find the index of the currently selected Grid row.
 
-3. Then, you could use the [dataSource insert](/api/javascript/data/datasource/methods/insert) method. 
+3. Then, you could use the [dataSource insert](/api/javascript/data/datasource/methods/insert) method.
 
 ```dojo
   <div id="grid"></div>
@@ -93,7 +93,7 @@ How can I add add a row above the selected row in the Grid?
       selectable: true,
       toolbar: [
         {
-          template: '<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-primary tton-solid-primary" onclick="return toolbar_click()">custom Add Command</button>'
+          template: '<button class="k-button k-button-rectangle k-button-primary" onclick="return toolbar_click()">custom Add Command</button>'
         },
         "create"
       ],

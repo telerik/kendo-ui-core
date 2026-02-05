@@ -36,8 +36,8 @@ How can I add a checkbox option in the Telerik UI for {{ site.framework }} Grid 
             .Columns(columns =>
             {
                 columns.Select().Width(50)
-                .ClientHeaderTemplate("<input tabindex='-1' id='header-check-all' class='k-select-checkbox k-checkbox k-checkbox-md k-rounded-md' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>")
-                .ClientFooterTemplate("<input tabindex='-1' id='footer-check-all' class='k-select-checkbox k-checkbox k-checkbox-md k-rounded-md' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>");
+                .ClientHeaderTemplate("<input tabindex='-1' id='header-check-all' class='k-select-checkbox k-checkbox' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>")
+                .ClientFooterTemplate("<input tabindex='-1' id='footer-check-all' class='k-select-checkbox k-checkbox' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>");
                 ...
             })
             .PersistSelection()
@@ -52,8 +52,8 @@ How can I add a checkbox option in the Telerik UI for {{ site.framework }} Grid 
         <kendo-grid name="grid" persist-selection="true">
             <columns>
                 <column selectable="true" width="50"
-                    header-template="<input tabindex='-1' id='header-check-all' class='k-select-checkbox k-checkbox k-checkbox-md k-rounded-md' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>"
-                    footer-template="<input tabindex='-1' id='footer-check-all' class='k-select-checkbox k-checkbox k-checkbox-md k-rounded-md' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>">
+                    header-template="<input tabindex='-1' id='header-check-all' class='k-select-checkbox k-checkbox' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>"
+                    footer-template="<input tabindex='-1' id='footer-check-all' class='k-select-checkbox k-checkbox' data-role='checkbox' aria-label='Select all rows' type='checkbox'/>">
                 </column>
                 ...
             </columns>

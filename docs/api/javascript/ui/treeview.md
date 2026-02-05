@@ -832,14 +832,15 @@ How do I customize the appearance of tree nodes in a Kendo UI TreeView using tem
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1492,10 +1493,10 @@ How do I get access to the actual HTML elements in my Kendo UI TreeView? Retriev
     });
 
     var treeview = $("#treeview").data("kendoTreeView");
-    
+
     // Get all currently rendered tree items
     var items = treeview.items();
-    
+
     console.log("Number of rendered items:", items.length);
     // Log each item's text content
     items.each(function(index, element) {

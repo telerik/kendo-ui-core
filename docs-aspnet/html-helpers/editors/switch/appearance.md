@@ -23,7 +23,7 @@ The Switch HtmlHelper provides the following styling options:
 
 ### Size
 
-The `Size()` method allows you to adjust the size of the Switch. The default size is `Medium`.
+The `Size()` method allows you to adjust the size of the Switch.
 
 ```HtmlHelper
 @(Html.Kendo().Switch()
@@ -52,7 +52,10 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
-- `None`
+
+> When not explicitly set, the applied theme controls the default size.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### TrackRounded
 
@@ -85,7 +88,10 @@ The `TrackRounded` option supports the following values:
 - `Medium`
 - `Large`
 - `Full`
-- `None`
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 ### ThumbRounded

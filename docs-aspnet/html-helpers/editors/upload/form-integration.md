@@ -218,7 +218,7 @@ To use the [built-in file validation of the Upload component]({% slug htmlhelper
         .Hint("Accepted file formats: .txt, .docx, .pdf")
         .Editor(e => e
             .Upload()
-            .Validation(validation => 
+            .Validation(validation =>
             {
                 validation.AllowedExtensions(new string[] { ".txt", ".docx", ".pdf" });
                 validation.MaxFileSize(31457280);
@@ -263,7 +263,7 @@ To ensure that the selected files for upload are valid based on the specified fi
         .Hint("Accepted file formats: .txt, .docx, .pdf")
         .Editor(e => e
             .Upload()
-            .Validation(validation => 
+            .Validation(validation =>
             {
                 validation.AllowedExtensions(new string[] { ".txt", ".docx", ".pdf" });
                 validation.MaxFileSize(31457280);
@@ -343,7 +343,7 @@ The following example shows how to integrate the Upload component into a standar
                 )
             </div>
         </div>
-        <button type="submit" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Submit</button>
+        <button type="submit" class="k-button k-button-primary">Submit</button>
     </form>
     ```
     ```TagHelper
@@ -368,7 +368,7 @@ The following example shows how to integrate the Upload component into a standar
                 </kendo-upload>
             </div>
         </div>
-        <button type="submit" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Submit</button>
+        <button type="submit" class="k-button k-button-primary">Submit</button>
     </form>
     ```
     {% else %}
@@ -408,7 +408,7 @@ The following example shows how to integrate the Upload component into a standar
                 )
             </div>
         </div>
-        <button type="submit" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Submit</button>
+        <button type="submit" class="k-button k-button-primary">Submit</button>
     }
     ```
     {% endif %}

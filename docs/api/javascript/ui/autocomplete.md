@@ -435,14 +435,15 @@ How can I prevent Kendo UI AutoComplete from showing all suggestions when the in
     });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
-- "none"
 - "solid"
 - "flat"
 - "outline"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1050,15 +1051,16 @@ How do I control the separator between the prefix and input field in a Kendo UI 
       })
     </script>
 
-### rounded `String`*(default: "medium")*
+### rounded `String`*(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
-- "none"
 - "small"
 - "medium"
 - "large"
 - "full"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1081,14 +1083,15 @@ How do I customize the rounded corners of an autocomplete dropdown? Adjust and c
       });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1891,13 +1894,13 @@ How can I get the list of items currently displayed in my Kendo AutoComplete dro
         filter: "startswith",
         suggest: true
     });
-    
+
     // Get reference to the autocomplete widget
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-    
+
     // Type some text to filter the items
     autocomplete.search("a");
-    
+
     // Get the currently rendered items
     setTimeout(function() {
         var items = autocomplete.items();

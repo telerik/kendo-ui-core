@@ -385,7 +385,7 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-primary"));
+            assert.isOk(button.hasClass("k-button-primary"));
         });
 
         it("action with themeColor error applies error theme class", function() {
@@ -397,7 +397,7 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-error"));
+            assert.isOk(button.hasClass("k-button-error"));
         });
 
         it("action with themeColor warning applies warning theme class", function() {
@@ -409,7 +409,7 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-warning"));
+            assert.isOk(button.hasClass("k-button-warning"));
         });
 
         it("action with fillMode applies fill mode class", function() {
@@ -571,7 +571,8 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-error"));
+            assert.isOk(button.hasClass("k-button-solid"));
+            assert.isOk(button.hasClass("k-button-error"));
             assert.isOk(button.hasClass("k-button-md"));
             assert.isOk(button.hasClass("k-rounded-full"));
             assert.equal(button.find(".k-button-icon").length, 1);
@@ -586,7 +587,7 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-primary"));
+            assert.isOk(button.hasClass("k-button-primary"));
         });
 
         it("action with primary true and themeColor uses specified themeColor", function() {
@@ -599,7 +600,7 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-error"));
+            assert.isOk(button.hasClass("k-button-error"));
         });
 
         it("setOptions updates action button properties", function() {
@@ -619,7 +620,7 @@ describe("api", function() {
             });
 
             let button = dialog.wrapper.find(".k-dialog-actions .k-button");
-            assert.isOk(button.hasClass("k-button-solid-error"));
+            assert.isOk(button.hasClass("k-button-error"));
             assert.equal(button.find(".k-button-icon").length, 1);
         });
 
@@ -646,8 +647,9 @@ describe("api", function() {
             let buttons = dialog.wrapper.find(".k-dialog-actions .k-button");
             assert.equal(buttons.length, 3);
             assert.isOk(buttons.eq(0).hasClass("k-button-outline"));
-            assert.isOk(buttons.eq(1).hasClass("k-button-solid-error"));
-            assert.isOk(buttons.eq(2).hasClass("k-button-solid-warning"));
+            assert.isOk(buttons.eq(1).hasClass("k-button-solid"));
+            assert.isOk(buttons.eq(1).hasClass("k-button-error"));
+            assert.isOk(buttons.eq(2).hasClass("k-button-warning"));
             assert.isOk(buttons.eq(2).hasClass("k-rounded-full"));
             assert.isOk(buttons.eq(2).hasClass("k-icon-button"));
         });

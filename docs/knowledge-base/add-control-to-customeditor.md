@@ -124,7 +124,7 @@ The following example demonstrates how to achieve the desired scenario.
                 var container = e.container;
 
                 /* ACTION: Ading a custom button. */
-                var newButton = $('<a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" href="#">New button</a>');
+                var newButton = $('<a class="k-button" href="#">New button</a>');
 
                 // Wire its click event.
                 newButton.click(function(e) { alert("Clicked"); });

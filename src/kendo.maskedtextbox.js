@@ -141,9 +141,9 @@ export const __meta__ = {
             value: "",
             mask: "",
             label: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             prefixOptions: {
                 separator: true
             },

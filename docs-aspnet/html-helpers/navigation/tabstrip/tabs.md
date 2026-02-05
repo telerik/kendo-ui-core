@@ -231,7 +231,7 @@ The following example showcases how to add a button element inside a specified t
         .Items(tabstrip =>
         {
             tabstrip.Add()
-            .Text("<button id='tab1Btn' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>")
+            .Text("<button id='tab1Btn' class='k-button k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>")
             .Encoded(false)
             .Selected(true)
             .Content(@<text>
@@ -255,7 +255,7 @@ The following example showcases how to add a button element inside a specified t
 ```TagHelper
     <kendo-tabstrip name="tabstrip">
         <items>
-            <tabstrip-item selected="true" encoded="false" text="<button id='tab1Btn' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>">
+            <tabstrip-item selected="true" encoded="false" text="<button id='tab1Btn' class='k-button k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>">
                 <content>
                     <p>Rainy weather in Paris.</p>
                 </content>

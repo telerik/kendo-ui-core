@@ -118,11 +118,11 @@ How to add custom CSS classes to Kendo UI Chip's remove icon? Add custom CSS cla
     </script>
 
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Specifies the background and border styles of the Chip. Valid fillMode options are:
+Specifies the background and border styles of the Chip. When `undefined` (the default), the theme controls the default fill mode. Valid fillMode options are:
 
-* `solid` *(default)*
+* `solid`
 * `outline`
 
 
@@ -140,9 +140,11 @@ How to configure the background rendering of a Kendo UI for jQuery Chip componen
     </script>
 
 
-### rounded  `String` *(default: 'medium')*
+### rounded  `String` *(default: undefined)*
 
-Specifies the size of the chip. Valid options are `small`, `medium`, `large`, `full` and `none`.
+Specifies the size of the chip. When `undefined` (the default), the theme controls the default border radius. Valid options are `small`, `medium`, `large`, `full`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -164,9 +166,11 @@ How to set a rounded corner style for a Kendo UI chip element? Adjust or configu
         $('#chip-none').kendoChip({ rounded: 'none', themeColor: 'success' });
     </script>
 
-### size  `String` *(default: 'medium')*
+### size  `String` *(default: undefined)*
 
-Specifies the size of the chip. Valid options are `small`, `medium`, `large` and `none`.
+Specifies the size of the chip. When `undefined` (the default), the theme controls the default size. Valid options are `small`, `medium`, `large`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

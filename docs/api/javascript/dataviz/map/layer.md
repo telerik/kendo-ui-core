@@ -21,7 +21,7 @@ How do I link a layer to its parent map in Kendo UI for jQuery? Configure the in
 
 #### Example - add a layer to an existing map instance
 
-    <button class="k-button k-button-lg k-button-solid-primary" id="add">Add Layer</button>
+    <button class="k-button k-button-lg k-button-primary" id="add">Add Layer</button>
     <div id="map"></div>
     <script>
       $("#add").on("click", function() {
@@ -59,7 +59,7 @@ How do I customize the display of data on a map layer in Kendo UI using Layer.op
 
 #### Example - add a layer to an existing map instance
 
-    <button class="k-button k-button-lg k-button-solid-primary" id="add">Add Layer</button>
+    <button class="k-button k-button-lg k-button-primary" id="add">Add Layer</button>
     <div id="map"></div>
     <script>
       $("#add").on("click", function() {
@@ -116,7 +116,7 @@ How do I access the parent map object in Kendo UI for jQuery? Retrieve or access
             }
           ]
         });
-        
+
         // Access the owner Map widget from the layer
         let map = $("#map").data("kendoMap");
         let layer = map.layers[0];
@@ -138,7 +138,7 @@ How do I dynamically show or hide specific layers on a Kendo UI map? Control lay
 
 #### Example
 
-    <button class="k-button k-button-lg k-button-solid-primary" id="show">Show Layer</button>
+    <button class="k-button k-button-lg k-button-primary" id="show">Show Layer</button>
     <div id="map"></div>
     <script>
       $("#show").on("click", function() {
@@ -164,7 +164,7 @@ How do I dynamically show or hide specific layers on a Kendo UI map? Control lay
             }
           ]
         });
-        
+
         // Hide the first layer by default.
         $("#map").data("kendoMap").layers[0].hide();
       }
@@ -182,7 +182,7 @@ How can I programmatically hide a map layer in Kendo UI for jQuery? Control, tog
 
 #### Example
 
-    <button class="k-button k-button-lg k-button-solid-primary" id="hide">Hide Layer</button>
+    <button class="k-button k-button-lg k-button-primary" id="hide">Hide Layer</button>
     <div id="map"></div>
     <script>
       $("#hide").on("click", function() {

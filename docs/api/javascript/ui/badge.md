@@ -68,9 +68,9 @@ How to enable or disable the decorative border around a Kendo UI for jQuery badg
     </script>
 
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Specifies how themeColor is applied to a badge. Valid options are `solid` (default) and `outline`.
+Specifies how themeColor is applied to a badge. When `undefined` (the default), the theme controls the default fill mode. Valid options are `solid` and `outline`.
 
 
 <div class="meta-api-description">
@@ -160,9 +160,9 @@ How can I adjust the position of a notification badge in Kendo UI for jQuery? Se
     </script>
 
 
-### rounded  `String` *(default: 'medium')*
+### rounded  `String` *(default: undefined)*
 
-Specifies the size of the badge. Valid options are `small`, `medium`, `large` and `full`.
+Specifies the size of the badge. When `undefined` (the default), the theme controls the default border radius. Valid options are `small`, `medium`, `large` and `full`.
 
 
 <div class="meta-api-description">
@@ -182,9 +182,9 @@ How do I control the shape of a Kendo UI badge? Control the shape and size of a 
         $('#badge-full').kendoBadge({ rounded: 'full', themeColor: 'primary' });
     </script>
 
-### size  `String` *(default: 'medium')*
+### size  `String` *(default: undefined)*
 
-Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
+Specifies the size of the badge. When `undefined` (the default), the theme controls the default size. Valid options are `small`, `medium` and `large`.
 
 
 <div class="meta-api-description">
@@ -263,9 +263,11 @@ How to customize the content of a Kendo UI badge control? Control and customize 
     </script>
 
 
-### themeColor `String` *(default: 'secondary')*
+### themeColor `String` *(default: undefined)*
 
-Specifies the theme color of the component. Valid options are
+Specifies the theme color of the component. If `undefined` (the default), the theme controls the default color.
+
+Valid options are
 
 * `inherit`: no coloring will be applied to the badge. Useful when the badge needs to blend-in with the surrounding elements.
 * `default`: apply coloring based on surface theme color.

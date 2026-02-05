@@ -14,7 +14,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -43,8 +43,8 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
       }
 
       .k-group .k-popup {
-        border-style: normal; 
-        border-width: 0px; 
+        border-style: normal;
+        border-width: 0px;
       }
       .chbx {
         margin-left: 1px;
@@ -70,7 +70,7 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
                   e.sender.unbind("activate");
                   e.item.find(".custom-class").remove();
                   e.item.find('.k-filter-item').find('[role="menuitemcheckbox"]').remove();
-                    $("<span class='custom-class'><label class='k-link' style='padding: 10px 40px 10px 0px;'><input class='chbx k-checkbox k-checkbox-md k-rounded-md' type='checkbox' checked onclick='checkAllMenu(this)'/>Select All</label></span>").prependTo(e.item.find(".k-animation-container"));
+                    $("<span class='custom-class'><label class='k-link' style='padding: 10px 40px 10px 0px;'><input class='chbx k-checkbox' type='checkbox' checked onclick='checkAllMenu(this)'/>Select All</label></span>").prependTo(e.item.find(".k-animation-container"));
                 }
               });
             },

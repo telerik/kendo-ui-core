@@ -1093,7 +1093,7 @@ import "./kendo.html.button.js";
                     "<div class='k-window-titlebar-actions k-dialog-titlebar-actions'></div>" +
                 "</div>"
             ),
-            close: template(({ messages }) => `<button class="k-window-titlebar-action k-dialog-titlebar-action k-button k-button-md k-button-flat k-button-flat-base k-rounded-md k-icon-button" data-role="close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>
+            close: template(({ messages }) => `<button class="k-window-titlebar-action k-dialog-titlebar-action k-button k-button-flat k-icon-button" data-role="close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>
                                                     ${kendo.ui.icon({ icon: "x", iconClass: "k-button-icon" })}
                                                 </button>`),
             actionbar: template(({ buttonLayout }) => `<div class='k-dialog-actions k-actions k-actions-horizontal k-window-actions k-actions-${encode(buttonLayout)}'></div>`),

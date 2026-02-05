@@ -18,8 +18,8 @@ The `Items` represent the content of the AppBar. The `Items` configuration accep
 
 You can configure the **Content Items** by using templates as per the following approaches:
 
-* Use the `Template` option exposed by `ContentItem` to consume and render HTML. 
-* Supply a [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview) to the item by using the `TemplateId` option. 
+* Use the `Template` option exposed by `ContentItem` to consume and render HTML.
+* Supply a [Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/overview) to the item by using the `TemplateId` option.
 
 The following example showcases how to use both template options to define the AppBar items.
 
@@ -28,7 +28,7 @@ The following example showcases how to use both template options to define the A
         .Name("appbar")
         .ThemeColor(AppBarThemeColor.Inherit)
         .Items(items=> {
-            items.Add().Template("<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
+            items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
             items.Add().TemplateId("search-template").Type(AppBarItemType.ContentItem);
         })
     )
@@ -48,9 +48,9 @@ The following example showcases how to use both template options to define the A
 
    <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit" >
         <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
             <appbar-item type="AppBarItemType.ContentItem" template-id="search-template"></appbar-item>
-        </items>   
+        </items>
     </kendo-appbar>
 
     <script id="search-template" type="text/x-kendo-tmpl">
@@ -66,13 +66,13 @@ The following example showcases how to use both template options to define the A
 
 ## Spacer
 
-The `Spacer` item creates a `span` element to add space and separate the content items from each other. 
+The `Spacer` item creates a `span` element to add space and separate the content items from each other.
 
 ```HtmlHelper
     @(Html.Kendo().AppBar()
         .Name("appbar")
         .Items(items=> {
-            items.Add().Template("<a class='k-button k-button-solid-base k-button-solid k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
+            items.Add().Template("<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>").Type(AppBarItemType.ContentItem);
             items.Add().Type(AppBarItemType.Spacer).Width("16px");
             items.Add().Template("<h3>AppBar Demo</h3>").Type(AppBarItemType.ContentItem);
         })
@@ -84,10 +84,10 @@ The `Spacer` item creates a `span` element to add space and separate the content
 
     <kendo-appbar name="appbar">
         <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-button-solid-base k-button-solid  k-button-md k-rounded-md' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button ' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
             <appbar-item type="AppBarItemType.Spacer" width="16px"></appbar-item>
             <appbar-item type="AppBarItemType.ContentItem" template="<h3>AppBar Demo</h3>"></appbar-item>
-        </items>   
+        </items>
     </kendo-appbar>
 ```
 {% endif %}

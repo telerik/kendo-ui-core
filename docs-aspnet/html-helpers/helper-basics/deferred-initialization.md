@@ -33,7 +33,7 @@ The following example illustrates how the initialization script of a [Button]({%
 * Generated HTML markup and initialization script
 
     ```HTML
-        <button id="primaryTextButton" name="primaryTextButton" data-role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" type="button" role="button" aria-disabled="false" tabindex="0"><span class="k-button-text">Primary Button</span></button>
+        <button id="primaryTextButton" name="primaryTextButton" data-role="button" class="k-button k-button-primary" type="button" role="button" aria-disabled="false" tabindex="0"><span class="k-button-text">Primary Button</span></button>
         <script>kendo.syncReady(function(){jQuery("#primaryTextButton").kendoButton({"themeColor":"primary"});});</script>
     ```
 

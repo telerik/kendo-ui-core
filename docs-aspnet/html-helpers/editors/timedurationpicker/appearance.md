@@ -30,14 +30,10 @@ The following values are available for the [`Size`](/api/kendo.mvc.ui.fluent/tim
 - `Small`
 - `Medium`
 - `Large`
-- `None`
 
-The default size value is `medium` and is applied to the wrapping `span` element through the `k-input-md` class.
+> When not explicitly set, the applied theme controls the default size.
 
-```html
-<span class="k-timedurationpicker k-input k-input-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### Rounded
 
@@ -49,15 +45,10 @@ The following values are available for the [`Rouned`](/api/kendo.mvc.ui.fluent/t
 - `Medium` — Medium border radius.
 - `Large` — Large border radius.
 - `Full` — Ellipse-like border radius.
-- `None` — Unset.
 
-The structure of the class is `k-rounded-{size}`.
+> When not explicitly set, the applied theme controls the default border radius.
 
-The default rounded value is `medium` and it is applied to the wrapping `span` element through the `k-rounded-md` class.
-
-```html
-<span class="k-timedurationpicker k-input k-rounded-md">
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### FillMode
 
@@ -68,16 +59,13 @@ The following values are available for the [`FillMode`](/api/kendo.mvc.ui.fluent
 - `Solid`
 - `Flat`
 - `Outline`
-- `None`
 
-The default `fillMode` value is `solid` and it is applied to the wrapping `span` element through the `k-input-solid` class.
+> When not explicitly set, the applied theme controls the default fill mode.
 
-```html
-<span class="k-timedurationpicker k-input k-input-solid">
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

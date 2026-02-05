@@ -206,14 +206,15 @@ How do I configure a Kendo UI TimeDurationPicker to accept user input? Configure
     });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
 - "solid"
 - "flat"
 - "outline"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -439,15 +440,16 @@ How do I make a TimeDurationPicker uneditable in Kendo UI? Control whether the t
     });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
 - "full"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -568,14 +570,15 @@ How do I set the duration value in a Kendo UI TimeDurationPicker component? Conf
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

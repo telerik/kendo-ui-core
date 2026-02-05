@@ -44,7 +44,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
 
       <script id="new-customers" type="text/x-kendo-template">
         <div class="info-container">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
             <img src="https://demos.telerik.com/kendo-ui/content/web/tilelayout/arrow_up_512x512.png" class="arrow-class" />
             <div class="info-holder">
                 <span class="item-values">35445</span>
@@ -54,7 +54,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
       </script>
 
       <script id="returning-customers" type="text/x-kendo-template">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
 
         <div id="returning-chart"></div>
 
@@ -67,7 +67,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
       </script>
 
       <script id="new-deals" type="text/x-kendo-template">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
 
         <div id="new-deals-chart"></div>
 
@@ -80,7 +80,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
       </script>
 
       <script id="new-visitors" type="text/x-kendo-template">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
         <div class="info-container">
             <div class="info-holder">
                 <span class="item-values">91694</span>
@@ -90,7 +90,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
       </script>
 
       <script id="expense" type="text/x-kendo-template">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
         <div class="info-container">
             <img src="https://demos.telerik.com/kendo-ui/content/web/tilelayout/arrow_down_512x512.png" class="arrow-class" />
             <div class="info-holder">
@@ -101,7 +101,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
       </script>
 
       <script id="income" type="text/x-kendo-template">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
         <div class="info-container">
             <img src="https://demos.telerik.com/kendo-ui/content/web/tilelayout/arrow_up_512x512.png" class="arrow-class" />
             <div class="info-holder">
@@ -112,7 +112,7 @@ How can I drag and drop new tiles after removing all of the tiles from the TileL
       </script>
 
       <script id="deals" type="text/x-kendo-template">
-        <a class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
+        <a class='k-button k-button-flat k-icon-button k-close-button'><span class='k-button-icon k-icon k-i-close'></span></a>
         <div class="info-container">
             <img src="https://demos.telerik.com/kendo-ui/content/web/tilelayout/arrow_up_512x512.png" class="arrow-class" />
             <div class="info-holder">

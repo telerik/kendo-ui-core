@@ -30,7 +30,7 @@ You can use the internal logic of the Endless Scrolling feature to load more ite
 
 ```dojo
     <div id="listView"></div>
-    <button id="load" class="k-button k-button-md k-button-solid-primary">Load More</button>
+    <button id="load" class="k-button k-button-primary">Load More</button>
 
 
     <script type="text/x-kendo-template" id="template">

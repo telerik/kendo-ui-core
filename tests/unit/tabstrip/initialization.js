@@ -95,10 +95,10 @@ describe("tabstrip initialization", function() {
         assert.isOk(tabstrip.tabGroup.hasClass("k-tabstrip-items-stretched"), "CSS class is applied");
     });
 
-    it("applies a bottom tab size CSS class - medium - default", function() {
+    it("does not apply default size class when size is not set", function() {
         tabstrip = new kendo.ui.TabStrip(dom);
 
-        assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-md"), "CSS class is applied");
+        assert.isNotOk(tabstrip.wrapper.hasClass("k-tabstrip-md"), "CSS class should not be applied");
     });
 
     it("applies a bottom tab size CSS class - small", function() {
@@ -113,7 +113,7 @@ describe("tabstrip initialization", function() {
         assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-lg"), "CSS class is applied");
     });
 
-    it("applies a bottom tab size CSS class - medium - set", function() {
+    it("applies a bottom tab size CSS class - medium - when explicitly set", function() {
         tabstrip = new kendo.ui.TabStrip(dom, { size: "medium" });
 
         assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-md"), "CSS class is applied");

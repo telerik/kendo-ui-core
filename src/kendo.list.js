@@ -34,7 +34,6 @@ export const __meta__ = {
         LIST = "k-list",
         TABLE = "k-table",
         DATA_TABLE = "k-data-table",
-        TABLE_MD = "k-table-md",
         LIST_UL = "k-list-ul",
         TABLE_LIST = "k-table-list",
         FIXED_GROUP_HEADER = ".k-list-group-sticky-header",
@@ -151,8 +150,7 @@ export const __meta__ = {
 
             if (options.columns && options.columns.length) {
                 that.list.removeClass(LIST).addClass(DATA_TABLE);
-                that.list.removeClass(that._listSize).addClass(TABLE_MD);
-
+                that.list.removeClass(that._listSize);
                 that.ul.removeClass(LIST_UL).addClass(TABLE);
 
                 that._columnsHeader();
@@ -170,7 +168,7 @@ export const __meta__ = {
             footerTemplate: "",
             headerTemplate: "",
             noDataTemplate: true,
-            size: "medium",
+            size: undefined,
             messages: {
                 "noData": "No data found.",
                 "clear": "clear",
@@ -299,7 +297,7 @@ export const __meta__ = {
 
         _filterHeader: function() {
             this.filterTemplate = '<div class="k-list-filter">' +
-                '<span class="k-searchbox k-input k-input-md k-rounded-md k-input-solid" type="text" autocomplete="off">' +
+                '<span class="k-searchbox k-input" type="text" autocomplete="off">' +
                     kendo.ui.icon({ icon: "search", iconClass: "k-input-icon" }) +
                 '</span>' +
             '</div>';

@@ -108,8 +108,8 @@ export const __meta__ = {
             optionalClass: "k-label-optional",
             optionalText: "(Optional)",
             type: "checkbox",
-            rounded: "medium",
-            size: "medium",
+            rounded: undefined,
+            size: undefined,
             stylingOptions: [ "size", "rounded" ]
         }
     });
@@ -127,7 +127,7 @@ export const __meta__ = {
             optionalClass: "k-label-optional",
             optionalText: "(Optional)",
             type: "radio",
-            size: "medium",
+            size: undefined,
             stylingOptions: [ "size"]
         }
     });

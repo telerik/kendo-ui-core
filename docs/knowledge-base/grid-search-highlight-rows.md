@@ -43,7 +43,7 @@ The search will work only with string values. Numbers and dates will also be tre
 ```dojo
      <script type='x-kendo/template' id='toolbar'>
     	<label>Search:</label>
-    	<span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">
+    	<span class="k-input k-textbox">
       <input data-role="textbox" aria-disabled="false" class="search k-input-inner" style='height: 28px;'/>
       </span>
       <span class="search-columns-icon k-icon k-i-gear"></span>
@@ -126,10 +126,10 @@ The search will work only with string values. Numbers and dates will also be tre
 
           // Bind the input event to the search box in the toolbar.
           grid.element.find(".search").on("input", search);
-          
+
           // Append a title to the popup.
           $(".search-columns-menu").prepend("<h5 class='search-columns-title'>Columns to search</h5>");
-          
+
           // Initialize a popup for the columns.
           let popup = $(".search-columns-menu").kendoPopup({
             anchor: $(".search-columns-icon"),
@@ -145,7 +145,7 @@ The search will work only with string values. Numbers and dates will also be tre
 
             this.element.find(".search-columns-list").html(list);
             this.element.find(".search-checkbox").on("change", onCheck);
-            
+
             function onCheck() {
               // When a checkbox is checked/unchecked, trigger the input event of the search box in order to update the found results.
               grid.element.find(".search").trigger("input");
@@ -202,7 +202,7 @@ The search will work only with string values. Numbers and dates will also be tre
             let checked = element.find("input:checked").length;
 
             if(checked) {
-              searchFields.push(element.text()); 
+              searchFields.push(element.text());
             }
           }
 

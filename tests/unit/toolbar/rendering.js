@@ -27,10 +27,10 @@ describe("Toolbar rendering:", function() {
         assert.isOk(container.hasClass("k-toolbar"));
     });
 
-    it("toolbar element has a k-toolbar-md class by default", function() {
+    it("toolbar element does not have a k-toolbar-md class by default", function() {
         container.kendoToolBar();
 
-        assert.isOk(container.hasClass("k-toolbar-md"));
+        assert.isNotOk(container.hasClass("k-toolbar-md"));
     });
 
     it("toolbar element sets the proper sizing class", function() {
@@ -168,7 +168,7 @@ describe("Toolbar rendering:", function() {
 
         let button = container.find("#foo");
 
-        assert.isOk(button.hasClass("k-button-solid-primary"));
+        assert.isOk(button.hasClass("k-button-primary"));
     });
 
     it("url sets a href to the button element if it is an anchor", function() {
@@ -1752,7 +1752,7 @@ describe("Toolbar rendering:", function() {
         assert.isOk(!$("#baz_overflow .k-link").hasClass("k-selected"), 6);
     });
 
-    it("split button has k-rounded-md class", function() {
+    it("split button does not have k-rounded-md class by default", function() {
         container.kendoToolBar({
             items: [
                 {
@@ -1768,10 +1768,10 @@ describe("Toolbar rendering:", function() {
 
         let splitButton = $(".k-split-button");
 
-        assert.isOk(splitButton.hasClass("k-rounded-md"));
+        assert.isNotOk(splitButton.hasClass("k-rounded-md"));
     });
 
-    it("split container has k-menu-group k-menu-group-md classes", function() {
+    it("split container has k-menu-group but not k-menu-group-md by default", function() {
         container.kendoToolBar({
             items: [
                 {
@@ -1788,7 +1788,7 @@ describe("Toolbar rendering:", function() {
         let splitContainer = $("[data-role=buttonmenu] > ul");
 
         assert.isOk(splitContainer.hasClass("k-menu-group"));
-        assert.isOk(splitContainer.hasClass("k-menu-group-md"));
+        assert.isNotOk(splitContainer.hasClass("k-menu-group-md"));
     });
 
     it("items in split container k-item and k-menu-item classes", function() {

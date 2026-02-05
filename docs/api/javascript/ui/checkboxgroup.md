@@ -52,15 +52,14 @@ How do I set a custom input name for multiple checkboxes in a Kendo UI checkbox 
         });
     </script>
 
-### inputRounded `String` *(default: 'medium')*
+### inputRounded `String` *(default: undefined)*
 
-Sets a value controlling the input elements border radius. Can also be set to the following string values:
+Sets a value controlling the border radius of the checkbox inputs. When `undefined` (the default), the theme controls the rounding. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
 - "full"
-- null
 
 
 <div class="meta-api-description">
@@ -78,14 +77,13 @@ How to set rounded corners for multiple checkboxes in Kendo UI CheckboxGroup? Ad
         });
     </script>
 
-### inputSize `String` *(default: 'medium')*
+### inputSize `String` *(default: undefined)*
 
-Sets a value controlling the size of the checkbox inputs. Can also be set to the following string values:
+Sets a value controlling the size of the checkbox inputs. When `undefined` (the default), the theme controls the size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- null
 
 
 <div class="meta-api-description">
@@ -625,9 +623,9 @@ The `<input type="checkbox">` element that triggered the change.
             focus: function (e) {
                 // The result can be observed in the DevTools(F12) console of the browser.
                 console.log(e.target);
-                console.log("The old checked state of the checkbox --> " + e.target.val() + "  " + e.target[0].checked); 
+                console.log("The old checked state of the checkbox --> " + e.target.val() + "  " + e.target[0].checked);
                 setTimeout(function(){
-                  console.log("The new checked state of the checkbox --> " + e.target.val() + "  " + e.target[0].checked); 
+                  console.log("The new checked state of the checkbox --> " + e.target.val() + "  " + e.target[0].checked);
                 })
             }
         });

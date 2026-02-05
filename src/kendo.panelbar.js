@@ -361,7 +361,7 @@ export const __meta__ = {
                 retry: template(({ messages }) =>
                     "<li class='k-panelbar-item'>" +
                         `${encode(messages.requestFailed)} ` +
-                        `<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-request-retry'><span class='k-button-text'>${encode(messages.retry)}</span></button>` +
+                        `<button class='k-button k-request-retry'><span class='k-button-text'>${encode(messages.retry)}</span></button>` +
                     "</li>"
                 ),
                 arrow: template(({ item, arrowIconOptions }) => kendo.ui.icon(arrowIconOptions(item))),

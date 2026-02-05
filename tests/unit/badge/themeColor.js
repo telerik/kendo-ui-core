@@ -20,7 +20,7 @@ describe('kendo.ui.Badge theme color', function() {
         badge = new Badge(span, { themeColor: 'primary' });
 
         assert.equal(badge.themeColor(), 'primary');
-        assert.equal(badge.element.hasClass('k-badge-solid-primary'), true);
+        assert.equal(badge.element.hasClass('k-badge-primary'), true);
     });
 
     it('badge.options.themeColor does not set class if themeColor is empty string', function() {
@@ -39,7 +39,7 @@ describe('kendo.ui.Badge theme color', function() {
         badge.themeColor('warning');
 
         assert.equal(badge.themeColor(), 'warning');
-        assert.equal(badge.element.hasClass('k-badge-solid-warning'), true);
+        assert.equal(badge.element.hasClass('k-badge-warning'), true);
     });
 
     it('badge.themeColor() does not set class if themeColor is empty string', function() {
@@ -60,7 +60,7 @@ describe('kendo.ui.Badge theme color', function() {
         badge.setOptions({ themeColor: 'warning' });
 
         assert.equal(badge.themeColor(), 'warning');
-        assert.equal(badge.element.hasClass('k-badge-solid-warning'), true);
+        assert.equal(badge.element.hasClass('k-badge-warning'), true);
     });
 
     it('badge.setOptions() does not set class if themeColor is empty string', function() {

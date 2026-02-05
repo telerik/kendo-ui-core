@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -51,7 +51,7 @@ The following example demonstrates how to create a custom ToolBar template in An
       <div ng-controller="MyCtrl">
 
         <script id="template" type="text/x-kendo-template">
-            <button id="textButton" ng-click="toolbarClick()" data-role="button" class="k-button k-button-sm k-rounded-md k-button-solid k-button-solid-base" type="button" role="button">
+            <button id="textButton" ng-click="toolbarClick()" data-role="button" class="k-button k-button-sm k-rounded-md" type="button" role="button">
               <span class="k-button-text">Command</span>
           </button>
         </script>

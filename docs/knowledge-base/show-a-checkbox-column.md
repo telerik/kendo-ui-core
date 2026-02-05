@@ -78,8 +78,8 @@ The following example demonstrates how to add and render a checkbox column bound
       height: 540,
       columns: [
         {
-          headerTemplate: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' onclick='toggleAll(event)' />",
-          template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked: checked' />",
+          headerTemplate: "<input type='checkbox' class='k-checkbox' onclick='toggleAll(event)' />",
+          template: "<input type='checkbox' class='k-checkbox' data-bind='checked: checked' />",
           width: 40
         },
         { field: "Position", expandable: true },

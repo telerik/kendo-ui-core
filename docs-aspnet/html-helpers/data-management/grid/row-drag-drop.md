@@ -128,7 +128,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
             columns.Bound(p => p.UnitPrice).Title("Price").Width(140);
             columns.Bound(p => p.Discontinued)
             .Title("In Stock")
-            .ClientTemplate("<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>")
+            .ClientTemplate("<span class='k-badge k-badge-success k-badge-inline'>Available</span>")
             .Width(130);
         })
         .Pageable()
@@ -157,7 +157,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
             </column>
             <column field="UnitPrice" title="Price" width="140">
             </column>
-            <column field="Discontinued" title="In Stock" template="<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>" width="130">
+            <column field="Discontinued" title="In Stock" template="<span class='k-badge k-badge-success k-badge-inline'>Available</span>" width="130">
             </column>
         </columns>
         <pageable enabled="true" />
@@ -188,7 +188,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
             columns.Bound(p => p.UnitPrice).Title("Price").Width(140);
             columns.Bound(p => p.Discontinued)
                 .Title("In Stock")
-                .ClientTemplate("<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>")
+                .ClientTemplate("<span class='k-badge k-badge-success k-badge-inline'>Available</span>")
                 .Width(130);
         })
         .Pageable()

@@ -15,7 +15,7 @@ The Telerik UI PopOver TagHelper and HtmlHelper for {{ site.framework }} are ser
 The Telerik UI PopOver HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI PopOver widget.
 {% endif %}
 
-The PopOver is a transient view that appears when the user clicks on a specified element or hovers within a particular area. It can contain elements such as buttons, icons, lists, and so on. 
+The PopOver is a transient view that appears when the user clicks on a specified element or hovers within a particular area. It can contain elements such as buttons, icons, lists, and so on.
 
 * [Demo page for the PopOver](https://demos.telerik.com/{{ site.platform }}/popover/index)
 
@@ -43,7 +43,7 @@ The PopOver is usually displayed or dismissed as a result of a user action. It e
 The following example demonstrates how to define the PopOver.
 
 ```HtmlHelper
-   <span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Hover me!</span>
+   <span id="info" class="k-button k-button-primary">Hover me!</span>
 
     @(Html.Kendo().Popover()
         .For("#info")
@@ -54,7 +54,7 @@ The following example demonstrates how to define the PopOver.
 ```
 {% if site.core %}
 ```TagHelper
-	<span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Hover me!</span>
+	<span id="info" class="k-button k-button-primary">Hover me!</span>
 
 	<kendo-popover for="#info" show-on="mouseenter" position="right" body="Main content"></kendo-popover>
 ```
@@ -67,7 +67,7 @@ The PopOver provides default configuration options such as its height and width,
 The following example demonstrates the basic configuration of the PopOver.
 
 ```HtmlHelper
-   <span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Click here</span>
+   <span id="info" class="k-button k-button-primary">Click here</span>
 
     @(Html.Kendo().Popover()
         .For("#info")
@@ -88,7 +88,7 @@ The following example demonstrates the basic configuration of the PopOver.
 ```
 {% if site.core %}
 ```TagHelper
-	<span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Click here</span>
+	<span id="info" class="k-button k-button-primary">Click here</span>
 
 	<kendo-popover for="#info" show-on="click" position="top" width="120" height="120" header="More Information:" body="Information content" actions-layout="center">
 		<actions>

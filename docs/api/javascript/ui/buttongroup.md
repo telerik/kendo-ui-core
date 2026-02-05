@@ -204,7 +204,7 @@ How to align badges in Kendo UI ButtonGroup? Adjust badge placement on buttons w
                 text: "Delete",
                 badge: {
                     text: "5",
-                    position: "edge", 
+                    position: "edge",
                     align: "bottom start"
                 }
             }
@@ -247,9 +247,12 @@ How to add a cutout border around badges in Kendo UI ButtonGroup? Control the vi
     </script>
 
 
-### items.badge.fill `String` *(default: 'solid')*
+### items.badge.fill `String` *(default: undefined)*
 
-Specifies the structure of a badge. Valid options are `solid` (default) and `outline`.
+Sets a value controlling how the color is applied to the badge. When `undefined` (the default), the theme controls the fill mode. Can also be set to the following string values:
+
+- "solid"
+- "outline"
 
 
 <div class="meta-api-description">
@@ -336,7 +339,7 @@ How do I prevent button badges from showing extremely large numbers in Kendo UI 
                 }
             },
             {
-                text: "Notifications", 
+                text: "Notifications",
                 badge: {
                     text: 25,
                     max: 50
@@ -395,7 +398,7 @@ How do I control the position of notification badges in a Kendo UI ButtonGroup? 
 ### items.badge.shape `String` *(default: 'rounded')*
 
 
-Specifies the shape of the badge. 
+Specifies the shape of the badge.
 Valid options are `rectangle`, `rounded`, `pill`, `circle`, `dot`.
 
 
@@ -441,9 +444,13 @@ How do I customize the shape of badges in a Kendo UI ButtonGroup? Set or customi
     </script>
 
 
-### items.badge.size  `String` *(default: 'medium')*
+### items.badge.size `String` *(default: undefined)*
 
-Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
+Sets a value controlling the size of the badge. When `undefined` (the default), the theme controls the size. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
 
 
 <div class="meta-api-description">
@@ -556,9 +563,11 @@ How do I set the badge text in a Kendo UI ButtonGroup? Set or update the badge l
     </script>
 
 
-### items.badge.themeColor `String` *(default: 'secondary')*
+### items.badge.themeColor `String` *(default: undefined)*
 
-Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
+Specifies the color of the component. If `undefined` (the default), the theme controls the default color.
+
+Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
 
 
 <div class="meta-api-description">
@@ -795,9 +804,11 @@ How to prevent HTML injection in Kendo UI ButtonGroup labels? Configure whether 
         });
     </script>
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Controls how the color is applied to the buttons in the Group. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+Controls how the color is applied to the buttons in the Group. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -818,9 +829,11 @@ How do I change the appearance of buttons in a Kendo UI ButtonGroup? Adjust butt
         });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Controls what border radius is applied to first and last button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+Controls what border radius is applied to first and last button. When `undefined` (the default), the theme controls the default border radius. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -841,9 +854,11 @@ How to control corner curvature in Kendo UI ButtonGroup buttons? Control and cus
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Controls the overall physical size of all buttons in the Group. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+Controls the overall physical size of all buttons in the Group. When `undefined` (the default), the theme controls the default size. Valid values are:  `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -893,10 +908,10 @@ How do I change the default color of a button group in Kendo UI for jQuery? Adju
 
 Gets or sets the badge of a button within the ButtonGroup. This method supports several usage scenarios:
 
-- **Get badge value**: When called with only the button parameter, returns the current badge text  
-- **Set badge value**: When called with a button and string/number value, updates the badge text  
-- **Create badge**: If the button doesn't have a badge, creates a new one with the specified value  
-- **Remove badge**: When called with `false` as the value parameter, completely removes the badge from the button  
+- **Get badge value**: When called with only the button parameter, returns the current badge text
+- **Set badge value**: When called with a button and string/number value, updates the badge text
+- **Create badge**: If the button doesn't have a badge, creates a new one with the specified value
+- **Remove badge**: When called with `false` as the value parameter, completely removes the badge from the button
 - **Handle zero**: Properly handles zero (0) as a valid badge value
 
 

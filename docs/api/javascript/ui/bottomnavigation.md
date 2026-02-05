@@ -107,21 +107,21 @@ How do I control the placement of text labels in bottom navigation items relativ
         });
     </script>
 
-### themeColor `String`  *(default: "primary")*
+### themeColor `String` *(default: undefined)*
 
-Specifies the theme color of the component. Valid options are:
+Sets a value controlling the theme color of the component. When `undefined` (the default), the theme controls the color. Can also be set to the following string values:
 
 * `inherit`: no coloring will be applied to the badge. Useful when the badge needs to blend-in with the surrounding elements.
 * `default`: apply coloring based on surface theme color.
-* `primary`:  apply coloring based on **primary** theme color.
+* `primary`: apply coloring based on **primary** theme color.
 * `secondary`: apply coloring based on **secondary** theme color.
 * `tertiary`: apply coloring based on **tertiary** theme color.
 * `info`: apply coloring based on **info** theme color.
 * `success`: apply coloring based on **success** theme color.
-* `warning`:apply coloring based on **warning** theme color.
+* `warning`: apply coloring based on **warning** theme color.
 * `error`: apply coloring based on **error** theme color.
 * `dark`: apply coloring based on **dark** theme color.
-* `light`: always coloring based on **light** theme color.
+* `light`: apply coloring based on **light** theme color.
 * `inverse`: depending on the luminance of the theme, light or dark, inverted will be dark or light.
 
 

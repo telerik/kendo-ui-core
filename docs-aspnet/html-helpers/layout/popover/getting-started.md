@@ -34,7 +34,7 @@ Use the PopOver HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
 
 ```HtmlHelper
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     @(Html.Kendo().Popover()
@@ -50,7 +50,7 @@ Use the PopOver HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
     @addTagHelper *, Kendo.Mvc
 
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     <kendo-popover for="#buttonHover" position="bottom" show-on="mouseenter" body="Hello!" width="100">
@@ -67,7 +67,7 @@ The PopOver exposes [events]({% slug events_popover %}) that you can handle to c
 
 ```HtmlHelper
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     @(Html.Kendo().Popover()
@@ -94,7 +94,7 @@ The PopOver exposes [events]({% slug events_popover %}) that you can handle to c
     @addTagHelper *, Kendo.Mvc
 
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     <kendo-popover for="#buttonHover" position="bottom" show-on="mouseenter" body="Hello!" width="100" on-hide="onHide" on-show="onShow">
@@ -145,7 +145,7 @@ You can reference the PopOver instances that you have created and build on top o
     {% if site.core %}
     ```TagHelper
         @addTagHelper *, Kendo.Mvc
-        
+
         <span id="target">Popover target</span>
 
         <kendo-button name="btn" on-click="onBtnClick">

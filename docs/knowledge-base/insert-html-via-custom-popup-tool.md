@@ -63,8 +63,8 @@ For additional information about the code used in the example, refer to the foll
                     '<p><textarea cols="60" rows="10" style="width:100%"></textarea></p>' +
                   '</div>' +
                   '<div class="k-edit-buttons k-state-default">' +
-                    '<button class="k-dialog-update k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Insert</button>' +
-                    '<button class="k-dialog-close k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Cancel</button>' +
+                    '<button class="k-dialog-update k-button k-button-primary">Insert</button>' +
+                    '<button class="k-dialog-close k-button">Cancel</button>' +
                   '</div>' +
                 '</div>';
 

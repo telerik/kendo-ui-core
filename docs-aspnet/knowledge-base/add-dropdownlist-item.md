@@ -31,7 +31,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
 
 1. Create a separate `Custom` DataSource and specify the action method for the [`.Create()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/customdatasourcetransportbuilder#createsystemactionkendomvcuifluentcustomcrudoperationbuilder) method.
 1. Set the filter type for the DropDownList through the [`.Filter()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplateidsystemstring).
-1. Specify a [`NoDataTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplatesystemstring) which will display an add confirmation dialog. 
+1. Specify a [`NoDataTemplate`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlistbuilder#nodatatemplatesystemstring) which will display an add confirmation dialog.
 1. Inside the template, create a button and attach a handler that passes both the widget `id` and input `value`.
 1. [`Sync`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/sync) the data to update the records.
 
@@ -129,7 +129,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
 
 ```JS script.js
     <script id="noDataTemplate" type="text/x-kendo-tmpl">
-        <button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base" onclick="addNew('#: instance.element[0].   id #', '#: instance.filterInput.val() #')">Add new item</button>
+        <button class="k-button" onclick="addNew('#: instance.element[0].   id #', '#: instance.filterInput.val() #')">Add new item</button>
     </script>
 
     <script>
@@ -148,7 +148,7 @@ How can I add a new item if it doesn't exist when working with the {{ site.produ
                 dataSource.sync(); //sync the data
             }
         };
-    </script> 
+    </script>
 ```
 
 For the complete implementation of the suggested approach, refer to [this GitHub Project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/DropDownList/AddItem.cshtml).

@@ -34,8 +34,8 @@ The following example demonstrates how to define the AppBar.
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
- 
-    <kendo-appbar name="appbar"> 
+
+    <kendo-appbar name="appbar">
     </kendo-appbar>
 ```
 {% endif %}
@@ -50,7 +50,7 @@ The following example showcases a basic configuration of the AppBar that contain
         .ThemeColor(AppBarThemeColor.Light)
         .Items(items =>
         {
-            items.Add().Template("<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary'>Categories</button>").Type(AppBarItemType.ContentItem);
+            items.Add().Template("<button class='k-button k-button-primary'>Categories</button>").Type(AppBarItemType.ContentItem);
             items.Add().Type(AppBarItemType.Spacer).Width("10px");
             items.Add().Template(Html.Kendo().Template()
             .AddComponent(ddl => ddl
@@ -74,10 +74,10 @@ The following example showcases a basic configuration of the AppBar that contain
 {% if site.core %}
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
- 
+
     <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Light">
         <items>
-            <appbar-item type="AppBarItemType.ContentItem" template="<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary'>Categories</button>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<button class='k-button k-button-primary'>Categories</button>"></appbar-item>
             <appbar-item type="AppBarItemType.Spacer" width="10px"></appbar-item>
             <appbar-item type="AppBarItemType.ContentItem">
                 <template>

@@ -105,14 +105,15 @@ How to prevent date picker from changing values on mouse wheel scroll? Control t
     });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
-- "none"
 - "solid"
 - "flat"
 - "outline"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -499,15 +500,16 @@ How to customize AM/PM indicators in Kendo UI date input fields? Customize or co
     });
     </script>
 
-### rounded `String`*(default: "medium")*
+### rounded `String`*(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
-- "none"
 - "small"
 - "medium"
 - "large"
 - "full"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -523,14 +525,15 @@ How to adjust the corner radius of a date picker input field in Kendo UI? Adjust
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

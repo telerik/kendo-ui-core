@@ -96,7 +96,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
 
     <div class="main-container">
         <a class="app-header">Your .NET Core Application</a>
-        <button id="menu-button" class="k-rpanel-toggle k-button k-button-md k-button-rectangle k-button-solid-secondary btn-toggle">
+        <button id="menu-button" class="k-rpanel-toggle k-button k-button-rectangle k-button-secondary btn-toggle">
             <span class="menu-icon"></span>
         </button>
     </div>
@@ -121,7 +121,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
 
     <div class="main-container">
         <a class="app-header">Your .NET Core Application</a>
-        <button id="menu-button" class="k-rpanel-toggle k-button k-button-md k-button-rectangle k-button-solid-secondary btn-toggle">
+        <button id="menu-button" class="k-rpanel-toggle k-button k-button-rectangle k-button-secondary btn-toggle">
             <span class="menu-icon"></span>
         </button>
     </div>
@@ -153,7 +153,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
                 display: block;
                 float: right;
             }
-            
+
             .k-rpanel-expanded ul {
                 flex-direction: column;
             }

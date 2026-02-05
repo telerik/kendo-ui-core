@@ -2,7 +2,7 @@
 title: Preventing Selection of First Level Options in DropDownTree
 description: Learn how to prevent the selection of first level options in a DropDownTree with checkboxes.
 type: how-to
-page_title: Preventing Selection of First Level Options in DropDownTree | Kendo UI DropDownTree 
+page_title: Preventing Selection of First Level Options in DropDownTree | Kendo UI DropDownTree
 slug: dropdowntree-prevent-selection-first-level-options
 tags: dropdowntree, checkboxes, selection, first level
 res_type: kb
@@ -42,7 +42,7 @@ $("#dropdowntree").kendoDropDownTree({
       if (e.group.firstLevel == true) {
         return "";
       } else {
-        return "<input class='k-checkbox-md k-rounded-md k-checkbox' type='checkbox' name='" + kendo.guid() + "' value='true' aria-hidden='true' tabindex='-1' />";
+        return "<input class='k-checkbox' type='checkbox' name='" + kendo.guid() + "' value='true' aria-hidden='true' tabindex='-1' />";
       }
     }
   },

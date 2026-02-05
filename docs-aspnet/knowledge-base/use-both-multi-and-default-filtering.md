@@ -95,7 +95,7 @@ By design, the Grid column does not support the multi-checkbox and the default m
             // Define the ListView and insert it to the filter menu container element.
             var element = $("<div class='checkbox-container'></div>").insertAfter(helpTextElement).kendoListView({
                 dataSource: checkboxesDataSource,
-                template: "<div><input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' value='#:" + field + "#'/> #:" + field + "#</div>"
+                template: "<div><input type='checkbox' class='k-checkbox' value='#:" + field + "#'/> #:" + field + "#</div>"
             });
             // Handle the "submit" event of the column filter menu.
             e.container.find("[type='submit']").click(function (e) {
@@ -118,7 +118,7 @@ By design, the Grid column does not support the multi-checkbox and the default m
                 var operator1 = $(".k-filter-menu-container").find("[data-role='dropdownlist']").eq(0).getKendoDropDownList().value();
                 var operator2 = $(".k-filter-menu-container").find("[data-role='dropdownlist']").eq(2).getKendoDropDownList().value();
                 var defaultFilterLogic = $(".k-filter-menu-container").find("[data-role='dropdownlist']").eq(1).getKendoDropDownList().value();
-                
+
                 if (defaultFilterValue1 != "") {
                     defaultFilters = {
                         logic: defaultFilterLogic,

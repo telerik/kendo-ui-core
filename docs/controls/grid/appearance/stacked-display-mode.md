@@ -174,12 +174,12 @@ You can also provide a UI for users to toggle between modes:
 ```dojo
     <div class="k-d-flex k-flex-row">
       <div class="k-mr-4">
-        <button id="columnsButton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Columns View</button>
-        <button id="stackedButton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Stacked View</button>
+        <button id="columnsButton" class="k-button">Columns View</button>
+        <button id="stackedButton" class="k-button k-button-primary">Stacked View</button>
       </div>
       <div id="grid" class="k-flex-grow"></div>
     </div>
-    
+
     <script>
       $(document).ready(function() {
         var grid = $("#grid").kendoGrid({
@@ -196,20 +196,20 @@ You can also provide a UI for users to toggle between modes:
             ]
           }
         }).data("kendoGrid");
-        
+
         $("#columnsButton").click(function() {
           grid.setOptions({ dataLayoutMode: "columns" });
-          $(this).addClass("k-button-solid-primary").removeClass("k-button-solid-base");
-          $("#stackedButton").addClass("k-button-solid-base").removeClass("k-button-solid-primary");
+          $(this).addClass("k-button-primary").removeClass("k-button-base");
+          $("#stackedButton").addClass("k-button-base").removeClass("k-button-primary");
         });
-        
+
         $("#stackedButton").click(function() {
-          grid.setOptions({ 
+          grid.setOptions({
             dataLayoutMode: "stacked",
             stackedLayoutSettings: { cols: 2 }
           });
-          $(this).addClass("k-button-solid-primary").removeClass("k-button-solid-base");
-          $("#columnsButton").addClass("k-button-solid-base").removeClass("k-button-solid-primary");
+          $(this).addClass("k-button-primary").removeClass("k-button-base");
+          $("#columnsButton").addClass("k-button-base").removeClass("k-button-primary");
         });
       });
     </script>
@@ -223,7 +223,7 @@ Stacked Display Mode is particularly useful for responsive designs. You can swit
 $(window).resize(function() {
   var grid = $("#grid").data("kendoGrid");
   if (window.innerWidth < 768) {
-    grid.setOptions({ 
+    grid.setOptions({
       dataLayoutMode: "stacked",
       stackedLayoutSettings: { cols: 1 }
     });

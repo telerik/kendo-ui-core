@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -63,7 +63,7 @@ The following example demonstrates how to select multiple rows by using the chec
         },
         columns: [{
             title: "select",
-            template: '<input class="k-checkbox k-checkbox-md k-rounded-md" type="checkbox" />'
+            template: '<input class="k-checkbox" type="checkbox" />'
           },
           { field: "id" },
           { field: "foo" },

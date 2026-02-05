@@ -1332,9 +1332,9 @@ How to position tab panels in Kendo UI TabStrip? Control the placement and orien
         });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Specifies the size of the widget tabs. Valid values are `"medium"` (default), `"small"` and `"large"`.
+Specifies the size of the widget tabs. When `undefined` (the default), the theme controls the default size. Valid values are `"medium"`, `"small"` and `"large"`.
 
 
 <div class="meta-api-description">

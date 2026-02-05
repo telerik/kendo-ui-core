@@ -70,9 +70,10 @@ How do I add custom CSS classes to a Kendo UI avatar element? Customize or overr
         });
     </script>
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Specifies the appearance fill style of the Avatar. The available values are `"outline"`, `"solid"` (default), and `"none"`.
+Specifies the appearance fill style of the Avatar. When `undefined` (the default), the theme controls the default fill mode. The available values are `"outline"`, `"solid"`.
+> The `\"none\"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -129,9 +130,11 @@ How do I dynamically set an image URL for the Kendo UI Avatar component? Configu
         });
     </script>
 
-### rounded `String` *(default: 'full')*
+### rounded `String` *(default: undefined)*
 
-Could be one of the predefined shapes available for the widget container: `"full"` (default), `"small"`, `"medium"`, `"large"`, or `"none"`.
+Could be one of the predefined shapes available for the widget container. When `undefined` (the default), the theme controls the default border radius. Options are: `"full"`, `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -148,9 +151,11 @@ How do I control the shape of an avatar in Kendo UI for jQuery? Adjust or config
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-The Avatar allows you to set predefined sizes. The available size values are `"small"`, `"medium"` (default), `"large"`, or `"none"`.
+The Avatar allows you to set predefined sizes. When `undefined` (the default), the theme controls the default size. The available size values are `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -207,10 +212,10 @@ How do I dynamically update the text inside a Kendo UI avatar widget? Configure 
     </script>
 
 
-### themeColor `String` *(default: 'primary')*
+### themeColor `String` *(default: undefined)*
 
-The Avatar allows you to specify predefined theme colors for background of its container. The available `themeColor` values are:
-    - "primary" (Default) - Applies coloring based on primary theme color.
+Sets a value controlling the theme color for the background of the Avatar container. When `undefined` (the default), the theme controls the color. Can also be set to the following string values:
+    - "primary" - Applies coloring based on primary theme color.
     - "base" - Applies base theme color.
     - "secondary" - Applies coloring based on secondary theme color.
     - "tertiary" - Applies coloring based on tertiary theme color.
@@ -222,7 +227,8 @@ The Avatar allows you to specify predefined theme colors for background of its c
     - "dark" - Applies coloring based on dark theme color.
     - "light" - Applies coloring based on light theme color.
     - "inverse" - Applies coloring based on inverted theme color.
-    - "none" - Does not apply theme color class.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

@@ -105,7 +105,7 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
                     <div class='k-card-body'><p>A luxurious two-bedroom apartment with the best views over Santorini</p></div>
                     <span class='k-card-separator'></span>
                     <div class='k-actions k-card-actions'>
-                        <span class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
+                        <span class='k-button k-button-flat k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
                     </div>
                 </div>")
         )
@@ -130,7 +130,7 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
                     <div class='k-card-body'><p>A luxurious two-bedroom apartment with the best views over Santorini</p></div>
                     <span class='k-card-separator'></span>
                     <div class='k-actions k-card-actions'>
-                        <span class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
+                        <span class='k-button k-button-flat k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
                     </div>
                 </div>
             </content>

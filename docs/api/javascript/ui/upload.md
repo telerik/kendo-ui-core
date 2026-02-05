@@ -1311,7 +1311,7 @@ How do I remove a specific file from the Kendo UI upload list without triggering
       $(document).ready(function() {
         $("#files").kendoUpload({
           template: ({ files, name }) => "<span class='k-progress'></span>" +
-          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox k-checkbox-md' />` +
+          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox' />` +
           `<label for='${files[0].uid}' class='k-checkbox-label'>Filename: ${name}</label>`
         });
 
@@ -1649,7 +1649,7 @@ How to programmatically delete an uploaded file by its unique identifier in Kend
       $(document).ready(function() {
         $("#files").kendoUpload({
           template: ({ files, name }) => "<span class='k-progress'></span>" +
-          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox k-checkbox-md' />` +
+          `<input id='${files[0].uid}' type='checkbox' class='k-checkbox' />` +
           `<label for='${files[0].uid}' class='k-checkbox-label'>Filename: ${name}</label>`,
           async: {
             autoUpload: false,

@@ -43,7 +43,7 @@ To validate the Editor value, use the [Kendo UI for jQuery Validator](https://do
             .Value("Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.")
         )
 
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Submit</button>
+        <button class="k-button k-button-primary">Submit</button>
     </form>
 ```
 ```JS script

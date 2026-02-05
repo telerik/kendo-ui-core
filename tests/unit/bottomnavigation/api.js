@@ -43,20 +43,20 @@ describe("kendo.ui.bottomnavigation API", function() {
     });
 
     it("setOptions method toggles themeColor classes", function() {
-        let bottomNav = setup();
+        let bottomNav = setup({ themeColor: "primary" });
 
-        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
+        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-primary"));
 
         bottomNav.setOptions({
             themeColor: "secondary"
         });
 
-        assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
-        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-secondary"));
+        assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-primary"));
+        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-secondary"));
     });
 
     it("setOptions method handles fillMode classes", function() {
-        let bottomNav = setup();
+        let bottomNav = setup({ fillMode: "flat" });
 
         assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat"));
 

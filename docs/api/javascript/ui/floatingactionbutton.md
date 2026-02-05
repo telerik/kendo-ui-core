@@ -143,9 +143,9 @@ How do I disable user input on a Kendo UI floating action button? Set or toggle 
         });
     </script>
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, and `"none"`.
+Controls how the color is applied to the button. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`.\n\n> The `\"none\"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -161,7 +161,7 @@ How to set up background fill for a floating action button in Kendo UI? Configur
         icon: "plus",
         fillMode: "solid"
     });
-    
+
     $("#fab-none").kendoFloatingActionButton({
         icon: "plus",
         fillMode: "none"
@@ -472,9 +472,11 @@ How do I position a floating action button on the screen in Kendo UI for jQuery?
         });
     </script>
 
-### rounded `String` *(default: 'full')*
+### rounded `String` *(default: undefined)*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`.
+Controls what border radius is applied to a button. When `undefined` (the default), the theme controls the default border radius. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -495,9 +497,11 @@ How do I adjust the corner curvature of a Kendo UI Floating Action Button? Adjus
         });
     </script>
 
-### size  `String` *(default: 'medium')*
+### size  `String` *(default: undefined)*
 
-Specifies the size of the FloatingActionButton. Valid options are `"small"`, `"medium"`, `"large"` and `"none"`.
+Specifies the size of the FloatingActionButton. When `undefined` (the default), the theme controls the default size. Valid options are `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

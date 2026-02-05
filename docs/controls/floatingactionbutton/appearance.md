@@ -94,11 +94,11 @@ The following values are available for the [`themeColor`](/api/javascript/ui/flo
 - `inverse`
 - `none`
 
-The default `themeColor` value is `primary`. A FloatingActionButton with default `fillMode` and `themeColor` will have `k-fab-solid-primary` class applied.
+The default `themeColor` value is `primary`. A FloatingActionButton with default `fillMode` and `themeColor` will have `k-fab-primary` class applied.
 
 ```html
 <!-- FloatingActionButton with default fillMode and themeColor -->
-<button class="k-fab k-fab-solid-primary k-fab-solid" >
+<button class="k-fab k-fab-primary k-fab-solid" >
 </button>
 
 <!-- FloatingActionButton with 'primary' themeColor and fillMode set to null -->
@@ -106,7 +106,7 @@ The default `themeColor` value is `primary`. A FloatingActionButton with default
 </button>
 
 <!-- FloatingActionButton with `solid` fillMode and `success` themeColor -->
-<button class="k-fab k-fab-solid-success k-fab-solid" >
+<button class="k-fab k-fab-success k-fab-solid" >
 </button>
 ```
 

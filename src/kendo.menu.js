@@ -169,7 +169,7 @@ export const __meta__ = {
             contentCssAttributes: function(item) {
                 var result = "";
                 var attributes = item.contentAttr || {};
-                var defaultClasses = "k-content k-menu-group k-menu-group-md";
+                var defaultClasses = "k-content k-menu-group";
 
                 if (!attributes['class']) {
                     attributes['class'] = defaultClasses;
@@ -195,7 +195,7 @@ export const __meta__ = {
             },
 
             groupCssClass: function() {
-                return "k-menu-group k-menu-group-md";
+                return "k-menu-group";
             },
 
             groupWrapperCssClass: function() {
@@ -1002,7 +1002,7 @@ export const __meta__ = {
                 }
 
                 groups = items.find("> ul")
-                                .addClass("k-menu-group k-menu-group-md")
+                                .addClass("k-menu-group")
                                 .attr(ROLE, "menu");
 
                 items = items.filter("li");
@@ -1622,7 +1622,7 @@ export const __meta__ = {
                    .filter(function() {
                        return !kendo.support.matchesSelector.call(this, nonContentGroupsSelector);
                    })
-                   .addClass("k-menu-group k-menu-group-md")
+                   .addClass("k-menu-group")
                    .attr(ROLE, "menu")
                    .parent("li")
                    .attr("aria-haspopup", "true")
@@ -2565,7 +2565,7 @@ export const __meta__ = {
                         "</li>";
                 }),
                 scrollButton: template(({ direction }) =>
-                    `<span class='k-button k-button-md k-button-flat k-button-flat-base k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
+                    `<span class='k-button k-button-flat k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
                         kendo.ui.icon({ icon: `caret-alt-${direction}`, iconClass: "k-button-icon" }) +
                     "</span>"
                 ),

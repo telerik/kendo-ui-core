@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -40,7 +40,7 @@ How can I apply filter to both the parent and child Grids in Hierarchy?
 It is possible to perform filtering over the parent Grid and the child Grid by ensuring the fetching of the filtered data for the parent Grid has finished. This is done by applying the filter to the child Grid in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the parent one.
 
 ```dojo
-    <button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" onclick="filter()">Filter Parent and Child</button>
+    <button class="k-button" onclick="filter()">Filter Parent and Child</button>
     <div id="grid"></div>
 
     <script type="text/x-kendo-template" id="template">

@@ -1004,14 +1004,15 @@ How do I prevent the MultiColumnComboBox from showing all items when searching f
     });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
-- "none"
 - "solid"
 - "flat"
 - "outline"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1866,15 +1867,16 @@ How do I remove the separator line between prefix adornment and input field in K
       })
     </script>
 
-### rounded `String`*(default: "medium")*
+### rounded `String`*(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
-- "none"
 - "small"
 - "medium"
 - "large"
 - "full"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -1900,14 +1902,15 @@ How do I customize the corner curvature of dropdown inputs in a MultiColumnCombo
       });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -2780,7 +2783,7 @@ How do I access the current list items in a Kendo UI MultiColumnComboBox? Access
     });
 
     var multicolumncombobox = $("#multicolumncombobox").data("kendoMultiColumnComboBox");
-    
+
     // get the list items
     var items = multicolumncombobox.items();
     console.log(items.length); // outputs the number of items

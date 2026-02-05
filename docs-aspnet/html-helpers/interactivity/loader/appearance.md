@@ -21,9 +21,11 @@ To explore the available options for customizing the Loader appearance, refer to
 The Loader allows you to set different visual animations by using the `Type` property.
 
 The available `Type` values are:
-* `Pulsing` (Default)&mdash;Applies pulsing animation on the Loader.
+* `Pulsing`&mdash;Applies pulsing animation on the Loader.
 * `InfiniteSpinner`&mdash;Applies infinite-spinner animation on the Loader.
 * `ConvergingSpinner`&mdash;Applies converging-spinner animation on the Loader.
+
+> When not explicitly set, the type defaults to `Pulsing`.
 
 ```HtmlHelper
     @(Html.Kendo().Loader()
@@ -62,7 +64,7 @@ The Loader allows you to specify predefined theme colors.
 
 The available `ThemeColor` values are:
 
-* `Primary` (Default)&mdash;Applies coloring based on primary theme color.
+* `Primary`&mdash;Applies coloring based on primary theme color.
 * `Secondary`&mdash;Applies coloring based on secondary theme color.
 * `Tertiary`&mdash; Applies coloring based on tertiary theme color.
 * `Info`&mdash;Applies coloring based on info theme color.
@@ -72,6 +74,8 @@ The available `ThemeColor` values are:
 * `Dark`&mdash; Applies coloring based on dark theme color.
 * `Light`&mdash; Applies coloring based on light theme color.
 * `Inverse`&mdash; Applies coloring based on inverted theme color.
+
+> When not explicitly set, the applied theme controls the default theme color.
 
 ```HtmlHelper
     @(Html.Kendo().Loader()
@@ -167,8 +171,10 @@ The Loader allows you to set different sizes.
 The available `Size` values are:
 
 * `Small`
-* `Medium` (Default)
+* `Medium`
 * `Large`
+
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
     @(Html.Kendo().Loader()

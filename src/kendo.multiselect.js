@@ -209,9 +209,9 @@ export const __meta__ = {
             clearButton: true,
             autoWidth: false,
             popup: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             label: null,
             adaptiveTitle: null,
             adaptiveSubtitle: null,
@@ -1650,10 +1650,7 @@ export const __meta__ = {
             that.tagTemplate = function(data) {
                 return html.renderChip('<span unselectable="on">' +
                 '</span>', $.extend({}, options, {
-                        fillMode: "solid",
-                        rounded: "medium",
                         enabled: true,
-                        themeColor: "base",
                         text: tagTemplate(data),
                         attr: {
                             unselectable: "on",

@@ -52,14 +52,13 @@ How do I set the HTML input name for radio buttons in a Kendo UI RadioGroup? Set
         });
     </script>
 
-### inputSize `String` *(default: 'medium')*
+### inputSize `String` *(default: undefined)*
 
-Sets a value controlling the size of the radio inputs. Can also be set to the following string values:
+Sets a value controlling the size of the radio inputs. When `undefined` (the default), the theme controls the size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- null
 
 
 <div class="meta-api-description">

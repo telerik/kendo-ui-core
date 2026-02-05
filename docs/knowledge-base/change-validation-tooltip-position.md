@@ -78,7 +78,7 @@ The approach relies on the following milestones:
 <script id="edit-template" type="text/x-kendo-template">
     <dl>
       <dt><label for="ProductName">Product Name</label></dt>
-      <dd><input class="k-input k-textbox k-input-solid k-input-md k-rounded-md" data-bind="value:ProductName" name="ProductName" required="required" />
+      <dd><input class="k-input k-textbox" data-bind="value:ProductName" name="ProductName" required="required" />
       <div class="validator-msg"><span data-for="ProductName" class="k-invalid-msg"></span></div></dd>
 
       <dt><label for="UnitPrice">Unit Price</label></dt>

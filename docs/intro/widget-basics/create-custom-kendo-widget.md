@@ -1,6 +1,6 @@
 ---
 title: Creating Custom Components
-page_title: Creating Custom Components - Working with Components 
+page_title: Creating Custom Components - Working with Components
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
 description: "Get started with Kendo UI for jQuery and create your own components by inheriting from the base Kendo UI widget class."
 components: ["general"]
@@ -38,8 +38,8 @@ Kendo UI provides options for you to create your own components by inheriting fr
     	        // The base call to initialize the component.
     	        Widget.fn.init.call(this, element, options);
 
-                // Add styling classes only for the updated components 
-                //$(element).parent().addClass("k-input-solid k-input-md k-rounded-md");
+                // Add styling classes only for the updated components
+                //$(element).parent().addClass("k-input-flat");
 
     	    }
     	});
@@ -55,7 +55,7 @@ Kendo UI provides options for you to create your own components by inheriting fr
     	        // The base call to initialize the component.
     	        Widget.fn.init.call(this, element, options);
                 // an example adding the CSS classes for MultiSelect
-                // $(element).parent().addClass("k-input-solid k-input-md k-rounded-md");
+                // $(element).parent().addClass("k-input-solid k-rounded-md");
     	    },
 
     	    options: {
@@ -155,7 +155,7 @@ var MyWidget = Widget.extend({
 
 R1 2022 introduced brand new rendering for some of our components. More information about this topic can be found in the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
 
-In order to utilize the new styling options in your custom components, you must explicitly copy the CSS properties of the original component. 
+In order to utilize the new styling options in your custom components, you must explicitly copy the CSS properties of the original component.
 
 To do so, add the following line of code before the `Widget.extend` method is called:
 

@@ -45,7 +45,7 @@ How can I export to Excel filtered Grid data when columns and data fields inform
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
-    <button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" onclick="exportFilteredData()">Export filtered data</button>
+    <button class="k-button" onclick="exportFilteredData()">Export filtered data</button>
     <div id="grid"></div>
 
     <script>

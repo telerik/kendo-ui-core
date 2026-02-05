@@ -25,7 +25,7 @@ The Chat component supports the following templates:
 
 ### messageTemplate
 
-The `messageTemplate` function controls the rendering of individual messages within the chat interface. This template receives comprehensive data about the message and related functionality, allowing for complete customization of message appearance including text content, timestamps, author information, and interactive elements. 
+The `messageTemplate` function controls the rendering of individual messages within the chat interface. This template receives comprehensive data about the message and related functionality, allowing for complete customization of message appearance including text content, timestamps, author information, and interactive elements.
 
 
 **Parameters:**
@@ -41,7 +41,7 @@ The `messageTemplate` function controls the rendering of individual messages wit
 
     <script>
       var chat = $("#chat")
-        .kendoChat({        
+        .kendoChat({
           messageTemplate: function (
             message,
             replyMessage,
@@ -60,7 +60,7 @@ The `messageTemplate` function controls the rendering of individual messages wit
               "</div>" +
               "</div>"
             );
-          },         
+          },
           width: 400,
           height: 600,
           fileActions: [],
@@ -325,7 +325,7 @@ The `filesTemplate` function customizes how file attachments are displayed withi
 
 ### headerItems
 
-The `headerItems` configuration allows you to define custom content for the chat header area using flexible template functions that return HTML content. Each header item can include logos, titles, navigation elements, action buttons, or any other UI components that enhance the chat experience and provide contextual information to users. 
+The `headerItems` configuration allows you to define custom content for the chat header area using flexible template functions that return HTML content. Each header item can include logos, titles, navigation elements, action buttons, or any other UI components that enhance the chat experience and provide contextual information to users.
 
 **Header Item Types:**
 - `contentItem` - Renders custom content using the template function
@@ -374,7 +374,7 @@ The `suggestedActionsTemplate` function customizes the rendering of suggested ac
                     html += "<p class='actions-title'>Choose an option:</p>";
 
                     for (let i = 0; i < suggestions.length; i++) {
-                        html += "<button class='k-button k-button-md k-rounded-md custom-action-btn' data-action='" + suggestions[i].text + "'>";
+                        html += "<button class='k-button custom-action-btn' data-action='" + suggestions[i].text + "'>";
                         html += "<span class='action-icon'></span>";
                         html += suggestions[i].text;
                         html += "</button>";
@@ -409,7 +409,7 @@ The `suggestedActionsTemplate` function customizes the rendering of suggested ac
 
 ### suggestionsTemplate
 
-The `suggestionsTemplate` function customizes the rendering of message suggestions that appear near the chat input area, providing users with quick reply options and commonly used phrases. These suggestions help streamline conversations by offering pre-defined responses that users can select instead of typing, which is particularly useful for customer service scenarios or repetitive interactions. 
+The `suggestionsTemplate` function customizes the rendering of message suggestions that appear near the chat input area, providing users with quick reply options and commonly used phrases. These suggestions help streamline conversations by offering pre-defined responses that users can select instead of typing, which is particularly useful for customer service scenarios or repetitive interactions.
 
 **Parameters:**
 - `suggestions` - Array of suggestion objects with text properties
@@ -427,14 +427,14 @@ The `suggestionsTemplate` function customizes the rendering of message suggestio
         suggestionsTemplate: function(suggestions) {
             let html = "<div class='custom-suggestions'>";
             html += "<span class='suggestions-label'>Quick replies: </span>";
-            
+
             for (let i = 0; i < suggestions.length; i++) {
-                html += "<button class='k-button k-button-md k-rounded-md'>";
+                html += "<button class='k-button'>";
                 html += "<span class='suggestion-icon'>💬</span>";
                 html += suggestions[i].text;
                 html += "</button>";
             }
-            
+
             html += "</div>";
             return html;
         }
@@ -446,7 +446,7 @@ The `suggestionsTemplate` function customizes the rendering of message suggestio
 
 ### timestampTemplate
 
-The `timestampTemplate` function controls how date and time separators are displayed between message groups, providing crucial temporal context that helps users navigate through conversation history. This template allows you to customize the appearance of time dividers that automatically appear when there are significant time gaps between messages, making it easier for users to understand when different parts of the conversation took place. 
+The `timestampTemplate` function controls how date and time separators are displayed between message groups, providing crucial temporal context that helps users navigate through conversation history. This template allows you to customize the appearance of time dividers that automatically appear when there are significant time gaps between messages, making it easier for users to understand when different parts of the conversation took place.
 
 **Parameters:**
 - `data.date` - Date object representing the timestamp

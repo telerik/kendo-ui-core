@@ -1,5 +1,5 @@
 ---
-title: Expand Asynchronously the Selected TreeView Nodes 
+title: Expand Asynchronously the Selected TreeView Nodes
 page_title: Expand Asynchronously the Selected TreeView Nodes
 description: "Learn how to asynchronously expand the selected node of the Kendo UI for jQuery TreeView."
 previous_url: /controls/navigation/treeview/how-to/nodes/node-async-expand
@@ -41,7 +41,7 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
 
 ```dojo
 <div id="container">
-    <button id='expandNode' class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-primary">Expand selected node</button>
+    <button id='expandNode' class="k-button k-button-rectangle k-button-primary">Expand selected node</button>
     <div id="treeview"></div>
 </div>
 

@@ -42,7 +42,7 @@ The following example demonstrates how to produce a PNG image of a page section 
 For more information, refer to the article on [transformation API](/api/javascript/geometry/transformation/methods/scale).
 
 ```dojo
-    <button type="button" class="export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+    <button type="button" class="export-img k-button">
       <span class="k-button-text">Export as Image</span>
     </button>
     <div class="content">

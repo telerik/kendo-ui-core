@@ -21,8 +21,8 @@ describe('kendo.ui.Loader initialization', function() {
         assert.equal(loader.element.hasClass('k-loader'), true);
     });
 
-    it('default size is \'medium\'', function() {
-        loader = new Loader(span);
+    it('size option sets internal _size', function() {
+        loader = new Loader(span, { size: 'medium' });
 
         assert.equal(loader._size, 'medium');
     });
@@ -33,8 +33,8 @@ describe('kendo.ui.Loader initialization', function() {
         assert.equal(loader._type, 'pulsing');
     });
 
-    it('default themeColor is \'primary\'', function() {
-        loader = new Loader(span);
+    it('themeColor option sets correct class', function() {
+        loader = new Loader(span, { themeColor: 'primary' });
 
         assert.equal(loader.element.hasClass('k-loader-primary'), true);
     });

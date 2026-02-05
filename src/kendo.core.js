@@ -3463,39 +3463,25 @@ function pad(number, digits, end) {
                 options = this.options,
                 el = element || this.wrapper || this.element,
                 classes = [],
-                i, prop, validFill, widgetName;
+                i, prop, widgetName,
+                widgetProperties;
 
-            if (!kendo.cssProperties.propertyDictionary[protoOptions.name]) {
+            widgetName = this.options._altname || protoOptions.name;
+            widgetProperties = kendo.cssProperties.propertyDictionary[widgetName];
+
+            if (!widgetProperties) {
                 return;
             }
 
             for (i = 0; i < cssPropertiesNames.length; i++) {
                 prop = cssPropertiesNames[i];
-                widgetName = this.options._altname || protoOptions.name;
 
-                if (protoOptions.hasOwnProperty(prop)) {
-                    if (prop === "themeColor") {
-                        validFill = kendo.cssProperties.getValidClass({
-                            widget: widgetName,
-                            propName: "fillMode",
-                            value: options.fillMode
-                        });
-
-                        if (validFill && validFill.length) {
-                            classes.push(kendo.cssProperties.getValidClass({
-                                widget: widgetName,
-                                propName: prop,
-                                value: options[prop],
-                                fill: options.fillMode
-                            }));
-                        }
-                    } else {
-                        classes.push(kendo.cssProperties.getValidClass({
-                            widget: widgetName,
-                            propName: prop,
-                            value: options[prop]
-                        }));
-                    }
+                if ((prop in protoOptions) || (prop in options)) {
+                    classes.push(kendo.cssProperties.getValidClass({
+                        widget: widgetName,
+                        propName: prop,
+                        value: options[prop]
+                    }));
                 }
             }
 
@@ -3529,17 +3515,20 @@ function pad(number, digits, end) {
             var protoOptions = this.__proto__.options,
                 currentOptions = this.options,
                 el = element || this.wrapper || this.element,
-                i, prop, widgetName;
+                i, prop, widgetName,
+                widgetProperties;
 
-            if (!kendo.cssProperties.propertyDictionary[protoOptions.name]) {
+            widgetName = this.options._altname || protoOptions.name;
+            widgetProperties = kendo.cssProperties.propertyDictionary[widgetName];
+
+            if (!widgetProperties) {
                 return;
             }
 
             for (i = 0; i < cssPropertiesNames.length; i++) {
                 prop = cssPropertiesNames[i];
-                widgetName = this.options._altname || protoOptions.name;
 
-                if (protoOptions.hasOwnProperty(prop) && newOptions.hasOwnProperty(prop)) {
+                if (((prop in protoOptions) || (prop in currentOptions)) && newOptions.hasOwnProperty(prop)) {
                     if (prop === "themeColor") {
                         el.removeClass(kendo.cssProperties.getValidClass({
                             widget: widgetName,
@@ -3652,7 +3641,17 @@ function pad(number, digits, end) {
             value,
             role = element.getAttribute("data-" + kendo.ns + "role");
 
-        for (option in options) {
+        // Combine options keys with CSS appearance properties to ensure they're always parsed
+        // even when their default value is undefined (which gets stripped by $.extend)
+        var allOptions = Object.keys(options);
+        for (var i = 0; i < cssPropertiesNames.length; i++) {
+            if (allOptions.indexOf(cssPropertiesNames[i]) === -1) {
+                allOptions.push(cssPropertiesNames[i]);
+            }
+        }
+
+        for (var j = 0; j < allOptions.length; j++) {
+            option = allOptions[j];
             // Pass the source option for MVVM scenarios.
             value = parseOption(element, option, source);
 
@@ -5492,7 +5491,7 @@ function pad(number, digits, end) {
 
             if (validValue) {
                 if (propName === "themeColor") {
-                    prefix = widgetProperties[PREFIX] + fill + "-";
+                    prefix = widgetProperties[PREFIX];
                 } else if (propName === "positionMode") {
                     prefix = "k-pos-";
                 } else if (propName === "rounded") {
@@ -5562,6 +5561,10 @@ function pad(number, digits, end) {
     };
 
     kendo.getValidCssClass = function(prefix, propName, value) {
+        if (value === undefined) {
+            return "";
+        }
+
         var validValue = kendo.propertyToCssClassMap[propName][value];
 
         if (validValue) {

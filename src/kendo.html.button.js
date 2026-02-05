@@ -48,10 +48,10 @@ export const __meta__ = {
             iconClass: "",
             spriteCssClass: "",
             imageUrl: "",
-            size: "medium",
-            rounded: "medium",
-            fillMode: "solid",
-            themeColor: "base",
+            size: undefined,
+            rounded: undefined,
+            fillMode: undefined,
+            themeColor: undefined,
             stylingOptions: [ "size", "rounded", "fillMode", "themeColor" ]
         },
         iconElement: function() {

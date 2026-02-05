@@ -25,7 +25,7 @@ The TextArea HtmlHelper supports the following styling methods:
 
 ### Size
 
-The `Size()` method allows you to adjust the size of the TextArea. The default size is `Medium`.
+The `Size()` method allows you to adjust the size of the TextArea.
 
 ```HtmlHelper
 @(Html.Kendo().TextArea()
@@ -52,12 +52,15 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
-- `None`
+
+> When not explicitly set, the applied theme controls the default size.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 ### Rounded
 
-You can control how much border radius is applied to the component by using the `Rounded()` method. The default value is `Medium`.
+You can control how much border radius is applied to the component by using the `Rounded()` method.
 
 ```HtmlHelper
 @(Html.Kendo().TextArea()
@@ -72,7 +75,7 @@ You can control how much border radius is applied to the component by using the 
 </kendo-textarea>
 ```
 {% endif %}
-The value `Medium` is applied to the wrapping span element through the `k-rounded-md` class. 
+The value `Medium` is applied to the wrapping span element through the `k-rounded-md` class.
 
 ```html
 <span class="k-textarea k-input k-rounded-md">
@@ -85,12 +88,15 @@ The `Rounded()` method supports the following values:
 - `Medium`
 - `Large`
 - `Full`
-- `None`
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 ### FillMode
 
-The `FillMode` option controls the way the color is applied to the component. The default value is `Solid`.
+The `FillMode` option controls the way the color is applied to the component.
 
 ```HtmlHelper
 @(Html.Kendo().TextArea()
@@ -119,7 +125,10 @@ The following values are available for the `FillMode` option:
 - `Solid`
 - `Flat`
 - `Outline`
-- `None`
+
+> When not explicitly set, the applied theme controls the default fill mode.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 ### Overflow

@@ -39,11 +39,11 @@ You have to preserve the server toolbar template of the Grid because of the exis
 
     @helper ToolbarTemplate()
     {
-        <a class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-grid-add" href="/Home/Read?grid-mode=insert"><span class="k-icon k-font-icon k-i-add"></span>Add</a>
-        <button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-grid-excel"><span class="k-icon k-font-icon k-i-excel"></span>Export to Excel</button>
-        <button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-grid-pdf"><span class="k-icon k-font-icon k-i-pdf"></span>Export to PDF</button>
-        <a class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base savesetting" href="/"><span></span>Save Settings</a>
-        <a class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base loadsetting" href="/"><span></span>Load Settings</a>
+        <a class="k-button k-grid-add" href="/Home/Read?grid-mode=insert"><span class="k-icon k-font-icon k-i-add"></span>Add</a>
+        <button class="k-button k-grid-excel"><span class="k-icon k-font-icon k-i-excel"></span>Export to Excel</button>
+        <button class="k-button k-grid-pdf"><span class="k-icon k-font-icon k-i-pdf"></span>Export to PDF</button>
+        <a class="k-button savesetting" href="/"><span></span>Save Settings</a>
+        <a class="k-button loadsetting" href="/"><span></span>Load Settings</a>
         @(Html.Kendo().DropDownList()
             .Name("ExampleEditor")
             .OptionLabel("- ExampleEditor -")

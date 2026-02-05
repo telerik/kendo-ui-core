@@ -176,8 +176,8 @@ var __meta__ = {
         },
         _createScrollList: function() {
             var templateOptions = $.extend({}, this.options, {
-                mainSize: kendo.getValidCssClass("k-timeselector-", "size", this.options.size || "medium"),
-                buttonSize: this.options.size || "medium"
+                mainSize: kendo.getValidCssClass("k-timeselector-", "size", this.options.size),
+                buttonSize: this.options.size
             });
             this.popupContent = $(kendo.template(MODERN_RENDERING_TEMPLATE)(templateOptions))
             .on(MOUSEDOWN, preventDefault);

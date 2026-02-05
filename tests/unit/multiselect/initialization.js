@@ -1019,7 +1019,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         assert.isNotOk(multiselect.wrapper.hasClass("k-rounded-large")); // Does not add valid class for other option
         assert.isNotOk(multiselect.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
         assert.isNotOk(multiselect.wrapper.hasClass("k-input-md")); // Does not add default class for the option
-        assert.isOk(multiselect.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
+        assert.isNotOk(multiselect.wrapper.hasClass("k-rounded-md")); // Does not add default class for other options when undefined
     });
 
     it("renders not-floating label from string", function() {

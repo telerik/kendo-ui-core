@@ -86,9 +86,9 @@ export const __meta__ = {
             enable: true,
             placeholder: '',
             label: null,
-            rounded: "medium",
-            size: "medium",
-            fillMode: "solid",
+            rounded: undefined,
+            size: undefined,
+            fillMode: undefined,
             icon: null,
             prefixOptions: {
                 separator: true

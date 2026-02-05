@@ -128,7 +128,7 @@ Follow the steps below to achieve the desired scenario:
     string defaultTitle = "No Title";
 }
 
-<kendo-scheduler name="scheduler" 
+<kendo-scheduler name="scheduler"
     date="new DateTime(2022, 6, 13)"
     start-time="new DateTime(2022, 6, 13, 7, 00, 00)"
     height="600"
@@ -178,22 +178,22 @@ Follow the steps below to achieve the desired scenario:
 ```JS script.js
     <script>
          var buttonGroup = `<span data-role='buttongroup' class='k-widget   k-button-group k-toolbar-button-group' role='group'   data-uid='f01bcb47-94d9-4c40-8e55-53a28b45134d'>
-             <button class='k-button k-button-md k-rounded-md k-button-solid     k-button-solid-base k-toggle-button k-group-start    ' ref-view-day data-name='day'    data-uid='dda9916c-3486-4407-9a69-4d5acca5ab52'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button     k-toggle-button k-group-start    ' ref-view-day data-name='day'    data-uid='dda9916c-3486-4407-9a69-4d5acca5ab52'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Day</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md   k-button-solid k-button-solid-base k-toggle-button      ' data-name='week' ref-view-week  data-uid='faac8830-48a5-4b51-9574-9a6c39166b45'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button   k-toggle-button      ' data-name='week' ref-view-week  data-uid='faac8830-48a5-4b51-9574-9a6c39166b45'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Week</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md  k-button-solid k-button-solid-base k-toggle-button       k-selected' ref-view-month data-name='month'   data-uid='be7bd46b-e9db-49ee-9d1f-aaee385d1884'   data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'     data-role='togglebutton' type='button' role='button' aria-disabled='false'  tabindex='-1' aria-pressed='true' data-group='views' ref-toolbar-tool>
+             <button class='k-button  k-toggle-button       k-selected' ref-view-month data-name='month'   data-uid='be7bd46b-e9db-49ee-9d1f-aaee385d1884'   data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'     data-role='togglebutton' type='button' role='button' aria-disabled='false'  tabindex='-1' aria-pressed='true' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Month</span>
              </button>
-             <button class='k-view-year k-button k-button-md k-rounded-md   k-button-solid k-button-solid-base k-toggle-button     ' data-name='year'    data-uid='d5aa93e5-ea56-48b7-a878-5f427722fb18'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-view-year k-button   k-toggle-button     ' data-name='year'    data-uid='d5aa93e5-ea56-48b7-a878-5f427722fb18'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Year</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md     k-button-solid k-button-solid-base k-toggle-button    ' data-name='agenda' ref-view-agenda   data-uid='bb93961e-ebe4-4e7a-bbaa-8fc4b8d69a90'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button     k-toggle-button    ' data-name='agenda' ref-view-agenda   data-uid='bb93961e-ebe4-4e7a-bbaa-8fc4b8d69a90'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Agenda</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md   k-button-solid k-button-solid-base k-toggle-button      k-group-end ' ref-view-timeline data-name='timeline'    data-uid='f137d9d3-02be-47a9-8b3c-9f13513f8090'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button   k-toggle-button      k-group-end ' ref-view-timeline data-name='timeline'    data-uid='f137d9d3-02be-47a9-8b3c-9f13513f8090'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Timeline</span>
              </button>
        </span>`;
@@ -207,7 +207,7 @@ Follow the steps below to achieve the desired scenario:
                  var view = $(e.target).text().toLowerCase()
 
                  $(this).parent().addClass("k-selected");
-                 $(this).parent().siblings().removeClass("k-selected");    
+                 $(this).parent().siblings().removeClass("k-selected");
 
                  switch(view){
                      case 'day':
@@ -227,7 +227,7 @@ Follow the steps below to achieve the desired scenario:
                          break;
                      case 'year':
                          scheduler.view("year")
-                         break;      
+                         break;
                  }
              })
         })

@@ -32,7 +32,7 @@ export const __meta__ = {
         },
         options: {
             name: "HTMLChipList",
-            size: "medium",
+            size: undefined,
             stylingOptions: ["size"]
         },
         _applyAriaAttributes: function(options) {

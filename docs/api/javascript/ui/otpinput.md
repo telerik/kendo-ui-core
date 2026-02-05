@@ -241,14 +241,15 @@ How to read the current OTP code entered in a Kendo UI OTPInput field? Control, 
         });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -265,14 +266,15 @@ How do I adjust the size of an OTPInput in Kendo UI for jQuery? Adjust or define
         });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
 - "solid"
 - "flat"
 - "outline"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -289,15 +291,16 @@ How can I customize the appearance of my Kendo UI OTP input field's cells? Confi
         });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
 - "full"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -334,7 +337,7 @@ How do I properly remove an OTP input component from my page to prevent memory l
         $("#otpinput").kendoOTPInput({
             items: 3
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.destroy();
     </script>
@@ -362,7 +365,7 @@ If set to `true`, the widget will be enabled. If set to `false`, the widget will
             items: 3,
             enable: false
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.enable(true);
     </script>
@@ -374,7 +377,7 @@ If set to `true`, the widget will be enabled. If set to `false`, the widget will
         $("#otpinput").kendoOTPInput({
             items: 3
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.enable(false);
     </script>
@@ -395,7 +398,7 @@ How do I programmatically focus on the Kendo UI OTPInput field? Programmatically
         $("#otpinput").kendoOTPInput({
             items: 3
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.focus();
     </script>
@@ -424,7 +427,7 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
         $("#otpinput").kendoOTPInput({
             items: 3
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.readonly(false);
     </script>
@@ -436,7 +439,7 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
         $("#otpinput").kendoOTPInput({
             items: 3
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.readonly(true);
     </script>
@@ -471,7 +474,7 @@ The value to set.
         $("#otpinput").kendoOTPInput({
             items: 3
         });
-        
+
         var otpInput = $("#otpinput").getKendoOTPInput();
         otpInput.value("123");
         otpInput.trigger("change")

@@ -365,9 +365,9 @@ How do I display and manage AI-generated response outputs in a Kendo UI Grid? Co
        ai: {
          aiAssistant: {
            promptOutputs: [
-             { 
-               prompt: "Analyze the grid data", 
-               output: "This grid contains user information with 1 record showing Jane Doe, age 30." 
+             {
+               prompt: "Analyze the grid data",
+               output: "This grid contains user information with 1 record showing Jane Doe, age 30."
              }
            ]
          },
@@ -1447,7 +1447,7 @@ How to configure the appearance of AI assistant output actions in a Kendo UI Gri
               type: "spacer"
             },
             {
-              command: "action2", 
+              command: "action2",
               text: "Action 2",
               type: "button"
             }
@@ -1544,24 +1544,24 @@ How to customize the header toolbar for Kendo UI Grid's AI Assistant? Customize 
          aiAssistant: {
            toolbarItems: [
              { type: "spacer" },
-             { 
-               type: "button", 
-               icon: "gear", 
-               fillMode: "flat", 
-               rounded: "full", 
-               click: function(e) { 
-                 console.log("Settings clicked"); 
-               } 
+             {
+               type: "button",
+               icon: "gear",
+               fillMode: "flat",
+               rounded: "full",
+               click: function(e) {
+                 console.log("Settings clicked");
+               }
              },
-             { 
-               type: "button", 
-               icon: "x", 
-               fillMode: "flat", 
-               rounded: "full", 
+             {
+               type: "button",
+               icon: "x",
+               fillMode: "flat",
+               rounded: "full",
                themeColor: "primary",
-               click: function(e) { 
+               click: function(e) {
                  console.log("X clicked");
-               } 
+               }
              }
            ]
          },
@@ -1843,7 +1843,7 @@ How do I configure multiple AI assistant layouts in Kendo UI for jQuery Grid? Se
                buttonIcon: "comment"
              },
              {
-               type: "output", 
+               type: "output",
                name: "results",
                buttonText: "Results",
                buttonIcon: "chart-line"
@@ -2889,7 +2889,7 @@ Whether this is a retry operation.
          aiAssistant: {
            promptResponse: (e) => {
               console.log("Prompt respones:", e);
-           } 
+           }
          },
          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
        }
@@ -5225,7 +5225,7 @@ How to customize command column in Kendo UI Grid with my own HTML template? Cust
             {
               // for click to work when there is template, add class "k-grid-[command.name]" to some element, otherwise the click handler will not be triggered
               name: "settings",
-              template: "Some text in the command column <a class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-settings'><span class='k-icon k-i-settings'></span>Settings</a>",
+              template: "Some text in the command column <a class='k-button k-grid-settings'><span class='k-icon k-i-settings'></span>Settings</a>",
               click(e){
                 kendo.alert("Settings clicked!")
               }
@@ -5446,8 +5446,8 @@ How do I bind a remote API to a foreign-key column in Kendo UI Grid? Set or cust
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { 
-          field: "categoryId", 
+        {
+          field: "categoryId",
           title: "Category",
           dataSource: {
             transport: {
@@ -5484,8 +5484,8 @@ How do I display user-friendly labels instead of raw values in a foreign key col
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { 
-          field: "categoryId", 
+        {
+          field: "categoryId",
           title: "Category",
           dataSource: [
             { id: 1, name: "Beverages" },
@@ -5519,8 +5519,8 @@ How do I configure Kendo UI Grid to link column values to related data by mappin
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { 
-          field: "categoryId", 
+        {
+          field: "categoryId",
           title: "Category",
           dataSource: [
             { categoryId: 1, categoryName: "Beverages" },
@@ -8791,10 +8791,10 @@ How do I customize the "clear" button label in Kendo UI Grid column menu on mobi
           { name: "columns" }
         ],
         columnMenu: {
-          messages: {           
+          messages: {
             clear: "Custom Clear Text"
           }
-        },        
+        },
         dataSource: [
           { id: 1, name: "Jane Doe", age: 30 },
           { id: 2, name: "John Doe", age: 33 }
@@ -8825,9 +8825,9 @@ How do I customize the "Clear All Filters" button text in a Kendo UI Grid column
         toolbar: [
           { name: "columns" }
         ],
-        columnMenu: {          
+        columnMenu: {
           clearAllFilters: true,
-          messages: {           
+          messages: {
             clearAllFilters: "Custom Clear All Filters Message"
           }
         },
@@ -8863,17 +8863,17 @@ How do I customize column names in the Kendo UI Grid's mobile menu? Set or custo
           { name: "columns" }
         ],
         columnMenu: {
-          messages: {           
+          messages: {
             column: "Custom Column label"
           }
-        },        
+        },
         dataSource: [
           { id: 1, name: "Jane Doe", age: 30 },
           { id: 2, name: "John Doe", age: 33 }
         ]
       });
     </script>
-	
+
 
 ### columnMenu.messages.columns `String` *(default: "Columns")*
 
@@ -10287,7 +10287,7 @@ How do I customize the header context menu item names in a Kendo UI Grid? Contro
       ],
       contextMenu: {
         head: [
-          { 
+          {
             name: "editrow",
             text: "Edit Row",
             icon: "edit"
@@ -10321,7 +10321,7 @@ How do I customize the context menu item label in a Kendo UI grid column header?
       ],
       contextMenu: {
         head: [
-          { 
+          {
             name: "editrow",
             text: "Edit Current Row",
             icon: "edit"
@@ -10355,7 +10355,7 @@ How do I customize the icon displayed next to context menu header items in a Ken
       ],
       contextMenu: {
         head: [
-          { 
+          {
             name: "editrow",
             text: "Edit Row",
             icon: "k-icon k-i-edit"
@@ -10390,7 +10390,7 @@ How do I customize the right-click menu in Kendo UI Grid with custom commands? S
       editable: "inline",
       contextMenu: {
         head: [
-          { 
+          {
             name: "editrow",
             text: "Edit Row",
             command: "edit"
@@ -10473,7 +10473,7 @@ How do I programmatically access header menu items in Kendo UI Grid context menu
       ],
       contextMenu: {
         head: [
-          { 
+          {
             name: "actions",
             text: "Row Actions",
             items: [
@@ -10510,7 +10510,7 @@ How to customize header context menu item text in Kendo UI Grid? Configure or cu
       ],
       contextMenu: {
         head: [
-          { 
+          {
             name: "actions",
             text: "Actions",
             items: [
@@ -10547,7 +10547,7 @@ How can I customize the icon in Kendo UI Grid context menu items? Control or cus
       ],
       contextMenu: {
         head: [
-          { 
+          {
             name: "actions",
             text: "Actions",
             items: [
@@ -10585,7 +10585,7 @@ How do I configure custom actions in the Kendo UI Grid header context menu? Conf
       editable: "inline",
       contextMenu: {
         head: [
-          { 
+          {
             name: "actions",
             text: "Actions",
             items: [
@@ -18646,9 +18646,9 @@ How to ignore overlapping cells when selecting in Kendo UI Grid? Control selecti
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - `"small"`
 - `"medium"`
@@ -19333,7 +19333,7 @@ How do I customize the buttons on my Kendo Grid's toolbar? Customize the grid to
       },
       editable: true
     });
-    
+
     function customAction() {
       alert("Custom action executed!");
     }
@@ -19403,7 +19403,7 @@ How do I customize the names of toolbar buttons in a Kendo UI Grid? Configure or
         ]
       }
     });
-    
+
     // Access button by CSS class derived from name
     $(".k-grid-myCustomCommand").click(function() {
       alert("Custom command clicked!");
@@ -19436,8 +19436,8 @@ How do I customize toolbar commands in Kendo UI Grid using a template? Customize
       ],
       toolbar: {
         items: [
-          { 
-            name: "customDropDown", 
+          {
+            name: "customDropDown",
             template: (data) => `<select class="k-dropdown">
                         <option>Option 1</option>
                         <option>Option 2</option>
@@ -19849,7 +19849,7 @@ How do I customize the appearance of grid toolbar commands in Kendo UI for jQuer
 
     <div id="grid"></div>
     <script id="template" type="text/x-kendo-template">
-    <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" href="\#" onclick="return toolbar_click()">Command</a>
+    <a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
     </script>
     <script>
     function toolbar_click() {
@@ -19886,7 +19886,7 @@ How do I customize the appearance of grid toolbar commands in Kendo UI for jQuer
     $("#grid").kendoGrid({
       toolbar: [
         {
-          template: '<a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" href="\\#" onclick="return toolbar_click()">Command</a>'
+          template: '<a class="k-button" href="\\#" onclick="return toolbar_click()">Command</a>'
         }
       ],
       columns: [
@@ -20069,7 +20069,7 @@ How to access and manipulate the footer section of a Kendo UI grid? Obtain and c
 
     <div id="grid"></div>
     <br />
-    <button id="btn" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Highlight footer row's cells</button>
+    <button id="btn" class='k-button'>Highlight footer row's cells</button>
 
     <script>
       let encode = kendo.htmlEncode;
@@ -20132,11 +20132,11 @@ How to customize the pager in Kendo UI Grid? Configure and control data grid pag
 
     var grid = $("#grid").data("kendoGrid");
     var pager = grid.pager;
-    
+
     // Access the pager widget methods
     console.log("Current page:", pager.page());
     console.log("Total pages:", pager.totalPages());
-    
+
     // Navigate to a specific page
     pager.page(2);
     </script>
@@ -20212,7 +20212,7 @@ How do I dynamically change the HTML of a column header in a Kendo UI Grid? Acce
 
     <div id="grid"></div>
     <br />
-    <button id="btn" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Highlight header row's cells</button>
+    <button id="btn" class='k-button'>Highlight header row's cells</button>
 
     <script>
       $("#grid").kendoGrid({
@@ -20248,7 +20248,7 @@ How to access scrollable content area of Kendo UI Grid for jQuery? Accessing the
 
     <div id="grid"></div>
     <br />
-    <button id="btn" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Highlight content's cells</button>
+    <button id="btn" class='k-button'>Highlight content's cells</button>
     <script>
       $("#grid").kendoGrid({
         columns: [
@@ -20324,7 +20324,7 @@ How do I access the locked columns in Kendo UI Grid? Access or manipulate the lo
 
     var grid = $("#grid").data("kendoGrid");
     var lockedTable = grid.lockedTable;
-    
+
     // Style the locked table
     lockedTable.css("border", "2px solid red");
     console.log("Locked table element:", lockedTable);
@@ -20871,7 +20871,7 @@ If set to true, the copied items will include the column headers.
 #### Example
 
      <div id="grid"></div>
-     <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="selectAndCopy()">Select and copy</a>
+     <a class="k-button" onclick="selectAndCopy()">Select and copy</a>
      <script>
             $("#grid").kendoGrid({
                 columns: [
@@ -21275,7 +21275,7 @@ If set to true, the exported items will include the column headers.
 #### Example
 
      <div id="grid"></div>
-     <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="selectAndExport()">Select and export</a>
+     <a class="k-button" onclick="selectAndExport()">Select and export</a>
      <script>
             $("#grid").kendoGrid({
                 columns: [
@@ -21359,7 +21359,7 @@ How can I retrieve the selected records in a Kendo UI grid using JavaScript? Ret
 #### Example
 
      <div id="grid"></div>
-     <a class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="printSelected()">Select and print</a>
+     <a class="k-button" onclick="printSelected()">Select and print</a>
      <script>
             $("#grid").kendoGrid({
                 columns: [
@@ -21546,8 +21546,8 @@ An array of command objects. Each command must have a `type` property and corres
         sortable: true,
         filterable: true,
         toolbar: [{
-          template: '<input id="aiPrompt" class="k-input k-input-md k-rounded-md" placeholder="Ask AI to manipulate the grid..." style="width: 300px; margin-right: 10px;" />' +
-                    '<button id="askAI" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Apply</button>'
+          template: '<input id="aiPrompt" class="k-input" placeholder="Ask AI to manipulate the grid..." style="width: 300px; margin-right: 10px;" />' +
+                    '<button id="askAI" class="k-button k-button-primary">Apply</button>'
         }]
       });
 
@@ -21555,7 +21555,7 @@ An array of command objects. Each command must have a `type` property and corres
 
       $("#askAI").on("click", function() {
         var prompt = $("#aiPrompt").val();
-        
+
         if (!prompt) {
           return;
         }
@@ -21652,8 +21652,8 @@ The user's natural language prompt describing the desired Grid operation (e.g., 
         sortable: true,
         filterable: true,
         toolbar: [{
-          template: '<input id="aiPrompt" class="k-input k-input-md k-rounded-md" placeholder="Ask AI..." style="width: 300px; margin-right: 10px;" />' +
-                    '<button id="askAI" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Apply</button>'
+          template: '<input id="aiPrompt" class="k-input" placeholder="Ask AI..." style="width: 300px; margin-right: 10px;" />' +
+                    '<button id="askAI" class="k-button k-button-primary">Apply</button>'
         }]
       });
 
@@ -21661,7 +21661,7 @@ The user's natural language prompt describing the desired Grid operation (e.g., 
 
       $("#askAI").on("click", function() {
         var prompt = $("#aiPrompt").val();
-        
+
         if (!prompt) {
           return;
         }
@@ -21887,7 +21887,7 @@ How do I update Kendo Grid data in jQuery after modifying an in-memory item? Tri
 
 #### Example - change the value of a dataItem and refresh the widget
 
-    <button id="refresh" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Refresh</button>
+    <button id="refresh" class="k-button">Refresh</button>
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -21968,7 +21968,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 #### Example - remove the selected table row
 
-    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="remove()">Remove selected row</button>
+    <button class="k-button" onclick="remove()">Remove selected row</button>
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
@@ -22331,7 +22331,7 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 #### Example - get the selected table rows
 
     <div id="grid"></div>
-    <button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base' id="btn">Get selected rows</button>
+    <button class='k-button' id="btn">Get selected rows</button>
     <script>
       $("#grid").kendoGrid({
         columns: [
@@ -22555,7 +22555,7 @@ A jQuery object or array of jQuery objects which represents the table row(s) or 
 #### Example - get the selected table rows
 
     <div id="grid"></div>
-    <button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base' id="btn">Get selected rows</button>
+    <button class='k-button' id="btn">Get selected rows</button>
     <script>
       $("#grid").kendoGrid({
         columns: [
@@ -22596,7 +22596,7 @@ How do I programmatically clear selections in the Kendo UI Grid? Remove or reset
 
 #### Example - highlight the first table row
 
-    <button id="clearHighlight" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Clear Highlight</button>
+    <button id="clearHighlight" class='k-button'>Clear Highlight</button>
     <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({

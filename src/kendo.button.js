@@ -94,11 +94,11 @@ import "./kendo.html.button.js";
                 spriteCssClass: "",
                 imageUrl: "",
                 badge: null,
-                size: "medium",
+                size: undefined,
                 shape: "rectangle",
-                rounded: "medium",
-                fillMode: "solid",
-                themeColor: "base"
+                rounded: undefined,
+                fillMode: undefined,
+                themeColor: undefined
             },
 
             _isNativeButton: function() {

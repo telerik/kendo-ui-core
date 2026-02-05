@@ -73,14 +73,14 @@ The following example demonstrates how to set `Size` in the declaration of the M
 ```
 {% endif %}
 
-The default size value is `Medium` and it is applied to the `span` wrapping element through the `k-input-md` class.
+> When not explicitly set, the applied theme controls the default size.
 
 Below is the HTML of the MultiSelect that is affected from the `Size` configuration. The changes are applied to the `span.k-multiselect` wrapping element and to the `span.k-chip` elements:
 
 ```html
 <span class="k-multiselect k-input k-multiselect-clearable k-input-lg">
     ...
-    <span class="k-chip k-chip-lg k-rounded-lg k-chip-solid k-chip-solid-base" aria-setsize="2"></span>
+    <span class="k-chip k-chip-lg k-rounded-lg k-chip-solid k-chip-base" aria-setsize="2"></span>
 </span>
 ```
 
@@ -94,7 +94,10 @@ The following values are available for the `Rounded` option:
 - `Medium`—medium border radius (applies the `k-rounded-md` class to the wrapping span element)
 - `Large`—large border radius (applies the `k-rounded-lg` class to the wrapping span element)
 - `Full`—largest (ellipse-like) border radius (applies the `k-rounded-full` class to the wrapping span element)
-- `None`—unset.
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 The following example demonstrates how to set `Rounded` in the declaration of the MultiSelect:
 ```HtmlHelper
@@ -144,7 +147,7 @@ The rendering of the MultiSelect with `Rounded.Medium` set:
 ```html
 <span class="k-multiselect k-input k-multiselect-clearable k-input-solid k-input-lg k-rounded-md">
     ...
-    <span class="k-chip k-chip-lg k-rounded-md k-chip-solid k-chip-solid-base" aria-setsize="2"></span>
+    <span class="k-chip k-chip-lg k-rounded-md k-chip-solid k-chip-base" aria-setsize="2"></span>
 </span>
 ```
 
@@ -157,9 +160,10 @@ The following values are available for the `FillMode` option:
 - `Solid`—applies the `k-input-solid` class to the wrapping span element
 - `Flat`—applies the `k-input-flat` class to the wrapping span element
 - `Outline`—applies the `k-input-outline` class to the wrapping span element
-- `None`—unset.
 
-The default value is `Solid` and it is applied to the `span.k-multiselect` wrapping element through the `k-input-solid` class and to the `span.k-chip` elements through the `.k-chip-solid .k-chip-solid-base` classes.
+> When not explicitly set, the applied theme controls the default fill mode.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 The following example demonstrates how to set `FillMode` in the declaration of the MultiSelect:
 ```HtmlHelper
@@ -207,7 +211,7 @@ The `FillMode.Outline` value is reflected through the respective classes applied
 ```html
 <span class="k-multiselect k-input k-multiselect-clearable k-input-outline k-input-lg k-rounded-md">
     ...
-    <span class="k-chip k-chip-lg k-rounded-md k-chip-outline k-chip-outline-base" aria-setsize="2"></span>
+    <span class="k-chip k-chip-lg k-rounded-md k-chip-outline k-chip-base" aria-setsize="2"></span>
 </span>
 ```
 

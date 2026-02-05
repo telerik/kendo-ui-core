@@ -1,62 +1,62 @@
 ---
-title: Configuring Orientation in Kendo UI for jQuery Form  
-description: Fixing layout issues in Kendo UI for jQuery Form when switching between vertical and horizontal orientations.  
-type: how-to  
-page_title: Resolving Kendo UI for jQuery Form Orientation Layout Issues  
-meta_title: Addressing Kendo UI for jQuery Form Layout Issues for Different Orientations  
-slug: kendo-form-orientation-layout-fix  
-tags: kendo ui for jquery, form, orientation, layout, css  
-res_type: kb  
+title: Configuring Orientation in Kendo UI for jQuery Form
+description: Fixing layout issues in Kendo UI for jQuery Form when switching between vertical and horizontal orientations.
+type: how-to
+page_title: Resolving Kendo UI for jQuery Form Orientation Layout Issues
+meta_title: Addressing Kendo UI for jQuery Form Layout Issues for Different Orientations
+slug: kendo-form-orientation-layout-fix
+tags: kendo ui for jquery, form, orientation, layout, css
+res_type: kb
 components: ["form"]
 ticketid: 1700945
 ---
 
-## Environment  
+## Environment
 
-<table>  
-<tbody>  
-<tr>  
-<td> Product </td>  
-<td> Kendo UI for jQuery Form </td>  
-</tr>  
-<tr>  
-<td> Version </td>  
-<td> 2025.3.1002 </td>  
-</tr>  
-</tbody>  
-</table>  
+<table>
+<tbody>
+<tr>
+<td> Product </td>
+<td> Kendo UI for jQuery Form </td>
+</tr>
+<tr>
+<td> Version </td>
+<td> 2025.3.1002 </td>
+</tr>
+</tbody>
+</table>
 
-## Description  
+## Description
 
-I want to ensure the layout of the [Kendo UI for jQuery Form](https://docs.telerik.com/kendo-ui/controls/data-management/form/overview) displays correctly when switching between vertical and horizontal orientations. While the vertical orientation works as expected, using the horizontal orientation causes misalignment of labels and fields across rows.  
+I want to ensure the layout of the [Kendo UI for jQuery Form](https://docs.telerik.com/kendo-ui/controls/data-management/form/overview) displays correctly when switching between vertical and horizontal orientations. While the vertical orientation works as expected, using the horizontal orientation causes misalignment of labels and fields across rows.
 
-This knowledge base article also answers the following questions:  
-- How to align labels and fields in Kendo UI for jQuery Form when using horizontal orientation?  
-- How to fix layout issues in Kendo UI for jQuery Form with horizontal setting?  
-- How to apply CSS for proper alignment in Kendo UI for jQuery Form?  
+This knowledge base article also answers the following questions:
+- How to align labels and fields in Kendo UI for jQuery Form when using horizontal orientation?
+- How to fix layout issues in Kendo UI for jQuery Form with horizontal setting?
+- How to apply CSS for proper alignment in Kendo UI for jQuery Form?
 
-## Solution  
+## Solution
 
-To resolve layout issues in the horizontal orientation of the Kendo UI for jQuery Form, apply custom CSS styles.  
+To resolve layout issues in the horizontal orientation of the Kendo UI for jQuery Form, apply custom CSS styles.
 
-1. Make the form labels have equal widths by using the following CSS:  
+1. Make the form labels have equal widths by using the following CSS:
 
-```css  
-.k-form.k-form-horizontal .k-form-field > .k-label {      
-    width: 150px !important;  
-    min-width: 150px !important;  
-}  
-```  
+```css
+.k-form.k-form-horizontal .k-form-field > .k-label {
+    width: 150px !important;
+    min-width: 150px !important;
+}
+```
 
-2. Extend the input fields to the right end of the form by setting their max-width to 100%:  
+2. Extend the input fields to the right end of the form by setting their max-width to 100%:
 
-```css  
-.k-form-horizontal .k-form-field-wrap {  
-    max-width: 100% !important;  
-}  
-```  
+```css
+.k-form-horizontal .k-form-field-wrap {
+    max-width: 100% !important;
+}
+```
 
-3. Test the solution using the provided example on Dojo: 
+3. Test the solution using the provided example on Dojo:
 ```dojo
 
     <style>
@@ -337,10 +337,10 @@ To resolve layout issues in the horizontal orientation of the Kendo UI for jQuer
             $("#validation-success").html("Field validated: " + e.field);
           },
           buttonsTemplate: `
-            <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" onclick="submitForm()">
+            <button type="button" class="k-button k-button-primary" onclick="submitForm()">
               <span class="k-button-text">Save</span>
             </button>
-            <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="clearForm()">
+            <button type="button" class="k-button" onclick="clearForm()">
               <span class="k-button-text">Clear</span>
             </button>
           `,
@@ -363,11 +363,11 @@ To resolve layout issues in the horizontal orientation of the Kendo UI for jQuer
         $("#validation-success").html("");
       }
     </script>
-```  
+```
 
-The example dynamically switches the orientation of the form and applies the suggested styles for proper rendering.  
+The example dynamically switches the orientation of the form and applies the suggested styles for proper rendering.
 
-## See Also  
+## See Also
 
-- [Kendo UI for jQuery Form Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/form/overview)  
+- [Kendo UI for jQuery Form Documentation](https://docs.telerik.com/kendo-ui/controls/data-management/form/overview)
 - [JavaScript API Reference of the Form](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/form)

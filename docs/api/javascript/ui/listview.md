@@ -2304,7 +2304,7 @@ A string, DOM element or jQuery object which represents the ListView item. A str
 
     <div id ="listView"></div>
     <div id="result"></div>
-    
+
     <script>
       var dataSource = new kendo.data.DataSource({
         data: [ { name: "Jane Doe", age: 25 }, { name: "John Doe", age: 56 }]
@@ -2313,9 +2313,9 @@ A string, DOM element or jQuery object which represents the ListView item. A str
         dataSource: dataSource,
         template: "<div>#:name#</div>"
       }).data("kendoListView");
-    
+
       var row = $('#listView .k-listview-item').first();
-    
+
       var dataItem = listview.dataItem(row);
       $("#result").html("Result: " + dataItem.name + " - " + dataItem.age);
     </script>
@@ -3019,7 +3019,7 @@ What triggers the edit event in Kendo UI ListView? Detect when an item in a list
     <script type="text/x-kendo-tmpl" id="template">
 			<div> #:name#
     	  <div>
-			    <button class="edit k-edit-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button">
+			    <button class="edit k-edit-button k-button k-icon-button" type="button">
             <span class="k-icon k-svg-icon k-svg-i-pencil k-button-icon" aria-hidden="true"></span>
           </button>
         </div>
@@ -3086,7 +3086,7 @@ What triggers the edit event in Kendo UI ListView? Detect when an item in a list
     <script type="text/x-kendo-tmpl" id="template">
 			<div> #:name#
     	<div>
-			<button class="edit k-edit-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button">
+			<button class="edit k-edit-button k-button k-icon-button" type="button">
          <span class="k-icon k-svg-icon k-svg-i-pencil k-button-icon" aria-hidden="true"></span>
       </button>
       </div>
@@ -3177,7 +3177,7 @@ How do I prevent automatic deletion of items in Kendo UI ListView when a user cl
       <div class="item">
         <p>#: name # || #: age #</p>
           <div class="edit-buttons">
-             <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
+             <a role="button" class="k-button k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
       </div>
       </div>
     </script>

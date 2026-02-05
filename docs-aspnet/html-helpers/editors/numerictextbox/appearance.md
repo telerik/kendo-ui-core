@@ -23,7 +23,7 @@ The NumericTextBox HtmlHelper supports the following styling options:
 
 ### Size
 
-The `Size()` method allows you to adjust the size of the NumericTextBox. The default size is `Medium`.
+The `Size()` method allows you to adjust the size of the NumericTextBox.
 
 ```HtmlHelper
 @(Html.Kendo().NumericTextBox()
@@ -51,12 +51,15 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
-- `None`
+
+> When not explicitly set, the applied theme controls the default size.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 ### Rounded
 
-You can control how much border radius is applied to the component by using the `Rounded()` method. The default value is `Medium`.
+You can control how much border radius is applied to the component by using the `Rounded()` method.
 
 ```HtmlHelper
 @(Html.Kendo().NumericTextBox()
@@ -84,12 +87,15 @@ The `Rounded` option supports the following values:
 - `Medium`
 - `Large`
 - `Full`
-- `None`
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 ### FillMode
 
-The `FillMode` option controls the way the color is applied to the NumericTextBox. The default value is `Solid`.
+The `FillMode` option controls the way the color is applied to the NumericTextBox.
 
 ```HtmlHelper
 @(Html.Kendo().NumericTextBox()
@@ -116,7 +122,10 @@ The following values are available for the `FillMode` option:
 - `Solid`
 - `Flat`
 - `Outline`
-- `None`
+
+> When not explicitly set, the applied theme controls the default fill mode.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)

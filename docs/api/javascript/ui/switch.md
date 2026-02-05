@@ -139,14 +139,15 @@ How do I customize the label text for an unchecked toggle switch in Kendo UI? Se
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Sets a value controlling the size of the component. Can also be set to the following string values:
+Sets a value controlling the size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -162,15 +163,16 @@ How do I adjust the size of a Kendo UI switch control? Adjust the dimensions or 
     });
     </script>
 
-### trackRounded `String` *(default: 'full')*
+### trackRounded `String` *(default: undefined)*
 
-Sets a value controlling the track's border radius. Can also be set to the following string values:
+Sets a value controlling the track's border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
 - "full"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -186,15 +188,16 @@ How to customize the border curvature of a Kendo UI switch track element? Contro
     });
     </script>
 
-### thumbRounded `String` *(default: 'full')*
+### thumbRounded `String` *(default: undefined)*
 
-Sets a value controlling the thumb's border radius. Can also be set to the following string values:
+Sets a value controlling the thumb's border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
 - "full"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

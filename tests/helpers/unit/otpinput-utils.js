@@ -1,7 +1,7 @@
 export function assertInputWrapperClasses(inputs) {
     const K_OTPINPUT = "k-otp-input",
           K_INPUT_INNER = "k-input-inner",
-          INPUT_WRAPPER_CLASSES = `k-input k-textbox k-input-solid k-input-md k-rounded-md ${K_OTPINPUT}`;
+          INPUT_WRAPPER_CLASSES = `k-input k-textbox ${K_OTPINPUT}`;
 
         $(inputs).each(function() {
             let inputWrapper = $(this).closest(`.${K_OTPINPUT}`);

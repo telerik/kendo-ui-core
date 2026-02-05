@@ -29,10 +29,11 @@ export const __meta__ = {
         KCLOSEICONSELECTOR = `.k-notification-actions .k-icon`,
         KHIDING = "k-hiding",
         INFO = "info",
+        DEFAULT = "default",
         SUCCESS = "success",
         WARNING = "warning",
         ERROR = "error",
-        TYPEICONS = { [INFO]: "info-circle", [ERROR]: "x-outline", [WARNING]: "exclamation-circle", [SUCCESS]: "check-outline" },
+        TYPEICONS = { [INFO]: "info-circle", [DEFAULT]: "info-circle", [ERROR]: "x-outline", [WARNING]: "exclamation-circle", [SUCCESS]: "check-outline" },
         TOP = "top",
         LEFT = "left",
         BOTTOM = "bottom",
@@ -378,14 +379,17 @@ export const __meta__ = {
         },
 
         show: function(content, type, safe) {
-            var that = this,
+            let that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
                 contentId = kendo.guid(),
+                typeClass = KNOTIFICATION + "-" + type,
                 args, defaultArgs;
 
+
             if (!type) {
-                type = INFO;
+                type = DEFAULT;
+                typeClass = "";
             }
 
             wrapper.attr("aria-label", type);
@@ -405,7 +409,7 @@ export const __meta__ = {
                 }
 
                 wrapper
-                    .addClass(KNOTIFICATION + "-" + type)
+                    .addClass(typeClass)
                     .toggleClass(KNOTIFICATION + "-closable", args.closeButton)
                     .attr({
                         "data-role": "alert",

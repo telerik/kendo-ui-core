@@ -56,7 +56,7 @@ How can I display the location of the uploaded file as a link within the Upload 
             <span class="k-file-name"><a href="" target="_blank">#=data.name#</a></span>
         </span>
         <strong class="k-upload-status">
-            <button type="button" class="k-button k-icon-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
+            <button type="button" class="k-button k-icon-button k-button-flat k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
             </button>
         </strong>
     </script>
@@ -66,7 +66,7 @@ How can I display the location of the uploaded file as a link within the Upload 
   @addTagHelper *, Kendo.Mvc
 
    <kendo-upload name="files" template-id="fileTemplate"    on-success="onSuccess">
-      <async auto-upload="true" 
+      <async auto-upload="true"
         save-url="@Url.Action("Async_Save", "Home")" remove-url="@Url.Action("Remove", "Home")" />
     </kendo-upload>
 
@@ -80,7 +80,7 @@ How can I display the location of the uploaded file as a link within the Upload 
             <span class="k-file-name"><a href="" target="_blank">#=data.name#</a></span>
         </span>
         <strong class="k-upload-status">
-            <button type="button" class="k-button k-icon-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
+            <button type="button" class="k-button k-icon-button k-button-flat k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
             </button>
         </strong>
     </script>

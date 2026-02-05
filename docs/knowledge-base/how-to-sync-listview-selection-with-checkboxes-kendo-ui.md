@@ -42,7 +42,7 @@ To synchronize the selection state between ListView items and checkboxes, follow
     ```javascript
     change: function(e) {
         $('.k-checkbox').prop('checked', false);
-        $('.k-selected').each((index, item) => { 
+        $('.k-selected').each((index, item) => {
             $(item).find('.k-checkbox').prop('checked', true);
         });
     },
@@ -51,7 +51,7 @@ To synchronize the selection state between ListView items and checkboxes, follow
 3. Attach a `click` event handler to checkboxes. In this handler, based on the checkbox state, select or deselect the corresponding ListView item.
 
     ```javascript
-    $('.k-checkbox').on('click', function(e) {         
+    $('.k-checkbox').on('click', function(e) {
         let isChecked = $(this).prop('checked');
 
         if(isChecked) {
@@ -66,7 +66,7 @@ To synchronize the selection state between ListView items and checkboxes, follow
 
 The implementation above ensures that selecting a ListView item checks its checkbox and checking a checkbox selects the ListView item, maintaining synchronization between the two.
 
-For a practical demonstration, refer to the example below: 
+For a practical demonstration, refer to the example below:
 
 ```dojo
 <button id="btn">Get Selected</button>
@@ -99,12 +99,12 @@ For a practical demonstration, refer to the example below:
 
           var itemWithID = currentData.find(function (item) {
             return item.ProductName === sDt;
-          });   
+          });
 
           listView.select($('.k-listview-content').children('[data-uid="' + itemWithID.uid + '"]'));
           $('[data-uid="' + itemWithID.uid + '"] .k-checkbox').prop('checked', true)
 
-          $('.k-checkbox').on('click', function(e){         
+          $('.k-checkbox').on('click', function(e){
             let isChecked = $(this).prop('checked')
 
             if(isChecked){
@@ -117,7 +117,7 @@ For a practical demonstration, refer to the example below:
         },
         dataSource: dataSource,
         selectable: "multiple",
-        template: "<div><input class='k-checkbox k-checkbox-md k-rounded-md' type='checkbox' />#:ProductName#</div>" 
+        template: "<div><input class='k-checkbox' type='checkbox' />#:ProductName#</div>"
       }).data("kendoListView");
 </script>
 ```

@@ -116,13 +116,13 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
                                     <div class="k-card-result overdue-tasks">7</div>
                                     <div class="k-card-title">From Yesterday: 16</div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="k-card">
                                 <div class="k-card-body">
                                     <div class="k-card-result issues">47</div>
                                     <div class="k-card-title">Closed By Team: 15</div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </text>);
 
@@ -171,13 +171,13 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
                                         <div class="k-card-result overdue-tasks">7</div>
                                         <div class="k-card-title">From Yesterday: 16</div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="k-card">
                                     <div class="k-card-body">
                                         <div class="k-card-result issues">47</div>
                                         <div class="k-card-title">Closed By Team: 15</div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </content>
                     </tabstrip-item>
@@ -280,7 +280,7 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
         public ActionResult CustomCommand_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetEmployees().ToDataSourceResult(request));
-        }  
+        }
     ```
 
 ## 4. Handle a TileLayout Event
@@ -301,9 +301,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -318,9 +318,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>The fantastical Sagrada Família church and other modernist landmarks designed by Antoni Gaudí dot the city.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -335,9 +335,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>San Francisco, officially City and County of San Francisco and colloquially known as SF, San Fran or "The City", is the cultural, commercial, and financial center of Northern California.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -378,9 +378,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -395,9 +395,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>The fantastical Sagrada Família church and other modernist landmarks designed by Antoni Gaudí dot the city.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -412,9 +412,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>San Francisco, officially City and County of San Francisco and colloquially known as SF, San Fran or "The City", is the cultural, commercial, and financial center of Northern California.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>

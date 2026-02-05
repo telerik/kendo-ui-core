@@ -225,14 +225,15 @@ How do I customize color input formats in Kendo UI ColorPicker? Control and cust
     });
     </script>
 
-### fillMode `String`*(default: "solid")*
+### fillMode `String`*(default: undefined)*
 
-Sets a value controlling how the color is applied. Can also be set to the following string values:
+Sets a value controlling how the color is applied. When `undefined` (the default), the theme controls the default fill mode. Can also be set to the following string values:
 
 - "solid"
 - "flat"
 - "outline"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -730,15 +731,16 @@ How do I configure the color preview in Kendo UI ColorPicker to show both new an
     });
     </script>
 
-### rounded `String` *(default: 'medium')*
+### rounded `String` *(default: undefined)*
 
-Sets a value controlling the border radius. Can also be set to the following string values:
+Sets a value controlling the border radius. When `undefined` (the default), the theme controls the default border radius. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
 - "full"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -833,14 +835,15 @@ How can I customize the color selection interface in Kendo UI ColorPicker? Contr
     });
     </script>
 
-### size `String`*(default: "medium")*
+### size `String`*(default: undefined)*
 
-Sets a value controlling size of the component. Can also be set to the following string values:
+Sets a value controlling size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- "none"
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -979,10 +982,10 @@ The color that should be set as the current value
     <script>
     $("#colorpicker").kendoColorPicker();
     var colorpicker = $("#colorpicker").data("kendoColorPicker");
-    
+
     // set picker color
     colorpicker.color(kendo.parseColor("#ff0000"));
-    
+
     // get picker color
     var currentColor = colorpicker.color();
     /* The result can be observed in the DevTools(F12) console of the browser. */

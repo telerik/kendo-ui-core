@@ -35,7 +35,7 @@ export const __meta__ = {
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-button-flat-base k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
+        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
 
     function button(options) {
         return options.template( {
@@ -127,7 +127,7 @@ export const __meta__ = {
 
             if (options.size) {
                 buttonSize = kendo.getValidCssClass("k-button-", "size", options.size);
-                dropDownClasses = "k-rounded-md " + kendo.getValidCssClass("k-picker-", "size", options.size);
+                dropDownClasses = kendo.getValidCssClass("k-picker-", "size", options.size);
             }
 
             if (options.navigatable) {
@@ -226,7 +226,7 @@ export const __meta__ = {
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-button-flat-base k-icon-button" title="' + options.messages.refresh +
+                    that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-icon-button" title="' + options.messages.refresh +
                         '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon($('<span class="k-button-icon"></span>'),REFRESH) + '</button>');
                 }
 
@@ -328,8 +328,8 @@ export const __meta__ = {
             name: "Pager",
             adaptiveMode: "none",
             ARIATemplate: ({ page, totalPages }) => `Page navigation, page ${page} of ${totalPages}`,
-            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-flat-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
-            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-flat-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
+            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
             numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${encode(text)}</option>`,
             buttonCount: 10,
             autoBind: true,
@@ -341,7 +341,7 @@ export const __meta__ = {
             refresh: false,
             responsive: true,
             navigatable: false,
-            size: "medium",
+            size: undefined,
             messages: {
                 allPages: "All",
                 display: "{0} - {1} of {2} items",

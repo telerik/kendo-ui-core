@@ -38,11 +38,11 @@ The default size value is `medium` and it is applied to the button element throu
 ```html
 
 <div id="splitButton_wrapper" class="k-split-button k-button-group k-rounded-md">
-    <button type="button" id="splitButton" data-role="splitbutton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" aria-label="Plus splitbutton">
+    <button type="button" id="splitButton" data-role="splitbutton" class="k-button" aria-label="Plus splitbutton">
         <span class="k-icon k-i-plus k-button-icon"></span>
         <span class="k-button-text">Plus</span>
     </button>
-    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button">
+    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-icon-button" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
         </button>
 </div>
@@ -64,10 +64,10 @@ The default `fillMode` value is `solid` and it is applied to the button element 
 
 ```html
 <div id="splitButton_wrapper" class="k-split-button k-button-group k-rounded-md">
-    <button class="k-button k-button-solid" >
+    <button class="k-button" >
         ...
     </button>
-    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button-solid k-button-solid-base k-icon-button" type="button">
+    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-icon-button" type="button">
         ...
     </button>
 </div>
@@ -92,38 +92,38 @@ The following values are available for the [`themeColor`](/api/javascript/ui/spl
 - `inverse`
 - `none`
 
-The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have the `k-button-solid-base` class applied.
+The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have the `k-button-base` class applied.
 
 ```html
 <!-- SplitButton with default fillMode and themeColor -->
 <div id="splitButton_wrapper" class="k-split-button k-button-group k-rounded-md">
-    <button id="button" data-role="splitbutton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="Button splitbutton">
+    <button id="button" data-role="splitbutton" class="k-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="Button splitbutton">
         <span class="k-icon k-i-paste k-button-icon"></span>
         <span class="k-button-text">Button</span>
     </button>
-    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button" type="button">
+    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-icon-button" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
-</div>    
+</div>
 
 <!-- SplitButton with default fillMode and 'primary' themeColor -->
 <div id="splitButton_wrapper" class="k-split-button k-button-group k-rounded-md">
-    <button id="button" data-role="splitbutton" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="Button splitbutton">
+    <button id="button" data-role="splitbutton" class="k-button k-button-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="Button splitbutton">
         <span class="k-icon k-i-paste k-button-icon"></span>
         <span class="k-button-text">Button</span>
     </button>
-    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-icon-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" type="button">
+    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-icon-button k-button-primary" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
 </div>
 
 <!-- SplitButton with `flat` fillMode and `primary` themeColor -->
 <div id="splitButton_wrapper" class="k-split-button k-button-group k-rounded-md">
-    <button id="button" data-role="splitbutton" class="k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="Button splitbutton">
+    <button id="button" data-role="splitbutton" class="k-button k-button-flat k-button-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="Button splitbutton">
         <span class="k-icon k-i-paste k-button-icon"></span>
         <span class="k-button-text">Button</span>
     </button>
-    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-icon-button k-button-md k-rounded-md k-button-flat k-button-flat-primary" type="button">
+    <button tabindex="-1" aria-label="arrow-button" class="k-split-button-arrow k-button k-icon-button k-button-flat k-button-primary" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
 </button>
 </div>
@@ -156,7 +156,7 @@ The default rounded value is `medium` and it is applied to the button element th
 ```
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

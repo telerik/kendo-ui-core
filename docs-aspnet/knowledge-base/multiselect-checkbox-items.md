@@ -37,7 +37,7 @@ How can I create a {{ site.product }} MultiSelect with checkboxes for each of th
 ```HtmlHelper
 	@(Html.Kendo().MultiSelect()
 		.Name("movies")
-		.ItemTemplate("<input class='k-checkbox k-checkbox-md k-rounded-md' type='checkbox' /><span>#: data.Text #</span>")
+		.ItemTemplate("<input class='k-checkbox' type='checkbox' /><span>#: data.Text #</span>")
 		.DataTextField("Text")
 		.DataValueField("Value")
 		.AutoClose(false)
@@ -134,7 +134,7 @@ How can I create a {{ site.product }} MultiSelect with checkboxes for each of th
         placeholder="Select movie..."
         value='new string[] { "1" }'
         bind-to="movies"
-        item-template="<input class='k-checkbox k-checkbox-md k-rounded-md' type='checkbox' /><span>#: data.Text #</span>">
+        item-template="<input class='k-checkbox' type='checkbox' /><span>#: data.Text #</span>">
     </kendo-multiselect>
  ```
 {% endif %}
@@ -142,7 +142,7 @@ How can I create a {{ site.product }} MultiSelect with checkboxes for each of th
 	<script>
 		function checkInputs(elements) { // Toggle 'checked' property, based on the selected items.
 			elements.each(function() {
-				var element = $(this);     
+				var element = $(this);
 				var input = element.find("input");
 				input.prop("checked", element.hasClass("k-selected"));
 			});

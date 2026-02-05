@@ -138,10 +138,10 @@ The following example demonstrates how to set `Rounded` in the declaration of th
     </datasource>
 ```
 {% endif %}
-The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
+> When not explicitly set, the applied theme controls the default border radius.
 
 ```html
-<span class="k-dropdownlist k-picker k-rounded-md">
+<span class="k-dropdownlist k-input k-rounded-md">
 </span>
 ```
 

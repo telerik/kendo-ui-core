@@ -14,7 +14,7 @@ slug: howto_persist_editor_template__while_restoring_state
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -45,9 +45,9 @@ Specify the custom editor to the columns object before passing it to the `setOpt
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div class="box wide">
-      <button id="save"class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >Save State
+      <button id="save"class="k-button" >Save State
       </button>
-      <button id="load" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >Load State
+      <button id="load" class="k-button" >Load State
       </button>
     </div>
 

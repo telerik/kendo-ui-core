@@ -24,7 +24,7 @@ components: ["general"]
 
 ## Description
 
-How can I implement a cascading Telerik UI for {{ site.framework }} AutoComplete? 
+How can I implement a cascading Telerik UI for {{ site.framework }} AutoComplete?
 
 ## Solution
 
@@ -40,7 +40,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
             @(Html.Kendo().AutoCompleteFor(m => m.OrganizationID)
                 .DataTextField("Name")
                 .Filter("contains")
-                .MinLength(1)                            
+                .MinLength(1)
                 .DataSource(source =>
                 {
                     source.Read(read =>
@@ -50,7 +50,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
                     .ServerFiltering(true);
                 })
             )
-                  
+
             <label asp-for="OrganizationNumber" class="form-label">Number:</label>
             @(Html.Kendo().AutoCompleteFor(m => m.OrganizationNumber)
                 .DataTextField("Number")
@@ -66,9 +66,9 @@ The following example consists of two AutoComplete editors that bind to Model pr
                 })
             )
             <div class="k-form-buttons">
-                <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+                <button class="k-button k-button-primary" type="submit">Submit</button>
             </div>
-        </form> 
+        </form>
     ```
     {% if site.core %}
     ```TagHelper
@@ -78,7 +78,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
 
         <form id="exampleForm" class="k-form k-form-vertical" method="post">
             <label for="OrganizationID" class="k-form-label">Name:</label>
-            <kendo-autocomplete name="OrganizationID" 
+            <kendo-autocomplete name="OrganizationID"
                 dataTextField="Name"
                 filter="FilterType.Contains"
                 min-length="1">
@@ -88,9 +88,9 @@ The following example consists of two AutoComplete editors that bind to Model pr
                     </transport>
                 </datasource>
             </kendo-autocomplete>
-                  
+
             <label asp-for="OrganizationNumber" class="form-label">Number:</label>
-            <kendo-autocomplete name="OrganizationNumber" 
+            <kendo-autocomplete name="OrganizationNumber"
                 dataTextField="Number"
                 filter="FilterType.Contains"
                 min-length="1">
@@ -101,9 +101,9 @@ The following example consists of two AutoComplete editors that bind to Model pr
                 </datasource>
             </kendo-autocomplete>
             <div class="k-form-buttons">
-                <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+                <button class="k-button k-button-primary" type="submit">Submit</button>
             </div>
-        </form> 
+        </form>
     ```
     ```Controller
         public class HomeController : Controller
@@ -183,7 +183,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
 
     ```View
         @(Html.Kendo().AutoCompleteFor(m => m.OrganizationID)
-            ...                         
+            ...
             .DataSource(source =>
             {
                 source.Read(read =>
@@ -195,7 +195,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
         )
 
         @(Html.Kendo().AutoCompleteFor(m => m.OrganizationNumber)
-            ...                         
+            ...
             .DataSource(source =>
             {
                 source.Read(read =>
@@ -204,7 +204,7 @@ The following example consists of two AutoComplete editors that bind to Model pr
                 })
                 .ServerFiltering(true);
             })
-        )              
+        )
     ```
     {% if site.core %}
     ```TagHelper
@@ -333,13 +333,13 @@ The following example consists of two AutoComplete editors that bind to Model pr
     ```View
         @(Html.Kendo().AutoCompleteFor(m => m.OrganizationID)
             .Events(ev => ev.Select("onSelectOrganizationName"))
-            ...                         
+            ...
         )
 
         @(Html.Kendo().AutoCompleteFor(m => m.OrganizationNumber)
             .Events(ev => ev.Select("onSelectOrganizationNumber"))
-            ...                         
-        )              
+            ...
+        )
     ```
     {% if site.core %}
     ```TagHelper

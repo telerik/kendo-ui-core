@@ -39,7 +39,7 @@ In this example, each TreeList is exported to a separate Excel sheet. For more i
 ```HtmlHelper
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
-<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="export">Export TreeLists to Excel</button>
+<button class="k-button" id="export">Export TreeLists to Excel</button>
 
 <h3>Designers</h3>
 @(Html.Kendo().TreeList<Telerik.Examples.Mvc.Areas.TreeListExportingMultiple.Models.EmployeeDirectoryModel>()
@@ -60,7 +60,7 @@ In this example, each TreeList is exported to a separate Excel sheet. For more i
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
-<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="export">Export TreeLists to Excel</button>
+<button class="k-button" id="export">Export TreeLists to Excel</button>
 
 <h3>Designers</h3>
 <kendo-treelist name="designers" on-excel-export="onExcelExportDesigners">

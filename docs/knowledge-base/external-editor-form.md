@@ -56,13 +56,13 @@ The following example demonstrates how to achieve the desired scenario.
       End:
       <input data-role="datetimepicker" data-bind="value: end" />
       </label>
-    <button id="save" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">Save</button>
-    <button id="cancel" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">Cancel</button>
+    <button id="save" class="k-button k-button-rectangle">Save</button>
+    <button id="cancel" class="k-button k-button-rectangle">Cancel</button>
     </script>
 
     <script>
       $(function() {
-        
+
         $("#scheduler").kendoScheduler({
           date: new Date("2025/6/13"),
           startTime: new Date("2025/6/13 07:00 AM"),
@@ -80,7 +80,7 @@ The following example demonstrates how to achieve the desired scenario.
           timezone: "Etc/UTC",
           dataSource: {
             batch: true,
-            transport: {              
+            transport: {
               read: {
                   url: "https://demos.telerik.com/service/v2/core/tasks"
               },

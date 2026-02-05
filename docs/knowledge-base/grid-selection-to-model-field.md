@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -105,10 +105,10 @@ The following example demonstrates how `SelectAll` that is located in the header
             navigatable: true,
             pageable: true,
             columns: [
-              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' onclick='checkAll(this)'/>" },
+              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox' onclick='checkAll(this)'/>" },
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
-                { field: "UnitsInStock", title: "Units In Stock", width: 120 },                            
+                { field: "UnitsInStock", title: "Units In Stock", width: 120 },
                 { command: "destroy", title: "&nbsp;", width: 150 }],
             dataBound: function(e){
               e.sender.items().each(function(){
@@ -203,10 +203,10 @@ The following example demonstrates how `SelectAll` that is located in the header
             navigatable: true,
             pageable: true,
             columns: [
-              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' onclick='checkAll(this)'/>" },
+              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox' onclick='checkAll(this)'/>" },
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
-                { field: "UnitsInStock", title: "Units In Stock", width: 120 },                            
+                { field: "UnitsInStock", title: "Units In Stock", width: 120 },
                 { command: "destroy", title: "&nbsp;", width: 150 }],
             dataBound: function(e){
               e.sender.items().each(function(){

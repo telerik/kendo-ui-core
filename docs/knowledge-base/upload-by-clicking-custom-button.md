@@ -38,11 +38,11 @@ How can I hide the default Upload button and upload the selected file by clickin
 ## Solution
 
 1. Hide the default **Clear** and **Upload** buttons of the Upload by using CSS.
-1. Allow the trigger of the upload by clicking the default button by using jQuery in the click handler of the custom button.  
+1. Allow the trigger of the upload by clicking the default button by using jQuery in the click handler of the custom button.
 
 ```dojo
 	<input type="file" name="files" id="files"/>
-	<input type="button" value="Upload Selected Files" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary k-upload-button" onclick="uploadSelected()"  />
+	<input type="button" value="Upload Selected Files" class="k-button k-button-primary k-upload-button" onclick="uploadSelected()"  />
 	<script>
 		$("#files").kendoUpload({
 			async: {
@@ -56,7 +56,7 @@ How can I hide the default Upload button and upload the selected file by clickin
 		  $(".k-upload-selected").click();
 		}
 	</script>
-	<style>  
+	<style>
 	  .k-clear-selected, .k-upload-selected {
 		display: none !important;
 	  }

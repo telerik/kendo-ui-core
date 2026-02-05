@@ -11,13 +11,14 @@ Represents the Kendo UI ChipList widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
-### fillMode `String` *(default: 'solid')*
+### fillMode `String` *(default: undefined)*
 
-Specifies the background and border styles of the Chip items. Valid fillMode options are:
+Specifies the background and border styles of the Chip items. When `undefined` (the default), the theme controls the default fill mode. Valid fillMode options are:
 
-* `solid` *(default)*
+* `solid`
 * `outline`
-* `none`
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -39,9 +40,11 @@ How can I customize the appearance of chip elements in a Kendo UI ChipList? Set 
     </script>
 
 
-### rounded  `String` *(default: 'medium')*
+### rounded  `String` *(default: undefined)*
 
-Specifies the size of the chip. Valid options are `small`, `medium`, `large`, `full` and `none`.
+Specifies the size of the chip. When `undefined` (the default), the theme controls the default border radius. Valid options are `small`, `medium`, `large`, `full`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -62,9 +65,11 @@ How do I customize the corner radius of Kendo UI ChipList items? Adjust the corn
         });
     </script>
 
-### size  `String` *(default: 'medium')*
+### size  `String` *(default: undefined)*
 
-Specifies the gap between the Chips in the ChipList. Valid options are `small`, `medium`, `large` and `none`.
+Specifies the gap between the Chips in the ChipList. When `undefined` (the default), the theme controls the default size. Valid options are `small`, `medium`, `large`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -87,9 +92,11 @@ How do I adjust the spacing between chips in a Kendo UI ChipList? Adjust spacing
     </script>
 
 
-### itemSize  `String` *(default: 'medium')*
+### itemSize  `String` *(default: undefined)*
 
-Specifies the size of the chip. Valid options are `small`, `medium`, `large` and `none`.
+Specifies the size of the chip. When `undefined` (the default), the theme controls the default size. Valid options are `small`, `medium`, `large`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

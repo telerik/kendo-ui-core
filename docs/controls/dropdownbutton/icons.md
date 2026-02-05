@@ -46,7 +46,7 @@ The following example demonstrates how to use icons in the DropDownButton compon
 The `icon` configuration in the previous example will produce the following HTML output:
 
 ```html
-<button type="button" id="dropDownButton" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" aria-label="Plus dropdownbutton">
+<button type="button" id="dropDownButton" data-role="dropdownbutton" class="k-menu-button k-button" aria-label="Plus dropdownbutton">
     <span class="k-icon k-i-plus k-button-icon"></span>
     <span class="k-button-text">Plus</span>
 </button>

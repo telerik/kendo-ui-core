@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -37,7 +37,7 @@ The following example demonstrates how to select a row on any page of a client-s
 
 ```dojo
     Select row with ID = <input id="numeric" /> (1-78)
-    <button id="searchBtn" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Go</button>
+    <button id="searchBtn" class="k-button">Go</button>
     <div id="grid"></div>
     <script>
       function selectGridRow(searchedId, grid, idField){
@@ -141,11 +141,11 @@ The following example demonstrates how to select a row on any page of a client-s
         });
       });
     </script>
-    <style> 
+    <style>
       .k-numerictextbox
-      { 
+      {
         width: 250px;
-      } 
+      }
     </style>
 ```
 

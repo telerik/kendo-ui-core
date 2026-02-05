@@ -165,9 +165,9 @@ export const __meta__ = {
             upArrowText: "Increase value",
             downArrowText: "Decrease value",
             label: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             prefixOptions: {
                 separator: true
             },

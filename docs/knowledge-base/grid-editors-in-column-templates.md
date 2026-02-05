@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -43,7 +43,7 @@ The following example demonstrates how to render an input editor in a column tem
     <div id="grid"></div>
     <script>
       function onDataBound(e) {
-        editAll();   
+        editAll();
       }
 
       function editAll() {
@@ -106,8 +106,8 @@ The following example demonstrates how to render an input editor in a column tem
           height: 430,
           toolbar: ["create", "save", "cancel"],
           columns: [
-            { template: "<span class='k-input k-textbox k-input-solid k-input-md k-rounded-md'><input data-bind='value:ProductName' class='k-input-inner' /></span>", title: "Product Name", width: 110 },
-            { template: "<span class='k-input k-textbox k-input-solid k-input-md k-rounded-md'><input data-bind='value:UnitsInStock' class='k-input-inner' /></span>", title: "Units In Stock", width: 110 },
+            { template: "<span class='k-input k-textbox'><input data-bind='value:ProductName' class='k-input-inner' /></span>", title: "Product Name", width: 110 },
+            { template: "<span class='k-input k-textbox'><input data-bind='value:UnitsInStock' class='k-input-inner' /></span>", title: "Units In Stock", width: 110 },
             { field: "Discontinued", width: 110 },
             { command: "destroy", title: "&nbsp;", width: 90 }],
           editable: true,

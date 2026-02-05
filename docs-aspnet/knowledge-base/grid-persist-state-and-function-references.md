@@ -33,13 +33,13 @@ How can I persist the function references of the custom command buttons in the {
 To achieve the desired scenario:
 
 1. Create two separate buttons which will be responsible for the loading and persisting of the Grid's state.
-1. Handle the [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) event of both buttons. 
+1. Handle the [`click`](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) event of both buttons.
 1. Store the options of the Grid by using the [`getOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getoptions) method while serializing them within the `LocalStorage` of the application by using the [`kendo.stringify()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/stringify) method.
 1. Just before you pass the options to the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method of the Grid upon the state's persistence, add the function reference to the parsed JSON file retrieved from the `LocalStorage`.
 
 ```Razor Index.cshtml
-    <a href="#" class="k-button k-button-md k-rounded-md k-button-solid-base"  id="save">Save State</a>
-    <a href="#" class="k-button k-button-md k-rounded-md k-button-solid-base" id="load">Load State</a>
+    <a href="#" class="k-button"  id="save">Save State</a>
+    <a href="#" class="k-button" id="load">Load State</a>
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
         .Name("grid")
@@ -81,7 +81,7 @@ To achieve the desired scenario:
 
             $("#load").click(function (e) { // Handle the Load button's click event.
                 e.preventDefault();
-                var parsedOptions = JSON.parse(localStorage["kendo-grid-options"]); 
+                var parsedOptions = JSON.parse(localStorage["kendo-grid-options"]);
                 if (parsedOptions) {
                     parsedOptions.columns[1].command[0].click = onClick; // Add the function reference of the custom command.
                     grid.setOptions(parsedOptions);

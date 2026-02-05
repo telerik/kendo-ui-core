@@ -89,14 +89,13 @@ How do I change the label next to a radio button in Kendo UI for jQuery? Set or 
         });
     </script>
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Sets a value controlling the size of the component. Can also be set to the following string values:
+Sets a value controlling the size of the component. When `undefined` (the default), the theme controls the default size. Can also be set to the following string values:
 
 - "small"
 - "medium"
 - "large"
-- null
 
 
 <div class="meta-api-description">

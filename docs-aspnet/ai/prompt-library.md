@@ -42,7 +42,7 @@ The [{{ site.product }} Grid](slug:htmlhelpers_grid_aspnetcore_overview) lets yo
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Grid
-#telerik-aspnetcorehtml-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality. 
+#telerik-aspnetcorehtml-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality.
 ```
 ```C# Output
 // View
@@ -76,13 +76,13 @@ using Kendo.Mvc.Extensions;
 public class HomeController : Controller
 {
     // ...existing code...
-    
+
     public ActionResult GetEmployees([DataSourceRequest] DataSourceRequest request)
     {
         var employees = GetEmployeeData();
         return Json(employees.ToDataSourceResult(request));
     }
-    
+
     private List<Employee> GetEmployeeData()
     {
         return new List<Employee>
@@ -101,7 +101,7 @@ public class HomeController : Controller
             new Employee { ID = 12, Name = "Jennifer White", Position = "UI Developer", Salary = 68000 }
         };
     }
-    
+
     // ...existing code...
 }
 
@@ -232,23 +232,23 @@ namespace ProjectName.Models
     public class Employee
     {
         public int Id { get; set; }
-        
+
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        
+
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        
+
         public int Age { get; set; }
-        
+
         public decimal Salary { get; set; }
-        
+
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
-        
+
         [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
-        
+
         [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
     }
@@ -264,7 +264,7 @@ namespace ProjectName.Models
 //View
 @(Html.Kendo().Grid<ProjectName.Models.Employee>()
     .Name("employeeGrid")
-    .ToolBar(toolbar => 
+    .ToolBar(toolbar =>
     {
         toolbar.Excel();
         toolbar.Pdf();
@@ -363,11 +363,11 @@ public ActionResult Pdf_Export_Save(string contentType, string base64, string fi
         columns.Bound(c => c.Name)
             .Title("Name")
             .ClientTemplate("#= Name # (Age: #= Age #)");
-        
+
         columns.Bound(c => c.StartDate)
             .Title("Start Date")
             .Format("{0:dd/MM/yyyy}");
-        
+
         columns.Bound(c => c.Status)
             .Title("Status")
             .ClientTemplate("#= Status ? 'Active' : 'Inactive' #");
@@ -408,16 +408,16 @@ public class Employee
 <div style="display: grid; gap: 10px; grid-template-columns: 1fr 1fr;">
 
 ```prompt Basic Grid
-#telerik-aspnetcoretag-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality. 
+#telerik-aspnetcoretag-assistant Create a basic Grid component that displays employee data with columns for ID, Name, Position, and Salary. Include sorting and pagination functionality.
 ```
 ```C# Output
 // View
 @addTagHelper "*, Kendo.Mvc"
 
 <kendo-grid name="employeeGrid">
-  <datasource type="DataSourceTagHelperType.Ajax" 
+  <datasource type="DataSourceTagHelperType.Ajax"
     page-size="10"
-    server-paging="true" 
+    server-paging="true"
     server-sorting="true">
     <transport>
         <read url="@Url.Action("GetEmployees", "Home")" />
@@ -440,14 +440,14 @@ public class Employee
       <column field="Salary" title="Salary" width="150" format="{0:C}" />
   </columns>
   <sortable enabled="true" allow-unsort="true" mode="single" />
-  <pageable enabled="true" 
-    button-count="5" 
-    refresh="true" 
-    page-sizes="new int[] { 5, 10, 20, 50 }" 
-    page-sizes-enabled="true" 
-    input="true" 
-    numeric="true" 
-    info="true" 
+  <pageable enabled="true"
+    button-count="5"
+    refresh="true"
+    page-sizes="new int[] { 5, 10, 20, 50 }"
+    page-sizes-enabled="true"
+    input="true"
+    numeric="true"
+    info="true"
     previous-next="true" />
 </kendo-grid>
 
@@ -516,39 +516,39 @@ public class Employee
             </model>
         </schema>
     </datasource>
-    
+
     <!-- Enable filter row functionality -->
     <filterable mode="row" enabled="true">
         <operators>
             <!-- String operators -->
-            <string eq="Equals" 
-                    neq="Not Equal" 
-                    contains="Contains" 
+            <string eq="Equals"
+                    neq="Not Equal"
+                    contains="Contains"
                     doesnotcontain="Does Not Contain"
                     startswith="Starts With"
                     endswith="Ends With"></string>
-            
+
             <!-- Number operators -->
-            <number eq="Equal" 
-                    neq="Not Equal" 
-                    gt="Greater Than" 
-                    gte="Greater or Equal" 
-                    lt="Less Than" 
+            <number eq="Equal"
+                    neq="Not Equal"
+                    gt="Greater Than"
+                    gte="Greater or Equal"
+                    lt="Less Than"
                     lte="Less or Equal"></number>
-            
+
             <!-- Date operators -->
-            <date eq="Equal" 
-                  neq="Not Equal" 
-                  gt="After" 
-                  gte="On or After" 
-                  lt="Before" 
+            <date eq="Equal"
+                  neq="Not Equal"
+                  gt="After"
+                  gte="On or After"
+                  lt="Before"
                   lte="On or Before"></date>
         </operators>
     </filterable>
-    
+
     <sortable enabled="true" />
     <pageable enabled="true" refresh="true" page-sizes="new int[] { 5, 10, 20, 50 }" />
-    
+
     <columns>
         <!-- Numeric column with default "equals" operator -->
         <column field="Id" title="ID" width="80">
@@ -556,42 +556,42 @@ public class Employee
                 <cell operator="eq" show-operators="true"></cell>
             </filterable>
         </column>
-        
+
         <!-- Text column with "contains" operator (good for searching names) -->
         <column field="Name" title="Employee Name" width="200">
             <filterable>
                 <cell operator="contains" show-operators="true" delay="500"></cell>
             </filterable>
         </column>
-        
+
         <!-- Text column with "startswith" operator (good for positions) -->
         <column field="Position" title="Position" width="180">
             <filterable>
                 <cell operator="startswith" show-operators="true" delay="500"></cell>
             </filterable>
         </column>
-        
+
         <!-- Text column with "eq" operator for exact department matches -->
         <column field="Department" title="Department" width="150">
             <filterable>
                 <cell operator="eq" show-operators="true"></cell>
             </filterable>
         </column>
-        
+
         <!-- Numeric column with "gte" operator (good for salary filtering) -->
         <column field="Salary" title="Salary" width="130" format="{0:C}">
             <filterable>
                 <cell operator="gte" show-operators="true" delay="300"></cell>
             </filterable>
         </column>
-        
+
         <!-- Date column with "gte" operator (hired on or after date) -->
         <column field="HireDate" title="Hire Date" width="120" format="{0:MM/dd/yyyy}">
             <filterable>
                 <cell operator="gte" show-operators="true"></cell>
             </filterable>
         </column>
-        
+
         <!-- Numeric column with "eq" operator for age -->
         <column field="Age" title="Age" width="80">
             <filterable>
@@ -614,13 +614,13 @@ namespace ProjctName.Controllers
         public JsonResult GetEmployees([DataSourceRequest] DataSourceRequest request)
         {
             var employees = GetEmployeeData();
-            
+
             // Apply server-side filtering, sorting, and paging
             var result = employees.ToDataSourceResult(request);
-            
+
             return Json(result);
         }
-        
+
         private List<Employee> GetEmployeeData()
         {
             return new List<Employee>
@@ -717,11 +717,11 @@ public IActionResult Pdf_Export_Save(string contentType, string base64, string f
 //View
 @addTagHelper "*, Kendo.Mvc"
 
-<kendo-grid name="virtualGrid" 
+<kendo-grid name="virtualGrid"
   height="400"
   auto-bind="true">
   <scrollable virtual="GridVirtualizationMode.Rows" />
-  <datasource type="DataSourceTagHelperType.Ajax" 
+  <datasource type="DataSourceTagHelperType.Ajax"
               page-size="100"
               server-operation="true">
       <transport>
@@ -764,10 +764,10 @@ public class HomeController : Controller
     {
         // Generate sample data for demonstration
         var data = GenerateLargeDataset(50000); // 50k records for demo
-        
+
         // Apply DataSourceRequest (paging, sorting, filtering)
         var result = data.ToDataSourceResult(request);
-        
+
         return Json(result);
     }
 
@@ -775,7 +775,7 @@ public class HomeController : Controller
     {
         var departments = new[] { "IT", "HR", "Sales", "Marketing", "Finance" };
         var random = new Random();
-        
+
         return Enumerable.Range(1, count).Select(i => new Employee
         {
             Id = i,
@@ -826,17 +826,17 @@ public class Employee
         </schema>
     </datasource>
     <columns>
-        <column field="Name" 
-                title="Employee Details" 
+        <column field="Name"
+                title="Employee Details"
                 template="<strong>#= Name #</strong> (Age: #= Age #)">
         </column>
         <column field="Age" title="Age"></column>
-        <column field="Status" 
-                title="Status" 
+        <column field="Status"
+                title="Status"
                 template="# if (Status) { # Active # } else { # Inactive # } #">
         </column>
-        <column field="StartDate" 
-                title="Start Date" 
+        <column field="StartDate"
+                title="Start Date"
                 template="#= kendo.toString(StartDate, 'dd/MM/yyyy') #">
         </column>
     </columns>
@@ -979,7 +979,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
             .SeriesLeave("onSeriesLeave")
         )
     )
-    
+
     <div id="centerText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
         <div style="font-size: 24px; font-weight: bold; color: #333;">900</div>
         <div style="font-size: 14px; color: #666;">Total Units</div>
@@ -990,15 +990,15 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
     function onSeriesHover(e) {
         var centerText = document.getElementById("centerText");
         var percentage = ((e.value / 900) * 100).toFixed(1);
-        centerText.innerHTML = 
+        centerText.innerHTML =
             '<div style="font-size: 20px; font-weight: bold; color: ' + e.series.color + ';">' + e.value + '</div>' +
             '<div style="font-size: 12px; color: #666;">' + e.category + '</div>' +
             '<div style="font-size: 12px; color: #666;">(' + percentage + '%)</div>';
     }
-    
+
     function onSeriesLeave(e) {
         var centerText = document.getElementById("centerText");
-        centerText.innerHTML = 
+        centerText.innerHTML =
             '<div style="font-size: 24px; font-weight: bold; color: #333;">900</div>' +
             '<div style="font-size: 14px; color: #666;">Total Units</div>';
     }
@@ -1060,19 +1060,19 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 <kendo-chart name="chartLineBasic" height="400">
     <chart-title text="Monthly Sales"></chart-title>
-    
+
     <category-axis>
         <category-axis-item categories='@new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }'>
         </category-axis-item>
     </category-axis>
-    
+
     <series>
-        <series-item type="ChartSeriesType.Line" 
-                     name="Sales" 
+        <series-item type="ChartSeriesType.Line"
+                     name="Sales"
                      data='@new double[] { 15000, 18000, 22000, 25000, 28000, 32000, 35000, 38000, 30000, 27000, 23000, 20000 }'>
         </series-item>
     </series>
-    
+
     <tooltip shared="true" visible="true"></tooltip>
 </kendo-chart>
 ```
@@ -1087,32 +1087,32 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 <kendo-chart name="chartAreaStacked" height="400">
     <chart-title text="Product Sales by Month"></chart-title>
-    
+
     <category-axis>
         <category-axis-item categories='@new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }'>
         </category-axis-item>
     </category-axis>
-    
+
     <series>
-        <series-item type="ChartSeriesType.Area" 
-                     name="Product A" 
+        <series-item type="ChartSeriesType.Area"
+                     name="Product A"
                      stack="normal"
                      data='@new double[] { 5000, 6000, 7500, 8000, 9000, 10000, 11000, 12000, 10500, 9500, 8500, 7000 }'>
         </series-item>
-        <series-item type="ChartSeriesType.Area" 
-                     name="Product B" 
+        <series-item type="ChartSeriesType.Area"
+                     name="Product B"
                      stack="normal"
                      data='@new double[] { 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 6000, 5500, 5000, 4500 }'>
         </series-item>
-        <series-item type="ChartSeriesType.Area" 
-                     name="Product C" 
+        <series-item type="ChartSeriesType.Area"
+                     name="Product C"
                      stack="normal"
                      data='@new double[] { 2000, 2200, 2500, 2800, 3200, 3500, 3800, 4000, 3700, 3400, 3100, 2800 }'>
         </series-item>
     </series>
-    
+
     <chart-legend visible="true"></chart-legend>
-    
+
     <tooltip shared="true" visible="true"></tooltip>
 </kendo-chart>
 ```
@@ -1127,36 +1127,36 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 <kendo-chart name="chartColumnProducts" height="400">
     <chart-title text="Product Comparison (Jan-Jun)"></chart-title>
-    
+
     <category-axis>
         <category-axis-item categories='@new string[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun" }'>
         </category-axis-item>
     </category-axis>
-    
+
     <value-axis>
         <value-axis-item>
             <chart-value-axis-item-title text="Sales Units"></chart-value-axis-item-title>
             <labels format="{0} units"></labels>
         </value-axis-item>
     </value-axis>
-    
+
     <series>
-        <series-item type="ChartSeriesType.Column" 
-                     name="Product A" 
+        <series-item type="ChartSeriesType.Column"
+                     name="Product A"
                      data='@new double[] { 1200, 1350, 1500, 1650, 1800, 1950 }'>
         </series-item>
-        <series-item type="ChartSeriesType.Column" 
-                     name="Product B" 
+        <series-item type="ChartSeriesType.Column"
+                     name="Product B"
                      data='@new double[] { 800, 900, 1100, 1250, 1400, 1550 }'>
         </series-item>
-        <series-item type="ChartSeriesType.Column" 
-                     name="Product C" 
+        <series-item type="ChartSeriesType.Column"
+                     name="Product C"
                      data='@new double[] { 600, 750, 850, 900, 1000, 1100 }'>
         </series-item>
     </series>
-    
+
     <chart-legend visible="true"></chart-legend>
-    
+
     <tooltip shared="true" visible="true"></tooltip>
 </kendo-chart>
 
@@ -1275,11 +1275,11 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
 
 <kendo-chart name="chartMarketShare" height="400">
     <chart-title text="Market Share Distribution"></chart-title>
-    
+
     <series>
-        <series-item type="ChartSeriesType.Pie" 
-                     name="Market Share" 
-                     data='@new object[] { 
+        <series-item type="ChartSeriesType.Pie"
+                     name="Market Share"
+                     data='@new object[] {
                          new { category = "Company A", value = 35.5, color = "#ff6384" },
                          new { category = "Company B", value = 28.2, color = "#36a2eb" },
                          new { category = "Company C", value = 18.7, color = "#ffcd56" },
@@ -1289,7 +1289,7 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
                      category-field="category"
                      field="value"
                      color-field="color">
-            <labels visible="true" 
+            <labels visible="true"
                     position="ChartSeriesLabelsPosition.OutsideEnd"
                     template="#= category #<br/>#= kendo.format('{0:n1}%', value) #"
                     background="white"
@@ -1300,16 +1300,16 @@ The [{{ site.product }} Charts](slug:htmlhelpers_charts_aspnetcore) provide a co
             </highlight>
         </series-item>
     </series>
-    
-    <chart-legend visible="true" 
+
+    <chart-legend visible="true"
                   position="ChartLegendPosition.Right"
                   align="ChartLegendAlign.Start">
         <labels template="#= text #: #= value #%"></labels>
     </chart-legend>
-    
-    <tooltip visible="true" 
+
+    <tooltip visible="true"
              template="#= category #: #= kendo.format('{0:n1}%', value) # of market share"></tooltip>
-             
+
     <chart-area background="#f9f9f9">
         <border width="0"></border>
     </chart-area>
@@ -1374,7 +1374,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
     function disableHolidays(date) {
         if (!date) return false;
-        
+
         // Check if the date is in the holidays array
         for (var i = 0; i < holidays.length; i++) {
             var holiday = holidays[i];
@@ -1384,7 +1384,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
                 return true; // Disable this date
             }
         }
-        
+
         // Optionally disable weekends as well
         var dayOfWeek = date.getDay();
         return dayOfWeek === 0 || dayOfWeek === 6; // Disable Sunday (0) and Saturday (6)
@@ -1395,11 +1395,11 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
     .container {
         margin-top: 20px;
     }
-    
+
     .form-group {
         margin-bottom: 20px;
     }
-    
+
     .form-group label {
         display: block;
         margin-bottom: 5px;
@@ -1416,7 +1416,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 ```C# Output
 <div class="container">
     <h2>Date Range Selection</h2>
-    
+
     <div class="row">
         <div class="col-md-6">
             <label for="fromDate">From Date:</label>
@@ -1427,7 +1427,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
                 .HtmlAttributes(new { style = "width: 100%;" })
             )
         </div>
-        
+
         <div class="col-md-6">
             <label for="toDate">To Date:</label>
             @(Html.Kendo().DatePicker()
@@ -1444,13 +1444,13 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
     function onFromDateChange() {
         var fromDatePicker = $("#fromDate").data("kendoDatePicker");
         var toDatePicker = $("#toDate").data("kendoDatePicker");
-        
+
         var fromDate = fromDatePicker.value();
-        
+
         if (fromDate) {
             // Set the minimum date of the "To" DatePicker to the selected "From" date
             toDatePicker.min(fromDate);
-            
+
             // If the current "To" date is before the new minimum, update it
             var toDate = toDatePicker.value();
             if (toDate && toDate < fromDate) {
@@ -1469,7 +1469,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 ```C# Output
 <div class="container">
     <h2>Adaptive DatePicker Demo</h2>
-    
+
     @(Html.Kendo().DatePicker()
         .Name("adaptiveDatePicker")
         .AdaptiveMode(Kendo.Mvc.UI.AdaptiveMode.Auto)
@@ -1488,7 +1488,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
         max-width: 600px;
         margin: 0 auto;
     }
-    
+
     /* Additional responsive styling */
     @@media (max-width: 500px) {
         .container {
@@ -1546,7 +1546,7 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 <div>
     <label for="birthdate">Select your birthdate:</label>
-    <kendo-datepicker name="birthdate" 
+    <kendo-datepicker name="birthdate"
       format="dd/MM/yyyy"
       min="@DateTime.Today.AddYears(-7)"
       max="@DateTime.Today.AddYears(3)">
@@ -1620,21 +1620,21 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
 
 <div class="container">
     <h2>Date Range Selection</h2>
-    
+
     <div class="row">
         <div class="col-md-6">
             <label for="fromDate">From Date:</label>
-            <kendo-datepicker name="fromDate" 
-                              value="DateTime.Today" 
+            <kendo-datepicker name="fromDate"
+                              value="DateTime.Today"
                               on-change="onFromDateChange"
                               style="width: 100%;">
             </kendo-datepicker>
         </div>
-        
+
         <div class="col-md-6">
             <label for="toDate">To Date:</label>
-            <kendo-datepicker name="toDate" 
-                              min="DateTime.Today" 
+            <kendo-datepicker name="toDate"
+                              min="DateTime.Today"
                               value="DateTime.Today.AddDays(1)"
                               style="width: 100%;">
             </kendo-datepicker>
@@ -1646,13 +1646,13 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
     function onFromDateChange() {
         var fromDatePicker = $("#fromDate").data("kendoDatePicker");
         var toDatePicker = $("#toDate").data("kendoDatePicker");
-        
+
         var fromDate = fromDatePicker.value();
-        
+
         if (fromDate) {
             // Set the minimum date of the "To" DatePicker to the selected "From" date
             toDatePicker.min(fromDate);
-            
+
             // If the current "To" date is before the new minimum, update it
             var toDate = toDatePicker.value();
             if (toDate && toDate < fromDate) {
@@ -1703,8 +1703,8 @@ The [{{ site.product }} DatePicker](slug:htmlhelpers_datepicker_aspnetcore) comp
         </form-item>
         <form-item field="StartDate">
             <item-label text="Start Date:" />
-            <datepicker-editor 
-                format="dd/MM/yyyy" 
+            <datepicker-editor
+                format="dd/MM/yyyy"
                 date-input="true"
                 placeholder="Select start date" />
         </form-item>
@@ -1731,7 +1731,7 @@ The [{{ site.product }} Form](slug:htmlhelpers_form_aspnetcore_overview) provide
 
 <div class="container">
     <h2>User Profile Settings</h2>
-    
+
     @(Html.Kendo().Form<UserProfileViewModel>()
         .Name("userProfileForm")
         .HtmlAttributes(new { action = "SaveProfile", method = "post" })
@@ -1745,11 +1745,11 @@ The [{{ site.product }} Form](slug:htmlhelpers_form_aspnetcore_overview) provide
             items.Add()
                 .Field(f => f.Name)
                 .Label(l => l.Text("Full Name:"));
-            
+
             items.Add()
                 .Field(f => f.Email)
                 .Label(l => l.Text("Email Address:"));
-            
+
             items.Add()
                 .Field(f => f.Agree)
                 .Label(l => l.Text("I agree to the terms and conditions").Optional(false));
@@ -1785,7 +1785,7 @@ public class UserProfileViewModel
 
 <div class="text-center">
     <h1>Subscription Form</h1>
-    
+
     @(Html.Kendo().Form<ProjectName.Models.UserSubscriptionModel>()
         .Name("subscriptionForm")
         .HtmlAttributes(new { action = "Submit", method = "POST" })
@@ -1818,7 +1818,7 @@ public class UserProfileViewModel
         .Validatable(v => v
             .ValidateOnBlur(true)
             .ValidationSummary(true))
-        .ButtonsTemplate("<button type='submit' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary'>Submit</button>")
+        .ButtonsTemplate("<button type='submit' class='k-button k-button-primary'>Submit</button>")
     )
 </div>
 
@@ -1827,7 +1827,7 @@ public class UserProfileViewModel
         $("#subscriptionForm").submit(function (e) {
             e.preventDefault();
             var form = $("#subscriptionForm").getKendoForm();
-            
+
             if (form.validator.validate()) {
                 // Form is valid, you can submit the data
                 console.log("Form data:", form.value());
@@ -1851,7 +1851,7 @@ public class UserProfileViewModel
 
 <div class="text-center">
     <h1 class="display-4">Login Form</h1>
-    
+
     @(Html.Kendo().Form<LoginFormModel>()
         .Name("loginForm")
         .HtmlAttributes(new { style = "width: 100%; max-width: 400px; margin: 0 auto;" })
@@ -1868,7 +1868,7 @@ public class UserProfileViewModel
                     .TextBox()
                     .HtmlAttributes(new { placeholder = "Enter your email", @class = "form-control" })
                 );
-            
+
             items.Add()
                 .Field(f => f.Password)
                 .Label(l => l.Text("Password:"))
@@ -1910,7 +1910,7 @@ namespace ProjectName.Models
 
 <div class="text-center">
     <h1 class="display-4">Person Information Form</h1>
-    
+
     @(Html.Kendo().Form<PersonModel>()
         .Name("personForm")
         .FormData(Model ?? new PersonModel())
@@ -1919,23 +1919,23 @@ namespace ProjectName.Models
             items.Add()
                 .Field(f => f.FirstName)
                 .Label(l => l.Text("First Name"));
-            
+
             items.Add()
                 .Field(f => f.LastName)
                 .Label(l => l.Text("Last Name"));
-            
+
             items.Add()
                 .Field(f => f.Email)
                 .Label(l => l.Text("Email"));
-            
+
             items.Add()
                 .Field(f => f.DateOfBirth)
                 .Label(l => l.Text("Date of Birth"))
                 .Editor(e => e.DatePicker());
         })
-        .ButtonsTemplate("<button type='submit' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary'>" +
+        .ButtonsTemplate("<button type='submit' class='k-button k-button-primary'>" +
                         "<span class='k-icon k-i-check'></span>Submit</button>" +
-                        "<button type='button' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-form-clear'>" +
+                        "<button type='button' class='k-button k-form-clear'>" +
                         "<span class='k-icon k-i-cancel'></span>Clear</button>")
         .Messages(m => m
             .Submit("Submit")
@@ -1996,17 +1996,17 @@ namespace ProjectName.Models
                 .Field(f => f.FirstName)
                 .Label(l => l.Text("First Name"))
                 .Editor(e => e.TextBox());
-            
+
             items.Add()
                 .Field(f => f.LastName)
                 .Label(l => l.Text("Last Name"))
                 .Editor(e => e.TextBox());
-            
+
             items.Add()
                 .Field(f => f.Email)
                 .Label(l => l.Text("Email"))
                 .Editor(e => e.TextBox());
-            
+
             items.Add()
                 .Field(f => f.Phone)
                 .Label(l => l.Text("Phone"))
@@ -2060,7 +2060,7 @@ public class PersonModel
     <h2>User Profile Settings</h2>
     <div class="row">
         <div class="col-md-6">
-            <kendo-form name="userProfileForm" 
+            <kendo-form name="userProfileForm"
                         form-data="@Model"
                         orientation="vertical"
                         focus-first="true"
@@ -2104,19 +2104,19 @@ public class UserProfileViewModel
 
 <div class="text-center">
     <h1 class="display-4">User Tier Registration</h1>
-    
+
     <kendo-form name="userTierForm" form-data="Model" orientation="vertical">
         <form-items>
             <form-item field="Name">
                 <item-label text="Name" />
                 <textbox-editor placeholder="Enter your name" />
             </form-item>
-            
+
             <form-item field="StartDate">
                 <item-label text="Start Date" />
                 <datepicker-editor format="dd/MM/yyyy" />
             </form-item>
-            
+
             <form-item field="SelectedTier">
                 <item-label text="Selected Tier" />
                 <dropdownlist-editor placeholder="Select your tier"
@@ -2130,12 +2130,12 @@ public class UserProfileViewModel
                   }' />
             </form-item>
         </form-items>
-        
+
         <buttons-template>
-            <button type="submit" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">
+            <button type="submit" class="k-button k-button-primary">
                 <span class="k-button-text">Submit</span>
             </button>
-            <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" onclick="clearForm()">
+            <button type="button" class="k-button" onclick="clearForm()">
                 <span class="k-button-text">Clear</span>
             </button>
         </buttons-template>
@@ -2165,23 +2165,23 @@ public class UserProfileViewModel
     <h1 class="display-4">Login Form</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <kendo-form name="loginForm" 
-                        form-data="Model" 
+            <kendo-form name="loginForm"
+                        form-data="Model"
                         orientation="vertical"
-                        asp-action="Index" 
+                        asp-action="Index"
                         asp-controller="Home"
                         method="post">
-                
+
                 <validatable>
                     <validation-summary enabled="true" />
                 </validatable>
-                
+
                 <form-items>
                     <form-item field="Email">
                         <item-label text="Email Address" />
                         <textbox-editor placeholder="Enter your email address" />
                     </form-item>
-                    
+
                     <form-item field="Password">
                         <item-label text="Password" />
                         <textbox-editor placeholder="Enter your password" type="password" />
@@ -2225,45 +2225,45 @@ namespace ProjectName.Models
 
 <div class="container mt-4">
     <h2>User Information Form</h2>
-    
-    <kendo-form name="userForm" 
+
+    <kendo-form name="userForm"
                 form-data="Model"
                 orientation="vertical"
                 clear-button="true">
         <form-items>
-            <form-item field="FirstName" 
-                      editor="TextBox" 
+            <form-item field="FirstName"
+                      editor="TextBox"
                       title="First Name">
                 <item-label text="First Name:" />
             </form-item>
-            
-            <form-item field="LastName" 
-                      editor="TextBox" 
+
+            <form-item field="LastName"
+                      editor="TextBox"
                       title="Last Name">
                 <item-label text="Last Name:" />
             </form-item>
-            
-            <form-item field="Email" 
-                      editor="TextBox" 
+
+            <form-item field="Email"
+                      editor="TextBox"
                       title="Email">
                 <item-label text="Email:" />
             </form-item>
-            
-            <form-item field="DateOfBirth" 
-                      editor="DatePicker" 
+
+            <form-item field="DateOfBirth"
+                      editor="DatePicker"
                       title="Date of Birth">
                 <item-label text="Date of Birth:" />
             </form-item>
         </form-items>
-        
+
         <messages submit="Submit Form" clear="Clear Form" />
-        
+
         <buttons-template>
-            <button type="submit" class="k-button k-button-solid-primary k-form-submit">
+            <button type="submit" class="k-button k-button-primary k-form-submit">
                 <span class="k-icon k-i-check"></span>
                 Submit Form
             </button>
-            <button type="button" class="k-button k-button-solid k-form-clear">
+            <button type="button" class="k-button k-form-clear">
                 <span class="k-icon k-i-reset"></span>
                 Clear Form
             </button>
@@ -2843,7 +2843,7 @@ public class RegisterViewModel
         .ValidateOnBlur(true)
     )
     .Messages(m => m.Submit("Submit"))
-    .ButtonsTemplate("<button type='submit' class='k-button k-button-solid-primary'>Submit</button>")
+    .ButtonsTemplate("<button type='submit' class='k-button k-button-primary'>Submit</button>")
 )
 
 // Model

@@ -53,7 +53,7 @@ Below is the HTML that is affected from the configuration. The changes are appli
 ```html
 <span class="k-multiselect k-input k-multiselect-clearable k-input-lg">
     ...
-    <span class="k-chip k-chip-lg k-rounded-lg k-chip-solid k-chip-solid-base" aria-setsize="2"></span>
+    <span class="k-chip k-chip-lg k-rounded-lg k-chip-solid k-chip-base" aria-setsize="2"></span>
 </span>
 ```
 
@@ -89,7 +89,7 @@ The changes are applied to the `span.k-multiselect` wrapping element and to the 
 ```html
 <span class="k-multiselect k-input k-multiselect-clearable k-input-solid k-input-lg k-rounded-md">
     ...
-    <span class="k-chip k-chip-lg k-rounded-md k-chip-solid k-chip-solid-base" aria-setsize="2"></span>
+    <span class="k-chip k-chip-lg k-rounded-md k-chip-solid k-chip-base" aria-setsize="2"></span>
 </span>
 ```
 
@@ -104,7 +104,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/multi
 - `outline`
 - `none`
 
-The default value is `solid` and it is applied to the `span.k-multiselect` wrapping element through the `k-input-solid` class and to the `span.k-chip` elements through the `.k-chip-outline .k-chip-outline-base` classes.
+The default value is `solid` and it is applied to the `span.k-multiselect` wrapping element through the `k-input-solid` class and to the `span.k-chip` elements through the `.k-chip-outline .k-chip-base` classes.
 
 The example below shows a basic MultiSelect configuration and how to set `fillMode` to "outline":
 
@@ -124,7 +124,7 @@ The changes are applied to the `span.k-multiselect` wrapping element and to the 
 ```html
 <span class="k-multiselect k-input k-multiselect-clearable k-input-outline k-input-lg k-rounded-md">
     ...
-    <span class="k-chip k-chip-lg k-rounded-md k-chip-outline k-chip-outline-base" aria-setsize="2"></span>
+    <span class="k-chip k-chip-lg k-rounded-md k-chip-outline k-chip-base" aria-setsize="2"></span>
 </span>
 ```
 

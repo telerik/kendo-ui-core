@@ -28,7 +28,7 @@ components: ["editor"]
 
 ## Description
 
-When I use the insert hyperlink dialog in Kendo UI for jQuery Editor I need to add custom class or attribute to the link. How can I achieve that? 
+When I use the insert hyperlink dialog in Kendo UI for jQuery Editor I need to add custom class or attribute to the link. How can I achieve that?
 
 ## Solution
 
@@ -295,11 +295,11 @@ Below is a runnable example:
     kendo.ui.editor.LinkCommand.fn._dialogTemplate = function() {
         return kendo.template(
             ...
-            "<div class='k-edit-label'></div>" +       
+            "<div class='k-edit-label'></div>" +
             "<div class='k-edit-field'>" +
-            "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md'   id='k-editor-link-class-green'>" +
+            "<input type='checkbox' class='k-checkbox'   id='k-editor-link-class-green'>" +
             "<label for='k-editor-link-class-green' class='k-checkbox-label'>Set custom class -green</  label>" +
-            "</div>" +        
+            "</div>" +
             "</div>" +
             ......
           )({
@@ -315,9 +315,9 @@ Below is a runnable example:
              this.attributes.target = target ? "_blank" : null;
 
 
-             if($('#k-editor-link-class-red').is(':checked')){            
+             if($('#k-editor-link-class-red').is(':checked')){
                this.attributes.className = 'red';
-             } 
+             }
 
              if($('#k-editor-link-class-green').is(':checked') && !this.attributes.    className){
                this.attributes.className = 'green';
@@ -326,13 +326,13 @@ Below is a runnable example:
              }
 
              this.formatter.apply(this._range, this.attributes);
-        }   
+        }
     ```
 
 1. In case you need to add custom attributes the same as the custom classes, you could handle the [`select`](/api/javascript/ui/editor/events/select) event of the widget. In the event handler you could search for the custom classes, and add the needed attributes:
     ```
         select: function(e){
-            if(isInsert){   
+            if(isInsert){
               $(e.sender.selectionRestorePoint.body).find('.red').attr('red', 'red')
               $(e.sender.selectionRestorePoint.body).find('.green').attr('green',   'green')
               isInsert = false
@@ -353,36 +353,36 @@ The described above is demonstrated in the below runnable example:
           "<label for='k-editor-link-url'>#: messages.linkWebAddress #</label>" +
           "</div>" +
           "<div class='k-edit-field'>" +
-          "<span class=\"k-textbox k-input k-input-md k-rounded-md k-input-solid\"><input type='text' class='k-input-inner' id='k-editor-link-url'></span>" +
+          "<span class=\"k-textbox k-input\"><input type='text' class='k-input-inner' id='k-editor-link-url'></span>" +
           "</div>" +
           "<div class='k-edit-label k-editor-link-text-row'>" +
           "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
           "</div>" +
           "<div class='k-edit-field k-editor-link-text-row'>" +
-          "<span class=\"k-textbox k-input k-input-md k-rounded-md k-input-solid\"><input type='text' class='k-input-inner' id='k-editor-link-text'></span>" +
+          "<span class=\"k-textbox k-input\"><input type='text' class='k-input-inner' id='k-editor-link-text'></span>" +
           "</div>" +
           "<div class='k-edit-label'>" +
           "<label for='k-editor-link-title'>#: messages.linkToolTip #</label>" +
           "</div>" +
           "<div class='k-edit-field'>" +
-          "<span class=\"k-textbox k-input k-input-md k-rounded-md k-input-solid\"><input type='text' class='k-input-inner' id='k-editor-link-title'></span>" +
+          "<span class=\"k-textbox k-input\"><input type='text' class='k-input-inner' id='k-editor-link-title'></span>" +
           "</div>" +
           "<div class='k-edit-label'></div>" +
           "<div class='k-edit-field'>" +
-          "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' id='k-editor-link-target'>" +
+          "<input type='checkbox' class='k-checkbox' id='k-editor-link-target'>" +
           "<label for='k-editor-link-target' class='k-checkbox-label'>#: messages.linkOpenInNewWindow #</label>" +
           "</div>" +
           "<div class='k-edit-field'>" +
-          "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' id='k-editor-link-class-green'>" +
+          "<input type='checkbox' class='k-checkbox' id='k-editor-link-class-green'>" +
           "<label for='k-editor-link-class-green' class='k-checkbox-label'>Set custom class -green</label>" +
           "</div>" +
           "<div class='k-edit-field'>" +
-          "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' id='k-editor-link-class-red'>" +
+          "<input type='checkbox' class='k-checkbox' id='k-editor-link-class-red'>" +
           "<label for='k-editor-link-class-red' class='k-checkbox-label'>Set custom class - red</label>" +
           "</div>" +
           "<div class='k-edit-buttons'>" +
-          '<button class="k-dialog-insert k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary"><span class="k-button-text">#: messages.dialogInsert #</span></button>' +
-          '<button class="k-dialog-close k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"><span class="k-button-text">#: messages.dialogCancel #</span></button>' +
+          '<button class="k-dialog-insert k-button k-button-primary"><span class="k-button-text">#: messages.dialogInsert #</span></button>' +
+          '<button class="k-dialog-close k-button"><span class="k-button-text">#: messages.dialogCancel #</span></button>' +
           "</div>" +
           "</div>" +
           "</div>"
@@ -398,7 +398,7 @@ The described above is demonstrated in the below runnable example:
 
         var nodes = kendo.ui.editor.RangeUtils.textNodes(this._range);
         var a = nodes.length ? this.formatter.finder.findSuitable(nodes[0]) : null;
-        var className = a && a.className ? a.className : "";       
+        var className = a && a.className ? a.className : "";
       };
 
       var originalApply = kendo.ui.editor.LinkCommand.fn._apply;
@@ -436,10 +436,10 @@ The described above is demonstrated in the below runnable example:
           this.attributes.target = target ? "_blank" : null;
 
 
-          if($('#k-editor-link-class-red').is(':checked')){            
+          if($('#k-editor-link-class-red').is(':checked')){
             this.attributes.className = 'red';
             isInsert = true
-          } 
+          }
 
           if($('#k-editor-link-class-green').is(':checked') && !this.attributes.className){
             this.attributes.className = 'green';
@@ -450,7 +450,7 @@ The described above is demonstrated in the below runnable example:
           }
 
           this.formatter.apply(this._range, this.attributes);
-        }        
+        }
 
         this._close(e);
 
@@ -459,9 +459,9 @@ The described above is demonstrated in the below runnable example:
         }
       }
 
-      $("#editor").kendoEditor({        
+      $("#editor").kendoEditor({
         select: function(e){
-          if(isInsert){   
+          if(isInsert){
             $(e.sender.selectionRestorePoint.body).find('.red').attr('red', 'red')
             $(e.sender.selectionRestorePoint.body).find('.green').attr('green', 'green')
             isInsert = false
@@ -469,7 +469,7 @@ The described above is demonstrated in the below runnable example:
         }
       });
     </script>
-``` 
+```
 
 ## See Also
 

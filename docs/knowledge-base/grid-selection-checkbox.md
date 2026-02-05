@@ -111,7 +111,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
             columns: [
             //define template column with checkbox and attach click event handler
             {
-                template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md checkbox' />",
+                template: "<input type='checkbox' class='k-checkbox checkbox' />",
                 width: 40,
                 attributes: {class: "k-text-center"}
             },

@@ -15,7 +15,7 @@ components: ["grid"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -123,9 +123,9 @@ You can also select multiple rows by using the checkboxes and applying custom st
                 //define template column with checkbox and attach click event handler
                 {
                     title: 'Select All',
-                    headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox k-checkbox-md k-rounded-md header-checkbox'>",
+                    headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox header-checkbox'>",
                     template: function (dataItem) {
-                        return "<input type='checkbox' id='" + dataItem.ProductID + "' class='k-checkbox k-checkbox-md k-rounded-md row-checkbox'>";
+                        return "<input type='checkbox' id='" + dataItem.ProductID + "' class='k-checkbox row-checkbox'>";
                     },
                     width: 80,
                     attributes: {class: "k-text-center"},

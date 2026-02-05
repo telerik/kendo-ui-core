@@ -1244,7 +1244,7 @@ describe("kendo.ui.DropDownList initialization", function() {
         assert.isOk(!optionLabel.hasClass("k-hover"));
     });
 
-    it("applies k-list-md by default to its popup list element", function() {
+    it("does not apply k-list-md by default when size is undefined", function() {
         let dropdownlist = new DropDownList(input, {
             optionLabel: "Select..."
         });
@@ -1252,7 +1252,7 @@ describe("kendo.ui.DropDownList initialization", function() {
         dropdownlist.open();
 
         assert.isOk(dropdownlist.list.hasClass("k-list"));
-        assert.isOk(dropdownlist.list.hasClass("k-list-md"));
+        assert.isNotOk(dropdownlist.list.hasClass("k-list-md"));
     });
 
     it("applies custom size class when set", function() {

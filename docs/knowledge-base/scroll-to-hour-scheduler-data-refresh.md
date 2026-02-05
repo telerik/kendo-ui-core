@@ -31,9 +31,9 @@ ticketid: 1698589
 In Kendo UI for jQuery [Scheduler](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/overview), the `scrollToHour` function may fail to scroll to the correct time slot after a programmatic `scheduler.dataSource.read()` refresh. This issue occurs due to differences in slot rendering between data refreshes and view switches, especially on high-DPI monitors with display scaling. The issue is more prominent when using intervals smaller than 60 minutes, such as 30, 15, or 10 minutes.
 
 This knowledge base article also answers the following questions:
-- How to fix scrollToHour not working after [`scheduler.dataSource.read()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/methods/read)?  
-- How to calculate the correct scroll position for different time slot intervals in Kendo Scheduler?  
-- Why does scrollToHour behave inconsistently after data refresh in Kendo Scheduler?  
+- How to fix scrollToHour not working after [`scheduler.dataSource.read()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/methods/read)?
+- How to calculate the correct scroll position for different time slot intervals in Kendo Scheduler?
+- Why does scrollToHour behave inconsistently after data refresh in Kendo Scheduler?
 
 ## Solution
 
@@ -88,7 +88,7 @@ $("#readBtn").on("click", function () {
 Full example
 
 ```dojo
-<button id="readBtn" type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Read</button>
+<button id="readBtn" type="button" class="k-button k-button-primary">Read</button>
 <br>
 <br>
 <div id="scheduler"></div>
@@ -101,7 +101,7 @@ Full example
                 "week"
             ];
             return supportedViews.includes(viewType);
-        }     
+        }
 
 		  function scrollToHour(targetHour) {
 		      var scheduler = $("#scheduler").data("kendoScheduler");
@@ -109,24 +109,24 @@ Full example
 		      var contentDiv = scheduler.element.find(".k-scheduler-content");
 		      var timeRows = scheduler.element.find(".k-scheduler-times tr");
 		      if (!timeRows.length) return;
-		  
+
 		      // Get majorTick and minorTickCount from the current view
 		      var majorTick = view.options.majorTick || 60;
 		      var minorTickCount = view.options.minorTickCount || 1;
 		      var slotsPerHour = (60 / majorTick) * minorTickCount;
-		  
+
 		      var startHour = scheduler.options.startTime.getHours();
 		      var slotIndex = Math.round((targetHour - startHour) * slotsPerHour);
-		  
+
 		      // Clamp slotIndex to available rows
 		      slotIndex = Math.max(0, Math.min(slotIndex, timeRows.length - 1));
-		  
+
 		      var slotHeight = timeRows.first().outerHeight();
 		      var scrollTop = slotIndex * slotHeight;
-		  
+
 		      contentDiv.scrollTop(scrollTop);
 		  }
-  
+
           var scheduler = $("#scheduler").kendoScheduler({
             date: new Date("2025/6/24"),
             startTime: new Date("2025/6/14 07:00 AM"),
@@ -191,11 +191,11 @@ Full example
                     var endDate = view.endDate();
                     var end = new Date(endDate);
                     end.setHours(23, 59, 59, 999);
-            
+
                     elements = scheduler.occurrencesInRange(start, end);
                   console.log("elements", elements)
                     var hour = 24;
-            
+
                     for (var i = 0; i < elements.length; i++) {
                         var booking = elements[i];
                         if (!booking.isAllDay && booking.start.getHours() < hour) {
@@ -206,7 +206,7 @@ Full example
                     }
                     console.log("dataBound scrollToTop hour", hour)
                     scrollToHour(hour);
- 
+
                 }
             },
         }).data("kendoScheduler");
@@ -220,8 +220,8 @@ Full example
 
 ### Explanation
 
-- **slotsPerHour Calculation**: This accounts for the number of slots per hour based on the `majorTick` duration and `minorTickCount` divisions.  
-- **Clamp slotIndex**: Ensures the calculated index is within the valid range of rows.  
+- **slotsPerHour Calculation**: This accounts for the number of slots per hour based on the `majorTick` duration and `minorTickCount` divisions.
+- **Clamp slotIndex**: Ensures the calculated index is within the valid range of rows.
 - **Scroll Calculation**: Computes the scroll position using the slot index and height of each slot.
 
 ### Key Notes
@@ -231,6 +231,6 @@ Full example
 
 ## See Also
 
-- [Kendo UI Scheduler Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/overview)  
-- [Scheduler Configuration Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler#configuration)  
-- [Scheduler View Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler)  
+- [Kendo UI Scheduler Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/scheduler/overview)
+- [Scheduler Configuration Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler#configuration)
+- [Scheduler View Options](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/scheduler)

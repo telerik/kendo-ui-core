@@ -17,7 +17,7 @@ describe("kendo.ui.TextArea initialization", function() {
         let widget = new TextArea(textarea),
             wrapper = widget.wrapper;
 
-        assert.equal(wrapper[0].className, "k-input k-textarea k-input-solid k-input-md k-rounded-md !k-flex-col");
+        assert.equal(wrapper[0].className, "k-input k-textarea !k-flex-col");
     });
 
     it("Should set placeholder", function() {
@@ -251,7 +251,7 @@ describe("kendo.ui.TextArea initialization", function() {
         assert.isNotOk(widget.wrapper.hasClass("k-rounded-full")); // Does not add valid class for other option
         assert.isNotOk(widget.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
         assert.isNotOk(widget.wrapper.hasClass("k-input-md")); // Does not add default class for the option
-        assert.isOk(widget.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
+        assert.isNotOk(widget.wrapper.hasClass("k-rounded-md")); // Does not add default class for other options when undefined
     });
 
     it("Should add !k-flex-row class when layoutFlow is 'horizontal'", function() {

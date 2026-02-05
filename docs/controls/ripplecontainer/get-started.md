@@ -15,7 +15,7 @@ After the completion of this guide, you will achieve the following end result:
 
 ```dojo
     <div id="ripple">
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Default Button</button>
+        <button class="k-button">Default Button</button>
     </div>
 
     <script>
@@ -27,7 +27,7 @@ After the completion of this guide, you will achieve the following end result:
 
 ## 1. Create a Div Element
 
-First, create a `<div>` element. 
+First, create a `<div>` element.
 
 ```html
     <div id="ripple"></div>
@@ -49,7 +49,7 @@ Next, set the contents of the RippleContainer. The ripple effect will be applied
 
 ```dojo
     <div id="ripple">
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Default Button</button>
+        <button class="k-button">Default Button</button>
     </div>
 
     <script>

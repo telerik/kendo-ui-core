@@ -16,7 +16,7 @@ describe("kendo.ui.TextBox initialization", function() {
         let textbox = new TextBox(input),
             wrapper = textbox.wrapper;
 
-        assert.equal(wrapper[0].className, "k-input k-textbox k-input-solid k-input-md k-rounded-md");
+        assert.equal(wrapper[0].className, "k-input k-textbox");
     });
 
     it("Should set placeholder", function() {
@@ -173,6 +173,6 @@ describe("kendo.ui.TextBox initialization", function() {
         assert.isNotOk(textbox.wrapper.hasClass("k-rounded-lg")); // Does not add valid class for other option
         assert.isNotOk(textbox.wrapper.hasClass("k-input-sm")); // Does not add invalid class with prefix
         assert.isNotOk(textbox.wrapper.hasClass("k-input-md")); // Does not add default class for the option
-        assert.isOk(textbox.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
+        assert.isNotOk(textbox.wrapper.hasClass("k-rounded-md")); // Does not add default class for other options
     });
 });

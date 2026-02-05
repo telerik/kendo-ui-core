@@ -1258,7 +1258,7 @@ How I can add a loading indicator while filtering or sorting of the Spreadsheet?
 
           $('.k-spreadsheet-filter').on('click', function(){
 
-            $('.k-spreadsheet-filter-menu [data-command="sort"], .k-spreadsheet-filter-menu .k-action-buttons .k-button-solid-primary').bind('click', function(){
+            $('.k-spreadsheet-filter-menu [data-command="sort"], .k-spreadsheet-filter-menu .k-action-buttons .k-button-primary').bind('click', function(){
               kendo.ui.progress($("#spreadsheet"), true);
               setTimeout(function(){
                 kendo.ui.progress($("#spreadsheet"), false);

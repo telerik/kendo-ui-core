@@ -37,14 +37,10 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
-- `None`
 
-The default size value is `Medium` and it is added as a class `k-radio-md` to the input element.
+> When not explicitly set, the applied theme controls the default size.
 
-```html
-<!-- default rendering -->
-<input type="radio" class="k-radio k-radio-md" id="radioButtonName"/>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 

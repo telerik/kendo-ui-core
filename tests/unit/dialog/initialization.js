@@ -144,7 +144,7 @@ describe("initialization", function() {
         let wrapper = dialog.wrapper;
 
         assert.equal(wrapper.find(".k-dialog-actions > .k-button").length, 2);
-        assert.isOk(wrapper.find(".k-dialog-actions > .k-button:first").is(".k-button-solid-primary"));
+        assert.isOk(wrapper.find(".k-dialog-actions > .k-button:first").is(".k-button-primary"));
     });
 
     it("visible:true option is inferred from content element", function() {

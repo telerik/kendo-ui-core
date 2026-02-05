@@ -14,7 +14,7 @@ components: ["general"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® {{ site.product }} Grid</td> 
+  <td>Progress® {{ site.product }} Grid</td>
  </tr>
 </table>
 
@@ -59,8 +59,8 @@ To achieve the desired scenario, implement a custom JSON [`reviver`](https://dev
 </script>
 
 <div class="box wide">
-    <button href="#" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" id="save">Save State</button>
-    <button href="#" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" id="load">Load State</button>
+    <button href="#" class="k-button k-button-primary" id="save">Save State</button>
+    <button href="#" class="k-button k-button-primary" id="load">Load State</button>
 </div>
 <br />
 @(Html.Kendo().Grid<TelerikMvcApp9.Models.OrderViewModel>()

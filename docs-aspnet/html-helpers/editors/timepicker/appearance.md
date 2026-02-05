@@ -43,14 +43,10 @@ The following values are available for the `Size` option:
 - `Small`—small size (applies the `k-input-sm` class to the wrapping span element)
 - `Medium`—medium size (applies the `k-input-md` class to the wrapping span element)
 - `Large`—large size (applies the `k-input-lg` class to the wrapping span element)
-- `None`—unset.
 
-The default size value is `Medium`.
+> When not explicitly set, the applied theme controls the default size.
 
-```html
-<span class="k-timepicker k-input k-input-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### Rounded
 
@@ -75,14 +71,10 @@ The following values are available for the `Rounded` option:
 - `Medium`—medium border radius (applies the `k-rounded-md` class to the wrapping span element)
 - `Large`—large border radius (applies the `k-rounded-lg` class to the wrapping span element)
 - `Full`—largest (ellipse-like) border radius (applies the `k-rounded-full` class to the wrapping span element)
-- `None`—unset.
 
-The default value is `Medium`.
+> When not explicitly set, the applied theme controls the default border radius.
 
-```html
-<span class="k-timepicker k-input k-rounded-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### FillMode
 
@@ -106,14 +98,10 @@ The following values are available for the `FillMode` option:
 - `Solid`—applies the `k-input-solid` class to the wrapping span element
 - `Flat`—applies the `k-input-flat` class to the wrapping span element
 - `Outline`—applies the `k-input-outline` class to the wrapping span element
-- `None`—unset.
 
-The default value is `Solid` and it is applied to the `span.k-timepicker` wrapping element through the `k-input-solid` class.
+> When not explicitly set, the applied theme controls the default fill mode.
 
-```html
-<span class="k-timepicker k-input k-input-solid">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 

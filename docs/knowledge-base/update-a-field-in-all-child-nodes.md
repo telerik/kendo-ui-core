@@ -92,7 +92,7 @@ The following example demonstrates how to update all child nodes recursively and
       dataSource: dataSource,
       height: 540,
       columns: [
-        { template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked: checked' />", width: 40 },
+        { template: "<input type='checkbox' class='k-checkbox' data-bind='checked: checked' />", width: 40 },
         { field: "Position", expandable: true },
         { field: "Name" },
         { field: "Phone" }

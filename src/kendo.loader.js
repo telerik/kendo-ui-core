@@ -52,13 +52,13 @@ export const __meta__ = {
 
         options: {
             name: 'Loader',
-            themeColor: "primary",
+            themeColor: undefined,
             sizes: {
                 'small': 'sm',
                 'medium': 'md',
                 'large': 'lg'
             },
-            size: 'medium',
+            size: undefined,
             type: "pulsing",
             visible: true,
             messages: {

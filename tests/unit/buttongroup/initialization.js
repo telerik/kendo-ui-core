@@ -230,8 +230,8 @@ describe("kendo.ui.ButtonGroup initialization", function() {
             ]
         });
 
-        assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-button-solid-primary"));
-        assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-button-solid-primary"));
+        assert.isOk(buttonGroup.element.children().eq(0).hasClass("k-button-primary"));
+        assert.isOk(buttonGroup.element.children().eq(1).hasClass("k-button-primary"));
     });
 
     it("passes the proper rounded option to the buttons", function() {

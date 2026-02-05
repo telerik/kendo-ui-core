@@ -37,7 +37,7 @@ How can I set the position of the caret inside an inline Kendo UI for jQuery Edi
 
 ## Solution
 
-To set the position of the caret inside an inline Kendo UI Editor by using JavaScript, you can use a position index or search for a string.  
+To set the position of the caret inside an inline Kendo UI Editor by using JavaScript, you can use a position index or search for a string.
 
 The exact implementation in other scenarios varies, depending on the business logic and used DOM or Range APIs.
 
@@ -45,7 +45,7 @@ The following example demonstrates how to use a position index&mdash;that is, it
 
 ```dojo
     <div id="example">
-        <p><button id="setPosition" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">Click</button></p>
+        <p><button id="setPosition" class="k-button">Click</button></p>
         <textarea id="editor">Some text to focus and edit.</textarea>
     </div>
 
@@ -77,8 +77,8 @@ The following example demonstrates how to search for a string&mdash;that is, it 
 ```dojo
     <div id="example">
       <p>
-        <input id="stringToFocus" class="k-textbox" type="text" value="focus" style="width: 20%" /> 
-        <button id="setPosition" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md">Click</button>
+        <input id="stringToFocus" class="k-textbox" type="text" value="focus" style="width: 20%" />
+        <button id="setPosition" class="k-button">Click</button>
       </p>
       <textarea id="editor" style="margin: 5em 0 0">
         <p>Random paragraph 1.</p>

@@ -71,22 +71,22 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     </dd>
                     <dt>Ship City</dt>
                     <dd>
-                        <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                        <span class="k-textbox k-input">
                             <input id="ShipCity" type="text" class="k-input-inner" data-bind="value:ShipCity" name="ShipCity" required="required" validationMessage="required" />
                         </span>
                         <span data-for="ShipCity" class="k-invalid-msg"></span>
                     </dd>
                     <dt>Ship Name</dt>
                     <dd>
-                        <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                        <span class="k-textbox k-input">
                             <input id="ShipName" type="text" class="k-input-inner" data-bind="value:ShipName" name="ShipName" required="required" validationMessage="required" />
                         </span>
                         <span data-for="ShipName" class="k-invalid-msg"></span>
                     </dd>
                 </dl>
                 <div class="edit-buttons">
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-update-button" href="\\#">#= kendo.ui.icon({ icon: 'check' }) #</a>
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#">#= kendo.ui.icon({ icon: 'cancel' }) #</a>
+                    <a role="button" class="k-button k-update-button" href="\\#">#= kendo.ui.icon({ icon: 'check' }) #</a>
+                    <a role="button" class="k-button k-cancel-button" href="\\#">#= kendo.ui.icon({ icon: 'cancel' }) #</a>
                 </div>
             </div>
         </script>
@@ -103,8 +103,8 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     <dd>#:ShipName#</dd>
                 </dl>
                 <div class="edit-buttons">
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
+                    <a role="button" class="k-button k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
+                    <a role="button" class="k-button k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
                 </div>
             </div>
         </script>
@@ -160,8 +160,8 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     ShipName = "ShipName " + i,
                     ShipCity = "ShipCity " + i
                 }));
-            }       
-        }       
+            }
+        }
 
         public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
         {
@@ -266,8 +266,8 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
                     <dd>#:ShipName#</dd>
                 </dl>
                 <div class="edit-buttons">
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
+                    <a role="button" class="k-button k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
+                    <a role="button" class="k-button k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
                 </div>
             </div>
         </script>

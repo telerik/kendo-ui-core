@@ -27,10 +27,13 @@ The Badge provides the following methods for styling:
 The `Rounded` property can be configured through the `Rounded` enumeration. The available values are:
 
 - `Small`&mdash;Renders a Badge with a small border radius.
-- `Medium` (default)&mdash;Renders a Badge with a medium border radius.
+- `Medium`&mdash;Renders a Badge with a medium border radius.
 - `Large`&mdash;Renders a Badge with a large border radius.
 - `Full`&mdash;Renders a circle shape Badge.
-- `None`&mdash;Renders a Badge with no border radius (square Badge).
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 The following example demonstrates the `Rounded` option of the Badge:
 
@@ -90,8 +93,10 @@ The available `ThemeColor` values are:
 The `Size` option allows you to set a predefined size for the Badge. The `Size` property can be configured by using the `BadgeSize` enumeration. The available values are:
 
 - `Small`
-- `Medium` (Default)
+- `Medium`
 - `Large`
+
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
     @(Html.Kendo().Badge()
@@ -113,8 +118,10 @@ The `Size` option allows you to set a predefined size for the Badge. The `Size` 
 
 The `FillMode` specifies how the theme colors are applied to the component. The available options are:
 
-- `Solid` (Default)
+- `Solid`
 - `Outline`
+
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```HtmlHelper
     @(Html.Kendo().Badge()

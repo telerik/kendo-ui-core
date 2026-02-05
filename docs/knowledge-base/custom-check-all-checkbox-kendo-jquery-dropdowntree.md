@@ -1,5 +1,5 @@
 ---
-title: Keeping "Check All" Checkbox Active and Check Only the Visible Nodes in Kendo UI for jQuery DropDownTree 
+title: Keeping "Check All" Checkbox Active and Check Only the Visible Nodes in Kendo UI for jQuery DropDownTree
 description: Learn how to keep the "Check All" checkbox visible and functional in the Kendo UI for jQuery DropDownTree when a filter is active, enabling selection of filtered leaf nodes.
 type: how-to
 page_title: How to Add Custom "Check All" Functionality in Kendo UI for jQuery DropDownTree with Filter
@@ -42,7 +42,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
 
 ### Steps
 
-1. **Add Custom Checkbox in the Popup**  
+1. **Add Custom Checkbox in the Popup**
    Use the [`open`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/events/open) event of the DropDownTree to create and add the custom checkbox.
 
    ```javascript
@@ -54,7 +54,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
        const customCheckboxHtml = `
            <div class="k-check-all custom-check-all" style="padding: 8px; border-bottom: 1px solid #ddd;">
                <span class="k-checkbox-wrap">
-                   <input type="checkbox" id="checkAllCustom" class="k-checkbox-lg k-rounded-md k-checkbox">
+                   <input type="checkbox" id="checkAllCustom" class="k-checkbox-lg k-checkbox">
                    <label for="checkAllCustom" class="k-checkbox-label" style="margin-left: 4px;">Check All Custom</label>
                </span>
            </div>
@@ -75,7 +75,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
    }
    ```
 
-2. **Handle "Check All" Logic**  
+2. **Handle "Check All" Logic**
    Implement the logic to select or deselect filtered leaf nodes.
 
    ```javascript
@@ -99,7 +99,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
    }
    ```
 
-3. **Ensure Checkbox Visibility During Filtering**  
+3. **Ensure Checkbox Visibility During Filtering**
    Use the [`filtering`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/dropdowntree/events/filtering) event to re-create the custom checkbox when filtering is applied.
 
    ```javascript
@@ -108,8 +108,8 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
    }
    ```
 
-4. **Example**  
-  
+4. **Example**
+
 ```dojo
 
     <input id="dropdowntree" />
@@ -198,7 +198,7 @@ To achieve this, create a custom "Check All" checkbox and add it to the DropDown
         const customCheckboxHtml = `
         <div class="k-check-all custom-check-all" style="padding: 8px; border-bottom: 1px solid #ddd;">
           <span class="k-checkbox-wrap">
-            <input type="checkbox" id="checkAllCustom" class="k-checkbox-lg k-rounded-md k-checkbox">
+            <input type="checkbox" id="checkAllCustom" class="k-checkbox-lg k-checkbox">
             <label for="checkAllCustom" class="k-checkbox-label" style="margin-left: 4px;">Check All Custom</label>
           </span>
         </div>

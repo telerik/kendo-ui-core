@@ -31,9 +31,9 @@ You can configure the Toolbar and include any of the built-in commands:
 {% if site.core %}
 ```TagHelper
     <toolbar>
-        <toolbar-button name="columns"></toolbar-button> 
-        <toolbar-button name="create"></toolbar-button> 
-        <toolbar-button name="save"></toolbar-button> 
+        <toolbar-button name="columns"></toolbar-button>
+        <toolbar-button name="create"></toolbar-button>
+        <toolbar-button name="save"></toolbar-button>
         <toolbar-button name="paste"></toolbar-button>
         <toolbar-button name="pdf"></toolbar-button>
         <toolbar-button name="excel"></toolbar-button>
@@ -42,7 +42,7 @@ You can configure the Toolbar and include any of the built-in commands:
         <toolbar-button name="separator" type="separator"></toolbar-button>
     </toolbar>
 ```
-{% endif %} 
+{% endif %}
 
 In the 2025 Q2 release an alternative way to configure the tools has been implemented. It relies on the `Items` configuration of the Grid toolbar:
 
@@ -133,7 +133,7 @@ The following example demonstrates how to modify the default overflow settings o
     <!-- Additional configuration. -->
 </kendo-grid>
 ```
-{% endif %} 
+{% endif %}
 
 For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
 
@@ -195,7 +195,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
         <editable mode="incell"/>
     </kendo-grid>
 ```
-{% endif %} 
+{% endif %}
 
 ## Custom Commands
 
@@ -219,7 +219,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
 {% if site.core %}
 ```TagHelper
     <toolbar>
-        <toolbar-button name="customCommand" text="Click me"></toolbar-button> 
+        <toolbar-button name="customCommand" text="Click me"></toolbar-button>
     </toolbar>
 
     <script>
@@ -231,7 +231,7 @@ The following example demonstrates how to add a custom command to the Toolbar:
     })
     </script>
 ```
-{% endif %} 
+{% endif %}
 
 If you are using the `Toolbar.Items` configuration (available since the Q2 2025 release), you can add a custom command as shown below:
 
@@ -269,10 +269,10 @@ The following example shows how to create a template for the Toolbar using an [e
 ```
 ```JS GridToolbarTemplate
     <script id="GridToolbarTemplate" type="text/x-kendo-template">
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Custom command</button>
+        <button class="k-button">Custom command</button>
     </script>
 ```
-{% else %} 
+{% else %}
 The following example shows how to create a template for the Toolbar using the `ClientTemplateHandler()` option, which returns an [external Kendo UI template](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external).
 
 ```HtmlHelper
@@ -282,7 +282,7 @@ The following example shows how to create a template for the Toolbar using the `
 ```
 ```JS
     <script id="GridToolbarTemplate" type="text/x-kendo-template">
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Custom command</button>
+        <button class="k-button">Custom command</button>
     </script>
 
     <script>
@@ -296,7 +296,7 @@ The following example shows how to create a template for the Toolbar using the `
 
 ### Built-In and Custom Commands in the Toolbar Template
 
-To use the built-in commands in the Toolbar template, add the `HTML` markup of the respective command. 
+To use the built-in commands in the Toolbar template, add the `HTML` markup of the respective command.
 
 The following example demonstrates how to add the built-in `Pdf` and `Search` commands together with custom commands to the Toolbar template.
 
@@ -309,9 +309,9 @@ The following example demonstrates how to add the built-in `Pdf` and `Search` co
                 .ToClientTemplate()
             )
         </div>
-        
-        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
-        
+
+        <a role="button" class="k-button k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>
             @(Html.Kendo().DropDownList()
@@ -329,7 +329,7 @@ The following example demonstrates how to add the built-in `Pdf` and `Search` co
             .ToClientTemplate()
         )
         </div>
-        
+
         <span class="k-textbox k-grid-search k-display-flex">
             <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
             <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
@@ -343,9 +343,9 @@ The following example demonstrates how to add the built-in `Pdf` and `Search` co
             <kendo-button name="refresh" icon="arrow-rotate-cw" is-in-client-template="true">
             </kendo-button>
         </div>
-        
-        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
-        
+
+        <a role="button" class="k-button k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>
             <kendo-dropdownlist name="categories" style="width:150px" is-in-client-template="true"
@@ -361,16 +361,16 @@ The following example demonstrates how to add the built-in `Pdf` and `Search` co
                 </datasource>
             </kendo-dropdownlist>
         </div>
-        
+
         <span class="k-textbox k-grid-search k-display-flex">
             <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
             <span class="k-input-icon"><span class="k-icon k-i-search"></span></span>
         </span>
     </script>
 ```
-{% endif %} 
+{% endif %}
 
-Starting with version R3 2023 SP1, you can use the [Template component]({% slug htmlhelpers_overview_template %}) to define custom Toolbar commands alongside the default ones. 
+Starting with version R3 2023 SP1, you can use the [Template component]({% slug htmlhelpers_overview_template %}) to define custom Toolbar commands alongside the default ones.
 
 The following example demonstrates how you can add [Button]({% slug htmlhelpers_button_aspnetcore %}) and [DropDownList]({% slug htmlhelpers_dropdownlist_aspnetcore %}) components to the Grid's Toolbar, along with the default `Excel` command. For a live example, visit the [Toolbar Template Demo of the Grid](https://demos.telerik.com/{{site.platform}}/grid/toolbar-template).
 
@@ -442,7 +442,7 @@ The following example demonstrates how you can add [Button]({% slug htmlhelpers_
         </toolbar>
     </kendo-grid>
 ```
-{% endif %} 
+{% endif %}
 ```JavaScript
     <script>
         function refresh() {
@@ -476,7 +476,7 @@ The following example demonstrates how to define a server-side Toolbar template.
     {
         toolbar.Template(@<text>
         <div class="refreshBtnContainer">
-            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" title="Refresh"><span class="k-button-icon k-icon k-i-reload"></span></a>
+            <a href="\\#" class="k-pager-refresh k-link k-button" title="Refresh"><span class="k-button-icon k-icon k-i-reload"></span></a>
         </div>
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>

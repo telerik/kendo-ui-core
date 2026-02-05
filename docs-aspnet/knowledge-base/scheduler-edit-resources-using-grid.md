@@ -28,7 +28,7 @@ component: scheduler
 
 How can I use the [{{ site.framework }} Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) component to edit the {{ site.framework }} Scheduler resources?
 
-By design, the user can edit the [resources assigned to the Scheduler events]({% slug htmlhelpers_scheduler_resources_aspnetcore %}). However, the default editor template of the Scheduler does not provide an editor that allows the users to edit the available resources. 
+By design, the user can edit the [resources assigned to the Scheduler events]({% slug htmlhelpers_scheduler_resources_aspnetcore %}). However, the default editor template of the Scheduler does not provide an editor that allows the users to edit the available resources.
 
 For example:
 
@@ -48,7 +48,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
             .Editable(editable => {
                 editable.TemplateName("CustomEditorTemplate");
             })
-            .Resources(resource => 
+            .Resources(resource =>
             {
                 resource.Add(m => m.Attendees)
                 .Title("Attendees")
@@ -227,7 +227,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
             )
         </div>
 
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" style="float:right;" id="editAttendees">Edit attendees</button>
+        <button class="k-button k-button-primary" style="float:right;" id="editAttendees">Edit attendees</button>
 
         <div id="insertNewAttendeeDialog">
             <div id="editResources"></div>
@@ -260,8 +260,8 @@ Follow the steps below to create a custom editor template for the Scheduler even
                 .ToClientTemplate()
             )
             <br />
-            <button id='saveAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Save changes</button>
-            <button id='cancelAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Cancel changes</button>
+            <button id='saveAttendees' class="k-button k-button-primary">Save changes</button>
+            <button id='cancelAttendees' class="k-button">Cancel changes</button>
         </div>
     </div>
     ```
@@ -276,7 +276,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
 				</kendo-multiselect>
             </div>
 
-            <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" style="float:right;" id="editAttendees">Edit attendees</button>
+            <button class="k-button k-button-primary" style="float:right;" id="editAttendees">Edit attendees</button>
 
             <div id="insertNewAttendeeDialog">
                 <div id="editResources"></div>
@@ -308,13 +308,13 @@ Follow the steps below to create a custom editor template for the Scheduler even
                         </column>
                     </columns>
                     <toolbar>
-                        <toolbar-button name="create"></toolbar-button> 
+                        <toolbar-button name="create"></toolbar-button>
                     </toolbar>
                     <editable mode="incell"/>
                 </kendo-grid>
                 <br />
-                <button id='saveAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Save changes</button>
-                <button id='cancelAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Cancel changes</button>
+                <button id='saveAttendees' class="k-button k-button-primary">Save changes</button>
+                <button id='cancelAttendees' class="k-button">Cancel changes</button>
             </div>
         </div>
     ```
@@ -375,7 +375,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
                     multi.dataSource.read(); // Trigger the Read request of the MultiSelect editor to load the updated options.
 
                     /* The index of the resource defined in the Scheduler configuration. */
-                    var resourceIndex = 0; 
+                    var resourceIndex = 0;
                     scheduler.resources[resourceIndex].dataSource.read(); // Trigger the Read request of the resources to load the updated options.
                 });
             });

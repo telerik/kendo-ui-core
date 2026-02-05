@@ -33,10 +33,10 @@ The following values are available for the [`size`](/api/javascript/ui/chip/conf
 - `lg`—large size
 - `none`—unset
 
-The default size value is `medium` and it is applied to the rendered div element through the `k-chip-md` class.
+The default size value is `undefined` and the default appearance is controlled by the theme.
 
 ```html
-<div class="k-chip k-chip-md" >
+<div class="k-chip" >
 </div>
 ```
 
@@ -52,7 +52,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/chip/
 The default fillMode value is `solid` and it is applied to the rendered div element through the `k-chip-solid` class.
 
 ```html
-<div class="k-chip k-chip-solid" >
+<div class="k-chip" >
 </div>
 ```
 
@@ -68,15 +68,15 @@ The following values are available for the [`themeColor`](/api/javascript/ui/chi
 - `warning`
 - `error`
 
-The default `themeColor` value is `base`. A Chip with default `fillMode` and `themeColor` will have `k-chip-solid-base` class applied.
+The default `themeColor` value is `base`. A Chip with default `fillMode` and `themeColor` will have `k-chip-base` class applied.
 
 ```html
 <!-- Chip with default fillMode and themeColor -->
-<div class="k-chip k-chip-solid k-chip-solid-base" >
+<div class="k-chip" >
 </div>
 
 <!-- Chip with `flat` fillMode and `warning` themeColor -->
-<div class="k-chip k-chip-flat k-chip-flat-warning" >
+<div class="k-chip k-chip-flat k-chip-warning" >
 </div>
 ```
 
@@ -93,15 +93,15 @@ The following values are available for the [`rounded`](/api/javascript/ui/chip/c
 - `pill`
 - `none`—unset
 
-The default rounded value is `medium` and it is applied to the rendered div element through the `k-rounded-md` class.
+The default rounded value is `undefined` and the default appearance is controlled by the theme.
 
 ```html
-<div class="k-chip k-rounded-md" >
+<div class="k-chip" >
 </div>
 ```
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

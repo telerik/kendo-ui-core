@@ -138,7 +138,7 @@ export const __meta__ = {
             direction: "down",
             element: null,
             items: [],
-            size: "medium",
+            size: undefined,
         },
 
         events: [

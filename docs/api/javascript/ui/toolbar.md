@@ -1576,9 +1576,10 @@ How do I adjust the scrolling speed in Kendo UI toolbar overflow navigation? Adj
 
 
 
-### size `String` *(default: 'medium')*
+### size `String` *(default: undefined)*
 
-Controls the overall physical size of the ToolBar and its items. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+Controls the overall physical size of the ToolBar and its items. When `undefined` (the default), the theme controls the default size. Valid values are:  `\"small\"`, `\"medium\"`, `\"large\"`.
+> The `\"none\"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">

@@ -148,9 +148,11 @@ How can I disable specific action buttons in a Kendo UI ActionSheet? Control the
         actionsheet.open();
     </script>
 
-### actionButtons.fillMode `String` *(default: 'solid')*
+### actionButtons.fillMode `String` *(default: undefined)*
 
-Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `"none"`. Default value is `"solid"`.
+Controls how the color is applied to the button. When `undefined` (the default), the theme controls the default fill mode. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
@@ -288,9 +290,11 @@ How can I customize the icons for ActionSheet buttons in Kendo UI? Customize act
         actionsheet.open();
     </script>
 
-### actionButtons.rounded `String` *(default: 'medium')*
+### actionButtons.rounded `String` *(default: undefined)*
 
-Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `"none"`. Default value is `"medium"`.
+Controls what border radius is applied to a button. When `undefined` (the default), the theme controls the default border radius. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 
@@ -335,9 +339,11 @@ How do I customize the appearance of action buttons in a Kendo UI ActionSheet by
         actionsheet.open();
     </script>
 
-### actionButtons.size `String` *(default: 'medium')*
+### actionButtons.size `String` *(default: undefined)*
 
-Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `"none"`. Default value is `"medium"`.
+Controls the overall physical size of a button. When `undefined` (the default), the theme controls the default size. Valid values are:  `"small"`, `"medium"`, `"large"`.
+
+> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
