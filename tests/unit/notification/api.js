@@ -178,7 +178,7 @@ describe("api", function() {
     it("show method renders passed object content", function() {
         notification = createNotification({
             templates: [{
-                type: "info",
+                type: "default",
                 template: ({ foo }) => `<div id='${foo}'></div>`
             }]
         });
@@ -218,7 +218,7 @@ describe("api", function() {
     it("show method renders passed function object content", function() {
         notification = createNotification({
             templates: [{
-                type: "info",
+                type: "default",
                 template: ({ foo }) => `<div id='${foo}'></div>`
             }]
         });

@@ -3,7 +3,7 @@ title: AI Components & Features
 page_title: Telerik UI for ASP.NET AI Components & Features
 description: "Build intelligent {{ site.framework }} apps faster with {{ site.product }} AI components and smart data features."
 slug: ai_components
-position: 7
+position: 4
 tag: new
 ---
 
