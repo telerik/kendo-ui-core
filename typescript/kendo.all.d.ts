@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2025.4.1321
+// Type definitions for Kendo UI Professional v2026.1.210
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -1300,6 +1300,28 @@ declare namespace kendo.data {
         action?: string | undefined;
         index?: number | undefined;
         items?: kendo.data.Model[] | undefined;
+    }
+
+    interface AISmartPasteTransportOptions {
+        service?: {
+            url?: string;
+            headers?: any;
+            data?: any;
+        };
+        requestStart?: (options?: any) => void;
+        success?: (response?: any) => void;
+        error?: (response?: any) => void;
+    }
+
+    class AISmartPasteTransport {
+        options: AISmartPasteTransportOptions;
+
+        constructor(options?: AISmartPasteTransportOptions);
+        read(options: any): void;
+        setup(options: any): any;
+        getData(options?: any): any;
+        success(response: any): any;
+        error(response: any): void;
     }
 
     class DataSource extends Observable{
@@ -15343,6 +15365,67 @@ declare namespace kendo.ui {
     interface SvgIconOptions extends IconOptions {
         icon?: any
     }
+
+    class SmartPasteButton extends kendo.ui.Button {
+        static fn: SmartPasteButton;
+
+        options: SmartPasteButtonOptions;
+
+        constructor(element: Element, options?: SmartPasteButtonOptions);
+
+        isListening(): boolean;
+        setOptions(options: SmartPasteButtonOptions): void;
+        destroy(): void;
+    }
+
+    interface SmartPasteButtonFormField {
+        field?: string;
+        type?: string;
+        description?: string;
+        allowedValues?: string[];
+        element?: Element;
+    }
+
+    interface SmartPasteButtonService {
+        url?: string;
+        headers?: any;
+        data?: any;
+    }
+
+    interface SmartPasteButtonOptions {
+        name?: string | undefined;
+        enable?: boolean | undefined;
+        cancelIcon?: string | undefined;
+        icon?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        formFields?: SmartPasteButtonFormField[] | null;
+        text?: string | null;
+        service?: SmartPasteButtonService | null;
+        requestStart?(e: SmartPasteButtonRequestStartEvent): void;
+        requestEnd?(e: SmartPasteButtonRequestEndEvent): void;
+        error?(e: SmartPasteButtonErrorEvent): void;
+    }
+
+    interface SmartPasteButtonEvent {
+        sender: SmartPasteButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface SmartPasteButtonRequestStartEvent extends SmartPasteButtonEvent {
+        formFields?: SmartPasteButtonFormField[];
+        content?: string;
+    }
+
+    interface SmartPasteButtonRequestEndEvent extends SmartPasteButtonEvent {
+        fieldValues?: any;
+    }
+
+    interface SmartPasteButtonErrorEvent extends SmartPasteButtonEvent {
+        error?: string;
+    }
 }
 declare namespace kendo.drawing {
     class Arc extends kendo.drawing.Element {
@@ -19475,6 +19558,30 @@ declare namespace kendo.dataviz.ui {
 
     }
 
+    interface DiagramAccessibility {
+        role?: string | undefined;
+        ariaRoleDescription?: string | undefined;
+        ariaLabel?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsContentPosition {
+        vertical?: string | undefined;
+        horizontal?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsContentBorder {
+        color?: string | undefined;
+        width?: number | undefined;
+        dashType?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsContentPadding {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
+    }
+
     interface DiagramConnectionDefaultsContent {
         color?: string | undefined;
         fontFamily?: string | undefined;
@@ -19484,32 +19591,87 @@ declare namespace kendo.dataviz.ui {
         template?: string|Function | undefined;
         text?: string | undefined;
         visual?: Function | undefined;
+        position?: string | DiagramConnectionDefaultsContentPosition | undefined;
+        background?: string | undefined;
+        border?: DiagramConnectionDefaultsContentBorder | undefined;
+        padding?: number | DiagramConnectionDefaultsContentPadding | undefined;
+        offset?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsEditableTool {
         name?: string | undefined;
     }
 
+    interface DiagramConnectionDefaultsEditablePointsVertexFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsVertexStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsVertex {
+        fill?: DiagramConnectionDefaultsEditablePointsVertexFill | undefined;
+        stroke?: DiagramConnectionDefaultsEditablePointsVertexStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsMidpointFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsMidpointStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsMidpoint {
+        fill?: DiagramConnectionDefaultsEditablePointsMidpointFill | undefined;
+        stroke?: DiagramConnectionDefaultsEditablePointsMidpointStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePoints {
+        snap?: number | undefined;
+        vertex?: DiagramConnectionDefaultsEditablePointsVertex | undefined;
+        midpoint?: DiagramConnectionDefaultsEditablePointsMidpoint | undefined;
+    }
+
     interface DiagramConnectionDefaultsEditable {
         drag?: boolean | undefined;
         remove?: boolean | undefined;
         tools?: DiagramConnectionDefaultsEditableTool[] | undefined;
+        points?: boolean | DiagramConnectionDefaultsEditablePoints | undefined;
     }
 
     interface DiagramConnectionDefaultsEndCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsEndCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEndCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsEndCap {
         fill?: string | DiagramConnectionDefaultsEndCapFill | undefined;
         stroke?: string | DiagramConnectionDefaultsEndCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: DiagramConnectionDefaultsEndCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsHoverStroke {
@@ -19541,18 +19703,29 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramConnectionDefaultsStartCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsStartCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsStartCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsStartCap {
         fill?: string | DiagramConnectionDefaultsStartCapFill | undefined;
         stroke?: string | DiagramConnectionDefaultsStartCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: DiagramConnectionDefaultsStartCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsStroke {
@@ -19574,6 +19747,25 @@ declare namespace kendo.dataviz.ui {
         toConnector?: string | undefined;
         type?: string | undefined;
         cornerRadius?: number | undefined;
+        accessibility?: DiagramAccessibility | undefined;
+    }
+
+    interface DiagramConnectionContentPosition {
+        vertical?: string | undefined;
+        horizontal?: string | undefined;
+    }
+
+    interface DiagramConnectionContentBorder {
+        color?: string | undefined;
+        width?: number | undefined;
+        dashType?: string | undefined;
+    }
+
+    interface DiagramConnectionContentPadding {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
     }
 
     interface DiagramConnectionContent {
@@ -19585,14 +19777,58 @@ declare namespace kendo.dataviz.ui {
         template?: string|Function | undefined;
         text?: string | undefined;
         visual?: Function | undefined;
+        position?: string | DiagramConnectionContentPosition | undefined;
+        background?: string | undefined;
+        border?: DiagramConnectionContentBorder | undefined;
+        padding?: number | DiagramConnectionContentPadding | undefined;
+        offset?: number | undefined;
     }
 
     interface DiagramConnectionEditableTool {
         name?: string | undefined;
     }
 
+    interface DiagramConnectionEditablePointsVertexFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsVertexStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsVertex {
+        fill?: DiagramConnectionEditablePointsVertexFill | undefined;
+        stroke?: DiagramConnectionEditablePointsVertexStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsMidpointFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsMidpointStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsMidpoint {
+        fill?: DiagramConnectionEditablePointsMidpointFill | undefined;
+        stroke?: DiagramConnectionEditablePointsMidpointStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePoints {
+        snap?: number | undefined;
+        vertex?: DiagramConnectionEditablePointsVertex | undefined;
+        midpoint?: DiagramConnectionEditablePointsMidpoint | undefined;
+    }
+
     interface DiagramConnectionEditable {
         tools?: DiagramConnectionEditableTool[] | undefined;
+        points?: boolean | DiagramConnectionEditablePoints | undefined;
     }
 
     interface DiagramConnectionEndCapFill {
@@ -19699,6 +19935,7 @@ declare namespace kendo.dataviz.ui {
         toConnector?: string | undefined;
         type?: string | undefined;
         cornerRadius?: number | undefined;
+        accessibility?: DiagramAccessibility | undefined;
     }
 
     interface DiagramEditableDragSnap {
@@ -20007,6 +20244,7 @@ declare namespace kendo.dataviz.ui {
         cornerRadius?: number | undefined;
         center?: { x: number; y: number } | undefined;
         radius?: number | undefined;
+        accessibility?: DiagramAccessibility | undefined;
     }
 
     interface DiagramShapeConnectorDefaultsFill {
@@ -20173,6 +20411,7 @@ declare namespace kendo.dataviz.ui {
         center?: { x: number; y: number } | undefined;
         radius?: number | undefined;
         dataItem?: any;
+        accessibility?: DiagramAccessibility | undefined;
     }
 
     interface DiagramExportImageOptions {
@@ -20192,6 +20431,7 @@ declare namespace kendo.dataviz.ui {
     interface DiagramOptions {
         name?: string | undefined;
         autoBind?: boolean | undefined;
+        accessibility?: DiagramAccessibility | undefined;
         connectionDefaults?: DiagramConnectionDefaults | undefined;
         connections?: DiagramConnection[] | undefined;
         connectionsDataSource?: any|any|kendo.data.DataSource | undefined;
@@ -24843,6 +25083,24 @@ declare namespace kendo.dataviz.diagram {
 
     }
 
+    interface ConnectionContentPosition {
+        vertical?: string | undefined;
+        horizontal?: string | undefined;
+    }
+
+    interface ConnectionContentBorder {
+        color?: string | undefined;
+        width?: number | undefined;
+        dashType?: string | undefined;
+    }
+
+    interface ConnectionContentPadding {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
+    }
+
     interface ConnectionContent {
         color?: string | undefined;
         fontFamily?: string | undefined;
@@ -24852,22 +25110,38 @@ declare namespace kendo.dataviz.diagram {
         template?: string|Function | undefined;
         text?: string | undefined;
         visual?: Function | undefined;
+        position?: string | ConnectionContentPosition | undefined;
+        background?: string | undefined;
+        border?: ConnectionContentBorder | undefined;
+        padding?: number | ConnectionContentPadding | undefined;
+        offset?: number | undefined;
     }
 
     interface ConnectionEndCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface ConnectionEndCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface ConnectionEndCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface ConnectionEndCap {
         fill?: string | ConnectionEndCapFill | undefined;
         stroke?: string | ConnectionEndCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: ConnectionEndCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface ConnectionHoverStroke {
@@ -24885,27 +25159,81 @@ declare namespace kendo.dataviz.diagram {
 
     interface ConnectionStartCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface ConnectionStartCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface ConnectionStartCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface ConnectionStartCap {
         fill?: string | ConnectionStartCapFill | undefined;
         stroke?: string | ConnectionStartCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: ConnectionStartCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface ConnectionStroke {
         color?: string | undefined;
     }
 
+    interface ConnectionEditablePointsVertexFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsVertexStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsVertex {
+        fill?: ConnectionEditablePointsVertexFill | undefined;
+        stroke?: ConnectionEditablePointsVertexStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsMidpointFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsMidpointStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsMidpoint {
+        fill?: ConnectionEditablePointsMidpointFill | undefined;
+        stroke?: ConnectionEditablePointsMidpointStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface ConnectionEditablePoints {
+        snap?: number | undefined;
+        vertex?: ConnectionEditablePointsVertex | undefined;
+        midpoint?: ConnectionEditablePointsMidpoint | undefined;
+    }
+
+    interface ConnectionEditable {
+        points?: boolean | ConnectionEditablePoints | undefined;
+    }
+
     interface ConnectionOptions {
         name?: string | undefined;
         content?: ConnectionContent | undefined;
+        editable?: boolean | ConnectionEditable | undefined;
         fromConnector?: string | undefined;
         fromX?: number | undefined;
         fromY?: number | undefined;

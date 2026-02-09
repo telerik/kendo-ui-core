@@ -2217,6 +2217,162 @@ How do I customize the optional field indicator in Kendo UI Form? Control or cus
         });
     </script>
 
+### messages.smartPaste `String` *(default: "Smart Paste")*
+
+The text message displayed for the SmartPasteButton when smart paste functionality is enabled.
+
+<div class="meta-api-description">
+How do I customize the Smart Paste button text in Kendo UI Form? Configure the text label displayed on the SmartPasteButton when AI-powered form filling is enabled, allowing customization of button text for localization, branding, or contextual clarity, setting the caption that users see when hovering or interacting with the smart paste functionality, and tailoring the button's displayed message to match application language or user interface requirements.
+</div>
+
+#### Example - set the smart paste button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                firstName: "",
+                lastName: ""
+            },
+            smartPaste: {
+                service: {
+                    url: "https://api.example.com/parse"
+                }
+            },
+            messages: {
+                smartPaste: "AI Fill"
+            }
+        });
+    </script>
+
+### smartPaste `Object`
+
+Configures the SmartPasteButton integration for AI-powered form filling. When enabled, adds a SmartPasteButton that can intelligently parse clipboard content and distribute it to appropriate form fields using AI processing.
+
+<div class="meta-api-description">
+How do I enable AI-powered smart paste functionality in Kendo UI Form? Enable and configure intelligent form filling by integrating SmartPasteButton functionality that uses AI services to parse unstructured clipboard content and automatically distribute data to appropriate form fields based on semantic understanding, enabling users to paste complex text like addresses, contact information, or structured data and have it intelligently mapped to form inputs, improving data entry efficiency and user experience through automated field population.
+</div>
+
+#### Example - Enable SmartPaste with AI service
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                phone: ""
+            },
+            smartPaste: {
+                service: {
+                    url: "https://your-ai-service.com/api/smart-paste",
+                    headers: {
+                        "Authorization": "Bearer YOUR_API_KEY"
+                    }
+                }
+            }
+        });
+    </script>
+
+### smartPaste.formFields `Array`
+
+Specifies custom form field configurations for AI processing. If not provided, the SmartPasteButton will automatically detect form fields from the Form's items configuration.
+
+#### smartPaste.formFields.field `String`
+
+The name of the form field that corresponds to a form element.
+
+#### smartPaste.formFields.type `String`
+
+The expected data type of the form field.
+
+#### smartPaste.formFields.description `String`
+
+A description of the form field that helps the AI service understand its purpose.
+
+#### smartPaste.formFields.allowedValues `Array`
+
+An array of allowed values that restricts the AI service to only use specific values for this field.
+
+#### Example - Custom form field configurations with allowedValues
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                category: ""
+            },
+            items: [
+                { field: "firstName", label: "First Name" },
+                { field: "lastName", label: "Last Name" },
+                { field: "email", label: "Email", validation: { required: true } },
+                { 
+                    field: "category", 
+                    label: "Category",
+                    editor: "DropDownList",
+                    editorOptions: {
+                        dataSource: ["business", "personal", "urgent"]
+                    }
+                }
+            ],
+            smartPaste: {
+                formFields: [
+                    { field: "firstName", type: "string", description: "Person's first name" },
+                    { field: "lastName", type: "string", description: "Person's last name" },
+                    { field: "email", type: "email", description: "Email address" },
+                    { field: "category", type: "string", description: "Contact category", allowedValues: ["business", "personal", "urgent"] }
+                ],
+                service: {
+                    url: "https://your-ai-service.com/api/smart-paste",
+                    headers: {
+                        "Authorization": "Bearer YOUR_API_KEY"
+                    }
+                }
+            }
+        });
+    </script>
+
+### smartPaste.service `Object`
+
+The AI service configuration for processing clipboard content and generating intelligent field mappings.
+
+<div class="meta-api-description">
+How do I configure the AI service for SmartPaste functionality in Kendo UI Form? Configure the artificial intelligence service that processes clipboard content and generates form field mappings, enabling connection to AI endpoints, setting authentication headers, customizing request data, and handling responses for intelligent content distribution across form fields during smart paste operations.
+</div>
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                firstName: "",
+                lastName: "",
+                email: ""
+            },
+            smartPaste: {
+                service: {
+                    url: "https://api.example.com/parse",
+                    headers: {
+                        "Authorization": "Bearer token123",
+                        "Content-Type": "application/json"
+                    },
+                    data: {
+                        locale: "en-US"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### validatable `Object`
 
 Configures the built-in Validator options.

@@ -45,6 +45,104 @@ How to enable automatic data binding for Kendo UI Diagram component? Control and
       });
     </script>
 
+### accessibility `Object`
+
+Defines accessibility options for the diagram.
+
+<div class="meta-api-description">
+How do I configure accessibility settings for a Kendo UI Diagram? Configure accessibility options such as ARIA labels, roles, and role descriptions to improve assistive technology support for diagram elements. Enable screen reader compatibility, keyboard navigation support, and semantic markup for better accessibility compliance in diagrams, flowcharts, and organizational charts.
+</div>
+
+#### Example - configuring accessibility for the diagram
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        accessibility: {
+            role: "graphics-document",
+            ariaRoleDescription: "Interactive Diagram",
+            ariaLabel: "Organization chart showing company structure"
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### accessibility.role `String` *(default: "graphics-document")*
+
+The accessibility role of the diagram element.
+
+<div class="meta-api-description">
+How do I set the ARIA role for a Kendo UI Diagram? Configure the ARIA role attribute for the diagram container to define its semantic purpose for assistive technologies. Set appropriate roles to communicate the diagram's function to screen readers and other accessibility tools, improving usability for users who rely on assistive technology.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        accessibility: {
+            role: "img"
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ]
+    });
+    </script>
+
+### accessibility.ariaRoleDescription `String` *(default: "Diagram")*
+
+The accessibility role description of the diagram element.
+
+<div class="meta-api-description">
+How do I set a custom role description for a Kendo UI Diagram? Configure the ARIA role description attribute to provide a human-readable description of the diagram's purpose for assistive technologies. Set custom descriptions to help screen reader users understand the specific type or purpose of the diagram beyond the generic role.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        accessibility: {
+            ariaRoleDescription: "Flowchart"
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Start" } }
+        ]
+    });
+    </script>
+
+### accessibility.ariaLabel `String`
+
+The accessibility label of the diagram element.
+
+<div class="meta-api-description">
+How do I set an ARIA label for a Kendo UI Diagram? Configure the ARIA label attribute to provide a descriptive text label for the diagram that assistive technologies can announce to users. Set meaningful labels that describe the diagram's content or purpose to improve accessibility for screen reader users.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        accessibility: {
+            ariaLabel: "Company organizational structure diagram"
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "CEO" } },
+            { id: "2", x: 100, y: 200, content: { text: "CTO" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
 ### connectionDefaults `Object`
 
 Defines the defaults of the connections. Whenever a connection is created, the specified connectionDefaults will be used and merged with the (optional) configuration passed through the connection creation method.
@@ -462,6 +560,486 @@ How can I customize the appearance of connections in my Kendo UI Diagram? Contro
       });
     </script>
 
+### connectionDefaults.content.position `String|Object` *(default: { vertical: "top", horizontal: "right" })*
+
+Defines the position of the label relative to the connection path. Can be set to `"inline"` to position the label along the connection path, or an object with `vertical` and `horizontal` properties.
+
+
+<div class="meta-api-description">
+How do I position connection labels in a Kendo UI Diagram? Control and customize the placement of connection labels relative to the connection path by setting the position to inline for labels along the path, or configuring vertical and horizontal positioning to place labels above, below, left, or right of the connection line. Enable flexible label positioning for better readability and visual clarity in diagrams, flowcharts, or network visualizations by specifying where text annotations appear relative to connectors.
+</div>
+
+#### Example - positioning connection label inline
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                position: "inline"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+#### Example - positioning connection label using object configuration
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                position: {
+                    vertical: "bottom",
+                    horizontal: "left"
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.position.vertical `String` *(default: "top")*
+
+The vertical position of the label relative to horizontal connections. The supported values are `"top"` and `"bottom"`.
+
+<div class="meta-api-description">
+How do I set vertical position of connection labels in a Kendo UI Diagram? Control whether connection labels appear above or below horizontal connection lines by setting the vertical position to top or bottom, enabling precise label placement for improved readability and visual organization in diagrams with horizontal connectors.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                position: {
+                    vertical: "bottom"
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.position.horizontal `String` *(default: "right")*
+
+The horizontal position of the label relative to vertical connections. The supported values are `"left"` and `"right"`.
+
+<div class="meta-api-description">
+How do I set horizontal position of connection labels in a Kendo UI Diagram? Control whether connection labels appear to the left or right of vertical connection lines by setting the horizontal position, enabling precise label placement for improved readability and visual organization in diagrams with vertical connectors.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                position: {
+                    horizontal: "left"
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 100, y: 300, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.background `String`
+
+The background color of the connection label. Accepts valid CSS colors.
+
+<div class="meta-api-description">
+How do I set background color for connection labels in a Kendo UI Diagram? Configure the background color of connection labels to improve visibility, highlight important connections, or match your application's theme by specifying any valid CSS color value including hex codes, RGB, RGBA, or named colors for the label background.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#ffeb3b"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.border `Object`
+
+The border options of the connection label. Applicable when background is set.
+
+<div class="meta-api-description">
+How do I add a border to connection labels in a Kendo UI Diagram? Configure the border appearance of connection labels by setting border color, width, and dash type to create visual boundaries around label text, enhancing readability and visual distinction of connection annotations in diagrams.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#000",
+                    width: 1
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.border.color `String`
+
+The color of the connection label border.
+
+<div class="meta-api-description">
+How do I set the border color of connection labels in a Kendo UI Diagram? Configure the outline color of connection label borders by specifying any valid CSS color value to create visual boundaries that match your diagram's theme or highlight specific connections.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#2196f3",
+                    width: 2
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.border.width `Number` *(default: 1)*
+
+The width of the connection label border.
+
+<div class="meta-api-description">
+How do I set the border width of connection labels in a Kendo UI Diagram? Configure the thickness of connection label borders by specifying a numeric pixel value to control how prominent the border appears around label text.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#000",
+                    width: 3
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.border.dashType `String`
+
+The dash type of the connection label border. The supported values are `"dash"`, `"dashDot"`, `"dot"`, `"longDash"`, `"longDashDot"`, `"longDashDotDot"`, and `"solid"`.
+
+<div class="meta-api-description">
+How do I set a dashed border on connection labels in a Kendo UI Diagram? Configure the line style of connection label borders by specifying a dash type such as dash, dot, or solid to create different visual effects for label boundaries.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#000",
+                    width: 1,
+                    dashType: "dash"
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.padding `Number|Object` *(default: { left: 4, right: 4, top: 2, bottom: 2 })*
+
+The padding options of the connection label. Applicable when background or border is set.
+
+<div class="meta-api-description">
+How do I add padding to connection labels in a Kendo UI Diagram? Configure the spacing between the label text and its background or border by setting padding values, either as a single number for uniform padding or as an object with individual top, right, bottom, and left values for precise control.
+</div>
+
+#### Example - using uniform padding
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: 10
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.padding.top `Number` *(default: 2)*
+
+The top padding of the connection label.
+
+<div class="meta-api-description">
+How do I set top padding on connection labels in a Kendo UI Diagram? Configure the spacing between the label text and the top edge of its background or border by specifying a numeric pixel value.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 10,
+                    right: 4,
+                    bottom: 2,
+                    left: 4
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.padding.right `Number` *(default: 4)*
+
+The right padding of the connection label.
+
+<div class="meta-api-description">
+How do I set right padding on connection labels in a Kendo UI Diagram? Configure the spacing between the label text and the right edge of its background or border by specifying a numeric pixel value.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 2,
+                    right: 15,
+                    bottom: 2,
+                    left: 4
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.padding.bottom `Number` *(default: 2)*
+
+The bottom padding of the connection label.
+
+
+<div class="meta-api-description">
+How do I set bottom padding on connection labels in a Kendo UI Diagram? Configure the spacing between the label text and the bottom edge of its background or border by specifying a numeric pixel value.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 2,
+                    right: 4,
+                    bottom: 10,
+                    left: 4
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.padding.left `Number` *(default: 4)*
+
+The left padding of the connection label.
+
+
+<div class="meta-api-description">
+How do I set left padding on connection labels in a Kendo UI Diagram? Configure the spacing between the label text and the left edge of its background or border by specifying a numeric pixel value.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 2,
+                    right: 4,
+                    bottom: 2,
+                    left: 15
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.content.offset `Number` *(default: 5)*
+
+Defines the distance (in pixels) between the label and the connection path.
+
+
+<div class="meta-api-description">
+How do I set the distance between connection labels and the path in a Kendo UI Diagram? Configure the offset distance between connection labels and the connection line to improve readability and prevent labels from overlapping with the connection path by specifying a numeric pixel value.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            content: {
+                text: "Connection",
+                offset: 15
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
 
 ### connectionDefaults.editable `Boolean|Object` *(default: true)*
 
@@ -654,6 +1232,613 @@ How do I customize the editing tools for connections in a Kendo UI Diagram? Conf
         shapes: [
             { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
             { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points `Boolean|Object` *(default: true)*
+
+Specifies whether the connection path can be reshaped by the user. When enabled, dragging a connection handle adds or updates connection points to reflect the new route. User-defined points are shown as hollow circular markers and can be removed by double-clicking them.
+
+
+<div class="meta-api-description">
+How do I enable connection point editing in a Kendo UI Diagram? Configure whether users can reshape connection paths by adding, moving, or removing intermediate points along the connection line. Enable interactive editing of connection vertices to create custom routing, allow users to adjust the path of connectors by dragging handles, and configure the appearance of vertex and midpoint handles for connection path manipulation.
+</div>
+
+#### Example - disabling connection points editing
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: false
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.snap `Number` *(default: 6)*
+
+The snap distance for connection points when dragging.
+
+<div class="meta-api-description">
+How do I configure snap distance for connection points in a Kendo UI Diagram? Set the distance threshold for snapping when dragging connection points, controlling how close points need to be to snap into position for precise alignment of connection paths.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    snap: 10
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex `Object`
+
+Defines the appearance of the connection vertex handles.
+
+<div class="meta-api-description">
+How do I customize the appearance of connection vertex handles in a Kendo UI Diagram? Configure the visual appearance of vertex handles that appear on connection paths, including fill color, stroke, and radius settings to match your application's theme or improve visibility during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        fill: { color: "#ff0000" },
+                        stroke: { color: "#000000", width: 2 },
+                        radius: 6
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.fill `Object`
+
+The fill options of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection vertex handles in a Kendo UI Diagram? Configure the interior color of vertex handles that appear on connection paths to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        fill: {
+                            color: "#4caf50",
+                            opacity: 0.8
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.fill.color `String`
+
+The fill color of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection vertex handles in a Kendo UI Diagram? Configure the interior color of vertex handles that appear on connection paths by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        fill: {
+                            color: "#4caf50"
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.fill.opacity `Number` *(default: 1)*
+
+The fill opacity of the connection vertex handle. Accepts values from 0 (fully transparent) to 1 (fully opaque).
+
+<div class="meta-api-description">
+How do I set the fill opacity of connection vertex handles in a Kendo UI Diagram? Configure the transparency level of vertex handle fill color to control how solid, faded, or see-through the handle appears, enabling customization of handle visibility and visual emphasis during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        fill: {
+                            color: "#4caf50",
+                            opacity: 0.5
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.stroke `Object`
+
+The stroke options of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the border of connection vertex handles in a Kendo UI Diagram? Configure the outline color and width of vertex handles that appear on connection paths to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        stroke: {
+                            color: "#000000",
+                            width: 2
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.stroke.color `String`
+
+The stroke color of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the stroke color of connection vertex handles in a Kendo UI Diagram? Configure the outline color of vertex handles that appear on connection paths by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        stroke: {
+                            color: "#000000"
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.stroke.width `Number` *(default: 1)*
+
+The stroke width of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the stroke width of connection vertex handles in a Kendo UI Diagram? Configure the outline thickness of vertex handles that appear on connection paths by specifying a numeric pixel value to control how prominent the handle border appears.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        stroke: {
+                            color: "#000000",
+                            width: 2
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.vertex.radius `Number`
+
+The radius of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the size of connection vertex handles in a Kendo UI Diagram? Configure the radius of vertex handles that appear on connection paths to make them larger for easier interaction or smaller for a cleaner appearance.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    vertex: {
+                        radius: 8
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint `Object`
+
+Defines the appearance of the connection midpoint handles.
+
+<div class="meta-api-description">
+How do I customize the appearance of connection midpoint handles in a Kendo UI Diagram? Configure the visual appearance of midpoint handles that appear on connection paths between vertices, including fill color, stroke, and radius settings to match your application's theme or improve visibility during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: { color: "#2196f3" },
+                        stroke: { color: "#000000", width: 1 },
+                        radius: 4
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.fill `Object`
+
+The fill options of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection midpoint handles in a Kendo UI Diagram? Configure the interior color of midpoint handles that appear on connection paths to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: {
+                            color: "#ff9800",
+                            opacity: 0.8
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.fill.color `String`
+
+The fill color of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection midpoint handles in a Kendo UI Diagram? Configure the interior color of midpoint handles that appear on connection paths by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: {
+                            color: "#ff9800"
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.fill.opacity `Number` *(default: 1)*
+
+The fill opacity of the connection midpoint handle. Accepts values from 0 (fully transparent) to 1 (fully opaque).
+
+<div class="meta-api-description">
+How do I set the fill opacity of connection midpoint handles in a Kendo UI Diagram? Configure the transparency level of midpoint handle fill color to control how solid, faded, or see-through the handle appears, enabling customization of handle visibility and visual emphasis during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: {
+                            color: "#ff9800",
+                            opacity: 0.5
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.stroke `Object`
+
+The stroke options of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the border of connection midpoint handles in a Kendo UI Diagram? Configure the outline color and width of midpoint handles that appear on connection paths to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        stroke: {
+                            color: "#333333",
+                            width: 1
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.stroke.color `String`
+
+The stroke color of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the stroke color of connection midpoint handles in a Kendo UI Diagram? Configure the outline color of midpoint handles that appear on connection paths by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        stroke: {
+                            color: "#333333"
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.stroke.width `Number` *(default: 1)*
+
+The stroke width of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the stroke width of connection midpoint handles in a Kendo UI Diagram? Configure the outline thickness of midpoint handles that appear on connection paths by specifying a numeric pixel value to control how prominent the handle border appears.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        stroke: {
+                            color: "#333333",
+                            width: 2
+                        }
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.editable.points.midpoint.radius `Number`
+
+The radius of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the size of connection midpoint handles in a Kendo UI Diagram? Configure the radius of midpoint handles that appear on connection paths to make them larger for easier interaction or smaller for a cleaner appearance.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            editable: {
+                points: {
+                    midpoint: {
+                        radius: 5
+                    }
+                }
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
         ],
         connections: [
             { from: "1", to: "2" }
@@ -2552,6 +3737,120 @@ How to round connection corners in Kendo UI diagram? Configure and customize the
       });
     </script>
 
+### connectionDefaults.accessibility `Object`
+
+Defines accessibility options for connections.
+
+<div class="meta-api-description">
+How do I configure accessibility settings for Kendo UI Diagram connections? Configure accessibility options such as ARIA labels, roles, and role descriptions for diagram connections to improve assistive technology support. Enable screen reader compatibility by providing meaningful labels and semantic information for connection elements in diagrams, flowcharts, and organizational charts.
+</div>
+
+#### Example - configuring accessibility for connections
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            accessibility: {
+                role: "graphics-symbol",
+                ariaRoleDescription: "Connection",
+                ariaLabel: "Connects shapes in the diagram"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.accessibility.role `String` *(default: "graphics-symbol")*
+
+The accessibility role of connection elements.
+
+<div class="meta-api-description">
+How do I set the ARIA role for Kendo UI Diagram connections? Configure the ARIA role attribute for connection elements to define their semantic purpose for assistive technologies. Set appropriate roles to communicate the connection's function to screen readers.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            accessibility: {
+                role: "presentation"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "A" } },
+            { id: "2", x: 300, y: 100, content: { text: "B" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.accessibility.ariaRoleDescription `String` *(default: "Connection")*
+
+The accessibility role description of connection elements.
+
+<div class="meta-api-description">
+How do I set a custom role description for Kendo UI Diagram connections? Configure the ARIA role description attribute to provide a human-readable description of connections for assistive technologies. Set custom descriptions to help screen reader users understand the type of relationship being represented.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            accessibility: {
+                ariaRoleDescription: "Workflow Link"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Start" } },
+            { id: "2", x: 300, y: 100, content: { text: "End" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### connectionDefaults.accessibility.ariaLabel `String`
+
+The accessibility label of connection elements.
+
+<div class="meta-api-description">
+How do I set an ARIA label for Kendo UI Diagram connections? Configure the ARIA label attribute to provide a descriptive text label for connections that assistive technologies can announce to users. Set meaningful labels that describe what the connection represents.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        connectionDefaults: {
+            accessibility: {
+                ariaLabel: "Process flow connection"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Step 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Step 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
 ### connections `Array`
 
 Defines the connections configuration.
@@ -2932,6 +4231,391 @@ How to customize appearance of connection labels in Kendo UI Diagram? Customize 
           }
         ]
       });
+    </script>
+
+### connections.content.position `String|Object` *(default: { vertical: "top", horizontal: "right" })*
+
+Defines the position of the label relative to the connection path. Can be set to `"inline"` to position the label along the connection path, or an object with `vertical` and `horizontal` properties.
+
+#### Example - positioning connection label inline
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                position: "inline"
+            }
+        }]
+    });
+    </script>
+
+#### Example - positioning connection label using object configuration
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                position: {
+                    vertical: "bottom",
+                    horizontal: "left"
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.position.vertical `String` *(default: "top")*
+
+The vertical position of the label relative to horizontal connections. The supported values are `"top"` and `"bottom"`.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                position: {
+                    vertical: "bottom"
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.position.horizontal `String` *(default: "right")*
+
+The horizontal position of the label relative to vertical connections. The supported values are `"left"` and `"right"`.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 100, y: 300, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                position: {
+                    horizontal: "left"
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.background `String`
+
+The background color of the connection label. Accepts valid CSS colors.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Important",
+                background: "#ffeb3b",
+                border: {
+                    color: "#000",
+                    width: 1
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.border `Object`
+
+The border options of the connection label. Applicable when background is set.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#000",
+                    width: 1
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.border.color `String`
+
+The color of the connection label border.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#2196f3",
+                    width: 2
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.border.width `Number` *(default: 1)*
+
+The width of the connection label border.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#000",
+                    width: 3
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.border.dashType `String`
+
+The dash type of the connection label border. The supported values are `"dash"`, `"dashDot"`, `"dot"`, `"longDash"`, `"longDashDot"`, `"longDashDotDot"`, and `"solid"`.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#fff",
+                border: {
+                    color: "#000",
+                    width: 1,
+                    dashType: "dash"
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.padding `Number|Object` *(default: { left: 4, right: 4, top: 2, bottom: 2 })*
+
+The padding options of the connection label. Applicable when background or border is set.
+
+#### Example - using uniform padding
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: 10
+            }
+        }]
+    });
+    </script>
+
+### connections.content.padding.top `Number` *(default: 2)*
+
+The top padding of the connection label.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 10,
+                    right: 4,
+                    bottom: 2,
+                    left: 4
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.padding.right `Number` *(default: 4)*
+
+The right padding of the connection label.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 2,
+                    right: 15,
+                    bottom: 2,
+                    left: 4
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.padding.bottom `Number` *(default: 2)*
+
+The bottom padding of the connection label.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 2,
+                    right: 4,
+                    bottom: 10,
+                    left: 4
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.content.padding.left `Number` *(default: 4)*
+
+The left padding of the connection label.
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                background: "#ffeb3b",
+                padding: {
+                    top: 2,
+                    right: 4,
+                    bottom: 2,
+                    left: 15
+                }
+            }
+        }]
+    });
     </script>
 
 ### connections.editable `Boolean|Object` *(default: true)*
@@ -5276,6 +6960,122 @@ How to bind custom data with individual connections in Kendo UI Diagram? Bind or
       });
     </script>
 
+### connections.accessibility `Object`
+
+Defines accessibility options for the connection.
+
+<div class="meta-api-description">
+How do I configure accessibility settings for individual Kendo UI Diagram connections? Configure accessibility options such as ARIA labels, roles, and role descriptions for individual diagram connections to provide specific accessibility information for each connection element.
+</div>
+
+#### Example - configuring accessibility for a specific connection
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Manager" } },
+            { id: "2", x: 300, y: 100, content: { text: "Employee" } }
+        ],
+        connections: [
+            {
+                from: "1",
+                to: "2",
+                accessibility: {
+                    ariaLabel: "Reports to relationship"
+                }
+            }
+        ]
+    });
+    </script>
+
+### connections.accessibility.role `String` *(default: "graphics-symbol")*
+
+The accessibility role of the connection.
+
+<div class="meta-api-description">
+How do I set the ARIA role for a specific Kendo UI Diagram connection? Configure the ARIA role attribute for an individual connection element to define its semantic purpose for assistive technologies.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "A" } },
+            { id: "2", x: 300, y: 100, content: { text: "B" } }
+        ],
+        connections: [
+            {
+                from: "1",
+                to: "2",
+                accessibility: {
+                    role: "img"
+                }
+            }
+        ]
+    });
+    </script>
+
+### connections.accessibility.ariaRoleDescription `String` *(default: "Connection")*
+
+The accessibility role description of the connection.
+
+<div class="meta-api-description">
+How do I set a custom role description for a specific Kendo UI Diagram connection? Configure the ARIA role description attribute to provide a human-readable description of the connection for assistive technologies.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Start" } },
+            { id: "2", x: 300, y: 100, content: { text: "End" } }
+        ],
+        connections: [
+            {
+                from: "1",
+                to: "2",
+                accessibility: {
+                    ariaRoleDescription: "Process Flow"
+                }
+            }
+        ]
+    });
+    </script>
+
+### connections.accessibility.ariaLabel `String`
+
+The accessibility label of the connection.
+
+<div class="meta-api-description">
+How do I set an ARIA label for a specific Kendo UI Diagram connection? Configure the ARIA label attribute to provide a descriptive text label for the connection that assistive technologies can announce to users.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "CEO" } },
+            { id: "2", x: 300, y: 100, content: { text: "VP" } }
+        ],
+        connections: [
+            {
+                from: "1",
+                to: "2",
+                accessibility: {
+                    ariaLabel: "CEO oversees VP"
+                }
+            }
+        ]
+    });
+    </script>
+
 ### connectionsDataSource `Object|Array|kendo.data.DataSource`
 
 Defines the data source of the connections.
@@ -6541,6 +8341,37 @@ How do I set the width of resize handles in a Kendo UI Diagram? Control and cust
                 handles: {
                     width: 10
                 }
+            }
+        }
+    });
+    </script>
+
+### editable.resize.offset `Number` *(default: 1)*
+
+The offset distance of resize handles from the shape edge.
+
+<div class="meta-api-description">
+How do I set the offset of resize handles from the shape in a Kendo UI Diagram? Configure the distance between the resize handles and the shape boundary to create visual spacing, positioning handles slightly outside or inside the shape for better visibility and easier interaction during resize operations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            {
+                id: "1",
+                content: {
+                    text: "Shape"
+                },
+                x: 100,
+                y: 100
+            }
+        ],
+        editable: {
+            resize: {
+                offset: 5
             }
         }
     });
@@ -7860,6 +9691,101 @@ How do I adjust node spacing in a Kendo UI diagram? Adjust the spacing between n
     });
     </script>
 
+### navigatable `Object`
+
+Defines the keyboard navigation options for the diagram.
+
+<div class="meta-api-description">
+How do I configure keyboard navigation in a Kendo UI Diagram? Configure keyboard navigation settings to control how users can move selected shapes using arrow keys, including enabling or disabling keyboard navigation entirely, and setting small and large step distances for precise or quick movements with Cmd/Ctrl and Shift modifier keys.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        navigatable: {
+            disabled: false,
+            smallStep: 2,
+            largeStep: 10
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### navigatable.disabled `Boolean` *(default: false)*
+
+If set to `true`, disables keyboard navigation in the diagram.
+
+<div class="meta-api-description">
+How do I disable keyboard navigation in a Kendo UI Diagram? Disable keyboard-based shape movement and navigation controls by setting this option to true, preventing users from using arrow keys to move selected shapes within the diagram.
+</div>
+
+#### Example - disabling keyboard navigation
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        navigatable: {
+            disabled: true
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ]
+    });
+    </script>
+
+### navigatable.smallStep `Number` *(default: 1)*
+
+The number of pixels to move the selected shape when using `Cmd/Ctrl + Arrow` keys.
+
+<div class="meta-api-description">
+How do I set the small step distance for keyboard navigation in a Kendo UI Diagram? Configure the pixel distance for fine-grained shape movement when using Cmd/Ctrl key combined with arrow keys, enabling precise positioning of shapes during keyboard navigation.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        navigatable: {
+            smallStep: 5
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ]
+    });
+    </script>
+
+### navigatable.largeStep `Number` *(default: 5)*
+
+The number of pixels to move the selected shape when using `Shift + Cmd/Ctrl + Arrow` keys.
+
+
+<div class="meta-api-description">
+How do I set the large step distance for keyboard navigation in a Kendo UI Diagram? Configure the pixel distance for larger shape movements when using Shift + Cmd/Ctrl keys combined with arrow keys, enabling quick repositioning of shapes during keyboard navigation.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        navigatable: {
+            largeStep: 20
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ]
+    });
+    </script>
+
 ### pannable `Boolean|Object` *(default: true)*
 
 Defines the pannable options. Use this setting to disable Diagram pan or change the key that activates the pan behavior.
@@ -8836,6 +10762,106 @@ How do I set the thickness of the selection border in a Kendo UI diagram? Adjust
     });
     </script>
 
+### selectable.fill `String|Object`
+
+Defines the fill configuration for the selection rectangle.
+
+<div class="meta-api-description">
+How do I customize the selection rectangle fill in a Kendo UI Diagram? Configure the background fill color and opacity of the selection rectangle that appears when dragging to select multiple shapes, enabling visual customization to match your application's theme or improve visibility of the selection area.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        selectable: {
+            key: "shift",
+            fill: {
+                color: "#8ebc00",
+                opacity: 0.2
+            }
+        }
+    });
+    </script>
+
+### selectable.fill.color `String`
+
+Defines the fill color of the selection rectangle.
+
+<div class="meta-api-description">
+How do I set the fill color of the selection rectangle in a Kendo UI Diagram? Configure the background color of the selection rectangle by specifying any valid CSS color value to match your application's theme or improve visibility during multi-select operations.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ],
+        selectable: {
+            key: "shift",
+            fill: {
+                color: "rgba(33, 150, 243, 0.3)"
+            }
+        }
+    });
+    </script>
+
+### selectable.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the selection rectangle. Ranges from 0 (completely transparent) to 1 (opaque).
+
+<div class="meta-api-description">
+How do I set the transparency of the selection rectangle in a Kendo UI Diagram? Configure the opacity of the selection rectangle fill to create a semi-transparent overlay when dragging to select multiple shapes, improving visibility of the shapes beneath.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ],
+        selectable: {
+            key: "shift",
+            fill: {
+                color: "#2196f3",
+                opacity: 0.1
+            }
+        }
+    });
+    </script>
+
+### selectable.offset `Number` *(default: 3)*
+
+Defines the offset (in pixels) of the selection rectangle from the shape bounds.
+
+<div class="meta-api-description">
+How do I set the selection rectangle offset in a Kendo UI Diagram? Configure the distance between the selection rectangle and the shape bounds to create visual spacing around selected shapes, improving clarity and preventing visual overlap.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ],
+        selectable: {
+            offset: 10
+        }
+    });
+    </script>
+
 ### shapeDefaults `Object`
 
 Defines the default options that will be applied to all shapes in the Diagram.
@@ -9576,6 +11602,43 @@ How do I adjust the thickness of connector lines in a Kendo UI diagram? Adjust t
     });
     </script>
 
+### shapeDefaults.connectors.offset `Number` *(default: 10)*
+
+Defines the offset applied to the connector position. The offset pushes the connector away from the shape edge by the specified number of pixels in the direction appropriate for the connector's position (e.g., upward for "top", downward for "bottom", etc.).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapeDefaults: {
+            connectors: [{
+                name: "top",
+                offset: 20
+            }, {
+                name: "bottom",
+                offset: 15
+            }, {
+                name: "left",
+                offset: 10
+            }, {
+                name: "right",
+                offset: 10
+            }]
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2", fromConnector: "right", toConnector: "left" }
+        ],
+        connectionDefaults: {
+            endCap: "ArrowEnd"
+        }
+    });
+    </script>
+
 ### shapeDefaults.connectorDefaults `Object`
 
 Defines the default options for the shape connectors.
@@ -10213,6 +12276,36 @@ How do I adjust the thickness of connector lines in a Kendo UI diagram? Set or a
         shapes: [{
             id: "1",
             content: { text: "Monday" },
+            x: 100,
+            y: 20
+        }],
+        connections: [{
+            from: "1"
+        }]
+    });
+    </script>
+
+### shapeDefaults.connectorDefaults.offset `Number` *(default: 10)*
+
+Defines the offset distance from the shape edge.
+
+<div class="meta-api-description">
+How do I set the offset of shape connectors from the shape edge in a Kendo UI Diagram? Configure the distance between the shape connectors and the shape boundary to create visual spacing, positioning connectors slightly outside the shape for better visibility and easier connection targeting.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapeDefaults: {
+            connectorDefaults: {
+                offset: 15
+            }
+        },
+        shapes: [{
+            id: "1",
+            content: { text: "Shape" },
             x: 100,
             y: 20
         }],
@@ -12761,6 +14854,111 @@ How do I set the radius for circular shapes in a Kendo UI diagram? Configure the
       });
     </script>
 
+### shapeDefaults.accessibility `Object`
+
+Defines accessibility options for shapes.
+
+<div class="meta-api-description">
+How do I configure accessibility settings for Kendo UI Diagram shapes? Configure accessibility options such as ARIA labels, roles, and role descriptions for diagram shapes to improve assistive technology support. Enable screen reader compatibility by providing meaningful labels and semantic information for shape elements in diagrams, flowcharts, and organizational charts.
+</div>
+
+#### Example - configuring accessibility for shapes
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapeDefaults: {
+            accessibility: {
+                role: "graphics-symbol",
+                ariaRoleDescription: "Diagram Shape",
+                ariaLabel: "Process step"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Step 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Step 2" } }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### shapeDefaults.accessibility.role `String` *(default: "graphics-symbol")*
+
+The accessibility role of shape elements.
+
+<div class="meta-api-description">
+How do I set the ARIA role for Kendo UI Diagram shapes? Configure the ARIA role attribute for shape elements to define their semantic purpose for assistive technologies. Set appropriate roles to communicate the shape's function to screen readers.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapeDefaults: {
+            accessibility: {
+                role: "listitem"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Item 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Item 2" } }
+        ]
+    });
+    </script>
+
+### shapeDefaults.accessibility.ariaRoleDescription `String` *(default: "Shape")*
+
+The accessibility role description of shape elements.
+
+<div class="meta-api-description">
+How do I set a custom role description for Kendo UI Diagram shapes? Configure the ARIA role description attribute to provide a human-readable description of shapes for assistive technologies. Set custom descriptions to help screen reader users understand the type of element being represented.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapeDefaults: {
+            accessibility: {
+                ariaRoleDescription: "Process Node"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Start" } },
+            { id: "2", x: 300, y: 100, content: { text: "End" } }
+        ]
+    });
+    </script>
+
+### shapeDefaults.accessibility.ariaLabel `String`
+
+The accessibility label of shape elements.
+
+<div class="meta-api-description">
+How do I set an ARIA label for Kendo UI Diagram shapes? Configure the ARIA label attribute to provide a descriptive text label for shapes that assistive technologies can announce to users. Set meaningful labels that describe what the shape represents.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapeDefaults: {
+            accessibility: {
+                ariaLabel: "Workflow step"
+            }
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Step 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Step 2" } }
+        ]
+    });
+    </script>
+
 ### shapes `Array`
 
 Defines the shape options.
@@ -13597,6 +15795,48 @@ How to set the stroke width of connectors in a Kendo UI Diagram? Adjust or confi
     });
     </script>
 
+### shapes.connectors.offset `Number` *(default: 10)*
+
+Defines the offset applied to the connector position. The offset pushes the connector away from the shape edge by the specified number of pixels in the direction appropriate for the connector's position (e.g., upward for "top", downward for "bottom", etc.).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            content: { text: "Shape with Offset Connectors" },
+            x: 100,
+            y: 100,
+            connectors: [{
+                name: "top",
+                offset: 25
+            }, {
+                name: "bottom",
+                offset: 25
+            }, {
+                name: "left",
+                offset: 15
+            }, {
+                name: "right",
+                offset: 15
+            }]
+        }, {
+            id: "2",
+            content: { text: "Target Shape" },
+            x: 350,
+            y: 100
+        }],
+        connections: [
+            { from: "1", to: "2", fromConnector: "right", toConnector: "left" }
+        ],
+        connectionDefaults: {
+            endCap: "ArrowEnd"
+        }
+    });
+    </script>
+
 ### shapes.connectorDefaults `Object`
 
 Defines default options for all connectors belonging to a given shape.
@@ -14180,6 +16420,38 @@ How do I adjust the thickness of connector lines in a Kendo UI Diagram? Adjust o
                 }
             }
         }]
+    });
+    </script>
+
+### shapes.connectorDefaults.offset `Number` *(default: 10)*
+
+Defines the offset applied to the connector position. The offset pushes the connector away from the shape edge by the specified number of pixels in the direction appropriate for the connector's position (e.g., upward for "top", downward for "bottom", etc.).
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            x: 100,
+            y: 100,
+            content: { text: "Offset Connectors" },
+            connectorDefaults: {
+                offset: 20
+            }
+        }, {
+            id: "2",
+            x: 300,
+            y: 100,
+            content: { text: "Shape 2" }
+        }],
+        connections: [
+            { from: "1", to: "2", fromConnector: "right", toConnector: "left" }
+        ],
+        connectionDefaults: {
+            endCap: "ArrowEnd"
+        }
     });
     </script>
 
@@ -16474,7 +18746,127 @@ How do I set the vertical position of shapes in a Kendo UI Diagram using JavaScr
     });
     </script>
 
-### template `String|Function` *(default: "")*
+### shapes.accessibility `Object`
+
+Defines accessibility options for the shape.
+
+<div class="meta-api-description">
+How do I configure accessibility settings for individual Kendo UI Diagram shapes? Configure accessibility options such as ARIA labels, roles, and role descriptions for individual diagram shapes to provide specific accessibility information for each shape element.
+</div>
+
+#### Example - configuring accessibility for a specific shape
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            {
+                id: "1",
+                x: 100,
+                y: 100,
+                content: { text: "CEO" },
+                accessibility: {
+                    ariaLabel: "Chief Executive Officer position"
+                }
+            },
+            {
+                id: "2",
+                x: 300,
+                y: 100,
+                content: { text: "CTO" },
+                accessibility: {
+                    ariaLabel: "Chief Technology Officer position"
+                }
+            }
+        ],
+        connections: [
+            { from: "1", to: "2" }
+        ]
+    });
+    </script>
+
+### shapes.accessibility.role `String` *(default: "graphics-symbol")*
+
+The accessibility role of the shape.
+
+<div class="meta-api-description">
+How do I set the ARIA role for a specific Kendo UI Diagram shape? Configure the ARIA role attribute for an individual shape element to define its semantic purpose for assistive technologies.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            {
+                id: "1",
+                x: 100,
+                y: 100,
+                content: { text: "Decision" },
+                accessibility: {
+                    role: "img"
+                }
+            }
+        ]
+    });
+    </script>
+
+### shapes.accessibility.ariaRoleDescription `String` *(default: "Shape")*
+
+The accessibility role description of the shape.
+
+<div class="meta-api-description">
+How do I set a custom role description for a specific Kendo UI Diagram shape? Configure the ARIA role description attribute to provide a human-readable description of the shape for assistive technologies.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            {
+                id: "1",
+                x: 100,
+                y: 100,
+                content: { text: "Start" },
+                accessibility: {
+                    ariaRoleDescription: "Terminator"
+                }
+            }
+        ]
+    });
+    </script>
+
+### shapes.accessibility.ariaLabel `String`
+
+The accessibility label of the shape.
+
+<div class="meta-api-description">
+How do I set an ARIA label for a specific Kendo UI Diagram shape? Configure the ARIA label attribute to provide a descriptive text label for the shape that assistive technologies can announce to users.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            {
+                id: "1",
+                x: 100,
+                y: 100,
+                content: { text: "CEO" },
+                accessibility: {
+                    ariaLabel: "John Smith - Chief Executive Officer"
+                }
+            }
+        ]
+    });
+    </script>
+
+### template `String|Function` *(default: "")"
 
 The [`template`](/api/javascript/kendo/methods/template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
 
@@ -16556,6 +18948,122 @@ How to customize the appearance of my Kendo UI diagram using a predefined theme?
             }
         ],
         theme: "material"
+    });
+    </script>
+
+### tabIndex `Number` *(default: 0)*
+
+The `tabIndex` value to set on the diagram element.
+
+<div class="meta-api-description">
+How do I set the tab index for a Kendo UI Diagram? Configure the keyboard tab order position of the diagram element by specifying a numeric tab index value, enabling control over keyboard navigation flow and focus order when users press the Tab key to navigate between interactive elements on the page.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        tabIndex: 1,
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } }
+        ]
+    });
+    </script>
+
+### tooltip `Boolean|Object`
+
+Defines the tooltip settings for the diagram.
+
+<div class="meta-api-description">
+How do I configure tooltips in a Kendo UI Diagram? Configure tooltip behavior for diagram elements including shapes and connections by setting the delay before tooltips appear and other tooltip-related options to improve user experience when hovering over diagram elements.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        tooltip: {
+            delay: 500
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Hover over me" } }
+        ]
+    });
+    </script>
+
+### tooltip.connectionTemplate `Function`
+
+Defines the tooltip that will be shown when hovering over a connection.
+
+<div class="meta-api-description">
+How do I set the tooltip for a connection in a Kendo UI Diagram? Configure the connection template before and when hovering over diagram connection elements tooltips are displayed..
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        tooltip: {
+            connectionTemplate: (e)=> `T: ${e.dataItem.label}`
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [
+            { 
+              from: "1", 
+              to: "2", 
+              dataItem: { label: "Connection from 1 to 2" } 
+            }
+        ]
+    });
+    </script>
+
+### tooltip.shapeTemplate `Function`
+
+Defines the tooltip that will be shown when hovering over a connection.
+
+<div class="meta-api-description">
+How do I set the tooltip for a shape in a Kendo UI Diagram? Configure the shape template before and when hovering over diagram shape elements tooltips are displayed.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        tooltip: {
+            shapeTemplate: (e)=> `T: ${e.content.text}`
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Tooltip appears" } }
+        ]
+    });
+    </script>
+
+### tooltip.delay `Number` *(default: 200)*
+
+The delay in milliseconds before the tooltipShow event is triggered after the user hovers over a diagram item.
+
+<div class="meta-api-description">
+How do I set the tooltip delay in a Kendo UI Diagram? Configure the time delay before tooltips appear when hovering over diagram elements, allowing users to control how quickly or slowly tooltips are displayed to prevent accidental tooltip popups during quick mouse movements or to show them faster for improved discoverability.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        tooltip: {
+            delay: 1000
+        },
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Tooltip appears after 1 second" } }
+        ]
     });
     </script>
 

@@ -2134,6 +2134,102 @@ export const __meta__ = {
         }
     });
 
+    var AISmartPasteTransport = Class.extend( {
+        init: function(options) {
+            const that = this;
+
+            options = that.options = extend({}, that.options, options);
+        },
+
+        read: function(options) {
+            const that = this;
+            options = that.options = extend({}, that.options, options);
+            options = that.setup(options);
+
+            if (that.options.requestStart) {
+                that.options.requestStart(options);
+            }
+
+            $.ajax(options);
+        },
+
+        setup: function(options) {
+            const that = this,
+                  service = options?.service || that.options.service,
+                  data = that.getData(options),
+                  url = typeof service === "string" ? service : service.url,
+                  requestOptions = {
+                    url: url,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        if (that.options.success) {
+                            that.options.success(response);
+                        }
+                    },
+                    error: function(response) {
+                        const resObject = {
+                            status: response.status,
+                            statusText: response.statusText,
+                            responseText: response.responseText,
+                        };
+                        if (that.options.error) {
+                            that.options.error(resObject);
+                        }
+                    }
+                 };
+
+                 if (service?.headers) {
+                     requestOptions.headers = service.headers;
+                 }
+
+                 return requestOptions;
+        },
+        getData: function(options = {}) {
+            const service = options?.service,
+                  formFields = options?.formFields,
+                  content = options?.content;
+
+                let defaultData = {
+                    formFields: formFields,
+                    content: content
+                };
+
+                if (service?.data && isFunction(service?.data)) {
+                    return $.extend({}, defaultData, service.data());
+                }
+
+                if (service?.data && Object.keys(service.data).length) {
+                    return $.extend({}, defaultData, service.data);
+                }
+
+                return defaultData;
+        },
+        success: function(response) {
+            const that = this;
+
+            if (that.options.success) {
+                that.options.success(response);
+            }
+
+            return response;
+        },
+        error: function(response) {
+            const that = this;
+
+            const resObject = {
+                status: response.status,
+                statusText: response.statusText,
+                responseText: response.responseText,
+            };
+
+            if (that.options.error) {
+                that.options.error(resObject);
+            }
+        }
+    });
+
     var AiTransport = Class.extend( {
         init: function(options) {
             const that = this;
@@ -6962,6 +7058,7 @@ export const __meta__ = {
         LazyObservableArray: LazyObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
+        AISmartPasteTransport: AISmartPasteTransport,
         AiTransport: AiTransport,
         Cache: Cache,
         DataReader: DataReader,
