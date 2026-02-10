@@ -9,7 +9,7 @@ let StaticList = kendo.ui.StaticList,
 describe("kendo.ui.StaticList API", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
-        element = $("<ul></ul>").appendTo(Mocha.fixture);
+        element = $("<div></div>").appendTo(Mocha.fixture);
     });
     afterEach(function() {
         element.data("kendoStaticList").destroy();
@@ -95,7 +95,7 @@ describe("kendo.ui.StaticList API", function() {
             template: (data) => `new ${encode(data)}`
         });
 
-        assert.equal(element.children(":first").find(".k-list-item-text").html(), "new item");
+        assert.equal(list.items().first().find(".k-list-item-text").html(), "new item");
     });
 
     it("setOptions does not update bound state", function() {
@@ -148,8 +148,11 @@ describe("kendo.ui.StaticList API", function() {
         list.dataSource.read();
 
         let current = list.focus();
+        let items = list.items();
 
-        assert.equal(current[0], list.element[0].children[1]);
+        // After grouping: group "a" has item1 (idx 0), item3 (idx 1); group "b" has item2 (idx 2)
+        // item3 is the last selected item, it's at index 1 in the items collection
+        assert.equal(current[0], items[1]);
     });
 
     it("dataItems method returns list of the selected items", function() {
@@ -238,7 +241,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.focus(children.eq(1));
 
@@ -255,7 +258,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.focus(1);
 
@@ -272,7 +275,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.focus(1);
         list.focus(-1);
@@ -290,7 +293,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.focus(children.eq(1));
         assert.equal(list.focusIndex(), 1);
@@ -304,7 +307,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.focus(1);
         list.focus(-1);
@@ -320,7 +323,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(children.eq(1));
 
@@ -374,7 +377,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
 
@@ -393,7 +396,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select([1, 2]);
 
@@ -411,7 +414,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select([1, 2]);
 
@@ -430,7 +433,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select([3]);
 
@@ -447,7 +450,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select([0, 2]);
 
@@ -464,7 +467,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
         list.select(0);
@@ -482,7 +485,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
         list.select(-1);
@@ -501,7 +504,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
         list.select(0);
@@ -520,7 +523,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
         list.select(1);
@@ -539,7 +542,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
         list.select([]);
@@ -566,13 +569,13 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
 
         assert.equal(children.eq(0).attr("class"), "k-list-item");
         assert.equal(children.eq(1).attr("class"), "k-list-item k-focus k-selected");
-        assert.equal(children.eq(2).attr("class"), "k-list-item k-first");
+        assert.equal(children.eq(2).attr("class"), "k-list-item");
     });
 
     it("select method sets selected data items", function() {
@@ -1161,7 +1164,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         list.select(1);
         list.value([]);
@@ -1208,7 +1211,7 @@ describe("kendo.ui.StaticList API", function() {
         list.value("item1");
         list.value("item2");
 
-        assert.equal(list.element.children(".k-selected").length, 1);
+        assert.equal(list.items().filter(".k-selected").length, 1);
     });
 
     it("value method selects item with unescaped characters", function() {
@@ -1221,7 +1224,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.value("item1\"");
 
-        assert.equal(list.element.children(".k-selected").length, 1);
+        assert.equal(list.items().filter(".k-selected").length, 1);
     });
 
     it("next method focuses first item if no items are focused", function() {
@@ -1233,7 +1236,7 @@ describe("kendo.ui.StaticList API", function() {
         list.dataSource.read();
         list.focusNext();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item k-focus");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
@@ -1250,7 +1253,7 @@ describe("kendo.ui.StaticList API", function() {
         list.focus(0);
         list.focusNext();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item");
         assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
@@ -1266,7 +1269,7 @@ describe("kendo.ui.StaticList API", function() {
         list.dataSource.read();
         list.focusPrev();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
@@ -1283,7 +1286,7 @@ describe("kendo.ui.StaticList API", function() {
         list.focus(2);
         list.focusPrev();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item");
         assert.equal(children.eq(1).attr("class"), "k-list-item k-focus");
@@ -1299,7 +1302,7 @@ describe("kendo.ui.StaticList API", function() {
         list.dataSource.read();
         list.focusFirst();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item k-focus");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
@@ -1315,7 +1318,7 @@ describe("kendo.ui.StaticList API", function() {
         list.dataSource.read();
         list.focusLast();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
@@ -1336,10 +1339,10 @@ describe("kendo.ui.StaticList API", function() {
 
         list.scrollToIndex(2);
 
-        let children = element[0].children;
+        let items = list.items();
 
         assert.equal(list.calls("scroll"), 1);
-        assert.equal(list.args("scroll")[0], children[2]);
+        assert.equal(list.args("scroll")[0], items[2]);
     });
 
     let getData = function(length) {
@@ -1567,7 +1570,7 @@ describe("kendo.ui.StaticList API", function() {
 
         list.dataSource.read();
 
-        let index = list.getElementIndex(list.element.children().eq(2));
+        let index = list.getElementIndex(list.items().eq(2));
 
         assert.equal(index, 2);
     });

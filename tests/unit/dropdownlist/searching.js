@@ -652,8 +652,13 @@ describe("kendo.ui.DropDownList searching", function() {
         dropdownlist.wrapper.focus().press("b");
         dropdownlist.wrapper.focus().press("b");
 
-        assert.isOk(dropdownlist.ul.children().eq(2).text(), "Bar");
-        assert.isOk(dropdownlist.ul.children().eq(2).hasClass("k-selected"));
+        // After grouping: group "a" has Foo (idx 0), Baz (idx 1); group "b" has Bar (idx 2)
+        // Searching for "b" twice should select Bar
+        let items = dropdownlist.listView.items();
+        let barItem = items.filter(function() { return $(this).text().trim() === "Bar"; });
+
+        assert.equal(barItem.length, 1);
+        assert.isOk(barItem.hasClass("k-selected"));
     });
 
     asyncTest("filter on paste", function(done) {

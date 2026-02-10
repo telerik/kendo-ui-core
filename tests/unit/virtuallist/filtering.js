@@ -164,7 +164,8 @@ describe("VirtualList Filtering: ", function() {
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
                 done(() => {
-                    assert.equal(virtualList.heightContainer.offsetHeight, 9 * 50);
+                    let cssGap = virtualList._cssGap || 0;
+                    assert.equal(virtualList.heightContainer.offsetHeight, 9 * (50 + cssGap));
                 });
             });
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });

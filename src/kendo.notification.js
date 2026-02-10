@@ -29,11 +29,11 @@ export const __meta__ = {
         KCLOSEICONSELECTOR = `.k-notification-actions .k-icon`,
         KHIDING = "k-hiding",
         INFO = "info",
-        DEFAULT = "default",
+        BASE = "base",
         SUCCESS = "success",
         WARNING = "warning",
         ERROR = "error",
-        TYPEICONS = { [INFO]: "info-circle", [DEFAULT]: "info-circle", [ERROR]: "x-outline", [WARNING]: "exclamation-circle", [SUCCESS]: "check-outline" },
+        TYPEICONS = { [BASE]: "", [INFO]: "info-circle", [ERROR]: "x-outline", [WARNING]: "exclamation-circle", [SUCCESS]: "check-outline" },
         TOP = "top",
         LEFT = "left",
         BOTTOM = "bottom",
@@ -43,7 +43,7 @@ export const __meta__ = {
         WRAPPER = '<div role="alert" aria-live="polite" class="k-notification"></div>',
         GET_TEMPLATE_FUNC = (encodeContent) =>
             ({ typeIcon, content, closeButton }) =>
-                kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) +
+                (typeIcon && (TYPEICONS[encode(typeIcon)] || encode(typeIcon)) ? kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) : '') +
                 `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>`,
         TEMPLATE = GET_TEMPLATE_FUNC(false),
         SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true),
@@ -384,11 +384,12 @@ export const __meta__ = {
                 wrapper = $(WRAPPER),
                 contentId = kendo.guid(),
                 typeClass = KNOTIFICATION + "-" + type,
+                typeIcon = type || "",
                 args, defaultArgs;
 
 
             if (!type) {
-                type = DEFAULT;
+                type = BASE;
                 typeClass = "";
             }
 
@@ -400,7 +401,7 @@ export const __meta__ = {
                     content = content();
                 }
 
-                defaultArgs = { typeIcon: type, content: "", closeButton: options.button };
+                defaultArgs = { typeIcon: typeIcon, content: "", closeButton: options.button };
 
                 if ($.isPlainObject(content)) {
                     args = extend(defaultArgs, content);

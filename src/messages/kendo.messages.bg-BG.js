@@ -355,6 +355,31 @@ $.extend(true, kendo.spreadsheet.messages.view,{
 });
 }
 
+if (kendo.ui.SmartBox) {
+kendo.ui.SmartBox.prototype.options.messages =
+$.extend(true, kendo.ui.SmartBox.prototype.options.messages,{
+  noPreviousSearches: "Няма предишни търсения",
+  noPreviousPrompts: "Няма предишни заявки",
+  previousSearches: "Предишни търсения",
+  previousPrompts: "Предишни заявки",
+  suggestedPrompts: "Предложени заявки",
+  searchModeLabel: "Търсене",
+  searchModeDescription: "Търси точни съвпадения на думи в данните ви",
+  searchPlaceholder: "Търсене",
+  semanticSearchModeLabel: "Семантично търсене",
+  semanticSearchModeDescription: "Разбира контекста, за да покаже най-подходящите резултати.",
+  semanticSearchPlaceholder: "Семантично търсене",
+  semanticSearchButtonText: "Търсене",
+  aiAssistantPlaceholder: "Сортиране, филтриране или групиране с AI",
+  speechToText: "Глас към текст",
+  speechToTextAriaLabel: "Стартиране на разпознаване на реч",
+  cancel: "Отказ",
+  send: "Изпрати",
+  searchButtonText: "Търсене",
+  aiAssistantButtonText: "AI Асистент"
+});
+}
+
 /* Slider */
 
 if (kendo.ui.Slider) {

@@ -117,4 +117,17 @@ describe("kendo.ui.MultiSelect Placeholder", function() {
         assert.equal(multiselect.input.val(), "");
     });
 
+    it("MultiSelect clears input value after selecting item when autoClose is true", function() {
+        let filterText = "2";
+        let placeholder = "Select...";
+        let multiselect = new MultiSelect(select.data("placeholder", placeholder), { autoClose: true });
+
+        multiselect.input.focus().val(filterText);
+        multiselect.open();
+
+        multiselect.ul.children().first().click();
+
+        assert.equal(multiselect.input.val(), "");
+    });
+
 });

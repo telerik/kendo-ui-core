@@ -584,7 +584,7 @@ describe("kendo.ui.MultiSelect selection", function() {
         multiselect.open();
         multiselect.input[0].dispatchEvent(evt);
 
-        let selectedItems = multiselect.ul.children(".k-selected");
+        let selectedItems = multiselect.listView.items().filter(".k-selected");
 
         assert.equal(selectedItems.length, 0);
     });

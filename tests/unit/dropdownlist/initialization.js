@@ -1560,7 +1560,7 @@ describe("kendo.ui.DropDownList initialization", function() {
             footerTemplate: () => "footer"
         });
 
-        assert.isOk(dropdownlist.noData.next().hasClass("k-list-footer"));
+        assert.isOk(dropdownlist.noData.siblings(".k-list-footer").length);
     });
 
     it("hides noData template if any data", function() {

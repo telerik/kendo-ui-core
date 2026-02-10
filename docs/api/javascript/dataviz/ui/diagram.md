@@ -18866,7 +18866,7 @@ How do I set an ARIA label for a specific Kendo UI Diagram shape? Configure the 
     });
     </script>
 
-### template `String|Function` *(default: "")"
+### template `String|Function` *(default: "")*
 
 The [`template`](/api/javascript/kendo/methods/template) which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. For an example, refer to the dataSource topic below.
 

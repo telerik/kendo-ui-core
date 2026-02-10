@@ -7,7 +7,7 @@ let StaticList = kendo.ui.StaticList,
 describe("kendo.ui.StaticList initialization", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
-        element = $("<ul></ul>").appendTo(Mocha.fixture);
+        element = $("<div></div>").appendTo(Mocha.fixture);
     });
     afterEach(function() {
         element.data("kendoStaticList").destroy();
@@ -35,7 +35,7 @@ describe("kendo.ui.StaticList initialization", function() {
     it("StaticList adds listbox role to the element", function() {
         let list = new StaticList(element, {});
 
-        assert.equal(element.attr("role"), "listbox");
+        assert.equal(list.content.find("ul").attr("role"), "listbox");
     });
 
     it("StaticList builds a template", function() {
@@ -88,7 +88,7 @@ describe("kendo.ui.StaticList initialization", function() {
 
         list.dataSource.read();
 
-        let li = list.element.children().eq(0);
+        let li = list.items().eq(0);
         li.mouseenter();
 
         assert.isOk(li.hasClass("k-hover"));
@@ -102,7 +102,7 @@ describe("kendo.ui.StaticList initialization", function() {
 
         list.dataSource.read();
 
-        let li = list.element.children().eq(0);
+        let li = list.items().eq(0);
         li.mouseenter();
         li.mouseleave();
 

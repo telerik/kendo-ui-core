@@ -201,7 +201,7 @@ export const __meta__ = {
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return `<span aria-hidden='true' class='k-button k-button-flat k-icon-button k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
+        return `<span aria-hidden='true' class='k-button k-button-flat k-icon-button k-rounded-none k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
     }
 
     function ajaxXhr() {

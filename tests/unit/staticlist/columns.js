@@ -6,7 +6,7 @@ let StaticList = kendo.ui.StaticList,
 describe("kendo.ui.StaticList API", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
-        element = $("<ul></ul>").appendTo(Mocha.fixture);
+        element = $("<div></div>").appendTo(Mocha.fixture);
     });
     afterEach(function() {
         element.data("kendoStaticList").destroy();
@@ -74,7 +74,7 @@ describe("kendo.ui.StaticList API", function() {
         });
 
         list.dataSource.read();
-        assert.equal(element.children(":first").find("span").length, 1);
+        assert.equal(list.items().first().find("span").length, 1);
         list.setOptions({
             columns: [
                 { field: "name" },
@@ -82,7 +82,7 @@ describe("kendo.ui.StaticList API", function() {
             ],
         });
 
-        assert.equal(element.children(":first").find("span").length, 2);
+        assert.equal(list.items().first().find("span").length, 2);
     });
 
 });

@@ -32,7 +32,7 @@ export function addInputPrefixSuffixContainers({ widget, wrapper, options, prefi
         }
 
         if (prefix.icon) {
-            prefixContainer.html(kendo.html.renderIcon({ icon: prefix.icon }));
+            prefixContainer.html(kendo.html.renderIcon({ icon: prefix.icon, iconClass: prefix.iconClass }));
         }
 
         if (prefix.template) {
@@ -57,7 +57,7 @@ export function addInputPrefixSuffixContainers({ widget, wrapper, options, prefi
         }
 
         if (suffix.icon) {
-            suffixContainer.html(kendo.html.renderIcon({ icon: suffix.icon }));
+            suffixContainer.html(kendo.html.renderIcon({ icon: suffix.icon, iconClass: suffix.iconClass }));
         }
 
         if (suffix.template) {

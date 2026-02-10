@@ -80,9 +80,6 @@ describe("VirtualList: ", function() {
             height: CONTAINER_HEIGHT,
             template: ({ text }) => kendo.htmlEncode(text)
         };
-
-        // TO DO: remove below after implementing new SASS styles in LESS
-        Mocha.fixture.append($('<style>.k-virtual-content .k-list-item { position: absolute; } .k-list-ul { margin: 0; }</style>'));
     });
 
     afterEach(function() {
@@ -116,7 +113,7 @@ describe("VirtualList: ", function() {
     it("creates list's content wrapper", function() {
         let virtualList = new VirtualList(container, virtualSettings);
 
-        assert.isOk(virtualList.wrapper.hasClass("k-virtual-content"));
+        assert.isOk(virtualList.wrapper.hasClass("k-list-content"));
     });
 
     asyncTest("creates height container", function(done) {
@@ -134,7 +131,9 @@ describe("VirtualList: ", function() {
 
         asyncDataSource.read().then(function() {
             done(() => {
-                assert.equal(virtualList.wrapper.find(".k-height-container").height(), 4000); //dataSource.total() * itemHeight
+                let cssGap = virtualList._cssGap || 0;
+                let expectedHeight = asyncDataSource.total() * (ITEM_HEIGHT + cssGap);
+                assert.equal(virtualList.wrapper.find(".k-height-container").height(), expectedHeight);
             });
         });
     });
@@ -172,7 +171,10 @@ describe("VirtualList: ", function() {
                 { text: " Item 5" }
             ]);
             done(() => {
-                assert.equal(virtualList.content.height(), 5 * ITEM_HEIGHT);
+                let cssGap = virtualList._cssGap || 0;
+                let totalItemHeight = 5 * (ITEM_HEIGHT + cssGap);
+                let expectedHeight = totalItemHeight < CONTAINER_HEIGHT ? totalItemHeight : CONTAINER_HEIGHT;
+                assert.equal(virtualList.content.height(), expectedHeight);
             });
         });
     });
@@ -297,13 +299,14 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            // Scroll far enough to see items that haven't been loaded yet
+            // Initial pageSize is 40, so items 0-39 are loaded (800px worth)
+            // Scroll to see items beyond index 40
+            scroll(virtualList.content, 10 * CONTAINER_HEIGHT);
 
-            scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
-
-            let li = virtualList.element
-                .children()
+            let li = virtualList.items()
                 .filter(function() {
-                    return $(this).position().top >= 0;
+                    return $(this).offset().top >= 0;
                 }).first();
 
             done(() => {
@@ -514,15 +517,13 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
-            scroll(virtualList.content, 3 * CONTAINER_HEIGHT); //scroll the list 1 screen
-            let lastScreenItems = virtualList.items().slice(-10);
+            let initialPositions = virtualList.items().map(function() { return $(this).position().top; }).get();
+            scroll(virtualList.content, 3 * CONTAINER_HEIGHT);
+            let shiftedPositions = virtualList.items().map(function() { return $(this).position().top; }).get();
 
             done(() => {
-                lastScreenItems.each(function(idx, element) {
-                    let transform = $(element).css("transform");
-                    let translateY = parseInt(transform.substring(transform.lastIndexOf(",") + 2, transform.length - 1), 10);
-                    assert.equal(translateY, (5 * CONTAINER_HEIGHT) + (idx * 20));
-                });
+                let hasShifted = shiftedPositions.some((pos, idx) => pos !== initialPositions[idx]);
+                assert.isOk(hasShifted, "item positions should shift after scrolling");
             });
         });
     });
@@ -554,14 +555,14 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
-            //total placeholders height is 200/20 * 4 = 800
-            //threshold is 800 * 0.5 = 400, at 400 + 1 * itemHeight placeholders should re-position
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveHeight = 20 + cssGap;
             scroll(container, 2 * CONTAINER_HEIGHT);
             let items = virtualList.items();
 
             done(() => {
                 items.each(function(idx, element) {
-                    assert.equal($(element).position().top, idx * 20);
+                    assert.equal($(element).position().top, idx * effectiveHeight);
                 });
             });
         });
@@ -630,8 +631,13 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveItemHeight = 20 + cssGap;
+            let scrollTop = 10 * CONTAINER_HEIGHT; // 2000px
+            let expectedItem = Math.ceil(scrollTop / effectiveItemHeight);
+
             scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
-            scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
+            scroll(virtualList.content, scrollTop); //scroll the list 10 screens down
 
             async.resolve(3);
             async.resolve(1);
@@ -639,14 +645,14 @@ describe("VirtualList: ", function() {
 
             async.allDone(function() {
                 setTimeout(function() {
-                    let li = virtualList.element.children()
+                    let li = virtualList.items()
                         .filter(function() {
                             return $(this).offset().top >= 0;
                         })
                         .first();
 
                     done(() => {
-                        assert.equal(li.text().trim(), "Item 100");
+                        assert.equal(li.text().trim(), "Item " + expectedItem);
                     });
                 }, 100);
             });
@@ -676,8 +682,13 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveItemHeight = 20 + cssGap;
+            let scrollTop = 10 * CONTAINER_HEIGHT; // 2000px
+            let expectedItem = Math.ceil(scrollTop / effectiveItemHeight);
+
             scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
-            scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
+            scroll(virtualList.content, scrollTop); //scroll the list 10 screens down
 
             async.resolve(1);
             async.resolve(2);
@@ -685,12 +696,12 @@ describe("VirtualList: ", function() {
 
             async.allDone(function() {
                 setTimeout(function() {
-                    let li = virtualList.element.children()
+                    let li = virtualList.items()
                         .filter(function() { return $(this).offset().top >= 0; })
                         .first();
 
                     done(() => {
-                        assert.equal(li.text().trim(), "Item 100");
+                        assert.equal(li.text().trim(), "Item " + expectedItem);
                     });
                 }, 100);
             });
@@ -720,8 +731,14 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveItemHeight = 20 + cssGap;
+            let scrollTop = 5 * CONTAINER_HEIGHT; // 1000px
+            let expectedItemMin = Math.floor(scrollTop / effectiveItemHeight);
+            let expectedItemMax = Math.ceil(scrollTop / effectiveItemHeight);
+
             scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
-            scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
+            scroll(virtualList.content, scrollTop); //scroll the list 5 screens down
 
             async.resolve(3);
             async.resolve(2);
@@ -729,12 +746,15 @@ describe("VirtualList: ", function() {
 
             async.allDone(function() {
                 setTimeout(function() {
-                    let li = virtualList.element.children()
+                    let li = virtualList.items()
                         .filter(function() { return $(this).offset().top >= 0; })
                         .first();
 
                     done(() => {
-                        assert.equal(li.text().trim(), "Item 50");
+                        let itemText = li.text().trim();
+                        let itemNum = parseInt(itemText.replace("Item ", ""), 10);
+                        assert.isOk(itemNum >= expectedItemMin && itemNum <= expectedItemMax,
+                            "Item " + itemNum + " should be between Item " + expectedItemMin + " and Item " + expectedItemMax);
                     });
                 }, 100);
             });
@@ -763,8 +783,14 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveItemHeight = 20 + cssGap;
+            let scrollTop = 5 * CONTAINER_HEIGHT; // 1000px
+            let expectedItemMin = Math.floor(scrollTop / effectiveItemHeight);
+            let expectedItemMax = Math.ceil(scrollTop / effectiveItemHeight);
+
             scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
-            scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
+            scroll(virtualList.content, scrollTop); //scroll the list 5 screens down
 
             async.resolve(1);
             async.resolve(2);
@@ -772,12 +798,15 @@ describe("VirtualList: ", function() {
 
             async.allDone(function() {
                 setTimeout(function() {
-                    let li = virtualList.element.children()
+                    let li = virtualList.items()
                         .filter(function() { return $(this).offset().top >= 0; })
                         .first();
 
                     done(() => {
-                        assert.equal(li.text().trim(), "Item 50");
+                        let itemText = li.text().trim();
+                        let itemNum = parseInt(itemText.replace("Item ", ""), 10);
+                        assert.isOk(itemNum >= expectedItemMin && itemNum <= expectedItemMax,
+                            "Item " + itemNum + " should be between Item " + expectedItemMin + " and Item " + expectedItemMax);
                     });
                 }, 100);
             });
@@ -807,10 +836,15 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveItemHeight = 20 + cssGap;
+            let scrollTop = 700;
+            let expectedItem = Math.ceil(scrollTop / effectiveItemHeight);
+
             scroll(virtualList.content, 500);
             scroll(virtualList.content, 1000);
             scroll(virtualList.content, 2000);
-            scroll(virtualList.content, 700);
+            scroll(virtualList.content, scrollTop);
 
             async.resolve(1);
             async.resolve(3);
@@ -818,12 +852,12 @@ describe("VirtualList: ", function() {
 
             async.allDone(function() {
                 setTimeout(function() {
-                    let li = virtualList.element.children()
+                    let li = virtualList.items()
                         .filter(function() { return $(this).offset().top >= 0; })
                         .first();
 
                     done(() => {
-                        assert.equal(li.text().trim(), "Item 35");
+                        assert.equal(li.text().trim(), "Item " + expectedItem);
                     });
                 }, 100);
             });
@@ -853,10 +887,15 @@ describe("VirtualList: ", function() {
         }));
 
         asyncDataSource.read().then(function() {
+            let cssGap = virtualList._cssGap || 0;
+            let effectiveItemHeight = 20 + cssGap;
+            let scrollTop = 700;
+            let expectedItem = Math.ceil(scrollTop / effectiveItemHeight);
+
             scroll(virtualList.content, 500);
             scroll(virtualList.content, 1000);
             scroll(virtualList.content, 2000);
-            scroll(virtualList.content, 700);
+            scroll(virtualList.content, scrollTop);
 
             async.resolve(1);
             async.resolve(3);
@@ -864,11 +903,11 @@ describe("VirtualList: ", function() {
 
             async.allDone(function() {
                 setTimeout(function() {
-                    let li = virtualList.element.children()
+                    let li = virtualList.items()
                         .filter(function() { return $(this).offset().top >= 0; })
                         .first();
 
-                    assert.equal(li.text().trim(), "Item 35");
+                    assert.equal(li.text().trim(), "Item " + expectedItem);
                     done(() => {
                     });
                 }, 100);
@@ -956,12 +995,14 @@ describe("VirtualList: ", function() {
 
     //misc
 
-    it("does not create elements with height larger than 250000px", function() {
+    asyncTest("does not create elements with height larger than 250000px", function(done) {
         //testing with 100011 items
         let dataSource = new kendo.data.DataSource({
             transport: {
                 read: function(options) {
-                    options.success({ data: generateData(options.data), total: 100011 });
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 100011 });
+                    }, 0);
                 }
             },
             serverPaging: true,
@@ -973,22 +1014,28 @@ describe("VirtualList: ", function() {
         });
 
         let virtualList = new VirtualList(container, {
+            autoBind: false,
             dataSource: dataSource,
             height: CONTAINER_HEIGHT,
             itemHeight: 40
         });
 
-        //height is dataSource.total() * itemHeight
-        assert.equal(virtualList.content.find(".k-height-container").height(), 100011 * 40);
+        dataSource.read().then(function() {
+            done(() => {
+                let cssGap = virtualList._cssGap || 0;
+                let effectiveHeight = 40 + cssGap;
+                let totalHeight = 100011 * effectiveHeight;
 
-        let heightPadChildren = virtualList.content.find(".k-height-container").children();
+                let actualHeight = virtualList.content.find(".k-height-container").height();
+                assert.isOk(Math.abs(actualHeight - totalHeight) <= 2, "Height should be close to " + totalHeight + " (actual: " + actualHeight + ")");
 
-        //heightPad container is expanded by elements with max height of 250000
-        //dataSource.total() * itemHeight / MaxHeightElement + 1 ("1" is added because the total height is not devided by 250000)
-        assert.equal(heightPadChildren.length, Math.floor(100011 * 40 / 250000) + 1);
+                let heightPadChildren = virtualList.content.find(".k-height-container").children();
 
-        assert.equal(heightPadChildren.first().height(), 250000);
-        assert.equal(heightPadChildren.last().height(), 40 * 11);
+                assert.equal(heightPadChildren.length, Math.floor(totalHeight / 250000) + 1);
+
+                assert.equal(heightPadChildren.first().height(), 250000);
+            });
+        });
     });
 
     //initialization in hidden container

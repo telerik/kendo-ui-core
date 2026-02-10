@@ -139,6 +139,14 @@ export const __meta__ = {
             that._tagTemplate();
             that.requireValueMapper(that.options);
             that._initList();
+            that._aria(); // Update aria-controls now that UL is available (for StaticList)
+
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
+            that.listView.bind("dataBound", function() { that._aria(); });
 
             that._reset();
             that._enable();
@@ -337,9 +345,14 @@ export const __meta__ = {
 
         _aria: function() {
             var that = this,
-                id = that.ul[0].id,
+                ul = that.ul,
+                id = ul.length ? ul[0].id : null,
                 autocomplete = this.options.filter === "none" ? "none" : "list",
                 tagListId = that.tagList.attr(ID);
+
+            if (!id) {
+                return; // UL not yet created, _aria will be called again after _initList
+            }
 
             that.input.attr({
                 "role": "combobox",
@@ -499,9 +512,9 @@ export const __meta__ = {
             var value = listView.value()[position];
             var dataItem = that.listView.selectedDataItems()[position];
             var customIndex = that._customOptions[value];
-            var listViewChildren = listView.element[0].children;
+            var listViewItems = listView.items().toArray();
             var option;
-            var listViewChild;
+            var listViewItem;
 
             if (that.trigger(DESELECT, { dataItem: dataItem, item: tag })) {
                 that._close();
@@ -537,9 +550,9 @@ export const __meta__ = {
                     listView._removedAddedIndexes.splice(position, 1);
                 }
 
-                listViewChild = listViewChildren[customIndex];
-                if (listViewChild) {
-                    listViewChildren[customIndex].classList.remove("k-selected");
+                listViewItem = listViewItems[customIndex];
+                if (listViewItem) {
+                    $(listViewItem).removeClass("k-selected");
                 }
                 if (that.options.tagMode !== "single") {
                     tag.remove();
@@ -1161,7 +1174,7 @@ export const __meta__ = {
                         if (e.ctrlKey && e.shiftKey && !that.options.virtual) {
                             that._selectRange(
                                 listView.getElementIndex(listView.focus()[0]),
-                                listView.element.children().length - 1
+                                listView.items().length - 1
                             );
                         }
                         listView.focusLast();
@@ -1224,9 +1237,11 @@ export const __meta__ = {
                 input.attr("placeholder", that.options.placeholder);
             }
 
-            if (!isActive) {
+            if (!isActive || that.options.autoClose) {
                 input.val("");
             }
+
+            that._prev = input.val();
         },
 
         _option: function(dataValue, dataText, selected) {
@@ -1522,7 +1537,7 @@ export const __meta__ = {
             listView.select(indices).done(function() {
                 indices.forEach(function(index) {
                     var dataItem = listView.dataItemByIndex(index);
-                    var candidate = listView.element.children()[index];
+                    var candidate = listView.items()[index];
                     var isSelected = $(candidate).hasClass("k-selected");
 
                     that.trigger(isSelected ? SELECT : DESELECT, { dataItem: dataItem, item: $(candidate) });

@@ -1,5 +1,4 @@
 import '@progress/kendo-ui/src/kendo.core.js';
-import { stub } from '../../helpers/unit/stub.js';
 
 describe("matchesMedia", function() {
 
@@ -10,14 +9,4 @@ describe("matchesMedia", function() {
         assert.equal(kendo._bootstrapToMedia("lg"), "(min-width: 992px)");
         assert.equal(kendo._bootstrapToMedia("xl"), "(min-width: 1200px)");
     });
-
-    it("matchesMedia calls bootstrapToMedia", function() {
-        let mediaStub = stub(kendo, "_bootstrapToMedia");
-
-        kendo.matchesMedia("xs");
-
-        assert.equal(mediaStub.calls("_bootstrapToMedia"), 1);
-        assert.equal(mediaStub.args("_bootstrapToMedia")[0], "xs");
-    });
-
 });

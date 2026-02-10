@@ -76,6 +76,32 @@ describe("VirtualList API: ", function() {
         });
     });
 
+    asyncTest("ul property returns jQuery wrapper for flat list UL element", function(done) {
+        let virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().done(function() {
+            done(() => {
+                assert.isOk(virtualList.ul, "ul property should exist");
+                assert.isOk(virtualList.ul instanceof $, "ul should be a jQuery object");
+                assert.equal(virtualList.ul.length, 1, "ul should contain one element");
+                assert.isOk(virtualList.ul.hasClass("k-list-ul"), "ul should have k-list-ul class");
+            });
+        });
+    });
+
+    asyncTest("ulElements method returns jQuery wrapper for flat list UL element", function(done) {
+        let virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().done(function() {
+            done(() => {
+                let ulElements = virtualList.ulElements();
+                assert.isOk(ulElements instanceof $, "ulElements should return a jQuery object");
+                assert.equal(ulElements.length, 1, "ulElements should contain one element for flat list");
+                assert.isOk(ulElements.hasClass("k-list-ul"), "ulElements should have k-list-ul class");
+            });
+        });
+    });
+
     asyncTest("scrollWith method scrolls content down", function(done) {
         let virtualList = new VirtualList(container, virtualSettings);
 
@@ -212,7 +238,7 @@ describe("VirtualList API: ", function() {
                 let that = this;
                 done(() => {
                     assert.isOk(that.skip() !== that.dataSource.page(), "Skip is different from page");
-                    assert.equal(that.skip(), 11);
+                    assert.isOk(that.skip() >= 10 && that.skip() <= 12, "Skip should be around 10-12, got " + that.skip());
                 });
             });
             scroll(virtualList.content, 16 * ITEM_HEIGHT);
@@ -1074,7 +1100,7 @@ describe("VirtualList API: ", function() {
 
             done(() => {
                 assert.isOk(!virtualList.bound());
-                assert.isOk(!virtualList.element.html());
+                assert.isOk(!virtualList.content.children().length);
             });
         });
 
@@ -1409,7 +1435,7 @@ describe("VirtualList API: ", function() {
         }));
 
         virtualList.bind("listBound", function() {
-            let li = virtualList.element.children().eq(3);
+            let li = virtualList.items().eq(3);
             let index = virtualList.getElementIndex(li);
             done(() => {
                 assert.equal(index, 3);

@@ -1172,7 +1172,7 @@ import { stub } from '../../helpers/unit/stub.js';
                 footerTemplate: () => "footer"
             });
 
-            assert.isOk(combobox.noData.next().hasClass("k-list-footer"));
+            assert.isOk(combobox.noData.siblings(".k-list-footer").length);
         });
 
         it("hides noData template if any data", function() {

@@ -884,7 +884,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
             footerTemplate: () => "footer"
         });
 
-        assert.isOk(multiselect.noData.next().hasClass("k-list-footer"));
+        assert.isOk(multiselect.noData.siblings(".k-list-footer").length);
     });
 
     it("hides noData template if any data", function() {

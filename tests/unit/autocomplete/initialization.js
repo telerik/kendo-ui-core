@@ -651,7 +651,7 @@ describe("kendo.ui.AutoComplete initialization", function() {
             footerTemplate: () => "footer"
         });
 
-        assert.isOk(autocomplete.noData.next().hasClass("k-list-footer"));
+        assert.isOk(autocomplete.noData.siblings(".k-list-footer").length);
     });
 
     it("hides noData template if any data", function() {

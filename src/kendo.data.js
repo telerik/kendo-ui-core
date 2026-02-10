@@ -2253,7 +2253,7 @@ export const __meta__ = {
                 that.options.requestStart(options);
             }
 
-            $.ajax(options);
+            return $.ajax(options);
         },
 
         success: function(response, options) {

@@ -15422,13 +15422,9 @@ How to customize collapse button label in Kendo UI grid details? Customize, tran
       });
     </script>
 
-### messages.commands.cancel `String`
-
-Defines the text of the "Cancel Changes" button located in the toolbar of the widget.
-
 
 <div class="meta-api-description">
-How to customize the "Cancel Changes" button caption in a Kendo UI Grid? Customize or localize the text label for the toolbar button that cancels or reverts changes in a data grid, including setting or configuring the "Cancel Changes" button caption, adjusting the cancel command text, controlling the prompt label for aborting edits, modifying the toolbar cancel action wording, and enabling different language versions or personalized messages for canceling grid modifications during data entry or editing sessions.
+How do I customize the message displayed when my Kendo UI Grid has no records? Customize or configure the notification, alert, or text displayed when a data table, list, grid, or results view contains no entries, empty rows, or zero records, enabling users to see a specific message indicating no data is available, blank datasets, or empty content by setting or controlling the no-data, empty-state, or no-results prompt in the interface when the feature to show absence of records is activated or turned on.
 </div>
 
 #### Example
@@ -15441,15 +15437,18 @@ How to customize the "Cancel Changes" button caption in a Kendo UI Grid? Customi
         { field: "age" },
         { command: ["edit", "destroy"] }
       ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      toolbar: ["create", "save", "cancel"],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        page: 2,
+        pageSize: 10
+      },
+      noRecords: true,
+      height: 200,
       messages: {
-        commands: {
-          cancel: "Cancel changes"
-        }
+        noRecords: "There is no data on current page"
       }
     });
     </script>
@@ -15488,6 +15487,7 @@ How do I customize the message displayed when my Kendo UI Grid has no records? C
       }
     });
     </script>
+
 
 ### messages.expandCollapseColumnHeader `String` *(default: "")*
 
@@ -18676,6 +18676,1753 @@ How do I adjust the layout size of my Kendo UI grid? Adjust or control the overa
     });
     </script>
 
+### smartBox `Object`
+
+<div class="meta-api-description">
+How to configure SmartBox in Kendo UI Grid? Enable and set up the SmartBox tool that combines search, semantic search, and AI assistant capabilities into a unified interface within the Grid toolbar. Configure smart search functionality, AI-powered natural language queries, and intelligent data exploration features to provide users with advanced search and AI assistant interactions for grid data.
+</div>
+
+Defines the configuration options for the SmartBox tool in the Grid. The SmartBox provides a unified interface for search, semantic search, and AI assistant capabilities.
+
+#### Example - enable SmartBox with basic configuration
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" },
+        { field: "UnitsInStock" }
+      ],
+      dataSource: {
+        transport: {
+          read: {
+            url: "https://demos.telerik.com/service/v2/core/products"
+          }
+        },
+        pageSize: 10
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "Search",
+        placeholder: "Search or ask AI...",
+        searchSettings: {
+          enabled: true
+        }
+      }
+    });
+    </script>
+
+### smartBox.activeMode `String`
+
+<div class="meta-api-description">
+How to set the default mode in SmartBox? Configure which mode is initially active when the SmartBox popup opens, choosing between Search, SemanticSearch, or AIAssistant modes. Control the starting search interface, set default AI mode, or specify the initial search type that users see when interacting with the SmartBox tool.
+</div>
+
+The mode which will be initially selected when the SmartBox popup is opened. If not provided, defaults to the first enabled mode. The available modes are:
+
+- `"Search"` - Standard text-based search mode.
+- `"SemanticSearch"` - AI-powered semantic search mode.
+- `"AIAssistant"` - AI assistant mode for natural language queries.
+
+#### Example - set the active mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.placeholder `String`
+
+The unified placeholder text of the SmartBox input independent of the activated mode.
+
+#### Example - set the placeholder
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        placeholder: "Search products or ask a question..."
+      }
+    });
+    </script>
+
+### smartBox.history `Boolean|Object` *(default: false)*
+
+Sets the settings for the history queries of all modes. When set to `true`, enables history with default settings. Can be set to an object to customize the history behavior.
+
+#### Example - enable history
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        history: true
+      }
+    });
+    </script>
+
+### smartBox.history.size `Number` *(default: 5)*
+
+Specifies the maximum number of history queries that will be rendered.
+
+#### Example - set history size
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        history: {
+          size: 10
+        }
+      }
+    });
+    </script>
+
+### smartBox.history.timestampFormat `String`
+
+Specifies the date format that is used to display the history queries timestamps.
+
+#### Example - set history timestamp format
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        history: {
+          size: 5,
+          timestampFormat: "yyyy-MM-dd HH:mm"
+        }
+      }
+    });
+    </script>
+
+### smartBox.suggestionTemplate `Function`
+
+Represents the template for a suggestion in the SmartBox component AI Assistant mode.
+
+#### Example - set a custom suggestion template
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        suggestionTemplate: (dataItem) => `<span class="suggestion-item">${dataItem.suggestion}</span>`,
+        aiAssistantSettings: {
+          enabled: true,
+          promptSuggestions: ["Show top products", "Calculate average price"]
+        }
+      }
+    });
+    </script>
+
+### smartBox.historyItemTemplate `Function`
+
+Represents the template for a history query in the SmartBox component.
+
+#### Example - set a custom history item template
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        history: true,
+        historyItemTemplate: (dataItem) => `<div class="history-item"><span class="query">${dataItem.query}</span><span class="time">${kendo.toString(dataItem.timestamp, dataItem.timestampFormat)}</span></div>`
+      }
+    });
+    </script>
+
+### smartBox.searchSettings `Object`
+
+Configures the initial settings for the Search mode.
+
+#### Example - configure search settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          enabled: true,
+          placeholder: "Search products...",
+          delay: 500
+        }
+      }
+    });
+    </script>
+
+### smartBox.searchSettings.enabled `Boolean` *(default: true)*
+
+Enables or disables the Search mode in the SmartBox.
+
+#### Example - disable search mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          enabled: false
+        },
+        semanticSearchSettings: {
+          enabled: true
+        }
+      }
+    });
+    </script>
+
+### smartBox.searchSettings.placeholder `String`
+
+The placeholder of the input in Search mode.
+
+#### Example - set search placeholder
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          placeholder: "Type to search products..."
+        }
+      }
+    });
+    </script>
+
+### smartBox.searchSettings.delay `Number` *(default: 300)*
+
+Determines the delay in milliseconds between the user typing a new search value and the component emitting the **search** event.
+
+#### Example - set search delay
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          delay: 500
+        }
+      }
+    });
+    </script>
+
+### smartBox.searchSettings.history `Boolean|Object`
+
+Sets the settings for the history queries in Search mode. Overrides the global `smartBox.history` setting for this mode.
+
+#### Example - configure search history
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          history: {
+            size: 10
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.searchSettings.history.size `Number` *(default: 5)*
+
+Specifies the maximum number of history queries that will be rendered in Search mode.
+
+#### Example - set search history size
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          history: {
+            size: 10
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.searchSettings.history.timestampFormat `String`
+
+Specifies the date format that is used to display the history queries timestamps in Search mode.
+
+#### Example - set search history timestamp format
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        searchSettings: {
+          history: {
+            timestampFormat: "yyyy-MM-dd HH:mm"
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings `Object`
+
+Configures the initial settings for the Semantic Search mode.
+
+#### Example - configure semantic search settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        semanticSearchSettings: {
+          enabled: true,
+          placeholder: "Describe what you're looking for..."
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings.enabled `Boolean` *(default: false)*
+
+Enables or disables the Semantic Search mode in the SmartBox.
+
+#### Example - enable semantic search mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "SemanticSearch",
+        semanticSearchSettings: {
+          enabled: true
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings.placeholder `String`
+
+The placeholder of the input in Semantic Search mode.
+
+#### Example - set semantic search placeholder
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "SemanticSearch",
+        semanticSearchSettings: {
+          enabled: true,
+          placeholder: "Describe what you're looking for..."
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings.delay `Number` *(default: 300)*
+
+Determines the delay in milliseconds between the user typing a new search value and the component emitting the **semanticSearch** event.
+
+#### Example - set semantic search delay
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "SemanticSearch",
+        semanticSearchSettings: {
+          enabled: true,
+          delay: 500
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings.history `Boolean|Object`
+
+Sets the settings for the history queries in Semantic Search mode. Overrides the global `smartBox.history` setting for this mode.
+
+#### Example - configure semantic search history
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "SemanticSearch",
+        semanticSearchSettings: {
+          enabled: true,
+          history: {
+            size: 8
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings.history.size `Number` *(default: 5)*
+
+Specifies the maximum number of history queries that will be rendered in Semantic Search mode.
+
+#### Example - set semantic search history size
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "SemanticSearch",
+        semanticSearchSettings: {
+          enabled: true,
+          history: {
+            size: 10
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearchSettings.history.timestampFormat `String`
+
+Specifies the date format that is used to display the history queries timestamps in Semantic Search mode.
+
+#### Example - set semantic search history timestamp format
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "SemanticSearch",
+        semanticSearchSettings: {
+          enabled: true,
+          history: {
+            timestampFormat: "yyyy-MM-dd HH:mm"
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings `Object`
+
+Configures the initial settings for the AI Assistant mode.
+
+#### Example - configure AI assistant settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+          promptSuggestions: ["Show top products", "Calculate average price"]
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.enabled `Boolean` *(default: false)*
+
+Enables or disables the AI Assistant mode in the SmartBox.
+
+#### Example - enable AI assistant mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.placeholder `String`
+
+The placeholder of the input in AI Assistant mode.
+
+#### Example - set AI assistant placeholder
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        aiAssistantSettings: {
+          enabled: true,
+          activeMode: "AIAssistant",
+          placeholder: "Ask me anything about your data...",
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.promptSuggestions `Array`
+
+A list of prompts to be suggested to the user in AI Assistant mode.
+
+#### Example - set prompt suggestions
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          promptSuggestions: [
+            "Show me the most expensive products",
+            "Which products have low stock?",
+            "Calculate the average unit price"
+          ],
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.history `Boolean|Object`
+
+Sets the settings for the history queries in AI Assistant mode. Overrides the global `smartBox.history` setting for this mode.
+
+#### Example - configure AI assistant history
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          history: {
+            size: 15
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.history.size `Number` *(default: 5)*
+
+Specifies the maximum number of history queries that will be rendered in AI Assistant mode.
+
+#### Example - set AI assistant history size
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          history: {
+            size: 10
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.history.timestampFormat `String`
+
+Specifies the date format that is used to display the history queries timestamps in AI Assistant mode.
+
+#### Example - set AI assistant history timestamp format
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          history: {
+            timestampFormat: "yyyy-MM-dd HH:mm"
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.service `String|Object`
+
+String value represents the URL to which the SmartBox tool sends the AI request. When you set this property, the SmartBox tool sends and handles an HTTP request to the provided URL. You can handle the `smartBoxAIAssistantPromptRequest` event to modify the request options before the tool sends it.
+
+The object configuration enables the user to set specific headers configuration and send additional data with the AI request.
+
+When `service` is not configured, the SmartBox tool does not send an HTTP request. You should handle the `smartBoxAIAssistantPromptRequest` event to send and handle a custom HTTP request.
+
+#### Example - set service as URL string
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+#### Example - set service as object with headers
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        aiAssistantSettings: {
+          enabled: true,
+          activeMode: "AIAssistant",
+          service: {
+            url: "https://demos.telerik.com/service/v2/ai/grid/smart-state",
+            headers: {
+              "Authorization": "Bearer your-api-key",
+              "Content-Type": "application/json"
+            },
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.service.url `String`
+
+The URL of the AI service to send requests to.
+
+#### Example - set service URL
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: {
+            url: "https://your-ai-service.com/api/query"
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.service.headers `Object`
+
+The headers to send with the AI service request.
+
+#### Example - set service headers
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: {
+            url: "https://your-ai-service.com/api/query",
+            headers: {
+              "Authorization": "Bearer your-api-key"
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.service.data `Object|Function`
+
+The data to send with the AI service request. Can be an object or a function that returns the data.
+
+#### Example - set service data
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: {
+            url: "https://your-ai-service.com/api/query",
+            data: (prompt) => ({
+              prompt: prompt,
+              model: "gpt-4",
+              temperature: 0.7
+            })
+          }
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.speechToTextButton `Boolean|Object` *(default: false)*
+
+Sets the settings for the Speech to Text button in AI Assistant mode. When set to `true`, enables speech-to-text with default settings.
+
+#### Example - enable speech to text button
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+
+#### Example - configure speech to text with custom settings
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: {
+            integrationMode: "webSpeech",
+            lang: "en-US",
+            continuous: false,
+            interimResults: true,
+            maxAlternatives: 1
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.speechToTextButton.integrationMode `String` *(default: "webSpeech")*
+
+Specifies the integration mode for speech recognition. Available modes:
+- `"webSpeech"` - Uses the Web Speech API for browser-based speech recognition.
+- `"none"` - Provides the microphone button without actual speech recognition, useful when handling speech input manually.
+
+#### Example - set integration mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: {
+            integrationMode: "webSpeech"
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.speechToTextButton.lang `String` *(default: "en-US")*
+
+Specifies the language code for speech recognition. Uses BCP-47 language tags (e.g., "en-US", "es-ES", "fr-FR", "de-DE").
+
+#### Example - set language for Spanish speech recognition
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: {
+            lang: "es-ES"
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.speechToTextButton.continuous `Boolean` *(default: false)*
+
+Specifies whether to continue listening after a result is received. When `true`, the speech recognition continues until explicitly stopped. When `false`, recognition stops after the first result.
+
+#### Example - enable continuous speech recognition
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: {
+            continuous: true
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.speechToTextButton.interimResults `Boolean` *(default: false)*
+
+Specifies whether to return interim results during speech recognition. When `true`, partial transcriptions are displayed as the user speaks, providing real-time feedback.
+
+#### Example - enable interim results for live transcription
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: {
+            interimResults: true
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantSettings.speechToTextButton.maxAlternatives `Number` *(default: 1)*
+
+Specifies the maximum number of alternative transcriptions to return from speech recognition. Higher values provide more options but may increase processing overhead.
+
+#### Example - set maximum alternatives
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          speechToTextButton: {
+            maxAlternatives: 3
+          },
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        }
+      }
+    });
+    </script>
+
+
+### smartBox.search
+
+Fired when the user performs a search in the SmartBox Search mode. Calling `e.preventDefault()` will prevent the default search behavior.
+
+#### Example - handle search event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        search: function(e) {
+          console.log("Search value:", e.searchValue);
+        }
+      }
+    });
+    </script>
+
+### smartBox.semanticSearch
+
+Fired when the user performs a search in the SmartBox Semantic Search mode. Use this event to handle semantic search requests with your AI service.
+
+#### Example - handle semantic search event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        semanticSearchSettings: {
+          enabled: true
+        },
+        semanticSearch: function(e) {
+          console.log("Semantic search value:", e.searchValue);
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantPromptRequest
+
+Fired before the SmartBox sends a prompt request to the AI service in AI Assistant mode. Calling `e.preventDefault()` will prevent the request from being sent.
+
+#### Example - handle AI prompt request event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        },
+        aiAssistantPromptRequest: function(e) {
+          console.log("Prompt:", e.prompt);
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantResponseSuccess
+
+Fired when the AI service returns a successful response in AI Assistant mode. Calling `e.preventDefault()` will prevent the default response handling.
+
+#### Example - handle AI response success event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        },
+        aiAssistantResponseSuccess: function(e) {
+          console.log("AI Response:", e.response);
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantResponseError
+
+Fired when the AI service returns an error in AI Assistant mode.
+
+#### Example - handle AI response error event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        },
+        aiAssistantResponseError: function(e) {
+          console.log("AI Error:", e.error);
+        }
+      }
+    });
+    </script>
+
+### smartBox.aiAssistantCancelRequest
+
+Fired when the user cancels an ongoing AI request in AI Assistant mode.
+
+#### Example - handle AI cancel request event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        activeMode: "AIAssistant",
+        aiAssistantSettings: {
+          enabled: true,
+          service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
+        },
+        aiAssistantCancelRequest: function(e) {
+          console.log("AI request cancelled");
+        }
+      }
+    });
+    </script>
+
+### smartBox.open
+
+Fired when the SmartBox popup opens.
+
+#### Example - handle SmartBox open event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        open: function(e) {
+          console.log("SmartBox popup opened");
+        }
+      }
+    });
+    </script>
+
+### smartBox.close
+
+Fired when the SmartBox popup closes.
+
+#### Example - handle SmartBox close event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        close: function(e) {
+          console.log("SmartBox popup closed");
+        }
+      }
+    });
+    </script>
+
+### smartBox.focus
+
+Fired when the SmartBox input receives focus.
+
+#### Example - handle SmartBox focus event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        focus: function(e) {
+          console.log("SmartBox focused");
+        }
+      }
+    });
+    </script>
+
+### smartBox.blur
+
+Fired when the SmartBox input loses focus.
+
+#### Example - handle SmartBox blur event
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "ProductName" },
+        { field: "UnitPrice" }
+      ],
+      dataSource: {
+        data: [
+          { ProductName: "Tea", UnitPrice: 10 },
+          { ProductName: "Coffee", UnitPrice: 15 }
+        ]
+      },
+      search: {
+        fields: [{ name: "ProductName", operator: "contains" }]
+      },
+      toolbar: ["smartBox"],
+      smartBox: {
+        blur: function(e) {
+          console.log("SmartBox lost focus");
+        }
+      }
+    });
+    </script>
+
 ### sortable `Boolean|Object` *(default: false)*
 
 If set to `true` the user could sort the grid by clicking the column header cells. By default sorting is disabled.
@@ -19118,6 +20865,10 @@ The "columnChooser" command enables the user to change the visibillity of the gr
 
 The "selectAll" command enables the user to select all rows if the grid is `selectable`. Requires enabled checkbox selection and multiple row selection.
 
+The "aiAssistant" command renders the AI assistant tool in the toolbar.
+
+The "smartBox" command renders the smart search box tool in the toolbar.
+
 * If an `Object` value is assigned, it will propagate these properties to the underlying Toolbar:
   * `items` - an array of commands as explained above
   * `overflow` - an object that configures the overflow behavior of the toolbar. The same as [`Toolbar.overflow`](/api/javascript/ui/toolbar/configuration/overflow) property
@@ -19304,6 +21055,10 @@ An array collection of items to be rendered in the toolbar. Each item will be tr
 - The "columnChooser" command enables the user to change the visibillity of the grid's columns.
 
 - The "selectAll" command enables the user to select all rows if the grid is `selectable`.
+
+- The "aiAssistant" command renders the AI assistant tool in the toolbar.
+
+- The "smartBox" command renders the smart search box tool in the toolbar.
 
 
 <div class="meta-api-description">

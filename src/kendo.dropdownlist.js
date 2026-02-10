@@ -118,8 +118,18 @@ export const __meta__ = {
 
             that.requireValueMapper(that.options);
             that._initList();
+            that._aria(); // Update aria-controls now that UL is available (for StaticList)
+
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls again
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
             that.listView.one("dataBound", that._attachAriaActiveDescendant.bind(that));
-            that.listView.bind("dataBound", () => that._refreshFloatingLabel());
+            that.listView.bind("dataBound", () => {
+                that._refreshFloatingLabel();
+                that._aria();
+            });
 
             that._cascade();
 
@@ -1279,7 +1289,6 @@ export const __meta__ = {
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
-                    rounded: "none"
                 });
 
                 wrapper.append('<span id="' + id + '" unselectable="on" class="k-input-inner">' +
@@ -1336,7 +1345,8 @@ export const __meta__ = {
                 e.preventDefault();
             } else {
                 this.wrapper.attr("aria-expanded", true);
-                this.ul.attr("aria-hidden", false);
+                const ulElements = this.list.find(".k-list-ul");
+                ulElements.attr("aria-hidden", false);
             }
         },
 
@@ -1345,7 +1355,8 @@ export const __meta__ = {
                 e.preventDefault();
             } else {
                 this.wrapper.attr("aria-expanded", false);
-                this.ul.attr("aria-hidden", true);
+                const ulElements = this.list.find(".k-list-ul");
+                ulElements.attr("aria-hidden", true);
             }
         },
 

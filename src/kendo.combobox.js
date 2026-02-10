@@ -102,6 +102,13 @@ export const __meta__ = {
             that.requireValueMapper(that.options);
             that._initList();
 
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
+            that.listView.bind("dataBound", function() { that._aria(); });
+
             that._cascade();
 
             if (options.autoBind) {
@@ -457,7 +464,7 @@ export const __meta__ = {
             var that = this;
             var state = that._state;
             var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
-            var reinitialized = !that.ul.find(that.listView.focus()).length;
+            var reinitialized = !that._getUlElement().find(that.listView.focus()).length;
 
             if (that.popup.visible()) {
                 return;
@@ -794,7 +801,7 @@ export const __meta__ = {
 
             if (typeof word !== "string") {
                 if (word[0]) {
-                    word = that.dataSource.view()[List.inArray(word[0], that.ul[0])];
+                    word = that.dataSource.view()[List.inArray(word[0], that._getUlElement()[0])];
                 }
 
                 word = word ? that._text(word) : "";
@@ -1007,7 +1014,8 @@ export const __meta__ = {
                 word = word.toLowerCase();
             }
 
-            if (!that.ul[0].firstChild) {
+            const ulElement = that._getUlElement();
+            if (!ulElement.length || !ulElement[0].firstChild) {
                 dataSource.one(CHANGE, function() {
                     if (dataSource.view()[0]) {
                         that.search(word);
@@ -1057,7 +1065,6 @@ export const __meta__ = {
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
-                    rounded: "none",
                 });
 
                 wrapper.append('<input ' + name + 'class="k-input-inner" type="text" autocomplete="' + AUTOCOMPLETEVALUE + '"/>')

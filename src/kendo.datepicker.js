@@ -748,7 +748,6 @@ var __meta__ = {
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
-                    rounded: "none"
                 })).insertAfter(element);
             }
 

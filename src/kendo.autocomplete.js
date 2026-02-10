@@ -129,6 +129,13 @@ export const __meta__ = {
 
             that._initList();
 
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
+            that.listView.bind("dataBound", function() { that._aria(); });
+
             disabled = $(that.element).parents("fieldset").is(':disabled');
 
             if (disabled) {

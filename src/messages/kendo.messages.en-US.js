@@ -1513,6 +1513,31 @@ $.extend(true, kendo.spreadsheet.messages.view,{
 });
 }
 
+if (kendo.ui.SmartBox) {
+kendo.ui.SmartBox.prototype.options.messages =
+$.extend(true, kendo.ui.SmartBox.prototype.options.messages,{
+  noPreviousSearches: "No previous searches",
+  noPreviousPrompts: "No previous prompts",
+  previousSearches: "Previously Searched",
+  previousPrompts: "Previously Asked",
+  suggestedPrompts: "Suggested Prompts",
+  searchModeLabel: "Search",
+  searchModeDescription: "Looks for exact word matches across your data",
+  searchPlaceholder: "Search",
+  semanticSearchModeLabel: "Semantic Search",
+  semanticSearchModeDescription: "Understands context to surface the most relevant results.",
+  semanticSearchPlaceholder: "Semantic Search",
+  semanticSearchButtonText: "Search",
+  aiAssistantPlaceholder: "Sort, filter or group with AI",
+  speechToText: "Speech to text",
+  speechToTextAriaLabel: "Start speech recognition",
+  cancel: "Cancel",
+  send: "Send",
+  searchButtonText: "Search",
+  aiAssistantButtonText: "AI Assistant",
+});
+}
+
 /* Slider messages */
 
 if (kendo.ui.Slider) {

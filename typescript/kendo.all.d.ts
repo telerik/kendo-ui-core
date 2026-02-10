@@ -7887,6 +7887,91 @@ declare namespace kendo.ui {
         aiAssistantWindow?: WindowOptions | undefined;
     }
 
+    interface GridSmartBoxHistorySettings {
+        size?: number | undefined;
+        timestampFormat?: string | undefined;
+    }
+
+    interface GridSmartBoxSearchSettings {
+        enabled?: boolean | undefined;
+        placeholder?: string | undefined;
+        delay?: number | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+        dataSource?: kendo.data.DataSource | undefined;
+    }
+
+    interface GridSmartBoxSemanticSearchSettings {
+        enabled?: boolean | undefined;
+        placeholder?: string | undefined;
+        delay?: number | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+    }
+
+    interface GridSmartBoxAIAssistantServiceSettings {
+        url?: string | undefined;
+        headers?: any | undefined;
+        data?: any | Function | undefined;
+    }
+
+    interface GridSmartBoxAIAssistantSettings {
+        enabled?: boolean | undefined;
+        placeholder?: string | undefined;
+        promptSuggestions?: string[] | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+        service?: string | GridSmartBoxAIAssistantServiceSettings | undefined;
+        speechToTextButton?: boolean | SpeechToTextButtonOptions | undefined;
+    }
+
+    interface SmartBoxEvent {
+        isDefaultPrevented?: function,
+        preventDefault?: function;
+        sender?: kendo.ui.Widget;
+        _defaultPrevented?: boolean;
+    }
+
+    interface GridSmartBoxRequestEvent  extends SmartBoxEvent {
+        prompt?: string;
+        service?: string | GridSmartBoxAIAssistantServiceSettings | undefined;
+        history?: string[];
+    }
+
+    interface GridSmartBoxResponseSuccessEvent extends SmartBoxEvent{
+        response?: any | GridAIResponse;
+        prompt?: string;
+        service?: string | GridSmartBoxAIAssistantServiceSettings | undefined;
+    }
+
+    interface GridSmartBoxResponseErrorEvent extends SmartBoxEvent {
+        error?: any;
+    }
+
+
+    interface GridSmartBoxSearchEvent extends SmartBoxEvent {
+        searchValue?: string;
+    }
+
+
+    interface GridSmartBoxOptions {
+        activeMode?: string | undefined;
+        placeholder?: string | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+        suggestionTemplate?: string | Function | undefined;
+        historyItemTemplate?: string | Function | undefined;
+        searchSettings?: GridSmartBoxSearchSettings | undefined;
+        semanticSearchSettings?: GridSmartBoxSemanticSearchSettings | undefined;
+        aiAssistantSettings?: GridSmartBoxAIAssistantSettings | undefined;
+        open: (e: PopupOpenEvent) => void;
+        close: (e: PopupCloseEvent) => void;
+        focus: (e: Event) => void;
+        blur: (e: Event) => void;
+        aiAssistantPromptRequest: (e: GridSmartBoxRequestEvent) => void;
+        aiAssistantResponseSuccess: (e: GridSmartBoxResponseSuccessEvent) => void;
+        aiAssistantResponseError: (e: GridSmartBoxResponseErrorEvent) => void;
+        aiAssistantCancelRequest: (e: SmartBoxEvent) => void;
+        search: (e: GridSmartBoxSearchEvent) => void;
+        semanticSearch: (e: GridSmartBoxSearchEvent) => void;
+    }
+
     interface GridOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
@@ -7922,6 +8007,7 @@ declare namespace kendo.ui {
         search?: GridSearch | undefined;
         selectable?: boolean|string|GridSelectableOptions | undefined;
         size?: string | undefined;
+        smartBox?: GridSmartBoxOptions | undefined;
         sortable?: boolean | GridSortable | undefined;
         toolbar?: string | Function | GridToolbarOptions | (string | GridToolbarItem)[] | ToolBarItem[] | undefined;
         width?: number|string | undefined;
