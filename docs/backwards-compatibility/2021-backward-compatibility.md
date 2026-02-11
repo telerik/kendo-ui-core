@@ -4,7 +4,7 @@ page_title: 2021 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2021."
 slug: breakingchanges2021_kendoui
 components: ["general"]
-position: 4
+position: 5
 ---
 
 # 2021 Releases

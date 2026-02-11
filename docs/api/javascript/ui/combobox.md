@@ -1876,7 +1876,7 @@ How to map preselected values in Kendo UI ComboBox with remote data? Handle and 
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -1945,7 +1945,7 @@ How to map preselected values in Kendo UI ComboBox with remote data? Handle and 
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];

@@ -85,4 +85,38 @@ describe("kendo.ui.StaticList API", function() {
         assert.equal(list.items().first().find("span").length, 2);
     });
 
+    it("ul element should have k-table-list class when columns are defined", function() {
+        let list = new StaticList(element, {
+            columns: [
+                { field: "name" },
+                { field: "id" }
+            ],
+            dataTextField: "name",
+            dataSource: [{ id: 1, name: "item1" },
+            { id: 2, name: "item2" },
+            { id: 3, name: "item3" }]
+        });
+
+        list.dataSource.read();
+
+        let ul = list.content.find("ul");
+        assert.isOk(ul.hasClass("k-table-list"), "ul should have k-table-list class when columns are defined");
+        assert.isNotOk(ul.hasClass("k-list-ul"), "ul should NOT have k-list-ul class when columns are defined");
+    });
+
+    it("ul element should have k-list-ul class when no columns are defined", function() {
+        let list = new StaticList(element, {
+            dataTextField: "name",
+            dataSource: [{ id: 1, name: "item1" },
+            { id: 2, name: "item2" },
+            { id: 3, name: "item3" }]
+        });
+
+        list.dataSource.read();
+
+        let ul = list.content.find("ul");
+        assert.isOk(ul.hasClass("k-list-ul"), "ul should have k-list-ul class when no columns are defined");
+        assert.isNotOk(ul.hasClass("k-table-list"), "ul should NOT have k-table-list class when no columns are defined");
+    });
+
 });

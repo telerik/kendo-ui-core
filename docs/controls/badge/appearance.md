@@ -41,6 +41,8 @@ The following example demonstrates the `rounded` option of the Badge:
 
 The Badge allows you to specify predefined theme colors.
 
+> Starting with the [**2026 Q1**](slug:breakingchanges2026_kendoui) release, the Badge component renders with the `primary` appearance by default. Because appearance defaults are now theme-controlled, the `themeColor` option will be `undefined` when not set, but the theme applies the primary styling. To preserve the previous (secondary) look, explicitly set `themeColor: 'secondary'`.
+
 The available [themeColor](/api/javascript/ui/badge/configuration/themeColor) values are:
 
 - "primary" (Default)—Applies coloring based on the primary theme color.

@@ -1915,7 +1915,7 @@ How do I optimize large list performance in Kendo UI MultiSelect inputs? Optimiz
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -1984,7 +1984,7 @@ How do I optimize large list performance in Kendo UI MultiSelect inputs? Optimiz
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -2058,7 +2058,7 @@ How to set uniform height for items in Kendo UI MultiSelect virtual list? Adjust
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -2161,7 +2161,7 @@ How do I map selected values to item indexes in Kendo UI MultiSelect with virtua
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];

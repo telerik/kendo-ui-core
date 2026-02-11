@@ -1696,7 +1696,7 @@ How to map selected values to data indexes in Kendo UI DropDownList with virtual
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -1764,7 +1764,7 @@ How to map selected values to data indexes in Kendo UI DropDownList with virtual
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];

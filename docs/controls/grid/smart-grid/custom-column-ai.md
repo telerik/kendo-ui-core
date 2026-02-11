@@ -1,9 +1,9 @@
 ---
-title: Custom AI Column in Kendo UI for jQuery Grid
+title: AI Custom Column Assistant
 description: "Learn how to integrate the InlineAIPrompt component in the Kendo UI for jQuery Grid to interact with your data using natural language prompts."
 components: ["grid"]
 slug: custom_ai_column_kendoui_grid
-position: 2
+position: 7
 ---
 
 

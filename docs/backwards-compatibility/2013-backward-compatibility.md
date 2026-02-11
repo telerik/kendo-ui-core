@@ -5,7 +5,7 @@ description: "Learn about the breaking changes and backwards compatibility relea
 previous_url: /backwards-compatibility/2013/2013-backward-compatibility
 slug: breakingchanges2013_kendoui
 components: ["general"]
-position: 12
+position: 13
 ---
 
 # 2013 Releases

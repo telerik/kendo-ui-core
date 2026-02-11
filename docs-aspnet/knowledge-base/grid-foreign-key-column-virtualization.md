@@ -61,7 +61,7 @@ The virtual ComboBox and DropDownList usually have server operations, however th
         function convertValues(value) {
             var data = [];
     
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
     
             for (var idx = 0; idx < value.length; idx++) {
                 data.push(value[idx]);

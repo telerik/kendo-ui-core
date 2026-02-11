@@ -1496,7 +1496,7 @@ How to enable virtual scrolling in Kendo UI Autocomplete for large datasets? Con
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -1640,7 +1640,7 @@ How do I map virtual item indexes to server-side identifiers in Kendo UI Autocom
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];

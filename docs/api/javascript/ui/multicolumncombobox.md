@@ -2414,7 +2414,7 @@ How do I map selected values to their corresponding data indexes in a Kendo UI M
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -2487,7 +2487,7 @@ How do I map selected values to their corresponding data indexes in a Kendo UI M
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];

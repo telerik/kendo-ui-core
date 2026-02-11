@@ -685,13 +685,13 @@ meta:
     position: 29
   html-helpers/data-management/grid/smart-grid:
     title: Smart Grid
-    position: 30
+    position: 4
   html-helpers/data-management/grid/troubleshoot:
     title: Troubleshooting
     position: 31
   html-helpers/data-management/grid/appearance:
     title: Appearance
-    position: 4
+    position: 6
   html-helpers/data-management/grid/templates:
     title: Templates
     position: 22
@@ -703,13 +703,13 @@ meta:
     position: 10
   html-helpers/data-management/grid/columns:
     title: Columns
-    position: 3
+    position: 5
   html-helpers/data-management/grid/grouping:
     title: Grouping
     position: 7
   html-helpers/data-management/grid/editing:
     title: Editing
-    position: 5
+    position: 3
   html-helpers/data-management/grid:
     title: Grid
   html-helpers/data-management/filter:

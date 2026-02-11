@@ -1,387 +1,500 @@
 ---
-title: AI Toolbar Assistant
-description: "Learn how to use the AI Assistant Toolbar Tool in the Telerik UI for Grid for {{ site.framework }} to interact with your data using natural language prompts."
-components: ["grid"]
+title: AI Smart Box
+description: "Learn how to use the AI Smart Box in the {{ site.framework }} Grid to provide unified search, semantic search, and AI-powered interactions in a single toolbar control."
 slug: ai_toolbar_tool_core_grid
-position: 1
+position: 3
+components: ["grid"]
+tag: new
 ---
 
-#  Core Data Grid AI Toolbar Assistant
+# {{ site.framework }} Data Grid AI Smart Box
 
-The Telerik UI Grid provides a built-in AI Assistant toolbar tool that allows users to interact with the Grid using natural language prompts. Use this feature to enable your end users to perform complex data operations like sorting, filtering, grouping, and highlighting without having to use the specific UI controls.
+The [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) AI Smart Box is a versatile toolbar tool that unifies search and AI capabilities in a single interface. It offers three distinct modes that you can enable independently or in combination to provide flexible data exploration for your users.
 
-The AI Assistant interprets user requests and automatically applies the corresponding Grid operations, making data exploration more intuitive and accessible. The toolbar integrates an [AIPrompt]({% slug htmlhelpers_overview_aiprompt %}) component that enables natural language interaction with your custom AI service.
+The AI Smart Box allows users to explore Grid data through traditional keyword search, semantic search that understands meaning and context, or AI-powered natural language commands.
 
-## AI Assistant Tool Basic Set Up
+For a runnable example demonstrating the Smart Box functionalities, refer to the [AI Smart Box Demo](https://demos.telerik.com/aspnet-core/grid/ai-smartbox).
 
-> The desired data operations ([`Filterable`](https://www.telerik.com/{{ site.platform }}/documentation/api/kendo.mvc.ui.fluent/gridbuilder#filterable), [`Sortable`](https://www.telerik.com/{{ site.platform }}/documentation/api/kendo.mvc.ui.fluent/gridbuilder#sortable), [`Groupable`](https://www.telerik.com/{{ site.platform }}/documentation/api/kendo.mvc.ui.fluent/gridbuilder#groupable)) must be enabled for the Grid, so that the AI Assistant can perform them on the Grid data.
 
-To configure the Grid's AI Assistant toolbar tool:
+## Implementation Steps
 
-1. Set up data binding in the Grid and enable the required data operations that the AI must control:
+To configure the Grid's AI Smart Box:
 
-    ```HtmlHelper
-    @(Html.Kendo().Grid<PatientRecord>()
-      .Name("grid")
-      .Filterable()
-      .Groupable()
-      .Sortable()
-      ... // Additional configuration options.
+1. Configure the Grid toolbar with the AI Smart Box tool:
+
+```HtmlHelper AI Smart Box Razor
+    @(
+            Html.Kendo().Grid<EcommerceProduct>()
+                    .Name("grid")
+                    .ToolBar(toolbar => { toolbar.SmartBox(); })
+                    .DataSource(ds => ds.Ajax().Read(r => r.Action("ECommerceProducts_Read", "Grid")))
     )
-    ```
-    {% if site.core %}
-    ```TagHelper
+```
+{% if site.core %}
+```TagHelper AI Smart Box TagHelper
+    @addTagHelper *, Kendo.Mvc
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="smartBox"></toolbar-button>
+        </toolbar>
+        <data-source>
+            <transport>
+                <read url="/Grid/ECommerceProducts_Read" />
+            </transport>
+        </data-source>
+    </kendo-grid>
+```
+{% endif %}
+
+2. Enable the modes you want to show in the AI Smart Box using the `SearchSettings`, `SemanticSearchSettings`, and `SiAssistantSettings` options:
+
+```HtmlHelper
+    @(
+            Html.Kendo().Grid<EcommerceProduct>()
+                    .Name("grid")
+                    .ToolBar(toolbar => { toolbar.SmartBox(); })
+                    .SmartBox(sb => sb
+                            .SearchSettings(s => s.Enabled(true))
+                            .SemanticSearchSettings(s => s.Enabled(true))
+                            .AiAssistantSettings(a => a.Enabled(true)))
+                    .DataSource(ds => ds.Ajax().Read(r => r.Action("ECommerceProducts_Read", "Grid")))
+    )
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="smartBox"></toolbar-button>
+        </toolbar>
+        <smart-box>
+            <search-settings enabled="true" />
+            <semantic-search-settings enabled="true" />
+            <ai-assistant-settings enabled="true" />
+        </smart-box>
+        <data-source>
+            <transport>
+                <read url="/Grid/ECommerceProducts_Read" />
+            </transport>
+        </data-source>
+    </kendo-grid>
+```
+{% endif %}
+
+> Search mode applies filters automatically to the Grid DataSource. You can optionally handle the `search` eventto customize the default search behavior.
+
+
+3. Configure the `Service.Url` property for AI Assistant mode to point to your AI service endpoint:
+
+```HtmlHelper
+    @(
+         Html.Kendo().Grid<EcommerceProduct>()
+                 .Name("grid")
+                 .ToolBar(toolbar => { toolbar.SmartBox(); })
+                 .SmartBox(sb => sb.Events(e => e.SemanticSearch("onSemanticSearch"))
+                         .SearchSettings(s => s.Enabled(true))
+                         .SemanticSearchSettings(ss => ss.Enabled(true))
+                         .AiAssistantSettings(ai => ai
+                             .Service(s => s.Url("https://demos.telerik.com/service/v2/ai/grid/smart-state")))
+                 )
+                 .DataSource(ds => ds.Ajax().Read(r => r.Action("ECommerceProducts_Read", "Grid")))
+    )
+```
+{% if site.core %}
+```TagHelper
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-grid name="grid">
+            <toolbar>
+                <toolbar-button name="smartBox"></toolbar-button>
+            </toolbar>
+            <smart-box>
+                <semantic-search-settings enabled="true" />
+                <search-settings enabled="true" />
+                <ai-assistant-settings>
+                    <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+                </ai-assistant-settings>
+                <events on-semantic-search="onSemanticSearch" />
+            </smart-box>
+            <data-source>
+                <transport>
+                    <read url="/Grid/ECommerceProducts_Read" />
+                </transport>
+            </data-source>
+        </kendo-grid>
+```
+{% endif %}
+
+> The `Service.Url` defines the endpoint where your natural language queries will be processed. It should point to [your custom AI service](slug:smart_ext_core_grid) that can understand your domain-specific data and business logic. To explore the available integration scenarios, see [AI Assistant Tools Setup](slug:ai_assistant_tools_setup).
+
+4. Handle the `SemanticSearch` event to implement your semantic search logic:
+
+```HtmlHelper
+    @(
+    Html.Kendo().Grid<EcommerceProduct>()
+            .Name("grid")
+            .ToolBar(toolbar => { toolbar.SmartBox(); })
+            .SmartBox(sb => sb.Events(e => e.SemanticSearch("onSemanticSearch"))
+                    .SearchSettings(s => s.Enabled(true))
+                    .SemanticSearchSettings(s => s.Enabled(true))
+            )
+    )
+    <script>
+            function onSemanticSearch(e) {
+                    return performSemanticSearch(e.searchValue);
+            }
+    </script>
+```
+{% if site.core %}
+```TagHelper
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-grid name="grid">
+            <toolbar>
+                <toolbar-button name="smartBox"></toolbar-button>
+            </toolbar>
+            <smart-box>
+                <search-settings on-semantic-search="onSemanticSearch" enabled="true" />
+                <semantic-search-settings enabled="true" />
+            </smart-box>
+            <data-source>
+                <transport>
+                    <read url="/Grid/ECommerceProducts_Read" />
+                </transport>
+            </data-source>
+        </kendo-grid>
+
+        <script>
+                function onSemanticSearch(e) {
+                        return performSemanticSearch(e.searchValue);
+                }
+        </script>
+```
+{% endif %}
+
+
+## Available Modes
+
+The AI Smart Box provides three modes that you can enable independently or in combination. Each mode serves different use cases and offers specific configuration options.
+
+<TabStrip>
+<TabStripTab title="Search Mode">
+
+The Search mode is enabled by default in the AI Smart Box and provides traditional keyword-based filtering across Grid columns. As users type, the AI Smart Box generates filter expressions that match the search value against the Grid columns. Use the `SearchSettings` option to further tailor the Search mode to your specific needs.
+
+By default, the Grid automatically applies the search filter to the DataSource. You can optionally handle the `Search` option to customize the search behavior.
+
+```HtmlHelper
+    @(
+        Html.Kendo().Grid<EcommerceProduct>()
+            .Name("grid")
+            .ToolBar(toolbar => { toolbar.SmartBox(); })
+            .Search(s => s.Fields(f => f.Field("name").Field("description").Field("category").Field("countryOfOrigin")))
+            .SmartBox(sb => sb
+                .SearchSettings(ss => ss.Enabled(true).History(true)))
+    )
+```
+{% if site.core %}
+```TagHelper
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-grid name="grid">
+            <toolbar>
+                <toolbar-button name="smartBox"></toolbar-button>
+            </toolbar>
+            <smart-box>
+                <search-settings enabled="true" />
+            </smart-box>
+        </kendo-grid>
+
+```
+{% endif %}
+
+
+
+> For more details about Search mode configuration, see the [Grid Searching]({% slug htmlhelpers_grid_aspnetcore_searchpanel %}) article.
+
+</TabStripTab>
+<TabStripTab title="Semantic Search Mode">
+
+Configure the `SemanticSearchMode` option of the AI Smart Box to enable semantic search functionality that interprets user intent and matches related terms, synonyms, and contextual meanings. This intelligent matching is particularly valuable when users might not know the exact terminology used in your Grid data.
+
+When users enter a search term, handle the `SemanticSearch` event to implement your semantic matching logic using vector embeddings or other techniques to find conceptually related content.
+
+```HtmlHelper
+    @(
+        Html.Kendo().Grid<EcommerceProduct>()
+            .Name("grid")
+            .ToolBar(toolbar => { toolbar.SmartBox(); })
+            .SmartBox(sb => sb.Events(e => e.SemanticSearch("onSemanticSearch"))
+                .SemanticSearchSettings(s => s
+                    .Enabled(true))
+            )
+    )
+```
+{% if site.core %}
+```TagHelper
+        @addTagHelper *, Kendo.Mvc
+
+        <kendo-grid name="grid">
+            <toolbar>
+                <toolbar-button name="smartBox"></toolbar-button>
+            </toolbar>
+            <smart-box>
+                <search-settings on-semantic-search="onSemanticSearch" enabled="true" />
+                <semantic-search-settings enabled="true" />
+            </smart-box>
+        </kendo-grid>
+
+```
+{% endif %}
+
+> For more information about implementing semantic search in the AI Smart Box, see the [Semantic Search](slug:smartbox_semantic_search_mode) article.
+
+</TabStripTab>
+<TabStripTab title="AI Assistant Mode">
+
+Use the `AiAssistant` option to enable AI Assistant mode, which allows users to interact with the Grid data through natural language commands. Users can apply any supported Grid operation&mdash;including filtering, sorting, column management, data export, and row highlighting.
+
+Configure the AI Assistant mode behavior through the configuration object. You can guide users with predefined prompts using the `PromptSuggestions` option and enable automatic communication with your custom AI service by setting the `Request.Url` option.
+
+```HtmlHelper
+    @(
+        Html.Kendo().Grid<EcommerceProduct>()
+            .Name("grid")
+            .ToolBar(toolbar => { toolbar.SmartBox();})
+            .SmartBox(sb => sb
+                .AiAssistantSettings(a => a
+                    .Enabled(true)
+                    .Service(s => s.Url("https://demos.telerik.com/service/v2/ai/grid/smart-state"))
+                    .PromptSuggestions(new[] {
+                        "Show top customers by revenue",
+                        "Filter active accounts",
+                        "Group by region"
+                    })))
+    )
+```
+{% if site.core %}
+```TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-grid name="grid">
-        <filterable enabled="true"/>
-        <groupable enabled="true"/>
-        <sortable enabled="true"/>
-        <!-- Additional configuration options. -->
-    </kendo-grid>
-    ```
-    {% endif %}
+      <toolbar>
+        <toolbar-button name="smartBox"></toolbar-button>
+      </toolbar>
 
-2. Enable the `AiAssistant()` tool in the [Grid's toolbar](slug://htmlhelpers_grid_aspnetcore_toolbar):
-
-    ```HtmlHelper
-    @(Html.Kendo().Grid<PatientRecord>()
-      .Name("grid")   
-      .ToolBar(t =>
-      {
-            t.AIAssistant();
-      })
-      ... // Additional configuration options.
-    )
-    ```
-    {% if site.core %}
-    ```TagHelper
-    <kendo-grid name="grid">
-        <toolbar>
-            <toolbar-button name="aiAssistant"></toolbar-button>
-        </toolbar>
-        <!-- Additional configuration options. -->
-    </kendo-grid>
-    ```
-    {% endif %}
-
-3. Configure the `Service` option to point to the AI service endpoint:
-
-    ```HtmlHelper
-    @(Html.Kendo().Grid<PatientRecord>()
-      .Name("grid")   
-      .AI(ai => ai
-          .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
-      )
-      ... // Additional configuration options.
-    )
-    ```
-    {% if site.core %}
-    ```TagHelper
-    <kendo-grid name="grid">
-      <ai>
+      <smart-box>
+        <ai-assistant-settings>
           <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-      </ai>
-      <!-- Additional configuration options. -->
+        </ai-assistant-settings>
+      </smart-box>
     </kendo-grid>
-    ```
-    {% endif %}
+```
+{% endif %}
 
-The AI service defines the endpoint where your natural language queries will be processed. It must point to your custom AI service that can understand your domain-specific data and business logic.
+> For more information about configuring AI Assistant mode and available integration options, see the [AI Assistant Tools Setup](slug:ai_assistant_tools_setup) article. To understand how to set up your custom AI service, see the [AI Service Setup](slug:smart_ext_core_grid) article.
 
-### Row Highlighting
+</TabStripTab>
+</TabStrip>
 
-One of the key features of the AI Assistant toolbar tool is the ability to visually highlight Grid rows based on natural language prompts. When users enter prompts containing the word **highlight**, the Grid automatically processes the request and applies visual highlighting to the matching data.
+## Setting the Active Mode
 
-The highlighting functionality enables users to quickly identify and visualize data patterns without having to manually configure filters or complex search criteria. The AI service interprets the natural language request and determines which rows must be highlighted based on the specified conditions.
+When you enable multiple modes in the AI Smart Box, users can choose their preferred interaction method by using the seamless mode-switching interface of the tool.
 
-Common highlighting use cases include:
+By default, the Search mode is initially selected when users open the AI Smart Box tool. You can customize this behavior and manually specify the mode that should be initially selected by using the `ActiveMode` option:
 
-- Conditional highlighting&mdash;**Highlight rows where age is above 60** will visually emphasize all rows meeting that criteria.
-- Date-based highlighting&mdash;**Highlight all admissions after July 15th, 2024** will mark rows with dates matching the condition.
-- Status-based highlighting&mdash;**Highlight rows with critical patients** will emphasize rows based on status values.
-- Numeric range highlighting&mdash;**Highlight risk scores between 30% and 50%** will highlight rows within the specified range.
-- Clear highlighting&mdash;**Clear highlighting** will remove all applied highlighting effects.
-
-Users can combine highlighting with other data operations like filtering, sorting, and grouping.
-
-## AI Service Integration
-
-The AI Assistant toolbar tool supports two main integration approaches depending on how you want to handle AI service communication:
-
-- [Automatic integration](#automatic-integration)
-- [Manual integration](#manual-integration)
-
-### Automatic Integration
-
-In the automatic approach, the AI Assistant toolbar tool handles all communication with your AI service internally through HTTP requests. You simply need to configure the AI service property to point to your custom AI service endpoint.
-
-The following example demonstrates a Grid with AI Assistant functionality that processes natural language requests for data operations:
-
-```HtmlHelper
-@(Html.Kendo().Grid<PatientRecord>()
-    .Name("grid")
-    .Columns(c =>
-    {
-        c.Bound(p => p.PatientName).Title("Patient Name").Width(180);
-        c.Bound(p => p.Age).Title("Age").Width(80);
-        c.Bound(p => p.ConditionSeverity)
-            .Title("Condition Severity")
-            .Width(160)
-            .ClientTemplate("<span class='condition-badge'></span>");
-        c.Bound(p => p.Department).Title("Department").Width(180);
-        c.Bound(p => p.Status)
-            .Title("Status")
-            .Width(180)
-            .ClientTemplate("<span class='status-chip'></span>");
-        c.Bound(p => p.AdmissionDate).Title("Admission Date").Width(140).Format("{0:dd-MM-yy}");
-        c.Bound(p => p.RiskScore)
-            .Title("Risk Score")
-            .ClientTemplate("<div class='progressbar'></div>");
-    })
-    .ToolBar(t =>
-    {
-        t.AIAssistant();
-        t.Spacer();
-        t.Custom().Name("resetChanges").Text("Reset changes").IconClass("k-icon k-i-arrow-rotate-ccw");
-    })
-    .AI(ai => ai
-        .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
-        .AIAssistant(a => a.PromptSuggestions(new[]
-        {
-            "Highlight age cells above 60",
-            "Mark all rows with critical care admissions after 15th of July 2024",
-            "Highlight rows with patients over 65 still under treatment",
-            "Highlight rows with patients not in Emergency department",
-            "Highlight rows with risk score between 30% and 50%",
-            "Clear highlighting"
-        }))
-        .AIAssistantWindow(ws => ws.Width(500).Height(460))
-    )
-    .Pageable()
-    .Sortable()
-    .Filterable()
-    .Scrollable(s => s.Height(600))
-    .HtmlAttributes(new { style = "height:600px;" })
-    .DataSource(ds => ds.Ajax()
-        .Read(r => r.Action("Patients_Read", "Grid"))
-        .PageSize(20)
-        .Model(m => m.Id(x => x.Id))
-    )
-    .Events(e => e.DataBound("onGridDataBound"))
+```Razor
+@(
+    Html.Kendo().Grid<EcommerceProduct>()
+        .Name("grid")
+        .ToolBar(toolbar => { toolbar.SmartBox(); })
+        .SmartBox(sb => sb
+            .ActiveMode("aiAssistant")
+            .SearchSettings(s => s.Enabled(true))
+            .SemanticSearchSettings(s => s.Enabled(true))
+            .AiAssistantSettings(a => a.Enabled(true)
+                .Service(s => s.Url("https://demos.telerik.com/service/v2/ai/grid/smart-state"))))
+        .DataSource(ds => ds.Ajax().Read(r => r.Action("ECommerceProducts_Read", "Grid")))
 )
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-grid name="grid" height="550" on-data-bound="onGridDataBound">
-    <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
-        <transport>
-            <read url="@Url.Action("Finance_Read", "Grid")" />
-        </transport>
-        <schema>
-            <model id="Id"></model>
-        </schema>
-    </datasource>
+    @addTagHelper *, Kendo.Mvc
 
-    <columns>
-        <column field="CustomerName" title="Customer Name" min-resizable-width="120" />
-
-        <column field="Amount" title="Amount" width="140" format="{0:n}"
-                template="# var cls = 'k-text-right'; if (Amount < 0) { cls = 'k-text-right k-font-weight-bold'; } #
-                          <div class='#= cls #'>#= kendo.toString(Amount, 'n') #</div>" />
-
-        <column field="Fee" title="Fee" width="80" format="{0:n}"
-                template="<div class='k-text-right'>#= kendo.toString(Fee, 'n') #</div>" />
-
-        <column field="Currency" title="Currency" width="100" />
-
-        <column field="Status" title="Status" width="120"
-                template="<span class='status-chip'></span>" />
-
-        <column field="TransType" title="Trans Type" width="140" />
-
-        <column field="AccountType" title="Account Type" width="120"
-                template="<span class='account-chip'></span>" />
-
-        <column field="TransDate" title="Trans Date" width="120" format="{0:dd-MM-yy}" />
-        <column field="Description" title="Description" width="180" />
-        <column field="Region" title="Region" width="100" />
-    </columns>
-
-    <toolbar>
-        <toolbar-button name="aiAssistant"></toolbar-button>
-        <toolbar-button name="spacer" type="spacer" />
-        <toolbar-button name="resetChanges"
-                        text="Reset changes"
-                        icon-class="k-icon k-i-arrow-rotate-ccw">
-        </toolbar-button>
-    </toolbar>
-
-    <sortable enabled="true" allow-unsort="true" show-indexes="true" mode="mixed" />
-    <filterable enabled="true" />
-    <groupable enabled="true" />
-    <pageable enabled="true" />
-    <scrollable enabled="true" />
-
-    <ai>
-        <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-        <ai-assistant prompt-suggestions='new[] {
-                              "Sort by Amount descending",
-                              "Group by account type",
-                              "Show only failed transactions",
-                              "Filter where currency is USD",
-                              "Display withdrawals over 800 after 15th September 2024",
-                              "Clear filtering",
-                              "Clear grouping"
-                          }'>
-        </ai-assistant>
-        <ai-assistant-window width="558"></ai-assistant-window>
-    </ai>
-
-</kendo-grid>
+    <kendo-grid name="grid">
+      <smart-box active-mode="aiAssistant">
+        <search-settings enabled="true" />
+        <semantic-search-settings enabled="true" />
+        <ai-assistant-settings>
+          <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+        </ai-assistant-settings>
+      </smart-box>
+    </kendo-grid>
 ```
 {% endif %}
-
-With automatic integration, the Grid is configured to work directly with your AI service. If the service returns the correct descriptors, the Grid can automatically interpret and apply the requested operations, enabling seamless setup and usage without additional manual configuration.
-
-The examples below represent sample responses for the basic data operations:
-
-- Filtering&mdash;Accepts an object with filter conditions and logic operators.
-
-  ```JSON
-  {
-    "filter": {
-      "logic": "and",
-      "filters": [
-        {
-          "field": "Currency",
-          "operator": "eq",
-          "value": "USD"
-        }
-      ]
-    },
-    "messages": [
-      "Filtered by the field Currency with the value equal to USD"
-    ]
-  }
-  ```
-
-- Sorting&mdash;Accepts an array of objects specifying field names and sort directions.
-
-  ```JSON
-  {
-    "sort": [
-      {
-        "field": "Amount",
-        "dir": "desc"
-      }
-    ],
-    "messages": [
-      "Sorted by the field Amount in descending order."
-    ]
-  }
-  ```
-
-- Grouping&mdash;Accepts an array of objects defining the fields to group by.
-
-  ```JSON
-  {
-    "group": [
-      {
-        "field": "AccountType",
-        "dir": "desc"
-      }
-    ],
-    "messages": [
-      "Grouped by the field AccountType in descending order."
-    ]
-  }
-  ```
-
-### Manual Integration
-
-For full control over the AI interaction, you can manually integrate your AI service by handling the `PromptRequest` event of the tool. This allows you to perform entirely custom requests to your AI service while using the UI that the AI Assistant provides.
-
-The `PromptRequest` event provides useful information that you can use in your custom AI service integration. The `requestData` field of the event contains the user's prompt, Grid column information, and HTTP request settings, while `isRetry` indicates whether this is a retry attempt. 
-
-When the response from the service is received, you can utilize the `PromptResponse` event and handle the returned data.
-
-In the AI Assistant configuration, you can handle all events provided by the integrated AIPrompt component. 
-
-These event details allow you to implement fully customized AI service communication while maintaining access to the Grid context and user input.
 
 ## Customization Options
 
-The AI Assistant toolbar tool provides various configuration options to customize the experience based on your application requirements:
+The AI Smart Box provides several customization options to tailor the appearance and behavior of the tool to your application's needs. You can configure [placeholder text](#placeholder-text), [query history settings](#query-history), and customize the appearance of [suggestions](#suggestion-template) and [history items](#history-item-template) using template directives.
 
-- [AIPrompt customization](#aiprompt-customization)
-- [Window appearance](#window-appearance)
+### Placeholder Text
 
-### AIPrompt Customization
+The AI Smart Box allows you to customize the placeholder text that appears in the input field for each mode.
 
-The AI Assistant toolbar tool utilizes the AIPrompt component internally to provide a conversational interface. You can customize the AIPrompt interface and user interaction by using the AI Assistant property of the tool.
+You can define a global placeholder for all modes through the `Placeholder` option of the AI Smart Box tool:
 
-This property allows you to add PromptSuggestions tailored to your specific use case that can guide users with examples of what your AI service can understand. Furthermore, the `SpeechToTextButton` setting provides voice input capabilities for enhancing accessibility in your application.
-
-```HtmlHelper
-    .AI(ai => ai
-        .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
-        .AIAssistant(a => a.PromptSuggestions(new[]
-        {
-            "Highlight age cells above 60",
-            "Mark all rows with critical care admissions after 15th of July 2024",
-            "Highlight rows with patients over 65 still under treatment",
-            "Highlight rows with patients not in Emergency department",
-            "Highlight rows with risk score between 30% and 50%",
-            "Clear highlighting"
-        }))
-    )
-```
-{% if site.core %}
-```TagHelper
-  <ai>
-      <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-      <ai-assistant prompt-suggestions='new[] {
-          "Sort by Amount descending",
-          "Group by account type",
-          "Show only failed transactions",
-          "Filter where currency is USD",
-          "Display withdrawals over 800 after 15th September 2024",
-          "Clear filtering",
-          "Clear grouping"
-      }'>
-      </ai-assistant>
-  </ai>
-```
-{% endif %}
-
-### Window Appearance
-
-You can also customize the appearance of the [Window](https://www.telerik.com/{{ site.platform }}/documentation/html-helpers/layout/window/overview) component, in which the AIPrompt of the toolbar tool is rendered. 
-
-To achieve this, use the `AIAssistantWindow` property, which allows you to control the positioning and visual appearance of the Window to match your application's design and requirements.
-
-```HtmlHelper
-.AI(ai => ai
-    .Service("https://demos.telerik.com/service/v2/ai/grid/smart-state")
-    .AIAssistantWindow(ws => ws.Width(500).Height(460))
+```Razor
+@(
+    Html.Kendo().Grid<EcommerceProduct>()
+        .Name("grid")
+        .ToolBar(toolbar => { toolbar.SmartBox(); })
+        .SmartBox(sb => sb.Placeholder("Search or ask..."))
 )
 ```
 {% if site.core %}
 ```TagHelper
-<ai>
-    <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
-    <ai-assistant-window width="500" height="460"></ai-assistant-window>
-</ai>
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-grid name="grid">
+      <toolbar>
+        <toolbar-button name="smartBox"></toolbar-button>
+      </toolbar>
+
+      <smart-box placeholder="Search or ask..." />
+```
+{% endif %}
+
+>tip To override the global placeholder for individual modes, set the `placeholder` property within the settings object of the respective AI Smart Box mode. For example, to customize the placeholder for the Semantic Search mode, see [Semantic Search Placeholder Text](slug:smartbox_semantic_search_mode#placeholder-text).
+
+### Query History
+
+The AI Smart Box maintains a history of recent queries for each enabled mode, allowing users to quickly reuse previous searches or commands.
+
+You can configure global history behavior through the `History` option of the AI Smart Box tool, which applies to all modes unless a mode provides its own history settings. The default global history size is `5` queries, and the default timestamp format is `'HH:mm:ss'`.
+
+```Razor
+@(
+    Html.Kendo().Grid<EcommerceProduct>()
+        .Name("grid")
+        .ToolBar(toolbar => { toolbar.SmartBox(); })
+        .SmartBox(sb => sb.SearchSettings(s => s.Enabled(true).History(h => h.Size(5).TimestampFormat("h:mm a"))))
+        .DataSource(ds => ds.Ajax().Read(r => r.Action("ECommerceProducts_Read", "Grid")))
+)
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-grid name="grid">
+      <toolbar>
+        <toolbar-button name="smartBox"></toolbar-button>
+      </toolbar>
+
+      <smart-box>
+        <search-settings enabled="true">
+          <history size="5" timestamp-format="h:mm a" />
+        </search-settings>
+      </smart-box>
+    </kendo-grid>
+```
+{% endif %}
+
+>tip For mode-specific history configuration, set the `history` property within the settings object of the respective AI Smart Box mode. For example, to configure the history settings for the Semantic Search mode, see [Semantic Search Query History](slug:smartbox_semantic_search_mode#query-history).
+
+### Suggestion Template
+
+The AI Smart Box provides a `SuggestionTemplate` option to customize the appearance of prompt suggestions in AI Assistant mode. The template provides access to the `Suggestion` field, allowing you to add icons, styling, or additional markup.
+
+```Razor
+@(
+    Html.Kendo().Grid<EcommerceProduct>()
+        .Name("grid")
+        .ToolBar(toolbar => { toolbar.SmartBox(); })
+        .SmartBox(sb => sb
+            .AiAssistantSettings(a => a
+                .Enabled(true)
+                .Service(s => s.Url("https://demos.telerik.com/service/v2/ai/grid/smart-state"))
+                .PromptSuggestions(new[] {
+                    "Show top customers by revenue",
+                    "Filter active accounts",
+                    "Group by region"
+                })
+                .SuggestionTemplate("<div class='custom-suggestion'><span class='k-icon k-i-sparkles'></span><span>#= suggestion #</span></div>")))
+)
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-grid name="grid">
+      <toolbar>
+        <toolbar-button name="smartBox"></toolbar-button>
+      </toolbar>
+
+      <smart-box>
+        <ai-assistant-settings>
+          <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+          <prompt-suggestions>
+            <suggestion>Show top customers by revenue</suggestion>
+            <suggestion>Filter active accounts</suggestion>
+            <suggestion>Group by region</suggestion>
+          </prompt-suggestions>
+          <suggestion-template>
+            <div class='custom-suggestion'><span class='k-icon k-i-sparkles'></span><span>#= suggestion #</span></div>
+          </suggestion-template>
+        </ai-assistant-settings>
+      </smart-box>
+    </kendo-grid>
+```
+{% endif %}
+
+### History Item Template
+
+You can use the `HistoryItemTemplate` option to customize the content of history items and format how previous queries are displayed. This template applies to all modes that have history enabled and provides access to the `Text`, `Timestamp`, and `TimestampFormat` fields.
+
+```Razor
+@(
+    Html.Kendo().Grid<EcommerceProduct>()
+        .Name("grid")
+        .ToolBar(toolbar => { toolbar.SmartBox(); })
+        .SmartBox(sb => sb
+            .AiAssistantSettings(a => a
+                .Enabled(true)
+                .Service(s => s.Url("https://demos.telerik.com/service/v2/ai/grid/smart-state"))
+                .HistoryItemTemplate("<div class='custom-history-item'><span class='history-text'>#= text #</span><span class='history-time'>#= kendo.toString(timestamp, timestampFormat) #</span></div>")))
+        .DataSource(ds => ds.Ajax().Read(r => r.Action("ECommerceProducts_Read", "Grid")))
+)
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-grid name="grid">
+      <toolbar>
+        <toolbar-button name="smartBox"></toolbar-button>
+      </toolbar>
+
+      <smart-box>
+        <ai-assistant-settings>
+          <service url="https://demos.telerik.com/service/v2/ai/grid/smart-state" />
+          <history-item-template>
+            <div class='custom-history-item'>
+                <span class='history-text'>#= text #</span>
+                <span class='history-time'>#= kendo.toString(timestamp, timestampFormat) #</span>
+            </div>
+          </history-item-template>
+        </ai-assistant-settings>
+      </smart-box>
+    </kendo-grid>
 ```
 {% endif %}
 
 ## Suggested Links
 
-{% if site.core %}
-* [ASP.NET Core Grid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
-{% endif %}
-* [AI Toolbar Assistant of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar)
-* [AI Row Highlighting by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/ai-toolbar-highlight)
-* [AIPrompt Overview Documentation](https://www.telerik.com/{{ site.platform }}/documentation/html-helpers/conversational-ui/aiprompt/overview)
-* [Server-Side API](/api/grid)
+* [Semantic Search Mode](slug:smartbox_semantic_search_mode)
+* [Grid Searching]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})
+* [AI Assistant Tools Setup](slug:ai_assistant_tools_setup)
+* [AI Service Setup](slug:smart_ext_core_grid)
+* [Smart Grid Overview](slug:overview_smart_grid)
+* [Grid Configuring the ToolBar]({% slug htmlhelpers_grid_aspnetcore_toolbar %})
+* [API Reference of the Grid](/api/grid)

@@ -4,7 +4,7 @@ page_title: 2017 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2017."
 slug: breakingchanges2017_kendoui
 components: ["general"]
-position: 8
+position: 9
 ---
 
 <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />

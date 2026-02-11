@@ -11,10 +11,14 @@ position: 2
 
 The Notification provides the `"info"`, `"success"`, `"warning"`, and `"error"` built-in notification types.
 
-The predefined Notifications enable you to apply different templates and looks for each type and provide ready-to-use shorthand display methods and styling functionalities. The shorthand method names match the listed notification types. If you do not specify a Notification type, the widget displays the `"info"` type. You can also define an unlimited amount of custom notification types and corresponding templates.
+The predefined Notifications enable you to apply different templates and looks for each type and provide ready-to-use shorthand display methods and styling functionalities. The shorthand method names match the listed notification types. You can also define an unlimited amount of custom notification types and corresponding templates.
 
-The following example demonstrates how to apply built-in notification types.
+> Starting with [**2026 Q1**](slug:breakingchanges2026_kendoui) version when no `type` parameter is passed to the [`show`](/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors (colourless). Previously, the default value of the `type` property was `info`. If you need to acheive the previous appearance you can use [`info`](/api/javascript/ui/notification/methods/info) method or explicitly pass `info` as a parameter to the [`show`](/api/javascript/ui/notification/methods/show) method. 
 
+The following example demonstrates how to apply built-in notification types. You can define an unlimited amount of custom notification types and corresponding [templates]({% slug templates_kendoui_notification %}).
+
+
+```
     <span id="notification"></span>
 
   	<script>
@@ -36,6 +40,7 @@ The following example demonstrates how to apply built-in notification types.
             notificationWidget.info("bar");
     	});
   	</script>
+```
 
 ## See Also
 

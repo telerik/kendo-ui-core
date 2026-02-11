@@ -57,6 +57,8 @@ The following example demonstrates the `Rounded` option of the Badge:
 
 The `ThemeColor` option controls the color that will be applied to the rendered Badge.
 
+> Starting with the [**2026 Q1**](slug:breakingchanges_2026) release, the Badge component renders with the `primary` appearance by default. Because appearance defaults are now theme-controlled, the `themeColor` option will be `undefined` when not set, but the theme applies the primary styling. To preserve the previous (secondary) look, explicitly set `themeColor: 'secondary'`.
+
 The available `ThemeColor` values are:
 
 - `Primary`&mdash;Applies coloring based on the primary theme color.

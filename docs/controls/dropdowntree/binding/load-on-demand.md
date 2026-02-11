@@ -101,7 +101,7 @@ The following example demonstrates how to configure a [`valueMapper`](/api/javas
 
         function convertValues(value) {
             var data = {};
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
             
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];

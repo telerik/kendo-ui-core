@@ -19,13 +19,14 @@ export const __meta__ = {
         LIST_CONTENT = "k-list-content",
         TABLE_CONTENT = "k-table-body k-table-scroller",
         HEADER = "k-list-group-sticky-header",
+        TABLE_HEADER = "k-table-group-sticky-header",
         LIST_ITEM = "k-list-item",
         TABLE_ITEM = "k-table-row",
         HEIGHTCONTAINER = "k-height-container",
         GROUPITEM = "k-list-item-group-label",
         GROUP_HEADER_ITEM = "k-list-group-item",
         LIST_UL = "k-list-ul",
-        TABLE_LIST = "k-table-list",
+        TABLE = "k-table",
 
         SELECTED = "k-selected",
         FOCUSED = "k-focus",
@@ -500,26 +501,21 @@ export const __meta__ = {
             that.element.attr("role", "listbox");
 
             if (that.options.columns?.length) {
-                const thead = that.element.closest(".k-data-table").find('.k-table-thead');
-                const row = $(`<tr class="k-table-group-row">
-                    <th class="k-table-th" colspan="${that.options.columns.length}"></th>
-                </tr>`);
-
-                thead.append(row);
-
-                that.header = row.find(".k-table-th");
-
                 const contentSelector = "." + contentClasses.split(' ').join('.');
                 that.content = that.wrapper = that.element.find(contentSelector);
                 if (!that.content.length) {
                     that.content = that.wrapper = $(`<div unselectable='on' class='${contentClasses}'></div>`).appendTo(that.element);
                 }
+
+                const stickyHeader = $(`<div class="${that._getFixedGroupHeaderClass()}"><span class="k-table-th"></span></div>`);
+                that.content.before(stickyHeader);
+                that.header = stickyHeader.find(".k-table-th");
             } else {
-                that.header = $(`<div class='${HEADER}'></div>`).appendTo(that.element);
+                that.header = $(`<div class='${that._getFixedGroupHeaderClass()}'></div>`).appendTo(that.element);
                 that.content = that.wrapper = $(`<div unselectable='on' class='${contentClasses}'></div>`).appendTo(that.element);
             }
 
-            that.element.children(".k-list-footer").appendTo(that.element);
+            that.element.children(".k-list-footer, .k-table-footer").appendTo(that.element);
 
             if (options.ariaLabel) {
                 this.element.attr("aria-label", options.ariaLabel);
@@ -617,6 +613,10 @@ export const __meta__ = {
 
         _getGroupHeaderClass: function() {
             return this._isTableVariant() ? "k-table-group-row" : GROUP_HEADER_ITEM;
+        },
+
+        _getFixedGroupHeaderClass: function() {
+            return this._isTableVariant() ? TABLE_HEADER : HEADER;
         },
 
         setOptions: function(options) {
@@ -1643,7 +1643,7 @@ export const __meta__ = {
             const groupId = that._generateGroupId(groupIndex, groupValue);
             const groupIconField = options.groupIconField;
 
-            ul.className = LIST_UL;
+            ul.className = that._isTableVariant() ? `${LIST_UL} ${TABLE}` : LIST_UL;
             ul.style.position = "absolute";
             ul.style.width = "100%";
             ul.style.top = "0";
@@ -1818,8 +1818,7 @@ export const __meta__ = {
 
             if (that.options.type === "flat") {
                 const ul = document.createElement("ul");
-                const isTableVariant = that._isTableVariant();
-                ul.className = isTableVariant ? LIST_UL + " " + TABLE_LIST : LIST_UL;
+                ul.className = that._isTableVariant() ? `${LIST_UL} ${TABLE}` : LIST_UL;
                 ul.style.position = "relative";
                 that.content.get(0).appendChild(ul);
                 that._flatUl = ul;
@@ -1837,7 +1836,7 @@ export const __meta__ = {
                 that.ul = $(ul);
 
                 // Measure CSS gap from the UL for positioning calculations (only for non-table variants)
-                that._cssGap = isTableVariant ? 0 : getCssGap(that.content, that.ul);
+                that._cssGap = that._isTableVariant() ? 0 : getCssGap(that.content, that.ul);
 
                 that._items = that._generateItems(ul, that.itemCount);
 
@@ -2860,7 +2859,8 @@ export const __meta__ = {
 
             if (!that._placeholderUl) {
                 const ul = document.createElement("ul");
-                ul.className = LIST_UL + " k-loading-placeholder";
+                const ulClass = that._isTableVariant() ? `${LIST_UL} ${TABLE}` : LIST_UL;
+                ul.className = ulClass + " k-loading-placeholder";
                 ul.style.position = "absolute";
                 ul.style.width = "100%";
                 ul.style.top = "0";

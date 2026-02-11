@@ -37,6 +37,7 @@ export const __meta__ = {
         LIST_UL = "k-list-ul",
         TABLE_LIST = "k-table-list",
         FIXED_GROUP_HEADER = ".k-list-group-sticky-header",
+        FIXED_GROUP_TABLE_HEADER = ".k-table-group-sticky-header",
         GROUP_LABEL = ".k-list-item-group-label",
         ITEMSELECTOR = ".k-list-item",
         ITEMSELECTORTABLE = ".k-table-row",
@@ -148,7 +149,6 @@ export const __meta__ = {
             if (options.columns && options.columns.length) {
                 that.list.removeClass(LIST).addClass(DATA_TABLE);
                 that.list.removeClass(that._listSize);
-                that.ul.removeClass(LIST_UL).addClass(TABLE);
 
                 that._columnsHeader();
             }
@@ -179,8 +179,16 @@ export const __meta__ = {
 
             // Return the first UL for backward compatibility
             // For grouped lists, use listView.items() to get all items across ULs
-            const ul = that.list.find(`.${LIST_UL}`).first();
+            const ul = that.list.find(`.${LIST_UL}, .${TABLE_LIST}`).first();
             return ul;
+        },
+
+        _isTableVariant: function() {
+            return this.options.columns && this.options.columns.length;
+        },
+
+        _getFixedGroupHeaderSelector: function() {
+            return this._isTableVariant() ? FIXED_GROUP_TABLE_HEADER : FIXED_GROUP_HEADER;
         },
 
         setOptions: function(options) {
@@ -643,7 +651,7 @@ export const __meta__ = {
         },
 
         _toggleHeader: function(show) {
-            var groupHeader = this.listView.content.prev(FIXED_GROUP_HEADER);
+            var groupHeader = this.listView.content.prev(this._getFixedGroupHeaderSelector());
             // Respect fixedGroupHeader: false option - don't show header if disabled
             if (this.options.fixedGroupHeader === false) {
                 show = false;
@@ -887,8 +895,8 @@ export const __meta__ = {
 
                 element.attr(ARIA_AUTOCOMPLETE, autocomplete);
             }
-            const ul = that.list.find(`.${LIST_UL}`).first();
-            const allUls = that.list.find(`.${LIST_UL}`);
+            const ul = that.list.find(`.${LIST_UL}, .${TABLE_LIST}`).first();
+            const allUls = that.list.find(`.${LIST_UL}, .${TABLE_LIST}`);
             const ariaLiveValue = !that._isFilterEnabled() ? "off" : "polite";
 
             if (ul.length) {
@@ -1071,7 +1079,7 @@ export const __meta__ = {
                 e.preventDefault();
             } else {
                 this._focused.attr(ARIA_EXPANDED, true);
-                const ulElements = this.list.find(".k-list-ul");
+                const ulElements = this.list.find(`.${LIST_UL}, .${TABLE_LIST}`);
                 ulElements.attr(ARIA_HIDDEN, false);
 
                 current = this.listView.focus();
@@ -1126,7 +1134,7 @@ export const __meta__ = {
                 e.preventDefault();
             } else {
                 this._focused.attr(ARIA_EXPANDED, false);
-                const ulElements = this.list.find(".k-list-ul");
+                const ulElements = this.list.find(`.${LIST_UL}, .${TABLE_LIST}`);
                 ulElements.attr(ARIA_HIDDEN, true);
 
                 this._focused.add(this.filterInput).removeAttr(ARIA_ACTIVEDESCENDANT);
@@ -1150,14 +1158,14 @@ export const __meta__ = {
         },
 
         _calculateGroupPadding: function(height) {
-            var groupHeader = this.listView.content.prev(FIXED_GROUP_HEADER);
+            var groupHeader = this.listView.content.prev(this._getFixedGroupHeaderSelector());
             var padding = 0;
             var direction = 'right';
             var li;
 
             if (groupHeader[0] && groupHeader[0].style.display !== "none") {
                 // For grouped lists, find first item across all group ULs
-                var ulElements = this.list.find(`.${LIST_UL}`);
+                var ulElements = this.list.find(`.${LIST_UL}, .${TABLE_LIST}`);
                 if (ulElements.length > 1) {
                     // Multiple ULs (grouped), find first list item in any UL
                     ulElements.each(function() {
@@ -1745,7 +1753,7 @@ export const __meta__ = {
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
-                    const ul = that.list.find(".k-list-ul");
+                    const ul = that.list.find(`.${LIST_UL}, .${TABLE_LIST}`);
 
                     if (!listView.bound() && (!ul.length || !ul[0].firstChild)) {
                         if (!that._fetch) {
@@ -2180,19 +2188,15 @@ export const __meta__ = {
                 this._touchHandlers();
             }
 
-            if (this.options.columns && this.options.columns.length) {
-                var thead = this.element.parent().find('.k-table-thead');
-                var row = $('<tr class="k-table-group-row">' +
-                    '<th class="k-table-th" colspan="' + this.options.columns.length + '"></th>' +
-                '</tr>');
-
-                thead.append(row);
-
-                this.header = row.find(".k-table-th");
-
+            if (this._isTableVariant()) {
                 this.element.append("<div class='k-table-body k-table-scroller' unselectable='on'></div>");
                 this.content = this.element.children(".k-table-body");
 
+                if (this.options.fixedGroupHeader !== false) {
+                    const stickyHeader = $('<div class="k-table-group-sticky-header"><span class="k-table-th"></span></div>');
+                    this.content.before(stickyHeader);
+                    this.header = stickyHeader.find(".k-table-th");
+                }
             } else {
                 this.element.append("<div class='k-list-content k-list-scroller' unselectable='on'></div>");
                 this.content = this.element.children(".k-list-content");
@@ -2203,7 +2207,7 @@ export const __meta__ = {
                 }
             }
 
-            this.element.children(".k-list-footer").appendTo(this.element);
+            this.element.children(".k-list-footer, .k-table-footer").appendTo(this.element);
 
             // Create initial empty UL with proper attributes so aria-controls can reference it
             this._createInitialUl();
@@ -2293,7 +2297,11 @@ export const __meta__ = {
                 ul.attr(ARIA_LIVE, options.ariaLive);
             }
 
-            ul.addClass(LIST_UL);
+            ul.addClass(that._isTableVariant() ? `${TABLE_LIST} ${TABLE}` : LIST_UL);
+        },
+
+        _isTableVariant: function() {
+            return this.options.columns && this.options.columns.length;
         },
 
         _createInitialUl: function() {
@@ -2324,7 +2332,7 @@ export const __meta__ = {
                 ul.attr(ARIA_MULTISELECTABLE, true);
             }
 
-            ul.addClass(LIST_UL);
+            ul.addClass(that._isTableVariant() ? `${TABLE_LIST} ${TABLE}` : LIST_UL);
             this.content.append(ul);
         },
 
@@ -3313,18 +3321,6 @@ export const __meta__ = {
                     groupIds.push(groupId);
 
                     html += "<ul unselectable='on' data-group-id='" + groupId + "'>";
-
-                    // For table variant, add a hidden sizing row to define column widths
-                    // This is needed because table-layout:fixed uses the first row to determine widths
-                    // and the group header row has different cell structure
-                    if (isTableVariant && (i > 0 || that.options.fixedGroupHeader === false)) {
-                        html += "<li class='k-table-row k-table-sizing-row' style='height: 0; line-height: 0; padding: 0; margin: 0; visibility: hidden;'>";
-                        that.options.columns.forEach(function(column) {
-                            const widthStyle = column.width ? `width: ${column.width}px;` : '';
-                            html += `<span class="k-table-td" style="${widthStyle} height: 0; padding: 0; border: 0; line-height: 0; font-size: 0;"></span>`;
-                        });
-                        html += "</li>";
-                    }
 
                     // Skip inline group header for first group only if fixedGroupHeader is enabled (default)
                     // since the first group name is shown in the sticky header
