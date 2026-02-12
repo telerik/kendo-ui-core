@@ -3,7 +3,6 @@ const PERCENT_REGEXP = /%/;
 const BOX_SHADOW_REGEXP = /(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+)?/i;
 /**
  * Service providing DOM utility functions
- 
  */
 export class DomUtilsService {
     constructor(supportService, $, namespaceService, utils, kendo // Optional kendo namespace for progress messages
@@ -83,7 +82,7 @@ export class DomUtilsService {
         if (dataset[this.namespaceService.ns + "scrollable"] === "false") {
             return false;
         }
-        if (element && element.className && typeof element.className === "string" &&
+        if (typeof (element === null || element === void 0 ? void 0 : element.className) === "string" &&
             element.className.indexOf("k-auto-scrollable") > -1) {
             return true;
         }
@@ -120,13 +119,11 @@ export class DomUtilsService {
                 el.scrollLeft = value;
             }
         }
+        else if (isRtl && webkit && (browserVersion < 85 || this.supportService.browser.safari)) {
+            return el.scrollWidth - el.clientWidth - el.scrollLeft;
+        }
         else {
-            if (isRtl && webkit && (browserVersion < 85 || this.supportService.browser.safari)) {
-                return el.scrollWidth - el.clientWidth - el.scrollLeft;
-            }
-            else {
-                return Math.abs(el.scrollLeft);
-            }
+            return Math.abs(el.scrollLeft);
         }
     }
     /**
@@ -273,7 +270,7 @@ export class DomUtilsService {
     getShadows(element) {
         const shadow = element.css("box-shadow");
         const radius = shadow
-            ? shadow.match(BOX_SHADOW_REGEXP) || [0, 0, 0, 0, 0]
+            ? BOX_SHADOW_REGEXP.exec(shadow) || [0, 0, 0, 0, 0]
             : [0, 0, 0, 0, 0];
         const blur = Math.max(+radius[3], +(radius[4] || 0));
         return {
@@ -584,13 +581,14 @@ export class DomUtilsService {
                 const isRtl = this.supportService.isRtl(container);
                 const leftRight = isRtl ? "right" : "left";
                 const containerScrollLeft = this.scrollLeft(container);
-                const webkitCorrection = browser.webkit
-                    ? (!isRtl ? 0 : container[0].scrollWidth - (container.width() || 0) - 2 * containerScrollLeft)
-                    : 0;
+                let webkitCorrection = 0;
+                if (browser.webkit && isRtl) {
+                    webkitCorrection = container[0].scrollWidth - (container.width() || 0) - 2 * containerScrollLeft;
+                }
                 // Note: The loading text message is set via kendo.ui.progress.messages.loading
                 // which should be accessed from the calling code
                 const loadingText = ((_c = (_b = (_a = this.kendo.ui) === null || _a === void 0 ? void 0 : _a.progress) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.loading) || "Loading...";
-                mask = this.$(`<div class='${cssClass}'><span role='alert' aria-live='polite' class='k-loading-text'>${loadingText}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>`)
+                this.$(`<div class='${cssClass}'><span role='alert' aria-live='polite' class='k-loading-text'>${loadingText}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>`)
                     .width(opts.width)
                     .height(opts.height)
                     .css("top", opts.top)
@@ -620,4 +618,127 @@ export class DomUtilsService {
         }
         return e.target;
     }
+    /**
+     * Create a drag-to-scroll handler for horizontal scrolling via mouse/touch drag.
+     * Encapsulates the drag state and event handling for scrollable containers.
+     * @param scrollContainer - The element that will be scrolled (or parent for delegation)
+     * @param options - Configuration options including namespace, capture element, and delegate selector
+     * @returns Handler with attach() and destroy() methods
+     */
+    createDragToScrollHandler(scrollContainer, options) {
+        return new DragToScrollHandlerImpl(this.$, scrollContainer, options);
+    }
 }
+class DragToScrollHandlerImpl {
+    constructor($, scrollContainer, options) {
+        this.isDragging = false;
+        this.hasDragged = false;
+        this.dragStartX = 0;
+        this.scrollStartLeft = 0;
+        this.currentDragTarget = null;
+        this.$ = $;
+        this.scrollContainer = scrollContainer;
+        this.namespace = options.namespace;
+        this.captureElement = options.captureElement;
+        this.delegateSelector = options.delegateSelector;
+        this.onDragStart = this.onDragStart.bind(this);
+        this.onDragMove = this.onDragMove.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.preventClickOnce = this.preventClickOnce.bind(this);
+    }
+    attach() {
+        if (!this.captureElement) {
+            return;
+        }
+        if (this.delegateSelector) {
+            this.scrollContainer
+                .on("mousedown" + this.namespace, this.delegateSelector, this.onDragStart)
+                .on("touchstart" + this.namespace, this.delegateSelector, this.onDragStart);
+        }
+        else {
+            this.scrollContainer
+                .on("mousedown" + this.namespace, this.onDragStart)
+                .on("touchstart" + this.namespace, this.onDragStart);
+        }
+        this.bindCaptureEvents();
+    }
+    destroy() {
+        this.scrollContainer.off(this.namespace);
+        if (this.captureElement) {
+            this.unbindCaptureEvents();
+        }
+        this.scrollContainer[0].removeEventListener("click", this.preventClickOnce, true);
+    }
+    getClientX(e) {
+        var _a, _b, _c, _d, _e;
+        if (e.type.indexOf("touch") !== -1) {
+            const touch = ((_b = (_a = e.originalEvent) === null || _a === void 0 ? void 0 : _a.touches) === null || _b === void 0 ? void 0 : _b[0]) || ((_d = (_c = e.originalEvent) === null || _c === void 0 ? void 0 : _c.changedTouches) === null || _d === void 0 ? void 0 : _d[0]);
+            return touch ? touch.clientX : 0;
+        }
+        return e.clientX || ((_e = e.originalEvent) === null || _e === void 0 ? void 0 : _e.clientX) || 0;
+    }
+    preventClickOnce(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        this.scrollContainer[0].removeEventListener("click", this.preventClickOnce, true);
+    }
+    onDragStart(e) {
+        const target = this.$(e.currentTarget);
+        if (!target.length) {
+            return;
+        }
+        this.isDragging = true;
+        this.hasDragged = false;
+        this.currentDragTarget = target[0];
+        this.dragStartX = this.getClientX(e);
+        this.scrollStartLeft = target[0].scrollLeft;
+        target.css("cursor", "grabbing");
+        target.css("user-select", "none");
+    }
+    onDragMove(e) {
+        if (!this.isDragging || !this.currentDragTarget) {
+            return;
+        }
+        const clientX = this.getClientX(e);
+        const deltaX = this.dragStartX - clientX;
+        if (!this.hasDragged && Math.abs(deltaX) >= DragToScrollHandlerImpl.DRAG_THRESHOLD) {
+            this.hasDragged = true;
+        }
+        if (this.hasDragged) {
+            e.preventDefault();
+            this.currentDragTarget.scrollLeft = this.scrollStartLeft + deltaX;
+        }
+    }
+    onDragEnd() {
+        if (!this.isDragging) {
+            return;
+        }
+        if (this.currentDragTarget) {
+            const target = this.$(this.currentDragTarget);
+            target.css("cursor", "");
+            target.css("user-select", "");
+        }
+        if (this.hasDragged) {
+            this.scrollContainer[0].addEventListener("click", this.preventClickOnce, true);
+        }
+        this.isDragging = false;
+        this.hasDragged = false;
+        this.currentDragTarget = null;
+    }
+    bindCaptureEvents() {
+        if (!this.captureElement) {
+            return;
+        }
+        // Bind all events to document so dragging continues when cursor leaves component
+        this.$(document)
+            .on("mousemove" + this.namespace, this.onDragMove)
+            .on("touchmove" + this.namespace, this.onDragMove)
+            .on("mouseup" + this.namespace, this.onDragEnd)
+            .on("touchend" + this.namespace, this.onDragEnd);
+    }
+    unbindCaptureEvents() {
+        this.$(document).off(this.namespace);
+    }
+}
+DragToScrollHandlerImpl.DRAG_THRESHOLD = 5;

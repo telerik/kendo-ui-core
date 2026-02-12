@@ -49,9 +49,13 @@ export class FileUtilsService {
         if (extension === undefined || !extension.length) {
             return type;
         }
+        let normalizedExt = extension.toLowerCase();
+        if (!normalizedExt.startsWith(".")) {
+            normalizedExt = "." + normalizedExt;
+        }
         for (let i = 0; i < groups.length; i += 1) {
             const extensions = fileTypeMap[groups[i]];
-            if (extensions.indexOf(extension.toLowerCase()) > -1) {
+            if (extensions.indexOf(normalizedExt) > -1) {
                 return withPrefix ? "file-" + groups[i] : groups[i];
             }
         }

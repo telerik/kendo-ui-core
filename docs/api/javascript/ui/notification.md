@@ -777,7 +777,7 @@ If this argument is not supplied, then `"info"` is assumed.
     notificationWidget.showText({
         closeButton: false,
         content: "Welcome to the Application",
-        "warning"
+        type: "warning"
     });
     </script>
 

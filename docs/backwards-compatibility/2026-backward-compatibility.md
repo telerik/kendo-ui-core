@@ -13,6 +13,55 @@ This article lists the breaking or important changes in the 2026 releases of Ken
 
 ## Kendo UI 2026 Q1
 
+### TreeView Enhanced Rendering (HTML and CSS)
+
+Starting with the **2026 Q1** release, the TreeView adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling.
+
+#### Key HTML Structure Changes
+
+**Wrapper class renamed**
+
+Before: Position-based wrapper classes were used:
+- `k-treeview-top`
+- `k-treeview-mid`
+- `k-treeview-bot`
+
+After: A single unified wrapper class is used:
+- `k-treeview-item-content`
+
+If you have custom CSS or jQuery selectors, replace selectors that target the positional classes with `.k-treeview-item-content`.
+
+**CSS variable for indentation level**
+
+Each `.k-treeview-item` now renders a `--kendo-treeview-level` CSS custom property that the theme uses to calculate indentation via `padding-inline-start`.
+
+Example:
+
+```html
+<li class="k-treeview-item" style="--kendo-treeview-level: 1;">
+    ...
+</li>
+<li class="k-treeview-item" style="--kendo-treeview-level: 2;">
+    ...
+</li>
+```
+
+**State classes moved**
+
+Before: State classes (`k-hover`, `k-focus`, `k-selected`, `k-disabled`) were applied to the `.k-treeview-leaf` element.
+
+After: State classes are applied to the `.k-treeview-item-content` wrapper.
+
+Update any custom selectors accordingly, for example:
+
+```css
+/* Before */
+.k-treeview .k-treeview-leaf.k-selected { /* ... */ }
+
+/* After */
+.k-treeview .k-treeview-item-content.k-selected { /* ... */ }
+```
+
 ### Component Appearance Defaults Removed
 
 > Starting with the R1 2026 release, Kendo UI for jQuery components no longer render default appearance CSS classes. Previously, components automatically added `size`, `rounded`, `fillMode`, and `themeColor` classes to their DOM elements. Instead, these properties default to `undefined`, allowing the theme's CSS to control the component styling.

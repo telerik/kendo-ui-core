@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2026.1.210
+// Type definitions for Kendo UI Professional v2026.1.212
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -3485,28 +3485,11 @@ declare namespace kendo.ui {
     }
 
     interface ChartWizardDefaultState extends Pick<ChartWizardState, 'stack' | 'seriesType'> { }
-
-    interface ChatMessage {
-        id?: string | any;
-        uid?: string | undefined;
-        text?: string | undefined;
-        authorId?: string | undefined;
-        authorName?: string | undefined;
-        authorImageUrl?: string | undefined;
-        authorImageAltText?: string | undefined;
-        timestamp?: Date | undefined;
-        replyToId?: string | any | undefined;
-        isDeleted?: boolean | undefined;
-        isPinned?: boolean | undefined;
-        files?: ChatFile[] | undefined;
-        type?: string | undefined;
-    }
-
     class Chat extends kendo.ui.Widget {
 
         static fn: Chat;
 
-        options: ChatOptions;
+        options: IChatOptions;
 
         dataSource: kendo.data.DataSource;
 
@@ -3515,169 +3498,496 @@ declare namespace kendo.ui {
 
         static extend(proto: Object): Chat;
 
-        constructor(element: Element, options?: ChatOptions);
+        constructor(element: Element, options?: IChatOptions);
 
+        /* Clear all chat messages */
         clearMessages(): void;
+        /* Clear pinned message */
         clearPinnedMessage(): void;
+        /* Clear reply state (if replying to a message) */
         clearReplyState(): void;
+        /* Get the message data item associated with a message element */
         dataItem(message: JQuery): any;
+        /* Destroy the component */
         destroy(): void;
-        fileDataItem(message: any, file: JQuery): ChatFile;
-        getMessageByUid(uid: string): ChatMessage | null;
+        /* Get the file data item associated with a file element */
+        fileDataItem(message: any, file: JQuery): IFile;
+        /* Get a message data item by its uid */
+        getMessageByUid(uid: string): IMessage | null;
+        /* Get the current user's ID */
         getUserId(): string;
-        postMessage(message: string | ChatMessage): ChatMessage;
-        removeMessage(message: ChatMessage): boolean;
+        /* Add a message to the chat */
+        postMessage(message: string | IMessage): IMessage;
+        /* Remove a message from the chat by a given data item */
+        removeMessage(message: IMessage): boolean;
+        /* Scroll to the bottom of the chat */
         scrollToBottom(): void;
-        setDataSource(dataSource: kendo.data.DataSource | any[] | any): void;
-        setOptions(options: ChatOptions): void;
+        /* Update the options of the chat */
+        setOptions(options: IChatOptions): void;
+        /* @deprecated Use `loading` method instead */
         toggleSendButtonGenerating(generating: boolean): void;
-        updateMessage(message: ChatMessage, newData: ChatMessage): ChatMessage;
+        /* Toggle between the send and loading buttons. */
+        loading(loading: boolean): void;
+        /* Update an existing message in the chat. */
+        updateMessage(message: IMessage, newData: IMessage): IMessage;
     }
 
-    interface ChatMessages {
-        messageListLabel?: string | undefined;
-        placeholder?: string | undefined;
-        sendButton?: string | undefined;
-        speechToTextButton?: string | undefined;
-        fileButton?: string | undefined;
-        downloadAll?: string | undefined;
-        selfMessageDeleted?: string | undefined;
-        otherMessageDeleted?: string | undefined;
-        pinnedMessageCloseButton?: string | undefined;
-        replyMessageCloseButton?: string | undefined;
-        fileMenuButton?: string | undefined;
+    interface IFile {
+        /** Unique identifier for the file */
+        uid: string;
+        /** File name with extension */
+        name: string;
+        /** File size in bytes */
+        size: number;
+        /** File extension (e.g., ".pdf", ".jpg") */
+        extension: string;
+        /** Javascript File object */
+        rawFile: File;
+    }
+    interface IMenuAction {
+        /** Unique name/identifier for the action */
+        name: string;
+        /** Display text for the action */
+        text: string;
+        /** Icon identifier */
+        icon: string;
+        /** Additional attributes for the menu item */
+        attributes?: Record<string, string>;
+        /** Additional data attributes */
+        attr?: Record<string, string>;
+        /** Unique ID for the action */
+        id?: string;
+    }
+    interface IToolbarAction {
+        /** Unique name/identifier for the action */
+        name: string;
+        /** Display text for the action */
+        text?: string;
+        /** Icon identifier */
+        icon?: string;
+        /** Button type */
+        type?: string;
+        /** Button fill mode */
+        fillMode?: string;
+        /** Overflow behavior */
+        overflow?: string;
+        /** Additional attributes */
+        attributes?: Record<string, string>;
+    }
+    interface IHeaderItem {
+        /** Type of header item */
+        type: string;
+        /** Template for the item */
+        template?: string | (() => string);
+        /** Additional configuration */
+        [key: string]: any;
+    }
+    type MessageWidthMode = "standard" | "full";
+    type AttachmentLayoutMode = "list" | "carousel";
+    interface IChatAttachment {
+        /** Type of attachment: card, image, etc. */
+        contentType: string;
+        /** Content data for the attachment */
+        content?: any;
+        /** Title for the attachment */
+        title?: string;
+        /** Subtitle for the attachment */
+        subtitle?: string;
+        /** Image URL for the attachment */
+        thumbnailUrl?: string;
+        /** Actions available on the attachment */
+        actions?: ISuggestion[];
+    }
+    type MessageStatus = "sent" | "delivered" | "seen" | "failed";
+    interface IMessageStatusSettings {
+        /** Font icon name to display for the status */
+        icon?: string;
+        /** SVG icon to display for the status */
+        svgIcon?: any;
+        /** Text to display for the status */
+        text?: string;
+        /** CSS class to apply to the status element */
+        cssClass?: string;
+    }
+    type FilesLayoutMode = "horizontal" | "vertical" | "wrap";
+    type SuggestedActionsLayoutMode = "scroll" | "wrap" | "scrollbuttons";
+    interface ISuggestion {
+        text: string;
+    }
+    interface IMessage {
+        /** Unique identifier for the message */
+        id: string;
+        /** Internal UID used by the data source */
+        uid?: string;
+        /** Message text content */
+        text: string;
+        /** ID of the message author */
+        authorId: string;
+        /** Display name of the author */
+        authorName?: string;
+        /** URL to the author's avatar image */
+        authorImageUrl?: string;
+        /** Alt text for the author's avatar */
+        authorImageAltText?: string;
+        /** Timestamp when the message was sent */
+        timestamp: Date;
+        /** Array of file attachments */
+        files: IFile[];
+        /** ID of the message being replied to */
+        replyToId?: string;
+        /** Whether the message has been deleted */
+        isDeleted?: boolean;
+        /** Whether the message is pinned */
+        isPinned?: boolean;
+        /** Whether this is a typing indicator */
+        isTyping?: boolean;
+        /** Suggested actions to display after this message */
+        suggestedActions?: ISuggestion[];
+        /** Whether this message belongs to the current user (computed) */
+        isOwnMessage?: boolean;
+        /** Message delivery status */
+        status?: MessageStatus;
+        /** Whether the message failed to send */
+        failed?: boolean;
+        /** Rich attachments (cards, images, etc.) */
+        attachments?: IChatAttachment[];
+        /** Layout mode for attachments */
+        attachmentLayout?: AttachmentLayoutMode;
+    }
+    interface IMessageSettings {
+        /** Whether to show the avatar for this user's messages */
+        showAvatar?: boolean;
+        /** Whether to show the username for this user's messages */
+        showUsername?: boolean;
+        /** Whether to show the timestamp for this user's messages */
+        showTimestamp?: boolean;
+        /** Message width mode for this user's messages */
+        messageWidthMode?: MessageWidthMode;
+        /** Whether messages from this user can be collapsed */
+        allowMessageCollapse?: boolean;
+        /** Whether to enable file actions for this user's messages */
+        enableFileActions?: boolean;
+        /** Whether to enable context menu actions for this user's messages */
+        enableContextMenuActions?: boolean;
+        /** Actions available in the message toolbar for this user */
+        messageToolbarActions?: IToolbarAction[];
+        /** Actions available in the context menu for this user */
+        messageActions?: IMenuAction[];
+    }
+    interface IChatMessages {
+        messageListLabel: string;
+        placeholder: string;
+        /** @deprecated Use `sendButton` instead. */
+        actionButton: string;
+        /** @deprecated Use `sendButtonLoading` instead. */
+        actionButtonLoading: string;
+        sendButton: string;
+        sendButtonLoading: string;
+        /** @deprecated Use `sendButtonLoading` instead. */
+        stopButton: string;
+        speechToTextButton: string;
+        fileButton: string;
+        downloadAll: string;
+        selfMessageDeleted: string;
+        otherMessageDeleted: string;
+        stopGeneration: string;
+        messageBoxLabel: string;
+        pinnedMessageCloseButton: string;
+        replyMessageCloseButton: string;
+        fileMenuButton: string;
+        retryMessage: string;
     }
 
-    interface ChatMenuAction {
-        name?: string | undefined;
-        text?: string | undefined;
-        icon?: string | undefined;
-        attr?: any;
-        enabled?: boolean | undefined;
+    const LINE_MODE: {
+        readonly SINGLE: "single";
+        readonly MULTI: "multi";
+        readonly AUTO: "auto";
+    };
+    type ModeValue = typeof LINE_MODE[keyof typeof LINE_MODE];
+    interface IFileSelectButtonSettings {
+        /** Enables the file attachment button (default: true) */
+        enable?: boolean;
+        /** Fill mode for the button */
+        fillMode?: string;
+        /** Border radius for the button */
+        rounded?: string;
+        /** Size of the button */
+        size?: string;
+        /** Theme color for the button */
+        themeColor?: string;
+        /** Icon name */
+        icon?: string;
+        /** Tooltip/aria-label text */
+        text?: string;
+        /** File restrictions */
+        restrictions?: {
+            allowedExtensions?: string[];
+            maxFileSize?: number;
+            minFileSize?: number;
+        };
+        /** Allow multiple file selection */
+        multiple?: boolean;
+        /** Accept attribute for input */
+        accept?: string;
     }
-
-    interface ChatMessageToolbarAction {
-        name?: string | undefined;
-        text?: string | undefined;
-        icon?: string | undefined;
-        type?: string | undefined;
-        attributes?: any;
-        fillMode?: string | undefined;
-        overflow?: string | undefined;
+    interface IInputEventArgs {
+        value: string;
     }
-
-    interface ChatFile {
-        uid?: string | undefined;
-        name?: string | undefined;
-        size?: number | undefined;
-        type?: string | undefined;
-        url?: string | undefined;
-        extension?: string | undefined;
+    interface ISendMessageEventArgs {
+        message?: IMessage;
+        generating?: boolean;
     }
-
-    interface ChatSuggestion {
-        text?: string | undefined;
+    interface ISuggestionClickEventArgs {
+        text: string;
     }
-
-    interface ChatOptions {
-        name?: string | undefined;
-        autoAssignId?: boolean | undefined;
-        allowMessageCollapse?: boolean | undefined;
-        fileActions?: ChatMenuAction[] | undefined;
-        autoBind?: boolean | undefined;
-        authorId?: string | number | undefined;
-        authorIdField?: string | undefined;
-        authorImageAltTextField?: string | undefined;
-        authorImageUrlField?: string | undefined;
-        authorNameField?: string | undefined;
-        dataSource?: kendo.data.DataSource | kendo.data.DataSourceOptions | any[] | undefined;
-        dir?: string | undefined;
-        fileAttachment?: boolean | undefined;
-        filesField?: string | undefined;
-        filesTemplate?: Function | undefined;
-        headerItems?: AppBarItem[] | undefined;
-        height?: number | string | undefined;
-        idField?: string | undefined;
-        isDeletedField?: string | undefined;
-        isPinnedField?: string | undefined;
-        isTypingField?: string | undefined;
-        messageActions?: ChatMenuAction[] | undefined;
-        messageGroupTemplate?: Function | undefined;
-        messageReferenceTemplate?: Function | undefined;
-        messages?: ChatMessages | undefined;
-        messageTemplate?: Function | undefined;
-        messageTimeFormat?: string | undefined;
-        messageToolbarActions?: ChatMessageToolbarAction[] | undefined;
-        messageWidthMode?: string | undefined;
-        replyToIdField?: string | undefined;
-        skipSanitization?: boolean | undefined;
-        speechToText?: boolean | undefined;
-        suggestedActionsScrollable?: boolean | undefined;
-        suggestedActionsTemplate?: Function | undefined;
-        suggestions?: ChatSuggestion[] | undefined;
-        suggestionsScrollable?: boolean | undefined;
-        suggestionsTemplate?: Function | undefined;
-        textField?: string | undefined;
-        timestampTemplate?: Function | undefined;
-        timestampField?: string | undefined;
-        width?: number | string | undefined;
-        input?(e: ChatInputEvent): void;
-        sendMessage?(e: ChatSendMessageEvent): void;
-        suggestionClick?(e: ChatSuggestionClickEvent): void;
-        unpin?(e: ChatUnpinEvent): void;
-        toolbarAction?(e: ChatToolbarActionEvent): void;
-        fileMenuAction?(e: ChatFileMenuActionEvent): void;
-        contextMenuAction?(e: ChatContextMenuActionEvent): void;
-        download?(e: ChatDownloadEvent): void;
+    interface IUnpinEventArgs {
+        message: IMessage;
     }
-    interface ChatEvent {
-        sender: Chat;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
+    interface IToolbarActionEventArgs {
+        type: string;
+        message: IMessage;
     }
-
-    interface ChatActionExecuteEvent extends ChatEvent {
-        type?: string | undefined;
-        message?: ChatMessage | undefined;
-        file?: ChatFile | undefined;
+    interface IFileMenuActionEventArgs {
+        type: string;
+        file: IFile;
+        message: IMessage;
     }
-
-    interface ChatInputEvent extends ChatEvent {
-        value?: string | undefined;
+    interface IContextMenuActionEventArgs {
+        type: string;
+        message: IMessage;
     }
-
-    interface ChatSendMessageEvent extends ChatEvent {
-        message?: ChatMessage | undefined;
-        generating?: boolean | undefined;
+    interface IDownloadEventArgs {
+        files?: IFile[];
+        file?: IFile;
+        message?: IMessage;
     }
-
-    interface ChatSuggestionClickEvent extends ChatEvent {
-        text?: string | undefined;
+    type SuggestionsTemplateFunction = (suggestions: ISuggestion[]) => string;
+    type TimestampTemplateFunction = (context: {
+        date: Date;
+        message: IMessage;
+    }) => string;
+    type MessageStatusTemplateFunction = (context: {
+        status: MessageStatus;
+        message: IMessage;
+    }) => string;
+    type MessageContentTemplateFunction = (message: IMessage) => string;
+    type UserStatusTemplateFunction = (context: {
+        author: {
+            id: string;
+            name?: string;
+            imageUrl?: string;
+        };
+    }) => string;
+    type AttachmentTemplateFunction = (context: {
+        attachment: IChatAttachment;
+        message: IMessage;
+    }) => string;
+    type MessageBoxTemplateFunction = () => string;
+    type HeaderTemplateFunction = () => string;
+    type MessageTemplateFunction = (message: IMessage & {
+        isOwnMessage: boolean;
+        author: {
+            id: string;
+            name?: string;
+            imageUrl?: string;
+            imageAltText?: string;
+        };
+    }, replyMessage: IMessage | null, downloadAll: boolean, messages: IChatMessages, expandable: boolean, messageTimeFormat: string, skipSanitization: boolean, statusTemplate?: MessageStatusTemplateFunction | null) => string;
+    type MessageGroupTemplateFunction = (context: {
+        message: IMessage;
+        author: {
+            id: string;
+            name?: string;
+            imageUrl?: string;
+            imageAltText?: string;
+        };
+        isOwnMessage: boolean;
+        replyMessage?: IMessage | null;
+        downloadAll?: boolean;
+        messages?: IChatMessages;
+        expandable?: boolean;
+        fullWidth?: boolean;
+        messageTimeFormat?: string;
+        timestampTemplate?: TimestampTemplateFunction | null;
+        statusTemplate?: MessageStatusTemplateFunction | null;
+        showTimestamp?: boolean;
+        messageTemplate?: MessageTemplateFunction;
+        contentTemplate?: MessageContentTemplateFunction | null;
+        authorMessageContentTemplate?: MessageContentTemplateFunction | null;
+        receiverMessageContentTemplate?: MessageContentTemplateFunction | null;
+        attachmentTemplate?: AttachmentTemplateFunction | null;
+        userStatusTemplate?: UserStatusTemplateFunction | null;
+        skipSanitization?: boolean;
+        messageSettings?: IMessageSettings;
+        filesLayoutMode?: FilesLayoutMode;
+        attachmentLayout?: AttachmentLayoutMode;
+    }) => string;
+    type MessageReferenceTemplateFunction = (context: {
+        text?: string;
+        files?: any[];
+        isOwnMessage?: boolean;
+        isPinMessage?: boolean;
+        isDeleted?: boolean;
+        renderCloseButton?: boolean;
+        renderFileMenuButton?: boolean;
+        messages?: IChatMessages;
+    }) => string;
+    type FilesTemplateFunction = (files: any[], downloadAll?: boolean, messages?: IChatMessages, closeButton?: boolean) => string;
+    type TimestampVisibility = "always" | "hover" | "never";
+    type SuggestionsBehavior = "send" | "insert";
+    type ChatDirection = "ltr" | "rtl";
+    interface IActionButtonSettings {
+        /** Icon name for the action button */
+        icon?: string;
+        /** Text to display on the action button */
+        text?: string;
+        /** Icon for the loading state */
+        loadingIcon?: string;
+        /** Text to display while loading */
+        loadingText?: string;
+        /** Whether to show the stop button when loading */
+        showStopButton?: boolean;
+        /**
+         * @deprecated Use `loadingIcon` instead. Will be removed in future version.
+         */
+        stopIcon?: string;
+        /**
+         * @deprecated Use `loadingText` instead. Will be removed in future version.
+         */
+        stopText?: string;
     }
-
-    interface ChatUnpinEvent extends ChatEvent {
-        message?: ChatMessage | undefined;
+    interface IMessageBoxSettings {
+        /** Mode: "single", "multi", or "auto" (default) */
+        mode?: ModeValue;
+        /** Initial number of rows for multi mode */
+        rows?: number;
+        /** Maximum height of the textarea in pixels */
+        maxTextAreaHeight?: number;
     }
-
-    interface ChatToolbarActionEvent extends ChatEvent {
-        type?: string | undefined;
-        message?: ChatMessage | undefined;
-    }
-
-    interface ChatFileMenuActionEvent extends ChatEvent {
-        type?: string | undefined;
-        file?: ChatFile | undefined;
-        message?: ChatMessage | undefined;
-    }
-
-    interface ChatContextMenuActionEvent extends ChatEvent {
-        type?: string | undefined;
-        message?: ChatMessage | undefined;
-    }
-
-    interface ChatDownloadEvent extends ChatEvent {
-        files?: ChatFile[] | undefined;
-        message?: ChatMessage | undefined;
+    interface IChatOptions {
+        showAvatar: boolean;
+        suggestionsBehavior: SuggestionsBehavior;
+        receiverMessageSettings: IMessageSettings | null;
+        filesLayoutMode: FilesLayoutMode;
+        failedField: string;
+        attachmentLayoutField: string;
+        messageContentTemplate: MessageContentTemplateFunction | null;
+        receiverMessageTemplate: MessageTemplateFunction | null;
+        receiverMessageContentTemplate: MessageContentTemplateFunction | null;
+        attachmentTemplate: AttachmentTemplateFunction | null;
+        actionButton: IActionButtonSettings;
+        /** Allow messages to be collapsed */
+        allowMessageCollapse: boolean;
+        /** Current user's author ID */
+        authorId: string | null;
+        /** Field name for author ID */
+        authorIdField: string;
+        /** Field name for author image alt text */
+        authorImageAltTextField: string;
+        /** Field name for author image URL */
+        authorImageUrlField: string;
+        /** Field name for author name */
+        authorNameField: string;
+        /** Automatically assign unique IDs to messages */
+        autoAssignId: boolean;
+        /** Automatically bind to the data source */
+        autoBind: boolean;
+        contextMenuAction: (args: IContextMenuActionEventArgs) => void;
+        /** Data source configuration */
+        dataSource?: any;
+        /** Text direction */
+        dir: ChatDirection;
+        download: (args: IDownloadEventArgs) => void;
+        /** Actions available in the file context menu */
+        fileActions: IMenuAction[];
+        fileMenuAction: (args: IFileMenuActionEventArgs) => void;
+        /** Enable file attachment button functionality */
+        fileAttachment: boolean | IFileSelectButtonSettings | null;
+        /** Field name for files array */
+        filesField: string;
+        /** Template for rendering file attachments */
+        filesTemplate: FilesTemplateFunction | null;
+        /** Header items for the chat Toolbar */
+        headerItems: IHeaderItem[];
+        /** Custom header template (overrides headerItems) */
+        headerTemplate: HeaderTemplateFunction | null;
+        /** Widget height */
+        height: string | number | null;
+        /** Field name for message ID */
+        idField: string;
+        /** Input event handler. The event is triggered on each input change in the message box. */
+        input: (args: IInputEventArgs) => void;
+        /** Field name for deleted flag */
+        isDeletedField: string;
+        /** Field name for pinned flag */
+        isPinnedField: string;
+        /** Field name for typing flag */
+        isTypingField: string;
+        /** Loading state - transforms send button to stop button */
+        loading: boolean;
+        /** Actions available in the message context menu */
+        messageActions: IMenuAction[];
+        /** Message box settings for PromptBox configuration */
+        messageBox: IMessageBoxSettings | null;
+        /** Template for rendering message groups */
+        messageGroupTemplate: MessageGroupTemplateFunction | null;
+        /** Template for rendering message references (reply/pin) */
+        messageReferenceTemplate: MessageReferenceTemplateFunction | null;
+        /** Custom settings for message status display with icon support */
+        messageStatusSettings: Partial<Record<MessageStatus, IMessageStatusSettings>> | null;
+        /** Template for rendering individual messages */
+        messageTemplate: MessageTemplateFunction | null;
+        /** Format string for message timestamps */
+        messageTimeFormat: string;
+        /** Actions available in the message toolbar */
+        messageToolbarActions: IToolbarAction[];
+        /** Message width display mode */
+        messageWidthMode: MessageWidthMode;
+        /** Localization messages */
+        messages: IChatMessages;
+        /** Template for no data/empty state */
+        noDataTemplate: (() => string) | null;
+        /** Field name for reply-to ID */
+        replyToIdField: string;
+        /** Show scroll-to-bottom button when scrolled up */
+        scrollToBottomButton: boolean;
+        /** Send message event handler. The even is triggered right before the message is sent. */
+        sendMessage: (args: ISendMessageEventArgs) => void;
+        /** Skip HTML sanitization (use with caution) */
+        skipSanitization: boolean;
+        /** Speech-to-text configuration. Use false to not render, true for default, or object for custom configuration. */
+        speechToText: boolean | object | null;
+        suggestionClick: (args: ISuggestionClickEventArgs) => void;
+        /** Layout mode for suggested actions */
+        suggestedActionsLayoutMode: SuggestedActionsLayoutMode;
+        /**
+         * @deprecated Use `suggestedActionsLayoutMode` instead. Will be removed in future version.
+         * Enable scrollable suggested actions
+         */
+        suggestedActionsScrollable: boolean;
+        /** Template for rendering suggested actions */
+        suggestedActionsTemplate: SuggestionsTemplateFunction | null;
+        /** Initial suggestions to display */
+        suggestions: ISuggestion[];
+        /** Layout mode for message box suggestions: "scroll" | "wrap" | "scrollbuttons" */
+        suggestionsLayoutMode: SuggestedActionsLayoutMode | null;
+        /**
+         * @deprecated Use `suggestionsLayoutMode` instead. Will be removed in future version.
+         * Enable scrollable suggestions
+         */
+        suggestionsScrollable: boolean;
+        /** Template for rendering suggestions */
+        suggestionsTemplate: SuggestionsTemplateFunction | null;
+        /** Field name for message text */
+        textField: string;
+        /** Field name for timestamp */
+        timestampField: string;
+        /** Custom timestamp template */
+        timestampTemplate: TimestampTemplateFunction | null;
+        toolbarAction: (args: IToolbarActionEventArgs) => void;
+        unpin: (args: IUnpinEventArgs) => void;
+        /** Widget width */
+        width: string | number | null;
     }
 
     class CheckBox extends kendo.ui.Widget {
@@ -7923,8 +8233,8 @@ declare namespace kendo.ui {
     }
 
     interface SmartBoxEvent {
-        isDefaultPrevented?: function,
-        preventDefault?: function;
+        isDefaultPrevented?: Function,
+        preventDefault?: Function;
         sender?: kendo.ui.Widget;
         _defaultPrevented?: boolean;
     }
@@ -15459,7 +15769,6 @@ declare namespace kendo.ui {
 
         constructor(element: Element, options?: SmartPasteButtonOptions);
 
-        isListening(): boolean;
         setOptions(options: SmartPasteButtonOptions): void;
         destroy(): void;
     }

@@ -220,6 +220,11 @@ defaults:
         title_prefix: "ASP.NET MVC AIPrompt Component"
 -
     scope:
+        path: "html-helpers/conversational-ui/promptbox"
+    values:
+        title_prefix: "ASP.NET MVC PromptBox Component"
+-
+    scope:
         path: "html-helpers/conversational-ui/chat"
     values:
         title_prefix: "ASP.NET MVC Chat Component"
