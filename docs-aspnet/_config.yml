@@ -470,6 +470,9 @@ navigation:
         title: "AIPrompt"
      "html-helpers/conversational-ui/chat":
         title: "Chat"
+     "html-helpers/conversational-ui/promptbox":
+        title: "PromptBox"
+        isNew: true
      "html-helpers/interactivity":
         title: "Interactivity and UX"
      "html-helpers/interactivity/loader":
@@ -790,13 +793,13 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2026.1.210"
+cdnVersion: "2026.1.212"
 
 ## The themes CDN used
 themesCdnVersion: "13.0.0"
 
 ## The MVC Core version used
-mvcCoreVersion: "2026.1.210"
+mvcCoreVersion: "2026.1.212"
 
 productCode: UIASPCORE
 
@@ -863,6 +866,11 @@ defaults:
         path: "html-helpers/conversational-ui/aiprompt"
     values:
         title_prefix: "ASP.NET Core AIPrompt Component"
+-
+    scope:
+        path: "html-helpers/conversational-ui/promptbox"
+    values:
+        title_prefix: "ASP.NET Core PromptBox Component"
 -
     scope:
         path: "html-helpers/data-management/filemanager"

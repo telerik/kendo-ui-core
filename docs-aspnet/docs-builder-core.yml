@@ -32,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
-  cdnVersion: "2026.1.210"
+  cdnVersion: "2026.1.212"
   themesCdnVersion: "13.0.0"
-  mvcCoreVersion: "2026.1.210"
+  mvcCoreVersion: "2026.1.212"
   platform: aspnet-core
   core: true
   mvc: false
@@ -271,6 +271,8 @@ meta:
     title: DropDownButton
   "*speechtotextbutton":
     title: SpeechToTextButton
+  "*smartpastebutton":
+    title: SmartPasteButton
   "*splitbutton":
     title: SplitButton
   "*switch":
@@ -557,6 +559,8 @@ meta:
     title: Chat
   html-helpers/conversational-ui/aiprompt:
     title: AIPrompt
+  html-helpers/conversational-ui/promptbox:
+    title: PromptBox
   html-helpers/conversational-ui:
     title: Conversational UI
   html-helpers/navigation/menu/contextmenu:

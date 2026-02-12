@@ -28,7 +28,7 @@ liquid-output-delimiter-right: "}}"
 liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
-  cdnVersion: "2026.1.210"
+  cdnVersion: "2026.1.212"
   themesCdnVersion: "13.0.0"
 
 markdown-replacements:
@@ -43,7 +43,7 @@ default-code-block-language: js
 
 kendo-api-path: ./api
 dojo-scripts:
-  kendoCdnVersion: 2026.1.210
+  kendoCdnVersion: 2026.1.212
   themesCdnVersion: 13.0.0
   pdfJsVersion: 4.6.82
   jQueryVersion: 3.4.1
@@ -191,6 +191,8 @@ meta:
     title: Hello Kendo UI
   "*aiprompt":
     title: AIPrompt
+  "*promptbox":
+    title: PromptBox
   "*window":
     title: Window
   "*upload":
@@ -592,6 +594,8 @@ meta:
     position: 4
   controls/chat:
     title: Chat
+  controls/promptbox:
+    title: PromptBox
   controls/chartwizard:
     title: ChartWizard
   controls/imageeditor:
@@ -681,6 +685,8 @@ meta:
     position: 3
   controls/speechtotextbutton:
     title: SpeechToTextButton
+  controls/smartpastebutton:
+    title: SmartPasteButton
   controls/spreadsheet/end-user:
     title: End User
     position: 9

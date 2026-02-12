@@ -64,9 +64,14 @@ export class HtmlService {
      * Convert text URLs to clickable HTML links
      */
     convertTextUrlToLink(text, skipSanitization) {
-        const urlRegex = /((https?:\/\/[^\s]+)|(www\.[^\s]+))/gi;
+        const urlRegex = /((https?:\/\/[^\s"'<>]+)|(www\.[^\s"'<>]+))/gi;
         const processedText = skipSanitization ? text : this.encode(text);
-        return processedText.replace(urlRegex, (match) => {
+        return processedText.replace(urlRegex, (match, _p1, _p2, _p3, offset, fullString) => {
+            const lastTagClose = fullString.lastIndexOf('>', offset - 1);
+            const beforeMatch = fullString.substring(lastTagClose + 1, offset);
+            if (/\w+\s*=\s*["']$/.test(beforeMatch)) {
+                return match;
+            }
             let url = match.trim();
             const displayText = match.trim();
             if (/^www\./i.test(url)) {
@@ -78,7 +83,7 @@ export class HtmlService {
                 const rel = 'noopener noreferrer';
                 return `<a href="${url}" target="${target}"${rel ? ` rel="${rel}"` : ''}>${displayText}</a>`;
             }
-            catch (e) {
+            catch (e) { //NOSONAR - No need to handle/log the error here.
                 // If URL is invalid, return original text
                 return match;
             }

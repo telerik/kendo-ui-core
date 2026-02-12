@@ -8927,7 +8927,7 @@ How to configure stepwise rotation in Kendo UI Diagram? Control the angular incr
                 name: "rotateClockwise",
                 step: 45
             }, {
-                name: "rotateAnticlockwise", 
+                name: "rotateAnticlockwise",
                 step: 45
             }]
         }
@@ -9959,7 +9959,7 @@ How to customize exporting diagrams to PDF in Kendo UI diagram? Control and cust
             }
         }
     });
-    
+
     // Export the diagram as PDF
     $("#diagram").data("kendoDiagram").saveAsPDF();
     </script>
@@ -14513,7 +14513,7 @@ Specifies the type of the Shape using any of the built-in shape type.
 * `image`: an image
 * `text`: some text
 
-Or common workflow shapes as: 
+Or common workflow shapes as:
 
 * `Terminator`: Start and end points of the workflow.
 * `Process`: Standard processing steps or actions.
@@ -14984,7 +14984,7 @@ How do I customize the appearance of nodes in a Kendo UI Diagram? Define and cus
                 fill: "lightblue"
             },
             {
-                id: "2", 
+                id: "2",
                 x: 300,
                 y: 100,
                 width: 120,
@@ -15072,7 +15072,7 @@ How do I customize the description of connectors in a Kendo UI diagram? Set or c
                 name: "top",
                 description: "Top connection point"
             }, {
-                name: "bottom", 
+                name: "bottom",
                 description: "Bottom connection point"
             }]
         }]
@@ -18505,7 +18505,7 @@ Specifies the type of the Shape using any of the built-in shape type.
 * `image`: an image
 * `text`: some text
 
-Or common workflow shapes as: 
+Or common workflow shapes as:
 
 * `Terminator`: Start and end points of the workflow.
 * `Process`: Standard processing steps or actions.
@@ -19014,10 +19014,10 @@ How do I set the tooltip for a connection in a Kendo UI Diagram? Configure the c
             { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
         ],
         connections: [
-            { 
-              from: "1", 
-              to: "2", 
-              dataItem: { label: "Connection from 1 to 2" } 
+            {
+              from: "1",
+              to: "2",
+              dataItem: { label: "Connection from 1 to 2" }
             }
         ]
     });

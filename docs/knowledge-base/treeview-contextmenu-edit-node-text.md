@@ -60,7 +60,7 @@ How can I edit the text of a TreeView node by using a context menu?
 
     $("#menu").kendoContextMenu({
         target: "#treeview",
-        filter: ".k-treeview-leaf",
+        filter: ".k-treeview-item-content",
         select: function (e) {
             var node = $("#treeview").getKendoTreeView().dataItem($(e.target).closest(".k-treeview-item"));
             // create and open Window

@@ -166,6 +166,7 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
          <IntroTableAnchor title="FloatingActionButton" href="slug:htmlhelpers_floatingactionbutton_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Menu" href="slug:htmlhelpers_menu_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="PanelBar" href="slug:htmlhelpers_panelbar_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="SmartPasteButton" href="slug:htmlhelpers_overview_smartpastebutton"></IntroTableAnchor>
          <IntroTableAnchor title="SpeechToTextButton" href="slug:htmlhelpers_overview_speechtotextbutton"></IntroTableAnchor>
          <IntroTableAnchor title="SplitButton" href="slug:htmlhelpers_splitbutton_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Stepper" href="slug:htmlhelpers_stepper_aspnetcore_overview"></IntroTableAnchor>
