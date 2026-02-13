@@ -17,7 +17,7 @@ The AI Smart Box allows users to explore Grid data through traditional keyword s
 
 In the following example, you can switch between modes in the AI Smart Box to explore each way of interaction. Use the keyword search for exact matches, try semantic search with queries like "gardening equipment" to find related items like "Smart Plant Watering System", or ask the AI Assistant to apply Grid operations in natural language.
 
-```dojo
+```html
  <div id="example">
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products-data-sm.js"></script>
     <div id="grid"></div>    
@@ -37,7 +37,7 @@ In the following example, you can switch between modes in the AI Smart Box to ex
 
             async loadModel() {
                 try {
-                    const module = await import('https://cdn.jsdelivr.net/npm/@@huggingface/transformers@3.8.1');
+                    const module = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');
                     const { pipeline, env } = module;
                     env.allowLocalModels = false;
                     this.extractor = await pipeline('feature-extraction', 'Xenova/multilingual-e5-small');

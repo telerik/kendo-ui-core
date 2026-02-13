@@ -17,7 +17,7 @@ For example, try searching for "workout essentials" in the demo below to look fo
 
 The following example demonstrates Semantic Search mode in action:
 
-```dojo
+```html
 <div id="example">
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products-data-sm.js"></script>
     <div id="grid"></div>    
@@ -37,7 +37,7 @@ The following example demonstrates Semantic Search mode in action:
 
             async loadModel() {
                 try {
-                    const module = await import('https://cdn.jsdelivr.net/npm/@@huggingface/transformers@3.8.1');
+                    const module = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1');
                     const { pipeline, env } = module;
                     env.allowLocalModels = false;
                     this.extractor = await pipeline('feature-extraction', 'Xenova/multilingual-e5-small');
