@@ -16,9 +16,6 @@ The AI Toolbar Assistant interprets user requests and automatically applies the 
 
 > The demo in this article uses a Telerik-hosted AI service for demonstration purposes only. For production applications, you should [implement your own AI service](slug:smart_ext_kendoui_grid) that understands your specific domain, data, and business requirements.
 
-The following example demonstrates a Smart Grid that processes natural language requests for performing data operations, column management, selection, highlighting, and export operations.
-
-<demo metaUrl="grid/ai/ai-data-operations/" height="720"></demo>
 
 ## Implementation Steps
 
