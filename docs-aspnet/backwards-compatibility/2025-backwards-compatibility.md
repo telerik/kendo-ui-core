@@ -4,7 +4,7 @@ page_title: 2025 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2025."
 components: ["general"]
 slug: breakingchanges_2025
-position: 1
+position: 3
 ---
 
 # 2025 Releases
@@ -40,7 +40,7 @@ These classes are applied to the control wrapper elements based on the `position
 
 ### Chat
 
-The [Chat component has been completely redesigned](slug:htmlhelpers_chat_aspnetcore). 
+The [Chat component has been completely redesigned](slug:htmlhelpers_chat_aspnetcore).
 
 * `Toolbar()` and `User()` configurations have been deprecated.
 * The following client-side methods have been deprecated: `getUser()`, `renderAttachments()`, `renderMessage()`, `renderSuggestedActions()`, `renderUserTypingIndicator()`, `clearUserTypingIndicator()`, `removeTypingIndicator()`, and `toggleToolbar()`. For more information on the new client-side methods, refer to the [client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat#methods).
@@ -100,7 +100,7 @@ In versions before 2025 Q3, the `icon-class` configuration option sets a sprite 
 Before Q3 2025:
 ```TagHelper
 <tabstrip-item icon-class="netherlandsFlag" text="Netherlands"></tabstrip-item>
-```    
+```
 After Q3 2025:
 ```TagHelper
 <tabstrip-item sprite-css-classes='new string[] {"netherlandsFlag"}' text="Netherlands"></tabstrip-item>

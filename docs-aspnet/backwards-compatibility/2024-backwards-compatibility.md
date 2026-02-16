@@ -4,7 +4,7 @@ page_title: 2024 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2024."
 components: ["general"]
 slug: breakingchanges_2024
-position: 2
+position: 4
 ---
 
 # 2024 Releases
@@ -187,12 +187,12 @@ The code is moved to the demo application, where it is used for demo purposes on
 
 **PDFViewer**
 
-* The PDFViewer starts using the [Pager](https://demos.telerik.com/{{ site.platform }}/pager/index) component internally and follows its specification. 
+* The PDFViewer starts using the [Pager](https://demos.telerik.com/{{ site.platform }}/pager/index) component internally and follows its specification.
 * Added `k-icon` class to the `k-dropzone-icon` in the center of the viewer.
 * Added `k-toolbar-combobox` to the combobox for zoom options.
 * Removed `k-widget`.
 * Removed `k-zoom-in-out-group` on the zoom tools buttongroup.
-* Removed `k-toggle-selection-group` on selection buttongroup. 
+* Removed `k-toggle-selection-group` on selection buttongroup.
 
 **PivotGridV2**
 
@@ -204,8 +204,8 @@ The following classes are now removed:
 * The `k-table-tbody` has been removed from the `.k-pivotgrid-tbody` elements.
 * The `k-table-row` class is now removed from the `.k-pivotgrid-row` elements.
 * The `k-grid-table` class has been removed from the `.k-pivotgrid-table` values table.
-* The `k-table-th` has been removed from the `th.k-pivotgrid-cell` elements. 
-* The `k-table-td` has been removed from the `td.k-pivotgrid-cell` elements. 
+* The `k-table-th` has been removed from the `th.k-pivotgrid-cell` elements.
+* The `k-table-td` has been removed from the `td.k-pivotgrid-cell` elements.
 * The `k-pos-relative` and `k-widget` classes are now removed from the Configurator.
 * The `k-rounded-full` class is substituted by `k-round-md`.
 * Added `k-pivotgrid-expanded` on an expanded header.
@@ -227,12 +227,12 @@ The following classes are now removed:
 |`k-view-week`| `[data-selector='week']`
 |`k-view-day`| `[data-selector='day']`
 |`k-view-agenda`| `[data-selector='agenda']`
-|`k-view-timeline`| `[data-selector='timeline']`  
+|`k-view-timeline`| `[data-selector='timeline']`
 |`k-svg-i-arrow-left`| `k-i-caret-alt-left`
 |`k-svg-i-arrow-right`| `k-i-caret-alt-right`
 
 * The `k-button-rectangle` is removed from the buttons in views ButtonGroup.
-* The`k-heading-cell` is removed from the Scheduler first column. 
+* The`k-heading-cell` is removed from the Scheduler first column.
 * The `k-scheduler-table-auto` is removed from the Month view.
 * The `k-scheduler-group-cell` is removed from grouped Scheduler.
 * Added `k-scheduler-navigation` class to Today, Previous and Next buttongroup.

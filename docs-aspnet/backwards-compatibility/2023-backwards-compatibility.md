@@ -4,7 +4,7 @@ page_title: 2023 Releases
 description: "Learn about the breaking changes and backward compatibility released by {{ site.product }} in 2023."
 components: ["general"]
 slug: breakingchanges_2023
-position: 3
+position: 5
 ---
 
 # 2023 Releases
@@ -21,18 +21,18 @@ As of the 2023 R3 release, the font icons have been detached from the [Kendo UI 
 
 The font icons are also available as an NPM package. For more information on how to install the NPM package, refer to the following [documentation](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
 
-## {{ site.product }} R1 2023 SP2 
+## {{ site.product }} R1 2023 SP2
 
 ### FloatingActionButton
 
-As part of the [rendering unification](#unified-rendering) of the components: 
+As part of the [rendering unification](#unified-rendering) of the components:
 
 * The `Shape` configuration option and the `shape` API method are now removed.
 * The element with class `k-fab-items` is moved inside the element with class `k-fab-popup`.
 
 ## {{ site.product }} R1 2023 SP1
 
-* Drop of the development and support of the LESS themes. 
+* Drop of the development and support of the LESS themes.
 
 ### Unified Rendering
 
@@ -60,7 +60,7 @@ All `k-state-{name of state}` classes are transposed to `k-{name of state}`. A l
 
 ### Animation Containers
 
-* Animation containers are all components that represent or hold a popup, for example, the Grid filter menu, column and popup editor, Tooltip, SplitButton, DropDownList, and more.  
+* Animation containers are all components that represent or hold a popup, for example, the Grid filter menu, column and popup editor, Tooltip, SplitButton, DropDownList, and more.
 * The `.k-animation-container` elements are now holding another wrapping element with the `.k-child-animation-container` class.
 
 ### PanelBar
@@ -89,7 +89,7 @@ The component's value is wrapped within a `<span>` element annotated with the `.
     |`k-grid-cancel`| `k-grid-cancel-command`
     |`k-grid-delete`| `k-grid-remove-command`
 
-* The following classes `table`-specific classes have been added to the `table` elements: 
+* The following classes `table`-specific classes have been added to the `table` elements:
 
     |Versions prior to 2023.1.314| Versions 2023.1.314 and later
     |:---   |:---
@@ -376,7 +376,7 @@ As of the R1 2023 release, the `Load` method of the `Telerik.Web.PDF` assembly i
                 console.log("click:");
                 console.log(kendo.widgetInstance(e.target));
             }
-            
+
             function onToggle(e) {
                 console.log("toggle: ", e.checked);
                 console.log(kendo.widgetInstance(e.target));

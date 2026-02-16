@@ -4,7 +4,7 @@ page_title: Breaking Changes
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }}."
 components: ["general"]
 slug: breakingchanges_aspnetcore
-position: 0
+position: 1
 ---
 
 # Breaking Changes
@@ -19,6 +19,7 @@ The [breaking changes in the Kendo UI for jQuery suite](https://www.telerik.com/
 
 ## See Also
 
+* [Kendo UI for jQuery 2026 Breaking Changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2026-backward-compatibility)
 * [Kendo UI for jQuery 2025 Breaking Changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2025-backward-compatibility)
 * [Kendo UI for jQuery 2024 Breaking Changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2024-backward-compatibility)
 * [Kendo UI for jQuery 2023 Breaking Changes](https://www.telerik.com/kendo-jquery-ui/documentation/backwards-compatibility/2023-backward-compatibility)
