@@ -4,18 +4,18 @@ page_title: 2026 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2026."
 components: ["general"]
 slug: breakingchanges_2026
-position: 0
+position: 2
 ---
 
 # 2026 Releases
 
 This article lists the breaking or important changes in the 2026 releases of {{ site.product }}.
 
-## {{ site.product }} R1 2026
+## {{ site.product }} 2026 Q1
 
 ### TreeView Enhanced Rendering (HTML and CSS)
 
-Starting with the **R1 2026** release, the TreeView adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling.
+Starting with the **2026 Q1** release, the TreeView adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling.
 
 #### Key HTML Structure Changes
 
@@ -62,11 +62,11 @@ Update any custom selectors accordingly, for example:
 .k-treeview .k-treeview-item-content.k-selected { /* ... */ }
 ```
 
-### Component Appearance Defaults Removed
+### Appearance Defaults Removed
 
-> Starting with the R1 2026 release, {{ site.product }} components no longer render default appearance CSS classes. Previously, components automatically added `size`, `rounded`, `fillMode`, and `themeColor` classes to their HTML output. Instead, these properties now default to `null`, allowing the theme's CSS to control the component styling.
+> Starting with the 2026 Q1 release, {{ site.product }} components no longer render default appearance CSS classes. Previously, components automatically added `size`, `rounded`, `fillMode`, and `themeColor` classes to their HTML output. Instead, these properties now default to `null`, allowing the theme's CSS to control the component styling.
 
-### What Changed
+#### What Changed
 
 Previously, components had hardcoded defaults like:
 - `Size = ComponentSize.Medium`
@@ -97,7 +97,7 @@ The visual appearance remains the same because Kendo Themes v13+ apply default s
 1. **`None` enum value removed** from appearance enums
 2. **Builder methods now accept nullable types** for appearance properties
 
-## Removed Enum Values
+#### Removed Enum Values
 
 The following `None` values have been **removed** from appearance enums:
 
@@ -108,7 +108,7 @@ The following `None` values have been **removed** from appearance enums:
 | `ButtonFillMode` | `None` |
 | `ChipFillMode` | `None` |
 
-### Migration for `None` Value Usage
+**Migration for `None` Value Usage**
 
 ```csharp
 // Before - using None to disable styling (NO LONGER VALID)
@@ -123,9 +123,9 @@ The following `None` values have been **removed** from appearance enums:
 )
 ```
 
-## Removed CSS Classes by Category
+### Removed CSS Classes by Category
 
-### Size Classes (No Longer Rendered by Default)
+#### Size Classes (No Longer Rendered by Default)
 
 | Class | Component Types |
 |-------|-----------------|
@@ -154,7 +154,7 @@ The following `None` values have been **removed** from appearance enums:
 | `k-loader-md` | Loader |
 | `k-loader-lg` | Loader |
 
-### Rounded Classes (No Longer Rendered by Default)
+#### Rounded Classes (No Longer Rendered by Default)
 
 | Class | Description |
 |-------|-------------|
@@ -163,7 +163,7 @@ The following `None` values have been **removed** from appearance enums:
 | `k-rounded-lg` | Large border radius |
 | `k-rounded-full` | Full/pill border radius |
 
-### FillMode Classes (No Longer Rendered by Default)
+#### FillMode Classes (No Longer Rendered by Default)
 
 | Class | Component Types |
 |-------|-----------------|
@@ -188,7 +188,7 @@ The following `None` values have been **removed** from appearance enums:
 | `k-avatar-solid` | Avatar |
 | `k-avatar-outline` | Avatar |
 
-### ThemeColor Classes (No Longer Rendered by Default)
+#### ThemeColor Classes (No Longer Rendered by Default)
 
 | Class Pattern | Examples |
 |---------------|----------|
@@ -197,11 +197,11 @@ The following `None` values have been **removed** from appearance enums:
 | `k-chip-solid-{color}` | `k-chip-solid-base`, `k-chip-solid-primary` |
 | `k-badge-solid-{color}` | `k-badge-solid-primary`, `k-badge-solid-secondary` |
 
-## Affected Components
+### Default Appearance Changes - Affected Components
 
 The following components no longer render default appearance classes:
 
-### Input Components
+#### Input Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -226,7 +226,7 @@ The following components no longer render default appearance classes:
 | ColorPalette | - | Removed | - | - |
 | Signature | Removed | Removed | Removed | - |
 
-### Button Components
+#### Button Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -236,14 +236,14 @@ The following components no longer render default appearance classes:
 | DropDownButton | Removed | Removed | Removed | Removed |
 | FloatingActionButton | Removed | Removed | Removed | Removed |
 
-### Chip Components
+#### Chip Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
 | Chip | Removed | Removed | Removed | Removed |
 | ChipList | - | Removed | - | - |
 
-### Indicator Components
+#### Indicator Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -253,7 +253,7 @@ The following components no longer render default appearance classes:
 
  >tip The default `themeColor` of the `Badge` component is now `primary`.
 
-### Navigation Components
+#### Navigation Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -261,7 +261,7 @@ The following components no longer render default appearance classes:
 | Breadcrumb | - | Removed | - | - |
 | TabStrip | - | Removed | - | - |
 
-### Selection Components
+#### Selection Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -269,7 +269,7 @@ The following components no longer render default appearance classes:
 | RadioButton | - | Removed | - | - |
 | Switch | - | Removed | Removed | - |
 
-### Data Components
+#### Data Components
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -278,7 +278,7 @@ The following components no longer render default appearance classes:
 | Pager | - | Removed | - | - |
 | TreeView | - | Removed | - | - |
 
-### Layout & Containers
+#### Layout & Containers
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
@@ -290,7 +290,7 @@ The following components no longer render default appearance classes:
 
 #### Notification
 
- >tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show`](/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
+>tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show`](/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
 
 ```
 var notification = $("#notification").data("kendoNotification");
@@ -303,16 +303,16 @@ notification.info("Some text");
 
 ```
 
-### Icons
+#### Icons
 
 | Component | fillMode | size | rounded | themeColor |
 |-----------|----------|------|---------|------------|
 | Icon | - | Removed | - | Removed |
 | SVGIcon | - | Removed | - | Removed |
 
-## Migration Guide
+### Migration Guide
 
-### For HTML Helper (MVC)
+#### For HTML Helper (MVC)
 
 If you need explicit styling, set the options:
 
@@ -336,7 +336,7 @@ If you need explicit styling, set the options:
 // Rendered: <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
 ```
 
-### For Tag Helpers (Core)
+#### For Tag Helpers (Core)
 
 ```html
 <!-- Before (implicit defaults) -->
@@ -352,7 +352,7 @@ If you need explicit styling, set the options:
 </kendo-button>
 ```
 
-### Grid Component Changes
+#### Grid Component Changes
 
 The Grid's internal elements (toolbar, pager, buttons) also no longer render default classes:
 
@@ -371,7 +371,7 @@ The Grid's internal elements (toolbar, pager, buttons) also no longer render def
 )
 ```
 
-### Dialog Actions
+#### Dialog Actions
 
 ```csharp
 // Before
@@ -387,7 +387,7 @@ The Grid's internal elements (toolbar, pager, buttons) also no longer render def
 })
 ```
 
-### Custom CSS Updates
+#### Custom CSS Updates
 
 If you have custom CSS targeting size classes:
 
@@ -405,7 +405,7 @@ If you have custom CSS targeting size classes:
 /* Or explicitly set size in code and target that class */
 ```
 
-## Builder Method Signature Changes
+### Builder Method Signature Changes
 
 The following builder methods now accept **nullable types**:
 
@@ -418,7 +418,7 @@ The following builder methods now accept **nullable types**:
 
 This affects all components with appearance options (Button, ComboBox, Grid, TextBox, etc.).
 
-## Theme Version Requirement
+### Theme Version Requirement
 
 This change requires **Kendo Themes v13.0.0 or later**. Update your theme package references:
 
@@ -433,9 +433,77 @@ Or CDN references:
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/13.0.0/default/default-main.css" />
 ```
 
-## Benefits
+### Benefits
 
 1. **Cleaner DOM** - Components render fewer CSS classes
 2. **Flexible Theming** - Easier to customize default appearance via CSS
 3. **Smaller Markup** - Reduced HTML output size
 4. **Centralized Defaults** - Styling defaults managed in CSS, not server-side code
+
+### Diagram
+
+For the fluent wrappers `DashTypes` were a **string** and are now **enums**.
+
+{% if site.core %}
+**HtmlHelpers**
+
+- `DiagramConnectionContentBorderSettingsBuilder`
+- `DiagramConnectionDefaultsContentBorderSettingsBuilder`
+- `DiagramConnectionDefaultsEndCapStrokeSettingsBuilder`
+- `DiagramConnectionDefaultsStartCapStrokeSettingsBuilder`
+- `DiagramConnectionEndCapStrokeSettingsBuilder`
+- `DiagramConnectionStartCapStrokeSettingsBuilder`
+- `DiagramEditableResizeHandlesHoverStrokeSettingsBuilder`
+- `DiagramEditableResizeHandlesStrokeSettingsBuilder`
+- `DiagramSelectableStrokeSettingsBuilder`
+- `DiagramShapeConnectorDefaultsHoverStrokeSettingsBuilder`
+- `DiagramShapeConnectorDefaultsStrokeSettingsBuilder`
+- `DiagramShapeConnectorHoverStrokeSettingsBuilder`
+- `DiagramShapeConnectorStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorDefaultsHoverStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorDefaultsStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorHoverStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorStrokeSettingsBuilder`
+- `DiagramShapeDefaultsStrokeSettingsBuilder`
+- `DiagramShapeStrokeSettingsBuilder`
+
+
+**TagHelpers**
+
+- `DiagramConnectionContentBorderSettingsBuilder`
+- `DiagramConnectionDefaultsContentBorderSettingsBuilder`
+- `DiagramConnectionDefaultsEndCapStrokeSettingsBuilder`
+- `DiagramConnectionDefaultsStartCapStrokeSettingsBuilder`
+- `DiagramConnectionEndCapStrokeSettingsBuilder`
+- `DiagramConnectionStartCapStrokeSettingsBuilder`
+- `DiagramEditableResizeHandlesHoverStrokeSettingsBuilder`
+- `DiagramEditableResizeHandlesStrokeSettingsBuilder`
+- `DiagramSelectableStrokeSettingsBuilder`
+- `DiagramShapeConnectorDefaultsHoverStrokeSettingsBuilder`
+- `DiagramShapeConnectorDefaultsStrokeSettingsBuilder`
+- `DiagramShapeConnectorHoverStrokeSettingsBuilder`
+- `DiagramShapeConnectorStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorDefaultsHoverStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorDefaultsStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorHoverStrokeSettingsBuilder`
+- `DiagramShapeDefaultsConnectorStrokeSettingsBuilder`
+- `DiagramShapeDefaultsStrokeSettingsBuilder`
+- `DiagramShapeStrokeSettingsBuilder`
+
+{% endif %}
+
+{% if site.mvc %}
+- `DiagramConnectionContentBorderSettingsBuilder`
+- `DiagramConnectionDefaultsContentBorderSettingsBuilder`
+- `DiagramConnectionDefaultsEndCapStrokeSettingsBuilder`
+- `DiagramConnectionDefaultsStartCapStrokeSettingsBuilder`
+- `DiagramConnectionEndCapStrokeSettingsBuilder`
+- `DiagramConnectionStartCapStrokeSettingsBuilder`
+- `DiagramEditableResizeHandlesHoverStrokeSettingsBuilder`
+- `DiagramEditableResizeHandlesStrokeSettingsBuilder`
+- `DiagramEditableSelectStrokeSettingsBuilder`
+- `DiagramSelectableStrokeSettingsBuilder`
+- `DiagramShapeDefaultsStrokeSettingsBuilder`
+- `DiagramShapeStrokeSettingsBuilder`
+- `DiagramStrokeSettingsBuilder`
+{% endif %}

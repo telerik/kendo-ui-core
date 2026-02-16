@@ -4,7 +4,7 @@ page_title: 2022 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2022."
 components: ["general"]
 slug: breakingchanges_2022
-position: 4
+position: 6
 ---
 
 # 2022 Releases
@@ -15,7 +15,7 @@ This article lists the breaking or important changes in the 2022 releases of {{ 
 
 **Selectable**
 
-As of the 2022 R3 release, the `Selectable` events mechanism is altered for a variety of the components. The `Change` event will now be fired only when Selection/Deselection is performed. Invoking the client-side API methods would not fire the event as well. 
+As of the 2022 R3 release, the `Selectable` events mechanism is altered for a variety of the components. The `Change` event will now be fired only when Selection/Deselection is performed. Invoking the client-side API methods would not fire the event as well.
 
 Below you can find a list of the impacted components:
 
