@@ -13,6 +13,53 @@ This article lists the breaking or important changes in the 2026 releases of Ken
 
 ## Kendo UI 2026 Q1
 
+### Chat Suggestions Configuration Changes
+
+Starting with the **2026 Q1** release, the Chat component has renamed the scrollable configuration options for suggested actions and suggestions to use a more descriptive layout mode approach.
+
+#### Renamed Options
+
+| Previous Option | New Option |
+|-----------------|------------|
+| `suggestedActionsScrollable` | `suggestedActionsLayoutMode` |
+| `suggestionsScrollable` | `suggestionsLayoutMode` |
+
+#### Value Changes
+
+The boolean values have been replaced with the `SuggestionsLayoutMode` enum:
+
+| Previous Value | New Value |
+|----------------|-----------|
+| `false/true` | `"wrap/scroll/scrollbuttons"` |
+
+#### Migration Examples
+
+**Before (2025 and earlier):**
+
+```javascript
+$("#chat").kendoChat({
+    suggestedActionsScrollable: false,
+    suggestionsScrollable: true
+});
+```
+
+**After (2026 Q1 and later):**
+
+```javascript
+$("#chat").kendoChat({
+    suggestedActionsLayoutMode: "wrap",
+    suggestionsLayoutMode: "scroll"
+});
+```
+
+#### Available Layout Modes
+
+| Value | Description |
+|-------|-------------|
+| `"wrap"` | Suggestions wrap to multiple lines within the available space |
+| `"scroll"` | Suggestions are displayed in a horizontally scrollable container |
+| `"scrollbuttons"` | Suggestions are displayed in a horizontally scrollable container with scroll buttons on each side |
+
 ### TreeView Enhanced Rendering (HTML and CSS)
 
 Starting with the **2026 Q1** release, the TreeView adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling.
