@@ -13,6 +13,75 @@ This article lists the breaking or important changes in the 2026 releases of {{ 
 
 ## {{ site.product }} 2026 Q1
 
+### Chat Suggestions Configuration Changes
+
+Starting with the **2026 Q1** release, the Chat component has renamed the scrollable configuration options for suggested actions and suggestions to use a more descriptive layout mode approach.
+
+#### Renamed Options
+
+| Previous Option | New Option |
+|-----------------|------------|
+| `SuggestedActionsScrollable` | `SuggestedActionsLayoutMode` |
+| `SuggestionsScrollable` | `SuggestionsLayoutMode` |
+
+#### Value Changes
+
+The boolean values have been replaced with the `SuggestionsLayoutMode` enum:
+
+| Previous Value | New Value |
+|----------------|-----------|
+| `False/True` | `"Wrap/Scroll/ScrollButtons"` |
+
+#### Migration Examples
+
+**Before (2025 and earlier):**
+
+```HtmlHelper
+    @(Html.Kendo().Chat()
+        .Name("chat")
+        .SuggestedActionsScrollable(false)
+        .SuggestionsScrollable(true)
+    )
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-chat name="chat"
+        suggested-actions-scrollable="false"
+        suggestions-scrollable="true">
+    </kendo-chat>
+```
+{% endif %}
+
+**After (2026 Q1 and later):**
+
+```HtmlHelper
+    @(Html.Kendo().Chat()
+        .Name("chat")
+        .SuggestedActionsLayoutMode(SuggestionsLayoutMode.Wrap)
+        .SuggestionsLayoutMode(SuggestionsLayoutMode.Scroll)
+    )
+```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-chat name="chat"
+        suggested-actions-layout-mode="SuggestionsLayoutMode.Wrap"
+        suggestions-layout-mode="SuggestionsLayoutMode.Scroll">
+    </kendo-chat>
+```
+{% endif %}
+
+#### Available Layout Modes
+
+| Value | Description |
+|-------|-------------|
+| `"Wrap"` | Suggestions wrap to multiple lines within the available space |
+| `"Scroll"` | Suggestions are displayed in a horizontally scrollable container |
+| `"ScrollButtons"` | Suggestions are displayed in a horizontally scrollable container with scroll buttons on each side |
+
 ### TreeView Enhanced Rendering (HTML and CSS)
 
 Starting with the **2026 Q1** release, the TreeView adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling.
