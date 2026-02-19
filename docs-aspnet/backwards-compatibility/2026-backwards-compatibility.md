@@ -528,25 +528,25 @@ For the fluent wrappers `DashTypes` were a **string** and are now **enums**.
 
 **TagHelpers**
 
-- `DiagramConnectionContentBorderSettingsBuilder`
-- `DiagramConnectionDefaultsContentBorderSettingsBuilder`
-- `DiagramConnectionDefaultsEndCapStrokeSettingsBuilder`
-- `DiagramConnectionDefaultsStartCapStrokeSettingsBuilder`
-- `DiagramConnectionEndCapStrokeSettingsBuilder`
-- `DiagramConnectionStartCapStrokeSettingsBuilder`
-- `DiagramEditableResizeHandlesHoverStrokeSettingsBuilder`
-- `DiagramEditableResizeHandlesStrokeSettingsBuilder`
-- `DiagramSelectableStrokeSettingsBuilder`
-- `DiagramShapeConnectorDefaultsHoverStrokeSettingsBuilder`
-- `DiagramShapeConnectorDefaultsStrokeSettingsBuilder`
-- `DiagramShapeConnectorHoverStrokeSettingsBuilder`
-- `DiagramShapeConnectorStrokeSettingsBuilder`
-- `DiagramShapeDefaultsConnectorDefaultsHoverStrokeSettingsBuilder`
-- `DiagramShapeDefaultsConnectorDefaultsStrokeSettingsBuilder`
-- `DiagramShapeDefaultsConnectorHoverStrokeSettingsBuilder`
-- `DiagramShapeDefaultsConnectorStrokeSettingsBuilder`
-- `DiagramShapeDefaultsStrokeSettingsBuilder`
-- `DiagramShapeStrokeSettingsBuilder`
+- `DiagramConnectionContentBorderSettingsTagHelper`
+- `DiagramConnectionDefaultsContentBorderSettingsTagHelper`
+- `DiagramConnectionDefaultsEndCapStrokeSettingsTagHelper`
+- `DiagramConnectionDefaultsStartCapStrokeSettingsTagHelper`
+- `DiagramConnectionEndCapStrokeSettingsTagHelper`
+- `DiagramConnectionStartCapStrokeSettingsTagHelper`
+- `DiagramEditableResizeHandlesHoverStrokeSettingsTagHelper`
+- `DiagramEditableResizeHandlesStrokeSettingsTagHelper`
+- `DiagramSelectableStrokeSettingsTagHelper`
+- `DiagramShapeConnectorDefaultsHoverStrokeSettingsTagHelper`
+- `DiagramShapeConnectorDefaultsStrokeSettingsTagHelper`
+- `DiagramShapeConnectorHoverStrokeSettingsTagHelper`
+- `DiagramShapeConnectorStrokeSettingsTagHelper`
+- `DiagramShapeDefaultsConnectorDefaultsHoverStrokeSettingsTagHelper`
+- `DiagramShapeDefaultsConnectorDefaultsStrokeSettingsTagHelper`
+- `DiagramShapeDefaultsConnectorHoverStrokeSettingsTagHelper`
+- `DiagramShapeDefaultsConnectorStrokeSettingsTagHelper`
+- `DiagramShapeDefaultsStrokeSettingsTagHelper`
+- `DiagramShapeStrokeSettingsTagHelper`
 
 {% endif %}
 
