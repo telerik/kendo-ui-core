@@ -25,9 +25,6 @@ The AI Coding Assistant is integrated in [Telerik {{ site.framework }} MCP Serve
 
 ## Getting Started
 
->warning**Кnown Issue: Hanging tool calls in Visual Studio (see [Troubleshooting](slug:ai_coding_assistant_troubleshooting_aspnet)).**
-
-
 To use the Telerik {{ site.framework }} AI Coding Assistant, you need:
 
 * A [Telerik user account](https://www.telerik.com/account/).
