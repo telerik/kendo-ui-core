@@ -3,6 +3,7 @@ title: AI Components & Features
 page_title: AI Components and Features in Kendo UI for jQuery by Progress
 description: "Discover the AI-powered components and features in Kendo UI for jQuery designed to boost productivity and enhance functionality and user experience."
 slug: ai_components_kendoui
+tag: updated
 position: 4
 ---
 
