@@ -2,6 +2,7 @@
 title: Support for Previous Versions
 page_title: Support Policy for Previous Kendo UI Versions
 description: "Get started with {{ site.product }}  and learn about the support policy on earlier versions, how bug fixes and feature requests are implemented, and how you can get them."
+components: ["general"]
 previous_url: /getting-started/prerequisites/old-versions-support-policy, /compatibility/old-versions-support-policy, /installation-mvc/upgrading/old-versions-support-policy
 slug: oldversionssupportpolicy_core
 position: 50

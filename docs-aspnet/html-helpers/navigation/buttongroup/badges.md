@@ -2,6 +2,7 @@
 title: Badges
 page_title: Badges
 description: "Learn how to configure the badges of the Telerik UI ButtonGroup component for {{ site.framework }}."
+components: ["buttongroup"]
 slug: badges_buttongroup_aspnetcore
 position: 6
 ---

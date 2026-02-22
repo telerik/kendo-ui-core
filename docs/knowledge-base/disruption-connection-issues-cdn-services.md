@@ -7,6 +7,7 @@ slug: troubleshoot_cdn_installing
 tags: kendoui, jquery, disruption, connection, issues, cdn, installing
 type: troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

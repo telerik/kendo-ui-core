@@ -7,6 +7,7 @@ slug: grid-filter-columns-by-date-via-search-panel
 tags: grid, search, panel, filter, date, format, columns
 ticketid: 1459985
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

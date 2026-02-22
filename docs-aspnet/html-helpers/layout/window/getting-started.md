@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Window component by following a complete step-by-step tutorial."
+components: ["window"]
 slug: aspnetcore_window_getting_started
 position: 1
 ---
@@ -243,7 +244,7 @@ You can reference the Window instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var windowReference = $("#window").data("kendoWindow"); // windowReference is a reference to the existing Window instance of the helper.
     </script>
@@ -251,7 +252,7 @@ You can reference the Window instances that you have created and build on top of
 
 1. Use the [Window client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/window#methods) to control the behavior of the widget. In this example, you will use the `close` method to close the window.
 
-    ```script
+    ```JS script
     <script>
         var windowReference = $("#window").data("kendoWindow"); // windowReference is a reference to the existing Window instance of the helper.
         windowReference.close(); 

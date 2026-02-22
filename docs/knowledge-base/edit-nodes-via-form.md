@@ -5,9 +5,9 @@ description: "Learn how to allow users to edit nodes by using a standalone form 
 slug: howto_editnodesviaform_treeview
 previous_url: /controls/navigation/treeview/how-to/editing/edit-nodes-via-form
 tags: telerik, kendo, jquery, treeview, edit, nodes, with, standalone, form
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

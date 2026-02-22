@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Calendar Right-to-Left Support
 description: "Get started with the Telerik UI Calendar for {{ site.framework }} and learn about the RTL supports it provides."
+components: ["calendar"]
 slug: rtl_calendar_aspnetcore
 position: 3
 ---

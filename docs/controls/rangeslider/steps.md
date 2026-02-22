@@ -2,6 +2,7 @@
 title: Steps
 page_title: jQuery RangeSlider Documentation - Steps
 description: "Learn how to configure the small and the large steps of the jQuery RangeSlider for Kendo UI."
+components: ["rangeslider"]
 slug: steps_rangeslider_widget
 position: 3
 ---

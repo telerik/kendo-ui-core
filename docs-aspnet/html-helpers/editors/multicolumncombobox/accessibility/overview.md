@@ -2,7 +2,8 @@
 title: Overview
 page_title: MultiColumnComboBox Documentation | MultiColumnComboBox Accessibility
 description: "Get started with the {{ site.product }} MultiColumnComboBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_multicolumncombobox
+components: ["multicolumncombobox"]
+slug: htmlhelpers_multicolumncombobox_accessibility
 position: 1
 ---
 
@@ -25,7 +26,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The MultiColumnComboBox implements the same ARIA specification as the **ComboBox** component.
 
-[ComboBox accessibility specification]({%slug accessibility_aspnetcore_combobox%})
+[ComboBox accessibility specification]({% slug htmlhelpers_combobox_accessibility %})
 
 ## Section 508
 

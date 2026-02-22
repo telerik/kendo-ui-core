@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MediaPlayer Documentation - MediaPlayer Overview
 description: "Get started with the jQuery MediaPlayer by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["mediaplayer"]
 previous_url: /web/mediaplayer/overview, /getting-started/web/mediaplayer/overview
 slug: overview_kendoui_mediaplayer_widget
 position: 1
@@ -20,7 +21,7 @@ To respond to cutting-end design practices and trends, the MediaPlayer component
 * [Multiple sources]({% slug multiplesources_kendoui_mediaplayer %})
 * [Playlists]({% slug playlists_kendoui_mediaplayer %})
 * [Globalization]({% slug globalization_mediaplayer_jquery %})
-* [Accessibility]({% slug accessibility_mediaplayer_jquery %})
+* [Accessibility]({% slug jquery_mediaplayer_accessibility %})
 
 ## Next Steps
 

@@ -6,8 +6,8 @@ page_title: Include Negative Values in the Total in Stacked Column Chart's label
 slug: include-negative-values-in-stacked-chart
 tags: chart, stacked, negative, include, labels
 res_type: kb
+components: ["chart"]
 ticketid: 1580716
-component: chart
 ---
 
 ## Environment

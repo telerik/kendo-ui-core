@@ -2,6 +2,7 @@
 title: Auto-Resizing to Content
 page_title: Auto-Resizing to Content
 description: "Learn how to expand the Splitter to fit the content inside it using the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: htmlhelpers_expand_splitter_to_content_aspnetcore
 position: 3
 ---
@@ -38,8 +39,7 @@ You can expand the height of the Splitter based on the content inside a pane.
             .Transport(transport =>
             {
                 transport.Read(read =>
-                   read.Url("https://demos.telerik.com/kendo-ui/service/products")
-                       .DataType("jsonp")
+                   read.Url("https://demos.telerik.com/service/v2/core/products")
                 );
             })
         )
@@ -86,7 +86,7 @@ You can expand the height of the Splitter based on the content inside a pane.
                 <model id="ProductID"></model>
             </schema>
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/products" datatype="jsonp" />
+                <read url="https://demos.telerik.com/service/v2/core/products" />
             </transport>
         </datasource>
     </kendo-grid>

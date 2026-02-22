@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TimePicker Documentation - Getting Started with the TimePicker
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["timepicker"]
 slug: getting_started_kendoui_timepicker_widget
 position: 1
 ---
@@ -97,8 +98,3 @@ You can customize the format of the displayed time by setting the [`format`](/ap
 * [JavaScript API Reference of the jQuery TimePicker](/api/javascript/ui/timepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

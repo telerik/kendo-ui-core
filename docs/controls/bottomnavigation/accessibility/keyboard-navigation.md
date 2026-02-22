@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery BottomNavigation Documentation - Keyboard Navigation
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["bottomnavigation"]
 slug: keynav_bottomnavigation_jquery
 position: 2
 ---
@@ -25,4 +26,4 @@ For a complete example, refer to the [demo on keyboard navigation of the BottomN
 
 * [Keyboard Navigation by the BottomNavigation (Demo)](https://demos.telerik.com/kendo-ui/bottomnavigation/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the BottomNavigation]({% slug accessibility_kendoui_bottomnavigation_widget %})
+* [Accessibility in the BottomNavigation]({% slug jquery_bottomnavigation_accessibility %})

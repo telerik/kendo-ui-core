@@ -6,6 +6,7 @@ page_title: Show Ellipsis for Long Content and Display Tooltip on Hover - Kendo 
 slug: grid-ellipsis-text-show-tooltip
 tags: grid, ellipsis, tooltip, long, text, content
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

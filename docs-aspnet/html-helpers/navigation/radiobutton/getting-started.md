@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} RadioButton component by following a complete step-by-step tutorial."
+components: ["radiobutton"]
 slug: aspnetcore_radiobutton_getting_started
 position: 1
 ---
@@ -151,7 +152,7 @@ You can reference the RadioButton instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var radiobuttonReference = $("#role2").data("kendoRadioButton"); // radiobuttonReference is a reference to the existing RadioButton instance of the helper.
     </script>
@@ -159,7 +160,7 @@ You can reference the RadioButton instances that you have created and build on t
 
 1. Use the [RadioButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiobutton#methods) to control the behavior of the widget. In this example, you will use the `check` method to check the RadioButton.
 
-    ```
+    ```JS script
     <script>
         $(document).ready(function() {
             //get a reference to the RadioButton instance

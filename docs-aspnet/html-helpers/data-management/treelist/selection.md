@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to configure its select functionality."
+components: ["treelist"]
 slug: htmlhelpers_treelist_selection
 position: 7
 ---
@@ -89,7 +90,7 @@ To get the currently selected items, you can use the [TreeList client-side API](
  1. Call the [`select()` client-side API method](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/select).  The method will return an array with the elements of the selected items.
  1. Loop through the selected items and call the [dataItem()](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/dataitem) method for each element to access the data item.
 
-```Script
+```JS script
     var treeListWidget = $("#treeList").data("kendoTreeList"); // Get a reference to the defined TreeList component.
     var selectedItemsElements = treeListWidget.select();
     var selectedDataItems = [];
@@ -173,4 +174,4 @@ In some scenarios, the specified TreeList rows must be selected by default. The 
 ## See Also
 
 * [Selection of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/checkbox-selection)
-* [Server-Side API](/api/selection)
+* [Server-Side API](/api/treelist)

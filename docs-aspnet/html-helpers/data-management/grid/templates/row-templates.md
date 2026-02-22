@@ -2,6 +2,7 @@
 title: Row Templates
 page_title: Row Templates
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to place custom content into a grid row with the help of row templates."
+components: ["grid"]
 slug: row_templates_aspnetcore_grid
 position: 3
 ---
@@ -42,6 +43,9 @@ The following example demonstrates how to use a string row template which genera
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using Row Templates in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/rowtemplate)
 * [Using Detail-Row Templates in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/detailtemplate)
 * [Using Toolbar Templates in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-template)

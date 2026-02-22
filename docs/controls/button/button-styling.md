@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Button Documentation - Appearance
 description: "Learn how to apply different styling options to the Button widget."
+components: ["button"]
 previous_url: /styles-and-layout/styling-components/button-styling
 slug: button_styling_widget
 position: 3
@@ -33,10 +34,10 @@ The following values are available for the [`size`](/api/javascript/ui/button/co
 - `lg`—large size
 - `none`—unset
 
-The default size value is `medium` and is applied to the button element through the `k-button-md` class.
+The default size value is `undefined` and the default size appearance is controlled by the theme.
 
 ```html
-<button class="k-button k-button-md" >
+<button class="k-button" >
 </button>
 ```
 
@@ -56,7 +57,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/butto
 The default fillMode value is `solid` and is applied to the button element through the `k-button-solid` class.
 
 ```html
-<button class="k-button k-button-solid" >
+<button class="k-button" >
 </button>
 ```
 
@@ -79,19 +80,19 @@ The following values are available for the [`themeColor`](/api/javascript/ui/but
 - `inverse`
 - `none`
 
-The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have `k-button-solid-base` class applied.
+The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have `k-button-base` class applied.
 
 ```html
 <!-- Button with default fillMode and themeColor -->
-<button class="k-button k-button-solid k-button-solid-base" >
+<button class="k-button" >
 </button>
 
 <!-- Button with default fillMode and 'primary' themeColor -->
-<button class="k-button k-button-solid k-button-solid-primary" >
+<button class="k-button k-button-primary" >
 </button>
 
 <!-- Button with `flat` fillMode and `primary` themeColor -->
-<button class="k-button k-button-flat k-button-flat-primary" >
+<button class="k-button k-button-flat k-button-primary" >
 </button>
 ```
 
@@ -108,10 +109,10 @@ The following values are available for the [`rounded`](/api/javascript/ui/button
 - `pill`
 - `none`—unset
 
-The default rounded value is `medium` and is applied to the button element through the `k-rounded-md` class.
+The default rounded value is `undefined` and the default appearance is controlled by the theme.
 
 ```html
-<button class="k-button k-rounded-md" >
+<button class="k-button" >
 </button>
 ```
 

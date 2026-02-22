@@ -7,6 +7,7 @@ slug: gantt-inside-container
 tags: kendo, kendoui, gantt, hiden, container
 ticketid: 1144634
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

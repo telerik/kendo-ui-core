@@ -2,6 +2,7 @@
 title: Server-Side Processing
 page_title: Server-Side Processing
 description: "Process the data of the Telerik UI Spreadsheet by using the Telerik Document Processing library."
+components: ["spreadsheet"]
 previous_url: /helpers/data-management/spreadsheet/spreadsheet-processing
 slug: spreadsheet_processing_spreadsheet_mvc
 position: 10
@@ -38,7 +39,7 @@ The supported file extensions are:
 * `.txt`
 * `.json`
 
-```cs
+```C#
 public class HomeController : Controller
 {
     public ActionResult Read()
@@ -92,7 +93,7 @@ The supported file extensions are:
 
 The following example demonstrates how to load the data by using the `BindTo` method and the Spreadsheet document model.
 
-```cs
+```C#
 	public class HomeController : Controller
     {
         public ActionResult Index()
@@ -128,7 +129,7 @@ The supported file extensions are:
 
 > Set [`aspnet:MaxJsonDeserializerMembers`](https://msdn.microsoft.com/en-us/library/hh975440%28v=vs.120%29.aspx?f=255&MSPPError=-2147217396) to a higher value than the default one in the `web.config`.
 
-```cs
+```C#
 [HttpPost]
 public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 {
@@ -136,7 +137,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
     return new EmptyResult();
 }
 ```
-```cshtml
+```Razor cshtml
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
 )
@@ -154,7 +155,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
     });
 </script>
 ```
-```web.config
+```xml web.config
 <configuration>
   <appSettings>
     <add key="aspnet:MaxJsonDeserializerMembers" value="150000" />

@@ -2,6 +2,7 @@
 title: Scale
 page_title: Scale
 description: "Learn the Options of the Scale of the Telerik UI ArcGauge component for {{ site.framework }}."
+components: ["arcgauge"]
 slug: scale_arcgaugehelper_aspnetcore
 position: 2
 ---
@@ -64,13 +65,13 @@ The ArcGauge has a scale that renders the values, pointers and labels. You can c
 
 The `Reverse()` option reverses the scale direction - the values increase counterclockwise.
 
-````HtmlHelper
+```HtmlHelper
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)
         .Scale(x => x.Reverse(true))
     )
-````
+```
 {% if site.core %}
 ```TagHelper
     <kendo-arcgauge name="gauge" value="65">

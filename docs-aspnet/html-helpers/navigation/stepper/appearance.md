@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to enable editing and alter the Steps value."
+components: ["stepper"]
 slug: htmlhelpers_stepper_aspnetcore_appearance
 position: 4
 ---

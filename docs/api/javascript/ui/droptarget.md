@@ -15,6 +15,11 @@ Represents the Kendo UI DropTarget widget. Inherits from [Widget](/api/javascrip
 
  Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
 
+
+<div class="meta-api-description">
+How do I restrict drag-and-drop interactions between specific elements in Kendo UI? Control and restrict drag-and-drop interactions by assigning matching group identifiers to draggable elements and drop zones, enabling filtering or enabling drop targets to accept only specific draggable items based on shared group names or categories, supporting scenarios like grouping drag sources and drop targets, setting allowed drop areas, configuring which elements can be dropped where, and managing drag-and-drop permissions through group matching or filtering rules.
+</div>
+
 #### Example
 
     <div class="orange"></div>
@@ -70,6 +75,11 @@ Represents the Kendo UI DropTarget widget. Inherits from [Widget](/api/javascrip
 
 Destroys all DropTarget instances from the group with the given name.
 
+
+<div class="meta-api-description">
+How do I remove all instances of grouped drop zones in Kendo UI drag-and-drop functionality? Delete or remove all instances of drag-and-drop targets linked by a shared group identifier, enabling bulk cleanup or unregistration of grouped drop zones when resetting, reconfiguring, or dismantling drag-and-drop functionality; control group-based target lifecycle, purge specific collections of drop handlers, disable or clear grouped drag targets by group name, and manage batch removal of drag target sets to maintain or update interactive regions in user interfaces.
+</div>
+
 #### Example - destroy group's DropTargets and detach events
 
     <div class="orange"></div>
@@ -116,6 +126,11 @@ Destroys all DropTarget instances from the group with the given name.
 
 Fired when draggable moves over the drop target.
 The `dragenter` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
+
+
+<div class="meta-api-description">
+How can I detect when a draggable item is moving over a drop target area using Kendo UI for jQuery? Detect when a draggable item moves over or enters a drop target area by capturing the dragenter event, enabling detection of pointer position, validating if the dragged data can be accepted, controlling default event behavior with methods like preventDefault or stopPropagation, and triggering visual responses such as highlights or feedback to indicate valid drop zones during drag-and-drop interactions.
+</div>
 
 #### Example - modify draggable hint and dropTarget element
 
@@ -178,6 +193,11 @@ The Draggable element.
 Fired when draggable moves out of the drop target.
 The `dragleave` event represents a jQuery `mousemove` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
 
+
+<div class="meta-api-description">
+What is the purpose of the dragleave event in Kendo UI's drag-and-drop functionality? Capture and respond to when a dragged element exits or moves away from a designated drop zone, enabling you to track drag leave interactions, clear visual highlights or drag indicators, manage drag-and-drop state changes, handle drag exit events, and process event data related to the draggable leaving the target area. Detect and react to drag movements leaving a drop area to update UI feedback, perform cleanup tasks, or trigger custom logic during drag-and-drop operations, with access to comprehensive event details similar to standard jQuery mouse event information.
+</div>
+
 #### Example - modify draggable hint and dropTarget element
 
     <div class="draggable orange"></div>
@@ -238,6 +258,11 @@ The Draggable element.
 
 Fired when draggable is dropped over the drop target.
 The `drop` event represents a jQuery `mouseup` event and contains all the event data of the [jQuery Event Object](https://api.jquery.com/category/events/event-object/).
+
+
+<div class="meta-api-description">
+How to trigger an event when a draggable element is dropped on a drop target in Kendo UI for jQuery? Detect and manage when a draggable element is released or dropped onto a designated drop area, capturing user interactions that involve drag-and-drop operations; trigger handlers on mouse release or drop actions over target zones with full event details including cursor position, event targets, original event context, and comprehensive event metadata for customizing responses to items being dropped, enabling developers to track, control, or respond to drag-and-drop completion using event listeners that access standard mouse and event properties within web interfaces.
+</div>
 
 #### Example - disable draggable component after it has been dropped
 

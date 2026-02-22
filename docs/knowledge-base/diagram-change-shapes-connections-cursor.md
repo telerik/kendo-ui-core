@@ -7,7 +7,7 @@ slug: diagram-change-shapes-connections-cursor
 tags: diagram, shape, connection
 ticketid: 1137455
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

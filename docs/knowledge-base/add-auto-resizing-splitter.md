@@ -5,9 +5,9 @@ description: "Learn how to add a splitter that resizes automatically along with 
 slug: howto_addautoresizingsplitter_window
 previous_url: /controls/layout/splitter/how-to/add-auto-resizing-splitter-to-window, /controls/layout/window/how-to/add-auto-resizing-splitter
 tags: telerik, kendo, jquery, window, add, sutoresizing, splitter
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

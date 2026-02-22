@@ -4,9 +4,9 @@ page_title: Export images in grid - Kendo UI for jQuery Data Grid
 description: "Learn how to include images in the exported xlsx file."
 slug: export-images-in-grid
 tags: grid, images, excel, export
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -58,7 +58,7 @@ Note that the path to the images points to another domain. Since retrieving the 
                 toolbar: ["excel"],
                 excel: {
                     fileName: "Kendo UI Grid Export.xlsx",
-                    proxyURL: "//demos.telerik.com/kendo-ui/service/export",
+                    proxyURL: "https://demos.telerik.com/service/v2/core/export",
                     filterable: true
                 },
                 excelExport: function (e) {
@@ -118,9 +118,8 @@ Note that the path to the images points to another domain. Since retrieving the 
                     }, 2000);
                 },
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/core/Orders"
                     },
                     schema: {
                         model: {
@@ -141,7 +140,7 @@ Note that the path to the images points to another domain. Since retrieving the 
                 pageable: true,
                 columns: [{
                     template: "<div class='customer-photo'" +
-                    "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>",
+                    "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>",
                     field: "CustomerID",
                     title: "Contact",
                     width: 80

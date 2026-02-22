@@ -7,6 +7,7 @@ slug: grid-persist-milliseconds-during-edit
 tags: grid, editing
 ticketid: 1142164
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

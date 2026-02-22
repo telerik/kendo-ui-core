@@ -7,6 +7,7 @@ slug: spreadsheet-hide-unselected-items-filtering
 tags: spreadsheet
 ticketid: 1172549  
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

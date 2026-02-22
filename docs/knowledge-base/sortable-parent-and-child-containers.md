@@ -5,9 +5,9 @@ description: "Learn how to create nested sortable containers."
 slug: howto_sortableparentandchildcontainers_sortable
 previous_url: /controls/interactivity/sortable/how-to/sortable-parent-and-child-containers
 tags: telerik, kendo, jquery, sortable, create, sortable, parent, and, child, containers
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery NumericTextBox Documentation - NumericTextBox Globalization
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn about the globalization options it supports."
+components: ["numerictextbox"]
 slug: globalization_numerictextbox
 position: 1
 ---

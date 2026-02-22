@@ -2,6 +2,7 @@
 title: Context Menu
 page_title: jQuery Grid Documentation - Context Menu
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable the ContextMenu."
+components: ["grid"]
 slug: context_menu_kendoui_grid
 position: 17
 ---
@@ -14,7 +15,7 @@ For a runnable example, refer to the [demo on ContextMenu in the Grid](https://d
 
 ## Getting Started
 
-To enable the ContextMenu functionality, set the [`contextmenu`](/api/javascript/ui/grid/cofiguration/contextmenu) property to `true`.
+To enable the ContextMenu functionality, set the [`contextmenu`](/api/javascript/ui/grid/configuration/contextmenu) property to `true`.
 
 ```
      $("#grid").kendoGrid({
@@ -25,7 +26,7 @@ To enable the ContextMenu functionality, set the [`contextmenu`](/api/javascript
 
 ## Predefined Tools
 
-The Grid component allows you to choose between a predefined list of commands that will be included in the ContextMenu. You can add the needed tools in the [`contextmenu.body`](/api/javascript/ui/grid/cofiguration/contextmenu.body) configuration option.
+The Grid component allows you to choose between a predefined list of commands that will be included in the ContextMenu. You can add the needed tools in the [`contextmenu.body`](/api/javascript/ui/grid/configuration/contextmenu.body) configuration option.
 The valid predefined tools are: *"separator", "create", "edit", "destroy", "select", "copySelection",."copySelectionNoHeaders", "reorderRow", "exportPDF", "exportExcel", "sortAsc", "sortDesc".*
 In the example below all predefined commands are included in a customized order.
 
@@ -37,28 +38,30 @@ In the example below all predefined commands are included in a customized order.
 
     	<script>
     		$(document).ready(function () {
-    			var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+    			var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
     				dataSource = new kendo.data.DataSource({
     					transport: {
     						read: {
-    							url: crudServiceBaseUrl + "/Products",
-    							dataType: "jsonp"
+    							url: crudServiceBaseUrl + "/Products"
     						},
     						update: {
     							url: crudServiceBaseUrl + "/Products/Update",
-    							dataType: "jsonp"
+    							type: "POST",
+          						contentType: "application/json"
     						},
     						destroy: {
     							url: crudServiceBaseUrl + "/Products/Destroy",
-    							dataType: "jsonp"
+    							type: "POST",
+          						contentType: "application/json"
     						},
     						create: {
     							url: crudServiceBaseUrl + "/Products/Create",
-    							dataType: "jsonp"
+    							type: "POST",
+          						contentType: "application/json"
     						},
     						parameterMap: function (options, operation) {
     							if (operation !== "read" && options.models) {
-    								return { models: kendo.stringify(options.models) };
+    								return kendo.stringify(options.models);
     							}
     						}
     					},
@@ -134,28 +137,30 @@ The example below demonstrates how the pages in the Grid can be changed using cu
 
 	<script>
 		$(document).ready(function () {
-			var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+			var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
 				dataSource = new kendo.data.DataSource({
 					transport: {
 						read: {
-							url: crudServiceBaseUrl + "/Products",
-							dataType: "jsonp"
+							url: crudServiceBaseUrl + "/Products"
 						},
 						update: {
 							url: crudServiceBaseUrl + "/Products/Update",
-							dataType: "jsonp"
+							type: "POST",
+          					contentType: "application/json"
 						},
 						destroy: {
 							url: crudServiceBaseUrl + "/Products/Destroy",
-							dataType: "jsonp"
+							type: "POST",
+          					contentType: "application/json"
 						},
 						create: {
 							url: crudServiceBaseUrl + "/Products/Create",
-							dataType: "jsonp"
+							type: "POST",
+          					contentType: "application/json"
 						},
 						parameterMap: function (options, operation) {
 							if (operation !== "read" && options.models) {
-								return { models: kendo.stringify(options.models) };
+								return kendo.stringify(options.models);
 							}
 						}
 					},

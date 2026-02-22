@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI BottomNavigation component for {{ site.framework }} that provides built-in configuration options for its items and appearance."
+components: ["bottomnavigation"]
 slug: htmlhelpers_bottomnavigation_aspnetcore
 position: 1
 ---
@@ -90,7 +91,7 @@ The following example demonstrates the basic configuration for the BottomNavigat
 * [Items]({% slug htmlhelpers_items_bottomnavigation_aspnetcore %})&mdash;The items configuration allows you to set various attributes like icons and text.
 * [Appearance]({% slug htmlhelpers_appearance_bottomnavigation_aspnetcore %})&mdash;The built-in appearance configuration allows you to customize the component.
 * [Templates]({% slug htmlhelpers_templates_bottomnavigation_aspnetcore %})&mdash;The templates give you control over the rendering of the BottomNavigation items.
-* [Accessibility]({% slug htmlhelpers_accessibility_bottomnavigation_aspnetcore %})&mdash;The BottomNavigation supports accessibility standards like WAI-ARIA, Section 508, WCAG 2.2, and provides keyboard support.
+* [Accessibility]({% slug htmlhelpers_bottomnavigation_accessibility %})&mdash;The BottomNavigation supports accessibility standards like WAI-ARIA, Section 508, WCAG 2.2, and provides keyboard support.
 * [Events]({% slug events_bottomnavigation %})&mdash;Use the `Select()` event to control the functions of the component.
 
 ## Next Steps

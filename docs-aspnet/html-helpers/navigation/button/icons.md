@@ -2,6 +2,7 @@
 title: Icon Button
 page_title: Icon Button
 description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI Button component for {{ site.framework }}."
+components: ["button"]
 previous_url: /helpers/navigation/button/icons
 slug: icons_button_aspnetcore
 position: 2
@@ -31,15 +32,24 @@ The `Icon()` method displays the appropriate [Kendo UI for jQuery font icon](htt
 ```TagHelper
 	<kendo-button name="buttonDelete" type="button" icon="trash"></kendo-button>
 ```
+{% endif %}
 
-Alternatively, use the `icon-class` attribute to set a custom icon. It accepts a CSS class (or multiple space-separated CSS classes).
+Alternatively, use the `IconClass` option to set a custom icon. It accepts a CSS class (or multiple space-separated CSS classes).
 
+```HtmlHelper
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+
+	@(Html.Kendo().Button()
+		.Name("buttonCustom")
+		.IconClass("fa fa-magic")
+	)
+```
+{% if site.core %}
 ```TagHelper
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
 
 	<kendo-button name="buttonCustom" type="button" icon-class="fa fa-magic"></kendo-button>
 ```
-
 {% endif %}
 
 The `SpriteCssClass()` method displays the icon as a background of a `span` element instead.

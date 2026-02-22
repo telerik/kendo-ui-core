@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery BottomNavigation Documentation - Getting Started with the BottomNavigation
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["bottomnavigation"]
 slug: getting_started_kendoui_bottomnavigation_component
 position: 2
 ---
@@ -74,8 +75,4 @@ Here, you will specify the [`items`](/api/javascript/ui/bottomnavigation/configu
 * [JavaScript API Reference of the BottomNavigation](/api/javascript/ui/bottomnavigation)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

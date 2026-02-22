@@ -2,7 +2,8 @@
 title: Overview
 page_title: Spreadsheet Documentation | Spreadsheet Accessibility
 description: "Get started with the {{ site.product }} Spreadsheet and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_spreadsheet_overview
+components: ["spreadsheet"]
+slug: htmlhelpers_spreadsheet_accessibility
 position: 1
 ---
 
@@ -54,7 +55,7 @@ The Spreadsheet is a composite component that is used to render spreadsheet data
 
 The Menu used for selecting the active ToolBar must implement the Menu specification.
 
-[Menu accessibility specification]({%slug accessibility_aspnetcore_menu%})
+[Menu accessibility specification]({% slug htmlhelpers_menu_accessibility %})
 
 ### ToolBars
 
@@ -65,14 +66,14 @@ All ToolBars must implement the ToolBar specification. Apart from that, they als
 | -------- | --------- | ----- |
 | `.k-spreadsheet-toolbar` | `aria-label` or `title` | Each ToolBar must have a label specifying its purpose. |
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 ### Name editor
 
 
 The Name editor must implement the spec for a ComboBox component.
 
-[ComboBox accessibility specification]({% slug accessibility_aspnetcore_combobox %})
+[ComboBox accessibility specification]({% slug htmlhelpers_combobox_accessibility %})
 
 ### Formula input
 
@@ -97,7 +98,7 @@ The Name editor must implement the spec for a ComboBox component.
 
 The Sheet area must implement the spec for a Grid component. The column header cells are header cells are the members of the `.k-spreadsheet-column-header` element. The row header cells are the members of the `.k-spreadsheet-row-header` element.
 
-[Grid accessibility specification]({% slug accessibility_aspnetcore_grid %})
+[Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
 
 ### Add new sheet button
 
@@ -112,7 +113,7 @@ The Sheet area must implement the spec for a Grid component. The column header c
 
 The Menu sheet button must implement the spec for a DropDownButton component.
 
-[DropDownButton accessibility specification]({% slug accessibility_aspnetcore_dropdownbutton %})
+[DropDownButton accessibility specification]({% slug htmlhelpers_dropdownbutton_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -123,14 +124,14 @@ The Menu sheet button must implement the spec for a DropDownButton component.
 
 The Sheets bar of the Spreadsheet must implement the TabStrip specification.
 
-[TabStrip accessibility specification]({% slug accessibility_aspnetcore_tabstrip %})
+[TabStrip accessibility specification]({% slug htmlhelpers_tabstrip_accessibility %})
 
 ### Tab Menu button
 
 
 The Menu button is each TabStrip tab must implement the DropDownButton specification.
 
-[DropDownButton accessibility specification]({% slug accessibility_aspnetcore_dropdownbutton %})
+[DropDownButton accessibility specification]({% slug htmlhelpers_dropdownbutton_accessibility %})
 
 ## Section 508
 

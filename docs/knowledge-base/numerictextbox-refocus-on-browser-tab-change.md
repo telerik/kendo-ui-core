@@ -6,6 +6,7 @@ page_title: Refocus the NumericTextBox after Switching to a Different Browser Ta
 slug: numerictextbox-refocus-on-browser-tab-change
 tags: numerictextbox, refocus, activelement, focus, tab, browser, change, window, input, visibilitychange
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: spreadsheet-manually-export-all-sheets-in-a-pdf
 tags: spreadsheet,pdf,drawing,single-pdf
 ticketid: 1143046
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

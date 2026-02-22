@@ -2,9 +2,10 @@
 title: Ajax Binding
 page_title: Ajax Binding
 description: "Configure the Telerik UI ListView for AJAX binding and easily enable client-data processing during AJAX binding."
+components: ["listview"]
 previous_url: /helpers/data-management/listview/binding
 slug: htmlhelpers_listview_aspnetcore_ajaxbinding
-position: 1
+position: 2
 ---
 
 # Ajax Binding
@@ -17,32 +18,38 @@ To configure the ListView for {{ site.framework }} for Ajax binding:
 
 1. Add a new action method which returns data to populate the ListView. Note that the action method has a parameter of type `Kendo.Mvc.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
 
-        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-        {
-        }
+    ```C#
+    public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+    {
+    }
+    ```
 
 1. Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.Mvc.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
-        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            // The result can be any IEnumerable or IQueriable.
-            var result = myService.Orders;
+    ```C#
+    public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        // The result can be any IEnumerable or IQueriable.
+        var result = myService.Orders;
 
-            var dsResult = result.ToDataSourceResult(request);
-        }
+        var dsResult = result.ToDataSourceResult(request);
+    }
+    ```
 
 1. Return the `DataSourceResult` as JSON.
 
-        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            // Get orders from the service.
-            var orders = myService.Orders;
+    ```C#
+    public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        // Get orders from the service.
+        var orders = myService.Orders;
 
-            // Apply the requested sort, page, group, filtering with the ToDataSourceResult() extension method.
-            var dsResult = orders.ToDataSourceResult(request);
+        // Apply the requested sort, page, group, filtering with the ToDataSourceResult() extension method.
+        var dsResult = orders.ToDataSourceResult(request);
 
-            return Json(dsResult);
-        }
+        return Json(dsResult);
+    }
+    ```
 
 1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the following example. The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
@@ -75,7 +82,7 @@ To configure the ListView for {{ site.framework }} for Ajax binding:
         </kendo-listview>
     ```
     {% endif %}
-    ```Template
+    ```JS Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order">
                 <h3>#= OrderID #</h3>
@@ -169,10 +176,12 @@ To pass additional parameters to the action method:
 1. Provide the name of a JavaScript function which will return an object containing the additional data.
    The following example demonstrates the action method.
 
-         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
-         {
-             // The implementation is omitted for brevity.
-         }
+    ```C#
+    public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
+    {
+        // The implementation is omitted for brevity.
+    }
+    ```
 
    The following example demonstrates how to send additional data.
 

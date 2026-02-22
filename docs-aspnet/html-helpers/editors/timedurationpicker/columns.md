@@ -2,6 +2,7 @@
 title: Columns
 page_title: TimeDurationPicker Columns
 description: "Learn how configure the columns of the Telerik UI TimeDurationPicker component for {{ site.framework }}."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_columns
 position: 3
 ---

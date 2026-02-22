@@ -2,7 +2,8 @@
 title: Overview
 page_title: ToggleButton Documentation | ToggleButton Accessibility
 description: "Get started with the {{ site.product }} ToggleButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_togglebutton_overview
+components: ["togglebutton"]
+slug: htmlhelpers_togglebutton_accessibility
 position: 1
 ---
 

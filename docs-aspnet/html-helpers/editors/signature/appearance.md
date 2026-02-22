@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Telerik UI Signature for {{ site.framework }} Documentation - Signature Appearance
 description: "Learn how to modify the appearance of the Telerik UI Signature for {{ site.framework }} component."
+components: ["signature"]
 slug: appearance_telerikui_signature_component
 position: 2
 ---

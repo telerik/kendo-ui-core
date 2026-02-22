@@ -2,6 +2,7 @@
 title: Custom Editor
 page_title: Custom Editor
 description: "Learn how to use a specific editor for the Telerik UI Filter component for {{ site.framework }}."
+components: ["filter"]
 slug: htmlhelpers_filter_aspnetcore_custom_editor
 position: 4
 ---
@@ -37,9 +38,8 @@ The following example demonstrates how to create a custom editor using the [`.Ed
                     dataTextField: "CategoryName",
                     dataValueField: "CategoryID",
                     dataSource: {
-                        type: "odata",
                         transport: {
-                            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                            read: "https://demos.telerik.com/service/v2/core/Categories"
                         }
                     }
                 });

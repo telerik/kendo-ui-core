@@ -347,8 +347,36 @@ $.extend(true, kendo.spreadsheet.messages.view,{
   "tabs": {
     "home": "Начало",
     "insert": "Вмъкване",
-    "data": "Данни"
+    "data": "Данни",
+    "file": "Файл",
+    "format": "Форматиране",
+    "view": "Изглед",
   }
+});
+}
+
+if (kendo.ui.SmartBox) {
+kendo.ui.SmartBox.prototype.options.messages =
+$.extend(true, kendo.ui.SmartBox.prototype.options.messages,{
+  noPreviousSearches: "Няма предишни търсения",
+  noPreviousPrompts: "Няма предишни заявки",
+  previousSearches: "Предишни търсения",
+  previousPrompts: "Предишни заявки",
+  suggestedPrompts: "Предложени заявки",
+  searchModeLabel: "Търсене",
+  searchModeDescription: "Търси точни съвпадения на думи в данните ви",
+  searchPlaceholder: "Търсене",
+  semanticSearchModeLabel: "Семантично търсене",
+  semanticSearchModeDescription: "Разбира контекста, за да покаже най-подходящите резултати.",
+  semanticSearchPlaceholder: "Семантично търсене",
+  semanticSearchButtonText: "Търсене",
+  aiAssistantPlaceholder: "Сортиране, филтриране или групиране с AI",
+  speechToText: "Глас към текст",
+  speechToTextAriaLabel: "Стартиране на разпознаване на реч",
+  cancel: "Отказ",
+  send: "Изпрати",
+  searchButtonText: "Търсене",
+  aiAssistantButtonText: "AI Асистент"
 });
 }
 
@@ -750,7 +778,25 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "ungroupHeader": "Натиснете ctrl + space за да разгрупирате",
   "toolbarLabel": "тулбар на таблицата",
   "groupingHeaderLabel": "ред за групиране на таблицата",
-  "filterCellTitle": "клетка за филтриране"
+  "filterCellTitle": "клетка за филтриране",
+  "clearButtons": {
+    "clearFiltering": "Премахни всички филтри",
+    "clearSorting": "Премахни сортирането",
+    "clearGrouping": "Премахни групирането",
+    "columnChooserReset": "Нулиране",
+  },
+  "applyButtons": {
+    "applyGrouping": "Готово",
+    "applySorting": "Готово",
+    "columnChooserApply": "Приложи",
+  },
+  "ai": {
+    "outputPlaceholder": "В момента няма наличен резултат.",
+    "success": "Данните са:",
+    "error": "Операцията не е успешна. Грешка:",
+    "invalidSelection": "Този режим на селекция в момента не е активиран. Моля, активирайте подходящата опция за селекция в конфигурацията на решетката.",
+    "promptPlaceholder": "Въведете вашия AI подканващ текст тук...",
+  }
 });
 }
 
@@ -1202,7 +1248,8 @@ if (kendo.ui.List) {
     kendo.ui.List.prototype.options.messages =
     $.extend(true, kendo.ui.List.prototype.options.messages,{
       "clear": "изчисти",
-      "noData": "Няма налични опции."
+      "noData": "Няма налични опции.",
+      "filterInputPlaceholder": "Филтър"
     });
 }
 
@@ -1242,7 +1289,8 @@ if (kendo.ui.DropDownTree) {
         "singleTag": "избрана/и опция/и",
         "clear": "изчисти",
         "deleteTag": "премахни",
-        "noData": "Няма налични опции."
+        "noData": "Няма налични опции.",
+        "filterInputPlaceholder": "Филтър"
     });
 }
 

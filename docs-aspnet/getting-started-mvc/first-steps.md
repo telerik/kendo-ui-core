@@ -2,6 +2,7 @@
 title: Using a Project Template
 page_title: Using a Project Template
 description: "Create a sample project with Progress Telerik UI for ASP.NET MVC components by starting with a Telerik template on Visual Studio."
+components: ["general"]
 slug: gettingstarted_aspnetmvc
 previous_url: /getting-started/asp-net-mvc-5
 position: 1
@@ -38,11 +39,9 @@ Follow these steps to download and install Telerik UI for ASP.NET MVC:
 
 1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik).
 
-   >tip If you don't have a Telerik account yet, you can [create one for free]().
-
 1. Download the installation file:
 
-    * To get the free trial version, follow [this link](https://www.telerik.com/try/ui-for-asp.net-mvc) to download UI for ASP.NET MVC. The installer will activate your trial when you complete the installation.
+    * If you are new to UI for ASP.NET MVC and have not purchased a license yet, you can [Start a Free Trial](https://www.telerik.com/try/ui-for-asp.net-mvc) by downloading and installing the UI for ASP.NET MVC components.  Once the installation completes, your free trial will be activated and you can continue with the next step.
 
     * If you have already purchased a license:
 
@@ -55,6 +54,14 @@ Follow these steps to download and install Telerik UI for ASP.NET MVC:
 1. Close any running Visual Studio instances and run the Telerik UI for ASP.NET MVC installer. The automatic setup will guide you through the rest of the installation. The Telerik Visual Studio Extensions are installed by default.
 
 The default installation folder is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET MVC<version>`. 
+
+## Installing a License Key
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-version)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-manual-steps)
+
+@[template](/_contentTemplates/licensing-templates.md#license-key-know-more-link)
 
 ## Creating a Telerik ASP.NET MVC Application
 
@@ -76,7 +83,7 @@ After the Visual Studio Extensions are installed, create a Telerik ASP.NET MVC a
 
 	![{{ site.product_short }} New Project Wizard templates](../getting-started-mvc/images/create-new-project-templates-mvc.png)
 
-1. Choose a [Theme](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/overview#using-the-build-process-of-the-themes). Click **Finish**.
+1. Choose a [Theme]({% slug sassbasedthemes_overview %}). Click **Finish**.
 
 ![{{ site.product_short }} Choose a Theme](../getting-started-mvc/images/select-theme-project-template-mvc.png)
 
@@ -84,47 +91,42 @@ The newly created application already has a reference to the required `Kendo.Mvc
 
 You can now start adding components.
 
-* [Find more information about Creating new Telerik Projects in this article.](https://docs.telerik.com/aspnet-mvc/vs-integration/new-project-wizard)
+For more information on how to use the Visual Stuido extension to set up new projects, refer to the [creating new {{ site.product }} projects article](https://docs.telerik.com/aspnet-mvc/vs-integration/new-project-wizard).
 
 ## Adding Components to the Application
 
-As a result of selecting the **GRID AND MENU** template, a Grid component has been added to the `Index.cshtml` view, and a Menu to the `_Layout.cshtml`. The Grid is configured and bound remotely to sample data returned by the `GridController`. The next step is to add an additional component to the application.
+As a result of selecting the **GRID AND MENU** template, a Grid component has been added to the `Index.cshtml` view, and a Menu to the `_Layout.cshtml`. The Grid is configured and binds remotely to the sample data returned by the `GridController`. The next step is to add an additional component to the application.
 
 Add a DatePicker to the `Index.cshtml` view:
 
-```
-    <h4>Telerik UI for ASP.NET MVC DatePicker:</h4>
+```Razor
+<h4>Telerik UI for ASP.NET MVC DatePicker:</h4>
 
-    @(Html.Kendo().DatePicker()
-        .Name("datepicker") // The Name of the DatePicker is mandatory. It specifies the "id" attribute of the component.
-        .Value(DateTime.Today) // Sets the value of the DatePicker.
-    )
+@(Html.Kendo().DatePicker()
+    .Name("datepicker") // The Name of the DatePicker is mandatory. It specifies the "id" attribute of the component.
+    .Value(DateTime.Today) // Sets the value of the DatePicker.
+)
 ```
 
 ## Building and Running the Application 
 
-Press `CTRL+F5` to build and run the application. You have a Grid and a DatePicker on your page.
+Press `CTRL+F5` to build and run the application. As a result, the following sample page is created.
 
 ![{{ site.product_short }} Sample page showing a Grid and a DatePicker](../getting-started-mvc/images/grid-and-datepicker-mvc.png)
-
-## Adding Your License File
-
-Using any client-side assets from the [Kendo UI CDN]({% slug cdnservices_core %}) or the [@progress/kendo-ui NPM package](https://www.npmjs.com/package/@progress/kendo-ui) requires you to add a Telerik license file to your application. A missing license file triggers [a banner, a watermark, and causes a warning message]({% slug troubleshooting-license-key-errors %}) in the browser's console.
-
-To generate your license file and add it to your application, follow the instructions in the [Installing a License File]({% slug installation_license_key_aspnetcore %}).
 
 ## Next Steps
 
 * [Explore the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Grid Data Binding Overview]({% slug htmlhelpers_grid_aspnetcore_binding_overview %})
 * [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
+* [Create a New Telerik UI for ASP.NET MVC Application through Visual Studio Extension]({% slug newprojectwizards_visualstudio_aspnetcore %})
 
 ## See Also
 
-* [Exploring the Helper Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
 * [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetcore %})
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
 * [Migrating from MVC to Core MVC](https://docs.telerik.com/aspnet-core/installation/migrating)
 * [MS - Upgrade from ASP.NET Framework to ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-7.0)
+

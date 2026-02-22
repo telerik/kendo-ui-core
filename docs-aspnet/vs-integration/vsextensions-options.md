@@ -2,6 +2,7 @@
 title: VS Extension Options
 page_title: VS Extension Options
 description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the {{ site.product }} VS Extensions to best suit your needs."
+components: ["installerandvsextensions"]
 previous_url: /installation/vs-integration/vsextensions-options, /getting-started/vs-integration/vsextensions-options, /vs-integration-mvc/vsextensions-options
 slug: vsextensionsoptions_visualstudio_aspnetcore
 position: 25
@@ -40,7 +41,7 @@ Set the default value for the **Copy referenced assemblies to solution** option 
 Set the project upgrade notifications for detected local distributions by using the options under the **Project Upgrade Notifications for Detected Local Distributions**:
 
 - **Suggest project upgrades for Telerik product versions available on my computer**&mdash;When enabled, you are prompted to upgrade upon opening a project, which is not using the latest version of Telerik products installed on your system.
-- **Suggest upgrades when an equal Dev release is detected on projects using a Trial**&mdash;When enabled, you are prompted to upgrade if a licensed version is available on your system, but the current project uses a trial version.
+- **Suggest upgrades when an equal Dev release is detected on projects using a Trial**&mdash;When enabled, you are prompted to upgrade if a licensed version is available on your system.
 
 ### Download Folder Selection
 

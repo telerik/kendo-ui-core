@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery BottomNavigation Documentation - BottomNavigation Overview
 description: "Get started with the jQuery BottomNavigation by Kendo UI and learn how to initialize the widget."
+components: ["bottomnavigation"]
 slug: overview_kendoui_bottomnavigation_widget
 position: 1
 ---
@@ -15,7 +16,7 @@ The Kendo UI BottomNavigation bar allows movement between primary destinations i
 * [Items]({% slug items_bottomnavigation_widget %}) - the configuration allows you to set various attributes like icons and text.
 * [Appearance]({% slug appearance_bottomnavigation_widget %}) - the configuration allows you to modify the appearance of the component.
 * [Templates]({% slug templates_bottomnavigation_widget %}) - the configuration allows you to customize how the items will be rendered.
-* [Accessibility]({% slug accessibility_kendoui_bottomnavigation_widget %}) - the BottomNavigation supports various accessibility standards.
+* [Accessibility]({% slug jquery_bottomnavigation_accessibility %}) - the BottomNavigation supports various accessibility standards.
 
 ## Next Steps
 

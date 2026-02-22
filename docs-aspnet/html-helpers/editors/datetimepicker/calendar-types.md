@@ -2,6 +2,7 @@
 title: Calendar Types
 page_title: Calendar Types
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to work around the default calendar type implementation and simulate other calendar types."
+components: ["datetimepicker"]
 slug: calendartypes_datetimepicker_aspnetcore
 position: 7
 ---

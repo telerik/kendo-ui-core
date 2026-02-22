@@ -7,6 +7,7 @@ slug: grid-lock-unlock-using-toolbar
 tags: grid, lock, unlock, toolbar, column, menu
 ticketid: 1150311
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -83,9 +84,8 @@ Use the `lockColumn` and `unlockColumn` methods. To make changes through a custo
     $(document).ready(function() {
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/core/Orders"
           },
           schema: {
             model: {

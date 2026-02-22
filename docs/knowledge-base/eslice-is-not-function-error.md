@@ -6,7 +6,7 @@ slug: eslice_is_not_function_error
 tags: telerik, kendoui, jquery, troubleshooting, eslice, is, not, a, function, warning, occurs
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

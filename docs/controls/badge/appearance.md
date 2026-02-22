@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Badge Documentation - Badge Appearance
 description: "Get started with the jQuery Badge by Kendo UI and learn how to customize the appearance of the widget."
+components: ["badge"]
 slug: appearance_kendoui_badge_widget
 position: 2
 ---
@@ -39,6 +40,8 @@ The following example demonstrates the `rounded` option of the Badge:
 ## Theme Color
 
 The Badge allows you to specify predefined theme colors.
+
+> Starting with the [**2026 Q1**](slug:breakingchanges2026_kendoui) release, the Badge component renders with the `primary` appearance by default. Because appearance defaults are now theme-controlled, the `themeColor` option will be `undefined` when not set, but the theme applies the primary styling. To preserve the previous (secondary) look, explicitly set `themeColor: 'secondary'`.
 
 The available [themeColor](/api/javascript/ui/badge/configuration/themeColor) values are:
 
@@ -95,9 +98,9 @@ The example below demonstrates how to set the `size` option to "large":
 
 ## FillMode
 
-The Badge enables you to set styling options and create solid or outline badges by setting the [`fill`](/api/javascript/ui/badge/configuration/fill) property.
+The Badge enables you to set styling options and create solid or outline badges by setting the [`fill`](/api/javascript/ui/badge/configuration/fillmode) property.
 
-The available [fill](/api/javascript/ui/badge/configuration/fill) values are:
+The available [fill](/api/javascript/ui/badge/configuration/fillmode) values are:
 
 - "solid" (Default)
 - "outline"

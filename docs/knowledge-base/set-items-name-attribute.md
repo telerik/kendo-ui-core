@@ -7,7 +7,7 @@ slug: set-items-name-attribute
 tags: combobox, name, id, attribute, set, render
 ticketid: 1129715
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment

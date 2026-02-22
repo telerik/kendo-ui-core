@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Virtualization
 description: "Learn how to setup the Virtualization feature of the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/virtualization
 slug: htmlhelpers_multiselect_virtualization_aspnetcore
 position: 5
@@ -156,7 +157,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             function convertValues(value) {
                 var data = {};
 
-                value = $.isArray(value) ? value : [value];
+                value = Array.isArray(value) ? value : [value];
 
                 for (var idx = 0; idx < value.length; idx++) {
                     data["values[" + idx + "]"] = value[idx];
@@ -201,7 +202,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             function convertValues(value) {
                 var data = {};
 
-                value = $.isArray(value) ? value : [value];
+                value = Array.isArray(value) ? value : [value];
 
                 for (var idx = 0; idx < value.length; idx++) {
                     data["values[" + idx + "]"] = value[idx];

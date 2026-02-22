@@ -2,6 +2,7 @@
 title: Create the Management Charts
 page_title: Create the Management Charts - Music Store Web App Tutorial
 description: "Learn how to create the Store Management charts in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: createstoremanagcharts_muscistorewebapp_aspnetmvc
 position: 11
 ---

@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: jQuery NumericTextBox Documentation - Automatic Correction
 description: Get familiar with the autocorrect feature of the jQuery NumericTextBox by Kendo UI, and learn how to disable it.
+components: ["numerictextbox"]
 slug: autocorrect_kendoui_numerictextbox
 position: 8
 ---

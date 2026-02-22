@@ -2,6 +2,7 @@
 title: Shared DataSource Binding
 page_title: Binding to a Shared DataSource
 description: "Learn how to bind the Telerik UI Timeline component for {{ site.framework }} widget to a shared data source."
+components: ["timeline"]
 slug: shared_datasource_timeline_aspnetcore
 position: 7
 ---

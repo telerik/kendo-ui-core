@@ -5,9 +5,9 @@ description: "Learn how to update the aggregates shown by the Kendo UI jQuery Gr
 previous_url: /controls/data-management/grid/how-to/update-aggregates-on-change, /controls/data-management/grid/how-to/various/update-aggregates-on-change
 slug: howto_update_aggregatesonchange_grid
 tags: update, aggregates, when, value, changes, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -59,9 +59,8 @@ To achieve the desired scenarion, use the following suggested implemetation. Not
         }];
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/core/Products"
             },
             schema:{
               model: {

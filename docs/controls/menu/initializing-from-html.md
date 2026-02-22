@@ -2,6 +2,7 @@
 title: Initializing from HTML
 page_title: jQuery Menu Documentation - Initializing from HTML Markup
 description: "Get started with the jQuery Menu by Kendo UI and learn about the alternative way to initialize the component from HTML."
+components: ["menu"]
 slug: html_kendoui_menu_component
 position: 2
 ---
@@ -19,7 +20,8 @@ The following example demonstrates how to initialize the Menu by using HTML mark
         <li>Normal Item
             <ul>
                 <li><span class="k-sprite icon-class"></span>Item with a Sprite</li>
-                <li><img src="images/contacts.gif" />Item with an Icon</li>
+                <li><img src="https://demos.telerik.com/kendo-ui/content/web/contacts.gif" />Item with an Icon</li>
+
             </ul>
         </li>
         <li><a href="https://www.google.com">Navigation Item</a></li>

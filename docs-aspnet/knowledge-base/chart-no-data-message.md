@@ -7,6 +7,7 @@ tags: telerik, chart, no, data, message
 component: chart
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -31,7 +32,7 @@ How can I display a message in the {{ site.product }} Chart when its data source
 The following example demonstrates how to achieve such behavior in the {{ site.product }} Chart. Note that the `div` element of the message is positioned and decorated through CSS.
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
     @(Html.Kendo().Chart()
         .Name("chart")
@@ -40,7 +41,7 @@ The following example demonstrates how to achieve such behavior in the {{ site.p
     )
 
 ```
-```Script.js
+```JS script.js
     <script>
         function onRender(e) {
             var view = e.sender.dataSource.view();
@@ -54,7 +55,7 @@ The following example demonstrates how to achieve such behavior in the {{ site.p
         }
     </script>
 ```
-```Style.css
+```C# Style.css
 
     <style>
         .container {
@@ -108,7 +109,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL Example on Displaying the {{ site.product }} Chart When Its Data Source is Empty](https://netcorerepl.telerik.com/cQbPQFFd41Tge1n326)
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

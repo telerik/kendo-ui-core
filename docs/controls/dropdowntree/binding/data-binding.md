@@ -2,6 +2,7 @@
 title: Local and Remote Data
 page_title: jQuery DropDownTree Documentation - Local and Remote Data Binding
 description: "Get started with the jQuery DropDownTree by Kendo UI and bind the widget to local or remote data."
+components: ["dropdowntree"]
 slug: databinding_kendoui_dropdowntree
 position: 1
 ---
@@ -42,12 +43,11 @@ The following example demonstrates how to create a DropDownTree and bind it to a
     <input id="dropdowntree"></input>
 
     <script>
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         var myDataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                url: serviceRoot + "/Employees",
-                dataType: "jsonp"
+                url: serviceRoot + "/Employees"
                 }
             },
             schema: {

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI FloatingActionButton component for {{ site.framework }}."
+components: ["floatingactionbutton"]
 slug: events_floatingactionbutton
 position: 6
 ---

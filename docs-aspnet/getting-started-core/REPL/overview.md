@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik REPL Overview
 description: Explore the Telerik REPL server playground tool and use it to write razor/C# code in the browser, run the code, and then share it.
+components: ["general"]
 slug: overview_repl_aspnetcore
 permalink: /getting-started/repl/overview
 position: 1

@@ -4,7 +4,8 @@ page_title: 2013 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2013."
 previous_url: /backwards-compatibility/2013/2013-backward-compatibility
 slug: breakingchanges2013_kendoui
-position: 12
+components: ["general"]
+position: 13
 ---
 
 # 2013 Releases
@@ -75,7 +76,7 @@ The icons in the sprite image have been rearranged to include more icons in two 
       });
     ```
 
-* Initializing the editor from a `div` element triggers the [inline editing mode](https://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
+* Initializing the editor from a `div` element triggers the [inline editing mode](https://demos.telerik.com/kendo-ui/editor/inline-editing). To revert to the old behavior, initialize it from a `<textarea>` element.
 
 **Mobile ListView**
 

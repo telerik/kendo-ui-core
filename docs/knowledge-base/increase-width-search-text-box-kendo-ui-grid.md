@@ -6,6 +6,7 @@ page_title: How to Customize the Width of the Search Box in Kendo UI Grid
 slug: increase-width-search-text-box-kendo-ui-grid
 tags: kendo ui, grid, css, search box, width
 res_type: kb
+components: ["grid"]
 ticketid: 1659726
 ---
 
@@ -45,9 +46,9 @@ This CSS targets the search box within the Grid's toolbar and sets its width to 
         $(document).ready(function () {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {

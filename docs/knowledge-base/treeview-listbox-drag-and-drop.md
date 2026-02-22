@@ -7,6 +7,7 @@ slug: treeview-listbox-drag-and-drop
 tags: treeview, listbox
 ticketid: 1163151  
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

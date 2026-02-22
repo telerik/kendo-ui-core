@@ -2,6 +2,7 @@
 title: Auto-Resizing to Window
 page_title: Auto-Resizing to Window
 description: "Learn how to auto-resize the Splitter to fit to the Window component by using the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: htmlhelpers_add_auto_resizing_splitter_to_window_aspnetcore
 position: 2
 ---

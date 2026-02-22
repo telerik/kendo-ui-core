@@ -2,6 +2,7 @@
 title: Templates  
 page_title: Templates  
 description: "Learn how to use templates to customize the appearance of the Telerik UI for {{ site.framework }} Scheduler component."  
+components: ["scheduler"]
 slug: scheduler_templates  
 position: 8
 ---

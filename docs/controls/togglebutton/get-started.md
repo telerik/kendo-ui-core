@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ToggleButton Documentation - Getting Started with the ToggleButton
 description: "Get started with the jQuery ToggleButton by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["togglebutton"]
 slug: getting_started_kendoui_togglebutton
 position: 2
 ---
@@ -91,8 +92,4 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 * [JavaScript API Reference of the ToggleButton](/api/javascript/ui/togglebutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -2,6 +2,7 @@
 title: Persisting the State
 page_title: Persisting the State
 description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn how to save and restore its state, options, and filter expression."
+components: ["filter"]
 previous_url: /helpers/data-management/filter/state
 slug: htmlhelpers_filter_aspnetcore_store_settings
 position: 3

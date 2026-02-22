@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery PivotGridV2 Documentation - PivotGridV2 Overview
 description: "Try now the Kendo UI for jQuery PivotGridV2 component that is great for data analysis with OLAP & KPIs support."
+components: ["pivotgridv2"]
 slug: overview_kendoui_pivotgridv2_widget
 position: 0
 ---

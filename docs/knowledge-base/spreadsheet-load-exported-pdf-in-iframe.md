@@ -7,7 +7,7 @@ slug: spreadsheet-load-exported-pdf-in-iframe
 tags: kendo, kendoui, spreadsheet, pdf, iframe, base64, embed
 ticketid: 1138153
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment
@@ -50,10 +50,10 @@ Load the generated base64 PDF data in the `<iframe>` element. To do that, use th
 
     $("#spreadsheet").kendoSpreadsheet({
       excel: {
-        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       },
       pdf: {
-        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       },
       sheets: [{
         name: "Food Order"

@@ -2,6 +2,7 @@
 title: Button
 page_title: Button ToolBar Command Type
 description: "Get started with the Telerik UI ToolBar for {{ site.framework }} and learn how to configure and use the Button command type."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_button_aspnetcore
 ---
 
@@ -173,4 +174,4 @@ The following example demonstrates how to use icons in the ToolBar when you set 
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar)
 * [Server-Side API Reference of the ToolBar](/api/toolbar)
-* [Client-Side API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [Client-Side API Reference of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

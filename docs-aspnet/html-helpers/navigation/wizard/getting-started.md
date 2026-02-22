@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Wizard component by following a complete step-by-step tutorial."
+components: ["wizard"]
 slug: wizard_getting_started
 position: 1
 ---
@@ -416,7 +417,7 @@ You can reference the Wizard instances that you have created and build on top of
 
 1. Use the value of the `Name()` option of the component to establish a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var wizardReference = $("#wizard").data("kendoWizard"); // wizardReference is a reference to the existing Wizard instance of the helper.
@@ -426,7 +427,7 @@ You can reference the Wizard instances that you have created and build on top of
 
 1. Use the [Wizard client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/wizard#methods) to control the behavior of the control. In this example, you will use the `select` method to select the second step (index 1).
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var wizardReference = $("#wizard").data("kendoWizard");

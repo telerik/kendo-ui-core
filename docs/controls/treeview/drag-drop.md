@@ -2,12 +2,13 @@
 title: Dragging and Dropping
 page_title: jQuery TreeView Documentation - Dragging and Dropping
 description: "Get started with the jQuery TreeView by Kendo UI and implement the drag-and-drop functionality of the widget."
+components: ["treeview"]
 slug: dragdrop_kendoui_treeview
 position: 3
 ---
 # Node Click-Move-Click
 
-As of Kendo UI R2 SP1 2023, users can reorder the TreeView's nodes by using the click-move-click functionality provided by the [`clickMoveClick``](/api/javascript/ui/treeview/configuration/dragandrop.clickmoveclick) option. To start moving the node, users can click on it, and then click again to place the node in its new position.
+As of Kendo UI R2 SP1 2023, users can reorder the TreeView's nodes by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/treeview/configuration/draganddrop.clickmoveclick) option. To start moving the node, users can click on it, and then click again to place the node in its new position.
 
 ```dojo
     <div id="treeview"></div>

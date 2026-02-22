@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery TextArea Documentation | TextArea Accessibility
 description: "Get started with the jQuery TextArea by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_textarea_widget
+components: ["textarea"]
+slug: jquery_textarea_accessibility
 position: 1
 ---
 

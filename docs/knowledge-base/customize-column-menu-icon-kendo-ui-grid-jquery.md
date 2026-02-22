@@ -6,6 +6,7 @@ page_title: How to Customize the Column or Filter Menu Button Icon in Kendo UI f
 slug: customize-column-menu-icon-kendo-ui-grid-jquery
 tags: kendo, ui, jquery, grid, icon, customization
 res_type: kb
+components: ["grid"]
 ticketid: 1673973
 ---
 

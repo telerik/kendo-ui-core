@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Kendo UI Sankey Diagram component for jQuery that allows the users to create diagrams that visualize changing flows and their distribution between domains."
+components: ["chart"]
 slug: overview_kendoui_sankeychart
 position: 0
 ---
@@ -30,7 +31,7 @@ The Kendo UI for jQuery Sankey Diagram includes the following customizable eleme
 
 ## Next Steps
 
-* [Basic Usage of the Sankey Diagram (Demo)](https://demos.telerik.com/kendo-ui/sankey-chart/index)
+* [Overview of the Sankey Diagram (Demo)](https://demos.telerik.com/kendo-ui/sankey-charts/index)
 
 ## See Also
 

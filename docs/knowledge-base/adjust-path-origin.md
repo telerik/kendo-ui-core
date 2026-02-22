@@ -5,9 +5,9 @@ description: "Learn how to adjust a path or the origin of an element when using 
 slug: howto_adjustpathorigin_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/adjust-path-origin
 tags: kendo, jquery, diagram, adjust, path, origin
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Cascading
 page_title: Cascading MultiColumnComboBoxes
 description: "Learn how to implement a series of two or more cascading Telerik UI for {{ site.framework }} MultiColumnComboBoxes."
+components: ["multicolumncombobox"]
 slug: htmlhelpers_multicolumncombobox_cascading
 position: 8
 ---
@@ -24,7 +25,7 @@ When an option is selected in the parent MultiColumnComboBox, the child MultiCol
 
 The following example shows the payload of the request sent by the child MultiColumnComboBox.
 
-```     
+```JS
     filter[filters][0][field]: parentID // "parentID" is the Name() of the parent MultiColumnComboBox.
     filter[filters][0][operator]: eq
     filter[filters][0][value]: slectedOptionValue

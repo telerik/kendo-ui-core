@@ -2,6 +2,7 @@
 title: Customization
 page_title: Customization of the ChipList Helper
 description: "Try now the Telerik UI for {{ site.framework }} ChipList and learn how to customize it by defining avatars and icons."
+components: ["chiplist"]
 slug: htmlhelpers_chiplist_aspnetcore_customization
 position: 4
 ---

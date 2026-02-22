@@ -7,6 +7,7 @@ slug: flash-of-unstyled-content
 tags: flash,unstyled,content,fuoc
 ticketid: 1383118, 1364951, 1365360
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

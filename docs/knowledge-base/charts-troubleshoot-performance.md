@@ -7,7 +7,7 @@ slug: tipsandtricks_kendouistyling
 type: troubleshooting
 tags: chart, troubleshoot, performance, issues, tips
 res_type: kb
-component: chart
+components: ["chart"]
 ---
 
 ## Environment

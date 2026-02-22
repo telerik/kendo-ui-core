@@ -6,6 +6,7 @@ page_title: How to Add Dynamic Image Count Badges to Buttons in Kendo UI for jQu
 slug: dynamic-image-count-in-buttons-kendo-ui-jquery-grid
 tags: kendo, ui, jquery , grid, button, dynamic, image, count, badge
 res_type: kb
+components: ["grid"]
 ticketid: 1672491
 ---
 
@@ -45,12 +46,11 @@ The following example demonstrates how to dynamically update the button's label 
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                   },
                 },
                 pageSize: 20,

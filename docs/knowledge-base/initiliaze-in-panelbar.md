@@ -5,9 +5,9 @@ description: "Learn how to initialize the jQuery Grid by Kendo UI inside a Panel
 previous_url: /controls/data-management/grid/how-to/hidden/initiliaze-in-panelbar
 slug: howto_initializegridinpanelbar_grid
 tags: grid, initialize, in, panelbar, kendoui, resize, dimensions, container
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

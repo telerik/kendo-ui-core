@@ -7,6 +7,7 @@ slug: combobox-tooltip-selected-item
 tags: combobox, tooltip, selected
 ticketid: 1143333  
 res_type: kb
+components: ["tooltip"]
 ---
 
 ## Environment
@@ -51,10 +52,9 @@ How can I show a tooltip on a selected item in the ComboBox?
         dataValueField: "ProductID",   
       	 select: onSelect,
         dataSource: {
-            type: "odata",
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    url: "https://demos.telerik.com/service/v2/core/Products",
                 }
             }
         }

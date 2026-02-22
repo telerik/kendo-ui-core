@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: Excel Export Troubleshooting
 description: "Learn about the solutions of common issues that may occur while exporting the Grid to Excel in ASP.NET MVC applications."
+components: ["grid"]
 slug: excelissues_gridhelper_aspnetmvc
 position: 2
 ---
@@ -99,6 +100,9 @@ The following example demonstrates the user server proxy.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Basic Usage of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid)
 * [Using the API of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/api)
 * [Server-Side API](/api/grid)

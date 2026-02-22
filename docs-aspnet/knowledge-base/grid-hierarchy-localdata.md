@@ -6,6 +6,7 @@ page_title: Grid Hierarchy with Local Data
 slug: grid-hierarchy-localdata
 tags: grid, hierarchy, asp, core, local data
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -37,7 +38,7 @@ To achieve the desired result follow the steps below:
 
   Check this [REPL for a runnable example](https://netcorerepl.telerik.com/wPlFuylo00Q9Ch7J51).
 
-  ```tab-Controller
+  ```Controller
         public ActionResult Index()
         {
             List<CategoryItem> data = new List<CategoryItem>
@@ -96,7 +97,7 @@ To achieve the desired result follow the steps below:
             return View(data);
         }
   ```
-  ```tab-View
+  ```View
     @model IEnumerable<CategoryItem>
 
     <script>

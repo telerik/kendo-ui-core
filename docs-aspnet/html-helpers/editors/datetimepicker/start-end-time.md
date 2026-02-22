@@ -2,6 +2,7 @@
 title: Start and End Time
 page_title: Start and End Time
 description: "Learn how to configure the start and end time of the Telerik UI DateTimePicker component for {{ site.framework }}."
+components: ["datetimepicker"]
 slug: htmlhelpers_datetimepicker_start_end_time_aspnetcore
 position: 15
 ---

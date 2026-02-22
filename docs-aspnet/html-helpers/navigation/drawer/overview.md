@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Drawer component for {{ site.framework }} that provides various display and interaction modes, item templates, and support for hierarchical structures."
+components: ["drawer"]
 previous_url: /helpers/navigation/drawer/overview
 slug: htmlhelpers_drawer_aspnetcore
 position: 0
@@ -53,7 +54,7 @@ The following example demonstrates how to define the Drawer.
         </content>
     </kendo-drawer>
 ```
-```Template
+```JS Template
     <script id="template" type="text/x-kendo-template">
         <ul>
             <li data-role='drawer-item'>First Item</li>

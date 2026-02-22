@@ -2,6 +2,7 @@
 title: Captcha Server-side Provider
 page_title: Captcha Server-side Provider
 description: "Learn how to configure the server-side provider for the Telerik UI Captcha component for {{ site.framework }}."
+components: ["captcha"]
 slug: htmlhelpers_captcha_provider
 position: 2
 ---
@@ -35,7 +36,7 @@ The server-side Telerik UI Captcha provider comes with the **Telerik.Web.Captcha
 In the C# backend file or controller, add references to the following namespaces:
 
 {% if site.mvc %}
-```
+```C#
     using System;
     using System.Drawing.Imaging;
     using System.IO;
@@ -43,7 +44,7 @@ In the C# backend file or controller, add references to the following namespaces
     using Telerik.Web.Captcha;
 ```
 {% else %}
-```
+```C#
     using System.IO;
     using System.Drawing.Imaging;
     using Newtonsoft.Json;

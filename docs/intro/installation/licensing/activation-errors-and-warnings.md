@@ -2,6 +2,7 @@
 title: License Activation Errors and Warnings
 page_title: Specific License Warnings and Errors When Using Kendo UI for jQuery Without a License or with an Invalid License.
 description: "Understand the license Warnings and errors when using Kendo UI for jQuery without a license or with an invalid license."
+components: ["general"]
 slug: activation-error-warnings
 previous_url: /knowledge-base/invalid-license
 published: True
@@ -62,12 +63,14 @@ If you use Kendo UI for jQuery in a project with an expired or missing license, 
 
 |Error or Condition |Message Code | Solution |
 |:---          |:---|:---
-|`No license key is detected`   |TKL002 | [Install a license key]({% slug licensing-overview %}) to activate the UI components and remove the error message.|
-|`Invalid license key`   |TKL003 | [Download a new license key]({% slug licensing-overview %}) and install it to activate the UI components and remove the error message.|
-|`Your subscription license has expired.`   |TKL103; TKL104 | Renew your subscription and [download a new license key]({% slug using-license-file %}#downloading-the-license-key).|
-|`Your perpetual license is invalid.`   |TKL102 | You are using a product version released outside the validity period of your perpetual license. To remove the error message, do either of the following: <ul><li>Renew your license, download a new license key, and install it.</li><li>Downgrade to a product version included in your perpetual license as indicated in the message.</li></ul>|
-|`Your trial license has expired.`   |TKL105 | Purchase a commercial license to continue using the product.|
-|`Your license is not valid for the detected product(s).`   |TKL101 | Review the purchase options for the listed products. Alternatively, remove the references to the listed packages from `package.json.`|
+|`No Telerik and Kendo UI License file found`   |TKL002 | [Install a license key]({% slug licensing-overview %}) to activate the UI components and remove the error message.|
+|`Corrupted Telerik and Kendo UI License Key content`   |TKL003 | [Download a new license key]({% slug licensing-overview %}) and install it to activate the UI components and remove the error message.|
+|`Unable to locate licenses for all products.`   |TKL004 | Your license is not valid for all Telerik and Kendo products added to your project. If you have already purchased the required license, then [update your license key]({% slug using-license-file %}#installing-or-updating-the-license-key).|
+|`Kendo UI for jQuery is not listed in your current license file.`   |TKL101 | Review the purchase options for the listed products. Alternatively, remove the references to the listed packages from `package.json`.|
+|`Your current license has expired`   |TKL102 | You are using a product version released outside the validity period of your perpetual license. To remove the error message, do either of the following: <ul><li>Renew your license, download a new license key, and install it.</li><li>Downgrade to a product version included in your perpetual license as indicated in the message.</li></ul>|
+|`Your subscription has expired.`   |TKL103; TKL104 | Renew your subscription and [download a new license key]({% slug using-license-file %}#downloading-the-license-key).|
+|`Your trial expired.`   |TKL105 | Purchase a commercial license to continue using the product.|
+|`No Telerik or Kendo UI product references detected in project.`   |TKL001 | <ul><li>If you use Telerik products and see this message, update the `Telerik.Licensing` package to version 1.4.9 or later.</li><li>If you do not use Telerik products, remove the `Telerik.Licensing` NuGet reference from your project.</li></ul>|
 
 ## See Also
 

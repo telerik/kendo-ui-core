@@ -7,7 +7,7 @@ slug: template-not-bound-when-a-mvvm-listbox-item-is-moved
 tags: listbox, mvvm, template
 ticketid: 1123792
 res_type: kb
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

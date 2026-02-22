@@ -7,6 +7,7 @@ tags: customize, grid, rows, cells, basedon, data, item, value
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -33,9 +34,9 @@ Grid templates enable you to customize and style the content *inside* the table 
 Although the demos apply custom CSS classes, you can still use the demonstrated approaches even if you apply inline styles or other HTML attributes.
 
 To customize the rows and cells based on the values of the data items, utilize any of the following approaches:
-* [Iterate the table rows](#iterating-the-table-rows)
-* [Iterate the data items](#iterating-the-data-items)
-* [Use a row template](#using-a-row-template)
+* [Iterate the table rows](#iterate-the-table-rows)
+* [Iterate the data items](#iterate-the-data-items)
+* [Use a row template](#use-a-row-template)
 
 ## Iterate the Table Rows
 

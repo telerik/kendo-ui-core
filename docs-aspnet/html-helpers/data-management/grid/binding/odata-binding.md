@@ -2,6 +2,7 @@
 title: OData Binding
 page_title: OData Binding
 description: "Learn how to implement OData binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/odata-binding
 slug: htmlhelpers_grid_aspnetcore_odata-binding
 position: 9
@@ -65,12 +66,13 @@ You will also have to add this configuration in your Web.config file:
 ## Binding the Grid
 
 Once the Web service is up and running, you define the Grid's DataSource instance and can apply its settings to point to the RESTful API URL:
-```C#
+
+```HtmlHelper
     .DataSource(dataSource => dataSource
         .Custom()
-        .Type("odata")
+        .Type("odata-v4")
         .Transport(transport =>
-           transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
+           transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"))
         ) 
         .PageSize(20)
         .ServerPaging(true)
@@ -79,13 +81,13 @@ Once the Web service is up and running, you define the Grid's DataSource instanc
     )
 ```
 {% if site.core %}
-```HTML
-    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20"
+```TagHelper
+    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata-v4" page-size="20"
         server-paging="true"
         server-sorting="true"
         server-filtering="true">
         <transport>
-            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"/>
+            <read url="https://demos.telerik.com/service/v2/odata/Orders"/>
         </transport>
     </datasource>
 ```
@@ -93,6 +95,9 @@ Once the Web service is up and running, you define the Grid's DataSource instanc
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [OData Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
 {% if site.core %}
 * [Official Microsoft Documentation on Getting Started with {{ site.framework }} OData](https://learn.microsoft.com/en-us/odata/webapi-8/getting-started?tabs=net60%2Cvisual-studio-2022%2Cvisual-studio)

@@ -7,6 +7,7 @@ slug: chart-one-datasource-different-filters
 tags: fetch, same, data, apply, different, chart, instances
 ticketid: 1424758
 res_type: kb
+components: ["datasource"]
 ---
 
 ## Environment
@@ -32,7 +33,7 @@ How can I have a single POST from a data source, retrieve all possible data, and
 1. Provide the array of data you got from the service to the `data` field of the data source.
 1. Individually set the desired filters, grouping, or sorting on each data source.
 
-```dojo
+```
 <div id="chart1"></div>
 <div id="chart2"></div>
 <script>

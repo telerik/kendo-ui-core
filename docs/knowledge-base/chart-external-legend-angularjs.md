@@ -7,6 +7,7 @@ slug: chart-external-legend-angularjs
 tags: chart, angularjs, legend
 ticketid: 1161365
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -91,8 +92,7 @@ In an AngularJS page, use the `ng-repeat` directive to render the external legen
           $scope.productsData = new kendo.data.DataSource({
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Products"
               }
             },
             pageSize: 10

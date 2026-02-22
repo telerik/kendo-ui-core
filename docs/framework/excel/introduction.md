@@ -2,6 +2,7 @@
 title: Overview
 page_title: Excel Export Overview - Kendo UI Excel Export
 description: "Learn how to create Excel documents with Kendo UI."
+components: ["general"]
 slug: introduction_excelexport_kendoui
 position: 0
 CTAControlName: Excel Export

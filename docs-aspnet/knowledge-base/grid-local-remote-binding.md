@@ -6,6 +6,7 @@ page_title: How to Decide Between Local and Remote Data Binding for Grid in {{ s
 slug: grid-local-remote-binding
 tags: grid, aspnetcore, data binding, local data binding, remote data binding
 res_type: kb
+components: ["general"]
 ticketid: 1658539
 ---
 

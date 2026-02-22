@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery MultiSelect Documentation - MultiSelect Overview
 description: "Try now the Kendo UI for jQuery MultiSelect component covering everything from binding it to local arrays of data and remote data services, grouping its data and filter it on the server, using templates to customize its content and layout to virtualizing its records and loading them on demand, implementing a summary tag mode and offering a comprehensive set of options for styling its appearance."
+components: ["multiselect"]
 slug: overview_kendoui_multiselect_widget
 position: 2
 ---
@@ -25,7 +26,7 @@ The MultiSelect displays a list of options and allows for multiple selections fr
 * [Rendering and dimensions]({% slug rendering_multiselect %})&mdash;You can change the dimensions of various elements of the Multiselect.
 * [Prefix and suffix]({% slug prefix_suffix_multiselect %})&mdash;The MultiSelect component lets you add custom content as prefix and suffix adornments.
 * [Globalization]({% slug globalization_multiselect %})&mdash;The MultiSelect supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_multiselect %}) need to be supported. Additionally, the MultiSelect supports [rendering in a right-to-left (RTL) direction]({% slug rtl_multiselect %}).
-* [Accessibility]({% slug accessibility_kendoui_multiselect_widget %})&mdash;The MultiSelect is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_multiselect %}).
+* [Accessibility]({% slug jquery_multiselect_accessibility %})&mdash;The MultiSelect is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_multiselect %}).
 
 >tip To learn more about the appearance, anatomy, and accessibility of the MultiSelect, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/multiselect/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

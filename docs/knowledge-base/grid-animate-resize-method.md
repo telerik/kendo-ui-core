@@ -7,6 +7,7 @@ slug: grid-animate-resize-method
 tags: grid, animation, resize, height
 ticketid: 1151627
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -38,9 +39,9 @@ How can I animate the height resizing of the Kendo UI Grid?
 		$(document).ready(function() {
 			$("#grid").kendoGrid({
 				dataSource: {
-					type: "odata",
+					type: "odata-v4",
 					transport: {
-						read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+						read: "https://demos.telerik.com/service/v2/odata/Customers"
 					},
 					pageSize: 20
 				},

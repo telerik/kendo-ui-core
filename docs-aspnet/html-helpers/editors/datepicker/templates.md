@@ -2,14 +2,13 @@
 title: Templates
 page_title: Templates
 description: "Get started with the {{ site.product }} DatePicker and learn how to customize its templates."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_templates
 position: 9
 ---
 {% if site.core %}
-    {% assign MonthEmpty = "/api/Kendo.Mvc.UI.Fluent/DatePickerMonthTemplateSettingsBuilder#emptysystemstring" %}
     {% assign Dates = "[`Dates`](/api/kendo.mvc.ui.fluent/datepickerbuilder#datessystemdatetime)" %}
 {% else %}
-    {% assign MonthEmpty = "/api/Kendo.Mvc.UI.Fluent/MonthTemplateBuilder#emptysystemstring" %}
     {% assign Dates = "[`BindTo`](/api/kendo.mvc.ui.fluent/datepickerbuilder#bindtosystemcollectionsgenericlistsystemdatetime)" %}
 {% endif %}
 
@@ -23,9 +22,9 @@ To modify the footer template of the DatePicker calendar, use the [`Footer`](/ap
 
 To modify the week column template, use the [`WeekNumber`](/api/kendo.mvc.ui.fluent/datepickerbuilder#weeknumbersystemboolean) property.
 
-The dates which are out of the `Min` and `Max` range are rendered as empty. To change their template, use the [`month.empty`]({{ MonthEmpty }}) option.
+The dates which are out of the `Min` and `Max` range are rendered as empty. To change their template, use the {% if site.core %}[`MonthTemplate.Empty`](/api/kendo.mvc.ui/monthtemplatebuilder#emptysystemstring){% else %}[`MonthTemplate.Empty`](/api/kendo.mvc.ui.fluent/monthtemplatebuilder#emptysystemstring){% endif %} option.
 
-For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %}#wai-aria).
+For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datepicker_accessibility %}#wai-aria).
 
 ## See Also
 

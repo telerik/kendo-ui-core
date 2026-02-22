@@ -2,6 +2,7 @@
 title: Focused Time
 page_title: Focused Time
 description: "Get started with the {{ site.product }} TimePicker and learn how to set the focused time when the user opens the pop-up."
+components: ["timepicker"]
 slug: htmlhelpers_timepicker_aspnetcore_focusedtime
 position: 4
 ---

@@ -7,7 +7,7 @@ slug: grid-select-parent-row-when-a-child-row-is-selected
 tags: grid, selection, parent, master, child, hierarchy, checkbox, select, row, any
 ticketid: 1147793
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -50,9 +50,9 @@ I have a hierarchical Kendo Grid with checkboxes for selection. On selection of 
                 $(document).ready(function() {
                     var element = $("#grid").kendoGrid({
                         dataSource: {
-                            type: "odata",
+                            type: "odata-v4",
                             transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                                read: "https://demos.telerik.com/service/v2/odata/Employees"
                             },
                             pageSize: 6,
                             serverPaging: true,
@@ -88,9 +88,9 @@ I have a hierarchical Kendo Grid with checkboxes for selection. On selection of 
                 function detailInit(e) {                  
                     $("<div/>").appendTo(e.detailCell).kendoGrid({
                         dataSource: {
-                            type: "odata",
+                            type: "odata-v4",
                             transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                                read: "https://demos.telerik.com/service/v2/odata/Orders"
                             },
                             serverPaging: true,
                             serverSorting: true,

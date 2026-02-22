@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} DropDownButton and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["dropdownbutton"]
 slug: keynav_aspnetcore_dropdownbutton
 position: 2
 ---

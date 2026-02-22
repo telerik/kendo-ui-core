@@ -7,6 +7,7 @@ slug: pdfViewer-load-pdf-dynamically-action-database
 tags: pdfviewer, load, pdf, server, dynamically
 ticketid: 1418499, 1418533
 res_type: kb
+components: ["pdfviewer"]
 ---
 
 ## Environment
@@ -37,13 +38,17 @@ Use the `.fromFile()` method of the Kendo UI PDFViewer and pass to it a URL to a
 
 The following example demonstrates how to change the loaded PDF dynamically by calling an action that will return the document and uses the selection in the Grid to trigger the change. The user can click Grid rows, extract data from them, and use that data to dynamically change the file that is loaded in a Kendo UI PDFViewer through its `.fromFile()` method. The example will not work in a sample Dojo because the handler does not actually exist. You need to implement that according to the logic of your application and it must return the PDF file with the correct MIME type (`application/pdf`).
 
+
 ```dojo
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs" type="module"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.min.mjs" type="module"></script>
+<script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.all.min.js" type="module"></script>
 <div id="grid"></div>
 
 <div id="pdfViewer">
 </div>
 
-<script>
+<script type="module">
   $("#grid").kendoGrid({
     columns: [
       { field: "name" },
@@ -81,10 +86,6 @@ The following example demonstrates how to change the loaded PDF dynamically by c
   });
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-<script>
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-</script>
 ```
 
 The following example demonstrates a sample MVC controller that shows how to return the needed file&mdash;the implementation details will vary between technologies and implementations.

@@ -5,9 +5,9 @@ description: "Learn how to programmatically zoom to a certain point in the Kendo
 slug: howto_zoomtopoint_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/zoom-to-point
 tags: kendo, jquery, diagram, zoom, to, predefined, points
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

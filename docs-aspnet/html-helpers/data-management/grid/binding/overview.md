@@ -1,44 +1,111 @@
 ---
 title: Overview
-page_title: Data Binding Overview
-description: "Learn about the different types of data binding when working with the Telerik UI Grid component for {{ site.framework }}."
+page_title: Telerik UI Grid Documentation | Data Binding Overview  
+description: "Learn how to bind data to the {{ site.product }} Grid using various data binding approaches."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/overview
 slug: htmlhelpers_grid_aspnetcore_binding_overview
-position: 1
+position: 0
 ---
 
 # Data Binding Overview
 
-Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}), the {{ site.product_short }} Grid provides different types of data binding. 
+The {{ site.product }} Grid provides flexible data binding capabilities that allow you to display and manage tabular data from various sources. You can choose the appropriate binding method based on your application architecture and data requirements.
 
 {% if site.core %}
-* [Local data binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %})
-* [Razor Pages binding]({% slug razorpages_gridhelper_aspnetcore %})
-{% else %}
-* [Server binding binding]({% slug serverbinding_grid_aspnetmvc %})
+@[template](/_contentTemplates/core/json-serialization-note.md#json-serialization-note)
 {% endif %}
-* [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
-* [SignalR data binding]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %})
-* [WebApi Binding]({% slug htmlhelpers_grid_webapi_binding %})
-* [Custom Binding]({% slug custombinding_grid_aspnetmvc %}){% if site.mvc %} 
-* [Server Binding]({% slug serverbinding_grid_aspnetmvc %})
 
-The {{ site.product }} Grid enables you to populate it with data by using server and Ajax data binding.
+## Data Binding Approaches
 
-* The server binding binds the Grid to a supplied model and the Grid makes `HTTP` and `GET` requests when binding.
-* The Ajax binding makes Ajax requests to get the data for the Grid.
+The Grid supports the following data binding methods:
 
-The following table lists the basic feature differences between the server and Ajax binding.
+### Local Data Binding
 
-|**Feature**  |**Server Binding** |**Ajax Binding** |
-|:---         |:---               |:---             |
-|**Templates** |In the server-bound mode, the Grid templates use server-side expressions and .NET code&mdash;C# or Visual Basic. Templates are executed server-side. |In the Ajax-bound mode, the Grid uses Kendo UI templates. Templates are executed on the client and use JavaScript. |
-|**Full-Page Updates** |The Grid makes HTTP GET requests to ASP.NET MVC action methods which cause a full-page refresh. |The Grid makes Ajax requests which cause partial page update. The Grid retrieves only the data needed for the current page.|
+Bind the Grid to a local dataset by passing an arbitrary model directly within the boundaries of the component. This approach is optimal for:
+- Small to medium-sized datasets that can be loaded in memory.
+- Static data that does not require frequent updates.
+- Scenarios where all data is available at render time.
+
+For detailed implementation instructions, see [Local Data Binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %}).
+
+### Remote Data Binding
+
+Connect the Grid to a remote endpoint using AJAX operations. This enables:
+- Dynamic data loading with paging, sorting, grouping, and filtering.
+- Real-time data updates from external sources.
+- Improved performance with large datasets through on-demand data loading.
+
+For more information and examples, refer to the [Remote Data Binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}) documentation.
+
+### Custom DataSource Binding
+
+Implement custom data binding scenarios with full control over the data retrieval process:
+- Custom data processing logic based on the remote server structure and requirements.
+- Custom data operations such as paging, sorting, filtering, and grouping.
+- Connection to [OData]({% slug htmlhelpers_grid_aspnetcore_odata-binding %}) and [GraphQL]({% slug htmlhelpers_grid_aspnetcore_graphql-binding %}) services.
+
+For more information, refer to the [Custom Binding]({% slug custombinding_grid_aspnetmvc %}) documentation.
+
+### Web API Data Binding
+
+Connect the Grid to Web API endpoints for RESTful data operations:
+- RESTful API integration with automatic HTTP verb mapping.
+- Standard HTTP methods (`GET`, `POST`, `PUT`, `DELETE`) for CRUD operations.
+- JSON data exchange format.
+- Clean separation between client and server logic.
+
+For more information, refer to the [Web API Binding]({% slug htmlhelpers_grid_webapi_binding %}) documentation.
+
+{% if site.mvc %}
+### Server Binding
+
+Utilize server-side binding for rendering the Grid with data on the server. This approach provides:
+- Server-side rendering with pre-populated data.
+- Full-page postback scenarios with HTTP requests for CRUD operations.
+- Integration with server-side data processing.
+- Server-side template execution using Razor syntax.
+
+For detailed implementation instructions, see [Server Binding]({% slug serverbinding_grid_aspnetmvc %}) documentation.
 {% endif %}
+
+### SignalR Data Binding
+
+Enable real-time data synchronization using SignalR for live data updates:
+- Real-time data synchronization across multiple clients.
+- Automatic Grid updates when data changes on the server.
+- Live collaboration features with instant data broadcasting.
+- Push notifications for data modifications without page refresh.
+
+For detailed implementation instructions, see [SignalR Data Binding]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %}) documentation.
+
+{% if site.core %}
+## Data Binding in Razor Pages
+
+You can seamlessly integrate the Grid component into Razor Pages applications. All the [data binding approaches](#data-binding-approaches) described above can be configured within Razor Pages scenarios.
+
+The component supports both HtmlHelper and TagHelper syntax, and allows you to send the anti-forgery token when connecting to remote endpoints to ensure secure data operations.
+
+For detailed implementation instructions, refer to the [Grid in Razor Pages]({% slug razorpages_gridhelper_aspnetcore %}) article.
+{% endif %}
+
+## Key Considerations
+
+When selecting a data binding approach for the Grid, evaluate the following factors:
+
+* **Performance**&mdash;Local binding offers faster initial rendering for small datasets, while remote binding provides better performance with large datasets through on-demand loading and server-side operations.
+* **Data volume**&mdash;Large datasets require remote binding, custom DataSource, or Web API binding to leverage server-side paging, sorting, and filtering for optimal performance.
+* **Security**&mdash;Remote binding provide better control over data access through server-side validation and authorization.
+* **Real-time requirements**&mdash;SignalR binding is essential for scenarios requiring live data updates and multi-client synchronization.
+* **API architecture**&mdash;Web API binding is optimal for RESTful services, while Custom DataSource binding provides flexibility for OData, GraphQL, or custom endpoints.
+{% if site.mvc %}
+* **Application model**&mdash;Server binding is suitable for traditional MVC applications requiring server-side rendering and full-page postbacks.
+{% endif %}
+* **Development complexity**&mdash;Local binding is simplest for static data, while Custom DataSource binding offers maximum flexibility at the cost of increased implementation complexity.
 
 ## Loading Overlay Types
 
-The Telerik UI Grid for {{ site.framework }} exposes two types of loading indicators:
+The Grid component exposes two types of loading indicators:
 
 * The `GridLoaderType.LoadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
 
@@ -48,20 +115,18 @@ Check the `Skeleton` loading type in action in the live demo below:
 
 * [Skeleton Loading Type Demo](https://demos.telerik.com/{{ site.platform }}/skeletoncontainer/grid-integration)
 
-## KB Articles on Grid Data Binding
-
-{% if site.core %}
-* [Troubleshooting the Grid When Data Doesn't Load](/knowledge-base/grid-is-not-showing-data)
-* [Grid Dynamic Data Binding](/knowledge-base/grid-dynamic)
-{% endif %}
-* [Find Out More in the Knowledge Base](/knowledge-base)
-
 ## See Also
 
-* [Remote Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding)
-* [Local Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding)
-* [WebAPI Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)
-* [OData Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
-* [SignalR Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/signalr)
-* [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
-* [Web Api Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)
+* [Server-Side API of the Grid HtmlHelper](/api/grid)
+{% if site.core %}
+* [Server-Side API of the Grid TagHelper](/api/taghelpers/grid)
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
+* [Local Data Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/local-data-binding)
+* [Remote Data Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding)
+* [Custom DataSource Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)
+* [Custom Ajax Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)
+* [Web API Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)
+* [OData Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
+* [SignalR Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/signalr)
+* [GraphQL Service Binding by the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/graphql)

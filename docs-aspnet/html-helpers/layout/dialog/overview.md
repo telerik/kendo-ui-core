@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI for {{ site.framework }} Dialog component and its features like custom action buttons and built-in customization options."
+components: ["dialog"]
 previous_url: /helpers/layout/dialog/overview
 slug: overview_dialoghelper_aspnetcore
 position: 0
@@ -96,7 +97,7 @@ The following example demonstrates a basic Dialog configuration.
 * [Custom action buttons]({% slug action_buttons_dialoghelper_aspnetcore %})—Adding action buttons to the Dialog allows you to interact with the user. 
 * [Height and width]({% slug dimensions_dialoghelper_aspnetcore %})—You can control the dimensions of the Dialog by setting its height and width. The default size of the Dialog depends on its content.
 * [HTML structure and DOM placement]({% slug structure_and_placement_dialoghelper_aspnetcore %})—Regardless of where you initialize the UI component, the HTML code of the Dialog will be appended as a child of the document's `<body>` element.
-* [Accessibility]({% slug accessbility_aspnetcore_dialog %})—The Dialog is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_numerictextbox_aspnetcore %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_dialog_accessibility %})—The Dialog is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_numerictextbox_aspnetcore %}) for faster navigation.
 * [Events]({% slug events_dialog %})—The Dialog emits a variety of events that allow you to implement custom functionality.
 
 ## Next Steps

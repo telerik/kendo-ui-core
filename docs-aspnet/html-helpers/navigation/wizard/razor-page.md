@@ -3,26 +3,28 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI Wizard component for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_wizard_razorpage_aspnetcore
+components: ["wizard"]
 position: 6
 ---
 
 # Wizard in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Loader for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Wizard for {{ site.framework }} in Razor Pages applications.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-This article describes how to configure the Wizard component in a Razor Pages scenario.
+## Submitting Wizard
 
-## Standard Submit
+By default, clicking on the **Done** button will fire the client-side validation of the Form integrated in the Wizard component. However, to prevent the user from selecting a different step if client-side validation fails, the respective fields must be marked with the attribute `required`. Once all of the fields are filled and the user clicks on the **Done** button, the data will be submitted and the page will reload to display the server validation messages from the `PageModel`, if any. 
 
-By default, clicking on the Done button will fire the client-side validation of the Form integrated in the Wizard component. However, in order to prevent the user to select a different step in case the client-side validation fails, the respective fields should be marked with a required attribute. Once all of the fields are filled and the user clicks on the Done button the data will be submitted and the page will reload to display the server validation messages from the page model, if any. 
+Also, since the Form makes a POST request, the antiforgery token must be included in the request. This can be achieved, for example, by appending a hidden input to the Form.
 
-As POST request will be sent to the server antiforgery token needs to be added. This can be achieved, for example, by appending a hidden input to the Form.
+See the implementation details in the example below. For the complete project, refer to the [Razor Pages example in our GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Wizard/WizardIndex.cshtml).
 
-See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+```HtmlHelper
+    @page
+    @model WizardIndexModel
 
-```HtmlHelper()
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -95,8 +97,15 @@ See the implementation details in the example below, and for the full project wi
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-wizard name="wizard"
-                on-done="onDone">
+    @page
+    @model WizardIndexModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @{
+        var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    } 
+
+    <kendo-wizard name="wizard" on-done="onDone">
         <wizard-steps>
             <wizard-step title="Account Details">
                 <wizard-step-form form-data="@Model.UserViewModel">
@@ -165,21 +174,21 @@ See the implementation details in the example below, and for the full project wi
     </kendo-wizard>
 ```
 {% endif %}
-```script
-    <script>
-        function onDone(e) {        
-            $("#wizard").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
-        }
-    </script>
+```JS Scripts
+<script>
+    function onDone(e) {        
+        $("#wizard").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
+    }
+</script>
 ```
-```tab-PageModel(cshtml.cs)
-
+```C# PageModel
+public class WizardIndexModel : PageModel
+{
     [BindProperty]
     public UserModel UserViewModel { get; set; }
 
     public void OnGet()
     {
-        
          UserViewModel = new UserModel() 
          { 
              AccountDetails = new Account(),
@@ -190,22 +199,25 @@ See the implementation details in the example below, and for the full project wi
     public IActionResult OnPost()
     {
         var model = Request.Form;
-        
         if (!ModelState.IsValid)
         {
             return Page();
         }
         return RedirectToPage("Success");
     }
+}
 ```
 
-## Submitting the Wizard with Ajax
+## Submitting Wizard with AJAX
 
-When the Wizard is submitted with ajax, the default done event of the component is prevented, thus forcing the manual implementation of the submit behavior. In this case, an ajax request is sent to a specific end-point on Done button click. However, for server validation, as the page is not reloaded and the page model data is not changed, the Telerik Validator attached to the integrated Form has no way of knowing what the server response is. For this reason, the ajax request callback can be used to notify the user of the status of the server validation. If the server end-point is returning validation errors related to the fields the error callback can be used to iterate over the response errors and create a visual representation in the UI. In a similar way the success callback can be used to notify the user of a succesful Form submission.
+When the Wizard is submitted through an AJAX request, the default `Done` event of the component is prevented, thus forcing the manual implementation of the submit behavior. In this case, an AJAX request is sent to a specific end-point when clicking the **Done** button. However, for server validation, as the page is not reloaded and the `PageModel` data is not changed, the internal Validator attached to the integrated Form has no way of knowing what the server response is. For this reason, the AJAX request callback can be used to notify the user of the status of the server validation. If the server endpoint returns validation errors related to the fields, the error callback can be used to iterate over the response errors and create a visual representation in the UI. In a similar way, the `success` callback can be used to notify the user of a successful Form submission. 
 
-See the implementation details in the example below, where the JSON errors are appended to the validation summary and it is toggled it in the ajax success and error callbacks. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+See the implementation details in the example below, where the JSON errors are appended to the validation summary, which is toggled in the AJAX `success` and `error` callbacks. For the complete project, refer to the [Razor Pages example in our GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Wizard/WizardAjaxSubmit.cshtml).
 
 ```HtmlHelper
+    @page
+    @model WizardAjaxSubmitModel
+
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -273,10 +285,14 @@ See the implementation details in the example below, where the JSON errors are a
     )
 ```
 ```TagHelper
-@addTagHelper *,Kendo.Mvc
+    @page
+    @model WizardAjaxSubmitModel
+    @addTagHelper *,Kendo.Mvc
 
-    <kendo-wizard name="wizard-ajax"
-                on-done="onDone">
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <kendo-wizard name="wizard-ajax" on-done="onDone">
         <wizard-steps>
             <wizard-step title="Main information">
                 <wizard-step-form form-data="@Model.User">
@@ -335,40 +351,43 @@ See the implementation details in the example below, where the JSON errors are a
         </wizard-steps>
     </kendo-wizard>
 ```
-```script.js
-    <script>
-        function onDone(e) {
-            e.originalEvent.preventDefault();            
-           
-            $.ajax({
-                type: 'POST',
-                url: "@Url.Page("WizardAjaxSubmit", "Submit")",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("RequestVerificationToken",
-                        $('input:hidden[name="__RequestVerificationToken"]').val());
-                },
-                data: form.serialize(),
-                success: function (data) {
-                    $("#validation-success").html("<div class='k-messagebox k-messagebox-success'>" + data.success + "</div>");
-                    $("#validation-error").find("ul").empty();
-                },
-                error: function (data) {
-                    var response = JSON.parse(data.responseText);
-                    var errorString = "";
-                    $.each(response.errors, function (key, value) {
-                        errorString += '<li class="k-messagebox k-messagebox-error">' + value + '</li>';
-                    });
-                    $("#validation-success").html("");
-                    $("#validation-error").find("ul").empty();
-                    $("#validation-error").find("ul").append(errorString);
-                }
-            });
-        }
-    </script>
+```JS Scripts
+<script>
+    function onDone(e) {
+        e.originalEvent.preventDefault();            
+        
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Page("WizardAjaxSubmit", "Submit")",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("RequestVerificationToken",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            data: form.serialize(),
+            success: function (data) {
+                $("#validation-success").html("<div class='k-messagebox k-messagebox-success'>" + data.success + "</div>");
+                $("#validation-error").find("ul").empty();
+            },
+            error: function (data) {
+                var response = JSON.parse(data.responseText);
+                var errorString = "";
+                $.each(response.errors, function (key, value) {
+                    errorString += '<li class="k-messagebox k-messagebox-error">' + value + '</li>';
+                });
+                $("#validation-success").html("");
+                $("#validation-error").find("ul").empty();
+                $("#validation-error").find("ul").append(errorString);
+            }
+        });
+    }
+</script>
 ```
-```tab-PageModel(cshtml.cs)
+```C# PageModel
+public class WizardAjaxSubmitModel : PageModel
+{
     [BindProperty]
     public UserViewModel User { get; set; }
+
     public void OnGet()
     {
         if (User == null)
@@ -376,6 +395,7 @@ See the implementation details in the example below, where the JSON errors are a
             User = new UserViewModel();
         }
     }
+
     public IActionResult OnPostSubmit(UserViewModel model)
     {
         if (!ModelState.IsValid)
@@ -391,6 +411,7 @@ See the implementation details in the example below, where the JSON errors are a
         }
         return new JsonResult(new { success = "Data Posted Successfully" });
     }
+}
 ```
 
 ## See Also

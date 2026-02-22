@@ -5,9 +5,9 @@ description: "Learn how to expand a Kendo UI for jQuery Scheduler widget to a wi
 previous_url: /controls/scheduling/scheduler/how-to/expand-scheduler-to-100-height-and-width, /controls/scheduling/scheduler/how-to/appearance/expand-scheduler-to-100-height-and-width
 slug: howto_expand_scheduler_to100percent_widthandheight_scheduler
 tags: telerik, kendo, jquery, scheduler, expand, to, 100%, height, and, width 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -75,8 +75,8 @@ body,
 <script>
 $(function() {
     $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/13"),
-        startTime: new Date("2022/6/13 07:00 AM"),
+        date: new Date("2025/6/13"),
+        startTime: new Date("2025/6/13 07:00 AM"),
         views: [
             "day",
             { type: "week", selected: true },
@@ -88,27 +88,29 @@ $(function() {
         dataSource: {
             batch: true,
             transport: {
-                read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                    dataType: "jsonp"
-                },
-                update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                    dataType: "jsonp"
-                },
-                create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                    dataType: "jsonp"
-                },
-                destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                    dataType: "jsonp"
-                },
-                parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
-                    }
+              read: {
+                url: "https://demos.telerik.com/service/v2/core/meetings",
+              },
+              update: {
+                url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                type: "POST",
+                contentType: "application/json"
+              },
+              create: {
+                url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                type: "POST",
+                contentType: "application/json"
+              },
+              destroy: {
+                url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                type: "POST",
+                contentType: "application/json"
+              },
+              parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                  return kendo.stringify(options.models);
                 }
+              }
             },
             schema: {
                 model: {

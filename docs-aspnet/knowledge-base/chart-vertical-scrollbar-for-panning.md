@@ -6,6 +6,7 @@ page_title: Using a Vertical Scrollbar to Pan a Chart
 slug: chart-vertical-scrollbar-for-panning
 tags: chart, vertical, scrollbar, panning
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 <table>
@@ -123,7 +124,7 @@ Follow the steps below to define a [Slider component]({% slug overview_sliderhel
   </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script>
     var viewSize = 0;
 
@@ -146,7 +147,7 @@ Follow the steps below to define a [Slider component]({% slug overview_sliderhel
     }
 </script>
 ```
-```Styles
+```CSS Styles
   <style>
     #chart{
         float: left;
@@ -190,7 +191,7 @@ For a runnable example based on the code above, refer to the [REPL example on en
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/chart)

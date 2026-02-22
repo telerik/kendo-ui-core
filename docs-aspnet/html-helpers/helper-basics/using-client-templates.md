@@ -2,6 +2,7 @@
 title: Using Client Templates
 page_title: Using Client Templates
 description: "Learn how to use client templates within the Telerik UI for {{ site.framework }} components."
+components: ["general"]
 slug: client_templates_overview
 position: 7
 ---
@@ -138,7 +139,7 @@ For example, you can define an external client template for a [Grid column]({% s
 
 1. Set up a script block with the `text/x-kendo-template` type.
 
-    ```
+    ```JS
         <script type="text/x-kendo-template">
             <!--Template content here-->
         </script>
@@ -146,7 +147,7 @@ For example, you can define an external client template for a [Grid column]({% s
 
 1. Add an `id` to the template script and ensure its value is unique on the page.
 
-    ```
+    ```JS
         <script type="text/x-kendo-template" id="myTemplate">
 
         </script>
@@ -154,7 +155,7 @@ For example, you can define an external client template for a [Grid column]({% s
 
 1. Specify the desired JavaScript logic in the template. For example, display the relevant information based on the value of the `Discontinued` property.
 
-    ```
+    ```JS
         <script type="text/x-kendo-template" id="myTemplate">
             <div class="product-item">
             #if(Discontinued){#
@@ -220,7 +221,7 @@ Also, you can integrate Telerik UI for {{ site.framework }} components in the ex
 
 ### Adding HTML Helpers inside External Client Templates
 
-By default, {% if site.core %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_core%}#deferred-initialization){% else %}[every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug fundamentals_aspnetmvc%}#deferred-initialization){% endif %}. If the helper declaration is placed inside an external Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
+By default, [every Telerik UI HtmlHelper renders a `script` element immediately after its HTML markup]({% slug deferred_initialization_overview%}). If the helper declaration is placed inside an external Kendo UI template, the nested script elements will be invalid. The `ToClientTemplate` method instructs the helper to escape its own script element so that it can be nested.
 
     <script id="template" type="text/x-kendo-template">
         @(Html.Kendo().NumericTextBox()
@@ -329,7 +330,7 @@ The example below illustrates how to incorporate the Grid Toolbar's template con
     </kendo-grid>
 ```
 {% endif %}
-```_Partial.cshtml
+```Razor _Partial.cshtml
     <div class="toolbar">
      <label class="category-label" for="category">Show products by category:</label>
      @(Html.Kendo().DropDownList()
@@ -379,7 +380,7 @@ In the preceding code:
         //Other configuration
     )
 ```
-```CustomPopupEditor.cshtml
+```Razor CustomPopupEditor.cshtml
     //~/Views/Shared/EditorTemplates/CustomPopupEditor.cshtml
 
     @model EmployeeViewModel
@@ -455,7 +456,7 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
     </kendo-combobox>
 ```
 {% endif %}
-```scripts.js
+```JS scripts.js
     function itemTemplateHandler(data) {
         if(data.Country == "Germany"){
             return `<div><b>${data.ContactName}</b></div>`;

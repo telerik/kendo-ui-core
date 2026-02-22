@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} MediaPlayer by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["mediaplayer"]
 previous_url: /helpers/media/mediaplayer/accessibility/keyboard-navigation
 slug: htmlhelpers_mediaplayer_accessibility_keyboard_navigation_aspnetcore
 position: 2
@@ -27,7 +28,7 @@ To enable it, use the [`Navigatable(true)`](/api/kendo.mvc.ui.fluent/mediaplayer
     <kendo-mediaplayer name="mediaPlayer" navigatable="true">
         <!-- Other configuration. -->
     </kendo-mediaplayer>
-``` 
+```
 {% endif %}
 
 For a complete example, refer to the [demo on using the keyboard navigation of the MediaPlayer](https://demos.telerik.com/{{ site.platform }}/mediaplayer/keyboard-navigation).

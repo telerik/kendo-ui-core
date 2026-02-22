@@ -2,7 +2,8 @@
 title: Overview
 page_title: BottomNavigation Documentation | BottomNavigation Accessibility
 description: "Get started with the {{ site.product }} BottomNavigation and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_bottomnavigation_aspnetcore
+components: ["bottomnavigation"]
+slug: htmlhelpers_bottomnavigation_accessibility
 position: 1
 ---
 
@@ -12,7 +13,7 @@ position: 1
 
 
 
-Out of the box, the {{ site.product }} BottomNavigation provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+Out of the box, the {{ site.product }} Bottom Navigation provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
 The Bottom Navigation is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.
@@ -23,8 +24,7 @@ The Bottom Navigation is compliant with the [Web Content Accessibility Guideline
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The Bottom Navigation component is a landmark `<nav>` element or an element with [`role="navigation"`](https://www.w3.org/TR/wai-aria-1.2/#navigation). It contains an ordered list of navigation items. Each navigation item contains a link.
-
+The Bottom Navigation component is a landmark `<nav>` element or an element with `role="navigation"`(https://www.w3.org/TR/wai-aria-1.2/#navigation). It contains an ordered list of navigation items. Each navigation item contains a link.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

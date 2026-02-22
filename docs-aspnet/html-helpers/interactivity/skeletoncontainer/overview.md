@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI SkeletonContainer component for {{ site.framework }}."
+components: ["skeletoncontainer"]
 slug: htmlhelpers_skeletoncontainer_aspnetcore_overview
 position: 0
 ---

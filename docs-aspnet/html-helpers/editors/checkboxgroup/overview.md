@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI CheckBoxGroup component for {{ site.framework }}."
+components: ["checkboxgroup"]
 slug: htmlhelpers_checkboxgroup_aspnetcore_overview
 position: 0
 ---

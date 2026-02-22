@@ -2,6 +2,7 @@
 title: Basic Operations
 page_title: jQuery Dialog Documentation - Basic Operations
 description: "Get started with the jQuery Dialog by Kendo UI and control its opened, closed, and destroyed state."
+components: ["dialog"]
 slug: basicoperations_kendoui_dialog
 position: 2
 ---

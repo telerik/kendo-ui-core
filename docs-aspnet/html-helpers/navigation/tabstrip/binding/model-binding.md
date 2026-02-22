@@ -2,41 +2,65 @@
 title: Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI TabStrip HtmlHelper for ASP.NET MVC."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/binding/model-binding
 slug: modelbinding_tabstrip_aspnetmvc
-position: 4
+position: 3
 ---
 
 # Model Binding
 
-The Telerik UI TabStrip enables you to bind it to a hierarchical model.
+The TabStrip enables you to bind it to a hierarchical model and populate its tabs dynamically based on a server-side model collection.
 
-1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc6_aspnetmvc %}).
-1. Create a new action method and pass the **Categories** table as the model.
+To configure the TabStrip for local data binding using a model collection, follow the next steps:
 
-        public ActionResult Index()
-        {
-            NorthwindDataContext northwind = new NorthwindDataContext();
+1. Create a new Action method and pass the **Categories** table as the model.
 
-            return View(northwind.Categories);
-        }
+    ```C#
+    public ActionResult Index()
+    {
+        NorthwindDataContext northwind = new NorthwindDataContext();
 
-1. Make your view strongly typed.
-
-    ```Razor
-        @model IEnumerable<MvcApplication1.Models.Category>
+        return View(northwind.Categories);
+    }
     ```
 
-1. Add a TabStrip.
+1. Add the model to the View.
 
     ```Razor
+    @model IEnumerable<MvcApplication1.Models.Category>
+    ```
+
+1. Define the TabStrip and bind it to the model data.
+
+    ```Razor Index.cshtml
         @(Html.Kendo().TabStrip()
-            .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip.
+            .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip HTML element.
             .BindTo(Model,(item,category)  =>
             {
                 item.Text = category.CategoryName;
+                item.ContentUrl = "/Home/TabContent?tabId=" + category.CategoryID;
             })
         )
+    ```
+    ```C# HomeController.cs
+    public PartialViewResult TabContent(int tabId) 
+    {
+        NorthwindDataContext northwind = new NorthwindDataContext();
+        var category = northwind.Categories.Where(x => x.CategoryID == tabId).FirstOrDefault();
+        return PartialView("_TabContentPartial", category);
+    }
+    ```
+    ```Razor _TabContentPartial.cshtml
+    @model MvcApplication1.Models.Category
+
+    @{
+        Layout = null;
+    }
+
+    <!-- Tab content-->
+    <h3>@Model.CategoryName</h3>
+    <p>@Model.Description</p>
     ```
 
 ## See Also

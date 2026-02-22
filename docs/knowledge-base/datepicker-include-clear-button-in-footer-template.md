@@ -8,6 +8,7 @@ position:
 tags: datepicker, clear, footer
 ticketid: 1456583
 res_type: kb
+components: ["timepicker"]
 ---
 
 ## Environment
@@ -32,24 +33,25 @@ How can I add a clear button to the footer of a Kendo UI DatePicker?
 The clear button can be appended to the [Kendo UI DatePicker's footer](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/configuration/footer) during the [Open event](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/events/open).  
 
 ```javascript
-    function onOpen(e) {
+     function onOpen(e) {
         //Get the opened DatePicker's footer
-        var footer = $(e.sender.dateView.popup)[0].element.find(".k-footer");
+        var footer = $(e.sender.dateView.popup)[0].element.find(
+          ".k-calendar-footer",
+        );
 
         //If the button doesn't exist, create it, and append it to the footer.
-        if (footer.find(".k-button").length == 0) {
-            var btn = $('<a/>');
-            btn.addClass('k-button');
-            btn.text('Clear');
-            btn.on('click', function () {
-                e.sender.value(null);
-                e.sender.close();
-            });
+        if (footer.find(".k-button").length == 1) {
+          var btn = $("<a/>");
+          btn.addClass("k-button");
+          btn.text("Clear");
+          btn.on("click", function () {
+            e.sender.value(null);
+            e.sender.close();
+          });
 
-            footer.append(btn);
+          footer.append(btn);
         }
-
-    }
+      }
 ```
 
 #### Example
@@ -67,23 +69,24 @@ The clear button can be appended to the [Kendo UI DatePicker's footer](https://d
         open: onOpen,
       });
 
-      function onOpen(e) {
+       function onOpen(e) {
         //Get the opened DatePicker's footer
-        var footer = $(e.sender.dateView.popup)[0].element.find(".k-footer");
+        var footer = $(e.sender.dateView.popup)[0].element.find(
+          ".k-calendar-footer",
+        );
 
         //If the button doesn't exist, create it, and append it to the footer.
-        if (footer.find(".k-button").length == 0) {
-          var btn = $('<a/>');
-          btn.addClass('k-button');
-          btn.text('Clear');
-          btn.on('click', function () {
+        if (footer.find(".k-button").length == 1) {
+          var btn = $("<a/>");
+          btn.addClass("k-button");
+          btn.text("Clear");
+          btn.on("click", function () {
             e.sender.value(null);
             e.sender.close();
           });
 
           footer.append(btn);
         }
-
       }
     </script>
 ```

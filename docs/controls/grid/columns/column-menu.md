@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: jQuery Grid Documentation - Column Menu
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable its column menu."
+components: ["grid"]
 slug: columnmenu_kendoui_grid_widget
 position: 5
 ---
@@ -100,7 +101,7 @@ As of R3 2023 version of the Kendo UI, the Grid component supports a new `tabbed
         columnMenu: {
           autoSize: true,
           componentType: "tabbed"
-        }
+        },
         columns: [
           { field: "name" },
           { field: "age" }
@@ -155,7 +156,7 @@ As of R1 2024, the Kendo UI Grid has a new built-in toolbar command - `columns`.
           columns: {
               sort: "asc",
           }
-        }
+        },
         columns: [
           { field: "name" },
           { field: "age" }

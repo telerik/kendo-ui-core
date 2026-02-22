@@ -6,6 +6,7 @@ type: how-to
 slug: datepicker-disable-months-and-years
 tags: datepicker, disable, years, months, view, datetimepicker
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

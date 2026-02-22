@@ -5,9 +5,9 @@ description: "Learn how use Kendo UI for jQuery Windows as sliding panes."
 slug: howto_windowasslidingpane_window
 previous_url: /controls/layout/window/how-to/window-as-sliding-pane
 tags: telerik, kendo, jquery, window, use, mvvm, for, data, editing
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Automatic Correction
 page_title: jQuery DateInput Documentation - Automatic Correction
 description: "Get familiar with the autocorrect feature of the jQuery DateInput by Kendo UI, and learn how to disable it."
+components: ["dateinput"]
 slug: autocorrect_kendoui_dateinput
 position: 6
 ---

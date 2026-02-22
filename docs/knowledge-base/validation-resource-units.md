@@ -5,9 +5,9 @@ description: "Learn how to change validation options of resource units in the Ke
 slug: howto_validation_resource_units_gantt
 previous_url: /controls/scheduling/gantt/how-to/validation-resource-units
 tags: telerik, kendo, jquery, gantt, change, validation, options, of, resource, units
-component: gantt
 type: how-to
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

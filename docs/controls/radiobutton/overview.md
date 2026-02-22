@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery RadioButton Documentation - RadioButton Overview
 description: "Get started with the jQuery RadioButton by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["radiobutton"]
 slug: overview_kendoui_radiobutton_widget
 position: 0
 ---
@@ -16,7 +17,7 @@ The RadioButton allows you to provide radiobutton functionality to `<input />` e
 
 * [Appearance]({% slug appearance_radiobutton_widget %})&mdash;The RadioButton provides styling options that allow you to change its appearance.
 * [Label]({% slug label_radiobutton_widget %})&mdash;You can set a label next to the RadioButton.
-* [Accessibility]({% slug accessibility_kendoui_radiobutton_widget %})&mdash;The RadioButton is accessible for screen readers and supports WAI-ARIA attributes.
+* [Accessibility]({% slug jquery_radiobutton_accessibility %})&mdash;The RadioButton is accessible for screen readers and supports WAI-ARIA attributes.
 
 >tip To learn more about the appearance, anatomy, and accessibility of the RadioButton, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/radiobutton/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 
@@ -24,7 +25,6 @@ The RadioButton allows you to provide radiobutton functionality to `<input />` e
 
 * [Getting Started with the Kendo UI RadioButton for jQuery]({% slug getting_started_kendoui_radiobutton_widget %})
 * [Overview of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/index)
-* [Using the API of the RadioButton (Demo)](https://demos.telerik.com/kendo-ui/radiobutton/api)
 
 ## See Also
 

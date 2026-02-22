@@ -2,6 +2,7 @@
 title: Limitations and Browser Support
 page_title: Limitations and Browser Support - Kendo UI Drawing Library
 description: "Learn about the browsers which the Kendo UI Drawing API supports."
+components: ["drawingapi"]
 previous_url: /framework/drawing/drawing-dom#known-limitations
 slug: supportedbrowsers_drawingapi
 position: 7

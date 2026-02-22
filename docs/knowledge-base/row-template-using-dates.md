@@ -5,30 +5,24 @@ description: "Learn how to use dates inside the row template of the Kendo UI Gri
 previous_url: /controls/data-management/grid/how-to/Templates/row-template-using-dates
 slug: howto_use_dates_inside_row_template_grid
 tags: use, dates, inside, row, template, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>All</td>
- </tr>
- <tr>
-  <td>Browser</td>
-  <td>All</td>
- </tr>
- <tr>
-  <td>Browser Version</td>
-  <td>All</td>
- </tr>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI Grid for jQuery</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.2.520</td>
+</tr>
+</tbody>
 </table>
 
 ## Description
@@ -75,7 +69,7 @@ The following example demonstrates how to use dates inside a Grid row template.
       <script id="rowTemplate" type="text/x-kendo-tmpl">
 	            <tr data-uid="#: uid #">
 		            <td class="photo">
-                       <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
         </td>
 		            <td class="details">
 			           <span class="name">#: FirstName# #: LastName# </span>
@@ -95,7 +89,7 @@ The following example demonstrates how to use dates inside a Grid row template.
       <script id="altRowTemplate" type="text/x-kendo-tmpl">
 	            <tr class="k-alt" data-uid="#: uid #">
 		            <td class="photo">
-                       <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
         </td>
 		            <td class="details">
 			           <span class="name">#: FirstName# #: LastName# </span>
@@ -116,10 +110,10 @@ The following example demonstrates how to use dates inside a Grid row template.
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+                  url: "https://demos.telerik.com/service/v2/odata/Employees",
                 }
               }
             },

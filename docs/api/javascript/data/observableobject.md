@@ -59,6 +59,11 @@ To create a new `ObservableObject`, use its constructor or the `kendo.observable
 
 The unique identifier of the `ObservableObject`.
 
+
+<div class="meta-api-description">
+How do I get a unique identifier for each instance of an observable object in Kendo UI for jQuery? Access or retrieve the unique identifier assigned to each instance of an observable object for tasks such as instance identification, object comparison, referencing specific objects during lookups, managing or updating particular elements in observable collections, or tracking and differentiating objects in data-binding scenarios. This unique ID can be used to configure instance-specific logic, control state changes per object, correlate objects across different contexts, or enable precise object management and retrieval in reactive programming environments where distinct object identification is essential.
+</div>
+
 #### Example - use the uid field
 
     <script>
@@ -72,6 +77,11 @@ The unique identifier of the `ObservableObject`.
 ### bind
 
 Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable#bind) API reference.
+
+
+<div class="meta-api-description">
+How do I bind callback functions to specific events in a Kendo UI for jQuery datasource? Subscribe to events emitted by an observable data source by attaching callback functions that trigger when specific events occur, enabling you to listen for and respond to state changes, updates, or custom event notifications dynamically. Configure event listeners, set handlers, and bind functions to event names to monitor data flow and changes, facilitating reactive programming patterns, event-driven interactions, and real-time responses to observable signals within an object or data model. Enable event subscription, callback registration, and event handling mechanisms to capture emitted events and execute custom logic in response to observable updates.
+</div>
 
 #### Example - subscribe to an event
 
@@ -87,6 +97,11 @@ Attaches a handler to an event. For more information and examples, refer to the 
 ### get
 
 Gets the value of the specified field.
+
+
+<div class="meta-api-description">
+How do I dynamically access and read the value of a specific field in an observable object using Kendo UI for jQuery? Access or retrieve the current value of a specific property or field from a reactive or observable object by name, enabling reading of individual data points from an observable state without mutating or altering it. This is useful for developers needing to get or read property values for conditional logic, UI updates, data binding, debugging, or state inspection after initialization, supporting queries like how to fetch a field’s value, access observable data fields dynamically, or obtain real-time values from a managed state object without triggering reactivity or writes.
+</div>
 
 #### Returns
 
@@ -120,6 +135,11 @@ The name of the field whose value will be returned.
 
 Gets the parent of the object if such a parent exists.
 
+
+<div class="meta-api-description">
+How to access parent object in Kendo UI data source observable? Retrieve or access the immediate ancestor or containing object of a nested observable data structure, enabling traversal of hierarchical observable relationships, navigating up through observable instances, obtaining parent references to manage state dependencies, inspect parent properties, control bindings based on ancestor data, and support logic that depends on relationships between nested observable objects or data models.
+</div>
+
 #### Returns
 
 `kendo.data.ObservableObject`&mdash;The parent of the object. Returns `undefined` if the object is not nested and does not have a parent.
@@ -138,6 +158,11 @@ Gets the parent of the object if such a parent exists.
 ### set
 
 Sets the value of the specified field.
+
+
+<div class="meta-api-description">
+How do I dynamically update individual fields in my Kendo UI data model using the set method? Update or modify a specific property or attribute within a reactive data model by specifying the field name and assigning a new value, enabling dynamic state changes that automatically trigger notifications to update UI components, observers, bindings, or listeners. This method supports setting individual fields at runtime, allowing developers to programmatically control and refresh model data, drive reactivity, or propagate changes in data-binding scenarios, state management, or observable patterns. Whether you need to replace, assign, mutate, or update a property for real-time interface updates, syncing models with views, or responding to user interactions, this enables precise field-level modification and reactive dataflow control.
+</div>
 
 #### Parameters
 
@@ -171,6 +196,11 @@ The new value of the field.
 
 Creates a plain JavaScript object which contains all fields of the `ObservableObject`.
 
+
+<div class="meta-api-description">
+How do I convert my observable data to a plain JavaScript object using Kendo UI for jQuery? Convert reactive or observable data structures into plain JavaScript objects by extracting all internal fields, enabling serialization, JSON formatting, logging, debugging, state inspection, transmission over networks, API payload preparation, data storage, deep comparison, or client-server communication. Easily transform complex observable entities into simple POJOs that are compatible with JSON.stringify or any process requiring raw data conversion, flattening reactive wrappers for easier handling and analysis in JavaScript applications.
+</div>
+
 #### Returns
 
 `Object`&mdash;Contains only the fields of the `ObservableObject`.
@@ -192,6 +222,11 @@ Fires when a field value is updated through the `set` method.
 
 > The `change` event is raised after the field value is updated. Calling the `get` method from the event handler will return the new value.
 
+
+<div class="meta-api-description">
+How do I detect changes to data fields in a Kendo UI datasource using the change event? Detect changes or updates to data fields within observable objects managed by data sources, enabling you to track and respond when a property value is modified or set. This event fires after a value update, allowing you to handle notifications, trigger callbacks, execute custom logic, or synchronize state based on the latest field data retrieved via getters. Listen for field modifications, value shifts, or property mutations to enable reactive programming patterns, data binding updates, or event-driven workflows that monitor dynamic data changes in your application.
+</div>
+
 #### Event Data
 
 ##### e.field `String`
@@ -209,9 +244,14 @@ The name of the field which changed.
     observable.set("name", "Jane Doe"); // raises the "change" event and the handler outputs "name"
     </script>
 
-### get event
+### get
 
 Fired when the `get` method is invoked.
+
+
+<div class="meta-api-description">
+How to detect property access in Kendo UI's ObservableObject using the get method? Detect property access or reads on ObservableObject by listening to get method calls, enabling monitoring, logging, tracking, or triggering actions when object properties are retrieved; configure event handlers or listeners to respond dynamically to property fetches, implement lazy-loading or audit access patterns, capture get invocations for debugging, analytics, or reactive programming tied to property access, and control behavior when properties are read within observable data structures.
+</div>
 
 #### Event Data
 
@@ -230,11 +270,16 @@ The name of the field which is retrieved.
     observable.get("name"); // raises the "get" event and the handler outputs "name"
     </script>
 
-### set event
+### set
 
 Fires when the `set` method is invoked.
 
 > The `set` event is raised before the field value is updated. Calling the `get` method from the event handler will return the old value. Calling `e.preventDefault` will prevent the update of the field and the `change` event will not be triggered.
+
+
+<div class="meta-api-description">
+How can I prevent changes to data in an observable object using Kendo UI's datasource? Intercept, validate, or block updates to object fields by handling events triggered before a value change is applied, enabling developers to monitor or cancel modifications, access previous values during update attempts, prevent changes dynamically, and control whether subsequent change notifications or events fire when setting new data on observable objects.
+</div>
 
 #### Event Data
 

@@ -7,7 +7,7 @@ slug: diagram-add-shapes-from-context-menu
 tags: diagram, shape, connection, dynamically, add, contextMenu, flowchart, context, menu
 ticketid: 1363741
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

@@ -2,8 +2,10 @@
 title: WebApi Binding
 page_title: WebApi Binding
 description: "Learn how to enable the WebAPI binding capabilities of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_webapi_binding
 previous_url: /html-helpers/data-management/grid/editing/webapi, /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
+position: 5
 ---
 
 # WebAPI Binding
@@ -20,7 +22,7 @@ For runnable examples, refer to the [demos on WebAPI binding of the Grid compone
 To ensure that the application is configured for both Web API binding capabilities:
 
 1. Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
-    ```
+    ```C#
           public class MvcApplication : System.Web.HttpApplication
           {
               protected void Application_Start()
@@ -32,7 +34,7 @@ To ensure that the application is configured for both Web API binding capabiliti
     ```
 
 1. Create a file named `WebApiConfig.cs` inside the `App_Start` folder and configure the default WebAPI routing convention.
-    ```
+    ```C#
         public static class WebApiConfig
         {
             public static void Register(HttpConfiguration config)
@@ -55,7 +57,7 @@ To ensure that the application is configured for both Web API binding capabiliti
 {% if site.mvc %}
 To support writing and reading data using WebAPI endpoints, the `ApiController` base class needs to be inherited for a given controller instance.
 
-```
+```C#
     public class TaskController : System.Web.Http.ApiController
     {
     }
@@ -63,7 +65,7 @@ To support writing and reading data using WebAPI endpoints, the `ApiController` 
 {% else %}
 To support writing and reading data using WebAPI endpoints, the ControllerBase base class needs to be inherited for a given controller instance.
 
-```
+```C#
     [ApiController()]
     [Route("api/[controller]")]
     public class TaskController : BaseController
@@ -89,7 +91,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
     ![{{ site.product_short }} Adding the Controller](../images/grid-api-controller.png)
 {% else %}
 1. Add a new class to the `~/Models` folder. The following example uses the `ProductViewModel` name.
-    ```
+    ```C#
         public class ProductViewModel
         {
             public int ProductID { get; set; }
@@ -106,14 +108,14 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 1. Update the `Get` method as demonstrated by The following example.
 
     {% if site.mvc %}
-    ```
+    ```C#
         public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof    (WebApiDataSourceRequestModelBinder))DataSourceRequest request)
         {
             return db.Products.ToDataSourceResult(request);
         }
     ```
     {% else %}
-    ```
+    ```C#
         [HttpGet]
         public DataSourceResult Get([DataSourceRequest]DataSourceRequest request)
         {
@@ -125,7 +127,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 1. Update the `Post` method as demonstrated in The following example.
 
    {% if site.mvc %}
-   ```
+   ```C#
         public HttpResponseMessage Post(Product product)
         {
             if (ModelState.IsValid)
@@ -149,7 +151,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
         }
    ```
    {% else %}
-   ```
+   ```C#
         [HttpPost]
         public IActionResult Post([FromForm] ProductViewModel product)
         {
@@ -168,7 +170,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 1. Update the `Put` method as demonstrated in The following example.
 
     {% if site.mvc %}
-    ```
+    ```C#
         public HttpResponseMessage Put(int id, TaskViewModel task)
         {
             if (ModelState.IsValid && id == task.TaskID)
@@ -192,7 +194,7 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
         }
     ```
     {% else %}
-    ```
+    ```C#
          [HttpPut("{id}")]
          public IActionResult Put(int id, [FromForm] ProductViewModel product)
          {
@@ -218,8 +220,8 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 
 1. Update the `Delete` method as demonstrated in the following example.
 
-     {% if site.mvc %}
-     ```
+    {% if site.mvc %}
+    ```C#
         public HttpResponseMessage Delete(int id)
         {
             ProductViewModel product = service.Read().FirstOrDefault(p => p.ProductID == id);
@@ -240,24 +242,24 @@ To support writing and reading data using WebAPI endpoints, the ControllerBase b
 
             return Request.CreateResponse(HttpStatusCode.OK, product);
         }
-       ```
-       {% else %}
-       ```
+    ```
+    {% else %}
+    ```C#
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-			try
-			{
-				service.Destroy(new ProductViewModel { ProductID = id } );
-			}
-			catch (DbUpdateConcurrencyException)
-			{
-				return new NotFoundResult();
-			}
-			return new StatusCodeResult(200);
-		}
-       ```
-       {% endif %}
+            try
+            {
+                service.Destroy(new ProductViewModel { ProductID = id } );
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return new NotFoundResult();
+            }
+            return new StatusCodeResult(200);
+        }
+    ```
+    {% endif %}
 
 1. In the view, configure the Grid to use the Products WebAPI controller.
 
@@ -344,5 +346,8 @@ The final result is a Grid with configured editing![{{ site.product_short }} The
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [WebApi Binding for the Grid HtmlHelper for {{ site.product }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/webapi)
 * [Server-Side API](/api/grid)

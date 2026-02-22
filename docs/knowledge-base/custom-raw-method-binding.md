@@ -5,9 +5,9 @@ description: "Learn how to use custom MVVM bindings to retrieve unmasked widget 
 slug: howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox
 previous_url: /controls/editors/maskedtextbox/how-to/MVVM/custom-raw-method-binding
 tags: telerik, kendo, jquery, maskedtextbox, use, custom, mvvm, binding, to, set, the, model, unmasked, value
-component: maskedtextbox
 type: how-to
 res_type: kb
+components: ["maskedtextbox"]
 ---
 
 ## Environment

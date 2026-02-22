@@ -7,6 +7,7 @@ slug: grid-dynamic-popup-editing
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, custom, popup, template, dynamic, datatable
 ticketid: 1511419, 1522079
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -103,7 +104,7 @@ The suggested approach demonstrates how to bind a [`DataTable`](https://docs.mic
         }
     }
 ```
-```EditorTemplate
+```JS EditorTemplate
     <div class="k-edit-form-container">
         @{ foreach (System.Data.DataColumn dcolumn in ViewData["modelData"] as IList<System.Data.DataColumn>) //Loop through the DataColumns and create the editors based on the column DataType.
             {

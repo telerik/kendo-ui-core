@@ -5,9 +5,9 @@ description: "Learn how to use custom MVVM binders for shapes and connections in
 slug: howto_custommvvmbidinders_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/custom-mvvm-binders
 tags: kendo, jquery, diagram, use, custom, mvvm, binders, for, shapes, and, connections
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment
@@ -55,7 +55,7 @@ By using this approach, you can:
                    data-bind="source: shapesSource,
                               value: shapeId" />
             to:
-            <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">
+            <span class="k-input k-textbox">
               <input type="text" class="k-input-inner" data-bind="value: shapeText,
                                                             events: {
                                                               change: onShapeTextChange
@@ -66,9 +66,9 @@ By using this approach, you can:
                  data-shape-defaults='{"type": "circle","content":{"template": "#= name #"}, "width": "70", "height":"70", "hover":{"fill": "Orange"}}'
                  data-connection-defaults='{"stroke":{"color":"#979797","width":1},"type":"polyline","startCap":"FilledCircle","endCap":"ArrowEnd","content":{"template":"#= label#"}}'
                  data-bind="diagramShapes: shapesSource,
-                            diagramConnections: connectionsSource"  
+                            diagramConnections: connectionsSource"
                  style="height: 250px;" ></div>
-          <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">
+          <span class="k-input k-textbox">
             <input type="text" class="k-input-inner" data-bind="value: getShapes" style="width:100%;"/>
           </span>
         </div>

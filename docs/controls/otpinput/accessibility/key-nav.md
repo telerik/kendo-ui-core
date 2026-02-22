@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery OTPInput Documentation - Keyboard Navigation
 description: "Get started with the jQuery OTPInput by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["otpinput"]
 slug: keynav_otpinput_jquery
 position: 2
 ---
@@ -27,4 +28,4 @@ For a complete example, refer to the [demo on keyboard navigation of the OTPInpu
 
 * [Keyboard Navigation by the OTPInput (Demo)](https://demos.telerik.com/kendo-ui/otpinput/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the OTPInput]({% slug accessibility_kendoui_otpinput %})
+* [Accessibility in the OTPInput]({% slug jquery_otpinput_accessibility %})

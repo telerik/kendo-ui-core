@@ -5,9 +5,9 @@ description: "Learn how to cascade opened Kendo UI for jQuery Windows."
 slug: howto_cascadeopenwindows_window
 previous_url: /controls/layout/window/how-to/cascade-open-windows
 tags: telerik, kendo, jquery, window, cascade, opened, windows
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

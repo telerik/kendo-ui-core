@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Learn how to group data in the Telerik UI AutoComplete component for {{ site.framework }} works."
+components: ["autocomplete"]
 previous_url: /helpers/editors/autocomplete/grouping
 slug: htmlhelpers_autocomplete_grouping_aspnetcore
 position: 6

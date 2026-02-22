@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Window Documentation | Window Accessibility
 description: "Get started with the jQuery Window by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_window
+components: ["window"]
+slug: jquery_window_accessibility
 position: 1
 ---
 
@@ -36,11 +37,11 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 Action buttons follow the **Button** specification.
 
-[Button accessibility specification]({{button_a11y_link}})
+[Button accessibility specification]({% slug jquery_button_accessibility %})
 
 ## Resources
 
-[ARIA practices Modal Dialog Example](https://www.w3.org/WAI/ARIA/apg/example-index/dialog-modal/dialog)
+[ARIA practices Modal Dialog Example](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)
 
 ## Section 508
 

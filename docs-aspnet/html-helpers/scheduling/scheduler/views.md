@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to how to use the default views and create custom views in the widget."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_views_aspnetcore
 position: 3
 ---
@@ -168,7 +169,7 @@ You can override each method and property that are defined in the list by extend
 
 
 {% if site.mvc %}
-Implementing a custom views is demonstrated in the the How-To article regarding [Implementing Custom Views](slug % howto_implementcustomviews_scheduleraspnetmvc %). 
+Implementing a custom views is demonstrated in the How-To article regarding [Implementing Custom Views](slug % howto_implementcustomviews_scheduleraspnetmvc %). 
 {% endif %} 
 
 ## See Also

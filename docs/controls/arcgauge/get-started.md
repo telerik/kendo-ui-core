@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ArcGauge Documentation - Getting Started with the ArcGauge
 description: "Get started with the jQuery ArcGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["arcgauge"]
 slug: getting_started_kendoui_arcgauge_component
 position: 2
 ---
@@ -185,15 +186,11 @@ By default, the ArcGauge does not render content in the center. To add content a
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the ArcGauge](https://demos.telerik.com/kendo-ui/arcgauge/index)
+* [Demo Page for the ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)
 
 ## See Also 
 
 * [JavaScript API Reference of the ArcGauge](/api/javascript/dataviz/ui/arcgauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

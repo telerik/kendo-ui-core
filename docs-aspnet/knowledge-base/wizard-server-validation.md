@@ -7,6 +7,7 @@ slug: wizard-server-validation
 tags: wizard, validation
 ticketid: 1524438
 res_type: kb
+components: ["general"]
 component: wizard
 ---
 
@@ -28,7 +29,7 @@ How can I implement server-side validation with the Wizard component?
 You can achieve this requirement using the following approach:
 
 
-```Index.cshtml
+```Razor Index.cshtml
 <style>
     .k-form-buttons {
         display: none;
@@ -131,7 +132,7 @@ You can achieve this requirement using the following approach:
     });
 </script>
 ```
-```ValidationController.cs
+```C# ValidationController.cs
     public partial class FormController : Controller
     {
         public ActionResult Validation()

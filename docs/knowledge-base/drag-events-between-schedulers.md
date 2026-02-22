@@ -5,9 +5,9 @@ description: "Learn how to implement the drag-and-drop functionality in a Kendo 
 previous_url: /controls/scheduling/scheduler/how-to/drag-events-between-schedulers, /controls/scheduling/scheduler/how-to/interaction/drag-events-between-schedulers
 slug: howto_drag-events-between-schedulers_scheduler
 tags: telerik, kendo, jquery, scheduler, drag, and, drop, between 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

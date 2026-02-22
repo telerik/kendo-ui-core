@@ -24,8 +24,8 @@ jobs:
       - name: Install
         run: npm ci --no-audit --no-fund
 
-      - name: Build scripts
-        run: npx gulp scripts
+      - name: Build
+        run: npm run build
 
       - name: Install Playwright Deps
         run: npx -y playwright install --with-deps chromium

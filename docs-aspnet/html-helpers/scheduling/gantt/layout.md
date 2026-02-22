@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout
 description: "Learn more about the layout of the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: htmlhelpers_gantt_layout_aspnetcore
 position: 2
 ---
@@ -16,7 +17,7 @@ The GanttList of the Gantt extends the TreeList widget and offers its functional
 
 * [TreeList Documentation](https://docs.telerik.com/kendo-ui/controls/treelist/overview)
 * [TreeList Demos](https://demos.telerik.com/kendo-ui/treelist/index)
-* [TreeList API](/api/javascript/ui/treelist)
+* [TreeList Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist)
 
 The following features of the TreeList are currently not supported by the GanttList.
 
@@ -31,6 +32,7 @@ The following features of the TreeList are currently not supported by the GanttL
 
 The example below demonstrates how to get a reference to a GanttList.
 
+```JS
     // Place this after the Gantt for {{ site.framework }} declaration.
     <script>
         $(document).ready(function() {
@@ -40,6 +42,7 @@ The example below demonstrates how to get a reference to a GanttList.
             var ganttList = gantt.list;
         });
     </script>
+```
     
 ## Timeline
 

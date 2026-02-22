@@ -2,6 +2,7 @@
 title: Disabled ButtonGroup
 page_title: jQuery ButtonGroup Documentation - Disabled ButtonGroup
 description: "Get started with the jQuery ButtonGroup by Kendo UI and enable or disable the widget."
+components: ["buttongroup"]
 slug: disabled_kendoui_buttongroup
 position: 2
 ---

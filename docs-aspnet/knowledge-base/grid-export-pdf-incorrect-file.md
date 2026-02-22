@@ -6,6 +6,7 @@ slug: grid-export-pdf-incorrect-file
 tags: grid, export, pdf, mozilla, firefox, empty, file, core, mvc, telerik
 ticketid: 1657223
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

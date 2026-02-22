@@ -2,6 +2,7 @@
 title: Images
 page_title: Images
 description: "Learn how to enhance the items of the Telerik UI for {{ site.framework }} TreeView by adding images and sprites."
+components: ["treeview"]
 slug: htmlhelpers_treeview_images
 position: 5
 ---
@@ -206,7 +207,7 @@ To include sprites in the TreeView items, specify the respective sprite CSS clas
         </items>
     </kendo-treeview>
 ```
-```Styles
+```CSS Styles
     <style>
         #treeviewSprites .k-sprite { /* "treeviewSprites" matches the "Name" of the TreeView component. */
             /* The "TreeView_sprites" folder is located in the "wwwroot" application folder. */
@@ -220,7 +221,7 @@ To include sprites in the TreeView items, specify the respective sprite CSS clas
     </style>
 ```
 {% else %}
-```Styles
+```CSS Styles
     <style>
         #treeviewSprites .k-sprite { /* "treeviewSprites" matches the "Name" of the TreeView component. */
             background-image: url("@Url.Content("~/Content/TreeView_sprites/coloricons-sprite.png")");
@@ -291,7 +292,7 @@ The following example shows how to render sprites for the TreeView items when th
         return Json(result);
     }
 ```
-```Styles
+```CSS Styles
     <style>
         #treeviewSprites .k-sprite { /* "treeviewSprites" matches the "Name" of the TreeView component. */
             /* The "TreeView_sprites" folder is located in the "wwwroot" application folder. */
@@ -334,7 +335,7 @@ The following example shows how to render sprites for the TreeView items when th
         return Json(result, JsonRequestBehavior.AllowGet);
     }
 ```
-```Styles
+```CSS Styles
     <style>
         #treeviewSprites .k-sprite { /* "treeviewSprites" matches the "Name" of the TreeView component. */
             background-image: url("@Url.Content("~/Content/TreeView_sprites/coloricons-sprite.png")");

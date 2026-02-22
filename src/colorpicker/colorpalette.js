@@ -64,7 +64,7 @@ import "../kendo.core.js";
             columns: 10,
             tileSize: null,
             palette: "basic",
-            size: "medium",
+            size: undefined,
         },
         _attachEvents: function() {
             var that = this;

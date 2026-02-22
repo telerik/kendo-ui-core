@@ -6,7 +6,7 @@ page_title: Remove Filter By Field Name - Kendo UI for jQuery Data Grid
 slug: grid-remove-filter-by-field-name
 tags: grid, filters, remove, dataSource, toolbar, field, fieldname, filter
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

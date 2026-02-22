@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} SkeletonContainer component by following a complete step-by-step tutorial."
+components: ["skeletoncontainer"]
 slug: aspnetcore_skeletoncontainer_getting_started
 position: 1
 ---
@@ -394,7 +395,7 @@ You can reference the SkeletonContainer instances that you have created and buil
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var skeletoncontainer = $("#skeleton").data("kendoSkeletonContainer"); // skeletoncontainer is a reference to the existing skeletoncontainer instance of the helper.
     </script>

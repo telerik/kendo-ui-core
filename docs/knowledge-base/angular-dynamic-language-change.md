@@ -5,9 +5,9 @@ description: "Learn how to dynamically change the language of the Kendo UI for j
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-dynamic-language-change
 slug: howto_dynamic_language_change
 tags: grid, change, languages, dynamically, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -81,9 +81,9 @@ The following example represents the AngularJS version of [this demo](https://de
 
             $scope.mainGridOptions = {
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                        read: "https://demos.telerik.com/service/v2/odata/Employees"
                     },
                     pageSize: 5,
                     serverPaging: true,

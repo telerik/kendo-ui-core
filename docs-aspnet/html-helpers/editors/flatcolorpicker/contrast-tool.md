@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: FlatColorPicker Documentation - FlatColorPicker Contrast Tool
 description: "Check out the Contrast Tool in the FlatColorPicker."
+components: ["flatcolorpicker"]
 slug: contrast_tool_flatcolorpickerhelper_aspnetcore
 position: 4
 ---
@@ -10,7 +11,7 @@ position: 4
 
 The FlatColorPicker provides a Color Contrast Tool. It offers the capability for checking the color contrast ratio between two colors.
 
-Color contrast between text and background is important on web pages. It affects some people’s ability to perceive the required information. The tool follows [the WCAG recommendations](/editors/flatcolorpicker/accessibility/overview#wcag-21) for web accessibility.
+Color contrast between text and background is important on web pages. It affects some people’s ability to perceive the required information. The tool follows [the WCAG recommendations]({% slug htmlhelpers_flatcolorpicker_accessibility %}) for web accessibility.
 
 According to the WCAG standard, there are two levels of contrast ratio:
  * AA (minimum contrast)—The level AA requires a contrast ratio of at least 4.5:1 for normal text.
@@ -45,4 +46,4 @@ The example below demonstrates how to enable the contrast tool in the ColorPicke
 ## See Also
 
 * [Contrast Tool of the FlatColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/contrast-tool)
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)

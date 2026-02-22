@@ -2,6 +2,7 @@
 title: Content
 page_title: Content
 description: "Get started with the Telerik UI Wizard component for {{ site.framework }} and learn how to set its content."
+components: ["wizard"]
 slug: htmlhelpers_wizard_aspnetcore_content
 position: 3
 ---

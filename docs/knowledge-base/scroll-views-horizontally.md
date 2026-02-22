@@ -5,9 +5,9 @@ description: "Learn how to scroll the Kendo UI for jQuery Scheduler views horizo
 previous_url: /controls/scheduling/scheduler/how-to/scroll-views-horizontally, /controls/scheduling/scheduler/how-to/scrolling/scroll-views-horizontally
 slug: howto_scroll_views_horizontally_scheduler
 tags: telerik, kendo, jquery, scheduler, scroll, views, horizontally 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -61,8 +61,8 @@ The Kendo UI Scheduler views are normally 100% wide and depend on the width of t
     <script>
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 400,
           views: [
             "day",
@@ -75,24 +75,26 @@ The Kendo UI Scheduler views are normally 100% wide and depend on the width of t
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                 type: "POST",
+                 contentType: "application/json"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                 type: "POST",
+                 contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                 type: "POST",
+                 contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PDF Export
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} learn how to set the PDF export functionality."
+components: ["diagram"]
 slug: htmlhelpers_diagram_aspnetcore_pdf_export
 position: 1
 ---
@@ -21,7 +22,7 @@ To enable PDF export in the Diagram:
 ```HTML
     <button class='export-pdf k-button'>Save as PDF</button>
 ```
-```JavaScrtipt
+```JS
     <script>
         $(".export-pdf").click(function () {
             $("#diagram").getKendoDiagram().saveAsPDF();

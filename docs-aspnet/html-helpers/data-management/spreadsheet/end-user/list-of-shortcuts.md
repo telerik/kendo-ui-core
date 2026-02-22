@@ -2,6 +2,7 @@
 title: List of Keyboard Shortcuts
 page_title: Spreadsheet
 description: "A list of the keyboard shortcuts supported by the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_list_of_shortcuts_aspnetcore
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: PDF Export
 description: "Export the Telerik UI StockChart for {{ site.framework }} to PDF."
+components: ["stockchart"]
 slug: pdf_export_stockchart_aspnetcore
 position: 4
 ---

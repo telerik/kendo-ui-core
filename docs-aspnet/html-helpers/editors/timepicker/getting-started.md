@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} TimePicker component by following a complete step-by-step tutorial."
+components: ["timepicker"]
 slug: timepicker_getting_started
 position: 1
 ---
@@ -55,7 +56,7 @@ Use the TimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to add t
 
 ## 3. Handle the TimePicker Events
 
-The TimePicker [exposes various events](/api/kendo.mvc.ui.fluent/timepickereventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the TimePicker to log a message in the Browser's console.
+The TimePicker {% if site.core %}[exposes various events](/api/kendo.mvc.ui.fluent/timepickereventbuilder){% else %}[exposes various events](/api/kendo.mvc.ui.fluent/datepickereventbuilderbase){% endif %} that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the TimePicker to log a message in the Browser's console.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -116,7 +117,7 @@ To use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var timePickerReference = $("#timepicker").data("kendoTimePicker"); // timePickerReference is a reference to the existing instance of the helper.
         </script>
@@ -124,7 +125,7 @@ To use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui
 
 1. Use the [client-side API of the TimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker/methods/enable) method to disable the TimePicker.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var timepicker = $("#timepicker").data("kendoTimePicker");

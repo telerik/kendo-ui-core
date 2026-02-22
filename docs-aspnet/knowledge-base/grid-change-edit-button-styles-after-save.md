@@ -6,6 +6,7 @@ page_title: Changing Edit Button Styles in an InLine Editable Grid After Save Op
 slug: grid-change-edit-button-styles-after-save
 tags: grid, inline, edit, button, styles, save, core, mvc
 res_type: kb
+components: ["general"]
 ticketid: 1634238
 ---
 
@@ -104,7 +105,7 @@ To implement the solution, follow the steps below:
   </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script type="text/javascript">
    var successfulSavedRow = null;
 
@@ -145,7 +146,7 @@ To implement the solution, follow the steps below:
     });
     </script>
 ```
-```Styles
+```CSS Styles
   <style>
    .successfullSave, .successfullSave:hover{
      background-color: green;

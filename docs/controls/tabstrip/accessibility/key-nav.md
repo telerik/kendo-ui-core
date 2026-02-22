@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery TabStrip Documentation - Keyboard Navigation
 description: "Get started with the jQuery TabStrip by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["tabstrip"]
 slug: keynav_tabstrip
 position: 2
 ---
@@ -16,4 +17,4 @@ For a complete example, refer to the [demo on keyboard navigation of the TabStri
 
 * [Keyboard Navigation by the TabStrip (Demo)](https://demos.telerik.com/kendo-ui/tabstrip/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the TabStrip]({% slug accessibility_tabstrip %})
+* [Accessibility in the TabStrip]({% slug jquery_tabstrip_accessibility %})

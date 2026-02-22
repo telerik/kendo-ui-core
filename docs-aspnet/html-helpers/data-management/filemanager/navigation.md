@@ -2,6 +2,7 @@
 title: Navigation
 page_title: Navigation
 description: "Get familiar with the navigation possibilities in the FileManager and how you can drill down to the specific file you need to manipulate with."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_navigation
 position: 5
 ---

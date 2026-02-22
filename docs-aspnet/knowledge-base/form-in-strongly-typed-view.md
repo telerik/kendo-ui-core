@@ -6,6 +6,7 @@ page_title: Use Strongly Typed Helpers in Form
 slug: form-in-strongly-typed-view
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, form, strongly-typed, view
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TimeDurationPicker Documentation - TimeDurationPicker Overview
 description: "Try now the Kendo UI for jQuery TimeDurationPicker component providing a number of features such as styling options, formatting settings, and columns."
+components: ["timedurationpicker"]
 slug: overview_kendoui_timedurationpicker_widget
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Manual Closing
 page_title: Manual Closing
 description: "Learn how to close the ToolBar popup manually with the Telerik UI ToolBar component for {{ site.framework }}."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_popup_manual_close_aspnetcore
 position: 3
 ---

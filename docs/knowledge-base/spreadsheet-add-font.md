@@ -7,6 +7,7 @@ slug: spreadsheet-add-font
 tags: spreadsheet, font
 ticketid: 1140766
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

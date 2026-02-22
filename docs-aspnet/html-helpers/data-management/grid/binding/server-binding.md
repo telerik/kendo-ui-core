@@ -2,9 +2,10 @@
 title: Server Binding
 page_title: Server Binding - Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Learn how to implement server binding with Telerik UI Grid HtmlHelper for ASP.NET MVC."
+components: ["grid"]
 previous_url: /helpers/grid/server-binding, /helpers/data-management/grid/server-binding
 slug: serverbinding_grid_aspnetmvc
-position: 5
+position: 4
 ---
 
 # Server Binding
@@ -277,6 +278,9 @@ The action method which renders the view that contains the Grid may need additio
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Binding the Grid HtmlHelper for ASP.NET MVC to Data (Demos)](https://demos.telerik.com/aspnet-mvc/grid/local-data-binding)
 * [Ajax Binding by the Grid HtmlHelper for ASP.NET MVC]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
 * [Server-Side API](/api/grid)

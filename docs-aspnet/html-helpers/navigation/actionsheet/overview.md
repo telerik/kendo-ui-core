@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the features and functionalities of the Telerik UI ActionSheet component for {{ site.framework }}. Learn how to initialize and configure the ActionSheet control." 
+components: ["actionsheet"]
 slug: htmlhelpers_actionsheet_aspnetcore
 position: 0
 ---
@@ -52,6 +53,22 @@ The following example demonstrates a basic configuration of the ActionSheet comp
             items.Add().Text("Upload New").IconClass("k-icon k-i-upload").Click("onClick");
             items.Add().Text("Cancel").IconClass("k-icon k-i-cancel").Group("bottom").Click("onClick");
         })
+        .Animation(animation =>
+        {
+            animation.Open(open =>
+            {
+                open.Expand(ExpandDirection.Vertical);
+            });
+        })
+        .CloseOnClick(true)
+        .ActionButtonsAlignment(ActionButtonsAlignment.Justify)
+        .ActionButtonsOrientation(ActionButtonsOrientation.Vertical)
+        .StartButton(startButton =>
+        {
+            startButton
+                .Icon("pencil")
+                .Click("startButtonClick");
+        })
     )
 
     <script>
@@ -62,17 +79,28 @@ The following example demonstrates a basic configuration of the ActionSheet comp
             var actionsheet = $("#actionsheet").data("kendoActionSheet");
             actionsheet.close();
         }
+
+        function startButtonClick(e) {
+            // Handle the "click" event of the start button.
+        }
     });
     </script>
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-actionsheet name="actionsheet" title="Select item">
+    <kendo-actionsheet
+        name="actionsheet"
+        title="Select item"
+        close-on-click="true"
+        action-buttons-alignment="ActionButtonsAlignment.Justify"
+        action-buttons-orientation="ActionButtonsOrientation.Vertical"
+    >
+        <start-button icon="pencil" click="startButtonClick"/>
+        <popup-animation enabled="true">
+            <open effects="expand:vertical" />
+        </popup-animation>
         <items>
-            <item text="Edit Item" icon-class="k-icon k-i-edit" click="onClick" />
-            <item text="Add to Favorites" icon-class="k-icon k-i-heart" click="onClick" />
-            <item text="Upload New" icon-class="k-icon k-i-upload" click="onClick" />
-            <item text="Cancel" icon-class="k-icon k-i-cancel" group="bottom" click="onClick" />
+            @* add actionsheet items *@
         </items>
     </kendo-actionsheet>
 
@@ -84,6 +112,10 @@ The following example demonstrates a basic configuration of the ActionSheet comp
             var actionsheet = $("#actionsheet").data("kendoActionSheet");
             actionsheet.close();
         }
+
+        function startButtonClick(e) {
+            // Handle the "click" event of the start button.
+        }
     });
     </script>
 ```
@@ -92,8 +124,10 @@ The following example demonstrates a basic configuration of the ActionSheet comp
 ## Functionality and Features
 
 * [Items]({% slug htmlhelpers_items_actionsheet_aspnetcore %})&mdash;You can configure the desired items and set various attributes like icons, text, descriptions, and more.
+* [Animations]({% slug htmlhelpers_animations_actionsheet %})&mdash;The ActionSheet allows you to define opening and closing animations.
+* [Action_Buttons]({% slug htmlhelpers_actionbuttons_actionsheet %})&mdash;The ActionSheet allows you to configure the orientation and alignment of the action buttons.
 * [Events]({% slug htmlhelpers_events_actionsheet_aspnetcore %})&mdash;Handle the component events and implement the any custom functionality.
-* [Accessibility]({% slug htmlhelpers_accessibility_actionsheet_aspnetcore %})&mdash;The ActionSheet is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_actionsheet_accessibility %})&mdash;The ActionSheet is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
 
 ## Next Steps
 

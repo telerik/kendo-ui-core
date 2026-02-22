@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} DateRangePicker component by following a complete step-by-step tutorial."
+components: ["daterangepicker"]
 slug: daterangepicker_getting_started
 position: 1
 ---
@@ -118,7 +119,7 @@ To use the [client-side API of the DateRangePicker](https://docs.telerik.com/ken
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var dateRangePickerReference = $("#daterangepicker").data("kendoDateRangePicker"); // DateRangePicker Reference is a reference to the existing instance of the helper.
         </script>
@@ -126,7 +127,7 @@ To use the [client-side API of the DateRangePicker](https://docs.telerik.com/ken
 
 1. Use the [client-side API of the DateRangePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/methods/enable) method to disable the DateRangePicker.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var daterangepicker = $("#daterangepicker").data("kendoDateRangePicker");

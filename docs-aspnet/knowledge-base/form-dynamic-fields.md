@@ -7,6 +7,7 @@ slug: form-dynamic-items
 tags: form, dynamic, items, fields
 ticketid: 1562665
 res_type: kb
+components: ["general"]
 component: form
 ---
 
@@ -39,7 +40,7 @@ This example demonstrates how to add/remove fields dynamically in the "Phones" F
 1. Handle the "click" event of the remove button to remove the specified "Phone" input.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @model ProjectName.Models.PersonViewModel
 
     @(Html.Kendo().Form<PersonViewModel>()

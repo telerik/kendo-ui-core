@@ -7,7 +7,7 @@ slug: grid-row-template-detail-template-angularjs
 tags: grid, angular, js, angularjs, directive, template, row, detail, rowTemplate, detailTemplate
 ticketid: 1179134
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -127,9 +127,9 @@ I can't get the `k-row-template` and `k-detail-template` to work together using 
         .controller("MyCtrl", function($scope){
         $scope.mainGridOptions = {
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 5,
             serverPaging: true,
@@ -151,9 +151,9 @@ I can't get the `k-row-template` and `k-detail-template` to work together using 
         $scope.detailGridOptions = function(dataItem) {
           return {
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

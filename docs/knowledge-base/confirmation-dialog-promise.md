@@ -5,9 +5,9 @@ description: "Learn how to create a confirmation dialog in a Kendo UI for jQuery
 slug: howto_createconfirmationdialog_viapromises_window
 previous_url: /controls/layout/window/how-to/confirmation-dialog-promise
 tags: telerik, kendo, jquery, window, create, confirmation, dialogs, with, promises, deferred, execution
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

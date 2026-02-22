@@ -7,6 +7,7 @@ tags: grid, show, display, tooltip, column, records
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -38,7 +39,7 @@ How can I show a Tooltip for the Telerik UI Grid for {{ site.framework }}?
 
 * Initialize the Tooltip for the Grid.
 
-```
+```Razor
    @(Html.Kendo().Tooltip()
         .For("#grid")
         .Position(TooltipPosition.Right)
@@ -47,12 +48,12 @@ How can I show a Tooltip for the Telerik UI Grid for {{ site.framework }}?
 ```
 * Specify a selector for elements, which the Tooltip will display within the grid, through the [`Filter`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/tooltipbuilderbase#filtersystemstring) configuration method.
 
-```
+```Razor
     .Filter("td:nth-child(3), th:nth-child(3)")
 ```
 * Provide a content handler for the Tooltip by using the [`ContentHandler`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/tooltipbuilderbase#contenthandlersystemstring) configuration method.
 
-```
+```Razor
     .ContentHandler("contentHandler")
 
     function contentHandler(e) {

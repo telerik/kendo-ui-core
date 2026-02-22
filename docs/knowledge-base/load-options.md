@@ -5,9 +5,9 @@ description: "Learn how to reload the configuration options of the Kendo UI Pivo
 previous_url: /controls/data-management/pivotgrid/how-to/load-options, /controls/data-management/pivotgrid/how-to/dimensions/load-options
 slug: howto_reload_configuration_options_pivotgrid
 tags: kendoui, pivotgrid, reload, configuration, options
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -70,7 +70,7 @@ The following example demonstrates how to reload the configuration options of th
                   catalog: "Adventure Works DW 2008R2",
                   cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
               },
               schema: {
                 type: "xmla"

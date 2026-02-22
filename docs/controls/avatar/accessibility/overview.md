@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Avatar Documentation | Avatar Accessibility
 description: "Get started with the jQuery Avatar by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_avatar_component
+components: ["avatar"]
+slug: jquery_avatar_accessibility
 position: 1
 ---
 

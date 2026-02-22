@@ -2,6 +2,7 @@
 title:  Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/binding/model-binding
 slug: htmlhelpers_multiselect_modelbinding_aspnetcore
 position: 6
@@ -10,6 +11,16 @@ position: 6
 # Model Binding
 
 You can implement model binding in the MultiSelect with both [local data](#local-data) and [remote data](#remote-data).
+
+{% if site.core %}
+> The [`Value()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#valuesystemcollectionsienumerable) setting takes precedence over the values of the [`Selected`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlistitem.selected?view=aspnetcore-9.0#microsoft-aspnetcore-mvc-rendering-selectlistitem-selected) property in cases where a [`SelectListItem`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlistitem?view=aspnetcore-9.0) is:
+> * Passed as a collection through the [`BindTo()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#bindtosystemcollectionsienumerable) configuration method.
+> * Has the value set either from the TagHelper `for` attribute, `MultiSelectFor` HtmlHelper, or the [`Value()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#valuesystemcollectionsienumerable) configuration method. 
+{% else %}
+> The [`Value()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#valuesystemcollectionsienumerable) setting takes precedence over the values of the [`Selected`](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.selectlistitem.selected?view=aspnet-mvc-5.2#system-web-mvc-selectlistitem-selected) property in cases where a [`SelectListItem`](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.selectlistitem?view=aspnet-mvc-5.2) is:
+> * Passed as a collection through the [`BindTo()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#bindtosystemcollectionsienumerable) configuration method.
+> * Has the value set either from the `MultiSelectFor` HtmlHelper or the [`Value()`](/api/kendo.mvc.ui.fluent/multiselectbuilder#valuesystemcollectionsienumerable) configuration method. 
+{% endif %} 
 
 ## Local Data
 

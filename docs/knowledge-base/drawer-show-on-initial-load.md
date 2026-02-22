@@ -6,6 +6,7 @@ type: how-to
 slug: drawer-show-on-initial-load
 tags: telerik, kendo, jquery, drawer, show, on, initial, load 
 res_type: kb
+components: ["drawer"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: External Template Loading
 page_title: Loading Templates from External Files - Kendo UI Templates
 description: "Learn how to load the jQuery Templates by Kendo UI from external files."
+components: ["general"]
 previous_url: /howto/load-templates-external-files
 slug: externalteplateloading_templatescomponent
 position: 5

@@ -2,6 +2,7 @@
 title: Positioning
 page_title: Positioning
 description: "Learn how to position and where to open the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_positioning_aspnetcore
 position: 3
 ---

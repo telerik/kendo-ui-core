@@ -2,6 +2,7 @@
 title: Labels
 page_title: Labels
 description: "Learn the basics when working with Labels for the Telerik UI MaskedTextBox for {{ site.framework }}."
+components: ["maskedtextbox"]
 slug: htmlhelpers_labels_maskedtextbox
 position: 4
 ---

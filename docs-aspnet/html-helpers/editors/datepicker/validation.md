@@ -2,13 +2,14 @@
 title: Validation
 page_title: Validation
 description: "Get started with the {{ site.product }} DatePicker and learn how to implement validation rules for its input value."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_validation
 position: 5
 ---
 {% if site.core %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#parseformatssystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/datepickerbuilder#parseformatssystemstring" %}
 {% else %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#parseformatssystemcollectionsgenericienumerablesystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/datepickerbuilder#parseformatssystemcollectionsgenericienumerable" %}
 {% endif %}
 
 # Validation

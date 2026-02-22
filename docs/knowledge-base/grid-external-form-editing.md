@@ -5,9 +5,9 @@ description: "Learn how to edit records through an external form in the Kendo UI
 previous_url: /controls/data-management/grid/how-to/Editing/grid-external-form-editing
 slug: howto_edit_records_using_external_forms_grid
 tags: grid, records, external, forms
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -70,30 +70,32 @@ The following example demonstrates how to achieve this behavior, create editors 
     </ul>
 </div>
 <script>
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     var validator;
     var viewModel = kendo.observable({
         dataSource: new kendo.data.DataSource({
             transport: {
                 read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                 },
                 update: {
                     url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
+                    type: "POST",
+            		contentType: "application/json"
                 },
                 destroy: {
                     url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
+                    type: "POST",
+            		contentType: "application/json"
                 },
                 create: {
                     url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
+                    type: "POST",
+            		contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },

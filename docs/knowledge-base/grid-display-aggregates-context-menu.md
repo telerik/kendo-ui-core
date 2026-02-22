@@ -7,7 +7,7 @@ slug: grid-display-aggregates-context-menu
 tags: grid, contextmenu, aggregates, custom, command
 ticketid: 1607509 
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -37,9 +37,8 @@ I want to add custom commands in the Grid context menu. Based on the selection i
       $(document).ready(function () {
 
         var dataSource = new kendo.data.DataSource({
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/core/Orders"
           },
           schema: {
             model: {

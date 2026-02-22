@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI CheckBox component for {{ site.framework }}."
+components: ["checkbox"]
 slug: events_checkbox
 position: 3
 ---

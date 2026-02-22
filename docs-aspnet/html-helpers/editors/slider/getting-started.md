@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Slider component by following a complete step-by-step tutorial."
+components: ["slider"]
 slug: slider_getting_started
 position: 1
 ---
@@ -142,7 +143,7 @@ The Slider exposes [events](/api/kendo.mvc.ui.fluent/slidereventbuilder) that yo
     </kendo-slider>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onChange(e) {
             let selectedValue = e.sender.value(); // Get the Slider value.
@@ -157,7 +158,7 @@ You can reference the Slider instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var sliderReference = $("#caloriesSlider").data("kendoSlider"); // sliderReference is a reference to the existing Slider instance of the helper.
@@ -201,7 +202,7 @@ You can reference the Slider instances that you have created and build on top of
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onChange(e) {
                 var slider = e.sender;
@@ -240,8 +241,8 @@ You can continue experimenting with the code sample above by running it in the T
 * [Client-Side API of the Slider](https://docs.telerik.com/kendo-ui/api/javascript/ui/slider)
 * [Client-Side API of the RangeSlider](https://docs.telerik.com/kendo-ui/api/javascript/ui/rangeslider)
 * [Server-Side API of the Slider](/api/slider)
-* [Server-Side API of the RangeSlider](/api/rangeslider)
 {% if site.core %}
+* [Server-Side API of the RangeSlider](/api/rangeslider)
 * [Server-Side API of the Slider TagHelper](/api/taghelpers/slider)
 {% endif %}
 {% if site.core %}

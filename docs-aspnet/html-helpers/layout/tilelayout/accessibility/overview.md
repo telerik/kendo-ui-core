@@ -2,7 +2,8 @@
 title: Overview
 page_title: TileLayout Documentation | TileLayout Accessibility
 description: "Get started with the {{ site.product }} TileLayout and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_tilelayout_overview
+components: ["tilelayout"]
+slug: htmlhelpers_tilelayout_accessibility
 position: 1
 ---
 

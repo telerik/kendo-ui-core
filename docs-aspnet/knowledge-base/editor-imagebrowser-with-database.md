@@ -7,6 +7,7 @@ slug: editor-imagebrowser-with-database
 tags: editor, image, store, database, sql, browser, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/database-with-imagebrowser, /html-helpers/editors/editor/how-to/database-with-imagebrowser
 res_type: kb
+components: ["general"]
 component: editor
 ---
 
@@ -33,7 +34,7 @@ See the full example on how to [set up the Editor `ImageBrowser` to store the im
 
 1. Implement the `Upload` action, to which the ImageBrowser uploads the selected files.
 
-    ```HomeController
+    ```C# HomeController
         public ActionResult Upload(string path, HttpPostedFileBase file)
         {
             if (file != null)
@@ -58,7 +59,7 @@ See the full example on how to [set up the Editor `ImageBrowser` to store the im
 
 1. Implement the `FileRepository` class, which performs the data operations with the database.
 
-    ```FilesRepository.cs
+    ```C# FilesRepository.cs
         using System;
         using System.Collections.Generic;
         using System.IO;

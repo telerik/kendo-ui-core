@@ -2,6 +2,7 @@
 title: Customization
 page_title: Customizing the Chip Helper
 description: "Discover the Telerik UI Chip component for {{ site.framework }} and learn how to customize it by configuring its icons and avatars."
+components: ["chip"]
 slug: htmlhelpers_chip_aspnetcore_customization
 position: 3
 ---

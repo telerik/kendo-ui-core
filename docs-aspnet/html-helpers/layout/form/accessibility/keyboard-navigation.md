@@ -2,6 +2,7 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} Form by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["form"]
 slug: keynav_aspnetcore_form
 position: 2
 ---

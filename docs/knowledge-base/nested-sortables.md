@@ -5,9 +5,9 @@ description: "Learn how to create nested Kendo UI Sortable widgets."
 slug: howto_nestsortables_sortable
 previous_url: /controls/interactivity/sortable/how-to/nested-sortables
 tags: telerik, kendo, jquery, sortable, create, nested, sortable, widgets
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

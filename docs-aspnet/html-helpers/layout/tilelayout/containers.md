@@ -1,14 +1,15 @@
 ---
 title: Tile Containers
 page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Containers
-description: "Learn how to define the content and headers of the The Telerik UI TileLayout component for {{ site.framework }} containers."
+description: "Learn how to define the content and headers of the Telerik UI TileLayout component for {{ site.framework }} containers."
+components: ["tilelayout"]
 slug: htmlhelpers_aspnet_tilelayout_containers
 position: 4
 ---
 
 # Layout Containers
 
-The Telerik UI TileLayout for {{ site.framework }} component tiles are configured by using the [`Containers`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#containerssystemactionkendomvcuifluenttilelayoutcontainerfactory) configurator. 
+The Telerik UI TileLayout for {{ site.framework }} component tiles are configured by using the [`Containers`](/api/kendo.mvc.ui.fluent/tilelayoutbuilder#containerssystemaction) configurator. 
 
 ## Dimensions
 
@@ -32,7 +33,7 @@ The main tile content is rendered from the [`BodyTemplate()`](/api/kendo.mvc.ui.
 
 The TileLayout exposes an object that allows you to override the following styles:
 
-```
+```JS
     var tileLayoutStyles = {
         wrapper: "k-widget k-tilelayout",
         item: "k-tilelayout-item k-card",
@@ -46,7 +47,7 @@ The TileLayout exposes an object that allows you to override the following style
 
 To override any of the classes, add your own or remove some, insert the new definition before the widget is initialized:
 
-```
+```JS
     kendo.ui.TileLayout.styles.item = "k-tilelayout-item k-card my-own-class";
 ```
 

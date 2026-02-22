@@ -2,6 +2,7 @@
 title: Dock Types
 page_title: Dock Types
 description: "Learn the specifics of the Telerik UI DockManager component for {{ site.framework }} Dock Types."
+components: ["dockmanager"]
 slug: dock_types_dockmanager_aspnetcore
 position: 1
 ---

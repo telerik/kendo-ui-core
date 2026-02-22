@@ -5,9 +5,9 @@ description: "Learn how to implement stable sorting in Google Chrome with the Ke
 previous_url: /controls/data-management/grid/how-to/stable-sort-chrome, /controls/data-management/grid/how-to/sorting/stable-sort-chrome
 slug: howto_implement_stable_sortin_chrome_grid
 tags: implement, stable, sorting, grid, chrome
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -72,7 +72,7 @@ A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm
     </script>
 ```
 
-The solution for this issue is to add a position field and use it to maintain stability. This is done through a custom [`columns.sortable.compare function`](/api/javascript/ui/grid/configuration/columns.sortable.compare).
+The solution for this issue is to add a position field and use it to maintain stability. This is done through a custom [`columns.sortable.compare function`](/api/javascript/ui/grid/configuration/columns.sortable#columnssortablecompare).
 
  - a stable sort function using a position field
 

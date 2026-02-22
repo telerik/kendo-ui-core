@@ -6,7 +6,7 @@ page_title: Identify when the DropDownTree is Fully Loaded - Kendo UI DropDownTr
 slug: dropdowntree-fully-loaded
 tags: kendo, kendo-ui, dropdowntree, databound, loaded, last-databound
 res_type: kb
-component: dropdowntree
+components: ["dropdowntree"]
 ---
 
 ## Environment
@@ -32,12 +32,11 @@ How can I identify the last `DataBound` event in the DropDownTree so that I know
 <input id="dropdowntree" style="width: 100%;" />
 
 <script>
-  var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+  var serviceRoot = "https://demos.telerik.com/service/v2/core";
   homogeneous = new kendo.data.HierarchicalDataSource({
     transport: {
       read: {
-        url: serviceRoot + "/Employees",
-        dataType: "jsonp"
+        url: serviceRoot + "/Employees"
       }
     },
     schema: {

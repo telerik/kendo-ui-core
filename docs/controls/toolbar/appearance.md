@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery ToolBar Documentation - Appearance
 description: "Get started with the jQuery ToolBar by Kendo UI and control its appearance."
+components: ["toolbar"]
 slug: appearance_kendoui_toolbar
 position: 5
 ---
@@ -72,7 +73,7 @@ The following example demonstrates how to set `size` of the toolbar to `small`.
 
 ### Overflow Options
 
-The ToolBar and its [`overflow`](/kendo-ui/api/javascript/ui/toolbar/configuration/items.overflow) configuration provide the following methods for styling:
+The ToolBar and its [`overflow`](/api/javascript/ui/toolbar/configuration/items.overflow) configuration provide the following methods for styling:
 
 - [`mode`](#Mode)—Defines the overflow mode. 
 - [`scrollButtons`](#ScrollButtons)—Defines the visibility of scroll buttons when mode is "scroll".

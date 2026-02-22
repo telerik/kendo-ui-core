@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Wizard Documentation - Wizard Keyboard Navigation
 description: "Get started with the jQuery Wizard by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["wizard"]
 slug: keynav_wizard_jquery
 position: 2
 ---
@@ -27,4 +28,4 @@ Kendo UI Wizard supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Wizard]({% slug accessibility_kendoui_wizard_widget %})
+* [Accessibility in the Wizard]({% slug jquery_wizard_accessibility %})

@@ -171,7 +171,8 @@ describe("menu icons", function() {
             iconPosition: "after",
             dataSource: [
                 { text: "Item 1", icon: "gear", iconClass: "custom-gear-icon-class" },
-                { text: "Item 2", icon: "pencil" }
+                { text: "Item 2", icon: "pencil" },
+                { text: "Item 3", iconClass: "fa-solid fa-house" }
             ]
         }).data("kendoMenu");
     });
@@ -183,6 +184,10 @@ describe("menu icons", function() {
 
     it("applies icon classes if specified", function() {
         assert.equal(menuElement.find('.k-icon.custom-gear-icon-class').length, 1);
+    });
+
+    it("applies only icon class", function() {
+        assert.equal(menuElement.find('.fa-solid.fa-house').length, 1);
     });
 
     it("places icons after text if iconPosition is 'after'", function() {
@@ -226,5 +231,27 @@ describe("menu scrollable", function() {
         initMenu({ scrollable: { scrollButtonsPosition: "split" } });
         assert.isOk(menu.element.prev().is(".k-menu-scroll-button-prev"));
         assert.isOk(menu.element.next().is(".k-menu-scroll-button-next"));
+    });
+
+    it("does not add unnecessary inline height to the element", function() {
+        menuElement.remove();
+        Mocha.fixture.append('<ul id="menu"></ul>');
+        menuElement = $("#menu");
+
+        let menuItems = [
+            { title: "Item 1" },
+            { title: "Item 2" },
+            { title: "Item 3" }
+        ];
+
+        menu = menuElement.kendoMenu({
+            dataSource: menuItems.concat(menuItems).concat(menuItems),
+            dataTextField: "title",
+            scrollable: {
+                distance: 40
+            }
+        }).data("kendoMenu");
+
+        assert.equal(menu.element[0].style.height, "");
     });
 });

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CheckBoxGroup Documentation - Getting Started with the CheckBoxGroup
 description: "Get started with the jQuery CheckBoxGroup by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["checkboxgroup"]
 slug: getting_started_kendoui_checkboxgroup_widget
 position: 2
 ---
@@ -76,8 +77,4 @@ Once the basic initialization is completed, you can start adding additional conf
 * [JavaScript API Reference of the CheckBoxGroup](/api/javascript/ui/checkboxgroup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

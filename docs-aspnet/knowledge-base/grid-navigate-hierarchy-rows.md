@@ -6,6 +6,7 @@ page_title: Navigating Through Hierarchical Grid Rows with Tab Key
 slug: grid-navigate-hierarchy-rows
 tags: grid, keyboard-navigation, hierarchy, rows, navigatable, tab-key, expanding, arrows
 res_type: kb
+components: ["general"]
 ticketid: 1637778
 ---
 
@@ -55,7 +56,7 @@ The [`Navigatable()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc
 
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         $(document).ready(function () {
             var grid = $('#grid').data('kendoGrid');

@@ -2,6 +2,7 @@
 title: State Persistence
 page_title: State Persistence
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and persist the state of the widget."
+components: ["grid"]
 slug: persiststate_grid_aspnetcore
 position: 14
 ---
@@ -16,7 +17,7 @@ By design, the `getOptions()` method retrieves the current Grid settings along w
 
 The example below shows how to retrieve and set the options of the Grid columns.
 
-```
+```JS
     let grid = $("#grid").data("kendoGrid"); // Get a reference to the Grid.
     let currentOptions = grid.getOptions(); // Get the current Grid options and DataSource state.
     let columnOptionsForSaving = kendo.stringify(currentOptions.columns); // Extract the Grid columns options.
@@ -25,5 +26,8 @@ The example below shows how to retrieve and set the options of the Grid columns.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Persisting the State of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/persist-state)
 * [Server-Side API](/api/grid)

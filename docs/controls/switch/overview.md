@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Switch Documentation - Switch Overview
 description: "Get started with the jQuery Switch by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["switch"]
 slug: overview_kendoui_switch_widget
 position: 1
 ---
@@ -21,7 +22,7 @@ When initialized, the Switch renders the currently selected value. The Switch ca
 * [Disabled Switch]({% slug disabled_kendoui_switch_widget %})
 * [Read-only Switch]({% slug readonly_kendoui_switch_widget %})
 * [Custom Switch]({% slug custom_kendoui_switch_widget %})
-* [Accessibility]({% slug accessibility_kendoui_switch %})
+* [Accessibility]({% slug jquery_switch_accessibility %})
 
 ## Next Steps 
 

@@ -2,6 +2,7 @@
 title: Legend
 page_title: Legend
 description: "Learn how to control the appearance of the {{ site.product }} Charts' legend."
+components: ["chart"]
 slug: htmlhelpers_charts_legend_aspnetcore
 ---
 
@@ -10,7 +11,7 @@ slug: htmlhelpers_charts_legend_aspnetcore
 The {{ site.product }} Chart supports customization of its legend, which displays the name of the configured data series.
 
 > * Series without a specified name will not display legend items.
-> * To render a legend item for the Pie, Donut, and Funnel series, set the [`categoryField`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring) of the items.
+> * To render a legend item for the Pie, Donut, and Funnel series, set the {% if site.core %}[`categoryField`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring){% else %}[`categoryField`](/api/kendo.mvc.ui.fluent/chartserieslegenditemsettingsbuilder){% endif %} of the items.
 
 ## Configuring the Legend Items
 
@@ -166,7 +167,7 @@ To exclude series from the legend, set their `VisibleInLegend` option to `false`
 
 You can configure the legend section of the Chart to render a title with customizable layout and content.
 
-To define a title, configure the [`Title`](/api/kendo.mvc.ui.fluent/chartlegendsettingsbuilder#titlesystemaction) property of the `Legend` configuration.
+To define a title, configure the [`Title`](/api/kendo.mvc.ui.fluent/chartlegendbuilder#titlesystemaction) property of the `Legend` configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Chart()
@@ -191,6 +192,5 @@ To define a title, configure the [`Title`](/api/kendo.mvc.ui.fluent/chartlegends
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API of the Chart for {{ site.framework }}](/api/chart)

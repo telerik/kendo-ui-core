@@ -1,4 +1,7 @@
 import '@progress/kendo-ui/src/kendo.actionsheet.js';
+import { TimerUtils } from '../../helpers/unit/timer-utils.js';
+import { asyncTest } from '../../helpers/unit/async-utils.js';
+
 
 let ActionSheet = kendo.ui.ActionSheet,
     div,
@@ -21,20 +24,21 @@ describe("kendo.ui.ActionSheet accessibility with AXE", function() {
         }, options));
     }
     beforeEach(function() {
+        TimerUtils.initTimer();
         div = $("<div style='color:green'></div>").appendTo(Mocha.fixture);
 
     });
     afterEach(function() {
+        TimerUtils.destroyTimer();
         instance.destroy();
         kendo.destroy(Mocha.fixture);
     });
 
-    it("ActionSheet is accessible", async function() {
+    asyncTest("ActionSheet is accessible", function(done) {
         createInstance({
             open: function(e) {
-                setTimeout(async function() {
-                    await axeRunFixture();
-                });
+                TimerUtils.advanceTimer(1);
+                done(() => axeRunFixture());
             },
         });
 
@@ -58,56 +62,78 @@ describe("kendo.ui.ActionSheet WAI-ARIA", function() {
         }, options));
     }
     beforeEach(function() {
+        TimerUtils.initTimer();
         div = $("<div style='color:green'></div>").appendTo(Mocha.fixture);
 
     });
     afterEach(function() {
+        TimerUtils.destroyTimer();
         instance.destroy();
         kendo.destroy(Mocha.fixture);
     });
 
-    it("ActionSheet items collection has role='group'", async function() {
+    asyncTest("ActionSheet items collection has role='group'", function(done) {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-list-ul").attr("role"), "group");
-                });
+                 TimerUtils.advanceTimer(1);
+                 done(() => assert.equal(instance.wrapper.find(".k-list-ul").attr("role"), "group"));
             },
         });
 
         instance.open();
     });
 
-    it("ActionSheet li elements have role='none'", async function() {
+    asyncTest("ActionSheet li elements have role='none'", function(done) {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-actionsheet-item").attr("role"), "button");
-                });
+                TimerUtils.advanceTimer(1);
+                done(() => assert.equal(instance.wrapper.find(".k-actionsheet-item").attr("role"), "button"));
             },
         });
 
         instance.open();
     });
 
-    it("ActionSheet has role='dialog'", async function() {
+    asyncTest("ActionSheet has role='dialog'", function(done) {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-actionsheet").attr("role"), "dialog");
-                });
+                TimerUtils.advanceTimer(1);
+                done(() => assert.equal(instance.wrapper.find(".k-actionsheet").attr("role"), "dialog"));
             },
         });
 
         instance.open();
     });
 
-    it("ActionSheet has aria-modal='true'", async function() {
+    asyncTest("ActionSheet has aria-modal='true'", function(done) {
         createInstance({
             open: function() {
-                setTimeout(function() {
-                    assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-modal"), "true");
-                });
+                TimerUtils.advanceTimer(1);
+                done(() => assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-modal"), "true"));
+            },
+        });
+
+        instance.open();
+    });
+
+    asyncTest("ActionSheet has aria-hidden='true'", function(done) {
+        createInstance({
+        });
+
+        instance.open();
+
+        TimerUtils.advanceTimer(10);
+        instance.close();
+
+        TimerUtils.advanceTimer(10);
+        done(() => assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-hidden"), "true"));
+    });
+
+    asyncTest("ActionSheet has aria-hidden='false'", function(done) {
+        createInstance({
+            open: function() {
+                TimerUtils.advanceTimer(1);
+                done(() => assert.equal(instance.wrapper.find(".k-actionsheet").attr("aria-hidden"), "false"));
             },
         });
 

@@ -5,9 +5,9 @@ description: "Learn how to use different editors based on the dataItem property 
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-editors-based-on-data-item-property
 slug: howto_use_editors_basedon_dataitem_property_grid
 tags: use, editors, basedon, dataitem, property, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,28 +45,30 @@ The following example demonstrates how to use different editors based on a prope
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-              dataSource = new kendo.data.DataSource({
-                transport: {
-                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                   dataType: "jsonp"
-                  },
-                  update: {
-                  url: crudServiceBaseUrl + "/Products/Update",
-                   dataType: "jsonp"
-                  },
-                  destroy: {
-                  url: crudServiceBaseUrl + "/Products/Destroy",
-                   dataType: "jsonp"
-                  },
-                  create: {
-                  url: crudServiceBaseUrl + "/Products/Create",
-                   dataType: "jsonp"
-                  },
+         var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                  },

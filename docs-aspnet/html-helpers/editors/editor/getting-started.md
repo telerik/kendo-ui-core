@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Editor component by following a complete step-by-step tutorial."
+components: ["editor"]
 slug: aspnetcore_editor_getting_started
 position: 1
 ---
@@ -183,7 +184,7 @@ To use the client-side API of the Editor and build on top of its initial configu
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var editorReference = $("#editor").data("kendoEditor"); // editorReference is a reference to the existing Editor instance of the helper.
@@ -193,7 +194,7 @@ To use the client-side API of the Editor and build on top of its initial configu
 
 1. Use the [Editor client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var editorReference = $("#editor").data("kendoEditor"); // editorReference is a reference to the existing Editor instance of the helper.

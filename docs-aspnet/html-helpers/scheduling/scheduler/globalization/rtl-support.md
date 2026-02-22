@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Right-to-Left Support
 description: "Get started with the Telerik UI Scheduler component for {{ site.framework }} and learn about the RTL supports it provides."
+components: ["scheduler"]
 slug: rtl_scheduler
 position: 4
 ---

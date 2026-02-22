@@ -6,7 +6,7 @@ slug: upload_general_performance_issues
 tags: telerik, progress, kendoui, jquery, upload, demonstrates, general, performance, issues
 type: troubleshooting
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: checkbox-styling-right-side
 tags: checkbox, styling, right, label, to the right, input
 ticketid: 1141307
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -36,7 +37,7 @@ res_type: kb
 
 ## Description
 
-When I use the checkbox styling [as shown in this demo](https://demos.telerik.com/kendo-ui/styling/checkboxes) and if I move the `input` element to the right of the `label` tag, the example stops working.
+When I use the checkbox styling and if I move the `input` element to the right of the `label` tag, the example stops working.
 
 How can I place move the `input` element to the right of the `label` tag in the Grid when I use checkbox styling?
 

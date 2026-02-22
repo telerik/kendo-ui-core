@@ -51,10 +51,10 @@ describe("DropDownButton intialization", function() {
     it("DropDownButton renders buttons with default styling options", function() {
         let dropDownButton = new DropDownButton(button, { items: defaultItems });
 
-        assert.isOk(button.hasClass("k-button-md"));
-        assert.isOk(button.hasClass("k-rounded-md"));
-        assert.isOk(button.hasClass("k-button-solid"));
-        assert.isOk(button.hasClass("k-button-solid-base"));
+        assert.isNotOk(button.hasClass("k-button-md"));
+        assert.isNotOk(button.hasClass("k-rounded-md"));
+        assert.isNotOk(button.hasClass("k-button-solid"));
+        assert.isNotOk(button.hasClass("k-button-solid-base"));
     });
 
     it("DropDownButton renders buttons with correct styling options", function() {
@@ -69,7 +69,7 @@ describe("DropDownButton intialization", function() {
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-outline-dark"));
+        assert.isOk(button.hasClass("k-button-dark"));
     });
 
     it("DropDownButton renders buttons with correct styling options after setOptions", function() {
@@ -87,13 +87,13 @@ describe("DropDownButton intialization", function() {
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-outline-dark"));
+        assert.isOk(button.hasClass("k-button-dark"));
     });
 
     it("DropDownButton renders default rounded option", function() {
         let dropDownButton = new DropDownButton(button, { items: defaultItems });
 
-        assert.isOk(button.hasClass("k-rounded-md"));
+        assert.isNotOk(button.hasClass("k-rounded-md"));
     });
 
     it("DropDownButton renders small rounded option", function() {

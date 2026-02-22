@@ -985,7 +985,7 @@ export const __meta__ = {
                 wrapper = element.wrap('<div class="k-listbox" unselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
-                $('<div class="k-list-scroller"><div class="k-list k-list-md"><div class="k-list-content"></div></div></div>').insertBefore(element);
+                $('<div class="k-list-scroller"><div class="k-list"><div class="k-list-content"></div></div></div>').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).css("display", "");

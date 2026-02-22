@@ -2,6 +2,7 @@
 title: Using iframe
 page_title: Using iframe
 description: "Learn how to use the Telerik UI Window component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) with an iframe element."
+components: ["window"]
 slug: htmlhelpers_window_iframe_aspnetcore
 position: 6
 ---

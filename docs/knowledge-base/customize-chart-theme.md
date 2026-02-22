@@ -5,9 +5,9 @@ description: "Learn how to create a custom theme for a Kendo UI Chart."
 previous_url: /controls/charts/how-to/customize-chart-theme, /controls/charts/how-to/appearance/customize-chart-theme
 slug: howto_customizechartthemes_charts
 tags: chart, customize, themes
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

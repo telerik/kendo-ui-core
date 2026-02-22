@@ -2,6 +2,7 @@
 title: Week Number Column
 page_title: Week Number Column
 description: "Render a column displaying the number of the weeks within the current month view when working with the Telerik UI MultiViewCalendar."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/week-column
 slug: week_column_multiviewcalendar_htmlhelper_aspnetcore
 position: 7

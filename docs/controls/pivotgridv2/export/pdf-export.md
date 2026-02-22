@@ -2,6 +2,7 @@
 title: PDF Export
 page_title: jQuery PivotGridV2 Documentation - PDF Export
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to export a Kendo UI PivotGridV2 to PDF."
+components: ["pivotgridv2"]
 slug: pdfexport_kendoui_pivotgridv2
 position: 1
 ---

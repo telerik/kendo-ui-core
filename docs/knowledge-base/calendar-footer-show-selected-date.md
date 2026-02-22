@@ -6,8 +6,8 @@ type: how-to
 slug: calendar-footer-show-selected-date
 tags: kendo, ui, calendar, footer, show, selected, current, date, select, navigate
 res_type: kb
+components: ["calendar"]
 ticketid: 1463800
-component: calendar
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Day Template
 page_title: jQuery MultiViewCalendar Documentation - Day Template
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and customize the rendered day for its Month view."
+components: ["multiviewcalendar"]
 slug: day_template_multiviewcalendar
 position: 4
 ---

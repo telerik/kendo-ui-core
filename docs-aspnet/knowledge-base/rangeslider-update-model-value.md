@@ -7,6 +7,7 @@ slug: rangeslider-update-model-value
 tags: slider, range, rangeslider, start, end, update, model, field, value, form, submit, core, mvc, telerik
 previous_url: /helpers/editors/slider/how-to/update-dialog-ajax-forms, /html-helpers/editors/slider/how-to/update-dialog-ajax-forms
 res_type: kb
+components: ["general"]
 component: rangeslider
 ---
 

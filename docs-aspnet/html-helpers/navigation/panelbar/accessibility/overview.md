@@ -2,7 +2,8 @@
 title: Overview
 page_title: PanelBar Documentation | PanelBar Accessibility
 description: "Get started with the {{ site.product }} PanelBar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_panelbar
+components: ["panelbar"]
+slug: htmlhelpers_panelbar_accessibility
 position: 1
 ---
 

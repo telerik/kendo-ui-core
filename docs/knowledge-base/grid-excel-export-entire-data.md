@@ -7,6 +7,7 @@ slug: grid-excel-export-entire-data
 tags: grid, excel, export, whole, data, no filter, group, all pages, complete, entire
 ticketid: 1140199
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -67,12 +68,11 @@ Use either of the following approaches:
               var dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
-                    url: "https://demos.telerik.com/kendo-ui/service/Products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Products"
                   },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery ListBox Documentation | ListBox Accessibility
 description: "Get started with the jQuery ListBox by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_listbox_widget
+components: ["listbox"]
+slug: jquery_listbox_accessibility
 position: 1
 ---
 
@@ -41,7 +42,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The ListBox toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

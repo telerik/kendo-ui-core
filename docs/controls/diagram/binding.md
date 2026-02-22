@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Diagram Documentation - Data Binding
 description: "Get started with the jQuery Diagram by Kendo UI and learn how to bind the component to data."
+components: ["diagram"]
 slug: binding_kendoui_diagram
 position: 2
 ---

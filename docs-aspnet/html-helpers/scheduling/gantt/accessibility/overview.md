@@ -2,7 +2,8 @@
 title: Overview
 page_title: Gantt Documentation | Gantt Accessibility
 description: "Get started with the {{ site.product }} Gantt and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_gantt
+components: ["gantt"]
+slug: htmlhelpers_gantt_accessibility
 position: 1
 ---
 
@@ -30,17 +31,19 @@ The Gantt component is a composite component that is used to represent project p
 | `.k-gantt` | `role=application` | Indicates the Gantt's role as an application. |
 
 
-The Gantt component integrates the ToolBar component and follows its WAI-ARIA support.
+The Gantt component integrates the toolbar component and follows its wai-aria support.
 
-[ToolBar accessibility specification]({%slug accessibility_toolbar_overview%})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
+
 
 The main inner component in the Gantt is the TreeList.
 
-[TreeList accessibility specification]({%slug htmlhelpers_treelist_aspnetcore_accessibility%})
+[TreeList accessibility specification]({% slug htmlhelpers_treelist_accessibility %})
 
-Another part of the component is the Splitter component and WAI-ARIA support.
 
-[Splitter accessibility specification]({%slug accessbility_aspnetcore_splitter%})
+Another part of the component is the Splitter component and Wai-Aria support.
+
+[Splitter accessibility specification]({% slug htmlhelpers_splitter_accessibility %})
 
 
 The following Wai-Aria support is implemented in the TimeLine of the Gantt.

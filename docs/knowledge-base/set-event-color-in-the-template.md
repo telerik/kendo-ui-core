@@ -5,9 +5,9 @@ description: "Learn how to set the event color in the template of the Kendo UI f
 previous_url: /controls/scheduling/scheduler/how-to/set-event-color-in-the-template, /controls/scheduling/scheduler/how-to/appearance/set-event-color-in-the-template
 slug: howto_seteventcolorinthetemplate_scheduler
 tags: telerik, kendo, jquery, scheduler, set, event, color, in, the, template 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

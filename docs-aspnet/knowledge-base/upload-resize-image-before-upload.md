@@ -7,6 +7,7 @@ slug: upload-resize-image-before-upload
 tags: upload, resize, image, client, before, upload
 ticketid: 1381676
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

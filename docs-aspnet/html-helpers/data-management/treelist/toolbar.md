@@ -2,6 +2,7 @@
 title: ToolBar
 page_title: ToolBar
 description: "Learn how to configure the ToolBar of the Telerik UI TreeList for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_ToolBar
 position: 10
 ---
@@ -10,7 +11,7 @@ position: 10
 
 The [`ToolBar()`](/api/kendo.mvc.ui.fluent/gridtoolbarcommandfactory) configuration option of the TreeList lets you add command buttons that allow the user to invoke built-in TreeList functionalities, such as adding data items, saving changes, searching, and so on.
 
-You can also define and add [custom commands](#custom-commands) to the TreeList's ToolBar, further expanding its functionality. To customize the appearance of the ToolBar, you can [utilize templates](#toolbar-template).
+You can also define and add [custom commands](#custom-commands) to the TreeList's ToolBar, further expanding its functionality. To customize the appearance of the ToolBar, you can [utilize templates](#toolbar-template-handler).
 
 ## Built-In Commands
 
@@ -57,6 +58,44 @@ You can configure the ToolBar and include any of the built-in commands:
 | Search | Adds the built-in search panel for the TreeList.| [Search Panel documentation]({% slug htmlhelpers_grid_aspnetcore_searchpanel %})|
 | Spacer | Moves the tools that are declared after it to the right side of the ToolBar.| NA|
 | Separator | Acts as a delimiter between the ToolBar Commands.| NA|
+
+### Overflow
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+@(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+     .Name("treelist")
+     .Toolbar(t => t.Items(item =>
+     {
+         item.Pdf();
+         item.Search();
+     })
+     .Overflow(o => o
+        .Mode(ToolBarOverflowMode.Scroll)
+        .ScrollButtons(ScrollButtonsType.Auto)
+        .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+        .ScrollDistance(50))
+     )
+     ... // Additional configuration.
+   )
+```
+{% if site.core %}
+```TagHelper
+<kendo-treelist name="treelist">
+    <toolbar>
+        <treelist-toolbar-button name="pdf" />
+        <treelist-toolbar-button name="search" />
+        <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+    </toolbar>
+    <!-- Additional configuration. -->
+</kendo-treelist>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
 
 ## Custom Commands
 

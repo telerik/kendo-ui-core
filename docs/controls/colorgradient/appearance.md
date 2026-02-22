@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery ColorGradient Documentation - Appearance
 description: "Learn how to apply different styling options to the ColorGradient component."
+components: ["colorgradient"]
 slug: appearance_kendoui_colorgradient
 position: 5
 ---

@@ -7,6 +7,7 @@ slug: dropdownlist-client-side-virtualization
 tags: dropdownlist, virtualization
 ticketid: 1150272  
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment
@@ -85,7 +86,7 @@ Based on the index of the currently selected value, calculate the indexes of the
 
     function convertValues(value) {
       var data = [];
-      value = $.isArray(value) ? value : [value];
+      value = Array.isArray(value) ? value : [value];
       for (var idx = 0; idx < value.length; idx++) {
         data.push(value[idx]);
       }

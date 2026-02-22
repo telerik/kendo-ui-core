@@ -6,6 +6,7 @@ page_title: Expanding PanelBar Items on the Client-Side
 slug: panelbar-expand-items-on-client-side
 tags: panelbar, expand, items, client, local data, remote date, recursively
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

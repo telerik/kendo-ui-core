@@ -6,6 +6,7 @@ type: how-to
 slug: drag-drop-empty-grid
 tags: kendo, jquery, datagrid, grid, drag, drop, empty, row
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -42,8 +43,7 @@ Therefore, to enable dragging and dropping of records to your empty Grid, you ha
         var dataSource = new kendo.data.DataSource({
           transport: {
             read:  {
-              url: "https://demos.telerik.com/kendo-ui/service" + "/Products",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core" + "/Products"
             }
           },
           pageSize: 10

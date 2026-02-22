@@ -4,7 +4,8 @@ page_title: 2014 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2014."
 previous_url: /backwards-compatibility/2014/2014-backward-compatibility
 slug: breakingchanges2014_kendoui
-position: 11
+components: ["general"]
+position: 12
 ---
 
 # 2014 Releases
@@ -95,7 +96,7 @@ Because of security precautions, scripts are no longer posted to the server by d
 
 **PivotDataSource**
 
-The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource/configuration/schema.cube) uses **objects** instead of numbers for the `state` argument. The field you should set to accumulate the value is called `accumulator`.
+The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource/configuration/schema#schemacube) uses **objects** instead of numbers for the `state` argument. The field you should set to accumulate the value is called `accumulator`.
 
 ```tab-Old
 	aggregate: function(value, state) { return value + state; }

@@ -7,7 +7,7 @@ slug: export-multiple-grids-in-the-same-pdf-file
 tags: kendo ui, mvc, pdf, multiple, grids, same, file, grid
 ticketid: 1131735
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -71,9 +71,8 @@ How can I export many Grids in the same PDF file?
                     scale: 0.8
                     },
                     dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     },
                     pageSize: 20
                     },
@@ -86,7 +85,7 @@ How can I export many Grids in the same PDF file?
                     },
                     columns: [{
                     template: "<div class='customer-photo'" +
-                    "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+                    "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
                     "<div class='customer-name'>#: ContactName #</div>",
                     field: "ContactName",
                     title: "Contact Name",
@@ -115,9 +114,8 @@ How can I export many Grids in the same PDF file?
                     scale: 0.7
                     },
                     dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                        read: "https://demos.telerik.com/service/v2/core/Products"
                     },
                     schema:{
                         model: {

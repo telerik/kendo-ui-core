@@ -6,7 +6,7 @@ page_title: Implement Cascading Cell Editors in the Spreadsheet
 slug: spreadsheet-cascading-cell-editors
 tags: kendo, jquery, spreadsheet, cascading, cell, editors
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

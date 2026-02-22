@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Splitter Documentation - Splitter Overview
 description: "Try now the Kendo UI for jQuery Splitter component that enables you to create dynamic layout of resizable and collapsible panes."
+components: ["splitter"]
 slug: overview_kendoui_splitter_widget
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Object-Model Architecture
 page_title: Object-Model Architecture - Kendo UI Class
 description: "Learn how to use the Kendo UI class category and get the basics of doing JavaScript inheritance with Kendo UI."
+components: ["mvvm"]
 previous_url: /tutorials/inheritance-with-kendoui, /framework/class/inheritance, /framework/inheritance
 slug: inheritance_kendoui_gettingstarted
 position: 3

@@ -158,4 +158,16 @@ describe("tabstrip data binding", function() {
         assert.equal(tabstrip.wrapper.find("li").length, 2);
         assert.equal(tabstrip.wrapper.children("div:not(.k-tabstrip-items-wrapper)").length, 2);
     });
+
+    it("adding item to empty dataSource adds a tab without errors", function() {
+        let tabstrip = new kendo.ui.TabStrip(dom, {
+            dataTextField: "Name",
+            dataSource: []
+        });
+
+        tabstrip.dataSource.add({ Name: "Tab2" });
+
+        assert.equal(dom.find("li").length, 1);
+        assert.equal(dom.find("li").text(), "Tab2");
+    });
 });

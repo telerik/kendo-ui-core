@@ -2,6 +2,7 @@
 title: Templates
 page_title: jQuery CircularGauge Documentation - Templates
 description: "Get started with the jQuery CircularGauge by Kendo UI and customize the content of its center by using the center template."
+components: ["circulargauge"]
 slug: centertemplate_kendoui_circulargauge
 position: 5
 ---

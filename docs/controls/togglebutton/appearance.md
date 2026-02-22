@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Kendo UI ToggleButton for jQuery."
+components: ["togglebutton"]
 slug: appearance_kendoui_togglebutton
 position: 2
 ---
@@ -79,7 +80,7 @@ The following options are available for the `fillMode` configuration:
 The structure of the Html class is `k-button-{fillMode}`. The default `fillMode` value is `Solid` and is applied to the rendered element through the `k-button-solid` class.
 
 ```html
-<button class="k-button  k-button-solid" >
+<button class="k-button " >
 </button>
 ```
 
@@ -112,11 +113,11 @@ The `themeColor` configuration provides a variety of colors that can be applied 
     </script>
 ```
 
-The default `themeColor` value is `base`. A ToggleButton with default `fillMode` and `themeColor` settings will have the `k-button-solid-base` class applied.
+The default `themeColor` value is `base`. A ToggleButton with default `fillMode` and `themeColor` settings will have the `k-button-base` class applied.
 
 ```html
     <!-- A ToggleButton with default fillMode and themeColor settings -->
-    <div class="k-button k-button-solid k-button-solid-base" >
+    <div class="k-button" >
     </div>
 ```
 

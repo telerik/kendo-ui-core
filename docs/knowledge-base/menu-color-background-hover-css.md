@@ -7,6 +7,7 @@ slug: menu-color-background-hover-css
 tags: menu, color, background, hover, css
 ticketid: 1173746
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

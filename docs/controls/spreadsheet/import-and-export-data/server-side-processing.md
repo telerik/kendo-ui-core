@@ -2,6 +2,7 @@
 title: Server-Side Processing
 page_title: jQuery Spreadsheet Documentation - Server-Side Processing
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to process its data by using the Telerik Document Processing library."
+components: ["spreadsheet"]
 slug: serverside_processing_spreadsheet_widget
 position: 4
 ---

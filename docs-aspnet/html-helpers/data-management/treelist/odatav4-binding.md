@@ -2,6 +2,7 @@
 title: OData-v4 Binding
 page_title: OData-v4 Binding
 description: "Learn how to implement OData-v4 binding with the Telerik UI TreeList component for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_odatav4-binding
 position: 8
 ---
@@ -26,7 +27,7 @@ To install the required dependencies for using OData, install the autonomous `Mi
 
 For applications using .NET Core 6 and the minimal hosting model, the Edm model and service need to be configured through the `Program.cs` file in the following way:
 
-```
+```C#
     builder.Services.AddControllers().AddOData(options =>
     {
         options.AddRouteComponents("odata", GetEdmModel());
@@ -51,7 +52,7 @@ For applications using .NET Core 6 and the minimal hosting model, the Edm model 
 
 For applications using .NET Core 3.1 and 5, the Edm model and service need to be configured through the `ConfigureServices` method in the following way:
 
-```
+```C#
   public void ConfigureServices(IServiceCollection services)
   {
       services.AddControllers().AddOData(
@@ -75,7 +76,7 @@ To ensure that the application is configured for both WebApi and OData binding c
 
 1. Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
   
-    ```
+    ```C#
       public class MvcApplication : System.Web.HttpApplication
       {
           protected void Application_Start()
@@ -87,7 +88,7 @@ To ensure that the application is configured for both WebApi and OData binding c
     ```
 1. Create a file named `WebApiConfig.cs` inside the `App_Start` folder and configure the Edm model and OData services.
   
-    ```
+    ```C#
       public static class WebApiConfig
       {
           public static void Register(HttpConfiguration config)
@@ -118,7 +119,7 @@ To ensure that the application is configured for both WebApi and OData binding c
 
 To support writing and reading data using the OData formats, the `ODataController` base class needs to be inherited for a given controller instance.
 
-```
+```C#
     public class ProductsController : ODataController
     {
         ...

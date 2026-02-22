@@ -2,6 +2,7 @@
 title: Overview
 page_title: ButtonGroup Overview
 description: "Discover the Telerik UI ButtonGroup component for {{ site.framework }} that provides features like Icons, two selection modes, and numerous built-in configuration options."
+components: ["buttongroup"]
 previous_url: /helpers/html-helpers/buttongroup, /helpers/navigation/buttongroup/overview
 slug: htmlhelpers_buttongroup_aspnetcore
 position: 0

@@ -7,6 +7,7 @@ slug: upload-files-from-grid-popup
 tags: upload, file, grid, popup, editor, template, core, mvc, telerik
 previous_url: /helpers/editors/upload/how-to/upload-files-from-grid, /html-helpers/editors/upload/how-to/upload-files-from-grid
 res_type: kb
+components: ["general"]
 component: upload
 ---
 
@@ -108,7 +109,7 @@ The example below shows how to integrate the Upload component into the custom te
         </script>
     ```
     {% endif %}
-    ```GridController
+    ```C# GridController
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
@@ -160,7 +161,7 @@ The example below shows how to integrate the Upload component into the custom te
 
 1. Create the custom editor template `CustomPopupEditor.cshtml` in the `~/Views/Shared/EditorTemplates` folder. Define the `FileName` property as read-only, since it will be populated dynamically based on the uploaded file in the next Step. Also, handle the [`Success`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/uploadeventbuilder#successsystemstring) event of the Upload control to get the name of the uploaded file.
 
-    ```CustomPopupEditor.cshtml
+    ```Razor CustomPopupEditor.cshtml
         @model FileViewModel
 
         @Html.HiddenFor(model => model.FileId)
@@ -186,7 +187,7 @@ The example below shows how to integrate the Upload component into the custom te
 1. Set up the `Save` and `Remove` Action methods of the Upload.
 
     {% if site.core %}
-    ```GridController
+    ```C# GridController
     public IWebHostingEnvironment WebHostEnvironment { get; set; }
 
     public GridController(IWebHostEnvironment webHostEnvironment)
@@ -244,7 +245,7 @@ The example below shows how to integrate the Upload component into the custom te
     }
     ```
     {% else %}
-    ```GridController
+    ```C# GridController
         public ActionResult SaveFile(HttpPostedFileBase file)
         {
             if (file != null)

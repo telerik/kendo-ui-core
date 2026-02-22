@@ -5,9 +5,9 @@ description: "Learn how to create custom editors in the Kendo UI Data Grid by us
 previous_url: /controls/data-management/grid/how-to/AngularJS/angular-custom-editor
 slug: howto_create_custom_editors_grid
 tags: grid, create, custom, editors, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -39,7 +39,7 @@ The following example demonstrates how to create a custom editor in the [Data Gr
 
 > The example loads Kendo UI 2023.3.1010 version.
 
-```dojo
+```
   <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
   <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -70,9 +70,9 @@ The following example demonstrates how to create a custom editor in the [Data Gr
       });
 
       $scope.ddlDataSource = new kendo.data.DataSource({
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+          read: "https://demos.telerik.com/service/v2/odata/Categories"
         }
       });
 

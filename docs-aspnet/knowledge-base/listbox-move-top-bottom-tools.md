@@ -6,6 +6,7 @@ page_title: Implementing 'moveTop' and 'moveBottom' Custom Tools of the ListBox
 slug: listbox-move-top-bottom-tools
 tags: listbox, custom, tools, moveTop, moveBottom, toolbar, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -84,7 +85,7 @@ The ListBox supports [`MoveUp()`](https://docs.telerik.com/{{ site.platform }}/a
         </kendo-button>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onClickTop() {
                 var listBox = $("#listBox").data("kendoListBox");

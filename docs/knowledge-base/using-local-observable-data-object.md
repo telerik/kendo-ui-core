@@ -5,9 +5,9 @@ description: "Learn how to bind the Kendo UI for jQuery Scheduler to a local obs
 previous_url: /controls/scheduling/scheduler/how-to/using-local-observable-data-object, /controls/scheduling/scheduler/how-to/binding/using-local-observable-data-object
 slug: howto_uselocalobservable_dataobject_scheduler
 tags: telerik, kendo, jquery, scheduler, use, local, observable, data, object 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

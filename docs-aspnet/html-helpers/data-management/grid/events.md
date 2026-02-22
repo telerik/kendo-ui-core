@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: grid_events
 position: 26
 ---
@@ -50,9 +51,9 @@ The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550" on-change="onChange" selectable="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+                <read url="@Url.Action("Orders_Read","Grid")"/>
             </transport>
         </datasource>
         <groupable enabled="true" />
@@ -86,5 +87,8 @@ The example below demonstrates how to use the [`Change` event](/api/kendo.mvc.ui
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using the API of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 * [Optimizing the Grid Performance]({% slug bestpractice_aspnetcore_grid %})

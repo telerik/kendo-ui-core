@@ -2,6 +2,7 @@
 title: Selected Times
 page_title: Selected Times
 description: "Get started with the {{ site.product }} TimePicker and learn how to set selected times and time ranges in the TimePicker."
+components: ["timepicker"]
 slug: htmlhelpers_timepicker_aspnetcore_selectedtimes
 position: 3
 ---

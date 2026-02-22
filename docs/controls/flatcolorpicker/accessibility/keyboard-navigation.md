@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery FlatColorPicker Documentation - Keyboard Navigation
 description: "Get started with the jQuery FlatColorPicker by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["flatcolorpicker"]
 slug: keynav_flatcolorpicker_jquery
 position: 2
 ---
@@ -26,4 +27,4 @@ For a complete example, refer to the [demo on keyboard navigation of the FlatCol
 
 * [Keyboard Navigation by the FlatColorPicker (Demo)](https://demos.telerik.com/kendo-ui/flatcolorpicker/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the FlatColorPicker]({% slug accessibility_kendoui_flatcolorpicker_widget %})
+* [Accessibility in the FlatColorPicker]({% slug jquery_flatcolorpicker_accessibility %})

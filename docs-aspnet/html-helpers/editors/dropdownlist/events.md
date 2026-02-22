@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: events_dropdownlist_aspnetcore
 position: 8
 ---

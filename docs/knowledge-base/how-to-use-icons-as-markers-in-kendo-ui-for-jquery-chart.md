@@ -6,6 +6,7 @@ page_title: How to Use Icons as Markers in Chart Line Series with Kendo UI for j
 slug: how-to-use-icons-as-markers-in-kendo-ui-for-jquery-chart
 tags: kendo-ui-for-jquery, chart, markers, icons, visualization
 res_type: kb
+components: ["chart"]
 ticketid: 1667208
 ---
 

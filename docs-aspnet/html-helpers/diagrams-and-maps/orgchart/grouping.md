@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Learn how to group nodes in the Telerik UI OrgChart component for {{ site.framework }} works."
+components: ["orgchart"]
 previous_url: /helpers/editors/orgchart/grouping
 slug: htmlhelpers_orgchart_grouping_aspnetcore
 position: 3

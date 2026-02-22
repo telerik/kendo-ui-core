@@ -7,6 +7,7 @@ slug: grid-add-new-button-header-inline
 tags: grid, add, new, button, header, inline, template, command, clientheadertemplate
 ticketid: 1413640
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

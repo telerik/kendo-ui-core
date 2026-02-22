@@ -7,7 +7,7 @@ slug: chart-cannot-pan-and-zoom-continuously-on-mobile
 tags: chart, mobile, svg-rendering
 ticketid: 1129220
 res_type: kb
-component: charts
+components: ["chart"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} AutoComplete component by following a complete step-by-step tutorial."
+components: ["autocomplete"]
 slug: aspnetcore_autocomplete_getting_started
 position: 1
 ---
@@ -270,7 +271,7 @@ To use the client-side API of the AutoComplete and build on top of its initial c
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var autocompleteReference = $("#autocomplete").data("kendoAutoComplete"); // autocompleteReference is a reference to the existing AutoComplete instance of the helper.
@@ -280,7 +281,7 @@ To use the client-side API of the AutoComplete and build on top of its initial c
 
 1. Use the [AutoComplete client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var autocompleteReference = $("#autocomplete").data("kendoAutoComplete"); // autocompleteReference is a reference to the existing AutoComplete instance of the helper.

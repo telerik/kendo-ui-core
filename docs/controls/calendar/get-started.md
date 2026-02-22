@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Calendar Documentation - Getting Started with the Calendar
 description: "Get started with the jQuery Calendar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["calendar"]
 slug: getting_started_kendoui_calendar_component
 position: 1
 ---
@@ -109,8 +110,4 @@ You can change the appearance of the dates by using the [`month`](/api/javascrip
 * [JavaScript API Reference of the jQuery Calendar](/api/javascript/ui/calendar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

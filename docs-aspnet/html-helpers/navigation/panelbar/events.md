@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: events_panelbar_aspnetcore
 position: 6
 ---

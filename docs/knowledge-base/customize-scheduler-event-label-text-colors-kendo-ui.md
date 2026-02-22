@@ -6,6 +6,7 @@ page_title: How to Customize Scheduler Event Text Colors Based on the Resource i
 slug: customize-scheduler-event-label-text-colors-kendo-ui
 tags: scheduler, event, label, text, color, customization, kendo-ui
 res_type: kb
+components: ["scheduler"]
 ticketid: 1653968
 ---
 
@@ -101,5 +102,5 @@ dataBound: function(e){
 ## See Also
 
 - [Scheduler Overview](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/overview)
-- [Scheduler Templates](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/templates)
+- [Scheduler Templates](https://www.telerik.com/kendo-jquery-ui/documentation/knowledge-base/custom-edit-and-event-templates)
 - [Scheduler dataBound Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound)

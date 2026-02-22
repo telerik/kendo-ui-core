@@ -2,6 +2,7 @@
 title: Google Cloud Big Query
 page_title: Google Cloud Big Query
 description: "Learn how to bind the Telerik UI for {{ site.framework }} Grid to data that is served through Google Cloud Big Query."
+components: ["general"]
 slug: google_cloud_big_query_aspnetmvc6_aspnetmvc
 position: 2
 ---
@@ -58,7 +59,7 @@ One of the steps for setting up authentication consists of downloading a JSON ke
 
 If you experience issues with accessing the environment variable, make sure the JSON file is present in an accessible location, for example, `C:\Program Files (x86)\IIS Express\myproject-name-191225-5f6ddc8dc2f6.json`. Try setting the GOOGLE_APPLICATION_CREDENTIALS environment variable in the application:
 
-```
+```C#
 public ActionResult Index()
 {
     Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "myproject-name-191225-5f6ddc8dc2f6.json");
@@ -75,7 +76,7 @@ Configure the Grid for remote binding and implement the actions the Grid will ca
 
     The declaration of the Grid and the view model it uses are shown in the example below.
 
-	```
+	```View
     @(Html.Kendo().Grid<TelerikApp1.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -138,7 +139,7 @@ Configure the Grid for remote binding and implement the actions the Grid will ca
 
     The Google BigQuery API (using Google.Cloud.BigQuery.V2;) allows you to run queries against the dataset. To use the API, add the following namespace to the controller:
 
-    ```csharp
+    ```C#
     using Google.Cloud.BigQuery.V2;
     ```
 

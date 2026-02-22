@@ -2,6 +2,7 @@
 title: Date Editing
 page_title: jQuery DateInput Documentation - Customize Date Editing
 description: "Learn how to customize the editing behavior of the Kendo UI for jQuery DateInput component."
+components: ["dateinput"]
 slug: dateediting_kendoui_dateinput
 position: 5
 ---

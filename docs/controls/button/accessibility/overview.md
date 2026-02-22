@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Button Documentation | Button Accessibility
 description: "Get started with the jQuery Button by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_button
+components: ["button"]
+slug: jquery_button_accessibility
 position: 1
 ---
 

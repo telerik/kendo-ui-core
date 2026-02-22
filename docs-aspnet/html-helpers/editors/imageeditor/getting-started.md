@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ImageEditor component by following a complete step-by-step tutorial."
+components: ["imageeditor"]
 slug: aspnetcore_imageeditor_getting_started
 position: 1
 ---
@@ -124,7 +125,7 @@ The ImageEditor exposes various [events](/api/kendo.mvc.ui.fluent/imageeditoreve
 </kendo-imageeditor>
 ```
 {% endif %}
-```script
+```JS script
 <script>	
 	function onError(e) {
 		console.log("error");
@@ -138,7 +139,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var imageEditorReference = $("#imageEditor").data("kendoImageEditor"); // imageEditorReference is a reference to the existing instance of the helper.
     </script>
@@ -146,7 +147,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the [ImageEditor client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor#methods) to control the behavior of the widget. In this example, you will programmatically execute the `ZoomImageEditorCommand` by using the `executeCommand` method.
 
-    ```script
+    ```JS script
     <script>
         var imageEditorReference = $("#imageEditor").data("kendoImageEditor"); // imageEditorReference is a reference to the existing instance of the helper.
         imageEditorReference.executeCommand({ command: "ZoomImageEditorCommand", options: imageEditorReference.getZoomLevel() - 0.3 });

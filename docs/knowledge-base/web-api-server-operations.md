@@ -5,9 +5,9 @@ description: "Learn how to implement the server-side data operations of paging, 
 previous_url: /controls/data-management/grid/how-to/web-api-server-operations, /controls/data-management/grid/how-to/binding/web-api-server-operations
 slug: howto_use_webapi_withserverside_operations_grid
 tags: use, webapi, grid, serverside, data, operations, paging, sorting, filtering, crud, edit, editing, editable
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -27,7 +27,7 @@ How can I implement the server-side data operations of paging, sorting, and filt
 
 Kendo UI does not provide any out-of-the-box capability for implementing server-side paging, sorting, and grouping.
 
-However, you can implement server-side data operations by using [Telerik UI for ASP.NET Core](/aspnet-core). The following example demonstrates how to use the `ToDataSourceResult` extension method to implement the server-side data operations of paging, sorting, and grouping.
+However, you can implement server-side data operations by using [Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui/documentation/introduction). The following example demonstrates how to use the `ToDataSourceResult` extension method to implement the server-side data operations of paging, sorting, and grouping.
 
 ```Controller
 using ApiJqueryGrid.Models;
@@ -91,7 +91,7 @@ namespace ApiJqueryGrid.Controllers
 }
 ```
 
-> The `dataSource` type Web API is intended for [Telerik UI for ASP.NET Core](/aspnet-core). As a result, you need to include `kendo.aspnetmvc.js`.
+> The `dataSource` type Web API is intended for [Telerik UI for ASP.NET Core](https://www.telerik.com/aspnet-core-ui/documentation/introduction). As a result, you need to include `kendo.aspnetmvc.js`.
 
 ```jQuery
     <div id="grid"></div>

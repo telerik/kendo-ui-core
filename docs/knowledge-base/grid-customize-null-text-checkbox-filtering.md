@@ -7,6 +7,7 @@ slug: grid-customize-null-text-checkbox-filtering
 position:
 tags: grid, filter
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -18,7 +18,7 @@ export const __meta__ = {
     var Button = ui.Button;
     var keys = kendo.keys;
     var NS = ".kendoButtonGroup";
-    var KBUTTONGROUP = "k-button-group k-button-group-";
+    var KBUTTONGROUP = "k-button-group";
     var KBUTTON = "k-button";
     var SELECTED = "k-selected";
     var DISABLED = "k-disabled";
@@ -45,10 +45,14 @@ export const __meta__ = {
             that.selectedIndices = [];
 
             that._buttons = that._renderItems(that.options.items);
-            const fillMode = options && options.fillMode ? options.fillMode : 'solid';
+            const fillModeClass = options && options.fillMode ? ' k-button-group-' + options.fillMode : '';
             that.element
-                .addClass(EMPTY + KBUTTONGROUP + fillMode)
+                .addClass(KBUTTONGROUP)
                 .attr("role", "group");
+
+            if (fillModeClass) {
+                that.element.addClass(fillModeClass);
+            }
 
             that._enable = true;
 
@@ -81,10 +85,10 @@ export const __meta__ = {
             enable: true,
             enabled: true,
             preventKeyNav: false,
-            size: "medium",
-            rounded: "medium",
-            fillMode: "solid",
-            themeColor: "base"
+            size: undefined,
+            rounded: undefined,
+            fillMode: undefined,
+            themeColor: undefined
         },
 
         badge: function(item, value) {

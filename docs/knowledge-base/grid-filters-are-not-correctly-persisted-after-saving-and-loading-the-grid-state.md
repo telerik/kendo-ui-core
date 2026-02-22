@@ -8,7 +8,7 @@ previous_url: /knowledge-base/the-grid-filters-are-not-correctly-persisted-after
 tags: grid, filter, persist
 ticketid: 1126061
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -57,9 +57,8 @@ Programmatically apply the time offset before the filter is set again.
         $(document).ready(function () {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Meetings"
+                read: "https://demos.telerik.com/service/v2/core/Meetings"
               },
               pageSize: 20
             },

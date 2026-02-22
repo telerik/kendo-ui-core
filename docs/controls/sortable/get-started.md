@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Sortable Documentation - Getting Started with the Sortable
 description: "Get started with the jQuery Sortable by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["sortable"]
 slug: getting_started_kendoui_sortable_widget
 position: 1
 ---
@@ -262,8 +263,4 @@ Specify which of the items in the Sortable are valid drop targets by using the [
 * [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery DatePicker Documentation | DatePicker Accessibility
 description: "Get started with the jQuery DatePicker by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_datepicker
+components: ["datepicker"]
+slug: jquery_datepicker_accessibility
 position: 1
 ---
 
@@ -46,13 +47,21 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | `.k-input-button` | `role=button` or `nodeName=button` | The element should either be a `<button>` element or should have `role="button"` assigned. |
 |  | `aria-label` | The button needs an accessible name to be assigned to it. |
 |  | `tabindex=-1` | The button element should not be focusable. |
+| `.k-datepicker.k-disabled .k-button` | `disabled` or `aria-disabled` | Attribute is rendered only when the picker is disabled. |
 
 ### Calendar Popup
 
 
 The Calendar in the Popup element of the component should implement the specification for the **Calendar** component.
 
-[Calendar accessibility specification]({{calendar_a11y_link}})
+[Calendar accessibility specification]({% slug jquery_calendar_accessibility %})
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug jquery_actionsheet_accessibility %})
 
 ## Resources
 

@@ -6,7 +6,7 @@ page_title: Export to Excel Grids with Many Template Columns and HTML Content in
 slug: grid-export-arbitrary-column-templates
 tags: grid, export, excel, templates
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -39,9 +39,9 @@ How can I export my Kendo UI Grid with multiple template columns with arbitrary 
       $(document).ready(function() {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model : {

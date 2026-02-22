@@ -2,6 +2,7 @@
 title: Click
 page_title: Click Binding - Kendo UI MVVM
 description: "Learn how to automatically trigger the attached methods once the user clicks the target DOM element by using the click binding in Kendo UI MVVM."
+components: ["mvvm"]
 slug: clickbinding_mvvm_kendoui
 ---
 
@@ -35,7 +36,7 @@ The following example demonstrates how to use the `click` binding.
 
 ## Binding to Events
 
-The `click` binding is a shorthand for the [`events`](events) binding. The code snippets from the following example are equivalent.
+The `click` binding is a shorthand for the [`events`](https://www.telerik.com/kendo-jquery-ui/documentation/framework/mvvm/bindings/events) binding. The code snippets from the following example are equivalent.
 
     <span data-bind="click: clickHandler"></span>
 

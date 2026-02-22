@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Virtualization
 description: "Learn how to set up the virtualization feature of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/virtualization
 slug: htmlhelpers_dropdownlist_virtualization_aspnetcore
 position: 5
@@ -159,7 +160,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             function convertValues(value) {
                 var data = {};
 
-                value = $.isArray(value) ? value : [value];
+                value = Array.isArray(value) ? value : [value];
 
                 for (var idx = 0; idx < value.length; idx++) {
                     data["values[" + idx + "]"] = value[idx];

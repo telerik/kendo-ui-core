@@ -2,6 +2,7 @@
 title: Internationalization
 page_title: jQuery Grid Documentation - Grid Internationalization
 description: "Get started with the jQuery Grid by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
+components: ["grid"]
 previous_url: /controls/grid/date-formats
 slug: intl_kendoui_grid_widget
 position: 2
@@ -86,20 +87,22 @@ The following example demonstrates how to allow the user to manually select the 
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                type: "POST",
+                contentType: "application/json",
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                type: "POST",
+                contentType: "application/json",
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                type: "POST",
+                contentType: "application/json",
               },
               parameterMap: function(options, operation) {
 
@@ -116,7 +119,7 @@ The following example demonstrates how to allow the user to manually select the 
                   }
                 }
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },
@@ -144,7 +147,10 @@ The following example demonstrates how to allow the user to manually select the 
           $("#grid").kendoGrid({
             dataSource: dataSource,
             height: 430,
-            toolbar: ["create", "save", "cancel"],
+            toolbar: {
+              showInactiveTools: true,
+              items: ["create", "save", "cancel"]
+            },
             editable:true,
             pageable: true,
             columns:[

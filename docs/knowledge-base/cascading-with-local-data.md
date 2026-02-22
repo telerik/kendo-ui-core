@@ -5,9 +5,9 @@ description: "Learn how to cascade Kendo UI ComboBoxes when working with local d
 previous_url: /controls/editors/combobox/how-to/cascading-with-local-data, /controls/editors/combobox/how-to/cascade/cascading-with-local-data
 slug: howto_implement_cascading_local_data_combobox
 tags: telerik, kendo, jquery, combobox, implement, cascading, with, local, data
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

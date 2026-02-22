@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: jQuery PivotGridV2 Documentation - Local Binding
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to bind it to a local array of data."
+components: ["pivotgridv2"]
 slug: localbinding_kendoui_pivotgridv2
 position: 4
 ---

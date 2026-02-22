@@ -6,7 +6,7 @@ slug: when_creating_multiple_widgets_one_works
 tags: telerik, kendoui, jquery, troubleshooting, when, creating, multiple, widgets, only, one, of, them, works
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

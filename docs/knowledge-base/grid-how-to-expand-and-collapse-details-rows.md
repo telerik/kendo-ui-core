@@ -7,7 +7,7 @@ slug: grid-how-to-expand-and-collapse-details-rows
 tags: grid, expand, collapse, details
 ticketid: 1137592
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -47,17 +47,17 @@ Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/m
 
 ```dojo
 <div id="example">
-      <button id="expand" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'><span class='k-button-text'>Expand All</span></button>
-      <button id="collapse" class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'><span class='k-button-text'>Collapse All</span></button>
+      <button id="expand" class='k-button'><span class='k-button-text'>Expand All</span></button>
+      <button id="collapse" class='k-button'><span class='k-button-text'>Collapse All</span></button>
       <div id="grid"></div>
 
       <script>
         $(document).ready(function() {
           var element = $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
               },
               pageSize: 6,
               serverPaging: true,
@@ -99,9 +99,9 @@ Use the [`expandRow`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/m
         function detailInit(e) {
           $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

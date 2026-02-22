@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: Contrast Tool
 description: "Learn more about the contrast tool provided by the Telerik UI ColorGradient component for {{ site.framework }}."
+components: ["colorgradient"]
 slug: htmlhelpers_contrast_tool_colorgradient
 position: 3
 ---
@@ -10,7 +11,7 @@ position: 3
 
 The ColorGradient provides a Color Contrast Tool. It provides the option for checking the color contrast ratio between two colors.
 
-The color contrast between text and background is important on web pages. It affects the ability of some people to perceive the presented information. The tool follows [the WCAG recommendations]({% slug htmlhelpers_accessibility_colorgradient %}#wcag-21) for web accessibility.
+The color contrast between text and background is important on web pages. It affects the ability of some people to perceive the presented information. The tool follows [the WCAG recommendations]({% slug overview_accessibility %}#web-content-accessibility-guidelines) for web accessibility.
 
 According to the WCAG standard, there are two levels of contrast ratio:
  * AA (minimum contrast)—the level AA requires a contrast ratio of at least 4.5:1 for normal text.
@@ -84,14 +85,14 @@ The example below demonstrates how to enable the contrast tool in the ColorGradi
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script type="text/javascript">
         function onChange(e) {
             $(".text-wrapper").css("color", e.value);
         }
     </script>
 ```
-```Styles
+```CSS Styles
     <style>
         .row {
             display: flex;         

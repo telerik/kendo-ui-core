@@ -7,7 +7,7 @@ slug: grid-group-one-column-only
 tags: grid, grouping, singe column
 ticketid: 1135530
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -40,9 +40,9 @@ How can I group only one column at a time in the Kendo UI Grid? How can I restri
         $(document).ready(function() {
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         model: {

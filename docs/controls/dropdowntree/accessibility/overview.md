@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery DropDownTree Documentation | DropDownTree Accessibility
 description: "Get started with the jQuery DropDownTree by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_dropdowntree_widget
+components: ["dropdowntree"]
+slug: jquery_dropdowntree_accessibility
 position: 1
 ---
 
@@ -63,7 +64,14 @@ The popup element of the DropDownTree has to implement the WAI-ARIA specificatio
 
 The tree that is placed in the `popup` element of the component must implement the specification for a TreeView component.
 
-[TreeView accessibility specification]({{treeview_a11y_link}})
+[TreeView accessibility specification]({% slug jquery_treeview_accessibility %})
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug jquery_actionsheet_accessibility %})
 
 ## Resources
 

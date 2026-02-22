@@ -6,7 +6,7 @@ slug: jquery_unavailable_undefined
 tags: telerik, kendoui, jquery, troubleshooting, jquery, is, undefined, unavailable 
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

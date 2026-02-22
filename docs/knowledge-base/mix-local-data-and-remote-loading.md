@@ -5,9 +5,9 @@ description: "Learn how to partially preload Kendo UI for jQuery TreeView items 
 slug: howto_combinelocaldatawithremoteloading_treeview
 previous_url: /controls/navigation/treeview/how-to/binding/mix-local-data-and-remote-loading
 tags: telerik, kendo, jquery, treeview, combine, local, data, with, remote, loading
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

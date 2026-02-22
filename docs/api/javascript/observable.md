@@ -14,6 +14,11 @@ Provides support for firing events. Inherits from [kendo.Class](/api/javascript/
 
 Attaches a handler to an event.
 
+
+<div class="meta-api-description">
+How do I use the `bind` method to attach event listeners to a Kendo UI data source? Configure event listeners or subscribe to component events by attaching handlers or callback functions to specific named events on a data source, enabling you to react dynamically to changes, updates, or user interactions by registering single functions or mapping multiple event-handler pairs after initialization. This supports event-driven programming patterns, allowing control over data changes, notifications, event subscriptions, and custom response logic in reactive components or data-bound interfaces.
+</div>
+
 #### Parameters
 
 ##### eventName `String`
@@ -42,6 +47,11 @@ A function to execute each time the event is triggered. That function should hav
 ### one
 
 Attaches a handler to an event. The handler is executed only once.
+
+
+<div class="meta-api-description">
+How to attach a single-use event handler to my Kendo UI Datasource? Configure a single-use event handler that listens for a specific event only once, triggering a callback on the first occurrence and then automatically removing itself to prevent multiple executions or manual unsubscription. This enables subscribing to an event a single time, attaching one-time listeners or one-off callbacks that respond immediately but do not persist, ideal for scenarios requiring a single event response without ongoing event handling or the need to explicitly detach handlers from data streams, observables, or event emitters.
+</div>
 
 #### Parameters
 
@@ -73,6 +83,11 @@ A function to execute each time the event is triggered. That function should hav
 
 Executes all handlers attached to the given event.
 
+
+<div class="meta-api-description">
+How to programmatically trigger events in Kendo UI for jQuery's observable data source? Invoke or emit events programmatically to execute all listeners or handlers attached to a specific event on an observable data source, enabling the firing of events, triggering callbacks, and initiating custom event-driven workflows from code; configure, call, or run event handlers dynamically, simulate event occurrences, activate listeners tied to event names, and control event propagation within observable patterns for reactive programming, event management, or asynchronous processing scenarios.
+</div>
+
 #### Parameters
 
 ##### eventName `String`
@@ -97,6 +112,11 @@ Optional event data which will be passed as an argument to the event handlers.
 ### unbind
 
 Remove a previously attached event handler.
+
+
+<div class="meta-api-description">
+How do I stop an event listener from firing in a Kendo UI DataSource? Stop or cancel event listeners, unsubscribe callbacks, detach handlers, remove or disable notifications, unregister functions previously bound to observable events, and control event subscription to prevent future invocations or updates by unlinking or turning off previously attached listener methods or callbacks that were set to trigger on changes or events.
+</div>
 
 #### Parameters
 

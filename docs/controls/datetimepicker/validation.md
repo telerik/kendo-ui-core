@@ -2,6 +2,7 @@
 title: Validation
 page_title: jQuery DateTimePicker Documentation - Validation
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to implement validation rules for its input value."
+components: ["datetimepicker"]
 slug: validation_kendoui_datetimepicker
 position: 5
 ---

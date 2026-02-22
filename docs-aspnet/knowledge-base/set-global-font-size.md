@@ -6,6 +6,7 @@ page_title: Set Global Font Size In Pixels
 slug: set-global-font-size
 tags: font, size, grid
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

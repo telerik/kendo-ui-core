@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI ToggleButton HtmlHelper for {{ site.framework }}."
+components: ["togglebutton"]
 slug: togglebutton_appearance
 position: 2
 ---
@@ -28,9 +29,12 @@ The ToggleButton HtmlHelper provides the following methods for styling:
 To control the size of the ToggleButton, configure the `Size` option with any of the following values:
 
 - `Small`
-- `Medium` - the default size
+- `Medium`
 - `Large`
-- `None`
+
+> When not explicitly set, the applied theme controls the default size.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 ```HtmlHelper
 @(Html.Kendo().ToggleButton()
@@ -48,16 +52,9 @@ To control the size of the ToggleButton, configure the `Size` option with any of
 ```
 {% endif %}
 
-The structure of the class is `k-button-{size}`. The default size value is `Medium` and is applied to the rendered  element through the `k-button-md` class.
-
-```html
-<button class="k-button k-button-md" >
-</button>
-```
-
 ### FillMode
 
-The `FillMode()` method specifies how the color is applied to the component. The default ToggleButton fill mode is `Solid`.
+The `FillMode()` method specifies how the color is applied to the component.
 
 ```HtmlHelper
 @(Html.Kendo().ToggleButton()
@@ -81,14 +78,10 @@ The following options are available for the `FillMode` configuration:
 - `Outline`
 - `Flat`
 - `Link`
-- `None`
 
-The structure of the Html class is `k-button-{fillMode}`. The default `fillMode` value is `Solid` and is applied to the rendered element through the `k-button-solid` class.
+> When not explicitly set, the applied theme controls the default fill mode.
 
-```html
-<button class="k-button  k-button-solid" >
-</button>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### ThemeColor
 
@@ -106,7 +99,7 @@ The `ThemeColor` configuration provides a variety of colors that can be applied 
 - `Light`
 - `Inverse`
 
-The default `ThemeColor` is `Base`.
+> When not explicitly set, the applied theme controls the default theme color.
 
 ```HtmlHelper
 @(Html.Kendo().ToggleButton()
@@ -124,17 +117,9 @@ The default `ThemeColor` is `Base`.
 ```
 {% endif %}
 
-The default `ThemeColor` value is `base`. A ToggleButton with default `FillMode` and `ThemeColor` settings will have the `k-button-solid-base` class applied.
-
-```html
-<!-- A ToggleButton with default fillMode and themeColor settings -->
-<div class="k-button k-button-solid k-button-solid-base" >
-</div>
-```
-
 ### Rounded
 
-The border radius of the ToggleButton can be customized through the `Rounded()` method. The default option is `Medium`.
+The border radius of the ToggleButton can be customized through the `Rounded()` method.
 
 ```HtmlHelper
 @(Html.Kendo().ToggleButtonButton()
@@ -158,14 +143,10 @@ The following values are available for the `Rounded` option:
 - `Medium`
 - `Large`
 - `Full`
-- `None`
 
-The structure of the class is `k-rounded-{size}`. The default rounded value of the ToggleButton is `Medium` and is applied to the rendered element through the `k-rounded-md` class.
+> When not explicitly set, the applied theme controls the default border radius.
 
-```html
-<button class="k-button k-rounded-md" >
-</button>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ## See Also
 

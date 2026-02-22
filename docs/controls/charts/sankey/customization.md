@@ -2,6 +2,7 @@
 title: Customization
 page_title: jQuery Sankey Diagram Documentation - Customization
 description: "Get started with the jQuery Sankey Chaarts by Kendo UI and learn how to customize the component."
+components: ["chart"]
 slug: customization_kendoui_sankeychart
 position: 3
 ---
@@ -10,19 +11,19 @@ position: 3
 
 You can configure the labels, nodes, and links displayed on the Sankey Diagram by using the following properties:
 
- - [`links`](/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`colorType`](/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the link to either `static`, `source`, or `target`. It also allows you to control the opacity and highlighting of the link.
+ - [`links`](/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`colorType`](/api/javascript/dataviz/ui/sankey/configuration/links.colortype) of the link to either `static`, `source`, or `target`. It also allows you to control the opacity and highlighting of the link.
  - [`nodes`](/api/javascript/dataviz/ui/sankey/configuration/nodes)&mdash;Provides options to modify the `color`, `opacity`, `offset`, `padding`, and `width` of the node.
  - [`labels`](/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the `font`, `color`, and `opacity` of the label. It also allows you to set the `visible` property to show or hide the label.
 
 ## Configure the Link Colors
 
-The Sankey diagram provides different [`colorTypes`](/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the links. The supported values are:
+The Sankey diagram provides different [`colorTypes`](/api/javascript/dataviz/ui/sankey/configuration/links.colortype) of the links. The supported values are:
 
  * `static`&mdash;The color is static and is determined by the link's color option.
  * `source`&mdash;The link color is the same as the source node color.
  * `target`&mdash;The link color is the same as the target node color.
 
-The example below demonstrates the different [`colorTypes`](/api/javascript/dataviz/ui/sankey/configuration/links.colortypes). You can select a `colorType` from the DropDownList at the top:
+The example below demonstrates the different [`colorTypes`](/api/javascript/dataviz/ui/sankey/configuration/links.colortype). You can select a `colorType` from the DropDownList at the top:
 
 ```dojo
     <input type="text" id="ddl" />

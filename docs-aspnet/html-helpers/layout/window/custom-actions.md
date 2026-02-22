@@ -2,6 +2,7 @@
 title: Custom Actions
 page_title: Custom Actions
 description: "Learn how to set custom user actions the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_customactions_aspnetcore
 position: 9
 ---
@@ -61,4 +62,4 @@ The Window then renders `k-icon` and `k-i-actionname` CSS classes for the action
 
 * [Implementing Custom Actions in the Window (Demo)](https://demos.telerik.com/{{ site.platform }}/window/actions)
 * [Server-Side API of the Telerik UI Window HtmlHelper for {{ site.framework }}](/api/window)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window)

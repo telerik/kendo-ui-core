@@ -5,9 +5,9 @@ description: "Learn how to define the virtual configuration option of the Kendo 
 slug: howto_define_virtual_option_combobox
 previous_url: /controls/editors/combobox/how-to/mvvm/virtual-config
 tags: telerik, kendo, jquery, combobox, define, virtual, confoguration, declaratively
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment
@@ -60,9 +60,9 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
                 var model = kendo.observable({
                         order: "10548",
                   source: new kendo.data.DataSource({
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                      read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                      read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                       model: {
@@ -87,9 +87,8 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
 
             function orderValueMapper(options) {
                 $.ajax({
-                  url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                  url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
                   type: "GET",
-                  dataType: "jsonp",
                   data: convertValues(options.value),
                   success: function (data) {
                     options.success(data);
@@ -100,7 +99,7 @@ The following example demonstrates how to define the [`virtual`](/api/javascript
             function convertValues(value) {
                 var data = {};
 
-                value = $.isArray(value) ? value : [value];
+                value = Array.isArray(value) ? value : [value];
 
                 for (var idx = 0; idx < value.length; idx++) {
                     data["values[" + idx + "]"] = value[idx];

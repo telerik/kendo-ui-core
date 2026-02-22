@@ -5,9 +5,9 @@ description: "Learn how to create a Kendo UI jQuery Grid with column and data fi
 previous_url: /controls/data-management/grid/how-to/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/various/create-with-dynamic-columns-and-data-types, /controls/data-management/grid/how-to/binding/create-with-dynamic-columns-and-data-types
 slug: howto_createdynamiccolumnsdatatypes_grid
 tags: grid, create, dynamic, columns, data, types
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -47,8 +47,7 @@ This article showcases how to dynamically generate the Kendo UI Grid by using th
     <script>
       var isDateField =[];
       $.ajax({
-        url: "https://run.mocky.io/v3/fe25d379-099c-4e04-b26b-5f0453e43ef4",
-        dataType: "jsonp",
+        url: "https://runner.telerik.io/fullscreen/DEUMgSey.json",
         success: function(result) {
           generateGrid(result);
         }

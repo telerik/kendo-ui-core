@@ -5,9 +5,9 @@ description: "Learn how to set the cell background color by using slotTemplate a
 previous_url: /controls/scheduling/scheduler/how-to/set-slot-background-color-using-slot-templates, /controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates
 slug: howto_setslotbackgroundcolor_usingslottemplates_scheduler
 tags: telerik, kendo, jquery, scheduler, set, the, slot, color, using, templates
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -64,8 +64,8 @@ The following example demonstrates how to achieve the desired behavior by using 
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           allDaySlotTemplate: "<div style='background:\\#A2A2AA; height: 100%;width: 100%;'></div>",
           slotTemplate: "<div style='background:#=getColorBasedOnHour(date)#; height: 100%;width: 100%;'></div>",
@@ -82,24 +82,26 @@ The following example demonstrates how to achieve the desired behavior by using 
             batch: true,
             transport: {
               read: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
-              },
-              update: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
-              },
-              create: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
-              },
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
+                },
+                update: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                create: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                destroy: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
+                },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

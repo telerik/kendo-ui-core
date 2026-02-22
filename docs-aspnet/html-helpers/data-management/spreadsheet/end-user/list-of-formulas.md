@@ -2,6 +2,7 @@
 title: List of Formulas and Functions
 page_title: Spreadsheet
 description: "A list of the formulas and functions available in the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_list_of_formulas_aspnetcore
 position: 2
 ---

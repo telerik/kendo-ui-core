@@ -7,6 +7,7 @@ slug: grid-editor-templates-nuget
 position: 
 tags: grid, nuget, templates, editing
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

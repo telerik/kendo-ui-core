@@ -6,6 +6,7 @@ page_title: Clone TreeView Nodes and All Their Children - Kendo UI TreeView for 
 slug: treeview-clone-node-async
 tags: kendo, kendo-ui, treeview, clone, node, all, children
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -40,8 +41,7 @@ $(document).ready(function() {
     var homogeneous = new kendo.data.HierarchicalDataSource({
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/Employees"
             }
         },
         schema: {

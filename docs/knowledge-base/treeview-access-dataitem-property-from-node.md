@@ -7,6 +7,7 @@ slug: treeview-access-dataitem-property-from-node
 tags: treeview, access, dataitem, data, item, property, node, id
 ticketid: 1158103
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -37,12 +38,11 @@ The following example demonstrates the full implementation of the suggested appr
   <div id="treeview"></div>
 </div>
 <script>
-  var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+  var serviceRoot = "https://demos.telerik.com/service/v2/core";
   homogeneous = new kendo.data.HierarchicalDataSource({
     transport: {
       read: {
-        url: serviceRoot + "/Employees",
-        dataType: "jsonp"
+        url: serviceRoot + "/Employees"
       }
     },
     schema: {

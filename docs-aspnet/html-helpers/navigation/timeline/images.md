@@ -2,6 +2,7 @@
 title: Images
 page_title: Timeline Images
 description: "Adding images in the Telerik UI Timeline component for {{ site.framework }}."
+components: ["timeline"]
 previous_url: /helpers/navigation/timeline/images
 slug: images_htmlhelpers_timeline_aspnetcore
 position: 4
@@ -13,7 +14,7 @@ The Timeline can render an `<img />` tag for the first item from the `Images` co
 
 The example below shows how you can add an image for the events.
 
->tip If you want to show more than one image, you need to customize the [template of the Timeline](templates).
+>tip If you want to show more than one image, you need to customize the [template of the Timeline](slug://templates_htmlhelpers_timeline_aspnetcore).
 
 
 ```HtmlHelper

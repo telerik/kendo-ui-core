@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Telerik UI Calendar for {{ site.framework }} in a RazorPages application."
+components: ["calendar"]
 slug: razorpages_calendar_aspnetcore
 position: 11
 ---
@@ -16,37 +17,43 @@ This article describes how to configure the Calendar component in a Razor Pages 
 
 For the complete project, refer to the [Calendar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Calendar/CalendarIndex.cshtml).
 
+```HtmlHelper
+@page
+@model CalendarIndexModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
 
-```tab-HtmlHelper(csthml)   
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
-
-    @(Html.Kendo().Calendar()
-        .Name("calendar")
-    )
-
+@(Html.Kendo().Calendar()
+    .Name("calendar")
+)
 ```
-
 {% if site.core %}
-```tab-TagHelper(cshtml)
-    inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-    @Html.AntiForgeryToken()
+```TagHelper
+@page
+@model CalendarIndexModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
 
-    @addTagHelper *, Kendo.Mvc
+@addTagHelper *, Kendo.Mvc
 
-    <kendo-calendar name="calendar">
-    </kendo-calendar>
+<kendo-calendar name="calendar">
+</kendo-calendar>
 ```
 {% endif %}
-
-```tab-PageModel(cshtml.cs)      
-	
+```C# PageModel
+public class CalendarIndexModel : PageModel
+{	
     public void OnGet()
     {
 
     }
+}
 ```
 
 ## See Also
 
-* [Server-Side API](/api/calendar)
+* [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
+* [Client-Side API of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [Server-Side HtmlHelper API of the Calenadr](/api/calendar)
+* [Server-Side TagHelper API of the Calendar](/api/taghelpers/calendar)
+* [Knowledge Base Section](/knowledge-base)

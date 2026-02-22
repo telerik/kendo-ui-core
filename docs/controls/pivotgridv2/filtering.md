@@ -2,6 +2,7 @@
 title: Filtering
 page_title: jQuery PivotGridV2 Documentation - Filtering
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to apply filters."
+components: ["pivotgridv2"]
 slug: filtering_kendoui_pivotgridv2
 position: 4
 ---
@@ -14,11 +15,11 @@ The PivotGridV2 uses [`kendo.data.PivotDataSourceV2`](/api/javascript/data/pivot
 
 The following image from the [Local Binding](https://demos.telerik.com/kendo-ui/pivotgridv2/local-flat-data-binding) demo demonstrates how end-users can apply a filter.
 
-[Applying Filter](pvg2localbindingfilter.png)
+![Applying Filter](pvg2localbindingfilter.png)
 
 The next image demonstrates the result when the end-user applies a filter to the **Country** row.
 
-[Filter Result](pvg2appliedfilter.png)
+![Filter Result](pvg2appliedfilter.png)
 
 ## Enabling Filtering
 
@@ -65,7 +66,7 @@ The example below demonstrates how to filter data only for cities starting with 
                   catalog: "Adventure Works DW 2008R2",
                   cube: "Adventure Works"
                 },
-                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
               },
               filter:[
                   {

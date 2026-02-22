@@ -2,6 +2,7 @@
 title: Dragging and Dropping
 page_title: Dragging and Dropping
 description: "Get started with the {{ site.product }} ListBox and learn how to enable the drag-and-drop functionality."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/draganddrop
 slug: htmlhelpers_listbox_draganddrop_aspnetcore
 position: 4

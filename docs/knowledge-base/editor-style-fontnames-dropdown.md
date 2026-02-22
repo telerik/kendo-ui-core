@@ -7,6 +7,7 @@ slug: editor-style-fontnames-dropdown
 tags: editor
 ticketid: 1171186  
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

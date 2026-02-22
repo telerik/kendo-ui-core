@@ -5,9 +5,9 @@ description: "Learn how to handle unique identifiers with Kendo UI for jQuery Me
 slug: howto_handleuniqueidentifiers_menu
 previous_url: /controls/navigation/menu/how-to/handle-unique-identifiers
 tags: telerik, kendo, jquery, menu, handle, unique, identifiers, with, items
-component: menu
 type: how-to
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

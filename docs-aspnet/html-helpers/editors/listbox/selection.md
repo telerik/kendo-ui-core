@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Get started with the {{ site.product }} ListBox and learn how enable the selection functionality."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/selection
 slug: htmlhelpers_listbox_selection_aspnetcore
 position: 5
@@ -92,7 +93,7 @@ To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Mul
         </kendo-listbox>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
         <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>

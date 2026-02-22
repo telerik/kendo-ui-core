@@ -5,9 +5,9 @@ description: "Learn how to stack static notifications to the left or to the righ
 slug: howto_stack_static_tothe_leftor_right_notification
 previous_url: /controls/layout/notification/how-to/stacking-left-right 
 tags: telerik, kendo, jquery, notification, stack, static, to, the, left, or, right 
-component: notification
 type: how-to
 res_type: kb
+components: ["notification"]
 ---
 
 ## Environment

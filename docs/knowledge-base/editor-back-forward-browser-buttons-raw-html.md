@@ -6,7 +6,7 @@ slug: editor_back_forward_buttons_raw_html
 tags: telerik, progress, kendoui, jquery, editor, back, forward, buttons, display, raw, html
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to enable the dropping only of new shapes on existing on
 slug: howto_draganddrop_onshapes_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/drag-and-drop-on-shapes
 tags: kendo, jquery, diagram, drag, and, drop, on, existing, shapes
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to persist a focused cell in the Kendo UI Grid for jQuer
 previous_url: /controls/data-management/grid/how-to/Editing/persist-focused-cell
 slug: howto_persist_focused_grid_cell_grid
 tags: persist, focused, grid, cells, after, rebind
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -56,28 +56,30 @@ Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/dataso
 
 <script>
   $(function () {
-    var crudServiceBaseUrl = "//demos.telerik.com/kendo-ui/service",
-        dataSource = new kendo.data.DataSource({
-          transport: {
-            read:  {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
-            },
-            update: {
-              url: crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
-            },
-            destroy: {
-              url: crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
-            },
-            create: {
-              url: crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
-            },
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },

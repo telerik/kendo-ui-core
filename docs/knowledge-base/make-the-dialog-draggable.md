@@ -7,6 +7,7 @@ slug: make-the-dialog-draggable
 tags: kendo, kendoui, dialog, draggable
 ticketid: 1360178
 res_type: kb
+components: ["dialog"]
 ---
 
 ## Environment

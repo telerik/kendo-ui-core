@@ -2,13 +2,14 @@
 title: Validation
 page_title: Validation
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to implement validation rules for its input value."
+components: ["datetimepicker"]
 slug: validation_datetimepicker_aspnetcore
 position: 5
 ---
 {% if site.core %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#parseformatssystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/datetimepickerbuilder#parseformatssystemstring" %}
 {% else %}
-    {% assign ParseFormats = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#parseformatssystemcollectionsgenericienumerablesystemstring" %}
+    {% assign ParseFormats = "/api/kendo.mvc.ui.fluent/datetimepickerbuilder#parseformatssystemcollectionsgenericienumerable" %}
 {% endif %}
 
 # Validation

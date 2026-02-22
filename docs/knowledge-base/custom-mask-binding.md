@@ -5,9 +5,9 @@ description: "Learn how to set the Kendo UI MaskedTextBox masks by using a custo
 slug: howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox
 previous_url: /controls/editors/maskedtextbox/how-to/MVVM/custom-mask-binding
 tags: telerik, kendo, jquery, maskedtextbox, customize, masks, through, mvvm, binding
-component: maskedtextbox
 type: how-to
 res_type: kb
+components: ["maskedtextbox"]
 ---
 
 ## Environment
@@ -47,7 +47,7 @@ The following example demonstrates how to implement [a custom MVVM binding]({% s
             <input data-role="maskedtextbox"
                    data-bind="value: phoneNumber, mask: mask"
                    style="width: 200px">
-            <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"  data-bind="click: changeMask"><span class="k-button-text">Change mask</span></button>
+            <button class="k-button"  data-bind="click: changeMask"><span class="k-button-text">Change mask</span></button>
         </div>
     </div>
     <script>

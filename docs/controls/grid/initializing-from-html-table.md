@@ -2,6 +2,7 @@
 title: Initializing from an HTML Table
 page_title: jQuery Data Grid Documentation - Initializing from an HTML Table
 description: "Get started with the jQuery Grid by Kendo UI and learn about the alternative way to initialize the component from an HTML table."
+components: ["grid"]
 slug: html_table_kendoui_grid_widget
 position: 2
 ---

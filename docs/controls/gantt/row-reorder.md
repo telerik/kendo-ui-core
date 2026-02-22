@@ -2,6 +2,7 @@
 title: Row Reordering
 page_title: jQuery Gantt Documentation - Row Reordering
 description: "Get started with the jQuery Gantt by Kendo UI and enable its dragging features."
+components: ["gantt"]
 slug: row_reorder_kendoui_gantt
 position: 7
 ---

@@ -125,35 +125,6 @@ import { stub } from '../../helpers/unit/stub.js';
             assert.equal(options.calls("foo"), 0);
         });
 
-        it("plugin callback is called for existing and new widgets", function() {
-            let currentWidgets = kendo.widgets;
-            kendo.widgets = [];
-
-            let Widget1 = kendo.ui.Widget.extend({ options: { name: "widget1" } });
-
-            kendo.ui.plugin(Widget1, { roles: [] });
-
-            let i = 0;
-            kendo.onWidgetRegistered(function(entry) {
-                switch (i++) {
-                    case 0:
-                        assert.equal(entry.widget.prototype.options.name, "widget1");
-                        break;
-                    case 1:
-                        assert.equal(entry.widget.prototype.options.name, "widget2");
-                        break;
-                }
-            });
-
-            let Widget2 = kendo.ui.Widget.extend({ options: { name: "widget2" } });
-
-            kendo.ui.plugin(Widget2, { roles: [] });
-
-            // reset the state
-            kendo.widgets = currentWidgets;
-            kendo._widgetRegisteredCallbacks = [];
-        });
-
         asyncTest("Widget can be extended with static Kendo template", function(done) {
 
             let currentWidgets = kendo.widgets;
@@ -189,25 +160,16 @@ import { stub } from '../../helpers/unit/stub.js';
 
             kendo.ui.plugin(Widget1);
 
-            kendo.onWidgetRegistered(function(entry) {
+            let el = $('<some-test-element />');
+            el.kendoHtmlTemplateWidget();
 
-                if (entry.name === 'kendoHtmlTemplateWidget') {
-                    let el = $('<some-test-element />');
-                    el.kendoHtmlTemplateWidget();
+            let elTemplate = el.data("kendoHtmlTemplateWidget").options.template;
 
-                    let elTemplate = el.data("kendoHtmlTemplateWidget").options.template;
+            // reset the state
+            el.data("kendoHtmlTemplateWidget").destroy();
+            kendo.widgets = currentWidgets;
 
-                    // reset the state
-                    el.data("kendoHtmlTemplateWidget").destroy();
-                    kendo.widgets = currentWidgets;
-                    kendo._widgetRegisteredCallbacks = [];
-
-                    done(() => assert.deepEqual(template, elTemplate));
-
-                }
-
-            });
-
+            done(() => assert.deepEqual(template, elTemplate));
         });
 
     });

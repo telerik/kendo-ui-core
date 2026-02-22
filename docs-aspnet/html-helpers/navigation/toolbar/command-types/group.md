@@ -2,6 +2,7 @@
 title: Group
 page_title: Group ToolBar Command Type
 description: "Get started with the Telerik UI ToolBar for {{ site.framework }} and learn how to configure and use the Group command type."
+components: ["toolbar"]
 slug: htmlhelpers_toolbar_group_aspnetcore
 ---
 
@@ -41,4 +42,4 @@ The following example demonstrates how to define a group of mutually exclusive T
 
 * [Basic Usage of the ToolBar (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar)
 * [Server-Side API Reference of the ToolBar](/api/toolbar)
-* [Client-Side API Reference of the ToolBar](/api/javascript/ui/toolbar)
+* [Client-Side API Reference of the ToolBar](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

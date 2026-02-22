@@ -7,6 +7,7 @@ slug: grid-adjust-rows-and-header-height
 tags: grid, row, rows, header, smaller, size, adjust, css
 ticketid: 1151240
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,9 +46,9 @@ To adjust the size of the rows in both the body and the header, use CSS and spec
       $(document).ready(function() {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

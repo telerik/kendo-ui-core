@@ -7,6 +7,7 @@ slug: grid-reorderable-with-column-menu-and-row-template
 tags: grid, rowTemplate, columnMenu, issue, does not work, row, template, column, menu, reorderable, reorder
 ticketid: 1160575
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

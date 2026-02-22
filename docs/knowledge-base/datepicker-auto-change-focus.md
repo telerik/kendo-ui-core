@@ -7,6 +7,7 @@ slug: datepicker-auto-change-focus
 tags: datepicker, change, focus, dateinput
 ticketid: 1168790
 res_type: kb
+components: ["timepicker"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ExpansionPanel TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["expansionpanel"]
 previous_url: /helpers/expansionpanel, /helpers/tag-helpers/expansionpanel
 slug: taghelpers_expansionpanel_aspnetcore
 position: 1
@@ -11,7 +12,7 @@ position: 1
 
 The Telerik UI ExpansionPanel TagHelper for ASP.NET Core is a layout component that provides the user with an easy way to expand and collapse a content area within the application.
 
-The Telerik UI ExpansionPanel TagHelper for ASP.NET Core is a server-side wrapper for the [Kendo UI ExpansionPanel](/api/javascript/ui/expansionpanel) widget.
+The Telerik UI ExpansionPanel TagHelper for ASP.NET Core is a server-side wrapper for the [Kendo UI ExpansionPanel](https://docs.telerik.com/kendo-ui/api/javascript/ui/expansionpanel) widget.
 
 Visit the [ExpansionPanel demo page](https://demos.telerik.com/aspnet-core/expansionpanel/tag-helper) to see it in action.
 
@@ -41,7 +42,7 @@ You must pass the configuration options of the ExpansionPanel TagHelper as attri
 
 ## Event Handling
 
-The below example demonstrates how the the `Expand`, `Collapse` and `Complete` events of the ExpansionPanel TagHelper can be intercepted to output messages in the console when these events are raised. They can also be hooked for customizations or to execute custom logic, if necessary.
+The below example demonstrates how the `Expand`, `Collapse` and `Complete` events of the ExpansionPanel TagHelper can be intercepted to output messages in the console when these events are raised. They can also be hooked for customizations or to execute custom logic, if necessary.
 
 ```tagHelper
 	<kendo-expansionpanel name="brazil" title="Brazil" sub-title="South America" expanded="true" on-expand="onExpand" on-collapse="onCollapse" on-complete="onComplete">

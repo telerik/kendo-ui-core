@@ -6,6 +6,7 @@ page_title: How to Export Grid Rows to Excel with Group Paging
 slug: export-grid-rows-excel-group-paging
 tags: grid, export, excel, group paging
 res_type: kb
+components: ["grid"]
 ---
 ## Environment
 | Product | Version |
@@ -24,7 +25,8 @@ However, there is a workaround available that allows you to export a group-paged
 
 The example below demonstrates how to achieve the desired scenario.
 
-```dojo
+```
+ <script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.aspnetmvc.min.js"></script>
  <div id="grid"></div>
     <script>
       $(document).ready(function () {
@@ -61,7 +63,7 @@ The example below demonstrates how to achieve the desired scenario.
             type: 'aspnetmvc-ajax',
             transport: {
               read: {
-                url: "https://demos.telerik.com/aspnet-core/service/api/customers"
+                url: "https://demos.telerik.com/service/v2/graphql/customers"
               }
             },
             pageSize: 50,

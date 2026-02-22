@@ -5,30 +5,24 @@ description: "Learn how to embed custom fonts while working with the Kendo UI Dr
 slug: howto_embedfontawesome_inexportedpdf_drawingapi
 previous_url: /framework/drawing/how-to/font-awesome
 tags: telerik, kendo, jquery, drawing, library, api, embed, fontawesome, icons, in, exported, pdf
-component: drawing
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Drawing API</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Visual Studio Version</td>
-  <td>Visual Studio 2017</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
- </tr>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI Grid for jQuery</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.2.520</td>
+</tr>
+</tbody>
 </table>
 
 ## Description
@@ -37,12 +31,12 @@ How can I embed custom fonts while working with the Kendo UI Drawing API library
 
 ## Solution
 
-Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/), must be [available for embedding]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) during the PDF export. Otherwise, the generated document will use a standard set of fonts as defined by the PDF Standard. These fonts normally cover only the [ASCII](https://en.wikipedia.org/wiki/ASCII) range.
+Custom fonts, including icon fonts such as [Font Awesome](https://github.com/FortAwesome/Font-Awesome), must be [available for embedding]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) during the PDF export. Otherwise, the generated document will use a standard set of fonts as defined by the PDF Standard. These fonts normally cover only the [ASCII](https://en.wikipedia.org/wiki/ASCII) range.
 
 The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 
     <script>
       // The font file location must be set explicitly if it's not hosted in the same domain
@@ -61,14 +55,14 @@ The following example demonstrates how to achieve the desired scenario.
                <i class="fa fa-thumbs-down fa-2x"></i>
                 </td>
             <td class="details">
-               <span class="title">Title: #: Title #</span>
+               <span class="name">Name: #: FullName #</span>
                 </td>
-            <td class="country">
-                #: Country #
+            <td class="employees">
+                #: HasEmployees #
                </td>
-            <td class="employeeID">
-               #: EmployeeID #
-                </td>
+            <td class="employeeId">
+               #: EmployeeId #
+            </td>
       </tr>
     </script>
     <script>
@@ -76,21 +70,20 @@ The following example demonstrates how to achieve the desired scenario.
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+          proxyURL: "https://demos.telerik.com/service/v2/core/export"
         },
         dataSource: {
-          type: "odata",
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+              url: "https://demos.telerik.com/service/v2/core/Employees",
             }
           }
         },
         columns: [
           { title: "Photo", width: 140 },
-          { title: "Details", width: 400 },
-          { title: "Country" },
-          { title: "EmployeeID" }
+          { title: "FullName", width: 400 },
+          { title: "HasEmployees" },
+          { title: "EmployeeId" }
         ],
         rowTemplate: kendo.template($("#rowTemplate").html()),
         scrollable: false

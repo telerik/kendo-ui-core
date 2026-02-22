@@ -7,7 +7,7 @@ slug: grid-collapse-groups
 tags: grid, groups, grouping, collapse, default, expand, prevent, fold
 ticketid: 1144787
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

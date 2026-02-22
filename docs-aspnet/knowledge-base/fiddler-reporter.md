@@ -6,6 +6,7 @@ page_title: Fiddler Everywhere Reporter
 slug: fiddler-reporter
 tags: capture, web, traffic, fiddler, everywhere, reporter, record, video
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -73,10 +74,10 @@ Detailed sections:
 
 There are 4 ways for capturing traffic that can be triggered from the button or the dropdown options:
 
-- [Start Capturing Browser (Default action)](#start-capturing-browser-default-action)
-- [Start Capturing Everything](#start-capturing-everything)
-- [Start Capturing Terminal](#start-capturing-terminal)
-- [Manual Setup (Advanced)](#manual-setup-advanced)
+- Start Capturing Browser (Default action)
+- Start Capturing Everything
+- Start Capturing Terminal
+- Manual Setup (Advanced)
 
 **Start Capturing Browser (Default action)**
 

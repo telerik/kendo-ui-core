@@ -2,6 +2,7 @@
 title: Virtual Scrolling
 page_title: Virtual Scrolling
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable virtual scrolling as an alternative to paging."
+components: ["grid"]
 slug: virtual_scrolling_aspnetcore_grid
 position: 2
 ---
@@ -33,21 +34,23 @@ When virtual scrolling is enabled, the Grid loads data from its remote data sour
 
 In virtual scrolling, the HTML output is different from the standard scrolling functionality&mdash;the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` which affects scenarios when the data rows have to be manually scrolled to a particular position.
 
-        <div class="k-widget k-grid">
-            <div class="k-grid-header">
-                <div class="k-grid-header-wrap">
-                    <table>...</table>
-                </div>
-            </div>
-            <div class="k-grid-content">
-                <div class="k-virtual-scrollable-wrap">
-                    <table>...</table>
-                </div>
-                <div class="k-scrollbar k-scrollbar-vertical">
-                    ...<!-- div elements which generate a scrollbar -->...
-                </div>
-            </div>
+```HTML
+<div class="k-widget k-grid">
+    <div class="k-grid-header">
+        <div class="k-grid-header-wrap">
+            <table>...</table>
         </div>
+    </div>
+    <div class="k-grid-content">
+        <div class="k-virtual-scrollable-wrap">
+            <table>...</table>
+        </div>
+        <div class="k-scrollbar k-scrollbar-vertical">
+            ...<!-- div elements which generate a scrollbar -->...
+        </div>
+    </div>
+</div>
+```
 
 When the user scrolls a Grid in its virtual-scrolling mode, the Grid renders the table rows for the reached scroll position on the fly. If the Gris uses local data or if its remote data has already been loaded and cached, the rendering rate and performance of the widget depend on:
 * The page size.
@@ -63,17 +66,19 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 * Disable text wrapping, or
 * Set an explicit, large-enough row height as demonstrated in the following example.
 
-        .k-virtual-scrollable-wrap tr
-        {
-            height: 3em;
-        }
+```CSS
+    .k-virtual-scrollable-wrap tr
+    {
+        height: 3em;
+    }
 
-        // Or
+    /* OR */
 
-        .k-virtual-scrollable-wrap td
-        {
-            white-space: nowrap;
-        }
+    .k-virtual-scrollable-wrap td
+    {
+        white-space: nowrap;
+    }
+```
 
 ## Using on Mobile
 
@@ -98,5 +103,8 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Virtualization of Remote Data by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Server-Side API](/api/grid)

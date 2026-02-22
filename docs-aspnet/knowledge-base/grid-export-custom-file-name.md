@@ -6,6 +6,7 @@ page_title: Customize The Excel Filename of the Grid
 slug: grid-export-custom-file-name
 tags: grid, export, custom, file, name, excel
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -28,7 +29,7 @@ Use the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid
 
 With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/globalization/intl/dateformatting) method or another way to format the date, concatenate the date to the filename.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<GridExportCustomName.Models.OrderViewModel>()
     .Name("grid")
     .Columns(columns =>
@@ -43,16 +44,16 @@ With the help of the [`kendo.toString()`](https://docs.telerik.com/kendo-ui/glob
     .Events(ev=>ev.ExcelExport("onExcelExport"))
     .DataSource(dataSource => dataSource
         .Custom()
-        .Type("odata")
+        .Type("odata-v4")
         .Transport(transport =>
-           transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
+           transport.Read(read => read.Url("https://demos.telerik.com/service/v2/odata/Orders"))
         )
         .PageSize(10)
     )
 
 )
 ```
-```script.js
+```JS script.js
     function onExcelExport(e) {
         e.workbook.fileName = kendo.toString(new Date, "dd/MM/yyyy HH:mm") + " Grid.xlsx";
     }

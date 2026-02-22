@@ -5,9 +5,9 @@ description: "Learn how to edit records in hierarchical Kendo UI Grid widgets fo
 previous_url: /controls/data-management/grid/how-to/Editing/edit-master-row-data-in-detail-template
 slug: howto_edit_recordsin_children_grid
 tags: grid, edit, records, child, hierarchy
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -41,10 +41,10 @@ The following example demonstrates how to edit records in a child Grid.
     var preventBinding = false,
     grid = $("#grid").kendoGrid({
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+            url: "https://demos.telerik.com/service/v2/odata/Employees",
             data: { $expand: "Orders" }
           }
         },
@@ -54,7 +54,7 @@ The following example demonstrates how to edit records in a child Grid.
           }
         },
         change: function (e) {
-          if (e.field && e.field.indexOf("Orders.results") >= 0) {
+          if (e.field && e.field.indexOf("Orders") >= 0) {
             preventBinding = true;
           }
         },
@@ -99,7 +99,7 @@ The following example demonstrates how to edit records in a child Grid.
 
 function detailInit(e) {
   var findByID = function (id) {
-    return e.data.Orders.results.find(function(item){
+    return e.data.Orders.find(function(item){
       return item.OrderID == id;
     });
   };
@@ -108,7 +108,7 @@ function detailInit(e) {
     dataSource: {
       transport: {
         read: function (options) {
-          options.success(e.data.Orders.results.toJSON());
+          options.success(e.data.Orders.toJSON());
         },
         update: function (options) {
           var data = options.data,
@@ -126,7 +126,7 @@ function detailInit(e) {
           var parentItem = findByID(options.data.OrderID);
           preventBinding = true;
 
-          e.data.Orders.results.remove(parentItem);
+          e.data.Orders.remove(parentItem);
 
           options.success();
         },

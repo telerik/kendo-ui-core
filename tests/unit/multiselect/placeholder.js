@@ -35,8 +35,7 @@ describe("kendo.ui.MultiSelect Placeholder", function() {
 
     it("MultiSelect shows placeholder on init", function() {
         let multiselect = new MultiSelect(select.data("placeholder", "Select..."));
-        assert.equal(multiselect.input.val(), "Select...");
-        assert.isOk(multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.attr("placeholder"), "Select...");
     });
 
     it("MultiSelect scales input on placeholder shows", function() {
@@ -79,16 +78,14 @@ describe("kendo.ui.MultiSelect Placeholder", function() {
         multiselect.input.focus();
 
         assert.equal(multiselect.input.val(), "");
-        assert.isOk(!multiselect.input.hasClass("k-readonly"));
     });
 
-    it("MultiSelect shows placeholder on focus", function() {
+    it("MultiSelect shows placeholder on blur", function() {
         let multiselect = new MultiSelect(select.data("placeholder", "Select..."));
 
         multiselect.input.blur();
 
-        assert.equal(multiselect.input.val(), "Select...");
-        assert.isOk(multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.attr("placeholder"), "Select...");
     });
 
     it("MultiSelect keeps the filter value when autoClose is false", function() {
@@ -116,6 +113,19 @@ describe("kendo.ui.MultiSelect Placeholder", function() {
         multiselect.ul.children().first().click();
 
         multiselect.input.blur();
+
+        assert.equal(multiselect.input.val(), "");
+    });
+
+    it("MultiSelect clears input value after selecting item when autoClose is true", function() {
+        let filterText = "2";
+        let placeholder = "Select...";
+        let multiselect = new MultiSelect(select.data("placeholder", placeholder), { autoClose: true });
+
+        multiselect.input.focus().val(filterText);
+        multiselect.open();
+
+        multiselect.ul.children().first().click();
 
         assert.equal(multiselect.input.val(), "");
     });

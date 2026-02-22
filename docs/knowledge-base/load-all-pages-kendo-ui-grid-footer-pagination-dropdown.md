@@ -6,6 +6,7 @@ page_title: Load All Pages in Kendo UI Grid Footer Pagination Dropdown
 slug: load-all-pages-kendo-ui-grid-footer-pagination-dropdown
 tags: kendo-ui, grid, pagination, dropdown, custom
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

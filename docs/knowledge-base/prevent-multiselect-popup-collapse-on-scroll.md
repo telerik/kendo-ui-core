@@ -6,6 +6,7 @@ page_title: How to Keep the MultiSelect Pop-up Open During Page Scroll
 slug: prevent-multiselect-pop-up-collapse-on-scroll
 tags: kendo-ui, multiselect, popup, scroll, open
 res_type: kb
+components: ["popup"]
 ticketid: 1657504
 ---
 
@@ -83,8 +84,7 @@ Below you will find a complete example to demonstrate the approach:
           dataSource: {
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
+                url: "https://demos.telerik.com/service/v2/core/Products",
               }
             }
           },

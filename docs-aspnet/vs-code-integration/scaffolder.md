@@ -2,6 +2,7 @@
 title: Scaffolder
 page_title: Visual Studio Code Scaffolder
 description: Learn more on the VS Code scaffolder allowing you to quickly generate Views with some of the most popular Telerik UI for ASP.NET Core components.
+components: ["installerandvsextensions"]
 previous_url: /installation/vs-code-integration/scaffolder
 slug: scaffolder-vs-code
 position: 3

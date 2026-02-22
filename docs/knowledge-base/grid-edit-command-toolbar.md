@@ -6,7 +6,7 @@ page_title: Implement the Edit or Update Commands in the Toolbar - Kendo UI for 
 slug: grid-edit-command-toolbar
 tags: grid, toolbar, edit, update, command, template, custom, replace, move,
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -43,41 +43,43 @@ How can I limit the number of columns in the Grid and move the **Edit** and **Up
 
 <script type="text/x-kendo-template" id="template">
     <div class="editBtnContainer">
-         <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-custom">Edit</button>          
+         <button type="button" class="k-button k-grid-custom">Edit</button>
 
     </div>
     <div class="updateCancelContainer">
-    		<a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-save-command" href="\\#"> 
+    		<a role="button" class="k-button k-grid-save-command" href="\\#">
         <span class="k-icon k-i-check k-button-icon"></span>Update</a>
-        <a role="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-cancel-command" href="\\#">
+        <a role="button" class="k-button k-grid-cancel-command" href="\\#">
         <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
     </div>
 </script>
 
 <script>
     $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
                 transport: {
-                    read: {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
+                    read:  {
+                        url: crudServiceBaseUrl + "/Products"
                     },
                     update: {
                         url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     destroy: {
                         url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     create: {
                         url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
-                    parameterMap: function (options, operation) {
+                    parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return { models: kendo.stringify(options.models) };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

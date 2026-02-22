@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ExpansionPanel component by following a complete step-by-step tutorial."
+components: ["expansionpanel"]
 slug: expansionpanel_getting_started
 position: 1
 ---
@@ -104,7 +105,7 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
                     <div class='k-card-body'><p>A luxurious two-bedroom apartment with the best views over Santorini</p></div>
                     <span class='k-card-separator'></span>
                     <div class='k-actions k-card-actions'>
-                        <span class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
+                        <span class='k-button k-button-flat k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
                     </div>
                 </div>")
         )
@@ -129,7 +130,7 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
                     <div class='k-card-body'><p>A luxurious two-bedroom apartment with the best views over Santorini</p></div>
                     <span class='k-card-separator'></span>
                     <div class='k-actions k-card-actions'>
-                        <span class='k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
+                        <span class='k-button k-button-flat k-icon-button' onclick='favoritesClick(event)'><span class='k-icon k-i-heart-outline'></span></span>
                     </div>
                 </div>
             </content>
@@ -137,7 +138,7 @@ The next step is to add a [Card](https://demos.telerik.com/aspnet-core/cards) as
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function favoritesClick(event){
             if($(event.target).hasClass("k-i-heart-outline")) {
@@ -201,7 +202,7 @@ You can reference the ExpansionPanel instances that you have created and build o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var expansionPanelReference = $("#expPanel").data("kendoExpansionPanel"); // expansionPanelReference is a reference to the existing ExpansionPanel instance of the helper.
@@ -226,7 +227,7 @@ You can reference the ExpansionPanel instances that you have created and build o
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var expansionPanelReference = $("#expPanel").data("kendoExpansionPanel");

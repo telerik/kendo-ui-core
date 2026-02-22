@@ -6,6 +6,7 @@ page_title: Making the Wizard Stepper Stick to the Top of the Page
 slug: making-wizard-stepper-stick-top-page
 tags: wizard, stepper, stick, top, scrolling
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

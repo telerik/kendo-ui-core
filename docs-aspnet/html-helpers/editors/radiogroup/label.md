@@ -2,6 +2,7 @@
 title: Label
 page_title: Label
 description: "Learn how to configure the label of the Telerik UI RadioGroup for {{ site.framework }}."
+components: ["radiogroup"]
 slug: htmlhelpers_radiogroup_aspnetcore_label
 position: 3
 ---

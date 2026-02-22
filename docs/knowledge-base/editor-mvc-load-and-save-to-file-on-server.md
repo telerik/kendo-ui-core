@@ -7,6 +7,7 @@ slug: editor-mvc-load-and-save-to-file-on-server
 tags: kendo, kendoui, MVC, editor, load-save-from-server, document-processing, formatprovider
 ticketid: 1141852
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

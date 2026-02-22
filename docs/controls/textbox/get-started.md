@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TextBox Documentation - Getting Started with the TextBox
 description: "Get started with the jQuery TextBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["textbox"]
 slug: getting_started_kendoui_textbox_widget
 position: 1
 ---
@@ -94,8 +95,4 @@ The TextBox enables you to configure the label by using the [`label`](https://do
 * [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

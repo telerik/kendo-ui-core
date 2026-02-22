@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} TileLayout component by following a complete step-by-step tutorial."
+components: ["tilelayout"]
 slug: tilelayout_getting_started
 position: 1
 ---
@@ -115,13 +116,13 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
                                     <div class="k-card-result overdue-tasks">7</div>
                                     <div class="k-card-title">From Yesterday: 16</div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="k-card">
                                 <div class="k-card-body">
                                     <div class="k-card-result issues">47</div>
                                     <div class="k-card-title">Closed By Team: 15</div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </text>);
 
@@ -170,13 +171,13 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
                                         <div class="k-card-result overdue-tasks">7</div>
                                         <div class="k-card-title">From Yesterday: 16</div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="k-card">
                                     <div class="k-card-body">
                                         <div class="k-card-result issues">47</div>
                                         <div class="k-card-title">Closed By Team: 15</div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </content>
                     </tabstrip-item>
@@ -275,16 +276,16 @@ The next step is to integrate a [TabStrip]({% slug htmlhelpers_tabstrip_aspnetco
         }
 
     ```
-    ```GridController
+    ```C# GridController
         public ActionResult CustomCommand_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetEmployees().ToDataSourceResult(request));
-        }  
+        }
     ```
 
 ## 4. Handle a TileLayout Event
 
-The TileLayout exposes convenient events for implementing your desired logic. In this example, you will use the [`Reorder`](/api/Kendo.Mvc.UI.Fluent/tilelayouteventbuilder#reordersystemstring) event to log the title, previous, and new position of the reordered item in the browser's console.
+The TileLayout exposes convenient events for implementing your desired logic. In this example, you will use the [`Reorder`](/api/kendo.mvc.ui.fluent/tilelayouteventbuilder#reordersystemstring) event to log the title, previous, and new position of the reordered item in the browser's console.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -300,9 +301,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -317,9 +318,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>The fantastical Sagrada Família church and other modernist landmarks designed by Antoni Gaudí dot the city.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -334,9 +335,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>San Francisco, officially City and County of San Francisco and colloquially known as SF, San Fran or "The City", is the cultural, commercial, and financial center of Northern California.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -377,9 +378,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -394,9 +395,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>The fantastical Sagrada Família church and other modernist landmarks designed by Antoni Gaudí dot the city.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -411,9 +412,9 @@ The TileLayout exposes convenient events for implementing your desired logic. In
                 <p>San Francisco, officially City and County of San Francisco and colloquially known as SF, San Fran or "The City", is the cultural, commercial, and financial center of Northern California.</p>
             </div>
             <div class="k-card-footer">
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-facebook"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
-                <a class="k-button k-button-flat-base k-button-flat k-button-md k-rounded-md k-icon-button"><span class="k-icon k-i-twitter"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-facebook"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-pinterest"></span></a>
+                <a class="k-button k-button-flat k-icon-button"><span class="k-icon k-i-twitter"></span></a>
             </div>
         </div>
     </script>
@@ -449,7 +450,7 @@ You can reference the TileLayout instances that you have created and build on to
 
 Use the value of the `Name()` option of the component to establish a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var tileLayoutReference = $("#tilelayout").data("kendoTileLayout"); // tileLayoutReference is a reference to the existing TileLayout instance of the helper.

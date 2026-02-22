@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI MultiSelect as an editor for comma-s
 previous_url: /controls/data-management/grid/how-to/Editing/use-multiselect-as-custom-editor, /controls/editors/multiselect/how-to/use-multiselect-as-custom-editor-in-grid, /controls/editors/multiselect/how-to/integration/use-multiselect-as-custom-editor-in-grid
 slug: howto_usemultiselectascustomeditor_grid
 tags: use, multiselect, custom, editor, grid, csv, string, fields
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -39,7 +39,7 @@ How can I use the Kendo UI MultiSelect as an editor for comma-separated string f
 
 To enable the mobile view of the ToolBar widget:
 
-1. Create a custom binding for the MultiSelect editor that inherits from the [`kendo.data.Binder`](/api/javascript/data/binder) class. This is done via the [`extend`](/api/javascript/data/binder/class%20methods/extend) method of the Binder.
+1. Create a custom binding for the MultiSelect editor that inherits from the [`kendo.data.Binder`](/api/javascript/data/binder) class. This is done via the [`extend`](/api/javascript/data/binder/class-methods/extend) method of the Binder.
 2. Declare the MultiSelect editor and pass is to the [`columns.editor`](/api/javascript/ui/grid/configuration/columns.editor)
 
 

@@ -7,6 +7,7 @@ slug: dropdownlist-filter-multiple-properties
 tags: dropdownlist, filter, multiple, properties
 ticketid: 1569491
 res_type: kb
+components: ["general"]
 component: dropdownlist
 ---
 
@@ -33,7 +34,7 @@ How can I filter the DropDownList data by multiple properties on the client-side
 1. Prevent the default behavior of the `Filtering` event.
 1. Use the dataSource [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method to apply the custom filtering.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().DropDownList()
           .Name("dropDownList")
           .DataTextField("Text")
@@ -58,7 +59,7 @@ How can I filter the DropDownList data by multiple properties on the client-side
           .HtmlAttributes(new { style = "width: 100%" })
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function onFilter(e){
             e.preventDefault();

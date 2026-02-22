@@ -7,6 +7,7 @@ slug: grid-filter-column-with-dropdownlist
 tags: grid, filter, dropdownlist
 ticketid: 1144229
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -126,9 +127,8 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
             dataTextField: "CategoryName",
             dataValueField: "CategoryID",
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                read: "https://demos.telerik.com/service/v2/core/Categories"
               }
             }
           });
@@ -139,9 +139,8 @@ Programmatically apply the filters on the [`filter`](/api/javascript/ui/grid/eve
             dataTextField: "CategoryName",
             dataValueField: "CategoryID",
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                read: "https://demos.telerik.com/service/v2/core/Categories"
               }
             },
             optionLabel: "--Select Value--"

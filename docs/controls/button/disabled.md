@@ -2,6 +2,7 @@
 title: Disabled Button
 page_title: jQuery Button Documentation - Disabled Button
 description: "Get started with the jQuery Button by Kendo UI and enable or disable the widget."
+components: ["button"]
 slug: disabled_button
 position: 4
 ---

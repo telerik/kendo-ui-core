@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Filter component and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["filter"]
 slug: keynav_filter_aspnetcore
 position: 2
 ---
@@ -26,4 +27,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Filter]
 ## See Also
 
 * [Keyboard Navigation by the Filter (Demo)](https://demos.telerik.com/{{site.platform}}/filter/keyboard-navigation)
-* [Accessibility in the Filter]({% slug accessibility_aspnetcore_filter %})
+* [Accessibility in the Filter]({% slug htmlhelpers_filter_accessibility %})

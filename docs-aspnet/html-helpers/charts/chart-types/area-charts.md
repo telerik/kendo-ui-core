@@ -2,6 +2,7 @@
 title: Area Charts
 page_title: Area Charts
 description: "Learn how to define Telerik UI Area Charts."
+components: ["chart"]
 slug: areacharts_aspnetcore_htmlhelper
 ---
 
@@ -15,10 +16,7 @@ The Telerik UI Area Chart HtmlHelper for {{ site.framework }} is a server-side w
 
 Area Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
-* [Demo page for the Area Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-{% if site.core %}
-* [Demo page for the Area Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
-{% endif %}
+* [Demo page for the Area Chart](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 
 ## Getting Started
 
@@ -114,8 +112,5 @@ The following image displays a smooth-line Area Chart.
 
 ## See Also
 
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-{% if site.core %}
-* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
-{% endif %}
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API](/api/chart)

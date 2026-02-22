@@ -2,8 +2,9 @@
 title: Local Binding
 page_title: Local Binding
 description: "Learn how to implement Local Binding with Telerik UI FileManager component for {{ site.framework }}."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_localbinding
-position: 1
+position: 4
 published: false
 ---
 
@@ -12,9 +13,9 @@ published: false
 The {{ site.product }} FileManager enables you to bind it to local arrays of data.
 
 
-To bind the FileManager to local data, set the `dataSource` option of the `kendoFileManager` object. The data should correspond ot the FileManager built-in model schema (see [Data Binding Overview]({% slug bindingoverview_kendoui_filemanager_widget %}) article)
+To bind the FileManager to local data, set the `dataSource` option of the `kendoFileManager` object. The data should correspond to the FileManager built-in model schema (see [Data Binding Overview]({% slug bindingoverview_kendoui_filemanager_widget %}) article)
 
-```dojo
+```JS dojo
     // Define the HTML div that will contain the FileManager.
     <div id="filemanager"></div>
 

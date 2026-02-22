@@ -33,7 +33,6 @@ export const __meta__ = {
     var TextBox = Widget.extend({
         init: function(element, options) {
             var that = this;
-
             Widget.fn.init.call(that, element, options);
             options = $.extend(true, {}, options);
 
@@ -87,9 +86,9 @@ export const __meta__ = {
             enable: true,
             placeholder: '',
             label: null,
-            rounded: "medium",
-            size: "medium",
-            fillMode: "solid",
+            rounded: undefined,
+            size: undefined,
+            fillMode: undefined,
             icon: null,
             prefixOptions: {
                 separator: true

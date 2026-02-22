@@ -5,9 +5,9 @@ description: "Find answers to the most frequently asked questions related to th
 previous_url: /controls/data-management/grid/grid-faq
 slug: frequently_asked_questions_grid
 tags: grid, faq
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

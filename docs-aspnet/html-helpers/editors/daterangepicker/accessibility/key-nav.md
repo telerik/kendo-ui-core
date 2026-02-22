@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["daterangepicker"]
 slug: keynav_daterangepicker_aspnetcore
 position: 2
 ---
@@ -37,4 +38,4 @@ The DateRangePicker supports the following shortcuts:
 ## See Also
 
 * [Keyboard Navigation by the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/keyboard-navigation)
-* [Accessibility in the DateRangePicker HtmlHelper for {{ site.framework }} ]({% slug accessibility_daterangepicker_aspnetcore %})
+* [Accessibility in the DateRangePicker HtmlHelper for {{ site.framework }} ]({% slug htmlhelpers_daterangepicker_accessibility %})

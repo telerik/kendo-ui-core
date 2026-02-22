@@ -7,7 +7,7 @@ slug: grid-drag-drop-with-locked-columns
 tags: grid, drag, drop, locked, sortable, reorder, frozen
 ticketid: 1413617
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

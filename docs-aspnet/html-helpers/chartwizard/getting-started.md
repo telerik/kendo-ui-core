@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Chart Wizard component by following a complete step-by-step tutorial."
+components: ["chartwizard"]
 slug: chartwizard_getting_started
 position: 1
 ---
@@ -9,6 +10,8 @@ position: 1
 # Getting Started with the Chart Wizard
 
 This tutorial explains how to set up the Telerik UI for {{ site.framework }} Chart Wizard and goes through the steps in the configuration of the component.
+
+The Chart Wizard component provides a user-friendly interface that allows you to create and customize various chart visualizations using data from external sources or from a [Grid]({%slug htmlhelpers_grid_aspnetcore_overview%}). 
 
 You will initialize a Chart Wizard component and bind it to a remote service. Then, you will configure different export and window options for the component. {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
@@ -45,7 +48,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 
 ## 2. Initialize the Chart Wizard
 
-Use the Chart Wizard HtmlHelper {% if site.core %}or TagHelper{% endif %} to configure the component.
+Use the Chart Wizard HtmlHelper {% if site.core %}or TagHelper {% endif %}to configure the component.
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the Chart Wizard element.
 * The `DataColumns()` option specifies the Model properties that will be available in the chart configurator to set up the chart series and axes.
@@ -102,7 +105,7 @@ Create a `Product` Model and define an Action method that returns the data colle
         public int Quantity { get; set; }
     }
 ```
-```HomeController.cs
+```C# HomeController.cs
     public JsonResult Read([DataSourceRequest] DataSourceRequest request)
     {
         return Json(ProductsData().ToDataSourceResult(request));
@@ -248,7 +251,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `Name()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var chartWizardReference = $("#chartwizard").data("kendoChartWizard"); // chartWizardReference is a reference to the existing instance of the helper.
         </script>

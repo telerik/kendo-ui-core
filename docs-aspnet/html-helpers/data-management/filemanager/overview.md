@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI for {{ site.framework }} FileManager component and learn how to create, initialize, and enable the widget."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_overview
 position: 0
 ---
@@ -150,8 +151,8 @@ The following example demonstrates the initialization of the FileManager with re
 | [Search]({% slug htmlhelpers_filemanager_aspnetcore_search %}) | The FileManager comes with a search panel out-of-the-box and allows you to quickly find the needed files. |
 | [Sort]({% slug htmlhelpers_filemanager_aspnetcore_sort %}) | FileManager provides a built-in sort functionality, which allows you to sort the files and folders. |
 | [Toolbar Commands]({% slug htmlhelpers_filemanager_aspnetcore_toolbar %}) | You can incorporate a ToolBar component that contains a variety of built-in commands.|
-| [Accessibility]({% slug accessibility_aspnetcore_filemanager %}) | The FileManager is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation. |
-| [Globalization]({% slug accessibility_aspnetcore_filemanager %}) | The FileManager supports globalization by combining the translation of component messages (localization) and their adaptation to specific cultures. |
+| [Accessibility]({% slug htmlhelpers_filemanager_accessibility %}) | The FileManager is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation. |
+| [Globalization]({% slug htmlhelpers_filemanager_accessibility %}) | The FileManager supports globalization by combining the translation of component messages (localization) and their adaptation to specific cultures. |
 
 ## Next Steps
 

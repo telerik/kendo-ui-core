@@ -5,9 +5,9 @@ description: "Learn how to reposition notification messages after hiding other m
 slug: howto_move_notifications_after_hiding_others
 previous_url: /controls/layout/notification/how-to/move-on-notification-hide 
 tags: telerik, kendo, jquery, notification, move, visible, after, hiding, others  
-component: notification
 type: how-to
 res_type: kb
+components: ["notification"]
 ---
 
 ## Environment

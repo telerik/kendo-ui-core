@@ -2,6 +2,7 @@
 title: Overview
 page_title: Avatar Overview
 description: "Learn the basics when working with the Telerik UI Avatar HtmlHelper for {{ site.framework }}."
+components: ["avatar"]
 slug: overview_avatarhelper_aspnetcore
 position: 0
 ---

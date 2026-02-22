@@ -8,6 +8,7 @@ position:
 tags: map, zoom
 ticketid: 1453772
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment
@@ -58,7 +59,7 @@ One way the amount of zoom can be modified when pressing the plus or minus butto
         center: [0, 0],
         layers: [{
           type: "tile",
-          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           attribution: "&copy; OpenStreetMap"
         }],
         zoomStart: function(e) {

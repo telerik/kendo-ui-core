@@ -4,7 +4,8 @@ page_title: 2012 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2012."
 previous_url: /backwards-compatibility/2012/2012-backward-compatibility
 slug: breakingchanges2012_kendoui
-position: 13
+components: ["general"]
+position: 14
 ---
 
 # 2012 Releases
@@ -99,7 +100,6 @@ All arrows have been renamed to better reflect their direction and size. For exa
 	.k-i-seek-e
 ```
 
-For more information, refer to the [demo on styling icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 **Popup**
 
@@ -127,14 +127,14 @@ Popup-based widgets nested in other Popup-based widgets create their Popup conta
 
 `Refresh()` no longer invokes `Read()` of the DataSource.
 
-    ```tab-Old
-        var chart = $("#chart").data("kendoChart");
-        chart.refresh();
-    ```
-    ```tab-New
-       var chart = $("#chart").data("kendoChart");
-       chart.dataSource.read();
-    ```
+```tab-Old
+    var chart = $("#chart").data("kendoChart");
+    chart.refresh();
+```
+```tab-New
+   var chart = $("#chart").data("kendoChart");
+   chart.dataSource.read();
+```
 
 ## Kendo UI 2012 Q1 (2012.1.322)
 

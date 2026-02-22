@@ -2,6 +2,7 @@
 title: Widths
 page_title: Column Widths
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to modify its column widths."
+components: ["grid"]
 slug: column_widths_grid_aspnetcore
 position: 2
 ---
@@ -31,10 +32,11 @@ Depending on whether scrolling is enabled, the columns of the Grid acquire diffe
 
 Change the `table-layout` to `fixed`.
 
-      #GridID > table // A header and data table.
-      {
-          table-layout: fixed;
-      }
+```CSS
+#GridID > table { /* A header and data table. */
+    table-layout: fixed;
+}
+```
 
 ## Removing Column and Header Misalignment
 
@@ -47,4 +49,7 @@ To remove the misalignment of the columns and headers when the Grid is resized, 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)

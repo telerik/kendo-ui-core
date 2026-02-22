@@ -8,7 +8,7 @@ previous_url: /knowledge-base/change-multiselect-tagmode-programatically
 tags: multiselect, tagmode, change, programmatically, number, selected, items
 ticketid: 1133139
 res_type: kb
-component: multi-select
+components: ["multiselect"]
 ---
 
 ## Environment

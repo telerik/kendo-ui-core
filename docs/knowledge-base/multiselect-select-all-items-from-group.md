@@ -6,7 +6,7 @@ page_title: Select All Items from a Group - Kendo UI MultiSelect for jQuery
 slug: multiselect-select-all-items-from-group
 tags: multiselect, select, all, items, group
 res_type: kb
-component: multi-select
+components: ["multiselect"]
 ---
 
 ## Environment
@@ -48,9 +48,8 @@ How can I select all items from a group in the MultiSelect by clicking the group
           dataValueField: "CustomerID",
           height: 400,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             group: { field: "Country" }
           }

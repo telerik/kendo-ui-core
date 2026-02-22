@@ -2,6 +2,7 @@
 title: Button
 page_title: jQuery ToolBar Documentation - Button Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Button command type."
+components: ["toolbar"]
 previous_url: /controls/toolbar/button
 slug: button_toolbar_widget
 ---

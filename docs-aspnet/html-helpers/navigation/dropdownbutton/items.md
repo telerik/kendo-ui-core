@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items of the widget."
+components: ["dropdownbutton"]
 slug: htmlhelpers_dropdownbutton_aspnetcore_items
 position: 2
 ---

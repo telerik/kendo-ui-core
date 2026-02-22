@@ -6,6 +6,7 @@ page_title: Persist the State of the {{ site.product }} Grid alongside the Funct
 slug: grid-persist-state-with-functions
 tags: kendoui, jquery, data, grid, persist, state, save, options, restore, function, functions, handler, handlers
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -13,14 +14,14 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® {{ site.product }} Grid</td> 
+  <td>Progress® {{ site.product }} Grid</td>
  </tr>
 </table>
 
 
 ## Description
 
-By default, the [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method cannot serialize function definitions. Event handlers and other similar Grid configurations are lost when the state of the component is persisted with [`getOptions`](/api/javascript/ui/grid/methods/getoptions) and [`setOptions`](/api/javascript/ui/grid/methods/setoptions).
+By default, the [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method cannot serialize function definitions. Event handlers and other similar Grid configurations are lost when the state of the component is persisted using the [`getOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getoptions) and [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) client-side methods.
 
 How can I persist the state of the Data Grid and include the function definitions in the saved options?
 
@@ -58,8 +59,8 @@ To achieve the desired scenario, implement a custom JSON [`reviver`](https://dev
 </script>
 
 <div class="box wide">
-    <button href="#" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" id="save">Save State</button>
-    <button href="#" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" id="load">Load State</button>
+    <button href="#" class="k-button k-button-primary" id="save">Save State</button>
+    <button href="#" class="k-button k-button-primary" id="load">Load State</button>
 </div>
 <br />
 @(Html.Kendo().Grid<TelerikMvcApp9.Models.OrderViewModel>()

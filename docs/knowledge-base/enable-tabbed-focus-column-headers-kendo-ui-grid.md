@@ -6,6 +6,7 @@ page_title: How to Navigate to Column Headers with Tab in Kendo UI Grid
 slug: enable-tabbed-focus-column-headers-kendo-ui-grid
 tags: kendo ui, grid, keyboard navigation, tabbed focus, wcag, accessibility
 res_type: kb
+components: ["grid"]
 ticketid: 1662786
 ---
 
@@ -50,9 +51,8 @@ Below is a runnable example:
         $("#grid").kendoGrid({
           selectable: true,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
           },
@@ -98,4 +98,4 @@ Below is a runnable example:
 
 - [Kendo UI Grid Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 - [Keyboard Navigation in Kendo UI Grid](https://docs.telerik.com/kendo-ui/controls/grid/accessibility/key-nav)
-- [Kendo UI Grid Accessibility Guide](https://docs.telerik.com/kendo-ui/accessibility/accessibility)
+- [Kendo UI Grid Accessibility Guide](https://www.telerik.com/kendo-jquery-ui/documentation/accessibility/accessibility-overview)

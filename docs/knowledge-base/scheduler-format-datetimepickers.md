@@ -4,10 +4,10 @@ page_title: Format Date in DateTimePickers in Scheduler Edit Popup
 description: "Learn how to set a custom format in the Kendo UI for jQuery Scheduler edit popup DateTimePickers."
 slug: scheduler-format-datetimepickers
 tags: telerik, kendo, jquery, scheduler, format, date, datetimepicker
-component: scheduler, dattimepicker
 ticketid: 1559389
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

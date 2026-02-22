@@ -5,9 +5,9 @@ description: "Learn how to use nested model properties in the Kendo UI Grid for 
 previous_url: /controls/data-management/grid/how-to/use-nested-model-properties, /controls/data-management/grid/how-to/binding/use-nested-model-properties
 slug: howto_use_nested_model_properties_grid
 tags: use, nested, model, properties, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

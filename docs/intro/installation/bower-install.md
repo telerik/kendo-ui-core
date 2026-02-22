@@ -2,6 +2,7 @@
 title: Installing with Bower
 page_title: Installing with Bower - Download and Installation 
 description: "Get started with Kendo UI for jQuery and install the commercial or the open-source Kendo UI distributions by using the Bower package manager."
+components: ["general"]
 previous_url: /install/bower, /intro/installation/overview-download
 slug: kendoui_bower_packages_kendoui_installation
 position: 30
@@ -136,7 +137,6 @@ The following example demonstrates how to initialize a DropDownList with some ba
 * [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Operation System Support]({% slug ossupport_kendo %})
 * [PDF and Excel Export Support]({% slug export_support_kendoui %})
-* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also

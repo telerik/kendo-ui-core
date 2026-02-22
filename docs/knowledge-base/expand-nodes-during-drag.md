@@ -5,9 +5,9 @@ description: "Learn how to expand Kendo UI for jQuery TreeView items that are ho
 slug: howto_expandnodesduringdrag_treeview
 previous_url: /controls/navigation/treeview/how-to/nodes/expand-nodes-during-drag
 tags: telerik, kendo, jquery, treeview, expand, nodes, while, during, dragging
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

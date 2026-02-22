@@ -7,6 +7,7 @@ slug: scale-diagram-to-fit-container-upon-resizing
 tags: diagram, scale, resize
 ticketid: 1492478
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment
@@ -90,5 +91,5 @@ Create a method to dynamically calculate the Diagram viewport dimensions and sca
 ## See Also
 
 * [Diagram Overview](https://docs.telerik.com/kendo-ui/controls/diagram/overview)
-* [Persist Shape Properties](https://docs.telerik.com/kendo-ui/controls/diagram/how-to/persist-shape-properties)
+* [Persist Shape Properties](https://docs.telerik.com/kendo-ui//knowledge-base/persist-shape-properties)
 * [Diagram Layout](https://docs.telerik.com/kendo-ui/controls/diagram/layout)

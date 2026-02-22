@@ -2,13 +2,14 @@
 title: Layout
 page_title: Layout
 description: "Learn how to configure the layout of the Telerik UI CheckBoxGroup for {{ site.framework }}."
+components: ["checkboxgroup"]
 slug: htmlhelpers_checkboxgroup_aspnetcore_layout
 position: 3
 ---
 
 # Layout
 
-The CheckBoxGroup supports two types of [`layout`](/api/javascript/ui/checkboxgroup/configuration/layout) - "horizontal" and "vertical". By default the checkboxes are rendered vertically.
+The CheckBoxGroup supports two types of [`Layout`](/api/kendo.mvc.ui.fluent/checkboxgroupbuilder#layoutsystemstring) - `horizontal` and `vertical`. By default, the checkboxes are rendered vertically.
 
 The following example shows how to set the CheckBoxGroup layout:
 

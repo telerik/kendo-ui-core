@@ -6,7 +6,7 @@ slug: third_party_modal_popups_no_access_to_widgets
 tags: telerik, kendoui, jquery, troubleshooting, third, party, modal, popups, prevent, access, to, widgets
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

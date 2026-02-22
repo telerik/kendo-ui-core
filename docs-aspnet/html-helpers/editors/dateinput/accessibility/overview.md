@@ -2,7 +2,8 @@
 title: Overview
 page_title: DateInput Documentation | DateInput Accessibility
 description: "Get started with the {{ site.product }} DateInput and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_dateinput_aspnetcore_accessibility
+components: ["dateinput"]
+slug: htmlhelpers_dateinput_accessibility
 position: 1
 ---
 
@@ -68,10 +69,10 @@ To test the DateInput component, refer to the [DateInput Accessibility Demo](htt
 
 ## Keyboard Navigation
 
-For details on how the DateInput keyboard navigation works, refer to the [DateInput Keyboard Navigation]({%slug htmlhelpers_dateinput_aspnetcore_accessibility_keyboardnavigation%}) article.
+For details on how the DateInput keyboard navigation works, refer to the [DateInput Keyboard Navigation]({%slug htmlhelpers_dateinput_accessibility_keyboardnavigation%}) article.
 
 ## See Also
 
 * [Keyboard Navigation by the DateInput for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/keyboard-navigation)
-* [Keyboard Navigation by the DateInput for {{ site.framework }}]({% slug htmlhelpers_dateinput_aspnetcore_accessibility_keyboardnavigation %})
+* [Keyboard Navigation by the DateInput for {{ site.framework }}]({% slug htmlhelpers_dateinput_accessibility_keyboardnavigation %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

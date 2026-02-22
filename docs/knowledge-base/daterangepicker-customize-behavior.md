@@ -6,6 +6,7 @@ page_title: How to Customize DateRangePicker Selection Behavior
 slug: daterangepicker-customize-behavior
 tags: kendo ui, daterangepicker, custom behavior, date selection
 res_type: kb
+components: ["daterangepicker"]
 ---
 
 ## Environment

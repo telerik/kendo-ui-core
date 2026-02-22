@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} DateInput component by following a complete step-by-step tutorial."
+components: ["dateinput"]
 slug: dateinput_getting_started
 position: 1
 ---
@@ -84,7 +85,7 @@ To use the client-side API of the DateInput and build on top of its initial conf
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var dateinputReference = $("#dateinput").data("kendoDateInput"); // dateinputReference is a reference to the existing DateInput instance of the helper.
@@ -94,7 +95,7 @@ To use the client-side API of the DateInput and build on top of its initial conf
 
 1. Use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods) to control the behavior of the control. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput/methods/enable) method to disable the input.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var dateinputReference = $("#dateinput").data("kendoDateInput"); // dateinputReference is a reference to the existing DateInput instance of the helper.

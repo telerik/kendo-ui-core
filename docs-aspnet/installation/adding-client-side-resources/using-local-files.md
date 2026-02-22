@@ -2,6 +2,7 @@
 title: Using Local Files
 page_title: Using Local Files
 description: "Learn how to add the Kendo client-side resources in a {{ site.product }} project by using local JavaScript and CSS files."
+components: ["general"]
 previous_url: /installation-mvc/adding-client-side-resources/using-local-files, /how-to/use-with-aspnet-bundles
 slug: using_local_client_side_resources
 position: 3
@@ -39,56 +40,58 @@ To add the client-side resources to your project:
     > * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.
     > * In the default .NET Core template, the jQuery scripts are included at the end of the `<body>` element. To properly load the {{ site.product }} HTML Helpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
-        <head>
+    ```HTML
+    <head>
+        ...
+
+        <environment include="Development">
             ...
 
-            <environment include="Development">
-                ...
-
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
-            </environment>
-            <environment exclude="Development">
-                ...
-
-                <link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
-                    asp-fallback-test-class="k-theme-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-            </environment>
-
-            <environment include="Development">
-                ...
-
-                <script src="~/lib/jquery/dist/jquery.js"></script>
-
-                @* Place the Kendo UI scripts after jQuery. *@
-                <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
-                <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
-            </environment>
-            <environment exclude="Development">
-                ...
-
-                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                        asp-fallback-test="window.jQuery"
-                        crossorigin="anonymous"
-                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-                </script>
-
-                @* Place the Kendo UI scripts after jQuery. *@
-                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
-                        asp-fallback-test="window.kendo">
-                </script>
-                <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
-                </script>
-            </environment>
-
+            <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
+        </environment>
+        <environment exclude="Development">
             ...
-        </head>
+
+            <link rel="stylesheet"
+                href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
+                asp-fallback-test-class="k-theme-test-class"
+                asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+        </environment>
+
+        <environment include="Development">
+            ...
+
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+
+            @* Place the Kendo UI scripts after jQuery. *@
+            <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+            <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+        </environment>
+        <environment exclude="Development">
+            ...
+
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+
+            @* Place the Kendo UI scripts after jQuery. *@
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
+                    asp-fallback-test="window.kendo">
+            </script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
+            </script>
+        </environment>
+
+        ...
+    </head>
+    ```
 
 {% else %}
 1. Extract the files from the archive.
@@ -113,9 +116,9 @@ To add the client-side resources to your project:
 
 1. If you are using {{ site.product }} R1 2023 SP1 (version 2023.1.314) or newer, add a reference to a local theme CSS file or use the CDN, as shown in step 1. Bundling is not needed, because a single theme CSS file must be referenced.  
 
-
-        <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
-
+    ```HTML
+    <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
+    ```
 
     > For product versions older than R1 2023 SP1, if you are using LESS CSS files, you can bundle them as shown below. Make sure you are familiar with CSS bundling.
 
@@ -125,7 +128,6 @@ To add the client-side resources to your project:
 
 1. Set the ASP.NET bundles to allow minified files in debug mode.
 
-
         bundles.IgnoreList.Clear();
 
 1. Open the layout of the application. By default, if using ASPX, the location will be `Views/Shared/_Layout.cshtml`, or `Site.master`.
@@ -133,7 +135,7 @@ To add the client-side resources to your project:
 1. For SASS themes - add reference to the respective CSS file, for example `default-main.css`. For {{ site.product }} versions older than R1 2023 SP1 and LESS themes - render the {{ site.product }} style bundle. 
 
 
-    ```Razor
+    ```HTML
         @*For SASS themes in the _Layout.cshtml (after the R1 2023 SP1 release):*@
         <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
 
@@ -148,7 +150,7 @@ To add the client-side resources to your project:
 
 1. Render the {{ site.product }} script bundle after jQuery. Make sure that the jQuery version you load is [supported]({% slug jquerysupport_core %})
 
-    ```Razor
+    ```HTML
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/kendo")
     ```
@@ -162,56 +164,58 @@ To add the client-side resources to your project:
     > * The CDN links and/or package versions have to point to the same {{ site.product }} version, which your project references.
     > * In the default .NET MVC template, the jQuery scripts are included at the end of the `<body>` element. To properly load the {{ site.product }} HTML Helpers, move the jQuery scripts and the Kendo UI client-side scripts to the `<head>` element and make sure that the Kendo UI scripts are loaded after the jQuery ones.
 
-        <head>
+    ```HTML
+    <head>
+        ...
+
+        <environment include="Development">
             ...
 
-            <environment include="Development">
-                ...
-
-                <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
-            </environment>
-            <environment exclude="Development">
-                ...
-
-                <link rel="stylesheet"
-                    href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
-                    asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
-                    asp-fallback-test-class="k-common-test-class"
-                    asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
-            </environment>
-
-            <environment include="Development">
-                ...
-
-                <script src="~/lib/jquery/dist/jquery.js"></script>
-
-                @* Place the Kendo UI scripts after jQuery. *@
-                <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
-                <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
-            </environment>
-            <environment exclude="Development">
-                ...
-
-                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                        asp-fallback-test="window.jQuery"
-                        crossorigin="anonymous"
-                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-                </script>
-
-                @* Place the Kendo UI scripts after jQuery. *@
-                <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
-                        asp-fallback-test="window.kendo">
-                </script>
-                <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
-                        asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
-                </script>
-            </environment>
-
+            <link rel="stylesheet" href="~/lib/kendo-ui/styles/default-main.css" />
+        </environment>
+        <environment exclude="Development">
             ...
-        </head>
+
+            <link rel="stylesheet"
+                href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css"
+                asp-fallback-href="~/lib/kendo-ui/styles/default-main.css"
+                asp-fallback-test-class="k-common-test-class"
+                asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
+        </environment>
+
+        <environment include="Development">
+            ...
+
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+
+            @* Place the Kendo UI scripts after jQuery. *@
+            <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+            <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+        </environment>
+        <environment exclude="Development">
+            ...
+
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+
+            @* Place the Kendo UI scripts after jQuery. *@
+            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
+                    asp-fallback-test="window.kendo">
+            </script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
+            </script>
+        </environment>
+
+        ...
+    </head>
+    ```
 {% endif %}
 
 ## Additional Local Files
@@ -228,7 +232,7 @@ The files for all these module systems are available in the [downloaded zip or 7
 
 {% if site.core %}
 * [Using LibMan to Add Client-Side Resources]({% slug using_libman %})
-* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
+* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug creating-custom-bundles %})
 {% endif %}
 * [Using ECMAScript Resources]({% slug core_ecmascript_overview %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})

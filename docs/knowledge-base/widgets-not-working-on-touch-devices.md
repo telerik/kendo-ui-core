@@ -6,7 +6,7 @@ slug: widgets_not_working_on_touch_devices
 tags: telerik, kendoui, jquery, troubleshooting, widgets, not, working, on, touch, devices
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

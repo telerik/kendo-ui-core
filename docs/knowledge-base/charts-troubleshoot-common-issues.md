@@ -7,7 +7,7 @@ slug: troubleshooting_chart_widget
 type: troubleshooting
 tags: chart, troubleshoot, common, issues
 res_type: kb
-component: chart
+components: ["chart"]
 ---
 
 ## Environment
@@ -196,7 +196,7 @@ The following example demonstrates how to embed fonts in exported PDF.
      $("#chart").kendoChart({
         pdf: {
             fileName: "Kendo UI Chart Export.pdf",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
         },
         title: {
             text: "Gross domestic product growth \n /GDP annual %/",

@@ -7,6 +7,7 @@ slug: listbox-add-click-handler-to-item-template
 tags: listbox, click, icon, template, function, click not working, draggable
 ticketid: 1401928
 res_type: kb
+components: ["listbox"]
 ---
 
 ## Environment

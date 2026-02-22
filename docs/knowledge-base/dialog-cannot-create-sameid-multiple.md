@@ -6,7 +6,7 @@ slug: dialog_cannot_create_sameid_multiple
 tags: telerik, progress, kendoui, jquery, dialog, cannot, create, multiple, same, id, components
 type: troubleshooting
 res_type: kb
-component: dialog
+components: ["dialog"]
 ---
 
 ## Environment

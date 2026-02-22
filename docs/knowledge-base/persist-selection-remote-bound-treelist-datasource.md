@@ -4,9 +4,9 @@ page_title: Persist Selected Rows - Kendo UI TreeList for jQuery
 description: "Learn how to persist the selected rows of the remotely bound Kendo UI TreeList for jQuery upon retrieving new data."
 slug: howto_persist_selected_rows_remote_bound_treelist
 tags: persist, selected, rows, treelist, remote, bind
-component: treelist
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,13 +43,12 @@ Store the ids of the selected items whenever the user selects a row and then wit
       <div id="treelist"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           var dataSource = new kendo.data.TreeListDataSource({
             transport: {
               read: {
-                url: crudServiceBaseUrl + "/EmployeeDirectory",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/EmployeeDirectory"
               }
             },
             schema: {

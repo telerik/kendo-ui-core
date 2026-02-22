@@ -6,6 +6,7 @@ page_title: How to Delay Tooltip Trigger in Kendo UI for ASP.NET MVC
 slug: delay-tooltip-trigger-kendo-ui-aspnet-mvc
 tags: kendo-ui, asp.net-mvc, tooltip, hover, delay, trigger
 res_type: kb
+components: ["tooltip"]
 category: knowledge-base
 ticketid: 1636529
 ---

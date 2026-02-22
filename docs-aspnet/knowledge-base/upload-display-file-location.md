@@ -7,6 +7,7 @@ slug: upload-display-file-location
 tags: upload, display, file, location, link
 ticketid: 1628324
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -33,7 +34,7 @@ How can I display the location of the uploaded file as a link within the Upload 
 1. Update the `Save` Action method to return the file location of the uploaded file.
 1. Subscribe to the [`Success`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#successsystemstring) event to intercept the received file location from the server. Select the anchor tag within the file template with jQuery and update the `href` attribute with the respective file location.
 
-```View_HtmlHelper
+```HtmlHelper
     @(Html.Kendo().Upload()
         .Name("files")
         .TemplateId("fileTemplate")
@@ -55,17 +56,17 @@ How can I display the location of the uploaded file as a link within the Upload 
             <span class="k-file-name"><a href="" target="_blank">#=data.name#</a></span>
         </span>
         <strong class="k-upload-status">
-            <button type="button" class="k-button k-icon-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
+            <button type="button" class="k-button k-icon-button k-button-flat k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
             </button>
         </strong>
     </script>
 ```
 {% if site.core %}
-```View_TagHelper
+```TagHelper
   @addTagHelper *, Kendo.Mvc
 
    <kendo-upload name="files" template-id="fileTemplate"    on-success="onSuccess">
-      <async auto-upload="true" 
+      <async auto-upload="true"
         save-url="@Url.Action("Async_Save", "Home")" remove-url="@Url.Action("Remove", "Home")" />
     </kendo-upload>
 
@@ -79,13 +80,13 @@ How can I display the location of the uploaded file as a link within the Upload 
             <span class="k-file-name"><a href="" target="_blank">#=data.name#</a></span>
         </span>
         <strong class="k-upload-status">
-            <button type="button" class="k-button k-icon-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
+            <button type="button" class="k-button k-icon-button k-button-flat k-upload-action"><span class="k-button-icon k-icon k-i-close k-i-x" title="Remove"></span>
             </button>
         </strong>
     </script>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onSuccess(e) {
             var uploadedFileName = e.files[0].name;

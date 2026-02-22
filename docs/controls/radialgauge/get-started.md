@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RadialGauge Documentation - Getting Started with the RadialGauge
 description: "Get started with the jQuery RadialGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["radialgauge"]
 slug: getting_started_kendoui_radialgauge_component
 position: 2
 ---
@@ -228,15 +229,11 @@ Here, you will specify the [`colors of the scale ranges`](/api/javascript/datavi
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the RadialGauge](https://demos.telerik.com/kendo-ui/radialgauge/index)
+* [Demo Page for the RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/index)
 
 ## See Also 
 
 * [JavaScript API Reference of the RadialGauge](/api/javascript/dataviz/ui/radialgauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

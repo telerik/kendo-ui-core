@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Configure the Telerik UI ListView for {{ site.framework }} to implement grouping functionality."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_grouping
 position: 9
 ---
@@ -22,7 +23,7 @@ Initially, the ListView is not bound to prevent double loading. This is achieved
 
 The key part is to configure the ListView Template for proper accomodation of the grouping structure of the data:
 
-```Template
+```JS Template
 <script type="text/x-kendo-template" id="template">
     <div class="k-listview-item">
         <h4 class="k-group-title">#= data.value #</h4>

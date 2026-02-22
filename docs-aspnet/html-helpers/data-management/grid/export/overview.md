@@ -2,6 +2,7 @@
 title: Overview
 page_title: Export Overview
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to configure the export functionality of the widget."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_export_overview
 position: 1
 ---
@@ -44,4 +45,7 @@ To enable the PDF and Excel Export functionality, add the following ToolBar conf
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)

@@ -738,11 +738,16 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "sortDesc": "Sort Descending",
     "moveGroupPrevious": "Move previous",
     "moveGroupNext": "Move next",
+    "selectall": "Select all",
   },
   "editable": {
     "cancelDelete": "Cancel",
     "confirmation": "Are you sure you want to delete this record?",
     "confirmDelete": "Delete"
+  },
+  "details": {
+    "expand": "Expand",
+    "collapse": "Collapse"
   },
   "noRecords": "No records available.",
   "expandCollapseColumnHeader": "",
@@ -750,7 +755,25 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "ungroupHeader": "Press ctrl + space to ungroup",
   "toolbarLabel": "grid toolbar",
   "groupingHeaderLabel": "grid grouping header",
-  "filterCellTitle": "filter cell"
+  "filterCellTitle": "filter cell",
+  "clearButtons": {
+    "clearFiltering": "Clear All Filters",
+    "clearSorting": "Clear Sorting",
+    "clearGrouping": "Clear Grouping",
+    "columnChooserReset": "Reset",
+  },
+  "applyButtons": {
+    "applyGrouping": "Done",
+    "applySorting": "Done",
+    "columnChooserApply": "Apply",
+  },
+  "ai": {
+    "outputPlaceholder": "No AI output available",
+    "success": "Data is:",
+    "error": "Operation is not successful. Error:",
+    "invalidSelection": "This selection mode is not currently enabled. Please enable the appropriate selection option in the grid configuration.",
+    "promptPlaceholder": "Enter your AI prompt here...",
+  }
 });
 }
 
@@ -1421,6 +1444,16 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "duration": "Duration",
     "moreFormats": "More formats..."
   },
+  formatTypesSamples: {
+    "number": "1,499.99",
+    "percent": "14.50%",
+    "financial": "(1,000.12)",
+    "currency": "$1,499.99",
+    "date": "4/21/2012",
+    "time": "5:49:00 PM",
+    "dateTime": "4/21/2012 5:49:00",
+    "duration": "168:05:00"
+  },
   "formatDecreaseDecimal": "Decrease decimal",
   "formatIncreaseDecimal": "Increase decimal",
   "freeze": "Freeze panes",
@@ -1477,6 +1510,31 @@ $.extend(true, kendo.spreadsheet.messages.view,{
     "insert": "Insert",
     "data": "Data"
   }
+});
+}
+
+if (kendo.ui.SmartBox) {
+kendo.ui.SmartBox.prototype.options.messages =
+$.extend(true, kendo.ui.SmartBox.prototype.options.messages,{
+  noPreviousSearches: "No previous searches",
+  noPreviousPrompts: "No previous prompts",
+  previousSearches: "Previously Searched",
+  previousPrompts: "Previously Asked",
+  suggestedPrompts: "Suggested Prompts",
+  searchModeLabel: "Search",
+  searchModeDescription: "Looks for exact word matches across your data",
+  searchPlaceholder: "Search",
+  semanticSearchModeLabel: "Semantic Search",
+  semanticSearchModeDescription: "Understands context to surface the most relevant results.",
+  semanticSearchPlaceholder: "Semantic Search",
+  semanticSearchButtonText: "Search",
+  aiAssistantPlaceholder: "Sort, filter or group with AI",
+  speechToText: "Speech to text",
+  speechToTextAriaLabel: "Start speech recognition",
+  cancel: "Cancel",
+  send: "Send",
+  searchButtonText: "Search",
+  aiAssistantButtonText: "AI Assistant",
 });
 }
 
@@ -1699,7 +1757,8 @@ if (kendo.ui.List) {
     kendo.ui.List.prototype.options.messages =
     $.extend(true, kendo.ui.List.prototype.options.messages,{
       "clear": "clear",
-      "noData": "No data found."
+      "noData": "No data found.",
+      "filterInputPlaceholder": "Filter",
     });
 }
 
@@ -1739,7 +1798,8 @@ if (kendo.ui.DropDownTree) {
         "singleTag": "item(s) selected",
         "clear": "clear",
         "deleteTag": "delete",
-        "noData": "No data found."
+        "noData": "No data found.",
+        "filterInputPlaceholder": "Filter"
     });
 }
 
@@ -1761,10 +1821,19 @@ if (kendo.ui.MultiSelect) {
 if (kendo.ui.Chat) {
     kendo.ui.Chat.prototype.options.messages =
     $.extend(true, kendo.ui.Chat.prototype.options.messages,{
-        "messageListLabel": "Message list",
-        "placeholder": "Type a message...",
-        "toggleButton": "Toggle toolbar",
-        "sendButton": "Send message"
+      "messageListLabel": "Message list",
+      "placeholder": "Type a message...",
+      "sendButton": "Send message",
+      "speechToTextButton": "Toggle speech to text",
+      "fileButton": "Attach file",
+      "downloadAll": "Download all",
+      "selfMessageDeleted": "You removed this message.",
+      "otherMessageDeleted": "This message was removed by its sender.",
+      "stopGeneration": "Stop generation",
+      "messageBoxLabel": "Type your message here",
+      "pinnedMessageCloseButton": "Unpin message",
+      "replyMessageCloseButton": "Remove reply",
+      "fileMenuButton": "File menu"
     });
 }
 

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PivotGridV2 Documentation - Getting Started with the PivotGridV2
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["pivotgridv2"]
 slug: getting_started_kendoui_pivotgridv2_widget
 position: 1
 ---
@@ -203,8 +204,4 @@ The user can filter the data through both the PivotGridV2 headers and the PivotC
 * [JavaScript API Reference of the jQuery PivotGridV2](/api/javascript/ui/pivotgridv2)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

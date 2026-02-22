@@ -2,6 +2,7 @@
 title: Troubleshooting
 page_title: Troubleshooting
 description: "Learn about the solutions of common issues that may occur while working with Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 previous_url: /helpers/data-management/spreadsheet/troubleshoot/troubleshooting, /helpers/data-management/spreadsheet/troubleshooting
 slug: troubleshoot_spreadsheethelper_aspnetmvc
 position: 13

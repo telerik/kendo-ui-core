@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Try now the Telerik UI Menu component for {{ site.framework }} providing built-in data-binding and customization options, a ContextMenu, and support for various accessibility standards."
+components: ["menu"]
 previous_url: /helpers/html-helpers/menu, /helpers/navigation/menu/overview
 slug: htmlhelpers_menu_aspnetcore
 position: 0
@@ -282,8 +283,9 @@ The following example demonstrates the basic configuration of the Menu.
 | [Animations]({% slug animations_menu %})| The Menu allows you to define animations for opening and closing its sub-items. |
 | [ContextMenu]({% slug htmlhelpers_contextmenu_aspnetcore %})| The Menu component supports the creation and implementation of context menus that open on right-click or based on custom events. |
 | [Security Trimming]({% slug securitytrimming_menu_aspnetmvc %})| The built-in security trimming functionality of the Menu is enabled by default. |
+| [Icons]({% slug htmlhelpers_menu_icons %})| Display icons in the Menu items to enhance the appearance of the component. |
 | [Events]({% slug events_menu %})| Explore the various Menu events that allow you to control what happens when the user interacts with the component. |
-| [Accessibility]({% slug accessibility_aspnetcore_menu %})| The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_menu_accessibility %})| The Menu is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

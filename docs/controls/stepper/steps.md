@@ -2,6 +2,7 @@
 title: Steps
 page_title: jQuery Stepper Documentation
 description: "Get started with the jQuery Stepper by Kendo UI and learn how to configure the steps."
+components: ["stepper"]
 slug: steps_stepper_widget
 position: 2
 ---

@@ -7,6 +7,7 @@ slug: grid-toolbar-template
 tags: grid, toolbar, asp, core, template
 ticketid: 1147879
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

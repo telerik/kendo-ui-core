@@ -5,6 +5,7 @@ description: Learn how to change Telerik UI for {{ site.framework }} culture num
 slug: culture-override-settings
 tags: culture, numeric, numbers, override, numberFormat, currency, percent
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -27,7 +28,7 @@ How can I override the numeric delimiters for {{ site.product }} culture?
 
 To achieve the desired scenario add a script which extends the numeric options for the culture:
 
-```Script.js
+```JS script.js
 <script>
         var customUS = $.extend(true, {}, kendo.culture(), {
             name: "custom-US",
@@ -49,7 +50,7 @@ To achieve the desired scenario add a script which extends the numeric options f
 </script>
 ```
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("Grid")
     .Columns(columns =>

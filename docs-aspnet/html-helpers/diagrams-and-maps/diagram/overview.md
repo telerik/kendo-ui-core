@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the server-side wrapper for the Telerik UI Diagram component for {{ site.framework }}."
+components: ["diagram"]
 previous_url: /helpers/diagrams-and-maps/diagram/overview
 slug: htmlhelpers_diagram_aspnetcore
 position: 0

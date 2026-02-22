@@ -6,6 +6,7 @@ page_title: How toSet Different Colors for Every Working Day in Scheduler Week V
 slug: color-scheduler-background-kendo-ui
 tags: kendo-ui, scheduler, color, background, working hours, customization
 res_type: kb
+components: ["scheduler"]
 ticketid: 1665622
 ---
 
@@ -32,7 +33,7 @@ This KB article also answers the following questions:
 
 To customize the background color of Scheduler days based on working hours, you can use the `.k-scheduler-content td:not(.k-nonwork-hour)` selector. 
 
-For different colors each day, use the [`slotTemplate`](/api/javascript/ui/scheduler/configuration/slottemplate) option in the Scheduler's configuration. This allows adding a different class based on the day rendered:
+For different colors each day, use the [`slotTemplate`](/api/javascript/ui/scheduler/configuration/views.slottemplate) option in the Scheduler's configuration. This allows adding a different class based on the day rendered:
 
 ```javascript
 {

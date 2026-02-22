@@ -2,6 +2,7 @@
 title: Color Presets
 page_title: jQuery ColorPalette Documentation - ColorPalette Color Presets
 description: "Learn more about the sets of predefined palettes in the Kendo UI for jQuery ColorPalette and how to customize them."
+components: ["colorpalette"]
 slug: presets_kendoui_colorpalette_widget
 position: 2
 ---
@@ -154,4 +155,4 @@ The result from the configuration is :
 ## See Also
 
 * [Palette Presets of the ColorPalette (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/palette-presets)
-* [JavaScript API Reference of the ColorPalette](/api/javascript/ui/colorpalette)
+* [JavaScript API Reference of the ColorPalette](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpalette)

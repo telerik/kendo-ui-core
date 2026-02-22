@@ -2,6 +2,7 @@
 title: Modes of Operation
 page_title: Modes of Operation
 description: "Learn which are the modes in which the Telerik UI Editor component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) operates."
+components: ["editor"]
 slug: htmlhelpers_editor_modes_aspnetcore
 position: 2
 ---

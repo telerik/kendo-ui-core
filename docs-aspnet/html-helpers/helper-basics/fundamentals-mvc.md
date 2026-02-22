@@ -2,6 +2,7 @@
 title: Fundamentals
 page_title: Fundamentals
 description: "Get started with Telerik UI for ASP.NET MVC and download, install, and configure your project."
+components: ["general"]
 slug: fundamentals_aspnetmvc
 previous_url: /fundamentals, /getting-started/fundamentals, getting-started/helper-basics/fundamentals
 position: 1
@@ -57,14 +58,16 @@ To subscribe to the client-side events that are exposed by a helper, use the `Ev
 
 1. Declare the event handlers.
 
-            <script>
-            function age_change(e) {
-                // Handle the event.
-            }
-            function age_spin(e) {
-                // Handle the event.
-            }
-            </script>
+    ```JS
+    <script>
+        function age_change(e) {
+            // Handle the event.
+        }
+        function age_spin(e) {
+            // Handle the event.
+        }
+    </script>
+    ```
 
 ## Referencing Client-Side Objects
 

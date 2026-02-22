@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn more about the Telerik UI PDFViewer component for {{ site.framework }}, and discover its built-in features like the toolbar and the supported events."
+components: ["pdfviewer"]
 previous_url: /helpers/pdf/pdfviewer/overview
 slug: htmlhelpers_pdfviewer_aspnetcore
 position: 0
@@ -28,11 +29,11 @@ You can initialize the PDFViewer from HTML either by using [PDF.JS](#using-pdfjs
 The following example demonstrates how to initialize the PDFViewer by using [PDF.JS](https://mozilla.github.io/pdf.js/).
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;
@@ -125,8 +126,9 @@ The following example demonstrates how to initialize the PDFViewer by using the 
 * [DPL Processing]({% slug htmlhelpers_pdfviewer_dpl_processing_aspnetcore %})&mdash;The component can use the Telerik Document Processing library to process and visualize a PDF document.
 * [Toolbar and Tools]({% slug htmlhelpers_pdfviewer_toolbar_aspnetcore %})&mdash;The PDFViewer offers diverse tools and commands.
 * [Annotations]({% slug annotations_pdfviewer_aspnetcore %})&mdash;You can highlight important text areas with different colors or add free text notes in the document.
+* [Form Filling]({% slug form_filling_pdfviewer_core %})&mdash;You can import files containing PDF forms and fill in the input elements.
 * [Events]({% slug events_pdfviewer_aspnetcore %})&mdash;To control the behavior of the component upon user interaction, you can use the events that the component emits.
-* [Accessibility]({% slug accessibility_aspnetcore_pdfviewer %})&mdash;The PDFViewer is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pdfviewer %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_pdfviewer_accessibility %})&mdash;The PDFViewer is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pdfviewer %}) for faster navigation.
 
 ## Next Steps
 

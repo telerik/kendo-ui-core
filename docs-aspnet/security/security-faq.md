@@ -2,6 +2,7 @@
 title: FAQ
 page_title: Security FAQ
 description: "Find answers to common questions about securing {{ site.product }} components, including how to report vulnerabilities, handle third-party dependencies, and receive security fixes."
+components: ["general"]
 slug: security_aspnetmvc6_aspnetmvc
 position: 3
 ---

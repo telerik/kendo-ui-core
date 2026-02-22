@@ -5,9 +5,9 @@ description: "Learn how to resize the nested calendar based on the width of the 
 slug: howto_use_resize_calendar_basedon_input_width_datepicker
 previous_url: /controls/editors/datepicker/how-to/resize-calendar-based-on-input-width
 tags: kendo, jquery, datepicker, resise, calendar, based, on, input, width
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment
@@ -42,9 +42,10 @@ The following example demonstrates how to achieve the desired scenario.
 ```dojo
     <div id="example">
       <div id="email-settings">
-        <input id="datepicker" value="10/10/2011" style="width:140px;" />
-        <input id="monthpicker" value="November 2011" style="width:180px" />
-      </div>
+       </div>
+       <input id="datepicker" value="10/10/2011" style="width:200px;" />
+       <input id="monthpicker" value="November 2011" style="width:190px" />
+      
       <script>
         $(document).ready(function() {
           // create DatePicker from input HTML element
@@ -80,9 +81,9 @@ The following example demonstrates how to achieve the desired scenario.
         #email-settings {
           height: 135px;
           width: 595px;
-          background: url('../content/web/datepicker/mailSettings.png') transparent no-repeat 0 0;
+          background: url('https://demos.telerik.com/kendo-ui/content/web/datepicker/mailSettings.png') transparent no-repeat 0 0;
         }
-        
+
         .k-calendar {
           overflow-x: scroll;
         }

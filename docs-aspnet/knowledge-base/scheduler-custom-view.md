@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/custom-view, /html-helpers/sc
 slug: scheduler-custom-view
 tags: scheduler, custom, view, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

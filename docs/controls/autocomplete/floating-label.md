@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: jQuery AutoComplete Documentation - Floating Label
 description: "Learn how to create and initialize a floating label for the Kendo UI for jQuery AutoComplete component."
+components: ["autocomplete"]
 slug: floating_label_kendoui_autocomplete_widget
 position: 9
 ---

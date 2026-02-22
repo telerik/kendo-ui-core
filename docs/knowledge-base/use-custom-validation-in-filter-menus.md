@@ -5,9 +5,9 @@ description: "Learn how to use custom validation in the filter menu of the jQuer
 previous_url: /controls/data-management/grid/how-to/filtering/use-custom-validation-in-filter-menus, /controls/editors/validator/how-to/use-custom-validation-in-grid-filter-menus
 slug: howto_gridfiltering_custom_validation_filter_menu_grid
 tags: use, custom, validation, filter, grid, menus
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

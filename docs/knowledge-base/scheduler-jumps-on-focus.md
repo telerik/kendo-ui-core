@@ -6,7 +6,7 @@ slug: scheduler_jumps_on_focus
 tags: telerik, progress, kendoui, scheduler, jumps, on, focus
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

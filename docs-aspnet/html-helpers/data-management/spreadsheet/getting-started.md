@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Spreadsheet component by following a complete step-by-step tutorial."
+components: ["spreadsheet"]
 slug: spreadsheet_getting_started
 position: 1
 ---
@@ -444,7 +445,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var spreadsheetReference = $("#spreadsheet").data("kendoSpreadsheet"); // spreadsheetReference is a reference to the existing instance of the helper.
         </script>
@@ -452,9 +453,9 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [Spreadsheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet#methods) to control the behavior of the widget.
 
-In this example, you will also see how to utilize the  [`Sheet API`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet) as well as the [`Range API`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) to customize the behavior of the Spreadsheet.
+    In this example, you will also see how to utilize the  [`Sheet API`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet) as well as the [`Range API`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) to customize the behavior of the Spreadsheet.
 
-    ```script
+    ```JS script
         <script>
             var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
             var sheet = spreadsheet.activeSheet(); // Select the currently active sheet.

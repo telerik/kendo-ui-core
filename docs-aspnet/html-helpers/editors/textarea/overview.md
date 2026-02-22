@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "How to use the TextArea component for {{ site.framework }}."
+components: ["textarea"]
 slug: htmlhelpers_overview_textarea
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Date Series
 page_title: jQuery Chart Documentation - Date Series
 description: "Get started with the jQuery Chart by Kendo UI and learn how to handle date series and date grouping."
+components: ["chart"]
 previous_url: /controls/charts/date-series
 slug: dateseries_charts_widget
 ---

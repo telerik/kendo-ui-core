@@ -8,7 +8,7 @@ tags: grid, editing, virtual, scroll, create
 previous_url: /knowledge-base/grid-error-with-createat-bottom-plues-scoll-virtual.md
 ticketid: 1137381
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

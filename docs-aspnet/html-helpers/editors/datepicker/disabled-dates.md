@@ -2,6 +2,7 @@
 title: Disabled Dates
 page_title: Disabled Dates
 description: "Get started with the {{ site.product }} DatePicker and learn how to disable specific dates in the widget."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_disableddates
 position: 2
 ---

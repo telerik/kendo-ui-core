@@ -2,6 +2,7 @@
 title: Overview
 page_title: Columns Overview
 description: "An overview the Telerik UI Grid component for {{ site.framework }} columns options."
+components: ["grid"]
 slug: htmlhelper_gridcolumns
 position: 1
 ---
@@ -97,7 +98,7 @@ Bound columns support many settings and amongst the most used are the following 
     </kendo-grid>
 ```
 {% endif %}
-```script
+```JS script
 <script>
     function calculateField(data) {
         return data.UnitPrice * data.UnitsInStock;
@@ -107,7 +108,7 @@ Bound columns support many settings and amongst the most used are the following 
 ```
 
 
-The [`Columns`](/api/kendo.mvc.ui.fluent/gridbuilder#columnssystemactionkendomvcuifluentgridcolumnfactoryt) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
+The [`Columns`](/api/kendo.mvc.ui.fluent/gridbuilder#columnssystemaction) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
 * A [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) which specifies the way the column is displayed.
 

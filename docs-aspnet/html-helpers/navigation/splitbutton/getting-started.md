@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} SplitButton component by following a complete step-by-step tutorial."
+components: ["splitbutton"]
 slug: aspnetcore_splitbutton_getting_started
 position: 1
 ---
@@ -50,7 +51,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
     <p>
 
     </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the SplitButton
@@ -235,7 +236,7 @@ You can reference the SplitButton instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var splitbuttonReference = $("#timeSplitButton").data("kendoSplitButton"); // splitbuttonReference is a reference to the existing timeSplitButton instance of the helper.
     </script>
@@ -243,7 +244,7 @@ You can reference the SplitButton instances that you have created and build on t
 
 1. Use the [SplitButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitbutton#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the splitbutton.
 
-    ```script
+    ```JS script
     <script>
         var splitbuttonReference = $("#timeSplitButton").data("kendoSplitButton"); // splitbuttonReference is a reference to the existing timeSplitButton instance of the helper.
         splitbuttonReference.enable(false); // Disable the splitbutton.

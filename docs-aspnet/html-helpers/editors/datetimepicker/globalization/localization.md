@@ -2,13 +2,14 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and translate its messages for different culture locales."
+components: ["datetimepicker"]
 slug: localization_datetimepicker_aspnetcore
 position: 2
 ---
 {% if site.core %}
-    {% assign Culture = "/api/Kendo.Mvc.UI.Fluent/DateTimePickerBuilder#culturesystemstring" %}
+    {% assign Culture = "/api/kendo.mvc.ui.fluent/datetimepickerbuilder#culturesystemstring" %}
 {% else %}
-    {% assign Culture = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#culturesystemstring" %}
+    {% assign Culture = "/api/kendo.mvc.ui.fluent/datepickerbuilderbase#culturesystemstring" %}
 {% endif %}
 
 # Localization

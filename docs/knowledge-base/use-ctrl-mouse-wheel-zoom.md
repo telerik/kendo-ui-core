@@ -5,9 +5,9 @@ description: "Learn how to zoom the Kendo UI Diagram widget in and out by using 
 slug: howto_ctrlmousewheeltozoom_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/use-ctrl-mouse-wheel-zoom
 tags: kendo, jquery, diagram, zoom, on, ctrl, keypress, only
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

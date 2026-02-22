@@ -8,6 +8,7 @@ position:
 tags: ImageEditor, image, print, command
 ticketid: 1563917
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 

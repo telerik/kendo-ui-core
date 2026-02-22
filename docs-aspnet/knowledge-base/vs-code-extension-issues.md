@@ -6,6 +6,7 @@ page_title: Visual Studio Code Extension Issues
 slug: vs-code-extension-issues
 tags: vscode, extension, troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -31,8 +32,7 @@ If the extension does not work right (missing pages, not starting, and more), fo
     * on Mac, open `/Users/[user_name]/.local/share/`
 3. [Install](https://marketplace.visualstudio.com/items?itemName=TelerikInc.aspnetcoretemplatewizard) the extension again.
 
-If you see `Response status code does not indicate success: 401 (Logon failed.).`, then the `Nuget.Config` file in `%APPDATA%\NuGet` may contain invalid credentials or keys. For more information, refer to the [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#setup-with-nuget-cli) or [NuGet Setup with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}#integrating-ui-for-aspnet-core) articles.
-
+If you see `Response status code does not indicate success: 401 (Logon failed.).`, then the `Nuget.Config` file in `%APPDATA%\NuGet` may contain invalid credentials or keys. For more information, refer to the [NuGet Troubleshooting]({% slug troubleshooting_telerik_nuget %}) article.
 
 ## More {{ site.framework }} Resources
 

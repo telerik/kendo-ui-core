@@ -7,6 +7,7 @@ slug: gantt-update-successor-when-parent-end-changes
 tags: kendo, kendoui, gantt, successor, dependencies, update
 ticketid: 1606594 
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

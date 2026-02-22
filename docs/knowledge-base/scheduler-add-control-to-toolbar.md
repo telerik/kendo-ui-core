@@ -7,7 +7,7 @@ slug: scheduler-add-control-to-toolbar
 tags: add, control, scheduler, toolbar, dropdownlist, template
 ticketid: 1133588
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -63,8 +63,7 @@ To implement the scenario, use jQuery.
     dataSource: {
       transport: {
         read: {
-          dataType: "jsonp",
-          url: "https://demos.telerik.com/kendo-ui/service/Products",
+          url: "https://demos.telerik.com/service/v2/core/Products",
         }
       }
     }

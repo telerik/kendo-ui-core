@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TextArea Documentation - Getting Started with the TextArea
 description: "Get started with the jQuery TextArea by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["textarea"]
 slug: getting_started_kendoui_textarea
 position: 1
 ---
@@ -95,8 +96,4 @@ The TextArea enables you to configure the label by using the [`label`](https://d
 * [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

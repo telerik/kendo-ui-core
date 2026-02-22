@@ -6,6 +6,7 @@ page_title: Selecting MultiSelect Items When Holding Shift Button
 slug: multiselect-select-multiple-items-shift-is-down
 tags: multiselect, select, many, items, when, shift, key, button, hold
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -29,22 +30,22 @@ How can I select one item in the MultiSelect and then, if the shift button is he
 
 * Set a handler for the [Select](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/events/select) event
 
-```
+```Razor
 .Events(ev=>ev.Select("onSelect"))
 ```
 
 * Initialize a variable, the value of which will indicate that the shift button is down.
 
-```
+```JS
 var isShiftDown = false;
-        window.onmousemove = function (e) {
-            if (e.shiftKey) {
-                isShiftDown = true;
-            }
-            else {
-                isShiftDown = false;
-            }
-        }
+window.onmousemove = function (e) {
+    if (e.shiftKey) {
+        isShiftDown = true;
+    }
+    else {
+        isShiftDown = false;
+    }
+}
 ```
 
 * Initialize two variables that hold as value the indexes of the selected elements. After the first select get the index of the first element. If the shift button is held down get the offset-index for the second element.
@@ -53,7 +54,7 @@ var isShiftDown = false;
 
 * Check if the first index is smaller than the second one, if not change their values.
 
-```
+```JS
   if (firstIndex > secondIndex) { 
         var temp = firstIndex;
         firstIndex = secondIndex
@@ -83,7 +84,7 @@ Example:
           )
         )
 ```
-```script.js
+```JS script.js
     var isShiftDown = false;
     window.onmousemove = function (e) {
         if (e.shiftKey) {

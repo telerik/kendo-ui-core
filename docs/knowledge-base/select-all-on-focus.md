@@ -5,9 +5,9 @@ description: "Learn how to select all the text when on focus in the Kendo UI Num
 previous_url: /aspmvc/web/numerictextbox/how-to/select-all-on-focus, /asp-mvc/web/numerictextbox/how-to/select-all-on-focus, /controls/editors/numerictextbox/how-to/select-all-on-focus
 slug: howto_select_all_texton_focus_numerictextbox
 tags: telerik, kendo, jquery, numerictextbox, select, all, text, when, on, focus
-component: numerictextbox
 type: how-to
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

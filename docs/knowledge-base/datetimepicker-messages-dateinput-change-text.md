@@ -7,6 +7,7 @@ slug: datetimepicker-messages-dateinput-change-text
 tags: datetimepicker, messages, dateinput, change, text, year, month, day, hour, minute, second, dayperiod, datepicker
 ticketid: 1350298
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ---
 
 ## Environment

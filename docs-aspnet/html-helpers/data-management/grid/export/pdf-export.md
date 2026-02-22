@@ -2,13 +2,14 @@
 title: PDF Export
 page_title: PDF Export
 description: "Export the Telerik UI Grid for {{ site.framework }} to PDF."
+components: ["grid"]
 slug: pdfexport_gridhelper_aspnetcore
 position: 3
 ---
 {% if site.core %}
-    {% assign pdfbuilder = "GridPdfSettingsBuilder" %}
+    {% assign pdfbuilder = "gridpdfsettingsbuilder" %}
 {% else %}
-    {% assign pdfbuilder = "PDFSettingsBuilder" %}
+    {% assign pdfbuilder = "pdfsettingsbuilder" %}
 {% endif %}
 
 # PDF Export
@@ -168,7 +169,7 @@ The Grid supports the following page template variables:
 * `pageNum`&mdash;Specifies the current page number.
 * `totalPages`&mdash;Specifies the total number of pages.
 
-```Template
+```JS Template
     <script type="x/kendo-template" id="page-template">
         <div class="page-template">
             <div class="header">
@@ -219,7 +220,7 @@ The Grid supports the following page template variables:
 ```
 {% endif %}
 
-```Styles
+```CSS Styles
     <style>
         body {
             font-family: "DejaVu Serif";
@@ -322,7 +323,7 @@ To send the generated file to a remote service, use the `ProxyURL()` and `ForceP
     </kendo-grid>
 ```
 {% endif %}
-```SampleProxy
+```C# SampleProxy
     [HttpPost]
     public ActionResult Pdf_Export_Save(string contentType, string base64, string fileName)
     {
@@ -453,6 +454,7 @@ It is also important to understand the difference between .Hidden() and .Visible
 
 ## Known Limitations
 
+* During export, the Grid initializes a new instance of its DataSource based on the original configuration. This triggers an additional `read` request to fetch the data, regardless of whether the [`AllPages`](#exporting-all-pages) option is enabled or disabled. The behavior ensures that the export process does not alter the state of the original DataSource.
 * All [known limitations](https://docs.telerik.com/kendo-ui/framework/drawing/limitations-browser-support) of the Kendo UI for jQuery HTML Drawing module apply.
 * Exporting a hierarchical Grid is not supported.
 * PDF export is not supported when the Grid has a locked (frozen) column enabled. If the algorithm decides to move a node to the next page, all DOM nodes that follow it will be also moved although there might be enough space for part of them on the current page.
@@ -467,6 +469,9 @@ It is also important to understand the difference between .Hidden() and .Visible
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)
 * [Rendering and Dimensions of the Grid component for {{ site.framework }}]({% slug width_grid_aspnetcore %})
 * [Adaptive Rendering of the Grid component for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})

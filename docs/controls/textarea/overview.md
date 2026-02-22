@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TextArea Documentation - TextArea Overview
 description: "Get started with the jQuery TextArea by Kendo UI and learn how to create and initialize the component."
+components: ["textarea"]
 slug: overview_kendoui_textarea_widget
 position: 0
 ---

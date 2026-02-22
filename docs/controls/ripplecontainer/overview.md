@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery RippleContainer Documentation - RippleContainer Overview
 description: "Get started with the jQuery RippleContainer by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["ripplecontainer"]
 slug: overview_kendoui_ripplecontainer_widget
 position: 1
 ---

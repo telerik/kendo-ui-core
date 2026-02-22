@@ -2,6 +2,7 @@
 title: Reordering
 page_title: Reordering of Columns
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to implement columns that can be reordered by dragging and dropping."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_column_reordering
 position: 5
 ---

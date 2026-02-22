@@ -6,6 +6,7 @@ page_title: Adding Custom Column Popup Editor
 slug: custom-column-popup-editor
 tags: mvc, grid, editing, custom editor, popup, button, editor
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -33,7 +34,7 @@ How to add a custom popup editor for a column in the {{ site.product }} Grid?
 1. Add a button to the cell by creating a column template through the [`.ClientTemplateId()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/gridboundcolumnbuilder#clienttemplateidsystemstring) configuration option.
 1. To open the window, handle the `click` event of the button. To bind the editor to the current data item, use the [`bind()`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/bind) method.
 
-```Index.cshtml
+```Razor Index.cshtml
     // Window
     @(Html.Kendo().Window()
         .Name("window")
@@ -44,7 +45,7 @@ How to add a custom popup editor for a column in the {{ site.product }} Grid?
             @(Html.Kendo().Editor()
               .Name("editor")
               .HtmlAttributes(new {data_bind="value:ProductName"})
-            ) 
+            )
         </text>)
         .Actions(actions => actions
             .Minimize()
@@ -86,15 +87,15 @@ How to add a custom popup editor for a column in the {{ site.product }} Grid?
         )
     )
 ```
-```Script.js
+```JS script.js
     <script id="productNameTemplate" type="text/x-kendo-template">
         <div class='contentDivs'>
             #= ProductName #
         </div>
-        <button onClick='onClick(this)' class='editButtons class="k-button k-button-solid-base k-button-solid k-button-md   k-rounded-lg"' style='float:right'>
+        <button onClick='onClick(this)' class='editButtons class="k-button k-rounded-lg"' style='float:right'>
             Edit
         </button>
-    </script> 
+    </script>
 
     <script type="text/javascript">
         function onClick(button){
@@ -102,13 +103,13 @@ How to add a custom popup editor for a column in the {{ site.product }} Grid?
               var grid = $("#grid").data("kendoGrid");
               var editor = $("#editor").data("kendoEditor");
               var window = $("#window").data("kendoWindow");
-        
+
               var row = $(button).closest("tr"); // Get the closest row element.
               var dataItem = grid.dataItem(row); // Get the current data item.
-        
+
               kendo.bind(editor.element, dataItem); // Bind the editor to the corresponding data item.
               window.open().center(); // Open the window.
-        }    
+        }
     </script>
 ```
 

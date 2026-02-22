@@ -6,6 +6,7 @@ page_title: Notify Users of the Server Operations {{ site.product }} Grid Result
 slug: grid-message-on-crud-operations-completion
 tags: grid, message, crud, create, update, destroy, events, server, request, notification
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

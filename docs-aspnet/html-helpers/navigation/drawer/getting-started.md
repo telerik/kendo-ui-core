@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Drawer component by following a complete step-by-step tutorial."
+components: ["drawer"]
 slug: drawer_getting_started
 position: 1
 ---
@@ -347,7 +348,7 @@ You can reference the Drawer instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var drawerReference = $("#drawer").data("kendoDrawer"); // drawerReference is a reference to the existing instance of the helper.
     </script>
@@ -355,7 +356,7 @@ You can reference the Drawer instances that you have created and build on top of
 
 1. Use the [Drawer client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/drawer#methods) to control the behavior of the widget. In this example, you will use the `hide` method to hide the Drawer.
 
-    ```script
+    ```JS script
     <script>
         var drawerReference = $("#drawer").data("kendoDrawer"); // drawerReference is a reference to the existing instance of the helper.
         drawerReference.show(); // Show (expand) the Drawer instance.

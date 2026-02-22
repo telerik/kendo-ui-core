@@ -2,6 +2,7 @@
 title: Editing
 page_title: Kendo UI for jQuery TaskBoard Documentation - Editing
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn how to implement its editing functionality."
+components: ["taskboard"]
 slug: editing_kendoui_taskboard_widget
 position: 6
 ---
@@ -23,7 +24,7 @@ The following example demonstrates how to configure CRUD (Create, Read, Update, 
     <div id="taskBoard"></div>
 
     <script>
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         var priorities = new kendo.data.DataSource({
             data: [
@@ -151,25 +152,27 @@ The TaskBoard uses two different data source instances for its columns and cards
 > * Define the `id` field of the data items in `schema.model.id`. This ensures correct adding, editing, and deleting of items.
 > * Define the model fields.
 
-For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
+For more information on the DataSource schema configuration, refer to [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel).
 
 The following example demonstrates how to configure the data source of the columns.
 
+```
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     columns: {
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/columns"
+                url: crudServiceBaseUrl + "/taskboard/columns"
             },
             create: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/columns_create",
+                url: crudServiceBaseUrl + "/taskboard/columns_create",
                 method: "POST"
             },
             update: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/columns_update",
+                url: crudServiceBaseUrl + "/taskboard/columns_update",
                 method: "POST"
             },
             destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/columns_destroy",
+                url: crudServiceBaseUrl + "/taskboard/columns_destroy",
                 method: "POST"
             }
         },
@@ -185,24 +188,28 @@ The following example demonstrates how to configure the data source of the colum
             }
         }
     }
+```
 
 The following example demonstrates how to configure the data source of the cards.
 
+```
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
+    
     dataSource: {
         transport: {
             read: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard"
+                url: crudServiceBaseUrl + "/taskboard"
             },
             create: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/create",
+                url: crudServiceBaseUrl + "/taskboard/create",
                 method: "POST"
             },
             update: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/update",
+                url: crudServiceBaseUrl + "/taskboard/update",
                 method: "POST"
             },
             destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/taskboard/destroy",
+                url: crudServiceBaseUrl + "/taskboard/destroy",
                 method: "POST"
             }
         },
@@ -220,6 +227,7 @@ The following example demonstrates how to configure the data source of the cards
             }
         }
     }
+```
 
 
 ### Setting the Editable Option

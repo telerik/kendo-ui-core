@@ -7,6 +7,7 @@ slug: chart-overlay-bar-series
 tags: chart, visual
 ticketid: 1158675, 1154649
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

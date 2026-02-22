@@ -2,6 +2,7 @@
 title: Overview
 page_title: Export Overview
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to configure its export functionality."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_export_overview
 position: 1
 ---

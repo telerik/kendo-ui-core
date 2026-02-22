@@ -6,6 +6,7 @@ page_title: How to Handle Click Events on Tags of MultiSelect in Kendo UI
 slug: how-to-handle-click-events-on-multiselect-tags-kendo-ui
 tags: kendo-ui, multiselect, click-event, tags, custom-logic
 res_type: kb
+components: ["multiselect"]
 ticketid: 1670286
 ---
 

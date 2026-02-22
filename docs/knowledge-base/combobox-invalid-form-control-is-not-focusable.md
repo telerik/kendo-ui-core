@@ -6,6 +6,7 @@ page_title: Avoid the Invalid Form Control is Not Focusable Error - Kendo UI Com
 slug: combobox-invalid-form-control-is-not-focusable
 ticketid: 1397842
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

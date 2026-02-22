@@ -7,6 +7,7 @@ slug: grid-pagesize-relative-to-height
 tags: grid, page, size, pagesize, height, adjust
 ticketid: 1156556
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -86,9 +87,8 @@ This solution adjusts the pageSize of the Grid dataSource only when the window i
 
   $("#grid").kendoGrid({
     dataSource: {
-      type: "odata",
       transport: {
-        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+        read: "https://demos.telerik.com/service/v2/core/Orders"
       },
       schema: {
         model: {

@@ -5,9 +5,9 @@ description: "Learn how to customize the predefined Kendo UI for jQuery Dialogs.
 slug: overview_customizepredefineddialogs_widget
 previous_url: /controls/layout/dialog/how-to/customize-predefined-dialogs 
 tags: telerik, kendo, jquery, dialog, customize, predefined, dialogs 
-component: dialog
 type: how-to
 res_type: kb
+components: ["dialog"]
 ---
 
 ## Environment

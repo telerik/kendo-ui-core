@@ -5,9 +5,9 @@ description: "Learn how to detect the Kendo UI DropDownList input change event."
 previous_url: /controls/editors/dropdownlist/how-to/detect-input-change-event, /controls/editors/dropdownlist/how-to/event-handling/detect-input-change-event
 slug: howto_detect_input_change_events_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, detect, input, change, events
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

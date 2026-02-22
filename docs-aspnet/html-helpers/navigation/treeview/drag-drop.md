@@ -2,13 +2,14 @@
 title: Dragging and Dropping
 page_title: TreeView Drag and Drop
 description: "Learn about the drag-and-drop functionality of the Telerik UI TreeView component for {{ site.framework }}."
+components: ["treeview"]
 slug: htmlhelpers_treeview_drag_drop_aspnetcore
 position: 6
 ---
 
 # Node Click-Move-Click
 
-As of {{site.product}} UI R2 SP1 2023, users can reorder the TreeView's nodes by using the click-move-click functionality. To enable the feature use the [`.DragAndDrop(dd=>dd.ClickMoveClick(true))`](/api/kendo.mvc.ui.fluent/draganddropbuilder#clickmoveclicksystemboolean) configuration option. To start moving the node, users can click on it, and then click again to place the node in its new position.
+As of {{site.product}} UI R2 SP1 2023, users can reorder the TreeView's nodes by using the click-move-click functionality. To enable the feature use the [`.DragAndDrop(dd=>dd.ClickMoveClick(true))`](/api/kendo.mvc.ui.fluent/treeviewdraganddropsettingsbuilder#clickmoveclicksystemboolean) configuration option. To start moving the node, users can click on it, and then click again to place the node in its new position.
 
 ```HtmlHelper
     @(Html.Kendo().TreeView()

@@ -4,9 +4,9 @@ page_title: Show Tooltip for Header Titles - Kendo UI for jQuery Data Grid
 description: "An example demonstrating how to show a Kendo UI Tooltip for the Kendo UI Grid headers."
 slug: grid-show-full-header-title-on-hover
 tags: grid, show, display, tooltip, header, title, field
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

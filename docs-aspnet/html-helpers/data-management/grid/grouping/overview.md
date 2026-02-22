@@ -2,6 +2,7 @@
 title: Overview
 page_title: Grouping
 description: "Learn how to enable the grouping functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_grouping
 position: 1
 ---
@@ -54,5 +55,8 @@ You can also render groups by setting group expressions in the DataSource of the
 {% endif %}
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Grouping with Aggregates by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
 * [Server-Side API](/api/grid)

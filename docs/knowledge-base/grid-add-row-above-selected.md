@@ -7,7 +7,7 @@ slug: grid-add-row-above-selected
 tags: grid, add, row
 ticketid: 1554656
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -29,7 +29,7 @@ How can I add add a row above the selected row in the Grid?
 
 2. Find the index of the currently selected Grid row.
 
-3. Then, you could use the [dataSource insert](/api/javascript/data/datasource/methods/insert) method. 
+3. Then, you could use the [dataSource insert](/api/javascript/data/datasource/methods/insert) method.
 
 ```dojo
   <div id="grid"></div>
@@ -43,30 +43,32 @@ How can I add add a row above the selected row in the Grid?
       var newRow = grid.items().filter("[data-uid='" + newItem.uid + "']");
       grid.editRow(newRow);
     }
-    var crudServiceBaseUrl = "//demos.telerik.com/kendo-ui/service",
-        dataSource = new kendo.data.DataSource({
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+      dataSource = new kendo.data.DataSource({
           transport: {
-            read:  {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
-            },
-            update: {
-              url: crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
-            },
-            destroy: {
-              url: crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
-            },
-            create: {
-              url: crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
-            },
-            parameterMap: function(options, operation) {
-              if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+              read:  {
+                  url: crudServiceBaseUrl + "/Products"
+              },
+              update: {
+                  url: crudServiceBaseUrl + "/Products/Update",
+                  type: "POST",
+          		contentType: "application/json"
+              },
+              destroy: {
+                  url: crudServiceBaseUrl + "/Products/Destroy",
+                  type: "POST",
+          		contentType: "application/json"
+              },
+              create: {
+                  url: crudServiceBaseUrl + "/Products/Create",
+                  type: "POST",
+          		contentType: "application/json"
+              },
+              parameterMap: function(options, operation) {
+                  if (operation !== "read" && options.models) {
+                      return kendo.stringify(options.models);
+                  }
               }
-            }
           },
           batch: true,
           pageSize: 20,
@@ -91,7 +93,7 @@ How can I add add a row above the selected row in the Grid?
       selectable: true,
       toolbar: [
         {
-          template: '<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-primary tton-solid-primary" onclick="return toolbar_click()">custom Add Command</button>'
+          template: '<button class="k-button k-button-rectangle k-button-primary" onclick="return toolbar_click()">custom Add Command</button>'
         },
         "create"
       ],

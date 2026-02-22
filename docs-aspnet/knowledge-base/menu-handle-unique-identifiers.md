@@ -6,6 +6,7 @@ previous_url: /helpers/navigation/menu/how-to/handle-unique-identifiers, /html-h
 slug: menu-handle-unique-identifiers
 tags: menu, items, select
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

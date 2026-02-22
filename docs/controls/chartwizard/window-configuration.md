@@ -2,13 +2,14 @@
 title: Window Configuration
 page_title: jQuery ChartWizard Documentation - Window Configuration
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn more about the supported Window settings."
+components: ["chartwizard"]
 slug: window_kendoui_chartwizard
 position: 5
 ---
 
 # Window Configuration
 
-To configure the Chart Wizard Window utilize the [window](/api/javascript/ui/chartwizard/configuration/window) object and set the options provided by the nested [Window](/api/javascript/ui/window/) component.
+To configure the Chart Wizard Window utilize the [window](/api/javascript/ui/chartwizard/configuration/window) object and set the options provided by the nested [Window](/api/javascript/ui/window) component.
 
 The following example demonstrates how to customize the ChartWizard window.
 

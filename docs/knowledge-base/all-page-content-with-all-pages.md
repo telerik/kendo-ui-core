@@ -5,9 +5,9 @@ description: "Learn how to export the whole content of the Kendo UI Grid for jQu
 previous_url: /controls/data-management/grid/how-to/pdf-export/all-page-content-with-all-pages
 slug: howto_export_allpagesand_full_page_content_pdf_grid
 tags: grid, export, pages, full, content
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -139,10 +139,10 @@ The following example demonstrates how to export all Grid pages and their full p
           allPages: true
         },
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
             read: {
-              url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+              url: "https://demos.telerik.com/service/v2/odata/Employees",
             }
           },
           pageSize: 5

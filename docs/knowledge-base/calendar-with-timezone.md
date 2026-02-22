@@ -6,8 +6,8 @@ type: how-to
 slug: calendar-with-timezone
 tags: kendo, ui, calendar, timezone, time, zone, current, today
 res_type: kb
+components: ["calendar"]
 ticketid: 1463800
-component: calendar
 ---
 
 ## Environment

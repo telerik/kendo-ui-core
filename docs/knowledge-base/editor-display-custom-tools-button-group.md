@@ -7,7 +7,7 @@ slug: editor-display-custom-tools-button-group
 tags: editor, display, appearance, CSS, custom, tools, button, group
 ticketid: 920475
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

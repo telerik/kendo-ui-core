@@ -5,9 +5,9 @@ description: "Learn how to access a MultiDimensional eXpressions (MDS) query in 
 previous_url: /controls/data-management/pivotgrid/how-to/access-mdx-query, /controls/data-management/pivotgrid/how-to/dimensions/access-mdx-query
 slug: howto_access_mdx_query_pivotgrid
 tags: kendoui, pivotgrid, access, mdx, query
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -60,7 +60,7 @@ To achieve this behavior, access the generated [MDX Query](https://en.wikipedia.
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "https://demos.telerik.com/olap/msmdpump.dll",
+                        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                       parameterMap: function(options, type) {
                         var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
 

@@ -2,6 +2,7 @@
 title: Installation Options
 page_title: Download and Installation
 description: "Get started with {{ site.product }} and learn about the available installation approaches."
+components: ["general"]
 previous_url: /getting-started/installation/overview-download, /getting-started/installation/overview, /installation-mvc/overview, /installation/overview-download
 slug: downloadinstall_aspnetcore
 position: 2

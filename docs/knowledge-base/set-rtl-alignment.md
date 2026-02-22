@@ -5,9 +5,9 @@ description: "Learn how to set an RTL alignment to a Kendo UI Chart component."
 previous_url: /controls/charts/how-to/set-rtl-alignment, /controls/charts/how-to/appearance/set-rtl-alignment
 slug: howto_setrtlalignment_charts
 tags: chart, achieve, rtl, alignment, using, drawing, api
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

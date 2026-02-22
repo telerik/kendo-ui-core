@@ -7,7 +7,7 @@ slug: dropdownlist-reloading-options-in-scheduler-edit-form
 tags: kendoui, kendo, dropdownlist, scheduler, edit, data, options, change
 ticketid: 1118178
 res_type: kb
-component: dropdownlist
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -50,8 +50,8 @@ Implement an event handler for the [`edit`](https://docs.telerik.com/kendo-ui/ap
   		}
 
   		$("#scheduler").kendoScheduler({
-  			date: new Date("2022/6/13"),
-  			startTime: new Date("2022/6/13 07:00 AM"),
+  			date: new Date("2025/6/13"),
+  			startTime: new Date("2025/6/13 07:00 AM"),
   			height: 600,
   			views: [
   				"day",
@@ -64,26 +64,28 @@ Implement an event handler for the [`edit`](https://docs.telerik.com/kendo-ui/ap
   			timezone: "Etc/UTC",
   			dataSource: {
   				batch: true,
-  				transport: {
-  					read: {
-  						url: "https://demos.telerik.com/kendo-ui/service/tasks",
-  						dataType: "jsonp"
-  					},
-  					update: {
-  						url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-  						dataType: "jsonp"
-  					},
-  					create: {
-  						url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-  						dataType: "jsonp"
-  					},
-  					destroy: {
-  						url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-  						dataType: "jsonp"
-  					},
+  				transport: {  					
+                	read: {
+                	    url: "https://demos.telerik.com/service/v2/core/tasks"
+                	},
+                	update: {
+                	    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                	    type: "POST",
+                	    contentType: "application/json"
+                	},
+                	create: {
+                	    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                	    type: "POST",
+                	    contentType: "application/json"
+                	},
+                	destroy: {
+                	    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                	    type: "POST",
+                	    contentType: "application/json"
+                	},
   					parameterMap: function(options, operation) {
   						if (operation !== "read" && options.models) {
-  							return {models: kendo.stringify(options.models)};
+  							return kendo.stringify(options.models);
   						}
   					}
   				},

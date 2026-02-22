@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Learn how the data filtering in the Telerik UI AutoComplete component for {{ site.framework }} works."
+components: ["autocomplete"]
 slug: htmlhelpers_autocomplete_filtering_aspnetcore
 position: 5
 ---
@@ -53,7 +54,7 @@ The following example demonstrates how to configure AutoComplete for Server Filt
 </kendo-autocomplete>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function onAdditionalData() {
             return {

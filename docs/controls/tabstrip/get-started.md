@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TabStrip Documentation - Getting Started with the TabStrip
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to initialize the component."
+components: ["tabstrip"]
 slug: getting_started_kendoui_tabstrip_widget
 position: 1
 ---
@@ -107,8 +108,4 @@ For more information about the alternative approach to load the content, refer t
 * [JavaScript API Reference of the TabStrip](/api/javascript/ui/tabstrip)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

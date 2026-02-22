@@ -6,6 +6,7 @@ page_title: Use the MultiSelect as an Editor in the Grid
 slug: grid-multiselect-as-editor
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, multiselect-editor, multiselect
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

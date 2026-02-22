@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ColorPicker Documentation - ColorPicker Overview
 description: "Get started with the jQuery ColorPicker by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["colorpicker"]
 slug: overview_kendoui_colorpicker_widget
 position: 1
 ---

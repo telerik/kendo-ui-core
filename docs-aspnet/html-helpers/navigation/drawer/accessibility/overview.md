@@ -2,7 +2,8 @@
 title: Overview
 page_title: Drawer Documentation | Drawer Accessibility
 description: "Get started with the {{ site.product }} Drawer and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_drawer
+components: ["drawer"]
+slug: htmlhelpers_drawer_accessibility
 position: 1
 ---
 

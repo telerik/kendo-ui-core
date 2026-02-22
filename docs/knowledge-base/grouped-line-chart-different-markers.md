@@ -5,9 +5,9 @@ description: "Learn how to set different marker types to each series in a groupe
 previous_url: /controls/charts/how-to/grouped-line-chart-different-markers, /controls/charts/how-to/appearance/grouped-line-chart-different-markers
 slug: howto_setdifrerentmarkers_forgroupedlinecharts_charts
 tags: chart, set, marker, type, grouped, line
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

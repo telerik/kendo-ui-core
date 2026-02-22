@@ -2,12 +2,13 @@
 title: Module Bundlers
 page_title: Module Bundlers - Kendo UI Third-Party Tools
 description: "Learn how to use the @progress/kendo-ui package with modern module bundlers like webpack, rollup, esbuild, and Vite's dev server)."
+components: ["general"]
 slug: module_bundlers_integration_kendoui
 ---
 
 # Module Bundlers
 
-The recommended approach to include Kendo UI is by using the NPM package.
+The recommended approach to include Kendo UI is by using the NPM package. For more information, refer to the [Installing with NPM](/intro/installation/npm) article. If you need specific instructions for working with Webpack, see the [Webpack Support]({% slug webpacksupport_integration_kendoui %}) article.
 
 Version 2023.3.718 of the `@progress/kendo-ui` package provides various improvements in the support for modern module bundlers. If you use an older version, consider upgrading to the latest one to take advantage of the improvements.
 
@@ -170,14 +171,6 @@ To set up the same with the module bundler you are using, refer to its documenta
 ## See Also
 
 * [Installing with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
-* [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
-* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
-* [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
-* [SystemJS Support]({% slug systemjs_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})
+* [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+

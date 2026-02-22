@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Breadcrumb Documentation - Keyboard Navigation
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["breadcrumb"]
 slug: keynav_kendoui_breadcrumb_widget
 position: 2
 ---
@@ -16,4 +17,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Breadcr
 
 * [Keyboard Navigation by the Breadcrumb (Demo)](https://demos.telerik.com/kendo-ui/breadcrumb/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Breadcrumb]({% slug accessibility_kendoui_breadcrumb_widget %})
+* [Accessibility in the Breadcrumb]({% slug jquery_breadcrumb_accessibility %})

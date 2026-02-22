@@ -2,6 +2,7 @@
 title: Getting Started with Telerik REPL
 page_title: Getting Started with Telerik REPL
 description: "Explore the features of the Telerik REPL server playground tool and learn how to use them when experimenting with the Telerik UI components."
+components: ["general"]
 slug: getting_started_repl_aspnetcore
 permalink: /getting-started/repl/repl-getting-started
 position: 2
@@ -17,7 +18,7 @@ By using the Telerik REPL for ASP.NET Core, you can write razor code that contai
 * [Rendering HTML](#rendering-html)
 * [Using Razor code blocks](#using-razor-code-blocks)
 * [Using Razor local methods](#using-razor-local-methods)
-* [Using Razor `@functions` directive](#using-razor-funcitons-directive)
+* [Using Razor `@functions` directive](#using-razor-the-functions-directive)
 
 To get a grasp of runnable examples that tackle different use-cases, see the [Starting Fast with Pre-Built Examples](https://www.telerik.com/aspnet-core-ui/repl/getting-started) article.
 
@@ -47,7 +48,7 @@ The basic snippets are listed in the Snippets section of the REPL Sidebar. You c
 
 By using the Telerik REPL for ASP.NET Core, you can render plain HTML:
 
-```
+```HTML
     <table>
     <tr>
         <th>Position</th>
@@ -71,7 +72,7 @@ By using the Telerik REPL for ASP.NET Core, you can render plain HTML:
 
 Razor code blocks start with `@` and are enclosed by `{}`:
 
-```
+```Razor
     @using System;
     @using System.Globalization;
 
@@ -87,7 +88,7 @@ Razor code blocks start with `@` and are enclosed by `{}`:
 
 In code blocks, you can declare local functions with markup to serve as templating methods:
 
-```
+```Razor
     @{
         void RenderName(string name)
         {
@@ -103,7 +104,7 @@ In code blocks, you can declare local functions with markup to serve as templati
 
 The `@functions` directive enables you to add C# members (fields, properties, and methods) to the generated class. The following example demonstrates how to generate an HTML table from a collection by using the Telerik REPL for ASP.NET Core:
 
-```
+```Razor
     @using System.Linq.Expressions
     @using System.Text
     @using System.Reflection

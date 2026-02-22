@@ -2,9 +2,10 @@
 title:  Model Binding
 page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 previous_url: /helpers/navigation/menu/binding/model-binding
 slug: htmlhelpers_menu_modelbinding_aspnetcore
-position: 2
+position: 3
 ---
 
 # Model Binding
@@ -13,7 +14,7 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
 
 1. Create a new action method and pass the **Categories** table as the model. The **Categories** has to be associated to the **Products** table.
 
-    ```Razor
+    ```C#
     public ActionResult Index()
     {
         NorthwindDataContext northwind = new NorthwindDataContext();
@@ -73,6 +74,6 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
 
 ## See Also
 
-* [Model Binding by the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/modelbinding)
-* [Binding to Custom Attributes by the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/menu-bind-attributes)
+* [Model Binding by the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/modelbinding)
+* [Binding to Custom Attributes by the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/menu-bind-attributes)
 * [Server-Side API](/api/menu)

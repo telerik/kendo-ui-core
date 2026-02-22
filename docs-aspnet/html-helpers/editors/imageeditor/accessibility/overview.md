@@ -2,7 +2,8 @@
 title: Overview
 page_title: ImageEditor Documentation | ImageEditor Accessibility
 description: "Get started with the {{ site.product }} ImageEditor and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_imageeditor
+components: ["imageeditor"]
+slug: htmlhelpers_imageeditor_accessibility
 position: 1
 ---
 
@@ -33,7 +34,7 @@ The ImageEditor is a composite component containing:
 
 The ToolBar follows the spec for the ToolBar component:
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 
 The image canvas must have an appropriate role and accessible name assigned:
@@ -46,7 +47,7 @@ The image canvas must have an appropriate role and accessible name assigned:
 
 The Edit pane (present on performing crop and resize of image) follows the spec for the Form component:
 
-[Form accessibility specification]({% slug htmlhelpers_form_aspnetcore_accessibility %})
+[Form accessibility specification]({% slug htmlhelpers_form_accessibility %})
 
 ## Resources
 

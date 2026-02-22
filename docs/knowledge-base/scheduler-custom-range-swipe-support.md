@@ -6,6 +6,7 @@ page_title: Scheduler Custom Range View and Swipe Support - Kendo UI Scheduler f
 slug: scheduler-custom-range-swipe
 tags: scheduler, custom, view, kendo, swipe, mobile
 res_type: kb
+components: ["scheduler"]
 ---
 ## Environment
 | Product | Version |
@@ -121,24 +122,26 @@ The following example will show you how you can create a custom view in the Sche
             batch: true,
             transport: {
               read: {
-                url: "https://demos.kendoui.com/service/tasks",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "https://demos.kendoui.com/service/tasks/update",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                  type: "POST",
+                  contentType: "application/json"
               },
               create: {
-                url: "https://demos.kendoui.com/service/tasks/create",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                  type: "POST",
+                  contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.kendoui.com/service/tasks/destroy",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                  type: "POST",
+                  contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

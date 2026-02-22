@@ -5,9 +5,9 @@ description: "Learn how to edit data in a Kendo UI for jQuery Window by using MV
 previous_url: /web/window/how-to/mvvm-editing-form, /controls/layout/window/how-to/MVVM/mvvm-editing-form
 slug: howto_usemvvmbinding_forwindowdataediting_mvvm_window
 tags: telerik, kendo, jquery, window, use, mvvm, for, data, editing
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment
@@ -46,7 +46,7 @@ The example below demonstrates how to achieve the desired scenario.
 
     <!-- template used to render the dataSource's data -->
     <script id="tmp" type="text/x-kendo-template">
-        <li data-uid="#: uid #"> ID: #: ProductID # Product Name: #: ProductName # <input data-role="button" type="button" value="edit" class="edit-button k-button k-button-sm k-rounded-md k-button-solid k-button-solid-base" /></li>
+        <li data-uid="#: uid #"> ID: #: ProductID # Product Name: #: ProductName # <input data-role="button" type="button" value="edit" class="edit-button k-button k-button-sm" /></li>
     </script>
 
     <!-- kendoWindow -->
@@ -78,37 +78,39 @@ The example below demonstrates how to achieve the desired scenario.
         </li>
         <li class="buttons">
           <!-- attach the click event handlers -->
-          <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base btnSave" data-bind="events: { click: sync }">Save</button>
-          <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base btnCancel" data-bind="events: { click: cancel }">Cancel</button>
+          <button class="k-button btnSave" data-bind="events: { click: sync }">Save</button>
+          <button class="k-button btnCancel" data-bind="events: { click: cancel }">Cancel</button>
         </li>
       </ul>
     </div>
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
       var validator;
       var viewModel = kendo.observable({
         //create a dataSource
         dataSource: new kendo.data.DataSource({
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
             },
             update: {
-              url: crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products/Update",
+                type: "POST",
+            contentType: "application/json"
             },
             destroy: {
-              url: crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products/Destroy",
+                type: "POST",
+            contentType: "application/json"
             },
             create: {
-              url: crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products/Create",
+                type: "POST",
+            contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },

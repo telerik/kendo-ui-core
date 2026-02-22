@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Kendo UI for jQuery TaskBoard Documentation - TaskBoard Data Binding
 description: "Get started with the Kendo UI for jQuery TaskBoard and bind the component to local or remote data."
+components: ["taskboard"]
 slug: databinding_kendoui_taskboard_widget
 position: 3
 ---
@@ -99,7 +100,7 @@ The following example demonstrates how to enable remote binding for the TaskBoar
      <div id="taskBoard"></div>
 
     <script>
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         $("#taskBoard").kendoTaskBoard({
             columnSettings: {

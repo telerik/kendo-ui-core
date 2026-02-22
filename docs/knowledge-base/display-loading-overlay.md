@@ -5,9 +5,9 @@ description: "Learn how to display a Kendo-UI-style loading indicator over the c
 slug: howto_displayloadingindicator_overwindow_window
 previous_url: /controls/layout/window/how-to/display-loading-overlay
 tags: telerik, kendo, jquery, window, display, loading, indicator, over, above
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

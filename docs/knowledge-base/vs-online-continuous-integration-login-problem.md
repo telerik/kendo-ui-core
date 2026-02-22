@@ -7,6 +7,7 @@ slug: vs-online-continuous-integration-login-problem
 tags: vs2017
 ticketid: 1106905
 res_type: kb
+components: ["dialog"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Slider Documentation - Keyboard Navigation
 description: "Get started with the jQuery Slider by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["slider"]
 slug: keynav_kendoui_slider
 position: 2
 ---
@@ -29,4 +30,4 @@ The user can focus the drag handles of the Slider through tabbing. When focused 
 
 * [Keyboard Navigation by the Slider (Demo)](https://demos.telerik.com/kendo-ui/slider/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Slider]({% slug accessibility_kendoui_slider %})
+* [Accessibility in the Slider]({% slug jquery_slider_accessibility %})

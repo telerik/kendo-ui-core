@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI AutoComplete component for {{ site.framework }}."
+components: ["autocomplete"]
 slug: events_autocomplete_aspnetcore
 position: 7
 ---

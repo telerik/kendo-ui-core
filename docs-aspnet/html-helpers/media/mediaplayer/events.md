@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI MediaPlayer component for {{ site.framework }}."
+components: ["mediaplayer"]
 slug: events_mediaplayer_aspnetcore
 position: 4
 ---

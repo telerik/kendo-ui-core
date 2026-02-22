@@ -2,6 +2,7 @@
 title: Checkboxes
 page_title: jQuery DropDownTree Documentation - Checkboxes
 description: "Get started with the jQuery DropDownTree by Kendo UI and manage the checked state of all nodes in the widget."
+components: ["dropdowntree"]
 slug: checkboxes_kendoui_dropdowntree
 position: 3
 ---
@@ -15,12 +16,11 @@ You can remove the tags (items) through their **X** button which will automatica
     <input id="dropdowntree"></input>
 
     <script>
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         var myDataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                url: serviceRoot + "/Employees",
-                dataType: "jsonp"
+                url: serviceRoot + "/Employees"
                 }
             },
             schema: {

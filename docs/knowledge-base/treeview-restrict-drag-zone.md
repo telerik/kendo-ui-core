@@ -6,7 +6,7 @@ page_title: Restrict Drag Zones - Kendo UI TreeView for jQuery
 slug: treeview-restrict-drag-zone
 tags: treeview, restrict, drag, zone
 res_type: kb
-component: treeview
+components: ["treeview"]
 ---
 
 ## Environment

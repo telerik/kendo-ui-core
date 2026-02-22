@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI DropDownButton HtmlHelper for {{ site.framework }}."
+components: ["dropdownbutton"]
 slug: htmlhelpers_dropdownbutton_aspnetcore_appearance
 position: 3
 ---
@@ -31,7 +32,7 @@ To control the size of the DropDownButton, configure the `Size()` method with an
 - `Large`
 - `None`
 
-The default `Size` value is `Medium`.
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownButton()
@@ -67,7 +68,7 @@ To manipulate the fill mode of the DropDownButton, configure the `FillMode()` me
 - `Flat`
 - `None`
 
-The default `FillMode` value is `Solid`.
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownButton()
@@ -110,7 +111,7 @@ To specify the theme color of the DropDownButton, configure the `ThemeColor()` m
 - `Light`
 - `Inverse`
 
-The default `ThemeColor` value is `Base`.
+> When not explicitly set, the applied theme controls the default theme color.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownButton()
@@ -147,7 +148,7 @@ To set the border radius of the DropDownButton, configure the `Rounded()` method
 - `Full`
 - `None`
 
-The default `Rounded` value is `Medium`.
+> When not explicitly set, the applied theme controls the default border radius.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownButton()
@@ -204,7 +205,7 @@ Enable the `ShowArrowButton()` option to render a down arrow in the DropDownButt
 {% endif %}
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

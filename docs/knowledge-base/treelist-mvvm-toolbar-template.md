@@ -7,6 +7,7 @@ slug: treelist-mvvm-toolbar-template
 tags: treelist, mvvm, toolbar, template
 ticketid: 1153897
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

@@ -14,6 +14,11 @@ Represents a filter applied to a column of a given [range](/api/javascript/sprea
 
 The constructor of the filter.
 
+
+<div class="meta-api-description">
+How do I initialize a custom filter for Kendo UI spreadsheet data? Initialize and set up a custom filtering instance for spreadsheet data by constructing the filter object, configuring its initial state, enabling bindings, and preparing it to build, apply, or evaluate dynamic filter criteria; supports creating and instantiating customized filter logic, controlling filter setup, enabling custom conditions, and configuring parameters to tailor spreadsheet data filtering behavior.
+</div>
+
 #### Parameters
 
 ##### options `Object`

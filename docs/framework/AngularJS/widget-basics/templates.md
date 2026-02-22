@@ -2,6 +2,7 @@
 title: Template Directives
 page_title: Template Directives | AngularJS Directives
 description: "Learn more about the AngularJS templates integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#using-template-directives
 slug: angularjs_integration_templates
 position: 6
@@ -42,8 +43,7 @@ The following table provides information on the template directives that are sup
        $scope.source = new kendo.data.DataSource({
          transport: {
            read: {
-             url: "https://demos.telerik.com/kendo-ui/service/products",
-             dataType: "jsonp"
+             url: "https://demos.telerik.com/service/v2/core/products"
            }
          },
          pageSize: 21

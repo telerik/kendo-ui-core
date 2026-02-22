@@ -7,7 +7,7 @@ slug: customize-specific-timeslots-scheduler
 tags: kendoui, kendo, scheduler, customize, style, disable
 ticketid: 1119501
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -57,7 +57,7 @@ How can I disable timeslots for a specific day and style them?
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
+          date: new Date("2025/6/13"),
           add: function(e) {
 
               var myDate = new Date("Thu Jun 13 2022 08:30:00 GMT+0300");
@@ -70,7 +70,7 @@ How can I disable timeslots for a specific day and style them?
             		return false;
               }
         	},
-          startTime: new Date("2022/6/13 07:00 AM"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           slotTemplate: "<div class='myClass' style='background:#=getColorBasedOnHour(date)#; height: 100%;width: 100%;'></div>",
           views: [
@@ -86,24 +86,26 @@ How can I disable timeslots for a specific day and style them?
             batch: true,
             transport: {
               read: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                  type: "POST",
+                  contentType: "application/json"
               },
               create: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                  type: "POST",
+                  contentType: "application/json"
               },
               destroy: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                  type: "POST",
+                  contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },
@@ -146,6 +148,6 @@ How can I disable timeslots for a specific day and style them?
 
 ## Notes
 
-For more information on modifying the appearance of slots, refer to [this example](https://docs.telerik.com/kendo-ui/controls/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
+For more information on modifying the appearance of slots, refer to [this example](https://docs.telerik.com/kendo-ui//knowledge-base/set-slot-background-color-using-slot-templates).
 
 The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views.slottemplate).

@@ -7,7 +7,7 @@ slug: spreadsheet-remove-undo-redo-buttons
 tags: spreadsheet, toolbar-buttons, undo, redo
 ticketid: 1135749
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

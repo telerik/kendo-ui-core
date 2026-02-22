@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RangeSlider Documentation - Getting Started with the RangeSlider
 description: "Get started with the jQuery RangeSlider by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["rangeslider"]
 slug: getting_started_kendoui_rangeslider
 position: 1
 ---
@@ -132,8 +133,3 @@ You can also choose how the tooltip for the currently selected range will be for
 * [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

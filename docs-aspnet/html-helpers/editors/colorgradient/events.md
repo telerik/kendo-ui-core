@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ColorGradient component for {{ site.framework }}."
+components: ["colorgradient"]
 slug: events_colorgradient_aspnetcore
 position: 4
 ---

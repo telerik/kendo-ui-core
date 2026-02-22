@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Review the available views in the FlatColorPicker."
+components: ["flatcolorpicker"]
 slug: htmlhelpers_views_flatcolorpickerhelper_aspnetcore
 position: 2
 ---
@@ -39,4 +40,4 @@ The FlatColorPicker is a component with a new and modern design. One of the avai
 ## See Also
 
 * [Views of the FlatColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/views)
-* [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
+* [JavaScript API Reference of the FlatColorPicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/flatcolorpicker)

@@ -2,6 +2,7 @@
 title: Dragging and Dropping
 page_title: jQuery Upload Documentation - Dragging and Dropping
 description: "Get started with the jQuery Upload by Kendo UI and learn how to implement the uploading of files by dragging and dropping them."
+components: ["upload"]
 slug: dragandrop_upload_widget
 position: 2
 ---

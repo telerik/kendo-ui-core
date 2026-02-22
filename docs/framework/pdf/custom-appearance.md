@@ -2,6 +2,7 @@
 title: Customizing the Appearance
 page_title: Customizing the Appearance - Kendo UI Drawing Library
 description: "Customize the PDF document with the Kendo UI Drawing library."
+components: ["general"]
 previous_url: /framework/drawing/drawing-dom#customizing-the-appearance, /framework/drawing/drawing-dom#using-the, /framework/drawing/drawing-dom#rendering-off-screen-content
 slug: customizingappearance_drawing
 position: 4

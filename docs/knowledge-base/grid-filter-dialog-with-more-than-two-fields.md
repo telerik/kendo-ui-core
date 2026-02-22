@@ -7,6 +7,7 @@ slug: grid-filter-dialog-with-more-than-two-fields
 tags: grid, filter, dialog, more, than, two, fields, multiple, filtering
 ticketid: 1147919
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

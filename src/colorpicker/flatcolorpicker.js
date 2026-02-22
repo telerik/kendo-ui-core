@@ -118,7 +118,7 @@ import "../kendo.html.button.js";
             columns: 10,
             tileSize: 24,
             messages   : MESSAGES,
-            size: "medium", // Fake styling option to accomplish colorpicker's size for textbox and button
+            // size: undefined, // Fake styling option to accomplish colorpicker's size for textbox and button
             _otOfPicker: true,
             _showAdaptiveView: false,
         },
@@ -198,7 +198,7 @@ import "../kendo.html.button.js";
             delete options.select;
             delete options.cancel;
             delete options._standalone;
-            
+
             const size = options._showAdaptiveView ? "large" : options.size;
 
             if (that._view) {
@@ -295,8 +295,8 @@ import "../kendo.html.button.js";
                 options = that.options,
                 buttonOptions = extend({}, options, {
                     fillMode: "flat",
-                    themeColor: "base",
-                    rounded: "medium",
+                    themeColor: undefined,
+                    rounded: undefined,
                     size: options._showAdaptiveView ? "large" : options.size
                 });
 
@@ -329,9 +329,9 @@ import "../kendo.html.button.js";
                     '</div>' +
                     '<div class="k-coloreditor-views k-vstack"></div>' +
                     (options.buttons ?
-                    '<div class="k-coloreditor-footer k-actions k-actions-end k-actions-horizontal">' +
-                        html.renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: "solid" })) +
-                        html.renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: "solid", themeColor: "primary" })) +
+                    '<div class="k-coloreditor-footer k-actions k-actions-start k-actions-horizontal">' +
+                        html.renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: null, themeColor: "primary" })) +
+                        html.renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: null })) +
                     '</div>'
                     : '')
                 )(options, buttonOptions);

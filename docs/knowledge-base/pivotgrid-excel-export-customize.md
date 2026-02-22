@@ -7,6 +7,7 @@ slug: pivotgrid-excel-export-customize
 tags: pivot, pivotgrid, excel, export, custom, cells, border, background, align
 ticketid: 1146696
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -98,7 +99,7 @@ The PivotGrid triggers its [`excelExport`](api/javascript/ui/pivotgrid/events/ex
             },
             excel: {
               fileName: "Kendo UI PivotGrid Export.xlsx",
-              proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+              proxyURL: "https://demos.telerik.com/service/v2/core/export",
               filterable: true
             },
             filterable: true,
@@ -115,7 +116,7 @@ The PivotGrid triggers its [`excelExport`](api/javascript/ui/pivotgrid/events/ex
                   catalog: "Adventure Works DW 2008R2",
                   cube: "Adventure Works"
                 },
-                read: "https://demos.telerik.com/olap/msmdpump.dll"
+                read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
               },
               schema: {
                 type: "xmla"

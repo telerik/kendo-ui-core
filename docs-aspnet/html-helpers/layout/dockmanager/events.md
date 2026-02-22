@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DockManager component for {{ site.framework }}."
+components: ["dockmanager"]
 slug: events_dockmanager_aspnetcore
 position: 3
 ---

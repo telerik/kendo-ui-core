@@ -7,6 +7,7 @@ slug: chart-show-content-in-donut-hole
 tags: chart, donut, drawing
 ticketid: 1338927
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

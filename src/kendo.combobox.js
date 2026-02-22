@@ -32,7 +32,6 @@ export const __meta__ = {
         Select = ui.Select,
         caret = kendo.caret,
         support = kendo.support,
-        placeholderSupported = support.placeholder,
         activeElement = kendo._activeElement,
         keys = kendo.keys,
         ns = ".kendoComboBox",
@@ -67,6 +66,13 @@ export const __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, that._focusHandler.bind(that));
 
+            if (!kendo.isPresent(options.readonly) && element.attr("readonly")) {
+                 options.readonly = true;
+            }
+            else if (!kendo.isPresent(options.readonly)) {
+                 options.readonly = false;
+            }
+
             options.placeholder = options.placeholder || element.attr("placeholder");
             options.inputMode = options.inputMode || element.attr("inputmode") || "text";
 
@@ -96,6 +102,13 @@ export const __meta__ = {
             that.requireValueMapper(that.options);
             that._initList();
 
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
+            that.listView.bind("dataBound", function() { that._aria(); });
+
             that._cascade();
 
             if (options.autoBind) {
@@ -110,10 +123,6 @@ export const __meta__ = {
                 if (text) {
                     that._setText(text);
                 }
-            }
-
-            if (!text) {
-                that._placeholder();
             }
 
             disabled = $(that.element).parents("fieldset").is(':disabled');
@@ -147,6 +156,7 @@ export const __meta__ = {
             delay: 200,
             dataTextField: "",
             dataValueField: "",
+            readonly: null,
             minLength: 1,
             enforceMinLength: false,
             height: 200,
@@ -174,10 +184,12 @@ export const __meta__ = {
             syncValueAndText: true,
             autoWidth: false,
             popup: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             label: null,
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
             clearOnEscape: true,
             _removeDataItems: true,
             _shouldRefresh: true
@@ -226,13 +238,28 @@ export const __meta__ = {
             Select.fn.destroy.call(that);
         },
 
+        _isEnabled: function() {
+            const that = this;
+            const element = that.element;
+
+            const isReadonly = element.prop(READONLY) || Boolean(that.element.attr("readonly"));
+            const isDisabled = element.prop(DISABLED) || Boolean(that.element.attr("disabled"));
+
+            return !isDisabled && !isReadonly;
+        },
+
         _popup: function() {
+            const that = this;
             Select.fn._popup.call(this);
-            this.popup.element.addClass("k-combobox-popup");
+            that.popup.element.addClass("k-combobox-popup");
         },
 
         _onActionSheetCreate: function() {
             var that = this;
+
+            that._unboundClick = true;
+            that.input
+                .on('click', that._arrowClick.bind(that));
 
             if (that.filterInput) {
                 that.filterInput
@@ -241,7 +268,7 @@ export const __meta__ = {
                     .on("paste" + ns, that._inputPaste.bind(that))
                     .attr({
                         "role": "combobox",
-                        "aria-expanded": false
+                        "aria-expanded": false,
                     });
 
                 that.popup.bind("activate", () => {
@@ -328,12 +355,19 @@ export const __meta__ = {
         },
 
         _arrowClick: function() {
-            this._toggle();
+            const that = this;
+
+            if (that._isEnabled()) {
+                that._toggle();
+            } else {
+                that._toggle(false);
+            }
         },
 
         _inputFocus: function() {
-            this.wrapper.addClass(FOCUSED);
-            this._placeholder(false);
+            const that = this;
+
+            that.wrapper.addClass(FOCUSED);
         },
 
         _inputFocusout: function(e) {
@@ -363,7 +397,6 @@ export const __meta__ = {
                 return;
             }
 
-            that._placeholder();
             that._valueBeforeCascade = that._old;
 
             if (isClearButton) {
@@ -431,7 +464,7 @@ export const __meta__ = {
             var that = this;
             var state = that._state;
             var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
-            var reinitialized = !that.ul.find(that.listView.focus()).length;
+            var reinitialized = !that._getUlElement().find(that.listView.focus()).length;
 
             if (that.popup.visible()) {
                 return;
@@ -490,7 +523,6 @@ export const __meta__ = {
 
                 that._accessor(value);
                 that.input.val(text || that.input.val());
-                that._placeholder();
             } else if (that._oldIndex === -1) {
                 that._oldIndex = that.selectedIndex;
             }
@@ -712,7 +744,6 @@ export const __meta__ = {
             this._setDomInputValue(text);
             this._accessor(value !== undefined ? value : text, idx);
 
-            this._placeholder();
             this._triggerCascade();
         },
 
@@ -770,7 +801,7 @@ export const __meta__ = {
 
             if (typeof word !== "string") {
                 if (word[0]) {
-                    word = that.dataSource.view()[List.inArray(word[0], that.ul[0])];
+                    word = that.dataSource.view()[List.inArray(word[0], that._getUlElement()[0])];
                 }
 
                 word = word ? that._text(word) : "";
@@ -902,7 +933,6 @@ export const __meta__ = {
                     if (that.selectedIndex === -1 && (!listView._selectedDataItems || !listView._selectedDataItems.length)) {
                         that._accessor(value);
                         that.input.val(value);
-                        that._placeholder(true);
                     }
 
                     if (that._userTriggered) {
@@ -984,7 +1014,8 @@ export const __meta__ = {
                 word = word.toLowerCase();
             }
 
-            if (!that.ul[0].firstChild) {
+            const ulElement = that._getUlElement();
+            if (!ulElement.length || !ulElement[0].firstChild) {
                 dataSource.one(CHANGE, function() {
                     if (dataSource.view()[0]) {
                         that.search(word);
@@ -1034,7 +1065,6 @@ export const __meta__ = {
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
-                    rounded: "none",
                 });
 
                 wrapper.append('<input ' + name + 'class="k-input-inner" type="text" autocomplete="' + AUTOCOMPLETEVALUE + '"/>')
@@ -1049,7 +1079,9 @@ export const __meta__ = {
 
             maxLength = parseInt(this.element.prop("maxlength") || this.element.attr("maxlength"), 10);
             if (maxLength > -1) {
-                input[0].maxLength = maxLength;
+                if (!kendo.isPresent(ComboBox._isServerRendered) || !ComboBox._isServerRendered) {
+                    input[0].maxLength = maxLength;
+                }
             }
 
             input.addClass(element.className)
@@ -1066,9 +1098,7 @@ export const __meta__ = {
                 .show();
 
             input.attr(kendo.attr("skip"), true);
-            if (placeholderSupported) {
-                input.attr("placeholder", that.options.placeholder);
-            }
+            input.attr("placeholder", that.options.placeholder);
 
             if (accessKey) {
                 element.accessKey = "";
@@ -1160,41 +1190,6 @@ export const __meta__ = {
             }
         },
 
-        _placeholder: function(show) {
-            if (placeholderSupported) {
-                return;
-            }
-
-            var that = this,
-                input = that.input,
-                placeholder = that.options.placeholder,
-                value;
-
-            if (placeholder) {
-                value = that.value();
-
-                if (show === undefined) {
-                    show = !value;
-                }
-
-                input.toggleClass("k-readonly", show);
-
-                if (!show) {
-                    if (!value) {
-                        placeholder = "";
-                    } else {
-                        return;
-                    }
-                }
-
-                input.val(placeholder);
-
-                if (!placeholder && input[0] === activeElement()) {
-                    caret(input[0], 0, 0);
-                }
-            }
-        },
-
         _search: function() {
             var that = this;
 
@@ -1268,7 +1263,6 @@ export const __meta__ = {
             this._oldIndex = this.selectedIndex;
 
             this.listView.setValue(value);
-            this._placeholder();
 
             this._initialIndex = null;
             this._presetValue = true;

@@ -5,9 +5,9 @@ description: "Learn how to match the visible column widths when hiding or showin
 previous_url: /controls/data-management/grid/how-to/Layout/auto-resize-grid-when-hiding-and-showing-columns
 slug: howto_resize_grid_when_hiding_columns_grid
 tags: grid, match, visible, column, width
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -59,9 +59,9 @@ To enforce a `min-width` style to the `table` element, use CSS:
         $(document).ready(function() {
           var grid = $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {
@@ -145,9 +145,9 @@ To access and loop through the columns, the `setGridWidth()` method:
 
           var grid = $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {

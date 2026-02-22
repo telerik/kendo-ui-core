@@ -2,13 +2,14 @@
 title: Animations
 page_title: Animations
 description: "Learn how to configure the animations for the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: htmlhelpers_window_animations_aspnetcore
 position: 10
 ---
 
 # Animations
 
-The Telerik UI Window for {{ site.framework }} allows you to customize the animation effects upon display via the [`Animation()`](/api/kendo.mvc.ui.fluent/windowbuilder#animationsystemactionkendomvcuifluentpopupanimationbuilder) configuration option.
+The Telerik UI Window for {{ site.framework }} allows you to customize the animation effects upon display via the [`Animation()`](/api/kendo.mvc.ui.fluent/windowbuilder#animationsystemboolean) configuration option.
 
 The Following example demonstrates how you can configure the [Animation effects](/api/Kendo.Mvc.UI/EffectsBuilder) for the Window:
 
@@ -49,6 +50,6 @@ The Following example demonstrates how you can configure the [Animation effects]
 
 ## See Also
 
-* [Adding Animation Effects to the Window (Demo)](https://demos.telerik.com/{{ site.framework }}/window/animation)
+* [Adding Animation Effects to the Window (Demo)](https://demos.telerik.com/{{ site.platform }}/window/animation)
 * [Server-Side API of the Telerik UI Window for {{ site.framework }}](/api/window)
-* [JavaScript API Reference of the Window](/api/javascript/ui/window)
+* [JavaScript API Reference of the Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window)

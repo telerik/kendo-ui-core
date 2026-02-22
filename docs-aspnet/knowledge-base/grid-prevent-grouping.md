@@ -6,6 +6,7 @@ page_title: Preventing the User from Removing the Initial Grid Groups, Changing 
 slug: grid-prevent-grouping
 tags: grid, prevent, initial, groups, order, remove, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -66,7 +67,7 @@ How can I prevent the user from moving the initially added groups of the Grid, c
         </kendo-grid>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onGroup(e) {
                 var currentGroups = e.sender.dataSource.group(); // Get the current groups.

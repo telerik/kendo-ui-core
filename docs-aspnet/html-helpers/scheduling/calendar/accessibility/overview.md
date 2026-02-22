@@ -2,7 +2,8 @@
 title: Overview
 page_title: Calendar Documentation | Calendar Accessibility
 description: "Get started with the {{ site.product }} Calendar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_calendar_aspnetcore
+components: ["calendar"]
+slug: htmlhelpers_calendar_accessibility
 position: 1
 ---
 
@@ -25,7 +26,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 ### Calendar Grid Element
 
 
-The Calendar Grid should follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid). It is a single-tab-stop component. All the button actions available for mouse users are also available via keyboard shortcuts.
+The Calendar Grid should follow the requirements for the `grid` role (https://www.w3.org/TR/wai-aria-1.2/#grid). It is a single-tab-stop component. All the button actions available for mouse users are also available via keyboard shortcuts.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

@@ -2,6 +2,7 @@
 title: Grid
 page_title: jQuery Sortable Documentation - Grid Integration
 description: "Get started with the jQuery Sortable by Kendo UI and integrate the component with the Kendo UI Grid."
+components: ["sortable"]
 previous_url: /controls/sortable/integration
 slug: integrationwith_grid_sortable
 ---
@@ -76,7 +77,7 @@ If the editing functionality of the Grid is enabled, use a more specific filter 
 
 If the Grid is configured to display details, use a selector that matches only the master Grid rows, for example, `filter: ">tbody >tr.k-master-row"`. In this way, the detail rows will not be draggable.
 
-For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/javascript/ui/sortable#events) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/kendo-ui/web/sortable/integration-grid.html).
+For more information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/javascript/ui/sortable#events) and the [demo on integrating the Sortable and the Grid](https://demos.telerik.com/kendo-ui/sortable/integration-grid).
 
 The editing functionality of the Kendo UI Grid is rendered through its [inline](https://demos.telerik.com/kendo-ui/grid/editing-inline), [popup](https://demos.telerik.com/kendo-ui/grid/editing-popup), or [batch](https://demos.telerik.com/kendo-ui/grid/editing) edit mode. The inline and popup modes are more common and easier to implement than the batch edit mode.
 

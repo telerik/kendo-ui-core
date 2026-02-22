@@ -5,9 +5,9 @@ description: "Learn how to create fixed headers on scroll in the Kendo UI Grid w
 previous_url: /controls/data-management/grid/how-to/Layout/fixed-headers-grid
 slug: howto_create_fixed_headers_grid
 tags: grid, fixed, header, scrolling
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -105,9 +105,8 @@ The following examples demonstrates the full code implementation.
         $("#employees").kendoGrid({
           dataBound:onDataBound,
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              read: "https://demos.telerik.com/service/v2/core/Customers"
             }
           },
           columns: [{

@@ -2,6 +2,7 @@
 title: Immutable Elements
 page_title: jQuery Editor Documentation - Immutable Elements
 description: "Get started with the jQuery Editor by Kendo UI and add HTML elements which cannot be edited by the user."
+components: ["editor"]
 previous_url: /controls/editor/immutable-elements
 slug: immutable_elements_editor_widget
 position: 10
@@ -33,7 +34,7 @@ To define the immutable elements in the content area, set the [`contenteditable`
 
 ## Serializing Immutables
 
-The [`immutables.serialization`](/api/javascript/ui/editor/configuration/immutables.serialization) option enables you to control the HTML representation of the immutable elements in the **viewHtml** dialog.
+The [`immutables.serialization`](/api/javascript/ui/editor/configuration/immutables#immutablesserialization) option enables you to control the HTML representation of the immutable elements in the **viewHtml** dialog.
 
 The `immutables.serialization` configuration option accepts the following parameters:
 
@@ -102,7 +103,7 @@ The `immutables.serialization` configuration option accepts the following parame
 
 ## Deserializing Immutables
 
-The [`immutables.deserialization`](/api/javascript/ui/editor/configuration/immutables.deserialization) does the opposite of the `immutables.serialization` one&mdash;it takes the HTML representation from the **viewHtml** dialog and alters the immutable DOM element based on the logic implemented in the callback function.
+The [`immutables.deserialization`](/api/javascript/ui/editor/configuration/immutables#immutablesdeserialization) does the opposite of the `immutables.serialization` one&mdash;it takes the HTML representation from the **viewHtml** dialog and alters the immutable DOM element based on the logic implemented in the callback function.
 
 The following example demonstrates how to use the `immutables.serialization` and `immutables.deserialization` options to expose the CSS `text-align` property in the **viewHtml** dialog so that the user is able to change it from the HTML code.
 

@@ -2,6 +2,7 @@
 title: Hint
 page_title: Hint
 description: "Disable the hint in the Telerik UI Sortable component for {{ site.framework }}."
+components: ["sortable"]
 slug: hint_sortable_aspnetcore
 position: 2
 ---

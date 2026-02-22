@@ -2,6 +2,7 @@
 title: Buttons
 page_title: Buttons
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to control the Calendar Popup behavior and leverage built-in buttons that will help you enhance the component's appearance."
+components: ["daterangepicker"]
 slug: buttons_daterangepicker_aspnetcore
 position: 7
 ---

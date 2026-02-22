@@ -6,6 +6,7 @@ page_title: Showing a Validation Summary in a Dialog
 slug: dialog-validation-summary
 tags: mvc, core, dialog, validation, summary
 res_type: kb
+components: ["general"]
 component: dialog
 ---
 
@@ -32,7 +33,7 @@ How can I show a validation summary in the {{ site.product }} Dialog?
 1. Get the reference of the validator and attach a handler to the `validate` event through the `.bind()` configuration method.
 1. Within the handler, assess if any errors have occurred by using the `.errors()` method. Based on the evaluation, append the error messages to the content of the Dialog and open it.
 
-```Index.cshtml
+```Razor Index.cshtml
     <form id="myform">
         <input name="username" required /> <br />
         <input name="password" required /> <br />
@@ -53,7 +54,7 @@ How can I show a validation summary in the {{ site.product }} Dialog?
             })
     )
 ```
-```Script.js
+```JS script.js
     $(document).ready(function(){
         var validator = $("#myform").kendoValidator().data("kendoValidator");
         validator.bind("validate", function (e) {        

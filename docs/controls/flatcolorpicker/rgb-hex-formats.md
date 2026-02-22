@@ -2,6 +2,7 @@
 title: Formats
 page_title: jQuery FlatColorPicker Documentation - FlatColorPicker RGB and HEX Formats
 description: "Check out the RGB and HEX input formats in the FlatColorPicker."
+components: ["flatcolorpicker"]
 slug: rgb_hex_kendoui_flatcolorpicker_widget
 position: 4
 ---

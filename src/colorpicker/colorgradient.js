@@ -65,7 +65,7 @@ import "../kendo.icons.js";
             Observable.fn.init.call(that);
         },
         _template: kendo.template(({ options, ns }) => {
-            let optionsSize = encode(options.size);
+            let optionsSize = options.size?  encode(options.size) : "";
             let optionsTabIndex = encode(options.tabindex);
 
             let vStackElement = "";
@@ -245,7 +245,7 @@ import "../kendo.icons.js";
             format: "hex",
             formats: ["rgb", "hex"],
             contrastTool: false,
-            size: "medium",
+            size: undefined,
             messages: {
                 contrastRatio: "Contrast ratio:",
                 fail: "Fail",

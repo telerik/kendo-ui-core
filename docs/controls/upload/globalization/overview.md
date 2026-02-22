@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Upload Documentation - Upload Globalization
 description: "Get started with the jQuery Upload by Kendo UI and learn about the globalization options it supports."
+components: ["upload"]
 slug: globalization_upload
 position: 1
 ---

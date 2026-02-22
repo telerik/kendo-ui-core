@@ -6,6 +6,7 @@ page_title: Programmatically Check Items in Kendo UI for jQuery Grid FilterMulti
 slug: iterate-check-items-kendo-ui-jquery-grid-filtermulticheck
 tags: kendo, ui, jquery, grid, filtermulticheck, iterate, check, items
 res_type: kb
+components: ["grid"]
 ticketid: 1682081
 ---
 
@@ -82,18 +83,17 @@ For a practical implementation, refer to the below runnable demo: [Kendo UI for 
 <div id="client"></div>
     <script>
       $(document).ready(function () {
-        var telerikWebServiceBase =
-          "https://demos.telerik.com/kendo-ui/service/";
+        var crudServiceBaseUrl =
+          "https://demos.telerik.com/service/v2/core/";
         $("#client").kendoGrid({
           dataSource: {
             transport: {
               read: {
-                url: telerikWebServiceBase + "/Products",
-                dataType: "jsonp",
+                url: crudServiceBaseUrl + "/Products"
               },
               parameterMap: function (options, operation) {
                 if (operation !== "read" && options.models) {
-                  return { models: kendo.stringify(options.models) };
+                  return kendo.stringify(options.models);
                 }
               },
             },

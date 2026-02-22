@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} Pager by Telerik UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["pager"]
 slug: keynav_aspnetcore_pager
 position: 2
 ---

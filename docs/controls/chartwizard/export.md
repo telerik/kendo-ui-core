@@ -2,15 +2,16 @@
 title: Export Options
 page_title: jQuery ChartWizard Documentation - Export Options
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn more about how you can export the chart to different formats."
+components: ["chartwizard"]
 slug: export_kendoui_chartwizard
 position: 4
 ---
 
 # Export Options
 
-To export the charts of the ChartWizard component to PDF, PNG, or SVG formats, set the desired properties in the [`exportOptions`](/api/javascript/ui/chartwizard/methods/exportoptions) object.
+To export the charts of the ChartWizard component to PDF, PNG, or SVG formats, set the desired properties in the [`exportOptions`](/api/javascript/ui/chartwizard/configuration/exportoptions) object.
 
-You can configure the parameters of the exported image by setting the image property to an [`exportOptions.image`](/api/javascript/ui/chartwizard/methods/exportoptions#image) object and the exported PDF file by utilizing the [`exportOptions.pdf`](/api/javascript/ui/chartwizard/methods/exportoptions#pdf) object.
+You can configure the parameters of the exported image by setting the image property to an [`exportOptions.image`](/api/javascript/ui/chartwizard/configuration/exportoptions.image) object and the exported PDF file by utilizing the [`exportOptions.pdf`](/api/javascript/ui/chartwizard/configuration/exportoptions.pdf) object.
 
 The following example demonstrates how to customize the export options of the component.
 

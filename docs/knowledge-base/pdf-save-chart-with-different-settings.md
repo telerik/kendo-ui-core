@@ -5,9 +5,9 @@ description: "Learn how to apply changes, visible only in the exported PDF."
 previous_url: /controls/charts/how-to/pdf-save-chart-with-different-settings, /charts/how-to/export/pdf-save-chart-with-different-settings
 slug: howto_apply_settings_for_PDF_only_charts
 tags: chart, apply, settings, for, exported, pdf, only
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -88,7 +88,7 @@ The following example demonstrates how to achieve this behavior.
           var options = {
             pdf: {
               fileName: "Kendo UI Chart Export.pdf",
-              proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+              proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             title: {
               text: "Gross domestic product growth \n /GDP annual %/",

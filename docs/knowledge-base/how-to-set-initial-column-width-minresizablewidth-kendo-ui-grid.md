@@ -6,6 +6,7 @@ page_title: How to Set Initial Column Width as minResizableWidth in Kendo UI Gri
 slug: how-to-set-initial-column-width-minresizablewidth-kendo-ui-grid
 tags: kendo-ui, grid, column, width, minresizablewidth
 res_type: kb
+components: ["grid"]
 ticketid: 1668462
 ---
 
@@ -56,9 +57,8 @@ Below is a runnable example where the width of the first column is changed:
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/core/Orders"
               },
               schema: {
                 model: {

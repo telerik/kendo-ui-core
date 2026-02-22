@@ -6,6 +6,7 @@ page_title: Excluding Columns from the Exported PDF File
 slug: grid-exclude-columns-during-pdf-export
 tags: aspnet, mvc, grid, change, columns, exclude, during, pdf, export, exporting
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

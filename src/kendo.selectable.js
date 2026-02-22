@@ -630,7 +630,11 @@ export const __meta__ = {
 
             cell.addClass(HOVER);
 
-            range = that.widget.selectRange();
+            range = that.widget?.selectRange();
+
+            if (!range) {
+                return;
+            }
 
             if (that.options.resetOnStart && range.end) {
                 return;

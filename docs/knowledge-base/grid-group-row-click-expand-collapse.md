@@ -7,6 +7,7 @@ slug: grid-group-row-click-expand-collapse
 tags: grid, group, click, expand, collapse, row
 ticketid: 1158121
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

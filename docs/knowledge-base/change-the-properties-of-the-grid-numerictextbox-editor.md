@@ -7,7 +7,7 @@ slug: change-the-properties-of-the-grid-numerictextbox-editor
 tags: grid, numerictextox, editing
 ticketid: 1121877
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

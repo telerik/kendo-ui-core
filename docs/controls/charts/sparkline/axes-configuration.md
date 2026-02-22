@@ -2,6 +2,7 @@
 title: Axes Configuration
 page_title: jQuery Sparkline Charts Documentation - Axes Configuration
 description: "Get started with the jQuery Sparkline by Kendo UI and learn how to configure their axes."
+components: ["chart"]
 slug: axes_kendoui_sparklinescharts
 position: 3
 ---
@@ -107,7 +108,7 @@ The following options are valid:
 
 If two or more categories fall within a base unit, its values are aggregated to display a single point.
 
-  span id="sparkline"></span>
+    <span id="sparkline"></span>
     <script>
     $("#sparkline").kendoSparkline({
         series: [{

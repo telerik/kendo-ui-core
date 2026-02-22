@@ -7,7 +7,7 @@ slug: listview-multiselection-drag-to-select-draggable
 tags: grid, listview, multipleselection, drag to select, draggable
 ticketid: 1116847
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Group
 page_title: jQuery ToolBar Documentation - Group Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the Group command type."
+components: ["toolbar"]
 previous_url: /controls/toolbar/group
 slug: group_toolbar_widget
 ---

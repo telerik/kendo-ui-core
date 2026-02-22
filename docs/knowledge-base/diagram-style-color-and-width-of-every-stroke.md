@@ -7,7 +7,7 @@ slug: diagram-custom-style-strokes
 tags: diagram, editing, stroke, style
 ticketid: 1498173
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

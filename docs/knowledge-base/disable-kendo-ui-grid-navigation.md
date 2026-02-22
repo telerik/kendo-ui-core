@@ -6,6 +6,7 @@ page_title: How to Disable Kendo UI for jQuery Grid and Its Navigation
 slug: disable-kendo-ui-grid-navigation
 tags: kendo, ui, grid, disable, navigation, jquery
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,7 +44,7 @@ $("#disable").click(function(){
     selectable: false
   });
 });
-``
+```
 
 This approach ensures that once a button is clicked, the Kendo UI for jQuery Grid appears greyed out and does not respond to user interactions such as selection and keyboard navigation. 
 

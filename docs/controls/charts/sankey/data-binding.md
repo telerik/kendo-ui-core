@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Sankey Diagram Documentation - Data Binding
 description: 'Learn how to bind your data to the Kendo UI for jQuery Sankey Diagram by using the provided data property.'
+components: ["chart"]
 slug: data_binding_kendoui_sankeychart
 position: 2
 ---

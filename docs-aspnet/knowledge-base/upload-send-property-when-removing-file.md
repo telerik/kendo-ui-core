@@ -6,6 +6,7 @@ page_title: Sending a Model Property to the Server When Removing a File from the
 slug: upload-send-property-when-removing-file
 tags: upload, asynchronous, remove, file, model, send, property, server
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 <table>
@@ -26,7 +27,7 @@ How can I pass a View Model property `Id` to the server when the user removes a 
 ## Solution
 1. Populate the Ids of the initially rendered files in hidden input elements on the same View, where the Upload component is defined.
 
-```View_HtmlHelper
+```HtmlHelper
   @model UserViewModel
 
   @foreach(var file in Model.Files)
@@ -54,7 +55,7 @@ How can I pass a View Model property `Id` to the server when the user removes a 
   )
 ```
 {% if site.core %}
-```View_TagHelper
+```TagHelper
     @addTagHelper *, Kendo.Mvc
     @model UserViewModel
 
@@ -94,7 +95,7 @@ How can I pass a View Model property `Id` to the server when the user removes a 
 
 2. Handle the `Remove` event of the Upload that triggers when an uploaded file is about to be removed. Get the `Id` of the file that will be removed from the respective hidden input, and send it to the server through the Upload Remove request.
 
-```View_HtmlHelper
+```HtmlHelper
   @model UserViewModel
 
   @foreach(var file in Model.Files)
@@ -109,7 +110,7 @@ How can I pass a View Model property `Id` to the server when the user removes a 
   )
 ```
 {% if site.core %}
-```View_TagHelper
+```TagHelper
     @addTagHelper *, Kendo.Mvc
     @model UserViewModel
 
@@ -122,7 +123,7 @@ How can I pass a View Model property `Id` to the server when the user removes a 
     </kendo-upload>
 ```
 {% endif %}
-```Script
+```JS script
 <script>
     function onRemove(e) {
         var fileName = e.files[0].name; // Get the name of the file that will be removed.

@@ -2,6 +2,7 @@
 title: Upgrading the Project API
 page_title: Upgrading the Project API
 description: "Learn how to analyze a Telerik UI for ASP.NET MVC application."
+components: ["installerandvsextensions"]
 slug: upgrade_api_analyzer_visualstudio_aspnetmvc
 position: 18
 previous_url: /getting-started/vs-integration/upgrade-api-analyzer, /vs-integration-mvc/upgrade-api-analyzer
@@ -59,7 +60,7 @@ For each change, the grid presents the following information:
 
 * **Difference**&mdash;Teh possible values are **Obsolete**, **Deleted**, or **Modified**. By default, the modified changes are not displayed because they indicate an internal update in the method or class which generally does not affect its function and does not require you to act. However, the modified changes become available when you update the filter of the **Difference** column.
 
-		![{{ site.product_short }} Displaying all found changes including the modifications](../vs-integration-mvc/images/upgrade-api-analyzer-displaying-changes.png)
+![{{ site.product_short }} Displaying all found changes including the modifications](../vs-integration/images/images-mvc/upgrade-api-analyzer-displaying-changes.png)
 
 * **Kind**&mdash;The possible values are **Type**, **Property**, **Method**, and **Field**.
 * **Node**&mdash;The name of the **Type**, **Property**, **Method**, or **Field** value.

@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery MediaPlayer Documentation - MediaPlayer Localization
 description: "Get started with the jQuery MediaPlayer by Kendo UI and translate its messages for different culture locales."
+components: ["mediaplayer"]
 slug: localization_mediaplayer_jquery
 position: 2
 ---
@@ -25,7 +26,7 @@ Similar to all Kendo UI widgets, the MediaPlayer allows you to add script files 
         },
         media: {
             title: "Herbert Grönemeyer - Der Weg",
-            source: "Video/video1.mp4"
+            source: "https://www.youtube.com/watch?v=UbkbVBNYZMc"
         }
     });
 </script>

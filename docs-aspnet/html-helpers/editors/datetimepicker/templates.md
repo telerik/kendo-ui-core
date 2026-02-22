@@ -2,6 +2,7 @@
 title: Templates
 page_title: DateTimePicker Templates
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to customize its templates."
+components: ["datetimepicker"]
 slug: templates_datetimepicker_aspnetcore
 position: 10
 ---
@@ -19,7 +20,7 @@ To customize the cell template in the **Month** view, use the [`MonthTemplate`](
 
 To modify the footer template of the DatePicker calendar, use the [`Footer`](/api/kendo.mvc.ui.fluent/datetimepickerbuilder#footersystemstring) property.
 
-For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug accessibility_datetimepicker_aspnetcore %}#wai-aria).
+For more information on customizing the `aria-label` text, refer to the article on [accessibility]({% slug htmlhelpers_datetimepicker_accessibility %}#wai-aria).
 
 ## See Also
 

@@ -2,6 +2,7 @@
 title: OS, Visual Studio, and Browser Support
 page_title: Operating System, Visual Studio and Browser Support
 description: "Get started with {{ site.product }} and learn which are the operating systems, Visual Studio versions, and Browsers that are supported by the framework components."
+components: ["general"]
 previous_url: /getting-started/prerequisites/os-support, /compatibility/os-support, /getting-started/prerequisites/visual-studio-support, /compatibility/visual-studio-support, /getting-started/prerequisites/browser-support, /compatibility/browser-support, /installation-mvc/system-requirements/browser-support.md
 slug: ossupport_core
 position: 1
@@ -38,7 +39,6 @@ The table below describes the minimum required version of Visual Studio based on
 | :---------------- | :---------------------------- |
 | 9.0               | Visual Studio 2022 |
 | 8.0               | Visual Studio 2022 |
-| 6.0               | Visual Studio 2022 | 
 
 >The R1 2024 release will be the last release that supports .NET versions older than 6.0. One year of outstanding support service will be provided for the R1 2024 release. For more details on the reasons for dropping the support of the old .NET versions, see this [blog post](https://www.telerik.com/blogs/embracing-future-product-update-enhanced-performance-and-security).
 
@@ -51,7 +51,7 @@ For a full list of the `.NET Core` requirements, see [.NET Core dependencies and
 {% else %}
 {{ site.product }} supports Visual Studio 2019 and later. The supported development environments also include:
 
-* [.NET Framework v4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
+* [.NET Framework v4.6.2](https://learn.microsoft.com/en-us/dotnet/framework/install/versions-and-dependencies#net-framework-462) and later.
 * [ASP.NET MVC 5](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started).
 * [IIS](https://www.iis.net/) 5 and later.
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx).

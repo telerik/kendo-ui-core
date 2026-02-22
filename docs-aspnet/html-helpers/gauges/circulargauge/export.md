@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Learn how to use the Export Options of the Telerik UI Circular Gauge component for {{ site.framework }}."
+components: ["circulargauge"]
 slug: export_circulargaugehelper_aspnetcore
 position: 4
 ---
@@ -10,17 +11,17 @@ position: 4
 
 The Telerik UI Circular Gauge for {{ site.framework }} export relies on the [Telerik UI DrawingAPI library](https://docs.telerik.com/kendo-ui/framework/drawing/dom-elements/overview). It enables you to export the content as:
 
-* [PDF](#export-to-pdf)
+* [PDF](#export-as-pdf)
 
-* [Image](#export-to-image)
+* [Image](#export-as-image)
 
-* [SVG](#export-to-svg)
+* [SVG](#export-as-svg)
 
 ## Export as PDF
 
 The circular gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/circulargauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-pdf k-button'>Export as PDF</button>
     
     @(Html.Kendo().CircularGauge()
@@ -37,7 +38,7 @@ The circular gauge allows you to retrieve the PDF representation of the content 
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -61,7 +62,7 @@ The circular gauge allows you to retrieve the PDF representation of the content 
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -74,7 +75,7 @@ The circular gauge allows you to retrieve the PDF representation of the content 
 
 The Circular Gauge allows you to retrieve the Image representation of the content through the [`exportImage` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/circulargauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper     
+```HtmlHelper
     <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().CircularGauge()
@@ -91,7 +92,7 @@ The Circular Gauge allows you to retrieve the Image representation of the conten
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -115,7 +116,7 @@ The Circular Gauge allows you to retrieve the Image representation of the conten
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -128,7 +129,7 @@ The Circular Gauge allows you to retrieve the Image representation of the conten
 
 The Circular Gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content through the [`exportSVG` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/circulargauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().CircularGauge()
@@ -145,7 +146,7 @@ The Circular Gauge allows you to retrieve the Scalable Vector Graphics (SVG) rep
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -169,7 +170,7 @@ The Circular Gauge allows you to retrieve the Scalable Vector Graphics (SVG) rep
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });

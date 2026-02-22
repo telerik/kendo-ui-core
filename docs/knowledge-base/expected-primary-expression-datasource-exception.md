@@ -7,6 +7,7 @@ slug: expected-primary-expression-datasource-exception
 tags: expected, primary, expression, exception, datasource, filter, mvc
 ticketid: 1135350
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

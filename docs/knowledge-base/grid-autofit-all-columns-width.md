@@ -7,6 +7,7 @@ slug: grid-autofit-all-columns-width
 tags: grid, autofit, auto, fit, automatically, columns, width, show, all, data
 ticketid: 1148885
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -49,9 +50,8 @@ If you have to only set the `checked` property of the columns to `true`, use the
       $(document).ready(function() {
         var grid = $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/core/Orders"
             },
             schema: {
               model: {

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Captcha Documentation - Getting Started with the Captcha
 description: "Get started with the jQuery Captcha by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["captcha"]
 slug: getting_started_kendoui_captcha_widget
 position: 1
 ---
@@ -12,21 +13,21 @@ This guide demonstrates how to get up and running with the Kendo UI for jQuery C
 
 After the completion of this guide, you will be able to achieve the following end result:
 
-```dojo
-    <input id="captcha" name="captcha" placeholder="Enter captcha" />
-    
-    <script>
-        $("#captcha").kendoCaptcha({
-            handler: "./reset",
-            audioHandler: function (args) {
-                args.success("./audio?captchaId=" + args.data.captchaId);
-            },
-            validationHandler: "./validate",
-            error: function (data) {
-                console.log(data);
-            }
-        })
-    </script>
+```html
+<input id="captcha" name="captcha" placeholder="Enter captcha" />
+
+<script>
+    $("#captcha").kendoCaptcha({
+        handler: "./reset",
+        audioHandler: function (args) {
+            args.success("./audio?captchaId=" + args.data.captchaId);
+        },
+        validationHandler: "./validate",
+        error: function (data) {
+            console.log(data);
+        }
+    })
+</script>
 ```
 
 > Due to CORS errors, the image and audio URLs for the Captcha cannot be accessed when running the example in the Dojo code runner. For a complete runnable example, check the [Captcha Overview demo](https://demos.telerik.com/kendo-ui/captcha/index).
@@ -124,8 +125,4 @@ The [`validationHandler`](/api/javascript/ui/captcha/configuration/validationhan
 * [JavaScript API Reference of the jQuery Captcha](/api/javascript/ui/captcha)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

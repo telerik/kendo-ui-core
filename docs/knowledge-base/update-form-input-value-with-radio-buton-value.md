@@ -7,6 +7,7 @@ slug: update-input-value-with-radiogroup-value-form
 tags: input, form, update, value, radiogroup, radiobutton
 ticketid: 1578406
 res_type: kb
+components: ["radiobutton"]
 ---
 
 ## Environment

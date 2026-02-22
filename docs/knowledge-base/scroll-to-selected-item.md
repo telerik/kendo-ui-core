@@ -5,9 +5,9 @@ description: "Learn how to scroll the Kendo UI for jQuery TreeView viewport to t
 slug: howto_scrolltoselecteditem_treeview
 previous_url: /controls/navigation/treeview/how-to/nodes/scroll-to-selected-item
 tags: telerik, kendo, jquery, treeview, scroll, to, selected, item
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

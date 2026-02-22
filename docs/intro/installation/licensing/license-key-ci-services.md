@@ -2,6 +2,7 @@
 title: Adding the License Key to CI Services
 page_title: Setting Up and Activating the Kendo UI for jQuery License Key Across Popular CI Services
 description: "Get started with Kendo UI for jQuery and learn how to set up and activate the Kendo UI for jQuery license key across popular CI services."
+components: ["general"]
 slug: license-key-to-ci-services
 published: True
 position: 4

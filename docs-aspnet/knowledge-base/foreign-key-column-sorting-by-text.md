@@ -7,6 +7,7 @@ tags: grid, enable, foreignkey, column, sort, text
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -35,7 +36,7 @@ To achieve the desired scenario:
 1. Add the complex model field that is corresponding for the ForeignKey column.
 1. Subscribe to the [`document.ready()`](http://learn.jquery.com/using-jquery-core/document-ready/) event, get a reference of the header for the ForeignKey column, and change the data-field attribute to point to the text field.
 
-```Model.cs
+```C# Model.cs
      public class ProductViewModel
      {
          public int ProductID
@@ -65,7 +66,7 @@ To achieve the desired scenario:
          public int? CategoryID { get; set; }
      }
 ```
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -102,7 +103,7 @@ To achieve the desired scenario:
             )
     )
 ```
-```Script.js
+```JS script.js
    <script type="text/javascript">
         $(function () {
             var grid = $("#grid").data("kendoGrid"); // Get the Grid's reference.

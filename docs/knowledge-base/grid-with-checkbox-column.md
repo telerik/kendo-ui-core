@@ -5,9 +5,9 @@ description: "Learn how to use checkbox column templates and perform editing."
 previous_url: /kendo-uimvc/web/grid/how-to/Templates/grid-with-checkbox-column, /controls/data-management/grid/how-to/Templates/grid-with-checkbox-column
 slug: howto_use_checkbox_column_templateand_edit_grid
 tags: grid, use, checkbox, column, templates, perform, edit
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -49,28 +49,30 @@ For more information on how to apply batch editing with a bound Boolean column, 
   </style>
    <div id="grid"></div>
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-          dataSource = new kendo.data.DataSource({
-            transport: {
-              read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: crudServiceBaseUrl + "/Products/Update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: crudServiceBaseUrl + "/Products/Destroy",
-                dataType: "jsonp"
-              },
-              create: {
-                url: crudServiceBaseUrl + "/Products/Create",
-                dataType: "jsonp"
-              },
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },
@@ -99,7 +101,7 @@ For more information on how to apply batch editing with a bound Boolean column, 
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
           { field: "UnitsInStock", title: "Units In Stock", width: 110 },
-          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox k-checkbox-md k-rounded-md" />', title: "Discontinued", width: 110, attributes: {class: "k-text-center"} },
+          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox" />', title: "Discontinued", width: 110, attributes: {class: "k-text-center"} },
           { command: "destroy", title: "&nbsp;", width: 100 }],
         editable: true
       });

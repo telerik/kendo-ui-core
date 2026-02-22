@@ -2,6 +2,7 @@
 title: Font Icons
 page_title: Font Icons - Sass Themes
 description: "Learn more about what icon fonts are and how to define, implement, and render the available Kendo UI Font Icons out of the supported list."
+components: ["general"]
 previous_url: /web/icons-web, /styles-and-layout/icons-web
 slug: webfonticons_kendoui_desktopwidgets
 position: 7
@@ -44,7 +45,7 @@ To use the Kendo UI font icons:
  The following example demonstrates how to render a font calendar icon.
  ```
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-font-icons/dist/index.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
     <span class="k-icon k-font-icon k-i-calendar"></span>
  ```
 
@@ -123,18 +124,3 @@ To accommodate an icon in your application, flip it by using the `k-flip-h` and 
 <span class="k-icon k-font-icon k-i-pencil k-flip-v"></span>
 <span class="k-icon k-font-icon k-i-pencil k-flip-h k-flip-v"></span>
 ```
-
-<style>
-    [data-is-dark='true'] .icons-frame {
-        color: #b5c2e3;
-        background-color: #11184b;
-        border: 2px dashed #1285de;
-    }
-
-    .icons-frame {
-        width: 100%;
-        height: 100%;
-        background-color: rgb(248, 248, 248);
-        border: 2px dashed rgb(235, 236, 238);
-    }
-</style>

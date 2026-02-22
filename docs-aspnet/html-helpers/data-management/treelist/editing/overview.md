@@ -2,6 +2,7 @@
 title: Overview
 page_title: Editing Overview
 description: "Learn how to configure the Telerik UI TreeList component for {{ site.framework }} and enable CRUD operations."
+components: ["treelist"]
 previous_url: /helpers/data-management/treelist/editing
 slug: editing_aspnetcore_treelist_helper
 position: 1
@@ -22,7 +23,7 @@ All CRUD operations of the TreeList component require a model with `Id` and `Par
 
  The following example demonstrates how to use the nullable model&mdash;items with ParentId `null` will be root items.
 
-```tab-HtmlHelper
+```HtmlHelper
  	.DataSource(dataSource => dataSource
 	...
 	.Model(m => {
@@ -47,14 +48,14 @@ All CRUD operations of the TreeList component require a model with `Id` and `Par
     </kendo-treelist>
 ```
 {% endif %}
-```tab-Model
+```Model
     public int? ReportsTo { get; set; }
 	public int EmployeeId { get; set; }
 ```
 
 The following example demonstrates how to use the non-nullable model&mdash;items with ParentId `string.empty` will be root items.
 
-```tab-HtmlHelper
+```HtmlHelper
  	.DataSource(dataSource => dataSource
 	...
 	.Model(m => {
@@ -79,7 +80,7 @@ The following example demonstrates how to use the non-nullable model&mdash;items
     </kendo-treelist>
 ```
 {% endif %}
-```tab-Model
+```Model
     public string ReportsTo { get; set; }
 	public string EmployeeId { get; set; }
 ```

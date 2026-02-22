@@ -5,9 +5,9 @@ description: "Learn how to enable the dragging of the handle of the Kendo UI for
 slug: howto_enable_dragging_switch
 previous_url: /controls/editors/switch/how-to/enable-dragging
 tags: telerik, kendo, jquery, switch, enable, dragging, drag, handle
-component: switch
 type: how-to
 res_type: kb
+components: ["switch"]
 ---
 
 ## Environment

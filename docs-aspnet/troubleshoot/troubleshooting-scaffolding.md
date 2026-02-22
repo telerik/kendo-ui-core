@@ -2,6 +2,7 @@
 title: Scaffolding
 page_title: Scaffolding Troubleshooting
 description: "Learn about the solutions of issues that may occur while using the Telerik UI Scaffolder Visual Studio Extension."
+components: ["general"]
 slug: troubleshooting_scaffolding_aspnetmvc
 position: 5
 ---
@@ -45,14 +46,6 @@ Make sure that a valid entity is selected.
 * [JavaScript Errors](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
 * [Performance Issues](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
 * [Content Security Policy](https://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
-* [Common Issues in Kendo UI Excel Export](https://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
 * [Common Issues in Kendo UI Charts](https://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
 * [Performance Issues in Kendo UI Widgets for Data Visualization](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/upload/troubleshoot/troubleshooting)
 * [Common Issues Related to Styling, Appearance, and Rendering](https://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

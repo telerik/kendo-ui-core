@@ -6,6 +6,7 @@ type: how-to
 slug: grid-excel-export-each-group-in-a-separate-sheet
 tags: grid, group, export, excel, sheet, separate, individual, page, rows
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,13 +46,12 @@ How can I export each group in a separate Excel sheet with the Kendo UI Grid?
         toolbar: ["excel"],
         excel: {
             fileName: "Kendo UI Grid Export.xlsx",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+            proxyURL: "https://demos.telerik.com/service/v2/core/export",
             allPages: true
         },
         dataSource: {
-            type: "odata",
             transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                read: "https://demos.telerik.com/service/v2/core/Products"
             },
             schema: {
                 model: {
@@ -151,9 +151,11 @@ How can I export each group in a separate Excel sheet with the Kendo UI Grid?
             let fileName = e.sender.options.excel.fileName;
 
             // Save the workbook.
-            kendo.saveAs({
-                dataURI: workbook.toDataURL(),
-                fileName: fileName
+            workbook.toDataURLAsync().then(function(dataURL) {
+              kendo.saveAs({
+     	   	 dataURI: dataURL,
+     	   	 fileName: "Test.xlsx"
+    	     });
             });
         }
     }

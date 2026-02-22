@@ -2,6 +2,7 @@
 title: Common Scenarios
 page_title: jQuery Sortable Documentation - Common Scenarios
 description: "Get started with the jQuery Sortable by Kendo UI and implement some common use-case scenarios."
+components: ["sortable"]
 slug: scenarios_kendoui_sortable
 position: 7
 ---

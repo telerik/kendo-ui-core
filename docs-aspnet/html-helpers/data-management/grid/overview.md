@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Grid component for {{ site.framework }} providing everything from paging, sorting, filtering, editing, and grouping to exporting to PDF and Excel."
+components: ["grid"]
 previous_url: /helpers/html-helpers/grid, /helpers/data-management/grid/overview, /helpers/data-management/grid/configuration
 slug: htmlhelpers_grid_aspnetcore_overview
 position: 0
@@ -62,9 +63,9 @@ The following example demonstrates how to define the Grid.
 ```Controller
     public class GridController : Controller
     {
-        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        public JsonResult Customers_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = Enumerable.Range(0, 50).Select(i => new Customer
+            var result = Enumerable.Range(1, 50).Select(i => new Customer
             {
                 CompanyName = "Company Name " + i,
                 ContactName = "Contact Name " + i,
@@ -77,7 +78,7 @@ The following example demonstrates how to define the Grid.
         }
     }
 ```
-```Customer.cs
+```C# Customer.cs
     public class Customer
     {
         public string ContactName { get; set; }
@@ -107,6 +108,7 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
             columns.Bound(p => p.ShipName).Width(300);
             columns.Bound(p => p.ShipCity).Width(250);
         })
+        .Scrollable()
         .Groupable()
         .Sortable()
         .Filterable()
@@ -114,34 +116,33 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
         .ButtonCount(5)
         .Refresh(true)
         .PageSizes(new[] { 5, 10, 20 }))
+        .HtmlAttributes(new { style = "height: 550px;" })
         .DataSource(dataSource => dataSource
-            .Custom()
-            .Transport(transport => transport
-            .Read(read => read.Action("Orders_Read", "Grid")))
-            .Schema(schema => schema
-                .Data("Data")
-                .Model(model => {
-                    model.Field("OrderDate", typeof(DateTime));
-                })
-            )
+            .Ajax()
+            .PageSize(20)
+            .Read(read => read.Action("Orders_Read", "Grid"))
         )
     )
 ```
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")"/>
             </transport>
             <schema>
-                <model>
+                <model id="OrderID">
                     <fields>
-                        <field name="OrderDate" type="Date"></field>
+                        <field name="OrderID" type="number"></field>
+                        <field name="OrderDate" type="date"></field>
+                        <field name="ShipName" type="string"></field>
+                        <field name="ShipCity" type="string"></field>
                     </fields>
                 </model>
             </schema>
         </datasource>
+        <scrollable enabled="true"/>
         <groupable enabled="true" />
         <sortable enabled="true" />
         <filterable enabled="true" />
@@ -155,14 +156,17 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
         </columns>
     </kendo-grid>
 ```
+
 {% endif %}
+
+>tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} AI Coding Assistant](slug://overview_ai) and the available [Grid-related prompts](slug:ai_prompt_library#grid).
 
 ## Functionality and Features
 
 | Feature | Description |
 |---------|-------------|
 | [Data binding]({% slug htmlhelpers_grid_aspnetcore_binding_overview %}) | You can bind the Grid to remote data or to local arrays of data. Additionally, you can use [SignalR]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %}) or configure your [custom binding]({% slug custombinding_grid_aspnetmvc %}). |
-| [Editing]({% slug batchediting_grid_aspnetcore %}) | The Grid supports various editing modes that allow you to control the way the data is represented.  |
+| [Editing]({% slug htmlhelpers_grid_aspnetcore_editing_overview %}) | The Grid supports various editing modes that allow you to control the way the data is represented.  |
 | [Filtering]({% slug htmlhelpers_grid_aspnetcore_filtering %}) | To filter the displayed data, you can use row, checkbox, and menu filtering. |
 | [Grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %}) | The Grid provides built-in aggregates for a grand total row and column values. Additionally, you can use group paging to load groups on demand and page through the groups at the same time. |
 | [Paging]({% slug htmlhelpers_grid_aspnetcore_paging %}) | Use the built-in paging functionality to paginate the data. For optimal performance, perform the paging operations on the server. |
@@ -177,10 +181,14 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 | [Templates]({% slug clientdetailtemplate_grid_aspnetcore %}) | The abundance of templates allows you to customize the way the data is visualized in the table. |
 | [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %}) | The virtual scrolling and endless scrolling modes allow you to further enhance the user experience. |
 | [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %}) | The selection functionality and its various options allow the users to quickly manipulate the desired data. |
+| [Stacked display mode]({% slug htmlhelpers_grid_aspnetcore_stacked_layout %}) | Displays Grid rows in a compact, card-like stacked arrangement with configurable column widths, ideal for limited horizontal space or mobile-friendly layouts.
+|
 | [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar %}) | You can add command buttons to the toolbar and even define custom commands. |
 | Rendering and styling | You can customize the appearance of the Grid by [configuring its rows]({% slug rows_aspnetcore_grid_widget %}), initializing the Grid from a [hidden container]({% slug hidden_containers_aspnetcore_grid %}), using [adaptive rendering]({% slug adaptive_rendering_gridhelper_aspnetcore %}), and setting its [height]({% slug height_aspnetcore_grid %}) and [width]({% slug width_grid_aspnetcore %}). |
 | [Globalization]({% slug globalization_grid_aspnetcore %}) | The Grid provides globalization through the combination of [localization]({% slug localization_aspnetcore_grid %}) with [internationalization]({% slug intl_aspnetcore_grid %}) and [right-to-left support]({% slug rtl_aspnetcore_grid %}).|
-| [Accessibility]({% slug accessibility_aspnetcore_grid %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_grid %}) for faster navigation. |
+| [Accessibility]({% slug htmlhelpers_grid_accessibility %}) | The Grid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_grid %}) for faster navigation. |
+| [AI Toolbar Assistant]({% slug ai_toolbar_tool_core_grid %}) | The Grid provides a built-in AI Assistant toolbar tool that allows users to interact with the Grid using natural language prompts. |
+| [Custom AI Column]({% slug custom_ai_column_core_grid %}) | The Grid can be enhanced with a custom AI-powered column that provides personalized insights, summaries, and explanations for individual rows. |
 
 ## Next Steps
 
@@ -194,6 +202,9 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)
 * [ASP.NET {{ site.framework_short }} Grid example](https://demos.telerik.com/{{ site.platform }}/grid)

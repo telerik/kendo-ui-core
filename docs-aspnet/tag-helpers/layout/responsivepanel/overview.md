@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn more about the Telerik UI Responsive Panel TagHelper for {{ site.framework }}, and use it your next project."
+components: ["responsivepanel"]
 previous_url: /helpers/responsivepanel, /helpers/tag-helpers/responsivepanel
 slug: taghelpers_responsivepanel_aspnetcore
 position: 1

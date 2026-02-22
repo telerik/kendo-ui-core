@@ -7,7 +7,7 @@ slug: grid-sort-column-checkbox-header
 tags: grid, sort, header, checkbox, template, prevent, enable
 ticketid: 1141908
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,9 +43,8 @@ To allow the selection and deselection of the checkbox only and prevent the [eve
         $(document).ready(function () {
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/service/v2/core/Customers"
                     },
                     pageSize: 20
                 },
@@ -60,7 +59,7 @@ To allow the selection and deselection of the checkbox only and prevent the [eve
                 columns: [{
                     headerTemplate: 'Recommendations & Status Details <br/><input type="checkbox" id="chkStatusDtls" /> Show all Status Details',
                     template: "<div class='customer-photo'" +
-                        "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+                        "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
                         "<div class='customer-name'>#: ContactName #</div>",
                     field: "ContactName",
                     title: "Contact Name",

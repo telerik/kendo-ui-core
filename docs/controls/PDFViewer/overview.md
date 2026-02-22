@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery PDFViewer Documentation - PDFViewer Overview
 description: "Get started with the jQuery PDFViewer by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["pdfviewer"]
 slug: overview_kendoui_pdfviewer_widget
 position: 0
 ---
@@ -20,6 +21,7 @@ The default tools collection includes the `pager`, `open`, and `download` tools.
 * [DPL Processing]({% slug dpl_processing_pdfviewer_widget %})&mdash;You can configure the PDFViewer to use the Telerik Document Processing Library.
 * [Toolbar and Tools]({% slug dpl_processing_pdfviewer_widget %})&mdash;You can configure which tools will be displayed in the PDFViewer.
 * [Annotations]({% slug annotations_pdfviewer %})&mdash;You can highlight important text areas with different colors or add free text notes in the document.
+* [Form Filling]({% slug form_filling_pdfviewer %})&mdash;You can import files containing PDF forms, and fill in the input elements.
 
 ## Next Steps
 

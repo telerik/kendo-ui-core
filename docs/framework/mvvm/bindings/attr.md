@@ -2,6 +2,7 @@
 title: Attribute
 page_title: Attribute Binding - Kendo UI MVVM
 description: "Learn how to populate and update DOM element attributes from the View-Model fields or methods through the attr binding in Kendo UI MVVM."
+components: ["mvvm"]
 slug: attributebinding_mvvm_kendoui
 ---
 
@@ -35,7 +36,7 @@ After calling `kendo.bind`, the image looks in the following way. The `data-bind
 
 ## Important Notes
 
-* Binding Attributes: value and checked&mdash;To set the `value` or `checked` attributes, use the [`value`](value) and [`checked`](checked) bindings instead.
+* Binding Attributes: value and checked&mdash;To set the `value` or `checked` attributes, use the [`value`](slug://valuebinding_mvvm_kendoui) and [`checked`](slug://checkedbinding_mvvm_kendoui) bindings instead.
 * Setting the HTML5 `Data` attributes&mdash;You can also set HTML5 data attributes through the `attr` binding.
 
         <div data-bind="attr: { data-foo: fooValue, data-bar: barValue }"></div>

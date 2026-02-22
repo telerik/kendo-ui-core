@@ -2,6 +2,7 @@
 title: HTML Structure and DOM Placement
 page_title: HTML Structure and DOM Placement
 description: "Learn about the HTML Structure and DOM Placement of the Telerik UI Dialog component for {{ site.framework }}."
+components: ["dialog"]
 slug: structure_and_placement_dialoghelper_aspnetcore
 position: 2
 ---
@@ -46,6 +47,7 @@ The following example demonstrates the possible markup and a possible placement 
 
 The following example demonstrates how the markup of the page from the previous example changes after the initialization of the Dialog when the widget is moved to become a child of the `<body>` and its additional markup (the wrapper and the title bar) is generated.
 
+```HTML
     <body>
         <div id="container1">
             ...
@@ -60,6 +62,7 @@ The following example demonstrates how the markup of the page from the previous 
             </div>
         </div>
     </body>
+```
 
 ## See Also
 

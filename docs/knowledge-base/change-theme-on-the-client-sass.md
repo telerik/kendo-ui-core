@@ -7,6 +7,7 @@ slug: change-theme-on-the-client-sass
 tags: theme, sass
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-hide-grouped-column
 tags: grid, hide, grouping, column
 ticketid: 1608593
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -40,10 +41,10 @@ The example below demonstrates how the grouped column can be hidden initially.
       $(document).ready(function() {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             group: { field: "ShipCity" },
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

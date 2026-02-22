@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI ComboBox for {{ site.framework }}."
+components: ["combobox"]
 slug: appearance_combobox_aspnetcore
 position: 3
 ---
@@ -86,7 +87,7 @@ The following example demonstrates how to set `Size` in the declaration of the C
 ```
 {% endif %}
 
-The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
+> When not explicitly set, the applied theme controls the default size.
 
 ```html
 <span class="k-combobox k-input k-input-md">
@@ -159,7 +160,7 @@ The following example demonstrates how to set `Rounded` in the declaration of th
 </kendo-combobox>
 ```
 {% endif %}
-The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
+> When not explicitly set, the applied theme controls the default border radius.
 
 ```html
 <span class="k-combobox k-input k-rounded-md">
@@ -232,10 +233,10 @@ The following example demonstrates how to set `FillMode` in the declaration of t
 ```
 {% endif %}
 
-The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```html
-<span class="k-combobox k-input k-input-outline">
+<span class="k-combobox k-input k-input-solid">
 </span>
 ```
 

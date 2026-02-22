@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ChartWizard Documentation - ChartWizard Overview
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["chartwizard"]
 slug: overview_kendoui_chartwizard_widget
 position: 1
 ---
@@ -17,7 +18,7 @@ The ChartWizard lets you create a chart using data from a Grid, another data-bou
 * [Data Binding]({% slug databinding_kendoui_chartwizard %})&mdash;You can configure the ChartWizard data.
 * [Export Options]({% slug export_kendoui_chartwizard %})&mdash;The ChartWizard allows you to export the Chart in different file formats.
 * [Window Configuration]({% slug window_kendoui_chartwizard %})&mdash;You can configure the ChartWizard window options.
-* [Accessibility]({% slug accessibility_kendoui_chartwizard %})&mdash;The ChartWizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_chartwizard_accessibility %})&mdash;The ChartWizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

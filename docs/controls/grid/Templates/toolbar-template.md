@@ -2,6 +2,7 @@
 title: Toolbar Template
 page_title: jQuery Grid Documentation - Toolbar Template
 description: "Get started with the jQuery Grid by Kendo UI and learn how to render different Toolbar content by using Kendo UI Templates."
+components: ["grid"]
 slug: toolbar_templates_kendoui_grid_component
 position: 4
 ---
@@ -19,7 +20,7 @@ The following example demonstrates how to set the template as a function that is
 ```dojo
 <div id="grid"></div>
 <script id="template" type="text/x-kendo-template">
-	<a  type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" href="\#" onclick="return toolbar_click()">Command</a>
+	<a  type="button" class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
 </script>
 <script>
 function toolbar_click() {
@@ -60,7 +61,7 @@ function toolbar_click() {
 }
 $("#grid").kendoGrid({
   toolbar: [
-    { template: "<button id='custom-button' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Custom command</button>" }
+    { template: "<button id='custom-button' class='k-button'>Custom command</button>" }
   ],
   columns: [
     { field: "name" },

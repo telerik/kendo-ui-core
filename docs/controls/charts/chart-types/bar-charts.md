@@ -2,6 +2,7 @@
 title: Bar Charts
 page_title: jQuery Chart Documentation - Bar Charts
 description: "Learn how to set the properties of Kendo UI Bar Charts."
+components: ["chart"]
 slug: bartypeofcharts_widget
 ---
 

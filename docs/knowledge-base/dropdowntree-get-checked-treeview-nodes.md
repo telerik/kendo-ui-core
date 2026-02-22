@@ -7,6 +7,7 @@ slug: dropdowntree-get-checked-treeview-nodes
 tags: dropdowntree, checked, treeview, node, recursion
 ticketid: 1408344
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

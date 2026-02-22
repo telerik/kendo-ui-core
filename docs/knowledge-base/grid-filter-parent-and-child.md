@@ -7,6 +7,7 @@ slug: grid-apply-filter-parent-child
 tags: grid, filter, parent, child, hierarchy, detail
 ticketid: 1573560
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -39,7 +40,7 @@ How can I apply filter to both the parent and child Grids in Hierarchy?
 It is possible to perform filtering over the parent Grid and the child Grid by ensuring the fetching of the filtered data for the parent Grid has finished. This is done by applying the filter to the child Grid in the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler of the parent one.
 
 ```dojo
-    <button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" onclick="filter()">Filter Parent and Child</button>
+    <button class="k-button" onclick="filter()">Filter Parent and Child</button>
     <div id="grid"></div>
 
     <script type="text/x-kendo-template" id="template">
@@ -50,9 +51,9 @@ It is possible to perform filtering over the parent Grid and the child Grid by e
       $(document).ready(function() {
         var element = $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 20,
             serverPaging: true,
@@ -104,9 +105,9 @@ It is possible to perform filtering over the parent Grid and the child Grid by e
 
         detailRow.find(".orders").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             serverPaging: true,
             serverSorting: true,

@@ -6,6 +6,7 @@ page_title: Converting Telerik Telerik.Web.Spreadsheet Workbook and Worksheets t
 slug: spreadsheet-understanding-telerik-web-spreadsheet-and-document-processing-library
 tags: spreadsheet, converting, workbook, worksheet, telerik.web.spreadsheet, dpl, document processing, back-end, server 
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

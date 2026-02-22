@@ -7,6 +7,7 @@ slug: datepicker-remove-header-from-calendar
 tags: datepicker, remove, hide, header, calendar, year, navigation, view
 ticketid: 1549449
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

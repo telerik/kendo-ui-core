@@ -2,6 +2,7 @@
 title: Calendar Types
 page_title: jQuery DateRangePicker Documentation - Calendar Types
 description: "Get started with the jQuery DateRangePicker by Kendo UI and learn how to work around the default calendar type implementation and simulate other calendar types."
+components: ["daterangepicker"]
 slug: calendartypes_kendoui_daterangepicker
 position: 6
 ---

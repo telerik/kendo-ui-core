@@ -88,6 +88,13 @@ export const __meta__ = {
             that._customOptions = {};
             that.options.inputMode = that.options.inputMode || that.element.attr("inputmode") || "text";
 
+            if (!kendo.isPresent(that.options.readonly) && that.element.attr("readonly")) {
+                 that.options.readonly = true;
+            }
+            else if (!kendo.isPresent(that.options.readonly)) {
+                 that.options.readonly = false;
+            }
+
             that._wrapper();
             that._inputValuesContainer();
             that._tagList();
@@ -132,6 +139,14 @@ export const __meta__ = {
             that._tagTemplate();
             that.requireValueMapper(that.options);
             that._initList();
+            that._aria(); // Update aria-controls now that UL is available (for StaticList)
+
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
+            that.listView.bind("dataBound", function() { that._aria(); });
 
             that._reset();
             that._enable();
@@ -166,6 +181,7 @@ export const __meta__ = {
             enabled: true,
             autoBind: true,
             autoClose: true,
+            readonly: null,
             highlightFirst: true,
             dataTextField: "",
             dataValueField: "",
@@ -181,6 +197,7 @@ export const __meta__ = {
             },
             enforceMinLength: false,
             delay: 100,
+            downArrow: false,
             value: null,
             maxSelectedItems: null,
             placeholder: "",
@@ -200,10 +217,12 @@ export const __meta__ = {
             clearButton: true,
             autoWidth: false,
             popup: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
-            label: null
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
+            label: null,
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
         },
 
         events: [
@@ -310,7 +329,8 @@ export const __meta__ = {
                     "aria-expanded": false,
                     "aria-controls": that.input.attr("aria-controls"),
                     "aria-autocomplete": that.input.attr("aria-autocomplete"),
-                    "aria-describedby": that.input.attr("aria-describedby")
+                    "aria-describedby": that.input.attr("aria-describedby"),
+                    "placeholder": that.options.placeholder,
                 });
 
             that.popup.bind("activate", () => {
@@ -318,16 +338,21 @@ export const __meta__ = {
                 that.filterInput.trigger("focus");
             });
 
-            that.popup.bind("close", () => {
+            that.popup.bind("deactivate", () => {
                 that.input.trigger("focus");
             });
         },
 
         _aria: function() {
             var that = this,
-                id = that.ul[0].id,
+                ul = that.ul,
+                id = ul.length ? ul[0].id : null,
                 autocomplete = this.options.filter === "none" ? "none" : "list",
                 tagListId = that.tagList.attr(ID);
+
+            if (!id) {
+                return; // UL not yet created, _aria will be called again after _initList
+            }
 
             that.input.attr({
                 "role": "combobox",
@@ -338,6 +363,24 @@ export const __meta__ = {
             });
 
             that._ariaLabel(that._focused);
+        },
+
+         _updateSelectedVirtualDataItemsIndexes: function() {
+            const that = this;
+            const listView = that.listView;
+            const selectedIndexes = listView?._selectedIndexes;
+            const selectedItems = listView?._selectedDataItems;
+            const customOptions = that?._customOptions || {};
+            const optionsMap = that._optionsMap || {};
+
+            if (selectedIndexes && selectedItems) {
+                selectedIndexes.forEach((_, index) => {
+                    const field = that.options.dataValueField;
+                    const dataItem = selectedItems[index];
+                    const newIdx = optionsMap[dataItem[field]];
+                    customOptions[dataItem[field]] = newIdx !== undefined ? newIdx : customOptions[dataItem[field]];
+                });
+            }
         },
 
         _activateItem: function() {
@@ -428,8 +471,9 @@ export const __meta__ = {
         },
 
         _inputFocus: function() {
-            this._placeholder(false, true);
-            this.wrapper.addClass(FOCUSEDCLASS);
+            const that = this;
+            that._placeholder();
+            that.wrapper.addClass(FOCUSEDCLASS);
         },
 
         _inputFocusout: function(e) {
@@ -442,8 +486,9 @@ export const __meta__ = {
             clearTimeout(that._typingTimeout);
 
             that.wrapper.removeClass(FOCUSEDCLASS);
+            that.tagList.children(CHIP).removeClass(FOCUSEDCLASS);
 
-            that._placeholder(!that.listView.selectedDataItems()[0], true);
+            that._placeholder();
             that.close();
 
             if (that._state === FILTER) {
@@ -467,9 +512,9 @@ export const __meta__ = {
             var value = listView.value()[position];
             var dataItem = that.listView.selectedDataItems()[position];
             var customIndex = that._customOptions[value];
-            var listViewChildren = listView.element[0].children;
+            var listViewItems = listView.items().toArray();
             var option;
-            var listViewChild;
+            var listViewItem;
 
             if (that.trigger(DESELECT, { dataItem: dataItem, item: tag })) {
                 that._close();
@@ -505,9 +550,9 @@ export const __meta__ = {
                     listView._removedAddedIndexes.splice(position, 1);
                 }
 
-                listViewChild = listViewChildren[customIndex];
-                if (listViewChild) {
-                    listViewChildren[customIndex].classList.remove("k-selected");
+                listViewItem = listViewItems[customIndex];
+                if (listViewItem) {
+                    $(listViewItem).removeClass("k-selected");
                 }
                 if (that.options.tagMode !== "single") {
                     tag.remove();
@@ -516,6 +561,7 @@ export const __meta__ = {
                 }
                 done();
             }
+            this._placeholder();
         },
 
         _tagListClick: function(e) {
@@ -729,6 +775,10 @@ export const __meta__ = {
 
             that.popup.position();
             that._updateItemFocus();
+
+            if (that.options?.virtual?.mapValueTo === 'dataItem') {
+                that._updateSelectedVirtualDataItemsIndexes();
+            }
 
             if (that._touchScroller) {
                 that._touchScroller.reset();
@@ -1124,7 +1174,7 @@ export const __meta__ = {
                         if (e.ctrlKey && e.shiftKey && !that.options.virtual) {
                             that._selectRange(
                                 listView.getElementIndex(listView.focus()[0]),
-                                listView.element.children().length - 1
+                                listView.items().length - 1
                             );
                         }
                         listView.focusLast();
@@ -1174,33 +1224,24 @@ export const __meta__ = {
             }
         },
 
-        _placeholder: function(show, skipCaret) {
-            var that = this;
-            var input = that.input;
-            var active = activeElement();
-            var placeholder = that.options.placeholder;
-            var inputValue = input.val();
-            var isActive = input[0] === active;
-            var caretPos = inputValue.length;
+        _placeholder: function() {
+            const that = this;
+            const input = that.input;
+            const active = activeElement();
+            const isActive = input[0] === active;
 
-            if (!isActive || that.options.autoClose || inputValue === placeholder) {
-                caretPos = 0;
-                inputValue = "";
+
+            if (this.listView.selectedDataItems().length > 0) {
+                input.removeAttr("placeholder");
+            } else {
+                input.attr("placeholder", that.options.placeholder);
             }
 
-            if (show === undefined) {
-                show = false;
-                if (input[0] !== active) {
-                    show = !that.listView.selectedDataItems()[0];
-                }
+            if (!isActive || that.options.autoClose) {
+                input.val("");
             }
 
-            that._prev = inputValue;
-            input.toggleClass("k-readonly", show).val(show ? placeholder : inputValue);
-
-            if (isActive && !skipCaret) {
-                kendo.caret(input[0], caretPos, caretPos);
-            }
+            that._prev = input.val();
         },
 
         _option: function(dataValue, dataText, selected) {
@@ -1496,7 +1537,7 @@ export const __meta__ = {
             listView.select(indices).done(function() {
                 indices.forEach(function(index) {
                     var dataItem = listView.dataItemByIndex(index);
-                    var candidate = listView.element.children()[index];
+                    var candidate = listView.items()[index];
                     var isSelected = $(candidate).hasClass("k-selected");
 
                     that.trigger(isSelected ? SELECT : DESELECT, { dataItem: dataItem, item: $(candidate) });
@@ -1567,6 +1608,9 @@ export const __meta__ = {
                 "title": element[0].title
             });
 
+            input.attr("placeholder", that.options.placeholder);
+
+
             if (accessKey) {
                 that._focused.attr("accesskey", accessKey);
             }
@@ -1621,10 +1665,7 @@ export const __meta__ = {
             that.tagTemplate = function(data) {
                 return html.renderChip('<span unselectable="on">' +
                 '</span>', $.extend({}, options, {
-                        fillMode: "solid",
-                        rounded: "medium",
                         enabled: true,
-                        themeColor: "base",
                         text: tagTemplate(data),
                         attr: {
                             unselectable: "on",

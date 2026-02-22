@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Captcha component by following a complete step-by-step tutorial."
+components: ["captcha"]
 slug: aspnetcore_captcha_getting_started
 position: 1
 ---
@@ -40,7 +41,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <p>
 
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Captcha
@@ -197,7 +198,7 @@ You can reference the Captcha instances that you have created and build on top o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var captchaReference = $("#captcha").data("kendoCaptcha"); // captchaReference is a reference to the existing captcha instance of the helper.
     </script>
@@ -205,7 +206,7 @@ You can reference the Captcha instances that you have created and build on top o
 
 1. Use the [Captcha client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/captcha#methods) to control the behavior of the widget. In this example, you will use the `reset` method to refresh the captcha.
 
-    ```script
+    ```JS script
     <script>
         var captchaReference = $("#captcha").data("kendoCaptcha"); // captchaReference is a reference to the existing timeCaptcha instance of the helper.
          captchaReference.reset(); // refreshes the Captcha

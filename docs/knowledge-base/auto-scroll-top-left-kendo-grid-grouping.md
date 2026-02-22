@@ -6,6 +6,7 @@ page_title: How to Automatically Scroll to the Top Left Corner in Kendo UI Grid 
 slug: auto-scroll-top-left-kendo-grid-grouping
 tags: kendo, ui, grid, autoscroll, grouping, javascript
 res_type: kb
+components: ["grid"]
 ticketid: 1664400
 ---
 
@@ -41,24 +42,25 @@ Here's a step-by-step guide to implementing this functionality:
 <div id="grid"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read: {
-                    url: crudServiceBaseUrl + "/detailproducts",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/detailproducts"                    
                   },
                   update: {
                     url: crudServiceBaseUrl + "/detailproducts/Update",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   destroy: {
                     url: crudServiceBaseUrl + "/detailproducts/Destroy",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                      return { models: kendo.stringify(options.models) };
+                      return kendo.stringify(options.models);
                     }
                   }
                 },
@@ -129,7 +131,7 @@ Here's a step-by-step guide to implementing this functionality:
             }, {
               field: "ProductName",
               title: "Product Name",
-              template: "<div class='product-photo' style='background-image: url(../content/web/foods/#:data.ProductID#.jpg);'></div><div class='product-name'>#: ProductName #</div>",
+              template: "<div class='product-photo' style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/foods/#:data.ProductID#.jpg);'></div><div class='product-name'>#: ProductName #</div>",
               width: 300
             }, {
               field: "UnitPrice",

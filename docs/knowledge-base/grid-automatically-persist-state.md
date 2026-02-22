@@ -7,7 +7,7 @@ slug: grid-automatically-persist-state
 tags: grid, state, persisting, persist, automatic, leave, page, save, restore, changes, options, keep, recreate, retain, load
 ticketid: 1138864
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -42,9 +42,8 @@ $(document).ready(function () {
     // prevent requesting data multiple times if there are persisted options
         autoBind: !options,
         dataSource: {
-            type: "odata",
             transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
         },

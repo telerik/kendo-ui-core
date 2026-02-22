@@ -7,6 +7,7 @@ slug: grid-toggle-font-style
 tags: grid, toggle, font, style, body
 ticketid: 1154127
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -63,9 +64,8 @@ Use the `CSS` jQuery method and the `change` event of the radio button.
     $(document).ready(function() {
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/core/Orders"
           },
           schema: {
             model: {

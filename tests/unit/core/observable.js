@@ -332,3 +332,66 @@ describe("observable", function() {
         assert.equal(handlerCalled, false);
     });
 });
+
+describe("Observable prototype methods enumerable", function() {
+    // These tests ensure Observable methods are enumerable, which is required
+    // for legacy patterns like $.extend({}, observableInstance, ...) to work
+    // correctly. jQuery's $.extend uses for...in which only iterates enumerable
+    // properties.
+
+    it("init method is enumerable on prototype", function() {
+        let descriptor = Object.getOwnPropertyDescriptor(Observable.prototype, 'init');
+        assert.isOk(descriptor.enumerable, "init should be enumerable");
+    });
+
+    it("bind method is enumerable on prototype", function() {
+        let descriptor = Object.getOwnPropertyDescriptor(Observable.prototype, 'bind');
+        assert.isOk(descriptor.enumerable, "bind should be enumerable");
+    });
+
+    it("one method is enumerable on prototype", function() {
+        let descriptor = Object.getOwnPropertyDescriptor(Observable.prototype, 'one');
+        assert.isOk(descriptor.enumerable, "one should be enumerable");
+    });
+
+    it("first method is enumerable on prototype", function() {
+        let descriptor = Object.getOwnPropertyDescriptor(Observable.prototype, 'first');
+        assert.isOk(descriptor.enumerable, "first should be enumerable");
+    });
+
+    it("trigger method is enumerable on prototype", function() {
+        let descriptor = Object.getOwnPropertyDescriptor(Observable.prototype, 'trigger');
+        assert.isOk(descriptor.enumerable, "trigger should be enumerable");
+    });
+
+    it("unbind method is enumerable on prototype", function() {
+        let descriptor = Object.getOwnPropertyDescriptor(Observable.prototype, 'unbind');
+        assert.isOk(descriptor.enumerable, "unbind should be enumerable");
+    });
+
+    it("methods are copied when using $.extend with Observable instance", function() {
+        let observable = new Observable();
+        let copied = $.extend({}, observable);
+
+        assert.equal(typeof copied.bind, "function", "bind should be copied");
+        assert.equal(typeof copied.unbind, "function", "unbind should be copied");
+        assert.equal(typeof copied.trigger, "function", "trigger should be copied");
+        assert.equal(typeof copied.one, "function", "one should be copied");
+        assert.equal(typeof copied.first, "function", "first should be copied");
+    });
+
+    it("methods work correctly on $.extend copied object", function() {
+        let observable = new Observable();
+        let copied = $.extend({}, observable, { customProp: true });
+
+        // The copied object should have the methods and they should be callable
+        let handlerCalled = false;
+        copied.bind("test", function() {
+            handlerCalled = true;
+        });
+        copied.trigger("test");
+
+        assert.isOk(handlerCalled, "Handler should be called on copied object");
+        assert.isOk(copied.customProp, "Custom properties should also be present");
+    });
+});

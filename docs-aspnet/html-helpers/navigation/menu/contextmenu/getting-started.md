@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Context Menu component by following a complete step-by-step tutorial."
+components: ["menu"]
 slug: context_menu_getting_started
 position: 1
 ---
@@ -397,7 +398,7 @@ You can reference the ContextMenu instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var contextMenuReference = $("#menu").data("kendoContextMenu"); //contextMenuReference is a reference to the existing instance of the helper.
         </script>
@@ -405,7 +406,7 @@ You can reference the ContextMenu instances that you have created and build on t
 
 1. Use the [ContextMenu client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable one of the Context Menu items.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var contextMenuReference = $("#menu").data("kendoContextMenu"); //contextMenuReference is a reference to the existing instance of the helper.

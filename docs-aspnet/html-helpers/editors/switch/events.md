@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Switch component for {{ site.framework }}."
+components: ["switch"]
 slug: events_switch
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: File Restrictions
 page_title: jQuery Upload Documentation - File Restrictions
 description: "Get started with the jQuery Upload by Kendo UI and learn how to validate the file extension, max and min file size for the files that are going to be uploaded."
+components: ["upload"]
 slug: validation_upload_widget
 position: 5
 ---

@@ -5,9 +5,9 @@ description: "Learn how to edit the Kendo UI Grid for jQuery by using a column t
 previous_url: /controls/data-management/grid/how-to/Editing/grid-editors-in-column-templates
 slug: howto_render_editor_column_template_grid
 tags: grid, editor, render, column, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -43,7 +43,7 @@ The following example demonstrates how to render an input editor in a column tem
     <div id="grid"></div>
     <script>
       function onDataBound(e) {
-        editAll();   
+        editAll();
       }
 
       function editAll() {
@@ -56,30 +56,32 @@ The following example demonstrates how to render an input editor in a column tem
       }
 
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+          dataSource = new kendo.data.DataSource({
               transport: {
-                read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
-                },
-                update: {
-                  url: crudServiceBaseUrl + "/Products/Update",
-                  dataType: "jsonp"
-                },
-                destroy: {
-                  url: crudServiceBaseUrl + "/Products/Destroy",
-                  dataType: "jsonp"
-                },
-                create: {
-                  url: crudServiceBaseUrl + "/Products/Create",
-                  dataType: "jsonp"
-                },
-                parameterMap: function(options, operation) {
-                  if (operation !== "read" && options.models) {
-                    return {models: kendo.stringify(options.models)};
+                  read:  {
+                      url: crudServiceBaseUrl + "/Products"
+                  },
+                  update: {
+                      url: crudServiceBaseUrl + "/Products/Update",
+                      type: "POST",
+                  contentType: "application/json"
+                  },
+                  destroy: {
+                      url: crudServiceBaseUrl + "/Products/Destroy",
+                      type: "POST",
+                  contentType: "application/json"
+                  },
+                  create: {
+                      url: crudServiceBaseUrl + "/Products/Create",
+                      type: "POST",
+                  contentType: "application/json"
+                  },
+                  parameterMap: function(options, operation) {
+                      if (operation !== "read" && options.models) {
+                          return kendo.stringify(options.models);
+                      }
                   }
-                }
               },
               batch: true,
               pageSize: 10,
@@ -104,8 +106,8 @@ The following example demonstrates how to render an input editor in a column tem
           height: 430,
           toolbar: ["create", "save", "cancel"],
           columns: [
-            { template: "<span class='k-input k-textbox k-input-solid k-input-md k-rounded-md'><input data-bind='value:ProductName' class='k-input-inner' /></span>", title: "Product Name", width: 110 },
-            { template: "<span class='k-input k-textbox k-input-solid k-input-md k-rounded-md'><input data-bind='value:UnitsInStock' class='k-input-inner' /></span>", title: "Units In Stock", width: 110 },
+            { template: "<span class='k-input k-textbox'><input data-bind='value:ProductName' class='k-input-inner' /></span>", title: "Product Name", width: 110 },
+            { template: "<span class='k-input k-textbox'><input data-bind='value:UnitsInStock' class='k-input-inner' /></span>", title: "Units In Stock", width: 110 },
             { field: "Discontinued", width: 110 },
             { command: "destroy", title: "&nbsp;", width: 90 }],
           editable: true,

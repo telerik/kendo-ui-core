@@ -7,6 +7,7 @@ slug: upload-display-directory-name-with-filesize
 tags: upload, directory, folder, name, file, size
 ticketid: 1548109
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -32,7 +33,7 @@ How can I display the directory name and the total size of its content when work
 1. Subscribe to the [`Select`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring) event.
 1. Get both the directory name and total file size in the `Select` event handler, and append them to the widget wrapper.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Upload()
         .Name("files")
         .Async(a => a
@@ -50,7 +51,7 @@ How can I display the directory name and the total size of its content when work
         })
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function onSelect(e) {
             var directoryName = "";

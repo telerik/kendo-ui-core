@@ -2,6 +2,7 @@
 title: Drawer
 page_title: Drawer Overview
 description: "Learn the basics when working with the hybrid Telerik UI Drawer HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobiledrawer/overview, /helpers/hybrid/mobiledrawer
 slug: overview_hybriddrawer_aspnetmvc
 ---

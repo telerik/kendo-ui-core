@@ -2,6 +2,7 @@
 title: Row Resizing
 page_title: Row Resizing
 description: "Learn all about the Row Resizing feature of the Grid."
+components: ["grid"]
 slug: rowresize_kendoui_grid
 position: 20
 ---
@@ -18,7 +19,7 @@ To enable the row resizing functionality set the `.Resizable()` configuration:
 
 ```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
-        .Name("Grid")
+        .Name("grid")
         .Resizable(r => r.Rows(true))
         .Columns(columns =>
         {
@@ -34,19 +35,20 @@ To enable the row resizing functionality set the `.Resizable()` configuration:
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" selectable="multiple, row">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+    <kendo-grid name="grid">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")" />
             </transport>
+            <schema data="Data" total="Total" errors="Errors">
+            </schema>
         </datasource>
         <resizable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-````
+```
 {% endif %}
 
 ## Multiple Rows
@@ -74,19 +76,20 @@ The user can resize more than one row at the same time. To do so, set the `Selec
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" selectable="multiple, row">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+    <kendo-grid name="grid" selectable="multiple, cell">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")" />
             </transport>
+            <schema data="Data" total="Total" errors="Errors">
+            </schema>
         </datasource>
         <resizable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-````
+```
 {% endif %}
 
 ## RowResize Event
@@ -101,7 +104,10 @@ The `RowResize` event fires when the user resizes one or more rows. You can subs
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Row Resizing in the {{ site.product }} Grid](https://demos.telerik.com/{{ site.platform }}/grid/row-resizing)
 * [Grid events]({% slug grid_events %})
 * [Server-side API](/api/grid)
-* [Client-side API of the Grid](/api/javascript/ui/grid)
+* [Client-side API of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

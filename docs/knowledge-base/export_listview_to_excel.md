@@ -4,10 +4,10 @@ page_title: Export ListView to Excel - Kendo UI for jQuery ListView
 description: "Learn how to export the Kendo UI ListView for jQuery to Excel."
 slug: export_listview_to_excel
 tags: listview, export, excel
-component: listview
 type: how-to
 ticketid: 1619053
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment
@@ -62,7 +62,7 @@ var rows = [{
 })
 ```
 
-* Instantiate a kendo.ooxml.Workbook component. The workbook has an array of sheets, where you can set their width and title, and set the rows property to the already created rows array. After that, call the [`toDataURL()`](/api/javascript/ooxml/workbook/methods/todataurl) method of the workbook to get the output Excel file as a data URI. 
+* Instantiate a kendo.ooxml.Workbook component. The workbook has an array of sheets, where you can set their width and title, and set the rows property to the already created rows array. After that, call the [`toDataURLAsync()`](/api/javascript/ooxml/workbook/methods/todataurlasync) method of the workbook to get the output Excel file as a data URI. 
 
 ```js
 var workbook = new kendo.ooxml.Workbook({
@@ -82,7 +82,12 @@ var workbook = new kendo.ooxml.Workbook({
     ]
 });
 // Save the file as an Excel file with the xlsx extension.
-kendo.saveAs({ dataURI: workbook.toDataURL(), fileName: "Test.xlsx" });
+workbook.toDataURLAsync().then(function(dataURL) {
+  kendo.saveAs({
+	 dataURI: dataURL,
+	 fileName: "Test.xlsx"
+  });
+});
 ```
 The following example demonstrates a full implementation of the described approach:
 
@@ -93,7 +98,7 @@ The following example demonstrates a full implementation of the described approa
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
         </div>
@@ -145,15 +150,19 @@ The following example demonstrates a full implementation of the described approa
                 });
 
                 // Save the file as an Excel file with the xlsx extension.
-                kendo.saveAs({ dataURI: workbook.toDataURL(), fileName: "Test.xlsx" });
+                workbook.toDataURLAsync().then(function(dataURL) {
+                  kendo.saveAs({
+     				 dataURI: dataURL,
+     				 fileName: "Test.xlsx"
+    			  });
+                });
             })
 
             $("#listView").kendoListView({
               dataSource: {            
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Products",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 },
                 pageSize: 21

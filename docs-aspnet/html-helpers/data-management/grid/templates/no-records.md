@@ -2,6 +2,7 @@
 title: No Records Template
 page_title: Grid No Records Template
 description: "Learn how to set a no records template in the Grid component for {{ site.framework }} if the backend does not return any data."
+components: ["grid"]
 slug: htmlhelpers_norecordstemplate_grid
 ---
 
@@ -80,7 +81,7 @@ Another option is to use the `TemplateHandler()` option that returns the desired
     </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
 <script>
     function noRecordsMsg() {
         if(new Date() > new Date(2024,4,28)) { // Specify the required condition.
@@ -92,4 +93,7 @@ Another option is to use the `TemplateHandler()` option that returns the desired
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/datasource)

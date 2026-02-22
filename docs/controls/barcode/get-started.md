@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Barcode Documentation - Getting Started with the Barcode
 description: "Get started with the jQuery Barcode by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["barcode"]
 slug: getting_started_kendoui_barcode_widget
 position: 2
 ---
@@ -97,11 +98,7 @@ You can customize the Barcode appearance by setting the [`color`](/api/javascrip
 
 ## See Also
 
-* [JavaScript API Reference of the jQuery Barcode](/api/javascript/ui/barcode)
+* [JavaScript API Reference of the jQuery Barcode](/api/javascript/dataviz/ui/barcode)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -6,6 +6,7 @@ page_title: Implementing Editor Component as Editor Template for a Child Grid
 slug: grid-hierarchy-editor-limitation
 tags: grid, editor, template, child, hierarchy
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -33,7 +34,7 @@ How can I use a Nested Component as an Editor Template in a Child Grid?
 When using a Nested Component internally, the special symbols should be manually escaped. To use a Nested Components as an Editor Template for a Child Grid in hierarchy, implement the Editor Template as follows:
 
 
-```EditorTemplate.cshtml
+```Razor EditorTemplate.cshtml
 @model TelerikMvcApp90.Models.Course
 
 @Html.Kendo().EditorFor(model => model.Description).Deferred()

@@ -2,6 +2,7 @@
 title: Animations
 page_title: Animations
 description: "Learn how to control the animations in the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: htmlhelpers_panelbar_animations_aspnetcore
 position: 6
 ---

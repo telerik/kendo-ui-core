@@ -2,7 +2,8 @@
 title: Overview
 page_title: CheckBoxGroup Documentation | CheckBoxGroup Accessibility
 description: "Get started with the {{ site.product_short }} CheckBoxGroup by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_checkboxgroup_aspnetcore
+components: ["checkboxgroup"]
+slug: htmlhelpers_checkboxgroup_accessibility
 position: 1
 ---
 

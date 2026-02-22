@@ -2,6 +2,7 @@
 title: Excel
 page_title: Excel Export
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to export a Telerik UI PivotGrid component for {{ site.framework }} to Excel."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_excelexport
 position: 1
 ---
@@ -50,19 +51,21 @@ To apply customizations during the export to Excel:
 
 1. In the handler, manipulate the generated workbook. The example alternates the [background color of the rows cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
 
-        <script>
-            function excelExport(e) {
-                var sheet = e.workbook.sheets[0];
-                for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-                    if (rowIndex % 2 == 0) {
-                        var row = sheet.rows[rowIndex];
-                        for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
-                            row.cells[cellIndex].background = "#aabbcc";
-                        }
+    ```JS
+    <script>
+        function excelExport(e) {
+            var sheet = e.workbook.sheets[0];
+            for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
+                if (rowIndex % 2 == 0) {
+                    var row = sheet.rows[rowIndex];
+                    for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+                        row.cells[cellIndex].background = "#aabbcc";
                     }
                 }
             }
-        </script>
+        }
+    </script>
+    ```
 
 ## Using Templates
 

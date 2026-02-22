@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery DropDownTree Documentation - DropDownTree Overview
 description: "Get started with the jQuery DropDownTree by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["dropdowntree"]
 slug: overview_kendoui_dropdowntree_widget
 position: 0
 ---

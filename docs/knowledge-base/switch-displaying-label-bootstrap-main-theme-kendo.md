@@ -6,6 +6,7 @@ page_title: Displaying Switch Label with Bootstrap Main Sass Theme
 slug: switch-displaying-label-bootstrap-main-theme-kendo
 tags: switch, bootstrap, label, theme, display, kendo
 res_type: kb
+components: ["switch"]
 ---
 ## Environment
 | Product | Version |

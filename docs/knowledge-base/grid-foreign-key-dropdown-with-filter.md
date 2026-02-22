@@ -7,6 +7,7 @@ slug: grid-foreign-key-dropdown-with-filter
 tags: grid, fk, foreign, key, dropdown, filter, contains, search, custom, edit
 ticketid: 1148304
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,8 +2,9 @@
 title: Comparison
 page_title: jQuery PivotGridV2 Documentation - Comparison
 description: "Learn about the differences between the old and the new version of the Kendo UI PivotGrid component."
+components: ["pivotgridv2"]
 slug: comparison_kendoui_pivotgridv2
-position: 2
+position: 3
 ---
 
 # Comparison

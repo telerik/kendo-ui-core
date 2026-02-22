@@ -5,9 +5,9 @@ description: "Learn how to show a message if the data source of a Kendo UI Chart
 previous_url: /controls/charts/how-to/show-no-data-available-message, /controls/charts/how-to/appearance/show-no-data-available-message
 slug: howto_showemptymessage_whencharthasnodata_charts
 tags: chart, show, message, when, charts, have, no, data
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: How to Customize {{ site.product }} Grid Footer Pagination to Load A
 slug: customize-kendo-ui-grid-footer-pagination-load-all-pages
 tags: kendo-ui-grid, pagination, customization, drop-down, default, telerik, aspnet-mvc, aspnet-core
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ page_title: Refresh Editor after Drag Drop in Sortable - Kendo UI Editor for jQu
 slug: editor-in-sortable
 tags: editor, sortable, content, refresh
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

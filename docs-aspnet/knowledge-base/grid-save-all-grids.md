@@ -6,6 +6,7 @@ slug: grid-save-all-grids
 tags: grid, all, save, changes, core, mvc, telerik
 component: grid
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -32,7 +33,7 @@ To achieve the desired scenario:
 1. Create an external **Save** Button and subscribe to its [`Click`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/buttoneventbuilder#clicksystemstring) event.
 1. Within the `Click` handler, loop through all utilized Grids by accessing them through the `.k-grid` class and save the changes by using the [`saveChanges()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/savechanges) method.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Button()
       .Name("saveBtn")
       .Content("Save changes")
@@ -93,7 +94,7 @@ To achieve the desired scenario:
         )
     )
 ```
-```Script.js
+```JS script.js
     <script type="text/javascript">
             function onClickHandler(e){
                 $(".k-grid").each(function (index, value) {

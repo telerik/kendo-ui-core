@@ -6,7 +6,7 @@ page_title: Highlight the Item Text Which Matches Search Criteria - Kendo UI Com
 slug: combobox-highlight-matched-text
 tags: kendo, kendo-ui, combobox, search, text, highlight
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment
@@ -90,11 +90,11 @@ Implement the `dataBound` event handler for the widget.
       autoBind: false,
       dataBound: onDataBound,
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         serverFiltering: true,
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+            url: "https://demos.telerik.com/service/v2/odata/Products",
           }
         }
       },

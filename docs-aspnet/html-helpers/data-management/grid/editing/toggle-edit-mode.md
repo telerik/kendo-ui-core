@@ -2,6 +2,7 @@
 title: Toggle Edit Mode
 page_title: Toggle Edit Mode
 description: "Learn how to toggle the edit mode of the Telerik UI for {{ site.framework }} Grid."
+components: ["grid"]
 position: 7
 slug: toggle_edit_mode_grid
 ---
@@ -99,8 +100,8 @@ To enable the Readonly mode, use the `Editable.Readonly()` configuration method.
 
 The {{ site.product }} Grid allows you to programmatically alter the editable state of the component through the following methods:
 
-* [`disableEditing()`](/api/javascript/ui/grid/methods/disableediting)&mdash;Disables editing operations.
-* [`enableEditing()`](/api/javascript/ui/grid/methods/enableediting)&mdash;Enables editing operations.
+* [`disableEditing()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/disableediting)&mdash;Disables editing operations.
+* [`enableEditing()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/enableediting)&mdash;Enables editing operations.
 
 
 ```JavaScript
@@ -113,6 +114,9 @@ The {{ site.product }} Grid allows you to programmatically alter the editable st
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Toggle Edit Mode of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/toggle-edit-mode)
 * [Server-Side API](/api/grid)
 * [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

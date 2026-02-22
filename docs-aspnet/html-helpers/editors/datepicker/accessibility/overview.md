@@ -2,7 +2,8 @@
 title: Overview
 page_title: DatePicker Documentation | DatePicker Accessibility
 description: "Get started with the {{ site.product }} DatePicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_datepicker_aspnetcore_accessibility
+components: ["datepicker"]
+slug: htmlhelpers_datepicker_accessibility
 position: 1
 ---
 
@@ -48,7 +49,14 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The Calendar in the Popup element of the component should implement the specification for the **Calendar** component.
 
-[Calendar accessibility specification]({%slug htmlhelpers_accessibility_calendar_aspnetcore%})
+[Calendar accessibility specification]({% slug htmlhelpers_calendar_accessibility %})
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
 
 ## Resources
 
@@ -87,10 +95,10 @@ To test the DatePicker component, refer to the [DatePicker Accessibility Demo](h
 
 ## Keyboard Navigation
 
-For details on how the DatePicker keyboard navigation works, refer to the [DatePicker Keyboard Navigation]({%slug htmlhelpers_datepicker_aspnetcore_accessibility_keyboardnavigation%}) article.
+For details on how the DatePicker keyboard navigation works, refer to the [DatePicker Keyboard Navigation]({%slug htmlhelpers_datepicker_accessibility_keyboardnavigation%}) article.
 
 ## See Also
 
 * [Keyboard Navigation by the DatePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datepicker/keyboard-navigation)
-* [Keyboard Navigation by the DatePicker for {{ site.framework }}]({% slug htmlhelpers_datepicker_aspnetcore_accessibility_keyboardnavigation %})
+* [Keyboard Navigation by the DatePicker for {{ site.framework }}]({% slug htmlhelpers_datepicker_accessibility_keyboardnavigation %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

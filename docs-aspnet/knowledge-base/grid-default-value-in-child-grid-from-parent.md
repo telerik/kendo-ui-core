@@ -7,6 +7,7 @@ slug: grid-default-value-in-child-grid-from-parent
 tags: aspnet, core, dotnet-core, mvc, kendo, kendo-ui, grid, child, Hierarchy, default, date, value, property, assign, pass
 ticketid: 1457037
 res_type: kb
+components: ["general"]
 component: grid, datasource
 ---
 
@@ -27,7 +28,7 @@ component: grid, datasource
 
 I have a hierarchy Grid where I need to set the default value in the child's Grid to values from the parent, but I get an error. The value I need to set is a date. Here is my code:
 
-```
+```Razor
     .Model(model => {
         model.Field(m => m.TestDate).DefaultValue("#= kendo.toString(TestDate,'dd/MM/yyyy') #");
     })
@@ -47,7 +48,7 @@ The behavior you describe is expected because the Razor syntax expects a date ty
 
 I would suggest you use the `Edit()` event handler to find the master grid and master row and set the value to the new model programmatically instead:
 
-```
+```Razor
     .Events(e=>e.Edit("addDefaultDate")).Events(e=>e.Edit("addDefaultDate"))
 
     function addDefaultDate(e) {

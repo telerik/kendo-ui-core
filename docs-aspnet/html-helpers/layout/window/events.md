@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 slug: events_window_aspnetcore
 position: 11
 ---

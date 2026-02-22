@@ -2,6 +2,7 @@
 title: Colors
 page_title: Colors
 description: "Learn how to set the colors of the Telerik UI Circular Gauge component for {{ site.framework }}."
+components: ["circulargauge"]
 slug: colors_circulargaugehelper_aspnetcore
 position: 3
 ---
@@ -10,7 +11,7 @@ position: 3
 
 The scale of the Circular Gauge can show different colors for different values. This allows for a diversified usage of the widget. The `Colors` option accepts a set of ranges with a respective `Color` option:
 
-````HtmlHelper
+```HtmlHelper
     @(Html.Kendo().CircularGauge()
         .Name("gauge")
         .Value(65)
@@ -24,7 +25,7 @@ The scale of the Circular Gauge can show different colors for different values. 
             colors.Add().From(75).To(100).Color("#f31700");
         })
     )
-````
+```
 {% if site.core %}
 ```TagHelper
     <kendo-circulargauge name="gauge" value="65" center-template="<span style='color: #: color #;'>#: value #%</span>">

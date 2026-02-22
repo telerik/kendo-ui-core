@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Charts Documentation - TreeMap Overview
 description: "Get started with the jQuery TreeMap by Kendo UI and learn how to create a Kendo UI TreeMap component and explore its major features."
+components: ["chart"]
 slug: overview_treemap_widget
 position: 1
 ---

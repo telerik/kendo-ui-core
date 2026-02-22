@@ -5,9 +5,9 @@ description: "Learn how to use custom content containers in the Kendo UI PanelBa
 slug: howto_use_custom_content_containers_in_the_panelbar_widget
 previous_url: /controls/navigation/panelbar/how-to/use-custom-content-containers
 tags: telerik, kendo, jquery, panelbar, use, custom, content, containers
-component: panelbar
 type: how-to
 res_type: kb
+components: ["panelbar"]
 ---
 
 ## Environment

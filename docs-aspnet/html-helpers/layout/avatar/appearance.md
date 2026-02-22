@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Avatar Appearance
 description: "Learn how to customize the appearance of the widget Telerik UI Avatar HtmlHelper for {{ site.framework }}."
+components: ["avatar"]
 slug: appearance_avatar_aspnetcore
 position: 2
 ---
@@ -16,9 +17,11 @@ For a live example, refer to the [Appearance Demo of the Avatar](https://demos.t
 
 The `Type` can be configured via the `AvatarType` enumeration. The available `AvatarType` values are:
 
-- `Text` (Default) — By passing a string that will be rendered as text (initials).
+- `Text` — By passing a string that will be rendered as text (initials).
 - `Image` — By passing an `img` element as child element of the Avatar.
 - `Icon` — By passing an `icon` to the Avatar component.
+
+> When not explicitly set, the type defaults to `Text`.
 
 The following example demonstrates the `Type` option of the Avatar:
 
@@ -44,11 +47,14 @@ All of the types can be rendered in a different shape by setting the `Rounded` p
 
 The `Rounded` property can be configured via the `Rounded` enumeration. The available values are:
 
-- `Full` (default) — Renders a circle shape avatar.
+- `Full` — Renders a circle shape avatar.
 - `Small` — Renders an avatar with small border radius.
-- `Medium` — Renders an avatar with meduim border radius.
+- `Medium` — Renders an avatar with medium border radius.
 - `Large` — Renders an avatar with large border radius.
-- `None` — Renders an avatar with no border radius (square avatar).
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 The following example demonstrates the `Rounded` option of the Avatar:
 
@@ -74,7 +80,7 @@ The Avatar allows you to specify predefined theme colors.
 
 The available `ThemeColor` values are:
 
-- `Primary` (Default)—Applies coloring based on the primary theme color.
+- `Primary`—Applies coloring based on the primary theme color.
 - `Base` - Applies base theme color.
 - `Secondary` — Applies coloring based on the secondary theme color.
 - `Tertiary` — Applies coloring based on the tertiary theme color.
@@ -86,6 +92,8 @@ The available `ThemeColor` values are:
 - `Dark` — Applies coloring based on the dark theme color.
 - `Light` — Applies coloring based on the light theme color.
 - `Inverse` — Applies coloring based on the inverted theme color.
+
+> When not explicitly set, the applied theme controls the default theme color.
 
 ```HtmlHelper
    @(Html.Kendo().Avatar()
@@ -110,9 +118,12 @@ The available `ThemeColor` values are:
 The Avatar allows you to set predefined or custom sizes. The `Size` property can be configured via the `ComponentSize`enumeration. The available values are:
 
 - `Small`
-- `Medium` (Default)
+- `Medium`
 - `Large`
-- `None`
+
+> When not explicitly set, the applied theme controls the default size.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 ```HtmlHelper
     @(Html.Kendo().Avatar()
@@ -136,9 +147,12 @@ The Avatar allows you to set predefined or custom sizes. The `Size` property can
 
 The Avatar enables you to set styling options and create solid or outline avatars by setting the `AvatarFillMode`. The available `AvatarFillMode` values are:
 
-- `Solid` (Default)
+- `Solid`
 - `Outline`
-- `None`
+
+> When not explicitly set, the applied theme controls the default fill mode.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 ```HtmlHelper
     @(Html.Kendo().Avatar()

@@ -7,6 +7,7 @@ slug: calendar-how-to-set-multiple-dates-in-the-calendar-with-mvvm
 tags: calendar, multiple, dates, mvvm, binding
 ticketid: 1140439
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

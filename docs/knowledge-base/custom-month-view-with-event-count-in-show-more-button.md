@@ -5,9 +5,9 @@ description: "Learn how to inherit some of the built-in views and implement spec
 previous_url: /controls/scheduling/scheduler/how-to/custom-month-view-with-event-count-in-show-more-button, /controls/scheduling/scheduler/how-to/custom-views/custom-month-view-with-event-count-in-show-more-button
 slug: howto_create_custom_monthview_eventcount_showmore_button_scheduler
 tags: telerik, kendo, jquery, scheduler, create, custom, month, views, with, event, count, in, the, show, more, button
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -44,7 +44,7 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
         var MORE_BUTTON_TEMPLATE = kendo.template(
             '<div style="width:#=width#px;left:#=left#px;top:#=top#px"' +
-            'class="k-more-events k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base"><span style="font-size:8pt; margin-top: 0;">' +
+            'class="k-more-events k-button k-button-rectangle"><span style="font-size:8pt; margin-top: 0;">' +
             '#=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
 
         function getEventCountForRange(startSlot, endSlot, rowsCount) {
@@ -143,8 +143,8 @@ The following example demonstrates how to achieve the desired scenario.
 
         $(function() {
             var scheduler = $("#scheduler").kendoScheduler({
-                date: new Date("2022/6/13"),
-                startTime: new Date("2022/6/13 07:00 AM"),
+                date: new Date("2025/6/13"),
+                startTime: new Date("2025/6/13 07:00 AM"),
                 height: 600,
                 views: [
                     { type: "CustomMonthView", selected: true },
@@ -155,26 +155,26 @@ The following example demonstrates how to achieve the desired scenario.
                     batch: true,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/tasks"
                         },
                         update: {
-                            url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         create: {
-                            url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         destroy: {
-                            url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {
-                                    models: kendo.stringify(options.models)
-                                };
+                                return kendo.stringify(options.models);
                             }
                         }
                     },

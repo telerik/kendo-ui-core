@@ -6,7 +6,7 @@ page_title: Change Resource for an Event with a ContextMenu - Kendo UI Scheduler
 slug: scheduler-change-resource-for-event-using-contextmenu
 tags: kendo, scheduler, agenda-view, contextmenu, resources
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -35,8 +35,8 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
   <script>
     $(function() {
       var scheduler = $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/23"),
-        startTime: new Date("2022/6/23 07:00 AM"),
+        date: new Date("2025/6/23"),
+        startTime: new Date("2025/6/23 07:00 AM"),
         height: 600,
         views: [{ type: "agenda" }],
         timezone: "Etc/UTC",
@@ -44,24 +44,26 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
           batch: true,
           transport: {
             read: {
-              url: "//demos.telerik.com/kendo-ui/service/tasks",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/tasks"
             },
             update: {
-              url: "//demos.telerik.com/kendo-ui/service/tasks/update",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/tasks/update",
+              type: "POST",
+              contentType: "application/json"
             },
             create: {
-              url: "//demos.telerik.com/kendo-ui/service/tasks/create",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/tasks/create",
+               type: "POST",
+              contentType: "application/json"
             },
             destroy: {
-              url: "//demos.telerik.com/kendo-ui/service/tasks/destroy",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },

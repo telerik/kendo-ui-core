@@ -2,6 +2,7 @@
 title: Selected Dates
 page_title: Selected Dates
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to set the selected and the min and max values."
+components: ["daterangepicker"]
 slug: selecteddates_daterangepicker_aspnetcore
 position: 3
 ---
@@ -27,7 +28,7 @@ The following example demonstrates how to render a DateRangePicker with an initi
     <kendo-daterangepicker name="daterangepicker" min="new DateTime(2019, 9, 4)" max="new DateTime(2099, 12, 31)">
         <range start="DateTime.Now" end="DateTime.Now.AddDays(10)" />
     </kendo-daterangepicker>
-```    
+```
 {% endif %}
 
 You can access the selected start and end range using the .range() method as demonstrated here:

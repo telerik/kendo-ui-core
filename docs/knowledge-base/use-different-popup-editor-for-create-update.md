@@ -5,9 +5,9 @@ description: "Learn how to use different popup editors for create and update ope
 previous_url: /controls/data-management/grid/how-to/Editing/use-different-popup-editor-for-create-update
 slug: howto_use_different_poup_editors_for_create_update_operations
 tags: use, various, popup, editors, grid, create, update, operations
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -77,10 +77,10 @@ The following example demonstrates how to use different popup editors in a Grid 
                 e.model.ProductID = e.sender.dataSource.data().length;
               },
               dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                  read: "https://demos.telerik.com/service/v2/odata/Categories"
                 }
               }
             });
@@ -94,10 +94,10 @@ The following example demonstrates how to use different popup editors in a Grid 
                 e.model.ProductName = this.text();
               },
               dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                  read: "https://demos.telerik.com/service/v2/odata/Products"
                 }
               }
             });

@@ -2,7 +2,8 @@
 title: Overview
 page_title: Chip Documentation | Chip Accessibility
 description: "Get started with the {{ site.product }} Chip and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_chip_overview
+components: ["chip"]
+slug: htmlhelpers_chip_accessibility
 position: 1
 ---
 
@@ -63,7 +64,7 @@ To test the Chip component, refer to the [Chip Accessibility Demo](https://demos
 
 ## Keyboard Navigation
 
-For details on how the Chip keyboard navigation works, refer to the [Chip Keyboard Navigation]({%slug keynav_aspnetcore_chip%}) article.
+For details on how the Chip keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
 
 ## See Also
 

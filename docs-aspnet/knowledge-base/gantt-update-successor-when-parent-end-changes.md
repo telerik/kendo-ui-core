@@ -6,6 +6,7 @@ page_title: Update Dependencies When The Parent Task End is Changed - Telerik UI
 slug: gantt-update-successor-when-parent-end-changes
 tags: gantt, successor, dependencies, update
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

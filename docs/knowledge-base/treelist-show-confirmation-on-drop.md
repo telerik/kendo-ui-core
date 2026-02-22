@@ -6,6 +6,7 @@ page_title: Show Confirmation for Dragged and Dropped Items - Kendo UI TreeList 
 slug: treelist-show-confirmation-on-drop
 ticketid: 1130225
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment
@@ -40,19 +41,18 @@ The dialog confirmation is an asynchronous action. To add it during the drag-and
 
       <script id="photo-template" type="text/x-kendo-template">
                <div class='employee-photo'
-                    style='background-image: url(../content/web/treelist/people/#:data.EmployeeID#.jpg);'></div>
+                    style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/treelist/people/#:data.EmployeeID#.jpg);'></div>
                <div class='employee-name'>#: FirstName #</div>
       </script>
 
       <script>
-        var service = "https://demos.telerik.com/kendo-ui/service";
+        var service = "https://demos.telerik.com/service/v2/core";
 
         $("#treelist").kendoTreeList({
           dataSource: {
             transport: {
               read: {
-                url: service + "/EmployeeDirectory/All",
-                dataType: "jsonp"
+                url: service + "/EmployeeDirectory/All"
               }
             },
             schema: {

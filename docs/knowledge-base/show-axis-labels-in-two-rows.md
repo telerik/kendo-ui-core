@@ -5,9 +5,9 @@ description: "Learn how to insert line breaks in Category Axis labels when worki
 previous_url: /controls/charts/how-to/show-axis-labels-in-two-rows, /controls/charts/how-to/appearance/show-axis-labels-in-two-rows
 slug: howto_showlabelsintworows_charts
 tags: chart, show, category, axis, labels, multiple, lines
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

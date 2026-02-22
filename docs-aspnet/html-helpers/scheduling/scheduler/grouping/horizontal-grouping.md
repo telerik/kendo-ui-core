@@ -2,6 +2,7 @@
 title: Horizontal Grouping
 page_title: Horizontal Grouping
 description: "Learn how to group the resources of the Telerik UI for {{ site.framework }} Scheduler horizontally."
+components: ["scheduler"]
 slug: scheduler_resources_grouping_horizontal
 position: 2
 ---

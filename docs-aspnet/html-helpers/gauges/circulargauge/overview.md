@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI CircularGauge component for {{ site.framework }} and learn how to initialize and configure the component."
+components: ["circulargauge"]
 previous_url: /helpers/gauges/circulargauge/overview
 slug: overview_circulargaugehelper_aspnetcore
 position: 0
@@ -28,10 +29,12 @@ It is essentially very similar to the ArcGauge with the difference that the Circ
 
 1. Create a new action method which renders the view.
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+    ```C#
+    public ActionResult Index()
+    {
+        return View();
+    }
+    ```
 
 1. Add the CircularGauge.
 

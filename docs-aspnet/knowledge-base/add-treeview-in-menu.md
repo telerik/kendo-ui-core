@@ -6,6 +6,7 @@ page_title: How to Replace Menu Items with TreeView in Kendo UI for ASP.NET MVC
 slug: how-to-integrate-kendo-treeview-in-menu-item-aspnet-mvc
 tags: kendo ui, asp.net mvc, menu, treeview, integration, navigation
 res_type: kb
+components: ["general"]
 ticketid: 1634883
 ---
 

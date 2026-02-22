@@ -6,6 +6,7 @@ page_title: How to Add New Item at the Bottom of Kendo UI ListView
 slug: listview-add-new-item-bottom
 tags: kendo-ui, listview, add, item, bottom
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

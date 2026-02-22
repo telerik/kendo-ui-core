@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ButtonGroup Documentation - Getting Started with the ButtonGroup
 description: "Get started with the jQuery ButtonGroup by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["buttongroup"]
 slug: getting_started_kendoui_buttongroup_widget
 position: 1
 ---
@@ -83,8 +84,4 @@ The ButtonGroup provides various configurations to change its appearance. Below 
 * [JavaScript API Reference of the ButtonGroup](/api/javascript/ui/buttongroup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -139,18 +139,18 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 
 Kendo UI Core depends on the following libraries:
 
-- [jQuery](http://www.jquery.com) v1.9.1+
+- [jQuery](http://www.jquery.com) v3.7.1
 
 Kendo UI Core has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with Kendo UI Core. However, we make no claims to support those versions, and will not troubleshoot issues that arise when using those versions.
 
 
 ## Building Kendo UI Core
 
-There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerik.com](https://www.telerik.com/kendo-ui/open-source-core), or build the source yourself using Gulp. The latter approach includes an option for building a distribution of Kendo UI Core that includes only the widgets and framework features required by your app.
+There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerik.com](https://www.telerik.com/kendo-ui/open-source-core), or build the source yourself. The latter approach includes an option for building a distribution of Kendo UI Core that includes only the widgets and framework features required by your app.
 
 ### Installing Dependencies
 
-In order to build Kendo UI Core, you need to have **Node.js 14.x** and **git 2.x**.
+In order to build Kendo UI Core, you need to have **Node.js 24.x**.
 
 For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
@@ -172,47 +172,50 @@ Enter the repository directory
 cd kendo-ui-core
 ```
 
-Initialize the submodule repository
-
-```bash
-git submodule update --init
-```
-
 Install dependencies:
 ```bash
-npm install
+npm ci
 ```
 
 Run the build script:
 ```bash
 npm run build
 ```
-The minified version of the scripts and styles of Kendo UI Core will be put in the `dist/` subdirectory.
-
-There are several other tasks available:
-```sh
-npx gulp --tasks
-```
+The minified version of the scripts will be put in the `dist/` subdirectory.
 
 ### Building only what you need
 
-The gulp `custom` task will create a custom minified file - `dist/kendo.custom.min.js`, which includes only the specified components. The following command will include only the autocomplete and dropdownlist widgets:
+Create a `src/kendo.custom.js` file. Import the components that you want your bundle to have. E.g.
 
-```sh
-npx gulp custom -c autocomplete,dropdownlist
+```javascript
+import './kendo.dropdownlist.js';
+import './kendo.numerictextbox.js';
 ```
 
-### Building ESM and CJS modules
+Add the `bundle all` text after all imports:
 
-The npm script `npm run scripts:modules` will create two folders (`cjs` and `esm`) in the `dist` folder, which includes the bundled modules.
+```javascript
+import './kendo.dropdownlist.js';
+import './kendo.numerictextbox.js';
+
+   "bundle all";
+```
+
+Run `npm run scripts` or `npm run scripts:min` to produce the bundles.
+
+After the process is completed, you should see `dist/js/kendo.custom.js`(or `min.js`) which will contain the combined source code for the given components.
 
 ### Development
 
-- Run the dev script in order to compile both modules and js files in `dist/dev` and `dist/mjs` folder
+- Run the dev script in order to compile the source code inside `dist/dev`. The source code is in `esm` format. You can edit the `rolldown.config.dev.mjs` to change the output. We recommend keeping it as is, as the rebuild times are much faster this way.
 
     `npm run scripts:dev` or `npm run scripts:dev -- -w`
 
-- Run the tests by running `npx gulp tests`
+- Run the tests:
+
+1. Run `npx playwright install` to install the necessary dependencies.
+2. Go to the `tests` folder by using `cd tests`.
+3. Run `npx vitest` to execute all tests.
 
 ## Source Code and Downloads
 

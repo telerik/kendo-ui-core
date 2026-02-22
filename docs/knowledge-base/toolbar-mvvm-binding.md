@@ -5,9 +5,9 @@ description: "Learn how to create a custom MVVM binding to update the Toolbar co
 previous_url: /controls/data-management/grid/how-to/toolbar-mvvm-binding, /controls/data-management/grid/how-to/binding/toolbar-mvvm-binding
 slug: howto_update_toolbar_content_using_mvvmbinding_grid
 tags: update, toolbar, content, using, mvvm, binding
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -81,20 +81,21 @@ The following example demonstrates how to create a [custom MVVM binding](/framew
             batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products/update",
+                     type: "POST",
+                 contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/products/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/products/create",
+                     type: "POST",
+                 contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             }

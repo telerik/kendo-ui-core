@@ -2,6 +2,7 @@
 title: Useful Tips
 page_title: Security and Validation Useful Tips
 description: "Get started with Telerik UI for {{ site.framework }} and learn the fundamentals for XSS and CSRF attacks."
+components: ["general"]
 slug: aspnetcore_security_gettingstarted
 previous_url: /getting-started/helper-basics/security-and-validation, /html-helpers/helper-basics/security-and-validation
 position: 2
@@ -120,7 +121,7 @@ When the [`Html()`](/api/kendo.mvc.ui.fluent/spreadsheetsheetrowcellbuilder#html
 
 ### PanelBar
 
-The [PanelBar]({% slug htmlhelpers_panelbar_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/panelbarbuilder#itemssystemactionkendomvcuifluentpanelbaritemfactory) configuration option allows the developer to disable the encoding for a particular item. {% if site.core %} for the [panelbar taghelper]({% slug htmlhelpers_panelbar_aspnetcore %}), disable the `encoded` attribute in the `panelbar-item` tag.{% endif %}
+The [PanelBar]({% slug htmlhelpers_panelbar_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/panelbarbuilder#itemssystemaction) configuration option allows the developer to disable the encoding for a particular item. {% if site.core %} for the [panelbar taghelper]({% slug htmlhelpers_panelbar_aspnetcore %}), disable the `encoded` attribute in the `panelbar-item` tag.{% endif %}
 
 ```HtmlHelper
     @(Html.Kendo().PanelBar()
@@ -149,7 +150,7 @@ In such scenarios, the use of HTML for the item text is allowed. The developer s
 
 ### Menu
 
-The [Menu]({% slug htmlhelpers_menu_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/menubuilder#itemssystemactionkendomvcuifluentmenuitemfactory) configuration option {% if site.core %}or the  `menu-item` tag {% endif %} allows the developer to disable the encoding for a menu item. 
+The [Menu]({% slug htmlhelpers_menu_aspnetcore %}) [`Items`](/api/kendo.mvc.ui.fluent/menubuilder#itemactionsystemaction) configuration option {% if site.core %}or the  `menu-item` tag {% endif %} allows the developer to disable the encoding for a menu item. 
 
 ```HtmlHelper
     @(Html.Kendo().Menu()
@@ -184,7 +185,7 @@ The usage of [Kendo Templates allows the developer to decide whether the display
 
 The [`DataSourceRequest`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui/datasourcerequest) object contains information on how the data, requested by a the Kendo widget, should be paged, filtered, sorted, grouped. This information is further translated internally to System.Linq.Expressions.Expression class. In the end, the ToDataSourceResult executes a LINQ query based on the information contained DataSourceRequest object, passed to an action method. The DataSourceRequest object itself does not contain user-provided data and does not contain HTML.
  
-```
+```C#
     //
     // Summary:
     //     Provides information about paging, sorting, filtering and grouping of data.
@@ -255,7 +256,7 @@ The anti-forgery tokens are used to ensure that a form or a request has been sub
 1. Send the token to the server-side by using the transport.data option of the DataSource. The [`kendo.antiforgerytokens`](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/antiforgerytokens) method returns an object that contains common CSRF tokens that are found on the page.
 
 
-    ```
+    ```Razor
         .Read(read=>read.Action("DetailProducts_Read", "Grid").Data("sendForgery"))
 
             // .  .  .
@@ -270,7 +271,7 @@ The anti-forgery tokens are used to ensure that a form or a request has been sub
 
 1. Validate the token by decorating the ActionMethods with the `[ValidateAntiForgeryToken]` data annotation:
 
-    ```
+    ```C#
         [ValidateAntiForgeryToken]
         public ActionResult ActionMethodName( ModelName model ) 
         {

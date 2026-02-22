@@ -2,12 +2,13 @@
 title: Tooltip
 page_title: Tooltip
 description: "Learn how to configure the tooltip in Telerik UI Charts, make it visible, and set its properties depending on your preferences."
+components: ["chart"]
 slug: htmlhelpers_charts_tooltip_aspnetcore
 ---
 {% if site.core %}
-    {% assign TemplateId = "/api/Kendo.Mvc.UI.Fluent/ChartAxisDefaultsCrosshairTooltipSettingsBuilder#templateidsystemstring" %}
+    {% assign TemplateId = "/api/kendo.mvc.ui.fluent/chartaxisdefaultscrosshairtooltipsettingsbuilder#templateidsystemstring" %}
 {% else %}
-    {% assign TemplateId = "/api/Kendo.Mvc.UI.Fluent/ChartAxisCrosshairTooltipBuilder#templatesystemstring" %}
+    {% assign TemplateId = "/api/kendo.mvc.ui.fluent/chartaxiscrosshairtooltipbuilder#templatesystemstring" %}
 {% endif %}
 
 # Tooltip
@@ -138,7 +139,7 @@ You can also use an external template by specifying [`TemplateId`]({{ TemplateId
 ```
 {% endif %}
 
-```Template
+```JS Template
     <script id="tooltipTemplate" type="text/x-kendo-template">
         Value: #= value # ; Category: #= category #
     </script>
@@ -148,6 +149,5 @@ You can also use an external template by specifying [`TemplateId`]({{ TemplateId
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API of the Chart for {{ site.framework }}](/api/chart)

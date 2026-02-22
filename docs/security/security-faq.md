@@ -2,6 +2,7 @@
 title: FAQ
 page_title: FAQ
 description: "Find answers to common questions about securing Kendo UI for jQuery controls, including how to report vulnerabilities, handle third-party dependencies, and receive security fixes."
+components: ["general"]
 slug: security/security-faq
 tags: telerik, kendoui, jquery, security
 published: True

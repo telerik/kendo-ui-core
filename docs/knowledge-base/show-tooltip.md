@@ -5,9 +5,9 @@ description: "Learn how to show additional information about a Kendo UI TreeList
 slug: howto_showtooltip_treelist
 previous_url: /controls/data-management/treelist/how-to/show-tooltip, /controls/layout/tooltip/how-to/kendoui-tooltip-in-treelist
 tags: kendo, jquery, treelist, show, extra, additional, information, in, tooltip
-component: treelist
 type: how-to
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

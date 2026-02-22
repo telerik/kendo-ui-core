@@ -2,6 +2,7 @@
 title: RequireJS
 page_title: RequireJS - Kendo UI Third-Party Tools
 description: "Learn how to work with Kendo UI and RequireJS compatible loader."
+components: ["general"]
 previous_url: /using-kendo-with-requirejs
 slug: requirejs_integration_kendoui
 ---
@@ -192,13 +193,10 @@ The following example demonstrates how to use a [custom Kendo script created wit
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})

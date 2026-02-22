@@ -2,6 +2,7 @@
 title: Overview
 page_title: Data Binding Overview
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and learn about the OLAP cube configuration for performing Ajax data binding with the PivotGridV2."
+components: ["pivotgridv2"]
 slug: databinding_pivotgridv2helper_aspnetcore
 position: 1
 ---
@@ -19,7 +20,7 @@ The PivotGridV2 for {{ site.framework }} supports Ajax data binding to an HTTP a
 
 ## OLAP Services
 
-* Telerik UI provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/olap/msmdpump.dll`. 
+* Telerik UI provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/service/v2/olap/msmdpump.dll`.
 * To see the responses, the service needs to be queried and cannot be opened directly in the browser.
 
 For more information on binding the PivotGridV2 to data over an OLAP cube, refer to the following articles:

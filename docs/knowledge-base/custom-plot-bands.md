@@ -5,9 +5,9 @@ description: "Learn how to create your own plot bands as a custom overlay in a K
 previous_url: /controls/charts/how-to/custom-plot-bands, /controls/charts/how-to/appearance/custom-plot-bands
 slug: howto_rendercustomplotbands_charts
 tags: chart, render, custom, plot, bands
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

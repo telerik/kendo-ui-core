@@ -5,6 +5,7 @@ page_title: Copy Text from {{ site.product }} TextBox to Clipboard
 slug: copy-text-from-textbox-to-clipboard
 tags: textbox, clipboard, copy, button, suffix, telerik, core, mvc, aspnet, kendo
 res_type: kb
+components: ["general"]
 component: textbox
 ---
 
@@ -68,7 +69,7 @@ To achieve the desired result:
     </kendo-textbox>
 ```
 {% else %}
-```Index.cshtml
+```Razor Index.cshtml
      @(Html.Kendo().TextBox()
         .Name("email")
         .Label(l => l.Content("Email Address").Floating(false))
@@ -89,7 +90,7 @@ To achieve the desired result:
 ```
 {% endif %}
 
-```Script.js
+```JS script.js
     <script>
         function onClick(e){
             var textBoxValue = $("#email").getKendoTextBox().value();

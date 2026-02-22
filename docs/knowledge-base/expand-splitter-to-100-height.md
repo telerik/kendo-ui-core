@@ -5,9 +5,9 @@ description: "Learn how to expand the Kendo UI Splitter to a 100% height and mak
 previous_url: /kendo-ui-mvc/controls/layout/splitter/how-to/expand-splitter-to-100-height, /controls/layout/splitter/how-to/expand-splitter-to-100-height
 slug: howto_expandto100heightandautoresize_splitter
 tags: telerik, kendo, jquery, splitter, expand, to, 100%, percent, height, auto, resize  
-component: splitter
 type: how-to
 res_type: kb
+components: ["splitter"]
 ---
 
 ## Environment

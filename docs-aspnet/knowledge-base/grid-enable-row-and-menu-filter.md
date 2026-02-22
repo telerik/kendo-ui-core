@@ -7,6 +7,7 @@ tags: telerik, grid, filter, row, menu, mode
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -31,7 +32,7 @@ How can I enable both the row and menu filter modes in the {{ site.product }} Gr
 To achieve the desired behavior, change the options of the Grid and enable both the menu and row filter modes by using the [`setOptions()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/setoptions) method.
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
     .Name("grid")
@@ -50,7 +51,7 @@ To achieve the desired behavior, change the options of the Grid and enable both 
 )
 
 ```
-```Script.js
+```JS script.js
     <script>
         $(document).ready(function () {
             let grid = $("#grid").data("kendoGrid")

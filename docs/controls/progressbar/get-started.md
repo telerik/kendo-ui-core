@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ProgressBar Documentation - Getting Started with the ProgressBar
 description: "Get started with the jQuery ProgressBar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["progressbar"]
 slug: getting_started_kendoui_progressbar_widget
 position: 1
 ---
@@ -178,8 +179,4 @@ The ProgressBar supports the [`change`](/api/javascript/ui/progressbar/events/ch
 * [JavaScript API Reference of the ProgressBar](/api/javascript/ui/progressbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

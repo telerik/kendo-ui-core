@@ -2,8 +2,9 @@
 title: Sizing
 page_title: Telerik UI Grid component for {{ site.framework }} Documentation - Sizing
 description: "Get started with the Telerik UI Grid for {{ site.framework }} and learn about its sizing options."
+components: ["grid"]
 slug: sizing_grid
-position: 6
+position: 7
 ---
 
 # Sizing
@@ -26,5 +27,8 @@ The `Size` option does not affect elements which are displayed inside a popup su
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Sizing the Telerik UI for {{ site.framework }} Data Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sizing)
 * [JavaScript API Reference of the size property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/size)

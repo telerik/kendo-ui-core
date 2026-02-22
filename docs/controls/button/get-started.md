@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Button Documentation - Getting Started with the Button
 description: "Get started with the jQuery Button by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["button"]
 slug: getting_started_kendoui_button_widget
 position: 2
 ---
@@ -95,8 +96,4 @@ Now you can use the [`badge`](/api/javascript/ui/button/configuration/badge) opt
 * [JavaScript API Reference of the Button](/api/javascript/ui/button)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

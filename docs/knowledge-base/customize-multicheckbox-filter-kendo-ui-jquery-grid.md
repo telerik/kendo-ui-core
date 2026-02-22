@@ -6,6 +6,7 @@ page_title: How to Add Custom Buttons to MultiCheckBox Filter in Kendo UI for An
 slug: customize-multicheckbox-filter-kendo-ui-jquery-grid
 tags: kendo-ui-for-jquery, grid, multicheckbox, filter, customize
 res_type: kb
+components: ["grid"]
 ticketid: 1681456
 ---
 
@@ -55,18 +56,17 @@ A practical example demonstrating custom 'Update' and 'Cancel' buttons for speci
 <div id="client"></div>
     <script>
       $(document).ready(function () {
-        var telerikWebServiceBase =
-          "https://demos.telerik.com/kendo-ui/service/";
+        var crudServiceBaseUrl =
+          "https://demos.telerik.com/service/v2/core/";
         $("#client").kendoGrid({
           dataSource: {
             transport: {
               read: {
-                url: telerikWebServiceBase + "/Products",
-                dataType: "jsonp",
+                url: crudServiceBaseUrl + "/Products"
               },
               parameterMap: function (options, operation) {
                 if (operation !== "read" && options.models) {
-                  return { models: kendo.stringify(options.models) };
+                  return kendo.stringify(options.models);
                 }
               },
             },
@@ -185,4 +185,4 @@ A practical example demonstrating custom 'Update' and 'Cancel' buttons for speci
 
 - [Kendo UI for jQuery Grid - Overview](https://docs.telerik.com/kendo-ui/controls/grid/overview)
 - [DataSource API Reference](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource)
-- [Customizing Filter Menus in Kendo UI Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-customize-filter-menu-multicheck-items)
+- [Use MultiSelect for Column Filtering in Kendo UI Grid](https://docs.telerik.com/kendo-ui/knowledge-base/multiselect-used-for-column-filtering)

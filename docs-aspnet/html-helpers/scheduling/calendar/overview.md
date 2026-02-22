@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Calendar component for {{ site.framework }} provides a styled UI Calendar."
+components: ["calendar"]
 previous_url: /helpers/scheduling/calendar/overview
 slug: htmlhelpers_overview_calendarhelper_aspnetcore
 position: 0
@@ -52,7 +53,7 @@ The following example demonstrates how to define the Calendar by using the Calen
 * [Week numbers]({% slug htmlhelpers_weeknumbers_calendar_aspnetcore %})
 * [Selection]({% slug htmlhelpers_selection_calendar_aspnetcore %})
 * [Disabled dates]({% slug htmlhelpers_disableddates_calendar_aspnetcore %})&mdash;The Calendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
-* [Accessibility]({% slug htmlhelpers_accessibility_calendar_aspnetcore %})&mdash;You can take advantage of the accessibility capabilities provided by the Calendar component.
+* [Accessibility]({% slug htmlhelpers_calendar_accessibility %})&mdash;You can take advantage of the accessibility capabilities provided by the Calendar component.
 * [Century cells format]({% slug htmlhelpers_century_cells_format_calendar_aspnetcore %})&mdash;The component exposes two formats for the century cells.
 * [Reverse selection]({% slug htmlhelpers_reverse_selection_calendar_aspnetcore %})&mdash;The component allows you to pick an end date which is before the start date.
 * [Show other month days]({% slug htmlhelpers_show_other_month_days_calendar_aspnetcore %})&mdash;The component allows you to control if the days from the previous/next months will be displayed.
@@ -105,7 +106,7 @@ The following example demonstrates how to subscribe to events by a handler name.
             kendo.alert(calendar.value());
         }
     </script>
-```    
+```
 {% endif %}
 
 ### Handling by Template Delegate
@@ -132,7 +133,7 @@ The following example demonstrates how to subscribe to events by a template dele
     )
 ```
 {% if site.core %}
-```TagHelper.cshtml
+```TagHelper
     <kendo-calendar name="calendar"
                     on-change='function(e)
                     {

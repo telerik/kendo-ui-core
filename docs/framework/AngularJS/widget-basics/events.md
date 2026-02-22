@@ -2,6 +2,7 @@
 title: Event Handlers
 page_title: Event Handling | AngularJS Directives
 description: "Learn more about handling Kendo UI widget events in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#setting-event-handlers
 slug: angularjs_widget_events
 position: 4
@@ -109,9 +110,9 @@ The following example demonstrates how to use some of these local variables.
         }
         $scope.mainGridOptions = {
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 5,
             serverPaging: true,

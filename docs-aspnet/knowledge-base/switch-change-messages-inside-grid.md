@@ -8,6 +8,7 @@ position:
 tags: switch, grid, messages, change, databound
 ticketid: 1434769
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

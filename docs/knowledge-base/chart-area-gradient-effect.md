@@ -7,6 +7,7 @@ slug: chart-area-gradient-effect
 tags: chart, area, gradient, effect, color
 ticketid: 1158735
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

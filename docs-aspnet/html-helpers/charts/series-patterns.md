@@ -2,6 +2,7 @@
 title: Chart Patterns
 page_title: Chart Patterns
 description: "Learn how to use Series Patterns of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_patterns
 position: 7
 ---
@@ -235,6 +236,5 @@ The following example demonstrates how to create a pie chart where each segment 
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Kendo UI Area Charts Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API](/api/chart)

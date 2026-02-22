@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Button Documentation - Button Globalization
 description: "Get started with the jQuery Button by Kendo UI and learn about the globalization options it supports."
+components: ["button"]
 slug: globalization_button
 position: 1
 ---

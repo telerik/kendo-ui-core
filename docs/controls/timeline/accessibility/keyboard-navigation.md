@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery TimeLine Documentation - Keyboard Navigation
 description: "Get started with the jQuery TimeLine by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["timeline"]
 slug: keynav_timeline_jquery
 position: 2
 ---
@@ -46,4 +47,4 @@ In horizontal mode, the Kendo UI for jQuery TimeLine supports the following keyb
 
 * [Keyboard Navigation by the Kendo UI for jQuery TimeLine (Demo)](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the TimeLine]({% slug accessibility_timeline_jquery %})
+* [Accessibility in the TimeLine]({% slug jquery_timeline_accessibility %})

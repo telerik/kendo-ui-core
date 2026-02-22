@@ -7,6 +7,7 @@ slug: grid-click-to-toggle-cell
 tags: grid, click, toggle, cell, content
 ticketid: 1153472
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

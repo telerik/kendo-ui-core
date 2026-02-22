@@ -5,9 +5,9 @@ description: "Learn how to manually filter the Data Source instance in a Kendo U
 previous_url: /controls/editors/combobox/how-to/filter-datasource-manually, /controls/editors/combobox/how-to/filtering/filter-datasource-manually
 slug: howto_filter_datasource_manually_combobox
 tags: telerik, kendo, jquery, combobox, filter, manually, data, source
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

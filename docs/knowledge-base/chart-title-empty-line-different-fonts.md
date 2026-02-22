@@ -7,6 +7,7 @@ slug: chart-title-empty-line-different-fonts
 tags: chart, title, font, subtitle
 ticketid: 1141221
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -28,7 +29,7 @@ How can I display a subtitle with an empty line and smaller font in the Kendo UI
 
 ## Solution
 
-1. Split the [`text`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/title.text) into three lines by using line feed characters(`\n`).
+1. Split the [`text`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/title) into three lines by using line feed characters(`\n`).
 1. Handle the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render) event of the Chart.
 1. In the `render` event handler:
 	1. Use a jQuery selector and [`hide`](https://api.jquery.com/hide/) the second line.

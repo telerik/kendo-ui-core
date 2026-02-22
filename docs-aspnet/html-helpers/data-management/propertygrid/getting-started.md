@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} PropertyGrid component by following a complete step-by-step tutorial."
+components: ["propertygrid"]
 slug: propertygrid_getting_started
 position: 1
 ---
@@ -313,7 +314,7 @@ To alter the appearance of the PropertyGrid values, use the template options of 
     </kendo-propertygrid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function iconTemplate(data) {
             return `${kendo.ui.icon(data.value)}`;
@@ -401,7 +402,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `Name()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var propertyGridReference = $("#propertyGrid").data("kendoPropertyGrid"); // propertyGridReference is a reference to the existing instance of the helper.
         </script>

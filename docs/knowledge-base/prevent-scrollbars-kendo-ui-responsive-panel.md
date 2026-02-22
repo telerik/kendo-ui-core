@@ -6,6 +6,7 @@ page_title: How to Fix Scrollbars Appearing in Kendo UI Responsive Panel with Me
 slug: prevent-scrollbars-kendo-ui-responsive-panel
 tags: kendo ui, responsive panel, overflow, css, menu
 res_type: kb
+components: ["menu"]
 ticketid: 1661761
 ---
 

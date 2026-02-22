@@ -7,6 +7,7 @@ previous_url: /knowledge-base/how-to-sort-the-detail-grid-programmatically
 slug: sort-the-detail-grid-programmatically
 ticketid: 1116825
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

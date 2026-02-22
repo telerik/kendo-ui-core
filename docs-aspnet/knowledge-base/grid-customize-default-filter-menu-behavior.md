@@ -7,6 +7,7 @@ slug: grid-customize-default-filter-menu-behavior
 tags: grid, filter, menu, value, persist, input
 ticketid: 1579319
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -38,7 +39,7 @@ How can I customize the default behavior of the Filter Menu and persist the sing
 1. Check if the Grid is filtered by the second input field and update its value by using the global variable `dtp2Value`.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Columns(columns =>

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: spreadsheet_events
 position: 4
 ---

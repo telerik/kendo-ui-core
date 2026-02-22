@@ -6,7 +6,7 @@ page_title: Attach a Handler for the Command click Event in AngularJS - Kendo UI
 slug: grid-angular-click-handler-for-command
 tags: grid, angularJS, event, command, handler
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -64,9 +64,9 @@ The following example demonstrates how to apply the necessary approach.
 
 				$scope.mainGridOptions = {
 					dataSource: {
-						type: "odata",
+						type: "odata-v4",
 						transport: {
-							read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+							read: "https://demos.telerik.com/service/v2/odata/Employees"
 						},
 						pageSize: 5,
 						serverPaging: true,

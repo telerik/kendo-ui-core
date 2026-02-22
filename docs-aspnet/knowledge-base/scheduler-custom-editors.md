@@ -7,6 +7,7 @@ previous_url: /html-helpers/scheduling/scheduler/how-to/custom-editor
 slug: scheduler-custom-editors
 tags: scheduler, custom, editors, template, events, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 
@@ -55,7 +56,7 @@ How can I use a custom template with editors to create new and edit the existing
 1. Create a View in the **~Views\Shared\EditorTemplates** folder. The name of the View must match the specified name in the `TemplateName()` option (for example, **CustomEditorTemplate.cshtml**).
    The created template automatically receives the respective Model data. As a reuslt, you can bind the fields through the `<WidgetName>For()` Helpers, as the Scheduler uses the [MVVM Pattern](https://docs.telerik.com/kendo-ui/framework/mvvm/overview) internally to update the data in the views:
 
-    ```CustomEditorTemplate.cshtml
+    ```Razor CustomEditorTemplate.cshtml
         @model MeetingViewModel
 
         <div class="k-edit-label">
@@ -88,7 +89,7 @@ How can I use a custom template with editors to create new and edit the existing
         </div>
     ```
     {% if site.core %}
-    ```TagHelper_CustomEditorTemplate.cshtml
+    ```TagHelper
         @model MeetingViewModel
 
         @{
@@ -178,7 +179,7 @@ How can I use a custom template with editors to create new and edit the existing
         public int? RoomID { get; set; }
     }
     ```
-    ```Interface
+    ```C# Interface
     namespace Kendo.Mvc.UI;
 
     public interface ISchedulerEvent

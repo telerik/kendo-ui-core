@@ -7,6 +7,7 @@ slug: grid-show-column-width-while-resizing
 tags: grid, show, column, width, resize, resizable, tooltip, excel
 ticketid: 1333477
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: Show Notifications when Editing Inline Grid
 slug: grid-show-notifications
 tags: grid, notification, messages, inline, editing
 res_type: kb
+components: ["general"]
 ticketid: 1580942
 component: grid, notification
 ---

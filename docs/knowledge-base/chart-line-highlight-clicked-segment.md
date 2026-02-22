@@ -7,6 +7,7 @@ slug: chart-line-highlight-clicked-segment
 tags: chart, line, highlight, click, series
 ticketid: 1152454
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -39,7 +40,7 @@ Handle the [`seriesClick`](https://docs.telerik.com/kendo-ui/api/javascript/data
 </style>
 <div id="example">
 	<div class="demo-section k-content wide">
-		<div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+		<div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
 	</div>
 	<script>
 		function createChart() {

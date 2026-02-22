@@ -5,9 +5,9 @@ description: "Learn how to disable a cascading child Kendo UI ComboBox."
 previous_url: /controls/editors/combobox/how-to/disable-child-combo, /controls/editors/combobox/how-to/cascade/disable-child-combo
 slug: howto_disable_child_cascading_combobox
 tags: telerik, kendo, jquery, combobox, disable, cascading, for, children
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment
@@ -81,10 +81,10 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "CategoryName",
           dataValueField: "CategoryID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/odata/Categories"
             }
           }
         }).data("kendoComboBox");
@@ -96,10 +96,10 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "ProductName",
           dataValueField: "ProductID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/service/v2/odata/Products"
             }
           },
           dataBound: function() {

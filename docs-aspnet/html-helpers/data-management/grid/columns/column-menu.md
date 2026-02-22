@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: Column Menu
 description: "Get started with the {{ site.product_short }} Grid by Kendo UI and learn how to enable its column menu."
+components: ["grid"]
 slug: columnmenu_aspnet_grid
 position: 6
 ---
@@ -151,4 +152,7 @@ By default, the column menu of the Grid is initialized in the `classic` render m
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Column Menu by the Grid (Demo)](https://demos.telerik.com/{{site.platform}}/grid/column-menu)

@@ -2,6 +2,7 @@
 title: Cards
 page_title: Cards - Styles and Appearance
 description: "Learn how to use the Kendo UI card class to render a flexible content container."
+components: ["general"]
 previous_url: /styles-and-layout/checkbox-cards
 slug: cards_kendouistyling
 ---

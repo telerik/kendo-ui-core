@@ -5,9 +5,9 @@ description: "Learn how to initialize the Kendo UI Grid inside the Kendo UI TabS
 slug: initialize_thegrid_tabstrip_widget
 previous_url: /controls/navigation/tabstrip/how-to/initiliaze-grid-in-tabstrip
 tags: telerik, kendo, jquery, tabstrip, grid, initialize
-component: tabstrip
 type: how-to
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

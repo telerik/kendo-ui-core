@@ -2,8 +2,9 @@
 title: 2024 Releases
 page_title: 2024 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2024."
+components: ["general"]
 slug: breakingchanges_2024
-position: 2
+position: 4
 ---
 
 # 2024 Releases
@@ -17,11 +18,11 @@ This article lists the breaking or important changes in the 2024 releases of {{ 
 For a while, the [CSS Utilities](https://www.telerik.com/design-system/docs/utils/get-started/introduction/) were bundled with the Kendo UI themes. Starting with version Q4 2024, the CSS Utilities are no longer included in the [Kendo UI themes]({% slug sassbasedthemes_overview %}).
 The Kendo UI theme stylesheet still contains all the necessary styles. However, in case you need to create an additional layout, dependent on the utility classes, you need to include the additional stylesheet `kendo-theme-utils.css`, which is available in the `styles` folder of the {{ site.product }} distribution and through the Kendo CDN service.
 
-```LocalFiles
+```HTML LocalFiles
     <link rel="stylesheet" href="~/lib/kendo/styles/default-ocean-blue.css" />
     <link rel="stylesheet" href="~/lib/kendo/styles/kendo-theme-utils.css" />
 ```
-```CDN
+```HTML CDN
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-ocean-blue.css" />
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/utils/all.css"/>
 ```
@@ -37,7 +38,7 @@ The `Rounded` configuration for the HTML Helpers now expects [`Kendo.Mvc.UI.Roun
 
 ### PanelBar TagHelper
 
-The `PanelBarItemBase(ViewContext)` constructor of the `PanelBarItemBase.cs` class is now obsolete. Use the parameterless constructo instead.
+The `PanelBarItemBase(ViewContext)` constructor of the `PanelBarItemBase.cs` class is now obsolete. Use the parameterless constructor instead.
 
 ### Form TagHelper
 
@@ -50,7 +51,7 @@ The `<WidgetName>.AsChildComponent()` method has been deprecated.
 
 #### Content browsing APIs
 
-The following interfaces, classes and their methods have been depreceted and removed from the `Kendo.Mvc` dll:
+The following interfaces, classes and their methods have been deprecated and removed from the `Kendo.Mvc` dll:
 
 {% if site.mvc %}
 | Component        | Class                      |
@@ -82,7 +83,7 @@ The following interfaces, classes and their methods have been depreceted and rem
 | FileManager      | `IContentPermission.cs`    |
 {% endif %}
 
-The code is moved to the demo application, where it is used for demo purposes only, demonstrating a possible implementation of the directory and file access functionality{% if site.mvc %}, and thumbnail creation{% endif %}. It is advisable to follow the best practices of your company/organisation when implementing the read/write access for the backend required for the above-listed components.
+The code is moved to the demo application, where it is used for demo purposes only, demonstrating a possible implementation of the directory and file access functionality{% if site.mvc %}, and thumbnail creation{% endif %}. It is advisable to follow the best practices of your company/organization when implementing the read/write access for the backend required for the above-listed components.
 
 #### Editor APIs
 
@@ -186,12 +187,12 @@ The code is moved to the demo application, where it is used for demo purposes on
 
 **PDFViewer**
 
-* The PDFViewer starts using the [Pager](https://demos.telerik.com/{{ site.platform }}/pager/index) component internally and follows its specification. 
+* The PDFViewer starts using the [Pager](https://demos.telerik.com/{{ site.platform }}/pager/index) component internally and follows its specification.
 * Added `k-icon` class to the `k-dropzone-icon` in the center of the viewer.
 * Added `k-toolbar-combobox` to the combobox for zoom options.
 * Removed `k-widget`.
 * Removed `k-zoom-in-out-group` on the zoom tools buttongroup.
-* Removed `k-toggle-selection-group` on selection buttongroup. 
+* Removed `k-toggle-selection-group` on selection buttongroup.
 
 **PivotGridV2**
 
@@ -203,8 +204,8 @@ The following classes are now removed:
 * The `k-table-tbody` has been removed from the `.k-pivotgrid-tbody` elements.
 * The `k-table-row` class is now removed from the `.k-pivotgrid-row` elements.
 * The `k-grid-table` class has been removed from the `.k-pivotgrid-table` values table.
-* The `k-table-th` has been removed from the `th.k-pivotgrid-cell` elements. 
-* The `k-table-td` has been removed from the `td.k-pivotgrid-cell` elements. 
+* The `k-table-th` has been removed from the `th.k-pivotgrid-cell` elements.
+* The `k-table-td` has been removed from the `td.k-pivotgrid-cell` elements.
 * The `k-pos-relative` and `k-widget` classes are now removed from the Configurator.
 * The `k-rounded-full` class is substituted by `k-round-md`.
 * Added `k-pivotgrid-expanded` on an expanded header.
@@ -226,12 +227,12 @@ The following classes are now removed:
 |`k-view-week`| `[data-selector='week']`
 |`k-view-day`| `[data-selector='day']`
 |`k-view-agenda`| `[data-selector='agenda']`
-|`k-view-timeline`| `[data-selector='timeline']`  
+|`k-view-timeline`| `[data-selector='timeline']`
 |`k-svg-i-arrow-left`| `k-i-caret-alt-left`
 |`k-svg-i-arrow-right`| `k-i-caret-alt-right`
 
 * The `k-button-rectangle` is removed from the buttons in views ButtonGroup.
-* The`k-heading-cell` is removed from the Scheduler first column. 
+* The`k-heading-cell` is removed from the Scheduler first column.
 * The `k-scheduler-table-auto` is removed from the Month view.
 * The `k-scheduler-group-cell` is removed from grouped Scheduler.
 * Added `k-scheduler-navigation` class to Today, Previous and Next buttongroup.
@@ -255,11 +256,11 @@ Apart from that, we made changes in the positioning styles of the component. Unt
 
 **Spreadsheet**
 
-* The tabs in the Spreadsheet are now rendered via [`Kendo Menu`](/api/javascript/ui/menu) instead of a [`Kendo TabStrip`](/api/javascript/ui/tabstrip).
-* The rendering of the SheetsBar at the bottom is unified with the rendering of a [`Kendo UI TabStrip`](/api/javascript/ui/tabstrip).
+* The tabs in the Spreadsheet are now rendered via [`Kendo Menu`](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu) instead of a [`Kendo TabStrip`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip).
+* The rendering of the SheetsBar at the bottom is unified with the rendering of a [`Kendo TabStrip`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip).
 * The `Add New Sheet` tool in the SheetsBar is now created from `<button>` element instead of `<a role="button"\>`.
 * The `Quick Access` section in the top toolbar is removed and the `Undo` and `Redo` buttons are moved in the Home tab.
-* The tools in the toolbar are now splitted into six separate tabs - File, Home, Insert, Format, Data and View.
+* The tools in the toolbar are now split into six separate tabs - File, Home, Insert, Format, Data and View.
 * Replaced `k-icon k-i-undo` with `k-icon k-i-reset`.
 * Replaced `k-icon k-i-redo` with `k-icon k-i-reload`.
 * Default values for `RowHeight` and `HeaderHeight` were set to 30 pixels.
@@ -343,13 +344,13 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 {% if site.core %}
 * `ChartSeriesBuilder.Type(string)`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series
              .Bar(new double[] { 3.907 })
              .Type("bar")
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series
            .Bar(new double[] { 3.907 }) // Type is determined by the declared Series builder.
         )
@@ -357,7 +358,7 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `ChartSeriesLineSettingsBuilder.Width(string)`, `ChartSeriesLineSettingsBuilder.Style(ChartAreaStyle)`, `ChartSeriesLineSettingsBuilder.Style(ChartPolarAreaStyle)`, `ChartSeriesLineSettingsBuilder.Style(ChartRadarAreaStyle)`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Line(line => line
@@ -368,7 +369,7 @@ As of the Q1 2024 release, the following APIs will be deprecated.
            )
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Line(line => line
@@ -380,13 +381,13 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `ChartSeriesOverlaySettingsBuilder.Gradient`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Overlay(overlay => overlay.Gradient(ChartBarGradient.Glass))
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series
            .Bar(new double[] { 3.907 })
            .Overlay(overlay => overlay.Gradient(ChartSeriesGradient.Glass))
@@ -395,13 +396,13 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `SplitterEventBuilder.LayoutChange`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Events(events => events
            .LayoutChange("change")
            .LayoutChange(@<text>function () { return; }</text>)
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Events(events => events
            .Render("change")
            .Render(@<text>function () { return; }</text>)
@@ -413,26 +414,26 @@ As of the Q1 2024 release, the following APIs will be deprecated.
 
 * `ChartSeriesBuilderBase.GroupNameTemplate`
 
-    ```Deprecated
+    ```Razor Deprecated
         .Series(series => series.Bar(s => s.Sales)
             .Name("Sales")
             .GroupNameTemplate("#= series.name # for #= group.field #   #=    group.value #")
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Series(series => series.Bar(s => s.Sales)
             .Name("#= series.name # for #= group.field #   #=    group.value #")
         )
     ```
 
 * `EditorMessages.FormatBlock`, `EditorMessages.Styles`
-    ```Deprecated
+    ```Razor Deprecated
         .Messages(messages => messages
             .FormatBlock("Format")
             .Styles("Style")
         )
     ```
-    ```Alternative
+    ```Razor Alternative
         .Messages(messages => messages
                .Formatting("Format")
                .Style("Style")

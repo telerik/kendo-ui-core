@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TimePicker Documentation - TimePicker Overview
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["timepicker"]
 slug: overview_kendoui_timepicker_widget
 position: 0
 ---
@@ -25,7 +26,7 @@ The widget supports configurable options for setting its format, minimum and max
 | [Interval]({% slug interval_kendoui_timepicker %}) | You can configure the interval between the time values. |
 | [Formats]({% slug formats_kendoui_timepicker %}) | The TimePicker allows you to define its time formatting. |
 | [Validation]({% slug validation_kendoui_timepicker %}) | The TimePicker is designed to keep its input value unchanged even when the typed time is invalid. |
-| [Accessibility]({% slug accessibility_kendoui_timepicker_widget %}) | The TimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Accessibility]({% slug jquery_timepicker_accessibility %}) | The TimePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
 | [Automatic Correction]({% slug autocorrect_kendoui_timepicker %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps

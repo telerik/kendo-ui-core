@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DateRangePicker component for {{ site.framework }}."
+components: ["daterangepicker"]
 slug: events_daterangepicker_aspnetcore
 position: 11
 ---

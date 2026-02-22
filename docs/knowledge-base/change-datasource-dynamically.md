@@ -5,9 +5,9 @@ description: "Learn how to dynamically change the DataSource based on user selec
 previous_url: /controls/editors/autocomplete/how-to/change-datasource-dynamically, /controls/editors/autocomplete/how-to/binding/change-datasource-dynamically
 slug: howto_change_datasource_dynamically_autocomplete
 tags: telerik, kendo, jquery, autocomplete, dynamically, change, datasource, on, user, selection, of, radio, buttons
-component: autocomplete
 type: how-to
 res_type: kb
+components: ["autocomplete"]
 ---
 
 ## Environment

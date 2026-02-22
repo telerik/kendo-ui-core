@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The {{ site.product }} suite comes with a set of built-in themes that you can choose from. Bootstrap and Material themes are also included."
+components: ["general"]
 slug: sassbasedthemes_overview
 previous_url: /styles-and-layout/sass-themes/installation, /styles-and-layout/sass-themes/browser-support, /styles-and-layout/sass-themes/swatches, /styles-and-layout/figma-kits, /styles-and-layout/sass-themes/figma-kits
 position: 1
@@ -55,7 +56,7 @@ There are two ways to load a Telerik theme, in terms of physical CSS file locati
 
 The Telerik themes are decoupled from the Telerik UI components, which leads to the following usage requirements:
 
-* When using a CSS theme as local file in `wwwroot`, [replace the file every time you change the {{ site.product }} version]({%slug upgrade_aspnetcore%}). This includes apps [created with the {{ site.product }} Visual Studio extension without CDN support]({%slug convertprojectwizard_visualstudio_aspnetcore%}#project-settings).
+* When using a CSS theme as local file in `wwwroot`, [replace the file every time you change the {{ site.product }} version]({%slug upgrade_aspnetcore%}). This includes apps [created with the {{ site.product }} Visual Studio extension]({%slug newprojectwizards_visualstudio_aspnetcore%}).
 
 >If you have an older version of the Telerik Extensions for Visual Studio and you want to create a new {{ site.product }} project with version 2023.1.314 (R1 2023 SP1), or a newer version of the components, you must first update the Telerik Extension. To download and install the latest version of the Telerik Extensions, follow the [Installing from Visual Studio Marketplace]({% slug overview_visualstudio_aspnetcore %}#installing-from-visual-studio-marketplace) instructions.
 

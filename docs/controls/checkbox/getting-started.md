@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CheckBox Documentation - Getting Started with the CheckBox
 description: "Get started with the jQuery CheckBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["checkbox"]
 slug: getting_started_kendoui_checkbox_widget
 position: 2
 ---
@@ -111,8 +112,4 @@ You can specify whether the CheckBox will be checked by default or not.
 * [JavaScript API Reference of the CheckBox](/api/javascript/ui/checkbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

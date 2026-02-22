@@ -5,9 +5,9 @@ description: "Learn how to use the PivotGrid API to add a new dimension to the c
 previous_url: /controls/data-management/pivotgrid/how-to/add-dimention-to-column-axis, /controls/data-management/pivotgrid/how-to/dimensions/add-dimension-to-column-axis
 slug: howto_add_dimension_column_axis_pivotgrid
 tags: kendoui, pivotgrid, add, dimension, to, column, axis
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

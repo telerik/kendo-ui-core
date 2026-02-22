@@ -2,6 +2,7 @@
 title: Precision
 page_title: Precision
 description: "Learn how to configure the precision functionality of the Telerik UI Rating for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/precision
 slug: htmlhelpers_rating_aspnetcore_precision
 position: 3

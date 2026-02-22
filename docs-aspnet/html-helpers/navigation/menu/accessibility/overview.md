@@ -2,7 +2,8 @@
 title: Overview
 page_title: Menu Documentation | Menu Accessibility
 description: "Get started with the {{ site.product }} Menu and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_menu
+components: ["menu"]
+slug: htmlhelpers_menu_accessibility
 position: 1
 ---
 
@@ -25,9 +26,9 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-menu:not(.k-context-menu)` | `role=menubar` | Announces the Menu menubar role |
-|  | `aria-activedescendent=.k-menu-item.k-focus id` | Points to the currently active menuitem. |
 | `.k-menu.k-menu-vertical` | `aria-orientation=vertical` | Announces the Menu orientation when vertical. |
 | `.k-menu-item` | `role=menuitem` | Announces the Menu item role. |
+|  | `tabindex=0/-1` | The focused item has tabindex '0', the rest - '-1' |
 | `.k-menu-item[aria-expanded]` | `aria-haspopup=true` | Indicates that there is a popup, associated with the item. Applicable to expandable items only. |
 | `.k-menu-item[aria-haspopup]` | `aria-controls=ul.k-menu-group id` | Indicates that there is a popup, associated with the item. Applicable to expandable items only. |
 | `.k-menu-item[aria-haspopup]` | `aria-expanded=true/false` | Indicates whether the item is expanded. |

@@ -5,9 +5,9 @@ description: "Learn how to explode a clicked segment in a Kendo UI Pie Chart."
 previous_url: /controls/charts/how-to/fit-exported-chart-in-pdf, /controls/charts/how-to/export/fit-exported-chart-in-pdf
 slug: howto_fitpdfexportedcharttopage_charts
 tags: chart, fit, pdf, export, to, page
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -108,7 +108,7 @@ The following example demonstrates how to work around this issue and fit a PDF-e
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.pdf",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
           });
         });
       });

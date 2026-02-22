@@ -6,6 +6,7 @@ page_title: Animate Panning to Location on the Map - Kendo UI Map for jQuery
 slug: map-animated-pan-to-location
 tags: map, pan, panning, animate, animation, automatic
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment
@@ -70,7 +71,7 @@ The following example demonstrates the full implementation of the suggested appr
         center: [0, 0],
         layers: [{
             type: "tile",
-            urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             attribution: "&copy; OpenStreetMap"
         }]
     });

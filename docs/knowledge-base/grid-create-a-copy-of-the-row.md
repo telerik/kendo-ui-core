@@ -7,6 +7,7 @@ slug: grid-create-a-copy-of-the-row
 tags: grid, copy, row
 ticketid: 1145126
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

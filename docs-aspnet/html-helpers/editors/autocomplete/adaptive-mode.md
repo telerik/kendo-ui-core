@@ -1,7 +1,8 @@
 ---
 title: Adaptiveness
 page_title: Adaptiveness
-description: "Learn how to configure the adaptive behavior of the the Telerik UI AutoComplete component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI AutoComplete component for {{ site.framework }}."
+components: ["autocomplete"]
 slug: htmlhelpers_autocomplete_adaptive_mode_aspnetcore
 position: 5
 ---
@@ -10,9 +11,13 @@ position: 5
 
 Adaptiveness is an advanced capability that enhances the Telerik UI for {{ site.framework }} AutoComplete by enabling a completely new layout based on the screen size. It also allows you to adjust the displayed on-screen keyboard for a more user-friendly interaction on touchscreen devices.
 
+<demo metaUrl="autocomplete/adaptive_mode/" height="600"></demo>
+
 ## Adaptive Mode
 
 The AutoComplete supports an adaptive mode that provides a mobile-friendly rendering of its popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/autocompletebuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.
+
+> Starting with the 2025 Q2 release, when the adaptive rendering mode is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
 
 The AutoComplete component automatically adapts to the current screen size and changes its rendering accordingly. On medium-sized screens, the suggestion list is displayed as docked to the bottom of the screen, while on smaller screens, it is rendered as a full-screen modal dialog. In all other scenarios, including when the `AdaptiveMode()` option is not specified or is set to its default value of `AdaptiveMode.None`, the standard popup is rendered docked to the input of the component.
 

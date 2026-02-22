@@ -7,7 +7,7 @@ slug: editor-image-insert-tool-from-file-system
 tags: editor, image, insert, tool, file, system, upload
 ticketid: 1174115
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

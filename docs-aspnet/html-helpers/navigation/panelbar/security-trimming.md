@@ -2,6 +2,7 @@
 title: Security Trimming
 page_title: Security Trimming - Telerik UI PanelBar HtmlHelper for ASP.NET MVC
 description: "Use the built-in security trimming functionality of the Telerik UI PanelBar HtmlHelper for ASP.NET MVC."
+components: ["panelbar"]
 previous_url: /helpers/navigation/panelbar/security-trimming
 slug: securitytrimming_panelbarhelper_aspnetmvc
 position: 4

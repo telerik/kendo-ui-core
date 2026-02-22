@@ -8,6 +8,7 @@ position:
 tags: grid, pdf, export, external, customize, header, footer, variable, content, template
 ticketid: 1407533
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -110,9 +111,8 @@ I am working on a multiple grid export to PDF which needs a custom template.
               scale: 0.8
             },
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               pageSize: 20
             },
@@ -151,9 +151,8 @@ I am working on a multiple grid export to PDF which needs a custom template.
               scale: 0.7
             },
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                read: "https://demos.telerik.com/service/v2/core/Products"
               },
               schema:{
                 model: {

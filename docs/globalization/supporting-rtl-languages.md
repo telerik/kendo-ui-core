@@ -2,6 +2,7 @@
 title: Right-to-Left Languages
 page_title: Right-to-Left Languages - Kendo UI Accessibility Support
 description: "Learn more about the Accessibility features related to bidirectional languages, supported by Kendo UI controls."
+components: ["general"]
 slug: right_toleft_languages_accessibility_support
 position: 4
 ---

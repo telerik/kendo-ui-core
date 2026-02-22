@@ -7,7 +7,7 @@ slug: panelbar_dropdownlist_position_popup
 tags: panelbar, dropdownlist, popup, position
 ticketid: 1594859
 res_type: kb
-component: panelbar, dropdownlist
+components: ["panelbar, dropdownlist"]
 ---
 
 ## Environment

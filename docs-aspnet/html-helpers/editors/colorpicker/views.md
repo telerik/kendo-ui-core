@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Learn more about the available views for the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 slug: htmlhelpers_views_colorpickerhelper_aspnetcore
 position: 3
 ---

@@ -1,7 +1,8 @@
 ---
 title: Adaptiveness
 page_title: Adaptiveness
-description: "Learn how to configure the adaptive behavior of the the Telerik UI OTPInput component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI OTPInput component for {{ site.framework }}."
+components: ["otpinput"]
 slug: adaptiveness_otpinputhelper
 position: 7
 ---

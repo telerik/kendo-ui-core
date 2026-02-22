@@ -2,6 +2,7 @@
 title: Box Plot Charts
 page_title: Box Plot Charts
 description: "Learn how to create a Telerik UI Box Plot Chart for {{ site.framework }} and configure its options."
+components: ["chart"]
 slug: boxplotcharts_aspnetcore_htmlhelper
 ---
 

@@ -2,6 +2,7 @@
 title: Model
 page_title: DataSource Model
 description: "Learn how to use the model properties the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourcemodel
 ---
 

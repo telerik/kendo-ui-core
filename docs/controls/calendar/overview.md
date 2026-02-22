@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Calendar Documentation - Calendar Overview
 description: "Try now the Kendo UI for jQuery Calendar component that renders a graphical calendar."
+components: ["calendar"]
 slug: overview_kendoui_calendar_widget
 position: 0
 ---
@@ -25,7 +26,7 @@ The component also supports custom templates for its Month view and configuratio
 * [Century cells format]({% slug century_cells_format_calendar %})&mdash;The component exposes two formats for the century cells.
 * [Reverse selection]({% slug reverse_selection_calendar %})&mdash;The component allows you to pick an end date which is before the start date.
 * [Show other month days]({% slug other_month_days_calendar %})&mdash;The component allows you to control if the days from the previous/next months will be displayed.
-* [Accessibility]({% slug accessibility_calendar %})&#8211;The Calendar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_calendar_accessibility %})&#8211;The Calendar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps
 

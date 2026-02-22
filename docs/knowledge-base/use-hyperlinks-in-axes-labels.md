@@ -5,9 +5,9 @@ description: "Learn how to display a daily timeline for two users in a Kendo UI 
 previous_url: /controls/charts/how-to/use-hyperlinks-in-axes-labels, /controls/charts/how-to/various/use-hyperlinks-in-axes-labels
 slug: howto_usehyperlinks_inaxislabels_charts
 tags: chart, use, hyperlinks, in, axes, labels
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

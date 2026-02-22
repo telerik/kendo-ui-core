@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Switch component by following a complete step-by-step tutorial."
+components: ["switch"]
 slug: aspnetcore_switch_getting_started
 position: 1
 ---
@@ -102,7 +103,7 @@ To change the [appearance]({% slug switch_appearance %}) of the Switch, use any 
 
 ## 5. Handle the Switch Events
 
-The Switch component exposes various [events](api/kendo.mvc.ui.fluent/switcheventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the Switch changes through user interaction.
+The Switch component exposes various [events](/api/kendo.mvc.ui.fluent/switcheventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the Switch changes through user interaction.
 
 ```HtmlHelper
     @(Html.Kendo().Switch()
@@ -144,7 +145,7 @@ You can reference the Switch instances that you have created and build on top of
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var switchReference = $("#switch").data("kendoSwitch"); // switchReference is a reference to the existing Switch instance of the helper.
@@ -153,7 +154,7 @@ You can reference the Switch instances that you have created and build on top of
     ```
 1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/switch/methods/check) client-side method.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                var switchInstance = $("#switch").kendoSwitch().data("kendoSwitch");// switchReference is a reference to the existing Switch instance of the helper.

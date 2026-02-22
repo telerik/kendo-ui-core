@@ -7,7 +7,7 @@ slug: grid-column-resize-not-working-in-chrome
 tags: grid, columns, resize, not, working, chrome, zoom, scale, latest, 61, version, breaks, size, width, change
 ticketid: 1132050
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -54,9 +54,8 @@ When the scale is not 100% or when I zoom the page, the column resize feature of
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/core/Orders"
               },
               schema: {
                 model: {

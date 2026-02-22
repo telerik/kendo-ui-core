@@ -6,6 +6,7 @@ page_title: How to Restrict Sortable Columns in a Kendo UI Grid
 slug: limit-sortable-columns-kendo-grid
 tags: kendo-ui, grid, sortable, columns, restriction
 res_type: kb
+components: ["sortable"]
 ticketid: 1668366
 ---
 
@@ -76,24 +77,25 @@ Below you will find a runnable example to try it out:
       <script>
         $(document).ready(function () {
           var sortedColumns = [];
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-              dataSource = new kendo.data.DataSource({
-                transport: {
-                  read: {
-                    url: crudServiceBaseUrl + "/detailproducts",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/detailproducts/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/detailproducts/Destroy",
-                    dataType: "jsonp"
-                  },
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                   parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                      return { models: kendo.stringify(options.models) };
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

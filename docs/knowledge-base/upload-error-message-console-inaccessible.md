@@ -6,7 +6,7 @@ slug: upload_error_message_console_inaccessible
 tags: telerik, progress, kendoui, jquery, upload, cannot, access, error, message, console
 type: troubleshooting
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

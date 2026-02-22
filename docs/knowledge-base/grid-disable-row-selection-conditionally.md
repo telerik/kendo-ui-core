@@ -7,7 +7,7 @@ slug: grid-disable-row-selection-conditionally
 tags: grid, selection, row
 ticketid: 1147832
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

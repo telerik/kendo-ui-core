@@ -7,6 +7,7 @@ slug: daterangepicker-messages-input-text-change
 tags: daterangepicker, messages, input, text, change, month, day, year, hour, minute, second, dayperiod, placeholder
 ticketid: 1417334
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -29,7 +30,7 @@ How can I change the default **day/month/year** placeholder text in the {{ site.
 
 To change the start and end input messages, reference the DateRangePicker and set the message options of the `_startDateInput` and `_endDateInput`:
 
-```dojo
+```HTML dojo
     <div id="dateRangePicker"></div>
     
     <script>

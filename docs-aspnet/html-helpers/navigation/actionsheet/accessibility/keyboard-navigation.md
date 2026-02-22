@@ -2,6 +2,7 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn how to use the keyboard navigation functionality of the Telerik ActionSheet component for {{ site.framework }}."
+components: ["actionsheet"]
 slug: htmlhelpers_actionsheet_keyboardnavigation_aspnetcore
 position: 2
 ---

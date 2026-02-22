@@ -2,7 +2,8 @@
 title: Overview
 page_title: TextArea Documentation | TextArea Accessibility
 description: "Get started with the {{ site.product }} TextArea and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_textarea_overview
+components: ["textarea"]
+slug: htmlhelpers_textarea_accessibility
 position: 1
 ---
 

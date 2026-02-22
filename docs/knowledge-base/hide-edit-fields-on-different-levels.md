@@ -5,9 +5,9 @@ description: "Learn how to hide editors for different columns on different level
 slug: howto_hideeditfieldsondifferentlevels_treelist
 previous_url: /controls/data-management/treelist/how-to/hide-edit-fields-on-different-levels
 tags: kendo, jquery, treelist, hide, edit, fields, on, different, levels
-component: treelist
 type: how-to
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment
@@ -50,29 +50,31 @@ The following example demonstrates how to achieve the required scenario.
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
         var dataSource = new kendo.data.TreeListDataSource({
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-              dataType: "jsonp"
+              url: crudServiceBaseUrl + "/EmployeeDirectory/All"
             },
             update: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-              dataType: "jsonp"
+               type: "POST",
+                    		contentType: "application/json"
             },
             destroy: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Destroy",
-              dataType: "jsonp"
+               type: "POST",
+                    		contentType: "application/json"
             },
             create: {
               url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
-              dataType: "jsonp"
+               type: "POST",
+                    		contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },

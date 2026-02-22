@@ -4,6 +4,7 @@ page_title:  FontAwesome Icons in Buttons - Kendo UI for jQuery Data Grid
 description: "Learn how to use FontAwesome icons with the built-in buttons of the Kendo UI Grid widget for jQuery."
 previous_url: /controls/data-management/grid/how-to/Layout/font-awesome-icons-in-custom-grid-command-buttons
 slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
+components: ["grid"]
 ---
 
 ## Environment

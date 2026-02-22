@@ -2,6 +2,7 @@
 title: Row Drag & Drop
 page_title: jQuery Grid Documentation - Row Drag & Drop
 description: "Get started with the jQuery Grid by Kendo UI and learn all about the Row Drag & Drop feature."
+components: ["grid"]
 slug: draganddrop_kendoui_grid_widget
 position: 13
 ---
@@ -43,7 +44,7 @@ For a runnable example, refer to the [demo on Row Drag & Drop in the Grid](https
 
 To enable the Drag and Drop functionality, set the `reorderable.rows` property to `true`.
 
-> * The Drag & Drop functionality requires defining the `id` field of the data items in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model). This ensures the correct reordering of the data items.
+> * The Drag & Drop functionality requires defining the `id` field of the data items in [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel). This ensures the correct reordering of the data items.
 
     $("#grid").kendoGrid({
         dataSource: {

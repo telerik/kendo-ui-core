@@ -6,6 +6,7 @@ slug: upload-copy-paste-file
 tags: telerik, upload, copy, paste, files
 component: upload
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -31,7 +32,7 @@ How can I copy and paste a file into the {{ site.product }} Upload?
 1. To paste a copied file, handle the `paste` event of the container.
 1. To insert the newly pasted file, use the `DataTransfer` object within the handler.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Upload()
         .Name("files")
         .Async(a => a
@@ -45,7 +46,7 @@ How can I copy and paste a file into the {{ site.product }} Upload?
         Paste Area
     </div>
 ```
-```Script.js
+```JS script.js
     <script>
         $(function(){
             $(".paste-area").on("paste", function(e){

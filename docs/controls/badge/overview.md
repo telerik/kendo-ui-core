@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Badge Documentation - Badge Overview
 description: "Try now the Kendo UI for jQuery Badge component to decorate buttons, menus, avatars and other components."
+components: ["badge"]
 slug: overview_kendoui_badge_widget
 position: 0
 ---
@@ -27,5 +28,4 @@ It also provides customizing its content through templates, setting different sh
 ## See Also
 
 * [Use Badge as a label (Demo)](https://demos.telerik.com/kendo-ui/badge/labels)
-* [Applying the Badge API (Demo)](https://demos.telerik.com/kendo-ui/badge/api)
 * [JavaScript API Reference of the Badge](/api/javascript/ui/badge)

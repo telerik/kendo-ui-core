@@ -2,6 +2,7 @@
 title: Commands
 page_title: jQuery PDFViewer Documentation - PDFViewer Commands
 description: "Get familiar with the Commands in the PDFViewer and how you can use them."
+components: ["pdfviewer"]
 slug: commands_kendoui_pdfviewer_widget
 position: 5
 ---

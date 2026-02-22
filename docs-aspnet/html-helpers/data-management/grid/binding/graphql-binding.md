@@ -2,6 +2,7 @@
 title: GraphQL Binding
 page_title: GraphQL Binding
 description: "Learn how to implement GraphQL binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/graphql-binding
 slug: htmlhelpers_grid_aspnetcore_graphql-binding
 position: 10
@@ -13,7 +14,7 @@ The Grid component provides multiple types of server-side binding. Using its Dat
 
 ## What is GraphQL?
 
-GraphQL is a query language for APIs and a runtime for fulfilling client (browser) queries by returning existing data. It offers a complete and understandable description of the data and provides the API clients exactly with the specific data they requested. 
+GraphQL is a query language for APIs and a runtime for fulfilling client (browser) queries by returning existing data. It offers a complete and understandable description of the data and provides the API clients exactly with the specific data they requested.
 
 As an alternative to REST, GraphQL allows developers to make requests to fetch data from multiple data sources with a single API call. GraphQL queries access not just the properties of one resource but also smoothly follow references between them.
 
@@ -64,25 +65,25 @@ The GraphQL service URL endpoints are referenced in the `.Custom() -> Transport`
         })
         .Transport(transport => transport
             .Create(r => r
-                .Url("https://demos.telerik.com/aspnet-core/service/api/graphql/")
+                .Url("https://demos.telerik.com/service/v2/graphql/")
                 .ContentType("application/json")
                 .Type(HttpVerbs.Post)
                 .Data("additionalDataOnCreate")
             )
             .Read(r => r
-                .Url("https://demos.telerik.com/aspnet-core/service/api/graphql/")
+                .Url("https://demos.telerik.com/service/v2/graphql/")
                 .ContentType("application/json")
                 .Type(HttpVerbs.Post)
                 .Data("additionalDataOnRead")
             )
             .Update(r => r
-                .Url("https://demos.telerik.com/aspnet-core/service/api/graphql/")
+                .Url("https://demos.telerik.com/service/v2/graphql/")
                 .ContentType("application/json")
                 .Type(HttpVerbs.Post)
                 .Data("additionalDataOnUpdate")
             )
             .Destroy(r => r
-                .Url("https://demos.telerik.com/aspnet-core/service/api/graphql/")
+                .Url("https://demos.telerik.com/service/v2/graphql/")
                 .ContentType("application/json")
                 .Type(HttpVerbs.Post)
                 .Data("additionalDataOnDestroy")
@@ -105,10 +106,10 @@ The GraphQL service URL endpoints are referenced in the `.Custom() -> Transport`
                 </model>
             </schema>
             <transport parameter-map="parameterMap">
-                <read url="https://demos.telerik.com/aspnet-core/service/api/graphql/" data="additionalDataOnRead" content-type="application/json" type="POST"/>
-                <update url="https://demos.telerik.com/aspnet-core/service/api/graphql/" data="additionalDataOnUpdate" content-type="application/json" type="POST"/>
-                <create url="https://demos.telerik.com/aspnet-core/service/api/graphql/" data="additionalDataOnCreate" content-type="application/json" type="POST"/>
-                <destroy url="https://demos.telerik.com/aspnet-core/service/api/graphql/" data="additionalDataOnDestroy" content-type="application/json" type="POST"/>
+                <read url="https://demos.telerik.com/service/v2/graphql/" data="additionalDataOnRead" content-type="application/json" type="POST"/>
+                <update url="https://demos.telerik.com/service/v2/graphql/" data="additionalDataOnUpdate" content-type="application/json" type="POST"/>
+                <create url="https://demos.telerik.com/service/v2/graphql/" data="additionalDataOnCreate" content-type="application/json" type="POST"/>
+                <destroy url="https://demos.telerik.com/service/v2/graphql/" data="additionalDataOnDestroy" content-type="application/json" type="POST"/>
             </transport>
         </datasource>
 ```
@@ -213,6 +214,9 @@ Sending required parameters to the GraphQL server backend and extracting the mea
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [GraphQL Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/graphql)
 * [GraphQL Introduction](https://graphql.org/learn/)
 * [Server-Side API](/api/grid)

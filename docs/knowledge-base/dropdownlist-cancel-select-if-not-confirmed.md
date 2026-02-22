@@ -6,7 +6,7 @@ page_title: Cancel Selection in AngularJS If Not Confirmed - Kendo UI DropDownLi
 slug: dropdownlist-cancel-select-if-not-confirmed
 tags: kendoui, kendo, angular, angularjs, dropdownlist, dialog, cancel-select, cancel, confirm
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment
@@ -26,7 +26,7 @@ How can I cancel (or not) the actual selection of an item in the Kendo UI DropDo
 
 Save the old value and, then, revert back to it. Revert the value if the **Cancel** option was selected.
 
-```dojo
+```
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content" ng-controller="MyCtrl">
     <h4>Static data</h4>

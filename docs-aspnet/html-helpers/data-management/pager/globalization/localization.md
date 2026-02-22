@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization for the Telerik UI Pager component for {{ site.framework }}
 description: "Get started with the Telerik UI Pager component for {{ site.framework }} and learn how to localize the text of its messages."
+components: ["pager"]
 slug: localization_pager_aspnet
 ---
 

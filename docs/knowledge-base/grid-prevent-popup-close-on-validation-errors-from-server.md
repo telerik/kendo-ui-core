@@ -6,7 +6,7 @@ page_title: Keep Popup Open on Server Error - Kendo UI for jQuery Data Grid
 slug: grid-prevent-popup-close-on-validation-errors-from-server
 tags: grid, edit, popup, prevent, cancel, stop, close, edit, insert, create, modal, reopen, keep, open, validation, fail, errors
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -59,50 +59,51 @@ I am returning errors from server and catch it in kendo datasource error event. 
 
 ###### Example - the update response contains errors which trigger the error event of the dataSource
 
-```dojo
+```
 <div id="grid"></div>
     <script>
       var dataSource = new kendo.data.DataSource({
+        pageSize: 15,
         transport: {
-          read:{
-            url: "https://www.mocky.io/v2/5ce682093300004b3573161e"
+          read: {
+            url: "https://runner.telerik.io/fullscreen/PQkmUirI.json",
           },
           update: {
-            url: "https://www.mocky.io/v2/5ce686e33300006200731647",
-          }
+            url: "https://runner.telerik.io/fullscreen/ojjEoSVp.json",
+          },
         },
         schema: {
-          data: "items",
-          total:"total",
+          total: "total",
           errors: "errors",
-          model:{
-            id: "id",
-            fields:{
-              id: { editable: false },
-              name: { type: "string" }
-            }
-          }
+          model: {
+            id: "ProductID",
+            fields: {
+              ProductID: { editable: false },
+              ProductName: { type: "string" },
+            },
+          },
         },
-        error: function(e) {
+        error: function (e) {
           grid.one("dataBinding", function (ev) {
             ev.preventDefault();
-            var message = "Errors:\n";            
-            $.each(e.errors, function (idx, error) {             
-               message += "Code: "
-                 + error.code
-                 + " | Reason: " + error.reason
-              	 + "\n";
+            var message = "Errors:\n";
+            $.each(e.errors, function (idx, error) {
+              debugger;
+              message +=
+                "Code: " + error.code + " | Reason: " + error.reason + "\n";
             });
             kendo.alert(message);
           });
-        }
+        },
       });
 
-      var grid = $("#grid").kendoGrid({
-        dataSource:dataSource,
-        columns:["id", "name", {command: ["edit"]}],
-        editable:{ mode : "popup"}
-      }).data("kendoGrid");
+      var grid = $("#grid")
+        .kendoGrid({
+          dataSource: dataSource,
+          columns: ["ProductID", "ProductName", { command: ["edit"] }],
+          editable: { mode: "popup" },
+        })
+        .data("kendoGrid");
     </script>
 ```
 

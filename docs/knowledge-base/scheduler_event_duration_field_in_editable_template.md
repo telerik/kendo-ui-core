@@ -4,10 +4,10 @@ page_title: Add Duration Field in the Editable Template for Scheduler Events- Ke
 description: "Learn how to add a duration field in the editable template for the events of the Kendo UI Scheduler for jQuery."
 slug: scheduler_event_duration_field_in_editable_template
 tags: scheduler, duration, event, editable, template
-component: scheduler
 type: how-to
 ticketid: 1613931
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -85,8 +85,8 @@ The following example demonstrates a full implementation of the described approa
 
     $(function() {
         $("#scheduler").kendoScheduler({
-            date: new Date("2022/6/13"),
-            startTime: new Date("2022/6/13 07:00 AM"),
+            date: new Date("2025/6/13"),
+            startTime: new Date("2025/6/13 07:00 AM"),
             height: 600,
             views: [
                 "day",          
@@ -108,24 +108,26 @@ The following example demonstrates a full implementation of the described approa
                 batch: true,
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                    dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks"
                     },
                     update: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                         type: "POST",
+                        contentType: "application/json"
                     },
                     create: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                         type: "POST",
+                        contentType: "application/json"
                     },
                     destroy: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                         type: "POST",
+                        contentType: "application/json"
                     },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {models: kendo.stringify(options.models)};
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

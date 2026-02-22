@@ -7,7 +7,7 @@ slug: map-marker-color-from-field
 tags: map, markers, marker color
 ticketid: 1115002
 res_type: kb
-component: map
+components: ["map"]
 ---
 
 ## Environment

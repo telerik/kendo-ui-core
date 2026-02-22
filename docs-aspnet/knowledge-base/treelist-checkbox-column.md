@@ -7,6 +7,7 @@ slug: treelist-checkbox-column
 tags: treelist, checkbox
 ticketid: 1141320
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -26,7 +27,7 @@ How can I add a checkbox column to the TreeList which will set an initial checke
 
 Use the [`template`](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/treelistcolumnbuilder#templatesystemstring) method of the TreeList column.
 
-```
+```Razor
 columns.Add().Field(e => e.CheckBoxColumnField).Template(
         "#if(CheckBoxColumnField == true){#" +
             Html.Kendo().CheckBox().Name("name#:CheckBoxColumnField#").HtmlAttributes(new { @class = "CheckBoxColumnField" }).Checked(true).ToHtmlString() +

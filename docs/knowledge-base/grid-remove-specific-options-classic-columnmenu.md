@@ -6,6 +6,7 @@ page_title: Remove Specific Options from Grid's Classic ColumnMenu
 slug: grid-remove-specific-options-classic-columnmenu
 tags: grid, columnmenu, options, classic, remove
 res_type: kb
+components: ["grid"]
 ---
 ## Environment
 | Product | Version |

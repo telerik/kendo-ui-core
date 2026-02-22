@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: jQuery Grid Documentation - Excel Export
 description: "Get started with the jQuery Grid by Kendo UI and learn how to set the Excel export functionality."
+components: ["grid"]
 previous_url: /excel-export
 slug: exporting_excel_kendoui_grid_widget
 position: 1
@@ -51,9 +52,8 @@ The following example demonstrates how to enable the Excel export functionality 
                 fileName: "Kendo UI Grid Export.xlsx"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -94,9 +94,8 @@ By default, the Grid exports only the current page of data. To export all pages,
                 allPages: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -114,8 +113,7 @@ By default, the Grid exports only the current page of data. To export all pages,
 
 To customize the generated Excel file, use the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-* For more information on Excel export, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation) and the [Excel Export Appearance article]({% slug appearance_excelexport_kendoui %}).
-* For more information on setting the background color of alternating rows while exporting the Grid to Excel, refer to [this example]({% slug howto_configure_color_alternating_rows_grid %}).
+For a comprehensive guide on all available customization options, refer to the [Excel Export Customization]({% slug excelexport_customization_kendoui_grid %}) article.
 
 ### Exporting Right-to-Left Content
 
@@ -141,9 +139,8 @@ Each row has a `type` field that can be used to distinguish between the various 
           allPages: true
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 7
         },
@@ -183,10 +180,9 @@ To send the generated file to a remote service, prevent the default file saving 
     <script>
         $("#grid").kendoGrid({
             toolbar: ["excel"],
-            dataSource: {
-                type: "odata",
+            dataSource: {                
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -199,15 +195,19 @@ To send the generated file to a remote service, prevent the default file saving 
             excelExport: function(e) {
                 // Prevent the default behavior which will prompt the user to save the generated file.
                 e.preventDefault();
+                
                 // Get the Excel file as a data URL.
-                var dataURL = new kendo.ooxml.Workbook(e.workbook).toDataURL();
-                // Strip the data URL prologue.
-                var base64 = dataURL.split(";base64,")[1];
-                // Post the base64 encoded content to the server which can save it.
-                $.post("/server/save", {
-                    base64: base64,
-                    fileName: "ExcelExport.xlsx"
-                });
+                new kendo.ooxml.Workbook(e.workbook).toDataURLAsync().then(function(dataURL) {
+					// Strip the data URL prologue.
+               	    var base64 = dataURL.split(";base64,")[1];
+                    console.log("Post to Server: " + base64);
+                    
+                    // Post the base64 encoded content to the server which can save it.
+                    // $.post("/server/save", {
+                    //   base64: base64,
+                    //   fileName: "ExcelExport.xlsx"
+                    //  });
+				});
             }
         });
     </script>

@@ -2,6 +2,7 @@
 title: AngularJS Support
 page_title: AngularJS Support | AngularJS Directives
 description: "Learn which are the AngularJS versions which the Kendo UI for jQuery supports."
+components: ["general"]
 slug: supportedversions_kendoui
 position: 6
 ---

@@ -1,45 +1,38 @@
 ---
-title: Responsive Pager
+title: Responsiveness
 page_title: Responsive Telerik UI Pager component for {{ site.framework }}
 description: "Get started with the Pager component for {{ site.framework }} and learn about its responsive feature."
+components: ["pager"]
 slug: responsive_pager_aspnet
-position: 4
+position: 3
 ---
 
-# Responsive Design
+# Responsiveness
 
-The Pager component for {{ site.framework }} is responsive by default. To disable the responsive behavior and have all of its elements visible at all times use the `Responsive()` method and pass `false` as a parameter.
+The Pager component is responsive by default. 
 
-## Visible Elements
+To disable the responsive behavior, set the [`Responsive()`](/api/kendo.mvc.ui.fluent/pagerbuilder#responsivesystemboolean) option to `false`. As a result, all Pager elements are visible, no matter the screen resolution of the device.
 
-The Pager widget determines which internal elements to render based on its width. When the Pager width is greater than or equal to 600 pixels, all elements are visible:
+> Starting with version Q2 2025, the Pager's sizing is no longer based on fixed breakpoints. Instead, the optimized responsive behavior renders as many elements as possible within the available space. For more information, refer to the [Breaking Changes section]({% slug breakingchanges_2025%}#pager).
 
-- `Page Sizes Dropdown`
-- `Numeric Page Number Buttons` or a `Numeric Input` if the pager is an `Input` one.
-- `Info element`
+The responsive Pager determines which elements to render based on the available space. The component's elements are displayed in the following order:
 
-## Breaking Points
+* [Numeric Page Number Buttons](/api/kendo.mvc.ui.fluent/pagerbuilder#numericsystemboolean) or a [Numeric Input](/api/kendo.mvc.ui.fluent/pagerbuilder#numericsystemboolean), if the Pager type is set to `Input()`.
+* [Page Sizes Dropdown](/api/kendo.mvc.ui.fluent/pagerbuilder#pagesizessystemboolean)
+* [Info label](/api/kendo.mvc.ui.fluent/pagerbuilder#infosystemboolean)
+* [Refresh button](/api/kendo.mvc.ui.fluent/pagerbuilder#refreshsystemboolean) (if enabled)
 
-When the Pager width is greater than or equal to 600 pixels, all elements are visible:
+As the screen size decreases, the elements are hidden from the bottom to the top of this list, starting with the `Refresh` button, to maintain optimal layout within the available space.
 
-![{{ site.product_short }} A Pager widget at over 600px resolution](../../../images/pager-responsive/pager-width-over-600.png)
-
-When the Pager width is greater than 480 and less than 600 pixels, the label showing the current paging information is hidden:
-
-![{{ site.product_short }} A Pager widget between 480 and 600px resolution](../../../images/pager-responsive/pager-width-480-600.png)
-
-When the Pager width is greater than 360 and less than 480 pixels, the current page is represented by a native `<select/>` element. The `pageSizes` dropdown and the label showing the current paging information are hidden.
-
-![{{ site.product_short }} A Pager widget between 360 and 480px resolution](../../../images/pager-responsive/pager-width-360-480.png)
-
-When the Pager width is less than 360 pixels, the current page is represented by a native `<select/>` element. The `pageSizes` dropdown and the label showing the current paging information are hidden.
-
-![{{ site.product_short }} A Pager widget under 360 pixels](../../../images/pager-responsive/pager-width-under-360.png)
+On smaller screens, when using the default [`Numeric()`](/api/kendo.mvc.ui.fluent/pagerbuilder#numericsystemboolean) Pager type, the numeric page buttons are automatically replaced with a single input field that functions the same way as when the [`Input()`](/api/kendo.mvc.ui.fluent/pagerbuilder#numericsystemboolean) option is enabled.
 
 ## See Also
 
-* [Pager Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
-* [Pager Server-Side API](/api/pager)
-* [Pager Settings and Types]({% slug settings_pager_aspnet %})
-* [Pager Templates]({% slug templates_pager_aspnet %})
-* [Globalization and Messages]({% slug globalization_pager_aspnet %})
+* [Use the Pager in Adaptive Mode]({% slug htmlhelpers_pager_adaptive_mode %})
+* [Server-Side API of the Pager HtmlHelper](/api/pager)
+{% if site.core %}
+* [Server-Side API of the Pager TagHelper](/api/taghelpers/pager)
+{% endif %}
+* [Client-Side API  of the Pager](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager)
+
+

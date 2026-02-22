@@ -2,6 +2,7 @@
 title: Layout
 page_title: jQuery Diagram Documentation - Layout
 description: "Get started with the jQuery Diagram by Kendo UI and use its built-in layout options."
+components: ["diagram"]
 slug: layout_kendoui_diagram
 position: 4
 ---

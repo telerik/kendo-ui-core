@@ -2,6 +2,7 @@
 title: Amazon DynamoDB
 page_title: Amazon DynamoDB
 description: "Learn how to create an Amazon DynamoDB table, and perform CRUD operations with the Telerik UI for {{ site.framework }} Grid."
+components: ["general"]
 slug: aws_dynamodb_aspnetcore
 position: 4
 ---
@@ -33,7 +34,7 @@ Once you have a user with the necessary permissions, you can proceed with config
 1. Load the Amazon AWS SDK script.
 1. Configure the AWS authentication by passing the user details to the `AWS.config.update` method.
 
-```
+```Razor
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,7 +62,7 @@ Once you have a user with the necessary permissions, you can proceed with config
 
 1. In the view, add a `<button>`, which you can use to create a table in DynamoDB on click.
 
-	```
+	```Razor
 	<button class="k-button" id="btn">Click to create a 'Movies' table</button>
 	```
 
@@ -70,7 +71,7 @@ Once you have a user with the necessary permissions, you can proceed with config
 
     The declaration of the Grid and the view model it uses are shown in the example below.
 
-	```csharp
+	```View
     @(Html.Kendo().Grid<GridDynamoDB.Models.MovieViewModel>()
         .Name("grid")
         .Columns(columns =>

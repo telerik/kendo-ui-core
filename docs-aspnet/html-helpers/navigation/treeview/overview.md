@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI TreeView component for {{ site.framework }} displays items in a tree-shape hierarchy, supports local and remote data binding, and provides templates for easier customization."
+components: ["treeview"]
 previous_url: /helpers/html-helpers/treeview, /helpers/navigation/treeview/overview
 slug: htmlhelpers_treeview_aspnetcore
 position: 0
@@ -257,7 +258,7 @@ The following example demonstrates how to configure the TreeView to bind to remo
 | [Checkboxes]({% slug htmlhelpers_treeview_checkboxes_aspnetcore %})| Render the TreeView items with checkboxes.  |
 | [Templates]({% slug htmlhelpers_treeview_templates_aspnetcore %})| To take full control over the rendering of the TreeView items, use templates. |
 | [Events]({% slug events_treeview_aspnetcore %})| The component exposes various events that allow you to respond to user actions. |
-| [Accessibility]({% slug accessibility_aspnetcore_treeview %})| The TreeView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_treeview_accessibility %})| The TreeView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

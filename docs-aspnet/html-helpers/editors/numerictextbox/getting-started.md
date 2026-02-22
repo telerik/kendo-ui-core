@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} NumericTextBox component by following a complete step-by-step tutorial."
+components: ["numerictextbox"]
 slug: aspnetcore_numerictextbox_getting_started
 position: 1
 ---
@@ -247,7 +248,7 @@ You can reference the NumericTextBox instances that you have created and build o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var numericTextBoxRef = $('#currency').data('kendoNumericTextBox'); // numericTextBoxRef is a reference to the existing currency instance of the helper.
     </script>
@@ -255,7 +256,7 @@ You can reference the NumericTextBox instances that you have created and build o
 
 1. Use the [NumericTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
 
-    ```script
+    ```JS script
     <script>
         var numericTextBoxRef = $('#currency').data('kendoNumericTextBox'); // numericTextBoxRef is a reference to the existing currency instance of the helper.
         numericTextBoxRef.readonly(true); // Set the readonly method to true and disable user input.

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Scheduler component by following a complete step-by-step tutorial."
+components: ["scheduler"]
 slug: scheduler_aspnetcore_get_started
 position: 1
 ---
@@ -93,7 +94,7 @@ Declare the `TaskViewModel` view model. It must implement the `ISchedulerEvent` 
         }
     }
 ```
-```Interface
+```C# Interface
     public interface ISchedulerEvent
     {
         string Title { get; set; }
@@ -332,7 +333,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var schedulerReference = $("#scheduler").data("kendoScheduler"); // schedulerReference is a reference to the existing instance of the helper.
     </script>
@@ -340,7 +341,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [Scheduler client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods) to control the behavior of the widget. In this example, you will see how to get or set the current Scheduler date with the `date` method.
 
-```script
+```JS script
     <script>
         var scheduler = $("#scheduler").data("kendoScheduler");
 		var currentDate = scheduler.date(); // Get the date set by the Date configuration of the helper.

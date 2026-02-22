@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery QRCode Documentation - Getting Started with the QRCode
 description: "Get started with the jQuery QRCode by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["qrcode"]
 slug: getting_started_kendoui_qrcode_widget
 position: 2
 ---
@@ -98,8 +99,4 @@ You can customize the QRCode appearance by setting the [`color`](/api/javascript
 * [JavaScript API Reference of the jQuery QRCode](/api/javascript/dataviz/ui/qrcode)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

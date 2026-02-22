@@ -6,6 +6,7 @@ page_title: Change Columns Width during PDF Exporting
 slug: grid-change-columns-width-during-pdf-export
 tags: aspnet, mvc, grid, change, columns, width, during, pdf, export, exporting
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -26,8 +27,7 @@ How can I change the width of the {{ site.product }} Grid columns when I export 
 
 The PDF Export appends a `k-pdf-export` class to all the elements and then removes it. That is why, you can target the `colgroup > col` setting and use CSS rules.
 
-```
-
+```CSS
 .k-pdf-export colgroup > col {
   width: 50px !important;        
 }
@@ -40,7 +40,7 @@ The PDF Export appends a `k-pdf-export` class to all the elements and then remov
 
 You can also target specific columns by using the `:nth-child()` selector.
 
-```
+```CSS
 .k-pdf-export colgroup > col:nth-child(1),
 .k-pdf-export colgroup > col:nth-child(4),
 .k-pdf-export colgroup > col:nth-child(7)

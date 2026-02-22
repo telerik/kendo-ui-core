@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI LinearGauge component for {{ site.framework }}."
+components: ["lineargauge"]
 previous_url: /helpers/gauges/lineargauge/overview
 slug: overview_lineargaugehelper_aspnetcore
 position: 0
@@ -95,9 +96,9 @@ The LinearGauge configuration options are passed as attributes.
 
 ## Functionality and Features
 
-* [Scale](https://docs.telerik.com/aspnet-core/html-helpers/gauges/lineargauge/scale)—The component's scale configuration renders the values, pointers and label.
-* [Pointers](https://docs.telerik.com/aspnet-core/html-helpers/gauges/lineargauge/pointers)—The `Pointers`` configuration controls the values that will be marked on the scale.
-* [Export](https://docs.telerik.com/aspnet-core/html-helpers/gauges/lineargauge/export)—You can export the LinearGauge to a PDF, raster or vector image.
+* [Scale]({% slug scale_lineargaugehelper_aspnetcore %})&mdash;The component's scale configuration renders the values, pointers and label.
+* [Pointers]({% slug pointers_lineargaugehelper_aspnetcore %})&mdash;The `Pointers` configuration controls the values that will be marked on the scale.
+* [Export]({% slug export_lineargaugehelper_aspnetcore %})&mdash;You can export the LinearGauge to a PDF, raster or vector image.
 
 ## Next Steps
 

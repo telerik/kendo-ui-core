@@ -5,9 +5,9 @@ description: "Learn how to restrict rows reordering in a Kendo UI Grid with a Ke
 slug: howto_restrict_reordergridrows_sortable
 previous_url: /controls/interactivity/sortable/how-to/reorderable-grid-wth-restricted-rows
 tags: telerik, kendo, jquery, sortable, create, reorderable, grids, with, restricted, rows
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment

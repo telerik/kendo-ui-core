@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery DockManager Documentation - DockManager Overview
 description: "Learn the basics when working with the Kendo UI for jQuery DockManager."
+components: ["dockmanager"]
 slug: overview_kendoui_dockmanager_widget
 position: 0
 ---

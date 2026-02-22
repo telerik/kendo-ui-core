@@ -7,7 +7,7 @@ slug: grid-changes-timezone
 tags: dates, date, timezone, change, grid, mvc, ui for asp.net mvc
 ticketid: 1133504
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

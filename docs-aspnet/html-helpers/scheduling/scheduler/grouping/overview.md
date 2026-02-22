@@ -2,6 +2,7 @@
 title: Overview
 page_title: Grouping Overview
 description: "Learn about the different types of grouping when the Telerik UI for {{ site.framework }} Scheduler is configured to use resources."
+components: ["scheduler"]
 slug: scheduler_resources_grouping_overview
 position: 1
 ---

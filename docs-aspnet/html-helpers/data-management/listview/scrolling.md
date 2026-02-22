@@ -2,6 +2,7 @@
 title: Scroll Modes
 page_title: Scrolling
 description: "Configure the Telerik UI ListView for {{ site.framework }} to enable its scrolling functionality."
+components: ["listview"]
 slug: htmlhelpers_listview_aspnetcore_scrolling
 position: 7
 ---
@@ -14,7 +15,7 @@ By default, the scrolling functionality of the Telerik UI ListView for {{ site.f
 
 To control scrolling in the ListView, use its `Scrollable` property.
 
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>
@@ -61,7 +62,7 @@ The endless scrolling functionality enables the ListView to display large amount
 
 The following example demonstrates how to enable the endless scroll mode of the ListView by setting the `Scrollable` property to the `Endless` value of the `ListViewScrollableMode` enum.
 
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>

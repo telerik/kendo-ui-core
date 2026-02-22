@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Stepper and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["stepper"]
 slug: keynav_aspnetcore_stepper
 position: 2
 ---
@@ -30,4 +31,4 @@ Kendo UI Stepper supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Navigation in the Stepper HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/keyboard-navigation)
-* [Accessibility in the Stepper HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_stepper %})
+* [Accessibility in the Stepper HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_stepper_accessibility %})

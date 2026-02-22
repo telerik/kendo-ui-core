@@ -5,9 +5,9 @@ description: "Learn how to prevent invalid values in a Kendo UI DateTimePicker c
 slug: howto_prevent_invalid_values_datetimepicker
 previous_url: /controls/editors/datetimepicker/how-to/prevent-invalid-values
 tags: telerik, kendo, jquery, datetimepicker, prevent, invalid, values
-component: datetimepicker
 type: how-to
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ---
 
 ## Environment

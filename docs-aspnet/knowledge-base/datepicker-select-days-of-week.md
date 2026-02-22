@@ -8,6 +8,7 @@ component: datepicker
 type: how-to
 ticketid: 1580901
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -34,7 +35,7 @@ How can I select the days of the week from the {{ site.product }} DatePicker?
 1. To select the days of the week, handle the [`.MonthTemplate()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datepickerbuilder#monthtemplatesystemstring) and pass the current date as an argument.
 1. Within the function handler, parse the date argument to a [`Date`](https://www.w3schools.com/js/js_dates.asp) object. To get the current day, use the [`.getDay()`](https://www.w3schools.com/jsref/jsref_getday.asp) method and obtain it from the previously defined flag variable.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().DatePicker()
           .Name("datepicker")
           .Value(DateTime.Today)
@@ -42,7 +43,7 @@ How can I select the days of the week from the {{ site.product }} DatePicker?
           .MonthTemplate(month => month.Content("#= getDays(date) #"))
     )
 ```
-```Script.js
+```JS script.js
     <script>
         var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; // Create a flag variable for the days of the week.
 
@@ -55,7 +56,7 @@ How can I select the days of the week from the {{ site.product }} DatePicker?
         }  
     </script>
 ```
-```Styles.css
+```C# Styles.css
     <style>
     /* Popup window size week headers.*/
     .k-calendar-thead > .k-calendar-tr

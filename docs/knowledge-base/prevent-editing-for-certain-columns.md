@@ -5,9 +5,9 @@ description: "Learn how to prevent editing for records based on Boolean values i
 previous_url: /controls/data-management/grid/how-to/Editing/prevent-editing-for-certain-columns
 slug: howto_prevent_editingfor_boolean_based_records_grid
 tags: prevent, editing, boolean, values, defined, records, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Custom Data Binding
 page_title: Custom Data Binding
 description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 previous_url: /helpers/editors/multiselect/binding/custom-binding
 slug: htmlhelpers_multiselect_todatasourceresultbinding_aspnetcore
 position: 5

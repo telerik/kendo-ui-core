@@ -6,6 +6,7 @@ page_title: Changing Hover Color of Grid Rows
 slug: grid-rows-hover-color
 tags: grid, rows, hover, color, locked, frozen, columns, table, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -73,84 +74,83 @@ By design, when the user hovers over a specified row in the locked Grid table, t
 1. Handle the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid and subscribe to the `hover` event of both locked and scrollable tables.
 
     ```HtmlHelper
-        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
-            .Name("Grid")
-            .Events(ev => ev.DataBound("onDataBound"))
-            ...
-        )
-
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+        .Name("Grid")
+        .Events(ev => ev.DataBound("onDataBound"))
+        ...
+    )
     ```
     {% if site.core %}
     ```TagHelper
-        @addTagHelper *, Kendo.Mvc
+    @addTagHelper *, Kendo.Mvc
 
-        <kendo-grid name="Grid" on-data-bound="onDataBound">
-            ...
-        </kendo-grid>
-
+    <kendo-grid name="Grid" on-data-bound="onDataBound">
+        ...
+    </kendo-grid>
     ```
     {% endif %}
-    ```Script
-        function onDataBound(e) {
-            // Replace "Grid" with the Name() of the Grid.
-            $("#Grid .k-grid-content-locked table tbody tr").hover(function() { // Hovering the rows within the locked table.
-                ...
-            });
+    ```JS Scripts
+    function onDataBound(e) {
+        // Replace "Grid" with the Name() of the Grid.
+        $("#Grid .k-grid-content-locked table tbody tr").hover(function() { // Hovering the rows within the locked table.
+            ...
+        });
 
-            // Replace "Grid" with the Name() of the Grid.
-            $('#Grid .k-grid-content table tbody tr').hover(function() { // Hovering the rows within the scrollable table.
-                ...
-            });
-        }
+        // Replace "Grid" with the Name() of the Grid.
+        $('#Grid .k-grid-content table tbody tr').hover(function() { // Hovering the rows within the scrollable table.
+            ...
+        });
+    }
     ```
+
 1. In the `hover` event handler of the Grid tables, toggle a cusom class to the hovered row from the respective table. Set the desired hover color to the custom class with CSS.
 
-    ```Script
-        function onDataBound(e) {
-            $("#Grid .k-grid-content-locked table tbody tr").hover(function() {
-                    var uid = $(this).attr("data-uid");
-                    var gridRow = $(".k-grid .k-grid-content").find("[data-uid='" + uid + "']");
-                    $(gridRow).toggleClass("custom-hover");
-                    $(this).toggleClass("custom-hover");
-            });
-            $('#Grid .k-grid-content table tbody tr').hover(function() {
-                    var uid = $(this).attr("data-uid");
-                    var lockedrow = $(".k-grid .k-grid-content-locked").find("[data-uid='" + uid + "']");
-                    $(lockedrow).toggleClass("custom-hover");
-                    $(this).toggleClass("custom-hover");
-            });
+    ```JS Scripts
+    function onDataBound(e) {
+        $("#Grid .k-grid-content-locked table tbody tr").hover(function() {
+                var uid = $(this).attr("data-uid");
+                var gridRow = $(".k-grid .k-grid-content").find("[data-uid='" + uid + "']");
+                $(gridRow).toggleClass("custom-hover");
+                $(this).toggleClass("custom-hover");
+        });
+        $('#Grid .k-grid-content table tbody tr').hover(function() {
+                var uid = $(this).attr("data-uid");
+                var lockedrow = $(".k-grid .k-grid-content-locked").find("[data-uid='" + uid + "']");
+                $(lockedrow).toggleClass("custom-hover");
+                $(this).toggleClass("custom-hover");
+        });
+    }
+    ```
+    ```CSS Styles
+    <style>
+        .custom-hover{
+            background-color: #a5e8e5 !important;
+            opacity: 0.6;
         }
-    ```
-    ```Styles
-        <style>
-            .custom-hover{
-                background-color: #a5e8e5 !important;
-                opacity: 0.6;
-            }
-        </style>
+    </style>
     ```
 
-If the Grid rows are selectable (the `Selected()` option is enabled), apply the following CSS styles:
+    If the Grid rows are selectable (the `Selected()` option is enabled), apply the following CSS styles:
 
-    ```
-        <style>
-            /* selected row color in both locked and scrollable tables */
-            /* Replace "Grid" with the Name() of the Grid */
-            #Grid .k-grid-content-locked .k-selected.k-alt td,
-            #Grid .k-grid-content .k-selected.k-alt td,
-            #Grid .k-grid-content-locked .k-selected td,
-            #Grid .k-grid-content .k-selected td {
-                background-color: #a5e8e5;
-            }
+    ```CSS
+    <style>
+        /* selected row color in both locked and scrollable tables */
+        /* Replace "Grid" with the Name() of the Grid */
+        #Grid .k-grid-content-locked .k-selected.k-alt td,
+        #Grid .k-grid-content .k-selected.k-alt td,
+        #Grid .k-grid-content-locked .k-selected td,
+        #Grid .k-grid-content .k-selected td {
+            background-color: #a5e8e5;
+        }
 
-            /* selected row hover color in both locked and scrollable tables */
-            #Grid .k-grid-content-locked .k-selected.k-alt td:hover,
-            #Grid .k-grid-content .k-selected.k-alt td:hover,
-            #Grid .k-grid-content-locked .k-selected td:hover,
-            #Grid .k-grid-content .k-selected td:hover {
-                background-color: #a5e8e5;
-            }
-        </style>
+        /* selected row hover color in both locked and scrollable tables */
+        #Grid .k-grid-content-locked .k-selected.k-alt td:hover,
+        #Grid .k-grid-content .k-selected.k-alt td:hover,
+        #Grid .k-grid-content-locked .k-selected td:hover,
+        #Grid .k-grid-content .k-selected td:hover {
+            background-color: #a5e8e5;
+        }
+    </style>
     ```
 
 For the complete implementation of the suggested approach, refer to the [Telerik REPL example on highlighting the entire hovered row when using frozen (locked) Grid columns](https://netcorerepl.telerik.com/cRkVQpOX04aXnQBZ18).

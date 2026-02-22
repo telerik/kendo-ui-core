@@ -7,6 +7,7 @@ slug: treeview-expand-node-parents-by-text
 tags: treeview
 ticketid: 1153697  
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -49,12 +50,11 @@ How can I expand all parent nodes by given child node text?
     <button type="submit" onclick="expand()">Expand</button>
 </div>
 <script>
-    var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+    var serviceRoot = "https://demos.telerik.com/service/v2/core";
     homogeneous = new kendo.data.HierarchicalDataSource({
         transport: {
           read: {
-            url: serviceRoot + "/Employees",
-            dataType: "jsonp"
+            url: serviceRoot + "/Employees"
           }
         },
         schema: {

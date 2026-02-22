@@ -2,6 +2,7 @@
 title: Font Icons
 page_title: Font Icons
 description: "Learn more about what icon fonts are and how to define, implement, and render the available Telerik UI Font Icons out of the supported list."
+components: ["general"]
 slug: webfonticons_aspnetmvc6_aspnetmvc
 position: 7
 ---
@@ -10,7 +11,7 @@ position: 7
 
 > As of the 2023 R3 release, the font icons are detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}). If you use the Kendo UI CDN service to include the Kendo UI theme, to continue using the font icons, add a reference the following stylesheet into your application:
 
-```
+```HTML
 <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
 ```
 
@@ -43,7 +44,7 @@ To use the Telerik UI font icons:
  3. Assign a `k-font-icon` CSS class followed by a predefined class from the [list of font icons](#icons-list) to an HTML tag. For example, a the `<span>` element.
 
  The following example demonstrates how to render a font calendar icon.
- ```
+ ```HTML
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" />
     <link rel="stylesheet" href="https://unpkg.com/@@progress/kendo-font-icons/dist/index.css" />
 
@@ -56,7 +57,7 @@ To use the Telerik UI font icons:
 
 Though the web icon font comes with a set of predefined CSS classes, you will need to use the icons with a custom CSS class name. To achieve this, set a `:before` pseudo content value for the relevant icon.
 
-```
+```HTML
 <span class="k-icon k-font-icon my-custom-icon-class"></span>
 <style>
     .my-custom-icon-class:before {
@@ -79,7 +80,7 @@ The Telerik UI font icons are designed on a 16px grid base. To achieve a pixel-p
 
 You can scale icons by setting the `font-size` configuration option.
 
-```
+```HTML
 <span class="k-icon k-font-icon k-i-gear"></span>
 <span class="k-icon k-font-icon k-i-gear k-icon-32"></span>
 <span class="k-icon k-font-icon k-i-gear k-icon-48"></span>
@@ -101,7 +102,7 @@ You can scale icons by setting the `font-size` configuration option.
 
 To set the icon color, use the `color` CSS property.
 
-```
+```HTML
     <span class="k-icon k-font-icon k-i-gear" style="color: blue;"></span>
     <span class="k-icon k-font-icon k-i-gear colored-icon"></span>
     <style>
@@ -115,7 +116,7 @@ To set the icon color, use the `color` CSS property.
 
 To conveniently accommodate an icon in your application, flip it by using the `k-flip-h` and `k-flip-v` predefined CSS classes.
 
-```
+```HTML
     <span class="k-icon k-font-icon k-i-pencil"></span>
     <span class="k-icon k-font-icon k-i-pencil k-flip-h"></span>
     <span class="k-icon k-font-icon k-i-pencil k-flip-v"></span>

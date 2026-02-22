@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: events_chart_aspnetcore
 position: 6
 ---
@@ -32,7 +33,7 @@ The following examples demonstrates how to subscribe to events by a handler name
     </kendo-chart>
 ```
 {% endif %}
-```script.js
+```JS script.js
     <script>
         function onSeriesClick(e) {
             // Handle the seriesClick event

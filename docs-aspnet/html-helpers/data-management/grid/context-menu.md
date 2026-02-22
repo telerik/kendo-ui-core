@@ -2,6 +2,7 @@
 title: Context Menu
 page_title: Context Menu
 description: "Learn how to enable and configure the Context Menu of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: grid_aspnetcore_contextmenu
 position: 16
 ---
@@ -205,6 +206,9 @@ The following example demonstrates how to subscribe to the Grid's ContextMenu `O
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [ContextMenu of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/context-menu)
 * [Server-Side API](/api/grid)
 * [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

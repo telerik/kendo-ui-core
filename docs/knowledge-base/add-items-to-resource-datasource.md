@@ -5,9 +5,9 @@ description: "Learn how to insert new items into a resource DataSource in a Kend
 previous_url: /controls/scheduling/scheduler/how-to/add-items-to-resource-datasource, /controls/scheduling/scheduler/how-to/binding/add-items-to-resource-datasource
 slug: howto_insert_items_in_resource_datasource_scheduler
 tags: telerik, kendo, jquery, scheduler, insert, new, items, into, resource, datasource
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -60,8 +60,8 @@ The following example demonstrates how to achieve the desired scenario.
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
             "day",
@@ -94,24 +94,26 @@ The following example demonstrates how to achieve the desired scenario.
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings",
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                type: "POST",
+                contentType: "application/json"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                type: "POST",
+                contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                type: "POST",
+                contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

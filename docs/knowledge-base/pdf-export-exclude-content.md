@@ -7,7 +7,7 @@ slug: pdf-export-exclude-content
 tags: pdf, export, content, exclude, drawing, api
 ticketid: 1135598
 res_type: kb
-component: drawing-api
+components: ["drawing-api"]
 ---
 
 ## Environment
@@ -69,7 +69,7 @@ Elements that you do not want to be exported can be hidden just before the expor
 	              kendo.saveAs({
 	                  dataURI: data,
 	                  fileName: "Example.pdf",
-	                  proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+	                  proxyURL: "https://demos.telerik.com/service/v2/core/export"
 	              });
 	          });
 	      });

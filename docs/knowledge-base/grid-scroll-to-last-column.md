@@ -6,7 +6,7 @@ page_title: Scroll the Last Column into View - Kendo UI for jQuery Data Grid
 slug: grid-scroll-to-last-column
 tags: kendoui, kendo, grid, column, scroll, view, move
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -34,9 +34,8 @@ How can I scroll the last column into view when a Grid with many columns is init
     $(document).ready(function () {
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 pageSize: 20
             },
@@ -54,7 +53,7 @@ How can I scroll the last column into view when a Grid with many columns is init
 
             columns: [{
                 template: "<div class='customer-photo'" +
-                    "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+                    "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
                     "<div class='customer-name'>#: ContactName #</div>",
                 field: "ContactName",
                 title: "Contact Name",

@@ -2,6 +2,7 @@
 title: Custom Cell Editors
 page_title: jQuery Spreadsheet Documentation - Custom Cell Editors
 description: "Get started with the jQuery Spreadsheet by Kendo UI and define custom editors for its cells."
+components: ["spreadsheet"]
 slug: custom_editors_spreadsheet_widget
 position: 6
 ---
@@ -37,7 +38,7 @@ The following example demonstrates how to set up a color-picking custom editor.
                 context = options;
                 open();
             },
-            icon: "k-icon k-i-background"
+            icon: "droplet"
         };
         // This function actually creates the UI if not already there, and
         // caches the dialog and the model.
@@ -86,7 +87,7 @@ The following example demonstrates how to set up a color-picking custom editor.
            sheetsbar: false,
            excel: {
                // Required to enable Excel Export in some browsers.
-               proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+               proxyURL: "https://demos.telerik.com/service/v2/core/export"
            },
            sheets: [{
                rows: [{

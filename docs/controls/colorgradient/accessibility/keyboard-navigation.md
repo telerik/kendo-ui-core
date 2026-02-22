@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ColorGradient Documentation - Keyboard Navigation
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["colorgradient"]
 slug: keynav_colorgradient_jquery
 position: 2
 ---
@@ -26,4 +27,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ColorGr
 
 * [Keyboard Navigation by the ColorGradient (Demo)](https://demos.telerik.com/kendo-ui/colorgradient/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ColorGradient]({% slug accessibility_kendoui_colorgradient_widget %})
+* [Accessibility in the ColorGradient]({% slug jquery_colorgradient_accessibility %})

@@ -7,7 +7,7 @@ let StaticList = kendo.ui.StaticList,
 describe("kendo.ui.StaticList events", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
-        element = $("<ul></ul>").appendTo(Mocha.fixture);
+        element = $("<div></div>").appendTo(Mocha.fixture);
     });
     afterEach(function() {
         element.data("kendoStaticList").destroy();

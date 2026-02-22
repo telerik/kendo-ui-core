@@ -5,9 +5,9 @@ description: "Learn how to make input elements of the Kendo UI for jQuery DatePi
 slug: howto_make_input_elements_readonly_datepicker
 previous_url: /controls/editors/datepicker/how-to/readonly-input
 tags: kendo, jquery, datepicker, make, input, elements, readonly
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

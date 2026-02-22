@@ -2,6 +2,7 @@
 title: Binding to Arrays
 page_title: Array Binding
 description: "Get started with the {{ site.product }} ListBox and learn how to bind the ListBox to client-side or server-side array."
+components: ["listbox"]
 slug: htmlhelpers_listbox_array_binding_aspnetcore
 position: 3
 ---
@@ -59,7 +60,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
         <toolbar position="ListBoxToolbarPosition.Right"
                     tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
     </kendo-listbox>
-````
+```
 {% endif %}
 
 ## Client-Side Arrays
@@ -115,7 +116,7 @@ The following example demonstrates how to initialize the ListBox and bind it to 
                 "Madrid"]
         })
     </script>
-````
+```
 {% endif %}
 
 ## See Also

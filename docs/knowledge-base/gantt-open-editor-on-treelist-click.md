@@ -7,7 +7,7 @@ slug: gantt-open-editor-on-treelist-click
 tags: gantt, open, show, task, select, editor, treelist, click
 ticketid: 1139636
 res_type: kb
-component: gantt
+components: ["gantt"]
 ---
 
 ## Environment

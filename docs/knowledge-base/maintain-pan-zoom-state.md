@@ -5,9 +5,9 @@ description: "Learn how to maintain the axis range after rebinding a Kendo UI Ch
 previous_url: /controls/charts/how-to/maintain-pan-zoom-state, /controls/charts/how-to/state/maintain-pan-zoom-state
 slug: howto_panandzoomrebind_charts
 tags: chart, keep, pan, and, zoom, state, on, rebind
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

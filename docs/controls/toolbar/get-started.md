@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ToolBar Documentation - Getting Started with the ToolBar
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to create and initialize the component."
+components: ["toolbar"]
 slug: getting_started_kendoui_toolbar
 position: 1
 ---
@@ -90,8 +91,4 @@ The ToolBar enables you to configure its items by using the [`items`](https://do
 * [JavaScript API Reference of the ToolBar](/api/javascript/ui/toolbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

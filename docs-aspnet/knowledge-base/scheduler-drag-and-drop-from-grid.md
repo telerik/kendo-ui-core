@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/drag-and-drop, /html-helpers/
 slug: scheduler-drag-and-drop-from-grid
 tags: scheduler, drag, drop, events, grid, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 
@@ -122,7 +123,7 @@ How can I implement a Drag and Drop functionality to allow the user to move even
         </kendo-scheduler>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script type="text/javascript">
             function onDataBound(e) {
                 createDropArea(this);

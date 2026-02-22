@@ -2,71 +2,73 @@
 
 ## Including the Client-Side Resources
 
-Before you can use a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts:
+To enable the Telerik UI for ASP.NET MVC components, you must add several [client-side]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) dependencies to the application, like scripts and a [theme file]({% slug sassbasedthemes_overview%})
 
-1. Go to `~\Views\Shared\_Layout.cshtml` and add the Kendo UI theme of your choice to the `<head>` of the document. Since Microsoft's project template uses Bootstrap, you can use the Kendo UI SASS Bootstrap theme to match it.
+Before adding a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts:
 
-		<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My ASP.NET Application</title>
+1. Go to `~\Views\Shared\_Layout.cshtml` and add the theme of your choice to the `<head>` of the document. Since ASP.NET Web Application template uses Bootstrap, you can use the [Telerik UI Bootstrap theme]({% slug sassbasedthemes_overview%}#built-in-themes) to match it:
+
+	```HTML
+	<head>
+		...
 		@Styles.Render("~/Content/css")
 		@Scripts.Render("~/bundles/modernizr")
 
-		@* Add the Kendo SASS Bootstrap theme: *@
+		@* Add the Telerik UI Bootstrap Main theme: *@
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
-		</head>
+		...
+	</head>
+	```
 
-1. In the `_Layout.cshtml` file, locate the `@Scripts.Render("~/bundles/jquery")` line in the `<body>` of the document and delete it. This jQuery script reference comes with the Microsoft ASP.NET Web Application template. 
+1. The ASP.NET Web Application template comes with a jQuery script reference at the end of `_Layout.cshtml` file. Locate the `@Scripts.Render("~/bundles/jquery")` line in the `<body>` of the document and move it to the `<head>`. Alterantively, use the jQuery script hosted on the jQuery CDN.
 
-	Removing this script is crucial because in the next step you add the jQuery script provided by Telerik. Having more than one script references causes errors.  
-
-1. Add the jQuery script to the `<head>` tag.
-
-		<head>
+	```HTML
+	<head>
 		...
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
-		
+	
 		@* Add the jQuery script from the jQuery CDN: *@
-		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-		</head>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	</head>
+	```
 
-1. Add the Kendo UI scripts. The Kendo UI script files required by UI for ASP.NET MVC must be loaded in the `<head>` tag *after* the jQuery script.
+1. Add the required Kendo UI script files in the `<head>` tag after the `jQuery` script reference:
 
-		<head>
+	```HTML
+	<head>
 		...
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
-		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 		@* Add the Kendo UI scripts: *@
-		<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-		</head>
+	</head>
+	```
 
-1. Finally, add the `bootstrap.min.js` script available in Microsoft's ASP.NET Web Application template, and the `<head>` will look like this.
+	> The installed {{ site.product }} NuGet package and the required [client-side assets]({% slug copyclientresources_aspnetmvc6_aspnetmvc %}) must have identical versions.
 
-		<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My Telerik MVC Application</title>
+1. Finally, add the `bootstrap.min.js` script available in ASP.NET Web Application template. The `<head>` tag must contain the following sylesheets and scripts:
+
+	```HTML
+
 		@Styles.Render("~/Content/css")
 		@Scripts.Render("~/bundles/modernizr")
 		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
-		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-		<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 		
 		@* Add the bootstrap.min.js script: *@
 		<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-		</head>
-
+	</head>
+	```
 >Always observe the following rules when adding client-side resources to your project:
-> * Put the Kendo UI script files (`kendo.all.min.js` and `kendo.aspnetmvc.min.js`) after the `jquery.min.js` script.
-> * A jQuery script must be loaded only once. It must be placed only in the `<head>` tag of the `_Layout.cshtml` file. Make sure there are no duplicate jQuery references elsewhere in the `_Layout` file.
-> * The Kendo UI scripts, the Kendo UI CSS file must use a compatible version of the theme, and the `Kendo.Mvc.dll` referenced in the project must be the same version as the Kendo UI script files.
+> * Register the Kendo UI script files (`kendo.all.min.js` and `kendo.aspnetmvc.min.js`) after the `jquery.min.js` script.
+> * The jQuery script must be loaded only once. It must be placed only in the `<head>` tag of the `_Layout.cshtml` file. Ensure there are no duplicate jQuery references elsewhere in the `_Layout` file.
+> * The Telerik UI for ASP.NET MVC version and the version of the included Telerik UI theme must be mutually compatible. For more information, refer to the [compatibility table]({% slug sass_themes_compatibility_aspnetmvc6_aspnetmvc %}).
+> * The `Kendo.Mvc.dll` and the referenced Kendo UI scripts must have identical versions.
 
-If you prefer to include the Kendo UI scripts and styles from a local source instead of CDNs, refer to the [Local Client-Side Resources]({% slug using_local_client_side_resources %}) article.
+If you prefer to include the client-side resources from a local source instead of CDNs, refer to the [Local Client-Side Resources]({% slug using_local_client_side_resources %}) article.
 
 #end

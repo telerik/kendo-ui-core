@@ -7,7 +7,7 @@ slug: grid-excel-export-formulas
 tags: excel, export, grid, formula, formulas, column, create, include, calculate, add, sum, total
 ticketid: 1433998
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -65,9 +65,8 @@ You can alter the generated workbook to include a column with formulas by follow
           allPages: true
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 7
         },

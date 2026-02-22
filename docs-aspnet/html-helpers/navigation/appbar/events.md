@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI AppBar component for {{ site.framework }}."
+components: ["appbar"]
 slug: events_app_bar
 position: 4
 ---

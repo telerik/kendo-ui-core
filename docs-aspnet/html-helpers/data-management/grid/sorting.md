@@ -2,6 +2,7 @@
 title: Sorting
 page_title: Sorting
 description: "Learn how to enable the sorting functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_sorting
 position: 9
 ---
@@ -167,6 +168,9 @@ If you want to sort a column as a different type than the original one in the da
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Sorting by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sorting)
 * [Knowledge Base Section](/knowledge-base)
 * [Server-Side API](/api/grid)

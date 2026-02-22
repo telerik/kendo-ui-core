@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }}."
+components: ["pivotgridv2"]
 slug: overview_pivotgridhelperv2_aspnetcore
 position: 0
 ---
@@ -23,7 +24,7 @@ The PivotGridV2 represents multidimensional data in a cross-tabular format. Comp
 
 ## Basic Configuration
 
-To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/olap/msmdpump.dll`, follow the next steps:
+To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/service/v2/olap/msmdpump.dll`, follow the next steps:
 
 {% if site.core %}
 1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET Core Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to install {{ site.product }} in the application.
@@ -59,7 +60,7 @@ To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://le
                         .Catalog("Adventure Works DW 2008R2")
                         .Cube("Adventure Works"))
                     .Read(read => read
-                        .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                        .Url("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                         .DataType("text")
                         .ContentType("text/xml")
                         .Type(HttpVerbs.Post)
@@ -83,7 +84,7 @@ To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://le
                     <row name="[Geography].[City]"></row>
                 </rows>
                 <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
-                <transport read-url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
+                <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST">
                     <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
                 </transport>
             </pivot-datasource>
@@ -104,7 +105,7 @@ The following image demonstrates the output from the example.
 * [Templates]({% slug htmlhelpers_pivotgridv2_aspnetcore_templates %})&mdash;The available templates allow you to control the rendering of the data cells and headers.
 * [Excel export]({% slug htmlhelpers_pivotgridv2_aspnetcore_excelexport %})&mdash;Built-in support for exporting the component data to Excel.
 * [PDF export]({% slug htmlhelpers_pivotgridv2_aspnetcore_pdfexport %})&mdash;You can export the component data to PDF through a single click.
-* [Accessibility]({% slug htmlhelpers_accessibility_actionsheet_aspnetcore %})&mdash;The PivotGridV2 is accessible for screen readers, supports WAI-ARIA, Section 508, WCAG 2.2, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pivotgridv2 %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_actionsheet_accessibility %})&mdash;The PivotGridV2 is accessible for screen readers, supports WAI-ARIA, Section 508, WCAG 2.2, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_pivotgridv2 %}) for faster navigation.
 
 ## Next Steps
 

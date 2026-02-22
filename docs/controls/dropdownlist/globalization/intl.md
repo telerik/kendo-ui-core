@@ -2,6 +2,7 @@
 title: Internationalization
 page_title: jQuery DropDownList Documentation - DropDownList Internationalization
 description: "Get started with the jQuery DropDownList by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
+components: ["dropdownlist"]
 slug: intl_kendoui_ddl_widget
 position: 2
 ---

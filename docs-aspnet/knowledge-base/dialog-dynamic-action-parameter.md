@@ -6,6 +6,7 @@ page_title: Passing a Parameter Dynamically to an Action Button of the Dialog
 slug: dialog-dynamic-action-parameter
 tags: dialog, dynamic, parameter, action, button, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -74,7 +75,7 @@ How can I pass a parameter dynamically to a specified action button of a Dialog 
         </kendo-dialog>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onClick() {
                 var customParam = "ABC123";
@@ -116,7 +117,7 @@ For a runnable example based on the code above, refer to the [REPL example on pa
 * [Telerik UI for {{ site.framework }} Forums](https://www.telerik.com/forums/aspnet-core-ui)
 
 {% else %}
-* [{{ site.framework }} Dialog Product Page](https://www.telerik.com/aspnet-mvc/dialog)
+* [{{ site.framework }} Dialog Product Page](https://www.telerik.com/aspnet-mvc/dialog-for-mvc)
 
 * [Telerik UI for {{ site.framework }} Video Onboarding Course (Free for trial users and license holders)]({%slug virtualclass_uiformvc%})
 

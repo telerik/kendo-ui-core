@@ -2,6 +2,7 @@
 title: Loading Content
 page_title: Loading Content
 description: "Learn about the different ways of loading content in Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 previous_url: /helpers/layout/window/content
 slug: htmlhelpers_window_loadingcontent_aspnetcore
 position: 5
@@ -40,17 +41,21 @@ In some scenarios, it is required to configure the Window to load dynamic conten
 
 1. Create a new action method which renders the view.
 
+    ```C#
         public ActionResult Index()
         {
             return View();
         }
+    ```
 
 1. Create an action method which renders the content.
 
+    ```C#
         public ActionResult AjaxContent()
         {
             return View();
         }
+    ```
 
 1. Add a Window on the page. Its definition will contain the LoadContentFrom() setting which will point to the Content Controller Action:
 
@@ -75,30 +80,30 @@ In some scenarios, it is required to configure the Window to load dynamic conten
     ```
     {% endif %}
 
-You can also use another [`.LoadContentFrom()`](/api/kendo.mvc.ui.fluent/windowbuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
+    You can also use another [`.LoadContentFrom()`](/api/kendo.mvc.ui.fluent/windowbuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
 
-```HtmlHelper
-@(Html.Kendo().Window()
-        .Name("window") 
-        .Title("User Details") 
-        .LoadContentFrom("UserDetails", "Window", new { userId = 10}) //Define the Action, Controller names and additional route values.
-    )
-```
-{% if site.core %}
- ```TagHelper
-<kendo-window name="window" title="User Details" content-url="@Url.Action("AjaxContent","Window",new { userId = 10 })">
-</kendo-window>
- ```
-{% endif %}
-```Controller
-public ActionResult UserDetails(int userId)
-{
-    MyUserViewModel model = myService.GetUserDetails(userId)
-    //fetch required details and pass them to the View 
-    
-    return View(model);
-}
-```
+    ```HtmlHelper
+    @(Html.Kendo().Window()
+            .Name("window") 
+            .Title("User Details") 
+            .LoadContentFrom("UserDetails", "Window", new { userId = 10}) //Define the Action, Controller names and additional route values.
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-window name="window" title="User Details" content-url="@Url.Action("AjaxContent","Window",new { userId = 10 })">
+    </kendo-window>
+    ```
+    {% endif %}
+    ```Controller
+    public ActionResult UserDetails(int userId)
+    {
+        MyUserViewModel model = myService.GetUserDetails(userId)
+        //fetch required details and pass them to the View 
+        
+        return View(model);
+    }
+    ```
 
 To refresh or change the Window's content on the client, once the Window has been initialized, you can use the [Client-side API of the Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window) and the [refresh method](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/refresh).
 ## See Also

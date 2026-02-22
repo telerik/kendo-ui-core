@@ -2,6 +2,7 @@
 title: Customization
 page_title: Less Themes Customization
 description: "Learn how you can customize the Telerik UI for {{ site.framework }} Less themes."
+components: ["general"]
 slug: less_themes_customization_aspnetmvc6_aspnetmvc
 position: 2
 ---
@@ -38,30 +39,38 @@ For the full list of primitives, refer to the [Overview article]({% slug less_th
 
 Usually, a CSS property that is defined by a primitive class is used by all components, which use that class, unless overridden by a selector with higher specificity.
 
-    .k-link {
-        color: blue;
-    }
+```CSS
+.k-link {
+    color: blue;
+}
+```
 
 The previous code snippet will not affect the following setting because the latter uses a descendant selector and is therefore more specific (20 versus 10, to be precise).
 
-    .k-panelbar .k-link {
-        color: red;
-    }
+```CSS
+.k-panelbar .k-link {
+    color: red;
+}
+```
 
 For more information about the CSS specificity, refer to [this article in the Smashing Magazine](http://www.smashingmagazine.com/2007/07/27/css-specificity-things-you-should-know/).
 
 To override the styling for a given widget type, you can use a CSS selector with the CSS class of the component. Make sure to register the custom rules after the respective theme CSS files. Otherwise, you have to use higher specificity and longer complex CSS selectors.
 
-    .k-menu .k-link {
-        color: red;
-    }
+```CSS
+.k-menu .k-link {
+    color: red;
+}
+```
 
 To customize the appearance of a particular component, you need a custom CSS, if you have set such, or you can use its id in the CSS selector. The Menu from the following example can be styled by adding its Name (id) to the selector. The CSS rule will apply only to the Meny with `.Name("menu1")` and will not affect any other Menu instances, because they will have different ids.
 
-    // Style a Menu by its id.
-    #menu1 .k-link {
-        color: red;
-    }
+```CSS
+/*Style a Menu by its id*/.
+#menu1 .k-link {
+    color: red;
+}
+```
 
 ## See More
 

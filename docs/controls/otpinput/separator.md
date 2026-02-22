@@ -2,6 +2,7 @@
 title: Separator
 page_title: jQuery OTPInput Documentation - OTPInput Separator
 description: "Learn how to configure different separators between the items of the OTPInput component."
+components: ["otpinput"]
 slug: separator_kendoui_otpinput
 position: 3
 ---

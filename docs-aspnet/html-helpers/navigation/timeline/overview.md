@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Timeline component for {{ site.framework }}."
+components: ["timeline"]
 previous_url: /helpers/navigation/timeline/overview
 slug: overview_htmlhelpers_timeline_aspnetcore
 position: 0
@@ -160,71 +161,8 @@ public class TimelineEventActionModel
 * [Images]({%slug images_htmlhelpers_timeline_aspnetcore %})
 * [Templates]({%slug templates_htmlhelpers_timeline_aspnetcore %})
 
-## Referencing Existing Instances
-
-To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
-
-```HtmlHelper
-    @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
-        .Name("Timeline")
-        .DataDateField("EventDate")
-        .DataDescriptionField("Description")
-        .DataSubTitleField("Subtitle")
-        .DataTitleField("Title")
-        .DataImagesField("Images")
-        .DataActionsField("Actions")
-        .Orientation("horizontal")
-        .DataSource(dt => dt.Read("GetTimelineData", "Timeline")) // see the first example in this article for a sample data source
-    )
-
-    <button onclick="buttonClick();">Go to next event</button>
-
-    <script>
-        function buttonClick() {
-            var timeline = $("#Timeline").data("kendoTimeline");
-            timeline.next();
-        }
-    </script>
-```
-{% if site.core %}
-```TagHelper
-    <kendo-timeline name="Timeline"
-                    orientation="horizontal"
-                    datadatefield="EventDate"
-                    datatitlefield="Title"
-                    datasubtitlefield="Subtitle"
-                    datadescriptionfield="Description"
-                    dataactionsfield="Actions"
-                    dataimagesfield="Images">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("GetTimelineData","Timeline")" />
-            </transport>
-            <schema>
-                <model>
-                    <fields>
-                        <field name="EventDate" type="date"></field>
-                        <field name="Title" type="string"></field>
-                        <field name="Subtitle" type="string"></field>
-                        <field name="Description" type="string"></field>
-                    </fields>
-                </model>
-            </schema>
-        </datasource>
-    </kendo-timeline>
-
-    <button onclick="buttonClick();">Go to next event</button>
-
-    <script>
-        function buttonClick() {
-            var timeline = $("#Timeline").data("kendoTimeline");
-            timeline.next();
-        }
-    </script>
-```
-{% endif %}
-
 ## Next Steps
+
 * [Getting Started with the Timeline]({% slug aspnetcore_timeline_getting_started %})
 * [Basic Usage of the Timeline for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/index)
 * [Timeline Events]({% slug events_timeline_aspnetcore %})

@@ -2,6 +2,7 @@
 title: MultiViewCalendar Century Cells Format
 page_title: jQuery MultiViewCalendar Documentation - MultiViewCalendar Century Cells Format
 description: "Learn the possible formats for the century cells in the Kendo UI for jQuery MultiViewCalendar."
+components: ["multiviewcalendar"]
 slug: century_cells_format_multiviewcalendar
 position: 8
 ---

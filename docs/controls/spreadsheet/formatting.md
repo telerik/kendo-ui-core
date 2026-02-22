@@ -2,6 +2,7 @@
 title: Cell Formatting
 page_title: jQuery Spreadsheet Documentation - Cell Formatting
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to format cells in the component."
+components: ["spreadsheet"]
 previous_url: /controls/spreadsheet/format
 slug: cell_formatting_spreadsheet_widget
 position: 5
@@ -43,10 +44,10 @@ The following example demonstrates how to format the Spreadsheet conditionally.
         $("#spreadsheet").kendoSpreadsheet({
             excel: {                
                 // Required to enable saving files in older browsers.
-                proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             pdf: {                
-                proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             sheets: [
                 {

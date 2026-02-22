@@ -7,6 +7,7 @@ slug: listbox-cascading
 tags: listbox, cascade, core, aspnet, mvc, add, remove, change, datasource, refresh, select
 ticketid: 1409405
 res_type: kb
+components: ["general"]
 component: listbox
 ---
 

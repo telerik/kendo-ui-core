@@ -7,6 +7,7 @@ slug: grid-filter-multi-checkboxes-external-datasource
 tags: grid, filter, multi, checkboxes, datasource
 ticketid: 1138899
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

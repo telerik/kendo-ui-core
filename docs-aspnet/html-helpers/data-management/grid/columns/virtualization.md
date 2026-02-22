@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: Column Virtualization
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable its column virtualization."
+components: ["grid"]
 slug: columnvirtualization_aspnet_grid
 ---
 
@@ -46,6 +47,9 @@ To enable both virtualized columns and rows:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Column Virtualization by the Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/column-virtualization)
 * [Virtual Scrolling of the {{ site.product }} Grid]({% slug virtual_scrolling_aspnetcore_grid %})
 * [Column Widths]({% slug column_widths_grid_aspnetcore %})

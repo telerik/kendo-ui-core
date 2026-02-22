@@ -5,9 +5,9 @@ description: "Learn how to select a row with a checkbox column that is bound to 
 previous_url: /controls/data-management/grid/how-to/Selection/grid-selection-to-model-field
 slug: howto_bind_selection_to_model_field
 tags: grid, bind, selection, model, field, checkbox, column
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -56,29 +56,30 @@ The following example demonstrates how `SelectAll` that is located in the header
 </div>
 <script>
     $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
-                autoSync: true,
-                transport: {
-                    read:  {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
-                    },
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {models: kendo.stringify(options.models)};
+                            return kendo.stringify(options.models);
                         }
                     }
                 },
@@ -104,10 +105,10 @@ The following example demonstrates how `SelectAll` that is located in the header
             navigatable: true,
             pageable: true,
             columns: [
-              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' onclick='checkAll(this)'/>" },
+              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox' onclick='checkAll(this)'/>" },
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
-                { field: "UnitsInStock", title: "Units In Stock", width: 120 },                            
+                { field: "UnitsInStock", title: "Units In Stock", width: 120 },
                 { command: "destroy", title: "&nbsp;", width: 150 }],
             dataBound: function(e){
               e.sender.items().each(function(){
@@ -153,29 +154,30 @@ The following example demonstrates how `SelectAll` that is located in the header
 </div>
 <script>
     $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
-                autoSync: true,
-                transport: {
-                    read:  {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
-                    },
+       var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		    contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		    contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		    contentType: "application/json"
+                        },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {models: kendo.stringify(options.models)};
+                            return kendo.stringify(options.models);
                         }
                     }
                 },
@@ -201,10 +203,10 @@ The following example demonstrates how `SelectAll` that is located in the header
             navigatable: true,
             pageable: true,
             columns: [
-              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' onclick='checkAll(this)'/>" },
+              { field: "Discontinued", width: 120, template: "<input type='checkbox' class='k-checkbox' data-bind='checked:Discontinued' />", headerTemplate: "<input id='checkAll' type='checkbox' class='k-checkbox' onclick='checkAll(this)'/>" },
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
-                { field: "UnitsInStock", title: "Units In Stock", width: 120 },                            
+                { field: "UnitsInStock", title: "Units In Stock", width: 120 },
                 { command: "destroy", title: "&nbsp;", width: 150 }],
             dataBound: function(e){
               e.sender.items().each(function(){

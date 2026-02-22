@@ -2,7 +2,8 @@
 title: Overview
 page_title: Stepper Documentation | Stepper Accessibility
 description: "Get started with the {{ site.product }} Stepper and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_stepper
+components: ["stepper"]
+slug: htmlhelpers_stepper_accessibility
 position: 1
 ---
 
@@ -23,8 +24,7 @@ The Stepper is compliant with the [Web Content Accessibility Guidelines (WCAG) 2
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The Stepper component is a landmark `<nav>` element or an element with [`role="navigation"`](https://www.w3.org/TR/wai-aria-1.2/#navigation). It contains an ordered list of navigation items. Each navigation item contains a link.
-
+The Stepper component is a landmark `<nav>` element or an element with `role="navigation"`(https://www.w3.org/TR/wai-aria-1.2/#navigation). It contains an ordered list of navigation items. Each navigation item contains a link.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Accessibility Overview
 description: "Accessibility features in the {{ site.product }} suite."
+components: ["general"]
 slug: overview_accessibility
 position: 1
 ---

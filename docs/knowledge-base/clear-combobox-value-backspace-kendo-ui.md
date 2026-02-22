@@ -6,6 +6,7 @@ page_title: How to Clear ComboBox Value Using Backspace Without Auto-Selecting F
 slug: clear-combobox-value-backspace-kendo-ui
 tags: kendo-ui, combobox, clear, value, backspace, filter
 res_type: kb
+components: ["combobox"]
 ticketid: 1665651
 ---
 

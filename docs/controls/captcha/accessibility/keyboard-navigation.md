@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Captcha Documentation - Keyboard Navigation
 description: "Get started with the jQuery Captcha by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["captcha"]
 slug: keynav_captcha_jquery
 position: 2
 ---
@@ -26,4 +27,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Captcha
 
 * [Keyboard Navigation by the Captcha (Demo)](https://demos.telerik.com/kendo-ui/captcha/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Captcha]({% slug accessibility_kendoui_captcha_widget %})
+* [Accessibility in the Captcha]({% slug jquery_captcha_accessibility %})

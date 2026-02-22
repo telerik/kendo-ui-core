@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Notification Documentation - Getting Started with the Notification
 description: "Get started with the jQuery Notification by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["notification"]
 slug: getting_started_kendoui_notification_component
 position: 1
 ---
@@ -105,8 +106,4 @@ You can customize the [`position`](https://docs.telerik.com/kendo-ui/api/javascr
 * [JavaScript API Reference of the jQuery Notification](/api/javascript/ui/notification)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

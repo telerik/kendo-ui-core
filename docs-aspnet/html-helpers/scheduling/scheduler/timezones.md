@@ -2,6 +2,7 @@
 title: Timezones
 page_title: Timezones
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its timezone."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_timezones_aspnetcore
 position: 5
 ---
@@ -117,3 +118,4 @@ You can find a full working sample with Timezone defined and different cultures 
 ## See Also
 
 * [Server-Side API](/api/scheduler)
+* [Knowledge Base: Change Timezone in Scheduler Dynamically]({% slug scheduler-change-timezone %})

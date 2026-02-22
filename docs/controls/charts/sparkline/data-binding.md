@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Sparkline Charts Documentation - Data Binding
 description: "Get started with the jQuery Sparkline by Kendo UI and learn how to bind the component to data."
+components: ["chart"]
 slug: databinding_kendoui_sparklinescharts
 position: 2
 ---

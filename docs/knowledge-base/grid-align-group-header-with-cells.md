@@ -7,6 +7,7 @@ slug: grid-align-group-header-cells
 tags: grid, grouping, aggregates, template
 ticketid: 1142332
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

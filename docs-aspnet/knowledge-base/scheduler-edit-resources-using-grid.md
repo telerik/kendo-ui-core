@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/scheduler-resource-editing, /
 slug: scheduler-edit-resources-using-grid
 tags: scheduler, edit, resources, grid, custom, editor, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 
@@ -27,7 +28,7 @@ component: scheduler
 
 How can I use the [{{ site.framework }} Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}) component to edit the {{ site.framework }} Scheduler resources?
 
-By design, the user can edit the [resources assigned to the Scheduler events]({% slug htmlhelpers_scheduler_resources_aspnetcore %}). However, the default editor template of the Scheduler does not provide an editor that allows the users to edit the available resources. 
+By design, the user can edit the [resources assigned to the Scheduler events]({% slug htmlhelpers_scheduler_resources_aspnetcore %}). However, the default editor template of the Scheduler does not provide an editor that allows the users to edit the available resources.
 
 For example:
 
@@ -47,7 +48,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
             .Editable(editable => {
                 editable.TemplateName("CustomEditorTemplate");
             })
-            .Resources(resource => 
+            .Resources(resource =>
             {
                 resource.Add(m => m.Attendees)
                 .Title("Attendees")
@@ -105,7 +106,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
             <!-- Other configuration -->
         </kendo-scheduler>
     ```
-    ```HomeController.cs
+    ```C# HomeController.cs
         public virtual JsonResult Read_Attendees([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetAll().ToDataSourceResult(request));
@@ -119,7 +120,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
         }
     ```
     {% else %}
-    ```HomeController.cs
+    ```C# HomeController.cs
         public virtual JsonResult Read_Attendees([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetAll().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -148,7 +149,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
 1. Create a custom editor template for the Scheduler. For more information, refer to the [implementing custom editors for the Scheduler events documentation]({% slug scheduler-custom-editors %}).
 1. Add a [MultiSelect]({% slug htmlhelpers_multiselect_aspnetcore %}) editor for the **Attendees** resources in the custom editor template and configure it for remote data binding.
 
-    ```CustomEditorTemplate.cshtml
+    ```Razor CustomEditorTemplate.cshtml
     <div class="k-edit-label">
         @(Html.LabelFor(model => model.Attendees))
     </div>
@@ -183,7 +184,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
     </div>
     ```
     {% if site.core %}
-    ```TagHelper_CustomEditorTemplate.cshtml
+    ```TagHelper
         @addTagHelper *, Kendo.Mvc
         <div class="k-edit-label">
             <label asp-for="Attendees"></label>
@@ -218,7 +219,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
 
 1. Add a button after the MultiSelect editor that will open the Window with the Grid. Also, define the InCell editable Grid and wrap it into a `<div>` element with a class **insertNewAttendeeDialog**. Finally, add **Save changes** and **Cancel changes** buttons below the Grid. The **Save changes** button will save the Grid changes, close the Window with the Grid, refresh the options of the MultiSelect editor used for the resources, and fetch the latest data for the resources collection.
 
-    ```CustomEditorTemplate.cshtml
+    ```Razor CustomEditorTemplate.cshtml
     <div data-container-for="Attendees" class="k-edit-field">
         <div style="width: 280px; display: inline-block">
             @(Html.Kendo().MultiSelectFor(model => model.Attendees)
@@ -226,7 +227,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
             )
         </div>
 
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" style="float:right;" id="editAttendees">Edit attendees</button>
+        <button class="k-button k-button-primary" style="float:right;" id="editAttendees">Edit attendees</button>
 
         <div id="insertNewAttendeeDialog">
             <div id="editResources"></div>
@@ -259,13 +260,13 @@ Follow the steps below to create a custom editor template for the Scheduler even
                 .ToClientTemplate()
             )
             <br />
-            <button id='saveAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Save changes</button>
-            <button id='cancelAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Cancel changes</button>
+            <button id='saveAttendees' class="k-button k-button-primary">Save changes</button>
+            <button id='cancelAttendees' class="k-button">Cancel changes</button>
         </div>
     </div>
     ```
     {% if site.core %}
-    ```TagHelper_CustomEditorTemplate.cshtml
+    ```TagHelper
         @addTagHelper *, Kendo.Mvc
 
         <div data-container-for="Attendees" class="k-edit-field">
@@ -275,7 +276,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
 				</kendo-multiselect>
             </div>
 
-            <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" style="float:right;" id="editAttendees">Edit attendees</button>
+            <button class="k-button k-button-primary" style="float:right;" id="editAttendees">Edit attendees</button>
 
             <div id="insertNewAttendeeDialog">
                 <div id="editResources"></div>
@@ -307,13 +308,13 @@ Follow the steps below to create a custom editor template for the Scheduler even
                         </column>
                     </columns>
                     <toolbar>
-                        <toolbar-button name="create"></toolbar-button> 
+                        <toolbar-button name="create"></toolbar-button>
                     </toolbar>
                     <editable mode="incell"/>
                 </kendo-grid>
                 <br />
-                <button id='saveAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Save changes</button>
-                <button id='cancelAttendees' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Cancel changes</button>
+                <button id='saveAttendees' class="k-button k-button-primary">Save changes</button>
+                <button id='cancelAttendees' class="k-button">Cancel changes</button>
             </div>
         </div>
     ```
@@ -374,7 +375,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
                     multi.dataSource.read(); // Trigger the Read request of the MultiSelect editor to load the updated options.
 
                     /* The index of the resource defined in the Scheduler configuration. */
-                    var resourceIndex = 0; 
+                    var resourceIndex = 0;
                     scheduler.resources[resourceIndex].dataSource.read(); // Trigger the Read request of the resources to load the updated options.
                 });
             });
@@ -418,7 +419,7 @@ Follow the steps below to create a custom editor template for the Scheduler even
         </script>
     ```
     {% endif %}
-    ```CustomEditorTemplate.cshtml
+    ```Razor CustomEditorTemplate.cshtml
         <script>
             function destroyDialog() {
                 var dialogElement = $(document.getElementById("insertNewAttendeeDialog"));

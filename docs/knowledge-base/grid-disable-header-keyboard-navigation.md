@@ -6,6 +6,7 @@ page_title: How to Disable Grid Header Keyboard Navigation in Kendo UI Grid
 slug: disable-grid-header-keyboard-navigation-kendo-ui-grid
 tags: grid, kendo ui, keyboard navigation, header, disable
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -38,9 +39,9 @@ Below you will find a runnable example:
             e.preventDefault()
           },
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

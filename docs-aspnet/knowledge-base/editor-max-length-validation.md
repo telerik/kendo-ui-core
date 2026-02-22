@@ -7,6 +7,7 @@ slug: editor-max-length-validation
 tags: editor, maxlength, max, maximum, length, text, validate, validation, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/add-max-length-validation, /html-helpers/editors/editor/how-to/add-max-length-validation
 res_type: kb
+components: ["general"]
 component: editor
 ---
 
@@ -42,10 +43,10 @@ To validate the Editor value, use the [Kendo UI for jQuery Validator](https://do
             .Value("Lorem ipsum dolor sit amet. Lorem ipsum dolor sit.")
         )
 
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Submit</button>
+        <button class="k-button k-button-primary">Submit</button>
     </form>
 ```
-```Script
+```JS script
     <script>
         // Register custom validation rules.
         (function ($, kendo) {

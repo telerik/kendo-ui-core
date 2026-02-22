@@ -5,9 +5,9 @@ description: "Learn how to dynamically calculate and set the major unit for the 
 previous_url: /controls/charts/how-to/configure-major-lines-in-value-axis, /controls/charts/how-to/various/configure-major-lines-in-value-axis
 slug: howto_calculatemajorunit_charts
 tags: chart, calculate, set, major, units, for, value, axes
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

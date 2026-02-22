@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Charts Documentation - StockChart Data Binding
 description: "Get started with the jQuery StockChart by Kendo UI and learn how to bind it to data."
+components: ["chart"]
 slug: databinding_kendoui_stockcharts
 position: 2
 ---
@@ -21,20 +22,23 @@ You can bind the StockChart to both local and remote data over its DataSource.
 
 The following example demonstrates a service that returns stock price history data as JSON.
 
- 	 [
-    		{
-        		"Date": "2000/01/03",
-        		"Open": 41.62,
-        		"High": 41.69,
-        		"Low": 39.81,
-        		"Close": 40.12,
-    			"Volume": 2632000
-    		},
-			...
-		]
+````javascript
+ [
+		{
+    		"Date": "2000/01/03",
+    		"Open": 41.62,
+    		"High": 41.69,
+    		"Low": 39.81,
+    		"Close": 40.12,
+			"Volume": 2632000
+		},
+		...
+	]
+````
 
 The following example demonstrates how to bind the StockChart to the remote service.
 
+````javascript
     $("#stockChart").kendoStockChart({
 		dataSource: {
 			transport: {
@@ -43,9 +47,12 @@ The following example demonstrates how to bind the StockChart to the remote serv
 		},
 		dateField: "Date"
     });
+````
 
 The following example demonstrates how to define the main and the Navigator series.
 
+
+````javascript
     $("#stockChart").kendoStockChart({
 		dataSource: {
 			transport: {
@@ -67,6 +74,7 @@ The following example demonstrates how to define the main and the Navigator seri
 			}
 		}
     });
+````
 
 ## Single Data-Source Mode
 
@@ -146,8 +154,7 @@ The following example demonstrates a StockChart in the master and navigator data
             serverFiltering: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/StockData",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/StockData"
                 },
                 parameterMap: function(data) {
                     return { filter: JSON.stringify(data.filter) };
@@ -170,8 +177,7 @@ The following example demonstrates a StockChart in the master and navigator data
             dataSource: {
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/StockData",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/StockData"
                     }
                 },
                 schema: stockDataSchema

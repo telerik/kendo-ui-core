@@ -2,6 +2,7 @@
 title: Color Ranges
 page_title: jQuery CircularGauge Documentation - Color Ranges
 description: "Get started with the jQuery CircularGauge by Kendo UI and learn how to set distinct colors for the different value ranges."
+components: ["circulargauge"]
 slug: colorranges_kendoui_circulargauge
 position: 3
 ---

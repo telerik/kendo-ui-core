@@ -2,6 +2,7 @@
 title: Export Options
 page_title: Telerik UI Chart Wizard Documentation - Export Options
 description: "Learn more about the built-in export options of the Telerik UI for {{ site.framework }} Chart Wizard component."
+components: ["chartwizard"]
 slug: htmlhelpers_export_chartwizard
 position: 3
 ---

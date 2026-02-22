@@ -6,6 +6,7 @@ page_title: Using External Method Variables in Kendo UI Grid FooterTemplate
 slug: how-to-use-external-variables-in-kendo-ui-grid-footer-template
 tags: kendo-ui, grid, footer-template, external-variables, jquery
 res_type: kb
+components: ["grid"]
 ticketid: 1661610
 ---
 

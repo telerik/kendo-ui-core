@@ -7,6 +7,7 @@ slug: chart-align-zero-multiple-axes
 tags: telerik, chart, align, zero, multiple, axes, value
 component: chart
 res_type: kb
+components: ["general"]
 ---
 
 
@@ -40,7 +41,7 @@ I have a {{ site.product }} Chart with multiple axes. One has negative values an
 {% endif %}
 
 
-```Index.cshtml   
+```Razor Index.cshtml   
     @(Html.Kendo().Chart(Model)
         .Name("chart")
         .Title("Hybrid car mileage report")
@@ -98,7 +99,7 @@ I have a {{ site.product }} Chart with multiple axes. One has negative values an
         )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function onlyPositive(e) {
             console.log(e.value);
@@ -137,7 +138,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Align Zero with Multiple Axes in the Chart](https://netcorerepl.telerik.com/QcvbQlbq50VLHjf500)
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

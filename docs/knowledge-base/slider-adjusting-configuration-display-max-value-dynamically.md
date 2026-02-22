@@ -6,6 +6,7 @@ page_title: Adjusting Slider Configuration to Display Max Value Dynamically | Ke
 slug: slider-adjusting-configuration-display-max-value-dynamically 
 tags: kendo ui, slider, configuration, max value
 res_type: kb
+components: ["slider"]
 ---
 
 ## Environment

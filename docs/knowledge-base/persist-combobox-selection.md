@@ -7,7 +7,7 @@ slug: persist-combobox-selection
 tags: persisting, selected, item, combobox
 ticketid: 1116339
 res_type: kb
-component: combobox
+components: ["combobox"]
 ---
 
 ## Environment
@@ -52,10 +52,10 @@ Retrieve the selected item and keep it in `localStorage` by using the [`select()
           dataTextField: "CategoryName",
           dataValueField: "CategoryID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/odata/Categories"
             }
           }
         }).data("kendoComboBox");

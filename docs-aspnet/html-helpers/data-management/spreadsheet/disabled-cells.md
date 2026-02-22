@@ -2,6 +2,7 @@
 title: Disabled Cells
 page_title: Spreadsheet Disabled Cells
 description: "Learn how to enable and disable cells for the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_disabled_cells_aspnetcore
 position: 8
 ---
@@ -64,7 +65,7 @@ You can set the state of a cell or range of cells after the initialization by us
 
 The following example demosntrates how to toggle the state of cell `A1` on button click:
 
-```
+```JS
 $("#myButton").click(function () {
     var range = $("#spreadsheet").data("kendoSpreadsheet").activeSheet().range("A1");
     var enabled = range.enable();

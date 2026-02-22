@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ScrollView Documentation - Getting Started with the ScrollView
 description: "Get started with the jQuery ScrollView by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["scrollview"]
 slug: getting_started_kendoui_scrollview_widget
 position: 2
 ---
@@ -106,8 +107,4 @@ To add pages in the ScrollView, you need to nest a `<div data-role="page"></div>
 * [JavaScript API Reference of the jQuery ScrollView](/api/javascript/ui/scrollview)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

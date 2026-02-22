@@ -2,6 +2,7 @@
 title: Tooltip
 page_title: jQuery Validator Documentation - Tooltip
 description: "Get started with the jQuery Validator by Kendo UI and ."
+components: ["validator"]
 slug: tooltip_kendoui_validator
 position: 5
 ---

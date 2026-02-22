@@ -2,6 +2,7 @@
 title: Forms Integration
 page_title: Forms Integration
 description: "Learn how to use forms in the Telerik UI Window component for {{ site.framework }}."
+components: ["window"]
 previous_url: /helpers/layout/window/using-forms-in-window
 slug: htmlhelpers_window_forms_aspnetcore
 position: 7
@@ -50,7 +51,7 @@ Though the Window allows the creation of popup forms, you need to consider the c
 
 To handle this behavior, render the content in an `iframe`.
 
-```HtmlHelper(Index.cshtml)
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("PopupForm")
         .Title("My Form")
@@ -85,14 +86,14 @@ To handle this behavior, render the content in an `iframe`.
     </script>
 ```
 {% endif %}
-```HomeController.cs
+```C# HomeController.cs
     public ActionResult GetForm()
     {
         // Return the view with the form.
         return View("Form");
     }
 ```
-```HtmlHelper(Form.cshtml)
+```HtmlHelper
     @* As this is loaded in an iframe, the view will have a layout to load an entire HTML page. *@
     @{
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -113,7 +114,7 @@ To handle this behavior, render the content in an `iframe`.
         )
     }
 ```
-```MyModel.cs
+```C# MyModel.cs
 public class MyModel
 {
     [Required]
@@ -124,7 +125,7 @@ public class MyModel
     public string Description { get; set; }
 }
 ```
-```MyModelController.cs
+```C# MyModelController.cs
 [HttpPost]
 public ActionResult MyModel_Create(MyModel model)
 {
@@ -144,7 +145,7 @@ public ActionResult MyModel_Create(MyModel model)
 
 In case the Form is used in a RazorPages application, create the form with no ActionMethod and Controller. Upon submission, the OnPost() ActionMethod in the code-behind will be invoked:
 
-```HtmlHelper(Form.cshtml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.Form.FormAjaxSubmitModel
     @{ ViewData["Title"] = "FormIndex"; }
@@ -169,7 +170,7 @@ In case the Form is used in a RazorPages application, create the form with no Ac
             )
     }
 ```
-```Form.cshtml.cs
+```C# Form.cshtml.cs
     public class FormAjaxSubmitModel : PageModel
     {
         [BindProperty]

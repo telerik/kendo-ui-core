@@ -5,9 +5,9 @@ description: "Learn how to select a row of the Kendo UI jQuery Grid with a check
 previous_url: /controls/data-management/grid/how-to/Selection/grid-selection-checkbox
 slug: howto_make_selection_checkbox_column_grid
 tags: grid, make, preserve, selection, checkbox, column, get, ids, selected, items
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -36,30 +36,30 @@ For earlier versions, refer to the following example. It demonstrates how to sel
 <script>
     $(document).ready(function () {
         //DataSource definition
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-        dataSource = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                },
-                update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                },
-                destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                },
-                create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
-                },
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                 parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {
-                            models: kendo.stringify(options.models)
-                        };
+                        return kendo.stringify(options.models);
                     }
                 }
             },
@@ -111,7 +111,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
             columns: [
             //define template column with checkbox and attach click event handler
             {
-                template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md checkbox' />",
+                template: "<input type='checkbox' class='k-checkbox checkbox' />",
                 width: 40,
                 attributes: {class: "k-text-center"}
             },

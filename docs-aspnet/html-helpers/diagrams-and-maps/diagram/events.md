@@ -2,8 +2,9 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Diagram component for {{ site.framework }}."
+components: ["diagram"]
 slug: diagram_events
-position: 5
+position: 6
 ---
 
 # Events
@@ -60,10 +61,10 @@ The following example demonstrates how to subscribe to events by a template dele
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-diagram name="diagram" 
+    <kendo-diagram name="diagram"
                    on-add="function(){
                       // Handle the add event.
-                   }" 
+                   }"
     </kendo-diagram>
 ```
 {% endif %}
@@ -76,4 +77,4 @@ The following example demonstrates how to subscribe to events by a template dele
 
 * [Using the API of the Diagram for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/api)
 * [Diagram Server-Side API for {{ site.framework}}](/api/diagram)
-* [Diagram Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/diagram)
+* [Diagram Client-Side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/diagram)

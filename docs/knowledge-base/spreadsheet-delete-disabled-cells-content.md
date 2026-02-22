@@ -7,7 +7,7 @@ slug: spreadsheet-delete-disabled-cells-content
 tags: kendo, kendoui, spreadsheet, delete, disabled, cells, contextmenu
 ticketid: 1135315
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment
@@ -44,7 +44,7 @@ How can I delete a disabled cell in a Spreadsheet row through the **Delete** com
 1. Determine whether the currently selected command is **Delete**.
 1. Enable the current selection (which is the entire row) and clear it.
 
-```dojo
+```
 <div id="spreadsheet"></div>
 <script>
     $(function() {

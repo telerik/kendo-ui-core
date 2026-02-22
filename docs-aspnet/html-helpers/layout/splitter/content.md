@@ -2,6 +2,7 @@
 title:  Content
 page_title: Set the content for the Splitter.
 description: "An example on how to set the content for  the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: htmlhelpers_splitter_content_aspnetcore
 position: 7
 ---
@@ -101,4 +102,4 @@ public ActionResult PaneContent()
 
 * [Loading Content with AJAX in the Splitter (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/ajax)
 * [Server-Side API](/api/splitter)
-* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)
+* [JavaScript API Reference of the Splitter](https://docs.telerik.com/kendo-ui/api/javascript/ui/splitter)

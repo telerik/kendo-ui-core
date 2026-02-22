@@ -6,6 +6,7 @@ page_title: Removing Previously Selected Items in the Grid
 slug: grid-with-batch-remove
 tags: aspnet, mvc, kendo-ui, grid, datasource, model, batch, edit
 res_type: kb
+components: ["general"]
 ticketid: 1564276
 component: grid, datasource
 ---

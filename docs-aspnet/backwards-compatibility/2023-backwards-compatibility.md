@@ -2,8 +2,9 @@
 title: 2023 Releases
 page_title: 2023 Releases
 description: "Learn about the breaking changes and backward compatibility released by {{ site.product }} in 2023."
+components: ["general"]
 slug: breakingchanges_2023
-position: 3
+position: 5
 ---
 
 # 2023 Releases
@@ -14,24 +15,24 @@ This article lists the breaking or important changes in the 2023 releases of {{ 
 
 As of the 2023 R3 release, the font icons have been detached from the [Kendo UI Themes CDN]({% slug cdnservices_core %}) and have been extracted to a separate package. To continue using the font icons, reference the following stylesheet in your application:
 
-```
+```HTML
     <link rel="stylesheet" href="https://unpkg.com/@progress/kendo-font-icons/dist/index.css" />
 ```
 
 The font icons are also available as an NPM package. For more information on how to install the NPM package, refer to the following [documentation](https://www.telerik.com/design-system/docs/foundation/iconography/font-icons/#usage).
 
-## {{ site.product }} R1 2023 SP2 
+## {{ site.product }} R1 2023 SP2
 
 ### FloatingActionButton
 
-As part of the [rendering unification](#unified-rendering) of the components: 
+As part of the [rendering unification](#unified-rendering) of the components:
 
 * The `Shape` configuration option and the `shape` API method are now removed.
 * The element with class `k-fab-items` is moved inside the element with class `k-fab-popup`.
 
 ## {{ site.product }} R1 2023 SP1
 
-* Drop of the development and support of the LESS themes. 
+* Drop of the development and support of the LESS themes.
 
 ### Unified Rendering
 
@@ -59,7 +60,7 @@ All `k-state-{name of state}` classes are transposed to `k-{name of state}`. A l
 
 ### Animation Containers
 
-* Animation containers are all components that represent or hold a popup, for example, the Grid filter menu, column and popup editor, Tooltip, SplitButton, DropDownList, and more.  
+* Animation containers are all components that represent or hold a popup, for example, the Grid filter menu, column and popup editor, Tooltip, SplitButton, DropDownList, and more.
 * The `.k-animation-container` elements are now holding another wrapping element with the `.k-child-animation-container` class.
 
 ### PanelBar
@@ -88,7 +89,7 @@ The component's value is wrapped within a `<span>` element annotated with the `.
     |`k-grid-cancel`| `k-grid-cancel-command`
     |`k-grid-delete`| `k-grid-remove-command`
 
-* The following classes `table`-specific classes have been added to the `table` elements: 
+* The following classes `table`-specific classes have been added to the `table` elements:
 
     |Versions prior to 2023.1.314| Versions 2023.1.314 and later
     |:---   |:---
@@ -106,7 +107,7 @@ The component's value is wrapped within a `<span>` element annotated with the `.
 * The sorting icons will be replaced with their `.k-i-sort-asc-small` and  `.k-i-sort-desc-small` general names instead of their `.k-i-sort-asc-sm` and `.k-i-sort-desc-sm` aliases.
 * The sorting icon is now wrapped in a `<span>` element:
 
-  ```
+  ```HTML
   <span class="k-sort-icon">
         <span class="k-icon k-i-sort-asc-small"></span>
   </span>
@@ -114,7 +115,7 @@ The component's value is wrapped within a `<span>` element annotated with the `.
 
 * The headings of the Grid are now updated with the new header [rendering](#unified-rendering):
 
-  ```Versions-Before-2023.1.314
+  ```HTML Versions-Before-2023.1.314
       <!--- Default header cell --->
       <th class="k-header">
               <a class="k-link">
@@ -150,7 +151,7 @@ The component's value is wrapped within a `<span>` element annotated with the `.
            </a>
       </th>
   ```
-  ```Versions-After-2023.1.314
+  ```HTML Versions-After-2023.1.314
    <!--- Default header cell --->
    <th class="k-header">
        <span class="k-cell-inner">
@@ -227,13 +228,13 @@ The CheckBox is wrapped in a `<span>` element annotated with the `.k-checkbox-wr
 * The `k-notification-wrap` class has also been removed.
 * The closable `<a class="k-icon k-i-close"></a>` notification icon is now replaced with a `<span>` element and the icon class `.k-i-close` name has been changed to `.k-i-x`.
 
-    ```
+    ```HTML
     <span class="k-icon k-i-x">...</span>
     ```
 
 * A `.k-notification-actions` container added wrapping to the closable icon.
 
-    ```
+    ```HTML
     <span class="k-notification-actions">
         <span class="k-notification-action k-notification-close-action">
             <span class="k-icon k-i-x">...</span>
@@ -250,13 +251,13 @@ The `.k-button-rectangle` class is now removed.
 
 * The **Upload** button and input are no longer nested but are on the same level, wrapped inside a `<div>` element.
 
-    ```Versions-Before-2023.1.314
+    ```HTML Versions-Before-2023.1.314
     <div class="k-button k-upload-button" aria-label="Select files...">
         <input name="files" id="upload-input">
         <span>Select files...</span>
     </div>
     ```
-    ```Versions-After-2023.1.314
+    ```HTML Versions-After-2023.1.314
     <div class="k-upload-button-wrap">
       <label for="upload-input"> <!-->optional element<-->
         <button class="k-upload-button k-button k-button-md k-button-solid k-button-solid-base k-rounded-md">
@@ -325,7 +326,7 @@ The `.k-button-rectangle` class is now removed.
 * The `.k-dialog-buttongroup` and `.k-dialog-buttons` classes are now replaced with `.k-dialog-actions`.
 * A new `.k-dialog-{value}` theme color property has been added to the `.k-window` element. It supports the `primary`, `dark`, and `light` theme colors.
 
-    ```
+    ```HTML
     <!-- Primary themeColor -->
     <div class="k-window k-dialog k-dialog-primary">...</div>
 
@@ -369,13 +370,13 @@ As of the R1 2023 release, the `Load` method of the `Telerik.Web.PDF` assembly i
 
 * The tools in the ToolBar are actual component instances instead of ToolBar items. As a result, the `click` and `toggle` event argument objects no longer hold a reference to the ToolBar item (`e.item`). From that release on, the component instance of the tool can be taken by using the `kendo.widgetInstance()` method. When rendered in the `OverflowMenu` or the popup of a DropDownButton or a SplitButton those tools are menu items. Hence, they are not Kendo UI controls. A reference to the jQuery elements is still available in those cases in the `e.target` event argument in the ToolBar's `Click` and `Toggle` event handlers.
 
-    ```html
+    ```JavaScript
         <script>
             function onClick(e) {
                 console.log("click:");
                 console.log(kendo.widgetInstance(e.target));
             }
-            
+
             function onToggle(e) {
                 console.log("toggle: ", e.checked);
                 console.log(kendo.widgetInstance(e.target));

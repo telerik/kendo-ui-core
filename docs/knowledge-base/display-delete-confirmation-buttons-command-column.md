@@ -5,9 +5,9 @@ description: "Learn how to display the Delete confirmation as a button instead o
 previous_url: /controls/data-management/grid/how-to/Editing/display-delete-confirmation-buttons-command-column
 slug: howto_display_delete_confirmation_buttons_command_column
 tags: grid, show, delete, confirmation, button, command, column
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -41,30 +41,32 @@ The following example demonstrates how to render the delete confirmation for a G
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "//demos.telerik.com/kendo-ui/service",
-              dataSource = new kendo.data.DataSource({
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
                 transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
-                  },
-                  parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                    read:  {
+                        url: crudServiceBaseUrl + "/Products"
+                    },
+                    update: {
+                        url: crudServiceBaseUrl + "/Products/Update",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    destroy: {
+                        url: crudServiceBaseUrl + "/Products/Destroy",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    create: {
+                        url: crudServiceBaseUrl + "/Products/Create",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return kendo.stringify(options.models);
+                        }
                     }
-                  }
                 },
                 batch: true,
                 pageSize: 20,

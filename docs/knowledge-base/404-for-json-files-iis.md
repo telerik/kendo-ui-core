@@ -6,7 +6,7 @@ slug: 404_json_files_iis
 tags: telerik, kendoui, jquery, troubleshooting, error, 404, status, code, thrown, json, files, iis
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

@@ -2,27 +2,26 @@
 title:  Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the {{ site.product }} Scheduler for remote data binding using a DataSource in a Razor Page application."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_razorpage_aspnetcore
 position: 6
 ---
 
 # Scheduler in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Loader for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI Scheduler for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_scheduler_databinding %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the Scheduler component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [Scheduler in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Scheduler/SchedulerCrudOperations.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 To configure the CRUD operations of the Scheduler DataSource within a Razor Pages application, follow the next steps:
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configuration. The URL in each of these options must refer to the method name in the `PageModel`.
 
-    ```tab-HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -44,15 +43,15 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
                     m.Field(f => f.EndTimezone);
                     m.Field(f => f.IsAllDay);
                 })
-                .Read(r => r.Url("/Index?handler=Meetings_Read").Data("forgeryToken"))
-                .Create(c => c.Url("/Index?handler=Meetings_Create").Data("forgeryToken"))
-                .Destroy(d => d.Url("/Index?handler=Meetings_Destroy").Data("forgeryToken"))
-                .Update(u => u.Url("/Index?handler=Meetings_Update").Data("forgeryToken"))
+                .Read(r => r.Url(Url.Page("Index", "Meetings_Read")).Data("forgeryToken"))
+                .Create(c => c.Url(Url.Page("Index", "Meetings_Create")).Data("forgeryToken"))
+                .Destroy(d => d.Url(Url.Page("Index", "Meetings_Destroy")).Data("forgeryToken"))
+                .Update(u => u.Url(Url.Page("Index", "Meetings_Update")).Data("forgeryToken"))
             )
             ... // Additional configuration options.
         )
     ```
-    ```tab-TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
         @addTagHelper *, Kendo.Mvc
@@ -65,10 +64,10 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
             timezone="Etc/UTC">
             <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
                 <transport>
-                    <read url="/Index?handler=Meetings_Read" data="forgeryToken"/>
-                    <create url="/Index?handler=Meetings_Create" data="forgeryToken"/>
-                    <destroy url="/Index?handler=Meetings_Destroy" data="forgeryToken"/>
-                    <update url="/Index?handler=Meetings_Update" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Meetings_Read")" data="forgeryToken"/>
+                    <create url="@Url.Page("Index", "Meetings_Create")" data="forgeryToken"/>
+                    <destroy url="@Url.Page("Index", "Meetings_Destroy")" data="forgeryToken"/>
+                    <update url="@Url.Page("Index", "Meetings_Update")" data="forgeryToken"/>
                 </transport>
                 <schema data="Data" total="Total" errors="Errors">
                     <scheduler-model id="MeetingID">
@@ -94,7 +93,7 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
-    ```C#
+    ```Razor
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```
@@ -124,7 +123,9 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
 
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static IList<MeetingViewModel> meetings;
 
         public void OnGet()
@@ -179,8 +180,9 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
 
             return new JsonResult(new[] { meeting }.ToDataSourceResult(request, ModelState));
         }
+    }
     ```
-    ```tab-Model
+    ```Model
         @using Kendo.Mvc.UI;
         @using System.ComponentModel.DataAnnotations;
 
@@ -231,6 +233,8 @@ To configure the CRUD operations of the Scheduler DataSource within a Razor Page
             public bool IsAllDay { get; set; }
         }
     ```
+
+For the complete project, refer to the [Scheduler in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Scheduler/SchedulerCrudOperations.cshtml).
 
 ## See Also
 

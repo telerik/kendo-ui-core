@@ -5,9 +5,9 @@ description: "Learn how to change the default paging to a slider in a Kendo UI G
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-pager-to-slider, /controls/data-management/grid/how-to/Paging/change-grid-pager-to-slider
 slug: howto_change_grid_pager_to_slider
 tags: grid, pager, slider
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

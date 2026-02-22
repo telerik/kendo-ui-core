@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI NumericTextBox component for {{ site.framework }} that allows the user to select numeric values through direct input or by using spinner buttons"
+components: ["numerictextbox"]
 previous_url: /helpers/html-helpers/numerictextbox, /helpers/editors/numerictextbox/overview
 slug: htmlhelpers_numerictextbox_aspnetcore
 position: 0
@@ -80,7 +81,7 @@ The NumericTextBox configuration options are passed as attributes.
 | [Formats]({% slug formats_numerictextbox_aspnetcore %})|The format property of the NumericTextBox allows you to convert a number object to a human-readable string by using the culture-specific settings.|
 | [Labels]({% slug htmlhelpers_labels_numerictextbox %})|The `Label()` method enables you to associate the label HTML element with the NumericTextBox.|
 | [Globalization]({% slug globalization_numerictextbox_aspnetcore %})|The NumericTextBox comes with globalization support that allows you to use the component in apps all over the world.|
-| [Accessibility]({% slug accessibility_numerictextbox_aspnetcore %})|The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_numerictextbox_aspnetcore %}) for faster navigation.|
+| [Accessibility]({% slug htmlhelpers_numerictextbox_accessibility %})|The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_numerictextbox_aspnetcore %}) for faster navigation.|
 | [Input Restrictions]({% slug input_restrictions_numerictextbox_aspnetcore %})|You can restrict the accepted value to a specific range and also control its precision.|
 | [Events]({% slug events_numerictextbox_aspnetcore %})|The NumericTextBox exposes the `Change()` and `Spin()` events that allow you to control its behavior.|
 | [Automatic Correction]({% slug htmlhelpers_numerictextbox_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |

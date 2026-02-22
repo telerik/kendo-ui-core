@@ -7,6 +7,7 @@ slug: grid-persist-checkbox-filter-external-datasource
 tags: kendoui, jquery, data, grid, persist, multi, checkbox, filter, external, datasource
 ticketid: 1580564
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -33,260 +34,256 @@ To work around this issue, use either of the following approaches:
 
 * Declare the DataSource directly inside the [`columns.filterable.dataSource`](/api/javascript/ui/grid/configuration/columns.filterable.datasource) property:
 
-		```dojo
-		    <div class="box-col">
-		      <button id="save">Save State</button>
-		      <button id="load">Load State</button>
-		    </div>
-		    <div id="grid"></div>
-		    <script>
-		      $(document).ready(function() {
-		        var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+	```dojo
+	    <div class="box-col">
+	      <button id="save">Save State</button>
+	      <button id="load">Load State</button>
+	    </div>
+	    <div id="grid"></div>
+	    <script>
+	      $(document).ready(function() {
+	        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/odata/";
+	        $("#grid").kendoGrid({
+	          dataSource: {
+	            type: "odata-v4",
+    		    transport: {
+    		      read: crudServiceBaseUrl + "Employees",
+    		    },
+	            pageSize: 20,
+	            serverPaging: true,
+	            serverSorting: true,
+	            serverFiltering: true,
+	          },
+	          editable: true,
+	          filterable: true,
+	          pageable: true,
+	          columns: [
+	            {
+	              field: "FirstName",
+	              title: "First Name",
+	              filterable: {
+	                multi: true, search: true,
+	                dataSource: {
+	                  transport: {
+	                    read: {
+	                      url: crudServiceBaseUrl + "Employees/Unique",
+	                      dataType: "jsonp",
+	                      data: {
+	                        field: "FirstName"
+	                      }
+	                    }
+	                  }
+	                }
+	              },
+	              width: "220px"
+	            },
+	            {
+	              field: "LastName",
+	              filterable: {
+	                dataSource: {
+	                  transport: {
+	                    read: {
+	                      url: crudServiceBaseUrl + "Employees/Unique",
+	                      dataType: "jsonp",
+	                      data: {
+	                        field: "LastName"
+	                      }
+	                    }
+	                  }
+	                },
+	                multi: true
+	              },
+	              title: "Last Name",
+	              width: "220px"
+	            },
+	            {
+	              field: "Country",
+	              width: "220px"
+	            },
+	            {
+	              field: "City",
+	              filterable: {
+	                multi: true,
+	                dataSource: [{
+	                  City: "Seattle",
+	                },{
+	                  City: "Tacoma",
+	                },{
+	                  City: "Kirkland",
+	                },{
+	                  City: "Redmond",
+	                },{
+	                  City: "London"
+	                }],
+	                checkAll: false
+	              },
+	              width: "220px"
+	            },
+	            {
+	              filterable: {
+	                multi: true,
+	                dataSource: {
+	                  transport: {
+	                    read: {
+	                      url: crudServiceBaseUrl + "Employees/Unique",
+	                      dataType: "jsonp",
+	                      data: {
+	                        field: "Title"
+	                      }
+	                    }
+	                  }
+	                }
+	              },
+	              field: "Title"
+	            }
+	          ]
+	        });
 
-		        $("#grid").kendoGrid({
-		          dataSource: {
-		            type: "odata",
-		            transport: {
-		              read: telerikWebServiceBase + "Northwind.svc/Employees"
-		            },
-		            pageSize: 20,
-		            serverPaging: true,
-		            serverSorting: true,
-		            serverFiltering: true,
-		          },
-		          editable: true,
-		          filterable: true,
-		          pageable: true,
-		          columns: [
-		            {
-		              field: "FirstName",
-		              title: "First Name",
-		              filterable: {
-		                multi: true, search: true,
-		                dataSource: {
-		                  transport: {
-		                    read: {
-		                      url: telerikWebServiceBase + "Employees/Unique",
-		                      dataType: "jsonp",
-		                      data: {
-		                        field: "FirstName"
-		                      }
-		                    }
-		                  }
-		                }
-		              },
-		              width: "220px"
-		            },
-		            {
-		              field: "LastName",
-		              filterable: {
-		                dataSource: {
-		                  transport: {
-		                    read: {
-		                      url: telerikWebServiceBase + "Employees/Unique",
-		                      dataType: "jsonp",
-		                      data: {
-		                        field: "LastName"
-		                      }
-		                    }
-		                  }
-		                },
-		                multi: true
-		              },
-		              title: "Last Name",
-		              width: "220px"
-		            },
-		            {
-		              field: "Country",
-		              width: "220px"
-		            },
-		            {
-		              field: "City",
-		              filterable: {
-		                multi: true,
-		                dataSource: [{
-		                  City: "Seattle",
-		                },{
-		                  City: "Tacoma",
-		                },{
-		                  City: "Kirkland",
-		                },{
-		                  City: "Redmond",
-		                },{
-		                  City: "London"
-		                }],
-		                checkAll: false
-		              },
-		              width: "220px"
-		            },
-		            {
-		              filterable: {
-		                multi: true,
-		                dataSource: {
-		                  transport: {
-		                    read: {
-		                      url: telerikWebServiceBase + "Employees/Unique",
-		                      dataType: "jsonp",
-		                      data: {
-		                        field: "Title"
-		                      }
-		                    }
-		                  }
-		                }
-		              },
-		              field: "Title"
-		            }
-		          ]
-		        });
+	        var grid = $("#grid").data("kendoGrid");
 
-		        var grid = $("#grid").data("kendoGrid");
+	        $("#save").click(function (e) {
+	          e.preventDefault();
+	          localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
+	        });
 
-		        $("#save").click(function (e) {
-		          e.preventDefault();
-		          localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
-		        });
-
-		        $("#load").click(function (e) {
-		          e.preventDefault();
-		          var options = JSON.parse(localStorage["kendo-grid-options"]);
-		          if (options) {
-		            grid.setOptions(options);
-		          }
-		        });
-		      });
-		    </script>
-		```
+	        $("#load").click(function (e) {
+	          e.preventDefault();
+	          var options = JSON.parse(localStorage["kendo-grid-options"]);
+	          if (options) {
+	            grid.setOptions(options);
+	          }
+	        });
+	      });
+	    </script>
+	```
 
 * Pass a reference of the external filterable DataSource to the `options` object before calling the `setOptions` method:
 
-		```dojo
-		    <div class="box-col">
-		      <button id="save">Save State</button>
-		      <button id="load">Load State</button>
-		    </div>
-		    <div id="grid"></div>
-		    <script>
-		      $(document).ready(function() {
-		        var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+	```dojo
+	    <div class="box-col">
+	      <button id="save">Save State</button>
+	      <button id="load">Load State</button>
+	    </div>
+	    <div id="grid"></div>
+	    <script>
+	      $(document).ready(function() {
+	        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/odata/";
 
-		        var FirstNameMultiDataSource = new kendo.data.DataSource({
-		          transport: {
-		            read: {
-		              url: telerikWebServiceBase + "Employees/Unique",
-		              dataType: "jsonp",
-		              data: {
-		                field: "FirstName"
-		              }
-		            }
+		    var FirstNameMultiDataSource = new kendo.data.DataSource({
+		      transport: {
+		        read: {
+		          url: crudServiceBaseUrl + "Employees/Unique",
+		          data: {
+		            field: "FirstName"
 		          }
-		        })
+		        }
+		      }
+		    })
+	        $("#grid").kendoGrid({
+	          dataSource: {
+	            type: "odata-v4",
+	            transport: {
+	              read: crudServiceBaseUrl + "Northwind.svc/Employees"
+	            },
+	            pageSize: 20,
+	            serverPaging: true,
+	            serverSorting: true,
+	            serverFiltering: true,
+	          },
+	          editable: true,
+	          filterable: true,
+	          pageable: true,
+	          columns: [
+	            {
+	              field: "FirstName",
+	              title: "First Name",
+	              filterable: {
+	                multi: true, search: true,
+	                dataSource: FirstNameMultiDataSource
+	              },
+	              width: "220px"
+	            },
+	            {
+	              field: "LastName",
+	              filterable: {
+	                dataSource: {
+	                  transport: {
+	                    read: {
+	                      url: crudServiceBaseUrl + "Employees/Unique",
+	                      dataType: "jsonp",
+	                      data: {
+	                        field: "LastName"
+	                      }
+	                    }
+	                  }
+	                },
+	                multi: true
+	              },
+	              title: "Last Name",
+	              width: "220px"
+	            },
+	            {
+	              field: "Country",
+	              width: "220px"
+	            },
+	            {
+	              field: "City",
+	              filterable: {
+	                multi: true,
+	                dataSource: [{
+	                  City: "Seattle",
+	                },{
+	                  City: "Tacoma",
+	                },{
+	                  City: "Kirkland",
+	                },{
+	                  City: "Redmond",
+	                },{
+	                  City: "London"
+	                }],
+	                checkAll: false
+	              },
+	              width: "220px"
+	            },
+	            {
+	              filterable: {
+	                multi: true,
+	                dataSource: {
+	                  transport: {
+	                    read: {
+	                      url: crudServiceBaseUrl + "Employees/Unique",
+	                      dataType: "jsonp",
+	                      data: {
+	                        field: "Title"
+	                      }
+	                    }
+	                  }
+	                }
+	              },
+	              field: "Title"
+	            }
+	          ]
+	        });
 
-		        $("#grid").kendoGrid({
-		          dataSource: {
-		            type: "odata",
-		            transport: {
-		              read: telerikWebServiceBase + "Northwind.svc/Employees"
-		            },
-		            pageSize: 20,
-		            serverPaging: true,
-		            serverSorting: true,
-		            serverFiltering: true,
-		          },
-		          editable: true,
-		          filterable: true,
-		          pageable: true,
-		          columns: [
-		            {
-		              field: "FirstName",
-		              title: "First Name",
-		              filterable: {
-		                multi: true, search: true,
-		                dataSource: FirstNameMultiDataSource
-		              },
-		              width: "220px"
-		            },
-		            {
-		              field: "LastName",
-		              filterable: {
-		                dataSource: {
-		                  transport: {
-		                    read: {
-		                      url: telerikWebServiceBase + "Employees/Unique",
-		                      dataType: "jsonp",
-		                      data: {
-		                        field: "LastName"
-		                      }
-		                    }
-		                  }
-		                },
-		                multi: true
-		              },
-		              title: "Last Name",
-		              width: "220px"
-		            },
-		            {
-		              field: "Country",
-		              width: "220px"
-		            },
-		            {
-		              field: "City",
-		              filterable: {
-		                multi: true,
-		                dataSource: [{
-		                  City: "Seattle",
-		                },{
-		                  City: "Tacoma",
-		                },{
-		                  City: "Kirkland",
-		                },{
-		                  City: "Redmond",
-		                },{
-		                  City: "London"
-		                }],
-		                checkAll: false
-		              },
-		              width: "220px"
-		            },
-		            {
-		              filterable: {
-		                multi: true,
-		                dataSource: {
-		                  transport: {
-		                    read: {
-		                      url: telerikWebServiceBase + "Employees/Unique",
-		                      dataType: "jsonp",
-		                      data: {
-		                        field: "Title"
-		                      }
-		                    }
-		                  }
-		                }
-		              },
-		              field: "Title"
-		            }
-		          ]
-		        });
+	        var grid = $("#grid").data("kendoGrid");
 
-		        var grid = $("#grid").data("kendoGrid");
-
-		        $("#save").click(function (e) {
-		          e.preventDefault();
-		          localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
-		        });
-
-		        $("#load").click(function (e) {
-		          e.preventDefault();
-		          var options = JSON.parse(localStorage["kendo-grid-options"]);
-		          // Reference the FirstName filterbale dataSource.
-		          options.columns[0].filterable.dataSource = FirstNameMultiDataSource;
-
-		          if (options) {
-		            grid.setOptions(options);
-		          }
-		        });
-		      });
-		    </script>
-		```
+	        $("#save").click(function (e) {
+	          e.preventDefault();
+	          localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
+	        });
+			
+	        $("#load").click(function (e) {
+	          e.preventDefault();
+	          var options = JSON.parse(localStorage["kendo-grid-options"]);
+	          // Reference the FirstName filterbale dataSource.
+	          options.columns[0].filterable.dataSource = FirstNameMultiDataSource;
+	          if (options) {
+	            grid.setOptions(options);
+	          }
+	        });
+	      });
+	    </script>
+	```
 
 
 ## See Also

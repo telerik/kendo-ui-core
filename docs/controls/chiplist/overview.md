@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ChipList Documentation - ChipList Overview
 description: "Try now the Kendo UI for jQuery ChipList component delivering a styled clickable UI functionality with arbitrary content."
+components: ["chiplist"]
 slug: overview_kendoui_chiplist_widget
 position: 1
 ---

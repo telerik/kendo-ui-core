@@ -6,6 +6,7 @@ page_title: Editable Search Box in Kendo UI DropDownList in Bootstrap Modal
 slug: editable-search-box-kendo-ui-dropdownlist-bootstrap-modal
 tags: kendo, dropdownlist, search box, editable, bootstrap modal
 res_type: kb
+components: ["filter"]
 ---
 ## Environment
 | Product | Version |

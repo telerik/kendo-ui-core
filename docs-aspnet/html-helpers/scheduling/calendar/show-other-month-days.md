@@ -2,6 +2,7 @@
 title: Show Other Month Days
 page_title: Show Other Month Days
 description: "Get started with the Telerik UI Calendar component for {{ site.framework }} Show Other Month Days Functionality."
+components: ["calendar"]
 slug: htmlhelpers_show_other_month_days_calendar_aspnetcore
 position: 8
 ---
@@ -10,7 +11,7 @@ position: 8
 
 The {{ site.product }} Calendar allows you to explicitly render days from the previous and next months in the current view.
 
-> The `ShowOtherDays()` configuration is not compatible with the [`range`](/api/javascript/ui/calendar/configuration/selectable) selection. It is advised that this property is set to **false** when the `Selectable()` configuration is set to **range**.
+> The `ShowOtherDays()` configuration is not compatible with the [`range`](/api/kendo.mvc.ui.fluent/calendarbuilder#selectablesystemstring) selection. It is advised that this property is set to `false` when the `Selectable()` configuration is set to `range`.
 
 ```HtmlHelper
         @(Html.Kendo().Calendar()

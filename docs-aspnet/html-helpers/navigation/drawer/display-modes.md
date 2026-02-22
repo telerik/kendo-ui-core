@@ -2,6 +2,7 @@
 title: Display Modes
 page_title: Display Modes
 description: "Use the display modes and handle the rendering of the Telerik UI Drawer component for {{ site.framework }}."
+components: ["drawer"]
 previous_url: /helpers/navigation/drawer/display-modes
 slug: displaymodes_drawer_aspnetcore
 position: 2

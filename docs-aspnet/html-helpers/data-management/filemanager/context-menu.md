@@ -2,6 +2,7 @@
 title: Context Menu
 page_title: Context Menu
 description: "Get familiar with the ContextMenu usage in the {{ site.product }} FileManager component, in order to delete add or move files" 
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_contextmenu
 position: 3
 ---
@@ -98,7 +99,7 @@ To add a custom command to the context menu of the FileManager, follow the instu
 
 1. Create the command for the FileManager:
 
-    ```
+    ```JS
         $(function(){
             var filemanagerNS = kendo.ui.filemanager;
 

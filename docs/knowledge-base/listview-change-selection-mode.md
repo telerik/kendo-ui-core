@@ -6,7 +6,7 @@ page_title: Switch between Single and Multiple Selection - Kendo UI ListView for
 slug: listview-change-selection-mode
 tags: listview, select, mode, single, multiple, selection, change, switch, dynamic,
 res_type: kb
-component: listview
+components: ["listview"]
 ---
 
 ## Environment

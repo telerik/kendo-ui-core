@@ -8,6 +8,7 @@ position:
 tags: grid, columns, menu
 ticketid: 1063371
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -164,9 +165,9 @@ Here's one approach you can take to add an external Kendo UI Menu with checkbox 
 
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

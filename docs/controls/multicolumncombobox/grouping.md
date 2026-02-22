@@ -2,6 +2,7 @@
 title: Grouping
 page_title: jQuery MultiColumnComboBox Documentation - Grouping
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and configure its grouping functionality."
+components: ["multicolumncombobox"]
 slug: grouping_kendoui_multicolumncombobox_widget
 position: 6
 ---
@@ -37,9 +38,8 @@ To enable the grouping functionality in a MultiColumnComboBox, use the remote tr
                 { field: "CustomerID", title: "Customer ID" }
             ],
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -72,9 +72,8 @@ To customize the inline group title which is displayed next to the suggestion it
                 { field: "CustomerID", title: "Customer ID" }
             ],
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }

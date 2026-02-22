@@ -2,7 +2,8 @@
 title: Overview
 page_title: Window Documentation | Window Accessibility
 description: "Get started with the {{ site.product }} Window and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_window
+components: ["window"]
+slug: htmlhelpers_window_accessibility
 position: 1
 ---
 
@@ -31,7 +32,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 Action buttons follow the **Button** specification.
 
-[Button accessibility specification]({% slug accessibility_aspnetcore_button %})
+[Button accessibility specification]({% slug htmlhelpers_button_accessibility %})
 
 ## Resources
 

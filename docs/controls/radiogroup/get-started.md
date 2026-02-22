@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RadioGroup Documentation - Getting Started with the RadioGroup
 description: "Get started with the jQuery RadioGroup by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["radiogroup"]
 slug: getting_started_kendoui_radiogroup
 position: 1
 ---
@@ -142,8 +143,3 @@ You can preset the value of the component using the [`value`](/api/javascript/ui
 * [JavaScript API Reference of the RadioGroup](/api/javascript/ui/radiogroup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

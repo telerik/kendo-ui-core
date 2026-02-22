@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Scheduler Documentation - Getting Started with the Scheduler
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to create and initialize the component."
+components: ["scheduler"]
 slug: getting_started_kendoui_scheduler_widget
 position: 1
 ---
@@ -206,8 +207,4 @@ To customize the appearance of the events, use the [`eventTemplate`](/api/javasc
 * [JavaScript API Reference of the jQuery Scheduler](/api/javascript/ui/scheduler)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

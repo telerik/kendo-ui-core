@@ -2,6 +2,7 @@
 title: Export Support
 page_title: Export Support
 description: "Get started with {{ site.product }} and learn about the versions of the Pako and JSZip libraries supported by the library and used for PDF and Excel export."
+components: ["general"]
 previous_url: /getting-started/prerequisites/export-support, /compatibility/export-support, /installation-mvc/system-requirements/export-support
 slug: exportsupport_core
 position: 5
@@ -17,8 +18,10 @@ The [Pako Deflate library](https://nodeca.github.io/pako/#Deflate) enables the c
 
 > Starting with v2023.3.1115 the Pako library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
 
-    <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
+```HTML
+<!-- Load Pako Deflate library to enable PDF compression -->
+<script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
+```
 
 For more information on the available PDF export options by Kendo UI, refer to the articles on [PDF Export](https://docs.telerik.com/kendo-ui/framework/pdf/overview) and [PDF output by the Drawing library](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/overview).
 
@@ -33,14 +36,18 @@ Include the JSZip library:
 
 > Starting with v2024.1.130 the JSZip library is no longer distributed with the rest of the Kendo UI for jQuery scripts. You must use one of the official distribution channels such as `unpkg` instead.
 
-    <!-- Load the JSZip library to enable Excel export -->
-    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+```HTML
+<!-- Load the JSZip library to enable Excel export -->
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+```
 
 To take full advantage of the Excel export feature, download the [JSZip](http://stuk.github.io/jszip/) library and include the file before the Kendo UI JavaScript files.
 
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+```HTML
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+```
 
 > * If you do not include JSZip in the page, Kendo UI will raise a runtime exception.
 

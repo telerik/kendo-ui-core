@@ -6,6 +6,7 @@ page_title: Displaying Glyph Characters when Using PDFViewer
 slug: pdfviewer-display-simplified-chinese-characters
 tags: pdfviewer, pdf, font, glyph, simplified, chinese, characters, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

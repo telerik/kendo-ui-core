@@ -4,9 +4,9 @@ page_title: Drag and Drop Rows to an Empty Grid - Kendo UI for jQuery Data Grid
 description: "Learn how to drag and drop rows between two Kendo UI Data Grids for jQuery when on of the Grids is empty."
 slug: howto_dragand_drop_rows_toan_empty_grid
 tags: grid, drag, drop, rows, between, empty
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -42,13 +42,12 @@ You can add the new item always to the bottom of the Grid by replacing the [`ins
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         var inStockData = [],
             discontinuedData = [];
         $.ajax({
           type: "READ",
           url: crudServiceBaseUrl + "/Products",
-          dataType: "jsonp",
           success: function (data) {
             data.forEach(function (item) {
               item.Discontinued === false ? inStockData.push(item) : discontinuedData.push(item);

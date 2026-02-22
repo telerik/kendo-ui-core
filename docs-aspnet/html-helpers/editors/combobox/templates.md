@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 slug: htmlhelpers_combobox_templates_aspnetcore
 position: 4
 ---
@@ -45,7 +46,7 @@ The following example demonstrates how to customize the ComboBox by referencing 
 </kendo-combobox>
 ```
 {% endif %}
-```template
+```JS Template
 <script id="itemTemplate" type="text/x-kendo-template">
     ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
 </script>
@@ -119,7 +120,7 @@ The following example demonstrates how to define an item template and how to eva
 </kendo-combobox>
 ```
 {% endif %}
-```template
+```JS Template
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
     </script>
@@ -159,7 +160,7 @@ The header template manages the way the popup header of a ComboBox is rendered.
 </kendo-combobox>
 ```
 {% endif %}
-```template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
     </script>
@@ -199,7 +200,7 @@ The footer template manages the way the popup footer of a ComboBox is rendered. 
 </kendo-combobox>
 ```
 {% endif %}
-```template
+```JS Template
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
     </script>
@@ -239,7 +240,7 @@ The ComboBox displays `noDataTemplate` in the popup when the data source is empt
 </kendo-combobox>
 ```
 {% endif %}
-```template
+```JS Template
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
     </script>

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Rating Documentation - Keyboard Navigation
 description: "Get started with the jQuery Rating by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["rating"]
 slug: keynav_kendoui_rating_widget
 position: 2
 ---
@@ -16,4 +17,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Rating]
 
 * [Keyboard Navigation by the Rating (Demo)](https://demos.telerik.com/kendo-ui/rating/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Rating]({% slug accessibility_kendoui_rating_widget %})
+* [Accessibility in the Rating]({% slug jquery_rating_accessibility %})

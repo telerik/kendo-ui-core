@@ -444,7 +444,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         }, 150);
     });
 
-    asyncTest("form reset support does not remove place2older", function(done) {
+    asyncTest("form reset support does not remove placeholder", function(done) {
         populateSelect();
 
         let form = $("<form/>").appendTo(Mocha.fixture).append(select);
@@ -455,7 +455,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         form[0].reset();
 
         setTimeout(function() {
-            done(() => assert.equal(multiselect.input.val(), "Select..."));
+            done(() => assert.equal(multiselect.input.attr("placeholder"), "Select..."));
         }, 150);
     });
 
@@ -884,7 +884,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
             footerTemplate: () => "footer"
         });
 
-        assert.isOk(multiselect.noData.next().hasClass("k-list-footer"));
+        assert.isOk(multiselect.noData.siblings(".k-list-footer").length);
     });
 
     it("hides noData template if any data", function() {
@@ -1019,7 +1019,7 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
         assert.isNotOk(multiselect.wrapper.hasClass("k-rounded-large")); // Does not add valid class for other option
         assert.isNotOk(multiselect.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
         assert.isNotOk(multiselect.wrapper.hasClass("k-input-md")); // Does not add default class for the option
-        assert.isOk(multiselect.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
+        assert.isNotOk(multiselect.wrapper.hasClass("k-rounded-md")); // Does not add default class for other options when undefined
     });
 
     it("renders not-floating label from string", function() {
@@ -1080,4 +1080,77 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
 
         assert.equal(multiselect.label.element.text(), "some label");
     });
+
+    it ("Should set readonly state", function() {
+        let multiselect = new MultiSelect(select, {
+            dataValueField: "name",
+            dataTextField: "name",
+            readonly: true,
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            noDataTemplate: () => "no data",
+            template: ({ name }) => name
+        });
+
+        assert.isOk(multiselect.wrapper.attr("aria-readonly", true));
+        assert.equal(multiselect.options.readonly, true);
+        assert.isOk(multiselect.input.attr("readonly"));
     });
+
+    it ("Should set readonly state from attribute", function() {
+        select = $("<select multiple readonly='readonly' />").appendTo(Mocha.fixture);
+
+         let multiSelect = new MultiSelect(select, {
+             dataValueField: "name",
+             dataTextField: "name",
+             dataSource: {
+                 data: [
+                     { name: "item1", value: "1" },
+                     { name: "item2", value: "2" },
+                     { name: "item3", value: "3" }
+                 ],
+                 group: "name"
+             },
+             label: () => `some label`
+         });
+
+          assert.isOk(multiSelect.wrapper.attr("aria-readonly", true));
+          assert.isOk(multiSelect.element.attr("readonly"));
+          assert.equal(multiSelect.options.readonly, true);
+     });
+
+     it ("Should take readonly option with higher precedent over attribute", function() {
+          select = $("<select multiple readonly='readonly' />").appendTo(Mocha.fixture);
+
+          let multiSelect = new MultiSelect(select, {
+              dataValueField: "name",
+              dataTextField: "name",
+              readonly: false,
+              dataSource: {
+                  data: [
+                      { name: "item1", value: "1" },
+                      { name: "item2", value: "2" },
+                      { name: "item3", value: "3" }
+                  ],
+                  group: "name"
+              },
+              label: () => `some label`
+          });
+
+          assert.isOk(multiSelect.wrapper.attr("aria-readonly", false));
+          assert.equal(multiSelect.options.readonly, false);
+     });
+
+     it("readonly method sets input to readonly", function() {
+        let multiSelect = new MultiSelect(select);
+        multiSelect.readonly(true);
+        multiSelect.input.focus();
+
+        assert.include(["readonly", "true"], multiSelect.input.attr("readonly"));
+    });
+});

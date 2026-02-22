@@ -6,6 +6,7 @@ page_title: Customizing Bar Chart Category Axis Labels
 slug: chart-customize-category-labels
 tags: chart, align, bar, label, y, axis, category, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -37,7 +38,7 @@ Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawi
 1. Use the [`kendo.drawing.align`](https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align) method to set the alignment within the rectangle.
 1. [Append the elements together within the group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group/methods/append), and return the results.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Site Visitors Stats")
@@ -70,7 +71,7 @@ Use the [Kendo UI Drawing API](https://docs.telerik.com/kendo-ui/framework/drawi
     )
 ```
 
-```Script.js
+```JS script.js
     <script>
         function customLabels(e) {
             var group = new kendo.drawing.Group(); // Initialize a new kendo.drawing.Group object.
@@ -111,7 +112,7 @@ For the complete implementation of the suggested approach, refer to the [Telerik
 ## See Also
 
 * [Telerik REPL: Customize the Category Labels of the Bar Chart](https://netcorerepl.telerik.com/cRYFEKlh02kX4pEE00)
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

@@ -2,6 +2,7 @@
 title: Animated Transitions
 page_title: jQuery FX Documentation - Animated Transitions
 description: "Get started with the jQuery FX by Kendo UI and create complex animated transitions with the replace setting between two elements with a common container."
+components: ["effects"]
 slug: replaceffect_fxeffects_widget
 position: 5
 ---

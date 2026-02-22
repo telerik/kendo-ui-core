@@ -5,9 +5,9 @@ description: "Learn how to customize a confirmation dialog in the Kendo UI Grid 
 previous_url: /web/grid/how-to/Editing/grid-custom-delete-confirmation-window, /controls/data-management/grid/how-to/Editing/custom-delete-confirmation-dialog
 slug: howto_customize_delete_confirmation_dialog_grid
 tags: grid, customize, confirmation, window
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -44,53 +44,55 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 <script type="text/x-kendo-template" id="windowTemplate">
     <p> Delete <strong>#= ProductName #</strong> ? </p>
     <p> We have #= UnitsInStock # units in stock. </p>
-    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="yesButton"><span class="k-button-text">Yes</span></button>
-    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">No</span></button>
+    <button class="k-button" id="yesButton"><span class="k-button-text">Yes</span></button>
+    <button class="k-button" id="noButton"><span class="k-button-text">No</span></button>
 </script>
 
 <script>
     $(document).ready(function () {
         var windowTemplate = kendo.template($("#windowTemplate").html());
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-        dataSource = new kendo.data.DataSource({
-            transport: {
-                read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read:  {
+                        url: crudServiceBaseUrl + "/Products"
+                    },
+                    update: {
+                        url: crudServiceBaseUrl + "/Products/Update",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    destroy: {
+                        url: crudServiceBaseUrl + "/Products/Destroy",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    create: {
+                        url: crudServiceBaseUrl + "/Products/Create",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return kendo.stringify(options.models);
+                        }
+                    }
                 },
-                update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                },
-                destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                },
-                create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
-                },
-                parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                batch: true,
+                pageSize: 20,
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        fields: {
+                            ProductID: { editable: false, nullable: true },
+                            ProductName: { validation: { required: true } },
+                            UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                            Discontinued: { type: "boolean" },
+                            UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                        }
                     }
                 }
-            },
-            batch: true,
-            pageSize: 20,
-            schema: {
-                model: {
-                    id: "ProductID",
-                    fields: {
-                        ProductID: { editable: false, nullable: true },
-                        ProductName: { validation: { required: true } },
-                        UnitPrice: { type: "number", validation: { required: true, min: 1} },
-                        Discontinued: { type: "boolean" },
-                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
-                    }
-                }
-            }
-        });
+            });
 
         var window = $("#window").kendoWindow({
             title: "Are you sure you want to delete this record?",

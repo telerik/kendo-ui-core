@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} TextBox component by following a complete step-by-step tutorial."
+components: ["textbox"]
 slug: aspnetcore_textbox_getting_started
 position: 1
 ---
@@ -153,7 +154,7 @@ You can reference the TextBox instances that you have created and build on top o
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var textboxReference = $("#textbox").data("kendoTextBox"); // textboxReference is a reference to the existing TextBox instance of the helper.
     </script>
@@ -161,7 +162,7 @@ You can reference the TextBox instances that you have created and build on top o
 
 1. Use the [TextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/textbox#methods) to control the behavior of the widget. In this example, you will use the `value()` method to change its current content.
 
-    ```script
+    ```JS script
     <script>
         var textboxReference = $("#textbox").data("kendoTextBox"); // textboxReference is a reference to the existing TextBox instance of the helper.
         textboxReference.value("Sample text"); // Update the current TextBox value.
@@ -183,7 +184,7 @@ You can continue experimenting with the code sample above by running it in the T
 
 * [Set Labels to the TextBox]({% slug htmlhelpers_labels_textbox %})
 * [Customize the Appearance of the TextBox]({% slug textbox_appearance %})
-* [Explore the Accessibility Features of the TextBox]({% slug accessibility_textbox_aspnetcore %})
+* [Explore the Accessibility Features of the TextBox]({% slug htmlhelpers_textbox_accessibility %})
 
 ## See Also
 

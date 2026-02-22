@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} DateTimePicker component by following a complete step-by-step tutorial."
+components: ["datetimepicker"]
 slug: datetimepicker_getting_started
 position: 1
 ---
@@ -56,7 +57,7 @@ Use the DateTimePicker HtmlHelper {% if site.core %}or TagHelper{% endif %} to a
 
 ## 3. Handle the DateTimePicker Events
 
-The DateTimePicker [exposes various events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the DateTimePicker.
+The DateTimePicker {% if site.core %}[exposes various events](/api/kendo.mvc.ui.fluent/datetimepickereventbuilder){% else %}[exposes various events](/api/kendo.mvc.ui.fluent/datepickereventbuilderbase){% endif %} that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Open`, `Close`, and `Change` events of the DateTimePicker.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -118,7 +119,7 @@ To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kend
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var dateTimePickerReference = $("#datetimepicker").data("kendoDateTimePicker"); // DateTimePicker Reference is a reference to the existing instance of the helper.
         </script>
@@ -126,7 +127,7 @@ To use the [client-side API of the DateTimePicker](https://docs.telerik.com/kend
 
 1. Use the [client-side API of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker) to control the behavior of the widget. In this example, you will use the [`enable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker/methods/enable) method to disable the DateTimePicker.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var dateTimePicker= $("#datetimepicker").data("kendoDateTimePicker");

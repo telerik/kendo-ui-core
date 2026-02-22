@@ -7,6 +7,7 @@ slug: dropdownlist-required-only-when-data-exists
 tags: dropdown, required, field, validation, conditional, change
 ticketid: 1364233
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

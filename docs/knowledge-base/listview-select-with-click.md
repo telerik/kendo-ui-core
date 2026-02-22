@@ -6,7 +6,7 @@ page_title: Select Multiple Items Only with Click - Kendo UI ListView for jQuery
 slug: listview-select-with-click
 tags: listview, select, item, items, click, mouse, only, deselect, single
 res_type: kb
-component: listview
+components: ["listview"]
 ---
 
 ## Environment
@@ -52,8 +52,7 @@ How can I allow the users to select or deselect ListView items only with the mou
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Products"
                 }
             },
             pageSize: 15

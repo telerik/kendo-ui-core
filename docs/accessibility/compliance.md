@@ -2,6 +2,7 @@
 title: Compliance
 page_title: Accessibility Compliance
 description: "Compliance with the accessibility standards and requirements in the Kendo UI for jQuery suite."
+components: ["general"]
 slug: section508_wcag21_accessibility_support
 tags: kendoui,jquery,accessibility,standards,compliance
 published: True
@@ -17,7 +18,7 @@ This article lists the accessibility compliance of the Kendo UI for jQuery compo
 
 The [Accessibility Conformance Report (ACR)](https://www.section508.gov/sell/acr/) is a document that explains how information and communication technology products such as software, hardware, electronic content, and support documentation conform to leading global accessibility standards. Kendo UI for jQuery provides an ACR through the <a href="https://www.itic.org/policy/accessibility/vpat" target="_blank">Voluntary Product Accessibility Template (VPAT®)</a>.
 
->tip Download the latest version of the <a href="assets/KendoUI-VPAT2.4RevINT.doc" download>Kendo UI for jQuery Accessibility Conformance Report</a>.
+>tip Download the latest version of the [Kendo UI for jQuery Accessibility Conformance Report](assets/KendoUI-VPAT2.4RevINT.doc).
 
 ## Compliance Table
 
@@ -80,7 +81,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |MaskedTextbox |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/maskedtextbox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/maskedtextbox/accessibility/overview)|
 |MediaPlayer   |n/a|[Demo](https://demos.telerik.com/kendo-ui/accessibility/mediaplayer)| [Documentation](https://docs.telerik.com/kendo-ui/controls/mediaplayer/accessibility/overview)|
 |Menu          |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/menu)| [Documentation](https://docs.telerik.com/kendo-ui/controls/menu/accessibility/overview)|
-|MultiColumnComboBox |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicombobox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/multicombobox/accessibility/overview)|
+|MultiColumnComboBox |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multicombobox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/multicolumncombobox/accessibility/overview)|
 |MultiSelect   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/multiselect)| [Documentation](https://docs.telerik.com/kendo-ui/controls/multiselect/accessibility/overview)|
 |Notification  |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/notification)| [Documentation](https://docs.telerik.com/kendo-ui/controls/notification/accessibility/overview)|
 |NumericTextbox|AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/numerictextbox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/numerictextbox/accessibility/overview)|
@@ -101,7 +102,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |Rating    |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/rating)| [Documentation](https://docs.telerik.com/kendo-ui/controls/rating/accessibility/overview)|
 |ResponsivePanel |AA |n/a| n/a|
 |Scheduler	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scheduler)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scheduler/accessibility/overview)|
-|ScrollView	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scrollview/accessibility/overview)|
+|ScrollView	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scrollview/overview)|
 |Signature	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/signature)| [Documentation](https://docs.telerik.com/kendo-ui/controls/signature/accessibility/overview)|
 |SkeletonContainer	   |AAA | n/a| n/a|
 |Slider	       |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/slider)| [Documentation](https://docs.telerik.com/kendo-ui/controls/slider/accessibility/overview)|
@@ -116,7 +117,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |TextBox	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/textbox)| [Documentation](https://docs.telerik.com/kendo-ui/controls/textbox/accessibility/overview)|
 |TileLayout	   |AAA|[Demo](https://demos.telerik.com/kendo-ui/accessibility/tilelayout)| [Documentation](https://docs.telerik.com/kendo-ui/controls/tilelayout/accessibility/overview)|
 |TimeDurationPicker	   |AA | [Demo](https://demos.telerik.com/kendo-ui/accessibility/timedurationpicker)| [Documentation](https://docs.telerik.com/kendo-ui/controls/timedurationpicker/accessibility/overview)|
-|TimeLine	   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline)| [Documentation](https://docs.telerik.com/kendo-ui/controls/actionsheet/accessibility/overview)|
+|TimeLine	   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timeline-vertical)| [Documentation](https://docs.telerik.com/kendo-ui/controls/actionsheet/accessibility/overview)|
 |TimePicker	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)| [Documentation](https://docs.telerik.com/kendo-ui/controls/timepicker/accessibility/overview)|
 |ToggleButton  |AAA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/timepicker)| [Documentation](https://demos.telerik.com/kendo-ui/accessibility/togglebutton)|
 |ToolBar	   |AA  |[Demo](https://demos.telerik.com/kendo-ui/accessibility/toolbar)| [Documentation](https://docs.telerik.com/kendo-ui/controls/toolbar/accessibility/overview)|

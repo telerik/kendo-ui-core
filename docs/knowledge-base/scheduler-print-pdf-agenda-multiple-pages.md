@@ -7,6 +7,7 @@ slug: scheduler-print-pdf-agenda-multiple-pages
 tags: kendo, kendoui, scheduler, agenda, pdf, multiple
 ticketid: 1133425
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

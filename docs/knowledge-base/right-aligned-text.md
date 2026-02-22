@@ -5,9 +5,9 @@ description: "Learn how to right-align the text of data cells in a Kendo UI Pivo
 previous_url: /controls/data-management/pivotgrid/how-to/right-aligned-text, /controls/data-management/pivotgrid/how-to/appearance/right-aligned-text
 slug: howto_right_align_text_pivotgrid
 tags: pivotgrid, align, text, to, the, right
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -65,7 +65,7 @@ The following example demonstrates how to right-align the text of data cells in 
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "https://demos.telerik.com/olap/msmdpump.dll"
+                        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"

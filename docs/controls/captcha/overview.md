@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Captcha Documentation - Captcha Overview
 description: "Get started with the jQuery Captcha by Kendo UI and learn how to initialize the widget."
+components: ["captcha"]
 slug: overview_kendoui_captcha_widget
 position: 0
 ---
@@ -17,7 +18,7 @@ The Kendo UI Captcha component is a security measure that prevents automated spa
 * [Audio]({% slug audio_kendoui_captcha_widget %})&mdash;The Captcha component can generate a voice representation of the Captcha text.
 * [Provider]({% slug provider_kendoui_captcha_widget %})&mdash;The provider generates and validates Captchas through helper classes and methods.
 * [Validation]({% slug validation_kendoui_captcha_widget %})&mdash;Using the server-side validation handler for the Captcha guarantees that no programs or bots can access the values of the Captcha on the client-side through JavaScript and then bypass the validation.
-* [Accessibility]({% slug accessibility_kendoui_captcha_widget %})&mdash;The Captcha is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_captcha_accessibility %})&mdash;The Captcha is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

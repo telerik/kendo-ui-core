@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Rating component by following a complete step-by-step tutorial."
+components: ["rating"]
 slug: getting_started_rating
 position: 1
 ---
@@ -99,7 +100,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
         <script>
             var ratingReference = $("#ratingExample").data("kendoRating"); // ratingReference is a reference to the existing instance of the helper.
         </script>
@@ -107,7 +108,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [Rating client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/rating#methods) to control the behavior of the widget. In this example, you will see how to adjust the value of Rating programmatically.
 
-    ```script
+    ```JS script
         <script>
             var rating = $("#trip").data("kendoRating");		
             rating.value(5);

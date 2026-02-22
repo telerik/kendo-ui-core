@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Rating component for {{ site.framework }}."
+components: ["rating"]
 previous_url: /helpers/editors/rating/overview
 slug: htmlhelpers_rating_aspnetcore_overview
 position: 0
@@ -68,7 +69,7 @@ The following example demonstrates the basic configuration for the Rating.
 | [Label]({% slug htmlhelpers_rating_aspnetcore_label %}) | The component allows you to customize its label. |
 | [Tooltip]({% slug htmlhelpers_rating_aspnetcore_tooltip %}) | The rating items display tooltips by default. They contain the value of each item. |
 | [Templates]({% slug htmlhelpers_rating_aspnetcore_templates %}) | By default, each Rating item is rendered with a star icon. You are able to customize the icon. |
-| [Accessibility]({% slug accessibility_aspnetcore_rating %}) | The Rating is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_rating_accessibility %}) | The Rating is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

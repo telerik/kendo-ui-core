@@ -2,6 +2,7 @@
 title: Group Paging
 page_title: Group Paging Overview 
 description: "Learn how to enable the group paging in the Telerik UI for {{ site.framework }} Grid by Kendo UI and load groups on demand."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnet_grouping
 ---
 
@@ -26,7 +27,7 @@ To enable group paging, use the `GroupPaging()` method as part of the data sourc
            x.Add(y => y.City);
         })
     )
-```  
+```
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550">
@@ -72,4 +73,7 @@ The expanded state of groups is preserved during paging only, but not if sort or
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Virtual Scrolling of the Grid]({% slug virtual_scrolling_aspnetcore_grid %})

@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery RangeSlider Documentation | RangeSlider Accessibility
 description: "Get started with the jQuery RangeSlider by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_rangeslider_widget
+components: ["rangeslider"]
+slug: jquery_rangeslider_accessibility
 position: 1
 ---
 
@@ -25,7 +26,7 @@ The RangeSlider is compliant with the [Web Content Accessibility Guidelines (WCA
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
-[Slider accessibility specification]({{slider_a11y_link}})
+[Slider accessibility specification]({% slug jquery_slider_accessibility %})
 
 
 The two focusable elements of the RangeSlider must implement the specification for the **Slider** component. Here is just one clarification for the use of `aria-valuetext` attribute:

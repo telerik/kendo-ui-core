@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery RadioButton Documentation - Getting Started with the RadioButton
 description: "Get started with the jQuery RadioButton by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["radiobutton"]
 slug: getting_started_kendoui_radiobutton_widget
 position: 1
 ---
@@ -82,8 +83,4 @@ The RadioButton component allows you to define whether it will be enabled or dis
 * [JavaScript API Reference of the jQuery RadioButton](/api/javascript/ui/radiobutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

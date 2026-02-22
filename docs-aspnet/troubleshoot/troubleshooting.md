@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Issues Troubleshooting
 description: "Learn about the solutions of common issues that may occur while working with Telerik UI for ASP.NET MVC."
+components: ["general"]
 previous_url: /troubleshooting
 slug: troubleshooting_aspnetmvc
 position: 1
@@ -39,7 +40,7 @@ As of the [Kendo UI R1 2017 release](https://docs.telerik.com/kendo-ui/backwards
 
 If you upgrade your project from a prior version to the R1 2017 version (2017.1.118) or later, you have to change the [classes of the custom CSS rules that you use accordingly](https://docs.telerik.com/kendo-ui/backwards-compatibility/2017-backward-compatibility#kendo-ui-2017-r1).
 
-If the icons are still missing after you change the classes, verify that the version is fully [updated](#upgrade-to-newer-versions).
+If the icons are still missing after you change the classes, verify that the version is fully [updated]({% slug upgrade_aspnetcore%}).
 
 
 ## JavaScript
@@ -307,7 +308,7 @@ This can happens if the wrapper is declared without `ToClientTemplate()`.
 
 **Solution**
 
-For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug fundamentals_aspnetmvc %}#client-templates)
+For more information on this issue, refer to the [article on Kendo UI wrappers fundamentals]({% slug client_templates_overview %})
 
 On the other hand, note that [template script expressions](https://docs.telerik.com/kendo-ui/framework/templates/overview#handle-external-templates-and-expressions) that include brackets (function calls) or arithmetic operators cannot be included in the `Name()` method of Kendo UI MVC wrappers. For example, the following implementations will trigger **invalid template** JavaScript errors:
 
@@ -440,7 +441,7 @@ Alternatively, just remove the non-minified script from the project. Obviously, 
 
 **Solution**
 
-When the Kendo UI theme images do not appear in this case, refer to the [article on CSS bundling]({% slug fundamentals_aspnetmvc %}#css-bundling).
+When the Kendo UI theme images do not appear in this case, refer to the [article on CSS bundling]({% slug fundamentals_aspnetmvc %}#using-css-bundling).
 
 ### MVC Wrapper with Ajax Binding Shows Outdated Data
 
@@ -503,18 +504,9 @@ For additional tips on the Editor widget, refer to the [troubleshooting article 
 * [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
-* [Common Issues in Kendo UI](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-common-issues)
 * [JavaScript Errors](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-js-errors)
 * [Performance Issues](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
 * [Content Security Policy](https://docs.telerik.com/kendo-ui/troubleshoot/content-security-policy)
-* [Common Issues in Kendo UI Excel Export](https://docs.telerik.com/kendo-ui/framework/excel/troubleshoot/common-issues)
 * [Common Issues in Kendo UI Charts](https://docs.telerik.com/kendo-ui/controls/charts/troubleshoot/common-issues)
 * [Performance Issues in Kendo UI Widgets for Data Visualization](https://docs.telerik.com/kendo-ui/troubleshoot/troubleshooting-memory-leaks)
-* [Common Issues in Kendo UI ComboBox](https://docs.telerik.com/kendo-ui/controls/combobox/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Diagram](https://docs.telerik.com/kendo-ui/controls/diagram/troubleshoot/common-issues)
-* [Common Issues in Kendo UI DropDownList](https://docs.telerik.com/kendo-ui/controls/dropdownlist/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Editor](https://docs.telerik.com/kendo-ui/controls/editor/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI MultiSelect](https://docs.telerik.com/kendo-ui/controls/multiselect/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduler/troubleshoot/troubleshooting)
-* [Common Issues in Kendo UI Upload](https://docs.telerik.com/kendo-ui/controls/upload/troubleshoot/troubleshooting)
 * [Common Issues Related to Styling, Appearance, and Rendering](https://docs.telerik.com/kendo-ui/styles-and-layout/troubleshoot/troubleshooting)

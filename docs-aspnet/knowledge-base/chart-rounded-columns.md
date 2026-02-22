@@ -6,6 +6,7 @@ type: how-to
 slug: chart-rounded-corners
 tags: progress, telerik, aspnet, mvc, core, chart, rounded, corners
 res_type: kb
+components: ["general"]
 component: chart
 ---
 

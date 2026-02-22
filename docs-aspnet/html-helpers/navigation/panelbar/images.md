@@ -2,6 +2,7 @@
 title: Images
 page_title: Images
 description: "Learn how to include images and sprite icons in the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: htmlhelpers_panelbar_images_aspnetcore
 position: 4
 ---
@@ -59,7 +60,7 @@ You can include images in the Telerik UI for {{ site.framework }} PanelBar items
 
 ## Sprites
 
-You can also set sprites the the Telerik UI for {{ site.framework }} PanelBar items using the `.SpriteCssClasses()` configuration option and specifying the sprite CSS class: 
+You can also set sprites the Telerik UI for {{ site.framework }} PanelBar items using the `.SpriteCssClasses()` configuration option and specifying the sprite CSS class: 
 
 ```HtmlHelper
 @(Html.Kendo().PanelBar()

@@ -6,6 +6,7 @@ page_title: How to Get the Current View Date Range in a Kendo UI Calendar
 slug: get-current-view-date-range-kendo-ui-calendar
 tags: kendo-ui, calendar, date-range, view, javascript
 res_type: kb
+components: ["calendar"]
 ticketid: 1660926
 ---
 
@@ -75,5 +76,5 @@ For a complete example and to see the code in action, check the following Dojo d
 
 ## See Also
 - [Calendar Overview](https://docs.telerik.com/kendo-ui/controls/editors/calendar/overview)
-- [Calendar Methods API Documentation](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar/methods)
+- [Calendar Methods API Documentation](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/calendar#methods)
 - [Kendo UI Dojo - Interactive Examples](https://dojo.telerik.com/)

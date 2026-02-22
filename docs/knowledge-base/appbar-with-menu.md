@@ -7,6 +7,7 @@ slug: appbar-menu-overflow
 tags: appbar, menu, overflow
 ticketid: 1498194
 res_type: kb
+components: ["appbar"]
 ---
 
 ## Environment
@@ -105,7 +106,7 @@ To achieve the desired scenario:
                                 <li>Canada</li>
                                 <li>Australia</li>
                             </ol>
-                            <img src="../content/web/menu/map.png" alt="Stores Around the Globe" />
+                            <img src="https://demos.telerik.com/kendo-ui/content/web/menu/map.png" alt="Stores Around the Globe" />
                             <button class="k-button">See full list</button>
                         </div>
                     </li>

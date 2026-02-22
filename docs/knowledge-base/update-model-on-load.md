@@ -5,9 +5,9 @@ description: "Learn how to update MVVM bound models on load in a Kendo UI DropDo
 previous_url: /controls/editors/dropdownlist/how-to/update-model-on-load, /controls/editors/dropdownlist/how-to/binding/update-model-on-load
 slug: howto_update_mvvm_model_onload_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, update, mvvm, bound, models, on, loading
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

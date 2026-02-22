@@ -2,6 +2,7 @@
 title: Selected Dates
 page_title: Selected Dates
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to set the selected and the min and max values."
+components: ["datetimepicker"]
 slug: selecteddates_datetimepicker_aspnetcore
 position: 3
 ---

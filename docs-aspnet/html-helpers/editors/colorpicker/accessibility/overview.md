@@ -2,7 +2,8 @@
 title: Overview
 page_title: ColorPicker Documentation | ColorPicker Accessibility
 description: "Get started with the {{ site.product }} ColorPicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_colorpicker_overview
+components: ["colorpicker"]
+slug: htmlhelpers_colorpicker_accessibility
 position: 1
 ---
 
@@ -23,7 +24,7 @@ The ColorPicker is compliant with the [Web Content Accessibility Guidelines (WCA
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_overview_colorgradient%}), [ColorPalette]({%slug overview_colorpalettehelper_aspnetcore%}), a UI to switch between them, and a button to reset its value. All the containing elements must implement their own specification apart from the ColorGradient element where some changes are required.
+The ColorPicker popup contains in itself ColorGradient, ColorPalette, a UI to switch between them, and a button to reset its value. All the containing elements must implement their own specification apart from the ColorGradient element where some changes are required.
 
 ### ColorPicker Wrapping Element
 
@@ -46,6 +47,18 @@ The ColorPicker popup contains in itself [ColorGradient]({%slug htmlhelpers_over
 | `.k-colorgradient` | `role=none/undefined` | The ColorGradient element must have its role removed. |
 |  | `aria-label=undefined` | The ColorGradient element must have its `aria-label` attribute removed. |
 |  | `tabindex=-1/undefined` | The ColorGradient must be removed from the page tab sequence. |
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-colorgradient` | `role=none/undefined` | The ColorGradient element must have its role removed. |
+|  | `aria-label=undefined` | The ColorGradient element must have its `aria-label` attribute removed. |
 
 ## Section 508
 

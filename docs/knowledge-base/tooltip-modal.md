@@ -7,7 +7,7 @@ slug: tooltip-modal
 tags: kendo, tooltip, modal
 ticketid: 1112824
 res_type: kb
-component: tooltip
+components: ["tooltip"]
 ---
 
 ## Environment

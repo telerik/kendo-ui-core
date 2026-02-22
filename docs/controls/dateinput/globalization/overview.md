@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery DateInput Documentation - DateInput Globalization
 description: "Get started with the jQuery DateInput by Kendo UI and learn about the globalization options it supports."
+components: ["dateinput"]
 slug: globalization_kendoui_dateinput_widget
 position: 1
 ---

@@ -7,6 +7,7 @@ slug: datetimepicker-change-dates-with-spinner
 tags: datetimepicker, datepicker, spinner, change
 ticketid: 1160455
 res_type: kb
+components: ["timepicker"]
 ---
 
 ## Environment

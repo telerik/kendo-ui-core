@@ -2,6 +2,7 @@
 title: Content Operations
 page_title: jQuery Splitter Documentation - Content Operations
 description: "Get started with the jQuery Splitter by Kendo UI and load its content with AJAX."
+components: ["splitter"]
 slug: content_kendoui_splitter
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PanelBar Documentation - Getting Started with the PanelBar
 description: "Get started with the jQuery PanelBar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["panelbar"]
 slug: getting_started_kendoui_panelbar_component
 position: 1
 ---
@@ -123,8 +124,4 @@ You can now configure the expand and collapse [animations](/api/javascript/ui/pa
 * [JavaScript API Reference of the jQuery PanelBar](/api/javascript/ui/panelbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -7,6 +7,7 @@ slug: textbox-label-change-floating-style
 tags: textbox, floating, style, before, after, empty, filled
 ticketid: 1498326
 res_type: kb
+components: ["textbox"]
 ---
 
 ## Environment
@@ -33,7 +34,7 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
 1. Add the style for the textbox when it is not focused but it is floating
 1. In the `change` event of the textbox, check if there is a value and toggle the style as required
 
-```
+```html
     <style>
         .k-floating-label-container {
           width: 100%;          
@@ -44,7 +45,7 @@ To achieve the desired behaviour, we will need both some JavaScript and CSS beca
         }       
     </style>
 ```
-```
+```javascript
     change: function(e){
         if(this.value()){
             $(".k-floating-label-container").css({color: "black", fontStyle:"normal"});

@@ -4,9 +4,9 @@ page_title: Add Custom Checkbox Filter on Top of the Default Filter Menu- Kendo 
 description: "Learn how to add a checkbox filter menu functionality in the Kendo UI for jQuery Data Grid component."
 slug: create_custom_checkbox_filter_menu__over_default_filter_grid
 tags: grid, create, checkbox, filter, menu, custom, kendoui, jquery
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -34,32 +34,33 @@ The following example demonstrates how to add the `Is Null` or `Empty` and `Is n
     <div id="grid"></div>
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+          dataSource = new kendo.data.DataSource({
               transport: {
-                read: {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
-                },
-                update: {
-                  url: crudServiceBaseUrl + "/Products/Update",
-                  dataType: "jsonp"
-                },
-                destroy: {
-                  url: crudServiceBaseUrl + "/Products/Destroy",
-                  dataType: "jsonp"
-                },
-                create: {
-                  url: crudServiceBaseUrl + "/Products/Create",
-                  dataType: "jsonp"
-                },
-                parameterMap: function (options, operation) {
-                  if (operation !== "read" && options.models) {
-                    return { models: kendo.stringify(options.models) };
+                  read:  {
+                      url: crudServiceBaseUrl + "/Products"
+                  },
+                  update: {
+                      url: crudServiceBaseUrl + "/Products/Update",
+                      type: "POST",
+                  contentType: "application/json"
+                  },
+                  destroy: {
+                      url: crudServiceBaseUrl + "/Products/Destroy",
+                      type: "POST",
+                  contentType: "application/json"
+                  },
+                  create: {
+                      url: crudServiceBaseUrl + "/Products/Create",
+                      type: "POST",
+                  contentType: "application/json"
+                  },
+                  parameterMap: function(options, operation) {
+                      if (operation !== "read" && options.models) {
+                          return kendo.stringify(options.models);
+                      }
                   }
-                }
               },
-              batch: true,
               pageSize: 20,
               schema: {
                 model: {

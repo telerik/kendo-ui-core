@@ -6,6 +6,7 @@ page_title: Changing Grid Height When Using Frozen Columns
 slug: grid-change-height-when-using-frozen-columns
 tags: aspnet, mvc, grid, change, height, when, using, frozen, columns, locked
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -28,7 +29,7 @@ The frozen column functionality requires the Grid to have fixed height. However,
 
 The following example demonstrates how to change the height style of the `div` wrapper element and then call the [`resize`](https://docs.telerik.com/kendo-ui/styles-and-layout/using-kendo-in-responsive-web-pages#individual-widget-resizing) method of the Grid.
 
-```Index.cshtml
+```Razor Index.cshtml
 
 <p>Group by the ShipCountry column and collapse some groups.</p>
 
@@ -58,7 +59,7 @@ The following example demonstrates how to change the height style of the `div` w
 )
 
 ```
-```script.js
+```JS script.js
 
     function attachGroupResizeHandler(grid) {
         grid.wrapper.find(".k-grouping-row .k-icon").on("click", function () {

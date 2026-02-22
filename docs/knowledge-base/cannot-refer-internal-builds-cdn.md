@@ -6,6 +6,7 @@ slug: cannot_refer_internal_builds_cdn
 tags: kendoui, jquery, cannot, refer, internal, builds, cdn, installing
 type: troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

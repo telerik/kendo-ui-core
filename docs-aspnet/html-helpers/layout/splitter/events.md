@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: events_splitter_aspnetcore
 position: 7
 ---

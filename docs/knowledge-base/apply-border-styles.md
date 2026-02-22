@@ -5,9 +5,9 @@ description: "Learn how to apply border styles to the tiles of the Kendo UI for 
 previous_url: /controls/charts/treemap/how-to/apply-border-styles, /controls/charts/how-to/appearance/apply-border-styles
 slug: howto_applyborderstyles_treemap
 tags: treemap, apply, border, styles
-component: treemap
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Week Numbers
 page_title: Week Numbers
 description: "Define the first rendered view when working with the Telerik UI Calendar component for {{ site.framework }}."
+components: ["calendar"]
 slug: htmlhelpers_weeknumbers_calendar_aspnetcore
 position: 4
 ---

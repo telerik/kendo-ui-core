@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} DropDownList component by following a complete step-by-step tutorial."
+components: ["dropdownlist"]
 slug: aspnetcore_dropdownlist_getting_started
 position: 1
 ---
@@ -277,7 +278,7 @@ To use the client-side API of the DropDownList and build on top of its initial c
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var dropdownlistReference = $("#dropdownlist").data("kendoDropDownList"); // dropdownlistReference is a reference to the existing DropDownList instance of the helper.
@@ -287,7 +288,7 @@ To use the client-side API of the DropDownList and build on top of its initial c
 
 1. Use the [DropDownList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods) to control the behavior of the control. In this example, you will use the `value` method to select an item.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var dropdownlistReference = $("#dropdownlist").data("kendoDropDownList"); // dropdownlistReference is a reference to the existing DropDownList instance of the helper.

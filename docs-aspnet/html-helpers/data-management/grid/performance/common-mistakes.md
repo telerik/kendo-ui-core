@@ -2,6 +2,7 @@
 title: Common Mistakes
 page_title: Common Mistakes
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to avoid and handle the most common performance mistakes."
+components: ["grid"]
 slug: performance_htmlhelpers_grid_aspnetcore
 position: 2
 ---
@@ -11,7 +12,7 @@ position: 2
 This article lists the configuration approaches which most frequently affect the performance of the Grid.
 
 * [Rendering everything](#rendering-everything)
-* [Excessive use of editors or widgets directly in the columns](#excessive-use-of-editors-or-widgets-in-cells)
+* [Excessive use of editors or widgets directly in the columns](#using-editors-or-widgets-in-cells-excessively)
 * [Extreme number of columns](#using-too-many-columns)
 * [Expanding all content](#expanding-all-content)
 
@@ -39,6 +40,9 @@ Hierarchical Grids are fast when the records for the child Grids in the `DetailT
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)
 * [Rendering and Dimensions of the Grid component for {{ site.framework }}]({% slug width_grid_aspnetcore %})
 * [Adaptive Rendering of the Grid component for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})

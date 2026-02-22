@@ -5,9 +5,9 @@ description: "Learn how to display a tooltip hint on hover a data cell element i
 previous_url: /controls/data-management/pivotgrid/how-to/tooltip-hint, /controls/data-management/pivotgrid/how-to/appearance/tooltip-hint, /controls/layout/tooltip/how-to/tooltip-hint-in-pivotgrid
 slug: howto_show_tooltip_withdata_cellinformation_pivotgrid
 tags: pivotgrid, show, render, tooltip, with, data, cell, information
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

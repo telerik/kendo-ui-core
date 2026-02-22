@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery ChartWizard Documentation - Data Binding
 description: "Get started with the jQuery ChartWizard by Kendo UI and bind the widget to local or remote data and provide its suggestions."
+components: ["chartwizard"]
 slug: databinding_kendoui_chartwizard
 position: 3
 ---
@@ -20,6 +21,7 @@ The following example demonstrates how to bind the Chart Wizard to an array of d
 
 ```dojo
     <div id="chartwizard"></div>
+    <script>
     $("#chartwizard").kendoChartWizard({            
         dataSource: [
            [
@@ -31,11 +33,12 @@ The following example demonstrates how to bind the Chart Wizard to an array of d
            ]
         ],
     });
+    </script>
 ```
 
 When the ChartWizard is bound to remote data, the remote service must return one or more arrays of objects with `field` and `value` properties. The example below demonstrates how to bind the ChartWizard to remote data:
 
-```dojo
+```
 <div id="chartwizard"></div>
 
 <script>
@@ -110,7 +113,7 @@ The example below demonstrates ChartWizard bound to local table-like data:
         }
     ];
 
-    const chartWizardData = kendo.ChartWizard.getWizardDataFromDataRows(dataRows);
+    const chartWizardData = window.kendo.ui.ChartWizard.getWizardDataFromDataRows(dataRows);
 
     var chartwizard = $("#chartwizard").kendoChartWizard({
         dataSource: chartWizardData
@@ -118,15 +121,15 @@ The example below demonstrates ChartWizard bound to local table-like data:
 </script>
 ```
 
-To bind the ChartWizard component to a remote data source, which returns only the `dataItems`, set the [`dataColumns`](/api/javascript/ui/chartwizard/#dataColumns) field.
+To bind the ChartWizard component to a remote data source, which returns only the `dataItems`, set the [`dataColumns`](/api/javascript/ui/chartwizard/configuration/datacolumns) field.
 
 ```dojo
     <div id="chartwizard"></div>
     <script>
       var dataSource = new kendo.data.DataSource({
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/odata/Orders"
         },
         schema: {
           model: {

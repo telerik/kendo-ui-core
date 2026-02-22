@@ -5,9 +5,9 @@ description: "Learn how to explode a clicked segment in a Kendo UI Pie Chart."
 previous_url: /controls/charts/how-to/explode-clicked-pie-segment, /controls/charts/how-to/interaction/explode-clicked-pie-segment
 slug: howto_explodeclickedsegment_piecharts
 tags: chart, expand, clicked, pie, segment
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

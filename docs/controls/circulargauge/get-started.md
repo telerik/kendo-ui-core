@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CircularGauge Documentation - Getting Started with the CircularGauge
 description: "Get started with the jQuery CircularGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["circulargauge"]
 slug: getting_started_kendoui_circulargauge_component
 position: 2
 ---
@@ -188,15 +189,11 @@ By default, the CircularGauge does not render content in the center. To add cont
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the CircularGauge](https://demos.telerik.com/kendo-ui/circulargauge/index)
+* [Demo Page for the CircularGauge](https://demos.telerik.com/kendo-ui/circular-gauge/index)
 
 ## See Also 
 
 * [JavaScript API Reference of the CircularGauge](/api/javascript/dataviz/ui/circulargauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

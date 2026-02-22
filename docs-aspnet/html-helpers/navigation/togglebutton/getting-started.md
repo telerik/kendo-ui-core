@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ToggleButton component by following a complete step-by-step tutorial."
+components: ["togglebutton"]
 slug: aspnetcore_togglebutton_getting_started
 position: 1
 ---
@@ -182,7 +183,7 @@ You can reference the ToggleButton instances that you have created and build on 
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var togglebuttonReference = $("#toggleButton").data("kendoToggleButton"); // togglebuttonReference is a reference to the existing togglebutton instance of the helper.
     </script>
@@ -190,7 +191,7 @@ You can reference the ToggleButton instances that you have created and build on 
 
 1. Use the [ToggleButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/togglebutton#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the component. The method is inherited from the Button widget.
 
-    ```script
+    ```JS script
     <script>
         var togglebuttonReference = $("#toggleButton").data("kendoToggleButton"); // togglebuttonReference is a reference to the existing togglebutton instance of the helper.
 

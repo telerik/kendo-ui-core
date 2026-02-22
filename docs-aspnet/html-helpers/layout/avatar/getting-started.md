@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Avatar component by following a complete step-by-step tutorial."
+components: ["avatar"]
 slug: avatar_getting_started
 position: 1
 ---
@@ -135,7 +136,7 @@ You can reference the Avatar instances that you have created and build on top of
     </kendo-avatar>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         $(document).ready(function() {
             var avatar = $("#avatar").data("kendoAvatar"); // The `avatar` variable holds a reference to the existing Avatar instance of the helper.

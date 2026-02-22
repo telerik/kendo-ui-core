@@ -6,6 +6,7 @@ page_title: How to Disable Image Drop in Kendo UI Editor
 slug: prevent-image-drops-kendo-ui-editor
 tags: kendo-ui, editor, image-drop, paste-event
 res_type: kb
+components: ["editor"]
 ticketid: 1673555
 ---
 

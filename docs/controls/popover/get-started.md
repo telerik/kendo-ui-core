@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Popover Documentation - Getting Started with the Popover
 description: "Get started with the jQuery Popover by Kendo UI and learn how to create and initialize the component."
+components: ["popover"]
 slug: getting_started_kendoui_popover
 position: 1
 ---
@@ -106,8 +107,4 @@ You can specify a selector so that the Popover would appear only for certain par
 * [JavaScript API Reference of the Popover](/api/javascript/ui/popover)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

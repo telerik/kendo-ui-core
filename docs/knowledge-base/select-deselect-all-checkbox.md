@@ -5,9 +5,9 @@ description: "Learn how to select or deselect all rows in the Kendo UI Grid for 
 previous_url: /controls/data-management/grid/how-to/Selection/select-deselect-all-checkbox
 slug: howto_select_deselect_all_rowswith_checkboxes_grid
 tags: select, deselect, all, grid, rows, with, selectall, header, checkbox
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -47,30 +47,30 @@ You can also select multiple rows by using the checkboxes and applying custom st
 <script>
     $(document).ready(function () {
         //DataSource definition
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
-                    },
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                     parameterMap: function (options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {
-                                models: kendo.stringify(options.models)
-                            };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },
@@ -123,9 +123,9 @@ You can also select multiple rows by using the checkboxes and applying custom st
                 //define template column with checkbox and attach click event handler
                 {
                     title: 'Select All',
-                    headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox k-checkbox-md k-rounded-md header-checkbox'>",
+                    headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox header-checkbox'>",
                     template: function (dataItem) {
-                        return "<input type='checkbox' id='" + dataItem.ProductID + "' class='k-checkbox k-checkbox-md k-rounded-md row-checkbox'>";
+                        return "<input type='checkbox' id='" + dataItem.ProductID + "' class='k-checkbox row-checkbox'>";
                     },
                     width: 80,
                     attributes: {class: "k-text-center"},

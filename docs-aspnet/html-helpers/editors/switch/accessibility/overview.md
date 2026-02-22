@@ -2,7 +2,8 @@
 title: Overview
 page_title: Switch Documentation | Switch Accessibility
 description: "Get started with the {{ site.product }} Switch and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_switch
+components: ["switch"]
+slug: htmlhelpers_switch_accessibility
 position: 1
 ---
 

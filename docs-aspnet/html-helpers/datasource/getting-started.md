@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} DataSource component by following a complete step-by-step tutorial."
+components: ["datasource"]
 slug: datasource_aspnetcore_get_started
 position: 1
 ---
@@ -280,10 +281,12 @@ The custom parameter names must not match reserved words, which are used by the 
 
 The following code demonstrates how to add the additional parameters to the action method.
 
-    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
-    {
-        // The implementation is omitted.
-    }
+```C#
+public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
+{
+    // The implementation is omitted.
+}
+```
 
 The following snippet demonstrates how to specify the JavaScript function which returns additional data.
 
@@ -339,7 +342,7 @@ Referencing existing instances of a component allows you to build on top of thei
 
 1. To reference an existing DataSource instance, use the `Name` provided to the component.
 
-    ```script
+    ```JS script
     <script>
 		$(document).ready(function(){
         	console.log(dataSource1)
@@ -349,7 +352,7 @@ Referencing existing instances of a component allows you to build on top of thei
 
 1. Use the [DataSource client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datasource#methods) to control the behavior of the widget. In this example, you will force the DataSource to send a new read request to the backend with the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method. Then, you will handle the returned promise to access the data item of the returned page with the [`view`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/view) method of the DataSource.
 
-    ```script
+    ```JS script
     <script>
         dataSource1.read().then(function() {
 			var view = dataSource1.view();

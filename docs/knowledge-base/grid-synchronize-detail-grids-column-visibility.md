@@ -7,6 +7,7 @@ slug: grid-show-hide-columns-in-all-detail-grids
 tags: grid, hierarchy, columns, column-menu
 ticketid: 1157518
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,9 +46,8 @@ The following example demonstrates the full implementation of the suggested appr
 
         var element = $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/core/Employees"
             },
             pageSize: 6
           },
@@ -79,9 +79,8 @@ The following example demonstrates the full implementation of the suggested appr
       function detailInit(e) {
         $("<div/>").appendTo(e.detailCell).kendoGrid({
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/core/Orders"
             },
             pageSize: 3,
             filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }

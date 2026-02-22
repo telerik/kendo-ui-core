@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ChartWizard Documentation - Getting Started with the ChartWizard
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chartwizard"]
 slug: getting_started_kendoui_chartwizard_component
 position: 2
 ---
@@ -65,7 +66,7 @@ In this step, you'll initialize the ChartWizard component from the parent `<div>
 
 ## 3. Bind the ChartWizard Component to Its Data
 
-The array containing the [`data`](/api/javascript/ui/chartwizard/configuration/data) consists of single or multiple arrays of Objects, which have the `field` and `value` properties.
+The array containing the [`data`](/api/javascript/ui/chartwizard/configuration/datasource) consists of single or multiple arrays of Objects, which have the `field` and `value` properties.
 
 ```javascript
     $("#chartwizard").kendoChartWizard({            
@@ -108,7 +109,7 @@ You can configure the paper size as well as the size of the exported image.
 
 ## 5. Configure the Window Options
 
-You can use the configuration options of the nested [Window](/api/javascript/ui/window/) component to customize the appearance of the ChartWizard window.
+You can use the configuration options of the nested [Window](/api/javascript/ui/window) component to customize the appearance of the ChartWizard window.
 
 ```javascript
         $("#chartwizard").kendoChartWizard({
@@ -147,8 +148,4 @@ You can use the configuration options of the nested [Window](/api/javascript/ui/
 * [JavaScript API Reference of the jQuery ChartWizard](/api/javascript/ui/chartwizard)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ListBox Documentation - Getting Started with the ListBox
 description: "Get started with the jQuery ListBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["listbox"]
 slug: getting_started_kendoui_listbox_widget
 position: 1
 ---
@@ -137,8 +138,4 @@ By default, the ListBox toolbar isn't rendered. To display the toolbar with arro
 * [JavaScript API Reference of the jQuery ListBox](/api/javascript/ui/listbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

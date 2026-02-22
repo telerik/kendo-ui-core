@@ -2,6 +2,7 @@
 title: Search Tool
 page_title: Kendo UI for jQuery TaskBoard Documentation - Search Tool
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn how to enable the search tool to search through its cards."
+components: ["taskboard"]
 slug: search_kendoui_taskboard_widget
 position: 7
 ---

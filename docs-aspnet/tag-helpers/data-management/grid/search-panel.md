@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: Search Panel
 description: "Learn how to enable the searching functionality of the Telerik UI Grid for ASP.NET Core."
+components: ["grid"]
 slug: taghelpers_grid_aspnetcore_searchpanel
 position: 5
 ---
@@ -17,15 +18,18 @@ Under the hood, the search panel uses filtering to show only the relevant record
 To enable the search panel functionality, include the `Search` option to the toolbar configuration.
 
     <kendo-grid name="grid" height="550">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+                <read url="@Url.Action("Read", "Grid")"/>
             </transport>
+            <schema data="Data" total="Total">
+                <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
+                </model>
+            </schema>
         </datasource>
         <toolbar>
             <toolbar-button name="search"></toolbar-button>
         </toolbar>
-
         <groupable enabled="true" />
         <sortable enabled="true" />
         <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">

@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery MultiColumnComboBox Documentation - Data Binding
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and bind the widget to local data arrays or remote data services."
+components: ["multicolumncombobox"]
 slug: databinding_kendoui_multicolumncombobox
 position: 3
 ---
@@ -61,8 +62,7 @@ Remote data binding is useful for larger datasets so that the items are loaded o
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }

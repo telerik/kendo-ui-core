@@ -2,6 +2,7 @@
 title: Prefix and Suffix
 page_title: jQuery AutoComplete Documentation - Prefix and Suffix
 description: "Learn how to add custom items as prefix and suffix adornments to enhance the user interface interactivity when using the Kendo UI for jQuery AutoComplete."
+components: ["autocomplete"]
 slug: prefix_suffix_autocomplete
 position: 10
 ---

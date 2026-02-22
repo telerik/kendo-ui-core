@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI PivotGrid component for {{ site.framework }}."
+components: ["pivotgrid"]
 previous_url: /helpers/data-management/pivotgrid/overview
 slug: overview_pivotgridhelper_aspnetcore
 position: 0
@@ -26,7 +27,7 @@ The PivotGrid represents multidimensional data in a cross-tabular format.
 
 ## Basic Configuration
 
-To configure the PivotGrid for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/olap/msmdpump.dll`, follow the next steps:
+To configure the PivotGrid for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/service/v2/olap/msmdpump.dll`, follow the next steps:
 
 {% if site.core %}
 1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET Core Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGrid`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to install {{ site.product }} in the application.
@@ -64,7 +65,7 @@ To configure the PivotGrid for Ajax binding to an [Adventure Works](https://lear
                         .Catalog("Adventure Works DW 2008R2")
                         .Cube("Adventure Works"))
                     .Read(read => read
-                        .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                        .Url("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                         .DataType("text")
                         .ContentType("text/xml")
                         .Type(HttpVerbs.Post)
@@ -88,20 +89,20 @@ To configure the PivotGrid for Ajax binding to an [Adventure Works](https://lear
             <schema type="xmla"/>
             <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
             <transport>
-                <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+                <read url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
                 <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
             </transport>
         </kendo-pivotdatasource>
 
-        <kendo-pivotconfigurator name="configurator" 
-            filterable="true" 
-            height="570" 
+        <kendo-pivotconfigurator name="configurator"
+            filterable="true"
+            height="570"
             datasource-id="pivotSource">
         </kendo-pivotconfigurator>
 
         <kendo-pivotgrid name="pivotgrid"
-            filterable="true" 
-            column-width="200" 
+            filterable="true"
+            column-width="200"
             height="570"
             datasource-id="pivotSource">
             <sortable enabled="true" />
@@ -115,7 +116,7 @@ To configure the PivotGrid for Ajax binding to an [Adventure Works](https://lear
 
 * [Data binding]({% slug databinding_pivotgridhelper_aspnetcore %})&mdash;You can bind the PivotGrid to [Online Analytical Processing (OLAP)](https://learn.microsoft.com/en-us/previous-versions/sql/sql-server-2005/ms175367(v=sql.90)) cube and or flat data.
 * [Filtering]({% slug htmlhelpers_pivotgrid_aspnetcore_filtering %})&mdash;Enable the filtering of the PivotGrid rows and columns.
-* [Sorting]({% slug htmlhelpers_pivotgrid_aspnetcore_sorting %})&mdash;The component supports sorting by the caption name of the members. 
+* [Sorting]({% slug htmlhelpers_pivotgrid_aspnetcore_sorting %})&mdash;The component supports sorting by the caption name of the members.
 * [Templates]({% slug htmlhelpers_pivotgrid_aspnetcore_templates %})&mdash;The available templates allow you to control the rendering of the data cells and headers.
 * [Excel export]({% slug htmlhelpers_pivotgrid_aspnetcore_excelexport %})&mdash;The PivotGrid provides an export to Excel feature.
 * [PDF export]({% slug htmlhelpers_pivotgrid_aspnetcore_pdfexport %})&mdash;You can export the PivotGrid content to PDF through a single click.

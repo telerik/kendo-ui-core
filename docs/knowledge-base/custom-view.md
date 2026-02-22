@@ -5,9 +5,9 @@ description: "Learn how to inherit some of the built-in views and implement spec
 previous_url: /controls/scheduling/scheduler/how-to/custom-view, /controls/scheduling/scheduler/how-to/custom-views/custom-view
 slug: howto_create_custom_view_inheriting_builtinview_scheduler
 tags: telerik, kendo, jquery, scheduler, create, custom, views, inheriting, builtin 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -74,8 +74,8 @@ The following example demonstrates how to achieve the desired scenario.
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
             "day",
@@ -90,24 +90,26 @@ The following example demonstrates how to achieve the desired scenario.
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                  type: "POST",
+                  contentType: "application/json"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                  type: "POST",
+                  contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                  type: "POST",
+                  contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

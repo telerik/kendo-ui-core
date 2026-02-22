@@ -7,6 +7,7 @@ slug: treeview-uncheck-check-all-nodes
 tags: treeview, uncheck, check, all, nodes
 ticketid: 1083489
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

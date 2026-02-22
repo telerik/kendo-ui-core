@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Avatar Documentation - Getting Started with the Avatar
 description: "Get started with the jQuery Avatar by Kendo UI and learn how to create and initialize the component in a few easy steps."
+components: ["avatar"]
 slug: getting_started_kendoui_avatar_component
 position: 2
 ---
@@ -68,8 +69,4 @@ Here, you will apply configuration settings, such as [`type`](/api/javascript/ui
 * [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

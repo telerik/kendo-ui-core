@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Stepper Documentation
 description: "Get started with the jQuery Stepper by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["stepper"]
 slug: keynav_stepper_jquery
 position: 2
 ---
@@ -30,4 +31,4 @@ Kendo UI Stepper supports the following keyboard shortcuts:
 ## See Also
 
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Stepper]({% slug accessibility_kendoui_stepper_widget %})
+* [Accessibility in the Stepper]({% slug jquery_stepper_accessibility %})

@@ -13,6 +13,11 @@ res_type: api
 Helper method for writing new widgets.
 Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-* attribute.
 
+
+<div class="meta-api-description">
+How do I register a custom jQuery plugin with Kendo UI? Registering and configuring a jQuery plugin for custom UI components to control element initialization, setup options, handle creation logic, bind client-side component instances to elements using data attributes, enable access and manipulation via jQuery’s .data() method, support plugin initialization, customization, component instance retrieval, and interaction after setup, allowing developers to create, initialize, and manage component lifecycle within jQuery-based interfaces.
+</div>
+
 #### Example
 
     <input />
@@ -57,6 +62,11 @@ The plugin function prefix, e.g. "Mobile" will register "kendoMobileFoo".
 Shows or hides a semi-transparent overlay with a loading image, with styling, which depends on the used theme.
 
 The method displays a semi-transparent background and an animated GIF. It is designed to be used during **asynchronous remote data requests**. Browsers normally do not animate GIFs during rendering processes or other resource-intensive tasks in the browser's main thread. If `kendo.ui.progress()` is used while performing such tasks, then the GIF animation may stop for a while. A possible workaround is to remove the animated GIF or replace it with a non-animated image, as shown below.
+
+
+<div class="meta-api-description">
+How to display a loading animation with Kendo UI progress bar? Configure or control visual busy indicators that display a translucent overlay with animated or static loading visuals to signal ongoing asynchronous tasks such as remote data fetching, AJAX calls, or network operations. Enable, set, or toggle semi-transparent overlays showing spinner animations or loading icons that inform users of background processing, handling UI blocking states, progress feedback during remote calls, or busy states while awaiting server responses. Manage loading overlays with theme-aware styling, options to show or hide animated GIFs or fallback static images, and address browser behavior affecting animation during intensive main-thread activity or slow rendering scenarios to improve user perception of asynchronous loading and operation progress.
+</div>
 
 #### Parameters
 
@@ -240,6 +250,11 @@ The flag, which indicates whether to show or hide the loading overlay.
 Returns a generated HTML string that represents a n SVG or Font icon depending on the globally set configation (by default 'svg'). 
 
 To set the global iconType use `kendo.setDefaults('iconType', 'font');` method before the widgets initialization. 
+
+
+<div class="meta-api-description">
+How do I generate HTML markup for icons in Kendo UI? Generate or retrieve the HTML string markup for an icon to insert into web pages, templates, or the DOM, supporting both scalable vector graphics (SVG) and font-based icons depending on the configured global icon style. Control, switch, or set icon formats between SVG or font icons programmatically or via defaults to influence how icons render across your UI components. Obtain icon markup as a string for use in custom rendering, dynamic content insertion, or template customization with flexibility in icon type selection and integration in web applications.
+</div>
 
 #### Parameters
 

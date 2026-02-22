@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Local Binding
 description: "Get started with the {{ site.product }} ListBox and learn how to bind the ListBox to local data."
+components: ["listbox"]
 slug: htmlhelpers_listbox_local_aspnetcore
 position: 2
 ---
@@ -58,7 +59,7 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
     </kendo-listbox>
 ```
 {% endif %}
-```IndexController.cs
+```C# IndexController.cs
     public class ListBoxController : Controller
     {
         public ActionResult Index()

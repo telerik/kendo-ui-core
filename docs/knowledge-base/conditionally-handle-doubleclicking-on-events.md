@@ -5,9 +5,9 @@ description: "Learn how to handle double-clicking on events conditionally based 
 previous_url: /controls/scheduling/scheduler/how-to/conditionally-handle-doubleclicking-on-events, /controls/scheduling/scheduler/how-to/editing/conditionally-handle-doubleclicking-on-events
 slug: howto_conditionally_handle_doubleclicking_events_scheduler
 tags: telerik, kendo, jquery, scheduler, handle, double, click, on, events, conditionally, based, on, the, view, name
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -47,8 +47,8 @@ The following example demonstrates how to achieve the desired scenario.
       $(function() {
         $("#scheduler").kendoScheduler({
           editable: false,
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
             "day",
@@ -62,24 +62,26 @@ The following example demonstrates how to achieve the desired scenario.
 
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
-              },
-              update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
-              },
-              create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
-              },
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
+                },
+                update: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                create: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                destroy: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
+                },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

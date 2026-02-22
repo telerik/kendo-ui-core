@@ -7,6 +7,7 @@ slug: grid-contextmenu-add-edit-delete-rows
 tags: grid, add, edit, delete, contextmenu
 ticketid: 1142072
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,34 +46,33 @@ How can I use the Kendo UI ContextMenu to add, edit, and delete rows in the Kend
 
     <script>
         $(document).ready(function() {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                     transport: {
-                        read: {
-                            url: crudServiceBaseUrl + "/Products",
-                            dataType: "jsonp"
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
                         },
                         update: {
                             url: crudServiceBaseUrl + "/Products/Update",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         destroy: {
                             url: crudServiceBaseUrl + "/Products/Destroy",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         create: {
                             url: crudServiceBaseUrl + "/Products/Create",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {
-                                    models: kendo.stringify(options.models)
-                                };
+                                return kendo.stringify(options.models);
                             }
                         }
                     },
-                    batch: true,
                     pageSize: 20,
                     schema: {
                         model: {

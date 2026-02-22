@@ -2,46 +2,42 @@
 title: Items Binding
 page_title: Items Binding
 description: "Manually define the properties of each item in the Telerik UI Menu component for {{ site.framework }} by using the items builder."
+components: ["menu"]
 slug: itemsbinding_menu_aspnetmvc
 position: 2
 ---
 
 # Items Binding
 
-The Menu enables you to manually define the properties of each item.
+The Menu enables you to declare its items and the properties of each item within the helper declaration.
 
-1. Make sure you followed all the steps from the [introductory article on Telerik UI for {{ site.framework }}]({% slug overview_aspnetmvc6_aspnetmvc %}).
-1. Create a new action method which renders the view.
+The following example demonstrates how to configure the Menu items using the `Items()` configuration.
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-1. Add a simple Menu.
-
-    ```HtmlHelper
-        @(Html.Kendo().Menu()
-            .Name("menu") // The name of the Menu is mandatory. It specifies the "id" attribute of the Menu.
-            .Items(items =>
-            {
-                items.Add().Text("Item 1"); // Add an item with the text "Item1".
-                items.Add().Text("Item 2"); // Add an item with the text "Item2".
-            }
-        )
-    ```
-    ```TagHelper
-        <kendo-menu name="menu">
-        <items>
-            <menu-item text="Home" asp-action="Index" asp-controller="Home"></menu-item>
-            <menu-item text="Second Page" asp-action="SecondIndex" asp-controller="Home"></menu-item>
-        </items>
-        </kendo-menu>
-    ```
+```HtmlHelper
+@(Html.Kendo().Menu()
+    .Name("menu") // The name of the Menu is mandatory. It specifies the "id" attribute of Menu's HTML element.
+    .Items(items =>
+    {
+        items.Add().Text("Home").Action("Index", "Home");
+        items.Add().Text("About").Action("About", "Home");
+    })
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-menu name="menu">
+    <items>
+        <menu-item text="Home" asp-action="Index" asp-controller="Home"></menu-item>
+        <menu-item text="About" asp-action="About" asp-controller="Home"></menu-item>
+    </items>
+</kendo-menu>
+```
+{% endif%}
 
 ## See Also
 
-* [Basic Usage of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu)
-* [MenuItemBuilder Server-Side API](/api/kendo.mvc.ui.fluent/menuitembuilder)
-* [MenuBuilder Server-Side API](/api/kendo.mvc.ui.fluent/menubuilder)
-* [Menu Server-Side API](/api/menu)
+* [Basic Usage of the Menu for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu)
+* [Server-Side API of the Menu HtmlHelper](/api/menu)
+{% if site.core %}
+* [Server-Side API of the Menu TagHelper](/api/taghelpers/menu)
+{% endif %}

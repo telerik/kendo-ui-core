@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 previous_url: /helpers/editors/colorpicker/overview
 slug: overview_colorpickerhelper_aspnetcore
 position: 0
@@ -94,7 +95,7 @@ The following example demonstrates how to configure the tile size, columns, `Cha
 | [Palettes]({% slug palettes_colorpicker %})| Define a color palette that the user can pick from.  |
 | [Adaptive Mode]({% slug htmlhelpers_colorpicker_adaptive_mode_aspnetcore %})| The ColorPicker supports an adaptive mode that renders a mobile-friendly popup. |
 | [Events]({% slug events_colorpicker %})| The ColorPicker allows you to handle its events and implement any custom logic. |
-| [Accessibility]({% slug accessibility_colorpicker_overview %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_colorpicker %}) for faster navigation. |
+| [Accessibility]({% slug htmlhelpers_colorpicker_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_colorpicker %}) for faster navigation. |
 
 ## Next Steps
 

@@ -2,14 +2,17 @@
 title: Peer-to-Peer Chat
 page_title: Peer-to-Peer Chat with SignalR
 description: "Learn how to create a peer-to-peer Telerik UI Chat with {{ site.framework }} SignalR."
+components: ["chat"]
 previous_url: /helpers/conversational-ui/chat/signalr-p-to-p
 slug: htmlhelpers_chat_aspnetcore_signalr
-position: 2
+position: 8
 ---
 
 # Peer-to-Peer Chat
 
-You can configure the Telerik UI Chat component for {{ site.framework }} and a {% if site.core %}[.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/){% else %}[SignalR 2](https://www.asp.net/signalr){% endif %} service to create a Peer-to-Peer Chat application.
+You can configure the Telerik UI Chat component for {{ site.framework }} and a {% if site.core %}[ASP.NET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/){% else %}[SignalR 2](https://www.asp.net/signalr){% endif %} service to create a Peer-to-Peer Chat application.
+
+For the complete project, refer to the [Chat Peer to Peer example]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Chat/ChatPeerToPeer.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/ChatPeerToPeer{% endif %}).
 
 To create the Peer-to-Peer Chat, you have to implement the SignalR Hub server and then to implement the application client:
 
@@ -25,8 +28,10 @@ Depending on your preferred editor, use any of the following approaches:
 {% if site.core %}
 
 * [Create a new {{ site.product }} application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetcore %})
-* [Create a new .Net Core application in Visual Studio and include the {{ site.product }} package]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Create a new .Net Core application with the CLI and include the {{ site.product }} package]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Create a new .NET Core application in Visual Studio and include the {{ site.product }} package]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Create a new .NET Core application with the CLI and include the {{ site.product }} package]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+
+> For .NET 6 and later versions, SignalR is included as part of the ASP.NET Core shared framework, so no additional package installation is required for the server-side SignalR functionality.
 
 {% else %}
 
@@ -39,80 +44,81 @@ Depending on your preferred editor, use any of the following approaches:
 
 {% if site.core %}
 
-1. Modify `Startup.cs`. The new lines have to be added to the bottom of the `ConfigureServices` and `Configure` methods.
+1. Modify `Program.cs` to configure SignalR services and routing.
 
-    > If in the `app.UseSignalR` line the editor throws an `IApplicationBuilder does not contain definition for UseSignalR` error, add the Microsoft.AspNetCore.SignalR v.1.0.0 package to the project.
+    ```C#
+    using Microsoft.AspNetCore.SignalR;
 
-    ```
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.DependencyInjection;
+    var builder = WebApplication.CreateBuilder(args);
 
-    namespace CoreSignalR
+    // Add services to the container.
+    builder.Services.AddControllersWithViews();
+
+    // Add the SignalR service.
+    builder.Services.AddSignalR();
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (!app.Environment.IsDevelopment())
     {
-        public class Startup
-        {
-            public void ConfigureServices(IServiceCollection services)
-            {
-                ...
-
-                // Add the SignalR service.
-                services.AddSignalR();
-            }
-
-            public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-            {
-                ...
-
-                // Point to the route that will return the SignalR Hub.
-                app.UseSignalR(routes =>
-                {
-                    routes.MapHub<ChatHub>("/chat");
-                });
-            }
-        }
+        app.UseExceptionHandler("/Home/Error");
+        app.UseHsts();
     }
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    // Map the SignalR Hub to the specified route.
+    app.MapHub<ChatHub>("/chat");
+
+    app.Run();
     ```
 
 1. Add a `ChatHub` class to the project.
 
-    ```
-    using System.Threading.Tasks;
+    ```C#
     using Microsoft.AspNetCore.SignalR;
 
-    namespace CoreSignalR
+    namespace YourAppNamespace
     {
-        // The Hub class should inherit from the Microsoft.AspNet.SignalR.Hub
+        // The Hub class should inherit from Microsoft.AspNetCore.SignalR.Hub
         public class ChatHub : Hub
         {
-            public async Task Send(object sender, string message)
+            public async Task Send(string senderId, string senderName, string message)
             {
-                // Broadcast the message to all clients except the sender
-                await Clients.Others.SendAsync("broadcastMessage", sender, message);
+                // Broadcast the message to all clients except the sender.
+                await Clients.Others.SendAsync("broadcastMessage", senderId, senderName, message);
             }
 
-            public async Task SendTyping(object sender)
+            public async Task SendTyping(string senderId, string senderName)
             {
-                // Broadcast the typing notification to all clients except the sender
-                await Clients.Others.SendAsync("typing", sender);
+                // Broadcast the typing notification to all clients except the sender.
+                await Clients.Others.SendAsync("typing", senderId, senderName);
             }
         }
     }
     ```
 {% else %}
 
-1. Add the `Microsoft.AspNet.SignalR` package to the application.
+1. Add the[ `Microsoft.AspNet.SignalR`](https://www.nuget.org/packages/Microsoft.AspNet.SignalR) NuGet package to the application.
 
-        install-package Microsoft.AspNet.SignalR
+        Install-Package Microsoft.AspNet.SignalR
 
 1. Create a `Startup.cs` file to configure the hub connection.
 
         using Microsoft.Owin;
         using Owin;
 
-        [assembly: OwinStartup(typeof(SignalR.Startup))]
-
-        namespace SignalR
+        namespace YourAppNamespace
         {
             public class Startup
             {
@@ -128,20 +134,21 @@ Depending on your preferred editor, use any of the following approaches:
 
         using Microsoft.AspNet.SignalR;
 
-        namespace SignalR.Hubs
+        namespace YourAppNamespace.Hubs
         {
             // The Hub class has to inherit from the Microsoft.AspNet.SignalR.Hub.
             public class ChatHub : Hub
             {
-                public void Send(object sender, string message)
+                public void Send(string senderId, string senderName, string message)
                 {
                     // Broadcast the message to all clients except the sender.
-                    Clients.Others.broadcastMessage(sender, message);
+                    Clients.Others.broadcastMessage(senderId, senderName, message);
                 }
-                public void SendTyping(object sender)
+                
+                public void SendTyping(string senderId, string senderName)
                 {
                     // Broadcast the typing notification to all clients except the sender.
-                    Clients.Others.typing(sender);
+                    Clients.Others.typing(senderId, senderName);
                 }
             }
         }
@@ -150,8 +157,7 @@ Depending on your preferred editor, use any of the following approaches:
 
 ## Initializing the Chat
 
-In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
-
+Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mvc.ui.fluent/chateventbuilder#sendmessagesystemstring) and [`Input`](/api/kendo.mvc.ui.fluent/chateventbuilder#inputsystemstring) events.
 
 ```HtmlHelper
     @{
@@ -160,32 +166,13 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
     @(Html.Kendo().Chat()
         .Name("chat")
-        .User(user => user
-            // Each instance of the app will generate a unique username.
-            // In this way, the SignalR Hub "knows" who is the user that sends the message
-            // and who are the clients that have to receive that message.
-            .Name(@name)
-            .IconUrl("https://demos.telerik.com/kendo-ui/content/chat/avatar.png")
-        )
+        .AuthorId(@name)
+        .IsTypingField("isTyping")
         .Events(events => events
-            .TypingStart("onTypingStart")
-            .Post("onPost")
+            .Input("onInput")
+            .SendMessage("onSendMessage")
         )
     )
-
-    <script>
-        // The `typingStart` will notify the SignallR Hub that the current client is typing.
-        // The Hub, in turn, will notify all the other clients that the user has started typing.
-        function onTypingStart(e) {
-            chatHub.invoke("sendTyping", chat.getUser());
-        }
-
-        // The `post` handler will send the user data and the typed text to the SignalR Hub.
-        // The Hub will then forward that info to the other clients.
-        function onPost(args) {
-            chatHub.invoke("send", chat.getUser(), args.text);
-        }
-    </script>
 ```
 {% if site.core %}
 ```TagHelper
@@ -193,26 +180,85 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
         var name = Guid.NewGuid().ToString();
     }
 
-    <kendo-chat name="chat"
-                on-post="onPost"
-                on-typing-start="onTypingStart">
-        <user name="@name"
-            icon-url="https://demos.telerik.com/kendo-ui/content/chat/avatar.png" />
+    <kendo-chat name="chat" 
+        author-id="@name"
+        is-typing-field="isTyping"
+        on-send-message="onSendMessage"
+        on-input="onInput">
     </kendo-chat>
+```
+```JS Scripts
+<script>
+    const currentUser = {
+        id: '@name',
+        name: 'User123',
+        iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/avatar.png"
+    };
+    let isTyping = false;
 
-    <script>
-        function onTypingStart() {
-            // The `typingStart` will notify the SignallR Hub that the current client is typing.
-            // The Hub, in  turn, will notify all the other clients that the user has started typing.
-            chatHub.invoke("sendTyping", chat.getUser());
+    // The 'Input' will notify the SignallR Hub that the current client is typing.
+    // The Hub, in turn, will notify all the other clients that the user has started typing.
+    function onInput(e) {
+        // If not already typing, send typing notification.
+        if (!isTyping) {
+            isTyping = true;
+            chatHub.invoke("sendTyping", currentUser.id, currentUser.name);
         }
+    }
 
-        function onPost(args) {
-            // The `post` handler will send the user data and the typed text to the SignalR Hub.
-            // The Hub will then forward that info to the other clients.
-            chatHub.invoke("send", chat.getUser(), args.text);
+    // The 'SendMessage' handler will send the user data and the typed text to the SignalR Hub.
+    // The Hub will then forward that info to the other clients.
+    function onSendMessage(args) {
+        // Update the message data based on the current user's data.
+        args.message.id = kendo.guid();
+        args.message.authorId = currentUser.id;
+        args.message.authorName = currentUser.name;
+        args.message.authorImageUrl = currentUser.iconUrl;
+
+        // Stop typing when sending a message.
+        if (isTyping) {
+            isTyping = false;
         }
-    </script>
+        chatHub.invoke("send", args.message.authorId, args.message.authorName, args.message.text);
+    }
+</script>
+```
+{% else %}
+```JS Scripts
+<script>
+    const currentUser = {
+        id: '@name',
+        name: 'User123',
+        iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/avatar.png"
+    };
+    let isTyping = false;
+
+    // The 'Input' will notify the SignallR Hub that the current client is typing.
+    // The Hub, in turn, will notify all the other clients that the user has started typing.
+    function onInput(e) {
+        // If not already typing, send typing notification.
+        if (!isTyping) {
+            isTyping = true;
+            chatHub.server.sendTyping(currentUser.id, currentUser.name);
+        }
+    }
+
+    // The 'SendMessage' handler will send the user data and the typed text to the SignalR Hub.
+    // The Hub will then forward that info to the other clients.
+    function onSendMessage(args) {
+        // Update the message data based on the current user's data.
+        args.message.id = kendo.guid();
+        args.message.authorId = currentUser.id;
+        args.message.authorName = currentUser.name;
+        args.message.authorImageUrl = currentUser.iconUrl;
+
+        // Stop typing when sending a message.
+        if (isTyping) {
+            isTyping = false;
+        }
+        chatHub.server.send(args.message.authorId, args.message.authorName, args.message.text);
+    }
+</script>
 ```
 {% endif %}
 
@@ -220,148 +266,210 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
 
 {% if site.core %}
 
-1. Get the SignalR client script from NPM.
+1. Add the SignalR JavaScript client library. You can use NPM to install the package or reference the library directly from CDN.
 
+    **Using npm**
+    
+    ```bash
+    npm install @microsoft/signalr
     ```
-    npm install @aspnet/signalr
+    
+    Then copy the file from `node_modules/@microsoft/signalr/dist/browser/signalr.min.js` to `wwwroot/lib/signalr/`.
+
+    **Using CDN**
+    
+    Reference the library directly from CDN in the View.
+
+    ```HTML
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
     ```
 
-1. Copy the `@aspnet/signalr` folder from the `node_modules` directory to the `wwwroot/lib` folder of the Core project.
-1. Include the SignalR script on the HTML page where you have initialized the Chat component.
+1. Include the SignalR script on the View that contains the Chat declaration.
 
-    ```
-    <script src="lib/signalr/dist/browser/signalr.min.js"></script>
+    ```HTML View
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
     ```
 
-1. Initialize the SignalR Hub proxy.
+1. Initialize the SignalR Hub connection.
 
-    ```
+    ```JS
     // Point to the Hub remote endpoint.
     window.chatHub = new signalR.HubConnectionBuilder()
         .withUrl('/chat')
         .build();
     ```
 
-1. Start the Hub proxy and configure it to detect errors.
+1. Start the Hub connection and configure it to handle errors.
 
-    ```
+    ```JS
     chatHub.start()
+        .then(function () {
+            console.log('SignalR connection started.');
+        })
         .catch(function(err) {
-            console.error(err.toString());
+            console.error('Error starting SignalR connection: ' + err.toString());
         });
     ```
 
 1. Attach the event handlers for the respective remote Hub actions.
 
-    ```
+    ```JS
     $(document).ready(function() {
-        window.chat = $("#chat").getKendoChat();
+        chatHub.on('broadcastMessage', function(senderId, senderName, message) {
+            const chat = $("#chat").getKendoChat();
 
-        chatHub.on('broadcastMessage', function(sender, message) {
-            var message = {
-                type: 'text',
-                text: message
-            };
+            // Check for a "typing" message.
+            let typingMessages = $.grep(chat.dataSource.data(), function(item){
+                return item.isTyping == true ? item.id : "";
+            });
 
-            // Render the received message in the Chat.
-            chat.renderMessage(message, sender);
+            if(typingMessages.length > 0) {
+                if(typingMessages[0].id != null) {
+                    let messageObject = chat.dataSource.get(typingMessages[0].id);
+                    if (messageObject) {
+                        // Update the "typing" message with the received message text.
+                        let updatedMessage = chat.updateMessage(messageObject, {
+                            text: message,
+                            isTyping: false
+                        });
+                    }
+                }
+            } else {
+                // Post the received message in the Chat.
+                chat.postMessage({
+                    id: kendo.guid(),
+                    authorId: senderId,
+                    authorName: senderName,
+                    authorImageUrl:currentUser.iconUrl,
+                    text: message,
+                    isTyping: false
+                });
+            }
         });
 
-        chatHub.on('typing', function(sender) {
-            // Display the typing notification in the Chat.
-            chat.renderMessage({ type: 'typing' }, sender);
+        chatHub.on('typing', function(senderId, senderName) {
+            console.log(senderName + ' is typing');
+            const chat = $("#chat").getKendoChat();
+
+            chat.postMessage({
+                id: kendo.guid(),
+                isTyping: true,
+                authorId: senderId,
+                authorName: senderName,
+                authorImageUrl: currentUser.iconUrl
+            });
         });
     });
     ```
 
-1. Complete SignalR Client Hub Proxy configuration.
+{% else %}
 
-    ```
-    <script src="lib/signalr/dist/browser/signalr.min.js"></script>
+1. Include the SignalR 2 script in the page. You can install [`Microsoft.AspNet.SignalR.JS`](https://www.nuget.org/packages/microsoft.aspnet.signalr.js/) NuGet package or reference the library directly from CDN.
+
+    **Using NuGet package**
     
+    ```
+    Install-Package Microsoft.AspNet.SignalR.JS
+    ```
+    
+    Then reference the library in the View:
+
+    ```HTML
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    ```
+
+    **Using CDN**
+    
+    Reference the library directly from CDN in the View.
+
+    ```HTML
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.3/jquery.signalR.min.js"></script>
+    ```
+
+1. Reference the auto-generated SignalR hub script for the application.
+    ```HTML
+        <script src="~/signalr/hubs"></script>
+    ```
+
+1. Implement the initialization logic for the SignalR Hub proxy.
+    ```JS
     <script>
-        // Point to the Hub remote endpoint.
-        window.chatHub = new signalR.HubConnectionBuilder()
-            .withUrl('/chat')
-            .build();
+        const currentUser = {
+            id: '@name',
+            name: 'User123',
+            iconUrl: "https://demos.telerik.com/kendo-ui/content/chat/avatar.png"
+        };
 
-        chatHub.start()
-            .catch(function(err) {
-                console.error(err.toString());
-            });
+        var isTyping = false;
+        var chatHub;
 
-        $(document).ready(function() {
-            window.chat = $("#chat").getKendoChat();
+        // Start the Hub proxy and attach event handlers for the respective remote hub actions.
+        $(document).ready(function () {
+            chatHub = $.connection.chatHub;
 
-            chatHub.on('broadcastMessage', function(sender, message) {
-                var message = {
-                    type: 'text',
-                    text: message
-                };
+            chatHub.client.broadcastMessage = function (senderId, senderName, message) {
+                const chat = $("#chat").getKendoChat();
 
-                // Render the received message in the Chat.
-                chat.renderMessage(message, sender);
-            });
+                // Check for a "typing" message.
+                let typingMessages = $.grep(chat.dataSource.data(), function (item) {
+                    return item.isTyping == true ? item.id : "";
+                });
 
-            chatHub.on('typing', function(sender) {
-                // Display the typing notification in the Chat.
-                chat.renderMessage({ type: 'typing' }, sender);
+                if (typingMessages.length > 0) {
+                    if (typingMessages[0].id != null) {
+                        let messageObject = chat.dataSource.get(typingMessages[0].id);
+                        if (messageObject) {
+                            // Update the "typing" message with the received message text.
+                            let updatedMessage = chat.updateMessage(messageObject, {
+                                text: message,
+                                isTyping: false
+                            });
+                        }
+                    }
+                } else {
+                    // Post the received message in the Chat.
+                    chat.postMessage({
+                        id: kendo.guid(),
+                        authorId: senderId,
+                        authorName: senderName,
+                        authorImageUrl: currentUser.iconUrl,
+                        text: message,
+                        isTyping: false
+                    });
+                }
+            };
+
+            chatHub.client.typing = function (senderId, senderName) {
+                console.log(senderName + ' is typing');
+                const chat = $("#chat").getKendoChat();
+
+                chat.postMessage({
+                    id: kendo.guid(),
+                    isTyping: true,
+                    authorId: senderId,
+                    authorName: senderName,
+                    authorImageUrl: currentUser.iconUrl
+                });
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                console.log('SignalR connection started.');
+            }).fail(function (err) {
+                console.error('Error starting SignalR connection: ' + err.toString());
             });
         });
     </script>
     ```
-    
-1. Start the Peer-to-Peer Chat application.
-
-{% else %}
-
-1. Include the SignalR 2 script in the page. It is distributed with the SignalR NuGet package.
-
-        <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
-
-1. Reference the auto-generated SignalR hub script for the application.
-
-        <script src="~/signalr/hubs"></script>
-
-1. Implement the initialization logic for the SignalR Hub proxy.
-
-        function startHub(startCallback) {
-            var hub = $.connection.chatHub;
-
-            $.connection.hub.start().done(function () {
-                startCallback(hub)
-            });
-
-            return hub;
-        }
-
-1. In the `$(document).ready()` handler, start the Hub proxy and attach event handlers for the respective remote hub actions.
-
-        $(document).ready(function () {
-            window.chat = $('#chat').getKendoChat();
-            window.chatHub = startHub(function (hub) { });
-
-            chatHub.on("broadcastMessage", function (sender, message) {
-                var message = {
-                    type: "text",
-                    text: message
-                };
-
-                // Render the received message in the Chat.
-                chat.renderMessage(message, sender);
-            });
-
-            chatHub.on("typing", function (sender) {
-                // Display the typing notification in the Chat.
-                chat.renderMessage({ type: "typing" }, sender);
-            });
-        });
-
-1. Start the Peer-to-Peer Chat Application.
-
 {% endif %}
+
+1. Start the Peer-to-Peer Chat application. To test the real-time messages, open the page with the Chat in two browser windows.
 
 ## See Also
 
-* [Basic Usage of the Chat HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
-* [Server-Side API of the Chat for {{ site.framework }}](/api/chat)
+* [Basic Usage of the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/index)
+* [Client-Side API of the Chat](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat)
+* [Server-Side API of the Chat](/api/chat)
+{% if site.core %}
+* [Server-Side API of the Chat TagHelper](/api/taghelpers/chat)
+{% endif %}

@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery Grid Documentation - Grid Localization
 description: "Get started with the jQuery Grid by Kendo UI and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+components: ["grid"]
 slug: localization_kendoui_grid_widget
 position: 3
 ---
@@ -148,28 +149,30 @@ The following example demonstrates a Grid with localized user interface for all 
       <div id="grid"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
                 transport: {
                   read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
+                    url: crudServiceBaseUrl + "/Products"
                   },
                   update: {
                     url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   destroy: {
                     url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   create: {
                     url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
+                    type: "POST",
+                    contentType: "application/json"
                   },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

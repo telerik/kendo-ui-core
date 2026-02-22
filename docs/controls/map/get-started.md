@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Map Documentation - Getting Started with the Map
 description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["map"]
 slug: getting_started_kendoui_map_component
 position: 1
 ---
@@ -129,11 +130,7 @@ You can display a marker over a specific Point of Interest. Similar to the `laye
 
 ## See Also 
 
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration/)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

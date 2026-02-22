@@ -2,6 +2,7 @@
 title:  Custom Attributes Binding
 page_title: Custom Attributes Binding
 description: "Learn how to bind custom attributes from the server-side with the Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 slug: custom-attributes-binding
 position: 6
 ---
@@ -16,14 +17,14 @@ The following example illustrates how to bind custom attributes.
 
 1. Make sure that you have supplemented the Menu items from the controller side.
 
-    ```Controller.cs
+    ```C# Controller.cs
         public ActionResult Menu_Bind_Attributes()
         {
             var categories = categoryService.GetCategories();
             return View(categories);
         }
     ```
-    ```Model.cs
+    ```C# Model.cs
         public class Category
         {
             public Category()
@@ -210,7 +211,7 @@ The following example illustrates how to bind custom attributes.
         </kendo-menu>
     ```
     {% endif %}
-    ```Script.js
+    ```JS script.js
         <script>
             function onMenuSelect(e){
                 // Gather the constructed custom attributes. 

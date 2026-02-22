@@ -5,9 +5,9 @@ description: "Learn how to create range filtering in the Kendo UI Grid for jQuer
 previous_url: /controls/data-management/grid/how-to/use-range-slider-in-filter-menu, /controls/data-management/grid/how-to/filtering/use-range-slider-in-filter-menu
 slug: howto_gridfiltering_rangefilteringwithslider_grid
 tags: use, create, grid, filtering, rangeslider
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -49,9 +49,9 @@ To see how the following example functions, filter the column by using the Kendo
         $("#grid").kendoGrid({
             filterMenuInit: onFilterMenuInit,
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 schema: {
                     model: {

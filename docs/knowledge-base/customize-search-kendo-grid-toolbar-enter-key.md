@@ -6,6 +6,7 @@ page_title: How to Trigger Search on Enter Key Press in Kendo UI Grid with Serve
 slug: customize-search-kendo-grid-toolbar-enter-key
 tags: kendo ui, grid, search, toolbar, serverfiltering, enter key, keydown event
 res_type: kb
+components: ["grid"]
 ticketid: 1668767
 ---
 
@@ -68,9 +69,9 @@ Below is a runnable example:
       $(document).ready(function () {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

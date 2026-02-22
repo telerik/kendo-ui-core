@@ -59,7 +59,50 @@ Replaces given element with another one, using CSS class defined transition.
 
 The current element which will be hidden when the transition ends.
 
+
+<div class="meta-api-description">
+What is the purpose of specifying `FXReplace.current` in a Kendo UI effects configuration? Control the element or outgoing component that should be hidden, removed, or transitioned out once a replace animation or transition finishes, specifying the target for concealment or DOM removal as part of the setup phase, enabling precise management of which visible content disappears or updates when the replace effect completes, letting you configure, set, or define the exiting element to be hidden or discarded after the transition ends.
+</div>
+
+#### Example
+
+    <div id="container">
+        <div id="currentElement">Current Content</div>
+        <div id="nextElement" style="display: none">Next Content</div>
+    </div>
+    <script>
+    // The current element is the one that will be replaced
+    var currentEl = $("#currentElement");
+    kendo.fx(currentEl).replace("#nextElement", "fade").run();
+    </script>
+
 ### transitionClass `string`
 
 The transition class name. Passing `swap` will result in `k-fx-swap` class set to the **common container element**.
+
+
+<div class="meta-api-description">
+How can I customize the animation class in Kendo UI's FXReplace? Set or customize the CSS class applied during element replacement animations to control visual transitions, enabling use of default swap animation classes like k-fx-swap or custom class names for tailored animation effects; configure or specify transition classes to manage how the container element animates during content swaps, replacement, or visual changes with smooth or custom CSS-driven transitions.
+</div>
+
+#### Example
+
+    <style>
+        .k-fx-custom.k-fx-start .k-fx-next {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .k-fx-custom.k-fx-end .k-fx-current {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    </style>
+    <div id="container">
+        <div id="element1">Element 1</div>
+        <div id="element2" style="display: none">Element 2</div>
+    </div>
+    <script>
+    // Use custom transition class name
+    kendo.fx("#element1").replace("#element2", "custom").run();
+    </script>
 

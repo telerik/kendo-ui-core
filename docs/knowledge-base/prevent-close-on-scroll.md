@@ -5,9 +5,9 @@ description: "Learn how to prevent popup closure on scrolling when users reach t
 previous_url: /controls/editors/dropdownlist/how-to/prevent-close-on-scroll, /controls/editors/dropdownlist/how-to/appearance/prevent-close-on-scroll
 slug: howto_prevent_popup_closure_onscroll_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, prevent, popup, closure, on scrolling
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment
@@ -57,8 +57,7 @@ The DropDownList enables you to make the popup remain open in such cases. The fo
             dataSource: {
               transport: {
                 read: {
-                  dataType: "jsonp",
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
+                  url: "https://demos.telerik.com/service/v2/core/Products",
                 }
               }
             },

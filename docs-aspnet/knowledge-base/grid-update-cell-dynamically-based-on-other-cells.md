@@ -6,6 +6,7 @@ page_title: Updating Grid Cell Dynamically based on the Values of Multiple Cells
 slug: grid-update-cell-dynamically-based-on-other-cells
 tags: grid, incell, editable, dynamically, automatically, cell, calculation, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ticketid: 1629412
 component: grid
 ---
@@ -109,7 +110,7 @@ Follow the next steps to update the <b>TransactionAmount</b> when the <b>CreditA
         </kendo-grid>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             function onCellClose(e) {
                 var closedCreditAmountCell = $(e.container).hasClass("creditAmountCell");

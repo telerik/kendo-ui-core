@@ -6,7 +6,7 @@ page_title:  Persist expanded rows in Kendo Grid - Kendo UI for jQuery Data Grid
 slug: grid-persist-expanded-rows
 tags: grid, persist, detail, expand, expanded, refresh
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -70,9 +70,9 @@ A possible solution is to:
 
           var grid = $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
               },
               pageSize: 20,
               serverPaging: true,
@@ -180,9 +180,9 @@ A possible solution is to:
 
           detailRow.find(".orders").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               serverPaging: true,
               serverSorting: true,

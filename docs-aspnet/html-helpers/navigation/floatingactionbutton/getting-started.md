@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} FloatingActionButton component by following a complete step-by-step tutorial."
+components: ["floatingactionbutton"]
 slug: floatingactionbutton_getting_started
 position: 1
 ---
@@ -223,7 +224,7 @@ You can reference the FloatingActionButton instances that you have created and b
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var floatingActionButtonReference = $("#fab").data("kendoFloatingActionButton"); // floatingActionButtonReference is a reference to the existing instance of the helper.
     </script>
@@ -231,7 +232,7 @@ You can reference the FloatingActionButton instances that you have created and b
 
 1. Use the [FloatingActionButton client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/floatingactionbutton#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the FloatingActionButton.
 
-    ```script
+    ```JS script
     <script>
         var floatingActionButtonReference = $("#fab").data("kendoFloatingActionButton"); // floatingActionButtonReference is a reference to the existing instance of the helper.
         floatingActionButtonReference.enable(false); // Disable the FloatingActionButton instance.

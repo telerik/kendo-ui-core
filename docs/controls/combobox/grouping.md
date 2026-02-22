@@ -2,6 +2,7 @@
 title: Grouping
 page_title: jQuery ComboBox Documentation - Grouping
 description: "Get started with the jQuery ComboBox by Kendo UI and group its data."
+components: ["combobox"]
 slug: grouping_kendoui_combobox_widget
 position: 4
 ---
@@ -40,10 +41,9 @@ To enable the grouping functionality in the ComboBox, use the remote `transport`
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             height: 200,
-            dataSource: {
-                type: "odata",
+            dataSource: {                
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -70,9 +70,8 @@ To customize the inline group title which is displayed next to the suggestion it
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } // Group the data by 'Country' field.
             }
@@ -99,9 +98,8 @@ To customize the group title which is displayed in the fixed group header positi
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } // Group the data by 'Country' field.
             }

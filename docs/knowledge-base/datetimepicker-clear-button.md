@@ -7,6 +7,7 @@ slug: datetimepicker-clear-button
 tags: datetimepicker, clear, button
 ticketid: 1168278
 res_type: kb
+components: ["timepicker"]
 ---
 
 ## Environment

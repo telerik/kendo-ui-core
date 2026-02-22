@@ -7,6 +7,7 @@ slug: dialog-prevent-js-execution
 tags: dialog, xss
 ticketid: 1510265
 res_type: kb
+components: ["dialog"]
 ---
 
 ## Environment

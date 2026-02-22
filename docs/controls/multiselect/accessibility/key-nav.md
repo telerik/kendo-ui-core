@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery MultiSelect Documentation - Keyboard Navigation
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["multiselect"]
 slug: keynav_multiselect
 position: 2
 ---
@@ -16,4 +17,4 @@ The keyboard navigation of the MultiSelect is always available. For a complete e
 
 * [Keyboard Navigation by the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the MultiSelect]({% slug accessibility_kendoui_multiselect_widget %})
+* [Accessibility in the MultiSelect]({% slug jquery_multiselect_accessibility %})

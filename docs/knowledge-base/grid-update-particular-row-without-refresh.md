@@ -6,7 +6,7 @@ page_title: Refresh the Content of a Row Only - Kendo UI for jQuery Data Grid
 slug: grid-update-particular-row-without-refresh
 tags: grid, row, update, render
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -31,7 +31,7 @@ How can I refresh the HTML of Grid record to apply the manual changes but avoid 
 If you apply changes to the `dataItem` without using its `set` method, although the item will contain the new values, these values will not be applied to the HTML. To apply the changes, traverse all cells and manually populate the new content.
 
 ```dojo
-<input type='button' class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" value='Change first cell value' onclick='changeFirstCellValue()' />
+<input type='button' class="k-button" value='Change first cell value' onclick='changeFirstCellValue()' />
 <div id="grid"></div>
 <script>
   function changeFirstCellValue(){

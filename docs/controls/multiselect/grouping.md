@@ -2,6 +2,7 @@
 title: Grouping
 page_title: jQuery MultiSelect Documentation - Grouping
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to configure its grouping functionality."
+components: ["multiselect"]
 slug: grouping_kendoui_multiselect_widget
 position: 4
 ---
@@ -31,9 +32,8 @@ To enable grouping, use the remote `transport` configuration and a grouped DataS
             dataValueField: "CustomerID",
             height: 200,
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -63,9 +63,8 @@ The following example demonstrates how to define a custom group template.
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }
@@ -94,9 +93,8 @@ The following example demonstrates how to define a custom fixed group template.
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 group: { field: "Country" } //group the data by 'Country' field
             }

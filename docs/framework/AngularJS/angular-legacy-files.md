@@ -2,6 +2,7 @@
 title: AngularJS Legacy Files
 page_title: AngularJS Legacy Files | AngularJS Directives
 description: "Learn how to get the deprecated AngularJS files."
+components: ["general"]
 slug: angularjs_legacy_files_kendoui
 position: 10
 ---

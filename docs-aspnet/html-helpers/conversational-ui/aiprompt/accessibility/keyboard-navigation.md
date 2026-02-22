@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} AIPrompt by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["aiprompt"]
 slug: keynav_aspnetcore_aiprompt
 position: 2
 ---

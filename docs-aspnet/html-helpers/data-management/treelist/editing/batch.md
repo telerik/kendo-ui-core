@@ -2,6 +2,7 @@
 title: Incell
 page_title: Incell Editing
 description: "Enable cell edit mode and batch updates in Telerik UI TreeList HtmlHelper for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_batch_editing
 position: 2
 ---

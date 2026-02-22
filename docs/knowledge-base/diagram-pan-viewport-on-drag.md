@@ -7,7 +7,7 @@ slug: diagram-pan-viewport-on-drag
 tags: diagram, pan, shapes, auto, move, drag, dragging, view, viewport
 ticketid: 1148503
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

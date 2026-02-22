@@ -6,6 +6,7 @@ page_title: How to Keep Step Numbers Visible on Completed Steps in Kendo UI Wiza
 slug: keep-step-numbers-visible-kendo-ui-wizard
 tags: kendo-ui, wizard, stepper, activate-event, custom-logic
 res_type: kb
+components: ["stepper"]
 ticketid: 1647918
 ---
 

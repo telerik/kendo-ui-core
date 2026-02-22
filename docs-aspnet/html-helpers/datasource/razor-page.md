@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the Telerik UI DataSource component for {{ site.framework }} in Razor Page scenario"
+components: ["datasource"]
 slug: htmlhelpers_datasource_aspnetcore_razor_page
 position: 10
 ---
@@ -16,7 +17,7 @@ When configuring the DataSource for a Razor Page scenario it is important to kee
 
 The example below demonstrates how to configure the Telerik UI DataSource component for {{ site.framework }} in Razor Page scenario. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.DataSource.DataSourceIndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -42,7 +43,7 @@ The example below demonstrates how to configure the Telerik UI DataSource compon
         }
     </script>
 ```
-```tab-TagHelper(csthml)
+```TagHelper
     @page
     @model Telerik.Examples.RazorPages.Pages.DataSource.DataSourceIndexModel
     @addTagHelper *, Kendo.Mvc
@@ -69,7 +70,7 @@ The example below demonstrates how to configure the Telerik UI DataSource compon
         }
     </script> 
 ```
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public static List<OrderViewModel> orders;
     private static int count;
     public void OnGet()

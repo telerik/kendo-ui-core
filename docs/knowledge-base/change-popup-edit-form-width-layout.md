@@ -1,114 +1,72 @@
 ---
-title: Increase Popup Edit Form and Textbox Width
-page_title: Popup Edit Form and Textbox Width - Kendo UI for jQuery Data Grid
-description: "Learn how to increase the width of the popup edit form and the textbox in the Kendo UI Grid."
+title: Adjust Popup Edit Form and Input Widths
+page_title: Adjust Popup Edit Form and Input Widths - Kendo UI for jQuery Data Grid
+description: "Learn how to adjust the width and height of the popup edit form in the Kendo UI Grid."
 previous_url: /controls/data-management/grid/how-to/Editing/change-popup-edit-form-width-layout
 slug: howto_increase_popup_edit_formand_textbox_grid
-tags: grid, increase, popup, edit, form, textbox, width
-component: grid
+tags: grid, adjust, popup, edit, form, input, width, height
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
- </tr>
-
-</table>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI for jQuery Grid</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.4.1217</td>
+</tr>
+</tbody>
 
 
 ## Description
 
-How can I increase the width of the popup edit form and the textbox in the Kendo UI Grid?
+How can I adjust the width and height of the popup edit form in the Kendo UI Grid?
 
 ## Solution
 
-The following example demonstrates how to increase the width of the popup edit form and the textbox width in the Kendo UI Grid.
+To adjust the dimensions of the popup edit form:
+
+1. Configure the popup window dimensions using the [`editable.window`](/api/javascript/ui/grid/configuration/editable.window) configuration.
+2. Use the [`edit`](/api/javascript/ui/grid/events/edit) event to customize the form container width if needed.
+
+The following example demonstrates how to set custom dimensions for the popup edit window in the Grid.
 
 ```dojo
-<style>
-/*
-    Increase the width of the edit form.
-    The default one is 400px.
-*/
-
-.k-edit-form-container
-{
-    width: 500px;
-}
-
-/*
-    Decrease the width of the edit form labels. The default one is 30%.
-    The new width should depend on the column titles.
-    Switch the text alignment to the left. By default, it is to the right.
-*/
-
-.k-popup-edit-form .k-edit-label
-{
-    width: 20%;
-    text-align: left;
-}
-
-/*
-    Increase the width of the textbox containers. The default one is 60%.
-    The sum of label and editor percentage widths should be around 90%, to make up for existing paddings.
-*/
-.k-popup-edit-form .k-edit-field
-{
-    width: 70%;
-}
-
-/*
-    Expand the edit textboxes and any other Kendo UI widgets.
-    In case of unexpected side effects, use widget-specific classes, instead of .k-widget.
-*/
-.k-popup-edit-form .k-edit-field > .k-textbox,
-.k-popup-edit-form .k-edit-field > .k-widget:not(.k-tooltip)
-{
-    width: 98%;
-}
-
-</style>
-
-<div id="example">
-    <div id="grid"></div>
+<div id="grid"></div>
 
 <script>
   $(document).ready(function () {
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         dataSource = new kendo.data.DataSource({
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
+              url: crudServiceBaseUrl + "/Products"
             },
             update: {
               url: crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             destroy: {
               url: crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             create: {
               url: crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
+              type: "POST",
+              contentType: "application/json"
             },
             parameterMap: function(options, operation) {
               if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
               }
             }
           },
@@ -139,11 +97,19 @@ The following example demonstrates how to increase the width of the popup edit f
         { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
         { field: "Discontinued", width: "120px" },
         { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
-      editable: "popup"
+      editable: {
+  		mode: "popup",
+  		window: {
+  		    width: "600px",
+  		    height: "300px",
+  		}
+	  },
+      edit: function (e) {
+      	$(e.container).find(".k-edit-form-container").css("width", "auto");
+      }
     });
   });
 </script>
-</div>
 ```
 
 ## See Also

@@ -5,9 +5,9 @@ description: "Learn how to display validation messages when the Kendo UI Upload 
 slug: howto_display_validation_messages_with_templates
 previous_url: /controls/editors/upload/how-to/display-validation-messages-with-templates
 tags: telerik, kendo, jquery, upload, display, validation, messages, using, templates
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

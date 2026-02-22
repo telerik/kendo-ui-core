@@ -6,7 +6,7 @@ page_title: Restrict Dragging Node Within Parent - Kendo UI TreeView for jQuery
 slug: treeview-restrict-drag-within-parent
 tags: treeview, restrict, drag, parent
 res_type: kb
-component: treeview
+components: ["treeview"]
 ---
 
 ## Environment

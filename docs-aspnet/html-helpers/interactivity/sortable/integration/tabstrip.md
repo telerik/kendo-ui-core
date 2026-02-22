@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: TabStrip Integration
 description: "Learn how to reorder TabStrip items when using the Telerik UI Sortable component for {{ site.framework }}."
+components: ["sortable"]
 slug: htmlhelpers_sortable_aspnetcore_integration_tabstrip
 position: 3
 ---
@@ -65,7 +66,7 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
 ```
 To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable.
 
-```
+```JS
     function onStart(e) {
         $("#tabstrip").data("kendoTabStrip").activateTab(e.item);
     }
@@ -73,7 +74,7 @@ To avoid visual glitches, activate the current tab at the `start` event handler 
 
 After a tab is sorted, update its order in the TabStrip.
 
-```
+```JS
     function onChange(e) {
         var tabstrip = $("#tabstrip").data("kendoTabStrip"),
                 reference = tabstrip.tabGroup.children().eq(e.newIndex);

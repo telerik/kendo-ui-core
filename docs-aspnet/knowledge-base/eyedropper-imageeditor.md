@@ -8,6 +8,7 @@ position:
 tags: colorpicker, eyedropper, imageeditor, color
 ticketid: 1596287
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

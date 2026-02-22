@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Stepper component by following a complete step-by-step tutorial."
+components: ["stepper"]
 slug: aspnetcore_stepper_getting_started
 position: 1
 ---
@@ -132,7 +133,7 @@ To use the client-side API of the Stepper and build on top of its initial config
 
 1. Use the `.Name()` (id attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
     <script>
         var stepperReference = $("#Stepper").data("kendoStepper"); // stepperReference is a reference to the existing instance of the helper.
     </script>
@@ -140,7 +141,7 @@ To use the client-side API of the Stepper and build on top of its initial config
 
 1. Use the [Stepper client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/stepper#methods) to control the behavior of the widget. In this example, you will use the `next` method to selects the step which is immediately after the currently selected step.
 
-    ```script
+    ```JS script
     <script>
         $(document).ready(function () {
             var stepperReference = $("#Stepper").data("kendoStepper");

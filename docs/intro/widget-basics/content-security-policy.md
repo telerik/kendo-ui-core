@@ -2,6 +2,7 @@
 title: Content Security Policy
 page_title: Content Security Policy - Working with Components 
 description: "Learn more about the Content Security Policy (CSP) mode and how to work with it in Kendo UI for jQuery controls."
+components: ["general"]
 slug: troubleshooting_content_security_policy_kendoui
 previous_url: /troubleshoot/content-security-policy
 position: 70
@@ -16,7 +17,7 @@ If the strict `Content-Security-Policy` (CSP) mode is enabled, it disables the f
 
 ## Kendo UI for jQuery Version 2024 Q4 and Later
 
-Starting with the [2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-4-1112) release, all Kendo UI for jQuery components are CSP compliant. 
+Starting with the [2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-4-1112-(2024-q4)) release, all Kendo UI for jQuery components are CSP compliant. 
 
 
 ## Kendo UI for jQuery Versions between R1 2023 and 2024 Q4

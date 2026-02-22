@@ -2,6 +2,7 @@
 title: Binding
 page_title: jQuery RadioGroup Documentation - Binding
 description: "Get started with the jQuery RadioGroup by Kendo UI and bind the widget to local data arrays"
+components: ["radiogroup"]
 slug: binding_kendoui_radiogroup
 position: 2
 ---

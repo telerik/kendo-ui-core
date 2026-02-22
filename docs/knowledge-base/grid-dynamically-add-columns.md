@@ -6,8 +6,8 @@ page_title: Add and Remove Columns Dynamically - Kendo UI for jQuery Data Grid
 slug: grid-dynamically-add-columns
 tags: grid, dynamically, columns, add
 res_type: kb
+components: ["grid"]
 ticketid: 1142259
-component: grid
 ---
 
 ## Environment
@@ -70,9 +70,9 @@ An alternative option is to use the [`setOptions()`](/api/javascript/ui/grid/met
 
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/odata/Orders"
           },
           schema: {
             model: {

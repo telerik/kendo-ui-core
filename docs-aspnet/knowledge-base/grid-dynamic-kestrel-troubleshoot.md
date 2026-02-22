@@ -6,6 +6,7 @@ page_title: Dynamic Grid Missing on the Page after .NET Core Update
 slug: grid-dynamic-kestrel-troubleshoot
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, grid, dynamic, kestrel, 3.1
 res_type: kb
+components: ["general"]
 ticketid: 1450544
 component: grid
 ---
@@ -27,7 +28,7 @@ The functionality works on core 2.2 and doesn't work on core 3.1. No error are r
 
 ## Solution
 
-After I deleted almost everything an error occured:
+After I deleted almost everything an error occurs:
 
 ```
     Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
@@ -35,7 +36,7 @@ After I deleted almost everything an error occured:
 
 It appears that .NET Core changed the defaults so you need to add the following code in `Startup.cs`:
 
-```
+```C#
     services.Configure<IISServerOptions>(options =>
     {
         options.AllowSynchronousIO = true;

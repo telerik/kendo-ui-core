@@ -6,7 +6,7 @@ page_title: Implement Double-Click Batch Editing in Selectable Grids - Kendo UI 
 slug: grid-edit-cell-on-double-click
 tags: grid, batch, incell, double-click
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

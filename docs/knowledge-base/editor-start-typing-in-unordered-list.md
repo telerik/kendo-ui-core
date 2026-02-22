@@ -7,7 +7,7 @@ slug: editor-start-typing-in-unordered-list
 tags: kendo, editor, list, unordered, bullets
 ticketid: 1113496
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

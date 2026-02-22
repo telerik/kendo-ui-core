@@ -2,6 +2,7 @@
 title: Layout
 page_title: jQuery Gantt Documentation - Layout
 description: "Get started with the jQuery Gantt by Kendo UI and learn more about its layout."
+components: ["gantt"]
 slug: layout_kendoui_gantt
 position: 2
 ---

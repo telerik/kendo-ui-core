@@ -2,6 +2,7 @@
 title: Add or Remove Tiles
 page_title: Kendo UI for jQuery TileLayout Documentation - TileLayout Add/Remove
 description: "Learn how to enable and use the reordering functionality of the Kendo UI for jQuery TileLayout."
+components: ["tilelayout"]
 slug: add_remove_kendoui_tilelayout_widget
 position: 5
 ---
@@ -12,7 +13,7 @@ The Kendo UI TileLayout widget supports the option to dynamically add and remove
 
 ## Usage
 
-This functionality is a custom implementation based on the [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JS array method and the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout/methods/setOptions) TileLayout client-side method.
+This functionality is a custom implementation based on the [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JS array method and the `setOptions` method.
 
 
 The example below demonstrates how you can enable users to remove a tile from the TileLayout by a clicking on its close button.

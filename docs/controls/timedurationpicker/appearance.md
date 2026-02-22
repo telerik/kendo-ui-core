@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery TimeDurationPicker Documentation - TimeDurationPicker Appearance
 description: "Learn how to apply different styling options to the TimeDurationPicker component."
+components: ["timedurationpicker"]
 slug: appearance_timedurationpicker
 position: 2
 ---

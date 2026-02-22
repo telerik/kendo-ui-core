@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Learn how to validate the {{ site.product }} editors and use the Kendo UI for jQuery Validator for client-side validation."
+components: ["general"]
 slug: validation_aspnetmvc
 previous_url: /validation, /getting-started/validation, /getting-started/helper-basics/validation
 position: 5
@@ -28,8 +29,11 @@ The {{ site.product }} editors support the following `DataAnnotation` attributes
 - `Required`
 - `StringLength`
 - `UrlAttribute`
+- `ReadOnly`
 
 The `HTML5` <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*" target="_blank">`data-*` attributes</a> are generated in the HTML markup of each editor component based on the `DataAnnotation` attributes applied to the Model properties. To enable the client-side validation, the <a href="https://docs.telerik.com/kendo-ui/controls/validator/overview" target="_blank">Kendo UI for jQuery Validator</a> must be activated on the form that contains the editor components. The Validator automatically creates <a href="https://docs.telerik.com/kendo-ui/controls/validator/rules" target="_blank">validation rules</a> based on the unobtrusive HTML attributes. Also, the Validator creates rules for the unobtrusive attributes that are generated implicitly by {{ site.framework }} for numbers and dates.
+
+>The `ReadOnly` attribute will not generate a `data-*` attribute or create an internal validator rule, but the respective DOM input element will contain a [`readonly` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/readonly).
 
 The following example demonstrates how to enable the Kendo UI Validator to perform client-side validation based on the applied `DataAnnotation` attributes.
 
@@ -58,6 +62,9 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
             [Required]
             [Display(Name = "Order Date")]
             public DateTime? OrderDate { get; set; }
+
+            [ReadOnly(true)]
+            public string ShipCountry { get; set; }
         }
     ```
 
@@ -66,14 +73,14 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
     {% if site.core %}
     ```C#
         public IActionResult Create()
-        {                
+        {
             return View(new OrderViewModel());
         }
     ```
     {% else %}
     ```C#
         public ActionResult Create()
-        {                
+        {
             return View(new OrderViewModel());
         }
     ```
@@ -186,13 +193,13 @@ The following example demonstrates how to enable the Kendo UI Validator to perfo
                     <label asp-for="OrderDate"></label>
                 </div>
                 <div class="editor-field">
-                    <kendo-datepicker for="OrderDate" 
+                    <kendo-datepicker for="OrderDate"
                         date-input="true">
                     </kendo-datepicker>
                     <span asp-validation-for="OrderDate"></span>
                 </div>
                 <p>
-                    <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+                    <button class="k-button k-button-primary" type="submit">Submit</button>
                 </p>
             </fieldset>
         </form>
@@ -445,12 +452,12 @@ For example, you can implement a `GreaterDateAttribute` attribute to check wheth
                     <span asp-validation-for="ShippedDate"></span>
                 </div>
                 <p>
-                    <button class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md" type="submit">Submit</button>
+                    <button class="k-button k-button-primary" type="submit">Submit</button>
                 </p>
             </fieldset>
         </form>
     ```
-    ```Script
+    ```JS script
         <script>
             $(function () {
                 $("#exampleForm").kendoValidator({
@@ -581,7 +588,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
 	}
 
 	public class CustomProductNameValidationAttribute : ValidationAttribute
-	{		
+	{
 		public override bool IsValid(object value)
 		{
 			var productName = (string)value;
@@ -593,7 +600,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
 		}
 	}
 ```
-```HtmlHelper_View
+```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -613,7 +620,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
         )
     )
 ```
-```TagHelper_View
+```TagHelper
     @addTagHelper *, Kendo.Mvc
 
     <kendo-grid name="grid">
@@ -645,7 +652,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
         <scrollable enabled="true"/>
     </kendo-grid>
 ```
-```Script
+```JS script
     <script type="text/javascript">
         // Register custom validation rules after the Grid declaration.
         $(document).ready( function () {
@@ -684,11 +691,11 @@ The following example shows how to implement a `CustomProductNameValidation` att
         {
             var productName = (string) value;
             if (!string.IsNullOrEmpty(productName))
-	        {                
+	        {
 		        return Regex.IsMatch(productName, "^[A-Z]");
             }
-            return true;            
-        }        
+            return true;
+        }
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
@@ -697,7 +704,7 @@ The following example shows how to implement a `CustomProductNameValidation` att
                 ErrorMessage = ErrorMessage,
                 ValidationType = "productnamevalidation"
             };
-        }        
+        }
     }
 ```
 ```View

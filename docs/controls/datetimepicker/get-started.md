@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DateTimePicker Documentation - Getting Started with the DateTimePicker
 description: "Get started with the jQuery DateTimePicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["datetimepicker"]
 slug: getting_started_kendoui_datetimepicker_widget
 position: 1
 ---
@@ -98,8 +99,3 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 * [JavaScript API Reference of the jQuery DateTimePicker](/api/javascript/ui/datetimepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

@@ -2,6 +2,7 @@
 title: Height
 page_title: Height
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to apply different heights to the Grid."
+components: ["grid"]
 slug: height_aspnetcore_grid
 position: 1
 ---
@@ -21,14 +22,16 @@ To set the height of the Grid, use any of the following approaches:
 
 When the height of the Grid is set, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected height of the Grid. That is why if you change the height of the Grid through JavaScript after you create the Grid, you have to call the [`resize` method](https://docs.telerik.com/kendo-ui/api/javascript/kendo/methods/resize) afterwards. In this way the Grid recalculates the height of its data area.
 
-        var gridWidget = $("#GridID").data("kendoGrid");
+```JS
+    var gridWidget = $("#GridID").data("kendoGrid");
 
-        // Apply the new height and trigger the layout readjustment.
-        gridWidget.wrapper.height(800);
-        gridWidget.resize();
+    // Apply the new height and trigger the layout readjustment.
+    gridWidget.wrapper.height(800);
+    gridWidget.resize();
 
-        // Force the layout readjustment without setting a new height.
-        gridWidget.resize(true);
+    // Force the layout readjustment without setting a new height.
+    gridWidget.resize(true);
+```
 
 In specific scenarios you can set a height style to the scrollable data area either by using JavaScript or external CSS which is a `div.k-grid-content` element. In such cases avoid setting a height to the Grid.
 
@@ -61,11 +64,13 @@ In specific scenarios you can set a height style to the scrollable data area eit
 
 You can make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid by [removing the default data area height]({% slug htmlhelpers_grid_aspnetcore_scrolling %}#scrolling-overview). Instead of the `GridID`, you can also use the `.k-grid` class to target all Grid instances.
 
-    #GridID .k-grid-content
-    {
-        min-height: 100px;
-        max-height: 400px;
-    }
+```CSS
+#GridID .k-grid-content
+{
+    min-height: 100px;
+    max-height: 400px;
+}
+```
 
 ## Enabling Auto-Resizing
 
@@ -76,10 +81,12 @@ You can make the Grid expand and shrink vertically according to the number of it
   * If the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, you do not need to call the `resize` method because these widgets will execute it automatically. Also, it is not necessary to apply the method if you use locked columns.
   * If the vertical space that is available for the Grid depends on a custom resizing of the layout, which is controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked columns.
 
-    $(window).resize(function (e) {
-        var grid = $("#GridID").data("kendoGrid");
-        grid.resize();
-    });
+    ```JS
+        $(window).resize(function (e) {
+            var grid = $("#GridID").data("kendoGrid");
+            grid.resize();
+        });
+    ```
 
 ## Configuring the Loading Indicator
 
@@ -89,6 +96,9 @@ Internally, the Grid uses the [`kendo.ui.progress`](https://docs.telerik.com/ken
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Scrolling by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
 * [Server-Side API](/api/grid)

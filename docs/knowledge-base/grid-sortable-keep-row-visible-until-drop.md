@@ -8,6 +8,7 @@ position:
 tags: grid, sortable, dragging, row, visible, reorder
 ticketid: 1409839
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

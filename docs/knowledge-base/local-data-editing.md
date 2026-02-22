@@ -5,9 +5,9 @@ description: "Learn how to implement editing with local data in a Kendo UI Diagr
 slug: howto_editlocaladata_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/local-data-editing
 tags: kendo, jquery, diagram, implement, local, data, editing
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment
@@ -259,7 +259,7 @@ You need this functionality because assigning a non-default `id` value for the n
 
     <div id="diagram"></div>
     <div id="changes">
-      <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" data-bind="click:showChanges"><span class="k-button-text">Show changes</span></button>
+      <button type="button" class="k-button" data-bind="click:showChanges"><span class="k-button-text">Show changes</span></button>
       <div data-bind="visible:visible">
         Deleted Shapes:
         <div data-bind="source: shapes.deleted" data-template="shapeItemTemplate">

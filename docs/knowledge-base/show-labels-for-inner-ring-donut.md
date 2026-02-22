@@ -5,9 +5,9 @@ description: "Learn how to show labels over nested rings of a Kendo UI Donut Cha
 previous_url: /controls/charts/how-to/show-labels-for-inner-ring-donut, /controls/charts/how-to/appearance/show-labels-for-inner-ring-donut
 slug: howto_showlabelsovernesteddonuts_charts
 tags: chart, show, labels, over, nested, donuts
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -44,7 +44,7 @@ The following example demonstrates how to configure such behavior.
 
     <div id="example">
       <div class="demo-section k-content wide">
-        <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+        <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
       </div>
       <script>
         function createChart() {

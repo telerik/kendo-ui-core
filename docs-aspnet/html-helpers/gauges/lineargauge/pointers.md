@@ -2,6 +2,7 @@
 title: Pointers
 page_title: Pointers
 description: "Learn the Options of the Pointers of the Telerik UI LinearGauge component for {{ site.framework }}."
+components: ["lineargauge"]
 slug: pointers_lineargaugehelper_aspnetcore
 position: 3
 ---

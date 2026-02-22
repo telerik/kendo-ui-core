@@ -4,10 +4,10 @@ page_title: How To Clear Filter in the MultiSelect When AutoClose is False
 description: "Learn how to clear filter in the MultiSelect when autoClose is false."
 slug: multiselect-autoclose-clear-filter
 tags: telerik, kendo, jquery, multiselect, filter, close, clear
-component: multiselect
 ticketid: 1558414
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment
@@ -44,11 +44,10 @@ I want to set [`autoClose`](/api/javascript/ui/multiselect/configuration/autoclo
               e.sender.wrapper.find('input').val("");
               e.sender.dataSource.filter({});
             },
-            dataSource: {
-              type: "odata",                   
+            dataSource: {              
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                  url: "https://demos.telerik.com/service/v2/core/Products",
                 }
               }
             }

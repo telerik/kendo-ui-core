@@ -2,6 +2,7 @@
 title: Selection
 page_title: jQuery ListView Documentation - Selection
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement its selection functionality."
+components: ["listview"]
 slug: selection_kendoui_listview
 position: 4
 ---
@@ -55,8 +56,7 @@ The following example demonstrates the full implementation of the suggested appr
 var dataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
         }
     },
     pageSize: 3

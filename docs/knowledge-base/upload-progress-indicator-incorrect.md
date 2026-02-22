@@ -6,7 +6,7 @@ slug: upload_progress_indicator_incorrectly
 tags: telerik, progress, kendoui, jquery, upload, progress, indicator, incorrectly, renders  
 type: troubleshooting
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

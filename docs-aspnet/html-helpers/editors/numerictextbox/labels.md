@@ -2,6 +2,7 @@
 title: Labels
 page_title: Labels
 description: "Learn the basics when working with Labels for the Telerik UI NumericTextBox for {{ site.framework }}."
+components: ["numerictextbox"]
 slug: htmlhelpers_labels_numerictextbox
 position: 3
 ---

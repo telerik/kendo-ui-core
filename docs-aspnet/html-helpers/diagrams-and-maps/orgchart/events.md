@@ -2,13 +2,14 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["orgchart"]
 slug: orgchart_events
 position: 5
 ---
 
 # Events
 
-The OrgChart exposes a variety of [events](api/kendo.mvc.ui.fluent/orgcharteventbuilder) that you can handle and further customize the behavior of the UI component.
+The OrgChart exposes a variety of [events](/api/kendo.mvc.ui.fluent/orgcharteventbuilder) that you can handle and further customize the behavior of the UI component.
 
 For a complete example on the OrgChart events, refer to the [OrgChart Events Demo](https://demos.telerik.com/{{ site.platform }}/orgchart/events).
 

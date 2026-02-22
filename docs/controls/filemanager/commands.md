@@ -2,6 +2,7 @@
 title: Commands
 page_title: jQuery FileManager Documentation - FileManager Commands
 description: "Get familiar with the Commands in the FileManager and how you can use them."
+components: ["filemanager"]
 slug: commands_kendoui_filemanager_widget
 position: 10
 ---
@@ -37,24 +38,24 @@ You can use the command to add a new folder in the FileManager.
           schema: kendo.data.schemas.filemanager,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
               method: "POST"
             },
             create: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
               method: "POST"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
               method: "POST"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
               method: "POST"
             }
           }
         },
-        uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload",
+        uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload",
 
       });
 
@@ -81,26 +82,26 @@ Use the command to open the popup for renaming a folder or for start editing the
     $("#filemanager").kendoFileManager({
       dataSource: {
         schema: kendo.data.schemas.filemanager,
-        transport: {
-          read: {
-            url: "/kendo-ui/service/FileManager/Read",
-            method: "POST"
-          },
-          create: {
-            url: "/kendo-ui/service/FileManager/Create",
-            method: "POST"
-          },
-          update: {
-            url: "/kendo-ui/service/FileManager/Update",
-            method: "POST"
-          },
-          destroy: {
-            url: "/kendo-ui/service/FileManager/Destroy",
-            method: "POST"
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
+              method: "POST"
+            },
+            create: {
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
+              method: "POST"
+            },
+            update: {
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
+              method: "POST"
+            },
+            destroy: {
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
+              method: "POST"
+            }
           }
-        }
       },
-      uploadUrl: "/kendo-ui/service/FileManager/Upload"  
+      uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload",
     });
 
     function renameFolder() {
@@ -250,24 +251,24 @@ The sort command provides an option to sort the items in the FileManager by spec
           schema: kendo.data.schemas.filemanager,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
               method: "POST"
             },
             create: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
               method: "POST"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
               method: "POST"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
               method: "POST"
             }
           }
         },
-        uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload"
+        uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload"
       });
 
       $('#sort').on('click', function(){
@@ -300,24 +301,24 @@ The command allows you to perform search on the currently rendered files and fol
           schema: kendo.data.schemas.filemanager,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
               method: "POST"
             },
             create: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
               method: "POST"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
               method: "POST"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
               method: "POST"
             }
           }
         },
-        uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload"
+        uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload"
       });
 
       $('#search').on('click', function(){
@@ -351,19 +352,19 @@ You can switch between the `grid` and the `list` view to display the files in th
         schema: kendo.data.schemas.filemanager,
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
             method: "POST"
           },
           create: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
             method: "POST"
           },
           update: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
             method: "POST"
           },
           destroy: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
             method: "POST"
           }
         }
@@ -401,24 +402,24 @@ You can use the command to pass in the options the dialog that should be opened.
         schema: kendo.data.schemas.filemanager,
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
             method: "POST"
           },
           create: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
             method: "POST"
           },
           update: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
             method: "POST"
           },
           destroy: {
-            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+            url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
             method: "POST"
           }
         }
       },
-      uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload"
+      uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload"
     });
 
     $('#btn').on('click', function(){
@@ -452,24 +453,24 @@ The toggle pane command opens the preview pane for reviewing the file details.
           schema: kendo.data.schemas.filemanager,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
               method: "POST"
             },
             create: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
               method: "POST"
             },
             update: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
               method: "POST"
             },
             destroy: {
-              url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+              url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
               method: "POST"
             }
           }
         },
-        uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload",
+        uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload",
         previewPane: {
           singleFileTemplate: kendo.template($("#preview-template").html())
         },

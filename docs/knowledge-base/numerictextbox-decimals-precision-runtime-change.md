@@ -7,6 +7,7 @@ slug: numerictextbox-decimals-precision-runtime-change
 tags: numerictextbox, decimals, precision, runtime, change
 ticketid: 1383068
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

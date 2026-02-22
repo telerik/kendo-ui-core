@@ -2,6 +2,7 @@
 title: Remote Data
 page_title: jQuery FileManager Documentation - Remote Binding in FileManager
 description: "Get understanding in the Remote Binding in FileManager."
+components: ["filemanager"]
 slug: remotedata_kendoui_filemanager_widget
 position: 2
 ---
@@ -10,7 +11,7 @@ position: 2
 
 The Kendo UI FileManager provides a built-in DataSource which allow you to quickly set up and implement a remote data-binding functionality.
 
-To bind the FileManager to remote data, specify the `dataSource` option and supply the object with the needed endpoints for `read`, `create`, `update` and `destroy` operations. The following example demonstrates such implementation, and the actual endpoints configurations could be found in [here](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Controllers/FileManagerController.cs):
+To bind the FileManager to remote data, specify the `dataSource` option and supply the object with the needed endpoints for `read`, `create`, `update` and `destroy` operations. The following example demonstrates such implementation, and the actual endpoints configurations could be found in [here](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-core/KendoCRUDService/KendoCRUDService/Controllers/FileManagerController.cs):
 
 ```
  <div id="filemanager"></div>

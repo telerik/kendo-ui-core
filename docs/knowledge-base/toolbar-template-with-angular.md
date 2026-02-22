@@ -5,9 +5,9 @@ description: "Learn how to create a custom ToolBar template in an AngularJS appl
 previous_url: /kendo-mvc/controls/data-management/grid/how-to/AngularJS/toolbar-template-with-angular, /controls/data-management/grid/how-to/AngularJS/toolbar-template-with-angular
 slug: howto_create_custom_toolbar_templates_grid
 tags: create, custom, toolbar, template, grid, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -43,7 +43,7 @@ The following example demonstrates how to create a custom ToolBar template in An
 
 > The example loads Kendo UI 2023.3.1010 version.
 
-```dojo
+```
     <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/angular.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2023.3.1010/js/kendo.all.min.js"></script>
 
@@ -51,7 +51,7 @@ The following example demonstrates how to create a custom ToolBar template in An
       <div ng-controller="MyCtrl">
 
         <script id="template" type="text/x-kendo-template">
-            <button id="textButton" ng-click="toolbarClick()" data-role="button" class="k-button k-button-sm k-rounded-md k-button-solid k-button-solid-base" type="button" role="button">
+            <button id="textButton" ng-click="toolbarClick()" data-role="button" class="k-button k-button-sm k-rounded-md" type="button" role="button">
               <span class="k-button-text">Command</span>
           </button>
         </script>

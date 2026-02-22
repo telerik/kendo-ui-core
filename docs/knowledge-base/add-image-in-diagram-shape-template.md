@@ -5,6 +5,7 @@ description: Learn how to add an image to the shape template of the Kendo UI for
 type: how-to
 slug: add-image-in-diagram-shape-template
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment
@@ -190,7 +191,7 @@ The following example shows how to implement the desired scenario by using the [
             var dataItem = options.dataItem;
 
             g.append(new dataviz.diagram.Image({
-                source: "../content/dataviz/diagram/people/antonio.jpg",
+                source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/antonio.jpg",
                 x: 3,
                 y: 3,
                 width: 68,
@@ -232,5 +233,5 @@ The following example shows how to implement the desired scenario by using the [
 
 * [Overview of the Kendo UI for jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [Using the API of the jQuery Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/api)
-* [JavaScript API Reference of the jQuery Diagram](/api/javascript/ui/diagram)
+* [JavaScript API Reference of the jQuery Diagram](/api/javascript/dataviz/ui/diagram)
 * [jQuery Diagram Product Page](https://www.telerik.com/kendo-jquery-ui/diagram)

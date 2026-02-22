@@ -17,7 +17,7 @@ describe("kendo.ui.NumericTextBox initialization", function() {
         let textbox = new NumericTextBox(input),
             wrapper = textbox.wrapper;
 
-        assert.equal(wrapper[0].className, "k-numerictextbox k-input k-input-solid k-input-md k-rounded-md");
+        assert.equal(wrapper[0].className, "k-numerictextbox k-input");
 
     });
 
@@ -31,16 +31,12 @@ describe("kendo.ui.NumericTextBox initialization", function() {
         assert.isOk(upArrow.hasClass("k-button"));
         assert.equal(upArrow.attr("tabindex"), "-1");
         assert.isOk(upArrow.hasClass("k-icon-button"));
-        assert.isOk(upArrow.hasClass("k-button-solid"));
-        assert.isOk(upArrow.hasClass("k-button-solid-base"));
         assert.isOk(upArrow.hasClass("k-spinner-increase"));
         assert.equal(upArrow.attr("aria-label"), textbox.options.upArrowText);
 
         assert.isOk(downArrow.hasClass("k-button"));
         assert.equal(downArrow.attr("tabindex"), "-1");
         assert.isOk(downArrow.hasClass("k-icon-button"));
-        assert.isOk(downArrow.hasClass("k-button-solid"));
-        assert.isOk(downArrow.hasClass("k-button-solid-base"));
         assert.isOk(downArrow.hasClass("k-spinner-decrease"));
         assert.equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
 

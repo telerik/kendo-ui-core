@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn how to use templates in the Telerik UI PanelBar component for {{ site.framework }}."
+components: ["panelbar"]
 slug: htmlhelpers_panelbar_templates_aspnetcore
 position: 5
 ---

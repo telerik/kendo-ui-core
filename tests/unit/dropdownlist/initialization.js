@@ -1244,7 +1244,7 @@ describe("kendo.ui.DropDownList initialization", function() {
         assert.isOk(!optionLabel.hasClass("k-hover"));
     });
 
-    it("applies k-list-md by default to its popup list element", function() {
+    it("does not apply k-list-md by default when size is undefined", function() {
         let dropdownlist = new DropDownList(input, {
             optionLabel: "Select..."
         });
@@ -1252,7 +1252,7 @@ describe("kendo.ui.DropDownList initialization", function() {
         dropdownlist.open();
 
         assert.isOk(dropdownlist.list.hasClass("k-list"));
-        assert.isOk(dropdownlist.list.hasClass("k-list-md"));
+        assert.isNotOk(dropdownlist.list.hasClass("k-list-md"));
     });
 
     it("applies custom size class when set", function() {
@@ -1560,7 +1560,7 @@ describe("kendo.ui.DropDownList initialization", function() {
             footerTemplate: () => "footer"
         });
 
-        assert.isOk(dropdownlist.noData.next().hasClass("k-list-footer"));
+        assert.isOk(dropdownlist.noData.siblings(".k-list-footer").length);
     });
 
     it("hides noData template if any data", function() {
@@ -1766,5 +1766,70 @@ describe("kendo.ui.DropDownList initialization", function() {
         });
 
         assert.equal(dropdownlist.label.element.text(), "some label");
+    });
+
+    it ("Should set readonly state", function() {
+        let dropdownlist = new DropDownList(input, {
+            dataValueField: "name",
+            dataTextField: "name",
+            readonly: true,
+            dataSource: {
+                data: [
+                    { name: "item1", value: "1" },
+                    { name: "item2", value: "2" },
+                    { name: "item3", value: "3" }
+                ],
+                group: "name"
+            },
+            label: () => `some label`
+        });
+
+        assert.isOk(dropdownlist.wrapper.attr("aria-readonly", true));
+        assert.isOk(dropdownlist.element.attr("readonly"));
+        assert.equal(dropdownlist.options.readonly, true);
+    });
+
+    it ("Should set readonly state from attribute", function() {
+        input = $("<input readonly='readonly' class='test' style='width: 200px' />").appendTo(Mocha.fixture);
+
+        let dropdownlist = new DropDownList(input, {
+            dataValueField: "name",
+            dataTextField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", value: "1" },
+                    { name: "item2", value: "2" },
+                    { name: "item3", value: "3" }
+                ],
+                group: "name"
+            },
+            label: () => `some label`
+        });
+
+         assert.isOk(dropdownlist.wrapper.attr("aria-readonly", true));
+         assert.isOk(dropdownlist.element.attr("readonly"));
+         assert.equal(dropdownlist.options.readonly, true);
+    });
+
+    it ("Should take readonly option with higher precedent over attribute", function() {
+        input = $("<input readonly='readonly' class='test' style='width: 200px' />").appendTo(Mocha.fixture);
+
+        let dropdownlist = new DropDownList(input, {
+            dataValueField: "name",
+            dataTextField: "name",
+            readonly: false,
+            dataSource: {
+                data: [
+                    { name: "item1", value: "1" },
+                    { name: "item2", value: "2" },
+                    { name: "item3", value: "3" }
+                ],
+                group: "name"
+            },
+            label: () => `some label`
+        });
+
+         assert.isOk(dropdownlist.wrapper.attr("aria-readonly", false));
+         assert.equal(dropdownlist.options.readonly, false);
     });
 });

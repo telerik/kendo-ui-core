@@ -5,9 +5,9 @@ description: "Learn how to create an external editor form in a Kendo UI for jQue
 previous_url: /asp-mvc/controls/scheduling/scheduler/how-to/external-editor-form, /controls/scheduling/scheduler/how-to/external-editor-form, /controls/scheduling/scheduler/how-to/editing/external-editor-form
 slug: howto_create_external_editor_form_scheduler
 tags: telerik, kendo, jquery, scheduler, create, external, editor, form
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -56,16 +56,16 @@ The following example demonstrates how to achieve the desired scenario.
       End:
       <input data-role="datetimepicker" data-bind="value: end" />
       </label>
-    <button id="save" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">Save</button>
-    <button id="cancel" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">Cancel</button>
+    <button id="save" class="k-button k-button-rectangle">Save</button>
+    <button id="cancel" class="k-button k-button-rectangle">Cancel</button>
     </script>
 
     <script>
       $(function() {
-        
+
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
             "day",
@@ -82,24 +82,26 @@ The following example demonstrates how to achieve the desired scenario.
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                  type: "POST",
+                  contentType: "application/json"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                  type: "POST",
+                  contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                  type: "POST",
+                  contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

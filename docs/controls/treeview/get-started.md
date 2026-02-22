@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TreeView Documentation - Getting Started with the TreeView
 description: "Get started with the jQuery TreeView by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["treeview"]
 slug: getting_started_kendoui_treeview_component
 position: 1
 ---
@@ -157,8 +158,4 @@ Now, you can change the default animations for expanding and collapsing the Tree
 * [JavaScript API Reference of the jQuery TreeView](/api/javascript/ui/treeview)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -2,6 +2,7 @@
 title: Tools
 page_title: Tools
 description: "Learn which tools are available in the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_tools_aspnetcore
 position: 3
 ---
@@ -348,7 +349,7 @@ To extend the Editor with a custom tool:
 
 1. Create a custom command through the `kendo.ui.editor.Command.extend` method
 
-    ```
+    ```JS
          var MyCustomCommand = kendo.ui.editor.Command.extend({
            exec: function (e) {
               // Custom Logic.
@@ -358,12 +359,12 @@ To extend the Editor with a custom tool:
 
 1. Insert the Command in the Editor widget object instance.
 
-    ```
+    ```JS
         kendo.ui.editor.MyCustomCommand = MyCustomCommand;
     ```
 1. Register the tool by using the built-in `registerTool()` method.
 
-    ```
+    ```JS
           kendo.ui.editor.EditorUtils.registerTool(
            'MyCustomCommand', new kendo.ui.editor.Tool({
                command: MyCustomCommand, 
@@ -419,16 +420,47 @@ To extend the Editor with a custom tool:
 
 1. Within an event handler in the custom tool, execute the required command by using the [`exec()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor/methods/exec) method.
 
-    ```
-        <script>
-            function onClick(e){
-            
-                $("#editor").getKendoEditor().exec("ToggleFullScreen");
-            }
-        </script>
+    ```JS
+    <script>
+        function onClick(e){
+        
+            $("#editor").getKendoEditor().exec("ToggleFullScreen");
+        }
+    </script>
     ```
 
 > Note that the tool name should correspond with the registered command.
+
+## Toolbar Overflow
+
+When the [`Toolbar()`](/api/kendo.mvc.ui.fluent/editorresizablesettingsbuilder#toolbarsystemboolean) option of the `Resizable()` configuration is enabled, the Editor will detect changes in the viewport's width and hide the overflowing controls in the tool overflow popup. Also, you can use the `Toolbar()` properties to customize the default overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Toolbar()` configuration.
+
+
+```Razor
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .Resizable(r=> r.Toolbar(t => t
+               .Mode(ToolBarOverflowMode.Scroll)
+               .ScrollButtons(ScrollButtonsType.Auto)
+               .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+               .ScrollDistance(50))
+         )
+        ... // Additional configuration.
+      )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+        <resizable>
+            <toolbar mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </resizable>
+    </kendo-editor>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
 
 ## See Also
 

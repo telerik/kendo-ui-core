@@ -5,9 +5,9 @@ description: "Learn how to expand the Kendo UI TabStrip widget to 100% height an
 slug: howto_expandto100percentheightautoresize_tabstrip
 previous_url: /controls/navigation/tabstrip/how-to/expand-height
 tags: telerik, kendo, jquery, tabstrip, expand, to, 100%, percent, height, and, autoresize
-component: tabstrip
 type: how-to
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

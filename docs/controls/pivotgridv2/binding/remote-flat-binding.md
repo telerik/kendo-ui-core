@@ -2,6 +2,7 @@
 title: Remote Flat Binding
 page_title: jQuery PivotGridV2 Documentation - Remote Flat Data Binding
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to bind it to a local array of data."
+components: ["pivotgridv2"]
 slug: remote_flat_binding_kendoui_pivotgridv2
 position: 5
 ---
@@ -32,7 +33,7 @@ The following code snippet showcases how you can use the [`transport`](/api/java
 $("#pivotgrid").kendoPivotGridV2({
     dataSource: {
 		transport: {
-			read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+			read: "https://demos.telerik.com/service/v2/core/Products"
 		}
         ......
     }

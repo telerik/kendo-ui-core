@@ -2,7 +2,8 @@
 title: Overview
 page_title: Slider Documentation | Slider Accessibility
 description: "Get started with the {{ site.product }} Slider and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_slider
+components: ["slider"]
+slug: htmlhelpers_slider_accessibility
 position: 1
 ---
 

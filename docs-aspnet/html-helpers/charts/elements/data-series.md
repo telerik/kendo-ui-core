@@ -2,6 +2,7 @@
 title: Data Series
 page_title: Data Series
 description: "Learn how to plot one or more specified data series in the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_dataseries_aspnetcore
 ---
 

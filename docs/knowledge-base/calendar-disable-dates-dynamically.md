@@ -6,6 +6,7 @@ type: how-to
 slug: calendar-disable-dates-dynamically
 tags: calendar, disable, dates, dynamically, javascript,js
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

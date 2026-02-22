@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery OrgChart Documentation - Getting Started with the OrgChart
 description: "Get started with the jQuery OrgChart by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["orgchart"]
 slug: getting_started_kendoui_orgchart_component
 position: 1
 ---
@@ -54,6 +55,7 @@ In this step, you will initialize the OrgChart from the `<div>` element.
     <script>
     $(document).ready(function() {
         $("#orgchart").kendoOrgChart();
+    });
     </script>
 ```
 
@@ -122,8 +124,4 @@ The OrgChart allows you to specify colors for the displayed cards. In this step,
 * [JavaScript API Reference of the OrgChart](/api/javascript/ui/orgchart)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

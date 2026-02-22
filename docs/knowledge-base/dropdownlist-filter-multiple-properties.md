@@ -7,7 +7,7 @@ slug: dropdownlist-filter-multiple-properties
 tags: dropdownlist
 ticketid: 1138305
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment
@@ -54,8 +54,7 @@ How can I filter the DropDownList items by multiple properties?
                 dataSource: {
                     transport: {
                         read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Customers",
+                            url: "https://demos.telerik.com/service/v2/core/Customers",
                         }
                     }
                 },

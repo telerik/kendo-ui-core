@@ -8,6 +8,7 @@ position:
 tags: grid, header, multicolumn, title, change, column
 ticketid: 1433557
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

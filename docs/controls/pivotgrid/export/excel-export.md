@@ -2,6 +2,7 @@
 title: Excel
 page_title: jQuery PivotGrid Documentation - Excel Export
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to export a Kendo UI PivotGrid to Excel."
+components: ["pivotgrid"]
 slug: excelexport_functionality_pivotgrid
 position: 1
 ---
@@ -40,7 +41,7 @@ If the JSZip JavaScript library is not found, an exception is thrown when you cl
 
 ### Excel Export is not working in Internet Explorer and Safari
 
-Internet Explorer 10 and earlier and Safari do not support file saving. These browsers require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/pivotgrid/configuration/excel.proxyurl) option.
+Internet Explorer 10 and earlier and Safari do not support file saving. These browsers require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/pivotgrid/configuration/excel#excelproxyurl) option.
 
     <div id="grid"></div>
     <script>
@@ -51,9 +52,8 @@ Internet Explorer 10 and earlier and Safari do not support file saving. These br
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },

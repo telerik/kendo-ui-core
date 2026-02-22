@@ -5,9 +5,9 @@ description: "Learn how to create a custom To-Do view for a Kendo UI for jQuery 
 previous_url: /controls/scheduling/scheduler/how-to/custom-todo-view, /controls/scheduling/scheduler/how-to/custom-views/custom-todo-view
 slug: howto_create_custom_todo_view
 tags: telerik, kendo, jquery, scheduler, create, custom, todo, views
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

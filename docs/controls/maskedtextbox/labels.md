@@ -2,6 +2,7 @@
 title: Labels
 page_title: jQuery Labels for MaskedTextBox Documentation
 description: "Learn how to create and initialize Labels for the MaskedTextBox."
+components: ["maskedtextbox"]
 slug: labels_maskedtextbox
 position: 3
 ---

@@ -6,6 +6,7 @@ page_title: Validating a From with the Validator Component
 slug: validator-basic-form-validation
 tags: aspnet, core, dotnet-core, kendo, kendo-ui, form, validation
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

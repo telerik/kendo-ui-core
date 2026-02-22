@@ -2,6 +2,7 @@
 title: Server Filtering
 page_title: jQuery ComboBox Documentation - Server Filtering
 description: "Get started with the jQuery ComboBox by Kendo UI and configure its server-side filtering."
+components: ["combobox"]
 slug: server_filtering_kendoui_combobox_widget
 position: 5
 ---
@@ -32,7 +33,7 @@ To bind the ComboBox to the selected data item only:
 
 1. Send the selected value to the server.
 1. Return only the matching data item.
-1. Use the  [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
+1. Use the  [`data`](/api/javascript/data/datasource/configuration/transport.read#transportreaddata) callback of the DataSource.
 
 ```javascript
     data: function() {

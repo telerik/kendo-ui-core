@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ListView component for {{ site.framework }}."
+components: ["listview"]
 previous_url: /helpers/html-helpers/listview, /helpers/data-management/listview/overview, /helpers/data-management/listview/configuration
 slug: htmlhelpers_listview_aspnetcore
 position: 0
@@ -30,7 +31,7 @@ The following example demonstrates how to define the ListView.
 
 
 ```HtmlHelper
-    @(Html.Kendo().ListView() 
+    @(Html.Kendo().ListView()
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
         .ClientTemplateId("template") // This template will be used for rendering the ListView items.
@@ -54,7 +55,7 @@ The following example demonstrates how to define the ListView.
     </kendo-listview>
 ```
 {% endif %}
-```Template
+```JS Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">
             <h3>#=ProductName#</h3>
@@ -74,7 +75,7 @@ The following example demonstrates how to define the ListView.
         {
             productService = service;
         }
-                                      
+
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetProducts().ToDataSourceResult(request));
@@ -147,7 +148,7 @@ The following example demonstrates the basic configuration for the ListView.
     </kendo-listview>
 ```
 {% endif %}
-```Templates
+```JS Templates
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product-view k-widget">
             <dl>
@@ -172,7 +173,7 @@ The following example demonstrates the basic configuration for the ListView.
             <dl>
                 <dt>Product Name</dt>
                 <dd>
-                    <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                    <span class="k-textbox k-input">
                         <input type="text" class="k-input-inner" data-bind="value:ProductName" name="ProductName" required="required" validationMessage="required" />
                     </span>
                     <span data-for="ProductName" class="k-invalid-msg"></span>
@@ -191,27 +192,27 @@ The following example demonstrates the basic configuration for the ListView.
                 <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
             </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
+                <a role="button" class="k-button k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
+                <a role="button" class="k-button k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
             </div>
         </div>
     </script>
 ```
- 
+
 
 ## Functionality and Features
 
 
 |Feature|Description|
 |-------|-----------|
-| [Ajax binding]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %}) | You can bind the ListView to an [Ajax DataSource](https://docs.telerik.com/aspnet-core/html-helpers/datasource/types#ajax-datasource) which formats the request and parses the server response out-of-the-box. | 
+| [Ajax binding]({% slug htmlhelpers_listview_aspnetcore_ajaxbinding %}) | You can bind the ListView to an [Ajax DataSource](https://docs.telerik.com/aspnet-core/html-helpers/datasource/types#ajax-datasource) which formats the request and parses the server response out-of-the-box. |
 | [Editing]({% slug htmlhelpers_listview_aspnetcore_editing %}) | To customize the editing functionality of the ListView, configure the provided editing templates. |
 | [Paging]({% slug htmlhelpers_listview_aspnetcore_paging %}) | The ListView component supports the paging functionality. |
 | [Templates]({% slug htmlhelpers_listview_aspnetcore_templates%}) | To customize the visualization of the ListView items, use the provided [Kendo templates](https://docs.telerik.com/kendo-ui/framework/templates/overview). |
 | [Scroll modes]({% slug htmlhelpers_listview_aspnetcore_scrolling %}) | ListView enables you to use the default scroll mode or utilize endless scrolling. |
 | [Selection]({% slug htmlhelpers_listview_aspnetcore_selection %}) | Choose between single or multiple selection mode. |
 | [Globalization]({% slug globalization_htmlhelpers_listview %}) | The ListView component allows you to adapt your apps for international users by translating the component messages and applying a right-to-left layout. |
-| [Accessibility]({% slug accessibility_htmlhelpers_listview %}) | The ListView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_listview_accessibility %}) | The ListView is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

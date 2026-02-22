@@ -7,6 +7,7 @@ slug: pivotgridv2-hide-column-summaries
 tags: pivot, pivotgrid, hide, summary, column, databound, remove, footer, last column, last row
 ticketid: 1598659
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -46,7 +47,7 @@ To achieve the desired scenario, use the [`dataBound`](/api/javascript/ui/pivotg
                 catalog: "Adventure Works DW 2008R2",
                 cube: "Adventure Works"
               },
-              read: 'https://demos.telerik.com/olap/msmdpump.dll'
+              read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
             }
           },
           dataBound: function(e) {

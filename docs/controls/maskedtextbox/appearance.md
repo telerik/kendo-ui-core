@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery MaskedTextBox Documentation - MaskedTextBox Appearance
 description: "Learn how to apply different styling options to the MaskedTextBox widget."
+components: ["maskedtextbox"]
 slug: maskedtextbox_appearance
 position: 3
 ---
@@ -10,7 +11,7 @@ position: 3
 
 In this article, you will find information about the styling options and rendering of the Kendo UI MaskedTextBox.
 
-For a live example, visit the [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/styling).
+For a live example, visit the [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/appearance).
 
 ## Options
 

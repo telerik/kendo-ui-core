@@ -7,6 +7,7 @@ slug: chart-hide-navigator-during-export
 tags: chart, navigator, hide, export, exclude, excel, pdf, image
 ticketid: 1157749
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -68,7 +69,7 @@ To maintain the navigator settings after it was zoomed in or out:
       $("#stock-chart").kendoStockChart({
         pdf: {
           fileName: "Kendo UI Stock Chart Export.pdf",
-          proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+          proxyURL: "https://demos.telerik.com/service/v2/core/export"
         },
         dataSource: {
           transport: {

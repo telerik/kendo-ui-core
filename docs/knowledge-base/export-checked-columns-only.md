@@ -5,9 +5,9 @@ description: "Learn how to create Excel documents by exporting the checked colum
 previous_url: /controls/data-management/grid/how-to/excel/export-checked-columns-only
 slug: howto_export_checked_columns_only_grid
 tags: grid, export, checked, columns, only
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

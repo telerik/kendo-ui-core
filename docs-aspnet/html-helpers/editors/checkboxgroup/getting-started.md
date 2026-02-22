@@ -2,6 +2,7 @@
 title: Getting Started 
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} CheckBoxGroup component by following a complete step-by-step tutorial."
+components: ["checkboxgroup"]
 slug: checkboxgroup_getting_started
 position: 1
 ---
@@ -82,7 +83,7 @@ Use the CheckBoxGroup HtmlHelper {% if site.core %}or TagHelper{% endif %} to ad
 {% endif %}
 
 ## 3. Handle the CheckBoxGroup Events
-The CheckBoxGroup exposes various [events](/api/kendo.mvc.ui.fluent/checkboxbroupeventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Focus` and `Select` events to determine whether the user utilizes the [Keyboard Navigation](https://docs.telerik.com/aspnet-core/html-helpers/editors/checkboxgroup/accessibility/keyboard-navigation) feature.
+The CheckBoxGroup exposes various [events](/api/kendo.mvc.ui.fluent/checkboxgroupeventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Focus` and `Select` events to determine whether the user utilizes the [Keyboard Navigation](https://docs.telerik.com/aspnet-core/html-helpers/editors/checkboxgroup/accessibility/keyboard-navigation) feature.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

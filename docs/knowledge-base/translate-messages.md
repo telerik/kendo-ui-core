@@ -5,9 +5,9 @@ description: "Learn how to translate the messages of a Kendo UI PivotGrid compon
 previous_url: /controls/data-management/pivotgrid/how-to/translate-messages, /controls/data-management/pivotgrid/how-to/localization/translate-messages
 slug: howto_translate_pivotgrid_messages_pivotgrid
 tags: kendoui, pivotgrid, translate, messages
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -103,7 +103,7 @@ The following example demonstrates how to translate the messages of a Kendo UI P
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "https://demos.telerik.com/olap/msmdpump.dll"
+                        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"

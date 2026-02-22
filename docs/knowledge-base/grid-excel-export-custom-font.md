@@ -7,7 +7,7 @@ slug: grid-excel-export-custom-font
 tags: excel, export, grid, font, font-family, row, font-size
 ticketid: 1137653
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -56,9 +56,8 @@ excelExport: function(e) {
           allPages: true
         },
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            read: "https://demos.telerik.com/service/v2/core/Products"
           },
           pageSize: 7
         },

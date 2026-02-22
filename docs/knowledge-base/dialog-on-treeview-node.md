@@ -7,6 +7,7 @@ slug: dialog-on-treeview-node
 tags: dialog, treeview, node
 ticketid: 1139187
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -48,8 +49,7 @@ How can I display TreeView node data in a Kendo UI Dialog on node selection?
 		var data = new kendo.data.HierarchicalDataSource({
 			transport: {
 				read: {
-					url: "https://demos.telerik.com/kendo-ui/service/Employees",
-					dataType: "jsonp"
+					url: "https://demos.telerik.com/service/v2/core/Employees"
 				}
 			},
 			schema: {

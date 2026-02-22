@@ -2,6 +2,7 @@
 title: ActionSheet
 page_title: ActionSheet Overview
 description: "Learn the basics when working with the hybrid Telerik UI ActionSheet HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobileactionsheet/overview, /helpers/hybrid/mobileactionsheet
 slug: overview_hybridactionsheet_aspnetmvc
 ---

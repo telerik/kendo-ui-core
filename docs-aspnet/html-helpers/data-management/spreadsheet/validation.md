@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Learn how to set cell validation for the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_validation_aspnetcore
 position: 11
 ---

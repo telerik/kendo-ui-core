@@ -5,9 +5,9 @@ description: "Learn how to implement color-coded ranges in bars when working wit
 previous_url: /controls/charts/how-to/color-coded-bars, /controls/charts/how-to/appearance/color-coded-bars
 slug: howto_implementcolorcodedranges_inbars_charts
 tags: chart, bars, color, ranges, implement
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

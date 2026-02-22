@@ -6,6 +6,7 @@ page_title: How to Filter Grid Rows in Kendo UI Based on Checkbox Clicks
 slug: filter-kendo-ui-grid-by-checkbox
 tags: kendo ui, grid, filter, checkbox, datasource
 res_type: kb
+components: ["grid"]
 ticketid: 1660908
 ---
 

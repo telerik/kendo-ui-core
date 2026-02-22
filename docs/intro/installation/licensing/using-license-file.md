@@ -2,6 +2,7 @@
 title: Adding a License Key File (NPM)
 page_title: Setting Up the Kendo UI for jQuery License Key - Download and Installation by Using NMP registry
 description: "Get started with Kendo UI for jQuery and learn how to acquire the library from the NPM distribution channel and register the script license file."
+components: ["general"]
 slug: using-license-file
 published: True
 position: 3
@@ -12,6 +13,9 @@ position: 3
 This article describes how to activate the Kendo UI for jQuery components by installing a new personal license key and how to replace an already expired one.
 
 Kendo UI for jQuery is a professionally developed library distributed under a [commercial license](https://www.telerik.com/purchase/license-agreement/kendo-ui). Using any of the UI components from the Kendo UI for jQuery library requires either a commercial license key or an active trial license key.
+
+ > This license activation method is supported for all Kendo UI versions starting with 2025.1.211.
+
 
 To activate the Kendo UI for jQuery components:
 
@@ -43,24 +47,21 @@ Whenever you purchase a new Kendo UI for jQuery license or renew an existing one
 
 2. Install `@progress/kendo-licensing` as a project dependency by running:
 
-```sh
-npm install --save @progress/kendo-licensing
-```
-or
-
-```sh
-yarn add @progress/kendo-licensing
-```
+     ```sh npm
+     npm install --save @progress/kendo-licensing
+     ```
+     ```sh yarn
+     yarn add @progress/kendo-licensing
+     ```
 
 3. Activate the license by running:
 
-```sh
-npx kendo-ui-license activate
-```
-or
-```sh
-yarn run kendo-ui-license activate
-```
+     ```sh npm
+     npx kendo-ui-license activate
+     ```
+     ```sh yarn
+     yarn run kendo-ui-license activate
+     ```
 ## See Also
 
 * [Licensing Overview]({% slug licensing-overview %})

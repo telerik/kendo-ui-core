@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Signature component for {{ site.framework }}."
+components: ["signature"]
 slug: events_signature_aspnetcore
 position: 7
 ---
@@ -36,7 +37,7 @@ The following example demonstrates how to subscribe to events by handler name.
         on-change="signature_change"/>
 ```
 {% endif %}
-```script.js
+```JS script.js
     function signature_open() {
         // Handle the open event.
     }

@@ -5,9 +5,9 @@ description: "Learn how to create a checkbox filter menu functionality in the co
 previous_url: /controls/data-management/grid/how-to/checkbox-filter-menu, /web/grid/how-to/checkbox-filter-menu, /controls/data-management/grid/how-to/filtering/checkbox-filter-menu
 slug: howto_create_checkbox_filter_menu_grid
 tags: grid, create, checkbox, filter, menu
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -44,28 +44,30 @@ The following example demonstrates how to create a menu functionality based on a
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
             dataSource = new kendo.data.DataSource({
               transport: {
                 read: {
-                  url: crudServiceBaseUrl + "/Products",
-                  dataType: "jsonp"
+                  url: crudServiceBaseUrl + "/Products"
                 },
                 update: {
                   url: crudServiceBaseUrl + "/Products/Update",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 destroy: {
                   url: crudServiceBaseUrl + "/Products/Destroy",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 create: {
                   url: crudServiceBaseUrl + "/Products/Create",
-                  dataType: "jsonp"
+                  type: "POST",
+                  contentType: "application/json"
                 },
                 parameterMap: function (options, operation) {
                   if (operation !== "read" && options.models) {
-                    return { models: kendo.stringify(options.models) };
+                    return kendo.stringify(options.models);
                   }
                 }
               },
@@ -134,15 +136,16 @@ The following example demonstrates how to create a menu functionality based on a
               value: input.value
             };
           });
-          if (fieldFilters.length) {
+          if (fieldFilters.length > 0) {
             removeFiltersForField(filter, field);
             filter.filters.push({
               logic: "or",
-              filters: fieldFilters
+              filters: fieldFilters,
             });
             dataSource.filter(filter);
+          } else if (fieldFilters.length == 0) {
+            dataSource.filter([]);
           }
-          popup.close();
         });
       }
 

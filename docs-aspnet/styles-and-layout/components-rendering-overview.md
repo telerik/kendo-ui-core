@@ -2,6 +2,7 @@
 title: Components Rendering
 page_title: Components Rendering Overview
 description: "Learn about the rendering of the {{ site.product }} components and their appearance options."
+components: ["general"]
 slug: components_rendering_overview
 position: 0
 ---
@@ -54,7 +55,7 @@ The `ThemeColor` property controls the color used to style the component. The pr
 The following example shows how a Button with `Solid` fill mode and `Base` theme color is rendered:
 
 ```html
-<button type="button" class="k-button k-button-solid k-button-solid-base">
+<button type="button" class="k-button">
     <span class="k-button-text">Text</span>
 </button>
 ```
@@ -98,7 +99,7 @@ The `Shape` property controls the shape of the component. The structure of the C
 The following example shows a Badge with `rectangle` shape:
 
 ```html
-<span class="k-badge k-badge-solid k-badge-primary k-badge-md k-badge-rectangle k-badge-inline">2</span>
+<span class="k-badge k-badge-primary k-badge-rectangle k-badge-inline">2</span>
 ```
 
 For more information about the available `Shape` option values, visit the [Appearance documentation](#updated-components) of the respective component.
@@ -136,7 +137,7 @@ The `FillMode` property controls how the color is applied to the component. The 
 The following example shows a Button with a `Solid` fill mode:
 
 ```html
-<button type="button" class="k-button k-button-solid">
+<button type="button" class="k-button">
     <span class="k-button-text">Text</span>
 </button>
 ```
@@ -257,7 +258,7 @@ Example of the old Button rendering:
 Example of the new Button rendering:
 
 ```html
-<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
+<button class="k-button">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
@@ -267,7 +268,7 @@ As demonstrated in the examples above, the `k-button-icontext` class is no longe
 
 ### How Can I Update the Reference to Target the Element In the New Rendering?
 
-The easiest way to solve the [issue with missing classes](#how-do-i-know-if-i-have-overriden-a-class-name) is to update the selectors of the CSS rules that target a  specific element.
+The easiest way to solve the [issue with missing classes](#how-do-i-know-if-i-have-overridden-a-class-name) is to update the selectors of the CSS rules that target a  specific element.
 
 The following example shows a CSS rule that uses an old class selector `k-button-icontext`, which does not exist in the new rendering:
 

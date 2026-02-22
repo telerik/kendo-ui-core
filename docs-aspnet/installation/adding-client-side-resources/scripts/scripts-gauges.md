@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Gauges
 page_title: Individual Scripts for Gauges
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Gauges"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-gauges, /installation/scripts/scripts-gauges
 slug: script_filesfor_gauges_widgets
 ---

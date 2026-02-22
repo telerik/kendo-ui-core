@@ -7,6 +7,7 @@ slug: grid-browser-resize-hides-columns-in-detail-template
 tags: grid, hierarchy, collapse, expand, hide, columns, column, detail, template
 ticketid: 1358601
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -56,9 +57,9 @@ The following example demonstrates the full implementation of the suggested appr
         $(document).ready(function () {
             var grid = $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                        read: "https://demos.telerik.com/service/v2/odata/Employees"
                     },
                     pageSize: 20,
                     serverPaging: true,

@@ -6,6 +6,7 @@ page_title: How to Disable Dragging for Specific Elements in TileLayout for Kend
 slug: prevent-drag-and-drop-tilelayout-kendo-ui-jquery
 tags: kendo-ui-for-jquery, tilelayout, drag-and-drop, jquery, ui, draggable, ignore
 res_type: kb
+components: ["tilelayout"]
 ---
 
 ## Environment

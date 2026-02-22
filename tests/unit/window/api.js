@@ -547,7 +547,7 @@ describe("api", function() {
         let firstWindow = createWindow(),
             secondWindow = createWindow();
 
-        wrapper(secondWindow).css("zIndex", 10012);
+        wrapper(secondWindow).css("zIndex", 11512);
 
         firstWindow.toFront();
 
@@ -612,6 +612,21 @@ describe("api", function() {
         dialog.toFront();
 
         assert.equal(dialog.wrapper.css("zIndex"), zIndex);
+    });
+
+    it("toFront() raises window z-index above dialog", function() {
+        let windowWidget = createWindow();
+        let dialog = createDialog({
+            modal: false
+        });
+
+
+        windowWidget.toFront();
+        let windowZIndex = parseInt(windowWidget.wrapper.css("zIndex"), 10);
+        let dialogWrapperZIndex = parseInt(dialog.dialogWrapper.css("z-index"), 10);
+
+        assert.isOk(windowZIndex > dialogWrapperZIndex,
+            "Window z-index (" + windowZIndex + ") should be greater than Dialog wrapper z-index (" + dialogWrapperZIndex + ")");
     });
 
     asyncTest("open() calls toFront()", function(done) {

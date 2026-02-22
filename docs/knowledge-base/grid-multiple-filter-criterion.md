@@ -6,7 +6,7 @@ page_title: Create Filter Widgets with Multiple Filter Criteria - Kendo UI for j
 slug: grid-multiple-filter-criterion
 tags: grid, multiple, filter, filters, criterion, extra, more, filtering, filtratrion, many
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -39,9 +39,9 @@ How can I create a filter widget with a multiple filter criterion in the Grid?
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {
@@ -112,16 +112,16 @@ How can I create a filter widget with a multiple filter criterion in the Grid?
 
                 })
 
-                $('<input class="k-input k-textbox k-input-solid k-input-md k-rounded-md" id="value'+i+'">')
+                $('<input class="k-input k-textbox" id="value'+i+'">')
                   .appendTo(e.container)
               }
 
 
-              var submit = $('<button  class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">Filter</button>');
-              var clear = $('<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Clear</button>');
-              
+              var submit = $('<button  class="k-button k-button-primary">Filter</button>');
+              var clear = $('<button class="k-button">Clear</button>');
+
               var grid =  $('#grid').data('kendoGrid');
-              
+
               $('<div class="k-action-buttons">')
                 .append(submit)
                 .append(clear)
@@ -153,24 +153,24 @@ How can I create a filter widget with a multiple filter criterion in the Grid?
                 }
 
                 filterQuery.filters.push(shipNameFilter)
-                
+
                 grid.dataSource.filter(filterQuery);
                 e.container.parent().data("kendoPopup").close();
               });
-							
+
               clear.on("click", function(ev) {
                 ev.preventDefault();
-                
+
                  var filterQuery =grid.dataSource.filter();
 
                 if(filterQuery){
                   removeFiltersForField(filterQuery,'ShipName')
                 }
-                
+
                 grid.dataSource.filter(filterQuery);
 
                 e.container.find(".k-input").val(null);
-                
+
                 e.container.parent().data("kendoPopup").close();
               });
             }}

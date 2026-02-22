@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery ComboBox Documentation - Data Binding
 description: "Get started with the jQuery ComboBox by Kendo UI and bind the component to local or remote data."
+components: ["combobox"]
 slug: databinding_kendoui_combobox
 position: 3
 ---
@@ -77,8 +78,7 @@ Remote data binding is useful for larger datasets so that the items are loaded o
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }

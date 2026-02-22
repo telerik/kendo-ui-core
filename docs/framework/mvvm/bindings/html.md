@@ -2,6 +2,7 @@
 title: HTML
 page_title: HTML Binding - Kendo UI MVVM
 description: "Learn how to update and set the HTML of the target DOM element by changing the View-Model value in Kendo UI MVVM."
+components: ["mvvm"]
 slug: htmlbinding_mvvm_kendoui
 ---
 
@@ -13,7 +14,7 @@ Changing the View-Model value via code updates the HTML of the target element. I
 
 ## Getting Started
 
-To set the value displayed by an `input`, `textarea` or `select`, use the [`value`](value) binding instead.
+To set the value displayed by an `input`, `textarea` or `select`, use the `value` binding instead.
 
     <span data-bind="html: name"></span>
     <script>
@@ -43,7 +44,7 @@ The following example demonstrates the expected output of the code.
 
     <span><strong>John Doe</strong></span>
 
-To display any HTML tags that are contained in the View-Model value, use the [`text`](text) binding.
+To display any HTML tags that are contained in the View-Model value, use the [`text`](/framework/mvvm/bindings/text) binding.
 
 ## Important Notes
 

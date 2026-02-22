@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery PanelBar Documentation - PanelBar Overview
 description: "Try now the Kendo UI for jQuery PanelBar component supporting options for binding it to local arrays or remote data, setting its single or multiple node expansion modes, displaying animations, and more."
+components: ["panelbar"]
 slug: overview_kendoui_panelbar_widget
 position: 0
 ---
@@ -21,7 +22,7 @@ Depending on the requirements, you can define its structure by using HTML or by 
 * [Animations]({% slug animations_kendoui_panelbar %})–The PanelBar supports various open and close animations.
 * [Items]({% slug items_kendoui_panelbar %})–You can use the available approaches and add and remove PanelBar items.
 * [Content operations]({% slug content_kendoui_panelbar %})–The PanelBar provides options for nesting the content of its items and to load its content with AJAX.
-* [Accessibility]({% slug accessibility_kendoui_panelbar_widget %})&mdash;The PanelBar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_panelbar_accessibility %})&mdash;The PanelBar is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps
 

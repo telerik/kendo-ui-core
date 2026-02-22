@@ -5,9 +5,9 @@ description: "Learn how to implement drag-and-drop reordering of in the Kendo UI
 slug: howto_reorder_using_draganddrop_kendouitouch_listview
 previous_url: /controls/data-management/listview/how-to/drag-n-drop-reordering-using-kendo-touch
 tags: listview, reorder, using, drag, and, drop, kendo, touch
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

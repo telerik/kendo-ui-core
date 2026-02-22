@@ -7,6 +7,7 @@ slug: grid-filter-icon-to-left
 previous_url: /knowledge-base/grid_filter_icon_to_left
 tags: Grid, Filter icon, Left position
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -53,7 +54,7 @@ The following example demonstrates the full implementation of the suggested appr
         }
     </style>
 
-        <script src="../content/shared/js/people.js"></script>
+        <script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
         <div id="example">
         <div id="grid"></div>
 

@@ -8,6 +8,7 @@ position:
 tags: grid, export, excel, hierarchy, detail,
 ticketid: 1563579
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

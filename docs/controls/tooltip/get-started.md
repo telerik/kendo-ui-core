@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Tooltip Documentation - Getting Started with the Tooltip
 description: "Get started with the jQuery Tooltip by Kendo UI and learn how to initialize the widget."
+components: ["tooltip"]
 slug: getting_started_kendoui_tooltip_widget
 position: 1
 ---
@@ -116,8 +117,3 @@ You can now set where the Tooltip will be displayed. For example,  if there is e
 * [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

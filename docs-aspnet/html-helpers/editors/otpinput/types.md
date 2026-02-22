@@ -2,6 +2,7 @@
 title: Types
 page_title: Types
 description: "Learn how to configure the different types of the Telerik UI OTPInput component for {{ site.framework }}."
+components: ["otpinput"]
 slug: types_otpinputhelper
 position: 6
 ---
@@ -14,7 +15,7 @@ The available types are:
 
 * `Number`&mdash;Allows typing only numerical characters.
 * `Text`&mdash;Allows typing characters of a different nature.
-* `Password`&mdash;Behaves like a input element of type <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password" target="_blank">password</a>.
+* `Password`&mdash;Behaves like an input element of type <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password" target="_blank">password</a>.
 
 The below example demonstrates how to configure the `Type()` configuration of the component.
 

@@ -2,6 +2,7 @@
 title: Binding
 page_title: jQuery CheckBoxGroup Documentation - Binding
 description: "Get started with the jQuery CheckBoxGroup by Kendo UI and bind the widget to local data arrays"
+components: ["checkboxgroup"]
 slug: binding_kendoui_checkboxgroup
 position: 3
 ---

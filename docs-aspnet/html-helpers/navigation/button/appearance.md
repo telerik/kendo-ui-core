@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI Button HtmlHelper for {{ site.framework }}."
+components: ["button"]
 slug: button_appearance
 position: 2
 ---
@@ -26,9 +27,10 @@ The Button component provides the following options for styling:
 To control the size of the Button, configure the `Size` option with any of the following values:
 
 - `Small`
-- `Medium` (the default size)
+- `Medium`
 - `Large`
-- `None`
+
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
 @(Html.Kendo().Button()
@@ -48,7 +50,9 @@ To control the size of the Button, configure the `Size` option with any of the f
 
 ### FillMode
 
-The `FillMode()` method specifies how the color is applied to the component. The default Button fill mode is `Solid`.
+The `FillMode()` method specifies how the color is applied to the component.
+
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```HtmlHelper
 @(Html.Kendo().Button()
@@ -73,7 +77,8 @@ The following options are available for the `FillMode` configuration:
 - `Flat`
 - `Link`
 - `Clear`
-- `None`
+
+> The `None` value is deprecated. Use custom CSS to achieve an unstyled appearance.
 
 ### ThemeColor
 
@@ -91,7 +96,7 @@ The `ThemeColor` configuration provides a variety of colors that can be applied 
 - `Light`
 - `Inverse`
 
-The default `ThemeColor` is `Base`.
+> When not explicitly set, the applied theme controls the default theme color.
 
 ```HtmlHelper
 @(Html.Kendo().Button()
@@ -111,7 +116,9 @@ The default `ThemeColor` is `Base`.
 
 ### Rounded
 
-The border radius of the Button can be customized through the `Rounded()` method. The default option is `Medium`.
+The border radius of the Button can be customized through the `Rounded()` method.
+
+> When not explicitly set, the applied theme controls the default border radius.
 
 ```HtmlHelper
 @(Html.Kendo().Button()
@@ -135,7 +142,8 @@ The following values are available for the `Rounded` option:
 - `Medium`
 - `Large`
 - `Full`
-- `None`
+
+> The `None` value is deprecated. Use custom CSS to remove border radius.
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 

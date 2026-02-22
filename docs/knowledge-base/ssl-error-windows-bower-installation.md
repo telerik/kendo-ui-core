@@ -7,6 +7,7 @@ slug: troubleshoot_bower_installing
 tags: progress, kendoui, jquery, ssl, issue, on, windows, bower, installation
 type: troubleshooting
 res_type: kb
+components: ["general"]
 ---
 
 

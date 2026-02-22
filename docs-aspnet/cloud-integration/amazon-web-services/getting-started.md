@@ -2,6 +2,7 @@
 title: Creating AWS Account and User
 page_title: Creating AWS Account and User
 description: "Start using {{ site.product }} with AWS (Amazon Web Services) by creating an AWS account and a user."
+components: ["general"]
 slug: aws_getting_started_aspnetcore
 position: 2
 ---

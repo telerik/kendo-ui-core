@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to manage the appearance of the Telerik UI ChipList component for {{ site.framework }} and apply its various styling options."
+components: ["chiplist"]
 slug: htmlhelpers_chiplist_aspnetcore_appearance
 position: 3
 ---
@@ -23,7 +24,7 @@ The ChipList component supports the following styling options:
 
 ## Item Size
 
-The `ItemSize` option controls how big or small the rendered `chip items` looks. 
+The `ItemSize` option controls how big or small the rendered `chip items` looks.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -56,16 +57,12 @@ The `ItemSize` option controls how big or small the rendered `chip items` looks.
 The [`Size`](/api/kendo.mvc.ui.fluent/chipbuilder#sizekendomvcuicomponentsize) option accepts the following values:
 
 - `ComponentSize.Small`—Small size.
-- (Default) `ComponentSize.Medium`—Medium size.
+- `ComponentSize.Medium`—Medium size.
 - `ComponentSize.Large`—Large size.
-- `ComponentSize.None`—Unset.
 
-The structure of the Html class rendered on the client-side is `k-chip-{size}`. The default size value is `Medium` and is applied to the rendered `div` element through the `k-chip-md` class.
+> When not explicitly set, the applied theme controls the default size.
 
-```html
-<div class="k-chip k-chip-md" >
-</div>
-```
+> The `ComponentSize.None` value is deprecated. Use custom CSS instead.
 
 ## Fill Mode
 
@@ -101,18 +98,12 @@ The `FillMode` specifies the background and border styles of the Chip items in t
 
 The [`FillMode`](/api/kendo.mvc.ui.fluent/chiplistbuilder#fillmodekendomvcuichipfillmode) option accepts the following values:
 
-- (Default) `ChipFillMode.Solid`
+- `ChipFillMode.Solid`
 - `ChipFillMode.Outline`
-- `ChipFillMode.None`
 
-The structure of the class is `k-chip-{fillMode}`. The default `FillMode` value is `Solid` and is applied to the rendered `div` element through the `k-chip-solid` class. 
+> When not explicitly set, the applied theme controls the default fill mode.
 
-```html
-<div id="chiplist" class="k-chip-list k-chip-list-md">
-    <div class="k-chip k-chip-solid" >
-    </div>
-</div>
-```
+> The `ChipFillMode.None` value is deprecated. Use custom CSS instead.
 
 ## Theme Color
 
@@ -145,22 +136,15 @@ The `ThemeColor` option controls the color that will be applied to the rendered 
 ```
 {% endif %}
 
-The [`ThemeColor`](/api/kendo.mvc.ui.fluent/chiplistbuilder#themecolorkendomvcuithemecolor) option accepts the following values:
+The [`ThemeColor`](/api/kendo.mvc.ui.fluent/chiplistitembuilder#themecolorkendomvcuichipthemecolor) option accepts the following values:
 
-- (Default) `ChipThemeColor.Base`
+- `ChipThemeColor.Base`
 - `ChipThemeColor.Info`
 - `ChipThemeColor.Success`
 - `ChipThemeColor.Warning`
 - `ChipThemeColor.Error`
 
-As applying `Items.ThemeColor` is closely related to the `FillMode`, the structure of the rendered Html class name for the `ThemeColor` is composite—`k-chip-{fillMode}-{themeColor}`. The default `Items.ThemeColor` value is `Base`. A Chip with a default `FillMode` and `ThemeColor` will have a `k-chip-solid-base` class applied.
-
-```html
-<div id="chiplist" class="k-chip-list">
-    <div class="k-chip k-chip-solid k-chip-solid-base" >
-    </div>
-</div>
-```
+> When not explicitly set, the applied theme controls the default theme color.
 
 ## Border Radius
 
@@ -197,22 +181,16 @@ The `Rounded` option controls how much border radius is applied to the rendered 
 The [`Rounded`](/api/kendo.mvc.ui.fluent/chipbuilder#roundedkendomvcuirounded) option accepts the following values:
 
 - `Rounded.Small`—Small form.
-- (Default) `Rounded.Medium`—Medium form.
+- `Rounded.Medium`—Medium form.
 - `Rounded.Large`—Large form.
 - `Rounded.Full`—Circular form.
-- `Rounded.None`—Unset.
 
-The structure of the Html class is `k-rounded-{size}`. The default `rounded` value is `Medium` and is applied to the rendered `div` element through the `k-rounded-md` class.
+> When not explicitly set, the applied theme controls the default border radius.
 
-```html
-<div id="chiplist" class="k-chip-list">
-    <div class="k-chip k-rounded-md" >
-    </div>
-</div>
-```
+> The `Rounded.None` value is deprecated. Use custom CSS instead.
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

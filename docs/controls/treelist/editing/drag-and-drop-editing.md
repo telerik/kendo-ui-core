@@ -2,13 +2,14 @@
 title: Drag-and-Drop
 page_title: jQuery TreeList Documentation - Editing by Dragging and Dropping
 description: "Get started with the jQuery TreeList by Kendo UI and enable its drag-and-drop edit mode."
+components: ["treelist"]
 slug: dragdropeditmode_kendoui_treelist
 position: 4
 ---
 
 # Row Click-Move-Click
 
-As of Kendo UI R2 SP1 2023, users can reorder the TreeList's rows can be by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/treelist/configuration/editable.move.clickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
+As of Kendo UI R2 SP1 2023, users can reorder the TreeList's rows can be by using the click-move-click functionality provided by the [`clickMoveClick`](/api/javascript/ui/treelist/configuration/editable#editablemoveclickmoveclick) option. To start moving the row, users can click the drag icon, and then click again to place the row in its new position.
 
 ```dojo
     <div id="treeList"></div>
@@ -51,21 +52,21 @@ The following example demonstrates how to enable the batch data source and the e
 
     <script>
         $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
             var dataSource = new kendo.data.TreeListDataSource({
                     transport: {
                         read:  {
-                            url: crudServiceBaseUrl + "/EmployeeDirectory/All",
-                            dataType: "jsonp"
+                            url: crudServiceBaseUrl + "/EmployeeDirectory/All"
                         },
                         update: {
                             url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
-                            dataType: "jsonp"
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
-                                return {models: kendo.stringify(options.models)};
+                                return kendo.stringify(options.models);
                             }
                         }
                     },

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ListView Documentation - Getting Started with the ListView
 description: "Get started with the jQuery ListView by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["listview"]
 slug: getting_started_kendoui_listview_widget
 position: 1
 ---
@@ -290,8 +291,4 @@ The ListView allows you to display a scrollbar inside the component so end-users
 * [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

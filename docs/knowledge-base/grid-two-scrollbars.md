@@ -6,7 +6,7 @@ page_title: Render a Second Vertical Scrollbar - Kendo UI for jQuery Data Grid
 slug: grid-two-scrollbars
 tags: grid, scroll, scrollbar, vertical
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -47,9 +47,8 @@ The following example attaches the event handlers within the `dataBound` event o
 			$(document).ready(function () {
 				$("#grid").kendoGrid({
 					dataSource: {
-						type: "odata",
 						transport: {
-							read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+							read: "https://demos.telerik.com/service/v2/core/Orders"
 						},
 						schema: {
 							model: {

@@ -8,6 +8,7 @@ position:
 tags: grid, sort, sorting, null, bottom, show, end, ascending, descending, order, values, element, last
 ticketid: 1432643
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

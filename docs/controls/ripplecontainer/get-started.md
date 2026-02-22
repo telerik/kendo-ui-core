@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Ripple Container Documentation - Getting Started with the RippleContainer
 description: "Get started with the jQuery RippleContainer by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["ripplecontainer"]
 slug: getting_started_kendoui_ripple_component
 position: 1
 ---
@@ -14,7 +15,7 @@ After the completion of this guide, you will achieve the following end result:
 
 ```dojo
     <div id="ripple">
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Default Button</button>
+        <button class="k-button">Default Button</button>
     </div>
 
     <script>
@@ -26,7 +27,7 @@ After the completion of this guide, you will achieve the following end result:
 
 ## 1. Create a Div Element
 
-First, create a `<div>` element. 
+First, create a `<div>` element.
 
 ```html
     <div id="ripple"></div>
@@ -48,7 +49,7 @@ Next, set the contents of the RippleContainer. The ripple effect will be applied
 
 ```dojo
     <div id="ripple">
-        <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Default Button</button>
+        <button class="k-button">Default Button</button>
     </div>
 
     <script>
@@ -68,8 +69,4 @@ Next, set the contents of the RippleContainer. The ripple effect will be applied
 * [JavaScript API Reference of the jQuery RippleContainer](/api/javascript/ui/ripplecontainer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

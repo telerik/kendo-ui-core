@@ -7,6 +7,7 @@ previous_url: /html-helpers/charts/how-to/create-dynamic-series, /helpers/charts
 slug: chart-bind-to-dynamic-series
 tags: chart, databound, dynamic, series
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -135,7 +136,7 @@ To see the complete example, refer to the [ASP.NET MVC application](https://gith
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/chart)

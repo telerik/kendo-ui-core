@@ -1,8 +1,9 @@
 ---
-comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `npx gulp js-dependencies`.
 title: Server-Side Wrappers
 page_title: Individual Scripts for Server-Side Wrappers - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Server-Side Wrappers"
+components: ["general"]
 slug: script_filesfor_serverside_wrappers
 ---
 
@@ -12,21 +13,6 @@ The following table lists the Kendo UI supplementary scripts for integration wit
 
 | Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [ASP.NET MVC](https://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) | jquery.js | |
-| | kendo.core.js | |
-| | kendo.data.js | |
-| | kendo.popup.js | |
-| | kendo.list.js | |
-| | kendo.html.base.js | |
-| | kendo.html.button.js | |
-| | kendo.combobox.js | |
-| | kendo.multicolumncombobox.js | |
-| | kendo.dropdownlist.js | |
-| | kendo.html.chip.js | |
-| | kendo.html.chiplist.js | |
-| | kendo.multiselect.js | |
-| | kendo.validator.js | |
-| | kendo.aspnetmvc.js | |
 
 ## See Also
 
@@ -42,6 +28,5 @@ The following table lists the Kendo UI supplementary scripts for integration wit
 + [Scripts for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Scripts for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Scripts for Media]({% slug script_filesfor_media_widgets %})
-+ [Scripts for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Scripts for Framework and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Scripts for PDF]({% slug script_filesfor_pdf %})

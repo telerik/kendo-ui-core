@@ -2,6 +2,7 @@
 title: Custom Tools
 page_title: jQuery ToolBar Documentation - Custom Tools
 description: "Get started with the jQuery ToolBar by Kendo UI and define custom tools."
+components: ["toolbar"]
 slug: custom_tools_kendoui_toolbar
 position: 4
 ---

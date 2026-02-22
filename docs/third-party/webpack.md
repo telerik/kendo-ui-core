@@ -2,12 +2,13 @@
 title: Webpack
 page_title: Webpack - Kendo UI Third-Party Tools
 description: "Package Kendo UI with Webpack."
+components: ["general"]
 slug: webpacksupport_integration_kendoui
 ---
 
 # Webpack
 
-The recommended approach to include Kendo UI is by using the NPM package.
+The recommended approach to include Kendo UI is using the NPM package. For more information, refer to the [Installing with NPM](/intro/installation/npm) article. If you need to work with different module bundlers beyond Webpack, see the [Module Bundlers]({% slug module_bundlers_integration_kendoui %}) article.
 
 ## Using NPM
 
@@ -160,8 +161,8 @@ Create a folder named `dist` and add the `index.html` file in it.
 
 In the root directory add a new `src` folder that will contain the scripts. Then, add a `index.js` file and import the needed modules:
 ```
-    import '@progress/kendo-ui/esm/kendo.button'
-    import '@progress/kendo-ui/esm/kendo.dropdownlist'
+    import '@progress/kendo-ui/esm/kendo.button.js'
+    import '@progress/kendo-ui/esm/kendo.dropdownlist.js'
 
     $(function () {
         $("#btn").kendoButton();
@@ -187,14 +188,5 @@ Execute the following commands to build and run the app:
 ## See Also
 
 * [Installing with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
-* [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
-* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [Angular 2.0]({% slug angular2support_integration_kendoui %})
-* [RequireJS]({% slug requirejs_integration_kendoui %})
+* [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
-* [SystemJS Support]({% slug systemjs_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})

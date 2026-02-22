@@ -7,7 +7,7 @@ slug: treeview-expand-parent-checked-child
 tags: menu, iframe
 ticketid: 1524346
 res_type: kb
-component: treeview, parent, node, check
+components: ["treeview"]
 ---
 
 ## Environment

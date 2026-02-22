@@ -2,6 +2,7 @@
 title: Overview
 page_title: ListBox Globalization
 description: "Get started with the Telerik UI ListBox component for {{ site.framework }} and learn about the globalization options it supports."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/globalization/overview
 slug: htmlhelpers_listbox_globalization_aspnetcore
 position: 1

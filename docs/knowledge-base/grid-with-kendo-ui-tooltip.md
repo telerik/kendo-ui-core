@@ -5,9 +5,9 @@ description: "Learn how to show Kendo UI Tooltip for the Kendo UI Grid for jQuer
 previous_url: /controls/data-management/grid/how-to/add-tooltip-for-cell, /controls/data-management/grid/how-to/grid-with-kendo-ui-tooltip, /controls/data-management/grid/how-to/Layout/grid-with-kendo-ui-tooltip
 slug: howto_show_tooltipfor_column_records_grid
 tags: grid, show, display, tooltip, column, records
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

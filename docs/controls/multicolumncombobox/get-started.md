@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MultiColumnComboBox Documentation - Getting Started with the MultiColumnComboBox
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["multicolumncombobox"]
 slug: getting_started_kendoui_multicolumncombobox_component
 position: 2
 ---
@@ -28,8 +29,7 @@ After the completion of this guide, you will achieve the following end result:
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -56,6 +56,7 @@ In this step, you will initialize the MultiColumnComboBox from the `<input>` ele
     <script>
     $(document).ready(function() {
         $("#comboBox").kendoMultiColumnComboBox();
+    });
     </script>
 ```
 
@@ -72,8 +73,7 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/autocomplete/configur
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -99,8 +99,7 @@ In this step you will define the columns rendered in the table of the MultiColum
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -129,8 +128,7 @@ The [`dataValueField`](/api/javascript/ui/multicolumncombobox/configuration/data
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -149,8 +147,4 @@ The [`dataValueField`](/api/javascript/ui/multicolumncombobox/configuration/data
 * [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

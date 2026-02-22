@@ -6,6 +6,7 @@ page_title: How to Disable Drag and Drop for Specific Columns in Kendo UI Spread
 slug: disable-drag-drop-specific-column-spreadsheet
 tags: kendo-ui, spreadsheet, drag-and-drop, disable-functionality
 res_type: kb
+components: ["spreadsheet"]
 ticketid: 1671669
 ---
 

@@ -6,7 +6,7 @@ page_title: Use Dynamic Editor - Kendo UI for jQuery Data Grid
 slug: grid-use-dynamic-editor
 tags: grid, editor, dynamic, different, single, input, textbox
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

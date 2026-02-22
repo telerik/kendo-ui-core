@@ -7,7 +7,7 @@ slug: grid-mobileswitch-as-editor
 tags: mobileswitch, switch, grid, custom editor
 ticketid: 1114947
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

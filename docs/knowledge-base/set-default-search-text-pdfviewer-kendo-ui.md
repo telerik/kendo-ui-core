@@ -6,6 +6,7 @@ page_title: How to Set Default Search Text in Kendo UI PDFViewer Search Box
 slug: set-default-search-text-pdfviewer-kendo-ui
 tags: pdfviewer, search, inputlabel, default text, kendo ui, jquery
 res_type: kb
+components: ["pdfviewer"]
 category: knowledge-base
 ticketid: 1652783
 ---
@@ -36,11 +37,10 @@ To set a default search text in the PDFViewer's search box, handle the [`click`]
 ```dojo
 
 <div id="pdfviewer"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
-    <script>
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
-    </script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.min.mjs" type="module"></script>
+    <script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.all.min.js" type="module"></script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
           file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"

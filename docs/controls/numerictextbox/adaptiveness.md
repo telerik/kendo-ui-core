@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure input mode for the Kendo UI for jQuery NumericTextBox component."
+components: ["numerictextbox"]
 slug: numerictextbox_input_mode_kendo
 position: 9
 ---

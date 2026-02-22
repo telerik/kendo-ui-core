@@ -1,13 +1,14 @@
 import "./kendo.popup.js";
 import "./kendo.data.js";
 import "./kendo.icons.js";
+import "./kendo.userevents.js";
 
 export const __meta__ = {
     id: "menu",
     name: "Menu",
     category: "web",
     description: "The Menu widget displays hierarchical data as a multi-level menu.",
-    depends: [ "popup", "data", "data.odata" ]
+    depends: [ "popup", "data", "data.odata", "userevents" ]
 };
 
 (function($, undefined) {
@@ -168,7 +169,7 @@ export const __meta__ = {
             contentCssAttributes: function(item) {
                 var result = "";
                 var attributes = item.contentAttr || {};
-                var defaultClasses = "k-content k-menu-group k-menu-group-md";
+                var defaultClasses = "k-content k-menu-group";
 
                 if (!attributes['class']) {
                     attributes['class'] = defaultClasses;
@@ -194,7 +195,7 @@ export const __meta__ = {
             },
 
             groupCssClass: function() {
-                return "k-menu-group k-menu-group-md";
+                return "k-menu-group";
             },
 
             groupWrapperCssClass: function() {
@@ -398,7 +399,13 @@ export const __meta__ = {
                     result.push(popup);
                 }
                 opener = popup.find(popupOpenerSelector());
-                popupId = opener.data(POPUP_OPENER_ATTR);
+
+                if (opener && opener.length && opener.length > 1) {
+                    result.push(...getChildPopups(popup, overflowWrapper));
+                    popupId = null;
+                } else {
+                    popupId = opener.data(POPUP_OPENER_ATTR);
+                }
             }
         });
 
@@ -821,10 +828,11 @@ export const __meta__ = {
 
         _toggleScrollButtons: function(scrollElement, backwardBtn, forwardBtn, horizontal) {
             const neededSpace = this._getNeededSpaceForChildren(scrollElement, horizontal);
-            const elementSpace = horizontal ? kendo._outerWidth(this.element) : kendo._outerHeight(this.element);
+            const elementSpace = horizontal ? kendo._outerWidth(scrollElement) : kendo._outerHeight(scrollElement);
+            const toggle = neededSpace > elementSpace;
 
-            backwardBtn.toggle(neededSpace > elementSpace);
-            forwardBtn.toggle(neededSpace > elementSpace);
+            backwardBtn.toggle(toggle);
+            forwardBtn.toggle(toggle);
 
             const currentScroll = horizontal ? kendo.scrollLeft(scrollElement) : scrollElement.scrollTop();
             const elementIsPopup = scrollElement.is(popupSelector) || scrollElement.parent().is(childAnimationContainerSelector);
@@ -994,7 +1002,7 @@ export const __meta__ = {
                 }
 
                 groups = items.find("> ul")
-                                .addClass("k-menu-group k-menu-group-md")
+                                .addClass("k-menu-group")
                                 .attr(ROLE, "menu");
 
                 items = items.filter("li");
@@ -1097,6 +1105,11 @@ export const __meta__ = {
                     } else {
                         e.preventDefault();
                     }
+
+                    const focusedSubItem = e.sender.element.find("." + FOCUSEDSTATE);
+                    if (focusedSubItem.length) {
+                        that._removeFocusItem();
+                    }
                 }
             }, options)).data(KENDOPOPUP);
         },
@@ -1185,9 +1198,12 @@ export const __meta__ = {
                                 $(menu.element).css({ height: "" });
                             }
                         }
-                        const maxWidthNone = options.scrollable || options.autoSize;
-                        const overflow = options.autoSize ? "auto" : "visible";
-                        div.css({ maxHeight: maxWidthNone ? "" : maxHeight, overflow: overflow });
+                        const rect = li[0].getBoundingClientRect();
+                        const fits = ((menu && menu.inlineHeight) || maxHeight) <= (window.innerHeight - rect.top);
+
+                        const maxHeightNone = options.scrollable || options.autoSize;
+                        const overflow = options.autoSize && !fits ? "auto" : "visible";
+                        div.css({ maxHeight: maxHeightNone ? "" : maxHeight, overflow: overflow });
 
                         li.data(ZINDEX, li.css(ZINDEX));
                         var nextZindex = that.nextItemZIndex++;
@@ -1404,7 +1420,7 @@ export const __meta__ = {
                 scrollTop = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollTop"),
                 bottomScrollbar = window.innerHeight - windowHeight,
                 maxHeight = windowHeight + bottomScrollbar,
-                canFit = maxHeight + scrollTop > popupOuterHeight + popupOffsetTop;
+                canFit = Math.floor(maxHeight + scrollTop) >= Math.floor(popupOuterHeight + popupOffsetTop);
 
             if (!canFit) {
                 let popupViewportGap = windowHeight * 0.05, // 5% gap from the viewport.
@@ -1606,7 +1622,7 @@ export const __meta__ = {
                    .filter(function() {
                        return !kendo.support.matchesSelector.call(this, nonContentGroupsSelector);
                    })
-                   .addClass("k-menu-group k-menu-group-md")
+                   .addClass("k-menu-group")
                    .attr(ROLE, "menu")
                    .parent("li")
                    .attr("aria-haspopup", "true")
@@ -2509,14 +2525,15 @@ export const __meta__ = {
                     var imageUrl = fieldAccessor("imageUrl")(item);
                     var icon = fieldAccessor("icon")(item);
                     var iconClass = fieldAccessor("iconClass")(item);
-                    var iconString = (icon ? kendo.ui.icon({ icon: icon, iconClass: iconClass }) : '' );
+                    var sprite = this.templates.sprite(item);
+                    var iconString = (((icon || iconClass) && sprite == '') ? kendo.ui.icon({ icon: icon, iconClass: iconClass }) : '' );
                     var imgAttributes = fieldAccessor("imageAttr")(item);
                     var tag = url ? 'a' : 'span';
 
                     return `<${tag} class='${rendering.textClass(item)}' role='none' ${url ? `href='${kendo.sanitizeLink(url)}'` : ''} >` +
                         (imageUrl ? `<img ${rendering.imageCssAttributes(imgAttributes)}  alt='' src='${imageUrl}' />` : '') +
                         (iconPosition == "before" ? iconString : '') +
-                        this.templates.sprite(item) +
+                        sprite +
                         this.options.template(data) +
                         (iconPosition == "after" ? iconString : '') +
                         data.arrow(data) +
@@ -2548,7 +2565,7 @@ export const __meta__ = {
                         "</li>";
                 }),
                 scrollButton: template(({ direction }) =>
-                    `<span class='k-button k-button-md k-button-flat k-button-flat-base k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
+                    `<span class='k-button k-button-flat k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
                         kendo.ui.icon({ icon: `caret-alt-${direction}`, iconClass: "k-button-icon" }) +
                     "</span>"
                 ),
@@ -2706,9 +2723,10 @@ export const __meta__ = {
             }
         },
 
-        open: function(x, y) {
+        open: function(x, y, keydown) {
             var that = this;
             const isHorizontal = that.options.orientation === 'horizontal';
+            let target = null;
             x = $(x)[0];
 
             if (typeof x === "number") {
@@ -2719,43 +2737,49 @@ export const __meta__ = {
                 }
             }
 
+            if (keydown) {
+                target = $(x);
+            }
+
             if (contains(that.element[0], $(x)[0]) || that._itemHasChildren($(x))) { // call parent open for children elements
                 Menu.fn.open.call(that, x);
             } else {
-                if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
-                    if (that.popup.visible() && that.options.filter) {
-                        that.popup.close(true);
-                        that.popup.element.parent().kendoStop(true);
-                    }
-
-                    if (!that._triggerFocusOnActivate) {
-                        that._triggerFocusOnActivate = that._focusMenu.bind(that);
-                    }
-                    that.bind(ACTIVATE, that._triggerFocusOnActivate);
-
-                    if (y !== undefined) {
-                        var overflowWrapper = that._overflowWrapper();
-                        if (overflowWrapper) {
-                            var offset = overflowWrapper.offset();
-                            x -= offset.left;
-                            y -= offset.top;
-                        }
-                        that.popup.wrapper.hide();
-                        that._configurePopupScrolling(x, y);
-                        that.popup.open(x, y);
-                    } else {
-                        that.popup.options.anchor = (x ? x : that.popup.anchor) || that.target;
-                        that.popup.element.kendoStop(true);
-                        that._configurePopupScrolling();
-                        that.popup.open();
-                    }
-
-                    that._initPopupScrolling(that.popup, isHorizontal);
-                    that.popup.element.siblings(scrollButtonSelector).hide();
-                    DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
-                    DOCUMENT_ELEMENT
-                        .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
+                if (that._triggerEvent({ item: that.element, type: OPEN, target }) !== false) {
+                    return;
                 }
+
+                if (that.popup.visible() && that.options.filter) {
+                    that.popup.close(true);
+                    that.popup.element.parent().kendoStop(true);
+                }
+
+                if (!that._triggerFocusOnActivate) {
+                    that._triggerFocusOnActivate = that._focusMenu.bind(that);
+                }
+                that.bind(ACTIVATE, that._triggerFocusOnActivate);
+
+                if (y !== undefined) {
+                    var overflowWrapper = that._overflowWrapper();
+                    if (overflowWrapper) {
+                        var offset = overflowWrapper.offset();
+                        x -= offset.left;
+                        y -= offset.top;
+                    }
+                    that.popup.wrapper.hide();
+                    that._configurePopupScrolling(x, y);
+                    that.popup.open(x, y);
+                } else {
+                    that.popup.options.anchor = (x ? x : that.popup.anchor) || that.target;
+                    that.popup.element.kendoStop(true);
+                    that._configurePopupScrolling();
+                    that.popup.open();
+                }
+
+                that._initPopupScrolling(that.popup, isHorizontal);
+                that.popup.element.siblings(scrollButtonSelector).hide();
+                DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
+                DOCUMENT_ELEMENT
+                    .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
             }
 
             return that;
@@ -2814,7 +2838,7 @@ export const __meta__ = {
             var scrollLeft = isFixed ? 0 : parentsScroll(this._overflowWrapper()[0], "scrollLeft");
             var shadow = kendo.getShadows(popupElement);
             var maxWidth = windowWidth - shadow.left - shadow.right;
-            var canFit = maxWidth + scrollLeft > popupOuterWidth + popupOffsetLeft;
+            var canFit = Math.floor(maxWidth + scrollLeft) >= Math.floor(popupOuterWidth + popupOffsetLeft);
 
             if (!canFit) {
                 popups.css({ overflow: "hidden", width: (maxWidth - popupOffsetLeft + scrollLeft) + "px" });
@@ -2823,7 +2847,6 @@ export const __meta__ = {
 
         close: function() {
             var that = this;
-
             if (contains(that.element[0], $(arguments[0])[0]) || that._itemHasChildren(arguments[0])) {
                 Menu.fn.close.call(that, arguments[0]);
             } else {
@@ -2934,7 +2957,12 @@ export const __meta__ = {
                 target.on("keydown", (e) => {
                     if (e.keyCode === kendo.keys.F10 && e.shiftKey) {
                         e.preventDefault();
-                        that.open(e.target);
+
+                        if (that.options.keyboardAlignToAnchor) {
+                            that.popup.options.anchor = e.target;
+                        }
+
+                        that.open(e.target, null, true);
                     }
                 });
             }
@@ -2943,11 +2971,12 @@ export const __meta__ = {
         _triggerEvent: function(e) {
             var that = this,
                 anchor = $(that.popup.options.anchor)[0],
-                origin = that._eventOrigin;
+                origin = that._eventOrigin,
+                target = e.target;
 
             that._eventOrigin = undefined;
 
-            return that.trigger(e.type, extend({ type: e.type, item: e.item || this.element[0], target: anchor }, origin ? { event: origin } : {} ));
+            return that.trigger(e.type, extend({ type: e.type, item: e.item || this.element[0], target: target ?? anchor }, origin ? { event: origin } : {} ));
         },
 
         _popup: function() {

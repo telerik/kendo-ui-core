@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ColorPalette component by following a complete step-by-step tutorial."
+components: ["colorpalette"]
 slug: color_palette_getting_started
 position: 1
 ---
@@ -10,7 +11,7 @@ position: 1
 
 This tutorial explains how to set up a basic Telerik UI for {{ site.framework }} ColorPalette and highlights the major steps in the configuration of the component.
 
-You will initialize a ColorPalette control with a custom set of colors. Next, you will handle the [`Change` event](/api/kendo.mvc.ui.fluent/colorpaletteeventbuilder) of the component to get the selected color and apply it as a background color to [DropDownButtons]({% slug htmlhelpers_dropdownbutton_aspnetcore %}). {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
+You will initialize a ColorPalette control with a custom set of colors. Next, you will handle the {% if site.core %}[`Change` event](/api/kendo.mvc.ui.fluent/colorpaletteeventbuilder){% else %} [`Change` event](/api/kendo.mvc.ui.fluent/simplecolorpickereventbuilder#changesystemfunc){% endif %} of the component to get the selected color and apply it as a background color to [DropDownButtons]({% slug htmlhelpers_dropdownbutton_aspnetcore %}). {% if site.core %}Finally, you can run the sample code in [Telerik REPL](https://netcorerepl.telerik.com/) and continue exploring the components.{% endif %}
 
  ![Sample Telerik UI for {{ site.framework }} ColorPalette](./images/color-palette-getting-started.png)
 
@@ -201,7 +202,7 @@ The next step is to configure DropDownButtons and handle the ColorPalette color 
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onChange(e){
             let selectedColor = e.value;
@@ -261,7 +262,7 @@ You can reference the ColorPalette instances that you have created and build on 
 
 1. Use the value of the `Name()` option of the component to establish a reference.
 
-   ```script
+   ```JS script
         <script>
             $(document).ready(function() {
                 var colorPaletteReference = $("#colorpalette").data("kendoColorPalette"); // colorPaletteReference is a reference to the existing ColorPalette instance of the helper.
@@ -286,7 +287,7 @@ You can reference the ColorPalette instances that you have created and build on 
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var colorPaletteReference = $("#colorpalette").data("kendoColorPalette");

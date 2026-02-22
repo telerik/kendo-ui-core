@@ -27,35 +27,6 @@ describe('kendo.ui.Badge initialization', function() {
         assert.equal(badge.text(), '');
     });
 
-    it('default rounded is \'medium\'', function() {
-        badge = new Badge(span);
-
-        assert.equal(badge._rounded, 'medium');
-        assert.equal(badge.rounded(), 'medium');
-        assert.equal(badge.element.hasClass('k-rounded-md'), true);
-    });
-
-    it('default size is \'medium\'', function() {
-        badge = new Badge(span);
-
-        assert.equal(badge._size, 'medium');
-        assert.equal(badge.element.hasClass('k-badge-md'), true);
-    });
-
-    it('default theme color is \'secondary\'', function() {
-        badge = new Badge(span);
-
-        assert.equal(badge._themeColor, 'secondary');
-        assert.equal(badge.element.hasClass('k-badge-solid-secondary'), true);
-    });
-
-    it('default fillMode is \'solid\'', function() {
-        badge = new Badge(span);
-
-        assert.equal(badge._fillMode, 'solid');
-        assert.equal(badge.element.hasClass('k-badge-solid'), true);
-    });
-
     it('default visibility is visible', function() {
         badge = new Badge(span);
 

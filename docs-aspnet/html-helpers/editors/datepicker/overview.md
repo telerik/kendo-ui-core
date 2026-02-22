@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI DatePicker component for {{ site.framework }}."
+components: ["datepicker"]
 previous_url: /helpers/html-helpers/datepicker, /helpers/editors/datepicker/overview
 slug: htmlhelpers_datepicker_aspnetcore
 position: 0
@@ -94,7 +95,7 @@ As of the 2024 Q4 Release the {{ site.framework }} DatePicker is compatible with
 | [Week number column]({% slug htmlhelpers_datepicker_aspnetcore_weeknumbercolumn %}) | The DatePicker provides options for rendering a column which displays the number of the weeks within the current Month view. |
 | [DateInput integration]({% slug htmlhelpers_datepicker_aspnetcore_dateinputintegration %}) | The fluent integration between the DatePicker and the DateInput allows you to take advantage of the natively available features of both components. |
 | [Templates]({% slug htmlhelpers_datepicker_aspnetcore_templates %}) | You can customize the content and look and feel of the DatePicker by utilizing templates. |
-| [Accessibility]({% slug htmlhelpers_datepicker_aspnetcore_accessibility %}) | The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
+| [Accessibility]({% slug htmlhelpers_datepicker_accessibility %}) | The DatePicker is accessible for screen readers, supports WAI-ARIA attributes, delivers keyboard shortcuts for faster navigation, and allows you to render it in a right-to-left direction. |
 | [Automatic Correction]({% slug htmlhelpers_datepicker_autocorrect_aspnetcore %})| You can configure whether the component will autocorrect the user's input when the `Min` and `Max` values are set. |
 
 ## Next Steps

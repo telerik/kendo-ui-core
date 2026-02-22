@@ -7,6 +7,7 @@ previous-url: /helpers/navigation/treeview/how-to/expand-node-async, /html-helpe
 slug: treeview-expand-node-async
 tags: treeview, async, node, expand
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -96,7 +97,7 @@ The TreeView component supports AJAX data binding by using Entity Framework. To 
 
 1. Add a button which will asynchronously load child nodes with the [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/node/methods/load) method in the child data source and, therefore, asynchronously expand the currently selected node.
 
-    ```cs
+    ```C#
     @(Html.Kendo().Button()
         .Name("expandNode")
         .Content("Expand selected node")

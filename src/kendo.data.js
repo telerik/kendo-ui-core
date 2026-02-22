@@ -2134,6 +2134,234 @@ export const __meta__ = {
         }
     });
 
+    var AISmartPasteTransport = Class.extend( {
+        init: function(options) {
+            const that = this;
+
+            options = that.options = extend({}, that.options, options);
+        },
+
+        read: function(options) {
+            const that = this;
+            options = that.options = extend({}, that.options, options);
+            options = that.setup(options);
+
+            if (that.options.requestStart) {
+                that.options.requestStart(options);
+            }
+
+            $.ajax(options);
+        },
+
+        setup: function(options) {
+            const that = this,
+                  service = options?.service || that.options.service,
+                  data = that.getData(options),
+                  url = typeof service === "string" ? service : service.url,
+                  requestOptions = {
+                    url: url,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        if (that.options.success) {
+                            that.options.success(response);
+                        }
+                    },
+                    error: function(response) {
+                        const resObject = {
+                            status: response.status,
+                            statusText: response.statusText,
+                            responseText: response.responseText,
+                        };
+                        if (that.options.error) {
+                            that.options.error(resObject);
+                        }
+                    }
+                 };
+
+                 if (service?.headers) {
+                     requestOptions.headers = service.headers;
+                 }
+
+                 return requestOptions;
+        },
+        getData: function(options = {}) {
+            const service = options?.service,
+                  formFields = options?.formFields,
+                  content = options?.content;
+
+                let defaultData = {
+                    formFields: formFields,
+                    content: content
+                };
+
+                if (service?.data && isFunction(service?.data)) {
+                    return $.extend({}, defaultData, service.data());
+                }
+
+                if (service?.data && Object.keys(service.data).length) {
+                    return $.extend({}, defaultData, service.data);
+                }
+
+                return defaultData;
+        },
+        success: function(response) {
+            const that = this;
+
+            if (that.options.success) {
+                that.options.success(response);
+            }
+
+            return response;
+        },
+        error: function(response) {
+            const that = this;
+
+            const resObject = {
+                status: response.status,
+                statusText: response.statusText,
+                responseText: response.responseText,
+            };
+
+            if (that.options.error) {
+                that.options.error(resObject);
+            }
+        }
+    });
+
+    var AiTransport = Class.extend( {
+        init: function(options) {
+            const that = this;
+
+            options = that.options = extend({}, that.options, options);
+
+            that.messageTypes = {
+                "ai": "assistant",
+                "system": "system",
+                "user": "user",
+                "tool": "tool"
+            };
+        },
+
+        read: function(options) {
+            const that = this;
+
+            options = that.setup(options);
+
+            if (that.options.requestStart) {
+                that.options.requestStart(options);
+            }
+
+            return $.ajax(options);
+        },
+
+        success: function(response, options) {
+            const that = this;
+            const service = options?.service || that.options.service;
+            const outputGetter = service?.outputGetter || that._getResponseData;
+            const isRetry = options?.isRetry;
+            const prompt = options?.prompt;
+            const output = {
+                id: kendo.guid(),
+                output: outputGetter(response),
+                prompt: prompt,
+                isRetry: isRetry,
+                response: response,
+            };
+
+            if (that.options.success) {
+                that.options.success(output);
+            }
+        },
+
+        error: function(response, options) {
+            const that = this;
+            const service = options?.service || that.options.service;
+            const outputGetter = service?.outputGetter || that._getResponseData;
+            const isRetry = options?.isRetry;
+            const prompt = options?.prompt;
+
+            const resObject = {
+                status: response.status,
+                statusText: response.statusText,
+                responseText: response.responseText,
+            };
+
+            const output = {
+                id: kendo.guid(),
+                output: outputGetter(resObject),
+                prompt: prompt,
+                isRetry: isRetry,
+                response: response,
+            };
+
+            if (that.options.error) {
+                that.options.error(output);
+            }
+        },
+
+        setup: function(options = {}) {
+            const that = this;
+            const service = options?.service || that.options.service;
+            const data = that.getData(options);
+            const url = typeof service === "string" ? service : service.url;
+            const requestOptions = {
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    that.success.call(that, response, options);
+                },
+                error: function(response) {
+                    that.error.call(that, response, options);
+                }
+            };
+
+            if (service?.headers) {
+                requestOptions.headers = service.headers;
+            }
+
+            return requestOptions;
+        },
+
+        getData: function(options) {
+            const that = this;
+            const service = options?.service;
+            const isRetry = options?.isRetry;
+            const history = options?.history || [];
+            const prompt = options?.prompt;
+
+            let defaultData = [
+                ...history,
+                {
+                    role: that.messageTypes.user,
+                    contents: [
+                        {
+                            $type: "text",
+                            text: prompt
+                        }
+                    ]
+                }
+            ];
+
+            if (service?.data && isFunction(service?.data)) {
+                return service.data(prompt, isRetry, history);
+            }
+
+            if (service?.data && Object.keys(service.data).length) {
+                return $.extend({}, service.data, { messages: defaultData });
+            }
+
+            return defaultData;
+        },
+
+        _getResponseData: function(response) {
+            return response?.messages?.[0]?.contents?.[0]?.text || "An error occurred while processing the request.";
+        },
+    });
+
     var Cache = Class.extend({
         init: function() {
             this._store = {};
@@ -2664,6 +2892,45 @@ export const __meta__ = {
             result.push(target);
         }
         return result;
+    }
+
+    function convertHighlightDescriptors(data, filters, idField) {
+        var getHighlightFromResults = function(results, filter) {
+            const highlighted = filter.cells && Object.keys(filter.cells).length > 0 ? filter.cells : true;
+            const acc = {};
+            let idx, length;
+
+            for (idx = 0, length = results.length; idx < length; idx++) {
+                const item = results[idx];
+                if (item && item.uid !== undefined) {
+                    const key = String(item[idField]);
+                    acc[key] = highlighted;
+                }
+            }
+
+            return acc;
+        };
+
+        let results = {};
+        let idx, length, filter, filteredData, highlightResults;
+
+        if (!isArray(filters)) {
+            return results;
+        }
+
+        for (idx = 0, length = filters.length; idx < length; idx++) {
+            filter = filters[idx];
+            if (filter) {
+                filteredData = new Query(data).filter(filter).toArray();
+                highlightResults = getHighlightFromResults(filteredData, filter);
+
+                if (highlightResults) {
+                    results = extend(true, results, highlightResults);
+                }
+            }
+        }
+
+        return results;
     }
 
     var DataSource = Observable.extend({
@@ -3438,7 +3705,7 @@ export const __meta__ = {
         },
 
         _readData: function(data) {
-            var read = !this._isServerGrouped() ? this.reader.data : this.reader.groups;
+            let read = !this._isServerGrouped() ? this.reader.data : this.reader.groups;
             return read.call(this.reader, data);
         },
 
@@ -3748,6 +4015,9 @@ export const __meta__ = {
                     that._pristineData.push(items[j]);
                 }
             } else {
+                if (kendo.isBlank(data)) {
+                    data = [];
+                }
                 that._pristineData = data.slice(0);
             }
 
@@ -4967,6 +5237,16 @@ export const __meta__ = {
             return that._group;
         },
 
+        parseHighlightDescriptors: function(descriptors, idField) {
+            const data = this._data ? this._flatData(this._data) : [];
+            if (!descriptors || !descriptors.length || !data.length) {
+                return [];
+            }
+
+            const highlightDescriptors = convertHighlightDescriptors(data, descriptors, idField || "id");
+            return highlightDescriptors;
+        },
+
         getGroupsFlat: function(data) {
             var idx,
                 result = [],
@@ -6106,6 +6386,8 @@ export const __meta__ = {
 
         _childrenLoaded: function() {
             this._loaded = true;
+            this._loading = false;
+            this._loadingPromise = null;
 
             this._updateChildrenField();
         },
@@ -6114,6 +6396,10 @@ export const __meta__ = {
             var options = {};
             var method = "_query";
             var children, promise;
+
+            if (this.loading()) {
+                return this._loadingPromise || $.Deferred().resolve().promise();
+            }
 
             if (this.hasChildren) {
                 this._initChildren();
@@ -6125,6 +6411,7 @@ export const __meta__ = {
                 if (!this._loaded) {
                     children._data = undefined;
                     method = "read";
+                    this.loading(true);
                 }
 
                 children.one(CHANGE, this._childrenLoaded.bind(this));
@@ -6135,6 +6422,7 @@ export const __meta__ = {
 
                 promise = children[method](options);
                 if (!this._loaded) {
+                    this._loadingPromise = promise;
                     this.trigger(ITEMLOAD, { promise: promise, node: this });
                 }
             } else {
@@ -6153,8 +6441,17 @@ export const __meta__ = {
         loaded: function(value) {
             if (value !== undefined) {
                 this._loaded = value;
+                this.loading(false);
             } else {
                 return this._loaded;
+            }
+        },
+
+        loading: function(value) {
+            if (value !== undefined) {
+                this._loading = value;
+            } else {
+                return this._loading || false;
             }
         },
 
@@ -6761,6 +7058,8 @@ export const __meta__ = {
         LazyObservableArray: LazyObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
+        AISmartPasteTransport: AISmartPasteTransport,
+        AiTransport: AiTransport,
         Cache: Cache,
         DataReader: DataReader,
         Model: Model,

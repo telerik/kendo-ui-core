@@ -5,9 +5,9 @@ description: "Learn how to cascade Kendo UI DropDownList widgets from multiple p
 previous_url: /controls/editors/dropdownlist/how-to/cascade-from-multiple-parents, /controls/editors/dropdownlist/how-to/cascade/cascade-from-multiple-parents
 slug: howto_cascade_multiple_parents_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, cascade, from, multiple, parents
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

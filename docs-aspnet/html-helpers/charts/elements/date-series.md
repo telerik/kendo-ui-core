@@ -2,25 +2,26 @@
 title: Date Series
 page_title: Date Series
 description: "Learn how to display dates in the Telerik UI Charts for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_dateseries_aspnetcore
 ---
 {% if site.core %}
-    {% assign CategoryAxisType = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#typekendomvcuichartcategoryaxistype" %}
-    {% assign CategoryField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#categoryfieldsystemstring" %}
-    {% assign BaseUnit = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitkendomvcuichartaxisbaseunit" %}
-    {% assign BaseUnitStep = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitstepsystemint32" %}
-    {% assign MaxDateGroups = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#maxdategroupssystemdouble" %}
+    {% assign CategoryAxisType = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#typekendomvcuichartcategoryaxistype" %}
+    {% assign CategoryField = "/api/kendo.mvc.ui.fluent/chartseriesbuilder#categoryfieldsystemstring" %}
+    {% assign BaseUnit = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#baseunitkendomvcuichartaxisbaseunit" %}
+    {% assign BaseUnitStep = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#baseunitstepsystemint32" %}
+    {% assign MaxDateGroups = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#maxdategroupssystemdouble" %}
     {% assign AutoBaseUnitSteps = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisAutoBaseUnitStepsSettingsBuilder" %}
-    {% assign LabelsFormat = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#formatsystemstring" %}
-    {% assign LabelsCulture = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#culturesystemstring" %}
-    {% assign Min = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minsystemobject" %}
-    {% assign Max = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#maxsystemobject" %}
-    {% assign AxisCrossingValue = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#axiscrossingvaluesystemobject" %}
-    {% assign MinorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minorunitsystemdouble" %}
-    {% assign MajorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#majorunitsystemdouble" %}
+    {% assign LabelsFormat = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#formatsystemstring" %}
+    {% assign LabelsCulture = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#culturesystemstring" %}
+    {% assign Min = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#minsystemobject" %}
+    {% assign Max = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#maxsystemobject" %}
+    {% assign AxisCrossingValue = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#axiscrossingvaluesystemobject" %}
+    {% assign MinorUnit = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#minorunitsystemdouble" %}
+    {% assign MajorUnit = "/api/kendo.mvc.ui.fluent/chartxaxisbuilder#majorunitsystemdouble" %}
 {% else %}
-    {% assign CategoryAxisType = "/api/Kendo.Mvc.UI/ChartCategoryAxis#type" %}
-    {% assign CategoryField = "/api/Kendo.Mvc.UI.Fluent/ChartPieSeriesBuilder#categoryfieldsystemstring" %}
+    {% assign CategoryAxisType = "/api/kendo.mvc.ui.fluent/chartcategoryaxisbuilder#typekendomvcuichartcategoryaxistype" %}
+    {% assign CategoryField = "/api/kendo.mvc.ui.fluent/chartpieseriesbuilder#categoryfieldsystemstring" %}
     {% assign BaseUnit = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunit" %}
     {% assign BaseUnitStep = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunitstep" %}
     {% assign MaxDateGroups = "/api/Kendo.Mvc.UI/ChartCategoryAxis#maxdategroups" %}
@@ -311,20 +312,20 @@ To set the base units in the categorical charts, use any of the following approa
 * [Default configuration](#default-configuration)
 * [Manual configuration](#manual-configuration)
 * [Automatic fitting](#automatic-fitting)
-* [Labels format](#label-format)
+* [Labels format](#labels-format)
 
 #### Default Configuration
 
 To determine a default base, use the smallest duration between categories.
 
-```HtmlHelper_BaseUnit_Years
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2006, 1, 1) })
         // baseUnit is set to "years".
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Years
+```TagHelper
 
     @{
         var categories_data = new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2006, 1, 2) };
@@ -338,14 +339,14 @@ To determine a default base, use the smallest duration between categories.
 ```
 {% endif %}
 
-```HtmlHelper_BaseUnit_Days
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) })
         // baseUnit is set to "days".
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Days
+```TagHelper
 
     @{
         var categories_data = new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) };
@@ -488,13 +489,13 @@ To set the base units in the scatter charts, use any of the following approaches
 
 * [Default configuration](#default-configuration)
 * [Manual configuration](#manual-configuration)
-* [Labels format](#label-format)
+* [Labels format](#labels-format)
 
 #### Default Configuration
 
 The default base unit is determined by the axis (or series) range.
 
-```HtmlHelper_BaseUnit_Years
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2006,1,1))
@@ -502,7 +503,7 @@ The default base unit is determined by the axis (or series) range.
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Years
+```TagHelper
 
     <x-axis>
         <x-axis-item min="new DateTime(2005,1,1)" max="new DateTime(2006,1,1)">
@@ -512,7 +513,7 @@ The default base unit is determined by the axis (or series) range.
 ```
 {% endif %}
 
-```HtmlHelper_BaseUnit_Days
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2005,1,2))
@@ -520,7 +521,7 @@ The default base unit is determined by the axis (or series) range.
     )
 ```
 {% if site.core %}
-```TagHelper_BaseUnit_Days
+```TagHelper
 
     <x-axis>
         <x-axis-item min="new DateTime(2005,1,1)" max="new DateTime(2005,1,2)">
@@ -572,6 +573,5 @@ The date axis provides options for specifying one format per base unit. If speci
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API of the Chart for {{ site.framework }}](/api/chart)

@@ -7,6 +7,7 @@ slug: grid-editing-incell-get-the-deleted-rows
 tags: grid, editable, get, obtain, deleted, destroyed, rows, items, pending, changes, incell, editing
 ticketid: 1343481
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -30,13 +31,13 @@ Is there any way to can retrieve deleted Rows on Click of custom button using in
 
 It is possible to get hold of the destroyed items in the data source with the help of the `destroyed()` internal method. It returns a collection of the destroyed items before they are synced. However, please be cautious of its usage and test it when moving to new versions. Since it is not a publically revealed property, it may be subject to change.
 
-    ```       
-        function getDestroyed(){
-            var grid = $("#grid").data("kendoGrid");
-            var destroyed = grid.dataSource.destroyed();
-            kendo.alert(kendo.stringify(destroyed));
-        }
-    ```
+```       
+    function getDestroyed(){
+        var grid = $("#grid").data("kendoGrid");
+        var destroyed = grid.dataSource.destroyed();
+        kendo.alert(kendo.stringify(destroyed));
+    }
+```
 
 ```dojo
     <div id="example">
@@ -49,28 +50,30 @@ It is possible to get hold of the destroyed items in the data source with the he
               kendo.alert(kendo.stringify(destroyed));
             }
             
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                      transport: {
                          read:  {
-                             url: crudServiceBaseUrl + "/Products",
-                             dataType: "jsonp"
+                             url: crudServiceBaseUrl + "/Products"
                          },
                          update: {
                              url: crudServiceBaseUrl + "/Products/Update",
-                             dataType: "jsonp"
+                             type: "POST",
+                             contentType: "application/json"
                          },
                          destroy: {
                              url: crudServiceBaseUrl + "/Products/Destroy",
-                             dataType: "jsonp"
+                             type: "POST",
+                             contentType: "application/json"
                          },
                          create: {
                              url: crudServiceBaseUrl + "/Products/Create",
-                             dataType: "jsonp"
+                             type: "POST",
+                             contentType: "application/json"
                          },
                          parameterMap: function(options, operation) {
                              if (operation !== "read" && options.models) {
-                                 return {models: kendo.stringify(options.models)};
+                                 return kendo.stringify(options.models);
                              }
                          }
                      },
@@ -111,4 +114,4 @@ It is possible to get hold of the destroyed items in the data source with the he
 
 ## See Also
 
-* [Editing the Kendo UI Grid Widget](https://docs.telerik.com/kendo-ui/controls/grid/editing)
+* [Grid Editing Overview](https://www.telerik.com/kendo-jquery-ui/documentation/controls/grid/editing/editing)

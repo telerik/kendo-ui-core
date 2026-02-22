@@ -2,6 +2,7 @@
 title: Enabled
 page_title: Enabled Binding - Kendo UI MVVM
 description: "Learn how to enable the target DOM element by having the View-Model value return true values in Kendo UI MVVM."
+components: ["mvvm"]
 slug: enabledbinding_mvvm_kendoui
 ---
 

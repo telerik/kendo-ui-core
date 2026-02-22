@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery AIPrompt Documentation - Getting Started with the AIPrompt
 description: "Get started with the jQuery AIPrompt by Kendo UI and learn how to create the component."
+components: ["aiprompt"]
 slug: getting_started_kendoui_aiprompt_component
 position: 1
 ---
@@ -317,8 +318,4 @@ In a similar fashion, if you wish to execute a command to process the generated 
 * [JavaScript API Reference of the jQuery AIPrompt](/api/javascript/ui/aiprompt)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

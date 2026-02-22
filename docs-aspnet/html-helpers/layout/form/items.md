@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn how to configure items."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_items
 position: 3
 ---

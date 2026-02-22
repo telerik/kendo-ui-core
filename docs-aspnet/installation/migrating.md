@@ -1,6 +1,7 @@
 ---
 title: Migrating from MVC to Core MVC
 description: "Common issues that may occur when you migrate from Telerik UI for MVC  to Telerik UI for Core MVC"
+components: ["general"]
 page_title: Migrating Telerik from MVC to Core MVC
 slug: migrating_from_mvc_to_core
 tags: migration, mvc, upgrade

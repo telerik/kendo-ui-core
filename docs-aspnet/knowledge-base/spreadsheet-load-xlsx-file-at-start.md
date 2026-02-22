@@ -7,6 +7,7 @@ slug: spreadsheet-load-xlsx-file-at-start
 tags: spreadsheet, xlsx, excel, file, initialization, start, server, load
 ticketid: 1628152
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

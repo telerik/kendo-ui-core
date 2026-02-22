@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Menu Documentation - Appearance
 description: "Get started with the jQuery Menu by Kendo UI and manage its appearance."
+components: ["menu"]
 slug: appearance_kendoui_menu
 position: 5
 ---

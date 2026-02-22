@@ -6,7 +6,7 @@ slug: widgets_unavailable_undefined
 tags: telerik, kendoui, jquery, troubleshooting, widgets, are, undefined, unavailable 
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

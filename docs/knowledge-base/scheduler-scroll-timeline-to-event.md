@@ -7,6 +7,7 @@ slug: scheduler-scroll-timeline-to-event
 tags: kendo, kendoui, scheduler, timeline, scroll, select, event
 ticketid: 1141944
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -69,8 +70,8 @@ You can also select the desired event by using the [`select`](https://docs.teler
     $("#scheduler").kendoScheduler({
       height: 300,
       selectable: true,
-      date: new Date("2022/6/13"),
-      startTime: new Date("2022/6/13 07:00 AM"),
+      date: new Date("2025/6/13"),
+      startTime: new Date("2025/6/13 07:00 AM"),
       eventHeight: 50,
       majorTick: 60,
       views: [ "timelineWeek" ],
@@ -79,8 +80,7 @@ You can also select the desired event by using the [`select`](https://docs.teler
         batch: true,
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/meetings",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/meetings"
           }
         },
         schema: {

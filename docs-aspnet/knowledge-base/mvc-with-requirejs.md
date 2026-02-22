@@ -7,6 +7,7 @@ previous_url: /how-to/use-with-requirejs-mvc
 slug: mvc-with-requirejs
 tags: requirejs, telerik, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -35,7 +36,7 @@ The following example demonstrates how to use bundled scripts with RequireJS to 
 1. Use RequireJS to load jQuery and the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}).
 1. Initialize the Grid by calling the `DeferredScripts()` method in the `initApp()` function.
 
-```Index.cshtml
+```Razor Index.cshtml
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/10.0.1/default/default-main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
 

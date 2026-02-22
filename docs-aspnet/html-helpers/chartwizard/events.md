@@ -2,6 +2,7 @@
 title: Events
 page_title: Telerik UI Chart Wizard Documentation - Client Events
 description: "Learn how to handle the events of the Telerik UI Chart Wizard component for {{ site.framework }}."
+components: ["chartwizard"]
 slug: htmlhelpers_events_chartwizard
 position: 5
 ---
@@ -32,7 +33,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-chartwizard>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onChange(e){
             // Handle the Chart Wizard "Change" event that triggers when the component changes its state.

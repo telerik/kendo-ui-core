@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery MediaPlayer Documentation - Keyboard Navigation
 description: "Get started with the jQuery MediaPlayer by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["mediaplayer"]
 slug: keynav_mediaplayer_jquery
 position: 2
 ---
@@ -31,4 +32,4 @@ The MediaPlayer supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the MediaPlayer (Demo)](https://demos.telerik.com/kendo-ui/mediaplayer/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the MediaPlayer]({% slug accessibility_mediaplayer_jquery %})
+* [Accessibility in the MediaPlayer]({% slug jquery_mediaplayer_accessibility %})

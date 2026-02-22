@@ -2,6 +2,7 @@
 title: DateInput Integration
 page_title: DateInput Integration
 description: "Get started with the Telerik UI DateTimePicker for ASP.NET and learn how to integrate it with the Telerik UI DateInput."
+components: ["datetimepicker"]
 slug: dateinputintegration_datetimepicker_aspnetcore
 position: 9
 ---
@@ -30,7 +31,7 @@ To use the DateInput as the input element in a DateTimePicker, enable the [`Date
 ```
 {% endif %}
 
-To customize the placeholders of the DateInput use the [`Messages`](api/kendo.mvc.ui.fluent/datetimepickermessagessettingsbuilder) configuration and set the desired DateInput messages.
+To customize the placeholders of the DateInput use the [`Messages`](/api/kendo.mvc.ui.fluent/datepickerbasemessagessettingsbuilder) configuration and set the desired DateInput messages.
 
 ## AutoFill functionality
 

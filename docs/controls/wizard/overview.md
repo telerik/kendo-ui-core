@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Wizard Documentation - Wizard Overview
 description: "Get started with the jQuery Wizard by Kendo UI and learn about the component's capabilities."
+components: ["wizard"]
 slug: overview_wizard_widget
 position: 0
 ---
@@ -17,7 +18,7 @@ The Wizard displays content in sequential, stepwise order. Each step of the Kend
 * [Form Integration]({% slug form_integration_wizard_widget  %})&mdash;The Wizard supports integration with the Kendo Form.
 * [Content]({% slug content_wizard_widget  %})&mdash;The component supports different ways to load its data.
 * [Layout]({% slug layout_wizard_widget %})&mdash;The Wizard provides both vertical and horizontal orientations.
-* [Accessibility]({% slug accessibility_kendoui_wizard_widget %})&mdash;The Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
+* [Accessibility]({% slug jquery_wizard_accessibility %})&mdash;The Wizard is accessible for screen readers, supports WAI-ARIA attributes, and delivers keyboard shortcuts for faster navigation.
 
 ## Next Steps 
 

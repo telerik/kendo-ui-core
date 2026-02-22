@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Learn how to configure the server-side validation when using the jQuery Captcha by Kendo UI."
+components: ["captcha"]
 slug: validation_kendoui_captcha_widget
 position: 3
 ---
@@ -56,7 +57,7 @@ To generate Captchas and validate the user's input, the Kendo UI Captcha depends
 
 1. Introduce the Kendo UI for jQuery Captcha:
 
-    ```dojo
+    ```
         <input id="captcha" />
     
         <script>

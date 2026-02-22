@@ -7,7 +7,7 @@ slug: dropdowntree-selected-dataitem
 tags: dropdowntree, treeview, selected, dataitem
 ticketid: 1554596
 res_type: kb
-component: dropdowntree
+components: ["dropdowntree"]
 ---
 
 ## Environment
@@ -35,8 +35,7 @@ How can I retrieve the dataItem of the selected node in Kendo UI for jQuery Drop
       var dataSource = new kendo.data.HierarchicalDataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Employees",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Employees"
           }
         },
         schema: {

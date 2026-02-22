@@ -2,6 +2,7 @@
 title: Local Binding
 page_title: Chart Wizard Documentation | Chart Wizard Local Data Binding
 description: "Learn how to bind the Telerik UI for {{ site.framework }} Chart Wizard component to a local data collection."
+components: ["chartwizard"]
 slug: htmlhelpers_localbinding_chartwizard
 position: 2
 ---
@@ -10,7 +11,7 @@ position: 2
 
 The Chart Wizard supports local data binding that enables you to pass an arbitrary Model directly within the boundaries of the component.
 
-For a runnable example, refer to the [demo on binding the Chart Wizard to local data](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-binding).
+For a runnable example, refer to the [demo on binding the Chart Wizard to local data](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-data-binding).
 
 To configure the Chart Wizard to bind to a local data collection available on the View, follow the next steps:
 
@@ -32,7 +33,7 @@ To configure the Chart Wizard to bind to a local data collection available on th
 1. Create a data collection of type `Product` in the Controller Action and pass it to the View that holds the Chart Wizard definition.
 
     {% if site.core %}
-    ```HomeController.cs      
+    ```C# HomeController.cs      
         public IActionResult Index()
         {
             // Returns a collection of type "Product".
@@ -52,7 +53,7 @@ To configure the Chart Wizard to bind to a local data collection available on th
         }
     ```
     {% else %}
-    ```HomeController.cs  
+    ```C# HomeController.cs  
         public ActionResult Index()
         {
             // Returns a collection of type "Product".
@@ -114,7 +115,7 @@ To configure the Chart Wizard to bind to a local data collection available on th
 ## See Also
 
 * [Binding the Chart Wizard to Remote Data]({% slug htmlhelpers_remotebinding_chartwizard %})
-* [Binding the Chart Wizard for {{ site.framework }} to Local Data (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-binding)
+* [Binding the Chart Wizard for {{ site.framework }} to Local Data (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/local-data-binding)
 * [Server-Side API of the Chart Wizard HtmlHelper](/api/chartwizard)
 {% if site.core %}
 * [Server-Side API of the Chart Wizard TagHelper](/api/taghelpers/chartwizard)

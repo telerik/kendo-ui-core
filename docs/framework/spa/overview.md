@@ -2,6 +2,7 @@
 title: Overview
 page_title: Single-Page Application Overview - Kendo UI Single-Page Application
 description: "Learn how to create a Kendo UI Single-Page Application."
+components: ["spa"]
 slug: overview_kendoui_singlepageapplication
 position: 1
 ---

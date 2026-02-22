@@ -10,12 +10,15 @@ product-code: UIASPCORE
 product-name: Telerik UI for ASP.NET Core
 product-url: https://www.telerik.com/aspnet-core-ui
 product-trial-url: https://www.telerik.com/try/aspnet-core-ui
+contribute-url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet/
 search-engine-id: c5d68ed79c1c44275
 avatar-path: ./images/avatar-ninja.svg
 no-results-image-path: ./images/ninja-no-results.svg
 img-max-width: 100%
 table-layout: fixed
 pdf-cover-png-path: ./images/pdf-cover.png
+gitLastCommitDateEnabled: true
+search-provider: nuclia
 
 cta-overview: The @Subject component is part of @ProductLink, a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial.
 cta-intro: "@ProductLink is a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial."
@@ -29,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
-  cdnVersion: "2025.1.211"
-  themesCdnVersion: "10.2.0"
-  mvcCoreVersion: "2025.1.211"
+  cdnVersion: "2026.1.212"
+  themesCdnVersion: "13.0.0"
+  mvcCoreVersion: "2026.1.212"
   platform: aspnet-core
   core: true
   mvc: false
@@ -40,10 +43,111 @@ hash-ignore-pattern: "[\\.\\(\\)\\<\\>,]"
 default-code-block-language: Razor
 enable-tabbed-code-blocks: true
 
+demos:
+  metaFileName: demo.json
+  defaultTheme: default-ocean-blue-a11y
+  uris:
+      www.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
+      wwwsit.telerik.com: https://demos.telerik.com/aspnet-core/docsbuilder/
+      wwwuat.telerik.com: https://aspnet-core-demos-staging.azurewebsites.net/aspnet-core/docsbuilder/
+      default: https://localhost:44314/docsbuilder/
+  themes:
+      default-main:
+          name: Main
+          group: Default
+          colors: ['#FFFFFF', '#ff6358', '#424242']
+      default-main-dark:
+          name: Main Dark
+          group: Default
+          tags: [dark]
+          colors: ['#333333', '#ff6358', '#FFFFFF']
+      default-ocean-blue:
+          name: Ocean Blue
+          group: Default
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-ocean-blue-a11y:
+          name: Ocean Blue A11y
+          group: Default
+          tags: [accessibility]
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-nordic:
+          name: Nordic
+          group: Default
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      default-purple:
+          name: Purple
+          group: Default
+          colors: ['#ffffff', '#bf70cc', '#424242']
+      default-turquoise:
+          name: Turquoise
+          group: Default
+          colors: ['#ffffff', '#28bfba', '#424242']
+
+      bootstrap-main:
+          name: Main
+          group: Bootstrap
+          colors: ['#ffffff', '#0d6efd', '#212529']
+      bootstrap-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Bootstrap
+          colors: ['#212529', '#0d6efd', '#ffffff']
+      bootstrap-nordic:
+          name: Nordic
+          group: Bootstrap
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      bootstrap-urban:
+          name: Urban
+          group: Bootstrap
+          colors: ['#ffffff', '#447a99', '#ff804d']
+      bootstrap-vintage:
+          name: Vintage
+          group: Bootstrap
+          colors: ['#744662', '#f2efe8', '#90b8c1']
+
+      material-main:
+          name: Main
+          group: Material
+          colors: ['#ffffff', '#3f51b5', '#424242']
+      material-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#3f51b5', '#ffffff']
+      material-arctic:
+          name: Arctic
+          group: Material
+          colors: ['#ffffff', '#2196f3', '#455a64']
+      material-lime-dark:
+          name: Lime Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#8bc34a', '#ffffff']
+      material-nova:
+          name: Nova
+          group: Material
+          colors: ['#ffffff', '#e91e63', '#455a64']
+
+      fluent-main:
+          name: Main
+          group: Fluent
+          colors: ['#ffffff', '#0078D4', '#323130']
+
+      fluent-main-dark:
+          name: Main Dark
+          group: Fluent
+          colors: ['#323130', '#0078D4', '#ffffff']
+  actions:
+    open-telerik-repl:
+        name: Telerik REPL
+        group: Edit in
+        iconUri: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAcCAYAAACQ0cTtAAAAAXNSR0IArs4c6QAAAYxJREFUSA21luFtwjAQhd8IHaEjMAIj8Lexo2aDdoNmg44AI3QD2KAjRAI7qfqHEVqdidNLsBPbjZEQBtv3cfeezwEiXlWHR9niKDQa2eEtYmv40qrBQ9niXWr88DdBRYfn8EgLKykDqXHlkLtxiyNlvRDKPy07bEWL5i7wJDs+X2rsk6CFQhULI3CynqSVvKDm/z50nKyncaHCIRQ0WpeqZ6GwSSktwZ2uNaXrHegTPFHPemRH+YUXl83pjLlcFqnnDWZsrvE5qvXE4j7BI/SsQaWag0znjLVb7EYlAWCg84f/lplQeI0V3qVnOd8E/jSLKMeoPxbf2Ngsg2F2A0FLjY9p+bzfL9javdEwuzHY3mvALHRRzzVhBC0VqqxlJO1sdtlg9lYWGvtsMN4TqWTZYK5bOQvM167Whj2d+xbnOlOrwRRO3GzGB6ZdsUeAEBhVxZqIPnkHEXSLsDPI1w1jA1U4zMIUTq5APexKjWAIGDLgqdtzRtfLUHtHEIKQqx1T4T/JM3Z0K/830C/YJNOpFlsHxgAAAABJRU5ErkJggg==
+
+
 markdown-replacements:
 - pattern: (/\.\.)*/aspnet-core/api/
   replacement: /api/
-- pattern: "```[ ]*(\\r?\\n[ ]*)+((?<liquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})[ ]*(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
+- pattern: "```[ ]*(\\r?\\n[ ]*)+(?=(?<followedBy>\\{%|\\r?\\n[ ]*```(?!prompt)))((?<liquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})[ ]*(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s*((if\\s+[^%]+)|endif|else)\\s*%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
   replacement: "```$<liquid>$<additionalLiquid>$<nextBlock>"
 - pattern: "```(?<lang>(HtmlHelper|View|TagHelper))\\s*?(?<newLine>\\r?\\n)"
   replacement: "```Razor $<lang>$<newLine>"
@@ -82,6 +186,7 @@ excluded-files:
 - "**/vs-integration/upgrade-api-analyzer.md"
 - "**/vs-integration/upgrade-wizard.md"
 - "**/installation/nuget-keys.md"
+- "**/installation/adding-client-side-resources/scripts/*"
 - "**/asp-net-mvc-3.md"
 - "**/asp-net-mvc-4.md"
 - "**/html-helpers/helper-basics/fundamentals-mvc.md"
@@ -99,28 +204,60 @@ excluded-files:
 - "**/html-helpers/navigation/menu/binding/sitemap-binding.md"
 - "**/html-helpers/navigation/panelbar/binding/sitemap-binding.md"
 - "**/html-helpers/navigation/panelbar/security-trimming.md"
-- "**/html-helpers/navigation/tabstrip/binding/*"
+- "**/html-helpers/navigation/tabstrip/binding/sitemap-binding.md"
 - "**/html-helpers/navigation/tabstrip/security-trimming.md"
 - "**/html-helpers/navigation/tabstrip/forms.md"
 - "**/html-helpers/navigation/treeview/security-trimming.md"
 - "**/html-helpers/editors/editor/import-export.md"
-- "**/html-helpers/data-management/grid/how-to/*"
-- "**/html-helpers/data-management/treelist/how-to/*"
-- "**/html-helpers/diagrams-and-maps/map/how-to/*"
-- "**/html-helpers/editors/autocomplete/how-to/*"
 - "**/html-helpers/editors/colorpicker/how-to/*"
-- "**/html-helpers/editors/datepicker/how-to/*"
-- "**/html-helpers/editors/dropdownlist/how-to/*"
 - "**/html-helpers/interactivity/progressbar/how-to/*"
 - "**/html-helpers/layout/window/how-to/*"
 - "**/html-helpers/navigation/menu/how-to/*"
 - "**/html-helpers/navigation/panelbar/how-to/*"
-- "**/html-helpers/navigation/treeview/how-to/*"
-- "**/html-helpers/scheduling/scheduler/how-to/*"
 - "**/tag-helpers/*"
 - "**/knowledge-base/switch-change-messages-inside-grid.md"
 - "**/knowledge-base/upload-files-to-database.md"
-- "**/knowledge-base/treeview-expand-node-async"
+- "**/knowledge-base/treeview-expand-node-async.md"
+- "**/knowledge-base/grid-access-current-model-in-popup.md"
+- "**/knowledge-base/grid-ajax-bound-grid-custom-json-result.md"
+- "**/knowledge-base/grid-ajax-editing-with-enumration.md"
+- "**/knowledge-base/grid-apply-dates-that-ignore-timezones.md"
+- "**/knowledge-base/grid-bind-to-collection-of-dynamic-objects.md"
+- "**/knowledge-base/grid-bind-to-datatable.md"
+- "**/knowledge-base/grid-bound-to-signalr.md"
+- "**/knowledge-base/grid-checkboxes-batch-editing.md"
+- "**/knowledge-base/grid-configure-foreignkey-columns-combobox-edit-template.md"
+- "**/knowledge-base/grid-csv-export-server-side.md"
+- "**/knowledge-base/grid-custom-popup-editor.md"
+- "**/knowledge-base/grid-edit-batch-mode-mutliselect-delete.md"
+- "**/knowledge-base/grid-edit-ef-code-first.md"
+- "**/knowledge-base/grid-edit-hierarchical-grids-in-incell-mode.md"
+- "**/knowledge-base/grid-edit-hierarchical-with-checkboxes.md"
+- "**/knowledge-base/grid-edit-nested.md"
+- "**/knowledge-base/grid-edit-radio-button-templates-incell-mode.md"
+- "**/knowledge-base/grid-edit-three-level-hierarchical-grid.md"
+- "**/knowledge-base/grid-editing-with-combobox-remote-binding-and-filtering.md"
+- "**/knowledge-base/grid-get-all-filters-recursively-modify-servre-side.md"
+- "**/knowledge-base/grid-handle-server-error.md"
+- "**/knowledge-base/grid-hierarchy-with-dynamic-model-loading-and-datatable.md"
+- "**/knowledge-base/grid-incell-batch-editing-webapi.md"
+- "**/knowledge-base/grid-inline-editing-of-nullable-boolean.md"
+- "**/knowledge-base/grid-oData-v4-web-api-controller.md"
+- "**/knowledge-base/grid-popup-editing-server-validation.md"
+- "**/knowledge-base/grid-post-grid-selection-to-server.md"
+- "**/knowledge-base/grid-post-grid-with-form.md"
+- "**/knowledge-base/grid-preserve-server-toolbar-template-after-set-options.md"
+- "**/knowledge-base/grid-render-byte-base64-show-preview-window.md"
+- "**/knowledge-base/grid-save-all-changes-with-one-request.md"
+- "**/knowledge-base/grid-save-state-with-url-browser-history-api.md"
+- "**/knowledge-base/grid-self-referencing-hierarchy.md"
+- "**/knowledge-base/grid-show-command-buttons-conditionally.md"
+- "**/knowledge-base/grid-timespan-editor.md"
+- "**/knowledge-base/grid-update-using-timestamp.md"
+- "**/knowledge-base/grid-use-groupheadertemplate-foreignkeycolumn.md"
+- "**/knowledge-base/grid-use-with-contextmenu.md"
+- "**/knowledge-base/grid-using-remote-validation.md"
+- "**/knowledge-base/grid-utc-time-on-both-server-and-client.md"
 - "**/knowledge-base/mvc-with-requirejs.md"
 
 meta:
@@ -132,6 +269,10 @@ meta:
     position: 50
   "*/dropdownbutton":
     title: DropDownButton
+  "*speechtotextbutton":
+    title: SpeechToTextButton
+  "*smartpastebutton":
+    title: SmartPasteButton
   "*splitbutton":
     title: SplitButton
   "*switch":
@@ -159,7 +300,7 @@ meta:
   "*timepicker":
     title: TimePicker
   "*timeline":
-    title: TimeLine
+    title: Timeline
   "*tilelayout":
     title: TileLayout
   "*textbox":
@@ -380,10 +521,10 @@ meta:
     position: 11
   accessibility:
     title: Accessibility
-    position: 10
+    position: 11
   globalization:
     title: Globalization
-    position: 9
+    position: 10
   styles-and-layout/less-themes:
     title: LESS Themes
     position: 3
@@ -392,7 +533,10 @@ meta:
     position: 2
   styles-and-layout:
     title: Styles and Appearance
-    position: 8
+    position: 9
+  ai:
+    title: AI Tools
+    position: 3
   html-helpers/pdf/pdfviewer:
     title: PDFViewer
   html-helpers/pdf:
@@ -415,6 +559,8 @@ meta:
     title: Chat
   html-helpers/conversational-ui/aiprompt:
     title: AIPrompt
+  html-helpers/conversational-ui/promptbox:
+    title: PromptBox
   html-helpers/conversational-ui:
     title: Conversational UI
   html-helpers/navigation/menu/contextmenu:
@@ -490,6 +636,8 @@ meta:
     title: TimeDurationPicker
   html-helpers/editors/imageeditor:
     title: Image Editor
+  html-helpers/conversational-ui/inline-aiprompt:
+    title: InlineAIPrompt
   html-helpers/editors/flatcolorpicker:
     title: FlatColorPicker
   html-helpers/editors/listbox/binding:
@@ -539,12 +687,15 @@ meta:
   html-helpers/data-management/grid/accessibility:
     title: Accessibility
     position: 29
+  html-helpers/data-management/grid/smart-grid:
+    title: Smart Grid
+    position: 4
   html-helpers/data-management/grid/troubleshoot:
     title: Troubleshooting
-    position: 30
+    position: 31
   html-helpers/data-management/grid/appearance:
     title: Appearance
-    position: 4
+    position: 6
   html-helpers/data-management/grid/templates:
     title: Templates
     position: 22
@@ -556,13 +707,13 @@ meta:
     position: 10
   html-helpers/data-management/grid/columns:
     title: Columns
-    position: 3
+    position: 5
   html-helpers/data-management/grid/grouping:
     title: Grouping
     position: 7
   html-helpers/data-management/grid/editing:
     title: Editing
-    position: 5
+    position: 3
   html-helpers/data-management/grid:
     title: Grid
   html-helpers/data-management/filter:
@@ -571,9 +722,12 @@ meta:
     title: Data Management
   html-helpers/datasource:
     title: Data Source
+  ai-components-and-features:
+    title: AI Components & Features
+    position: 4
   html-helpers:
     title: Components
-    position: 7
+    position: 8
   troubleshoot:
     title: Troubleshooting
     position: 60
@@ -637,9 +791,6 @@ meta:
   html-helpers/helper-basics:
     title: Working with Helpers
     position: 2
-  installation-mvc/adding-client-side-resources/scripts:
-    title: Creating Custom Script Bundles
-    position: 5
   installation-mvc/adding-client-side-resources:
     title: Providing Client-Side Resources
     position: 6
@@ -664,9 +815,6 @@ meta:
   installation/activating-your-license:
     title: "Activating Your License"
     position: 3
-  installation/adding-client-side-resources/scripts:
-    title: Creating Custom Script Bundles
-    position: 5
   vs-code-integration:
     title: VS Code Integration
     position: 6
@@ -717,6 +865,9 @@ redirects:
 - from: "^/getting-started/vs-integration/(.*)$"
   to: "/vs-integration/$1"
 
+- from: "^/installation/adding-client-side-resources/scripts/(.*)$"
+  to: "/installation/adding-client-side-resources/creating-custom-bundles"
+
 - from: "^/styles-and-layout/styling-components/(.*)$"
   to: "/styles-and-layout/$1"
 
@@ -728,3 +879,4 @@ redirects:
 
 - from: "^/tag-helpers/(.*)$"
   to: "/html-helpers/$1"
+

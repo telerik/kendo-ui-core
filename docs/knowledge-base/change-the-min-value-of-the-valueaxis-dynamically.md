@@ -7,7 +7,7 @@ slug: change-the-min-value-of-the-valueaxis-dynamically
 tags: chart, valueaxis, min, dynamically
 ticketid: 1125680
 res_type: kb
-component: charts
+components: ["chart"]
 ---
 
 ## Environment
@@ -45,7 +45,7 @@ For the full implementation, refer to [this Dojo example](https://dojo.telerik.c
 ```
    <div id="example">
       <div class="demo-section k-content wide">
-        <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+        <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
       </div>
       <script>
 

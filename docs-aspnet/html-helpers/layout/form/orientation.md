@@ -2,6 +2,7 @@
 title: Orientation
 page_title: Orientation
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its orientation options."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_orientation
 position: 7
 ---

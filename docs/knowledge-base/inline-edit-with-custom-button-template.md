@@ -7,7 +7,7 @@ slug: inline-edit-with-custom-button-template
 tags: inline, edit, delete, custom, button, template, commands, grid
 ticketid: 1133582
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -39,7 +39,7 @@ Use the [`addRow`](/api/javascript/ui/grid/methods/addrow) and [`removeRow`](/ap
 1. Use the `columns.template` property to add a custom button to the column.
 
     ````dojo
-    { template: "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"}
+    { template: "<button class='k-button customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"}
     ````
 
 1. Apply the [`editRow`](/api/javascript/ui/grid/methods/editrow) method by passing the row for which the button was clicked as an argument.
@@ -59,28 +59,30 @@ Use the [`addRow`](/api/javascript/ui/grid/methods/addrow) and [`removeRow`](/ap
           });
 
           $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+           var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
-                  transport: {
-                    read:  {
-                      url: crudServiceBaseUrl + "/Products",
-                      dataType: "jsonp"
-                    },
-                    update: {
-                      url: crudServiceBaseUrl + "/Products/Update",
-                      ataType: "jsonp"
-                    },
-                    destroy: {
-                      url: crudServiceBaseUrl + "/Products/Destroy",
-                      dataType: "jsonp"
-                    },
-                    create: {
-                      url: crudServiceBaseUrl + "/Products/Create",
-                      dataType: "jsonp"
-                    },
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                     parameterMap: function(options, operation) {
                       if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                       }
                     }
                   },
@@ -110,8 +112,8 @@ Use the [`addRow`](/api/javascript/ui/grid/methods/addrow) and [`removeRow`](/ap
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}"},
                 { field: "UnitsInStock", title:"Units In Stock"},
-                { template: "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"},
-                { template: "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base customDelete'><span class='k-button-text'>My Delete</span></button>", title:"Custom Delete"},
+                { template: "<button class='k-button customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"},
+                { template: "<button class='k-button customDelete'><span class='k-button-text'>My Delete</span></button>", title:"Custom Delete"},
                 { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }]
             });

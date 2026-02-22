@@ -55,32 +55,35 @@ describe("kendo.ui.bottomnavigation initialization", function() {
         assert.isOk(bottomNav.element.hasClass("k-pos-fixed"));
     });
 
-    it("themeColor is primary by default", function() {
+    it("themeColor is not set by default", function() {
         let bottomNav = setup();
 
-        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
+        assert.isNotOk(bottomNav.element.hasClass("k-bottom-nav-flat-primary"));
     });
 
-    it("themeColor is set to secondary", function() {
+    it("themeColor is set to secondary with fillMode", function() {
         let bottomNav = setup({
-            themeColor: "secondary"
+            themeColor: "secondary",
+            fillMode: "flat"
         });
 
-        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat-secondary"));
+        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat"));
+        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-secondary"));
     });
 
     it("themeColor cannot be set to custom value", function() {
         let bottomNav = setup({
-            themeColor: "custom"
+            themeColor: "custom",
+            fillMode: "flat"
         });
 
         assert.isFalse(bottomNav.element.hasClass("k-bottom-nav-flat-custom"));
     });
 
-    it("fillMode is flat by default", function() {
+    it("fillMode is not set by default", function() {
         let bottomNav = setup();
 
-        assert.isOk(bottomNav.element.hasClass("k-bottom-nav-flat"));
+        assert.isNotOk(bottomNav.element.hasClass("k-bottom-nav-flat"));
     });
 
     it("fillMode is set to a valid value", function() {

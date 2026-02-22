@@ -7,6 +7,7 @@ slug: window-drag-resize-over-iframe
 tags: window, iframe, drag, resize
 ticketid:
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment
@@ -37,7 +38,7 @@ When there is a Kendo Window and an iframe on the same page (Window and Editor a
     <div id="example">
       <div id="window">
         <h4>Armchair 402</h4>
-        <div class="armchair"><img src="../content/web/window/armchair-402.png" alt="Armchair 402" /> Artek Alvar Aalto - Armchair 402</div>
+        <div class="armchair"><img src="https://demos.telerik.com/kendo-ui/content/web/window/armchair-402.png" alt="Armchair 402" /> Artek Alvar Aalto - Armchair 402</div>
         <p>Alvar Aalto is one of the greatest names in modern architecture and design. Glassblowers at the iittala factory still meticulously handcraft the legendary vases that are variations on one theme, fluid organic shapes that let the end user decide the use. Interpretations of the shape in new colors and materials add to the growing Alvar Aalto Collection that remains true to his original design.</p>
       </div>
 

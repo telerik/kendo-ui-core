@@ -6,6 +6,7 @@ page_title: Sending Additional Form Data in the Grid
 slug: grid-send-form-data
 tags: grid, form, read, fetch, send, additional, data, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -37,7 +38,7 @@ To achieve the desired results:
 1. Map the external fields to the JSON object.
 1. Pass the JSON object in the return statement of the handler.
 
-```Index.cshtml
+```Razor Index.cshtml
     // Form
     <form id="userForm">
         <label for="FirstName">First name:</label>
@@ -67,7 +68,7 @@ To achieve the desired results:
                 )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function dataHandler(e){
             var formArray = $("#userForm").serializeArray(); // Serialize the form data as an array.
@@ -83,7 +84,7 @@ To achieve the desired results:
         }
     </script>
 ```
-```Controller.cs
+```C# Controller.cs
     public class GridController : Controller
     {
          public ActionResult Orders_Read([DataSourceRequest] DataSourceRequest request, UserModel model)
@@ -94,7 +95,7 @@ To achieve the desired results:
          }
     }
 ```
-```Model.cs
+```C# Model.cs
     public class UserModel
     {
         public string FirstName { get; set; }

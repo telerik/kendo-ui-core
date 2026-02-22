@@ -2,6 +2,7 @@
 title: Custom Binding
 page_title: Custom Binding
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for Custom binding."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_custombinding_aspnetcore
 position: 3
 ---
@@ -47,8 +48,8 @@ The following example demonstrates how to declare the {{ site.product }} Schedul
                 .DataValueField("Value")
                 .DataColorField("Color")
                 .BindTo(new[] {
-                        new { Text = "Meeting Room 101", Value = 1, Color =     "#6eb3fa" },
-                        new { Text = "Meeting Room 201", Value = 2, Color =     "#f58a8a" }
+                    new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+                    new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
                 });
             resource.Add(m => m.Attendees)
                 .Title("Attendees")
@@ -57,46 +58,51 @@ The following example demonstrates how to declare the {{ site.product }} Schedul
                 .DataValueField("Value")
                 .DataColorField("Color")
                 .BindTo(new[] {
-                        new { Text = "Alex", Value = 1, Color = "#f8a398" },
-                        new { Text = "Bob", Value = 2, Color = "#51a0ed" },
-                        new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+                    new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                    new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                    new { Text = "Charlie", Value = 3, Color = "#56ca85" }
                 });
         })
         .DataSource(d => d
-                .Custom() // Declare a Custom DataSource.
-                .Batch(true)
-                .Schema(schema => schema // Compose the Model's schema.
-                    .Model(m =>
-                    {
-                        m.Id(f => f.MeetingID);
-                        m.Field("title", typeof(string)).DefaultValue("No   title").From("Title");
-                        m.Field("start", typeof(DateTime)).From("Start");
-                        m.Field("end", typeof(DateTime)).From("End");
-                        m.Field("description", typeof(string)).From ("Description");
-                        m.Field("recurrenceID", typeof(int)).From   ("RecurrenceID");
-                        m.Field("recurrenceRule", typeof(string)).From  ("RecurrenceRule");
-                        m.Field("recurrenceException", typeof(string)).From ("RecurrenceException");
-                        m.Field("isAllDay", typeof(bool)).From("IsAllDay");
-                        m.Field("startTimezone", typeof(string)).From   ("StartTimezone");
-                        m.Field("endTimezone", typeof(string)).From ("EndTimezone");
-                    }))
-                .Transport(transport => transport // Set up the transport operations.
-                    .Read(read => read.Url("https://demos.telerik.com/kendo-ui/ service/meetings")
-                          .DataType("jsonp"))
-                    .Create(create => create.Url("https://demos.telerik.com/    kendo-ui/service/meetings/create")
-                          .DataType("jsonp"))
-                    .Destroy(destroy => destroy.Url("https://demos.telerik.com/ kendo-ui/service/meetings/destroy")
-                          .DataType("jsonp"))
-                    .Update(update => update.Url("https://demos.telerik.com/    kendo-ui/service/meetings/update")
-                          .DataType("jsonp"))
-                    .ParameterMap("parameterMap")) // Wire to a handler that will alter the request format.
+            .Custom() // Declare a Custom DataSource.
+            .Batch(true)
+            .Schema(schema => schema // Compose the Model's schema.
+                .Model(m =>
+                {
+                    m.Id(f => f.MeetingID);
+                    m.Field("title", typeof(string)).DefaultValue("No   title").From("Title");
+                    m.Field("start", typeof(DateTime)).From("Start");
+                    m.Field("end", typeof(DateTime)).From("End");
+                    m.Field("description", typeof(string)).From ("Description");
+                    m.Field("recurrenceID", typeof(int)).From   ("RecurrenceID");
+                    m.Field("recurrenceRule", typeof(string)).From  ("RecurrenceRule");
+                    m.Field("recurrenceException", typeof(string)).From ("RecurrenceException");
+                    m.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                    m.Field("startTimezone", typeof(string)).From   ("StartTimezone");
+                    m.Field("endTimezone", typeof(string)).From ("EndTimezone");
+                })
+            )
+            .Transport(transport => transport // Set up the transport operations.
+                .Read(read => read.Url("https://demos.telerik.com/service/v2/core/meetings")
+                    .ContentType("application/json"))
+                .Create(create => create.Url("https://demos.telerik.com/service/v2/core/meetings/create")
+                    .ContentType("application/json")
+                    .Type(HttpVerbs.Post))
+                .Destroy(destroy => destroy.Url(""https://demos.telerik.com/service/v2/core/meetings/destroy")
+                    .ContentType("application/json")
+                    .Type(HttpVerbs.Post))
+                .Update(update => update.Url("https://demos.telerik.com/service/v2/core/meetings/update")
+                    .ContentType("application/json")
+                    .Type(HttpVerbs.Post))
+                .ParameterMap("parameterMap") // Wire to a handler that will alter the request format.
+            )
         )
     )
 
     <script>
         function parameterMap(options, operation) { // Handler that alters the request format.
             if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                kendo.stringify(options.models);
             }
         }
     </script>
@@ -140,38 +146,37 @@ The following example demonstrates how to declare the {{ site.product }} Schedul
             <resource field="Attendees" title="Attendees" multiple="true"   datatextfield="Text" datavaluefield="Value" datacolorfield="Color"    bind-to="@attendeesData">
             </resource>
         </resources>
-        <scheduler-datasource type="@DataSourceTagHelperType.Custom" batch="true"> // Declare a Custom DataSource.
+        <scheduler-datasource type="@DataSourceTagHelperType.Custom" batch="true">
+            <transport parameter-map="parameterMap">
+                <read url="https://demos.telerik.com/service/v2/core/meetings"/>
+                <create url="https://demos.telerik.com/service/v2/core/meetings/create" type="POST" content-type="application/json" />
+                <destroy url="https://demos.telerik.com/service/v2/core/meetings/destroy" type="POST" content-type="application/json" />
+                <update url="https://demos.telerik.com/service/v2/core/meetings/update" type="POST" content-type="application/json" />
+            </transport>
             <schema>
-                <scheduler-model id="MeetingID"> // Compose the Model's schema.
+                <scheduler-model id="MeetingID">
                     <fields>
                         <field name="MeetingID" type="number"></field>
-                        <field name="title" from="Title" type="string"  default-value="@defaultTitle"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
                         <field name="start" from="Start" type="date"></field>
                         <field name="end" from="End" type="date"></field>
-                        <field name="description" from="Description"    type="string"></field>
-                        <field name="recurrenceId" from="RecurrenceID"  type="number" default-value=null></field>
-                        <field name="recurrenceRule" from="RecurrenceRule"  type="string" ></field>
-                        <field name="recurrenceException"   from="RecurrenceException" type="string"></field>
-                        <field name="startTimezone" from="StartTimezone"    type="string"></field>
-                        <field name="endTimezone" from="EndTimezone"    type="string"></field>
-                        <field name="isAllDay" from="IsAllDay" type="boolean"></    field>
+                        <field name="description" from="Description" type="string"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number" default-value=null></field>
+                        <field name="recurrenceRule" from="RecurrenceRule" type="string" ></field>
+                        <field name="recurrenceException" from="RecurrenceException" type="string"></field>
+                        <field name="startTimezone" from="StartTimezone" type="string"></field>
+                        <field name="endTimezone" from="EndTimezone" type="string"></field>
+                        <field name="isAllDay" from="IsAllDay" type="boolean"></field>
                     </fields>
                 </scheduler-model>
             </schema>
-            <transport parameter-map="parameterMap"> // Wire to a handler that will alter the request format.
-                // Set up the transport operations.
-                <read url="https://demos.telerik.com/kendo-ui/service/meetings"     dataType="jsonp"/>
-                <create url="https://demos.telerik.com/kendo-ui/service/    meetings/create" dataType="jsonp"/>
-                <destroy url="https://demos.telerik.com/kendo-ui/service/   meetings/destroy" dataType="jsonp" />
-                <update url="https://demos.telerik.com/kendo-ui/service/    meetings/update" dataType="jsonp"/>
-            </transport>
         </scheduler-datasource>
     </kendo-scheduler>
 
     <script>
         function parameterMap(options, operation) { // Handler that alters the request format.
             if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                kendo.stringify(options.models);
             }
         }
     </script>

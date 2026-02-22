@@ -2,6 +2,7 @@
 title: Responsive Columns
 page_title: Responsive Columns
 description: "Learn how to make the Telerik UI for {{ site.framework}} Grid columns responsive for different viewport dimensions."
+components: ["grid"]
 slug: responsive_columns_grid
 position: 12
 ---
@@ -149,7 +150,7 @@ The content within the column `Template()` method will be displayed when the con
   </kendo-grid>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         var resColTemplate;
 
@@ -159,7 +160,7 @@ The content within the column `Template()` method will be displayed when the con
         });
     </script>
 ```
-```Template
+```JS Template
     <script id="responsive-column-template" type="text/x-kendo-template">
         <strong>Contact Name</strong>
         <p class="col-template-val">#=data.ContactName#</p>
@@ -177,5 +178,8 @@ The content within the column `Template()` method will be displayed when the con
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Responsive Columns for the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/responsive-columns)
 * [Server-Side API](/api/grid)

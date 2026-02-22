@@ -6,6 +6,7 @@ page_title: How to Destroy Iframe Content in Kendo UI Tooltip on Hide
 slug: how-to-destroy-iframe-tooltip-content-kendo-ui
 tags: kendo, ui, jquery, tooltip, destroy, iframe, content, hide
 res_type: kb
+components: ["tooltip"]
 ticketid: 1682358
 ---
 

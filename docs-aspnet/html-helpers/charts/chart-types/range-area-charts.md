@@ -2,6 +2,7 @@
 title: Range Area Charts
 page_title: Range Area Charts
 description: "Learn how to define and configure a Telerik UI Range Area Chart for {{ site.framework }}."
+components: ["chart"]
 slug: rangeareacharts_aspnetcore_htmlhelper
 ---
 

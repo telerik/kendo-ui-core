@@ -5,9 +5,9 @@ description: "Learn how to show a ContextMenu with tree-item actions in a Kendo 
 slug: howto_shiwnodecontextmenu_treeview
 previous_url: /controls/navigation/treeview/how-to/integration/show-context-menu
 tags: telerik, kendo, jquery, treeview, show, contextmenu, for, nodes, items
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

@@ -7,7 +7,7 @@ slug: change-a-widget-options-dynamically
 previous_url: /knowledge-base/how-to-change-a-widget-options-dinamically
 tags: grid, setoptions, dynamically, options
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -85,9 +85,9 @@ The following example demonstrates how to dynamically change the Grid columns ba
           })
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {

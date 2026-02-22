@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started with the ChipList
 description: "Get started with the Telerik UI for {{ site.framework }} and learn how to create, initialize, and enable the component by following the complete step-by-step tutorial."
+components: ["chiplist"]
 slug: chiplist_aspnetcore_get_started
 position: 2
 ---
@@ -146,7 +147,7 @@ Now you can use the `Items.Icon` option which allows you to display a label on t
 
 ## See Also 
 
-* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](/api/javascript/ui/chiplist)
+* [JavaScript API Reference of the ChipList HtmlHelper for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chiplist)
 * [Server-Side API of the ChipList HtmlHelper for {{ site.framework }}](/api/chiplist)
 * [Knowledge Base Section](/knowledge-base)
 

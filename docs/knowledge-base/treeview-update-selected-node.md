@@ -7,6 +7,7 @@ slug: treeview-update-selected-node
 tags: treeview, troubleshooting
 ticketid: 1556946  
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -33,12 +34,11 @@ How can I update the text of the selected node in Kendo UI for jQuery TreeView?
     <div id="treeview"></div>
 
     <script>
-      var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+      var serviceRoot = "https://demos.telerik.com/service/v2/core";
       homogeneous = new kendo.data.HierarchicalDataSource({
         transport: {
           read: {
-            url: serviceRoot + "/Employees",
-            dataType: "jsonp"
+            url: serviceRoot + "/Employees"
           }
         },
         schema: {

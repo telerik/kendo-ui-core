@@ -7,7 +7,7 @@ slug: export-multiple-charts-in-the-same-pdf-file
 tags: kendo ui, jquery, pdf, multiple, charts, same, file
 ticketid: 1131735
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -274,4 +274,4 @@ How can I export many Charts in the same PDF file?
     </style>
 ```
 
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: jQuery Grid Documentation - Search Panel | Kendo UI 
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable search panel to search through its data."
+components: ["grid"]
 slug: searchpanel_kendoui_grid_widget
 position: 7
 ---

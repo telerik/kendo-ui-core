@@ -6,6 +6,7 @@ page_title: Color Alternating Rows of Excel Export
 slug: grid-export-color-alternating-rows
 tags: grid, export, excel, color, alternating, rows
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -38,7 +39,7 @@ Use the [`background`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/wo
 1. Specify the desired background color.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>

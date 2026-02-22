@@ -6,8 +6,8 @@ page_title: Dynamically Calculate Aggregates in the Grid - Kendo UI for jQuery D
 slug: grid-dynamic-aggregates
 tags: grid, dynamically, column, header, dynamic, aggregate, menu, footer, update, refresh, calculate
 res_type: kb
+components: ["grid"]
 ticketid: 1471295
-component: grid
 ---
 
 ## Environment
@@ -35,7 +35,7 @@ There a different options to choose from when it comes to the UI of the aggregat
 1. When the selection in the menu changes, generate a `footerTemplate` and assign it to the respective grid columns. Use the `setOptions()` method to update the grid with the new column configuration or refresh the grid if using static footer templates
 1. Apply the aggregates dynamically by using the data source [`aggregate()`](/api/javascript/data/datasource/methods/aggregate) method on selection change in the menu. 
 
-```dojo
+```
     <style>
       .aggregate-selector {
         display: flex;
@@ -53,8 +53,7 @@ There a different options to choose from when it comes to the UI of the aggregat
       var model;
       var columns;
       $.ajax({
-        url: "https://www.mocky.io/v2/5835e736110000020e0c003c",
-        dataType: "jsonp",
+        url: "https://runner.telerik.io/fullscreen/DEUMgSey.json",
         success: function (result) {
           generateGrid(result);
         }

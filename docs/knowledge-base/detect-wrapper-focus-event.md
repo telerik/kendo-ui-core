@@ -5,9 +5,9 @@ description: "Learn how to detect the Kendo UI DropDownList wrapper focus event.
 previous_url: /controls/editors/dropdownlist/how-to/detect-wrapper-focus-event, /controls/editors/dropdownlist/how-to/event-handling/detect-wrapper-focus-event
 slug: howto_detect_wrapper_focus_events_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, detect, wrapper, focus, events
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

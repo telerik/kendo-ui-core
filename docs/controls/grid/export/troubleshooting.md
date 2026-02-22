@@ -2,6 +2,7 @@
 title: Troubleshooting
 page_title: jQuery Grid Documentation - Export Troubleshooting
 description: "Get started with the jQuery Grid by Kendo UI and learn how to solve issues you might encounter while exporting the content of the Grid to Excel."
+components: ["grid"]
 slug: exporttroubleshoot_kendoui_grid_widget
 position: 80
 ---
@@ -33,9 +34,8 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },

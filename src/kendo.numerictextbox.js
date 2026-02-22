@@ -23,7 +23,6 @@ export const __meta__ = {
         activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         parse = kendo.parseFloat,
-        placeholderSupported = kendo.support.placeholder,
         getCulture = kendo.getCulture,
         CHANGE = "change",
         DISABLED = "disabled",
@@ -166,9 +165,9 @@ export const __meta__ = {
             upArrowText: "Increase value",
             downArrowText: "Decrease value",
             label: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             prefixOptions: {
                 separator: true
             },
@@ -890,9 +889,6 @@ export const __meta__ = {
             var input = this._text;
 
             input.val(value);
-            if (!placeholderSupported && !value) {
-                input.val(this.options.placeholder);
-            }
 
             input.attr("title", this.element.attr("title") || input.val());
         },

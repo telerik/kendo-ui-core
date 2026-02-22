@@ -7,7 +7,7 @@ slug: filter-multi-check-row-filter
 tags: checkbox, filter, row, multi, kendo, grid
 ticketid: 1123045
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

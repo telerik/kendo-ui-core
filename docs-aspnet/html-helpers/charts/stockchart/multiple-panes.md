@@ -2,6 +2,7 @@
 title: Multiple Panes
 page_title: Multiple Panes
 description: "Learn how to configure the Telerik UI StockChart component for {{ site.framework }} with multiple panes."
+components: ["stockchart"]
 slug: multiple_panes_stockchart_aspnetcore
 position: 3
 ---
@@ -150,7 +151,7 @@ The following example shows a complete configuration of a StockChart with **Valu
         </series>
     </kendo-stockchart>
 ```
-```HomeController
+```C# HomeController
     public IActionResult _StockData()
     {
         using (var db = GetContext())
@@ -173,7 +174,7 @@ The following example shows a complete configuration of a StockChart with **Valu
     }
 ```
 {% else %}
-```HomeController
+```C# HomeController
     public ActionResult _StockData()
     {
         using (var db = GetContext())

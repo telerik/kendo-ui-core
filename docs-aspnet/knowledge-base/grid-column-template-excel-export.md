@@ -6,6 +6,7 @@ page_title: Exporting Grid Column Templates to Excel
 slug: grid-column-template-excel-export 
 tags: grid, excel, export, column, template
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

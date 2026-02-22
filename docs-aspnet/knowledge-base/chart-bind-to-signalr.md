@@ -7,6 +7,7 @@ previous_url: /helpers/charts/how-to/binding-to-singalr, /html-helpers/charts/ho
 slug: chart-bind-to-signalr
 tags: chart, databound, signalr
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -86,13 +87,13 @@ How can I bind the Chart to a [SignalR](https://dotnet.microsoft.com/en-us/apps/
 
 ```JavaScript
     <script>
-        var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
+        var hubUrl = "path/to/hub";
         var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
         var hub = connection.createHubProxy("productHub");
         var hubStart = connection.start({ jsonp: true });
     </script>
 ```
-```Styles
+```CSS Styles
   <style>
     .footer:first-of-type {
         display: none !important;
@@ -125,7 +126,7 @@ For the complete implementation, refer to the [ASP.NET MVC application](https://
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/chart)

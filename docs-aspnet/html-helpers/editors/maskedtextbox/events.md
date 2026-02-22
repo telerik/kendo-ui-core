@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI MaskedTextBox component for {{ site.framework }}."
+components: ["maskedtextbox"]
 slug: events_maskedtextbox_aspnetcore
 position: 7
 ---
@@ -32,7 +33,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 </kendo-maskedtextbox>
 ```
 {% endif %}
-```script.js
+```JS script.js
   <script>
   function maskedtextbox_change() {
       // Handle the change event.

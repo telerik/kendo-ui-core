@@ -5,30 +5,24 @@ description: "Learn how to insert HTML content via custom Kendo UI Editor tools.
 previous_url: /controls/editors/editor/how-to/insert-html-via-custom-popup-tool, /controls/editors/editor/how-to/customize/insert-html-via-custom-popup-tool
 slug: howto_insert_html_content_custom_popup_tool_editor
 tags: telerik, kendo, jquery, editor, insert, html, content, through, custom, popup, tools
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment
 
 <table>
- <tr>
-  <td>Product</td>
-  <td>Progress® Kendo UI® Editor for jQuery</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 64bit</td>
- </tr>
- <tr>
-  <td>Visual Studio Version</td>
-  <td>Visual Studio 2017</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
- </tr>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Kendo UI for jQuery Editor</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>2025.4.1321</td>
+</tr>
+</tbody>
 </table>
 
 ## Description
@@ -61,17 +55,15 @@ For additional information about the code used in the example, refer to the foll
     </div>
 
     <script>
-
     $(function(){
-
         function onCustomToolClick (e) {
             var popupHtml =
-                '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container" style="width:auto;">' +
+                '<div class="k-editor-dialog k-edit-form-container" style="width:auto;">' +
                   '<div style="padding: 0 1em;">' +
-                    '<p><textarea cols="60" rows="10" style="width:90%"></textarea></p>' +
+                    '<p><textarea cols="60" rows="10" style="width:100%"></textarea></p>' +
                   '</div>' +
                   '<div class="k-edit-buttons k-state-default">' +
-                    '<button class="k-dialog-insert k-button k-primary">Insert</button>' +
+                    '<button class="k-dialog-update k-button k-button-primary">Insert</button>' +
                     '<button class="k-dialog-close k-button">Cancel</button>' +
                   '</div>' +
                 '</div>';
@@ -99,9 +91,10 @@ For additional information about the code used in the example, refer to the foll
             .center().open();
 
             // Insert the new content in the Editor when the Insert button is clicked.
-            popupWindow.element.find(".k-dialog-insert").click(function(){
+            popupWindow.element.find(".k-dialog-update").click(function(){
                 var customHtml = popupWindow.element.find("textarea").val();
                 editor.selectRange(storedRange);
+              console.log(customHtml)
                 editor.exec("inserthtml", { value: customHtml });
             });
 
@@ -124,7 +117,6 @@ For additional information about the code used in the example, refer to the foll
         });
 
     });
-
     </script>
 ```
 

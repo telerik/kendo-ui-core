@@ -5,6 +5,7 @@ page_title: Auto Height for rows of Excel Export
 slug: grid-export-cell-auto-height
 tags: grid, export, excel, format, cells, height, auto-height, core, mvc, telerik
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -42,7 +43,7 @@ To achieve the desired scenario:
 1. Export.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<wrap_text_in_Export_excel.Models.OrderViewModel>()
         .Name("grid")
         .Columns(columns =>

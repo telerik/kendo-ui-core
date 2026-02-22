@@ -6,7 +6,7 @@ page_title: Show Hidden Columns When Editing the Grid - Kendo UI for jQuery Data
 slug: grid-show-hidden-on-edit
 tags: grid, edit, show, hidden, on, editor
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -40,28 +40,30 @@ Toggle the visibility of the column by using the built-in methods of the Grid.
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
-                transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
+                  transport: {
+                      read:  {
+                          url: crudServiceBaseUrl + "/Products"
+                      },
+                      update: {
+                          url: crudServiceBaseUrl + "/Products/Update",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      destroy: {
+                          url: crudServiceBaseUrl + "/Products/Destroy",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      create: {
+                          url: crudServiceBaseUrl + "/Products/Create",
+                          type: "POST",
+                  		    contentType: "application/json"
                   },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

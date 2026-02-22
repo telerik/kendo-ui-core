@@ -7,6 +7,7 @@ slug: grid-popup-editing-show-validation-summary
 tags: grid, popup, editing, validation, tooltip, summary, list, instead, remove
 ticketid: 1411276
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -54,7 +55,7 @@ You can show a validation summary with a few lines of JavaScript.
     </kendo-grid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function addValidationSummary(e) {
             var validator = e.container.data("kendoValidator");
@@ -72,7 +73,7 @@ As a result, the error messages will be displayed as a list above the editors:
 
 To keep the tooltips, as well, do not reset the "errorTemplate" option:
 
-```Scripts
+```JS scripts
     <script>
         function addValidationSummary(e) {
             var validator = e.container.data("kendoValidator");

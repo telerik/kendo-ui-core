@@ -5,9 +5,9 @@ description: "Learn how to persist row selection during data operations in a Ken
 slug: howto_persists_row_selection_listview
 previous_url: /controls/data-management/listview/how-to/persist-selection-after-data-operations
 tags: listview, persist, row, selection, during, data, operations
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment
@@ -45,9 +45,9 @@ The following example demonstrates how to persist row selection during data oper
     <script>
       $(function () {
         var dataSource = new kendo.data.DataSource({
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/odata/Orders"
           },
           schema: {
             model: {

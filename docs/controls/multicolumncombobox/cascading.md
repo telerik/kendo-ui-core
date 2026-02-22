@@ -2,6 +2,7 @@
 title: Cascading MultiColumnComboBoxes
 page_title: jQuery MultiColumnComboBox Documentation - Cascading MultiColumnComboBoxes
 description: "Get started with the jQuery MultiColumnComboBox by Kendo UI and implement cascading MultiColumnComboBoxes."
+components: ["multicolumncombobox"]
 slug: cascading_kendoui_multicolumncombobox_widget
 position: 9
 ---
@@ -35,6 +36,8 @@ The following example demonstrates the parameters of this request.
 
 To initialize a cascading MultiColumnComboBox, use the following example.
 
+```dojo
+
     <label for="categories">Categories</label>
     <input id="categories"/>
 
@@ -48,10 +51,10 @@ To initialize a cascading MultiColumnComboBox, use the following example.
             dataTextField: "CategoryName",
             dataValueField: "CategoryID",
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                    read: "https://demos.telerik.com/service/v2/odata/Categories"
                 }
             }
         }).data("kendoMultiColumnComboBox");
@@ -66,18 +69,19 @@ To initialize a cascading MultiColumnComboBox, use the following example.
             columns: [
                 { field: "ProductID", title: "ID", width: 120 },
                 { field: "ProductName", title: "Name", width: 120 },
-                { field: "UnitsInStock ", title: "UnitsInStock", width: 120 }
+                { field: "UnitsInStock", title: "UnitsInStock", width: 120 }
             ],
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 serverFiltering: true,
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/odata/Products"
                 }
             }
         }).data("kendoMultiColumnComboBox");
       })
     </script>
+```
 
 ## See Also
 

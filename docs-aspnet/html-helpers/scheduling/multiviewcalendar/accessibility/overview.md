@@ -2,7 +2,8 @@
 title: Overview
 page_title: MultiViewCalendar Documentation | MultiViewCalendar Accessibility
 description: "Get started with the {{ site.product }} MultiViewCalendar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_multiviewcalendar_aspnetcore
+components: ["multiviewcalendar"]
+slug: htmlhelpers_multiviewcalendar_accessibility
 position: 1
 ---
 
@@ -25,8 +26,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 ### MultiViewCalendar Grid
 
 
-The element wrapping the tables in the component should follow the requirements for the [`grid` role](https://www.w3.org/TR/wai-aria-1.2/#grid).
-
+The element wrapping the tables in the component should follow the requirements for the `grid` role (https://www.w3.org/TR/wai-aria-1.2/#grid).
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

@@ -6,6 +6,7 @@ page_title: Numeric Column Right Alignment
 slug: grid-numeric-column-add-css-alignment
 tags: grid, CSS, alignment, column, numeric
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

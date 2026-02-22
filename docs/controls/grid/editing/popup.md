@@ -2,6 +2,7 @@
 title: Popup
 page_title: jQuery Grid Documentation - Popup Editing
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and learn how to apply the popup edit mode."
+components: ["grid"]
 slug: popupediting_grid
 position: 4
 ---

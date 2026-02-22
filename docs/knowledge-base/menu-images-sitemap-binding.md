@@ -7,7 +7,7 @@ slug: menu-images-sitemap-binding
 tags: menu, show, display, images, items, sitemap, binding, xml
 ticketid: 1143354
 res_type: kb
-component: menu
+components: ["menu"]
 ---
 
 ## Environment

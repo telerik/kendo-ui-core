@@ -2,6 +2,7 @@
 title: Chat Bot Services
 page_title: jQuery Chat Documentation - Chat Bot Services
 description: "Get started with the jQuery Chat by Kendo UI and configure and connect the Kendo UI Chat component to an existing Bot framework / service of choice."
+components: ["chat"]
 previous_url: /controls/chat/configure-chat-agent
 slug: connect_to_chatbot_service
 ---
@@ -26,8 +27,7 @@ An example of such communication is to send an AJAX request to a server endpoint
       var chat = args.sender;
 
       // Initiate an AJAX request and pass the args.text value.
-      $.ajax("https://demos.telerik.com/kendo-ui/service/Products/Read", {
-        dataType: "jsonp",
+      $.ajax("https://demos.telerik.com/service/v2/core/Products/Read", {
         data: {
           skip: args.text,
           take: 1
@@ -109,8 +109,7 @@ You can achieve the same result by encapsulating the communication logic in an `
       var chat = this.chat;
 
       // Initiate an AJAX request and pass the args.text value.
-      $.ajax("https://demos.telerik.com/kendo-ui/service/Products/Read", {
-        dataType: "jsonp",
+      $.ajax("https://demos.telerik.com/service/v2/core/Products/Read", {
         data: {
           skip: args.text,
           take: 1

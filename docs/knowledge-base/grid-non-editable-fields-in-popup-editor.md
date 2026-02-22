@@ -7,7 +7,7 @@ slug: display-non-editable-fields-in-popup-editor
 tags: jquery, grid, popup, noneditable, fields, readonly, hidden, missing
 ticketid: 1588359
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

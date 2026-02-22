@@ -5,8 +5,8 @@ description: "Learn how to show a selected range from a Kendo UI Spreadsheet in 
 previous_url: /controls/data-management/spreadsheet/how-to/AngularJS/show-selected-range-in-tooltip, /controls/data-management/spreadsheet/how-to/show-selected-range-in-tooltip
 slug: tooltip_on_spreadsheet_range
 tags: spreadsheet, tooltip, range, selection
-component: tooltip, spreadsheet
 res_type: kb
+components: ["tooltip"]
 ---
 
 ## Environment
@@ -39,7 +39,7 @@ The following example demonstrates how to display a selected range from the Spre
       <div id="spreadsheet" style="width: 100%"></div>
       <script>
         $(function() {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
           var dataSource = new kendo.data.DataSource({
             transport: {
@@ -111,7 +111,6 @@ The following example demonstrates how to display a selected range from the Spre
           function onRead(options) {
             $.ajax({
               url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp",
               success: function (result) {
                 options.success(result);
               },

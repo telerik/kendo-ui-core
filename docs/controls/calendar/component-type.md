@@ -2,6 +2,7 @@
 title: Calendar Component Types
 page_title: jQuery Calendar Documentation - Calendar Component Types
 description: "Get started with the jQuery Calendar by Kendo UI and learn how to enable the modern component type."
+components: ["calendar"]
 slug: componenttypes_calendar
 position: 8
 ---

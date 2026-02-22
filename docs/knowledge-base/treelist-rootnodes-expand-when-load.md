@@ -8,6 +8,7 @@ position:
 tags: treelist, expand, load, parent, node, rootnode, open
 ticketid: 1432660
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment

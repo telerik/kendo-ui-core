@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Learn how to select dates in the Telerik UI MultiViewCalendar component for {{ site.framework }}."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/selection
 slug: selection_multiviewcalendar_htmlhelper_aspnetcore
 position: 4

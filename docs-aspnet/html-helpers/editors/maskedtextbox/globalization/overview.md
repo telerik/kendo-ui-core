@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI MaskedTextBox for {{ site.framework }} and learn about the globalization options it supports."
+components: ["maskedtextbox"]
 slug: globalization_maskedtextbox_aspnetcore
 position: 1
 ---

@@ -7,6 +7,7 @@ slug: grid-exclude-item-from-sort
 tags: grid, exclude, item, sort, sorting, items, row, record
 ticketid: 1158437
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

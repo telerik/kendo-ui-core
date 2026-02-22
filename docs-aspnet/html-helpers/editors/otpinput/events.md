@@ -2,13 +2,14 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI OTPInput component for {{ site.framework }}."
+components: ["otpinput"]
 slug: events_otpinputhelper
 position: 8
 ---
 
 # Events
 
-The Telerik UI for {{ site.framework }} OTPInput exposes an [event](/api/kendo.mvc.ui.fluent/otpinputeventbuilder) that allows you to control and customize the behavior of the UI component.
+The Telerik UI for {{ site.framework }} OTPInput exposes a [Change](/api/kendo.mvc.ui.fluent/otpinputbuilder#eventssystemaction) event that allows you to control and customize the behavior of the UI component.
 
 For a complete example on the basic OTPInput event, refer to the [demo on using the events of the OTPInput](https://demos.telerik.com/{{ site.platform }}/otpinput/events).
 

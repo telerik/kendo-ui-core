@@ -2,7 +2,8 @@
 title: Overview
 page_title: CheckBox Documentation | CheckBox Accessibility
 description: "Get started with the {{ site.product }} CheckBox and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_checkbox_overview
+components: ["checkbox"]
+slug: htmlhelpers_checkbox_accessibility
 position: 1
 ---
 
@@ -63,7 +64,7 @@ The CheckBox has been tested with the following screen readers and browsers comb
 
 ## Keyboard Navigation
 
-For details on how the CheckBox keyboard navigation works, refer to the [CheckBox Keyboard Navigation]({%slug keynav_aspnetcore_checkbox%}) article.
+For details on how the CheckBox keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
 
 ## See Also
 

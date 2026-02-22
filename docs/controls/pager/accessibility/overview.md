@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Pager Documentation | Pager Accessibility
 description: "Get started with the jQuery Pager by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_pager_widget
+components: ["pager"]
+slug: jquery_pager_accessibility
 position: 1
 ---
 
@@ -41,7 +42,7 @@ The `Page` select, which is present for mobile devices and smaller screens with 
 |  | `aria-label` | Announces the currently selected page and the number of available pages. |
 |  | `aria-controls` | Points to the `id` of the element that is being controlled, for example, a Grid. |
 | `.k-pager-nav` | `role=button` or `nodeName=button` | Specifies the role of the element. |
-|  | `aria-disabled=true` | The attribute is present when the the `Arrow` button is disabled, for example, present on the **Previous** button when the current page is the first one. |
+|  | `aria-disabled=true` | The attribute is present when the `Arrow` button is disabled, for example, present on the **Previous** button when the current page is the first one. |
 |  | `title` | Specifies the purpose of each button. |
 |  | `aria-label` or `title` | Specifies the purpose of each link, for example, `Page 6`. |
 |  | `aria-current=page` | The attribute must be present on the currently selected page element. |

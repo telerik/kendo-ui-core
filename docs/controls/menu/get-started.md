@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Menu Documentation - Getting Started with the Menu
 description: "Get started with the jQuery Menu by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["menu"]
 slug: getting_started_kendoui_menu_widget
 position: 1
 ---
@@ -175,8 +176,3 @@ The Menu enables you to modify the default open and close [`animations`](/api/ja
 * [JavaScript API Reference of the jQuery Menu](/api/javascript/ui/menu)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

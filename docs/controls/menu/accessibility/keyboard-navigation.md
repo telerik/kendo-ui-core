@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Menu Documentation - Keyboard Navigation
 description: "Get started with the jQuery Menu by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["menu"]
 slug: keynav_menu_jquery
 position: 2
 ---
@@ -31,4 +32,4 @@ Kendo UI Menu supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Menu]({% slug accessibility_menu_jquery %})
+* [Accessibility in the Menu]({% slug jquery_menu_accessibility %})

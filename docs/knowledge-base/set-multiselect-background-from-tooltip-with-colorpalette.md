@@ -7,6 +7,7 @@ slug: set-multiselect-background-from-tooltip-with-colorpalette
 tags: multiselect, tags, change, background, color, tooltip, colorpalette
 ticketid: 1487280
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment
@@ -18,15 +19,7 @@ res_type: kb
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>2021.1.224</td>
- </tr>
- <tr>
-  <td>Operating System</td>
-  <td>Windows 10 32bit</td>
- </tr>
- <tr>
-  <td>Preferred Language</td>
-  <td>JavaScript</td>
+  <td>2025.2.520</td>
  </tr>
 </table>
 
@@ -34,9 +27,9 @@ res_type: kb
 Is it possible to assign a color to the MultiSelect tags from a ToolTip as we can find it in software like Asana or Trello?
 
 ## Solution
-1. Add a ToolTip to the MultiSelect's container. Use the `filter` method to target the tags. 
-1. Set an Html element as `content` of the ToolTip. In the Tooltip's `show` event handler initialize a ColorPalette from the Html element in the Tooltip's `content`. 
-1. Capture the `change` event of the ColorPalette and set the new color as the background of the Tag that showed the Tooltip. Then `hide` the Tooltip. 
+1. Add a ToolTip to the MultiSelect's container. Use the [`filter`](/api/javascript/ui/tooltip/configuration/filter) method to target the tags. 
+1. Set an Html element as [`content`](/api/javascript/ui/tooltip/configuration/content) of the ToolTip. In the Tooltip's [`show`](/api/javascript/ui/tooltip/methods/show) event handler initialize a ColorPalette from the Html element in the Tooltip's `content`. 
+1. Capture the [`change`](/api/javascript/ui/colorpalette/events/change) event of the ColorPalette and set the new color as the background of the Tag that showed the Tooltip. Then [`hide`](/api/javascript/ui/tooltip/events/hide) the Tooltip. 
 
 ```dojo
  <div id="container">
@@ -50,11 +43,11 @@ Is it possible to assign a color to the MultiSelect tags from a ToolTip as we ca
           dataValueField: "ProductID",
           autoBind: false,
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/service/v2/odata/Products",
               }
             }
           },
@@ -65,7 +58,7 @@ Is it possible to assign a color to the MultiSelect tags from a ToolTip as we ca
         });
 
         $("#container").kendoTooltip({
-          filter: "li",
+          filter: "div.k-chip",
           content: "<div id='color-chooser'></div>",
           width:200,
           show:function(e){

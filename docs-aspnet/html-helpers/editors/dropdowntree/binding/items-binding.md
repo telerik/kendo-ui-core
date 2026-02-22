@@ -2,6 +2,7 @@
 title:  Items Binding
 page_title: Items Binding
 description: "Define the items of the Telerik UI DropDownTree component for {{ site.framework }} within the helper declaration."
+components: ["dropdowntree"]
 slug: itemsbinding_dropdowntree
 position: 2
 ---

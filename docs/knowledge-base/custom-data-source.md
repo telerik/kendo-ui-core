@@ -5,9 +5,9 @@ description: "Learn how to customize the data source options for PDF export of t
 previous_url: /controls/data-management/grid/how-to/pdf-export/custom-data-source
 slug: howto_customize_data_source_pdf_grid
 tags: grid, customize, datasource
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -85,9 +85,9 @@ The following example demonstrates how to switch to client paging during PDF exp
   <script>
     // Main Data Source with server paging
     var dataSource = new kendo.data.DataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
-        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+        read: "https://demos.telerik.com/service/v2/odata/Customers"
       },
       pageSize: 20,
       serverPaging: true
@@ -95,9 +95,9 @@ The following example demonstrates how to switch to client paging during PDF exp
 
     // Export Data Source with client paging
     var dataSourceClientPaging = new kendo.data.DataSource({
-      type: "odata",
+      type: "odata-v4",
       transport: {
-        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+        read: "https://demos.telerik.com/service/v2/odata/Customers"
       },
       pageSize: 20
     });

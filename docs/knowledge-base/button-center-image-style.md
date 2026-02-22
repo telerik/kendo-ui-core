@@ -7,6 +7,7 @@ slug: button-center-image-style
 tags: button, center, image, style
 ticketid: 1156939
 res_type: kb
+components: ["button"]
 ---
 
 ## Environment

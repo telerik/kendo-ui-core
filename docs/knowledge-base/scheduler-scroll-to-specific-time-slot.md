@@ -6,7 +6,7 @@ page_title: Scroll to Specific Time Slots in AngularJS - Kendo UI Scheduler for 
 slug: scheduler-scroll-to-specific-time-slot
 tags: scroll, time, slot, specific, scheduler, angular, angularjs
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -29,7 +29,7 @@ Create a `scrollToHour` method that:
 * Traverses the current scheduler view rows and checks for the desired time slot.
 * Uses the view `_scrollTo` method to navigate to the desired slot.
 
-```dojo
+```
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
         <button class="k-button" ng-click="scrollToHour(22)">Scroll to 10 PM</button>
@@ -63,8 +63,8 @@ Create a `scrollToHour` method that:
         },
         $scope.schedulerOptions = {
             id: "scheduler",
-            date: new Date("2022/6/13"),
-            startTime: new Date("2022/6/13 07:00 AM"),
+            date: new Date("2025/6/13"),
+            startTime: new Date("2025/6/13 07:00 AM"),
             height: 600,
             views: [
                 "day",
@@ -77,24 +77,26 @@ Create a `scrollToHour` method that:
                 batch: true,
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks"
                     },
                     update: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     create: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     destroy: {
-                        url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {models: kendo.stringify(options.models)};
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

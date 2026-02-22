@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery OTPInput Documentation - OTPInput Appearance
 description: "Learn how to apply different styling options to the OTPInput component."
+components: ["otpinput"]
 slug: appearance_kendoui_otpinput
 position: 2
 ---

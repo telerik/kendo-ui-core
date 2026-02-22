@@ -2,6 +2,7 @@
 title: Application
 page_title: Application Overview
 description: "Learn the basics when working with the hybrid Telerik UI Application HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobileapplication/overview, /helpers/hybrid/mobileapplication
 slug: overview_hybridapplication_aspnetmvc
 ---

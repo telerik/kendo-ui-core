@@ -2,6 +2,7 @@
 title: Disabled Elements
 page_title: jQuery Tooltip Documentation - Disabled Elements
 description: "Get started with the jQuery Tooltip by Kendo UI and render it over disabled elements."
+components: ["tooltip"]
 slug: disabledelements_kendoui_tooltip
 position: 3
 ---

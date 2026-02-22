@@ -7,7 +7,7 @@ slug: share-legend-between-charts
 tags: chart, legend, series, kendo-ui
 ticketid: 1114263
 res_type: kb
-component: charts
+components: ["chart"]
 ---
 
 ## Environment

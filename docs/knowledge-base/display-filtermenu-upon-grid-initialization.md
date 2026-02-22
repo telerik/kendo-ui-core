@@ -4,10 +4,10 @@ page_title: Display FilterMenu upon Grid Initialization - Kendo UI for jQuery Gr
 description: "Learn how to display FilterMenu upon the initialization of the Kendo UI Grid for jQuery."
 slug: display-filtermenu-upon-grid-initialization
 tags: grid, filtermenu, initialization
-component: grid
 type: how-to
 ticketid: 1596996
 res_type: kb
+components: ["grid", "menu"]
 ---
 
 ## Environment
@@ -50,7 +50,7 @@ titleFilterMenu.link.click();
 The following example demonstrates the full implementation of the suggested approach:
 
 ```dojo
-<script src="../content/shared/js/people.js"></script>
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
 
     <div id="example">
       <div id="grid"></div>

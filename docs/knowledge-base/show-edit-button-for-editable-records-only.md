@@ -5,9 +5,9 @@ description: "Learn how to show edit buttons only for the editable records of th
 previous_url: /controls/data-management/grid/how-to/Editing/show-edit-button-for-editable-records-only
 slug: howto_show_editfor_editable_records_only_grid
 tags: show, edit, buttons, editable, records, only
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -47,28 +47,30 @@ The following example demonstrates how to show the **Edit** buttons in the Grid 
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-              dataSource = new kendo.data.DataSource({
-                transport: {
-                 read:  {
-                  url: crudServiceBaseUrl + "/Products",
-                   dataType: "jsonp"
-                  },
-                  update: {
-                  url: crudServiceBaseUrl + "/Products/Update",
-                   dataType: "jsonp"
-                  },
-                  destroy: {
-                  url: crudServiceBaseUrl + "/Products/Destroy",
-                   dataType: "jsonp"
-                  },
-                  create: {
-                  url: crudServiceBaseUrl + "/Products/Create",
-                   dataType: "jsonp"
-                  },
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                  },

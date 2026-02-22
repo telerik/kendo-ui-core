@@ -5,7 +5,7 @@ description: "Learn how to keep the editor template after restoring Grid options
 type: how-to
 tags: kendo, ui, grid, persist, editor, template, setOptions, getOptions, restore
 res_type: kb
-component: grid
+components: ["grid"]
 slug: howto_persist_editor_template__while_restoring_state
 ---
 
@@ -14,7 +14,7 @@ slug: howto_persist_editor_template__while_restoring_state
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -45,9 +45,9 @@ Specify the custom editor to the columns object before passing it to the `setOpt
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div class="box wide">
-      <button id="save"class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >Save State
+      <button id="save"class="k-button" >Save State
       </button>
-      <button id="load" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >Load State
+      <button id="load" class="k-button" >Load State
       </button>
     </div>
 
@@ -127,9 +127,8 @@ Specify the custom editor to the columns object before passing it to the `setOpt
           dataTextField: "CategoryName",
           dataValueField: "CategoryID",
           dataSource: {
-            type: "odata",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/service/v2/core/Categories"
             }
           }
         });

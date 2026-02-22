@@ -2,6 +2,7 @@
 title: Adaptive Rendering
 page_title: Adaptive Rendering
 description: "Explore how the {{ site.product }} components that support adaptive mode are rendered based on the screen dimensions."
+components: ["general"]
 slug: adaptive_rendering
 position: 1
 ---
@@ -26,6 +27,7 @@ The following components support the adaptive rendering functionality:
 | DropDownTree | [DropDownTree Adaptive Rendering Mode Documentation]({%slug htmlhelpers_dropdowntree_adaptive_mode_aspnetcore%}) |
 | MultiColumnComboBox | [MultiColumnComboBox Adaptive Rendering Mode Documentation]({%slug htmlhelpers_multicolumncombobox_adaptive_mode_aspnetcore%}) |
 | MultiSelect | [MultiSelect Adaptive Rendering Mode Documentation]({%slug htmlhelpers_multiselect_adaptive_mode_aspnetcore%}) |
+| Pager | [Pager Adaptive Rendering Mode Documentation]({%slug htmlhelpers_pager_adaptive_mode%}) |
 | TimeDurationPicker | [TimeDurationPicker Adaptive Rendering Mode Documentation]({%slug htmlhelpers_timedurationpicker_adaptive_mode_aspnetcore%}) |
 | TimePicker | [TimePicker Adaptive Rendering Mode Documentation]({%slug htmlhelpers_timepicker_adaptive_mode_aspnetcore%}) |
 
@@ -280,7 +282,9 @@ The following example showcases how to dynamically manage the orientation of the
 * [Adaptive Rendering by the DateTimePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/datetimepicker/adaptive-mode)
 * [Adaptive Rendering by the DropDownList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/adaptive-mode)
 * [Adaptive Rendering by the DropDownTree for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdowntree/adaptive-mode)
+* [Adaptive Rendering by the Grid Tools for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-tools)
 * [Adaptive Rendering by the MultiColumnComboBox for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/adaptive-mode)
 * [Adaptive Rendering by the MultiSelect for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/adaptive-mode)
+* [Adaptive Rendering by the Pager for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager/adaptive-mode)
 * [Adaptive Rendering by the TimeDurationPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker/adaptive-mode)
 * [Adaptive Rendering by the TimePicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timepicker/adaptive-mode)

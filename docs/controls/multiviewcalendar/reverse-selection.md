@@ -2,6 +2,7 @@
 title: MultiViewCalendar Reverse Selection
 page_title: jQuery MultiViewCalendar Documentation - MultiViewCalendar Reverse Selection
 description: "Check the reverse selection feature in the Kendo UI for jQuery MultiViewCalendar."
+components: ["multiviewcalendar"]
 slug: reverse_selection_multiviewcalendar
 position: 9
 ---

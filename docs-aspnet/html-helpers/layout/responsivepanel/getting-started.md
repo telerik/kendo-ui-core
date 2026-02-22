@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Responsive Panel component by following a complete step-by-step tutorial."
+components: ["responsivepanel"]
 slug: responsive_panel_getting_started
 position: 1
 ---
@@ -95,7 +96,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
 
     <div class="main-container">
         <a class="app-header">Your .NET Core Application</a>
-        <button id="menu-button" class="k-rpanel-toggle k-button k-button-md k-button-rectangle k-button-solid-secondary btn-toggle">
+        <button id="menu-button" class="k-rpanel-toggle k-button k-button-rectangle k-button-secondary btn-toggle">
             <span class="menu-icon"></span>
         </button>
     </div>
@@ -120,7 +121,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
 
     <div class="main-container">
         <a class="app-header">Your .NET Core Application</a>
-        <button id="menu-button" class="k-rpanel-toggle k-button k-button-md k-button-rectangle k-button-solid-secondary btn-toggle">
+        <button id="menu-button" class="k-rpanel-toggle k-button k-button-rectangle k-button-secondary btn-toggle">
             <span class="menu-icon"></span>
         </button>
     </div>
@@ -137,7 +138,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
     </div>
 ```
 {% endif %}
-```Styles
+```CSS Styles
     <style>
         #menu-button {
             display: none;
@@ -152,7 +153,7 @@ Also, hide the toggle button with CSS and define a media query to show it when t
                 display: block;
                 float: right;
             }
-            
+
             .k-rpanel-expanded ul {
                 flex-direction: column;
             }
@@ -195,7 +196,7 @@ The Responsive Panel exposes [events](/api/kendo.mvc.ui.fluent/responsivepanelev
     </kendo-responsivepanel>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onOpen(e) {
             // Custom logic when the Responsive Panel opens.
@@ -210,7 +211,7 @@ You can reference the Responsive Panel instances that you have created and build
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var responsivePanelReference = $("#responsive-panel").data("kendoResponsivePanel"); // responsivePanelReference is a reference to the existing Responsive Panel instance of the helper.
@@ -235,7 +236,7 @@ You can reference the Responsive Panel instances that you have created and build
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick(e) {
                 e.stopPropagation();

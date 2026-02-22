@@ -2,6 +2,7 @@
 title: Grouping
 page_title: DataSource Grouping
 description: "Learn how to set the initial group options in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourcegroup
 ---
 

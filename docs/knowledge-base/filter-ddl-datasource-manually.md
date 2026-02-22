@@ -5,9 +5,9 @@ description: "Learn how to filter DataSource instance manually in the Kendo UI D
 previous_url: /controls/editors/dropdownlist/how-to/filter-datasource-manually, /controls/editors/dropdownlist/how-to/filtering/filter-datasource-manually
 slug: howto_filter_datasource_manually_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, filter, data, source, manually
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MultiSelect Documentation - Getting Started with the MultiSelect
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["multiselect"]
 slug: getting_started_kendoui_multiselect_widget
 position: 1
 ---
@@ -19,9 +20,9 @@ After the completion of this guide, you will be able to achieve the following en
         dataTextField: "ContactName",
         dataValueField: "CustomerID",
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/odata/Customers"
           },
         },
         label: { 
@@ -86,9 +87,9 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/multiselect/configura
         dataTextField: "ContactName", // The field of the data item that provides the text content of the list items. 
         dataValueField: "CustomerID", // The field of the data item that provides the value of the component.
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/odata/Customers"
           },
         },
         height: 150
@@ -108,9 +109,8 @@ The MultiSelect provides several options that enable you to modify its appearanc
         dataTextField: "ContactName",
         dataValueField: "CustomerID",
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/core/Customers"
           },
         },
         height: 150,
@@ -121,7 +121,7 @@ The MultiSelect provides several options that enable you to modify its appearanc
 
 ## 5. Configure the Label 
 
-The MultiSelect enables you to configure the label by using its [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/mulstiselect/configuration/label) property.
+The MultiSelect enables you to configure the label by using its [`label`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/label) property.
 
 ```html
 <select id="customers"></select>
@@ -131,9 +131,8 @@ The MultiSelect enables you to configure the label by using its [`label`](https:
         dataTextField: "ContactName",
         dataValueField: "CustomerID",
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/core/Customers"
           },
         },
         height: 150,
@@ -156,8 +155,4 @@ The MultiSelect enables you to configure the label by using its [`label`](https:
 * [JavaScript API Reference of the MultiSelect](/api/javascript/ui/multiselect)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

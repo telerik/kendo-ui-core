@@ -2,6 +2,7 @@
 title: Scope Bindings
 page_title: Model and Value Binding | AngularJS Directives
 description: "Learn more about the AngularJS bindings integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
+components: ["general"]
 previous_url: /framework/AngularJS/introduction#applying-scope-bindings
 slug: angularjs_value_model_binding
 position: 5
@@ -97,8 +98,7 @@ The following example demonstrates how to display the `Chai` option in the Multi
           dataSource: {
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
               }
             }
           }
@@ -134,8 +134,7 @@ The following example demonstrates how to display `Chai` and `Mishi Kobe Niku` a
           dataSource: {
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
               }
             }
           }

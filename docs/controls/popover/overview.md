@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Popover Documentation - Popover Overview
 description: "Get started with the jQuery Popover by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["popover"]
 slug: overview_kendoui_popover_widget
 position: 0
 ---
@@ -16,7 +17,7 @@ The Kendo UI Popover widget for jQuery provides a simple way to display addition
 
 * [Templates]({% slug templates_kendoui_popover_widget %})&mdash;The Popover allows you to customize its content by using a template.
 * [Events]({% slug events_kendoui_popover_widget %})&mdash;The Popover component supports convenient events that allow you to extend its default functionality.
-* [Accessibility]({% slug accessibility_kendoui_popover_widget %})&mdash;The Popover is accessible for screen readers and supports WAI-ARIA attributes.
+* [Accessibility]({% slug jquery_popover_accessibility %})&mdash;The Popover is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## Next Steps 
 

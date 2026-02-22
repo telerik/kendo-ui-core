@@ -2,6 +2,7 @@
 title: Setting the Operators
 page_title: jQuery Filter Documentation - Setting the Operators
 description: "Get started with the jQuery Filter by Kendo UI and learn how to select its available filter operators."
+components: ["filter"]
 slug: choose_operators_kendoui_filter_widget
 position: 2
 ---

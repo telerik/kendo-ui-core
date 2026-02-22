@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI Pager component for {{ site.framework }} and learn about the globalization options it supports."
+components: ["pager"]
 slug: globalization_pager_aspnet
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery RadioGroup Documentation - Keyboard Navigation
 description: "Get started with the jQuery RadioGroup by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["radiogroup"]
 slug: keynav_radiogroup_jquery
 position: 2
 ---
@@ -25,4 +26,4 @@ For a complete example, refer to the [demo on keyboard navigation of the RadioGr
 
 * [Keyboard Navigation by the RadioGroup (Demo)](https://demos.telerik.com/kendo-ui/radiogroup/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the RadioGroup]({% slug accessibility_kendoui_radiogroup_widget %})
+* [Accessibility in the RadioGroup]({% slug jquery_radiogroup_accessibility %})

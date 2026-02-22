@@ -7,6 +7,7 @@ slug: grid-selection-in-nested-components
 tags: grid, wizard, window, hierarchy, selection
 ticketid: 1582155
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -42,7 +43,7 @@ To achieve the desired scenario:
 
 The following sample code represents the steps described above.
 
-```Index.cshtml
+```Razor Index.cshtml
         @(Html.Kendo().Grid<TelerikMvcApp50.Models.OrderViewModel>()
             .Name("grid")
             .ToolBar(t => t.Custom().Text("Adjust Multiple Standard Prices").HtmlAttributes(new { id = "customCommand" }))

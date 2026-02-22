@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery DropDownList Documentation - DropDownList Overview
 description: "Try now the Kendo UI for jQuery DropDownList component covering everything from data binding, and grouping to virtualization and templates."
+components: ["dropdownlist"]
 slug: overview_kendoui_dropdownlist_widget
 position: 0
 ---
@@ -27,7 +28,7 @@ The user input is restricted within the predefined options. To apply a keyboard 
 |[Cascading DropDownLists]({% slug cascading_kendoui_ddl_widget %})|The cascading functionality of the DropDownList enables you to implement a series of two or more DropDownLists in which each DropDownList is filtered according to the selected options in the previous DropDownList.
 |[Rendering and dimensions]({% slug rendering_dropdownlist_widget %})|The DropDownList component provides a set of options for controlling its overall size, the border radius for its tags, and the way its color is applied.  
 |[Globalization]({% slug globalization_dropdownlist_widget %})|The DropDownList supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_kendoui_ddl_widget %}) need to be supported. Additionally, the DropDownList supports [rendering in a right-to-left (RTL) direction]({% slug rtl_kendoui_ddl_widget %}).
-|[Accessibility]({% slug accessibility_kendoui_ddl_widget %})|The DropDownList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_ddl_widget %}).
+|[Accessibility]({% slug jquery_dropdownlist_accessibility %})|The DropDownList is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_ddl_widget %}).
 
 >tip To learn more about the appearance, anatomy, and accessibility of the DropDownList, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/dropdownlist/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

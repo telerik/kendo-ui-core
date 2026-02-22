@@ -7,7 +7,7 @@ slug: grid-excel-export-custom-headers
 tags: grid, excel, export, custom, headers, kendo
 ticketid: 1081450
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -52,7 +52,7 @@ The example demonstrates how to export additional information to Excel by implem
                 toolbar: ["excel"],
                 excel: {
                   fileName: "Kendo UI Grid Export.xlsx",
-                  proxyURL: "//demos.telerik.com/kendo-ui/service/export",
+                  proxyURL: "https://demos.telerik.com/service/v2/core/export",
                   filterable: true
                 },
                 excelExport: function(e){
@@ -78,9 +78,8 @@ The example demonstrates how to export additional information to Excel by implem
                   sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70});
                 },
                 dataSource: {
-                  type: "odata",
                   transport: {
-                    read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/core/Orders"
                   },
                   schema: {
                     model: {

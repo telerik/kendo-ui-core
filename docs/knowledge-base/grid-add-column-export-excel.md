@@ -7,7 +7,7 @@ slug: grid-add-column-export-excel
 tags: grid, column, excel
 ticketid: 1604782 
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

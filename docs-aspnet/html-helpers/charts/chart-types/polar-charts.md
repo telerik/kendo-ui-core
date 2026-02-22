@@ -2,6 +2,7 @@
 title: Polar Charts
 page_title: Polar Charts
 description: "Learn the basics when working with the Telerik UI for {{ site.framework }} Polar Chart and its various types."
+components: ["chart"]
 slug: polarcharts_aspnetcore_htmlhelper
 ---
 
@@ -31,7 +32,7 @@ The Polar Charts can be categorized into the following types:
 * [Polar Scatter](#polar-scatter-charts)&mdash;Displays plots that represent non-connected data points.
 * [Polar Area](#polar-area-charts)&mdash;Shows the data points connected with straight line segments that enclose a filled area together with the chart pole.
 
-To customize the default [chart axes](#configuring-the-axes), explore the various options available through the [`XAxis`](/api/kendo.mvc.ui.fluent/chartxaxisbuilder) and [`YAxis`](/api/kendo.mvc.ui.fluent/chartyaxisbuilder) configurations.
+To customize the default [chart axes](#configuring-the-axes), explore the various options available through the {% if site.core %}[`XAxis`](/api/kendo.mvc.ui.fluent/chartxaxisbuilder){% else %}[`XAxis`](/api/kendo.mvc.ui.fluent/chartbuilder#xaxissystemaction){% endif %} and {% if site.core %}[`YAxis`](/api/kendo.mvc.ui.fluent/chartyaxisbuilder){% else %}[`YAxis`](/api/kendo.mvc.ui.fluent/chartbuilder#yaxissystemaction){% endif %} configurations.
 
 Also, you can bind the Polar Chart to inline, local, and remote data. For more information on the available data binding approaches, refer to the [Charts Data Binding Overview]({% slug htmlhelpers_charts_databinding_aspnetcore %}).
 
@@ -333,7 +334,7 @@ The configuration from the example results in the following Polar Chart.
 
 ## Configuring the Axes
 
-The Polar Chart contains X and Y-axes. You can configure both axes through the [`XAxis()`](/api/kendo.mvc.ui.fluent/chartxaxisbuilder) and [`YAxis()`](/api/kendo.mvc.ui.fluent/chartyaxisbuilder) configurations.
+The Polar Chart contains X and Y-axes. You can configure both axes through the {% if site.core %}[`XAxis()`](/api/kendo.mvc.ui.fluent/chartxaxisbuilder){% else %}[`XAxis()`](/api/kendo.mvc.ui.fluent/chartbuilder#xaxissystemaction){% endif %} and {% if site.core %}[`YAxis()`](/api/kendo.mvc.ui.fluent/chartyaxisbuilder){% else %}[`YAxis()`](/api/kendo.mvc.ui.fluent/chartbuilder#yaxissystemaction){% endif %} configurations.
 
 The following example shows how to set a specified start angle (degrees) for the X-axis and hide the labels of the Y-axis of a Polar Line Chart.
 

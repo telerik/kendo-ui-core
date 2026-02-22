@@ -7,6 +7,7 @@ slug: stepper-broken-progressbar-when-used-with-side-bar
 tags: stepper, progress, bar, progressBar, extend, beyond, expanding, collapsing, vertical, menu
 ticketid: 1545635
 res_type: kb
+components: ["general"]
 component: stepper
 ---
 
@@ -27,7 +28,7 @@ A stepper control used with a vertical menu which is expanding and collapsing up
 ## Reproduce
 
 
-```_Layout.cshtml
+```Razor _Layout.cshtml
 <body style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;">
 
     <div id="mySidebar" class="sidebar">
@@ -42,7 +43,7 @@ A stepper control used with a vertical menu which is expanding and collapsing up
 
 </body>
 ```
-```style.css
+```C# style.css
 
     .sidebar {
        height: 100%;
@@ -64,7 +65,7 @@ A stepper control used with a vertical menu which is expanding and collapsing up
         margin-left: 50px;
     }
 ```
-```Index.cshtml
+```Razor Index.cshtml
 <div class="row myClass">
         @(Html.Kendo().Stepper()
         .Name("LevelSteps")
@@ -82,7 +83,7 @@ A stepper control used with a vertical menu which is expanding and collapsing up
     )
 </div>
 ```
-```script.js
+```JS script.js
     function openNav() {
         document.getElementById("mySidebar").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";

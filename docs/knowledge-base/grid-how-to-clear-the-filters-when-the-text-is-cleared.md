@@ -7,7 +7,7 @@ slug: grid-how-to-clear-the-filters-when-the-text-is-cleared
 tags: grid, filter, clear
 ticketid: 1136856
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -62,9 +62,9 @@ In this scenario, use the [`ColumnMenuInit`](https://docs.telerik.com/kendo-ui/a
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            type: "odata",
+                            type: "odata-v4",
                             transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                                read: "https://demos.telerik.com/service/v2/odata/Orders"
                             },
                             schema: {
                                 model: {

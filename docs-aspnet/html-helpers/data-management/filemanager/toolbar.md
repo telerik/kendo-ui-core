@@ -2,6 +2,7 @@
 title: Toolbar Commands
 page_title: Toolbar Commands
 description: "Get familiar with the Toolbar Commands in the Telerik UI FileManager for {{ site.framework }} and how you can use them."
+components: ["filemanager"]
 slug: htmlhelpers_filemanager_aspnetcore_toolbar
 position: 9
 ---
@@ -48,7 +49,8 @@ To Enable/Disable a Toolbar command button or update the its text you can use th
 As of Kendo UI R1 2020 SP1 the kendo.ui.filemanager namespace exposes the FileManagerCommand class that could be extended to implement a custom FileManager command. The example below demonstrates how to create a custom command that shows the total size of the selected files.
 
 First, create a new command by extending the FileManagerCommand class.
-```
+
+```JS
     <script>
         var filemanagerNS = kendo.ui.filemanager;
 
@@ -112,6 +114,76 @@ You can also add the custom command to the ContextMenu of the FileManager
 	</context-menu>
 ```
 {% endif %}
+
+## Overflow
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+@(Html.Kendo().FileManager().Name("filemanager")
+    .DataSource(ds =>
+        {
+           ...
+        );
+    })
+    .UploadUrl("Upload", "FileManagerData")
+    .Toolbar(tb => tb.Items(items =>
+    {
+        items.Add("createFolder");
+        items.Add("upload");
+        items.Add("sortField");
+        items.Add("changeView");
+        items.Add("spacer");
+        items.Add("details");
+        items.Add("search");
+    })
+    .Overflow(o => o
+       .Mode(ToolBarOverflowMode.Scroll)
+       .ScrollButtons(ScrollButtonsType.Auto)
+       .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+       .ScrollDistance(50))
+    )
+    .ContextMenu(context => context.Items(items => items.Add("rename")))
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-filemanager name="filemanager" upload-url="@Url.Action("Upload", "FileManagerData")">
+	<filemanager-datasource>
+ 	 		...
+	</filemanager-datasource>
+	<toolbar enabled="true">
+ 		<items>
+ 	 		<item name="createFolder">
+ 	 		</item>
+ 	 		<item name="upload">
+ 	 		</item>
+ 	 		<item name="sortField">
+ 	 		</item>
+ 	 		<item name="changeView">
+ 	 		</item>
+ 	 		<item name="spacer">
+ 	 		</item>
+ 	 		<item name="details">
+ 	 		</item>
+ 	 		<item name="search">
+ 	 		</item>
+ 		</items>
+        <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+	</toolbar>
+	<context-menu enabled="true">
+ 		<items>
+ 	 		<item name="rename">
+ 	 		</item>
+ 		</items>
+	</context-menu>
+</kendo-filemanager>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
 
 ## See Also
 

@@ -4,9 +4,9 @@ page_title: Convert DataSource Filters to SQL Expression
 description: "Learn how to convert regular and nested filters to SQL expressions."
 slug: datasource-convert-to-sql-expression
 tags: telerik, kendo, jquery, grid, datasource, sql, expression, scheduler, treelist, where, filter, filters
-component: datasource
 type: how-to
 res_type: kb
+components: ["datasource"]
 ---
 
 ## Environment
@@ -45,7 +45,7 @@ Once the SQL expression is generated, you can use a number of different approach
 The following example showcases the complete solution integrated with a Kendo UI Grid:
 
 ```dojo
-    <button id="get" type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary"><span class="k-button-text">Convert Filters to SQL Query</span></button>
+    <button id="get" type="button" class="k-button k-button-primary"><span class="k-button-text">Convert Filters to SQL Query</span></button>
     <div id="console" style='padding: 1em;'>
       <p>SELECT * FROM mytable</p>
       <p>WHERE <span id="console-filter" style='color: #205493;'></span></p>
@@ -126,9 +126,9 @@ The following example showcases the complete solution integrated with a Kendo UI
       $(document).ready(function() {
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             filter: {
               logic: "and",

@@ -2,6 +2,7 @@
 title: Tabs
 page_title: Tabs
 description: "Configure the tabs of the Telerik UI TabStrip component for {{ site.framework }}."
+components: ["tabstrip"]
 slug: htmlhelpers_tabstrip_aspnetcore_tabs
 position: 2
 ---
@@ -109,7 +110,7 @@ The following example demonstrates how to add a new TabStrip tab and position it
     </kendo-tabstrip>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         var tabstrip = $("#tabstrip").data("kendoTabStrip");
 
@@ -230,7 +231,7 @@ The following example showcases how to add a button element inside a specified t
         .Items(tabstrip =>
         {
             tabstrip.Add()
-            .Text("<button id='tab1Btn' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>")
+            .Text("<button id='tab1Btn' class='k-button k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>")
             .Encoded(false)
             .Selected(true)
             .Content(@<text>
@@ -254,7 +255,7 @@ The following example showcases how to add a button element inside a specified t
 ```TagHelper
     <kendo-tabstrip name="tabstrip">
         <items>
-            <tabstrip-item selected="true" encoded="false" text="<button id='tab1Btn' class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>">
+            <tabstrip-item selected="true" encoded="false" text="<button id='tab1Btn' class='k-button k-icon-button' type='button' onclick='tabBtnClick();'>Read more</button>">
                 <content>
                     <p>Rainy weather in Paris.</p>
                 </content>
@@ -271,6 +272,180 @@ The following example showcases how to add a button element inside a specified t
         function tabBtnClick() {
             // Handle the button 'click' event.
         }
+    </script>
+```
+{% endif %}
+
+## Closable Tabs
+
+Use the `Closable` property to create closable tabs in the {{site.framework}} TabStrip component. When enabled for the entire component, every tab shows a **close** icon which hides the tab from view and removes it from the TabStrip. You can also control the closable behavior individually by setting the `closable` option for the respective tab. The default value is `false`.
+
+```HtmlHelper
+    @(Html.Kendo().TabStrip()
+            .Name("tabstrip")
+            .Items(tabstrip =>
+            {
+                 tabstrip.Add().Text("New Folder (Closable)")
+                 .Icon("folder-add")
+                 .IconPosition(IconPosition.Before)
+                 .Closable(true)
+                 .Content("New Folder Content");
+            })
+        .SelectedIndex(0)
+        )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-tabstrip name="tabstrip">
+        <items>
+            <tabstrip-item icon="folder-add" icon-position="IconPosition.Before" text="New Folder (Closable)" closable="true">
+                <content>
+                    New Folder Content
+                </content>
+            </tabstrip-item>
+        </items>
+    </kendo-tabstrip>
+```
+{% endif %}
+
+## Disabled Tabs
+
+You can leverage the `Enable` property to specify whether a given tab should be enabled or disabled. Disabled tabs cannot be selected or focused and are displayed with a different visual style. The default value is `true`.
+
+```HtmlHelper
+    @(Html.Kendo().TabStrip()
+            .Name("tabstrip")
+            .Items(tabstrip =>
+            {
+                  tabstrip.Add().Text("Delete User (Disabled)")
+                  .Icon("x-outline")
+                  .Enabled(false)
+                  .Content("Delete User Content");
+            })
+        .SelectedIndex(0)
+        )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-tabstrip name="tabstrip">
+        <items>
+            <tabstrip-item icon="x-outline" text="Delete User (Disabled)" enabled="false">
+                <content>
+                    Delete User Content
+                </content>
+            </tabstrip-item>
+        </items>
+    </kendo-tabstrip>
+```
+{% endif %}
+
+## Tabs Icons
+
+The TabStrip component provides built-in icons for each of its tabs. The icon is rendered inside the tab element.  You can use the name for an existing icon in a theme or SVG content. Check the [full list of Telerik icons](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/) for all the available icons.
+
+Use the `IconPosition` property to set the position of the icon relative to the tab text. Possible values are "IconPosition.Before" and "IconPosition.After".
+
+Use the `IconClass` setting to apply a custom CSS class to the icon element, allowing you to style it further.
+
+```HtmlHelper
+    @(Html.Kendo().TabStrip()
+            .Name("tabstrip")
+            .Items(tabstrip =>
+            {
+                 tabstrip.Add().Text("Privileges (Larger Icon)")
+                 .Icon("security-lock-solid")
+                 .IconPosition(IconPosition.After)
+                 .IconClass("larger-icon")
+                 .Content("Privileges Content");
+            })
+        .SelectedIndex(0)
+        )
+        <style>
+           .larger-icon {
+              scale: 1.5;
+           }
+         </style>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-tabstrip name="tabstrip">
+        <items>
+            <tabstrip-item icon="security-lock-solid" icon-position="IconPosition.After" icon-class="larger-icon" text="Privileges (Larger Icon)">
+                <content>
+                    Privileges Content
+                </content>
+            </tabstrip-item>
+        </items>
+    </kendo-tabstrip>
+    <style>
+         .larger-icon {
+             scale: 1.5;
+         }
+     </style>
+```
+{% endif %}
+
+## Tab Actions
+
+Use the TabStrip `Actions` configuration to define a collection of action buttons that are rendered in the tab. The actions buttons are rendered as part of the tab and can be used to provide additional functionality beyond the built-in close button.
+
+Each action can be further customized with icons, attributes and a handler function that will be executed when the action is clicked.
+
+```HtmlHelper
+    @(Html.Kendo().TabStrip()
+            .Name("tabstrip")
+            .Items(tabstrip =>
+            {
+                 tabstrip.Add().Text("Account")
+                 .Icon("user-outline")
+                 .Actions(actions =>
+                 {
+                     actions.Add().Icon("envelope").Action("sendMessage").HtmlAttributes(new { title = "Send Message" });
+                     actions.Add().Icon("zoom-in").Action("zoomIn").HtmlAttributes(new { title = "Zoom In" });
+                      actions.Add().Icon("zoom-out").Action("zoomOut").HtmlAttributes(new { title = "Zoom Out" });
+                   })
+                  .Content("Account Content");
+            })
+           .SelectedIndex(0)
+        )
+       <script>
+         function sendMessage(e){
+             alert("Message Sent!");
+         }
+        function zoomIn(e){
+              $(".k-tabstrip-content.k-active").css("zoom",parseFloat($(".k-tabstrip-content.k-active").css("zoom"))+0.2);
+          }
+        function zoomOut(e){
+              $(".k-tabstrip-content.k-active").css("zoom",parseFloat($(".k-tabstrip-content.k-active").css("zoom"))-0.2);
+         }
+       </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-tabstrip name="tabstrip">
+        <items>
+            <tabstrip-item icon="user-outline" icon-position="IconPosition.After" icon-class="larger-icon" text="Account">
+                <content>
+                    Account Content
+                </content>
+                <tabstrip-item-actions>
+                    <tabstrip-item-action icon="envelope" action-handler="sendMessage" html-attributes='new Dictionary<string, object>{ ["title"] = "Send Message" }'></tabstrip-item-action>
+                    <tabstrip-item-action icon="zoom-in" action-handler="zoomIn" html-attributes='new Dictionary<string, object>{ ["title"] = "Zoom In" }'></tabstrip-item-action>
+                    <tabstrip-item-action icon="zoom-out" action-handler="zoomOut" html-attributes='new Dictionary<string, object>{ ["title"] = "Zoom In" }'></tabstrip-item-action>
+                </tabstrip-item-actions>
+            </tabstrip-item>
+        </items>
+    </kendo-tabstrip>
+    <script>
+         function sendMessage(e){
+             alert("Message Sent!");
+         }
+        function zoomIn(e){
+              $(".k-tabstrip-content.k-active").css("zoom",parseFloat($(".k-tabstrip-content.k-active").css("zoom"))+0.2);
+          }
+        function zoomOut(e){
+              $(".k-tabstrip-content.k-active").css("zoom",parseFloat($(".k-tabstrip-content.k-active").css("zoom"))-0.2);
+         }
     </script>
 ```
 {% endif %}

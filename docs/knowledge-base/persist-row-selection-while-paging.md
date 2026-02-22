@@ -5,7 +5,7 @@ description: Learn how to persist row selection while performing the paging, sor
 type: how-to
 tags: kendo, ui, grid, selection, paging, sorting, grouping, filtering
 res_type: kb
-component: grid
+components: ["grid"]
 slug: howto_persist_row_selection_paging_sorting_filtering_grid
 previous_url: /controls/data-management/grid/how-to/Selection/persist-row-selection-while-paging
 ---
@@ -36,9 +36,9 @@ previous_url: /controls/data-management/grid/how-to/Selection/persist-row-select
 
         $("#grid").kendoGrid({
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

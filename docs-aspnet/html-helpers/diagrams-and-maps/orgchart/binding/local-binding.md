@@ -2,6 +2,7 @@
 title:  Local Binding
 page_title: Local Binding
 description: "Learn how to implement Local Binding with Telerik UI OrgChart component for {{ site.framework }}."
+components: ["orgchart"]
 previous_url: /helpers/editors/orgchart/binding/local-binding
 slug: htmlhelpers_orgchart_localbinding_aspnetcore
 position: 2

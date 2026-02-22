@@ -5,9 +5,9 @@ description: "Learn how to integrate the Kendo UI DatePicker widget with the Dat
 slug: howto_integrate_withdatejs_library_datepicker
 previous_url: /controls/editors/datepicker/how-to/datejs-integration
 tags: kendo, jquery, datepicker, integrate, with, datejs, library
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

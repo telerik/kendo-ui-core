@@ -2,6 +2,7 @@
 title: Highlight Ongoing Events
 page_title: Highlight Ongoing Events
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to highlight ongoing events."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_ongoing_events_aspnetcore
 position: 7
 ---
@@ -64,4 +65,4 @@ The `CurrentTimeMarker` configuration of the Scheduler also exposes a `UseLocalT
 
 * [Highlight Ongoing Events of the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/ongoing-events)
 * [Server-Side API](/api/scheduler)
-* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)
+* [JavaScript API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)

@@ -7,6 +7,7 @@ slug: negative-number-minus-sign-position-rtl
 tags: RTL, right-to-left, languages, negative, number, position
 teampulseid:ticketid: 996114
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

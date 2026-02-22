@@ -5,9 +5,9 @@ description: "Learn how to align the footer cells during Excel export in a Kendo
 previous_url: /controls/data-management/grid/how-to/excel/footer-alignment
 slug: howto_alignfootercells_grid
 tags: grid, align, footer, cells, excel, export
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -63,9 +63,8 @@ Normally, to achieve this behavior, you can use HTML and CSS. However, Excel doe
         }
       },
       dataSource: {
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          read: "https://demos.telerik.com/service/v2/core/Products"
         },
         schema:{
           model: {

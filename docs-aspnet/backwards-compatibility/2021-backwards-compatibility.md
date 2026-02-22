@@ -2,8 +2,9 @@
 title: 2021 Releases
 page_title: 2021 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2021."
+components: ["general"]
 slug: breakingchanges_2021
-position: 5
+position: 7
 ---
 
 # 2021 Releases
@@ -51,7 +52,7 @@ Reverting to the previous appearance is possible by:
 
 - setting the Search Panel as the last element in the toolbar
 
-```
+```Razor
 .ToolBar(toolbar =>
     {
         toolbar.Excel();
@@ -62,7 +63,7 @@ Reverting to the previous appearance is possible by:
 
 - utilizing the following styles:
 
-```
+```CSS
     <style>
      .k-grid .k-grid-search {
             margin-left: auto;

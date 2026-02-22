@@ -7,7 +7,7 @@ slug: radio-buttons-custom-editor
 tags: radio buttons, grid, editor
 ticketid: 1117548
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -152,9 +152,9 @@ To create an editor with radio buttons:
 
                 item += "<label>"
                  if (category === i) {
-                    item += "<input type='radio' class='k-radio k-radio-md' name='" + dataItem.uid + "' onclick='setDataItem(this);' checked=checked />";
+                    item += "<input type='radio' class='k-radio' name='" + dataItem.uid + "' onclick='setDataItem(this);' checked=checked />";
                 } else {
-                    item += "<input type='radio' class='k-radio k-radio-md' name='" + dataItem.uid + "' onclick='setDataItem(this);'/>";
+                    item += "<input type='radio' class='k-radio' name='" + dataItem.uid + "' onclick='setDataItem(this);'/>";
                 }
                 item += categories[i].text;
                 item += "</label>"

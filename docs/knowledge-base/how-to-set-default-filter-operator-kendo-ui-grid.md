@@ -6,6 +6,7 @@ page_title: How to Set Default Filter Operator for Kendo UI for jQuery Grid Colu
 slug: how-to-set-default-filter-operator-kendo-ui-grid
 tags: kendo-ui, grid, filter, default operator, column menu
 res_type: kb
+components: ["grid"]
 ticketid: 1674080
 ---
 

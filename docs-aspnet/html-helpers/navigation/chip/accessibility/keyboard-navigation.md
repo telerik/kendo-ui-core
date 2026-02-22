@@ -2,6 +2,7 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} Chip by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["chip"]
 slug: keynav_aspnetcore_chip
 position: 2
 ---

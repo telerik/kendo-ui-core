@@ -5,9 +5,9 @@ description: "Learn how to implement row numbers in the Kendo UI Grid for jQuery
 previous_url: /controls/data-management/grid/how-to/Templates/add-row-numbers
 slug: howto_addrownumbers_grid
 tags: grid, row, numbers, kendoui, jquery
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -34,9 +34,9 @@ To achieve the desired scenario, use the [`page()`](/api/javascript/data/datasou
 
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+            read: "https://demos.telerik.com/service/v2/odata/Customers"
           },
           pageSize: 20
 

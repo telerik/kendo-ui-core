@@ -6,6 +6,7 @@ page_title: General Disruption and Connection Issues
 slug: cdn_connection_issues
 tags: cdn, troubleshooting, connection, issue
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

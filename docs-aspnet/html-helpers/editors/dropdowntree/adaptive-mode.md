@@ -1,7 +1,8 @@
 ---
 title: Adaptive Mode
 page_title: Adaptive Mode
-description: "Learn how to configure the adaptive behavior of the the Telerik UI DropDownTree component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI DropDownTree component for {{ site.framework }}."
+components: ["dropdowntree"]
 slug: htmlhelpers_dropdowntree_adaptive_mode_aspnetcore
 position: 5
 ---
@@ -9,6 +10,8 @@ position: 5
 # Adaptive Mode
 
 The Telerik UI for {{ site.framework }} DropDownTree supports an adaptive mode that renders a mobile-friendly rendering of its popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/dropdowntreebuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.
+
+> Starting with the 2025 Q2 release, when the adaptive rendering mode is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
 
 The DropDownTree component automatically adapts to the current screen size and changes its rendering accordingly. On medium-sized screens, the suggestion list is displayed as docked to the bottom of the screen, while on smaller screens, it is rendered as a full-screen modal dialog. In all other scenarios, including when the `AdaptiveMode()` option is not specified or is set to its default value of `AdaptiveMode.None`, the standard popup is rendered docked to the input of the component.
 
@@ -20,38 +23,7 @@ The adaptive mode changes the rendering of the DropDownTree popup element based 
 
 The following example demonstrates how to enable the adaptive mode of the DropDownTree by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().DropDownTree()
-        .Name("dropdowntree")
-        .DataTextField("Name")
-        .DataValueField("id")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .DataSource(dataSource => dataSource
-            .Read(read => read
-                .Action("Read_DropDownTreeData", "Home")
-            )
-        )
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-dropdowntree name="dropdowntree" 
-        datatextfield="Name" 
-        datavaluefield="id" 
-        adaptive-mode="AdaptiveMode.Auto">
-        <hierarchical-datasource>
-            <schema>
-                <hierarchical-model id="id"></hierarchical-model>
-            </schema>
-            <transport>
-                <read url="@Url.Action("Remote_DropDownTreeData", "Home")" />
-            </transport>
-        </hierarchical-datasource>
-    </kendo-dropdowntree>
-```
-{% endif %}
+<demo metaUrl="dropdowntree/adaptive_mode/" height="600"></demo>
 
 ## See Also
 

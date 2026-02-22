@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery NumericTextBox Documentation - NumericTextBox Overview
 description: "Try now the Kendo UI for jQuery NumericTextBox component providing a number of the features such as styling options, formatting settings, and labels."
+components: ["numerictextbox"]
 slug: overview_kendoui_numerictextbox_widget
 position: 0
 ---
@@ -21,7 +22,7 @@ By default, the widget renders **Spin** buttons which increase or decrease the v
 * [Globalization]({% slug globalization_numerictextbox %})&mdash;The NumericTextBox supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_numerictextbox %}) need to be supported. Additionally, the NumericTextBox supports [rendering in a right-to-left (RTL) direction]({% slug rtl_numerictextbox %}).
 * [Prefix and suffix]({% slug prefix_suffix_numerictextbox %})&mdash;The NumericTextBox component lets you add custom content as prefix and suffix adornments.
 * [Automatic Correction]({% slug autocorrect_kendoui_numerictextbox %})&mdash;You can configure whether the component will autocorrect the user's input when the `min` and `max` values are set.
-* [Accessibility]({% slug accessibility_numerictextbox %})&mdash;The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_numerictextbox %}).
+* [Accessibility]({% slug jquery_numerictextbox_accessibility %})&mdash;The NumericTextBox is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_numerictextbox %}).
 
 >tip To learn more about the appearance, anatomy, and accessibility of the NumericTextBox, visit the [Progress Design System documentation](https://www.telerik.com/design-system/docs/components/numerictextbox/)—an information portal offering rich component usage guidelines, descriptions of the available style variables, and globalization support details.
 

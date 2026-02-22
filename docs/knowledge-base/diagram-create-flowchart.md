@@ -7,6 +7,7 @@ slug: diagram-create-flowchart
 tags: diagram, flowchart
 ticketid: 1147424
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

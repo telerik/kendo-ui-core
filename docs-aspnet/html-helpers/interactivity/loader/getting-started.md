@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Loader component by following a complete step-by-step tutorial."
+components: ["loader"]
 slug: aspnetcore_loader_getting_started
 position: 1
 ---
@@ -76,7 +77,7 @@ You can reference the Loader instances that you have created and build on top of
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var loaderReference = $("#loader").data("kendoLoader"); // loaderReference is a reference to the existing Loader instance of the helper.

@@ -7,6 +7,7 @@ slug: grid-hierarchical-selected-rows-relations
 tags: detail, template, hierarchical, grid, selectable, relation, child, parent, checkbox
 ticketid: 1632302
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

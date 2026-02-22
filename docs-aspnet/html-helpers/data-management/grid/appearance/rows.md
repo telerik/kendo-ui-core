@@ -2,6 +2,7 @@
 title: Rows
 page_title: Rows
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when configuring the behavior of its rows."
+components: ["grid"]
 slug: rows_aspnetcore_grid_widget
 position: 3
 ---
@@ -17,7 +18,7 @@ To get a table row in the Grid by the ID of the data item:
 1. Make sure the [Id field is defined in the model configuration](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/datasourcemodeldescriptorfactory) of the data source of the Grid.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively.
 
-```script
+```JS script
     var grid = $("#grid").data("kendoGrid"); // Get the Grid instance.
     var dataItem = grid.dataSource.get(10249); // The get() method of the dataSource only works when the model id is set.
     var tableRow = $("[data-uid='" + dataItem.uid + "']"); // Get the row by its unique data-uid attribute. This UID is rendered by the Grid automatically.
@@ -48,7 +49,7 @@ The following example demonstrates how to add a table row in the [`DataBound()`]
 </div>
 ```
 {% endif %}
-```script
+```JS script
     function onGridDataBound(e) {
         if (!e.sender.dataSource.view().length) {
             var colspan = e.sender.thead.find("th:visible").length,
@@ -68,15 +69,15 @@ Hover is a UI state which provides better visualization across long table rows a
 
 * Open the Kendo UI theme CSS file (for example, `kendo.default.min.css`) and remove the following CSS rule.
 
-      ```
-      .k-grid tr:hover {
-          /* ...background styles here... */
-        }
-      ```
+    ```CSS
+    .k-grid tr:hover {
+        /* ...background styles here... */
+    }
+    ```
 
 * Override the `hover` styling by using the CSS code from the following example. The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
 
-    ```
+    ```CSS
     .k-grid tr:not(.k-selected):hover {
         background: none;
         color: inherit;
@@ -89,6 +90,9 @@ Hover is a UI state which provides better visualization across long table rows a
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using Row Templates in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/rowtemplate)
 * [Row Templates in the Grid HtmlHelper for {{ site.framework }}]({% slug row_templates_aspnetcore_grid %})
 * [Server-Side API](/api/grid)

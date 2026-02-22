@@ -2,6 +2,7 @@
 title: TabStrip
 page_title: TabStrip Overview
 description: "Learn the basics when working with the hybrid Telerik UI TabStrip HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobiletabstrip/overview, /helpers/hybrid/mobiletabstrip
 slug: overview_hybridtabstrip_aspnetmvc
 ---

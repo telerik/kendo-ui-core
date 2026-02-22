@@ -6,6 +6,7 @@ page_title: Persist The Filter State of a Telerik UI Grid When Using Outside Pla
 slug: grid-persist-separate-multiselect-filter
 tags: grid, multiselect, persist, filter, sessionstorage
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -43,7 +44,7 @@ The example below is implemented as per the following steps:
 
 The following examples demonstrates the steps described above.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().MultiSelect()
           .Name("freight")
           .AutoClose(false)

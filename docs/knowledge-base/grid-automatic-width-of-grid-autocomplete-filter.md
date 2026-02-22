@@ -7,6 +7,7 @@ slug: grid-automatic-width-of-grid-autocomplete-filter
 tags: grid, filter, width, suggestions
 ticketid: 1144763
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -41,9 +42,9 @@ Programmatically set the [`autoWidth`](https://docs.telerik.com/kendo-ui/api/jav
                 $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                            type: "odata",
+                            type: "odata-v4",
                             transport: {
-                                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                                read: "https://demos.telerik.com/service/v2/odata/Orders"
                             },
                             schema: {
                                 model: {

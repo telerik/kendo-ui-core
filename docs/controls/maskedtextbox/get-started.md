@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MaskedTextBox Documentation - Getting Started with the MaskedTextBox
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["maskedtextbox"]
 slug: getting_started_kendoui_maskedtextbox
 position: 1
 ---
@@ -78,8 +79,4 @@ To change the appearance of the component, use the `fillMode`, `rounded`, and `s
 * [JavaScript API Reference of the jQuery MaskedTextBox](/api/javascript/ui/maskedtextbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

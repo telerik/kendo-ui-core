@@ -5,9 +5,9 @@ description: "Learn how to persist the old value of the Kendo UI NumericTextBox 
 slug: howto_persist_old_value_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/persist-old-value
 tags: telerik, kendo, jquery, numerictextbox, persist, old, values
-component: numerictextbox
 type: how-to
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

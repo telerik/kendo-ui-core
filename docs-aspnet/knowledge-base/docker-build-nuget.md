@@ -7,6 +7,7 @@ previous_url: /aspnet-mvc/knowledge-base/docker-build-nuget
 slug: docker-build-nuget
 tags: docker, dockerfile, nuget, nuget-config, packages, dotnet, restore
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -70,11 +71,12 @@ You'll want to place the `nuget.config` file inside the same directory that your
 
 Put the `nuget.config` file in the same directory as the `csproj` file.
 
-```bat
+```
 /MyApp/MyApp.csproj
 /MyApp/nuget.config
 /MyApp.sln
 ```
+
 Here is an example `Dockerfile` with some comments to explain how the `nuget.config` is effective in Option 1
 
 ```dockerfile
@@ -110,7 +112,7 @@ ENTRYPOINT ["dotnet", "MyApp.dll"]
 
 For multi-project solutions, you can place the `nuget.config` file in the same folder as the `sln` file so that both projects share the same file.
 
-```bat
+```
 /FirstProject/FirstProject.csproj
 /SecondProject/SecondProject.csproj
 /MyApp.sln

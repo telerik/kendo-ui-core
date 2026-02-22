@@ -7,6 +7,7 @@ slug: grid-savechanges-external-button
 tags: grid, saveChanges, button
 ticketid: 1544067
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -33,7 +34,7 @@ How can I save the changes in the {{ site.product }} Grid by using an outside bu
 1. Get a [`reference`](https://docs.telerik.com/aspnet-core/getting-started/helper-basics/fundamentals#referencing-client-side-objects) to the Grid.
 1. Use the client-side [`saveChanges`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/savechanges) method.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("Grid")
         .Columns(columns => {
@@ -71,7 +72,7 @@ How can I save the changes in the {{ site.product }} Grid by using an outside bu
       .Events(e=>e.Click("onClickHandler"))
     )
 ```
-```script.js
+```JS script.js
     function onClickHandler() {
         var grid = $("#grid").data("kendoGrid");
         grid.saveChanges();

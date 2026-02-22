@@ -5,9 +5,9 @@ description: "Learn how to validate radio buttons with only one error message in
 previous_url: /framework/validator/how-to/validate-radio-buttons, /controls/editors/validator/how-to/validate-radio-buttons
 slug: howto_validateradiowithonemessage_validator
 tags: telerik, kendo, jquery, validator, validate, radio, buttons, with, only, one, error, message
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment
@@ -73,7 +73,7 @@ $(function(){
 </script>
 ```
 
-# Validate Radio Buttons with Only One Error Message when the validationSummary is enabled
+## Validate Radio Buttons with Only One Error Message when the validationSummary is enabled
 
 In scenario when the `validationSummary` is enabled a custom class can be added to the radio inputs. All the items, except one with the specified class needs to be hidden when the validation fails. 
 

@@ -2,13 +2,14 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI PropertyGrid component for {{ site.framework }}."
+components: ["propertygrid"]
 slug: htmlhelpers_events_propertygrid
 position: 5
 ---
 
 # Events
 
-The Telerik UI PropertyGrid for {{ site.framework }} [exposes various events](/api/kendo.mvc.ui.fluent/propertygridventbuilder) that allow you to control the behavior of the UI component.
+The Telerik UI PropertyGrid for {{ site.framework }} [exposes various events](/api/kendo.mvc.ui.fluent/propertygrideventbuilder) that allow you to control the behavior of the UI component.
 
 For a complete example on basic PropertyGrid events, refer to the [demo on using the events of the PropertyGrid](https://demos.telerik.com/{{ site.platform }}/propertygrid/events).
 
@@ -35,7 +36,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-propertygrid>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onEdit(e){
             // Handle the PropertyGrid Edit event that triggers when the user edits a data item.

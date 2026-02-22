@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Learn how to enable editing and alter the Breadcrumb value."
+components: ["breadcrumb"]
 slug: htmlhelpers_breadcrumb_aspnetcore_editing
 position: 4
 ---

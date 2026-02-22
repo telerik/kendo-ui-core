@@ -7,7 +7,7 @@ slug: spreadsheet-date-validation-based-on-previous-column-date
 tags: kendo, kendo-ui, spreadsheet, validation, date, previous-column
 ticketid: 1149122
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment

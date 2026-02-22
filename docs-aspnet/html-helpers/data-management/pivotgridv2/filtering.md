@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Get started with the Telerik UI PivotGridV2 component for {{ site.framework }} and learn how to filter a Telerik UI PivotGridV2 component for {{ site.framework }}."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_filtering
 position: 5
 ---
@@ -46,7 +47,7 @@ To set a predefined filter when using Xmla data use the above-described approach
         <schema type="xmla"/>
         <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
         <transport>
-            <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+            <read url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
             <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
         </transport>
         <filters>
@@ -58,7 +59,7 @@ To set a predefined filter when using Xmla data use the above-described approach
 
 ### Filtering when using Flat Data
 
-Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](/api/javascript/data/datasource/configuration/filter).
+Build the filter descriptor similar to [the filter option of the `kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter).
 
 ```HtmlHelper
     .Filter(f =>

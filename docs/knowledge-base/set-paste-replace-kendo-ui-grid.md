@@ -6,6 +6,7 @@ page_title: Programmatically Set Paste as Replace in Kendo UI for jQuery Grid To
 slug: set-paste-replace-kendo-ui-grid
 tags: kendo, ui, jQuery, grid, paste, replace, programmatically, databound, toolbar
 res_type: kb
+components: ["grid"]
 ticketid: 1672367
 ---
 

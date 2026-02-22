@@ -2,6 +2,7 @@
 title: Custom Cell Editors
 page_title: Spreadsheet Custom Cell Editors
 description: "Learn how to implement custom cell editors for the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore
 position: 9
 ---
@@ -16,7 +17,7 @@ A cell editor allows the user to enter the data in the correct format. For examp
 To define a custom editor, use `kendo.spreadsheet.registerEditor(name, editor)`:
  *  `name` is an ID of your choice. You will use it to select the particular editor on a `Range`.
 
- *  `editor` can be an [object](#configuring-editor-as-object) or a [function](#configuring-editor-as-function).
+ *  `editor` can be an [object](#configuring-editor-as-object) or a function.
 
  ### Configuring `editor` as Object
 
@@ -143,4 +144,4 @@ select a color.
 ## See Also
 
 * [Implementing Custom Cell Editors in the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/custom-editors)
-* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)

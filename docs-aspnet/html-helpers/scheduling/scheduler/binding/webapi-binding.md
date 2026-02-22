@@ -3,8 +3,9 @@ title: Web API Binding
 page_title: Web API Binding
 previous_url: /html-helpers/scheduling/scheduler/how-to/web-api-binding, /helpers/scheduling/scheduler/how-to/web-api-binding
 description: "Learn how to enable the Web API binding capabilities of the Telerik UI Scheduler for {{ site.framework }}."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_webapi_binding
-position: 5
+position: 4
 ---
 
 # Web API Binding
@@ -25,7 +26,7 @@ To ensure that the application is configured for Web API binding:
 
 * Configure the Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
 
-  ```
+  ```C#
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -38,7 +39,7 @@ To ensure that the application is configured for Web API binding:
 
 * Create a file named `WebApiConfig.cs` into the `App_Start` folder and configure the default Web API routing convention.
  
-  ```
+  ```C#
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -62,7 +63,7 @@ To ensure that the application is configured for Web API binding:
 To support writing and reading data using Web API endpoints, the {% if site.core %} `ControllerBase` {%else%} `ApiController` {% endif %} base class needs to be inherited for a given controller instance.
 
 {% if site.core %}
-```
+```C#
     [Route("api/[controller]")]
     public class TaskController : Controller
     {
@@ -136,7 +137,7 @@ To support writing and reading data using Web API endpoints, the {% if site.core
     }
 ```
 {% else %}
-```
+```C#
 public class TaskController : System.Web.Http.ApiController
     {
         SchedulerTaskService service;

@@ -5,9 +5,9 @@ description: "Learn how to create cascading Kendo UI MultiSelect widgets."
 previous_url: /controls/editors/multiselect/how-to/cascading-multiselects, /controls/editors/multiselect/how-to/cascade/cascading-multiselects
 slug: howto_create_cascading_widgets_multiselect
 tags: telerik, kendo, jquery, multiselect, create, cascading, multiselects
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment
@@ -45,11 +45,11 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
       $(function() {
         var productsDataSource = new kendo.data.DataSource({
-          type: "odata",
+          type: "odata-v4",
           serverFiltering: true,
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+              url: "https://demos.telerik.com/service/v2/odata/Products",
             },
             parameterMap: function(data) {
               return kendo.data.transports.odata.parameterMap.call(this, data);
@@ -69,11 +69,11 @@ The following example demonstrates how to achieve the desired scenario.
           dataTextField: "CompanyName",
           dataValueField: "SupplierID",
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Suppliers"
+                url: "https://demos.telerik.com/service/v2/odata/Suppliers"
               }
             }
           },

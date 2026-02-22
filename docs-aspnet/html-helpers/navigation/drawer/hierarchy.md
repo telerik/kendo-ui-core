@@ -2,6 +2,7 @@
 title: Hierarchy
 page_title: Hierarchy
 description: "Find out how to create an item hierarchy using the Telerik UI Drawer component for {{ site.framework }}."
+components: ["drawer"]
 slug: hierarchy_drawer_aspnetcore
 position: 5
 ---
@@ -76,7 +77,7 @@ To utilize the hierarchy functionality of the Telerik UI Drawer:
 
 1. Define the `onItemClick` handling function.
 
-    ```html
+    ```JS
         <script>
             function onItemClick(e) {
                 if (!e.item.hasClass("k-drawer-separator")) {

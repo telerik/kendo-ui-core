@@ -6,6 +6,7 @@ page_title: How to Keep a Marker Centered in Kendo UI Map on Zoom and Pan
 slug: centering-a-marker-kendo-ui-map
 tags: kendo, ui, map, center, marker, zoom, pan
 res_type: kb
+components: ["map"]
 ticketid: 1671377
 ---
 
@@ -33,7 +34,7 @@ Centering a marker in the visible view of the map, including when zooming or pan
 
 ## Solution
 
-To center a marker in the Kendo UI Map and keep it centered during zoom and pan operations, use the [center()](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/center) method of the map. This method allows you to set or get the center of the map. To maintain the centered marker when the map is zoomed or panned, apply logic inside the [`zoomEnd`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/zoomend) and [`panEnd`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/panend) event handlers of the map.
+To center a marker in the Kendo UI Map and keep it centered during zoom and pan operations, use the [center()](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/center) method of the map. This method allows you to set or get the center of the map. To maintain the centered marker when the map is zoomed or panned, apply logic inside the [`zoomEnd`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/zoomend) and [`panEnd`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/panend) event handlers of the map.
 
 Below is the JavaScript code that demonstrates how to implement this functionality:
 

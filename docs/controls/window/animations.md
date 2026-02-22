@@ -2,6 +2,7 @@
 title: Animations
 page_title: jQuery Window Documentation - Animations
 description: "Get started with the jQuery Window by Kendo UI and learn how to add animation effects upon display."
+components: ["window"]
 slug: animations_window
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Width
 page_title: Width
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to apply different widths to the Grid."
+components: ["grid"]
 slug: width_grid_aspnetcore
 position: 2
 ---
@@ -27,36 +28,45 @@ Depending on the specific scenarios, you can use any of the following approaches
 
 * If scrolling is disabled, use the following CSS.
 
-        #GridID
-        {
-            min-width: 800px;
-        }
+    ```CSS
+    #GridID
+    {
+        min-width: 800px;
+    }
+    ```
 
 * If scrolling is enabled and the Grid is not hierarchical (with no nested tables), use the following CSS. For more information on the supported scroll modes by the Grid, refer to the [article on scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
 
-        #GridID .k-grid-header-wrap > table, // A header table.
-        #GridID .k-grid-content table, // A data table, no virtual scrolling.
-        #GridID .k-virtual-scrollable-wrap table // A data table, with virtual scrolling.
-        {
-            min-width: 800px;
-        }
+    ```CSS
+    #GridID .k-grid-header-wrap > table, // A header table.
+    #GridID .k-grid-content table, // A data table, no virtual scrolling.
+    #GridID .k-virtual-scrollable-wrap table // A data table, with virtual scrolling.
+    {
+        min-width: 800px;
+    }
+    ```
 
 * If scrolling is enabled and the Grid is hierarchical (with nested tables), use the following CSS. For more information on the supported scroll modes by the Grid, refer to the [article on scrolling]({% slug htmlhelpers_grid_aspnetcore_scrolling %}).
 
-        #GridID .k-grid-header-wrap > table, // A header table.
-        #GridID .k-grid-content table, // A data table, no virtual scrolling.
-        #GridID .k-virtual-scrollable-wrap table // A data table, with virtual scrolling.
-        {
-            min-width: 800px;
-        }
-        #GridID .k-grid-content table table, // A data table, no virtual scrolling.
-        #GridID .k-virtual-scrollable-wrap table table // A data table, with virtual scrolling.
-        {
-            min-width: initial;
-        }
+    ```CSS
+    #GridID .k-grid-header-wrap > table, // A header table.
+    #GridID .k-grid-content table, // A data table, no virtual scrolling.
+    #GridID .k-virtual-scrollable-wrap table // A data table, with virtual scrolling.
+    {
+        min-width: 800px;
+    }
+    #GridID .k-grid-content table table, // A data table, no virtual scrolling.
+    #GridID .k-virtual-scrollable-wrap table table // A data table, with virtual scrolling.
+    {
+        min-width: initial;
+    }
+    ```
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Scrolling by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
 * [Server-Side API](/api/grid)

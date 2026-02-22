@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Popup Documentation - Getting Started with the Popup
 description: "Get started with the jQuery Popup by Kendo UI and learn how to create and initialize the component."
+components: ["popup"]
 slug: getting_started_kendoui_popup_component
 position: 1
 ---
@@ -74,8 +75,4 @@ In this step, you will initialize the Popup from the `<div>` element. All settin
 * [JavaScript API Reference of the jQuery Popup](/api/javascript/ui/popup)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

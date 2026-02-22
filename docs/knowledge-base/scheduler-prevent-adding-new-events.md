@@ -7,6 +7,7 @@ slug: scheduler-prevent-adding-new-events
 tags: kendo, kendo-ui, scheduler
 ticketid: 1110078
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

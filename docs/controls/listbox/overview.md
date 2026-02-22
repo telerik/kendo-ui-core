@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ListBox Documentation - ListBox Overview
 description: "Try now the Kendo UI for jQuery ListBox component covering everything from data binding, drag-and-drop, and templates."
+components: ["listbox"]
 slug: overview_kendoui_listbox_widget
 position: 0
 ---

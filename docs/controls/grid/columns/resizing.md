@@ -2,6 +2,7 @@
 title: Resizing
 page_title: jQuery Grid Documentation - Resizing of Columns
 description: "Get started with the jQuery Grid by Kendo UI and learn how to enable column resizing in order to modify the width of columns."
+components: ["grid"]
 previous_url: /appearance/columns/resizing
 slug: column_resizing_kendoui_grid_widget
 position: 6
@@ -29,7 +30,6 @@ By design, the last column of the Grid has no right border, so that no double bo
         border-right: 1px solid #ccc;
     }
 
-> For column resizing on mobile devices please refer to the [Grid Adaptive Rendering](https://demos.telerik.com/kendo-ui/grid/adaptive-rendering) official demo and the [Adaptive Rendering](https://docs.telerik.com/kendo-ui/controls/grid/appearance/adaptive) documentation article.
 
 ## KB Articles on Column Resizing
 

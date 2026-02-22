@@ -6,6 +6,7 @@ page_title: How to Set Min Date and Time Based on Another DateTimePicker's Selec
 slug: dynamically-set-min-date-time-kendo-datetimepicker
 tags: kendo-ui, datetimepicker, min-date, setoptions, javascript
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ticketid: 1674797
 ---
 

@@ -5,9 +5,9 @@ description: "Learn how to move a row from one Kendo UI jQuery Grid to another u
 previous_url: /controls/data-management/grid/how-to/transfer-grid-rows-sortable, /controls/data-management/grid/how-to/integration/transfer-grid-rows-sortable
 slug: howto_transferrowsingridsortable_grid
 tags: transfer, move, grid, rows using, sortable
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

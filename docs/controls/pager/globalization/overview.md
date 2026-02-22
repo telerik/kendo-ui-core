@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Pager Documentation - Pager Globalization
 description: "Get started with the jQuery Pager by Kendo UI and learn about the globalization options it supports."
+components: ["pager"]
 slug: globalization_kendoui_pager_widget
 position: 1
 ---

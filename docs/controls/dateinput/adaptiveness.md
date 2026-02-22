@@ -2,6 +2,7 @@
 title: Adaptiveness
 page_title: Adaptiveness
 description: "Learn how to configure the input mode for the Kendo UI for jQuery DateInput component."
+components: ["dateinput"]
 slug: dateinput_input_mode_kendo
 position: 8
 ---

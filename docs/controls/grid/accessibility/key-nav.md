@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Grid Documentation - Keyboard Navigation
 description: "Get started with the jQuery Grid by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["grid"]
 slug: keynav_kendoui_grid_widget
 position: 2
 ---
@@ -39,6 +40,6 @@ For a complete list of all supported key combinations, refer to the [Pager's Key
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/web/grid/navigation.html)
+* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in the Grid]({% slug overview_accessibility_support_kendoui %})

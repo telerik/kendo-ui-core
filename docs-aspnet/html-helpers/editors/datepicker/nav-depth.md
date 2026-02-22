@@ -2,6 +2,7 @@
 title: Start View and Selection Depth
 page_title: Start View and Selection Depth
 description: "Get started with the {{ site.product }} DatePicker and learn how to define the start view and control the navigation depth of the widget."
+components: ["datepicker"]
 slug: htmlhelpers_datepicker_aspnetcore_navdepth
 position: 4
 ---

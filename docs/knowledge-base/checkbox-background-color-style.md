@@ -7,6 +7,7 @@ slug: checkbox-background-color-style
 tags: checkbox, background, color, style
 ticketid: 1140909
 res_type: kb
+components: ["checkbox"]
 ---
 
 ## Environment
@@ -134,4 +135,4 @@ The following example demonstrates how to render a list of CheckBoxes with a new
 
 ## See Also
 
-* [Demo on Styling CheckBoxes](https://demos.telerik.com/kendo-ui/styling/checkboxes)
+* [Demo on CheckBoxes Appearance](https://demos.telerik.com/kendo-ui/checkbox/appearance)

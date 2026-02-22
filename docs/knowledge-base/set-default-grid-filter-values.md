@@ -7,7 +7,7 @@ slug: default-grid-filter-values
 tags: grid, default filter, values, filter menu, kendo grid
 ticketid: 1583924
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

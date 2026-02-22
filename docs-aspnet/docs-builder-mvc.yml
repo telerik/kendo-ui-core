@@ -10,12 +10,15 @@ product-code: KENDOUIMVC
 product-name: Telerik UI for ASP.NET MVC
 product-url: https://www.telerik.com/aspnet-mvc
 product-trial-url: https://www.telerik.com/try/ui-for-asp.net-mvc
+contribute-url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet/
 search-engine-id: 403521cf8c97d434d
 avatar-path: ./images/avatar-ninja.svg
 no-results-image-path: ./images/ninja-no-results.svg
 img-max-width: 100%
 table-layout: fixed
 pdf-cover-png-path: ./images/pdf-cover.png
+gitLastCommitDateEnabled: true
+search-provider: nuclia
 
 cta-overview: The @Subject component is part of @ProductLink, a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial.
 cta-intro: "@ProductLink is a professional grade UI library with 110+ components for building modern and feature-rich applications. To try it out sign up for a free 30-day trial."
@@ -29,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-mvc
   framework: "ASP.NET MVC"
   framework_short: "MVC"
-  cdnVersion: "2025.1.211"
-  themesCdnVersion: "10.2.0"
-  mvcCoreVersion: "2025.1.211"
+  cdnVersion: "2026.1.212"
+  themesCdnVersion: "13.0.0"
+  mvcCoreVersion: "2026.1.212"
   platform: aspnet-mvc
   core: false
   mvc: true
@@ -40,8 +43,103 @@ hash-ignore-pattern: "[\\.\\(\\)\\<\\>,]"
 default-code-block-language: Razor
 enable-tabbed-code-blocks: true
 
+demos:
+  metaFileName: demo.json
+  defaultTheme: default-ocean-blue-a11y
+  uris:
+      www.telerik.com: https://demos.telerik.com/aspnet-mvc/docsbuilder/
+      wwwsit.telerik.com: https://demos.telerik.com/aspnet-mvc/docsbuilder/
+      wwwuat.telerik.com: https://aspnet-mvc-demos-staging.azurewebsites.net/aspnet-mvc/docsbuilder/
+      default: https://localhost:44300/docsbuilder/
+  themes:
+      default-main:
+          name: Main
+          group: Default
+          colors: ['#FFFFFF', '#ff6358', '#424242']
+      default-main-dark:
+          name: Main Dark
+          group: Default
+          tags: [dark]
+          colors: ['#333333', '#ff6358', '#FFFFFF']
+      default-ocean-blue:
+          name: Ocean Blue
+          group: Default
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-ocean-blue-a11y:
+          name: Ocean Blue A11y
+          group: Default
+          tags: [accessibility]
+          colors: ['#ffffff', '#0275d8', '#656565']
+      default-nordic:
+          name: Nordic
+          group: Default
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      default-purple:
+          name: Purple
+          group: Default
+          colors: ['#ffffff', '#bf70cc', '#424242']
+      default-turquoise:
+          name: Turquoise
+          group: Default
+          colors: ['#ffffff', '#28bfba', '#424242']
+
+      bootstrap-main:
+          name: Main
+          group: Bootstrap
+          colors: ['#ffffff', '#0d6efd', '#212529']
+      bootstrap-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Bootstrap
+          colors: ['#212529', '#0d6efd', '#ffffff']
+      bootstrap-nordic:
+          name: Nordic
+          group: Bootstrap
+          colors: ['#ffffff', '#01a8c1', '#e7607b']
+      bootstrap-urban:
+          name: Urban
+          group: Bootstrap
+          colors: ['#ffffff', '#447a99', '#ff804d']
+      bootstrap-vintage:
+          name: Vintage
+          group: Bootstrap
+          colors: ['#744662', '#f2efe8', '#90b8c1']
+
+      material-main:
+          name: Main
+          group: Material
+          colors: ['#ffffff', '#3f51b5', '#424242']
+      material-main-dark:
+          name: Main Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#3f51b5', '#ffffff']
+      material-arctic:
+          name: Arctic
+          group: Material
+          colors: ['#ffffff', '#2196f3', '#455a64']
+      material-lime-dark:
+          name: Lime Dark
+          tags: [dark]
+          group: Material
+          colors: ['#303030', '#8bc34a', '#ffffff']
+      material-nova:
+          name: Nova
+          group: Material
+          colors: ['#ffffff', '#e91e63', '#455a64']
+
+      fluent-main:
+          name: Main
+          group: Fluent
+          colors: ['#ffffff', '#0078D4', '#323130']
+
+      fluent-main-dark:
+          name: Main Dark
+          group: Fluent
+          colors: ['#323130', '#0078D4', '#ffffff']
+
 markdown-replacements:
-- pattern: "```(\\r?\\n[ ]*)+((?<liquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
+- pattern: "```(\\r?\\n[ ]*)+(?=(?<followedBy>\\{%|\\r?\\n[ ]*```(?!prompt)))((?<liquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})(\\r?\\n[ ]*)*(?<additionalLiquid>\\{%\\s+((if\\s+[^%]+)|endif|else)\\s+%\\})?)?(\\r?\\n[ ]*)*(?<nextBlock>\\r?\\n[ ]*```)"
   replacement: "```$<liquid>$<additionalLiquid>$<nextBlock>"
 - pattern: "```(?<lang>(HtmlHelper|View|TagHelper))\\s*?(?<newLine>\\r?\\n)"
   replacement: "```Razor $<lang>$<newLine>"
@@ -66,6 +164,7 @@ excluded-files:
 - "**/getting-started-core/*"
 - "**/backwards-compatibility/2018-backwards-compatibility.md"
 - "**/installation/json-serialization.md"
+- "**/installation/adding-client-side-resources/scripts/*"
 - "**/installation/adding-client-side-resources/using-libman.md"
 - "**/vs-integration/snippets.md"
 - "**/vs-code-integration/*"
@@ -89,7 +188,6 @@ excluded-files:
 - "**/knowledge-base/grid-enable-operations-for-object-column.md"
 - "**/knowledge-base/grid-export-color-alternating-rows.md"
 - "**/knowledge-base/grid-export-format-cells.md"
-- "**/knowledge-base/grid-export-multiple-grids-to-excel.md"
 - "**/knowledge-base/grid-header-multicolumn-title-change.md"
 - "**/knowledge-base/grid-icon-command-button-no-text.md"
 - "**/knowledge-base/grid-is-not-showing-data.md"
@@ -108,67 +206,19 @@ excluded-files:
 - "**/knowledge-base/vs-online-continuous-integration-login-problem.md"
 - "**/knowledge-base/grid-toggle-editable-mode.md"
 - "**/knowledge-base/grid-export-parent-and-all-detail-grids-to-excel.md"
-- "**/html-helpers/data-management/grid/binding/razor-page.md"
 - "**/knowledge-base/vs-2015-support.md"
 - "**/knowledge-base/trial-to-commercial-license-troubleshooting.md"
 - "**/knowledge-base/vs-code-extension-issues.md"
+- "**/knowledge-base/razor-class-library.md"
 - "**/html-helpers/hybrid/*"
 - "**/html-helpers/helper-basics/fundamentals.md"
 - "**/html-helpers/helper-basics/declarative-initialization.md"
-- "**/html-helpers/data-management/filemanager/binding/razor-page.md"
-- "**/html-helpers/datasource/razor-page.md"
-- "**/html-helpers/diagrams-and-maps/diagram/binding/razor-pages.md"
-- "**/html-helpers/conversational-ui/chat/razor-page.md"
-- "**/html-helpers/editors/autocomplete/binding/razor-pages.md"
-- "**/html-helpers/editors/checkboxgroup/razor-page.md"
-- "**/html-helpers/editors/dropdownlist/binding/razor-page.md"
-- "**/html-helpers/editors/colorpicker/razor-page.md"
-- "**/html-helpers/editors/combobox/binding/razor-page.md"
-- "**/html-helpers/editors/dropdowntree/binding/razor-page.md"
-- "**/html-helpers/editors/multicolumncombobox/binding/razor-page.md"
-- "**/html-helpers/editors/multiselect/binding/razor-page.md"
-- "**/html-helpers/editors/radiogroup/razor-page.md"
-- "**/html-helpers/editors/rating/razor-page.md"
-- "**/html-helpers/editors/slider/razor-page.md"
-- "**/html-helpers/editors/switch/razor-page.md"
-- "**/html-helpers/editors/upload/razor-page.md"
-- "**/html-helpers/editors/captcha/razor-page.md"
 - "**/html-helpers/editors/dropdownlist/troubleshooting.md"
-- "**/html-helpers/editors/imageeditor/razor-page.md"
-- "**/html-helpers/interactivity/loader/razor-page.md"
-- "**/html-helpers/layout/form/razor-page.md"
-- "**/html-helpers/layout/dialog/razor-page.md"
-- "**/html-helpers/layout/notification/razor-page.md"
-- "**/html-helpers/layout/splitter/razor-page.md"
-- "**/html-helpers/layout/tooltip/razor-page.md"
-- "**/html-helpers/layout/window/razor-page.md"
-- "**/html-helpers/navigation/breadcrumb/razor-page.md"
-- "**/html-helpers/navigation/button/razor-page.md"
-- "**/html-helpers/navigation/buttongroup/razor-page.md"
-- "**/html-helpers/navigation/menu/binding/razor-page.md"
-- "**/html-helpers/navigation/menu/contextmenu/razor-page.md"
-- "**/html-helpers/navigation/panelbar/binding/razor-page.md"
-- "**/html-helpers/navigation/radiobutton/razor-page.md"
-- "**/html-helpers/navigation/stepper/razor-page.md"
-- "**/html-helpers/navigation/wizard/razor-page.md"
-- "**/html-helpers/scheduling/scheduler/binding/razor-page.md"
-- "**/html-helpers/scheduling/scheduler/binding/signalr-binding.md"
-- "**/html-helpers/navigation/tabstrip/razor-page.md"
-- "**/html-helpers/scheduling/calendar/razor-pages.md"
-- "**/html-helpers/editors/datepicker/razor-pages.md"
-- "**/html-helpers/editors/datetimepicker/razor-pages.md"
-- "**/html-helpers/scheduling/multiviewcalendar/razor-pages.md"
-- "**/html-helpers/charts/treemap/razor-pages.md"
-- "**/html-helpers/navigation/toolbar/razor-page.md"
-- "**/html-helpers/data-management/treelist/binding/razor-page.md"
-- "**/html-helpers/editors/dateinput/razor-page.md"
-- "**/html-helpers/editors/daterangepicker/razor-page.md"
-- "**/html-helpers/navigation/drawer/razor-page.md"
-- "**/html-helpers/pdf/pdfviewer/razor-page.md"
-- "**/html-helpers/data-management/listview/binding/razor-page.md"
-- "**/html-helpers/media/mediaplayer/razor-page.md"
 - "**/html-helpers/overview-taghelpers.md"
-- "**/html-helpers/chartwizard/binding/razor-page.md"
+- "**/knowledge-base/grid-azure-empty-cells.md"
+- "**/razor-page.md"
+- "**/razor-pages.md"
+- "**/ai/copilot-extension.md"
 
 meta:
   "*/accessibility":
@@ -179,6 +229,10 @@ meta:
     position: 50
   "*/dropdownbutton":
     title: DropDownButton
+  "*speechtotextbutton":
+    title: SpeechToTextButton
+  "*smartpastebutton":
+    title: SmartPasteButton
   "*splitbutton":
     title: SplitButton
   "*switch":
@@ -206,7 +260,7 @@ meta:
   "*timepicker":
     title: TimePicker
   "*timeline":
-    title: TimeLine
+    title: Timeline
   "*tilelayout":
     title: TileLayout
   "*textbox":
@@ -403,7 +457,7 @@ meta:
     title: Appearance
   backwards-compatibility:
     title: Breaking Changes
-    position: 15
+    position: 16
   cloud-integration/google-cloud:
     title: Google Cloud
     position: 4
@@ -415,22 +469,25 @@ meta:
     position: 2
   cloud-integration:
     title: Cloud Integration
-    position: 14
+    position: 15
   integration-with-other-telerik-products:
     title: Integration with Other Telerik Products
-    position: 13
+    position: 14
   deployment:
     title: Deployment
-    position: 12
+    position: 13
   security:
     title: Security
-    position: 11
+    position: 12
   accessibility:
     title: Accessibility
-    position: 10
+    position: 11
   globalization:
     title: Globalization
-    position: 9
+    position: 10
+  ai:
+    title: AI Tools
+    position: 3
   styles-and-layout/less-themes:
     title: LESS Themes
     position: 3
@@ -439,7 +496,7 @@ meta:
     position: 2
   styles-and-layout:
     title: Styles and Appearance
-    position: 8
+    position: 9
   html-helpers/pdf/pdfviewer:
     title: PDFViewer
   html-helpers/pdf:
@@ -462,6 +519,8 @@ meta:
     title: Chat
   html-helpers/conversational-ui/aiprompt:
     title: AIPrompt
+  html-helpers/conversational-ui/promptbox:
+    title: PromptBox
   html-helpers/conversational-ui:
     title: Conversational UI
   html-helpers/navigation/menu/contextmenu:
@@ -537,6 +596,8 @@ meta:
     title: TimeDurationPicker
   html-helpers/editors/imageeditor:
     title: Image Editor
+  html-helpers/conversational-ui/inline-aiprompt:
+    title: InlineAIPrompt
   html-helpers/editors/flatcolorpicker:
     title: FlatColorPicker
   html-helpers/editors/listbox/binding:
@@ -586,12 +647,15 @@ meta:
   html-helpers/data-management/grid/accessibility:
     title: Accessibility
     position: 29
+  html-helpers/data-management/grid/smart-grid:
+    title: Smart Grid
+    position: 4
   html-helpers/data-management/grid/troubleshoot:
     title: Troubleshooting
-    position: 30
+    position: 31
   html-helpers/data-management/grid/appearance:
     title: Appearance
-    position: 4
+    position: 6
   html-helpers/data-management/grid/templates:
     title: Templates
     position: 22
@@ -603,13 +667,13 @@ meta:
     position: 10
   html-helpers/data-management/grid/columns:
     title: Columns
-    position: 3
+    position: 5
   html-helpers/data-management/grid/grouping:
     title: Grouping
     position: 7
   html-helpers/data-management/grid/editing:
     title: Editing
-    position: 5
+    position: 3
   html-helpers/data-management/grid:
     title: Grid
   html-helpers/data-management/filter:
@@ -618,9 +682,12 @@ meta:
     title: Data Management
   html-helpers/datasource:
     title: Data Source
+  ai-components-and-features:
+    title: AI Components & Features
+    position: 4
   html-helpers:
     title: Components
-    position: 7
+    position: 8
   troubleshoot:
     title: Troubleshooting
     position: 60
@@ -684,9 +751,6 @@ meta:
   html-helpers/helper-basics:
     title: Working with Helpers
     position: 2
-  installation-mvc/adding-client-side-resources/scripts:
-    title: Creating Custom Script Bundles
-    position: 5
   installation-mvc/adding-client-side-resources:
     title: Providing Client-Side Resources
     position: 6
@@ -711,9 +775,6 @@ meta:
   installation/activating-your-license:
     title: "Activating Your License"
     position: 3
-  installation/adding-client-side-resources/scripts:
-    title: Creating Custom Script Bundles
-    position: 5
   vs-code-integration:
     title: VS Code Integration
     position: 6
@@ -761,6 +822,9 @@ redirects:
 
 - from: "^/getting-started/vs-integration/(.*)$"
   to: "/vs-integration/$1"
+
+- from: "^/installation/adding-client-side-resources/scripts/(.*)$"
+  to: "/installation/adding-client-side-resources/creating-custom-bundles"
 
 - from: "^/styles-and-layout/styling-components/(.*)$"
   to: "/styles-and-layout/$1"
@@ -812,3 +876,4 @@ redirects:
 
 - from: "^/helpers/(.*)$"
   to: "/html-helpers/$1"
+

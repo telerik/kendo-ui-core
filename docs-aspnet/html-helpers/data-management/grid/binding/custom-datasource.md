@@ -1,9 +1,10 @@
 ---
-title: Grid Custom DataSource
+title: Custom DataSource
 page_title: Custom DataSource of the Grid Component
 description: "Get started with Telerik UI for ASP.NET MVC and use the CustomDataSource builder for the Grid component."
+components: ["grid"]
 slug: grid_customdatasource_aspnetmvc
-position: 4
+position: 3
 ---
 
 # Custom DataSource
@@ -125,6 +126,9 @@ The following example demonstrates a CustomDataSourceBuilder definition.
 
 ## See Also
 
-* [Custom DataSource for {{ site.framework }} (https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/custom-datasource)
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
+* [Custom DataSource for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/html-helpers/datasource/custom-datasource)
 * [Server-Side API](/api/grid)
 * [Custom DataSource in Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)

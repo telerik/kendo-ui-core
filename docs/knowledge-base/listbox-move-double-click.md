@@ -7,7 +7,7 @@ slug: listbox-move-double-click
 tags: listbox, doubleclick, transfer
 ticketid: 1147380
 res_type: kb
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

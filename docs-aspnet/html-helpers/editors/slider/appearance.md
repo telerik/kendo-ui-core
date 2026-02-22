@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI Slider HtmlHelper for {{ site.framework }}."
+components: ["slider"]
 slug: slider_appearance
 position: 2
 ---

@@ -1,12 +1,13 @@
 ---
-title: ListView Custom DataSource
-page_title: Custom DataSource of the ListView Component
-description: "Get started with Telerik UI for ASP.NET MVC and use the CustomDataSource builder for the ListView component."
+title: Custom Binding
+page_title: Custom DataSource Binding of the ListView Component
+description: "Learn how to configure the {{ site.product }} ListView for custom data bidning."
+components: ["listview"]
 slug: listview_customdatasource_aspnetmvc
 position: 4
 ---
 
-# Custom DataSource
+# Custom Data Binding
 
 Telerik UI for ASP.NET MVC enables you to use the CustomDataSource builder that is available to helpers that support Data Binding.
 

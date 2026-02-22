@@ -7,7 +7,7 @@ slug: grid-how-to-set-new-line-based-on-the-data
 tags: grid
 ticketid: 1138306
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

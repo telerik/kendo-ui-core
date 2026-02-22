@@ -6,8 +6,8 @@ page_title: Add and Remove Columns Dynamically and Persist Their Settings - Kend
 slug: grid-dynamically-add-remove-columns-persist-settings
 tags: grid, dynamically, columns, add, persist, settings
 res_type: kb
+components: ["grid"]
 ticketid: 1593817
-component: grid
 ---
 
 ## Environment
@@ -85,9 +85,8 @@ To achieve the desired scenario:
 
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/core/Orders"
           },
           schema: {
             model: {
@@ -115,6 +114,7 @@ To achieve the desired scenario:
         var grid = e.sender;
         gridCols = grid.options.columns; //get the grid columns initially
       })
+  </script>
 ```
 
 ## See Also

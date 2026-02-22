@@ -2,6 +2,7 @@
 title: Compliance
 page_title: Accessibility Compliance
 description: "Compliance with the accessibility standards and requirements in the {{ site.product }} suite."
+components: ["general"]
 slug: compliance_accessibility
 position: 2
 ---
@@ -77,6 +78,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 | Grid                | AA      | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/grid) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/accessibility/overview) |
 | GridLayout          | N/A      | N/A                   | N/A                         |
 | ImageEditor         | AA      | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/imageeditor) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/imageeditor/accessibility/overview) |
+| InlineAIPrompt      | AAA     | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/inline-aiprompt) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/conversational-ui/inline-aiprompt/accessibility/overview) |
 | LinearGauge         | N/A      | N/A                   | N/A                         |
 | ListBox             | AA      | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/listbox) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/listbox/accessibility/overview) |
 | ListView            | AAA     | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/listview) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/listview/accessibility/overview) |
@@ -110,6 +112,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 | SkeletonContainer | AAA | N/A | N/A |
 | Slider | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/slider) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/slider/accessibility/overview) |
 | Sortable | AA | N/A | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/interactivity/sortable/accessibility/overview) |
+| SpeechToTextButton | AAA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/speechtotextbutton) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/speechtotextbutton/accessibility/overview) |
 | SplitButton | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/splitbutton) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/splitbutton/accessibility/overview) |
 | Splitter | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/splitter) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/splitter/accessibility/overview) |
 | Spreadsheet | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/spreadsheet) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/spreadsheet/accessibility/overview) |
@@ -122,7 +125,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 | TextBox | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/textbox) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/textbox/accessibility) |
 | TileLayout | AAA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/tilelayout) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/layout/tilelayout/accessibility/overview) |
 | TimeDurationPicker | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/timedurationpicker) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/timedurationpicker/accessibility/overview) |
-| TimeLine | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/timeline-vertical) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/timeline/accessibility/overview) |
+| Timeline | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/timeline-vertical) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/timeline/accessibility/overview) |
 | TimePicker | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/timepicker) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/timepicker/accessibility/overview) |
 | ToggleButton | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/togglebutton) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/togglebutton/accessibility/overview) |
 | ToolBar | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/toolbar) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/toolbar/accessibility/overview) |

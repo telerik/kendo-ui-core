@@ -2,7 +2,8 @@
 title: Overview
 page_title: PropertyGrid Documentation | PropertyGrid Accessibility
 description: "Get started with the {{ site.product_short }} PropertyGrid by Telerik UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_propertygrid
+components: ["propertygrid"]
+slug: htmlhelpers_propertygrid_accessibility
 position: 1
 ---
 

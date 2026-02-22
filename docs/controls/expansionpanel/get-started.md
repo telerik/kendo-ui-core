@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ExpansionPanel Documentation - Getting Started with the ExpansionPanel
 description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["expansionpanel"]
 slug: getting_started_kendoui_expansionpanel_component
 position: 2
 ---
@@ -66,8 +67,4 @@ In this step, you will initialize the ExpansionPanel from the `<div>` element.
 * [JavaScript API Reference of the ExpansionPanel](/api/javascript/ui/expansionpanel)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

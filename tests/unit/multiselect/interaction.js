@@ -214,11 +214,13 @@ describe("kendo.ui.MultiSelect selection", function() {
     });
 
     it("MultiSelect clears input on blur", function() {
-        let multiselect = new MultiSelect(select);
+        let multiselect = new MultiSelect(select, {
+            placeholder: "Select..."
+        });
 
         multiselect.input.focus().val("test").focusout();
 
-        assert.equal(multiselect.input.val(), "");
+        assert.equal(multiselect.input.attr("placeholder"), "Select...");
     });
 
     it("MultiSelect shows all available items if input is cleared", function() {
@@ -582,7 +584,7 @@ describe("kendo.ui.MultiSelect selection", function() {
         multiselect.open();
         multiselect.input[0].dispatchEvent(evt);
 
-        let selectedItems = multiselect.ul.children(".k-selected");
+        let selectedItems = multiselect.listView.items().filter(".k-selected");
 
         assert.equal(selectedItems.length, 0);
     });

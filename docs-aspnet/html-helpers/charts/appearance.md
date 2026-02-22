@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to control the appearance of the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 previous_url: /helpers/html-helpers/charts/chart/appearance
 slug: htmlhelpers_charts_appearance_aspnetcore
 position: 3
@@ -236,6 +237,5 @@ Below is an example of using pattern fills for series:
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Kendo UI Area Charts Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API](/api/chart)

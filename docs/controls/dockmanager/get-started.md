@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DockManager Documentation - Getting Started with the DockManager
 description: "Get started with the jQuery DockManager by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dockmanager"]
 slug: getting_started_kendoui_dockmanager_component
 position: 1
 ---
@@ -215,8 +216,4 @@ Here you will define the nested panes for the DockManager.
 * [JavaScript API Reference of the DockManager](/api/javascript/ui/dockmanager)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

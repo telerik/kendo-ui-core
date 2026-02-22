@@ -5,9 +5,9 @@ description: "Learn how to add a background color to the sorted columns of the K
 previous_url: /controls/data-management/grid/how-to/Layout/add-background-sorted-columns-LESS-themes
 slug: howto_add_background_sorted_columns_LESS_themes_grid
 tags: backaground, color, less, themes, columns, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

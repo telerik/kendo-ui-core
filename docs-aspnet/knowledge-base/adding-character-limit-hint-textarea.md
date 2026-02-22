@@ -5,6 +5,7 @@ page_title: How to Add a Character Limit Hint to the Telerik UI for {{ site.fram
 slug: adding-character-limit-hint-textarea
 tags: textarea, textbox, character, limit, hint, max, count, validation
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

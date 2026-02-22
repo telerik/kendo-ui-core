@@ -2,6 +2,7 @@
 title: Sankey Diagram
 page_title: Sankey Diagram
 description: "Learn the basics when working with the sankey diagram in the {{ site.product }} suite which allows the users to create diagrams that visualize changing flows and their distribution between domains."
+components: ["chart"]
 slug: htmlhelpers_sankeycharts_aspnetcore
 position: 4
 ---
@@ -22,9 +23,9 @@ The {{ site.product }} Sankey Diagram allows you to create diagrams that visuali
 
 Sankey Diagram visualize its data using Nodes (items) and Links (connections). You can add them using their respective collections. In addition to that, you can configure the links, legend, and tooltips displayed on the Sankey Diagram by using the following properties:
 
- - [`Links`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`ColorType`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the link to either `Static`, `Source`, or `Target`. It also allows you to control the opacity and highlighting of the link.
+ - [`Links`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links)&mdash;Provides options to set the [`ColorType`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/sankey/configuration/links.colortype) of the link to either `Static`, `Source`, or `Target`. It also allows you to control the opacity and highlighting of the link.
  - [`Legend`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/legend)&mdash;Provides options to customize the appearance of the diagram legend.
- - [`Tooltip`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the the functionality of the diagram element titles.
+ - [`Tooltip`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/labels)&mdash;Provides options to modify the functionality of the diagram element titles.
 
  Here is a sample demonstration:
 
@@ -45,7 +46,7 @@ Sankey Diagram visualize its data using Nodes (items) and Links (connections). Y
         }))
         .Tooltip(t => t
             .Delay(100)
-            .FollowPointer(true)
+            .FollowPointer(true))
  )
 ```
 {% if site.core %}
@@ -74,7 +75,7 @@ Sankey Diagram visualize its data using Nodes (items) and Links (connections). Y
 
 ## Configuring the Link Colors
 
-The Sankey diagram provides different [`ColorTypes`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/sankey/configuration/links.colortypes) of the links. The supported LinkColorType values are:
+The Sankey diagram provides different [`ColorTypes`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/sankey/configuration/links.colortype) of the links. The supported LinkColorType values are:
 
  * `Static`&mdash;The color is static and is determined by the link's color option.
  * `Source`&mdash;The link color is the same as the source node color.

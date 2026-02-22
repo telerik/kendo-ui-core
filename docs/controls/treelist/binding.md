@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery TreeList Documentation - Data Binding
 description: "Get started with the jQuery TreeList by Kendo UI and bind the component to local or remote data."
+components: ["treelist"]
 slug: databinding_kendoui_treelist
 position: 2
 ---
@@ -106,33 +107,35 @@ The following example demonstrates how to enable the remote binding for the Tree
     <script>
 
         $(document).ready(function(){
-            var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+            var serviceRoot = "https://demos.telerik.com/service/v2/core";
 
             // Create the TreeListDataSource.
             var dataSource = new kendo.data.TreeListDataSource({
                 transport: {
                     // Define the remote end points
                     read:  {
-                        url: serviceRoot + "/EmployeeDirectory/All",
-                        dataType: "jsonp"
+                        url: serviceRoot + "/EmployeeDirectory/All"
                     },
                     update: {
                         url: serviceRoot + "/EmployeeDirectory/Update",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     destroy: {
                         url: serviceRoot + "/EmployeeDirectory/Destroy",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     create: {
                         url: serviceRoot + "/EmployeeDirectory/Create",
-                        dataType: "jsonp"
+                        type: "POST",
+                        contentType: "application/json"
                     },
 
                     // Post the changed models in the `model` field serialized as JSON.
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return { models: kendo.stringify(options.models) };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

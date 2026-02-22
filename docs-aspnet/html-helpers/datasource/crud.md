@@ -2,6 +2,7 @@
 title: CRUD Operations
 page_title: DataSource CRUD
 description: "Learn how to define the CRUD options in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourcecrud
 ---
 

@@ -7,6 +7,7 @@ slug: spreadsheet-with-datasource-insert-header-and-footer
 tags: kendo, kendoui, spreadsheet, datasource, footer, header
 ticketid: 1140923
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment
@@ -38,7 +39,7 @@ How can I have additional header and footer rows that are not part of the return
 
 <script>
   $(function() {
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
 
     function onRequestEnd(e) {
       // Check the request type
@@ -65,8 +66,7 @@ How can I have additional header and footer rows that are not part of the return
       requestEnd: onRequestEnd,
       transport: {
         read:  {
-          url: crudServiceBaseUrl + "/Products",
-          dataType: "jsonp"
+          url: crudServiceBaseUrl + "/Products"
         }
       },
       schema: {

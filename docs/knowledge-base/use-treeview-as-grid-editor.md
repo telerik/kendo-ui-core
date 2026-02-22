@@ -5,9 +5,9 @@ description: "Learn how to use TreeView as an editor in the Kendo UI Grid for jQ
 previous_url: /controls/data-management/grid/how-to/Editing/use-treeview-as-grid-editor, /controls/navigation/treeview/how-to/integration/use-treeview-as-editor-grid
 slug: howto_usethe_treeview_aseditor_grid
 tags: use, treeview, custom, editor, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,28 +45,30 @@ The following example demonstrates how to use the TreeView for batch editing in 
 
 		<script>
 			$(document).ready(function () {
-				var crudServiceBaseUrl = "//demos.telerik.com/kendo-ui/service",
-					dataSource = new kendo.data.DataSource({
-						transport: {
-							read: {
-								url: crudServiceBaseUrl + "/Products",
-								dataType: "jsonp"
-							},
-							update: {
-								url: crudServiceBaseUrl + "/Products/Update",
-								dataType: "jsonp"
-							},
-							destroy: {
-								url: crudServiceBaseUrl + "/Products/Destroy",
-								dataType: "jsonp"
-							},
-							create: {
-								url: crudServiceBaseUrl + "/Products/Create",
-								dataType: "jsonp"
-							},
+				var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
 							parameterMap: function (options, operation) {
 								if (operation !== "read" && options.models) {
-									return { models: kendo.stringify(options.models) };
+									return kendo.stringify(options.models);
 								}
 							}
 						},

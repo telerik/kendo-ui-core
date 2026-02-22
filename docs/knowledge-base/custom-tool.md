@@ -5,9 +5,9 @@ description: "Learn how to develop and register custom Kendo UI for jQuery ToolB
 slug: howto_customtool_toolbar
 previous_url: /controls/navigation/toolbar/how-to/custom-tool
 tags: telerik, kendo, jquery, toolbar, develop, implement, register, custom, tools
-component: toolbar
 type: how-to
 res_type: kb
+components: ["toolbar"]
 ---
 
 ## Environment

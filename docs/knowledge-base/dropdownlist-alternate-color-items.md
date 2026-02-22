@@ -7,6 +7,7 @@ slug: dropdownlist-alternate-color-items
 tags: dropdownlist, dropdown, list, items, color, alternate, background
 ticketid: 1141949
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment
@@ -59,8 +60,7 @@ Use the following CSS rules:
         dataSource: {
           transport: {
             read: {
-              dataType: "jsonp",
-              url: "https://demos.telerik.com/kendo-ui/service/Products",
+              url: "https://demos.telerik.com/service/v2/core/Products",
             }
           }
         }

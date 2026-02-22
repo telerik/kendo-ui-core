@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery ListView Documentation - Items
 description: "Get started with the jQuery ListView by Kendo UI and learn how to alternate its items."
+components: ["listview"]
 previous_url: /controls/listview/basic-usage
 slug: items_kendoui_listview
 position: 2
@@ -62,8 +63,7 @@ The following example demonstrates the full implementation of the suggested appr
 var dataSource = new kendo.data.DataSource({
     transport: {
         read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
         }
     },
     pageSize: 3

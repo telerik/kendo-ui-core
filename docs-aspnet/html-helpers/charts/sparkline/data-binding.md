@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: Data Binding
 description: "Learn how to bind the Telerik UI Sparkline component for {{ site.framework }} to data."
+components: ["sparkline"]
 slug: overview_sparklinesdatabinding_aspnetcore
 position: 2
 ---

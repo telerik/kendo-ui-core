@@ -6,6 +6,7 @@ previous_url: /helpers/navigation/menu/how-to/grid-hierarchy-with-dynamic-model-
 slug: menu-item-click-open-window
 tags: menu, window, open, select, item, ajax
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -95,7 +96,7 @@ How can I use a Telerik UI for {{ site.framework }} Menu item click to open a Te
     }
 ```
 
-```PartialView
+```Razor PartialView
     <script type="text/javascript">
     	 // Destroy the Window after close to allow the opening of multiple Windows.
     	 function onClose(e) {

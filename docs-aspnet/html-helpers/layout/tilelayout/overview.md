@@ -2,6 +2,7 @@
 title: Overview
 page_title: Telerik UI TileLayout component for {{ site.framework }} Overview 
 description: "Learn the basics when working with the Telerik UI TileLayout component for {{ site.framework }}."
+components: ["tilelayout"]
 slug: htmlhelpers_aspnet_tilelayout_overview
 position: 0
 ---

@@ -7,6 +7,7 @@ slug: grid-navigate-virtual-scrolling-up-down-arrows
 tags: grid, virtual, scrolling, arrows, keyboard, navigate
 ticketid: 1156118
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,12 +46,12 @@ How can I navigate the virtual scrolling of the Kendo UI Grid with the **Up** an
 		$(document).ready(function() {
 			$("#grid").kendoGrid({
 				dataSource: {
-					type: "odata",
+					type: "odata-v4",
 					serverPaging: true,
 					serverSorting: true,
 					pageSize: 100,
 					transport: {
-						read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+						read: "https://demos.telerik.com/service/v2/odata/Orders"
 					}
 				},
 				height: 543,

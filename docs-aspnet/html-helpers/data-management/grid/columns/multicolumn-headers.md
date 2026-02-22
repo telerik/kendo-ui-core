@@ -2,6 +2,7 @@
 title: Multi-Column Headers
 page_title: Multi-Column Headers
 description: "The Multi-Column Header feature of the Telerik UI Grid component for {{ site.framework }} allows you to group one or more columns under a common higher-level header."
+components: ["grid"]
 slug: multicolumn_headers_aspnetcore_grid
 position: 5
 ---
@@ -94,20 +95,22 @@ A full Grid with Multi-column headers would look like below
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" reorderable="true"resizable="true" height="550">
-    <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+<kendo-grid name="grid" resizable="true" height="550">
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+        <schema data="Data" total="Total" errors="Errors">
+        </schema>
         <transport>
-            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers" />
+            <read url="@Url.Action("MultiColumn_Customers_Read", "Grid")"/>
         </transport>
     </datasource>
+    <scrollable enabled="true"/>
     <groupable enabled="true" />
     <sortable enabled="true" />
-    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-    </pageable>
-    <filterable enabled="true" />
+    <pageable enabled="true"/>
     <column-menu enabled="true"/>
+    <reorderable enabled="true" columns="true"/>
     <columns>
-        <column field="ContactName" title="Contact Name" width="240" />
+        <column field="CompanyName" width="420" />
         <column title="Contact Info" >
             <columns>
                 <column field="ContactTitle" title="Contact Title" width="200" />
@@ -128,5 +131,8 @@ A full Grid with Multi-column headers would look like below
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Implementing Multi-Column Headers in the Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/multicolumnheaders)
 * [Server-Side API](/api/grid)

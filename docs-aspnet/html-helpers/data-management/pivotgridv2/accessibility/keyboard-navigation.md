@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: PivotGridV2 Keyboard Navigation
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["pivotgridv2"]
 slug: keynav_aspnetcore_pivotgridv2
 position: 2
 ---
@@ -87,4 +88,4 @@ The Telerik UI for {{ site.framework }} PivotConfiguratorV2 Chip Menu supports t
 ## See Also
 
 * [Keyboard Navigation by the PivotGridV2 (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgridv2/keyboard-navigation)
-* [Accessibility in the PivotGridV2]({% slug accessibility_aspnetcore_pivotgridv2 %})
+* [Accessibility in the PivotGridV2]({% slug htmlhelpers_pivotgridv2_accessibility %})

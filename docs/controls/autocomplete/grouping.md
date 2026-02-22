@@ -2,6 +2,7 @@
 title: Grouping
 page_title: jQuery AutoComplete Documentation - Grouping
 description: "Get started with the jQuery AutoComplete by Kendo UI and group its data."
+components: ["autocomplete"]
 slug: grouping_kendoui_autocomplete_widget
 position: 3
 ---

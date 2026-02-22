@@ -7,7 +7,7 @@ slug: troubleshooting_kendoui_dialog
 tags: telerik, progress, kendoui, jquery, dialog, scrollbar, overlaps, ios
 type: troubleshooting
 res_type: kb
-component: dialog
+components: ["dialog"]
 ---
 
 ## Environment

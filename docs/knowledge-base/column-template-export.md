@@ -5,9 +5,9 @@ description: "Learn how to use column template as the value of a corresponding c
 previous_url: /mvc/controls/data-management/grid/how-to/excel/column-template-export, /controls/data-management/grid/how-to/excel/column-template-export
 slug: howto_use_column_template_grid
 tags: grid, use, column, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -51,8 +51,7 @@ $("#grid").kendoGrid({
   dataSource: {
     transport: {
       read: {
-        url: "https://demos.telerik.com/kendo-ui/service/products",
-        dataType: "jsonp"
+        url: "https://demos.telerik.com/service/v2/core/products"
       }
     },
     pageSize: 10

@@ -7,6 +7,7 @@ slug: editor-new-line-on-enter
 tags: editor, new, line, br, paragraph, enter, press, key, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/add-new-line-on-enter, /html-helpers/editors/editor/how-to/add-new-line-on-enter
 res_type: kb
+components: ["general"]
 component: editor
 ---
 
@@ -34,7 +35,7 @@ By default, the Editor adds a paragraph (`p` element) when the focus is in the E
 1. Add a script that customizes the `insertLineBreak` and `insertParagraph` tools. As a result, a new line is added when pressing the `Enter` key, and a paragraph is inserted by pressing `Shift + Enter`.  
 1. Declare the Editor after the script tag with the custom logic.
 
-```Script
+```JS script
     <script>
         var editorNS = kendo.ui.editor,
             registerTool = editorNS.EditorUtils.registerTool,

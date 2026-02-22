@@ -5,9 +5,9 @@ description: "Learn how to hide the Edit buttons of the Kendo UI for jQuery Sche
 previous_url: /controls/scheduling/scheduler/how-to/hide-edit-buttons, /controls/scheduling/scheduler/how-to/appearance/hide-edit-buttons
 slug: howto_hidethe_editbutons_scheduler
 tags: telerik, kendo, jquery, scheduler, hide, the, edit, buttons 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

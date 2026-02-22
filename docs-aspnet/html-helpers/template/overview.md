@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI for {{ site.framework }} Template component."
+components: ["templates"]
 slug: htmlhelpers_overview_template
 position: 0
 ---
@@ -123,7 +124,7 @@ The examples below show how to use the Template component to create custom edito
             // Other configuration
         )
     ```
-    ```ShipNameEditor.cshtml
+    ```Razor ShipNameEditor.cshtml
         //~/Views/Shared/EditorTemplates/ShipNameEditor.cshtml
         @model object 
 
@@ -174,7 +175,7 @@ The examples below show how to use the Template component to create custom edito
             // Other configuration
         )
     ```
-    ```CustomGridEditor.cshtml
+    ```Razor CustomGridEditor.cshtml
         //~/Views/Shared/EditorTemplates/CustomGridEditor.cshtml
 
         @model OrderViewModel
@@ -248,7 +249,7 @@ The following example demonstrates how to create a Content Security Policy (CSP)
     </kendo-grid>
 ```
 {% endif %}
-```scripts.js
+```JS scripts.js
     function handler(data) {
         if (data.IsActive) {
             return '<div><b>Active order</b></div>'
@@ -354,7 +355,7 @@ The following snippet demonstrates the previously used approach for defining the
     </kendo-taskboard>
 ```
 {% endif %}
-```card-template
+```JS card-template
     <script id="card-template" type="text/x-kendo-template">
         <div class="template-container">
             <div class="template-header" id="#= ID #" >

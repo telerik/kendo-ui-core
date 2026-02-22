@@ -2,6 +2,7 @@
 title: Server Detail Templates
 page_title: Server Detail Templates
 description: "Set the detail template used during server binding of the Kendo UI Grid for ASP.NET MVC."
+components: ["grid"]
 previous_url: /helpers/grid/server-detail-template, /helpers/data-management/grid/templating/server-detail-template
 slug: servertemplates_grid_aspnetmvc
 position: 4.5
@@ -217,5 +218,8 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server Detail Template by the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/serverdetails)
 * [Server-Side API](/api/grid)

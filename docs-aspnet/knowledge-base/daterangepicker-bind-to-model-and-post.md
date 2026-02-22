@@ -7,6 +7,7 @@ slug: daterangepicker-bind-to-model-and-post
 tags: daterangepicker, model, value, post, controller
 ticketid: 1418770
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

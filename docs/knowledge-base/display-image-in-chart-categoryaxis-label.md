@@ -4,10 +4,10 @@ page_title: Display Image in Chart CategoryAxis Label - Kendo UI for jQuery Char
 description: "Learn how to display an image in the categoryAxis label of the Kendo UI Chart for jQuery."
 slug: display-image-in-chart-categoryaxis-label
 tags: chart, image, categoryaxis, label
-component: chart
 type: how-to
 ticketid: 1625008
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -73,5 +73,5 @@ The following example demonstrates how to achieve the desired scenario:
 ```
 
 ## See Also
-* [Kendo UI for jQuery Chart Overview (Demo)](/charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [Kendo UI for jQuery Chart Overview (Demo)](https://demos.telerik.com/kendo-ui/charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

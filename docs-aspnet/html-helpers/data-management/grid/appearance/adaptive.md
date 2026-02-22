@@ -2,6 +2,7 @@
 title: Adaptive Rendering
 page_title: Adaptive Rendering
 description: "Get started with the {{ site.framework }} Grid by Telerik UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
+components: ["grid"]
 previous_url: /html-helpers/data-management/grid/adaptive, /helpers/data-management/grid/adaptive
 slug: adaptive_rendering_gridhelper_aspnetcore
 position: 5
@@ -65,6 +66,9 @@ To manually destroy the Grid:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Responsive Columns by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/responsive-columns)
 * [Adaptive Rendering by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-rendering)
 * [Server-Side API](/api/grid)

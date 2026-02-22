@@ -5,9 +5,9 @@ description: "Learn how to use bars of a fixed size when working with the Kendo 
 previous_url: /controls/charts/how-to/fixed-bar-size, /controls/charts/how-to/appearance/fixed-bar-size
 slug: howto_usefixedbarsize_charts
 tags: chart, customize, themes
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

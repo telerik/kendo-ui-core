@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Scheduler Documentation - Data Binding
 description: "Get started with the jQuery Scheduler by Kendo UI and bind the component to local data arrays or remote data services."
+components: ["scheduler"]
 slug: databinding_kendoui_scheduler
 position: 2
 ---
@@ -52,46 +53,47 @@ The following example demonstrates how to bind the component to a remote service
         date: new Date("2022/6/13"),
         timezone: "Etc/UTC", // Setting the timezone is recommended when binding to a remote service.
         dataSource: {
-            batch: true, // Enable the batch updates.
+            batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
                 },
-                parameterMap: function(options, operation) {
+                parameterMap: function (options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },
             schema: {
                 model: {
-                    id: "taskId", // The "id" of the event is the "taskId" field.
+                    id: "taskID",
                     fields: {
-                        // Describe the Scheduler event fields and map them to the fields that are returned by the remote service.
-                        taskId: {
-                            from: "TaskID", // The 'TaskID' server-side field is mapped to the 'taskId' client-side field.
-                            type: "number"
-                        },
+                        taskID: { from: "TaskID", type: "number" },
                         title: { from: "Title", defaultValue: "No title", validation: { required: true } },
                         start: { type: "date", from: "Start" },
                         end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
                         description: { from: "Description" },
                         recurrenceId: { from: "RecurrenceID" },
                         recurrenceRule: { from: "RecurrenceRule" },
                         recurrenceException: { from: "RecurrenceException" },
+                        ownerId: { from: "OwnerID", defaultValue: 1 },
                         isAllDay: { type: "boolean", from: "IsAllDay" }
                     }
                 }
@@ -108,7 +110,7 @@ When you bind the Scheduler to a remote service:
 
         parameterMap: function(options, operation) {
             if (operation !== "read" && options.models) {
-                return {models: kendo.stringify(options.models)};
+                return kendo.stringify(options.models);
             }
         }
 

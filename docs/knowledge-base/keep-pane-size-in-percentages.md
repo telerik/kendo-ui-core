@@ -5,9 +5,9 @@ description: "Learn how to keep the Kendo UI Splitter pane sizes in percentages 
 slug: howto_keeppanesizepercentages_splitter
 previous_url: /controls/layout/splitter/how-to/keep-pane-size-in-percentages 
 tags: telerik, kendo, jquery, splitter, keep, pane, size, in, percentage, points 
-component: splitter 
 type: how-to
 res_type: kb
+components: ["splitter"]
 ---
 
 ## Environment

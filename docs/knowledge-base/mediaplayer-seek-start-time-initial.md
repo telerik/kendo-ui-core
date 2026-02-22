@@ -7,6 +7,7 @@ slug: mediaplayer-seek-start-time-initial
 tags: mediaplayer, seek, start, time, initial
 ticketid: 1386652
 res_type: kb
+components: ["mediaplayer"]
 ---
 
 ## Environment

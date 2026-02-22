@@ -5,9 +5,9 @@ description: "Learn how to filter the ListView datasource based on Kendo UI Slid
 slug: howto_updatelistviewondatasitemupdate_listview
 previous_url: /controls/data-management/listview/how-to/update-widget-on-datasourceitem-update
 tags: listview, update, on, updating, datasource, item
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment
@@ -80,8 +80,8 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
                 <dd>#:Discontinued#</dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+                <a role="button" class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+                <a role="button" class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
         </div>
         </div>
       </script>
@@ -91,7 +91,7 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
             <dl>
                 <dt>Product Name</dt>
                 <dd>
-                    <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                    <span class="k-textbox k-input">
                         <input type="text" class="k-input-inner" data-bind="value:ProductName" name="ProductName" required="required" validationMessage="required" />
         </span>
                     <span data-for="ProductName" class="k-invalid-msg"></span>
@@ -107,16 +107,17 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
                     <span data-for="UnitsInStock" class="k-invalid-msg"></span>
         </dd>
                 <dt>Discontinued</dt>
-                <dd><input type="checkbox" class="k-checkbox k-checkbox-md k-rounded-md" name="Discontinued" data-bind="checked:Discontinued"></dd>
+                <dd><input type="checkbox" class="k-checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-icon-button k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-icon-button k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
+                <a role="button" class="k-button k-icon-button k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
+                <a role="button" class="k-button k-icon-button k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
         </div>
         </div>
       </script>
 
       <script>
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
         var viewModel = kendo.observable({
           newProductName: "test",
           updateValue: function() {
@@ -134,21 +135,27 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
             },
             batch: true,
             transport: {
-              read: {
-                url: "//demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: "//demos.telerik.com/kendo-ui/service/products/update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: "//demos.telerik.com/kendo-ui/service/products/create",
-                dataType: "jsonp"
-              },
+               read:  {
+                   url: crudServiceBaseUrl + "/Products"
+               },
+               update: {
+                   url: crudServiceBaseUrl + "/Products/Update",
+                   type: "POST",
+               contentType: "application/json"
+               },
+               destroy: {
+                   url: crudServiceBaseUrl + "/Products/Destroy",
+                   type: "POST",
+               contentType: "application/json"
+               },
+               create: {
+                   url: crudServiceBaseUrl + "/Products/Create",
+                   type: "POST",
+               contentType: "application/json"
+               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             }

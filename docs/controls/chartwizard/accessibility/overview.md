@@ -2,7 +2,8 @@
 title: Overview
 page_title: jQuery ChartWizard Documentation - ChartWizard Accessibility
 description: "Get started with the jQuery ChartWizard by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_chartwizard
+components: ["chartwizard"]
+slug: jquery_chartwizard_accessibility
 position: 1
 ---
 

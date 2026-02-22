@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Gantt Documentation | Gantt Accessibility
 description: "Get started with the jQuery Gantt by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_gantt_widget
+components: ["gantt"]
+slug: jquery_gantt_accessibility
 position: 1
 ---
 
@@ -42,7 +43,7 @@ The Grid is a composite component that consists of 4 logically separated structu
 
 Grid Toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -55,7 +56,7 @@ Grid Toolbar follows the specification of the ToolBar component.
 
 Grid Grouping Header follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -177,6 +178,15 @@ Implements the ColumnMenu specification.
 |  | `aria-colindex` | Col number, based on leaf columns, starting from 1. Needed only for Virtual columns and Hidden columns scenarios, when not all columns are rendered in the DOM. Otherwise, can be interpreted from the DOM structure. Can be calculated by summing previous columns colspans. |
 |  | `id` | Id must be present on the element, so that it can be properly referenced in the respective `<tr>` element in the `k-grid-content <tbody>` element. |
 
+#### Grid popup editor
+
+
+The popup editor consists of a Window component containing a Form component.
+
+[Window accessibility specification]({% slug jquery_window_accessibility %})
+
+[Form accessibility specification]({% slug jquery_form_accessibility %})
+
 #### Grid footer
 
 
@@ -206,7 +216,7 @@ The Aggregates totals are placed within a `<tfoot>` element in the Content `<tab
 
 For the Grid Pager WAI-ARIA spec, please review the Pager component.
 
-[Pager accessibility specification]({{pager_a11y_link}})
+[Pager accessibility specification]({% slug jquery_pager_accessibility %})
 
 #### Grid selection aggregates
 
@@ -216,6 +226,15 @@ The selection aggregates are placed within a `.k-grid-selection-aggregates` elem
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-grid-selection-aggregates` | `aria-live=polite` | Ensures that changes in the calculated selection aggregates are announced by assistive technologies. |
+
+### Data Grid Stacked Layout
+
+
+The element is a regular Grid cell (td element) that holds a stacked layout content representing all available column headers and content for the given row. All internal "stacked cell" elements become focusable when focus is moved within the cell.
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-grid-stack-cell` | `tabindex=0` | "Stacked cell" elements receive tabindex '0' when focus is within their parent '.k-grid-stack-row' element. This allows the end user to navigate through the content using Tab. The tabindex attribute is removed when focus leaves the '.k-grid-stack-row' element. |
 
 ## Resources
 

@@ -8,6 +8,7 @@ position:
 tags: grid, cell, empty, null, style, css
 ticketid: 1438929
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

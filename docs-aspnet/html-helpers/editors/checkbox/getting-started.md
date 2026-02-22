@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} CheckBox component by following a complete step-by-step tutorial."
+components: ["checkbox"]
 slug: aspnetcore_checkbox_getting_started
 position: 1
 ---
@@ -102,7 +103,7 @@ To change the [appearance]({% slug checkbox_appearance %}) of the CheckBox, use 
 
 ## 5. Handle the CheckBox Events
 
-The CheckBox component exposes an [event](api/kendo.mvc.ui.fluent/checkboxbuilder#eventssystemaction) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the CheckBox changes through user interaction.
+The CheckBox component exposes an [event](/api/kendo.mvc.ui.fluent/checkboxbuilder#eventssystemaction) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Change` event to display a popup message when the value of the CheckBox changes through user interaction.
 
 ```HtmlHelper
     @(Html.Kendo().CheckBox()
@@ -142,7 +143,7 @@ You can reference the CheckBox instances that you have created and build on top 
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
          <script>
              $(document).ready(function() {
                  var checkBoxReference = $("#checkbox").data("kendoCheckBox"); // checkBoxReference is a reference to the existing CheckBox instance of the helper.
@@ -151,7 +152,7 @@ You can reference the CheckBox instances that you have created and build on top 
     ```
 1. Set the check state of the component by using the [`check()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/checkbox/methods/check) client-side method.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                var checkBoxReference = $("#checkbox").data("kendoCheckBox"); // checkBoxReference is a reference to the existing CheckBox instance of the helper.

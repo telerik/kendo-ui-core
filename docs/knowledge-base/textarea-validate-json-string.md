@@ -7,6 +7,7 @@ slug: textarea-validate-json-string
 tags: textarea, json, parse, validate, string, input
 ticketid: 1540635
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

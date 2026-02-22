@@ -6,6 +6,7 @@ page_title: Filter the Grid Data by a DateTime Field with the Search Tool
 slug: grid-searchbox-date-filtering
 tags: grid, search, box, date, time, field, filter, data, schema, parse
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -38,7 +39,7 @@ To change this behavior, configure the `Schema.Model.Parse` property of the Nume
 For a runnable sample of the Client-side operations approach refer to this [Telerik REPL](https://netcorerepl.telerik.com/mmaowUPI25QV9sSD08).
 
 
-```View.cshtml
+```Razor View.cshtml
     .DataSource( dataSource => dataSource
         .Custom()
         ...
@@ -72,7 +73,7 @@ For a runnable sample of the Client-side operations approach refer to this [Tele
 For a runnable sample of the Server-side operations approach refer to this [Telerik REPL](https://netcorerepl.telerik.com/cmOIQqFy26LMASWU44).
 
 
-```View.cshtml
+```Razor View.cshtml
     .DataSource( dataSource => dataSource
         .Custom()
         ...

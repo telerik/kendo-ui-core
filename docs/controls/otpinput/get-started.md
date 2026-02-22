@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery OTPInput Documentation - Getting Started with the OTPInput
 description: "Get started with the jQuery OTPInput by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["otpinput"]
 slug: getting_started_kendoui_otpinput
 position: 1
 ---
@@ -140,8 +141,3 @@ The OTPInput supports three [types](/api/javascript/ui/otpinput/configuration/ty
 * [JavaScript API Reference of the OTPInput](/api/javascript/ui/otpinput)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

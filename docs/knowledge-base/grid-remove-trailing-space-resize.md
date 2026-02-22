@@ -7,7 +7,7 @@ slug: grid-remove-trailing-space-resize
 tags: grid, resize, column, empty, space, blank, trailing, size, zero, width
 ticketid: 1084792
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -52,7 +52,7 @@ Add an empty column to the Grid. You can manually calculate its width, so that i
 
     function adjustLastColumn() {
         var grid = $("#grid1").data("kendoGrid");
-        var contentDiv = grid.wrapper.children(".k-grid-content");
+        var contentDiv = grid.wrapper.children().find(".k-grid-content");
         var masterHeaderTable = grid.thead.parent();
         var masterBodyTable = contentDiv.children("table");
         var gridDivWidth = contentDiv.width() - kendo.support.scrollbar();
@@ -81,9 +81,9 @@ Add an empty column to the Grid. You can manually calculate its width, so that i
 
     $("#grid1").kendoGrid({
         dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 6,
             serverPaging: true,

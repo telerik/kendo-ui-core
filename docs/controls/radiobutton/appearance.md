@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery RadioButton Documentation - RadioButton Appearance
 description: "Get started with the jQuery RadioButton by Kendo UI and learn how to customize the appearance of the widget."
+components: ["radiobutton"]
 slug: appearance_radiobutton_widget
 position: 3
 ---

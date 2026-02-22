@@ -2,6 +2,7 @@
 title: Override Theme Styles
 page_title: Override Theme Styles
 description: "General rules of thumb to override Kendo UI themes."
+components: ["general"]
 slug: themes-override-kendoui
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} StockChart component by following a complete step-by-step tutorial."
+components: ["stockchart"]
 slug: stockchart_getting_started
 position: 1
 ---
@@ -238,7 +239,7 @@ In the `Home` controller, declare the `RemoteDataBindingData` action that you se
 
 ## 6. Handle the StockChart Events
 
-The StockChart [exposes various events](/api/kendo.mvc.ui.fluent/stockcharteventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `DataBound` event of the StockChart.
+The StockChart {% if site.core %}[exposes various events](/api/kendo.mvc.ui.fluent/stockcharteventbuilder){% else %}[exposes various events](/api/kendo.mvc.ui.fluent/charteventbuilder){% endif %} that you can handle and further customize the functionality of the component. In this tutorial, you will use the `DataBound` event of the StockChart.
 
 ```HtmlHelper
     @(Html.Kendo().StockChart<StockDataPoint>()
@@ -310,7 +311,7 @@ To use the client-side API of the StockChart and build on top of its initial con
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             var stockchartReference = $("#stockChart").data("kendoStockChart"); // stockchartReference is a reference to the existing instance of the helper.
         </script>
@@ -318,7 +319,7 @@ To use the client-side API of the StockChart and build on top of its initial con
 
 1. Use the [StockChart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart#methods) to control the behavior of the widget. In this example, you will use the [`exportPDF()`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/stock-chart/methods/exportpdf) method to export the StockChart to a PDF file programmatically.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function () {
                 var stockchartReference = $("#stockChart").data("kendoStockChart"); // stockchartReference is a reference to the existing instance of the helper.

@@ -7,6 +7,7 @@ slug: scheduler-filter-resources-dropdown
 tags: kendo, kendoui, combobox, scheduler, filter, resources
 ticketid: 1138727
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -53,8 +54,8 @@ For the full implementation of the approach, refer to [this Dojo example](https:
 <script>
     $(function() {
         var scheduler = $("#scheduler").kendoScheduler({
-            date: new Date("2022/6/13"),
-            startTime: new Date("2022/6/13 07:00 AM"),
+            date: new Date("2025/6/13"),
+            startTime: new Date("2025/6/13 07:00 AM"),
             height: 600,
             views: [
                 "day",
@@ -75,26 +76,26 @@ For the full implementation of the approach, refer to [this Dojo example](https:
                 batch: true,
                 transport: {
                     read: {
-                        url: "//demos.telerik.com/kendo-ui/service/tasks",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks"
                     },
                     update: {
-                        url: "//demos.telerik.com/kendo-ui/service/tasks/update",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     create: {
-                        url: "//demos.telerik.com/kendo-ui/service/tasks/create",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     destroy: {
-                        url: "//demos.telerik.com/kendo-ui/service/tasks/destroy",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                        type: "POST",
+                        contentType: "application/json"
                     },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {
-                                models: kendo.stringify(options.models)
-                            };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

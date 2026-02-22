@@ -2,6 +2,7 @@
 title: Module Initialization
 page_title: Module Initialization
 description: "Learn how to enable the module initialization of the Telerik UI for {{ site.framework }} components."
+components: ["general"]
 slug: module_initialization_overview
 position: 4
 ---
@@ -19,7 +20,7 @@ More information about the ECMAScript Modules peculiarities in context of the Ke
 
 To initialize the Telerik UI for {{ site.framework }} components as JavaScript modules, apply either of the following approaches:
 
- * [Initialize specific components as modules](#initializing-specific-components-as-module)
+ * [Initialize specific components as modules](#initializing-specific-components-as-modules)
  * [Initialize components globally as modules](#initializing-components-globally-as-modules)
 
 ### Initializing Specific Components as Modules
@@ -53,7 +54,7 @@ Enable the `RenderAsModule` setting in the `AddKendo` method that registers the 
 
  * For applications using .NET 6 or later and the [minimal hosting model](https://docs.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#new-hosting-model), the `AddKendo` method is defined in the `Program.cs` file.
 
-	```
+	```C#
 	var builder = WebApplication.CreateBuilder(args);
 
 	builder.Services.AddKendo(options =>
@@ -64,7 +65,7 @@ Enable the `RenderAsModule` setting in the `AddKendo` method that registers the 
 
  * For applications using .NET 5 or earlier, the `AddKendo` method is defined in the `ConfigureServices` method in the `Startup.cs` file.
 
-	```
+	```C#
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddKendo(options =>
@@ -76,7 +77,7 @@ Enable the `RenderAsModule` setting in the `AddKendo` method that registers the 
 {% else %}
 Enable the `RenderAsModule` setting in the `KendoMvc.Setup` method that registers the Kendo UI service within the `Global.asax.cs` file:
 
-```
+```Razor
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

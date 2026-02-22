@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Get started with the Telerik UI PropertyGrid component for {{ site.framework }} and learn the available item options."
+components: ["propertygrid"]
 slug: htmlhelpers_items_propertygrid
 position: 3
 ---
@@ -317,7 +318,7 @@ You can explicitly configure an editor for a specific field by using any of the 
             public string FontFamily { get; set; }
         }
     ```
-    ```Scripts
+    ```JS scripts
         <script>
             function fontFamilyEditor(container, options) {
                 $('<textarea class="myCustomEditor" data-bind="value: ' + options.field + '" name="' + options.model.field + '"/>')

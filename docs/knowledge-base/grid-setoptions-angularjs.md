@@ -7,7 +7,7 @@ slug: grid-setoptions-angularjs
 tags: angularjs, grid
 ticketid: 1099270
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

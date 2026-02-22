@@ -5,9 +5,9 @@ description: "Learn how to bind to the blur event of the filter input element in
 previous_url: /controls/editors/multiselect/how-to/wire-blur-event-of-filter-input, /controls/editors/multiselect/how-to/filtering/wire-blur-event-of-filter-input
 slug: howto_wire_blur_event_ofthe_filter_input_multiselect
 tags: telerik, kendo, jquery, multiselect, wire, blur, event, of, the, filter, input
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery NumericTextBox Documentation - Getting Started with the NumericTextBox
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["numerictextbox"]
 slug: getting_started_kendoui_numerictextbox_widget
 position: 1
 ---
@@ -73,8 +74,3 @@ To apply a format to the rendered value, use the [`format`](/api/javascript/ui/n
 * [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

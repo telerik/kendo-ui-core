@@ -2,6 +2,7 @@
 title: File Identification
 page_title: File Identification
 description: "Learn how to identify the file, that is being uploaded with the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 slug: htmlhelpers_upload_identify_files_aspnetcore
 position: 5
 ---

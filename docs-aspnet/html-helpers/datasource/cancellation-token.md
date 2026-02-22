@@ -2,6 +2,7 @@
 title: Cancellation Token
 page_title: Passing a Cancellation Token
 description: "Learn how to cancel an asynchronous call by passing additional parameter to the DataSource method."
+components: ["datasource"]
 slug: htmlhelper_datasource_cancellationtoken
 ---
 

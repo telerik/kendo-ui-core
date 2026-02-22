@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} AppBar component by following a complete step-by-step tutorial."
+components: ["appbar"]
 slug: app_bar_getting_started
 position: 1
 ---
@@ -247,7 +248,7 @@ The AppBar exposes the [`Resize`](/api/kendo.mvc.ui.fluent/appbareventbuilder) e
     </div>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function onReszie() {
             if (window.matchMedia("(max-width: 400px)").matches) {
@@ -263,7 +264,7 @@ The AppBar exposes the [`Resize`](/api/kendo.mvc.ui.fluent/appbareventbuilder) e
 You can reference the AppBar instances that you have created and build on top of their existing configuration.
 Use the `id` attribute of the component instance to get its reference.
 
-```script
+```JS script
     <script>
         $(document).ready(function() {
             var appBarReference = $("#appbar").data("kendoAppBar"); // appBarReference is a reference to the existing AppBar instance of the helper.

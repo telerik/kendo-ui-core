@@ -1,8 +1,9 @@
 ---
-comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `rake js_dependencies`.
+comment: THIS FILE IS AUTO-GENERATED, MANUAL CHANGES ARE OVERWRITTEN. TO UPDATE THE CONTENT, UPDATE COMPONENT DEPENDENCIES AND RUN `npx gulp js-dependencies`.
 title: Conversational UI
 page_title: Individual Scripts for Conversational UI - Scripts - Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Conversational UI"
+components: ["general"]
 slug: script_filesfor_conversationalui_widgets
 ---
 
@@ -13,9 +14,30 @@ The following table lists the individual script files for the Kendo UI conversat
 | Component | Individual Scripts | Comments |
 | :---   | :---         | :---     |
 | [Chat](https://demos.telerik.com/kendo-ui/chat/index) | jquery.js | |
+| | kendo.licensing.js | |
 | | kendo.core.js | |
+| | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
+| | kendo.html.base.js | |
+| | kendo.html.icon.js | |
+| | kendo.icons.js | |
+| | kendo.html.button.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.textarea.js | |
+| | kendo.popup.js | |
+| | kendo.data.odata.js | |
+| | kendo.menu.js | |
+| | kendo.avatar.js | |
+| | kendo.button.menu.js | |
+| | kendo.splitbutton.js | |
+| | kendo.dropdownbutton.js | |
+| | kendo.badge.js | |
+| | kendo.button.js | |
+| | kendo.togglebutton.js | |
+| | kendo.buttongroup.js | |
+| | kendo.toolbar.js | |
+| | kendo.speechtotextbutton.js | |
 | | kendo.chat.js | |
 
 ## See Also
@@ -32,6 +54,5 @@ The following table lists the individual script files for the Kendo UI conversat
 + [Scripts for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Scripts for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Scripts for Media]({% slug script_filesfor_media_widgets %})
-+ [Scripts for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Scripts for Framework and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Scripts for PDF]({% slug script_filesfor_pdf %})

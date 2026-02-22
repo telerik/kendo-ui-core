@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Calendar Documentation - Keyboard Navigation
 description: "Get started with the jQuery Calendar by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["calendar"]
 slug: keynav_calendar
 position: 2
 ---
@@ -29,4 +30,4 @@ For a runnable example, refer to the [demo on keyboard navigation of the Calenda
 
 * [Keyboard Navigation by the Calendar (Demo)](https://demos.telerik.com/kendo-ui/calendar/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Calendar]({% slug accessibility_calendar %})
+* [Accessibility in the Calendar]({% slug jquery_calendar_accessibility %})

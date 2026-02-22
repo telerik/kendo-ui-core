@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery OrgChart Documentation | OrgChart Accessibility
 description: "Get started with the jQuery OrgChart by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_orgchart_widget
+components: ["orgchart"]
+slug: jquery_orgchart_accessibility
 position: 1
 ---
 
@@ -53,9 +54,9 @@ The `OrgChart` component represents a tree structure and allows editing of its i
 
 The edit popup of the OrgChart should implement the specification of the Window component with a Form component in it.
 
-[Window accessibility specification]({{window_a11y_link}})
+[Window accessibility specification]({% slug jquery_window_accessibility %})
 
-[Form accessibility specification]({{form_a11y_link}})
+[Form accessibility specification]({% slug jquery_form_accessibility %})
 
 ## Resources
 

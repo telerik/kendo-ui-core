@@ -2,6 +2,7 @@
 title: Hidden Containers
 page_title: Hidden Containers
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when initializing it in a hidden container."
+components: ["grid"]
 slug: hidden_containers_aspnetcore_grid
 position: 4
 ---
@@ -26,7 +27,7 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
   > This approach is applicable only if frozen columns and virtual scrolling are not used.
 
-    ```
+    ```CSS
       #GridID .k-grid-content
       {
           height: 270px;
@@ -37,12 +38,15 @@ To handle the behavior that is related to the initialization of the Grid inside 
 
   > This approach is applicable if virtual scrolling is enabled and the Kendo UI version is older than 2014.3.1119.
 
-    ```
+    ```JS
     $("#GridID").data("kendoGrid").dataSource.fetch();
     ```
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Initializing the Grid HtmlHelper for {{ site.framework }} in a TabStrip component]({% slug grid-initialize-in-tabstrip%})
 * [Scrolling by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Scroll Modes of the Grid HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_grid_aspnetcore_scrolling %})

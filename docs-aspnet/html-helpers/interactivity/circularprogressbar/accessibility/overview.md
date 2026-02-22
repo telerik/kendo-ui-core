@@ -2,7 +2,8 @@
 title: Overview
 page_title: CircularProgressBar Documentation | CircularProgressBar Accessibility
 description: "Get started with the {{ site.product }} CircularProgressBar and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_circularprogressbar_overview
+components: ["circularprogressbar"]
+slug: htmlhelpers_circularprogressbar_accessibility
 position: 1
 ---
 
@@ -25,7 +26,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The CircularProgressBar follows the specification for the ProgressBar component.
 
-[ProgressBar accessibility specification]({% slug accessibility_progressbar_overview %})
+[ProgressBar accessibility specification]({% slug htmlhelpers_progressbar_accessibility %})
 
 ## Resources
 

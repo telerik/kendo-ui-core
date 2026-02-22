@@ -2,6 +2,7 @@
 title: Export Options
 page_title: jQuery Sankey Diagram Documentation - Export
 description: "Learn how to export the Kendo UI for the jQuery Sankey Diagram to either an Image, SVG, or a PDF and customize the export."
+components: ["chart"]
 slug: export_kendoui_sankeychart
 position: 4
 ---

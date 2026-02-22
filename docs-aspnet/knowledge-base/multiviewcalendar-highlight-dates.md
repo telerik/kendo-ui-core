@@ -6,6 +6,7 @@ page_title: Highlighting Dates in the MultiViewCalendar
 slug: multiviewcalendar-highlight-dates
 tags: aspnet, mvc, core, dotnet-core, kendo, kendo-ui, multiviewcalendar, date, dates, highlight
 res_type: kb
+components: ["general"]
 component: multiviewcalendar
 ---
 

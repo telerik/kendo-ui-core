@@ -2,6 +2,7 @@
 title: User Guide
 page_title: Spreadsheet
 description: "A user guide for the Telerik UI Spreadsheet component for {{ site.framework }}."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_user_guide_aspnetcore
 position: 1
 ---
@@ -28,7 +29,7 @@ The Spreadsheet is used for the implementation of related data and its visualiza
 
 **Figure 1: Main Elements of the Spreadsheet**
 
-<center>![{{ site.product_short }} Spreadsheet UI components](../images/spreadsheet-components.png)</center>
+ ![{{ site.product_short }} Spreadsheet UI components](../images/spreadsheet-components.png)
 
 ## Actions
 

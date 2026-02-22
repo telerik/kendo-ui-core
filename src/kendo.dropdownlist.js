@@ -66,6 +66,13 @@ export const __meta__ = {
             options = that.options;
             element = that.element.on("focus" + ns, that._focusHandler.bind(that));
 
+            if (!kendo.isPresent(options.readonly) && element.attr("readonly")) {
+                 options.readonly = true;
+            }
+            else if (!kendo.isPresent(options.readonly)) {
+                 options.readonly = false;
+            }
+
             that._focusInputHandler = that._focusInput.bind(that);
 
             that.optionLabel = $();
@@ -111,7 +118,18 @@ export const __meta__ = {
 
             that.requireValueMapper(that.options);
             that._initList();
+            that._aria(); // Update aria-controls now that UL is available (for StaticList)
+
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls again
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
             that.listView.one("dataBound", that._attachAriaActiveDescendant.bind(that));
+            that.listView.bind("dataBound", () => {
+                that._refreshFloatingLabel();
+                that._aria();
+            });
 
             that._cascade();
 
@@ -180,11 +198,14 @@ export const __meta__ = {
             autoWidth: false,
             popup: null,
             filterTitle: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            readonly: null,
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             label: null,
-            popupFilter: true
+            popupFilter: true,
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
         },
 
         events: [
@@ -658,8 +679,18 @@ export const __meta__ = {
         },
 
         _wrapperMousedown: function(e) {
-            const condition = this._hasActionSheet() ? (this.filterInput && e.currentTarget === this.filterInput[0]) : (this.filterInput && e.currentTarget !== this.filterInput[0]);
-            this._prevent = condition;
+            const that = this;
+            let condition = that.filterInput && !that._touchEnabled() ? e.currentTarget !== that.filterInput[0] : true;
+
+            if (that.popup && that._hasActionSheet()) {
+                condition = true;
+                that.popup.unbind("close");
+
+                that.popup.bind("close", function() {
+                    that._change();
+                });
+            }
+            that._prevent = condition;
         },
 
         _wrapperClick: function(e) {
@@ -953,12 +984,16 @@ export const __meta__ = {
             });
         },
 
+        _touchEnabled: function() {
+            return support.mobileOS && (support.touch || support.MSPointers || support.pointers);
+        },
+
         _focusElement: function(element) {
             var active = activeElement();
             var wrapper = this.wrapper;
             var filterInput = this.filterInput;
             var compareElement = element === filterInput ? wrapper : filterInput;
-            var touchEnabled = support.mobileOS && (support.touch || support.MSPointers || support.pointers);
+            var touchEnabled = this._touchEnabled();
 
             if (filterInput && filterInput[0] === element[0] && touchEnabled) {
                 return;
@@ -1254,7 +1289,6 @@ export const __meta__ = {
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
-                    rounded: "none"
                 });
 
                 wrapper.append('<span id="' + id + '" unselectable="on" class="k-input-inner">' +
@@ -1311,7 +1345,8 @@ export const __meta__ = {
                 e.preventDefault();
             } else {
                 this.wrapper.attr("aria-expanded", true);
-                this.ul.attr("aria-hidden", false);
+                const ulElements = this.list.find(".k-list-ul");
+                ulElements.attr("aria-hidden", false);
             }
         },
 
@@ -1320,7 +1355,8 @@ export const __meta__ = {
                 e.preventDefault();
             } else {
                 this.wrapper.attr("aria-expanded", false);
-                this.ul.attr("aria-hidden", true);
+                const ulElements = this.list.find(".k-list-ul");
+                ulElements.attr("aria-hidden", true);
             }
         },
 

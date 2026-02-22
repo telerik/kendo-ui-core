@@ -5,9 +5,9 @@ description: "Learn how to change the PivotGrid data source dynamically in a Ken
 previous_url: /controls/data-management/pivotgrid/how-to/change-data-source, /controls/data-management/pivotgrid/how-to/dimensions/change-data-source
 slug: howto_change_datasource_dynamically_pivotgrid
 tags: kendoui, pivotgrid, change, data, source, dynamically
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

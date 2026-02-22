@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI NumericTextBox for {{ site.framework }} and translate its messages for different culture locales."
+components: ["numerictextbox"]
 slug: localization_numerictextbox_aspnetcore
 position: 2
 ---

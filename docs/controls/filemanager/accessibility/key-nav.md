@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery FileManager Documentation - Keyboard Navigation
 description: "Get started with the jQuery FileManager by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["filemanager"]
 slug: keynav_kendoui_filemanager_widget
 position: 2
 ---
@@ -17,5 +18,5 @@ D
 
 ## See Also
 
-* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/web/filemanager/keyboard-navigation.html)
+* [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)

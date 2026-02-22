@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn how to configure the template options when working with the Telerik UI TreeView for {{ site.framework }}."
+components: ["treeview"]
 slug: htmlhelpers_treeview_templates_aspnetcore
 position: 8
 ---
@@ -19,12 +20,12 @@ The following example demonstrates how to display custom text for a given TreeVi
 ```HtmlHelper
     @(Html.Kendo().TreeView()
         .Name("treeview")
-        .Template("(#= item.id #) #= item.text # ")  
+        .Template("(#= item.id #) #= item.text # ")
         .CheckboxTemplate("<input type='checkbox' name='checkedFiles[#= item.id #]' value='true' />")
         .DataSource(source =>
         {
             source.Read(read => read.Action("Read_TemplateData", "TreeView"));
-        })    
+        })
     )
 ```
 {% if site.core %}
@@ -58,18 +59,18 @@ The following example demonstrates how to display a custom checkbox for each of 
 ```HtmlHelper
     @(Html.Kendo().TreeView()
         .Name("treeview")
-        .CheckboxTemplate("<input type='checkbox' class='k-checkbox k-checkbox-md' name='checkedFiles[#= item.id #]' value='true' />")
+        .CheckboxTemplate("<input type='checkbox' class='k-checkbox' name='checkedFiles[#= item.id #]' value='true' />")
         .DataSource(source =>
         {
             source.Read(read => read.Action("Read_TemplateData", "TreeView"));
-        })    
+        })
     )
 ```
 
 {% if site.core %}
 ```TagHelper
     <kendo-treeview  name="treeview">
-        <checkboxes template="<input type='checkbox' class='k-checkbox k-checkbox-md' name='checkedFiles[#= item.id #]' value='true' />" />
+        <checkboxes template="<input type='checkbox' class='k-checkbox' name='checkedFiles[#= item.id #]' value='true' />" />
         <hierarchical-datasource>
             <schema>
                 <hierarchical-model id="id"></hierarchical-model>

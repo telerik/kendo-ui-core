@@ -5,9 +5,9 @@ description: "Learn how to load markers only for the visible area of a Kendo UI 
 slug: howto_loadmarkers_map
 previous_url: /controls/diagrams-and-maps/map/how-to/load-markers-for-area
 tags: kendo, jquery, map, load, markers, for, visible, areas
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

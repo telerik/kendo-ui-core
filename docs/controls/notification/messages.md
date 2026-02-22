@@ -2,6 +2,7 @@
 title: Messages
 page_title: jQuery Notification Documentation - Messages
 description: "Get started with the jQuery Notification by Kendo UI and set the position and stacking of its messages."
+components: ["notification"]
 slug: positionstacking_kendoui_notification
 position: 3
 ---
@@ -16,7 +17,7 @@ By default, the Notification creates popups which overlay the other page content
 
 You can independently control positioning and stacking. If you do not define any stacking settings, based on the position settings, the popups will stack upwards or downwards. For example, popups displayed at the top of the viewport will stack downwards and vice versa. The automatic settings of the stacking functionality comply with a common preference among users. However, you can render leftward or rightward stacking by explicitly defining the respective settings.
 
-Popups are [pinned](/api/javascript/ui/notification/configuration/position.pinned) by default and they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. To enable the popups to move together with the scrolled page, use the `position:absolute` style.
+Popups are [pinned](/api/javascript/ui/notification/configuration/position#positionpinned) by default and they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. To enable the popups to move together with the scrolled page, use the `position:absolute` style.
 
 If the popup content is expected to vary and stacking is likely to occur, explicitly define dimensions. In this way, the popups are aligned and look better when stacked next to one another.
 

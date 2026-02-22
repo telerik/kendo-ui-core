@@ -7,6 +7,7 @@ slug: grid-popover-editor
 tags: kendoui, grid, edit, cell, values, popover, editor 
 ticketid: 1359627
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

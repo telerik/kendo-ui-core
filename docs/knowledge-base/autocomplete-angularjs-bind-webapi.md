@@ -7,7 +7,7 @@ slug: autocomplete-angularjs-bind-webapi
 tags: kendoui, kendo, autocomplete, webapi, angularjs
 ticketid: 1136078
 res_type: kb
-component: autocomplete
+components: ["autocomplete"]
 ---
 
 ## Environment

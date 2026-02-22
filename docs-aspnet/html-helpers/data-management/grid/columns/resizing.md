@@ -2,6 +2,7 @@
 title: Resizing
 page_title: Resizing of Columns
 description: "The Telerik UI Grid component for {{ site.framework }} comes with a handy Column Resize feature. This allows application users to modify the width of columns and to focus on the content that they need."
+components: ["grid"]
 slug: column_resizing_aspnetcore_grid
 position: 7
 ---
@@ -62,12 +63,17 @@ The example below demonstrates how to disable resizing for the `ShipCity` column
 
 By design, the last column of the Grid has no right border, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid width. If needed, you can apply a right border with the CSS code from the following example. The color value of the `#ccc` border has to match the color of the cell border from the Kendo UI theme. To obtain this, check the styles of the table cell by using a DOM inspector.
 
-    .k-grid-header-wrap > table,
-    .k-grid-content > table {
-        border-right: 1px solid #ccc;
-    }
+```CSS
+.k-grid-header-wrap > table,
+.k-grid-content > table {
+    border-right: 1px solid #ccc;
+}
+```
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Column Resizing by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/column-resizing)
 * [Server-Side API](/api/grid)

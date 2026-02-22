@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the items, tags, and the popup header of the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 slug: htmlhelpers_multiselect_templates_aspnetcore
 position: 4
 ---

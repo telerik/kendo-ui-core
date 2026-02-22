@@ -2,6 +2,7 @@
 title: Downloading the Bundles
 page_title: Downloading the Bundles - Download and Installation 
 description: "Get started with Kendo UI for jQuery and learn how to host the library in your project by downloading the bundles."
+components: ["general"]
 slug: hosting_kendoui
 position: 20
 ---
@@ -28,7 +29,7 @@ When the download completes, each folder inside the downloaded archive contains 
 |`/mjs`							|Contains the JavaScript modules that can be used instead of the bundled scripts from the `js` folder.|
 |`/license-agreements`| Contains the End User License Agreement (EULA) that has to be read before installing Kendo UI.|
 |`/src`							|Used to hold the source code files but they are now provided in a separate download package. Access the source code package from the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account. Note that the source code is not available to trial users.|
-|`/styles`					|Contains the compiled CSS of all the [themes](({% slug sassbasedthemes_kendoui %})) Kendo UI provides. |
+|`/styles`					|Contains the compiled CSS of all the [themes]({% slug sassbasedthemes_kendoui %}) Kendo UI provides. |
 |`/typescript`			|Includes the Kendo UI [TypeScript definitions](https://docs.telerik.com/kendo-ui/third-party/typescript).|
 |`/vsdoc`				    |Includes the files that provide the intellisense.  |
 |`changelog.html`		|Provides the Kendo UI release notes.|
@@ -53,7 +54,6 @@ Based on the preferred technologies, you can also use other approaches to add Ke
 * [Web Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Operation System Support]({% slug ossupport_kendo %})
 * [PDF and Excel Export Support]({% slug export_support_kendoui %})
-* [Component Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
 * [Create Your Own Custom Components]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also

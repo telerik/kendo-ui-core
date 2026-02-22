@@ -5,9 +5,9 @@ description: "Learn how to enable ForeignKey column sorting by text in the Kendo
 previous_url: /controls/data-management/grid/how-to/foreign-key-column-sorting-by-text, /controls/data-management/grid/how-to/various/foreign-key-column-sorting-by-text
 slug: howto_enable_foreignkey_sotringby_text_grid
 tags: grid, enable, freignkey, column, sort, text
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

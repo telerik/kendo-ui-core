@@ -7,6 +7,7 @@ slug: grid-copy-columns-from-excel-paste-on-selected-columns
 tags: grid, copy, paste, excel, columns
 ticketid: 1158270
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

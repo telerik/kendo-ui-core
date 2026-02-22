@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 slug: events_colorpicker
 position: 8
 ---

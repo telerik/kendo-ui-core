@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Menu Documentation | Menu Accessibility
 description: "Get started with the jQuery Menu by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_menu_jquery
+components: ["menu"]
+slug: jquery_menu_accessibility
 position: 1
 ---
 

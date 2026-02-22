@@ -7,7 +7,7 @@ slug: troubleshooting_common_issues_kendoui
 tags: telerik, kendoui, jquery, troubleshooting, examples, fail, load, sample, data 
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

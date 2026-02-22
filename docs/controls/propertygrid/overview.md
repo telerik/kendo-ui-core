@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Kendo UI PropertyGrid component for jQuery that allows the users to edit and display the properties and attributes of objects."
+components: ["propertygrid"]
 slug: overview_kendoui_propertygrid
 position: 0
 ---
@@ -17,7 +18,7 @@ The Kendo UI for jQuery PropertyGrid is a user interface component that provides
 
 ## Functionality and Features
 
-* [Accessibility]({% slug accessibility_kendoui_propertygrid %})&mdash;The PropertyGrid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_propertygrid_jquery %}).
+* [Accessibility]({% slug jquery_propertygrid_accessibility %})&mdash;The PropertyGrid is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_propertygrid_jquery %}).
 
 ## Next Steps
 

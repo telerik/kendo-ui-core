@@ -5,9 +5,9 @@ description: "Learn how to use the databound event to modify the event styling i
 previous_url: /controls/scheduling/scheduler/how-to/modify-event-styling-on-databound, /controls/scheduling/scheduler/how-to/appearance/modify-event-styling-on-databound
 slug: howto_modifyeventstyling_ondatabound_scheduler
 tags: telerik, kendo, jquery, scheduler, modify, event, styling, on, databound 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

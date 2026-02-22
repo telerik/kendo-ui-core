@@ -5,9 +5,9 @@ description: "Learn how to render an element for the bars with a zero value with
 previous_url: /controls/charts/how-to/render-zero-bars, /controls/charts/how-to/appearance/render-zero-bars
 slug: howto_renderzerobars_charts
 tags: chart, render, element, zero, chart, bars
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -5,9 +5,9 @@ description: "Learn how to sort the stacked series in a grouped Kendo UI Chart."
 previous_url: /controls/charts/how-to/sort-stacked-series-groups, /controls/charts/how-to/sorting/sort-stacked-series-groups
 slug: howto_sortstackedseriesinagroupedchart_charts
 tags: chart, sort, stacked, series, in, grouped, charts
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI ImageEditor component for {{ site.framework }}."
+components: ["imageeditor"]
 slug: events_imageeditor_aspnetcore
 position: 3
 ---
@@ -10,7 +11,7 @@ position: 3
 
 You can subscribe to [all ImageEditor events](/api/kendo.mvc.ui.fluent/imageeditoreventbuilder) and then use them to further customize the behavior of the component.
 
-The example below demonstrates how to use the [`Execute` event](api/kendo.mvc.ui.fluent/imageeditoreventbuilder#executesystemstring) that the ImageEditor generates when the user executes a command.
+The example below demonstrates how to use the [`Execute` event](/api/kendo.mvc.ui.fluent/imageeditoreventbuilder#executesystemstring) that the ImageEditor generates when the user executes a command.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI
@@ -36,7 +37,7 @@ The example below demonstrates how to use the [`Execute` event](api/kendo.mvc.ui
     </kendo-imageeditor>
 ```
 {% endif %}
-```script
+```JS script
 	<script>	
 	function onExecute(e) {
 		console.log(e.command);

@@ -7,6 +7,7 @@ slug: dropdownlist-enable-wordwrap-item-style
 tags: dropdownlist, enable, wordwrap, item, style
 ticketid: 1160023
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

@@ -6,6 +6,7 @@ page_title: ListBox Move elements on double click
 slug: listbox-move-double-click
 tags: listbox, list, box, double, click, transfer, items
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -28,7 +29,7 @@ How can I transfer items between ListBoxes by double-clicking the {{ site.produc
 1. Handle the [`dblclick`](https://api.jquery.com/dblclick/) event on the items in both ListBoxes.
 2. In the event handler, based on the ListBox, manually execute the `transferTo` or `transferFrom` command.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().ListBox()
             .Name("listBoxA")
             .ConnectWith("listBoxB")
@@ -39,7 +40,7 @@ How can I transfer items between ListBoxes by double-clicking the {{ site.produc
             .BindTo(new List<string>())
             .Selectable(ListBoxSelectable.Multiple))
 ```
-```script.js
+```JS script.js
     $(document).ready(function () {
         var listBoxB = $("#listBoxB").data("kendoListBox");
         var listBoxA = $("#listBoxA").data("kendoListBox");

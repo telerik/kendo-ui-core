@@ -6,6 +6,7 @@ page_title: How to Disable Column Reordering in Kendo UI Grid Column Menu
 slug: disable-column-reordering-kendo-ui-grid
 tags: kendo-ui, grid, column-menu, column-reordering, javascript, set-column-position
 res_type: kb
+components: ["grid"]
 ticketid: 1660343
 ---
 
@@ -55,26 +56,26 @@ $("#grid").kendoGrid({
 
 For a practical demonstration, refer to the below Dojo demo.
 
-``dojo
-    <div id="grid"></div>
-    <script>
-      $("#grid").kendoGrid({
-        columns: [
-          { field: "name" },
-          { field: "age" }
-        ],
-        reorderable: true,
-        columnMenu: true,
-        dataSource: [
-          { name: "Jane Doe", age: 30 },
-          { name: "John Doe", age: 33 }
-        ],
-        columnMenuInit: function(e) {
-          let positionItem = $(e.container).find("ul").children("li").eq(1);
-          positionItem.hide();
-        }
-      });
-    </script>
+```dojo
+<div id="grid"></div>
+<script>
+  $("#grid").kendoGrid({
+    columns: [
+      { field: "name" },
+      { field: "age" }
+    ],
+    reorderable: true,
+    columnMenu: true,
+    dataSource: [
+      { name: "Jane Doe", age: 30 },
+      { name: "John Doe", age: 33 }
+    ],
+    columnMenuInit: function(e) {
+      let positionItem = $(e.container).find("ul").children("li").eq(1);
+      positionItem.hide();
+    }
+  });
+</script>
 ```
 
 ## See Also

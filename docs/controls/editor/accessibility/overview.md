@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Editor Documentation | Editor Accessibility
 description: "Get started with the jQuery Editor by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_editor_widget
+components: ["editor"]
+slug: jquery_editor_accessibility
 position: 1
 ---
 

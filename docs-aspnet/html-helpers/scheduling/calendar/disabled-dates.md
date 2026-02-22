@@ -2,6 +2,7 @@
 title: Disabled Dates
 page_title: Disabled Dates
 description: "Disable dates when working with the Telerik UI Calendar component for {{ site.framework }}."
+components: ["calendar"]
 slug: htmlhelpers_disableddates_calendar_aspnetcore
 position: 6
 ---

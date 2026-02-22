@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: Search Panel
 description: "Learn how to enable the searching functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_searchpanel
 previous_url: /helpers/html-helpers/grid/features/searching, /html-helpers/data-management/grid/features/searching
 position: 13
@@ -129,5 +130,8 @@ The default search panel message is `Search...`. You can modify it by using the 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Server-Side API](/api/grid)
 * [Knowledge Base Section](/knowledge-base)

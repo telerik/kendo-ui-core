@@ -5,9 +5,9 @@ description: "Learn how to expand all child nodes of a Kendo UI for jQuery TreeV
 slug: howto_expandallnodes_uponcheck_treeview
 previous_url: /controls/navigation/treeview/how-to/nodes/expand-all-nodes-upon-check
 tags: telerik, kendo, jquery, treeview, expand, all, nodes, upon, check
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

@@ -2,55 +2,50 @@
 title:  Razor Pages
 page_title: ASP.NET Core DropDownList Razor Pages | Telerik UI for ASP.NET Core
 description: "Find out how to configure the ASP.NET Core DropDownList component in a Razor Pages scenario."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_razorpage_aspnetcore
-position: 3
+position: 6
 ---
 
-# ASP.NET Core DropDownList in Razor Pages
+# DropDownList in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
-You can seamlessly integrate the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
-This article describeshow to configure the DropDownList component in a Razor Pages scenario.
-For the complete project, refer to the [DropDownList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownList).
+This article describes how to seamlessly integrate and configure the Telerik UI DropDownList for {{ site.framework }} in Razor Pages applications.
 
-## Getting Started
-In order to set up the Razor DropDownList component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_dropdownlist_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-    ```tab-HtmlHelper(csthml)    
-    
-        @(Html.Kendo().DropDownList()
-                .Name("products")
-                .DataTextField("ShipName")
-                .DataValueField("ShipCity")
-                .HtmlAttributes(new { style = "width:300px;" })
-                .AutoBind(false)
-                .Filter(FilterType.Contains)      
-                .DataSource(ds => ds
-                    .Custom()
-                    .Transport(transport => transport
-                        .Read(read => read
-                            .Url("/DropDownList/DropDownListCrudOps?handler=Read").Data("dataFunction")
-                        ))
-                        .ServerFiltering(true)
-                )
-        )
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
+
+## Binding to Remote Data
+
+The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers the most versatile data binding approach. To connect the DropDownList to a dataset retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
+
+1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
+
+    ```Razor HtmlHelper_Index.cshtml
+    @(Html.Kendo().DropDownList()
+        .Name("ordersDDL")
+        .DataTextField("ShipName")
+        .DataValueField("OrderID")
+        .DataSource(source =>
+        {
+            source.Read(read => read
+                .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
+        })
+    )
     ```
-{% if site.core %}
-    ```TagHelper
-    
-        <kendo-dropdownlist name="products"
-                            datatextfield="ShipName"
-                            datavaluefield="ShipCity"
-                            auto-bind="false"
-                            filter="FilterType.Contains">
-            <datasource server-filtering="true">
-                <transport>
-                    <read url="@Url("/DropDownList/DropDownListCrudOps?handler=Read")" data="dataFunction" />
-                </transport>
-            </datasource>
-        </kendo-dropdownlist>
+    {% if site.core %}
+    ```Razor TagHelper_Index.cshtml
+    <kendo-dropdownlist name="ordersDDL"
+        datatextfield="ShipName"
+        datavaluefield="OrderID">
+        <datasource>
+            <transport>
+                <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
+            </transport>
+        </datasource>
+    </kendo-dropdownlist>
     ```
-{% endif %}
+    {% endif %}
 
 1. Add an `AntiForgeryToken` at the top of the page.
 
@@ -59,9 +54,9 @@ In order to set up the Razor DropDownList component bindings, you need to config
         @Html.AntiForgeryToken()
     ```
 
-1. Send the `AntiForgeryToken` with the [Read, Create, Update, Destroy] request.
+1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -69,54 +64,160 @@ In order to set up the Razor DropDownList component bindings, you need to config
         </script>
     ```
 
-    Additional parameters can also be supplied.
+    Additional parameters can also be supplied. For example, when the [server filtering]({% slug htmlhelpers_dropdownlist_serverfiltering_aspnetcore%}#server-filtering) of the DropDownList is enabled, send the filter value along with the antiforgery token to the server using the JavaScript handler specified in the `Data()` option.
 
+    ```HtmlHelper
+        @page
+        @model IndexModel
+        <div>
+            @(Html.Kendo().DropDownList()
+                .Name("ordersDDL")
+                .DataTextField("ShipName")
+                .DataValueField("OrderID")
+                .AutoBind(false)
+                .Filter(FilterType.Contains)
+                .MinLength(3)
+                .DataSource(source =>
+                {
+                    source.Read(read => read
+                        .Url(Url.Page("Index", "Read")).Data("dataFunction"))
+                        .ServerFiltering(true);
+                })
+            )
+        </div>
     ```
+    ```TagHelper
+        @page
+        @model IndexModel
+        @addTagHelper *, Kendo.Mvc
+
+        <div>
+            <kendo-dropdownlist name="ordersDDL" auto-bind="false"
+                datatextfield="ShipName"
+                datavaluefield="OrderID"
+                min-length="3"
+                filter="FilterType.Contains">
+                <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+                    <transport>
+                        <read url="@Url.Page("Index", "Read")" data="dataFunction"/>
+                    </transport>
+                </datasource>
+            </kendo-dropdownlist>
+        </div>
+    ```
+    ```JS
         <script>
-            function dataFunction() {
-                var value = $("#products").getKendoDropDownList().filterInput.val();
+            function dataFunction(e) {
+                var filterValue = '';
+                if (e.filter.filters[0]) {
+                    filterValue = e.filter.filters[0].value;
+                }
+
                 return {
                     __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
-                    filterValue: value
+                    filterValue: filterValue
                 };
-            }   
+            }
         </script>
     ```
 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```tab-PageModel(cshtml.cs)
+    ```C# PageModel
+        public class IndexModel : PageModel
+        {
+            public JsonResult OnGetRead()
+            {
+                var dropdownListData = new List<OrderViewModel>();
+                // Populate the collection with the DropDownList data.
+                return new JsonResult(dropdownListData);
+            }
+        }
+    ```
+    ```C# Model
+    public class OrderViewModel
+    {
+        public int OrderID { get; set; }
+
+        public string ShipName { get; set; }
+    }
+    ```
+
+    When the server filtering is enabled, intercept the filter value sent through the `dataFunction` handler in the Read method and filter the data on the server before returning it to the DropDownList.
+
+    ```C# PageModel
+        public class IndexModel : PageModel
+        {
+            public JsonResult OnGetRead(string filterValue)
+            {
+                var dropdownListData = new List<OrderViewModel>();
+                // Populate the collection with the DropDownList data.
+
+                if (filterValue != null)
+                {
+                    var filteredData = dropdownListData.Where(p => p.ShipName.Contains(filterValue));
+                    return new JsonResult(filteredData);
+                }
+                return new JsonResult(dropdownListData);
+            }
+        }
+    ```
+For the complete project, refer to the [DropDownList in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/DropDownList/DropDownListCrudOps.cshtml).
+
+
+## Binding to a PageModel Property
+
+To bind the DropDownList to a property from the `PageModel`, follow the next steps:
+
+1. Add a property to the `PageModel` that must bind to the DropDownList.
+
+    ```C# PageModel
+    public class IndexModel : PageModel
+    {
+        [BindProperty]
+        public int OrderID { get; set; }
+
+        public void OnGet()
+        {
+            OrderID = 2; // Assign a value to the "OrderID" property, if needed.
+        }
+
         public JsonResult OnGetRead(string filterValue)
         {
-            if (filterValue != null)
-            {
-                //orders is the DBContext
-                var filteredData = orders.Where(p => p.ShipName.Contains(filterValue)); 
-                return new JsonResult(filteredData);
-            }
-            return new JsonResult(orders);
+            var dropdownListData = new List<OrderViewModel>();
+            // Populate the collection with the DropDownList data.
+            return new JsonResult(dropdownListData);
         }
+    }
     ```
 
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the DropDownList to the property using the `DropDownListFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
-
-        @(Html.Kendo().DropDownListFor(m => m.Product))
+        
+        @(Html.Kendo().DropDownListFor(m => m.OrderID)  
+            .DataTextField("ShipName")
+            .DataValueField("OrderID")
+            .DataSource(source =>
+            {
+                source.Read(read => read
+                    .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
+            })
+        )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -124,11 +225,26 @@ In order to set up the Razor DropDownList component bindings, you need to config
         @Html.AntiForgeryToken()
         @addTagHelper *, Kendo.Mvc
 
-        <kendo-dropdownlist for="Product">
-        </kendo-datepicker>
+        <kendo-combobox for="OrderID"
+            datatextfield="ShipName" 
+            datavaluefield="OrderID">
+            <datasource>
+                <transport>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
+                </transport>
+            </datasource>
+        </kendo-combobox>
+    ```
+    ```JS
+        <script>
+            function forgeryToken(e) {
+                return kendo.antiForgeryTokens();
+            }
+        </script>
     ```
 
 ## See Also
+
 * [Using Telerik UI for ASP.NET Core in Razor Pages](https://docs.telerik.com/aspnet-core/getting-started/razor-pages#using-telerik-ui-for-aspnet-core-in-razor-pages)
 * [Client-Side API of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
 * [Server-Side HtmlHelper API of the DropDownList](/api/dropdownlist)

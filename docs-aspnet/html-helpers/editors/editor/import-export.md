@@ -2,13 +2,14 @@
 title: Import and Export of Documents
 page_title: Import and Export of Documents
 description: "Import and export different types of documents with the Telerik UI Editor for ASP.NET MVC."
+components: ["editor"]
 slug: overview_importexportdpl_aspnetmvc
-position: 10
+position: 11
 ---
 
 # Import and Export of Documents
 
-As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to import and export various types of documents through the dedicated `Kendo.Mvc.Export` assembly.
+As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to import and export various types of documents through the dedicated `Kendo.Mvc.Export` assembly. In the Q2 2025 release, `Kendo.Mvc.Export` has been replaced by the `Telerik.Core.Export` NuGet package.
 
 Along with the server-side integration of the [Telerik Document Processing](https://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
 
@@ -16,11 +17,11 @@ Along with the server-side integration of the [Telerik Document Processing](http
 
 ## Requirements
 
-The import and export capabilities are bundled as part of the [UI for ASP.NET MVC suite]({% slug overview_aspnetmvc6_aspnetmvc %}). You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions.
+The import and export capabilities are bundled as part of the [UI for ASP.NET MVC suite]({% slug overview_aspnetmvc6_aspnetmvc %}). You can get the required assemblies from the `telerik.ui.for.aspnetmvc.<version>.zip` archive that contains a `Kendo.MVC.Export` folder with the assemblies for both .NET 4.0 and .NET 4.5 versions. For product versions after Q2 2025, use the `Telerik.Core.Export` NuGet package.
 
 To start using the import and export functionality:
 
-1. Add a reference in your project to the `Kendo.MVC.Export` assembly.
+1. Add a reference in your project to the `Kendo.MVC.Export` assembly, or install the `Telerik.Core.Export` NuGet package for product versions after Q2 2025.
 1. Add references in your project to the required [Telerik Document Processing libraries](https://docs.telerik.com/devtools/document-processing/introduction#libraries).
 
 ## Exporting Content from the Editor
@@ -70,8 +71,8 @@ To start using the import and export functionality:
 
 1. Implement the action method in the corresponding controller.
 
-    ```
-    using Kendo.Mvc.Export;
+    ```C#
+    using Telerik.Core.Export;
     ...
         [HttpPost]
         public ActionResult Export(EditorExportData data)
@@ -99,7 +100,7 @@ To start using the import and export functionality:
     > To send a file to the server, the `Import` tool integrates the [Telerik UI Upload HtmlHelper]({%slug htmlhelpers_upload_aspnetcore %}). You can configure it through the following exposed helper methods:
     >
     > * [`AllowedExtensions()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#allowedextensionssystemstring)
-    > * [`MaxFileSize()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#maxfilesizesystemnullablesystemdouble)
+    > * [`MaxFileSize()`](/api/kendo.mvc.ui.fluent/uploadvalidationsettingsbuilder#maxfilesizesystemnullable)
     > * [`Complete()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#completesystemstring)
     > * [`Progress()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#progresssystemstring)
     > * [`Select()`](/api/kendo.mvc.ui.fluent/uploadeventbuilder#selectsystemstring)
@@ -120,8 +121,8 @@ To start using the import and export functionality:
 
 1. Implement the action method in the corresponding controller.
 
-    ```
-    using Kendo.Mvc.Export;
+    ```C#
+    using Telerik.Core.Export;
     ...
         public ActionResult Import(HttpPostedFileBase file)
         {
@@ -149,8 +150,8 @@ To start using the import and export functionality:
 
 The Document Processing Library provides settings for the import and export which enables you to fine-tune the way the content is handled in the supported document types. The following example demonstrates how to use [`HtmlImportSettings`](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so that you can process HTML images before they are exported to `RadFlowDocument`.
 
-```
-using Kendo.Mvc.Export;
+```C#
+using Telerik.Core.Export;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
     [HttpPost]
@@ -184,8 +185,8 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 
 The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
 
-```
-using Kendo.Mvc.Export;
+```C#
+using Telerik.Core.Export;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
     public ActionResult Import(HttpPostedFileBase file)

@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Learn how to configure the icons of the items and the delimiters of the widget."
+components: ["breadcrumb"]
 slug: htmlhelpers_breadcrumb_aspnetcore_icons
 position: 3
 ---

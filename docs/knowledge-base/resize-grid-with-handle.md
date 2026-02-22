@@ -5,9 +5,9 @@ description: "Learn how to resize the widget via drag handle and apply the new s
 previous_url: /controls/data-management/grid/how-to/Layout/resize-grid-with-handle
 slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 tags: resize, grid, via, drag, dragging, handle, apply, new, size
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -92,9 +92,9 @@ The handler will be shown only at the bottom-right corner of the Grid after hove
     $(function(){
         var options = {
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 schema: {
                     model: {

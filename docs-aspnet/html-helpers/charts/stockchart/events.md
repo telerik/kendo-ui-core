@@ -2,13 +2,14 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI StockChart component for {{ site.framework }}."
+components: ["stockchart"]
 slug: stockchart_events
 position: 5
 ---
 
 # Events
 
-The StockChart exposes a variety of [events](api/kendo.mvc.ui.fluent/stockcharteventbuilder) that you can handle and further customize the behavior of the UI component.
+The StockChart exposes a variety of [events](/api/kendo.mvc.ui.fluent/stockcharteventbuilder) that you can handle and further customize the behavior of the UI component.
 
 For a complete example on basic Chart events, refer to the [demo on using the events of the Chart](https://demos.telerik.com/{{ site.platform }}/chart-api/events).
 

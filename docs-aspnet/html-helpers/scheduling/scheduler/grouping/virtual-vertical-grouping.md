@@ -2,6 +2,7 @@
 title: Virtual Vertical Grouping
 page_title: Virtual Vertical Grouping
 description: "Learn how to enable the vertical virtualization feature of the Telerik UI for {{ site.framework }} Scheduler that has resources."
+components: ["scheduler"]
 slug: scheduler_resources_grouping_virtual_vertical
 position: 4
 ---

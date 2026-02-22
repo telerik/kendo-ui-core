@@ -2,6 +2,7 @@
 title: Excel Export
 page_title: jQuery Spreadsheet Documentation - Excel Export
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to export the content of the component in an Excel file in the browser."
+components: ["spreadsheet"]
 slug: export_toexcel_spreadsheet_widget
 position: 2
 ---
@@ -24,7 +25,7 @@ The following image demonstrates the export of the Spreadsheet data to Excel.
 
 ## API Export Reference
 
-The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/javascript/ui/spreadsheet/configuration/excel.filename).
+The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet/methods/saveasexcel) method for initiating the export via JavaScript. This method does not ask you to specify a file name. Instead, it sets the value in [`excel.fileName`](/api/javascript/ui/pivotgrid/configuration/excel#excelfilename).
 
 ## Outputting the Result
 

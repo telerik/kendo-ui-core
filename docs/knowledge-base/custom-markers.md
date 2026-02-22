@@ -5,9 +5,9 @@ description: "Learn how to custyomize markers on a Kendo UI Map component."
 slug: howto_customizemarkersonmap_map
 previous_url: /controls/diagrams-and-maps/map/how-to/custom-markers
 tags: kendo, jquery, map, customize, markers
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment
@@ -48,9 +48,9 @@ The following example demonstrates how to use custom markers on a Kendo UI Map.
           zoom: 3,
           layers: [{
             type: "tile",
-            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
             subdomains: ["a", "b", "c"],
-            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+            attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
           }],
           markers: [{
             location: [30.268107, -97.744821],

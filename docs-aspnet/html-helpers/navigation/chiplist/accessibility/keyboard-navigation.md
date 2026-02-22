@@ -2,6 +2,7 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product_short }} ChipList by Telerik UI and learn about the component keyboard navigation functionality."
+components: ["chiplist"]
 slug: keynav_aspnetcore_chiplist
 position: 2
 ---

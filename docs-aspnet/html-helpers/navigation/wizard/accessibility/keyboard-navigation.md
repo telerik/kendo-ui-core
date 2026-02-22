@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Wizard and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["wizard"]
 slug: keynav_aspnetcore_wizard
 position: 2
 ---
@@ -26,4 +27,4 @@ Telerik UI Wizard for {{ site.framework }} supports the following keyboard short
 ## See Also
 
 * [Keyboard Navigation in the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/keyboard-navigation)
-* [Accessibility in the Wizard HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_wizard %})
+* [Accessibility in the Wizard HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_wizard_accessibility %})

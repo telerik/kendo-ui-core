@@ -7,6 +7,7 @@ slug: grid-popup-editing-show-validation-summary
 tags: kendoui, grid, edit, popup, validation, summary 
 ticketid: 1607760
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -37,28 +38,30 @@ To achieve the desired scenario:
    <div id="grid"></div>
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
-                transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
+                  transport: {
+                      read:  {
+                          url: crudServiceBaseUrl + "/Products"
+                      },
+                      update: {
+                          url: crudServiceBaseUrl + "/Products/Update",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      destroy: {
+                          url: crudServiceBaseUrl + "/Products/Destroy",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      create: {
+                          url: crudServiceBaseUrl + "/Products/Create",
+                          type: "POST",
+                  		    contentType: "application/json"
                   },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

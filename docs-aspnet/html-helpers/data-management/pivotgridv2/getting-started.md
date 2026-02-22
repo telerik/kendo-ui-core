@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} PivotGridV2 component by following a complete step-by-step tutorial."
+components: ["pivotgridv2"]
 slug: pivotgridv2_getting_started
 position: 1
 ---
@@ -41,11 +42,11 @@ Optionally, you can structure the View content by adding the desired HTML elemen
 
 Declare the [PivotContainer](https://docs.telerik.com/{{ site.platform }}/api/pivotcontainer) that will hold the pivot configurator component and the [PivotConfiguratorButton](https://docs.telerik.com/{{ site.platform }}/api/pivotconfiguratorbutton) that toggles the visibility of the related PivotConfiguratorV2.
 
-```HtmlHelper   
+```HtmlHelper
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
-        .Content(@<text>        
+        .Content(@<text>
             @(Html.Kendo().PivotConfiguratorButton()
                 .Name("toggleConfiguratorBtn")
                 .Text("Toggle Configurator")
@@ -69,11 +70,11 @@ Declare the [PivotContainer](https://docs.telerik.com/{{ site.platform }}/api/pi
 
 Define the PivotConfiguratorV2 supplementary component into the PivotContainer declaration. The configurator allows you to control the column and row dimensions and the measure fields of the PivotGridV2. Also, enable its `Filterable` and `Sortable` options to filter and sort the rows and columns.
 
-```HtmlHelper   
+```HtmlHelper
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
-        .Content(@<text>   
+        .Content(@<text>
             @(Html.Kendo().PivotConfiguratorV2()
                 .Name("configurator")
                 .Sortable()
@@ -107,15 +108,15 @@ Use the PivotGridV2 HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the PivotGridV2 element.
 * The `Configurator()` option sets the `Name()` of the defined PivotConfiguratorV2 that is connected to the component.
-* Add the `DataSource()` configuration option and set its type to [`Xmla`]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-xmla). Configure the OLAP service dll (`https://demos.telerik.com/olap/msmdpump.dll`) in the `Read` action to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Also, define the desired initial rows, columns and measures.
+* Add the `DataSource()` configuration option and set its type to [`Xmla`]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-xmla). Configure the OLAP service dll (`https://demos.telerik.com/service/v2/olap/msmdpump.dll`) in the `Read` action to bind the PivotGridV2 to data over an [OLAP cube]({% slug htmlhelpers_pivotgridv2_aspnetcore_fundamentals%}#what-is-an-olap-cube). Also, define the desired initial rows, columns and measures.
 
 Define the component into the PivotContainer declaration:
 
-```HtmlHelper   
+```HtmlHelper
     @(Html.Kendo().PivotContainer()
         .Name("container")
         .ConfiguratorPosition("right")
-        .Content(@<text>   
+        .Content(@<text>
             ... // PivotConfiguratorV2 declaration.
 
             @(Html.Kendo().PivotGridV2()
@@ -134,7 +135,7 @@ Define the component into the PivotContainer declaration:
                         .Connection(connection => connection
                             .Catalog("Adventure Works DW 2008R2")
                             .Cube("Adventure Works"))
-                        .Read("https://demos.telerik.com/olap/msmdpump.dll")
+                        .Read("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                     )
                 )
             )
@@ -159,7 +160,7 @@ Define the component into the PivotContainer declaration:
                     <row name="[Geography].[City]" expand="true"></row>
                 </rows>
                 <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} )></measures>
-                <transport read-url="https://demos.telerik.com/olap/msmdpump.dll">
+                <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll">
                     <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
                 </transport>
             </pivot-datasource>
@@ -211,7 +212,7 @@ You can reference the PivotGridV2 instances that you have created and build on t
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var pivotGridV2Reference = $("#pivotgrid").data("kendoPivotGridV2"); // pivotGridV2Reference is a reference to the existing PivotGridV2 instance of the helper.
@@ -236,7 +237,7 @@ You can reference the PivotGridV2 instances that you have created and build on t
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var pivotGridV2Reference = $("#pivotgrid").data("kendoPivotGridV2");

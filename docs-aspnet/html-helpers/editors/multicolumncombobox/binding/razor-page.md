@@ -3,68 +3,52 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MultiColumnComboBox component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_multicolumncombobox_razorpage_aspnetcore
-position: 3
+components: ["multicolumncombobox"]
+position: 7
 ---
 
 # MultiColumnComboBox in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI MultiColumnComboBox for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI MultiColumnComboBox for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_multicolumncombobox_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the MultiColumnComboBox component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [MultiColumnComboBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MultiColumnComboBox/MultiColumnComboBoxIndex.cshtml).
+## Binding to Remote Data
 
-In order to set up the MultiColumnComboBox component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`).
+The [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) component offers the most versatile data binding approach. To connect the MultiColumnComboBox to a dataset retrieved from a remote endpoint in a Razor Pages application, proceed with the following steps:
 
-```tab-HtmlHelper(csthml)        
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-	@Html.AntiForgeryToken()
+1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-	<h1>MultiColumnComboBox Index</h1>
+    ```Razor HtmlHelper_Index.cshtml
+    @page
+    @model IndexModel
 
-	@(Html.Kendo().MultiColumnComboBox()
-        .Name("products")
+    @(Html.Kendo().MultiColumnComboBox()
+        .Name("orders")
         .DataTextField("ShipName")
-        .DataValueField("ShipCity")
-        .Filter(FilterType.Contains)
+        .DataValueField("OrderID")
         .Columns(columns =>
-            {
-                columns.Add().Field("ShipName").Title("Ship Name").Width("200px");
-                columns.Add().Field("ShipCity").Title("Ship City").Width("200px");
-                columns.Add().Field("Freight").Title("Freight").Width("200px");
-            })
-        .DataSource(ds => ds
-            .Custom()
-            .Transport(transport => transport
-                .Read(r => r
-                    .Url("/MultiColumnComboBox/MultiColumnComboBoxIndex?handler=Read").Data("dataFunction")
-                ))
-                .ServerFiltering(true)
-            )
-        )
-	<script>
-		function dataFunction(e) {
-			var filterValue = '';
-			if (e.filter.filters[0]) {
-				filterValue = e.filter.filters[0].value;
-			}
-			return {
-				__RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
-				filterValue: filterValue
-			};
-		}
-	</script>
-```
-{% if site.core %}
-```tab-TagHelper(cshtml)
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-	@Html.AntiForgeryToken()
-
-	<h1>MultiColumnComboBox Index</h1>
-
-    <kendo-multicolumncombobox name="products" datatextfield="ShipName" datavaluefield="ShipCity" filter="FilterType.Contains">
+        {
+            columns.Add().Field("ShipName").Title("Ship Name").Width("200px");
+            columns.Add().Field("ShipCity").Title("Ship City").Width("200px");
+            columns.Add().Field("Freight").Title("Freight").Width("200px");
+        })
+        .DataSource(source =>
+        {
+            source.Read(read => read
+                .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
+        })
+    )
+    ```
+    ```Razor TagHelper_Index.cshtml
+    @page
+    @model IndexModel
+    
+    <kendo-multicolumncombobox name="orders"
+        datatextfield="ShipName"
+        datavaluefield="OrderID">
         <multicolumncombobox-columns>
             <column field="ShipName" title="Ship Name" width="200px">
             </column>
@@ -73,47 +57,155 @@ In order to set up the MultiColumnComboBox component bindings, you need to confi
             <column field="Freight" title="Freight" width="200px">
             </column>
         </multicolumncombobox-columns>
-        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
-                <transport>
-                    <read url="@Url.Page("/MultiColumnComboBox/MultiColumnComboBoxIndex?handler=Read")" data="dataFunction" />
-                </transport>
+        <datasource>
+            <transport>
+                <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
+            </transport>
         </datasource>
     </kendo-multicolumncombobox>
+    ```
 
-    <script>
-		function dataFunction(e) {
-			var filterValue = '';
-			if (e.filter.filters[0]) {
-				filterValue = e.filter.filters[0].value;
-			}
-			return {
-				__RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
-				filterValue: filterValue
-			};
-		}
-	</script>
-```
-{% endif %}
-```tab-PageModel(cshtml.cs)      
+1. Add an `AntiForgeryToken` at the top of the page.
 
-    public JsonResult OnGetRead(string filterValue)
-    {
-        if (filterValue != null)
+    ```
+        @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+        @Html.AntiForgeryToken()
+    ```
+
+1. Send the `AntiForgeryToken` with the Read request.
+
+    ```JavaScript
+        <script>
+            function forgeryToken() {
+                return kendo.antiForgeryTokens();
+            }
+        </script>
+    ```
+
+    Additional parameters can also be supplied. For example, when the [server filtering]({% slug filtering_multicolumncombobox_aspnetcore%}#server-filtering) of the MultiColumnComboBox is enabled, send the filter value along with the antiforgery token to the server using the JavaScript handler specified in the `Data()` option.
+
+    ```HtmlHelper
+    @page
+    @model IndexModel
+
+    @(Html.Kendo().MultiColumnComboBox()
+        .Name("orders")
+        .DataTextField("ShipName")
+        .DataValueField("OrderID")
+        .Filter(FilterType.Contains)
+        .AutoBind(false)
+        .MinLength(3)
+        .Columns(columns =>
         {
-            var filteredData = orders.Where(p => p.ShipName.Contains(filterValue));
-            return new JsonResult(filteredData);
-        }
-        return new JsonResult(orders);
-    }
-```
+            columns.Add().Field("ShipName").Title("Ship Name").Width("200px");
+            columns.Add().Field("ShipCity").Title("Ship City").Width("200px");
+            columns.Add().Field("Freight").Title("Freight").Width("200px");
+        })
+        .DataSource(source =>
+        {
+            source.Read(read => read
+                .Url(Url.Page("Index", "Read")).Data("dataFunction"))
+                .ServerFiltering(true);
+        })
+    )
+    ```
+    ```TagHelper
+    @page
+    @model IndexModel
+    @addTagHelper *, Kendo.Mvc
 
-## Binding the MultiColumnComboBox to a PageModel Property
+    <kendo-multicolumncombobox name="orders"
+        auto-bind="false"
+        min-length="3"
+        filter="FilterType.Contains"
+        datatextfield="ShipName"
+        datavaluefield="OrderID">
+        <multicolumncombobox-columns>
+            <column field="ShipName" title="Ship Name" width="200px">
+            </column>
+            <column field="ShipCity" title="Ship City" width="200px">
+            </column>
+            <column field="Freight" title="Freight" width="200px">
+            </column>
+        </multicolumncombobox-columns>
+        <datasource server-filtering="true">
+            <transport>
+                <read url="@Url.Page("Index", "Read")" data="dataFunction"/>
+            </transport>
+        </datasource>
+    </kendo-multicolumncombobox>
+    ```
+    ```JS
+        <script>
+            function dataFunction(e) {
+                var filterValue = '';
+                if (e.filter.filters[0]) {
+                    filterValue = e.filter.filters[0].value;
+                }
+
+                return {
+                    __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+                    filterValue: filterValue
+                };
+            }
+        </script>
+    ```
+
+1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
+
+    ```C# PageModel
+        public class IndexModel : PageModel
+        {
+            public JsonResult OnGetRead()
+            {
+                var comboBoxData = new List<OrderViewModel>();
+                // Populate the collection with the MultiColumnComboBox data.
+                return new JsonResult(dropdownListData);
+            }
+        }
+    ```
+    ```C# Model
+    public class OrderViewModel
+    {
+        public int OrderID { get; set; }
+
+        public string ShipName { get; set; }
+
+        public string ShipCity { get; set; }
+
+        public decimal? Freight { get; set; }
+    }
+    ```
+
+    When the server filtering is enabled, intercept the filter value sent through the `dataFunction` handler in the Read method and filter the data on the server before returning it to the MultiColumnComboBox.
+
+    ```C# PageModel
+    public class IndexModel : PageModel
+    {
+        public JsonResult OnGetRead(string filterValue)
+        {
+            var comboBoxData = new List<OrderViewModel>();
+            // Populate the collection with the MultiColumnComboBox data.
+
+            if (filterValue != null)
+            {
+                var filteredData = comboBoxData.Where(p => p.ShipName.Contains(filterValue));
+                return new JsonResult(filteredData);
+            }
+            return new JsonResult(comboBoxData);
+        }
+    }
+    ```
+
+For the complete project, refer to the [MultiColumnComboBox in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/MultiColumnComboBox/MultiColumnComboBoxIndex.cshtml).
+
+## Binding to a PageModel Property
 
 To bind the MultiColumnComboBox to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that must bind to the MultiColumnComboBox.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public class IndexModel : PageModel
         {
             [BindProperty]
@@ -127,21 +219,22 @@ To bind the MultiColumnComboBox to a property from the `PageModel`, follow the n
             public JsonResult OnGetRead()
             {
                 var comboBoxData = new List<OrderViewModel>();
-                // Populate the collection with the ComboBox data.
+                // Populate the collection with the MultiColumnComboBox data.
                 return new JsonResult(comboBoxData);
             }
         }
     ```
+
 1. Declare the `PageModel` at the top of the page.
 
-    ```C#
+    ```Razor
         @page
         @model IndexModel
     ```
 
 1. Bind the MultiColumnComboBox to the property using the `MultiColumnComboBoxFor()` configuration.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -154,11 +247,11 @@ To bind the MultiColumnComboBox to a property from the `PageModel`, follow the n
             .DataSource(source =>
             {
                 source.Read(read => read
-                    .Url("/Index?handler=Read").Data("forgeryToken"));
+                    .Url(Url.Page("Index", "Read")).Data("forgeryToken"));
             })
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -171,7 +264,7 @@ To bind the MultiColumnComboBox to a property from the `PageModel`, follow the n
             datavaluefield="OrderID">
             <datasource>
                 <transport>
-                    <read url="/Index?handler=Read" data="forgeryToken"/>
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken"/>
                 </transport>
             </datasource>
         </kendo-multicolumncombobox>

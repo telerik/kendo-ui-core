@@ -8,6 +8,7 @@ position:
 tags: progressbar, change, modify, color, values, value
 ticketid: 1430605
 res_type: kb
+components: ["progressbar"]
 ---
 
 ## Environment

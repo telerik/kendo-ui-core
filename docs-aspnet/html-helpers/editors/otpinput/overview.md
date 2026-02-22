@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI OTPInput for {{ site.framework }}."
+components: ["otpinput"]
 slug: overview_otpinputhelper
 position: 0
 ---
@@ -30,7 +31,7 @@ The OTPInput is a UI component that allows the user to enter a one-time password
 | [Items]({% slug items_otpinputhelper %}) | You can configure the items of the OTPInput through an action delegate or a single number. |
 | [Separators]({% slug separator_otpinputhelper %}) | The OTPInput supports different types of separators between the item groups. |
 | [Adaptiveness]({% slug adaptiveness_otpinputhelper %}) | You configure what type of virtual keyboard will be displayed when working with the component on a mobile device. |
-| [Accessibility]({% slug accessibility_otpinputhelper %}) | The OTPInput is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_otpinputhelper %}). |
+| [Accessibility]({% slug htmlhelpers_otpinput_accessibility %}) | The OTPInput is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_otpinputhelper %}). |
 
 ## Next Steps
 

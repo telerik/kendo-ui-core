@@ -2,6 +2,7 @@
 title: Touchscreen Interactions
 page_title: Touchscreen Interactions
 description: "Utilize the Telerik UI Grid component for {{ site.framework }} and learn the different interactions when using a touch screen device."
+components: ["grid"]
 slug: touchscreen_interactions_grid_aspnetcore
 position: 23
 ---
@@ -27,5 +28,8 @@ The Row Drag and Drop on mobile devices activates on `hold` & `slide` of the row
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Grid Adaptive Rendering](https://demos.telerik.com/{{ site.platform }}/grid/adaptive-rendering)
 * [Server-Side API](/api/grid)

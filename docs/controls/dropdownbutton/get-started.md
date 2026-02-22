@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DropDownButton Documentation - Getting Started with the DropDownButton
 description: "Get started with the jQuery DropDownButton by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dropdownbutton"]
 slug: getting_started_kendoui_dropdownbutton_widget
 position: 1
 ---
@@ -75,8 +76,4 @@ Next, you can configure the items in the popup by using the [`items`](/api/javas
 * [JavaScript API Reference of the jQuery DropDownButton](/api/javascript/ui/dropdownbutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

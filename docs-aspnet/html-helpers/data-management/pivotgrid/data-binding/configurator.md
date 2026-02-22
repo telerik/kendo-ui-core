@@ -2,6 +2,7 @@
 title: PivotConfigurator
 page_title: PivotConfigurator Overview
 description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to create and configure the Telerik UI PivotGrid Configurator."
+components: ["pivotgrid"]
 slug: htmlhelpers_pivotgrid_aspnetcore_configurator
 position: 4
 ---
@@ -33,14 +34,14 @@ The following example demonstrates how to create the PivotConfigurator.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-pivotconfigurator name="configurator" 
-                             datasource-id="pivotSource" 
-                             filterable="true"  
+    <kendo-pivotconfigurator name="configurator"
+                             datasource-id="pivotSource"
+                             filterable="true"
                              height="570">
     </kendo-pivotconfigurator>
 
-    <kendo-pivotgrid name="pivotgrid" 
-                     filterable="true" 
+    <kendo-pivotgrid name="pivotgrid"
+                     filterable="true"
                      datasource-id="pivotSource"
                      height="570">
     </kendo-pivotgrid>
@@ -79,7 +80,7 @@ The following example demonstrates how to configure the PivotConfigurator.
                     .Catalog("Adventure Works DW 2008R2")
                     .Cube("Adventure Works"))
                 .Read(read => read
-                    .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                    .Url("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                     .DataType("text")
                     .ContentType("text/xml")
                     .Type(HttpVerbs.Post)
@@ -102,20 +103,20 @@ The following example demonstrates how to configure the PivotConfigurator.
         <schema type="xmla"/>
         <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
         <transport>
-            <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+            <read url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
             <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
         </transport>
     </kendo-pivotdatasource>
 
-    <kendo-pivotconfigurator name="configurator" 
-                             filterable="true" 
-                             height="570" 
+    <kendo-pivotconfigurator name="configurator"
+                             filterable="true"
+                             height="570"
                              datasource-id="pivotSource">
     </kendo-pivotconfigurator>
 
     <kendo-pivotgrid name="pivotgrid"
-                     filterable="true" 
-                     column-width="200" 
+                     filterable="true"
+                     column-width="200"
                      height="570"
                      datasource-id="pivotSource">
         <sortable enabled="true" />

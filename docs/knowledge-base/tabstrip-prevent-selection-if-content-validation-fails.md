@@ -7,6 +7,7 @@ slug: tabstrip-prevent-selection-if-content-validation-fails
 tags: kendo, kendo-ui, tabstrip, prevent, selection, validation
 ticketid: 769370
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

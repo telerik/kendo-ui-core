@@ -5,9 +5,9 @@ description: "Learn how to use a scrollbar for a Kendo UI Diagram component."
 slug: howto_usescrollbar_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/using-scrollbar
 tags: kendo, jquery, diagram, add, implement, use, scrollbars
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment

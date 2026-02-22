@@ -7,7 +7,7 @@ slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -36,28 +36,30 @@ When the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/
 
         <script>
             $(document).ready(function () {
-            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
                 dataSource = new kendo.data.DataSource({
                     transport: {
-                    read: {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
-                    },
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
                     parameterMap: function (options, operation) {
                         if (operation !== "read" && options.models) {
-                        return { models: kendo.stringify(options.models) };
+                        return kendo.stringify(options.models);
                         }
                     }
                     },

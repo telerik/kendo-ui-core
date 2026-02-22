@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery CheckBoxGroup Documentation - Keyboard Navigation
 description: "Get started with the jQuery CheckBoxGroup by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["checkboxgroup"]
 slug: keynav_checkboxgroup_jquery
 position: 2
 ---
@@ -24,4 +25,4 @@ For a complete example, refer to the [demo on keyboard navigation of the CheckBo
 
 * [Keyboard Navigation by the CheckBoxGroup (Demo)](https://demos.telerik.com/kendo-ui/checkboxgroup/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the CheckBoxGroup]({% slug accessibility_kendoui_checkboxgroup_widget %})
+* [Accessibility in the CheckBoxGroup]({% slug jquery_checkboxgroup_accessibility %})

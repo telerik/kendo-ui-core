@@ -2,6 +2,7 @@
 title: Forms
 page_title: Forms
 description: "Use forms when working with a Telerik UI TabStrip for ASP.NET MVC."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/forms
 slug: forms_tabstrip_aspnetmvc
 position: 4

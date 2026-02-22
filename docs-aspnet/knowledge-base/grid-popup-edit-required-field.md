@@ -6,6 +6,7 @@ page_title: Dynamically change if a field is required in PopUp Edit Mode of a Te
 slug: grid-popup-edit-required-field
 tags: grid, dropdownlist, popup, required
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -39,7 +40,7 @@ The example below is implemented as per the following steps:
 
 The following example demonstrates the steps described above.
 
-```TestEditor.cshtml
+```Razor TestEditor.cshtml
 @model string
 
 @(Html.Kendo().DropDownList()

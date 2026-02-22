@@ -7,6 +7,7 @@ slug: slider-reverse-scale
 tags: slider, reverse, scale, decrement, steps
 ticketid: 1672392
 res_type: kb
+components: ["general"]
 component: slider
 ---
 
@@ -58,7 +59,7 @@ How can I reverse the minimum and maximum values of the Slider so the maximum va
     </kendo-slider>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         $(document).ready(function(){
             var list = $('.k-slider ul.k-slider-items');
@@ -75,7 +76,7 @@ How can I reverse the minimum and maximum values of the Slider so the maximum va
 
 When you need to get the Slider's value, use its absolute value:
 
-```Scripts
+```JS scripts
     <script>
         var slider = $("#reversedSlider").data("kendoSlider");
         var sliderValue = Math.abs(slider.value());

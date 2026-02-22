@@ -2,6 +2,7 @@
 title: Page Templates
 page_title: Page Templates - Kendo UI Drawing Library
 description: "Use page templates when you export content in PDF with the Kendo UI Drawing library."
+components: ["general"]
 previous_url: /framework/drawing/drawing-dom#header-and-footer-templates
 slug: templates_drawing
 position: 5
@@ -63,10 +64,9 @@ This template will be inserted into each page before producing the output. You c
     <script>
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                        url: "https://demos.telerik.com/service/v2/core/Products",
                     }
                 }
             },

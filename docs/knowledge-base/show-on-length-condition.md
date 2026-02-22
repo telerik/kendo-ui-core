@@ -5,9 +5,9 @@ description: "Learn how to show a Kendo UI Tooltip only if the target text excee
 slug: howto_showonlyiftextexceedscertainlength_tooltip
 previous_url: /controls/layout/tooltip/how-to/show-on-length-condition
 tags: telerik, kendo, jquery, tooltip, show, only, if, text, exceeds, certain, length 
-component: tooltip
 type: how-to
 res_type: kb
+components: ["tooltip"]
 ---
 
 ## Environment

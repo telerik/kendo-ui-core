@@ -5,9 +5,9 @@ description: "Learn how to use the default date format of the current culture as
 slug: howto_use_current_culture_date_format_in_datetimepicker
 previous_url: /controls/editors/datetimepicker/how-to/change-parse-formats-based-on-culture
 tags: telerik, kendo, jquery, datetimepicker, use, current, default, culture, format, as, parse, format
-component: datetimepicker
 type: how-to
 res_type: kb
+components: ["datetimepicker", "timepicker"]
 ---
 
 ## Environment

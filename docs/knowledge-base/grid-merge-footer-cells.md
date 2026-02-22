@@ -7,6 +7,7 @@ slug: grid-merge-footer-cells
 tags: grid, merge, cells, footer
 ticketid: 1149497
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

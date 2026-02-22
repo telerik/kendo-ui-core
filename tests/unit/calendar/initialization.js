@@ -169,7 +169,7 @@ describe("kendo.ui.Calendar initialization", function() {
 
         stub(cal, "navigate");
 
-        let link = div.find(".k-calendar-footer").find(".k-button-md");
+        let link = div.find(".k-calendar-footer").find(".k-button");
 
         link.click();
 
@@ -186,7 +186,7 @@ describe("kendo.ui.Calendar initialization", function() {
 
         stub(cal, "_todayClick");
 
-        let link = div.find(".k-calendar-footer").find(".k-button-md");
+        let link = div.find(".k-calendar-footer").find(".k-button");
         link.click();
 
         assert.isOk(!link.hasClass("k-calendar-nav-today"));
@@ -202,7 +202,7 @@ describe("kendo.ui.Calendar initialization", function() {
 
         stub(cal, "_todayClick");
 
-        div.find(".k-calendar-footer").find(".k-button-md").click();
+        div.find(".k-calendar-footer").find(".k-button").click();
 
         assert.equal(+cal.value(), +new Date(today.getFullYear(), today.getMonth(), today.getDate()));
     });
@@ -249,7 +249,7 @@ describe("kendo.ui.Calendar initialization", function() {
 
         let culture = kendo.getCulture("bg-BG");
         let format = culture.calendars.standard.patterns["d"];
-        let link = div.find(".k-calendar-footer").find(".k-button-md");
+        let link = div.find(".k-calendar-footer").find(".k-button");
 
         assert.equal(link.children().first().html(), kendo.toString(new Date(), "D", culture));
         assert.equal(link.attr("title"), kendo.toString(new Date(), "D", culture));

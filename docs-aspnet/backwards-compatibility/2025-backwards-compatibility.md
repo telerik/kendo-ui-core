@@ -2,16 +2,262 @@
 title: 2025 Releases
 page_title: 2025 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2025."
+components: ["general"]
 slug: breakingchanges_2025
-position: 1
+position: 3
 ---
 
 # 2025 Releases
 
 This article lists the breaking or important changes in the 2025 releases of {{ site.product }}.
 
+## {{ site.product }} Q4 2025
+
+### DateRangePicker
+
+The DateRangePicker will be initialized through a root `span` element.
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `<div class="k-daterangepicker"></div>`    | `<span class="k-daterangepicker"></span>` |
+
+### Rendering Changes
+
+**Map**
+
+The positional CSS classes used for Map controls (attribution, navigator, and zoom) have been updated to align with modern CSS practices:
+
+| Old Classes | New Class |
+| ----------- | --------- |
+| `k-pos-top k-pos-left` | `k-top-start` |
+| `k-pos-top k-pos-right` | `k-top-end` |
+| `k-pos-bottom k-pos-left` | `k-bottom-start` |
+| `k-pos-bottom k-pos-right` | `k-bottom-end` |
+
+These classes are applied to the control wrapper elements based on the `position` configuration of the Map controls (attribution, navigator, and zoom). The API values for the position property (`topLeft`, `topRight`, `bottomLeft`, `bottomRight`) remain unchanged.
+
+## {{ site.product }} Q3 2025 (2025.3.825)
+
+### Chat
+
+The [Chat component has been completely redesigned](slug:htmlhelpers_chat_aspnetcore).
+
+* `Toolbar()` and `User()` configurations have been deprecated.
+* The following client-side methods have been deprecated: `getUser()`, `renderAttachments()`, `renderMessage()`, `renderSuggestedActions()`, `renderUserTypingIndicator()`, `clearUserTypingIndicator()`, `removeTypingIndicator()`, and `toggleToolbar()`. For more information on the new client-side methods, refer to the [client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat#methods).
+
+#### HtmlHelper Chat Options
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `User(user => user.Name())`    | `AuthorId()`<br/>`AuthorIdField()`<br/>`AuthorNameField()` |
+| `User(user => user.IconUrl())` | `AuthorImageUrlField()`<br/>`AuthorImageAltTextField()` |
+
+#### HtmlHelper Chat Events
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `ActionClick`    | [`SuggestionClick`](/api/kendo.mvc.ui.fluent/chateventbuilder#suggestionclicksystemstring) and [`FileMenuAction`](/api/kendo.mvc.ui.fluent/chateventbuilder#filemenuactionsystemstring) |
+| `Post` | [`SendMessage`](/api/kendo.mvc.ui.fluent/chateventbuilder#sendmessagesystemstring) |
+| `TypingStart` and `TypingEnd` | [`Input`](/api/kendo.mvc.ui.fluent/chateventbuilder#inputsystemstring) |
+| `ToolClick` | No longer available. |
+
+{% if site.core %}
+#### TagHelper Chat Options
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `<user name="authorName" />`    | `author-id="1"`<br/>`author-id-field="AuthorId"`<br/>`author-name-field="AuthorName"` |
+| `<user icon-url="url" />` | `author-image-url-field="AuthorImageUrl"`<br/>`author-image-alt-text-field="AuthorImageAltTextField"` |
+
+#### TagHelper Chat Events
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `on-action-click`    | `on-suggestion-click` and `on-file-menu-action` |
+| `on-post` | `on-send-message` |
+| `on-typing-start` and `on-typing-end` | `on-input` |
+| `on-tool-click` | No longer available. |
+{% endif %}
+
+## {{ site.product }} Q3 2025 (2025.3.812)
+
+### ActionSheet
+
+The ActionSheet's action buttons now accept enums for the `FillMode`, `Rounded`, `ThemeColor`, `Size` properties instead of strings. The `ActionSheetItem.Group` property now accepts the `ActionSheetItemGroup` enum instead of a string.
+
+### AIPrompt
+
+* The `ShowOutputRating()` option of the AIPrompt HtmlHelper {% if site.core %} and `show-output-rating` attribute of AIPrompt TagHelper{% endif %} is deprecated. Use [`OutputActions()`](/api/kendo.mvc.ui.fluent/aipromptbuilder#outputactionsactionaipromptoutputactionfactory) configuration option that is more flexible.
+* The `OutputRatingChange` event is deprecated. Use `OutputAction` instead.
+* The `OutputCopy` event is deprecated. Use `OutputAction` event instead.
+* The `k-prompt-suggestion` class on the `role='listitem'` element has been replaced with the `k-suggestion` class.
+
+{% if site.core %}
+### TabStrip
+
+In versions before 2025 Q3, the `icon-class` configuration option sets a sprite CSS class in the items of the TabStrip TagHelper. Starting with version 2025 Q3, the `icon-class` attribute applies a custom CSS class to the default SVG tab icon element. The `sprite-css-classes` attribute sets sprite icons to the TabStrip tabs.
+
+Before Q3 2025:
+```TagHelper
+<tabstrip-item icon-class="netherlandsFlag" text="Netherlands"></tabstrip-item>
+```
+After Q3 2025:
+```TagHelper
+<tabstrip-item sprite-css-classes='new string[] {"netherlandsFlag"}' text="Netherlands"></tabstrip-item>
+```
+{% endif %}
+
+### UIPrimitives
+
+The {{ site.product }} 2025 Q3 release introduces changes in the naming of several properties in the `UIPrimitives.cs` class:
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `UIPrimitives.Grid.Toolbar`     | `UIPrimitives.Grid.GridToolbar`|
+| `UIPrimitives.Slider.Item`     | `UIPrimitives.Slider.SliderItem`|
+| `UIPrimitives.Window.Content`     | `UIPrimitives.Window.WindowContent`|
+| `UIPrimitives.PanelBar.Item`     | `UIPrimitives.PanelBar.PanelBarItem`|
+| `UIPrimitives.PanelBar.Content`     | `UIPrimitives.PanelBar.PanelBarContent`|
+| `UIPrimitives.PanelBar.Header`     | `UIPrimitives.PanelBar.PanelBarHeader`|
+| `UIPrimitives.PanelBar.Group`     | `UIPrimitives.PanelBar.PanelBarGroup`|
+
+## {{ site.product }} Q2 2025
+
+### Unified Distribution for Trial and Commercial Packages
+
+With the goal of streamlining user experience, the trial and commercial packages have been consolidated into a single unified distribution for {{ site.product }}. Access is now managed through a license key file, eliminating the need for separate trial download. For more information, please refer to [Setting Up Your License Key]({% slug installation_license_key_aspnetcore %}).
+
+{% if site.core %}
+
+### Target Framework
+
+With the Q2 2025 release, {{ site.product }} support for .NET 6 has been dropped as .NET 6 has reached the end of its lifecycle on November 12, 2024. You can update to a supported [LTS and STS versions of .NET Core](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#lifecycle).
+
+### PopOver
+
+The [`IconClass()`](/api/kendo.mvc.ui.fluent/popoveractionbuilder#iconclasssystemstring) option of the PopOver HtmlHelper and the [`icon-class`](/api/kendo.mvc.taghelpers/popoveractiontaghelper#attributes) attribute of the PopOver TagHelper now expect a `string` instead of a JavaScript handler or a template delegate (`System.Func<Object,Object>`).
+
+```HtmlHelper
+    <span id="target">Hover</span>
+
+    @(Html.Kendo().Popover()
+        .For("#target")
+        .Body("Content description")
+        .Actions(a =>
+        {
+            // "IconClass" adds a CSS class to the icon element inside the action button.
+            a.Add().Text("refresh").Icon("arrow-rotate-cw").IconClass("refresh-icon");
+        })
+    )
+```
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <span id="target">Hover</span>
+
+    <kendo-popover for="#target" body="Content description">
+        <actions>
+            <!-- "icon-class" adds a CSS class to the icon element inside the action button.-->
+            <action text="refresh" icon="arrow-rotate-cw" icon-class="refresh-icon"></action>
+        </actions>
+    </kendo-popover>
+```
+
+### Pager Position in Grid
+
+#### HtmlHelper Grid
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `Position(GridPagerPosition.Top)`     | `Position(PagerPosition.Top)`|
+
+#### TagHelper Grid
+
+| Old                            | New                              |
+| -----------                    | -----------                      |
+| `position="GridPagerPosition.Top"`     | `position="PagerPosition.Top"`|
+
+{% else %}
+
+### Kendo.Mvc.Export
+
+As of the Q2 2025 release, the `Telerik.Core.Export` package targets .NET Framework 4.6.2 in addition to .NET. You can the `Telerik.Core.Export` package in ASP.NET MVC5 applications, as well as in .NET applications. The old `Kendo.Mvc.Export` assembly will no longer be distributed.
+
+{% endif %}
+
+### ToolBar Buttons in Grid
+
+The Grid component now provides a new property to disable or hide the inactive tools when editing. Its ToolBar buttons like `Save Changes` and `Cancel` will be hidden by default. When the `ToolBar.ShowInactiveTools` option is enabled the inactive tools will be displayed as disabled.
+
+More details you can find in the dedicated [Grid ToolBar article]({% slug htmlhelpers_grid_aspnetcore_toolbar%}).
+
+### Telerik.Zip
+
+As of the Q2 2025 release, the following NuGet packages and assemblies no longer have a dependency to the `Telerik.Zip` library:
+
+{% if site.core %}
+* Telerik.Core.Export
+{% else %}
+* Telerik.Mvc.Export
+{% endif %}
+* Telerik.Web.Pdf
+* Telerik.Web.Spreadsheet
+
+The `Telerik.Zip` library will continue to be shipped as a standalone library.
+
+### Pager
+
+The [responsive behavior]({% slug responsive_pager_aspnet%}) of the Pager has been enhanced, which introduces the following changes:
+
+* The Pager's sizing is no longer based on breakpoints. Instead, the optimized responsive behavior renders as many elements as possible within the available space.
+* `Input` Type&mdash;When the [`Input()`](/api/kendo.mvc.ui.fluent/pagerbuilder#inputsystemboolean) option of the Pager is enabled, the TextBox next to the navigation arrows is replaced with a NumericTextBox, and the numeric page number buttons are no longer rendered.
+* Page Selection&mdash;The page selection drop-down has been replaced with a NumericTextBox for improved user interaction.
+* `NumbersSelectLabel()` Property&mdash;The [`NumbersSelectLabel()`](/api/kendo.mvc.ui.fluent/pagermessagessettingsbuilder#numbersselectlabelsystemstring) option in the `Messages()` configuration has been removed as it is no longer needed with the replacement of the page selection drop-down.
+
+> These changes to the Pager affect all components that use a built-in pager, including the Grid, PDFViewer, and other data management components.
+
+### Rendering Changes
+
+The {{ site.product }} 2025 Q2 release introduces changes in the rendering of the following components:
+
+**AIPrompt**
+
+* The `k-white-space-pre-line` class has been removed from the `k-card-body` element where the output from the prompt is rendered.
+
+**DockManager**
+
+* The `k-header` class has been removed from the TabStrip element.
+
+**ExpansionPanel**
+
+* The `k-d-none` class on the `k-expander-content-wrapper` element has been replaced with the `k-hidden` class.
+
+**Gantt**
+
+* The `k-alt` class has been removed from the rows in the TreeList and the timeline in the Gantt.
+
+**Grid**
+
+* The `k-alt` class has been removed from the `tr.k-table-alt-row` elements.
+* The `k-grid-draggable-header` class and the `draggable=true` attribute have been added to the `k-grid-header` element when grouping or column reodering is enabled.
+* The `k-touch-action-none` class has been removed from the draggable cell elements due to the addition of the `k-grid-draggable-header`.
+* The `k-drag-cell` class (when row-reordering is enabled) has been removed from the `k-table-th` element.
+
+**Menu**
+
+* The `k-menu-separator` class has been replaced with the `k-separator-horizontal` class.
+
+**Spreadsheet**
+
+* The `k-tabstrip-item` class has been added to the `k-item` elements in the sheet bar.
+
+**TreeList**
+
+* The `k-treelist-group` class has been removed from the parent nodes.
+* The `k-drag-cell` class (in row-reordering scenario) has been removed.
+
 ## {{ site.product }} Q1 2025
 
 ### License Activation
 
-Starting with 2025 Q1, all users of {{ site.product }} will need to apply a valid license key file to both new and existing projects. For details, see our [Licensing Documentation]({% slug installation_license_key_aspnetcore %}). 
+Starting with 2025 Q1, all users of {{ site.product }} will need to apply a valid license key file to both new and existing projects. For details, see our [Licensing Documentation]({% slug installation_license_key_aspnetcore %}).

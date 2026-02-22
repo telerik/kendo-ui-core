@@ -5,9 +5,9 @@ description: "Learn how to prevent adding custom values to a Kendo UI ComboBox c
 previous_url: /controls/editors/combobox/how-to/prevent-custom-values, /controls/editors/combobox/how-to/customize/prevent-custom-values
 slug: howto_prevent_adding_custom_values_combobox
 tags: telerik, kendo, jquery, combobox, prevent, adding, custom, values
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment
@@ -56,11 +56,11 @@ The following example demonstrates how to achieve the desired scenario.
           autoBind: false,
           minLength: 3,
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/service/v2/odata/Products",
               }
             }
           },

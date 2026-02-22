@@ -2,6 +2,7 @@
 title: Form Integration
 page_title: jQuery Wizard Documentation - Wizard Form integration
 description: "Get started with the jQuery Wizard by Kendo UI and learn how the Wizard integrates Kendo UI Forms."
+components: ["wizard"]
 slug: form_integration_wizard_widget
 position: 2
 ---

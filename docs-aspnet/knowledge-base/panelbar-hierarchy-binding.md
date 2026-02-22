@@ -7,6 +7,7 @@ previous-url: /helpers/navigation/panelbar/how-to/use-hierarchy-binding, /html-h
 slug: panelbar-hierarchy-binding
 tags: panelbar, hierarchy, binding
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -27,7 +28,7 @@ How can I display hierarchical data in the PanelBar component?
 
 ## Solution
 
-1. Create a `List` collection of type [`PanelBarItemModel`](/api/kendo.mvc.ui/panelbaritemmodell) and access it in the view.
+1. Create a `List` collection of type [`PanelBarItemModel`](/api/kendo.mvc.ui/panelbaritemmodel) and access it in the view.
 1.  Use the [`BindTo()`](/api/kendo.mvc.ui.fluent/panelbarbuilder#bindtosystemcollectionsienumerablesystemaction) method of the PanelBar to bind the component to the collection.
 
 ```HtmlHelper
@@ -65,7 +66,7 @@ How can I display hierarchical data in the PanelBar component?
             }}
     </items>
 </kendo-panelbar>
-``` 
+```
 {% endif %}
 ```Controller
     public class HomeController : Controller

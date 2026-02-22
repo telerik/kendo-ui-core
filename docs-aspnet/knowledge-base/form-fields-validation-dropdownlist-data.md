@@ -6,6 +6,7 @@ page_title: Dynamically Adjusting Form Field Validation Based on Available Optio
 slug: form-fields-validation-dropdownlist-data
 tags: form, fields, required, dropdownlist, remote, data, options, requestend
 res_type: kb
+components: ["general"]
 ticketid: 1637672
 ---
 
@@ -93,7 +94,7 @@ When using {{ site.product }} Form, which contains {{ site.product }} DropDownLi
     </kendo-form>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function validateField(eventData, fieldName) { // Reuse this handler for all editors that loads data from the server.
             if (eventData.response.length > 0) {

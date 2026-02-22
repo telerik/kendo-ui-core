@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery AutoComplete Documentation - Data Binding
 description: "Get started with the jQuery AutoComplete by Kendo UI and bind the widget to local or remote data and provide its suggestions."
+components: ["autocomplete"]
 slug: databinding_kendoui_autocomplete
 position: 2
 ---
@@ -51,9 +52,8 @@ The following example demonstrates how to bind the AutoComplete to a remote data
             minLength: 3,
             dataTextField: "ContactName", // JSON property name to use
             dataSource: new kendo.data.DataSource({
-                type: "odata", // specifies data protocol
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 }
             })
         });

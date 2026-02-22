@@ -7,7 +7,7 @@ slug: grid-customize-pdf-export-filename
 tags: grid, pdf, export, datetime, customize, customize
 ticketid: 1130491
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

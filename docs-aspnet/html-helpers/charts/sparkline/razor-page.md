@@ -2,6 +2,7 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI Sparkline component for {{ site.framework }} in a Razor Pages application with an example on how to configure its remote binding DataSource."
+components: ["sparkline"]
 slug: htmlhelper_sparkline_razorpages_aspnetcore
 position: 3
 ---
@@ -22,7 +23,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 1. Specify the Read request URL in the `DataSource` configuration. The URL must refer to the method name in the `PageModel`.
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -34,7 +35,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             ...
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -57,7 +58,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 1. Send the `AntiForgeryToken` with the Read request.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -67,7 +68,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -80,7 +81,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 1. Within the `cshtml.cs` file, add a handler method for the Read operation that returns the dataset.
 
-    ```tab-Index.cshtml.cs
+    ```C# Index.cshtml.cs
         public static List<Weather> items;
 
         public void OnGet()
@@ -105,7 +106,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
             return new JsonResult(items);
         }
     ```
-    ```tab-Model
+    ```Model
         public class Weather
         {
             public int Id { get; set; }

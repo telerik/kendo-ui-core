@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ExpansionPanel Documentation - ExpansionPanel Overview
 description: "Get started with the jQuery ExpansionPanel by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["expansionpanel"]
 slug: overview_kendoui_expansionpanel_widget
 position: 1
 ---
@@ -23,5 +24,5 @@ The Kendo UI ExpansionPanel is a layout component that provides the user with an
 
 ## See Also
 
-* [Basic Usage of the ExpansionPanel (Demo)](https://demos.telerik.com/kendo-ui/expanisonpanel/index)
+* [Basic Usage of the ExpansionPanel (Demo)](https://demos.telerik.com/kendo-ui/expansionpanel/index)
 * [JavaScript API Reference of the ExpansionPanel](/api/javascript/ui/expansionpanel)

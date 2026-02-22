@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview - Kendo UI Accessibility Support
 description: "Learn about the general requirements web applications have to meet to be accessible and the Accessibility support Kendo UI components provide."
+components: ["general"]
 slug: overview_accessibility_support_kendoui
 published: True
 previous_url: /accessibility/keyboard-support,/accessibility/themes-swatches, /accessibility/wai-aria-support-in-kendo, /accessibility/section-508
@@ -118,4 +119,4 @@ Kendo UI for jQuery components are tested in the following environments:
 
 ## See Also
 
-* [Telerik and Kendo UI Design System Accessibility Documentation](https://www.telerik.com/design-system/docs/foundation/accessibility/global-accessibility)
+* [Telerik and Kendo UI Design System Accessibility Documentation](https://www.telerik.com/design-system/docs/foundation/guides/accessibility/global-accessibility/)

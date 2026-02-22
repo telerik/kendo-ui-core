@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Scheduler component for {{ site.framework }}."
+components: ["scheduler"]
 slug: scheduler_events
 position: 9
 ---
@@ -39,7 +40,7 @@ The following example demonstrates how to subscribe to the `DataBound` and `Data
     </kendo-scheduler>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function scheduler_dataBinding(e) {
             // Handle the DataBinding event that fires before the Scheduler binds to its DataSource.
@@ -191,7 +192,7 @@ By handling the client-side events of the Scheduler, you can restrict the creati
     </kendo-scheduler>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     function onAdd(e){
         if (!checkAvailability(e.event.start, e.event.end, e.event)) {
             e.preventDefault();

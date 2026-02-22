@@ -2,6 +2,7 @@
 title: Server Editing
 page_title: Server Editing - Telerik UI Grid HtmlHelper for ASP.NET MVC
 description: "Configure server editing of the Kendo UI Grid for ASP.NET MVC."
+components: ["grid"]
 previous_url: /helpers/grid/server-editing, /helpers/data-management/grid/server-editing
 slug: serverediting_grid_aspnetmvc
 ---
@@ -113,13 +114,13 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
 
 1. Implement the `Read` action method.
 
-    ```Index
+    ```C# Index
         public ActionResult Index()
         {
             return View(ProductService.GetAll());
         }
     ```
-    ```ProductService
+    ```C# ProductService
         public class ProductService : IDisposable
         {
             private static bool UpdateDatabase = false;
@@ -321,7 +322,7 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
                 entities.Dispose();
             }
         }
-    ```    
+    ```
 
 1. Implement the `Create` action method.
 
@@ -395,5 +396,8 @@ You can enable the server edit mode for the Telerik UI Grid for ASP.NET MVC.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Editing Approaches by the Grid HtmlHelper for ASP.NET MVC (Demos)](https://demos.telerik.com/aspnet-mvc/grid/editing)
 * [Server-Side API](/api/grid)

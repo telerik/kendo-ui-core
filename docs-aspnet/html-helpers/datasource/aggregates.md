@@ -2,6 +2,7 @@
 title: Aggregates
 page_title: Aggregates
 description: "Learn how to set the aggregate options in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourceaggregates
 ---
 

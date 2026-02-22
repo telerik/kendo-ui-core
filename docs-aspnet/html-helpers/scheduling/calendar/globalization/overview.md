@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI Calendar for {{ site.framework }} and learn about the globalization options it supports."
+components: ["calendar"]
 slug: globalization_calendar_aspnetcore
 position: 1
 ---

@@ -2,6 +2,7 @@
 title: Scrolling
 page_title: jQuery ContextMenu Documentation - Scrolling
 description: "Get started with the jQuery ContextMenu by Kendo UI and enable the scrolling functionality of the widget."
+components: ["menu"]
 slug: scrolling_kendoui_contextmenu
 position: 5
 ---
@@ -10,7 +11,7 @@ position: 5
 
 By default, the items inside the ContextMenu do not scroll.
 
-However, you can enable scrolling by setting the [`scrollable`](/kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable) property of the ContextMenu to `true`. Once enabled, the ContextMenu displays buttons which scroll the items if they cannot fit the viewport height.
+However, you can enable scrolling by setting the [`scrollable`](/api/javascript/ui/contextmenu/configuration/scrollable) property of the ContextMenu to `true`. Once enabled, the ContextMenu displays buttons which scroll the items if they cannot fit the viewport height.
 
 The following example demonstrates how to enable scrolling within the ContextMenu.
 
@@ -55,7 +56,7 @@ The following example demonstrates how to enable scrolling within the ContextMen
         });
     </script>
 
-You can also customize the scrollable amount by setting a value (in pixels) to the [`distance`](/kendo-ui/api/javascript/ui/contextmenu/configuration/scrollable.distance) property. `distance` defaults to `50`.
+You can also customize the scrollable amount by setting a value (in pixels) to the [`distance`](/api/javascript/ui/contextmenu/configuration/scrollable.distance) property. `distance` defaults to `50`.
 
     <div id="target">Right Click to open the ContextMenu</div>
     <ul id="context-menu">

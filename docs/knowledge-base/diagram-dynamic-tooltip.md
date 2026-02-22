@@ -7,7 +7,7 @@ slug: diagram-dynamic-tooltip
 tags: diagram, tooltip, shapes, custom, background, conditional, dynamic, show
 ticketid: 1433776
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

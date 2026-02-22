@@ -7,6 +7,7 @@ slug: chart-gradient-none-style-flat
 tags: chart, gradient, none, style, flat
 ticketid: 1170343
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

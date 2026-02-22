@@ -5,6 +5,7 @@ description: "Learn how to always display the entire decimal portion in the Tele
 slug: numerictextbox-keep-trailing-zeros
 tags: numerictextbox, html, helper, custom, mvc, telerik, zero, trailing, decimal, portion, float
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -37,7 +38,7 @@ To achieve the desired result:
 > You can further elaborate on the example to reflect the globalization practices and check if the decimals are properly rendered when used on multiple NumericTextBoxes.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().NumericTextBox<double>()
         .Name("currency")
         .Format("n4")
@@ -47,7 +48,7 @@ To achieve the desired result:
         .HtmlAttributes(new {onfocus = "onFocus(event)" })
     )
 ```
-```Script.js
+```JS script.js
     <script>
         function onSpin(e){ 
             var inputElement = this.element;

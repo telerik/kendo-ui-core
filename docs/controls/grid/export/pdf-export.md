@@ -2,9 +2,10 @@
 title: PDF Export
 page_title: jQuery Grid Documentation - PDF Export
 description: "Get started with the jQuery Grid by Kendo UI and learn how to set the PDF export functionality."
+components: ["grid"]
 previous_url: /controls/grid/pdf-export 
 slug: exporting_pdf_kendoui_grid_widget
-position: 2
+position: 3
 ---
 
 # PDF Export
@@ -44,9 +45,8 @@ The following example demonstrates how to enable the PDF export functionality of
                 fileName: "Kendo UI Grid Export.pdf"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -86,9 +86,8 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
                 allPages: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -127,9 +126,8 @@ You can specify a paper size that will be applied to the whole document. The con
                 scale: 0.75
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -210,9 +208,8 @@ The Grid allows you to specify a page template and use the template to position 
                 template: $("#page-template").html()
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -240,9 +237,8 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -271,9 +267,8 @@ To send the generated file to a remote service, set a `proxyUrl` and `forceProxy
                 proxyURL: "/proxy"
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -328,9 +323,8 @@ The following example demonstrates how to handle custom fonts.
                 allPages: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 pageSize: 7
             },
@@ -378,7 +372,6 @@ columns: [
 ## KB Articles on PDF Export
 
 * [Exporting the Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
-* [Exporting All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
 * [Exporting Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})
 * [Find Out More in the Knowledge Base](/knowledge-base)
 

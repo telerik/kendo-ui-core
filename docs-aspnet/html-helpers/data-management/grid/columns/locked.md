@@ -2,6 +2,7 @@
 title: Locked
 page_title: Locked Columns
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} (Demo) supporting locked columns that are visible at all times while the user scrolls the Grid horizontally."
+components: ["grid"]
 slug: locked_columns_aspnetcore_grid
 position: 3
 ---
@@ -28,7 +29,7 @@ Locked columns cannot be scrolled on touch because they are wrapped in a contain
 
 Locked columns rely on synchronizing the row height of the frozen and non-frozen parts of the Grid. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise, the synchronization might not work properly because of sub-pixel issues.
 
-```
+```CSS
 div.k-grid td
 {
   line-height: 18px;
@@ -39,5 +40,8 @@ When you implement custom code and rely on selectors or target the Grid table, t
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Implementing Locked Columns in the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/frozen-columns)
 * [Server-Side API](/api/grid)

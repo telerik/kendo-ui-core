@@ -6,7 +6,7 @@ slug: diagram_layout_different_pdf
 tags: telerik, progress, kendoui, diagram, pdf, layout, different
 type: troubleshooting
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

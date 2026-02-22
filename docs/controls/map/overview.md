@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Map Documentation - Map Overview
 description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["map"]
 slug: overview_kendoui_mapwidget
 position: 0
 ---
@@ -17,6 +18,7 @@ It also provides tile layers, shape (vector) layers, and marker layers.
 ## Functionality and Features
 
 * [Layers]({% slug maplayers_mapwidget %})&mdash;Learn the possible options to render the layers.
+* [Azure Tiles]({% slug azure-tiles %})&mdash;Learn how to integrate Azure Maps as a tile source by proxying tile requests through an ASP.NET Core backend.
 * [Creating maps]({% slug mapauthoring_mapwidget %})&mdash;You can create your own map using datasets.
 * [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)&mdash;You can configure the Map to work with Azure service.
 
@@ -25,10 +27,10 @@ It also provides tile layers, shape (vector) layers, and marker layers.
 
 * [Getting Started with the Kendo UI Map for jQuery]({% slug getting_started_kendoui_map_component %})
 * [Overview of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)
 
 ## See Also
 
 * [Overview of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
 * [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
-* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map/configuration)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

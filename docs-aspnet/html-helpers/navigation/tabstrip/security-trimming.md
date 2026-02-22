@@ -2,6 +2,7 @@
 title: Security Trimming
 page_title: Security Trimming
 description: "Use the built-in security trimming functionality of the Telerik UI TabStrip HtmlHelper for ASP.NET MVC."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/security-trimming
 slug: securitytrimming_tabstrip_aspnetmvc
 position: 5

@@ -2,6 +2,7 @@
 title: Date Formatting
 page_title: Date Formatting
 description: "Get started with the Telerik UI DatePicker for {{ site.framework }} and learn how to use different date formats."
+components: ["datepicker"]
 slug: formats_datepicker_aspnetcore
 position: 2
 ---

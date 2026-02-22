@@ -33,9 +33,6 @@ navigation:
     "intro/widget-basics":
         title: "Working with Components"
         position: 3
-    "intro/scripts":
-        title: "Script Dependencies"
-        position: 4
     "controls":
         title: "Components"
         position: 4
@@ -189,6 +186,9 @@ navigation:
     "controls/chat/integrations":
         title: "Integrations"
         position: 4
+    "controls/promptbox":
+        title: "PromptBox"
+        isNew: true
     "controls/fx":
         title: "FX"
     "controls/draganddrop":
@@ -204,6 +204,9 @@ navigation:
     "controls/sortable/integration":
         title: "Integration"
         position: 6
+    "ai-assistant":
+        title: "AI Coding Assistant"
+        position: 5
     "framework":
         title: "Shared Utilities"
         position: 5
@@ -591,6 +594,8 @@ navigation:
         title: "Window"
     "*aiprompt":
         title: "AIPrompt"
+    "*promptbox":
+        title: "PromptBox"
     "*hello-kendo-ui":
         title: "Hello Kendo UI"
     "*home-page":
@@ -615,16 +620,16 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2025.1.227"
+cdnVersion: "2026.1.212"
 
 ## The themes CDN used
-themesCdnVersion: "10.2.0"
+themesCdnVersion: "13.0.0"
 
 ## The Pdfjs CDN version used
 pdfjsCdnVersion: "4.6.82"
 
 ## The MVC Core version used
-mvcCoreVersion: "2025.1.227"
+mvcCoreVersion: "2026.1.212"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
@@ -1769,6 +1774,11 @@ defaults:
     values:
         component: "propertygrid"
 
+-
+    scope:
+        path: "controls/promptbox"
+    values:
+        component: "promptbox"
 
 -
     scope:
@@ -2064,6 +2074,7 @@ intro_columns:
     items:
       "AIPrompt": "overview_kendoui_aiprompt_component"
       "Chat": "overview_kendoui_chat_widget"
+      "PromptBox": "overview_kendoui_promptbox"
   -
     title: "PDF"
     items:

@@ -2,6 +2,7 @@
 title: Calendar Reverse Selection
 page_title: jQuery Calendar Documentation - Calendar Reverse Selection
 description: "Check the reverse selection feature in the Kendo UI for jQuery Calendar."
+components: ["calendar"]
 slug: reverse_selection_calendar
 position: 10
 ---

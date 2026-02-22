@@ -6,6 +6,7 @@ page_title: Grid Open Filter Menu Upon Initialization
 slug: grid-open-filter-menu-on-init
 tags: kendo, kendo-ui, grid, filter, menu, open, init, initialization
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

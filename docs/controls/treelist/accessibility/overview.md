@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery TreeList Documentation | TreeList Accessibility
 description: "Get started with the jQuery TreeList by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_treelist
+components: ["treelist"]
+slug: jquery_treelist_accessibility
 position: 1
 ---
 
@@ -39,7 +40,7 @@ The TreeList is a composite component that consists of 2 logically separated str
 
 TreeList Toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -52,7 +53,7 @@ TreeList Toolbar follows the specification of the ToolBar component.
 
 The element with `role=treegrid` must not include the ToolBar element as it does not belong to the `role=treegrid` element itself. It implements the ARIA specification for the Grid component with some exceptions listed below.
 
-[Grid accessibility specification]({{grid_a11y_link}})
+[Grid accessibility specification]({% slug jquery_grid_accessibility %})
 
 
 In the Kendo jQuery TreeList, the `role=treegrid` is assigned to the `<table>` in the `k-grid-content` element.

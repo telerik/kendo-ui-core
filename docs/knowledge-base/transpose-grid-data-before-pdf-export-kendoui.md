@@ -6,6 +6,7 @@ page_title: How to Transpose Kendo UI Grid Data on the Exported PDF
 slug: transpose-grid-data-before-pdf-export-kendoui
 tags: kendo ui, grid, pdf export, transpose data
 res_type: kb
+components: ["grid"]
 ticketid: 1528457
 ---
 

@@ -7,6 +7,7 @@ slug: gantt-resources-depending-on-task
 tags: kendo, kendoui, gantt, resources, assignments, dynamic, task-specific
 ticketid: 1146251
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment
@@ -41,7 +42,7 @@ How can I populate the **Assignments** edit dialog based on the `StartDate` and 
     }
     ```
 
-1. Configure a [`Data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read.data) function for the Resources Read action. As a result, you will be able to filter the returned Resources based on the start and end time of the task on the server.
+1. Configure a [`Data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read#transportreaddata) function for the Resources Read action. As a result, you will be able to filter the returned Resources based on the start and end time of the task on the server.
 
     ```C#
     .Resources(r => r

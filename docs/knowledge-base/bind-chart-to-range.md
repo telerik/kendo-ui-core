@@ -5,9 +5,9 @@ description: "Learn how to bind a Kendo UI Chart to the data of a Kendo UI Sprea
 slug: howto_bindcharttosheet_spreadsheet_widget
 pevious_url: /controls/charts/how-to/bind-chart-to-spreadsheet-data, /controls/charts/how-to/binding/bind-chart-to-spreadsheet-data, /controls/data-management/spreadsheet/how-to/bind-chart-to-range
 tags: kendo, jquery, spreadsheet, bind, chart, to, sheet, data
-component: spreadsheet
 type: how-to
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

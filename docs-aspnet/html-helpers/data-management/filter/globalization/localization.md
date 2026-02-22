@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI Filter component for {{ site.framework }} and learn how to localize its operator texts."
+components: ["filter"]
 previous_url: /helpers/data-management/filter/globalization/localization
 slug: htmlhelpers_filter_aspnetcore_localization
 position: 2

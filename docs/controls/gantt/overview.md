@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Gantt Documentation - Gantt Overview
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the component and use its events."
+components: ["gantt"]
 slug: overview_kendoui_gantt_widget
 position: 0
 ---

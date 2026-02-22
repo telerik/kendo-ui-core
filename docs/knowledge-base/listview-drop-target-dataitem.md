@@ -6,8 +6,8 @@ page_title: Target DataItem on Drop - Kendo UI ListView for jQuery
 slug: listview-drop-target-dataitem
 tags: grid, drag, drop, target, under, cursor, dataItem, hover, listview, mouse
 res_type: kb
+components: ["listview"]
 ticketid: 1491644
-component: listview
 ---
 
 ## Environment

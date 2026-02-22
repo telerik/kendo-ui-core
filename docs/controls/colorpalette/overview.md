@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ColorPalette Documentation - ColorPalette Overview
 description: "Get started with the jQuery ColorPalette by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["colorpalette"]
 slug: overview_kendoui_colorpalette_widget
 position: 1
 ---
@@ -71,7 +72,7 @@ As of Kendo UI R3 2022, you can initialize the ColorGradient from an `input` ele
 ## Functionality and Features
 
 * [Color Presets]({% slug presets_kendoui_colorpalette_widget %})&mdash;The widget provides a set of predefined color palettes.
-* [Accessibility]({% slug accessibility_kendoui_colorpalette_widget %})&mdash;The ColorPalette supports various accessibility standards.
+* [Accessibility]({% slug jquery_colorpalette_accessibility %})&mdash;The ColorPalette supports various accessibility standards.
 
 ## Next Steps 
 

@@ -2,6 +2,7 @@
 title: SVG Icons
 page_title: SVG Icons - Sass Themes
 description: "Learn more about what icon fonts are and how to define, implement, and render the available Kendo UI SVG Icons out of the supported list."
+components: ["general"]
 slug: svgicons_kendoui_desktopwidgets
 position: 6
 ---
@@ -77,7 +78,7 @@ The following example shows how to set a custom SVG icon renderer.
  ```dojo
  <script>
     var icon =  kendo.ui.icon({
-        type: (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`
+        type: (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`,
         icon: 'camera'
     });
     $('body').append(icon);

@@ -7,6 +7,7 @@ slug: grid-persist-child-grids-checkbox-selection
 tags: grid, checkbox, selection, hierarchy, child, persist
 ticketid: 1150871
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,9 +44,9 @@ How can I persist the selected rows of the child Grids when I change the page of
 		$(document).ready(function() {
 			var element = $("#grid").kendoGrid({
 				dataSource: {
-					type: "odata",
+					type: "odata-v4",
 					transport: {
-						read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+						read: "https://demos.telerik.com/service/v2/odata/Employees"
 					},
 					pageSize: 6,
 					serverPaging: true,
@@ -96,9 +97,9 @@ How can I persist the selected rows of the child Grids when I change the page of
 		function detailInit(e) {
 			var childGrid = $("<div id=childGrid" + e.data.EmployeeID + "/>").appendTo(e.detailCell).kendoGrid({
 				dataSource: {
-					type: "odata",
+					type: "odata-v4",
 					transport: {
-						read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+						read: "https://demos.telerik.com/service/v2/odata/Orders"
 					},
 					serverPaging: true,
 					serverSorting: true,

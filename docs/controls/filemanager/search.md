@@ -2,6 +2,7 @@
 title: Search
 page_title: jQuery FileManager Documentation - Search in FileManager
 description: "Get familiar with the Search functionality in the FileManager and how you can configure it."
+components: ["filemanager"]
 slug: search_kendoui_filemanager_widget
 position: 7
 ---

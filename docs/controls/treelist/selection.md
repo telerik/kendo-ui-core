@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Get started with the Kendo UI TreeList for jQuery and learn how to configure its select functionality."
+components: ["treelist"]
 slug: selection_kendoui_treelist
 position: 10
 ---
@@ -57,4 +58,4 @@ In order to select or deselect all of the child items of the currently selected 
 ## See Also
 
 * [Selection of the Kendo UI TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/checkbox-selection)
-* [TreeList JavaScript API Reference](/api/selection)
+* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

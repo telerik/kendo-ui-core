@@ -5,9 +5,9 @@ description: "Learn how to collapse a row that was previously expanded when the 
 previous_url: /controls/data-management/grid/how-to/Layout/allow-a-single-expanded-row-only
 slug: howto_allowonlyasingleexpandedrow_grid
 tags: grid, single, row, master, expand
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -40,9 +40,9 @@ The following example demonstrates how to collapse a Grid row that was previousl
 	  $(document).ready(function() {
 	    var grid = $("#grid").kendoGrid({
 	      dataSource: {
-	        type: "odata",
+	        type: "odata-v4",
 	        transport: {
-	          read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+	          read: "https://demos.telerik.com/service/v2/odata/Employees"
 	        },
 	        pageSize: 6,
 	        serverPaging: true,
@@ -88,9 +88,9 @@ The following example demonstrates how to collapse a Grid row that was previousl
 	  function detailInit(e) {
 	    $("<div/>").appendTo(e.detailCell).kendoGrid({
 	      dataSource: {
-	        type: "odata",
+	        type: "odata-v4",
 	        transport: {
-	          read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+	          read: "https://demos.telerik.com/service/v2/odata/Orders"
 	        },
 	        serverPaging: true,
 	        serverSorting: true,

@@ -7,6 +7,7 @@ slug: grid-limit-the-exported-rows-to-excel
 tags: grid, excel, export
 ticketid: 1146796
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

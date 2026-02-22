@@ -2,6 +2,7 @@
 title: Right-to-Left support
 page_title: Right-to-Left support
 description: "Get started with the {{ site.product }} Captcha and learn how to set it in RTL mode."
+components: ["captcha"]
 slug: htmlhelpers_captcha_rtl
 position: 3
 ---

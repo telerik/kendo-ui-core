@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: Right-to-Left Support
 description: "Get started with the Telerik UI TimePicker for {{ site.framework }} and learn about the RTL supports it provides."
+components: ["timepicker"]
 slug: rtl_timepicker_aspnetcore
 position: 3
 ---

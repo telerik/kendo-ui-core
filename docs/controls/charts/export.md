@@ -2,6 +2,7 @@
 title: Export
 page_title: jQuery Chart Documentation - Export
 description: "Get started with the jQuery Chart by Kendo UI and set its export functionality to produce PDF, SVG, and Images."
+components: ["chart"]
 previous_url: /controls/charts/chart/export
 slug: exporting_kendoui_chart_widget
 position: 3

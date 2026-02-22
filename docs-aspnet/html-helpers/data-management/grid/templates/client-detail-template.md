@@ -2,6 +2,7 @@
 title: Client Detail Templates
 page_title: Client Detail Templates
 description: "Set the detail template used during Ajax binding of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/templating/client-detail-template
 slug: clientdetailtemplate_grid_aspnetcore
 position: 4
@@ -39,38 +40,46 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 1. Open `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
 
-        public ActionResult Products_Read()
-        {
-        }
+    ```CS
+    public ActionResult Products_Read()
+    {
+    }
+    ```
 
 1. Add a new parameter of type `DataSourceRequest` to the action. This parameter will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-        {
-        }
+    ```CS
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+    }
+    ```
 
 1. Use the `ToDataSourceResult` extension method to convert the Products to a `DataSourceResult` object. That extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    ```CS
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new NorthwindEntities())
         {
-            using (var northwind = new NorthwindEntities())
-            {
-                IQueryable<Product> products = northwind.Products;
-                DataSourceResult result = products.ToDataSourceResult(request);
-            }
+            IQueryable<Product> products = northwind.Products;
+            DataSourceResult result = products.ToDataSourceResult(request);
         }
+    }
+    ```
 
 1. Return the `DataSourceResult` as JSON. Configure the Grid for Ajax binding.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    ```CS
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new NorthwindEntities())
         {
-            using (var northwind = new NorthwindEntities())
-            {
-                IQueryable<Product> products = northwind.Products;
-                DataSourceResult result = products.ToDataSourceResult(request);
-                return Json(result);
-            }
+            IQueryable<Product> products = northwind.Products;
+            DataSourceResult result = products.ToDataSourceResult(request);
+            return Json(result);
         }
+    }
+    ```
 
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
@@ -89,7 +98,6 @@ To configure the Grid for {{ site.framework }} to display additional details of 
               .Pageable()
         )
     ```
-
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid">
@@ -119,14 +127,16 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
     > Each `#` symbol that is not part of a template expression&mdash;`#: #`, `# #` or `#= #`&mdash;must be escaped&mdash;`\\#`.
 
-        <script id="client-template" type="text/x-kendo-template">
-            <div>ProductID: #: ProductID #</div>
-            <div>ProductName: #: ProductName #</div>
-            <div>UnitsInStock: #: UnitsInStock #</div>
-            <div>UnitPrice: #: UnitPrice #</div>
-            <div>UnitsOnOrder: #: UnitsOnOrder #</div>
-            <div>Discontinued: #: Discontinued #</div>
-        </script>
+    ```JS
+    <script id="client-template" type="text/x-kendo-template">
+        <div>ProductID: #: ProductID #</div>
+        <div>ProductName: #: ProductName #</div>
+        <div>UnitsInStock: #: UnitsInStock #</div>
+        <div>UnitPrice: #: UnitPrice #</div>
+        <div>UnitsOnOrder: #: UnitsOnOrder #</div>
+        <div>Discontinued: #: Discontinued #</div>
+    </script>
+    ```
 
 1. Specify the `id` of the template by using the `ClientDetailTemplateId` method.
 
@@ -197,62 +207,72 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
 
 1. Open `HomeController.cs` and add a new action method which will return the **Category** entities as JSON. The Grid makes Ajax requests to this action.
 
-        public ActionResult Categories_Read()
-        {
-        }
+    ```C#
+    public ActionResult Categories_Read()
+    {
+    }
+    ```
 
 1. Add a new parameter of type `DataSourceRequest` to the action. This parameter will contain the current grid request information - page, sort, group and filter. Decorate that parameter with the `DataSourceRequestAttribute`. That attribute will populate the `DataSourceRequest` object from the posted data.
 
-        public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
-        {
-        }
+    ```C#
+    public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
+    {
+    }
+    ```
 
 1. Use the `ToDataSourceResult` extension method to convert the Categories to a `DataSourceResult` object. That extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object.
 
-        public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
+    ```C#
+    public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new NorthwindEntities())
         {
-            using (var northwind = new NorthwindEntities())
-            {
-                IQueryable<Category> categories = northwind.Categories;
-                // Flatten the Category to avoid circular references during JSON serialization.
-                DataSourceResult result = categories.ToDataSourceResult(request, category => new {
-                    category.CategoryID,
-                    category.CategoryName
-                });
-            }
+            IQueryable<Category> categories = northwind.Categories;
+            // Flatten the Category to avoid circular references during JSON serialization.
+            DataSourceResult result = categories.ToDataSourceResult(request, category => new {
+                category.CategoryID,
+                category.CategoryName
+            });
         }
+    }
+    ```
 
 1.  Return the `DataSourceResult` as JSON. Now let's configure the Grid for AJAX binding.
 
-        public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
+    ```C#
+    public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new NorthwindEntities())
         {
-            using (var northwind = new NorthwindEntities())
-            {
-                IQueryable<Category> categories = northwind.Categories;
-                // Flatten the Category to avoid circular references during JSON serialization.
-                DataSourceResult result = categories.ToDataSourceResult(request, category => new {
-                    category.CategoryID,
-                    category.CategoryName
-                });
-                return Json(result);
-            }
+            IQueryable<Category> categories = northwind.Categories;
+            // Flatten the Category to avoid circular references during JSON serialization.
+            DataSourceResult result = categories.ToDataSourceResult(request, category => new {
+                category.CategoryID,
+                category.CategoryName
+            });
+            return Json(result);
         }
+    }
+    ```
 
 1. Open `HomeController.cs` and add a new action method which will return the **Product** entities for a given category as JSON. The child Grid makes Ajax requests to this action.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, int categoryId)
+    ```C#
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, int categoryId)
+    {
+        using (var northwind = new NorthwindEntities())
         {
-            using (var northwind = new NorthwindEntities())
-            {
-                IQueryable<Product> products = northwind.Products.Where(product => product.CategoryID == categoryId);
-                // Flatten the Product to avoid circular references during JSON serialization
-                DataSourceResult result = products.ToDataSourceResult(request, product => new {
-                    product.ProductID,
-                    product.ProductName
-                });
-                return Json(result);
-            }
+            IQueryable<Product> products = northwind.Products.Where(product => product.CategoryID == categoryId);
+            // Flatten the Product to avoid circular references during JSON serialization
+            DataSourceResult result = products.ToDataSourceResult(request, product => new {
+                product.ProductID,
+                product.ProductName
+            });
+            return Json(result);
         }
+    }
+    ```
 
 1. In the view, configure the Grid for Ajax binding to `Categories_Read`.
 
@@ -302,7 +322,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
     ```HtmlHelper
         <script id="client-template" type="text/x-kendo-template">
             @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Product>()
-                    .Name("grid_#=CategoryID#") // make sure the Name is unuque
+                    .Name("grid_#=CategoryID#") // make sure the Name is unique
                     .Columns(columns =>
                     {
                         columns.Bound(product => product.ProductID);
@@ -317,30 +337,30 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
             )
         </script>
     ```
-
     {% if site.core %}
     ```TagHelper
         @{
             var url =@Url.Action("HierarchyBinding_Orders","Grid");
         }
+        
         <script id="client-template" type="text/html">
-        <kendo-grid name="grid_#=CategoryID#" is-in-client-template="true">
-            <columns>
-                <column field="ProductID">
-                </column>
-                <column field="ProductName" template="<strong>\\#:ProductName\\#</strong>""> // escape the "#" characters
-                </column>
-            </columns>
-            <datasource type="DataSourceTagHelperType.Ajax">
-                <schema data="Data" total="Total" errors="Errors">
-                </schema>
-                <transport>
-                    <read url="@Html.Raw(url+"?employeeID=#=EmployeeID#")" />
-                </transport>
-            </datasource>
-            <pageable enabled="true" />
-        </kendo-grid>
-</script>
+            <kendo-grid name="grid_#=CategoryID#" is-in-client-template="true">
+                <columns>
+                    <column field="ProductID">
+                    </column>
+                    <column field="ProductName" template="<strong>\\#:ProductName\\#</strong>""> // escape the "#" characters
+                    </column>
+                </columns>
+                <datasource type="DataSourceTagHelperType.Ajax">
+                    <schema data="Data" total="Total" errors="Errors">
+                    </schema>
+                    <transport>
+                        <read url="@Html.Raw(url+"?employeeID=#=EmployeeID#")" />
+                    </transport>
+                </datasource>
+                <pageable enabled="true" />
+            </kendo-grid>
+        </script>
     ```
     {% endif %}
 
@@ -399,5 +419,8 @@ Nesting client templates are not an out-of-the-box feature the Kendo UI Core wra
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Client Detail Templates by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/detailtemplate)
 * [Server-Side API](/api/grid)

@@ -2,6 +2,7 @@
 title: Tile Containers
 page_title: Kendo UI for jQuery TileLayout Documentation - TileLayout Containers
 description: "Learn how to define the content and headers of the Kendo UI for jQuery TileLayout containers."
+components: ["tilelayout"]
 slug: containers_kendoui_tilelayout_widget
 position: 4
 ---

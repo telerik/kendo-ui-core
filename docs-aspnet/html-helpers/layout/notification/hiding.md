@@ -2,6 +2,7 @@
 title: Hiding
 page_title: Hiding
 description: "Learn the basics when working with the Telerik UI Notification component for {{ site.framework }}."
+components: ["notification"]
 previous_url: /helpers/layout/notification/hiding
 slug: hiding_notificatiomhelper_aspnetmvc
 position: 3

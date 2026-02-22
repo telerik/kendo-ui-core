@@ -6,6 +6,7 @@ slug: view-date-range
 tags: telerik, kendo, core, mvc, scheduler, retrieve, the, current, view, date, range, calendar 
 component: scheduler
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -34,7 +35,7 @@ To achieve the desired scenario:
 1. To handle where the date range is being navigated **to**, subscribe to the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/schedulereventbuilder#databoundsystemstring) event and call the previously defined function.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Activity>()
         .Name("scheduler")
         .Date(new DateTime(2020, 10, 4))
@@ -85,7 +86,7 @@ To achieve the desired scenario:
     <div class="console"></div>
 ```
 
-```Script.js
+```JS script.js
     // Handlers
     <script>
         function scheduler_view_range(e) { // Common function

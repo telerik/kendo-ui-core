@@ -5,9 +5,9 @@ description: "Learn how to export the Agenda view of the Kendo UI for jQuery Sch
 previous_url: /controls/scheduling/scheduler/how-to/agenda-view-pdf-export-with-paging, /controls/scheduling/scheduler/how-to/export/agenda-view-pdf-export-with-paging
 slug: howto_implement_pdf_export_inagenda_view_scheduler
 tags: telerik, kendo, jquery, scheduler, export, agenda, view, with, paging, in, pdf
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -44,7 +44,7 @@ To achieve the desired scenario, use the [drawing API]({% slug multipagecontent_
     <!-- Load Pako ZLIB library to enable PDF compression -->
     <script src="https://unpkg.com/pako/dist/pako_deflate.min.js"></script>
     <div id="example">
-      <button id="export" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Export to PDF</button>
+      <button id="export" class="k-button">Export to PDF</button>
       <div id="scheduler"></div>
     </div>
     <script>

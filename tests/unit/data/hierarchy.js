@@ -1611,5 +1611,74 @@ import { asyncTest } from '../../helpers/unit/async-utils.js';
             assert.equal(dataSource.view()[0].children.view()[0].children.view()[0].children.view().length, 2);
         });
 
+        it("Node.load() prevents double requests when already loading", async function() {
+            let readCallCount = 0;
+            let dataSource = new HierarchicalDataSource({
+                data: [
+                    { hasChildren: true, id: 1 }
+                ],
+                schema: {
+                    model: {
+                        children: {
+                            transport: {
+                                read: function(options) {
+                                    readCallCount++;
+                                    setTimeout(function() {
+                                        options.success([{ id: 2 }, { id: 3 }]);
+                                    }, 50);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            dataSource.fetch();
+            let node = dataSource.data()[0];
+
+            // Call load() twice rapidly
+            let promise1 = node.load();
+            let promise2 = node.load();
+
+            // Wait for completion
+            await Promise.all([promise1, promise2]);
+
+            // Should only call read once
+            assert.equal(readCallCount, 1, "Transport read should only be called once, but was called " + readCallCount + " times");
+        });
+
+        it("Node.loading() tracks loading state correctly", async function() {
+            let resolveData;
+            let dataSource = new HierarchicalDataSource({
+                data: [
+                    { hasChildren: true, id: 1 }
+                ],
+                schema: {
+                    model: {
+                        children: {
+                            transport: {
+                                read: function(options) {
+                                    resolveData = () => options.success([{ id: 2 }]);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            dataSource.fetch();
+            let node = dataSource.data()[0];
+
+            assert.equal(node.loading(), false, "Should not be loading initially");
+
+            let promise = node.load();
+
+            assert.equal(node.loading(), true, "Should be loading after load() is called");
+
+            resolveData();
+            await promise;
+            assert.equal(node.loading(), false, "Should not be loading after completion");
+        });
+
     });
 

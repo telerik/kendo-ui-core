@@ -7,7 +7,7 @@ slug: retrieve-visible-grid-columns-data-with-select-odata-parameter
 tags: retrieve, visible, columns, data, $select, odata
 ticketid: 1138950
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -38,10 +38,10 @@ How can I retrieve the columns data that is visible only from the remote service
     $(document).ready(function() {
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                        url: "https://demos.telerik.com/service/v2/odata/Orders",
                         data: {
                         $select: getColumns
                         }

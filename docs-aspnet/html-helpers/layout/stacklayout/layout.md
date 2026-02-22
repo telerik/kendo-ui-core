@@ -2,6 +2,7 @@
 title: Layout
 page_title: Setting Up the Layout of the {{ site.framework }} StackLayout
 description: "Learn how to configure the {{ site.framework }} StackLayout and control its appearance."
+components: ["general"]
 slug: htmlhelpers_aspnet_stacklayout_layout
 position: 2
 ---
@@ -103,6 +104,15 @@ The `VerticalAlign` configuraiton controls the alignment of the items in the Sta
 * `Stretch` (default)
 
 By default, the items will be stretched, taking all the available space.
+
+To switch from horizontal to vertical orientation (or vice versa) after the component’s initialization, toggle the `k-hstack` and `k-vstack` classes:
+
+```JS
+    <script>
+        $("#stacklayout").toggleClass("k-hstack").toggleClass("k-vstack"); //Horizontal-to-vertical change.
+    </script>
+```
+
 
 ## See Also
 

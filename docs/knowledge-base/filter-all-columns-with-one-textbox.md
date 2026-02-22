@@ -6,7 +6,7 @@ page_title: Filter All Columns with Single Textbox - Kendo UI for jQuery Data Gr
 slug: filter-all-columns-with-one-textbox
 tags: grid, filter, all, columns, single, input, textbox, one, global, search, entire, whole
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Product Version</td>
@@ -35,10 +35,10 @@ How can I implement a global Grid search and enable the users to search through 
 
     <div id="example">
       Filter all fields:
-      <span style="width: 30%;" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input id='filter' class='k-input-inner'/></span>
+      <span style="width: 30%;" class="k-input k-textbox"><input id='filter' class='k-input-inner'/></span>
       <div id="grid"></div>
 
-      <script>        
+      <script>
         function isNumeric(n) {
           return !isNaN(parseFloat(n)) && isFinite(n);
         }
@@ -50,7 +50,7 @@ How can I implement a global Grid search and enable the users to search through 
             return false;
           } else {
             return null;
-          }          
+          }
         }
 
         $(document).ready(function () {
@@ -99,7 +99,7 @@ How can I implement a global Grid search and enable the users to search through 
                       operator: 'eq',
                       value: e.target.value
                     });
-                  }    
+                  }
 
                 } else if (type == 'date') {
                   var data = grid.dataSource.data();
@@ -121,7 +121,7 @@ How can I implement a global Grid search and enable the users to search through 
                     operator: 'eq',
                     value: bool
                   });
-                }               
+                }
               }
             });
             grid.dataSource.filter(filter);

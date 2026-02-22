@@ -2,6 +2,7 @@
 title: Animations
 page_title: jQuery PanelBar Documentation - Animations
 description: "Get started with the jQuery PanelBar by Kendo UI and control its animations."
+components: ["panelbar"]
 slug: animations_kendoui_panelbar
 position: 4
 ---

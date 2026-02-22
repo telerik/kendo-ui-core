@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} RadioGroup component by following a complete step-by-step tutorial."
+components: ["radiogroup"]
 slug: aspnetcore_radiogroup_getting_started
 position: 1
 ---
@@ -151,7 +152,7 @@ You can reference the RadioGroup instances that you have created and build on to
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var radiogroupReference = $("#radiogroup").data("kendoRadioGroup"); // radiogroupReference is a reference to the existing RadioGroup instance of the helper.
     </script>
@@ -159,7 +160,7 @@ You can reference the RadioGroup instances that you have created and build on to
 
 1. Use the [RadioGroup client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/radiogroup#methods) to control the behavior of the widget. In this example, you will use the `enable` method to disable the RadioGroup.
 
-    ```script
+    ```JS script
     <script>
         var radiogroupReference = $("#radiogroup").data("kendoRadioGroup"); // radiogroupReference is a reference to the existing RadioGroup instance of the helper.
         radiogroupReference.enable(false); 

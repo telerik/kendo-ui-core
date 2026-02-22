@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Grid component by following a complete step-by-step tutorial."
+components: ["grid"]
 slug: grid_aspnetcore_get_started
 position: 1
 ---
@@ -338,7 +339,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the `id` attribute of the component instance to get a client-side reference.
 
-    ```script
+    ```JS script
     <script>
         var gridReference = $("#grid").data("kendoGrid"); // gridReference is a reference to the existing instance of the helper.
     </script>
@@ -346,7 +347,7 @@ Referencing existing instances allows you to build on top of their configuration
 
 1. Use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control the behavior of the widget. In this example, you will hide one of the Grid columns by using `hideColumn` method.
 
-    ```script
+    ```JS script
     <script>
         var gridReference = $("#grid").data("kendoGrid"); // gridReference is a reference to the existing instance of the helper.
         gridReference.hideColumn("ProductID"); // Hide a column by using its field name.
@@ -363,6 +364,9 @@ For more information on referencing specific helper instances, see the [Methods 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Using the API of the Grid for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/api)
 * [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Grid server-side API](/api/grid)

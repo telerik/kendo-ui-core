@@ -7,6 +7,7 @@ slug: excel-export-set-row-height-to-auto
 tags: workbook, excel, export, rows, wrapped, cells, auto, adjust
 ticketid: 1142435
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -94,7 +95,12 @@ Here is some example logic that can be used:
               rows: rows
             }]
           });
-          kendo.saveAs({dataURI: workbook.toDataURL(), fileName: "Test.xlsx"});
+          workbook.toDataURLAsync().then(function(dataURL) {
+            kendo.saveAs({
+     		 dataURI: dataURL,
+     		 fileName: "Test.xlsx"
+    	   });
+          });
         }
 
         function generateModel(data) {

@@ -2,8 +2,9 @@
 title: CRUD Operations
 page_title: CRUD Operations
 description: "Learn how to use the create, read, update, and delete CRUD operations with the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_crud_editor_aspnetcore
-position: 8
+position: 9
 ---
 
 # CRUD Operations
@@ -17,7 +18,7 @@ For a runnable project, refer to [this GitHub repository](https://github.com/tel
 
 The following example demonstrates how to define the database model.
 
-```
+```C#
 public class EditorDataContext : DbContext
 {
     public EditorDataContext(DbContextOptions<EditorDataContext> options)

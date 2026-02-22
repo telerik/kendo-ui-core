@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TreeMap component for {{ site.framework }}."
+components: ["treemap"]
 slug: events_treemap_aspnetcore
 position: 3
 ---
@@ -34,7 +35,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 ```
 {% endif %}
-```script.js
+```JS script.js
 
     <script>
         function onItemCreated(e) {

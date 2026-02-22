@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI MultiViewCalendar component for {{ site.framework }} provides a styled UI Calendar with the capability of displaying multiple Views at the same time."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/overview
 slug: overview_multiviewcalendar_htmlhelper_aspnetcore
 position: 0
@@ -25,32 +26,35 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 ## Initializing the MultiViewCalendar
 
 1. Make sure you followed all the steps from the [introductory article on {{ site.product }}](https://docs.telerik.com/{{ site.platform }}/introduction).
+
 1. Create a new action method which renders the view.
 
-            public ActionResult Index()
-            {
-                return View();
-            }
+    ```C#
+    public ActionResult Index()
+    {
+        return View();
+    }
+    ```
 
 1. Add a MultiViewCalendar.
 
-  ```HtmlHelper
-          @(Html.Kendo().MultiViewCalendar()
-              .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
-              .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
-              .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
-              .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
-          )
-  ```
-  {% if site.core %}
-  ```TagHelper
-            <kendo-multiviewcalendar name="multiviewcalendar"
-                                     min="new DateTime(2010, 1, 1, 10, 0, 0)"
-                                     max="new DateTime(2010, 1, 1, 20, 0, 0)"
-                                     value="DateTime.Now">
-            </kendo-multiviewcalendar>
-  ```
-  {% endif %}
+    ```HtmlHelper
+    @(Html.Kendo().MultiViewCalendar()
+        .Name("MultiViewCalendar") // The name of the MultiViewCalendar is mandatory. It specifies the "id" attribute of the widget.
+        .Min(new DateTime(2010, 1, 1, 10, 0, 0)) // Set the min time of the MultiViewCalendar.
+        .Max(new DateTime(2010, 1, 1, 20, 0, 0)) // Set the min date of the MultiViewCalendar.
+        .Value(DateTime.Now) // Set the value of the MultiViewCalendar.
+    )
+    ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-multiviewcalendar name="multiviewcalendar"
+      min="new DateTime(2010, 1, 1, 10, 0, 0)"
+      max="new DateTime(2010, 1, 1, 20, 0, 0)"
+      value="DateTime.Now">
+    </kendo-multiviewcalendar>
+    ```
+    {% endif %}
 
 ## Functionality and Features
 

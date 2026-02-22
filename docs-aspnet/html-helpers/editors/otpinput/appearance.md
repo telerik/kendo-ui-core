@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI OTPInput for {{ site.framework }}."
+components: ["otpinput"]
 slug: appearance_otpinputhelper
 position: 3
 ---
@@ -29,7 +30,7 @@ To control the size of the OTPInput, configure the `Size` option with any of the
 - `Large`
 - `None`
 
-The default option is `Medium`.
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()
@@ -40,7 +41,7 @@ The default option is `Medium`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-otpinput name="otpinput" 
+    <kendo-otpinput name="otpinput"
         size="ComponentSize.Large"
         items="5">
     </kendo-otpinput>
@@ -59,11 +60,9 @@ The following options are available for the `FillMode` configuration:
 - `Solid`
 - `Outline`
 - `Flat`
-- `Link`
-- `Clear`
 - `None`
 
-The default OTPInput fill mode is `Solid`.
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()
@@ -74,7 +73,7 @@ The default OTPInput fill mode is `Solid`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-otpinput name="otpinput" 
+    <kendo-otpinput name="otpinput"
         fill-mode="FillMode.Outline"
         items="5">
     </kendo-otpinput>
@@ -96,7 +95,7 @@ The following values are available for the `Rounded` option:
 - `Full`
 - `None`
 
-The default option is `Medium`.
+> When not explicitly set, the applied theme controls the default border radius.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()
@@ -107,7 +106,7 @@ The default option is `Medium`.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-otpinput name="otpinput" 
+    <kendo-otpinput name="otpinput"
         rounded="Rounded.Full"
         items="5">
     </kendo-otpinput>

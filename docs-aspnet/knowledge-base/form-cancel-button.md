@@ -6,6 +6,7 @@ type: how-to
 slug: form-cancel-button
 tags: progress, telerik, aspnet, mvc, core, add, integrate, implement, form, cancel, button
 res_type: kb
+components: ["general"]
 component: form
 ---
 
@@ -28,14 +29,14 @@ How can I integrate a **Cancel** button within the {{ site.product }} Form?
 
 ## Solution
 
-To achieve the desired scenario: 
+To achieve the desired scenario:
 
 1. Provide initial values for the Form through the `.FormData()` configuration option.
 1. Configure the Form buttons through the [`.ButtonTemplateId()`](https://docs.telerik.com/aspnet-core/api/kendo.mvc.ui.fluent/formbuilder#buttonstemplateidsystemstring) configuration option and provide an `id` for the **Cancel** button.
 1. Attach a click handler for the **Cancel** button.
 1. Within the handler, get the `formData`, set the `form` fields programmatically, and make an Ajax request to the desired end-point.
 
-```Form.cshtml
+```Razor Form.cshtml
 @model FormPostModel.Models.Team
 
     @(Html.Kendo().Form<FormPostModel.Models.Team>()
@@ -70,20 +71,20 @@ To achieve the desired scenario:
                 });
         }).FormData(Model)
     )
-       
+
     <script id="buttonsTemplate" type="text/x-kendo-template">
         <div class="myButtonsContainer">
-            <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary k-form-submit" type="submit">
+            <button class="k-button k-button-primary k-form-submit" type="submit">
                 <span class="k-button-text">My Submit Submit</span>
             </button>
-            <button id="cancelBtn" type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+            <button id="cancelBtn" type="button" class="k-button">
                 <span class="k-button-text"> My Cancel Button</span>
             </button>
         </div>
     </script>
 
 ```
-```script.js
+```JS script.js
    $(document).ready(function(){
          $("#cancelBtn").on("click",function(e){
             var form=$("#formExample").data("kendoForm");

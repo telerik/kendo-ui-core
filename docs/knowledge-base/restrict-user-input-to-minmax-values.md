@@ -5,9 +5,9 @@ description: "Learn how to restrict user input by applying minimum and maximum v
 slug: howto_restrict_user_input_minandmax_values_datepicker
 previous_url: /controls/editors/datepicker/how-to/restrict-user-input-to-minmax-values
 tags: kendo, jquery, datepicker, restrict, user, input, to, minimum, maximum, values
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

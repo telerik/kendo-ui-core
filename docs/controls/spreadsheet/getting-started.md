@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Spreadsheet Documentation - Getting Started with the Spreadsheet
 description: "Get started with the jQuery Spreadsheet by Kendo UI and learn how to create and initialize the component in a few easy steps."
+components: ["spreadsheet"]
 slug: getting_started_kendoui_spreadsheet_component
 position: 2
 ---
@@ -195,8 +196,4 @@ The Spreadsheet component provides multiple configuration options that let you c
 * [JavaScript API Reference of the Range](/api/javascript/spreadsheet/range)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

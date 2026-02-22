@@ -2,6 +2,7 @@
 title: Setting Up Your License Key
 page_title: Setting Up Your License Key File
 description: Learn how to create and install a Telerik license key file, which is required during application building and deployment.
+components: ["general"]
 slug: installation_license_key_aspnetcore
 tags: installation, license, key
 position: 0
@@ -9,7 +10,7 @@ position: 0
 
 # Setting Up Your License Key File
 
-{{ site.product }} requires activation through a license key for both trial and commercial licenses. This article describes how to download your personal license key and use it to activate the {{ site.product_short }} components.
+{{ site.product }} requires activation through a license key for both trial and commercial licenses. This article describes how to download your personal license key and use it to activate the {{ site.product_short }} components. An invalid license results in [errors and warnings]({%slug troubleshooting-license-key-errors%}) during build and run-time indicators such as watermarks and banners.
 
 @[template](/_contentTemplates/licensing-templates.md#license-key-version)
 
@@ -56,7 +57,7 @@ If you need to activate {{ site.product }} only in a specific app, then save `te
 
 @[template](/_contentTemplates/licensing-templates.md#license-key-update-whenever)
 
-By default, when you have an active license, the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}) are activated internally. Version 2025.1.227 introduces the `ActivateKendoScripts` method that you can use to activate the Kendo UI scripts manually. Call this method if no HtmlHelper {% if site.core %}or TagHelper {% endif %}components are used on the View. 
+By default, when you have an active license, the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}) are activated internally. Version 2025.1.227 introduces the `ActivateKendoScripts` method that you can use to activate the Kendo UI scripts manually. Call this method if no Telerik HtmlHelper {% if site.core %}or TagHelper {% endif %} components are used in the View. 
 
 ```
     @(Html.Kendo().ActivateKendoScripts())

@@ -6,7 +6,7 @@ slug: editor_resize_images_tables
 tags: telerik, progress, kendoui, jquery, editor, how, to, resize,, images, and, tables
 type: how-to
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

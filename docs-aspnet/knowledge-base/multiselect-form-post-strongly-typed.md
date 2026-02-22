@@ -7,6 +7,7 @@ previous_url: /helpers/editors/multiselect/how-to/use-strongly-typed-posted-with
 slug: multiselect-form-post-strongly-typed
 tags: multiselect, form, post, model, strongly-typed, strongly, typed, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: multiselect
 ---
 
@@ -83,7 +84,7 @@ Using a strongly typed variable means that the form is bound to a specific model
 	}
 ```
 {% endif %}
-```Models
+```Model
 	public class CountryInfo
  	{
     	public int[] SelectedCities { get; set; }

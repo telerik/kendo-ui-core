@@ -7,6 +7,7 @@ slug: colorpicker-change-dropdownlist
 tags: colorpicker, dropdownlist, color
 ticketid: 1143760
 res_type: kb
+components: ["colorpicker"]
 ---
 
 ## Environment

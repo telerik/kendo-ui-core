@@ -7,6 +7,7 @@ slug: gantt-custom-time-marker
 tags: kendo, kendoui, gantt, custom, time, marker, primavera, status
 ticketid: 1343465
 res_type: kb
+components: ["gantt"]
 ---
 
 ## Environment

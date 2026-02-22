@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Slider Documentation - Appearance
 description: "Learn how to apply different styling options to the Slider widget."
+components: ["slider"]
 slug: appearance_kendoui_slider_widget
 position: 2
 ---

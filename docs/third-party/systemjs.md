@@ -2,6 +2,7 @@
 title: SystemJS
 page_title: SystemJS - Kendo UI Third-Party Tools
 description: "Include Kendo UI with SystemJS."
+components: ["general"]
 slug: systemjs_integration_kendoui
 ---
 
@@ -214,9 +215,8 @@ The following example demonstrates the configuration for SystemJS 0.20.x.
 
     $(".grid").kendoGrid({
         dataSource: {
-            type: "odata",
             transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
             },
             pageSize: 20
         },
@@ -247,13 +247,9 @@ The following example demonstrates the configuration for SystemJS 0.20.x.
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})

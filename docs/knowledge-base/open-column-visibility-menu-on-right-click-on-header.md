@@ -6,7 +6,7 @@ page_title: Implement Custom Menu for Toggling the Visibility of Columns on Righ
 slug: open-column-visibility-menu-on-right-click-on-header
 tags: grid, right-click, hide, show, columns
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -117,9 +117,9 @@ The following example demonstrates how to apply the necessary approach.
 
                 },
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                     model: {

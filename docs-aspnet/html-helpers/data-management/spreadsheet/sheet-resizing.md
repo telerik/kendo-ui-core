@@ -2,6 +2,7 @@
 title: Sheet Resizing
 page_title: Spreadsheet Sheet Resizing
 description: "Learn how to resize the sheet of the Telerik UI Spreadsheet for {{ site.framework }}, by using the client-side API of the component."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_sheet_resizing_aspnetcore
 position: 9
 ---

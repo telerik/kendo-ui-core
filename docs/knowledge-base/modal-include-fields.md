@@ -5,9 +5,9 @@ description: "Learn how to make the Include fields filter window modal in a Kend
 previous_url: /controls/data-management/pivotgrid/how-to/modal-include-fields, /controls/data-management/pivotgrid/how-to/appearance/modal-include-fields
 slug: howto_make_include_fields_window_modal_pivotgrid
 tags: pivotgrid, make, include, fields, window, modal
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -59,7 +59,7 @@ The following example demonstrates how to access the **Fields to include** filte
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "https://demos.telerik.com/olap/msmdpump.dll",
+                        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                       parameterMap: function(options, type) {
                         var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
 

@@ -2,6 +2,7 @@
 title: Line Charts
 page_title: Line Charts
 description: "Learn how to define and configure Telerik UI Line Charts."
+components: ["chart"]
 slug: linecharts_aspnetcore_htmlhelper
 ---
 

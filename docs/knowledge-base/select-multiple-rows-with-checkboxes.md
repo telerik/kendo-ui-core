@@ -5,9 +5,9 @@ description: "Learn how to select multiple rows with checkboxes in the Kendo UI 
 previous_url: /controls/data-management/grid/how-to/Selection/select-multiple-rows-with-checkboxes
 slug: howto_select_multiple_rowswith_checkboxes_grid
 tags: select, multiple, rows, checkboxes, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -15,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -63,7 +63,7 @@ The following example demonstrates how to select multiple rows by using the chec
         },
         columns: [{
             title: "select",
-            template: '<input class="k-checkbox k-checkbox-md k-rounded-md" type="checkbox" />'
+            template: '<input class="k-checkbox" type="checkbox" />'
           },
           { field: "id" },
           { field: "foo" },

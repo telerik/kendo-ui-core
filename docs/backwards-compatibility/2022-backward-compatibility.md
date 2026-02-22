@@ -3,7 +3,8 @@ title: 2022 Releases
 page_title: 2022 Releases - Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2022."
 slug: breakingchanges2022_kendoui
-position: 2
+components: ["general"]
+position: 4
 ---
 
 # 2022 Releases
@@ -31,7 +32,7 @@ Below you can find a list of the impacted components:
 
 **Toolbar**
 
-As of 2022 R2 SP1, the Toolbar's SplitButton is replaced with the [standalone SplitButton widget](../api/javascript/ui/splitbutton.md).
+As of 2022 R2 SP1, the Toolbar's SplitButton is replaced with the [standalone SplitButton widget](/api/javascript/ui/splitbutton).
 
 ### Old vs New Rendering of the SplitButton in the Toolbar
 

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI ListView component for {{ site.framework }} and learn about the globalization options it supports."
+components: ["listview"]
 slug: globalization_htmlhelpers_listview
 position: 1
 ---

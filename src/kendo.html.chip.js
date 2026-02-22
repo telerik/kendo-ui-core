@@ -31,10 +31,10 @@ export const __meta__ = {
         },
         options: {
             name: "HTMLChip",
-            size: "medium",
-            rounded: "medium",
-            fillMode: "solid",
-            themeColor: "base",
+            size: undefined,
+            rounded: undefined,
+            fillMode: undefined,
+            themeColor: undefined,
             attr: {},
             icon: "",
             iconClass: "",
@@ -61,7 +61,7 @@ export const __meta__ = {
             } else if (options.iconClass) {
                 that.wrapper.prepend($("<span class='" + options.iconClass + "'></span>").attr(options.iconAttr));
             } else if (options.avatarClass) {
-                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar k-avatar-md k-avatar-solid k-avatar-solid-primary k-rounded-full " + options.avatarClass + "'></span>").attr(options.iconAttr));
+                that.wrapper.prepend($("<span class='k-chip-avatar k-avatar " + options.avatarClass + "'></span>").attr(options.iconAttr));
             }
 
             that.element.addClass("k-chip-content");

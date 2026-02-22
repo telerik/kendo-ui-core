@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Splitter Documentation - Getting Started with the Splitter
 description: "Get started with the jQuery Splitter by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["splitter"]
 slug: getting_started_kendoui_splitter_component
 position: 1
 ---
@@ -62,7 +63,7 @@ Now, you can set the [`orientation`](/api/javascript/ui/splitter/configuration/o
 
 ## 4. Configure the Panes
 
-In this step, you'll configure the [`panes`](/api/javascript/ui/splitter/configuration/pane) of the Splitter.
+In this step, you'll configure the [`panes`](/api/javascript/ui/splitter/configuration/panes) of the Splitter.
 
 ```javascript
       $("#splitter").kendoSplitter({
@@ -81,8 +82,4 @@ In this step, you'll configure the [`panes`](/api/javascript/ui/splitter/configu
 * [JavaScript API Reference of the jQuery Splitter](/api/javascript/ui/splitter)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items of the ActionSheet component."
+components: ["actionsheet"]
 slug: htmlhelpers_items_actionsheet_aspnetcore
 position: 2
 ---
@@ -45,7 +46,7 @@ The following example demonstrates the possible options for the `Items` configur
     </kendo-actionsheet>
 ````
 {% endif %}
-```Script
+```JS script
     <script>
         function onClick(e) {
             e.preventDefault();

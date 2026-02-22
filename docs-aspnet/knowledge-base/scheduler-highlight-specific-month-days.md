@@ -6,6 +6,7 @@ page_title: Dynamically Highlighting Specified Dates within the Month View of th
 slug: scheduler-highlight-specific-month-days
 tags: scheduler, highlight, dates, month, view, slots, dynamically, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -67,7 +68,7 @@ How can I highlight dynamically specific dates within the Scheduler month view o
         </kendo-scheduler>
     ```
     {% endif %}
-    ```Script
+    ```JS script
         <script>
             var highlightedDays = [
             {
@@ -112,7 +113,7 @@ How can I highlight dynamically specific dates within the Scheduler month view o
             }
         </script>
     ```
-    ```Styles
+    ```CSS Styles
         <style>
             .highlightedDay {
                 background-color: yellow;

@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the items, popup header and footer of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["autocomplete"]
 slug: htmlhelpers_autocomplete_templates_aspnetcore
 position: 3
 ---
@@ -75,7 +76,7 @@ The following example demonstrates how to customize the AutoComplete by referenc
 </kendo-autocomplete>
 ```
 {% endif %}
-```template
+```JS Template
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
     </script>
@@ -115,7 +116,7 @@ The following example demonstrates how to define an item template and how to eva
 </kendo-autocomplete>
 ```
 {% endif %}
-```template
+```JS Template
   <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
     </script>
@@ -153,7 +154,7 @@ The header template manages the way the popup header of a AutoComplete is render
 </kendo-autocomplete>
 ```
 {% endif %}
-```template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
     </script>
@@ -193,7 +194,7 @@ The footer template manages the way the popup footer of a AutoComplete is render
 
 ```
 {% endif %}
-```template
+```JS Template
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
     </script>
@@ -232,7 +233,7 @@ The AutoComplete displays `noDataTemplate` in the popup when the data source is 
 
 ```
 {% endif %}
-```template
+```JS Template
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
     </script>

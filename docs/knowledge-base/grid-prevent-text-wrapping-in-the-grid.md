@@ -7,6 +7,7 @@ slug: grid-prevent-text-wrapping-in-the-grid
 tags: grid, wrap, prevent
 ticketid: 1141418
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -47,9 +48,9 @@ Use the following implementation to prevent wrapping in specific grid cells.
         $(document).ready(function() {
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         model: {

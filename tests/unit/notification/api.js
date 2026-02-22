@@ -178,7 +178,7 @@ describe("api", function() {
     it("show method renders passed object content", function() {
         notification = createNotification({
             templates: [{
-                type: "info",
+                type: "base",
                 template: ({ foo }) => `<div id='${foo}'></div>`
             }]
         });
@@ -218,7 +218,7 @@ describe("api", function() {
     it("show method renders passed function object content", function() {
         notification = createNotification({
             templates: [{
-                type: "info",
+                type: "base",
                 template: ({ foo }) => `<div id='${foo}'></div>`
             }]
         });
@@ -486,5 +486,21 @@ describe("api", function() {
         $(".k-notification .k-i-x").click();
 
         assert.equal($(".k-notification").length, 1);
+    });
+
+    it("showText method renders close button when closeButton option is set in the message", function() {
+        notification = createNotification({
+            autoHideAfter: 0
+        });
+
+        notification.showText({
+            closeButton: true,
+            content: "Welcome to the Application"
+        }, "warning");
+
+        let notificationElement = $(".k-notification");
+
+        assert.equal(notificationElement.length, 1);
+        assert.equal(notificationElement.find(".k-notification-close-action").length, 1);
     });
 });

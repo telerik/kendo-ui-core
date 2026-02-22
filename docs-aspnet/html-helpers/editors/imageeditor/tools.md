@@ -2,6 +2,7 @@
 title: Tools
 page_title: Tools
 description: "Learn which tools are available in the Telerik UI ImageEditor component for {{ site.framework }}."
+components: ["imageeditor"]
 slug: htmlhelpers_imageeditor_tools_aspnetcore
 position: 2
 ---
@@ -127,6 +128,40 @@ Then add the custom command to the ImageEditor Toolbar:
     </toolbar>
 ```
 {% endif %}
+
+## Overflow
+
+The built-in toolbar provides properties for customizing its overflow behavior and appearance.
+The following example demonstrates how to modify the default overflow settings of the toolbar through the `Oveflow()` configuration.
+
+```Razor
+    @(Html.Kendo().ImageEditor()
+        .Name("imageEditor")
+        .Height(900)
+        .SaveAs(s => s.FileName("image_edited.png"))
+        .Toolbar(t => t
+          .Overflow(o => o
+            .Mode(ToolBarOverflowMode.Scroll)
+            .ScrollButtons(ScrollButtonsType.Auto)
+            .ScrollButtonsPosition(ScrollButtonsPositionType.Start)
+            .ScrollDistance(50)
+          )
+        )
+        .ImageUrl(@Url.Content("~/shared/images/photos/11.jpg"))
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-imageeditor name="imageEditor" height="900" image-url="@Url.Content("~/shared/images/photos/11.jpg")">
+        <save-as file-name="image_edited.png" />
+        <toolbar>
+            <overflow mode="ToolBarOverflowMode.Scroll" scroll-buttons="ScrollButtonsType.Auto" scroll-buttons-position="ScrollButtonsPositionType.Start" scroll-distance="50" />
+        </toolbar>
+    </kendo-imageeditor>
+```
+{% endif %} 
+
+For more information on the available overflow options, refer to the [Appearance documentation of the ToolBar component]({% slug toolbar_appearance %}).
 
 ## Loading Images in the ImageEditor
 

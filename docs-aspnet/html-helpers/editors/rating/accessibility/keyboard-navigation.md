@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Rating and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["rating"]
 slug: keynav_aspnetcore_rating
 position: 2
 ---
@@ -15,4 +16,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Rating]
 ## See Also
 
 * [Keyboard Navigation in the Rating HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/rating/keyboard-navigation)
-* [Accessibility in the Rating HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_rating %})
+* [Accessibility in the Rating HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_rating_accessibility %})

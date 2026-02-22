@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery PanelBar Documentation - Data Binding
 description: "Get started with the jQuery PanelBar by Kendo UI and bind the widget to local data arrays or remote data services."
+components: ["panelbar"]
 slug: databinding_kendoui_panelbar
 position: 2
 ---
@@ -53,8 +54,7 @@ The following example demonstrates how to create a PanelBar and bind it to a rem
             dataSource: {
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/Employees"
                     }
                 },
                 schema: {

@@ -2,6 +2,7 @@
 title: Column Width
 page_title: Column Width - Kendo UI Excel Export
 description: "Learn how to set the width of the columns and enable automatic width while exporting Kendo UI components to Excel."
+components: ["general"]
 slug: columnwidth_excelexport_kendoui
 position: 4
 ---
@@ -14,7 +15,7 @@ If the cell value needs more space, it will be clipped. This article provides in
 
 ## Setting Fixed Column Widths
 
-To manually set the column width in pixels, use the [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns.width) option.
+To manually set the column width in pixels, use the [`width`](/api/javascript/ooxml/workbook/configuration/sheets.columns#sheetscolumnswidth) option.
 
 ```dojo
 <script>
@@ -34,16 +35,18 @@ var workbook = new kendo.ooxml.Workbook({
     }
   ]
 });
-kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+workbook.toDataURLAsync().then(function (dataURI) {
+    kendo.saveAs({
+      dataURI: dataURI,
+      fileName: "Test.xlsx",
+    });
 });
 </script>
 ```
 
 ## Automatically Adjusting Widths to Content
 
-To enable the automatic width calculation, set the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns.autowidth) option to `true`. When set, the he column stretches to accommodate the longest cell value.
+To enable the automatic width calculation, set the [`autoWidth`](/api/javascript/ooxml/workbook/configuration/sheets.columns#sheetscolumnsautowidth) option to `true`. When set, the he column stretches to accommodate the longest cell value.
 
 ```dojo
 <script>
@@ -63,9 +66,11 @@ var workbook = new kendo.ooxml.Workbook({
     }
   ]
 });
-kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+workbook.toDataURLAsync().then(function (dataURI) {
+    kendo.saveAs({
+      dataURI: dataURI,
+      fileName: "Test.xlsx",
+    });
 });
 </script>
 ```

@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Chart Documentation - Keyboard Navigation
 description: "Get started with the jQuery Chart by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["chart"]
 slug: keynav_kendoui_charts_widget
 position: 2
 ---
@@ -46,4 +47,4 @@ When the legend area is focused, the following keyboard commands are available:
 
 * [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Chart]({% slug accessibility_kendoui_charts_widget %})
+* [Accessibility in the Chart]({% slug jquery_chart_accessibility %})

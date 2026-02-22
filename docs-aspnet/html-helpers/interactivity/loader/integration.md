@@ -2,6 +2,7 @@
 title: Integration
 page_title: Integration
 description: "Integrating The Telerik UI Loader component for {{ site.framework }}."
+components: ["loader"]
 slug: htmlhelpers_loader_aspnetcore_integration
 position: 3
 ---
@@ -50,7 +51,7 @@ The following example demonstrates how the Loader can be integrated in a Button 
     </style>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         function onClick() {
             var loader = $("#loader").data("kendoLoader");      
@@ -203,7 +204,7 @@ The following example demonstrates how the Loader can be used as a building bloc
     </style>
 ```
 {% endif %}
-```Script
+```JS script
     <script>
         var loadingPanelVisible = false;
 

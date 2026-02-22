@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI TabStrip component for {{ site.framework }} enables users to categorize content in different views for tidier visualization."
+components: ["tabstrip"]
 previous_url: /helpers/html-helpers/tabstrip, /helpers/navigation/tabstrip/overview
 slug: htmlhelpers_tabstrip_aspnetcore
 position: 0
@@ -182,14 +183,19 @@ The following example demonstrates the basic configuration of the TabStrip.
 
 ## Functionality and Features
 
-* [Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})—The TabStrip provides various configuration options for the tabs, which allows you to organize the content into different views.
-* [Tab content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})—You can customize the content shown to the user.
-* [Animation effects]({% slug htmlhelpers_tabstrip_animations_aspnetcore %})—The animation options help you to configure the desired switch transitions between the different tabs.
-* [Appearance Customization]({% slug tabstrip_appearance %})—The TabStrip provides various settings to control the desired appearance.
+|Feature|Description|
+|-------|-----------|
+| [Appearance]({% slug tabstrip_appearance %})| The TabStrip provides various settings to control the appearance of the tabs. |
+| [Data Binding]({% slug tabstrip_databinding_aspnetmvc %})| The component supports various data binding approaches including items binding, model binding, and remote data binding for loading tab content dynamically. |
+| [Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})| The TabStrip supports various built-in options for the tabs that allow you to organize the content into different views. |
+| [Tab content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})| You can customize each tab's contnet. |
 {% if site.mvc %}
-* [Forms]({% slug forms_tabstrip_aspnetmvc %})—You can render forms inside the TabStrip and let users submit data.
+| [Forms]({% slug forms_tabstrip_aspnetmvc %})| You can render forms inside the TabStrip and let users submit data. |
 {% endif %}
-* [Images]({% slug htmlhelpers_tabstrip_images_aspnetcore %})—The TabStrip supports adding custom images.
+| [Images]({% slug htmlhelpers_tabstrip_images_aspnetcore %})| Include images or icons in the tabs.  |
+| [Animation effects]({% slug htmlhelpers_tabstrip_animations_aspnetcore %})| The animation options help you to configure the desired switch transitions between the different tabs. |
+| [Events]({% slug events_tabstrip_aspnetcore %})| The component emits a variety of events that allow you to implement custom functionality. |
+| [Accessibility]({% slug htmlhelpers_tabstrip_accessibility %})| The TabStrip is accessible by screen readers and provides WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_tabstrip%}) for faster navigation. |
 
 ## Next Steps
 

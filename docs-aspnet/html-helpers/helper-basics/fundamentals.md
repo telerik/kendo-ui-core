@@ -2,6 +2,7 @@
 title: Fundamentals
 page_title: Fundamentals
 description: "Get started with Telerik UI for ASP.NET Core and learn the basics about the helpers."
+components: ["general"]
 slug: fundamentals_core
 previous_url: /getting-started/helper-basics/fundamentals
 position: 1
@@ -11,7 +12,7 @@ position: 1
 
 Telerik UI for ASP.NET Core is a set of server-side wrappers (HTML and tag helpers) that allow you to use the Kendo UI components in .NET Core.
 
-For more information on the difference between helpers and components, refer to the [Telerik UI for ASP.NET Core introduction article]({% slug overview_aspnetmvc6_aspnetmvc %}#widgets-vs-helpers).
+For more information on the difference between helpers and components, refer to the [Telerik UI for ASP.NET Core introduction article]({% slug knownissues_aspnetmvc6_aspnetmvc %}#components-vs-helpers).
 
 As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](https://api.jquery.com/ready/). As a result, regardless of whether the document is ready at the point of execution or not, the code placed outside a document-ready handler is executed before the code within the handler. This change affects the usage of the Telerik UI for ASP.NET Core components because the components for the MVC helpers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a component and its API calls within a document-ready handler.
 
@@ -61,7 +62,7 @@ Add the desired options as attributes and set their value.
 
 When binding a Tag Helper editor to a Model property, use the attribute `for`. It will automatically set the `name` attribute to the name of the Model property.
 
-```TagHelperFor
+```TagHelper
     <kendo-numerictextbox for="currency" format="c" min="0" spinners="false" max="200">
     </kendo-numerictextbox>
 ```
@@ -79,7 +80,7 @@ You can get a reference to the client-side object that is initialized by the hel
     <kendo-numerictextbox name="age" value="10">
     </kendo-numerictextbox>
 ```
-```script
+```JS script
     $(function(){
         var numeric = $("#age").data("kendoNumericTextBox");
         numeric.value(10);
@@ -107,7 +108,7 @@ If you have deferred the initialization of the component, make sure you get its 
 
     @Html.Kendo().DeferredScripts()
 ```
-```script
+```JS script
     $(function(){
         var numeric = $("#age").data("kendoNumericTextBox");
         numeric.value(10);

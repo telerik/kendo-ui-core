@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Kendo UI for jQuery TaskBoard Documentation - Keyboard Navigation
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["taskboard"]
 slug: keynav_kendoui_taskboard_widget
 position: 2
 ---
@@ -47,4 +48,4 @@ The following example demonstrates how to register a shortcut for focusing the l
 
 * [Keyboard Navigation of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the TaskBoard]({% slug accessibility_kendoui_taskboard_widget %})
+* [Accessibility in the TaskBoard]({% slug jquery_taskboard_accessibility %})

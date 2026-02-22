@@ -2,6 +2,7 @@
 title: Date and Time Formatting
 page_title: Date and Time Formatting
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to define the date and time format."
+components: ["datetimepicker"]
 slug: datetimeformatting_datetimepicker_aspnetcore
 position: 6
 ---

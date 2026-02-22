@@ -2,6 +2,7 @@
 title: Overview
 page_title: Providing Client-Side Resources
 description: "Get started with {{ site.product }} and learn about the different ways of copying the client-side resources into a Telerik UI for ASP.NET Core project."
+components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-vscode, /mvc-6/getting-started-vscode, /getting-started/getting-started-copy-client-resources, /getting-started/installation/getting-started-copy-client-resources, /installation/getting-started-copy-client-resources, installation-mvc/adding-client-side-resources/getting-started-copy-client-resources
 slug: copyclientresources_aspnetmvc6_aspnetmvc
 position: 1
@@ -33,18 +34,8 @@ You can use the following methods for adding the Kendo client-side resources to 
 
 ## Creating Custom Script Bundles
 
-{% if site.core %}
-Depending on the Telerik UI components that you use in your project, you may need lighter scripts that support only the components in your application. You have the choice to select scripts for individual components or to create your custom scripts. For more details, see [Creating Your Own Custom Script Bundles]({% slug custombundles_core %}).
+Depending on the Telerik UI components that you use in your project, you may need lighter scripts that support only the components in your application. You can create your custom script file that contains the scripts for the required components or use combined scripts. For more details, refer to the [Creating Custom Bundles article]({% slug creating-custom-bundles %}).
 
-{% else %}
-Depending on the Telerik UI components that you use in your project, you may need only the scripts that support the components in your application. To find the scripts that you must include in your application, check the documents under [**Installation** > **Providing Client-Side Resources** > **Creating Custom Script Bundles**]({% slug custombundles_core %}). For example, to find out what scripts are required to use the Telerik UI Charts, see the [Individual Scripts for Charts]({% slug script_filesfor_charts_widgets %}) document.
-
-Clients with a commercial license can use the [Custom Download Builder tool](https://www.telerik.com/download/custom-download) to create a single JavaScript file which contains the dependencies only for the required widgets and features.
-
-> * Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
-> * Do not use RequireJS to load Download Builder packages because the tool will not create the required AMD modules.
-> * Make sure the `Server Wrappers` checkbox is checked&mdash;this will include the scripts required by the wrappers.
-{% endif %}
 ## Next Steps
 
 * [Installing a License File]({% slug installation_license_key_aspnetcore %})
@@ -53,7 +44,7 @@ Clients with a commercial license can use the [Custom Download Builder tool](htt
 {% if site.core %}
 * [Using LibMan to Add Client-Side Resources]({% slug using_libman %})
 {% endif %}
-* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
+* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug creating-custom-bundles %})
 
 ## See Also
 

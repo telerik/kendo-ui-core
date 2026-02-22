@@ -2,6 +2,7 @@
 title: Snippets
 page_title: Visual Studio Snippets
 description: Learn more on the available VS snippets and how they help you speed up the developing web applications with Progress Telerik UI for ASP.NET Core.
+components: ["installerandvsextensions"]
 slug: snippets-vs
 position: 16
 ---

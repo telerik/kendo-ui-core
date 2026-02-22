@@ -6,6 +6,7 @@ page_title: Hide the Vertical Scrollbar
 slug: grid-hide-vertical-scrollbar
 tags: aspnet, mvc, grid, hide, vertical, scrollbar
 res_type: kb
+components: ["general"]
 component: grid
 ---
 

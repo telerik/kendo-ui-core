@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery TextBox Documentation - TextBox Appearance
 description: "Learn how to apply different styling options to the TextBox component."
+components: ["textbox"]
 previous_url: /styles-and-layout/styling-components/textbox-styling
 slug: appearance_kendoui_textbox_widget
 position: 2

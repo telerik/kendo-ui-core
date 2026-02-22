@@ -21,8 +21,8 @@ export const __meta__ = {
             enabled: true,
             encoded: true,
             label: null,
-            rounded: "medium",
-            size: "medium",
+            rounded: undefined,
+            size: undefined,
             wrapperClass: "k-checkbox-wrap"
         },
 

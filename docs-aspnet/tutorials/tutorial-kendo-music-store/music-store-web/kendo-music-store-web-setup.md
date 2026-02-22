@@ -2,6 +2,7 @@
 title: Set Up the Project
 page_title: Set Up the Project - Music Store Web App Tutorial
 description: "Learn how to set up the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: projectsetup_muscistorewebapp_aspnetmvc
 position: 1
 ---
@@ -22,7 +23,7 @@ Start by adding Kendo UI to the project. The Kendo UI distribution can be downlo
 
 ### Download Kendo UI
 
-The preferred method of getting Kendo UI is to browse to [telerik.com](https://www.telerik.com/download/kendo-ui) and download Kendo UI as a `.zip` file. Depending on whether you are using the Trial version or have purchased the full Commercial distribution, you have a `.zip` file that follows one of these directory structures:
+The preferred method of getting Kendo UI is to browse to [telerik.com](https://www.telerik.com/download/kendo-ui) and download Kendo UI as a `.zip` file. Depending on whether you are using the Trial license or have purchased the full Commercial distribution, you have a `.zip` file that follows one of these directory structures:
 
 ![{{ site.product_short }} The directory structure](images/kendo-commercial-zip-layout.png)
 

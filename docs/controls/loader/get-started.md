@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Loader Documentation - Getting Started with the Loader
 description: "Get started with the jQuery Loader by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["loader"]
 slug: getting_started_kendoui_loader_widget
 position: 1
 ---
@@ -82,8 +83,4 @@ The component has a [`type`](/api/javascript/ui/loader/configuration/type) optio
 * [JavaScript API Reference of the jQuery Loader](/api/javascript/ui/loader)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

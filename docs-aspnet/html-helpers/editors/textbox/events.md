@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TextBox component for {{ site.framework }}."
+components: ["textbox"]
 slug: events_textbox_aspnetcore
 position: 7
 ---
@@ -32,7 +33,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 </kendo-textbox>
 ```
 {% endif %}
-```script.js
+```JS script.js
   <script>
   function textbox_change() {
       // Handle the change event.

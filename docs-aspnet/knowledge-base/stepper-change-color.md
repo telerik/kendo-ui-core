@@ -7,6 +7,7 @@ slug: stepper-change-color
 tags: stepper, step, color, dynamic
 ticketid: 1576676
 res_type: kb
+components: ["general"]
 component: stepper
 ---
 
@@ -291,7 +292,7 @@ The scenario relies on the following key steps:
   </script>
 
 ```
-```Styles
+```CSS Styles
   <style>
     .k-stepper [class*="correct"] .k-step-indicator {
         background-color: green;

@@ -7,6 +7,7 @@ slug: treelist-drag-and-scroll-mobile
 tags: treelist, android, ios, mobile, drag, drop, scroll
 ticketid: 1179396
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment
@@ -41,14 +42,13 @@ To overcome the interference of the device scrolling and the drag-and-drop:
 	<div id="treelist"></div>
 	<script>
 	$(document).ready(function() {
-		var service = "https://demos.telerik.com/kendo-ui/service";
+		var service = "https://demos.telerik.com/service/v2/core";
 
 		$("#treelist").kendoTreeList({
 		dataSource: {
 			transport: {
 			read: {
-				url: service + "/EmployeeDirectory/All",
-				dataType: "jsonp"
+				url: service + "/EmployeeDirectory/All"
 			}
 			},
 			schema: {

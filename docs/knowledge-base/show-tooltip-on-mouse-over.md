@@ -5,9 +5,9 @@ description: "Learn how to show a toolbar on mouse over in the Kendo UI Validato
 previous_url: /framework/validator/how-to/show-tooltip-on-mouse-over, /controls/editors/validator/how-to/show-tooltip-on-mouse-over
 slug: howto_showtooltiponmouseover_validator
 tags: telerik, kendo, jquery, validator, show, tooltip, on, mouseover
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment
@@ -65,7 +65,7 @@ The following example demonstrates how to achieve the desired scenario.
         height: 323px;
         margin: 0 auto;
         padding: 10px 20px 20px 170px;
-        background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
+        background: url('https://demos.telerik.com/kendo-ui/content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
       }
       #tickets h3 {
         font-weight: normal;
@@ -146,9 +146,9 @@ The following example demonstrates how to achieve the desired scenario.
           $("#age").kendoNumericTextBox();
           var tooltip = $("#tickets").kendoTooltip({
             filter: ".k-invalid",
-            content: function(e) {
-              var name = e.target.attr("name") || e.target.closest(".k-input").find(".k-invalid:input").attr("name");
-              var errorMessage = $("#tickets").find("[data-for=" + name + "]");
+             content: function(e) {
+              var name = e.target.children("input[id]").attr("name") || e.target.children().closest(".k-input").find(".k-invalid:input").attr("name");
+              var errorMessage = $("#tickets").find("[data-for=" + name + "]");              
               return '<span class="k-icon k-warning"> </span>' + errorMessage.text();
             },
             show: function() {

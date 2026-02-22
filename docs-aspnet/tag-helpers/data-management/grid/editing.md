@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Learn the basics when working with the Telerik UI Grid TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["grid"]
 slug: editing_grid_aspnetcore
 position: 3
 ---
@@ -21,31 +22,32 @@ To enable the data editing capabilities:
 The example below demonstrates how to implement batch editing in the Grid. For a runnable example, refer to the [demo on setting the batch edit mode of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing).
 
 ```tagHelper
-<kendo-grid name="grid" height="550">
-    <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">
+<kendo-grid name="grid" height="550" navigatable="true">
+    <datasource page-size="20" type="DataSourceTagHelperType.Ajax" batch="true" server-operation="false" on-error="error_handler">
         <transport>
-            <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
-            <update url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Update"  />
-            <destroy url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Destroy"   />
-            <create url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Create" />
+            <read url="@Url.Action("Editing_Read", "Grid")"/>
+            <update url="@Url.Action("Editing_Update", "Grid")"/>
+            <create url="@Url.Action("Editing_Create", "Grid")"/>
+            <destroy url="@Url.Action("Editing_Destroy", "Grid")"/>
         </transport>
-        <schema  >
+        <schema data="Data" total="Total">
             <model id="ProductID">
                 <fields>
-                    <field name="ProductName"></field>
+                    <field name="ProductName" type="string"></field>
                     <field name="UnitPrice" type="number"></field>
                     <field name="UnitsInStock" type="number"></field>
+                    <field name="Discontinued" type="boolean"></field>
                 </fields>
             </model>
         </schema>
     </datasource>
     <editable mode="incell" />
-    <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
-    </pageable>
+    <pageable enabled="true"/>
+    <sortable enabled="true"/>
+    <scrollable enabled="true"/>
     <toolbar> <!-- Enable the built-in grid's Toolbar commands "create", "save", and "cancel". -->
         <toolbar-button name="create" text="Add new record"></toolbar-button> <!-- Adds an empty row to the grid to create a new record. -->
         <toolbar-button name="save" text="Save Changes"></toolbar-button> <!-- Saves the new and the edited records. -->
-        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button> <!-- Reverts any data changes done by the end user. -->
     </toolbar>
     <columns>
         <column field="ProductName" title="Product Name" width="240" />
@@ -93,7 +95,7 @@ The example below demonstrates how to implement batch editing in the Grid. For a
     )
 )
 ```
-```ProductViewModel.cs
+```C# ProductViewModel.cs
     public class ProductViewModel
     {
         public int ProductID

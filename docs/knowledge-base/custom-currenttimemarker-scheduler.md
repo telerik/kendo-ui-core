@@ -6,6 +6,7 @@ page_title: How to Set a Custom Time for the CurrentTimeMarker in Scheduler
 slug: custom-currenttimemarker-scheduler
 tags: scheduler, currenttimemarker, customization, javascript, jquery
 res_type: kb
+components: ["scheduler"]
 ticketid: 1643757
 ---
 

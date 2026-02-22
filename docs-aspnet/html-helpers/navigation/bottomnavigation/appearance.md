@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the BottomNavigation component for {{ site.framework }}."
+components: ["bottomnavigation"]
 slug: htmlhelpers_appearance_bottomnavigation_aspnetcore
 position: 3
 ---
@@ -25,7 +26,7 @@ The BottomNavigation component provides the following styling options:
 
 ### ItemFlow
 
-To control the the position of the text labels against the items, set the [`ItemFlow`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#itemflowkendomvcuibottomnavigationitemflow) option to `Vertical` or `Horizonatal`.
+To control the position of the text labels against the items, set the [`ItemFlow`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#itemflowkendomvcuibottomnavigationitemflow) option to `Vertical` or `Horizonatal`.
 
 ```HtmlHelper
     @(Html.Kendo().BottomNavigation()

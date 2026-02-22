@@ -6,7 +6,7 @@ slug: access-the-selected-data-value-field-on-the-listbox-change-event
 ticketid: 1118759
 type: how-to
 res_type: kb
-component: listbox
+components: ["listbox"]
 ---
 
 ## Environment

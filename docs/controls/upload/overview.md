@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Upload Documentation - Upload Overview
 description: "Try now the Kendo UI for jQuery Upload component covering everything from operation modes and templates to file processing and dragging and dropping."
+components: ["upload"]
 slug: overview_kendoui_upload_widget
 position: 1
 ---
@@ -27,7 +28,7 @@ The Upload provides a set of [default API configuration options](/api/javascript
 | [File restrictions]({% slug validation_upload_widget %})              |You can also use the Upload to validate the files selected for upload in terms of their extension and size.
 | [Templates]({% slug templates_upload %})                              |The Upload enables you to use templates for rendering its content and layout. 
 | [Globalization]({% slug globalization_upload %})                      |The Upload supports globalization to ensure that it can fit well in any application, no matter what [languages and locales]({% slug localization_upload %}) need to be supported. Additionally, the Upload supports [rendering in a right-to-left (RTL) direction]({% slug rtl_upload %}).
-| [Accessibility]({% slug accessibility_upload %})                      |The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_upload %}).
+| [Accessibility]({% slug jquery_upload_accessibility %})                      |The Upload is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_upload %}).
 
 ## Next Steps
 

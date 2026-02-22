@@ -6,7 +6,7 @@ page_title: Select a row from a Grid in another page - Kendo UI for jQuery Data 
 slug: grid-redirect-and-select-a-row
 tags: grid, redirect, navigate, new, page, select, row
 res_type: how-to
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -39,7 +39,7 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
 
 ```
     <a href="https://runner.telerik.io/fullscreen/oDUzU?id=#:data.EmployeeID#"/>                
-        <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
     </a>
 ```
 
@@ -148,10 +148,9 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
                $(document).ready(function() {
                     $("#grid").kendoGrid({
                         dataSource: {
-                          type: "odata",
                           transport: {
                               read: {
-                                  url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+                                  url: "https://demos.telerik.com/service/v2/core/Employees",
                               }
                           }
                         },

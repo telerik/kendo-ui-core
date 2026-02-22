@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/server-filtering, /html-helpe
 slug: scheduler-server-filtering
 tags: scheduler, server, filter, events, dates, ranges, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 
@@ -88,7 +89,7 @@ How can I filter the events of the {{ site.framework }} Scheduler on the server 
         </kendo-scheduler>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
     <script>
         function getAdditionalData() {
             var scheduler = $("#scheduler").data("kendoScheduler"); // Get a reference to the Scheduler.
@@ -119,7 +120,7 @@ How can I filter the events of the {{ site.framework }} Scheduler on the server 
 
 1. Create a `FilterRange` Model to ensure the received date range is parsed correctly. Define the setters of the `start` and `end` properties to convert the dates to UTC.
 
-    ```FilterRange.cs
+    ```C# FilterRange.cs
         using System;
         using System.Collections.Generic;
         using System.Linq;
@@ -151,7 +152,7 @@ How can I filter the events of the {{ site.framework }} Scheduler on the server 
 
 1. Intercept the parameter of type `FilterRange` in the `Read` Action and return the filtered events data to the Scheduler.
 
-    ```HomeController.cs
+    ```C# HomeController.cs
         public virtual JsonResult Read(DataSourceRequest request, FilterRange range)
         {
             var data = taskService.GetRange(range.Start, range.End);

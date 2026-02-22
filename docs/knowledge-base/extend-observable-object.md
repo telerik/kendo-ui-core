@@ -5,9 +5,9 @@ description: "Bind a container to an extended ObservableObject with default valu
 slug: howto_bindacontainertoanextended_observableobjectwithdefaultvalues_mvvm
 previous_url: /framework/mvvm/how-to/extend-observable-object
 tags: telerik, kendo, jquery, mvvm, pattern, architecture, bind, container, to, extended, observableobject, with, default, values
-component: mvvm pattern
 type: how-to
 res_type: kb
+components: ["mvvm pattern"]
 ---
 
 ## Environment
@@ -45,12 +45,12 @@ As an alternative, default values can be defined using the `Observable.fn.set` m
     <div id="form">
       <fieldset>
         <legend>WORKING:</legend>
-        <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md k-valid" style="">
+        <span class="k-input k-textbox k-valid" style="">
           <input type="text" data-bind="value: filter.name" data-value-update="keypress" title="value" data-role="textbox" class="k-input-inner" /></span>
-        <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md k-valid" style="">
+        <span class="k-input k-textbox k-valid" style="">
           <input type="text" data-bind="value: filter.name" data-value-update="keypress" title="value" data-role="textbox" class="k-input-inner" />
         </span>
-        <button type="button" data-bind="events: {click: click}" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+        <button type="button" data-bind="events: {click: click}" class="k-button">
           <span class="k-button-text">this.set("filter.name", "test");</span>
         </button>
       </fieldset>

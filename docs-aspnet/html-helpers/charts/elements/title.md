@@ -2,6 +2,7 @@
 title: Title and Subtitle
 page_title: Title and Subtitle
 description: "Learn how to control the appearance of the {{ site.product }} Charts' titles."
+components: ["chart"]
 slug: htmlhelpers_charts_title_aspnetcore
 previous_url: /html-helpers/charts/elements/title-and-legend 
 ---
@@ -96,6 +97,5 @@ The Chart supports the following properties which enable you to customize the ap
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API of the Chart for {{ site.framework }}](/api/chart)

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Calendar component by following a complete step-by-step tutorial."
+components: ["calendar"]
 slug: aspnetcore_calendar_getting_started
 position: 1
 ---
@@ -40,7 +41,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <p>
 
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Calendar
@@ -157,7 +158,7 @@ You can reference the Calendar instances that you have created and build on top 
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var calendarReference = $("#calendar").data("kendoCalendar"); // calendarReference is a reference to the existing calendar instance of the helper.
     </script>
@@ -165,7 +166,7 @@ You can reference the Calendar instances that you have created and build on top 
 
 1. Use the [Calendar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar#methods) to control the behavior of the widget. In this example, you will use the `view` method to access the calendar active view.
 
-    ```script
+    ```JS script
     <script>
         var calendarReference = $("#calendar").data("kendoCalendar"); // calendarReference is a reference to the existing timeCalendar instance of the helper.
         var view = calendarReference.view(); // Gets an instance of the current view used by the Calendar.

@@ -8,6 +8,7 @@ position:
 tags: grid, workbook, format, sheet, column, excel, export
 ticketid: 1605832
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

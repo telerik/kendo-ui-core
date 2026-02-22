@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery DropDownList Documentation - Keyboard Navigation
 description: "Get started with the jQuery DropDownList by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["dropdownlist"]
 slug: keynav_kendoui_ddl_widget
 position: 2
 ---
@@ -16,4 +17,4 @@ For a complete example, refer to the [demo on keyboard navigation of the DropDow
 
 * [Keyboard Navigation by the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the DropDownList]({% slug accessibility_kendoui_ddl_widget %})
+* [Accessibility in the DropDownList]({% slug jquery_dropdownlist_accessibility %})

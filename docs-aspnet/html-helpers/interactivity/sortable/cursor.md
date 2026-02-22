@@ -2,6 +2,7 @@
 title: Cursor
 page_title: Cursor
 description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn how to customize the displayed cursor."
+components: ["sortable"]
 slug: htmlhelpers_sortable_aspnetcore_cursor
 position: 4
 ---

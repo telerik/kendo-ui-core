@@ -2,15 +2,11 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 previous_url: /helpers/html-helpers/charts/charts, /helpers/html-helpers/charts, /helpers/html-helpers/charts/chart/overview, /helpers/charts/overview
 slug: htmlhelpers_charts_aspnetcore
 position: 0
 ---
-{% if site.core %}
-    {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultssettingsbuildert" %}
-{% else %}
-    {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultsbuildert" %}
-{% endif %}
 
 # {{ site.framework }} Chart Overview
 
@@ -32,8 +28,7 @@ The following image displays the structure of the Chart.
 
 To see the component in action, check the examples:
 
-* [Demo page for the Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Demo page for the Chart TagHelper](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
+* [Demo page for {{ site.framework }} Charts](https://demos.telerik.com/{{ site.platform }}/charts)
 
 ## Initializing the Chart
 
@@ -290,7 +285,7 @@ The Chart enables you to configure each axis to display bands with different col
 
 ### Global Settings
 
-You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`]({{ AxisDefaults }}).
+You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`](/api/kendo.mvc.ui.fluent/chartbuilder#axisdefaultssystemaction).
 
 ```HtmlHelper
     .AxisDefaults(a=> a
@@ -337,7 +332,7 @@ The Telerik UI for {{ site.framework }} Chart supports an extensive set of serie
 
 To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Chart client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
-```
+```JavaScript
     // Place the following after the Chart for {{ site.framework }} declaration.
     <script>
         $(function() {

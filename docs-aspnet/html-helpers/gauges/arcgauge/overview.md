@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ArcGauge component for {{ site.framework }}."
+components: ["arcgauge"]
 previous_url: /helpers/gauges/arcgauge/overview
 slug: overview_arcgaugehelper_aspnetcore
 position: 0

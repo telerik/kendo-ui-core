@@ -2,6 +2,7 @@
 title: ToggleButton
 page_title: jQuery ToolBar Documentation - ToggleButton Command Type
 description: "Get started with the jQuery ToolBar by Kendo UI and learn how to configure and use the ToggleButton command type."
+components: ["toolbar"]
 previous_url: /controls/toolbar/togglebutton
 slug: toggle_button_toolbar_widget
 ---

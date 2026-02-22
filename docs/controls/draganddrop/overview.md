@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Drag-and-Drop Documentation - Drag-and-Drop Overview
 description: "Get started with the jQuery Drag-and-Drop by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["draganddrop"]
 slug: overview_kendoui_draganddrop_intercativityandux
 position: 0
 ---

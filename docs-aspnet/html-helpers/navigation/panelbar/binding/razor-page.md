@@ -3,55 +3,59 @@ title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI PanelBar component for {{ site.framework }} in a Razor Pages application with an example on how to configure its remote binding DataSource."
 slug: htmlhelpers_panelbar_razorpage_aspnetcore
-position: 5
+components: ["panelbar"]
+position: 6
 ---
 
 # PanelBar in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Loader for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI PanelBar for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_panelbar_databinding_aspnetcore %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the PanelBar component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [PanelBar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PanelBar/PanelBarRemoteDate.cshtml).
+## Binding to Remote Data
 
-## Getting Started
+In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL must refer to the method name in the `PageModel`.
 
-In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel.
+```HtmlHelper
+@page
+@model IndexModel
 
-```tab-HtmlHelper(cshtml)   
-     
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-	@Html.AntiForgeryToken()
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
 	
-	@(Html.Kendo().PanelBar()
-        .Name("panelbar")
-        .DataTextField("Name")
-        .DataSource(dataSource => dataSource
-            .Read(read => read
-                .Url("/PanelBar/PanelBarRemoteData?handler=Read")
-            )
+@(Html.Kendo().PanelBar()
+    .Name("panelbar")
+    .DataTextField("Name")
+    .DataSource(dataSource => dataSource
+        .Read(read => read
+            .Url(Url.Page("Index", "Read"))
         )
-	)	
+    )
+)	
 ```
 {% if site.core %}
-```tab-TagHelper(cshtml)
+```TagHelper
+@page
+@model IndexModel
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
     
-    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-	@Html.AntiForgeryToken()
-    
-    <kendo-panelbar name="panelbar" datatextfield="Name">
-        <hierarchical-datasource>
-            <transport>
-                <read url="/PanelBar/PanelBarRemoteData?handler=Read" />
-            </transport>
-        </hierarchical-datasource>
-    </kendo-panelbar>
+<kendo-panelbar name="panelbar" datatextfield="Name">
+    <hierarchical-datasource>
+        <transport>
+            <read url="@Url.Page("Index", "Read")" />
+        </transport>
+    </hierarchical-datasource>
+</kendo-panelbar>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
-
+```C# PageModel
+public class IndexModel : PageModel
+{
     public JsonResult OnGetRead(int? id)
     {       
 		//employees is the DBContext
@@ -67,7 +71,10 @@ In order to set up the PanelBar component bindings, you need to configure the `R
         );
         return new JsonResult(result);
     }
+}
 ```
+
+For the complete project, refer to the [PanelBar in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PanelBar/PanelBarRemoteDate.cshtml).
 
 ## See Also
 

@@ -2,6 +2,7 @@
 title: Orientation
 page_title: jQuery Timeline Documentation - Orientation
 description: "See how to control the orientation of the Timeline component for jQuery by Kendo UI."
+components: ["timeline"]
 slug: orientation_kendoui_timeline_widget
 position: 3
 ---

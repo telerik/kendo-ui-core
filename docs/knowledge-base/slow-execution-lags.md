@@ -7,7 +7,7 @@ previous_url: /troubleshoot/troubleshooting-memory-leaks
 tags: telerik, kendoui, jquery, troubleshooting, performance, browser, slow, execution, lags
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

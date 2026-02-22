@@ -2,6 +2,7 @@
 title: Adding Telerik UI to Existing Projects
 page_title: Adding Telerik UI to Existing Projects
 description: "Learn how to convert an existing {{ site.framework }} application to a {{ site.product }} application."
+components: ["installerandvsextensions"]
 previous_url: /installation/vs-integration/convert-project-wizard, /getting-started/vs-integration/convert-project-wizard, /vs-integration-mvc/convert-project-wizard
 slug: convertprojectwizard_visualstudio_aspnetcore
 position: 10
@@ -17,7 +18,7 @@ The **Convert Project Wizard** turns an existing {% if site.core %}ASP.NET Core{
 > The Convert Project Wizard does not support converting Razor Pages projects and projects with .Net version 5.
 >
 > The Convert Project Wizard is independent from the Visual Studio version and requires:
-> - A .NET Core project version 3.1, 6, 7 or 8
+> - A project that targets .NET 8 or 9
 > - The `Microsoft.NET.Sdk.Web` to be included as property of the project file
 >    ```
 >        <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -52,7 +53,9 @@ To start the wizard, use either the **Extensions** menu in VS or the context men
 The conversion wizard provides the following steps:
 - [Version selection](#version-selection)
 - [Theme selection](#theme-selection)
+{% if site.mvc %}
 - [Project settings](#project-settings)
+{% endif %}
 
 ## Version Selection
 

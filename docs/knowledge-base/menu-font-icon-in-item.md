@@ -7,6 +7,7 @@ slug: menu-font-icon-in-item
 tags: font,icon,menu
 ticketid: 1413471
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment

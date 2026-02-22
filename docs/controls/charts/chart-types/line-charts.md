@@ -2,6 +2,7 @@
 title: Line Charts
 page_title: jQuery Chart Documentation - Line Charts
 description: "Learn how to create a Kendo UI Line Chart and configure its options."
+components: ["chart"]
 slug: linetypeoscharts_widget
 ---
 

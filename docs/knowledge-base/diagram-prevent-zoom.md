@@ -7,7 +7,7 @@ slug: diagram-prevent-zoom
 tags: diagram, prevent, zoom, zooming, disallow, stop
 ticketid: 1498173
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

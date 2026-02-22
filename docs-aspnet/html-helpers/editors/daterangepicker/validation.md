@@ -2,6 +2,7 @@
 title: Validation
 page_title: Validation
 description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to implement validation rules for its input value."
+components: ["daterangepicker"]
 slug: validation_daterangepicker_aspnetcore
 position: 5
 ---

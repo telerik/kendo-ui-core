@@ -2,6 +2,7 @@
 title: Item Templates
 page_title: Item Templates
 description: "Get started with the {{ site.product }} ListBox and learn how to customize its item templates."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/templates
 slug: htmlhelpers_listbox_templates_aspnetcore
 position: 3
@@ -87,7 +88,7 @@ The ListBox provides templates for its items that are passed as a function or st
             <draggable enabled="true" placeholder="customPlaceholder"/>
     </kendo-listbox>
 ```
-``` IndexController.cs
+```C# IndexController.cs
     public class ListBoxController : Controller
     {
         private IProductService productService;
@@ -131,7 +132,7 @@ The ListBox provides templates for its items that are passed as a function or st
     }
 ```
 {% else %}
-``` IndexController.cs
+```C# IndexController.cs
     public class ListBoxController : Controller
     {
         private IProductService productService;
@@ -175,7 +176,7 @@ The ListBox provides templates for its items that are passed as a function or st
     }
 ```
 {% endif %}
-``` scripts
+```JS scripts
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url(@Url.Content("~/shared/web/Customers/")#:data.CustomerID#.jpg);"></span>
         <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>

@@ -2,6 +2,7 @@
 title: Dimensions
 page_title: jQuery Window Documentation - Dimensions
 description: "Get started with the jQuery Window by Kendo UI and learn how to set its dimensions and resize it depending on the content it displays."
+components: ["window"]
 slug: dimensionsresize_window
 position: 4
 ---

@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: gantt_events
 position: 10
 ---
@@ -10,7 +11,7 @@ position: 10
 
 You can subscribe to [all Gantt events](/api/kendo.mvc.ui.fluent/gantteventbuilder) and then use them to further customize the behavior of the component.
 
-The example below demonstrates how to use the [`Move` event](api/kendo.mvc.ui.fluent/gantteventbuilder#movesystemstring) that the Gantt generates when the user moves a task.
+The example below demonstrates how to use the [`Move` event](/api/kendo.mvc.ui.fluent/gantteventbuilder#movesystemstring) that the Gantt generates when the user moves a task.
 
 ```HtmlHelper
 @using Kendo.Mvc.UI

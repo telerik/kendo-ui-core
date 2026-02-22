@@ -6,7 +6,7 @@ page_title: Manually Add Exception to recurring Event - Kendo UI Scheduler for j
 slug: scheduler-manually-add-exceptio-to-recurring
 tags: kendo, kendoui, scheduler, recurring-events, exception, add-exception
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

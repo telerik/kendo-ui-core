@@ -5,9 +5,9 @@ description: "Learn how to transform the content during export while applying th
 slug: howto_applytransformationsduringexport_drawingapi
 previous_url: /framework/drawing/how-to/export-transform
 tags: telerik, kendo, jquery, drawing, api, library, apply, transformations, during, export
-component: drawing
 type: how-to
 res_type: kb
+components: ["drawing"]
 ---
 
 ## Environment
@@ -42,7 +42,7 @@ The following example demonstrates how to produce a PNG image of a page section 
 For more information, refer to the article on [transformation API](/api/javascript/geometry/transformation/methods/scale).
 
 ```dojo
-    <button type="button" class="export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+    <button type="button" class="export-img k-button">
       <span class="k-button-text">Export as Image</span>
     </button>
     <div class="content">
@@ -102,7 +102,7 @@ For more information, refer to the article on [transformation API](/api/javascri
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.png",
-            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/service/v2/core/export"
           });
         });
       });

@@ -7,6 +7,7 @@ slug: listview-pdf-export-all-pages
 tags: listview, pdf, export, all pages
 ticketid: 1139418
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

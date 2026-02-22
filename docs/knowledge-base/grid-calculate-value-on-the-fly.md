@@ -6,6 +6,7 @@ page_title: Update Calculated Cell Value on the Fly - Kendo UI for jQuery Data G
 slug: grid-calculate-value-on-the-fly
 tags: grid, calculated, cell, value, dynamically, calculate, update, result
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

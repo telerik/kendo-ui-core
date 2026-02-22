@@ -2,8 +2,9 @@
 title: Layout
 page_title: Layout
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} and use its built-in layout options."
+components: ["diagram"]
 slug: htmlhelpers_diagram_aspnetcore_layout
-position: 4
+position: 5
 ---
 
 # Layout

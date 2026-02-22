@@ -7,6 +7,7 @@ slug: chart-how-to-draw-a-custom-target-line-over-a-bar
 tags: chart, bar, target,
 ticketid: 1140477
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

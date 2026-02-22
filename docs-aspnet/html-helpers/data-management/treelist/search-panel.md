@@ -2,6 +2,7 @@
 title: Search Panel
 page_title: Search Panel
 description: "Learn how to enable the searching functionality of the Telerik UI TreeList for {{ site.framework }}."
+components: ["treelist"]
 slug: htmlhelpers_treeList_aspnetcore_searchpanel
 position: 5
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI DockManager component for {{ site.framework }}."
+components: ["dockmanager"]
 slug: overview_dockmanagerhelper_aspnetcore
 position: 0
 ---
@@ -177,7 +178,7 @@ You can set the DockManager pane content through the `Content()`, `ContentHandle
 
 * [Docking Panes]({% slug dock_types_dockmanager_aspnetcore %})&mdash;You can dock panes globally or within other inner panes.
 * [Pane Types]({% slug pane_types_dockmanager_aspnetcore %})&mdash;Use different pane types depending on the hierarchical structure you want to achieve.
-* [Events](% slug events_dockmanager_aspnetcore%)&mdash;You can explicitly handle a variety of event in order to manipulate the component.
+* [Events]({% slug events_dockmanager_aspnetcore%})&mdash;You can explicitly handle a variety of event in order to manipulate the component.
 
 ## Next Steps
 

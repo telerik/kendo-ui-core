@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started - Kendo UI for jQuery Excel Export
 description: "Get started with the jQuery Excel Export by Kendo UI and learn how to generate workbooks and export them."
+components: ["general"]
 slug: getting_started_kendoui_excel_export
 position: 1
 ---
@@ -150,7 +151,7 @@ The workbook has an array of sheets. Sheets have rows and rows have cells.
 
 ## 4. Convert the Workbook to Data URI
 
-Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
+Call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
 ```javascript
       workbook.toDataURLAsync().then(function(dataURL) {
@@ -181,8 +182,3 @@ Call the [`kendo.saveAs`](/api/javascript/kendo/methods/saveas) method to save t
 
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

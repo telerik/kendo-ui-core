@@ -6,6 +6,7 @@ previous_url: /helpers/navigation/menu/how-to/use-same-controller-in-different-a
 slug: menu-same-controller-different-areas
 tags: menu, controller, different, areas
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

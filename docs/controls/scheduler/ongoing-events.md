@@ -2,6 +2,7 @@
 title: Highlight Ongoing Events
 page_title: jQuery Scheduler Documentation - Highlight Ongoing Events
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how the ongoing events highlight works."
+components: ["scheduler"]
 slug: ongoing_events_kendoui_scheduler_widget
 position: 8
 ---

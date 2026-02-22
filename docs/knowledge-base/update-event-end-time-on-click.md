@@ -5,9 +5,9 @@ description: "Learn how to update the end time of an event on click in a Kendo U
 previous_url: /controls/scheduling/scheduler/how-to/update-event-end-time-on-click, /controls/scheduling/scheduler/how-to/editing/update-event-end-time-on-click
 slug: howto_update_event_end_time_on_click_scheduler
 tags: telerik, kendo, jquery, scheduler, update, the, end, time, of, events, on, click 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -46,8 +46,8 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
         $(function () {
             $("#scheduler").kendoScheduler({
-                date: new Date("2022/6/13"),
-                startTime: new Date("2022/6/13 07:00 AM"),
+                date: new Date("2025/6/13"),
+                startTime: new Date("2025/6/13 07:00 AM"),
                 height: 600,
                 selectable: true,
                 views: [
@@ -61,24 +61,26 @@ The following example demonstrates how to achieve the desired scenario.
                     batch: true,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings"
                         },
                         update: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         create: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         destroy: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                            type: "POST",
+                            contentType: "application/json"
                         },
                         parameterMap: function (options, operation) {
                             if (operation !== "read" && options.models) {
-                                return { models: kendo.stringify(options.models) };
+                                return kendo.stringify(options.models);
                             }
                         }
                     },

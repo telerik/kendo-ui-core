@@ -2,6 +2,7 @@
 title: Resources
 page_title: Resources
 description: "Use resources in the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 slug: htmlhelpers_gantt_resources_aspnetcore
 position: 6
 ---
@@ -11,6 +12,52 @@ position: 6
 The Gantt allows you to assign resources to tasks. A resource is optional metadata that can be associated with a Gantt task.
 
 The resources are set through the `Resources` configuration method.
+
+When setting resources from a remote endpoint, the Gantt expects the data items to have the following signature: `{ id: 0, name: "Resource 1", color: "green", format: "p0" }`. In case the **ResourceViewModel** is different and requires mapping, use a custom `DataSource` to configure the mapping:
+
+```HtmlHelper
+    @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
+        .Name("gantt")
+        .Resources(r => r
+            .Field("resources")
+            .DataColorField("MyColorField")
+            .DataTextField("MyNameField")
+            .DataSource(d => d
+                .Custom()
+                .Schema(s => s
+                    .Model(m => m.Id("MyIDField"))
+                    .Data("Data")
+                )
+                .Transport(t =>
+                {
+                    t.Read("ReadResources", "Gantt");
+                })
+            )
+        )
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-gantt name="gantt">
+    	<resources datacolorfield="MyColorField" datatextfield="MyNameField" field="resources">
+            <datasource type="DataSourceTagHelperType.Custom">
+                <schema data="Data" total="Total" errors="Errors">
+                    <model id="MyIDField">
+                        <fields>
+                            <field name="MyIDField" type="number"></field>
+                            <field name="MyColorField" type="string"></field>
+                            <field name="MyNameField" type="string"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <transport>
+                    <read  url="@Url.Action("ReadResources","Gantt")" />
+                </transport>
+            </datasource>
+        </resources>
+    </kendo-gantt>
+```
+{% endif %}
 
 ## Assignments
 

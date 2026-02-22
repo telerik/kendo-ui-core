@@ -2,6 +2,7 @@
 title: Hierarchy
 page_title: jQuery Grid Documentation - Hierarchy
 description: "Get started with the jQuery Grid by Kendo UI and display its parent and child records by applying hierarchy to its structure."
+components: ["grid"]
 slug: hierarchy_kendoui_grid_widget
 position: 14
 ---
@@ -23,9 +24,9 @@ To implement hierarchy in the Grid, wire its [`detailInit`](/api/javascript/ui/g
     <script>
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                    read: "https://demos.telerik.com/service/v2/odata/Employees"
                 },
                 schema: {
                     model: {
@@ -49,9 +50,9 @@ To implement hierarchy in the Grid, wire its [`detailInit`](/api/javascript/ui/g
         $("#grid").kendoGrid({
             detailInit: detailInit,
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 pageSize: 6,
                 serverPaging: true,
@@ -68,9 +69,9 @@ To implement hierarchy in the Grid, wire its [`detailInit`](/api/javascript/ui/g
     function detailInit(e) {
         $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 serverFiltering: true,
                 serverPaging: true,
@@ -88,9 +89,9 @@ To implement hierarchy in the Grid, wire its [`detailInit`](/api/javascript/ui/g
     function detailInit(e) {
         $("<div/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 // Retrieve all records where the EmployeeID is equal to the primary key of the parent.
                 filter: {field: "EmployeeID", operator: "eq", value: e.data.EmployeeID},
@@ -113,9 +114,9 @@ The following code snippet showcases the full implementation of the Hierarchical
         $(document).ready(function() {
             var element = $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                        read: "https://demos.telerik.com/service/v2/odata/Employees"
                     },
                     pageSize: 6,
                     serverPaging: true,
@@ -162,9 +163,9 @@ The following code snippet showcases the full implementation of the Hierarchical
         function detailInit(e) {
             $("<div/>").appendTo(e.detailCell).kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     serverPaging: true,
                     serverSorting: true,

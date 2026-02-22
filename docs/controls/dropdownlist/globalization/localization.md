@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery DropDownList Documentation - DropDownList Localization
 description: "Get started with the jQuery DropDownList by Kendo UI and translate its messages for different culture locales."
+components: ["dropdownlist"]
 slug: localization_kendoui_ddl_widget
 position: 3
 ---

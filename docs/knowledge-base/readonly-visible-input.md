@@ -5,9 +5,9 @@ description: "Learn how to make a visible input read-only in the Kendo UI ComboB
 previous_url: /controls/editors/combobox/how-to/readonly-visible-input, /controls/editors/combobox/how-to/customize/readonly-visible-input
 slug: howto_make_visible_inputs_readonly_combobox
 tags: telerik, kendo, jquery, combobox, make, visible, inputs, read, only
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

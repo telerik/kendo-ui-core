@@ -2,15 +2,16 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Stepper component for {{ site.framework }}."
+components: ["stepper"]
 slug: stepper_events
 position: 6
 ---
 
 # Events
 
-You can subscribe to [all Stepper events](/api/kendo.mvc.ui.fluent/steppereventbuilder) and then use them to further customize the behavior of the Stepper.
+You can subscribe to [all client-side events](/api/kendo.mvc.ui.fluent/steppereventbuilder) and then use them to further customize the behavior of the Stepper.
 
-The example below demonstrates how to use the [`Click` event](/api/kendo.mvc.ui.fluent/steppereventbuilder#clicksystemstring) that the Stepper triggers when the user clicks on a tool.
+The example below demonstrates how to handle the [`Activate`](/api/kendo.mvc.ui.fluent/steppereventbuilder#activatesystemstring) and [`Select`](/api/kendo.mvc.ui.fluent/steppereventbuilder#selectsystemstring) events that the Stepper triggers when a specified step is selected.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI

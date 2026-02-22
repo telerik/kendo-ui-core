@@ -7,6 +7,7 @@ slug: grid-animate-detail-row-with-kendo-effect
 tags: grid, aniamte, detail, row, detailrow, effect, slide in, fade, expand
 ticketid: 540440
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -72,9 +73,9 @@ Use the `detailInit` event and custom CSS rules.
   $(document).ready(function() {
     var element = $("#grid").kendoGrid({
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+          read: "https://demos.telerik.com/service/v2/odata/Employees"
         },
         pageSize: 5,
         serverPaging: true,
@@ -131,9 +132,9 @@ Use the `detailInit` event and custom CSS rules.
 
     detailRow.find(".orders").kendoGrid({
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/odata/Orders"
         },
         serverPaging: true,
         serverSorting: true,

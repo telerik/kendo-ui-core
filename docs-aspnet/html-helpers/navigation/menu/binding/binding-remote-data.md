@@ -1,13 +1,14 @@
 ---
-title:  Binding to Remote Data
-page_title: Binding to Remote Data
+title:  Remote Data Binding
+page_title: Remote Binding
 description: "Learn how to bind to remote data with Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 previous_url: /helpers/navigation/menu/binding/remote-data
 slug: htmlhelpers_menu_bindingremotedata_aspnetcore
-position: 3
+position: 4
 ---
 
-# Binding to Remote Data
+# Remote Data Binding
 
 Remote data binding enables you to bind the Menu to a server end-point that returns the items collection for the Menu.
 
@@ -30,10 +31,9 @@ The Menu supports remote data binding as of the R2 2019 release.
             }
         );
 
-        return Json(result, JsonRequestBehavior.AllowGet);
+        return Json(result{% if site.mvc %}, JsonRequestBehavior.AllowGet {% endif %});
     }
     ```
-
 1. Use the DataSource to configure the action URL to the end-point. Set up the `DataTextField` to define the field which will be bound to the text of the items. If the children items are not in an items field, configure the Model with the corresponding field that holds the children collection.
 
     ```HtmlHelper

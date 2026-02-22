@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Get started with the Telerik UI PivotGridV2 HtmlHelper for {{ site.framework }} and learn about the available template options."
+components: ["pivotgridv2"]
 slug: htmlhelpers_pivotgridv2_aspnetcore_templates
 position: 5
 ---
@@ -47,7 +48,7 @@ In the data cell template, you can access the following fields:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="dataCellTemplate" type="text/x-kendo-tmpl">
         # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
         # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
@@ -85,7 +86,7 @@ In the column header template, you can access the following fields:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length) { #
             <em>#: member.caption #</em>
@@ -119,7 +120,7 @@ In the row header template, you can access the following fields:
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-tmpl">
         # if (!member.children.length) { #
             <em>#: member.caption #</em>
@@ -160,7 +161,7 @@ The fields which can be used in the template are:
             .Connection(connection => connection
                 .Catalog("Adventure Works DW 2008R2")
                 .Cube("Adventure Works"))
-                .Read("https://demos.telerik.com/olap/msmdpump.dll")
+                .Read("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
             )
         )
     )
@@ -178,14 +179,14 @@ The fields which can be used in the template are:
             </rows>
             <measures values=@(new string[] {"[Measures].[Internet Revenue Status]"} )>
             </measures>
-            <transport read-url="https://demos.telerik.com/olap/msmdpump.dll">
+            <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll">
                 <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
             </transport>
         </pivot-datasource>
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="kpiStatusTemplate" type="text/x-kendo-tmpl">
         # if (!dataItem) { #
             <em>N/A</em>
@@ -230,7 +231,7 @@ The fields which can be used in the template are:
             .Connection(connection => connection
                 .Catalog("Adventure Works DW 2008R2")
                 .Cube("Adventure Works"))
-                .Read("https://demos.telerik.com/olap/msmdpump.dll")
+                .Read("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
             )
         )
     )
@@ -248,14 +249,14 @@ The fields which can be used in the template are:
             </rows>
             <measures values=@(new string[] {"[Measures].[Internet Revenue Trend]"} )>
             </measures>
-            <transport read-url="https://demos.telerik.com/olap/msmdpump.dll">
+            <transport read-url="https://demos.telerik.com/service/v2/olap/msmdpump.dll">
                 <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
             </transport>
         </pivot-datasource>
     </kendo-pivotgridv2>
 ````
 {% endif %}
-```Template
+```JS Template
     <script id="kpiTrendTemplate" type="text/x-kendo-tmpl">
         # if (!dataItem) { #
             <em>N/A</em>

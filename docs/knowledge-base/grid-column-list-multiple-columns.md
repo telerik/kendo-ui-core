@@ -6,6 +6,7 @@ page_title: Show Column List in Multiple Columns - Kendo UI for jQuery Data Grid
 slug: grid-column-list-multiple-columns
 tags: grid, column, list, multiple, columns
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

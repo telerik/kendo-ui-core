@@ -6,6 +6,7 @@ page_title: How to Make Kendo UI ComboBox Open on Focus - Kendo UI for jQuery
 slug: how-to-open-combobox-on-focus-kendo-ui-jquery
 tags: kendo, ui, combobox, focus, open
 res_type: kb
+components: ["combobox"]
 ticketid: 1675005
 ---
 
@@ -66,11 +67,11 @@ For a practical implementation, refer to this example:
           dataTextField: "ProductName",
           dataValueField: "ProductID",          
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/service/v2/odata/Products",
               }
             }
           }

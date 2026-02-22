@@ -5,9 +5,9 @@ description: "Learn how to change the text color in the Kendo UI NumericTextBox 
 slug: howto_change_text_color_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/change-text-color
 tags: telerik, kendo, jquery, numerictextbox, change, text, color
-component: numerictextbox
 type: how-to
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

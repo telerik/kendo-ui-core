@@ -6,6 +6,7 @@ page_title: How to Set Grid Cell Background Color Based on Data Source Field - K
 slug: how-to-set-grid-cell-background-color-kendo-ui
 tags: kendo-ui, grid, background-color, jquery, datasource, cell, databound
 res_type: kb
+components: ["grid"]
 ticketid: 1671214
 ---
 

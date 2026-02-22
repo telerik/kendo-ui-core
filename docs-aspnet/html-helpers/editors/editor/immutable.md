@@ -2,8 +2,9 @@
 title: Immutable Elements
 page_title: Immutable Elements
 description: "Learn how to use immutable elements in the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: htmlhelpers_editor_immutable_aspnetcore
-position: 7
+position: 8
 ---
 
 # Immutable Elements
@@ -14,7 +15,7 @@ For a runnable example, refer to the [demo on immutable elements in the Editor](
 
 ## Enabling Immutable Elements
 
-To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To prevent the user interaction with that element, you also need to enable the [`Immutables()`](/api/kendo.mvc.ui.fluent/editorbuilder#immutablessystemactionkendomvcuifluenteditorimmutablessettingsbuilder) configuration method.
+To define the immutable elements in the content area, set the [`contenteditable`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable) DOM attribute to `false`. To prevent the user interaction with that element, you also need to enable the [`Immutables()`](/api/kendo.mvc.ui.fluent/editorbuilder#immutablessystemaction) configuration method.
 
 ```HtmlHelper
     @(Html.Kendo().Editor()
@@ -106,7 +107,7 @@ The `immutables.serialization` configuration method accepts the following parame
 
 ## Deserializing Immutables
 
-The [`Deserialization()`](/api/kendo.mvc.ui.fluent/editorimmutablessettingsbuilder#deserializationsystemfuncsystemobjectsystemobject) method does the opposite of the `Serialization()` one. `Deserialization()` takes the HTML representation from the `ViewHtml` dialog and alters the immutable DOM element based on the implemented logic in the callback function.
+The [`Deserialization()`](/api/kendo.mvc.ui.fluent/editorimmutablessettingsbuilder#deserializationsystemstring) method does the opposite of the `Serialization()` one. `Deserialization()` takes the HTML representation from the `ViewHtml` dialog and alters the immutable DOM element based on the implemented logic in the callback function.
 
 The following example demonstrates how to use the `Serialization()` and `Deserialization()` options to expose the CSS `text-align` property in the `ViewHtml` dialog so that the user is able to change it from the HTML code.
 

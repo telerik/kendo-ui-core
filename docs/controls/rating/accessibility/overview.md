@@ -2,7 +2,8 @@
 title: Overview
 page_title: jQuery Rating Documentation - Rating Accessibility
 description: "Get started with the jQuery Rating by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_rating_widget
+components: ["rating"]
+slug: jquery_rating_accessibility
 position: 1
 ---
 

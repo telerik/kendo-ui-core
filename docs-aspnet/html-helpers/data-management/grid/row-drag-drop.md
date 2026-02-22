@@ -2,6 +2,7 @@
 title: Row Drag and Drop
 page_title: Row Drag and Drop
 description: "Learn how to enable the drag and drop functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_row_drag_drop_grid
 position: 19
 ---
@@ -29,7 +30,7 @@ To enable the Drag and Drop feature:
             .Columns(columns =>
             {
                 columns.Template("").Draggable(true);
-                columns.Bound(p => p.ShipName).Title("Order");
+                columns.Bound(p => p.ShipName).Title("Ship Name");
             })
             .DataSource(dataSource => dataSource
                 .Ajax()
@@ -37,23 +38,21 @@ To enable the Drag and Drop feature:
                 .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
                 .Read(read => read.Action("Orders_Read", "Grid"))
             )
-            ...
         )
     ```
     {% if site.core %}
     ```TagHelper
         <kendo-grid name="grid" height="550">
-            <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
                 <transport>
-                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                    <read url="@Url.Action("Orders_Read","Grid")" />
                 </transport>
-                <schema>
+                <schema data="Data" total="Total" errors="Errors">
                     <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                     </model>
                 </schema>
             </datasource>
             <reorderable rows="true"/>
-            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
             <columns>
                 <column template="" draggable="true" />
                 <column field="ShipName" title="Ship Name"/>
@@ -75,7 +74,7 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
         .Columns(columns =>
         {
             columns.Template("").Draggable(true);
-            columns.Bound(p => p.ShipName).Title("Order");
+            columns.Bound(p => p.ShipName).Title("Ship Name");
         })
         .DataSource(dataSource => dataSource
             .Ajax()
@@ -83,34 +82,34 @@ Additionally, the row drag clue will be `N items selected` where `N` is the numb
             .Model(m => m.Id("OrderID")) //Ensure that the Model identifier ("Id") is defined.
             .Read(read => read.Action("Orders_Read", "Grid"))
         )
-        ...
     )
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid" height="550" selectable="multiple, row">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+    <kendo-grid name="grid" selectable="multiple, row">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")" />
             </transport>
-            <schema>
+            <schema data="Data" total="Total" errors="Errors">
                 <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                 </model>
             </schema>
         </datasource>
         <reorderable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column template="" draggable="true" />
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-````
+```
 {% endif %}
 
 ## Drag and Drop Rows between Grids
 
 You can move items from one instance of the Grid to another by handling the [`RowReorder` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/rowreorder) of the Grid. It fires on reordering for both Grid instances and allows you to access and modify their data sources. Both Grids must be bound to the same model.
+
+> Dragging and dropping a row into an empty Grid requires a custom implementation that adds a placeholder row to the target Grid.
 
 For a runnable example, refer to the [demo on drag and drop by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/drag-drop).
 
@@ -129,7 +128,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
             columns.Bound(p => p.UnitPrice).Title("Price").Width(140);
             columns.Bound(p => p.Discontinued)
             .Title("In Stock")
-            .ClientTemplate("<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>")
+            .ClientTemplate("<span class='k-badge k-badge-success k-badge-inline'>Available</span>")
             .Width(130);
         })
         .Pageable()
@@ -150,15 +149,15 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
     )
 ```
 ```TagHelper
-    <kendo-grid name="grid" navigatable="true" style="height:430px;" width="550">
+    <kendo-grid name="grid" navigatable="true" height="430">
         <columns>
-            <column template="" draggable="true">
+            <column template="" draggable="true" width="100">
             </column>
-            <column field="ProductName" title="Product">
+            <column field="ProductName" title="Product" width="200">
             </column>
-            <column field="UnitPrice" title="Price">
+            <column field="UnitPrice" title="Price" width="140">
             </column>
-            <column field="Discontinued" title="In Stock" template="<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>">
+            <column field="Discontinued" title="In Stock" template="<span class='k-badge k-badge-success k-badge-inline'>Available</span>" width="130">
             </column>
         </columns>
         <pageable enabled="true" />
@@ -167,7 +166,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
         <reorderable columns="true" >
             <rows click-move-click="true" />
         </reorderable>
-        <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
             <schema data="Data" total="Total" errors="Errors">
                 <model id="ProductID">
                 </model>
@@ -189,7 +188,7 @@ As of {{site.product}} R2 SP1 2023, users can reorder the Grid's rows by using t
             columns.Bound(p => p.UnitPrice).Title("Price").Width(140);
             columns.Bound(p => p.Discontinued)
                 .Title("In Stock")
-                .ClientTemplate("<span class='k-badge k-badge-solid k-badge-solid-success k-badge-md k-rounded-md k-badge-inline'>Available</span>")
+                .ClientTemplate("<span class='k-badge k-badge-success k-badge-inline'>Available</span>")
                 .Width(130);
         })
         .Pageable()
@@ -228,10 +227,10 @@ You can allow the user to reorder the Grid rows by dragging the row through a dr
     )
 ```
 ```TagHelper
-    <kendo-grid name="grid" navigatable="true" style="height:430px;" width="550">
+    <kendo-grid name="grid">
         <columns>
-            <column template="" draggable="true"></column>
-            <column field="ProductName" title="Product"></column>
+            <column template="" draggable="true" width="100"></column>
+            <column field="ProductName" title="Product" width="200"></column>
         </columns>
     </kendo-grid>
 ````
@@ -256,6 +255,8 @@ The {{site.product}} Grid exposes a [RowReorder](/api/kendo.mvc.ui.fluent/gridev
 
 You can reorder the rows through the keyboard when the `Navigatable()` method is enabled.
 
+On mobile devices, the Drag and Drop functionality activates on `hold` & `slide` of the row.
+
 The example below demonstrates how to drag and drop the Grid rows by using the keys `Ctrl + Up/Down`.
 
 ```HtmlHelper
@@ -266,7 +267,7 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
         .Columns(columns =>
         {
             columns.Template("").Draggable(true);
-            columns.Bound(p => p.ShipName).Title("Order");
+            columns.Bound(p => p.ShipName).Title("Ship Name");
         })
         .DataSource(dataSource => dataSource
             .Ajax()
@@ -280,31 +281,37 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 {% if site.core %}
 ```TagHelper
     <kendo-grid name="grid" height="550" navigatable="true">
-        <datasource type="DataSourceTagHelperType.Custom" custom-type="odata" page-size="20">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="10">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+                <read url="@Url.Action("Orders_Read","Grid")" />
             </transport>
-            <schema>
+            <schema data="Data" total="Total" errors="Errors">
                 <model id="OrderID"> <!--Ensure that the Model identifier ("id") is defined.-->
                 </model>
             </schema>
         </datasource>
         <reorderable rows="true"/>
-        <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }"></pageable>
         <columns>
             <column template="" draggable="true" />
             <column field="ShipName" title="Ship Name"/>
         </columns>
     </kendo-grid>
-````
+```
 {% endif %}
+
+When the [`Multiple` selection]({% slug htmlhelpers_grid_aspnetcore_selection%}#select-modes
+) option is enabled for the Grid rows, the user can drag and drop the selected rows through the `Ctrl` + `Mouse left-click` combination.
 
 ## Known Limitations
 
 * Any DataSource operations (for example, sorting, filtering, grouping, and so on) that involve rendering rows in a different order than their natural one are not supported.
+* The Drag and Drop functionality in combination with the [selection feature]({% slug htmlhelpers_grid_aspnetcore_selection%}) is not supported in Microsoft Internet Explorer.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Row Drag and Drop by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/drag-drop)
 * [Grid Events]({% slug grid_events %})
 * [Server-Side API](/api/grid)

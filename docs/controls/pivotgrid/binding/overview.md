@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery PivotGrid Documentation - Data Binding
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn about the OLAP cube configuration for performing data binding and about the limitations when binding the component to flat data."
+components: ["pivotgrid"]
 slug: databinding_kendoui_pivotgrid
 position: 1
 ---
@@ -12,14 +13,14 @@ The Kendo UI PivotGrid supports data binding to an HTTP accessible Online Analyt
 
 ## OLAP Services
 
-Kendo UI provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/olap/msmdpump.dll`. To see the responses, the service needs to be queried and cannot be opened directly in the browser. For more information on binding the PivotGrid to data over an OLAP cube, refer to the following articles:
+Kendo UI provides an OLAP service dll that can be used for testing and is hosted at `https://demos.telerik.com/service/v2/olap/msmdpump.dll`. To see the responses, the service needs to be queried and cannot be opened directly in the browser. For more information on binding the PivotGrid to data over an OLAP cube, refer to the following articles:
 * [OLAP Cube Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 * [PivotConfigurator Overview]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 
 ## Flat Data
 
-When the PivotGrid is bound to a flat-data structure, it processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/javascript/data/pivotdatasource/configuration/schema.cube). This means that the component uses the processing power of the browser to project the data and produces the required categorized data output. Even though the PivotGrid does not restrict the maximum data amount bound to itself, the data has limits that are directly related to the browser capability to handle the loaded dataset.
+When the PivotGrid is bound to a flat-data structure, it processes the data on the client (browser) and creates a client cube representation [(configuration)](/api/javascript/data/pivotdatasource/configuration/schema#schemacube). This means that the component uses the processing power of the browser to project the data and produces the required categorized data output. Even though the PivotGrid does not restrict the maximum data amount bound to itself, the data has limits that are directly related to the browser capability to handle the loaded dataset.
 
 The symptoms for an overloaded browser are:
 - The browser is extremely slowly loading or unresponsive for a long time.

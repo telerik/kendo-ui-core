@@ -5,9 +5,9 @@ description: "Learn how drag and drop images in the Kendo UI Editor component."
 previous_url: /controls/editors/editor/how-to/drag-and-drop-images, /controls/editors/editor/how-to/customize/drag-and-drop-images
 slug: howto_drag_and_drop_images_editor
 tags: telerik, kendo, jquery, editor, drag, and, drop, images
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment
@@ -37,7 +37,7 @@ How can I drag and drop images in the Kendo UI for jQuery Editor?
 
 ## Solution
 
-The following example demonstrates how to achieve the desired scenario. As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](https://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
+The following example demonstrates how to achieve the desired scenario. As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](https://demos.telerik.com/kendo-ui/dragdrop/index).
 
 ```dojo
   <style>

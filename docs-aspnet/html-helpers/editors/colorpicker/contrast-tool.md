@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: Contrast Tool
 description: "Learn more about the contrast tool for the Telerik UI ColorPicker component for {{ site.framework }}."
+components: ["colorpicker"]
 slug: htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore
 position: 4
 ---
@@ -110,5 +111,5 @@ The example below demonstrates how to enable the contrast tool in the ColorPicke
 
 * [Contrast Tool of the ColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/contrast-tool)
 * [Server-Side API](/api/colorpicker)
-* [Client-Side API](/api/javascript/ui/colorpicker)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker)
 

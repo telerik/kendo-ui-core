@@ -6,6 +6,7 @@ slug: upload-file-and-load-in-pdfviewer
 tags: telerik, upload, file, pdf, load, pdfviewer
 component: upload
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -33,7 +34,7 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
 1. Within the handler, get the name of the uploaded `PDF` file from the event data, get a reference to the PDFViewer, and call the [`fromFile()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) to load the file that is uploaded on the server.
 1. Call the jQuery [`show()`](http://api.jquery.com/show/) method to show the hidden PDFViewer.
 
-```View_HtmlHelper
+```HtmlHelper
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
   <script>
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
@@ -57,7 +58,7 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
   </div>
 ```
 {% if site.core %}
-```View_TagHelper
+```TagHelper
   @addTagHelper *, Kendo.Mvc
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
@@ -75,7 +76,7 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
   </div>
 ```
 {% endif %}
-```Script.js
+```JS script.js
   <script>
       function onSuccess(e) {
           if (e.operation == "upload") {
@@ -89,7 +90,7 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
   </script> 
 ```
 {% if site.core %}
-```HomeController
+```C# HomeController
   using System.Net.Http.Headers;
 
   public async Task<ActionResult> Async_Save(IFormFile files)
@@ -124,7 +125,7 @@ How can I upload a `PDF` file by using the Telerik UI for {{ site.framework }} U
   }
 ```
 {% else %}
-```HomeController
+```C# HomeController
     public ActionResult Async_Save(HttpPostedFileBase files)
     {
         if (files != null)

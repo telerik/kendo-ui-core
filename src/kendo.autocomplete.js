@@ -28,7 +28,6 @@ export const __meta__ = {
         support = kendo.support,
         caret = kendo.caret,
         activeElement = kendo._activeElement,
-        placeholderSupported = support.placeholder,
         ui = kendo.ui,
         List = ui.List,
         keys = kendo.keys,
@@ -81,9 +80,7 @@ export const __meta__ = {
             options.placeholder = options.placeholder || element.attr("placeholder");
             options.inputMode = options.inputMode || element.attr("inputmode") || "text";
 
-            if (placeholderSupported) {
-                element.attr("placeholder", options.placeholder);
-            }
+            element.attr("placeholder", options.placeholder);
 
             that._wrapper();
             that._clearButton();
@@ -102,10 +99,10 @@ export const __meta__ = {
                 .on("keypress" + ns, that._keypress.bind(that))
                 .on("input" + ns, that._search.bind(that))
                 .on("paste" + ns, that._search.bind(that))
-                .on("focus" + ns, function() {
+                .on("focus" + ns, function(e) {
                     that._prev = that._accessor();
                     that._oldText = that._prev;
-                    that._placeholder(false);
+
                     wrapper.addClass(FOCUSED);
                 })
                 .on("focusout" + ns, function(ev) {
@@ -114,7 +111,6 @@ export const __meta__ = {
                     }
 
                     that._change();
-                    that._placeholder();
                     that.close();
                     wrapper.removeClass(FOCUSED);
                 })
@@ -131,9 +127,14 @@ export const __meta__ = {
 
             that._old = that._accessor();
 
-            that._placeholder();
-
             that._initList();
+
+            // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
+            if (that.options.virtual) {
+                that.listView.one("listBound", function() { that._aria(); });
+            }
+
+            that.listView.bind("dataBound", function() { that._aria(); });
 
             disabled = $(that.element).parents("fieldset").is(':disabled');
 
@@ -186,10 +187,12 @@ export const __meta__ = {
             clearButton: true,
             autoWidth: false,
             popup: null,
-            size: "medium",
-            fillMode: "solid",
-            rounded: "medium",
+            size: undefined,
+            fillMode: undefined,
+            rounded: undefined,
             label: null,
+            adaptiveTitle: null,
+            adaptiveTitleSubtitle: null,
         },
 
         _clearValueMouseDownHandler: function(ev) {
@@ -204,6 +207,16 @@ export const __meta__ = {
 
         _onActionSheetCreate: function() {
             var that = this;
+
+            that._unboundClick = true;
+            that.element
+                .on("click", function() {
+                    if (that._isEnabled()) {
+                        that.popup.toggle();
+                    } else {
+                        that.popup.close();
+                    }
+                });
 
             if (that.filterInput) {
                 that.filterInput
@@ -221,11 +234,20 @@ export const __meta__ = {
                     that.filterInput.val(that.element.val());
                     that.filterInput.trigger("focus");
                 });
-
                 that.popup.bind("deactivate", () => {
                     that.element.trigger("focus");
                 });
             }
+        },
+
+        _isEnabled: function() {
+            const that = this;
+            const element = that.element;
+
+            const isReadonly = element.prop(READONLY) || Boolean(that.element.attr("readonly"));
+            const isDisabled = element.prop(DISABLED) || Boolean(that.element.attr("disabled"));
+
+            return !isDisabled && !isReadonly;
         },
 
         _onCloseButtonPressed: function() {
@@ -618,7 +640,6 @@ export const __meta__ = {
 
             this._prev = text;
             this._accessor(text);
-            this._placeholder();
         },
 
         _unifySeparators: function() {
@@ -633,7 +654,6 @@ export const __meta__ = {
             this._old = this.oldText = this._accessor();
 
             this.listView.setValue(value);
-            this._placeholder();
         },
 
         _change: function() {
@@ -671,7 +691,6 @@ export const __meta__ = {
 
             if (value !== undefined) {
                 element.value = value === null ? "" : value;
-                that._placeholder();
             } else {
                 value = element.value;
 
@@ -697,6 +716,9 @@ export const __meta__ = {
             that._last = key;
 
             if (key === keys.DOWN) {
+                if (!that._isEnabled()) {
+                    return;
+                }
                 if (visible) {
                     this._move(current ? "focusNext" : "focusFirst");
                 } else if (that.value()) {
@@ -714,6 +736,9 @@ export const __meta__ = {
                 }
                 e.preventDefault();
             } else if (key === keys.ESC ) {
+                if (!that._isEnabled()) {
+                    return;
+                }
                 if (visible) {
                     e.preventDefault();
                     that.close();
@@ -780,44 +805,6 @@ export const __meta__ = {
                caret(this.element);
             } else if (this.options.suggest && this.listView.focus() != null) {
                 this.suggest(this.listView.focus());
-            }
-        },
-
-        _placeholder: function(show) {
-            if (placeholderSupported) {
-                return;
-            }
-
-            var that = this,
-                element = that.element,
-                placeholder = that.options.placeholder,
-                value;
-
-            if (placeholder) {
-                value = element.val();
-
-                if (show === undefined) {
-                    show = !value;
-                }
-
-                if (!show) {
-                    if (value !== placeholder) {
-                        placeholder = value;
-                    } else {
-                        placeholder = "";
-                    }
-                }
-
-                if (value === that._old && !show) {
-                    return;
-                }
-
-                element.toggleClass("k-readonly", show)
-                       .val(placeholder);
-
-                if (!placeholder && element[0] === document.activeElement) {
-                    caret(element[0], 0, 0);
-                }
             }
         },
 

@@ -6,6 +6,7 @@ page_title: Setting Custom Colors for the Chart Series
 slug: chart-set-custom-color-for-each-chart-series
 tags: mvc, core, chart, custom, color, series
 res_type: kb
+components: ["general"]
 component: chart
 ---
 
@@ -32,7 +33,7 @@ How to set custom colors for each series of the {{ site.product }} Chart?
 2. By using the [setOptions](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/setoptions) method, set the colors for the series. 
 
 
-    ```Index.cshtml
+    ```Razor Index.cshtml
     <div class="demo-section k-content wide">
         @(Html.Kendo().Chart()
             .Name("chart")
@@ -98,7 +99,7 @@ How to set custom colors for each series of the {{ site.product }} Chart?
         )
     </div>
     ```
-    ```Script.js
+    ```JS script.js
         var seriesColors = []; //stores the colors from the color picker
         function isSeriesColorsExceeded(){ //asserts if more than 3 colors are pushed into the seriesColors variable
             if (seriesColors.length >= 3) {
@@ -149,7 +150,7 @@ For the complete implementation of the suggested approach, refer to the followin
 ## See Also
 
 * [Telerik REPL Example: Setting Custom Colors for the Chart Series](https://netcorerepl.telerik.com/QckskMPP37Q360dl12)
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 * [Telerik UI for {{ site.framework }} Breaking Changes]({%slug breakingchanges_2023%})
 * [Telerik UI for {{ site.framework }} Knowledge Base](https://docs.telerik.com/{{ site.platform }}/knowledge-base)

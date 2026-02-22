@@ -6,6 +6,7 @@ page_title: Sticky tab in the TabStrip
 slug: tabstrip-sticky-tab
 tags: aspnet, mvc, core, dotnet-core, kendo, kendo-ui, tabstrip, tab, sticky, always, visible
 res_type: kb
+components: ["general"]
 component: tabstrip
 ---
 

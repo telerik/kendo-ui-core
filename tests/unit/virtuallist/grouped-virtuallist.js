@@ -183,4 +183,50 @@ describe("Grouped VirtualList: ", function() {
         });
     });
 
+    // Height calculation tests
+
+    asyncTest("height container includes group header heights when groupCount option is provided", function(done) {
+        // 300 items with groups of 30 items each = 10 groups
+        // First group uses sticky header, so only 9 inline group headers
+        let virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            itemHeight: ITEM_HEIGHT,
+            groupCount: 10 // Specify total number of groups
+        }));
+
+        asyncDataSource.read().then(function() {
+            done(() => {
+                let cssGap = virtualList._cssGap || 0;
+                // Total elements = 300 items + 9 inline headers = 309
+                // Gaps occur between elements within each group, not between all elements
+                // Total gaps = totalElements - groupCount = 309 - 10 = 299
+                let totalElements = 300 + (10 - 1);
+                let totalGaps = totalElements - 10;
+                let expectedHeight = (totalElements * ITEM_HEIGHT) + (totalGaps * cssGap);
+                assert.equal(virtualList.heightContainer.offsetHeight, expectedHeight, "Height should include all group headers except first");
+            });
+        });
+    });
+
+    asyncTest("height container uses visible groups when groupCount option is not provided", function(done) {
+        let virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            itemHeight: ITEM_HEIGHT
+            // groupCount not provided
+        }));
+
+        asyncDataSource.read().then(function() {
+            done(() => {
+                let visibleGroupCount = asyncDataSource.view().length;
+                let cssGap = virtualList._cssGap || 0;
+                // Total elements = 300 items + (visibleGroupCount - 1) inline headers
+                // Gaps occur between elements within each group, not between all elements
+                // Total gaps = totalElements - visibleGroupCount
+                let inlineHeaders = Math.max(0, visibleGroupCount - 1);
+                let totalElements = 300 + inlineHeaders;
+                let totalGaps = Math.max(0, totalElements - visibleGroupCount);
+                let expectedHeight = (totalElements * ITEM_HEIGHT) + (totalGaps * cssGap);
+                assert.equal(virtualList.heightContainer.offsetHeight, expectedHeight, "Height should include visible group headers except first");
+            });
+        });
+    });
+
 });

@@ -7,6 +7,7 @@ slug: stock-chart-navigate-to-predefined-periods
 tags: stock-chart, zoom, navigate
 ticketid: 1364958
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -100,7 +101,7 @@ The following example demonstrates how to implement the suggested approach.
           dataSource: {
             transport: {
               read: {
-                url: "../content/dataviz/js/boeing-stock.json",
+                url: "https://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
                 dataType: "json"
               }
             },

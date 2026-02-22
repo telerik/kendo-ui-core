@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items of the widget."
+components: ["splitbutton"]
 slug: htmlhelpers_splitbutton_aspnetcore_items
 position: 2
 ---

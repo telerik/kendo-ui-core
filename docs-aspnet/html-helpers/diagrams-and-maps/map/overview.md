@@ -2,6 +2,7 @@
 title: Overview
 page_title: Map Overview
 description: "Learn the basics when working with the Telerik UI Map component for {{ site.framework }}."
+components: ["map"]
 previous_url: /helpers/html-helpers/map, /helpers/diagrams-and-maps/map/overview
 slug: htmlhelpers_map_aspnetcore
 position: 0
@@ -182,6 +183,7 @@ The following example demonstrates the basic configuration for the Map component
 
 * [Getting Started with the Map]({% slug aspnetcore_map_getting_started %})
 * [Basic Usage of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/index)
+* [Azure Tile Layout of the Map for {{ site.framework }}]({% slug azure-tiles %})
 * [Map Events]({% slug events_map_aspnetcore %})
 
 ## See Also

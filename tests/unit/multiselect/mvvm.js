@@ -281,6 +281,21 @@ describe('multiselect MVVM', function() {
         assert.isOk(observable.value instanceof kendo.data.ObservableArray);
     });
 
+     it("should display arrow down button", function() {
+        dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value" data-down-arrow="true"/>');
+
+        let observable = kendo.observable({
+            items: [{ name: "foo" }, { name: "bar" }, { name: "baz" }],
+            value: { name: "foo" }
+        });
+
+        kendo.bind(dom, observable);
+        const multiselect = dom.data("kendoMultiSelect");
+
+        assert.isOk(multiselect._arrow);
+        assert.isOk(multiselect._arrow.length);
+    });
+
     it("clearing value of the widget sets value property to empty array", function() {
         dom = $('<select data-role="multiselect" multiple="multiple" data-value-field="name" data-bind="source:items, value:value"/>');
 

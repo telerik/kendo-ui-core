@@ -1,7 +1,8 @@
 ---
 title: React
 page_title: React - Kendo UI Third-Party Tools
-description: "Learn how to use Kendo UI widgets in React applications."
+description: "Learn how to use Kendo UI components in React applications."
+components: ["general"]
 previous_url: /React2
 slug: reactsupport_integration_kendoui
 ---
@@ -10,7 +11,7 @@ slug: reactsupport_integration_kendoui
 
 Kendo UI provides integration support for React.
 
-To use any jQuery component in a React application, you need a trial of the [Kendo UI for jQuery](https://www.telerik.com/kendo-ui#jquery) library or a valid [Kendo UI license](https://www.telerik.com/purchase/kendo-ui).
+To use any jQuery component in a React application, you need a valid [Kendo UI license](https://www.telerik.com/purchase/kendo-ui).
 
 ## Kendo UI Wrappers for React
 
@@ -22,9 +23,13 @@ For the few React components still missing, we recommend [the approach below](#k
 
 ## KendoReact Suite
 
-If you are looking for native React components (no jQuery dependency), please visit [KendoReact](https://www.telerik.com/kendo-react-ui/). KendoReact is a UI component library of 100+ native React components, from Data Grid, Scheduler and Charts to DatePickers, Menus and Buttons.
+If you are building a React application, we encourage you to use [KendoReact components](https://www.telerik.com/kendo-react-ui). These components are:
 
-To access the native components, you need to sign up for a [KendoReact trial](https://www.telerik.com/download-login-v2-kendo-react-ui/) or purchase a [KendoReact](https://www.telerik.com/kendo-react-ui/pricing/) or [Kendo UI](https://www.telerik.com/purchase/kendo-ui) license.
+* Built Exclusively for React–Designed from the ground up for React applications, ensuring full compatibility with React’s architecture.
+* Optimized for Performance–Leverages React’s virtual DOM and efficient rendering for high-performance UI.
+* Seamless Integration–Works natively with React hooks, state management (Redux, Context API), and modern React best practices.
+* Consistent & Customizable–Provides a comprehensive suite of UI components that follow React’s component-based design while allowing deep customization.
+
 
 Almost all Kendo UI for jQuery components can be found as native equivalents in KendoReact. The Spreadsheet is one exception and you can use the jQuery equivalent in your React applications following the instructions below.
 
@@ -32,9 +37,9 @@ The [KendoReact Roadmap](https://www.telerik.com/support/whats-new/kendo-react-u
 
 ## Kendo UI for jQuery in React Applications
 
-The Kendo UI for jQuery widgets can be used inside a React application following the steps below. Please note, that our recommendation is to use the native React equivalents as they offer much better performance in React applications.
+You can use the Kendo UI for jQuery components in a React application following the steps below. Note that the Kendo developers recommend using native React equivalents instead as they offer much better performance in React applications.
 
-1. Import the Kendo UI files or a single file if only one or two widgets will be used in order to reduce the bundle size:
+1. Import the Kendo UI files or a single file if only one or two components will be used in order to reduce the bundle size:
 
     ```
         import '@progress/kendo-ui' // import the entire Kendo UI
@@ -42,13 +47,13 @@ The Kendo UI for jQuery widgets can be used inside a React application following
         import '@progress/kendo-ui/js/kendo.spreadsheet.js'
     ```
 
-1. Add the DOM element that will be used to render the Kendo UI for jQuery widget.
+1. Add the DOM element that will be used to render the Kendo UI for jQuery component.
 
     ```
         <div id="spreadsheet"></div>
     ```
 
-1. On the `ComponentDidMount` event initialize the widget with its options.
+1. On the `ComponentDidMount` event initialize the component with its options.
 
     ```html
         componentDidMount(){
@@ -58,7 +63,7 @@ The Kendo UI for jQuery widgets can be used inside a React application following
         }
     ```
 
-1. The jQuery widgets are not automatically controlled by the changes in the state or the props. If the component has to be changed, the public API methods of the component can be utilized on the `componentDidUpdate` lifecycle method.
+1. The jQuery component are not automatically controlled by the changes in the state or the props. If the component has to be changed, the public API methods of the component can be utilized on the `componentDidUpdate` lifecycle method.
 
     ```
         componentDidUpdate(){
@@ -79,7 +84,7 @@ The Kendo UI for jQuery widgets can be used inside a React application following
         }
     ```
 
-1. To prevent performance issues and memory leaks, destroy the widget on the `componentWillUnmount` lifecycle method.
+1. To prevent performance issues and memory leaks, destroy the component on the `componentWillUnmount` lifecycle method.
 
     ```
         this.kendoSpreadsheetInstance.destroy()
@@ -89,13 +94,6 @@ The Kendo UI for jQuery widgets can be used inside a React application following
 
 ## See Also
 
-* [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
-* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
-* [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
-* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
-* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
-* [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
 * [Module Bundlers]({% slug module_bundlers_integration_kendoui %})
-* [Aurelia]({% slug aurelia_integration_kendoui %})

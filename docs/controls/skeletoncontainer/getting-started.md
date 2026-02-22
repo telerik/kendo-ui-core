@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery SkeletonContainer Documentation - Getting Started with the SkeletonContainer
 description: "Get started with the jQuery SkeletonContainer by Kendo UI and learn how to create and initialize the component in a few easy steps."
+components: ["skeletoncontainer"]
 slug: getting_started_kendoui_skeletoncontainer_component
 position: 2
 ---
@@ -90,8 +91,4 @@ Here, you will apply configuration settings, such as [`animation`](/api/javascri
 * [JavaScript API Reference of the SkeletonContainer](/api/javascript/ui/skeletoncontainer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

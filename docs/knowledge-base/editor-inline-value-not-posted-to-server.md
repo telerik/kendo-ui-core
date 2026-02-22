@@ -6,7 +6,7 @@ slug: editor_inline_value_not_posted_server
 tags: telerik, progress, kendoui, jquery, editor, inline, value, is, not, posted, on, the, server 
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

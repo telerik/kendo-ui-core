@@ -5,9 +5,9 @@ description: "Learn how to nest editors inside event templates and update the un
 previous_url: /controls/scheduling/scheduler/how-to/editors-inside-event-template, /controls/scheduling/scheduler/how-to/editing/editors-inside-event-template
 slug: howto_nest_editorsinside_event_templates_scheduler
 tags: telerik, kendo, jquery, scheduler, nest, editors, inside, event, templates 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -65,8 +65,8 @@ The following example demonstrates how to achieve the desired scenario.
 
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
             "day",
@@ -80,26 +80,28 @@ The following example demonstrates how to achieve the desired scenario.
           timezone: "Etc/UTC",
           dataSource: {
             batch: true,
-            transport: {
+            transport: {             
               read: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                  type: "POST",
+                  contentType: "application/json"
               },
               create: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                  type: "POST",
+                  contentType: "application/json"
               },
               destroy: {
-                url: "//demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                  type: "POST",
+                  contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

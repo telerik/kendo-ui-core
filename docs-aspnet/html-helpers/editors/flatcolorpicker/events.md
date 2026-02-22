@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI FlatFlatColorPicker component for {{ site.framework }}."
+components: ["flatcolorpicker"]
 slug: events_flatcolorpicker
 position: 6
 ---

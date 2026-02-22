@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery FloatingActionButton Documentation - Getting Started with the FloatingActionButton
 description: "Get started with the jQuery FloatingActionButton by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["floatingactionbutton"]
 slug: getting_started_kendoui_floatingactionbutton_widget
 position: 2
 ---
@@ -95,8 +96,4 @@ You can add an icon to the FloatingActionButton by utilizing the [`icon`](/api/j
 * [JavaScript API Reference of the jQuery FloatingActionButton](/api/javascript/ui/floatingactionbutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

@@ -2,6 +2,7 @@
 title: Start View and Navigation Depth
 page_title: Start View and Selection Depth
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to define the start view and control the navigation depth."
+components: ["datetimepicker"]
 slug: navdepth_datetimepicker_aspnetcore
 position: 4
 ---

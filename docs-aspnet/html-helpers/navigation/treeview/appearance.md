@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI TreeView for {{ site.framework }}."
+components: ["treeview"]
 slug: appearance_treeview
 position: 3
 ---
@@ -21,9 +22,10 @@ The following values are available for the `Size` option:
 - `Small`—small size (applies the `k-treeview-sm` class to the wrapping div element)
 - `Medium`—medium size (applies the `k-treeview-md` class to the wrapping div element)
 - `Large`—large size (applies the `k-treeview-lg` class to the wrapping div element)
-- `None`—unset.
 
-The default size value is `Medium`.
+> When not explicitly set, the applied theme controls the default size.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 The example below shows a basic TreeView configuration and how to set `Size` to `Large`:
 

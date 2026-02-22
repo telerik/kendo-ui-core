@@ -8,6 +8,19 @@ export function copyUploadPrototype() {
     );
 }
 
+export function simulateDrop(srcFiles, uploadInstance) {
+    let dropEvent = $.Event("drop", {
+        originalEvent: {
+            dataTransfer: {
+                files: srcFiles
+            }
+        },
+        stopPropagation: function() { },
+        preventDefault: function() { }
+    });
+    $(uploadInstance.wrapper).find(".k-dropzone").trigger(dropEvent);
+}
+
 export function createHTML() {
     $("#testbed_container").remove();
     let html = '<div id="testbed_container"><div id="prototype" style="display:none">' +

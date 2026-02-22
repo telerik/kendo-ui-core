@@ -5,9 +5,9 @@ description: "Learn how to resize the Kendo UI Grid when using frozen columns."
 previous_url: /controls/data-management/grid/how-to/Layout/change-grid-height-when-using-frozen-columns
 slug: howto_change_grid_height_frozen_columns
 tags: grid, change, height, frozen, locked, columns
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -77,9 +77,9 @@ The following example demonstrates how to change the height style of the [`<div>
 
       $("#grid").kendoGrid({
         dataSource: {
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/odata/Orders"
           },
           schema: {
             model: {

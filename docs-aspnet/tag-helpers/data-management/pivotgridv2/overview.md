@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI PivotGridV2 TagHelper for ASP.NET Core (MVC 6 or ASP.NET Core MVC)."
+components: ["pivotgridv2"]
 slug: taghelpers_pivotgridv2_aspnetcore
 previous_url: /helpers/tag-helpers/pivotgridv2
 position: 1
@@ -38,7 +39,7 @@ The PivotGrid TagHelper configuration options are passed as attributes of the ta
         <schema type="xmla"/>
         <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
         <transport>
-            <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+            <read url="https://demos.telerik.com/service/v2/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
             <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
         </transport>
     </kendo-pivotdatasourcev2>
@@ -73,7 +74,7 @@ The PivotGrid TagHelper configuration options are passed as attributes of the ta
                     .Catalog("Adventure Works DW 2008R2")
                     .Cube("Adventure Works"))
                 .Read(read => read
-                    .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                    .Url("https://demos.telerik.com/service/v2/olap/msmdpump.dll")
                     .DataType("text")
                     .ContentType("text/xml")
                     .Type(HttpVerbs.Post)

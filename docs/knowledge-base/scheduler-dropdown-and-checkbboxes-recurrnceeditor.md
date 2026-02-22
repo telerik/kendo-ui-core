@@ -6,7 +6,7 @@ page_title: Use DropDownList for RecurrenceEditor and Checkboxes for Week Days S
 slug: scheduler-dropdown-and-checkbboxes-recurrnceeditor
 tags: recurrence, recurrenceeditor, scheduler, editor, dropdownlist, checkboxes
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -447,24 +447,26 @@ In order to have the DropDownList and the checkboxes instead of the current Butt
             batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },

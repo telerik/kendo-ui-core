@@ -2,6 +2,7 @@
 title: Troubleshooting
 page_title: Troubleshooting
 description: "Learn about the solutions of common issues that may occur while working with Telerik UI Upload for {{ site.framework }}."
+components: ["upload"]
 previous_url: /aspnet-mvc/helpers/upload/troubleshooting, /aspnet-mvc/upload/troubleshooting, /helpers/editors/upload/troubleshooting
 slug: troubleshoot_uploadhelper_aspnetmvc
 position: 40

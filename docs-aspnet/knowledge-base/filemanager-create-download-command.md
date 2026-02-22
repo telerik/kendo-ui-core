@@ -7,6 +7,7 @@ tags: filemanager, custom command, download command
 component: filemanager
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 

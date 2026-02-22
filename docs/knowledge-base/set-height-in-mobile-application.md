@@ -5,9 +5,9 @@ description: "Learn how to set a 100% height of a Kendo UI Map widget in mobile 
 slug: howto_set100percentheight_inmobileapps_map
 previous_url: /controls/diagrams-and-maps/map/how-to/set-height-in-mobile-application
 tags: kendo, jquery, map, set, hundred, percent, 100%, height, on, mobile, apps
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment
@@ -39,7 +39,7 @@ How can I set the height of the Kendo UI for jQuery Map to 100% on mobile?
 
 The following example demonstrates how to use the Map widget in a Kendo UI Mobile View and set the height for the Map to 100%.
 
-```dojo
+```
     <div data-role="view" data-init="createMap" data-stretch="true">
       <div id="map"></div>
     </div>

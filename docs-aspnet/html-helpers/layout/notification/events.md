@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Notification component for {{ site.framework }}."
+components: ["notification"]
 slug: events_notification_aspnetcore
 position: 6
 ---

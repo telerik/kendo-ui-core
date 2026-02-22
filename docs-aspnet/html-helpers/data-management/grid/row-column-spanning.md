@@ -2,6 +2,7 @@
 title: Row and Column Spanning
 page_title: Row and Column Spanning
 description: "Learn how to implement row and column spanning for cells of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: grid_aspnetcore_spanning
 position: 21
 ---
@@ -263,5 +264,8 @@ The example below demonstrates how to define the conditions based on which the v
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Row and Column Spanning of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/row-column-spanning)
 * [Server-Side API](/api/grid)

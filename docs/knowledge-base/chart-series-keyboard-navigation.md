@@ -7,6 +7,7 @@ slug: chart-series-keyboard-navigation
 tags: chart, series, accessibility, keyboard, navigation, aria, label, screenreader, reader, screen
 ticketid: 1497415
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -59,7 +60,7 @@ The following example showcases the full implementation of the logic with multip
       }
     </style>
 
-    <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+    <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
     <script>
       function createChart() {
         $("#chart").kendoChart({
@@ -290,7 +291,7 @@ The following example showcases the full implementation of the logic with single
       }
     </style>
 
-    <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+    <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
     <script>
       function createChart() {
         $("#chart").kendoChart({

@@ -6,6 +6,7 @@ page_title: ListView Load More Items Button
 slug: listview-load-more-button
 tags: kendo, kendo-ui, listview, load, more, fetch, paging
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment
@@ -29,12 +30,12 @@ You can use the internal logic of the Endless Scrolling feature to load more ite
 
 ```dojo
     <div id="listView"></div>
-    <button id="load" class="k-button k-button-md k-button-solid-primary">Load More</button>
+    <button id="load" class="k-button k-button-primary">Load More</button>
 
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
+            <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName #" />
             <h3>#:ProductName#</h3>
             <p>#:kendo.toString(UnitPrice, "c")#</p>
       </div>
@@ -59,8 +60,7 @@ You can use the internal logic of the Endless Scrolling feature to load more ite
         var dataSource = new kendo.data.DataSource({
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/Products",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/Products"
             }
           },
           pageSize: 9

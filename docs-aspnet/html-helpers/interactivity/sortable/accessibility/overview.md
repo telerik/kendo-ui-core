@@ -2,7 +2,8 @@
 title: Overview
 page_title: Sortable Documentation | Sortable Accessibility
 description: "Get started with the {{ site.product }} Sortable and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_sortable_overview
+components: ["sortable"]
+slug: htmlhelpers_sortable_accessibility
 position: 1
 ---
 

@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn how to customize its templates."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_templates
 position: 8
 ---
@@ -88,9 +89,11 @@ The editable header template controls the rendering of the header. It is set thr
 
 The following example shows an editable header template.
 
-    <script id="editable-header-template" type="text/x-kendo-template">
-        <div class='k-taskboard-pane-header-text'>Editing <strong>#:Title#</strong></div>
-    </script>
+```JS
+<script id="editable-header-template" type="text/x-kendo-template">
+    <div class='k-taskboard-pane-header-text'>Editing <strong>#:Title#</strong></div>
+</script>
+```
 
 ## Preview Pane Template
 
@@ -110,20 +113,22 @@ The preview pane template controls the rendering of the preview pane. It is set 
 
 The following example shows a preview pane template.
 
-    <script id="previewPane-content-template" type="text/x-kendo-template">
-        <div class="k-taskboard-pane-content">
-            <p>#: Description #</p>
-            <p>#: kendo.toString(Start, "MMMM dd, h:mm tt")# - #:kendo.toString(End, "MMMM dd, h:mm tt")#</p>
-        </div>
-        <div class="k-taskboard-pane-actions k-action-buttons k-actions-end">
-            <button class="k-button k-button-icontext" title="Delete" data-command="DeleteCardCommand" data-options="null">
-                <span class="k-icon k-i-delete "></span>Delete
-            </button>
-            <button class="k-button k-button-icontext k-primary" title="Edit" data-command="EditCardCommand" data-options="null">
-                <span class="k-icon k-i-edit"></span>Edit
-            </button>
-        </div>
-    </script>
+```JS
+<script id="previewPane-content-template" type="text/x-kendo-template">
+    <div class="k-taskboard-pane-content">
+        <p>#: Description #</p>
+        <p>#: kendo.toString(Start, "MMMM dd, h:mm tt")# - #:kendo.toString(End, "MMMM dd, h:mm tt")#</p>
+    </div>
+    <div class="k-taskboard-pane-actions k-action-buttons k-actions-end">
+        <button class="k-button k-button-icontext" title="Delete" data-command="DeleteCardCommand" data-options="null">
+            <span class="k-icon k-i-delete "></span>Delete
+        </button>
+        <button class="k-button k-button-icontext k-primary" title="Edit" data-command="EditCardCommand" data-options="null">
+            <span class="k-icon k-i-edit"></span>Edit
+        </button>
+    </div>
+</script>
+```
 
 ## Preview Pane Header Template
 
@@ -143,17 +148,19 @@ The preview pane header template controls the rendering of the header of the pre
 
 The following example shows a preview pane header template.
 
-    <script id="previewPane-header-template" type="text/x-kendo-template">
-        <div class="k-taskboard-pane-header">
-            <h3 class="k-taskboard-pane-header-text">#: Title #</h3>
-            <span class="k-spacer"></span>
-            <div class="k-taskboard-pane-header-actions">
-                <button class="k-button k-button-icon k-flat" title="Close" data-command="ClosePaneCommand">
-                    <span class="k-icon k-i-close"></span>
-                </button>
-            </div>
+```JS
+<script id="previewPane-header-template" type="text/x-kendo-template">
+    <div class="k-taskboard-pane-header">
+        <h3 class="k-taskboard-pane-header-text">#: Title #</h3>
+        <span class="k-spacer"></span>
+        <div class="k-taskboard-pane-header-actions">
+            <button class="k-button k-button-icon k-flat" title="Close" data-command="ClosePaneCommand">
+                <span class="k-icon k-i-close"></span>
+            </button>
         </div>
-    </script>
+    </div>
+</script>
+```
 
 ## See Also
 

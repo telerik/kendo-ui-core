@@ -5,9 +5,9 @@ description: "Learn how to reset expand/collapse state and fetch the data again 
 previous_url: /controls/data-management/pivotgrid/how-to/reset-expand-state, /controls/data-management/pivotgrid/how-to/dimensions/reset-expand-state
 slug: howto_reset_expand_state_pivotgrid
 tags: kendoui, pivotgrid, reset, expand, state
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -67,7 +67,7 @@ The following example demonstrates how to reset the expand/collapse state and fe
                       catalog: "Adventure Works DW 2008R2",
                       cube: "Adventure Works"
                     },
-                    read: "https://demos.telerik.com/olap/msmdpump.dll",
+                    read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
                     parameterMap: function(options, type) {
                       var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
 

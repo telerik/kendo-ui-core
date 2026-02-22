@@ -7,6 +7,7 @@ slug: grid-dropdownlist-command-template
 tags: grid, column, template, dropdownlist, command, custom
 ticketid: 1575207
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -37,7 +38,7 @@ To achieve the desired scenario:
 1. Traverse through each records by handling the [`DataBound`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/grideventbuilder#databoundsystemstring) event of the Grid. To initialize the DropDownlists, use the previously decorated common class for the custom command input.
 1. Handle each of the command options by subscribing to the [`Change`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/dropdownlisteventbuilder#changesystemstring) event of the DropDownLists.
 
-```Index.cshtml
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -66,7 +67,42 @@ To achieve the desired scenario:
         )
     )
 ```
-```Script.js
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" on-data-bound="onDataBound" style="height:430px">
+        <columns>
+            <column field="ProductName" />
+            <column field="UnitPrice" width="100" />
+            <column field="UnitsInStock" width="100" />
+            <column field="Discontinued" width="100" />
+            <column>
+                <commands>
+                    <column-command text="myCommand" template="<input class='dropDownTemplate' />" style="width: 172px;" />
+                </commands>
+            </column>
+        </columns>
+        <toolbar>
+            <toolbar-button name="create" text="Create" />
+        </toolbar>
+        <editable mode="inline" enabled="true" />
+        <pageable enabled="true" />
+        <sortable enabled="true" />
+        <scrollable enabled="true" />
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+            <schema>
+                <model id="ProductID" />
+            </schema>
+            <transport>
+                <read url="@Url.Action("EditingInline_Read", "Grid")" />
+                <create url="@Url.Action("EditingInline_Create", "Grid")" />
+                <update url="@Url.Action("EditingInline_Update", "Grid")" />
+                <destroy url="@Url.Action("EditingInline_Destroy", "Grid")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
+```JS script.js
 <script type="text/javascript">
     var ddlDataSource = [ // Create a common DataSource.
             {

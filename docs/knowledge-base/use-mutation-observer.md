@@ -5,9 +5,9 @@ description: "Learn how to use the MutationObserver to add a red border and hide
 previous_url: /framework/validator/how-to/use-mutation-observer, /controls/editors/validator/how-to/use-mutation-observer
 slug: howto_usemutationobserver_addborderandhidetooltip_validator
 tags: telerik, kendo, jquery, validator, use, mutationobserver, add, border, hide, tooltip
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment
@@ -67,7 +67,7 @@ The following example demonstrates how to achieve this behavior by using a `Muta
         height: 323px;
         margin: 0 auto;
         padding: 10px 20px 20px 170px;
-        background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
+        background: url('https://demos.telerik.com/kendo-ui/content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
       }
       #tickets h3 {
         font-weight: normal;

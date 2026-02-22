@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery PDFViewer Documentation | PDFViewer Accessibility
 description: "Get started with the jQuery PDFViewer by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_pdfviewer_widget
+components: ["pdfviewer"]
+slug: jquery_pdfviewer_accessibility
 position: 1
 ---
 
@@ -28,7 +29,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The PDF Viewer component contains two inner elements - a toolbar and a page container.
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |

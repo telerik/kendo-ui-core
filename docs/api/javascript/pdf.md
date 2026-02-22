@@ -18,6 +18,12 @@ The [exportPDF](/api/javascript/drawing/methods/drawdom) method will use the fon
 Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig [CSS `@font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face) directly from the stylesheets. "Manually" calling the `pdf.defineFont()`method is no longer necessary. For more information how to embed fonts using CSS at-rules - check [this]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) section. This will work only if the style sheet and fonts are loaded from the same domain.
 
 > Fonts must be loaded from the same origin or [CORS-enabled](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image).
+> The only format supported by the `defineFont` method is `.ttf`.
+
+
+<div class="meta-api-description">
+How do I configure custom fonts for PDF generation in Kendo UI? Configure and map TrueType font files (.ttf) locations to enable embedding custom fonts in generated PDF documents, control font embedding by specifying font file paths, set font resources for PDF creation, support defining multiple font mappings safely for consistent font usage across exports, enable usage of local or same-origin TrueType fonts in PDF output, handle font embedding when automatic CSS @font-face extraction is unavailable or cross-origin restrictions prevent stylesheet font loading, support only .ttf font format and ensure fonts are loaded from the same domain or via CORS to embed them correctly in PDF generation processes.
+</div>
 
 #### Parameters
 

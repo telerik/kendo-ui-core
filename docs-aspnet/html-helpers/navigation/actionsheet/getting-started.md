@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ActionSheet component by following a complete step-by-step tutorial."
+components: ["actionsheet"]
 slug: action_sheet_getting_started
 position: 1
 ---
@@ -44,6 +45,10 @@ Use the ActionSheet HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the ActionSheet element.
 * The `Title()` option specifies the title that will be displayed in the header.
 * The `Items()` method configures the component items.
+* The `CloseOnClick()` determines whether the ActionSheet will close when clicking outside of it
+* The `ActionButtonsAlignment()` controls the alignment of the action buttons in the footer.
+* The `ActionButtonOrientation()` controls the orientation of the action buttons in the footer.
+* The `StartButton()` configures a start button that will be rendered in the left side of the header section of the ActionSheet.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -52,11 +57,20 @@ Use the ActionSheet HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
         @(Html.Kendo().ActionSheet()
             .Name("actionsheet")
             .Title("Choose an option")
+            .CloseOnClick(true)
+            .ActionButtonsAlignment(ActionButtonsAlignment.Justify)
+            .ActionButtonsOrientation(ActionButtonsOrientation.Vertical)
             .Items(items =>
             {
                 items.Add().Text("Add to favorites").IconClass("k-i-heart").Click("onItemClick");
                 items.Add().Text("Share").IconClass("k-i-share").Click("onItemClick");
                 items.Add().Text("Comment").IconClass("k-i-comment").Click("onItemClick");
+            })
+            .StartButton(startButton =>
+            {
+                startButton
+                    .Icon("pencil")
+                    .Click("startButtonClick");
             })
         )
     </div>
@@ -66,18 +80,80 @@ Use the ActionSheet HtmlHelper {% if site.core %}or TagHelper{% endif %} to add 
     @addTagHelper *, Kendo.Mvc
 
     <div id="city" class="demo-view">
-        <kendo-actionsheet name="actionsheet" title="Choose an option">
+        <kendo-actionsheet 
+            name="actionsheet"
+            title="Choose an option"
+            close-on-click="true"
+            action-buttons-alignment="ActionButtonsAlignment.Justify"
+            action-buttons-orientation="ActionButtonsOrientation.Vertical"
+        >
             <items>
                 <item text="Add to Favorites" icon-class="k-i-heart" click="onItemClick" />
                 <item text="Share" icon-class="k-i-share" click="onItemClick" />
                 <item text="Comment" icon-class="k-i-comment" click="onItemClick" />
             </items>
+            <start-button icon="pencil" click="startButtonClick"/>
         </kendo-actionsheet>
     </div>
 ```
 {% endif %}
 
-## 3. Configure the Card and the Button
+## 3. Configure the Animation
+
+Next, use the `Animation()` method to configure the effects that the component renders when the user opens and closes the ActionSheet.
+
+```HtmlHelper
+    @using Kendo.Mvc.UI
+
+    <div id="city" class="demo-view">
+        @(Html.Kendo().ActionSheet()
+            .Name("actionsheet")
+            .Title("Choose an option")
+            .CloseOnClick(true)
+            .ActionButtonsAlignment(ActionButtonsAlignment.Justify)
+            .ActionButtonsOrientation(ActionButtonsOrientation.Vertical)
+            .Items(items =>
+            {
+                items.Add().Text("Add to favorites").IconClass("k-i-heart").Click("onItemClick");
+                items.Add().Text("Share").IconClass("k-i-share").Click("onItemClick");
+                items.Add().Text("Comment").IconClass("k-i-comment").Click("onItemClick");
+            })
+            .Animation(animation =>
+            {   
+                animation.Open(open =>
+                {
+                    open.Expand(ExpandDirection.Horizontal);
+                    open.Fade(FadeDirection.In);
+                    open.Duration(500);
+                });
+            })
+        )
+    </div>
+```
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+    <div id="city" class="demo-view">
+        <kendo-actionsheet 
+            name="actionsheet"
+            title="Choose an option"
+            close-on-click="true"
+            action-buttons-alignment="ActionButtonsAlignment.Justify"
+            action-buttons-orientation="ActionButtonsOrientation.Vertical"
+        >
+            <items>
+                <item text="Add to Favorites" icon-class="k-i-heart" click="onItemClick" />
+                <item text="Share" icon-class="k-i-share" click="onItemClick" />
+                <item text="Comment" icon-class="k-i-comment" click="onItemClick" />
+            </items>
+            <popup-animation enabled="true">
+                <open effects="expand:horizontal fade:in" duration="500" />
+            </popup-animation>
+        </kendo-actionsheet>
+    </div>
+```
+
+## 4. Configure the Card and the Button
 
 The next step is to define the Card and the Button components—the ActionSheet will be displayed on top of the Card when the Button is clicked.
 
@@ -150,7 +226,7 @@ The next step is to define the Card and the Button components—the ActionSheet 
 
 Handle the `Click` event of the Button and call the [`open()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet/methods/open) client-side method to open the ActionSheet.
 
-```Scripts
+```JS scripts
     <script>
         function moreOptionsClick() {
             var actionsheet = $("#actionsheet").data("kendoActionSheet");
@@ -161,7 +237,7 @@ Handle the `Click` event of the Button and call the [`open()`](https://docs.tele
 
 Handle the `Click` event of each ActionSheet item and call the [`close()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet/methods/close) client-side method to close the ActionSheet when an item is selected.
 
-```Scripts
+```JS scripts
     <script>
         function onItemClick() {
             var actionsheet = $("#actionsheet").data("kendoActionSheet");
@@ -170,7 +246,7 @@ Handle the `Click` event of each ActionSheet item and call the [`close()`](https
     </script>
 ```
 
-## 4. Handle the ActionSheet Events
+## 5. Handle the ActionSheet Events
 
 The ActionSheet exposes [events](/api/kendo.mvc.ui.fluent/actionsheeteventbuilder) that you can handle and further customize the functionality of the component. In this tutorial, you will use the `Activate` event to disable the <b>Share</b> ActionSheet item based on a specified condition (for example, depending on the user permissions).
 
@@ -202,7 +278,7 @@ The ActionSheet exposes [events](/api/kendo.mvc.ui.fluent/actionsheeteventbuilde
     </kendo-actionsheet>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         var isAdmin = false;
         function onActivate() {
@@ -213,13 +289,13 @@ The ActionSheet exposes [events](/api/kendo.mvc.ui.fluent/actionsheeteventbuilde
     </script>
 ```
 
-## 5. (Optional) Reference Existing ActionSheet Instances
+## 6. (Optional) Reference Existing ActionSheet Instances
 
 You can reference the ActionSheet instances that you have created and build on top of their existing configuration:
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var actionSheetReference = $("#actionsheet").data("kendoActionSheet"); // actionSheetReference is a reference to the existing ActionSheet instance of the helper.
@@ -227,7 +303,7 @@ You can reference the ActionSheet instances that you have created and build on t
         </script>
     ```
 
-1. Use the [ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet#methods) to control the behavior of the component. In this example, you will enable the adaptive mode of the ActionSheet through the [`Adaptive()`](api/kendo.mvc.ui.fluent/actionsheetbuilder#adaptive) option and use the `fullscreen()` method to set the ActionSheet in full-screen mode dynamically (for example, when a button is clicked).
+1. Use the [ActionSheet client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/actionsheet#methods) to control the behavior of the component. In this example, you will enable the adaptive mode of the ActionSheet through the [`Adaptive()`](/api/kendo.mvc.ui.fluent/actionsheetbuilder#adaptivesystemboolean) option and use the `fullscreen()` method to set the ActionSheet in full-screen mode dynamically (for example, when a button is clicked).
 
 
     ```HtmlHelper
@@ -266,7 +342,7 @@ You can reference the ActionSheet instances that you have created and build on t
         </kendo-actionsheet>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var actionSheetReference = $("#actionsheet").data("kendoActionSheet");
@@ -283,8 +359,8 @@ For more information on referencing specific helper instances, see the [Methods 
 
 You can continue experimenting with the code sample above by running it in the Telerik REPL server playground:
 
-* [Sample code with the ActionSheet HtmlHelper](https://netcorerepl.telerik.com/QHvbbHQu27Xz7SvT04)
-* [Sample code with the ActionSheet TagHelper](https://netcorerepl.telerik.com/GdllFHma315X63Gz21)
+* [Sample code with the ActionSheet HtmlHelper](https://netcorerepl.telerik.com/GzuoGSln40F4zO7h04)
+* [Sample code with the ActionSheet TagHelper](https://netcorerepl.telerik.com/mpOymybd409eBlLh27)
 
 {% endif %}
 

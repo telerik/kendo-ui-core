@@ -6,7 +6,7 @@ page_title: Duplicate Pager - Kendo UI for jQuery Data Grid
 slug: grid-show-pager-top-bottom
 tags: grid, pager, duplicate, top, bottom, multiply, clone
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -36,9 +36,8 @@ The following example demonstrates how you can duplicate and add the Pager above
     $(document).ready(function () {
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 pageSize: 20
             },

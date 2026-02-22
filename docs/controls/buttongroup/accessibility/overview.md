@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery ButtonGroup Documentation | ButtonGroup Accessibility
 description: "Get started with the jQuery ButtonGroup by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_buttongroup_jquery
+components: ["buttongroup"]
+slug: jquery_buttongroup_accessibility
 position: 1
 ---
 

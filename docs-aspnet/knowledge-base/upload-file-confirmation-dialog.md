@@ -6,6 +6,7 @@ slug: upload-file-confirmation-dialog
 tags: upload, dialog, confirmation, file, telerik, core, mvc
 ticketid: 1660745
 res_type: kb
+components: ["general"]
 component: upload
 ---
 
@@ -70,7 +71,7 @@ The following example demonstrates how to implement these steps:
 ```
  {% endif %}
 
-```Script.js
+```JS script.js
 <script>
     function onUpload(e){
         let upload = $("#files").getKendoUpload();

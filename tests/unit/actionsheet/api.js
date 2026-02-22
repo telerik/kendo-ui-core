@@ -54,15 +54,15 @@ describe("kendo.ui.ActionSheet API", function() {
 
     it("setOptions method updates the component configuration", function() {
         createInstance();
-        
+
         instance.setOptions({
             title: "Updated Title"
         });
-        
+
         instance.open();
-        
+
         var title = instance.element.find(".k-actionsheet-title").text();
-        
+
         assert.equal(title, "Updated Title");
     });
 });

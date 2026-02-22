@@ -7,6 +7,7 @@ slug: treelist-filter-checkboxes
 tags: treelist, filter, menu, checkbox
 ticketid: 1610040
 res_type: kb
+components: ["treelist"]
 ---
 
 ## Environment
@@ -44,14 +45,13 @@ The following example demonstrates how to create a menu functionality based on a
 
       <script>
         $(document).ready(function() {
-          var service = "https://demos.telerik.com/kendo-ui/service";
+          var service = "https://demos.telerik.com/service/v2/core";
 
           $("#treelist").kendoTreeList({
             dataSource: {
               transport: {
                 read: {
-                  url: service + "/EmployeeDirectory/All",
-                  dataType: "jsonp"
+                  url: service + "/EmployeeDirectory/All"
                 }
               },
               schema: {

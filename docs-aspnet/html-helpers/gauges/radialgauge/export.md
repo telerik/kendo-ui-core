@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Learn the Export Options of the Telerik UI RadialGauge component for {{ site.framework }}."
+components: ["radialgauge"]
 slug: export_radialgaugehelper_aspnetcore
 position: 4
 ---
@@ -10,17 +11,17 @@ position: 4
 
 The Telerik UI RadialGauge for {{ site.framework }} export relies on the [Telerik UI DrawingAPI library](https://docs.telerik.com/kendo-ui/framework/drawing/dom-elements/overview). It enables you to export the content to:
 
-* [Export as PDF](#export-to-pdf)
+* [Export as PDF](#export-as-pdf)
 
-* [Export as Image](#export-to-image)
+* [Export as Image](#export-as-image)
 
-* [Export as SVG](#export-to-svg)
+* [Export as SVG](#export-as-svg)
 
 ## Export as PDF
 
 The radial gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-pdf k-button'>Export as PDF</button>
     
     @(Html.Kendo().RadialGauge()
@@ -39,7 +40,7 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -66,7 +67,7 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -79,7 +80,7 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
 
 The radial gauge allows you to retrieve the Image representation of the content via the [exportImage method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().RadialGauge()
@@ -98,7 +99,7 @@ The radial gauge allows you to retrieve the Image representation of the content 
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -125,7 +126,7 @@ The radial gauge allows you to retrieve the Image representation of the content 
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -138,7 +139,7 @@ The radial gauge allows you to retrieve the Image representation of the content 
 
 The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content via the [exportSVG method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```HtmlHelper        
+```HtmlHelper
     <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().RadialGauge()
@@ -157,7 +158,7 @@ The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) repre
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -184,7 +185,7 @@ The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) repre
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });

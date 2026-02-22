@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery MultiSelect Documentation - Data Binding
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to bind the MultiSelect to local data arrays and to remote data sources."
+components: ["multiselect"]
 slug: databinding_multiselect
 position: 3
 ---
@@ -59,8 +60,7 @@ To initialize the MultiSelect by binding the component to remote data arrays and
             dataSource: {
                 transport: {
                     read: {
-                        dataType: "jsonp",
-                        url: "https://demos.telerik.com/kendo-ui/service/Products"
+                        url: "https://demos.telerik.com/service/v2/core/Products"
                     }
                 }
             }
@@ -83,11 +83,11 @@ The following example demonstrates how to preselect values on initial loading.
                 dataTextField: "Name",
                 dataValueField: "Id",
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     serverFiltering: true,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                            url: "https://demos.telerik.com/service/v2/odata/Products",
                         }
                     }
                 },

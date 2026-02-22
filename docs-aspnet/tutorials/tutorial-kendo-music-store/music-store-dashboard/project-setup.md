@@ -2,6 +2,7 @@
 title: Set Up the Project
 page_title: Set Up the Project - Music Store Dashboard Tutorial
 description: "Learn how to set up the Kendo UI Music Store Dashboard sample project by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: projectsetup_muscistoredashboard_aspnetmvc
 position: 1
 ---

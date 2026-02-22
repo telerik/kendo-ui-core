@@ -5,9 +5,9 @@ description: "Learn how to restyle the row border width in a Kendo UI for jQuery
 previous_url: /controls/scheduling/scheduler/how-to/re-style-row-border-width, /controls/scheduling/scheduler/how-to/appearance/re-style-row-border-width
 slug: howto_restyle_row_border_width_scheduler
 tags: telerik, kendo, jquery, scheduler, restyle, width, of, row, borders 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -53,8 +53,8 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
       $(function() {
         $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
             "day",
@@ -68,24 +68,26 @@ The following example demonstrates how to achieve the desired scenario.
             batch: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                 type: "POST",
+               contentType: "application/json"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                 type: "POST",
+               contentType: "application/json"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                 type: "POST",
+               contentType: "application/json"
               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },
@@ -155,19 +157,20 @@ The following example demonstrates how to achieve the desired scenario.
         vertical-align: top;
       }
 
-      #team-schedule {
-        background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
+       #team-schedule {
+        background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/team-schedule.png') transparent no-repeat;
         height: 115px;
         position: relative;
       }
 
       #people {
-        background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
+        background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/scheduler-people.png') no-repeat;
         width: 345px;
         height: 115px;
         position: absolute;
         right: 0;
       }
+      
       #alex {
         position: absolute;
         left: 4px;

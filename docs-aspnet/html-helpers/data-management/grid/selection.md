@@ -2,6 +2,7 @@
 title: Selection
 page_title: Selection
 description: "Learn how to enable the selection functionality of the Telerik UI Grid for {{ site.framework }}."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_selection
 position: 11
 ---
@@ -22,6 +23,7 @@ To control the selection in the Grid, use the `Selectable` property.
         .Selectable(selectable => selectable
             .Mode(GridSelectionMode.Multiple))
 		...
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -48,6 +50,7 @@ You can set the select mode of the Grid to `Multiple` or `Single`. Additionally,
             .Mode(GridSelectionMode.Multiple)
             .Type(GridSelectionType.Cell))
         ...
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -62,13 +65,14 @@ You can set the select mode of the Grid to `Multiple` or `Single`. Additionally,
 The Grid allows you to conditionally drag to select when the multiple selection mode is configured for rows or cells through the `DragToSelect` property.
 
 ```HtmlHelper
-        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("cellSelection")
         .Selectable(selectable => selectable
             .DragToSelect(false)
             .Mode(GridSelectionMode.Multiple)
             .Type(GridSelectionType.Row))
         ...
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -90,6 +94,8 @@ The Grid also provides a built-in functionality for persisting the selection thr
     .DataSource(dataSource => dataSource
         .Ajax()
         .Model(model => model.Id(p => p.OrderID))
+        ...
+    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -125,7 +131,7 @@ To get data from the selected rows, use the `Change` event of the Grid:
 
 1. Declare the event handler and access the selected data items.
 
-    ````HTML
+    ````JS
     <script>
         function onChange(e) {
             var selectedRows = this.select(); //Get the selected Grid rows.
@@ -144,7 +150,7 @@ To get data from the selected rows, use the `Change` event of the Grid:
 
 To clear the selected row data, use the [`clearSelectionMethod`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection).
 
-```
+```JS
 <script>
     function clearSelection(){ // Custom function.
         var grid = $("#grid").data("kendoGrid");
@@ -155,6 +161,9 @@ To clear the selected row data, use the [`clearSelectionMethod`](https://docs.te
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Multiple Selection by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)
 * [Checkbox Selection by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/checkbox-selection)
 * [Persisting the State of the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/persist-state)

@@ -5,9 +5,9 @@ description: "Learn how to persist an entered date in the Kendo UI DatePicker up
 slug: howto_persist_entered_dates_datepicker
 previous_url: /controls/editors/datepicker/how-to/persist-entered-date
 tags: kendo, jquery, datepicker, persist, entered, dates, and, navigation, between, pages
-component: datepicker
 type: how-to
 res_type: kb
+components: ["datepicker"]
 ---
 
 ## Environment

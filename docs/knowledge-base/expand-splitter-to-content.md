@@ -5,9 +5,9 @@ description: "Learn how to expand the Kendo UI Splitter based on the height of t
 slug: howto_expandtocontent_splitter
 previous_url: /controls/layout/splitter/how-to/expand-splitter-to-content
 tags: telerik, kendo, jquery, splitter, expand, based, on, content, height  
-component: splitter
 type: how-to
 res_type: kb
+components: ["splitter"]
 ---
 
 ## Environment
@@ -68,9 +68,8 @@ The following example demonstrates how to make the Kendo UI Splitter expand its 
 
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
-                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
                 }
             },
             columns: [{

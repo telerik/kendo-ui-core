@@ -6,6 +6,7 @@ type: how-to
 slug: grid-excel-export-strikethrough-text
 tags: grid, excel, export, text, decoration, strike, strikethrough
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -52,8 +53,7 @@ Certain values in my Grid have a strikethrough decoration applied with the `<s><
         dataSource: {
           transport: {
             read: {
-              url: "https://demos.telerik.com/kendo-ui/service/products",
-              dataType: "jsonp"
+              url: "https://demos.telerik.com/service/v2/core/products"
             }
           },
           pageSize: 10

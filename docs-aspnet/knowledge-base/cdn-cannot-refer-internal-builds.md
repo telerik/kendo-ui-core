@@ -6,6 +6,7 @@ page_title: Referring Kendo UI internal builds from a CDN
 slug: cdn_cannot_refer_internal_builds
 tags: refer, internal, kendo, builds, cdn
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

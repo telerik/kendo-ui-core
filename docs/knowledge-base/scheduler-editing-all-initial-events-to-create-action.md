@@ -6,7 +6,7 @@ slug: scheduler_editing_initial_events_to_create
 tags: telerik, progress, kendoui, scheduler, when, editing, all, initial, events, sent, to, create, action
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

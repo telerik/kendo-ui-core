@@ -5,9 +5,9 @@ description: "Learn how to get the UID of events on hover in the Kendo UI for jQ
 previous_url: /controls/scheduling/scheduler/how-to/get-event-uid-on-hover, /controls/scheduling/scheduler/how-to/editing/get-event-uid-on-hover
 slug: howto_get_the_uid_of_an_event_on_hover_scheduler
 tags: telerik, kendo, jquery, scheduler, get, the, uid, of, event, on, hover 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -66,26 +66,28 @@ $(function() {
         timezone: "Etc/UTC",
         dataSource: {
             batch: true,
-            transport: {
+            transport: {                
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },
@@ -167,13 +169,13 @@ $(function() {
 }
 
 #team-schedule {
-    background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
+    background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/team-schedule.png') transparent no-repeat;
     height: 115px;
     position: relative;
 }
 
 #people {
-    background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
+    background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/scheduler-people.png') no-repeat;
     width: 345px;
     height: 115px;
     position: absolute;

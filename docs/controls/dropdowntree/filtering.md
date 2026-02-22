@@ -2,6 +2,7 @@
 title: Filtering
 page_title: jQuery DropDownTree Documentation - Filtering
 description: "Get started with the jQuery DropDownTree by Kendo UI and filter the displayed items of the widget by their text value."
+components: ["dropdowntree"]
 slug: filtering_kendoui_dropdowntree
 position: 4
 ---
@@ -23,12 +24,11 @@ The following example demonstrates how to set the filter of the DropDownTree.
     <input id="dropdowntree"></input>
 
     <script>
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         var myDataSource = new kendo.data.HierarchicalDataSource({
             transport: {
                 read: {
-                url: serviceRoot + "/Employees",
-                dataType: "jsonp"
+                url: serviceRoot + "/Employees"
                 }
             },
             schema: {

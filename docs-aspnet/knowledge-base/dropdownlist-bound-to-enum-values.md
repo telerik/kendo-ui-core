@@ -8,6 +8,7 @@ position:
 tags: form, dropdownlist, enum, bind, populate
 ticketid: 1601481
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -34,7 +35,7 @@ I want to populate a {{ site.product }} DropDownList editor of a Form with the E
 
 To achieve the desired results:
 
-1. Use the [Html.GetEnumSelectList<TEnum>()](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.getenumselectlist?view=aspnetcore-7.0#microsoft-aspnetcore-mvc-viewfeatures-htmlhelper-getenumselectlist-1) to get the `SelectList` of the available options.
+1. Use the [`Html.GetEnumSelectList<TEnum>()`](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.getenumselectlist?view=aspnetcore-7.0#microsoft-aspnetcore-mvc-viewfeatures-htmlhelper-getenumselectlist-1) to get the `SelectList` of the available options.
 
 1. Use the `BindTo()` configuration of the DropDownList to bind to the returned `SelectList`.
 

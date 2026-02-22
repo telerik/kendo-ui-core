@@ -8,13 +8,18 @@ res_type: api
 # kendo.data.Model
 
 `Model` inherits from the [`ObservableObject`](/api/javascript/data/observableobject) and extends it with fields and methods which enable it to define a schema. The
-[DataSource](/api/javascript/data/datasource) contains instances of the `Model` when the [`schema.model`](/api/javascript/data/datasource/configuration/schema.model) setting is specified.
+[DataSource](/api/javascript/data/datasource) contains instances of the `Model` when the [`schema.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) setting is specified.
 
 ## Fields
 
 ### id
 
 The value of the ID of the `Model`. This field is available only if the `id` is defined in the Model configuration. See the following example.
+
+
+<div class="meta-api-description">
+How do I access the unique identifier of a data model instance in Kendo UI for jQuery? Retrieve or access the unique identifier, primary key, or record ID of a data model instance to reference, update, delete, or manage specific entries and their relationships within a database or data source. Enable querying by ID, set or get the instance's identifier value, control entity references, link records via IDs, or manipulate model objects using their unique keys after data source connection. This identifier field is essential for targeting individual records, syncing changes, and handling model relationships programmatically when an ID attribute is configured in the model schema.
+</div>
 
 #### Example - configure the Model id 
 
@@ -43,12 +48,11 @@ The value of the ID of the `Model`. This field is available only if the `id` is 
 #### Example - define the model.id in dataSource schema
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
               read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
+                url: crudServiceBaseUrl + "/Products"
               }
             },
             pageSize: 20,
@@ -69,6 +73,27 @@ The value of the ID of the `Model`. This field is available only if the `id` is 
 ### idField `String`
 
 The name of the `Model` ID field. This field is available only if the `id` is defined in the Model configuration.
+
+
+<div class="meta-api-description">
+How do I specify the unique identifier field in Kendo UI for jQuery data source? Specify or configure the unique identifier field name for data records to enable precise referencing, lookup, update, or deletion operations on models where an ID is defined; control which model attribute functions as the primary key for matching, key-based access, or record identification, supporting scenarios like querying by unique keys, syncing data changes, or ensuring consistent entity recognition across data sources.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        id: "productId",
+        fields: {
+            productId: { type: "number" },
+            name: { type: "string" }
+        }
+    });
+    var product = new Product({ productId: 1, name: "Sample Product" });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.idField); // outputs "productId"
+    </script>
 
     <script>
     var Person = kendo.data.Model.define({
@@ -99,11 +124,35 @@ The name of the `Model` ID field. This field is available only if the `id` is de
 
 The unique identifier of the `Model`. Inherited from `ObservableObject`. For more information, refer to the [`uid`](/api/javascript/data/observableobject#fields-uid) API reference.
 
+
+<div class="meta-api-description">
+How do I access the unique identifier for an object in a Kendo UI Data Source? retrieve or access the unique identifier, id, or key for an object or model instance to track, reference, compare, or map specific records or entities; manage identity fields used within observable objects for distinguishing instances, accessing primary keys, or linking data entries consistently across components and data stores; get or set unique instance identifiers, object IDs, or unique keys for efficient lookup, data synchronization, entity comparison, or debugging purposes in reactive or observable frameworks.
+</div>
+
+#### Example
+
+    <script>
+    var model1 = new kendo.data.Model({ name: "Item 1" });
+    var model2 = new kendo.data.Model({ name: "Item 2" });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(model1.uid); // outputs a unique identifier string like "1e3b4c5d-6789"
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(model2.uid); // outputs a different unique identifier string
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(model1.uid === model2.uid); // outputs false - each model has a unique uid
+    </script>
+
 The main benefit of the `uid` identifiers is to represent a link between data items (that may not have an ID of their own) and the corresponding rendered DOM elements (list items, table rows, and so on). The `uid` identifiers are generated randomly and are not persisted on reloading of data or web pages.
 
 ### dirty `Boolean`
 
 Indicates whether the model is modified.
+
+
+<div class="meta-api-description">
+How to determine if a Kendo UI datasource model has unsaved changes? Detect if data has unsaved modifications, changes, or edits in a model to control save and revert workflows, enable or disable save buttons based on local updates, trigger validations when data differs from the original state, track whether fields or records are altered, and decide when to persist or discard user input or changes in forms, data sources, or objects.
+</div>
 
 #### Example - use the dirty field
 
@@ -125,9 +174,41 @@ Indicates whether the model is modified.
 
 Attaches a handler to an event. For more information and examples, refer to the [`bind`](/api/javascript/observable/methods/bind) API reference.
 
+
+<div class="meta-api-description">
+How do I attach event listeners to data models in Kendo UI for jQuery? Attach event listeners or handlers to specific named events on data models by subscribing with the event name and a callback function, enabling detection and response to changes, updates, triggers, or custom events within the model. Configure event binding to listen for and handle model state changes, mutations, notifications, or user-defined event triggers, allowing dynamic reaction to data modifications and event-driven programming patterns in your application. Enable, set up, or control event subscriptions on model objects to execute callback functions when certain events occur, supporting custom logic execution when model events fire or data changes happen.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" }
+        }
+    });
+    
+    var product = new Product({ name: "Laptop", price: 999 });
+    
+    // Bind to the change event
+    product.bind("change", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Field '" + e.field + "' changed to: " + e.value);
+    });
+    
+    product.set("name", "Gaming Laptop"); // triggers change event
+    product.set("price", 1299); // triggers change event
+    </script>
+
 ### define
 
 Defines a new `Model` type by using the provided options. The returned value inherits from the `kendo.data.Model` class.
+
+
+<div class="meta-api-description">
+How do I extend Kendo UI's data model types using the `define` method? Create or configure custom data model types by defining new models with specified options, enabling extension or customization of data items such as fields, identifiers, default values, validation rules, and instance methods. This method supports generating constructors that inherit from base data model classes, allowing developers to tailor model behavior, implement custom data bindings, control serialization, and add unique logic for individual model instances in data sources or application contexts. Set up, extend, or override model schemas and behaviors to meet specific data representation needs or validation requirements within your data-driven application.
+</div>
 
 #### Example - define a model
 
@@ -274,6 +355,11 @@ Specifies the validation options which will be used by the [Kendo UI Validator](
 
 Determines if the specified field is editable or not.
 
+
+<div class="meta-api-description">
+How do I dynamically control editing of fields in Kendo UI for jQuery data sources? Determine if a specific data field can be modified at runtime by checking its edit permissions, enabling dynamic control over inline editing, form binding, or update handling. Configure whether a field is writable, toggling edit modes and validation logic based on current conditions, user roles, or business rules. Use this to enable, disable, or conditionally allow editing of model properties within data sources, supporting customization of user interface behavior for editing, input control, or form interactions.
+</div>
+
 #### Returns
 
 `Boolean`&mdash;Returns `true` if the field is editable. Otherwise, returns `false`.
@@ -308,9 +394,40 @@ The field that will be checked.
 
 Gets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/methods/get) API reference.
 
+
+<div class="meta-api-description">
+How do I retrieve the value of a specific field from a data model instance in Kendo UI for jQuery? Access, retrieve, or read the value of a specific field or property from a data model instance representing structured data within a data source, enabling extraction of individual attribute values for use in user interface templates, form editors, event handler logic, or business workflows. This functionality supports fetching field data dynamically by name, obtaining model property values for display, validation, conditional logic, or data manipulation scenarios during runtime. It is commonly employed to get the contents of a single property within complex data records or objects managed by observable models and data-binding frameworks.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            category: { type: "string", defaultValue: "Electronics" }
+        }
+    });
+    
+    var product = new Product({ name: "Smartphone", price: 599 });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("name")); // outputs "Smartphone"
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("price")); // outputs 599
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("category")); // outputs "Electronics" (default value)
+    </script>
+
 ### isNew
 
 Checks if the `Model` is new or not. The `id` field is used to determine if a model instance is new or existing. If the value of the specified field is equal to the default value that is specified through the `fields` configuration, the model is considered new.
+
+
+<div class="meta-api-description">
+How do I check if a data record is new in Kendo UI for jQuery? Check if a data record is new, unsaved, or already exists by verifying the presence or default state of its unique identifier to decide whether to create a new entry or update an existing one; this method helps control save operations, differentiate between insert versus update in data workflows, and manage conditional logic based on whether the model instance has been persisted or remains fresh without an assigned ID or primary key.
+</div>
 
 #### Returns
 
@@ -338,20 +455,186 @@ Checks if the `Model` is new or not. The `id` field is used to determine if a mo
 
 Sets the value of the specified field. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/methods/set) API reference.
 
+
+<div class="meta-api-description">
+How can I dynamically update model fields in Kendo UI for jQuery? Update or assign values to data model fields dynamically, modify specific attributes within data objects, change property values programmatically, enable synchronization between model changes and UI components, trigger change notifications for data bindings, control observable data updates, configure model properties to automatically notify connected views or data sources, set attributes on objects with reactive event propagation, adjust model data fields while ensuring UI reflects the latest state, and manage real-time updates between data structures and interface elements.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            inStock: { type: "boolean", defaultValue: true }
+        }
+    });
+    
+    var product = new Product({ name: "Tablet", price: 299 });
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("name")); // outputs "Tablet"
+    
+    // Set new values
+    product.set("name", "iPad Pro");
+    product.set("price", 1099);
+    product.set("inStock", false);
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("name")); // outputs "iPad Pro"
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("price")); // outputs 1099
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(product.get("inStock")); // outputs false
+    </script>
+
 ### toJSON
 
 Creates a plain JavaScript object which contains all fields of the `Model`. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`toJSON`](/api/javascript/data/observableobject/methods/tojson) API reference.
 
+
+<div class="meta-api-description">
+How do I convert a Kendo UI Datasource model instance to a JSON object? Convert a data model instance into a plain JavaScript object representation to inspect, serialize, export, or manipulate its current field values and properties; enable easy transformation of complex model data into simple JSON-ready objects for sending over networks, storing, or logging, with support for extracting all fields, flattening nested properties, and creating serializable snapshots of data entities from observable data sources or structured objects.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        id: "productId",
+        fields: {
+            productId: { type: "number" },
+            name: { type: "string" },
+            price: { type: "number" },
+            category: { type: "string" }
+        }
+    });
+    
+    var product = new Product({
+        productId: 1,
+        name: "Wireless Mouse",
+        price: 29.99,
+        category: "Computer Accessories"
+    });
+    
+    var jsonObject = product.toJSON();
+    
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(jsonObject); // outputs { productId: 1, name: "Wireless Mouse", price: 29.99, category: "Computer Accessories" }
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(typeof jsonObject); // outputs "object" - it's a plain JavaScript object
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(JSON.stringify(jsonObject)); // outputs JSON string representation
+    </script>
+
 ## Events
 
-### change event
+### change
 
 Fires when a field value is updated through the `set` method. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`change`](/api/javascript/data/observableobject/events/change) API reference.
 
-### get event
 
-Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/events/get event) API reference.
+<div class="meta-api-description">
+How to detect changes in Kendo UI for jQuery data model fields? Detect and handle updates when a data model’s field value changes due to set operations, enabling real-time listening for changes, automatic UI refreshes, data validation triggers, synchronization of updated values with backend servers, reacting to user edits or programmatic modifications, monitoring observable object property updates, tracking model state mutations, firing change event handlers for reactive programming, capturing data changes in client-side frameworks, and implementing change detection mechanisms to maintain consistency between the model and application view layers.
+</div>
 
-### set event
+#### Example
 
-Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/events/set event) API reference.
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            inStock: { type: "boolean" }
+        }
+    });
+    
+    var product = new Product({ name: "Monitor", price: 299, inStock: true });
+    
+    // Bind to the change event
+    product.bind("change", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Change event fired!");
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Field: " + e.field);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("New value: " + e.value);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Old value: " + e.previousValue);
+    });
+    
+    product.set("name", "Gaming Monitor"); // triggers change event
+    product.set("price", 399); // triggers change event
+    product.set("inStock", false); // triggers change event
+    </script>
+
+### get
+
+Fires when the `get` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`get`](/api/javascript/data/observableobject/events/get) API reference.
+
+
+<div class="meta-api-description">
+How can I set up event listeners to track when a data model property is accessed in Kendo UI for jQuery? Detect and respond to whenever a model property is accessed or retrieved by configuring listeners for property read actions, enabling monitoring or reacting when the get method is called on data model instances. Track and handle property access events, observe changes during data retrieval operations, set up handlers for property fetch triggers within observable model or data source objects, and capture moments when data fields are requested or read in applications managing data models. Control behavior on property fetching, intercept access calls for validation, logging, or dynamic processing tied to property reads in data-bound contexts.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" }
+        }
+    });
+    
+    var product = new Product({ name: "Keyboard", price: 79 });
+    
+    // Bind to the get event
+    product.bind("get", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Get event fired for field: " + e.field);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Value being retrieved: " + e.value);
+    });
+    
+    var name = product.get("name"); // triggers get event
+    var price = product.get("price"); // triggers get event
+    </script>
+
+### set
+
+Fires when the `set` method is invoked. Inherited from `kendo.data.ObservableObject`. For more information and examples, refer to the [`set`](/api/javascript/data/observableobject/events/set) API reference.
+
+
+<div class="meta-api-description">
+How can I detect changes in my data model properties when using Kendo UI for jQuery? Detect and respond to changes in data model properties when values are updated or assigned via setter methods, enabling synchronization of application state, UI refreshes, validation triggers, event handling on property modification, monitoring dynamic data updates, reacting to property value assignment, and integrating custom logic upon model data changes across reactive or observable data sources.
+</div>
+
+#### Example
+
+    <script>
+    var Product = kendo.data.Model.define({
+        fields: {
+            name: { type: "string" },
+            price: { type: "number" },
+            available: { type: "boolean" }
+        }
+    });
+    
+    var product = new Product({ name: "Headphones", price: 149, available: true });
+    
+    // Bind to the set event
+    product.bind("set", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Set event fired for field: " + e.field);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("New value being set: " + e.value);
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Previous value: " + e.previousValue);
+    });
+    
+    product.set("name", "Wireless Headphones"); // triggers set event
+    product.set("price", 199); // triggers set event
+    product.set("available", false); // triggers set event
+    </script>

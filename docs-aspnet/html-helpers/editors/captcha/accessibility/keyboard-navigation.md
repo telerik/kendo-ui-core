@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Captcha and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["captcha"]
 slug: htmlhelpers_aspnetcore_keynav
 position: 2
 ---

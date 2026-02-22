@@ -2,6 +2,7 @@
 title: DataSource Binding
 page_title: DataSource Binding
 description: "Learn how to bind a sheet of a {{ site.product }} Spreadsheet to a DataSource in {{ site.framework }} applications."
+components: ["spreadsheet"]
 slug: htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore
 position: 1
 ---
@@ -39,7 +40,7 @@ You need to configure the `read` and `submit` transport options to send requests
 
 For the complete project, refer to the [Spreadsheet in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/Spreadsheet).
 
-```tab-Index.cshtml
+```Razor Index.cshtml
     @page
     @model IndexModel
 
@@ -159,7 +160,7 @@ For the complete project, refer to the [Spreadsheet in Razor Pages example](http
         });
     </script>
 ```
-```tab-Index.cshtml.cs
+```C# Index.cshtml.cs
     public static IList<Product> SpreadData;
 
     public void OnGet()
@@ -228,7 +229,7 @@ For the complete project, refer to the [Spreadsheet in Razor Pages example](http
         }
     }
 ```
-```tab-Model
+```Model
     public class Product
     {
         public int ProductID { get; set; }

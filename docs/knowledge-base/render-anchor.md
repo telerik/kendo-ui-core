@@ -5,9 +5,9 @@ description: "Learn how to render a row header captino as an anchor in a Kendo U
 previous_url: /controls/data-management/pivotgrid/how-to/render-anchor, /controls/data-management/pivotgrid/how-to/appearance/render-anchor
 slug: howto_render_rowheader_captionas_anchor_pivotgrid
 tags: pivotgrid, render, row, header, captions, as, anchors
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

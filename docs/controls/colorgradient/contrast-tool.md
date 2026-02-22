@@ -2,6 +2,7 @@
 title: Contrast Tool
 page_title: ColorGradient Documentation - ColorGradient Contrast Tool
 description: "Learn more about the contrast tool provided by the Kendo UI for jQuery ColorGradient."
+components: ["colorgradient"]
 slug: contrast_tool_kendoui_colorgradient_widget
 position: 4
 ---
@@ -10,7 +11,7 @@ position: 4
 
 As of the end of 2021, the ColorGradient provides a Color Contrast Tool. It enables you to check the color contrast ratio between two colors.
 
-Color contrast between text and background is important on web pages. It affects the ability of some people to perceive the presented information. The tool follows [the WCAG recommendations](/colorgradient/accessibility/overview#wcag-21) for web accessibility.
+Color contrast between text and background is important on web pages. It affects the ability of some people to perceive the presented information. The tool follows [the WCAG recommendations](slug://jquery_colorgradient_accessibility#wai-aria) for web accessibility.
 
 According to the WCAG standard, there are two levels of contrast ratio:
  * AA (minimum contrast)—The level AA requires a contrast ratio of at least 4.5:1 for normal text.

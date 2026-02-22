@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ProgressBar component by following a complete step-by-step tutorial."
+components: ["progressbar"]
 slug: getting_started_progressbar
 position: 2
 ---
@@ -108,7 +109,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var progressbarReference = $("#progressbarExample").data("kendoProgressBar"); // progressbarReference is a reference to the existing instance of the helper.
     </script>
@@ -116,7 +117,7 @@ Referencing existing component instances allows you to build on top of their con
 
 1. Use the [ProgressBar client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/progressbar#methods) to control the behavior of the widget. In this example, you will see how to adjust the value of ProgressBar programmatically.
 
-    ```script
+    ```JS script
         <script>
             var progressbar = $("#shipment").data("kendoProgressBar");		
             progressbar.value(35);

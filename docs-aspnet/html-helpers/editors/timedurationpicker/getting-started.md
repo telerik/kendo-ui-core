@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started with the TimeDurationPicker
 description: "Get started with the Telerik UI TimeDurationPicker component for {{ site.framework }} and learn how to initialize the component, configure its columns, and handle its events."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_getting_started
 position: 2
 ---
@@ -73,7 +74,7 @@ The next step is to set the columns configuration, which:
 
 ## 3. Configure the Separator
 
-The TimeDurationPicker enables you to specify your own [`separator`](/api/javascript/ui/timedurationpicker/configuration/separator) that will be used to divide the individual time portions such as hours, minutes, and seconds.
+The TimeDurationPicker enables you to specify your own [`Separator`](/api/kendo.mvc.ui.fluent/timedurationpickerbuilder#separatorsystemstring) to divide the individual time portions, such as hours, minutes, and seconds.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -165,7 +166,7 @@ You can reference the TimeDurationPicker instances that you have created and bui
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var timeDurationPickerRef = $("#timedurationpicker").data("kendoTimeDurationPicker"); // timeDurationPickerRef is a reference to the existing currency instance of the helper.
     </script>
@@ -173,7 +174,7 @@ You can reference the TimeDurationPicker instances that you have created and bui
 
 1. Use the [TimeDurationPicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timedurationpicker#methods) to control the behavior of the widget. In this example, you will use the `readonly` method to disable user input.
 
-    ```script
+    ```JS script
     <script>
         var timeDurationPickerRef = $("#timedurationpicker").data("kendoTimeDurationPicker"); // timeDurationPickerRef is a reference to the existing currency instance of the helper.
         timeDurationPickerRef.readonly(true); // Set the readonly method to true and disable user input.

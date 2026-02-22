@@ -2,50 +2,54 @@
 title: Sitemap Binding
 page_title: Sitemap Binding
 description: "Set a sitemap to create the items of the Telerik UI TabStrip HtmlHelper for ASP.NET MVC."
+components: ["tabstrip"]
 previous_url: /helpers/navigation/tabstrip/binding/sitemap-binding
 slug: sitemapbinding_tabstrip_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Sitemap Binding
 
-The TabStrip enables you to create its items by setting a sitemap.
+The TabStrip enables you to create its items by binding to an ASP.NET sitemap, which automatically generates the hierarchical structure based on the XML sitemap configuration.
 
-1. Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc6_aspnetmvc %}).
+To bind the TabStrip to a sitemap, follow the next steps:
+
 1. Create a simple sitemap with the `sample.sitemap` file name at the root of the project.
 
-        <?xml version="1.0" encoding="utf-8" ?>
-        <siteMap>
-            <siteMapNode title="Home" controller="Home" action="Overview">
-            <siteMapNode controller="grid" action="index" title="Grid" />
-            <siteMapNode controller="tabstrip" action="index" title="TabStrip" />
-            </siteMapNode>
-        </siteMap>
+    ```xml
+    <?xml version="1.0" encoding="utf-8" ?>
+    <siteMap>
+        <siteMapNode title="Home" controller="Home" action="Overview">
+        <siteMapNode controller="grid" action="index" title="Grid" />
+        <siteMapNode controller="tabstrip" action="index" title="TabStrip" />
+        </siteMapNode>
+    </siteMap>
+    ```
 
-1. Load the sitemap using `SiteMapManager`.
+1. Load the sitemap using the `SiteMapManager`.
 
-        public ActionResult Index()
+    ```C#
+    public ActionResult Index()
+    {
+        if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
         {
-            if (!SiteMapManager.SiteMaps.ContainsKey("sample"))
-            {
-                SiteMapManager.SiteMaps.Register<xmlsitemap>("sample", sitmap => sitmap.LoadFrom("~/sample.sitemap"));
-            }
-            return View();
+            SiteMapManager.SiteMaps.Register<xmlsitemap>("sample", sitmap => sitmap.LoadFrom("~/sample.sitemap"));
         }
+        return View();
+    }
+    ```
 
-1. Add a TabStrip.
+1. Define the TabStrip and bind it to the sitemap.
 
-```HtmlHelper
+    ```Razor
     @(Html.Kendo().TabStrip()
-           .Name("tabstrip") // The name of the tabstrip is mandatory. It specifies the "id" attribute of the TabStrip.
+        .Name("tabstrip") // The name of the TabStrip is mandatory. It specifies the "id" attribute of the TabStrip HTML element.
         .BindTo("sample") // Bind to the sitemap with the name "sample".
-     )
-```
-
+    )
+    ```
 
 ## See Also
 
-* [Basic Usage of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip)
-* [Using the API of the TabStrip HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip/api)
-* [TabStripBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/kendo.mvc.ui.fluent/tabstripbuilder)
-* [TabStrip Server-Side API](/api/tabstrip)
+* [Basic Usage of the TabStrip for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip)
+* [Using the API of the TabStrip for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/tabstrip/api)
+* [Server-Side API of the TabStrip](/api/tabstrip)

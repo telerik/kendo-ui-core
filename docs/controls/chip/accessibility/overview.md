@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Chip Documentation | Chip Accessibility
 description: "Get started with the jQuery Chip by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_chip_widget
+components: ["chip"]
+slug: jquery_chip_accessibility
 position: 1
 ---
 

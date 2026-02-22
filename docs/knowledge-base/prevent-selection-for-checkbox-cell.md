@@ -5,9 +5,9 @@ description: "Learn how to prevent selection for checkbox cells in the Kendo UI 
 previous_url: /controls/data-management/grid/how-to/Selection/prevent-selection-for-checkbox-cell
 slug: howto_prevent_selection_checkbox_cells_grid
 tags: prevent, selection, grid, checkbox, cells
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

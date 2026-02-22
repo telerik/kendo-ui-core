@@ -1,6 +1,7 @@
 ---
 title: NuGet Source
 description: "Learn how to handle various issues that may occur when you work with the {{ site.product }} library and the NuGet installation approach."
+components: ["general"]
 page_title: Troubleshooting Telerik NuGet Feed Issues
 slug: troubleshooting_telerik_nuget
 tags: telerik, nuget, source, core, mvc, troubleshooting, installation
@@ -22,16 +23,14 @@ Regardless of the cause for the issue, it is recommended that you start from the
 * [Error `Unable to resolve ... . PackageSourceMapping is enabled`](#unable-to-resolve-package-due-to-packagesourcemapping)
 * [Error `Failed to retrieve information about ... from remote source`](#failed-to-retrieve-information-from-remote-source)
 
-## Telerik NuGet Feed Status
-
-Visit <a href="https://status.telerik.com" target="_blank">status.telerik.com</a> to check the status of the Telerik NuGet server. The top section shows manually logged incidents with possible updates or workaround suggestions. The <a href="https://status.telerik.com/#system-metrics" target="_blank">**System Metrics** section</a> provides real-time automated diagnostics.
+@[template](/_contentTemplates/general-info.md#status-telerik-com)
 
 ## Tips for Handling Common NuGet Issues
 
 The most common reasons for issues with the private Telerik NuGet feed are related to:
 
 * Authentication and credentials.
-* Licensing. For example, requesting commercial packages with a trial license or vice-versa.
+* Licensing. For example, using an old license key after a renewal, or after a new Telerik license purchase.
 * Missing or wrong local configuration (`NuGet.Config`).
 * Network connectivity issues, including **proxies** and **firewalls**.
 
@@ -39,9 +38,9 @@ Errors like `Unable to load the service index for source https://nuget.telerik.c
 
 ### Verify NuGet Credentials and Package Access
 
-To verify if you can access the Telerik NuGet server and the expected packages, open `https://nuget.telerik.com/v3/search?q=blazor&prerelease=true&skip=0&take=100&semVerLevel=2.0.0` directly in the web browser and enter your Telerik credentials in the prompt.
+To verify if you can access the Telerik NuGet server and the expected packages, open `https://nuget.telerik.com/v3/search?q=aspnet&prerelease=true&skip=0&take=100&semVerLevel=2.0.0` directly in the web browser and enter `api-key` as username and [your generated API key]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#generate-a-nuget-api-key) as password.
 
-As a result, you will see a JSON output with the NuGet packages and versions that are available for you. Depending on your license, search for {% if site.core %}`Telerik.UI.for.AspNet.Core` or `Telerik.UI.for.AspNet.Core.Trial`{% else %}`Telerik.UI.for.AspNet.Mvc5` or `Telerik.UI.for.AspNet.Mvc5.Trial`{% endif %}.
+As a result, you will see a JSON output with the NuGet packages and versions that are available for you. Search for {% if site.core %}`Telerik.UI.for.AspNet.Core`{% else %}`Telerik.UI.for.AspNet.Mvc5` or `Telerik.UI.for.AspNet.Mvc5.Lite`{% endif %}.
 
 If the above URL does not open, you have either come across a local networking issue or [the NuGet server is down](#error-503-service-unavailable).
 
@@ -52,14 +51,16 @@ If you can access the feed in the browser, but you do not see the packages in Vi
 If you suspect that your saved credentials are wrong, use the following steps to remove them from Windows and, then, add the correct ones:
 
 1. Remove the saved credentials in the <a href="https://support.microsoft.com/en-us/windows/accessing-credential-manager-1b5c916a-6a16-889f-8581-fc16e8165ac0" target="_blank">Windows Credential Manager</a>. These credentials will appear as `nuget.telerik.com` or `VSCredentials_nuget.telerik.com` entries.
-2. Remove the Telerik NuGet package source from Visual Studio.
-3. If you have added the Telerik  package source by NuGet CLI, try to remove it from the CLI by running the following commands:
+1. Remove the Telerik NuGet package source from Visual Studio.
+{% if site.core %}
+1. If you have added the Telerik  package source by NuGet CLI, try to remove it from the CLI by running the following commands:
     * <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-list-source" target="_blank">`dotnet nuget list source`</a>
     * <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-remove-source" target="_blank">`dotnet nuget remove source`</a>
-4. Check if you have any credentials stored in `%AppData%\NuGet\Nuget.Config`. If so, remove them.
-5. Try to reset the Visual Studio user data by <a href="https://stackoverflow.com/questions/43550797/how-to-force-nuget-to-ask-for-authentication-when-connecting-to-a-private-feed" target="_blank">forcing NuGet to ask for authentication</a>.
-6. Restart Visual Studio.
-7. Enter the Telerik NuGet package source again through Visual Studio or CLI. If you are using the feed in a .NET Core application, store your credentials as plain text.
+{% endif %}
+1. Check if you have any credentials stored in `%AppData%\NuGet\Nuget.Config`. If so, remove them.
+1. Try to reset the Visual Studio user data by <a href="https://stackoverflow.com/questions/43550797/how-to-force-nuget-to-ask-for-authentication-when-connecting-to-a-private-feed" target="_blank">forcing NuGet to ask for authentication</a>.
+1. Restart Visual Studio.
+1. Enter the Telerik NuGet package source again through Visual Studio{% if site.core %} or CLI{% endif %}. If you are using the feed in a .NET Core application, store your credentials as plain text.
 
 ## Error 401 Unauthorized
 
@@ -68,14 +69,18 @@ If you suspect that your saved credentials are wrong, use the following steps to
 * No provided credentials
 * Incorrect password
 * [Correct password with unescaped special characters](#special-characters-in-the-password)
-* Using an invalidated (removed) <a href="https://www.telerik.com/account/downloads/nuget-keys" target="_blank">Telerik NuGet API key</a>, which no longer exists in your Telerik account.
-* Using a valid <a href="https://www.telerik.com/account/downloads/nuget-keys" target="_blank">Telerik NuGet API key</a> with the wrong username. It must be `api-key`.
+* Using an invalidated (removed) Telerik NuGet API key, which no longer exists in [your Telerik account](https://www.telerik.com/account/downloads/api-keys).
+* Using a valid <a href="https://www.telerik.com/account/downloads/api-keys" target="_blank">Telerik NuGet API key</a> with the wrong username. It must be `api-key`.
 
 An easy way to verify your credentials is to [access the Telerik NuGet server directly in the web browser](#tips-for-handling-common-nuget-issues). Then, depending on your setup, check or update your credentials in:
 
 * The applicable `NuGet.Config` file. There may be <a href="https://learn.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior" target="_blank">multiple such files on the device</a>.
 * [Windows Credential Manager](#removing-saved-credentials)
-* In a [CI/CD workflow]({% slug nuget_keys%}#using-only-cli-commands), which [obtains the credentials from a secret]({% slug nuget_keys%}#storing-a-nuget-key).
+{% if site.core %}
+* In a [CI/CD workflow]({% slug nuget_keys%}#using-net-cli-commands), which [obtains the credentials from a secret]({% slug nuget_keys%}#storing-api-keys).
+{% else %}
+* In a CI/CD workflow, which [obtains the credentials from a secret]({% slug nuget_keys%}#storing-api-keys).
+{% endif %}
 
 ### Special Characters in the Password
 
@@ -88,10 +93,10 @@ To solve the issue:
 
 Avoid using an online encoder utility for a password. Instead, use a Powershell command:
 
-````PowerShell.skip-repl
+```batch PowerShell.skip-repl
 Add-Type -AssemblyName System.Web
 [System.Web.HttpUtility]::HtmlEncode('my§uper&P@§§word')
-````
+```
 
 ![Powershell Encoding](images/encode-passwords-with-powershell.png)
 
@@ -110,7 +115,11 @@ Such an error implies that the [Telerik NuGet source]({% slug nuget_install_aspn
 * Missing Telerik NuGet source configuration in the `NuGet.Config` file.
 * The correct `NuGet.Config` file is not used, because it is missing or misplaced.
 
+{% if site.core %}
 If the error occurs in a Docker scenario, the solution is to copy the `NuGet.Config` file (or configure the NuGet source) explicitly during the Docker image build. You can also <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore#options" target="_blank">reference the `NuGet.Config` file path explicitly in the `dotnet restore` command</a>.
+{% endif %}
+
+>tip If you attempt to upgrade a trial NuGet package to a Q2 2025 version, change the name of the referenced NuGet package name. As of  Q2 2025, the package has no `Trial` identifier in its name. Uninstall the older package version and install the Q2 2025 version of the {% if site.core %}`Telerik.UI.for.AspNet.Core`{% else %}`Telerik.UI.for.AspNet.Mvc5`{% endif %} package.
 
 ## Error 503 Service Unavailable
 

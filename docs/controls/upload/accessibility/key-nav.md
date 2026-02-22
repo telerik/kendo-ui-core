@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Upload Documentation - Keyboard Navigation
 description: "Get started with the jQuery Upload by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["upload"]
 slug: keynav_upload
 position: 2
 ---
@@ -31,4 +32,4 @@ For the complete example, refer to the [demo on Kendo UI Dojo](https://dojo.tele
 
 * [Keyboard Navigation by the Upload (Demo)](https://dojo.telerik.com/@nenchef/OPAQAjOk)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Upload]({% slug accessibility_upload %})
+* [Accessibility in the Upload]({% slug jquery_upload_accessibility %})

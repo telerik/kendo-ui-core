@@ -5,9 +5,9 @@ description: "Learn how to nest a chart inside the Kendo UI Grid for jQuery temp
 previous_url: /controls/data-management/grid/how-to/use-nested-chart, /controls/data-management/grid/how-to/integration/use-nested-chart, /controls/charts/how-to/use-nested-chart-ingrid, /controls/charts/how-to/integration/use-nested-chart-ingrid
 slug: howto_use_nested_charts_grid
 tags: use, nested, chart, grid, template
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

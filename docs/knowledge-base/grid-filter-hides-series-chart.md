@@ -7,7 +7,7 @@ slug: grid-filter-hides-series-chart
 tags: grid, pie chart, filter, hide, series
 ticketid: 1145170
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

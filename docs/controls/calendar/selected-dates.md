@@ -2,6 +2,7 @@
 title: Selected Dates
 page_title: jQuery Calendar Documentation - Selected Dates
 description: "Get started with the jQuery Calendar by Kendo UI and set the initially selected, the minimum, and maximum dates in the widget."
+components: ["calendar"]
 slug: selecteddates_kendoui_calendar
 position: 2
 ---

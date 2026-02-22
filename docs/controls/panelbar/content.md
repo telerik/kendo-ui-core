@@ -2,6 +2,7 @@
 title: Content Operations
 page_title: jQuery PanelBar Documentation - Content Operations
 description: "Get started with the jQuery PanelBar by Kendo UI and nest the item content or load the content of the widget with AJAX."
+components: ["panelbar"]
 slug: content_kendoui_panelbar
 position: 5
 ---

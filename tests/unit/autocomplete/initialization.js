@@ -610,6 +610,14 @@ describe("kendo.ui.AutoComplete initialization", function() {
         assert.equal(autocomplete.header, null);
     });
 
+    it("readonly method sets input to readonly", function() {
+        let autocomplete = new AutoComplete(input);
+        autocomplete.readonly(true);
+        autocomplete.element.focus();
+
+        assert.include(["readonly", "true"], autocomplete.element.attr("readonly"));
+    });
+
     it("AutoComlete is disabled when placed in disabled fieldset", function() {
         $(input).wrap('<fieldset disabled="disabled"></fieldset>');
         input.kendoAutoComplete().data("kendoAutoComplete");
@@ -643,7 +651,7 @@ describe("kendo.ui.AutoComplete initialization", function() {
             footerTemplate: () => "footer"
         });
 
-        assert.isOk(autocomplete.noData.next().hasClass("k-list-footer"));
+        assert.isOk(autocomplete.noData.siblings(".k-list-footer").length);
     });
 
     it("hides noData template if any data", function() {

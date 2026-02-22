@@ -2,6 +2,7 @@
 title: Destroying Components
 page_title: Destroying Components - Working with Components 
 description: "Get started with Kendo UI for jQuery and learn how to destroy the components."
+components: ["general"]
 previous_url: /framework/widgets/destroy
 slug: destroywidgets_kendoui_gettingstarted
 position: 6

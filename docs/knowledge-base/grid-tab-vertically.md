@@ -7,6 +7,7 @@ slug: grid-tab-vertically
 tags: kendo, jquery, grid, tab, editing, vertical
 ticketid: 1140359
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

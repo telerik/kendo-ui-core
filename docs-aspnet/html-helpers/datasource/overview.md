@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelpers_datasource_aspnetcore
 position: 0
 ---
@@ -52,7 +53,7 @@ The following example demonstrates how to define the DataSource. You can access 
     </script>  
 ```
 {% endif %}
-```HomeController
+```C# HomeController
 
     public JsonResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
@@ -68,7 +69,7 @@ The following example demonstrates how to define the DataSource. You can access 
 
 To use `DataSourceRequest` and `ToDataSourceResult()` with the DataSource HtmlHelper, add the following namespaces with `using` directives in the Controller:
 
-```
+```C#
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 ```
@@ -163,6 +164,7 @@ To map to a ViewModel on the fly, pass a mapping lambda as a second parameter to
 
  > The naming of the model properties of the view model objects and entities returned by Entity Framework must match. If usage of different naming is desired, implement [model mapping]({% slug datasource_model_mapping %}).
 
+```C#
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
     {
         using (var northwind = new NorthwindEntities())
@@ -179,6 +181,7 @@ To map to a ViewModel on the fly, pass a mapping lambda as a second parameter to
             return Json(result);
         }
     }
+```
 
 ## Functionality and Features
 

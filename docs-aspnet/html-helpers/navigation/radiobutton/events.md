@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI RadioButton component for {{ site.framework }}."
+components: ["radiobutton"]
 slug: events_radiobutton_aspnetcore
 position: 6
 ---

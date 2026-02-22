@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Accommodate an icon and enhance the meaning of the text content of the Kendo UI ToggleButton widget for jQuery."
+components: ["togglebutton"]
 slug: icons_kendoui_togglebutton
 position: 2
 ---

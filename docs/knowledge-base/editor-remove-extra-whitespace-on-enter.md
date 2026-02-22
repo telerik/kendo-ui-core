@@ -6,6 +6,7 @@ page_title: Prevent the Appearance of Extra Whitespace on Enter - Kendo UI Edito
 slug: editor-remove-extra-whitespace-on-enter
 ticketid: 1381664
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

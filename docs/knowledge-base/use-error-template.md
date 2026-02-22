@@ -5,9 +5,9 @@ description: "Learn how to use a template to customize a tooltip in the Kendo UI
 previous_url: /framework/validator/how-to/use-error-template, /controls/editors/validator/how-to/use-error-template
 slug: howto_usetemplatestocustomizetooltips_validator
 tags: telerik, kendo, jquery, validator, use, templates, to, customize, tooltips
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment
@@ -71,7 +71,7 @@ The following example demonstrates how to use an [`errorTemplate`](/api/framewor
           height: 323px;
           margin: 0 auto;
           padding: 10px 20px 20px 170px;
-          background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
+          background: url('https://demos.telerik.com/kendo-ui/content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
         }
         #tickets h3 {
           font-weight: normal;

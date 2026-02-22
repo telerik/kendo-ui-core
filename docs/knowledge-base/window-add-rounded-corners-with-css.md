@@ -8,6 +8,7 @@ position:
 tags: window, add, style, corners, css, rounded
 ticketid: 1440987
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

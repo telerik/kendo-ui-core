@@ -2,6 +2,7 @@
 title: Scale Options
 page_title: jQuery LinearGauge Documentation - Scale Options
 description: "Get started with the jQuery LinearGauge by Kendo UI and customize the options of its scale."
+components: ["lineargauge"]
 slug: scale_kendoui_lineargauge
 position: 3
 ---

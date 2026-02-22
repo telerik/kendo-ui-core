@@ -8,7 +8,7 @@ slug: page-break-by-group-grid-pdf-export
 tags: kendo, grid, pdf, export, group, page, break
 ticketid: 1120369
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -96,9 +96,8 @@ pdf: { 
               scale: 0.8
             },
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               pageSize: 91,
               group:{field:"Country"}
@@ -112,7 +111,7 @@ pdf: { 
             },
             columns: [{
               template: "<div class='customer-photo'" +
-              "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+              "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
               "<div class='customer-name'>#: ContactName #</div>",
               field: "ContactName",
               title: "Contact Name",

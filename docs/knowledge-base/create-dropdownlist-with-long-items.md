@@ -5,9 +5,9 @@ description: "Learn how to create Kendo UI DropDownLists with long items."
 previous_url: /controls/editors/dropdownlist/how-to/create-dropdownlist-with-long-items, /controls/editors/dropdownlist/how-to/appearance/create-dropdownlist-with-long-items
 slug: howto_create_listswith_long_items_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, create, lists, with, long, items
-component: dropdownlist
 type: how-to
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

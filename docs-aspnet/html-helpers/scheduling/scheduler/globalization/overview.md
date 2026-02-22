@@ -2,6 +2,7 @@
 title: Overview
 page_title: Globalization
 description: "Get started with the Telerik UI Scheduler component for {{ site.framework }} and learn about the globalization options it supports."
+components: ["scheduler"]
 slug: globalization_scheduler
 position: 1
 ---

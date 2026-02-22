@@ -2,6 +2,7 @@
 title: Amazon S3
 page_title: Amazon S3 (Amazon Simple Storage Service)
 description: "Learn how to use the Telerik UI for {{ site.framework }} Upload component, to upload files to a bucket in Amazon S3"
+components: ["general"]
 slug: aws_s3_storage_aspnetcore
 position: 3
 ---
@@ -90,7 +91,7 @@ In your application, create a model and set up the S3 authorization as demonstra
 
 The following server-side logic authorizes uploads by creating and signing temporary policies for each client:
 
-```
+```Controller
 public ActionResult Index()
 {
     var config = new S3Config
@@ -181,7 +182,7 @@ The policy sets restrictions on the destination, content type, and others. Any r
 
 Add the Upload component to the view and handle its `upload` and `select` events.
 
-```
+```View
 @(Html.Kendo().Upload()
     .Name("file")
     .Async(async => async

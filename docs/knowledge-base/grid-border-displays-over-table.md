@@ -6,7 +6,7 @@ page_title: Grid Overflows and Its Border Is Displayed over the Table - Kendo UI
 slug: grid-border-displays-over-table
 tags: grid, table, border, styling
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

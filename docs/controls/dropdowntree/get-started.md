@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DropDownTree Documentation - Getting Started with the DropDownTree
 description: "Get started with the jQuery DropDownTree by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["dropdowntree"]
 slug: getting_started_kendoui_dropdowntree_widget
 position: 1
 ---
@@ -121,8 +122,3 @@ The DropDownTree supports both single and multiple (default) tag modes. The exam
 * [JavaScript API Reference of the DropDownTree](/api/javascript/ui/datepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

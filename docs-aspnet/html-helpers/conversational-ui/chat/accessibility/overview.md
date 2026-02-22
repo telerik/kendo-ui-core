@@ -2,11 +2,16 @@
 title: Overview
 page_title: Chat Documentation | Chat Accessibility
 description: "Get started with the {{ site.product }} Chat and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_chat_overview
+components: ["chat"]
+slug: htmlhelpers_chat_accessibility
 position: 1
 ---
 
 # Chat Accessibility
+
+
+
+
 
 Out of the box, the {{ site.product }} Chat provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
@@ -18,23 +23,53 @@ The Chat is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 
 
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
+### Chat component
+
+
+The Chat component is a composite one and integrates the accessibility of the ToolBar, Dialog, DropDownButton and ContextMenu components.
+
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
 | `.k-message-list` | `role=log` | The role of the Chat message list must imply that there is a log (list) of messages. |
 |  | `aria-label` | Announces the purpose of the Chat message list (for ex. 'Message list'). |
-| `.k-quick-reply` | `role=button` | The quick reply elements must be exposed as buttons. |
-|  | `tabindex=0` | The quick reply elements must be part of the page tabsequence. |
-| `.k-message-box>.k-input-inner` | `role=textbox` or `nodeName=input` | The message must have an input or an element with `role=textbox`. |
-|  | `label for` or `aria-label` or `aria-labelledby` | The message box input must have a label. |
+| `.k-bubble` | `tabindex=0` | The Chat bubble must be focusable. |
+| `.k-bubble .k-typing-indicator` | `tabindex=-1` | The Chat bubble typing indicator should not be focusable. |
+| `.k-suggestion-group` | `role=group` | Indicates that the suggestion container element is a group. |
+| `.k-suggestion` | `role=button` | The suggestion elements must be exposed as buttons. |
+|  | `tabindex=0` | The suggestion elements must be part of the page tabsequence. |
 | `.k-input-suffix>.k-button` | `role=button` or `nodeName=button` | The buttons must have appropriate role. |
 |  | `aria-label` or `title` | The buttons must be properly labelled. |
-| `.k-button-toggle` | `aria-controls=.k-toolbar-box id` | The ToolBar toggle button must have an `aria-controls` attribute pointing to the ToolBar element. |
-| `.k-toolbar-box` | `role=toolbar` | The Chat ToolBar must have an appropriate role. |
+| `.k-input-suffix>.k-chat-send.k-disabled` | `aria-disabled=true` | Announces send action as disabled if necessary. |
+| `.k-message-group-content>.k-chat-download-button` | `aria-label` or `title` | The download button must be properly labelled. |
+|  | `role=button` or `nodeName=button` | The download button must have an appropriate role. |
+| `.k-message-reference>.k-button` | `aria-label` or `title` | The reference close button must be properly labelled. |
+|  | `role=button` or `nodeName=button` | The reference close button must have an appropriate role. |
+| `k-bubble-expandable-indicator` | `role=button` | The expandable indicator must have an appropriate role. |
+|  | `aria-label` or `title` | The expandable indicator must be properly labelled. |
+|  | `tabindex=0` | The expandable indicator must be part of the page tabsequence. |
+
+### ToolBar Component
 
 
-Chat ToolBar follows the specification for the the ToolBar component.
+Chat Message ToolBar follows the specification for the ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
+
+### Textarea Component
+
+[Textarea accessibility specification]({% slug htmlhelpers_textarea_accessibility %})
+
+### DropDownButton Component
+
+[DropDownButton accessibility specification]({% slug htmlhelpers_dropdownbutton_accessibility %})
+
+### SpeechToTextButton Component
+
+[SpeechToTextButton accessibility specification]({% slug htmlhelpers_speechtotextbutton_accessibility %})
+
+### ContextMenu Component
+
+[ContextMenu accessibility specification]({% slug htmlhelpers_contextmenu_accessibility %})
 
 ## Resources
 
@@ -75,4 +110,6 @@ For details on how the Chat keyboard navigation works, refer to the [Chat Keyboa
 
 ## See Also
 
+* [Keyboard Navigation by the Chat for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chat/keyboard-navigation)
+* [Keyboard Navigation by the Chat for {{ site.framework }}]({% slug keynav_aspnetcore_chat %})
 * [Accessibility in {{ site.product }}]({%slug overview_accessibility%})

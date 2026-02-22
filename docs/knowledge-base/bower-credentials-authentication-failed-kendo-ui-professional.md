@@ -7,6 +7,7 @@ slug: bower-credentials-authentication-failed-kendo-ui-professional
 tags: bower, git, credentials, kendo, professional
 ticketid: 1116013
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

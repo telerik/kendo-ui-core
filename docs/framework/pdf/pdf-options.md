@@ -2,6 +2,7 @@
 title: PDF Options
 page_title: PDF Options - Kendo UI Drawing Library
 description: "Specify the basic parameters of the output file when you generate content with the Kendo UI Drawing library."
+components: ["general"]
 previous_url: /framework/drawing/pdf-output#pdf-options
 slug: configuration_drawing
 position: 2

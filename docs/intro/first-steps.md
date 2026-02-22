@@ -2,6 +2,7 @@
 title: First Steps
 page_title: First Steps with Your Kendo UI for jQuery Project Guide - Getting Started 
 description: "A guide on getting started with Kendo UI for jQuery, showing how to add the necessary CSS and JavaScript files, and implement the Grid component."
+components: ["general"]
 previous_url: /install/onsite, /getting-started, /intro/getting-started, /using-kendo-with, /getting-started/using-kendo-with, /bootstrapper, /intro/installation/getting-started
 slug: getting_started_installation_kendoui
 position: 0
@@ -22,7 +23,7 @@ The process draws on the following milestones:
  1. [Configure the Grid](#5-configure-the-grid)
  1. [Add a license file to your app](#6-add-your-license-file)
 
- >tip Visual Studio Code users can speed up the project creation by using the [Kendo UI Productivity Tools for Visual Studio Code](intro/installation/vscode-integration).
+ >tip Visual Studio Code users can speed up the project creation by using the [Kendo UI Productivity Tools for Visual Studio Code](https://www.telerik.com/kendo-jquery-ui/documentation/intro/installation/vscode-integration).
  
 ## 1. Download the Controls 
 
@@ -40,16 +41,16 @@ To make sure all scripts are loaded, make a simple API call to render the [Kendo
 
 > The `$(function() { });` code block is a [jQuery `document.ready`](https://learn.jquery.com/using-jquery-core/document-ready/) handler. All JavaScript code from this guide has to go inside this closure.
 
-	```html
-		<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" />
-		<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-		
-    <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
-    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script>
+```html
+  <link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+  
+  <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/mjs/kendo.all.js" type="module"></script>
 
-    <!-- OR by using the BUNDLED JAVASCRIPT -->
-		<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
-	```
+  <!-- OR by using the BUNDLED JAVASCRIPT -->
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
+```
 
 ## 3. Bind the Grid to Data
 

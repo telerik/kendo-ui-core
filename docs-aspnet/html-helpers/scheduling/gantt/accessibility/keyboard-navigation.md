@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Gantt and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["gantt"]
 slug: keynav_aspnetcore_gantt
 position: 2
 ---
@@ -73,4 +74,4 @@ Actions Applied to the Add Task Action Drop-Down of the Gantt:
 ## See Also
 
 * [Keyboard Navigation in the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/keyboard-navigation)
-* [Accessibility in the Gantt HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_gantt %})
+* [Accessibility in the Gantt HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_gantt_accessibility %})

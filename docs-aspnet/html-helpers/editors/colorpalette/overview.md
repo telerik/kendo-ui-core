@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorPalette component for {{ site.framework }}."
+components: ["colorpalette"]
 previous_url: /helpers/editors/colorpalette/overview
 slug: overview_colorpalettehelper_aspnetcore
 position: 0
@@ -67,7 +68,7 @@ The following example showcases a basic configuration of the ColorPalette with f
 
 * [Color Presets]({% slug presets_kendoui_colorpalette_widget %})&mdash;Use predefined color palettes or configure a custom set of palettes.
 * [Events]({% slug color_palette_events %})&mdash;Subscribe to the ColorPalette `Change` event and implement the desired custom logic.
-* [Accessibility]({% slug accessibility_aspnet_colorpalette_widget %})&mdash;The ColorPalette is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_colorpalette_accessibility %})&mdash;The ColorPalette is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_wizard %}) for faster navigation.
 
 ## Next Steps
 

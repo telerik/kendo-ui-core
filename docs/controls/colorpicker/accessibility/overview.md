@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery ColorPicker Documentation | ColorPicker Accessibility
 description: "Get started with the jQuery ColorPicker by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_colorpicker_widget
+components: ["colorpicker"]
+slug: jquery_colorpicker_accessibility
 position: 1
 ---
 
@@ -50,6 +51,18 @@ The ColorPicker popup contains in itself ColorGradient, ColorPalette, a UI to sw
 | `.k-colorgradient` | `role=none/undefined` | The ColorGradient element must have its role removed. |
 |  | `aria-label=undefined` | The ColorGradient element must have its `aria-label` attribute removed. |
 |  | `tabindex=-1/undefined` | The ColorGradient must be removed from the page tab sequence. |
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug jquery_actionsheet_accessibility %})
+
+| Selector | Attribute | Usage |
+| -------- | --------- | ----- |
+| `.k-colorgradient` | `role=none/undefined` | The ColorGradient element must have its role removed. |
+|  | `aria-label=undefined` | The ColorGradient element must have its `aria-label` attribute removed. |
 
 ## Section 508
 

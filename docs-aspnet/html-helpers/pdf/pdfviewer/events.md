@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI PDFViewer component for {{ site.framework }}."
+components: ["pdfviewer"]
 slug: events_pdfviewer_aspnetcore
 position: 6
 ---
@@ -17,11 +18,11 @@ For a complete example on basic PDFViewer events, refer to the [demo on using th
 The following example demonstrates how to subscribe to events by a handler name.
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
-```Global.asax
+```C# Global.asax
     KendoMvc.Setup(options =>
     {
         options.RenderAsModule = true;

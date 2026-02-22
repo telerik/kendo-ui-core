@@ -2,6 +2,7 @@
 title: Scrolling to a Specific Item
 page_title: Scrolling to a Specific Item
 description: "Learn more about the programmatic scrolling to specific items with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 slug: scrolling_to_item_aspnetcore_grid
 position: 4
 ---
@@ -186,7 +187,7 @@ The following example shows how to scroll to an item that is not loaded yet when
         <scrollable enabled="true" virtual="true"/>
     </kendo-grid>
 ```
-```GridController
+```C# GridController
     public IActionResult Index()
     {
         ViewData["initialItemId"] = 10403;
@@ -209,7 +210,7 @@ The following example shows how to scroll to an item that is not loaded yet when
     }
 ```
 {% else %}
-```GridController
+```C# GridController
     public ActionResult Index()
     {
         ViewData["initialItemId"] = 10403;
@@ -263,6 +264,9 @@ The following example shows how to scroll to an item that is not loaded yet when
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Scrolling to Specific Item by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/scroll-to-item)
 * [Client-Side Grid API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side Grid HtmlHelper API](/api/grid)

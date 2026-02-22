@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Slider for {{ site.framework }}."
+components: ["slider"]
 previous_url: /helpers/editors/slider/overview
 slug: overview_sliderhelper_aspnetcore
 position: 0
@@ -93,7 +94,7 @@ The Slider configuration options are passed as attributes. The following example
 
 * [Appearance]({% slug slider_appearance %})&mdash;Use different configuration settings that control the styling of the component.
 * [Events]({% slug events_slider %})&mdash;Handle the component events and implement any custom functionality.
-* [Accessibility]({% slug accessibility_aspnetcore_slider %})&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_slider%}) for faster navigation.
+* [Accessibility]({% slug htmlhelpers_slider_accessibility %})&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_slider%}) for faster navigation.
 
 ## Next Steps
 

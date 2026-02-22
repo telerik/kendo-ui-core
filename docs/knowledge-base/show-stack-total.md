@@ -5,9 +5,9 @@ description: "Learn how to place a label with the stack total on top of column o
 previous_url: /controls/charts/how-to/various/show-stack-total
 slug: howto_showtotalstacked_charts
 tags: chart, total, sum, for, stacked, series
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -75,6 +75,48 @@ It is possible to use this configuration to display the cumulative point value f
                 visible: true
             }
           }]
+        });
+      });
+    </script>
+```
+
+Since the label is defined at last field level, when you unselect the last field from legend the `stackValue` is no longer visible. To overcome this, add a 'dummy' series field with the total label:
+
+```dojo
+    <div id="chart"></div>
+    <script>
+      $(function () {
+        $("#chart").kendoChart({
+          dataSource: {
+            data: [
+              { a: 22, b: 11, c: 33, d: 0 },
+              { a: 2, b: 1, c: 3, d: 0 },
+            ],
+          },
+          seriesDefaults: {
+            type: "column",
+            stack: true,
+          },
+          series: [
+            {
+              field: "a",
+              name: "a",
+            },
+            {
+              field: "b",
+              name: "b",
+            },
+            {
+              field: "c",
+              name: "c",
+            },
+            {
+              field: "d",
+              labels: {
+                template: "#= stackValue #",
+                visible: true,
+              }
+            }]
         });
       });
     </script>

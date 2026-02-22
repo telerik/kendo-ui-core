@@ -7,7 +7,7 @@ slug: swap-alt-background-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, alt color
 ticketid: 1114254
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,9 +43,9 @@ I have a multi-level, hierarchy Grid. The headers of the child grids are hidden.
     $(document).ready(function() {
         var element = $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                    read: "https://demos.telerik.com/service/v2/odata/Employees"
                 },
                 pageSize: 6,
                 serverPaging: true,
@@ -84,9 +84,9 @@ I have a multi-level, hierarchy Grid. The headers of the child grids are hidden.
     function detailInit(e) {
         $("<div id='grid_" + e.data.EmployeeID + "'/>").appendTo(e.detailCell).kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 serverPaging: true,
                 serverSorting: true,

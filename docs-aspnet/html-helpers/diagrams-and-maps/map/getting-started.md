@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Map component by following a complete step-by-step tutorial."
+components: ["map"]
 slug: aspnetcore_map_getting_started
 position: 1
 ---
@@ -36,7 +37,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <h4>Map with event handler</h4>
 <p>
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Map
@@ -244,13 +245,13 @@ You can reference the Map instances that you have created and build on top of th
 
 1. Use the `id` attribute of the component instance to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var map = $("#map").data("kendoMap"); // map is a reference to the existing map instance of the helper.
     </script>
     ```
 1. Use the [Map client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/map#methods) to control the behavior of the widget. In this example, you will use the `center` method to access center the view of the Map
-    ```script
+    ```JS script
     <script>
         var map = $("#map").data("kendoMap"); // map is a reference to the existing map instance of the helper.
         map.center([32.7758, -96.7966]).zoom(10); // set the Map center
@@ -269,6 +270,6 @@ You can continue experimenting with the code sample above by running it in the T
 * [Use Remote Binding for the markers of the Map]({% slug htmlhelpers_map_remote_binding_markers %})
 ## See Also
 * [Using the API of the Map for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/api)
-* [Client-Side API of the Map](https://docs.telerik.com/kendo-ui/api/javascript/ui/map)
+* [Client-Side API of the Map](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/map)
 * [Server-Side API of the Map](/api/map)
 * [Knowledge Base Section](/knowledge-base)

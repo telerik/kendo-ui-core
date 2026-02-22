@@ -1,4 +1,4 @@
-(function($, undefined) {
+﻿(function($, undefined) {
 
 /* Filter cell operator messages */
 

@@ -7,6 +7,7 @@ slug: scheduler-event-edit-recurrence-options
 tags: scheduler, event, edit, recurrence, custom, settings
 ticketid: 1470383
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

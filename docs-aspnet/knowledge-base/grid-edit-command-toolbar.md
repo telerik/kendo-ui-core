@@ -5,6 +5,7 @@ page_title: Placing Edit or Update Buttons to Grid Toolbar
 slug: grid-edit-command-toolbar
 tags: grid, toolbar, edit, update, command, template, custom, replace, move, core, mvc, telerik, component, wrapper
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -35,17 +36,17 @@ To achieve the desired result:
 1. Handle the click event for the buttons to enter/exit edit mode.
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
     <script type="text/x-kendo-template" id="template"> // ToolBar Template
         <div class="editBtnContainer">
-             <button type="button" class="k-button k-button-md k-rounded-md k-button-solid  k-button-solid-base k-grid-custom">Edit</button>          
+             <button type="button" class="k-button  k-grid-custom">Edit</button>
 
         </div>
         <div class="updateCancelContainer">
-                <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-save-command" href="\\#"> 
+                <a role="button" class="k-button    k-grid-save-command" href="\\#">
             <span class="k-icon k-i-check k-button-icon"></span>Update</a>
-            <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-cancel-command" href="\\#">
+            <a role="button" class="k-button    k-grid-cancel-command" href="\\#">
             <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
         </div>
     </script>
@@ -81,17 +82,17 @@ To achieve the desired result:
 ```
 
 {% if site.core %}
-```TagHelper.cshtml
+```TagHelper
 
     <script type="text/x-kendo-template" id="template"> // ToolBar Template
         <div class="editBtnContainer">
-             <button type="button" class="k-button k-button-md k-rounded-md k-button-solid  k-button-solid-base k-grid-custom">Edit</button>          
+             <button type="button" class="k-button  k-grid-custom">Edit</button>
 
         </div>
         <div class="updateCancelContainer">
-                <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-save-command" href="\\#"> 
+                <a role="button" class="k-button    k-grid-save-command" href="\\#">
             <span class="k-icon k-i-check k-button-icon"></span>Update</a>
-            <a role="button" class="k-button k-button-md k-rounded-md k-button-solid    k-button-solid-base k-grid-cancel-command" href="\\#">
+            <a role="button" class="k-button    k-grid-cancel-command" href="\\#">
             <span class="k-icon k-i-cancel k-button-icon"></span>Cancel</a>
         </div>
     </script>
@@ -133,7 +134,7 @@ To achieve the desired result:
 ```
 {% endif %}
 
-```Script.js
+```JS script.js
     $(document).ready(function(){
 
         $(".k-grid-custom.k-button").on("click", function (e) {
@@ -163,7 +164,7 @@ To achieve the desired result:
 
     })
 ```
-```Styles.css
+```C# Styles.css
     .updateCancelContainer {
         display: none;
     }

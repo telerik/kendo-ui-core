@@ -2,6 +2,7 @@
 title: Text
 page_title: Text Binding - Kendo UI MVVM
 description: "Learn how to update the text of the DOM element to a View-Model value by using the text binding in Kendo UI MVVM."
+components: ["mvvm"]
 slug: textbinding_mvvm_kendoui
 ---
 
@@ -13,7 +14,7 @@ Changing the View-Model value via code updates the text of the DOM element. If t
 
 ## Getting Started
 
-To set the value that is displayed by an `input`, `textarea`, or `select`, use the [`value`](value) binding instead.
+To set the value that is displayed by an `input`, `textarea`, or `select`, use the [`value`](https://www.telerik.com/kendo-jquery-ui/documentation/framework/mvvm/bindings/value) binding instead.
 
 The following example demonstrates how to use the `text` binding.
 

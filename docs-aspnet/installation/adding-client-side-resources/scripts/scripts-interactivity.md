@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Interactivity and UX
 page_title: Individual Scripts for Interactivity and UX
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Interactivity and UX"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-interactivity, /installation/scripts/scripts-interactivity
 slug: script_filesfor_interactivityandux_widgets
 ---

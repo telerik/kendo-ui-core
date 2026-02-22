@@ -5,9 +5,9 @@ description: "Learn how to reorder multiple items using the Kendo UI Sortable co
 slug: howto_reordermultipleitems_sortable
 previous_url: /controls/interactivity/sortable/how-to/multiple-items-reordering
 tags: telerik, kendo, jquery, sortable, reorder, multiple, items
-component: sortable
 type: how-to
 res_type: kb
+components: ["sortable"]
 ---
 
 ## Environment
@@ -115,11 +115,11 @@ The following example demonstrates how to achieve the desired scenario.
     }
 
     .one-way {
-      background: url('../content/web/sortable/one-way.png') no-repeat 50% 50%;
+      background: url('https://demos.telerik.com/kendo-ui/content/web/sortable/one-way.png') no-repeat 50% 50%;
     }
 
     .two-way {
-      background: url('../content/web/sortable/two-way.png') no-repeat 50% 50%;
+      background: url('https://demos.telerik.com/kendo-ui/content/web/sortable/two-way.png') no-repeat 50% 50%;
     }
 
     .list-wrapper {

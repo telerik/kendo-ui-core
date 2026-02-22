@@ -2,6 +2,7 @@
 title: Persisting the Pane Size
 page_title: Persisting the Pane Size
 description: "Learn how to keep the Splitter pane sizes in percentages using the Telerik UI Splitter component for {{ site.framework }}."
+components: ["splitter"]
 slug: htmlhelpers_keep_pane_size_in_percentages_aspnetcore
 position: 5
 ---

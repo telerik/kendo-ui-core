@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Popup Documentation - Popup Overview
 description: "Get started with the jQuery Popup by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["popup"]
 slug: overview_kendoui_popup_widget
 position: 0
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Gantt component for {{ site.framework }}."
+components: ["gantt"]
 previous_url: /helpers/html-helpers/gantt, /helpers/scheduling/gantt/overview
 slug: htmlhelpers_gantt_aspnetcore
 position: 0
@@ -302,14 +303,14 @@ The following example demonstrates the basic configuration of the Gantt.
 | Feature | Description |
 |:---         |:---
 | [Layout]({% slug htmlhelpers_gantt_layout_aspnetcore %}) | The layout of the Gantt consists of the GanttList and Timeline sections separated by a splitbar. |
-| [Data binding]({% slug htmlhelpers_gantt_binding_aspnetcore %}) | The Gantt provides various options for data binding. |
+| [Data binding]({% slug htmlhelpers_gantt_databinding %}) | The Gantt provides various options for data binding. |
 | [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %}) | The Gantt columns offer configuration options for customizing the columns in the list section of the Gantt  |
 | [Planned vs Actual]({% slug htmlhelpers_gantt_planned_vs_actual_aspnetcore %}) | You can compare the actual `start` and `end` dates with the originaly planned dates. |
 | [PDF export]({% slug htmlhelpers_gantt_pdf_export_aspnetcore %}) | The Gantt has built-in PDF export capabilities. |
 | [Select date range]({% slug htmlhelpers_gantt_select_date_range_aspnetcore %}) | You can configure the component to display tasks in a specified date range only. |
 | [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %}) | The Gantt allows you to assign optional resources to the Gantt tasks. |
 | [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %}) | You can customizing the rendering of the Gantt tasks through templates. |
-| [Accessibility]({% slug accessibility_aspnetcore_gantt %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_gantt_accessibility %}) | The Gantt is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 
 ## Next Steps
 

@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery FlatColorPicker Documentation - Getting Started with the FlatColorPicker
 description: "Get started with the jQuery FlatColorPicker by Kendo UI and learn how to create and initialize the component."
+components: ["flatcolorpicker"]
 slug: getting_started_kendoui_flatcolorpicker_widget
 position: 2
 ---
@@ -72,8 +73,4 @@ Here, you will apply some settings such as [`clearButton`](/api/javascript/ui/fl
 * [JavaScript API Reference of the FlatColorPicker](/api/javascript/ui/flatcolorpicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

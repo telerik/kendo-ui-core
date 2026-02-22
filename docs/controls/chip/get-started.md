@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Chip Documentation - Getting Started with the Chip
 description: "Get started with the jQuery Chip by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chip"]
 slug: getting_started_kendoui_chip_widget
 position: 2
 ---
@@ -85,8 +86,4 @@ Now you can use the [`label`](/api/javascript/ui/chip/configuration/label) optio
 * [JavaScript API Reference of the Chip](/api/javascript/ui/chip)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

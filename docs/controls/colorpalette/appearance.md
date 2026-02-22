@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery ColorPalette Documentation - Appearance
 description: "Learn how to apply different styling options to the ColorPalette component."
+components: ["colorpalette"]
 slug: appearance_kendoui_colorpalette
 position: 4
 ---

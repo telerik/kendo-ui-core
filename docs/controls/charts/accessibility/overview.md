@@ -2,7 +2,8 @@
 title: Overview
 page_title: jQuery Charts Documentation - Charts Accessibility
 description: "Get started with the jQuery Charts by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_charts_widget
+components: ["chart"]
+slug: jquery_chart_accessibility
 position: 1
 ---
 
@@ -41,7 +42,7 @@ For more information, refer to:
 ## See Also
 
 * [WCAG 2.2 Support by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/index)
-* [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/navigation.html)
+* [Keyboard Navigation by the Chart (Demo)](https://demos.telerik.com/kendo-ui/charts/keyboard-navigation)
 * [Keyboard Navigation by the Chart]({% slug keynav_kendoui_charts_widget %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

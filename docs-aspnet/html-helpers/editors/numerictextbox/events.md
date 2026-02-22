@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI NumericTextBox component for {{ site.framework }}."
+components: ["numerictextbox"]
 slug: events_numerictextbox_aspnetcore
 position: 9
 ---
@@ -33,7 +34,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </kendo-numerictextbox>
 ```
 {% endif %}
-```script
+```JS script
 <script>
     function numerictextbox_spin() {
         // Handle the spin event.

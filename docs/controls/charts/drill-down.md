@@ -2,6 +2,7 @@
 title: Drilldown
 page_title: jQuery Chart Documentation - Drilldown
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure drilldown charts."
+components: ["chart"]
 slug: drilldown_charts_widget
 position: 5
 ---
@@ -19,7 +20,7 @@ The view hierarchy is displayed in a breadcrumb for easy navigation back to prev
 
 To configure a chart series for drilldown:
 * Set [`drilldownField`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.drilldownfield) to a field that contains the drilldown series configuration for each point.
-* Add a [`kendoChartBreadcrumb`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chartbreadcrumb) component and link it to the Chart.
+* Add a [`kendoChartBreadcrumb`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart-breadcrumb) component and link it to the Chart.
 
 ```dojo
     <nav id="breadcrumb"></nav>
@@ -212,7 +213,7 @@ To populate the drilldown series on demand:
 
 ## Customizing the Breadcrumb Root Item
 
-To customize the root item of the chart Breadcrumb, set the [`rootItem`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chartbreadcrumb/configuration/rootItem).
+To customize the root item of the chart Breadcrumb, set the [`rootItem`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart-breadcrumb/configuration/rootitem).
 
 ```dojo
   <nav id="breadcrumb"></nav>
@@ -342,5 +343,5 @@ To implement a custom drilldown navigation:
 
 ## See Also
 
-* [Drilldown Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-drilldown/index)
+* [Drilldown Chart (Demo)](https://demos.telerik.com/kendo-ui/drilldown-charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

@@ -7,6 +7,7 @@ slug: kendo-all-min-js-not-present-in-the-npm-distribution
 tags: npm, webpack
 ticketid: 1110344
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

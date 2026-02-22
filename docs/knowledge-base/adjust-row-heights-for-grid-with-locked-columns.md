@@ -5,9 +5,9 @@ description: "Learn how to adjust the height of the rows when the columns are lo
 previous_url: /controls/data-management/grid/how-to/AngularJS/adjust-row-heights-for-grid-with-locked-columns
 slug: howto_adjust_row_heights_template_locked_columns_grid
 tags: grid, adjust, row, height, locked
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -33,7 +33,7 @@ In such cases, if you show the content later, you might cause issues related to 
 
 The following example demonstrates how to adjust the row heights in a Kendo UI Grid with locked columns and with a column template that uses the `ng-if` directive.
 
-```dojo
+```
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-grid k-scope-field="grid" options="mainGridOptions"></kendo-grid>
@@ -66,9 +66,9 @@ The following example demonstrates how to adjust the row heights in a Kendo UI G
         $scope.visible = false;
         $scope.mainGridOptions = {
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 5,
             serverPaging: true,

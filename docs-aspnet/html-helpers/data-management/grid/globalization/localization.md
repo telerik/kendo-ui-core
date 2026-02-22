@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+components: ["grid"]
 slug: localization_aspnetcore_grid
 position: 3
 ---
@@ -16,44 +17,47 @@ To use the community-sources Resources files, override the executing context and
 
 1. Add the `Microsoft.AspNetCore.Mvc.Filters` and `System.Globalization` to the controller using namespaces:
 
-        using Microsoft.AspNetCore.Mvc.Filters;
-        using System.Globalization;
+    ```C#
+    using Microsoft.AspNetCore.Mvc.Filters;
+    using System.Globalization;
+    ```
 
 1. Override the default thread culture and the current UI culture.
 
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-FR");
+    ```C#
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fr-FR");
 
-            base.OnActionExecuting(context);
-        }
+        base.OnActionExecuting(context);
+    }
+    ```
 
 1. Match the client-side culture. By including the Kendo UI culture scripts, the number formats, the week and month names, the date and time formats, and so on will match the server-side culture and prevent validation errors. The culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design.
 
-```HtmlHelper
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
-    <!-- include the call to the kendo.culture() method before any widgets are initialized -->
+    ```HtmlHelper
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
+        <!-- include the call to the kendo.culture() method before any widgets are initialized -->
 
-    <script>kendo.culture("fr-FR");</script>
+        <script>kendo.culture("fr-FR");</script>
 
-    @(Html.Kendo().Grid<OrderViewModel>()
-        /* grid definition */
-    )
-```
-{% if site.core %}
-```TagHelper
-    <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
-    <!-- include the call to the kendo.culture() method before any widgets are initialized -->
+        @(Html.Kendo().Grid<OrderViewModel>()
+            /* grid definition */
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
+        <!-- include the call to the kendo.culture() method before any widgets are initialized -->
 
-    <script>kendo.culture("fr-FR");</script>
+        <script>kendo.culture("fr-FR");</script>
 
-    <kendo-grid name="grid">
-        /* grid definition */
-    </kendo-grid>
-```
-{% endif %}
+        <kendo-grid name="grid">
+            /* grid definition */
+        </kendo-grid>
+    ```
+    {% endif %}
     
-
 ## Toolbar Messages
 
 The following example demonstrates how to implement the custom translation of the toolbar messages in the Grid by using the `Toolbar.[Command].Text()` method.
@@ -245,6 +249,9 @@ The following example demonstrates how to implement the translations of the page
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Localization Support by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/globalization)
 * [RTL Support by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/right-to-left-support)
 * [Globalization in {{ site.product }}]({% slug overview_globalization_core %})

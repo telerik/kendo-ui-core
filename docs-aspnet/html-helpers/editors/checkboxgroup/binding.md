@@ -2,13 +2,14 @@
 title: Binding
 page_title: Binding
 description: "Learn how to implement data binding with Telerik UI CheckBoxGroup component for {{ site.framework }}."
+components: ["checkboxgroup"]
 slug: htmlhelpers_checkboxgroup_binding_aspnetcore
 position: 2
 ---
 
 # Binding
 
-When using the helpers, you can bind the checkbox items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
+When using the helpers, you can bind the checkbox items by using the [Items()](#items-method) method or the [BindTo()](#bindto-method) method.
 
 ## Items Method
 
@@ -180,7 +181,7 @@ You can implement model binding both with [local](#items-method) and [remote dat
     @(Html.Kendo().CheckBoxGroupFor(model => model.CheckBoxGroupValue)
          .HtmlAttributes(new { style = "height: auto;" })
          .Layout(CheckBoxGroupLayout.Vertical)
-         .BindTo((List<IInputGroupItem>)ViewData["CheckBoxGroupItems"])
+         .BindTo((List<CheckBoxGroupModel>)ViewData["CheckBoxGroupItems"])
     )
 ```
 {% if site.core %}
@@ -189,7 +190,7 @@ You can implement model binding both with [local](#items-method) and [remote dat
 
     <kendo-checkboxgroup for="CheckBoxGroupValue"
                          value="Model.CheckBoxGroupValue"
-                         bind-to='(List<IInputGroupItem>)ViewData["CheckBoxGroupItems"]'>
+                         bind-to='(List<CheckBoxGroupModel>)ViewData["CheckBoxGroupItems"]'>
     </kendo-checkboxgroup>
 ```
 {% endif %}

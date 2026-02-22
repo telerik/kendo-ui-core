@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery Stepper Documentation | Stepper Accessibility
 description: "Get started with the jQuery Stepper by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_stepper_widget
+components: ["stepper"]
+slug: jquery_stepper_accessibility
 position: 1
 ---
 

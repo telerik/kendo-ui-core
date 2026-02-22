@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Captcha component for {{ site.framework }}."
+components: ["captcha"]
 slug: events_captcha_aspnetcore
 position: 7
 ---

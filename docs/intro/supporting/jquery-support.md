@@ -2,6 +2,7 @@
 title: jQuery Support
 page_title: jQuery Support - Support and Distribution 
 description: "Get started with Kendo UI for jQuery and learn about the jQuery version support which is delivered by the Kendo UI for jQuery library."
+components: ["general"]
 previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites, /technical-requirements
 slug: jquerysupport_kendoui
 position: 3
@@ -17,11 +18,15 @@ The Kendo UI library is based on [jQuery](https://jquery.com/).
 
 ## Supported Versions
 
-Kendo UI is compatible with jQuery 1.10.x, 2.2.x and 3.7.x. Each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released.
+Kendo UI is compatible with jQuery 1.10.x, 2.2.x, 3.7.x and 4.0.0. Each newly released jQuery version introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases, use the previous jQuery version until the next official Kendo UI version that resolves the issue is released.
 The following table provides a list of the jQuery versions that are compatible with the major Kendo UI releases and their corresponding service packs.
 
 | Major Releases												                                         | Compatible jQuery Versions    |
 | :---															                                             | :---			         |
+| [Kendo UI 2025.4.1321](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-4-1321)|4.0.0, 3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2025.4.1111 (2025 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-4-1111)|3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2025.3.812 (2025 Q3)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-3-812-(2025-q3))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2025.2.520 (2025 Q2)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-2-520-(2025-q2))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2025.1.211 (2025 Q1)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2025-1-211-(2025-q1))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-4-1112-(2024-q4))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2024.3.806 (2024 Q3)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-for-jquery-2024-3-806-(2024-q3))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
@@ -30,7 +35,7 @@ The following table provides a list of the jQuery versions that are compatible w
 | [Kendo UI 2023.3.1010 (R3 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2023-(version-2023-3-1010))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2023.2.606 (R2 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2023-(version-2023-2-606))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2023.1.117 (R1 2023)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2023-(version-2023-1-117))|3.6.4, 3.6.1, 2.2.x, 1.12.4, 1.10.x|
-| [Kendo UI 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2022-(version-2022-3-913))|3.6.1, 2.2.x, 1.12.4, 1.10.x|
+| [Kendo UI 2022.3.913 (R3 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendoui-r3-2022-(version-2022-3-913))|3.6.1, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2022.2.510 (R2 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r2-2022-(version-2022-2-510))|3.6.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2022.1.119 (R1 2022)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r1-2022-(version-2022-1-119))|3.6.0, 2.2.x, 1.12.4, 1.10.x|
 | [Kendo UI 2021.3.914 (R3 2021)](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2021)|3.6.0, 2.2.x, 1.12.4, 1.10.x|

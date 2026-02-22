@@ -5,9 +5,9 @@ description: "Learn how to resize the columns of the Kendo UI Grid for jQuery by
 previous_url: /controls/data-management/grid/how-to/AngularJS/resize-columns-from-button
 slug: howto_resize_columnsfrom_abutton_grid
 tags: resize, columns, using, custom, button, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,7 +43,7 @@ How can I resize the columns of the Kendo UI Grid for jQuery by using a custom b
 
 The following example demonstrates how to resize the columns of the Grid by using a custom button and AngularJS handlers.
 
-```dojo
+```
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-grid="kg" options="mainGridOptions">
@@ -68,9 +68,9 @@ The following example demonstrates how to resize the columns of the Grid by usin
 
         $scope.mainGridOptions = {
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+              read: "https://demos.telerik.com/service/v2/odata/Employees"
             },
             pageSize: 5,
             serverPaging: true,

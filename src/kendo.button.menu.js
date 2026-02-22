@@ -86,7 +86,7 @@ export const __meta__ = {
                                                         `${TEXT_TEMPLATE({ text })}` +
                                                     `</span>`;
 
-    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${sanitizeLink(url)}" ${attributes.target ? `target="${attributes.target}"` : ''} class="${cssClasses.item}">` +
+    var LINK_TEMPLATE = ({ url, imageUrl, spriteCssClass, icon, text, attributes }) => `<a href="${sanitizeLink(url)}" ${attributes && attributes.target ? `target="${attributes.target}"` : ''} class="${cssClasses.item}">` +
                                                     `${IMAGE_TEMPLATE({ imageUrl })}` +
                                                     `${SPRITE_TEMPLATE({ spriteCssClass })}` +
                                                     `${ICON_TEMPLATE({ icon })}` +
@@ -138,7 +138,7 @@ export const __meta__ = {
             direction: "down",
             element: null,
             items: [],
-            size: "medium",
+            size: undefined,
         },
 
         events: [

@@ -2,6 +2,7 @@
 title: Upgrading to .NET 8
 page_title: Upgrading to .NET 8 Troubleshooting
 description: "Learn about the solutions of issues that may occur while upgrading your project to .NET 8."
+components: ["general"]
 slug: troubleshooting_net8
 position: 2
 ---

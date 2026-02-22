@@ -5,9 +5,9 @@ description: "Learn how to display a daily timeline for two users in a Kendo UI 
 previous_url: /controls/charts/how-to/timeline-using-range-bars, /controls/charts/how-to/various/timeline-using-range-bars
 slug: howto_createtimeline_usingrangebars_charts
 tags: chart, create, timelines, using, range, bars
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-configure-property-using-new-html-helper
 tags: grid, mvc, asp.net, property, globally, global, multiple, custom, helper.
 ticketid: 1157755
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

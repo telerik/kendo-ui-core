@@ -2,7 +2,8 @@
 title: Overview
 page_title: OTPInput Documentation | OTPInput Accessibility
 description: "Get started with the {{ site.product }} OTPInput and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_otpinputhelper
+components: ["otpinput"]
+slug: htmlhelpers_otpinput_accessibility
 position: 1
 ---
 
@@ -12,7 +13,7 @@ position: 1
 
 
 
-Out of the box, the Kendo UI for jQuery OTP provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
+Out of the box, the {{ site.product }} OTP provides extensive accessibility support and enables users with disabilities to acquire complete control over its features.
 
 
 The OTP is compliant with the [Web Content Accessibility Guidelines (WCAG) 2.2 AA](https://www.w3.org/TR/WCAG22/) standards and [Section 508](https://www.section508.gov/) requirements, follows the [Web Accessibility Initiative - Accessible Rich Internet Applications (WAI-ARIA)](https://www.w3.org/WAI/ARIA/apg/) best practices for implementing the [keyboard navigation](#keyboard-navigation) for its `component` role, provides options for managing its focus and is tested against the most popular screen readers.

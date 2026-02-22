@@ -2,8 +2,9 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Editor component for {{ site.framework }}."
+components: ["editor"]
 slug: events_editor_aspnetcore
-position: 14
+position: 15
 ---
 
 # Events

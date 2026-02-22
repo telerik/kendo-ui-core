@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} ColorGradient component by following a complete step-by-step tutorial."
+components: ["colorgradient"]
 slug: aspnetcore_colorgradient_getting_started
 position: 1
 ---
@@ -243,7 +244,7 @@ To use the client-side API of the ColorGradient and build on top of its initial 
 
 1. Use the `.Name()` (`id` attribute) of the component instance to get a reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var colorgradientReference = $("#colorgradient").data("kendoColorGradient"); // colorgradientReference is a reference to the existing ColorGradient instance of the helper.
@@ -253,7 +254,7 @@ To use the client-side API of the ColorGradient and build on top of its initial 
 
 1. Use the [ColorGradient client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorgradient#methods) to control the behavior of the control. In this example, you will use the `value` method to change the color programmatically.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var colorgradientReference = $("#colorgradient").data("kendoColorGradient"); // colorgradientReference is a reference to the existing ColorGradient instance of the helper.

@@ -2,6 +2,7 @@
 title: Build the Team Efficiency Dashboard Project - Step 6 Manage the Client Side
 page_title: Build the Team Efficiency Dashboard Project - Manage the Client Side
 description: "Build the Team Efficiency Dashboard Project - Step 6: Manage the Client Side."
+components: ["general"]
 slug: client_side_timeefficiencyapp_aspnetmvc6
 position: 6
 ---

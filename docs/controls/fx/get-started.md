@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery FX Documentation - Getting Started with the FX
 description: "Get started with the jQuery FX by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["effects"]
 slug: getting_started_kendoui_fx_component
 position: 2
 ---
@@ -85,8 +86,4 @@ In this step, you will play the effects.
 * [JavaScript API Reference of the FX](/api/javascript/effects/common)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

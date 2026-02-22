@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery MultiViewCalendar Documentation - Getting Started with the MultiViewCalendar
 description: "Get started with the jQuery MultiViewCalendar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["multiviewcalendar"]
 slug: getting_started_kendoui_multiviewcalendar_component
 position: 1
 ---
@@ -97,8 +98,4 @@ You can set a footer for the MultiViewCalendar by using the [`footer`](/api/java
 * [JavaScript API Reference of the jQuery MultiViewCalendar](/api/javascript/ui/multiviewcalendar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

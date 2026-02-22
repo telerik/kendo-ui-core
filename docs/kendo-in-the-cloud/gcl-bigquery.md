@@ -45,11 +45,11 @@ For more information on how to create new DataSets and tables, refer to the arti
 
 **Figure 4: Schema of the Products Table in the KendoDS DataSet**
 
-    ![Kendo UI for jQuery products table](images/gcl-table-schema.png)
+![Kendo UI for jQuery products table](images/gcl-table-schema.png)
 
 **Figure 5: Data of the Products Table in the KendoDS DataSet**
 
-    ![Kendo UI for jQuery products table](images/gcl-table-data.png)
+![Kendo UI for jQuery products table](images/gcl-table-data.png)
 
 ## Configuring the Grid to Consume and Manipulate Available BigQuery Data
 

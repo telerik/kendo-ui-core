@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery TreeView Documentation - TreeView Overview
 description: "Try now the Kendo UI for jQuery TreeView component supporting options for binding it to local arrays or remote data, dragging and dropping its nodes, configuring its items, and more."
+components: ["treeview"]
 slug: overview_kendoui_treeview_widget
 position: 0
 ---

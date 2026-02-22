@@ -2,6 +2,7 @@
 title: Filtering
 page_title: jQuery PivotGrid Documentation - Filtering
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the component."
+components: ["pivotgrid"]
 slug: filtering_kendoui_pivotgrid
 position: 3
 ---
@@ -40,7 +41,7 @@ The example below demonstrates how to filter data only for cities starting with 
               cube: "Adventure Works"
             },
             read: {
-              url: "https://demos.telerik.com/olap/msmdpump.dll",
+              url: "https://demos.telerik.com/service/v2/olap/msmdpump.dll",
               dataType: "text",
               contentType: "text/xml",
               type: "POST"

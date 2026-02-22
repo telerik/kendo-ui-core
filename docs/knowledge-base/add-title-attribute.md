@@ -5,9 +5,9 @@ description: "Learn how to add a title attribute in the Kendo UI for jQuery Nume
 slug: howto_add_title_attribute_numerictextbox
 previous_url: /controls/editors/numerictextbox/how-to/add-title-attribute
 tags: telerik, kendo, jquery, numerictextbox, add, title, attribute
-component: numerictextbox
 type: how-to
 res_type: kb
+components: ["numerictextbox"]
 ---
 
 ## Environment

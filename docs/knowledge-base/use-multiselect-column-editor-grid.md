@@ -5,9 +5,9 @@ description: "Learn how to use a Kendo UI MultiSelect for a column editor in the
 previous_url: /controls/editors/multiselect/how-to/use-multiselect-column-editor-grid, /controls/editors/multiselect/how-to/integration/use-multiselect-column-editor-grid
 slug: howto_usemultiselectgridcolumneditor
 tags: telerik, kendo, jquery, multiselect, use, as, column, editor, in, grid
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-editing-upload-in-popup
 tags: aspnet, core,  kendo, kendo-ui, grid, edit, popup, upload, custom, files
 ticketid: 1364607
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -63,7 +64,7 @@ Instead:
 
 1. Add a `ClientTemplate` which caters for the difference in the file names sent by the success handler and the `IFormFile`:
 
-    ```
+    ```Razor
         columns.Bound(p => p.FileUploads).ClientTemplate("#=getFileTemplate(data)#");
         <script>
             function getFileTemplate(data) {

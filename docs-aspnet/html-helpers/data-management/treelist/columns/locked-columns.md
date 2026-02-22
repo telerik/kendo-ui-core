@@ -2,6 +2,7 @@
 title: Locked
 page_title: Locked Columns
 description: "Get started with the Telerik UI TreeList component for {{ site.framework }} (Demo) supporting locked columns that are visible at all times while the user scrolls the TreeList horizontally."
+components: ["treelist"]
 slug: htmlhelpers_treelist_aspnetcore_locked_columns
 position: 1
 ---
@@ -18,7 +19,7 @@ For the feature to work properly, the following configuration settings has to be
 * Define the height of the TreeList.
 * Set explicit pixel widths to all columns to allow the TreeList to adjust the layout of the frozen and non-frozen table parts.
 * Make sure that the total width of all locked columns is equal to or less than the width of the TreeList minus three times the width of the scrollbar.
-* Make sure that the TreeList is not [initialized inside a hidden container](#hidden-containers).
+* Make sure that the TreeList is not [initialized inside a hidden container]({% slug hidden_containers_aspnetcore_grid%}).
 
 ```HtmlHelper
   @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
@@ -88,7 +89,7 @@ Locked columns cannot be scrolled on touch because they are wrapped in a contain
 
 Locked columns rely on synchronizing the row height of the frozen and non-frozen parts of the TreeList. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise, the synchronization might not work properly because of sub-pixel issues.
 
-```
+```CSS
 div.k-treelist td
 {
   line-height: 18px;

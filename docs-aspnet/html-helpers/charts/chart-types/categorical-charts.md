@@ -2,13 +2,14 @@
 title: Categorical Charts
 page_title: Categorical Charts
 description: "Learn the basics when working with the categorical charts in the {{ site.product }} suite."
+components: ["chart"]
 slug: htmlhelpers_categoricalcharts_aspnetcore
 position: 2
 ---
 
 {% if site.core %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#positionkendomvcuichartaxislabelsposition" %}
-    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisbuildert" %}
+    {% assign Position = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign ValueAxis = "/api/kendo.mvc.ui.fluent/chartbuilder#valueaxissystemaction" %}
 {% else %}
     {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
     {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}

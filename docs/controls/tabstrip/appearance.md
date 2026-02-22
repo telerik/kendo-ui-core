@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery TabStrip Documentation - TabStrip Appearance
 description: "Learn how to apply different styling options to the TabStrip component."
+components: ["tabstrip"]
 slug: appearance_kendoui_tabstrip_widget
 position: 7
 ---
@@ -23,7 +24,7 @@ The Kendo UI TabStrip supports the following styling options:
 
 The `tabSize` option controls how big or small the rendered `tabstrip` looks. 
 
-The following values are available for the [`tabSize`](/api/javascript/ui/tabstrip/configuration/tabsize) option:
+The following values are available for the [`size`](/api/javascript/ui/tabstrip/configuration/size) option:
 
 - `small`—small size
 - `medium`—medium size

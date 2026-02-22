@@ -6,6 +6,7 @@ page_title: Show Index in Kendo UI ListView
 slug: listview-show-index-editing
 tags: kendo ui, listview, index, editing
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment

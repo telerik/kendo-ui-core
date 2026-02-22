@@ -2,8 +2,9 @@
 title: Events
 page_title: TimeDurationPicker Events
 description: "Learn how to handle the events of the Telerik UI TimeDurationPicker component for {{ site.framework }}."
+components: ["timedurationpicker"]
 slug: htmlhelpers_timedurationpickerhelper_events
-position: 7
+position: 8
 ---
 
 # TimeDurationPicker Events
@@ -37,7 +38,7 @@ The following example demonstrates how to subscribe to events by a handler name.
         </kendo-timedurationpicker>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function timedurationpicker_open(e) {
             // Handle the open event.

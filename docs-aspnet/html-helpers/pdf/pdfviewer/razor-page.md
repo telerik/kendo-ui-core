@@ -2,28 +2,25 @@
 title: Razor Pages
 page_title: Razor Pages
 description: "Learn how to configure the Telerik UI PDFViewer for {{ site.framework }} in RazorPages scenario."
+components: ["pdfviewer"]
 slug: htmlhelpers_pdfviewer_aspnetcore_razor_page
 position: 7
 ---
 
 # PDFViewer in Razor Pages 
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI Loader for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI PDFViewer for {{ site.framework }} in Razor Pages applications.
-
-This article describes how to configure the PDFViewer component in a Razor Pages scenario.
-
-For the complete project, refer to the [PDFViewer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PDFViewer).
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
 ## PDFjs Processing
 
 > Starting with version 2024 R4, the PDFViewer requires PDF.js version 4+. For more information, refer to the [PDF.js processing documentation]({% slug htmlhelpers_pdfviewer_pdfjs_processing_aspnetcore%}).
 
-The following example demonstrates how to initialize the PDFViewer in RazorPage project by using [PDF.JS](https://mozilla.github.io/pdf.js/):
+The following example demonstrates how to initialize the PDFViewer in a Razor Pages application by using [PDF.JS](https://mozilla.github.io/pdf.js/):
 
 {% if site.core %}
-```Program.cs
+```C# Program.cs
     builder.Services.AddKendo(x => x.RenderAsModule = true);
 ```
 {% else %}
@@ -34,9 +31,9 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
     });
 ```
 {% endif %}
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
-    @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerIndexModel
+    @model PDFViewerIndexModel
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
@@ -50,15 +47,15 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
     <h1>PDFViewerPDFJSProcessing</h1>
 
     @(Html.Kendo().PDFViewer()
-            .Name("pdfviewer")
-            .PdfjsProcessing(pdf => pdf.File(Url.Content("~/sample.pdf")))
-            .Height(1200)
+        .Name("pdfviewer")
+        .PdfjsProcessing(pdf => pdf.File(Url.Content("~/sample.pdf")))
+        .Height(1200)
     )
 ```
 {% if site.core %}
 ```TagHelper
     @page
-    @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerIndexModel
+    @model PDFViewerIndexModel
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.mjs" type="module"></script>
@@ -71,13 +68,12 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
 
     <h1>PDFViewerPDFJSProcessing</h1>
 
-    <kendo-pdfviewer height="1200" 
-                    name="pdfviewer">
+    <kendo-pdfviewer height="1200" name="pdfviewer">
         <pdfjs-processing file="@Url.Content("~/sample.pdf")"/>
     </kendo-pdfviewer>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public class PDFViewerIndexModel : PageModel
     {
         public void OnGet()
@@ -86,13 +82,15 @@ The following example demonstrates how to initialize the PDFViewer in RazorPage 
     }
 ```
 
+For the complete project, refer to the [PDFViewer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PDFViewer/PDFViewerIndex.cshtml).
+
 ## DPL Processing
 
-The following example demonstrates how to initialize the PDFViewer by using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction):
+The following example demonstrates how to initialize the PDFViewer by using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction) in a Razor Pages application.
 
-```tab-HtmlHelper(csthml)
+```HtmlHelper
     @page
-    @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerDPLModel
+    @model PDFViewerDPLModel
 
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
@@ -100,23 +98,31 @@ The following example demonstrates how to initialize the PDFViewer by using the 
     <h1>PDFViewerDPLProcessing</h1>
 
     @(Html.Kendo().PDFViewer()
-            .Name("pdfviewer")
-            .DplProcessing(dpl =>
-            {
-                dpl.Read(r=>r.Url("/PDFViewer/PDFViewerDPL?handler=Read"));
-            })
+        .Name("pdfviewer")
+        .DplProcessing(dpl =>
+        {
+            dpl.Read(r => r.Url(Url.Page("PDFViewerDPL", "Read")));
+        })
     )
 ```
 {% if site.core %}
 ```TagHelper
+    @page
+    @model PDFViewerDPLModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <h1>PDFViewerDPLProcessing</h1>
+
     <kendo-pdfviewer name="pdfviewer">
         <dpl-processing>
-            <read url="/PDFViewer/PDFViewerDPL?handler=Read"/>
+            <read url="@Url.Page("PDFViewerDPL", "Read")"/>
         </dpl-processing>
     </kendo-pdfviewer>
 ```
 {% endif %}
-```tab-PageModel(cshtml.cs)      
+```C# PageModel
 	public class PDFViewerDPLModel : PageModel
     {
         private IHostingEnvironment _hostingEnvironment;
@@ -150,6 +156,8 @@ The following example demonstrates how to initialize the PDFViewer by using the 
         }
     }
 ```
+
+For the complete project, refer to the [PDFViewer in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/PDFViewer/PDFViewerDPL.cshtml).
 
 ## See Also
 

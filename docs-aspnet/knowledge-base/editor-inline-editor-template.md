@@ -7,6 +7,7 @@ slug: editor-inline-editor-template
 tags: editor, inline, template, core, mvc, telerik
 previous_url: /helpers/editors/editor/how-to/inline-editor-in-editor-template, /html-helpers/editors/editor/how-to/inline-editor-in-editor-template
 res_type: kb
+components: ["general"]
 component: editor
 ---
 

@@ -7,6 +7,7 @@ slug: dropdownlist-hide-items-when-click
 tags: dropdownlist, hide, click, popup, open, keyboard
 ticketid: 1598543
 res_type: kb
+components: ["dropdownlist"]
 ---
 
 ## Environment

@@ -2,14 +2,15 @@
 title: Scatter Charts
 page_title: Scatter Charts
 description: "Learn the basics when working with the scatter charts in the {{ site.product }} suite."
+components: ["chart"]
 slug: htmlhelpers_scattercharts_aspnetcore
 position: 3
 ---
 
 {% if site.core %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign Position = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#positionkendomvcuichartaxislabelsposition" %}
 {% else %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign Position = "/api/kendo.mvc.ui.fluent/chartaxislabelsbuilder#positionkendomvcuichartaxislabelsposition" %}
 {% endif %}
 
 # Scatter Charts
@@ -222,7 +223,7 @@ The primary Y axis crosses the X axis at point 0 (leftmost). The second, `torque
 ## Smooth Scatter Line
 
 By default, the series in the Scatter Line Chart are connected with a straight line.
-To display a smooth line, use the [`Style(ChartScatterLineStyle.Smooth)`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartscatterlinestyle) setting of the `Series` configuration.
+To display a smooth line, use the {% if site.core %}[`Style(ChartScatterLineStyle.Smooth)`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartscatterlinestyle){% else %}[`Style(ChartScatterLineStyle.Smooth)`](/api/kendo.mvc.ui.fluent/chartseriesbuilder#stylekendomvcuichartlinestyle){% endif %} setting of the `Series` configuration.
 
 ```HtmlHelper
     @(Html.Kendo().Chart()

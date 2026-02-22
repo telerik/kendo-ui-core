@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance - Kendo UI Excel Export
 description: "Learn how to change the look and feel of the cells while exporting Kendo UI components to Excel."
+components: ["general"]
 slug: appearance_excelexport_kendoui
 position: 2
 ---
@@ -78,9 +79,11 @@ var workbook = new kendo.ooxml.Workbook({
     }
   ]
 });
-kendo.saveAs({
-    dataURI: workbook.toDataURL(),
-    fileName: "Test.xlsx"
+workbook.toDataURLAsync().then(function (dataURL) {
+  kendo.saveAs({
+    dataURI: dataURL,
+    fileName: "Test.xlsx",
+  });
 });
 </script>
 ```

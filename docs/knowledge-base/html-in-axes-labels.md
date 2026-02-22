@@ -5,9 +5,9 @@ description: "Learn how to use HTML for axes labels."
 previous_url: /controls/charts/how-to/html-in-axes-labels, /controls/charts/how-to/various/html-in-axes-labels
 slug: howto_addhtmltoaxeslabels_charts
 tags: chart, use, html, for, axes, labels
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -37,7 +37,7 @@ How can I use HTML for the `categoryAxis.labels` configuration of the Chart?
 
 ## Solution
 
-The following example demonstrates how to achieve this through the [`visual`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels.visual) option.
+The following example demonstrates how to achieve this through the [`visual`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelsvisual) option.
 
 ```dojo
 

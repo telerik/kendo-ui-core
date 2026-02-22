@@ -2,7 +2,8 @@
 title: Overview
 page_title: DateTimePicker Documentation | DateTimePicker Accessibility
 description: "Get started with the {{ site.product }} DateTimePicker and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_datetimepicker_aspnetcore
+components: ["datetimepicker"]
+slug: htmlhelpers_datetimepicker_accessibility
 position: 1
 ---
 
@@ -48,21 +49,28 @@ This section lists the selectors, attributes, and behavior patterns supported by
 
 The Calendar in the Popup element of the component should implement the specification for the **Calendar** component.
 
-[Calendar accessibility specification]({%slug htmlhelpers_accessibility_calendar_aspnetcore%})
+[Calendar accessibility specification]({% slug htmlhelpers_calendar_accessibility %})
 
 ### Popup Date/Time View Chooser
 
 
 The Date/Time view chooser in the Popup element of the component should implement the specification for the **ButtonGroup** component.
 
-[ButtonGroup accessibility specification]({%slug accessibility_aspnetcore_buttongroup%})
+[ButtonGroup accessibility specification]({% slug htmlhelpers_buttongroup_accessibility %})
 
 ### TimePicker Popup
 
 
 Time Popup implementation should follow the specification for the TimePicker component.
 
-[TimePicker accessibility specification]({%slug accessibility_timepicker_aspnetcore%})
+[TimePicker accessibility specification]({% slug htmlhelpers_timepicker_accessibility %})
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
 
 ## Resources
 

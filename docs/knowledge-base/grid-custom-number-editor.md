@@ -5,9 +5,9 @@ description: "Learn how to create a custom number editor in the Kendo UI Grid fo
 previous_url: /controls/data-management/grid/how-to/Editing/grid-custom-number-editor, /controls/editors/numerictextbox/how-to/custom-number-editor-grid
 slug: howto_create_custom_number_editor_numerictextbox_grid
 tags: grid, custom, number, editor, numerictextbox
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

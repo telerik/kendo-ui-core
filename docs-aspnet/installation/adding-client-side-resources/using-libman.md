@@ -2,6 +2,7 @@
 title: Using LibMan
 page_title: Using LibMan
 description: "Learn how to add the Kendo client-side web assets in a Telerik UI for ASP.NET Core project by using LibMan and WebPack."
+components: ["general"]
 slug: using_libman
 position: 4
 ---
@@ -18,7 +19,7 @@ To provide the client-side web assets by using LibMan:
 
 1. Add the following configuration to the `libman.json` file to fetch the library in the specified destination:
 
-    ```libman.json
+    ```JS libman.json
     {
     "version": "1.0",
     "defaultProvider": "cdnjs",
@@ -42,7 +43,7 @@ To provide the client-side web assets by using LibMan:
     * `webpack.config.js` and `package.json` files to the **wwwroot** folder of the application.
     * `entry.js` file in the **wwwroot/js/** folder to specify the scripts that should be bundled.
 
-    ```webpack.config.js
+    ```JS webpack.config.js
     const path = require('path');
     var webpack = require("webpack");
 
@@ -69,7 +70,7 @@ To provide the client-side web assets by using LibMan:
         devtool: 'source-map',
     };
     ```
-    ```package.json
+    ```JS package.json
     {
     "version": "1.0.0",
     "name": "asp.net",
@@ -95,7 +96,7 @@ To provide the client-side web assets by using LibMan:
     }
     }
     ```
-    ```entry.js
+    ```JS entry.js
         require("jquery")
         window.$ = window.jQuery = $
 
@@ -119,7 +120,7 @@ To provide the client-side web assets by using LibMan:
 
 1. In the `_Layout.cshtml`, file add a reference to the desired theme, the bundled scripts, and the license file `kendo-ui-license.js`:
 
-    ```_Layout.cshtml
+    ```Razor _Layout.cshtml
         <link rel="stylesheet" href="~/lib/kendo-ui/{{ site.cdnVersion }}/css/web/kendo.default-v2.css" />
         <script src="~/dist/bundle.js"></script>
         <script src="./kendo-ui-license.js"></script>
@@ -129,4 +130,4 @@ To provide the client-side web assets by using LibMan:
 
 * [Using Local Files to Add Client-Side Resources]({% slug using_local_client_side_resources %})
 * [Using CDN to Add Client-Side Resources]({% slug cdnservices_core %})
-* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug custombundles_core %})
+* [Creating Your Own Custom Script Bundles with Client-Side Resources]({% slug creating-custom-bundles %})

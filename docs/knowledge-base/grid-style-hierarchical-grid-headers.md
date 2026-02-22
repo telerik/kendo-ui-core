@@ -7,6 +7,7 @@ slug: grid-style-hierarchical-grid-headers
 tags: grid, headers, style, css, hierarchy, detail, kendo
 ticketid: 1142385
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -7,6 +7,7 @@ slug: grid-remove-spinner-numerictextbox-editor
 tags: numerictextbox, spinners, editor, remove
 ticketid: 1132419, 1134869
 res_type: kb
+components: ["general"]
 component: numerictextbox
 ---
 

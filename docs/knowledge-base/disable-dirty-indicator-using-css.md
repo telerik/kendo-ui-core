@@ -7,7 +7,7 @@ slug: disable-dirty-indicator-using-css
 tags: dirty, indicator, grid, disable, css
 ticketid: 1136481
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -60,30 +60,32 @@ For the full implementation, open the following example in the Dojo.
 
   <script>
     $(document).ready(function () {
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
           dataSource = new kendo.data.DataSource({
             transport: {
-              read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: crudServiceBaseUrl + "/Products/Update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: crudServiceBaseUrl + "/Products/Destroy",
-                dataType: "jsonp"
-              },
-              create: {
-                url: crudServiceBaseUrl + "/Products/Create",
-                dataType: "jsonp"
-              },
-              parameterMap: function(options, operation) {
-                if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                read:  {
+                    url: crudServiceBaseUrl + "/Products"
+                },
+                update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    type: "POST",
+            		contentType: "application/json"
+                },
+                destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    type: "POST",
+            		contentType: "application/json"
+                },
+                create: {
+                    url: crudServiceBaseUrl + "/Products/Create",
+                    type: "POST",
+            		contentType: "application/json"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return kendo.stringify(options.models);
+                    }
                 }
-              }
             },
             batch: true,
             pageSize: 20,

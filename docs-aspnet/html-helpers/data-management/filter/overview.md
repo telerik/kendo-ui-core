@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI Filter component for {{ site.framework }}."
+components: ["filter"]
 previous_url: /helpers/data-management/filter/overview
 slug: htmlhelpers_filter_aspnetcore_overview
 position: 0
@@ -164,19 +165,6 @@ public class SampleData
 * [Setting the operators]({% slug htmlhelpers_filter_aspnetcore_choose_operators %})&mdash;You can define which filter operators will be displayed in the filtering drop-down.
 * [Persisting the state]({% slug htmlhelpers_filter_aspnetcore_store_settings %})&mdash;The Filter enables you to store its filter expression and restore its state for the user.
 * [Globalization]({% slug globalization_filter_aspnetcore %})&mdash;The globalization process combines the translation of component messages (localization) with adapting them to specific cultures.
-
-## Referencing Existing Instances
-
-To refer to an existing Filter instance use the `jQuery.data()` method. Once a reference is established, use the [Filter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter#methods) to control its behavior.
-
-```
-<script>
-    $(function() {
-        // The Name() of the Filter is used to get its client-side instance.
-        var filter = $("#theFilter").data("kendoFilter");
-    });
-</script>
-```
 
 ## See Also
 

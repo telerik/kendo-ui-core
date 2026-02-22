@@ -2,6 +2,7 @@
 title: PopOver
 page_title: PopOver Overview
 description: "Learn the basics when working with the hybrid Telerik UI PopOver HtmlHelper for ASP.NET MVC."
+components: ["general"]
 previous_url: /helpers/hybrid/mobilepopover/overview, /helpers/hybrid/mobilepopover
 slug: overview_hybridpopover_aspnetmvc
 ---

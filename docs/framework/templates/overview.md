@@ -2,6 +2,7 @@
 title: Overview
 page_title: Templates Overview - Kendo UI Templates
 description: "Learn how to use HTML encoding and compilation in the Kendo UI for jQuery Templates component."
+components: ["general"]
 slug: overview_kendoui_templatescomponent
 position: 0
 ---

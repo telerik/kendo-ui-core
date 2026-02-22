@@ -2,6 +2,7 @@
 title: Getting Started 
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Circular Gauge component by following a complete step-by-step tutorial."
+components: ["circulargauge"]
 slug: circulargauge_getting_started
 position: 1
 ---
@@ -123,7 +124,8 @@ You can reference the Circular Gauge instances that you have created and build o
         });
     ```
 
-1. Use the [Circular Gauge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/circulargauge#methods) to control the behavior of the component. In this example, you will use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/circulargauge/methods/value) method to change the value of the Circular Gauge when the user presses the ArrowUp or ArrowDown keyboard buttons.
+1. Use the [Circular Gauge client-side API](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/circulargauge#methods) to control the behavior of the component. In this example, you will use the [`value()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/circulargauge/methods/value) method to change the value of the Circular Gauge when the user presses the `ArrowUp` or `ArrowDown` keyboard buttons.
+
 
     ```JavaScript
         $("body").on("keydown",function(e){
@@ -158,6 +160,6 @@ You can continue experimenting with the code sample above by running it in the T
 ## See Also
 
 * [Using the API of the Circular Gauge for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/circular-gauge/api)
-* [Client-Side API of the Circular Gauge](https://docs.telerik.com/kendo-ui/api/javascript/ui/circulargauge)
+* [Client-Side API of the Circular Gauge](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/circulargauge)
 * [Server-Side API of the Circular Gauge](/api/circulargauge)
 * [Knowledge Base Section](/knowledge-base)

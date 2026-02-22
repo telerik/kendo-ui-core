@@ -5,6 +5,7 @@ page_title: Removing the Kendo License Warning
 slug: remove-license-warning-message
 tags: license, warning, core, aspnet, mvc, message, upgrade, troubleshoot, application
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -39,9 +40,9 @@ The application seems to be running. How can I remove the warning, watermark, an
 
 ## Solution
 
-The license warning will surface because of the [new licensing mechanism](https://docs.telerik.com/{{ site.platform }}/installation/adding-client-side-resources/using-license-code) introduced with the `R3 2022` release. To remove the warning:
+The license warning will surface because of the [new licensing mechanism](https://docs.telerik.com/{{ site.platform }}/documentation/installation/activating-your-license/setting-up-your-license) introduced with the `R3 2022` release. To remove the warning:
 
-* Generate a [license file](https://docs.telerik.com/{{ site.platform }}/installation/adding-client-side-resources/using-license-code#step-1-get-the-license-file).
+* Generate a [license file](https://docs.telerik.com/{{ site.platform }}/documentation/installation/activating-your-license/setting-up-your-license#manual-installation).
 * Add the license file after the CDN reference to `kendo.all.min.js` and `kendo.aspnetmvc.min.js`.
     ```
     <script src="https://kendo.cdn.telerik.com/***/kendo.all.min.js"></script>

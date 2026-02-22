@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ActionSheet Documentation - Keyboard Navigation
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["actionsheet"]
 slug: keynav_actionsheet_jquery
 position: 2
 ---
@@ -25,4 +26,4 @@ For a complete example, refer to the [demo on keyboard navigation of the ActionS
 
 * [Keyboard Navigation by the ActionSheet (Demo)](https://demos.telerik.com/kendo-ui/actionsheet/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ActionSheet]({% slug accessibility_kendoui_actionsheet_widget %})
+* [Accessibility in the ActionSheet]({% slug jquery_actionsheet_accessibility %})

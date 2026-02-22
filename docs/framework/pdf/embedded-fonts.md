@@ -2,6 +2,7 @@
 title: Unicode and Embedded Fonts
 page_title: Unicode and Embedded Fonts - Kendo UI Drawing Library
 description: "Embed and render fonts when you export content to PDF by using the Kendo UI Drawing library."
+components: ["general"]
 previous_url: /framework/drawing/pdf-output#custom-fonts
 slug: embeddedfonts_drawing
 position: 3
@@ -70,22 +71,22 @@ The following example demonstrates a sample CSS declaration.
 
 1. To use the built-in [`defineFont`](/api/javascript/pdf/methods/definefont) method from the Drawing library, you have to call it before the PDF file is requested. The object you pass to the `defineFont` method has to map the font name or the style to a URL with the `TrueType` file. The same-origin policy applies and, unless [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is configured, you are not allowed to specify URLs of different origin (domain, protocol, and port).
 
-        ```
-            // Import DejaVu Sans font for embedding
-            kendo.pdf.defineFont({
-                "DejaVu Sans":
-                     "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf",
+    ```
+        // Import DejaVu Sans font for embedding
+        kendo.pdf.defineFont({
+            "DejaVu Sans":
+                 "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans.ttf"
 
-                "DejaVu Sans|Bold":
-                    "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold":
+                "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Bold.ttf"
 
-                "DejaVu Sans|Bold|Italic":
-                     "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Bold|Italic":
+                 "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
 
-                "DejaVu Sans|Italic":
-                     "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
-            });
-        ```
+            "DejaVu Sans|Italic":
+                 "https://cdn.kendostatic.com/2023.1.117/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    ```
 
 1. To make sure the elements that you are trying to export are using this font, specify `font-family: "DejaVu Sans"` in their styles. The following example demonstrates how to make all Kendo widgets use this font.
 

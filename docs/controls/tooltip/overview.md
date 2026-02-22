@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Tooltip Documentation - Tooltip Overview
 description: "Try now the Kendo UI for jQuery Tooltip component coming with default configuration options for relatively positioning it to the target, events for displaying the widget, auto-hiding behavior, and more."
+components: ["tooltip"]
 slug: overview_kendoui_tooltip_widget
 position: 0
 ---

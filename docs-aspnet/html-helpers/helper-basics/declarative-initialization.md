@@ -2,6 +2,7 @@
 title: Declarative Initialization
 page_title: Declarative Initialization
 description: "Learn how to enable the declarative initialization of the Telerik UI for {{ site.framework }} components."
+components: ["general"]
 slug: declarative_initialization_overview
 position: 3
 ---
@@ -43,10 +44,10 @@ The following example illustrates the generated declarative configuration of a [
 
 * Generated declarative configuration
 
-    ```
+    ```HTML
         <div id="textbox-container">
             <label class="k-label k-input-label" for="textbox">Comments:</label>
-            <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">
+            <span class="k-input k-textbox">
                 <input data-label="{'content':'Comments:'}" data-role="textbox" id="textbox" name="textbox" type="text" value="" aria-disabled="false" class="k-input-inner" autocomplete="off" style="width: 100%;">
             </span>
         </div>

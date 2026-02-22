@@ -2,6 +2,7 @@
 title: Disabled Button
 page_title: Disabled Button
 description: "Enable or disable the Telerik UI Button component for {{ site.framework }}."
+components: ["button"]
 previous_url: /helpers/navigation/button/disabled
 slug: disabled_buttonhelper_aspnetmvc
 position: 2
@@ -55,6 +56,7 @@ At runtime, you can disable the Button at with JavaScript by using its [`enable(
 @(Html.Kendo().Button()
         .Name("editButton")
         .Content("Edit")
+)
 ```
 ```TagHelper
     <kendo-button name="editButton">Edit</kendo-button>

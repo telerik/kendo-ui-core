@@ -2,7 +2,8 @@
 title: Overview
 page_title: TreeList Documentation | TreeList Accessibility
 description: "Get started with the {{ site.product }} TreeList and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_treelist_aspnetcore_accessibility
+components: ["treelist"]
+slug: htmlhelpers_treelist_accessibility
 position: 1
 ---
 
@@ -34,7 +35,7 @@ The TreeList is a composite component that consists of 2 logically separated str
 
 TreeList Toolbar follows the specification of the ToolBar component.
 
-[ToolBar accessibility specification]({% slug accessibility_toolbar_overview %})
+[ToolBar accessibility specification]({% slug htmlhelpers_toolbar_accessibility %})
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
@@ -47,17 +48,14 @@ TreeList Toolbar follows the specification of the ToolBar component.
 
 The element with `role=treegrid` must not include the ToolBar element as it does not belong to the `role=treegrid` element itself. It implements the ARIA specification for the Grid component with some exceptions listed below.
 
-[Grid accessibility specification]({% slug accessibility_aspnetcore_grid %})
-
-
-In the {{ site.product }} TreeList, the `role=treegrid` is assigned to the `<table>` in the `k-grid-content` element.
+[Grid accessibility specification]({% slug htmlhelpers_grid_accessibility %})
 
 
 The below table lists the ARIA requirements for the TreeList which are not present in the Grid specification:
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-grid-content>table` | `role=treegrid` | The role specifies the element is a TreeGrid. |
+| `.k-treelist .k-grid-aria-root` | `role=treegrid` | Sets the proper role for the TreeList component. |
 | `.k-table-tbody .k-table-row` | `aria-expanded=true/false` | Set on the currently expanded row(s). |
 | `.k-table-tbody .k-i-caret-alt-down,.k-table-tbody .k-i-caret-alt-right,.k-table-tbody .k-svg-i-caret-alt-down,.k-table-tbody .k-svg-i-caret-alt-right` | `aria-hidden=true` | Removes the expand/collapse icon from the accessibility tree. |
 

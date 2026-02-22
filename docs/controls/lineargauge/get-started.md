@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery LinearGauge Documentation - Getting Started with the LinearGauge
 description: "Get started with the jQuery LinearGauge by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["lineargauge"]
 slug: getting_started_kendoui_lineargauge_component
 position: 2
 ---
@@ -231,15 +232,11 @@ The LinearGauge allows you to add multiple [`pointers`](/api/javascript/dataviz/
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the LinearGauge](https://demos.telerik.com/kendo-ui/lineargauge/index)
+* [Demo Page for the LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 
 ## See Also 
 
 * [JavaScript API Reference of the LinearGauge](/api/javascript/dataviz/ui/lineargauge)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

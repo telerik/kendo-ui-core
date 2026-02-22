@@ -2,6 +2,7 @@
 title: OData-v4 Binding
 page_title: OData-v4 Binding
 description: "Learn how to implement OData-v4 binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/data-management/grid/binding/odatav4-binding
 slug: htmlhelpers_grid_aspnetcore_odatav4-binding
 position: 8
@@ -26,7 +27,7 @@ To install the required dependencies for using OData, install the autonomous `Mi
 
 For applications using .NET Core 6 and the minimal hosting model, the Edm model and service need to be configured through the `Program.cs` file in the following way:
 
-```
+```C#
     builder.Services.AddControllers().AddOData(options =>
     {
         options.AddRouteComponents("odata", GetEdmModel());
@@ -52,7 +53,7 @@ For applications using .NET Core 6 and the minimal hosting model, the Edm model 
 
 For applications using .NET Core 3.1 and 5, the Edm model and service need to be configured through the `ConfigureServices` method in the following way:
 
-```
+```C#
   public void ConfigureServices(IServiceCollection services)
   {
       services.AddControllers().AddOData(
@@ -75,7 +76,7 @@ To ensure that the application is configured for both WebApi and OData binding c
 
 1. Configure Web API by calling `GlobalConfiguration.Configure` in the `Application_Start` method.
   
-  ```
+  ```C#
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -87,7 +88,7 @@ To ensure that the application is configured for both WebApi and OData binding c
   ```
 2. Create a file named `WebApiConfig.cs` inside the `App_Start` folder and configure the Edm model and OData services.
   
-  ```
+  ```C#
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -118,7 +119,7 @@ To ensure that the application is configured for both WebApi and OData binding c
 
 To support writing and reading data using the OData formats, the `ODataController` base class needs to be inherited for a given controller instance.
 
-```
+```C#
     public class ProductsController : ODataController
     {
         ...
@@ -128,7 +129,7 @@ To support writing and reading data using the OData formats, the `ODataControlle
 From there, the REST API endpoints need to be decorated with the `EnableQuery` attribute. This attribute is responsible for applying the query options that are passed in the query string.
 
 {% if site.core %}
-```
+```C#
     public class ProductsController : ODataController
     {
         [HttpGet]
@@ -179,7 +180,7 @@ From there, the REST API endpoints need to be decorated with the `EnableQuery` a
 ```
 {% else %}
 
-```
+```C#
     public class ProductsController : ODataController
     {
         [EnableQuery]
@@ -436,7 +437,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
 
 1. Add a default batch handler within the `AddOData()` extensions method and inject the `UseODataBatching()` middleware.
 
-    ```
+    ```C#
       var defaultBatchHandler = new DefaultODataBatchHandler();
       defaultBatchHandler.MessageQuotas.MaxNestingDepth = 2;
 
@@ -602,7 +603,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
 
 1. Add a default batch handler within the `AddOData()` extensions method and inject the `UseODataBatching()` middleware within the `Startup.cs` file.
 
-  ```
+  ```C#
       public void ConfigureServices(IServiceCollection services)
       {
           var defaultBatchHandler = new DefaultODataBatchHandler();
@@ -769,7 +770,7 @@ To configure CRUD operations that support OData-v4 Binding, explicitly add a `Cl
 To enable batch editing capabilities in an ASP.NET MVC Environment:
 
 1. Add a default batch handler inside the `WebApiConfig` file.
-  ```
+  ```C#
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -869,6 +870,9 @@ To enable batch editing capabilities in an ASP.NET MVC Environment:
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [OData-v4 Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/odata)
 {% if site.core %}
 * [GitHub Example](https://github.com/telerik/ui-for-aspnet-core-examples/commit/1a513aae311b339349d61e65d4f12fe954e2afc8)

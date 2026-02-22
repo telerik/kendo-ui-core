@@ -2,6 +2,7 @@
 title: Build the Team Efficiency Dashboard Project - Step 5 Telerik UI ListView
 page_title: Build the Team Efficiency Dashboard Project - Telerik UI ListView
 description: "Build the Team Efficiency Dashboard Project - Step 5: Telerik UI ListView."
+components: ["general"]
 slug: telerikui_listview_timeefficiencyapp_aspnetmvc6
 position: 5
 ---
@@ -116,7 +117,7 @@ There are three ways to use the hash syntax:
 - Render values as HTML: `#= #`.
 - Use HTML encoding to display values: `#: #`.
 - Execute arbitrary JavaScript code: `# if (true) { # ... non-script content here ... # } #`.
-  ````HTML
+  ```HTML
   <script type="text/x-kendo-template" id="myTemplate">
       #if(isAdmin){#
           <li>#: name # is Admin</li>
@@ -124,7 +125,7 @@ There are three ways to use the hash syntax:
           <li>#: name # is User</li>
       #}#
   </script>
-  ````
+  ```
 
 #### Exercise: Create the ListView Template for Showing Employees
 

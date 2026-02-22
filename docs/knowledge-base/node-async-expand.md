@@ -1,13 +1,13 @@
 ---
-title: Expand Asynchronously the Selected TreeView Nodes 
+title: Expand Asynchronously the Selected TreeView Nodes
 page_title: Expand Asynchronously the Selected TreeView Nodes
 description: "Learn how to asynchronously expand the selected node of the Kendo UI for jQuery TreeView."
 previous_url: /controls/navigation/treeview/how-to/nodes/node-async-expand
 slug: howto_asynchronous_expand_selected_node
 tags: telerik, kendo, jquery, treeview, expand, selected, nodes, asynchronously
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -41,19 +41,19 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
 
 ```dojo
 <div id="container">
-    <button id='expandNode' class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-primary">Expand selected node</button>
+    <button id='expandNode' class="k-button k-button-rectangle k-button-primary">Expand selected node</button>
     <div id="treeview"></div>
 </div>
 
 <script>
     $(document).ready(function() {
         var OrderDetails = {
-            type: "odata",
+            type: "odata-v4",
             transport: {
                 read: {
                     url: function(options) {
                         return kendo.format(
-                            "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products({0})/Order_Details",
+                            "https://demos.telerik.com/service/v2/odata/Products({0})/Order_Details",
                             options.ProductID
                         );
                     }
@@ -69,7 +69,7 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
         };
 
         var Products = {
-            type: "odata",
+            type: "odata-v4",
             schema: {
                 model: {
                     id: "ProductID",
@@ -81,7 +81,7 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
                 read: {
                     url: function(options) {
                         return kendo.format(
-                            "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories({0})/Products",
+                            "https://demos.telerik.com/service/v2/odata/Categories({0})/Products",
                             options.CategoryID
                         );
                     }
@@ -90,10 +90,10 @@ The TreeView enables you to expand the selected node when `loadOnDemand` is set 
         };
 
         var Categories = new kendo.data.HierarchicalDataSource({
-            type: "odata",
+            type: "odata-v4",
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                    url: "https://demos.telerik.com/service/v2/odata/Categories"
                 }
             },
             schema: {

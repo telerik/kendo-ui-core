@@ -2,6 +2,7 @@
 title: Icons
 page_title: Icons
 description: "Get started with the Telerik UI {{ site.platform }} DropDownButton and add background, image, or font icons to enhance the visualization of the widget."
+components: ["dropdownbutton"]
 slug: htmlhelpers_dropdownbutton_aspnetcore_icons
 position: 4
 ---
@@ -35,7 +36,7 @@ The DropDownButton provides the `Icon`, `SpriteCssClass`, and `ImageUrl` propert
         )
     ```
     {% if site.core %}
-    ```TagHelper.cshtml
+    ```TagHelper
         <kendo-dropdownbutton name="DropDownButton" text="Plus" sprite-css-class="myPlusIcon">
         </kendo-dropdownbutton>
     ```

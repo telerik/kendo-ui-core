@@ -5,9 +5,9 @@ description: "Learn how to show tooltips for Chart notes."
 previous_url: /controls/charts/how-to/tooltip-for-chart-notes, /controls/charts/how-to/integration/tooltip-for-chart-notes, /controls/layout/tooltip/how-to/tooltip-for-chart-notes-charts
 slug: howto_showtooltipfornotes_charts
 tags: chart, show, tooltip, for, notes
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

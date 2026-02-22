@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn about its features and how to initialize the component."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_overview
 position: 0
 ---
@@ -158,7 +159,7 @@ The following example demonstrates how to initialize the TaskBoard.
 | [Search]({% slug htmlhelpers_taskboard_aspnetcore_search %}) | You can utilize a built-in search tool in the TaskBoard's toolbar that allows you to search through the cards data. |
 | [Templates]({% slug htmlhelpers_taskboard_aspnetcore_templates %}) | You are able to control the rendering of columns, cards, and popup headers with the use of [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview) or the [Template Component](https://docs.telerik.com/{{ site.platform }}/html-helpers/template/overview). |
 | [Toolbar]({% slug htmlhelpers_taskboard_aspnetcore_toolbar %}) | The built-in toolbar of the component allows you to use existing tools or to create new custom ones. |
-| [Accessibility]({% slug htmlhelpers_taskboard_aspnetcore_accessibility %}) | The TaskBoard is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
+| [Accessibility]({% slug htmlhelpers_taskboard_accessibility %}) | The TaskBoard is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support. |
 | [Globalization]({% slug htmlhelpers_taskboard_aspnetcore_globalization %}) | The globalization process combines the translation of component messages (localization) with adapting them to specific cultures (internationalization and right-to-left support). |
 
 ## Next Steps

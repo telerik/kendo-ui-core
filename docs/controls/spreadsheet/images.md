@@ -2,6 +2,7 @@
 title: Images
 page_title: jQuery Spreadsheet Documentation - Images
 description: "Get started with the jQuery Spreadsheet by Kendo UI and place an image in the component."
+components: ["spreadsheet"]
 slug: images_spreadsheet_widget
 position: 3
 ---
@@ -47,7 +48,7 @@ Then, in the popup window, you can select or drag in a file from the file system
 
 The following example demonstrates how to configure the Spreadsheet to display an image with top-left corner placed in the `J6` cell.
 
-```dojo
+```
     <div id="spreadsheet"></div>
 
     <script>
@@ -80,7 +81,7 @@ The Spreadsheet Sheet API exposes a method that allows you to programmatically a
     > * Images are supported only for client-side import and export. When you engage server-side import or export, no images will be loaded or exported.
     > * To properly export any image to PDF by using the default Spreadsheet functionality, at least one cell with data has to be present on the sheet which contains that image.
 
-    ```dojo
+    ```
         <div id="spreadsheet"></div>
 
         <script>

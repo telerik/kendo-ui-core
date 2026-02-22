@@ -2,6 +2,7 @@
 title: Metadata
 page_title: Metadata
 description: "Learn how to send and receive metadata when uploading files with the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 previous_url: /helpers/editors/upload/metadata
 slug: htmlhelpers_upload_send_meta_aspnetcore
 position: 6
@@ -25,7 +26,7 @@ To send metadata over to the `Save()` handler:
 
 2. Declare a handler for the `upload` event and attach a data object to the passed event.
 
-    ```
+    ```JS
     function onUpload(e) {
         e.data = {
             fileDescription: $("#fileDescription").val()
@@ -44,7 +45,7 @@ To send metadata over to the `Save()` handler:
             )
             .Events(e => e.Upload("onUpload"))
         )
-    ```    
+    ```
     {% if site.core %}
     ```TagHelper
         <kendo-upload name="files" on-upload="onUpload">
@@ -82,13 +83,13 @@ To receive metadata from the `save` handler:
 
 1. Build the response.
 
-    ```
+    ```C#
     return Json(new object() { foo = "bar" });
     ```
 
 2. Declare a handler for the [`success` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/success) and process the response.
 
-    ```
+    ```JS
     function onSuccess(e) {
         alert("Foo: " + e.response.foo);
     }

@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery Chart Documentation - Data Binding
 description: "Get started with the jQuery Chart by Kendo UI and learn how to bind it to inline data and to a data source."
+components: ["chart"]
 previous_url: /controls/charts/chart/data-binding
 slug: databinding_charts_widget
 position: 2

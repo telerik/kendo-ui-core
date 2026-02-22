@@ -7,6 +7,7 @@ tags: use, nested, model, properties, grid
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -42,7 +43,7 @@ In addition when you use `From` together with CRUD operations and add new rows, 
 
 The reason is that during updates and creates, the Telerik UI DataSource tries to construct a data item object which matches the original (server-side) data-item structure. For new data items, such a structure does not exist and needs to be defined explicitly.
 
-```
+```Razor
   ...
   .DataSource(ds => ds
               .Custom()
@@ -63,7 +64,6 @@ The reason is that during updates and creates, the Telerik UI DataSource tries t
                 transport.Create("Orders_Create", "Grid");
                 transport.Destroy("Orders_Destroy", "Grid");
             })
-            )
     )
 ```
 

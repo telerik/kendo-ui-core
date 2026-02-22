@@ -7,6 +7,7 @@ slug: mvc-missing-glyphs
 tags: mvc, font icons
 ticketid: 1110130, 1106399, 1095375
 res_type: kb
+components: ["switch"]
 ---
 
 ## Environment

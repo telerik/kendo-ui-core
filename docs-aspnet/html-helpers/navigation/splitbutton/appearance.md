@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI SplitButton HtmlHelper for {{ site.framework }}."
+components: ["splitbutton"]
 slug: htmlhelpers_splitbutton_aspnetcore_appearance
 position: 3
 ---
@@ -30,7 +31,7 @@ To control the size of the SplitButton, configure the `Size()` method with any o
 - `Large`
 - `None`
 
-The default `Size` value is `Medium`.
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
@@ -66,7 +67,7 @@ To manipulate the fill mode of the SplitButton, configure the `FillMode()` metho
 - `Flat`
 - `None`
 
-The default `FillMode` value is `Solid`.
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
@@ -109,7 +110,7 @@ To specify the theme color of the SplitButton, configure the `ThemeColor()` meth
 - `Light`
 - `Inverse`
 
-The default `ThemeColor` value is `Base`.
+> When not explicitly set, the applied theme controls the default theme color.
 
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
@@ -146,7 +147,7 @@ To set the border radius of the SplitButton, configure the `Rounded()` method wi
 - `Full`
 - `None`
 
-The default `Rounded` value is `Medium`.
+> When not explicitly set, the applied theme controls the default border radius.
 
 ```HtmlHelper
     @(Html.Kendo().SplitButton()
@@ -174,7 +175,7 @@ The default `Rounded` value is `Medium`.
 {% endif %}
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

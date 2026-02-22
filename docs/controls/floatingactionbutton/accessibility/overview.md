@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery FloatingActionButton Documentation | FloatingActionButton Accessibility
 description: "Get started with the jQuery FloatingActionButton by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_floatingactionbutton_widget
+components: ["floatingactionbutton"]
+slug: jquery_floatingactionbutton_accessibility
 position: 1
 ---
 
@@ -45,7 +46,7 @@ The FloatingActionButton features two distinct modes of operation: button-only a
 
 In the button-with-menu mode, the FloatingActionButton must implement the specification for the DropDownButton component.
 
-[DropDownButton accessibility specification]({{dropdownbutton_a11y_link}})
+[DropDownButton accessibility specification]({% slug jquery_dropdownbutton_accessibility %})
 
 ## Resources
 

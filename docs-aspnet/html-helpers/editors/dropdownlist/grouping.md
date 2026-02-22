@@ -2,6 +2,7 @@
 title: Grouping
 page_title: Grouping
 description: "Learn how to group data in the Telerik UI DropDownList component for {{ site.framework }} works."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/grouping
 slug: htmlhelpers_dropdownlist_grouping_aspnetcore
 position: 3

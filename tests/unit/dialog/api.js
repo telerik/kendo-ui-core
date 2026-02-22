@@ -373,4 +373,312 @@ describe("api", function() {
 
         assert.isOk(dialog._stopCenterOnResize.called);
     });
+
+    // Tests for action button properties
+    describe("action button properties", function() {
+        it("action with themeColor applies theme color class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    themeColor: "primary"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-primary"));
+        });
+
+        it("action with themeColor error applies error theme class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "Delete",
+                    themeColor: "error"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-error"));
+        });
+
+        it("action with themeColor warning applies warning theme class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "Warning",
+                    themeColor: "warning"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-warning"));
+        });
+
+        it("action with fillMode applies fill mode class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    fillMode: "outline"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-outline"));
+        });
+
+        it("action with fillMode flat applies flat class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    fillMode: "flat"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-flat"));
+        });
+
+        it("action with fillMode link applies link class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    fillMode: "link"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-link"));
+        });
+
+        it("action with size applies size class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    size: "large"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-lg"));
+        });
+
+        it("action with size small applies small class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    size: "small"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-sm"));
+        });
+
+        it("action with size medium applies medium class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    size: "medium"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-md"));
+        });
+
+        it("action with rounded applies rounded class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    rounded: "full"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-rounded-full"));
+        });
+
+        it("action with rounded medium applies medium rounded class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    rounded: "medium"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-rounded-md"));
+        });
+
+        it("action with rounded small applies small rounded class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    rounded: "small"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-rounded-sm"));
+        });
+
+        it("action with icon renders icon element", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "Delete",
+                    icon: "trash"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            let icon = button.find(".k-button-icon");
+            assert.equal(icon.length, 1);
+            assert.isOk(icon.hasClass("k-svg-icon") || icon.hasClass("k-icon"));
+        });
+
+        it("action with icon and no text creates icon-only button", function() {
+            let dialog = createDialog({
+                actions: [{
+                    icon: "trash"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-icon-button"));
+        });
+
+        it("action with iconClass applies custom icon class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    iconClass: "fa fa-male"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            let icon = button.find(".fa.fa-male");
+            assert.equal(icon.length, 1);
+        });
+
+        it("action with multiple properties applies all classes", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "Delete",
+                    themeColor: "error",
+                    fillMode: "solid",
+                    size: "medium",
+                    rounded: "full",
+                    icon: "trash"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-solid"));
+            assert.isOk(button.hasClass("k-button-error"));
+            assert.isOk(button.hasClass("k-button-md"));
+            assert.isOk(button.hasClass("k-rounded-full"));
+            assert.equal(button.find(".k-button-icon").length, 1);
+        });
+
+        it("action with primary true and no themeColor defaults to primary theme", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    primary: true
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-primary"));
+        });
+
+        it("action with primary true and themeColor uses specified themeColor", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    primary: true,
+                    themeColor: "error"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-error"));
+        });
+
+        it("setOptions updates action button properties", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    themeColor: "primary"
+                }]
+            });
+
+            dialog.setOptions({
+                actions: [{
+                    text: () => "Delete",
+                    themeColor: "error",
+                    icon: "trash"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("k-button-error"));
+            assert.equal(button.find(".k-button-icon").length, 1);
+        });
+
+        it("multiple actions with different properties render correctly", function() {
+            let dialog = createDialog({
+                actions: [
+                    {
+                        text: () => "Cancel",
+                        fillMode: "outline"
+                    },
+                    {
+                        text: () => "Delete",
+                        themeColor: "error",
+                        fillMode: "solid"
+                    },
+                    {
+                        icon: "eye-slash",
+                        themeColor: "warning",
+                        rounded: "full"
+                    }
+                ]
+            });
+
+            let buttons = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.equal(buttons.length, 3);
+            assert.isOk(buttons.eq(0).hasClass("k-button-outline"));
+            assert.isOk(buttons.eq(1).hasClass("k-button-solid"));
+            assert.isOk(buttons.eq(1).hasClass("k-button-error"));
+            assert.isOk(buttons.eq(2).hasClass("k-button-warning"));
+            assert.isOk(buttons.eq(2).hasClass("k-rounded-full"));
+            assert.isOk(buttons.eq(2).hasClass("k-icon-button"));
+        });
+
+        it("action with cssClass applies custom CSS class", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    cssClass: "myCustomClass"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            assert.isOk(button.hasClass("myCustomClass"));
+        });
+
+        it("action with icon and iconClass prefers icon property", function() {
+            let dialog = createDialog({
+                actions: [{
+                    text: () => "OK",
+                    icon: "trash",
+                    iconClass: "fa fa-male"
+                }]
+            });
+
+            let button = dialog.wrapper.find(".k-dialog-actions .k-button");
+            // Icon should be rendered (either as SVG or font icon)
+            let iconElement = button.find(".k-button-icon");
+            assert.equal(iconElement.length, 1);
+        });
+    });
 });

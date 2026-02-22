@@ -48,7 +48,6 @@ export const __meta__ = {
             alpha: "Alpha",
             gradient: "Gradient view",
             palette: "Palette view",
-            adaptiveTitle: "Choose Color",
         },
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
@@ -292,10 +291,12 @@ export const __meta__ = {
             views: ["gradient", "palette"],
             backgroundColor: null,
             ARIATemplate: (data) => `Current selected color is ${data || "none"}`,
-            size: "medium",
-            rounded: "medium",
-            fillMode: "solid",
+            size: undefined,
+            rounded: undefined,
+            fillMode: undefined,
             adaptiveMode: "none",
+            adaptiveTitle: null,
+            adaptiveSubtitle: null,
         },
 
         events: [ "activate", "change", "select", "open", "close" ],
@@ -419,7 +420,6 @@ export const __meta__ = {
                     text: "Cancel",
                     size: "large",
                     fillMode: that.options.fillMode,
-                    themeColor: "base",
                 },
                 {
                     command: "apply",
@@ -489,9 +489,13 @@ export const __meta__ = {
                 if (isAdaptive) {
                     that._popup = popup = selectorWrapper.kendoActionSheet({
                         adaptive: true,
-                        closeButton: true,
+                        closeButton: {
+                            icon: "check",
+                            themeColor: "primary",
+                        },
                         hideOverflowContent: true,
-                        title: kendo.htmlEncode(options.messages.adaptiveTitle),
+                        title: options.adaptiveTitle ? kendo.htmlEncode(options.adaptiveTitle) : "Choose Color",
+                        subtitle: options.adaptiveSubtitle ? kendo.htmlEncode(options.adaptiveSubtitle) : "",
                         footerTemplate: that._actionFooterButtons(),
                     }).data("kendoActionSheet");
 

@@ -7,6 +7,7 @@ slug: chart-add-trend-line
 tags: chart, trendline, average, mean, sampling
 ticketid: 1163517
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment
@@ -28,13 +29,15 @@ How can I add a trend line and/or an average line to the Chart?
 
 ## Solution
 
+> The suggested approach is suitable for versions before Kendo UI **2024 Q1 (2024.1.130)**. With versions **2024 Q1** the Kendo UI for jQuery chart provide built-in trendline support. You can ;earn more [here](https://docs.telerik.com/kendo-ui/controls/charts/elements/trendlines)
+
 1. Add an additional [`series`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series) with the average values to the Chart.
 2. Remove the [`markers`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers) by using the [`visible`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.markers.visible) property of the `series` so that the average values stand out as a line instead of a series.
 
-```dojo
+```
 <div id="example">
   <div class="demo-section k-content wide">
-    <div id="chart" style="background: center no-repeat url('../content/shared/styles/world-map.png');"></div>
+    <div id="chart" style="background: center no-repeat url('https://demos.telerik.com/kendo-ui/content/shared/styles/world-map.png');"></div>
   </div>
   <script>
     $(document).ready(function() {

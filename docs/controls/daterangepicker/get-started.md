@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery DateRangePicker Documentation - Getting Started with the DateRangePicker
 description: "Get started with the jQuery DateRangePicker by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["daterangepicker"]
 slug: getting_started_kendoui_daterangepicker_widget
 position: 1
 ---
@@ -95,8 +96,3 @@ You can customize the format of the displayed date by setting the [`format`](/ap
 * [JavaScript API Reference of the jQuery DateRangePicker](/api/javascript/ui/daterangepicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

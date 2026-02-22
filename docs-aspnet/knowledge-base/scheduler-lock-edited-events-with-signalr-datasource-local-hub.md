@@ -7,6 +7,7 @@ previous_url: /helpers/scheduling/scheduler/how-to/lock-edited-events-with-signa
 slug: scheduler-lock-edited-events-with-signalr-datasource-local-hub
 tags: scheduler, signalr, datasource, local, hub, lock, events, edit, real-time, push-notifications, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 
@@ -59,7 +60,7 @@ This example demonstrates locking the currently edited events of the Scheduler s
             var hubStart = {};
 
             // Create a new SignalR connection to the specified hubUrl.
-            var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
+            var hubUrl = "path/to/hub";
             var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
             var productHub = connection.createHubProxy("meetingHub");
 
@@ -77,7 +78,7 @@ This example demonstrates locking the currently edited events of the Scheduler s
             });
         </script>
     ```
-    ```ProductHub.cs
+    ```C# ProductHub.cs
         public class ProductHub : Hub
         {
             public void LockRecord(int id)

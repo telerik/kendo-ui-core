@@ -41,12 +41,12 @@ export const __meta__ = {
             name: 'Badge',
             cutoutBorder: false,
             data: {},
-            fillMode: 'solid',
+            fillMode: undefined,
             icon: '',
             max: Infinity,
             position: 'inline',
             align: '',
-            rounded: 'medium',
+            rounded: undefined,
             roundings: {
                 'small': 'sm',
                 'medium': 'md',
@@ -58,10 +58,10 @@ export const __meta__ = {
                 'medium': 'md',
                 'large': 'lg'
             },
-            size: 'medium',
+            size: undefined,
             template: null,
             text: '',
-            themeColor: 'secondary',
+            themeColor: undefined,
             visible: true,
             _classNames: []
         },
@@ -151,7 +151,7 @@ export const __meta__ = {
 
             // Color
             if (typeof themeColor === 'string' && themeColor !== '') {
-                classNames.push('k-badge-' + fillMode + '-' + themeColor);
+                classNames.push('k-badge-' + themeColor);
             }
 
             // Size

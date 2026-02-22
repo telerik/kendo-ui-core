@@ -2,6 +2,7 @@
 title: Local and Remote Data
 page_title: jQuery TreeView Documentation - Local and Remote Data
 description: "Get started with the jQuery TreeView by Kendo UI and learn how to initialize the component and use its events."
+components: ["treeview"]
 slug: databinding_kendoui_treeview
 position: 1
 ---
@@ -45,8 +46,7 @@ The following example demonstrates how to create a TreeView and bind it to a rem
         dataSource: {
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                    dataType: "json"
+                    url: "https://demos.telerik.com/service/v2/core/Employees"
                 }
             },
             schema: {

@@ -3,26 +3,25 @@ title:  Razor Pages
 page_title: Razor Pages
 description: "Learn how to use the Telerik UI ListView for {{ site.framework }} in a Razor Pages application."
 slug: htmlhelpers_listview_razorpage_aspnetcore
+components: ["listview"]
 position: 5
 ---
 
 # ListView in Razor Pages
 
-Razor Pages is an alternative to the MVC pattern that makes page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cshtml.cs` file (by design, the two files have the same name). 
+This article describes how to seamlessly integrate and configure the Telerik UI ListView for {{ site.framework }} in Razor Pages applications.
 
-You can seamlessly integrate the Telerik UI ListView for {{ site.framework }} in Razor Pages applications.
+> You can use any of the available [data binding approaches]({% slug htmlhelpers_databinding_overview_listview %}#data-binding-approaches) to bind the component to data in a Razor Pages application.
 
-This article describes how to configure the ListView component in a Razor Pages scenario.
+@[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 
-For the complete project, refer to the [ListView in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListView/ListViewCrudOperations.cshtml).
-
-## Getting Started
+## Binding to Remote Data
 
 To configure the CRUD operations of the ListView `DataSource` within a Razor Pages application, follow the next steps:
 
 1. Specify the `Read`, `Create`, `Update`, and `Destroy` options of the `DataSource` configuration. The URL in each of these options must refer to the method name in the `PageModel`
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model IndexModel
 
@@ -36,14 +35,14 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                 .Ajax()
                 .Model(model => model.Id(p => p.OrderID))
                 .PageSize(18)
-                .Create(create => create.Url("/Index?handler=Create").Data("forgeryToken"))
-                .Read(read => read.Url("/Index?handler=Read").Data("forgeryToken"))
-                .Update(update => update.Url("/Index?handler=Update").Data("forgeryToken"))
-                .Destroy(destroy => destroy.Url("/Index?handler=Destroy").Data("forgeryToken"))
+                .Create(create => create.Url(Url.Page("Index", "Create")).Data("forgeryToken"))
+                .Read(read => read.Url(Url.Page("Index", "Read")).Data("forgeryToken"))
+                .Update(update => update.Url(Url.Page("Index", "Update")).Data("forgeryToken"))
+                .Destroy(destroy => destroy.Url(Url.Page("Index", "Destroy")).Data("forgeryToken"))
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model IndexModel
 
@@ -53,10 +52,10 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     <model id="OrderID"/>
                 </schema>
                 <transport>
-                    <create url="/Index?handler=Create" data="forgeryToken" />
-                    <read url="/Index?handler=Read" data="forgeryToken" />
-                    <update url="/Index?handler=Update" data="forgeryToken" />
-                    <destroy url="/Index?handler=Destroy" data="forgeryToken"/>
+                    <create url="@Url.Page("Index", "Create")" data="forgeryToken" />
+                    <read url="@Url.Page("Index", "Read")" data="forgeryToken" />
+                    <update url="@Url.Page("Index", "Update")" data="forgeryToken" />
+                    <destroy url="@Url.Page("Index", "Destroy")" data="forgeryToken"/>
                 </transport>
             </datasource>
             <pageable enabled="true"/>
@@ -72,27 +71,27 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     </dd>
                     <dt>Ship City</dt>
                     <dd>
-                        <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                        <span class="k-textbox k-input">
                             <input id="ShipCity" type="text" class="k-input-inner" data-bind="value:ShipCity" name="ShipCity" required="required" validationMessage="required" />
                         </span>
                         <span data-for="ShipCity" class="k-invalid-msg"></span>
                     </dd>
                     <dt>Ship Name</dt>
                     <dd>
-                        <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                        <span class="k-textbox k-input">
                             <input id="ShipName" type="text" class="k-input-inner" data-bind="value:ShipName" name="ShipName" required="required" validationMessage="required" />
                         </span>
                         <span data-for="ShipName" class="k-invalid-msg"></span>
                     </dd>
                 </dl>
                 <div class="edit-buttons">
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-update-button" href="\\#">#= kendo.ui.icon({ icon: 'check' }) #</a>
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#">#= kendo.ui.icon({ icon: 'cancel' }) #</a>
+                    <a role="button" class="k-button k-update-button" href="\\#">#= kendo.ui.icon({ icon: 'check' }) #</a>
+                    <a role="button" class="k-button k-cancel-button" href="\\#">#= kendo.ui.icon({ icon: 'cancel' }) #</a>
                 </div>
             </div>
         </script>
     ```
-    ```Template
+    ```JS Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order-view k-widget">
                 <dl>
@@ -104,8 +103,8 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     <dd>#:ShipName#</dd>
                 </dl>
                 <div class="edit-buttons">
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
+                    <a role="button" class="k-button k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
+                    <a role="button" class="k-button k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
                 </div>
             </div>
         </script>
@@ -120,7 +119,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
 1. Send the `AntiForgeryToken` with the CRUD requests.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return kendo.antiForgeryTokens();
@@ -130,7 +129,7 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
     Additional parameters can also be supplied.
 
-    ```
+    ```JavaScript
         <script>
             function forgeryToken() {
                 return {
@@ -143,7 +142,9 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
 1. Within the `cshtml.cs` file, add a handler method for each data operation.
 
-    ```Index.cshtml.cs
+    ```C# Index.cshtml.cs
+    public class IndexModel : PageModel
+    {
         public static IList<OrderViewModel> orders;
 
         public void OnGet()
@@ -159,8 +160,8 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
                     ShipName = "ShipName " + i,
                     ShipCity = "ShipCity " + i
                 }));
-            }       
-        }       
+            }
+        }
 
         public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
         {
@@ -188,15 +189,18 @@ To configure the CRUD operations of the ListView `DataSource` within a Razor Pag
 
             return new JsonResult(new[] { order }.ToDataSourceResult(request, ModelState));
         }
+    }
     ```
 
-## Binding the ListView to a PageModel Property
+For the complete project, refer to the [ListView in Razor Pages example](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.RazorPages/Telerik.Examples.RazorPages/Pages/ListView/ListViewCrudOperations.cshtml).
+
+## Binding to a PageModel Property
 
 To bind the ListView to a property from the `PageModel`, follow the next steps:
 
 1. Add a property to the `PageModel` that holds the data collection that must be loaded in the ListView.
 
-    ```
+    ```C#
         public class ListViewPageModel : PageModel
         {
             [BindProperty]
@@ -221,11 +225,11 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
 
     ```
         @model ListViewPageModel
-    ```  
+    ```
 
 1. Bind the ListView to the collection property and disable the server data operations (`ServerOperations(false)`).
 
-    ```HtmlHelper_Index.cshtml
+    ```HtmlHelper
         @page
         @model ListViewPageModel
 
@@ -241,7 +245,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
             )
         )
     ```
-    ```TagHelper_Index.cshtml
+    ```TagHelper
         @page
         @model ListViewPageModel
 
@@ -250,7 +254,7 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
             <datasource type="DataSourceTagHelperType.Ajax" page-size="18" server-operation="false" />
         </kendo-listview>
     ```
-    ```Template
+    ```JS Template
         <script type="text/x-kendo-tmpl" id="template">
             <div class="order-view k-widget">
                 <dl>
@@ -262,8 +266,8 @@ To bind the ListView to a property from the `PageModel`, follow the next steps:
                     <dd>#:ShipName#</dd>
                 </dl>
                 <div class="edit-buttons">
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
-                    <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
+                    <a role="button" class="k-button k-edit-button" href="\\#">#= kendo.ui.icon({ icon: 'pencil' }) #</a>
+                    <a role="button" class="k-button k-delete-button" href="\\#">#= kendo.ui.icon({ icon: 'x' }) #</a>
                 </div>
             </div>
         </script>

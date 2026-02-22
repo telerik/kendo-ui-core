@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview - Styles and Appearance
 description: "Learn about the rendering of the Kendo UI components and how to change their default options."
+components: ["general"]
 slug: components_rendering_overview
 position: 0
 ---

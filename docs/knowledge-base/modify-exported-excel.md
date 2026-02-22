@@ -5,9 +5,9 @@ description: "Learn how to modify the generated Excel file from a Kendo UI Pivot
 previous_url: /controls/data-management/pivotgrid/how-to/modify-exported-excel, /controls/data-management/pivotgrid/how-to/export/modify-exported-excel
 slug: howto_modify_exported_excel_files_pivotgrid
 tags: kendoui, pivotgrid, modify, exported, excel, files
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -52,7 +52,7 @@ The following example demonstrates how to achieve this behavior.
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                 excel: {
                     fileName: "Kendo UI PivotGrid Export.xlsx",
-                    proxyURL: "//demos.telerik.com/kendo-ui/service/export",
+                    proxyURL: "https://demos.telerik.com/service/v2/core/export",
                     filterable: true
                 },
                 excelExport: function(e) {
@@ -88,7 +88,7 @@ The following example demonstrates how to achieve this behavior.
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "//demos.telerik.com/olap/msmdpump.dll"
+                        read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
                     },
                     schema: {
                         type: "xmla"

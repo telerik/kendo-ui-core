@@ -2,6 +2,7 @@
 title: Column Templates
 page_title: Column Templates
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to customize the way the column displays its value."
+components: ["grid"]
 slug: column_templates_aspnetcore_grid
 position: 2
 ---
@@ -97,5 +98,8 @@ The following example demonstrates how to set a column template as a function.
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Templates by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-template)
 * [Server-Side API](/api/grid)

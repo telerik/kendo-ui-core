@@ -7,6 +7,7 @@ slug: grid-export-pdf-without-toolbar-pager
 tags: grid, export, pdf, toolbar, pager, ignore, exclude, columnmenu, column, menu, filter, icon
 ticketid: 1143253
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -84,7 +85,7 @@ The following example demonstrates the outcome of the suggested approach.
   <script id="rowTemplate" type="text/x-kendo-tmpl">
     <tr data-uid="#: uid #">
       <td class="photo">
-        <img src="../content/web/Employees/#: EmployeeID #.jpg" alt="#: EmployeeID #" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#: EmployeeID #.jpg" alt="#: EmployeeID #" />
       </td>
       <td class="details">
         <span class="name">#: FirstName# #: LastName# </span>
@@ -101,7 +102,7 @@ The following example demonstrates the outcome of the suggested approach.
   <script id="altRowTemplate" type="text/x-kendo-tmpl">
     <tr class="k-alt" data-uid="#: uid #">
       <td class="photo">
-        <img src="../content/web/Employees/#: data.EmployeeID #.jpg" alt="#: EmployeeID #" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#: data.EmployeeID #.jpg" alt="#: EmployeeID #" />
       </td>
       <td class="details">
         <span class="name">#: FirstName# #: LastName# </span>
@@ -155,14 +156,13 @@ The following example demonstrates the outcome of the suggested approach.
       pdf: {
         allPages: true,
         fileName: "Kendo UI Grid Export.pdf",
-        proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+        proxyURL: "https://demos.telerik.com/service/v2/core/export"
       },
       toolbar: kendo.template($("#template").html()),
       dataSource: {
-        type: "odata",
         transport: {
           read: {
-            url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+            url: "https://demos.telerik.com/service/v2/core/Employees",
           }
         },
         pageSize: 5

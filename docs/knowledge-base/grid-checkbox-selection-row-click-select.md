@@ -7,7 +7,7 @@ slug: grid-checkbox-selection-row-click-select
 tags: grid, checkbox selection, kendo ui
 ticketid: 1144198
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -44,8 +44,7 @@ How can I select rows with checkboxes by clicking anywhere on the row of the Gri
                     pageSize: 10,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/Products",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/Products"
                         }
                     },
                     schema: {

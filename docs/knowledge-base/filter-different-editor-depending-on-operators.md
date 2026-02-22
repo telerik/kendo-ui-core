@@ -4,10 +4,10 @@ page_title: Display Different Editors Depending on Operators - Kendo UI for jQue
 description: "Learn how to display different editors depending on the operator in the Kendo UI Filter for jQuery."
 slug: filter-different-editor-depending-on-operators
 tags: filter, editor, operator
-component: filter
 type: how-to
 ticketid: 1616662
 res_type: kb
+components: ["filter"]
 ---
 
 
@@ -33,7 +33,7 @@ How can I have different editors appear depending on the current operator of the
 The following example demonstrates how to achieve the desired scenario:
 
 ```dojo
-    <script src="../content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example">
       <div id="filter"></div>
       <br />
@@ -122,9 +122,8 @@ The following example demonstrates how to achieve the desired scenario:
             dataTextField: "CategoryName",
             dataValueField: "CategoryID",
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                read: "https://demos.telerik.com/service/v2/core/Categories"
               }
             }
           });

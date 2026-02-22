@@ -7,6 +7,7 @@ slug: calendar-dynamically-display-selection
 tags: kendo, kendoui, calendar, multiselect, dynamical, select
 ticketid: 1145054
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

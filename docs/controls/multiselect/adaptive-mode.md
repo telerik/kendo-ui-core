@@ -2,6 +2,7 @@
 title: Adaptive Mode
 page_title: Adaptive Mode
 description: "Learn how to configure adaptive mode for the Kendo UI for jQuery MultiSelect component."
+components: ["multiselect"]
 slug: multiselect_adaptive_mode_kendo
 position: 14
 ---
@@ -10,28 +11,11 @@ position: 14
 
 The Kendo UI for jQuery MultiSelect provides adaptive mode&mdash;built-in mobile-friendly rendering of its popup that accommodates the component content based on the current screen size.
 
-To set the adaptive mode, use the `adaptiveMode` option. In the example below, you can resize the browser to see how the component will adapt to different resolutions.
+> Starting with the 2025 Q2 release, when the `adaptiveMode` property is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
 
-```dojo
-    <div style="justify-content:center; display:flex">
-      <div style="width:600px; ">
-        <select id="products"></select>
-      </div>
-    </div>
-    <script>
-      $(document).ready(function() {
-        $("#products").kendoMultiSelect({
-          adaptiveMode: "auto",
-          dataTextField: "text",
-          dataSource: [
-            {text: "Apples"},
-            {text: "Oranges"},
-            {text: "Bananas"}
-          ]    
-        });
-      });
-    </script>
-```
+To set the adaptive mode, use the `adaptiveMode` option.
+
+<demo metaUrl="multiselect/adaptive-mode/" height="600"></demo>
 
 # On-Screen Keyboard
 

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
+components: ["multicolumncombobox"]
 previous_url: /helpers/html-helpers/multicolumncombobox, /helpers/editors/multicolumncombobox/overview
 slug: htmlhelpers_multicolumncombobox_aspnetcore
 position: 0
@@ -208,7 +209,7 @@ The following example demonstrates the basic configuration of the MultiColumnCom
 | [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})| Use a series of two or more cascaded MultiColumnComboBoxes.|
 | [Prefix and Suffix]({% slug prefix_suffix_multicolumncombobox %})| Enhance the component look and feel by adding prefix and suffix adornments.|
 | [Events]({% slug events_multicolumncombobox_aspnetcore %})| Handle the component events and implement any custom functionality.|
-| [Accessibility]({% slug accessibility_aspnetcore_multicolumncombobox %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
+| [Accessibility]({% slug htmlhelpers_multicolumncombobox_accessibility %})|The MultiColumnComboBox is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.|
 | [Cascading]({% slug htmlhelpers_multicolumncombobox_cascading %})|The cascading MultiColumnComboBox is a series of two or more MultiColumnComboBoxes in which each MultiColumnComboBox is filtered according to the selected options that are based on the DataValueField in the previous MultiColumnComboBox.|
 | [Templates](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/multicolumncombobox/templates)|The  MultiColumnComboBox provides capability to fully customize the content presented to the user.|
 

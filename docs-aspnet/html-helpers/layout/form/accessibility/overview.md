@@ -2,7 +2,8 @@
 title: Overview
 page_title: Form Documentation | Form Accessibility
 description: "Get started with the {{ site.product }} Form and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_form_aspnetcore_accessibility
+components: ["form"]
+slug: htmlhelpers_form_accessibility
 position: 1
 ---
 
@@ -67,7 +68,7 @@ To test the Form component, refer to the [Form Accessibility Demo](https://demos
 
 ## Keyboard Navigation
 
-For details on how the Form keyboard navigation works, refer to the [Keyboard Navigation]({%slug keynav_aspnetcore_form%}) article.
+For details on how the Form keyboard navigation works, refer to the [Accessibility Overview]({%slug overview_accessibility%}#keyboard-navigation) article.
 
 ## See Also
 

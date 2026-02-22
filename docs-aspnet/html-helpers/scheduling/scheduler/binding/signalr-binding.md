@@ -2,17 +2,28 @@
 title: SignalR Binding
 page_title: SignalR Binding
 description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for SignalR Binding."
+components: ["scheduler"]
 slug: htmlhelpers_scheduler_signalr_binding_aspnetcore
-position: 4
+position: 5
 ---
 
-# SignalR
-[SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-5.0) is a library maintained by Microsoft that simplifies adding real-time web functionality to web applications, requiring high-frequency updates in real-time to all connected clients.
+# SignalR Binding
 
-## Versions
+SignalR allows you to add real-time functionality to your Scheduler. SignalR takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible. This is useful in collaborative scenarios where multiple parties are using the Scheduler simultaneously or in apps that utilize push notifications.
 
-ASP.NET Core SignalR isn't compatible with clients or servers for ASP.NET SignalR. This means, for example, that you cannot connect a ASP.NET SignalR server to a client using ASP.NET Core SignalR client library.
-The table below highlights major differences between ASP.NET SignalR and ASP.NET Core SignalR
+You can use it with both the Telerik UI helpers for MVC and Core because they wrap the [Kendo UI for jQuery Scheduler](https://docs.telerik.com/kendo-ui/controls/scheduler/overview).
+
+For a runnable example, refer to the [demo on SignalR binding of the Scheduler component](https://demos.telerik.com/{{ site.platform }}/scheduler/signalr).
+
+> As of the [{{ site.framework }} R2 2018 release](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1), the suite provides SignalR support for its components.
+
+This article provides step-by-step instructions on using SignalR binding with the Scheduler.
+
+## SignalR Versions
+
+Two versions of SignalR exist&mdash;[ASP.NET Core SignalR](https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-8.0) and [ASP.NET SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr). It is important to note that ASP.NET Core SignalR  is not compatible with clients or servers for ASP.NET SignalR. This means, for example, that you cannot connect a ASP.NET SignalR server to a client using ASP.NET Core SignalR client library.
+
+The table below highlights the major differences between ASP.NET SignalR and ASP.NET Core SignalR:
 
 <table>
       <thead>
@@ -51,15 +62,38 @@ The table below highlights major differences between ASP.NET SignalR and ASP.NET
       </tbody>
 </table>
 
-For further details refer to [the official Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/signalr/version-differences?view=aspnetcore-5.0).
+For further details, refer to [the official Microsoft documentation](https://learn.microsoft.com/en-us/aspnet/core/signalr/version-differences?view=aspnetcore-8.0).
 
-# ASP.NET SignalR configuration 
+{% if site.core %}
+>tip The {{ site.product }} Scheduler uses the [ASP.NET Core SignalR service](https://github.com/telerik/kendo-ui-demos-service/tree/master/signalr-hubs), and the example below demonstrates how to set up the Scheduler with this service. If you use ASP.NET SignalR, refer to Microsoft's documentation for complete details on configuring the server and client-side hubs and hub connections.
 
- The [Scheduler SignalR Demo](https://demos.telerik.com/{{ site.platform }}/scheduler/signalr) and the [SignalR Meeting hub](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Hubs/MeetingHub.cs) are built using Microsoft.AspNet.SignalR and v1.1.3 of the client-side scripts.
+### Setting Up the ASP.NET Core SignalR Service
 
- To setup an application to use the Scheduler for {{ site.framework }} and the Microsoft.AspNet.SignalR library you need to:
- * Map to the hub when application starts
- ```
+To configure ASP.NET Core SignalR service, edit the `Program.cs` file and add SignalR to the services collection. Once done, ensure the hubs are mapped, as well.
+
+```C#
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSignalR(opt => opt.EnableDetailedErrors = true).AddJsonProtocol(options => {
+    options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+});
+...
+var app = builder.Build();
+...
+app.MapHub<MeetingHub>("/meetings");
+
+app.Run();
+```
+{% else %}
+### Setting Up ASP.NET SignalR Service
+
+Complete details on setting up an ASP.NET SignalR service are available in [Microsoft's documentation](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/tutorial-getting-started-with-signalr). In general, the following steps must be taken:
+
+1. Add the `Microsoft.AspNet.SignalR` NuGet package.
+1. Add an OWIN Startup Class and the SignalR configuration.
+1. Ensure the hubs are mapped.
+
+```
     public class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -71,294 +105,383 @@ For further details refer to [the official Microsoft documentation](https://docs
             });
         }
     }
- ```
- 
- * Create a [Hub with CRUD operation support](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Hubs/MeetingHub.cs)
- * Configure the Scheduler for SignalR binding and the client-side hub connection
- ```JavaScript
-  <script src="~/shared/web/integration/jquery.signalr-1.1.3.min.js"></script>
-    <script>
-        var hubUrl = "https://demos.telerik.com/kendo-ui/service/signalr/hubs";
-        var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
-        var meetingHub = connection.createHubProxy("meetingHub");
-        var hubStart = connection.start({ jsonp: true });
+```
+{% endif %}
 
-        function onPush(e) {
-            var notification = $("#notification").data("kendoNotification");
-            notification.success(e.type);
+## Configuring the Hub
+
+SignalR uses [hubs to communicate between clients and servers](https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-8.0). A hub is a high-level pipeline that allows the client-server communication. The SignalR Hubs API enables you to call methods on connected clients from the server.
+
+The example below demonstrates a sample Hub implementation:
+
+```C#
+    public class MeetingHub(SampleEntitiesDataContext context) : Hub
+    {
+        public override Task OnConnectedAsync()
+        {
+            Groups.AddToGroupAsync(Context.ConnectionId, GetGroupName());
+            return base.OnConnectedAsync();
         }
-    </script>
- ```
- ```HtmlHelper
-    @(Html.Kendo().Notification()
-        .Name("notification")
-        .Width("100%")
-        .Position(position => position
-            .Top(0)
-            .Left(0))
-    )
 
-    @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingSignalRViewModel>()
-        .Name("scheduler")
-        .Date(new DateTime(2013, 6, 13))
-        .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
-        .Height(600)
-        .Views(views =>
+        public override Task OnDisconnectedAsync(Exception e)
         {
-            views.DayView();
-            views.WeekView(weekView => weekView.Selected(true));
-            views.MonthView();
-            views.AgendaView();
-            views.TimelineView();
-        })
-        .Timezone("Etc/UTC")
-        .Resources(resource =>
+            Groups.RemoveFromGroupAsync(Context.ConnectionId, GetGroupName());
+            return base.OnDisconnectedAsync(e);
+        }
+
+        public IEnumerable<MeetingSignalR> Read()
         {
-            resource.Add(m => m.RoomID)
-                .Title("Room")
-                .DataTextField("Text")
-                .DataValueField("Value")
-                .DataColorField("Color")
-                .BindTo(new[] {
-                        new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
-                        new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
-                });
-            resource.Add(m => m.Attendees)
-                .Title("Attendees")
-                .Multiple(true)
-                .DataTextField("Text")
-                .DataValueField("Value")
-                .DataColorField("Color")
-                .BindTo(new[] {
-                        new { Text = "Alex", Value = 1, Color = "#f8a398" },
-                        new { Text = "Bob", Value = 2, Color = "#51a0ed" },
-                        new { Text = "Charlie", Value = 3, Color = "#56ca85" }
-                });
-        })
-        .DataSource(dataSource => dataSource
-            .SignalR()
-            .Events(events => events.Push("onPush"))
-            .Transport(tr => tr
-                .Promise("hubStart")
-                .Hub("meetingHub")
-                .Client(c => c
-                    .Read("read")
-                    .Create("create")
-                    .Update("update")
-                    .Destroy("destroy"))
-                .Server(s => s
-                    .Read("read")
-                    .Create("create")
-                    .Update("update")
-                    .Destroy("destroy")))
-            .Schema(schema => schema
-                .Model(model =>
+            var createdAt = DateTime.Now;
+            var meetings = context.Meetings
+                .ToList() // Execute the query because Linq to SQL doesn't get Guid.NewGuid()
+                .Select(meeting => new MeetingSignalR
                 {
-                    model.Id(m => m.ID);
-                    model.Field(m => m.ID).Editable(false);
-                    model.Field("start", typeof(DateTime)).From("Start");
-                    model.Field("end", typeof(DateTime)).From("End");
-                    model.Field("title", typeof(string)).From("Title");
-                    model.Field("description", typeof(string)).From("Description");
-                    model.Field("recurrenceID", typeof(int)).From("RecurrenceID");
-                    model.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
-                    model.Field("recurrenceException", typeof(string)).From("RecurrenceException");
-                    model.Field("isAllDay", typeof(bool)).From("IsAllDay");
-                    model.Field("startTimezone", typeof(string)).From("StartTimezone");
-                    model.Field("endTimezone", typeof(string)).From("EndTimezone");
-                })
-            )
-        )
-    )
- ```
+                    ID = Guid.NewGuid(),
+                    Title = meeting.Title,
+                    Start = DateTime.SpecifyKind(meeting.Start, DateTimeKind.Utc),
+                    End = DateTime.SpecifyKind(meeting.End, DateTimeKind.Utc),
+                    StartTimezone = meeting.StartTimezone,
+                    EndTimezone = meeting.EndTimezone,
+                    Description = meeting.Description,
+                    IsAllDay = meeting.IsAllDay,
+                    RoomID = meeting.RoomID,
+                    RecurrenceRule = meeting.RecurrenceRule,
+                    RecurrenceException = meeting.RecurrenceException,
+                    RecurrenceID = meeting.RecurrenceID,
+                    Attendees = meeting.MeetingAttendees.Select(m => m.AttendeeID).ToArray(),
+                    CreatedAt = createdAt = createdAt.AddMilliseconds(1)
+                }).ToList();
 
-# ASP.NET Core SignalR configuration 
-
-There are several major diferences when configuring ASP.NET Core SignalR compared to ASP.NET SignalR.  See the implementation details in the example below and for a complete example navigate to our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc) with code examples.
-
-The steps below outline what you need to do to configure the Scheduler HtmlHelper for {{ site.framework }} when using ASP.NET Core SignalR.
-* ASP.NET Core SignalR is an ASP.NET Core middleware. Therefore, on the server, you will need to add it in the ConfigureServices method and also map routes to hubs:
-```Startup.cs
-    public void ConfigureServices(IServiceCollection services)
-    {
-        // Add framework services.
-        services
-            .AddControllersWithViews()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-            // Maintain property names during serialization. See:
-            // https://github.com/aspnet/Announcements/issues/194
-            // https://docs.telerik.com/aspnet-core/compatibility/json-serialization
-            .AddNewtonsoftJson(options => 
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
-        // Add Kendo UI services to the services container
-        services.AddKendo();
-        // Add SignalR services to the services container
-        services.AddSignalR().AddJsonProtocol(options => {
-            options.PayloadSerializerOptions.PropertyNamingPolicy = null;
-        });
-    }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        //Additional configuraions
-
-        app.UseEndpoints(endpoints =>
-        {
-            // Map route to Hub
-            endpoints.MapHub<MeetingHub>("/meetingHub");
-            endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-        });
-    }
-```
-
-* Configure a Hub with CRUD methods
-```
-    public class MeetingHub : Hub
-    {
-        //static collection used for Demo purposes. You can fetch events from a database, for example.
-        public static List<MeetingSignalRViewModel> Meetings { get; set; }
-
-        public MeetingHub()
-        {
-            Meetings = new List<MeetingSignalRViewModel>();
+            return meetings;
         }
 
-        public async Task<MeetingSignalRViewModel> Create(MeetingSignalRViewModel item)
+        public void Update(MeetingSignalR meeting)
         {
-            item.ID = Guid.NewGuid();
-            Meetings.Add(item);
-
-            await Clients.Others.SendAsync("CREATE", item);
-
-            return item;
+            Clients.OthersInGroup(GetGroupName()).SendAsync("update", meeting);
         }
 
-        public IEnumerable<MeetingSignalRViewModel> Read()
+        public void Destroy(MeetingSignalR meeting)
         {
-            return Meetings;
+            Clients.OthersInGroup(GetGroupName()).SendAsync("destroy", meeting);
         }
 
-        public async Task Update(MeetingSignalRViewModel item)
+        public MeetingSignalR Create(MeetingSignalR meeting)
         {
-            var target = Meetings.FirstOrDefault(x => x.ID == item.ID);
-            target = item;
+            meeting.ID = Guid.NewGuid();
+            meeting.CreatedAt = DateTime.Now;
 
-            await Clients.Others.SendAsync("UPDATE", item);
+            Clients.OthersInGroup(GetGroupName()).SendAsync("create", meeting);
+
+            return meeting;
         }
 
-        public async Task Destroy(MeetingSignalRViewModel item)
+        public string GetGroupName()
         {
-            var target = Meetings.Find(x => x.ID == item.ID);
-            Meetings.Remove(target);
+            return GetRemoteIpAddress();
+        }
 
-            await Clients.Others.SendAsync("DESTROY", item);
+        public string GetRemoteIpAddress()
+        {
+            return Context.GetHttpContext()?.Connection.RemoteIpAddress?.ToString();
         }
     }
 ```
 
-* Configure the Scheduler for ASP.NET Core SignalR binding and the client-side hub connection:
+## Including the Client-Side Library
+
+Ensure the client-side library matches the server-side library version. Connecting an ASP.NET SignalR server to a client using ASP.NET Core SignalR client library and vice versa is not supported.
+
+{% if site.core %}
+### Configuring the ASP.NET Core SignalR Client-Side Hub
+
+1. Add a reference to the client-side SignalR library.
+1. Initialize a hub.
+1. Start the hub.
+
+For complete details and API reference on the client-side SignalR library, refer to [Microsoft's documentation](https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client?view=aspnetcore-8.0&tabs=visual-studio).
+
 ```JavaScript
-    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js" integrity="sha512-7SRCYIJtR6F8ocwW7UxW6wGKqbSyqREDbfCORCbGLatU0iugBLwyOXpzhkPyHIFdBO0K2VCu57fvP2Twgx1o2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        "use strict";
-        
-        var meetingHubConnection = new signalR.HubConnectionBuilder().withUrl("/meetingHub").build();
-        var hubStart = meetingHubConnection
-            .start({ jsonp: true })
+        var hubUrl = "path/to/hub";
+        var hub = new signalR.HubConnectionBuilder()
+            .withUrl(hubUrl,{
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
+            })
+            .build();
+
+        var hubStart = hub.start()
             .then(function (e) {
                 $("#notification").data("kendoNotification").success("SignalR Hub Started!");
             })
             .catch(function (err) {
                 return console.error(err.toString());
             });
-
-        function onPush(e) {
-            $("#notification").data("kendoNotification").success(e.type);
-        }
     </script>
 ```
-```HtmlHelper
-    @(Html.Kendo().Notification()
-        .Name("notification")
-        .Width("100%")
-        .Position(position => position
-            .Top(0)
-            .Left(0))
-            )
+{% else %}
+### Configuring the ASP.NET SignalR Client-Side Hub
 
-        @(Html.Kendo().Scheduler<MeetingSignalRViewModel>()
-        .Name("scheduler")
-        .Date(DateTime.Now)
-        .StartTime(DateTime.Now.AddHours(-3))
-        .Height(600)
-        .Views(views =>
-        {
-            views.DayView();
-            views.WeekView(weekView => weekView.Selected(true));
-            views.MonthView();
-            views.AgendaView();
-            views.TimelineView();
-        })
-        .Timezone("Etc/UTC")
-        .Resources(resource =>
-        {
-            resource.Add(m => m.RoomID)
-                .Title("Room")
-                .DataTextField("Text")
-                .DataValueField("Value")
-                .DataColorField("Color")
-                .BindTo(new[] {
-                        new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
-                        new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
-                });
-            resource.Add(m => m.Attendees)
-                .Title("Attendees")
-                .Multiple(true)
-                .DataTextField("Text")
-                .DataValueField("Value")
-                .DataColorField("Color")
-                .BindTo(new[] {
-                        new { Text = "Alex", Value = 1, Color = "#f8a398" },
-                        new { Text = "Bob", Value = 2, Color = "#51a0ed" },
-                        new { Text = "Charlie", Value = 3, Color = "#56ca85" }
-                });
-        })
-        .DataSource(dataSource => dataSource
-            .SignalR()
-            .Events(events => events.Push("onPush"))
-            .Transport(tr => tr
-                .Promise("hubStart") // The promise returned by the start method of the SignalR connection
-                .Hub("meetingHubConnection") // The SignalR HubConnection object created by the HubConnectionBuilder
-                .Client(c => c
-                    .Read("read")
-                    .Create("create")
-                    .Update("update")
-                    .Destroy("destroy"))
-                .Server(s => s
-                    .Read("read")
-                    .Create("create")
-                    .Update("update")
-                    .Destroy("destroy")))
-            .Schema(schema => schema
-                .Model(model =>
-                {
-                    model.Id(m => m.ID);
-                    model.Field(m => m.ID).Editable(false);
-                    model.Field("start", typeof(DateTime)).From("Start");
-                    model.Field("end", typeof(DateTime)).From("End");
-                    model.Field("title", typeof(string)).From("Title");
-                    model.Field("description", typeof(string)).From("Description");
-                    model.Field("recurrenceID", typeof(int)).From("RecurrenceID");
-                    model.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
-                    model.Field("recurrenceException", typeof(string)).From("RecurrenceException");
-                    model.Field("isAllDay", typeof(bool)).From("IsAllDay");
-                    model.Field("startTimezone", typeof(string)).From("StartTimezone");
-                    model.Field("endTimezone", typeof(string)).From("EndTimezone");
-                })
-            )
+If you use the ASP.NET SignalR service, you must use the ASP.NET SignalR client-side library. 
+
+1. Add a reference to the client-side SignalR library.
+1. Initialize a hub.
+1. Start the hub.
+
+For additional guidance on the client-side API of the ASP.NET SignalR library, refer to [Microsoft's documentation](https://learn.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
+The example below demonstrates the hub configuration:
+
+ ```JavaScript
+    <script src="Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script>
+        var hubUrl = "path/to/hub";
+        var connection = $.hubConnection(hubUrl, { useDefaultPath: false });
+        var hub = connection.createHubProxy("meetings");
+        var hubStart = connection.start({ jsonp: true });
+    </script>
+ ```
+{% endif %}
+
+## Configuring the Scheduler DataSource
+
+The next steps describe how to set up the `Transport` configuration of the Scheduler's DataSource to connect to the SignalR Hub.
+
+Instruct the DataSource to use SignalR protocol for transmitting and operating with data in real-time.
+
+```Razor HtmlHelper
+@(Html.Kendo().Scheduler<MeetingSignalRViewModel>()
+    .Name("scheduler")
+    .Date(DateTime.Now)
+    .StartTime(DateTime.Now.AddHours(-3))
+    .Height(600)
+    .Views(views =>
+    {
+        views.DayView();
+        views.WeekView(weekView => weekView.Selected(true));
+        views.MonthView();
+        views.AgendaView();
+        views.TimelineView();
+    })
+    .Timezone("Etc/UTC")
+    .Resources(resource =>
+    {
+        resource.Add(m => m.RoomID)
+            .Title("Room")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                    new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+                    new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
+            });
+        resource.Add(m => m.Attendees)
+            .Title("Attendees")
+            .Multiple(true)
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                    new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                    new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                    new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+            });
+    })
+    .DataSource(dataSource => dataSource
+        .SignalR()
+        .Transport(tr => tr
+            .Promise("hubStart") // The promise returned by the start method of the SignalR connection.
+            .Hub("hub") // The SignalR HubConnection object created by the hub connection.
+            .Client(c => c
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy"))
+            .Server(s => s
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy")))
+        .Schema(schema => schema
+            .Model(model =>
+            {
+                model.Id(m => m.ID);
+                model.Field(m => m.ID).Editable(false);
+                model.Field("start", typeof(DateTime)).From("Start");
+                model.Field("end", typeof(DateTime)).From("End");
+                model.Field("title", typeof(string)).From("Title");
+                model.Field("description", typeof(string)).From("Description");
+                model.Field("recurrenceID", typeof(int)).From("RecurrenceID");
+                model.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
+                model.Field("recurrenceException", typeof(string)).From("RecurrenceException");
+                model.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                model.Field("startTimezone", typeof(string)).From("StartTimezone");
+                model.Field("endTimezone", typeof(string)).From("EndTimezone");
+            })
         )
     )
+)
 ```
+```C# Model
+using Kendo.Mvc.UI;
+
+public class MeetingSignalRViewModel : ISchedulerEvent
+{
+    public Guid? ID { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+
+    private DateTime start;
+    public DateTime Start
+    {
+        get
+        {
+            return start;
+        }
+        set
+        {
+            start = value.ToUniversalTime();
+        }
+    }
+
+    public string StartTimezone { get; set; }
+
+    private DateTime end;
+
+    public DateTime End
+    {
+        get
+        {
+            return end;
+        }
+        set
+        {
+            end = value.ToUniversalTime();
+        }
+    }
+
+    public string EndTimezone { get; set; }
+    public string RecurrenceRule { get; set; }
+    public int? RecurrenceID { get; set; }
+    public string RecurrenceException { get; set; }
+    public bool IsAllDay { get; set; }
+    public string Timezone { get; set; }
+    public int? RoomID { get; set; }
+    public IEnumerable<int> Attendees { get; set; }
+}
+```
+
+## SignalR with Push Notifications
+
+The following example demonstrates a sample implementation of a Scheduler that uses SignalR to show push notifications.
+
+```JavaScript
+$(document).ready(function() {
+    var hubUrl = "path/to/hub";
+    var hub = new signalR.HubConnectionBuilder()
+        .withUrl(hubUrl,{
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets
+        })
+        .build();
+
+    var hubStart = hub.start()
+        .then(function (e) {
+            $("#notification").data("kendoNotification").success("SignalR Hub Started!");
+        })
+        .catch(function (err) {
+            return console.error(err.toString());
+        });
+});
+
+function onPush(e) {
+    var notification = $("#notification").data("kendoNotification");
+    notification.success(e.type);
+}
+```
+```HtmlHelper
+@(Html.Kendo().Scheduler<MeetingSignalRViewModel>()
+    .Name("scheduler")
+    .Date(DateTime.Now)
+    .StartTime(DateTime.Now.AddHours(-3))
+    .Height(600)
+    .Views(views =>
+    {
+        views.DayView();
+        views.WeekView(weekView => weekView.Selected(true));
+        views.MonthView();
+        views.AgendaView();
+        views.TimelineView();
+    })
+    .Timezone("Etc/UTC")
+    .Resources(resource =>
+    {
+        resource.Add(m => m.RoomID)
+            .Title("Room")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                    new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+                    new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
+            });
+        resource.Add(m => m.Attendees)
+            .Title("Attendees")
+            .Multiple(true)
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                    new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                    new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                    new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+            });
+    })
+    .DataSource(dataSource => dataSource
+        .SignalR()
+        .Events(events => events.Push("onPush"))
+        .Transport(tr => tr
+            .Promise("hubStart")
+            .Hub("hub")
+            .Client(c => c
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy"))
+            .Server(s => s
+                .Read("read")
+                .Create("create")
+                .Update("update")
+                .Destroy("destroy")))
+        .Schema(schema => schema
+            .Model(model =>
+            {
+                model.Id(m => m.ID);
+                model.Field(m => m.ID).Editable(false);
+                model.Field("start", typeof(DateTime)).From("Start");
+                model.Field("end", typeof(DateTime)).From("End");
+                model.Field("title", typeof(string)).From("Title");
+                model.Field("description", typeof(string)).From("Description");
+                model.Field("recurrenceID", typeof(int)).From("RecurrenceID");
+                model.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
+                model.Field("recurrenceException", typeof(string)).From("RecurrenceException");
+                model.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                model.Field("startTimezone", typeof(string)).From("StartTimezone");
+                model.Field("endTimezone", typeof(string)).From("EndTimezone");
+            })
+        )
+    )
+)
+
+@(Html.Kendo().Notification()
+    .Name("notification")
+    .Width("100%")
+    .AppendTo(".k-scheduler-footer")
+)
+```
+
+## See Also
+
+* [SignalR Binding by the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/signalr)
+* [Official Microsoft Documentation on Getting Started with {{ site.framework }} SignalR](https://learn.microsoft.com/en-us/aspnet/signalr/overview/getting-started/)
+* [Server-Side API](/api/scheduler)

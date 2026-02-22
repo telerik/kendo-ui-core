@@ -2,6 +2,7 @@
 title: Items
 page_title: Items
 description: "Learn how to configure the items in the SkeletonContaienr components for {{ site.framework }}."
+components: ["skeletoncontainer"]
 slug: htmlhelpers_skeletoncontainer_aspnetcore_items
 position: 2
 ---

@@ -2,6 +2,7 @@
 title: Known Exceptions
 page_title: Known Exceptions Troubleshooting
 description: "Learn about the known exceptions you might come across while working with Kendo UI Grid for ASP.NET MVC."
+components: ["grid"]
 slug: knownexceptions_gridhelper_aspnetmvc
 position: 3
 ---
@@ -26,16 +27,18 @@ This exception is thrown when the length of the JSON response exceeds the defaul
 * Serialize only the required properties of your model by [using a View Model](https://docs.telerik.com/{{ site.platform }}/html-helpers/data-management/grid/faq#how-to-convert-my-models-to-view-model-objects).
 * Manually serialize the `DataSourceResult`.
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
-        {
-            var data = GetData();
-            var serializer = new JavaScriptSerializer();
-            var result = new ContentResult();
-            serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
-            result.Content = serializer.Serialize(data.ToDataSourceResult(request));
-            result.ContentType = "application/json";
-            return result;
-        }
+    ```C#
+    public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+    {
+        var data = GetData();
+        var serializer = new JavaScriptSerializer();
+        var result = new ContentResult();
+        serializer.MaxJsonLength = Int32.MaxValue; // Whatever max length you want here
+        result.Content = serializer.Serialize(data.ToDataSourceResult(request));
+        result.ContentType = "application/json";
+        return result;
+    }
+    ```
 
 ## Sensitive Information Error Message
 
@@ -80,16 +83,16 @@ Yet another reason is that you explicitly specified that the Grid should make HT
 ## Limited Usage of Templates
 
 {% if site.core %}
-    The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
+The Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates (like Group Header Templates) which makes the usage of `.ServerOperations(true)` in this case incompatible.
 {% else %}
-    An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
+An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable Grid is bound to a `DataTable` or `DataSet`. The reason is that the ASP.NET MVC `EditorFor` method does not support `DataTable`.
 
 **Solution** Use a popup edit form with a custom editor template.
 
 For more information on how to resolve this issue, refer to the following resources:
 * [Popup editing in the Telerik UI for ASP.NET MVC Grid HtmlHelper (demo)](https://demos.telerik.com/aspnet-mvc/grid/editing-popup)
 * [Binding to a DataTable by the Telerik UI for ASP.NET MVC Grid HtmlHelper (how-to online example)](/helpers/grid/how-to/Binding/grid-bind-to-datatable)
-* [Editor templates in the Telerik UI for ASP.NET MVC Grid HtmlHelper]({% slug editortemplates_grid_aspnetcore %})&mdash;use a separate editor template for each data field.
+* [Editor templates in the Telerik UI for ASP.NET MVC Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_editing_overview %})&mdash;use a separate editor template for each data field.
 * [The TemplateName setting in the Telerik UI for ASP.NET MVC Grid HtmlHelper](/api/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String))&mdash;use it
 to set a single edit form template for the whole edit form.
 {% endif %}
@@ -113,6 +116,9 @@ In the above scenario, the widget **C** will not be rendered correctly and will 
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Basic Usage of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid)
 * [Using the API of the Grid HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/grid/api)
 * [Server-Side API](/api/grid)

@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
+components: ["tabstrip"]
 slug: tabstrip_appearance
 position: 2
 ---

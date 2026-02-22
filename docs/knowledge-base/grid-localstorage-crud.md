@@ -5,9 +5,9 @@ description: "Learn how to perform CRUD operations with local storage data in th
 previous_url: /controls/data-management/grid/how-to/grid-localstorage-crud, /controls/data-management/grid/how-to/Editing/grid-localstorage-crud
 slug: howto_perform_crud_operationswith_local_storage_data_grid
 tags: grid, perform, crud, operations, local, storage, data
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

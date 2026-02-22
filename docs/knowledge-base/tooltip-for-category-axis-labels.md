@@ -5,9 +5,9 @@ description: "Learn how to show tooltips for the categoryAxis labels."
 previous_url: /controls/charts/how-to/tooltip-for-category-axis-labels, /controls/charts/how-to/integration/tooltip-for-category-axis-labels
 slug: howto_showtooltipforaxislabels_charts
 tags: chart, use, drawing, api, show, custom, tooltip, categoryaxis, labels
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

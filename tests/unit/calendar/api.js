@@ -651,8 +651,8 @@ describe("kendo.ui.Calendar API", function() {
         stub(cal, "navigate");
         cal._today.click();
 
-        assert.isOk(!div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-nav-today"));
-        assert.isOk(div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-disabled"));
+        assert.isNotOk(div.find(".k-calendar-footer").find(".k-button").hasClass("k-nav-today"));
+        assert.isOk(div.find(".k-calendar-footer").find(".k-button").hasClass("k-disabled"));
         assert.equal(cal.calls("navigate"), 0);
     });
 
@@ -666,8 +666,8 @@ describe("kendo.ui.Calendar API", function() {
         stub(cal, "navigate");
         cal._today.click();
 
-        assert.isOk(!div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-nav-today"));
-        assert.isOk(div.find(".k-calendar-footer").find(".k-button-md").hasClass("k-disabled"));
+        assert.isNotOk(div.find(".k-calendar-footer").find(".k-button").hasClass("k-nav-today"));
+        assert.isOk(div.find(".k-calendar-footer").find(".k-button").hasClass("k-disabled"));
         assert.equal(cal.calls("navigate"), 0);
     });
 

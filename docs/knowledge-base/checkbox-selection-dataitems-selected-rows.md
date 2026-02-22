@@ -7,7 +7,7 @@ slug: checkbox-selection-dataitems-selected-rows
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -65,8 +65,7 @@ To get the `dataItem` for each selected row:
               pageSize: 10,
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               schema: {
@@ -127,7 +126,7 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 
 ```dojo
     <div id="example">
-      <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" onclick="getSelectedRowsData()"><span class="k-button-text">Update List</span></button>
+      <button class="k-button k-button-primary" onclick="getSelectedRowsData()"><span class="k-button-text">Update List</span></button>
       <div id="grid"></div>
       <h4>Shopping List</h4>
       <select id="listBox" style="width:856px;"></select>
@@ -139,8 +138,7 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
               pageSize: 10,
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/Products",
-                  dataType: "jsonp"
+                  url: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               schema: {

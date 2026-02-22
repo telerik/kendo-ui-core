@@ -6,6 +6,7 @@ slug: validator-required-if-rule
 tags: validator, required, required if, required-if, validation, conditional
 ticketid: 1384728
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment
@@ -45,7 +46,7 @@ The code comments contain tips for the suggested implementation. For more inform
 
 ```dojo
 <form id="myform">
-	<span style="width: 250px" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input type="text" id="input1" name="input1" placeholder="type something here and click Validate" class='k-input-inner'/></span>
+	<span style="width: 250px" class="k-input k-textbox"><input type="text" id="input1" name="input1" placeholder="type something here and click Validate" class='k-input-inner'/></span>
 
 	<br /><br />
 
@@ -73,11 +74,11 @@ The code comments contain tips for the suggested implementation. For more inform
 
 	<br /><br />
 
-	<span style="width: 250px" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input type="text" id="secondInput" requiredIf="input1" name="secondInput" class='k-input-inner'/></span>
+	<span style="width: 250px" class="k-input k-textbox"><input type="text" id="secondInput" requiredIf="input1" name="secondInput" class='k-input-inner'/></span>
 
 	<br /><br />
 
-	<button id="save" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">Validate</span></button>
+	<button id="save" class="k-button" id="noButton"><span class="k-button-text">Validate</span></button>
 
 </form>
 

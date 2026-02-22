@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery TaskBoard Documentation | TaskBoard Accessibility
 description: "Get started with the jQuery TaskBoard by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_taskboard_widget
+components: ["taskboard"]
+slug: jquery_taskboard_accessibility
 position: 1
 ---
 

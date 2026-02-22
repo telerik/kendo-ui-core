@@ -2,6 +2,7 @@
 title: Formatting Marks
 page_title: jQuery Editor Documentation - Formatting Marks
 description: "Get started with the jQuery Editor by Kendo UI and explaining the formatting marks tool."
+components: ["editor"]
 slug: fomratting_marks_editor_component
 position: 8
 ---

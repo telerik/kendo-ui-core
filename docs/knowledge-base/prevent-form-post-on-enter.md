@@ -5,9 +5,9 @@ description: "Learn how to prevent POST on pressing the `Enter` key in a Kendo U
 previous_url: /controls/editors/combobox/how-to/prevent-form-post-on-enter, /controls/editors/combobox/how-to/customize/prevent-form-post-on-enter
 slug: howto_prevent_post_onpressing_enter_combobox
 tags: telerik, kendo, jquery, combobox, prevent, post, on, enter, key, press
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

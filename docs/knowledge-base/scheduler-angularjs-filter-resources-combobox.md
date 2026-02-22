@@ -7,6 +7,7 @@ slug: scheduler-angularjs-filter-resources-combobox
 tags: kendo, kendo-ui, scheduler, resources, combobox, angularjs
 ticketid: 1158749
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -71,8 +72,8 @@ The following example demonstrates the full implementation of the suggested appr
     var $ctrl = this;
 
     this.schedulerOptions = {
-      date: new Date("2022/6/13"),
-      startTime: new Date("2022/6/13 07:00 AM"),
+      date: new Date("2025/6/13"),
+      startTime: new Date("2025/6/13 07:00 AM"),
       eventHeight: 50,
       majorTick: 60,
       views: [ "timeline", "timelineWeek", "timelineWorkWeek", {
@@ -86,24 +87,26 @@ The following example demonstrates the full implementation of the suggested appr
         batch: true,
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/meetings",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/meetings"
           },
           update: {
-            url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/meetings/update",
+             type: "POST",
+                 contentType: "application/json"
           },
           create: {
-            url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/meetings/create",
+             type: "POST",
+                 contentType: "application/json"
           },
           destroy: {
-            url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+             type: "POST",
+                 contentType: "application/json"
           },
           parameterMap: function (options, operation) {
             if (operation !== "read" && options.models) {
-              return { models: kendo.stringify(options.models) };
+              return kendo.stringify(options.models);
             }
           }
         },

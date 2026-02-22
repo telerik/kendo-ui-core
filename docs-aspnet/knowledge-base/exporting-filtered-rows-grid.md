@@ -7,6 +7,7 @@ slug: exporting-filtered-rows-grid
 tags: grid, export, excel, filtered rows, filtered data, server export
 ticketid: 1555436
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

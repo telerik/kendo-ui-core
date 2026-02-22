@@ -2,6 +2,7 @@
 title: Installing with the MSI Installer
 page_title: Installing with the MSI Installer for Windows
 description: "Get started with {{ site.product }} and install the components with the Windows MSI Installer Package."
+components: ["general"]
 previous_url: /getting-started/installation/msi-install, /installation-mvc/msi-install, /installation/msi-install
 slug: msi_install_aspnetmvc6_aspnetmvc
 position: 3
@@ -74,13 +75,13 @@ You will find the following in the {{ site.product }} installation directory:
 
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The non-minified CSS files used by the themes.
-* `src`&mdash;Contains an informational `README` saying that you must visit [your Telerik account](https://www.telerik.com/login/) to download the `source.zip` package with the JavaScript, CSS, and C# source code. This directory is not available in the trial version.
+* `src`&mdash;Contains an informational `README` saying that you must visit [your Telerik account](https://www.telerik.com/login/) to download the `source.zip` package with the JavaScript, CSS, and C# source code. This directory is not available, if you are using a trial license.
 * `VSExtensions`&mdash;The extensions for Visual Studio.
 * `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (`kendo.all`, `kendo.dataviz`, `kendo.web`, and `kendo.mobile`).
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts.
 * `pdfviewer`&mdash;The `Telerik.Web.PDF` assembly from the Telerik Document Processing library and its dependencies.
 * `dpl`&mdash;The NuGet packages for the Telerik Document Processing library. 
-* `export`&mdash;The `Kendo.Mvc.Export` assembly that allows exporting `IEnumerable` sources to XLSX and CSV formats.
+* `export`&mdash;The `Telerik.Core.Export` NuGet package that allows exporting `IEnumerable` sources to XLSX and CSV formats.
 * `license-agreements`&mdash;End-user license agreements files.
 * `spreadsheet`&mdash;The `Telerik.Web.Spreadsheet` assembly from the Telerik Document Processing library and its dependencies.
 {% if site.core %}

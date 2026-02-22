@@ -7,7 +7,7 @@ slug: troubleshooting_common_issues_multiselect_kendoui
 tags: telerik, progress, kendoui, jquery, multiselect, selected, item, lost, when, bound, to, sared, datasource
 type: troubleshooting
 res_type: kb
-component: multiselect
+components: ["multiselect"]
 ---
 
 ## Environment

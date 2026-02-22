@@ -2,6 +2,7 @@
 title:  Model Binding
 page_title: Model Binding
 description: "Learn how to implement Model Binding with Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 previous_url: /helpers/editors/dropdownlist/binding/model-binding
 slug: htmlhelpers_dropdownlist_modelbinding_aspnetcore
 position: 5
@@ -112,5 +113,7 @@ You can configure the DropDownList to get its data from a remote source by makin
     
 ## See Also
 
-* [ASP.NET {{ site.framework_short }} DropDownList from database]({%slug htmlhelpers_dropdownlist_ajaxbinding_aspnetcore %})
-* [Server-Side API](/api/dropdownlist)
+* [Server-Side API of the DropDownList HtmlHelper](/api/dropdownlist)
+{% if site.core %}
+* [Server-Side API of the DropDownList TagHelper](/api/taghelpers/dropdownlist)
+{% endif %}

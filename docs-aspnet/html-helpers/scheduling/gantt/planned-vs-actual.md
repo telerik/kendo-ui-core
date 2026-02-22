@@ -2,6 +2,7 @@
 title: Planned vs Actual
 page_title: Data Binding
 description: "Learn more about how the Telerik UI Gantt component for {{ site.framework }} displays planned and actual dates."
+components: ["gantt"]
 slug: htmlhelpers_gantt_planned_vs_actual_aspnetcore
 position: 4
 ---

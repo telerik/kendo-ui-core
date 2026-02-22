@@ -7,6 +7,7 @@ slug: chart-category-axis-label-fit
 tags: chart, category, axis, label, fit
 ticketid: 1179489
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

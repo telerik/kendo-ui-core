@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} PopOver component by following a complete step-by-step tutorial."
+components: ["popover"]
 slug: getting_started_popover
 position: 1
 ---
@@ -33,7 +34,7 @@ Use the PopOver HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
 
 ```HtmlHelper
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     @(Html.Kendo().Popover()
@@ -49,7 +50,7 @@ Use the PopOver HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the 
     @addTagHelper *, Kendo.Mvc
 
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     <kendo-popover for="#buttonHover" position="bottom" show-on="mouseenter" body="Hello!" width="100">
@@ -66,7 +67,7 @@ The PopOver exposes [events]({% slug events_popover %}) that you can handle to c
 
 ```HtmlHelper
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     @(Html.Kendo().Popover()
@@ -93,7 +94,7 @@ The PopOver exposes [events]({% slug events_popover %}) that you can handle to c
     @addTagHelper *, Kendo.Mvc
 
     <div class="demo-section">
-        <span id="buttonHover" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md wider">Hover me!</span>
+        <span id="buttonHover" class="k-button k-button-primary wider">Hover me!</span>
     </div>
 
     <kendo-popover for="#buttonHover" position="bottom" show-on="mouseenter" body="Hello!" width="100" on-hide="onHide" on-show="onShow">
@@ -117,7 +118,7 @@ You can reference the PopOver instances that you have created and build on top o
 
 1. Use the value of the `For()` option of the component to establish a reference.
 
-    ```script
+    ```JS script
     <script>
         var popoverReference = $("#buttonHover").data("kendoPopOver"); // popoverReference is a reference to the existing PopOver instance of the helper.
     </script>
@@ -144,7 +145,7 @@ You can reference the PopOver instances that you have created and build on top o
     {% if site.core %}
     ```TagHelper
         @addTagHelper *, Kendo.Mvc
-        
+
         <span id="target">Popover target</span>
 
         <kendo-button name="btn" on-click="onBtnClick">
@@ -155,7 +156,7 @@ You can reference the PopOver instances that you have created and build on top o
         </kendo-popover>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
         <script>
             function onBtnClick() {
                 var popoverReference = $("#target").data("kendoPopOver");

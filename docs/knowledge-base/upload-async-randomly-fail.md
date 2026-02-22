@@ -6,7 +6,7 @@ slug: upload_asynch_uploads_fail_randomly
 tags: telerik, progress, kendoui, jquery, upload, async, uploads, fail, randomly
 type: troubleshooting
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment

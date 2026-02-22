@@ -1,7 +1,8 @@
 ---
 title: Add or Remove Tiles
 page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation - TileLayout Add/Remove
-description: "Learn the basics of the The Telerik UI TileLayout component for {{ site.framework }} add/remove functionality."
+description: "Learn the basics of the Telerik UI TileLayout component for {{ site.framework }} add/remove functionality."
+components: ["tilelayout"]
 slug: htmlhelpers_aspnet_tilelayout_add_remove
 position: 5
 ---
@@ -12,35 +13,33 @@ The Kendo UI TileLayout component supports the option to dynamically add and rem
 
 ## Usage
 
-This functionality is a custom implementation based on the [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JS array method and the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout/methods/setOptions) TileLayout client-side method.
-
+This functionality is a custom implementation based on the [`splice()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JavaScript array method and the [`setOptions()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/widget/methods/setoptions) TileLayout client-side method.
 
 The example below demonstrates how you can enable users to remove a tile from the TileLayout by a clicking on its close button.
 
+```JS
+  $("#tilelayout").on("click", ".k-button", function (e) {
+    var tilelayout = $("#tilelayout").data("kendoTileLayout");
+    var itemId = $(e.currentTarget).closest(".k-tilelayout-item").attr("id");
+    var mainItems = tilelayout.items;
+    var item = tilelayout.itemsMap[itemId];
 
-```HtmlHelper
-        $("#tilelayout").on("click", ".k-button", function (e) {
-          var itemId = $(e.currentTarget).closest(".k-tilelayout-item").attr("id");
-          var mainItems = tilelayout.items;
-          var item = tilelayout.itemsMap[itemId];
+    mainItems.splice(mainItems.indexOf(item), 1);
+    item.colSpan = 1;
 
-          mainItems.splice(mainItems.indexOf(item), 1);
-          item.colSpan = 1;
+    recreateSetup(mainItems);
+  });
 
-          recreateSetup(mainItems);
-        });
+  function recreateSetup(mainItems) {
+    var tilelayout = $("#tilelayout").data("kendoTileLayout");
+    for (var i = 0; i < mainItems.length; i++) {
+      if (mainItems[i]) {
+        mainItems[i].order = i;
+      }
+    }
 
-
-        function recreateSetup(mainItems) {
-          for (var i = 0; i < mainItems.length; i++) {
-            if (mainItems[i]) {
-              mainItems[i].order = i;
-            }
-          }
-
-          tilelayout.setOptions({ containers: mainItems });
-        }
-      </script>
+    tilelayout.setOptions({ containers: mainItems });
+  }
 ```
 
 For a full implementation of the Add/Remove functionality please refer to the official [`Add/Remove demo`](https://demos.telerik.com/{{ site.platform }}/tilelayout/add-remove) page.

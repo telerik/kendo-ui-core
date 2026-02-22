@@ -1,5 +1,6 @@
 import "./kendo.data.js";
 import "./kendo.dropdownlist.js";
+import "./kendo.numerictextbox.js";
 import "./kendo.icons.js";
 
 export const __meta__ = {
@@ -15,8 +16,6 @@ export const __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
-        mediaQuery = kendo.mediaQuery,
-        support = kendo.support,
         encode = kendo.htmlEncode,
         template = kendo.template,
         FIRST = "caret-alt-to-left",
@@ -33,11 +32,10 @@ export const __meta__ = {
         NS = ".kendoPager",
         CLICK = "click",
         KEYDOWN = "keydown",
-        DISABLED = "disabled",
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-button-flat-base k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
+        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
 
     function button(options) {
         return options.template( {
@@ -49,14 +47,6 @@ export const __meta__ = {
             title: options.title || "",
             tabindex: options.navigatable ? 0 : -1,
             navigatable: options.navigatable
-        });
-    }
-
-    function selectOption(template, idx, text, selected) {
-        return template( {
-            idx: idx,
-            text: text || idx,
-            selected: selected || false
         });
     }
 
@@ -137,7 +127,7 @@ export const __meta__ = {
 
             if (options.size) {
                 buttonSize = kendo.getValidCssClass("k-button-", "size", options.size);
-                dropDownClasses = "k-rounded-md " + kendo.getValidCssClass("k-picker-", "size", options.size);
+                dropDownClasses = kendo.getValidCssClass("k-picker-", "size", options.size);
             }
 
             if (options.navigatable) {
@@ -168,38 +158,30 @@ export const __meta__ = {
             }
 
             if (options.numeric) {
-                if (!that._numericSelect) {
-                    that._numericSelect = that._numericWrap.find(".k-dropdown");
-
-                    if (that._numericSelect.length === 0) {
-                       that._numericSelect = $("<select aria-label='" + that.options.messages.numbersSelectLabel + "' class='k-dropdown k-picker k-picker-solid k-dropdown-list " + dropDownClasses + "' />").appendTo(that._numericWrap);
-                    }
-                }
-
-                if (!that.list) {
-                    that.list = that._numericWrap.find(".k-pager-numbers");
-
-                    if (that.list.length === 0) {
-                       that.list = $('<div class="k-pager-numbers" />').appendTo(that._numericWrap);
-                    }
-                }
-
-                if (options.dataSource && !options.dataSource.total()) {
-                    that._numericSelect.empty().append("<option value='0' />");
-                    that.list.empty().append(that.selectTemplate({ text: 0, tabindex: options.navigatalbe ? 0 : -1, navigatable: options.navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) }));
-                }
-            }
-
-            if (options.input) {
                 if (!that.element.find(".k-pager-input").length) {
-                   that.element.append('<span class="k-pager-input k-label">' +
-                        encode(options.messages.page) +
-                       '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" /></span>' +
-                       encode(kendo.format(options.messages.of, totalPages)) +
-                       '</span>');
+                    let pagerInput = that._decoratePagerInput($("<span class='k-pager-input'></span>"), totalPages);
+                    that._numericWrap.append(pagerInput);
+                    that._initNumericInputTextBox();
                 }
+                else {
+                    that._decoratePagerInput(that.element.find(".k-pager-input"), totalPages);
+                    that._initNumericInputTextBox();
+                }
+                if (!options.input) {
+                    if (!that.list) {
+                        that.list = that._numericWrap.find(".k-pager-numbers");
 
-                that.element.on(KEYDOWN + NS, ".k-pager-input input", that._keydown.bind(that));
+                        if (that.list.length === 0) {
+                           that.list = $('<div class="k-pager-numbers" />').appendTo(that._numericWrap);
+                        }
+                    }
+
+                    if (options.dataSource && !options.dataSource.total()) {
+                        that.list.empty().append(that.selectTemplate({ text: 0, tabindex: options.navigatalbe ? 0 : -1, navigatable: options.navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) }));
+                    }
+                    that._pagerInputWrap.hide();
+
+                }
             }
 
             if (options.previousNext) {
@@ -236,7 +218,7 @@ export const __meta__ = {
                 that.element.find(".k-pager-sizes select").val(that.pageSize());
 
                 if (kendo.ui.DropDownList) {
-                   that.element.find(".k-pager-sizes select").show().attr("aria-label", options.messages.pageSizeDropDownLabel).kendoDropDownList({ size: options.size });
+                   that.element.find(".k-pager-sizes select").show().attr("aria-label", options.messages.pageSizeDropDownLabel).kendoDropDownList({ size: options.size, adaptiveMode: options.adaptiveMode });
                 }
 
                 that.element.on(CHANGE + NS, ".k-pager-sizes select", that._change.bind(that));
@@ -244,7 +226,7 @@ export const __meta__ = {
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-button-flat-base k-icon-button" title="' + options.messages.refresh +
+                    that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-icon-button" title="' + options.messages.refresh +
                         '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon($('<span class="k-button-icon"></span>'),REFRESH) + '</button>');
                 }
 
@@ -259,11 +241,14 @@ export const __meta__ = {
 
             that.element
                 .on(CLICK + NS , "button", that._click.bind(that))
-                .on(CHANGE + NS , "select.k-dropdown", that._numericSelectChange.bind(that))
                 .addClass("k-pager");
 
             if (options.size) {
                 that.element.addClass(kendo.getValidCssClass("k-pager-", "size", options.size));
+            }
+
+            if (options.responsive) {
+                that.element.addClass("k-pager-responsive");
             }
 
             if (options.autoBind) {
@@ -274,9 +259,47 @@ export const __meta__ = {
             $(window).on("resize" + NS, that._resizeHandler);
 
             that._navigatable();
-            that._responsive();
+            that._lastWidth = 1;
+            that.resize();
 
             kendo.notify(that);
+        },
+
+        _initNumericInputTextBox: function() {
+            let that = this,
+                options = that.options;
+
+             that._numericTextBox = that._numericWrap.find(".k-pager-input input").kendoNumericTextBox({
+                        spinners: false,
+                        size: options.size,
+                        min: 1,
+                        format: "n0",
+                        change: function(e) {
+                            let page = this.value();
+
+                            if (page < 1 || page > that.totalPages()) {
+                                page = that.page();
+                            }
+
+                            setTimeout(function() {
+                                that.page(page);
+                            },100);
+                        }
+                    }).data("kendoNumericTextBox");
+                    that._numericTextBox.element.on("focus" + NS, () => that._restoreTabIndexes());
+                    that._numericTextBox.wrapper.find(".k-input-spinner").remove();
+                    that._pagerInputWrap = that.element.find(".k-pager-input");
+        },
+
+        _decoratePagerInput: function(pagerInputWrap, totalPages) {
+            let that = this,
+                options = that.options;
+
+            $(pagerInputWrap).append('<span>' + encode(options.messages.page) + '</span>' +
+                    `<input aria-label='${that.options.messages.page}'/>` +
+                    '<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>');
+
+            return pagerInputWrap;
         },
 
         destroy: function() {
@@ -287,6 +310,10 @@ export const __meta__ = {
             that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
             that._refreshHandler = null;
+            let pagerInput = that.element.find(".k-pager-input");
+            if (pagerInput.length) {
+                pagerInput.remove();
+            }
             $(window).off("resize" + NS, this._resizeHandler);
 
             kendo.destroy(that.element);
@@ -299,9 +326,10 @@ export const __meta__ = {
 
         options: {
             name: "Pager",
+            adaptiveMode: "none",
             ARIATemplate: ({ page, totalPages }) => `Page navigation, page ${page} of ${totalPages}`,
-            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-flat-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
-            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-flat-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
+            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
             numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${encode(text)}</option>`,
             buttonCount: 10,
             autoBind: true,
@@ -313,7 +341,7 @@ export const __meta__ = {
             refresh: false,
             responsive: true,
             navigatable: false,
-            size: "medium",
+            size: undefined,
             messages: {
                 allPages: "All",
                 display: "{0} - {1} of {2} items",
@@ -323,7 +351,6 @@ export const __meta__ = {
                 itemsPerPage: "items per page",
                 pageButtonLabel: "Page {0}",
                 pageSizeDropDownLabel: "Page sizes drop down",
-                numbersSelectLabel: "Page select",
                 first: "Go to the first page",
                 previous: "Go to the previous page",
                 next: "Go to the next page",
@@ -355,84 +382,87 @@ export const __meta__ = {
 
         _adaptiveStep: function(step, hide, availableWidth) {
             var that = this;
+            var gap = parseInt(this.element.css("gap"));
             switch (step) {
                 case 0:
                     return that._toggleButtons(hide, availableWidth);
                 case 1:
-                    return that._toggleRefresh(hide, availableWidth);
+                    return that._toggleRefresh(hide, availableWidth - gap);
                 case 2:
-                    return that._togglePagerInfo(hide, availableWidth);
+                    return that._togglePagerInfo(hide, availableWidth - gap);
                 case 3:
-                    return that._toggleInputSizesLabel(hide, availableWidth);
+                    return that._toggleInputSizesLabel(hide, availableWidth - gap);
                 case 4:
-                    return that._togglePageSizesLabel(hide, availableWidth);
+                    return that._togglePageSizesLabel(hide, availableWidth - gap);
                 case 5:
-                    return that._togglePageSizesDropDown(hide, availableWidth);
-                case 6:
-                    return that._togglePageInputs(hide, availableWidth);
+                    return that._togglePageSizesDropDown(hide, availableWidth - gap);
                 default:
                  break;
               }
         },
 
         _calculateNeededWidth: function() {
-            var sumWidth = 0;
-            var gap = parseInt(this.element.css("gap"));
+            let sumWidth = 0;
+            const gap = parseInt(this.element.css("gap"));
+            const leftPadding = parseInt(this.element.css("padding-left"));
+            const rightPadding = parseInt(this.element.css("padding-right"));
             this.element.children().each(function() {
                 const element = $(this);
                 const pagerInfo = element.hasClass("k-pager-info");
                 if (pagerInfo) {
-                    element.removeClass("k-pager-info k-label");
+                    element.removeClass("k-pager-info");
                 }
-                sumWidth += element.is(":visible") ? element.width() : 0;
-                sumWidth += gap;
+                sumWidth += element.is(":visible") ? kendo._outerWidth(element) : 0;
                 if (pagerInfo) {
-                    element.addClass("k-pager-info k-label");
+                    element.addClass("k-pager-info");
                 }
             });
-            return sumWidth;
+            sumWidth += gap * (this.element.children(":visible").length - 1);
+            return sumWidth + leftPadding + rightPadding;
         },
 
         _resize: function(size) {
             var that = this;
-            that._responsive(size);
+            const currentOuter = size.width;
+            const correctionBuffer = 3;
             if (!that.element.is(":visible") || !that._lastWidth || !that.options.responsive) {
                 return;
             }
 
-            if (that._lastWidth < size.width) {
-                for (let i = 6; i >= 0; i--) {
+            if (that._lastWidth < currentOuter) {
+                for (let i = 5; i >= 0; i--) {
                     const availableWidth = that._calculateNeededWidth();
-                    if (size.width < availableWidth) {
+                    if (currentOuter < availableWidth) {
                         break;
                     }
-                    const shouldBreak = that._adaptiveStep(i, false, size.width - availableWidth);
+                    const shouldBreak = that._adaptiveStep(i, false, currentOuter - availableWidth);
                     if (shouldBreak) {
                         break;
                     }
                 }
-            } else if (that._lastWidth > size.width) {
-                for (let i = 0; i < 7; i++) {
-                    if (size.width > that._calculateNeededWidth()) {
+            } else if (that._lastWidth > currentOuter) {
+                for (let i = 0; i < 6; i++) {
+                    if ((currentOuter - correctionBuffer) > that._calculateNeededWidth()) {
                         break;
                     }
                     that._adaptiveStep(i, true);
                 }
             }
 
-            that._lastWidth = size.width;
+            that._lastWidth = currentOuter;
         },
 
         _toggleButtons: function(hide, availableWidth) {
-            if (!this._numericWrap || !this.list || !this._numericSelect) {
+            if (this.options.input || !this._numericWrap || !this.list || !this._numericTextBox) {
                 return;
             }
+            const pagerInputWidth = kendo._outerWidth(this._pagerInputWrap, true);
 
             if (hide) {
-                this._numericSelect.show();
+                this._pagerInputWrap.show();
                 this.list.hide();
-            } else if (availableWidth && ((this.list.width() - this._numericSelect.width()) < availableWidth)) {
-                this._numericSelect.hide();
+            } else if (availableWidth && ((this.list.width() - pagerInputWidth) < availableWidth)) {
+                this._pagerInputWrap.hide();
                 this.list.show();
             }
         },
@@ -445,9 +475,9 @@ export const __meta__ = {
 
             if (hide) {
                 refreshContainer.hide();
-            } else if (availableWidth && (refreshContainer.width() < availableWidth)) {
+            } else if (availableWidth && (kendo._outerWidth(refreshContainer) < availableWidth)) {
                 refreshContainer.show();
-            } else {
+            } else if (refreshContainer.is(":hidden")) {
                 return true;
             }
         },
@@ -467,21 +497,20 @@ export const __meta__ = {
         },
 
         _toggleInputSizesLabel: function(hide, availableWidth) {
-            if (!this.options.input) {
+            if (!this._numericTextBox) {
                 return;
             }
             const inputElements = this.element.find(".k-pager-input").children();
-            const labels = inputElements.eq(0).add(inputElements.eq(2));
+            const label = inputElements.eq(0);
 
             if (hide) {
-                labels.hide();
-            } else if (availableWidth && ((inputElements.eq(0).width() + inputElements.eq(2).width()) < availableWidth)) {
-                labels.show();
-            } else {
+                label.hide();
+            } else if (availableWidth && (inputElements.eq(0).width() < availableWidth)) {
+                label.show();
+            } else if (label.is(":hidden")) {
                 return true;
             }
         },
-
 
         _togglePageSizesLabel: function(hide, availableWidth) {
             if (!this.options.pageSizes) {
@@ -493,7 +522,7 @@ export const __meta__ = {
                 label.hide();
             } else if (availableWidth && (label.width() < availableWidth)) {
                 label.show();
-            } else {
+            } else if (label.is(":hidden")) {
                 return true;
             }
         },
@@ -507,71 +536,16 @@ export const __meta__ = {
 
             if (hide) {
                 picker.hide();
-            } else if (availableWidth && (picker.width() < availableWidth)) {
+            } else if (availableWidth && (kendo._outerWidth(picker) < availableWidth)) {
                 picker.show();
-            } else {
+            } else if (!picker.is(":visible")) {
                 return true;
             }
         },
 
-
-        _togglePageInputs: function(hide, availableWidth) {
-            var options = this.options;
-
-            if (!options.input || !this._numericSelect) {
-                return;
-            }
-
-            if (hide) {
-                this._numericSelect.hide();
-            } else if (availableWidth && (this._numericSelect.width() < availableWidth) && !this.list.is(":visible")) {
-                this._numericSelect.show();
-            } else {
-                return true;
-            }
-        },
 
         _createDataSource: function(options) {
             this.dataSource = kendo.data.DataSource.create(options.dataSource);
-        },
-
-        _responsive: function(size) {
-            var that = this;
-            var options = that.options;
-            var width;
-            var info;
-
-            if (options.responsive) {
-                width = that.element.outerWidth();
-
-                if (size && size.width > 0) {
-                    width = size.width;
-                }
-
-                info = that.element.find(".k-pager-info");
-
-                if (width <= 480) {
-                    info.hide();
-                    that.element.find(".k-pager-sizes").children().hide();
-                    if (options.numeric) {
-                        that._numericSelect.show();
-                        that.list.hide();
-                    }
-                } else {
-                    if (width <= 600) {
-                        info.hide();
-                        if (options.numeric) {
-                            that._numericSelect.show();
-                            that.list.hide();
-                        }
-                    } else if (options.numeric) {
-                        that._numericSelect.hide();
-                        that.list.show();
-                    }
-                }
-            } else if (that._numericSelect) {
-                that._numericSelect.hide();
-            }
         },
 
         refresh: function(e) {
@@ -582,7 +556,6 @@ export const __meta__ = {
                 reminder,
                 page = that.page(),
                 html = "",
-                selectHtml = "",
                 options = that.options,
                 pageSize = that.pageSize(),
                 collapsedTotal = that._collapsedTotal(),
@@ -598,7 +571,7 @@ export const __meta__ = {
                 return;
             }
 
-            if (options.numeric) {
+            if (options.numeric && !options.input) {
 
                 if (page > buttonCount) {
                     reminder = (page % buttonCount);
@@ -617,7 +590,6 @@ export const __meta__ = {
                         numeric: false,
                         title: options.messages.morePages
                     });
-                    selectHtml += selectOption(numericSelectItemTemplate, start - 1, options.messages.morePages);
                 }
 
                 for (idx = start; idx <= end; idx++) {
@@ -630,7 +602,6 @@ export const __meta__ = {
                         numeric: true,
                         title: kendo.format(options.messages.pageButtonLabel, idx)
                     });
-                    selectHtml += selectOption(numericSelectItemTemplate, idx, idx, idx == page);
                 }
 
                 if (end < totalPages) {
@@ -643,16 +614,13 @@ export const __meta__ = {
                         numeric: numericSelectItemTemplate,
                         title: options.messages.morePages
                     });
-                    selectHtml += selectOption(numericSelectItemTemplate, idx, options.messages.morePages);
                 }
 
                 if (html === "") {
                     html = that.selectTemplate({ text: 0, size: buttonSize, tabindex: navigatable ? 0 : -1, navigatable: navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) });
-                    selectHtml = $("<option value='0' />");
                 }
 
                 that.list.html(html);
-                that._numericSelect.html(selectHtml);
             }
 
             if (options.info) {
@@ -668,17 +636,13 @@ export const __meta__ = {
                 that.element.find(".k-pager-info").html(html);
             }
 
-            if (options.input) {
-                that.element
-                    .find(".k-pager-input")
-                    .html('<span>' + encode(that.options.messages.page) + '</span>' +
-                        '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" aria-label="' + that.options.messages.page + " " + page + '"></span>' +
-                        '<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>')
-                    .find("input")
-                    .val(page)
-                    .attr(DISABLED, total < 1)
-                    .attr("aria-disabled", total < 1)
-                    .toggleClass("k-disabled", total < 1);
+            if (that._numericTextBox) {
+                that._numericTextBox.value(page);
+                if ((total > 0) !== !that._numericTextBox.wrapper.hasClass("k-disabled")) {
+                    that._numericTextBox.enable(total > 0);
+                }
+                that._numericTextBox.wrapper.prev().html('<span>' + encode(options.messages.page) + '</span>');
+                that._numericTextBox.wrapper.next().html('<span>' + encode(kendo.format(options.messages.of, totalPages)) + '</span>');
             }
 
             if (options.previousNext) {
@@ -711,7 +675,6 @@ export const __meta__ = {
             that._restoreFocus(start, end, totalPages);
             that._excludeChildrenFromTab();
             that._updateAria();
-
             if (totalPages) {
                 that._lastWidth = kendo._outerWidth(that.element) + 12;
                 that.resize(true);
@@ -760,20 +723,6 @@ export const __meta__ = {
             return this.dataSource.total();
         },
 
-        _keydown: function(e) {
-            if (e.keyCode === kendo.keys.ENTER) {
-                var input = this.element.find(".k-pager-input").find("input"),
-                    page = parseInt(input.val(), 10);
-
-                if (isNaN(page) || page < 1 || page > this.totalPages()) {
-                    page = this.page();
-                }
-
-                input.val(page);
-
-                this.page(page);
-            }
-        },
 
         _refreshClick: function(e) {
             e.preventDefault();
@@ -822,7 +771,7 @@ export const __meta__ = {
 
             that._tabindex(that.element);
 
-            that.element.on("keydown" + NS, that, that._keyDown.bind(that));
+            that.element.on(KEYDOWN + NS, that, that._keyDown.bind(that));
             that.element.on("focusout" + NS, function() { that.element.removeClass("k-focus"); });
             that.element.on("focusin" + NS, function(e) {
                 that.element.addClass("k-focus");
@@ -903,14 +852,6 @@ export const __meta__ = {
                 e.preventDefault();
                 e.stopPropagation();
             }
-        },
-
-        _numericSelectChange: function(e) {
-            var target = e.currentTarget;
-            var value = target.value;
-            var page = parseInt(value, 10);
-
-            this.page(page);
         },
 
         _click: function(e) {

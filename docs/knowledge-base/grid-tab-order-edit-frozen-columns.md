@@ -7,7 +7,7 @@ slug: grid-tab-order-edit-frozen-columns
 tags: grid, frozen, columns, tab, order, focus, input, buttons, tabbing, tabindex
 ticketid: 1142004
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,31 +43,27 @@ To keep the tab order:
 
 <script>
     $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
-            dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: crudServiceBaseUrl + "/Products",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: crudServiceBaseUrl + "/Products/Update",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: crudServiceBaseUrl + "/Products/Destroy",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: crudServiceBaseUrl + "/Products/Create",
-                        dataType: "jsonp"
-                    },
-                    parameterMap: function (options, operation) {
-                        if (operation !== "read" && options.models) {
-                            return { models: kendo.stringify(options.models) };
-                        }
-                    }
-                },
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+              dataSource = new kendo.data.DataSource({
+                  transport: {
+                      read:  {
+                          url: crudServiceBaseUrl + "/Products"
+                      },
+                      update: {
+                          url: crudServiceBaseUrl + "/Products/Update",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      destroy: {
+                          url: crudServiceBaseUrl + "/Products/Destroy",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      create: {
+                          url: crudServiceBaseUrl + "/Products/Create",
+                          type: "POST",
+                  		    contentType: "application/json"
+                  },
                 batch: true,
                 pageSize: 20,
                 schema: {

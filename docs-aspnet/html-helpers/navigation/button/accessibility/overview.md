@@ -2,7 +2,8 @@
 title: Overview
 page_title: Button Documentation | Button Accessibility
 description: "Get started with the {{ site.product }} Button and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_button
+components: ["button"]
+slug: htmlhelpers_button_accessibility
 position: 1
 ---
 

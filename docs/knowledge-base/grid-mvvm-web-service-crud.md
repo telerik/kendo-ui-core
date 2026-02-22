@@ -5,9 +5,9 @@ description: "Learn how to use CRUD operations when the Kendo UI Grid for jQuery
 previous_url: /controls/data-management/grid/how-to/Editing/grid-mvvm-web-service-crud
 slug: howto_use_crud_operationswith_mvvmbound_grid
 tags: grid, crud, operations, when, bound, mvvm
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

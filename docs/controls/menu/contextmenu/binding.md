@@ -2,6 +2,7 @@
 title: Data Binding
 page_title: jQuery ContextMenu Documentation - Data Binding
 description: "Get started with the jQuery ContextMenu by Kendo UI and bind the component to local data arrays or remote data services."
+components: ["menu"]
 slug: binding_kendoui_contextmenu
 position: 2
 ---
@@ -51,8 +52,7 @@ The following example demonstrates how to create a Menu and bind it to a remote 
             dataSource: {
                 transport: {
                     read: {
-                        url: "https://demos.telerik.com/kendo-ui/service/Employees",
-                        dataType: "jsonp"
+                        url: "https://demos.telerik.com/service/v2/core/Employees"
                     }
                 },
                  schema: {

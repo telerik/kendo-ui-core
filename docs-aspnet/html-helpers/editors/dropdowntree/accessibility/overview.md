@@ -2,7 +2,8 @@
 title: Overview
 page_title: DropDownTree Documentation | DropDownTree Accessibility
 description: "Get started with the {{ site.product }} DropDownTree and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_dropdowntree
+components: ["dropdowntree"]
+slug: htmlhelpers_dropdowntree_accessibility
 position: 1
 ---
 
@@ -34,7 +35,7 @@ The following table summarizes the selectors and attributes supported by the Dro
 |  | `aria-haspopup=tree` | Indicates the presence of a popup with a tree navigation. |
 |  | `aria-expanded=true/false` | Announces the state of the popup visibility. |
 |  | `aria-controls=.k-treeview id` | Points to the `treeview` element. Signifies that the `combobox` element controls the `treeview` one. |
-|  | `aria-activedescendent=.k-treeview-item id` | Points to the focused item in the popup. The focused item is changed with the keyboard navigation. If the popup is not visible, the attribute must not point to any element or must be removed. |
+|  | `aria-describedby=.k-input-inner id` | Announces the selected value of the drop-down. |
 |  | `aria-readonly=true` | The attribute is rendered only when the drop-down is read-only. |
 |  | `aria-autocomplete=list` | The attribute is rendered and the value is set to `list` when the filtering feature is enabled. |
 |  | `aria-invalid=true` | The attribute is rendered only when the drop-down is in a form and announces the valid state of the component. |
@@ -60,7 +61,14 @@ The popup element of the DropDownTree has to implement the WAI-ARIA specificatio
 
 The tree that is placed in the `popup` element of the component must implement the specification for a TreeView component.
 
-[TreeView accessibility specification]({%slug accessibility_aspnetcore_treeview%})                                   
+[TreeView accessibility specification]({% slug htmlhelpers_treeview_accessibility %})
+
+### Adaptive Mode
+
+
+When the component is in adaptive mode, the popup element follows the specifications of the ActionSheet component.
+
+[ActionSheet accessibility specification]({% slug htmlhelpers_actionsheet_accessibility %})
 
 ## Resources
 

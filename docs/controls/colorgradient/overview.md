@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery ColorGradient Documentation - ColorGradient Overview
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["colorgradient"]
 slug: overview_kendoui_colorgradient_widget
 position: 1
 ---
@@ -16,7 +17,7 @@ The Kendo UI for jQuery ColorGradient renders a gradient (a hue and an alpha sli
 
 * [Contrast Tool]({% slug contrast_tool_kendoui_colorgradient_widget %})&mdash;The widget provides a color contrast tool, which checks the contrast ratio between two colors.
 * [Formats]({% slug rgb_hex_kendoui_colorgradient_widget %})&mdash;The widget supports RGB and HEX input formats.
-* [Accessibility]({% slug accessibility_kendoui_colorgradient_widget %})&mdash;The ColorGradient supports various accessibility standards.
+* [Accessibility]({% slug jquery_colorgradient_accessibility %})&mdash;The ColorGradient supports various accessibility standards.
 
 ## Next Steps 
 

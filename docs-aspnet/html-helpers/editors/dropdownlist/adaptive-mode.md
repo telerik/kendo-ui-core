@@ -1,7 +1,8 @@
 ---
 title: Adaptive Mode
 page_title: Adaptive Mode
-description: "Learn how to configure the adaptive behavior of the the Telerik UI DropDownList component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_adaptive_mode_aspnetcore
 position: 5
 ---
@@ -9,6 +10,8 @@ position: 5
 # Adaptive Mode
 
 The Telerik UI for {{ site.framework }} DropDownList supports an adaptive mode that renders a mobile-friendly rendering of its popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/dropdownlistbuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.
+
+> Starting with the 2025 Q2 release, when the adaptive rendering mode is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
 
 The DropDownList component automatically adapts to the current screen size and changes its rendering accordingly. On medium-sized screens, the suggestion list is displayed as docked to the bottom of the screen, while on smaller screens, it is rendered as a full-screen modal dialog. In all other scenarios, including when the `AdaptiveMode()` option is not specified or is set to its default value of `AdaptiveMode.None`, the standard popup is rendered docked to the input of the component.
 
@@ -20,36 +23,7 @@ The adaptive mode changes the rendering of the DropDownList popup element based 
 
 The following example demonstrates how to enable the adaptive mode of the DropDownList by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().DropDownList()
-        .Name("dropdownlist")
-        .DataTextField("ProductName")
-        .DataValueField("ProductID")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .DataSource(source => {
-            source.Read(read =>
-            {
-                read.Action("Products_Read", "DropDownList");
-            });
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-   <kendo-dropdownlist name="dropdownlist"
-        adaptive-mode="AdaptiveMode.Auto"
-        datatextfield="ProductName"
-        datavaluefield="ProductID">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("Products_Read", "DropDownList")" />
-            </transport>
-        </datasource>
-    </kendo-dropdownlist>
-```
-{% endif %}
+<demo metaUrl="dropdownlist/adaptive_mode/" height="600"></demo>
 
 ## See Also
 

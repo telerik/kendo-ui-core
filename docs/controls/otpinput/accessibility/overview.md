@@ -2,7 +2,8 @@
 title: Overview
 page_title: jQuery OTPInput Documentation | OTPInput Accessibility
 description: "Get started with the jQuery OTPInput by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_otpinput
+components: ["otpinput"]
+slug: jquery_otpinput_accessibility
 position: 1
 ---
 

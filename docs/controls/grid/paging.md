@@ -2,6 +2,7 @@
 title: Paging
 page_title: jQuery Grid Documentation - Paging
 description: "Get started with the jQuery Grid by Kendo UI and implement its paging functionality to page the displayed data and learn how to do paging on the server."
+components: ["grid"]
 slug: paging_kendoui_grid_widget
 position: 8
 ---

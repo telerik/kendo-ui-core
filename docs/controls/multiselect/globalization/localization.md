@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery MultiSelect Documentation - MultiSelect Localization
 description: "Get started with the jQuery MultiSelect by Kendo UI and translate its messages for different culture locales."
+components: ["multiselect"]
 slug: localization_multiselect
 position: 3
 ---

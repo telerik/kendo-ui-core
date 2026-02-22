@@ -7,6 +7,7 @@ slug: chart-new-point-draw-scatter-line
 tags: chart, new, point, draw, scatter, line
 ticketid: 1398949
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

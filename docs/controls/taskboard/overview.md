@@ -2,6 +2,7 @@
 title: Overview
 page_title: Kendo UI for jQuery TaskBoard Documentation - TaskBoard Overview
 description: "Get started with the Kendo UI for jQuery TaskBoard and learn about its features and how to initialize the component."
+components: ["taskboard"]
 slug: overview_kendoui_taskboard_widget
 position: 1
 ---
@@ -20,13 +21,13 @@ The Kendo UI TaskBoard allows you to organize items and keep track of their stat
 * [Search]({% slug search_kendoui_taskboard_widget %})
 * [Templates]({% slug templates_kendoui_taskboard_widget %})
 * [Toolbar]({% slug toolbar_kendoui_taskboard_widget %})
-* [Accessibility]({% slug accessibility_kendoui_taskboard_widget %})
+* [Accessibility]({% slug jquery_taskboard_accessibility %})
 
 ## Next Steps 
 
 * [Getting Started with the Kendo UI TaskBoard for jQuery]({% slug getting_started_kendoui_taskboard_widget %})
 * [Basic Usage of the TaskBoard (Demo)](https://demos.telerik.com/kendo-ui/taskboard/index)
-* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard_)
+* [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
 
 ## See Also
 

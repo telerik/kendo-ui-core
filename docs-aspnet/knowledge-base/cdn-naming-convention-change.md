@@ -5,6 +5,7 @@ page_title: CDN Naming Convention Change
 slug: cdn-naming-convention-change
 tags: cdn, url, change, upgrade, troubleshoot, application, naming, convention
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -29,7 +30,7 @@ I was using the following Kendo JS and CSS links before upgrading {{ site.produc
     https://kendo.cdn.telerik.com/2022.2.802/styles/kendo.bootstrap-main.min.css
 ```
 
-However, as of the the latest `R1 2023 SP1` release, these resources seem to be obsolete. How can I reference the themes from the CDN?
+However, as of the latest `R1 2023 SP1` release, these resources seem to be obsolete. How can I reference the themes from the CDN?
 
 ## Solution
 

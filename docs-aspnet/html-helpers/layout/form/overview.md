@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its features and how to initialize the component."
+components: ["form"]
 slug: htmlhelpers_form_aspnetcore_overview
 position: 1
 ---
@@ -99,6 +100,12 @@ The following example demonstrates how to define the Form.
 ```
 {% endif %}
 
+{% if site.mvc %}
+
+Similar to the [`Html.BeginForm`](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.html.formextensions.beginform?view=aspnet-mvc-5.2#system-web-mvc-html-formextensions-beginform(system-web-mvc-htmlhelper)), the Form component generates a `<form>` HTML element. The `form` element has a `POST` method and the submit request is processed by the respective action method for the view. You can customize these options through the `HtmlAttributes()` method: `HtmlAttributes(new { action = @Url.Action("MyAction","MyController"), method = "POST" })`.
+
+{% endif %}
+
 ## Functionality and Features
 
 |Feature|Description|
@@ -108,9 +115,10 @@ The following example demonstrates how to define the Form.
 | [Groups]({% slug htmlhelpers_form_aspnetcore_groups %})| The Form allows you to group the input fields in logical sections. |
 | [Buttons]({% slug form_aspnetcore_buttons %})| Alter the **Submit** and **Clear** buttons appearance.  |
 | [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})|  You can choose between a `vertical` or `horizontal` orientation of the labels in the Form. |
+| [Responsive Form]({% slug htmlhelpers_form_aspnetcore_responsive %})| Configure column spans and breakpoints to make the Form responsive on various screen sizes. |
 | [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})| The Form has a built-in validator to enable seamless client-side validaiton. |
 | [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hiddenfields %})| You can hide specific fields, like the `ID`. |
-| [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_form %}) for faster navigation. |
+| [Accessibility]({% slug htmlhelpers_form_accessibility %})| The component is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts]({% slug keynav_aspnetcore_form %}) for faster navigation. |
 
 ## Next Steps
 

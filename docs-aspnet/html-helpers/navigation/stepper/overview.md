@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "The Telerik UI Stepper component for {{ site.framework }} provides a styled UI component for progressive handling of workflow."
+components: ["stepper"]
 slug: htmlhelpers_stepper_aspnetcore_overview
 position: 0
 ---
@@ -71,32 +72,6 @@ The following example demonstrates the basic configuration for the Stepper.
         </steps>
     </kendo-stepper>
 ```
-
-## Events
-
-You can subscribe to all Stepper events.
-
-```TagHelper
-    <kendo-stepper name="stepper" on-activate="onActivate" on-select="onSelect">
-        <steps>
-            <step label="First" icon="home"></step>
-            <step label="Second" selected="true"></step>
-            <step label="Third"></step>
-            <step label="Fourth" enabled="false"></step>
-            <step label="Fifth"></step>
-        </steps>
-    </kendo-stepper>
-
-    <script>
-        function onActivate(e) {
-            console.log("Activated: " + e.step.options.label);
-        }
-
-        function onSelect(e) {
-            console.log("Selected: " + e.step.options.label);
-        }
-    </script>
-```
 {% endif %}
 
 ## Functionality and Features
@@ -105,7 +80,7 @@ You can subscribe to all Stepper events.
 * [Steps]({% slug htmlhelpers_stepper_aspnetcore_steps %})&mdash;The component provides different configuration options for its steps.
 * [Appearance]({% slug htmlhelpers_stepper_aspnetcore_appearance %})&mdash;The Stepper enables you to customize its final appearance.
 * [Operation modes]({% slug htmlhelpers_stepper_aspnetcore_operation_modes %})&mdash;The component provides the capability of operation modes.
-* [Accessibility]({% slug accessibility_aspnetcore_stepper %})&mdash;The Stepper is compatible with the global accessibility requirements.
+* [Accessibility]({% slug htmlhelpers_stepper_accessibility %})&mdash;The Stepper is compatible with the global accessibility requirements.
 
 ## Next Steps
 

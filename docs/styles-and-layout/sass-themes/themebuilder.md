@@ -2,6 +2,7 @@
 title: ThemeBuilder
 page_title: ThemeBuilder - Sass Themes
 description: "Learn what the ThemeBuilder is and how to use it to customize the appearance of the Kendo UI for jQuery components in your applications."
+components: ["general"]
 slug: sassbasedthemes_themebuilder_kendoui
 position: 3
 ---

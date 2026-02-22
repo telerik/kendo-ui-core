@@ -6,6 +6,7 @@ page_title: Display an Empty String When the Value is Min Date
 slug: grid-date-min-field
 tags: grid, date, datetime, min, value, empty
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -36,7 +37,7 @@ How can I display an empty string when the field value is the minimum Date value
 1. Else - return the date value in the proper format.
 1. Here is an example:
 
-```Index.cshtml
+```Razor Index.cshtml
 columns.Bound(p => p.OrderDate).ClientTemplate("#=orderDetails(data)#");
 ```
 

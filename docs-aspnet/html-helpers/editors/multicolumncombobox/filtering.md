@@ -2,6 +2,7 @@
 title: Filtering
 page_title: Filtering
 description: "Set the filter options of the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
+components: ["multicolumncombobox"]
 previous_url: /helpers/editors/multicolumncombobox/filtering
 slug: filtering_multicolumncombobox_aspnetcore
 position: 6

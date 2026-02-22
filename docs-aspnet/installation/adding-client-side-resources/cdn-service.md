@@ -2,9 +2,10 @@
 title: Using CDN
 page_title: Using CDN
 description: "Get started with {{ site.product }} and install the helpers by using the Telerik UI CDN services."
+components: ["general"]
 previous_url: /getting-started/installation/cdn-service, /installation/cdn-service, /installation-mvc/adding-client-side-resources/cdn-service
 slug: cdnservices_core
-position: 5
+position: 2
 ---
 
 # Using CDN with {{ site.product }}
@@ -91,13 +92,13 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 
 1. To add the Bootstrap theme files, insert a `link` tag within the `head` tag of the layout and include the style file or files.
 
-    ```
+    ```HTML
          <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/bootstrap/bootstrap-main.css" />
     ```
 
 1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
 
-    ```
+    ```HTML
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
     ```
@@ -107,14 +108,18 @@ The following complete example demonstrates how to add the [CSS files](#adding-t
 
 1. To add the JavaScript files, insert a `script` tag and include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after the jQuery script.
 
+    ```HTML
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+    ```
 
 1. If using the Telerik MVC Scheduler helper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
 
+    ```HTML
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.timezones.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
+    ```
 {% endif %}
 
 1. Setup the License File by following the instructions in the [Installing a License File]({% slug installation_license_key_aspnetcore %}).
@@ -128,7 +133,7 @@ The following articles provide solutions to common issues related to the Telerik
 
 ## Next Steps
 
-* [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Creating Your Own Custom Script Bundles]({% slug creating-custom-bundles %})
 * [Using ECMAScript Modules]({% slug core_ecmascript_overview %})
 ## See Also
 

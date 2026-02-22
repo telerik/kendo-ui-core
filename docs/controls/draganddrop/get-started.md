@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Draggable Documentation - Getting Started with the Draggable
 description: "Get started with the jQuery Draggable by Kendo UI and learn how to create and initialize the component."
+components: ["draganddrop"]
 slug: getting_started_kendoui_draggable_widget
 position: 1
 ---
@@ -219,8 +220,3 @@ For a better visualization of the scenario, you can add styles to the Draggable 
 * [JavaScript API Reference of the Draggable](/api/javascript/ui/draggable)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

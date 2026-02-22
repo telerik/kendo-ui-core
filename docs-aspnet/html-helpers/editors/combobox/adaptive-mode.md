@@ -1,7 +1,8 @@
 ---
 title: Adaptiveness
 page_title: Adaptiveness
-description: "Learn how to configure the adaptive behavior of the the Telerik UI ComboBox component for {{ site.framework }}."
+description: "Learn how to configure the adaptive behavior of the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 slug: htmlhelpers_combobox_adaptive_mode_aspnetcore
 position: 5
 ---
@@ -14,6 +15,8 @@ Adaptiveness is an advanced capability that enhances the Telerik UI for {{ site.
 
 The ComboBox supports an adaptive mode that provides a mobile-friendly rendering of its popup. To enable the adaptive rendering mode, set the [`AdaptiveMode()`](/api/kendo.mvc.ui.fluent/comboboxbuilder#adaptivemodekendomvcuiadaptivemode) property to `AdaptiveMode.Auto`.
 
+> Starting with the 2025 Q2 release, when the adaptive rendering mode is enabled and the component is accessed on a mobile device, the popup will open as soon as the component receives focus. In previous versions, the popup only opened once the user began typing.
+
 The ComboBox component automatically adapts to the current screen size and changes its rendering accordingly. On medium-sized screens, the suggestion list is displayed as docked to the bottom of the screen, while on smaller screens, it is rendered as a full-screen modal dialog. In all other scenarios, including when the `AdaptiveMode()` option is not specified or is set to its default value of `AdaptiveMode.None`, the standard popup is rendered docked to the input of the component.
 
 The adaptive mode changes the rendering of the ComboBox popup element based on the screen resolution of the device (the horizontal value in `px`) with the following breakpoints:
@@ -24,39 +27,7 @@ The adaptive mode changes the rendering of the ComboBox popup element based on t
 
 The following example demonstrates how to enable the adaptive mode of the ComboBox by using the `AdaptiveMode()` option.
 
-```HtmlHelper
-    @(Html.Kendo().ComboBox()
-        .Name("combobox")
-        .DataTextField("ProductName")
-        .DataValueField("ProductID")
-        .AdaptiveMode(AdaptiveMode.Auto)
-        .Filter(FilterType.StartsWith)
-        .DataSource(source =>
-        {
-            source.Read(read =>
-            {
-                read.Action("Products_Read", "ComboBox");
-            });
-        })
-    )
-```
-{% if site.core %}
-```TagHelper
-    @addTagHelper *, Kendo.Mvc
-
-    <kendo-combobox name="combobox"
-        adaptive-mode="AdaptiveMode.Auto"
-        datatextfield="ProductName"
-        datavaluefield="ProductID"
-        filter="FilterType.StartsWith">
-        <datasource>
-            <transport>
-                <read url="@Url.Action("Products_Read", "ComboBox")" />
-            </transport>
-        </datasource>
-    </kendo-combobox>
-```
-{% endif %}
+<demo metaUrl="combobox/adaptive_mode/" height="600"></demo>
 
 ## On-Screen Keyboard
 

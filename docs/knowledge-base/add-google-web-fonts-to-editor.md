@@ -5,9 +5,9 @@ description: "Learn how to add Google WebFonts in the Kendo UI for jQuery Editor
 previous_url: /controls/editors/editor/how-to/add-google-web-fonts-to-editor, /controls/editors/editor/how-to/appearance/add-google-web-fonts-to-editor
 slug: howto_add_google_webfonts_editor
 tags: telerik, kendo, jquery, editor, add, google, webfonts
-component: editor
 type: how-to
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment
@@ -79,10 +79,10 @@ The following example demonstrates how to achieve the desired scenario.
 		// Load Google Web Font in the editing area.
 		$(editor.data("kendoEditor").body)
 		  .prevAll("head")
-			.append("<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet'>")
-			.append("<link href='http://fonts.googleapis.com/css?family=Griffy' rel='stylesheet' type='text/css'>")
-			.append("<link href='http://fonts.googleapis.com/css?family=Jacques+Francois+Shadow' rel='stylesheet' type='text/css'>")
-			.append("<link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>");
+			.append("<link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet'>")
+			.append("<link href='https://fonts.googleapis.com/css?family=Griffy' rel='stylesheet' type='text/css'>")
+			.append("<link href='https://fonts.googleapis.com/css?family=Jacques+Francois+Shadow' rel='stylesheet' type='text/css'>")
+			.append("<link href='https://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>");
 	</script>
 ```
 

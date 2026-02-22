@@ -5,9 +5,9 @@ description: "Learn how to  configure per-shape tooltips in the Kendo UI Map sha
 slug: howto_displayshapetooltip_map
 previous_url: /controls/diagrams-and-maps/map/how-to/shape-tooltips
 tags: kendo, jquery, map, display, tooltips, for, shapes
-component: map
 type: how-to
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment

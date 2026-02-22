@@ -8,6 +8,7 @@ position:
 tags: listbox, remove, delete, first, focus, select, default, item, set
 ticketid: 1447644
 res_type: kb
+components: ["listbox"]
 ---
 
 ## Environment

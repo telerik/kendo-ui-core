@@ -2,6 +2,7 @@
 title: Editing
 page_title: Editing
 description: "Learn about the Editing capabilities of the Telerik UI OrgChart component for {{ site.framework }}."
+components: ["orgchart"]
 slug: htmlhelpers_orgchart_editing_aspnetcore
 position: 2
 ---
@@ -159,7 +160,7 @@ The following example demonstrates how to configure the OrgChart to use editing.
 
 For disabling the Edit functionality set the `Editable` configuration to `false`:
 
-```
+```Razor
 .Editable(false)
 ```
 

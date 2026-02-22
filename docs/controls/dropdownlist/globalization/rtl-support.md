@@ -2,6 +2,7 @@
 title: RTL Support
 page_title: jQuery DropDownList Documentation - DropDownList Right-to-Left Support
 description: "Get started with the jQuery DropDownList by Kendo UI and learn about the RTL supports it provides."
+components: ["dropdownlist"]
 slug: rtl_kendoui_ddl_widget
 position: 3
 ---

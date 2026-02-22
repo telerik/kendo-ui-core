@@ -2,6 +2,7 @@
 title: Shortcuts
 page_title: jQuery TimeDurationPicker Documentation - TimeDurationPicker Shortcuts
 description: "Learn how to configure the columns of the TimeDurationPicker component."
+components: ["timedurationpicker"]
 slug: shortcuts_timedurationpicker
 position: 4
 ---

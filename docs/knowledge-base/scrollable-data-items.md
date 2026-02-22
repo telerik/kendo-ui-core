@@ -5,9 +5,9 @@ description: "Learn how to create scrollable data items in the Kendo UI MultiSel
 previous_url: /controls/editors/multiselect/how-to/scrollbale-data-items, /web/multiselect/how-to/scrollbale-data-items, /controls/editors/multiselect/how-to/scrollable-data-items, /controls/editors/multiselect/how-to/selection/scrollable-data-items
 slug: howto_create_scrollable_data_items_multiselect
 tags: telerik, kendo, jquery, multiselect, scroll, selected, items
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

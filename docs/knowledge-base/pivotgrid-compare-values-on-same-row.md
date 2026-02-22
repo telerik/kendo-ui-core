@@ -6,6 +6,7 @@ page_title: Compare PivotGridV2 Cell Values on the Same Row
 slug: pivotgrid-compare-cells-on-same-row
 tags: kendoui,  pivotgridv2, compare, cell, values, same, row
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

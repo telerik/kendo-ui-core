@@ -5,9 +5,9 @@ description: "Learn how to vertically scroll the Kendo UI TabStrip widget by usi
 slug: howto_scrolltabstripwithkeyboard_tabstrip
 previous_url: /controls/navigation/tabstrip/how-to/vertical-keyboard-scroll
 tags: telerik, kendo, jquery, tabstrip, scroll, with, keyboard, use, vertical, scrolling
-component: tabstrip
 type: how-to
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

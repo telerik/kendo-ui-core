@@ -5,9 +5,9 @@ description: "Learn how to drag and drop rows between two Kendo UI Grids for jQu
 previous_url: /controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /aspne-mvc/controls/data-management/grid/how-to/drag-and-drop-rows-between-two-grids, /controls/data-management/grid/how-to/various/drag-and-drop-rows-between-two-grids
 slug: howto_dragand_drop_rows_between_twogrids_grid
 tags: grid, drag, drop, rows, between
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

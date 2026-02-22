@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ResponsivePanel Documentation - Getting Started with the ResponsivePanel
 description: "Get started with the jQuery ResponsivePanel by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["responsivepanel"]
 slug: getting_started_kendoui_responsivepanel_widget
 position: 1
 ---
@@ -100,8 +101,4 @@ The ResponsivePanel provides several options that enable you to modify its behav
 * [JavaScript API Reference of the jQuery ResponsivePanel](/api/javascript/ui/responsivepanel)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

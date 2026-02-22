@@ -5,9 +5,9 @@ description: "Learn how to set a validation rule to a specific column range in K
 slug: howto_validationtocolumn_spreadsheet_widget
 previous_url: /controls/data-management/spreadsheet/how-to/validation-to-column
 tags: kendo, jquery, spreadsheet, set, validation, rules, to, column, ranges
-component: spreadsheet
 type: how-to
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment
@@ -49,7 +49,7 @@ To apply the validation rule to the specific range, the following example uses t
             sheetsbar: false,
             excel: {
                 // Required to enable Excel Export in some browsers
-                proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+                proxyURL: "https://demos.telerik.com/service/v2/core/export"
             },
             sheets: [
                 {

@@ -5,9 +5,9 @@ description: "Learn how to use the drawing tooltip to show a tooltip for the Ken
 slug: howto_shapestooltip_diagram
 previous_url: /controls/diagrams-and-maps/diagram/how-to/drawing-tooltip
 tags: kendo, jquery, diagram, show, tooltip, for, shapes
-component: diagram
 type: how-to
 res_type: kb
+components: ["diagram"]
 ---
 
 ## Environment
@@ -133,7 +133,7 @@ The following example demonstrates how to use the [drawing tooltip options](/api
         }));
 
         g.append(new dataviz.diagram.Image({
-          source: "../content/dataviz/diagram/people/" + dataItem.image,
+          source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
           x: 3,
           y: 3,
           width: 68,

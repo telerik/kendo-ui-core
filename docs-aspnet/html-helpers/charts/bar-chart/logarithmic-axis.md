@@ -2,6 +2,7 @@
 title: Logarithmic Axis
 page_title: Logarithmic Axis
 description: "Learn how to set the Logarithmic Axis of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_logarithmic_axis
 ---
 

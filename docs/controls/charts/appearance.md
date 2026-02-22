@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery Chart Documentation - Appearance
 description: "Get started with the jQuery Chart by Kendo UI and learn how to control its appearance, change the themes, and manage the animated transitions."
+components: ["chart"]
 previous_url: /controls/charts/chart/appearance
 slug: appearance_charts_widget
 position: 4
@@ -107,6 +108,9 @@ To revert to the series colors from version 4.x, you can:
     ```dojo
         <div id="chart"></div>
             <script>
+            var chartDefaultV4Colors =
+            ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
+
             $("#chart").kendoChart({
                 theme: "sass",
                 seriesColors: chartDefaultV4Colors,
@@ -126,7 +130,7 @@ To revert to the series colors from version 4.x, you can:
 
 In addition to solid colors, the Chart series can also be filled with repeating patterns by using the [`series.pattern`](/api/javascript/dataviz/ui/chart/configuration/series.pattern) configuration setting.
 
-> The pattern inherits the [`series.color`](slug:api_charts_seriesitemcomponent#toc-color) as main color and accepts an optional `background` color.
+> The pattern inherits the [`series.color`](/api/javascript/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
 
 The following customizable pattern fills are available:
 * Crosshatch

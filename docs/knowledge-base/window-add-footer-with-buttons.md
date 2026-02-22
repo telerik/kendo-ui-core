@@ -7,6 +7,7 @@ slug: window-add-footer-with-buttons
 tags: window, footer, buttons, resizable, scrollable
 ticketid: 1142513
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment

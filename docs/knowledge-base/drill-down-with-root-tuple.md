@@ -5,9 +5,9 @@ description: "Learn how to make the Kendo UI PivotGrid widget drill down on expa
 previous_url: /controls/data-management/pivotgrid/how-to/drill-down-with-root-tuple, /controls/data-management/pivotgrid/how-to/filtering/drill-down-with-root-tuple
 slug: howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid
 tags: kendoui, pivotgrid, drill, down, navigation, starting, from, root, tuple
-component: pivotgrid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -225,7 +225,7 @@ In this way, the widget drills down on `expand` always starting from the expande
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
           },
-          read: "//demos.telerik.com/olap/msmdpump.dll"
+          read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
         },
         schema: {
           type: "xmla"

@@ -2,6 +2,7 @@
 title: Scale
 page_title: Scale
 description: "Learn the Options of the Scale of the Telerik UI RadialGauge component for {{ site.framework }}."
+components: ["radialgauge"]
 slug: scale_radialgaugehelper_aspnetcore
 position: 2
 ---

@@ -6,6 +6,7 @@ page_title: How to Zoom into the Last 30 Days on a Kendo UI Chart
 slug: how-to-display-chart-data-zoomed-to-last-30-days
 tags: kendo ui, chart, zoom, categoryaxis, date, data visualization
 res_type: kb
+components: ["chart"]
 ticketid: 1627452
 ---
 
@@ -126,7 +127,7 @@ For an interactive example using the [`Stock Chart`](https://docs.telerik.com/ke
             dataSource: {
               transport: {
                 read: {
-                  url: "../content/dataviz/js/boeing-stock.json",
+                  url: "https://demos.telerik.com/kendo-ui/content/dataviz/js/boeing-stock.json",
                   dataType: "json"
                 }
               },
@@ -199,6 +200,6 @@ For an interactive example using the [`Stock Chart`](https://docs.telerik.com/ke
 
 ## See Also
 
-- [Chart Configuration - API ](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration.)
+- [Chart Configuration - API ](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart)
 - [Overview of the Chart Component](https://docs.telerik.com/kendo-ui/controls/charts/chart/overview)
 - [Overview of the Stock Chart Component](https://docs.telerik.com/kendo-ui/controls/charts/stockchart/overview)

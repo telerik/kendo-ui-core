@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Drawer Documentation - Keyboard Navigation
 description: "Get started with the jQuery Drawer by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["drawer"]
 slug: keynav_drawer_jquery
 position: 2
 ---
@@ -28,4 +29,4 @@ Kendo UI Drawer supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the Drawer (Demo)](https://demos.telerik.com/kendo-ui/drawer/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Drawer]({% slug accessibility_drawer_jquery %})
+* [Accessibility in the Drawer]({% slug jquery_drawer_accessibility %})

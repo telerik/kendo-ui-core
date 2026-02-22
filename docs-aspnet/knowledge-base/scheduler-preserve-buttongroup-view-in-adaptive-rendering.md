@@ -6,6 +6,7 @@ slug: scheduler-preserve-buttongroup-view-in-adaptive-rendering
 tags: scheduler, button, group, mobile, rendering, adaptive ,core, mvc, telerik, view, calendar
 component: scheduler
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -37,7 +38,7 @@ Follow the steps below to achieve the desired scenario:
 1. To change a given button's state upon selection, add the [`k-selected`](https://docs.telerik.com/kendo-ui/styles-and-layout/components-rendering-overview#state-classes) state class.
 1. Subscribe to the [window.resize](https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event) event and replace the transformed DropDownList when the view dimensions are changed.
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
     .Name("scheduler")
     .Date(new DateTime(2022, 6, 13))
@@ -78,33 +79,31 @@ Follow the steps below to achieve the desired scenario:
             });
     })
     .DataSource(d => d
-            .Custom()
-            .Batch(true)
-            .Schema(schema => schema
-                .Model(m =>
-                {
-                    m.Id(f => f.MeetingID);
-                    m.Field("title", typeof(string)).DefaultValue("No title").From("Title");
-                    m.Field("start", typeof(DateTime)).From("Start");
-                    m.Field("end", typeof(DateTime)).From("End");
-                    m.Field("description", typeof(string)).From("Description");
-                    m.Field("recurrenceID", typeof(int)).From("RecurrenceID");
-                    m.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
-                    m.Field("recurrenceException", typeof(string)).From("RecurrenceException");
-                    m.Field("isAllDay", typeof(bool)).From("IsAllDay");
-                    m.Field("startTimezone", typeof(string)).From("StartTimezone");
-                    m.Field("endTimezone", typeof(string)).From("EndTimezone");
-                }))
-            .Transport(transport => transport
-                .Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/meetings")
-                      .DataType("jsonp"))
-                .Create(create => create.Url("https://demos.telerik.com/kendo-ui/service/meetings/create")
-                      .DataType("jsonp"))
-                .Destroy(destroy => destroy.Url("https://demos.telerik.com/kendo-ui/service/meetings/destroy")
-                      .DataType("jsonp"))
-                .Update(update => update.Url("https://demos.telerik.com/kendo-ui/service/meetings/update")
-                      .DataType("jsonp"))
-                .ParameterMap("parameterMap"))
+        .Custom()
+        .Batch(true)
+        .Schema(schema => schema
+            .Model(m =>
+            {
+                m.Id(f => f.MeetingID);
+                m.Field("title", typeof(string)).DefaultValue("No title").From("Title");
+                m.Field("start", typeof(DateTime)).From("Start");
+                m.Field("end", typeof(DateTime)).From("End");
+                m.Field("description", typeof(string)).From("Description");
+                m.Field("recurrenceID", typeof(int)).From("RecurrenceID");
+                m.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
+                m.Field("recurrenceException", typeof(string)).From("RecurrenceException");
+                m.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                m.Field("startTimezone", typeof(string)).From("StartTimezone");
+                m.Field("endTimezone", typeof(string)).From("EndTimezone");
+            })
+        )
+        .Transport(transport => transport
+            .Read(read => read.Url("https://demos.telerik.com/service/v2/core/meetings"))
+            .Create(create => create.Url("https://demos.telerik.com/service/v2/core/meetings/create").Type(HttpVerbs.Post).ContentType("application/json"))
+            .Destroy(destroy => destroy.Url("https://demos.telerik.com/service/v2/core/meetings/destroy").Type(HttpVerbs.Post).ContentType("application/json"))
+            .Update(update => update.Url("https://demos.telerik.com/service/v2/core/meetings/update").Type(HttpVerbs.Post).ContentType("application/json"))
+            .ParameterMap("parameterMap")
+        )
     )
 )
 ```
@@ -129,7 +128,7 @@ Follow the steps below to achieve the desired scenario:
     string defaultTitle = "No Title";
 }
 
-<kendo-scheduler name="scheduler" 
+<kendo-scheduler name="scheduler"
     date="new DateTime(2022, 6, 13)"
     start-time="new DateTime(2022, 6, 13, 7, 00, 00)"
     height="600"
@@ -150,10 +149,10 @@ Follow the steps below to achieve the desired scenario:
     </resources>
     <scheduler-datasource type="@DataSourceTagHelperType.Custom" batch="true">
         <transport parameter-map="parameterMap">
-            <read url="https://demos.telerik.com/kendo-ui/service/meetings" dataType="jsonp"/>
-            <create url="https://demos.telerik.com/kendo-ui/service/meetings/create" dataType="jsonp"/>
-            <destroy url="https://demos.telerik.com/kendo-ui/service/meetings/destroy" dataType="jsonp" />
-            <update url="https://demos.telerik.com/kendo-ui/service/meetings/update" dataType="jsonp"/>
+            <read url="https://demos.telerik.com/service/v2/core/meetings"/>
+            <create url="https://demos.telerik.com/service/v2/core/meetings/create" type="POST" content-type="application/json" />
+            <destroy url="https://demos.telerik.com/service/v2/core/meetings/destroy" type="POST" content-type="application/json" />
+            <update url="https://demos.telerik.com/service/v2/core/meetings/update" type="POST" content-type="application/json" />
         </transport>
         <schema>
             <scheduler-model id="MeetingID">
@@ -176,25 +175,25 @@ Follow the steps below to achieve the desired scenario:
 </kendo-scheduler>
 ```
 {% endif %}
-```Script.js
+```JS script.js
     <script>
          var buttonGroup = `<span data-role='buttongroup' class='k-widget   k-button-group k-toolbar-button-group' role='group'   data-uid='f01bcb47-94d9-4c40-8e55-53a28b45134d'>
-             <button class='k-button k-button-md k-rounded-md k-button-solid     k-button-solid-base k-toggle-button k-group-start    ' ref-view-day data-name='day'    data-uid='dda9916c-3486-4407-9a69-4d5acca5ab52'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button     k-toggle-button k-group-start    ' ref-view-day data-name='day'    data-uid='dda9916c-3486-4407-9a69-4d5acca5ab52'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Day</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md   k-button-solid k-button-solid-base k-toggle-button      ' data-name='week' ref-view-week  data-uid='faac8830-48a5-4b51-9574-9a6c39166b45'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button   k-toggle-button      ' data-name='week' ref-view-week  data-uid='faac8830-48a5-4b51-9574-9a6c39166b45'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Week</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md  k-button-solid k-button-solid-base k-toggle-button       k-selected' ref-view-month data-name='month'   data-uid='be7bd46b-e9db-49ee-9d1f-aaee385d1884'   data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'     data-role='togglebutton' type='button' role='button' aria-disabled='false'  tabindex='-1' aria-pressed='true' data-group='views' ref-toolbar-tool>
+             <button class='k-button  k-toggle-button       k-selected' ref-view-month data-name='month'   data-uid='be7bd46b-e9db-49ee-9d1f-aaee385d1884'   data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'     data-role='togglebutton' type='button' role='button' aria-disabled='false'  tabindex='-1' aria-pressed='true' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Month</span>
              </button>
-             <button class='k-view-year k-button k-button-md k-rounded-md   k-button-solid k-button-solid-base k-toggle-button     ' data-name='year'    data-uid='d5aa93e5-ea56-48b7-a878-5f427722fb18'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-view-year k-button   k-toggle-button     ' data-name='year'    data-uid='d5aa93e5-ea56-48b7-a878-5f427722fb18'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Year</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md     k-button-solid k-button-solid-base k-toggle-button    ' data-name='agenda' ref-view-agenda   data-uid='bb93961e-ebe4-4e7a-bbaa-8fc4b8d69a90'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button     k-toggle-button    ' data-name='agenda' ref-view-agenda   data-uid='bb93961e-ebe4-4e7a-bbaa-8fc4b8d69a90'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Agenda</span>
              </button>
-             <button class='k-button k-button-md k-rounded-md   k-button-solid k-button-solid-base k-toggle-button      k-group-end ' ref-view-timeline data-name='timeline'    data-uid='f137d9d3-02be-47a9-8b3c-9f13513f8090'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
+             <button class='k-button   k-toggle-button      k-group-end ' ref-view-timeline data-name='timeline'    data-uid='f137d9d3-02be-47a9-8b3c-9f13513f8090'    data-parentuid='f01bcb47-94d9-4c40-8e55-53a28b45134d'  data-role='togglebutton' type='button' role='button' aria-disabled='false'   tabindex='-1' aria-pressed='false' data-group='views' ref-toolbar-tool>
                  <span class='k-button-text'>Timeline</span>
              </button>
        </span>`;
@@ -208,7 +207,7 @@ Follow the steps below to achieve the desired scenario:
                  var view = $(e.target).text().toLowerCase()
 
                  $(this).parent().addClass("k-selected");
-                 $(this).parent().siblings().removeClass("k-selected");    
+                 $(this).parent().siblings().removeClass("k-selected");
 
                  switch(view){
                      case 'day':
@@ -228,7 +227,7 @@ Follow the steps below to achieve the desired scenario:
                          break;
                      case 'year':
                          scheduler.view("year")
-                         break;      
+                         break;
                  }
              })
         })
@@ -239,7 +238,7 @@ Follow the steps below to achieve the desired scenario:
         })
         function parameterMap(options, operation) {
             if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                kendo.stringify(options.models);
             }
         }
     </script>

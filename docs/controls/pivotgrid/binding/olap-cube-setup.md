@@ -2,6 +2,7 @@
 title: OLAP Cube Setup
 page_title: jQuery PivotGrid Documentation - OLAP Cube Setup
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to set up the OLAP Cube when working with the component."
+components: ["pivotgrid"]
 slug: olap_cube_setup_pivotgrid_widget
 position: 3
 ---
@@ -23,7 +24,7 @@ For more information on creating, defining, and deploying the OLAP multidimensio
 To enable the HTTP access to the SQL Server Analysis Services, use an `MSMDPUMP.ddl` ISAPI extension.
 
 * For more information on setting up the `MSMDPUMP.ddl` extension, refer to the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
-* For an online accessible OLAP service for testing purposes, use `https://demos.telerik.com/olap/msmdpump.dll`. The URL does not open directly in the browser.
+* For an online accessible OLAP service for testing purposes, use `https://demos.telerik.com/service/v2/olap/msmdpump.dll`. The URL does not open directly in the browser.
 
 ## Enabling the Cross-Domain Access
 

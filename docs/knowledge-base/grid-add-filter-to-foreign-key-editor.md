@@ -8,6 +8,7 @@ position:
 tags: grid, foreign key , dropdown, filter, column
 ticketid: 1148304
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

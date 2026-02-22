@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} Filter component by following a complete step-by-step tutorial."
+components: ["filter"]
 slug: aspnetcore_filter_getting_started
 position: 1
 ---
@@ -32,7 +33,7 @@ Optionally, you can structure the document by adding the desired HTML elements l
 <h4>Filter with event handler</h4>
 <p>
 </p>
-``` 
+```
 {% endif %}
 
 ## 2. Initialize the Filter
@@ -43,7 +44,7 @@ Use the Calendar HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the
 * The `MainLogic()` configuration method defines the value of the logical operator at the root level of the filter expression.
 * The `ApplyButton` will display a button which when clicked will apply filtering over the datasource.
 * The `Fields` is an array of JavaScript objects that hold information about the filter field, it's editor, default values used for filter and etc.
-* The `FilterExpression` is An object which represents a filter expression which the [`kendo.data.DataSource`](/api/javascript/data/datasource) can use to filter the data.
+* The `FilterExpression` is An object which represents a filter expression which the [`kendo.data.DataSource`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource) can use to filter the data.
 
 ```HtmlHelper
 @using Kendo.Mvc
@@ -253,13 +254,13 @@ You can reference the Filter instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to get a reference.
 
-    ```script
+    ```JS script
     <script>
         var filterInstance = $("#filter").data("kendoFilter"); // filterInstance is a reference to the existing Filter instance of the helper.
     </script>
     ```
 1. Use the [Filter client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filter#methods) to control the behavior of the widget. In this example, you will use the `applyFilter` method to apply the generated filter to the dataSource.
-    ```script
+    ```JS script
     <script>
         var filterInstance = $("#filter").data("kendoFilter"); // filterInstance is a reference to the existing Filter instance of the helper.
         filterInstance.applyFilter();

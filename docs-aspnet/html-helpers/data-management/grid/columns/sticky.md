@@ -2,6 +2,7 @@
 title: Sticky
 page_title: Sticky Columns
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} (Demo) supporting sticky columns that are scrollable, yet, visible at all times while the user scrolls the Grid horizontally."
+components: ["grid"]
 slug: htmlhelper_grid_sticky_columns
 position: 4
 ---
@@ -58,7 +59,10 @@ The following Grid configuration ensures that it will be possible to scroll colu
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Implementing Sticky Columns in the Grid (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns)
 * [Knowledge Base](/knowledge-base)
-* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
 * [Server-Side API](/api/grid)

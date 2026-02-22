@@ -5,9 +5,9 @@ description: "Learn how to use the `schema.parse()` method to replace the non-su
 previous_url: /controls/data-management/grid/how-to/transform-invalid-data-item-keys, /controls/data-management/grid/how-to/various/transform-invalid-data-item-keys
 slug: howto_transforminvaliddataitemkety_grid
 tags: transform, invalid, data, items, keys, valid, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

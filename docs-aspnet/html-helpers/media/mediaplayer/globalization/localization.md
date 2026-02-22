@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI MediaPlayer component for {{ site.framework }} and translate its tooltip messages for different culture locales."
+components: ["mediaplayer"]
 previous_url: /html-helpers/media/mediaplayer/localization, /helpers/media/mediaplayer/globalization/localization
 slug: htmlhelpers_mediaplayer_localization_aspnetcore
 position: 2

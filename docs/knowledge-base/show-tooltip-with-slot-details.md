@@ -5,9 +5,9 @@ description: "Learn how to use the Kendo UI for jQuery Tooltip to show slot deta
 previous_url: /controls/scheduling/scheduler/how-to/show-tooltip-with-slot-details, /controls/scheduling/scheduler/how-to/appearance/show-tooltip-with-additional-information-over-events
 slug: howto_showtooltipwith_additionalinformation_overslots_scheduler
 tags: telerik, kendo, jquery, scheduler, show, a, tooltip, with, slot, details 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -47,8 +47,8 @@ The following example demonstrates how to achieve the desired scenario.
   <script>
   $(function() {
       $("#scheduler").kendoScheduler({
-          date: new Date("2022/6/13"),
-          startTime: new Date("2022/6/13 07:00 AM"),
+          date: new Date("2025/6/13"),
+          startTime: new Date("2025/6/13 07:00 AM"),
           height: 600,
           views: [
               "day",
@@ -62,24 +62,26 @@ The following example demonstrates how to achieve the desired scenario.
               batch: true,
               transport: {
                   read: {
-                      url: "https://demos.telerik.com/kendo-ui/service/tasks",
-                      dataType: "jsonp"
-                  },
-                  update: {
-                      url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
-                      dataType: "jsonp"
-                  },
-                  create: {
-                      url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
-                      dataType: "jsonp"
-                  },
-                  destroy: {
-                      url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
-                      dataType: "jsonp"
-                  },
+                    url: "https://demos.telerik.com/service/v2/core/tasks"
+                },
+                update: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                create: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                    type: "POST",
+                    contentType: "application/json"
+                },
+                destroy: {
+                    url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                    type: "POST",
+                    contentType: "application/json"
+                },
                   parameterMap: function(options, operation) {
                       if (operation !== "read" && options.models) {
-                          return {models: kendo.stringify(options.models)};
+                          return kendo.stringify(options.models);
                       }
                   }
               },
@@ -181,13 +183,13 @@ The following example demonstrates how to achieve the desired scenario.
   }
 
   #team-schedule {
-      background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
+      background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/team-schedule.png') transparent no-repeat;
       height: 115px;
       position: relative;
   }
 
   #people {
-      background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
+      background: url('https://demos.telerik.com/kendo-ui/content/web/scheduler/scheduler-people.png') no-repeat;
       width: 345px;
       height: 115px;
       position: absolute;

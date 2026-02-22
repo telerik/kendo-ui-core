@@ -2,6 +2,7 @@
 title: MultiViewCalendar Other Month Days
 page_title: jQuery MultiViewCalendar Documentation - MultiViewCalendar Other Month Days
 description: "Learn how you can show or hide the days from the previous and next months in the Kendo UI for jQuery MultiViewCalendar."
+components: ["multiviewcalendar"]
 slug: other_month_days_multiviewcalendar
 position: 10
 ---

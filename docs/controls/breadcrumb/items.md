@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery Breadcrumb Documentation - Items
 description: "Get started with the jQuery Breadcrumb by Kendo UI and learn how to configure the items of the component."
+components: ["breadcrumb"]
 slug: items_breadcrumb_widget
 position: 3
 ---

@@ -36,6 +36,7 @@ vs-integration/create-kendo-professional-project.md,
 vs-integration/upgrade-api-analyzer.md,
 vs-integration/upgrade-wizard.md,
 installation/nuget-keys.md,
+installation/adding-client-side-resources/scripts/*,
 asp-net-mvc-3.md,
 asp-net-mvc-4.md,
 html-helpers/helper-basics/fundamentals-mvc.md,
@@ -53,28 +54,76 @@ html-helpers/data-management/grid/templates/server-detail-template.md,
 html-helpers/navigation/menu/binding/sitemap-binding.md,
 html-helpers/navigation/panelbar/binding/sitemap-binding.md,
 html-helpers/navigation/panelbar/security-trimming.md,
-html-helpers/navigation/tabstrip/binding/*,
+html-helpers/navigation/tabstrip/binding/sitemap-binding.md,
 html-helpers/navigation/tabstrip/security-trimming.md,
 html-helpers/navigation/tabstrip/forms.md,
 html-helpers/navigation/treeview/security-trimming.md,
 html-helpers/editors/editor/import-export.md,
 html-helpers/data-management/grid/how-to/*,
 html-helpers/data-management/treelist/how-to/*,
-html-helpers/diagrams-and-maps/map/how-to/*,
-html-helpers/editors/autocomplete/how-to/*,
 html-helpers/editors/colorpicker/how-to/*,
-html-helpers/editors/datepicker/how-to/*,
-html-helpers/editors/dropdownlist/how-to/*,
 html-helpers/interactivity/progressbar/how-to/*,
 html-helpers/layout/window/how-to/*,
 html-helpers/navigation/menu/how-to/*,
 html-helpers/navigation/panelbar/how-to/*,
-html-helpers/navigation/treeview/how-to/*,
-html-helpers/scheduling/scheduler/how-to/*,
 tag-helpers/*,
 knowledge-base/switch-change-messages-inside-grid.md,
 knowledge-base/upload-files-to-database.md,
-knowledge-base/treeview-expand-node-async,
+knowledge-base/treeview-expand-node-async.md,
+knowledge-base/grid-access-current-model-in-popup.md,
+knowledge-base/grid-add-new-values-to-records-with-autocomplete-editor.md,
+knowledge-base/grid-ajax-bound-grid-custom-json-result.md,
+knowledge-base/grid-ajax-editing-with-enumration.md,
+knowledge-base/grid-alternating-rows.md,
+knowledge-base/grid-apply-dates-that-ignore-timezones.md,
+knowledge-base/grid-bind-to-collection-of-dynamic-objects.md,
+knowledge-base/grid-bind-to-datatable.md,
+knowledge-base/grid-bound-to-signalr.md,
+knowledge-base/grid-cell-format.md,
+knowledge-base/grid-checkboxes-batch-editing.md,
+knowledge-base/grid-column-template-export.md,
+knowledge-base/grid-conditionally-editable-columns.md,
+knowledge-base/grid-configure-foreignkey-columns-combobox-edit-template.md,
+knowledge-base/grid-csv-export-server-side.md,
+knowledge-base/grid-custom-popup-editor.md,
+knowledge-base/grid-custom-row-styles-based-on-data.md,
+knowledge-base/grid-edit-batch-mode-mutliselect-delete.md,
+knowledge-base/grid-edit-ef-code-first.md,
+knowledge-base/grid-edit-hierarchical-grids-in-incell-mode.md,
+knowledge-base/grid-edit-hierarchical-with-checkboxes.md,
+knowledge-base/grid-edit-nested.md,
+knowledge-base/grid-edit-radio-button-templates-incell-mode.md,
+knowledge-base/grid-edit-three-level-hierarchical-grid.md,
+knowledge-base/grid-editing-cascading-dropdownlist.md,
+knowledge-base/grid-editing-with-combobox-remote-binding-and-filtering.md,
+knowledge-base/grid-enum-editing-with-dropdownlist-localization.md,
+knowledge-base/grid-excel-export-server-side.md,
+knowledge-base/grid-external-editor-for-batch-editable-grid.md,
+knowledge-base/grid-get-all-filters-recursively-modify-servre-side.md,
+knowledge-base/grid-handle-server-error.md,
+knowledge-base/grid-hierarchy-with-dynamic-model-loading-and-datatable.md,
+knowledge-base/grid-incell-batch-editing-webapi.md,
+knowledge-base/grid-incell-editing-cascading-dropdownlist.md,
+knowledge-base/grid-inline-editing-of-nullable-boolean.md,
+knowledge-base/grid-multiple-export.md,
+knowledge-base/grid-oData-v4-web-api-controller.md,
+knowledge-base/grid-pdf-export-server-side.md,
+knowledge-base/grid-popup-editing-server-validation.md,
+knowledge-base/grid-post-grid-selection-to-server.md,
+knowledge-base/grid-post-grid-with-form.md,
+knowledge-base/grid-preserve-server-toolbar-template-after-set-options.md,
+knowledge-base/grid-render-byte-base64-show-preview-window.md,
+knowledge-base/grid-save-all-changes-with-one-request.md,
+knowledge-base/grid-save-state-with-url-browser-history-api.md,
+knowledge-base/grid-self-referencing-hierarchy.md,
+knowledge-base/grid-show-command-buttons-conditionally.md,
+knowledge-base/grid-timespan-editor.md,
+knowledge-base/grid-update-using-timestamp.md,
+knowledge-base/grid-use-groupheadertemplate-foreignkeycolumn.md,
+knowledge-base/grid-use-multiselect-filter.md,
+knowledge-base/grid-use-with-contextmenu.md,
+knowledge-base/grid-using-remote-validation.md,
+knowledge-base/grid-utc-time-on-both-server-and-client.md,
 knowledge-base/mvc-with-requirejs.md]
 
 exclude_navigation: ["knowledge-base/*",
@@ -115,9 +164,6 @@ navigation:
      "vs-code-integration":
         title: "VS Code Integration"
         position: 6
-     "installation/adding-client-side-resources/scripts":
-        title: "Creating Custom Script Bundles"
-        position: 5
      "installation":
         title: "Installation & Upgrade"
         position: 4
@@ -148,9 +194,6 @@ navigation:
      "installation-mvc/adding-client-side-resources":
          title: "Providing Client-Side Resources"
          position: 6
-     "installation-mvc/adding-client-side-resources/scripts":
-        title: "Creating Custom Script Bundles"
-        position: 5
      "html-helpers/helper-basics":
         title: "Working with Helpers"
         position: 2
@@ -258,15 +301,15 @@ navigation:
      "tutorials/tutorial-saleshub/order-page":
         title: "Order Page"
         position: 3
-     "licensing":
-        title: "Licensing"
-        position: 59
      "troubleshoot":
         title: "Troubleshooting"
         position: 60
+     "ai-components-and-features":
+        title: "AI Components & Features"
+        position: 4
      "html-helpers":
         title: "Components"
-        position: 7
+        position: 8
      "html-helpers/datasource":
         title: "Data Source"
      "html-helpers/data-management":
@@ -427,6 +470,9 @@ navigation:
         title: "AIPrompt"
      "html-helpers/conversational-ui/chat":
         title: "Chat"
+     "html-helpers/conversational-ui/promptbox":
+        title: "PromptBox"
+        isNew: true
      "html-helpers/interactivity":
         title: "Interactivity and UX"
      "html-helpers/interactivity/loader":
@@ -447,16 +493,19 @@ navigation:
         title: "PDFViewer"
      "styles-and-layout":
         title: "Styles and Appearance"
-        position: 8
+        position: 9
      "styles-and-layout/sass-themes":
         title: "SASS Themes"
         position: 2
      "styles-and-layout/less-themes":
         title: "LESS Themes"
         position: 3
+     "ai":
+        title: "AI Tools"
+        position: 3
      "globalization":
         title: "Globalization"
-        position: 9
+        position: 10
      "accessibility":
         title: "Accessibility"
         position: 10
@@ -693,7 +742,7 @@ navigation:
      "*tilelayout":
         title: "TileLayout"
      "*timeline":
-        title: "TimeLine"
+        title: "Timeline"
      "*timepicker":
         title: "TimePicker"
      "*timedurationpicker":
@@ -723,6 +772,12 @@ navigation:
         isNew: true
      "*switch":
         title: "Switch"
+     "*speechtotextbutton":
+         title: "SpeechToTextButton"
+         isNew: true
+     "*inline-aiprompt":
+         title: "InlineAIPrompt"
+         isNew: true
      "*splitbutton":
         title: "SplitButton"
      "*/dropdownbutton":
@@ -738,13 +793,13 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2025.1.227"
+cdnVersion: "2026.1.212"
 
 ## The themes CDN used
-themesCdnVersion: "10.2.0"
+themesCdnVersion: "13.0.0"
 
 ## The MVC Core version used
-mvcCoreVersion: "2025.1.227"
+mvcCoreVersion: "2026.1.212"
 
 productCode: UIASPCORE
 
@@ -811,6 +866,11 @@ defaults:
         path: "html-helpers/conversational-ui/aiprompt"
     values:
         title_prefix: "ASP.NET Core AIPrompt Component"
+-
+    scope:
+        path: "html-helpers/conversational-ui/promptbox"
+    values:
+        title_prefix: "ASP.NET Core PromptBox Component"
 -
     scope:
         path: "html-helpers/data-management/filemanager"
@@ -961,6 +1021,11 @@ defaults:
         path: "html-helpers/editors/imageeditor"
     values:
         title_prefix: "ASP.NET Core Image Editor Component"
+-
+    scope:
+        path: "html-helpers/conversational-ui/inline-aiprompt"
+    values:
+         title_prefix: "ASP.NET Core InlineAIPrompt Component"
 -
     scope:
         path: "html-helpers/editors/listbox"
@@ -1208,6 +1273,11 @@ defaults:
         title_prefix: "ASP.NET Core FloatingActionButton Component"
 -
     scope:
+        path: "html-helpers/navigation/speechtotextbutton"
+    values:
+        title_prefix: "ASP.NET Core SpeechToTextButton Component"
+-
+    scope:
         path: "html-helpers/navigation/splitbutton"
     values:
         title_prefix: "ASP.NET Core SplitButton Component"
@@ -1265,7 +1335,7 @@ defaults:
     scope:
         path: "html-helpers/navigation/timeline"
     values:
-        title_prefix: "ASP.NET Core TimeLine Component"
+        title_prefix: "ASP.NET Core Timeline Component"
 -
     scope:
         path: "html-helpers/navigation/toolbar"

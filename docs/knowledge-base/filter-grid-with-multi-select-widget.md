@@ -7,7 +7,7 @@ slug: filter-grid-with-multi-select-widget
 tags: kendo ui, mvc, grid, multi, select, filter, custom,
 ticketid: 1129339
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -48,9 +48,8 @@ How can I apply multiple filters in a Grid for a single field with the Kendo UI 
                   }
                 },
                 dataSource: {
-                  type: "odata",
                   transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                   },
                   pageSize: 20
                 },
@@ -65,7 +64,7 @@ How can I apply multiple filters in a Grid for a single field with the Kendo UI 
                 },
                 columns: [{
                   template: "<div class='customer-photo'" +
-                  "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
+                  "style='background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
                   "<div class='customer-name'>#: ContactName #</div>",
                   field: "ContactName",
                   title: "Contact Name",

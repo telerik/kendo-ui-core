@@ -2,6 +2,7 @@
 title: Batch
 page_title: jQuery Grid Documentation - Batch Editing
 description: "Get started with the editing functionality of the jQuery Grid by Kendo UI and learn how to apply the batch edit mode."
+components: ["grid"]
 slug: batchediting_grid
 position: 2
 ---

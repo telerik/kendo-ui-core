@@ -5,9 +5,9 @@ description: "Learn how to handle the Kendo UI for jQuery TreeView drag event to
 slug: howto_preventdragging_nodestodeeplevels_treeview
 previous_url: /controls/navigation/treeview/how-to/nodes/prevent-dragging-to-deep-levels
 tags: telerik, kendo, jquery, treeview, prevent, dragging, of, nodes, to, deep, levels
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

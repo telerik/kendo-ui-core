@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: Getting Started
 description: "Make your first steps with the Telerik UI for {{ site.framework }} QRCode component by following a complete step-by-step tutorial."
+components: ["qrcode"]
 slug: qrcode_getting_started
 position: 1
 ---
@@ -43,7 +44,7 @@ Use the QRCode HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
 
 * The `Name()` configuration method is mandatory as its value is used for the `id` and the `name` attributes of the QRCode element.
 * The `Value()` options specifies the QRCode value.
-* Customize the component appearance by using the `Size()`, `Color()`, and `Border()` methods. 
+* Customize the component appearance by using the `Size()`, `Color()`, and `Border()` methods.
 
 ```HtmlHelper
     @using Kendo.Mvc.UI
@@ -60,9 +61,9 @@ Use the QRCode HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    <kendo-qrcode name="vacationQrCode" 
-        value="https://demos.telerik.com/kendo-ui/qrcode/index" 
-        size="170" 
+    <kendo-qrcode name="vacationQrCode"
+        value="https://demos.telerik.com/kendo-ui/qrcode/index"
+        size="170"
         color="#000000">
         <border color="#000000" width="5" />
     </kendo-qrcode>
@@ -82,8 +83,8 @@ The next step is to define the Card component with the vacation information that
                 <p>Africa provides some of the most epic wildlife diversity on the planet. Not many vacations involve sleeping in close quarters with lions, leopards, elephants, buffaloes, rhinos, giraffes and hippos.</p>
             </div>
             <div class="k-card-actions k-card-actions-vertical k-card-actions-stretched">
-                <span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Book now</span>
-                <span class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Check rates</span>
+                <span class="k-button k-button-primary k-button-flat">Book now</span>
+                <span class="k-button k-button-primary k-button-flat">Check rates</span>
             </div>
         </div>
     </div>
@@ -116,7 +117,7 @@ You can reference the QRCode instances that you have created and build on top of
 
 1. Use the `id` attribute of the component instance to get its reference.
 
-    ```script
+    ```JS script
         <script>
             $(document).ready(function() {
                 var qrCodeReference = $("#vacationQrCode").data("kendoQRCode"); // qrCodeReference is a reference to the existing QRCode instance of the helper.
@@ -141,7 +142,7 @@ You can reference the QRCode instances that you have created and build on top of
         </kendo-button>
     ```
     {% endif %}
-    ```Scripts
+    ```JS Scripts
         <script>
             function onBtnClick() {
                 var qrCodeReference = $("#vacationQrCode").data("kendoQRCode");

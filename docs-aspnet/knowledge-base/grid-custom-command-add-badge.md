@@ -7,6 +7,7 @@ tags: telerik, grid, custom, command, add, badge
 component: grid
 type: how-to
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -37,7 +38,7 @@ To achieve the desired scenario:
 1. Provide a unique id for the badges that you will create.
 1. Based on the value of a data item field, append a child element inside the Button. From the Button, initialize a Badge control. 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -66,7 +67,7 @@ To achieve the desired scenario:
         )
     )
 ```
-```Script.js
+```JS script.js
     <script type="text/javascript">
         function onDataBound(e){
             var grid = $("#grid").data("kendoGrid");

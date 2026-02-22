@@ -7,6 +7,7 @@ slug: responsive-kendo-window
 tags: kendo, window, responsive, adaptive, percent, size
 ticketid: 1362958
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment
@@ -37,7 +38,7 @@ To display a responsive Window:
     lorem ipsum dolor sit amet.
 </div>
 
-<button id="btnShowDiag" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">Show dialog</button>
+<button id="btnShowDiag" class="k-button">Show dialog</button>
 <script>
     $(document).ready(function() {
         var myWindow = $("#theWindow")

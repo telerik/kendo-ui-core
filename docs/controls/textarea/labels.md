@@ -2,6 +2,7 @@
 title: Labels
 page_title: jQuery Labels for TextArea Documentation
 description: "Learn how to create and initialize Labels for the TextArea."
+components: ["textarea"]
 slug: labels_textarea
 position: 2
 ---

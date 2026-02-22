@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery ListBox Documentation - ListBox Localization
 description: "Get started with the jQuery ListBox by Kendo UI and translate its messages for different culture locales."
+components: ["listbox"]
 slug: localization_listbox
 position: 2
 ---

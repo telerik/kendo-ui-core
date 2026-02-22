@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery Filter Documentation - Keyboard Navigation
 description: "Get started with the jQuery Filter by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["filter"]
 slug: keynav_filter_jquery
 position: 2
 ---
@@ -27,4 +28,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Filter]
 
 * [Keyboard Navigation by the Filter (Demo)](https://demos.telerik.com/kendo-ui/filter/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the Filter]({% slug accessibility_kendoui_filter_widget %})
+* [Accessibility in the Filter]({% slug jquery_filter_accessibility %})

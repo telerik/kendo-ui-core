@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Get started with the {{ site.product }} Upload and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["upload"]
 slug: keynav_aspnetcore_upload
 position: 2
 ---
@@ -30,4 +31,4 @@ For a complete example, refer to the [demo on keyboard navigation of the Upload]
 ## See Also
 
 * [Keyboard Navigation by the Upload (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/keyboard-navigation)
-* [Accessibility Overview of the Upload HtmlHelper for {{ site.framework }}]({% slug accessibility_aspnetcore_upload %})
+* [Accessibility Overview of the Upload HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_upload_accessibility %})

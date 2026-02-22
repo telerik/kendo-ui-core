@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn how to customize the appearance of the Telerik UI TextBox HtmlHelper for {{ site.framework }}."
+components: ["textbox"]
 slug: textbox_appearance
 position: 2
 ---
@@ -45,14 +46,10 @@ The following values are available for the `Size` option:
 - `Small`
 - `Medium`
 - `Large`
-- `None`
 
-The default size value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
+> When not explicitly set, the applied theme controls the default size.
 
-```html
-<span class="k-textbox k-input k-input-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### Rounded
 
@@ -78,14 +75,10 @@ The following values are available for the `Rounded` option:
 - `Medium`
 - `Large`
 - `Full`
-- `None`
 
-The default value is `Medium` and it is added as a class `k-rounded-md` to the wrapping span element.
+> When not explicitly set, the applied theme controls the default border radius.
 
-```html
-<span class="k-textbox k-input k-rounded-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### FillMode
 
@@ -110,14 +103,10 @@ The following values are available for the `FillMode` option:
 - `Solid`
 - `Flat`
 - `Outline`
-- `None`
 
-The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
+> When not explicitly set, the applied theme controls the default fill mode.
 
-```html
-<span class="k-textbox k-input k-input-solid">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 

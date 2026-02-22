@@ -2,6 +2,7 @@
 title: Repeated Table Headers
 page_title: Repeated Table Headers - Kendo UI Drawing Library
 description: "Render table headers on each page when you export content in PDF with the Kendo UI Drawing library."
+components: ["general"]
 previous_url: /framework/drawing/drawing-dom#recurrent-table-headers
 slug: recurrenttableheaders_drawing
 position: 10

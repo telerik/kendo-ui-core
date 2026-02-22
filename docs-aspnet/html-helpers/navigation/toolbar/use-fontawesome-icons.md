@@ -2,6 +2,7 @@
 title: Using FontAwesome Icons
 page_title: Using FontAwesome Icons
 description: "Learn how to use Fontawesome icons in the Telerik UI ToolBar component for {{ site.framework }}."
+components: ["toolbar"]
 slug: htmlhelpers_use_fontawesome_icons_aspnetcore
 position: 4
 ---

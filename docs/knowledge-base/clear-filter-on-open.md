@@ -5,9 +5,9 @@ description: "Learn how to clear the filter of the Kendo UI ComboBox on opening 
 previous_url: /controls/editors/combobox/how-to/clear-filter-on-open, /controls/editors/combobox/how-to/filtering/clear-filter-on-open
 slug: howto_clear_filter_open_combobox
 tags: telerik, kendo, jquery, combobox, clear, filter, on, opening
-component: combobox
 type: how-to
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment
@@ -56,11 +56,11 @@ The following example demonstrates how to achieve the desired scenario.
           autoBind: false,
           minLength: 3,
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             serverFiltering: true,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/service/v2/odata/Products",
               }
             }
           },

@@ -7,6 +7,7 @@ slug: calender-disable-months
 tags: calendar, disable, year view, month
 ticketid: 1144828
 res_type: kb
+components: ["calendar"]
 ---
 
 ## Environment

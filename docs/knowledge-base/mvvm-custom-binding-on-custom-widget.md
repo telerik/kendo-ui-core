@@ -7,7 +7,7 @@ slug: mvvm-custom-binding-on-custom-widget
 tags: kendo, kendoui, mvvm, custom-binding, custom-widget
 ticketid: 1144432
 res_type: kb
-component: mvvm
+components: ["mvvm"]
 ---
 
 ## Environment

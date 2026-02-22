@@ -7,7 +7,7 @@ slug: grid-filter-menu-prevent-close-browser-scroll
 tags: grid, filtering, menu, popup, prevent, close, scroll
 ticketid: 1147708
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -47,31 +47,31 @@ How can I prevent the filter popup from closing when the user scrolls the page o
 <script>
     var scroll = false;
     $(document).ready(function() {
-        var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core/";
         $("#client").kendoGrid({
             dataSource: {
                 transport: {
-                    read: {
-                        url: telerikWebServiceBase + "/Products",
-                        dataType: "jsonp"
+                    read:  {
+                        url: crudServiceBaseUrl + "/Products"
                     },
                     update: {
-                        url: telerikWebServiceBase + "/Products/Update",
-                        dataType: "jsonp"
+                        url: crudServiceBaseUrl + "/Products/Update",
+                        type: "POST",
+                		contentType: "application/json"
                     },
                     destroy: {
-                        url: telerikWebServiceBase + "/Products/Destroy",
-                        dataType: "jsonp"
+                        url: crudServiceBaseUrl + "/Products/Destroy",
+                        type: "POST",
+                		contentType: "application/json"
                     },
                     create: {
-                        url: telerikWebServiceBase + "/Products/Create",
-                        dataType: "jsonp"
+                        url: crudServiceBaseUrl + "/Products/Create",
+                        type: "POST",
+                		contentType: "application/json"
                     },
                     parameterMap: function(options, operation) {
                         if (operation !== "read" && options.models) {
-                            return {
-                                models: kendo.stringify(options.models)
-                            };
+                            return kendo.stringify(options.models);
                         }
                     }
                 },

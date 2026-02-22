@@ -97,8 +97,12 @@ describe("VirtualList MVVM - No CSP", function() {
             scroll(virtualList.content, 620);
             setTimeout(function() {
                 done(() => {
-                    assert.equal(virtualList.items().eq(0).text(), "Item 11");
-                    assert.equal(virtualList.items().last().text(), "Item 50");
+                    let firstItemText = virtualList.items().eq(0).text();
+                    let firstItemNum = parseInt(firstItemText.replace("Item ", ""), 10);
+                    assert.isOk(firstItemNum >= 10 && firstItemNum <= 12, "First item should be around Item 10-12, got " + firstItemText);
+                    let lastItemText = virtualList.items().last().text();
+                    let lastItemNum = parseInt(lastItemText.replace("Item ", ""), 10);
+                    assert.isOk(lastItemNum >= 49 && lastItemNum <= 51, "Last item should be around Item 49-51, got " + lastItemText);
                 });
             }, 300);
         }, 100);

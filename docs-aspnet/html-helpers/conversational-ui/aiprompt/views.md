@@ -2,6 +2,7 @@
 title: Views
 page_title: Views
 description: "Configure the prompt, output, and commands views of the Telerik UI for {{ site.framework }} AIPrompt component."
+components: ["aiprompt"]
 slug: htmlhelpers_views_aiprompt
 position: 2
 ---
@@ -58,7 +59,6 @@ The following example demonstrates how to specify the `Output` view as active wh
     @(Html.Kendo().AIPrompt()
         .Name("aiprompt")
         .ActiveView(1)
-        .ShowOutputRating(false)
         .Views(views =>
         {
             views.Add().Type(ViewType.Prompt);
@@ -70,7 +70,7 @@ The following example demonstrates how to specify the `Output` view as active wh
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    <kendo-aiprompt name="aiprompt" active-view="1" show-output-rating="false">
+    <kendo-aiprompt name="aiprompt" active-view="1">
         <aiprompt-views>
             <aiprompt-view type="ViewType.Prompt"></aiprompt-view>
             <aiprompt-view type="ViewType.Output"></aiprompt-view>
@@ -126,7 +126,7 @@ The example below shows how to configure the `Commands` view and specify a custo
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         var promptData = [
         {
@@ -202,7 +202,7 @@ The following example demonstrates how to create a custom view that contains a b
     </kendo-aiprompt>
 ```
 {% endif %}
-```Scripts
+```JS scripts
     <script>
         function initializeComponents() {
             this.element.find("[ref-custom-button]").kendoButton({
@@ -216,7 +216,7 @@ The following example demonstrates how to create a custom view that contains a b
 
 ## See Also
 
-* [Configuring the AIPrompt Templates]({% slug htmlhelpers_templates_aiprompt %})
+* [Configuring the AIPrompt Output Actions]({% slug htmlhelpers_output_actions_aiprompt %})
 * [Server-Side API of the AIPrompt HtmlHelper](/api/aiprompt)
 {% if site.core %}
 * [Server-Side API of the AIPrompt TagHelper](/api/taghelpers/aiprompt)

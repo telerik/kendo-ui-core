@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery SplitButton Documentation - Getting Started with the SplitButton
 description: "Get started with the jQuery SplitButton by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["splitbutton"]
 slug: getting_started_kendoui_splitbutton_widget
 position: 2
 ---
@@ -95,8 +96,4 @@ You can add an icon to the SplitButton by utilizing the [`icon`](/api/javascript
 * [JavaScript API Reference of the jQuery SplitButton](/api/javascript/ui/splitbutton)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

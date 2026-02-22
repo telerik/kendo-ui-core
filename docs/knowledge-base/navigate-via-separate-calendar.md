@@ -5,9 +5,9 @@ description: "Navigate the Kendo UI for jQuery Scheduler widget with a separate 
 previous_url: /controls/scheduling/scheduler/how-to/navigate-via-separate-calendar, /controls/scheduling/scheduler/how-to/interaction/navigate-via-separate-calendar
 slug: howto_navigate_the_scheduler_via_separate_calendar_scheduler
 tags: telerik, kendo, jquery, scheduler, navigate, in, the, with, a, separate, calendar 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -46,8 +46,8 @@ The following example demonstrates how to achieve the desired scenario.
     <script>
         $(function () {
             var scheduler = $("#scheduler").kendoScheduler({
-                date: new Date("2022/6/13"),
-                startTime: new Date("2022/6/13 07:00 AM"),
+                date: new Date("2025/6/13"),
+                startTime: new Date("2025/6/13 07:00 AM"),
                 height: 600,
                 selectable: true,
                 views: [
@@ -61,24 +61,26 @@ The following example demonstrates how to achieve the desired scenario.
                     batch: true,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings"
                         },
                         update: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                             type: "POST",
+                    		contentType: "application/json"
                         },
                         create: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                             type: "POST",
+                    		contentType: "application/json"
                         },
                         destroy: {
-                            url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                            dataType: "jsonp"
+                            url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                             type: "POST",
+                    		contentType: "application/json"
                         },
                         parameterMap: function (options, operation) {
                             if (operation !== "read" && options.models) {
-                                return { models: kendo.stringify(options.models) };
+                                return kendo.stringify(options.models);
                             }
                         }
                     },

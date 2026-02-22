@@ -2,6 +2,7 @@
 title: Component Types
 page_title: jQuery TimePicker Documentation - TimePicker Component Types
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to enable the modern component type."
+components: ["timepicker"]
 slug: componenttypes_timepicker
 position: 6
 ---
@@ -20,7 +21,7 @@ By default, the TimePicker is initialized with the `classic` render mode. In ord
 
 As a result, the appearance of the widget is alternated. 
 
-![Kendo UI for jQuery TimePicker Comparison between the content types](../../../images/modern-classic-timepicker.png)
+![Kendo UI for jQuery TimePicker Comparison between the content types](../../images/modern-classic-timepicker.png)
 
 > The rendered selectors in the Kendo UI TimePicker depend on the currently applied format. If the format is omitted, the default format from the application's culture is used. 
 

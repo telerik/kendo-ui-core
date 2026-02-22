@@ -2,8 +2,9 @@
 title: Selection & Export
 page_title: jQuery Grid Documentation - Selection & Export
 description: "The jQuery Grid by Kendo UI allows you to select cells and then export them. This article explains the steps required to configure and use the component."
+components: ["grid"]
 slug: exporting_selection_kendoui_grid
-position: 4
+position: 5
 ---
 
 # Selection & Export

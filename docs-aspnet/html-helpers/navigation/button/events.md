@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Button component for {{ site.framework }}."
+components: ["button"]
 slug: events_button_aspnetcore
 position: 5
 ---
@@ -27,7 +28,7 @@ For a complete example on basic Button events, refer to the [demo on using the e
 </kendo-button>
 ```
 {% endif %}
-```script
+```JS script
 	<script>
 		function onClick() {
 			alert('Button clicked!')

@@ -6,6 +6,7 @@ page_title: How to Export Kendo UI for jQuery TreeView Data to PDF
 slug: export-treeview-to-pdf-kendo-ui-jquery
 tags: kendo, treeview, export, pdf, drawing, drawdom
 res_type: kb
+components: ["treeview"]
 ticketid: 1679577
 ---
 
@@ -92,12 +93,11 @@ Below is a sample runnable example demonstrating how to export the TreeView to P
           themeColor: 'success'
         });
 
-        var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
+        var serviceRoot = "https://demos.telerik.com/service/v2/core";
         homogeneous = new kendo.data.HierarchicalDataSource({
           transport: {
             read: {
-              url: serviceRoot + "/Employees",
-              dataType: "jsonp",
+              url: serviceRoot + "/Employees"
             },
           },
           schema: {

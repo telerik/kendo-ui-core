@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Slider Documentation - Slider Overview
 description: "Get started with the jQuery Slider by Kendo UI and learn how to create, initialize, and enable the widget."
+components: ["slider"]
 slug: overview_kendoui_slider_widget
 position: 0
 ---
@@ -17,7 +18,7 @@ The Slider can either present one handle and two opposing buttons for selecting 
 ## Functionality and Features
 
 * [Appearance]({% slug appearance_kendoui_slider_widget %})&mdash;The Slider provides styling options that allow you to change its appearance.
-* [Accessibility]({% slug accessibility_kendoui_slider %})&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_slider %}).
+* [Accessibility]({% slug jquery_slider_accessibility %})&mdash;The Slider is accessible for screen readers, supports WAI-ARIA attributes, and delivers [keyboard shortcuts for faster navigation]({% slug keynav_kendoui_slider %}).
 
 ## Next Steps
 

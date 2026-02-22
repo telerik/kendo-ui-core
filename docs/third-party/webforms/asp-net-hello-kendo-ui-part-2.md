@@ -2,6 +2,7 @@
 title: Part 5 - Hello CRUD Data Operations
 page_title: Part 5 - Hello CRUD Data Operations - Kendo UI Third-Party Frameworks
 description: "Learn how to enable CRUD operations, handle the editing functionality and failed requests in the Kendo UI Grid widget."
+components: ["general"]
 previous_url: /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2, /third-party/tutorials/webforms/asp-net-hello-kendo-ui-part-2.html
 slug: part5_aspnetwebforms_tutorials
 position: 5
@@ -57,7 +58,7 @@ The `EmployeesController` `Get` method now looks a bit different. Notice that it
     // WebAPI will respond to an HTTP GET with this method
     public Models.Response Get() {
 
-        // the the take and skip parameters off of the incoming request
+        // the take and skip parameters off of the incoming request
         int take = _request["take"] == null ? 10 : int.Parse(_request["take"]);
         int skip = _request["skip"] == null ? 0 : int.Parse(_request["skip"]);
 
@@ -76,9 +77,9 @@ The `EmployeesController` `Get` method now looks a bit different. Notice that it
 <!--_-->
 ### Enable Editing in Grid
 
-To enable full CRUD operations in the Grid, add the interactive bit of UI. Kendo UI has several options for how to do this. You can edit grid rows in a [popup](https://demos.telerik.com/kendo-ui/web/grid/editing-popup.html), or [inline](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html). You can get very granular control over the look and feel of the editing experience with [custom editors](https://demos.telerik.com/kendo-ui/web/grid/editing-custom.html).
+To enable full CRUD operations in the Grid, add the interactive bit of UI. Kendo UI has several options for how to do this. You can edit grid rows in a [popup](https://demos.telerik.com/kendo-ui/grid/editing-popup), or [inline](https://demos.telerik.com/kendo-ui/grid/editing-inline). You can get very granular control over the look and feel of the editing experience with [custom editors](https://demos.telerik.com/kendo-ui/grid/editing-custom).
 
-This example uses the built-in [inline](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) editing that comes with the Kendo UI Grid widget.
+This example uses the built-in [inline](https://demos.telerik.com/kendo-ui/grid/editing-inline) editing that comes with the Kendo UI Grid widget.
 
 To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as demonstrated in the example below. With this change, you can now save the page and launch it with Visual Studio. When you click on a row, it becomes editable.
 
@@ -92,7 +93,7 @@ To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as
 
 ### Use Command Columns
 
-To get a better editing experience, use a [command column](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) in the grid.
+To get a better editing experience, use a [command column](https://demos.telerik.com/kendo-ui/grid/editing-inline) in the grid.
 
 In the `Default.aspx` file, add a column to the columns definition that specifies the commands that you want to include. For this example, specify `edit` and `destroy` Make the `title` an empty string. Also, format the DateTime that will be coming back as the `BirthDate` to make the date cleaner.
 
@@ -124,7 +125,7 @@ With this change, the Grid puts the entire row in edit mode when you click the *
 
 However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](/api/javascript/data/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
 
-Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](https://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column when in edit mode.
+Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](https://demos.telerik.com/kendo-ui/datepicker) for the **BirthDate** column when in edit mode.
 
 The example below demonstrates how to specify a model for the DataSource.
 
@@ -151,7 +152,7 @@ The example below demonstrates how to specify a model for the DataSource.
 
 In the above declaration, the `FirstName` field is additionally marked as being not editable.
 
-Run the application now and notice that when you put the grid into edit mode you get a Kendo UI [DatePicker](https://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column. You cannot edit the **FirstName** column either. If you try and null out the **LastName** field, the Grid displays a popup message telling you that the **LastName** is required.
+Run the application now and notice that when you put the grid into edit mode you get a Kendo UI [DatePicker](https://demos.telerik.com/kendo-ui/datepicker) for the **BirthDate** column. You cannot edit the **FirstName** column either. If you try and null out the **LastName** field, the Grid displays a popup message telling you that the **LastName** is required.
 
 **Figure 2: An editable Grid with a model**
 
@@ -431,13 +432,11 @@ Download the finished code for this module from [here](https://github.com/teleri
 
 Build on this tutorial by gradually adding more advanced functionalities to this application and consider the information from these pages:
 
-* [Hello Kendo UI Tutorial Part 1 on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1)
-* [Hello Kendo UI Tutorial Part 2 on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2)
-* [Kendo UI Grid Editing Functionality in Popups](https://demos.telerik.com/kendo-ui/web/grid/editing-popup.html)
-* [Kendo UI Grid Editing Functionality Inline](https://demos.telerik.com/kendo-ui/web/grid/editing-inline.html)
-* [Kendo UI Grid Custom Editing](https://demos.telerik.com/kendo-ui/web/grid/editing-custom.html)
+* [Kendo UI Grid Editing Functionality in Popups](https://demos.telerik.com/kendo-ui/grid/editing-popup)
+* [Kendo UI Grid Editing Functionality Inline](https://demos.telerik.com/kendo-ui/grid/editing-inline)
+* [Kendo UI Grid Custom Editing](https://demos.telerik.com/kendo-ui/grid/editing-custom)
 * [JavaScript `model` API](/api/javascript/data/model)
-* [Kendo UI DatePicker Demo Online](https://demos.telerik.com/kendo-ui/web/datepicker)
+* [Kendo UI DatePicker Demo Online](https://demos.telerik.com/kendo-ui/datepicker)
 
 ## See Also
 

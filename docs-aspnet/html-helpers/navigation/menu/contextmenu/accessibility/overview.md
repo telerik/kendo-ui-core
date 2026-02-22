@@ -2,7 +2,8 @@
 title: Overview
 page_title: Telerik UI ContextMenu for {{ site.framework }} Documentation | ContextMenu Accessibility
 description: "Get started with the Telerik UI ContextMenu component for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_contextmenu_overview
+components: ["menu"]
+slug: htmlhelpers_contextmenu_accessibility
 position: 1
 ---
 
@@ -20,7 +21,7 @@ This section lists the selectors, attributes, and behavior patterns supported by
 | -------- | --------- | ----- |
 | `.k-context-menu` | `role=menu` | The context menu implements the `menu` role. |
 
-Apart from the above, the ContextMenu element must implement the [specification for a vertical Menu component]({% slug accessibility_aspnetcore_menu%}).
+Apart from the above, the ContextMenu element must implement the [specification for a vertical Menu component]({% slug htmlhelpers_menu_accessibility%}).
 
 ## Resources
 

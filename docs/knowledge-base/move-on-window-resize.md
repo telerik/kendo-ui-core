@@ -5,9 +5,9 @@ description: "Learn how to move popup notifications on window resize in the Kend
 slug: howto_move_popup_notifications_onwindow_resize_notification
 previous_url: /controls/layout/notification/how-to/move-on-window-resize 
 tags: telerik, kendo, jquery, notification, move, popup, on, window, resize  
-component: notification
 type: how-to
 res_type: kb
+components: ["notification"]
 ---
 
 ## Environment

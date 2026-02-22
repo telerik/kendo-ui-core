@@ -6,6 +6,7 @@ page_title: Use Scheduler With Google Calendar
 slug: scheduler-google-calendar-integration
 tags: aspnet, core, mvc, dotnet-core, dotnet-mvc, kendo, kendo-ui, scheduler, google, calendar
 res_type: kb
+components: ["general"]
 component: scheduler
 ---
 

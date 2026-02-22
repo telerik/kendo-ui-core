@@ -7,6 +7,7 @@ slug: grid-tab-vertically-grouping
 tags: kendo, jquery, grid, tab, editing, vertical, grouping
 ticketid: 1587893
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

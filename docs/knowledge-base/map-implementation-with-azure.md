@@ -6,7 +6,7 @@ page_title: Use Azure maps in Kendo UI Map
 slug: map-using-azure
 tags: map, kendo, azure, ui, geospatial, zoom
 res_type: kb
-component: map
+components: ["map"]
 ---
 
 ## Environment

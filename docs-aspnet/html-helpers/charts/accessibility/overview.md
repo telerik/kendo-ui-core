@@ -2,7 +2,8 @@
 title: Overview
 page_title: Telerik UI Charts Documentation | Charts Accessibility
 description: "Get started with the Telerik UI Chart component for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_charts
+components: ["chart"]
+slug: htmlhelpers_chart_accessibility
 position: 1
 ---
 

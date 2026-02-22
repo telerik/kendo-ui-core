@@ -21,6 +21,8 @@ export const __meta__ = {
         INVALIDLABEL = "k-text-error",
         MESSAGEBOX = "k-messagebox k-messagebox-error",
         INPUTINNER = ".k-input-inner",
+        UPLOADBUTTONWRAPPER = ".k-upload-button-wrap",
+        CHECKBOXWRAPPER= ".k-checkbox-wrap",
         INPUTWRAPPER = ".k-input",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
@@ -161,7 +163,8 @@ export const __meta__ = {
                 that.element.attr(NOVALIDATE, NOVALIDATE);
             }
 
-            that._shouldSearchDocument = that.element.is(FORM) && that.element.attr("id") !== undefined;
+            const formId = that.element.attr("id");
+            that._shouldSearchDocument = that.element.is(FORM) && formId != undefined && $(`:input[form='${formId}']`).length > 0;
             that._containerElement = that._shouldSearchDocument ? $(document) : that.element;
             that._inputSelector = that._buildSelector(INPUTSELECTOR, validateAttributeSelector);
             that._checkboxSelector = that._buildSelector(CHECKBOXSELECTOR, validateAttributeSelector);
@@ -200,10 +203,26 @@ export const __meta__ = {
                         quote = !!name && name.indexOf("'") > -1 ? '\"' : "'",
                         namedCheckbox = input.attr("name") && !containerElement.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
                         checkbox = input.filter("[type=checkbox]").length && (noNameCheckbox || namedCheckbox),
+                        file = input.filter("[type=file]").parents(UPLOADBUTTONWRAPPER).children("input").length,
                         radio = input.filter("[type=radio]").length && !containerElement.find("input[name=" + quote + input.attr("name") + quote + "]:checked").length,
                         value = input.val();
 
-                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
+                        if (file) {
+                            let isValid = false;
+
+                            input.filter("[type=file]")
+                                .parents(UPLOADBUTTONWRAPPER)
+                                .children("input")
+                                .each(function(idx) {
+                                    if (input.val()) {
+                                        isValid = true;
+                                    }
+                                });
+
+                            return !(hasAttribute(input, "required") && !isValid);
+                        }
+
+                        return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search],[type=password]").filter("[pattern]").length && input.val() !== "") {
@@ -300,15 +319,12 @@ export const __meta__ = {
         },
 
         _buildSelector: function(selectorConstant, validateAttributeSelector) {
-            const that = this,
-            formSelector = `,[form="${that.element.attr("id")}"]`;
-            let selector = selectorConstant + validateAttributeSelector;
-
-            if ( that._shouldSearchDocument) {
-                selector += formSelector;
+            if (!this._shouldSearchDocument) {
+                return selectorConstant + validateAttributeSelector;
             }
+            const id = this.element.attr("id");
 
-            return selector;
+            return `#${id} ` + selectorConstant + validateAttributeSelector + `,[form="${id}"]`;
         },
 
         _allowSubmit: function() {
@@ -404,6 +420,17 @@ export const __meta__ = {
 
                 inputs = containerElement.find(this._inputSelector);
 
+                containerElement.find(UPLOADBUTTONWRAPPER).each(function() {
+                    let uploadContainer = $($(this).parents(".k-upload")[0]),
+                        firstFileInput = $(this).find("input:hidden[type='file']").first();
+
+                    if (firstFileInput.length) {
+                        if (uploadContainer.length && !uploadContainer.hasClass("k-disabled")) {
+                            Array.prototype.push.call(inputs, firstFileInput[0]);
+                        }
+                    }
+                });
+
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
                     if (!this.validateInput(inputs.eq(idx))) {
                         invalid = true;
@@ -463,10 +490,10 @@ export const __meta__ = {
 
             input.removeAttr(ARIAINVALID);
 
-            if (input.hasClass("k-hidden") && input.attr("data-role") == "otpinput") {
+            if (input.hasClass("k-hidden") && (input.attr("data-role") == "otpinput" || input.attr("data-role") == "upload")) {
                 widgetInstance = kendo.widgetInstance(input);
             }
-            if (input.hasClass("k-hidden") && input.attr("data-role") != "otpinput") {
+            if (input.hasClass("k-hidden") && input.attr("data-role") == "signature") {
                 widgetInstance = kendo.widgetInstance(input.closest(".k-signature"));
             }
 
@@ -655,9 +682,12 @@ export const __meta__ = {
 
             customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || customMessage || input.attr("title") || "",
+            const closestParentWithFieldName = input.parent().closest("[name='" + fieldName + "']");
+            const target = closestParentWithFieldName.length ? closestParentWithFieldName : input;
+
+            return kendo.format(target.attr(kendo.attr(ruleKey + "-msg")) || target.attr("validationMessage") || nonDefaultMessage || customMessage || target.attr("title") || "",
                 fieldName,
-                input.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
+                target.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
         },
 
         _checkValidity: function(input) {
@@ -703,6 +733,7 @@ export const __meta__ = {
                 containerElement = this._containerElement,
                 inputs = containerElement.find(that._inputSelector);
             let sorted = [];
+            let checkBoxNames = [];
 
             for (let idx = 0, length = inputs.length; idx < length; idx++) {
                 let input = $(inputs[idx]);
@@ -711,10 +742,19 @@ export const __meta__ = {
                     // Add current name if:
                     // - not present so far;
                     // - present but not part of CheckBoxGroup or RadioGroup.
+
                     if (sorted.indexOf(input.attr(NAME)) === -1 ||
                         (input.closest(".k-checkbox-list").length === 0 &&
                         input.closest(".k-radio-list").length === 0)) {
-                            sorted.push(input.attr(NAME));
+                            if (input.parents(CHECKBOXWRAPPER).length) {
+                                checkBoxNames.push(input.attr(NAME));
+                                sorted.push(input.attr(NAME));
+                            }
+                            else {
+                                if (!checkBoxNames.includes(input.attr(NAME))) {
+                                    sorted.push(input.attr(NAME));
+                                }
+                            }
                     }
                 }
             }

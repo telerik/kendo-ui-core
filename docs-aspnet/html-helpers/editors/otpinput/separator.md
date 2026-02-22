@@ -2,6 +2,7 @@
 title: Separator
 page_title: Separator
 description: "Learn how to configure different separators between the items of the Telerik UI OTPInput for {{ site.framework }} component."
+components: ["otpinput"]
 slug: separator_otpinputhelper
 position: 4
 ---
@@ -37,7 +38,7 @@ The below example demonstrates how to add a separator as a string.
 ```
 {% endif%}
 
-The next example shows how to add a separator in the form of a function handler by using the [`kendo.ui.icon`](/api/javascript/ui/ui/methods/icon) method.
+The next example shows how to add a separator in the form of a function handler by using the [`kendo.ui.icon`](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/icon) method.
 
 ```HtmlHelper
     @(Html.Kendo().OTPInput()

@@ -2,6 +2,7 @@
 title: Notes
 page_title: Notes
 description: "Learn how to configure the notes of a Telerik UI Chart component for {{ site.framework }}."
+components: ["chart"]
 slug: htmlhelpers_charts_notes_aspnetcore
 ---
 
@@ -119,6 +120,5 @@ The template provides access to all information that is associated with the poin
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
 * [Server-Side API of the Chart for {{ site.framework }}](/api/chart)

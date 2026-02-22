@@ -5,9 +5,9 @@ description: "Get started with Kendo UI for jQuery enabling you to export to Exc
 previous_url: /controls/data-management/grid/how-to/excel/detail-grid-export
 slug: howto_exportto_excel_masterand_detail_grid
 tags: grid, export, detail, grids
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -49,9 +49,9 @@ The following example demonstrates how to export a detail Grid to Excel includin
 
 
   var dataSource = new kendo.data.DataSource({
-    type: "odata",
+    type: "odata-v4",
     transport: {
-      read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+      read: "https://demos.telerik.com/service/v2/odata/Orders"
     }
   });
 
@@ -60,9 +60,9 @@ The following example demonstrates how to export a detail Grid to Excel includin
   $("#grid").kendoGrid({
     toolbar: ["excel"],
     dataSource: {
-      type: "odata",
+      type: "odata-v4",
       transport: {
-        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+        read: "https://demos.telerik.com/service/v2/odata/Employees"
       },
       pageSize: 6,
       serverPaging: true
@@ -211,9 +211,9 @@ The following example demonstrates how to export a detail Grid to Excel includin
 
     $("<div/>").appendTo(e.detailCell).kendoGrid({
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/odata/Orders"
         },
         serverPaging: true,
         serverSorting: true,
@@ -255,9 +255,9 @@ The following example demonstrates how to export a detail Grid to Excel includin
   $("#grid").kendoGrid({
     toolbar: ["excel"],
     dataSource: {
-      type: "odata",
+      type: "odata-v4",
       transport: {
-        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+        read: "https://demos.telerik.com/service/v2/odata/Employees"
       },
       pageSize: 6,
       serverPaging: true
@@ -357,9 +357,9 @@ The following example demonstrates how to export a detail Grid to Excel includin
 
     $("<div/>").appendTo(e.detailCell).kendoGrid({
       dataSource: {
-        type: "odata",
+        type: "odata-v4",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/odata/Orders"
         },
         serverPaging: true,
         serverSorting: true,

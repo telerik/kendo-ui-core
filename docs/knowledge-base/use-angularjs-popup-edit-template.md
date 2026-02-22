@@ -5,9 +5,9 @@ description: "Learn how to use the popup editor template of the Kendo UI Grid wi
 previous_url: /controls/data-management/grid/how-to/AngularJS/use-angularjs-popup-edit-template
 slug: howto_use_angularin_popup_editor_templates_grid
 tags: use, angularjs, popup, editor, templates, grid
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -64,7 +64,7 @@ The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-cha
     </div>
 
     <script>
-      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+      var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
       angular.module("KendoDemos", [ "kendo.directives" ])
       .directive("myDirective", function() {
         return {
@@ -82,25 +82,27 @@ The `dataItem` is made dirty through `ng-change` for HTML elements and `k-on-cha
         $scope.mainGridOptions = {
           dataSource: {
             transport: {
-              read:  {
-                url: crudServiceBaseUrl + "/Products",
-                dataType: "jsonp"
-              },
-              update: {
-                url: crudServiceBaseUrl + "/Products/Update",
-                dataType: "jsonp"
-              },
-              destroy: {
-                url: crudServiceBaseUrl + "/Products/Destroy",
-                dataType: "jsonp"
-              },
-              create: {
-                url: crudServiceBaseUrl + "/Products/Create",
-                dataType: "jsonp"
-              },
+               read:  {
+                   url: crudServiceBaseUrl + "/Products"
+               },
+               update: {
+                   url: crudServiceBaseUrl + "/Products/Update",
+                   type: "POST",
+               contentType: "application/json"
+               },
+               destroy: {
+                   url: crudServiceBaseUrl + "/Products/Destroy",
+                   type: "POST",
+               contentType: "application/json"
+               },
+               create: {
+                   url: crudServiceBaseUrl + "/Products/Create",
+                   type: "POST",
+               contentType: "application/json"
+               },
               parameterMap: function(options, operation) {
                 if (operation !== "read" && options.models) {
-                  return {models: kendo.stringify(options.models)};
+                  return kendo.stringify(options.models);
                 }
               }
             },

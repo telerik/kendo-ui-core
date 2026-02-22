@@ -7,6 +7,7 @@ slug: dynamic-forms-from-json-file
 tags: form, dynamic, read, json, file, editors
 ticketid: 1629362
 res_type: kb
+components: ["general"]
 component: form
 ---
 
@@ -31,7 +32,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
 
 1. Create the JSON file with the following structure and save it into the application.
 
-    ```formData.json
+    ```JS formData.json
         [{
             "Id": 16014,
             "Properties": [
@@ -71,7 +72,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
 1. Create the following Models:
     * <b>FormViewModel</b>—The Model that defines the properties and structure of the JSON data.
 
-        ```FormViewModel
+        ```C# FormViewModel
             public class FormViewModel
             {
                 public int Id { get; set; } // The unique Form Id.
@@ -80,7 +81,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
         ```
     * <b>FormItems</b>—The Model that represents the Form item.
 
-        ```FormItems
+        ```C# FormItems
             public class FormItems
             {
                 public string Property { get; set; } // The name of the property that will bind to each Form item.
@@ -89,7 +90,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
         ```
     * <b>UserViewModel</b>—The Model to which each Form will bind.
 
-        ```UserViewModel
+        ```C# UserViewModel
             public class UserViewModel
             {
                 public string Name { get; set; }
@@ -101,7 +102,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
 
 1. Use the [`JsonConvert.DeserializeObject<T>()`](https://www.newtonsoft.com/json/help/html/Overload_Newtonsoft_Json_JsonConvert_DeserializeObject.htm) method to convert the JSON content from the file into a `List<FormViewModel>` objects.
 
-    ```HomeController.cs
+    ```C# HomeController.cs
         using Newtonsoft.Json;
 
         public ActionResult Index()
@@ -121,7 +122,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
 
 1. Access the Model collection in the View and loop through each <b>FormViewModel</b> record to generate the respective Forms. Within the Form `Items()` configuration, loop through the nested <b>Properties</b> collection and define the editor of each item based on the value of the <b>EditorType</b> property.
 
-    ```Index.cshtml_HtmlHelper
+    ```Razor Index.cshtml_HtmlHelper
         @model List<FormViewModel>
 
         @foreach (var item in Model)
@@ -193,7 +194,7 @@ How can I generate dynamic {{ site.product }} Forms through a JSON file?
         }
     ```
     {% if site.core %}
-    ```Index.cshtml_TagHelper
+    ```Razor Index.cshtml_TagHelper
         @addTagHelper *, Kendo.Mvc
 
         @{

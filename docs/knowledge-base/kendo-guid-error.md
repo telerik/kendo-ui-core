@@ -6,6 +6,7 @@ slug: howto_resolve_getrandomvalues_message
 tags: telerik, kendo, jquery, guid, crypto, getRandomValues, grid, error, defined
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

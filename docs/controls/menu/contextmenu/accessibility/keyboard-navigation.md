@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery ContextMenu Documentation - Keyboard Navigation
 description: "Get started with the jQuery ContextMenu by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["menu"]
 slug: keynav_contextmenu_jquery
 position: 2
 ---
@@ -32,4 +33,4 @@ Kendo UI ContextMenu supports the following keyboard shortcuts:
 
 * [Keyboard Navigation by the ContextMenu (Demo)](https://demos.telerik.com/kendo-ui/menu/context-menu-keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the ContextMenu]({% slug accessibility_kendoui_contextmenu_widget %})
+* [Accessibility in the ContextMenu]({% slug jquery_contextmenu_accessibility %})

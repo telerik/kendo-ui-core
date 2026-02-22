@@ -2,6 +2,7 @@
 title: Export
 page_title: Export
 description: "Explore the export options of the Telerik UI ArcGauge component for {{ site.framework }}."
+components: ["arcgauge"]
 slug: export_arcgaugehelper_aspnetcore
 position: 4
 ---
@@ -20,9 +21,9 @@ The ArcGauge export functionality relies on the [Kendo UI Drawing library](https
 
 The ArcGauge allows you to retrieve the PDF representation of the content through the [`exportPDF()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a remote endpoint or downloaded client-side.
 
-```HtmlHelper        
-    <button class='export-pdf k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export to PDF</button>
-    
+```HtmlHelper
+    <button class='export-pdf k-button'>Export to PDF</button>
+
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)
@@ -33,14 +34,14 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
         $(document).ready( function () {
             $(".export-pdf").on("click", function () {
                 var gauge = $("#gauge").getKendoArcGauge();
-                gauge.exportPDF({ 
-                    paperSize: "auto", 
-                    margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } 
+                gauge.exportPDF({
+                    paperSize: "auto",
+                    margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
                 }).done(function (data) {
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -49,7 +50,7 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
 ```
 {% if site.core %}
 ```TagHelper
-    <button class='export-pdf k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export to PDF</button>
+    <button class='export-pdf k-button'>Export to PDF</button>
 
     <kendo-arcgauge name="gauge" value="65">
         <scale major-unit="20" minor-unit="5">
@@ -60,14 +61,14 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
         $(document).ready( function () {
             $(".export-pdf").on("click", function () {
                 var gauge = $("#gauge").getKendoArcGauge();
-                gauge.exportPDF({ 
-                    paperSize: "auto", 
-                    margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" } 
+                gauge.exportPDF({
+                    paperSize: "auto",
+                    margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
                 }).done(function (data) {
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.pdf",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -80,8 +81,8 @@ The ArcGauge allows you to retrieve the PDF representation of the content throug
 
 You can retrieve the image representation of the ArcGauge content by using the [`exportImage()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded client-side.
 
-```HtmlHelper     
-    <button class='export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as Image</button>
+```HtmlHelper
+    <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
@@ -97,7 +98,7 @@ You can retrieve the image representation of the ArcGauge content by using the [
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -106,8 +107,8 @@ You can retrieve the image representation of the ArcGauge content by using the [
 ```
 {% if site.core %}
 ```TagHelper
-    <button class='export-img k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as Image</button>
-    
+    <button class='export-img k-button'>Export as Image</button>
+
     <kendo-arcgauge name="gauge" value="65">
         <scale major-unit="20" minor-unit="5">
         </scale>
@@ -121,7 +122,7 @@ You can retrieve the image representation of the ArcGauge content by using the [
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.png",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -134,8 +135,8 @@ You can retrieve the image representation of the ArcGauge content by using the [
 
 You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportsvg) to export the ArcGauge as a Scalable Vector Graphics (SVG). The `base64` result can be forwarded to a service or downloaded on the client.
 
-```HtmlHelper        
-    <button class='export-svg k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as SVG</button>
+```HtmlHelper
+    <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
@@ -151,7 +152,7 @@ You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/jav
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });
@@ -160,8 +161,8 @@ You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/jav
 ```
 {% if site.core %}
 ```TagHelper
-    <button class='export-svg k-button k-button-md k-rounded-md k-button-solid k-button-solid-base'>Export as SVG</button>
-    
+    <button class='export-svg k-button'>Export as SVG</button>
+
     <kendo-arcgauge name="gauge" value="65">
         <scale major-unit="20" minor-unit="5">
         </scale>
@@ -175,7 +176,7 @@ You can use the [`exportSVG()` method](https://docs.telerik.com/kendo-ui/api/jav
                     kendo.saveAs({
                         dataURI: data,
                         fileName: "chart.svg",
-                        proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
+                        proxyURL: "https://demos.telerik.com/service/v2/core/export"
                     });
                 });
             });

@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Appearance
 description: "Learn about the rendering and appearance options of the Telerik UI MaskedTextBox for {{ site.framework }}."
+components: ["maskedtextbox"]
 slug: appearance_maskedtextbox
 position: 2
 ---
@@ -29,7 +30,6 @@ The following values are available for the `Size` option:
 - `Small`—small size (applies the `k-input-sm` class to the wrapping span element)
 - `Medium`—medium size (applies the `k-input-md` class to the wrapping span element)
 - `Large`—large size (applies the `k-input-lg` class to the wrapping span element)
-- `None`—unset.
 
 The following example demonstrates how to set `Size` in the declaration of the MaskedTextBox:
 
@@ -47,12 +47,9 @@ The following example demonstrates how to set `Size` in the declaration of the M
  ```
 {% endif %}
 
-The default size value is `Medium`.
+> When not explicitly set, the applied theme controls the default size.
 
-```html
-<span class="k-maskedtextbox k-input k-input-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### Rounded
 
@@ -64,7 +61,6 @@ The following values are available for the `Rounded` option:
 - `Medium`—medium border radius (applies the `k-rounded-md` class to the wrapping span element)
 - `Large`—large border radius (applies the `k-rounded-lg` class to the wrapping span element)
 - `Full`—largest border radius (applies the `k-rounded-full` class to the wrapping span element)
-- `None`—unset.
 
 The following example demonstrates how to set `Rounded` in the declaration of the MaskedTextBox:
 
@@ -82,12 +78,9 @@ The following example demonstrates how to set `Rounded` in the declaration of th
  ```
 {% endif %}
 
-The default rounded value is `Medium`.
+> When not explicitly set, the applied theme controls the default border radius.
 
-```html
-<span class="k-maskedtextbox k-input k-rounded-md">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 ### FillMode
 
@@ -98,10 +91,9 @@ The following values are available for the `FillMode` option:
 - `Solid`—applies the `k-input-solid` class to the wrapping span element
 - `Flat`—applies the `k-input-flat` class to the wrapping span element
 - `Outline`—applies the `k-input-outline` class to the wrapping span element
-- `None`—unset.
 
 The following example demonstrates how to set `FillMode` in the declaration of the MaskedTextBox:
-    
+
 ```HtmlHelper
   @(Html.Kendo().MaskedTextBox()
     .Name("maskedtextbox")
@@ -116,12 +108,9 @@ The following example demonstrates how to set `FillMode` in the declaration of t
  ```
 {% endif %}
 
-The default fillMode value is `solid`.
+> When not explicitly set, the applied theme controls the default fill mode.
 
-```html
-<span class="k-maskedtextbox k-input k-input-solid">
-</span>
-```
+> The `None` value is deprecated. Use custom CSS instead.
 
 @[template](/_contentTemplates/components-rendering-section.md#components-rendering-section)
 

@@ -6,6 +6,7 @@ page_title: Persist the State of the Kendo UI Grid alongside the Function Handle
 slug: grid-persist-state-with-functions
 tags: kendoui, jquery, data, grid, persist, state, save, options, restore, function, functions, handler, handlers
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -43,9 +44,9 @@ To achieve the desired scenario, implement a custom JSON [`reviver`](https://dev
     $(document).ready(function () {
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
+                type: "odata-v4",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    read: "https://demos.telerik.com/service/v2/odata/Orders"
                 },
                 schema: {
                     model: {

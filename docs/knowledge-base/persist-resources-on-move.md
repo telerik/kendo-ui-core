@@ -5,9 +5,9 @@ description: "Learn how to persist resource values on a move event in a Kendo UI
 previous_url: /controls/scheduling/scheduler/how-to/persist-resources-on-move, /controls/scheduling/scheduler/how-to/binding/persist-resources-on-move
 slug: howto_persistresourcevalues_onamoveevent_scheduler
 tags: telerik, kendo, jquery, scheduler, persist, resource, values, on, move 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

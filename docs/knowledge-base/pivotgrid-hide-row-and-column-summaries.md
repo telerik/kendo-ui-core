@@ -7,6 +7,7 @@ slug: pivotgrid-hide-row-and-column-summaries
 tags: pivot, pivotgrid, hide, summary, column, row, databound, remove, footer, last column, last row
 ticketid: 1413666
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -64,9 +65,8 @@ Meanwhile, the easiest way to accomplish the desired behaviour would be to:
             columnWidth: 120,
             height: 570,
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                read: "https://demos.telerik.com/service/v2/core/Customers"
               },
               schema: {
                 cube: {

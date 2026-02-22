@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery AIPrompt Documentation - Keyboard Navigation
 description: "Get started with the jQuery AIPrompt by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["aiprompt"]
 slug: keynav_aiprompt_jquery
 position: 2
 ---
@@ -26,4 +27,4 @@ For a complete example, refer to the [demo on keyboard navigation of the AIPromp
 
 * [Keyboard Navigation by the AIPrompt (Demo)](https://demos.telerik.com/kendo-ui/aiprompt/keyboard-navigation)
 * [Keyboard Support in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %}#keyboard-navigation)
-* [Accessibility in the AIPrompt]({% slug accessibility_kendoui_aiprompt_component %})
+* [Accessibility in the AIPrompt]({% slug jquery_aiprompt_accessibility %})

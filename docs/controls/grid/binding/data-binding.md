@@ -2,6 +2,7 @@
 title: Remote Data
 page_title: jQuery Grid Documentation - Remote Data
 description: "Get started with the jQuery Grid by Kendo UI featuring a built-in DataSource which allows you to bind the Grid to remote data."
+components: ["grid"]
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
 position: 3
@@ -50,41 +51,41 @@ The following example demonstrates how to implement the suggested approach. In t
 * The `data` functions as the JSON element that will be repeated&mdash;based on this element, Kendo UI binds each row in the Grid to an item in this element. The server returns data as an `items` array so the repeating item is `"items"`.
 * The `model` describes the structure of the data. By using it, you can specify the data type of each field in the data for proper handling as well as, when needed, explicitly state which is the unique id field.
 
-      ```dojo
-          <div id="grid">
-          </div>
+    ```dojo
+    <div id="grid">
+    </div>
 
-          <script>
-            $(function() {
-              $("#grid").kendoGrid({
-                dataSource: {   
-                  transport: {   
-                    read: {
-                      url: "https://api.flickr.com/services/feeds/photos_public.gne",
-                      data: {
-                        tags: "nature",
-                        format: "json"
-                      },
-                      dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-                      jsonp: "jsoncallback",
-                    }
-                  },
-                  schema: {
-                    data: "items",
-                    model: {
-                      fields: {
-                        published: {type: "date"}
-                      }
-                    }
-                  }
+    <script>
+      $(function() {
+        $("#grid").kendoGrid({
+          dataSource: {   
+            transport: {   
+              read: {
+                url: "https://api.flickr.com/services/feeds/photos_public.gne",
+                data: {
+                  tags: "nature",
+                  format: "json"
                 },
-                height: 500,
-                scrollable: true,
-                selectable: true
-              });
-            });
-          </script>   
-      ```
+                dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                jsonp: "jsoncallback",
+              }
+            },
+            schema: {
+              data: "items",
+              model: {
+                fields: {
+                  published: {type: "date"}
+                }
+              }
+            }
+          },
+          height: 500,
+          scrollable: true,
+          selectable: true
+        });
+      });
+    </script>   
+    ```
 
 ### Adding the Data
 
@@ -305,7 +306,6 @@ Check the `skeleton` loading type in action in the live demo below:
 ## See Also
 
 * [Remote Data Binding of the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/remote-data-binding)
-* [Binding the Grid to Kinvey Backend Services (Demo)](https://demos.telerik.com/kendo-ui/grid/kinvey)
 * [Binding the Grid to GraphQL Services (Demo)](https://demos.telerik.com/kendo-ui/grid/graphql)
 * [Binding the Grid to SignalR (Demo)](https://demos.telerik.com/kendo-ui/grid/signalr)
 * [Binding the Grid over MVVM (Demo)](https://demos.telerik.com/kendo-ui/grid/mvvm)

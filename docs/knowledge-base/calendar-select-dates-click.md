@@ -6,7 +6,7 @@ type: how-to
 slug: calendar-select-dates-click
 tags: kendo, ui, calendar, select, range, dates, multiple, click, mouse, only, control, ctrl
 res_type: kb
-component: calendar
+components: ["calendar"]
 ---
 
 ## Environment

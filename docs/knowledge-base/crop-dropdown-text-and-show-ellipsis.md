@@ -7,7 +7,7 @@ slug: crop-dropdown-text-and-show-ellipsis
 tags: crop, dropdownlist, dropdown, ellipsis, overflow
 ticketid: 1084518
 res_type: kb
-component: dropdownlist
+components: ["dropdownlist"]
 ---
 
 ## Environment
@@ -60,8 +60,7 @@ Use the `white-space`, `overflow`, and `text-overflow` CSS properties.
           dataSource: {
             transport: {
               read: {
-                dataType: "jsonp",
-                url: "https://demos.telerik.com/kendo-ui/service/Products",
+                url: "https://demos.telerik.com/service/v2/core/Products",
               }
             }
           }

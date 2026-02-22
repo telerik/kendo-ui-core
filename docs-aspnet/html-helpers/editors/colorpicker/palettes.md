@@ -2,6 +2,7 @@
 title: Palettes
 page_title: Palettes
 description: "Learn more about the color palettes of the Telerik UI for {{ site.framework }} ColorPicker."
+components: ["colorpicker"]
 slug: palettes_colorpicker
 position: 6
 ---
@@ -10,7 +11,7 @@ position: 6
 
 The ColorPicker supports color palettes that are displayed in the `Palette` view.
 
-The default palette consists of 20 basic colors. You can specify the desired collection of colors through the [`Palette()`](/api/kendo.mvc.ui.fluent/colorpickerbuilder#palettesystemcollectionsgenericienumerable) option.
+The default palette consists of 20 basic colors. You can specify the desired collection of colors through the `Palette()` option.
 
 The example below demonstrates how to define a color palette that will be displayed in the `Palette` view.
 

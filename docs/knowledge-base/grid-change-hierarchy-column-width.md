@@ -7,6 +7,7 @@ slug: grid-change-hierarchy-column-width
 tags: grid, hierarchy, column width, change
 ticketid: 1149333
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

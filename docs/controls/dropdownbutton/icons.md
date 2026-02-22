@@ -2,6 +2,7 @@
 title: Icons
 page_title: jQuery DropDownButton Documentation - Icons
 description: "Get started with the jQuery DropDownButton by Kendo UI and add background, image, or font icons to enhance the visualization of the component."
+components: ["dropdownbutton"]
 slug: icons_kendoui_dropdownbutton_widget
 position: 4
 ---
@@ -26,7 +27,7 @@ To visually enhance the DropDownButton, use any of the following approaches:
 Background icons are applied through the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The DropDownButton can either:
 * Automatically render the `span` element.
 * Use an existing `span` element&mdash;Possible only if the element has a `k-sprite` CSS class or a `k-icon` CSS class (if you use the `icon` property).
-The difference between the `icon` and `spriteCssClass` properties is that `icon` is intended for use with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [demo on using icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
+The difference between the `icon` and `spriteCssClass` properties is that `icon` is intended for use with the built-in Kendo UI icons which are part of the theme sprite. For a list of the available icon names, refer to the [Telerik and Kendo UI Design System Icons List](https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/).
 
 The following example demonstrates how to use icons in the DropDownButton component:
 
@@ -44,26 +45,26 @@ The following example demonstrates how to use icons in the DropDownButton compon
 
 The `icon` configuration in the previous example will produce the following HTML output:
 
-	```html
-    <button type="button" id="dropDownButton" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" aria-label="Plus dropdownbutton">
-        <span class="k-icon k-i-plus k-button-icon"></span>
-        <span class="k-button-text">Plus</span>
-    </button>
-    ```
+```html
+<button type="button" id="dropDownButton" data-role="dropdownbutton" class="k-menu-button k-button" aria-label="Plus dropdownbutton">
+    <span class="k-icon k-i-plus k-button-icon"></span>
+    <span class="k-button-text">Plus</span>
+</button>
+```
 
 The following example demonstrates how to apply the `spriteCssClass`:
 
-	```
-    <button type="button" id="dropDownButton">Plus</button>
+```
+<button type="button" id="dropDownButton">Plus</button>
 
-	<script>
-	$(function(){
-		$("#dropDownButton").kendoDropDownButton({
-			spriteCssClass: "myPlusIcon"
-		});
+<script>
+$(function(){
+	$("#dropDownButton").kendoDropDownButton({
+		spriteCssClass: "myPlusIcon"
 	});
-	</script>
-    ```
+});
+</script>
+```
 
 Technically, you can use the `spriteCssClass` to achieve the same result as `icon`. However, `icon` avoids the need to set two CSS classes at the same time and provides a certain level of abstraction.
 

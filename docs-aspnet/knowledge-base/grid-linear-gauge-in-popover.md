@@ -6,6 +6,7 @@ page_title: Display a LinearGauge in a Popover When Click on a Grid Cell
 slug: grid-linear-gauge-in-popover
 tags: grid, linear, gauge, popover
 res_type: kb
+components: ["general"]
 ticketid: 1571483
 component: grid, linearGauge, popover
 ---
@@ -33,7 +34,7 @@ How can I display a [Popover](https://docs.telerik.com/{{ site.platform }}/html-
 
 1. Add a custom class to the Grid columns that will display the LinearGauge when a specified cell is clicked.
 
-    ```
+    ```Razor
         columns.Bound(p => p.Freight).HtmlAttributes(new { @class = "lGaugeCol"});
     ```
 
@@ -55,7 +56,7 @@ How can I display a [Popover](https://docs.telerik.com/{{ site.platform }}/html-
 
 1. Pass the header and the body of the Popover by using JavaScript functions.
 
-    ```
+    ```JS
         <script>
             var clickedDataItem;
             function getHeader(e){
@@ -75,7 +76,7 @@ How can I display a [Popover](https://docs.telerik.com/{{ site.platform }}/html-
 
 1. Initialize the [LinearGauge](https://demos.telerik.com/{{ site.platform }}/linear-gauge) in the `Show` event handler of the Popover.
 
-    ```
+    ```JS
         function onShow(e){
             createGauge(clickedDataItem.Freight); //Pass the value of the Model property to the createGauge() function.
         }
@@ -97,7 +98,7 @@ How can I display a [Popover](https://docs.telerik.com/{{ site.platform }}/html-
 
 1. Destroy the LinearGauge in the `Hide` event handler of the Popover.
 
-    ```
+    ```JS
         function onHide(e) {
             var gauge = $("#gauge").data("kendoLinearGauge");
             gauge.destroy();

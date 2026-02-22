@@ -5,9 +5,9 @@ description: "Learn how to prevent deleting a selected item on pressing the Back
 previous_url: /controls/editors/multiselect/how-to/prevent-removing-selected-items-on-backspace, /controls/editors/multiselect/how-to/selection/prevent-removing-selected-items-on-backspace
 slug: howto_prevent_deleting_selected_items_on_backspace_multiselect
 tags: telerik, kendo, jquery, multiselect, prevent, deletion, of, selected, items, on, backspace
-component: multiselect
 type: how-to
 res_type: kb
+components: ["multiselect"]
 ---
 
 ## Environment

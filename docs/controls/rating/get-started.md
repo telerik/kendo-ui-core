@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Rating Documentation - Getting Started with the Rating
 description: "Get started with the jQuery Rating by Kendo UI and learn how to create and initialize the component."
+components: ["rating"]
 slug: getting_started_kendoui_rating_widget
 position: 1
 ---
@@ -88,8 +89,4 @@ You can set the value of the Rating upon initialization.
 * [JavaScript API Reference of the jQuery Rating](/api/javascript/ui/rating)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

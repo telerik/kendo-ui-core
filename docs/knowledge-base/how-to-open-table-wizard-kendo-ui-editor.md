@@ -6,6 +6,7 @@ page_title: How to Open the Table Wizard Dialog in Kendo UI for jQuery Editor
 slug: how-to-open-table-wizard-kendo-ui-editor
 tags: kendo-ui, editor, tablewizard, exec-command
 res_type: kb
+components: ["editor"]
 ticketid: 1678934
 ---
 

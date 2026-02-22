@@ -2,6 +2,7 @@
 title: Getting Started with Remote Services
 page_title: Getting Started with Remote Data Binding - Kendo UI for jQuery DataSource
 description: "Get started with the jQuery DataSource component by Kendo UI and learn how to bind and configure remote data in your JavaScript widgets."
+components: ["datasource"]
 slug: getting_started_kendoui_remote_data_binding
 position: 3
 ---
@@ -18,9 +19,8 @@ After the completion of this guide, you will be able to sort, filter, and log th
 	<div id="container"></div>
     <script>
       var dataSource = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
           model: {
@@ -55,9 +55,8 @@ The example below demonstrates how to use the [`transport.read`](/api/javascript
 
 ```
     var dataSource = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         }
       });
 ```
@@ -68,9 +67,8 @@ Configuring the schema is optional. When the response is more complex than a pla
 
 ```
     var dataSource = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
             model: {
@@ -117,9 +115,8 @@ The following example demonstrates how to enable the client-side sorting of the 
 
 ```
 	var dataSource = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
           model: {
@@ -143,9 +140,8 @@ The example below demonstrates how to enable the client-side filtering of the Da
 
 ```
 	var dataSource = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
           model: {
@@ -175,8 +171,3 @@ This is it! Now you are ready to dive more deeply into the DataSource component 
 * [JavaScript API Reference of the DataSource](/api/javascript/data/datasource)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>

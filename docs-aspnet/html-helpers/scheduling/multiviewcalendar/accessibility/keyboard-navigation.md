@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Use the Telerik UI MultiViewCalendar keyboard navigation."
+components: ["multiviewcalendar"]
 previous_url: /helpers/scheduling/multiviewcalendar/accessibility/keyboard-navigation
 slug: keyboard_navigation_multiviewcalendar_htmlhelper_aspnetcore
 position: 2

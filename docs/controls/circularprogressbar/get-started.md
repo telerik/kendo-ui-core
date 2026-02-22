@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery CircularProgressBar Documentation - Getting Started with the CircularProgressBar
 description: "Get started with the jQuery CircularProgressBar by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["circularprogressbar"]
 slug: getting_started_kendoui_circularprogressbar_widget
 position: 2
 ---
@@ -175,8 +176,4 @@ You can specify how the center of the CircularProgressBar will appear using a te
 * [JavaScript API Reference of the CircularProgressBar](/api/javascript/ui/circularprogressbar)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

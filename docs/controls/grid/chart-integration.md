@@ -2,8 +2,9 @@
 title: Chart Integration
 page_title: jQuery Grid Documentation - Chart Integration
 description: "Get started with the jQuery Grid by Kendo UI and learn how to quickly create the desired chart using the Grid datae."
+components: ["grid"]
 slug: chart_integration_kendoui_grid
-position: 18
+position: 19
 ---
 
 # Chart Integration
@@ -35,9 +36,9 @@ In the example below you can select multiple cells using `Ctrl` + `click` and th
     <script>
       $(document).ready(function () {
         const dataSource = new kendo.data.DataSource({
-          type: "odata",
+          type: "odata-v4",
           transport: {
-            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+            read: "https://demos.telerik.com/service/v2/odata/Orders"
           },
           schema: {
             model: {

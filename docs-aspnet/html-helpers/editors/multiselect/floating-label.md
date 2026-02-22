@@ -2,6 +2,7 @@
 title: Floating Label
 page_title: Floating Label
 description: "Learn how to initialize a floating label for the Telerik UI MultiSelect component for {{ site.framework }}."
+components: ["multiselect"]
 slug: htmlhelpers_multiselect_floatinglabel_aspnetcore
 position: 7
 ---

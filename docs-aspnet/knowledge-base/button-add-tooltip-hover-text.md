@@ -7,6 +7,7 @@ slug: button-add-tooltip-hover-text
 tags: button, add, tooltip, hover, text
 ticketid: 1413806
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment

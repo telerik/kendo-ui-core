@@ -7,7 +7,7 @@ slug: troubleshooting_diagram_widget
 tags: telerik, progress, kendoui, diagram, visuals, graphics, not, rendering, ie, internet, explorer
 type: troubleshooting
 res_type: kb
-component: diagram
+components: ["diagram"]
 ---
 
 ## Environment

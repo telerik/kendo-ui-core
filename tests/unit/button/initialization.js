@@ -23,13 +23,13 @@ describe("initialization", function() {
         assert.isOk(button.data("kendoButton").element.hasClass("k-button"));
     });
 
-    it("Button element gets all default classes", function() {
+    it("Button element does not get default styling classes when options are undefined", function() {
         button = getButton().kendoButton();
 
-        assert.isOk(button.hasClass("k-button-md"));
-        assert.isOk(button.hasClass("k-rounded-md"));
-        assert.isOk(button.hasClass("k-button-solid"));
-        assert.isOk(button.hasClass("k-button-solid-base"));
+        assert.isNotOk(button.hasClass("k-button-md"));
+        assert.isNotOk(button.hasClass("k-rounded-md"));
+        assert.isNotOk(button.hasClass("k-button-solid"));
+        assert.isNotOk(button.hasClass("k-button-solid-base"));
     });
 
     it("Button element applies classes specified in styles options", function() {
@@ -43,7 +43,7 @@ describe("initialization", function() {
         assert.isOk(button.hasClass("k-button-lg"));
         assert.isOk(button.hasClass("k-rounded-full"));
         assert.isOk(button.hasClass("k-button-link"));
-        assert.isOk(button.hasClass("k-button-link-primary"));
+        assert.isOk(button.hasClass("k-button-primary"));
     });
 
     it("Button element applies fillMode clear classes specified in styles options", function() {
@@ -57,7 +57,7 @@ describe("initialization", function() {
         assert.isOk(button.hasClass("k-button-lg"));
         assert.isOk(button.hasClass("k-rounded-full"));
         assert.isOk(button.hasClass("k-button-clear"));
-        assert.isOk(button.hasClass("k-button-clear-primary"));
+        assert.isOk(button.hasClass("k-button-primary"));
     });
 
     it("Button has inner element with class k-button-text", function() {

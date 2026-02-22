@@ -2,7 +2,8 @@
 title: Overview
 page_title: FloatingActionButton Documentation | FloatingActionButton Accessibility
 description: "Get started with the {{ site.product }} FloatingActionButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: htmlhelpers_accessibility_floatingactionbutton_aspnetcore
+components: ["floatingactionbutton"]
+slug: htmlhelpers_floatingactionbutton_accessibility
 position: 1
 ---
 
@@ -23,7 +24,7 @@ The FloatingActionButton is compliant with the [Web Content Accessibility Guidel
 This section lists the selectors, attributes, and behavior patterns supported by the component and its composite elements, if any.
 
 
-The FloatingActionButton features two distinct modes of operation: [button-only](#button-only-mode) and [button-with-menu](#button-with-menu-mode).
+The FloatingActionButton features two distinct modes of operation: button-only and button-with-menu.
 
 ### Button-Only Mode
 
@@ -38,7 +39,7 @@ The FloatingActionButton features two distinct modes of operation: [button-only]
 
 In the button-with-menu mode, the FloatingActionButton must implement the specification for the DropDownButton component.
 
-[DropDownButton accessibility specification]({% slug accessibility_aspnetcore_dropdownbutton %})
+[DropDownButton accessibility specification]({% slug htmlhelpers_dropdownbutton_accessibility %})
 
 ## Resources
 

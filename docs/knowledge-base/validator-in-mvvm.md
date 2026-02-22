@@ -5,9 +5,9 @@ description: "Learn how to fully integrate the Kendo UI Validator in an MVVM sce
 slug: howto_addvalidatormvvm_validator
 previous_url: /controls/editors/validator/how-to/validator-in-mvvm
 tags: telerik, kendo, jquery, validator, add, to, mvvm
-component: validator
 type: how-to
 res_type: kb
+components: ["validator"]
 ---
 
 ## Environment

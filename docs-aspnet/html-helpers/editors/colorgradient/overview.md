@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ColorGradient component for {{ site.framework }}."
+components: ["colorgradient"]
 slug: htmlhelpers_overview_colorgradient
 position: 0
 ---
@@ -70,7 +71,7 @@ The following example shows a basic implementation of the control.
 
 * [Formats]({% slug htmlhelpers_rgb_hex_formats_colorgradient %})—The ColorGradient supports both RGB and HEX input formats. 
 * [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorgradient %})—You can use the Color Contrast Tool that is built into the ColorGradient to check the color contrast ratio between two colors.
-* [Accessibility]({% slug htmlhelpers_accessibility_colorgradient %})—The ColorGradient is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
+* [Accessibility]({% slug htmlhelpers_colorgradient_accessibility %})—The ColorGradient is accessible by screen readers and provides WAI-ARIA, Section 508, WCAG 2.2, and keyboard support.
 
 ## Next Steps
 

@@ -8,7 +8,7 @@ previous_url: /knowledge-base/how-to-disable-the-grid-command-buttons
 tags: grid, command, disable, buttons
 ticketid: 1133355
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

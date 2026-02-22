@@ -29,10 +29,11 @@ export const __meta__ = {
         KCLOSEICONSELECTOR = `.k-notification-actions .k-icon`,
         KHIDING = "k-hiding",
         INFO = "info",
+        BASE = "base",
         SUCCESS = "success",
         WARNING = "warning",
         ERROR = "error",
-        TYPEICONS = { [INFO]: "info-circle", [ERROR]: "x-outline", [WARNING]: "exclamation-circle", [SUCCESS]: "check-outline" },
+        TYPEICONS = { [BASE]: "", [INFO]: "info-circle", [ERROR]: "x-outline", [WARNING]: "exclamation-circle", [SUCCESS]: "check-outline" },
         TOP = "top",
         LEFT = "left",
         BOTTOM = "bottom",
@@ -42,7 +43,7 @@ export const __meta__ = {
         WRAPPER = '<div role="alert" aria-live="polite" class="k-notification"></div>',
         GET_TEMPLATE_FUNC = (encodeContent) =>
             ({ typeIcon, content, closeButton }) =>
-                kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) +
+                (typeIcon && (TYPEICONS[encode(typeIcon)] || encode(typeIcon)) ? kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) : '') +
                 `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>`,
         TEMPLATE = GET_TEMPLATE_FUNC(false),
         SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true),
@@ -212,12 +213,22 @@ export const __meta__ = {
             }
         },
 
-        _showPopup: function(wrapper, options) {
+        _showPopup: function(wrapper, options, hasCloseButton) {
             var that = this,
                 autoHideAfter = options.autoHideAfter,
                 x = options.position.left,
                 y = options.position.top,
-                popup, openPopup;
+                popup, openPopup,
+                positionRight = options.position.right;
+
+            // Adjust position.right based on per-notification closeButton
+            if (hasCloseButton && positionRight === 20) {
+                // Close button present but position not adjusted
+                positionRight = 40;
+            } else if (!hasCloseButton && positionRight === 40 && options.button) {
+                // Close button not present but position was adjusted for global button
+                positionRight = 20;
+            }
 
             openPopup = $("." + that._guid + ":not(." + KHIDING + ")").last();
 
@@ -250,7 +261,7 @@ export const __meta__ = {
                 popup.open();
             } else {
                 if (x === null) {
-                    x = $(window).width() - wrapper.outerWidth() - options.position.right;
+                    x = $(window).width() - wrapper.outerWidth() - positionRight;
                 }
 
                 if (y === null) {
@@ -261,7 +272,7 @@ export const __meta__ = {
             }
             wrapper.removeClass("k-popup");
 
-            popup.wrapper.addClass(that._guid).css(extend({ margin: 0,zIndex: 10050 }, that._popupPaddings));
+            popup.wrapper.addClass(that._guid).css(extend({ margin: 0,zIndex: 12000 }, that._popupPaddings));
 
             if (options.position.pinned) {
                 popup.wrapper.css("position", "fixed");
@@ -368,14 +379,18 @@ export const __meta__ = {
         },
 
         show: function(content, type, safe) {
-            var that = this,
+            let that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
                 contentId = kendo.guid(),
+                typeClass = KNOTIFICATION + "-" + type,
+                typeIcon = type || "",
                 args, defaultArgs;
 
+
             if (!type) {
-                type = INFO;
+                type = BASE;
+                typeClass = "";
             }
 
             wrapper.attr("aria-label", type);
@@ -386,7 +401,7 @@ export const __meta__ = {
                     content = content();
                 }
 
-                defaultArgs = { typeIcon: type, content: "", closeButton: options.button };
+                defaultArgs = { typeIcon: typeIcon, content: "", closeButton: options.button };
 
                 if ($.isPlainObject(content)) {
                     args = extend(defaultArgs, content);
@@ -395,8 +410,8 @@ export const __meta__ = {
                 }
 
                 wrapper
-                    .addClass(KNOTIFICATION + "-" + type)
-                    .toggleClass(KNOTIFICATION + "-closable", options.button)
+                    .addClass(typeClass)
+                    .toggleClass(KNOTIFICATION + "-closable", args.closeButton)
                     .attr({
                         "data-role": "alert",
                         title: options.title
@@ -404,7 +419,7 @@ export const __meta__ = {
                     .css({ width: options.width, height: options.height })
                     .append(that._getCompiled(type, safe)(args));
 
-                if (that.options.button) {
+                if (args.closeButton) {
                     wrapper.append(that.addActions("close"));
                 }
 
@@ -414,7 +429,7 @@ export const __meta__ = {
                 if ($(options.appendTo)[0]) {
                     that._showStatic(wrapper, options);
                 } else {
-                    that._showPopup(wrapper, options);
+                    that._showPopup(wrapper, options, args.closeButton);
                 }
 
                 that.trigger(SHOW, { element: wrapper });

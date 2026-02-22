@@ -2,6 +2,7 @@
 title: Notes
 page_title: jQuery Chart Documentation - Notes
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its notes."
+components: ["chart"]
 previous_url: /controls/charts/notes
 slug: chartnotes_charts_widget
 ---

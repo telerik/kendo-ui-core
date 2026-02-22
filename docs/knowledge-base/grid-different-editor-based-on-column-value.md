@@ -6,7 +6,7 @@ page_title: Use Different Editor Based on the Column Value - Kendo UI for jQuery
 slug: grid-different-editor-based-on-column-value
 tags: grid, different, condition, editor, value, data, type, dynamic
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -147,9 +147,8 @@ How can I use a different editor based on the column value in a Grid?
               dataTextField: "CategoryName",
               dataValueField: "CategoryName",
               dataSource: {
-                type: "odata",
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                  read: "https://demos.telerik.com/service/v2/core/Categories"
                 }
               },
               change: function (e) {
@@ -170,9 +169,8 @@ How can I use a different editor based on the column value in a Grid?
               dataTextField: "ProductName",
               dataValueField: "ProductName",
               dataSource: {
-                type: "odata",
                 transport: {
-                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                  read: "https://demos.telerik.com/service/v2/core/Products"
                 }
               },
               change: function (e) {

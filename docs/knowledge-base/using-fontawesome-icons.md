@@ -5,9 +5,9 @@ description: "Learn how to include custom FontAwesome icons in the Kendo UI for 
 slug: howto_use_fontawesome_icons_menu
 previous_url: /controls/navigation/menu/how-to/using-fontawesome-icons
 tags: telerik, kendo, jquery, menu, use, fontawesome, icons
-component: menu
 type: how-to
 res_type: kb
+components: ["menu"]
 ---
 
 ## Environment
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I include custom [FontAwesome](http://fortawesome.github.io/Font-Awesome/) icons in the Kendo UI for jQuery Menu?
+How can I include custom [FontAwesome](https://github.com/FortAwesome/Font-Awesome) icons in the Kendo UI for jQuery Menu?
 
 ## Solution
 

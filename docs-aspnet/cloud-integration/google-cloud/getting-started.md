@@ -2,6 +2,7 @@
 title: Google Cloud Account and Project
 page_title: Google Cloud Account and Project
 description: "Start using {{ site.product }} with Google Cloud by creating a Google Cloud account and a project."
+components: ["general"]
 slug: google_cloud_getting_started_aspnetmvc6_aspnetmvc
 position: 1
 ---

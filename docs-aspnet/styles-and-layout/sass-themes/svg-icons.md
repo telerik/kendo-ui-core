@@ -2,6 +2,7 @@
 title: SVG Icons
 page_title: SVG Icons - Sass Themes
 description: "Learn more about what icon fonts are and how to define, implement, and render the available Telerik UI SVG Icons out of the supported list."
+components: ["general"]
 slug: svgicons_core_mvc
 position: 6
 ---
@@ -47,7 +48,7 @@ To configure the default rendered Icons type directly from the server files of t
 {% endif %}
 
 This global configuration will be used by all components that render any elements on the server. To make sure that both client and server use the same global configuration, use the following HTML helper:
-```C#
+```Razor
 @(Html.Kendo().DefaultSettings())
 ```
 
@@ -57,7 +58,7 @@ With the R1 SP1 2023 release, {{ site.product }} introduced a new `kendo.ui.icon
 
 The following example shows how to create an SVG icon by extending an existing HTML element.
 
-```dojo
+```JS dojo
 <span id="icon"></span>
 
 <script>
@@ -67,7 +68,7 @@ The following example shows how to create an SVG icon by extending an existing H
 
 The following example shows how to create an SVG icon without an element.
 
-```dojo
+```JS dojo
 <script>
     var icon = kendo.ui.icon('camera');
     $('body').append(icon);
@@ -76,7 +77,7 @@ The following example shows how to create an SVG icon without an element.
 
 The following example shows how to create a specific SVG icon.
 
-```dojo
+```JS dojo
 <script>
     var icon = kendo.ui.icon({ icon: 'camera', type: 'svg' });
     $('body').append(icon);
@@ -85,7 +86,7 @@ The following example shows how to create a specific SVG icon.
 
 The following example shows how to set a custom SVG icon.
 
- ```dojo
+ ```JS dojo
 <script>
     var icon = kendo.ui.icon({
         type: 'svg', // if default is svg you can omit this option
@@ -100,7 +101,7 @@ The following example shows how to set a custom SVG icon.
 
 The following example shows how to set a custom SVG icon renderer.
 
- ```dojo
+ ```JS dojo
 <script>
     var icon = kendo.ui.icon({
         type: (element, options) => `<span class="my-custom-icon"><span class="k-icon k-i-${options.icon}"></span></span>`
@@ -116,7 +117,7 @@ Depending on your preference, you can still use Font Icons either through the `i
 
 The following example shows how to configure a specific Font icon.
 
-```dojo
+```JS dojo
 <script>
     var icon = kendo.ui.icon({ icon: 'camera', type: 'font' });
     $('body').append(icon);
@@ -125,7 +126,7 @@ The following example shows how to configure a specific Font icon.
 
 The following example shows how to globally configure Font icons.
 
-```dojo
+```JS dojo
 <script>
     kendo.setDefaults('iconType', 'font');
     var icon = kendo.ui.icon({ icon: 'camera' });

@@ -5,9 +5,9 @@ description: "Learn how to get a next occurrence of the Kendo UI SchedulerEvent 
 previous_url: /controls/scheduling/scheduler/how-to/get-next-occurance, /controls/scheduling/scheduler/how-to/get-next-occurrence, /controls/scheduling/scheduler/how-to/various/get-next-occurrence
 slug: howto_getthe_next_occurance_scheduler
 tags: telerik, kendo, jquery, scheduler, get, the, next, event, occurrence 
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment

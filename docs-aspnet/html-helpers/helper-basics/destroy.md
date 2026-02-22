@@ -2,6 +2,7 @@
 title: Destroying Helpers
 page_title: Destroying Widgets
 description: "Get started with Telerik UI for {{ site.framework }} and learn how to destroy the helpers."
+components: ["general"]
 slug: destroyhelpers_core
 previous_url: /getting-started/helper-basics/destroy 
 position: 6
@@ -30,15 +31,17 @@ You might need to manually destroy helpers in the following possible cases:
 
 The following example demonstrates how to destroy and remove a Grid helper.
 
-	<script>
-		$(document).ready(function () {
-			$("#grid").data("kendoGrid").destroy(); // Get a reference to an existing Grid instance and destroy the Grid.
+```JS
+<script>
+	$(document).ready(function () {
+		$("#grid").data("kendoGrid").destroy(); // Get a reference to an existing Grid instance and destroy the Grid.
 
-			$("#grid").empty(); // Empty the Grid content (inner HTML)
-			// or
-			$("#grid").remove(); // remove all Grid HTML.
-		});
-	</script>
+		$("#grid").empty(); // Empty the Grid content (inner HTML)
+		// or
+		$("#grid").remove(); // remove all Grid HTML.
+	});
+</script>
+```
 
 ## Destroying Helpers Automatically
 

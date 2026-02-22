@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: The {{ site.product }} FlatColorPicker Documentation - Keyboard Navigation
 description: "Get started with the {{ site.product }} FlatColorPicker by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["flatcolorpicker"]
 slug: keyboard_navigation_flatcolorpickerhelper_aspnetcore
 position: 2
 ---
@@ -30,4 +31,4 @@ For a complete example, refer to the [demo on keyboard navigation of the FlatCol
 ## See Also
 
 * [Keyboard Navigation of the FlatColorPicker (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker/keyboard-navigation)
-* [FlatColorPicker Accessibility Overview]({% slug accessibility_flatcolorpickerhelper_aspnetcore %})
+* [FlatColorPicker Accessibility Overview]({% slug htmlhelpers_flatcolorpicker_accessibility %})

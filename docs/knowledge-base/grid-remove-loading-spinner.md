@@ -7,6 +7,7 @@ slug: grid-remove-loading-spinner
 tags: grid, spinner, loading
 ticketid: 1138280
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -38,9 +39,9 @@ How can I remove the loading spinner from the Kendo UI Grid?
         $(document).ready(function() {
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     schema: {
                         model: {

@@ -6,7 +6,7 @@ type: how-to
 slug: calendar-select-range-of-dates
 tags: kendo, ui, calendar, select, range, dates, multiple, between, datepicker
 res_type: kb
-component: calendar
+components: ["calendar"]
 ---
 
 ## Environment

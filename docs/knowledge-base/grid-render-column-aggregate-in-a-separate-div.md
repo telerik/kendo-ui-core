@@ -7,6 +7,7 @@ slug: grid-render-column-aggregate-in-a-separate-div
 tags: grid, aggregates
 ticketid: 1148127
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -40,9 +41,8 @@ To retrieve the aggregate of a column, use the [`aggregates`](https://docs.teler
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                read: "https://demos.telerik.com/service/v2/core/Products"
               },
               schema:{
                 model: {

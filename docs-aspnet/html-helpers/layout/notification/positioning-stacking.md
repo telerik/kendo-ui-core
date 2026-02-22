@@ -2,6 +2,7 @@
 title: Positioning and Stacking
 page_title: Positioning and Stacking
 description: "Learn the basics when working with the Telerik UI Notification component for {{ site.framework }}."
+components: ["notification"]
 previous_url: /helpers/layout/notification/positioning-stacking
 slug: positioning_notificatiomhelper_aspnetmvc
 position: 4

@@ -2,6 +2,7 @@
 title: Integration with Microsoft.Extensions.AI
 page_title: Integration with Microsoft.Extensions.AI
 description: "Learn more about integrating the Telerik UI for {{ site.framework }} components with Microsoft.Extensions.AI"
+components: ["general"]
 slug: integration_microsoft_extensions_ai
 position: 11
 ---
@@ -19,7 +20,7 @@ To integrate the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft
 {% if site.core %}
 `Microsoft.Extensions.AI` provides a simple integration with various models where the configuration slightly differs depending on the model. The example below shows usage of <a href="https://www.nuget.org/packages/Azure.AI.OpenAI" target="_blank">Azure OpenAI</a> and you may <a href="https://devblogs.microsoft.com/dotnet/introducing-microsoft-extensions-ai-preview/#chat" target="_blank">explore some other examples with different models in this post</a>.
 
-```Program.cs
+```C# Program.cs
     // Add services to the container.
 
     // Register the Azure OpenAI client.

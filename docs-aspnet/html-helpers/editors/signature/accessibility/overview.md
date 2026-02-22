@@ -2,7 +2,8 @@
 title: Overview
 page_title: Signature Documentation | Signature Accessibility
 description: "Get started with the {{ site.product }} Signature and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_signature_overview
+components: ["signature"]
+slug: htmlhelpers_signature_accessibility
 position: 1
 ---
 

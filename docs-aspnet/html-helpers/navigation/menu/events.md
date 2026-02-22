@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI Menu component for {{ site.framework }}."
+components: ["menu"]
 slug: events_menu
 position: 7
 ---

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ScrollView for {{ site.framework }}."
+components: ["scrollview"]
 previous_url: /helpers/media/scrollview/overview
 slug: htmlhelpers_scrollview_aspnetcore
 position: 0
@@ -94,8 +95,8 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
          .TemplateId("employee-template")
          .DataSource(d =>
                 d.Custom()
-                  .Type("odata")
-                  .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees")))
+                  .Type("odata-v4")
+                  .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Employees")))
                   .ServerPaging(true)
                   .PageSize(1))
          .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
@@ -118,9 +119,9 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
     <kendo-scrollview name="scrollView" content-height="100%" 
                                         template-id="employee-template" 
                                         style="height:600px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="1" server-paging="true">
+        <datasource custom-type="odata-v4" page-size="1" server-paging="true">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees" />
+                <read url="https://demos.telerik.com/service/v2/odata/Employees" />
             </transport>
         </datasource>
     </kendo-scrollview>
@@ -209,7 +210,7 @@ The following example demonstrates how to fetch data from a Controller action.
 
 If you set the `PageSize` option to a larger value, you will need to use a loop in the template.
 
-```
+```JS
     <script id="scrollview-template" type="text/x-kendo-template">
         # for (var i = 0; i < data.length; i++) { #
             <p style="border: 2px solid blue; color: red;">#= data[i].SomeField #</p>

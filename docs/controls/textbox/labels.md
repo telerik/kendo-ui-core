@@ -2,6 +2,7 @@
 title: Labels
 page_title: jQuery Labels for TextBox Documentation
 description: "Learn how to create and initialize Labels for the TextBox."
+components: ["textbox"]
 slug: labels_textbox
 position: 3
 ---

@@ -2,6 +2,7 @@
 title: Sample Application
 page_title: Sample Demos Application
 description: "Get started with Telerik UI for {{ site.framework }} sample demos application and learn how to run the demos locally."
+components: ["general"]
 slug: sample_application
 position: 8
 ---

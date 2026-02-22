@@ -7,6 +7,7 @@ slug: grid-mvvm-empty-norecords-template
 tags: grid, mvvm, empty, norecords, template
 ticketid: 1123131
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -73,8 +74,7 @@ The following example demonstrates how to implement a custom `noRecords` templat
             },
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/products",
-                dataType: "jsonp"
+                url: "https://demos.telerik.com/service/v2/core/products"
               }
             }
           })

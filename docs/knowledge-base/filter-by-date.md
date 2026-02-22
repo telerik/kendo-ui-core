@@ -5,9 +5,9 @@ description: "Learn how to filter date columns in the Kendo UI Grid for jQuery."
 previous_url: /controls/data-management/grid/how-to/filter-by-date, /controls/data-management/grid/how-to/filtering/filter-by-date
 slug: howto_filter_date_columns_grid
 tags: grid, filter, date, columns
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 
@@ -42,7 +42,7 @@ To achieve this behavior and ignore the exact time when you filter the data:
 The helper field is intended to hold only the date, so that the Grid data is later filtered by it while displaying the original `datetime` field.
 
 To create the helper field:
-* Use the [`dataSource.schema.parse`](/api/javascript/data/datasource/configuration/schema.parse) configuration to create a new field that is intended to hold the date only.
+* Use the [`dataSource.schema.parse`](/api/javascript/data/datasource/configuration/schema#schemaparse) configuration to create a new field that is intended to hold the date only.
 * Use the data-holding field in the [`columns`](/api/javascript/ui/grid/configuration/columns) definition, but provide a [`template`](/api/javascript/ui/grid/configuration/columns.template) that will visualize the initial datetime field.
 
 ```dojo

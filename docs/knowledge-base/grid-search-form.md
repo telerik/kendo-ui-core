@@ -6,8 +6,8 @@ page_title: Search Form for Grid - Kendo UI for jQuery Data Grid
 slug: grid-search-form
 tags: kendoui, kendo, grid, search, panel, form, external, filter, before, load
 res_type: kb
+components: ["grid"]
 ticketid: 1148195
-component: grid
 ---
 
 ## Environment
@@ -62,9 +62,9 @@ The most common way of implementing such functionality is the following:
         var grid = $("#grid").kendoGrid({
           autoBind:false,
           dataSource: {
-            type: "odata",
+            type: "odata-v4",
             transport: {
-              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+              read: "https://demos.telerik.com/service/v2/odata/Orders"
             },
             schema: {
               model: {

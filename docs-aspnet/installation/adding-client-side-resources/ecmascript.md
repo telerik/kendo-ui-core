@@ -2,6 +2,7 @@
 title: ECMAScript Modules
 page_title: ECMAScript Modules
 description: "Get started with {{ site.product }} and learn about the ECMAScript modules provided in the library."
+components: ["general"]
 slug: core_ecmascript_overview
 position: 6
 ---
@@ -82,16 +83,51 @@ You can obtain the ECMAScript modules in any of the following ways:
 
 ## Manually Building the Source Code
 
+> Some bundlers such as legacy versions of Webpack and MVC's ScriptBundler are unable to process newer JavaScript syntax. This is a limitation of the bundlers themselves. We strongly encourage you to migrate towards newer solutions such as `rolldown` that is not only significantly faster but is also up to date with the latest browser standards.
+
 You can manually build the source code of the components by following these steps:
 
 1. Navigate to your [downloads](https://www.telerik.com/account/my-downloads) page.
 1. Open the Kendo UI for jQuery page and scroll down to the **Source Code** section.
 1. Once you have downloaded and extracted the source code, navigate to the `src` folder and open a terminal.
+
 1. Run the following command to install **npm**:
 
   ```javascript
     npm install
   ```
+
+### Versions after February 2026
+
+1. Once the previous operation is complete, run one of the following commands to build the scripts:
+
+  - The following command will build the `esm`, `cjs` and `umd` version of the scripts:
+
+    ```javascript
+      npm run build
+    ```
+
+  - The following command builds a dev(esm) version of the scripts only. You can this to quickly build the source code and debug it if you've made any changes.
+
+    ```javascript
+      npm run build:dev
+    ```
+
+  - The following command is the exact same as the previous one, except it enables a watcher. Any time you make a change to the source code, the build process will be re-triggered automatically.
+
+    ```javascript
+      npm run build:dev:watch
+    ```
+
+  - The follwing command enables you to produce a custom bundle with only the components that you need:
+
+    ```javascript
+      npm run scripts:custom
+    ```
+
+    The process is easy and straightforward. Refer to the `README.md` inside the source bundle for additional information. This command is designed to be a replacement to both the legacy `npx gulp custom -c` AND the custom `download-builder` application.
+
+### Versions prior to February 2026
 
 1. Once the previous operation is complete, run one of the following commands to build the scripts:
 
@@ -118,6 +154,7 @@ You can manually build the source code of the components by following these step
     ```javascript
       npm run scripts:all
     ```
+
 
 ## See Also
 

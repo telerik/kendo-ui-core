@@ -2,6 +2,7 @@
 title: Localization
 page_title: Localization - Kendo UI Globalization
 description: "Learn how to use the Kendo UI localization files in order to change the default messages of widgets."
+components: ["general"]
 previous_url: /framework/localization/overview, /localization
 slug: overview_localization_kendoui
 position: 3
@@ -57,7 +58,7 @@ The following example demonstrates how to create a new localization file. The `k
 
 ### Localizing Widgets That Are Rendered by Server-Side Wrappers
 
-The server-side wrappers (helpers) render some of the markup and the respective messages that are needed for the widgets from the server. Applying the UI localization on the client side may not work as expected. Currently, the ASP.NET MVC wrappers come with localization resource files which work with the default localization mechanism provided by ASP.NET MVC. For more information, refer to the article on [globalization in ASP.NET MVC](/aspnet-mvc/globalization#localized-user-interface).
+The server-side wrappers (helpers) render some of the markup and the respective messages that are needed for the widgets from the server. Applying the UI localization on the client side may not work as expected. Currently, the ASP.NET MVC wrappers come with localization resource files which work with the default localization mechanism provided by ASP.NET MVC. For more information, refer to the article on [globalization in ASP.NET MVC](https://www.telerik.com/aspnet-mvc/documentation/globalization/overview).
 
 ### Changing the Language at Runtime in AngularJS Applications
 
@@ -76,5 +77,5 @@ If you notice any missing messages in the localization files or would like to ad
 ## See Also
 
 * [Localize the Grid Widget]({% slug localization_kendoui_grid_widget %})
-* [Globalization and Localization in Telerik UI for ASP.NET MVC](/aspnet-mvc/globalization)
+* [Globalization and Localization in Telerik UI for ASP.NET MVC](https://www.telerik.com/aspnet-mvc/documentation/globalization/overview)
 * [JSP API Reference on Localization of the Upload Widget](/api/jsp/upload/localization)

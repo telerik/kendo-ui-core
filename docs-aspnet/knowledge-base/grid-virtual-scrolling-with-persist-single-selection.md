@@ -6,6 +6,7 @@ page_title: Persist Single-Row Selection in Grid with Virtual Scrolling
 slug: grid-virtual-scrolling-persist-row-selection
 tags: grid, virtual, scrolling, virtualization, persist, selection
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -38,7 +39,7 @@ The example below is implemented as per the following steps:
 1. Use the private `_selectedIds` object of the Grid to save the selected row.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()    
         .Name("grid")
         .Columns(columns => {

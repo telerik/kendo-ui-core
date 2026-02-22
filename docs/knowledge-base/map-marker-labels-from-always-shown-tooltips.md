@@ -7,6 +7,7 @@ slug: map-marker-labels-from-always-shown-tooltips
 tags: map,show,always,marker,tooltip,label
 ticketid: 1412666
 res_type: kb
+components: ["map"]
 ---
 
 ## Environment
@@ -40,9 +41,9 @@ The map markers in the Kendo UI Map have tooltips which the user can display by 
 			zoom: 3,
 			layers: [{
 				type: "tile",
-				urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+				urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
 				subdomains: ["a", "b", "c"],
-				attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+				attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
 			}],
 			markerDefaults: { //make tooltips "sticky" by default
 				tooltip: {

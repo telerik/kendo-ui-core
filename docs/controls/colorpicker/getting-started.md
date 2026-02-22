@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ColorPicker Documentation - Getting Started with the ColorPicker
 description: "Get started with the jQuery ColorPicker by Kendo UI and learn how to create and initialize the component."
+components: ["colorpicker"]
 slug: getting_started_kendoui_colorpicker_widget
 position: 2
 ---
@@ -77,8 +78,4 @@ Here, you will apply some settings such as [`views`](/api/javascript/ui/colorpic
 * [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

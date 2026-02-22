@@ -5,6 +5,7 @@ description: An example on how to validate whether a file is selected for upload
 type: how-to
 ticketid: 1547435
 res_type: kb
+components: ["general"]
 component: upload
 ---
 
@@ -67,7 +68,7 @@ How can I validate if a file is selected for upload when working with the {{ sit
             )
        )
        <span class="k-invalid-msg" data-for="files"></span>
-       <input type="submit" id="submitForm" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" />
+       <input type="submit" id="submitForm" class="k-button" />
     </form>
 ```
 **Validate** on form submission whilst preventing the default behavior.
@@ -88,7 +89,7 @@ How can I validate if a file is selected for upload when working with the {{ sit
 ```
 For the complete example, refer to the following [Telerik REPL](https://netcorerepl.telerik.com/wwYPwobp35zcEZ9d17) example:
 
-```Index.cshtml
+```Razor Index.cshtml
     <div id="validationSummary"></div>
 
     <form id="myForm" method="post">
@@ -105,7 +106,7 @@ For the complete example, refer to the following [Telerik REPL](https://netcorer
         <input type="submit" id="submitForm" />
     </form>
 ```
-```script.js
+```JS script.js
     <script>
           var validator = $("#myForm").kendoValidator({
                 rules: {

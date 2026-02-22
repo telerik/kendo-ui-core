@@ -7,6 +7,7 @@ slug: grid-is-not-showing-data
 tags: grid, data, core, aspnet, not showing, binding, loading, empty, no items, records, returned
 ticketid: 1112718
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -32,7 +33,7 @@ By default, the data in .NET Core is serialized in camelCase while the property 
 
 Edit the `ConfigureServices` method in the `Startup.cs` file.
 
-```
+```C#
     public void ConfigureServices(IServiceCollection services)
     {
         ...

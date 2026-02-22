@@ -2,18 +2,14 @@
 title: Localization
 page_title: Localization
 description: "Get started with the Telerik UI TimePicker for {{ site.framework }} and translate its messages for different culture locales."
+components: ["timepicker"]
 slug: localization_timepicker_aspnetcore
 position: 2
 ---
-{% if site.core %}
-    {% assign Culture = "/api/Kendo.Mvc.UI.Fluent/TimePickerBuilder#culturesystemstring" %}
-{% else %}
-    {% assign Culture = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#culturesystemstring" %}
-{% endif %}
 
 # Localization
 
-The TimePicker provides options for localizing its user interface by utilizing its [`Culture`]({{ Culture }}) property.
+The TimePicker provides options for localizing its user interface by utilizing its [`Culture`](/api/kendo.mvc.ui.fluent/timepickerbuilder#culturesystemstring) property.
 
 To enable the desired culture, add a reference to the script file before the TimePicker is initialized and include the desired culture in the settings of the helper.
 

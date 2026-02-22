@@ -6,6 +6,7 @@ page_title: How to Focus and Position the Caret at the End in Kendo UI Editor
 slug: move-caret-end-kendo-ui-editor
 tags: kendo ui, editor, caret, focus, text, content
 res_type: kb
+components: ["editor"]
 ticketid: 1669031
 ---
 

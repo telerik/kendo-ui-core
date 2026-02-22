@@ -5,9 +5,9 @@ description: "Learn how to add a custom Delete confirmation dialog to the ListVi
 slug: add_custom_delete_confirmation_dialog
 previous_url: /controls/data-management/listview/how-to/custom-delete-confirmation
 tags: listview, add, custom, confirmation, dialog
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment
@@ -43,7 +43,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
     <div id="example">
 
       <div id="confirmation"></div>
-      <a id="add-new-button" role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" href="#"><span class="k-button-icon k-icon k-i-add"></span>Add new record</a>
+      <a id="add-new-button" role="button" class="k-button" href="#"><span class="k-button-icon k-icon k-i-add"></span>Add new record</a>
       <div id="listView"></div>
 
       <script type="text/x-kendo-tmpl" id="template">
@@ -59,9 +59,9 @@ The following example demonstrates how to add a custom **Delete** confirmation d
                 <dd>#:Discontinued#</dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#">Edit<span class="k-button-icon k-icon k-i-edit"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">Built-in delete<span class="k-icon k-i-close"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#" onClick="deleteItem(event)">Custom delete<span class="k-icon k-i-close"></span></span></a>
+                <a role="button" class="k-button k-edit-button" href="\\#">Edit<span class="k-button-icon k-icon k-i-edit"></span></a>
+                <a role="button" class="k-button k-delete-button" href="\\#">Built-in delete<span class="k-icon k-i-close"></span></a>
+                <a role="button" class="k-button k-cancel-button" href="\\#" onClick="deleteItem(event)">Custom delete<span class="k-icon k-i-close"></span></span></a>
         </div>
         </div>
       </script>
@@ -69,8 +69,8 @@ The following example demonstrates how to add a custom **Delete** confirmation d
       <script type="text/x-kendo-template" id="confirmTemplate">
         Delete <strong>#= ProductName #</strong> ? </p>
         We have #= UnitsInStock # units in stock. </p>
-        <a id="yesButton" role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">Yes</a>
-        <a id="noButton" role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">No</a>
+        <a id="yesButton" role="button" class="k-button k-delete-button" href="\\#">Yes</a>
+        <a id="noButton" role="button" class="k-button k-delete-button" href="\\#">No</a>
       </script>
 
       <script type="text/x-kendo-tmpl" id="editTemplate">
@@ -78,7 +78,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
             <dl>
                 <dt>Product Name</dt>
                 <dd>
-                    <span class="k-textbox k-input k-input-md k-rounded-md k-input-solid">
+                    <span class="k-textbox k-input">
                         <input type="text" class="k-input-inner" data-bind="value:ProductName" name="ProductName" required="required" validationMessage="required" />
         </span>
                     <span data-for="ProductName" class="k-invalid-msg"></span>
@@ -97,8 +97,8 @@ The following example demonstrates how to add a custom **Delete** confirmation d
                 <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
+                <a role="button" class="k-button k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
+                <a role="button" class="k-button k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
         </div>
         </div>
       </script>
@@ -125,30 +125,32 @@ The following example demonstrates how to add a custom **Delete** confirmation d
         }
 
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
                 transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
-                  },
-                  parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                    read:  {
+                        url: crudServiceBaseUrl + "/Products"
+                    },
+                    update: {
+                        url: crudServiceBaseUrl + "/Products/Update",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    destroy: {
+                        url: crudServiceBaseUrl + "/Products/Destroy",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    create: {
+                        url: crudServiceBaseUrl + "/Products/Create",
+                        type: "POST",
+                		contentType: "application/json"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return kendo.stringify(options.models);
+                        }
                     }
-                  }
                 },
                 batch: true,
                 pageSize: 4,

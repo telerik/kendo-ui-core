@@ -6,7 +6,7 @@ slug: widgets_cannot-initialize_ie_compatibility
 tags: telerik, kendoui, jquery, troubleshooting, widgets, cannot, be, initialized, in, internet, explorer, compatibility, mode
 type: troubleshooting
 res_type: kb
-component: kendoui
+components: ["kendoui"]
 ---
 
 ## Environment

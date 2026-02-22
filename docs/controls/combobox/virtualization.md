@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: jQuery ComboBox Documentation - Virtualization
 description: "Get started with the jQuery ComboBox by Kendo UI and configure its virtualization functionality."
+components: ["combobox"]
 slug: virtualization_kendoui_combobox_widget
 position: 7
 ---
@@ -39,9 +40,8 @@ The following example demonstrates how to set the minimum component and DataSour
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
                             type: "GET",
-                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);
@@ -51,9 +51,9 @@ The following example demonstrates how to set the minimum component and DataSour
                 },
                 height: 520,
                 dataSource: {
-                    type: "odata",
+                    type: "odata-v4",
                     transport: {
-                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/service/v2/odata/Orders"
                     },
                     pageSize: 80,
                     serverPaging: true,
@@ -67,7 +67,7 @@ The following example demonstrates how to set the minimum component and DataSour
         function convertValues(value) {
             var data = {};
 
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
 
             for (var idx = 0; idx < value.length; idx++) {
                 data["values[" + idx + "]"] = value[idx];
@@ -127,7 +127,7 @@ When the component receives a value which is not fetched from the remote server 
 ```javascript
     valueMapper: function(options) {
         $.ajax({
-            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
             type: "GET",
             data: options.value, //send value to the server
             success: function (data) {
@@ -147,7 +147,7 @@ If you implement the `mapValueTo: "dataItem"` configuration, the `valueMapper` i
     mapValueTo: "dataItem",
     valueMapper: function(options) {
         $.ajax({
-            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
             type: "GET",
             data: options.value, //send value to the server
             success: function (dataItems) {
@@ -182,9 +182,8 @@ On initial load, the component checks whether the selected value is present in t
 
 ```javascript
 $.ajax({
-    url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+    url: "https://demos.telerik.com/service/v2/core/Orders/ValueMapper",
     type: "GET",
-    dataType: "jsonp",
     data: { "values[0]": "10661" }
     success: function (data) {
         // The returned data is [413].
@@ -193,7 +192,7 @@ $.ajax({
 })
 ```
 
-The Ajax method calls URLs similar to `https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper?values[0]=10661` and the result is `callback([413]) //the result is JSONP`.
+The Ajax method calls URLs similar to `https://demos.telerik.com/service/v2/core/Orders/ValueMapper?values[0]=10661` and the result is `callback([413]) //the result is JSONP`.
 
 **Function implementation** The service maps the selected value to a particular row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 

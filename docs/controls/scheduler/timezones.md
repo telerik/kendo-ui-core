@@ -2,6 +2,7 @@
 title: Timezones
 page_title: jQuery Scheduler Documentation - Timezones
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to configure its timezones."
+components: ["scheduler"]
 slug: timezones_kendoui_scheduler_widget
 position: 5
 ---
@@ -104,7 +105,7 @@ When the `timezone` option is set the events in the Scheduler will be displayed 
 
 > The **kendo.timezones.min.js** file must be included in order to use timezones other than "Etc/UTC".
 
-> The **timezone** option will not affect events if the component's data source is initialized separately. In this case set the [schema.timezone](/api/javascript/data/schedulerdatasource/configuration/schema.timezone) option directly.
+> The **timezone** option will not affect events if the component's data source is initialized separately. In this case set the [schema.timezone](/api/javascript/data/schedulerdatasource/configuration/schema#schematimezone) option directly.
 
 In the example below, the event will be displayed in the **Europe/Berlin** timezone. It will be displayed as scheduled for 4:00pm, regardless of your location.
 

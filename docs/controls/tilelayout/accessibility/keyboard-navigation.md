@@ -2,6 +2,7 @@
 title: Keyboard Navigation
 page_title: jQuery TileLayout Documentation - Keyboard Navigation
 description: "Get started with the jQuery TileLayout by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
+components: ["tilelayout"]
 slug: keynav_kendoui_tilelayout_widget
 position: 2
 ---

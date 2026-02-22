@@ -82,23 +82,23 @@ export const __meta__ = {
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size, isRtl }) => `<div class="k-header k-hstack">
-            <span tabindex="-1" data-href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-rounded-md k-button-flat k-button-flat-base k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></span>
-            <span tabindex="-1" data-href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-flex"></span>
-            <span tabindex="-1" data-href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-button-flat k-flex"></span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</span>
         </div>`,
         MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages, isRtl }) => `<div class="k-calendar-header">
-            <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-flat-primary k-rounded-md">
+            <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-primary">
                 <span class="k-button-text"></span>
             </button>
             <span class="k-spacer"></span>
             <span class="k-calendar-nav">
-                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button">
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
                 </button>
-                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat k-button-flat-primary k-rounded-md" role="link">
+                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat" role="link">
                     <span class="k-button-text">${kendo.htmlEncode(messages.today)}</span>
                 </button>
-                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-button-flat-base k-rounded-md k-icon-button">
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button">
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}
                 </button>
             </span>
@@ -134,7 +134,7 @@ export const __meta__ = {
             }
 
             id = element
-                .addClass("k-calendar k-calendar-md " + (options.weekNumber ? " k-week-number" : ""))
+                .addClass("k-calendar " + (options.weekNumber ? " k-week-number" : ""))
                 .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
                 .on(KEYDOWN_NS, "table.k-calendar-table", that._move.bind(that))
                 .on(CLICK + " touchend", CELLSELECTORVALID, function(e) {
@@ -240,7 +240,7 @@ export const __meta__ = {
             selectDates: [],
             start: MONTH,
             depth: MONTH,
-            size: "medium",
+            size: undefined,
             showOtherMonthDays: true,
             animation: {
                 horizontal: {
@@ -293,10 +293,11 @@ export const __meta__ = {
 
         setOptions: function(options) {
             let that = this,
-            isComponentTypeChanged;
+            isComponentTypeChanged = false;
 
-            isComponentTypeChanged = options.componentType ? true : false;
-
+            if (options.componentType) {
+                isComponentTypeChanged = options.componentType !== that.options.componentType;
+            }
             normalize(options);
 
             options.disableDates = getDisabledExpr(options.disableDates);
@@ -338,13 +339,13 @@ export const __meta__ = {
 
             that.navigate();
 
+            let value = parse(options.value || that.options.value || that._value, options.format, options.culture);
             if (isComponentTypeChanged) {
-                let value = parse(that.options.value, options.format, options.culture);
                 that._current = new DATE(+restrictValue(value, options.min, options.max));
                 that._cell = null;
                 that._table = null;
-                that.value(value);
             }
+            that.value(value);
 
             if (options.weekNumber) {
                 that.element.addClass('k-week-number');
@@ -1433,14 +1434,14 @@ export const __meta__ = {
 
             if (!footer[0]) {
                 footer = $(`<div class="k-calendar-footer">
-                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-md k-button-flat k-button-flat-primary k-rounded-md" role="link">
+                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-flat k-button-primary" role="link">
                         <span class="k-button-text"></span>
                     </button>
                 </div>`).appendTo(element);
             }
 
             that._today = footer.show()
-                .find(".k-button-flat-primary")
+                .find(".k-button-flat.k-button-primary")
                 .attr("title", kendo.toString(today, "D", that.options.culture));
 
             footer.find(".k-button-text")

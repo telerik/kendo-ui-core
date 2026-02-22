@@ -2,6 +2,7 @@
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
 description: "Learn how to use the keyboard navigation functionality of the Telerik UI FloatingActionButton component for {{ site.framework }}."
+components: ["floatingactionbutton"]
 slug: htmlhelpers_floatingactionbutton_keyboardnavigation_aspnetcore
 position: 2
 ---

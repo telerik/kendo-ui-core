@@ -2,6 +2,7 @@
 title: Chunk Upload
 page_title: Chunk Upload
 description: "Learn how to upload large files in chunks when using the Telerik UI Upload component for {{ site.framework }}."
+components: ["upload"]
 previous_url: /helpers/editors/upload/chunk-upload
 slug: htmlhelpers_upload_chunks_aspnetcore
 position: 3
@@ -46,7 +47,7 @@ To enable the chunk upload:
 {% if site.core %}
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
 
-    ```
+    ```C#
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -186,7 +187,7 @@ To enable the chunk upload:
 {% else %}
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
 
-    ```
+    ```C#
     [DataContract]
     public class ChunkMetaData
     {

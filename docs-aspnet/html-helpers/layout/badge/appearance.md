@@ -2,6 +2,7 @@
 title: Appearance
 page_title: Badge Appearance
 description: "Learn how to customize the appearance of the Telerik UI Badge HtmlHelper for {{ site.framework }}."
+components: ["badge"]
 slug: appearance_badge_aspnetcore
 position: 2
 ---
@@ -26,10 +27,13 @@ The Badge provides the following methods for styling:
 The `Rounded` property can be configured through the `Rounded` enumeration. The available values are:
 
 - `Small`&mdash;Renders a Badge with a small border radius.
-- `Medium` (default)&mdash;Renders a Badge with a medium border radius.
+- `Medium`&mdash;Renders a Badge with a medium border radius.
 - `Large`&mdash;Renders a Badge with a large border radius.
 - `Full`&mdash;Renders a circle shape Badge.
-- `None`&mdash;Renders a Badge with no border radius (square Badge).
+
+> When not explicitly set, the applied theme controls the default border radius.
+
+> The `None` value is deprecated. Use custom CSS instead.
 
 The following example demonstrates the `Rounded` option of the Badge:
 
@@ -52,6 +56,8 @@ The following example demonstrates the `Rounded` option of the Badge:
 ### ThemeColor
 
 The `ThemeColor` option controls the color that will be applied to the rendered Badge.
+
+> Starting with the [**2026 Q1**](slug:breakingchanges_2026) release, the Badge component renders with the `primary` appearance by default. Because appearance defaults are now theme-controlled, the `themeColor` option will be `undefined` when not set, but the theme applies the primary styling. To preserve the previous (secondary) look, explicitly set `themeColor: 'secondary'`.
 
 The available `ThemeColor` values are:
 
@@ -89,8 +95,10 @@ The available `ThemeColor` values are:
 The `Size` option allows you to set a predefined size for the Badge. The `Size` property can be configured by using the `BadgeSize` enumeration. The available values are:
 
 - `Small`
-- `Medium` (Default)
+- `Medium`
 - `Large`
+
+> When not explicitly set, the applied theme controls the default size.
 
 ```HtmlHelper
     @(Html.Kendo().Badge()
@@ -112,8 +120,10 @@ The `Size` option allows you to set a predefined size for the Badge. The `Size` 
 
 The `FillMode` specifies how the theme colors are applied to the component. The available options are:
 
-- `Solid` (Default)
+- `Solid`
 - `Outline`
+
+> When not explicitly set, the applied theme controls the default fill mode.
 
 ```HtmlHelper
     @(Html.Kendo().Badge()

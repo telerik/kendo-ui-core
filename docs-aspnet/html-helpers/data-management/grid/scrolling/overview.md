@@ -2,6 +2,7 @@
 title: Overview
 page_title: Scrolling Overview
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to configure the scrolling functionality of the component."
+components: ["grid"]
 slug: htmlhelpers_grid_aspnetcore_scrolling
 position: 1
 ---
@@ -277,15 +278,20 @@ When a web page is zoomed, the browser changes the content size of all pages exc
 
 > If the Grid is in the right-to-left (RTL) mode, use the `padding-left` instead of the `padding-right` CSS attribute.
 
+```JS
     $(function () {
         $(window).resize(function (e) {
             var grid = $('#GridID').data("kendoGrid"); // Get a reference to the Grid.
             grid.thead.closest(".k-grid-header").css("padding-right", kendo.support.scrollbar(true));
         });
     });
+```
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Scrolling a Grid HtmlHelper for {{ site.framework }} with Locked Columns (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/frozen-columns)
 * [Virtual Scrolling a Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/virtualization-remote-data)
 * [Endless Scrolling a Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/endless-scrolling-remote)

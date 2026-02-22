@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Hybrid UI
 page_title: Individual Scripts for Hybrid UI
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Hybrid UI"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-hybridui, /installation/scripts/scripts-hybridui
 slug: script_filesfor_hybridui_widgets
 ---

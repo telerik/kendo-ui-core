@@ -2,6 +2,7 @@
 title: Layout
 page_title: Layout
 description: "Get started with the Telerik UI Wizard component for {{ site.framework }} and learn how to customize its appearance."
+components: ["wizard"]
 slug: htmlhelpers_wizard_aspnetcore_layout
 position: 4
 ---

@@ -6,7 +6,7 @@ page_title: Calculate New Width after Using AutoFitColumn Method - Kendo UI for 
 slug: grid-change-wrapper-width-after-autofitcolumn
 tags: kendoui, kendo, grid, column width, grid width
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

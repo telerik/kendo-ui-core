@@ -6,6 +6,7 @@ page_title: Highlight rows in the Spreadsheet conditionally
 slug: spreadsheet-highlight-rows-conditionally
 tags: mvc, core, spreadsheet, highlight, rows, condition
 res_type: kb
+components: ["general"]
 component: spreadsheet
 ---
 
@@ -32,7 +33,7 @@ How to highlight rows conditionally in the {{ site.product }} Spreadsheet?
 2. Traverse the rows, and if the record meets the condition, recolor all the cells in the row by using the [`background`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/background) method of the [`range`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range) object.  
 
 
-```Index.cshtml
+```Razor Index.cshtml
 
     @(Html.Kendo().Spreadsheet()
         .Name("spreadsheet")
@@ -105,7 +106,7 @@ How to highlight rows conditionally in the {{ site.product }} Spreadsheet?
     )
 
 ```
-```Script.js
+```JS script.js
     function onDataBound(e) {
         var data=e.sheet.dataSource.view();
         data.forEach((item, ind)=>{

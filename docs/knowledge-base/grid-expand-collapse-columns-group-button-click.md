@@ -7,6 +7,7 @@ slug: grid-expand-collapse-columns-group-button-click
 tags: grid, multi-column, headers, expand, collapse, columns
 ticketid: 1158853
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -39,9 +40,8 @@ How can I expand and collapse a group of columns with a button when I am using m
 	$(document).ready(function () {
 		$("#grid").kendoGrid({
 		dataSource: {
-			type: "odata",
 			transport: {
-			read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+			read: "https://demos.telerik.com/service/v2/core/Customers"
 			},
 			pageSize: 20
 		},

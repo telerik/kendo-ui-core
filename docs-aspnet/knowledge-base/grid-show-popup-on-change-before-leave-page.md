@@ -6,6 +6,7 @@ page_title: Show Confirmation Popup When User Leaves the Page with Unsaved Grid 
 slug: grid-show-popup-on-change-before-leave-page
 tags: grid, inline, editing, detect, unsaved, change, popup, dialog, prompt, user, confirmation, core, mvc, telerik
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -51,7 +52,7 @@ To detect the changes in the Grid when the user attempts to navigate away from t
     </kendo-grid>
 ```
 {% endif %}
-```Script
+```JS script
     $(document).ready(function () {
         $(window).bind("beforeunload", function (event) {
             var gridDS = $('#grid').getKendoGrid().dataSource; // Access the Grid's DataSource.

@@ -5,9 +5,9 @@ description: "Learn how to use AngularJS directives to bind the Kendo UI Grid fo
 previous_url: /controls/data-management/grid/how-to/AngularJS/use-telerik-backend-services-with-angular
 slug: howto_bindto_telerik_backend_services_grid
 tags: bind, grid, kinvey, backend, telerik, services, angularjs
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -6,7 +6,7 @@ slug: multiselect_repetitive_requests_filtering
 tags: telerik, progress, kendoui, multiselect, performs, repetitive, requests, while, filtering, aspnet
 type: troubleshooting
 res_type: kb
-component: multiselect
+components: ["multiselect"]
 ---
 
 ## Environment

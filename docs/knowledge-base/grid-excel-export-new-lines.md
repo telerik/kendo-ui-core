@@ -6,6 +6,7 @@ page_title: Export Data with Line Breaks to Excel - Kendo UI for jQuery Data Gri
 slug: grid-excel-export-new-lines
 tags: grid, excel, export, new lines
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -45,13 +46,12 @@ The line breaks in the HTML cannot be handled by Excel as new lines. That is why
             toolbar: ["excel"],
             excel: {
                 fileName: "Kendo UI Grid Export.xlsx",
-                proxyURL: "https://demos.telerik.com/kendo-ui/service/export",
+                proxyURL: "https://demos.telerik.com/service/v2/core/export",
                 filterable: true
             },
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                    read: "https://demos.telerik.com/service/v2/core/Products"
                 },
                 schema:{
                     model: {

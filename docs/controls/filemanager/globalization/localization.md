@@ -2,6 +2,7 @@
 title: Localization
 page_title: jQuery FileManager Documentation - FileManager Localization
 description: "Get started with the jQuery Grid by Kendo UI and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+components: ["filemanager"]
 slug: localization_kendoui_filemanager_widget
 position: 3
 ---

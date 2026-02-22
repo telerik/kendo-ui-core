@@ -6,7 +6,7 @@ slug: scheduler_remotely_databoud_doesnot_populate
 tags: telerik, progress, kendoui, scheduler, remotely, databound, does, not, populate
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

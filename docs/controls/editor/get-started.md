@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Editor Documentation - Getting Started with the jQuery Editor
 description: "Get started with the jQuery Editor by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["editor"]
 slug: getting_started_kendoui_editor_widget
 position: 2
 ---
@@ -156,8 +157,4 @@ The Editor provides several options that enable you to modify its behavior. The 
 * [JavaScript API Reference of the jQuery Editor](/api/javascript/ui/editor)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

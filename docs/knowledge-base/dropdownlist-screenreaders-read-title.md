@@ -7,7 +7,7 @@ slug: dropdownlist-screenreaders-read-title
 tags: dropdownlist, screenreaders, title
 ticketid: 1142772
 res_type: kb
-component: dropdownlist, combobox, multiselect
+components: ["dropdownlist"]
 ---
 
 ## Environment

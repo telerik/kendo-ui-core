@@ -2,6 +2,7 @@
 title: Checked
 page_title: Checked Binding - Kendo UI MVVM
 description: "Learn how to change the behavior of a checkbox or a radio button based on the value from the View-Model in Kendo UI MVVM."
+components: ["mvvm"]
 slug: checkedbinding_mvvm_kendoui
 ---
 
@@ -64,7 +65,7 @@ The following example demonstrates how to use the `checked` binding with a group
 
 ## Using with Data-Type Attributes
 
-Checkbox inputs bound to an array and radio buttons also support [strong typing](https://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](value#strongly-typed-value-binding).
+Checkbox inputs bound to an array and radio buttons also support [strong typing](https://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](slug://valuebinding_mvvm_kendoui#strongly-typed-value-binding).
 
 ```dojo
     <div id="view">

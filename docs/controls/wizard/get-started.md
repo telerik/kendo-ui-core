@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Wizard Documentation - Getting Started with the Wizard
 description: "Get started with the jQuery Wizard by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["wizard"]
 slug: getting_started_kendoui_wizard_widget
 position: 1
 ---
@@ -75,8 +76,4 @@ The Wizard provides different ways to display its data. In this guide, you will 
 * [JavaScript API Reference of the jQuery Wizard](/api/javascript/ui/wizard)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

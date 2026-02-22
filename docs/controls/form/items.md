@@ -2,6 +2,7 @@
 title: Items
 page_title: Kendo UI for jQuery Form Documentation - Items
 description: "Get started with the Kendo UI for jQuery Form and learn how to configure items."
+components: ["form"]
 slug: items_form_widget
 position: 2
 ---
@@ -170,11 +171,11 @@ With the `editor` option you can explicitly configure an editor to be used for a
                             dataValueField: "ProductID",
                             filter: "contains",
                             dataSource: {
-                                type: "odata",
+                                type: "odata-v4",
                                 serverFiltering: true,
                                 transport: {
                                     read: {
-                                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                                        url: "https://demos.telerik.com/service/v2/odata/Products",
                                     }
                                 }
                             }
@@ -212,6 +213,63 @@ You can implement custom editor by using the editor option as a function as foll
         });
     </script>
 ```
+
+## Configure Upload Component as Editor
+
+Starting with Q2 2025, you can use the [Upload]({% slug overview_kendoui_upload_widget %}) component as an editor type in the Form. This allows you to integrate file uploading capabilities directly within your forms.
+
+To use the Upload as a form editor, specify `"Upload"` as the editor type in your form item configuration:
+
+```dojo
+    <form id="form"></form>
+
+    <script>
+        $(document).ready(function () {
+            $("#form").kendoForm({
+                formData: {
+                    Username: "",
+                    Email: "",
+                    UploadedFile: null
+                },
+                items: [
+                    {
+                        field: "Username",
+                        label: "Username:",
+                        validation: { required: true }
+                    },
+                    {
+                        field: "Email",
+                        label: "Email:",
+                        validation: { required: true, email: true }
+                    },
+                    {
+                        field: "UploadedFile",
+                        label: "Document:",
+                        hint: "Accepted formats: .pdf, .docx, .txt",
+                        editor: "Upload",
+                        validation: { required: true },
+                        editorOptions: {
+                            multiple: false,
+                            validation: {
+                                allowedExtensions: [".pdf", ".docx", ".txt"],
+                                maxFileSize: 10485760 // 10MB
+                            }
+                        }
+                    }
+                ],
+                submit: function(e) {
+                    e.preventDefault();
+                    // Handle form submission with file
+                    if (e.model.UploadedFile) {
+                        console.log("Selected file:", e.model.UploadedFile.name);
+                    }
+                }
+            });
+        });
+    </script>
+```
+
+For more information about using the Upload component with Form, including configuration options and examples of handling file uploads, refer to the [Form Integration article]({% slug form_integration_upload_component %}) in the Upload documentation.
 
 ## See Also
 

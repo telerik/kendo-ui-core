@@ -2,6 +2,7 @@
 title: Paging
 page_title: jQuery ListView Documentation - Paging
 description: "Get started with the jQuery ListView by Kendo UI and learn how to implement a separate pager and split its content into pages."
+components: ["listview"]
 slug: paging_kendoui_listview
 position: 5
 ---
@@ -37,12 +38,11 @@ The following example demonstrates how to implement the suggested approach.
 
 <script>
   $(document).ready(function () {
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
         dataSource = new kendo.data.DataSource({
           transport: {
             read:  {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
+              url: crudServiceBaseUrl + "/Products"
             }
           },
           pageSize: 10
@@ -113,8 +113,7 @@ When you use the Pager component and when the number of items, which are bound t
         var dataSource = new kendo.data.DataSource({
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/Products",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/Products"
                 }
             },
             pageSize: 4
@@ -146,10 +145,10 @@ The following example demonstrates the full implementation of the suggested appr
 
 <script>
 var dataSource = new kendo.data.DataSource({
+    pageSize: 10,
     transport: {
         read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
         }
     }
 });

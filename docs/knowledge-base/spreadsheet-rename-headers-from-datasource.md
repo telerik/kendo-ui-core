@@ -6,7 +6,7 @@ page_title: Rename the Default Headers When Using DataSource - Kendo UI Spreadsh
 slug: spreadsheet-rename-headers-from-datasource
 tags: kendo, kendoui, spreadsheet, datasource, headers
 res_type: kb
-component: spreadsheet
+components: ["spreadsheet"]
 ---
 
 ## Environment
@@ -32,7 +32,7 @@ Handle the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript
 
 <script>
   $(function() {
-    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
+    var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core";
     var shouldPopulateHeader = true;
 
     var dataSource = new kendo.data.DataSource({
@@ -54,8 +54,7 @@ Handle the first [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript
       },
       transport: {
         read:  {
-          url: crudServiceBaseUrl + "/Products",
-          dataType: "jsonp"
+          url: crudServiceBaseUrl + "/Products"
         }
       },
       schema: {

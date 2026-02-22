@@ -2,6 +2,7 @@
 title: Endless Scrolling
 page_title: Endless Scrolling
 description: "Get started with the Telerik UI Grid component for {{ site.framework }} supporting endless scrolling mode suitable for displaying large number of items."
+components: ["grid"]
 slug: endless_scrolling_aspnetcore_grid
 position: 3
 ---
@@ -113,5 +114,8 @@ In such cases, you have to manually update the scroll position and [`pageSize`](
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [Endless Scrolling of Remote Data by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/endless-scrolling-remote)
 * [Server-Side API](/api/grid)

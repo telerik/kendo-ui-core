@@ -2,6 +2,7 @@
 title: Advanced Export
 page_title: Advanced Export
 description: "Get started with the Telerik UI Diagram for {{ site.framework }} and learn how to set its advanced export functionality."
+components: ["diagram"]
 slug: htmlhelpers_diagram_aspnetcore_export
 position: 2
 ---
@@ -61,7 +62,7 @@ The Telerik UI Diagram for {{ site.framework }} provides options for exporting i
     </kendo-diagram>
 ```
 {% endif %}
-``` JavaScript-export
+```JS JavaScript-export
     <script>
         $(".export-pdf").click(function () {
             var diagram = $("#diagram").getKendoDiagram();
@@ -95,7 +96,7 @@ The Telerik UI Diagram for {{ site.framework }} provides options for exporting i
         });
     </script>
 ```
-``` JavaScript-Template
+```JS JavaScript-Template
     <script>
         function visualTemplate(options) {
             var dataviz = kendo.dataviz;

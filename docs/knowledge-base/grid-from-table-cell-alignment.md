@@ -7,7 +7,7 @@ slug: align-content-grid-html-table
 tags: jquery, grid, align, content, table, kendo grid
 ticketid: 1534294
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

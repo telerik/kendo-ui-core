@@ -2,6 +2,7 @@
 title: Customize the Shopping Cart
 page_title: Customize the Shopping Cart - Music Store Web App Tutorial
 description: "Learn how to create a custom Shopping Cart Menu widget in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+components: ["general"]
 slug: customizeshoppingcart_muscistorewebapp_aspnetmvc
 position: 8
 ---

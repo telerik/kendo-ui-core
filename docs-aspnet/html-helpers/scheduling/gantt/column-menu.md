@@ -2,6 +2,7 @@
 title: Column Menu
 page_title: Column Menu
 description: "Get started with Telerik UI Gantt component for {{ site.framework }} and learn how to enable its column menu feature."
+components: ["gantt"]
 slug: htmlhelpers_gantt_columnmenu_aspnetcore
 position: 8
 ---
@@ -10,10 +11,7 @@ position: 8
 
 The Gantt provides a built-in option for triggering column operations through a menu.
 
-To enable the Column Menu use [`.ColumnMenu()`](api/kendo.mvc.ui.fluent/ganttbuilder#columnmenu) configuration method. As a result, the column headers of the Gantt's TreeList render a column menu, which allows the user to sort, filter, reorder, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and does not render the corresponding UI. For a runnable example, refer to the [demo on configuring the Columns in the Gantt](https://demos.telerik.com/{{ site.platform }}/gantt/columns).
-
-> When the `columnMenu` configuration is enabled, the Gantt fires the client-side [`columnMenuInit`](/api/javascript/ui/gantt/events/columnmenuinit) and [`columnMenuOpen`](/api/javascript/ui/gantt/events/columnmenuopen) events instead of [`filterMenuInit`](/api/javascript/ui/gantt/events/filtermenuinit) and [`filterMenuOpen`](/api/javascript/ui/gantt/events/filtermenuopen).
-
+To enable the Column Menu use [`.ColumnMenu()`](/api/kendo.mvc.ui.fluent/ganttbuilder#columnmenusystemboolean) configuration method. As a result, the column headers of the Gantt's TreeList render a column menu, which allows the user to sort, filter, reorder, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and does not render the corresponding UI. For a runnable example, refer to the [demo on configuring the Columns in the Gantt](https://demos.telerik.com/{{ site.platform }}/gantt/columns).
 
 ## Column Reordering
 

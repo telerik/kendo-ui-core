@@ -16,6 +16,51 @@ Gets or sets the Navigator selected date range.
 >
 > The select method is available in Kendo UI v.2016.2.517 and later
 
+
+<div class="meta-api-description">
+How do I dynamically change the selected date range in a Kendo UI Stock Chart? Configure, retrieve, update, or control the current date range selection programmatically to synchronize date intervals with other UI elements like calendars, custom date pickers, or saved state restoration by using methods that allow getting or setting the selected date span dynamically, enabling applications to read user-selected periods, apply preset ranges, change selections through code, manage time intervals, or integrate date range controls seamlessly across components for consistent temporal data filtering and display.
+</div>
+
+#### Example
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+      dataSource: {
+        data: [
+          { value: 1, category: "One", date: new Date(2025, 1, 1) },
+          { value: 2, category: "Two", date: new Date(2025, 5, 1) }
+        ]
+      },
+      dateField: "date",
+      series: [{
+        type: "line",
+        field: "value",
+        name: "Value"
+      }],
+      navigator: {
+        series: [{
+          type: "area",
+          field: "value",
+          name: "Value"
+        }],
+        select: {
+          from: "2025/02/05",
+          to: "2025/03/07"
+        },
+      }
+    });
+
+    setTimeout(() => {
+      var chart = $("#stock-chart").data("kendoStockChart");
+      var navigator = chart.navigator;
+
+      // Get current selected range
+      var selectedRange = navigator.select();
+      console.log("Current range:", selectedRange.from, "to", selectedRange.to);
+    }, 1000);    
+    </script>
+
 ##### Example - Set selected range
     <input id="fromDate" />
     <input id="toDate" />

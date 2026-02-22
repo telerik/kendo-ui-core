@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery ColorGradient Documentation - Getting Started with the ColorGradient
 description: "Get started with the jQuery ColorGradient by Kendo UI and learn how to create and initialize the component."
+components: ["colorgradient"]
 slug: getting_started_kendoui_colorgradient_widget
 position: 2
 ---
@@ -121,8 +122,4 @@ Here, you will apply some settings as [`opacity`](/api/javascript/ui/colorgradie
 * [JavaScript API Reference of the ColorGradient](/api/javascript/ui/colorgradient)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

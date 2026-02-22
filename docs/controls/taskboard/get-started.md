@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery TaskBoard Documentation - Getting Started with the TaskBoard
 description: "Get started with the jQuery TaskBoard by Kendo UI and learn how to create and initialize the component."
+components: ["taskboard"]
 slug: getting_started_kendoui_taskboard_widget
 position: 2
 ---
@@ -214,8 +215,4 @@ Here, you will specify [`dataStatusField`](/api/javascript/ui/taskboard/configur
 * [JavaScript API Reference of the TaskBoard](/api/javascript/ui/taskboard)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

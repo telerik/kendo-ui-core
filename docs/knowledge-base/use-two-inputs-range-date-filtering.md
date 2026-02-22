@@ -5,9 +5,9 @@ description: "Learn how to create range filtering for dates in the Kendo UI Grid
 previous_url: /controls/data-management/grid/how-to/use-two-inputs-range-date-filtering, /controls/data-management/grid/how-to/filtering/use-two-inputs-range-date-filtering
 slug: howto_gridfiltering_rangedatefiltering_grid
 tags: use, grid, range, data, filtering, datetimepickers, row, modes
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

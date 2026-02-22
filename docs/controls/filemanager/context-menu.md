@@ -2,6 +2,7 @@
 title: Context Menu
 page_title: jQuery FileManager Documentation - FileManager ContextMenu
 description: "Get familiar with the ContextMenu usage in the FileManager component, in order to delete add or move files"
+components: ["filemanager"]
 slug: contextmenu_kendoui_filemanager_widget
 position: 3
 ---

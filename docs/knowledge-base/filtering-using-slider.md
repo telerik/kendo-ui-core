@@ -5,9 +5,9 @@ description: "Learn how to filter the ListView datasource based on Kendo UI Slid
 slug: howto_filter_using_slider_selection_listview
 previous_url: /controls/data-management/listview/how-to/filtering-using-slider, /controls/editors/slider/how-to/filter-listview-using-slider
 tags: listview, filter, using, slider, selection
-component: listview
 type: how-to
 res_type: kb
+components: ["listview"]
 ---
 
 ## Environment
@@ -33,7 +33,7 @@ res_type: kb
 
 ## Description
 
-How can I filter the data source of the ListView based on a [`Slider`](/kendo-ui/controls/editors/rangeslider/overview) selection?
+How can I filter the data source of the ListView based on a [`Slider`](/controls/editors/rangeslider/overview) selection?
 
 ## Solution
 
@@ -84,8 +84,7 @@ The following example demonstrates how to achieve this behavior and display the 
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "https://demos.telerik.com/kendo-ui/service/Products",
-            dataType: "jsonp"
+            url: "https://demos.telerik.com/service/v2/core/Products"
           }
         },
         pageSize: 4

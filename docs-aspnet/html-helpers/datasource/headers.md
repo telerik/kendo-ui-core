@@ -2,6 +2,7 @@
 title: Headers
 page_title: Headers
 description: "Learn how to set request headers in the DataSource component for {{ site.framework }}."
+components: ["datasource"]
 slug: htmlhelper_datasourceheaders_aspnetcore
 position: 3
 ---
@@ -34,7 +35,7 @@ The following example demonstrates how to use the `Headers` option to set a requ
         myDataSource.read(); // The header will be set in the request that is sent to the HomeController ReadOrders action.
     </script>
 ```
-```HomeController
+```C# HomeController
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
@@ -45,7 +46,7 @@ The following example demonstrates how to use the `Headers` option to set a requ
     }
 ```
 {% else %}
-```HomeController
+```C# HomeController
 
     public ActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {

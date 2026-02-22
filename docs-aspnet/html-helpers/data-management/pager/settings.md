@@ -2,6 +2,7 @@
 title: Pager Settings and Types
 page_title: Pager Settings and Types
 description: "Learn how to change the settings when working with the Telerik UI Pager component for {{ site.framework }}."
+components: ["pager"]
 slug: settings_pager_aspnet
 position: 2
 ---

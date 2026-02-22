@@ -2,6 +2,7 @@
 title: Paging
 page_title: Paging
 description: "Get started with the Telerik UI ScrollView component for {{ site.framework }} and learn how to enable its paging functionality."
+components: ["scrollview"]
 slug: htmlhelpers_scrollview_aspnetcore_paging
 position: 3
 ---
@@ -20,8 +21,8 @@ If the pager is set to `false`, the ScrollView will not display a pager.
                 .TemplateId("scrollview-template")
                 .DataSource(d =>
                         d.Custom()
-                          .Type("odata")
-                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products")))
+                          .Type("odata-v4")
+                          .Transport(t => t.Read(r => r.Url("https://demos.telerik.com/service/v2/odata/Products")))
                           .ServerPaging(true)
                           .PageSize(3))
                 .HtmlAttributes(new { style = "height:600px; width:890px; max-width: 100%;" })
@@ -49,9 +50,9 @@ If the pager is set to `false`, the ScrollView will not display a pager.
                                         enable-pager="false"
                                         template-id="scrollview-template" 
                                         style="height:600px; width:890px; max-width: 100%;">
-        <datasource custom-type="odata" page-size="3" server-paging="true">
+        <datasource custom-type="odata-v4" page-size="3" server-paging="true">
             <transport>
-                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+                <read url="https://demos.telerik.com/service/v2/odata/Products" />
             </transport>
         </datasource>
     </kendo-scrollview>

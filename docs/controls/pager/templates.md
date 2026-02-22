@@ -2,6 +2,7 @@
 title: Pager Templates
 page_title: jQuery Pager Documentation - Pager Templates
 description: "Get started with the jQuery Pager by Kendo UI and learn about its templating options."
+components: ["pager"]
 slug: templates_kendoui_pager_widget
 ---
 

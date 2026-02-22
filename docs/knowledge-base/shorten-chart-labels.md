@@ -5,9 +5,9 @@ description: "Learn how to shorten long Kendo UI Chart labels to a more readable
 previous_url: /controls/charts/how-to/shorten-chart-labels, /controls/charts/how-to/appearance/shorten-chart-labels
 slug: howto_shortenchartlabels_charts
 tags: chart, shorten, labels
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

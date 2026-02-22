@@ -5,9 +5,9 @@ description: "Learn how to render multiple Kendo UI for jQuery TreeView widgets 
 slug: howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview
 previous_url: /controls/navigation/treeview/how-to/MVVM/multiple-treeviews-source-binding
 tags: telerik, kendo, jquery, treeview, render, show, multiple, widgets, with, using, html, binding
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment

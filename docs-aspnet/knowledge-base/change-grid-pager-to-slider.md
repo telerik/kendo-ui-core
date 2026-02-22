@@ -6,6 +6,7 @@ slug: change-grid-pager-to-slider
 tags: grid, pager, slider, core, mvc, telerik
 component: grid
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -38,7 +39,7 @@ To achieve the desired result:
 
 > When you apply this approach, the [`page`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/page) method of the Grid's DataSource will not fire.
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("grid")
         .Columns(columns =>
@@ -68,7 +69,7 @@ To achieve the desired result:
     )
 ```
 
-```Script.js
+```JS script.js
     <script type="text/javascript">
        var sliderCreated = false; // Flag variable.
 

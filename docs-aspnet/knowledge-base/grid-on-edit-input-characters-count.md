@@ -6,6 +6,7 @@ page_title: Show Characters Count When Editing a Field in a Row
 slug: grid-on-edit-input-characters-count
 tags: grid, editing, characters, count, show, edit, input
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -27,7 +28,7 @@ How to show the characters count when editing a field in a row in the Grid for {
 
 * Set a handler for the [`Edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event.
 
-    ```
+    ```Razor
      .Events(ev=>ev.Edit("onEdit"))
     ```
 
@@ -39,7 +40,7 @@ How to show the characters count when editing a field in a row in the Grid for {
 
 * Append a new element right after the input field.
 
-    ```Index.cshtml
+    ```Razor Index.cshtml
     @(Html.Kendo().Grid<CharacterCounter.Models.OrderViewModel>()
                 .Name("grid")
                 .Columns(columns =>
@@ -67,7 +68,7 @@ How to show the characters count when editing a field in a row in the Grid for {
                 )
             )
     ```
-    ```script.js
+    ```JS script.js
     function onEdit(e) {
             var inputFields = $('#grid .k-grid-content tbody .k-input[data-role="textbox"]')
             if (inputFields) {

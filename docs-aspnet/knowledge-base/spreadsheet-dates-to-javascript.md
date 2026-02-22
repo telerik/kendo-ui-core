@@ -6,6 +6,7 @@ page_title: Convert {{ site.product }} Spreadsheet Dates From MS Excel Date Form
 slug: spreadsheet-dates-to-javascript
 tags: excel dates, format, javascript, date, object, type, convert, spreadsheet, range, value
 res_type: kb
+components: ["general"]
 component: spreadsheet
 ---
 

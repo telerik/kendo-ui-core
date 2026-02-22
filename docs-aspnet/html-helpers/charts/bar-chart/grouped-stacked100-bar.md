@@ -2,6 +2,7 @@
 title: 100% Stacked and Grouped Bars
 page_title: 100% Stacked and Grouped Bars
 description: "Learn how to use the 100% Stacked and Grouped Bars of Telerik UI Bar Charts component for {{ site.framework }}."
+components: ["chart"]
 slug: barcharts_aspnetcore_htmlhelper_stacked100_and_grouped_bars
 ---
 

@@ -8,6 +8,7 @@ position:
 tags: grid, button, toolbar
 ticketid: 1461293
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -40,7 +41,7 @@ To add a custom button:
         .ToolBar(e => {
             e.Pdf();
             e.Excel();
-            e.Custom().Text("Instructions").HtmlAttributes(new { id = "customButton", @class="floatRight" });
+            e.Custom().Text("Instructions").HtmlAttributes(new { id = "customButton", @class="flexAlignRight" });
         })
     ```
 
@@ -58,8 +59,8 @@ To add a custom button:
 1. Finally, add some style to right align the {{ site.product }} Button.
 
     ```css
-        .floatRight {
-            float: right;
+        .flexAlignRight {
+            margin-left: auto;
         }
     ```
 

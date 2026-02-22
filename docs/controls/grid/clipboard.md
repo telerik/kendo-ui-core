@@ -2,8 +2,9 @@
 title: Clipboard
 page_title: jQuery Grid Documentation - Clipboard Support
 description: "Learn how to enable the clipboard functionality of the jQuery Grid of Kendo UI that allows you to copy and paste content from Excel to the Grid and vice-versa"
+components: ["grid"]
 slug: clipboard_kendoui_grid_component
-position: 18
+position: 19
 ---
 
 # Clipboard
@@ -126,7 +127,7 @@ The following example demonstrates how to subscribe to the `paste` event.
 ## See Also
 
 * [Copy to Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
-* [Paste from Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/paste-to-excel)
+* [Paste from Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/paste-from-excel)
 * [Select and Export to Excel by using the jQuery Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/selection-export)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
 * [Knowledge Base Section](/knowledge-base)

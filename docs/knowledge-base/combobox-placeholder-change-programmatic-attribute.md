@@ -7,6 +7,7 @@ slug: combobox-placeholder-change-programmatic-attribute
 tags: combobox, placeholder, change, programmatic, attribute, initialization
 ticketid: 1411783
 res_type: kb
+components: ["combobox"]
 ---
 
 ## Environment

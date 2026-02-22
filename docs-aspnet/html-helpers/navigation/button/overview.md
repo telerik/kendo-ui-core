@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI Button component for {{ site.framework }} that provides features like Badges, Icons, and numerous built-in configuration options."
+components: ["button"]
 previous_url: /helpers/html-helpers/button, /helpers/navigation/button/overview
 slug: htmlhelpers_button_aspnetcore
 position: 0

@@ -2,6 +2,7 @@
 title: Formats
 page_title: Formats
 description: "Get started with the Telerik UI TimePicker for {{ site.framework }} and learn how to define the time format."
+components: ["timepicker"]
 slug: formats_timepicker_aspnetcore
 position: 5
 ---

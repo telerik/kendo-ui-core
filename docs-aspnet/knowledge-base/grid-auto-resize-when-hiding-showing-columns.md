@@ -6,6 +6,7 @@ page_title: Resizing When Hiding or Showing Columns
 slug: grid-auto-resize-when-hiding-showing-columns
 tags: grid, auto, resize, when, hiding, showing, columns, match, width
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment 
@@ -69,7 +70,7 @@ Enforce a `min-width` style to the table element using only CSS:
      )
  )
 ```
-```script.js
+```JS script.js
 function onDataBound(e) {
         setGridWidth(e)
     }

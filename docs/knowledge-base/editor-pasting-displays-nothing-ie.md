@@ -7,7 +7,7 @@ slug: troubleshooting_editor_widget
 tags: telerik, progress, kendoui, jquery, editor, pasting, produces, displays, nothing, internet, explorer, ie
 type: troubleshooting
 res_type: kb
-component: editor
+components: ["editor"]
 ---
 
 ## Environment

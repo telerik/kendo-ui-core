@@ -8,7 +8,7 @@ previous_url: /knowledge-base/how-to-add-a-progressbar-in-a-grid-cell
 tags: grid, progressbar
 ticketid: 1104936
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment

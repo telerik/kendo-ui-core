@@ -8,6 +8,7 @@ position:
 tags: grid, scroll, horizontal, moving, slow, not, working, scrollbar
 ticketid: 1149398
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -61,9 +62,8 @@ The following example demonstrates the implementation of the suggested approach.
     $(document).ready(function () {
         $("#grid").kendoGrid({
             dataSource: {
-                type: "odata",
                 transport: {
-                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    read: "https://demos.telerik.com/service/v2/core/Customers"
                 },
                 pageSize: 20
             },

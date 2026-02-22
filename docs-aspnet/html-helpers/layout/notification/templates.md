@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Learn the basics when working with the Telerik UI Notification component for ASP.NET MVC."
+components: ["notification"]
 previous_url: /helpers/layout/notification/templates
 slug: templates_notificatiomhelper_aspnetmvc
 position: 5

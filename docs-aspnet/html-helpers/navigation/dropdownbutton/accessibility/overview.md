@@ -2,7 +2,8 @@
 title: Overview
 page_title: DropDownButton Documentation | DropDownButton Accessibility
 description: "Get started with the {{ site.product }} DropDownButton and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_aspnetcore_dropdownbutton
+components: ["dropdownbutton"]
+slug: htmlhelpers_dropdownbutton_accessibility
 position: 1
 ---
 

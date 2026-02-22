@@ -2,6 +2,7 @@
 title: Localization
 page_title: ListBox Localization
 description: "Get started with the Telerik UI ListBox component for {{ site.framework }} and learn about the localization options it supports."
+components: ["listbox"]
 previous_url: /helpers/editors/listbox/globalization/localization
 slug: htmlhelpers_listbox_localization_aspnetcore
 position: 2
@@ -82,7 +83,7 @@ These messages serve as tooltip text when the user hovers over the buttons.
     </kendo-listbox>
 ```
 {% endif %}
-``` Template
+```JS Template
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
         <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>

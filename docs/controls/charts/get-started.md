@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery Chart Documentation - Getting Started with the Chart
 description: "Get started with the jQuery Chart by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["chart"]
 slug: getting_started_kendoui_chart_widget
 position: 1
 ---
@@ -297,15 +298,11 @@ The Chart [`tooltip`](/api/javascript/dataviz/ui/chart/configuration/tooltip#too
 ## Next Steps
 
 * [Referencing Existing Component Instances]({% slug widget_methodsand_events_kendoui_installation %})
-* [Demo Page for the Chart](https://demos.telerik.com/kendo-ui/chart/index)
+* [Demo Page for the Chart](https://demos.telerik.com/kendo-ui/charts/index)
 
 ## See Also 
 
-* [JavaScript API Reference of the Chart](/api/javascript/ui/chart)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

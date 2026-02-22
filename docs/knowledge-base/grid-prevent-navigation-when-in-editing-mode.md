@@ -5,9 +5,9 @@ description: "Learn how to prevent page navigation while in edit mode of the Ken
 previous_url: /controls/data-management/grid/how-to/Editing/grid-prevent-navigation-when-in-editing-mode
 slug: howto_prevent_page_navigation_inedit_mode_grid
 tags: grid, prevent, page, navigation, edit, mode
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -49,28 +49,30 @@ If the Grid is in edit mode and you do not make any changes, the page navigation
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
-                transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
+                  transport: {
+                      read:  {
+                          url: crudServiceBaseUrl + "/Products"
+                      },
+                      update: {
+                          url: crudServiceBaseUrl + "/Products/Update",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      destroy: {
+                          url: crudServiceBaseUrl + "/Products/Destroy",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      create: {
+                          url: crudServiceBaseUrl + "/Products/Create",
+                          type: "POST",
+                  		    contentType: "application/json"
                   },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                 },
@@ -138,28 +140,30 @@ If the Grid is in edit mode, paging and sorting are prevented.
 
       <script>
         $(document).ready(function () {
-          var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
               dataSource = new kendo.data.DataSource({
-                transport: {
-                  read:  {
-                    url: crudServiceBaseUrl + "/Products",
-                    dataType: "jsonp"
-                  },
-                  update: {
-                    url: crudServiceBaseUrl + "/Products/Update",
-                    dataType: "jsonp"
-                  },
-                  destroy: {
-                    url: crudServiceBaseUrl + "/Products/Destroy",
-                    dataType: "jsonp"
-                  },
-                  create: {
-                    url: crudServiceBaseUrl + "/Products/Create",
-                    dataType: "jsonp"
+                  transport: {
+                      read:  {
+                          url: crudServiceBaseUrl + "/Products"
+                      },
+                      update: {
+                          url: crudServiceBaseUrl + "/Products/Update",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      destroy: {
+                          url: crudServiceBaseUrl + "/Products/Destroy",
+                          type: "POST",
+                  		    contentType: "application/json"
+                      },
+                      create: {
+                          url: crudServiceBaseUrl + "/Products/Create",
+                          type: "POST",
+                  		    contentType: "application/json"
                   },
                   parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                      return {models: kendo.stringify(options.models)};
+                      return kendo.stringify(options.models);
                     }
                   }
                 },

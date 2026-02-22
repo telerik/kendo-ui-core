@@ -2,6 +2,7 @@
 title: Form Integration
 page_title: Form Integration
 description: "Get started with the Telerik UI Wizard component for {{ site.framework }} and learn how the Wizard integrates with the Telerik UI Form component for {{ site.framework }}."
+components: ["wizard"]
 slug: htmlhelpers_wizard_aspnetcore_form_integration
 position: 2
 ---
@@ -192,7 +193,7 @@ When the {{ site.product }} Wizard is initialized as a `<div>` element any forms
     </kendo-wizard>
 ```
 {% endif %}
-```script
+```JS script
     <script>
         function onSubmit(event){
             event.preventDefault();

@@ -7,6 +7,7 @@ slug: grid-custom-icons-in-buttons
 tags: grid, custom, buttons, icons, image, background, update, cancel, edit
 ticketid: 1144053
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Tooltip
 page_title: jQuery Chart Documentation - Tooltip
 description: "Get started with the jQuery Chart by Kendo UI and learn how to configure its tooltip, make it visible, and set its properties depending on your preferences."
+components: ["chart"]
 slug: tooltip_charts_widget
 previous_url: /controls/charts/tooltip
 ---

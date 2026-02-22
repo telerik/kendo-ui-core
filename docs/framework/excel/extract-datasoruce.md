@@ -2,6 +2,7 @@
 title: Exporting Data Sources
 page_title: Exporting Data Sources - Kendo UI Excel Export
 description: "Learn how to create Excel documents by using the Kendo UI DataSource component."
+components: ["general"]
 slug: exportdatasource_excelexport_kendoui
 position: 7
 ---
@@ -20,7 +21,7 @@ To extract the DataSource to an Excel document (workbook):
 2. Create the rows header structure based on the DataSource data. Save it into an `array`.
 3. Fetch the remote data and by using the callback of the [`fetch`](/api/javascript/data/datasource/methods/fetch) method, loop through the items and push the data to the `rows` array.
 4. Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets, where you can set their width and title, and set the `rows` property to the already created `rows` array.
-5. Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
+5. Call the [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
 ## Creating Excel Workbooks
 
@@ -29,9 +30,8 @@ The following example demonstrates how to create an Excel workbook based on the 
 ```dojo
     <script>
       var ds = new kendo.data.DataSource({
-        type: "odata",
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/service/v2/core/Orders"
         },
         schema: {
           model: {
@@ -95,7 +95,12 @@ The following example demonstrates how to create an Excel workbook based on the 
           ]
         });
         // Save the file as an Excel file with the xlsx extension.
-        kendo.saveAs({dataURI: workbook.toDataURL(), fileName: "Test.xlsx"});
+        workbook.toDataURLAsync().then(function(dataURL) {
+          kendo.saveAs({
+             dataURI: dataURL,
+             fileName: "Test.xlsx"
+          });
+        });
       });
     </script>
 ```

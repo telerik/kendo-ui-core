@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI TileLayout component for {{ site.framework }}."
+components: ["tilelayout"]
 slug: tilelayout_events
 position: 6
 ---

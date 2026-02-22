@@ -7,6 +7,7 @@ slug: treelist-load-and-expand-one-level-of-data
 ticketid: 1627637
 tags: treelist, expand, partial, read, request, node, root, level, initially, load, only, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -31,12 +32,12 @@ How do I expand only the first item on page load in the Telerik UI for {{ site.f
 To achieve the desired results:
 
 1. Set the TreeList [`AutoBind()`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/treelistbuilder#autobindsystemboolean) property explicitly to `false`.
-1. Make a read request (the custom call which will return the initial data) by using the client-side dataSource's [`read()`](/api/javascript/data/datasource/methods/read) method.
-1. Use the client-side TreeListDataSource's [`load()`](/api/javascript/data/treelistdatasource/methods/load) method to load the root.
-1. To expand only the items which are in the view, use the client-side [`expand()`](/api/javascript/ui/treelist/methods/expand) method - this will not make a request for non-loaded items.
+1. Make a read request (the custom call which will return the initial data) by using the client-side dataSource's [`read()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/read) method.
+1. Use the client-side TreeListDataSource's [`load()`](https://docs.telerik.com/kendo-ui/api/javascript/data/treelistdatasource/methods/load) method to load the root.
+1. To expand only the items which are in the view, use the client-side [`expand()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/expand) method - this will not make a request for non-loaded items.
 
 
-```Index.cshtml
+```Razor Index.cshtml
     @(Html.Kendo().TreeList<EmployeeDirectoryRemoteModel>()
         .Name("treelist")
         .Columns(columns =>
@@ -59,7 +60,7 @@ To achieve the desired results:
         )
     )
 ```
-```Script.js
+```JS script.js
     <script>
         $(document).ready(function () {
 
@@ -79,7 +80,7 @@ To achieve the desired results:
     </script>
 ```
 {% if site.core %}
-```Controller.cs
+```C# Controller.cs
 	public class EmployeeDirectoryController : Controller
     {
         private IEmployeeDirectoryService employeeDirectory;
@@ -104,7 +105,7 @@ To achieve the desired results:
     }
 ```
 {% else %}
-```Controller.cs
+```C# Controller.cs
     public class EmployeeDirectoryController : Controller
     {
         private EmployeeDirectoryService employeeDirectory;

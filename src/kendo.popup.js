@@ -185,7 +185,6 @@ export const __meta__ = {
         _animationClose: function() {
             var that = this;
             var location = that.wrapper.data(LOCATION);
-
             that.wrapper.hide();
 
             if (location) {
@@ -198,6 +197,10 @@ export const __meta__ = {
 
             that._closing = false;
             that._trigger(DEACTIVATE);
+            // This fixes an issue with aria-hidden error - https://github.com/telerik/kendo-ui-core/issues/8096
+            setTimeout(function() {
+                that.element.attr("aria-hidden", true);
+            }, 0);
         },
 
         destroy: function() {
@@ -272,8 +275,7 @@ export const __meta__ = {
                         overflow: HIDDEN,
                         display: "block",
                         position: ABSOLUTE
-                    })
-                    .attr("aria-hidden", false);
+                    });
 
                 parent = element.parent();
 
@@ -308,8 +310,8 @@ export const __meta__ = {
                        .kendoStop(true)
                        .kendoAnimate(animation);
 
-
                 element.attr("aria-hidden", false);
+
             }
         },
 
@@ -321,7 +323,6 @@ export const __meta__ = {
 
             that.wrapper = kendo.wrap(element, options.autosize, options._resizeOnWrap, shouldCorrectWidth, options.autowidth)
             .css({
-                overflow: HIDDEN,
                 display: "block",
                 position: ABSOLUTE
             })
@@ -455,10 +456,9 @@ export const __meta__ = {
                 }
 
                 parent.kendoStop(true);
-                that.element.attr("aria-hidden", true);
                 wrap
-                    .css({ overflow: HIDDEN }) // stop callback will remove hidden overflow
-                    .attr("aria-hidden", true);
+                    .css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
+
                 parent.kendoAnimate(animation);
 
                 if (skipEffects) {
@@ -481,7 +481,7 @@ export const __meta__ = {
                     that._resizeTimeout = null;
                 }, 50);
             } else {
-                if (!that._hovered || (that._activated && that.element.find(".k-list").length > 0)) {
+                if (!that._hovered || (that._activated && that.element.find(".k-list:visible").length > 0)) {
                     that.close();
                 }
             }

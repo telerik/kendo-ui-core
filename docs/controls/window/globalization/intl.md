@@ -2,6 +2,7 @@
 title: Internationalization
 page_title: jQuery Window Documentation - Window Internationalization
 description: "Get started with the jQuery Window by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
+components: ["window"]
 slug: intl_window
 position: 2
 ---

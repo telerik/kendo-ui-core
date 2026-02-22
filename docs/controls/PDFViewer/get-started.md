@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery PDFViewer Documentation - Getting Started with the PDFViewer
 description: "Get started with the jQuery PDFViewer by Kendo UI and learn how to create and initialize the component."
+components: ["pdfviewer"]
 slug: getting_started_kendoui_pdfviewer_widget
 position: 1
 ---
@@ -15,14 +16,7 @@ After the completion of this guide, you will be able to achieve the following en
 ```dojo
     <div id="pdfViewer"></div>
 
-    <script>
-      $.when(
-        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"),
-        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js")
-      )
-        .done(function () {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';           
-      }).then(function(){
+    <script type="module">
         $("#pdfViewer").kendoPDFViewer({
           pdfjsProcessing: {
             file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
@@ -31,7 +25,6 @@ After the completion of this guide, you will be able to achieve the following en
           height: 700,
           scale: 1.5
         })
-      })
     </script>
 ```
 
@@ -152,8 +145,4 @@ The [`scale`](/api/javascript/ui/pdfviewer/configuration/scale) configuration al
 * [JavaScript API Reference of the PDFViewer](/api/javascript/ui/pdfviewer)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

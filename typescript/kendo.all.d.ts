@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2025.1.227
+// Type definitions for Kendo UI Professional v2026.1.212
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -286,7 +286,6 @@ declare namespace kendo {
         hasHW3D: boolean;
         hasNativeScrolling: boolean;
         devicePixelRatio: number;
-        placeholder: boolean;
         zoomLevel: number;
         mobileOS: {
             device: string;
@@ -470,37 +469,31 @@ declare namespace kendo {
 }
 
 declare namespace kendo.chat {
-    class ChatMessageBox extends  kendo.Class {
+    // @deprecated Use the main Chat widget instead
+    class ChatView extends kendo.Class {
         init?(options: any): void;
         exec?(): void;
         styles?(options: any): void;
     }
 
-    class ChatToolBar extends  kendo.Class {
-        init?(options: any): void;
-        exec?(): void;
-        styles?(options: any): void;
-    }
-
-    class ChatView extends  kendo.Class {
-        init?(options: any): void;
-        exec?(): void;
-        styles?(options: any): void;
-    }
-
-    class Component extends  kendo.Class {
+    // @deprecated Use the main Chat widget instead
+    class Component extends kendo.Class {
         init?(options: any): void;
         exec?(): void;
     }
 
+    // @deprecated
     interface Templates {
-       heroCard?(): void;
-       message?(): void;
     }
 
+    // Deprecated methods - kept for backwards compatibility
+    // @deprecated Use built-in templates or append elements manually
     function getComponent(componentName: string): void;
+    // @deprecated Use built-in templates or append elements manually
     function getTemplate(templateName: string): kendo.chat.Templates | string;
+    // @deprecated Use built-in templates or append elements manually
     function registerComponent(componentName: string, component: kendo.chat.Component): void;
+    // @deprecated Use built-in templates or append elements manually
     function registerTemplate(templateName: string, template: string | Function): void;
 }
 
@@ -870,6 +863,8 @@ declare namespace kendo.data {
         load(): void;
         loaded(value: boolean): void;
         loaded(): boolean;
+        loading(value: boolean): void;
+        loading(): boolean;
         parentNode(): Node;
     }
 
@@ -1305,6 +1300,28 @@ declare namespace kendo.data {
         action?: string | undefined;
         index?: number | undefined;
         items?: kendo.data.Model[] | undefined;
+    }
+
+    interface AISmartPasteTransportOptions {
+        service?: {
+            url?: string;
+            headers?: any;
+            data?: any;
+        };
+        requestStart?: (options?: any) => void;
+        success?: (response?: any) => void;
+        error?: (response?: any) => void;
+    }
+
+    class AISmartPasteTransport {
+        options: AISmartPasteTransportOptions;
+
+        constructor(options?: AISmartPasteTransportOptions);
+        read(options: any): void;
+        setup(options: any): any;
+        getData(options?: any): any;
+        success(response: any): any;
+        error(response: any): void;
     }
 
     class DataSource extends Observable{
@@ -2232,12 +2249,20 @@ declare namespace kendo.ui {
         addPromptOutput(promptOutput: AIPromptPromptOutput): void;
 
         getViews(): AIPromptView[] | any[];
+
+        updatePromptOutputContent(content: string, outputIdOrElement?: string | Object): void;
+
+        startStreaming(): void;
+
+        stopStreaming(): void;
     }
 
     interface AIPromptPromptOutput {
-        id: string;
-        prompt: string;
+        id?: string | undefined;
+        prompt?: string | undefined;
         output: string;
+        isLoading?: boolean | undefined;
+        isRetry?: boolean | undefined;
     }
 
     interface AIPromptEvent {
@@ -2246,21 +2271,102 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    interface AIPromptCommandExecuteEvent extends AIPromptEvent {
+        // Command execution event data
+    }
+
+    interface AIPromptPromptRequestEvent extends AIPromptEvent {
+        prompt: string;
+        output?: string | undefined;
+        history?: AIPromptPromptOutput[] | undefined;
+        isRetry?: boolean | undefined;
+    }
+
+    interface AIPromptPromptResponseEvent extends AIPromptEvent {
+        output: string;
+        prompt: string;
+        outputId: string;
+        isRetry: boolean;
+    }
+
+    interface AIPromptOutputActionEvent extends AIPromptEvent {
+        command: string;
+        outputId: string;
+        output: string;
+        prompt: string;
+        button: JQuery;
+    }
+
+    interface AIPromptPromptRequestCancelEvent extends AIPromptEvent {
+        output?: Object | undefined;
+    }
+
+    interface AIPromptSpeechToTextOptions {
+        integrationMode?: string | undefined;
+        lang?: string | undefined;
+        continuous?: boolean | undefined;
+        interimResults?: boolean | undefined;
+        maxAlternatives?: number | undefined;
+    }
+
+    interface AIPromptPromptTextAreaOptions {
+        fillMode?: string | undefined;
+        inputMode?: string | undefined;
+        label?: {
+            content?: string | undefined;
+            floating?: boolean | undefined;
+        } | undefined;
+        maxLength?: number | undefined;
+        overflow?: string | undefined;
+        placeholder?: string | undefined;
+        resize?: string | undefined;
+        rows?: number | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+    }
+
+    interface AIPromptOutputAction {
+        command?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        themeColor?: string | undefined;
+        title?: string | undefined;
+        type?: string | undefined;
+    }
+
     interface AIPromptOptions {
         name?: string | undefined;
         activeView?: number | string | undefined;
+        service?: string | AIPromptServiceOptions | undefined;
         views?: AIPromptView[] | any[] | undefined;
         promptOutputs?: AIPromptPromptOutput[] | any[] | undefined;
+        encodedPromptOutputs?: boolean | undefined;
         promptSuggestionItemTemplate?: string | Function | undefined;
         promptSuggestions?: string[] | any[] | undefined;
         toolbarItems?: ToolBarItem[] | any[] | undefined;
-        showOutputRating?: boolean | undefined;
+        showOutputSubtitleTooltip?: boolean | undefined;
+        speechToText?: boolean | AIPromptSpeechToTextOptions | undefined;
+        promptTextArea?: AIPromptPromptTextAreaOptions | undefined;
+        outputActions?: (string | AIPromptOutputAction)[] | undefined;
+        outputTemplate?: Function | undefined;
         messages?: AIPromptMessages | undefined;
 
-        commandExecute?(e: AIPromptEvent): void;
-        promptRequest?(e: AIPromptEvent): void;
+        commandExecute?(e: AIPromptCommandExecuteEvent): void;
+        promptRequest?(e: AIPromptPromptRequestEvent): void;
+        promptResponse?(e: AIPromptPromptResponseEvent): void;
+        outputAction?(e: AIPromptOutputActionEvent): void;
+        promptRequestCancel?(e: AIPromptPromptRequestCancelEvent): void;
         outputRatingChange?(e: AIPromptEvent): void;
         outputCopy?(e: AIPromptEvent): void;
+    }
+
+    interface AIPromptServiceOptions {
+        url?: string | undefined;
+        headers?: any[] | undefined;
+        outputGetter?: Function | undefined,
+        data?: Function | any | undefined,
     }
 
     interface AIPromptMessages {
@@ -2272,9 +2378,12 @@ declare namespace kendo.ui {
         generateOutput?: string | undefined;
         outputRetryTitle?: string | undefined;
         outputTitle?: string | undefined;
-        promptPlaceHolder?: string | undefined;
+        promptPlaceholder?: string | undefined;
         promptSuggestions?: string | undefined;
         retryGeneration?: string | undefined;
+        ratePositive?: string | undefined;
+        rateNegative?: string | undefined;
+        stopGeneration?: string | undefined;
     }
 
     interface AIPromptView {
@@ -2284,8 +2393,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         viewTemplate?: string | Function | undefined;
         footerTemplate?: string | Function | undefined;
-        initializeComponent(container: JQuery): void;
-        initializeComponent(): void;
+        initializeComponents?: Function | undefined;
     }
 
     class Alert extends kendo.ui.Dialog {
@@ -2422,6 +2530,8 @@ declare namespace kendo.ui {
     interface AutoCompleteOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | AutoCompleteAnimation | undefined;
         autoWidth?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
@@ -2787,9 +2897,24 @@ declare namespace kendo.ui {
 
     }
 
+    interface ButtonGroupItemBadge {
+        align?: string | undefined;
+        cutoutBorder?: boolean | undefined;
+        fill?: string | undefined;
+        icon?: string | undefined;
+        max?: number | undefined;
+        position?: string | undefined;
+        shape?: string | undefined;
+        size?: string | undefined;
+        template?: string | Function | undefined;
+        text?: string | number | undefined;
+        themeColor?: string | undefined;
+        visible?: boolean | undefined;
+    }
+
     interface ButtonGroupItem {
         attributes?: any;
-        badge?: string | undefined;
+        badge?: ButtonGroupItemBadge | undefined;
         enabled?: boolean | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
@@ -3360,113 +3485,509 @@ declare namespace kendo.ui {
     }
 
     interface ChartWizardDefaultState extends Pick<ChartWizardState, 'stack' | 'seriesType'> { }
-
-
-
     class Chat extends kendo.ui.Widget {
 
         static fn: Chat;
 
-        options: ChatOptions;
+        options: IChatOptions;
 
+        dataSource: kendo.data.DataSource;
 
         element: JQuery;
         wrapper: JQuery;
 
         static extend(proto: Object): Chat;
 
-        constructor(element: Element, options?: ChatOptions);
+        constructor(element: Element, options?: IChatOptions);
 
-
-        clearUserTypingIndicator(sender: any): void;
-        getUser(): any;
-        postMessage(message: string): void;
-        removeTypingIndicator(): void;
-        renderAttachments(options: any, sender: any): void;
-        renderMessage(message: any, sender: any): void;
-        renderSuggestedActions(suggestedActions: any): void;
-        renderUserTypingIndicator(sender: any): void;
-        toggleToolbar(skipEffects: boolean): void;
+        /* Clear all chat messages */
+        clearMessages(): void;
+        /* Clear pinned message */
+        clearPinnedMessage(): void;
+        /* Clear reply state (if replying to a message) */
+        clearReplyState(): void;
+        /* Get the message data item associated with a message element */
+        dataItem(message: JQuery): any;
+        /* Destroy the component */
+        destroy(): void;
+        /* Get the file data item associated with a file element */
+        fileDataItem(message: any, file: JQuery): IFile;
+        /* Get a message data item by its uid */
+        getMessageByUid(uid: string): IMessage | null;
+        /* Get the current user's ID */
+        getUserId(): string;
+        /* Add a message to the chat */
+        postMessage(message: string | IMessage): IMessage;
+        /* Remove a message from the chat by a given data item */
+        removeMessage(message: IMessage): boolean;
+        /* Scroll to the bottom of the chat */
+        scrollToBottom(): void;
+        /* Update the options of the chat */
+        setOptions(options: IChatOptions): void;
+        /* @deprecated Use `loading` method instead */
+        toggleSendButtonGenerating(generating: boolean): void;
+        /* Toggle between the send and loading buttons. */
+        loading(loading: boolean): void;
+        /* Update an existing message in the chat. */
+        updateMessage(message: IMessage, newData: IMessage): IMessage;
     }
 
-    interface ChatMessages {
-        messageListLabel?: string | undefined;
-        placeholder?: string | undefined;
-        sendButton?: string | undefined;
-        toggleButton?: string | undefined;
+    interface IFile {
+        /** Unique identifier for the file */
+        uid: string;
+        /** File name with extension */
+        name: string;
+        /** File size in bytes */
+        size: number;
+        /** File extension (e.g., ".pdf", ".jpg") */
+        extension: string;
+        /** Javascript File object */
+        rawFile: File;
     }
-
-    interface ChatUser {
-        iconUrl?: string | undefined;
-        name?: string | undefined;
+    interface IMenuAction {
+        /** Unique name/identifier for the action */
+        name: string;
+        /** Display text for the action */
+        text: string;
+        /** Icon identifier */
+        icon: string;
+        /** Additional attributes for the menu item */
+        attributes?: Record<string, string>;
+        /** Additional data attributes */
+        attr?: Record<string, string>;
+        /** Unique ID for the action */
+        id?: string;
     }
-
-    interface ChatRenderAttachmentsOptionsAttachments {
+    interface IToolbarAction {
+        /** Unique name/identifier for the action */
+        name: string;
+        /** Display text for the action */
+        text?: string;
+        /** Icon identifier */
+        icon?: string;
+        /** Button type */
+        type?: string;
+        /** Button fill mode */
+        fillMode?: string;
+        /** Overflow behavior */
+        overflow?: string;
+        /** Additional attributes */
+        attributes?: Record<string, string>;
+    }
+    interface IHeaderItem {
+        /** Type of header item */
+        type: string;
+        /** Template for the item */
+        template?: string | (() => string);
+        /** Additional configuration */
+        [key: string]: any;
+    }
+    type MessageWidthMode = "standard" | "full";
+    type AttachmentLayoutMode = "list" | "carousel";
+    interface IChatAttachment {
+        /** Type of attachment: card, image, etc. */
+        contentType: string;
+        /** Content data for the attachment */
         content?: any;
-        contentType?: string | undefined;
+        /** Title for the attachment */
+        title?: string;
+        /** Subtitle for the attachment */
+        subtitle?: string;
+        /** Image URL for the attachment */
+        thumbnailUrl?: string;
+        /** Actions available on the attachment */
+        actions?: ISuggestion[];
+    }
+    type MessageStatus = "sent" | "delivered" | "seen" | "failed";
+    interface IMessageStatusSettings {
+        /** Font icon name to display for the status */
+        icon?: string;
+        /** SVG icon to display for the status */
+        svgIcon?: any;
+        /** Text to display for the status */
+        text?: string;
+        /** CSS class to apply to the status element */
+        cssClass?: string;
+    }
+    type FilesLayoutMode = "horizontal" | "vertical" | "wrap";
+    type SuggestedActionsLayoutMode = "scroll" | "wrap" | "scrollbuttons";
+    interface ISuggestion {
+        text: string;
+    }
+    interface IMessage {
+        /** Unique identifier for the message */
+        id: string;
+        /** Internal UID used by the data source */
+        uid?: string;
+        /** Message text content */
+        text: string;
+        /** ID of the message author */
+        authorId: string;
+        /** Display name of the author */
+        authorName?: string;
+        /** URL to the author's avatar image */
+        authorImageUrl?: string;
+        /** Alt text for the author's avatar */
+        authorImageAltText?: string;
+        /** Timestamp when the message was sent */
+        timestamp: Date;
+        /** Array of file attachments */
+        files: IFile[];
+        /** ID of the message being replied to */
+        replyToId?: string;
+        /** Whether the message has been deleted */
+        isDeleted?: boolean;
+        /** Whether the message is pinned */
+        isPinned?: boolean;
+        /** Whether this is a typing indicator */
+        isTyping?: boolean;
+        /** Suggested actions to display after this message */
+        suggestedActions?: ISuggestion[];
+        /** Whether this message belongs to the current user (computed) */
+        isOwnMessage?: boolean;
+        /** Message delivery status */
+        status?: MessageStatus;
+        /** Whether the message failed to send */
+        failed?: boolean;
+        /** Rich attachments (cards, images, etc.) */
+        attachments?: IChatAttachment[];
+        /** Layout mode for attachments */
+        attachmentLayout?: AttachmentLayoutMode;
+    }
+    interface IMessageSettings {
+        /** Whether to show the avatar for this user's messages */
+        showAvatar?: boolean;
+        /** Whether to show the username for this user's messages */
+        showUsername?: boolean;
+        /** Whether to show the timestamp for this user's messages */
+        showTimestamp?: boolean;
+        /** Message width mode for this user's messages */
+        messageWidthMode?: MessageWidthMode;
+        /** Whether messages from this user can be collapsed */
+        allowMessageCollapse?: boolean;
+        /** Whether to enable file actions for this user's messages */
+        enableFileActions?: boolean;
+        /** Whether to enable context menu actions for this user's messages */
+        enableContextMenuActions?: boolean;
+        /** Actions available in the message toolbar for this user */
+        messageToolbarActions?: IToolbarAction[];
+        /** Actions available in the context menu for this user */
+        messageActions?: IMenuAction[];
+    }
+    interface IChatMessages {
+        messageListLabel: string;
+        placeholder: string;
+        /** @deprecated Use `sendButton` instead. */
+        actionButton: string;
+        /** @deprecated Use `sendButtonLoading` instead. */
+        actionButtonLoading: string;
+        sendButton: string;
+        sendButtonLoading: string;
+        /** @deprecated Use `sendButtonLoading` instead. */
+        stopButton: string;
+        speechToTextButton: string;
+        fileButton: string;
+        downloadAll: string;
+        selfMessageDeleted: string;
+        otherMessageDeleted: string;
+        stopGeneration: string;
+        messageBoxLabel: string;
+        pinnedMessageCloseButton: string;
+        replyMessageCloseButton: string;
+        fileMenuButton: string;
+        retryMessage: string;
     }
 
-    interface ChatRenderAttachmentsOptions {
-        attachments?: ChatRenderAttachmentsOptionsAttachments | undefined;
-        attachmentLayout?: string | undefined;
+    const LINE_MODE: {
+        readonly SINGLE: "single";
+        readonly MULTI: "multi";
+        readonly AUTO: "auto";
+    };
+    type ModeValue = typeof LINE_MODE[keyof typeof LINE_MODE];
+    interface IFileSelectButtonSettings {
+        /** Enables the file attachment button (default: true) */
+        enable?: boolean;
+        /** Fill mode for the button */
+        fillMode?: string;
+        /** Border radius for the button */
+        rounded?: string;
+        /** Size of the button */
+        size?: string;
+        /** Theme color for the button */
+        themeColor?: string;
+        /** Icon name */
+        icon?: string;
+        /** Tooltip/aria-label text */
+        text?: string;
+        /** File restrictions */
+        restrictions?: {
+            allowedExtensions?: string[];
+            maxFileSize?: number;
+            minFileSize?: number;
+        };
+        /** Allow multiple file selection */
+        multiple?: boolean;
+        /** Accept attribute for input */
+        accept?: string;
     }
-
-    interface ChatRenderAttachmentsSender {
-        id?: any;
-        name?: string | undefined;
-        iconUrl?: string | undefined;
+    interface IInputEventArgs {
+        value: string;
     }
-
-    interface ChatRenderMessageMessage {
-        type?: string | undefined;
-        text?: string | undefined;
+    interface ISendMessageEventArgs {
+        message?: IMessage;
+        generating?: boolean;
     }
-
-    interface ChatRenderMessageSender {
-        id?: any;
-        name?: string | undefined;
-        iconUrl?: string | undefined;
+    interface ISuggestionClickEventArgs {
+        text: string;
     }
-
-    interface ChatRenderSuggestedActionsSuggestedActions {
-        title?: string | undefined;
-        value?: string | undefined;
+    interface IUnpinEventArgs {
+        message: IMessage;
     }
-
-    interface ChatOptions {
-        name?: string | undefined;
-        messages?: ChatMessages | undefined;
-        user?: ChatUser | undefined;
-        actionClick?(e: ChatActionClickEvent): void;
-        post?(e: ChatPostEvent): void;
-        sendMessage?(e: ChatSendMessageEvent): void;
-        typingEnd?(e: ChatTypingEndEvent): void;
-        typingStart?(e: ChatTypingStartEvent): void;
+    interface IToolbarActionEventArgs {
+        type: string;
+        message: IMessage;
     }
-    interface ChatEvent {
-        sender: Chat;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
+    interface IFileMenuActionEventArgs {
+        type: string;
+        file: IFile;
+        message: IMessage;
     }
-
-    interface ChatActionClickEvent extends ChatEvent {
-        text?: string | undefined;
+    interface IContextMenuActionEventArgs {
+        type: string;
+        message: IMessage;
     }
-
-    interface ChatPostEvent extends ChatEvent {
-        text?: string | undefined;
-        timestamp?: Date | undefined;
-        from?: any;
+    interface IDownloadEventArgs {
+        files?: IFile[];
+        file?: IFile;
+        message?: IMessage;
     }
-
-    interface ChatSendMessageEvent extends ChatEvent {
-        text?: string | undefined;
+    type SuggestionsTemplateFunction = (suggestions: ISuggestion[]) => string;
+    type TimestampTemplateFunction = (context: {
+        date: Date;
+        message: IMessage;
+    }) => string;
+    type MessageStatusTemplateFunction = (context: {
+        status: MessageStatus;
+        message: IMessage;
+    }) => string;
+    type MessageContentTemplateFunction = (message: IMessage) => string;
+    type UserStatusTemplateFunction = (context: {
+        author: {
+            id: string;
+            name?: string;
+            imageUrl?: string;
+        };
+    }) => string;
+    type AttachmentTemplateFunction = (context: {
+        attachment: IChatAttachment;
+        message: IMessage;
+    }) => string;
+    type MessageBoxTemplateFunction = () => string;
+    type HeaderTemplateFunction = () => string;
+    type MessageTemplateFunction = (message: IMessage & {
+        isOwnMessage: boolean;
+        author: {
+            id: string;
+            name?: string;
+            imageUrl?: string;
+            imageAltText?: string;
+        };
+    }, replyMessage: IMessage | null, downloadAll: boolean, messages: IChatMessages, expandable: boolean, messageTimeFormat: string, skipSanitization: boolean, statusTemplate?: MessageStatusTemplateFunction | null) => string;
+    type MessageGroupTemplateFunction = (context: {
+        message: IMessage;
+        author: {
+            id: string;
+            name?: string;
+            imageUrl?: string;
+            imageAltText?: string;
+        };
+        isOwnMessage: boolean;
+        replyMessage?: IMessage | null;
+        downloadAll?: boolean;
+        messages?: IChatMessages;
+        expandable?: boolean;
+        fullWidth?: boolean;
+        messageTimeFormat?: string;
+        timestampTemplate?: TimestampTemplateFunction | null;
+        statusTemplate?: MessageStatusTemplateFunction | null;
+        showTimestamp?: boolean;
+        messageTemplate?: MessageTemplateFunction;
+        contentTemplate?: MessageContentTemplateFunction | null;
+        authorMessageContentTemplate?: MessageContentTemplateFunction | null;
+        receiverMessageContentTemplate?: MessageContentTemplateFunction | null;
+        attachmentTemplate?: AttachmentTemplateFunction | null;
+        userStatusTemplate?: UserStatusTemplateFunction | null;
+        skipSanitization?: boolean;
+        messageSettings?: IMessageSettings;
+        filesLayoutMode?: FilesLayoutMode;
+        attachmentLayout?: AttachmentLayoutMode;
+    }) => string;
+    type MessageReferenceTemplateFunction = (context: {
+        text?: string;
+        files?: any[];
+        isOwnMessage?: boolean;
+        isPinMessage?: boolean;
+        isDeleted?: boolean;
+        renderCloseButton?: boolean;
+        renderFileMenuButton?: boolean;
+        messages?: IChatMessages;
+    }) => string;
+    type FilesTemplateFunction = (files: any[], downloadAll?: boolean, messages?: IChatMessages, closeButton?: boolean) => string;
+    type TimestampVisibility = "always" | "hover" | "never";
+    type SuggestionsBehavior = "send" | "insert";
+    type ChatDirection = "ltr" | "rtl";
+    interface IActionButtonSettings {
+        /** Icon name for the action button */
+        icon?: string;
+        /** Text to display on the action button */
+        text?: string;
+        /** Icon for the loading state */
+        loadingIcon?: string;
+        /** Text to display while loading */
+        loadingText?: string;
+        /** Whether to show the stop button when loading */
+        showStopButton?: boolean;
+        /**
+         * @deprecated Use `loadingIcon` instead. Will be removed in future version.
+         */
+        stopIcon?: string;
+        /**
+         * @deprecated Use `loadingText` instead. Will be removed in future version.
+         */
+        stopText?: string;
     }
-
-    interface ChatTypingEndEvent extends ChatEvent {
+    interface IMessageBoxSettings {
+        /** Mode: "single", "multi", or "auto" (default) */
+        mode?: ModeValue;
+        /** Initial number of rows for multi mode */
+        rows?: number;
+        /** Maximum height of the textarea in pixels */
+        maxTextAreaHeight?: number;
     }
-
-    interface ChatTypingStartEvent extends ChatEvent {
+    interface IChatOptions {
+        showAvatar: boolean;
+        suggestionsBehavior: SuggestionsBehavior;
+        receiverMessageSettings: IMessageSettings | null;
+        filesLayoutMode: FilesLayoutMode;
+        failedField: string;
+        attachmentLayoutField: string;
+        messageContentTemplate: MessageContentTemplateFunction | null;
+        receiverMessageTemplate: MessageTemplateFunction | null;
+        receiverMessageContentTemplate: MessageContentTemplateFunction | null;
+        attachmentTemplate: AttachmentTemplateFunction | null;
+        actionButton: IActionButtonSettings;
+        /** Allow messages to be collapsed */
+        allowMessageCollapse: boolean;
+        /** Current user's author ID */
+        authorId: string | null;
+        /** Field name for author ID */
+        authorIdField: string;
+        /** Field name for author image alt text */
+        authorImageAltTextField: string;
+        /** Field name for author image URL */
+        authorImageUrlField: string;
+        /** Field name for author name */
+        authorNameField: string;
+        /** Automatically assign unique IDs to messages */
+        autoAssignId: boolean;
+        /** Automatically bind to the data source */
+        autoBind: boolean;
+        contextMenuAction: (args: IContextMenuActionEventArgs) => void;
+        /** Data source configuration */
+        dataSource?: any;
+        /** Text direction */
+        dir: ChatDirection;
+        download: (args: IDownloadEventArgs) => void;
+        /** Actions available in the file context menu */
+        fileActions: IMenuAction[];
+        fileMenuAction: (args: IFileMenuActionEventArgs) => void;
+        /** Enable file attachment button functionality */
+        fileAttachment: boolean | IFileSelectButtonSettings | null;
+        /** Field name for files array */
+        filesField: string;
+        /** Template for rendering file attachments */
+        filesTemplate: FilesTemplateFunction | null;
+        /** Header items for the chat Toolbar */
+        headerItems: IHeaderItem[];
+        /** Custom header template (overrides headerItems) */
+        headerTemplate: HeaderTemplateFunction | null;
+        /** Widget height */
+        height: string | number | null;
+        /** Field name for message ID */
+        idField: string;
+        /** Input event handler. The event is triggered on each input change in the message box. */
+        input: (args: IInputEventArgs) => void;
+        /** Field name for deleted flag */
+        isDeletedField: string;
+        /** Field name for pinned flag */
+        isPinnedField: string;
+        /** Field name for typing flag */
+        isTypingField: string;
+        /** Loading state - transforms send button to stop button */
+        loading: boolean;
+        /** Actions available in the message context menu */
+        messageActions: IMenuAction[];
+        /** Message box settings for PromptBox configuration */
+        messageBox: IMessageBoxSettings | null;
+        /** Template for rendering message groups */
+        messageGroupTemplate: MessageGroupTemplateFunction | null;
+        /** Template for rendering message references (reply/pin) */
+        messageReferenceTemplate: MessageReferenceTemplateFunction | null;
+        /** Custom settings for message status display with icon support */
+        messageStatusSettings: Partial<Record<MessageStatus, IMessageStatusSettings>> | null;
+        /** Template for rendering individual messages */
+        messageTemplate: MessageTemplateFunction | null;
+        /** Format string for message timestamps */
+        messageTimeFormat: string;
+        /** Actions available in the message toolbar */
+        messageToolbarActions: IToolbarAction[];
+        /** Message width display mode */
+        messageWidthMode: MessageWidthMode;
+        /** Localization messages */
+        messages: IChatMessages;
+        /** Template for no data/empty state */
+        noDataTemplate: (() => string) | null;
+        /** Field name for reply-to ID */
+        replyToIdField: string;
+        /** Show scroll-to-bottom button when scrolled up */
+        scrollToBottomButton: boolean;
+        /** Send message event handler. The even is triggered right before the message is sent. */
+        sendMessage: (args: ISendMessageEventArgs) => void;
+        /** Skip HTML sanitization (use with caution) */
+        skipSanitization: boolean;
+        /** Speech-to-text configuration. Use false to not render, true for default, or object for custom configuration. */
+        speechToText: boolean | object | null;
+        suggestionClick: (args: ISuggestionClickEventArgs) => void;
+        /** Layout mode for suggested actions */
+        suggestedActionsLayoutMode: SuggestedActionsLayoutMode;
+        /**
+         * @deprecated Use `suggestedActionsLayoutMode` instead. Will be removed in future version.
+         * Enable scrollable suggested actions
+         */
+        suggestedActionsScrollable: boolean;
+        /** Template for rendering suggested actions */
+        suggestedActionsTemplate: SuggestionsTemplateFunction | null;
+        /** Initial suggestions to display */
+        suggestions: ISuggestion[];
+        /** Layout mode for message box suggestions: "scroll" | "wrap" | "scrollbuttons" */
+        suggestionsLayoutMode: SuggestedActionsLayoutMode | null;
+        /**
+         * @deprecated Use `suggestionsLayoutMode` instead. Will be removed in future version.
+         * Enable scrollable suggestions
+         */
+        suggestionsScrollable: boolean;
+        /** Template for rendering suggestions */
+        suggestionsTemplate: SuggestionsTemplateFunction | null;
+        /** Field name for message text */
+        textField: string;
+        /** Field name for timestamp */
+        timestampField: string;
+        /** Custom timestamp template */
+        timestampTemplate: TimestampTemplateFunction | null;
+        toolbarAction: (args: IToolbarActionEventArgs) => void;
+        unpin: (args: IUnpinEventArgs) => void;
+        /** Widget width */
+        width: string | number | null;
     }
 
     class CheckBox extends kendo.ui.Widget {
@@ -3906,7 +4427,6 @@ declare namespace kendo.ui {
         green?: string;
         blue?: string;
         hex?: string;
-        adaptiveTitle?: string;
     }
 
     interface ColorPickerTileSize {
@@ -3916,7 +4436,9 @@ declare namespace kendo.ui {
 
     interface ColorPickerOptions {
         name?: string | undefined;
-        adaptiveMode?: "none" | "auto" | undefined; 
+        adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         buttons?: boolean | undefined;
         contrastTool?: boolean | ColorPickerContrastTool | undefined;
         clearButton?: boolean | undefined;
@@ -4029,6 +4551,8 @@ declare namespace kendo.ui {
     interface ComboBoxOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | ComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -4037,6 +4561,7 @@ declare namespace kendo.ui {
         cascadeFromParentField?: string | undefined;
         cascadeOnCustomValue?: boolean | undefined;
         clearButton?: boolean | undefined;
+        readonly?: boolean | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
@@ -4426,6 +4951,8 @@ declare namespace kendo.ui {
         autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DatePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
@@ -4526,6 +5053,8 @@ declare namespace kendo.ui {
         calendarButton?: boolean | undefined;
         clearButton?: boolean | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         ARIATemplate?: string | undefined;
         culture?: string | undefined;
         dates?: any;
@@ -4628,6 +5157,8 @@ declare namespace kendo.ui {
         autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DateTimePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         ARIATemplate?: string | undefined;
@@ -4709,6 +5240,13 @@ declare namespace kendo.ui {
         text?: string | undefined;
         action?: Function | undefined;
         primary?: boolean | undefined;
+        cssClass?: string | undefined;
+        fillMode?: string | undefined;
+        themeColor?: string | undefined;
+        size?: string | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        rounded?: string | undefined;
     }
 
     interface DialogAnimationClose {
@@ -4975,6 +5513,8 @@ declare namespace kendo.ui {
     interface DropDownListOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DropDownListAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -4984,6 +5524,7 @@ declare namespace kendo.ui {
         dataSource?: any|any|kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
+        readonly?: boolean | undefined;
         delay?: number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
@@ -5011,6 +5552,7 @@ declare namespace kendo.ui {
         value?: string | undefined;
         valuePrimitive?: boolean | undefined;
         virtual?: boolean | DropDownListVirtual | undefined;
+        messages?: DropDownListMessages | undefined;
         change?(e: DropDownListChangeEvent): void;
         close?(e: DropDownListCloseEvent): void;
         dataBound?(e: DropDownListDataBoundEvent): void;
@@ -5023,6 +5565,11 @@ declare namespace kendo.ui {
         sender: DropDownList;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DropDownListMessages {
+        noData?: string | undefined;
+        filterInputPlaceholder?: string | undefined;
     }
 
     interface DropDownListChangeEvent extends DropDownListEvent {
@@ -5112,6 +5659,7 @@ declare namespace kendo.ui {
         clear?: string | undefined;
         deleteTag?: string | undefined;
         singleTag?: string | undefined;
+        filterInputPlaceholder?: string | undefined;
     }
 
     interface DropDownTreePopup {
@@ -5127,6 +5675,8 @@ declare namespace kendo.ui {
     interface DropDownTreeOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | DropDownTreeAnimation | undefined;
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -5325,6 +5875,38 @@ declare namespace kendo.ui {
         value(): string;
         value(value: string): void;
 
+    }
+
+    interface EditorAIPrompt {
+        service?: AIPromptServiceOptions | undefined;
+        inline?: EditorAIInlineOptions | undefined;
+        popup?: EditorAIPopupOptions | undefined;
+
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
+    interface EditorAIBaseSettings {
+        systemPrompt?: Function | undefined,
+        commands?: EditorAICommandOptions[] | undefined;
+    }
+
+    interface EditorAIPopupOptions extends EditorAIBaseSettings {
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
+    interface EditorAIInlineOptions extends EditorAIBaseSettings {
+        promptSuggestions?: string[] | any[] | undefined;
+        initializeComponent(container: JQuery): void;
+        initializeComponent(): void;
+    }
+
+    interface EditorAICommandOptions {
+        text?: string | undefined,
+        prompt?: Function | undefined,
+        icon?: string | undefined,
+        id?: string | undefined
     }
 
     interface EditorDeserialization {
@@ -5726,6 +6308,7 @@ declare namespace kendo.ui {
         nonce?: string | undefined;
         formattingMarksRefreshDelay?: number | boolean | undefined;
         unsafeInline?: boolean | undefined;
+        ai?: EditorAIPrompt;
         change?(e: EditorEvent): void;
         execute?(e: EditorExecuteEvent): void;
         keydown?(e: EditorEvent): void;
@@ -6231,6 +6814,9 @@ declare namespace kendo.ui {
     interface FilterMenuOptions {
         name?: string | undefined;
         dataSource?: any|any|kendo.data.DataSource | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         extra?: boolean | undefined;
         field?: string | undefined;
         messages?: FilterMenuMessages | undefined;
@@ -6443,14 +7029,20 @@ declare namespace kendo.ui {
         encoded?: boolean | undefined;
     }
 
+    interface ResponsiveFormBreakPoint  {
+        minWidth?: number | undefined;
+        maxWidth?: number | undefined;
+        value: number;
+    }
+
     interface FormGridGutterOptions {
-        rows?: string | number | undefined;
-        cols?: string | number | undefined;
+        rows?: string | Array<ResponsiveFormBreakPoint> | number | undefined;
+        cols?: string | Array<ResponsiveFormBreakPoint> | number | undefined;
     }
 
     interface FormGridOptions {
-        cols?: string | number | undefined;
-        gutter?: string | number | FormGridGutterOptions | undefined;
+        cols?: string | Array<ResponsiveFormBreakPoint> | number | undefined;
+        gutter?: string | Array<ResponsiveFormBreakPoint> | number | FormGridGutterOptions | undefined;
     }
 
     interface FormItem {
@@ -6460,7 +7052,7 @@ declare namespace kendo.ui {
         id?: string | undefined;
         hint?: string | undefined;
         title?: string | undefined;
-        colSpan?: number | undefined;
+        colSpan?: number | Array<ResponsiveFormBreakPoint> | undefined;
         attributes?: any;
         editor?: string|Function | undefined;
         editorOptions?: any;
@@ -6960,6 +7552,8 @@ declare namespace kendo.ui {
         hideColumn(column: string): void;
         hideColumn(column: any): void;
         hideColumn(column: any[]): void;
+        handleAIResponse(response: GridAIResponse): void;
+        getAIRequest(prompt: string): GridAIRequest;
         items(): any;
         lockColumn(column: number): void;
         lockColumn(column: string): void;
@@ -6978,6 +7572,9 @@ declare namespace kendo.ui {
         select(rows: string): void;
         select(rows: Element): void;
         select(rows: JQuery): void;
+        highlight(): JQuery;
+        highlight(elements: JQuery|JQuery[]): void;
+        clearHighlight(): void;
         selectedKeyNames(): any;
         setDataSource(dataSource: kendo.data.DataSource): void;
         setOptions(options: any): void;
@@ -6994,6 +7591,166 @@ declare namespace kendo.ui {
 
     }
 
+    interface GridAIRequestContent {
+        $type: string;
+        text: string;
+    }
+
+    interface GridAIRequestColumn {
+        id: string;
+        field?: string | undefined;
+        title?: string | undefined;
+        type?: "checkbox" | "command" | "draggable" | undefined;
+        [key: string]: any;
+    }
+
+    interface GridAIRequest {
+        role: string;
+        contents: GridAIRequestContent[];
+        columns: GridAIRequestColumn[];
+    }
+
+    interface GridAISelectionDescriptor {
+        logicalOperator?: number | undefined;
+        filters?: kendo.data.DataSourceFilterItem[] | undefined;
+        cells?: { [key: string]: any } | undefined;
+    }
+
+    interface GridAIHighlightDescriptor {
+        logicalOperator?: number | undefined;
+        filters?: kendo.data.DataSourceFilterItem[] | undefined;
+        cells?: { [key: string]: any } | undefined;
+    }
+
+    interface GridAICommandBase {
+        type: string;
+        message?: string | undefined;
+    }
+
+    interface GridSortCommand extends GridAICommandBase {
+        type: "GridSort";
+        sort: kendo.data.DataSourceSortItem;
+    }
+
+    interface GridClearSortCommand extends GridAICommandBase {
+        type: "GridClearSort";
+    }
+
+    interface GridFilterCommand extends GridAICommandBase {
+        type: "GridFilter";
+        filter: kendo.data.DataSourceFilterItem;
+    }
+
+    interface GridClearFilterCommand extends GridAICommandBase {
+        type: "GridClearFilter";
+    }
+
+    interface GridGroupCommand extends GridAICommandBase {
+        type: "GridGroup";
+        group: kendo.data.DataSourceGroupItem;
+    }
+
+    interface GridClearGroupCommand extends GridAICommandBase {
+        type: "GridClearGroup";
+    }
+
+    interface GridSelectCommand extends GridAICommandBase {
+        type: "GridSelect";
+        select: GridAISelectionDescriptor;
+    }
+
+    interface GridClearSelectCommand extends GridAICommandBase {
+        type: "GridClearSelect";
+    }
+
+    interface GridHighlightCommand extends GridAICommandBase {
+        type: "GridHighlight";
+        highlight: GridAIHighlightDescriptor;
+    }
+
+    interface GridClearHighlightCommand extends GridAICommandBase {
+        type: "GridClearHighlight";
+    }
+
+    interface GridColumnHideCommand extends GridAICommandBase {
+        type: "GridColumnHide";
+        id: string;
+    }
+
+    interface GridColumnShowCommand extends GridAICommandBase {
+        type: "GridColumnShow";
+        id: string;
+    }
+
+    interface GridColumnResizeCommand extends GridAICommandBase {
+        type: "GridColumnResize";
+        id: string;
+        size: number | string;
+    }
+
+    interface GridColumnLockCommand extends GridAICommandBase {
+        type: "GridColumnLock";
+        id: string;
+    }
+
+    interface GridColumnUnlockCommand extends GridAICommandBase {
+        type: "GridColumnUnlock";
+        id: string;
+    }
+
+    interface GridColumnReorderCommand extends GridAICommandBase {
+        type: "GridColumnReorder";
+        id: string;
+        position?: number | undefined;
+        index?: number | undefined;
+    }
+
+    interface GridPageCommand extends GridAICommandBase {
+        type: "GridPage";
+        page: number;
+    }
+
+    interface GridPageSizeCommand extends GridAICommandBase {
+        type: "GridPageSize";
+        pageSize: number;
+    }
+
+    interface GridExportPDFCommand extends GridAICommandBase {
+        type: "GridExportPDF";
+        fileName?: string | undefined;
+    }
+
+    interface GridExportExcelCommand extends GridAICommandBase {
+        type: "GridExportExcel";
+        fileName?: string | undefined;
+    }
+
+    type GridAICommand = 
+        | GridSortCommand
+        | GridClearSortCommand
+        | GridFilterCommand
+        | GridClearFilterCommand
+        | GridGroupCommand
+        | GridClearGroupCommand
+        | GridSelectCommand
+        | GridClearSelectCommand
+        | GridHighlightCommand
+        | GridClearHighlightCommand
+        | GridColumnHideCommand
+        | GridColumnShowCommand
+        | GridColumnResizeCommand
+        | GridColumnLockCommand
+        | GridColumnUnlockCommand
+        | GridColumnReorderCommand
+        | GridPageCommand
+        | GridPageSizeCommand
+        | GridExportPDFCommand
+        | GridExportExcelCommand;
+
+    interface GridAIResponse {
+        commands?: GridAICommand[] | undefined;
+        message?: string | undefined;
+    }
     interface GridAllowCopy {
         delimeter?: string|any | undefined;
     }
@@ -7038,6 +7795,7 @@ declare namespace kendo.ui {
     interface GridColumnMenu {
         columns?: boolean | GridColumnMenuColumns | undefined;
         filterable?: boolean | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         clearAllFilters?: boolean | undefined;
         sortable?: boolean | undefined;
         messages?: GridColumnMenuMessages | undefined;
@@ -7269,6 +8027,23 @@ declare namespace kendo.ui {
         excel?: string | undefined;
         save?: string | undefined;
         update?: string | undefined;
+        filter?: string | undefined;
+        sort?: string | undefined;
+        group?: string | undefined;
+        columnchooser?: string | undefined;
+    }
+
+    interface GridClearButtons {
+        clearFiltering?: string | undefined;
+        clearSorting?: string | undefined;
+        clearGrouping?: string | undefined;
+        columnChooserReset?: string | undefined;
+    }
+
+    interface GridApplyButtons {
+        applyGrouping?: string | undefined;
+        applySorting?: string | undefined;
+        columnChooserApply?: string | undefined;
     }
 
     interface GridMessages {
@@ -7278,6 +8053,8 @@ declare namespace kendo.ui {
         toolbarLabel?: string | undefined;
         groupingHeaderLabel?: string | undefined;
         filterCellTitle?: string | undefined;
+        clearButtons?: GridClearButtons | undefined;
+        applyButtons?: GridApplyButtons | undefined;
     }
 
     interface GridNoRecords {
@@ -7397,20 +8174,118 @@ declare namespace kendo.ui {
         text?: string | undefined;
         icon?: string | undefined;
         command?: string | undefined;
+        items?: GridContextMenuItem[] | undefined;
     }
 
     interface GridContextMenu extends ContextMenuOptions {
         body?: GridContextMenuItem[] | undefined;
-        head?:GridContextMenuItem[] | undefined;
+        head?: GridContextMenuItem[] | undefined;
+        groups?: GridContextMenuItem[] | undefined;
     }
 
     interface GridToolbarOptions{
         items?: (string | GridToolbarItem)[] | ToolBarItem[];
         overflow?: ToolBarOverflowOptions | undefined;
+        showInactiveTools?: boolean | undefined;
+    }
+
+    interface GridAIOptions {
+        keepOutputHistory?: boolean | undefined;
+        autoClose?: boolean | undefined;
+        service?: string | AIPromptServiceOptions | undefined;
+        aiAssistant?: AIPromptOptions | undefined;
+        aiAssistantWindow?: WindowOptions | undefined;
+    }
+
+    interface GridSmartBoxHistorySettings {
+        size?: number | undefined;
+        timestampFormat?: string | undefined;
+    }
+
+    interface GridSmartBoxSearchSettings {
+        enabled?: boolean | undefined;
+        placeholder?: string | undefined;
+        delay?: number | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+        dataSource?: kendo.data.DataSource | undefined;
+    }
+
+    interface GridSmartBoxSemanticSearchSettings {
+        enabled?: boolean | undefined;
+        placeholder?: string | undefined;
+        delay?: number | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+    }
+
+    interface GridSmartBoxAIAssistantServiceSettings {
+        url?: string | undefined;
+        headers?: any | undefined;
+        data?: any | Function | undefined;
+    }
+
+    interface GridSmartBoxAIAssistantSettings {
+        enabled?: boolean | undefined;
+        placeholder?: string | undefined;
+        promptSuggestions?: string[] | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+        service?: string | GridSmartBoxAIAssistantServiceSettings | undefined;
+        speechToTextButton?: boolean | SpeechToTextButtonOptions | undefined;
+    }
+
+    interface SmartBoxEvent {
+        isDefaultPrevented?: Function,
+        preventDefault?: Function;
+        sender?: kendo.ui.Widget;
+        _defaultPrevented?: boolean;
+    }
+
+    interface GridSmartBoxRequestEvent  extends SmartBoxEvent {
+        prompt?: string;
+        service?: string | GridSmartBoxAIAssistantServiceSettings | undefined;
+        history?: string[];
+    }
+
+    interface GridSmartBoxResponseSuccessEvent extends SmartBoxEvent{
+        response?: any | GridAIResponse;
+        prompt?: string;
+        service?: string | GridSmartBoxAIAssistantServiceSettings | undefined;
+    }
+
+    interface GridSmartBoxResponseErrorEvent extends SmartBoxEvent {
+        error?: any;
+    }
+
+
+    interface GridSmartBoxSearchEvent extends SmartBoxEvent {
+        searchValue?: string;
+    }
+
+
+    interface GridSmartBoxOptions {
+        activeMode?: string | undefined;
+        placeholder?: string | undefined;
+        history?: boolean | GridSmartBoxHistorySettings | undefined;
+        suggestionTemplate?: string | Function | undefined;
+        historyItemTemplate?: string | Function | undefined;
+        searchSettings?: GridSmartBoxSearchSettings | undefined;
+        semanticSearchSettings?: GridSmartBoxSemanticSearchSettings | undefined;
+        aiAssistantSettings?: GridSmartBoxAIAssistantSettings | undefined;
+        open: (e: PopupOpenEvent) => void;
+        close: (e: PopupCloseEvent) => void;
+        focus: (e: Event) => void;
+        blur: (e: Event) => void;
+        aiAssistantPromptRequest: (e: GridSmartBoxRequestEvent) => void;
+        aiAssistantResponseSuccess: (e: GridSmartBoxResponseSuccessEvent) => void;
+        aiAssistantResponseError: (e: GridSmartBoxResponseErrorEvent) => void;
+        aiAssistantCancelRequest: (e: SmartBoxEvent) => void;
+        search: (e: GridSmartBoxSearchEvent) => void;
+        semanticSearch: (e: GridSmartBoxSearchEvent) => void;
     }
 
     interface GridOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
+        ai?: GridAIOptions | undefined;
         allowCopy?: boolean | GridAllowCopy | undefined;
         allowPaste?: boolean | undefined;
         altRowTemplate?: string|Function | undefined;
@@ -7442,6 +8317,7 @@ declare namespace kendo.ui {
         search?: GridSearch | undefined;
         selectable?: boolean|string|GridSelectableOptions | undefined;
         size?: string | undefined;
+        smartBox?: GridSmartBoxOptions | undefined;
         sortable?: boolean | GridSortable | undefined;
         toolbar?: string | Function | GridToolbarOptions | (string | GridToolbarItem)[] | ToolBarItem[] | undefined;
         width?: number|string | undefined;
@@ -8434,6 +9310,8 @@ declare namespace kendo.ui {
     interface MultiColumnComboBoxOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | MultiColumnComboBoxAnimation | undefined;
         autoBind?: boolean | undefined;
         autoWidth?: boolean | undefined;
@@ -8593,6 +9471,8 @@ declare namespace kendo.ui {
     interface MultiSelectOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | MultiSelectAnimation | undefined;
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
@@ -8602,6 +9482,7 @@ declare namespace kendo.ui {
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
         delay?: number | undefined;
+        readonly?: boolean | undefined;
         downArrow?: boolean | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
@@ -8786,9 +9667,11 @@ declare namespace kendo.ui {
         show(data: any, type: string): void;
         show(data: string, type: string): void;
         show(data: Function, type: string): void;
+        show(data: ShowParams, type: string): void;
         showText(data: any, type: string): void;
         showText(data: string, type: string): void;
         showText(data: Function, type: string): void;
+        showText(data: ShowParams, type: string): void;
         success(data: any): void;
         success(data: string): void;
         success(data: Function): void;
@@ -8797,7 +9680,9 @@ declare namespace kendo.ui {
         warning(data: Function): void;
 
     }
-
+    interface ShowParams {
+        closeButton?: boolean | undefined;
+    }
     interface NotificationPosition {
         bottom?: number | undefined;
         left?: number | undefined;
@@ -9173,6 +10058,7 @@ declare namespace kendo.ui {
     }
 
     interface PDFViewerPdfjsProcessing {
+        renderForms?: boolean | undefined;
         file?: any|string | undefined;
     }
 
@@ -9272,7 +10158,6 @@ declare namespace kendo.ui {
         display?: string | undefined;
         empty?: string | undefined;
         allPages?: string | undefined;
-        numbersSelectLabel?: string | undefined;
         pageButtonLabel?: string | undefined;
         pageSizeDropDownLabel?: string | undefined;
         page?: string | undefined;
@@ -9287,6 +10172,7 @@ declare namespace kendo.ui {
 
     interface PagerOptions {
         name?: string | undefined;
+        adaptiveMode?: "none" | "auto" | undefined;
         ARIATemplate?: string | undefined;
         autoBind?: boolean | undefined;
         buttonCount?: number | undefined;
@@ -11413,11 +12299,13 @@ declare namespace kendo.ui {
         hint?: Function|string|JQuery | undefined;
         holdToDrag?: boolean | undefined;
         ignore?: string | undefined;
+        navigatable?: boolean | undefined;
         placeholder?: Function|string|JQuery | undefined;
         start?(e: SortableStartEvent): void;
         move?(e: SortableMoveEvent): void;
         end?(e: SortableEndEvent): void;
         change?(e: SortableChangeEvent): void;
+        navigate?(e: SortableNavigateEvent): void;
         cancel?(e: SortableCancelEvent): void;
     }
     interface SortableEvent {
@@ -11452,6 +12340,10 @@ declare namespace kendo.ui {
         oldIndex?: number | undefined;
         newIndex?: number | undefined;
         draggableEvent?: any;
+    }
+
+    interface SortableNavigateEvent extends SortableEvent {
+        item?: JQuery | undefined;
     }
 
     interface SortableCancelEvent extends SortableEvent {
@@ -11996,7 +12888,7 @@ declare namespace kendo.ui {
 
     interface SpreadsheetExcelImportEvent extends SpreadsheetEvent {
         file?: Blob|File | undefined;
-        progress?: JQueryPromise<any> | undefined;
+        promise?: JQueryPromise<any> | undefined;
     }
 
     interface SpreadsheetPdfExportEvent extends SpreadsheetEvent {
@@ -12220,12 +13112,15 @@ declare namespace kendo.ui {
     interface TabStripOptions {
         name?: string | undefined;
         animation?: boolean | TabStripAnimation | undefined;
+        closable?: boolean | undefined;
         collapsible?: boolean | undefined;
         contentUrls?: any;
         dataContentField?: string | undefined;
         dataContentUrlField?: string | undefined;
+        dataIconField?: string | undefined;
+        dataIconPositionField?: string | undefined;
         dataImageUrlField?: string | undefined;
-        dataSource?: any|any|kendo.data.DataSource | undefined;
+        dataSource?: any| TabStripItem[] |kendo.data.DataSource | undefined;
         dataSpriteCssClass?: string | undefined;
         dataTextField?: string | undefined;
         dataUrlField?: string | undefined;
@@ -12241,6 +13136,22 @@ declare namespace kendo.ui {
         select?(e: TabStripSelectEvent): void;
         show?(e: TabStripShowEvent): void;
     }
+
+    interface TabStripItem {
+        icon?: string | undefined;
+        iconPosition?: 'before' | 'after' | undefined;
+        closable?: boolean | undefined;
+        enabled?: boolean | undefined;
+        actions?: TabStripTabAction[] | undefined;
+    }
+
+    interface TabStripTabAction {
+        action?: Function | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        attributes?: any | undefined;
+    }
+
     interface TabStripEvent {
         sender: TabStrip;
         preventDefault: Function;
@@ -12706,6 +13617,8 @@ declare namespace kendo.ui {
     interface TimeDurationPickerOptions {
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         columns?: TimeDurationPickerColumn[] | undefined;
         enable?: boolean | undefined;
         fillMode?: string | undefined;
@@ -12772,6 +13685,7 @@ declare namespace kendo.ui {
         inputMode?: string | undefined;
         label?: string | Function | TextAreaLabel | undefined;
         maxLength?: number | undefined;
+        maxRows?: number | undefined;
         placeholder?: string | undefined;
         readonly?: boolean | undefined;
         rows?: number | undefined;
@@ -12899,6 +13813,122 @@ declare namespace kendo.ui {
     interface OTPInputChangeEvent extends OTPInputEvent {
     }
 
+    class InlineAIPrompt extends kendo.ui.Widget {
+
+       static fn: InlineAIPrompt;
+
+       options: InlineAIPromptOptions;
+
+       element: JQuery;
+       wrapper: JQuery;
+
+       static extend(proto: Object): InlineAIPrompt;
+
+       constructor(element: Element, options?: InlineAIPromptOptions);
+
+       close(): void;
+       destroy(): void;
+       enable(enable: boolean): void;
+       focus(): void;
+       open(): void;
+       open(x: number, y: number): void;
+       readonly(readonly: boolean): void;
+       setOptions(options: InlineAIPromptOptions): void;
+       startStreaming(): void;
+       stopStreaming(): void;
+       updatePromptOutputContent(content: string): void;
+       value(): string;
+       value(value: string): void;
+    }
+
+    interface InlineAIPromptMessages {
+        promptSend?: string | undefined;
+        stopOutputRetrieval?: string | undefined;
+        commandsMenu?: string | undefined;
+        retryOutputAction?: string | undefined;
+        copyOutputAction?: string | undefined;
+        discardOutputAction?: string | undefined;
+    }
+
+    interface InlineAIPromptCommand {
+        id?: string | undefined;
+        text?: string | undefined;
+        icon?: string | Function | undefined;
+        prompt?: Function | undefined;
+        items?: InlineAIPromptCommand[] | undefined;
+    }
+
+    interface InlineAIPromptServiceOptions {
+        url?: string | undefined;
+        headers?: any | undefined;
+        data?: any | Function | undefined;
+        outputGetter?: Function | undefined;
+    }
+
+    interface InlineAIPromptOutputAction {
+        command?: string | undefined;
+        text?: string | undefined;
+        icon?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        themeColor?: string | undefined;
+        title?: string | undefined;
+    }
+
+    interface InlineAIPromptOptions {
+        name?: string | undefined;
+        enable?: boolean | undefined;
+        encodedPromptOutputs?: boolean | undefined;
+        readonly?: boolean | undefined;
+        placeholder?: string | undefined;
+        messages?: InlineAIPromptMessages | undefined;
+        speechToText?: boolean | SpeechToTextButtonOptions | undefined;
+        service?: string | InlineAIPromptServiceOptions | undefined;
+        isStreaming?: boolean | undefined;
+        systemPrompt?: Function | undefined;
+        outputActions?: string[] | InlineAIPromptOutputAction[] | (string | InlineAIPromptOutputAction)[] | undefined;
+        commands?: InlineAIPromptCommand[] | undefined;
+        responseTemplate?: string | Function | undefined;
+        popup?: InlineAIPromptPopup | undefined;
+        commandExecute?(e: InlineAIPromptCommandExecuteEvent): void;
+        outputAction?(e: InlineAIPromptOutputActionEvent): void;
+        promptRequest?(e: InlineAIPromptPromptRequestEvent): void;
+        promptRequestCancel?(e: InlineAIPromptEvent): void;
+        promptResponse?(e: InlineAIPromptPromptResponseEvent): void;
+        show?(e: InlineAIPromptEvent): void;
+        hide?(e: InlineAIPromptEvent): void;
+    }
+
+    interface InlineAIPromptPopup {
+        width?: number | string | undefined;
+        height?: number | string | undefined;
+        animation?: boolean | PopupAnimation | undefined;
+        appendTo?: string | JQuery | undefined;
+    }
+    interface InlineAIPromptEvent {
+        sender: InlineAIPrompt;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface InlineAIPromptCommandExecuteEvent extends InlineAIPromptEvent {
+        query?: string | undefined;
+        selection?: string | undefined;
+    }
+
+    interface InlineAIPromptOutputActionEvent extends InlineAIPromptEvent {
+        action?: string | undefined;
+        content?: string | undefined;
+    }
+
+    interface InlineAIPromptPromptRequestEvent extends InlineAIPromptEvent {
+        prompt?: string | undefined;
+    }
+
+    interface InlineAIPromptPromptResponseEvent extends InlineAIPromptEvent {
+        response?: any | undefined;
+    }
+
     class TimePicker extends kendo.ui.Widget {
 
         static fn: TimePicker;
@@ -12951,6 +13981,8 @@ declare namespace kendo.ui {
         autoAdjust?: boolean | undefined;
         name?: string | undefined;
         adaptiveMode?: "none" | "auto" | undefined;
+        adaptiveTitle?: string | null;
+        adaptiveSubtitle?: string | null;
         animation?: boolean | TimePickerAnimation | undefined;
         autoCorrectParts?: boolean | undefined;
         componentType?: string | undefined;
@@ -13088,6 +14120,57 @@ declare namespace kendo.ui {
 
     interface TimelineNavigateEvent extends TimelineEvent {
         action?: string | undefined;
+    }
+
+    class SpeechToTextButton extends kendo.ui.Button {
+        options: SpeechToTextButtonOptions;
+        element: JQuery;
+        wrapper: JQuery;
+        speechRecognition: any;
+        constructor(element: Element, options?: SpeechToTextButtonOptions);
+        isListening(): boolean;
+        startRecognition(): void;
+        stopRecognition(): void;
+        abortRecognition(): void;
+        destroy(): void;
+    }
+
+    interface SpeechToTextButtonMessages {
+        unsupported?: string;
+        notInitialized?: string;
+        start?: string;
+        stop?: string;
+    }
+
+    interface SpeechToTextButtonEvent extends kendo.ui.ButtonEvent {
+        sender: SpeechToTextButton;
+    }
+
+    interface SpeechToTextButtonResultEvent extends SpeechToTextButtonEvent {
+        isFinal: boolean;
+        alternatives: {
+            transcript: string;
+            confidence: number;
+        }[];
+    }
+
+    interface SpeechToTextButtonErrorEvent extends SpeechToTextButtonEvent {
+        error: string | any;
+    }
+
+    interface SpeechToTextButtonOptions extends kendo.ui.ButtonOptions {
+        name?: string;
+        stopIcon?: string;
+        integrationMode?: "webSpeech" | "none";
+        lang?: string;
+        continuous?: boolean;
+        interimResults?: boolean;
+        maxAlternatives?: number;
+        messages?: SpeechToTextButtonMessages;
+        start?(e: SpeechToTextButtonEvent): void;
+        end?(e: SpeechToTextButtonEvent): void;
+        result?(e: SpeechToTextButtonResultEvent): void;
+        error?(e: SpeechToTextButtonErrorEvent): void;
     }
 
     class ToggleButton extends kendo.ui.Button {
@@ -14084,6 +15167,7 @@ declare namespace kendo.ui {
         dataImageUrlField?: string | undefined;
         dataSource?: any|any|kendo.data.HierarchicalDataSource | undefined;
         dataSpriteCssClassField?: string | undefined;
+        dataIconField?: string | undefined;
         dataTextField?: string|any | undefined;
         dataUrlField?: string | undefined;
         dragAndDrop?: boolean | TreeViewDragAndDrop | undefined;
@@ -14677,6 +15761,66 @@ declare namespace kendo.ui {
     interface SvgIconOptions extends IconOptions {
         icon?: any
     }
+
+    class SmartPasteButton extends kendo.ui.Button {
+        static fn: SmartPasteButton;
+
+        options: SmartPasteButtonOptions;
+
+        constructor(element: Element, options?: SmartPasteButtonOptions);
+
+        setOptions(options: SmartPasteButtonOptions): void;
+        destroy(): void;
+    }
+
+    interface SmartPasteButtonFormField {
+        field?: string;
+        type?: string;
+        description?: string;
+        allowedValues?: string[];
+        element?: Element;
+    }
+
+    interface SmartPasteButtonService {
+        url?: string;
+        headers?: any;
+        data?: any;
+    }
+
+    interface SmartPasteButtonOptions {
+        name?: string | undefined;
+        enable?: boolean | undefined;
+        cancelIcon?: string | undefined;
+        icon?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        formFields?: SmartPasteButtonFormField[] | null;
+        text?: string | null;
+        service?: SmartPasteButtonService | null;
+        requestStart?(e: SmartPasteButtonRequestStartEvent): void;
+        requestEnd?(e: SmartPasteButtonRequestEndEvent): void;
+        error?(e: SmartPasteButtonErrorEvent): void;
+    }
+
+    interface SmartPasteButtonEvent {
+        sender: SmartPasteButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface SmartPasteButtonRequestStartEvent extends SmartPasteButtonEvent {
+        formFields?: SmartPasteButtonFormField[];
+        content?: string;
+    }
+
+    interface SmartPasteButtonRequestEndEvent extends SmartPasteButtonEvent {
+        fieldValues?: any;
+    }
+
+    interface SmartPasteButtonErrorEvent extends SmartPasteButtonEvent {
+        error?: string;
+    }
 }
 declare namespace kendo.drawing {
     class Arc extends kendo.drawing.Element {
@@ -14808,7 +15952,7 @@ declare namespace kendo.drawing {
     }
 
 
-    interface FillOptions  {
+      interface FillOptions  {
 
 
 
@@ -17392,6 +18536,15 @@ declare namespace kendo.dataviz.ui {
         visible?: boolean | undefined;
     }
 
+    interface ChartSeriesDefaultsFocusHighlight {
+        border?: {
+            width?: number;
+            color?: string;
+            opacity?: number;
+            dashType?: string;
+        };
+    }
+
     interface ChartSeriesDefaults {
         area?: any;
         bar?: any;
@@ -17399,10 +18552,14 @@ declare namespace kendo.dataviz.ui {
         bubble?: any;
         candlestick?: any;
         column?: any;
+        dynamicSlope?: boolean | undefined;
+        dynamicHeight?: boolean | undefined;
         donut?: any;
+        focusHighLight?: ChartSeriesDefaultsFocusHighlight | undefined;
         gap?: number | undefined;
         labels?: ChartSeriesDefaultsLabels | undefined;
         line?: any;
+        legendItem?: ChartLegendItem | undefined;
         ohlc?: any;
         overlay?: ChartSeriesDefaultsOverlay | undefined;
         pie?: any;
@@ -17411,6 +18568,8 @@ declare namespace kendo.dataviz.ui {
         scatterLine?: any;
         spacing?: number | undefined;
         stack?: boolean | ChartSeriesDefaultsStack | undefined;
+        startAngle?: number | undefined;
+        style?: string | undefined;
         type?: string | undefined;
         tooltip?: ChartSeriesDefaultsTooltip | undefined;
         verticalArea?: any;
@@ -18698,6 +19857,20 @@ declare namespace kendo.dataviz.ui {
         destroy(): void;
     }
 
+    type DiagramStrokeDashType =
+        | "dash"
+        | "dashDot"
+        | "dot"
+        | "longDash"
+        | "longDashDot"
+        | "longDashDotDot"
+        | "solid";
+
+    interface BringIntoViewOptions {
+        align?: string;
+        animate?: boolean;
+    }
+
     class Diagram extends kendo.ui.Widget {
 
         static fn: Diagram;
@@ -18721,7 +19894,7 @@ declare namespace kendo.dataviz.ui {
         addShape(obj: any, undoable: boolean): kendo.dataviz.diagram.Shape;
         alignShapes(direction: string): void;
         boundingBox(items: any): kendo.dataviz.diagram.Rect;
-        bringIntoView(obj: any, options: any): void;
+        bringIntoView(obj: any, options?: BringIntoViewOptions): void;
         cancelEdit(): void;
         clear(): void;
         connect(source: any, target: any, options: any): void;
@@ -18760,9 +19933,9 @@ declare namespace kendo.dataviz.ui {
         saveAsPdf(): JQueryPromise<any>;
         saveEdit(): void;
         select(): any;
-        select(elements: kendo.dataviz.diagram.Connection, options: any): void;
-        select(elements: kendo.dataviz.diagram.Shape, options: any): void;
-        select(elements: any, options: any): void;
+        select(elements: kendo.dataviz.diagram.Connection, options?: any): void;
+        select(elements: kendo.dataviz.diagram.Shape, options?: any): void;
+        select(elements: any, options?: any): void;
         selectAll(): void;
         selectArea(rect: kendo.dataviz.diagram.Rect): void;
         setConnectionsDataSource(dataSource: kendo.data.DataSource): void;
@@ -18780,6 +19953,30 @@ declare namespace kendo.dataviz.ui {
 
     }
 
+    interface DiagramAccessibility {
+        role?: string | undefined;
+        ariaRoleDescription?: string | undefined;
+        ariaLabel?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsContentPosition {
+        vertical?: string | undefined;
+        horizontal?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsContentBorder {
+        color?: string | undefined;
+        width?: number | undefined;
+        dashType?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsContentPadding {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
+    }
+
     interface DiagramConnectionDefaultsContent {
         color?: string | undefined;
         fontFamily?: string | undefined;
@@ -18789,32 +19986,87 @@ declare namespace kendo.dataviz.ui {
         template?: string|Function | undefined;
         text?: string | undefined;
         visual?: Function | undefined;
+        position?: string | DiagramConnectionDefaultsContentPosition | undefined;
+        background?: string | undefined;
+        border?: DiagramConnectionDefaultsContentBorder | undefined;
+        padding?: number | DiagramConnectionDefaultsContentPadding | undefined;
+        offset?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsEditableTool {
         name?: string | undefined;
     }
 
+    interface DiagramConnectionDefaultsEditablePointsVertexFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsVertexStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsVertex {
+        fill?: DiagramConnectionDefaultsEditablePointsVertexFill | undefined;
+        stroke?: DiagramConnectionDefaultsEditablePointsVertexStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsMidpointFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsMidpointStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePointsMidpoint {
+        fill?: DiagramConnectionDefaultsEditablePointsMidpointFill | undefined;
+        stroke?: DiagramConnectionDefaultsEditablePointsMidpointStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEditablePoints {
+        snap?: number | undefined;
+        vertex?: DiagramConnectionDefaultsEditablePointsVertex | undefined;
+        midpoint?: DiagramConnectionDefaultsEditablePointsMidpoint | undefined;
+    }
+
     interface DiagramConnectionDefaultsEditable {
         drag?: boolean | undefined;
         remove?: boolean | undefined;
         tools?: DiagramConnectionDefaultsEditableTool[] | undefined;
+        points?: boolean | DiagramConnectionDefaultsEditablePoints | undefined;
     }
 
     interface DiagramConnectionDefaultsEndCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsEndCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsEndCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsEndCap {
         fill?: string | DiagramConnectionDefaultsEndCapFill | undefined;
         stroke?: string | DiagramConnectionDefaultsEndCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: DiagramConnectionDefaultsEndCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsHoverStroke {
@@ -18846,23 +20098,35 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramConnectionDefaultsStartCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsStartCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface DiagramConnectionDefaultsStartCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsStartCap {
         fill?: string | DiagramConnectionDefaultsStartCapFill | undefined;
         stroke?: string | DiagramConnectionDefaultsStartCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: DiagramConnectionDefaultsStartCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface DiagramConnectionDefaultsStroke {
         color?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
     }
 
     interface DiagramConnectionDefaults {
@@ -18877,6 +20141,26 @@ declare namespace kendo.dataviz.ui {
         stroke?: DiagramConnectionDefaultsStroke | undefined;
         toConnector?: string | undefined;
         type?: string | undefined;
+        cornerRadius?: number | undefined;
+        accessibility?: DiagramAccessibility | undefined;
+    }
+
+    interface DiagramConnectionContentPosition {
+        vertical?: string | undefined;
+        horizontal?: string | undefined;
+    }
+
+    interface DiagramConnectionContentBorder {
+        color?: string | undefined;
+        width?: number | undefined;
+        dashType?: string | undefined;
+    }
+
+    interface DiagramConnectionContentPadding {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
     }
 
     interface DiagramConnectionContent {
@@ -18888,14 +20172,58 @@ declare namespace kendo.dataviz.ui {
         template?: string|Function | undefined;
         text?: string | undefined;
         visual?: Function | undefined;
+        position?: string | DiagramConnectionContentPosition | undefined;
+        background?: string | undefined;
+        border?: DiagramConnectionContentBorder | undefined;
+        padding?: number | DiagramConnectionContentPadding | undefined;
+        offset?: number | undefined;
     }
 
     interface DiagramConnectionEditableTool {
         name?: string | undefined;
     }
 
+    interface DiagramConnectionEditablePointsVertexFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsVertexStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsVertex {
+        fill?: DiagramConnectionEditablePointsVertexFill | undefined;
+        stroke?: DiagramConnectionEditablePointsVertexStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsMidpointFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsMidpointStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePointsMidpoint {
+        fill?: DiagramConnectionEditablePointsMidpointFill | undefined;
+        stroke?: DiagramConnectionEditablePointsMidpointStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface DiagramConnectionEditablePoints {
+        snap?: number | undefined;
+        vertex?: DiagramConnectionEditablePointsVertex | undefined;
+        midpoint?: DiagramConnectionEditablePointsMidpoint | undefined;
+    }
+
     interface DiagramConnectionEditable {
         tools?: DiagramConnectionEditableTool[] | undefined;
+        points?: boolean | DiagramConnectionEditablePoints | undefined;
     }
 
     interface DiagramConnectionEndCapFill {
@@ -18904,7 +20232,7 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramConnectionEndCapStroke {
         color?: string | undefined;
-        dashType?: string | undefined;
+        dashType?: string | DiagramStrokeDashType | undefined;
         width?: number | undefined;
     }
 
@@ -18912,6 +20240,10 @@ declare namespace kendo.dataviz.ui {
         fill?: string | DiagramConnectionEndCapFill | undefined;
         stroke?: string | DiagramConnectionEndCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: { x: number, y: number} | undefined;
+        radius?: number | undefined;
+        position?: string | undefined;
     }
 
     interface DiagramConnectionFrom {
@@ -18957,7 +20289,7 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramConnectionStartCapStroke {
         color?: string | undefined;
-        dashType?: string | undefined;
+        dashType?: string | DiagramStrokeDashType | undefined;
         width?: number | undefined;
     }
 
@@ -18965,11 +20297,17 @@ declare namespace kendo.dataviz.ui {
         fill?: string | DiagramConnectionStartCapFill | undefined;
         stroke?: string | DiagramConnectionStartCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: { x: number, y: number} | undefined;
+        radius?: number | undefined;
+        position?: string | undefined;
     }
 
     interface DiagramConnectionStroke {
         color?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
     }
 
     interface DiagramConnectionTo {
@@ -18991,6 +20329,8 @@ declare namespace kendo.dataviz.ui {
         to?: string | DiagramConnectionTo | undefined;
         toConnector?: string | undefined;
         type?: string | undefined;
+        cornerRadius?: number | undefined;
+        accessibility?: DiagramAccessibility | undefined;
     }
 
     interface DiagramEditableDragSnap {
@@ -19098,6 +20438,7 @@ declare namespace kendo.dataviz.ui {
     }
 
     interface DiagramPannable {
+        enabled?: boolean | undefined;
         key?: string | undefined;
     }
 
@@ -19217,6 +20558,10 @@ declare namespace kendo.dataviz.ui {
         fontWeight?: string | undefined;
         template?: string|Function | undefined;
         text?: string | undefined;
+        lineSpacing?: number | undefined;
+        textWrap?: string | undefined;
+        padding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
+        relativePadding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
     }
 
     interface DiagramShapeDefaultsEditableTool {
@@ -19291,6 +20636,10 @@ declare namespace kendo.dataviz.ui {
         width?: number | undefined;
         x?: number | undefined;
         y?: number | undefined;
+        cornerRadius?: number | undefined;
+        center?: { x: number; y: number } | undefined;
+        radius?: number | undefined;
+        accessibility?: DiagramAccessibility | undefined;
     }
 
     interface DiagramShapeConnectorDefaultsFill {
@@ -19373,8 +20722,12 @@ declare namespace kendo.dataviz.ui {
         fontSize?: number | undefined;
         fontStyle?: string | undefined;
         fontWeight?: string | undefined;
-        template?: string|Function | undefined;
+        template?: string | Function | undefined;
         text?: string | undefined;
+        lineSpacing?: number | undefined;
+        textWrap?: string | undefined;
+        padding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
+        relativePadding?: number | { top?: number; right?: number; bottom?: number; left?: number } | undefined;
     }
 
     interface DiagramShapeEditableTool {
@@ -19423,8 +20776,10 @@ declare namespace kendo.dataviz.ui {
 
     interface DiagramShapeStroke {
         color?: string | undefined;
-        dashType?: string | undefined;
+        dashType?: string | DiagramStrokeDashType | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
     }
 
     interface DiagramShape {
@@ -19447,6 +20802,11 @@ declare namespace kendo.dataviz.ui {
         width?: number | undefined;
         x?: number | undefined;
         y?: number | undefined;
+        cornerRadius?: number | undefined;
+        center?: { x: number; y: number } | undefined;
+        radius?: number | undefined;
+        dataItem?: any;
+        accessibility?: DiagramAccessibility | undefined;
     }
 
     interface DiagramExportImageOptions {
@@ -19466,6 +20826,7 @@ declare namespace kendo.dataviz.ui {
     interface DiagramOptions {
         name?: string | undefined;
         autoBind?: boolean | undefined;
+        accessibility?: DiagramAccessibility | undefined;
         connectionDefaults?: DiagramConnectionDefaults | undefined;
         connections?: DiagramConnection[] | undefined;
         connectionsDataSource?: any|any|kendo.data.DataSource | undefined;
@@ -19612,7 +20973,6 @@ declare namespace kendo.dataviz.ui {
         point?: kendo.dataviz.diagram.Point | undefined;
         zoom?: number | undefined;
     }
-
 
     class LinearGauge extends kendo.ui.Widget {
 
@@ -20498,6 +21858,7 @@ declare namespace kendo.dataviz.ui {
         exportImage(options: any): JQueryPromise<any>;
         exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
         exportSVG(options: any): JQueryPromise<any>;
+        redraw(): void;
         refresh(): void;
         setDataSource(dataSource: kendo.data.DataSource): void;
         setOptions(options: any): void;
@@ -24117,6 +25478,24 @@ declare namespace kendo.dataviz.diagram {
 
     }
 
+    interface ConnectionContentPosition {
+        vertical?: string | undefined;
+        horizontal?: string | undefined;
+    }
+
+    interface ConnectionContentBorder {
+        color?: string | undefined;
+        width?: number | undefined;
+        dashType?: string | undefined;
+    }
+
+    interface ConnectionContentPadding {
+        top?: number | undefined;
+        right?: number | undefined;
+        bottom?: number | undefined;
+        left?: number | undefined;
+    }
+
     interface ConnectionContent {
         color?: string | undefined;
         fontFamily?: string | undefined;
@@ -24126,22 +25505,38 @@ declare namespace kendo.dataviz.diagram {
         template?: string|Function | undefined;
         text?: string | undefined;
         visual?: Function | undefined;
+        position?: string | ConnectionContentPosition | undefined;
+        background?: string | undefined;
+        border?: ConnectionContentBorder | undefined;
+        padding?: number | ConnectionContentPadding | undefined;
+        offset?: number | undefined;
     }
 
     interface ConnectionEndCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface ConnectionEndCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface ConnectionEndCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface ConnectionEndCap {
         fill?: string | ConnectionEndCapFill | undefined;
         stroke?: string | ConnectionEndCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: ConnectionEndCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface ConnectionHoverStroke {
@@ -24159,27 +25554,81 @@ declare namespace kendo.dataviz.diagram {
 
     interface ConnectionStartCapFill {
         color?: string | undefined;
+        opacity?: number | undefined;
     }
 
     interface ConnectionStartCapStroke {
         color?: string | undefined;
         dashType?: string | undefined;
         width?: number | undefined;
+        lineCap?: string | undefined;
+        lineJoin?: string | undefined;
+    }
+
+    interface ConnectionStartCapAnchor {
+        x?: number | undefined;
+        y?: number | undefined;
     }
 
     interface ConnectionStartCap {
         fill?: string | ConnectionStartCapFill | undefined;
         stroke?: string | ConnectionStartCapStroke | undefined;
         type?: string | undefined;
+        path?: string | undefined;
+        anchor?: ConnectionStartCapAnchor | undefined;
+        radius?: number | undefined;
     }
 
     interface ConnectionStroke {
         color?: string | undefined;
     }
 
+    interface ConnectionEditablePointsVertexFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsVertexStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsVertex {
+        fill?: ConnectionEditablePointsVertexFill | undefined;
+        stroke?: ConnectionEditablePointsVertexStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsMidpointFill {
+        color?: string | undefined;
+        opacity?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsMidpointStroke {
+        color?: string | undefined;
+        width?: number | undefined;
+    }
+
+    interface ConnectionEditablePointsMidpoint {
+        fill?: ConnectionEditablePointsMidpointFill | undefined;
+        stroke?: ConnectionEditablePointsMidpointStroke | undefined;
+        radius?: number | undefined;
+    }
+
+    interface ConnectionEditablePoints {
+        snap?: number | undefined;
+        vertex?: ConnectionEditablePointsVertex | undefined;
+        midpoint?: ConnectionEditablePointsMidpoint | undefined;
+    }
+
+    interface ConnectionEditable {
+        points?: boolean | ConnectionEditablePoints | undefined;
+    }
+
     interface ConnectionOptions {
         name?: string | undefined;
         content?: ConnectionContent | undefined;
+        editable?: boolean | ConnectionEditable | undefined;
         fromConnector?: string | undefined;
         fromX?: number | undefined;
         fromY?: number | undefined;

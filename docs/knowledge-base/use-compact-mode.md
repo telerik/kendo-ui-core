@@ -5,9 +5,9 @@ description: "Learn how to hide the selected files for upload from the user inte
 slug: howto_usecompactuimode_upload
 previous_url: /controls/editors/upload/how-to/use-compact-mode
 tags: telerik, kendo, jquery, upload, use, compact, ui, mode
-component: upload
 type: how-to
 res_type: kb
+components: ["upload"]
 ---
 
 ## Environment

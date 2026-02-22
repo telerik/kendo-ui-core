@@ -5,9 +5,9 @@ description: "Learn how to show lines between the nodes of the Kendo UI for jQue
 slug: howto_showlinesbetweennodes_treeview
 previous_url: /controls/navigation/treeview/how-to/appearance/show-node-lines
 tags: telerik, kendo, jquery, treeview, show, lines, between, nodes
-component: treeview
 type: how-to
 res_type: kb
+components: ["treeview"]
 ---
 
 ## Environment
@@ -37,7 +37,7 @@ How can I show lines between the nodes of the Kendo UI for jQuery TreeView?
 
 ## Solution
 
-Depending on the [TreeView rendering and styling options]({% slug appearance_kendoui_treeview_widget%}) that you use, apply either the solution for the [new rendering](#new-rendering) or the [old rendering](#new-rendering).
+Depending on the [TreeView rendering and styling options]({% slug appearance_kendoui_treeview_widget%}) that you use, apply either the solution for the [new rendering](#new-rendering) or the [old rendering](#old-rendering).
 
 ### New Rendering
 
@@ -70,9 +70,7 @@ The following example demonstrates how to achieve the desired scenario.
         font-size: 12px;
       }
 
-      .k-treeview .k-treeview-top,
-      .k-treeview .k-treeview-mid,
-      .k-treeview .k-treeview-bot {
+      .k-treeview .k-treeview-item > .k-treeview-item-content {
         background-image: url('https://d35islomi5rx1v.cloudfront.net/mvc/2012.2.607/Default/treeview-nodes.png');
         background-repeat: no-repeat;
         margin-left: -16px;
@@ -83,11 +81,10 @@ The following example demonstrates how to achieve the desired scenario.
       .k-treeview .k-treeview-last { background-image: none; }
 
 
-      .k-treeview .k-treeview-top { background-position: -91px 0; }
-      .k-treeview .k-treeview-bot { background-position: -69px -22px; }
-      .k-treeview .k-treeview-mid { background-position: -47px -44px; }
-      .k-treeview .k-treeview-last .k-treeview-top { background-position: -25px -66px; }
-      .k-treeview .k-treeview-group .k-treeview-last .k-treeview-bot { background-position: -69px -22px; }
+  .k-treeview .k-treeview-item:first-child > .k-treeview-item-content { background-position: -91px 0; }
+  .k-treeview .k-treeview-item:last-child > .k-treeview-item-content { background-position: -69px -22px; }
+  .k-treeview .k-treeview-item:not(:first-child):not(:last-child) > .k-treeview-item-content { background-position: -47px -44px; }
+  .k-treeview .k-treeview-item:only-child > .k-treeview-item-content { background-position: -25px -66px; }
 
       .k-treeview .k-treeview-item {
         background-repeat: no-repeat;

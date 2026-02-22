@@ -6,6 +6,7 @@ page_title: How to Sort Grid Columns Bound to Nested Objects in Kendo UI for jQu
 slug: kendo-grid-jquery-sorting-nested-objects
 tags: kendo, ui, grid, jquery, sorting, nested, objects
 res_type: kb
+components: ["grid"]
 ticketid: 1680261
 ---
 

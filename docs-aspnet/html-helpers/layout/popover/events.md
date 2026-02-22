@@ -2,6 +2,7 @@
 title: Events
 page_title: Events
 description: "Learn how to handle the events of the Telerik UI PopOver component for {{ site.framework }}."
+components: ["popover"]
 slug: events_popover
 position: 7
 ---

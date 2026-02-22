@@ -2,6 +2,7 @@
 title: jQuery Support
 page_title: jQuery Support
 description: "Get started with {{ site.product }} and learn which jQuery versions are supported by the component library."
+components: ["general"]
 previous_url: /getting-started/prerequisites/jquery-support, /compatibility/jquery-support, /installation-mvc/system-requirements/jquery-support
 slug: jquerysupport_core
 position: 2
@@ -18,7 +19,7 @@ The Kendo UI library is based on [jQuery](http://jquery.com/) and all Kendo UI b
 
 ## Supported Versions
 
-{{ site.product }} is compatible with jQuery 1.10.x, 2.2.x and 3.7.x. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released.
+{{ site.product }} is compatible with jQuery 1.10.x, 2.2.x, 3.7.x and 4.0.0. Usually, each newly released jQuery version introduces breaking changes and is not compatible with the existing {{ site.product }}. In such cases, use the previous jQuery version until the release of the next official {{ site.product }} version that resolves the issue is released.
 
 Generally, the {{ site.product }} service packs and their related major releases ship with the same jQuery version. The jQuery version changes only with new major releases.
 
@@ -27,6 +28,10 @@ The following table provides a list of the jQuery versions that are compatible w
 {% if site.core %}
 | Major Releases												                                         | Compatible jQuery Versions    |
 | :---															                                             | :---			         |
+| [UI for ASP.NET Core 2025.4.1321](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2025-4-1321)|4.0.0, 3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [UI for ASP.NET Core 2025.4.1111 (2025 Q4)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2025-4-1111)|3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [UI for ASP.NET Core 2025.3.812 (2025 Q3)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2025-3-812-(2025-q3))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [UI for ASP.NET Core 2025.2.520 (2025 Q2)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2025-2-520-(2025-q2))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [UI for ASP.NET Core 2025.1.211 (2025 Q1)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2025-1-211-(2025-q1))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [UI for ASP.NET Core 2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2024-4-1112-(2024-q4))|3.7.x, 2.2.x, 1.12.4, 1.10.x|
 | [UI for ASP.NET Core 2024.3.806 (2024 Q3)](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history/telerik-ui-for-asp-net-core-2024-3-806-(2024-q3))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
@@ -59,6 +64,10 @@ The following table provides a list of the jQuery versions that are compatible w
 {% else %}
 | Major Releases												                                         | Compatible jQuery Versions    |
 | :---															                                             | :---			         |
+| [UI for ASP.NET MVC 2025.4.1321](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2025-4.1321)|4.0.0, 3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [UI for ASP.NET MVC 2025.4.1111 (2025 Q4)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2025-4-1111)|3.7.x, 2.2.x, 1.12.4, 1.10.x|
+| [UI for ASP.NET MVC 2025.3.812 (2025 Q3)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2025-3-812-(2025-q3))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
+| [UI for ASP.NET MVC 2025.2.520 (2025 Q2)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2025-2-520-(2025-q2))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [UI for ASP.NET MVC 2025.1.211 (2025 Q1)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2025-1-211-(2025-q1))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [UI for ASP.NET MVC 2024.4.1112 (2024 Q4)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2024-4-1112-(2024-q4))|3.7.0, 2.2.x, 1.12.4, 1.10.x|
 | [UI for ASP.NET MVC 2024.3.806 (2024 Q3)](https://www.telerik.com/support/whats-new/aspnet-mvc/release-history/telerik-ui-for-asp-net-mvc-2024-3-806-(2024-q3))|3.7.0, 2.2.x, 1.12.4, 1.10.x|

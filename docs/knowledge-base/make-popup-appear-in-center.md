@@ -5,9 +5,9 @@ description: "Learn how to align the a popup to always appear in the center of a
 slug: howto_makepopupcenter_window
 previous_url: /controls/layout/window/how-to/make-popup-appear-in-center
 tags: telerik, kendo, jquery, window, render, popup, in, the, center, of, the
-component: window
 type: how-to
 res_type: kb
+components: ["window"]
 ---
 
 ## Environment
@@ -52,7 +52,7 @@ The example below demonstrates how to position a popup in the center of the brow
        $('button').click(createAndShowPopup);
        var kendoWindowAssign = $("#windowForAssign");
        var title = "Sample title";
-       var url = "http://jsonplaceholder.typicode.com/posts";
+       var url = "https://jsonplaceholder.typicode.com/posts";
 
        function createAndShowPopup(){
         kendoWindowAssign.kendoWindow({
@@ -71,6 +71,7 @@ The example below demonstrates how to position a popup in the center of the brow
         popup.open();
         popup.center();
       }
+  </script>
 ```
 
 ## See Also

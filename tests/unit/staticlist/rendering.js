@@ -8,7 +8,7 @@ let StaticList = kendo.ui.StaticList,
 describe("kendo.ui.StaticList rendering", function() {
     beforeEach(function() {
         kendo.ns = "kendo-";
-        element = $("<ul></ul>").appendTo(Mocha.fixture);
+        element = $("<div></div>").appendTo(Mocha.fixture);
     });
     afterEach(function() {
         element.data("kendoStaticList").destroy();
@@ -26,7 +26,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let li = element.children(":first");
+        let li = list.items().first();
         let textElement = li.children(".k-list-item-text");
 
         assert.equal(textElement.html(), "foo");
@@ -46,7 +46,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let li = element.children(":first");
+        let li = list.items().first();
 
         assert.equal(li.attr("class"), "k-list-item k-selected k-focus");
     });
@@ -61,7 +61,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item k-selected");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
@@ -83,7 +83,7 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item k-selected");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
@@ -107,15 +107,52 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
+        // Items should not have k-list-item-group-label class themselves
         assert.isOk(!children.eq(0).hasClass("k-list-item-group-label"));
         assert.isOk(!children.eq(1).hasClass("k-list-item-group-label"));
         assert.isOk(!children.eq(2).hasClass("k-list-item-group-label"));
-        assert.equal(children.eq(2).find(".k-list-item-group-label").length, 1);
+
+        // With the new grouped structure, groups are separated into different ULs
+        // First group does NOT have inline header (uses sticky header when fixedGroupHeader: true - default)
+        // Subsequent groups have inline headers (k-list-group-item)
+        let uls = list.content.children("ul");
+        assert.equal(uls.length, 2);
+        assert.equal(uls.eq(0).children(".k-list-group-item").length, 0); // First group - no inline header (uses sticky header)
+        assert.equal(uls.eq(1).children(".k-list-group-item").length, 1); // Second group - has inline header
+        assert.equal(uls.eq(0).find(".k-list-item-text").first().text().trim(), "item1"); // First item in first group
+        assert.equal(uls.eq(1).find(".k-list-item-text").first().text().trim(), "b"); // Group header in second group
     });
 
-    it("kendoStaticList renders k-first class to the group header element", function() {
+    it("kendoStaticList renders grouped data source with fixedGroupHeader: false", function() {
+        let list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ],
+                group: "type"
+            },
+            template: (data) => encode(data.name),
+            groupTemplate: (data) => encode(data),
+            fixedGroupHeader: false
+        });
+
+        list.dataSource.read();
+
+        // With fixedGroupHeader: false, ALL groups have inline headers
+        let uls = list.content.children("ul");
+        assert.equal(uls.length, 2);
+        assert.equal(uls.eq(0).children(".k-list-group-item").length, 1); // First group - has inline header
+        assert.equal(uls.eq(1).children(".k-list-group-item").length, 1); // Second group - has inline header
+        assert.equal(uls.eq(0).find(".k-list-item-text").first().text().trim(), "a"); // Group header in first group
+        assert.equal(uls.eq(1).find(".k-list-item-text").first().text().trim(), "b"); // Group header in second group
+    });
+
+    it("kendoStaticList does not add k-first class (deprecated)", function() {
         let list = new StaticList(element, {
             dataValueField: "name",
             dataSource: {
@@ -132,11 +169,12 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
+        // k-first class is no longer added - groups are separated by UL elements
         assert.isOk(!children.eq(0).hasClass("k-first"));
         assert.isOk(!children.eq(1).hasClass("k-first"));
-        assert.isOk(children.eq(2).hasClass("k-first"));
+        assert.isOk(!children.eq(2).hasClass("k-first"));
     });
 
     it("kendoStaticList renders fixed grouped header", function() {
@@ -330,11 +368,11 @@ describe("kendo.ui.StaticList rendering", function() {
 
         list.dataSource.read();
 
-        let children = element.children();
+        let children = list.items();
 
         assert.equal(children.eq(0).attr("class"), "k-list-item k-selected");
         assert.equal(children.eq(1).attr("class"), "k-list-item");
-        assert.equal(children.eq(2).attr("class"), "k-list-item k-first k-selected k-focus");
+        assert.equal(children.eq(2).attr("class"), "k-list-item k-selected k-focus");
     });
 
     it("kendoStaticList sets a data items collection during rendering", function() {
@@ -455,7 +493,7 @@ describe("kendo.ui.StaticList rendering", function() {
             value: "item1"
         });
 
-        assert.equal(list.focus()[0], list.element.children()[0]);
+        assert.equal(list.focus()[0], list.items()[0]);
     });
 
     it("StaticList clears focused item when data source is empty", function() {

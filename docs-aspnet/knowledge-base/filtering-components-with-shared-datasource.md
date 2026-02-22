@@ -6,6 +6,7 @@ page_title: Filtering Components Independently that Use a Shared DataSource
 slug: filtering-components-with-shared-datasource
 tags: DataSource, shared, filtering, widgets, components, telerik, core, mvc
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -122,7 +123,7 @@ The example below shows how to bind two Grids to the same DataSource and allow t
 
 1. Within the `$(document).ready()` function, access the main DataSource and handle once its [`requestEnd`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/events/requestend) event to access the data when it is received from the server. Use the [`data()`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/data) method to set the received data to the additional DataSources that are used by the Grids.
 
-    ```Scripts
+    ```JS scripts
     <script>
         $(document).ready(function () {
             mainDS.read();

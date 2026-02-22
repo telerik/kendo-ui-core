@@ -7,6 +7,7 @@ slug: filter-custom-editor-server-filtering
 tags: filter, custom, editor, server, filtering, autocomplete
 ticketid: 1629421
 res_type: kb
+components: ["general"]
 component: filter
 ---
 
@@ -59,7 +60,7 @@ How can I define the [AutoComplete]({% slug htmlhelpers_autocomplete_aspnetcore 
 1. Handle the [`filtering`](https://docs.telerik.com/kendo-ui/api/javascript/ui/autocomplete/events/filtering) event of the AutoComplete, extract the search entry value from the event data, and store it into a global variable <b>searchParameter</b>.
 1. Use the [`data`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read#transportreaddata) option of the DataSource to pass the global variable as an additional parameter through the `Read` request of the AutoComplete. This way, you will ensure that the correct search entry will be sent to the server when the Filter component has multiple fields that use the same AutoComplete editor.
 
-    ```Scripts
+    ```JS scripts
         function productNameAutoCompleteEditor(container, options) {
             var searchParameter = "";
             $('<input data-bind="value: value" name="' + options.field + '"/>')

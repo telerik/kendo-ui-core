@@ -2,6 +2,7 @@
 title: Vertical Grouping
 page_title: Vertical Grouping
 description: "Learn how to group the resources of the Telerik UI for {{ site.framework }} Scheduler vertically."
+components: ["scheduler"]
 slug: scheduler_resources_grouping_vertical
 position: 3
 ---

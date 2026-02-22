@@ -6,7 +6,7 @@ page_title: Display SelectAll in the ColumnMenu for Showing and Hiding Columns -
 slug: grid-include-selectall-in-columnmenu
 tags: kendoui, kendo, grid, column menu, select all
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -14,7 +14,7 @@ component: grid
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Grid for jQuery</td> 
+  <td>Progress® Kendo UI® Grid for jQuery</td>
  </tr>
 </table>
 
@@ -43,8 +43,8 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
       }
 
       .k-group .k-popup {
-        border-style: normal; 
-        border-width: 0px; 
+        border-style: normal;
+        border-width: 0px;
       }
       .chbx {
         margin-left: 1px;
@@ -70,14 +70,14 @@ Render the checkbox within the `columnMenuInit` event of the Grid.
                   e.sender.unbind("activate");
                   e.item.find(".custom-class").remove();
                   e.item.find('.k-filter-item').find('[role="menuitemcheckbox"]').remove();
-                    $("<span class='custom-class'><label class='k-link' style='padding: 10px 40px 10px 0px;'><input class='chbx k-checkbox k-checkbox-md k-rounded-md' type='checkbox' checked onclick='checkAllMenu(this)'/>Select All</label></span>").prependTo(e.item.find(".k-animation-container"));
+                    $("<span class='custom-class'><label class='k-link' style='padding: 10px 40px 10px 0px;'><input class='chbx k-checkbox' type='checkbox' checked onclick='checkAllMenu(this)'/>Select All</label></span>").prependTo(e.item.find(".k-animation-container"));
                 }
               });
             },
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {

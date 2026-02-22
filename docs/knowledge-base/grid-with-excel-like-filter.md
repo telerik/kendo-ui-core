@@ -5,9 +5,9 @@ description: "Learn how to filter the jQuery Grid by Kendo UI by using AutoCompl
 previous_url: /controls/data-management/grid/how-to/filtering/grid-with-excel-like-filter
 slug: howto_gridfiltering_excellike_grid
 tags: grid, similar, excel, filter, menus, using, autocomplete, showing, results, current, filtering
-component: grid
 type: how-to
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

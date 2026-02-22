@@ -8,6 +8,7 @@ position:
 tags: 
 ticketid: 1465850
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

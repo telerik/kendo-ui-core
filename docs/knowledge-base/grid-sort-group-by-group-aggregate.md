@@ -7,6 +7,7 @@ slug: grid-sort-group-by-group-aggregate
 tags: grid, sort, group, aggregate, compare
 ticketid: 1431802
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment

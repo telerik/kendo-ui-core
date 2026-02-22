@@ -7,7 +7,7 @@ slug: troubleshooting_upload_widget
 tags: telerik, progress, kendoui, jquery, upload, select, button, partially, visible, has, no, text
 type: troubleshooting
 res_type: kb
-component: upload
+components: ["upload"]
 ---
 
 ## Environment
@@ -34,8 +34,6 @@ The [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) uses an o
 ## Solution
 
 To handle this issue in Internet Explorer, set **Internet Options** > **Security** > **Internet** (or Local intranet) > **Custom Level** > **Binary and script behaviors** to **Enable**.
-
-![Kendo UI for jQuery Upload Behaviors](upload-ie-script-behaviors.png)
 
 ## See Also
 

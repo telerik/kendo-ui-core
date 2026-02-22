@@ -2,6 +2,7 @@
 title: Date Ranges
 page_title: Date Ranges
 description: "Configure the minimum and maximum dates when working with the Telerik UI Calendar component for {{ site.framework }}."
+components: ["calendar"]
 slug: htmlhelpers_dateranges_calendar_aspnetcore
 position: 2
 ---

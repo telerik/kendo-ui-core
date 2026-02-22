@@ -2,6 +2,7 @@
 title: Getting Started
 page_title: jQuery FileManager Documentation - Getting Started with the FileManager
 description: "Get started with the jQuery FileManager by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["filemanager"]
 slug: getting_started_kendoui_filemanager_component
 position: 1
 ---
@@ -32,24 +33,24 @@ After the completion of this guide, you will achieve the following end result:
                 { name: "changeView" }
               ]
             },          
-            uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload",
+            uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload",
             dataSource: {
               schema: kendo.data.schemas.filemanager,
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
                   method: "POST"
                 },
                 create: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
                   method: "POST"
                 },
                 update: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
                   method: "POST"
                 },
                 destroy: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
                   method: "POST"
                 }
               }
@@ -77,6 +78,7 @@ In this step, you will initialize the FileManager from the `<div>` element.
     <script>
     $(document).ready(function() {
         $("#filemanager").kendoFileManager();
+    });
     </script>
 ```
 
@@ -94,19 +96,19 @@ Here, you will specify a [`dataSource`](/api/javascript/ui/filemanager/configura
                     schema: kendo.data.schemas.filemanager,
                     transport: {
                         read: {
-                            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                            url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
                             method: "POST"
                         },
                         create: {
-                            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+                            url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
                             method: "POST"
                         },
                         update: {
-                            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+                            url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
                             method: "POST"
                         },
                         destroy: {
-                            url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+                            url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
                             method: "POST"
                         }
                     }
@@ -143,19 +145,19 @@ In this step, you will define the items that will be included in the Toolbar of 
             schema: kendo.data.schemas.filemanager,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
                 method: "POST"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
                 method: "POST"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
                 method: "POST"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
                 method: "POST"
               }
             }
@@ -187,24 +189,24 @@ By using the [`uploadUrl`](/api/javascript/ui/filemanager/configuration/uploadur
               { name: "changeView" }
             ]
           },
-          uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload",
+          uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload",
           dataSource: {
             schema: kendo.data.schemas.filemanager,
             transport: {
               read: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
                 method: "POST"
               },
               create: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
                 method: "POST"
               },
               update: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
                 method: "POST"
               },
               destroy: {
-                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+                url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
                 method: "POST"
               }
             }
@@ -242,24 +244,24 @@ The following example demonstrates how to configure the `noFileTemplate`:
                 { name: "changeView" }
               ]
             },          
-            uploadUrl: "https://demos.telerik.com/kendo-ui/service/FileManager/Upload",
+            uploadUrl: "https://demos.telerik.com/service/v2/core/FileManager/Upload",
             dataSource: {
               schema: kendo.data.schemas.filemanager,
               transport: {
                 read: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Read",
                   method: "POST"
                 },
                 create: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Create",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Create",
                   method: "POST"
                 },
                 update: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Update",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Update",
                   method: "POST"
                 },
                 destroy: {
-                  url: "https://demos.telerik.com/kendo-ui/service/FileManager/Destroy",
+                  url: "https://demos.telerik.com/service/v2/core/FileManager/Destroy",
                   method: "POST"
                 }
               }
@@ -280,8 +282,4 @@ The following example demonstrates how to configure the `noFileTemplate`:
 * [JavaScript API Reference of the FileManager](/api/javascript/ui/filemanager)
 * [Knowledge Base Section](/knowledge-base)
 
-<script>
-  window.onload = function() {
-    document.getElementsByClassName("btn-run")[0].click();
-  }
-</script>
+

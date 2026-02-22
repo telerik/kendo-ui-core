@@ -2,6 +2,7 @@
 title: DataSource Operations
 page_title: DataSource Operations - Kendo UI for jQuery DataSource
 description: "Learn how to filter, sort, and group your data items when working with the Kendo UI for jQuery DataSource component and your JavaScript widgets."
+components: ["datasource"]
 previous_url: /framework/datasource/basic-usage
 slug: datasourceoperations_kendoui_datasourcecomponent
 position: 4
@@ -56,11 +57,11 @@ The following example demonstrates how to configure `serverSorting`.
 
     <script>
       var dataSource = new kendo.data.DataSource({
-        type: "odata",           
+        type: "odata-v4",           
         serverSorting: true,
         sort: { field: "ProductName", dir: "asc" },           
         transport: {
-          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          read: "https://demos.telerik.com/service/v2/odata/Products"
         },
       });    
 

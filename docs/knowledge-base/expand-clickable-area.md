@@ -5,9 +5,9 @@ description: "Learn how to extend the clickable or touchable area of points in a
 previous_url: /controls/charts/how-to/expand-clickable-area, /controls/charts/how-to/interaction/expand-clickable-area
 slug: howto_extendclickableareaofpoints_charts
 tags: chart, expand, clickable, area, of, points
-component: chart
 type: how-to
 res_type: kb
+components: ["chart"]
 ---
 
 ## Environment

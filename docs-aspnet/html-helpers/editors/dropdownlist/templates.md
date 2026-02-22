@@ -2,6 +2,7 @@
 title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI DropDownList component for {{ site.framework }}."
+components: ["dropdownlist"]
 slug: htmlhelpers_dropdownlist_templates_aspnetcore
 position: 4
 ---
@@ -46,7 +47,7 @@ The following example demonstrates how to customize the DropDownList by declarin
 </kendo-dropdownlist>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
     </script>
@@ -74,7 +75,7 @@ The following example demonstrates how to customize the DropDownList by referenc
                     datatextfield="ContactName"
                     datavaluefield="CustomerID"
                     template="<span><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>">
-    
+
     <datasource>
         <transport>
             <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
@@ -118,7 +119,7 @@ The following example demonstrates how to define an item template and how to eva
 </kendo-dropdownlist>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
     </script>
@@ -160,7 +161,7 @@ The value template manages the way the selected value of a DropDownList is rende
 </kendo-dropdownlist>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="valueTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#
     </script>
@@ -202,7 +203,7 @@ The header template manages the way the pop-up header of a DropDownList is rende
 </kendo-dropdownlist>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
     </script>
@@ -242,7 +243,7 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
 </kendo-dropdownlist>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
     </script>
@@ -284,7 +285,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 </kendo-dropdownlist>
 ```
 {% endif %}
-```Template
+```JS Template
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
     </script>
@@ -293,6 +294,8 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 ## Option Label Template
 
 The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has been set. Use `OptionLabelTemplate` if you want to customize the markup of the optionLabel.
+
+> If the `OptionLabel` is defined as an object, the object must contain the model properties corresponding to the `DataValueField` and `DataTextField` options. For example, `OptionLabel(new { ContactName = "Select address", CustomerID = 0 })`. Otherwise, the component will show `undefined`.
 
 ```HtmlHelper
     @(Html.Kendo().DropDownList()

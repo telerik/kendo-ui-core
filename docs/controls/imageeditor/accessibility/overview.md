@@ -2,7 +2,8 @@
 title: Wai-Aria Support
 page_title: jQuery ImageEditor Documentation | ImageEditor Accessibility
 description: "Get started with the jQuery ImageEditor by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.2."
-slug: accessibility_kendoui_imageeditor_widget
+components: ["imageeditor"]
+slug: jquery_imageeditor_accessibility
 position: 1
 ---
 
@@ -38,7 +39,7 @@ The ImageEditor is a composite component containing:
 
 The ToolBar follows the spec for the ToolBar component:
 
-[ToolBar accessibility specification]({{toolbar_a11y_link}})
+[ToolBar accessibility specification]({% slug jquery_toolbar_accessibility %})
 
 
 The image canvas must have an appropriate role and accessible name assigned:
@@ -51,7 +52,7 @@ The image canvas must have an appropriate role and accessible name assigned:
 
 The Edit pane (present on performing crop and resize of image) follows the spec for the Form component:
 
-[Form accessibility specification]({{form_a11y_link}})
+[Form accessibility specification]({% slug jquery_form_accessibility %})
 
 ## Resources
 

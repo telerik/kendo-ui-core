@@ -7,6 +7,7 @@ slug: grid-foreign-key-column-virtualization
 tags: grid, foreign, editor, key, virtualization, combo, virtual
 ticketid: 1418905, 1406973
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -60,7 +61,7 @@ The virtual ComboBox and DropDownList usually have server operations, however th
         function convertValues(value) {
             var data = [];
     
-            value = $.isArray(value) ? value : [value];
+            value = Array.isArray(value) ? value : [value];
     
             for (var idx = 0; idx < value.length; idx++) {
                 data.push(value[idx]);

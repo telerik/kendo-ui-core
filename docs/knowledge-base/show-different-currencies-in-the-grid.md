@@ -8,7 +8,7 @@ tags: grid, currencies
 previous_url: /knowledge-base/how-to-show-different-currencies-in-the-grid
 ticketid: 1105869
 res_type: kb
-component: grid
+components: ["grid"]
 ---
 
 ## Environment
@@ -42,9 +42,9 @@ Use a custom approach by utilizing the [`column.template`](https://docs.telerik.
         $(document).ready(function() {
           $("#grid").kendoGrid({
             dataSource: {
-              type: "odata",
+              type: "odata-v4",
               transport: {
-                read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                read: "https://demos.telerik.com/service/v2/odata/Orders"
               },
               schema: {
                 model: {

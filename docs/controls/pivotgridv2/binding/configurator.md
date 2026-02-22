@@ -2,6 +2,7 @@
 title: PivotConfiguratorV2
 page_title: jQuery PivotGridV2 Documentation - PivotConfiguratorV2 Overview
 description: "Get started with the jQuery PivotGridV2 by Kendo UI and learn how to create and configure the Kendo UI PivotConfiguratorV2."
+components: ["pivotgridv2"]
 slug: overview_kendoui_pivotconfiguratorv2
 position: 6
 ---
@@ -48,7 +49,7 @@ The following example demonstrates how to configure the components.
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: 'https://demos.telerik.com/olap/msmdpump.dll'
+                        read: 'https://demos.telerik.com/service/v2/olap/msmdpump.dll'
                     }
                 }
             }).data("kendoPivotGridV2");
@@ -75,7 +76,7 @@ The following example demonstrates how to configure the components.
 
 The following image demonstrates the output from the previous example.
 
-![Kendo UI for jQuery PivotConfiguratorV2 Overview](../../../../images/pivotconfiguratorv2-overview.png)
+![Kendo UI for jQuery PivotConfiguratorV2 Overview](../../../images/pivotconfiguratorv2-overview.png)
 
 ## Referencing Existing Instances
 

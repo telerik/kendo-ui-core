@@ -2,6 +2,7 @@
 title: Items
 page_title: jQuery ActionSheet Documentation - Items
 description: "Get started with the jQuery ActionSheet by Kendo UI and learn how to configure the items of the widget."
+components: ["actionsheet"]
 slug: items_actionsheet_widget
 position: 2
 ---
@@ -58,5 +59,5 @@ The following example demonstrates the possible options for the `items` configur
 
 ## See Also
 
-* [Items demo of the ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/items)
+* [Overview demo of the ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index)
 * [JavaScript API Reference of the ActionSheet](/api/javascript/ui/actionsheet)

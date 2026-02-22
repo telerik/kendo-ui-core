@@ -208,8 +208,8 @@ export const __meta__ = {
             resizable: true,
             navigateOnTab: false,
             evaluateTemplates: false,
-            size: "medium",
-            fillMode: "solid",
+            size: undefined,
+            fillMode: undefined,
             overflow: {
                 mode: "menu", // scroll, menu, section, none
                 scrollButtons: "auto", // auto, hidden, visible
@@ -1325,9 +1325,9 @@ export const __meta__ = {
             this.wrapper.find(DOT + KBUTTON + DOT + KFOCUS).removeClass(KFOCUS);
         },
 
-        _getAllItems: function(isSection) {
+        _getAllItems: function(isSection, skipDisabled) {
             let container = isSection == true ? this._overflowSectionContentElement() : this.wrapper;
-            return container.find(ITEM_REF_SELECTOR)
+            return container.find(ITEM_REF_SELECTOR + (skipDisabled ? ":not(.k-disabled)" : ""))
                 .filter(":visible")
                 .filter((i, el) => {
                     if (el.style.visibility === HIDDEN) {
@@ -1370,7 +1370,7 @@ export const __meta__ = {
 
         _getNextElement: function(item, direction) {
             const isSection = $(item).closest(".k-toolbar-popup").length > 0;
-            var items = this._getAllItems(isSection),
+            var items = this._getAllItems(isSection, true),
                 itemIndex = items.index(item) === -1 ? items.index(item.parentElement) : items.index(item),
                 focusableItem = items[itemIndex + direction];
 
@@ -1546,7 +1546,7 @@ export const __meta__ = {
 
         _keyFocusFirst: function(target, e) {
             const isSection = target.closest(".k-toolbar-popup").length > 0;
-            var items = this._getAllItems(isSection);
+            var items = this._getAllItems(isSection, true);
 
             if (target.is(DOT + DROPDOWNLIST) || target.is(INPUT)) {
                 return;
@@ -1559,7 +1559,7 @@ export const __meta__ = {
 
         _keyFocusLast: function(target, e) {
             const isSection = target.closest(".k-toolbar-popup").length > 0;
-            var items = this._getAllItems(isSection),
+            var items = this._getAllItems(isSection, true),
                 last;
 
             if (target.is(DOT + DROPDOWNLIST) || target.is(INPUT)) {
@@ -2019,7 +2019,7 @@ export const __meta__ = {
                     },
                     activate: function(e) {
                         const isSection = true;
-                        let firstFocusableSectionItem = that._getAllItems(isSection).first();
+                        let firstFocusableSectionItem = that._getAllItems(isSection, true).first();
                         that._resetTabIndex(firstFocusableSectionItem);
                         firstFocusableSectionItem.trigger(FOCUS);
                     },

@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Discover the Telerik UI for {{ site.framework }} PopOver component and its features like custom action buttons and built-in customization options."
+components: ["popover"]
 slug: htmlhelpers_overview_popover
 position: 0
 ---
@@ -14,12 +15,9 @@ The Telerik UI PopOver TagHelper and HtmlHelper for {{ site.framework }} are ser
 The Telerik UI PopOver HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI PopOver widget.
 {% endif %}
 
-The PopOver is a transient view that appears when the user clicks on a specified element or hovers within a particular area. It can contain elements such as buttons, icons, lists, and so on. 
+The PopOver is a transient view that appears when the user clicks on a specified element or hovers within a particular area. It can contain elements such as buttons, icons, lists, and so on.
 
-* [Demo page for the PopOver HtmlHelper](https://demos.telerik.com/{{ site.platform }}/popover/index)
-{% if site.core %}
-* [Demo page for the PopOver TagHelper](https://demos.telerik.com/{{ site.platform }}/popover/tag-helper)
-{% endif %}
+* [Demo page for the PopOver](https://demos.telerik.com/{{ site.platform }}/popover/index)
 
 ## PopOver vs. Tooltip
 
@@ -45,7 +43,7 @@ The PopOver is usually displayed or dismissed as a result of a user action. It e
 The following example demonstrates how to define the PopOver.
 
 ```HtmlHelper
-   <span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Hover me!</span>
+   <span id="info" class="k-button k-button-primary">Hover me!</span>
 
     @(Html.Kendo().Popover()
         .For("#info")
@@ -56,7 +54,7 @@ The following example demonstrates how to define the PopOver.
 ```
 {% if site.core %}
 ```TagHelper
-	<span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Hover me!</span>
+	<span id="info" class="k-button k-button-primary">Hover me!</span>
 
 	<kendo-popover for="#info" show-on="mouseenter" position="right" body="Main content"></kendo-popover>
 ```
@@ -69,7 +67,7 @@ The PopOver provides default configuration options such as its height and width,
 The following example demonstrates the basic configuration of the PopOver.
 
 ```HtmlHelper
-   <span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Click here</span>
+   <span id="info" class="k-button k-button-primary">Click here</span>
 
     @(Html.Kendo().Popover()
         .For("#info")
@@ -90,7 +88,7 @@ The following example demonstrates the basic configuration of the PopOver.
 ```
 {% if site.core %}
 ```TagHelper
-	<span id="info" class="k-button k-button-solid-primary k-button-solid k-button-md k-rounded-md">Click here</span>
+	<span id="info" class="k-button k-button-primary">Click here</span>
 
 	<kendo-popover for="#info" show-on="click" position="top" width="120" height="120" header="More Information:" body="Information content" actions-layout="center">
 		<actions>
@@ -108,14 +106,12 @@ The following example demonstrates the basic configuration of the PopOver.
 
 * [Templates]({% slug htmlhelpers_templates_popover %})&mdash;The PopOver provides template options that allow you to customize the header and body content.
 * [Events]({% slug events_popover %})&mdash;The component exposes the `Show` and `Hide` events that you can handle and control its behavior.
+* [Accessibility]({% slug htmlhelpers_popover_accessibility %})&mdash;The PopOver is accessible for screen readers and supports WAI-ARIA attributes.
 
 ## Next Steps
 
 * [Getting Started with the PopOver]({% slug getting_started_popover %})
-* [Basic Usage of the PopOver HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover)
-{% if site.core %}
-* [Basic Usage of the PopOver TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/popover/tag-helper)
-{% endif %}
+* [Basic Usage of the PopOver for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/popover)
 
 ## See Also
 

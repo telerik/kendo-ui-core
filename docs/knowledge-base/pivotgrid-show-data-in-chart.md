@@ -7,6 +7,7 @@ slug: pivotgrid-show-resize-data-in-chart
 tags: pivotgrid, chart, data, bar, column
 ticketid: 1359517
 res_type: kb
+components: ["grid"]
 ---
 
 ## Environment
@@ -206,7 +207,7 @@ The following example demonstrates the full implementation of the suggested appr
                 catalog: "Adventure Works DW 2008R2",
                 cube: "Adventure Works"
             },
-            read: "https://demos.telerik.com/olap/msmdpump.dll"
+            read: "https://demos.telerik.com/service/v2/olap/msmdpump.dll"
         },
         schema: {
             type: "xmla"

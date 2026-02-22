@@ -2,6 +2,7 @@
 title: Donut Charts
 page_title: Donut Charts
 description: "Learn how to create a Telerik UI Donut Chart for {{ site.framework }}."
+components: ["chart"]
 slug: donutcharts_aspnetcore_htmlhelper
 ---
 

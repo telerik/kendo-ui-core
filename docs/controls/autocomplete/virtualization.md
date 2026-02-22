@@ -2,6 +2,7 @@
 title: Virtualization
 page_title: jQuery AutoComplete Documentation - Virtualization
 description: "Get started with the jQuery AutoComplete by Kendo UI and configure its virtualization functionality."
+components: ["autocomplete"]
 slug: virtualization_kendoui_autocomplete_widget
 position: 6
 ---

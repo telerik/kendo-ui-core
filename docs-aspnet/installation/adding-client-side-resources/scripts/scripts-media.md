@@ -3,6 +3,7 @@ comment: THIS FILE IS A COPY OF THE AUTO-GENERATED jQUERY file. TO UPDATE THE CO
 title: Media
 page_title: Individual Scripts for Media
 description: "Get started with Kendo UI for jQuery and find the list of required script files for the Kendo UI Media"
+components: ["general"]
 previous_url: /getting-started/scripts/scripts-media, /installation/scripts/scripts-media
 slug: script_filesfor_media_widgets
 ---

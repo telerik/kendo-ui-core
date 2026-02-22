@@ -2,6 +2,7 @@
 title: Internationalization
 page_title: jQuery DatePicker Documentation - DatePicker Internationalization
 description: "Get started with the jQuery DatePicker by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
+components: ["datepicker"]
 slug: intl_datepicker
 position: 2
 ---

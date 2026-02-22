@@ -6,6 +6,7 @@ page_title: Plotting a Threshold Line in a DrillDown Series Chart
 slug: drilldown-chart-plot-threshold-line
 tags: chart, drilldown, plotband, threshold-line, series
 res_type: kb
+components: ["general"]
 ---
 ## Environment
 <table>
@@ -51,7 +52,7 @@ Here is a sample implementation:
         </kendo-chart>
 ```
 {% endif %}
-```Script
+```JS script
 var initialPlotBands = [];
 
 function onDrillDown(e) {
@@ -91,7 +92,7 @@ function onDrilldownLevelChange(e) {
 
 ## See Also
 
-* [Client-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/kendo-ui/api/javascript/ui/chart)
+* [Client-Side API Reference of the Chart for {{ site.framework }}](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/dataviz/ui/chart)
 * [Server-Side API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/chart)
 {% if site.core %}
 * [Server-Side TagHelper API Reference of the Chart for {{ site.framework }}](https://docs.telerik.com/{{ site.platform }}/api/taghelpers/chart)

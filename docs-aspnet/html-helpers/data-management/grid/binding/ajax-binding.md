@@ -2,9 +2,10 @@
 title: Ajax Binding
 page_title: Ajax Binding
 description: "Learn how to implement Ajax binding with the Telerik UI Grid component for {{ site.framework }}."
+components: ["grid"]
 previous_url: /helpers/html-helpers/grid/ajax-binding, /helpers/data-management/grid/binding/ajax-binding
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
-position: 4
+position: 2
 ---
 
 # Ajax Binding
@@ -50,129 +51,142 @@ If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](
 
 1. Open the `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
 
-        public ActionResult Products_Read()
-        {
-        }
+    ```C#
+    public ActionResult Products_Read()
+    {
+    }
+    ```
 
 1. Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. It will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. Now import the `Kendo.Mvc.UI` namespace.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
-        {
-        }
+    ```C#
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+    }
+    ```
 
 1. Use the `ToDataSourceResult` extension method to convert the Products to a `Kendo.Mvc.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    ```C#
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new SampleEntities())
         {
-            using (var northwind = new SampleEntities())
-            {
-                IQueryable<Product> products = northwind.Products;
-                DataSourceResult result = products.ToDataSourceResult(request);
-                return Json(result);
-            }
+            IQueryable<Product> products = northwind.Products;
+            DataSourceResult result = products.ToDataSourceResult(request);
+            return Json(result);
         }
+    }
+    ```
 
 1. Return `DataSourceResult` as JSON. Alternatively, you can use an asynchronous action and return `ToDataSourceResultAsync` as JSON.
 
-        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    ```C#
+    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new SampleEntities())
         {
-            using (var northwind = new SampleEntities())
-            {
-                IQueryable<Product> products = northwind.Products;
-                DataSourceResult result = products.ToDataSourceResult(request);
-                return Json(result);
-            }
+            IQueryable<Product> products = northwind.Products;
+            DataSourceResult result = products.ToDataSourceResult(request);
+            return Json(result);
         }
+    }
+    ```
 
-        The asynchronous `ToDataSourceResultAsync` counterpart:
+    The asynchronous `ToDataSourceResultAsync` counterpart:
 
-        public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+    ```C#
+    public async Task<ActionResult> Products_Read([DataSourceRequest]DataSourceRequest request)
+    {
+        using (var northwind = new SampleEntities())
         {
-            using (var northwind = new SampleEntities())
-            {
-                IQueryable<Product> products = northwind.Products;
-                DataSourceResult result = await products.ToDataSourceResultAsync(request);
-                return Json(result);
-            }
+            IQueryable<Product> products = northwind.Products;
+            DataSourceResult result = await products.ToDataSourceResultAsync(request);
+            return Json(result);
         }
+    }
+    ```
 
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
-{% if site.core %}
-```HtmlHelper
-    @(Html.Kendo().Grid<TelerikAspNetCoreApp1.Models.Products>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource //Configure the Grid data source.
-              .Ajax() //Specify that Ajax binding is used.
-              .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
-           )
-          .Columns(columns =>
-          {
-              //Create a column bound to the ProductId property.
-              columns.Bound(product => product.ProductId);
-              //Create a column bound to the ProductName property.
-              columns.Bound(product => product.ProductName);
-              //Create a column bound to the UnitsInStock property.
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable() // Enable paging
-             .Sortable() // Enable sorting
-    )
-```
-```TagHelper
-<div style="width:500px">
-    <kendo-grid name="grid">
-        <datasource type="DataSourceTagHelperType.Ajax">
-            <transport>
-                <read url="@Url.Action("Products_Read", "Home")" />
-            </transport>
-        </datasource>
-        <pageable enabled="true">
-        </pageable>
-        <sortable enabled="true"/>
-        <columns>
-            <column field="ProductID"/>
-            <column field="ProductName"/>
-            <column field="UnitsInStock"/>
-        </columns>
-    </kendo-grid>
-</div>
-```
-{% else %}
-```HtmlHelper
-    @(Html.Kendo().Grid<TelerikMvcApp1.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource //Configure the Grid data source.
-              .Ajax() //Specify that Ajax binding is used.
-              .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
-           )
-          .Columns(columns =>
-          {
-              //Create a column bound to the ProductID property.
-              columns.Bound(product => product.ProductID);
-              //Create a column bound to the ProductName property.
-              columns.Bound(product => product.ProductName);
-              //Create a column bound to the UnitsInStock property.
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable() // Enable paging
-             .Sortable() // Enable sorting
-    )
-```
-{% endif %}
+    {% if site.core %}
+    ```HtmlHelper
+        @(Html.Kendo().Grid<TelerikAspNetCoreApp1.Models.Products>()
+            .Name("grid")
+            .DataSource(dataSource => dataSource //Configure the Grid data source.
+                .Ajax() //Specify that Ajax binding is used.
+                .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
+            )
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductId property.
+                columns.Bound(product => product.ProductId);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() // Enable paging
+                .Sortable() // Enable sorting
+        )
+    ```
+    ```TagHelper
+    <div style="width:500px">
+        <kendo-grid name="grid">
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Products_Read", "Home")" />
+                </transport>
+            </datasource>
+            <pageable enabled="true">
+            </pageable>
+            <sortable enabled="true"/>
+            <columns>
+                <column field="ProductID"/>
+                <column field="ProductName"/>
+                <column field="UnitsInStock"/>
+            </columns>
+        </kendo-grid>
+    </div>
+    ```
+    {% else %}
+    ```HtmlHelper
+        @(Html.Kendo().Grid<TelerikMvcApp1.Models.Product>()
+            .Name("grid")
+            .DataSource(dataSource => dataSource //Configure the Grid data source.
+                .Ajax() //Specify that Ajax binding is used.
+                .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
+            )
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() // Enable paging
+                .Sortable() // Enable sorting
+        )
+    ```
+    {% endif %}
 
 1. Build and run the application.
 
-{% if site.core %}
-![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-binding-core.png)
-{% else %}
-![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-binding-mvc.png)
-{% endif %}
+    {% if site.core %}
+    ![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-binding-core.png)
+    {% else %}
+    ![{{ site.product_short }} The final result is a Grid bound to data](../images/grid-binding-mvc.png)
+    {% endif %}
 
 To download a Visual Studio Project, refer to [this GitHub repository]({% if site.mvc %} https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas/GridAjaxBindingDatabase{% else %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/AjaxBinding.cshtml{% endif %}).
 
 ## See Also
 
+{% if site.core %}
+* [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
+{% endif %}
 * [DataSource Overview]({% slug htmlhelpers_datasource_aspnetcore %})
 * [Grid FAQs]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
 * [Custom Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/customajaxbinding)

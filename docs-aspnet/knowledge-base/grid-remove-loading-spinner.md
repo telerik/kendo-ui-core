@@ -6,6 +6,7 @@ page_title: Hide the Grid Loading Spinner
 slug: grid-remove-loading-spinner
 tags: grid, remove, loading, spinner
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -31,7 +32,7 @@ How can I remove the loading spinner from the {{ site.product }} Grid?
 
 Example: 
 
-```Index.cshtml
+```Razor Index.cshtml
 @(Html.Kendo().Grid<GridRemoveLoading.Models.OrderViewModel>()
     .Name("grid")
     .Columns(columns =>
@@ -55,7 +56,7 @@ Example:
     )
 )
 ```
-```script.js
+```JS script.js
    function onRequestStart(e) {
         setTimeout(function (e) {
             $(".k-loading-image").hide();

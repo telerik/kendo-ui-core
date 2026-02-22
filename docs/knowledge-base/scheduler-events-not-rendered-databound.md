@@ -7,7 +7,7 @@ slug: troubleshooting_scheduler_widget
 tags: telerik, progress, kendoui, scheduler, events, not, rendered, databound
 type: troubleshooting
 res_type: kb
-component: scheduler
+components: ["scheduler"]
 ---
 
 ## Environment

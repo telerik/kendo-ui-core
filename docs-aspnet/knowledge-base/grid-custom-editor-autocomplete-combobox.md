@@ -6,6 +6,7 @@ page_title: Use AutoComplete as Custom Column Editor
 slug: grid-custom-editor-autocomplete-combobox
 tags: aspnet, mvc, grid, custom, editor, autocomplete, combobox,
 res_type: kb
+components: ["general"]
 component: grid, autocomplete, 
 ---
 
@@ -27,12 +28,12 @@ How can I use the {{ site.product }} AutoComplete as a custom column editor for 
 1. Create an editor template within the following directory - "~\Views\Shared\EditorTemplates\"
 2. Pass the newly created view name to the following column configuration : 
 
-```
+```Razor
 columns.Bound(p => p.ProductName).EditorTemplateName("CustomEditorName");
 ```
 
 #### Example
-```Index.cshtml
+```Razor Index.cshtml
 
 @(Html.Kendo().Grid<GridExample.Models.ProductViewModel>()
     .Name("Grid")
@@ -59,7 +60,7 @@ columns.Bound(p => p.ProductName).EditorTemplateName("CustomEditorName");
 )
 
 ```
-```AutoCompleteEditor.cshtml
+```Razor AutoCompleteEditor.cshtml
 @model string
 
 @(Html.Kendo().AutoCompleteFor(m => m)
@@ -71,7 +72,7 @@ columns.Bound(p => p.ProductName).EditorTemplateName("CustomEditorName");
       }))
 
 ```
-```ComboBoxEditor.cshtml
+```Razor ComboBoxEditor.cshtml
 @model string
 
 @(Html.Kendo().ComboBoxFor(m => m)

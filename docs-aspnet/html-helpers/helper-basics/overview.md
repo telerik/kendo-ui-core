@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with Telerik UI Helpers for {{ site.framework }}"
+components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues, /known-issues
 slug: knownissues_aspnetmvc6_aspnetmvc
 position: 0
@@ -80,7 +81,7 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
         @removeTagHelper "*, Microsoft.AspNetCore.Mvc.Razor"
 
 * The `TagMode` enum of the MultiSelect is now renamed to `MultiSelectTagMode`.
-* [`Deferred()`]({% slug fundamentals_core%}#deferred-initialization) can be invoked only as a last setting.
+* [`Deferred()`]({% slug deferred_initialization_overview%}) can be invoked only as a last setting.
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")

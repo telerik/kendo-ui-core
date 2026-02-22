@@ -5,9 +5,9 @@ description: "Learn how to hide the time headers of the day, week, and workWeek 
 previous_url: /controls/scheduling/scheduler/how-to/hide-time-header, /controls/scheduling/scheduler/how-to/appearance/hide-time-header
 slug: howto_hide_time_headers_scheduler
 tags: telerik, kendo, jquery, scheduler, hide, time, headers
-component: scheduler
 type: how-to
 res_type: kb
+components: ["scheduler"]
 ---
 
 ## Environment
@@ -53,8 +53,8 @@ The following example demonstrates how to hide the time headers of a grouped Ken
 <script>
 $(function() {
     $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/13"),
-        startTime: new Date("2022/6/13 07:00 AM"),
+        date: new Date("2025/6/13"),
+        startTime: new Date("2025/6/13 07:00 AM"),
         height: 600,
         views: [
             "day",
@@ -80,24 +80,26 @@ $(function() {
             batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings",
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },
@@ -165,8 +167,8 @@ The following example demonstrates how to hide the time headers of an ungrouped 
 <script>
 $(function() {
     $("#scheduler").kendoScheduler({
-        date: new Date("2022/6/13"),
-        startTime: new Date("2022/6/13 07:00 AM"),
+        date: new Date("2025/6/13"),
+        startTime: new Date("2025/6/13 07:00 AM"),
         height: 600,
         views: [
             "day",
@@ -186,24 +188,28 @@ $(function() {
             batch: true,
             transport: {
                 read: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 update: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/update",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings/update",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 create: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/create",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings/create",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 destroy: {
-                    url: "https://demos.telerik.com/kendo-ui/service/meetings/destroy",
-                    dataType: "jsonp"
+                    url: "https://demos.telerik.com/service/v2/core/meetings/destroy",
+                     type: "POST",
+                    		contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return kendo.stringify(options.models);
                     }
                 }
             },

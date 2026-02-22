@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery DateRangePicker Documentation - DateRangePicker Appearance
 description: "Learn how to apply different styling options to the DateRangePicker widget."
+components: ["daterangepicker"]
 slug: appearance_kendoui_daterangepicker_widget
 position: 2
 ---
@@ -82,5 +83,5 @@ The default fillMode value is `solid` and it is applied to the wrapping span ele
 ## See Also
 
 * [Components Appearance Overview]({% slug components_rendering_overview %})
-* [Appearance Demo of the DateRangePicker](https://demos.telerik.com/kendo-ui/daternagepicker/appearance)
+* [Appearance Demo of the DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/appearance)
 * [JavaScript API Reference of the DateRangePicker](/api/javascript/ui/daterangepicker)

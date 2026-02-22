@@ -2,6 +2,7 @@
 title: Appearance
 page_title: jQuery DropDownButton Documentation - Appearance
 description: "Learn how to apply different styling options to the DropDownButton widget."
+components: ["dropdownbutton"]
 slug: appearance_kendoui_dropdownbutton_widget
 position: 3
 ---
@@ -54,11 +55,11 @@ The following values are available for the [`fillMode`](/api/javascript/ui/dropd
 
 The default `fillMode` value is `solid` and it is applied to the button element through the `k-button-solid` class.
 
-    ```html
-        <button class="k-menu-button k-button k-button-solid" >
-            ...
-        </button>
-    ```
+```html
+<button class="k-menu-button k-button" >
+    ...
+</button>
+```
 
 ### ThemeColor
 
@@ -79,21 +80,21 @@ The following values are available for the [`themeColor`](/api/javascript/ui/dro
 - `inverse`
 - `none`
 
-The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` options will have the `k-button-solid-base` class applied.
+The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` options will have the `k-button-base` class applied.
 
 ```html
 <!-- DropDownButton with default fillMode and themeColor -->
-<button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="User Settings dropdownbutton">
+<button id="button" data-role="dropdownbutton" class="k-menu-button k-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="User Settings dropdownbutton">
     <span class="k-button-text">User Settings</span>
 </button>
 
 <!-- DropDownButton with default fillMode and 'primary' themeColor -->
-<button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="User Settings dropdownbutton">
+<button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-button-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="User Settings dropdownbutton">
     <span class="k-button-text">User Settings</span>
 </button>
 
 <!-- DropDownButton with `flat` fillMode and `primary` themeColor -->
-<button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-button-md k-rounded-md k-button-flat k-button-flat-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="User Settings dropdownbutton">
+<button id="button" data-role="dropdownbutton" class="k-menu-button k-button k-button-flat k-button-primary" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="button_buttonmenu" aria-label="User Settings dropdownbutton">
     <span class="k-button-text">User Settings</span>
 </button>
 ```
@@ -120,7 +121,7 @@ The default `rounded` value is `medium` and it is applied to the button element 
 ```
 
 ## Rendering
- 
+
 To review the rendering of the component, refer to the HTML specifications in the [Kendo UI Themes Monorepo](https://github.com/telerik/kendo-themes/tree/develop). The `tests` folder of the repository contains the rendering for all flavors of the components, providing a clear reference for how their elements are structured. The rendering information can help you customize a component's appearance and behavior by applying custom CSS or JavaScript to suit specific design or functional requirements.
 
 ## See Also

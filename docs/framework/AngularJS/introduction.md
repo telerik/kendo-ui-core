@@ -2,6 +2,7 @@
 title: Overview
 page_title: AngularJS Directives Overview | AngularJS Directives
 description: "Learn more about the AngularJS integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
+components: ["general"]
 previous_url: /using-kendo-with-angularjs, /AngularJS/introduction
 slug: angularjs_integration_directives
 position: 1
@@ -62,7 +63,7 @@ You can reference a widget by using any of the following approaches:
             };
             });
         </script>
-      ```
+    ```
 
 * Using the `tag` directive&mdash;As of the Kendo UI Q1 2015 release, if you use the `tag` directive variant, you can set the `k-scope-field` to achieve the same.
 

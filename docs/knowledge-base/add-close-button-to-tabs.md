@@ -5,9 +5,9 @@ description: "Learn how to add a Close button to the tabs of the Kendo UI for jQ
 slug: howto_addclosebuttontotabs_tabstrip
 previous_url: /controls/navigation/tabstrip/how-to/add-close-button-to-tabs
 tags: telerik, kendo, jquery, tabstrip, add, close, buttons, to, tabs
-component: tabstrip
 type: how-to
 res_type: kb
+components: ["tabstrip"]
 ---
 
 ## Environment

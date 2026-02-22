@@ -1,13 +1,14 @@
 ---
-title: Custom Data Binding
-page_title: Custom Data Binding
+title: Custom Binding
+page_title: Custom Binding
 description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI ComboBox component for {{ site.framework }}."
+components: ["combobox"]
 previous_url: /helpers/editors/combobox/binding/custom-binding
 slug: htmlhelpers_combobox_todatasourceresultbinding_aspnetcore
-position: 5
+position: 4
 ---
 
-# Custom Data Binding
+# Custom Binding
 
 You can configure the Telerik UI ComboBox for data binding to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 

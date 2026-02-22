@@ -6,6 +6,7 @@ page_title: How to Customize Navigation Arrow Icons in ScrollView - Kendo UI
 slug: customize-icons-in-scrollview
 tags: kendo ui, scrollview, customization, icons, navigation arrows
 res_type: kb
+components: ["scrollview"]
 ticketid: 1662936
 ---
 

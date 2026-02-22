@@ -6,6 +6,7 @@ page_title: ListView Popup Editor
 slug: listview-popup-editor
 tags: kendo, kendo-ui, listview, popup, edit, editor
 res_type: kb
+components: ["popup"]
 ---
 
 ## Environment
@@ -41,8 +42,8 @@ Use the [Form](https://demos.telerik.com/kendo-ui/form/index) and [Window](https
                 <dd>#:Discontinued#</dd>
       </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#"><span class="k-button-icon k-icon k-i-edit"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#"><span class="k-button-icon k-icon k-i-close"></span></a>
+                <a role="button" class="k-button k-edit-button" href="\\#"><span class="k-button-icon k-icon k-i-edit"></span></a>
+                <a role="button" class="k-button k-delete-button" href="\\#"><span class="k-button-icon k-icon k-i-close"></span></a>
       </div>
       </div>
     </script>
@@ -57,28 +58,30 @@ Use the [Form](https://demos.telerik.com/kendo-ui/form/index) and [Window](https
 
     <script>
       $(document).ready(function () {
-        var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service"
-        var dataSource = new kendo.data.DataSource({
-          transport: {
-            read: {
-              url: crudServiceBaseUrl + "/Products",
-              dataType: "jsonp"
-            },
-            update: {
-              url: crudServiceBaseUrl + "/Products/Update",
-              dataType: "jsonp"
-            },
-            destroy: {
-              url: crudServiceBaseUrl + "/Products/Destroy",
-              dataType: "jsonp"
-            },
-            create: {
-              url: crudServiceBaseUrl + "/Products/Create",
-              dataType: "jsonp"
-            },
+        var crudServiceBaseUrl = "https://demos.telerik.com/service/v2/core",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            type: "POST",
+                    		contentType: "application/json"
+                        },
             parameterMap: function (options, operation) {
               if (operation !== "read" && options.models) {
-                return { models: kendo.stringify(options.models) };
+                return kendo.stringify(options.models);
               }
             }
           },

@@ -7,6 +7,7 @@ slug: editor-custom-dialog-add-hyperlink
 tags: kendo, window, kendo-ui, editor, custom, dialog, hyperlink, class
 ticketid: 1536777
 res_type: kb
+components: ["editor"]
 ---
 
 ## Environment

@@ -2,6 +2,7 @@
 title: Resources
 page_title: Resources
 description: "Get started with the Telerik UI for {{ site.framework }} TaskBoard and learn how to configure its resources."
+components: ["taskboard"]
 slug: htmlhelpers_taskboard_aspnetcore_resources
 position: 7
 ---

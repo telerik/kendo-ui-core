@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery Filter Documentation - Filter Overview
 description: "Get started with the jQuery Filter by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["filter"]
 slug: overview_kendoui_filter_widget
 position: 0
 ---

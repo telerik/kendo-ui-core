@@ -6,6 +6,7 @@ page_title:  Filtering and Editing a ForeignKey Column Bound to an Enum Field in
 slug: grid-foreign-key-enum-field
 tags: grid, foreign, key, enum, field, filter, edit, dropdownlist, telerik, core, mvc
 res_type: kb
+components: ["general"]
 component: grid
 ---
 
@@ -225,7 +226,7 @@ When the Grid is configured for [Popup editng]({% slug popupediting_grid_aspnetc
         public ShipmentStatus Status { get; set; }
     }
 ```
-```EnumEditor.cshtml
+```Razor EnumEditor.cshtml
     // ~Views\Shared\EditorTemplates\EnumEditor.cshtml
 
     @model ShipmentStatus

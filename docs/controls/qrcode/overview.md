@@ -2,6 +2,7 @@
 title: Overview
 page_title: jQuery QRCode Documentation - QRCode Overview
 description: "Get started with the jQuery QRCode by Kendo UI and learn how to create, initialize, and enable the component."
+components: ["qrcode"]
 slug: overview_kendoui_qrcode_widget
 position: 1
 ---

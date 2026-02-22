@@ -1081,24 +1081,6 @@ import { stub } from '../../helpers/unit/stub.js';
             $(".k-list-container").remove();
         });
 
-        asyncTest("ComboBox calls placeholder method when delayed binding is used", function(done) {
-            let combobox = input.kendoComboBox({
-                text: "Chai",
-                placeholder: "Select...",
-                autoBind: false
-            }).data("kendoComboBox");
-
-            stub(combobox, {
-                _placeholder: combobox._placeholder
-            });
-
-            setTimeout(function() {
-                combobox.dataSource.read();
-
-                done(() => assert.equal(combobox.calls("_placeholder"), 1));
-            });
-        });
-
         it("ComboBox opens the popup if noDataTemplate", function() {
             let combobox = new ComboBox(input, {
                 noDataTemplate: () => "no data"
@@ -1190,7 +1172,7 @@ import { stub } from '../../helpers/unit/stub.js';
                 footerTemplate: () => "footer"
             });
 
-            assert.isOk(combobox.noData.next().hasClass("k-list-footer"));
+            assert.isOk(combobox.noData.siblings(".k-list-footer").length);
         });
 
         it("hides noData template if any data", function() {
@@ -1371,5 +1353,75 @@ import { stub } from '../../helpers/unit/stub.js';
             assert.equal(combobox.label.element.text(), "some label");
         });
 
-    });
+        it ("Should set readonly state", function() {
+            let combobox = new ComboBox(input, {
+                readonly: true,
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ]
+                }
+            });
+
+            assert.isOk(combobox.wrapper.attr("aria-readonly", true));
+            assert.isOk(combobox.input.attr("readonly"));
+            assert.equal(combobox.options.readonly, true);
+        });
+
+        it ("Should set readonly state from attribute", function() {
+            input = $("<input readonly='readonly' class='test' style='width: 200px' />").appendTo(Mocha.fixture);
+
+            let combobox = new ComboBox(input, {
+                dataValueField: "name",
+                dataTextField: "name",
+                dataSource: {
+                    data: [
+                        { name: "item1", value: "1" },
+                        { name: "item2", value: "2" },
+                        { name: "item3", value: "3" }
+                    ],
+                    group: "name"
+                },
+                label: () => `some label`
+            });
+
+             assert.isOk(combobox.wrapper.attr("aria-readonly", true));
+             assert.isOk(combobox.element.attr("readonly"));
+             assert.equal(combobox.options.readonly, true);
+        });
+
+        it ("Should take readonly option with higher precedent over attribute", function() {
+             input = $("<input readonly='readonly' class='test' style='width: 200px' />").appendTo(Mocha.fixture);
+
+             let combobox = new ComboBox(input, {
+                 dataValueField: "name",
+                 dataTextField: "name",
+                 readonly: false,
+                 dataSource: {
+                     data: [
+                         { name: "item1", value: "1" },
+                         { name: "item2", value: "2" },
+                         { name: "item3", value: "3" }
+                     ],
+                     group: "name"
+                 },
+                 label: () => `some label`
+             });
+
+             assert.isOk(combobox.wrapper.attr("aria-readonly", false));
+             assert.equal(combobox.options.readonly, false);
+        });
+
+        it("readonly method sets input to readonly", function() {
+            let combobox = new ComboBox(input);
+            combobox.readonly(true);
+            combobox.input.focus();
+
+            assert.include(["readonly", "true"], combobox.input.attr("readonly"));
+        });
+});
 

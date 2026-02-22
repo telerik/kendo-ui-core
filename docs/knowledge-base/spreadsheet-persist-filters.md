@@ -7,6 +7,7 @@ slug: spreadsheet-persist-filters
 tags: kendo, kendo-ui, spreadsheet, filters, persist-filter
 ticketid: 1156588
 res_type: kb
+components: ["spreadsheet"]
 ---
 
 ## Environment

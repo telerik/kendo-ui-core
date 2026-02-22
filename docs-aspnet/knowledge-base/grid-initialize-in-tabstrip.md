@@ -6,6 +6,7 @@ page_title: Initialize the Grid in a TabStrip
 slug: grid-initialize-in-tabstrip
 tags: grid, initialize, tabstrip
 res_type: kb
+components: ["general"]
 ---
 
 ## Environment
@@ -50,7 +51,7 @@ By design, when the Grid is initialized inside a hidden container, its layout ma
         </kendo-tabstrip>
     ```
     {% endif %}
-    ```Scripts
+    ```JS scripts
     <script type="text/javascript">
         function onActivate(e) {
             let activatedTab = $(e.item).attr("id"); // Get the "id" of the activated tab.
