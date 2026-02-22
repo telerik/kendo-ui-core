@@ -592,6 +592,45 @@ if (kendo.ui.PivotGrid) {
       $.extend(true, kendo.ui.ImageBrowser.prototype.options.messages, browserMessages);
   }
 
+  /* Gantt messages */
+
+  if (kendo.ui.Gantt) {
+    kendo.ui.Gantt.prototype.options.messages =
+      $.extend(true, kendo.ui.Gantt.prototype.options.messages, {
+        "actions": {
+          "addChild": "Ajouter une sous-tâche",
+          "append": "Ajouter une tâche",
+          "insertAfter": "Ajouter après",
+          "insertBefore": "Ajouter avant",
+          "pdf": "Exporter vers PDF"
+        },
+        "cancel": "Annuler",
+        "deleteDependencyWindowTitle": "Effacer la dépendance",
+        "deleteTaskWindowTitle": "Effacer la tâche",
+        "destroy": "Effacer",
+        "editor": {
+          "assingButton": "Assigner",
+          "editorTitle": "Tâche",
+          "end": "Fin",
+          "percentComplete": "Complété",
+          "resources": "Ressources",
+          "resourcesEditorTitle": "Ressources",
+          "resourcesHeader": "Ressources",
+          "start": "Début",
+          "title": "Titre",
+          "unitsHeader": "Unités"
+        },
+        "save": "Sauvegarder",
+        "views": {
+          "day": "Jours",
+          "end": "Fin",
+          "month": "Mois",
+          "start": "Début",
+          "week": "Semaine",
+          "year": "Année"
+        }
+      });
+  }
 
   /* Upload messages */
 
