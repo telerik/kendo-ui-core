@@ -414,6 +414,8 @@ If you need explicit styling, set the options:
 // Rendered: <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
 ```
 
+{% if site.core %}
+
 #### For Tag Helpers (Core)
 
 ```html
@@ -423,6 +425,8 @@ If you need explicit styling, set the options:
 <!-- After (explicit sizing) -->
 <kendo-button name="myButton" size="ComponentSize.Medium" rounded="Rounded.Medium" fill-mode="ButtonFillMode.Solid" theme-color="ThemeColor.Base"> Click Me </kendo-button>
 ```
+
+{% endif %}
 
 #### Grid Component Changes
 

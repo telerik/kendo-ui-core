@@ -10,7 +10,7 @@ Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript.
 
 Kendo UI Core is a free and open-source subset of Kendo UI. The following table details the widgets and features available in Kendo UI Core, as well as the additional features available via a commercial Kendo UI license.
 
-| Feature | Kendo UI Core | [Professional](https://www.telerik.com/kendo-ui) | UI for [MVC](https://www.telerik.com/aspnet-mvc)/[Core](https://www.telerik.com/aspnet-core-ui)/[JSP](https://www.telerik.com/jsp-ui)/[PHP](https://www.telerik.com/php-ui) |
+| Feature | Kendo UI Core | [Professional](https://www.telerik.com/kendo-ui) | UI for [ASP.NET MVC](https://www.telerik.com/aspnet-mvc)/[ASP.NET Core](https://www.telerik.com/aspnet-core-ui) |
 | ------- | :----: | :--------: | :------------------: |
 | **Data Management**       |
 | [Grid](https://demos.telerik.com/kendo-ui/grid/index)                  | :x:  | :white_check_mark: | :white_check_mark:           |
@@ -154,7 +154,7 @@ In order to build Kendo UI Core, you need to have **Node.js 24.x**.
 
 For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
-Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git, and `brew install node@14` to install Node.js.
+Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git, and `brew install node@24` to install Node.js.
 
 Linux users can use the [distributions provided by NodeSource](https://github.com/nodesource/distributions) or their package managers to install `git` and `nodejs`.
 
@@ -226,10 +226,9 @@ If you want to skip building Kendo UI Core yourself, head on over to [Telerik.co
 You can also easily include Kendo UI Core in your site or application by using the Kendo CDN:
 
 ```html
-<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
-<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
-<script src="http://kendo.cdn.telerik.com/2014.2.716/js/jquery.min.js"></script>
-<script src="http://kendo.cdn.telerik.com/2014.2.716/js/kendo.ui.core.min.js"></script>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/13.0.0/default/default-ocean-blue.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="http://kendo.cdn.telerik.com/2026.1.212/js/kendo.ui.core.min.js"></script>
 ```
 The main advantage of the CDN approach is that your users may be able to leverage a primed cache version of Kendo UI Core if they've visited other sites using the framework.
 
@@ -286,6 +285,6 @@ This project has been released under the [Apache License, version 2.0](http://ww
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*Copyright © 2024 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.*
+*Copyright © 2026 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.*
 
 *Progress, Telerik, and certain product names used herein are trademarks or registered trademarks of Progress Software Corporation and/or one of its subsidiaries or affiliates in the U.S. and/or other countries.*
