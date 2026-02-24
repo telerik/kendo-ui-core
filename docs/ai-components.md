@@ -76,7 +76,7 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
     </article-card>    
     <article-card
         tag="new"
-        href="/controls/chat/ai-integration"
+        href="/controls/grid/smart-grid/ai-chat-assistant"
         src="./images/aicomponents/Grid_AI_Chat_Integration_Light_Large.svg"
         title="AI Chat Integration"
         subTitle="Grid Integration"
