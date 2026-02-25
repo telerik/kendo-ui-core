@@ -29,6 +29,8 @@ To use the Kendo UI Upload as a drop zone:
 
     ![Kendo UI for jQuery Upload Release the file to the upload queue](upload-drag-drop-3.png)
 
+> By default, the Upload allows multiple files to be dragged and dropped. To restrict the selection to a single file, set the [`multiple`(/api/javascript/ui/upload/configuration/multiple)] configuration option to `false`.
+
 ## Implementing Custom Drop Zones
 
 As of the Kendo UI 2016 Q3 release, the Upload provides options for implementing custom drop zones depending on a particular selector. For the runnable example, refer to the [demo on implementing custom drop zones in the Upload](https://demos.telerik.com/kendo-ui/upload/customdropzone).
