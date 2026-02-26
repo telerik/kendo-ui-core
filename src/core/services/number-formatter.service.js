@@ -1,3 +1,4 @@
+import { cultureService } from "./culture.service";
 const DOT = ".";
 const COMMA = ",";
 const SHARP = "#";
@@ -7,14 +8,11 @@ const EMPTY = "";
 const STANDARD_FORMAT_REGEX = /^(n|c|p|e)(\d*)$/i;
 const LITERAL_REGEX = /(\\.)|(googol)|(['][^']*[']?)|(["][^"]*["]?)/g;
 const COMMA_REGEX = /\,/g;
-export class NumberFormatterService {
-    constructor(cultureService) {
-        this.cultureService = cultureService;
-    }
+class NumberFormatterService {
     format(number, format, culture) {
         const resolvedCulture = culture
-            ? this.cultureService.getCulture(culture)
-            : this.cultureService.culture();
+            ? cultureService.getCulture(culture)
+            : cultureService.culture();
         let numberFormat = resolvedCulture.numberFormat;
         let decimal = numberFormat[DOT];
         let precision = numberFormat.decimals;
@@ -396,3 +394,4 @@ export class NumberFormatterService {
         return result.toFixed(Math.min(precision, 20));
     }
 }
+export const numberFormatterService = new NumberFormatterService();

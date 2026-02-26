@@ -1,3 +1,4 @@
+import { formatterService } from "./formatter.service";
 // Regex patterns for template parsing
 const argumentNameRegExp = /^\w+/;
 const encodeRegExp = /\$\{([^}]*)\}/g;
@@ -39,9 +40,8 @@ function compilePart(part, stringPart) {
  * - #: expression # - Output HTML-encoded expression result
  * - # code # - Execute JavaScript code
  */
-export class TemplateService {
-    constructor(formatterService) {
-        this.formatterService = formatterService;
+class TemplateService {
+    constructor() {
         this.paramName = "data";
         this.useWithBlock = true;
         this.debugTemplates = false;
@@ -104,11 +104,13 @@ export class TemplateService {
             if (this.debugTemplates) {
                 console.warn(`Invalid template:'${template}' Generated code:'${functionBody}'`);
                 // Return a no-op function in debug mode
+                //NOSONAR - In debug mode we do not want to throw an error.
                 return (() => "");
             }
             else {
-                throw new Error(this.formatterService.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
+                throw new Error(formatterService.format("Invalid template:'{0}' Generated code:'{1}'", template, functionBody));
             }
         }
     }
 }
+export const templateService = new TemplateService();

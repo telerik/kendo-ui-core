@@ -1,16 +1,14 @@
 /**
  * Defaults Service
  * Manages global Kendo defaults configuration with deep path support.
- *
- * @module core-v2/services/defaults.service
  */
+import { utilsService } from "./utils.service";
 /**
  * Service for managing global Kendo defaults configuration.
  * Supports deep path-based setting with automatic object creation.
  */
-export class DefaultsService {
-    constructor(utils) {
-        this.utils = utils;
+class DefaultsService {
+    constructor() {
         /**
          * The defaults storage object
          */
@@ -53,7 +51,7 @@ export class DefaultsService {
             curr = curr[part];
         });
         if (value !== null && typeof value === "object" && value.constructor === Object) {
-            curr[key] = this.utils.deepExtend({}, curr[key] || {}, value);
+            curr[key] = utilsService.deepExtend({}, curr[key] || {}, value);
         }
         else {
             curr[key] = value;
@@ -77,3 +75,4 @@ export class DefaultsService {
         return curr;
     }
 }
+export const defaultsService = new DefaultsService();

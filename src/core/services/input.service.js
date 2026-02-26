@@ -1,13 +1,10 @@
+import { supportService } from "./support.service";
 /**
  * Input Service Implementation
  * Provides utilities for input element manipulation.
  
  */
-export class InputService {
-    constructor($, supportService) {
-        this.$ = $;
-        this.supportService = supportService;
-    }
+class InputService {
     /**
      * Get or set the caret (text cursor) position in an input element.
      */
@@ -29,7 +26,7 @@ export class InputService {
             if (inputElement.selectionStart !== undefined) {
                 if (isPosition) {
                     inputElement.focus();
-                    const mobile = this.supportService.mobileOS;
+                    const mobile = supportService.mobileOS;
                     if (mobile && (mobile.wp || mobile.android)) {
                         // Without the timeout the caret is at the end of the input
                         setTimeout(() => {
@@ -47,7 +44,7 @@ export class InputService {
             }
             else if (document.selection) {
                 // Legacy IE support
-                if (this.$(inputElement).is(":visible")) {
+                if ($(inputElement).is(":visible")) {
                     inputElement.focus();
                 }
                 rangeElement = inputElement.createTextRange();
@@ -81,7 +78,6 @@ export class InputService {
      */
     antiForgeryTokens() {
         const tokens = {};
-        const $ = this.$;
         const csrfToken = $("meta[name=csrf-token],meta[name=_csrf]").attr("content");
         const csrfParam = $("meta[name=csrf-param],meta[name=_csrf_header]").attr("content");
         $("input[name^='__RequestVerificationToken']").each(function () {
@@ -93,3 +89,4 @@ export class InputService {
         return tokens;
     }
 }
+export const inputService = new InputService();

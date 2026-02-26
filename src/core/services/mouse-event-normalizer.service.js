@@ -1,17 +1,14 @@
 /**
  * Mouse Event Normalizer Service
  * Handles mouse event capturing and muting for touch/pointer event normalization.
- *
- * @module core-v2/services/mouse-event-normalizer.service
  */
+import { supportService } from "./support.service";
 /**
  * Mouse event normalizer service for handling touch/mouse event conflicts.
  * Prevents ghost clicks and normalizes touch events to mouse events.
  */
-export class MouseEventNormalizerService {
-    constructor($, support) {
-        this.$ = $;
-        this.support = support;
+class MouseEventNormalizerService {
+    constructor() {
         /**
          * Whether the mouse trap has been set up
          */
@@ -42,7 +39,7 @@ export class MouseEventNormalizerService {
         let idx = 0;
         const length = this.MOUSE_EVENTS.length;
         const element = document.documentElement;
-        if (this.mouseTrap || !this.support.eventCapture) {
+        if (this.mouseTrap || !supportService.eventCapture) {
             return;
         }
         this.mouseTrap = true;
@@ -52,7 +49,7 @@ export class MouseEventNormalizerService {
         const handler = function (e) {
             if (self.captureMouse) {
                 if (e.type === "click") {
-                    if (self.bustClick && !self.$(e.target).is(self.EXCLUDE_BUST_CLICK_SELECTOR)) {
+                    if (self.bustClick && !$(e.target).is(self.EXCLUDE_BUST_CLICK_SELECTOR)) {
                         e.preventDefault();
                         e.stopPropagation();
                     }
@@ -90,3 +87,4 @@ export class MouseEventNormalizerService {
         }, 400);
     }
 }
+export const mouseEventNormalizerService = new MouseEventNormalizerService();

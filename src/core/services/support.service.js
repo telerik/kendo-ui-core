@@ -13,11 +13,9 @@ function testRx(agent, rxs, dflt) {
 /**
  * Support detection service for browser, OS, and feature detection
  */
-export class SupportService {
-    constructor($) {
+class SupportService {
+    constructor() {
         this._scrollbar = undefined;
-        this.$ = $;
-        // Bind methods to ensure correct 'this' context when called as standalone functions
         this.scrollbar = this.scrollbar.bind(this);
         this.isRtl = this.isRtl.bind(this);
         this.detectOS = this.detectOS.bind(this);
@@ -28,7 +26,6 @@ export class SupportService {
         this.initialize();
     }
     initialize() {
-        const $ = this.$;
         const win = window;
         const doc = document;
         const nav = navigator;
@@ -202,7 +199,7 @@ export class SupportService {
      * Check if element is in RTL context
      */
     isRtl(element) {
-        return this.$(element).closest(".k-rtl").length > 0;
+        return $(element).closest(".k-rtl").length > 0;
     }
     /**
      * Detect mobile operating system from user agent
@@ -383,7 +380,6 @@ export class SupportService {
                     return false;
                 }
                 // Check if viewport is user-scalable
-                const $ = this.$;
                 return !($("meta[name=viewport]").attr("content") || "").match(/user-scalable=no/i);
             }
         }
@@ -484,3 +480,4 @@ export class SupportService {
         return this.matchMedia && window.matchMedia(media).matches;
     }
 }
+export const supportService = new SupportService();

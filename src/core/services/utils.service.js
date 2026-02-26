@@ -5,9 +5,8 @@ const UNDEFINED = "undefined";
  * Utility service providing general helper functions.
  
  */
-export class UtilsService {
-    constructor(kendo) {
-        this.kendo = kendo;
+class UtilsService {
+    constructor() {
         /**
          * Keyboard key codes for handling keyboard events.
          * Maps common key names to their numeric key codes.
@@ -49,15 +48,13 @@ export class UtilsService {
             Friday: 5,
             Saturday: 6
         };
-        // kendo.data is accessed at call time, not construction time,
-        // because data types (ObservableArray, DataSource, etc.) are
-        // defined later in kendo.data.js
     }
     /**
      * Get kendo.data namespace (accessed at call time for lazy loading)
      */
     get kendoData() {
-        return this.kendo.data || {};
+        var _a;
+        return ((_a = window.kendo) === null || _a === void 0 ? void 0 : _a.data) || {};
     }
     /**
      * Convert camelCase to hyphen-case
@@ -89,14 +86,6 @@ export class UtilsService {
     }
     /**
      * Deep extend an object with one or more source objects.
-     *
-     * IMPORTANT BEHAVIOR NOTES:
-     * - Does NOT copy properties with undefined values (matches jQuery.extend behavior)
-     * - Handles Date objects by creating new Date instances
-     * - Handles objects with clone() method by calling clone()
-     * - Skips Kendo special types: ObservableArray, LazyObservableArray, DataSource, HierarchicalDataSource
-     * - Skips Array, RegExp, ArrayBuffer, and HTMLElement instances
-     * - Protects against prototype pollution (__proto__, constructor, prototype)
      */
     deepExtend(destination, ...sources) {
         for (let i = 0; i < sources.length; i++) {
@@ -310,7 +299,7 @@ export class UtilsService {
      */
     logToConsole(message, type) {
         const console = window.console;
-        const kendo = this.kendo;
+        const kendo = window.kendo;
         if (!kendo.suppressLog && typeof console !== "undefined" && console.log) {
             console[type || "log"](message);
         }
@@ -425,3 +414,4 @@ export class UtilsService {
         return deferred.promise();
     }
 }
+export const utilsService = new UtilsService();

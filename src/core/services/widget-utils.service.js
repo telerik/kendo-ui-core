@@ -5,6 +5,12 @@
  * All methods preserve exact original functionality from kendo.core.js.
  *
  */
+import { widgetRegistryService } from "./widget-registry.service";
+import { propertyAccessService } from "./property-access.service";
+import { templateService } from "./template.service";
+import { utilsService } from "./utils.service";
+import { namespaceService } from "./namespace.service";
+import { Observable } from "../base";
 // Constants - match original kendo.core.js
 const STRING = "string";
 const FUNCTION = "function";
@@ -18,32 +24,23 @@ const cssPropertiesNames = ["themeColor", "fillMode", "shape", "size", "rounded"
 /**
  * Widget Utils Service Implementation
  */
-export class WidgetUtilsService {
-    constructor($, widgetRegistryService, propertyAccessService, templateService, utilsService, Observable, namespaceService) {
-        this.$ = $;
-        this.widgetRegistryService = widgetRegistryService;
-        this.propertyAccessService = propertyAccessService;
-        this.templateService = templateService;
-        this.utilsService = utilsService;
-        this.Observable = Observable;
-        this.namespaceService = namespaceService;
-    }
+class WidgetUtilsService {
     /**
      * Get default namespaces from the registry service
      * Returns [kendo.ui, kendo.dataviz.ui, kendo.mobile.ui]
      */
     getDefaultNamespaces() {
         return [
-            this.widgetRegistryService.getNamespace("ui"),
-            this.widgetRegistryService.getNamespace("dataviz.ui"),
-            this.widgetRegistryService.getNamespace("mobile.ui")
+            widgetRegistryService.getNamespace("ui"),
+            widgetRegistryService.getNamespace("dataviz.ui"),
+            widgetRegistryService.getNamespace("mobile.ui")
         ].filter(Boolean);
     }
     /**
      * Parse a single option from element's data attribute
      */
     parseOption(element, option, source) {
-        const ns = this.namespaceService.ns;
+        const ns = namespaceService.ns;
         let value;
         let modelBinded = false;
         if (option.indexOf("data") === 0) {
@@ -84,8 +81,9 @@ export class WidgetUtilsService {
             // This way you can set a config like so bind:data-checkboxes="checkboxesOptions" where checkboxesOptions is an object inside your viewmodel.
             // This is a CSP-safe approach similar to data-checkboxes="{ checkboxes: true }" but you don't need to eval javascript.
             value = source[value];
-            if (value instanceof this.Observable) {
+            if (value instanceof Observable) {
                 // Pass true as a parameter to allow function serialization. Otherwise, if you have a function in the configuration, it will be ignored.
+                // @ts-ignore-next-line -> The check needs to be for ObservableObject, but kendo.data is not extracted yet.
                 value = value.toJSON(true);
             }
         }
@@ -95,8 +93,7 @@ export class WidgetUtilsService {
      * Parse all options from element's data attributes
      */
     parseOptions(element, options, source) {
-        const $ = this.$;
-        const ns = this.namespaceService.ns;
+        const ns = namespaceService.ns;
         const result = {};
         let option;
         let value;
@@ -117,16 +114,16 @@ export class WidgetUtilsService {
                 if (templateRegExp.test(option) && role != "drawer") {
                     if (typeof value === "string") {
                         if (this.validateQuerySelectorTemplate(value)) {
-                            value = this.templateService.compile($("#" + value).html());
+                            value = templateService.compile($("#" + value).html());
                         }
                         else if (source && source[value]) {
-                            value = this.templateService.compile(source[value]);
+                            value = templateService.compile(source[value]);
                         }
                         else {
-                            value = this.templateService.compile(value);
+                            value = templateService.compile(value);
                         }
                     }
-                    else if (!this.utilsService.isFunction(value)) {
+                    else if (!utilsService.isFunction(value)) {
                         value = element.getAttribute(option);
                     }
                 }
@@ -140,7 +137,7 @@ export class WidgetUtilsService {
      */
     validateQuerySelectorTemplate(value) {
         try {
-            return !!(this.$("#" + value).length);
+            return !!($("#" + value).length);
         }
         catch (e) {
         }
@@ -150,8 +147,7 @@ export class WidgetUtilsService {
      * Initialize a widget on an element
      */
     initWidget(element, options, roles, source) {
-        const $ = this.$;
-        const ns = this.namespaceService.ns;
+        const ns = namespaceService.ns;
         let result;
         let option;
         let widget;
@@ -182,7 +178,7 @@ export class WidgetUtilsService {
             widget = roles[role];
         }
         else { // full namespace path - like kendo.ui.Widget
-            widget = this.propertyAccessService.getter(role)(window);
+            widget = propertyAccessService.getter(role)(window);
         }
         const data = $(element).data();
         const widgetKey = widget ? "kendo" + widget.fn.options.prefix + widget.fn.options.name : "";
@@ -210,7 +206,7 @@ export class WidgetUtilsService {
         options = $.extend({}, this.parseOptions(element, $.extend({}, widget.fn.options, widget.fn.defaults), source), options);
         if (dataSource) {
             if (typeof dataSource === STRING) {
-                options.dataSource = this.propertyAccessService.getter(dataSource)(window);
+                options.dataSource = propertyAccessService.getter(dataSource)(window);
             }
             else {
                 options.dataSource = dataSource;
@@ -220,7 +216,7 @@ export class WidgetUtilsService {
             option = widget.fn.events[idx];
             value = this.parseOption(element, option);
             if (value !== undefined) {
-                options[option] = this.propertyAccessService.getter(value)(window);
+                options[option] = propertyAccessService.getter(value)(window);
             }
         }
         if (!result) {
@@ -235,9 +231,8 @@ export class WidgetUtilsService {
      * Initialize all widgets in an element tree
      */
     init(element, ...namespaces) {
-        const $ = this.$;
-        const ns = this.namespaceService.ns;
-        const roles = this.widgetRegistryService.rolesFromNamespaces(namespaces, this.getDefaultNamespaces());
+        const ns = namespaceService.ns;
+        const roles = widgetRegistryService.rolesFromNamespaces(namespaces, this.getDefaultNamespaces());
         const self = this;
         $(element).find("[data-" + ns + "role]").addBack().each(function () {
             self.initWidget(this, {}, roles);
@@ -247,8 +242,7 @@ export class WidgetUtilsService {
      * Destroy all widgets in an element tree
      */
     destroy(element) {
-        const $ = this.$;
-        const ns = this.namespaceService.ns;
+        const ns = namespaceService.ns;
         $(element).find("[data-" + ns + "role]").addBack().each(function () {
             const data = $(this).data();
             for (var key in data) {
@@ -262,14 +256,13 @@ export class WidgetUtilsService {
      * Containment comparer for sorting widgets by DOM hierarchy
      */
     containmentComparer(a, b) {
-        return this.$.contains(a, b) ? -1 : 1;
+        return $.contains(a, b) ? -1 : 1;
     }
     /**
      * Resize all widgets in an element tree
      */
     resize(element, force) {
-        const $ = this.$;
-        const ns = this.namespaceService.ns;
+        const ns = namespaceService.ns;
         const self = this;
         // Create resizableWidget filter with proper context
         const resizableWidgetFilter = function () {
@@ -295,7 +288,7 @@ export class WidgetUtilsService {
      * Get widget instance from a DOM element
      */
     widgetInstance(element, suites) {
-        const ns = this.namespaceService.ns;
+        const ns = namespaceService.ns;
         const defaultNamespaces = this.getDefaultNamespaces();
         let role = element.data(ns + "role");
         let widgets = [];
@@ -326,7 +319,7 @@ export class WidgetUtilsService {
                 widgets = defaultNamespaces.map(ns => ns.roles[role]);
             }
             if (role.indexOf(".") >= 0) {
-                widgets = [this.propertyAccessService.getter(role)(window)];
+                widgets = [propertyAccessService.getter(role)(window)];
             }
             for (i = 0, length = widgets.length; i < length; i++) {
                 const widget = widgets[i];
@@ -340,3 +333,4 @@ export class WidgetUtilsService {
         }
     }
 }
+export const widgetUtilsService = new WidgetUtilsService();

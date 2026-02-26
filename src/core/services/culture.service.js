@@ -61,9 +61,15 @@ const DEFAULT_EN_US_CULTURE = {
         }
     }
 };
-export class CultureService {
-    constructor(culturesRegistry) {
-        this.cultures = culturesRegistry;
+class CultureService {
+    constructor() {
+        if (!window.kendo) {
+            window.kendo = {};
+        }
+        if (!window.kendo.cultures) {
+            window.kendo.cultures = {};
+        }
+        this.cultures = window.kendo.cultures;
         // Initialize with default en-US culture if not present
         if (!this.cultures[DEFAULT_LANGUAGE]) {
             this.cultures[DEFAULT_LANGUAGE] = DEFAULT_EN_US_CULTURE;
@@ -144,3 +150,4 @@ export class CultureService {
         return this.cultures;
     }
 }
+export const cultureService = new CultureService();

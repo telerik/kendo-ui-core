@@ -1,13 +1,12 @@
+import { numberParserService } from "./number-parser.service";
 // Constants
 const NUMBER = "number";
 const STRING = "string";
 /**
  * Service for timezone conversions
- * Extracted from kendo.timezone in kendo.core.js
  */
-export class TimezoneService {
-    constructor(numberParserService) {
-        this.numberParserService = numberParserService;
+class TimezoneService {
+    constructor() {
         /**
          * Timezone zone definitions - populated externally
          */
@@ -40,7 +39,7 @@ export class TimezoneService {
         const info = this.zoneAndRule(utcTime, this.zones, this.rules, timezone);
         const zone = info.zone;
         const rule = info.rule;
-        return this.numberParserService.parseFloat(rule ? zone[0] - rule[6] : zone[0]);
+        return numberParserService.parseFloat(rule ? zone[0] - rule[6] : zone[0]);
     }
     /**
      * Get the timezone abbreviation for a given time
@@ -216,3 +215,4 @@ export class TimezoneService {
         };
     }
 }
+export const timezoneService = new TimezoneService();

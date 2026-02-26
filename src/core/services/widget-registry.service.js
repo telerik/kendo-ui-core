@@ -2,21 +2,17 @@
  * Widget Registry Service
  *
  * Manages widget registration across different namespaces (ui, mobile.ui, dataviz.ui).
- * Provides both modern service-based access and maintains backward compatibility
- * with legacy kendo.ui.plugin() pattern.
  *
- 
  */
+import { formatterService } from "./formatter.service";
 // Constants
 const STRING = "string";
 const FUNCTION = "function";
 /**
  * Widget Registry Service implementation
  */
-export class WidgetRegistryService {
-    constructor($, formatterService) {
-        this.$ = $;
-        this.formatterService = formatterService;
+class WidgetRegistryService {
+    constructor() {
         /**
          * All registered widgets
          */
@@ -127,7 +123,7 @@ export class WidgetRegistryService {
      */
     getWidgetInstance(element, namespace) {
         var _a, _b, _c, _d;
-        const el = this.$(element);
+        const el = $(element);
         let result;
         const searchNamespaces = namespace ? [namespace] : Array.from(this.namespaces.values());
         for (const ns of searchNamespaces) {
@@ -147,8 +143,6 @@ export class WidgetRegistryService {
      * Create jQuery plugin for a widget
      */
     createJQueryPlugin(name, widget, getter) {
-        const $ = this.$;
-        const formatterService = this.formatterService;
         const slice = Array.prototype.slice;
         $.fn[name] = function (options) {
             let value = this;
@@ -187,7 +181,6 @@ export class WidgetRegistryService {
     }
     /**
      * Merge roles from multiple namespaces into a single object
-     * Uses jQuery extend to match original behavior exactly
      */
     rolesFromNamespaces(namespaces, defaultNamespaces) {
         const roles = [];
@@ -200,7 +193,8 @@ export class WidgetRegistryService {
         for (idx = 0, length = namespaces.length; idx < length; idx++) {
             roles[idx] = namespaces[idx].roles;
         }
-        // Use $.extend.apply to match original: extend.apply(null, [{}].concat(roles.reverse()))
-        return this.$.extend.apply(null, [{}].concat(roles.reverse()));
+        const reversedRoles = [...roles].reverse();
+        return $.extend.apply(null, [{}].concat(reversedRoles));
     }
 }
+export const widgetRegistryService = new WidgetRegistryService();

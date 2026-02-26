@@ -1,14 +1,12 @@
 /**
  * Type utilities service for runtime type checking.
  * Implements jQuery's deprecated type() function.
- *
- * @module core-v2/services/type-utils.service
  */
 /**
  * Service for runtime type checking utilities.
  * Provides type() function that was deprecated in jQuery.
  */
-export class TypeUtilsService {
+class TypeUtilsService {
     constructor() {
         /**
          * Map of toString results to lowercase type names
@@ -58,3 +56,4 @@ export class TypeUtilsService {
             typeof obj;
     }
 }
+export const typeUtilsService = new TypeUtilsService();

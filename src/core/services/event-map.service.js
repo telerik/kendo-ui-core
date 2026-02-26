@@ -1,18 +1,15 @@
 /**
  * Event Map Service
  * Provides cross-browser event mapping for touch, pointer, and mouse events.
- *
- * @module core-v2/services/event-map.service
  */
+import { supportService } from "./support.service";
 /**
  * Event map service for cross-browser event handling.
  * Maps abstract event names (down, move, up, cancel) to the appropriate
  * browser-specific events based on touch/pointer/mouse support.
  */
-export class EventMapService {
-    constructor($, support) {
-        this.$ = $;
-        this.support = support;
+class EventMapService {
+    constructor() {
         /**
          * Regex for matching event names in a string
          */
@@ -31,7 +28,7 @@ export class EventMapService {
             up: "mouseup touchend touchcancel",
             cancel: "mouseleave touchcancel"
         };
-        if (this.support.touch && (this.support.mobileOS && (this.support.mobileOS.ios || this.support.mobileOS.android))) {
+        if (supportService.touch && (supportService.mobileOS && (supportService.mobileOS.ios || supportService.mobileOS.android))) {
             // Touch-only devices
             map = {
                 down: "touchstart",
@@ -40,7 +37,7 @@ export class EventMapService {
                 cancel: "touchcancel"
             };
         }
-        else if (this.support.pointers) {
+        else if (supportService.pointers) {
             // W3C Pointer Events
             map = {
                 down: "pointerdown",
@@ -49,7 +46,7 @@ export class EventMapService {
                 cancel: "pointercancel pointerleave"
             };
         }
-        else if (this.support.msPointers) {
+        else if (supportService.msPointers) {
             // IE10 MS Pointer Events
             map = {
                 down: "MSPointerDown",
@@ -65,13 +62,13 @@ export class EventMapService {
      * Creates these events using mouseover/out and event-time checks
      */
     setupMSPointerEvents() {
-        if (this.support.msPointers && !("onmspointerenter" in window)) {
+        if (supportService.msPointers && !("onmspointerenter" in window)) {
             // IE10 - Create MSPointerEnter/MSPointerLeave events
-            this.$.each({
+            $.each({
                 MSPointerEnter: "MSPointerOver",
                 MSPointerLeave: "MSPointerOut"
             }, (orig, fix) => {
-                this.$.event.special[orig] = {
+                $.event.special[orig] = {
                     delegateType: fix,
                     bindType: fix,
                     handle: function (event) {
@@ -120,3 +117,4 @@ export class EventMapService {
         return events;
     }
 }
+export const eventMapService = new EventMapService();

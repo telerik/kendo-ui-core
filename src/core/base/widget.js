@@ -34,11 +34,10 @@
  * });
  */
 import { Observable } from "./observable";
-import { inject } from "../service-container";
-import { KendoJQueryService } from "../services/kendo-jquery.service";
-import { DomUtilsService } from "../services/dom-utils.service";
-import { UtilsService } from "../services/utils.service";
-import { CssPropertiesService } from "../services/css-properties.service";
+import { kendoJQueryService } from "../services/kendo-jquery.service";
+import { domUtilsService } from "../services/dom-utils.service";
+import { utilsService } from "../services/utils.service";
+import { cssPropertiesService } from "../services/css-properties.service";
 import * as licensing from "../../kendo.licensing.js";
 // CSS property names that can be applied to widgets
 const cssPropertiesNames = ["themeColor", "fillMode", "shape", "size", "rounded", "positionMode"];
@@ -104,7 +103,7 @@ export class Widget extends Observable {
             that._showWatermarkOverlay = licensing.addWatermarkOverlayAndBanner;
         }
         // Wrap element with KendoJQuery and bind handler
-        const kendoJQuery = inject(KendoJQueryService).getConstructor();
+        const kendoJQuery = kendoJQueryService.getConstructor();
         that.element = kendoJQuery(element).handler(that);
         // Initialize Observable
         Observable.fn.init.call(that);
@@ -124,7 +123,7 @@ export class Widget extends Observable {
             options.dataSource = dataSource;
         }
         // Set data-role attribute if not present
-        const roleAttr = inject(DomUtilsService).attr("role");
+        const roleAttr = domUtilsService.attr("role");
         if (!that.element.attr(roleAttr)) {
             that.element.attr(roleAttr, (options.name || "").toLowerCase());
         }
@@ -159,7 +158,7 @@ export class Widget extends Observable {
     setOptions(options) {
         this._clearCssClasses(options);
         this._setEvents(options);
-        inject(KendoJQueryService).getConstructor().extend(this.options, options);
+        kendoJQueryService.getConstructor().extend(this.options, options);
         this._applyCssClasses();
     }
     /**
@@ -200,7 +199,7 @@ export class Widget extends Observable {
      * @returns Size object with width and height
      */
     getSize() {
-        return inject(DomUtilsService).dimensions(this.element);
+        return domUtilsService.dimensions(this.element);
     }
     /**
      * Get or set widget size
@@ -258,7 +257,7 @@ export class Widget extends Observable {
         let prop;
         let widgetName;
         let widgetProperties;
-        const cssProps = inject(CssPropertiesService);
+        const cssProps = cssPropertiesService;
         widgetName = this.options._altname || protoOptions.name;
         widgetProperties = cssProps.propertyDictionary[widgetName];
         if (!cssProps || !widgetProperties) {
@@ -285,7 +284,7 @@ export class Widget extends Observable {
         const that = this;
         const inputElm = that.element;
         const inputId = inputElm.attr("id");
-        const $ = inject(KendoJQueryService).getConstructor();
+        const $ = kendoJQueryService.getConstructor();
         const labelElm = $("label[for=\"" + inputId + "\"]");
         const ariaLabel = inputElm.attr(ARIA_LABEL);
         const ariaLabelledBy = inputElm.attr(ARIA_LABELLEDBY);
@@ -300,8 +299,7 @@ export class Widget extends Observable {
             target.attr(ARIA_LABELLEDBY, ariaLabelledBy);
         }
         else if (labelElm.length) {
-            // Use utils.guid() for generating unique IDs
-            const guid = inject(UtilsService).guid();
+            const guid = utilsService.guid();
             labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || guid);
             target.attr(ARIA_LABELLEDBY, labelId);
         }
@@ -319,7 +317,7 @@ export class Widget extends Observable {
         let prop;
         let widgetName;
         let widgetProperties;
-        const cssProps = inject(CssPropertiesService);
+        const cssProps = cssPropertiesService;
         widgetName = this.options._altname || protoOptions.name;
         widgetProperties = cssProps.propertyDictionary[widgetName];
         if (!cssProps || !widgetProperties) {

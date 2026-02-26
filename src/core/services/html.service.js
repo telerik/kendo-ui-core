@@ -9,7 +9,7 @@ const ALLOWED_PROTOCOLS = ["http:", "https:"];
 /**
  * Service for HTML encoding, decoding, and sanitization
  */
-export class HtmlService {
+class HtmlService {
     /**
      * Decode HTML entities to their character equivalents
      */
@@ -108,3 +108,4 @@ export class HtmlService {
         return template;
     }
 }
+export const htmlService = new HtmlService();

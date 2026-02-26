@@ -3,10 +3,7 @@
  * Provides utilities for extracting theme colors.
  
  */
-export class ColorService {
-    constructor($) {
-        this.$ = $;
-    }
+class ColorService {
     /**
      * Get series colors from CSS custom properties.
      */
@@ -17,13 +14,14 @@ export class ColorService {
             '<div class="k-var--series-d"></div>' +
             '<div class="k-var--series-e"></div>' +
             '<div class="k-var--series-f"></div>';
-        const series = this.$(seriesColorsTemplate);
+        const series = $(seriesColorsTemplate);
         const colors = [];
-        series.appendTo(this.$("body"));
+        series.appendTo($("body"));
         series.each((_i, item) => {
-            colors.push(this.$(item).css("background-color"));
+            colors.push($(item).css("background-color"));
         });
         series.remove();
         return colors;
     }
 }
+export const colorService = new ColorService();
