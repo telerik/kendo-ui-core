@@ -2,7 +2,6 @@ export * from "./class";
 export * from "./observable";
 export * from "./widget";
 export * from "./databound-widget";
-export * from "./dependency-container";
 export * from "./culture";
 export * from "./formatter";
 export * from "./parser";

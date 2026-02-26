@@ -2,9 +2,8 @@
 const PREFIX = "prefix";
 /**
  * Service for managing CSS class properties for widgets
- * Extracted from kendo.cssProperties in kendo.core.js
  */
-export class CssPropertiesService {
+class CssPropertiesService {
     constructor() {
         /**
          * Predefined theme color values
@@ -237,3 +236,4 @@ export class CssPropertiesService {
         return undefined;
     }
 }
+export const cssPropertiesService = new CssPropertiesService();

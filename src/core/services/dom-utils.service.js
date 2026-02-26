@@ -1,17 +1,14 @@
+import { supportService } from "./support.service";
+import { utilsService } from "./utils.service";
+import { namespaceService } from "./namespace.service";
 // Constants
 const PERCENT_REGEXP = /%/;
 const BOX_SHADOW_REGEXP = /(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+)?/i;
 /**
  * Service providing DOM utility functions
  */
-export class DomUtilsService {
-    constructor(supportService, $, namespaceService, utils, kendo // Optional kendo namespace for progress messages
-    ) {
-        this.supportService = supportService;
-        this.$ = $;
-        this.namespaceService = namespaceService;
-        this.utils = utils;
-        this.kendo = kendo;
+class DomUtilsService {
+    constructor() {
         this.animationQueue = [];
         // Set up requestAnimationFrame with fallbacks
         const win = window;
@@ -30,7 +27,7 @@ export class DomUtilsService {
      * Get outer width of element
      */
     outerWidth(element, includeMargin, calculateFromHidden) {
-        const $element = this.$(element);
+        const $element = $(element);
         if (calculateFromHidden) {
             return this.getHiddenDimensions($element, includeMargin).width;
         }
@@ -40,7 +37,7 @@ export class DomUtilsService {
      * Get outer height of element
      */
     outerHeight(element, includeMargin, calculateFromHidden) {
-        const $element = this.$(element);
+        const $element = $(element);
         if (calculateFromHidden) {
             return this.getHiddenDimensions($element, includeMargin).height;
         }
@@ -55,7 +52,7 @@ export class DomUtilsService {
         if (document.defaultView && document.defaultView.getComputedStyle) {
             computedStyle = document.defaultView.getComputedStyle(element, "");
             if (properties) {
-                this.$.each(properties, (_idx, value) => {
+                $.each(properties, (_idx, value) => {
                     styles[value] = computedStyle.getPropertyValue(value);
                 });
             }
@@ -64,12 +61,12 @@ export class DomUtilsService {
             // IE fallback
             computedStyle = element.currentStyle;
             if (properties) {
-                this.$.each(properties, (_idx, value) => {
-                    styles[value] = computedStyle[this.utils.toCamelCase(value)];
+                $.each(properties, (_idx, value) => {
+                    styles[value] = computedStyle[utilsService.toCamelCase(value)];
                 });
             }
         }
-        if (!this.utils.size(styles)) {
+        if (!utilsService.size(styles)) {
             return computedStyle;
         }
         return styles;
@@ -79,7 +76,7 @@ export class DomUtilsService {
      */
     isScrollable(element) {
         const dataset = element.dataset;
-        if (dataset[this.namespaceService.ns + "scrollable"] === "false") {
+        if (dataset[namespaceService.ns + "scrollable"] === "false") {
             return false;
         }
         if (typeof (element === null || element === void 0 ? void 0 : element.className) === "string" &&
@@ -93,23 +90,23 @@ export class DomUtilsService {
      * Get or set scroll left position (RTL-aware)
      */
     scrollLeft(element, value) {
-        const webkit = this.supportService.browser.webkit;
-        const mozilla = this.supportService.browser.mozilla;
-        const browserVersion = this.supportService.browser.version;
+        const webkit = supportService.browser.webkit;
+        const mozilla = supportService.browser.mozilla;
+        const browserVersion = supportService.browser.version;
         // Handle jQuery collection
-        if (element instanceof this.$ && value !== undefined) {
+        if (element instanceof $ && value !== undefined) {
             element.each((_i, e) => {
                 this.scrollLeft(e, value);
             });
             return;
         }
-        const el = element instanceof this.$ ? element[0] : element;
+        const el = element instanceof $ ? element[0] : element;
         if (!el) {
             return;
         }
-        const isRtl = this.supportService.isRtl(element);
+        const isRtl = supportService.isRtl(element);
         if (value !== undefined) {
-            if (isRtl && webkit && (browserVersion < 85 || this.supportService.browser.safari)) {
+            if (isRtl && webkit && (browserVersion < 85 || supportService.browser.safari)) {
                 el.scrollLeft = el.scrollWidth - el.clientWidth - value;
             }
             else if (isRtl && (mozilla || webkit) && value > 0) {
@@ -119,7 +116,7 @@ export class DomUtilsService {
                 el.scrollLeft = value;
             }
         }
-        else if (isRtl && webkit && (browserVersion < 85 || this.supportService.browser.safari)) {
+        else if (isRtl && webkit && (browserVersion < 85 || supportService.browser.safari)) {
             return el.scrollWidth - el.clientWidth - el.scrollLeft;
         }
         else {
@@ -139,8 +136,8 @@ export class DomUtilsService {
             left: offset.left
         };
         // IE10 touch zoom is living in a separate viewport
-        if (this.supportService.browser.msie && (this.supportService.pointers || this.supportService.msPointers) && !positioned) {
-            const sign = this.supportService.isRtl(element) ? 1 : -1;
+        if (supportService.browser.msie && (supportService.pointers || supportService.msPointers) && !positioned) {
+            const sign = supportService.isRtl(element) ? 1 : -1;
             result.top -= (window.pageYOffset - (document.documentElement.scrollTop));
             result.left -= (window.pageXOffset + (sign * document.documentElement.scrollLeft));
         }
@@ -153,7 +150,7 @@ export class DomUtilsService {
         const clone = element.clone();
         clone.css("display", "");
         clone.css("visibility", "hidden");
-        clone.appendTo(this.$("body"));
+        clone.appendTo($("body"));
         const width = clone.outerWidth(includeMargin || false);
         const height = clone.outerHeight(includeMargin || false);
         clone.remove();
@@ -168,7 +165,7 @@ export class DomUtilsService {
     parseEffects(input) {
         const effects = {};
         const items = typeof input === "string" ? input.split(" ") : input;
-        this.$.each(items, function (idx) {
+        $.each(items, function (idx) {
             effects[idx] = this;
         });
         return effects;
@@ -304,14 +301,14 @@ export class DomUtilsService {
             if (!percentHeight && (!autosize || (autosize && height)) || forceDimensions) {
                 computedHeight = this.outerHeight(element, false, calculateFromHidden);
             }
-            element.wrap(this.$("<div/>")
+            element.wrap($("<div/>")
                 .addClass("k-child-animation-container")
                 .css({
                 width: autowidth ? "auto" : computedWidth,
                 height: computedHeight
             }));
             parent = element.parent();
-            parent.wrap(this.$("<div/>")
+            parent.wrap($("<div/>")
                 .addClass("k-animation-container")
                 .attr("role", "region"));
             if (percentage) {
@@ -380,7 +377,7 @@ export class DomUtilsService {
      * Scroll element horizontally by a delta
      */
     scrollByDelta(element, delta) {
-        const isRtl = this.supportService.isRtl(element);
+        const isRtl = supportService.isRtl(element);
         const srcOffset = isRtl ? -this.scrollLeft(element) : this.scrollLeft(element);
         const scrollDestination = srcOffset + delta;
         const scrollWidth = element[0].scrollWidth - element[0].clientWidth;
@@ -487,12 +484,12 @@ export class DomUtilsService {
      */
     onResize(callback) {
         let handler = callback;
-        if (this.supportService.mobileOS && this.supportService.mobileOS.android) {
+        if (supportService.mobileOS && supportService.mobileOS.android) {
             handler = function () {
                 setTimeout(callback, 600);
             };
         }
-        this.$(window).on(this.supportService.resize, handler);
+        $(window).on(supportService.resize, handler);
         return handler;
     }
     /**
@@ -500,7 +497,7 @@ export class DomUtilsService {
      * @param callback - The handler returned from onResize
      */
     unbindResize(callback) {
-        this.$(window).off(this.supportService.resize, callback);
+        $(window).off(supportService.resize, callback);
     }
     /**
      * Get a data attribute value from an element using kendo namespace.
@@ -509,7 +506,7 @@ export class DomUtilsService {
      * @returns The attribute value
      */
     attrValue(element, key) {
-        return element.data(this.namespaceService.ns + key);
+        return element.data(namespaceService.ns + key);
     }
     /**
      * Get the kendo data attribute name with namespace prefix.
@@ -517,7 +514,7 @@ export class DomUtilsService {
      * @returns The full attribute name (e.g., "data-kendo-role" or "data-role")
      */
     attr(value) {
-        return "data-" + this.namespaceService.ns + value;
+        return "data-" + namespaceService.ns + value;
     }
     /**
      * Get or set element dimensions.
@@ -546,7 +543,6 @@ export class DomUtilsService {
      * @param styleProps - Array of CSS property names to apply
      */
     applyStylesFromKendoAttributes(element, styleProps) {
-        const $ = this.$;
         const selector = styleProps.map(styleProp => `[${this.attr(`style-${styleProp}`)}]`).join(",");
         element.find(selector).addBack(selector).each((_, currentElement) => {
             const $currentElement = $(currentElement);
@@ -568,8 +564,8 @@ export class DomUtilsService {
     progress(container, toggle, options) {
         var _a, _b, _c;
         let mask = container.find(".k-loading-mask");
-        const browser = this.supportService.browser;
-        const opts = this.$.extend({}, {
+        const browser = supportService.browser;
+        const opts = $.extend({}, {
             width: "100%",
             height: "100%",
             top: container.scrollTop(),
@@ -578,7 +574,7 @@ export class DomUtilsService {
         const cssClass = opts.opacity ? "k-loading-mask k-opaque" : "k-loading-mask";
         if (toggle) {
             if (!mask.length) {
-                const isRtl = this.supportService.isRtl(container);
+                const isRtl = supportService.isRtl(container);
                 const leftRight = isRtl ? "right" : "left";
                 const containerScrollLeft = this.scrollLeft(container);
                 let webkitCorrection = 0;
@@ -586,9 +582,9 @@ export class DomUtilsService {
                     webkitCorrection = container[0].scrollWidth - (container.width() || 0) - 2 * containerScrollLeft;
                 }
                 // Note: The loading text message is set via kendo.ui.progress.messages.loading
-                // which should be accessed from the calling code
-                const loadingText = ((_c = (_b = (_a = this.kendo.ui) === null || _a === void 0 ? void 0 : _a.progress) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.loading) || "Loading...";
-                this.$(`<div class='${cssClass}'><span role='alert' aria-live='polite' class='k-loading-text'>${loadingText}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>`)
+                // Sadly we must preserve this global for backward compatibility.
+                const loadingText = ((_c = (_b = (_a = window.kendo.ui) === null || _a === void 0 ? void 0 : _a.progress) === null || _b === void 0 ? void 0 : _b.messages) === null || _c === void 0 ? void 0 : _c.loading) || "Loading...";
+                $(`<div class='${cssClass}'><span role='alert' aria-live='polite' class='k-loading-text'>${loadingText}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>`)
                     .width(opts.width)
                     .height(opts.height)
                     .css("top", opts.top)
@@ -607,7 +603,7 @@ export class DomUtilsService {
      * @returns The target element
      */
     eventTarget(e) {
-        if (!this.supportService.touch) {
+        if (!supportService.touch) {
             return e.target;
         }
         // Handle touch events - get element at touch point
@@ -626,17 +622,16 @@ export class DomUtilsService {
      * @returns Handler with attach() and destroy() methods
      */
     createDragToScrollHandler(scrollContainer, options) {
-        return new DragToScrollHandlerImpl(this.$, scrollContainer, options);
+        return new DragToScrollHandlerImpl(scrollContainer, options);
     }
 }
 class DragToScrollHandlerImpl {
-    constructor($, scrollContainer, options) {
+    constructor(scrollContainer, options) {
         this.isDragging = false;
         this.hasDragged = false;
         this.dragStartX = 0;
         this.scrollStartLeft = 0;
         this.currentDragTarget = null;
-        this.$ = $;
         this.scrollContainer = scrollContainer;
         this.namespace = options.namespace;
         this.captureElement = options.captureElement;
@@ -684,7 +679,7 @@ class DragToScrollHandlerImpl {
         this.scrollContainer[0].removeEventListener("click", this.preventClickOnce, true);
     }
     onDragStart(e) {
-        const target = this.$(e.currentTarget);
+        const target = $(e.currentTarget);
         if (!target.length) {
             return;
         }
@@ -715,7 +710,7 @@ class DragToScrollHandlerImpl {
             return;
         }
         if (this.currentDragTarget) {
-            const target = this.$(this.currentDragTarget);
+            const target = $(this.currentDragTarget);
             target.css("cursor", "");
             target.css("user-select", "");
         }
@@ -731,14 +726,15 @@ class DragToScrollHandlerImpl {
             return;
         }
         // Bind all events to document so dragging continues when cursor leaves component
-        this.$(document)
+        $(document)
             .on("mousemove" + this.namespace, this.onDragMove)
             .on("touchmove" + this.namespace, this.onDragMove)
             .on("mouseup" + this.namespace, this.onDragEnd)
             .on("touchend" + this.namespace, this.onDragEnd);
     }
     unbindCaptureEvents() {
-        this.$(document).off(this.namespace);
+        $(document).off(this.namespace);
     }
 }
 DragToScrollHandlerImpl.DRAG_THRESHOLD = 5;
+export const domUtilsService = new DomUtilsService();

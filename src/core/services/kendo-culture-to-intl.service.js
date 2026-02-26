@@ -1,30 +1,27 @@
+import { cultureService } from "./culture.service";
+import { dateParserService } from "./date-parser.service";
+import { formatterService } from "./formatter.service";
 /**
  * Service that converts Kendo cultures to Intl-compatible format
  * Used for integration with @progress/kendo-intl
  */
-export class KendoCultureToIntlService {
-    constructor(cultureService, dateParser, formatter) {
-        this.cultureService = cultureService;
-        this.dateParser = dateParser;
-        this.formatter = formatter;
-    }
+class KendoCultureToIntlService {
     /**
      * Convert a Kendo culture to an Intl-compatible adapter
      */
     convert(culture) {
-        const kendoCulture = this.cultureService.getCulture(culture) || this.cultureService.culture();
+        const kendoCulture = cultureService.getCulture(culture) || cultureService.culture();
         const currencies = {};
         currencies[kendoCulture.numberFormat.currency.abbr] = kendoCulture.numberFormat.currency;
-        const localeInfoAll = this.buildLocaleInfoAll(kendoCulture, currencies);
         return {
             localeInfo: () => this.buildLocaleInfo(kendoCulture, currencies),
-            parseDate: (value, fmt) => this.dateParser.parseExactDate(value, fmt, kendoCulture),
+            parseDate: (value, fmt) => dateParserService.parseExactDate(value, fmt, kendoCulture),
             toString: (value, fmt) => {
-                const result = this.formatter.toString(value, fmt, kendoCulture);
+                const result = formatterService.toString(value, fmt, kendoCulture);
                 // Coerce to string for Intl adapter compatibility
                 return result == null ? "" : String(result);
             },
-            format: (fmt, ...values) => this.formatter.format(fmt, ...values)
+            format: (fmt, ...values) => formatterService.format(fmt, ...values)
         };
     }
     buildLocaleInfo(kendoCulture, currencies) {
@@ -177,3 +174,4 @@ export class KendoCultureToIntlService {
         return localeInfoAll;
     }
 }
+export const intlService = new KendoCultureToIntlService();

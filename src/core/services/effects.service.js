@@ -1,3 +1,4 @@
+import { utilsService } from "./utils.service";
 // Constants
 const STRING = "string";
 const BOOLEAN = "boolean";
@@ -5,10 +6,8 @@ const BOOLEAN = "boolean";
  * Effects Service - provides animation effects utilities
  
  */
-export class EffectsService {
-    constructor($, utilsService) {
-        this.$ = $;
-        this.utilsService = utilsService;
+class EffectsService {
+    constructor() {
         this._directions = this.createDirections();
         this._effects = this.createEffects();
     }
@@ -71,7 +70,6 @@ export class EffectsService {
      * Create the effects object
      */
     createEffects() {
-        const $ = this.$;
         const effects = {
             enabled: true,
             Element: function (element) {
@@ -125,12 +123,12 @@ export class EffectsService {
         if (typeof options === STRING) {
             // options is the list of effect names separated by space e.g. animate(element, "fadeIn slideDown")
             // only callback is provided e.g. animate(element, options, function() {});
-            if (this.utilsService.isFunction(duration)) {
+            if (utilsService.isFunction(duration)) {
                 complete = duration;
                 duration = 400;
                 reverse = false;
             }
-            if (this.utilsService.isFunction(reverse)) {
+            if (utilsService.isFunction(reverse)) {
                 complete = reverse;
                 reverse = false;
             }
@@ -145,21 +143,20 @@ export class EffectsService {
                 complete: complete
             };
         }
-        return this.$.extend({
+        return $.extend({
             //default options
             effects: {},
             duration: 400, //jQuery default duration
             reverse: false,
-            init: this.$.noop,
-            teardown: this.$.noop,
+            init: $.noop,
+            teardown: $.noop,
             hide: false
-        }, options, { completeCallback: options.complete, complete: this.$.noop }); // Move external complete callback, so deferred.resolve can be always executed.
+        }, options, { completeCallback: options.complete, complete: $.noop }); // Move external complete callback, so deferred.resolve can be always executed.
     }
     /**
      * Animate one or more elements
      */
     animate(element, options, duration, reverse, complete) {
-        const $ = this.$;
         const effects = this._effects;
         const preparedOptions = this.prepareAnimationOptions.bind(this);
         let idx = 0;
@@ -179,7 +176,7 @@ export class EffectsService {
     toggleClass(element, classes, options, add) {
         if (classes) {
             const classArray = classes.split(" ");
-            this.$.each(classArray, (idx, value) => {
+            $.each(classArray, (idx, value) => {
                 element.toggleClass(value, add);
             });
         }
@@ -192,3 +189,4 @@ export class EffectsService {
         return new this._effects.Element(element);
     }
 }
+export const effectsService = new EffectsService();

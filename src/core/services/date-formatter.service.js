@@ -1,3 +1,4 @@
+import { cultureService } from "./culture.service";
 const DATE_FORMAT_REGEX = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|aa|ss|s|zzz|zz|z|EEEE|"[^"]*"|'[^']*'/g;
 /**
  * Pad a number with leading zeros
@@ -9,14 +10,11 @@ function pad(value, length = 2) {
     }
     return str;
 }
-export class DateFormatterService {
-    constructor(cultureService) {
-        this.cultureService = cultureService;
-    }
+class DateFormatterService {
     format(date, format, culture) {
         const resolvedCulture = culture
-            ? this.cultureService.getCulture(culture)
-            : this.cultureService.culture();
+            ? cultureService.getCulture(culture)
+            : cultureService.culture();
         const calendar = resolvedCulture.calendars.standard;
         const days = calendar.days;
         const months = calendar.months;
@@ -116,3 +114,4 @@ export class DateFormatterService {
         return result !== undefined ? result : match.slice(1, match.length - 1);
     }
 }
+export const dateFormatterService = new DateFormatterService();

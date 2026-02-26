@@ -1,11 +1,11 @@
+import { utilsService } from "./utils.service";
 /**
  * Property Access Service Implementation
  * Provides utilities for dynamic property access using path expressions.
  
  */
-export class PropertyAccessService {
-    constructor(utilsService) {
-        this.utilsService = utilsService;
+class PropertyAccessService {
+    constructor() {
         this.getterCache = {};
         this.setterCache = {};
     }
@@ -79,7 +79,7 @@ export class PropertyAccessService {
                 let result = obj;
                 for (let idx = 0; idx < fields.length; idx++) {
                     result = result[fields[idx]];
-                    if (!this.utilsService.isPresent(result) && safe) {
+                    if (!utilsService.isPresent(result) && safe) {
                         return result;
                     }
                 }
@@ -124,3 +124,4 @@ export class PropertyAccessService {
         };
     }
 }
+export const propertyAccessService = new PropertyAccessService();

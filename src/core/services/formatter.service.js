@@ -1,27 +1,21 @@
-import { NumberFormatterService } from "./number-formatter.service";
+import { numberFormatterService } from "./number-formatter.service";
+import { dateFormatterService } from "./date-formatter.service";
 const DATE_OBJECT = "[object Date]";
 const FORMAT_REGEX = /\{(\d+)(:[^\}]+)?\}/g;
 const objectToString = {}.toString;
-export class FormatterService {
-    constructor(numberFormatter, dateFormatter) {
-        this.numberFormatter = numberFormatter;
-        this.dateFormatter = dateFormatter;
-    }
+class FormatterService {
     /**
      * Format a value to string, or return it as-is if no format specified.
-     * The loose return type matches original kendo.toString behavior where
-     * unformatted values pass through (e.g., null stays null for jQuery .val())
      */
     toString(value, format, culture) {
         if (format) {
             if (objectToString.call(value) === DATE_OBJECT) {
-                return this.dateFormatter.format(value, format, culture);
+                return dateFormatterService.format(value, format, culture);
             }
             else if (typeof value === "number") {
-                return this.numberFormatter.format(value, format, culture);
+                return numberFormatterService.format(value, format, culture);
             }
         }
-        // Match original behavior: return value as-is (not String(value))
         // This allows jQuery .val(null) to work correctly (clears input)
         return value !== undefined ? value : "";
     }
@@ -40,22 +34,8 @@ export class FormatterService {
         }
         return format;
     }
-    /**
-     * Get the number formatter instance (for direct access)
-     */
-    getNumberFormatter() {
-        return this.numberFormatter;
-    }
-    /**
-     * Get the date formatter instance (for direct access)
-     */
-    getDateFormatter() {
-        return this.dateFormatter;
-    }
-    /**
-     * Static round method exposed for external use (matches kendo._round)
-     */
-    static round(value, precision, negative) {
-        return NumberFormatterService.round(value, precision, negative);
+    round(value, precision, negative) {
+        return numberFormatterService.round(value, precision, negative);
     }
 }
+export const formatterService = new FormatterService();

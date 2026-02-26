@@ -3,7 +3,7 @@
  * Provides utilities for building CSS selectors.
  
  */
-export class SelectorService {
+class SelectorService {
     /**
      * Convert space-separated class names to a CSS selector.
      */
@@ -31,3 +31,4 @@ export class SelectorService {
         return selectors.join(" ").replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
     }
 }
+export const selectorService = new SelectorService();

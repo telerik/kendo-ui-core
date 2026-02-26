@@ -4,5 +4,3 @@ export * from "./models";
 export * from "./base";
 // Export all services and their interfaces
 export * from "./services";
-// Export service container for dependency injection
-export * from "./service-container";

@@ -2,37 +2,33 @@ import { defaultBreakpoints, mediaQuery } from './utils/mediaquery.js';
 import { fromESClass } from './utils/convert-class.js';
 import * as licensing from './kendo.licensing.js';
 import {
-    CultureService,
-    NumberFormatterService,
-    DateFormatterService,
-    FormatterService,
-    NumberParserService,
-    DateParserService,
-    KendoCultureToIntlService,
-    TemplateService,
-    HtmlService,
-    SupportService,
-    DateUtilsService,
-    DomUtilsService,
-    UtilsService,
-    EffectsService,
-    FileUtilsService,
-    FocusUtilsService,
-    PropertyAccessService,
-    InputService,
-    ColorService,
-    SelectorService,
-    TimezoneService,
-    CssPropertiesService,
-    TypeUtilsService,
-    MouseEventNormalizerService,
-    EventMapService,
-    DefaultsService,
-    KendoJQueryService,
-    WidgetRegistryService,
-    WidgetUtilsService,
-    NamespaceService,
-    serviceContainer,
+    cultureService,
+    formatterService,
+    numberParserService,
+    dateParserService,
+    intlService,
+    templateService,
+    htmlService,
+    supportService,
+    dateUtilsService,
+    domUtilsService,
+    utilsService,
+    effectsService,
+    fileUtilsService,
+    focusUtilsService,
+    propertyAccessService,
+    inputService,
+    colorService,
+    selectorService,
+    timezoneService,
+    cssPropertiesService,
+    typeUtilsService,
+    eventMapService,
+    defaultsService,
+    kendoJQueryService,
+    widgetRegistryService,
+    widgetUtilsService,
+    namespaceService,
     Class,
     Observable,
     Widget,
@@ -55,164 +51,9 @@ const each = $.each;
 const noop = $.noop;
 const slice = [].slice;
 
-// Avoid extending the deprecated properties in latest versions of jQuery
-const noDepricateExtend = function() {
-    let src, copyIsArray, copy, name, options, clone;
-    let target = arguments[0] || {};
-    let i = 1;
-    const length = arguments.length;
-    let deep = false;
-
-    // Handle a deep copy situation
-    if (typeof target === "boolean") {
-        deep = target;
-
-        // skip the boolean and the target
-        target = arguments[i] || {};
-        i++;
-    }
-
-    // Handle case when target is a string or something (possible in deep copy)
-    if (typeof target !== "object" && typeof target !== "function") {
-        target = {};
-    }
-
-    // extend jQuery itself if only one argument is passed
-    if (i === length) {
-        target = this;
-        i--;
-    }
-
-    for (; i < length; i++) {
-
-        // Only deal with non-null/undefined values
-        if ((options = arguments[i]) != null) {
-
-            // Extend the base object
-            for (name in options) {
-                // filters, concat and : properties are depricated in the jQuery 3.3.0
-                // cssNumber is deprecated in jQuery 4.0.0
-                // accessing these properties throw a warning when jQuery migrate is included
-                if (name == "filters" || name == "concat" || name == ":" || name == "cssNumber") {
-                    continue;
-                }
-                src = target[name];
-                copy = options[name];
-
-                // Prevent never-ending loop
-                if (target === copy) {
-                    continue;
-                }
-
-                // Recurse if we're merging plain objects or arrays
-                if (deep && copy && (jQuery.isPlainObject(copy) ||
-                    (copyIsArray = Array.isArray(copy)))) {
-
-                    if (copyIsArray) {
-                        copyIsArray = false;
-                        clone = src && Array.isArray(src) ? src : [];
-
-                    } else {
-                        clone = src && jQuery.isPlainObject(src) ? src : {};
-                    }
-
-                    // Never move original objects, clone them
-                    target[name] = noDepricateExtend(deep, clone, copy);
-
-                    // Don't bring in undefined values
-                } else if (copy !== undefined) {
-                    target[name] = copy;
-                }
-            }
-        }
-    }
-
-    // Return the modified object
-    return target;
-};
-
 kendo.version = licensing.packageMetadata.version;
 
 const EN = "en-US";
-
-kendo.cultures = kendo.cultures || {};
-
-const namespaceService = new NamespaceService();
-const utilsService = new UtilsService(kendo);
-const supportService = new SupportService($);
-const htmlService = new HtmlService();
-const cultureService = new CultureService(kendo.cultures);
-const numberFormatterService = new NumberFormatterService(cultureService);
-const dateFormatterService = new DateFormatterService(cultureService);
-const formatterService = new FormatterService(numberFormatterService, dateFormatterService);
-const numberParserService = new NumberParserService(cultureService);
-const dateParserService = new DateParserService(cultureService, FormatterService.round);
-const intlService = new KendoCultureToIntlService(cultureService, dateParserService, formatterService);
-const templateService = new TemplateService(formatterService);
-const dateUtilsService = new DateUtilsService(cultureService, formatterService);
-const domUtilsService = new DomUtilsService(supportService, $, namespaceService, utilsService, kendo);
-const effectsService = new EffectsService($, utilsService);
-const inputService = new InputService($, supportService);
-const fileUtilsService = new FileUtilsService($, supportService, inputService);
-const propertyAccessService = new PropertyAccessService(utilsService);
-const widgetRegistryService = new WidgetRegistryService($, formatterService);
-const widgetUtilsService = new WidgetUtilsService(
-    $,
-    widgetRegistryService,
-    propertyAccessService,
-    templateService,
-    utilsService,
-    Observable,
-    namespaceService
-);
-const focusUtilsService = new FocusUtilsService($, domUtilsService, widgetUtilsService);
-const colorService = new ColorService($);
-const selectorService = new SelectorService();
-const timezoneService = new TimezoneService(numberParserService);
-const cssPropertiesService = new CssPropertiesService();
-const typeUtilsService = new TypeUtilsService();
-const mouseEventNormalizerService = new MouseEventNormalizerService($, supportService);
-const eventMapService = new EventMapService($, supportService);
-const defaultsService = new DefaultsService(utilsService);
-const kendoJQueryService = new KendoJQueryService(
-    $,
-    supportService,
-    mouseEventNormalizerService,
-    eventMapService,
-    utilsService,
-    noDepricateExtend
-);
-
-serviceContainer.singletonInstance(UtilsService, utilsService);
-serviceContainer.singletonInstance(SupportService, supportService);
-serviceContainer.singletonInstance(HtmlService, htmlService);
-serviceContainer.singletonInstance(CultureService, cultureService);
-serviceContainer.singletonInstance(NumberFormatterService, numberFormatterService);
-serviceContainer.singletonInstance(DateFormatterService, dateFormatterService);
-serviceContainer.singletonInstance(FormatterService, formatterService);
-serviceContainer.singletonInstance(NumberParserService, numberParserService);
-serviceContainer.singletonInstance(DateParserService, dateParserService);
-serviceContainer.singletonInstance(KendoCultureToIntlService, intlService);
-serviceContainer.singletonInstance(TemplateService, templateService);
-serviceContainer.singletonInstance(DateUtilsService, dateUtilsService);
-serviceContainer.singletonInstance(DomUtilsService, domUtilsService);
-serviceContainer.singletonInstance(EffectsService, effectsService);
-serviceContainer.singletonInstance(InputService, inputService);
-serviceContainer.singletonInstance(FileUtilsService, fileUtilsService);
-serviceContainer.singletonInstance(FocusUtilsService, focusUtilsService);
-serviceContainer.singletonInstance(PropertyAccessService, propertyAccessService);
-serviceContainer.singletonInstance(ColorService, colorService);
-serviceContainer.singletonInstance(SelectorService, selectorService);
-serviceContainer.singletonInstance(TimezoneService, timezoneService);
-serviceContainer.singletonInstance(CssPropertiesService, cssPropertiesService);
-serviceContainer.singletonInstance(TypeUtilsService, typeUtilsService);
-serviceContainer.singletonInstance(MouseEventNormalizerService, mouseEventNormalizerService);
-serviceContainer.singletonInstance(EventMapService, eventMapService);
-serviceContainer.singletonInstance(DefaultsService, defaultsService);
-serviceContainer.singletonInstance(KendoJQueryService, kendoJQueryService);
-serviceContainer.singletonInstance(WidgetRegistryService, widgetRegistryService);
-serviceContainer.singletonInstance(WidgetUtilsService, widgetUtilsService);
-serviceContainer.singletonInstance(NamespaceService, namespaceService);
 
 const kendoJQuery = kendoJQueryService.getConstructor();
 const eventMap = eventMapService.getFullEventMap();
@@ -341,7 +182,7 @@ kendo.kendoCultureToIntl = function(culture) {
 kendo.culture(EN);
 
 const round = function(value, precision, negative) {
-    return FormatterService.round(value, precision, negative);
+    return formatterService.round(value, precision, negative);
 };
 
 const toString = function(value, fmt, culture) {

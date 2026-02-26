@@ -1,12 +1,12 @@
+import { cultureService } from "./culture.service";
+import { formatterService } from "./formatter.service";
 import { DATE_FIELD_MAP, NAME_TYPES } from "../models/date-utils";
 /**
  * Service providing date utility functions
  * Extracted from kendo.date namespace
  */
-export class DateUtilsService {
-    constructor(cultureService, formatterService) {
-        this.cultureService = cultureService;
-        this.formatterService = formatterService;
+class DateUtilsService {
+    constructor() {
         this.MS_PER_MINUTE = 60000;
         this.MS_PER_HOUR = 60 * 60000;
         this.MS_PER_DAY = 86400000;
@@ -91,9 +91,7 @@ export class DateUtilsService {
      * Get the week number in the year
      */
     weekInYear(date, weekStartDay) {
-        if (weekStartDay === undefined) {
-            weekStartDay = this.cultureService.culture().calendar.firstDay;
-        }
+        weekStartDay !== null && weekStartDay !== void 0 ? weekStartDay : (weekStartDay = cultureService.culture().calendar.firstDay);
         const prevWeekDate = this.addDays(date, -7);
         const nextWeekDate = this.addDays(date, 7);
         const weekNumber = this.calcWeekInYear(date, weekStartDay);
@@ -305,7 +303,7 @@ export class DateUtilsService {
      * Split a date format string into parts
      */
     splitDateFormat(format) {
-        const info = this.cultureService.culture();
+        const info = cultureService.culture();
         const pattern = this.datePattern(format, info)
             .replaceAll("dddd", "EEEE")
             .replaceAll("ddd", "EEE")
@@ -362,7 +360,7 @@ export class DateUtilsService {
     dateFormatNames(options) {
         var _a, _b;
         let { type, nameType } = options;
-        const info = this.cultureService.culture();
+        const info = cultureService.culture();
         if (nameType === "wide") {
             nameType = "names";
         }
@@ -382,7 +380,7 @@ export class DateUtilsService {
      * Get date field name
      */
     dateFieldName(options) {
-        const info = this.cultureService.culture();
+        const info = cultureService.culture();
         const dateFields = info.calendar.dateFields;
         const fieldNameInfo = (dateFields === null || dateFields === void 0 ? void 0 : dateFields[options.type]) || {};
         return fieldNameInfo[options.nameType];
@@ -410,11 +408,12 @@ export class DateUtilsService {
             return 'Yesterday';
         }
         else if (diffDays <= 6) {
-            return `Last ${this.formatterService.toString(dateObj, 'dddd')}`;
+            return `Last ${formatterService.toString(dateObj, 'dddd')}`;
         }
         else {
             // For older dates, show formatted date
-            return String(this.formatterService.toString(dateObj, 'dddd, MMMM dd, yyyy'));
+            return String(formatterService.toString(dateObj, 'dddd, MMMM dd, yyyy'));
         }
     }
 }
+export const dateUtilsService = new DateUtilsService();

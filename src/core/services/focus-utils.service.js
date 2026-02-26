@@ -1,15 +1,12 @@
+import { widgetUtilsService } from "./widget-utils.service";
+import { domUtilsService } from "./dom-utils.service";
 // TAB key code - will be moved to utils service in future refactoring
 const TAB_KEY = 9;
 /**
  * Focus Utils Service - provides focus-related utilities
  
  */
-export class FocusUtilsService {
-    constructor($, domUtils, widgetUtilsService) {
-        this.$ = $;
-        this.domUtils = domUtils;
-        this.widgetUtilsService = widgetUtilsService;
-    }
+class FocusUtilsService {
     /**
      * Check if an element is focusable
      */
@@ -26,7 +23,6 @@ export class FocusUtilsService {
      * Check if an element is visible (not hidden or with visibility:hidden)
      */
     visible(element) {
-        const $ = this.$;
         return $.expr.pseudos.visible(element) &&
             !$(element).parents().addBack().filter(function () {
                 return $.css(this, "visibility") === "hidden";
@@ -36,7 +32,7 @@ export class FocusUtilsService {
      * Check if an element is kendo-focusable (focusable with positive tabindex)
      */
     kendoFocusable(element) {
-        const idx = this.$(element).attr("tabindex");
+        const idx = $(element).attr("tabindex");
         const numIdx = idx !== undefined ? parseInt(idx, 10) : NaN;
         return this.focusable(element, !isNaN(numIdx) && numIdx > -1);
     }
@@ -44,8 +40,7 @@ export class FocusUtilsService {
      * Focus an element while preserving scroll positions of parent containers
      */
     focusElement(element) {
-        const $ = this.$;
-        const domUtils = this.domUtils;
+        const domUtils = domUtilsService;
         const scrollTopPositions = [];
         const scrollableParents = element.parentsUntil("body")
             .filter(function (index, el) {
@@ -71,7 +66,6 @@ export class FocusUtilsService {
      * Focus the next focusable element in the document
      */
     focusNextElement() {
-        const $ = this.$;
         if (document.activeElement) {
             const focussable = $(":kendoFocusable");
             const index = focussable.index(document.activeElement);
@@ -85,12 +79,10 @@ export class FocusUtilsService {
      * Set up form cycling - when tabbing from last element, cycle to first
      */
     cycleForm(form) {
-        const $ = this.$;
-        const self = this;
         const firstElement = form.find("input, .k-widget, .k-dropdownlist, .k-combobox").first();
         const lastElement = form.find("button, .k-button").last();
         function focus(el) {
-            const widget = self.widgetUtilsService.widgetInstance(el);
+            const widget = widgetUtilsService.widgetInstance(el);
             if (widget && widget.focus) {
                 widget.focus();
             }
@@ -115,9 +107,8 @@ export class FocusUtilsService {
      * Get the focusable element for a widget
      */
     getWidgetFocusableElement(element) {
-        const $ = this.$;
         const nextFocusable = element.closest(":kendoFocusable");
-        const widgetInstance = this.widgetUtilsService.widgetInstance(element);
+        const widgetInstance = widgetUtilsService.widgetInstance(element);
         let target;
         if (nextFocusable.length) {
             target = nextFocusable;
@@ -137,7 +128,6 @@ export class FocusUtilsService {
      */
     registerFocusableSelector() {
         const self = this;
-        const $ = this.$;
         $.extend($.expr.pseudos, {
             kendoFocusable: function (element) {
                 return self.kendoFocusable(element);
@@ -158,3 +148,4 @@ export class FocusUtilsService {
         }
     }
 }
+export const focusUtilsService = new FocusUtilsService();

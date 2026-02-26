@@ -1,15 +1,14 @@
+import { supportService } from "./support.service";
+import { inputService } from "./input.service";
 /**
  * File Utils Service - provides file-related utilities
  
  */
-export class FileUtilsService {
-    constructor($, support, inputService) {
-        this.$ = $;
-        this.support = support;
-        this.inputService = inputService;
+class FileUtilsService {
+    constructor() {
         this._fileGroupMap = this.createFileGroupMap();
         this.fileSaver = document.createElement("a");
-        this.downloadAttribute = "download" in this.fileSaver && !this.support.browser.edge;
+        this.downloadAttribute = "download" in this.fileSaver && !supportService.browser.edge;
     }
     /**
      * Create the default file group mapping
@@ -76,13 +75,12 @@ export class FileUtilsService {
      * Post data to a proxy URL
      */
     postToProxy(dataURI, fileName, proxyURL, proxyTarget) {
-        const $ = this.$;
         const form = $("<form>").attr({
             action: proxyURL,
             method: "POST",
             target: proxyTarget
         });
-        const data = this.inputService.antiForgeryTokens();
+        const data = inputService.antiForgeryTokens();
         data.fileName = fileName;
         const parts = dataURI.split(";base64,");
         data.contentType = parts[0].replace("data:", "");
@@ -148,3 +146,4 @@ export class FileUtilsService {
         save(options.dataURI, options.fileName, options.proxyURL, options.proxyTarget);
     }
 }
+export const fileUtilsService = new FileUtilsService();

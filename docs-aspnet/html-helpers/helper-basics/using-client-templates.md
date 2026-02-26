@@ -11,14 +11,13 @@ position: 7
 
 The Telerik UI for {{ site.framework }} components provide templating options that let you customize and control their appearance or integrate other UI components. Many use cases require displaying a specified component element (for example, item, option, button, cell, and more) differently based on a specified condition or overriding its default look and feel. In such scenarios, client templates come in handy.
 
-The templating options use [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview), which offer a way to create HTML chunks that can be merged automatically with JavaScript code. They are a substitute for traditional HTML string-building in JavaScript.
-
 The available template types are:
 
 * [Inline Client Templates](#inline-client-templates)
 * [External Client Templates](#external-client-templates)
 * [Partial Client Templates](#partial-client-templates)
 * [Content Security Policy Templates](#content-security-policy-csp-templates)
+* [How exactly template parameter evaluation works](#how-exactly-template-parameter-evaluation-works)
 
 
 ## Inline Client Templates
@@ -350,7 +349,7 @@ The example below illustrates how to incorporate the Grid Toolbar's template con
 
 ## Content Security Policy (CSP) Templates
 
-As of the R1 SP1 2023 release, Telerik UI for {{ site.framework }} addresses the [content security policy issues]({% slug troubleshooting_content_security_policy_aspnetmvc %}) related to the `usafe-eval` directive for components except for the Spreadsheet.
+As of the R1 SP1 2023 release, Telerik UI for {{ site.framework }} addresses the [content security policy issues]({% slug troubleshooting_content_security_policy_aspnetmvc %}) related to the `unsafe-eval` directive for components except for the Spreadsheet.
 
 To remove the `unsafe-eval` keyword from the meta tag of your application, you must convert all client templates ([inline](#inline-client-templates), [external](#external-client-templates), and [partial](#partial-client-templates) templates) into CSP-compatible templates. 
 
@@ -466,6 +465,16 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
     }
 ```
 
+## How exactly template parameter evaluation works
+
+The templating options use [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview), which offer a way to create HTML chunks that can be merged automatically with JavaScript code. They are a substitute for traditional HTML string-building in JavaScript.
+
+> To display the values of the Model properties as HTML, use the [hash syntax (`#=#`)](https://docs.telerik.com/kendo-ui/framework/templates/essentials#template-syntax).
+
+The `data` object, available in the template, varies depending on the component and the template type. For example, the [Grid Column FooterTemplate](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.footertemplate) exposes the aggregates data for the specific column, while the [Chart Series TooltipTemplate](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.tooltip.template) exposes the `category`, `value`, `series`, and `dataItem` objects.
+
+For more information on the data available in the different templates, refer to the [Kendo UI for jQuery API documentation](https://docs.telerik.com/kendo-ui/api/introduction) or search the [Knowledge Base](https://docs.telerik.com/kendo-ui/knowledge-base).
+
 ## See Also
 
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_aspnetmvc%})
@@ -474,4 +483,5 @@ The example below demonstrates how to load the [item template of a ComboBox]({% 
 * [Getting Started with the Kendo UI Inline Templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-inline)
 * [Getting Started with Kendo UI External Templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-external)
 * [Getting Started with Kendo UI Content Security Policy (CSP) Templates](https://docs.telerik.com/kendo-ui/framework/templates/get-started-csp-templates)
+* [Known Exceptions: Limited Usage of Templates](https://www.telerik.com/{{ site.platform }}/documentation/html-helpers/data-management/grid/troubleshoot/known-exceptions#limited-usage-of-templates)
 

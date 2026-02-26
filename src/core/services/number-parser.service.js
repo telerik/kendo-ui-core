@@ -1,3 +1,4 @@
+import { cultureService } from "./culture.service";
 const DOT = ".";
 const COMMA = ",";
 const SPACE = " ";
@@ -5,10 +6,7 @@ const MINUS = "-";
 const EXPONENT_REGEX = /[eE][\-+]?[0-9]+/;
 const NON_BREAKING_SPACE_REGEX = /\u00A0/g;
 const WHITESPACE_REGEX = /\s/g;
-export class NumberParserService {
-    constructor(cultureService) {
-        this.cultureService = cultureService;
-    }
+class NumberParserService {
     /**
      * Parse a string value as an integer according to culture settings
      */
@@ -30,7 +28,7 @@ export class NumberParserService {
             return value;
         }
         let strValue = value.toString();
-        const resolvedCulture = this.cultureService.getCulture(culture);
+        const resolvedCulture = cultureService.getCulture(culture);
         let numberFormat = resolvedCulture.numberFormat;
         const percent = numberFormat.percent;
         const currency = numberFormat.currency;
@@ -86,3 +84,4 @@ export class NumberParserService {
         return result;
     }
 }
+export const numberParserService = new NumberParserService();

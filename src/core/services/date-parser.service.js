@@ -1,3 +1,5 @@
+import { cultureService } from "./culture.service";
+import { numberFormatterService } from "./number-formatter.service";
 const DATE_OBJECT = "[object Date]";
 const objectToString = {}.toString;
 const SHORT_TIMEZONE_REGEX = /[+|\-]\d{1,2}/;
@@ -37,10 +39,8 @@ const NUMBER_REGEX = {
     4: /^\d{4}/,
     exact3: /^\d{3}/
 };
-export class DateParserService {
-    constructor(cultureService, roundFn) {
-        this.cultureService = cultureService;
-        this.roundFn = roundFn;
+class DateParserService {
+    constructor() {
         this.timezoneService = null;
     }
     /**
@@ -86,7 +86,7 @@ export class DateParserService {
                 return date;
             }
         }
-        const resolvedCulture = this.cultureService.getCulture(culture);
+        const resolvedCulture = cultureService.getCulture(culture);
         let formatArray;
         if (!formats) {
             formatArray = this.getDefaultFormats(resolvedCulture);
@@ -290,7 +290,7 @@ export class DateParserService {
                     milliseconds = getNumber(count);
                     if (milliseconds !== null && match) {
                         let ms = parseFloat("0." + match[0]);
-                        ms = parseFloat(this.roundFn(ms, 3));
+                        ms = parseFloat(numberFormatterService.round(ms, 3));
                         milliseconds = ms * 1000;
                     }
                     if (milliseconds === null || this.outOfRange(milliseconds, 0, 999)) {
@@ -437,3 +437,4 @@ export class DateParserService {
         return strings.reduce((max, s) => Math.max(max, s.length), 0);
     }
 }
+export const dateParserService = new DateParserService();

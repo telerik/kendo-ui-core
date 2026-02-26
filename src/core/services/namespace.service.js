@@ -4,7 +4,7 @@
  * Manages the data attribute namespace prefix used throughout Kendo UI.
  * This allows customization of data-role attributes (e.g., data-kendo-role instead of data-role).
  */
-export class NamespaceService {
+class NamespaceService {
     constructor() {
         this._ns = "";
     }
@@ -22,3 +22,4 @@ export class NamespaceService {
         this._ns = value;
     }
 }
+export const namespaceService = new NamespaceService();

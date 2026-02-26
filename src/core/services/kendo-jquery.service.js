@@ -6,11 +6,11 @@
  * - Handler context binding
  * - Touch/mouse event normalization
  * - Keyboard event handling
- *
- 
- *
- * @module core-v2/services/kendo-jquery.service
  */
+import { supportService } from "./support.service";
+import { mouseEventNormalizerService } from "./mouse-event-normalizer.service";
+import { eventMapService } from "./event-map.service";
+import { utilsService } from "./utils.service";
 // Constants
 const STRING = "string";
 const UNDEFINED = "undefined";
@@ -18,29 +18,72 @@ const UNDEFINED = "undefined";
  * KendoJQuery Service
  * Creates and manages the KendoJQuery wrapper around jQuery
  */
-export class KendoJQueryService {
-    constructor($, support, mouseEventNormalizer, eventMapService, utils, noDeprecateExtend) {
-        this.$ = $;
-        this.support = support;
-        this.mouseEventNormalizer = mouseEventNormalizer;
-        this.eventMapService = eventMapService;
-        this.utils = utils;
+class KendoJQueryService {
+    constructor() {
         this.originalOn = $.fn.on;
-        this.kendoJQuery = this.createKendoJQuery(noDeprecateExtend);
+        this.kendoJQuery = this.createKendoJQuery();
         this.rootjQuery = this.kendoJQuery(document);
+    }
+    /**
+     * Extend objects while avoiding jQuery deprecated properties
+     */
+    noDeprecateExtend(deep, target, ...sources) {
+        let src, copyIsArray, copy, name, options, clone;
+        // Handle case when target is a string or something (possible in deep copy)
+        if (typeof target !== "object" && typeof target !== "function") {
+            target = {};
+        }
+        for (const source of sources) {
+            // Only deal with non-null/undefined values
+            if (source != null) {
+                // Extend the base object
+                for (name in source) {
+                    // filters, concat and : properties are depricated in the jQuery 3.3.0
+                    // cssNumber is deprecated in jQuery 4.0.0
+                    // accessing these properties throw a warning when jQuery migrate is included
+                    if (name === "filters" || name === "concat" || name === ":" || name === "cssNumber") {
+                        continue;
+                    }
+                    src = target[name];
+                    copy = source[name];
+                    // Prevent never-ending loop
+                    if (target === copy) {
+                        continue;
+                    }
+                    // Recurse if we're merging plain objects or arrays
+                    if (deep && copy && ($.isPlainObject(copy) ||
+                        (copyIsArray = Array.isArray(copy)))) {
+                        if (copyIsArray) {
+                            copyIsArray = false;
+                            clone = src && Array.isArray(src) ? src : [];
+                        }
+                        else {
+                            clone = src && $.isPlainObject(src) ? src : {};
+                        }
+                        // Never move original objects, clone them
+                        target[name] = this.noDeprecateExtend(deep, clone, copy);
+                        // Don't bring in undefined values
+                    }
+                    else if (copy !== undefined) {
+                        target[name] = copy;
+                    }
+                }
+            }
+        }
+        // Return the modified object
+        return target;
     }
     /**
      * Create the KendoJQuery constructor and prototype
      */
-    createKendoJQuery(noDeprecateExtend) {
-        const $ = this.$;
+    createKendoJQuery() {
         const self = this;
         // Create the kendoJQuery function
         const kendoJQuery = function (selector, context) {
             return new kendoJQuery.fn.init(selector, context);
         };
         // Copy all jQuery static properties/methods (without deprecated warnings)
-        noDeprecateExtend(true, kendoJQuery, $);
+        this.noDeprecateExtend(true, kendoJQuery, $);
         // Set up prototype chain - inherit from jQuery
         // TypeScript doesn't like `new $()` but this is valid jQuery pattern
         kendoJQuery.fn = kendoJQuery.prototype = new $();
@@ -61,7 +104,7 @@ export class KendoJQueryService {
                 return this;
             },
             autoApplyNS: function (ns) {
-                this.data("kendoNS", ns || self.utils.guid());
+                this.data("kendoNS", ns || utilsService.guid());
                 return this;
             },
             on: function (...args) {
@@ -79,17 +122,17 @@ export class KendoJQueryService {
                     argsCopy.pop();
                 }
                 const callback = argsCopy[argsCopy.length - 1];
-                const events = self.eventMapService.applyEventMap(argsCopy[0], ns);
+                const events = eventMapService.applyEventMap(argsCopy[0], ns);
                 // Setup mouse trap for touch/mouse normalization
-                if (self.support.mouseAndTouchPresent &&
+                if (supportService.mouseAndTouchPresent &&
                     events.search(/mouse|click/) > -1 &&
                     this[0] !== document.documentElement) {
-                    self.mouseEventNormalizer.setupMouseMute();
+                    mouseEventNormalizerService.setupMouseMute();
                     const selector = argsCopy.length === 2 ? null : argsCopy[1];
                     const bustClick = events.indexOf("click") > -1 && events.indexOf("touchend") > -1;
                     on.call(this, {
-                        touchstart: (e) => self.mouseEventNormalizer.muteMouse(e),
-                        touchend: () => self.mouseEventNormalizer.unMuteMouse()
+                        touchstart: (e) => mouseEventNormalizerService.muteMouse(e),
+                        touchend: () => mouseEventNormalizerService.unMuteMouse()
                     }, selector, {
                         bustClick: bustClick
                     });
@@ -160,3 +203,4 @@ export class KendoJQueryService {
         return !e.preventKendoKeydown;
     }
 }
+export const kendoJQueryService = new KendoJQueryService();

@@ -43,8 +43,7 @@
  * const dog = new Dog('Rex');
  * dog.speak(); // "Rex barks."
  */
-import { inject } from "../service-container";
-import { KendoJQueryService } from "../services/kendo-jquery.service";
+import { kendoJQueryService } from "../services/kendo-jquery.service";
 /**
  * Base Class for Kendo UI.
  * All Kendo classes inherit from this base class.
@@ -98,7 +97,7 @@ export class Class {
                 if (proto[member] != null && proto[member].constructor === Object) {
                     // For plain object members, deep merge with base class member
                     // Uses jQuery's extend(true, ...) - exactly as original
-                    fn[member] = inject(KendoJQueryService).getConstructor().extend(true, {}, base.prototype[member], proto[member]);
+                    fn[member] = kendoJQueryService.getConstructor().extend(true, {}, base.prototype[member], proto[member]);
                 }
                 else {
                     // For other members (functions, primitives, arrays, etc.), direct assignment
@@ -138,5 +137,5 @@ Class.prototype.init = function (..._args) {
 // Initialize options by deep extending with the provided options
 Class.prototype._initOptions = function (options) {
     // Use jQuery's extend directly to match original behavior exactly
-    this.options = inject(KendoJQueryService).getConstructor().extend(true, {}, this.options, options);
+    this.options = kendoJQueryService.getConstructor().extend(true, {}, this.options, options);
 };
