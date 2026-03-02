@@ -11,7 +11,7 @@ position: 2
 
 The Diagram provides options for binding it to data.
 
-> Make sure that you are familiar with the [Kendo UI for jQuery DataSource component]({% slug overview_kendoui_datasourcecomponent %}).
+> Make sure that you are familiar with the [Kendo UI for jQuery DataSource component](slug:overview_kendoui_datasourcecomponent).
 
 To create a hierarchical Diagram, pass a Kendo UI template and a data source as an option.
 

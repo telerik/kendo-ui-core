@@ -31,10 +31,13 @@ To access the actual diagramming API, call the `data()` method.
 
 ## Functionality and Features
 
-* [Data binding]({% slug binding_kendoui_diagram %})
-* [Editing]({% slug editing_kendoui_diagram_widget %})
-* [Layout]({% slug layout_kendoui_diagram %})
-* [Shapes]({% slug shapes_kendoui_diagram %})
+* [Data binding](slug:binding_kendoui_diagram)
+* [Editing](slug:editing_kendoui_diagram_widget)
+* [Layout](slug:layout_kendoui_diagram)
+* [Shapes](slug:shapes_kendoui_diagram)
+* [Connections](slug:connections_kendoui_diagram_widget)
+* [Tooltips](slug:tooltips_kendoui_diagram_widget)
+* [Keyboard Navigation](slug:keynav_kendoui_diagram_widget)
 
 ## See Also
 

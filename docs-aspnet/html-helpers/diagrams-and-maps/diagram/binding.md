@@ -285,14 +285,14 @@ To create a network of visuals and customize the appearance of the Diagram, set 
 
 ## Next Steps
 
-* [Customize Diagram Appearance]({% slug htmlhelpers_diagram_aspnetcore_shapes_connections %})
-* [Handle Diagram Events]({% slug diagram_events %})
-* [Configure Diagram Layout]({% slug htmlhelpers_diagram_aspnetcore_layout %})
+* [Customize Diagram Appearance](slug:htmlhelpers_diagram_aspnetcore_shapes_connections)
+* [Handle Diagram Events](slug:diagram_events)
+* [Configure Diagram Layout](slug:htmlhelpers_diagram_aspnetcore_layout)
 
 ## See Also
 
 * [Basic Usage of the Diagram HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram)
 * [Server-Side API](/api/diagram)
 {% if site.core %}
-* [Diagram in Razor Pages]({% slug razorpages_diagramhelper_aspnetcore %})
+* [Diagram in Razor Pages](slug:razorpages_diagramhelper_aspnetcore)
 {% endif %}

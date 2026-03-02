@@ -67,7 +67,7 @@ The following example demonstrates how to achieve the desired behavior.
           target: "#treeview",
 
           // show when node text is clicked
-          filter: ".k-in",
+          filter: ".k-treeview-item-content",
 
           // handle item clicks
           select: function(e) {
