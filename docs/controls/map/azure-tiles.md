@@ -91,7 +91,7 @@ Use the tile layer type and point the urlTemplate to the proxy controller action
                 zoom: 3,
                 layers: [{
                     type: "tile",
-                    urlTemplate: "/Map/AzureTile?zoom=#=zoom#&x=#=x#&y=#=y#",
+                    urlTemplate: "https://demos.telerik.com/kendo-ui/map/azuretile?zoom=#=zoom#&x=#=x#&y=#=y#",
                     attribution: "© Microsoft Azure Maps"
                 }]
             });
