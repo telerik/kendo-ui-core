@@ -8,11 +8,11 @@ position: 2
 ---
 
 {% if site.core %}
-    {% assign Position = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#positionkendomvcuichartaxislabelsposition" %}
-    {% assign ValueAxis = "/api/kendo.mvc.ui.fluent/chartbuilder#valueaxissystemaction" %}
+{% assign Position = "/api/kendo.mvc.ui.fluent/chartcategoryaxislabelssettingsbuilder#positionkendomvcuichartaxislabelsposition" %}
+{% assign ValueAxis = "/api/kendo.mvc.ui.fluent/chartbuilder#valueaxissystemaction" %}
 {% else %}
-    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
-    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}
+{% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
+{% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}
 {% endif %}
 
 # Categorical Charts
@@ -37,7 +37,9 @@ To set the category names, use the `CategoryAxis` object.
         )
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -59,6 +61,7 @@ To set the category names, use the `CategoryAxis` object.
     </kendo-chart>
 
 ```
+
 {% endif %}
 
 You can also bind the category name to a field of the data item.
@@ -75,7 +78,9 @@ You can also bind the category name to a field of the data item.
         )
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -97,8 +102,66 @@ You can also bind the category name to a field of the data item.
     </kendo-chart>
 
 ```
+
 {% endif %}
 
+### Highlighting Categories
+
+The category axis supports visual highlighting of categories when hovering over the chart. This feature helps users identify which category is currently under focus by displaying a colored overlay across the entire category band.
+
+To enable category highlighting, set the `highlight` option of the `categoryAxis`.
+
+```HtmlHelper
+    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
+        .Name("chart")
+        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Column_Charts")))
+        .Series(series => {
+            series.Column(model => model.Wind).Name("Wind");
+        })
+        .CategoryAxis(axis => axis
+            .Field("Year")
+            .Highlight(highlight => highlight
+                .Visible(true)
+                .Color("green")
+                .Opacity(0.3)
+                .Border(b => b
+                    .Color("orange")
+                    .Width(2)
+                    .DashType(ChartDashType.DashDot)
+                )
+            )
+        )
+    )
+```
+
+{% if site.core %}
+
+```TagHelper
+
+    @addTagHelper *, Kendo.Mvc
+
+    <kendo-chart name="chart">
+        <datasource>
+            <transport>
+                <read type="post" url="@Url.Action("_SpainElectricityProduction", "Column_Charts")" />
+            </transport>
+        </datasource>
+        <series>
+            <series-item type="ChartSeriesType.Column" name="Wind" field="Wind">
+            </series-item>
+        </series>
+        <category-axis>
+            <category-axis-item field="Year">
+                <highlight visible="true" color="green" opacity="0.3>
+                    <border color="orange" width="2" dash-type="ChartDashType.DashDot/>
+                </highlight>
+            </category-axis-item>
+        </category-axis>
+    </kendo-chart>
+
+```
+
+{% endif %}
 
 ## Positioning the Label
 
@@ -106,10 +169,9 @@ The category and value axes provide options for displaying their labels either n
 
 To change the label position, set the [`Position`]({{ Position }}) option of the axis labels which provides the following available options:
 
-* (Default) When `Position` is set to `"ChartAxisLabelsPosition.OnAxis"`, the labels are positioned next to the axis.
-* When `Position` is set to `"ChartAxisLabelsPosition.End"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
-* When `Position` is set to `"ChartAxisLabelsPosition.Start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
-
+- (Default) When `Position` is set to `"ChartAxisLabelsPosition.OnAxis"`, the labels are positioned next to the axis.
+- When `Position` is set to `"ChartAxisLabelsPosition.End"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
+- When `Position` is set to `"ChartAxisLabelsPosition.Start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
 
 ```HtmlHelper
     .CategoryAxis(axis => axis
@@ -117,7 +179,9 @@ To change the label position, set the [`Position`]({{ Position }}) option of the
         .Labels(l => l.Position(ChartAxisLabelsPosition.Start))
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @{
@@ -131,6 +195,7 @@ To change the label position, set the [`Position`]({{ Position }}) option of the
     </category-axis>
 
 ```
+
 {% endif %}
 
 ## Setting the Value Axis
@@ -156,7 +221,9 @@ The following example demonstrates how to configure a numeric axis with a minimu
         )
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -183,6 +250,7 @@ The following example demonstrates how to configure a numeric axis with a minimu
     </kendo-chart>
 
 ```
+
 {% endif %}
 
 ## Setting Multiple Value Axes
@@ -218,7 +286,9 @@ The following example demonstrates how to define the `miles` and `km` axes. To a
         )
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -251,6 +321,7 @@ The following example demonstrates how to define the `miles` and `km` axes. To a
     </kendo-chart>
 
 ```
+
 {% endif %}
 
 ## Arranging the Value Axes
@@ -263,7 +334,9 @@ You can also control the arrangement of the value axes by specifying the values 
         .AxisCrossingValue(0, 3)
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @{
@@ -276,15 +349,15 @@ You can also control the arrangement of the value axes by specifying the values 
     </category-axis>
 
 ```
-{% endif %}
 
+{% endif %}
 
 ## See Also
 
-* [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Bar Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/index)
-* [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
-{% if site.core %}
-* [Basic Usage of the Line Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
-{% endif %}
-* [Server-Side API](/api/chart)
+- [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
+- [Basic Usage of the Bar Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/index)
+- [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
+  {% if site.core %}
+- [Basic Usage of the Line Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
+  {% endif %}
+- [Server-Side API](/api/chart)

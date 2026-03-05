@@ -52,30 +52,56 @@ You can also bind the category name to a field of the data item.
         }
     });
 
+### Highlighting Categories
+
+The category axis supports visual highlighting of categories when hovering over the chart. This feature helps users identify which category is currently under focus by displaying a colored overlay across the entire category band.
+
+To enable category highlighting, set the `highlight` option of the `categoryAxis` object.
+
+    $("#chart").kendoChart({
+        series: [{
+            name: "World",
+            data: [15.7, 16.7, 20, 23.5, 26.6]
+        }],
+        categoryAxis: {
+            categories: [2005, 2006, 2007, 2008, 2009],
+            highlight: {
+                visible: true,
+                color: "green",
+                opacity: 0.3,
+                border: {
+                    color: "orange",
+                    width: 2,
+                    dashType: "solid"
+                }
+            }
+        }
+    });
+
 ## Positioning the Label
 
 The category and value axes provide options for displaying their labels either next to the axis or at the outer edges of the plot area. By default, the labels are positioned next to the axis.
 
 To change the label position, set the [`position`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.labels.position) option of the axis labels which provides the following available options:
 
-* (Default) When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis.
-* When `position` is set to `"end"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
-* When `position` is set to `"start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
+- (Default) When `position` is set to `"onAxis"` or `undefined`, the labels are positioned next to the axis.
+- When `position` is set to `"end"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
+- When `position` is set to `"start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
 
-    $("#container").kendoChart({
-        title: {
-            text: "Average temperature"
-        },
-        series: [{
-            data: [2, -5, 8]
-        }],
-        categoryAxis: {
-            categories: ["Aug", "Sep", "Oct"],
-            labels: {
-                position: 'start'
-            }
-        }
-    });
+  $("#container").kendoChart({
+  title: {
+  text: "Average temperature"
+  },
+  series: [{
+  data: [2, -5, 8]
+  }],
+  categoryAxis: {
+  categories: ["Aug", "Sep", "Oct"],
+  labels: {
+  position: 'start'
+  }
+  }
+  });
 
 ## Setting the Value Axis
 
@@ -84,17 +110,17 @@ Currently, the Chart supports only numeric value axes. To access the configurati
 The following example demonstrates how to configure a numeric axis with a minimum value of `0` and a maximum value of `100`.
 
 $("#chart").kendoChart({
-    series: [{
-        name: "World",
-        data: [15.7, 16.7, 20, 23.5, 26.6]
-    }],
-    valueAxis: {
-        min: 0,
-        max: 100
-    },
-    categoryAxis: {
-        categories: [2005, 2006, 2007, 2008, 2009]
-    }
+series: [{
+name: "World",
+data: [15.7, 16.7, 20, 23.5, 26.6]
+}],
+valueAxis: {
+min: 0,
+max: 100
+},
+categoryAxis: {
+categories: [2005, 2006, 2007, 2008, 2009]
+}
 });
 
 ## Setting Multiple Value Axes
@@ -148,14 +174,13 @@ You can also control the arrangement of the value axes by specifying the values 
         axisCrossingValue: [0, 3]
     }
 
-
 The previous example results in the following output.
 
 ![Kendo UI for jQuery Chart with customized axis-crossing values](../chart-axis-crossing-values.png)
 
 ## See Also
 
-* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [Basic Usage of the Bar Chart (Demo)](https://demos.telerik.com/kendo-ui/bar-charts/index)
-* [Basic Usage of the Line Chart (Demo)](https://demos.telerik.com/kendo-ui/line-charts/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+- [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+- [Basic Usage of the Bar Chart (Demo)](https://demos.telerik.com/kendo-ui/bar-charts/index)
+- [Basic Usage of the Line Chart (Demo)](https://demos.telerik.com/kendo-ui/line-charts/index)
+- [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

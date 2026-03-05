@@ -63,68 +63,69 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
 The 5.0 release of the Kendo Sass Themes features an updated color palette for the chart series.
 
 To revert to the series colors from version 4.x, you can:
-* Use the pre-built theme swatches from the respective [npm packages]({% slug sassbasedthemes_kendoui %}#using-npm-packages):
-  * `dist/default-dataviz-v4` from `@progress/kendo-theme-default`
-  * `dist/bootstrap-dataviz-v4` from `@progress/kendo-theme-bootstrap`
-  * `dist/material-dataviz-v4` from `@progress/kendo-theme-material`
 
-* Use [SCSS variables]({% slug sassbasedthemes_kendoui %}#customizing-the-themes) to revert the series colors to their previous defaults:
+- Use the pre-built theme swatches from the respective [npm packages]({% slug sassbasedthemes_kendoui %}#using-npm-packages):
+  - `dist/default-dataviz-v4` from `@progress/kendo-theme-default`
+  - `dist/bootstrap-dataviz-v4` from `@progress/kendo-theme-bootstrap`
+  - `dist/material-dataviz-v4` from `@progress/kendo-theme-material`
 
-    // Default v4
-    $series-a: #ff6358;
-    $series-b: #ffd246;
-    $series-c: #78d237;
-    $series-d: #28b4c8;
-    $series-e: #2d73f5;
-    $series-f: #aa46be;
+- Use [SCSS variables]({% slug sassbasedthemes_kendoui %}#customizing-the-themes) to revert the series colors to their previous defaults:
 
-    // Bootstrap v4
-    $series-a: #0275d8;
-    $series-b: #5bc0de;
-    $series-c: #5cb85c;
-    $series-d: #f0ad4e;
-    $series-e: #e67d4a;
-    $series-f: #d9534f;
+  // Default v4
+  $series-a: #ff6358;
+  $series-b: #ffd246;
+  $series-c: #78d237;
+  $series-d: #28b4c8;
+  $series-e: #2d73f5;
+  $series-f: #aa46be;
 
-    // Material v4
-    $series-a: #3f51b5;
-    $series-b: #2196f3;
-    $series-c: #43a047;
-    $series-d: #ffc107;
-    $series-e: #ff5722;
-    $series-f: #e91e63;
+  // Bootstrap v4
+  $series-a: #0275d8;
+  $series-b: #5bc0de;
+  $series-c: #5cb85c;
+  $series-d: #f0ad4e;
+  $series-e: #e67d4a;
+  $series-f: #d9534f;
 
-* Use the [`seriesColors`](/api/javascript/dataviz/ui/chart/configuration/seriescolors) configuration setting for individual Chart instances:
+  // Material v4
+  $series-a: #3f51b5;
+  $series-b: #2196f3;
+  $series-c: #43a047;
+  $series-d: #ffc107;
+  $series-e: #ff5722;
+  $series-f: #e91e63;
 
-    var chartDefaultV4Colors =
-    ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
+- Use the [`seriesColors`](/api/javascript/dataviz/ui/chart/configuration/seriescolors) configuration setting for individual Chart instances:
 
-    var chartBootstrapV4Colors =
-    ['#0275d8', '#5bc0de', '#5cb85c', '#f0ad4e', '#e67d4a', '#d9534f'];
+  var chartDefaultV4Colors =
+  ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
 
-    var chartMaterialV4Colors =
-    ['#3f51b5', '#2196f3', '#43a047', '#ffc107', '#ff5722', '#e91e63'];
+  var chartBootstrapV4Colors =
+  ['#0275d8', '#5bc0de', '#5cb85c', '#f0ad4e', '#e67d4a', '#d9534f'];
 
-    ```dojo
-        <div id="chart"></div>
-            <script>
-            var chartDefaultV4Colors =
-            ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
+  var chartMaterialV4Colors =
+  ['#3f51b5', '#2196f3', '#43a047', '#ffc107', '#ff5722', '#e91e63'];
 
-            $("#chart").kendoChart({
-                theme: "sass",
-                seriesColors: chartDefaultV4Colors,
-                series: [{
-                    type: "bar",
-                    name: "United States",
-                    data: [67.96, 68.93, 75, 74, 78]
-                }],
-                categoryAxis: {
-                    categories: [2005, 2006, 2007, 2008, 2009]
-                }
-            });
-        </script>
-    ```
+  ```dojo
+      <div id="chart"></div>
+          <script>
+          var chartDefaultV4Colors =
+          ['#ff6358', '#ffd246', '#78d237', '#28b4c8', '#2d73f5', '#aa46be'];
+
+          $("#chart").kendoChart({
+              theme: "sass",
+              seriesColors: chartDefaultV4Colors,
+              series: [{
+                  type: "bar",
+                  name: "United States",
+                  data: [67.96, 68.93, 75, 74, 78]
+              }],
+              categoryAxis: {
+                  categories: [2005, 2006, 2007, 2008, 2009]
+              }
+          });
+      </script>
+  ```
 
 ### Using Pattern Fills
 
@@ -133,11 +134,12 @@ In addition to solid colors, the Chart series can also be filled with repeating 
 > The pattern inherits the [`series.color`](/api/javascript/dataviz/ui/chart/configuration/series.color) as main color and accepts an optional `background` color.
 
 The following customizable pattern fills are available:
-* Crosshatch
-* Diagonal Stripes
-* Dots
-* Grid
-* Vertical Stripes
+
+- Crosshatch
+- Diagonal Stripes
+- Dots
+- Grid
+- Vertical Stripes
 
 Below is an example of using pattern fills for series:
 
@@ -247,7 +249,10 @@ Kendo UI Charts use animated transitions to display new and updated data. To dis
     </script>
 ```
 
+You can also customize the chart's animation by taking advantage of the [Kendo Motion system](https://www.telerik.com/design-system/docs/foundation/motion/). The Kendo Motion system provides duration tokens and easing tokens that combine into transition tokens and helps define the behavior of interactive objects.
+
 ## See Also
 
-* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
-* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+- [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+- [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)
+- [Kendo Motion System](https://www.telerik.com/design-system/docs/foundation/motion/)

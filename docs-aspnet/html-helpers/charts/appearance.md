@@ -48,7 +48,9 @@ The Charts come with [a set of predefined themes](https://docs.telerik.com/kendo
         )
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -85,6 +87,7 @@ The Charts come with [a set of predefined themes](https://docs.telerik.com/kendo
     </kendo-chart>
 
 ```
+
 {% endif %}
 
 ## Sass Themes
@@ -121,7 +124,9 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
         )
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -158,6 +163,7 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
     </kendo-chart>
 
 ```
+
 {% endif %}
 
 ## Using Pattern Fills
@@ -167,11 +173,12 @@ In addition to solid colors, the Chart series can also be filled with repeating 
 > The pattern inherits the series color as main color and accepts an optional `background` color.
 
 The following customizable pattern fills are available:
-* Crosshatch
-* Diagonal Stripes
-* Dots
-* Grid
-* Vertical Stripes
+
+- Crosshatch
+- Diagonal Stripes
+- Dots
+- Grid
+- Vertical Stripes
 
 Below is an example of using pattern fills for series:
 
@@ -187,7 +194,9 @@ Below is an example of using pattern fills for series:
         })
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -208,6 +217,7 @@ Below is an example of using pattern fills for series:
     </kendo-chart>
 
 ```
+
 {% endif %}
 
 ## Animated Transitions
@@ -221,7 +231,9 @@ Below is an example of using pattern fills for series:
         // Other options.
     )
 ```
+
 {% if site.core %}
+
 ```TagHelper
 
     @addTagHelper *, Kendo.Mvc
@@ -231,11 +243,14 @@ Below is an example of using pattern fills for series:
     </kendo-chart>
 
 ```
+
 {% endif %}
 
+You can also customize the chart's animation by taking advantage of the [Kendo Motion system](https://www.telerik.com/design-system/docs/foundation/motion/). The Kendo Motion system provides duration tokens and easing tokens that combine into transition tokens and helps define the behavior of interactive objects.
 
 ## See Also
 
-* [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
-* [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
-* [Server-Side API](/api/chart)
+- [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
+- [Basic Usage of the Area Chart for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+- [Server-Side API](/api/chart)
+- [Kendo Motion System](https://www.telerik.com/design-system/docs/foundation/motion/)

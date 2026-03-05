@@ -4546,10 +4546,265 @@ How do I adjust the thickness of the category axis crosshair in a Kendo UI chart
     });
     </script>
 
+### categoryAxis.highlight `Object`
+
+The highlight configuration options for the category axis.
+
+<div class="meta-api-description">
+How to enable category highlight on the category axis in Kendo UI chart? Configure and enable category axis highlighting to visually distinguish and highlight the current hovered or focused category on the chart by showing a colored background or overlay across the entire category band. Control the highlight appearance including color, opacity, visibility, and border styling to enhance visual feedback when interacting with categories. Enable or disable category highlighting to provide clear visual indicators of which category is currently being examined, supporting better data point identification and improving user interaction experience during chart navigation and data exploration.
+</div>
+
+#### Example - set the category axis highlight options
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          color: "#ff0000",
+          opacity: 0.2
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.border `Object`
+
+The border options for the category highlight.
+
+<div class="meta-api-description">
+How to customize the border of category highlight in Kendo UI chart? Customize and configure the outline, color, width, style, and appearance of the border around the category highlight area on the chart to control how the boundary of the highlighted category is rendered, enabling precise styling, visual emphasis, or border customization for enhanced chart interactivity and visual presentation.
+</div>
+
+#### Example - configure the category axis highlight border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          border: {
+            color: "#000000",
+            width: 2
+          }
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.border.color `String`
+
+The color of the category highlight border. Accepts a valid CSS color string, including hex and rgb.
+
+<div class="meta-api-description">
+How to set the color of the category highlight border in Kendo UI chart? Adjust or configure the border color of the category highlight to control the outline shade around the highlighted category, enabling customization using any CSS color format like hex codes, RGB, RGBA, or named colors. Set or style the category highlight border hue to enhance chart data presentation, customize the border appearance for readability or theme matching, and apply custom colors for category highlight frames to create distinct or subtle visual effects in data visualization components.
+</div>
+
+#### Example - set the category axis highlight border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          border: {
+            color: "#ff0000"
+          }
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.border.width `Number` *(default: 0)*
+
+The width of the category highlight border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+<div class="meta-api-description">
+How to set the border width of category highlight in Kendo UI chart? Adjust the thickness or pixel width of the category highlight border to control the outline visibility and style of the highlight box, enabling customization of the highlighted category border by setting or configuring numeric border widths or border thickness values; modify or control the highlight outline size for enhanced visual emphasis or subtlety in chart highlights.
+</div>
+
+#### Example - set the category axis highlight border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          border: {
+            width: 2
+          }
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.border.dashType `String` *(default: "solid")*
+
+The dash type of the category highlight border.
+
+The following dash types are supported:
+
+- "dash" - a line consisting of dashes
+- "dashDot" - a line consisting of a repeating pattern of dash-dot
+- "dot" - a line consisting of dots
+- "longDash" - a line consisting of a repeating pattern of long-dash
+- "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+- "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+- "solid" - a solid line
+
+<div class="meta-api-description">
+How do I customize the appearance of the category highlight border in a Kendo UI chart? Configure and customize the category highlight border line style by setting patterns such as solid, dashed, dotted, dash-dot, long dash, long dash-dot, and long dash-dot-dot to control the stroke appearance, enabling developers to style, enable, or change the category highlight border visualization with various dash and dot combinations for enhanced chart interactivity and visual clarity in data presentations or analytic views.
+</div>
+
+#### Example - set the category axis highlight border dashType
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          border: {
+            dashType: "dash"
+          }
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.border.opacity `Number` *(default: 1)*
+
+The opacity of the category highlight border. By default the category highlight border is opaque.
+
+<div class="meta-api-description">
+How do I adjust the opacity of the category highlight border in a Kendo UI chart? Adjust and configure the transparency, alpha level, or opacity of the category highlight border to control visibility, blending, and emphasis during mouseover or pointer interactions, enabling control over how solid or translucent the category highlight border appears. This setting helps customize the border's see-through effect, allowing developers to set fade, transparency, or blending levels to emphasize or de-emphasize the border line displayed on the highlighted category when users hover over the chart.
+</div>
+
+#### Example - set the category axis highlight border opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          border: {
+            opacity: 0.5
+          }
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.color `String`
+
+The fill color of the category highlight. Accepts a valid CSS color string, including hex and rgb.
+
+<div class="meta-api-description">
+How to change the color of category highlight in Kendo UI chart? Adjust or customize the fill color inside the category highlight area to align with branding guidelines, improve visibility, enhance contrast against the chart background, or match dark and light themes by specifying any valid CSS color value such as hex codes, RGB, RGBA, HSL, or named colors. Enable styling of category highlight fill colors to fit design systems or user interface preferences and maintain visual consistency across charts by setting foreground colors dynamically or statically for category backgrounds that appear on hover.
+</div>
+
+#### Example - set the category axis highlight color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          color: "#ff0000"
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.opacity `Number` *(default: 1)*
+
+The opacity of the category highlight. By default the category highlight is opaque.
+
+<div class="meta-api-description">
+How to adjust the opacity of category highlight in Kendo UI chart? Adjust and configure the transparency, alpha level, or opacity of the category highlight to control visibility, blending, and emphasis during mouseover or pointer interactions, enabling control over how solid or translucent the category highlight appears for better visual integration with the chart background. This setting helps customize the category highlight's see-through effect, allowing developers to set fade, transparency, or blending levels to emphasize or de-emphasize the interactive highlight displayed on categories when users hover over data points.
+</div>
+
+#### Example - set the category axis highlight opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true,
+          color: "#ff0000",
+          opacity: 0.2
+        }
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### categoryAxis.highlight.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the category highlight. By default the category highlight is not displayed.
+
+<div class="meta-api-description">
+How to control category highlight visibility in Kendo UI chart? Control the display of category highlight for the category axis, including enabling or disabling the visual highlight that shows the current hovered or focused category on the chart, configuring visibility to show or hide the category background overlay or band, toggling category highlighting for enhanced user interaction feedback, and managing category highlight presentation in graphs or plots to provide clear visual indicators of which category is being examined.
+</div>
+
+#### Example - show the category axis highlight
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        highlight: {
+          visible: true
+        }
+      },
+      series: [
+        { type: "line", data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
 ### categoryAxis.field `String`
 
-The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/chart#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
-
+The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/chart#configuration-dataSource) option to be set. **The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "\_"), and may not start with a digit.**
 
 <div class="meta-api-description">
 How to configure category axis labels in Kendo UI chart using a specific data field? Set or configure the category axis labels by linking the chart’s category axis to a specific data field containing category names, enabling binding of axis labels to your dataset entries, data source, or data items; control which property or key in your data objects defines the category dimension for grouping, labeling, or classification on the chart axis, ensuring proper mapping between data fields and visual category ticks, with the field name formatted as a valid JavaScript identifier suitable for integration with data sources and dynamic datasets.
