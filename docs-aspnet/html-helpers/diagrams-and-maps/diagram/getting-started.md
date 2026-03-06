@@ -58,7 +58,7 @@ Declare the `Shape` an `Connection` view models.
 Use the Diagram HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the component to a page and set some of its options.
 
 1. Use the `Name()` configuration method to assign a name to the instance of the helper&mdash;this is mandatory as its value is used for the `id` and the `name` attributes of the Diagram element.
-1. Add the `DataSource()` configuration option, configure the `ShapeDataSource` and `ConnectionsDataSource`, and set the end points for the [CRUD operations]({% slug htmlhelpers_diagram_aspnetcore_editing %}). 
+1. Add the `DataSource()` configuration option, configure the `ShapeDataSource` and `ConnectionsDataSource`, and set the end points for the [CRUD operations](slug:htmlhelpers_diagram_aspnetcore_editing). 
 1. Customize the [appearance](https://docs.telerik.com/{{ site.platform }}/html-helpers/diagrams-and-maps/diagram/binding/binding#customizing-the-appearance) of the Diagram.
 
 ```HtmlHelper
@@ -567,9 +567,9 @@ Referencing existing instances allows you to build on top of their configuration
 
 ## Next Steps
 
-* [Setting the Layout of the Diagram]({% slug htmlhelpers_diagram_aspnetcore_layout %})
-* [Binding the Diagram to Data]({% slug htmlhelpers_diagram_aspnetcore_binding %})
-* [Implementing Editing in the Diagram]({% slug htmlhelpers_diagram_aspnetcore_editing %})
+* [Setting the Layout of the Diagram](slug:htmlhelpers_diagram_aspnetcore_layout)
+* [Binding the Diagram to Data](slug:htmlhelpers_diagram_aspnetcore_binding)
+* [Implementing Editing in the Diagram](slug:htmlhelpers_diagram_aspnetcore_editing)
 
 ## See Also
 

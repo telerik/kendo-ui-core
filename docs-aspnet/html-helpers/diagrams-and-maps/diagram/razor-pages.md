@@ -12,7 +12,7 @@ position: 3
 
 This article describes how to seamlessly integrate and configure the Telerik UI Diagram for {{ site.framework }} in Razor Pages applications.
 
-> You can use any of the available [data binding approaches]({% slug htmlhelpers_diagram_aspnetcore_binding %}) to bind the component to data in a Razor Pages application.
+> You can use any of the available [data binding approaches](slug:htmlhelpers_diagram_aspnetcore_binding) to bind the component to data in a Razor Pages application.
 
 @[template](/_contentTemplates/core/razor-pages-general-info.md#referencing-handler-methods)
 

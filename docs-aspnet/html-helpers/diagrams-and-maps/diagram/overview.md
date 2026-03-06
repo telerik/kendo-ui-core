@@ -61,19 +61,21 @@ The Diagram represents information in a schematic way and according to particula
     {% endif %}
 ## Functionality and Features
 
-* [Data binding]({% slug htmlhelpers_diagram_aspnetcore_binding %})&mdash;Configure the way of binding for the Diagram.
-* [Editing]({% slug htmlhelpers_diagram_aspnetcore_editing %})&mdash;You can enable editing operations for both the existing shapes and connections between them.
-* [Layout]({% slug htmlhelpers_diagram_aspnetcore_layout %})&mdash;The Diagram comes with built-in layout options that enable you to further alter its appearance.
-* [Shapes]({% slug htmlhelpers_diagram_aspnetcore_shapes_connections %})&mdash;The Diagram enables you to add various shapes.
-* [PDF export]({% slug htmlhelpers_diagram_aspnetcore_pdf_export %})&mdash;You have the ability to export the existing Diagram to a PDF document.
-* [Advanced export]({% slug htmlhelpers_diagram_aspnetcore_export %})&mdash;The Diagram enables you to further customize the exporting mechanism.
+* [Data binding](slug:htmlhelpers_diagram_aspnetcore_binding)&mdash;Set the binding method for the Diagram.
+* [Editing](slug:htmlhelpers_diagram_aspnetcore_editing)&mdash;You can enable editing operations for both the existing shapes and the connections between them.
+* [Layout](slug:htmlhelpers_diagram_aspnetcore_layout)&mdash;The Diagram comes with built-in layout options that enable you to further alter its appearance.
+* [Shapes](slug:htmlhelpers_diagram_aspnetcore_shapes_connections)&mdash;The Diagram enables you to add various shapes.
+* [Tooltips](slug:htmlhelpers_diagram_aspnetcore_tooltips)&mdash;Display additional information when users hover over shapes and connections.
+* [Keyboard navigation](slug:keynav_diagram_aspnetcore)&mdash;Navigate and interact with the Diagram using keyboard shortcuts.
+* [PDF export](slug:htmlhelpers_diagram_aspnetcore_pdf_export)&mdash;You have the ability to export the existing Diagram to a PDF document.
+* [Advanced export](slug:htmlhelpers_diagram_aspnetcore_export)&mdash;The Diagram enables you to further customize the exporting mechanism.
 
 ## Next Steps
 
-* [Getting Started with the Diagram]({% slug diagram_getting_started %})
+* [Getting Started with the Diagram](slug:diagram_getting_started)
 * [Basic Usage of the Diagram HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/index)
 {% if site.core %}
-* [Diagram in Razor Pages]({% slug razorpages_diagramhelper_aspnetcore %})
+* [Diagram in Razor Pages](slug:razorpages_diagramhelper_aspnetcore)
 {% endif %}
 
 ## See Also

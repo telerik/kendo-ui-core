@@ -21763,6 +21763,8 @@ The point in Model coordinates.
 
 Pans the diagram with a specified delta (represented as a Point).
 
+If called without parameters, the method returns the current pan offset of the diagram.
+
 
 <div class="meta-api-description">
 How do I programmatically pan a Kendo UI Diagram to adjust its visible area? Control or adjust the visible area of a diagram by shifting, scrolling, or translating the viewport using coordinate offsets or delta values, enabling programmatic movement, navigation, or panning relative to the current view; this method supports moving the diagram display horizontally and vertically by specified x and y values, allowing dynamic repositioning, viewport translation, or content adjustment to simulate scrolling or drag-like interactions within the diagram space.
@@ -21773,6 +21775,12 @@ How do I programmatically pan a Kendo UI Diagram to adjust its visible area? Con
 ##### pan `Object|kendo.dataviz.diagram.Point`
 
 The translation delta to apply to the diagram or the Point to pan to.
+
+Object — The current pan offset in the format:
+{
+    x: Number,
+    y: Number
+}
 
 #### Example - pan to a predefined point in the Diagram
 
@@ -21811,6 +21819,22 @@ The translation delta to apply to the diagram or the Point to pan to.
         }
       });
     </script>
+
+#### Example – Pan the Diagram Relative to the Current Position
+
+var diagram = $("#diagram").data("kendoDiagram");
+
+// Move diagram 50px to the right
+var currentOffset = diagram.pan();
+
+diagram.pan({
+    x: currentOffset.x + 50,
+    y: currentOffset.y
+});
+
+The pan() method sets an absolute offset.
+To move the Diagram relatively (for example, when handling keyboard navigation), first retrieve the current offset by calling pan() without arguments, then apply the desired delta and set the new offset.
+
 
 ### paste
 
