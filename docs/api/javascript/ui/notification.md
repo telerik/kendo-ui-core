@@ -702,6 +702,10 @@ How do I programmatically show a notification in Kendo UI with custom animation?
 The notification type. Built-in types include `"info"`, `"success"`, `"warning"`,`"error"` and `"default"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
 If this argument is not supplied, then `"default"` is assumed.
 
+##### safe `Boolean`
+
+Controls the HTML encoding. When the value is `true` the content is HTML-encoded (safe from XSS attacks). The `false`  or undefined (omitted) refers to the content NOT being encoded.
+
 #### Example - Use the show method with a template and custom arguments
 
     <span id="notification"></span>
@@ -730,6 +734,45 @@ If this argument is not supplied, then `"default"` is assumed.
 
 	notificationWidget.show(getNotificationMessage, "myAlert");
     </script>
+
+#### Example - use the show method with encoded and not encoded data
+
+    <span id="notification"></span>
+    <script>
+
+    $("#notification").kendoNotification();
+
+    var notification = $("#notification").kendoNotification().data("kendoNotification");
+
+    // Unsafe - renders HTML (XSS risk if content is from user input)
+    notification.show("<strong>Bold text</strong>", "warning", false);
+    // or
+    notification.show("<strong>Bold text</strong>", "warning");
+
+    // Safe - HTML-encodes, shows literal text
+    notification.show("<strong>Bold text</strong>", "info", true);
+    // Would display: <strong>Bold text</strong> (as plain text)
+
+    // Public API - showText() method internally uses safe=true
+    notification.showText("<strong>Bold text</strong>", "info");
+    // Same as: notification.show("<strong>Bold text</strong>", "info", true);
+    </script>
+
+#### Example - use the show method different type arguments
+
+    <span id="notification"></span>
+    <script>
+
+    $("#notification").kendoNotification();
+
+    var notification = $("#notification").kendoNotification().data("kendoNotification");
+
+    notification.show("Message", "info");      // Blue info notification
+    notification.show("Message", "success");   // Green success notification
+    notification.show("Message", "warning");   // Yellow warning notification
+    notification.show("Message");              // No type = defaults to "default"
+    </script>
+
 
 ### showText
 

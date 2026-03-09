@@ -139,6 +139,67 @@ Update any custom selectors accordingly, for example:
 }
 ```
 
+### TabStrip Rendering Changes (HTML and CSS)
+
+Starting with the **2026 Q1** release, the TabStrip no longer renders the `k-item` class on tab items. Tab elements now use `k-tabstrip-item` as the primary class.
+
+#### Key HTML Structure Changes
+
+**Tab item class removed**
+
+Before: Tab items rendered both classes:
+
+- `k-item`
+- `k-tabstrip-item`
+
+After: Tab items render only:
+
+- `k-tabstrip-item`
+
+If you have custom CSS or jQuery selectors targeting `.k-item` inside TabStrip, replace them with `.k-tabstrip-item`.
+
+Example:
+
+```html
+<!-- Before -->
+<li class="k-item k-tabstrip-item k-active">Tab 1</li>
+
+<!-- After -->
+<li class="k-tabstrip-item k-active">Tab 1</li>
+```
+
+**State selectors update**
+
+Before: State selectors often targeted `.k-item`.
+
+After: State selectors should target `.k-tabstrip-item`.
+
+Update any custom selectors accordingly, for example:
+
+```css
+/* Before */
+.k-tabstrip .k-item.k-active {
+    /* ... */
+}
+
+/* After */
+.k-tabstrip .k-tabstrip-item.k-active {
+    /* ... */
+}
+```
+
+**Sortable integration selectors**
+
+If you use Sortable to reorder TabStrip tabs, update the Sortable `filter` selector from `li.k-item` to `li.k-tabstrip-item`.
+
+```js
+// Before
+filter: "li.k-item"
+
+// After
+filter: "li.k-tabstrip-item"
+```
+
 ### Appearance Defaults Removed
 
 > Starting with the 2026 Q1 release, {{ site.product }} components no longer render default appearance CSS classes. Previously, components automatically added `size`, `rounded`, `fillMode`, and `themeColor` classes to their HTML output. Instead, these properties now default to `null`, allowing the theme's CSS to control the component styling.
@@ -314,6 +375,8 @@ The following components no longer render default appearance classes:
 | DropDownButton       | Removed  | Removed | Removed | Removed    |
 | FloatingActionButton | Removed  | Removed | Removed | Removed    |
 
+>tip The ButtonGroup's `Items.Badge.ThemeColor` no longer render default appearance classes as well. It defaults to `undefined` which enforces the theme to control the default color
+
 #### Chip Components
 
 | Component | fillMode | size    | rounded | themeColor |
@@ -368,7 +431,7 @@ The following components no longer render default appearance classes:
 
 #### Notification
 
-> tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show`](/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
+> tip Starting with **2026 Q1** version when no `type` parameter is passed the the [`show()`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/notification/methods/show) method, the Notification will be displayed with default colors. Previously, the default value of the `type` property was `info`. If you need to acheive the previous behavior you can use the approaches demonstrated below:
 
 ```
 var notification = $("#notification").data("kendoNotification");
