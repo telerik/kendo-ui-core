@@ -1236,6 +1236,7 @@ How to export PropertyGrid data as PDF with customizable layout and compression?
     <div id="propertyGrid"></div>
     <script>
     $("#propertyGrid").kendoPropertyGrid({
+        toolbar: ["pdf", "spacer", "search"],
         pdf: {
             fileName: "PropertyGrid.pdf",
             author: "Kendo UI Team",
