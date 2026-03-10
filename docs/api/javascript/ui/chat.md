@@ -3882,7 +3882,9 @@ The array of remaining files after removal.
 
 ### suggestionClick
 
-Fired when a user clicks on a suggested message or action. This event is useful for tracking user engagement with suggestions and handling custom suggestion logic.
+Fired when a user clicks a global suggestion in the Chat. This event is useful for tracking user engagement with the global suggestions and handling custom suggestion logic.
+
+>note For per-message [`suggestedActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestedactionstemplate), the event that fires is [`sendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/sendmessage).
 
 <div class="meta-api-description">
 How do I handle clicks on suggested messages in a Kendo UI Chat widget? Capture and process user interactions with suggested messages or actions in chat interfaces, enabling detection of clicks on suggestions to execute custom logic, insert chosen text, send predefined replies, or trigger related workflows. Configure event handlers to monitor selection of autocomplete options, recommendation taps, quick reply choices, or inline action picks, allowing control over default behaviors, engagement tracking, suggestion data retrieval, dynamic navigation, and contextual side effects within conversational UI components.

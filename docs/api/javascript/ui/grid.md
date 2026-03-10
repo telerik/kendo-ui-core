@@ -7614,13 +7614,17 @@ How do I freeze specific columns in place while scrolling a Kendo UI Grid? Contr
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { locked: true, field: "id", width:200 },
-        { field: "name", width:800 }
-      ],
-      dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
-    });
+	    $("#grid").kendoGrid({
+	      columns: [
+	        { locked: true, field: "id", width:200 },
+	        { field: "name", width: 250 },
+	        { field: "age", width: 200},
+	        { field: "city", width: 300}
+	      ],
+	      dataSource: [ { id: 1, name: "Jane Doe", age: 32, city: "NYC" }, { id: 2, name: "John Doe", age: 28, city: "London" } ],
+	      width: 600,
+	      height: 130
+	    });
     </script>
 
 ### columns.lockable `Boolean` *(default: true)*
