@@ -624,6 +624,15 @@ class DomUtilsService {
     createDragToScrollHandler(scrollContainer, options) {
         return new DragToScrollHandlerImpl(scrollContainer, options);
     }
+    /**
+     * Create a ResizeObserver service for monitoring element resize events.
+     * Provides debounced resize callbacks and automatic cleanup.
+     * @param options - Configuration options including element, callback, and debounce time
+     * @returns ResizeObserverService instance with destroy() method
+     */
+    createResizeObserver(options) {
+        return new ResizeObserverService(options);
+    }
 }
 class DragToScrollHandlerImpl {
     constructor(scrollContainer, options) {
@@ -737,4 +746,52 @@ class DragToScrollHandlerImpl {
     }
 }
 DragToScrollHandlerImpl.DRAG_THRESHOLD = 5;
+const DEFAULT_RESIZE_EVENT_TIME = 50;
+const HAS_OBSERVER = typeof ResizeObserver !== "undefined";
+/**
+ * @hidden
+ */
+class ResizeObserverService {
+    static supported() {
+        return HAS_OBSERVER;
+    }
+    constructor(options) {
+        var _a;
+        this.onResize = (_entries) => {
+            if (this.resizeCallback) {
+                this.resizeCallback();
+            }
+        };
+        const el = options.element;
+        this.element = el instanceof $ ? el[0] : el;
+        this.resizeCallback = options.onResize;
+        this.debounceTime = (_a = options.debounceTime) !== null && _a !== void 0 ? _a : DEFAULT_RESIZE_EVENT_TIME;
+        this.observeOptions = options.observeOptions || {};
+        this.resizeObserver = null;
+        this.debounceResize = null;
+        this.initResizeObserver();
+    }
+    initResizeObserver() {
+        this.debounceResize = utilsService.throttle(this.onResize.bind(this), this.debounceTime);
+        if (HAS_OBSERVER) {
+            this.resizeObserver = new ResizeObserver(this.debounceResize);
+            this.resizeObserver.observe(this.element, this.observeOptions);
+        }
+    }
+    destroy() {
+        this.destroyResizeObserver();
+        this.element = null;
+    }
+    destroyResizeObserver() {
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
+        if (this.debounceResize) {
+            this.debounceResize.cancel();
+        }
+        this.resizeObserver = null;
+        this.debounceResize = null;
+        this.resizeCallback = null;
+    }
+}
 export const domUtilsService = new DomUtilsService();
