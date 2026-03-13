@@ -566,6 +566,84 @@ Or CDN references:
 3. **Smaller Markup** - Reduced HTML output size
 4. **Centralized Defaults** - Styling defaults managed in CSS, not server-side code
 
+
+### Virtual List Rendering Changes
+
+Starting with the **2026 Q1** release, the Virtual List introduces changes to its HTML rendering.
+
+| Aspect | Before (2025 and earlier) | After (2026 Q1 and later) |
+|--------|--------------------------|---------------------------|
+| List element class | `k-virtual-content k-list-ul` | `k-list-ul` |
+| Grouped data | All group labels and items in a single `<ul>` | Separate `<ul>` per group, each with its own group label |
+
+**Before:**
+
+```html
+<ul class="k-virtual-content k-list-ul">
+    <li class="k-list-item-group-label">Group A</li>
+    <li class="k-list-item">Item 1</li>
+    <li class="k-list-item">Item 2</li>
+    <li class="k-list-item-group-label">Group B</li>
+    <li class="k-list-item">Item 3</li>
+</ul>
+```
+
+**After:**
+
+```html
+<ul class="k-list-ul">
+    <li class="k-list-item-group-label">Group A</li>
+    <li class="k-list-item">Item 1</li>
+    <li class="k-list-item">Item 2</li>
+</ul>
+<ul class="k-list-ul">
+    <li class="k-list-item-group-label">Group B</li>
+    <li class="k-list-item">Item 3</li>
+</ul>
+```
+
+If you have custom CSS or jQuery selectors targeting `k-virtual-content`, update them to use `.k-list-ul`.
+
+### MultiColumnComboBox Sticky Group Header Rendering Changes
+
+Starting with the **2026 Q1** release, the MultiColumnComboBox component introduces a change to how the sticky group header is rendered when the data is grouped.
+
+| Aspect | Before (2025 and earlier) | After (2026 Q1 and later) |
+|--------|--------------------------|---------------------------|
+| CSS class | `.k-list-group-sticky-header` | `.k-table-group-sticky-header` |
+| Element | `<tr>` inside `<table>` | `<div>` outside `<table>` |
+
+**Before:**
+
+```html
+<table class="k-table">
+    <tr class="k-list-group-sticky-header">
+        <td colspan="...">Group Name</td>
+    </tr>
+    <!-- table rows -->
+</table>
+```
+
+**After:**
+
+```html
+<div class="k-table-group-sticky-header">Group Name</div>
+<table class="k-table">
+    <!-- table rows -->
+</table>
+```
+
+If you have custom CSS or jQuery selectors targeting `.k-list-group-sticky-header` for the MultiColumnComboBox, update them to use `.k-table-group-sticky-header`:
+
+```css
+/* Before */
+.k-multicolumncombobox .k-list-group-sticky-header { /* ... */ }
+
+/* After */
+.k-multicolumncombobox .k-table-group-sticky-header { /* ... */ }
+```
+
+
 ### Diagram
 
 For the fluent wrappers `DashTypes` were a **string** and are now **enums**.
@@ -633,3 +711,5 @@ For the fluent wrappers `DashTypes` were a **string** and are now **enums**.
 - `DiagramShapeStrokeSettingsBuilder`
 - `DiagramStrokeSettingsBuilder`
   {% endif %}
+
+
