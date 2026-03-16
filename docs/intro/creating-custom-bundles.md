@@ -47,6 +47,8 @@ You can create custom scripts that provide only the widgets and features your pr
 
 Users with a commercial license might use the [custom Download Builder tool](https://www.telerik.com/download/custom-download) to create a single JavaScript file that contains only the required widgets and features.
 
+For a local, terminal-based workflow, refer to [Building Custom Kendo UI Scripts Locally]({% slug kendoui_custom_builder_cli %}).
+
 > * Do not use multiple custom combined scripts, as they contain duplicate code. Instead, create one combined script file, which includes everything you need.
 > * It is not possible to load Download Builder packages by using RequireJS because the tool will not create the required AMD modules.
 
