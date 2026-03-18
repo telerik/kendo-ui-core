@@ -13813,11 +13813,11 @@ declare namespace kendo.ui {
     }
 
     interface ToolBarCloseEvent extends ToolBarEvent {
-        SplitButton?: JQuery | undefined;
+        widget?: JQuery | undefined;
     }
 
     interface ToolBarOpenEvent extends ToolBarEvent {
-        SplitButton?: JQuery | undefined;
+        widget?: JQuery | undefined;
     }
 
     interface ToolBarToggleEvent extends ToolBarEvent {
