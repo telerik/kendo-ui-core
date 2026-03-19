@@ -9388,6 +9388,383 @@ How to customize the "Unlock" label in Kendo UI Grid column menu? Customize or l
     });
     </script>
 
+### csv `Object`
+
+Configures the CSV export settings of the grid.
+
+
+<div class="meta-api-description">
+How do I customize CSV export from my Kendo UI grid? Control and customize exporting data grids to CSV files, including setting the exported file name, choosing whether to export all data or only the current page, configuring delimiter and line separator characters, managing large file handling through proxy or server settings, preventing formula injection attacks, adding UTF-8 BOM for Excel compatibility, and adjusting export scope and behavior to fit different use cases for CSV file generation from grid data.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" },
+        { field: "unitPrice" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages", unitPrice: 2.5 },
+        { productName: "Coffee", category: "Beverages", unitPrice: 3.0 }
+      ],
+      toolbar: ["csv"],
+      csv: {
+        fileName: "ProductData.csv",
+        allPages: true
+      }
+    });
+    </script>
+
+### csv.allPages `Boolean` *(default: false)*
+
+If set to `true` the grid will export all pages of data. By default the grid exports only the current page.
+
+> If the grid is bound to remote data and `allPages` is set to `true` it will request **all** data items from the remote service. Be careful if you have a lot of data.
+
+
+<div class="meta-api-description">
+How to export entire grid dataset to CSV in Kendo UI for jQuery? Control exporting of entire datasets to CSV, including all pages of grid data rather than just the visible or current page; this setting enables exporting full collections whether data is local or fetched from remote endpoints, supporting scenarios where users want to export complete records instead of partial views, configure bulk data export, enable full dataset downloads, handle multi-page data exports, and manage exporting large or paginated grid content seamlessly to CSV files.
+</div>
+
+#### Example - export all pages of data
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            allPages: true
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.delimiter `String` *(default: ",")*
+
+The delimiter character used to separate values in the CSV output.
+
+
+<div class="meta-api-description">
+How to change the CSV delimiter in Kendo UI Grid CSV export? Customize or set the field separator character used between values when exporting grid data to CSV format, enabling selection of commas, semicolons, tabs, pipes, or other delimiters to match regional or application-specific CSV formatting requirements, control how column values are separated in exported CSV files, configure CSV output for compatibility with different spreadsheet applications, locales, or import tools that expect specific delimiter characters.
+</div>
+
+#### Example - set a custom delimiter
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            delimiter: ";"
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.fileName `String` *(default: "Export.csv")*
+
+Specifies the file name of the exported CSV file.
+
+
+<div class="meta-api-description">
+How to set default filename for Kendo UI Grid CSV export? Set or customize the default filename for CSV exports, control the downloaded file name, specify or change the export file title for grid data, define the output file name when saving or exporting to CSV format, enable naming of exported CSV files to organize or identify reports, adjust the file name for export tasks, configure the download file label for grid data extraction, and manage how exported CSV documents are named by setting a desired .csv filename.
+</div>
+
+#### Example - set the default CSV file name
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            fileName: "Products.csv"
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.forceProxy `Boolean` *(default: false)*
+
+If set to true, the content will be forwarded to [proxyURL](csv.proxyurl) even if the browser supports saving files locally.
+
+
+<div class="meta-api-description">
+How to configure CSV exports in Kendo UI Grid to go through a proxy server? Control whether CSV exports from data grids are routed through a server-side proxy or downloaded directly by the browser, enabling configuration to force file exports through a proxy URL for environments requiring server mediation, bypassing local downloads to ensure compliance with network policies, firewalls, or centralized logging; toggle between enabling direct client-side saving of CSV files when supported by browsers and enforcing server-side forwarding of generated export content.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" }
+      ],
+      toolbar: ["csv"],
+      csv: {
+        forceProxy: true,
+        proxyURL: "/save"
+      }
+    });
+    </script>
+
+### csv.includeUTF8BOM `Boolean` *(default: false)*
+
+If set to `true`, a UTF-8 BOM (Byte Order Mark) will be prepended to the CSV content. This can be useful for ensuring proper character encoding when opening the file in Excel.
+
+
+<div class="meta-api-description">
+How to add UTF-8 BOM to Kendo UI Grid CSV export? Prepend a UTF-8 Byte Order Mark to CSV exports to ensure special characters, accents, and non-Latin scripts display correctly when opening the exported file in Microsoft Excel or other spreadsheet applications that require a BOM for proper UTF-8 detection, control character encoding for exported CSV files, enable Unicode compatibility in exported data.
+</div>
+
+#### Example - include UTF-8 BOM
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            includeUTF8BOM: true
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.lineSeparator `String` *(default: "\r\n")*
+
+The line separator used between rows in the CSV output.
+
+
+<div class="meta-api-description">
+How to change the line separator in Kendo UI Grid CSV export? Configure the row separator or line ending character sequence used in exported CSV files, enabling selection of CRLF, LF, or custom line breaks to match platform-specific or application-specific requirements for CSV formatting, control how rows are separated in exported CSV data, adjust line endings for compatibility with different operating systems or import tools.
+</div>
+
+#### Example - set a custom line separator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            lineSeparator: "\n"
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.maxCellLength `Number` *(default: 32767)*
+
+The maximum number of characters allowed in a single cell. Longer values will be truncated.
+
+
+<div class="meta-api-description">
+How to limit cell content length in Kendo UI Grid CSV export? Set or restrict the maximum number of characters allowed per cell in exported CSV data, truncate long text values during CSV file generation, prevent oversized cell content from causing issues in spreadsheet applications, control cell content limits for data integrity and file size management during CSV exports.
+</div>
+
+#### Example - set maximum cell length
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            maxCellLength: 100
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.maxColumns `Number` *(default: 1000)*
+
+The maximum number of columns to include in the CSV export.
+
+
+<div class="meta-api-description">
+How to limit the number of columns in Kendo UI Grid CSV export? Restrict or cap the number of columns included in exported CSV files, control which columns are exported to prevent overly wide spreadsheets, manage CSV output size by limiting column count, configure export scope to include only a specified number of grid columns.
+</div>
+
+#### Example - limit the number of exported columns
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            maxColumns: 5
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.maxRows `Number` *(default: 1000000)*
+
+The maximum number of rows to include in the CSV export.
+
+
+<div class="meta-api-description">
+How to limit the number of rows in Kendo UI Grid CSV export? Restrict or cap the number of rows included in exported CSV files, manage file size and export performance by limiting row count, prevent exporting excessively large datasets, configure export scope to include only a specified number of data rows from the grid.
+</div>
+
+#### Example - limit the number of exported rows
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            maxRows: 1000
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.preventFormulaInjection `Boolean` *(default: true)*
+
+If set to `true`, cell values starting with `=`, `+`, `-`, `@`, `\t`, or `\r` will be prefixed with a single quote (`'`) to prevent formula injection.
+
+
+<div class="meta-api-description">
+How to prevent CSV injection in Kendo UI Grid CSV export? Protect against formula injection or CSV injection attacks by sanitizing cell values that start with special characters like equals sign, plus, minus, at symbol, tab, or carriage return; enable safe CSV exports by prefixing potentially dangerous cell content with single quotes, secure exported data against DDE or formula-based attacks when opening CSV files in spreadsheet applications.
+</div>
+
+#### Example - enable formula injection prevention
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            preventFormulaInjection: true
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
+### csv.proxyURL `String`
+
+The URL of the server side proxy which will stream the file to the end user.
+
+A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.
+
+The developer is responsible for implementing the server-side proxy.
+
+The proxy will receive a POST request with the following parameters in the request body:
+
+* contentType: The MIME type of the file
+* base64: The base-64 encoded file content
+* fileName: The file name, as requested by the caller.
+
+The proxy should return the decoded file with the "Content-Disposition" header set to
+`attachment; filename="<fileName.csv>"`.
+
+
+<div class="meta-api-description">
+How to enable CSV file downloads in older browsers using Kendo UI Grid? Configure a server-side proxy URL to enable seamless download of exported CSV files in browsers that lack native file-saving capabilities like Internet Explorer 9 and earlier versions, as well as Safari. This proxy endpoint handles POST requests containing file metadata such as MIME type, base64-encoded CSV content, and desired file name, ensuring streamed file delivery with proper content disposition headers for attachment downloads.
+</div>
+
+#### Example - set the server proxy URL
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["csv"],
+        csv: {
+            proxyURL: "/save"
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/service/v2/core/products"
+                }
+            },
+            pageSize: 10
+        },
+        pageable: true
+    });
+    </script>
+
 ### contextMenu `Object|Boolean` *(default: false)*
 
 Configures the ContextMenus of the Grid.
@@ -23016,6 +23393,51 @@ If set to false, the detail template is displayed without animations.
     grid.expandRow(".k-master-row:first");
     </script>
 
+### exportSelectedToCSV
+
+Exports the selected rows to a CSV file.
+
+
+<div class="meta-api-description">
+How to export only selected rows from Kendo UI grid to CSV file? Export only the currently selected rows from a data grid to a CSV file by triggering an export function that captures and downloads the current row selection; integrate export actions with buttons or UI controls, customize exported row data through the Grid CSV configuration, automate export workflows based on user-selected records, and control exporting subsets of grid data for reporting, saving, or sharing while maintaining the selected rows when invoking the export operation.
+</div>
+
+#### Parameters
+
+##### includeHeaders `Boolean`
+
+If set to true, the exported items will include the column headers.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="selectAndExport()">Select and export</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                selectable: "multiple, row"
+            });
+
+        function selectAndExport() {
+            var grid = $("#grid").data("kendoGrid");
+              grid.select($('#grid tbody tr').slice(0,2));
+
+            grid.exportSelectedToCSV(true);
+        }
+
+     </script>
+
 ### exportSelectedToExcel
 
 Exports the selected items to an Excel file.
@@ -23825,6 +24247,40 @@ The new column width.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.resizeColumn(grid.columns[0], 200);
+    </script>
+
+### saveAsCSV
+
+Initiates the CSV export.
+
+> Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
+
+> This method does not fire the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event.
+
+
+<div class="meta-api-description">
+How to export Kendo UI grid data as a CSV file? Trigger or initiate on-demand exporting or downloading of the current grid or table data as a CSV file using a method to programmatically generate and save CSV files, enabling export of grid content, data state, or filtered views in response to user actions or events. This includes functionality to automatically start CSV file creation, handle or customize the export payload through event hooks before finalizing the file, and support user-triggered workflows such as button clicks to avoid browser popup blockers when saving or exporting grid data to CSV format.
+</div>
+
+#### Example - manually initiate CSV export
+
+    <button id="export">Export to CSV</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ],
+    });
+    $("#export").click(function(e) {
+        var grid = $("#grid").data("kendoGrid");
+        grid.saveAsCSV();
+    });
     </script>
 
 ### saveAsExcel
@@ -25790,6 +26246,71 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("columnUnstick", grid_columnUnstick);
+    </script>
+
+### csvExport
+
+Fired when the user clicks the "Export to CSV" toolbar button.
+
+
+<div class="meta-api-description">
+How to customize CSV export from Kendo UI Grid? Listen for export to CSV actions from grid data, capture events triggered by user interactions with the export button, customize or intercept CSV file generation, modify export settings, apply formatting before export, run custom export logic or alternative workflows, respond to data extraction requests, control export behavior dynamically, and handle user-initiated CSV downloads from grid interfaces.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+##### e.csv `String`
+
+The generated CSV string. Modifications of the CSV content will reflect in the output file.
+
+##### e.preventDefault `Function`
+
+If invoked the grid will not save the generated file.
+
+#### Example - subscribe to the "csvExport" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["csv"],
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ],
+      csvExport: function(e) {
+        console.log(e.csv);
+      }
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.wrapper.find(".k-grid-csv").trigger("click");
+    </script>
+
+#### Example - subscribe to the "csvExport" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["csv"],
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe"},
+        { name: "John Doe"}
+      ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("csvExport", function(e) {
+        console.log(e.csv);
+    });
+    grid.wrapper.find(".k-grid-csv").trigger("click");
     </script>
 
 ### dataBinding

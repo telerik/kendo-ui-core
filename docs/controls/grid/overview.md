@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: jQuery Grid Documentation - Data Grid Overview
-description: "Try now the Kendo UI for jQuery Data Grid component covering everything from paging, sorting, filtering, editing, and grouping to exporting to PDF and Excel."
+description: "Try now the Kendo UI for jQuery Data Grid component covering everything from paging, sorting, filtering, editing, and grouping to exporting to CSV, PDF, and Excel."
 components: ["grid"]
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
@@ -26,7 +26,7 @@ It provides options for executing data operations, such as paging, sorting, filt
 |[Grouping]({% slug grouping_kendoui_grid_widget %}) | The Grid enables you to group its data by using row templates and while paging is enabled. Additionally, you can [load groups on demand and page through the groups at the same time]({% slug grouppaging_kendoui_grid_widget %}) and [display aggregated number results]({% slug aggregates_kendoui_grid_widget %}).
 |[Paging]({% slug paging_kendoui_grid_widget %}) | You can paginate your Grid data as required and optimize the performance of the control by applying the paging operations on the server.
 |[Sorting]({% slug sorting_kendoui_grid_widget %}) | The Grid allows you to cover a set of sorting approaches by providing the single-, multi-, and mixed-sort modes. 
-|Export options | The Grid enables you to export it to [Excel]({% slug exporting_excel_kendoui_grid_widget %}) and [PDF]({% slug exporting_pdf_kendoui_grid_widget %}) documents, and also delivers options to [print only its contents]({% slug printing_kendoui_grid %}) and ignore the rest of the page.
+|Export options | The Grid enables you to export it to [CSV]({% slug exporting_csv_kendoui_grid_widget %}), [Excel]({% slug exporting_excel_kendoui_grid_widget %}), and [PDF]({% slug exporting_pdf_kendoui_grid_widget %}) documents, and also delivers options to [print only its contents]({% slug printing_kendoui_grid %}) and ignore the rest of the page.
 |[Column enhancements]({% slug column_widths_kendoui_grid_widget %}) | The Grid provides various options to control its column behavior by delivering features such as [locked]({% slug locked_columns_kendoui_grid_widget %}) and [sticky columns]({% slug sticky_columns_kendoui_grid_widget %}), [built-in column operations]({% slug columnmenu_kendoui_grid_widget %}), [multi-column headers]({% slug multicolumn_headers_kendoui_grid_widget %}) as well as supporting [column resizing]({% slug column_resizing_kendoui_grid_widget %}) and [column reordering]({% slug reordercols_kendoui_grid_widget %}) actions.  
 |[State persistence]({% slug persiststate_kendoui_grid_widget %}) | You persist the state of the Grid if saving custom user settings and restoring them afterwards is required.
 |[Hierarchy]({% slug hierarchy_kendoui_grid_widget %}) | The Grid also enables you to visualize the relations between parent and child records and display the table data in a hierarchical fashion.
