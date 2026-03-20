@@ -227,6 +227,18 @@ Use the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event to inspect
 * When exporting all pages with large remote datasets, the browser may become unresponsive.
 * Older browsers may require a server proxy. Configure [`csv.proxyURL`](/api/javascript/ui/grid/configuration/csv.proxyurl) and [`csv.forceProxy`](/api/javascript/ui/grid/configuration/csv.forceproxy) when needed.
 * The [`saveAsCSV`](/api/javascript/ui/grid/methods/saveascsv) method does not trigger the [`csvExport`](/api/javascript/ui/grid/events/csvexport) event.
+* The Grid CSV export does not support exporting footer rows.
+
+If you need footer totals in the exported file, append a total row to the flat data before generating the CSV.
+
+```javascript
+// Example structure of flat data with totals included
+const rows = [
+    { product: "A", amount: 10 },
+    { product: "B", amount: 15 },
+    { product: "Total", amount: 25 }
+];
+```
 
 ## See Also
 

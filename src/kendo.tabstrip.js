@@ -1244,6 +1244,8 @@ export const __meta__ = {
                                 kendo.applyStylesFromKendoAttributes(tabstripContent, ["display"]);
                                 return tabstripContent;
                             }
+
+                            return $("<div class='" + CONTENT + "'></div>");
                         });
             } else {
                 if (typeof tab == "string" && tab[0] != "<") {
