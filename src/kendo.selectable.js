@@ -451,7 +451,7 @@ export const __meta__ = {
                  toSelect.addClass(selectedClass);
 
                 if (this.options.aria) {
-                    toSelect.attr(ARIASELECTED, true);
+                    toSelect.not('[role="none"]').attr(ARIASELECTED, true);
                 }
             }
         },
@@ -471,7 +471,7 @@ export const __meta__ = {
             element.removeClass(this.options.selectedClass || SELECTED).removeAttr(rangeSelectedAttr);
 
             if (this.options.aria) {
-                element.attr(ARIASELECTED, false);
+                element.not('[role="none"]').attr(ARIASELECTED, false);
             }
 
             return element;
@@ -658,7 +658,8 @@ export const __meta__ = {
                 return this._start;
             }
 
-            element.addClass(SELECTED + " " + RANGESTART).attr(ARIASELECTED, true);
+            element.addClass(SELECTED + " " + RANGESTART);
+            element.not('[role="none"]').attr(ARIASELECTED, true);
 
             if (!preventFlagUpdate) {
                 this._start = element;
@@ -670,7 +671,8 @@ export const __meta__ = {
                 return this._start;
             }
 
-            element.addClass(SELECTED + " " + RANGEEND).attr(ARIASELECTED, true);
+            element.addClass(SELECTED + " " + RANGEEND);
+            element.not('[role="none"]').attr(ARIASELECTED, true);
 
             if (!preventFlagUpdate) {
                 this._end = element;
@@ -681,7 +683,8 @@ export const __meta__ = {
             let tables = this.element.find("table"),
                 options = this.options;
 
-            elements.addClass(MID).attr(ARIASELECTED, true);
+            elements.addClass(MID);
+            elements.not('[role="none"]').attr(ARIASELECTED, true);
             tables.each(function() {
                 let that = $(this);
                 let lastCell = that.find(options.cellSelectorValid).last();
