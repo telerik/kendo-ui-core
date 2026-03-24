@@ -7636,6 +7636,7 @@ declare namespace kendo.ui {
         values?: any;
         menu?: boolean | undefined;
         columnMenu?: boolean | undefined;
+        editorOptions?: any;
     }
 
     interface GridEditable {
@@ -7847,10 +7848,10 @@ declare namespace kendo.ui {
 
     interface GridSelectableOptions {
         dragToSelect?: boolean | undefined;
-        mode: string | undefined;
-        ignoreOverlapped: boolean | undefined;
-        cellAggregates: boolean | any[] | undefined;
-        checkboxSelection: boolean | undefined;
+        mode?: string | undefined;
+        ignoreOverlapped?: boolean | undefined;
+        cellAggregates?: boolean | any[] | undefined;
+        checkboxSelection?: boolean | undefined;
     }
 
     interface GridScrollable {
@@ -11652,6 +11653,56 @@ declare namespace kendo.ui {
         page?: number | undefined;
     }
 
+    class SegmentedControl extends kendo.ui.Widget {
+        static fn: SegmentedControl;
+
+        options: SegmentedControlOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): SegmentedControl;
+
+        constructor(element: Element, options?: SegmentedControlOptions);
+
+        destroy(): void;
+        enable(enable?: boolean): void;
+        focus(item?: number | JQuery): void;
+        item(index: number): JQuery;
+        items(): JQuery;
+        select(value?: string): string | undefined;
+        setOptions(options: SegmentedControlOptions): void;
+    }
+
+    interface SegmentedControlItem {
+        enabled?: boolean | undefined;
+        icon?: string | undefined;
+        iconClass?: string | undefined;
+        text?: string | undefined;
+        value?: string | undefined;
+    }
+
+    interface SegmentedControlOptions {
+        name?: string | undefined;
+        enabled?: boolean | undefined;
+        items?: SegmentedControlItem[] | undefined;
+        layoutMode?: string | undefined;
+        selectedValue?: string | undefined;
+        size?: string | undefined;
+        change?(e: SegmentedControlChangeEvent): void;
+    }
+
+    interface SegmentedControlEvent {
+        sender: SegmentedControl;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface SegmentedControlChangeEvent extends SegmentedControlEvent {
+        value?: string | undefined;
+        item?: SegmentedControlItem | undefined;
+    }
+
     class Signature extends kendo.ui.Widget {
         static fn: Signature;
 
@@ -11785,6 +11836,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         decreaseButtonTitle?: string | undefined;
         dragHandleTitle?: string | undefined;
+        enabled?: boolean | undefined;
         increaseButtonTitle?: string | undefined;
         largeStep?: number | undefined;
         max?: number | undefined;
@@ -27244,6 +27296,10 @@ interface JQuery {
     kendoScrollView(): JQuery;
     kendoScrollView(options: kendo.ui.ScrollViewOptions): JQuery;
     data(key: "kendoScrollView"): kendo.ui.ScrollView | undefined;
+
+    kendoSegmentedControl(): JQuery;
+    kendoSegmentedControl(options: kendo.ui.SegmentedControlOptions): JQuery;
+    data(key: "kendoSegmentedControl"): kendo.ui.SegmentedControl | undefined;
 
     kendoSignature(): JQuery;
     kendoSignature(options: kendo.ui.SignatureOptions): JQuery;

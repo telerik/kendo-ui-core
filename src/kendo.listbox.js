@@ -558,8 +558,12 @@ export const __meta__ = {
         },
 
         _clear: function() {
-            this.draggedElement.removeClass(DRAGGEDCLASS);
-            this.placeholder.remove();
+            if (this.draggedElement) {
+                this.draggedElement.removeClass(DRAGGEDCLASS);
+            }
+            if (this.placeholder) {
+                this.placeholder.remove();
+            }
         },
 
         _findElementUnderCursor: function(e) {
