@@ -196,6 +196,145 @@ How do I control automatic message collapsing in Kendo UI Chat? Enable or disabl
     });
     </script>
 
+### attachmentLayout `String` _(default: "list")_
+
+Sets the default layout mode for rich attachments (cards, images) within messages. Individual messages can override this setting via their `attachmentLayout` data property.
+
+<div class="meta-api-description">
+How do I change the layout of rich attachments in Kendo UI Chat messages? Configure or switch between list and carousel display modes for rich attachment cards, images, and embedded content within chat messages, enabling horizontal scrolling carousels or vertical stacked lists for attachment rendering, controlling how multiple attachments are arranged, displayed, or presented within individual messages or across the chat interface for optimal visual layout and interactive browsing of embedded rich content items.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Here are your options:",
+            authorId: "bot",
+            authorName: "Bot",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            attachments: [
+                { contentType: "card", title: "Option A", subtitle: "First choice" },
+                { contentType: "card", title: "Option B", subtitle: "Second choice" }
+            ]
+        }
+    ];
+
+    $("#chat").kendoChat({
+        attachmentLayout: "carousel",
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### attachmentLayoutField `String` _(default: "attachmentLayout")_
+
+The field of the message data item that provides the attachment layout mode for that specific message. Allows per-message override of the global `attachmentLayout` setting.
+
+<div class="meta-api-description">
+How do I map a custom data field for per-message attachment layout in Kendo UI Chat? Configure the field name used in message data objects to specify per-message attachment layout modes, enabling different attachment display layouts for individual messages by mapping a custom or renamed data property for attachment arrangement, supporting dynamic or heterogeneous attachment layouts within the same chat conversation.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Cards with custom layout field:",
+            authorId: "bot",
+            authorName: "Bot",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            attachments: [
+                { contentType: "card", title: "Item 1" },
+                { contentType: "card", title: "Item 2" }
+            ],
+            cardDisplayMode: "carousel"
+        }
+    ];
+
+    $("#chat").kendoChat({
+        attachmentLayoutField: "cardDisplayMode",
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### attachmentsField `String` _(default: "attachments")_
+
+The field of the message data item that provides the rich attachments array. Each attachment object can contain `contentType`, `title`, `subtitle`, `thumbnailUrl`, and `actions` properties.
+
+<div class="meta-api-description">
+How do I map a custom data field for message attachments in Kendo UI Chat? Configure the field name used in message data objects to provide rich attachment arrays like cards, images, or embedded content, enabling integration with backend APIs that use different property names for message attachments, mapping custom data structures for rich content display within chat messages.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Message with custom attachments field:",
+            authorId: "bot",
+            authorName: "Bot",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            cards: [
+                { contentType: "card", title: "Custom Field Card", subtitle: "Mapped via attachmentsField" }
+            ]
+        }
+    ];
+
+    $("#chat").kendoChat({
+        attachmentsField: "cards",
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### attachmentTemplate `Function` _(default: null)_
+
+The template used to render individual attachments within messages. Receives the attachment data object and should return an HTML string. When not set, the default attachment rendering is used.
+
+The function receives the attachment object with properties such as `title`, `subtitle`, `image`, `contentType`, and `content`.
+
+<div class="meta-api-description">
+How do I customize attachment rendering in Kendo UI Chat? Override the default attachment template to control how individual file attachments, images, and media items appear within chat messages, providing full flexibility to customize attachment cards, previews, thumbnails, file type indicators, download links, and media players for each attachment data item.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Check out this file:",
+            authorId: "user1",
+            authorName: "John",
+            timestamp: new Date(),
+            attachments: [
+                { title: "Report.pdf", contentType: "application/pdf", content: "#" }
+            ]
+        }
+    ];
+
+    $("#chat").kendoChat({
+        attachmentTemplate: function(attachment) {
+            return '<div class="custom-attachment">' +
+                   '<span class="k-icon k-i-file"></span> ' +
+                   '<a href="' + attachment.content + '">' + attachment.title + '</a>' +
+                   '</div>';
+        },
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
 ### autoBind `Boolean` _(default: true)_
 
 Controls whether the Chat will automatically fetch data from the data source when initialized. When set to false, you must manually call the data source's fetch() method.
@@ -405,6 +544,128 @@ How do I configure the author name field in Kendo UI Chat? Specify or configure 
     });
     </script>
 
+### authorMessageSettings `Object` _(default: null)_
+
+User-specific message settings applied to messages sent by the current user (author). These settings override the global display options like `showAvatar`, `showUsername`, and `messageWidthMode` for author messages only. See also [`receiverMessageSettings`](#configuration-receiverMessageSettings).
+
+The object accepts the following properties:
+
+* `showAvatar` - `Boolean` - Whether to show the avatar for author messages.
+* `showUsername` - `Boolean` - Whether to show the username for author messages.
+* `messageWidthMode` - `String` - Message width mode: `"standard"` or `"full"`.
+* `allowMessageCollapse` - `Boolean` - Whether author messages can be collapsed.
+* `messageTemplate` - `Function` - Template override for author messages. Receives the same arguments as [`messageTemplate`](#configuration-messageTemplate).
+* `messageContentTemplate` - `Function` - Content template override for author messages. Receives the current message object.
+* `enableFileActions` - `Boolean` - Whether file actions are enabled for author messages.
+* `enableContextMenuActions` - `Boolean` - Whether context menu actions are enabled for author messages.
+* `messageToolbarActions` - `Array` - Toolbar actions specific to author messages.
+* `messageActions` - `Array` - Context menu actions specific to author messages.
+
+<div class="meta-api-description">
+How do I customize the appearance and behavior of my own messages in Kendo UI Chat? Configure per-user message settings for the current user's messages to control avatar visibility, username display, message width, toolbar actions, and context menu actions independently from receiver messages, enabling WhatsApp-style layouts where sender messages hide avatars and usernames while receiver messages show them, or configuring different toolbar actions for own messages versus received messages.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Author message without avatar or username.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "Receiver message with avatar and username.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        authorId: "user1",
+        authorMessageSettings: {
+            showAvatar: false,
+            showUsername: false,
+            messageContentTemplate: function(message) {
+                return '<div style="background:#e3f2fd;padding:8px;border-radius:12px;">' +
+                       kendo.htmlEncode(message.text) + '</div>';
+            }
+        },
+        dataSource: messagesData
+    });
+    </script>
+
+### authorMessageSettings.showAvatar `Boolean`
+
+Whether to show the avatar for author messages.
+
+### authorMessageSettings.showUsername `Boolean`
+
+Whether to show the username for author messages.
+
+### authorMessageSettings.messageWidthMode `String`
+
+The width mode to apply to author messages. Supported values are `"standard"` and `"full"`.
+
+### authorMessageSettings.allowMessageCollapse `Boolean`
+
+Whether long author messages can be collapsed.
+
+### authorMessageSettings.messageTemplate `Function`
+
+The template used to render author messages. Receives the same arguments as [`messageTemplate`](#configuration-messageTemplate).
+
+### authorMessageSettings.messageContentTemplate `Function`
+
+A content template override for author messages. Receives the current message object.
+
+### authorMessageSettings.enableFileActions `Boolean`
+
+Whether file actions are enabled for author messages.
+
+### authorMessageSettings.enableContextMenuActions `Boolean`
+
+Whether context menu actions are enabled for author messages.
+
+### authorMessageSettings.messageToolbarActions `Array`
+
+Defines the collection of toolbar actions rendered for author messages.
+
+### authorMessageSettings.messageToolbarActions.icon `String`
+
+Defines the icon class for the toolbar action.
+
+### authorMessageSettings.messageToolbarActions.text `String`
+
+Defines the text for the toolbar action.
+
+### authorMessageSettings.messageToolbarActions.name `String`
+
+Defines the name identifier for the toolbar action.
+
+### authorMessageSettings.messageActions `Array`
+
+Defines the collection of context menu actions rendered for author messages.
+
+### authorMessageSettings.messageActions.icon `String`
+
+Defines the icon class for the context menu action.
+
+### authorMessageSettings.messageActions.name `String`
+
+Defines the name identifier for the context menu action.
+
+### authorMessageSettings.messageActions.text `String`
+
+Defines the display text for the context menu action.
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source configuration or instance that contains the Chat messages. The data source should contain message objects with fields for text, author information, timestamps, and other message properties.
@@ -485,6 +746,36 @@ How do I set the direction of text in Kendo UI Chat to support languages with di
 
     $("#chat").kendoChat({
         dir: "rtl",
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### failedField `String` _(default: "failed")_
+
+The field of the message data item that provides the failed flag. When `true`, the message is rendered with a failed state indicator and a retry button.
+
+<div class="meta-api-description">
+How do I configure the data field name for failed message status in Kendo UI Chat? Map a custom data property to indicate whether a chat message failed to send, enabling custom field names for message failure state, controlling how failed messages are detected and displayed with retry buttons, integrating with backend APIs that use different property names for message delivery failure flags.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message failed to send.",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            sendError: true
+        }
+    ];
+
+    $("#chat").kendoChat({
+        failedField: "sendError",
         authorId: "user1",
         dataSource: messagesData
     });
@@ -845,6 +1136,40 @@ How do I configure Kendo UI chat to handle file attachments? Configure the field
     });
     </script>
 
+### filesLayoutMode `String` _(default: "vertical")_
+
+Controls the layout mode for file attachments within messages. Available modes are `"vertical"` (stacked), `"horizontal"` (side-by-side with scrolling), and `"wrap"` (wrapping flow layout).
+
+<div class="meta-api-description">
+How do I change the layout of file attachments in Kendo UI Chat? Configure the arrangement and display mode for file attachments within chat messages, switching between vertical stacking, horizontal scrolling, or wrapping flow layouts for file attachment boxes, controlling how multiple files are presented visually within message bubbles for optimal space usage and user experience.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Files in horizontal layout:",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            files: [
+                { name: "report.pdf", size: 245760, icon: "file-pdf" },
+                { name: "data.csv", size: 12345, icon: "file-csv" },
+                { name: "image.png", size: 500000, icon: "image" }
+            ]
+        }
+    ];
+
+    $("#chat").kendoChat({
+        filesLayoutMode: "horizontal",
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
 ### filesTemplate `Function`
 
 The template that is used to render the files in the message box when selected.
@@ -928,6 +1253,40 @@ How do I customize the top section of the Kendo UI chat interface with header it
             }
         ],
         authorId: "user2",
+        dataSource: messagesData
+    });
+    </script>
+
+### headerTemplate `Function` _(default: null)_
+
+A custom template function for rendering the chat header. When set, this overrides the `headerItems` configuration and provides full control over the header content. The function should return an HTML string.
+
+<div class="meta-api-description">
+How do I create a fully custom header for Kendo UI Chat? Replace the default header items rendering with a custom HTML template function for complete control over the chat header area, enabling custom layouts with avatars, status indicators, titles, or any HTML content in the header bar above the message list, overriding the standard AppBar-based headerItems approach with a template-driven custom header.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "The header above is rendered with a custom template.",
+            authorId: "bot",
+            authorName: "Support Bot",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        headerTemplate: function() {
+            return '<div style="display:flex;align-items:center;gap:10px;padding:8px 16px;">' +
+                   '<strong>Custom Header</strong>' +
+                   '<span style="color:green;">Online</span>' +
+                   '</div>';
+        },
+        authorId: "user1",
         dataSource: messagesData
     });
     </script>
@@ -1081,6 +1440,35 @@ How do I configure the typing field in my Kendo UI Chat component? Configure or 
 
     $("#chat").kendoChat({
         isTypingField: "typing",
+        dataSource: messagesData
+    });
+    </script>
+
+### loading `Boolean` _(default: false)_
+
+Sets the initial loading state of the Chat component. When `true`, the send button displays a loading/stop indicator instead of the send icon. This is useful for AI chat applications where generating responses takes time. See also the [`loading`](#methods-loading) method for toggling this state at runtime.
+
+<div class="meta-api-description">
+How do I set the initial loading or generating state of the Kendo UI Chat send button? Configure the chat component to start in a loading, generating, or busy state with the send button showing a progress indicator or stop button, useful for AI chatbot interfaces, streaming responses, or async message processing where the initial state should indicate ongoing generation or processing activity.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Generating response...",
+            authorId: "bot",
+            authorName: "AI Bot",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        loading: true,
+        authorId: "user1",
         dataSource: messagesData
     });
     </script>
@@ -1799,9 +2187,9 @@ How do I customize the button text for the file attachment menu in Kendo UI Chat
     });
     </script>
 
-### messageBox `Object` _(default: null)_
+### messageBox `Object` _(default: { mode: "multi", maxTextAreaHeight: 110 })_
 
-Configures the message input box (PromptBox) settings. Allows customization of the input mode, rows, height, and nested file select button settings.
+Configures the built-in message input box (PromptBox). Use this option to customize the default input mode, row count, and auto-grow height when [`messageBoxTemplate`](#configuration-messageBoxTemplate) is not set.
 
 #### Example
 
@@ -1842,9 +2230,9 @@ The input mode for the message box:
     });
     </script>
 
-### messageBox.rows `Number` _(default: 3)_
+### messageBox.rows `Number` _(default: 1)_
 
-The initial number of visible rows when mode is "multi".
+The initial number of visible rows for the built-in multiline input.
 
 #### Example
 
@@ -1859,7 +2247,7 @@ The initial number of visible rows when mode is "multi".
     });
     </script>
 
-### messageBox.maxTextAreaHeight `Number` _(default: 100)_
+### messageBox.maxTextAreaHeight `Number` _(default: 110)_
 
 The maximum height of the textarea in pixels. When set, the textarea will stop expanding and show a scrollbar.
 
@@ -1876,9 +2264,231 @@ The maximum height of the textarea in pixels. When set, the textarea will stop e
     });
     </script>
 
+### messageContentTemplate `Function` _(default: null)_
+
+A custom template function for rendering the content area inside message bubbles. This template controls only the text/content portion of messages, not the entire message group structure. When set, it is used for both author and receiver messages unless overridden by `authorMessageSettings.messageContentTemplate` or `receiverMessageSettings.messageContentTemplate`.
+
+<div class="meta-api-description">
+How do I customize the content inside chat message bubbles in Kendo UI Chat? Override the default message text rendering with a custom template function that controls how message content appears inside bubbles, enabling custom formatting, styling, markdown rendering, or HTML transformations of message text while preserving the outer message structure including avatar, username, and timestamp.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This uses a custom content template.",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "So does this message.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageContentTemplate: function(message) {
+            return '<div style="border-left:3px solid #1a73e8;padding-left:8px;">' +
+                   '<em>' + kendo.htmlEncode(message.text) + '</em>' +
+                   '</div>';
+        },
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageStatusSettings `Object` _(default: null)_
+
+Custom settings for message status display, allowing you to configure icons, text, and CSS classes for each message delivery status. The object should be a mapping from status values (`"sent"`, `"delivered"`, `"seen"`, `"failed"`) to settings objects.
+
+Each status settings object accepts:
+
+* `icon` - `String` - Font icon name to display.
+* `text` - `String` - Text label for the status.
+* `cssClass` - `String` - Additional CSS class to apply to the status element.
+
+<div class="meta-api-description">
+How do I customize message delivery status icons and text in Kendo UI Chat? Configure custom icons, labels, CSS classes, and visual indicators for message delivery states like sent, delivered, seen, and failed, enabling branded or application-specific status rendering with font icons, custom text labels, and per-status styling for message read receipts and delivery confirmations in chat interfaces.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Sent message",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            status: "sent"
+        },
+        {
+            id: 2,
+            text: "Delivered message",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 1),
+            status: "delivered"
+        },
+        {
+            id: 3,
+            text: "Seen message",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 2),
+            status: "seen"
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageStatusSettings: {
+            sent: { icon: "check", text: "Sent" },
+            delivered: { icon: "check-circle", text: "Delivered" },
+            seen: { icon: "eye", text: "Seen", cssClass: "k-text-primary" },
+            failed: { icon: "x-circle", text: "Failed", cssClass: "k-text-error" }
+        },
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageStatusSettings.sent `Object`
+
+Configures the settings object used when the message status is `"sent"`.
+
+### messageStatusSettings.sent.icon `String`
+
+The font icon name to display for the `"sent"` status.
+
+### messageStatusSettings.sent.text `String`
+
+The text label to display for the `"sent"` status.
+
+### messageStatusSettings.sent.cssClass `String`
+
+An additional CSS class applied to the `"sent"` status element.
+
+### messageStatusSettings.delivered `Object`
+
+Configures the settings object used when the message status is `"delivered"`.
+
+### messageStatusSettings.delivered.icon `String`
+
+The font icon name to display for the `"delivered"` status.
+
+### messageStatusSettings.delivered.text `String`
+
+The text label to display for the `"delivered"` status.
+
+### messageStatusSettings.delivered.cssClass `String`
+
+An additional CSS class applied to the `"delivered"` status element.
+
+### messageStatusSettings.seen `Object`
+
+Configures the settings object used when the message status is `"seen"`.
+
+### messageStatusSettings.seen.icon `String`
+
+The font icon name to display for the `"seen"` status.
+
+### messageStatusSettings.seen.text `String`
+
+The text label to display for the `"seen"` status.
+
+### messageStatusSettings.seen.cssClass `String`
+
+An additional CSS class applied to the `"seen"` status element.
+
+### messageStatusSettings.failed `Object`
+
+Configures the settings object used when the message status is `"failed"`.
+
+### messageStatusSettings.failed.icon `String`
+
+The font icon name to display for the `"failed"` status.
+
+### messageStatusSettings.failed.text `String`
+
+The text label to display for the `"failed"` status.
+
+### messageStatusSettings.failed.cssClass `String`
+
+An additional CSS class applied to the `"failed"` status element.
+
+### messageStatusTemplate `Function` _(default: null)_
+
+A custom template function for rendering message status indicators. Receives a context object with `status` (the status string) and `message` (the message object). When set, this overrides the default status rendering and `messageStatusSettings`.
+
+<div class="meta-api-description">
+How do I create a custom message status display template in Kendo UI Chat? Override the default message delivery status rendering with a custom template function that receives the status value and message data, enabling fully custom HTML rendering for sent, delivered, seen, and failed status indicators with dynamic styling, animations, or complex status displays.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Message with custom status template",
+            authorId: "user1",
+            authorName: "John Doe",
+            timestamp: new Date(2026, 0, 1, 9, 0),
+            status: "seen"
+        }
+    ];
+
+    $("#chat").kendoChat({
+        messageStatusTemplate: function(ctx) {
+            var colors = { sent: "#999", delivered: "#4CAF50", seen: "#2196F3", failed: "#f44336" };
+            return '<span style="color:' + (colors[ctx.status] || "#999") + '">' +
+                   '[' + ctx.status.toUpperCase() + ']</span>';
+        },
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### messageBoxTemplate `Function` _(default: null)_
+
+The template used to render the message input area at the bottom of the Chat. The function receives no arguments and should return an HTML string for the custom message box markup.
+
+When using a custom template, the first `textarea` or supported text input inside the template is used as the message input. To enable send button behavior, add an element with the `ref-chat-message-box-send-button` attribute. If the template contains `input[type='file']` elements, they participate in the file selection flow.
+
+<div class="meta-api-description">
+How do I customize the message input box in Kendo UI Chat? Override the default message composition area template to control the layout of the input region while still using the Chat component's supported input, send-button, and file-input hooks for composing and submitting messages.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        messageBoxTemplate: function() {
+            return '<div class="custom-message-box" style="display:flex;gap:8px;padding:10px;">' +
+                   '<textarea class="k-input-inner" placeholder="Type here..." rows="1" style="flex:1;resize:none;"></textarea>' +
+                   '<button ref-chat-message-box-send-button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-primary">Send</button>' +
+                   '</div>';
+        },
+        authorId: "user1"
+    });
+    </script>
+
 ### messageTemplate `Function`
 
-The template used to render individual messages.
+The template used to render individual messages. When set, it is used for both author and receiver messages unless overridden by `authorMessageSettings.messageTemplate` or `receiverMessageSettings.messageTemplate`.
+
+The function receives `message`, `replyMessage`, `downloadAll`, `messages`, `expandable`, `messageTimeFormat`, `skipSanitization`, and `statusTemplate`.
 
 <div class="meta-api-description">
 How can I customize the appearance of messages in Kendo UI Chat? Customize message rendering by setting templates or layouts for chat messages, enabling control over how individual messages display avatars, timestamps, attachments, text, and other content elements; configure message appearance, structure, styling, or formatting within the chat interface to create personalized, dynamic message presentations or custom components for chat bubbles, message items, or conversation flows.
@@ -1908,9 +2518,9 @@ How can I customize the appearance of messages in Kendo UI Chat? Customize messa
     ];
 
     $("#chat").kendoChat({
-        messageTemplate: function(message, replyMessage, downloadAll, messages, expandable, messageTimeFormat) {
+        messageTemplate: function(message, replyMessage, downloadAll, messages, expandable, messageTimeFormat, skipSanitization, statusTemplate) {
             return "<div class='custom-message'>" +
-                   "<div class='custom-message-text'>" + message.text + "</div>" +
+                   "<div class='custom-message-text'>" + kendo.htmlEncode(message.text) + "</div>" +
                    "<div class='custom-message-time'>" + kendo.toString(message.timestamp, "HH:mm") + "</div>" +
                    "</div>";
         },
@@ -2151,6 +2761,30 @@ How can I configure chat messages to expand beyond standard bubble sizes in a Ke
     });
     </script>
 
+### noDataTemplate `Function` _(default: null)_
+
+A custom template function for rendering an empty state when the chat has no messages. When set, the template output is displayed in place of the empty message list area, providing a visual cue that the conversation has not started yet.
+
+<div class="meta-api-description">
+How do I show a custom empty state or placeholder when there are no messages in Kendo UI Chat? Configure a custom template for the empty chat state, no data state, or placeholder content when the message list is empty, enabling display of welcome messages, onboarding instructions, icons, or call-to-action prompts when no conversation messages exist in the chat interface.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        noDataTemplate: function() {
+            return '<div style="text-align:center;padding:40px;color:#999;">' +
+                   '<p style="font-size:18px;">No messages yet</p>' +
+                   '<p>Start a conversation by typing below</p>' +
+                   '</div>';
+        },
+        authorId: "user1",
+        dataSource: { data: [] }
+    });
+    </script>
+
 ### scrollToBottomButton `Boolean` _(default: true)_
 
 Shows or hides the scroll-to-bottom button that appears when the user scrolls up in the message list.
@@ -2162,6 +2796,82 @@ Shows or hides the scroll-to-bottom button that appears when the user scrolls up
     $("#chat").kendoChat({
         scrollToBottomButton: false,
         authorId: "user"
+    });
+    </script>
+
+### showAvatar `Boolean` _(default: true)_
+
+Controls whether avatars are displayed next to messages. This is a global setting that can be overridden per-user via `authorMessageSettings` and `receiverMessageSettings`.
+
+<div class="meta-api-description">
+How do I hide or show avatars in Kendo UI Chat messages? Toggle the display of user avatar images next to chat messages globally, enabling or disabling profile pictures, user icons, or author images for all messages in the chat interface, controlling avatar visibility for cleaner or more compact message layouts.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message has no avatar displayed.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "Neither does this one.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        showAvatar: false,
+        authorId: "user1",
+        dataSource: messagesData
+    });
+    </script>
+
+### showUsername `Boolean` _(default: true)_
+
+Controls whether usernames are displayed above messages. This is a global setting that can be overridden per-user via `authorMessageSettings` and `receiverMessageSettings`.
+
+<div class="meta-api-description">
+How do I hide or show usernames in Kendo UI Chat messages? Toggle the display of sender names, author labels, or usernames above chat messages globally, enabling or disabling name labels for a cleaner messaging interface, controlling username visibility for all messages to create compact or anonymous chat layouts.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message has no username displayed above it.",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "Neither does this one.",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        showUsername: false,
+        authorId: "user1",
+        dataSource: messagesData
     });
     </script>
 
@@ -2240,6 +2950,133 @@ How do I configure the field that identifies which message a reply corresponds t
         dataSource: messagesData
     });
     </script>
+
+### receiverMessageSettings `Object` _(default: null)_
+
+User-specific message settings applied to messages received from other users. These settings override the global display options like `showAvatar`, `showUsername`, and `messageWidthMode` for receiver messages only. See also [`authorMessageSettings`](#configuration-authorMessageSettings).
+
+The object accepts the following properties:
+
+* `showAvatar` - `Boolean` - Whether to show the avatar for receiver messages.
+* `showUsername` - `Boolean` - Whether to show the username for receiver messages.
+* `messageWidthMode` - `String` - Message width mode: `"standard"` or `"full"`.
+* `allowMessageCollapse` - `Boolean` - Whether receiver messages can be collapsed.
+* `messageTemplate` - `Function` - Template override for receiver messages. Receives the same arguments as [`messageTemplate`](#configuration-messageTemplate).
+* `messageContentTemplate` - `Function` - Content template override for receiver messages. Receives the current message object.
+* `enableFileActions` - `Boolean` - Whether file actions are enabled for receiver messages.
+* `enableContextMenuActions` - `Boolean` - Whether context menu actions are enabled for receiver messages.
+* `messageToolbarActions` - `Array` - Toolbar actions specific to receiver messages.
+* `messageActions` - `Array` - Context menu actions specific to receiver messages.
+
+<div class="meta-api-description">
+How do I customize the appearance and behavior of received messages in Kendo UI Chat? Configure per-user message settings for messages from other participants to control avatar visibility, username display, message width, toolbar actions, and context menu actions independently from the current user's own messages, enabling asymmetric chat layouts where receiver messages have different styling, actions, or display options compared to author messages.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Author message (standard width).",
+            authorId: "user1",
+            authorName: "John Doe",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "Receiver message (full width, with avatar and username).",
+            authorId: "user2",
+            authorName: "Jane Smith",
+            authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        authorId: "user1",
+        receiverMessageSettings: {
+            showAvatar: true,
+            showUsername: true,
+            messageWidthMode: "full",
+            messageTemplate: function(message) {
+                return '<div style="display:flex;gap:8px;max-width:70%;">' +
+                       '<img src="' + (message.author.imageUrl || '') + '" style="width:32px;height:32px;border-radius:50%;" />' +
+                       '<div>' +
+                       '<small style="color:#999;">' + kendo.htmlEncode(message.author.name || "") + '</small>' +
+                       '<div style="background:#f0f0f0;padding:10px;border-radius:0 16px 16px 16px;">' +
+                       kendo.htmlEncode(message.text) + '</div></div></div>';
+            }
+        },
+        dataSource: messagesData
+    });
+    </script>
+
+### receiverMessageSettings.showAvatar `Boolean`
+
+Whether to show the avatar for receiver messages.
+
+### receiverMessageSettings.showUsername `Boolean`
+
+Whether to show the username for receiver messages.
+
+### receiverMessageSettings.messageWidthMode `String`
+
+The width mode to apply to receiver messages. Supported values are `"standard"` and `"full"`.
+
+### receiverMessageSettings.allowMessageCollapse `Boolean`
+
+Whether long receiver messages can be collapsed.
+
+### receiverMessageSettings.messageTemplate `Function`
+
+The template used to render receiver messages. Receives the same arguments as [`messageTemplate`](#configuration-messageTemplate).
+
+### receiverMessageSettings.messageContentTemplate `Function`
+
+A content template override for receiver messages. Receives the current message object.
+
+### receiverMessageSettings.enableFileActions `Boolean`
+
+Whether file actions are enabled for receiver messages.
+
+### receiverMessageSettings.enableContextMenuActions `Boolean`
+
+Whether context menu actions are enabled for receiver messages.
+
+### receiverMessageSettings.messageToolbarActions `Array`
+
+Defines the collection of toolbar actions rendered for receiver messages.
+
+### receiverMessageSettings.messageToolbarActions.icon `String`
+
+Defines the icon class for the toolbar action.
+
+### receiverMessageSettings.messageToolbarActions.text `String`
+
+Defines the text for the toolbar action.
+
+### receiverMessageSettings.messageToolbarActions.name `String`
+
+Defines the name identifier for the toolbar action.
+
+### receiverMessageSettings.messageActions `Array`
+
+Defines the collection of context menu actions rendered for receiver messages.
+
+### receiverMessageSettings.messageActions.icon `String`
+
+Defines the icon class for the context menu action.
+
+### receiverMessageSettings.messageActions.name `String`
+
+Defines the name identifier for the context menu action.
+
+### receiverMessageSettings.messageActions.text `String`
+
+Defines the display text for the context menu action.
 
 ### speechToText `Boolean|Object` _(default: true)_
 
@@ -2628,6 +3465,32 @@ How to customize the text displayed for suggestion items in Kendo UI chat interf
     });
     </script>
 
+### suggestionsBehavior `String` _(default: "send")_
+
+Controls what happens when a user selects a message suggestion. Supported values:
+
+- `"send"`: The suggestion text is immediately sent as a message.
+- `"insert"`: The suggestion text is inserted into the message box input, allowing the user to edit it before sending.
+
+<div class="meta-api-description">
+How do I change the behavior when a user clicks a suggestion in Kendo UI Chat? Control or configure what happens when a chat suggestion is selected or clicked, such as immediately sending the suggested text as a message or inserting it into the message input box for editing, allowing customization of the suggestion interaction flow to support both quick-reply and editable-suggestion use cases in chat interfaces.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        suggestionsBehavior: "insert",
+        suggestions: [
+            { text: "Option 1" },
+            { text: "Option 2" },
+            { text: "Option 3" }
+        ],
+        authorId: "user"
+    });
+    </script>
+
 ### suggestionsLayoutMode `String` _(default: "scroll")_
 
 Layout mode for message box suggestions. Supported values:
@@ -2832,6 +3695,35 @@ How do I configure the chat interface to extract message content from my data ar
     });
     </script>
 
+### statusField `String` _(default: "status")_
+
+Specifies the field name in the data source from which the message status will be read. The status describes the delivery state of the message (e.g. `"Sending"`, `"Sent"`, `"Delivered"`, `"Seen"`, `"Failed"`). See also [`messageStatusSettings`](#configuration-messageStatusSettings).
+
+<div class="meta-api-description">
+How do I map a custom status field in the Kendo UI Chat data source? Set or configure which property in the data structure contains the delivery status, state, or progress of each chat message, enabling the component to read, display, or update message statuses such as sending, sent, delivered, seen, or failed from your data items, API responses, or backend models when the status property has a non-default name.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Hello!",
+            authorId: "user1",
+            authorName: "John",
+            timestamp: new Date(),
+            deliveryState: "Seen"
+        }
+    ];
+
+    $("#chat").kendoChat({
+        statusField: "deliveryState",
+        dataSource: messagesData
+    });
+    </script>
+
 ### timestampField `String` _(default: "timestamp")_
 
 Specifies the field name in the data source from which the message timestamp will be read.
@@ -2857,6 +3749,65 @@ How do I configure the timestamp field in Kendo UI Chat to display message times
     $("#chat").kendoChat({
         timestampField: "createdAt",
         dataSource: messagesData
+    });
+    </script>
+
+### timestampVisibility `String` _(default: "onFocus")_
+
+Controls the visibility of message timestamps. Supported values:
+
+- `"onFocus"`: Timestamps are only visible for selected/focused messages (default behavior).
+- `"hidden"`: Timestamps are never visible for any messages.
+
+<div class="meta-api-description">
+How do I control message timestamp visibility in Kendo UI Chat? Set or configure when and how message timestamps are displayed, including visible only on focus or hidden entirely, enabling compact chat layouts or detailed time tracking depending on the desired user experience and interface design.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Focus on this message to see the timestamp.",
+            authorId: "user1",
+            authorName: "John",
+            timestamp: new Date(2026, 0, 1, 9, 0)
+        },
+        {
+            id: 2,
+            text: "The timestamp appears on focus.",
+            authorId: "user1",
+            authorName: "John",
+            timestamp: new Date(2026, 0, 1, 9, 5)
+        }
+    ];
+
+    $("#chat").kendoChat({
+        timestampVisibility: "onFocus",
+        dataSource: messagesData
+    });
+    </script>
+
+### userStatusTemplate `Function` _(default: null)_
+
+The template used to render the user status content shown next to the latest message in a receiver group. The function receives a context object with a `message` field, where `message.author` contains the normalized author data, and should return an HTML string.
+
+<div class="meta-api-description">
+How do I customize user status indicators like typing in Kendo UI Chat? Override the custom user-status content rendered next to the latest receiver message in a group by using the message context, including the normalized author information, to show typing text or other message-adjacent status content.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        userStatusTemplate: function(ctx) {
+            return '<div class="custom-typing"><em>' +
+                   kendo.htmlEncode(ctx.message.author.name || "") + ' is typing...</em></div>';
+        },
+        authorId: "user1"
     });
     </script>
 
@@ -3460,6 +4411,54 @@ How do I programmatically scroll to the bottom of a Kendo UI chat interface? Aut
     }, 2000);
     </script>
 
+### scrollToMessage
+
+Scrolls the chat message list view to the message with the specified UID. Returns `true` if the message was found and scrolled to, or `false` if the message was not found.
+
+<div class="meta-api-description">
+How do I scroll to a specific message in Kendo UI Chat? Programmatically scroll the chat view to a particular message identified by its unique ID, enabling navigation to replies, search results, linked messages, or any specific conversation point within long message threads.
+</div>
+
+#### Parameters
+
+##### uid `String`
+
+The unique identifier of the message to scroll to.
+
+#### Returns
+
+`Boolean` - `true` if the message was found and scrolled to, `false` otherwise.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [];
+    for (let i = 1; i <= 30; i++) {
+        messagesData.push({
+            id: i,
+            text: "Message #" + i,
+            authorId: i % 2 === 0 ? "user2" : "user1",
+            authorName: i % 2 === 0 ? "Jane" : "John",
+            timestamp: new Date(2026, 0, 1, 9, i)
+        });
+    }
+
+    let chat = $("#chat").kendoChat({
+        authorId: "user1",
+        dataSource: messagesData,
+        height: 400
+    }).data("kendoChat");
+
+    setTimeout(function() {
+        let firstItem = chat.dataSource.at(0);
+        if (firstItem) {
+            let success = chat.scrollToMessage(firstItem.uid);
+            console.log("Scrolled to message:", success);
+        }
+    }, 1000);
+    </script>
+
 ### setDataSource
 
 Sets a new data source for the Chat component.
@@ -3656,7 +4655,99 @@ The new data to apply to the message.
     }, 3000);
     </script>
 
+### value
+
+Gets or sets the text value in the message box input field. When called without arguments, returns the current input value. When called with a string argument, sets the input value.
+
+<div class="meta-api-description">
+How do I get or set the message input value in Kendo UI Chat? Retrieve or update the text content in the chat message box input field programmatically, enabling pre-filling messages, reading draft content, clearing the input, or manipulating the message composition area for auto-complete, template insertion, or macro-expansion scenarios.
+</div>
+
+#### Parameters
+
+##### newValue `String` *(optional)*
+
+The new text value to set in the message box input. If omitted, the method acts as a getter.
+
+#### Returns
+
+`String` - The current value of the message box input when used as a getter.
+
+#### Example
+
+    <div id="chat"></div>
+    <button id="getBtn">Get Value</button>
+    <button id="setBtn">Set Value</button>
+    <script>
+    let chat = $("#chat").kendoChat({
+        authorId: "user1"
+    }).data("kendoChat");
+
+    $("#getBtn").on("click", function() {
+        console.log("Current value:", chat.value());
+    });
+
+    $("#setBtn").on("click", function() {
+        chat.value("Hello from the API!");
+    });
+    </script>
+
 ## Events
+
+### executeAction
+
+Fired when the user clicks an action button in an attachment card. Use this event to handle custom actions defined in attachment data.
+
+<div class="meta-api-description">
+How do I handle attachment action button clicks in Kendo UI Chat? Respond to user clicks on action buttons within chat attachment cards, enabling interactive workflows such as opening links, triggering API calls, confirming orders, or executing custom logic when users interact with action elements in rich message cards.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Chat`
+
+The widget instance which fired the event.
+
+##### e.action `Object`
+
+The action object with `title`, `type`, and `value` properties describing the button that was clicked.
+
+##### e.message `Object`
+
+The message object that contains the attachment with the clicked action.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "Here is a product card:",
+            authorId: "bot",
+            authorName: "Shop Bot",
+            timestamp: new Date(),
+            attachments: [
+                {
+                    title: "Premium Widget",
+                    subtitle: "$29.99",
+                    actions: [
+                        { title: "Buy Now", type: "call", value: "buy-widget-1" },
+                        { title: "Details", type: "openUrl", value: "https://example.com" }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    $("#chat").kendoChat({
+        authorId: "user1",
+        dataSource: messagesData,
+        executeAction: function(e) {
+            console.log("Action clicked:", e.action.title, e.action.value);
+        }
+    });
+    </script>
 
 ### input
 
@@ -3679,6 +4770,49 @@ The current value of the input field.
     $("#chat").kendoChat({
         input: function(e) {
             console.log("User is typing:", e.value);
+        }
+    });
+    </script>
+
+### resendMessage
+
+Fired when the user clicks the retry button on a failed message. Use this event to re-attempt message delivery.
+
+<div class="meta-api-description">
+How do I handle message retry in Kendo UI Chat? Respond when users click the retry or resend button on messages that failed to deliver, enabling re-submission of the message to the server, updating delivery status, and managing error recovery flows in chat interfaces with unreliable connections or backend failures.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Chat`
+
+The widget instance which fired the event.
+
+##### e.message `Object`
+
+The failed message data object that the user wants to resend.
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    let messagesData = [
+        {
+            id: 1,
+            text: "This message failed to send.",
+            authorId: "user1",
+            authorName: "John",
+            timestamp: new Date(),
+            status: "failed",
+            failed: true
+        }
+    ];
+
+    $("#chat").kendoChat({
+        authorId: "user1",
+        dataSource: messagesData,
+        resendMessage: function(e) {
+            console.log("Resending message:", e.message.text);
         }
     });
     </script>
@@ -3882,13 +5016,13 @@ The array of remaining files after removal.
 
 ### suggestionClick
 
-Fired when a user clicks a global suggestion in the Chat. This event is useful for tracking user engagement with the global suggestions and handling custom suggestion logic.
-
->note For per-message [`suggestedActions`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestedactionstemplate), the event that fires is [`sendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/sendmessage).
+Fired when a user clicks a suggestion in the Chat. Global suggestions always trigger this event. Per-message `suggestedActions` trigger this event when `suggestionsBehavior` is set to `"insert"`; otherwise they flow through [`sendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/sendmessage).
 
 <div class="meta-api-description">
 How do I handle clicks on suggested messages in a Kendo UI Chat widget? Capture and process user interactions with suggested messages or actions in chat interfaces, enabling detection of clicks on suggestions to execute custom logic, insert chosen text, send predefined replies, or trigger related workflows. Configure event handlers to monitor selection of autocomplete options, recommendation taps, quick reply choices, or inline action picks, allowing control over default behaviors, engagement tracking, suggestion data retrieval, dynamic navigation, and contextual side effects within conversational UI components.
 </div>
+
+> note When `suggestionsBehavior` is `"send"` (the default), global suggestions also trigger `sendMessage` and post the selected text as a message.
 
 #### Event Data
 

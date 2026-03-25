@@ -14561,6 +14561,15 @@ A function that can be used to create a custom visual for the highlighted marker
 How to customize appearance of highlighted legend markers in Kendo UI Chart? Customize and control how highlighted legend markers are visually rendered in charts by defining specific drawing elements such as SVG shapes or graphical primitives, enabling tailored marker appearance during user interactions or focus states. Configure custom visuals for legend highlights by supplying functions that receive contextual data about markers and their highlight status, allowing dynamic rendering of highlight states, specialized marker styles, interactive emphasis effects, or unique graphical indications for selected legend items. Enable advanced styling, custom drawing, and visual differentiation of legend markers upon highlighting, supporting scenarios like hover effects, selected state visuals, thematic marker customization, or adaptive graphics based on marker properties and highlight context.
 </div>
 
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
 #### Example
 
     <div id="chart"></div>
@@ -14585,15 +14594,6 @@ How to customize appearance of highlighted legend markers in Kendo UI Chart? Cus
       ]
     });
     </script>
-
-* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
-* options - the marker options.
-* createVisual - a function that can be used to get the default visual.
-* category - the category of the marker point.
-* dataItem - the dataItem of the marker point.
-* value - the value of the marker point.
-* sender - the chart instance.
-* series - the series of the marker point.
 
 ### legend.item.highlight.visible `Boolean` *(default: true)*
 
@@ -36110,6 +36110,341 @@ How to change the cursor style when hovering over chart legend items in Kendo UI
                 cursor: "pointer"
             }
         }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight `Object`
+
+The highlight configuration of the legend item.
+
+#### Example - configure the legend item highlight
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            visible: true,
+            markers: {
+              background: "red"
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers `Object`
+
+The `markers` configuration of the legend item when it is hovered.
+
+#### Example - configure the legend item highlight markers
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              background: "red",
+              border: {
+                color: "black",
+                width: 2
+              }
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.background `String|Function`
+
+The background color of the highlighted legend item markers.
+
+#### Example - set the legend item highlight markers background
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              background: "yellow"
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.border `Object|Function`
+
+The border of the highlighted markers.
+
+#### Example - configure the legend item highlight markers border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              border: {
+                color: "red",
+                width: 3,
+                dashType: "dash"
+              }
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.border.color `String|Function`
+
+The configuration of the Chart legend highlighted item markers border.
+
+#### Example - set the legend item highlight markers border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              border: {
+                color: "red",
+                width: 2
+              }
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.border.dashType `String`
+
+The dash type of the highlighted legend item border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the legend item highlight markers border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              border: {
+                color: "black",
+                width: 2,
+                dashType: "dash"
+              }
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`.
+
+#### Example - set the legend item highlight markers border radius
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              type: "roundedRect",
+              borderRadius: 10
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.type `String|Function`
+
+The highlighted markers shape.
+
+The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
+
+#### Example - set the legend item highlight markers type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              type: "square"
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.visible `Boolean|Function`
+
+If set to `true` the chart will display the legend item markers. Defaults to the series options.
+
+#### Example - hide the legend item highlight markers
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              visible: false
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.markers.visual `Function`
+
+A function that can be used to create a custom visual for the highlighted markers. The available argument fields are:
+
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* options - the marker options.
+* createVisual - a function that can be used to get the default visual.
+* category - the category of the marker point.
+* dataItem - the dataItem of the marker point.
+* value - the value of the marker point.
+* sender - the chart instance.
+* series - the series of the marker point.
+
+#### Example - use custom visual for the legend item highlight markers
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            markers: {
+              visual: function(e) {
+                var rect = new kendo.geometry.Rect([0, 0], [10, 10]);
+                var path = kendo.drawing.Path.fromRect(rect, {
+                  fill: { color: "red" },
+                  stroke: { color: "black" }
+                });
+                return path;
+              }
+            }
+          }
+        }
+      }
+    });
+    </script>
+
+### seriesDefaults.legendItem.highlight.visible `Boolean` *(default: true)*
+
+If set to `false`, the hover effect of the legend item is disabled.
+
+#### Example - disable the legend item highlight
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        name: "Series A",
+        data: [1, 2, 3]
+      }],
+      seriesDefaults: {
+        legendItem: {
+          highlight: {
+            visible: false
+          }
+        }
+      }
     });
     </script>
 

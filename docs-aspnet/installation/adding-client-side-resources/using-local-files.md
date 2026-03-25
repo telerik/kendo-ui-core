@@ -24,11 +24,11 @@ To add the client-side resources to your project:
 1. Go to the [UI for ASP.NET MVC download page](https://www.telerik.com/account/product-download?product=KENDOUIMVC) or to **Account Overview** > **Downloads** > **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC**.
 {% endif %}
 
-1. Download the archive that matches the `Kendo.Mvc.UI` version in your project. For example, if your project references `Kendo.Mvc.UI` version `{{ site.mvcCoreVersion }}`, then download the {% if site.core %}`telerik.ui.for.aspnetcore.{{ site.mvcCoreVersion }}.commercial`{% else %}`telerik.ui.for.aspnetmvc.{{ site.mvcCoreVersion }}.commercial`{% endif %} zip or 7z archive.
+1. Download the archive that matches the `Kendo.Mvc.UI` version in your project. For example, if your project references `Kendo.Mvc.UI` version `{{ site.mvcCoreVersion }}`, then download the {% if site.core %}`telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}.`{% else %}`telerik.ui.for.aspnetmvc.{{ site.mvcCoreVersion }}.`{% endif %} zip or 7z archive.
 
 {% if site.core %}
-    - `telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}.commercial-source` includes non-minified scripts and styles.
-    - `telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}.commercial` includes minified scripts and styles.
+    - `telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}.source` includes non-minified scripts and styles.
+    - `telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}` includes minified scripts and styles.
 
 1. Copy the `js` and `styles` folders from the archive to your project under `wwwroot\lib\kendo-ui`.
 

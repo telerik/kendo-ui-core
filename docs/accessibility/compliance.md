@@ -103,6 +103,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 |ResponsivePanel |AA |n/a| n/a|
 |Scheduler	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scheduler)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scheduler/accessibility/overview)|
 |ScrollView	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/scrollview)| [Documentation](https://docs.telerik.com/kendo-ui/controls/scrollview/overview)|
+|SegmentedControl	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/segmentedcontrol)| [Documentation](https://docs.telerik.com/kendo-ui/controls/segmentedcontrol/overview)|
 |Signature	   |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/signature)| [Documentation](https://docs.telerik.com/kendo-ui/controls/signature/accessibility/overview)|
 |SkeletonContainer	   |AAA | n/a| n/a|
 |Slider	       |AA |[Demo](https://demos.telerik.com/kendo-ui/accessibility/slider)| [Documentation](https://docs.telerik.com/kendo-ui/controls/slider/accessibility/overview)|

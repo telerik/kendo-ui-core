@@ -87,7 +87,6 @@ export const __meta__ = {
             resizable: "none",
             maxLength: null,
             maxRows: null,
-            cols: 20,
             rows: 1,
             rounded: undefined,
             size: undefined,
@@ -190,7 +189,8 @@ export const __meta__ = {
             });
 
             if (that.floatingLabel) {
-                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+                let enableValue = enable === undefined ? true : enable;
+                that.floatingLabel.enable(enableValue);
             }
         },
 

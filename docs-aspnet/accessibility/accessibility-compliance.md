@@ -108,6 +108,7 @@ Also check the [notes below the table](#accessibility-compliance-notes).
 | Sankey Diagram | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/sankey) | N/A |
 | Scheduler | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/scheduler) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/scheduling/scheduler/accessibility/overview) |
 | ScrollView | N/A | N/A | N/A |
+| SegmentedControl | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/segmentedcontrol) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/navigation/segmentedcontrol/accessibility/overview) |
 | Signature | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/signature) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/signature/accessibility/overview) |
 | SkeletonContainer | AAA | N/A | N/A |
 | Slider | AA | [Demo](https://demos.telerik.com/{{ site.platform }}/accessibility/slider) | [Documentation](https://docs.telerik.com/{{ site.platform }}/html-helpers/editors/slider/accessibility/overview) |
