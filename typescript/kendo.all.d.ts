@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2026.1.212
+// Type definitions for Kendo UI Professional v2026.1.325
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -3431,6 +3431,10 @@ declare namespace kendo.ui {
         removeMessage(message: IMessage): boolean;
         /* Scroll to the bottom of the chat */
         scrollToBottom(): void;
+        /* Scroll to a specific message by its uid */
+        scrollToMessage(uid: string): boolean;
+        /* Set a new data source for the chat */
+        setDataSource(dataSource: kendo.data.DataSource | Object | any[]): void;
         /* Update the options of the chat */
         setOptions(options: IChatOptions): void;
         /* @deprecated Use `loading` method instead */
@@ -3439,6 +3443,9 @@ declare namespace kendo.ui {
         loading(loading: boolean): void;
         /* Update an existing message in the chat. */
         updateMessage(message: IMessage, newData: IMessage): IMessage;
+        /* Get or set the input value of the message box */
+        value(): string;
+        value(newValue: string): void;
     }
 
     interface IFile {
@@ -3505,7 +3512,15 @@ declare namespace kendo.ui {
         /** Image URL for the attachment */
         thumbnailUrl?: string;
         /** Actions available on the attachment */
-        actions?: ISuggestion[];
+        actions?: IAttachmentAction[];
+    }
+    interface IAttachmentAction {
+        /** Display title for the action */
+        title: string;
+        /** Action type identifier */
+        type: string;
+        /** Action payload value */
+        value: string;
     }
     type MessageStatus = "sent" | "delivered" | "seen" | "failed";
     interface IMessageStatusSettings {
@@ -3522,6 +3537,17 @@ declare namespace kendo.ui {
     type SuggestedActionsLayoutMode = "scroll" | "wrap" | "scrollbuttons";
     interface ISuggestion {
         text: string;
+        title?: string;
+    }
+    interface IAuthor {
+        /** Unique identifier for the author */
+        id: string;
+        /** Display name of the author */
+        name?: string;
+        /** URL to the author's avatar image */
+        imageUrl?: string;
+        /** Alt text for the avatar image */
+        imageAltText?: string;
     }
     interface IMessage {
         /** Unique identifier for the message */
@@ -3568,8 +3594,6 @@ declare namespace kendo.ui {
         showAvatar?: boolean;
         /** Whether to show the username for this user's messages */
         showUsername?: boolean;
-        /** Whether to show the timestamp for this user's messages */
-        showTimestamp?: boolean;
         /** Message width mode for this user's messages */
         messageWidthMode?: MessageWidthMode;
         /** Whether messages from this user can be collapsed */
@@ -3582,6 +3606,10 @@ declare namespace kendo.ui {
         messageToolbarActions?: IToolbarAction[];
         /** Actions available in the context menu for this user */
         messageActions?: IMenuAction[];
+        /** Template override for this user's messages */
+        messageTemplate?: MessageTemplateFunction | null;
+        /** Content template override for this user's messages */
+        messageContentTemplate?: MessageContentTemplateFunction | null;
     }
     interface IChatMessages {
         messageListLabel: string;
@@ -3670,15 +3698,28 @@ declare namespace kendo.ui {
         file?: IFile;
         message?: IMessage;
     }
+    interface IExecuteActionEventArgs {
+        action: IAttachmentAction;
+        message: IMessage;
+    }
+    interface IResendMessageEventArgs {
+        message: IMessage;
+        uid?: string;
+    }
+    interface IFileSelectEventArgs {
+        files: IFile[];
+    }
+    interface IFileRemoveEventArgs {
+        file: IFile;
+        files: IFile[];
+    }
     type SuggestionsTemplateFunction = (suggestions: ISuggestion[]) => string;
     type TimestampTemplateFunction = (context: { date: Date; message: IMessage }) => string;
     type MessageStatusTemplateFunction = (context: { status: MessageStatus; message: IMessage }) => string;
     type MessageContentTemplateFunction = (message: IMessage) => string;
     type UserStatusTemplateFunction = (context: {
-        author: {
-            id: string;
-            name?: string;
-            imageUrl?: string;
+        message: IMessage & {
+            author: IAuthor;
         };
     }) => string;
     type AttachmentTemplateFunction = (context: { attachment: IChatAttachment; message: IMessage }) => string;
@@ -3722,8 +3763,6 @@ declare namespace kendo.ui {
         showTimestamp?: boolean;
         messageTemplate?: MessageTemplateFunction;
         contentTemplate?: MessageContentTemplateFunction | null;
-        authorMessageContentTemplate?: MessageContentTemplateFunction | null;
-        receiverMessageContentTemplate?: MessageContentTemplateFunction | null;
         attachmentTemplate?: AttachmentTemplateFunction | null;
         userStatusTemplate?: UserStatusTemplateFunction | null;
         skipSanitization?: boolean;
@@ -3733,7 +3772,7 @@ declare namespace kendo.ui {
     }) => string;
     type MessageReferenceTemplateFunction = (context: { text?: string; files?: any[]; isOwnMessage?: boolean; isPinMessage?: boolean; isDeleted?: boolean; renderCloseButton?: boolean; renderFileMenuButton?: boolean; messages?: IChatMessages }) => string;
     type FilesTemplateFunction = (files: any[], downloadAll?: boolean, messages?: IChatMessages, closeButton?: boolean) => string;
-    type TimestampVisibility = "always" | "hover" | "never";
+    type TimestampVisibility = "onFocus" | "hidden";
     type SuggestionsBehavior = "send" | "insert";
     type ChatDirection = "ltr" | "rtl";
     interface IActionButtonSettings {
@@ -3765,16 +3804,26 @@ declare namespace kendo.ui {
         maxTextAreaHeight?: number;
     }
     interface IChatOptions {
+        /** Show username on messages (can be overridden by user-specific settings) */
+        showUsername: boolean;
+        /** Show avatar on messages (can be overridden by user-specific settings) */
         showAvatar: boolean;
+        /** Timestamp visibility mode (can be overridden by user-specific settings) */
+        timestampVisibility: TimestampVisibility;
         suggestionsBehavior: SuggestionsBehavior;
+        authorMessageSettings: IMessageSettings | null;
         receiverMessageSettings: IMessageSettings | null;
+        attachmentLayout: AttachmentLayoutMode;
         filesLayoutMode: FilesLayoutMode;
+        statusField: string;
         failedField: string;
+        attachmentsField: string;
         attachmentLayoutField: string;
+        messageStatusTemplate: MessageStatusTemplateFunction | null;
         messageContentTemplate: MessageContentTemplateFunction | null;
-        receiverMessageTemplate: MessageTemplateFunction | null;
-        receiverMessageContentTemplate: MessageContentTemplateFunction | null;
+        userStatusTemplate: UserStatusTemplateFunction | null;
         attachmentTemplate: AttachmentTemplateFunction | null;
+        messageBoxTemplate: MessageBoxTemplateFunction | null;
         actionButton: IActionButtonSettings;
         /** Allow messages to be collapsed */
         allowMessageCollapse: boolean;
@@ -3798,9 +3847,12 @@ declare namespace kendo.ui {
         /** Text direction */
         dir: ChatDirection;
         download: (args: IDownloadEventArgs) => void;
+        executeAction: (args: IExecuteActionEventArgs) => void;
         /** Actions available in the file context menu */
         fileActions: IMenuAction[];
         fileMenuAction: (args: IFileMenuActionEventArgs) => void;
+        fileSelect: (args: IFileSelectEventArgs) => void;
+        fileRemove: (args: IFileRemoveEventArgs) => void;
         /** Enable file attachment button functionality */
         fileAttachment: boolean | IFileSelectButtonSettings | null;
         /** Field name for files array */
@@ -3849,6 +3901,7 @@ declare namespace kendo.ui {
         noDataTemplate: (() => string) | null;
         /** Field name for reply-to ID */
         replyToIdField: string;
+        resendMessage: (args: IResendMessageEventArgs) => void;
         /** Show scroll-to-bottom button when scrolled up */
         scrollToBottomButton: boolean;
         /** Send message event handler. The even is triggered right before the message is sent. */
@@ -3867,6 +3920,8 @@ declare namespace kendo.ui {
         suggestedActionsScrollable: boolean;
         /** Template for rendering suggested actions */
         suggestedActionsTemplate: SuggestionsTemplateFunction | null;
+        /** Field name for message-level suggested actions */
+        suggestedActionsField: string;
         /** Initial suggestions to display */
         suggestions: ISuggestion[];
         /** Layout mode for message box suggestions: "scroll" | "wrap" | "scrollbuttons" */

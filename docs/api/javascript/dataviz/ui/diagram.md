@@ -4618,6 +4618,35 @@ The left padding of the connection label.
     });
     </script>
 
+### connections.content.offset `Number` *(default: 5)*
+
+Defines the distance (in pixels) between the label and the connection path.
+
+
+<div class="meta-api-description">
+How do I set the distance between a connection label and the path in a Kendo UI Diagram? Configure the offset distance between a specific connection label and the connection line to improve readability and prevent labels from overlapping with the connection path by specifying a numeric pixel value.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            content: {
+                text: "Connection",
+                offset: 15
+            }
+        }]
+    });
+    </script>
+
 ### connections.editable `Boolean|Object` *(default: true)*
 
 Defines the shape editable options.
@@ -4749,6 +4778,651 @@ How to customize the connection handling tool in Kendo UI Diagram? Set or custom
               {name: "delete"}
             ]
           }
+        }]
+    });
+    </script>
+
+### connections.editable.drag `Boolean` *(default: true)*
+
+Specifies if the connection can be dragged.
+
+
+<div class="meta-api-description">
+How do I enable or disable dragging for a specific connection in a Kendo UI Diagram? Control whether an individual connection or link within a diagram can be moved, repositioned, or dragged by users through drag-and-drop actions during editing. Enable or disable the ability to click and drag a connection to customize visual relationships dynamically, supporting use cases like interactive diagrams, editable graphs, or interface workflows where moving connections is needed.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                drag: false
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.remove `Boolean` *(default: true)*
+
+Specifies if the connection can be removed.
+
+
+<div class="meta-api-description">
+How do I prevent a specific connection from being removed in a Kendo UI Diagram? Control whether users can delete or remove an individual connection or link between shapes in a diagram by enabling or disabling the ability to remove a specific connection, controlling access to connection removal during diagram setup or runtime.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                remove: false
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points `Boolean|Object` *(default: true)*
+
+Specifies whether the connection path can be reshaped by the user. When enabled, dragging a connection handle adds or updates connection points to reflect the new route. User-defined points are shown as hollow circular markers and can be removed by double-clicking them.
+
+
+<div class="meta-api-description">
+How do I enable connection point editing for a specific connection in a Kendo UI Diagram? Configure whether users can reshape a specific connection path by adding, moving, or removing intermediate points along the connection line. Enable interactive editing of connection vertices to create custom routing, allow users to adjust the path of a connector by dragging handles, and configure the appearance of vertex and midpoint handles for connection path manipulation.
+</div>
+
+#### Example - disabling connection points editing for a connection
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: false
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.snap `Number` *(default: 6)*
+
+The snap distance for connection points when dragging.
+
+<div class="meta-api-description">
+How do I configure snap distance for connection points on a specific connection in a Kendo UI Diagram? Set the distance threshold for snapping when dragging connection points on a specific connection, controlling how close points need to be to snap into position for precise alignment of the connection path.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    snap: 10
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex `Object`
+
+Defines the appearance of the connection vertex handles.
+
+<div class="meta-api-description">
+How do I customize the appearance of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the visual appearance of vertex handles that appear on a specific connection path, including fill color, stroke, and radius settings to match your application's theme or improve visibility during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        fill: { color: "#ff0000" },
+                        stroke: { color: "#000000", width: 2 },
+                        radius: 6
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.fill `Object`
+
+The fill options of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the interior color of vertex handles that appear on a specific connection path to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        fill: {
+                            color: "#4caf50",
+                            opacity: 0.8
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.fill.color `String`
+
+The fill color of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the interior color of vertex handles that appear on a specific connection path by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        fill: {
+                            color: "#4caf50"
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.fill.opacity `Number` *(default: 1)*
+
+The fill opacity of the connection vertex handle. Accepts values from 0 (fully transparent) to 1 (fully opaque).
+
+<div class="meta-api-description">
+How do I set the fill opacity of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the transparency level of vertex handle fill color to control how solid, faded, or see-through the handle appears, enabling customization of handle visibility and visual emphasis during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        fill: {
+                            color: "#4caf50",
+                            opacity: 0.5
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.stroke `Object`
+
+The stroke options of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the border of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the outline color and width of vertex handles that appear on a specific connection path to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        stroke: {
+                            color: "#000000",
+                            width: 2
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.stroke.color `String`
+
+The stroke color of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the stroke color of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the outline color of vertex handles that appear on a specific connection path by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        stroke: {
+                            color: "#000000"
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.stroke.width `Number` *(default: 1)*
+
+The stroke width of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the stroke width of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the outline thickness of vertex handles that appear on a specific connection path by specifying a numeric pixel value to control how prominent the handle border appears.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        stroke: {
+                            color: "#000000",
+                            width: 2
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.vertex.radius `Number`
+
+The radius of the connection vertex handle.
+
+<div class="meta-api-description">
+How do I set the size of connection vertex handles for a specific connection in a Kendo UI Diagram? Configure the radius of vertex handles that appear on a specific connection path to make them larger for easier interaction or smaller for a cleaner appearance.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    vertex: {
+                        radius: 8
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint `Object`
+
+Defines the appearance of the connection midpoint handles.
+
+<div class="meta-api-description">
+How do I customize the appearance of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the visual appearance of midpoint handles that appear on a specific connection path between vertices, including fill color, stroke, and radius settings to match your application's theme or improve visibility during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: { color: "#2196f3" },
+                        stroke: { color: "#000000", width: 1 },
+                        radius: 4
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.fill `Object`
+
+The fill options of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the interior color of midpoint handles that appear on a specific connection path to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: {
+                            color: "#ff9800",
+                            opacity: 0.8
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.fill.color `String`
+
+The fill color of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the fill color of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the interior color of midpoint handles that appear on a specific connection path by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: {
+                            color: "#ff9800"
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.fill.opacity `Number` *(default: 1)*
+
+The fill opacity of the connection midpoint handle. Accepts values from 0 (fully transparent) to 1 (fully opaque).
+
+<div class="meta-api-description">
+How do I set the fill opacity of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the transparency level of midpoint handle fill color to control how solid, faded, or see-through the handle appears, enabling customization of handle visibility and visual emphasis during connection editing.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        fill: {
+                            color: "#ff9800",
+                            opacity: 0.5
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.stroke `Object`
+
+The stroke options of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the border of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the outline color and width of midpoint handles that appear on a specific connection path to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        stroke: {
+                            color: "#333333",
+                            width: 1
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.stroke.color `String`
+
+The stroke color of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the stroke color of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the outline color of midpoint handles that appear on a specific connection path by specifying any CSS-compatible color value including hex codes, RGB, RGBA, or named colors to improve visibility or match your application's visual theme.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        stroke: {
+                            color: "#333333"
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.stroke.width `Number` *(default: 1)*
+
+The stroke width of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the stroke width of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the outline thickness of midpoint handles that appear on a specific connection path by specifying a numeric pixel value to control how prominent the handle border appears.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        stroke: {
+                            color: "#333333",
+                            width: 2
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    </script>
+
+### connections.editable.points.midpoint.radius `Number`
+
+The radius of the connection midpoint handle.
+
+<div class="meta-api-description">
+How do I set the size of connection midpoint handles for a specific connection in a Kendo UI Diagram? Configure the radius of midpoint handles that appear on a specific connection path to make them larger for easier interaction or smaller for a cleaner appearance.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 200, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            editable: {
+                points: {
+                    midpoint: {
+                        radius: 5
+                    }
+                }
+            }
         }]
     });
     </script>
@@ -4946,6 +5620,72 @@ How do I change the color of connection end caps in a Kendo UI diagram? Adjust o
             stroke: {
               color: "#333",
               width: 2
+            }
+          }
+        }]
+    });
+    </script>
+
+### connections.endCap.stroke.lineCap `String`
+
+Defines the line cap style of the stroke. Supported values are "butt", "round", and "square".
+
+
+<div class="meta-api-description">
+How do I customize the line cap style of the stroke on a specific connection end cap in a Kendo UI diagram? Control the appearance of how a connection end cap stroke terminates by setting the line cap style to butt for flat endings, round for circular endings, or square for extended rectangular endings, enabling precise visual customization of stroke termination points on a specific diagram connection end cap.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "ArrowEnd",
+            stroke: {
+              color: "#333",
+              width: 2,
+              lineCap: "round"
+            }
+          }
+        }]
+    });
+    </script>
+
+### connections.endCap.stroke.lineJoin `String`
+
+Defines the line join style of the stroke. Supported values are "bevel", "miter", and "round".
+
+
+<div class="meta-api-description">
+How do I customize the line join style of the stroke on a specific connection end cap in a Kendo UI diagram? Control the appearance of how a connection end cap stroke connects at corners by setting the line join style to bevel for flat-cut corners, miter for sharp pointed corners, or round for smooth curved corners, enabling precise visual customization of stroke junction points on a specific diagram connection end cap.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+          { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+          { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+          from: "1",
+          to: "2",
+          endCap: {
+            type: "ArrowEnd",
+            stroke: {
+              color: "#333",
+              width: 2,
+              lineJoin: "round"
             }
           }
         }]
@@ -5450,6 +6190,32 @@ How do I change the color of hovered connections in a Kendo UI diagram? Control 
               color: "#ff6358"
             }
           }
+        }]
+    });
+    </script>
+
+### connections.selectable `Boolean` *(default: true)*
+
+Specifies if the connection can be selected.
+
+
+<div class="meta-api-description">
+How do I make a specific connection selectable or non-selectable in a Kendo UI Diagram? Control whether an individual connection link or edge in a diagram can be selected by user interactions such as clicking or tapping, and determine if this connection element responds to selection commands, highlighting, or logic that depends on selecting connections during setup or runtime.
+</div>
+
+#### Example
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [
+            { id: "1", x: 100, y: 100, content: { text: "Shape 1" } },
+            { id: "2", x: 300, y: 100, content: { text: "Shape 2" } }
+        ],
+        connections: [{
+            from: "1",
+            to: "2",
+            selectable: false
         }]
     });
     </script>
@@ -18267,6 +19033,42 @@ How to rotate shapes in Kendo UI Diagram by a specific angle? Control or set the
                 angle: 45
             }
         }]
+    });
+    </script>
+
+### shapes.selectable `Boolean` *(default: true)*
+
+Specifies if the shape can be selected.
+
+
+<div class="meta-api-description">
+How do I make a specific shape selectable or non-selectable in a Kendo UI Diagram? Control whether an individual shape in a diagram can be selected by users, enabling or disabling shape selection functionality for a specific element, toggling interactivity, configuring whether the shape responds to clicks or selection gestures, and managing if the shape is focusable or highlighted on user input.
+</div>
+
+#### Example - disabling selection for a specific shape
+
+    <div id="diagram"></div>
+    <script>
+    $("#diagram").kendoDiagram({
+        shapes: [{
+            id: "1",
+            x: 100,
+            y: 100,
+            content: { text: "Not Selectable" },
+            selectable: false
+        }, {
+            id: "2",
+            x: 300,
+            y: 100,
+            content: { text: "Selectable" }
+        }],
+        connections: [{
+            from: "1",
+            to: "2"
+        }],
+        connectionDefaults: {
+            endCap: "ArrowEnd"
+        }
     });
     </script>
 

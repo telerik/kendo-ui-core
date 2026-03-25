@@ -1,12 +1,12 @@
 ---
-title: Integrating Buttons and Checkboxes in a Kendo UI for jQuery DropDownList
-description: Learn how to combine buttons and checkboxes within a single Kendo UI for jQuery DropDownList component.
+title: Integrating Buttons and Checkboxes in a Kendo UI for jQuery DropDownButton
+description: Learn how to combine buttons and checkboxes within a single Kendo UI for jQuery DropDownButton component.
 type: how-to
-page_title: How to Combine Buttons and Checkboxes in Kendo UI for jQuery DropDownList
-slug: how-to-combine-buttons-and-checkboxes-kendo-ui-dropdownlist
-tags: kendo-ui, jquery, dropdownlist, button, checkbox
+page_title: How to Combine Buttons and Checkboxes in Kendo UI for jQuery DropDownButton
+slug: how-to-combine-buttons-and-checkboxes-kendo-ui-dropdownbutton
+tags: kendo-ui, jquery, dropdownbutton, button, checkbox
 res_type: kb
-components: ["toolbar"]
+components: ["dropdownbutton"]
 ticketid: 1677682
 ---
 
@@ -16,7 +16,7 @@ ticketid: 1677682
 <tbody>
 <tr>
 <td>Product</td>
-<td>Progress® Kendo UI® Toolbar</td>
+<td>Progress® Kendo UI® DropDownButton for jQuery</td>
 </tr>
 <tr>
 <td>Version</td>
@@ -27,16 +27,16 @@ ticketid: 1677682
 
 ## Description
 
-I want to set up a DropDownList in Kendo UI for jQuery where the top items are selection items and the bottom items are checkboxes that do not close on click. This is to achieve a similar functionality to the Telerik UI for ASP.NET AJAX SplitButton, but within the Kendo UI for jQuery framework.
+I want to set up a [`DropDownButton`](https://www.telerik.com/kendo-jquery-ui/documentation/controls/dropdownbutton/overview) in Kendo UI for jQuery where the top items are actionable button items and the bottom items are checkboxes that do not close the dropdown on click. This is to achieve a similar functionality to the Telerik UI for ASP.NET AJAX SplitButton, but within the Kendo UI for jQuery framework.
 
 This knowledge base article also answers the following questions:
-- How can I integrate both buttons and checkboxes in a single Kendo UI for jQuery DropDownList?
-- Is it possible to prevent the DropDownList from closing when certain items are clicked?
-- How to customize DropDownList items with templates in Kendo UI for jQuery?
+- How can I integrate both buttons and checkboxes in a single Kendo UI for jQuery DropDownButton?
+- Is it possible to prevent the DropDownButton popup from closing when certain items are clicked?
+- How to customize DropDownButton items with templates in Kendo UI for jQuery?
 
 ## Solution
 
-To integrate buttons and checkboxes within a single DropDownList component, and to prevent the dropdown from closing when certain items (like checkboxes) are clicked, follow the steps below:
+To integrate buttons and checkboxes within a single DropDownButton component, and to prevent the dropdown from closing when checkbox items are clicked, follow the steps below:
 
 1. Utilize the `itemTemplate` configuration of the [DropDownButton](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton/configuration/itemtemplate) to customize the items within the dropdown. This template allows for the inclusion of both buttons and checkboxes.
 
@@ -74,12 +74,16 @@ $("#dropdownbutton").kendoDropDownButton({
     // Button items...
     { text: "Checkbox 1", click: function(e) { 
       var checkbox = $(e.currentTarget).find("input");
-      checkbox.prop("checked", !checkbox.prop("checked"));
+      if (!$(e.target).is('input[type="checkbox"]')) {
+        checkbox.prop("checked", !checkbox.prop("checked"));
+      }
       preventClose = true;
     }},
     { text: "Checkbox 2", click: function(e) { 
       var checkbox = $(e.currentTarget).find("input");
-      checkbox.prop("checked", !checkbox.prop("checked"));
+      if (!$(e.target).is('input[type="checkbox"]')) {
+        checkbox.prop("checked", !checkbox.prop("checked"));
+      }
       preventClose = true;
     }}
     // Other items...
@@ -93,7 +97,7 @@ $("#dropdownbutton").kendoDropDownButton({
 });
 ```
 
-This approach allows for a flexible DropDownList component that can accommodate both actionable buttons and selectable checkboxes.
+This approach allows for a flexible DropDownButton component that can accommodate both actionable button items and selectable checkboxes.
 
 Full example:
 
@@ -109,14 +113,18 @@ Full example:
           { text: "Item 2" },
           { text: ""},
           { text: "Item 3",  click: function(e) { 
-            var checkbox = $(e.currentTarget).find("input")
-            checkbox.attr("checked", !checkbox.attr("checked"));
+            var checkbox = $(e.currentTarget).find("input");
+            if (!$(e.target).is('input[type="checkbox"]')) {
+              checkbox.prop("checked", !checkbox.prop("checked"));
+            }
             preventClose = true;
           } 
           },
           { text: "Item 4",  click: function(e) { 
-            var checkbox = $(e.currentTarget).find("input")
-            checkbox.attr("checked", !checkbox.attr("checked"));
+            var checkbox = $(e.currentTarget).find("input");
+            if (!$(e.target).is('input[type="checkbox"]')) {
+              checkbox.prop("checked", !checkbox.prop("checked"));
+            }
             preventClose = true;
           }  }
         ],
@@ -145,6 +153,6 @@ Full example:
 
 ## See Also
 
-- [Kendo UI for jQuery DropDownList Overview](https://docs.telerik.com/kendo-ui/controls/editors/dropdownlist/overview)
+- [Kendo UI for jQuery DropDownButton Overview](https://docs.telerik.com/kendo-ui/controls/navigation/dropdownbutton/overview)
 - [DropDownButton ItemTemplate Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownbutton/configuration/itemtemplate)
 

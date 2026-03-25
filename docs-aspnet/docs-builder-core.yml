@@ -32,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
-  cdnVersion: "2026.1.212"
-  themesCdnVersion: "13.0.0"
-  mvcCoreVersion: "2026.1.212"
+  cdnVersion: "2026.1.325"
+  themesCdnVersion: "13.1.1"
+  mvcCoreVersion: "2026.1.325"
   platform: aspnet-core
   core: true
   mvc: false
@@ -275,6 +275,8 @@ meta:
     title: SmartPasteButton
   "*splitbutton":
     title: SplitButton
+  "*segmentedcontrol":
+    title: SegmentedControl
   "*switch":
     title: Switch
   "*template":

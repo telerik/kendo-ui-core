@@ -44072,6 +44072,45 @@ The widget instance which fired the event.
     });
     </script>
 
+### zoomEnd
+
+Fires when the user stops zooming the chart.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the final range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the zoom action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="stockChart"></div>
+    <script>
+    $("#stockChart").kendoStockChart({
+        dateField: "date",
+        series: [{
+            field: "value",
+            data: [
+                { date: new Date("2022/1/1"), value: 10 },
+                { date: new Date("2022/1/2"), value: 15 },
+                { date: new Date("2022/1/3"), value: 20 }
+            ]
+        }],
+        zoomEnd: function(e) {
+            console.log("Zoom ended - final axis ranges:", e.axisRanges);
+        }
+    });
+    </script>
+
 ### zoom
 
 Fires as long as the user is zooming the chart using the mousewheel.

@@ -32,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-mvc
   framework: "ASP.NET MVC"
   framework_short: "MVC"
-  cdnVersion: "2026.1.212"
-  themesCdnVersion: "13.0.0"
-  mvcCoreVersion: "2026.1.212"
+  cdnVersion: "2026.1.325"
+  themesCdnVersion: "13.1.1"
+  mvcCoreVersion: "2026.1.325"
   platform: aspnet-mvc
   core: false
   mvc: true
@@ -235,6 +235,8 @@ meta:
     title: SmartPasteButton
   "*splitbutton":
     title: SplitButton
+  "*segmentedcontrol":
+    title: SegmentedControl
   "*switch":
     title: Switch
   "*template":
