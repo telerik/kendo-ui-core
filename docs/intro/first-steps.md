@@ -23,7 +23,7 @@ The process draws on the following milestones:
  1. [Configure the Grid](#5-configure-the-grid)
  1. [Add a license file to your app](#6-add-your-license-file)
 
- >tip Visual Studio Code users can speed up the project creation by using the [Kendo UI Productivity Tools for Visual Studio Code](https://www.telerik.com/kendo-jquery-ui/documentation/intro/installation/vscode-integration).
+ >tip You can speed up the setup process and project creation with [Kendo CLI]({% slug kendoui_kendo_cli %}) or by using the [Kendo UI Productivity Tools for Visual Studio Code](https://www.telerik.com/kendo-jquery-ui/documentation/intro/installation/vscode-integration).
  
 ## 1. Download the Controls 
 
