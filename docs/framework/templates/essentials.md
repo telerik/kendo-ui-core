@@ -157,7 +157,7 @@ The following example demonstrates how to handle missing or undefined properties
 ```dojo
     <div id="example"></div>
     <script>
-        var template = kendo.template("<div>#= title || 'Untitled' #</div>");
+        var template = kendo.template("<div>#= (typeof title !== 'undefined' && title) || 'Untitled' #</div>");
         var data1 = { title: "My Document" };
         var data2 = {};
         $("#example").html(template(data1) + template(data2));
