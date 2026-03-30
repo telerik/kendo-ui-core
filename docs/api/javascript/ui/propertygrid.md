@@ -755,6 +755,33 @@ What is the correct syntax for setting up two-way binding in a PropertyGrid with
     });
     </script>
 
+### items.fieldType `String`
+
+Specifies the JavaScript type of the field value. Used to determine the correct default editor when the model value is `null`. Accepted values are `"string"`, `"number"`, `"boolean"`, and `"date"`.
+
+
+<div class="meta-api-description">
+How do I set the correct editor for nullable fields in a Kendo UI PropertyGrid? Explicitly declare the JavaScript type of a property value to ensure the correct default editor is selected when the initial value is null, undefined, or not yet set. Control the type-driven editor assignment for nullable model properties by specifying fieldType as string, number, boolean, or date, enabling accurate editor selection for empty or uninitialized fields, handling nullable types from server-side models, and ensuring the PropertyGrid correctly infers input controls when value-based type detection fails due to null values.
+</div>
+
+#### Example - set fieldType for a nullable property
+
+    <div id="propertyGrid"></div>
+    <script>
+    $("#propertyGrid").kendoPropertyGrid({
+        model: {
+            size: null,
+            count: null,
+            name: "Laptop"
+        },
+        items: [
+            { field: "size", fieldType: "string" },
+            { field: "count", fieldType: "number" },
+            { field: "name" }
+        ]
+    });
+    </script>
+
 ### items.format `String`
 
 The format that is applied to the value before it is displayed. Takes the `{0:format}` form where `format` is a [standard number format](/api/javascript/kendo#standard-number-formats), [custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
