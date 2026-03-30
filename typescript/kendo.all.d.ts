@@ -10815,6 +10815,7 @@ declare namespace kendo.ui {
         editor?: string | Function | undefined;
         editorOptions?: Object | undefined;
         field?: string | undefined;
+        fieldType?: string | undefined;
         format?: string | undefined;
         group?: string | undefined;
         items?: Array<PropertyGridItem> | undefined;
