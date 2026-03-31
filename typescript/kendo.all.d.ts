@@ -27054,7 +27054,7 @@ interface JQuery {
     data(key: "kendoChart"): kendo.dataviz.ui.Chart | undefined;
 
     kendoChat(): JQuery;
-    kendoChat(options: kendo.ui.ChatOptions): JQuery;
+    kendoChat(options: kendo.ui.IChatOptions): JQuery;
     data(key: "kendoChat"): kendo.ui.Chat | undefined;
 
     kendoCheckBox(): JQuery;

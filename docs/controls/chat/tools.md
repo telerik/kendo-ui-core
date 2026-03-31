@@ -134,6 +134,115 @@ Configure toolbar actions using the [`messageToolbarActions`](https://www.teleri
 </script>
 ```
 
+## Per-User Message Settings
+
+The Chat component supports configuring different message display settings for the current user (author) and other participants (receivers) through the [`authorMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/authormessagesettings) and [`receiverMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/receivermessagesettings) options. These settings allow you to create asymmetric chat layouts, such as WhatsApp-style interfaces where the author's messages hide the avatar and username while receiver messages display both.
+
+Each settings object supports the following properties:
+
+| Property | Type | Description |
+|---|---|---|
+| `showAvatar` | `Boolean` | Whether to display the avatar image next to messages. |
+| `showUsername` | `Boolean` | Whether to display the username label above messages. |
+| `messageWidthMode` | `String` | Message width mode: `"standard"` or `"full"`. |
+| `enableFileActions` | `Boolean` | Whether file actions are available for the user's messages. |
+| `enableContextMenuActions` | `Boolean` | Whether the context menu is available for the user's messages. |
+| `messageToolbarActions` | `Array` | Toolbar actions specific to the user's messages. |
+| `messageActions` | `Array` | Context menu actions specific to the user's messages. |
+| `messageContentTemplate` | `Function` | Content template override for the user's messages. |
+
+### Configuring Avatar and Username Visibility
+
+The following example demonstrates a WhatsApp-style layout where the author's messages hide the avatar and username, while receiver messages display both:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        authorMessageSettings: {
+            showAvatar: false,
+            showUsername: false
+        },
+        receiverMessageSettings: {
+            showAvatar: true,
+            showUsername: true,
+            messageWidthMode: "full"
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "You",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/ANATR.jpg",
+                    text: "Hey! Did you finish the design review?",
+                    timestamp: new Date(2025, 7, 20, 14, 30), status: "seen"
+                },
+                {
+                    id: 2, authorId: 2, authorName: "Emma",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/DUMON.jpg",
+                    text: "Yes! I just sent the final mockups to the client.",
+                    timestamp: new Date(2025, 7, 20, 14, 35)
+                },
+                {
+                    id: 3, authorId: 1, authorName: "You",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/ANATR.jpg",
+                    text: "That's amazing! Great work on the color palette choices.",
+                    timestamp: new Date(2025, 7, 20, 14, 40), status: "delivered"
+                }
+            ]
+        }
+    });
+</script>
+```
+
+### Per-User Toolbar Actions
+
+You can configure different toolbar actions for author and receiver messages. For example, author messages may include a delete action while receiver messages offer a copy action:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        authorMessageSettings: {
+            messageToolbarActions: [
+                { name: "reply", icon: "undo" },
+                { name: "delete", icon: "trash" }
+            ]
+        },
+        receiverMessageSettings: {
+            messageToolbarActions: [
+                { name: "reply", icon: "undo" },
+                { name: "copy", icon: "copy" }
+            ]
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "Lora",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/ANATR.jpg",
+                    text: "Can you send me the preview link?",
+                    timestamp: new Date(2025, 7, 20, 14, 30)
+                },
+                {
+                    id: 2, authorId: 2, authorName: "Emma",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/DUMON.jpg",
+                    text: "Sure! Here it is: https://example.com/preview",
+                    timestamp: new Date(2025, 7, 20, 14, 35)
+                }
+            ]
+        },
+        toolbarAction: function(e) {
+            console.log("Toolbar action:", e.type);
+        }
+    });
+</script>
+```
+
 ## Message Styling
 
 Visual customization options enable you to tailor message presentation to align with your application's design language and user experience requirements.
@@ -199,9 +308,106 @@ $("#chat").kendoChat({
 
 The `standard` setting provides balanced spacing and readability, while `full` maximizes horizontal space utilization for detailed content display.
 
+### File Attachment Layout
+
+The `filesLayoutMode` option controls the arrangement of file attachments within messages. Available modes are `"vertical"` (stacked, default), `"horizontal"` (side-by-side with scrolling), and `"wrap"` (wrapping flow layout):
+
+```javascript
+$("#chat").kendoChat({
+    authorId: "user001",
+    filesLayoutMode: "vertical"
+});
+```
+
+## Message Status
+
+The Chat component supports displaying delivery status indicators for messages through the [`messageStatusSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/messagestatussettings) option. You can configure custom icons, text labels, and CSS classes for each delivery state—`"sent"`, `"delivered"`, `"seen"`, and `"failed"`:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        authorId: 1,
+        height: 500,
+        messageStatusSettings: {
+            sent: { icon: "check", text: "Sent" },
+            delivered: { icon: "check-circle", text: "Delivered" },
+            seen: { icon: "eye", text: "Seen", cssClass: "k-text-primary" },
+            failed: { icon: "x-circle", text: "Failed", cssClass: "k-text-error" }
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "You",
+                    text: "This message was sent.", timestamp: new Date(2025, 7, 15, 9, 0),
+                    status: "sent"
+                },
+                {
+                    id: 2, authorId: 1, authorName: "You",
+                    text: "This message was delivered.", timestamp: new Date(2025, 7, 15, 9, 5),
+                    status: "delivered"
+                },
+                {
+                    id: 3, authorId: 1, authorName: "You",
+                    text: "This message was seen.", timestamp: new Date(2025, 7, 15, 9, 10),
+                    status: "seen"
+                }
+            ]
+        }
+    });
+</script>
+```
+
+## Failed Messages and Retry
+
+Messages can be marked as failed by setting the `failed` property to `true`. When a message is in a failed state, the Chat renders a retry button that, when clicked, fires the [`resendMessage`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/events/resendmessage) event. Use this event to re-attempt message delivery:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    var chat = $("#chat").kendoChat({
+        authorId: 1,
+        height: 500,
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "You",
+                    text: "This message failed to send — click retry to resend.",
+                    timestamp: new Date(), failed: true
+                }
+            ]
+        },
+        resendMessage: function(e) {
+            var sender = e.sender;
+            sender.updateMessage(e.message, { failed: false, status: "sent" });
+
+            setTimeout(function() {
+                sender.updateMessage(e.message, { status: "delivered" });
+            }, 1000);
+        }
+    }).data("kendoChat");
+</script>
+```
+
+## Loading State
+
+The Chat component provides a `loading()` method that toggles the send button between its default state and a loading/stop indicator. This is particularly useful for AI chat applications where generating responses takes time:
+
+```javascript
+var chat = $("#chat").data("kendoChat");
+
+// Show loading state
+chat.loading(true);
+
+// Hide loading state
+chat.loading(false);
+```
 
 ## See Also 
 
+* [Per-User Settings (Demo)](https://demos.telerik.com/kendo-ui/chat/per-user-settings)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
 * [Chat Templates]({% slug templates_kendoui_chat %})
 * [Chat Suggestions]({% slug suggestions_kendoui_chat %})
