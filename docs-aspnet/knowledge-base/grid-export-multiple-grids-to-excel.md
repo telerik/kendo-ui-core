@@ -86,6 +86,8 @@ The example below relies on the following key steps:
     )
 ```
 ```JavaScript
+    <!-- JSZip library is required for Excel export. Load it before using Excel export features. -->
+    <!-- Starting from Q1 2024, JSZip is no longer distributed with Kendo UI. Use unpkg or another official CDN. -->
     <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
     <script>
         // Use Promises to sync the exports.
@@ -136,6 +138,8 @@ The example below relies on the following key steps:
         }
     </script>
 ```
+
+> Starting with Kendo UI version 2024.1.130 (Q1 2024), the JSZip library is no longer distributed with Kendo UI. You must include it from an official distribution channel such as `unpkg` or Cloudflare. Ensure the JSZip script loads successfully before attempting Excel export operations.
 
 {% if site.mvc %}
 > The solution requires Telerik UI for ASP.NET MVC 2014.3.1125 version or later. Earlier versions do not expose the `ExcelExport` event through the fluent API.

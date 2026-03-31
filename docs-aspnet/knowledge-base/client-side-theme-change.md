@@ -110,6 +110,30 @@ Set the theme in the `_Layout.cshtml` file by following the requirements discuss
 
 If you store the stylesheets within the application, an alternative approach is to generate the URL to the stylesheet for the selected theme.
 
+{% if site.core %}
+```razor
+    @{
+        var mainHref = "https://kendo.cdn.telerik.com/themes/6.3.0/";
+        var selectedTheme = "classic/classic-main";
+
+        if (Request.Cookies["theme"] != null)
+        {
+            selectedTheme = Request.Cookies["theme"];
+        }
+
+        if (selectedTheme == "custom")
+        {
+            <link rel="stylesheet" href="~/css/styles/kendo.custom.css" />
+        }
+
+        else
+        {
+            var themeHref = mainHref + selectedTheme + ".css";
+            <link href=@themeHref rel="stylesheet" type="text/css" />
+        }
+    }
+```
+{% else %}
 ```razor
     @{
         var mainHref = "https://kendo.cdn.telerik.com/themes/6.3.0/";
@@ -132,6 +156,7 @@ If you store the stylesheets within the application, an alternative approach is 
         }
     }
 ```
+{% endif %}
 
 ## More {{ site.framework }} DropDownList Resources
 

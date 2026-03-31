@@ -16,10 +16,13 @@ The Kendo UI for jQuery Chat provides extensive template customization options t
 The Chat component supports the following templates:
 
 * **Message Templates**—Control how individual messages and message groups are rendered
+* **Message Content Templates**—Customize only the content area inside message bubbles
 * **File Templates**—Customize the display of file attachments within messages
 * **Header Templates**—Define custom content for the chat header area
 * **Suggestion Templates**—Customize suggested actions and message suggestions
 * **Timestamp Templates**—Control how date and time separators are displayed
+* **Status Templates**—Customize how message delivery status indicators are rendered
+* **No Data Template**—Define the empty state when the chat has no messages
 
 ## Message Templates
 
@@ -288,6 +291,152 @@ The `messageReferenceTemplate` function renders message references that are used
     </script>
 ```
 
+## Message Content Templates
+
+Message content templates customize only the text/content portion of messages inside the bubble, without affecting the surrounding message group structure (avatar, username, timestamp). This provides a lighter-weight customization compared to the full `messageTemplate`.
+
+### messageContentTemplate
+
+The `messageContentTemplate` option controls the rendering of the content area for all messages—both author and receiver. It receives the current message object as a parameter:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        messageContentTemplate: function(message) {
+            return '<div style="border-left:3px solid #1a73e8;padding-left:8px;">' +
+                   '<em>' + kendo.htmlEncode(message.text) + '</em>' +
+                   '</div>';
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "John Doe",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+                    text: "This message uses a custom content template.",
+                    timestamp: new Date(2025, 7, 15, 9, 0)
+                },
+                {
+                    id: 2, authorId: 2, authorName: "Support Agent",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg",
+                    text: "So does this one — the same template applies to all messages.",
+                    timestamp: new Date(2025, 7, 15, 9, 5)
+                }
+            ]
+        }
+    });
+</script>
+```
+
+### Per-User Content Templates
+
+You can set different content templates for author (sender) and receiver messages through the [`authorMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/authormessagesettings) and [`receiverMessageSettings`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/receivermessagesettings) configuration options. These per-user templates override the global `messageContentTemplate` when set.
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        authorMessageSettings: {
+            messageContentTemplate: function(message) {
+                return '<div style="background:#e3f2fd;padding:8px;border-radius:12px;">' +
+                       kendo.htmlEncode(message.text) + '</div>';
+            }
+        },
+        receiverMessageSettings: {
+            messageContentTemplate: function(message) {
+                return '<div style="background:#f3e5f5;padding:8px;border-radius:12px;border-left:3px solid #9c27b0;">' +
+                       kendo.htmlEncode(message.text) + '</div>';
+            }
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "John Doe",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+                    text: "Author message with blue background.",
+                    timestamp: new Date(2025, 7, 15, 9, 0)
+                },
+                {
+                    id: 2, authorId: 2, authorName: "Support Agent",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg",
+                    text: "Receiver message with purple background and left border.",
+                    timestamp: new Date(2025, 7, 15, 9, 5)
+                }
+            ]
+        }
+    });
+</script>
+```
+
+## Message Status Template
+
+The `messageStatusTemplate` function customizes how message delivery status indicators are rendered. It receives a context object with the `status` string and the `message` object. When set, this overrides the default status rendering and `messageStatusSettings`.
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        messageStatusTemplate: function(ctx) {
+            var colors = { sent: "#999", delivered: "#4CAF50", seen: "#2196F3", failed: "#f44336" };
+            var color = colors[ctx.status] || "#999";
+            return '<span style="color:' + color + ';font-size:11px;font-weight:bold;">' +
+                   '[' + ctx.status.toUpperCase() + ']' +
+                   '</span>';
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 1, authorName: "You",
+                    text: "Sent message.", timestamp: new Date(2025, 7, 15, 9, 0),
+                    status: "sent"
+                },
+                {
+                    id: 2, authorId: 1, authorName: "You",
+                    text: "Delivered message.", timestamp: new Date(2025, 7, 15, 9, 5),
+                    status: "delivered"
+                },
+                {
+                    id: 3, authorId: 1, authorName: "You",
+                    text: "Seen message.", timestamp: new Date(2025, 7, 15, 9, 10),
+                    status: "seen"
+                }
+            ]
+        }
+    });
+</script>
+```
+
+## No Data Template
+
+The `noDataTemplate` function renders an empty state when the Chat has no messages. Use this to display welcome text, onboarding instructions, or call-to-action prompts:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        noDataTemplate: function() {
+            return '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#999;">' +
+                   '<p style="font-size:18px;margin:0;">No messages yet</p>' +
+                   '<p style="font-size:14px;margin:4px 0 0;">Start a conversation by typing below</p>' +
+                   '</div>';
+        },
+        dataSource: { data: [] }
+    });
+</script>
+```
+
 ## File Templates
 
 ### filesTemplate
@@ -353,6 +502,41 @@ The `headerItems` configuration allows you to define custom content for the chat
           height: 500
       }).data("kendoChat");
   </script>
+```
+
+### headerTemplate
+
+The `headerTemplate` option provides an alternative to `headerItems` by allowing you to render the entire chat header from a single template function. When set, it overrides the `headerItems` configuration. The function should return an HTML string:
+
+```dojo
+<div id="chat"></div>
+
+<script>
+    $("#chat").kendoChat({
+        height: 500,
+        authorId: 1,
+        headerTemplate: function() {
+            return '<div style="display:flex;align-items:center;gap:10px;padding:8px 16px;">' +
+                   '<img src="https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg" ' +
+                   'style="width:32px;height:32px;border-radius:50%;" alt="Support Agent">' +
+                   '<div>' +
+                   '<strong>Support Agent</strong>' +
+                   '<div style="font-size:12px;opacity:0.7;">Online</div>' +
+                   '</div>' +
+                   '</div>';
+        },
+        dataSource: {
+            data: [
+                {
+                    id: 1, authorId: 2, authorName: "Support Agent",
+                    authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg",
+                    text: "Hello! How can I help you today?",
+                    timestamp: new Date()
+                }
+            ]
+        }
+    });
+</script>
 ```
 
 ## Suggestion Templates
@@ -508,5 +692,6 @@ The `timestampTemplate` function controls how date and time separators are displ
 
 ## See Also
 
+* [Templates (Demo)](https://demos.telerik.com/kendo-ui/chat/templates)
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

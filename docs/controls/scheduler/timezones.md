@@ -25,6 +25,7 @@ You can define a [timezone](/api/javascript/ui/scheduler/configuration/timezone)
 > * When you bind the Scheduler to a remote service, keep the `timezone` option always set to, for example, `"Etc/UTC"`.
 > * When the `timezone` option of the Scheduler is not set, the current system timezone offset is used.
 > * The recommended `Date` format for sending and receiving Scheduler event dates is [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with a **Z** zone designator (UTC date). The same format is used by the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method, which converts JavaScript `Date` objects to JSON strings.
+> * The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) Wikipedia page.
 
 ## Reading Events from the DataSource
 

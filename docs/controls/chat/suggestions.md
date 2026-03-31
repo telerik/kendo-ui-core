@@ -41,6 +41,78 @@ $("#chat").kendoChat({
 });
 ```
 
+### Suggestions Behavior
+
+The [`suggestionsBehavior`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestionsbehavior) option controls what happens when a user clicks a message suggestion. The supported values are:
+
+- `"send"` (default)—The suggestion text is immediately sent as a message.
+- `"insert"`—The suggestion text is inserted into the message box input, allowing the user to edit it before sending.
+
+```dojo
+    <div id="chat"></div>
+    <script>
+        var chat = $("#chat").kendoChat({
+            suggestions: [
+                { text: "Technical Support" },
+                { text: "Billing Question" },
+                { text: "Product Information" }
+            ],
+            suggestionsBehavior: "insert",
+            dataSource: {
+                data: [
+                    {
+                        id: 1,
+                        authorId: "assistant",
+                        authorName: "Virtual Assistant",
+                        authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg",
+                        text: "Hello! How can I help you today? Click a suggestion to insert it into the input box.",
+                        timestamp: new Date()
+                    }
+                ]
+            },
+            authorId: "user"
+        }).data("kendoChat");
+    </script>
+```
+
+### Suggestions Layout Mode
+
+The [`suggestionsLayoutMode`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/ui/chat/configuration/suggestionslayoutmode) option controls how message suggestions are arranged visually. The supported values are:
+
+- `"scroll"` (default)—Suggestions are displayed in a horizontally scrollable row.
+- `"wrap"`—Suggestions wrap to multiple lines when they exceed the available width.
+- `"scrollbuttons"`—Suggestions are scrollable with left/right navigation buttons.
+
+```dojo
+    <div id="chat"></div>
+    <script>
+        var chat = $("#chat").kendoChat({
+            suggestions: [
+                { text: "Technical Support" },
+                { text: "Billing Question" },
+                { text: "Product Information" },
+                { text: "Schedule a Demo" },
+                { text: "Contact Sales" },
+                { text: "General Inquiry" }
+            ],
+            suggestionsLayoutMode: "scrollbuttons",
+            authorId: "user",
+            dataSource: {
+                data: [
+                    {
+                        id: 1,
+                        authorId: "assistant",
+                        authorName: "Virtual Assistant",
+                        authorImageUrl: "https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg",
+                        text: "Welcome! Use the arrow buttons to scroll through the suggestions below.",
+                        timestamp: new Date()
+                    }
+                ]
+            }
+        }).data("kendoChat");
+    </script>
+```
+
 ### Handling Suggestion Clicks
 
 Implement the `suggestionClick` event to handle user interactions with message suggestions:
@@ -260,6 +332,7 @@ You can customize the appearance of suggestions actions using the [`suggestiedAc
 
 ## See Also
 
+* [Suggestions (Demo)](https://demos.telerik.com/kendo-ui/chat/suggestions)
 * [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)
 * [Chat Overview]({% slug overview_kendoui_chat_widget %})
