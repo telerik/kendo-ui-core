@@ -24287,6 +24287,8 @@ How to export Kendo UI grid data as a CSV file? Trigger or initiate on-demand ex
 
 Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/grid/events/excelexport) event.
 
+> This call requires JSZip library included.
+	
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
 
