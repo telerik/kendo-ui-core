@@ -1,7 +1,7 @@
 ---
 title: Changelog
 page_title: Kendo UI for jQuery AI Coding Assistant Changelog
-description: "Find out about the latest changes and improvements in the jQuery AI Coding Assistant." 
+description: "Find out about the latest changes and improvements in the jQuery AI Coding Assistant."
 slug: ai_coding_assistant_changelog
 components: ["aicodingassistant"]
 position: 3
@@ -10,6 +10,24 @@ position: 3
 # Kendo UI for jQuery AI Coding Assistant Changelog
 
 Learn about the latest changes, improvements and bug fixes in the Kendo UI for jQuery AI Coding Assistant. The updates are structured in a chronological order with the newest ones appearing first.
+
+## March, 2026 Changelog
+
+### Highlights
+
+- Updated the component snippets to align with the latest version.
+
+## February, 2026 Changelog
+
+### Highlights
+
+- Updated the component snippets to align with the latest version.
+
+## January, 2026 Changelog
+
+### Highlights
+
+- The MCP server automatically detects your Telerik license when configured globally, simplifying the setup process.
 
 ## November, 2025 Changelog
 
@@ -30,4 +48,4 @@ Learn about the latest changes, improvements and bug fixes in the Kendo UI for j
 
 ## See Also
 
-* [Kendo UI for jQuery AI Coding Assistant Overview]({% slug ai_coding_assistant_overview %})
+- [Kendo UI for jQuery AI Coding Assistant Overview]({% slug ai_coding_assistant_overview %})
