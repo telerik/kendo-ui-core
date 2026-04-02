@@ -2223,7 +2223,8 @@ declare namespace kendo.ui {
     }
 
     interface AIPromptCommandExecuteEvent extends AIPromptEvent {
-        // Command execution event data
+        item?: any;
+        isRetry?: boolean | undefined;
     }
 
     interface AIPromptPromptRequestEvent extends AIPromptEvent {
@@ -2287,6 +2288,7 @@ declare namespace kendo.ui {
         themeColor?: string | undefined;
         title?: string | undefined;
         type?: string | undefined;
+        iconButton?: boolean | undefined;
     }
 
     interface AIPromptOptions {
@@ -6824,6 +6826,7 @@ declare namespace kendo.ui {
         formData?: FormData | undefined;
         layout?: string | "grid" | undefined;
         grid?: FormGridOptions | undefined;
+        renderButtons?: boolean | undefined;
         validatable?: FormValidatable | undefined;
         size?: string | undefined;
 
@@ -27001,6 +27004,11 @@ interface JQuery {
     kendoActionSheet(options: kendo.ui.ActionSheetOptions): JQuery;
     data(key: "kendoActionSheet"): kendo.ui.ActionSheet | undefined;
 
+    kendoAIPrompt(): JQuery;
+    kendoAIPrompt(options: kendo.ui.AIPromptOptions): JQuery;
+    data(key: "kendoAIPrompt"): kendo.ui.AIPrompt | undefined;
+    getKendoAIPrompt(): kendo.ui.AIPrompt | undefined;
+
     kendoAlert(): JQuery;
     kendoAlert(options: kendo.ui.AlertOptions): JQuery;
     data(key: "kendoAlert"): kendo.ui.Alert | undefined;
@@ -27032,6 +27040,11 @@ interface JQuery {
     kendoBottomNavigation(): JQuery;
     kendoBottomNavigation(options: kendo.ui.BottomNavigationOptions): JQuery;
     data(key: "kendoBottomNavigation"): kendo.ui.BottomNavigation | undefined;
+
+    kendoBreadcrumb(): JQuery;
+    kendoBreadcrumb(options: kendo.ui.BreadcrumbOptions): JQuery;
+    data(key: "kendoBreadcrumb"): kendo.ui.Breadcrumb | undefined;
+    getKendoBreadcrumb(): kendo.ui.Breadcrumb | undefined;
 
     kendoButton(): JQuery;
     kendoButton(options: kendo.ui.ButtonOptions): JQuery;
@@ -27189,6 +27202,11 @@ interface JQuery {
     kendoForm(options: kendo.ui.FormOptions): JQuery;
     data(key: "kendoForm"): kendo.ui.Form | undefined;
 
+    kendoFileManager(): JQuery;
+    kendoFileManager(options: kendo.ui.FileManagerOptions): JQuery;
+    data(key: "kendoFileManager"): kendo.ui.FileManager | undefined;
+    getKendoFileManager(): kendo.ui.FileManager | undefined;
+
     kendoGantt(): JQuery;
     kendoGantt(options: kendo.ui.GanttOptions): JQuery;
     data(key: "kendoGantt"): kendo.ui.Gantt | undefined;
@@ -27200,6 +27218,11 @@ interface JQuery {
     kendoImageEditor(): JQuery;
     kendoImageEditor(options: kendo.ui.ImageEditorOptions): JQuery;
     data(key: "kendoImageEditor"): kendo.ui.ImageEditor | undefined;
+
+    kendoInlineAIPrompt(): JQuery;
+    kendoInlineAIPrompt(options: kendo.ui.InlineAIPromptOptions): JQuery;
+    data(key: "kendoInlineAIPrompt"): kendo.ui.InlineAIPrompt | undefined;
+    getKendoInlineAIPrompt(): kendo.ui.InlineAIPrompt | undefined;
 
     kendoLinearGauge(): JQuery;
     kendoLinearGauge(options: kendo.dataviz.ui.LinearGaugeOptions): JQuery;
@@ -27308,6 +27331,11 @@ interface JQuery {
     kendoProgressBar(): JQuery;
     kendoProgressBar(options: kendo.ui.ProgressBarOptions): JQuery;
     data(key: "kendoProgressBar"): kendo.ui.ProgressBar | undefined;
+
+    kendoPropertyGrid(): JQuery;
+    kendoPropertyGrid(options: kendo.ui.PropertyGridOptions): JQuery;
+    data(key: "kendoPropertyGrid"): kendo.ui.PropertyGrid | undefined;
+    getKendoPropertyGrid(): kendo.ui.PropertyGrid | undefined;
 
     kendoPrompt(): JQuery;
     kendoPrompt(options: kendo.ui.PromptOptions): JQuery;
