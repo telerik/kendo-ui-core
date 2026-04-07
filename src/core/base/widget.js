@@ -1,17 +1,6 @@
 /**
  * Kendo UI Widget Class
  *
- * Base widget class for all Kendo UI components.
- * Extends Observable to provide event handling and adds:
- * - Element binding and management
- * - Options handling with deep extend
- * - Resize management
- * - CSS class application based on options
- * - ARIA accessibility support
- * - Licensing watermark support
- *
- 
- *
  * @example
  * // ES6 class inheritance
  * class MyWidget extends Widget {
@@ -86,6 +75,10 @@ export class Widget extends Observable {
      */
     constructor(element, options) {
         super();
+        /**
+         * Features active on this widget instance.
+         */
+        this._features = [];
         // Call init with the provided arguments
         if (element !== undefined) {
             this.init(element, options);
@@ -97,6 +90,7 @@ export class Widget extends Observable {
      * @param options - Widget configuration options
      */
     init(element, options) {
+        var _a, _b;
         const that = this;
         // Check licensing
         if (!licensing.validatePackage()) {
@@ -117,10 +111,22 @@ export class Widget extends Observable {
             // Avoid deep cloning the data source
             options = kendoJQuery.extend({}, options, { dataSource: {} });
         }
+        const userFeatures = options === null || options === void 0 ? void 0 : options.features;
+        const protoFeatures = (_a = that.options) === null || _a === void 0 ? void 0 : _a.features;
+        const features = (_b = userFeatures !== null && userFeatures !== void 0 ? userFeatures : protoFeatures) !== null && _b !== void 0 ? _b : [];
+        if (options) {
+            delete options.features;
+        }
         options = that.options = kendoJQuery.extend(true, {}, that.options, that.defaults, props || {}, options);
         // Restore dataSource reference
         if (dataSource) {
             options.dataSource = dataSource;
+        }
+        options.features = features;
+        that._features = features;
+        that._validateFeatures(features);
+        for (let i = 0; i < features.length; i++) {
+            features[i].setup(that);
         }
         // Set data-role attribute if not present
         const roleAttr = domUtilsService.attr("role");
@@ -229,11 +235,48 @@ export class Widget extends Observable {
     _resize(_size, _force) {
         // noop - override in subclasses
     }
+    _validateFeatures(features) {
+        var _a;
+        const featureMap = this.constructor.featureMap;
+        if (!featureMap) {
+            return;
+        }
+        const ctor = this.constructor;
+        const defaults = ctor.options || ((_a = ctor.prototype) === null || _a === void 0 ? void 0 : _a.options);
+        if (!defaults) {
+            return;
+        }
+        const loadedNames = {};
+        for (let i = 0; i < features.length; i++) {
+            loadedNames[features[i].name] = true;
+        }
+        for (const featureName in featureMap) {
+            if (loadedNames[featureName]) {
+                continue;
+            }
+            const opts = featureMap[featureName];
+            for (let i = 0; i < opts.length; i++) {
+                const key = opts[i];
+                if (this.options[key] !== undefined && this.options[key] !== defaults[key]) {
+                    throw new Error(`Option "${key}" requires the "${featureName}" feature. ` +
+                        `Import it and add it to the features array.`);
+                }
+            }
+        }
+    }
     /**
      * Destroy the widget and clean up resources
      */
     destroy() {
         const that = this;
+        if (that._features) {
+            for (let i = that._features.length - 1; i >= 0; i--) {
+                const f = that._features[i];
+                if (f.teardown) {
+                    f.teardown(that);
+                }
+            }
+        }
         that.element.removeData("kendo" + that.options.prefix + that.options.name);
         that.element.removeData("handler");
         that.unbind();

@@ -1,6 +1,4 @@
 /**
- * Input Service Interface
- * Provides utilities for input element manipulation (caret position, etc.)
- 
+ * Input utility type definitions.
  */
 export {};

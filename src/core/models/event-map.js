@@ -1,6 +1,6 @@
 /**
  * Event Map interfaces and types.
  *
- * @module core-v2/models/event-map
+ * @module core/models/event-map
  */
 export {};

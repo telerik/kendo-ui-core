@@ -7,6 +7,6 @@
  * - Touch/mouse event normalization
  * - Keyboard event handling
  *
- * @module core-v2/models/kendo-jquery
+ * @module core/models/kendo-jquery
  */
 export {};

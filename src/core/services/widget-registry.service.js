@@ -22,6 +22,13 @@ class WidgetRegistryService {
          */
         this.namespaces = new Map();
     }
+    isWidgetConstructor(value) {
+        if (typeof value !== FUNCTION || value === null) {
+            return false;
+        }
+        const widget = value;
+        return "fn" in widget && "extend" in widget;
+    }
     /**
      * Create a new namespace with roles:{} and register it
      * This is the primary way to create namespaces - the service owns them.
@@ -85,12 +92,14 @@ class WidgetRegistryService {
     getWidget(name, namespace) {
         if (namespace) {
             const register = this.namespaces.get(namespace);
-            return register === null || register === void 0 ? void 0 : register[name];
+            const widget = register === null || register === void 0 ? void 0 : register[name];
+            return this.isWidgetConstructor(widget) ? widget : undefined;
         }
         // Search all namespaces
         for (const register of this.namespaces.values()) {
-            if (register[name]) {
-                return register[name];
+            const widget = register[name];
+            if (this.isWidgetConstructor(widget)) {
+                return widget;
             }
         }
         return undefined;
