@@ -3779,11 +3779,13 @@ export const __meta__ = {
         },
 
         _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
-            if (!item.hasClass(SELECTED)) {
+            if (item.length > 0 && !item.hasClass(SELECTED)) {
                 return;
             }
 
-            item.removeClass(SELECTED);
+            if (item.length) {
+                item.removeClass(SELECTED);
+            }
             this._values.splice(position, 1);
             this._selectedIndexes.splice(position, 1);
             const dataItem = this._selectedDataItems.splice(position, 1)[0];
