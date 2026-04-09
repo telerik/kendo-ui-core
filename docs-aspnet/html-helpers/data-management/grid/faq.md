@@ -464,7 +464,7 @@ The following example demonstrates how to send additional data in an Ajax-bound 
 
 ## How can I reload data in Ajax-bound Grids?
 
-Use the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource#read) method of the DataSource.
+Use the [`read`](https://www.telerik.com/kendo-jquery-ui/documentation/api/javascript/data/datasource/methods/read) method of the DataSource.
 
 The following example demonstrates how to reload an Ajax-bound Grid.
 
