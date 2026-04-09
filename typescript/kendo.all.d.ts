@@ -3804,8 +3804,13 @@ declare namespace kendo.ui {
         rows?: number;
         /** Maximum height of the textarea in pixels */
         maxTextAreaHeight?: number;
+        startAffixTemplate?: Function | undefined;
+        endAffixTemplate?: Function | undefined;
+        topAffixTemplate?: Function | undefined;
     }
     interface IChatOptions {
+        messageTemplate?: MessageTemplateFunction | null;
+        messageContentTemplate?: MessageContentTemplateFunction | null;
         /** Show username on messages (can be overridden by user-specific settings) */
         showUsername: boolean;
         /** Show avatar on messages (can be overridden by user-specific settings) */
@@ -3904,6 +3909,8 @@ declare namespace kendo.ui {
         /** Field name for reply-to ID */
         replyToIdField: string;
         resendMessage: (args: IResendMessageEventArgs) => void;
+        /** Offset reserved above an incoming auto-scrolled message. Accepts pixels or percentage of the visible area. */
+        autoScrollThreshold: number | string;
         /** Show scroll-to-bottom button when scrolled up */
         scrollToBottomButton: boolean;
         /** Send message event handler. The even is triggered right before the message is sent. */
