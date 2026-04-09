@@ -2264,6 +2264,71 @@ The maximum height of the textarea in pixels. When set, the textarea will stop e
     });
     </script>
 
+### messageBox.startAffixTemplate `Function`
+
+Defines a custom template for the start affix area of the built-in message box. The start affix is positioned before the input field. This option applies when [`messageBoxTemplate`](#configuration-messageBoxTemplate) is not set.
+
+In the built-in PromptBox-backed Chat message box, the file attachment button belongs to the start affix. If the template does not include a matching `ref-promptbox-file-select-button` element, Chat backfills the enabled attachment button before the authored start-affix content inside the same start-affix container.
+
+<div class="meta-api-description">
+How do I add custom content before the built-in Kendo UI Chat message input? Configure messageBox.startAffixTemplate to render custom HTML, icons, labels, or other elements at the start of the built-in PromptBox-backed input area, customize the leading affix content for the Chat message box, and control how content appears before the input field when using the default Chat message box instead of a custom messageBoxTemplate.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        messageBox: {
+            startAffixTemplate: () => '<span class="k-icon k-i-star"></span>'
+        }
+    });
+    </script>
+
+### messageBox.endAffixTemplate `Function`
+
+Defines a custom template for the end affix area of the built-in message box. The end affix is positioned after the input field and alongside the built-in action area. This option applies when [`messageBoxTemplate`](#configuration-messageBoxTemplate) is not set.
+
+The built-in speech-to-text and send buttons remain in the end affix. If the template omits matching `ref-promptbox-speech-to-text-button` or `ref-promptbox-send-button` elements, Chat backfills the enabled controls after the authored end-affix content inside the same end-affix container.
+
+<div class="meta-api-description">
+How do I add custom content after the built-in Kendo UI Chat message input? Configure messageBox.endAffixTemplate to render custom buttons, icons, labels, or other HTML at the end of the built-in PromptBox-backed input area, customize the trailing affix content next to the Chat action area, and control how content appears after the input field when the default Chat message box is used.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        messageBox: {
+            endAffixTemplate: () => '<button class="k-button k-button-flat">Custom</button>'
+        }
+    });
+    </script>
+
+### messageBox.topAffixTemplate `Function`
+
+Defines a custom template for the top affix area of the built-in message box. The top affix is rendered above the content area and is visible in multi-line mode only. This option applies when [`messageBoxTemplate`](#configuration-messageBoxTemplate) is not set.
+
+<div class="meta-api-description">
+How do I add content above the built-in Kendo UI Chat multiline message input? Configure messageBox.topAffixTemplate to render custom HTML above the default PromptBox-backed Chat input, add helper text, labels, badges, or contextual content above the message area, and customize the top affix region for the built-in multi-line Chat message box without replacing the whole messageBoxTemplate.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        messageBox: {
+            mode: "multi",
+            topAffixTemplate: () => '<div class="chat-top-affix">Enter a detailed message</div>'
+        }
+    });
+    </script>
+
 ### messageContentTemplate `Function` _(default: null)_
 
 A custom template function for rendering the content area inside message bubbles. This template controls only the text/content portion of messages, not the entire message group structure. When set, it is used for both author and receiver messages unless overridden by `authorMessageSettings.messageContentTemplate` or `receiverMessageSettings.messageContentTemplate`.
@@ -2796,6 +2861,24 @@ Shows or hides the scroll-to-bottom button that appears when the user scrolls up
     $("#chat").kendoChat({
         scrollToBottomButton: false,
         authorId: "user"
+    });
+    </script>
+
+### autoScrollThreshold `Number|String` _(default: "20%")_
+
+Defines the amount of space that is preserved above a newly auto-scrolled incoming message when the user is already near the bottom of the message list. Accepts either a pixel value or a percentage of the visible message list area.
+
+<div class="meta-api-description">
+How do I control the offset above a newly received message in Kendo UI Chat auto scrolling? Configure autoScrollThreshold to preserve previous context above an incoming message when the user is near the bottom, set the incoming auto-scroll offset in pixels or percentage, adjust how much content remains visible above a newly revealed message, and tune the Chat auto-scroll threshold so new messages are brought into view without snapping flush to the top or bottom.
+</div>
+
+#### Example
+
+    <div id="chat"></div>
+    <script>
+    $("#chat").kendoChat({
+        authorId: "user",
+        autoScrollThreshold: "25%"
     });
     </script>
 

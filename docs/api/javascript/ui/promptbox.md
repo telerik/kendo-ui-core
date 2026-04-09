@@ -208,6 +208,8 @@ How do I disable the Kendo UI PromptBox? Set the enable option to false to preve
 
 Defines a custom template for the end affix area. The end affix is positioned after the input field and typically contains action buttons.
 
+When the built-in PromptBox buttons are enabled, the authored end-affix content stays in place and the framework backfills any missing built-in controls after it inside the same end-affix container. To adopt a custom element instead of the default control, include `ref-promptbox-send-button`, `ref-promptbox-file-select-button`, or `ref-promptbox-speech-to-text-button` on the authored element.
+
 <div class="meta-api-description">
 How do I add custom content to the end of Kendo UI PromptBox? Use the endAffixTemplate to add custom HTML content or components to the end affix area, which appears after the input field. This allows you to add custom buttons, icons, or other interactive elements alongside the default action buttons.
 </div>
