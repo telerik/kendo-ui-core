@@ -81,11 +81,11 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
     var result = new List<HierarchicalViewModel>()
     {
-        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+        new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item" }
     };
 
     return result;
@@ -94,16 +94,23 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 public IActionResult Read_TreeViewData(int? id)
 {
     var result = GetHierarchicalData()
-        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
         .Select(item => new {
             id = item.ID,
             Name = item.Name,
-            expanded = item.Expanded,
-            imageUrl = item.ImageUrl,
             hasChildren = item.HasChildren
         });
 
     return Json(result);
+}
+```
+```Model
+public class HierarchicalViewModel
+{
+    public int ID { get; set; }
+    public int? ParentID { get; set; }
+    public bool HasChildren { get; set; }
+    public string Name { get; set; }
 }
 ```
 {% else %}
@@ -112,11 +119,11 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
     var result = new List<HierarchicalViewModel>()
     {
-        new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Parent item" },
-        new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item" },
-        new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item" }
+        new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Parent item" },
+        new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item" },
+        new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item" }
     };
 
     return result;
@@ -125,16 +132,23 @@ public static IList<HierarchicalViewModel> GetHierarchicalData()
 public ActionResult Read_TreeViewData(int? id)
 {
     var result = GetHierarchicalData()
-        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
         .Select(item => new {
             id = item.ID,
             Name = item.Name,
-            expanded = item.Expanded,
-            imageUrl = item.ImageUrl,
             hasChildren = item.HasChildren
         });
 
     return Json(result, JsonRequestBehavior.AllowGet);
+}
+```
+```Model
+public class HierarchicalViewModel
+{
+    public int ID { get; set; }
+    public int? ParentID { get; set; }
+    public bool HasChildren { get; set; }
+    public string Name { get; set; }
 }
 ```
 {% endif %}
@@ -191,11 +205,11 @@ The following example demonstrates how to configure the TreeView to bind to remo
     {
         var data = new List<HierarchicalViewModel>()
         {
-            new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-            new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Item 1" },
-            new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item 2" },
-            new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item 1.1" },
-            new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item 1.2" }
+            new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+            new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Item 1" },
+            new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item 2" },
+            new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item 1.1" },
+            new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item 1.2" }
         };
         return data;
     }
@@ -203,7 +217,7 @@ The following example demonstrates how to configure the TreeView to bind to remo
     public JsonResult ReadItems(int? id)
     {
         var result = GetHierarchicalData()
-        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
         .Select(item => new {
             id = item.ID,
             Name = item.Name,
@@ -213,17 +227,26 @@ The following example demonstrates how to configure the TreeView to bind to remo
         return Json(result);
     }
 ```
+```Model
+    public class HierarchicalViewModel
+    {
+        public int ID { get; set; }
+        public int? ParentID { get; set; }
+        public bool HasChildren { get; set; }
+        public string Name { get; set; }
+    }
+```
 {% else %}
 ```Controller
     public List<HierarchicalViewModel> GetHierarchicalData()
     {
         var data = new List<HierarchicalViewModel>()
         {
-            new HierarchicalViewModel() { ID = 1, ParendID = null, HasChildren = true, Name = "Parent item" },
-            new HierarchicalViewModel() { ID = 2, ParendID = 1, HasChildren = true, Name = "Item 1" },
-            new HierarchicalViewModel() { ID = 3, ParendID = 1, HasChildren = false, Name = "Item 2" },
-            new HierarchicalViewModel() { ID = 4, ParendID = 2, HasChildren = false, Name = "Item 1.1" },
-            new HierarchicalViewModel() { ID = 5, ParendID = 2, HasChildren = false, Name = "Item 1.2" }
+            new HierarchicalViewModel() { ID = 1, ParentID = null, HasChildren = true, Name = "Parent item" },
+            new HierarchicalViewModel() { ID = 2, ParentID = 1, HasChildren = true, Name = "Item 1" },
+            new HierarchicalViewModel() { ID = 3, ParentID = 1, HasChildren = false, Name = "Item 2" },
+            new HierarchicalViewModel() { ID = 4, ParentID = 2, HasChildren = false, Name = "Item 1.1" },
+            new HierarchicalViewModel() { ID = 5, ParentID = 2, HasChildren = false, Name = "Item 1.2" }
         };
         return data;
     }
@@ -231,7 +254,7 @@ The following example demonstrates how to configure the TreeView to bind to remo
     public JsonResult ReadItems(int? id)
     {
         var result = GetHierarchicalData()
-        .Where(x => id.HasValue ? x.ParendID == id : x.ParendID == null)
+        .Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
         .Select(item => new {
             id = item.ID,
             Name = item.Name,
@@ -239,6 +262,15 @@ The following example demonstrates how to configure the TreeView to bind to remo
         });
 
         return Json(result, JsonRequestBehavior.AllowGet);
+    }
+```
+```Model
+    public class HierarchicalViewModel
+    {
+        public int ID { get; set; }
+        public int? ParentID { get; set; }
+        public bool HasChildren { get; set; }
+        public string Name { get; set; }
     }
 ```
 {% endif %}

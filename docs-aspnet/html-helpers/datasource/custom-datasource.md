@@ -18,6 +18,59 @@ The CustomDataSource builder class allows full control over the [DataSource clie
 
 The regular DataSource builders have many settings that are configured by default. The CustomDataSource builder removes these predefined settings, so when you declare a DataSource as custom, configure these additional settings.
 
+### Standalone DataSource
+
+The following example demonstrates how to convert a regular standalone DataSource to a CustomDataSource builder.
+
+    @(Html.Kendo().DataSource<OrderViewModel>()
+        .Name("myDataSource")
+        .Ajax(dataSource => dataSource
+            .ServerOperation(true)
+            .Model(model =>
+            {
+                model.Id(p => p.OrderID);
+                model.Field(p => p.OrderID).Editable(false);
+            })
+            .Read(read => read.Action("Read", "Home"))     
+        )
+    )
+
+The following example demonstrates the CustomDataSourceBuilder equivalent.
+
+    @(Html.Kendo().DataSource<OrderViewModel>()
+        .Name("myDataSource")
+        .Custom(dataSource =>
+        {
+            dataSource
+            .Type("aspnetmvc-ajax")
+            .PageSize(10)
+            .ServerPaging(true)
+            .ServerSorting(true)
+            .ServerFiltering(true)
+            .Transport(transport =>
+            {
+                transport.Read(read => read.Action("Read", "Home"));
+            })
+            .Schema(schema =>
+            {
+                schema
+                .Data("Data")
+                .Total("Total")
+                .Errors("Errors")
+                .Model(model =>
+                {
+                    model.Id("OrderID");
+                    model.Field("OrderID", typeof(int));
+                    model.Field("OrderDate", typeof(DateTime));
+                    model.Field("OrderDescription", typeof(string));
+                    model.Field("IsCompleted", typeof(bool));
+                });
+            });
+        })
+    )
+
+### Grid DataSource
+
 The following example demonstrates how to convert a regular [Grid](https://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
 
     @(Html.Kendo().Grid<OrderViewModel>()
