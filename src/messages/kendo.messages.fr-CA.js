@@ -174,14 +174,30 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "columns": "Colonnes",
   "sortAscending": "Tri croissant",
   "sortDescending": "Tri décroissant",
+  "filter": "Filtrer",
+  "clearAllFilters": "Enlever tous les filtres",
+  "column": "Colonne",
+  "columns": "Colonnes",
+  "columnVisibility": "Visibilité colonne",
+  "clear": "Effacer",
+  "cancel": "Canceller",
+  "done": "Terminé",
   "settings": "Paramètres de colonne",
-  "done": "Fini",
   "lock": "Bloquer",
-  "unlock": "Ouvrir"
-});
+  "unlock": "Débloquer", 
+  "stick": "Figer la colonne",
+  "unstick": "Décoller la colonne",
+  "setColumnPosition": "Spécifier la position",
+  "apply": "Définir", // "Appliquer"
+  "reset": "Réinitialiser",
+  "buttonTitle": "Modifier les paramètres",
+  "movePrev": "Déplacer vers la gauche",
+  "moveNext": "Déplacer vers la droite",
+  "groupColumn": "Grouper la colonne",
+  "ungroupColumn": "Enlever le groupe pour cette colonne",
+  });
 }
 
 /* Gantt messages */
@@ -305,26 +321,54 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 
 if (kendo.ui.Grid) {
 kendo.ui.Grid.prototype.options.messages =
-$.extend(true, kendo.ui.Grid.prototype.options.messages,{
+$.extend(true, kendo.ui.Grid.prototype.options.messages, {
+  "loader": {
+    "loading": "Chargement...",
+    "exporting": "Exportation en cours..."
+  },
   "commands": {
+    "cancel": "Annuler les modifications",
+    "canceledit": "Annuler",
     "create": "Insérer",
     "destroy": "Effacer",
-    "canceledit": "Annuler",
-    "update": "Mettre à jour",
     "edit": "Éditer",
     "excel": "Exporter vers Excel",
     "pdf": "Exporter vers PDF",
-    "select": "Sélectionner",
-    "cancel": "Annuler les modifications",
     "save": "Enregistrer les modifications",
-    "search": "Rechercher..."
+    "select": "Sélectionner",
+    "update": "Mettre à jour",
+    "search": "Rechercher...",
+    "selectRow": "Sélectionner la ligne",
+    "selectAllRows": "Toutes les lignes",
+    "clearSelection": "Annuler la sélection",
+    "copySelection": "Copier la sélection",
+    "copySelectionNoHeaders": "Copier la sélection (Sans les en-têtes)",
+    "reorderRow": "Repositionner la ligne",
+    "reorderRowUp": "Haut",
+    "reorderRowDown": "Bas",
+    "reorderRowTop": "Première",
+    "reorderRowBottom": "Dernière",
+    "exportPdf": "Exporter vers PDF",
+    "exportExcel": "Exporter vers Excel",
+    "exportToExcelAll": "Tout",
+    "exportToExcelSelection": "Sélection",
+    "exportToExcelSelectionNoHeaders": "Sélection (Sans les en-têtes)",
+    "sortAsc": "Trier de A à Z",
+    "sortDesc": "Trier de Z à A",
+    "moveGroupPrevious": "Précédent",
+    "moveGroupNext": "Suivant",
   },
   "editable": {
-    "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
+    "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement ?",
     "cancelDelete": "Annuler",
     "confirmDelete": "Effacer"
   },
-  "noRecords": "Aucun enregistrement disponible."
+  "noRecords": "Aucun enregistrement disponible.",
+  "groupHeader": "Appuyer sur ctrl + espace pour grouper",
+  "ungroupHeader": "Appuyer sur ctrl + espace pour dissocier",
+  "toolbarLabel": "Barre d'outils",
+  "groupingHeaderLabel": "En-tête du groupe",
+  "filterCellTitle": "Filtre de la cellule"
 });
 }
   /* TreeList messages */
