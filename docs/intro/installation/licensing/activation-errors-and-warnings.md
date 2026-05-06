@@ -44,11 +44,11 @@ If you use Kendo UI for jQuery in a project with an invalid license, the UI comp
 
 ### Banner
 
-A banner appears on pages that use unlicensed Kendo UI for jQuery components:
+A banner with an action button appears on pages that use Kendo UI for jQuery components when the license is invalid, expired, or missing:
 
 ![Banner](../../../knowledge-base/images/banner.png)
 
-* Clicking the ? button of the banner takes you to the Kendo UI for jQuery licensing documentation.
+* Clicking the action button redirects you to start a trial, purchase, or renew your license, depending on your license status.
 * Clicking the x button of the banner closes it until the page is reloaded or a license is activated.
 
 ### Console Warning

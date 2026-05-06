@@ -40,7 +40,7 @@ This depends on your license:
 * *Subscription licenses* will continue to function normally for deployed applications. However, the following will happen when you try to rebuild the application:
      * A warning message will appear when calling the `kendo-ui-license activate` command.
 * *Trial licenses* will continue to function normally with an expired license key. The following will happen if you try to build or run the application:
-     * A watermark appears on application startup.
+     * A banner appears on application startup.
      * A modal dialog appears on application startup.
      * A warning message will appear when calling the kendo-ui-license activate command.
      * A warning message similar to the following is logged in the build log.
