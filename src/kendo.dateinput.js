@@ -38,7 +38,8 @@ var __meta__ = {
 
     var DateInput = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                initialValue;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -61,6 +62,8 @@ var __meta__ = {
             element.css({
                 height: element[0].style.height
             });
+
+            initialValue = that.options.value || element.val();
 
 
             that._validationIcon = $(kendo.ui.icon({ icon: "exclamation-circle", iconClass: "k-input-validation-icon k-hidden" })).insertAfter(element);
@@ -91,7 +94,7 @@ var __meta__ = {
             } else {
                 that.readonly(element.is("[readonly]"));
             }
-            that.value(that.options.value || element.val());
+            that.value(initialValue);
             if (!skipStyling) {
                 that._applyCssClasses();
             }
@@ -933,4 +936,3 @@ var __meta__ = {
 }
 
 })(window.kendo.jQuery);
-
