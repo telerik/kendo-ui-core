@@ -1267,7 +1267,7 @@ var __meta__ = {
 
     var TimePicker = Widget.extend({
         init: function(element, options) {
-            var that = this, ul, timeView, disabled;
+            var that = this, ul, timeView, disabled, initialValue;
 
             options = options || {};
             options.componentType = options.componentType || "classic";
@@ -1350,6 +1350,8 @@ var __meta__ = {
             that._icon();
             that._reset();
 
+            initialValue = options.value || element.val();
+
             try {
                 element[0].setAttribute("type", "text");
             } catch (e) {
@@ -1392,7 +1394,7 @@ var __meta__ = {
                     messages: options.messages.dateInput
                 });
             }
-            that._old = that._update(options.value || that.element.val());
+            that._old = that._update(initialValue);
             that._oldText = element.val();
             that._applyCssClasses();
 
@@ -2061,4 +2063,3 @@ var __meta__ = {
     ui.plugin(TimePicker);
 
 })(window.kendo.jQuery);
-
