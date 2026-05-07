@@ -121,6 +121,8 @@ var __meta__ = {
             that._reset();
             that._template();
 
+            initialValue = options.value || element.val();
+
             try {
                 element[0].setAttribute("type", "text");
             } catch (e) {
@@ -146,11 +148,11 @@ var __meta__ = {
                 that.readonly(element.is("[readonly]"));
             }
 
-            initialValue = parse(options.value || that.element.val(), options.parseFormats, options.culture);
+            initialValue = parse(initialValue, options.parseFormats, options.culture) || initialValue;
 
             that._createDateInput(options);
 
-            that._old = that._update(initialValue || that.element.val());
+            that._old = that._update(initialValue);
             that._oldText = element.val();
             that._applyCssClasses();
 
@@ -1250,4 +1252,3 @@ var __meta__ = {
     ui.plugin(DateTimePicker);
 
 })(window.kendo.jQuery);
-
