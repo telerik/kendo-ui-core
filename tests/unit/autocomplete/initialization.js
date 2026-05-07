@@ -17,6 +17,26 @@ describe("kendo.ui.AutoComplete initialization", function() {
         assert.isOk(input.data("kendoAutoComplete") instanceof AutoComplete);
     });
 
+    it("uses the initial element value before changing the input type", function() {
+        let dateInput = $("<input type='date' value='2026-05-07' />").appendTo(Mocha.fixture);
+        let typeValue = dateInput[0].type;
+
+        Object.defineProperty(dateInput[0], "type", {
+            get: function() {
+                return typeValue;
+            },
+            set: function(value) {
+                typeValue = value;
+                this.value = "";
+            }
+        });
+
+        let autocomplete = new AutoComplete(dateInput, []);
+
+        assert.equal(autocomplete.element.val(), "2026-05-07");
+        assert.equal(autocomplete._old, "2026-05-07");
+    });
+
     it("data source is initialized from options.dataSource when array is passed", function() {
         let data = [1, 2];
         let autocomplete = new AutoComplete(input, {

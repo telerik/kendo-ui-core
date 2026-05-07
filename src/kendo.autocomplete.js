@@ -67,7 +67,7 @@ export const __meta__ = {
 
     var AutoComplete = List.extend({
         init: function(element, options) {
-            var that = this, wrapper, disabled;
+            var that = this, wrapper, disabled, initialValue;
 
             that.ns = ns;
             options = Array.isArray(options) ? { dataSource: options } : options;
@@ -88,7 +88,9 @@ export const __meta__ = {
             that._dataSource();
             that._ignoreCase();
 
+            initialValue = element.val();
             element[0].type = "text";
+            element.val(initialValue);
             wrapper = that.wrapper;
 
             that._popup();
@@ -915,4 +917,3 @@ export const __meta__ = {
     }]);
 })(window.kendo.jQuery);
 export default kendo;
-
