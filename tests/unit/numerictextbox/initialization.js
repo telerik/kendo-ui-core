@@ -89,6 +89,25 @@ describe("kendo.ui.NumericTextBox initialization", function() {
         assert.equal(textbox._text.val(), "12.00");
     });
 
+    it("uses the initial element value before changing the input type", function() {
+        let numberInput = $('<input type="number" value="13.5" />').appendTo(Mocha.fixture);
+        let setAttribute = numberInput[0].setAttribute;
+
+        numberInput[0].setAttribute = function(name, value) {
+            setAttribute.call(this, name, value);
+
+            if (name === "type" && value === "text") {
+                this.value = "0";
+            }
+        };
+
+        let textbox = new NumericTextBox(numberInput);
+
+        assert.equal(textbox.value(), 13.5);
+        assert.equal(textbox.element.val(), "13.5");
+        assert.equal(textbox._text.val(), "13.50");
+    });
+
     it("Bind change events", function() {
         let textbox = new NumericTextBox(input.val("12"), {
             change: function() { }

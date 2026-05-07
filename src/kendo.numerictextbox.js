@@ -54,7 +54,7 @@ export const __meta__ = {
          init: function(element, options) {
              var that = this,
              isStep = options && options.step !== undefined,
-             min, max, step, value, disabled;
+             min, max, step, value, disabled, initialValue;
              var inputType;
 
              Widget.fn.init.call(that, element, options);
@@ -86,6 +86,7 @@ export const __meta__ = {
              that._initialOptions = extend({}, options);
 
              inputType = element.attr("type");
+             initialValue = element.val();
 
              that._reset();
              that._wrapper();
@@ -117,9 +118,9 @@ export const __meta__ = {
 
              if (value == NULL) {
                  if (inputType == "number") {
-                    value = parseFloat(element.val());
+                    value = parseFloat(initialValue);
                  } else {
-                     value = element.val();
+                     value = initialValue;
                  }
              }
 
@@ -1003,4 +1004,3 @@ export const __meta__ = {
     ui.plugin(NumericTextBox);
 })(window.kendo.jQuery);
 export default kendo;
-
