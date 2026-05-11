@@ -522,7 +522,7 @@ export const __meta__ = {
         _isOnScrollbar: function(e) {
             var target = e.target;
 
-            if (!target || target.clientHeight === 0 && target.clientWidth === 0) {
+            if (!target || (target.clientHeight === 0 && target.clientWidth === 0)) {
                 return false;
             }
 
