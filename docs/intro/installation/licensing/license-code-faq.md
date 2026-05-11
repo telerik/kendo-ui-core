@@ -128,7 +128,7 @@ Yes, the product will continue to function without a license file. However, a wa
 
 ## Will my license key be exposed in browser developer tools?
 
-Yes, when activating the license by [adding a licensing script key](({% slug using-license-code %})) to the application, the license key will be visible in the browser developer tools. However, the Script Key is safe to redistribute, it just unlocks the product and is required for the application to run.
+Yes, when activating the license by [adding a licensing script key]({% slug using-license-code %}) to the application, the license key will be visible in the browser developer tools. However, the Script Key is safe to redistribute, it just unlocks the product and is required for the application to run.
 
 ## I have a `KendoLicensing is not defined` error in the console. What should I do?
 

@@ -24,7 +24,12 @@ position: 11
 
 ## Available Versions
 
-The Telerik Document Processing Libraries are available in **.NET Framework** and **.NET Standard (.NET Core)** compatible versions. Both versions are <a href="https://docs.telerik.com/devtools/document-processing/getting-started/installation/nuget-packages" target="_blank">available as NuGet packages</a>. Read more in the *<a href="https://docs.telerik.com/devtools/document-processing/getting-started/getting-started" target="_blank">Getting Started with Telerik Document Processing Libraries</a>* article.
+The Telerik Document Processing Libraries are available in two versions:
+
+* A version for **.NET Framework** and **.NET 8**, **.NET 9** and **.NET 10** for Windows.
+* A version for **.NET Standard 2.0** (Support for .NET 8, .NET 9 and .NET 10).
+
+Both versions are available as NuGet packages</a> but with different names. The packages for .NET Standard do not contain the word *Windows* in their name. Read more in the *<a href="https://www.telerik.com/document-processing-libraries/documentation/getting-started/installation/nuget-packages" target="_blank">Available NuGet Packages</a>* article.
 
 ## Configuration Wizard
 

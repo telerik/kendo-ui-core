@@ -44,14 +44,14 @@ $(document).ready(function () {
 
   $("#mediaplayer").data("kendoMediaPlayer").one("ready",function(e){
     var videoEl =  $("#mediaplayer").find("video");
-    videoEl.attr("poster","https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Polar_Bear_AdF.jpg/400px-Polar_Bear_AdF.jpg");
+    videoEl.attr("poster","https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Polar_Bear_AdF.jpg/960px-Polar_Bear_AdF.jpg");
     videoEl[0].load();
   });
 
   var videos = new kendo.data.DataSource({
     data: [{
       title: "Build HIPAA-Compliant Healthcare Apps Fast",
-      poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Polar_Bear_AdF.jpg/400px-Polar_Bear_AdF.jpg",
+      poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Polar_Bear_AdF.jpg/960px-Polar_Bear_AdF.jpg",
       source: "https://www.w3schools.com/tags/movie.mp4"
     },
           ]

@@ -45,7 +45,7 @@ kendo-api-path: ./api
 dojo-scripts:
   kendoCdnVersion: 2026.1.415
   themesCdnVersion: 13.1.1
-  pdfJsVersion: 4.6.82
+  pdfJsVersion: 5.6.205
   jQueryVersion: 3.4.1
 
 demos:
