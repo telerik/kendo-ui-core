@@ -511,9 +511,26 @@ export const __meta__ = {
         },
 
         _select: function(e) {
+           if (this._isOnScrollbar(e)) {
+               return;
+           }
            if (!this.allowSelection || this.trigger(SELECT, { event: e })) {
                e.preventDefault();
            }
+        },
+
+        _isOnScrollbar: function(e) {
+            var target = e.target;
+
+            if (!target || target.clientHeight === 0 && target.clientWidth === 0) {
+                return false;
+            }
+
+            var rect = target.getBoundingClientRect();
+            var rightBoundary = rect.left + target.clientLeft + target.clientWidth;
+            var bottomBoundary = rect.top + target.clientTop + target.clientHeight;
+
+            return e.clientX > rightBoundary || e.clientY > bottomBoundary;
         },
 
         _start: function(e) {
@@ -527,6 +544,10 @@ export const __meta__ = {
                 which = e.which;
 
             if ((which && which > 1) || (that._maxTouchesReached())) {
+                return;
+            }
+
+            if (that._isOnScrollbar(e)) {
                 return;
             }
 
