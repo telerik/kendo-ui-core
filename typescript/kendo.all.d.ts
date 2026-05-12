@@ -7370,6 +7370,8 @@ declare namespace kendo.ui {
         items(): any;
         lockColumn(column: number): void;
         lockColumn(column: string): void;
+        pinRows(): { top: kendo.data.ObservableObject[]; bottom: kendo.data.ObservableObject[] };
+        pinRows(targets: JQuery | Element | kendo.data.ObservableObject | (JQuery | Element | kendo.data.ObservableObject)[], position?: string): void;
         refresh(): void;
         removeRow(row: string): void;
         removeRow(row: Element): void;
@@ -7399,6 +7401,7 @@ declare namespace kendo.ui {
         stickColumn(column: string): void;
         unlockColumn(column: number): void;
         unlockColumn(column: string): void;
+        unpinRows(targets: JQuery | Element | kendo.data.ObservableObject | (JQuery | Element | kendo.data.ObservableObject)[]): void;
         unstickColumn(column: number): void;
         unstickColumn(column: string): void;
     }
@@ -7689,6 +7692,7 @@ declare namespace kendo.ui {
         media?: string | undefined;
         minResizableWidth?: number | undefined;
         minScreenWidth?: number | undefined;
+        pinnable?: boolean | undefined;
         resizable?: boolean | undefined;
         selectable?: boolean | undefined;
         sortable?: boolean | GridColumnSortable | undefined;
@@ -7912,6 +7916,13 @@ declare namespace kendo.ui {
         title?: string | undefined;
     }
 
+    interface GridPinnable {
+        top?: any[] | undefined;
+        bottom?: any[] | undefined;
+        pinRowLocation?: "top" | "bottom" | "both" | undefined;
+        isRowPinnable?: ((context: { dataItem: any }) => boolean) | undefined;
+    }
+
     interface GridSelectableOptions {
         dragToSelect?: boolean | undefined;
         mode?: string | undefined;
@@ -8100,6 +8111,8 @@ declare namespace kendo.ui {
         noRecords?: boolean | GridNoRecords | undefined;
         pageable?: boolean | GridPageable | undefined;
         pdf?: GridPdf | undefined;
+        pinnable?: boolean | GridPinnable | undefined;
+        pinnedRowTemplate?: ((data: { dataItem: any; row: string }) => string) | undefined;
         persistSelection?: boolean | undefined;
         reorderable?: boolean | GridReorderable | undefined;
         resizable?: boolean | GridResizable | undefined;
@@ -8147,6 +8160,8 @@ declare namespace kendo.ui {
         pdfExport?(e: GridPdfExportEvent): void;
         remove?(e: GridRemoveEvent): void;
         rowReorder?(e: GridRowReorderEvent): void;
+        rowPin?(e: GridRowPinEvent): void;
+        rowUnpin?(e: GridRowUnpinEvent): void;
         save?(e: GridSaveEvent): void;
         saveChanges?(e: GridSaveChangesEvent): void;
         sort?(e: GridSortEvent): void;
@@ -8321,6 +8336,20 @@ declare namespace kendo.ui {
         oldIndex: number | undefined;
         sender: Grid;
         preventDefault: Function;
+    }
+
+    interface GridRowPinEvent extends GridEvent {
+        dataItem?: kendo.data.ObservableObject | undefined;
+        position?: string | undefined;
+        pinnedTopRows?: kendo.data.ObservableObject[] | undefined;
+        pinnedBottomRows?: kendo.data.ObservableObject[] | undefined;
+    }
+
+    interface GridRowUnpinEvent extends GridEvent {
+        dataItem?: kendo.data.ObservableObject | undefined;
+        position?: string | null | undefined;
+        pinnedTopRows?: kendo.data.ObservableObject[] | undefined;
+        pinnedBottomRows?: kendo.data.ObservableObject[] | undefined;
     }
 
     interface GridSaveEvent extends GridEvent {

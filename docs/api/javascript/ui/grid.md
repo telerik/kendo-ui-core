@@ -7657,6 +7657,41 @@ How do I control column movement between locked and unlocked sections in a Kendo
     });
     </script>
 
+### columns.pinnable `Boolean` *(default: false)*
+
+If set to `true` a pin/unpin icon button will be rendered in the column cells, allowing users to pin or unpin individual rows by clicking it. Clicking the icon opens a menu with options to pin the row to the top, pin to the bottom, or unpin it.
+
+> **Important:** The [`pinnable`](/api/javascript/ui/grid/configuration/pinnable) option on the Grid must also be set to enable row pinning.
+
+
+<div class="meta-api-description">
+How do I add a pin button column to a Kendo UI Grid? Add a visual pin icon or button to each row in a grid column that allows users to pin or unpin rows by clicking, configure a column with pin/unpin actions for pinning rows to the top or bottom of the data grid, enable an interactive pin column with a context menu for row pinning operations, and display a pin indicator icon in each row for quick row pinning and unpinning through user interaction.
+</div>
+
+#### Example - add a pin column
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { pinnable: true, width: 40 },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: true
+    });
+    </script>
+
 ### columns.media `String`
 
 Sets the condition that needs to be satisfied for a column to remain visible. The property accepts valid strings for the [`matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) browser API (assuming it is supported by the browser) and toggles the visibility of the columns based on the media queries.
@@ -18306,6 +18341,275 @@ How do I set the title for a PDF exported from Kendo UI Grid? Configure or set t
     });
     </script>
 
+### pinnable `Boolean|Object` *(default: false)*
+
+Enables row pinning for the Grid. When enabled, rows can be pinned to the top or bottom of the Grid so they remain visible while scrolling through the remaining data. Pinned rows are rendered in dedicated containers above and below the scrollable content area.
+
+The `pinnable` option can be set to `true` to enable the feature without initially pinned rows, or to an object specifying which rows to pin by their ID values.
+
+> **Important:** The data source must define an [`schema.model.id`](/api/javascript/data/datasource/configuration/schema#schemamodel) field for row pinning to work.
+
+
+<div class="meta-api-description">
+How do I pin rows in Kendo UI Grid? Enable pinning, freezing, or fixing specific rows to the top or bottom of a data grid so they remain visible during vertical scrolling, configure initial pinned rows by their data item IDs, control which rows stay anchored at the top or bottom boundary of the grid, set up sticky rows that persist across scrolling, and manage row pinning behavior through configuration and API methods for grid components.
+</div>
+
+#### Example - enable row pinning
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: true,
+      contextMenu: true
+    });
+    </script>
+
+### pinnable.top `Array`
+
+An array of data item ID values that will be pinned to the top of the Grid on initialization.
+
+<div class="meta-api-description">
+How do I initially pin rows to the top of a Kendo UI Grid? Specify which rows should be fixed or pinned at the top of the grid on load by providing an array of row IDs, configure initial top-pinned rows that remain visible above the scrollable content area, set up frozen rows at the top boundary of the data grid, and define which data items are anchored to the top during initialization.
+</div>
+
+#### Example - pin rows to the top on initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1, 2]
+      }
+    });
+    </script>
+
+### pinnable.bottom `Array`
+
+An array of data item ID values that will be pinned to the bottom of the Grid on initialization.
+
+<div class="meta-api-description">
+How do I initially pin rows to the bottom of a Kendo UI Grid? Specify which rows should be fixed or pinned at the bottom of the grid on load by providing an array of row IDs, configure initial bottom-pinned rows that remain visible below the scrollable content area, set up frozen rows at the bottom boundary of the data grid, and define which data items are anchored to the bottom during initialization.
+</div>
+
+#### Example - pin rows to the bottom on initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1],
+        bottom: [3]
+      }
+    });
+    </script>
+
+### pinnable.pinRowLocation `String` *(default: "both")*
+
+Controls where rows can be pinned. When set to `"top"` or `"bottom"`, the pin column renders a single toggle icon instead of a context menu, allowing rows to be pinned or unpinned with a single click. When set to `"both"` (the default), the pin column shows a context menu with options to pin to the top, pin to the bottom, or unpin.
+
+The context menu items in the [`contextMenu`](/api/javascript/ui/grid/configuration/contextmenu) are also updated accordingly when `pinRowLocation` is set to a single location.
+
+<div class="meta-api-description">
+How do I restrict the pin location of rows in a Kendo UI Grid? Control whether rows can be pinned to the top only, bottom only, or both locations in a data grid, configure single-click pinning behavior that removes the pin context menu and directly pins rows to the specified location, set up a simplified pin toggle that pins or unpins rows with one click instead of choosing from a context menu, and define which pinning positions are available in the grid pin column and body context menu.
+</div>
+
+#### Example - pin rows only to the top with a single click
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { pinnable: true, width: 40 },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        pinRowLocation: "top"
+      }
+    });
+    </script>
+
+#### Example - pin rows only to the bottom with a single click
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { pinnable: true, width: 40 },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        pinRowLocation: "bottom"
+      }
+    });
+    </script>
+
+### pinnable.isRowPinnable `Function`
+
+A function that determines whether a specific row can be pinned. The function receives an object with a `dataItem` field containing the data item for the row, and must return a boolean value. When the function returns `false` for a row, the pin column renders an empty cell without a pin icon, the pin column context menu does not open for that row, and the [`pinRows`](/api/javascript/ui/grid/methods/pinrows) method does not pin the row. Unpinning is always allowed regardless of this function's return value.
+
+<div class="meta-api-description">
+How do I prevent specific rows from being pinned in a Kendo UI Grid? Control which rows are eligible for pinning or freezing in a data grid by providing a callback function that evaluates each row and returns whether it can be pinned, conditionally disable pinning for certain data items based on business rules, hide pin icons for non-pinnable rows, prevent the pin context menu from appearing on restricted rows, and block programmatic pinning via the API for rows that should not be fixed to the top or bottom of the grid.
+</div>
+
+#### Example - allow pinning only for rows with age greater than 30
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { pinnable: true, width: 40 },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        isRowPinnable: function(context) {
+          return context.dataItem.age > 30;
+        }
+      }
+    });
+    </script>
+
+#### Example - combine isRowPinnable with pinRowLocation
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { pinnable: true, width: 40 },
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        pinRowLocation: "top",
+        isRowPinnable: function(context) {
+          return context.dataItem.age > 30;
+        }
+      }
+    });
+    </script>
+
+### pinnedRowTemplate `Function`
+
+A function that allows customizing the rendering of pinned rows. The function receives an object with two fields: `dataItem` (the data item for the row) and `row` (the default HTML string for the row). The function must return an HTML string.
+
+If not set, pinned rows use the same template as regular rows.
+
+<div class="meta-api-description">
+How do I customize the appearance of pinned rows in a Kendo UI Grid? Configure a custom template for frozen or pinned rows at the top or bottom of the grid by providing a function that receives the data item and the default row HTML, allowing developers to modify, wrap, or completely replace the markup of pinned rows, style pinned rows differently from regular rows, add visual indicators or custom classes to fixed rows, and control how anchored rows render in the grid while keeping the default row template for non-pinned items.
+</div>
+
+#### Example - customize pinned row appearance
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1]
+      },
+      pinnedRowTemplate: function(data) {
+        return data.row.replace("<tr", '<tr style="background-color: #ffe0e0;"');
+      }
+    });
+    </script>
+
 ### persistSelection `Boolean` *(default:false)*
 
 Sets a value indicating whether the selection will be persisted when sorting, paging, filtering and etc are performed.
@@ -24109,6 +24413,123 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
     grid.lockColumn("age");
     </script>
 
+### pinRows
+
+Pins one or more data rows to the top or bottom of the Grid. When called without arguments, returns the currently pinned rows.
+
+
+<div class="meta-api-description">
+How do I programmatically pin rows in a Kendo UI Grid? Pin, freeze, or fix one or more specific data rows to the top or bottom of a grid by passing row elements, jQuery objects, or data item references as an array, control row pinning position to anchor rows at the top or bottom boundary of the scrollable area, retrieve the currently pinned rows when called without arguments, get the list of pinned top and bottom rows, and programmatically add rows to the pinned containers for persistent visibility during scrolling.
+</div>
+
+#### Parameters
+
+##### targets `Array|jQuery|Element|kendo.data.ObservableObject`
+
+A single row or an array of rows to pin. Each item can be a jQuery object, DOM element, or data item.
+
+##### position `String` *(default: "bottom")*
+
+The position to pin the rows to. Accepted values are `"top"` or `"bottom"`.
+
+#### Returns
+
+`Object` When called without arguments, returns an object with two properties:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| top | Array | An array of data items pinned to the top of the Grid. |
+| bottom | Array | An array of data items pinned to the bottom of the Grid. |
+
+#### Example - get the pinned rows
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1],
+        bottom: [3]
+      }
+    });
+    var grid = $("#grid").data("kendoGrid");
+    var pinned = grid.pinRows();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log("Top pinned:", pinned.top.length);
+    console.log("Bottom pinned:", pinned.bottom.length);
+    </script>
+
+#### Example - pin a single row to the top
+
+    <button id="pin">Pin first row</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: true
+    });
+    $("#pin").click(function() {
+      var grid = $("#grid").data("kendoGrid");
+      var firstItem = grid.dataSource.at(0);
+      grid.pinRows(firstItem, "top");
+    });
+    </script>
+
+#### Example - pin multiple rows to the top
+
+    <button id="pin">Pin first two rows</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: true
+    });
+    $("#pin").click(function() {
+      var grid = $("#grid").data("kendoGrid");
+      var items = [grid.dataSource.at(0), grid.dataSource.at(1)];
+      grid.pinRows(items, "top");
+    });
+    </script>
+
 ### refresh
 
 Renders all table rows using the current data items.
@@ -25154,6 +25575,52 @@ To unlock a column when it is the only one locked use the [`setOptions`](/api/ja
       grid.setOptions({
         columns: columns
       })
+    </script>
+
+### unpinRows
+
+Unpins one or more previously pinned data rows.
+
+
+<div class="meta-api-description">
+How do I programmatically unpin rows in a Kendo UI Grid? Unpin, unfreeze, or release one or more specific data rows that were previously pinned to the top or bottom of a grid, restoring them to their normal positions in the scrollable content area, remove rows from the pinned containers, and programmatically toggle row pinning state for dynamic grid management.
+</div>
+
+#### Parameters
+
+##### targets `Array|jQuery|Element|kendo.data.ObservableObject`
+
+A single row or an array of rows to unpin. Each item can be a jQuery object, DOM element, or data item.
+
+#### Example - unpin a row
+
+    <button id="unpin">Unpin first row</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 },
+          { id: 3, name: "Jim Doe", age: 25 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1]
+      }
+    });
+    $("#unpin").click(function() {
+      var grid = $("#grid").data("kendoGrid");
+      var firstItem = grid.dataSource.at(0);
+      grid.unpinRows(firstItem);
+    });
     </script>
 
 ### unstickColumn
@@ -28224,6 +28691,196 @@ The widget instance which fired the event.
         console.log(e.row, e.newHeight, e.oldHeight);
       }
     });
+    </script>
+
+### rowPin
+
+Fired when a row is pinned.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+
+<div class="meta-api-description">
+How do I detect when a row is pinned in a Kendo UI Grid? Detect and respond to row pinning actions in data grids, capturing events triggered when rows are pinned or fixed to the top or bottom of the grid, enabling developers to execute custom logic for updating state, persisting pinning preferences, modifying layouts, or controlling pinning behavior through event prevention. How can I cancel a row pin operation in a grid component?
+</div>
+
+#### Event Data
+
+##### e.dataItem `kendo.data.ObservableObject`
+
+The data item of the row being pinned.
+
+##### e.position `String`
+
+The pin position. Either `"top"` or `"bottom"`.
+
+##### e.pinnedTopRows `Array`
+
+The array of data items that will be pinned to the top after the operation completes.
+
+##### e.pinnedBottomRows `Array`
+
+The array of data items that will be pinned to the bottom after the operation completes.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the row from being pinned.
+
+#### Example - subscribe to the "rowPin" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: true,
+      contextMenu: true,
+      rowPin: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Pinning:", e.dataItem.name);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "rowPin" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_rowPin(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("Pinning:", e.dataItem.name);
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: true,
+      contextMenu: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("rowPin", grid_rowPin);
+    </script>
+
+### rowUnpin
+
+Fired when a row is unpinned.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+
+<div class="meta-api-description">
+How do I detect when a row is unpinned in a Kendo UI Grid? Detect and respond to row unpinning actions in data grids, capturing events triggered when previously pinned rows are released from their fixed position at the top or bottom of the grid, enabling developers to execute custom logic for updating state, persisting preferences, adjusting layouts, or preventing the unpin operation through event cancellation.
+</div>
+
+#### Event Data
+
+##### e.dataItem `kendo.data.ObservableObject`
+
+The data item of the row being unpinned.
+
+##### e.position `String`
+
+The position from which the row is being unpinned. Will be `null` since the row is being removed from pinned state.
+
+##### e.pinnedTopRows `Array`
+
+The array of data items that will be pinned to the top after the operation completes.
+
+##### e.pinnedBottomRows `Array`
+
+The array of data items that will be pinned to the bottom after the operation completes.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the row from being unpinned.
+
+#### Example - subscribe to the "rowUnpin" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1]
+      },
+      contextMenu: true,
+      rowUnpin: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("Unpinning:", e.dataItem.name);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "rowUnpin" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_rowUnpin(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("Unpinning:", e.dataItem.name);
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: { id: "id" }
+        }
+      },
+      pinnable: {
+        top: [1]
+      },
+      contextMenu: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("rowUnpin", grid_rowUnpin);
     </script>
 
 ### save
