@@ -1537,4 +1537,147 @@
                 collapse: "طي"
             });
     }
+
+    /* ColorGradient messages */
+
+    if (kendo.ui.ColorGradient) {
+
+        kendo.ui.ColorGradient.prototype.options.messages =
+            $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+                "contrastRatio": "نسبة التباين:",
+                "fail": "فشل",
+                "pass": "نجاح",
+                "hex": "HEX",
+                "toggleFormat": "تبديل الصيغة",
+                "red": "أحمر",
+                "green": "أخضر",
+                "blue": "أزرق",
+                "alpha": "ألفا"
+            });
+
+    }
+
+    /* PivotConfiguratorV2 messages */
+
+    if (kendo.ui.PivotConfiguratorV2) {
+
+        kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+            $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+                "title": "إعدادات",
+                "cancelButtonText": "إلغاء",
+                "applyButtonText": "تطبيق",
+                "measures": "اختر بعض الحقول لبدء الإعداد",
+                "columns": "اختر بعض الحقول لبدء الإعداد",
+                "rows": "اختر بعض الحقول لبدء الإعداد"
+            });
+
+    }
+
+    /* PivotFieldMenuV2 messages */
+
+    if (kendo.ui.PivotFieldMenuV2) {
+
+        kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+            $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+                "apply": "تطبيق",
+                "sortAscending": "ترتيب تصاعدي",
+                "sortDescending": "ترتيب تنازلي",
+                "filterFields": "تصفية الحقول",
+                "filter": "تصفية",
+                "include": "تضمين الحقول...",
+                "clear": "مسح",
+                "reset": "إعادة تعيين",
+                "moveToColumns": "نقل إلى الأعمدة",
+                "moveToRows": "نقل إلى الصفوف",
+                "movePrevious": "نقل للسابق",
+                "moveNext": "نقل للتالي",
+                "filterOperatorsDropDownLabel": "عوامل تصفية المنطقة",
+                "filterValueTextBoxLabel": "قيمة تصفية المنطقة",
+                "operators": {
+                    "contains": "يحتوي على",
+                    "doesnotcontain": "لا يحتوي على",
+                    "startswith": "يبدأ بـ",
+                    "endswith": "ينتهي بـ",
+                    "eq": "يساوي",
+                    "neq": "لا يساوي"
+                }
+            });
+
+    }
+
+    /* TimePicker */
+
+    /* TimePicker */
+
+    if (kendo.ui.TimePicker) {
+
+        kendo.ui.TimePicker.prototype.options.messages =
+            $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+                "set": "تعيين",
+                "cancel": "إلغاء",
+                "hour": "ساعة",
+                "minute": "دقيقة",
+                "second": "ثانية",
+                "millisecond": "ميلي ثانية",
+                "now": "الآن"
+            });
+
+    }
+
+    /* DateTimePicker */
+
+    /* DateTimePicker */
+
+    if (kendo.ui.DateTimePicker) {
+
+        kendo.ui.DateTimePicker.prototype.options.messages =
+            $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+                "set": "تعيين",
+                "cancel": "إلغاء",
+                "hour": "ساعة",
+                "minute": "دقيقة",
+                "second": "ثانية",
+                "millisecond": "ميلي ثانية",
+                "now": "الآن",
+                "date": "التاريخ",
+                "time": "الوقت",
+                "today": "اليوم",
+                "weekColumnHeader": ""
+            });
+
+    }
+
+    /* Map messages */
+
+    if (kendo.dataviz.ui.Map) {
+
+        kendo.dataviz.ui.Map.prototype.options.messages =
+            $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+                "tileTitle": "عنوان الخريطة"
+            });
+
+    }
+
+    /* Sankey messages */
+
+    if (kendo.dataviz.ui.Sankey) {
+
+        kendo.dataviz.ui.Sankey.prototype.options.messages =
+            $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+                "tooltipUnits": "{0} وحدات"
+            });
+
+    }
+
+    /* Chart messages */
+
+    if (kendo.dataviz.ui.Chart) {
+
+        kendo.dataviz.ui.Chart.prototype.options.messages =
+            $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+                "noData": "لا تتوفر بيانات"
+            });
+
+    }
+
 })(window.kendo.jQuery);

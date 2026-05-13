@@ -1064,4 +1064,546 @@
       });
   }
 
+  /* DropDownList messages */
+
+  if (kendo.ui.DropDownList) {
+
+      kendo.ui.DropDownList.prototype.options.messages =
+          $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+  }
+
+  /* ComboBox messages */
+
+  if (kendo.ui.ComboBox) {
+
+      kendo.ui.ComboBox.prototype.options.messages =
+          $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+  }
+
+  /* AutoComplete messages */
+
+  if (kendo.ui.AutoComplete) {
+
+      kendo.ui.AutoComplete.prototype.options.messages =
+          $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+  }
+
+  /* MultiColumnComboBox messages */
+
+  if (kendo.ui.MultiColumnComboBox) {
+
+      kendo.ui.MultiColumnComboBox.prototype.options.messages =
+          $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+  }
+
+  /* ColorGradient messages */
+
+  if (kendo.ui.ColorGradient) {
+
+      kendo.ui.ColorGradient.prototype.options.messages =
+          $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+              "contrastRatio": "Αναλογία αντίθεσης:",
+              "fail": "Αποτυχία",
+              "pass": "Επιτυχία",
+              "hex": "HEX",
+              "toggleFormat": "Εναλλαγή μορφής",
+              "red": "Κόκκινο",
+              "green": "Πράσινο",
+              "blue": "Μπλε",
+              "alpha": "Άλφα"
+          });
+
+  }
+
+  /* DateRangePicker messages */
+
+  if (kendo.ui.DateRangePicker) {
+
+      kendo.ui.DateRangePicker.prototype.options.messages =
+          $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
+              "startLabel": "Αρχή",
+              "endLabel": "Τέλος"
+          });
+
+  }
+
+  /* FileManager messages */
+
+  if (kendo.ui.FileManager) {
+
+      kendo.ui.FileManager.prototype.options.messages =
+          $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+              "toolbar": {
+                  "createFolder": "Νέος φάκελος",
+                  "upload": "Μεταφόρτωση",
+                  "sortDirection": "Κατεύθυνση ταξινόμησης",
+                  "sortDirectionAsc": "Αύξουσα",
+                  "sortDirectionDesc": "Φθίνουσα",
+                  "sortField": "Ταξινόμηση κατά",
+                  "nameField": "Όνομα",
+                  "sizeField": "Μέγεθος",
+                  "typeField": "Τύπος",
+                  "dateModifiedField": "Ημερομηνία τροποποίησης",
+                  "dateCreatedField": "Ημερομηνία δημιουργίας",
+                  "listView": "Προβολή λίστας",
+                  "gridView": "Προβολή πλέγματος",
+                  "search": "Αναζήτηση",
+                  "details": "Λεπτομέρειες",
+                  "detailsChecked": "Ναι",
+                  "detailsUnchecked": "Όχι",
+                  "Delete": "Διαγραφή",
+                  "Rename": "Μετονομασία"
+              },
+              "views": {
+                  "nameField": "Όνομα",
+                  "sizeField": "Μέγεθος",
+                  "typeField": "Τύπος",
+                  "dateModifiedField": "Ημερομηνία τροποποίησης",
+                  "dateCreatedField": "Ημερομηνία δημιουργίας",
+                  "items": "στοιχεία"
+              },
+              "dialogs": {
+                  "upload": {
+                      "title": "Μεταφόρτωση αρχείων",
+                      "clear": "Εκκαθάριση",
+                      "done": "Ολοκληρώθηκε"
+                  },
+                  "moveConfirm": {
+                      "title": " ",
+                      "content": "<p class='k-text-center'>Θέλετε να μετακινήσετε ή να αντιγράψετε τα επιλεγμένα αρχεία;</p>",
+                      "okText": "Αντιγραφή",
+                      "cancel": "Μετακίνηση",
+                      "close": "Κλείσιμο"
+                  },
+                  "deleteConfirm": {
+                      "title": "Επιβεβαίωση διαγραφής",
+                      "content": "<p class='k-text-center'>Είστε βέβαιοι ότι θέλετε να διαγράψετε τα επιλεγμένα αρχεία;<br/>Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.</p>",
+                      "okText": "Διαγραφή",
+                      "cancel": "Ακύρωση",
+                      "close": "Κλείσιμο"
+                  },
+                  "renamePrompt": {
+                      "title": "Μετονομασία",
+                      "content": "<p class='k-text-center'>Εισαγάγετε νέο όνομα αρχείου</p>",
+                      "okText": "Μετονομασία",
+                      "cancel": "Ακύρωση",
+                      "close": "Κλείσιμο"
+                  }
+              },
+              "previewPane": {
+                  "noFileSelected": "Δεν επιλέχθηκε αρχείο",
+                  "extension": "Τύπος",
+                  "size": "Μέγεθος",
+                  "created": "Ημερομηνία δημιουργίας",
+                  "createdUtc": "Ημερομηνία δημιουργίας (UTC)",
+                  "modified": "Ημερομηνία τροποποίησης",
+                  "modifiedUtc": "Ημερομηνία τροποποίησης (UTC)",
+                  "items": "στοιχεία"
+              }
+          });
+
+  }
+
+  /* TaskBoard messages */
+
+  if (kendo.ui.TaskBoard) {
+
+      kendo.ui.TaskBoard.prototype.options.messages =
+          $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+              "edit": "Επεξεργασία",
+              "createNewCard": "Νέα κάρτα",
+              "create": "Δημιουργία",
+              "search": "Αναζήτηση",
+              "previewCard": "Προεπισκόπηση κάρτας",
+              "addCard": "Προσθήκη κάρτας",
+              "editCard": "Επεξεργασία κάρτας",
+              "deleteCard": "Διαγραφή κάρτας",
+              "addColumn": "Προσθήκη στήλης",
+              "editColumn": "Επεξεργασία στήλης",
+              "deleteColumn": "Διαγραφή στήλης",
+              "close": "Κλείσιμο",
+              "cancel": "Ακύρωση",
+              "delete": "Διαγραφή",
+              "saveChanges": "Αποθήκευση αλλαγών",
+              "title": "Τίτλος:",
+              "description": "Περιγραφή:",
+              "newColumn": "Νέα στήλη",
+              "deleteColumnConfirm": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή τη στήλη;",
+              "deleteCardConfirm": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την κάρτα;"
+          });
+
+  }
+
+  /* PivotConfiguratorV2 messages */
+
+  if (kendo.ui.PivotConfiguratorV2) {
+
+      kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+          $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+              "title": "Ρυθμίσεις",
+              "cancelButtonText": "Ακύρωση",
+              "applyButtonText": "Εφαρμογή",
+              "measures": "Επιλέξτε πεδία για εκκίνηση",
+              "columns": "Επιλέξτε πεδία για εκκίνηση",
+              "rows": "Επιλέξτε πεδία για εκκίνηση"
+          });
+
+  }
+
+  /* PivotFieldMenuV2 messages */
+
+  if (kendo.ui.PivotFieldMenuV2) {
+
+      kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+          $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+              "apply": "Εφαρμογή",
+              "sortAscending": "Αύξουσα σειρά",
+              "sortDescending": "Φθίνουσα σειρά",
+              "filterFields": "Φίλτρο πεδίων",
+              "filter": "Φίλτρο",
+              "include": "Συμπερίληψη πεδίων...",
+              "clear": "Εκκαθάριση",
+              "reset": "Επαναφορά",
+              "moveToColumns": "Μετακίνηση σε στήλες",
+              "moveToRows": "Μετακίνηση σε γραμμές",
+              "movePrevious": "Μετακίνηση πίσω",
+              "moveNext": "Μετακίνηση μπροστά",
+              "filterOperatorsDropDownLabel": "Τελεστές φίλτρου",
+              "filterValueTextBoxLabel": "Τιμή φίλτρου",
+              "operators": {
+                  "contains": "Περιέχει",
+                  "doesnotcontain": "Δεν περιέχει",
+                  "startswith": "Αρχίζει με",
+                  "endswith": "Τελειώνει με",
+                  "eq": "Είναι ίσο με",
+                  "neq": "Δεν είναι ίσο με"
+              }
+          });
+
+  }
+
+  /* MobileRecurrenceEditor messages */
+
+  if (kendo.ui.MobileRecurrenceEditor) {
+
+      kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+          $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+              "cancel": "Ακύρωση",
+              "update": "Αποθήκευση",
+              "endTitle": "Τέλος επανάληψης",
+              "repeatTitle": "Μοτίβο επανάληψης",
+              "headerTitle": "Επανάληψη συμβάντος",
+              "end": {
+                  "never": "Ποτέ",
+                  "after": "Μετά",
+                  "on": "Στις"
+              },
+              "daily": {
+                  "interval": "ημέρα(-ες)"
+              },
+              "weekly": {
+                  "interval": "εβδομάδα(-ες)"
+              },
+              "monthly": {
+                  "interval": "μήνα(-ες)",
+                  "repeatBy": "Επανάληψη κατά: ",
+                  "dayOfMonth": "Ημέρα του μήνα",
+                  "dayOfWeek": "Ημέρα της εβδομάδας"
+              },
+              "yearly": {
+                  "interval": "έτος(-η)",
+                  "repeatBy": "Επανάληψη κατά: ",
+                  "dayOfMonth": "Ημέρα του μήνα",
+                  "dayOfWeek": "Ημέρα της εβδομάδας",
+                  "of": " του "
+              },
+              "endRule": {
+                  "after": " εμφάνιση(-εις)",
+                  "on": "Στις "
+              }
+          });
+
+  }
+
+  /* ListBox messaages */
+
+  if (kendo.ui.ListBox) {
+
+      kendo.ui.ListBox.prototype.options.messages =
+          $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
+              "tools": {
+                  "remove": "Διαγραφή",
+                  "moveUp": "Μετακίνηση επάνω",
+                  "moveDown": "Μετακίνηση κάτω",
+                  "transferTo": "Μεταφορά σε",
+                  "transferFrom": "Μεταφορά από",
+                  "transferAllTo": "Μεταφορά όλων σε",
+                  "transferAllFrom": "Μεταφορά όλων από"
+              }
+          });
+
+  }
+
+  /* TimePicker */
+
+  if (kendo.ui.TimePicker) {
+
+      kendo.ui.TimePicker.prototype.options.messages =
+          $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+              "set": "Ορισμός",
+              "cancel": "Ακύρωση",
+              "hour": "ώρα",
+              "minute": "λεπτό",
+              "second": "δευτερόλεπτο",
+              "millisecond": "χιλιοστό δευτερολέπτου",
+              "now": "Τώρα"
+          });
+
+  }
+
+  /* DateTimePicker */
+
+  if (kendo.ui.DateTimePicker) {
+
+      kendo.ui.DateTimePicker.prototype.options.messages =
+          $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+              "set": "Ορισμός",
+              "cancel": "Ακύρωση",
+              "hour": "ώρα",
+              "minute": "λεπτό",
+              "second": "δευτερόλεπτο",
+              "millisecond": "χιλιοστό δευτερολέπτου",
+              "now": "Τώρα",
+              "date": "Ημερομηνία",
+              "time": "Ώρα",
+              "today": "Σήμερα",
+              "weekColumnHeader": ""
+          });
+
+  }
+
+  /* Calendar */
+
+  if (kendo.ui.Calendar) {
+
+      kendo.ui.Calendar.prototype.options.messages =
+          $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+              "weekColumnHeader": "",
+              "today": "Σήμερα",
+              "navigateTo": "Μετάβαση σε: ",
+              "parentViews": {
+                  "month": "Ετήσια προβολή",
+                  "year": "Δεκαετής προβολή",
+                  "decade": "Αιώνια προβολή"
+              }
+          });
+
+  }
+
+  /* DateInput */
+
+  if (kendo.ui.DateInput) {
+
+      kendo.ui.DateInput.prototype.options.messages =
+          $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+              "year": "έτος",
+              "month": "μήνας",
+              "day": "ημέρα",
+              "weekday": "ημέρα εβδομάδας",
+              "hour": "ώρες",
+              "minute": "λεπτά",
+              "second": "δευτερόλεπτα",
+              "dayperiod": "ΠΜ/ΜΜ"
+          });
+
+  }
+
+  /* List messages */
+
+  if (kendo.ui.List) {
+
+      kendo.ui.List.prototype.options.messages =
+          $.extend(true, kendo.ui.List.prototype.options.messages, {
+              "clear": "εκκαθάριση",
+              "noData": "Δεν βρέθηκαν δεδομένα."
+          });
+
+  }
+
+  /* DropDownTree messages */
+
+  if (kendo.ui.DropDownTree) {
+
+      kendo.ui.DropDownTree.prototype.options.messages =
+          $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+              "clear": "εκκαθάριση",
+              "noData": "Δεν βρέθηκαν δεδομένα.",
+              "singleTag": "στοιχείο(-α) επιλεγμένο(-α)"
+          });
+
+  }
+
+  /* MultiSelect messages */
+
+  if (kendo.ui.MultiSelect) {
+
+      kendo.ui.MultiSelect.prototype.options.messages =
+          $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+              "clear": "εκκαθάριση",
+              "noData": "Δεν βρέθηκαν δεδομένα.",
+              "singleTag": "στοιχείο(-α) επιλεγμένο(-α)"
+          });
+
+  }
+
+  /* Chat messages */
+
+  if (kendo.ui.Chat) {
+
+      kendo.ui.Chat.prototype.options.messages =
+          $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+              "placeholder": "Πληκτρολογήστε μήνυμα...",
+              "toggleButton": "Εναλλαγή γραμμής εργαλείων",
+              "sendButton": "Αποστολή"
+          });
+
+  }
+
+  /* Wizard messages */
+
+  if (kendo.ui.Wizard) {
+
+      kendo.ui.Wizard.prototype.options.messages =
+          $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+              "reset": "Επαναφορά",
+              "previous": "Προηγούμενο",
+              "next": "Επόμενο",
+              "done": "Ολοκλήρωση",
+              "step": "Βήμα",
+              "of": "από"
+          });
+
+  }
+
+  /* PDFViewer messages */
+
+  if (kendo.ui.PDFViewer) {
+
+      kendo.ui.PDFViewer.prototype.options.messages =
+          $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+              "defaultFileName": "Έγγραφο",
+              "toolbar": {
+                  "zoom": {
+                      "zoomLevel": "Επίπεδο ζουμ",
+                      "zoomOut": "Σμίκρυνση",
+                      "zoomIn": "Μεγέθυνση",
+                      "actualWidth": "Πραγματικό πλάτος",
+                      "autoWidth": "Αυτόματο πλάτος",
+                      "fitToWidth": "Προσαρμογή στο πλάτος",
+                      "fitToPage": "Προσαρμογή στη σελίδα"
+                  },
+                  "open": "Άνοιγμα",
+                  "exportAs": "Εξαγωγή",
+                  "download": "Λήψη",
+                  "pager": {
+                      "first": "Μετάβαση στην πρώτη σελίδα",
+                      "previous": "Μετάβαση στην προηγούμενη σελίδα",
+                      "next": "Μετάβαση στην επόμενη σελίδα",
+                      "last": "Μετάβαση στην τελευταία σελίδα",
+                      "of": "από",
+                      "page": "σελίδα",
+                      "pages": "σελίδες"
+                  },
+                  "print": "Εκτύπωση",
+                  "toggleSelection": "Ενεργοποίηση επιλογής",
+                  "togglePan": "Ενεργοποίηση μετακίνησης",
+                  "search": "Αναζήτηση"
+              },
+              "errorMessages": {
+                  "notSupported": "Υποστηρίζονται μόνο αρχεία PDF.",
+                  "parseError": "Δεν ήταν δυνατή η επεξεργασία του αρχείου PDF.",
+                  "notFound": "Το αρχείο δεν βρέθηκε.",
+                  "popupBlocked": "Το αναδυόμενο παράθυρο αποκλείεται από τον περιηγητή."
+              }
+          });
+
+  }
+
+  /* Captcha messages */
+
+  if (kendo.ui.Captcha) {
+
+      kendo.ui.Captcha.prototype.options.messages =
+          $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+              "reset": "Αναδημιουργία captcha",
+              "audio": "Αναπαραγωγή ήχου captcha",
+              "imageAlt": "Πληκτρολογήστε το κείμενο από την εικόνα captcha",
+              "success": "Η επαλήθευση ήταν επιτυχής"
+          });
+
+  }
+
+  /* OrgChart messages */
+
+  if (kendo.ui.OrgChart) {
+
+      kendo.ui.OrgChart.prototype.options.messages =
+          $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+              "label": "Οργανόγραμμα",
+              "edit": "Επεξεργασία",
+              "create": "Δημιουργία",
+              "destroy": "Διαγραφή",
+              "destroyContent": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το στοιχείο και τα υποκείμενά του;",
+              "destroyTitle": "Διαγραφή στοιχείου",
+              "cancel": "Ακύρωση",
+              "save": "Αποθήκευση",
+              "menuLabel": "Μενού επεξεργασίας",
+              "uploadAvatar": "Μεταφόρτωση νέας εικόνας",
+              "parent": "Γονικό",
+              "name": "Όνομα",
+              "title": "Τίτλος",
+              "none": "--Κανένα--",
+              "expand": "Ανάπτυξη",
+              "collapse": "Σύμπτυξη"
+          });
+
+  }
+
+  /* Map messages */
+
+  if (kendo.dataviz.ui.Map) {
+
+      kendo.dataviz.ui.Map.prototype.options.messages =
+          $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+              "tileTitle": "Τίτλος χάρτη"
+          });
+
+  }
+
+  /* Sankey messages */
+
+  if (kendo.dataviz.ui.Sankey) {
+
+      kendo.dataviz.ui.Sankey.prototype.options.messages =
+          $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+              "tooltipUnits": "{0} Μονάδες"
+          });
+
+  }
+
+  /* Chart messages */
+
+  if (kendo.dataviz.ui.Chart) {
+
+      kendo.dataviz.ui.Chart.prototype.options.messages =
+          $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+              "noData": "Δεν υπάρχουν διαθέσιμα δεδομένα"
+          });
+
+  }
+
 })(window.kendo.jQuery);

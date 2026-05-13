@@ -36,7 +36,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
 });
 }
 
-/* Filter menu operator messages */
+/* FilterMenu operator messages */
 
 if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.operators =
@@ -536,7 +536,7 @@ $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
 });
 }
 
-/* Gantt */
+/* Gantt messages */
 
 if (kendo.ui.Gantt) {
 kendo.ui.Gantt.prototype.options.messages =
@@ -961,5 +961,678 @@ $.extend(true, kendo.spreadsheet.messages.view,{
   }
 });
 }
+
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+
+    kendo.ui.DropDownList.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+
+    kendo.ui.ComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+
+    kendo.ui.AutoComplete.prototype.options.messages =
+        $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+
+    kendo.ui.ColorGradient.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+            "contrastRatio": "Коэффициент контрастности:",
+            "fail": "Не пройдено",
+            "pass": "Пройдено",
+            "hex": "HEX",
+            "toggleFormat": "Переключить формат",
+            "red": "Красный",
+            "green": "Зелёный",
+            "blue": "Синий",
+            "alpha": "Альфа"
+        });
+
+}
+
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+
+    kendo.ui.FlatColorPicker.prototype.options.messages =
+        $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+            "apply": "Применить",
+            "cancel": "Отмена",
+            "noColor": "без цвета",
+            "clearColor": "Очистить цвет"
+        });
+
+}
+
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+
+    kendo.ui.ColorPicker.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+            "apply": "Применить",
+            "cancel": "Отмена",
+            "noColor": "без цвета",
+            "clearColor": "Очистить цвет"
+        });
+
+}
+
+/* FileBrowser messages */
+
+if (kendo.ui.FileBrowser) {
+
+    kendo.ui.FileBrowser.prototype.options.messages =
+        $.extend(true, kendo.ui.FileBrowser.prototype.options.messages, {
+            "uploadFile": "Загрузить",
+            "orderBy": "Сортировать по",
+            "orderByName": "Имя",
+            "orderBySize": "Размер",
+            "directoryNotFound": "Каталог с таким именем не найден.",
+            "emptyFolder": "Пустая папка",
+            "deleteFile": "Вы уверены, что хотите удалить \"{0}\"?",
+            "invalidFileType": "Выбранный файл \"{0}\" недопустим. Поддерживаемые типы файлов: {1}.",
+            "overwriteFile": "Файл с именем \"{0}\" уже существует в текущем каталоге. Хотите перезаписать его?",
+            "dropFilesHere": "перетащите файл сюда для загрузки",
+            "search": "Поиск"
+        });
+
+}
+
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+
+    kendo.ui.FileManager.prototype.options.messages =
+        $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+            "toolbar": {
+                "createFolder": "Новая папка",
+                "upload": "Загрузить",
+                "sortDirection": "Направление сортировки",
+                "sortDirectionAsc": "По возрастанию",
+                "sortDirectionDesc": "По убыванию",
+                "sortField": "Сортировать по",
+                "nameField": "Имя",
+                "sizeField": "Размер",
+                "typeField": "Тип",
+                "dateModifiedField": "Дата изменения",
+                "dateCreatedField": "Дата создания",
+                "listView": "Список",
+                "gridView": "Таблица",
+                "search": "Поиск",
+                "details": "Подробности",
+                "detailsChecked": "Да",
+                "detailsUnchecked": "Нет",
+                "Delete": "Удалить",
+                "Rename": "Переименовать"
+            },
+            "views": {
+                "nameField": "Имя",
+                "sizeField": "Размер",
+                "typeField": "Тип",
+                "dateModifiedField": "Дата изменения",
+                "dateCreatedField": "Дата создания",
+                "items": "элементов"
+            },
+            "dialogs": {
+                "upload": {
+                    "title": "Загрузить файлы",
+                    "clear": "Очистить",
+                    "done": "Готово"
+                },
+                "moveConfirm": {
+                    "title": " ",
+                    "content": "<p class='k-text-center'>Переместить или скопировать выбранные файлы?</p>",
+                    "okText": "Копировать",
+                    "cancel": "Переместить",
+                    "close": "Закрыть"
+                },
+                "deleteConfirm": {
+                    "title": "Подтвердить удаление",
+                    "content": "<p class='k-text-center'>Вы уверены, что хотите удалить выбранные файлы?<br/>Это действие нельзя отменить.</p>",
+                    "okText": "Удалить",
+                    "cancel": "Отмена",
+                    "close": "Закрыть"
+                },
+                "renamePrompt": {
+                    "title": "Переименовать",
+                    "content": "<p class='k-text-center'>Введите новое имя файла</p>",
+                    "okText": "Переименовать",
+                    "cancel": "Отмена",
+                    "close": "Закрыть"
+                }
+            },
+            "previewPane": {
+                "noFileSelected": "Файл не выбран",
+                "extension": "Тип",
+                "size": "Размер",
+                "created": "Дата создания",
+                "createdUtc": "Дата создания (UTC)",
+                "modified": "Дата изменения",
+                "modifiedUtc": "Дата изменения (UTC)",
+                "items": "элементов"
+            }
+        });
+
+}
+
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+
+    kendo.ui.TaskBoard.prototype.options.messages =
+        $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+            "edit": "Редактировать",
+            "createNewCard": "Новая карточка",
+            "create": "Создать",
+            "search": "Поиск",
+            "previewCard": "Предпросмотр карточки",
+            "addCard": "Добавить карточку",
+            "editCard": "Редактировать карточку",
+            "deleteCard": "Удалить карточку",
+            "addColumn": "Добавить столбец",
+            "editColumn": "Редактировать столбец",
+            "deleteColumn": "Удалить столбец",
+            "close": "Закрыть",
+            "cancel": "Отмена",
+            "delete": "Удалить",
+            "saveChanges": "Сохранить изменения",
+            "title": "Название:",
+            "description": "Описание:",
+            "newColumn": "Новый столбец",
+            "deleteColumnConfirm": "Вы уверены, что хотите удалить этот столбец?",
+            "deleteCardConfirm": "Вы уверены, что хотите удалить эту карточку?"
+        });
+
+}
+
+/* NumericTextBox messages */
+
+if (kendo.ui.NumericTextBox) {
+
+    kendo.ui.NumericTextBox.prototype.options =
+        $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+            "upArrowText": "Увеличить значение",
+            "downArrowText": "Уменьшить значение"
+        });
+
+}
+
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+
+    kendo.ui.MediaPlayer.prototype.options.messages =
+        $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages, {
+            "pause": "Пауза",
+            "play": "Воспроизведение",
+            "mute": "Отключить звук",
+            "unmute": "Включить звук",
+            "quality": "Качество",
+            "fullscreen": "Полный экран"
+        });
+
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "Настройки",
+            "cancelButtonText": "Отмена",
+            "applyButtonText": "Применить",
+            "measures": "Выберите поля для начала",
+            "columns": "Выберите поля для начала",
+            "rows": "Выберите поля для начала"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "Применить",
+            "sortAscending": "По возрастанию",
+            "sortDescending": "По убыванию",
+            "filterFields": "Фильтр полей",
+            "filter": "Фильтр",
+            "include": "Включить поля...",
+            "clear": "Очистить",
+            "reset": "Сбросить",
+            "moveToColumns": "Переместить в столбцы",
+            "moveToRows": "Переместить в строки",
+            "movePrevious": "Назад",
+            "moveNext": "Вперёд",
+            "filterOperatorsDropDownLabel": "Операторы фильтра",
+            "filterValueTextBoxLabel": "Значение фильтра",
+            "operators": {
+                "contains": "Содержит",
+                "doesnotcontain": "Не содержит",
+                "startswith": "Начинается с",
+                "endswith": "Заканчивается на",
+                "eq": "Равно",
+                "neq": "Не равно"
+            }
+        });
+
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+        $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+            "cancel": "Отмена",
+            "update": "Сохранить",
+            "endTitle": "Окончание повторения",
+            "repeatTitle": "Шаблон повторения",
+            "headerTitle": "Повторить событие",
+            "end": {
+                "never": "Никогда",
+                "after": "После",
+                "on": "В дату"
+            },
+            "daily": {
+                "interval": "дн."
+            },
+            "weekly": {
+                "interval": "нед."
+            },
+            "monthly": {
+                "interval": "мес.",
+                "repeatBy": "Повторять по: ",
+                "dayOfMonth": "День месяца",
+                "dayOfWeek": "День недели"
+            },
+            "yearly": {
+                "interval": "г.",
+                "repeatBy": "Повторять по: ",
+                "dayOfMonth": "День месяца",
+                "dayOfWeek": "День недели",
+                "of": " из "
+            },
+            "endRule": {
+                "after": " повтор(ов)",
+                "on": "В дату "
+            }
+        });
+
+}
+
+/* Slider messages */
+
+if (kendo.ui.Slider) {
+
+    kendo.ui.Slider.prototype.options =
+        $.extend(true, kendo.ui.Slider.prototype.options, {
+            "increaseButtonTitle": "Увеличить",
+            "decreaseButtonTitle": "Уменьшить",
+            "dragHandleTitle": "Перетащить"
+        });
+
+}
+
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+
+    kendo.ui.ListBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
+            "tools": {
+                "remove": "Удалить",
+                "moveUp": "Вверх",
+                "moveDown": "Вниз",
+                "transferTo": "Перенести в",
+                "transferFrom": "Перенести из",
+                "transferAllTo": "Перенести все в",
+                "transferAllFrom": "Перенести все из"
+            }
+        });
+
+}
+
+/* TreeView messages */
+
+if (kendo.ui.TreeView) {
+
+    kendo.ui.TreeView.prototype.options.messages =
+        $.extend(true, kendo.ui.TreeView.prototype.options.messages, {
+            "loading": "Загрузка...",
+            "requestFailed": "Ошибка запроса.",
+            "retry": "Повторить"
+        });
+
+}
+
+/* kendo.ui.progress method */
+
+if (kendo.ui.progress) {
+
+    kendo.ui.progress.messages =
+        $.extend(true, kendo.ui.progress.messages, {
+            "loading": "Загрузка..."
+        });
+
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+
+    kendo.ui.TimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+            "set": "Установить",
+            "cancel": "Отмена",
+            "hour": "час",
+            "minute": "минута",
+            "second": "секунда",
+            "millisecond": "миллисекунда",
+            "now": "Сейчас"
+        });
+
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+
+    kendo.ui.DateTimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+            "set": "Установить",
+            "cancel": "Отмена",
+            "hour": "час",
+            "minute": "минута",
+            "second": "секунда",
+            "millisecond": "миллисекунда",
+            "now": "Сейчас",
+            "date": "Дата",
+            "time": "Время",
+            "today": "Сегодня",
+            "weekColumnHeader": ""
+        });
+
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+
+    kendo.ui.Calendar.prototype.options.messages =
+        $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+            "weekColumnHeader": "",
+            "today": "Сегодня",
+            "navigateTo": "Перейти к: ",
+            "parentViews": {
+                "month": "Годовой вид",
+                "year": "Десятилетний вид",
+                "decade": "Вековой вид"
+            }
+        });
+
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+
+    kendo.ui.List.prototype.options.messages =
+        $.extend(true, kendo.ui.List.prototype.options.messages, {
+            "clear": "очистить",
+            "noData": "Данные не найдены."
+        });
+
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+
+    kendo.ui.DropDownTree.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+            "clear": "очистить",
+            "noData": "Данные не найдены.",
+            "singleTag": "элемент(ов) выбрано"
+        });
+
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+
+    kendo.ui.MultiSelect.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+            "clear": "очистить",
+            "noData": "Данные не найдены.",
+            "singleTag": "элемент(ов) выбрано"
+        });
+
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+
+    kendo.ui.Chat.prototype.options.messages =
+        $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+            "placeholder": "Введите сообщение...",
+            "toggleButton": "Панель инструментов",
+            "sendButton": "Отправить"
+        });
+
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+
+    kendo.ui.Wizard.prototype.options.messages =
+        $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+            "reset": "Сбросить",
+            "previous": "Назад",
+            "next": "Далее",
+            "done": "Готово",
+            "step": "Шаг",
+            "of": "из"
+        });
+
+}
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            "defaultFileName": "Документ",
+            "toolbar": {
+                "zoom": {
+                    "zoomLevel": "Масштаб",
+                    "zoomOut": "Уменьшить",
+                    "zoomIn": "Увеличить",
+                    "actualWidth": "Реальная ширина",
+                    "autoWidth": "Авто ширина",
+                    "fitToWidth": "По ширине",
+                    "fitToPage": "По странице"
+                },
+                "open": "Открыть",
+                "exportAs": "Экспорт",
+                "download": "Скачать",
+                "pager": {
+                    "first": "К первой странице",
+                    "previous": "К предыдущей странице",
+                    "next": "К следующей странице",
+                    "last": "К последней странице",
+                    "of": "из",
+                    "page": "страница",
+                    "pages": "страниц"
+                },
+                "print": "Печать",
+                "toggleSelection": "Выделение",
+                "togglePan": "Прокрутка",
+                "search": "Поиск"
+            },
+            "errorMessages": {
+                "notSupported": "Поддерживаются только PDF-файлы.",
+                "parseError": "Не удалось обработать PDF-файл.",
+                "notFound": "Файл не найден.",
+                "popupBlocked": "Всплывающее окно заблокировано браузером."
+            }
+        });
+
+}
+
+/* Captcha messages */
+
+if (kendo.ui.Captcha) {
+
+    kendo.ui.Captcha.prototype.options.messages =
+        $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+            "reset": "Обновить captcha",
+            "audio": "Воспроизвести звук captcha",
+            "imageAlt": "Введите текст с изображения captcha",
+            "success": "Проверка пройдена"
+        });
+
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+
+    kendo.ui.OrgChart.prototype.options.messages =
+        $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+            "label": "Организационная диаграмма",
+            "edit": "Редактировать",
+            "create": "Создать",
+            "destroy": "Удалить",
+            "destroyContent": "Вы уверены, что хотите удалить этот элемент и его подчинённые?",
+            "destroyTitle": "Удалить элемент",
+            "cancel": "Отмена",
+            "save": "Сохранить",
+            "menuLabel": "Меню редактирования",
+            "uploadAvatar": "Загрузить изображение",
+            "parent": "Родитель",
+            "name": "Имя",
+            "title": "Должность",
+            "none": "--Нет--",
+            "expand": "Развернуть",
+            "collapse": "Свернуть"
+        });
+
+}
+
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+
+    kendo.dataviz.ui.Map.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+            "tileTitle": "Заголовок карты"
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} Единиц"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "Нет доступных данных"
+        });
+
+}
+
+  /* FilterCell operators */
+  if (kendo.ui.FilterCell) {
+    kendo.ui.FilterCell.prototype.options.operators =
+      $.extend(true, kendo.ui.FilterCell.prototype.options.operators, {
+        "string": {
+          "eq": "равно",
+          "neq": "не равно",
+          "startswith": "начинается с",
+          "contains": "содержит",
+          "doesnotcontain": "не содержит",
+          "endswith": "оканчивается на",
+          "isnull": "равно null",
+          "isnotnull": "не равно null",
+          "isempty": "пусто",
+          "isnotempty": "не пусто",
+          "isnullorempty": "не имеет значения",
+          "isnotnullorempty": "имеет значение"
+        },
+        "number": {
+          "eq": "равно",
+          "neq": "не равно",
+          "gte": "больше или равно",
+          "gt": "больше",
+          "lte": "меньше или равно",
+          "lt": "меньше",
+          "isnull": "равно null",
+          "isnotnull": "не равно null"
+        },
+        "date": {
+          "eq": "равно",
+          "neq": "не равно",
+          "gte": "после или равно",
+          "gt": "после",
+          "lte": "до или равно",
+          "lt": "до",
+          "isnull": "равно null",
+          "isnotnull": "не равно null"
+        },
+        "enums": {
+          "eq": "равно",
+          "neq": "не равно",
+          "isnull": "равно null",
+          "isnotnull": "не равно null"
+        }
+      });
+  }
 
 })(window.kendo.jQuery);

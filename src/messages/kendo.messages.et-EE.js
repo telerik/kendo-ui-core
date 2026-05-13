@@ -564,7 +564,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancelDelete": "Tühista",
     "confirmation": "Olete kindel, et soovite selle salvestise kustutada",
     "confirmDelete": "Kustuta"
-
   },
     "noRecords": "Salvestisi pole saadaval",
     "expandCollapseColumnHeader": "",
@@ -1669,6 +1668,76 @@ if (kendo.dataviz.ui.Map) {
     $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
         "tileTitle": "Kaardi pealkiri"
     });
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "Seaded",
+            "cancelButtonText": "Tühista",
+            "applyButtonText": "Rakenda",
+            "measures": "Valige alustamiseks väljad",
+            "columns": "Valige alustamiseks väljad",
+            "rows": "Valige alustamiseks väljad"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "Rakenda",
+            "sortAscending": "Kasvav järjestus",
+            "sortDescending": "Kahanev järjestus",
+            "filterFields": "Väljade filter",
+            "filter": "Filter",
+            "include": "Kaasa väljad...",
+            "clear": "Tühjenda",
+            "reset": "Lähtesta",
+            "moveToColumns": "Teisalda veergudesse",
+            "moveToRows": "Teisalda ridadesse",
+            "movePrevious": "Teisalda eelmisele",
+            "moveNext": "Teisalda järgmisele",
+            "filterOperatorsDropDownLabel": "Filtri operaatorid",
+            "filterValueTextBoxLabel": "Filtri väärtus",
+            "operators": {
+                "contains": "Sisaldab",
+                "doesnotcontain": "Ei sisalda",
+                "startswith": "Algab",
+                "endswith": "Lõppeb",
+                "eq": "On võrdne",
+                "neq": "Ei ole võrdne"
+            }
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} Ühikut"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "Andmed puuduvad"
+        });
+
 }
 
 })(window.kendo.jQuery);

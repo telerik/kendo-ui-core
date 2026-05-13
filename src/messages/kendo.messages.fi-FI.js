@@ -919,4 +919,573 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+
+    kendo.ui.DropDownList.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+
+    kendo.ui.ComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+
+    kendo.ui.AutoComplete.prototype.options.messages =
+        $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+
+    kendo.ui.ColorGradient.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+            "contrastRatio": "Kontrastisuhde:",
+            "fail": "Epäonnistui",
+            "pass": "Hyväksytty",
+            "hex": "HEX",
+            "toggleFormat": "Vaihda muoto",
+            "red": "Punainen",
+            "green": "Vihreä",
+            "blue": "Sininen",
+            "alpha": "Alfa"
+        });
+
+}
+
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+
+    kendo.ui.DateRangePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
+            "startLabel": "Alku",
+            "endLabel": "Loppu"
+        });
+
+}
+
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+
+    kendo.ui.FileManager.prototype.options.messages =
+        $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+            "toolbar": {
+                "createFolder": "Uusi kansio",
+                "upload": "Lataa",
+                "sortDirection": "Lajittelujärjestys",
+                "sortDirectionAsc": "Nouseva",
+                "sortDirectionDesc": "Laskeva",
+                "sortField": "Lajittele",
+                "nameField": "Nimi",
+                "sizeField": "Koko",
+                "typeField": "Tyyppi",
+                "dateModifiedField": "Muokattu",
+                "dateCreatedField": "Luotu",
+                "listView": "Listanäkymä",
+                "gridView": "Ruudukkonäkymä",
+                "search": "Hae",
+                "details": "Tiedot",
+                "detailsChecked": "Kyllä",
+                "detailsUnchecked": "Ei",
+                "Delete": "Poista",
+                "Rename": "Nimeä uudelleen"
+            },
+            "views": {
+                "nameField": "Nimi",
+                "sizeField": "Koko",
+                "typeField": "Tyyppi",
+                "dateModifiedField": "Muokattu",
+                "dateCreatedField": "Luotu",
+                "items": "kohdetta"
+            },
+            "dialogs": {
+                "upload": {
+                    "title": "Lataa tiedostoja",
+                    "clear": "Tyhjennä",
+                    "done": "Valmis"
+                },
+                "moveConfirm": {
+                    "title": " ",
+                    "content": "<p class='k-text-center'>Haluatko siirtää vai kopioida valitut tiedostot?</p>",
+                    "okText": "Kopioi",
+                    "cancel": "Siirrä",
+                    "close": "Sulje"
+                },
+                "deleteConfirm": {
+                    "title": "Vahvista poisto",
+                    "content": "<p class='k-text-center'>Haluatko varmasti poistaa valitut tiedostot?<br/>Tätä toimintoa ei voi kumota.</p>",
+                    "okText": "Poista",
+                    "cancel": "Peruuta",
+                    "close": "Sulje"
+                },
+                "renamePrompt": {
+                    "title": "Nimeä uudelleen",
+                    "content": "<p class='k-text-center'>Anna uusi tiedostonimi</p>",
+                    "okText": "Nimeä uudelleen",
+                    "cancel": "Peruuta",
+                    "close": "Sulje"
+                }
+            },
+            "previewPane": {
+                "noFileSelected": "Tiedostoa ei valittu",
+                "extension": "Tyyppi",
+                "size": "Koko",
+                "created": "Luotu",
+                "createdUtc": "Luotu (UTC)",
+                "modified": "Muokattu",
+                "modifiedUtc": "Muokattu (UTC)",
+                "items": "kohdetta"
+            }
+        });
+
+}
+
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+
+    kendo.ui.TaskBoard.prototype.options.messages =
+        $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+            "edit": "Muokkaa",
+            "createNewCard": "Uusi kortti",
+            "create": "Luo",
+            "search": "Hae",
+            "previewCard": "Esikatsele kortti",
+            "addCard": "Lisää kortti",
+            "editCard": "Muokkaa korttia",
+            "deleteCard": "Poista kortti",
+            "addColumn": "Lisää sarake",
+            "editColumn": "Muokkaa saraketta",
+            "deleteColumn": "Poista sarake",
+            "close": "Sulje",
+            "cancel": "Peruuta",
+            "delete": "Poista",
+            "saveChanges": "Tallenna muutokset",
+            "title": "Otsikko:",
+            "description": "Kuvaus:",
+            "newColumn": "Uusi sarake",
+            "deleteColumnConfirm": "Haluatko varmasti poistaa tämän sarakkeen?",
+            "deleteCardConfirm": "Haluatko varmasti poistaa tämän kortin?"
+        });
+
+}
+
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+
+    kendo.ui.MediaPlayer.prototype.options.messages =
+        $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages, {
+            "pause": "Tauko",
+            "play": "Toista",
+            "mute": "Mykistä",
+            "unmute": "Poista mykistys",
+            "quality": "Laatu",
+            "fullscreen": "Koko näyttö"
+        });
+
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "Asetukset",
+            "cancelButtonText": "Peruuta",
+            "applyButtonText": "Käytä",
+            "measures": "Valitse kentät aloittaaksesi",
+            "columns": "Valitse kentät aloittaaksesi",
+            "rows": "Valitse kentät aloittaaksesi"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "Käytä",
+            "sortAscending": "Nouseva järjestys",
+            "sortDescending": "Laskeva järjestys",
+            "filterFields": "Kenttäsuodatin",
+            "filter": "Suodata",
+            "include": "Sisällytä kentät...",
+            "clear": "Tyhjennä",
+            "reset": "Palauta",
+            "moveToColumns": "Siirrä sarakkeisiin",
+            "moveToRows": "Siirrä riveihin",
+            "movePrevious": "Siirrä edellinen",
+            "moveNext": "Siirrä seuraava",
+            "filterOperatorsDropDownLabel": "Suodatinoperaattorit",
+            "filterValueTextBoxLabel": "Suodatinarvo",
+            "operators": {
+                "contains": "Sisältää",
+                "doesnotcontain": "Ei sisällä",
+                "startswith": "Alkaa",
+                "endswith": "Päättyy",
+                "eq": "On yhtä kuin",
+                "neq": "Ei ole yhtä kuin"
+            }
+        });
+
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+        $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+            "cancel": "Peruuta",
+            "update": "Tallenna",
+            "endTitle": "Toiston lopetus",
+            "repeatTitle": "Toistokuvio",
+            "headerTitle": "Toista tapahtuma",
+            "end": {
+                "never": "Ei koskaan",
+                "after": "Jälkeen",
+                "on": "Päivänä"
+            },
+            "daily": {
+                "interval": "päivä(ä)"
+            },
+            "weekly": {
+                "interval": "viikko(a)"
+            },
+            "monthly": {
+                "interval": "kuukausi(a)",
+                "repeatBy": "Toista: ",
+                "dayOfMonth": "Kuukauden päivä",
+                "dayOfWeek": "Viikonpäivä"
+            },
+            "yearly": {
+                "interval": "vuosi(a)",
+                "repeatBy": "Toista: ",
+                "dayOfMonth": "Kuukauden päivä",
+                "dayOfWeek": "Viikonpäivä",
+                "of": " / "
+            },
+            "endRule": {
+                "after": " tapahtuma(a)",
+                "on": "Päivänä "
+            }
+        });
+
+}
+
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+
+    kendo.ui.ListBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
+            "tools": {
+                "remove": "Poista",
+                "moveUp": "Siirrä ylös",
+                "moveDown": "Siirrä alas",
+                "transferTo": "Siirrä kohteeseen",
+                "transferFrom": "Siirrä kohteesta",
+                "transferAllTo": "Siirrä kaikki kohteeseen",
+                "transferAllFrom": "Siirrä kaikki kohteesta"
+            }
+        });
+
+}
+
+/* kendo.ui.progress method */
+
+if (kendo.ui.progress) {
+
+    kendo.ui.progress.messages =
+        $.extend(true, kendo.ui.progress.messages, {
+            "loading": "Ladataan..."
+        });
+
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+
+    kendo.ui.TimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+            "set": "Aseta",
+            "cancel": "Peruuta",
+            "hour": "tunti",
+            "minute": "minuutti",
+            "second": "sekunti",
+            "millisecond": "millisekunti",
+            "now": "Nyt"
+        });
+
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+
+    kendo.ui.DateTimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+            "set": "Aseta",
+            "cancel": "Peruuta",
+            "hour": "tunti",
+            "minute": "minuutti",
+            "second": "sekunti",
+            "millisecond": "millisekunti",
+            "now": "Nyt",
+            "date": "Päivämäärä",
+            "time": "Aika",
+            "today": "Tänään",
+            "weekColumnHeader": ""
+        });
+
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+
+    kendo.ui.Calendar.prototype.options.messages =
+        $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+            "weekColumnHeader": "",
+            "today": "Tänään",
+            "navigateTo": "Siirry: ",
+            "parentViews": {
+                "month": "Vuosinäkymä",
+                "year": "Vuosikymmennäkymä",
+                "decade": "Vuosisatanäkymä"
+            }
+        });
+
+}
+
+/* DateInput */
+
+if (kendo.ui.DateInput) {
+
+    kendo.ui.DateInput.prototype.options.messages =
+        $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+            "year": "vuosi",
+            "month": "kuukausi",
+            "day": "päivä",
+            "weekday": "viikonpäivä",
+            "hour": "tunnit",
+            "minute": "minuutit",
+            "second": "sekunnit",
+            "dayperiod": "AP/IP"
+        });
+
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+
+    kendo.ui.List.prototype.options.messages =
+        $.extend(true, kendo.ui.List.prototype.options.messages, {
+            "clear": "tyhjennä",
+            "noData": "Tietoja ei löytynyt."
+        });
+
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+
+    kendo.ui.DropDownTree.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+            "clear": "tyhjennä",
+            "noData": "Tietoja ei löytynyt.",
+            "singleTag": "kohdetta valittu"
+        });
+
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+
+    kendo.ui.MultiSelect.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+            "clear": "tyhjennä",
+            "noData": "Tietoja ei löytynyt.",
+            "singleTag": "kohdetta valittu"
+        });
+
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+
+    kendo.ui.Chat.prototype.options.messages =
+        $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+            "placeholder": "Kirjoita viesti...",
+            "toggleButton": "Vaihda työkalurivi",
+            "sendButton": "Lähetä"
+        });
+
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+
+    kendo.ui.Wizard.prototype.options.messages =
+        $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+            "reset": "Palauta",
+            "previous": "Edellinen",
+            "next": "Seuraava",
+            "done": "Valmis",
+            "step": "Vaihe",
+            "of": "/"
+        });
+
+}
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            "defaultFileName": "Asiakirja",
+            "toolbar": {
+                "zoom": {
+                    "zoomLevel": "Zoomaustaso",
+                    "zoomOut": "Loitonna",
+                    "zoomIn": "Lähennä",
+                    "actualWidth": "Todellinen leveys",
+                    "autoWidth": "Automaattinen leveys",
+                    "fitToWidth": "Sovita leveyteen",
+                    "fitToPage": "Sovita sivulle"
+                },
+                "open": "Avaa",
+                "exportAs": "Vie",
+                "download": "Lataa",
+                "pager": {
+                    "first": "Ensimmäiselle sivulle",
+                    "previous": "Edelliselle sivulle",
+                    "next": "Seuraavalle sivulle",
+                    "last": "Viimeiselle sivulle",
+                    "of": "/",
+                    "page": "sivu",
+                    "pages": "sivua"
+                },
+                "print": "Tulosta",
+                "toggleSelection": "Ota valinta käyttöön",
+                "togglePan": "Ota panorointi käyttöön",
+                "search": "Hae"
+            },
+            "errorMessages": {
+                "notSupported": "Vain PDF-tiedostot ovat tuettuja.",
+                "parseError": "PDF-tiedostoa ei voitu käsitellä.",
+                "notFound": "Tiedostoa ei löytynyt.",
+                "popupBlocked": "Selain esti ponnahdusikkunan."
+            }
+        });
+
+}
+
+/* Captcha messages */
+
+if (kendo.ui.Captcha) {
+
+    kendo.ui.Captcha.prototype.options.messages =
+        $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+            "reset": "Luo captcha uudelleen",
+            "audio": "Toista captcha-ääni",
+            "imageAlt": "Kirjoita captcha-kuvan teksti",
+            "success": "Vahvistus onnistui"
+        });
+
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+
+    kendo.ui.OrgChart.prototype.options.messages =
+        $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+            "label": "Organisaatiokaavio",
+            "edit": "Muokkaa",
+            "create": "Luo",
+            "destroy": "Poista",
+            "destroyContent": "Haluatko varmasti poistaa tämän kohteen ja sen alaiset?",
+            "destroyTitle": "Poista kohde",
+            "cancel": "Peruuta",
+            "save": "Tallenna",
+            "menuLabel": "Muokkausvalikko",
+            "uploadAvatar": "Lataa uusi kuva",
+            "parent": "Ylempi",
+            "name": "Nimi",
+            "title": "Otsikko",
+            "none": "--Ei mitään--",
+            "expand": "Laajenna",
+            "collapse": "Tiivistä"
+        });
+
+}
+
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+
+    kendo.dataviz.ui.Map.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+            "tileTitle": "Kartan otsikko"
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} Yksikköä"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "Tietoja ei saatavilla"
+        });
+
+}
+
 })(window.kendo.jQuery);

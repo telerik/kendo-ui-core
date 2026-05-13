@@ -6,7 +6,6 @@
  * http://www.telerik.com/purchase/license-agreement/kendo-ui-complete
  * If you do not own a commercial license, this file shall be governed by the trial license terms.
 
-
 */
 
 (function($, undefined) {
@@ -1118,6 +1117,493 @@ if (kendo.ui.DateInput) {
       "second": "sekondat",
       "dayperiod": "AM/PM"
     });
+}
+
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+
+    kendo.ui.DropDownList.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+
+    kendo.ui.ComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+
+    kendo.ui.AutoComplete.prototype.options.messages =
+        $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+
+    kendo.ui.ColorGradient.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+            "contrastRatio": "Raporti i kontrastit:",
+            "fail": "Deshtim",
+            "pass": "Kalim",
+            "hex": "HEX",
+            "toggleFormat": "Ndrysho formatin",
+            "red": "E kuqe",
+            "green": "E gjelber",
+            "blue": "Blu",
+            "alpha": "Alfa"
+        });
+
+}
+
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+
+    kendo.ui.DateRangePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
+            "startLabel": "Fillimi",
+            "endLabel": "Fundi"
+        });
+
+}
+
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+
+    kendo.ui.FileManager.prototype.options.messages =
+        $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+            "toolbar": {
+                "createFolder": "Dosje e re",
+                "upload": "Ngarko",
+                "sortDirection": "Drejtimi i renditjes",
+                "sortDirectionAsc": "Rrites",
+                "sortDirectionDesc": "Zbrites",
+                "sortField": "Rendit sipas",
+                "nameField": "Emri",
+                "sizeField": "Madhesia",
+                "typeField": "Lloji",
+                "dateModifiedField": "Data e ndryshimit",
+                "dateCreatedField": "Data e krijimit",
+                "listView": "Pamja e listes",
+                "gridView": "Pamja e rrjetes",
+                "search": "Kerko",
+                "details": "Detajet",
+                "detailsChecked": "Po",
+                "detailsUnchecked": "Jo",
+                "Delete": "Fshi",
+                "Rename": "Riemerto"
+            },
+            "views": {
+                "nameField": "Emri",
+                "sizeField": "Madhesia",
+                "typeField": "Lloji",
+                "dateModifiedField": "Data e ndryshimit",
+                "dateCreatedField": "Data e krijimit",
+                "items": "artikuj"
+            },
+            "dialogs": {
+                "upload": {
+                    "title": "Ngarko skedare",
+                    "clear": "Pastro",
+                    "done": "Perfunduar"
+                },
+                "moveConfirm": {
+                    "title": " ",
+                    "content": "<p class='k-text-center'>Deshironi te zhvendosni apo kopjoni skedaret e zgjedhur?</p>",
+                    "okText": "Kopjo",
+                    "cancel": "Zhvendos",
+                    "close": "Mbyll"
+                },
+                "deleteConfirm": {
+                    "title": "Konfirmo fshirjen",
+                    "content": "<p class='k-text-center'>Jeni te sigurt qe deshironi te fshini skedaret e zgjedhur?<br/>Ky veprim nuk mund te zhbehet.</p>",
+                    "okText": "Fshi",
+                    "cancel": "Anulo",
+                    "close": "Mbyll"
+                },
+                "renamePrompt": {
+                    "title": "Riemerto",
+                    "content": "<p class='k-text-center'>Vendosni emrin e ri te skedarit</p>",
+                    "okText": "Riemerto",
+                    "cancel": "Anulo",
+                    "close": "Mbyll"
+                }
+            },
+            "previewPane": {
+                "noFileSelected": "Asnje skedar nuk eshte zgjedhur",
+                "extension": "Lloji",
+                "size": "Madhesia",
+                "created": "Data e krijimit",
+                "createdUtc": "Data e krijimit (UTC)",
+                "modified": "Data e ndryshimit",
+                "modifiedUtc": "Data e ndryshimit (UTC)",
+                "items": "artikuj"
+            }
+        });
+
+}
+
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+
+    kendo.ui.TaskBoard.prototype.options.messages =
+        $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+            "edit": "Ndrysho",
+            "createNewCard": "Karte e re",
+            "create": "Krijo",
+            "search": "Kerko",
+            "previewCard": "Parashiko karten",
+            "addCard": "Shto karte",
+            "editCard": "Ndrysho karten",
+            "deleteCard": "Fshi karten",
+            "addColumn": "Shto kolone",
+            "editColumn": "Ndrysho kolonen",
+            "deleteColumn": "Fshi kolonen",
+            "close": "Mbyll",
+            "cancel": "Anulo",
+            "delete": "Fshi",
+            "saveChanges": "Ruaj ndryshimet",
+            "title": "Titulli:",
+            "description": "Pershkrimi:",
+            "newColumn": "Kolone e re",
+            "deleteColumnConfirm": "Jeni te sigurt qe deshironi te fshini kete kolone?",
+            "deleteCardConfirm": "Jeni te sigurt qe deshironi te fshini kete karte?"
+        });
+
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "Cilesimet",
+            "cancelButtonText": "Anulo",
+            "applyButtonText": "Apliko",
+            "measures": "Zgjidhni fushat per te filluar",
+            "columns": "Zgjidhni fushat per te filluar",
+            "rows": "Zgjidhni fushat per te filluar"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "Apliko",
+            "sortAscending": "Rrites",
+            "sortDescending": "Zbrites",
+            "filterFields": "Filtri i fushave",
+            "filter": "Filtro",
+            "include": "Perfshi fushat...",
+            "clear": "Pastro",
+            "reset": "Rivendos",
+            "moveToColumns": "Zhvendos ne kolona",
+            "moveToRows": "Zhvendos ne rreshta",
+            "movePrevious": "Prapa",
+            "moveNext": "Para",
+            "filterOperatorsDropDownLabel": "Operatoret e filtrit",
+            "filterValueTextBoxLabel": "Vlera e filtrit",
+            "operators": {
+                "contains": "Permban",
+                "doesnotcontain": "Nuk permban",
+                "startswith": "Fillon me",
+                "endswith": "Mbaron me",
+                "eq": "Eshte e barabarte",
+                "neq": "Nuk eshte e barabarte"
+            }
+        });
+
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+        $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+            "cancel": "Anulo",
+            "update": "Ruaj",
+            "endTitle": "Fundi i perseritjes",
+            "repeatTitle": "Modeli i perseritjes",
+            "headerTitle": "Perserit ngjarjen",
+            "end": {
+                "never": "Asnjehere",
+                "after": "Pas",
+                "on": "Ne date"
+            },
+            "daily": {
+                "interval": "dite"
+            },
+            "weekly": {
+                "interval": "jave"
+            },
+            "monthly": {
+                "interval": "muaj",
+                "repeatBy": "Perserit sipas: ",
+                "dayOfMonth": "Dita e muajit",
+                "dayOfWeek": "Dita e javes"
+            },
+            "yearly": {
+                "interval": "vit",
+                "repeatBy": "Perserit sipas: ",
+                "dayOfMonth": "Dita e muajit",
+                "dayOfWeek": "Dita e javes",
+                "of": " e "
+            },
+            "endRule": {
+                "after": " here",
+                "on": "Ne date "
+            }
+        });
+
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+
+    kendo.ui.TimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+            "set": "Vendos",
+            "cancel": "Anulo",
+            "hour": "ore",
+            "minute": "minute",
+            "second": "sekonde",
+            "millisecond": "milisekonde",
+            "now": "Tani"
+        });
+
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+
+    kendo.ui.DateTimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+            "set": "Vendos",
+            "cancel": "Anulo",
+            "hour": "ore",
+            "minute": "minute",
+            "second": "sekonde",
+            "millisecond": "milisekonde",
+            "now": "Tani",
+            "date": "Data",
+            "time": "Ora",
+            "today": "Sot",
+            "weekColumnHeader": ""
+        });
+
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+
+    kendo.ui.List.prototype.options.messages =
+        $.extend(true, kendo.ui.List.prototype.options.messages, {
+            "clear": "pastro",
+            "noData": "Nuk ka te dhena."
+        });
+
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+
+    kendo.ui.DropDownTree.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+            "clear": "pastro",
+            "noData": "Nuk ka te dhena.",
+            "singleTag": "artikuj te zgjedhur"
+        });
+
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+
+    kendo.ui.MultiSelect.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+            "clear": "pastro",
+            "noData": "Nuk ka te dhena.",
+            "singleTag": "artikuj te zgjedhur"
+        });
+
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+
+    kendo.ui.Chat.prototype.options.messages =
+        $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+            "placeholder": "Shkruani nje mesazh...",
+            "toggleButton": "Shiriti i veglave",
+            "sendButton": "Dergo"
+        });
+
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+
+    kendo.ui.Wizard.prototype.options.messages =
+        $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+            "reset": "Rivendos",
+            "previous": "Para",
+            "next": "Pas",
+            "done": "Perfundo",
+            "step": "Hapi",
+            "of": "nga"
+        });
+
+}
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            "defaultFileName": "Dokument",
+            "toolbar": {
+                "zoom": {
+                    "zoomLevel": "Niveli i zmadhimit",
+                    "zoomOut": "Zvogelim",
+                    "zoomIn": "Zmadhim",
+                    "actualWidth": "Gjeresia reale",
+                    "autoWidth": "Gjeresia automatike",
+                    "fitToWidth": "Perputh me gjeresine",
+                    "fitToPage": "Perputh me faqen"
+                },
+                "open": "Hap",
+                "exportAs": "Eksporto",
+                "download": "Shkarko",
+                "pager": {
+                    "first": "Shko ne faqen e pare",
+                    "previous": "Shko ne faqen e meparshme",
+                    "next": "Shko ne faqen tjeter",
+                    "last": "Shko ne faqen e fundit",
+                    "of": "nga",
+                    "page": "faqe",
+                    "pages": "faqe"
+                },
+                "print": "Shtyp",
+                "toggleSelection": "Zgjedhja",
+                "togglePan": "Levizja",
+                "search": "Kerko"
+            },
+            "errorMessages": {
+                "notSupported": "Vetem skedaret PDF mbeshteten.",
+                "parseError": "Skedari PDF nuk mund te perpunohej.",
+                "notFound": "Skedari nuk u gjet.",
+                "popupBlocked": "Dritarja kercyese u bllokua nga shfletuesi."
+            }
+        });
+
+}
+
+/* Captcha messages */
+
+if (kendo.ui.Captcha) {
+
+    kendo.ui.Captcha.prototype.options.messages =
+        $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+            "reset": "Rigjenero captcha",
+            "audio": "Luan zanin e captcha",
+            "imageAlt": "Shkruani tekstin nga imazhi i captcha",
+            "success": "Verifikimi ishte i suksesshem"
+        });
+
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+
+    kendo.ui.OrgChart.prototype.options.messages =
+        $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+            "label": "Organogrami",
+            "edit": "Ndrysho",
+            "create": "Krijo",
+            "destroy": "Fshi",
+            "destroyContent": "Jeni te sigurt qe deshironi te fshini kete element dhe varesit e tij?",
+            "destroyTitle": "Fshi elementin",
+            "cancel": "Anulo",
+            "save": "Ruaj",
+            "menuLabel": "Menyja e ndryshimit",
+            "uploadAvatar": "Ngarko imazh te ri",
+            "parent": "Prind",
+            "name": "Emri",
+            "title": "Titulli",
+            "none": "--Asnje--",
+            "expand": "Zgjero",
+            "collapse": "Mbyll"
+        });
+
+}
+
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+
+    kendo.dataviz.ui.Map.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+            "tileTitle": "Titulli i hartes"
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} Njesi"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "Nuk ka te dhena te disponueshme"
+        });
+
 }
 
 })(window.kendo.jQuery);

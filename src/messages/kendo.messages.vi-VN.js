@@ -1154,4 +1154,479 @@ if (kendo.ui.DateInput) {
     });
 }
 
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+
+    kendo.ui.DropDownList.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+
+    kendo.ui.ComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+
+    kendo.ui.AutoComplete.prototype.options.messages =
+        $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+
+    kendo.ui.ColorGradient.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+            "contrastRatio": "Ti le tuong phan:",
+            "fail": "Khong dat",
+            "pass": "Dat",
+            "hex": "HEX",
+            "toggleFormat": "Chuyen doi dinh dang",
+            "red": "Do",
+            "green": "Xanh la",
+            "blue": "Xanh duong",
+            "alpha": "Alpha"
+        });
+
+}
+
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+
+    kendo.ui.FileManager.prototype.options.messages =
+        $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+            "toolbar": {
+                "createFolder": "Thu muc moi",
+                "upload": "Tai len",
+                "sortDirection": "Huong sap xep",
+                "sortDirectionAsc": "Tang dan",
+                "sortDirectionDesc": "Giam dan",
+                "sortField": "Sap xep theo",
+                "nameField": "Ten",
+                "sizeField": "Kich thuoc",
+                "typeField": "Loai",
+                "dateModifiedField": "Ngay sua doi",
+                "dateCreatedField": "Ngay tao",
+                "listView": "Xem danh sach",
+                "gridView": "Xem luoi",
+                "search": "Tim kiem",
+                "details": "Chi tiet",
+                "detailsChecked": "Co",
+                "detailsUnchecked": "Khong",
+                "Delete": "Xoa",
+                "Rename": "Doi ten"
+            },
+            "views": {
+                "nameField": "Ten",
+                "sizeField": "Kich thuoc",
+                "typeField": "Loai",
+                "dateModifiedField": "Ngay sua doi",
+                "dateCreatedField": "Ngay tao",
+                "items": "muc"
+            },
+            "dialogs": {
+                "upload": {
+                    "title": "Tai len tap tin",
+                    "clear": "Xoa",
+                    "done": "Xong"
+                },
+                "moveConfirm": {
+                    "title": " ",
+                    "content": "<p class='k-text-center'>Ban muon di chuyen hay sao chep cac tap tin da chon?</p>",
+                    "okText": "Sao chep",
+                    "cancel": "Di chuyen",
+                    "close": "Dong"
+                },
+                "deleteConfirm": {
+                    "title": "Xac nhan xoa",
+                    "content": "<p class='k-text-center'>Ban co chac chan muon xoa cac tap tin da chon?<br/>Hanh dong nay khong the hoan tac.</p>",
+                    "okText": "Xoa",
+                    "cancel": "Huy",
+                    "close": "Dong"
+                },
+                "renamePrompt": {
+                    "title": "Doi ten",
+                    "content": "<p class='k-text-center'>Nhap ten tap tin moi</p>",
+                    "okText": "Doi ten",
+                    "cancel": "Huy",
+                    "close": "Dong"
+                }
+            },
+            "previewPane": {
+                "noFileSelected": "Khong co tap tin nao duoc chon",
+                "extension": "Loai",
+                "size": "Kich thuoc",
+                "created": "Ngay tao",
+                "createdUtc": "Ngay tao (UTC)",
+                "modified": "Ngay sua doi",
+                "modifiedUtc": "Ngay sua doi (UTC)",
+                "items": "muc"
+            }
+        });
+
+}
+
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+
+    kendo.ui.TaskBoard.prototype.options.messages =
+        $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+            "edit": "Chinh sua",
+            "createNewCard": "The moi",
+            "create": "Tao",
+            "search": "Tim kiem",
+            "previewCard": "Xem truoc the",
+            "addCard": "Them the",
+            "editCard": "Chinh sua the",
+            "deleteCard": "Xoa the",
+            "addColumn": "Them cot",
+            "editColumn": "Chinh sua cot",
+            "deleteColumn": "Xoa cot",
+            "close": "Dong",
+            "cancel": "Huy",
+            "delete": "Xoa",
+            "saveChanges": "Luu thay doi",
+            "title": "Tieu de:",
+            "description": "Mo ta:",
+            "newColumn": "Cot moi",
+            "deleteColumnConfirm": "Ban co chac chan muon xoa cot nay?",
+            "deleteCardConfirm": "Ban co chac chan muon xoa the nay?"
+        });
+
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "Cai dat",
+            "cancelButtonText": "Huy",
+            "applyButtonText": "Ap dung",
+            "measures": "Chon truong de bat dau",
+            "columns": "Chon truong de bat dau",
+            "rows": "Chon truong de bat dau"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "Ap dung",
+            "sortAscending": "Tang dan",
+            "sortDescending": "Giam dan",
+            "filterFields": "Loc truong",
+            "filter": "Loc",
+            "include": "Bao gom truong...",
+            "clear": "Xoa",
+            "reset": "Dat lai",
+            "moveToColumns": "Chuyen den cot",
+            "moveToRows": "Chuyen den hang",
+            "movePrevious": "Lui",
+            "moveNext": "Tien",
+            "filterOperatorsDropDownLabel": "Toan tu loc",
+            "filterValueTextBoxLabel": "Gia tri loc",
+            "operators": {
+                "contains": "Chua",
+                "doesnotcontain": "Khong chua",
+                "startswith": "Bat dau voi",
+                "endswith": "Ket thuc voi",
+                "eq": "Bang",
+                "neq": "Khong bang"
+            }
+        });
+
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+        $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+            "cancel": "Huy",
+            "update": "Luu",
+            "endTitle": "Ket thuc lap lai",
+            "repeatTitle": "Mau lap lai",
+            "headerTitle": "Lap lai su kien",
+            "end": {
+                "never": "Khong bao gio",
+                "after": "Sau",
+                "on": "Vao ngay"
+            },
+            "daily": {
+                "interval": "ngay"
+            },
+            "weekly": {
+                "interval": "tuan"
+            },
+            "monthly": {
+                "interval": "thang",
+                "repeatBy": "Lap lai theo: ",
+                "dayOfMonth": "Ngay trong thang",
+                "dayOfWeek": "Ngay trong tuan"
+            },
+            "yearly": {
+                "interval": "nam",
+                "repeatBy": "Lap lai theo: ",
+                "dayOfMonth": "Ngay trong thang",
+                "dayOfWeek": "Ngay trong tuan",
+                "of": " cua "
+            },
+            "endRule": {
+                "after": " lan",
+                "on": "Vao ngay "
+            }
+        });
+
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+
+    kendo.ui.TimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+            "set": "Dat",
+            "cancel": "Huy",
+            "hour": "gio",
+            "minute": "phut",
+            "second": "giay",
+            "millisecond": "mili giay",
+            "now": "Bay gio"
+        });
+
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+
+    kendo.ui.DateTimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+            "set": "Dat",
+            "cancel": "Huy",
+            "hour": "gio",
+            "minute": "phut",
+            "second": "giay",
+            "millisecond": "mili giay",
+            "now": "Bay gio",
+            "date": "Ngay",
+            "time": "Gio",
+            "today": "Hom nay",
+            "weekColumnHeader": ""
+        });
+
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+
+    kendo.ui.List.prototype.options.messages =
+        $.extend(true, kendo.ui.List.prototype.options.messages, {
+            "clear": "xoa",
+            "noData": "Khong co du lieu."
+        });
+
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+
+    kendo.ui.DropDownTree.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+            "clear": "xoa",
+            "noData": "Khong co du lieu.",
+            "singleTag": "muc da chon"
+        });
+
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+
+    kendo.ui.MultiSelect.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+            "clear": "xoa",
+            "noData": "Khong co du lieu.",
+            "singleTag": "muc da chon"
+        });
+
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+
+    kendo.ui.Chat.prototype.options.messages =
+        $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+            "placeholder": "Nhap tin nhan...",
+            "toggleButton": "Chuyen doi thanh cong cu",
+            "sendButton": "Gui"
+        });
+
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+
+    kendo.ui.Wizard.prototype.options.messages =
+        $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+            "reset": "Dat lai",
+            "previous": "Truoc",
+            "next": "Tiep",
+            "done": "Xong",
+            "step": "Buoc",
+            "of": "/"
+        });
+
+}
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            "defaultFileName": "Tai lieu",
+            "toolbar": {
+                "zoom": {
+                    "zoomLevel": "Muc thu phong",
+                    "zoomOut": "Thu nho",
+                    "zoomIn": "Phong to",
+                    "actualWidth": "Do rong thuc",
+                    "autoWidth": "Do rong tu dong",
+                    "fitToWidth": "Vua voi chieu rong",
+                    "fitToPage": "Vua voi trang"
+                },
+                "open": "Mo",
+                "exportAs": "Xuat",
+                "download": "Tai xuong",
+                "pager": {
+                    "first": "Di den trang dau",
+                    "previous": "Di den trang truoc",
+                    "next": "Di den trang tiep",
+                    "last": "Di den trang cuoi",
+                    "of": "/",
+                    "page": "trang",
+                    "pages": "trang"
+                },
+                "print": "In",
+                "toggleSelection": "Chon",
+                "togglePan": "Di chuyen",
+                "search": "Tim kiem"
+            },
+            "errorMessages": {
+                "notSupported": "Chi ho tro tep PDF.",
+                "parseError": "Khong the xu ly tep PDF.",
+                "notFound": "Khong tim thay tep.",
+                "popupBlocked": "Cua so bat len bi trinh duyet chan."
+            }
+        });
+
+}
+
+/* Captcha messages */
+
+if (kendo.ui.Captcha) {
+
+    kendo.ui.Captcha.prototype.options.messages =
+        $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+            "reset": "Tao lai captcha",
+            "audio": "Phat am thanh captcha",
+            "imageAlt": "Nhap van ban tu hinh anh captcha",
+            "success": "Xac minh thanh cong"
+        });
+
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+
+    kendo.ui.OrgChart.prototype.options.messages =
+        $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+            "label": "So do to chuc",
+            "edit": "Chinh sua",
+            "create": "Tao",
+            "destroy": "Xoa",
+            "destroyContent": "Ban co chac chan muon xoa muc nay va cac muc con cua no?",
+            "destroyTitle": "Xoa muc",
+            "cancel": "Huy",
+            "save": "Luu",
+            "menuLabel": "Menu chinh sua",
+            "uploadAvatar": "Tai len hinh moi",
+            "parent": "Cha",
+            "name": "Ten",
+            "title": "Chuc danh",
+            "none": "--Khong--",
+            "expand": "Mo rong",
+            "collapse": "Thu gon"
+        });
+
+}
+
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+
+    kendo.dataviz.ui.Map.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+            "tileTitle": "Tieu de ban do"
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} Don vi"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "Khong co du lieu"
+        });
+
+}
+
 })(window.kendo.jQuery);

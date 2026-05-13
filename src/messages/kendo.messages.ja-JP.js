@@ -606,4 +606,986 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+
+    kendo.ui.DropDownList.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+
+    kendo.ui.ComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+
+    kendo.ui.AutoComplete.prototype.options.messages =
+        $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+
+    kendo.ui.ColorGradient.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+            "contrastRatio": "コントラスト比:",
+            "fail": "不合格",
+            "pass": "合格",
+            "hex": "HEX",
+            "toggleFormat": "フォーマット切替",
+            "red": "赤",
+            "green": "緑",
+            "blue": "青",
+            "alpha": "アルファ"
+        });
+
+}
+
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+
+    kendo.ui.DateRangePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
+            "startLabel": "開始",
+            "endLabel": "終了"
+        });
+
+}
+
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+
+    kendo.ui.FileManager.prototype.options.messages =
+        $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+            "toolbar": {
+                "createFolder": "新しいフォルダー",
+                "upload": "アップロード",
+                "sortDirection": "並べ替え方向",
+                "sortDirectionAsc": "昇順",
+                "sortDirectionDesc": "降順",
+                "sortField": "並べ替え",
+                "nameField": "名前",
+                "sizeField": "サイズ",
+                "typeField": "種類",
+                "dateModifiedField": "更新日",
+                "dateCreatedField": "作成日",
+                "listView": "リスト表示",
+                "gridView": "グリッド表示",
+                "search": "検索",
+                "details": "詳細",
+                "detailsChecked": "はい",
+                "detailsUnchecked": "いいえ",
+                "Delete": "削除",
+                "Rename": "名前変更"
+            },
+            "views": {
+                "nameField": "名前",
+                "sizeField": "サイズ",
+                "typeField": "種類",
+                "dateModifiedField": "更新日",
+                "dateCreatedField": "作成日",
+                "items": "アイテム"
+            },
+            "dialogs": {
+                "upload": {
+                    "title": "ファイルのアップロード",
+                    "clear": "クリア",
+                    "done": "完了"
+                },
+                "moveConfirm": {
+                    "title": " ",
+                    "content": "<p class='k-text-center'>選択したファイルを移動しますか、コピーしますか？</p>",
+                    "okText": "コピー",
+                    "cancel": "移動",
+                    "close": "閉じる"
+                },
+                "deleteConfirm": {
+                    "title": "削除の確認",
+                    "content": "<p class='k-text-center'>選択したファイルを削除してもよろしいですか？<br/>この操作は取り消せません。</p>",
+                    "okText": "削除",
+                    "cancel": "キャンセル",
+                    "close": "閉じる"
+                },
+                "renamePrompt": {
+                    "title": "名前変更",
+                    "content": "<p class='k-text-center'>新しいファイル名を入力してください</p>",
+                    "okText": "名前変更",
+                    "cancel": "キャンセル",
+                    "close": "閉じる"
+                }
+            },
+            "previewPane": {
+                "noFileSelected": "ファイルが選択されていません",
+                "extension": "種類",
+                "size": "サイズ",
+                "created": "作成日",
+                "createdUtc": "作成日 (UTC)",
+                "modified": "更新日",
+                "modifiedUtc": "更新日 (UTC)",
+                "items": "アイテム"
+            }
+        });
+
+}
+
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+
+    kendo.ui.TaskBoard.prototype.options.messages =
+        $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+            "edit": "編集",
+            "createNewCard": "新しいカード",
+            "create": "作成",
+            "search": "検索",
+            "previewCard": "カードのプレビュー",
+            "addCard": "カードを追加",
+            "editCard": "カードを編集",
+            "deleteCard": "カードを削除",
+            "addColumn": "列を追加",
+            "editColumn": "列を編集",
+            "deleteColumn": "列を削除",
+            "close": "閉じる",
+            "cancel": "キャンセル",
+            "delete": "削除",
+            "saveChanges": "変更を保存",
+            "title": "タイトル:",
+            "description": "説明:",
+            "newColumn": "新しい列",
+            "deleteColumnConfirm": "この列を削除してもよろしいですか？",
+            "deleteCardConfirm": "このカードを削除してもよろしいですか？"
+        });
+
+}
+
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+
+    kendo.ui.MediaPlayer.prototype.options.messages =
+        $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages, {
+            "pause": "一時停止",
+            "play": "再生",
+            "mute": "ミュート",
+            "unmute": "ミュート解除",
+            "quality": "品質",
+            "fullscreen": "全画面"
+        });
+
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "設定",
+            "cancelButtonText": "キャンセル",
+            "applyButtonText": "適用",
+            "measures": "フィールドを選択して開始",
+            "columns": "フィールドを選択して開始",
+            "rows": "フィールドを選択して開始"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "適用",
+            "sortAscending": "昇順",
+            "sortDescending": "降順",
+            "filterFields": "フィールドフィルター",
+            "filter": "フィルター",
+            "include": "フィールドを含む...",
+            "clear": "クリア",
+            "reset": "リセット",
+            "moveToColumns": "列に移動",
+            "moveToRows": "行に移動",
+            "movePrevious": "前に移動",
+            "moveNext": "次に移動",
+            "filterOperatorsDropDownLabel": "フィルター演算子",
+            "filterValueTextBoxLabel": "フィルター値",
+            "operators": {
+                "contains": "を含む",
+                "doesnotcontain": "を含まない",
+                "startswith": "で始まる",
+                "endswith": "で終わる",
+                "eq": "等しい",
+                "neq": "等しくない"
+            }
+        });
+
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+        $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+            "cancel": "キャンセル",
+            "update": "保存",
+            "endTitle": "繰り返しの終了",
+            "repeatTitle": "繰り返しパターン",
+            "headerTitle": "イベントの繰り返し",
+            "end": {
+                "never": "なし",
+                "after": "回数",
+                "on": "日付"
+            },
+            "daily": {
+                "interval": "日"
+            },
+            "weekly": {
+                "interval": "週"
+            },
+            "monthly": {
+                "interval": "月",
+                "repeatBy": "繰り返し基準: ",
+                "dayOfMonth": "月の日",
+                "dayOfWeek": "曜日"
+            },
+            "yearly": {
+                "interval": "年",
+                "repeatBy": "繰り返し基準: ",
+                "dayOfMonth": "月の日",
+                "dayOfWeek": "曜日",
+                "of": " の "
+            },
+            "endRule": {
+                "after": " 回",
+                "on": "日付 "
+            }
+        });
+
+}
+
+/* ListBox messaages */
+
+if (kendo.ui.ListBox) {
+
+    kendo.ui.ListBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
+            "tools": {
+                "remove": "削除",
+                "moveUp": "上へ移動",
+                "moveDown": "下へ移動",
+                "transferTo": "転送先",
+                "transferFrom": "転送元",
+                "transferAllTo": "すべて転送先",
+                "transferAllFrom": "すべて転送元"
+            }
+        });
+
+}
+
+/* kendo.ui.progress method */
+
+if (kendo.ui.progress) {
+
+    kendo.ui.progress.messages =
+        $.extend(true, kendo.ui.progress.messages, {
+            "loading": "読み込み中..."
+        });
+
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+
+    kendo.ui.TimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+            "set": "設定",
+            "cancel": "キャンセル",
+            "hour": "時",
+            "minute": "分",
+            "second": "秒",
+            "millisecond": "ミリ秒",
+            "now": "現在"
+        });
+
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+
+    kendo.ui.DateTimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+            "set": "設定",
+            "cancel": "キャンセル",
+            "hour": "時",
+            "minute": "分",
+            "second": "秒",
+            "millisecond": "ミリ秒",
+            "now": "現在",
+            "date": "日付",
+            "time": "時刻",
+            "today": "今日",
+            "weekColumnHeader": ""
+        });
+
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+
+    kendo.ui.Calendar.prototype.options.messages =
+        $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+            "weekColumnHeader": "",
+            "today": "今日",
+            "navigateTo": "移動: ",
+            "parentViews": {
+                "month": "年表示",
+                "year": "10年表示",
+                "decade": "100年表示"
+            }
+        });
+
+}
+
+/* DateInput */
+
+if (kendo.ui.DateInput) {
+
+    kendo.ui.DateInput.prototype.options.messages =
+        $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+            "year": "年",
+            "month": "月",
+            "day": "日",
+            "weekday": "曜日",
+            "hour": "時",
+            "minute": "分",
+            "second": "秒",
+            "dayperiod": "午前/午後"
+        });
+
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+
+    kendo.ui.List.prototype.options.messages =
+        $.extend(true, kendo.ui.List.prototype.options.messages, {
+            "clear": "クリア",
+            "noData": "データがありません。"
+        });
+
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+
+    kendo.ui.DropDownTree.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+            "clear": "クリア",
+            "noData": "データがありません。",
+            "singleTag": "件選択済み"
+        });
+
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+
+    kendo.ui.MultiSelect.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+            "clear": "クリア",
+            "noData": "データがありません。",
+            "singleTag": "件選択済み"
+        });
+
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+
+    kendo.ui.Chat.prototype.options.messages =
+        $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+            "placeholder": "メッセージを入力...",
+            "toggleButton": "ツールバーの切替",
+            "sendButton": "送信"
+        });
+
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+
+    kendo.ui.Wizard.prototype.options.messages =
+        $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+            "reset": "リセット",
+            "previous": "前へ",
+            "next": "次へ",
+            "done": "完了",
+            "step": "ステップ",
+            "of": "/"
+        });
+
+}
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            "defaultFileName": "ドキュメント",
+            "toolbar": {
+                "zoom": {
+                    "zoomLevel": "ズームレベル",
+                    "zoomOut": "縮小",
+                    "zoomIn": "拡大",
+                    "actualWidth": "実際の幅",
+                    "autoWidth": "自動幅",
+                    "fitToWidth": "幅に合わせる",
+                    "fitToPage": "ページに合わせる"
+                },
+                "open": "開く",
+                "exportAs": "エクスポート",
+                "download": "ダウンロード",
+                "pager": {
+                    "first": "最初のページへ",
+                    "previous": "前のページへ",
+                    "next": "次のページへ",
+                    "last": "最後のページへ",
+                    "of": "/",
+                    "page": "ページ",
+                    "pages": "ページ"
+                },
+                "print": "印刷",
+                "toggleSelection": "選択切替",
+                "togglePan": "パン切替",
+                "search": "検索"
+            },
+            "errorMessages": {
+                "notSupported": "PDFファイルのみサポートされています。",
+                "parseError": "PDFファイルを処理できませんでした。",
+                "notFound": "ファイルが見つかりません。",
+                "popupBlocked": "ポップアップがブラウザによりブロックされました。"
+            }
+        });
+
+}
+
+/* Captcha messages */
+
+if (kendo.ui.Captcha) {
+
+    kendo.ui.Captcha.prototype.options.messages =
+        $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+            "reset": "キャプチャを再生成",
+            "audio": "キャプチャ音声を再生",
+            "imageAlt": "キャプチャ画像のテキストを入力",
+            "success": "検証に成功しました"
+        });
+
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+
+    kendo.ui.OrgChart.prototype.options.messages =
+        $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+            "label": "組織図",
+            "edit": "編集",
+            "create": "作成",
+            "destroy": "削除",
+            "destroyContent": "この項目とその配下を削除してもよろしいですか？",
+            "destroyTitle": "項目を削除",
+            "cancel": "キャンセル",
+            "save": "保存",
+            "menuLabel": "編集メニュー",
+            "uploadAvatar": "新しい画像をアップロード",
+            "parent": "親",
+            "name": "名前",
+            "title": "タイトル",
+            "none": "--なし--",
+            "expand": "展開",
+            "collapse": "折りたたみ"
+        });
+
+}
+
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+
+    kendo.dataviz.ui.Map.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+            "tileTitle": "マップタイトル"
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} 単位"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "利用可能なデータがありません"
+        });
+
+}
+
+  /* TreeList messages */
+  if (kendo.ui.TreeList) {
+    kendo.ui.TreeList.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
+        "noRows": "表示するレコードがありません",
+        "loading": "読み込み中...",
+        "requestFailed": "リクエストが失敗しました。",
+        "retry": "再試行",
+        "commands": {
+          "edit": "編集",
+          "update": "保存",
+          "canceledit": "キャンセル",
+          "create": "新規レコード追加",
+          "createchild": "子レコード追加",
+          "destroy": "削除",
+          "excel": "Excelにエクスポート",
+          "pdf": "PDFにエクスポート"
+        }
+      });
+  }
+  /* TreeList messages */
+  if (kendo.ui.TreeList) {
+    kendo.ui.TreeList.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
+        "noRows": "表示するレコードがありません",
+        "loading": "読み込み中...",
+        "requestFailed": "リクエストが失敗しました。",
+        "retry": "再試行",
+        "commands": {
+          "edit": "編集",
+          "update": "更新",
+          "canceledit": "キャンセル",
+          "create": "新規レコード追加",
+          "createchild": "子レコード追加",
+          "destroy": "削除",
+          "excel": "Excelにエクスポート",
+          "pdf": "PDFにエクスポート"
+        }
+      });
+  }
+  /* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "すべての罫線",
+  "insideBorders": "内側の罫線",
+  "insideHorizontalBorders": "内側の横罫線",
+  "insideVerticalBorders": "内側の縦罫線",
+  "outsideBorders": "外側の罫線",
+  "leftBorder": "左罫線",
+  "topBorder": "上罫線",
+  "rightBorder": "右罫線",
+  "bottomBorder": "下罫線",
+  "noBorders": "罫線なし",
+  "reset": "色をリセット",
+  "customColor": "カスタム色...",
+  "apply": "適用",
+  "cancel": "キャンセル"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "適用",
+  "save": "保存",
+  "cancel": "キャンセル",
+  "remove": "削除",
+  "retry": "再試行",
+  "revert": "元に戻す",
+  "okText": "OK",
+  "formatCellsDialog": {
+    "title": "書式設定",
+    "categories": {
+      "number": "数値",
+      "currency": "通貨",
+      "date": "日付"
+    }
+  },
+  "fontFamilyDialog": {
+    "title": "フォント"
+  },
+  "fontSizeDialog": {
+    "title": "フォントサイズ"
+  },
+  "bordersDialog": {
+    "title": "罫線"
+  },
+  "alignmentDialog": {
+    "title": "配置",
+    "buttons": {
+      "justifyLeft": "左揃え",
+      "justifyCenter": "中央揃え",
+      "justifyRight": "右揃え",
+      "justifyFull": "両端揃え",
+      "alignTop": "上揃え",
+      "alignMiddle": "中央揃え(縦)",
+      "alignBottom": "下揃え"
+    }
+  },
+  "mergeDialog": {
+    "title": "セルの結合",
+    "buttons": {
+      "mergeCells": "すべて結合",
+      "mergeHorizontally": "横方向に結合",
+      "mergeVertically": "縦方向に結合",
+      "unmerge": "結合解除"
+    }
+  },
+  "freezeDialog": {
+    "title": "ウィンドウ枠の固定",
+    "buttons": {
+      "freezePanes": "ウィンドウ枠を固定",
+      "freezeRows": "行を固定",
+      "freezeColumns": "列を固定",
+      "unfreeze": "固定を解除"
+    }
+  },
+  "confirmationDialog": {
+    "text": "このシートを削除してもよろしいですか？",
+    "title": "シートの削除"
+  },
+  "validationDialog": {
+    "title": "データの入力規則",
+    "hintMessage": "有効な{0}値{1}を入力してください。",
+    "hintTitle": "入力規則 {0}",
+    "criteria": {
+      "any": "任意の値",
+      "number": "数値",
+      "text": "テキスト",
+      "date": "日付",
+      "custom": "ユーザー定義の数式",
+      "list": "リスト"
+    },
+    "comparers": {
+      "greaterThan": "より大きい",
+      "lessThan": "より小さい",
+      "between": "の間",
+      "notBetween": "の間ではない",
+      "equalTo": "等しい",
+      "notEqualTo": "等しくない",
+      "greaterThanOrEqualTo": "以上",
+      "lessThanOrEqualTo": "以下"
+    },
+    "comparerMessages": {
+      "greaterThan": "{0}より大きい",
+      "lessThan": "{0}より小さい",
+      "between": "{0}から{1}の間",
+      "notBetween": "{0}から{1}の間ではない",
+      "equalTo": "{0}と等しい",
+      "notEqualTo": "{0}と等しくない",
+      "greaterThanOrEqualTo": "{0}以上",
+      "lessThanOrEqualTo": "{0}以下",
+      "custom": "数式を満たす: {0}"
+    },
+    "labels": {
+      "criteria": "条件",
+      "comparer": "比較演算子",
+      "min": "最小値",
+      "max": "最大値",
+      "value": "値",
+      "start": "開始",
+      "end": "終了",
+      "onInvalidData": "無効なデータの場合",
+      "rejectInput": "入力を拒否",
+      "showWarning": "警告を表示",
+      "showHint": "ヒントを表示",
+      "hintTitle": "ヒントのタイトル",
+      "hintMessage": "ヒントのメッセージ",
+      "ignoreBlank": "空白を無視"
+    },
+    "placeholders": {
+      "typeTitle": "タイトルを入力",
+      "typeMessage": "メッセージを入力"
+    }
+  },
+  "exportAsDialog": {
+    "title": "エクスポート...",
+    "labels": {
+      "fileName": "ファイル名",
+      "saveAsType": "ファイルの種類",
+      "exportArea": "エクスポート",
+      "paperSize": "用紙サイズ",
+      "margins": "余白",
+      "orientation": "方向",
+      "print": "印刷",
+      "guidelines": "ガイドライン",
+      "center": "中央",
+      "horizontally": "水平方向",
+      "vertically": "垂直方向"
+    }
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "結合されたセルの一部は変更できません。"
+  },
+  "useKeyboardDialog": {
+    "title": "コピーと貼り付け",
+    "errorMessage": "これらの操作はメニューから実行できません。代わりにキーボードショートカットを使用してください:",
+    "labels": {
+      "forCopy": "コピー",
+      "forCut": "切り取り",
+      "forPaste": "貼り付け"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "複数選択ではその操作を実行できません。"
+  },
+  "insertCommentDialog": {
+    "title": "コメントの挿入",
+    "labels": {
+      "comment": "コメント",
+      "removeComment": "コメントの削除"
+    }
+  },
+  "insertImageDialog": {
+    "title": "画像の挿入",
+    "info": "ここに画像をドラッグするか、クリックして選択",
+    "typeError": "JPEG、PNGまたはGIF画像を選択してください"
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "範囲をA～Zに並べ替え",
+  "sortDescending": "範囲をZ～Aに並べ替え",
+  "filterByValue": "値でフィルター",
+  "filterByCondition": "条件でフィルター",
+  "apply": "適用",
+  "search": "検索",
+  "addToCurrent": "現在の選択に追加",
+  "clear": "クリア",
+  "blanks": "(空白)",
+  "operatorNone": "なし",
+  "and": "AND",
+  "or": "OR",
+  "operators": {
+    "string": {
+      "contains": "テキストを含む",
+      "doesnotcontain": "テキストを含まない",
+      "startswith": "テキストで始まる",
+      "endswith": "テキストで終わる"
+    },
+    "date": {
+      "eq": "日付が等しい",
+      "neq": "日付が等しくない",
+      "lt": "日付より前",
+      "gt": "日付より後"
+    },
+    "number": {
+      "eq": "等しい",
+      "neq": "等しくない",
+      "gte": "以上",
+      "gt": "より大きい",
+      "lte": "以下",
+      "lt": "より小さい"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
+kendo.spreadsheet.messages.colorPicker =
+$.extend(true, kendo.spreadsheet.messages.colorPicker,{
+  "reset": "色をリセット",
+  "customColor": "カスタム色...",
+  "apply": "適用",
+  "cancel": "キャンセル"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "左に列を追加",
+  "addColumnRight": "右に列を追加",
+  "addRowAbove": "上に行を追加",
+  "addRowBelow": "下に行を追加",
+  "alignment": "配置",
+  "alignmentButtons": {
+    "justifyLeft": "左揃え",
+    "justifyCenter": "中央揃え",
+    "justifyRight": "右揃え",
+    "justifyFull": "両端揃え",
+    "alignTop": "上揃え",
+    "alignMiddle": "中央揃え(縦)",
+    "alignBottom": "下揃え"
+  },
+  "backgroundColor": "背景",
+  "bold": "太字",
+  "borders": "罫線",
+  "colorPicker": {
+    "reset": "色をリセット",
+    "customColor": "カスタム色..."
+  },
+  "copy": "コピー",
+  "cut": "切り取り",
+  "deleteColumn": "列を削除",
+  "deleteRow": "行を削除",
+  "excelImport": "Excelからインポート...",
+  "filter": "フィルター",
+  "fontFamily": "フォント",
+  "fontSize": "フォントサイズ",
+  "format": "カスタム書式...",
+  "formatTypes": {
+    "automatic": "自動",
+    "number": "数値",
+    "percent": "パーセント",
+    "financial": "会計",
+    "currency": "通貨",
+    "date": "日付",
+    "time": "時刻",
+    "dateTime": "日時",
+    "duration": "期間",
+    "moreFormats": "その他の書式..."
+  },
+  "formatDecreaseDecimal": "小数点以下を減らす",
+  "formatIncreaseDecimal": "小数点以下を増やす",
+  "freeze": "ウィンドウ枠の固定",
+  "freezeButtons": {
+    "freezePanes": "ウィンドウ枠を固定",
+    "freezeRows": "行を固定",
+    "freezeColumns": "列を固定",
+    "unfreeze": "固定を解除"
+  },
+  "insertComment": "コメントの挿入",
+  "insertImage": "画像の挿入",
+  "italic": "斜体",
+  "merge": "セルの結合",
+  "mergeButtons": {
+    "mergeCells": "すべて結合",
+    "mergeHorizontally": "横方向に結合",
+    "mergeVertically": "縦方向に結合",
+    "unmerge": "結合解除"
+  },
+  "open": "開く...",
+  "paste": "貼り付け",
+  "quickAccess": {
+    "redo": "やり直し",
+    "undo": "元に戻す"
+  },
+  "saveAs": "名前を付けて保存...",
+  "sortAsc": "昇順に並べ替え",
+  "sortDesc": "降順に並べ替え",
+  "sortButtons": {
+    "sortSheetAsc": "シートをA～Zに並べ替え",
+    "sortSheetDesc": "シートをZ～Aに並べ替え",
+    "sortRangeAsc": "範囲をA～Zに並べ替え",
+    "sortRangeDesc": "範囲をZ～Aに並べ替え"
+  },
+  "textColor": "テキストの色",
+  "textWrap": "折り返し",
+  "underline": "下線",
+  "validation": "データの入力規則..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "nameBox": "名前ボックス",
+  "formulaInput": "数式入力",
+  "errors": {
+    "shiftingNonblankCells": "データ損失の可能性があるため、セルを挿入できません。別の挿入位置を選択するか、ワークシートの末尾からデータを削除してください。",
+    "filterRangeContainingMerges": "結合を含む範囲にフィルターを作成できません",
+    "validationError": "入力した値がセルに設定された入力規則に違反しています。"
+  },
+  "tabs": {
+    "home": "ホーム",
+    "insert": "挿入",
+    "data": "データ"
+  },
+  "sheetBar": {
+    "addSheet": "新しいシートの追加",
+    "deleteSheet": "削除",
+    "duplicateSheet": "複製",
+    "renameSheet": "名前変更",
+    "hideSheet": "非表示",
+    "moveRight": "右に移動",
+    "moveLeft": "左に移動"
+  }
+});
+}
+
+  /* SmartBox messages */
+
+  if (kendo.ui.SmartBox) {
+    kendo.ui.SmartBox.prototype.options.messages =
+      $.extend(true, kendo.ui.SmartBox.prototype.options.messages, {
+        "noPreviousSearches": "過去の検索はありません",
+        "noPreviousPrompts": "過去のプロンプトはありません",
+        "previousSearches": "過去の検索",
+        "previousPrompts": "過去のプロンプト",
+        "suggestedPrompts": "おすすめのプロンプト",
+        "searchModeLabel": "検索",
+        "searchModeDescription": "データ内の正確な単語一致を検索します",
+        "searchPlaceholder": "検索",
+        "semanticSearchModeLabel": "セマンティック検索",
+        "semanticSearchModeDescription": "コンテキストを理解して最も関連性の高い結果を表示します。",
+        "semanticSearchPlaceholder": "セマンティック検索",
+        "semanticSearchButtonText": "検索",
+        "aiAssistantPlaceholder": "AIで並べ替え、フィルター、グループ化",
+        "speechToText": "音声テキスト変換",
+        "speechToTextAriaLabel": "音声認識を開始",
+        "cancel": "キャンセル",
+        "send": "送信",
+        "searchButtonText": "検索",
+        "aiAssistantButtonText": "AIアシスタント"
+      });
+  }
+
 })(window.kendo.jQuery);

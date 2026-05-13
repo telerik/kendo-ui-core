@@ -1372,7 +1372,7 @@
             });
     }
 
-    /* ListBox messages */
+    /* ListBox messaages */
     if (kendo.ui.ListBox) {
         kendo.ui.ListBox.prototype.options.messages =
             $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
@@ -1743,6 +1743,586 @@
                     }
                 }
             });
+    }
+
+    /* ColorGradient messages */
+
+    if (kendo.ui.ColorGradient) {
+
+        kendo.ui.ColorGradient.prototype.options.messages =
+            $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+                "contrastRatio": "对比度：",
+                "fail": "失败",
+                "pass": "通过",
+                "hex": "HEX",
+                "toggleFormat": "切换格式",
+                "red": "红",
+                "green": "绿",
+                "blue": "蓝",
+                "alpha": "透明度"
+            });
+
+    }
+
+    /* FileManager messages */
+
+    if (kendo.ui.FileManager) {
+
+        kendo.ui.FileManager.prototype.options.messages =
+            $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+                "toolbar": {
+                    "createFolder": "新建文件夹",
+                    "upload": "上传",
+                    "sortDirection": "排序方向",
+                    "sortDirectionAsc": "升序",
+                    "sortDirectionDesc": "降序",
+                    "sortField": "排序字段",
+                    "nameField": "名称",
+                    "sizeField": "大小",
+                    "typeField": "类型",
+                    "dateModifiedField": "修改日期",
+                    "dateCreatedField": "创建日期",
+                    "listView": "列表视图",
+                    "gridView": "网格视图",
+                    "search": "搜索",
+                    "details": "详情",
+                    "detailsChecked": "是",
+                    "detailsUnchecked": "否",
+                    "Delete": "删除",
+                    "Rename": "重命名"
+                },
+                "views": {
+                    "nameField": "名称",
+                    "sizeField": "大小",
+                    "typeField": "类型",
+                    "dateModifiedField": "修改日期",
+                    "dateCreatedField": "创建日期",
+                    "items": "项"
+                },
+                "dialogs": {
+                    "upload": {
+                        "title": "上传文件",
+                        "clear": "清空",
+                        "done": "完成"
+                    },
+                    "moveConfirm": {
+                        "title": " ",
+                        "content": "<p class='k-text-center'>是否移动或复制所选文件？</p>",
+                        "okText": "复制",
+                        "cancel": "移动",
+                        "close": "关闭"
+                    },
+                    "deleteConfirm": {
+                        "title": "确认删除",
+                        "content": "<p class='k-text-center'>确定要删除所选文件吗？<br/>此操作无法撤销。</p>",
+                        "okText": "删除",
+                        "cancel": "取消",
+                        "close": "关闭"
+                    },
+                    "renamePrompt": {
+                        "title": "重命名",
+                        "content": "<p class='k-text-center'>请输入新文件名</p>",
+                        "okText": "重命名",
+                        "cancel": "取消",
+                        "close": "关闭"
+                    }
+                },
+                "previewPane": {
+                    "noFileSelected": "未选择文件",
+                    "extension": "类型",
+                    "size": "大小",
+                    "created": "创建日期",
+                    "createdUtc": "创建日期 (UTC)",
+                    "modified": "修改日期",
+                    "modifiedUtc": "修改日期 (UTC)",
+                    "items": "项"
+                }
+            });
+
+    }
+
+    /* FilterCell operators */
+
+    /* FilterCell operators */
+
+    if (kendo.ui.FilterCell) {
+
+        kendo.ui.FilterCell.prototype.options.operators =
+            $.extend(true, kendo.ui.FilterCell.prototype.options.operators, {
+                "string": {
+                    "contains": "包含",
+                    "startswith": "开头是",
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "doesnotcontain": "不包含",
+                    "endswith": "结尾是",
+                    "isnull": "为空",
+                    "isnotnull": "不为空",
+                    "isempty": "为空值",
+                    "isnotempty": "不为空值",
+                    "isnullorempty": "有值",
+                    "isnotnullorempty": "没有值"
+                },
+                "number": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "gte": "大于或等于",
+                    "gt": "大于",
+                    "lte": "小于或等于",
+                    "lt": "小于",
+                    "isnull": "为空",
+                    "isnotnull": "不为空"
+                },
+                "date": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "gte": "晚于或等于",
+                    "gt": "晚于",
+                    "lte": "早于或等于",
+                    "lt": "早于",
+                    "isnull": "为空",
+                    "isnotnull": "不为空"
+                },
+                "enums": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "isnull": "为空",
+                    "isnotnull": "不为空"
+                }
+            });
+
+    }
+
+    /* FilterMenu operator messages */
+
+    /* FilterMenu operator messages */
+
+    if (kendo.ui.FilterMenu) {
+
+        kendo.ui.FilterMenu.prototype.options.operators =
+            $.extend(true, kendo.ui.FilterMenu.prototype.options.operators, {
+                "string": {
+                    "contains": "包含",
+                    "startswith": "开头是",
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "doesnotcontain": "不包含",
+                    "endswith": "结尾是",
+                    "isnull": "为空",
+                    "isnotnull": "不为空",
+                    "isempty": "为空值",
+                    "isnotempty": "不为空值",
+                    "isnullorempty": "有值",
+                    "isnotnullorempty": "没有值"
+                },
+                "number": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "gte": "大于或等于",
+                    "gt": "大于",
+                    "lte": "小于或等于",
+                    "lt": "小于",
+                    "isnull": "为空",
+                    "isnotnull": "不为空"
+                },
+                "date": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "gte": "晚于或等于",
+                    "gt": "晚于",
+                    "lte": "早于或等于",
+                    "lt": "早于",
+                    "isnull": "为空",
+                    "isnotnull": "不为空"
+                },
+                "enums": {
+                    "eq": "等于",
+                    "neq": "不等于",
+                    "isnull": "为空",
+                    "isnotnull": "不为空"
+                }
+            });
+
+    }
+
+    /* TaskBoard messages */
+
+    if (kendo.ui.TaskBoard) {
+
+        kendo.ui.TaskBoard.prototype.options.messages =
+            $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+                "edit": "编辑",
+                "createNewCard": "新建卡片",
+                "create": "创建",
+                "search": "搜索",
+                "previewCard": "预览卡片",
+                "addCard": "添加卡片",
+                "editCard": "编辑卡片",
+                "deleteCard": "删除卡片",
+                "addColumn": "添加列",
+                "editColumn": "编辑列",
+                "deleteColumn": "删除列",
+                "close": "关闭",
+                "cancel": "取消",
+                "delete": "删除",
+                "saveChanges": "保存更改",
+                "title": "标题：",
+                "description": "描述：",
+                "newColumn": "新列",
+                "deleteColumnConfirm": "确定要删除此列吗？",
+                "deleteCardConfirm": "确定要删除此卡片吗？"
+            });
+
+    }
+
+    /* NumericTextBox messages */
+
+    /* NumericTextBox messages */
+
+    if (kendo.ui.NumericTextBox) {
+
+        kendo.ui.NumericTextBox.prototype.options =
+            $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+                "upArrowText": "增加值",
+                "downArrowText": "减少值"
+            });
+
+    }
+
+    /* PivotConfiguratorV2 messages */
+
+    if (kendo.ui.PivotConfiguratorV2) {
+
+        kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+            $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+                "title": "设置",
+                "cancelButtonText": "取消",
+                "applyButtonText": "应用",
+                "measures": "选择一些字段以开始设置",
+                "columns": "选择一些字段以开始设置",
+                "rows": "选择一些字段以开始设置"
+            });
+
+    }
+
+    /* PivotFieldMenuV2 messages */
+
+    if (kendo.ui.PivotFieldMenuV2) {
+
+        kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+            $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+                "apply": "应用",
+                "sortAscending": "升序排序",
+                "sortDescending": "降序排序",
+                "filterFields": "字段筛选",
+                "filter": "筛选",
+                "include": "包含字段...",
+                "clear": "清除",
+                "reset": "重置",
+                "moveToColumns": "移至列",
+                "moveToRows": "移至行",
+                "movePrevious": "前移",
+                "moveNext": "后移",
+                "filterOperatorsDropDownLabel": "区域筛选运算符",
+                "filterValueTextBoxLabel": "区域筛选值",
+                "operators": {
+                    "contains": "包含",
+                    "doesnotcontain": "不包含",
+                    "startswith": "开头是",
+                    "endswith": "结尾是",
+                    "eq": "等于",
+                    "neq": "不等于"
+                }
+            });
+
+    }
+
+    /* Slider messages */
+
+    /* Slider messages */
+
+    if (kendo.ui.Slider) {
+
+        kendo.ui.Slider.prototype.options =
+            $.extend(true, kendo.ui.Slider.prototype.options, {
+                "increaseButtonTitle": "增加",
+                "decreaseButtonTitle": "减少",
+                "dragHandleTitle": "拖动"
+            });
+
+    }
+
+    /* ListBox messaages */
+
+    /* ListBox messaages */
+
+    if (kendo.ui.ListBox) {
+
+        kendo.ui.ListBox.prototype.options.messages =
+            $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
+                "tools": {
+                    "remove": "删除",
+                    "moveUp": "上移",
+                    "moveDown": "下移",
+                    "transferTo": "转移到",
+                    "transferFrom": "转移自",
+                    "transferAllTo": "全部转移到",
+                    "transferAllFrom": "全部转移自"
+                }
+            });
+
+    }
+
+    /* Upload messages */
+
+    if (kendo.ui.Upload) {
+
+        kendo.ui.Upload.prototype.options.localization =
+            $.extend(true, kendo.ui.Upload.prototype.options.localization, {
+                "select": "选择文件...",
+                "cancel": "取消",
+                "retry": "重试",
+                "remove": "移除",
+                "clearSelectedFiles": "清除",
+                "uploadSelectedFiles": "上传",
+                "dropFilesHere": "将文件拖放到此处进行上传",
+                "statusUploading": "上传中",
+                "statusUploaded": "已上传",
+                "statusWarning": "警告",
+                "statusFailed": "失败",
+                "headerStatusUploading": "上传中...",
+                "headerStatusUploaded": "完成",
+                "headerStatusPaused": "已暂停"
+            });
+
+    }
+
+    /* kendo.ui.progress method */
+
+    if (kendo.ui.progress) {
+
+        kendo.ui.progress.messages =
+            $.extend(true, kendo.ui.progress.messages, {
+                "loading": "加载中..."
+            });
+
+    }
+
+    /* Dialog */
+
+    if (kendo.ui.Dialog) {
+
+        kendo.ui.Dialog.prototype.options.messages =
+            $.extend(true, kendo.ui.Dialog.prototype.options.messages, {
+                "close": "关闭"
+            });
+
+    }
+
+    /* TimePicker */
+
+    /* TimePicker */
+
+    if (kendo.ui.TimePicker) {
+
+        kendo.ui.TimePicker.prototype.options.messages =
+            $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+                "set": "设置",
+                "cancel": "取消",
+                "hour": "小时",
+                "minute": "分钟",
+                "second": "秒",
+                "millisecond": "毫秒",
+                "now": "现在"
+            });
+
+    }
+
+    /* DateTimePicker */
+
+    /* DateTimePicker */
+
+    if (kendo.ui.DateTimePicker) {
+
+        kendo.ui.DateTimePicker.prototype.options.messages =
+            $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+                "set": "设置",
+                "cancel": "取消",
+                "hour": "小时",
+                "minute": "分钟",
+                "second": "秒",
+                "millisecond": "毫秒",
+                "now": "现在",
+                "date": "日期",
+                "time": "时间",
+                "today": "今天",
+                "weekColumnHeader": ""
+            });
+
+    }
+
+    /* Calendar */
+
+    /* Calendar */
+
+    if (kendo.ui.Calendar) {
+
+        kendo.ui.Calendar.prototype.options.messages =
+            $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+                "weekColumnHeader": "",
+                "today": "今天",
+                "navigateTo": "导航至: ",
+                "parentViews": {
+                    "month": "年视图",
+                    "year": "十年视图",
+                    "decade": "世纪视图"
+                }
+            });
+
+    }
+
+    /* Alert */
+
+    if (kendo.ui.Alert) {
+
+        kendo.ui.Alert.prototype.options.messages =
+            $.extend(true, kendo.ui.Alert.prototype.options.messages, {
+                "okText": "确定"
+            });
+
+    }
+
+    /* Confirm */
+
+    if (kendo.ui.Confirm) {
+
+        kendo.ui.Confirm.prototype.options.messages =
+            $.extend(true, kendo.ui.Confirm.prototype.options.messages, {
+                "okText": "确定",
+                "cancel": "取消"
+            });
+
+    }
+
+    /* Prompt */
+
+    if (kendo.ui.Prompt) {
+
+        kendo.ui.Prompt.prototype.options.messages =
+            $.extend(true, kendo.ui.Prompt.prototype.options.messages, {
+                "okText": "确定",
+                "cancel": "取消"
+            });
+
+    }
+
+    /* DateInput */
+
+    /* DateInput */
+
+    if (kendo.ui.DateInput) {
+
+        kendo.ui.DateInput.prototype.options.messages =
+            $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+                "year": "年",
+                "month": "月",
+                "day": "日",
+                "weekday": "星期",
+                "hour": "时",
+                "minute": "分",
+                "second": "秒",
+                "dayperiod": "上午/下午"
+            });
+
+    }
+
+    /* Wizard messages */
+
+    if (kendo.ui.Wizard) {
+
+        kendo.ui.Wizard.prototype.options.messages =
+            $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+                "reset": "重置",
+                "previous": "上一步",
+                "next": "下一步",
+                "done": "完成",
+                "step": "步骤",
+                "of": "/"
+            });
+
+    }
+
+    /* Captcha messages */
+
+    if (kendo.ui.Captcha) {
+
+        kendo.ui.Captcha.prototype.options.messages =
+            $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+                "reset": "重新生成验证码",
+                "audio": "播放验证码音频",
+                "imageAlt": "输入验证码图片中的文字",
+                "success": "验证成功"
+            });
+
+    }
+
+    /* OrgChart messages */
+
+    if (kendo.ui.OrgChart) {
+
+        kendo.ui.OrgChart.prototype.options.messages =
+            $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+                "label": "组织架构图",
+                "edit": "编辑",
+                "create": "创建",
+                "destroy": "删除",
+                "destroyContent": "确定要删除此项及其子项吗？",
+                "destroyTitle": "删除项目",
+                "cancel": "取消",
+                "save": "保存",
+                "menuLabel": "编辑菜单",
+                "uploadAvatar": "上传新头像",
+                "parent": "上级",
+                "name": "名称",
+                "title": "职位",
+                "none": "--无--",
+                "expand": "展开",
+                "collapse": "折叠"
+            });
+
+    }
+
+    /* Map messages */
+
+    if (kendo.dataviz.ui.Map) {
+
+        kendo.dataviz.ui.Map.prototype.options.messages =
+            $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+                "tileTitle": "地图标题"
+            });
+
+    }
+
+    /* Sankey messages */
+
+    if (kendo.dataviz.ui.Sankey) {
+
+        kendo.dataviz.ui.Sankey.prototype.options.messages =
+            $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+                "tooltipUnits": "{0} 个单位"
+            });
+
+    }
+
+    /* Chart messages */
+
+    if (kendo.dataviz.ui.Chart) {
+
+        kendo.dataviz.ui.Chart.prototype.options.messages =
+            $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+                "noData": "没有可用数据"
+            });
+
     }
 
 })(window.kendo.jQuery);

@@ -6,7 +6,6 @@
  * http://www.telerik.com/purchase/license-agreement/kendo-ui-complete
  * If you do not own a commercial license, this file shall be governed by the trial license terms.
 
-
 */
 
 (function($, undefined) {
@@ -788,7 +787,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   },
   "useKeyboardDialog": {
     "title": "Kopiranje i umetanje",
-
     "errorMessage": "Ove akcije se ne mogu pozivati preko menija. Umjesto toga koristite prečice na tastaturi:",
     "labels": {
       "forCopy": "za kopiranje",
@@ -1119,6 +1117,493 @@ if (kendo.ui.DateInput) {
       "second": "sekunde",
       "dayperiod": "AM/PM"
     });
+}
+
+/* DropDownList messages */
+
+if (kendo.ui.DropDownList) {
+
+    kendo.ui.DropDownList.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownList.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ComboBox messages */
+
+if (kendo.ui.ComboBox) {
+
+    kendo.ui.ComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.ComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* AutoComplete messages */
+
+if (kendo.ui.AutoComplete) {
+
+    kendo.ui.AutoComplete.prototype.options.messages =
+        $.extend(true, kendo.ui.AutoComplete.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* MultiColumnComboBox messages */
+
+if (kendo.ui.MultiColumnComboBox) {
+
+    kendo.ui.MultiColumnComboBox.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
+
+}
+
+/* ColorGradient messages */
+
+if (kendo.ui.ColorGradient) {
+
+    kendo.ui.ColorGradient.prototype.options.messages =
+        $.extend(true, kendo.ui.ColorGradient.prototype.options.messages, {
+            "contrastRatio": "Odnos kontrasta:",
+            "fail": "Neuspeh",
+            "pass": "Uspeh",
+            "hex": "HEX",
+            "toggleFormat": "Promeni format",
+            "red": "Crvena",
+            "green": "Zelena",
+            "blue": "Plava",
+            "alpha": "Alfa"
+        });
+
+}
+
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+
+    kendo.ui.DateRangePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
+            "startLabel": "Pocetak",
+            "endLabel": "Kraj"
+        });
+
+}
+
+/* FileManager messages */
+
+if (kendo.ui.FileManager) {
+
+    kendo.ui.FileManager.prototype.options.messages =
+        $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+            "toolbar": {
+                "createFolder": "Novi folder",
+                "upload": "Otpremi",
+                "sortDirection": "Smer sortiranja",
+                "sortDirectionAsc": "Rastuce",
+                "sortDirectionDesc": "Opadajuce",
+                "sortField": "Sortiraj po",
+                "nameField": "Naziv",
+                "sizeField": "Velicina",
+                "typeField": "Tip",
+                "dateModifiedField": "Datum izmene",
+                "dateCreatedField": "Datum kreiranja",
+                "listView": "Prikaz liste",
+                "gridView": "Tabelarni prikaz",
+                "search": "Pretrazi",
+                "details": "Detalji",
+                "detailsChecked": "Da",
+                "detailsUnchecked": "Ne",
+                "Delete": "Obrisi",
+                "Rename": "Preimenuj"
+            },
+            "views": {
+                "nameField": "Naziv",
+                "sizeField": "Velicina",
+                "typeField": "Tip",
+                "dateModifiedField": "Datum izmene",
+                "dateCreatedField": "Datum kreiranja",
+                "items": "stavki"
+            },
+            "dialogs": {
+                "upload": {
+                    "title": "Otpremi fajlove",
+                    "clear": "Obrisi",
+                    "done": "Gotovo"
+                },
+                "moveConfirm": {
+                    "title": " ",
+                    "content": "<p class='k-text-center'>Zelite li da premestite ili kopirate izabrane fajlove?</p>",
+                    "okText": "Kopiraj",
+                    "cancel": "Premesti",
+                    "close": "Zatvori"
+                },
+                "deleteConfirm": {
+                    "title": "Potvrdite brisanje",
+                    "content": "<p class='k-text-center'>Da li ste sigurni da zelite da obrisete izabrane fajlove?<br/>Ova radnja se ne moze opozvati.</p>",
+                    "okText": "Obrisi",
+                    "cancel": "Otkazi",
+                    "close": "Zatvori"
+                },
+                "renamePrompt": {
+                    "title": "Preimenuj",
+                    "content": "<p class='k-text-center'>Unesite novi naziv fajla</p>",
+                    "okText": "Preimenuj",
+                    "cancel": "Otkazi",
+                    "close": "Zatvori"
+                }
+            },
+            "previewPane": {
+                "noFileSelected": "Nijedan fajl nije izabran",
+                "extension": "Tip",
+                "size": "Velicina",
+                "created": "Datum kreiranja",
+                "createdUtc": "Datum kreiranja (UTC)",
+                "modified": "Datum izmene",
+                "modifiedUtc": "Datum izmene (UTC)",
+                "items": "stavki"
+            }
+        });
+
+}
+
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+
+    kendo.ui.TaskBoard.prototype.options.messages =
+        $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
+            "edit": "Izmeni",
+            "createNewCard": "Nova kartica",
+            "create": "Kreiraj",
+            "search": "Pretrazi",
+            "previewCard": "Pregled kartice",
+            "addCard": "Dodaj karticu",
+            "editCard": "Izmeni karticu",
+            "deleteCard": "Obrisi karticu",
+            "addColumn": "Dodaj kolonu",
+            "editColumn": "Izmeni kolonu",
+            "deleteColumn": "Obrisi kolonu",
+            "close": "Zatvori",
+            "cancel": "Otkazi",
+            "delete": "Obrisi",
+            "saveChanges": "Sacuvaj izmene",
+            "title": "Naslov:",
+            "description": "Opis:",
+            "newColumn": "Nova kolona",
+            "deleteColumnConfirm": "Da li ste sigurni da zelite da obrisete ovu kolonu?",
+            "deleteCardConfirm": "Da li ste sigurni da zelite da obrisete ovu karticu?"
+        });
+
+}
+
+/* PivotConfiguratorV2 messages */
+
+if (kendo.ui.PivotConfiguratorV2) {
+
+    kendo.ui.PivotConfiguratorV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotConfiguratorV2.prototype.options.messages, {
+            "title": "Podesavanja",
+            "cancelButtonText": "Otkazi",
+            "applyButtonText": "Primeni",
+            "measures": "Izaberite polja za pocetak",
+            "columns": "Izaberite polja za pocetak",
+            "rows": "Izaberite polja za pocetak"
+        });
+
+}
+
+/* PivotFieldMenuV2 messages */
+
+if (kendo.ui.PivotFieldMenuV2) {
+
+    kendo.ui.PivotFieldMenuV2.prototype.options.messages =
+        $.extend(true, kendo.ui.PivotFieldMenuV2.prototype.options.messages, {
+            "apply": "Primeni",
+            "sortAscending": "Rastuce",
+            "sortDescending": "Opadajuce",
+            "filterFields": "Filter polja",
+            "filter": "Filter",
+            "include": "Ukljuci polja...",
+            "clear": "Obrisi",
+            "reset": "Resetuj",
+            "moveToColumns": "Premesti u kolone",
+            "moveToRows": "Premesti u redove",
+            "movePrevious": "Nazad",
+            "moveNext": "Napred",
+            "filterOperatorsDropDownLabel": "Operatori filtera",
+            "filterValueTextBoxLabel": "Vrednost filtera",
+            "operators": {
+                "contains": "Sadrzi",
+                "doesnotcontain": "Ne sadrzi",
+                "startswith": "Pocinje sa",
+                "endswith": "Zavrsava se sa",
+                "eq": "Jednako",
+                "neq": "Nije jednako"
+            }
+        });
+
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+        $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, {
+            "cancel": "Otkazi",
+            "update": "Sacuvaj",
+            "endTitle": "Kraj ponavljanja",
+            "repeatTitle": "Obrazac ponavljanja",
+            "headerTitle": "Ponovi dogadaj",
+            "end": {
+                "never": "Nikada",
+                "after": "Posle",
+                "on": "Na datum"
+            },
+            "daily": {
+                "interval": "dan(a)"
+            },
+            "weekly": {
+                "interval": "nedelja"
+            },
+            "monthly": {
+                "interval": "mesec(i)",
+                "repeatBy": "Ponovi po: ",
+                "dayOfMonth": "Dan u mesecu",
+                "dayOfWeek": "Dan u nedelji"
+            },
+            "yearly": {
+                "interval": "godina/e",
+                "repeatBy": "Ponovi po: ",
+                "dayOfMonth": "Dan u mesecu",
+                "dayOfWeek": "Dan u nedelji",
+                "of": " od "
+            },
+            "endRule": {
+                "after": " ponavljanja",
+                "on": "Na datum "
+            }
+        });
+
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+
+    kendo.ui.TimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+            "set": "Postavi",
+            "cancel": "Otkazi",
+            "hour": "sat",
+            "minute": "minut",
+            "second": "sekunda",
+            "millisecond": "milisekunda",
+            "now": "Sada"
+        });
+
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+
+    kendo.ui.DateTimePicker.prototype.options.messages =
+        $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+            "set": "Postavi",
+            "cancel": "Otkazi",
+            "hour": "sat",
+            "minute": "minut",
+            "second": "sekunda",
+            "millisecond": "milisekunda",
+            "now": "Sada",
+            "date": "Datum",
+            "time": "Vreme",
+            "today": "Danas",
+            "weekColumnHeader": ""
+        });
+
+}
+
+/* List messages */
+
+if (kendo.ui.List) {
+
+    kendo.ui.List.prototype.options.messages =
+        $.extend(true, kendo.ui.List.prototype.options.messages, {
+            "clear": "obrisi",
+            "noData": "Nema podataka."
+        });
+
+}
+
+/* DropDownTree messages */
+
+if (kendo.ui.DropDownTree) {
+
+    kendo.ui.DropDownTree.prototype.options.messages =
+        $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
+            "clear": "obrisi",
+            "noData": "Nema podataka.",
+            "singleTag": "izabranih stavki"
+        });
+
+}
+
+/* MultiSelect messages */
+
+if (kendo.ui.MultiSelect) {
+
+    kendo.ui.MultiSelect.prototype.options.messages =
+        $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
+            "clear": "obrisi",
+            "noData": "Nema podataka.",
+            "singleTag": "izabranih stavki"
+        });
+
+}
+
+/* Chat messages */
+
+if (kendo.ui.Chat) {
+
+    kendo.ui.Chat.prototype.options.messages =
+        $.extend(true, kendo.ui.Chat.prototype.options.messages, {
+            "placeholder": "Unesite poruku...",
+            "toggleButton": "Traka sa alatkama",
+            "sendButton": "Posalji"
+        });
+
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+
+    kendo.ui.Wizard.prototype.options.messages =
+        $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
+            "reset": "Resetuj",
+            "previous": "Prethodno",
+            "next": "Sledece",
+            "done": "Gotovo",
+            "step": "Korak",
+            "of": "od"
+        });
+
+}
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            "defaultFileName": "Dokument",
+            "toolbar": {
+                "zoom": {
+                    "zoomLevel": "Nivo zumiranja",
+                    "zoomOut": "Umanji",
+                    "zoomIn": "Uvecaj",
+                    "actualWidth": "Stvarna sirina",
+                    "autoWidth": "Automatska sirina",
+                    "fitToWidth": "Prilagodi sirini",
+                    "fitToPage": "Prilagodi stranici"
+                },
+                "open": "Otvori",
+                "exportAs": "Izvezi",
+                "download": "Preuzmi",
+                "pager": {
+                    "first": "Idi na prvu stranicu",
+                    "previous": "Idi na prethodnu stranicu",
+                    "next": "Idi na sledecu stranicu",
+                    "last": "Idi na poslednju stranicu",
+                    "of": "od",
+                    "page": "stranica",
+                    "pages": "stranica"
+                },
+                "print": "Stampaj",
+                "toggleSelection": "Izbor",
+                "togglePan": "Pomeranje",
+                "search": "Pretrazi"
+            },
+            "errorMessages": {
+                "notSupported": "Podrzani su samo PDF fajlovi.",
+                "parseError": "PDF fajl nije moguce obraditi.",
+                "notFound": "Fajl nije pronaden.",
+                "popupBlocked": "Iskacuci prozor blokiran od strane pregledaca."
+            }
+        });
+
+}
+
+/* Captcha messages */
+
+if (kendo.ui.Captcha) {
+
+    kendo.ui.Captcha.prototype.options.messages =
+        $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
+            "reset": "Ponovo generisite captcha",
+            "audio": "Reprodukujte zvuk captcha",
+            "imageAlt": "Unesite tekst sa slike captcha",
+            "success": "Verifikacija je uspesna"
+        });
+
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+
+    kendo.ui.OrgChart.prototype.options.messages =
+        $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
+            "label": "Organizacioni dijagram",
+            "edit": "Izmeni",
+            "create": "Kreiraj",
+            "destroy": "Obrisi",
+            "destroyContent": "Da li ste sigurni da zelite da obrisete ovu stavku i njene podredene?",
+            "destroyTitle": "Obrisi stavku",
+            "cancel": "Otkazi",
+            "save": "Sacuvaj",
+            "menuLabel": "Meni za uredivanje",
+            "uploadAvatar": "Otpremi novu sliku",
+            "parent": "Nadredeni",
+            "name": "Naziv",
+            "title": "Naslov",
+            "none": "--Nista--",
+            "expand": "Prosiri",
+            "collapse": "Skupi"
+        });
+
+}
+
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+
+    kendo.dataviz.ui.Map.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
+            "tileTitle": "Naslov mape"
+        });
+
+}
+
+/* Sankey messages */
+
+if (kendo.dataviz.ui.Sankey) {
+
+    kendo.dataviz.ui.Sankey.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Sankey.prototype.options.messages, {
+            "tooltipUnits": "{0} Jedinica"
+        });
+
+}
+
+/* Chart messages */
+
+if (kendo.dataviz.ui.Chart) {
+
+    kendo.dataviz.ui.Chart.prototype.options.messages =
+        $.extend(true, kendo.dataviz.ui.Chart.prototype.options.messages, {
+            "noData": "Nema dostupnih podataka"
+        });
+
 }
 
 })(window.kendo.jQuery);
