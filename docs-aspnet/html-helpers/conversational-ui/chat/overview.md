@@ -119,6 +119,8 @@ The following example demonstrates how to define header items, predefined sugges
 | [AI Integration]({% slug htmlhelpers_ai_integration_chat %}) | Configure the Chat to interact with a large language model through a streaming AI chat service. |
 | [Tools]({% slug htmlhelpers_tools_chat %}) | Utilize the available context menu actions and toolbar commands. |
 | [File Uploads and Media]({% slug htmlhelpers_files_and_media_chat %}) | Enable file uploads, media sharing, and speech-to-text functionality of the Chat component. |
+| [Adornments]({% slug htmlhelpers_adornments_chat %}) | Configure start, end, and top PromptBox adornments to place custom controls around the input area. |
+| [AutoScroll Threshold]({% slug htmlhelpers_autoscroll_threshold_chat %}) | Configure the bottom-zone threshold that controls when incoming messages auto-scroll into view. |
 | [Quick Actions]({% slug htmlhelpers_quick_actions_chat %}) | Define quick response suggestions that appear above the message box. |
 | [Templates]({% slug htmlhelpers_templates_chat %}) | Use template options to customize the rendering of the messages, attachments, quick actions, and more. |
 | [Peer-to-Peer Chat]({% slug htmlhelpers_chat_aspnetcore_signalr %}) | Create a peer-to-peer Chat application using SignalR. |

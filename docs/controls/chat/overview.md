@@ -21,6 +21,8 @@ The Kendo UI for jQuery Chat component empowers developers to create sophisticat
 * [AI Integration]({% slug databinding_kendoui_chat %})&mdash;Configure the Chat to interact with a large language model through a standalone AI chat client service.
 * [Tools]({% slug tools_kendoui_chat %})&mdash;Utilize the available context menu actions, toolbar commands, per-user message settings, and message status features.
 * [File Uploads and Media]({% slug media_kendoui_chat %})&mdash;Enable the file uploads, media sharing, and speech-to-text functionality of the Chat component.
+* [Adornments]({% slug adornments_kendoui_chat %})&mdash;Customize the PromptBox area with start, end, and top affixes for additional actions and controls.
+* [AutoScroll Threshold]({% slug autoscroll_threshold_kendoui_chat %})&mdash;Configure the bottom threshold that determines when new messages auto-scroll into view.
 * [Quick Actions]({% slug suggestions_kendoui_chat %})&mdash;Define quick response suggestions that appear below the message input, and configure their behavior and layout.
 * [Templates]({% slug templates_kendoui_chat %})&mdash;Use the template options to customize the rendering of the messages, attachments, quick actions, status indicators, and more.
 

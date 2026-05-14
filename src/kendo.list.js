@@ -1441,7 +1441,7 @@ export const __meta__ = {
 
                 list.listView.destroy();
                 if (list.listView.content) {
-                    this._getUlElement().unwrap();
+                    list.listView.content.remove();
                 }
                 list._initList({ skipValueUpdate: true });
                 list.listView.value(listViewValue);
