@@ -68,6 +68,25 @@ How do I customize the subtitle in Kendo UI datepicker for mobile views? Set, cu
     });
     </script>
 
+### readonly `Boolean`*(default: "false")*
+
+If set to `true`, the widget will be readonly and will not allow user input. The widget is not readonly be default and allow user input.
+
+<div class="meta-api-description">
+How do I prevent users from typing in a Kendo UI DatePicker? Control whether a dropdown field or select menu permits user typing or modification by enabling a read-only mode that disables input editing, locks selection to preset options, prevents users from altering or entering new values, restricts interaction to selection only.
+</div>
+
+#### Example - make the widget readonly
+
+    <div id="datepicker">
+    </div>
+    <script>
+       $("#datepicker").kendoDatePicker({
+          readonly: true,
+          dateInput: true
+      });
+    </script>
+
 ### animation `Boolean|Object`
 
 Configures the opening and closing animations of the calendar popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the calendar popup will open and close instantly.

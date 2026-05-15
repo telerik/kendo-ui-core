@@ -4882,6 +4882,7 @@ declare namespace kendo.ui {
         month?: DatePickerMonth | undefined;
         weekNumber?: boolean | undefined;
         parseFormats?: any;
+        readonly?: boolean | undefined;
         rounded?: string | undefined;
         size?: string | undefined;
         start?: string | undefined;
@@ -5076,6 +5077,7 @@ declare namespace kendo.ui {
         month?: DateTimePickerMonth | undefined;
         weekNumber?: boolean | undefined;
         parseFormats?: any;
+        readonly?: boolean | undefined;
         rounded?: string | undefined;
         size?: string | undefined;
         start?: string | undefined;
