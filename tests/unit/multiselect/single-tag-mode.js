@@ -44,7 +44,7 @@ describe("kendo.ui.MultiSelect Single Tag mode", function() {
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 item(s) selected</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down,.k-svg-i-caret-alt-down"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
         assert.equal(tag.find(".k-chip-icon").attr("aria-label"), "open");
     });
 
@@ -61,7 +61,7 @@ describe("kendo.ui.MultiSelect Single Tag mode", function() {
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 selected of 15</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down,.k-svg-i-caret-alt-down"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -77,7 +77,7 @@ describe("kendo.ui.MultiSelect Single Tag mode", function() {
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 (1) selected of 15</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down,.k-svg-i-caret-alt-down"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -93,7 +93,7 @@ describe("kendo.ui.MultiSelect Single Tag mode", function() {
 
         assert.equal(tag.children().length, 2);
         assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 (1) selected of 15</span>');
-        assert.isOk(tag.find(".k-chip-icon").is(".k-i-caret-alt-down,.k-svg-i-caret-alt-down"));
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-chevron-down,.k-svg-i-chevron-down"));
     });
 
     it("Updates the text of the selected tag when value is changed", function() {

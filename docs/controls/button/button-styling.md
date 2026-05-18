@@ -75,10 +75,7 @@ The following values are available for the [`themeColor`](/api/javascript/ui/but
 - `success`
 - `warning`
 - `error`
-- `dark`
-- `light`
 - `inverse`
-- `none`
 
 The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have `k-button-base` class applied.
 

@@ -95,8 +95,6 @@ The `ThemeColor` configuration provides a variety of colors that can be applied 
 - `Success`
 - `Warning`
 - `Error`
-- `Dark`
-- `Light`
 - `Inverse`
 
 > When not explicitly set, the applied theme controls the default theme color.

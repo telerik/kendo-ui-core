@@ -158,7 +158,7 @@ Use a custom template for the AI column to render a button. When the button is c
                 var icon = "user";
                 if (dataItem.TreatmentPlanStatus) {
                     if (dataItem.TreatmentPlanStatus === "Active") {
-                        icon = "pills-solid"; themeColor = "info";
+                        icon = "pills"; themeColor = "info";
                     } else if (dataItem.TreatmentPlanStatus === "Under Evaluation") {
                         icon = "calculator"; themeColor = "base";
                     } else if (dataItem.TreatmentPlanStatus === "Adjusting") {
@@ -166,7 +166,7 @@ Use a custom template for the AI column to render a button. When the button is c
                     } else if (dataItem.TreatmentPlanStatus === "Stable") {
                         icon = "arrows-no-change"; themeColor = "success";
                     } else {
-                        icon = "wallet-solid"; themeColor = "error";
+                        icon = "wallet"; themeColor = "error";
                     }
                     $(this).find(".treatment-chip").kendoChip({
                         label: dataItem.TreatmentPlanStatus,

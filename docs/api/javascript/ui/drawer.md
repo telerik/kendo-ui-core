@@ -29,7 +29,7 @@ How to automatically collapse Kendo UI for jQuery Drawer after navigation link i
     <script>
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 autoCollapse: false
             }).data("kendoDrawer");
 
@@ -55,7 +55,7 @@ How do I control the initial state of a Kendo UI for jQuery navigation drawer? C
       $("#drawer").kendoDrawer({
         expanded: true,
         mode: "push",
-        template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+        template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
         position: 'left'
       });
     </script>
@@ -77,7 +77,7 @@ How do I set the position of a Kendo UI drawer to open from the left or right si
     <script>
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'right'
             }).data("kendoDrawer");
 
@@ -103,7 +103,7 @@ How does the mode property affect the interaction between the drawer panel and m
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left'
             }).data("kendoDrawer");
 
@@ -130,7 +130,7 @@ How do I enable keyboard navigation in Kendo UI for jQuery Drawer control? Contr
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
                 navigatable: true,
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left'
             }).data("kendoDrawer");
 
@@ -156,7 +156,7 @@ How do I customize the content of the Kendo UI Drawer? Customize the sliding pan
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left'
             }).data("kendoDrawer");
 
@@ -182,7 +182,7 @@ How do I set the minimum height of a Kendo UI Drawer in jQuery? Set or configure
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li></ul>`,
                 position: 'left',
                 minHeight: 200
             }).data("kendoDrawer");
@@ -209,7 +209,7 @@ How to enable a minimized drawer view in Kendo UI for jQuery? Control or configu
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left',
                 mini: true
             }).data("kendoDrawer");
@@ -234,7 +234,7 @@ How do I adjust the width of the minimized drawer in Kendo UI for jQuery? Adjust
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left',
                 mini: {
                     width: 45
@@ -261,7 +261,7 @@ How to customize the collapsed view of Kendo UI for jQuery Drawer? Customize the
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left',
                 mini: {
                     width: 45,
@@ -305,7 +305,7 @@ How to disable swipe-to-open navigation drawer in Kendo UI for jQuery? Enable or
     <script>
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 swipeToOpen: false
             }).data("kendoDrawer");
 
@@ -331,7 +331,7 @@ How do I set a fixed width for a Kendo UI Drawer? Adjust or configure the expand
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
-                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left',
                 width: 200
             }).data("kendoDrawer");
@@ -361,7 +361,7 @@ What happens when I call the destroy method on a Kendo UI Drawer component? Remo
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left'
                 }).data("kendoDrawer");
 
@@ -391,7 +391,7 @@ How do I programmatically hide a Kendo UI Drawer component? Programmatically clo
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left'
                 }).data("kendoDrawer");
 
@@ -424,7 +424,7 @@ How can I programmatically show a Kendo UI drawer? Trigger the drawer to open or
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left'
                 }).data("kendoDrawer");
 
@@ -458,7 +458,7 @@ How can I prevent a Kendo UI for jQuery Drawer from hiding programmatically? Det
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left',
                     hide: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -493,7 +493,7 @@ How to prevent Kendo UI Drawer from showing until user is authenticated? Interce
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left',
                     show: function(e) {
                         e.preventDefault();
@@ -521,7 +521,7 @@ How to prevent default action when an item is clicked in a Kendo UI Drawer? Dete
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left',
                     itemClick: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -553,7 +553,7 @@ How to check if Kendo UI Drawer is currently open in jQuery? Determine if the si
             $(document).ready(function() {
                 var drawerInstance = $("#drawer").kendoDrawer({
                     mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left'
                 }).data("kendoDrawer");
 

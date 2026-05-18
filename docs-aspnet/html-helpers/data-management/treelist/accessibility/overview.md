@@ -57,7 +57,7 @@ The below table lists the ARIA requirements for the TreeList which are not prese
 | -------- | --------- | ----- |
 | `.k-treelist .k-grid-aria-root` | `role=treegrid` | Sets the proper role for the TreeList component. |
 | `.k-table-tbody .k-table-row` | `aria-expanded=true/false` | Set on the currently expanded row(s). |
-| `.k-table-tbody .k-i-caret-alt-down,.k-table-tbody .k-i-caret-alt-right,.k-table-tbody .k-svg-i-caret-alt-down,.k-table-tbody .k-svg-i-caret-alt-right` | `aria-hidden=true` | Removes the expand/collapse icon from the accessibility tree. |
+| `.k-table-tbody .k-i-chevron-down,.k-table-tbody .k-i-chevron-right,.k-table-tbody .k-svg-i-chevron-down,.k-table-tbody .k-svg-i-chevron-right` | `aria-hidden=true` | Removes the expand/collapse icon from the accessibility tree. |
 
 ## Resources
 

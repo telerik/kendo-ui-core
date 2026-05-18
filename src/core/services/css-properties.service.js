@@ -10,7 +10,7 @@ class CssPropertiesService {
          */
         this.themeColorValues = [
             'base', 'primary', 'secondary', 'tertiary', 'inherit',
-            'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'
+            'info', 'success', 'warning', 'error', 'inverse'
         ];
         /**
          * Predefined fill mode values
@@ -24,7 +24,7 @@ class CssPropertiesService {
          * Predefined size values
          */
         this.sizeValues = [
-            ['small', 'sm'], ['medium', 'md'], ['large', 'lg']
+            ['xsmall', 'xs'], ['small', 'sm'], ['medium', 'md'], ['large', 'lg']
         ];
         /**
          * Predefined rounded values
@@ -141,7 +141,7 @@ class CssPropertiesService {
         }
         const widgetValues = widgetProperties[propName];
         const validValue = widgetValues
-            ? (widgetValues[value] || (defaultVals && defaultVals[value]))
+            ? widgetValues[value]
             : (defaultVals && defaultVals[value]);
         if (validValue) {
             let prefix;

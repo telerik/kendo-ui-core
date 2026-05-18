@@ -115,7 +115,7 @@ The Dialog action buttons support extensive appearance customization through sev
 
 ### Theme Colors
 
-The `themeColor` property controls the color scheme of the button. Available values are: `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverse`, and `none`.
+The `themeColor` property controls the color scheme of the button. Available values are: `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, and `inverse`.
 
       $("#dialog").kendoDialog({
           title: "Confirm Action",

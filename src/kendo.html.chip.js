@@ -115,6 +115,9 @@ export const __meta__ = {
     kendo.cssProperties.registerPrefix("HTMLChip", "k-chip-");
 
     kendo.cssProperties.registerValues("HTMLChip", [{
+        prop: "themeColor",
+        values: ['base', 'error', 'info', 'warning', 'success']
+    }, {
         prop: "rounded",
         values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
     }]);

@@ -266,11 +266,11 @@ How do I set a badge label on a Kendo UI button using different data types? Conf
 
 ### badge.themeColor `String` *(default: 'secondary')*
 
-Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
+Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverted`.
 
 
 <div class="meta-api-description">
-How do I change the color of a button's badge in Kendo UI for jQuery? Configure or customize the badge color styling on a button by setting its theme or semantic color such as primary, secondary, success, warning, error, info, dark, light, inverted, or default to control the visual emphasis, feedback indication, or design consistency; developers may want to adjust or apply specific color themes for badges to match UI palettes, highlight status, convey state meaning, or inherit parent color schemes within interactive button components.
+How do I change the color of a button's badge in Kendo UI for jQuery? Configure or customize the badge color styling on a button by setting its theme or semantic color such as primary, secondary, success, warning, error, info, inverted, or default to control the visual emphasis, feedback indication, or design consistency; developers may want to adjust or apply specific color themes for badges to match UI palettes, highlight status, convey state meaning, or inherit parent color schemes within interactive button components.
 </div>
 
 #### Example
@@ -449,7 +449,7 @@ How do I customize the border radius of a Kendo UI button? Adjust or customize b
 
 ### size `String` *(default: undefined)*
 
-Controls the overall physical size of a button. Valid values are: `"small"`, `"medium"`, and `"large"`. When `undefined` (the default), the theme controls the default size.
+Controls the overall physical size of a button. Valid values are: `"xsmall"`, `"small"`, `"medium"`, and `"large"`. When `undefined` (the default), the theme controls the default size.
 
 > The `"none"` value is deprecated. Use custom CSS to customize the size.
 
@@ -501,13 +501,13 @@ How do I configure sprite background images on interactive elements using Kendo 
 
 ### themeColor `String` *(default: undefined)*
 
-Controls the main color applied to the button. Valid values are: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, and `"inverse"`. When `undefined` (the default), the theme controls the default theme color.
+Controls the main color applied to the button. Valid values are: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, and `"inverse"`. When `undefined` (the default), the theme controls the default theme color.
 
 > The `"none"` value is deprecated. Use custom CSS to remove the theme color styling.
 
 
 <div class="meta-api-description">
-How do I set the color scheme of a Kendo UI button using themeColor property? Control and customize the primary color scheme of buttons to indicate different statuses, importance levels, or stylistic themes, enabling you to apply various predefined color presets such as base, primary, secondary, tertiary, informational, success, warning, error, dark, light, inverse, or disable coloring altogether. Configure button appearance to differentiate actions, highlight critical functions, set contextual meanings, or match branding by selecting from essential tone options that convey alerts, confirmations, or neutral states, supporting diverse visual emphasis and UI consistency in your application’s controls.
+How do I set the color scheme of a Kendo UI button using themeColor property? Control and customize the primary color scheme of buttons to indicate different statuses, importance levels, or stylistic themes, enabling you to apply various predefined color presets such as base, primary, secondary, tertiary, informational, success, warning, error, inverse, or disable coloring altogether. Configure button appearance to differentiate actions, highlight critical functions, set contextual meanings, or match branding by selecting from essential tone options that convey alerts, confirmations, or neutral states, supporting diverse visual emphasis and UI consistency in your application’s controls.
 </div>
 
 #### Example
@@ -515,7 +515,7 @@ How do I set the color scheme of a Kendo UI button using themeColor property? Co
     <button id="button" type="button">Cancel</button>
     <script>
         $("#button").kendoButton({
-            themeColor: "dark"
+            themeColor: "base"
         });
     </script>
 

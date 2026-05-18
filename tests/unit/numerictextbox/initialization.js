@@ -40,8 +40,8 @@ describe("kendo.ui.NumericTextBox initialization", function() {
         assert.isOk(downArrow.hasClass("k-spinner-decrease"));
         assert.equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
 
-        assert.isOk(upArrow.children(":first").is(".k-icon.k-i-caret-alt-up.k-button-icon, .k-svg-icon.k-svg-i-caret-alt-up.k-button-icon"));
-        assert.isOk(downArrow.children(":first").is(".k-icon.k-i-caret-alt-down.k-button-icon, .k-svg-icon.k-svg-i-caret-alt-down.k-button-icon"));
+        assert.isOk(upArrow.children(":first").is(".k-icon.k-i-chevron-up.k-button-icon, .k-svg-icon.k-svg-i-chevron-up.k-button-icon"));
+        assert.isOk(downArrow.children(":first").is(".k-icon.k-i-chevron-down.k-button-icon, .k-svg-icon.k-svg-i-chevron-down.k-button-icon"));
     });
 
     it("Should render INPUT containing the formatted value", function() {

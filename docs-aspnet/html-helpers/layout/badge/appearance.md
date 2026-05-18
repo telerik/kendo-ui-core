@@ -65,14 +65,10 @@ The available `ThemeColor` values are:
 - `Default`&mdash;Applies base theme color.
 - `Secondary`&mdash;Applies coloring based on the secondary theme color.
 - `Tertiary`&mdash;Applies coloring based on the tertiary theme color.
-- `Inherit`&mdash;Applies the inherited coloring value.
 - `Info`&mdash;Applies coloring based on the info theme color.
 - `Success`&mdash;Applies coloring based on the success theme color.
 - `Warning`&mdash;Applies coloring based on the warning theme color.
 - `Error`&mdash;Applies coloring based on the error theme color.
-- `Dark`&mdash;Applies coloring based on the dark theme color.
-- `Light`&mdash;Applies coloring based on the light theme color.
-- `Inverted`&mdash;Applies coloring based on the inverted theme color.
 
 ```HtmlHelper
    @(Html.Kendo().Badge()

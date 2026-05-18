@@ -266,6 +266,14 @@ If a jQuery element is passed as the first it will render an icon classes and co
 
 If a `string` is provided, it will attempt to render a valid SVG icon from the predefined kendo svg collection (`kendo.ui.svgIcons`). Or add class for the font icon by prefixing with `k-i-`. Check the available options in the [`FontIcon`](/styles-and-layout/sass-themes/font-icons) or the [`SvgIcon`](/styles-and-layout/sass-themes/svg-icons) API sections.
 
+##### options.variant `String` *(default: null)*
+
+Specifies the SVG icon variant to render. The supported values are `"solid"`, `"outline"`, and `"duotone"`. Only applicable when the icon type is `"svg"` and the icon definition includes a `variants` object.
+
+<div class="meta-api-description">
+How do I set or change the SVG icon style variant in Kendo UI for jQuery? Control icon fill styles by selecting between solid, outline, or duotone icon variants for SVG icons rendered via kendo.ui.icon. Switch icon appearance between filled, outlined, and duotone display modes to match your UI theme or design requirements. Configure SVG icon variants using the variant option, colon-separated string format, or dash-suffixed icon names to render different icon visual styles.
+</div>
+
 #### Example - extending an element
 
     <span id="icon"></span>
@@ -335,5 +343,26 @@ If a `string` is provided, it will attempt to render a valid SVG icon from the p
             icon: 'camera'
         });
         
+        $('body').append(icon);
+    </script>
+
+#### Example - render a solid variant of an SVG icon
+
+    <script>
+        var icon = kendo.ui.icon({ icon: 'heart', variant: 'solid' });
+        $('body').append(icon);
+    </script>
+
+#### Example - render an outline variant using string format
+
+    <script>
+        var icon = kendo.ui.icon('heart:outline');
+        $('body').append(icon);
+    </script>
+
+#### Example - render a duotone variant
+
+    <script>
+        var icon = kendo.ui.icon({ icon: 'heart', variant: 'duotone' });
         $('body').append(icon);
     </script>

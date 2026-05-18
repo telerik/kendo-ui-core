@@ -62,25 +62,18 @@ To control the position of the text labels against the items, set the [`ItemFlow
 
 The [`ThemeColor`](https://docs.telerik.com/{{ site.platform }}/api/kendo.mvc.ui.fluent/bottomnavigationbuilder#themecolorkendomvcuibottomnavigationthemecolor) configuration provides a variety of colors that can be applied to the component. The available options are:
 
-- `Default`
+- `Base`
 - `Primary`
 - `Secondary`
 - `Tertiary`
-- `Info`
-- `Success`
-- `Warning`
-- `Error`
-- `Dark`
-- `Light`
 - `Inverse`
-- `Inherit` (no coloring will be applied)
 
 The default `ThemeColor` is `Primary`.
 
 ```HtmlHelper
     @(Html.Kendo().BottomNavigation()
         .Name("bottomNavigation")
-        .ThemeColor(BottomNavigationThemeColor.Info)
+        .ThemeColor(BottomNavigationThemeColor.Secondary)
         .Items(i =>
         {
             i.Add().Text("Home").Data(new { view = "home" }).Icon("home").Selected(true);
@@ -97,7 +90,7 @@ The default `ThemeColor` is `Primary`.
         var profile = new { view = "profile" };
     }
 
-    <kendo-bottomnavigation name="bottomNavigation" theme-color="BottomNavigationThemeColor.Info">
+    <kendo-bottomnavigation name="bottomNavigation" theme-color="BottomNavigationThemeColor.Secondary">
         <bottomnavigation-items>
             <bottomnavigation-item context-data="@home" text="Home" icon="home" selected="true"></bottomnavigation-item>
             <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar-date"></bottomnavigation-item>

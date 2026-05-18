@@ -295,6 +295,12 @@ export const __meta__ = {
                     wrapper.css(TOP, "-10000px");
                 }
 
+                if (fixed.isFixed) {
+                    element.css("margin", "0");
+                } else {
+                    element.css("margin", "");
+                }
+
                 that.flipped = that._position(fixed);
                 animation = that._openAnimation();
 

@@ -13,7 +13,7 @@ Represents the Kendo UI SplitButton widget. Inherits from [Widget](/api/javascri
 
 ## Configuration
 
-### arrowIcon `String` *(default: 'caret-alt-down')*
+### arrowIcon `String` *(default: 'chevron-down')*
 
 The icon rendered for the arrow button of the **SplitButton**.
 
@@ -31,7 +31,7 @@ How do I customize the arrow icon in Kendo UI SplitButton? Control, configure, o
             { text: "item 1" },
             { text: "item 2" }
         ],
-        arrowIcon: "caret-alt-up"
+        arrowIcon: "chevron-up"
     });
     </script>
 
@@ -616,11 +616,11 @@ How do I change the icon of a Kendo UI SplitButton? Set or customize the backgro
 
 ### themeColor `String` *(default: 'base')*
 
-Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, and `"inverse"`. Default value is `"base"`.
 
 
 <div class="meta-api-description">
-How do I customize the color scheme of a Kendo UI split button? Control and configure the color scheme, visual style, and thematic tone of a split button's appearance by setting or customizing its main color to reflect different states such as primary, secondary, success, warning, error, light, dark, info, tertiary, inverse, or no color, enabling precise styling, branding, or state signaling for user interface components across various design contexts and color theme options.
+How do I customize the color scheme of a Kendo UI split button? Control and configure the color scheme, visual style, and thematic tone of a split button's appearance by setting or customizing its main color to reflect different states such as primary, secondary, success, warning, error, info, tertiary, inverse, or no color, enabling precise styling, branding, or state signaling for user interface components across various design contexts and color theme options.
 </div>
 
 #### Example
@@ -632,7 +632,7 @@ How do I customize the color scheme of a Kendo UI split button? Control and conf
                 { text: "item 1" },
                 { text: "item 2" }
             ],
-            themeColor: "dark"
+            themeColor: "primary"
         });
     </script>
 

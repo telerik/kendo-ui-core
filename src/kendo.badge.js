@@ -319,6 +319,13 @@ export const __meta__ = {
 
     ui.plugin(Badge);
 
+    kendo.cssProperties.registerPrefix("Badge", "k-badge-");
+
+    kendo.cssProperties.registerValues("Badge", [{
+        prop: "themeColor",
+        values: ['base', 'primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error']
+    }]);
+
 })(window.kendo.jQuery);
 export default kendo;
 

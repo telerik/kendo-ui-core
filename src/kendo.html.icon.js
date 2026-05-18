@@ -9,43 +9,47 @@ export const __meta__ = {
 };
 
 (function($, undefined) {
-    var kendo = window.kendo,
+    const kendo = window.kendo,
         extend = $.extend,
         HTMLBase = kendo.html.HTMLBase;
 
-    var KFONTICON = 'k-icon k-font-icon';
-    var KI_PREFFIX = 'k-i-';
-    var KSVGICON = 'k-icon k-svg-icon';
-    var KSVG_PREFFIX = 'k-svg-i-';
+    const KFONTICON = 'k-icon k-font-icon';
+    const KI_PREFFIX = 'k-i-';
+    const KSVGICON = 'k-icon k-svg-icon';
+    const KSVG_PREFFIX = 'k-svg-i-';
 
-    var FLIP_PREFIX = 'k-flip-';
-    var FLIP_HORIZONTAL = `${FLIP_PREFIX}h`;
-    var FLIP_VERTICAL = `${FLIP_PREFIX}v`;
+    const FLIP_PREFIX = 'k-flip-';
+    const FLIP_HORIZONTAL = `${FLIP_PREFIX}h`;
+    const FLIP_VERTICAL = `${FLIP_PREFIX}v`;
 
-    var THEME_COLOR_PREFIX = 'k-color-';
+    const THEME_COLOR_PREFIX = 'k-color-';
 
-    var ICON_TYPES = {
+    const ICON_TYPES = {
         'svg': (element, options) => new HTMLSvgIcon(element, options),
         'font': (element, options) => new HTMLFontIcon(element, options)
     };
 
-    var FLIP_CLASSES = {
+    const FLIP_CLASSES = {
         default: '',
         horizontal: FLIP_HORIZONTAL,
         vertical: FLIP_VERTICAL,
         both: `${FLIP_HORIZONTAL} ${FLIP_VERTICAL}`
     };
 
-    var renderIcon = function(element, options) {
+    const VALID_VARIANTS = ['solid', 'outline', 'duotone'];
+    const renderIcon = function(element, options) {
         if (!element || $.isPlainObject(element) || kendo.isString(element)) {
             options = element;
             element = $("<span></span>");
         }
 
         if (kendo.isString(options)) {
-            options = {
-                icon: options
-            };
+            const parts = options.split(':');
+            const parsed = { icon: parts[0] };
+            if (parts.length > 1 && VALID_VARIANTS.indexOf(parts[1]) > -1) {
+                parsed.variant = parts[1];
+            }
+            options = parsed;
         }
 
         if (!kendo.isPresent(options.type)) {
@@ -63,9 +67,21 @@ export const __meta__ = {
         return (ICON_TYPES[options.type](element, options)).html();
     };
 
-    var HTMLBaseIcon = HTMLBase.extend({
+    function expandSelfClosingTags(html) {
+        const voidTags = /^(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)$/i;
+
+        return html.replace(
+            /<([a-z][a-z0-9:-]*)([^>]*)\/>/gi,
+            (_, tag, attrs) =>
+            (voidTags.test(tag)
+                ? `<${tag}${attrs}/>`
+                : `<${tag}${attrs}></${tag}>`)
+        );
+    }
+
+    const HTMLBaseIcon = HTMLBase.extend({
         init: function(element, options) {
-            var that = this;
+            const that = this;
             HTMLBase.fn.init.call(that, element, options);
             that._wrapper();
         },
@@ -119,7 +135,7 @@ export const __meta__ = {
         }
     });
 
-    var HTMLFontIcon = HTMLBaseIcon.extend({
+    const HTMLFontIcon = HTMLBaseIcon.extend({
         init: function(element, options) {
             HTMLBaseIcon.fn.init.call(this, element, options);
         },
@@ -152,10 +168,11 @@ export const __meta__ = {
         },
         options: extend({}, HTMLBaseIcon.fn.options, {
             name: 'HTMLSVGIcon',
-            icon: null
+            icon: null,
+            variant: null
         }),
         _wrapper: function() {
-            var that = this,
+            let that = this,
                 icon = that.options.icon,
                 iconClass = that.options.iconClass,
                 // Find if there is an existing k-svg-i- class appended to the element.
@@ -174,9 +191,18 @@ export const __meta__ = {
             }
 
             if (kendo.isString(icon)) {
-                // remove k-i- and convert kebab-case-icon to camelCaseIcon
-                icon = icon.replace('k-i-', '').replace(/-./g, x=>x[1].toUpperCase());
-                icon = kendo.ui.svgIcons[icon] || kendo.ui.svgIcons[`${icon}Icon`];
+                let iconName = icon.replace('k-i-', '');
+                const variantMatch = iconName.match(/-(solid|outline|duotone)$/);
+
+                if (variantMatch) {
+                    iconName = iconName.replace(variantMatch[0], '');
+                    if (!that.options.variant) {
+                        that.options.variant = variantMatch[1];
+                    }
+                }
+
+                const camelName = iconName.replace(/-(solid|outline|duotone)/, '').replace(/-./g, x=>x[1].toUpperCase());
+                icon = kendo.ui.svgIcons[camelName] || kendo.ui.svgIcons[`${camelName}Icon`];
             }
 
             className = icon && icon.name ? `${KSVG_PREFFIX}${icon.name}` : '';
@@ -189,13 +215,20 @@ export const __meta__ = {
                 .addClass(iconClass || '');
 
             if ($.isPlainObject(icon)) {
+                let svgContent = icon.content || '';
+                const svgVariant = that.options.variant;
+                if (svgVariant && icon.variants && icon.variants[svgVariant]) {
+                    svgContent = icon.variants[svgVariant];
+
+                }
+
                 svgElm.attr('viewBox', icon.viewBox || '')
                     .attr({
                         'viewBox': icon.viewBox || '',
                         'focusable': 'false',
                         'xmlns': 'http://www.w3.org/2000/svg'
                     })
-                    .html(icon.content || '');
+                    .html(expandSelfClosingTags(svgContent));
 
                 that.wrapper.append(svgElm[0].outerHTML);
             }
@@ -218,7 +251,7 @@ export const __meta__ = {
         values: kendo.cssProperties.sizeValues.concat([['xsmall', 'xs'], ['xlarge', 'xl'], ['xxlarge', 'xxl'], ['xxxlarge', 'xxxl']])
     }, {
         prop: "themeColor",
-        values: ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse']
+        values: ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'inverse']
     }]);
 
     kendo.cssProperties.registerPrefix("HTMLSVGIcon", "k-icon-");
@@ -228,7 +261,7 @@ export const __meta__ = {
         values: kendo.cssProperties.sizeValues.concat([['xsmall', 'xs'], ['xlarge', 'xl'], ['xxlarge', 'xxl'], ['xxxlarge', 'xxxl']])
     }, {
         prop: "themeColor",
-        values: ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse']
+        values: ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'inverse']
     }]);
 })(window.kendo.jQuery);
 export default kendo;

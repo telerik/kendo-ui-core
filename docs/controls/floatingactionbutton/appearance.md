@@ -82,17 +82,10 @@ The `themeColor` option controls the color that will be applied to the rendered 
 
 The following values are available for the [`themeColor`](/api/javascript/ui/floatingactionbutton/configuration/themecolor) option:
 
+- `base`
 - `primary`
 - `secondary`
 - `tertiary`
-- `info`
-- `success`
-- `warning`
-- `error`
-- `dark`
-- `light`
-- `inverse`
-- `none`
 
 The default `themeColor` value is `primary`. A FloatingActionButton with default `fillMode` and `themeColor` will have `k-fab-primary` class applied.
 
@@ -105,8 +98,8 @@ The default `themeColor` value is `primary`. A FloatingActionButton with default
 <button class="k-fab" >
 </button>
 
-<!-- FloatingActionButton with `solid` fillMode and `success` themeColor -->
-<button class="k-fab k-fab-success k-fab-solid" >
+<!-- FloatingActionButton with `solid` fillMode and `tertiary` themeColor -->
+<button class="k-fab k-fab-tertiary k-fab-solid" >
 </button>
 ```
 

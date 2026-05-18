@@ -59,10 +59,7 @@ The `ThemeColor()` configuration provides a variety of colors that can be applie
 - `Success`
 - `Warning`
 - `Error`
-- `Dark`
-- `Light`
 - `Inverse`
-- `None`
 
 The default `ThemeColor` is `Base`.
 
@@ -138,17 +135,17 @@ The following values are available for the `Rounded()` option:
 
 ### Icons
 
-The SpeechToTextButton displays different icons based on its [operational state]({% slug htmlhelpers_overview_speechtotextbutton%}#button-states). When the component is in inactive mode (ready to start recording), it displays the `microphone-outline` icon by default. You can customize this using the `Icon()` configuration option to specify a different icon that better fits your application's design.
+The SpeechToTextButton displays different icons based on its [operational state]({% slug htmlhelpers_overview_speechtotextbutton%}#button-states). When the component is in inactive mode (ready to start recording), it displays the `microphone` icon by default. You can customize this using the `Icon()` configuration option to specify a different icon that better fits your application's design.
 
-During active mode (while recording speech), the component automatically switches to the `stop-sm` icon to indicate that recording is in progress and can be stopped. The `StopIcon()` option allows you to override this default behavior with a custom icon of your choice.
+During active mode (while recording speech), the component automatically switches to the `stop` icon to indicate that recording is in progress and can be stopped. The `StopIcon()` option allows you to override this default behavior with a custom icon of your choice.
 
 Select the desired icons from the comprehensive list of available <a href="https://www.telerik.com/design-system/docs/foundation/iconography/icon-list/" target="_blank">built-in icons in {{ site.product }}</a>.
 
 ```HtmlHelper
 @(Html.Kendo().SpeechToTextButton()
     .Name("speechButton")
-    .Icon("microphone-outline")
-    .StopIcon("stop-sm")
+    .Icon("microphone")
+    .StopIcon("stop")
 )
 ```
 {% if site.core %}
@@ -156,8 +153,8 @@ Select the desired icons from the comprehensive list of available <a href="https
 @addTagHelper *, Kendo.Mvc
 
 <kendo-speechtotextbutton name="speechButton"
-    icon="microphone-outline"
-    stop-icon="stop-sm">
+    icon="microphone"
+    stop-icon="stop">
 </kendo-speechtotextbutton>
 ```
 {% endif %}

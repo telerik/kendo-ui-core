@@ -106,8 +106,6 @@ To specify the theme color of the SplitButton, configure the `ThemeColor()` meth
 - `Success`
 - `Warning`
 - `Error`
-- `Dark`
-- `Light`
 - `Inverse`
 
 > When not explicitly set, the applied theme controls the default theme color.

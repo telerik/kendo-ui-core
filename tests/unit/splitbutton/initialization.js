@@ -46,16 +46,16 @@ describe("SplitButton intialization", function() {
         let arrowBtn = button.next();
         let arrowIcon = arrowBtn.children().eq(0);
         assert.isOk(arrowIcon.is(".k-icon, .k-svg-icon"));
-        assert.isOk(arrowIcon.is(".k-i-caret-alt-down, .k-svg-i-caret-alt-down"));
+        assert.isOk(arrowIcon.is(".k-i-chevron-down, .k-svg-i-chevron-down"));
     });
 
     it("SplitButton renders arrow button with custom icon", function() {
-        let splitButton = new SplitButton(button, { items: defaultItems, arrowIcon: "caret-alt-up" });
+        let splitButton = new SplitButton(button, { items: defaultItems, arrowIcon: "chevron-up" });
         let arrowBtn = button.next();
         let arrowIcon = arrowBtn.children().eq(0);
         assert.isOk(arrowIcon.is(".k-icon, .k-svg-icon"));
         assert.isNotOk(arrowIcon.hasClass("k-i-arrow-s"));
-        assert.isOk(arrowIcon.is(".k-i-caret-alt-up, .k-svg-i-caret-alt-up"));
+        assert.isOk(arrowIcon.is(".k-i-chevron-up, .k-svg-i-chevron-up"));
     });
 
     it("SplitButton renders button with text", function() {
@@ -90,18 +90,18 @@ describe("SplitButton intialization", function() {
             size: "small",
             rounded: "small",
             fillMode: "outline",
-            themeColor: "dark",
+            themeColor: "secondary",
             items: defaultItems
         });
 
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-dark"));
+        assert.isOk(button.hasClass("k-button-secondary"));
         assert.isOk(button.next().hasClass("k-button-sm"));
         assert.isOk(button.next().hasClass("k-rounded-sm"));
         assert.isOk(button.next().hasClass("k-button-outline"));
-        assert.isOk(button.next().hasClass("k-button-dark"));
+        assert.isOk(button.next().hasClass("k-button-secondary"));
     });
 
     it("SplitButton renders buttons with correct styling options after setOptions", function() {
@@ -113,17 +113,17 @@ describe("SplitButton intialization", function() {
             size: "small",
             rounded: "small",
             fillMode: "outline",
-            themeColor: "dark"
+            themeColor: "secondary"
         });
 
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-dark"));
+        assert.isOk(button.hasClass("k-button-secondary"));
         assert.isOk(button.next().hasClass("k-button-sm"));
         assert.isOk(button.next().hasClass("k-rounded-sm"));
         assert.isOk(button.next().hasClass("k-button-outline"));
-        assert.isOk(button.next().hasClass("k-button-dark"));
+        assert.isOk(button.next().hasClass("k-button-secondary"));
     });
 
     it("SplitButton does not render default rounded option when undefined", function() {

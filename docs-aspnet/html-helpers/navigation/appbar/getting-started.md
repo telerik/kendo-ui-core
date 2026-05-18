@@ -104,7 +104,7 @@ The next step is to integrate the Avatar and DropDownButton components by using 
             .Name("appbar")
             .Position(AppBarPosition.Top)
             .PositionMode(AppBarPositionMode.Sticky)
-            .ThemeColor(AppBarThemeColor.Dark)
+            .ThemeColor(AppBarThemeColor.Inverse)
             .Items(items=> {
                 items.Add().Template(Html.Kendo().Template().AddComponent(avatar => avatar
                     .Avatar()
@@ -139,7 +139,7 @@ The next step is to integrate the Avatar and DropDownButton components by using 
     <div class="appbar-container">
         <kendo-appbar name="appbar" position="AppBarPosition.Top" 
         position-mode="AppBarPositionMode.Sticky" 
-        theme-color="AppBarThemeColor.Dark">
+        theme-color="AppBarThemeColor.Inverse">
             <items>
                 <appbar-item type="AppBarItemType.ContentItem">
                     <template>
@@ -182,7 +182,7 @@ The AppBar exposes the [`Resize`](/api/kendo.mvc.ui.fluent/appbareventbuilder) e
             .Name("appbar")
             .Position(AppBarPosition.Top)
             .PositionMode(AppBarPositionMode.Sticky)
-            .ThemeColor(AppBarThemeColor.Dark)
+            .ThemeColor(AppBarThemeColor.Inverse)
             .Events(ev => ev.Resize("oResize"))
             .Items(items=> {
                 items.Add().Template(Html.Kendo().Template().AddComponent(avatar => avatar
@@ -218,7 +218,7 @@ The AppBar exposes the [`Resize`](/api/kendo.mvc.ui.fluent/appbareventbuilder) e
     <div class="appbar-container">
         <kendo-appbar name="appbar" position="AppBarPosition.Top" on-resize="onResize"
         position-mode="AppBarPositionMode.Sticky" 
-        theme-color="AppBarThemeColor.Dark">
+        theme-color="AppBarThemeColor.Inverse">
             <items>
                 <appbar-item type="AppBarItemType.ContentItem">
                     <template>

@@ -67,8 +67,8 @@ function onDataBound(e) {
     let sorts = grid.dataSource.sort(); // Get the currently sorted fields.
 
     var nonSortableIcon = kendo.ui.icon({ icon: 'caret-alt-expand', type: 'svg' }); // Specify the desired SVG icon for the non-sorted columns.
-    var descSortIcon = kendo.ui.icon({ icon: 'caret-alt-down', type: 'svg' }); // Specify the desired SVG icon for descending order.
-    var ascSortIcon = kendo.ui.icon({ icon: 'caret-alt-up', type: 'svg' }); // Specify the desired SVG icon for ascending order.
+    var descSortIcon = kendo.ui.icon({ icon: 'chevron-down', type: 'svg' }); // Specify the desired SVG icon for descending order.
+    var ascSortIcon = kendo.ui.icon({ icon: 'chevron-up', type: 'svg' }); // Specify the desired SVG icon for ascending order.
 
     if(sorts == undefined) { // Check if the Grid is sorted initially.
         grid.thead.find("th .k-cell-inner .k-link").each(function(){  // Loop through the Grid column headers.

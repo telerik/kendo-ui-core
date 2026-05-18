@@ -77,7 +77,7 @@ export const __meta__ = {
             themeColor: undefined,
             icon: null,
             popup: null,
-            arrowIcon: "caret-alt-down",
+            arrowIcon: "chevron-down",
             messages: {
                 labelSuffix: "splitbutton"
             }
@@ -361,6 +361,9 @@ export const __meta__ = {
     kendo.cssProperties.registerPrefix("SplitButton", "k-splitbutton-");
 
     kendo.cssProperties.registerValues("SplitButton", [{
+        prop: "themeColor",
+        values: ['base', 'primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error', 'inverse']
+    }, {
         prop: "rounded",
         values: kendo.cssProperties.roundedValues.concat([["full", "full"]])
     }]);

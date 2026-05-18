@@ -42,10 +42,10 @@ The following scripts will generate the content for the templates:
 
             # if (data.hasChildren) { #
                 # if(data.model.expanded) { #
-                    <span class="k-svg-icon k-svg-i-caret-alt-down"></span>
+                    <span class="k-svg-icon k-svg-i-chevron-down"></span>
                 # }
                 else { #
-                 <span class="k-svg-icon k-svg-i-caret-alt-right"></span>
+                 <span class="k-svg-icon k-svg-i-chevron-right"></span>
                 # } #
             # } #
        <div class='employee-photo'
@@ -70,10 +70,10 @@ The following scripts will generate the content for the templates:
 
             # if (data.hasChildren) { #
                 # if(data.model.expanded) { #
-                    <span class="k-svg-icon k-svg-i-caret-alt-down"></span>
+                    <span class="k-svg-icon k-svg-i-chevron-down"></span>
                 # }
                 else { #
-                 <span class="k-svg-icon k-svg-i-caret-alt-right"></span>
+                 <span class="k-svg-icon k-svg-i-chevron-right"></span>
                 # } #
             # } #
        <div class='employee-photo'
@@ -95,12 +95,12 @@ Additionally, for the expand/collapse icons to apear, you must create SVG icons 
 ```
 <script>
     function onDataBound(e) {
-        $(".k-svg-i-caret-alt-right").each(function () {
-            kendo.ui.icon(this, { icon: 'caret-alt-right' });
+        $(".k-svg-i-chevron-right").each(function () {
+            kendo.ui.icon(this, { icon: 'chevron-right' });
         })
 
-        $(".k-svg-i-caret-alt-down").each(function () {
-            kendo.ui.icon(this, { icon: 'caret-alt-down' });
+        $(".k-svg-i-chevron-down").each(function () {
+            kendo.ui.icon(this, { icon: 'chevron-down' });
         })
     }
 </script>
@@ -117,9 +117,9 @@ The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.
             #}#
             #if(data.hasChildren){#
                 # if(data.model.expanded) { #
-                    #= kendo.ui.icon("caret-alt-down") #
+                    #= kendo.ui.icon("chevron-down") #
                 # } else { #
-                    #= kendo.ui.icon("caret-alt-right") #
+                    #= kendo.ui.icon("chevron-right") #
                 # } #
             #}#
        <div class='employee-photo'
@@ -143,9 +143,9 @@ The TreeList in versions of {{ site.product_short }} prior to R1 2023 SP1 (2023.
             #}#
             #if(data.hasChildren){#
                 # if(data.model.expanded) { #
-                    #= kendo.ui.icon("caret-alt-down") #
+                    #= kendo.ui.icon("chevron-down") #
                 # } else { #
-                    #= kendo.ui.icon("caret-alt-right") #
+                    #= kendo.ui.icon("chevron-right") #
                 # } #
             #}#
        <div class='employee-photo'

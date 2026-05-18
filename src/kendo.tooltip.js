@@ -380,6 +380,7 @@ export const __meta__ = {
             autoHide: true,
             width: null,
             height: null,
+            themeColor: null,
             animation: {
                 open: {
                     effects: "fade:in",
@@ -604,6 +605,10 @@ export const __meta__ = {
                 height: options.height
             });
 
+            if (options.themeColor) {
+                wrapper.addClass(kendo.cssProperties.getValidClass({ widget: "Tooltip", propName: "themeColor", value: options.themeColor }));
+            }
+
             that.content = wrapper.find(".k-tooltip-content");
             that.arrow = wrapper.find(".k-callout");
         },
@@ -657,6 +662,13 @@ export const __meta__ = {
     });
 
     kendo.ui.plugin(Tooltip);
+
+    kendo.cssProperties.registerPrefix("Tooltip", "k-tooltip-");
+
+    kendo.cssProperties.registerValues("Tooltip", [{
+        prop: "themeColor",
+        values: ['base', 'inverse', 'info', 'success', 'warning', 'error']
+    }]);
 })(window.kendo.jQuery);
 export default kendo;
 

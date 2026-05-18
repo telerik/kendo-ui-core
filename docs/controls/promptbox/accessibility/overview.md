@@ -55,7 +55,7 @@ The primary action button for submitting the prompt or stopping generation.
 
 | Selector | Attribute | Usage |
 | -------- | --------- | ----- |
-| `.k-prompt-box-affix .k-button:has(.k-svg-i-arrow-up-outline), .k-prompt-box-affix .k-button:has(.k-svg-i-stop-sm)` | `aria-live=polite` | The send button renders the aria-live attribute to announce the change in status. |
+| `.k-prompt-box-affix .k-button:has(.k-svg-i-arrow-up), .k-prompt-box-affix .k-button:has(.k-svg-i-stop)` | `aria-live=polite` | The send button renders the aria-live attribute to announce the change in status. |
 |  | `aria-label` | The send button is labelled to indicate its current action (e.g., 'Send prompt' or 'Stop generating'). |
 
 [SpeechToTextButton accessibility specification]({% slug jquery_speechtotextbutton_accessibility %})

@@ -438,8 +438,8 @@ export const __meta__ = {
             }
 
             const isRtl = kendo.support.isRtl(splitbar);
-            const leftIcon = isRtl ? "caret-alt-right" : "caret-alt-left";
-            const rightIcon = isRtl ? "caret-alt-left" : "caret-alt-right";
+            const leftIcon = isRtl ? "chevron-right" : "chevron-left";
+            const rightIcon = isRtl ? "chevron-left" : "chevron-right";
 
             splitbar.addClass("k-splitbar k-splitbar-" + orientation)
                 .attr("role", "separator")
@@ -452,15 +452,15 @@ export const __meta__ = {
                 .toggleClass("k-splitbar-static-" + orientation,
                     !draggable && !prevCollapsible && !nextCollapsible)
                 .html(
-                    catIconIf("collapse-prev", "caret-alt-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                    catIconIf("collapse-prev", "chevron-up", prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
                     catIconIf("collapse-prev", leftIcon, prevCollapsible && !prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
-                    catIconIf("expand-prev", "caret-alt-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
+                    catIconIf("expand-prev", "chevron-down", prevCollapsible && prevCollapsed && !nextCollapsed && orientation == VERTICAL) +
                     catIconIf("expand-prev", rightIcon, prevCollapsible && prevCollapsed && !nextCollapsed && orientation == HORIZONTAL) +
                     catIconIf("resize-handle", null, draggable && orientation == VERTICAL) +
                     catIconIf("resize-handle", null, draggable && orientation == HORIZONTAL) +
-                    catIconIf("collapse-next", "caret-alt-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                    catIconIf("collapse-next", "chevron-down", nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
                     catIconIf("collapse-next", rightIcon, nextCollapsible && !nextCollapsed && !prevCollapsed && orientation == HORIZONTAL) +
-                    catIconIf("expand-next", "caret-alt-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
+                    catIconIf("expand-next", "chevron-up", nextCollapsible && nextCollapsed && !prevCollapsed && orientation == VERTICAL) +
                     catIconIf("expand-next", leftIcon, nextCollapsible && nextCollapsed && !prevCollapsed && orientation == HORIZONTAL)
                 );
 

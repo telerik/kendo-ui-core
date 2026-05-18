@@ -37,7 +37,7 @@ export const __meta__ = {
         TOUCHSTART = "touchstart",
         TOUCHMOVE = "touchmove",
         TOUCHEND = "touchend",
-        INPUTSELECTOR_ICONSSELECTOR_FONT = "span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,.k-icon.k-i-caret-alt-down,.k-icon.k-i-caret-alt-right,.k-icon.k-i-caret-alt-left",
+        INPUTSELECTOR_ICONSSELECTOR_FONT = "span.k-icon.k-i-chevron-down,span.k-icon.k-i-chevron-up,.k-icon.k-i-chevron-down,.k-icon.k-i-chevron-right,.k-icon.k-i-chevron-left",
         INPUTSELECTOR_ICONSSELECTOR_SVG = INPUTSELECTOR_ICONSSELECTOR_FONT.replaceAll('k-i', 'k-svg-i'),
         INPUTSELECTOR_SVG_PARTS = INPUTSELECTOR_ICONSSELECTOR_SVG.split(",").map((selector) => selector + " *").join(","),
         INPUTSELECTOR = `input,a,textarea,.k-multiselect-wrap,select,button,${INPUTSELECTOR_ICONSSELECTOR_FONT},${INPUTSELECTOR_ICONSSELECTOR_SVG},${INPUTSELECTOR_SVG_PARTS},.k-button>span,.k-button>span *,.k-button>img,label.k-checkbox-label.k-no-text,span.k-numeric-wrap,.k-focusable`,

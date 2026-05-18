@@ -49,15 +49,10 @@ The available [themeColor](/api/javascript/ui/badge/configuration/themeColor) va
 - "base"-Applies base theme color.
 - "secondary"—Applies coloring based on the secondary theme color.
 - "tertiary"—Applies coloring based on the tertiary theme color.
-- "inherit"—Applies the inherited coloring value.
 - "info"—Applies coloring based on the info theme color.
 - "success"—Applies coloring based on the success theme color.
 - "warning"—Applies coloring based on the warning theme color.
 - "error"—Applies coloring based on the error theme color.
-- "dark"—Applies coloring based on the dark theme color.
-- "light"—Applies coloring based on the light theme color.
-- "inverse"—Applies coloring based on the inverted theme color.
-- "none"-will apply no theme color class.
 
 ```dojo
     <a class="k-button"><span id="badge">42</span></a>

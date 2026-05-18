@@ -144,7 +144,7 @@ Below is a runnable example:
             that._actionButtonsTemplate({
               messages,
               insertButtonIcon: "link",
-              cancelButtonIcon: "cancel-outline",
+              cancelButtonIcon: "cancel",
             }),
           ),
         );
@@ -585,7 +585,7 @@ Below is a runnable example:
             that._actionButtonsTemplate({
               messages,
               insertButtonIcon: "link",
-              cancelButtonIcon: "cancel-outline",
+              cancelButtonIcon: "cancel",
             }),
           ),
         );

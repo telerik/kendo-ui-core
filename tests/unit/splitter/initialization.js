@@ -55,8 +55,8 @@ describe("initialization", function() {
 
         let splitbars = splitter.dom.find(".k-splitbar");
 
-        assert.equal(splitbars.eq(0).find(".k-svg-icon.k-svg-i-caret-alt-left").length, 1);
-        assert.equal(splitbars.eq(1).find(".k-svg-icon.k-svg-i-caret-alt-right").length, 1);
+        assert.equal(splitbars.eq(0).find(".k-svg-icon.k-svg-i-chevron-left").length, 1);
+        assert.equal(splitbars.eq(1).find(".k-svg-icon.k-svg-i-chevron-right").length, 1);
     });
 
     it("splitbars have resize handle between resizable panes", function() {

@@ -660,11 +660,11 @@ How do I configure the dropdown button's arrow to function independently? Config
 
 ### themeColor `String` *(default: 'base')*
 
-Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, and `"inverse"`. Default value is `"base"`.
 
 
 <div class="meta-api-description">
-How do I customize the color of Kendo UI dropdown buttons? Set or customize the main color scheme, accent, or theme tone of dropdown buttons to align with user interface design, selecting from common palette options like primary, secondary, tertiary, informational, success, warning, error, dark mode, light mode, inverse styles, or no color styling. Control the visual appearance by configuring the color style or theme palette of button dropdowns, enabling developers to match branding colors, enable consistent UI themes, toggle color variations for feedback states, and apply predefined or neutral color options across different contexts or design systems.
+How do I customize the color of Kendo UI dropdown buttons? Set or customize the main color scheme, accent, or theme tone of dropdown buttons to align with user interface design, selecting from common palette options like base, primary, secondary, tertiary, informational, success, warning, error, or inverse styles. Control the visual appearance by configuring the color style or theme palette of button dropdowns, enabling developers to match branding colors, enable consistent UI themes, toggle color variations for feedback states, and apply predefined or neutral color options across different contexts or design systems.
 </div>
 
 #### Example
@@ -676,7 +676,7 @@ How do I customize the color of Kendo UI dropdown buttons? Set or customize the 
                 { text: "item 1" },
                 { text: "item 2" }
             ],
-            themeColor: "dark"
+            themeColor: "primary"
         });
     </script>
 

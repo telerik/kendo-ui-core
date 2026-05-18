@@ -232,7 +232,9 @@ export const __meta__ = {
 
                 that.popup.bind("activate", () => {
                     that.filterInput.val(that.element.val());
+                    that._prev = "";
                     that.filterInput.trigger("focus");
+                    that._search();
                 });
                 that.popup.bind("deactivate", () => {
                     that.element.trigger("focus");

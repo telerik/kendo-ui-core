@@ -74,7 +74,7 @@ export const __meta__ = {
             that._value = options.value = value;
 
             var _buttonHtml = kendo.html.renderButton('<button class="k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, that.options, {
-                icon: "caret-alt-down"
+                icon: "chevron-down"
             }));
 
             var content = that._inputWrapper = that.wrapper = $(that._template($.extend({}, that.options, {

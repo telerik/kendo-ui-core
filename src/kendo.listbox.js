@@ -62,10 +62,10 @@ export const __meta__ = {
     var TRANSFER_FROM = "transferFrom";
     var TRANSFER_ALL_TO = "transferAllTo";
     var TRANSFER_ALL_FROM = "transferAllFrom";
-    var CARET_ALT_RIGHT = "caret-alt-right";
-    var CARET_ALT_LEFT = "caret-alt-left";
-    var CARET_ALT_DOUBLE_RIGHT = "caret-double-alt-right";
-    var CARET_ALT_DOUBLE_LEFT = "caret-double-alt-left";
+    var CHEVRON_RIGHT = "chevron-right";
+    var CHEVRON_LEFT = "chevron-left";
+    var CHEVRON_DOUBLE_RIGHT = "chevron-double-right";
+    var CHEVRON_DOUBLE_LEFT = "chevron-double-left";
     var DRAGGEDCLASS = "k-ghost";
     var UNIQUE_ID = "uid";
     var ID = "id";
@@ -1562,16 +1562,16 @@ export const __meta__ = {
 
             ToolBar.defaultTools = kendo.deepExtend({}, ToolBar.defaultTools, {
                 transferTo: {
-                    icon: isRtl ? CARET_ALT_LEFT : CARET_ALT_RIGHT
+                    icon: isRtl ? CHEVRON_LEFT : CHEVRON_RIGHT
                 },
                 transferFrom: {
-                    icon: isRtl ? CARET_ALT_RIGHT : CARET_ALT_LEFT
+                    icon: isRtl ? CHEVRON_RIGHT : CHEVRON_LEFT
                 },
                 transferAllTo: {
-                    icon: isRtl ? CARET_ALT_DOUBLE_LEFT : CARET_ALT_DOUBLE_RIGHT
+                    icon: isRtl ? CHEVRON_DOUBLE_LEFT : CHEVRON_DOUBLE_RIGHT
                 },
                 transferAllFrom: {
-                    icon: isRtl ? CARET_ALT_DOUBLE_RIGHT : CARET_ALT_DOUBLE_LEFT
+                    icon: isRtl ? CHEVRON_DOUBLE_RIGHT : CHEVRON_DOUBLE_LEFT
                 }
             });
 
@@ -1690,27 +1690,27 @@ export const __meta__ = {
         },
         moveUp: {
             command: MOVE_UP,
-            icon: "caret-alt-up"
+            icon: "chevron-up"
         },
         moveDown: {
             command: MOVE_DOWN,
-            icon: "caret-alt-down"
+            icon: "chevron-down"
         },
         transferTo: {
             command: TRANSFER_TO,
-            icon: CARET_ALT_RIGHT
+            icon: CHEVRON_RIGHT
         },
         transferFrom: {
             command: TRANSFER_FROM,
-            icon: CARET_ALT_LEFT
+            icon: CHEVRON_LEFT
         },
         transferAllTo: {
             command: TRANSFER_ALL_TO,
-            icon: CARET_ALT_DOUBLE_RIGHT
+            icon: CHEVRON_DOUBLE_RIGHT
         },
         transferAllFrom: {
             command: TRANSFER_ALL_FROM,
-            icon: CARET_ALT_DOUBLE_LEFT
+            icon: CHEVRON_DOUBLE_LEFT
         }
     };
 

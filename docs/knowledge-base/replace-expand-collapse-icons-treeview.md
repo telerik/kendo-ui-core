@@ -44,9 +44,9 @@ $("#treeview").kendoTreeView({
           //changes icon on collapse
           collapse: function (e) {
             setTimeout(function () {
-              if ($("span.k-svg-i-caret-alt-right").length > 0) {
-                kendo.ui.icon($("span.k-svg-i-caret-alt-right"), {
-                  icon: "plus-outline",
+              if ($("span.k-svg-i-chevron-right").length > 0) {
+                kendo.ui.icon($("span.k-svg-i-chevron-right"), {
+                  icon: "plus",
                 });
               }
             }, 0);
@@ -55,9 +55,9 @@ $("#treeview").kendoTreeView({
           //changes icon on expand
           expand: function (e) {
             setTimeout(function () {
-              if ($("span.k-svg-i-caret-alt-down").length > 0) {
-                kendo.ui.icon($("span.k-svg-i-caret-alt-down"), {
-                  icon: "minus-outline",
+              if ($("span.k-svg-i-chevron-down").length > 0) {
+                kendo.ui.icon($("span.k-svg-i-chevron-down"), {
+                  icon: "minus",
                 });
               }
             }, 0);
@@ -107,9 +107,9 @@ Additionally, the icons need to be initially changed after the creation of the c
           //changes icon on collapse
           collapse: function (e) {
             setTimeout(function () {
-              if ($("span.k-svg-i-caret-alt-right").length > 0) {
-                kendo.ui.icon($("span.k-svg-i-caret-alt-right"), {
-                  icon: "plus-outline",
+              if ($("span.k-svg-i-chevron-right").length > 0) {
+                kendo.ui.icon($("span.k-svg-i-chevron-right"), {
+                  icon: "plus",
                 });
               }
             }, 0);
@@ -118,9 +118,9 @@ Additionally, the icons need to be initially changed after the creation of the c
           //changes icon on expand
           expand: function (e) {
             setTimeout(function () {
-              if ($("span.k-svg-i-caret-alt-down").length > 0) {
-                kendo.ui.icon($("span.k-svg-i-caret-alt-down"), {
-                  icon: "minus-outline",
+              if ($("span.k-svg-i-chevron-down").length > 0) {
+                kendo.ui.icon($("span.k-svg-i-chevron-down"), {
+                  icon: "minus",
                 });
               }
             }, 0);
@@ -128,15 +128,15 @@ Additionally, the icons need to be initially changed after the creation of the c
         });
 
         //sets initial icons
-        if ($("span.k-svg-i-caret-alt-down").length > 0) {
-          kendo.ui.icon($("span.k-svg-i-caret-alt-down"), {
-            icon: "minus-outline",
+        if ($("span.k-svg-i-chevron-down").length > 0) {
+          kendo.ui.icon($("span.k-svg-i-chevron-down"), {
+            icon: "minus",
           });
         }
 
-        if ($("span.k-svg-i-caret-alt-right").length > 0) {
-          kendo.ui.icon($("span.k-svg-i-caret-alt-right"), {
-            icon: "plus-outline",
+        if ($("span.k-svg-i-chevron-right").length > 0) {
+          kendo.ui.icon($("span.k-svg-i-chevron-right"), {
+            icon: "plus",
           });
         }
       </script>

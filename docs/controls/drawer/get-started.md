@@ -31,7 +31,7 @@ After the completion of this guide, you will achieve the following end result:
       $(document).ready(function() {
         $("#drawer").kendoDrawer({
           mode: "push",
-          template: `<ul><li class='k-selected' data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+          template: `<ul><li class='k-selected' data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
           position: 'left',
           mini: true,
           itemClick: function (e) {
@@ -71,8 +71,8 @@ In this step, you'll initialize the Drawer component from the `<div>` element.
     $("#drawer").kendoDrawer({
       mode: "push",
       template: `<ul>
-      <li class='k-selected' data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li>
-      <li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li>
+      <li class='k-selected' data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li>
+      <li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li>
       </ul>`
      });
 ```

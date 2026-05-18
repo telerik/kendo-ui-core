@@ -215,24 +215,14 @@ How do I dynamically update the text inside a Kendo UI avatar widget? Configure 
 ### themeColor `String` *(default: undefined)*
 
 Sets a value controlling the theme color for the background of the Avatar container. When `undefined` (the default), the theme controls the color. Can also be set to the following string values:
-    - "primary" - Applies coloring based on primary theme color.
     - "base" - Applies base theme color.
+    - "primary" - Applies coloring based on primary theme color.
     - "secondary" - Applies coloring based on secondary theme color.
     - "tertiary" - Applies coloring based on tertiary theme color.
-    - "inherit" - Applies inherited coloring value.
-    - "info" - Applies coloring based on info theme color.
-    - "success" - Applies coloring based on success theme color.
-    - "warning" - Applies coloring based on warning theme color.
-    - "error" - Applies coloring based on error theme color.
-    - "dark" - Applies coloring based on dark theme color.
-    - "light" - Applies coloring based on light theme color.
-    - "inverse" - Applies coloring based on inverted theme color.
-
-> The `"none"` value is deprecated. Use custom CSS instead.
 
 
 <div class="meta-api-description">
-How do I customize the background color of an avatar in Kendo UI? Set or customize the background color of avatar containers by selecting from a variety of predefined theme color options such as primary, base, secondary, tertiary, info, success, warning, error, dark, light, inverse, or none. Control the visual style, adjust theme CSS classes, inherit colors from parent elements, enable different intents like alerts or statuses, and configure the avatar appearance to match branding or UI themes by applying or disabling specific color themes. This includes options to inherit colors automatically, disable theme-based coloring, or emphasize semantic states, allowing developers to tailor avatar visuals flexibly through theme color settings.
+How do I customize the background color of an avatar in Kendo UI? Set or customize the background color of avatar containers by selecting from predefined theme color options such as base, primary, secondary, or tertiary. Control the visual style, adjust theme CSS classes, and configure the avatar appearance to match branding or UI themes by applying specific color themes, allowing developers to tailor avatar visuals flexibly through theme color settings.
 </div>
 
 #### Example
@@ -241,7 +231,7 @@ How do I customize the background color of an avatar in Kendo UI? Set or customi
     <script>
         $("#avatar").kendoAvatar({
             text: "IG",
-            themeColor: "warning"
+            themeColor: "secondary"
         });
     </script>
 

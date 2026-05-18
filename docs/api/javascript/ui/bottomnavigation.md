@@ -111,22 +111,15 @@ How do I control the placement of text labels in bottom navigation items relativ
 
 Sets a value controlling the theme color of the component. When `undefined` (the default), the theme controls the color. Can also be set to the following string values:
 
-* `inherit`: no coloring will be applied to the badge. Useful when the badge needs to blend-in with the surrounding elements.
-* `default`: apply coloring based on surface theme color.
+* `base`: apply coloring based on **base** theme color.
 * `primary`: apply coloring based on **primary** theme color.
 * `secondary`: apply coloring based on **secondary** theme color.
 * `tertiary`: apply coloring based on **tertiary** theme color.
-* `info`: apply coloring based on **info** theme color.
-* `success`: apply coloring based on **success** theme color.
-* `warning`: apply coloring based on **warning** theme color.
-* `error`: apply coloring based on **error** theme color.
-* `dark`: apply coloring based on **dark** theme color.
-* `light`: apply coloring based on **light** theme color.
-* `inverse`: depending on the luminance of the theme, light or dark, inverted will be dark or light.
+* `inverse`: apply coloring based on **inverse** theme color.
 
 
 <div class="meta-api-description">
-How do I change the color scheme of a BottomNavigation component in Kendo UI? Configure and control the BottomNavigation component’s color scheme by setting theme colors that determine surface, accent, and badge hues through options like inherit, default, primary, secondary, tertiary, info, success, warning, error, dark, light, or inverse. Enable blending or contrasting visual styles by mapping navigation elements to a theme palette or contextual modes that adapt based on luminance or design intent. Set, customize, or switch the appearance for badges, backgrounds, and accents with color roles that support branding, alerts, status, or UI contrast, allowing flexible theming aligned with primary, secondary, tertiary priorities, semantic states like info or error, or adaptive light/dark modes. Control and override default colors, enable dynamic inversion, or maintain consistent surface tone integration across navigation components using scalable theme color options for responsive design and user interface clarity.
+How do I change the color scheme of a BottomNavigation component in Kendo UI? Configure and control the BottomNavigation component’s color scheme by setting theme colors that determine surface, accent, and badge hues through options like base, primary, secondary, tertiary, or inverse. Enable blending or contrasting visual styles by mapping navigation elements to a theme palette or contextual modes that adapt based on design intent. Set, customize, or switch the appearance for badges, backgrounds, and accents with color roles that support branding or UI contrast, allowing flexible theming aligned with primary, secondary, tertiary priorities or adaptive modes. Control and override default colors, enable dynamic inversion, or maintain consistent surface tone integration across navigation components using scalable theme color options for responsive design and user interface clarity.
 </div>
 
 #### Example
@@ -135,7 +128,7 @@ How do I change the color scheme of a BottomNavigation component in Kendo UI? Co
 
     <script>
         $("#bottomnav").kendoBottomNavigation({
-            themeColor: "dark",
+            themeColor: "primary",
             items: [
                 { text: "Home", icon: "home" },
                 { text: "Info", icon: "info-circle" },

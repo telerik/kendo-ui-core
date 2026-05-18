@@ -134,7 +134,7 @@ export const __meta__ = {
 
     var SAFE_COMPONENTS = ["Button", "SplitButton", "DropDownButton", "ButtonGroup", "Switch", "ColorPicker"];
 
-    var POPUP_BUTTON_TEMPLATE = `<button class="k-popup-button"><span class="k-button-icon k-icon"></span><span class="k-button-text">${kendo.ui.icon("caret-alt-down")}</span></button>`;
+    var POPUP_BUTTON_TEMPLATE = `<button class="k-popup-button"><span class="k-button-icon k-icon"></span><span class="k-button-text">${kendo.ui.icon("chevron-down")}</span></button>`;
     var TEMPLATE_WRAPPER = "<div class='k-toolbar-item' aria-keyshortcuts='Enter'></div>";
     var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-item' tabindex='0' ref-toolbar-tool >";
     var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
@@ -337,8 +337,8 @@ export const __meta__ = {
                     const mouseUp = kendo.support.touch ? "touchend" : "mouseup";
                     const browser = kendo.support.browser;
                     const isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
-                    const prevIcon = !that._isRtl ? "caret-alt-left" : "caret-alt-right";
-                    const nextIcon = !that._isRtl ? "caret-alt-right" : "caret-alt-left";
+                    const prevIcon = !that._isRtl ? "chevron-left" : "chevron-right";
+                    const nextIcon = !that._isRtl ? "chevron-right" : "chevron-left";
 
                     const scrollLeftButtonHtml = this._getScrollButtonHtml("prev", prevIcon);
                     const scrollRightButtonHtml = this._getScrollButtonHtml("next", nextIcon);
@@ -1493,6 +1493,7 @@ export const __meta__ = {
             }
 
             if (!this.options.navigateOnTab && keyCode === keys.ENTER && target.hasClass(TEMPLATE_ITEM)) {
+                e.preventDefault();
                 this._keyActivateTemplate(target);
             } else if (isInSection && keyCode === keys.ESC) {
                 this.overflowSection.close();

@@ -418,7 +418,7 @@ How to control icon visibility in toolbar button groups? Configure button icon v
 				type: "buttonGroup",
 				buttons: [
 					{ text: "foo", icon: "clock", showIcon: "overflow" },
-					{ text: "bar", icon: "x-outline", showIcon: "both" },
+					{ text: "bar", icon: "x", showIcon: "both" },
 					{ text: "baz", icon: "arrow-rotate-cw", showIcon: "toolbar" }
 				]
 			}]
@@ -447,7 +447,7 @@ How to make toolbar buttons show text alongside icons? Customize button label vi
 				type: "buttonGroup",
 				buttons: [
 					{ text: "foo", icon: "clock", showText: "overflow" },
-					{ text: "bar", icon: "x-outline", showText: "both" },
+					{ text: "bar", icon: "x", showText: "both" },
 					{ text: "baz", icon: "arrow-rotate-cw", showText: "toolbar" }
 				]
 			}]

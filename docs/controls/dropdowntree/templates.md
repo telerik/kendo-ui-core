@@ -20,7 +20,7 @@ The item template manages the way the nodes in the DropDownTree are rendered.
     <input id="dropdowntree">
     <script id="treeview-template" type="text/kendo-ui-template">
             #: item.text #
-            <a class='k-icon k-i-close-outline' href='\#'></a>
+            <a class='k-icon k-i-close' href='\#'></a>
     </script>
     <script>
         $(document).ready(function() {

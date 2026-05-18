@@ -81,8 +81,6 @@ The supported values include:
 * `success`
 * `warning`
 * `error`
-* `dark`
-* `light`
 * `inverse`
 * `none`
 

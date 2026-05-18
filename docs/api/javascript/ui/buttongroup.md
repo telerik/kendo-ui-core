@@ -567,11 +567,11 @@ How do I set the badge text in a Kendo UI ButtonGroup? Set or update the badge l
 
 Specifies the color of the component. If `undefined` (the default), the theme controls the default color.
 
-Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
+Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverted`.
 
 
 <div class="meta-api-description">
-How do I set custom colors for badges in a Kendo UI button group? Control and customize the visual color of badges associated with individual buttons in a group by configuring the badge's color scheme using semantic color tokens such as default, primary, secondary, tertiary, info, success, warning, error, dark, light, inverted, or inherit; this enables setting, changing, or theming badge colors for status indicators, alerts, notifications, or highlights on buttons within a button group to match application design, state, or user context.
+How do I set custom colors for badges in a Kendo UI button group? Control and customize the visual color of badges associated with individual buttons in a group by configuring the badge's color scheme using semantic color tokens such as default, primary, secondary, tertiary, info, success, warning, error, inverted, or inherit; this enables setting, changing, or theming badge colors for status indicators, alerts, notifications, or highlights on buttons within a button group to match application design, state, or user context.
 </div>
 
 #### Example
@@ -881,11 +881,11 @@ How can I adjust the size of grouped buttons in a Kendo UI ButtonGroup? Adjust a
 
 ### themeColor `String` *(default: 'base')*
 
-Controls the main color applied to the buttons in the Group. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+Controls the main color applied to the buttons in the Group. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, and `"inverse"`. Default value is `"base"`.
 
 
 <div class="meta-api-description">
-How do I change the default color of a button group in Kendo UI for jQuery? Adjust or set the primary color scheme, style, or emphasis of multiple buttons grouped together by configuring the main theme color to customize visual appearance, highlight importance, or match branding. Options include standard color categories like base, primary, secondary, tertiary, info, success, warning, error states, dark and light themes, inverse palettes, or disabling color with none. Useful for controlling button group aesthetics, theming button states, enabling consistent UI color coding, and applying contextual or semantic colors to grouped interactive elements. This enables developers to define or override default colors, switch between preset tones, or style grouped buttons collectively for uniform design language and user interface clarity.
+How do I change the default color of a button group in Kendo UI for jQuery? Adjust or set the primary color scheme, style, or emphasis of multiple buttons grouped together by configuring the main theme color to customize visual appearance, highlight importance, or match branding. Options include standard color categories like base, primary, secondary, tertiary, info, success, warning, error states, inverse palettes, or disabling color with none. Useful for controlling button group aesthetics, theming button states, enabling consistent UI color coding, and applying contextual or semantic colors to grouped interactive elements. This enables developers to define or override default colors, switch between preset tones, or style grouped buttons collectively for uniform design language and user interface clarity.
 </div>
 
 #### Example
@@ -894,7 +894,7 @@ How do I change the default color of a button group in Kendo UI for jQuery? Adju
 
     <script>
         $("#buttonGroup").kendoButtonGroup({
-            themeColor: "dark",
+            themeColor: "primary",
             items: [
                 { text: "<b>foo</b>", encoded: false },
                 { text: "<b>bar</b>", encoded: true }

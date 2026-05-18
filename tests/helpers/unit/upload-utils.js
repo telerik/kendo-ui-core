@@ -360,7 +360,7 @@ export function uploadAsync(createUpload, simulateUpload, simulateUploadWithResp
     it("retry button is rendered upon upload error", function() {
         let uploadInstance = createUpload();
         simulateUploadWithResponse(errorResponse);
-        assert.equal($(".k-upload-files li.k-file .k-upload-action .k-i-arrow-rotate-cw-small,.k-upload-files li.k-file .k-upload-action .k-svg-i-arrow-rotate-cw-small", uploadInstance.wrapper).length, 1);
+        assert.equal($(".k-upload-files li.k-file .k-upload-action .k-i-arrow-rotate-cw,.k-upload-files li.k-file .k-upload-action .k-svg-i-arrow-rotate-cw", uploadInstance.wrapper).length, 1);
     });
 
     it("clicking remove should call remove action", function() {
@@ -538,7 +538,7 @@ export function uploadAsync(createUpload, simulateUpload, simulateUploadWithResp
 
         uploadInstance._module.performUpload = function() { performUploadCalled = true; };
 
-        $('.k-i-arrow-rotate-cw-small,.k-svg-i-arrow-rotate-cw-small', uploadInstance.wrapper).trigger("click");
+        $('.k-i-arrow-rotate-cw,.k-svg-i-arrow-rotate-cw', uploadInstance.wrapper).trigger("click");
 
         assert.isOk(performUploadCalled);
     });

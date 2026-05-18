@@ -31,7 +31,7 @@ describe("splitter collapse", function() {
                 e.preventDefault();
             }
         });
-        splitter.dom.find(".k-svg-i-caret-alt-left").trigger("click");
+        splitter.dom.find(".k-svg-i-chevron-left").trigger("click");
 
         assert.isOk(!splitter.dom.find(".k-pane:first").data("pane").collapsed);
     });
@@ -41,12 +41,12 @@ describe("splitter collapse", function() {
             panes: [{ size: "80px", collapsible: true, resizable: true },
                 { collapsible: true, resizable: true }],
         });
-        splitter.dom.find(".k-svg-i-caret-alt-right").trigger("click");
+        splitter.dom.find(".k-svg-i-chevron-right").trigger("click");
    
         assert.equal(splitter.dom.find(".k-pane").first().width(), 193);
         assert.equal(splitter.dom.find(".k-pane").last().width(), 0);
 
-        splitter.dom.find(".k-svg-i-caret-alt-left").trigger("click");
+        splitter.dom.find(".k-svg-i-chevron-left").trigger("click");
 
         assert.equal(splitter.dom.find(".k-pane").first().width(), 80);
         assert.equal(splitter.dom.find(".k-pane").last().width(), 113);
@@ -261,7 +261,7 @@ describe("splitter expand", function() {
         splitter.object.collapse(".k-pane:first");
 
         assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-        assert.isOk(!splitter.dom.find(".k-splitbar .k-svg-i-caret-alt-left").length);
+        assert.isOk(!splitter.dom.find(".k-splitbar .k-svg-i-chevron-left").length);
     });
 
     it("collapsing pane disables collapsing of previous pane", function() {
@@ -272,7 +272,7 @@ describe("splitter expand", function() {
         splitter.object.collapse(".k-pane:last");
 
         assert.isOk(splitter.dom.find(".k-splitbar").is(":not(.k-splitbar-draggable-horizontal)"));
-        assert.isOk(!splitter.dom.find(".k-splitbar .k-svg-i-caret-alt-right").length);
+        assert.isOk(!splitter.dom.find(".k-splitbar .k-svg-i-chevron-right").length);
     });
 
     // The fluid pane should stay as a buffer as it would distort the fixed size of the remaining static panes
@@ -331,7 +331,7 @@ describe("splitter expand", function() {
             ]
         });
 
-        splitter.dom.find(".k-svg-i-caret-alt-left")
+        splitter.dom.find(".k-svg-i-chevron-left")
             .trigger("mousedown")
             .trigger("mouseup")
             .trigger("click");
@@ -344,7 +344,7 @@ describe("splitter expand", function() {
             panes: [{ collapsible: true }, {}]
         });
 
-        splitter.dom.find(".k-svg-i-caret-alt-left")
+        splitter.dom.find(".k-svg-i-chevron-left")
             .trigger("mousedown");
 
         splitter.dom.find(".k-overlay:first")
@@ -362,9 +362,9 @@ describe("splitter expand", function() {
             ]
         });
 
-        splitter.dom.find(".k-i-caret-alt-up").click();
+        splitter.dom.find(".k-i-chevron-up").click();
 
-        splitter.dom.find(".k-i-caret-alt-down").click();
+        splitter.dom.find(".k-i-chevron-down").click();
 
         assert.equal(splitter.dom.find(".k-pane:first").width(), 96);
     });

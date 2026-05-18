@@ -89,7 +89,7 @@ export const __meta__ = {
             itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,
             itemActionTemplate: ({ element, icon, iconClass, attributes }) => {
                 let resolvedAttributes = attributes ? (attributes.toJSON ? attributes.toJSON() : attributes) : {};
-                return kendo.html.renderButton(element || $("<button unselectable='on'></button>").attr(resolvedAttributes), { icon, iconClass, fillMode: "flat" });
+                return kendo.html.renderButton(element || $("<button unselectable='on'></button>").attr(resolvedAttributes), { icon, iconClass, fillMode: "flat", size: "xsmall" });
             },
         },
 
@@ -1627,8 +1627,8 @@ export const __meta__ = {
                     const mouseUp = kendo.support.touch ? "touchend" : "mouseup";
                     const browser = kendo.support.browser;
                     const isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
-                    const prevIcon = isHorizontal ? "caret-alt-left" : "caret-alt-up";
-                    const nextIcon = isHorizontal ? "caret-alt-right" : "caret-alt-down";
+                    const prevIcon = isHorizontal ? "chevron-left" : "chevron-up";
+                    const nextIcon = isHorizontal ? "chevron-right" : "chevron-down";
 
                     const scrollLeft = scrollButtonHtml("prev", prevIcon);
                     const scrollRight = scrollButtonHtml("next", nextIcon);

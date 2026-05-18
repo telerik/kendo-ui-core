@@ -40,12 +40,12 @@ describe('kendo.ui.Loader color', function() {
 
     // #region loader.themeColor()
     it('loader.themeColor() sets correct class', function() {
-        loader = new Loader(span, { themeColor: 'info' });
+        loader = new Loader(span, { themeColor: 'primary' });
 
-        loader.themeColor('warning');
+        loader.themeColor('secondary');
 
-        assert.equal(loader.themeColor(), 'warning');
-        assert.equal(loader.element.hasClass('k-loader-warning'), true);
+        assert.equal(loader.themeColor(), 'secondary');
+        assert.equal(loader.element.hasClass('k-loader-secondary'), true);
     });
 
     it('loader.themeColor() does not set class if color is inherit', function() {
@@ -70,12 +70,12 @@ describe('kendo.ui.Loader color', function() {
 
     // #region setOptions
     it('loader.setOptions() sets correct class', function() {
-        loader = new Loader(span, { themeColor: 'info' });
+        loader = new Loader(span, { themeColor: 'primary' });
 
-        loader.setOptions({ themeColor: 'warning' });
+        loader.setOptions({ themeColor: 'secondary' });
 
-        assert.equal(loader.themeColor(), 'warning');
-        assert.equal(loader.element.hasClass('k-loader-warning'), true);
+        assert.equal(loader.themeColor(), 'secondary');
+        assert.equal(loader.element.hasClass('k-loader-secondary'), true);
     });
 
     it('loader.setOptions() does not set class if themeColor is inherit', function() {

@@ -107,8 +107,6 @@ To specify the theme color of the DropDownButton, configure the `ThemeColor()` m
 - `Success`
 - `Warning`
 - `Error`
-- `Dark`
-- `Light`
 - `Inverse`
 
 > When not explicitly set, the applied theme controls the default theme color.

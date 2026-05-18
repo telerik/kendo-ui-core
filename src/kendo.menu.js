@@ -291,12 +291,12 @@ export const __meta__ = {
         updateFirstLast(item);
     }
 
-    function updateArrow(item) {
+     function updateArrow(item) {
         item = $(item);
-        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-caret]:not(.k-sprite),> .k-link > .k-menu-expand-arrow > [class*=k-svg-i-caret]:not(.k-sprite)").parent().remove();
+        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-chevron]:not(.k-sprite),> .k-link > .k-menu-expand-arrow > [class*=k-svg-i-chevron]:not(.k-sprite)").parent().remove();
 
         item.filter(":has(.k-menu-group)")
-            .children(".k-link:not(:has([class*=k-i-caret]:not(.k-sprite))),.k-link:not(:has([class*=k-svg-i-caret]:not(.k-sprite)))")
+            .children(".k-link:not(:has([class*=k-i-chevron]:not(.k-sprite))),.k-link:not(:has([class*=k-svg-i-chevron]:not(.k-sprite)))")
             .each(function() {
                 var item = $(this);
 
@@ -310,13 +310,13 @@ export const __meta__ = {
             isRtl = kendo.support.isRtl(parent);
 
         if (parent.hasClass(MENU + "-horizontal")) {
-            arrowIconName = "caret-alt-down";
+            arrowIconName = "chevron-down";
         } else {
             if (isRtl) {
-                arrowIconName = "caret-alt-left";
+                arrowIconName = "chevron-left";
             }
             else {
-                arrowIconName = "caret-alt-right";
+                arrowIconName = "chevron-right";
             }
         }
         return arrowIconName;
@@ -1203,6 +1203,11 @@ export const __meta__ = {
 
                         const maxHeightNone = options.scrollable || options.autoSize;
                         const overflow = options.autoSize && !fits ? "auto" : "visible";
+
+                        if (menu && maxHeight) {
+                            maxHeight += parseInt($(div).css("padding")) * $(menu.element).children().length;
+                        }
+
                         div.css({ maxHeight: maxHeightNone ? "" : maxHeight, overflow: overflow });
 
                         li.data(ZINDEX, li.css(ZINDEX));
@@ -2589,11 +2594,11 @@ export const __meta__ = {
                 }),
                 scrollButton: template(({ direction }) =>
                     `<span class='k-button k-button-flat k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
-                        kendo.ui.icon({ icon: `caret-alt-${direction}`, iconClass: "k-button-icon" }) +
+                        kendo.ui.icon({ icon: `chevron-${direction}`, iconClass: "k-button-icon" }) +
                     "</span>"
                 ),
                 arrow: template(({ item, group }) =>
-                    `<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: group.horizontal ? "caret-alt-down" : "caret-alt-right" })}</span>`),
+                    `<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: group.horizontal ? "chevron-down" : "chevron-right" })}</span>`),
                 sprite: template((data) => {
                     var spriteCssClass = fieldAccessor("spriteCssClass")(data);
                     if (spriteCssClass) {
@@ -3006,11 +3011,18 @@ export const __meta__ = {
             var that = this;
             var overflowWrapper = that._overflowWrapper();
             var contextMenuElement = that.element
-                .addClass("k-context-menu");
+                .addClass("k-context-menu k-menu-group");
+
+            if (that.options.orientation === "horizontal") {
+                contextMenuElement.css("flex-direction", "row");
+            }
 
             that._triggerProxy = that._triggerEvent.bind(that);
 
-            that.popup = $("<div></div>")
+            const popupElement = $("<div class='k-menu-popup'></div>")
+                .css("overflow", "initial");
+
+            that.popup = popupElement
                             .append(contextMenuElement)
                             .kendoPopup({
                                 origin: that.options.origin,

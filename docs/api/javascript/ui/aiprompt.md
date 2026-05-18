@@ -736,11 +736,11 @@ How to adjust button corner radius style in AIPrompt? Adjust the button corner r
 
 ### outputActions.themeColor `String`
 
-Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"light"`, `"inverse"`, `"dark"`.
+Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"inverse"`.
 
 
 <div class="meta-api-description">
-How do I set the theme color for action buttons in a Kendo UI AIPrompt? Control or customize the visual appearance, styling, and color scheme of action buttons by setting the theme or design color for interactive elements such as primary, secondary, success, warning, error, info, light, dark, inverse, base, or tertiary tones, enabling developers to configure button colors for various UI states, contexts, or branding requirements in prompts, dialogs, or user interface components.
+How do I set the theme color for action buttons in a Kendo UI AIPrompt? Control or customize the visual appearance, styling, and color scheme of action buttons by setting the theme or design color for interactive elements such as primary, secondary, success, warning, error, info, inverse, base, or tertiary tones, enabling developers to configure button colors for various UI states, contexts, or branding requirements in prompts, dialogs, or user interface components.
 </div>
 
 #### Example
@@ -964,11 +964,11 @@ How do I customize the corner curvature of AIPrompt toolbar buttons? Adjust the 
     </script>
 
 ### toolbarItems.themeColor `String`
-The theme color of the toolbar item. Available options are `base`, `primary`, `secondary`, `tertiary`, `success`, `warning`, `error`, `info`, `light`, `inverse` or `dark`.
+The theme color of the toolbar item. Available options are `base`, `primary`, `secondary`, `tertiary`, `success`, `warning`, `error`, `info`, `inverse`.
 
 
 <div class="meta-api-description">
-How to customize the color theme of a toolbar item in Kendo UI for jQuery AI Prompt? Control and customize the toolbar item's appearance by configuring its color theme to convey different semantic meanings such as success, error, warning, info, or primary actions; adjust visual styling options including base, secondary, tertiary, light, dark, and inverse tones to ensure proper contrast, highlight importance, or match branding; set or override theme colors for toolbar buttons within an AI prompt interface during initialization or dynamically to influence user interface feedback, status indications, or aesthetic consistency across components.
+How to customize the color theme of a toolbar item in Kendo UI for jQuery AI Prompt? Control and customize the toolbar item's appearance by configuring its color theme to convey different semantic meanings such as success, error, warning, info, or primary actions; adjust visual styling options including base, secondary, tertiary, and inverse tones to ensure proper contrast, highlight importance, or match branding; set or override theme colors for toolbar buttons within an AI prompt interface during initialization or dynamically to influence user interface feedback, status indications, or aesthetic consistency across components.
 </div>
 
 #### Example

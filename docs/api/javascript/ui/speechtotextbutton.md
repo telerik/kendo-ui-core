@@ -51,7 +51,7 @@ How do I configure voice recognition for a Kendo UI SpeechToTextButton? Configur
         });
     </script>
 
-### icon `String` *(default: "microphone-outline")*
+### icon `String` *(default: "microphone")*
 The name of the Kendo UI font icon to be displayed in the button when it is not active (not listening).
 
 
@@ -68,7 +68,7 @@ How do I change the icon on a Kendo UI SpeechToTextButton when voice recognition
         });
     </script>
 
-### stopIcon `String` *(default: "stop-sm")*
+### stopIcon `String` *(default: "stop")*
 The name of the Kendo UI font icon to be displayed in the button when it is active (listening).
 
 
@@ -80,7 +80,7 @@ How can I customize the stop icon for Kendo UI SpeechToTextButton? Control and c
     <button id="speechButton"></button>
     <script>
         $("#speechButton").kendoSpeechToTextButton({
-            stopIcon: "stop-outline"
+            stopIcon: "stop"
         });
     </script>
 

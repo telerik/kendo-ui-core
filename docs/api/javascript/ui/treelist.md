@@ -35,9 +35,9 @@ How do I customize alternating row templates in Kendo UI for jQuery TreeList? Co
             		#}#
              		# if (data.hasChildren) { #
                 	# if(data.model.expanded) { #
-                      #= kendo.ui.icon("caret-alt-down") #
+                      #= kendo.ui.icon("chevron-down") #
                 	# } else { #
-                      #= kendo.ui.icon("caret-alt-right") #
+                      #= kendo.ui.icon("chevron-right") #
                 	# } #
             		# } #
                 <strong>#: data.model.lastName # </strong>
@@ -53,9 +53,9 @@ How do I customize alternating row templates in Kendo UI for jQuery TreeList? Co
             		#}#
              		# if (data.hasChildren) { #
                 	# if(data.model.expanded) { #
-                      #= kendo.ui.icon("caret-alt-down") #
+                      #= kendo.ui.icon("chevron-down") #
                 	# } else { #
-                      #= kendo.ui.icon("caret-alt-right") #
+                      #= kendo.ui.icon("chevron-right") #
                 	# } #
             		# } #
                 <strong>#: data.model.lastName # </strong>
@@ -7323,9 +7323,9 @@ How to customize row appearance in Kendo UI TreeList? Customize or control the r
                 		#}#
                  		# if (data.hasChildren) { #
                     	# if(data.model.expanded) { #
-                          #= kendo.ui.icon("caret-alt-down") #
+                          #= kendo.ui.icon("chevron-down") #
                     	# } else { #
-                          #= kendo.ui.icon("caret-alt-right") #
+                          #= kendo.ui.icon("chevron-right") #
                     	# } #
                 		# } #
                     <strong>#: data.model.lastName # </strong>
@@ -7341,9 +7341,9 @@ How to customize row appearance in Kendo UI TreeList? Customize or control the r
               		#}#
                		# if (data.hasChildren) { #
                   	# if(data.model.expanded) { #
-                        #= kendo.ui.icon("caret-alt-down") #
+                        #= kendo.ui.icon("chevron-down") #
                   	# } else { #
-                        #= kendo.ui.icon("caret-alt-right") #
+                        #= kendo.ui.icon("chevron-right") #
                   	# } #
               		# } #
                   <strong>#: data.model.lastName # </strong>

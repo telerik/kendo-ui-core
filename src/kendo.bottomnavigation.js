@@ -362,6 +362,11 @@ export const __meta__ = {
     ui.plugin(BottomNavigation);
 
     kendo.cssProperties.registerPrefix("BottomNavigation", "k-bottom-nav-");
+
+    kendo.cssProperties.registerValues("BottomNavigation", [{
+        prop: "themeColor",
+        values: ['base', 'primary', 'secondary', 'tertiary', 'inverse']
+    }]);
 })(window.kendo.jQuery);
 export default kendo;
 

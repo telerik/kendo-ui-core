@@ -223,10 +223,6 @@ import "./kendo.html.button.js";
                     }
                 }
 
-                if (options.themeColor && options.themeColor !== "none") {
-                    wrapper.addClass(kendo.getValidCssClass("k-window-", "themeColor", options.themeColor));
-                }
-
                 that.minTop = that.minLeft = -Infinity;
                 that.maxTop = that.maxLeft = Infinity;
                 that._position();
@@ -559,8 +555,6 @@ import "./kendo.html.button.js";
                 // make a deep extend over options.position telerik/kendo-ui-core#844
                 var cachedOptions = JSON.parse(JSON.stringify(options));
 
-                that.wrapper.removeClass(kendo.getValidCssClass("k-window-", "themeColor", that.options.themeColor));
-
                 extend(options.position, that.options.position);
                 extend(options.position, cachedOptions.position);
 
@@ -583,10 +577,6 @@ import "./kendo.html.button.js";
                 that._resizable();
                 that._draggable();
                 that._actions();
-
-                if (that.options.themeColor && that.options.themeColor !== "none") {
-                    that.wrapper.addClass(kendo.getValidCssClass("k-window-", "themeColor", that.options.themeColor));
-                }
 
                 if (typeof options.modal !== "undefined") {
                     var visible = that.options.visible !== false;
@@ -629,7 +619,6 @@ import "./kendo.html.button.js";
                     }
                 },
                 title: "",
-                themeColor: "",
                 actions: ["Close"],
                 autoFocus: true,
                 modal: false,
@@ -1845,7 +1834,7 @@ import "./kendo.html.button.js";
                 let iconName = (icon || "").toLowerCase() || name.toLowerCase();
                 if (iconName == "restore") { iconName = "window-restore"; }
 
-                return kendo.html.renderButton(`<button role='button' class='k-window-titlebar-action' aria-label='${name}'></button>`, { icon: iconName, fillMode: "flat" });
+                return kendo.html.renderButton(`<button role='button' class='k-window-titlebar-action' aria-label='${name}'></button>`, { icon: iconName, fillMode: "flat", size: "xsmall" });
             }),
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar'>" +

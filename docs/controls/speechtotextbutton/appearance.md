@@ -77,8 +77,6 @@ The following values are available for the `themeColor` option:
 - `success`—positive action color
 - `warning`—attention-drawing color
 - `error`—negative action color
-- `dark`—dark color
-- `light`—light color
 - `inverse`—contrasting color
 
 ```dojo
@@ -188,7 +186,7 @@ The following values are available for the `rounded` option:
 
 ### Icon
 
-The `icon` option determines which icon is displayed when the button is not in the active state. The default is the `microphone-outline` icon.
+The `icon` option determines which icon is displayed when the button is not in the active state. The default is the `microphone` icon.
 
 ```dojo
     <button id="speechButton"></button>
@@ -204,7 +202,7 @@ The `icon` option determines which icon is displayed when the button is not in t
 
 ### StopIcon
 
-The `stopIcon` option determines which icon is displayed when the button is in the active state (speech recognition in progress). The default is the `stop-sm` icon.
+The `stopIcon` option determines which icon is displayed when the button is in the active state (speech recognition in progress). The default is the `stop` icon.
 
 ```dojo
     <button id="speechButton"></button>

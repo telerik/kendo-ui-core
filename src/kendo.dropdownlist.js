@@ -1285,7 +1285,7 @@ export const __meta__ = {
 
             if (!span[0]) {
                 arrowBtn = html.renderButton('<button role="button" tabindex="-1" class="k-input-button" aria-label="select"></button>', {
-                    icon: "caret-alt-down",
+                    icon: "chevron-down",
                     size: options.size,
                     fillMode: options.fillMode,
                     shape: "none",
@@ -1377,7 +1377,7 @@ export const __meta__ = {
                 try {
                     that.valueTemplate(that._optionLabelDataItem());
                 } catch (e) {
-                    throw new Error(MSG_INVALID_OPTION_LABEL);
+                    throw new Error(MSG_INVALID_OPTION_LABEL, { cause: e });
                 }
             }
         },

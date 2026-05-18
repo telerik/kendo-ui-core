@@ -171,7 +171,7 @@ How do I change the size of the Action button in Kendo UI PromptBox? Set the siz
 Defines the theme color for the Action button.
 
 <div class="meta-api-description">
-How do I change the color of the Action button in Kendo UI PromptBox? Set the themeColor option to apply a predefined color scheme to the Action button. Available options include primary, secondary, tertiary, info, success, warning, error, dark, and light.
+How do I change the color of the Action button in Kendo UI PromptBox? Set the themeColor option to apply a predefined color scheme to the Action button. Available options include primary, secondary, tertiary, info, success, warning, error, and inverse.
 </div>
 
 #### Example
@@ -474,7 +474,7 @@ How do I change the size of the File Select button in Kendo UI PromptBox? Set th
 Defines the theme color for the File Select button.
 
 <div class="meta-api-description">
-How do I change the color of the File Select button in Kendo UI PromptBox? Set the themeColor option to apply a predefined color scheme to the button. Available options include primary, secondary, tertiary, info, success, warning, error, dark, and light.
+How do I change the color of the File Select button in Kendo UI PromptBox? Set the themeColor option to apply a predefined color scheme to the button. Available options include primary, secondary, tertiary, info, success, warning, error, and inverse.
 </div>
 
 #### Example
@@ -944,7 +944,7 @@ How do I change the size of the Speech to Text button in Kendo UI PromptBox? Set
 Defines the theme color for the Speech to Text button.
 
 <div class="meta-api-description">
-How do I change the color of the Speech to Text button in Kendo UI PromptBox? Set the themeColor option to apply a predefined color scheme to the button. Available options include primary, secondary, tertiary, info, success, warning, error, dark, and light.
+How do I change the color of the Speech to Text button in Kendo UI PromptBox? Set the themeColor option to apply a predefined color scheme to the button. Available options include primary, secondary, tertiary, info, success, warning, error, and inverse.
 </div>
 
 #### Example

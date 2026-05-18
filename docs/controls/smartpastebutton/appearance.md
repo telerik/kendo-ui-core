@@ -171,8 +171,6 @@ The available themeColor values are:
 * `"success"`
 * `"warning"`
 * `"error"`
-* `"dark"`
-* `"light"`
 * `"inverse"`
 
 ### Theme Color Example

@@ -104,7 +104,7 @@ export const __meta__ = {
                 $("<span></span>")
                     .addClass("k-button-arrow")
                     .addClass("k-menu-button-arrow")
-                    .append(kendo.ui.icon(kendo.htmlEncode("caret-alt-down")))
+                    .append(kendo.ui.icon(kendo.htmlEncode("chevron-down")))
                     .appendTo(that.element);
             } else {
                 const arrowButton = that.element.find(".k-button-arrow");

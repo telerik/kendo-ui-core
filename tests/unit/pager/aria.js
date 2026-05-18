@@ -104,8 +104,8 @@ describe('pager aria', function() {
     it("prev button is disabled on the first page", function() {
         let pager = setup({}, { navigatable: true, previousNext: true });
 
-        assert.isOk(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").parent().hasClass("k-disabled"));
-        assert.equal(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").parent().attr("aria-disabled"), "true");
+        assert.isOk(pager.find(".k-i-chevron-left,.k-svg-i-chevron-left").parent().hasClass("k-disabled"));
+        assert.equal(pager.find(".k-i-chevron-left,.k-svg-i-chevron-left").parent().attr("aria-disabled"), "true");
     });
 });
 

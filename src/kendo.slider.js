@@ -544,15 +544,15 @@ export const __meta__ = {
 
         if (isHorizontal) {
             if (type === "increase") {
-                buttonIconName = isRtl ? "caret-alt-left" : "caret-alt-right";
+                buttonIconName = isRtl ? "chevron-left" : "chevron-right";
             } else {
-                buttonIconName = isRtl ? "caret-alt-right" : "caret-alt-left";
+                buttonIconName = isRtl ? "chevron-right" : "chevron-left";
             }
         } else {
             if (type == "increase") {
-                buttonIconName = "caret-alt-up";
+                buttonIconName = "chevron-up";
             } else {
-                buttonIconName = "caret-alt-down";
+                buttonIconName = "chevron-down";
             }
         }
 

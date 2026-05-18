@@ -504,6 +504,37 @@ How do I configure my Kendo UI tooltip to show on mouse hover? Configure how and
       });
     </script>
 
+### themeColor `String`
+
+Specifies the theme color of the Tooltip popup.
+
+The supported values are:
+
+* `base`
+* `inverse`
+* `info`
+* `success`
+* `warning`
+* `error`
+
+<div class="meta-api-description">
+How do I change the color of Kendo UI tooltip pop-ups? Set or configure the visual color theme of tooltip popups by assigning a theme color value that maps to a CSS class on the tooltip wrapper, controlling the appearance of hover tooltips, info popups, or contextual hints with predefined color schemes such as base, inverse, info, success, warning, or error, enabling color-coded tooltip styling for different severity levels, status indicators, and contextual message types to provide visual consistency across the application interface.
+</div>
+
+#### Example - set tooltip theme color
+
+    <span id="target" title="Tooltip content">
+      Some content
+    </span>
+
+    <script>
+    $(document).ready(function() {
+        $("#target").kendoTooltip({
+            themeColor: "info"
+        });
+    });
+    </script>
+
 ### hideAfter `Number`*(default: 100)*
 
 Specifies the delay (in milliseconds) before the Tooltip is hidden.

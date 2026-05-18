@@ -136,6 +136,9 @@ export const __meta__ = {
         prop: "fillMode",
         values: kendo.cssProperties.fillModeValues.concat(["link", "clear"])
     }, {
+        prop: "themeColor",
+        values: ['base', 'primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error', 'inverse']
+    }, {
         prop: "rounded",
         values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
     }]);

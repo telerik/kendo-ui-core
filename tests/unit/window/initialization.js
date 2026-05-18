@@ -279,15 +279,6 @@ describe("initialization", function() {
         assert.isOk(dialog.wrapper.hasClass("k-window-sm"));
     });
 
-    it("creating window with themeColor sets the correct class", function() {
-        let dialog = createWindow({
-            minHeight: 200,
-            themeColor: "dark"
-        });
-
-        assert.isOk(dialog.wrapper.hasClass("k-window-dark"));
-    });
-
 
     it("creating window with preventScroll stop the document scrolling", function() {
         let dialog = createWindow({

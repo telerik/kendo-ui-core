@@ -62,7 +62,7 @@ Use the Drawer HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
                 <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
                 <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
                 <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
                 <li data-role='drawer-separator'></li>
             </ul>
         "))
@@ -78,7 +78,7 @@ Use the Drawer HtmlHelper {% if site.core %}or TagHelper{% endif %} to add the c
             <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
             <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
             <li data-role='drawer-separator'></li>
-            <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favourites'>Favourites</span></li>
+            <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favourites'>Favourites</span></li>
             <li data-role='drawer-separator'></li>
         </ul>
     </script>
@@ -111,7 +111,7 @@ In addition, you can use the `AutoCollapse` method to stop the Drawer from autom
                 <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
                 <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
                 <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
                 <li data-role='drawer-separator'></li>
             </ul>
         "))
@@ -127,7 +127,7 @@ In addition, you can use the `AutoCollapse` method to stop the Drawer from autom
             <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
             <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
             <li data-role='drawer-separator'></li>
-            <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favourites'>Favorites</span></li>
+            <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favourites'>Favorites</span></li>
             <li data-role='drawer-separator'></li>
         </ul>
     </script>
@@ -159,7 +159,7 @@ Next, add some basic content to the Drawer items by using the `Content()` method
                 <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
                 <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
                 <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
                 <li data-role='drawer-separator'></li>
             </ul>
         ")
@@ -192,7 +192,7 @@ Next, add some basic content to the Drawer items by using the `Content()` method
             <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
             <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
             <li data-role='drawer-separator'></li>
-            <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favourites'>Favorites</span></li>
+            <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favourites'>Favorites</span></li>
             <li data-role='drawer-separator'></li>
         </ul>
     </script>
@@ -244,7 +244,7 @@ To hide the content for the items that aren't currently selected, you will apply
                 <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
                 <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
                 <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
                 <li data-role='drawer-separator'></li>
             </ul>
         ")
@@ -294,7 +294,7 @@ To hide the content for the items that aren't currently selected, you will apply
             <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
             <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
             <li data-role='drawer-separator'></li>
-            <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favourites'>Favourites</span></li>
+            <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favourites'>Favourites</span></li>
             <li data-role='drawer-separator'></li>
         </ul>
     </script>

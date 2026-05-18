@@ -94,12 +94,12 @@ export function getDataItem(listbox, item) {
 function getToolElementClassName(command) {
     let clssClassNames = {
         "remove": "x",
-        "moveUp": "caret-alt-up",
-        "moveDown": "caret-alt-down",
-        "transferTo": "caret-alt-right",
-        "transferFrom": "caret-alt-left",
-        "transferAllTo": "caret-double-alt-right",
-        "transferAllFrom": "caret-double-alt-left"
+        "moveUp": "chevron-up",
+        "moveDown": "chevron-down",
+        "transferTo": "chevron-right",
+        "transferFrom": "chevron-left",
+        "transferAllTo": "chevron-double-right",
+        "transferAllFrom": "chevron-double-left"
     };
 
     return "k-svg-i-" + clssClassNames[command];

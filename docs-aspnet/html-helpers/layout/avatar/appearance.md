@@ -84,14 +84,6 @@ The available `ThemeColor` values are:
 - `Base` - Applies base theme color.
 - `Secondary` — Applies coloring based on the secondary theme color.
 - `Tertiary` — Applies coloring based on the tertiary theme color.
-- `Inherit` — Applies the inherited coloring value.
-- `Info` — Applies coloring based on the info theme color.
-- `Success` — Applies coloring based on the success theme color.
-- `Warning` — Applies coloring based on the warning theme color.
-- `Error` — Applies coloring based on the error theme color.
-- `Dark` — Applies coloring based on the dark theme color.
-- `Light` — Applies coloring based on the light theme color.
-- `Inverse` — Applies coloring based on the inverted theme color.
 
 > When not explicitly set, the applied theme controls the default theme color.
 

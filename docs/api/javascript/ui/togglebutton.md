@@ -40,6 +40,37 @@ Specifies the selected state of the ToggleButtons. If set to `true` the widget w
 
 
 <div class="meta-api-description">
+How do I set the initial state of a Kendo UI ToggleButton? Control the starting toggled state of a button by configuring whether it is initially active, enabled, or switched on, using a true or false value to set the button's default selection status, toggle activation state, or initial pressed condition; useful for defining if a toggle control begins as selected, checked, highlighted, or in an enabled mode when loaded or initialized.
+</div>
+
+#### Example
+
+    <button id="button1" type="button">Option 1</button>
+    <button id="button2" type="button">Option 2</button>
+    <script>
+        $("#button1").kendoToggleButton({
+            selected: true
+        });
+        $("#button2").kendoToggleButton({
+            group: "myGroup"
+        });
+    </script>
+
+### size `String` *(default: undefined)*
+
+Controls the overall physical size of the ToggleButton. Valid values are: `"xsmall"`, `"small"`, `"medium"`, and `"large"`. When `undefined` (the default), the theme controls the default size.
+
+#### Example
+
+    <button id="button" type="button">Edit</button>
+    <script>
+        $("#button").kendoToggleButton({
+            size: "large"
+        });
+    </script>
+
+
+<div class="meta-api-description">
 How do I set the initial state of a Kendo UI ToggleButton? Control the starting toggled state of a button by configuring whether it is initially active, enabled, or switched on, using a true or false value to set the button’s default selection status, toggle activation state, or initial pressed condition; useful for defining if a toggle control begins as selected, checked, highlighted, or in an enabled mode when loaded or initialized.
 </div>
 

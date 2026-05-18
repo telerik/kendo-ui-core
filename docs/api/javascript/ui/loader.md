@@ -73,46 +73,28 @@ How do I adjust the size of the loading spinner in Kendo UI for jQuery? Adjust t
 
 Sets a value controlling the theme color of the component. When `undefined` (the default), the theme controls the color. Can also be set to the following string values:
 
+* `base`: apply coloring based on **base** theme color.
 * `primary`: apply coloring based on **primary** theme color.
 * `secondary`: apply coloring based on **secondary** theme color.
 * `tertiary`: apply coloring based on **tertiary** theme color.
-* `info`: apply coloring based on **info** theme color.
-* `success`: apply coloring based on **success** theme color.
-* `warning`: apply coloring based on **warning** theme color.
-* `error`: apply coloring based on **error** theme color.
-* `dark`: apply coloring based on **dark** theme color.
-* `light`: apply coloring based on **light** theme color.
-* `inverse`: depending on the luminance of the theme, light or dark, inverted will be dark or light.
 
 
 <div class="meta-api-description">
-How do I set the color of a Kendo UI loader to match my theme? Set or configure the loader color using theme-driven hues, including primary, secondary, tertiary, info, success, warning, error, dark, light, or inverse shades to ensure consistent visual feedback and semantic meaning in user interfaces; apply accent and semantic color variants to control loader styling that adapts to UI themes, toggles between light and dark modes, supports status indicators like success or error, and maintains visual emphasis or inversion based on background luminance, enabling developers to customize loader appearance for different states, accessibility, and branding requirements.
+How do I set the color of a Kendo UI loader to match my theme? Set or configure the loader color using theme-driven hues, including base, primary, secondary, or tertiary shades to ensure consistent visual feedback and semantic meaning in user interfaces; apply accent and semantic color variants to control loader styling that adapts to UI themes, enabling developers to customize loader appearance for different states, accessibility, and branding requirements.
 </div>
 
 #### Example
 
+    <span id="loader-base"></span>
     <span id="loader-primary"></span>
     <span id="loader-secondary"></span>
     <span id="loader-tertiary"></span>
-    <span id="loader-info"></span>
-    <span id="loader-success"></span>
-    <span id="loader-warning"></span>
-    <span id="loader-error"></span>
-    <span id="loader-dark"></span>
-    <span id="loader-light"></span>
-    <span id="loader-inverse"></span>
 
     <script>
+        $('#loader-base').kendoLoader({ themeColor: 'base' });
         $('#loader-primary').kendoLoader({ themeColor: 'primary' });
         $('#loader-secondary').kendoLoader({ themeColor: 'secondary' });
         $('#loader-tertiary').kendoLoader({ themeColor: 'tertiary' });
-        $('#loader-info').kendoLoader({ themeColor: 'info' });
-        $('#loader-success').kendoLoader({ themeColor: 'success' });
-        $('#loader-warning').kendoLoader({ themeColor: 'warning' });
-        $('#loader-error').kendoLoader({ themeColor: 'error' });
-        $('#loader-dark').kendoLoader({ themeColor: 'dark' });
-        $('#loader-light').kendoLoader({ themeColor: 'light' });
-        $('#loader-inverse').kendoLoader({ themeColor: 'inverse' });
     </script>
 
 

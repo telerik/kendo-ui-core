@@ -189,6 +189,13 @@ export const __meta__ = {
 
     ui.plugin(Loader);
 
+    kendo.cssProperties.registerPrefix("Loader", "k-loader-");
+
+    kendo.cssProperties.registerValues("Loader", [{
+        prop: "themeColor",
+        values: ['base', 'primary', 'secondary', 'tertiary']
+    }]);
+
 })(window.kendo.jQuery);
 export default kendo;
 

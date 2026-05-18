@@ -318,7 +318,7 @@ You can leverage the `Enable` property to specify whether a given tab should be 
             .Items(tabstrip =>
             {
                   tabstrip.Add().Text("Delete User (Disabled)")
-                  .Icon("x-outline")
+                  .Icon("x")
                   .Enabled(false)
                   .Content("Delete User Content");
             })
@@ -329,7 +329,7 @@ You can leverage the `Enable` property to specify whether a given tab should be 
 ```TagHelper
     <kendo-tabstrip name="tabstrip">
         <items>
-            <tabstrip-item icon="x-outline" text="Delete User (Disabled)" enabled="false">
+            <tabstrip-item icon="x" text="Delete User (Disabled)" enabled="false">
                 <content>
                     Delete User Content
                 </content>
@@ -353,7 +353,7 @@ Use the `IconClass` setting to apply a custom CSS class to the icon element, all
             .Items(tabstrip =>
             {
                  tabstrip.Add().Text("Privileges (Larger Icon)")
-                 .Icon("security-lock-solid")
+                 .Icon("security-lock")
                  .IconPosition(IconPosition.After)
                  .IconClass("larger-icon")
                  .Content("Privileges Content");
@@ -370,7 +370,7 @@ Use the `IconClass` setting to apply a custom CSS class to the icon element, all
 ```TagHelper
     <kendo-tabstrip name="tabstrip">
         <items>
-            <tabstrip-item icon="security-lock-solid" icon-position="IconPosition.After" icon-class="larger-icon" text="Privileges (Larger Icon)">
+            <tabstrip-item icon="security-lock" icon-position="IconPosition.After" icon-class="larger-icon" text="Privileges (Larger Icon)">
                 <content>
                     Privileges Content
                 </content>
@@ -397,7 +397,7 @@ Each action can be further customized with icons, attributes and a handler funct
             .Items(tabstrip =>
             {
                  tabstrip.Add().Text("Account")
-                 .Icon("user-outline")
+                 .Icon("user")
                  .Actions(actions =>
                  {
                      actions.Add().Icon("envelope").Action("sendMessage").HtmlAttributes(new { title = "Send Message" });
@@ -424,7 +424,7 @@ Each action can be further customized with icons, attributes and a handler funct
 ```TagHelper
     <kendo-tabstrip name="tabstrip">
         <items>
-            <tabstrip-item icon="user-outline" icon-position="IconPosition.After" icon-class="larger-icon" text="Account">
+            <tabstrip-item icon="user" icon-position="IconPosition.After" icon-class="larger-icon" text="Account">
                 <content>
                     Account Content
                 </content>

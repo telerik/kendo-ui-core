@@ -19,10 +19,10 @@ export const __meta__ = {
         VALIDINPUT = "k-valid",
         VALIDATIONSUMMARY = "k-validation-summary",
         INVALIDLABEL = "k-text-error",
-        MESSAGEBOX = "k-messagebox k-messagebox-error",
+        MESSAGEBOX = "k-messagebox",
         INPUTINNER = ".k-input-inner",
         UPLOADBUTTONWRAPPER = ".k-upload-button-wrap",
-        CHECKBOXWRAPPER= ".k-checkbox-wrap",
+        CHECKBOXWRAPPER = ".k-checkbox-wrap",
         INPUTWRAPPER = ".k-input",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
@@ -183,6 +183,7 @@ export const __meta__ = {
         options: {
             name: "Validator",
             errorTemplate: ({ message }) => `<span class="k-form-error">${message}</span>`,
+            messageBoxThemeColor: "error",
             messages: {
                 required: "{0} is required",
                 pattern: "{0} is not valid",
@@ -825,6 +826,12 @@ export const __meta__ = {
             }
 
             container.addClass([VALIDATIONSUMMARY, MESSAGEBOX].join(" "));
+
+            const themeColor = that.options.messageBoxThemeColor;
+            if (themeColor) {
+                container.addClass("k-messagebox-" + themeColor);
+            }
+
             container.attr("role", "alert");
 
             container.on("click" + NS, that._summaryClick.bind(that));

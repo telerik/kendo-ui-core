@@ -134,8 +134,6 @@ import "./kendo.html.button.js";
             setOptions: function(options) {
                 var that = this;
                 var sizeClass = that.options.size;
-                that.wrapper.removeClass(kendo.getValidCssClass("k-dialog-", "themeColor", that.options.themeColor));
-
                 options = $.extend(that.options, options);
 
                 Widget.fn.setOptions.call(that, options);
@@ -164,10 +162,6 @@ import "./kendo.html.button.js";
                     that.dialogWrapper.hide();
                 } else {
                     that._triggerOpen();
-                }
-
-                if (options.themeColor && options.themeColor !== "none") {
-                    that.wrapper.addClass(kendo.getValidCssClass("k-dialog-", "themeColor", that.options.themeColor));
                 }
 
                 if (typeof options.modal !== "undefined") {
@@ -320,10 +314,6 @@ import "./kendo.html.button.js";
                 that._closable(wrapper);
 
                 wrapper.append(content);
-                if (options.themeColor && options.themeColor !== "none") {
-                    wrapper.addClass(wrapper.addClass(kendo.getValidCssClass("k-dialog-", "themeColor", options.themeColor)));
-                }
-
                 if (options.content) {
                     kendo.destroy(content.children());
                     content.html(options.content);
@@ -889,7 +879,6 @@ import "./kendo.html.button.js";
             options: {
                 title: "",
                 buttonLayout: "stretched",
-                themeColor: "",
                 actions: [],
                 modal: true,
                 size: "auto",
@@ -1093,9 +1082,7 @@ import "./kendo.html.button.js";
                     "<div class='k-window-titlebar-actions k-dialog-titlebar-actions'></div>" +
                 "</div>"
             ),
-            close: template(({ messages }) => `<button class="k-window-titlebar-action k-dialog-titlebar-action k-button k-button-flat k-icon-button" data-role="close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'>
-                                                    ${kendo.ui.icon({ icon: "x", iconClass: "k-button-icon" })}
-                                                </button>`),
+            close: template(({ messages }) => kendo.html.renderButton(`<button class="k-window-titlebar-action k-dialog-titlebar-action" data-role="close" title='${encode(messages.close)}' aria-label='${encode(messages.close)}' tabindex='-1'></button>`, { icon: "x", fillMode: "flat", size: "xsmall" })),
             actionbar: template(({ buttonLayout }) => `<div class='k-dialog-actions k-actions k-actions-horizontal k-window-actions k-actions-${encode(buttonLayout)}'></div>`),
             alertWrapper: template(() => "<div class='k-dialog-wrapper'><div class='k-overlay'></div><div class='k-window k-dialog' role='alertdialog'></div></div>"),
             alert: "<div></div>",

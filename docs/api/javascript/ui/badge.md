@@ -269,8 +269,7 @@ Specifies the theme color of the component. If `undefined` (the default), the th
 
 Valid options are
 
-* `inherit`: no coloring will be applied to the badge. Useful when the badge needs to blend-in with the surrounding elements.
-* `default`: apply coloring based on surface theme color.
+* `base`: apply coloring based on surface theme color.
 * `primary`:  apply coloring based on **primary** theme color.
 * `secondary`: apply coloring based on **secondary** theme color.
 * `tertiary`: apply coloring based on **tertiary** theme color.
@@ -278,19 +277,15 @@ Valid options are
 * `success`: apply coloring based on **success** theme color.
 * `warning`:apply coloring based on **warning** theme color.
 * `error`: apply coloring based on **error** theme color.
-* `dark`: apply coloring based on **dark** theme color.
-* `light`: always coloring based on **light** theme color.
-* `inverse`: depending on the luminance of the theme, light or dark, inverse will be dark or light.
 
 
 <div class="meta-api-description">
-How do I set the color of a Kendo UI badge element using themeColor? Set or customize the badge color styling by configuring theme colors such as primary, secondary, tertiary, info, success, warning, error, dark, light, or inverse to match semantic palettes or inherit colors from surrounding elements. Control visual emphasis, notification status, highlight importance, or blend badges seamlessly with backgrounds by choosing options that enable coloring based on light, dark, default surface, or no color for subtle integration. Enable adaptive color schemes, apply contextual color codes for alerts or statuses, and configure badges to reflect theme luminance for contrasting visibility or minimal distraction in UI design.
+How do I set the color of a Kendo UI badge element using themeColor? Set or customize the badge color styling by configuring theme colors such as base, primary, secondary, tertiary, info, success, warning, or error to match semantic palettes. Control visual emphasis, notification status, highlight importance, or blend badges seamlessly with backgrounds by choosing options that enable coloring based on the default surface or contextual color. Enable adaptive color schemes, apply contextual color codes for alerts or statuses, and configure badges to reflect theme styling for consistent visibility in UI design.
 </div>
 
 #### Example
 
-    <span id="badge-inherit">Inherit</span>
-    <span id="badge-default">Default</span>
+    <span id="badge-base">Base</span>
     <span id="badge-primary">Primary</span>
     <span id="badge-secondary">Secondary</span>
     <span id="badge-tertiary">Tertiary</span>
@@ -298,13 +293,9 @@ How do I set the color of a Kendo UI badge element using themeColor? Set or cust
     <span id="badge-success">Success</span>
     <span id="badge-warning">Warning</span>
     <span id="badge-error">Error</span>
-    <span id="badge-dark">Dark</span>
-    <span id="badge-light">Light</span>
-    <span id="badge-inverse">Inverse</span>
 
     <script>
-        $('#badge-inherit').kendoBadge({ themeColor: 'inherit' });
-        $('#badge-secondary').kendoBadge({ themeColor: 'secondary' });
+        $('#badge-base').kendoBadge({ themeColor: 'base' });
         $('#badge-primary').kendoBadge({ themeColor: 'primary' });
         $('#badge-secondary').kendoBadge({ themeColor: 'secondary' });
         $('#badge-tertiary').kendoBadge({ themeColor: 'tertiary' });
@@ -312,9 +303,6 @@ How do I set the color of a Kendo UI badge element using themeColor? Set or cust
         $('#badge-success').kendoBadge({ themeColor: 'success' });
         $('#badge-warning').kendoBadge({ themeColor: 'warning' });
         $('#badge-error').kendoBadge({ themeColor: 'error' });
-        $('#badge-dark').kendoBadge({ themeColor: 'dark' });
-        $('#badge-light').kendoBadge({ themeColor: 'light' });
-        $('#badge-inverse').kendoBadge({ themeColor: 'inverse' });
     </script>
 
 

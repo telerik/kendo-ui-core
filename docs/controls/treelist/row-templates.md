@@ -27,10 +27,10 @@ The following example demonstrates how to set `row` and `altRow` templates by us
           #}#
           # if (data.hasChildren) { #
               # if(data.model.expanded) { #
-                    #= kendo.ui.icon("caret-alt-down") #
+                    #= kendo.ui.icon("chevron-down") #
               # }
               else { #
-                     #= kendo.ui.icon("caret-alt-right") #
+                     #= kendo.ui.icon("chevron-right") #
               # } #
           # } #
       </td>
@@ -51,10 +51,10 @@ The following example demonstrates how to set `row` and `altRow` templates by us
           #}#
           # if (data.hasChildren) { #
                # if(data.model.expanded) { #
-                     #= kendo.ui.icon("caret-alt-down") #
+                     #= kendo.ui.icon("chevron-down") #
                # }
                else { #
-                      #= kendo.ui.icon("caret-alt-right") #
+                      #= kendo.ui.icon("chevron-right") #
                # } #
           # } #
        </td>
@@ -96,10 +96,10 @@ Implement the templates in the script tags by using the [`data.model`](/api/java
           #}#
           # if (data.hasChildren) { #
               # if(data.model.expanded) { #
-                    #= kendo.ui.icon("caret-alt-down") #
+                    #= kendo.ui.icon("chevron-down") #
               # }
               else { #
-                     #= kendo.ui.icon("caret-alt-right") #
+                     #= kendo.ui.icon("chevron-right") #
               # } #
           # } #
       </td>
@@ -120,10 +120,10 @@ Implement the templates in the script tags by using the [`data.model`](/api/java
           #}#
           # if (data.hasChildren) { #
               # if(data.model.expanded) { #
-                    #= kendo.ui.icon("caret-alt-down") #
+                    #= kendo.ui.icon("chevron-down") #
               # }
               else { #
-                     #= kendo.ui.icon("caret-alt-right") #
+                     #= kendo.ui.icon("chevron-right") #
               # } #
           # } #
        </td>

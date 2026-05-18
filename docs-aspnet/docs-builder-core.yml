@@ -32,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
-  cdnVersion: "2026.1.415"
-  themesCdnVersion: "13.1.1"
-  mvcCoreVersion: "2026.1.415"
+  cdnVersion: "2026.2.519"
+  themesCdnVersion: "14.0.0"
+  mvcCoreVersion: "2026.2.519"
   platform: aspnet-core
   core: true
   mvc: false

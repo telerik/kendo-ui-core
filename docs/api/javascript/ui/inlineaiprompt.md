@@ -903,7 +903,7 @@ How to set button corner radius for output actions in Kendo UI InlineAIPrompt? A
     
 ### outputActions.fillMode `String`
 
-Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"light"`, `"inverse"`, `"dark"`.
+Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"inverse"`.
 
 
 <div class="meta-api-description">
@@ -923,11 +923,11 @@ How do I customize the appearance of interactive buttons within an inline AI pro
 
 ### outputActions.themeColor `String`
 
-Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"light"`, `"inverse"`, `"dark"`.
+Specifies the theme color of the action button. Available options: `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"success"`, `"warning"`, `"error"`, `"info"`, `"inverse"`.
 
 
 <div class="meta-api-description">
-How do I customize the color of action buttons in an inline AI prompt using Kendo UI? Adjust, configure, or customize the color scheme and visual emphasis of action buttons within prompts by selecting from a range of semantic theme colors including primary, secondary, tertiary, success, warning, error, info, light, dark, base, or inverse tones to control the button’s appearance, highlight, or style for varying UI contexts, alert levels, or user interaction cues in inline AI prompt interfaces.
+How do I customize the color of action buttons in an inline AI prompt using Kendo UI? Adjust, configure, or customize the color scheme and visual emphasis of action buttons within prompts by selecting from a range of semantic theme colors including primary, secondary, tertiary, success, warning, error, info, base, or inverse tones to control the button’s appearance, highlight, or style for varying UI contexts, alert levels, or user interaction cues in inline AI prompt interfaces.
 </div>
 
 #### Example

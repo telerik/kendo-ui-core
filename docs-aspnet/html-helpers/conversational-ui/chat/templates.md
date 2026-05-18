@@ -385,7 +385,7 @@ The following example demonstrates how to customize the default appearance of th
         html += "</div>";
         return html;
     }
-    kendo.ui.icon($(".action-icon"), { icon: 'globe-outline' });
+    kendo.ui.icon($(".action-icon"), { icon: 'globe' });
 </script>
 ```
 

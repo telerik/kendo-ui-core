@@ -587,7 +587,7 @@ The `suggestedActionsTemplate` function customizes the rendering of suggested ac
                     ]
                 },
             }).data("kendoChat");
-            kendo.ui.icon($(".action-icon"), { icon: 'globe-outline' });
+            kendo.ui.icon($(".action-icon"), { icon: 'globe' });
         </script>
 ```
 

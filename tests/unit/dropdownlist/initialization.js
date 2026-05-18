@@ -109,7 +109,7 @@ describe("kendo.ui.DropDownList initialization", function() {
         assert.isOk(spanArrow.is("button"));
         assert.isOk(spanArrow.hasClass("k-input-button"));
         assert.isOk(arrow.is("span"));
-        assert.isOk(arrow.is(".k-icon.k-i-caret-alt-down, .k-svg-icon.k-svg-i-caret-alt-down"));
+        assert.isOk(arrow.is(".k-icon.k-i-chevron-down, .k-svg-icon.k-svg-i-chevron-down"));
     });
 
     it("arrow button have a tabindex of -1 to prevent focus stealing from the wrapper", function() {

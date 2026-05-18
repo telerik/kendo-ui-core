@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2026.1.415
+// Type definitions for Kendo UI Professional v2026.2.519
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -3715,6 +3715,9 @@ declare namespace kendo.ui {
         file: IFile;
         files: IFile[];
     }
+    interface IReferencedMessageClickEventArgs {
+        id: string | number;
+    }
     type SuggestionsTemplateFunction = (suggestions: ISuggestion[]) => string;
     type TimestampTemplateFunction = (context: { date: Date; message: IMessage }) => string;
     type MessageStatusTemplateFunction = (context: { status: MessageStatus; message: IMessage }) => string;
@@ -3777,6 +3780,13 @@ declare namespace kendo.ui {
     type TimestampVisibility = "onFocus" | "hidden";
     type SuggestionsBehavior = "send" | "insert";
     type ChatDirection = "ltr" | "rtl";
+    type ScrollMode = "scrollable" | "endless";
+    interface IMessageReferenceData extends Pick<IMessage, "id" | "authorId">, Partial<Pick<IMessage, "uid" | "text" | "files" | "isDeleted" | "isPinned" | "isOwnMessage" | "authorName" | "authorImageUrl" | "authorImageAltText">> {}
+    interface IMessageReferenceResolverOptions {
+        value: Array<string | number>;
+        success: (dataItems: IMessageReferenceData[]) => void;
+        error: (error: unknown) => void;
+    }
     interface IActionButtonSettings {
         /** Icon name for the action button */
         icon?: string;
@@ -3809,6 +3819,16 @@ declare namespace kendo.ui {
         topAffixTemplate?: Function | undefined;
     }
     interface IChatOptions {
+        /** Controls whether the chat renders all messages or uses endless scrolling */
+        scrollMode?: ScrollMode;
+        /** Endless batch size. Chat uses `dataSource.pageSize()` when the data source provides a valid value and only seeds or normalizes it when endless mode is enabled and the data source does not. */
+        pageSize?: number;
+        /** Delay in milliseconds before endless edge-trigger loading starts */
+        endlessScrollDebounceDelay?: number;
+        /** Auxiliary pinned message records used for pinned previews and navigation outside the currently loaded endless window. */
+        pinnedMessages?: IMessageReferenceData[];
+        /** Resolves off-window referenced messages for endless remote scenarios and returns auxiliary reference records rather than a rendered range. */
+        referenceResolver?: ((options: IMessageReferenceResolverOptions) => void) | null;
         /** Show username on messages (can be overridden by user-specific settings) */
         showUsername?: boolean;
         /** Show avatar on messages (can be overridden by user-specific settings) */
@@ -3949,6 +3969,8 @@ declare namespace kendo.ui {
         timestampTemplate?: TimestampTemplateFunction | null;
         toolbarAction?: (args: IToolbarActionEventArgs) => void;
         unpin?: (args: IUnpinEventArgs) => void;
+        /** Referenced message click event handler. The public payload exposes only the referenced message `id`. */
+        referencedMessageClick?: (args: IReferencedMessageClickEventArgs) => void;
         /** Widget width */
         width?: string | number | null;
     }
@@ -5179,7 +5201,6 @@ declare namespace kendo.ui {
         minHeight?: number | undefined;
         minWidth?: number | undefined;
         modal?: boolean | DialogModal | undefined;
-        themeColor?: string | undefined;
         title?: string | boolean | undefined;
         visible?: boolean | undefined;
         width?: number | string | undefined;
@@ -6893,6 +6914,7 @@ declare namespace kendo.ui {
         validateOnBlur: boolean;
         validationSummary: boolean;
         errorTemplate: string | Function;
+        messageBoxThemeColor: string;
     }
 
     interface FormEvent {
@@ -14030,6 +14052,7 @@ declare namespace kendo.ui {
         position?: string | undefined;
         showAfter?: number | undefined;
         showOn?: string | undefined;
+        themeColor?: string | undefined;
         contentLoad?(e: TooltipEvent): void;
         show?(e: TooltipEvent): void;
         hide?(e: TooltipEvent): void;
@@ -15035,6 +15058,7 @@ declare namespace kendo.ui {
     interface ValidatorOptions {
         name?: string | undefined;
         errorTemplate?: string | Function | undefined;
+        messageBoxThemeColor?: string | undefined;
         messages?: any;
         rules?: any;
         validateOnBlur?: boolean | undefined;
@@ -15170,7 +15194,6 @@ declare namespace kendo.ui {
         position?: WindowPosition | undefined;
         resizable?: boolean | undefined;
         scrollable?: boolean | undefined;
-        themeColor?: string | undefined;
         title?: string | boolean | WindowTitle | undefined;
         visible?: boolean | undefined;
         width?: number | string | undefined;
@@ -15358,6 +15381,7 @@ declare namespace kendo.ui {
 
     interface SvgIconOptions extends IconOptions {
         icon?: any;
+        variant?: "solid" | "outline" | "duotone" | undefined;
     }
 
     class SmartPasteButton extends kendo.ui.Button {

@@ -96,8 +96,6 @@ The `themeColor` configuration provides a variety of colors that can be applied 
 - `success`
 - `warning`
 - `error`
-- `dark`
-- `light`
 - `inverse`
 
 ```dojo

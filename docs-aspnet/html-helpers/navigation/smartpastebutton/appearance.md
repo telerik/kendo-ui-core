@@ -98,8 +98,6 @@ The `ThemeColor` configuration provides a variety of colors that can be applied 
 - `Success`
 - `Warning`
 - `Error`
-- `Dark`
-- `Light`
 - `Inverse`
 
 ```HtmlHelper
@@ -158,7 +156,7 @@ The following values are available for the `Rounded` option:
 
 ### Icon
 
-The SmartPasteButton supports icon customization through the `Icon()` method. The icon value is the name of a Kendo UI font icon (for example, `paste-sparkle`, `copy`, or `microphone-outline`).
+The SmartPasteButton supports icon customization through the `Icon()` method. The icon value is the name of a Kendo UI font icon (for example, `paste-sparkle`, `copy`, or `microphone`).
 
 ```HtmlHelper
 @(Html.Kendo().SmartPasteButton()

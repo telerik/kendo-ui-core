@@ -30,7 +30,7 @@ The next example shows how to use the `ItemClick()` event to display the content
                 <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
                 <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
                 <li data-role='drawer-separator'></li>
-                <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
+                <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favorites'>Favorites</span></li>
                 <li data-role='drawer-separator'></li>
             </ul>
         ")
@@ -80,7 +80,7 @@ The next example shows how to use the `ItemClick()` event to display the content
             <li data-role='drawer-item'><span class='k-icon k-i-notification k-i-bell'></span><span class='k-item-text' data-id='Notifications'>Notifications</span></li>
             <li data-role='drawer-item'><span class='k-icon k-i-calendar'></span><span class='k-item-text' data-id='Calendar'>Calendar</span></li>
             <li data-role='drawer-separator'></li>
-            <li data-role='drawer-item'><span class='k-icon k-i-star-outline k-i-bookmark-outline'></span><span class='k-item-text' data-id='Favourites'>Favourites</span></li>
+            <li data-role='drawer-item'><span class='k-icon k-i-star k-i-bookmark'></span><span class='k-item-text' data-id='Favourites'>Favourites</span></li>
             <li data-role='drawer-separator'></li>
         </ul>
     </script>

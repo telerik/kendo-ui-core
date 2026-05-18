@@ -47,7 +47,7 @@ If the predefined colors provided by the Kendo UI themes suit your application, 
 Example:
 ```javascript
 $("#rating").kendoRating({
-    itemTemplate: "<i class='k-icon'>#= kendo.ui.icon({ icon: 'star-outline', themeColor: 'success' }) #</i>",
+    itemTemplate: "<i class='k-icon'>#= kendo.ui.icon({ icon: 'star', themeColor: 'success' }) #</i>",
     selectedTemplate: "<i class='k-icon'>#= kendo.ui.icon({ icon: 'star', themeColor: 'warning' }) #</i>",
     hoveredTemplate: "<i class='k-icon'>#= kendo.ui.icon({ icon: 'star', themeColor: 'secondary' }) #</i>"
 });
@@ -101,7 +101,7 @@ Below you will find a runnable example demonstrating both of the approaches:
         max: 6,
         value: 3,
         itemTemplate:
-          "<i class='k-icon'> #= kendo.ui.icon({ icon: 'star-outline', themeColor: 'success' }) #</i>",
+          "<i class='k-icon'> #= kendo.ui.icon({ icon: 'star', themeColor: 'success' }) #</i>",
         selectedTemplate:
           "<i class='k-icon'>#= kendo.ui.icon({ icon: 'star', themeColor: 'warning' }) #</i>",
         hoveredTemplate:

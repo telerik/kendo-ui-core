@@ -435,11 +435,11 @@ How do I set the custom text for each action button in a Kendo UI ActionSheet? C
 
 ### actionButtons.themeColor `String` *(default: 'base')*
 
-Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"inverse"`, and `"none"`. Default value is `"base"`.
 
 
 <div class="meta-api-description">
-How to customize the color of action buttons in Kendo UI ActionSheet? Control and customize the primary color and visual style of action buttons in an action sheet by selecting or setting semantic color variants such as base, primary, secondary, tertiary, info, success, warning, error, dark, light, inverse, or none; configure, adjust, or apply theme colors to style buttons for different tones, statuses, or design schemes, enabling consistent, meaningful color usage that affects the button’s appearance, emphasis, and user interaction feedback.
+How to customize the color of action buttons in Kendo UI ActionSheet? Control and customize the primary color and visual style of action buttons in an action sheet by selecting or setting semantic color variants such as base, primary, secondary, tertiary, info, success, warning, error, inverse, or none; configure, adjust, or apply theme colors to style buttons for different tones, statuses, or design schemes, enabling consistent, meaningful color usage that affects the button’s appearance, emphasis, and user interaction feedback.
 </div>
 
 #### Example
@@ -1199,11 +1199,11 @@ How do I customize the icon styles for action sheet items in Kendo UI? Customize
 
 ### items.iconColor `String`
 
-The icon color. Available options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted` or any hexadecimal value.
+The icon color. Available options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverted` or any hexadecimal value.
 
 
 <div class="meta-api-description">
-How to change the color of icons in an ActionSheet item using Kendo UI for jQuery? Control and customize the color of icons in action sheet items by configuring icon hues using predefined theme tokens like primary, secondary, tertiary, info, success, warning, error, dark, light, inverted, or specify any custom hex color code. Adjust whether icons inherit their color from parent elements or explicitly set them to match branding, UI themes, or accessibility preferences, enabling flexibility in icon appearance for menus, options, or contextual action displays. This setting helps manage icon color schemes for clarity, emphasis, consistency, or visual hierarchy in interactive components.
+How to change the color of icons in an ActionSheet item using Kendo UI for jQuery? Control and customize the color of icons in action sheet items by configuring icon hues using predefined theme tokens like primary, secondary, tertiary, info, success, warning, error, inverted, or specify any custom hex color code. Adjust whether icons inherit their color from parent elements or explicitly set them to match branding, UI themes, or accessibility preferences, enabling flexibility in icon appearance for menus, options, or contextual action displays. This setting helps manage icon color schemes for clarity, emphasis, consistency, or visual hierarchy in interactive components.
 </div>
 
 #### Example

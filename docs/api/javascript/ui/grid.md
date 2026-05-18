@@ -3719,39 +3719,6 @@ How do I enable scrolling in the Kendo UI for jQuery Grid's AI assistant window?
     });
     </script>
 
-### ai.aiAssistantWindow.themeColor `String` *default: ""*
-
-The `themeColor` option controls the color that will be applied to the AI AssistantWindow.
-
-The following values are available for the themeColor:
-
-- `primary`
-- `dark`
-- `light`
-- `none`
-
-
-<div class="meta-api-description">
-How do I customize the accent color of an AI assistant interface in a Kendo UI Grid? Adjust, configure, or set the accent color of an AI assistant interface to customize its visual style or appearance, including options for primary colors, dark mode, light themes, or disabling color accents entirely. This controls the theming or color scheme of an assistant window, enabling developers to tailor UI highlights, mood, or branding consistency through color customization, theming preferences, or user interface accent adjustments. Options to enable or disable color highlights and switch between contrasting color modes allow flexible visual presentation for AI assistant elements within a grid or panel environment.
-</div>
-
-#### Example - set AI AssistantWindow theme color
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-       columns: [{ field: "name" }],
-       dataSource: [{ name: "Jane Doe" }],
-       toolbar: ["aiAssistant"],
-       ai: {
-         aiAssistantWindow: {
-           themeColor: "primary"
-         },
-         service: "https://demos.telerik.com/service/v2/ai/grid/smart-state"
-       }
-    });
-    </script>
-
 ### ai.aiAssistantWindow.title `Object|String|Boolean` *default: "AI Assistant"*
 
 The text in the title bar of the AI AssistantWindow. If set to `false`, the AI AssistantWindow will be displayed without a title bar.

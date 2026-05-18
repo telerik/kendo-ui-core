@@ -31,7 +31,7 @@ Grid for Progress® Kendo UI®
 
 ## Description
 
-I want to change the expand/collapse [SVG icon](/styles-and-layout/sass-themes/svg-icons) in a hierarchy Grid in Kendo UI. The default Kendo UI caret icon needs to be replaced with custom SVG icons, such as `plus-outline` for expand and `minus-outline` for collapse. This requires implementing custom logic in the[`dataBound`](/api/javascript/ui/grid/events/databound), [`detailExpand`](/api/javascript/ui/grid/events/detailexpand), and [`detailCollapse`](/api/javascript/ui/grid/events/detailcollapse) event handlers of the Kendo UI Grid.
+I want to change the expand/collapse [SVG icon](/styles-and-layout/sass-themes/svg-icons) in a hierarchy Grid in Kendo UI. The default Kendo UI caret icon needs to be replaced with custom SVG icons, such as `plus` for expand and `minus` for collapse. This requires implementing custom logic in the[`dataBound`](/api/javascript/ui/grid/events/databound), [`detailExpand`](/api/javascript/ui/grid/events/detailexpand), and [`detailCollapse`](/api/javascript/ui/grid/events/detailcollapse) event handlers of the Kendo UI Grid.
 
 This knowledge base article also answers the following questions:
 - How to replace default icons in Kendo UI Grid hierarchy?
@@ -58,11 +58,11 @@ dataBound: function() {
         cell.prepend("<span class='expand' onclick='expandRow(this)'></span>");
 
         // Hide the default Kendo UI caret icon
-        cell.find(".k-svg-i-caret-alt-right").hide();
+        cell.find(".k-svg-i-chevron-right").hide();
     });
 
-    // Replace the default icon with a custom 'plus-outline' icon for all elements with class 'expand'
-    kendo.ui.icon($(".expand"), { icon: 'plus-outline' });
+    // Replace the default icon with a custom 'plus' icon for all elements with class 'expand'
+    kendo.ui.icon($(".expand"), { icon: 'plus' });
 }
 ```
 
@@ -86,8 +86,8 @@ detailExpand: function(e) {
         button.attr("onclick", "collapseRow(this)");
     });
 
-    // Replace the icon with a 'minus-outline' for all elements with class 'collapse'
-    kendo.ui.icon($(".collapse"), { icon: 'minus-outline' });
+    // Replace the icon with a 'minus' for all elements with class 'collapse'
+    kendo.ui.icon($(".collapse"), { icon: 'minus' });
 }
 ```
 
@@ -111,8 +111,8 @@ detailCollapse: function(e) {
         button.attr("onclick", "expandRow(this)");
     });
 
-    // Replace the icon with a 'plus-outline' for all elements with class 'expand'
-    kendo.ui.icon($(".expand"), { icon: 'plus-outline' });
+    // Replace the icon with a 'plus' for all elements with class 'expand'
+    kendo.ui.icon($(".expand"), { icon: 'plus' });
 }
 ```
 
@@ -142,9 +142,9 @@ For a runnable example, please refer to the next demo.
             this.tbody.find('.k-hierarchy-cell').each(function(_,x){
               x= $(x);
               x.prepend("<span class='expand' onclick='expandRow(this)'></span>");
-              x.find(".k-svg-i-caret-alt-right").hide();
+              x.find(".k-svg-i-chevron-right").hide();
             });
-            kendo.ui.icon($(".expand"), { icon: 'plus-outline' });
+            kendo.ui.icon($(".expand"), { icon: 'plus' });
           },
           detailExpand: function(e) {
             this.tbody.find('.expand').each(function(_,x){
@@ -153,7 +153,7 @@ For a runnable example, please refer to the next demo.
               x.removeClass("expand").addClass("collapse");
               x.attr("onclick","collapsdRow(this)");
             });
-            kendo.ui.icon($(".collapse"), { icon: 'minus-outline' });
+            kendo.ui.icon($(".collapse"), { icon: 'minus' });
           },
           detailCollapse: function(e) {
             this.tbody.find('.collapse').each(function(_,x){
@@ -162,7 +162,7 @@ For a runnable example, please refer to the next demo.
               x.removeClass("collapse").addClass("expand");
               x.attr("onclick","expandRow(this)");
             });
-            kendo.ui.icon($(".expand"), { icon: 'plus-outline' });
+            kendo.ui.icon($(".expand"), { icon: 'plus' });
           },
           columns: [
             {

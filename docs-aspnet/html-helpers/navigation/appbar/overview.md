@@ -47,7 +47,7 @@ The following example showcases a basic configuration of the AppBar that contain
 ```HtmlHelper
     @(Html.Kendo().AppBar()
         .Name("appbar")
-        .ThemeColor(AppBarThemeColor.Light)
+        .ThemeColor(AppBarThemeColor.Primary)
         .Items(items =>
         {
             items.Add().Template("<button class='k-button k-button-primary'>Categories</button>").Type(AppBarItemType.ContentItem);
@@ -75,7 +75,7 @@ The following example showcases a basic configuration of the AppBar that contain
 ```TagHelper
     @addTagHelper *, Kendo.Mvc
 
-    <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Light">
+    <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Primary">
         <items>
             <appbar-item type="AppBarItemType.ContentItem" template="<button class='k-button k-button-primary'>Categories</button>"></appbar-item>
             <appbar-item type="AppBarItemType.Spacer" width="10px"></appbar-item>

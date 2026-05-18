@@ -62,14 +62,14 @@ describe("DropDownButton intialization", function() {
             size: "small",
             rounded: "small",
             fillMode: "outline",
-            themeColor: "dark",
+            themeColor: "secondary",
             items: defaultItems
         });
 
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-dark"));
+        assert.isOk(button.hasClass("k-button-secondary"));
     });
 
     it("DropDownButton renders buttons with correct styling options after setOptions", function() {
@@ -81,13 +81,13 @@ describe("DropDownButton intialization", function() {
             size: "small",
             rounded: "small",
             fillMode: "outline",
-            themeColor: "dark"
+            themeColor: "secondary"
         });
 
         assert.isOk(button.hasClass("k-button-sm"));
         assert.isOk(button.hasClass("k-rounded-sm"));
         assert.isOk(button.hasClass("k-button-outline"));
-        assert.isOk(button.hasClass("k-button-dark"));
+        assert.isOk(button.hasClass("k-button-secondary"));
     });
 
     it("DropDownButton renders default rounded option", function() {

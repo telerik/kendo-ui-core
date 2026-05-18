@@ -11,17 +11,20 @@ Represents the Kendo UI AppBar widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
-### themeColor `String` *(default: 'light')*
+### themeColor `String` *(default: 'inherit')*
 
 Specifies the color of the component. Valid options are
 
 * `inherit`: no coloring will be applied to the appbar. Useful when the appbar needs to blend-in with the surrounding elements.
-* `dark`: applies coloring based on **dark** theme color.
-* `light`: applies coloring based on **light** theme color.
+* `base`: apply coloring based on **base** theme color.
+* `primary`: apply coloring based on **primary** theme color.
+* `secondary`: apply coloring based on **secondary** theme color.
+* `tertiary`: apply coloring based on **tertiary** theme color.
+* `inverse`: apply coloring based on **inverse** theme color.
 
 
 <div class="meta-api-description">
-How do I change the color scheme of my Kendo UI app bar? Adjust the app bar’s color scheme by configuring its theme color to blend seamlessly with the surrounding layout or to explicitly set it to dark or light color themes, enabling control over the appearance with options to inherit parent colors, apply a dark-themed palette for nighttime or high-contrast interfaces, or a light-themed palette suitable for bright, clean designs, facilitating consistent UI theming, color customization, and visual integration across different modes and design requirements.
+How do I change the color scheme of my Kendo UI app bar? Adjust the app bar's color scheme by configuring its theme color to blend seamlessly with the surrounding layout or to explicitly set it to base, primary, secondary, tertiary, or inverse color themes, enabling control over the appearance with options to inherit parent colors or apply a specific themed palette, facilitating consistent UI theming, color customization, and visual integration across different modes and design requirements.
 </div>
 
 #### Example - set color
@@ -33,7 +36,7 @@ How do I change the color scheme of my Kendo UI app bar? Adjust the app bar’s 
                 template: "<span><input /><span>"
             }
         ],
-        themeColor: "dark"
+        themeColor: "primary"
     });
     </script>
 

@@ -26,7 +26,7 @@ The following example demonstrates how to configure the TabStrip items using the
                 <p>Item 1 content.</p>
             </text>);
         items.Add().Text("Item 2")
-        .Icon("user-outline")
+        .Icon("user")
         .Content(@<text>
                 <p>Item 2 content.</p>
             </text>);

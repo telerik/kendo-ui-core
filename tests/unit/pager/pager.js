@@ -433,7 +433,7 @@ describe('pager', function() {
     it("shows prev button", function() {
         let pager = setup({}, { previousNext: true });
 
-        assert.equal(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").length, 1);
+        assert.equal(pager.find(".k-i-chevron-left,.k-svg-i-chevron-left").length, 1);
     });
 
     it("shows first button", function() {
@@ -445,7 +445,7 @@ describe('pager', function() {
     it("shows next button", function() {
         let pager = setup({}, { previousNext: true });
 
-        assert.equal(pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").length, 1);
+        assert.equal(pager.find(".k-i-chevron-right,.k-svg-i-chevron-right").length, 1);
     });
 
     it("shows last button", function() {
@@ -471,7 +471,7 @@ describe('pager', function() {
     it("prev button is disabled on the first page", function() {
         let pager = setup({}, { previousNext: true });
 
-        assert.isOk(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").parent().hasClass("k-disabled"));
+        assert.isOk(pager.find(".k-i-chevron-left,.k-svg-i-chevron-left").parent().hasClass("k-disabled"));
     });
 
     it("prev button is enabled on any page but first", function() {
@@ -480,7 +480,7 @@ describe('pager', function() {
         dataSource.read();
         dataSource.page(2);
 
-        assert.isOk(!pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
+        assert.isOk(!pager.find(".k-i-chevron-left").parent().hasClass("k-disabled"));
     });
 
     it("prev button page data attribute is set to page minus one", function() {
@@ -489,7 +489,7 @@ describe('pager', function() {
         dataSource.read();
         dataSource.page(3);
 
-        assert.equal(pager.find(".k-i-caret-alt-left,.k-svg-i-caret-alt-left").parent().data(kendo.ns + "page"), 2);
+        assert.equal(pager.find(".k-i-chevron-left,.k-svg-i-chevron-left").parent().data(kendo.ns + "page"), 2);
     });
 
     it("next button is disabled on the last page", function() {
@@ -497,14 +497,14 @@ describe('pager', function() {
 
         dataSource.read();
         dataSource.page(5);
-        assert.isOk(pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").parent().hasClass("k-disabled"));
+        assert.isOk(pager.find(".k-i-chevron-right,.k-svg-i-chevron-right").parent().hasClass("k-disabled"));
     });
 
     it("next button is enabled on any page but last", function() {
         let pager = setup({}, { previousNext: true });
 
         dataSource.read();
-        assert.isOk(!pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").parent().hasClass("k-disabled"));
+        assert.isOk(!pager.find(".k-i-chevron-right,.k-svg-i-chevron-right").parent().hasClass("k-disabled"));
     });
 
     it("next button page data attribute is set to page plus one", function() {
@@ -513,7 +513,7 @@ describe('pager', function() {
         dataSource.read();
         dataSource.page(3);
 
-        assert.equal(pager.find(".k-i-caret-alt-right,.k-svg-i-caret-alt-right").parent().data(kendo.ns + "page"), 4);
+        assert.equal(pager.find(".k-i-chevron-right,.k-svg-i-chevron-right").parent().data(kendo.ns + "page"), 4);
     });
 
     it("last button is disabled on the last page", function() {
@@ -571,7 +571,7 @@ describe('pager', function() {
             autoBind: false
         });
 
-        assert.isOk(!pager.find(".k-i-caret-alt-left").parent().hasClass("k-disabled"));
+        assert.isOk(!pager.find(".k-i-chevron-left").parent().hasClass("k-disabled"));
     });
 
     it("next is enabled if the data source is read before pager init", function() {
@@ -588,7 +588,7 @@ describe('pager', function() {
             autoBind: false
         });
 
-        assert.isOk(!pager.find(".k-i-caret-alt-right").parent().hasClass("k-disabled"));
+        assert.isOk(!pager.find(".k-i-chevron-right").parent().hasClass("k-disabled"));
     });
 
     it("last is enabled if the data source is read before pager init", function() {

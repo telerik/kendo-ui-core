@@ -370,13 +370,13 @@ How do I control the stacking order of notifications in Kendo UI for jQuery? Con
 
 ### templates `Array` *(default: [])*
 
-Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are `"info"`, `"success"`, `"warning"` and `"error"`.
+Describes the HTML markup of the different notification types as Kendo UI template strings. The predefined type values are `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`.
 
 *This documentation section assumes that you are familiar with [Kendo UI templates](/framework/templates/overview)*.
 
 
 <div class="meta-api-description">
-How do I customize notification appearance in Kendo UI using templates? Customize notification appearance by defining HTML or custom markup templates for each notification type including info, success, warning, and error messages; configure, set, or override default rendering using template strings, Kendo UI style templates, or component initialization parameters to control how notifications display content, structure, and styling for different message categories, enabling tailored visual feedback, personalized alerts, and dynamic message formatting across notification types.
+How do I customize notification appearance in Kendo UI using templates? Customize notification appearance by defining HTML or custom markup templates for each notification type including base, primary, secondary, tertiary, info, success, warning, error, and inverse messages; configure, set, or override default rendering using template strings, Kendo UI style templates, or component initialization parameters to control how notifications display content, structure, and styling for different message categories, enabling tailored visual feedback, personalized alerts, and dynamic message formatting across notification types.
 </div>
 
 #### Example - define several custom templates
@@ -699,8 +699,8 @@ How do I programmatically show a notification in Kendo UI with custom animation?
 
 ##### type `String`
 
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"`,`"error"` and `"default"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
-If this argument is not supplied, then `"default"` is assumed.
+The notification type. Predefined type values include `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
+If this argument is not supplied, then `"base"` is assumed.
 
 ##### safe `Boolean`
 
@@ -767,10 +767,12 @@ Controls the HTML encoding. When the value is `true` the content is HTML-encoded
 
     var notification = $("#notification").kendoNotification().data("kendoNotification");
 
+    notification.show("Message", "primary");   // Primary notification
     notification.show("Message", "info");      // Blue info notification
     notification.show("Message", "success");   // Green success notification
     notification.show("Message", "warning");   // Yellow warning notification
-    notification.show("Message");              // No type = defaults to "default"
+    notification.show("Message", "inverse");   // Inverse notification
+    notification.show("Message");               // No type = defaults to "base"
     </script>
 
 
@@ -795,8 +797,8 @@ How do I prevent XSS attacks when displaying plain-text notifications in Kendo U
 
 ##### type `String`
 
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
-If this argument is not supplied, then `"info"` is assumed.
+The notification type. Predefined type values include `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"` and `"inverse"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
+If this argument is not supplied, then `"base"` is assumed.
 
 #### Example - Use the showText method to display a string
 

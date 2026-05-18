@@ -30,12 +30,12 @@ describe("menu api", function() {
         Mocha.fixture.append(
             '    <ul id="menu" class="k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
             '        <li class="k-item" style=""><span class="k-link">ASP.NET MVC<span' +
-            '                class="k-icon k-i-caret-alt-down"></span></span>' +
+            '                class="k-icon k-i-chevron-down"></span></span>' +
             '            <ul class="k-menu-group">' +
             '                <li class="k-item"><span class="k-link">Grid</span>' +
             '                </li>' +
             '                <li class="k-item"><span class="k-link">Menu<span' +
-            '                class="k-icon k-i-caret-alt-right"></span></span>' +
+            '                class="k-icon k-i-chevron-right"></span></span>' +
             '                    <ul class="k-menu-group">' +
             '                        <li class="k-item"><span class="k-link">Grid</span>' +
             '                        </li>' +
@@ -49,7 +49,7 @@ describe("menu api", function() {
             '                <li class="k-item"><span class="k-link">TabStrip</span></li>' +
             '            </ul>' +
             '        </li><li class="k-item"><span class="k-link">Silverlight<span' +
-            '                class="k-icon k-i-caret-alt-down"></span></span>' +
+            '                class="k-icon k-i-chevron-down"></span></span>' +
             '            <ul class="k-menu-group">' +
             '                <li class="k-item"><span class="k-link">GridView</span>' +
             '                </li>' +
@@ -61,7 +61,7 @@ describe("menu api", function() {
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
             '        </li><li class="k-item"><span class="k-link">ASP.NET AJAX<span' +
-            '                class="k-icon k-i-caret-alt-down"></span></span>' +
+            '                class="k-icon k-i-chevron-down"></span></span>' +
             '            <ul class="k-menu-group">' +
             '                <li class="k-item"><span class="k-link">Grid</span></li>' +
             '                <li class="k-item"><span class="k-link">Editor</span>' +
@@ -71,7 +71,7 @@ describe("menu api", function() {
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
             '        </li><li class="k-item"><a href="#Menu-4" class="k-link">OpenAccess ORM<span' +
-            '                class="k-icon k-i-caret-alt-down"></span></a>' +
+            '                class="k-icon k-i-chevron-down"></span></a>' +
             '            <ul class="k-menu-group">' +
             '                <li class="k-item">' +
             '                    <div id="Menu-4" class="k-content">' +
@@ -86,7 +86,7 @@ describe("menu api", function() {
             '            </ul>' +
             '        </li><li class="k-item"><span class="k-link">Reporting</span></li><li class="k-item"><span class="k-link">Sitefinity ASP.NET CMS</span>' +
             '        </li><li style="border-right: 0;" class="k-item"><span class="k-link">Other products<span' +
-            '                class="k-icon k-i-caret-alt-down"></span></span>' +
+            '                class="k-icon k-i-chevron-down"></span></span>' +
             '            <ul class="k-menu-group">' +
             '                <li class="k-item"><span class="k-link">Web Testing Tools</span>' +
             '                </li>' +

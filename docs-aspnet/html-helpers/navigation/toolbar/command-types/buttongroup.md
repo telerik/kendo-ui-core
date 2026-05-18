@@ -21,8 +21,8 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar co
         {
             items.Add().Type(CommandType.ButtonGroup).Id("btnGroup").Buttons(buttons =>
             {
-                buttons.Add().Text("Prev").Icon("caret-alt-left");
-                buttons.Add().Text("Next").Icon("caret-alt-right");
+                buttons.Add().Text("Prev").Icon("chevron-left");
+                buttons.Add().Text("Next").Icon("chevron-right");
             });
 
         })
@@ -34,8 +34,8 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar co
         <toolbar-items>
             <item type="CommandType.ButtonGroup" id="btnGroup">
                 <buttons>
-                    <toolbar-button text="Prev" icon="caret-alt-left"></toolbar-button>
-                    <toolbar-button text="Next" icon="caret-alt-right"></toolbar-button>
+                    <toolbar-button text="Prev" icon="chevron-left"></toolbar-button>
+                    <toolbar-button text="Next" icon="chevron-right"></toolbar-button>
                 </buttons>
             </item>
         </toolbar-items>

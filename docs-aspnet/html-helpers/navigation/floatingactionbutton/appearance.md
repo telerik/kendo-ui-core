@@ -75,17 +75,10 @@ The `FillMode()` method specifies how the color is applied to the component. The
 
 The `ThemeColor` configuration provides a variety of colors that can be applied to the component. The available options are:
 
+- `Base`
 - `Primary`
 - `Secondary`
 - `Tertiary`
-- `Info`
-- `Success`
-- `Warning`
-- `Error`
-- `Dark`
-- `Light`
-- `Inverse`
-- `None`
 
 The default `ThemeColor` is `Primary`.
 

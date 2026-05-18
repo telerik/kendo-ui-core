@@ -65,15 +65,9 @@ The Loader allows you to specify predefined theme colors.
 The available `ThemeColor` values are:
 
 * `Primary`&mdash;Applies coloring based on primary theme color.
+* `Base`&mdash;Applies coloring based on base theme color.
 * `Secondary`&mdash;Applies coloring based on secondary theme color.
 * `Tertiary`&mdash; Applies coloring based on tertiary theme color.
-* `Info`&mdash;Applies coloring based on info theme color.
-* `Success`&mdash; Applies coloring based on success theme color.
-* `Warning`&mdash; Applies coloring based on warning theme color.
-* `Error`&mdash; Applies coloring based on error theme color.
-* `Dark`&mdash; Applies coloring based on dark theme color.
-* `Light`&mdash; Applies coloring based on light theme color.
-* `Inverse`&mdash; Applies coloring based on inverted theme color.
 
 > When not explicitly set, the applied theme controls the default theme color.
 
@@ -92,41 +86,6 @@ The available `ThemeColor` values are:
         .Name("Tertiary")
         .ThemeColor(LoaderThemeColor.Tertiary)
     )
-
-    @(Html.Kendo().Loader()
-        .Name("Info")
-        .ThemeColor(LoaderThemeColor.Info)
-    )
-
-    @(Html.Kendo().Loader()
-        .Name("Success")
-        .ThemeColor(LoaderThemeColor.Success)
-    )
-
-    @(Html.Kendo().Loader()
-        .Name("Warning")
-        .ThemeColor(LoaderThemeColor.Warning)
-    )
-
-    @(Html.Kendo().Loader()
-        .Name("Error")
-        .ThemeColor(LoaderThemeColor.Error)
-    )
-
-    @(Html.Kendo().Loader()
-        .Name("Dark")
-        .ThemeColor(LoaderThemeColor.Dark)
-    )
-
-    @(Html.Kendo().Loader()
-        .Name("Light")
-        .ThemeColor(LoaderThemeColor.Light)
-    )
-
-    @(Html.Kendo().Loader()
-        .Name("Inverse")
-        .ThemeColor(LoaderThemeColor.Inverse)
-    )
 ```
 {% if site.core %}
 ```TagHelper
@@ -139,27 +98,6 @@ The available `ThemeColor` values are:
     </kendo-loader>
 
     <kendo-loader name="Tertiary" theme-color="LoaderThemeColor.Tertiary">
-    </kendo-loader>
-
-    <kendo-loader name="Info" theme-color="LoaderThemeColor.Info">
-    </kendo-loader>
-
-    <kendo-loader name="Success" theme-color="LoaderThemeColor.Success">
-    </kendo-loader>
-
-    <kendo-loader name="Warning" theme-color="LoaderThemeColor.Warning">
-    </kendo-loader>
-
-    <kendo-loader name="Error" theme-color="LoaderThemeColor.Error">
-    </kendo-loader>
-
-    <kendo-loader name="Dark" theme-color="LoaderThemeColor.Dark">
-    </kendo-loader>
-
-    <kendo-loader name="Light" theme-color="LoaderThemeColor.Light">
-    </kendo-loader>
-
-    <kendo-loader name="Inverse" theme-color="LoaderThemeColor.Inverse">
     </kendo-loader>
 ```
 {% endif %}

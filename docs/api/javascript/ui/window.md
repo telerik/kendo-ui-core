@@ -754,32 +754,6 @@ How do I enable scrolling in a Kendo UI for jQuery Window widget? Control whethe
 	    });
     </script>
 
-### themeColor `String` *default: ""*
-
-The `themeColor` option controls the color that will be applied.
-
-The following values are available for the themeColor:
-
-- `primary`
-- `dark`
-- `light`
-- `none`
-
-
-<div class="meta-api-description">
-How do I change the accent color for my Kendo UI window? Configure the accent color or color scheme for a window interface including options for primary, dark, light, or no color styling, enabling control over the visual theme, appearance, color accents, or style applied during component initialization to match branding, UI preferences, or light and dark mode settings.
-</div>
-
-#### Example
-
-    <div id="dialog"></div>
-    <script>
-    $("#dialog").kendoWindow({
-      actions: ["Maximize"],
-      title: "Customer details"
-    });
-    </script>
-
 ### title `Object|String|Boolean` *default: ""*
 
 The text in the title bar of the Window. If set to `false`, the Window will be displayed without a title bar.

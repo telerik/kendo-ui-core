@@ -550,11 +550,11 @@ How do I set the label on a Kendo UI Floating Action Button? Configure or set th
 
 ### themeColor `String` *(default: 'secondary')*
 
-Specifies the theme color of the FloatingActionButton. Valid options are `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"` and `"none"`.
+Specifies the theme color of the FloatingActionButton. Valid options are `"base"`, `"primary"`, `"secondary"`, and `"tertiary"`.
 
 
 <div class="meta-api-description">
-How do I change the color of my Kendo UI Floating Action Button? Customize the circular action button’s appearance by setting its color scheme to align with your application’s design system, choosing from common theme palettes like primary, secondary, tertiary, info, success, warning, error, dark, light, inverse, or opting for no color styling. Configure, apply, or control the floating action button’s visual emphasis through predefined semantic colors that reflect status, importance, or branding, enabling consistent UI theming and styling adaptability across light and dark modes or contrasting backgrounds. Adjust the accent or highlight color of the floating button to communicate context such as confirmation, alerts, or neutral states, ensuring harmony with your app’s color theme and UX guidelines.
+How do I change the color of my Kendo UI Floating Action Button? Customize the circular action button's appearance by setting its color scheme to align with your application's design system, choosing from common theme palettes like base, primary, secondary, or tertiary. Configure, apply, or control the floating action button's visual emphasis through predefined semantic colors that reflect status, importance, or branding, enabling consistent UI theming and styling adaptability across different backgrounds. Adjust the accent or highlight color of the floating button to communicate context such as confirmation, alerts, or neutral states, ensuring harmony with your app's color theme and UX guidelines.
 </div>
 
 #### Example

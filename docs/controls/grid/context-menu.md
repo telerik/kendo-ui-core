@@ -183,8 +183,8 @@ The example below demonstrates how the pages in the Grid can be changed using cu
 			$("#grid").kendoGrid({
 				contextMenu: {
 					body: [
-						{ name: "MyCustomPrevPage", text: "My Custom Previous Page", icon: "caret-alt-left", command: "CustomPrevCommand" },
-						{ name: "MyCustomNextPage", text: "My Custom Next Page", icon: "caret-alt-right", command: "CustomNextCommand" }						
+						{ name: "MyCustomPrevPage", text: "My Custom Previous Page", icon: "chevron-left", command: "CustomPrevCommand" },
+						{ name: "MyCustomNextPage", text: "My Custom Next Page", icon: "chevron-right", command: "CustomNextCommand" }						
 					]
 				},
 				editable: false,

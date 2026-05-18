@@ -130,6 +130,9 @@ import "./kendo.button.js";
             prop: "fillMode",
             values: kendo.cssProperties.fillModeValues.concat(["link"])
         }, {
+            prop: "themeColor",
+            values: ['base', 'primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error', 'inverse']
+        }, {
             prop: "rounded",
             values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
         }]);

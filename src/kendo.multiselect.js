@@ -447,7 +447,7 @@ export const __meta__ = {
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var target = $(e.target);
-            var closeButton = target.closest(".k-input-button, .k-chip").children("[class*='-i-caret-alt-down']")[0];
+            var closeButton = target.closest(".k-input-button, .k-chip").children("[class*='-i-chevron-down']")[0];
             var removeButton = target.closest("[class*='-i-x']")[0];
 
             if (notInput && !(removeButton && kendo.support.mobileOS) && e.cancelable) {
@@ -1680,7 +1680,7 @@ export const __meta__ = {
                             "aria-label": that.options.messages.deleteTag,
                             title: that.options.messages.deleteTag
                         },
-                        icon: !isMultiple ? "caret-alt-down" : "",
+                        icon: !isMultiple ? "chevron-down" : "",
                         iconAttr: {
                             unselectable: "on",
                             "aria-hidden": true,
@@ -1707,7 +1707,7 @@ export const __meta__ = {
         _arrowButton: function() {
             var arrowTitle = encode(this.options.messages.downArrow),
                 arrow = $(html.renderButton('<button type="button" aria-label="' + arrowTitle + '" class="k-input-button"></button>', $.extend({}, this.options, {
-                    icon: "caret-alt-down",
+                    icon: "chevron-down",
                     rounded: null
                 })));
 

@@ -27,8 +27,8 @@ The following example demonstrates how to define the SpeechToTextButton componen
 @(Html.Kendo().SpeechToTextButton()
     .Name("speechButton")
     .IntegrationMode(IntegrationMode.WebSpeech)
-    .Icon("microphone-outline")
-    .StopIcon("stop-sm")
+    .Icon("microphone")
+    .StopIcon("stop")
 )
 ```
 {% if site.core %}
@@ -37,8 +37,8 @@ The following example demonstrates how to define the SpeechToTextButton componen
 
 <kendo-speechtotextbutton name="speechButton"
     integration-mode="IntegrationMode.WebSpeech"
-    icon="microphone-outline"
-    stop-icon="stop-sm">
+    icon="microphone"
+    stop-icon="stop">
 </kendo-speechtotextbutton>
 ```
 {% endif %}
@@ -102,8 +102,8 @@ The following example demonstrates a basic integration of the SpeechToTextButton
 
 The SpeechToTextButton component operates in three distinct states that reflect the current status of the speech recognition process:
 
-* Inactive State&mdash;The state before speech recognition begins. The default button's icon is `microphone-outline`.
-* Active State (listening)&mdash;Indicates that speech recognition is currently in progress. The button's icon changes to the default `stop-sm` icon.
+* Inactive State&mdash;The state before speech recognition begins. The default button's icon is `microphone`.
+* Active State (listening)&mdash;Indicates that speech recognition is currently in progress. The button's icon changes to the default `stop` icon.
 * Error State&mdash;Triggers when speech recognition encounters an error or when the Web Speech API is not supported by the browser.
 
 ## Browser Support

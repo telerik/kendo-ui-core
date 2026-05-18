@@ -95,7 +95,7 @@ import { stub } from '../../helpers/unit/stub.js';
             assert.isOk(button.is("button"));
             assert.isOk(button.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
-            assert.isOk(arrow.is(".k-icon.k-i-caret-alt-down, .k-svg-icon.k-svg-i-caret-alt-down"));
+            assert.isOk(arrow.is(".k-icon.k-i-chevron-down, .k-svg-icon.k-svg-i-chevron-down"));
         });
 
         it("text input should keep the visible input empty on init", function() {
@@ -1128,7 +1128,7 @@ import { stub } from '../../helpers/unit/stub.js';
             combobox.dataSource.bind("change", function() {
                 assert.isOk(false, "dataSource should not be read");
             });
-            combobox.wrapper.find(".k-i-caret-alt-down, .k-svg-i-caret-alt-down").click();
+            combobox.wrapper.find(".k-i-chevron-down, .k-svg-i-chevron-down").click();
 
             assert.isOk(combobox.popup.visible());
         });
@@ -1142,7 +1142,7 @@ import { stub } from '../../helpers/unit/stub.js';
             combobox.dataSource.bind("change", function() {
                 assert.isOk(false, "dataSource should not be read");
             });
-            combobox.wrapper.find(".k-i-caret-alt-down, .k-svg-i-caret-alt-down").click();
+            combobox.wrapper.find(".k-i-chevron-down, .k-svg-i-chevron-down").click();
 
             assert.isOk(combobox.popup.visible());
         });

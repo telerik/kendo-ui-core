@@ -147,7 +147,7 @@ How to set custom CSS classes for dialog action buttons in Kendo UI? Customize t
 
 ### actions.themeColor `String` *(default: 'secondary')*
 
-Controls the main color applied to the action button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `"none"`. Default value is `"base"`.
+Controls the main color applied to the action button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"inverse"`, and `"none"`. Default value is `"base"`.
 
 <div class="meta-api-description">
 How do I change the color scheme of dialog action buttons in Kendo UI? Customize, configure, or set the color theme for action buttons within dialogs by selecting from predefined theme colors such as primary, secondary, error, success, warning, info, tertiary, base, dark, light, inverse, or none to match branding or indicate button purpose; control button appearance by applying semantic colors, adjusting visual prominence, highlighting destructive actions with error themes, emphasizing confirmations with primary or success colors, managing button color variants for consistent UI design, and tailoring dialog button styling to communicate action importance or context through thematic color choices.
@@ -768,38 +768,6 @@ How to prevent page scrolling when a Kendo UI modal dialog is open? Control disa
           preventScroll: true
       }
     });
-    </script>
-
-### themeColor `String` *default: ""*
-
-The `themeColor` option controls the color that will be applied.
-
-The following values are available for the themeColor:
-
-- `primary`
-- `dark`
-- `light`
-- `none`
-
-
-<div class="meta-api-description">
-How do I customize the color scheme of a Kendo UI dialog box? Customize the color scheme or accent of dialog components by selecting or configuring theme colors such as primary, dark, light, or no accent; control the visual style, appearance, or color palette of modal windows, alert boxes, popups, or user interface dialogs by enabling or setting predefined color themes and adjusting the component’s look to match application branding or design preferences.
-</div>
-
-#### Example
-
-    <div id="dialog"></div>
-    <script>
-      $("#dialog").kendoDialog({
-        themeColor: "dark",
-        content:"This is a dark-themed Kendo Dialog",
-        actions: [
-          {
-            text: "OK",
-          },
-        ],
-        title: "Customer details",
-      });
     </script>
 
 ### title `String|Boolean` *default: ""*

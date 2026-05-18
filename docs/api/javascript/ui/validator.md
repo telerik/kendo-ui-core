@@ -49,6 +49,41 @@ How to customize error message layout in Kendo UI Validator? Customize validatio
     </script>
 
 
+### messageBoxThemeColor `String` *(default: "error")*
+
+Specifies the theme color applied to the validation summary message box.
+
+The supported values are:
+
+* `base`
+* `primary`
+* `secondary`
+* `tertiary`
+* `info`
+* `success`
+* `warning`
+* `error`
+* `inverse`
+
+<div class="meta-api-description">
+How do I change the color of the Kendo UI Validator summary message box? Set or configure the visual color theme of the validation summary container by assigning a theme color value that controls the appearance of the message box displaying grouped validation errors, enabling customization of the summary feedback color to match different severity levels or UI design requirements such as error, warning, info, or success states, allowing consistent color-coded presentation of form validation results and error summaries.
+</div>
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <input type="email" name="userEmail" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+    $("#myform").kendoValidator({
+        validationSummary: true,
+        messageBoxThemeColor: "warning"
+    });
+    </script>
+
 ### messages `Object`
 
 Set of messages (either strings or functions) which will be shown when given validation rule fails.

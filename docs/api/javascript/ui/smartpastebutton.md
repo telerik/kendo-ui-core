@@ -137,7 +137,7 @@ How do I adjust the corner rounding of a Kendo UI SmartPasteButton? Control the 
 
 ### size `String` *(default: "medium")*
 
-Sets a value controlling the size of the SmartPasteButton. Valid values are `"small"`, `"medium"`, and `"large"`.
+Sets a value controlling the size of the SmartPasteButton. Valid values are `"xsmall"`, `"small"`, `"medium"`, and `"large"`.
 
 <div class="meta-api-description">
 How do I change the size of a Kendo UI SmartPasteButton? Control the button's dimensions, padding, and overall visual scale by selecting from predefined size options, enabling customization of button proportions to fit different layouts, ensuring proper visual hierarchy, matching design specifications, and maintaining consistency with other form elements or UI components through standardized sizing options.

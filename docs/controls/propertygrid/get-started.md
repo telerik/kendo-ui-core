@@ -21,7 +21,7 @@ After the completion of this guide, you will be able to achieve the following en
         var items = [
 		    	{ field: "size", group: "Kendo UI/Telerik", editor: "DropDownList", editorOptions: { dataSource: ["small", "medium", "large", "none"] }, description: 'Controls     the overall physical size of a button. Default value is "medium".' },
 		    	{ field: "fillMode", group: "Kendo UI/Telerik", editor: "DropDownList", editorOptions: { dataSource: ["solid", "outline", "flat", "link", "clear", "none"] },     description: 'Controls how the color is applied to the button. Default value is "solid".' },
-		    	{ field: "themeColor", group: "Kendo UI/Telerik", editor: "DropDownList", editorOptions: { dataSource: ["base", "primary", "secondary", "tertiart", "info",     "warning", "success", "error", "dark", "light", "inverse", "none"] }, description: 'Controls the main color applied to the button.' },			
+		    	{ field: "themeColor", group: "Kendo UI/Telerik", editor: "DropDownList", editorOptions: { dataSource: ["base", "primary", "secondary", "tertiary", "info",     "warning", "success", "error", "inverse", "none"] }, description: 'Controls the main color applied to the button.' },			
 		    	{
 		    		field: "font",
 		    		group: "HTML",

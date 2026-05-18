@@ -337,7 +337,9 @@ How do I customize attachment rendering in Kendo UI Chat? Override the default a
 
 ### autoBind `Boolean` _(default: true)_
 
-Controls whether the Chat will automatically fetch data from the data source when initialized. When set to false, you must manually call the data source's fetch() method.
+Controls whether the Chat will automatically fetch data from the data source when initialized.
+
+When [`scrollMode`](#configuration-scrollMode) is set to `"endless"` and the [`dataSource`](#configuration-dataSource) uses `serverPaging`, `autoBind: false` is not supported. Remote endless mode always starts with a Chat-managed latest-window request, and manual `dataSource.read()` and `dataSource.fetch()` calls are not supported for that mode.
 
 <div class="meta-api-description">
 How to configure automatic data loading for Kendo UI chat messages? Configure automatic or manual data loading and binding for chat message retrieval by enabling or disabling the initial fetch from the data source upon component setup, allowing control over when messages are loaded, whether to preload conversations automatically, manage deferred loading scenarios, trigger manual data fetches to populate chat content, or preconfigure the data source before binding, useful for optimizing data flow, controlling network requests, and customizing message synchronization behavior in chat interfaces.
@@ -366,13 +368,16 @@ How to configure automatic data loading for Kendo UI chat messages? Configure au
         }
     ];
 
+    let dataSource = new kendo.data.DataSource({
+        data: messagesData
+    });
+
     let chat = $("#chat").kendoChat({
         autoBind: false,
         authorId: "user1",
-        dataSource: messagesData
+        dataSource: dataSource
     }).data("kendoChat");
 
-    // Manually fetch data later
     setTimeout(function() {
         chat.dataSource.fetch();
     }, 2000);
@@ -710,6 +715,238 @@ How to configure data sources for dynamic message loading in Kendo UI Chat? Conf
     $("#chat").kendoChat({
         authorId: "user2",
         dataSource: messagesData
+    });
+    </script>
+
+### pinnedMessages `Array`
+
+Provides a stable root-level collection that the Chat can use for pinned-message banners when the current endless-scroll window does not contain the pinned target.
+
+This option is most useful with [`scrollMode`](#configuration-scrollMode) set to `"endless"` and a server-paged [`dataSource`](#configuration-dataSource).
+
+The Chat uses the last item in the `pinnedMessages` array as the active pinned banner. Each item can be a full message object or a partial object, but it must contain enough data to identify the target and render the pinned banner.
+
+If the pinned target is not part of the current remote window, the Chat can still render the banner from `pinnedMessages` while using the endless endpoint to load the target batch when the banner is clicked.
+
+<div class="meta-api-description">
+How do I provide pinned message data for Kendo UI Chat endless scrolling? Supply auxiliary pinned messages for pinned banners when the current endless-scroll batch does not contain the pinned item and keep remote pinned history available so the Chat can render pinned previews and navigate to referenced history.
+</div>
+
+#### Example - provide auxiliary pinned messages for endless scrolling
+
+```html
+        <div id="chat"></div>
+        <script>
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "/api/chat/messages",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "data",
+                    total: "total"
+                },
+                serverPaging: true,
+                pageSize: 10
+            });
+
+            $("#chat").kendoChat({
+                authorId: "customer",
+                dataSource: dataSource,
+                height: 520,
+                scrollMode: "endless",
+                pinnedMessages: [
+                    {
+                        id: 7,
+                        authorName: "Warehouse Support",
+                        text: "Order 98145 was packed and moved to the outbound lane."
+                    },
+                    {
+                        id: 12,
+                        authorName: "Warehouse Support",
+                        text: "Order 98145 left the regional warehouse at 10:14 AM and is scheduled for next-day delivery.",
+                        isPinned: true
+                    }
+                ]
+            });
+        </script>
+```
+
+### pinnedMessages.id `String`
+
+The unique identifier of the message.
+
+### pinnedMessages.text `String`
+
+The text of the message.
+
+### pinnedMessages.authorId `String`
+
+The author's unique identifier.
+
+### pinnedMessages.authorName `String`
+
+The author's name.
+
+### pinnedMessages.authorImageUrl `String`
+
+The author's image.
+
+### pinnedMessages.authorImageAltText `String`
+
+The alternative text that will be displayed if no image is present.
+
+### pinnedMessages.isPinned `Boolean`
+
+The pin mode of the message.
+
+### pinnedMessages.isDeleted `Boolean`
+
+Checks if the message is deleted.
+
+### pinnedMessages.isOwnMessage `Boolean`
+
+Checks Whether this message belongs to the current user.
+
+### scrollMode `String` _(default: "scrollable")_
+
+Controls how the Chat renders long conversations. The supported values are:
+
+- `"scrollable"` - Renders the full message list.
+- `"endless"` - Initially renders only the latest effective `dataSource.pageSize()` window. Scrolling near the top loads older messages, and scrolling near the bottom while a historical batch is active loads newer messages.
+
+With local data, the Chat uses the bound DataSource page size for the initial latest window and for each adjacent history load. If the bound DataSource does not expose a valid page size, the Chat seeds the DataSource with the default endless batch size of `20` before the first endless load. With a server-paged data source, remote endless mode uses a Chat-specific server contract:
+
+* The startup latest request sends `pageSize` and `intent: "latest"` and omits `startIndex` and `endIndex`.
+* Older and newer requests send explicit `startIndex`, `endIndex`, and `pageSize` values, where `startIndex` is zero-based and inclusive and `endIndex` is exclusive.
+* Jump requests send `targetMessageId` and `pageSize` without explicit `startIndex` and `endIndex`, and the server chooses the returned frame.
+* Default DataSource paging parameters such as `page`, `skip`, and `take` may still appear on the wire and must be ignored by the endless endpoint.
+
+> Warning: Every remote endless response must return `total`, `startIndex`, and `endIndex`. The returned item count must equal `endIndex - startIndex`, and the latest window is the one where `endIndex === total`.
+
+Off-batch pinned banners can use [`pinnedMessages`](#configuration-pinnedMessages). Off-batch reply previews require [`referenceResolver`](#configuration-referenceResolver).
+
+In remote endless mode (`scrollMode: "endless"` with a server-paged [`dataSource`](#configuration-dataSource)), `autoBind: false`, manual `dataSource.read()`, and manual `dataSource.fetch()` are not supported.
+
+To use endless scrolling, set `scrollMode` to `"endless"` and set a fixed [`height`](#configuration-height) on the Chat.
+
+<div class="meta-api-description">
+How do I enable endless scrolling in Kendo UI Chat for long conversations? Configure chat history to render the latest batch first, load older messages while scrolling upward, load newer messages when browsing back toward the newest conversation state, and keep large chat histories lightweight without rendering the full conversation at once for both local and server-paged data sources.
+</div>
+
+#### Example - enable endless scrolling for a long conversation
+
+    <div id="chat"></div>
+    <script>
+    var messages = [];
+
+    for (var i = 1; i <= 36; i++) {
+        var isCustomer = i % 2 === 0;
+
+        messages.push({
+            id: i,
+            authorId: isCustomer ? "customer" : "agent",
+            authorName: isCustomer ? "Taylor Reed" : "Support Desk",
+            authorImageUrl: isCustomer ? "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg" : "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            text: isCustomer ? "I am reviewing order update " + i + "." : "Support timeline update " + i + " is ready.",
+            timestamp: new Date(2026, 0, 10, 8, i)
+        });
+    }
+
+    var dataSource = new kendo.data.DataSource({
+        data: messages,
+        pageSize: 10
+    });
+
+    $("#chat").kendoChat({
+        authorId: "customer",
+        dataSource: dataSource,
+        height: 500,
+        scrollMode: "endless"
+    });
+    </script>
+
+### pageSize `Number` _(default: 20)_
+
+Documents the default endless batch size.
+
+When [`scrollMode`](#configuration-scrollMode) is set to `"endless"`, the effective batch size comes from `dataSource.pageSize()` for the initial latest window, older/newer adjacent loads, and jump requests. Configure the bound DataSource page size for endless mode instead of relying on a separate Chat range contract, because a root Chat `pageSize` value does not override the bound DataSource page size.
+
+If the bound DataSource does not declare a valid page size, the Chat seeds the DataSource with the default endless batch size of `20` before the first endless load.
+
+<div class="meta-api-description">
+How can I control how many messages are loaded at a time in Kendo UI Chat endless scrolling? Set the batch size for the initial chat window, older and newer history loads, long conversation rendering windows, and server-paged message requests so each endless-scroll step loads a specific number of messages while keeping the rendered range aligned with the remote response.
+</div>
+
+#### Example - configure the endless scrolling batch size
+
+    <div id="chat"></div>
+    <script>
+    var messages = [];
+
+    for (var i = 1; i <= 30; i++) {
+        var isCustomer = i % 3 === 0;
+
+        messages.push({
+            id: i,
+            authorId: isCustomer ? "customer" : "dispatcher",
+            authorName: isCustomer ? "Mila Chen" : "Dispatch Team",
+            authorImageUrl: isCustomer ? "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg" : "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            text: isCustomer ? "Please confirm delivery checkpoint " + i + "." : "Delivery checkpoint " + i + " was recorded for shipment 44018.",
+            timestamp: new Date(2026, 0, 11, 10, i)
+        });
+    }
+
+    var dataSource = new kendo.data.DataSource({
+        data: messages,
+        pageSize: 8
+    });
+
+    $("#chat").kendoChat({
+        authorId: "customer",
+        dataSource: dataSource,
+        height: 480,
+        scrollMode: "endless"
+    });
+    </script>
+
+### endlessScrollDebounceDelay `Number` _(default: 150)_
+
+Specifies the delay in milliseconds before the Chat loads older or newer messages after the user reaches an endless-scroll edge. The delay applies only to endless edge-trigger loading and does not affect the scroll-to-bottom button behavior or separator updates.
+
+<div class="meta-api-description">
+How do I debounce endless scrolling requests in Kendo UI Chat? Configure a delay before older or newer history loads start when the user reaches the top or bottom edge in endless mode, control chat endless-scroll request timing, reduce rapid edge-triggered loading, tune delayed history fetching for long conversations, and set the wait time before endless history batches are requested.
+</div>
+
+#### Example - configure endless scroll load debounce
+
+    <div id="chat"></div>
+    <script>
+    var messages = [];
+
+    for (var i = 1; i <= 40; i++) {
+        messages.push({
+            id: i,
+            authorId: i % 2 === 0 ? "user1" : "user2",
+            authorName: i % 2 === 0 ? "Nina" : "Sam",
+            text: "Message " + i,
+            timestamp: new Date(2026, 0, 12, 9, i)
+        });
+    }
+
+    var dataSource = new kendo.data.DataSource({
+        data: messages,
+        pageSize: 10
+    });
+
+    $("#chat").kendoChat({
+        authorId: "user1",
+        dataSource: dataSource,
+        height: 480,
+        scrollMode: "endless",
+        endlessScrollDebounceDelay: 250
     });
     </script>
 
@@ -2852,7 +3089,11 @@ How do I show a custom empty state or placeholder when there are no messages in 
 
 ### scrollToBottomButton `Boolean` _(default: true)_
 
-Shows or hides the scroll-to-bottom button that appears when the user scrolls up in the message list.
+Shows or hides the floating scroll-to-bottom button that appears when the user moves away from the latest messages. In endless scrolling mode, the button is also used to return to the latest rendered batch before scrolling to its bottom.
+
+<div class="meta-api-description">
+How do I show or hide the floating scroll-to-bottom button in Kendo UI Chat? Configure the chat recovery button that appears when users move away from the latest messages, control whether the jump-to-latest button is visible, and manage how users return from historical endless-scroll batches to the newest conversation state.
+</div>
 
 #### Example
 
@@ -3160,6 +3401,68 @@ Defines the name identifier for the context menu action.
 ### receiverMessageSettings.messageActions.text `String`
 
 Defines the display text for the context menu action.
+
+### referenceResolver `Function`
+
+Provides the resolver that the Chat uses when a remote endless batch contains reply references to messages that are outside the current loaded window.
+
+This option is required for off-batch reply previews in remote endless mode. The Chat calls the resolver with a single options object that contains:
+
+* `value` - `Array<String|Number>` - The unique referenced ids that must be resolved.
+* `success` - `Function` - Call this function with an array of resolved items.
+* `error` - `Function` - Call this function with the resolver error.
+
+The Chat matches resolver results by `id`, not by returned order. Each resolved item can be a full message object or a partial object, but it must include `id`, `authorId`, and enough preview data to render the reply reference such as `text`, non-empty `files`, or `isDeleted: true`. If any requested id is missing from the success result, or if `error` is called, the incoming remote batch fails.
+
+<div class="meta-api-description">
+How do I resolve reply previews for remote endless scrolling in Kendo UI Chat? Configure a resolver for off-screen reply references, fetch missing referenced messages by id before rendering a remote endless batch, return lightweight or full message objects for reply previews, and handle missing reference data or resolver failures when chat history is loaded in server-backed windows.
+</div>
+
+#### Example - resolve off-batch reply previews for remote endless scrolling
+
+```html
+        <div id="chat"></div>
+        <script>
+            var archiveById = {
+                12: {
+                    id: 12,
+                    authorId: "warehouse-support",
+                    authorName: "Warehouse Support",
+                    text: "Order 98145 left the regional warehouse at 10:14 AM and is scheduled for next-day delivery.",
+                    timestamp: new Date(2026, 0, 5, 10, 14)
+                }
+            };
+
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "/api/chat/messages",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "data",
+                    total: "total"
+                },
+                serverPaging: true,
+                pageSize: 12
+            });
+
+            $("#chat").kendoChat({
+                authorId: "customer",
+                dataSource: dataSource,
+                height: 520,
+                scrollMode: "endless",
+                referenceResolver: function(options) {
+                    var resolvedItems = options.value.map(function(id) {
+                        return archiveById[id];
+                    }).filter(Boolean);
+
+                    options.success(resolvedItems);
+                }
+            });
+        </script>
+```
 
 ### speechToText `Boolean|Object` _(default: true)_
 
@@ -4854,6 +5157,114 @@ The current value of the input field.
         input: function(e) {
             console.log("User is typing:", e.value);
         }
+    });
+    </script>
+
+### referencedMessageClick
+
+Fired when the user clicks a pinned message banner or a reply reference.
+
+The event payload contains only `{ id }` for both pinned-banner clicks and reply-reference clicks.
+
+In endless scrolling mode, the event fires before the Chat attempts to render and scroll to a referenced message that is outside the current batch.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+
+<div class="meta-api-description">
+How do I detect when a user clicks a pinned message banner or a reply reference in Kendo UI Chat? Listen for reference navigation in chat conversations, inspect the referenced message id, and react when the Chat jumps to an older or off-screen message while endless scrolling is active.
+</div>
+
+#### Event Data
+
+##### e.id `String|Number`
+
+The id of the referenced message.
+
+##### e.sender `kendo.ui.Chat`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "referencedMessageClick" event during initialization
+
+    <div id="chat"></div>
+    <script>
+    var messages = [];
+
+    for (var i = 1; i <= 24; i++) {
+        var isCustomer = i % 2 === 0;
+
+        messages.push({
+            id: i,
+            authorId: isCustomer ? "customer" : "agent",
+            authorName: isCustomer ? "Avery Cole" : "Returns Desk",
+            authorImageUrl: isCustomer ? "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg" : "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            text: isCustomer ? "I am reviewing return request update " + i + "." : "Return request update " + i + " is available.",
+            timestamp: new Date(2026, 0, 12, 11, i)
+        });
+    }
+
+    messages[3].isPinned = true;
+    messages[3].text = "Return label RL-2048 was issued at 11:04 AM and remains the active pinned update.";
+    messages[22].replyToId = messages[3].id;
+    messages[22].text = "Can you confirm whether return label RL-2048 is still valid for pickup tomorrow?";
+
+    var dataSource = new kendo.data.DataSource({
+        data: messages,
+        pageSize: 8
+    });
+
+    $("#chat").kendoChat({
+        authorId: "customer",
+        dataSource: dataSource,
+        height: 500,
+        scrollMode: "endless",
+        referencedMessageClick: function(e) {
+            /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log(e.id);
+        }
+    });
+    </script>
+
+#### Example - subscribe to the "referencedMessageClick" event after initialization
+
+    <div id="chat"></div>
+    <script>
+    var messages = [];
+
+    for (var i = 1; i <= 24; i++) {
+        var isCustomer = i % 2 === 0;
+
+        messages.push({
+            id: i,
+            authorId: isCustomer ? "customer" : "agent",
+            authorName: isCustomer ? "Avery Cole" : "Returns Desk",
+            authorImageUrl: isCustomer ? "https://demos.telerik.com/kendo-ui/content/web/Customers/LONEP.jpg" : "https://demos.telerik.com/kendo-ui/content/web/Customers/RICSU.jpg",
+            text: isCustomer ? "I am reviewing return request update " + i + "." : "Return request update " + i + " is available.",
+            timestamp: new Date(2026, 0, 12, 12, i)
+        });
+    }
+
+    messages[3].isPinned = true;
+    messages[3].text = "Return label RL-2048 was issued at 12:04 PM and remains the active pinned update.";
+    messages[22].replyToId = messages[3].id;
+    messages[22].text = "Can you confirm whether return label RL-2048 is still valid for pickup tomorrow?";
+
+    var dataSource = new kendo.data.DataSource({
+        data: messages,
+        pageSize: 8
+    });
+
+    $("#chat").kendoChat({
+        authorId: "customer",
+        dataSource: dataSource,
+        height: 500,
+        scrollMode: "endless"
+    });
+    var chat = $("#chat").data("kendoChat");
+    chat.bind("referencedMessageClick", function(e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.id);
     });
     </script>
 

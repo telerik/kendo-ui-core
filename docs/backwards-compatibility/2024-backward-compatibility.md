@@ -137,8 +137,8 @@ The following classes are now removed:
 |`k-view-day`| `[data-selector='day']`
 |`k-view-agenda`| `[data-selector='agenda']`
 |`k-view-timeline`| `[data-selector='timeline']`  
-|`k-svg-i-arrow-left`| `k-i-caret-alt-left`
-|`k-svg-i-arrow-right`| `k-i-caret-alt-right`
+|`k-svg-i-arrow-left`| `k-i-chevron-left`
+|`k-svg-i-arrow-right`| `k-i-chevron-right`
 
 * The `k-button-rectangle` is removed from the buttons in views ButtonGroup.
 * The`k-heading-cell` is removed from the Scheduler first column. 

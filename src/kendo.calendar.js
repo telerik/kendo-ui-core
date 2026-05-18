@@ -82,9 +82,9 @@ export const __meta__ = {
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = ({ actionAttr, size, isRtl }) => `<div class="k-header k-hstack">
-            <span tabindex="-1" data-href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="prev" role="button" class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button" ${ARIA_LABEL}="Previous">${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}</span></span>
             <span tabindex="-1" data-href="#" ${actionAttr}="nav-up" id="` + kendo.guid() + `" role="button" class="k-calendar-nav-fast k-button ${size} k-button-flat k-flex"></span>
-            <span tabindex="-1" data-href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `caret-alt-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</span>
+            <span tabindex="-1" data-href="#" ${actionAttr}="next" role="button" class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button" ${ARIA_LABEL}="Next">${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}</span>
         </div>`,
         MODERN_HEADER_TEMPLATE = ({ actionAttr, size, messages, isRtl }) => `<div class="k-calendar-header">
             <button ${actionAttr}="nav-up" id="` + kendo.guid() + `" class="k-calendar-title k-button ${size} k-button-flat k-button-primary">
@@ -702,7 +702,7 @@ export const __meta__ = {
                 that.selectable = new Selectable(that.wrapper, {
                     aria: true,
                     //excludes the anchor element
-                    inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-caret-alt-down,span.k-icon.k-i-caret-alt-up,span.k-svg-icon.k-svg-i-caret-alt-down,span.k-svg-icon.k-svg-i-caret-alt-up",
+                    inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-chevron-down,span.k-icon.k-i-chevron-up,span.k-svg-icon.k-svg-i-chevron-down,span.k-svg-icon.k-svg-i-chevron-up",
                     multiple: selectableOptions.multiple,
                     filter: "table.k-calendar-table:eq(0) " + CELLSELECTORVALID,
                     change: that._onSelect.bind(that),

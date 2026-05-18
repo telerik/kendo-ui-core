@@ -61,9 +61,9 @@ To achieve the desired scenario:
                 #}#
                 #if(data.hasChildren){#
                     # if(data.model.expanded) { #
-                      #= kendo.ui.icon("caret-alt-down") #
+                      #= kendo.ui.icon("chevron-down") #
                 	# } else { #
-                      #= kendo.ui.icon("caret-alt-right") #
+                      #= kendo.ui.icon("chevron-right") #
                 	# } #
                 #}#
                 <span class="k-sprite #: data.model.SpriteCssClass #"></span>
@@ -80,9 +80,9 @@ To achieve the desired scenario:
                 #}#
                 #if(data.hasChildren){#
                     # if(data.model.expanded) { #
-                      #= kendo.ui.icon("caret-alt-down") #
+                      #= kendo.ui.icon("chevron-down") #
                 	# } else { #
-                      #= kendo.ui.icon("caret-alt-right") #
+                      #= kendo.ui.icon("chevron-right") #
                 	# } #
                 #}#
                 <span class="k-sprite #: data.model.SpriteCssClass #"></span>

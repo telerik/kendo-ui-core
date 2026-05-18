@@ -25,8 +25,8 @@ The following example demonstrates how to define a ButtonGroup in the ToolBar co
                     id: "btnGroup",
                     //ButtonGroup's items accept the same appearance configuration options as the button item
                     buttons: [
-                        { text: "prev", icon: "caret-alt-left" },
-                        { text: "next", icon: "caret-alt-right" }
+                        { text: "prev", icon: "chevron-left" },
+                        { text: "next", icon: "chevron-right" }
                     ]
                 }
             ]
