@@ -29,6 +29,7 @@ The `size` option controls how big or small the rendered `button` looks. The str
 
 The following values are available for the [`size`](/api/javascript/ui/button/configuration/size) option:
 
+- `xs`—extra small size
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size

@@ -78,7 +78,7 @@ The following example demonstrates the `Rounded` option of the Avatar:
 
 The Avatar allows you to specify predefined theme colors.
 
-The available `ThemeColor` values are:
+The available `AvatarThemeColor` values are:
 
 - `Primary`—Applies coloring based on the primary theme color.
 - `Base` - Applies base theme color.
@@ -92,7 +92,7 @@ The available `ThemeColor` values are:
         .Name("avatar")
         .Type(AvatarType.Icon)
         .Icon("user")
-        .ThemeColor(ThemeColor.Primary)
+        .ThemeColor(AvatarThemeColor.Primary)
     )
 ```
 {% if site.core %}
@@ -100,7 +100,7 @@ The available `ThemeColor` values are:
     <kendo-avatar name="avatar"
         type="AvatarType.Icon"
         icon="user"
-        theme-color="ThemeColor.Primary">
+        theme-color="AvatarThemeColor.Primary">
     </kendo-avatar>
 ```
 {% endif %}

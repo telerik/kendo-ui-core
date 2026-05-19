@@ -26,6 +26,7 @@ The Button component provides the following options for styling:
 
 To control the size of the Button, configure the `Size` option with any of the following values:
 
+- `XSmall`
 - `Small`
 - `Medium`
 - `Large`
@@ -35,14 +36,14 @@ To control the size of the Button, configure the `Size` option with any of the f
 ```HtmlHelper
 @(Html.Kendo().Button()
     .Name("textButton")
-    .Size(ComponentSize.Medium)
+    .Size(ButtonSize.Medium)
     .HtmlAttributes( new {type = "button"} )
     .Content("Text Button")
 )
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-button name="textButton" size="ComponentSize.Medium">
+<kendo-button name="textButton" size="ButtonSize.Medium">
     Text Button
 </kendo-button>
 ```

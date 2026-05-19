@@ -11,6 +11,166 @@ position: 2
 
 This article lists the breaking or important changes in the 2026 releases of {{ site.product }}.
 
+## {{ site.product }} 2026 Q2
+
+### New Meridian Theme — Default Theme Moved to Maintenance
+
+Starting with the **2026 Q2** release, a new theme called **Meridian** is introduced as the recommended default theme for all {{ site.product }} products. The previous Default theme is moved to **maintenance mode**.
+
+- The Meridian theme is now the default theme used across all demos, documentation, and templates.
+- The Default theme will continue to be available but will receive only critical bug fixes. No new features or visual updates will be added.
+- Customers can migrate to the Meridian theme on their own schedule.
+- This constitutes a major version bump for Kendo Themes due to visual breaking changes.
+
+### Dialog and Window — ThemeColor Option Removed
+
+The `ThemeColor` configuration option has been **entirely removed** from the Dialog and Window components. The `ThemeColor` property and its associated `DialogThemeColor` / `WindowThemeColor` types are no longer available.
+
+**Before (2026 Q1 and earlier):**
+
+```HtmlHelper
+@(Html.Kendo().Dialog()
+    .Name("dialog")
+    .ThemeColor("primary")
+)
+
+@(Html.Kendo().Window()
+    .Name("window")
+    .ThemeColor("dark")
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-dialog name="dialog" theme-color="primary"></kendo-dialog>
+<kendo-window name="window" theme-color="dark"></kendo-window>
+```
+{% endif %}
+
+**After (2026 Q2 and later):**
+
+```HtmlHelper
+@(Html.Kendo().Dialog()
+    .Name("dialog")
+)
+
+@(Html.Kendo().Window()
+    .Name("window")
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-dialog name="dialog"></kendo-dialog>
+<kendo-window name="window"></kendo-window>
+```
+{% endif %}
+
+### Light and Dark Theme Colors Removed Globally
+
+The `Light` and `Dark` values have been **removed** from the `ThemeColor` option across all components that previously supported them. This is a breaking change for consumers explicitly setting `ThemeColor` to `Light` or `Dark`.
+
+#### Updated ThemeColor Value Sets Per Component
+
+| Component | New Allowed ThemeColor Values |
+|-----------|------------------------------|
+| Button | `Base`, `Primary`, `Secondary`, `Tertiary`, `Info`, `Success`, `Warning`, `Error`, `Inverse` |
+| FloatingActionButton | `Base`, `Primary`, `Secondary`, `Tertiary` |
+| Icon / SVGIcon | `Inherit`, `Primary`, `Secondary`, `Tertiary`, `Info`, `Success`, `Warning`, `Error`, `Inverse` |
+| Badge | `Base`, `Primary`, `Secondary`, `Tertiary`, `Info`, `Success`, `Warning`, `Error` |
+| Loader | `Base`, `Primary`, `Secondary`, `Tertiary` |
+| Avatar | `Base`, `Primary`, `Secondary`, `Tertiary` |
+| AppBar | `Base`, `Primary`, `Secondary`, `Tertiary`, `Inverse` |
+| BottomNavigation | `Base`, `Primary`, `Secondary`, `Tertiary`, `Inverse` |
+
+**Migration:** Replace any usage of `ThemeColor.Light` or `ThemeColor.Dark` with the closest available value (for example, `ThemeColor.Base` or `ThemeColor.Inverse`).
+
+### Enum Type Changes
+
+The following enum type changes have been made in the {{ site.product }} wrappers. Components that previously used the generic `ThemeColor` enum now use component-specific enums with restricted value sets (removing `Light` and `Dark`). Similarly, the Button `Size` property now uses a dedicated `ButtonSize` enum.
+
+| Component | Property | Previous Enum Type | New Enum Type | New Allowed Values |
+|-----------|----------|--------------------|---------------|--------------------|
+| Avatar | ThemeColor | `ThemeColor` | `AvatarThemeColor` | `Base`, `Primary`, `Secondary`, `Tertiary` |
+| Button | Size | `ComponentSize` | `ButtonSize` | `XSmall`, `Small`, `Medium`, `Large` |
+| FloatingActionButton | ThemeColor | `ThemeColor` | `FloatingActionButtonThemeColor` | `Base`, `Primary`, `Secondary`, `Tertiary` |
+| AppBar | ThemeColor | `ThemeColor` | `AppBarThemeColor` | `Base`, `Primary`, `Secondary`, `Tertiary`, `Inverse` |
+| BottomNavigation | ThemeColor | `ThemeColor` | `BottomNavigationThemeColor` | `Base`, `Primary`, `Secondary`, `Tertiary`, `Inverse` |
+
+#### Migration
+
+**Before (2026 Q1 and earlier):**
+
+```csharp
+@(Html.Kendo().Avatar()
+    .Name("avatar")
+    .ThemeColor(ThemeColor.Primary)
+)
+
+@(Html.Kendo().Button()
+    .Name("btn")
+    .Size(ComponentSize.Small)
+)
+```
+
+**After (2026 Q2 and later):**
+
+```csharp
+@(Html.Kendo().Avatar()
+    .Name("avatar")
+    .ThemeColor(AvatarThemeColor.Primary)
+)
+
+@(Html.Kendo().Button()
+    .Name("btn")
+    .Size(ButtonSize.Small)
+)
+```
+
+### New XS (Extra Small) Button Size
+
+The Button component now supports an extra small size (`XSmall`). This size is intended for use in complex, multi-layered components such as close buttons in component headers.
+
+```HtmlHelper
+@(Html.Kendo().Button()
+    .Name("btn")
+    .Content("Close")
+    .Size(ButtonSize.XSmall)
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-button name="btn" size="ButtonSize.XSmall">Close</kendo-button>
+```
+{% endif %}
+
+### Caret Icons Replaced with Chevron Icons
+
+The `caret-alt-down`, `caret-alt-up`, `caret-alt-left`, and `caret-alt-right` icons have been replaced with `chevron-down`, `chevron-up`, `chevron-left`, and `chevron-right` respectively across all components. This includes the SplitButton default arrow icon.
+
+If you have custom CSS or JavaScript targeting the old `caret-alt-*` icon class names, update them to the corresponding `chevron-*` names.
+
+### Scheduler and Gantt — View Selector Markup Changed
+
+The toolbar view selector in the Scheduler and Gantt components is now rendered with a **SegmentedControl** instead of a ButtonGroup. Custom CSS or DOM queries that targeted the previous ButtonGroup markup must be updated.
+
+The DateTimePicker also now uses a SegmentedControl for its date/time toggle.
+
+### LoaderContainer — Overlay Class Changed
+
+The LoaderContainer now uses the standard `k-overlay` CSS class instead of the deprecated `k-overlay-light` variant. The `k-overlay-{overlayColor}` classes have been removed.
+
+If you have custom CSS targeting `k-overlay-light` on the LoaderContainer, update it to target `k-overlay`.
+
+### PDFViewer — Loader Overlay Class Changed
+
+The PDFViewer loader overlay now uses the standard `k-overlay` CSS class instead of `k-overlay-light`. Custom CSS targeting `k-overlay-light` on the PDFViewer loader will no longer apply.
+
+### Icon Component — New FillMode Property
+
+The Icon and SVGIcon components now support a `FillMode` property with the following values: `Solid`, `Outline`, `Duotone`.
+
 ## {{ site.product }} 2026 Q1
 
 ### Chat Suggestions Configuration Changes

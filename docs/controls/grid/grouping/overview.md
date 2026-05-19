@@ -80,6 +80,10 @@ To allow automatic hiding of a grouped column, set the [`columns.hideOnGroup`](/
 
 For a runnable example, visit the [Hiding Grouped Columns](https://demos.telerik.com/kendo-ui/grid/hiding-grouped-columns) demo.
 
+## Sticky Groups
+
+The Grid supports sticky group headers and footers that remain visible while scrolling through grouped data. For more information, refer to the article on [sticky groups]({% slug sticky_groups_kendoui_grid_widget %}).
+
 ## KB Articles on Grouping
 
 * [Enable Grouping for Columns Bound to Complex Object]({% slug enable-operations-for-object-column %})
