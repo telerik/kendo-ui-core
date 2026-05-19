@@ -2,6 +2,14 @@ import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright'
 import path from 'path';
 
+const ciLaunchOptions = process.platform === 'linux' && process.env.CI ? {
+    launchOptions: {
+        ignoreDefaultArgs: [
+            '--disable-dev-shm-usage',
+        ]
+    },
+} : undefined;
+
 export default defineConfig({
     test: {
         include: ['unit/**/*.js'],
@@ -20,7 +28,7 @@ export default defineConfig({
         }],
         browser: {
             screenshotFailures: false,
-            provider: playwright(),
+            provider: playwright(ciLaunchOptions),
             enabled: true,
             instances: [
                 {
@@ -33,8 +41,5 @@ export default defineConfig({
                 height: 1080
             }
         },
-        launchOptions: process.platform === 'linux' && process.env.CI ? {
-            executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome',
-        } : {},
     }
 });

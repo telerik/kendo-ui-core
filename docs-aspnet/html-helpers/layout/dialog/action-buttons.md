@@ -173,7 +173,7 @@ The Dialog action buttons support extensive appearance customization through sev
 
 ### Theme Colors
 
-The `ThemeColor()` method controls the color scheme of the button. Available values are: `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverse`, and `none`.
+The `ThemeColor()` method controls the color scheme of the button. Available values are: `base`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `inverse`, and `none`.
 
 ```HtmlHelper
     @(Html.Kendo().Dialog()

@@ -58,5 +58,6 @@ You can also render groups by setting group expressions in the DataSource of the
 {% if site.core %}
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}
+* [Sticky Groups]({% slug htmlhelpers_grid_aspnetcore_sticky_groups %})
 * [Grouping with Aggregates by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
 * [Server-Side API](/api/grid)

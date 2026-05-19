@@ -928,8 +928,9 @@ export const __meta__ = {
 
             var yDelta = parent.scrollTop + velocity.y;
             var yInBounds = yIsScrollable && yDelta > 0 && yDelta < parent.scrollHeight;
-
-            var xDelta = parent.scrollLeft + velocity.x;
+            var isRtl = kendo.support.isRtl(parent);
+            var scrollLeft = isRtl ? kendo.scrollLeft(parent) : parent.scrollLeft;
+            var xDelta = scrollLeft + (isRtl ? -velocity.x : velocity.x);
             var xInBounds = xIsScrollable && xDelta > 0 && xDelta < parent.scrollWidth;
 
             if (yInBounds) {
@@ -939,9 +940,17 @@ export const __meta__ = {
             }
 
             if (xInBounds) {
-                parent.scrollLeft += velocity.x;
+                if (isRtl) {
+                    kendo.scrollLeft(parent, xDelta);
+                } else {
+                    parent.scrollLeft = xDelta;
+                }
             } else if (xIsScrollable && xDelta < 0) {
-                parent.scrollLeft = 0;
+                if (isRtl) {
+                    kendo.scrollLeft(parent, 0);
+                } else {
+                    parent.scrollLeft = 0;
+                }
             }
 
             if (this.hint && isRootNode && (xInBounds || yInBounds)) {

@@ -150,7 +150,7 @@ How to set custom CSS classes for dialog action buttons in Kendo UI? Customize t
 Controls the main color applied to the action button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"inverse"`, and `"none"`. Default value is `"base"`.
 
 <div class="meta-api-description">
-How do I change the color scheme of dialog action buttons in Kendo UI? Customize, configure, or set the color theme for action buttons within dialogs by selecting from predefined theme colors such as primary, secondary, error, success, warning, info, tertiary, base, dark, light, inverse, or none to match branding or indicate button purpose; control button appearance by applying semantic colors, adjusting visual prominence, highlighting destructive actions with error themes, emphasizing confirmations with primary or success colors, managing button color variants for consistent UI design, and tailoring dialog button styling to communicate action importance or context through thematic color choices.
+How do I change the color scheme of dialog action buttons in Kendo UI? Customize, configure, or set the color theme for action buttons within dialogs by selecting from predefined theme colors such as primary, secondary, error, success, warning, info, tertiary, base, inverse, or none to match branding or indicate button purpose; control button appearance by applying semantic colors, adjusting visual prominence, highlighting destructive actions with error themes, emphasizing confirmations with primary or success colors, managing button color variants for consistent UI design, and tailoring dialog button styling to communicate action importance or context through thematic color choices.
 </div>
 
 #### Example
