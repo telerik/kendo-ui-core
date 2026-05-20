@@ -11,7 +11,9 @@ The following table lists the Telerik UI for {{ site.framework }} versions and t
 
 | Telerik UI for {{ site.framework }} | Kendo UI Sass Themes |
 |:---         |:---                     |
-| Telerik UI 2026.1.429 (Q1 2026.1.429) | @progress/kendo-theme-bootstrap@^13.1.1<br>@progress/kendo-theme-classic@^13.1.1<br>@progress/kendo-theme-default@^13.1.1<br>@progress/kendo-theme-fluent@^13.1.1<br>@progress/kendo-theme-material@^13.1.1 |
+| Telerik UI 2026.2.520 (Q2 2026.2.520) | @progress/kendo-theme-bootstrap@14.1.0<br>@progress/kendo-theme-classic@14.1.0<br>@progress/kendo-theme-default@14.1.0<br>@progress/kendo-theme-fluent@14.1.0<br>@progress/kendo-theme-material@14.1.0<br>@progress/kendo-theme-meridian@14.1.0 |
+| Telerik UI 2026.1.415 (2026.1.415) | @progress/kendo-theme-bootstrap@^13.1.1<br>@progress/kendo-theme-classic@^13.1.1<br>@progress/kendo-theme-default@^13.1.1<br>@progress/kendo-theme-fluent@^13.1.1<br>@progress/kendo-theme-material@^13.1.1 |
+| Telerik UI 2026.1.325 (2026.1.325) | @progress/kendo-theme-bootstrap@^13.1.1<br>@progress/kendo-theme-classic@^13.1.1<br>@progress/kendo-theme-default@^13.1.1<br>@progress/kendo-theme-fluent@^13.1.1<br>@progress/kendo-theme-material@^13.1.1 |
 | Telerik UI 2026.1.212 (Q1 2026.1.212) | @progress/kendo-theme-bootstrap@13.0.0<br>@progress/kendo-theme-classic@13.0.0<br>@progress/kendo-theme-default@13.0.0<br>@progress/kendo-theme-fluent@13.0.0<br>@progress/kendo-theme-material@13.0.0 |
 | Telerik UI 2025.4.1321 (2025.4.1321) | @progress/kendo-theme-bootstrap@12.3.0<br>@progress/kendo-theme-classic@12.3.0<br>@progress/kendo-theme-default@12.3.0<br>@progress/kendo-theme-fluent@12.3.0<br>@progress/kendo-theme-material@12.3.0 |
 | Telerik UI 2025.4.1217 (2025.4.1217) | @progress/kendo-theme-bootstrap@12.3.0<br>@progress/kendo-theme-classic@12.3.0<br>@progress/kendo-theme-default@12.3.0<br>@progress/kendo-theme-fluent@12.3.0<br>@progress/kendo-theme-material@12.3.0 |

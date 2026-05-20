@@ -112,28 +112,31 @@ The Chat also supports endless scrolling with a server-paged Kendo UI DataSource
 > Warning: Every remote endless response must return `total`, `startIndex`, and `endIndex`, and the returned item count must equal `endIndex - startIndex`.
 
 ```javascript
+var messages = [];
+
+ for (var i = 1; i <= 40; i++) {
+     messages.push({
+         id: i,
+         authorId: i % 2 === 0 ? "user1" : "user2",
+         authorName: i % 2 === 0 ? "Nina" : "Sam",
+         text: "Message " + i,
+         timestamp: new Date(2026, 0, 12, 9, i)
+     });
+ }
+
 var archiveById = {
-    12: {
-        id: 12,
-        authorName: "Warehouse Support",
-        text: "Order 98145 left the regional warehouse at 10:14 AM and is scheduled for next-day delivery.",
-        timestamp: new Date(2026, 0, 5, 10, 14)
-    }
+     12: {
+         id: 12,
+         authorId: "warehouse-support",
+         authorName: "Warehouse Support",
+         text: "Order 98145 left the regional warehouse at 10:14 AM and is scheduled for next-day delivery.",
+         timestamp: new Date(2026, 0, 5, 10, 14)
+     }
 };
 
 var dataSource = new kendo.data.DataSource({
-    transport: {
-        read: {
-            url: "/api/chat/messages",
-            dataType: "json"
-        }
-    },
-    schema: {
-        data: "data",
-        total: "total"
-    },
-    serverPaging: true,
-    pageSize: 12
+    data: messages,
+    pageSize: 10
 });
 
 $("#chat").kendoChat({
