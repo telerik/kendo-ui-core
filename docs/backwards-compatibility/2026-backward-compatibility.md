@@ -13,7 +13,7 @@ This article lists the breaking or important changes in the 2026 releases of Ken
 
 ## Kendo UI 2026 Q2
 
-### New Meridian Theme — Default Theme Moved to Maintenance
+### New Meridian Theme - Default Theme Moved to Maintenance
 
 Starting with the **2026 Q2** release, a new theme called **Meridian** is introduced as the recommended default theme for all Kendo UI products. The previous Default theme is moved to **maintenance mode**.
 
@@ -32,7 +32,13 @@ To switch to the Meridian theme, update your stylesheet reference:
 <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/14.0.0/meridian/meridian-main.css" />
 ```
 
-### Dialog and Window — themeColor Option Removed
+### Kendo UI Icons Package Version
+
+The **2026 Q2** release ships with Kendo UI Icons version **4.9.2** in the source package and wrappers. However, there is also Icons version **5.0.0** available, which includes new icons and updates aligned with the Meridian theme. Icons v5.0.0 is currently in preview mode in the demos and will be officially included in the source packages in an upcoming release.
+
+> If you are referencing icons from the Kendo CDN or npm and want to stay aligned with the demos, you can use version 5.0.0. If you prefer to stay aligned with the distributed source, continue using version 4.9.2 until the next official update.
+
+### Dialog and Window - themeColor Option Removed
 
 The `themeColor` configuration option has been **entirely removed** from the Dialog and Window components. Previously available values (`primary`, `dark`, `light`, `none`) are no longer accepted.
 
@@ -86,13 +92,13 @@ The Button component now supports an extra small size (`"xsmall"` / `"xs"`). Thi
 
 The following components now use XS-sized buttons internally:
 
-- Dialog — close button
-- Window — close, minimize, maximize buttons
-- Chat — attachment actions, pinned toolbar close button, message actions, quick reply remove button, failed message retry button
-- Upload — remove and retry buttons
-- TabStrip — close button
-- Timeline — card expand/collapse button
-- Spreadsheet — sheet bar buttons
+- Dialog - close button
+- Window - close, minimize, maximize buttons
+- Chat - attachment actions, pinned toolbar close button, message actions, quick reply remove button, failed message retry button
+- Upload - remove and retry buttons
+- TabStrip - close button
+- Timeline - card expand/collapse button
+- Spreadsheet - sheet bar buttons
 
 ```javascript
 $("#button").kendoButton({
@@ -125,13 +131,13 @@ Similarly, `caret-double-alt-left` and `caret-double-alt-right` are replaced wit
 
 If you have custom CSS or JavaScript targeting the old `caret-alt-*` icon class names, update them to the corresponding `chevron-*` names.
 
-### Scheduler and Gantt — View Selector Markup Changed
+### Scheduler and Gantt - View Selector Markup Changed
 
 The toolbar view selector in the Scheduler and Gantt components is now rendered with a **SegmentedControl** instead of a ButtonGroup. Custom CSS or DOM queries that targeted the previous ButtonGroup markup must be updated.
 
 The DateTimePicker also now uses a SegmentedControl for its date/time toggle.
 
-### Tooltip — New themeColor Option
+### Tooltip - New themeColor Option
 
 The Tooltip component now supports a `themeColor` option. Available values are: `base`, `inverse`, `info`, `success`, `warning`, `error`.
 
@@ -141,17 +147,17 @@ $("#tooltip").kendoTooltip({
 });
 ```
 
-### LoaderContainer — Overlay Class Changed
+### LoaderContainer - Overlay Class Changed
 
 The LoaderContainer now uses the standard `k-overlay` CSS class instead of the deprecated `k-overlay-light` variant. The `k-overlay-{overlayColor}` classes have been removed.
 
 If you have custom CSS targeting `k-overlay-light` on the LoaderContainer, update it to target `k-overlay`.
 
-### PDFViewer — Loader Overlay Class Changed
+### PDFViewer - Loader Overlay Class Changed
 
 The PDFViewer loader overlay now uses the standard `k-overlay` CSS class instead of `k-overlay-light`. Custom CSS targeting `k-overlay-light` on the PDFViewer loader will no longer apply.
 
-### Icon Component — New fillMode Property
+### Icon Component - New fillMode Property
 
 The Icon and SVGIcon components now support a `fillMode` property with the following values: `solid`, `outline`, `duotone`. The property applies a `k-{fillMode}` CSS class to the icon element.
 

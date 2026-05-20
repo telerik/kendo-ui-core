@@ -13,7 +13,7 @@ This article lists the breaking or important changes in the 2026 releases of {{ 
 
 ## {{ site.product }} 2026 Q2
 
-### New Meridian Theme — Default Theme Moved to Maintenance
+### New Meridian Theme - Default Theme Moved to Maintenance
 
 Starting with the **2026 Q2** release, a new theme called **Meridian** is introduced as the recommended default theme for all {{ site.product }} products. The previous Default theme is moved to **maintenance mode**.
 
@@ -22,7 +22,13 @@ Starting with the **2026 Q2** release, a new theme called **Meridian** is introd
 - Customers can migrate to the Meridian theme on their own schedule.
 - This constitutes a major version bump for Kendo Themes due to visual breaking changes.
 
-### Dialog and Window — ThemeColor Option Removed
+### Kendo UI Icons Package Version
+
+The **2026 Q2** release ships with Kendo UI Icons version **4.9.2** in the source package and wrappers. However, there is also Icons version **5.0.0** available, which includes new icons and updates aligned with the Meridian theme. Icons v5.0.0 is currently in preview mode in the demos and will be officially included in the source packages in an upcoming release.
+
+> If you are referencing icons from the Kendo CDN or npm and want to stay aligned with the demos, you can use version 5.0.0. If you prefer to stay aligned with the distributed source, continue using version 4.9.2 until the next official update.
+
+### Dialog and Window - ThemeColor Option Removed
 
 The `ThemeColor` configuration option has been **entirely removed** from the Dialog and Window components. The `ThemeColor` property and its associated `DialogThemeColor` / `WindowThemeColor` types are no longer available.
 
@@ -151,23 +157,23 @@ The `caret-alt-down`, `caret-alt-up`, `caret-alt-left`, and `caret-alt-right` ic
 
 If you have custom CSS or JavaScript targeting the old `caret-alt-*` icon class names, update them to the corresponding `chevron-*` names.
 
-### Scheduler and Gantt — View Selector Markup Changed
+### Scheduler and Gantt - View Selector Markup Changed
 
 The toolbar view selector in the Scheduler and Gantt components is now rendered with a **SegmentedControl** instead of a ButtonGroup. Custom CSS or DOM queries that targeted the previous ButtonGroup markup must be updated.
 
 The DateTimePicker also now uses a SegmentedControl for its date/time toggle.
 
-### LoaderContainer — Overlay Class Changed
+### LoaderContainer - Overlay Class Changed
 
 The LoaderContainer now uses the standard `k-overlay` CSS class instead of the deprecated `k-overlay-light` variant. The `k-overlay-{overlayColor}` classes have been removed.
 
 If you have custom CSS targeting `k-overlay-light` on the LoaderContainer, update it to target `k-overlay`.
 
-### PDFViewer — Loader Overlay Class Changed
+### PDFViewer - Loader Overlay Class Changed
 
 The PDFViewer loader overlay now uses the standard `k-overlay` CSS class instead of `k-overlay-light`. Custom CSS targeting `k-overlay-light` on the PDFViewer loader will no longer apply.
 
-### Icon Component — New FillMode Property
+### Icon Component - New FillMode Property
 
 The Icon and SVGIcon components now support a `FillMode` property with the following values: `Solid`, `Outline`, `Duotone`.
 
