@@ -40,7 +40,7 @@ The top adornments are displayed above the input area of the PromptBox and only 
 ```javascript
     $("#promptbox").kendoPromptBox({
         mode: "multi",
-        topAffixTemplate: '<div class="custom-header">Attached files:</div>'
+        topAffixTemplate: () => '<div class="custom-header">Attached files:</div>'
     });
 ```
 
@@ -51,7 +51,7 @@ By default, the adornments are part of the PromptBox. When you set the `enable` 
 ```javascript
     $("#promptbox").kendoPromptBox({
         enable: false,
-        startAffixTemplate: "<button>Click me</button>"
+        startAffixTemplate: () => "<button>Click me</button>"
     });
 ```
 
