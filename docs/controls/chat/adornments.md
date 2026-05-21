@@ -31,8 +31,8 @@ The example below adds custom action buttons in the start and end PromptBox regi
         authorId: "user",
         messageBox: {
             mode: "single",
-            startAffixTemplate: '<button class="k-button k-button-flat k-button-sm" type="button">Source</button>',
-            endAffixTemplate: '<button class="k-button k-button-flat k-button-sm" type="button">Settings</button>'
+            startAffixTemplate: () => '<button class="k-button k-button-flat k-button-sm" type="button">Source</button>',
+            endAffixTemplate: () => '<button class="k-button k-button-flat k-button-sm" type="button">Settings</button>'
         },
         dataSource: {
             data: [
@@ -62,7 +62,7 @@ Use `topAffixTemplate` to render additional controls such as model selectors or 
         messageBox: {
             mode: "multi",
             rows: 3,
-            topAffixTemplate: '<div class="chat-model-affix"><select id="model"></select></div>'
+            topAffixTemplate: () => '<div class="chat-model-affix"><select id="model"></select></div>'
         }
     });
 

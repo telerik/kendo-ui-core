@@ -79,8 +79,8 @@ Currently, the Kendo themes do not contain the necessary styles for the form ele
 In the example below, you can see how to enable the Form Filling feature:
 
 ```dojo
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
+    <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.mjs" type="module"></script> <!-- Include pdf.js before the kendo scripts -->
+    <script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.worker.mjs" type="module"></script> <!-- Include pdf.worker.js before the kendo scripts -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" type="module"></script>
     <script src="https://kendo.cdn.telerik.com/2025.2.520/js/kendo.all.min.js" type="module"></script>
 

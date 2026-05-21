@@ -38,8 +38,8 @@ Combine the Drawing API with the [Kendo UI PDFViewer component](https://demos.te
 1. When the promise is resolved, in the `done` method, use the [`fromFile` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer/methods/fromfile) of the PDFViewer component instead of `kendo.saveAs`.
 
 ```dojo
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs" type="module"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.min.mjs" type="module"></script>
+<script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.min.mjs" type="module"></script>
+<script src="https://unpkg.com/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs" type="module"></script>
 <script src="https://kendo.cdn.telerik.com/2025.1.227/js/kendo.all.min.js" type="module"></script>
   <div class="content-wrapper">
     <input type="text" placeholder="Type your name" />
