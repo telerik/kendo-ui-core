@@ -133,67 +133,61 @@ How to configure time zone handling for scheduling data in Kendo UI Scheduler? C
 #### Example - configure the data source model
 
     <script>
-    // include kendo.timezones.js
-    var version = kendo.version;
-
-    $('<script/>', { 
-        type:'text/javascript', 
-        src:'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js'
-    }).appendTo('head');
-    
-    var dataSource = new kendo.data.SchedulerDataSource({
-        batch: true,
-        transport: {
-            read: {
-                url: "https://demos.telerik.com/service/v2/core/tasks"
-            },
-            update: {
-                url: "https://demos.telerik.com/service/v2/core/tasks/update",
-                type: "POST",
-                contentType: "application/json"
-            },
-            create: {
-                url: "https://demos.telerik.com/service/v2/core/tasks/create",
-                type: "POST",
-                contentType: "application/json"
-            },
-            destroy: {
-                url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
-                type: "POST",
-                contentType: "application/json"
-            },
-            parameterMap: function(options, operation) {
-                if (operation !== "read" && options.models) {
-                    return kendo.stringify(options.models);
+        $.getScript('https://kendo.cdn.telerik.com/' + kendo.version + '/js/kendo.timezones.min.js', function() {
+            var dataSource = new kendo.data.SchedulerDataSource({
+                batch: true,
+                transport: {
+                    read: {
+                        url: "https://demos.telerik.com/service/v2/core/tasks"
+                    },
+                    update: {
+                        url: "https://demos.telerik.com/service/v2/core/tasks/update",
+                        type: "POST",
+                        contentType: "application/json"
+                    },
+                    create: {
+                        url: "https://demos.telerik.com/service/v2/core/tasks/create",
+                        type: "POST",
+                        contentType: "application/json"
+                    },
+                    destroy: {
+                        url: "https://demos.telerik.com/service/v2/core/tasks/destroy",
+                        type: "POST",
+                        contentType: "application/json"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return kendo.stringify(options.models);
+                        }
+                    }
+                },
+                schema: {
+                    timezone: "Europe/London",
+                    model: {
+                        id: "taskId",
+                        fields: {
+                            taskId: { from: "TaskID", type: "number" },
+                            title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                            start: { type: "date", from: "Start" },
+                            end: { type: "date", from: "End" },
+                            startTimezone: { from: "StartTimezone" },
+                            endTimezone: { from: "EndTimezone" },
+                            description: { from: "Description" },
+                            recurrenceId: { from: "RecurrenceID" },
+                            recurrenceRule: { from: "RecurrenceRule" },
+                            recurrenceException: { from: "RecurrenceException" },
+                            ownerId: { from: "OwnerID", defaultValue: 1 },
+                            isAllDay: { type: "boolean", from: "IsAllDay" }
+                        }
+                    }
                 }
-            }
-        },
-        schema: {
-            timezone: "Europe/London", // Use the London timezone
-            model: {
-                id: "taskId",
-                fields: {
-                    taskId: { from: "TaskID", type: "number" },
-                    title: { from: "Title", defaultValue: "No title", validation: { required: true } },
-                    start: { type: "date", from: "Start" },
-                    end: { type: "date", from: "End" },
-                    startTimezone: { from: "StartTimezone" },
-                    endTimezone: { from: "EndTimezone" },
-                    description: { from: "Description" },
-                    recurrenceId: { from: "RecurrenceID" },
-                    recurrenceRule: { from: "RecurrenceRule" },
-                    recurrenceException: { from: "RecurrenceException" },
-                    ownerId: { from: "OwnerID", defaultValue: 1 },
-                    isAllDay: { type: "boolean", from: "IsAllDay" }
-                }
-            }
-        }
-    });
-    dataSource.fetch(function() {
-        var event = this.at(0);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log(event.start); // outputs converted date based on defined timezone
-    });
+            });
+            dataSource.fetch(function() {
+                var event = this.at(0);
+                /* The result can be observed in the DevTools(F12) console of the browser. */
+                console.log(event.start); // outputs converted date based on defined timezone
+            });
+        });
     </script>
 
 ## Methods
