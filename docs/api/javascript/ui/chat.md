@@ -734,7 +734,7 @@ How do I provide pinned message data for Kendo UI Chat endless scrolling? Supply
 
 #### Example - provide auxiliary pinned messages for endless scrolling
 
-```html
+```pseudo
         <div id="chat"></div>
         <script>
             var dataSource = new kendo.data.DataSource({
@@ -3420,7 +3420,7 @@ How do I resolve reply previews for remote endless scrolling in Kendo UI Chat? C
 
 #### Example - resolve off-batch reply previews for remote endless scrolling
 
-```html
+```pseudo
         <div id="chat"></div>
         <script>
             var archiveById = {
