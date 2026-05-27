@@ -779,11 +779,15 @@ export const __meta__ = {
 
                 that.hint.css({
                     position: "absolute",
-                    zIndex: 20000, // the Window's z-index is 10000 and can be raised because of z-stacking
+                    zIndex: 20000,
                     left: offset.left,
                     top: offset.top,
                 })
                 .appendTo(document.body);
+
+                if (that.options.clickMoveClick) {
+                    that.hint.css("pointer-events", "none");
+                }
             }
         },
 
