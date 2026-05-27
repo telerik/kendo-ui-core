@@ -669,7 +669,8 @@ export const __meta__ = {
 
             that.surface.handler(that)
                 .on(kendo.applyEventMap("move", ns), "_move")
-                .on(kendo.applyEventMap("cancel up", ns), "cancel");
+                .on(kendo.applyEventMap("up", ns), "_surfaceUp")
+                .on(kendo.applyEventMap("cancel", ns), "cancel");
 
             element.on(kendo.applyEventMap("down", ns), filter, "_down")
                 .on(kendo.applyEventMap("up", ns), filter, "_up");
@@ -747,6 +748,27 @@ export const __meta__ = {
             } else if (this.touches && this.touches.length > 0) {
                 this._disposeAll();
                 this.trigger(CANCEL);
+            }
+        },
+
+        _surfaceUp: function(e) {
+            var type = e && e.type;
+
+            if (type === "touchcancel" || type === "pointercancel" || type === "pointerleave" || type === "mouseleave") {
+                return;
+            }
+
+            if (e && e.which && e.which > 1) {
+                return;
+            }
+
+            if (this._preventCancel) {
+                this._preventCancel = false;
+                return;
+            }
+
+            if (this.touches && this.touches.length > 0) {
+                this._end(e);
             }
         },
 
