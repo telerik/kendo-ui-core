@@ -109,6 +109,15 @@ export const __meta__ = {
             that._updateUI(value);
         },
         destroy: function() {
+            if (this.smallMQL) {
+                this.smallMQL.destroy();
+            }
+            if (this.mediumMQL) {
+                this.mediumMQL.destroy();
+            }
+            if (this.largeMQL) {
+                this.largeMQL.destroy();
+            }
             this.wrapper.off(NS).find("*").off(NS);
             if (this._popup) {
                 this._selector.destroy();
