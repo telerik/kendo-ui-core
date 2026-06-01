@@ -136,6 +136,157 @@ describe("kendo.ui.MultiSelect interaction", function() {
 
         assert.notEqual(item[0].style.display, "none");
     });
+
+    it("MultiSelect focuses input after tag delete button click", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
+
+        assert.equal(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect with tagMode 'single' does not render a remove button on the chip", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select, { tagMode: "single" });
+        let xButton = multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle");
+
+        assert.equal(xButton.length, 0);
+    });
+
+    it("MultiSelect focuses input after tag delete button click while popup is open", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        multiselect.open();
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
+
+        assert.equal(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect disabled widget X click does not move focus to the input", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        multiselect.enable(false);
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        let xButton = multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle");
+        if (xButton.length > 0) {
+            xButton.click();
+        }
+
+        assert.notEqual(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect focuses input after touchend on tag delete button", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").trigger("touchend");
+
+        assert.equal(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect focuses input after non-first chip delete button click", function() {
+        populateSelect();
+        select.val(["0", "1", "2"]);
+
+        let multiselect = new MultiSelect(select);
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        multiselect.tagList.children().eq(1).find(".k-i-x-circle,.k-svg-i-x-circle").click();
+
+        assert.equal(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect readonly widget X click does not move focus to the input", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        multiselect.readonly(true);
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        let xButton = multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle");
+        if (xButton.length > 0) {
+            xButton.click();
+        }
+
+        assert.notEqual(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect input retains focus after backspace removes last tag", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        multiselect.input[0].focus();
+
+        let evt = new KeyboardEvent("keydown", { keyCode: 8, which: 8, bubbles: true });
+        multiselect.input[0].dispatchEvent(evt);
+
+        assert.equal(multiselect.input[0], document.activeElement);
+    });
+
+    it("MultiSelect focuses input after X click on chip added by re-setting value", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
+
+        multiselect.value(["0"]);
+
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        multiselect.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
+
+        assert.equal(multiselect.input[0], document.activeElement);
+        externalButton.remove();
+    });
+
+    it("MultiSelect focuses input after X click following destroy and re-initialize", function() {
+        populateSelect();
+        select.val("0");
+
+        let multiselect = new MultiSelect(select);
+        multiselect.destroy();
+
+        let multiselect2 = new MultiSelect(select);
+        let externalButton = $("<button>other</button>").appendTo(Mocha.fixture);
+        externalButton[0].focus();
+
+        multiselect2.tagList.children().first().find(".k-i-x-circle,.k-svg-i-x-circle").click();
+
+        assert.equal(multiselect2.input[0], document.activeElement);
+        externalButton.remove();
+    });
 });
 
 describe("kendo.ui.MultiSelect selection", function() {
