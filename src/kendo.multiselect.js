@@ -571,6 +571,7 @@ export const __meta__ = {
 
             if (target.is("[class*='-i-x-circle']")) {
                 this._removeTag(target.closest(CHIP), true);
+                this.focus();
             }
         },
 

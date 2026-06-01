@@ -316,7 +316,10 @@ export const __meta__ = {
             }
         },
         close: function() {
-            var selOptions = (this._selector && this._selector.options) || {};
+            if (!this._popup) {
+                return;
+            }
+            const selOptions = (this._selector && this._selector.options) || {};
             selOptions._closing = true;
             this._getPopup().close();
 
