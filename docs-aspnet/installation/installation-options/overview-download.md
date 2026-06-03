@@ -95,6 +95,7 @@ If you use the automated installer or the archive with the setup files, you will
 * [Create a New Project through the Telerik Extensions]({% slug newprojectwizards_visualstudio_aspnetcore %})
 
 ## See Also
+* [Using Telerik.Cli for setting up your development environment]({% slug installation_cli %})
 {% if site.core %}
 * [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
 * [Using the CDN Services]({% slug cdnservices_core %})

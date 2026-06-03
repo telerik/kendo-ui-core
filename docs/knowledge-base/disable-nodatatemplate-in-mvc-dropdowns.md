@@ -30,7 +30,7 @@ Disable `noDataTemplate` by setting the `noDataTemplate` option of the wrapped w
 ```dojo
 <input id="autocomplete" style="width: 100%;" />
 <script>
-    // The below configuration mimicks the initialization with a wrapper (MVC/Core, JSP/PHP).
+    // The below configuration mimics the initialization with a wrapper (MVC/Core).
 
     $(document).ready(function(){
         $("#autocomplete").kendoAutoComplete({

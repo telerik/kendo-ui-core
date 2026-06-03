@@ -109,8 +109,6 @@ The following list of Kendo UI demos provides examples of server-side logic that
 * [Client-side solution with ASP.NET MVC service](https://demos.telerik.com/kendo-ui/upload/chunkupload)
 * [ASP.NET MVC](https://demos.telerik.com/aspnet-mvc/upload/chunkupload)
 * [ASP.NET Core](https://demos.telerik.com/aspnet-core/upload/chunkupload)
-* [PHP](https://demos.telerik.com/php-ui/upload/chunkupload)
-* [Java/JSP](https://demos.telerik.com/jsp-ui/upload/chunkupload)
 
 ## See Also
 
