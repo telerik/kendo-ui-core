@@ -15,9 +15,9 @@ To set the widths of the Grid columns, use their `Width()` method.
 
 Depending on whether scrolling is enabled, the columns of the Grid acquire different behavior:
 
-* By default, scrolling is enabled for the Grid in Kendo UI for jQuery, UI for JSP, and UI for PHP. When scrolling is enabled:
+* By default, scrolling is enabled for the Grid in Kendo UI for jQuery. When scrolling is enabled:
     * The `table-layout` style is set to `fixed` and all columns without a defined width appear equally wide.
-    * When the horizontal space is not enough, columns without a defined width shrink to a zero width.
+    * When the horizontal space is insufficient, columns without a defined width shrink to a zero width.
     * Regardless of the cell content, the defined column widths are obeyed.
     * If the content of a cell cannot fit, the Grid will either wrap or clip it.
     * During the resizing of columns, only the resized column and the [`table`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/fields/table) will change its widths.
@@ -26,7 +26,7 @@ Depending on whether scrolling is enabled, the columns of the Grid acquire diffe
     * When all columns have pixel widths and their sum is less than the width of the Grid, the column widths are ignored and the browser expands all columns.
 * By default, scrolling is disabled for the Grid in UI for ASP.NET MVC and {{ site.product_short }}. When scrolling is disabled:
     * The `table-layout` style is set to `auto`. If not explicitly defined, the column widths are determined by the browser and by the cell content, which is the default behavior of HTML tables.
-    * The browser will try to obey all column widths that are set but might adjust the widths of some columns depending on their content.
+    * The browser will try to obey all column widths that are set but can adjust the widths of some columns depending on their content.
 
 ## Making Non-Scrollable Grids Obey Column Widths
 

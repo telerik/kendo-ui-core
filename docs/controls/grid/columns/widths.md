@@ -12,13 +12,13 @@ position: 1
 
 To set the widths of the Grid columns, use their [`width`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.width) property.
 
-You can also set the width of the columns when you create a Grid from an HTML `table` through the `col` elements&mash;however, avoid this approach when you use width styles for table cells.
+You can also set the width of the columns when you create a Grid from an HTML `table` through the `col` elements, however, avoid this approach when you use width styles for table cells.
 
 ## Using Column Widths and Scrolling
 
 Depending on whether scrolling is enabled, the columns of the Grid acquire different behavior:
 
-* By default, scrolling is enabled for the Grid in Kendo UI for jQuery, UI for JSP, and UI for PHP. When scrolling is enabled:
+* By default, scrolling is enabled for the Grid in Kendo UI for jQuery. When scrolling is enabled:
     * The `table-layout` style is set to `fixed` and all columns without a defined width appear equally wide.
     * When the horizontal space is not enough, columns without a defined width shrink to a zero width.
     * Regardless of the cell content, the defined column widths are obeyed.

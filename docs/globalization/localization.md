@@ -78,4 +78,3 @@ If you notice any missing messages in the localization files or would like to ad
 
 * [Localize the Grid Widget]({% slug localization_kendoui_grid_widget %})
 * [Globalization and Localization in Telerik UI for ASP.NET MVC](https://www.telerik.com/aspnet-mvc/documentation/globalization/overview)
-* [JSP API Reference on Localization of the Upload Widget](/api/jsp/upload/localization)
