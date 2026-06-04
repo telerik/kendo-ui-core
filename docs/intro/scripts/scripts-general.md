@@ -32,6 +32,7 @@ The following table lists the individual script files for the Kendo UI component
 | | kendo.data.odata.js | |
 | | kendo.menu.js | |
 | | kendo.toolbar.js | |
+| | kendo.binder.js | |
 | | kendo.filter.js | |
 | [Grid](https://demos.telerik.com/kendo-ui/grid/index) | jquery.js | |
 | | kendo.licensing.js | |

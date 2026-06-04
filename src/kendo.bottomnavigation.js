@@ -24,7 +24,8 @@ export const __meta__ = {
         K_POS = "k-pos-",
         DOT = ".",
 
-        SELECT = "select";
+        SELECT = "select",
+        KENDO_KEYDOWN = "kendoKeydown";
 
     var isString = function(value) {
         return typeof value === "string";
@@ -87,7 +88,8 @@ export const __meta__ = {
         },
 
         events: [
-            SELECT
+            SELECT,
+            KENDO_KEYDOWN
         ],
 
         destroy: function() {
@@ -212,7 +214,7 @@ export const __meta__ = {
                 keydownProxy = that._keydown.bind(that);
 
             that.element.on("click" + NS, DOT + bottomNavigationStyles.item, clickProxy)
-                        .on("keydown" + NS, DOT + bottomNavigationStyles.item, keydownProxy);
+                        .on("keydown" + NS, DOT + bottomNavigationStyles.item, that, keydownProxy);
         },
 
         _click: function(ev) {
@@ -245,6 +247,10 @@ export const __meta__ = {
             var that = this,
                 target = $(ev.target),
                 key = ev.keyCode;
+
+            if (!kendo.keyDownHandler(ev, that)) {
+                return;
+            }
 
             if (key === keys.ENTER || key === keys.SPACEBAR) {
                 if (that._isItem(target)) {

@@ -25,4 +25,5 @@ The component supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the SpeechToTextButton for {{ site.framework }}]({% slug custom_keyboard_navigation_speechtotextbutton_htmlhelper %})
 * [Keyboard Navigation in {{ site.product }}]({% slug overview_accessibility %}#keyboard-navigation)

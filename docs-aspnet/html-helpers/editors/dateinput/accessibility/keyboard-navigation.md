@@ -30,5 +30,6 @@ For a complete example, refer to the [demo on keyboard navigation of the DateInp
 
 ## See Also
 
+* [Custom Keyboard Navigation in the DateInput for {{ site.framework }}]({% slug custom_keyboard_navigation_dateinput_htmlhelper %})
 * [Keyboard Navigation in the DateInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dateinput/keyboard-navigation)
 * [Accessibility in the DateInput HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_dateinput_accessibility %})

@@ -16,6 +16,7 @@ import "../kendo.color.js";
 
         NS = ".kendoColorTools",
         KEYDOWN_NS = "keydown" + NS,
+        KENDO_KEYDOWN = "kendoKeydown",
         DISABLED = "k-disabled";
 
     var ColorSelector = Widget.extend({
@@ -49,7 +50,8 @@ import "../kendo.color.js";
             "change",
             "select",
             "forceSelect",
-            "cancel"
+            "cancel",
+            KENDO_KEYDOWN
         ],
         color: function(value) {
             if (value !== undefined) {
@@ -91,7 +93,7 @@ import "../kendo.color.js";
             this._onEnable(enable);
         },
         _attachFocusEvents: function () {
-            this.wrapper.on(KEYDOWN_NS, this._navKeydown.bind(this))
+            this.wrapper.on(KEYDOWN_NS, this, this._navKeydown.bind(this))
                 .on("focusout" + NS, this._navFocusout.bind(this));
         },
         _initialValue: function() {

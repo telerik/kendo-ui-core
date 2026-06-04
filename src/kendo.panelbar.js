@@ -42,6 +42,7 @@ export const __meta__ = {
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
+        KENDO_KEYDOWN = "kendoKeydown",
         UNDEFINED = "undefined",
         EXPANDEDCLASS = "k-expanded",
         GROUPS = "> .k-panelbar-group",
@@ -219,7 +220,7 @@ export const __meta__ = {
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
                 .on(CLICK + NS, disabledItems, false)
                 .on(CLICK + NS, ".k-request-retry", that._retryRequest.bind(that))
-                .on("keydown" + NS, that._keydown.bind(that))
+                .on("keydown" + NS, that, that._keydown.bind(that))
                 .on("focus" + NS, function() {
                     var item = that.select();
                     that._current(item[0] ? item : that._first());
@@ -250,7 +251,8 @@ export const __meta__ = {
             CHANGE,
             ERROR,
             DATABOUND,
-            CONTENTLOAD
+            CONTENTLOAD,
+            KENDO_KEYDOWN
         ],
         options: {
             name: "PanelBar",

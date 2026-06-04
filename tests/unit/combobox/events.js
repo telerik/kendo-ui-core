@@ -1093,4 +1093,19 @@ describe("kendo.ui.ComboBox events", function() {
             keyCode: kendo.keys.TAB
         });
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        combobox = new ComboBox(input, {
+            dataSource: ["foo", "bar"],
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+
+        assert.isTrue(fired);
+    });
 });

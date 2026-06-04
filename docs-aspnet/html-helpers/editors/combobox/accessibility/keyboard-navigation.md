@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the ComboBo
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ComboBox for {{ site.framework }}]({% slug custom_keyboard_navigation_combobox_htmlhelper %})
 * [Keyboard Navigation in the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/comboBox/keyboard-navigation)
 * [Accessibility in the ComboBox HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_combobox_accessibility %})

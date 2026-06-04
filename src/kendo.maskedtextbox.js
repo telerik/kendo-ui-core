@@ -34,6 +34,7 @@ export const __meta__ = {
     var MOUSEUP = "mouseup";
     var DROP = "drop";
     var KEYDOWN = "keydown";
+    var KENDO_KEYDOWN = "kendoKeydown";
     var PASTE = "paste";
     var INPUT = "input";
 
@@ -153,7 +154,8 @@ export const __meta__ = {
         },
 
         events: [
-            CHANGE
+            CHANGE,
+            KENDO_KEYDOWN
         ],
 
         rules: {
@@ -292,7 +294,7 @@ export const __meta__ = {
 
             if (that._maskLength) {
                 that.element
-                    .on(ns(KEYDOWN), that._keydown.bind(that))
+                    .on(ns(KEYDOWN), that, that._keydown.bind(that))
                     .on(ns(DROP), that._drop.bind(that))
                     .on(ns(CHANGE), that._trackChange.bind(that))
                     .on(INPUT_EVENT_NAME, that._inputHandler.bind(that));
@@ -470,6 +472,10 @@ export const __meta__ = {
         },
 
         _keydown: function(e) {
+            if (e.preventKendoKeydown) {
+                return;
+            }
+
             var key = e.keyCode;
 
             this.__backward = key === keys.BACKSPACE;

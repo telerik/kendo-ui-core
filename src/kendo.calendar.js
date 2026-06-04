@@ -62,6 +62,7 @@ export const __meta__ = {
         BLUR = "blur" + ns,
         FOCUS = "focus",
         FOCUS_WITH_NS = FOCUS + ns,
+        KENDO_KEYDOWN = "kendoKeydown",
         MOUSEENTER = support.touch ? "touchstart" : "mouseenter",
         MOUSEENTER_WITH_NS = support.touch ? "touchstart" + ns : "mouseenter" + ns,
         MOUSELEAVE = support.touch ? "touchend" + ns + " touchmove" + ns : "mouseleave" + ns,
@@ -136,7 +137,7 @@ export const __meta__ = {
             id = element
                 .addClass("k-calendar " + (options.weekNumber ? " k-week-number" : ""))
                 .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
-                .on(KEYDOWN_NS, "table.k-calendar-table", that._move.bind(that))
+                .on(KEYDOWN_NS, "table.k-calendar-table", that, that._move.bind(that))
                 .on(CLICK + " touchend", CELLSELECTORVALID, function(e) {
                     var link = e.currentTarget.firstChild,
                         value = toDateObject(link);
@@ -269,7 +270,8 @@ export const __meta__ = {
 
         events: [
             CHANGE,
-            NAVIGATE
+            NAVIGATE,
+            KENDO_KEYDOWN
         ],
 
         componentTypes: {
@@ -975,8 +977,13 @@ export const __meta__ = {
         },
 
         _move: function(e) {
-            var that = this,
-                options = that.options,
+            var that = this;
+
+            if (!kendo.keyDownHandler(e, that)) {
+                return;
+            }
+
+            var options = that.options,
                 key = e.keyCode,
                 view = that._view,
                 index = that._index,

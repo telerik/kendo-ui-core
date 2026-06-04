@@ -372,4 +372,19 @@ describe("kendo.ui.MultiSelect Events", function() {
 
         assert.equal(multiselect.value().length, 2);
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let multiselect = new kendo.ui.MultiSelect($("<select multiple='multiple'></select>").appendTo(Mocha.fixture), {
+            dataSource: ["foo", "bar"],
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+
+        assert.isTrue(fired);
+    });
 });

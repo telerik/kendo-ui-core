@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the ButtonG
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ButtonGroup for {{ site.framework }}]({% slug custom_keyboard_navigation_buttongroup_htmlhelper %})
 * [Keyboard Navigation in the ButtonGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/buttongroup/keyboard-navigation)
 * [Accessibility in the ButtonGroup HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_buttongroup_accessibility %})

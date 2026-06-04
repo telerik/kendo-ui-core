@@ -32,7 +32,7 @@ The following example demonstrates how to enable the component keyboard navigati
 ```
 {% endif %}
 
-For a complete example, refer to the [demo on using the keyboard navigation of the PropertyGrid](https://demos.telerik.com/{{ site.platform }}/propertygrid/keyboard-navigation).  
+For a complete example, refer to the [demo on using the keyboard navigation of the PropertyGrid](https://demos.telerik.com/{{ site.platform }}/propertygrid/keyboard-navigation).
 
 The PropertyGrid supports the following keyboard shortcuts:
 
@@ -69,5 +69,6 @@ The PropertyGrid supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the PropertyGrid for {{ site.framework }}]({% slug custom_keyboard_navigation_propertygrid_htmlhelper %})
 * [Keyboard Navigation by the PropertyGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/propertygrid/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

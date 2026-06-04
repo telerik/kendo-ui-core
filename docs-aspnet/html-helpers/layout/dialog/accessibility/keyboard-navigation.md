@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the Dialog]
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Dialog for {{ site.framework }}]({% slug custom_keyboard_navigation_dialog_htmlhelper %})
 * [Keyboard Navigation in the Dialog HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog/keyboard-navigation)
 * [Accessibility in the Dialog HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_dialog_accessibility %})

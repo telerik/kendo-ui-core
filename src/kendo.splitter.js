@@ -25,6 +25,7 @@ export const __meta__ = {
         RESIZE = "resize",
         RESIZING = "resizing",
         LAYOUTCHANGE = "layoutChange",
+        KENDO_KEYDOWN = "kendoKeydown",
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
         MOUSEENTER = "mouseenter",
@@ -138,7 +139,8 @@ export const __meta__ = {
             ERROR,
             RESIZE,
             RESIZING,
-            LAYOUTCHANGE
+            LAYOUTCHANGE,
+            KENDO_KEYDOWN
         ],
 
         _addOverlays: function() {
@@ -156,7 +158,7 @@ export const __meta__ = {
             // do not use delegated events to increase performance of nested elements
             that.element
                 .children(".k-splitbar-draggable-" + orientation)
-                .on("keydown" + NS, that._keydown.bind(that))
+                .on("keydown" + NS, that, that._keydown.bind(that))
                 .on("mousedown" + NS, function(e) { e.currentTarget.focus({ preventScroll: true }); })
                 .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED); })
                 .on("blur" + NS, function(e) {

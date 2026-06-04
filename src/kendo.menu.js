@@ -84,6 +84,7 @@ export const __meta__ = {
         touchPointerTypes = { "2": 1, "touch": 1 },
         STRING = "string",
         DATABOUND = "dataBound",
+        KENDO_KEYDOWN = "kendoKeydown",
         ARIA_EXPANDED = "aria-expanded",
         ROLE = "role",
 
@@ -530,7 +531,8 @@ export const __meta__ = {
             ACTIVATE,
             DEACTIVATE,
             SELECT,
-            DATABOUND
+            DATABOUND,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -582,7 +584,7 @@ export const __meta__ = {
                    .on(TOUCHSTART + NS + " " + MOUSEENTER + NS + " " + MOUSELEAVE + NS + " " +
                        MOUSEDOWN + NS + " " + CLICK + NS, linkSelector, that._toggleHover.bind(that));
 
-            element.on("keydown" + NS, that._keydown.bind(that))
+            element.on("keydown" + NS, that, that._keydown.bind(that))
                    .on("focus" + NS, that._focus.bind(that))
                    .on("focus" + NS, ".k-content", that._focus.bind(that))
                    .on("blur" + NS, that._removeFocusItem.bind(that))

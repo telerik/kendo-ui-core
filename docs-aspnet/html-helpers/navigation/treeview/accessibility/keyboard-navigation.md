@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the TreeVie
 
 ## See Also
 
+* [Custom Keyboard Navigation in the TreeView for {{ site.framework }}]({% slug custom_keyboard_navigation_treeview_htmlhelper %})
 * [Keyboard Navigation in the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/keyboard-navigation)
 * [Accessibility in the TreeView HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_treeview_accessibility %})

@@ -95,7 +95,7 @@ export const __meta__ = {
 
             element
                 .addClass("k-input-inner")
-                .on("keydown" + ns, that._keydown.bind(that))
+                .on("keydown" + ns, that, that._keydown.bind(that))
                 .on("keypress" + ns, that._keypress.bind(that))
                 .on("input" + ns, that._search.bind(that))
                 .on("paste" + ns, that._search.bind(that))
@@ -294,7 +294,8 @@ export const __meta__ = {
             "select",
             "filtering",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "kendoKeydown"
         ],
 
         setOptions: function(options) {

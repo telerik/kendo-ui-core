@@ -25,6 +25,7 @@ export const __meta__ = {
         msPointers = support.msPointers,
         CHANGE = "change",
         SLIDE = "slide",
+        KENDO_KEYDOWN = "kendoKeydown",
         NS = ".slider",
         MOUSE_DOWN = "touchstart" + NS + " mousedown" + NS,
         TRACK_MOUSE_DOWN = pointers ? "pointerdown" + NS : (msPointers ? "MSPointerDown" + NS : MOUSE_DOWN),
@@ -101,7 +102,8 @@ export const __meta__ = {
 
         events: [
             CHANGE,
-            SLIDE
+            SLIDE,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -813,7 +815,7 @@ export const __meta__ = {
             that.wrapper
                 .find(DRAG_HANDLE)
                 .off(KEY_DOWN, false)
-                .on(KEY_DOWN, this._keydown.bind(that));
+                .on(KEY_DOWN, that, this._keydown.bind(that));
 
             options.enabled = true;
         },

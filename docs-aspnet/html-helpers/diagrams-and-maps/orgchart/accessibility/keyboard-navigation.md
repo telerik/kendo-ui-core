@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the OrgChar
 
 ## See Also
 
+* [Custom Keyboard Navigation in the OrgChart for {{ site.framework }}]({% slug custom_keyboard_navigation_orgchart_htmlhelper %})
 * [Keyboard Navigation in the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/keyboard-navigation)
 * [Accessibility in the OrgChart HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_orgchart_accessibility %})

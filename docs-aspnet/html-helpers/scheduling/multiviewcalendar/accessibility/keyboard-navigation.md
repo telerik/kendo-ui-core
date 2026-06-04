@@ -36,12 +36,13 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-multiviewcalendar name="MultiViewCalendar" selectable="multiple">        
+    <kendo-multiviewcalendar name="MultiViewCalendar" selectable="multiple">
     </kendo-multiviewcalendar>
 ```
 {% endif %}
 
 ## See Also
 
+* [Custom Keyboard Navigation in the MultiViewCalendar for {{ site.framework }}]({% slug custom_keyboard_navigation_multiviewcalendar_htmlhelper %})
 * [Keyboard Navigation in the MultiViewCalendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiviewcalendar/keyboard-navigation)
 * [Server-Side API](/api/multiviewcalendar)

@@ -28,5 +28,6 @@ The Slider supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Slider for {{ site.framework }}]({% slug custom_keyboard_navigation_slider_htmlhelper %})
 * [Keyboard Navigation by the Slider for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/slider/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

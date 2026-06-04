@@ -280,7 +280,8 @@ export const __meta__ = {
             CONTENTLOAD,
             "change",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "kendoKeydown"
         ],
 
         options: {
@@ -342,7 +343,7 @@ export const __meta__ = {
             options.animation = extend(true, animation, options.animation);
 
             if (options.navigatable) {
-                that.tabGroup.on("keydown" + NS, that._keyDownProxy);
+                that.tabGroup.on("keydown" + NS, that, that._keyDownProxy);
             } else {
                 that.tabGroup.off("keydown" + NS, that._keyDownProxy);
             }
@@ -1149,7 +1150,7 @@ export const __meta__ = {
             that._keyDownProxy = that._keydown.bind(that);
 
             if (options.navigatable) {
-                that.tabGroup.on("keydown" + NS, that._keyDownProxy);
+                that.tabGroup.on("keydown" + NS, that, that._keyDownProxy);
             }
 
             $(window).on('resize' + NS, that._resize.bind(that));

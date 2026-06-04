@@ -1079,3 +1079,57 @@ How to handle splitter pane size changes with Kendo UI for jQuery? Detect, respo
     var splitter = $("#splitter").data("kendoSplitter");
     splitter.bind("resize", splitter_resize);
     </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the Splitter is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI Splitter? Capture and intercept keydown events fired while the Splitter is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the Splitter component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Splitter`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default Splitter keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div>Pane B</div>
+    </div>
+    <script>
+      $("#splitter").kendoSplitter({
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div>Pane B</div>
+    </div>
+    <script>
+      $("#splitter").kendoSplitter();
+      var widget = $("#splitter").data("kendoSplitter");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

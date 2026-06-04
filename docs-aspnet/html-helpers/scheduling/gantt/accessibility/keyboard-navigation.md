@@ -73,5 +73,6 @@ Actions Applied to the Add Task Action Drop-Down of the Gantt:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Gantt for {{ site.framework }}]({% slug custom_keyboard_navigation_gantt_htmlhelper %})
 * [Keyboard Navigation in the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/keyboard-navigation)
 * [Accessibility in the Gantt HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_gantt_accessibility %})

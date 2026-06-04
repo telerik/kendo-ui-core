@@ -300,4 +300,21 @@ describe("menu events", function() {
         menuDiv.remove();
     });
 
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let menuDiv = $("<ul><li>Item 1</li><li>Item 2</li></ul>").appendTo(Mocha.fixture);
+        let menu = menuDiv.kendoMenu({
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        }).data("kendoMenu");
+
+        menuDiv.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+
+        assert.isTrue(fired);
+        menu.destroy();
+        menuDiv.remove();
+    });
+
 });

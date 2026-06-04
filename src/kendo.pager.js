@@ -32,6 +32,7 @@ export const __meta__ = {
         NS = ".kendoPager",
         CLICK = "click",
         KEYDOWN = "keydown",
+        KENDO_KEYDOWN = "kendoKeydown",
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
@@ -321,7 +322,8 @@ export const __meta__ = {
         },
 
         events: [
-            CHANGE
+            CHANGE,
+            KENDO_KEYDOWN
         ],
 
         options: {

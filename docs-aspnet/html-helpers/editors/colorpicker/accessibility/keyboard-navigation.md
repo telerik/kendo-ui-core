@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the ColorPicker is always available.
 
-For a runnable example, refer to the [demo on using the keyboard navigation of the ColorPicker](https://demos.telerik.com/{{ site.platform }}/colorpicker/keyboard-navigation).  
+For a runnable example, refer to the [demo on using the keyboard navigation of the ColorPicker](https://demos.telerik.com/{{ site.platform }}/colorpicker/keyboard-navigation).
 
 The ColorPicker supports the following keyboard shortcuts:
 
@@ -31,5 +31,6 @@ The ColorPicker supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ColorPicker for {{ site.framework }}]({% slug custom_keyboard_navigation_colorpicker_htmlhelper %})
 * [Keyboard Navigation by the ColorPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

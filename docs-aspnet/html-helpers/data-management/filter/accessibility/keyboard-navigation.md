@@ -15,7 +15,7 @@ The {{ site.product }} Filter component supports the following keyboard shortcut
 
 | SHORTCUT						| DESCRIPTION				                                                        |
 |:---                 |:---                                                                                         |
-| `Enter`             | Enables the inner navigation of the currently focused filter row or filter expression row   |  
+| `Enter`             | Enables the inner navigation of the currently focused filter row or filter expression row   |
 | `Esc`               | Exits the inner navigation of the currently focused filter row or filter expression row     |
 | `Left arrow`        | Focuses the previous focusable element inside a filter row or filter expression row         |
 | `Right arrow`       | Focuses the next focusable element inside a filter row or filter expression row             |
@@ -26,5 +26,6 @@ For a complete example, refer to the [demo on keyboard navigation of the Filter]
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Filter for {{ site.framework }}]({% slug custom_keyboard_navigation_filter_htmlhelper %})
 * [Keyboard Navigation by the Filter (Demo)](https://demos.telerik.com/{{site.platform}}/filter/keyboard-navigation)
 * [Accessibility in the Filter]({% slug htmlhelpers_filter_accessibility %})

@@ -21,5 +21,6 @@ The ToggleButton is focusable by default, and follows the regular tab order of t
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ToggleButton for {{ site.framework }}]({% slug custom_keyboard_navigation_togglebutton_htmlhelper %})
 * [Keyboard Navigation by the ToggleButton for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/togglebutton/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

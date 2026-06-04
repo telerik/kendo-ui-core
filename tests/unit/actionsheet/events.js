@@ -122,4 +122,19 @@ describe("kendo.ui.ActionSheet events", function() {
         instance.wrapper.find('.k-actionsheet-item:eq(0)').trigger('click');
         assert.isTrue(instance.visible());
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        createInstance({
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        instance.open();
+        instance.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.ESC });
+
+        assert.isTrue(fired);
+    });
 });

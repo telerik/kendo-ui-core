@@ -96,4 +96,18 @@ describe("kendo.ui.Calendar events", function() {
         assert.deepEqual(instance.current(), date);
     });
 
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        instance = new Calendar(div, {
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        instance.element.find("table.k-calendar-table").trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
+
+        assert.isTrue(fired);
+    });
+
 });

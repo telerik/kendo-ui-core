@@ -2241,3 +2241,60 @@ The widget instance which fired the event.
             console.log("open");
         });
     </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the ToolBar is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI ToolBar? Capture and intercept keydown events fired while the ToolBar is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the ToolBar component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.ToolBar`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default ToolBar keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div id="toolbar"></div>
+    <script>
+      $("#toolbar").kendoToolBar({
+        items: [
+          { type: "button", id: "btn1", text: "Button 1" },
+          { type: "button", id: "btn2", text: "Button 2" }
+        ],
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <div id="toolbar"></div>
+    <script>
+      $("#toolbar").kendoToolBar({
+        items: [
+          { type: "button", id: "btn1", text: "Button 1" },
+          { type: "button", id: "btn2", text: "Button 2" }
+        ],
+      });
+      var widget = $("#toolbar").data("kendoToolBar");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

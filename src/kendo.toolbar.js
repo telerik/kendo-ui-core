@@ -67,6 +67,7 @@ export const __meta__ = {
         FOCUSIN = "focusin",
         FOCUSOUT = "focusout",
         KEYDOWN = "keydown",
+        KENDO_KEYDOWN = "kendoKeydown",
 
         SPACER = "spacer",
         PRIMARY = "primary",
@@ -203,7 +204,8 @@ export const __meta__ = {
             CLOSE,
             OVERFLOW_OPEN,
             OVERFLOW_CLOSE,
-            CHANGE
+            CHANGE,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -1257,12 +1259,12 @@ export const __meta__ = {
             var that = this,
                 options = that.options;
 
-            that.element.on(KEYDOWN + ns, that._keydown.bind(that))
+            that.element.on(KEYDOWN + ns, that, that._keydown.bind(that))
                 .on(FOCUSIN + ns, that._focusIn.bind(that))
                 .on(FOCUSOUT + ns, that._focusOut.bind(that));
 
             if (options.overflow?.mode == "section" && that.overflowSection) {
-                that._overflowSectionContentElement().on(KEYDOWN + ns, that._keydown.bind(that));
+                that._overflowSectionContentElement().on(KEYDOWN + ns, that, that._keydown.bind(that));
             }
 
             if (options.overflow?.mode == "scroll") {

@@ -14,5 +14,6 @@ The keyboard navigation of the BottomNavigation is always available.
 For a complete example, refer to the [demo on keyboard navigation of the BottomNavigation](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/keyboard-navigation)
 ## See Also
 
+* [Custom Keyboard Navigation in the BottomNavigation for {{ site.framework }}]({% slug custom_keyboard_navigation_bottomnavigation_htmlhelper %})
 * [Keyboard Navigation by the BottomNavigation HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/keyboard-navigation)
 * [Server-Side API](/api/bottomnavigation)

@@ -233,7 +233,8 @@ export const __meta__ = {
             DESELECT,
             "filtering",
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "kendoKeydown"
         ],
 
         setDataSource: function(dataSource) {
@@ -321,7 +322,7 @@ export const __meta__ = {
             var that = this;
 
             that.filterInput
-                .on("keydown" + ns, that._keydown.bind(that))
+                .on("keydown" + ns, that, that._keydown.bind(that))
                 .on("input" + ns, that._search.bind(that))
                 .on("paste" + ns, that._search.bind(that))
                 .attr({
@@ -644,7 +645,7 @@ export const __meta__ = {
                     .on("mousedown" + ns + " touchend" + ns, that._wrapperMousedown.bind(that))
                     .on(CLICK, that._focusHandler.bind(that));
 
-                that.input.on(KEYDOWN, that._keydown.bind(that))
+                that.input.on(KEYDOWN, that, that._keydown.bind(that))
                     .on("paste" + ns, that._search.bind(that))
                     .on("input" + ns, that._search.bind(that))
                     .on("focus" + ns, that._inputFocus.bind(that))

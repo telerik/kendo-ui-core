@@ -45,6 +45,7 @@ import "./kendo.html.button.js";
             CLOSE = "close",
             SHOW = "show",
             HIDE = "hide",
+            KENDO_KEYDOWN = "kendoKeydown",
             SIZE = {
                 small: "k-window-sm",
                 medium: "k-window-md",
@@ -346,9 +347,9 @@ import "./kendo.html.button.js";
 
                     wrapper.find(KCLOSE)
                         .on("click", that._closeClick.bind(that))
-                        .on("keydown", that._closeKeyHandler.bind(that));
+                        .on("keydown", that, that._closeKeyHandler.bind(that));
 
-                    that.element.on("keydown", that._keydown.bind(that));
+                    that.element.on("keydown", that, that._keydown.bind(that));
                 }
             },
 
@@ -873,7 +874,8 @@ import "./kendo.html.button.js";
                 OPEN,
                 CLOSE,
                 SHOW,
-                HIDE
+                HIDE,
+                KENDO_KEYDOWN
             ],
 
             options: {

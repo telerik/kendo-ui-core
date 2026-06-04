@@ -204,7 +204,8 @@ export const __meta__ = {
             "dataBinding",
             "dataBound",
             "cascade",
-            "set"
+            "set",
+            "kendoKeydown"
         ],
 
         setOptions: function(options) {
@@ -263,7 +264,7 @@ export const __meta__ = {
 
             if (that.filterInput) {
                 that.filterInput
-                    .on("keydown" + ns, that._keydown.bind(that))
+                    .on("keydown" + ns, that, that._keydown.bind(that))
                     .on("input" + ns, that._search.bind(that))
                     .on("paste" + ns, that._inputPaste.bind(that))
                     .attr({
@@ -441,7 +442,7 @@ export const __meta__ = {
                 clear.on(CLICK + " touchend" + ns, that._clearValue.bind(that));
 
                 that.input
-                    .on("keydown" + ns, that._keydown.bind(that))
+                    .on("keydown" + ns, that, that._keydown.bind(that))
                     .on("input" + ns, that._search.bind(that))
                     .on("paste" + ns, that._inputPaste.bind(that));
 

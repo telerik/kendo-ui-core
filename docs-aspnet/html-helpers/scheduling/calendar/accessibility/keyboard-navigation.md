@@ -26,5 +26,6 @@ When the user applies the multiple date selection, the Calendar demonstrates the
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Calendar for {{ site.framework }}]({% slug custom_keyboard_navigation_calendar_htmlhelper %})
 * [Keyboard Navigation by the Calendar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/calendar/keyboard-navigation)
 * [Server-Side API](/api/calendar)

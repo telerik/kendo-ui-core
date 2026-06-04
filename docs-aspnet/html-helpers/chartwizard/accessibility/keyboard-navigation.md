@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the Chart Wizard is always available.
 
-For a runnable example, refer to the [demo on using the keyboard navigation of the Chart Wizard](https://demos.telerik.com/{{ site.platform }}/chartwizard/keyboard-navigation).  
+For a runnable example, refer to the [demo on using the keyboard navigation of the Chart Wizard](https://demos.telerik.com/{{ site.platform }}/chartwizard/keyboard-navigation).
 
 The Chart Wizard component consists of multiple nested components and supports their keyboard shortcuts:
 
@@ -37,5 +37,6 @@ Also, the Chart Wizard supports the following key combinations:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Chart Wizard for {{ site.framework }}]({% slug custom_keyboard_navigation_chartwizard_htmlhelper %})
 * [Keyboard Navigation by the Chart Wizard for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chartwizard/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

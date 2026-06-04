@@ -60,7 +60,7 @@ import "../kendo.icons.js";
 
             that._render();
 
-            that.element.on(KEYDOWN_NS, that.keydown.bind(that));
+            that.element.on(KEYDOWN_NS, that, that.keydown.bind(that));
 
             Observable.fn.init.call(that);
         },
@@ -336,7 +336,7 @@ import "../kendo.icons.js";
             var that = this,
                 wrapper = that.wrapper,
                 hsvRect = wrapper.find(".k-hsv-rectangle"),
-                hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, bind(that._hsvKeydown, that)),
+                hsvHandle = hsvRect.find(".k-draghandle").attr("tabIndex", 0).on(KEYDOWN_NS, that, bind(that._hsvKeydown, that)),
                 value = this.value();
 
             if (value && value.indexOf("rgba") > -1) {

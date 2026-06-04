@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the Grid is always available.
 
-For a complete example, refer to the [demo on using the keyboard navigation of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation).  
+For a complete example, refer to the [demo on using the keyboard navigation of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/keyboard-navigation).
 
 The Grid supports its keyboard navigation functionality through the `Navigatable()` method. When enabled, you can initially select a row or cell and then move within the Grid by using the `Arrow` keys. The navigation occurs at a cell level regardless of what the `Selectable()` mode is. To select the current row or cell, press `Space`.
 
@@ -37,6 +37,7 @@ You can also avoid the procedure and bypass the keyboard navigation of the Grid,
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Grid for {{ site.framework }}]({% slug custom_keyboard_navigation_grid_htmlhelper %})
 {% if site.core %}
 * [ASP.NET Core DataGrid Homepage](https://www.telerik.com/aspnet-core-ui/grid)
 {% endif %}

@@ -271,4 +271,19 @@ describe("keyboard support", function() {
         dialog.wrapper.find(".k-dialog-actions .k-button").press(keys.SPACEBAR);
         dialog.wrapper.find(".k-dialog-actions .k-button").click();
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let dialog = createDialog({
+            visible: true,
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        dialog.element.trigger({ type: "keydown", keyCode: keys.ESC });
+
+        assert.isTrue(fired);
+    });
 });

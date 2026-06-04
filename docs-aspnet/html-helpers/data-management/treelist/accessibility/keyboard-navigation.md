@@ -59,5 +59,6 @@ For a complete list of all supported key combinations, refer to the [Pager's Key
 
 ## See Also
 
+* [Custom Keyboard Navigation in the TreeList for {{ site.framework }}]({% slug custom_keyboard_navigation_treelist_htmlhelper %})
 * [Keyboard Navigation by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

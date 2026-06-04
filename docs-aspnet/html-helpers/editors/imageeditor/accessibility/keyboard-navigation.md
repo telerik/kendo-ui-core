@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the ImageEd
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ImageEditor for {{ site.framework }}]({% slug custom_keyboard_navigation_imageeditor_htmlhelper %})
 * [Keyboard Navigation in the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/keyboard-navigation)
 * [Accessibility in the ImageEditor HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_imageeditor_accessibility %})

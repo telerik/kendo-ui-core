@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the ChipList is always available.
 
-For a runnable example, refer to the [demo on using the keyboard navigation of the ChipList](https://demos.telerik.com/{{ site.platform }}/chiplist/keyboard-navigation).  
+For a runnable example, refer to the [demo on using the keyboard navigation of the ChipList](https://demos.telerik.com/{{ site.platform }}/chiplist/keyboard-navigation).
 
 The ChipList supports the following keyboard shortcuts:
 
@@ -24,5 +24,6 @@ The ChipList supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ChipList for {{ site.framework }}]({% slug custom_keyboard_navigation_chiplist_htmlhelper %})
 * [Keyboard Navigation by the ChipList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chiplist/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

@@ -1125,4 +1125,19 @@ describe("kendo.ui.DropDownList events", function() {
 
         dropdownlist.element.click();
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "bar"],
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        dropdownlist.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+
+        assert.isTrue(fired);
+    });
 });

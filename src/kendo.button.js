@@ -24,7 +24,8 @@ import "./kendo.html.button.js";
             DISABLED = "disabled",
             DISABLEDSTATE = "k-disabled",
             FOCUSEDSTATE = "k-focus",
-            ACTIVESTATE = "k-active";
+            ACTIVESTATE = "k-active",
+            KENDO_KEYDOWN = "kendoKeydown";
 
         var BUTTON_DEFAULTS = {
             icon: "",
@@ -61,7 +62,7 @@ import "./kendo.html.button.js";
                     .on(CLICK + NS, that._click.bind(that))
                     .on("focus" + NS, that._focus.bind(that))
                     .on("blur" + NS, that._blur.bind(that))
-                    .on("keydown" + NS, that._keydown.bind(that))
+                    .on("keydown" + NS, that, that._keydown.bind(that))
                     .on("keyup" + NS, that._removeActive.bind(that))
                     .on(MOUSEDOWN + NS, that._addActive.bind(that))
                     .on(MOUSEUP + NS + " " + MOUSEOUT + NS, that._removeActive.bind(that));
@@ -82,7 +83,8 @@ import "./kendo.html.button.js";
             },
 
             events: [
-                CLICK
+                CLICK,
+                KENDO_KEYDOWN
             ],
 
             options: {

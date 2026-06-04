@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the Schedul
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Scheduler for {{ site.framework }}]({% slug custom_keyboard_navigation_scheduler_htmlhelper %})
 * [Keyboard Navigation in the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/keyboard-navigation)
 * [Accessibility in the Scheduler HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_scheduler_accessibility %})

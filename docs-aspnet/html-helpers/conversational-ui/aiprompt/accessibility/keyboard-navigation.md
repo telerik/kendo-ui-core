@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the AIPrompt is always available.
 
-For a runnable example, refer to the [demo on using the keyboard navigation of the AIPrompt](https://demos.telerik.com/{{ site.platform }}/aiprompt/keyboard-navigation).  
+For a runnable example, refer to the [demo on using the keyboard navigation of the AIPrompt](https://demos.telerik.com/{{ site.platform }}/aiprompt/keyboard-navigation).
 
 The AIPrompt supports the following keyboard shortcuts:
 
@@ -25,5 +25,6 @@ The AIPrompt supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the AIPrompt for {{ site.framework }}]({% slug custom_keyboard_navigation_aiprompt_htmlhelper %})
 * [Keyboard Navigation by the AIPrompt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/aiprompt/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

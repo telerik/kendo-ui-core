@@ -730,3 +730,51 @@ How to detect when the slider handle is being moved in real-time? Detect and han
 ##### e.value `Number`
 
 Represents the value from the current position of the drag handle.
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the Slider is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI Slider? Capture and intercept keydown events fired while the Slider is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the Slider component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Slider`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default Slider keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <input id="slider" />
+    <script>
+      $("#slider").kendoSlider({
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <input id="slider" />
+    <script>
+      $("#slider").kendoSlider();
+      var widget = $("#slider").data("kendoSlider");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

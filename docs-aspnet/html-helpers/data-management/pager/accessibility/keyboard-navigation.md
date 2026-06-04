@@ -11,7 +11,7 @@ position: 2
 
 To enable keyboard navigation of the Pager set the `Navigatable()` option to `true`.
 
-For a complete example, refer to the [demo on using the keyboard navigation of the Pager](https://demos.telerik.com/{{ site.platform }}/pager/keyboard-navigation).  
+For a complete example, refer to the [demo on using the keyboard navigation of the Pager](https://demos.telerik.com/{{ site.platform }}/pager/keyboard-navigation).
 
 The Pager supports its keyboard navigation functionality through the `Navigatable()` method. When enabled, you can initially change the active page by using the `PageUp` and `PageDown` keys.
 Alternatively, you can press `Enter` and navigate through the different elements of the pager via `Tab` and `Shift+Tab`.
@@ -58,5 +58,6 @@ When an element inside the Pager is focused:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Pager for {{ site.framework }}]({% slug custom_keyboard_navigation_pager_htmlhelper %})
 * [Keyboard Navigation of the Pager HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pager/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

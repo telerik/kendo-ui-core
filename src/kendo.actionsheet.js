@@ -40,6 +40,7 @@ export const __meta__ = {
     var extend = $.extend;
     var CLICK = "click";
     var KEYDOWN = "keydown";
+    var KENDO_KEYDOWN = "kendoKeydown";
 
     function contains(container, target) {
         if (!container || !target) {
@@ -85,7 +86,8 @@ export const __meta__ = {
             OPEN,
             CLOSE,
             ACTIVATE,
-            DEACTIVATE
+            DEACTIVATE,
+            KENDO_KEYDOWN
         ],
 
         options: {

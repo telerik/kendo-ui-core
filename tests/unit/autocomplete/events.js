@@ -425,5 +425,20 @@ describe("kendo.ui.AutoComplete events", function() {
 
         assert.equal(autocomplete.wrapper.find(autocomplete._clear).length, 0);
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let autocomplete = new AutoComplete(input, {
+            dataSource: ["foo", "bar"],
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+
+        assert.isTrue(fired);
+    });
 });
 

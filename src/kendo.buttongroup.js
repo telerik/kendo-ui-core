@@ -33,6 +33,7 @@ export const __meta__ = {
     var MULTIPLE = "multiple";
     var TOGGLE = "toggle";
     var FOCUS = "focus";
+    var KENDO_KEYDOWN = "kendoKeydown";
 
     var ButtonGroup = Widget.extend({
         init: function(element, options) {
@@ -75,7 +76,8 @@ export const __meta__ = {
         },
 
         events: [
-            SELECT
+            SELECT,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -221,7 +223,7 @@ export const __meta__ = {
 
         _attachEvents: function() {
             if (!this.options.preventKeyNav) {
-                this.element.on(KEYDOWN + NS, this._keyDown.bind(this));
+                this.element.on(KEYDOWN + NS, this, this._keyDown.bind(this));
             }
         },
 

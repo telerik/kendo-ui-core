@@ -133,7 +133,7 @@ import "../kendo.html.button.js";
             var that = this;
 
             that.wrapper
-                .on(KEYDOWN_NS, bind(that._keydown, that))
+                .on(KEYDOWN_NS, that, bind(that._keydown, that))
                 .on(CLICK_NS, ".k-button[data-command]", function () {
                     that._clearColor = true;
                     that._updateUI(null);

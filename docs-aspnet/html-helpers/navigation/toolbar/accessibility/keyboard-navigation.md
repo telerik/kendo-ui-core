@@ -46,5 +46,6 @@ The following keyboard shortcuts are applicable to the SplitButton, DropDownButt
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ToolBar for {{ site.framework }}]({% slug custom_keyboard_navigation_toolbar_htmlhelper %})
 * [Keyboard Navigation by the ToolBar for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

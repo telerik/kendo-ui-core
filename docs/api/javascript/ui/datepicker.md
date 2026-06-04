@@ -1428,7 +1428,7 @@ How do I properly destroy a Kendo UI datepicker widget? Clean up and fully dispo
     datepicker.destroy();
     </script>
 
-### enable
+### enable *(default: true)*
 
 Enable/Disable the DatePicker widget.
 
@@ -1836,4 +1836,52 @@ The widget instance which fired the event.
     datepicker.bind("open", function(e) {
         e.preventDefault(); //prevent popup opening
     });
+    </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the DatePicker is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI DatePicker? Capture and intercept keydown events fired while the DatePicker is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the DatePicker component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.DatePicker`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default DatePicker keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <input id="datepicker" />
+    <script>
+      $("#datepicker").kendoDatePicker({
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <input id="datepicker" />
+    <script>
+      $("#datepicker").kendoDatePicker();
+      var widget = $("#datepicker").data("kendoDatePicker");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
     </script>

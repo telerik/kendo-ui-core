@@ -53,4 +53,19 @@ describe("kendo.ui.MaskedTextBox events", function() {
             keyCode: kendo.keys.ENTER
         });
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let maskedtextbox = new MaskedTextBox(input, {
+            mask: "LLLL",
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        input.trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
+
+        assert.isTrue(fired);
+    });
 });

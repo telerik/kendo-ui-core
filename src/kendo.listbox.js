@@ -78,6 +78,7 @@ export const __meta__ = {
     var DRAG = "drag";
     var DROP = "drop";
     var DRAGEND = "dragend";
+    var KENDO_KEYDOWN = "kendoKeydown";
     var DEFAULT_FILTER = "ul.k-list-ul>li.k-list-item";
 
     var RIGHT = "right";
@@ -179,7 +180,8 @@ export const __meta__ = {
             DRAGSTART,
             DRAG,
             DROP,
-            DRAGEND
+            DRAGEND,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -275,7 +277,7 @@ export const __meta__ = {
 
             if (options.navigatable) {
                 that._getList().on(CLICK, ENABLED_ITEM_SELECTOR, that._click.bind(that))
-                            .on(KEYDOWN, that._keyDown.bind(that))
+                            .on(KEYDOWN, that.listbox, that._keyDown.bind(that))
                             .on(BLUR, that._blur.bind(that));
             }
         },
@@ -1548,7 +1550,7 @@ export const __meta__ = {
 
             that.element
                 .on(CLICK, ENABLED_TOOL_SELECTOR, that._onToolClick.bind(that))
-                .on(KEYDOWN, that._keyDown.bind(that));
+                .on(KEYDOWN, that.listBox, that._keyDown.bind(that));
         },
         _createTools: function() {
             var that = this;

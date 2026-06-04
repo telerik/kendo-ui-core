@@ -28,6 +28,7 @@ export const __meta__ = {
         CHANGE = "change",
         NAVIGATE = "navigate",
         CANCEL = "cancel",
+        KENDO_KEYDOWN = "kendoKeydown",
 
         ACTION_SORT = "sort",
         ACTION_REMOVE = "remove",
@@ -100,7 +101,8 @@ export const __meta__ = {
             END,
             CHANGE,
             NAVIGATE,
-            CANCEL
+            CANCEL,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -128,7 +130,7 @@ export const __meta__ = {
             that._keydownHandler = that._keydown.bind(that);
             that._blurHandler = that._blur.bind(that);
             that._focusHandler = that._focus.bind(that);
-            that.element.on(KEYDOWN, REFSORTABLEITEM_ATTR, that._keydownHandler)
+            that.element.on(KEYDOWN, REFSORTABLEITEM_ATTR, that, that._keydownHandler)
                 .on(BLUR, REFSORTABLEITEM_ATTR, that._blurHandler)
                 .on(FOCUS, REFSORTABLEITEM_ATTR, that._focusHandler);
         },
@@ -207,6 +209,10 @@ export const __meta__ = {
                   focusable = target.find(":kendoFocusable");
             let handled = false;
             let newTarget;
+
+            if (!kendo.keyDownHandler(e, that)) {
+                return;
+            }
 
             that._preventNavigate = false;
 

@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the Switch]
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Switch for {{ site.framework }}]({% slug custom_keyboard_navigation_switch_htmlhelper %})
 * [Keyboard Navigation in the Switch HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/switch/keyboard-navigation)
 * [Accessibility in the Switch HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_switch_accessibility %})

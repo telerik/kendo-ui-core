@@ -26,5 +26,6 @@ Telerik UI Wizard for {{ site.framework }} supports the following keyboard short
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Wizard for {{ site.framework }}]({% slug custom_keyboard_navigation_wizard_htmlhelper %})
 * [Keyboard Navigation in the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/keyboard-navigation)
 * [Accessibility in the Wizard HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_wizard_accessibility %})

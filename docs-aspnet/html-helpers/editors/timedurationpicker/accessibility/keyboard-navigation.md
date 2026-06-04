@@ -87,6 +87,7 @@ For a complete example, refer to the [demo on keyboard navigation of the TimePic
 
 ## See Also
 
+* [Custom Keyboard Navigation in the TimeDurationPicker for {{ site.framework }}]({% slug custom_keyboard_navigation_timedurationpicker_htmlhelper %})
 * [Configuring the TimeDurationPicker Columns]({% slug htmlhelpers_timedurationpickerhelper_columns %})
 * [Using the API of the TimeDurationPicker for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timedurationpicker/api)
 * [Knowledge Base Section](/knowledge-base)

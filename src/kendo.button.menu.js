@@ -37,6 +37,7 @@ export const __meta__ = {
         OPEN = "menuOpen",
         CLOSE = "menuClose",
         KEYDOWN = "keydown",
+        KENDO_KEYDOWN = "kendoKeydown",
         FOCUS = "focus",
 
         DIRECTIONS = {
@@ -144,7 +145,8 @@ export const __meta__ = {
         events: [
             MENU_CLICK,
             OPEN,
-            CLOSE
+            CLOSE,
+            KENDO_KEYDOWN
         ],
 
         _renderList: function() {
@@ -276,10 +278,10 @@ export const __meta__ = {
 
             that.list
                 .on(CLICK + NS, DOT + cssClasses.menuItem, that._click.bind(that))
-                .on(KEYDOWN + NS, DOT + cssClasses.menuItem, that.listItemKeydown.bind(that));
+                .on(KEYDOWN + NS, DOT + cssClasses.menuItem, that, that.listItemKeydown.bind(that));
 
             that.mainButton
-                .on(KEYDOWN + NS, that._keydown.bind(that));
+                .on(KEYDOWN + NS, that, that._keydown.bind(that));
         },
 
         _keydown: function(ev) {

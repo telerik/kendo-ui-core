@@ -117,4 +117,19 @@ describe("events", function() {
 
         assert.isOk(isClickPrevented);
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+
+        button = getButton().kendoButton({
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        button.trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
+
+        assert.isTrue(fired);
+    });
 });

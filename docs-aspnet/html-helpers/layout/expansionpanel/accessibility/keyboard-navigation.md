@@ -16,6 +16,7 @@ For a complete example, refer to the [demo on using the keyboard navigation of t
 
 ## See Also
 
+* [Custom Keyboard Navigation in the ExpansionPanel for {{ site.framework }}]({% slug custom_keyboard_navigation_expansionpanel_htmlhelper %})
 * [Basic Usage of the ExpansionPanel HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel)
 {% if site.core %}
 * [Basic Usage of the ExpansionPanel TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/expansionpanel/tag-helper)

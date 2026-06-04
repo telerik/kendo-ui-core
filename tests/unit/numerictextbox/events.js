@@ -151,4 +151,18 @@ describe("kendo.ui.NumericTextBox Events", function() {
 
         assert.equal(calls, 0);
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let textbox = new kendo.ui.NumericTextBox(input, {
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        textbox.element.trigger({ type: "keydown", keyCode: kendo.keys.UP });
+
+        assert.isTrue(fired);
+    });
 });

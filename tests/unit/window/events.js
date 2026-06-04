@@ -792,4 +792,18 @@ describe("keyboard support", function() {
 
         assert.isOk(triggers, 1);
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let dialog = createWindow({
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        dialog.wrapper.trigger({ type: "keydown", keyCode: keys.ESC });
+
+        assert.isTrue(fired);
+    });
 });

@@ -805,3 +805,60 @@ If invoked prevents the item selection.
             }
         })
     </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the BottomNavigation is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI BottomNavigation? Capture and intercept keydown events fired while the BottomNavigation is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the BottomNavigation component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.BottomNavigation`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default BottomNavigation keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <nav id="bottomnavigation"></nav>
+    <script>
+      $("#bottomnavigation").kendoBottomNavigation({
+        items: [
+          { text: "Home", icon: "home" },
+          { text: "Info", icon: "info-circle" }
+        ],
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <nav id="bottomnavigation"></nav>
+    <script>
+      $("#bottomnavigation").kendoBottomNavigation({
+        items: [
+          { text: "Home", icon: "home" },
+          { text: "Info", icon: "info-circle" }
+        ],
+      });
+      var widget = $("#bottomnavigation").data("kendoBottomNavigation");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

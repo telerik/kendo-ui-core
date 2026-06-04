@@ -100,4 +100,18 @@ describe("splitter events", function() {
 
         splitter.object.ajaxRequest(".k-pane:first", notExistingUrl);
     });
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        splitter = create({
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        });
+
+        splitter.dom.find(".k-splitbar").first().trigger({ type: "keydown", keyCode: kendo.keys.RIGHT });
+
+        assert.isTrue(fired);
+    });
 });

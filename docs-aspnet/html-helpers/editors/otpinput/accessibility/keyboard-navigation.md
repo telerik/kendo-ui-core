@@ -14,7 +14,7 @@ The keyboard navigation of the OTPInput is always available.
 The {{ site.product }} OTPInput supports the following keyboard shortcuts:
 
 | SHORTCUT						| DESCRIPTION				                                                        |
-|:---                 |:---                         
+|:---                 |:---
 | `Tab`               | Focuses the next input in the component.|
 | `Shift`+`Tab`       | Focuses the previous input in the component.|
 | `Up/Down Arrows`       | Navigates to the next/previous item when a panel is focused.|
@@ -26,6 +26,7 @@ For a complete example, refer to the [demo on keyboard navigation of the OTPInpu
 
 ## See Also
 
+* [Custom Keyboard Navigation in the OTPInput for {{ site.framework }}]({% slug custom_keyboard_navigation_otpinput_htmlhelper %})
 * [Keyboard Navigation by the OTPInput HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/otpinput/keyboard-navigation)
 * [Server-Side API of the OTPInput HtmlHelper](/api/otpinput)
 {% if site.core %}

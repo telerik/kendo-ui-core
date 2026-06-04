@@ -848,4 +848,19 @@ describe("Toolbar: Events: ", function() {
             assert.isOk(window.location.href.indexOf("#foo") !== -1);
         });
     }
+
+    it("keydown logic can be prevented through kendoKeydown event", function() {
+        let fired = false;
+        let toolbar = container.kendoToolBar({
+            items: [{ type: "button", text: "Action" }],
+            kendoKeydown: function(e) {
+                fired = true;
+                e.preventKendoKeydown = true;
+            }
+        }).data("kendoToolBar");
+
+        toolbar.element.trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
+
+        assert.isTrue(fired);
+    });
 });

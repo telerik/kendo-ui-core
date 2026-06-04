@@ -16,5 +16,6 @@ The keyboard navigation of the NumericTextBox is always available.
 
 ## See Also
 
+* [Custom Keyboard Navigation in the NumericTextBox for {{ site.framework }}]({% slug custom_keyboard_navigation_numerictextbox_htmlhelper %})
 * [Keyboard Navigation by the NumericTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/numerictextbox/keyboard-navigation)
 * [Accessibility in the NumericTextBox HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_numerictextbox_accessibility %})

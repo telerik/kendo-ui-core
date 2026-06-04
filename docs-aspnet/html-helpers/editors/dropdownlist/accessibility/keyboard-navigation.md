@@ -15,5 +15,6 @@ For a complete example, refer to the [demo on keyboard navigation of the DropDow
 
 ## See Also
 
+* [Custom Keyboard Navigation in the DropDownList for {{ site.framework }}]({% slug custom_keyboard_navigation_dropdownlist_htmlhelper %})
 * [Keyboard Navigation in the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/DropDownList/keyboard-navigation)
 * [Accessibility in the DropDownList HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_dropdownlist_accessibility %})

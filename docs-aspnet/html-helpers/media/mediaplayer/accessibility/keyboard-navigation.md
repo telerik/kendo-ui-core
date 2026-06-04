@@ -12,7 +12,7 @@ position: 2
 
 The keyboard navigation of the MediaPlayer is disabled by default.
 
-To enable it, use the [`Navigatable(true)`](/api/kendo.mvc.ui.fluent/mediaplayerbuilder#navigatablesystemboolean) configuration. 
+To enable it, use the [`Navigatable(true)`](/api/kendo.mvc.ui.fluent/mediaplayerbuilder#navigatablesystemboolean) configuration.
 
 ```HtmlHelper
     @(Html.Kendo().MediaPlayer()
@@ -51,5 +51,6 @@ The MediaPlayer supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the MediaPlayer for {{ site.framework }}]({% slug custom_keyboard_navigation_mediaplayer_htmlhelper %})
 * [Keyboard Navigation by the MediaPlayer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/mediaplayer/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

@@ -727,6 +727,10 @@ declare namespace kendo.data {
         title?: string | undefined;
     }
 
+    interface SchedulerKendoKeydownEvent extends SchedulerEvent {
+        preventKendoKeydown: boolean;
+    }
+
     class SchedulerEvent extends Model {
         static idField: string;
         static fields: DataSourceSchemaModelFields;
@@ -2175,11 +2179,16 @@ declare namespace kendo.ui {
         close?(e: ActionSheetEvent): void;
         deactivate?(e: ActionSheetEvent): void;
         open?(e: ActionSheetEvent): void;
+        kendoKeydown?(e: ActionSheetKendoKeydownEvent): void;
     }
     interface ActionSheetEvent {
         sender: ActionSheet;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ActionSheetKendoKeydownEvent extends ActionSheetEvent {
+        preventKendoKeydown: boolean;
     }
 
     class AIPrompt extends kendo.ui.Widget {
@@ -2220,6 +2229,10 @@ declare namespace kendo.ui {
         sender: AIPrompt;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface AIPromptKendoKeydownEvent extends AIPromptEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface AIPromptCommandExecuteEvent extends AIPromptEvent {
@@ -2315,6 +2328,7 @@ declare namespace kendo.ui {
         promptRequestCancel?(e: AIPromptPromptRequestCancelEvent): void;
         outputRatingChange?(e: AIPromptEvent): void;
         outputCopy?(e: AIPromptEvent): void;
+        kendoKeydown?(e: AIPromptKendoKeydownEvent): void;
     }
 
     interface AIPromptServiceOptions {
@@ -2516,11 +2530,16 @@ declare namespace kendo.ui {
         filtering?(e: AutoCompleteFilteringEvent): void;
         open?(e: AutoCompleteOpenEvent): void;
         select?(e: AutoCompleteSelectEvent): void;
+        kendoKeydown?(e: AutoCompleteKendoKeydownEvent): void;
     }
     interface AutoCompleteEvent {
         sender: AutoComplete;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface AutoCompleteKendoKeydownEvent extends AutoCompleteEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface AutoCompleteChangeEvent extends AutoCompleteEvent {}
@@ -2662,11 +2681,16 @@ declare namespace kendo.ui {
         template?: string | Function | undefined;
         positionMode?: string | undefined;
         select?(e: BottomNavigationSelectEvent): void;
+        kendoKeydown?(e: BottomNavigationKendoKeydownEvent): void;
     }
     interface BottomNavigationEvent {
         sender: BottomNavigation;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface BottomNavigationKendoKeydownEvent extends BottomNavigationEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface BottomNavigationSelectEvent extends BottomNavigationEvent {
@@ -2706,6 +2730,7 @@ declare namespace kendo.ui {
 
         change?(e: BreadcrumbChangeEvent): void;
         click?(e: BreadcrumbClickEvent): void;
+        kendoKeydown?(e: BreadcrumbKendoKeydownEvent): void;
     }
 
     interface BreadcrumbMessages {
@@ -2728,6 +2753,10 @@ declare namespace kendo.ui {
         sender: Breadcrumb;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface BreadcrumbKendoKeydownEvent extends BreadcrumbEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface BreadcrumbChangeEvent extends BreadcrumbEvent {
@@ -2768,6 +2797,7 @@ declare namespace kendo.ui {
         spriteCssClass?: string | undefined;
         themeColor?: string | undefined;
         click?(e: ButtonClickEvent): void;
+        kendoKeydown?(e: ButtonKendoKeydownEvent): void;
     }
 
     interface ButtonBadge {
@@ -2789,6 +2819,10 @@ declare namespace kendo.ui {
         sender: Button;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ButtonKendoKeydownEvent extends ButtonEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ButtonClickEvent extends ButtonEvent {
@@ -2857,11 +2891,16 @@ declare namespace kendo.ui {
         size?: string | undefined;
         themeColor?: string | undefined;
         select?(e: ButtonGroupSelectEvent): void;
+        kendoKeydown?(e: ButtonGroupKendoKeydownEvent): void;
     }
     interface ButtonGroupEvent {
         sender: ButtonGroup;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ButtonGroupKendoKeydownEvent extends ButtonGroupEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ButtonGroupSelectEvent extends ButtonGroupEvent {
@@ -2946,11 +2985,16 @@ declare namespace kendo.ui {
         value?: Date | undefined;
         change?(e: CalendarEvent): void;
         navigate?(e: CalendarEvent): void;
+        kendoKeydown?(e: CalendarKendoKeydownEvent): void;
     }
     interface CalendarEvent {
         sender: Calendar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface CalendarKendoKeydownEvent extends CalendarEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface CalendarRange {
@@ -3073,12 +3117,17 @@ declare namespace kendo.ui {
         change?: (e: ChartWizardChangeEvent) => void;
         dataBinding?: (e: ChartWizardDataEvent) => void;
         dataBound?: (e: ChartWizardDataEvent) => void;
+        kendoKeydown?(e: ChartWizardKendoKeydownEvent): void;
     }
 
     interface ChartWizardEvent {
         sender: ChartWizard;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ChartWizardKendoKeydownEvent extends ChartWizardEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ChartWizardExportEvent extends ChartWizardEvent {
@@ -4115,11 +4164,16 @@ declare namespace kendo.ui {
         click?(e: ChipClickEvent): void;
         select?(e: ChipSelectEvent): void;
         remove?(e: ChipRemoveEvent): void;
+        kendoKeydown?(e: ChipKendoKeydownEvent): void;
     }
     interface ChipEvent {
         sender: Chip;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ChipKendoKeydownEvent extends ChipEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ChipClickEvent extends ChipEvent {
@@ -4181,11 +4235,16 @@ declare namespace kendo.ui {
         items?: ChipListItem[] | undefined;
         select?(e: ChipListSelectEvent): void;
         remove?(e: ChipListRemoveEvent): void;
+        kendoKeydown?(e: ChipListKendoKeydownEvent): void;
     }
     interface ChipListEvent {
         sender: ChipList;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ChipListKendoKeydownEvent extends ChipListEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ChipListSelectEvent extends ChipListEvent {
@@ -4417,11 +4476,16 @@ declare namespace kendo.ui {
         select?(e: ColorPickerSelectEvent): void;
         open?(e: ColorPickerEvent): void;
         close?(e: ColorPickerEvent): void;
+        kendoKeydown?(e: ColorPickerKendoKeydownEvent): void;
     }
     interface ColorPickerEvent {
         sender: ColorPicker;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ColorPickerKendoKeydownEvent extends ColorPickerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ColorPickerChangeEvent extends ColorPickerEvent {
@@ -4554,11 +4618,16 @@ declare namespace kendo.ui {
         open?(e: ComboBoxOpenEvent): void;
         select?(e: ComboBoxSelectEvent): void;
         cascade?(e: ComboBoxCascadeEvent): void;
+        kendoKeydown?(e: ComboBoxKendoKeydownEvent): void;
     }
     interface ComboBoxEvent {
         sender: ComboBox;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ComboBoxKendoKeydownEvent extends ComboBoxEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ComboBoxChangeEvent extends ComboBoxEvent {}
@@ -4814,11 +4883,16 @@ declare namespace kendo.ui {
         size?: string | undefined;
         steps?: DateInputSteps | undefined;
         change?(e: DateInputChangeEvent): void;
+        kendoKeydown?(e: DateInputKendoKeydownEvent): void;
     }
     interface DateInputEvent {
         sender: DateInput;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DateInputKendoKeydownEvent extends DateInputEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DateInputChangeEvent extends DateInputEvent {}
@@ -4912,11 +4986,16 @@ declare namespace kendo.ui {
         change?(e: DatePickerChangeEvent): void;
         close?(e: DatePickerCloseEvent): void;
         open?(e: DatePickerOpenEvent): void;
+        kendoKeydown?(e: DatePickerKendoKeydownEvent): void;
     }
     interface DatePickerEvent {
         sender: DatePicker;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DatePickerKendoKeydownEvent extends DatePickerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DatePickerChangeEvent extends DatePickerEvent {}
@@ -5002,11 +5081,16 @@ declare namespace kendo.ui {
         change?(e: DateRangePickerChangeEvent): void;
         close?(e: DateRangePickerCloseEvent): void;
         open?(e: DateRangePickerOpenEvent): void;
+        kendoKeydown?(e: DateRangePickerKendoKeydownEvent): void;
     }
     interface DateRangePickerEvent {
         sender: DateRangePicker;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DateRangePickerKendoKeydownEvent extends DateRangePickerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DateRangePickerChangeEvent extends DateRangePickerEvent {}
@@ -5109,11 +5193,16 @@ declare namespace kendo.ui {
         change?(e: DateTimePickerChangeEvent): void;
         close?(e: DateTimePickerCloseEvent): void;
         open?(e: DateTimePickerOpenEvent): void;
+        kendoKeydown?(e: DateTimePickerKendoKeydownEvent): void;
     }
     interface DateTimePickerEvent {
         sender: DateTimePicker;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DateTimePickerKendoKeydownEvent extends DateTimePickerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DateTimePickerChangeEvent extends DateTimePickerEvent {}
@@ -5210,11 +5299,16 @@ declare namespace kendo.ui {
         initOpen?(e: DialogEvent): void;
         open?(e: DialogEvent): void;
         show?(e: DialogEvent): void;
+        kendoKeydown?(e: DialogKendoKeydownEvent): void;
     }
     interface DialogEvent {
         sender: Dialog;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DialogKendoKeydownEvent extends DialogEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DialogCloseEvent extends DialogEvent {
@@ -5256,12 +5350,17 @@ declare namespace kendo.ui {
         hide?(e: DrawerHideEvent): void;
         show?(e: DrawerEvent): void;
         itemClick?(e: DrawerEvent): void;
+        kendoKeydown?(e: DrawerKendoKeydownEvent): void;
     }
     interface DrawerEvent {
         sender: Drawer;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
         item?: JQuery | undefined;
+    }
+
+    interface DrawerKendoKeydownEvent extends DrawerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DrawerHideEvent extends DrawerEvent {}
@@ -5460,11 +5559,16 @@ declare namespace kendo.ui {
         open?(e: DropDownListOpenEvent): void;
         select?(e: DropDownListSelectEvent): void;
         cascade?(e: DropDownListCascadeEvent): void;
+        kendoKeydown?(e: DropDownListKendoKeydownEvent): void;
     }
     interface DropDownListEvent {
         sender: DropDownList;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DropDownListKendoKeydownEvent extends DropDownListEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DropDownListMessages {
@@ -5613,11 +5717,16 @@ declare namespace kendo.ui {
         filtering?(e: DropDownTreeFilteringEvent): void;
         open?(e: DropDownTreeOpenEvent): void;
         select?(e: DropDownTreeSelectEvent): void;
+        kendoKeydown?(e: DropDownTreeKendoKeydownEvent): void;
     }
     interface DropDownTreeEvent {
         sender: DropDownTree;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface DropDownTreeKendoKeydownEvent extends DropDownTreeEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface DropDownTreeChangeEvent extends DropDownTreeEvent {}
@@ -6252,11 +6361,16 @@ declare namespace kendo.ui {
         expand?(e: ExpansionPanelEvent): void;
         collapse?(e: ExpansionPanelEvent): void;
         complete?(e: ExpansionPanelEvent): void;
+        kendoKeydown?(e: ExpansionPanelKendoKeydownEvent): void;
     }
     interface ExpansionPanelEvent {
         sender: ExpansionPanel;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ExpansionPanelKendoKeydownEvent extends ExpansionPanelEvent {
+        preventKendoKeydown: boolean;
     }
 
     class FileManager extends kendo.ui.Widget {
@@ -6469,11 +6583,16 @@ declare namespace kendo.ui {
         dataBinding?(e: FileManagerEvent): void;
         dataBound?(e: FileManagerEvent): void;
         drop?(e: FileManagerEvent): void;
+        kendoKeydown?(e: FileManagerKendoKeydownEvent): void;
     }
     interface FileManagerEvent {
         sender: FileManager;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface FileManagerKendoKeydownEvent extends FileManagerEvent {
+        preventKendoKeydown: boolean;
     }
 
     class Filter extends kendo.ui.Widget {
@@ -6572,11 +6691,16 @@ declare namespace kendo.ui {
         messages?: FilterMessages | undefined;
         operators?: FilterOperators | undefined;
         change?(e: FilterChangeEvent): void;
+        kendoKeydown?(e: FilterKendoKeydownEvent): void;
     }
     interface FilterEvent {
         sender: Filter;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface FilterKendoKeydownEvent extends FilterEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface FilterChangeEvent extends FilterEvent {
@@ -6797,6 +6921,7 @@ declare namespace kendo.ui {
         click?(e: FloatingActionButtonClickEvent): void;
         expand?(e: FloatingActionButtonExpandEvent): void;
         collapse?(e: FloatingActionButtonCollapseEvent): void;
+        kendoKeydown?(e: FloatingActionButtonKendoKeydownEvent): void;
     }
 
     interface FloatingActionButtonItem {
@@ -6813,6 +6938,10 @@ declare namespace kendo.ui {
         sender: FloatingActionButton;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface FloatingActionButtonKendoKeydownEvent extends FloatingActionButtonEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface FloatingActionButtonExpandEvent extends FloatingActionButtonEvent {}
@@ -7234,11 +7363,16 @@ declare namespace kendo.ui {
         resize?(e: GanttResizeEvent): void;
         resizeEnd?(e: GanttResizeEndEvent): void;
         togglePlannedTasks?(e: GanttTogglePlannedTasks): void;
+        kendoKeydown?(e: GanttKendoKeydownEvent): void;
     }
     interface GanttEvent {
         sender: Gantt;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface GanttKendoKeydownEvent extends GanttEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface GanttDataBindingEvent extends GanttEvent {}
@@ -8189,12 +8323,17 @@ declare namespace kendo.ui {
         save?(e: GridSaveEvent): void;
         saveChanges?(e: GridSaveChangesEvent): void;
         sort?(e: GridSortEvent): void;
+        kendoKeydown?(e: GridKendoKeydownEvent): void;
     }
 
     interface GridEvent {
         sender: Grid;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface GridKendoKeydownEvent extends GridEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface GridBeforeEditEvent extends GridEvent {
@@ -8514,11 +8653,16 @@ declare namespace kendo.ui {
         imageRendered?(e: ImageEditorImageRenderedEvent): void;
         execute?(e: ImageEditorExecuteEvent): void;
         error?(e: ImageEditorErrorEvent): void;
+        kendoKeydown?(e: ImageEditorKendoKeydownEvent): void;
     }
     interface ImageEditorEvent {
         sender: ImageEditor;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ImageEditorKendoKeydownEvent extends ImageEditorEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ImageEditorImageLoadedEvent extends ImageEditorEvent {
@@ -8624,11 +8768,16 @@ declare namespace kendo.ui {
         dragend?(e: ListBoxDragendEvent): void;
         remove?(e: ListBoxRemoveEvent): void;
         reorder?(e: ListBoxReorderEvent): void;
+        kendoKeydown?(e: ListBoxKendoKeydownEvent): void;
     }
     interface ListBoxEvent {
         sender: ListBox;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ListBoxKendoKeydownEvent extends ListBoxEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ListBoxAddEvent extends ListBoxEvent {
@@ -8726,6 +8875,7 @@ declare namespace kendo.ui {
         edit?(e: ListViewEditEvent): void;
         remove?(e: ListViewRemoveEvent): void;
         save?(e: ListViewSaveEvent): void;
+        kendoKeydown?(e: ListViewKendoKeydownEvent): void;
     }
 
     interface ListViewPageableMessages {
@@ -8760,6 +8910,10 @@ declare namespace kendo.ui {
         sender: ListView;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ListViewKendoKeydownEvent extends ListViewEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ListViewCancelEvent extends ListViewEvent {
@@ -8855,11 +9009,16 @@ declare namespace kendo.ui {
         suffixOptions?: BasePrefixSuffixOptions | undefined;
         value?: string | undefined;
         change?(e: MaskedTextBoxChangeEvent): void;
+        kendoKeydown?(e: MaskedTextBoxKendoKeydownEvent): void;
     }
     interface MaskedTextBoxEvent {
         sender: MaskedTextBox;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface MaskedTextBoxKendoKeydownEvent extends MaskedTextBoxEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface MaskedTextBoxChangeEvent extends MaskedTextBoxEvent {}
@@ -8925,11 +9084,16 @@ declare namespace kendo.ui {
         ready?(e: MediaPlayerEvent): void;
         timeChange?(e: MediaPlayerEvent): void;
         volumeChange?(e: MediaPlayerEvent): void;
+        kendoKeydown?(e: MediaPlayerKendoKeydownEvent): void;
     }
     interface MediaPlayerEvent {
         sender: MediaPlayer;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface MediaPlayerKendoKeydownEvent extends MediaPlayerEvent {
+        preventKendoKeydown: boolean;
     }
 
     class Menu extends kendo.ui.Widget {
@@ -9014,11 +9178,16 @@ declare namespace kendo.ui {
         activate?(e: MenuActivateEvent): void;
         deactivate?(e: MenuDeactivateEvent): void;
         select?(e: MenuSelectEvent): void;
+        kendoKeydown?(e: MenuKendoKeydownEvent): void;
     }
     interface MenuEvent {
         sender: Menu;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface MenuKendoKeydownEvent extends MenuEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface MenuCloseEvent extends MenuEvent {
@@ -9322,11 +9491,16 @@ declare namespace kendo.ui {
         open?(e: MultiSelectOpenEvent): void;
         select?(e: MultiSelectSelectEvent): void;
         deselect?(e: MultiSelectDeselectEvent): void;
+        kendoKeydown?(e: MultiSelectKendoKeydownEvent): void;
     }
     interface MultiSelectEvent {
         sender: MultiSelect;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface MultiSelectKendoKeydownEvent extends MultiSelectEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface MultiSelectChangeEvent extends MultiSelectEvent {}
@@ -9427,12 +9601,17 @@ declare namespace kendo.ui {
         value?: Date | undefined;
         change?(e: MultiViewCalendarEvent): void;
         navigate?(e: MultiViewCalendarEvent): void;
+        kendoKeydown?(e: MultiViewCalendarKendoKeydownEvent): void;
     }
 
     interface MultiViewCalendarEvent {
         sender: MultiViewCalendar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface MultiViewCalendarKendoKeydownEvent extends MultiViewCalendarEvent {
+        preventKendoKeydown: boolean;
     }
 
     class Notification extends kendo.ui.Widget {
@@ -9579,11 +9758,16 @@ declare namespace kendo.ui {
         value?: number | undefined;
         change?(e: NumericTextBoxChangeEvent): void;
         spin?(e: NumericTextBoxSpinEvent): void;
+        kendoKeydown?(e: NumericTextBoxKendoKeydownEvent): void;
     }
     interface NumericTextBoxEvent {
         sender: NumericTextBox;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface NumericTextBoxKendoKeydownEvent extends NumericTextBoxEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface NumericTextBoxChangeEvent extends NumericTextBoxEvent {}
@@ -9682,11 +9866,16 @@ declare namespace kendo.ui {
         expand?(e: OrgChartExpandEvent): void;
         save?(e: OrgChartSaveEvent): void;
         select?(e: OrgChartSelectEvent): void;
+        kendoKeydown?(e: OrgChartKendoKeydownEvent): void;
     }
     interface OrgChartEvent {
         sender: OrgChart;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface OrgChartKendoKeydownEvent extends OrgChartEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface OrgChartCancelEvent extends OrgChartEvent {
@@ -9881,11 +10070,16 @@ declare namespace kendo.ui {
         render?(e: PDFViewerRenderEvent): void;
         open?(e: PDFViewerOpenEvent): void;
         error?(e: PDFViewerErrorEvent): void;
+        kendoKeydown?(e: PDFViewerKendoKeydownEvent): void;
     }
     interface PDFViewerEvent {
         sender: PDFViewer;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface PDFViewerKendoKeydownEvent extends PDFViewerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface PDFViewerRenderEvent extends PDFViewerEvent {
@@ -9960,11 +10154,16 @@ declare namespace kendo.ui {
         messages?: PagerMessages | undefined;
         navigatable?: boolean | undefined;
         change?(e: PagerChangeEvent): void;
+        kendoKeydown?(e: PagerKendoKeydownEvent): void;
     }
     interface PagerEvent {
         sender: Pager;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface PagerKendoKeydownEvent extends PagerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface PagerChangeEvent extends PagerEvent {}
@@ -10086,11 +10285,16 @@ declare namespace kendo.ui {
         error?(e: PanelBarErrorEvent): void;
         expand?(e: PanelBarExpandEvent): void;
         select?(e: PanelBarSelectEvent): void;
+        kendoKeydown?(e: PanelBarKendoKeydownEvent): void;
     }
     interface PanelBarEvent {
         sender: PanelBar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface PanelBarKendoKeydownEvent extends PanelBarEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface PanelBarActivateEvent extends PanelBarEvent {
@@ -10851,6 +11055,7 @@ declare namespace kendo.ui {
         pdfExport?(e: TreeListPdfExportEvent): void;
         save?(e: TreeListSaveEvent): void;
         columnResize?(e: TreeListColumnResizeEvent): void;
+        kendoKeydown?(e: PropertyGridKendoKeydownEvent): void;
     }
 
     interface PropertyGridContextMenuItem {
@@ -10922,6 +11127,10 @@ declare namespace kendo.ui {
         sender: PropertyGrid;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface PropertyGridKendoKeydownEvent extends PropertyGridEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface PropertyGridBeforeEditEvent extends PropertyGridEvent {
@@ -11179,6 +11388,7 @@ declare namespace kendo.ui {
         readonly?: boolean | undefined;
         change?(e: RatingChangeEvent): void;
         select?(e: RatingSelectEvent): void;
+        kendoKeydown?(e: RatingKendoKeydownEvent): void;
     }
 
     interface RatingLabel {
@@ -11189,6 +11399,10 @@ declare namespace kendo.ui {
         sender: Rating;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface RatingKendoKeydownEvent extends RatingEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface RatingChangeEvent extends RatingEvent {
@@ -11615,6 +11829,7 @@ declare namespace kendo.ui {
         resize?(e: SchedulerResizeEvent): void;
         resizeEnd?(e: SchedulerResizeEndEvent): void;
         save?(e: SchedulerSaveEvent): void;
+        kendoKeydown?(e: SchedulerKendoKeydownEvent): void;
     }
     interface SchedulerEvent {
         sender: Scheduler;
@@ -11753,11 +11968,16 @@ declare namespace kendo.ui {
         velocityThreshold?: number | undefined;
         change?(e: ScrollViewChangeEvent): void;
         refresh?(e: ScrollViewRefreshEvent): void;
+        kendoKeydown?(e: ScrollViewKendoKeydownEvent): void;
     }
     interface ScrollViewEvent {
         sender: ScrollView;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ScrollViewKendoKeydownEvent extends ScrollViewEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ScrollViewChangeEvent extends ScrollViewEvent {
@@ -11865,11 +12085,16 @@ declare namespace kendo.ui {
         change?(e: SignatureEvent): void;
         close?(e: SignatureEvent): void;
         open?(e: SignatureEvent): void;
+        kendoKeydown?(e: SignatureKendoKeydownEvent): void;
     }
     interface SignatureEvent {
         sender: Signature;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface SignatureKendoKeydownEvent extends SignatureEvent {
+        preventKendoKeydown: boolean;
     }
 
     class SkeletonContainer extends kendo.ui.Widget {
@@ -11968,11 +12193,16 @@ declare namespace kendo.ui {
         value?: number | undefined;
         change?(e: SliderChangeEvent): void;
         slide?(e: SliderSlideEvent): void;
+        kendoKeydown?(e: SliderKendoKeydownEvent): void;
     }
     interface SliderEvent {
         sender: Slider;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface SliderKendoKeydownEvent extends SliderEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface SliderChangeEvent extends SliderEvent {
@@ -12026,11 +12256,16 @@ declare namespace kendo.ui {
         change?(e: SortableChangeEvent): void;
         navigate?(e: SortableNavigateEvent): void;
         cancel?(e: SortableCancelEvent): void;
+        kendoKeydown?(e: SortableKendoKeydownEvent): void;
     }
     interface SortableEvent {
         sender: Sortable;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface SortableKendoKeydownEvent extends SortableEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface SortableStartEvent extends SortableEvent {
@@ -12221,11 +12456,16 @@ declare namespace kendo.ui {
         expand?(e: SplitterExpandEvent): void;
         layoutChange?(e: SplitterEvent): void;
         resize?(e: SplitterEvent): void;
+        kendoKeydown?(e: SplitterKendoKeydownEvent): void;
     }
     interface SplitterEvent {
         sender: Splitter;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface SplitterKendoKeydownEvent extends SplitterEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface SplitterCollapseEvent extends SplitterEvent {
@@ -12502,11 +12742,16 @@ declare namespace kendo.ui {
         paste?(e: SpreadsheetPasteEvent): void;
         dataBinding?(e: SpreadsheetDataBindingEvent): void;
         dataBound?(e: SpreadsheetDataBoundEvent): void;
+        kendoKeydown?(e: SpreadsheetKendoKeydownEvent): void;
     }
     interface SpreadsheetEvent {
         sender: Spreadsheet;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface SpreadsheetKendoKeydownEvent extends SpreadsheetEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface SpreadsheetInsertSheetEvent extends SpreadsheetEvent {}
@@ -12651,6 +12896,7 @@ declare namespace kendo.ui {
         trackRounded?: string | undefined;
         thumbRounded?: string | undefined;
         change?(e: SwitchChangeEvent): void;
+        kendoKeydown?(e: SwitchKendoKeydownEvent): void;
     }
 
     interface SwitchMessages {
@@ -12662,6 +12908,10 @@ declare namespace kendo.ui {
         sender: Switch;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface SwitchKendoKeydownEvent extends SwitchEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface SwitchChangeEvent extends SwitchEvent {
@@ -12704,6 +12954,13 @@ declare namespace kendo.ui {
 
         activate?(e: StepperActivateEvent): void;
         select?(e: StepperSelectEvent): void;
+        kendoKeydown?(e: StepperKendoKeydownEvent): void;
+    }
+
+    interface StepperKendoKeydownEvent {
+        sender: Stepper;
+        preventDefault: Function;
+        preventKendoKeydown: boolean;
     }
 
     interface StepperActivateEvent {
@@ -12831,6 +13088,7 @@ declare namespace kendo.ui {
         error?(e: TabStripErrorEvent): void;
         select?(e: TabStripSelectEvent): void;
         show?(e: TabStripShowEvent): void;
+        kendoKeydown?(e: TabStripKendoKeydownEvent): void;
     }
 
     interface TabStripItem {
@@ -12852,6 +13110,10 @@ declare namespace kendo.ui {
         sender: TabStrip;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TabStripKendoKeydownEvent extends TabStripEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TabStripActivateEvent extends TabStripEvent {
@@ -13237,11 +13499,16 @@ declare namespace kendo.ui {
         width?: string | number | undefined;
         resize?(e: TileLayoutResizeEvent): void;
         reorder?(e: TileLayoutReorderEvent): void;
+        kendoKeydown?(e: TileLayoutKendoKeydownEvent): void;
     }
     interface TileLayoutEvent {
         sender: TileLayout;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TileLayoutKendoKeydownEvent extends TileLayoutEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TileLayoutResizeEvent extends TileLayoutEvent {
@@ -13315,11 +13582,16 @@ declare namespace kendo.ui {
         change?(e: TimeDurationPickerChangeEvent): void;
         close?(e: TimeDurationPickerCloseEvent): void;
         open?(e: TimeDurationPickerOpenEvent): void;
+        kendoKeydown?(e: TimeDurationPickerKendoKeydownEvent): void;
     }
     interface TimeDurationPickerEvent {
         sender: TimeDurationPicker;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TimeDurationPickerKendoKeydownEvent extends TimeDurationPickerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TimeDurationPickerChangeEvent extends TimeDurationPickerEvent {}
@@ -13467,6 +13739,7 @@ declare namespace kendo.ui {
         rounded?: string | undefined;
         size?: string | undefined;
         change?(e: OTPInputChangeEvent): void;
+        kendoKeydown?(e: OTPInputKendoKeydownEvent): void;
     }
 
     interface OTPInputItemOptions {
@@ -13477,6 +13750,10 @@ declare namespace kendo.ui {
         sender: TextBox;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface OTPInputKendoKeydownEvent extends OTPInputEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface OTPInputChangeEvent extends OTPInputEvent {}
@@ -13564,6 +13841,7 @@ declare namespace kendo.ui {
         promptResponse?(e: InlineAIPromptPromptResponseEvent): void;
         show?(e: InlineAIPromptEvent): void;
         hide?(e: InlineAIPromptEvent): void;
+        kendoKeydown?(e: InlineAIPromptKendoKeydownEvent): void;
     }
 
     interface InlineAIPromptPopup {
@@ -13576,6 +13854,10 @@ declare namespace kendo.ui {
         sender: InlineAIPrompt;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface InlineAIPromptKendoKeydownEvent extends InlineAIPromptEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface InlineAIPromptCommandExecuteEvent extends InlineAIPromptEvent {
@@ -13668,6 +13950,7 @@ declare namespace kendo.ui {
         change?(e: TimePickerChangeEvent): void;
         close?(e: TimePickerCloseEvent): void;
         open?(e: TimePickerOpenEvent): void;
+        kendoKeydown?(e: TimePickerKendoKeydownEvent): void;
     }
 
     interface TimePickerMessages {
@@ -13684,6 +13967,10 @@ declare namespace kendo.ui {
         sender: TimePicker;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TimePickerKendoKeydownEvent extends TimePickerEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TimePickerChangeEvent extends TimePickerEvent {}
@@ -13747,11 +14034,16 @@ declare namespace kendo.ui {
         collapse?(e: TimelineCollapseEvent): void;
         actionClick?(e: TimelineActionClickEvent): void;
         navigate?(e: TimelineNavigateEvent): void;
+        kendoKeydown?(e: TimelineKendoKeydownEvent): void;
     }
     interface TimelineEvent {
         sender: Timeline;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TimelineKendoKeydownEvent extends TimelineEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TimelineChangeEvent extends TimelineEvent {
@@ -13802,6 +14094,10 @@ declare namespace kendo.ui {
         sender: SpeechToTextButton;
     }
 
+    interface SpeechToTextButtonKendoKeydownEvent extends SpeechToTextButtonEvent {
+        preventKendoKeydown: boolean;
+    }
+
     interface SpeechToTextButtonResultEvent extends SpeechToTextButtonEvent {
         isFinal: boolean;
         alternatives: {
@@ -13827,6 +14123,7 @@ declare namespace kendo.ui {
         end?(e: SpeechToTextButtonEvent): void;
         result?(e: SpeechToTextButtonResultEvent): void;
         error?(e: SpeechToTextButtonErrorEvent): void;
+        kendoKeydown?(e: SpeechToTextButtonKendoKeydownEvent): void;
     }
 
     class ToggleButton extends kendo.ui.Button {
@@ -13848,6 +14145,13 @@ declare namespace kendo.ui {
         group?: string | undefined;
         selected?: boolean | undefined;
         toggle?(e: ToggleButtonToggleEvent): void;
+        kendoKeydown?(e: ToggleButtonKendoKeydownEvent): void;
+    }
+
+    interface ToggleButtonKendoKeydownEvent {
+        sender: ToggleButton;
+        preventDefault: Function;
+        preventKendoKeydown: boolean;
     }
 
     interface ToggleButtonToggleEvent {
@@ -13970,11 +14274,16 @@ declare namespace kendo.ui {
         toggle?(e: ToolBarToggleEvent): void;
         overflowClose?(e: ToolBarOverflowCloseEvent): void;
         overflowOpen?(e: ToolBarOverflowOpenEvent): void;
+        kendoKeydown?(e: ToolBarKendoKeydownEvent): void;
     }
     interface ToolBarEvent {
         sender: ToolBar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface ToolBarKendoKeydownEvent extends ToolBarEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface ToolBarClickEvent extends ToolBarEvent {
@@ -14555,11 +14864,16 @@ declare namespace kendo.ui {
         columnMenuOpen?(e: TreeListColumnMenuOpenEvent): void;
         columnLock?(e: TreeListColumnLockEvent): void;
         columnUnlock?(e: TreeListColumnUnlockEvent): void;
+        kendoKeydown?(e: TreeListKendoKeydownEvent): void;
     }
     interface TreeListEvent {
         sender: TreeList;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TreeListKendoKeydownEvent extends TreeListEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TreeListBeforeEditEvent extends TreeListEvent {
@@ -14817,11 +15131,16 @@ declare namespace kendo.ui {
         expand?(e: TreeViewExpandEvent): void;
         navigate?(e: TreeViewNavigateEvent): void;
         select?(e: TreeViewSelectEvent): void;
+        kendoKeydown?(e: TreeViewKendoKeydownEvent): void;
     }
     interface TreeViewEvent {
         sender: TreeView;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface TreeViewKendoKeydownEvent extends TreeViewEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface TreeViewCheckEvent extends TreeViewEvent {
@@ -15210,11 +15529,16 @@ declare namespace kendo.ui {
         refresh?(e: WindowEvent): void;
         resize?(e: WindowEvent): void;
         restore?(e: WindowEvent): void;
+        kendoKeydown?(e: WindowKendoKeydownEvent): void;
     }
     interface WindowEvent {
         sender: Window;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface WindowKendoKeydownEvent extends WindowEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface WindowCloseEvent extends WindowEvent {
@@ -15300,11 +15624,16 @@ declare namespace kendo.ui {
         reset?(e: WizardResetEvent): void;
         select?(e: WizardSelectEvent): void;
         formValidateFailed?(e: WizardFormValidateFailedEvent): void;
+        kendoKeydown?(e: WizardKendoKeydownEvent): void;
     }
     interface WizardEvent {
         sender: Wizard;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    interface WizardKendoKeydownEvent extends WizardEvent {
+        preventKendoKeydown: boolean;
     }
 
     interface WizardActivateEvent extends WizardEvent {

@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the Chip is always available.
 
-For a runnable example, refer to the [demo on using the keyboard navigation of the Chip](https://demos.telerik.com/{{ site.platform }}/chip/keyboard-navigation).  
+For a runnable example, refer to the [demo on using the keyboard navigation of the Chip](https://demos.telerik.com/{{ site.platform }}/chip/keyboard-navigation).
 
 The Chip supports the following keyboard shortcuts:
 
@@ -22,5 +22,6 @@ The Chip supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Chip for {{ site.framework }}]({% slug custom_keyboard_navigation_chip_htmlhelper %})
 * [Keyboard Navigation by the Chip for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chip/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

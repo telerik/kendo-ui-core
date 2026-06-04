@@ -32,5 +32,6 @@ The Splitter supports the following shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Splitter for {{ site.framework }}]({% slug custom_keyboard_navigation_splitter_htmlhelper %})
 * [Keyboard Navigation in the Splitter HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/keyboard-navigation)
 * [Accessibility in the Splitter HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_splitter_accessibility %})

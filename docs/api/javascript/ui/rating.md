@@ -561,3 +561,51 @@ The DOM element that triggered the event.
             }
         });
     </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the Rating is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI Rating? Capture and intercept keydown events fired while the Rating is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the Rating component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Rating`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default Rating keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <input id="rating" />
+    <script>
+      $("#rating").kendoRating({
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <input id="rating" />
+    <script>
+      $("#rating").kendoRating();
+      var widget = $("#rating").data("kendoRating");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

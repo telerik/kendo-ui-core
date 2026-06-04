@@ -103,5 +103,6 @@ Additional keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Spreadsheet for {{ site.framework }}]({% slug custom_keyboard_navigation_spreadsheet_htmlhelper %})
 * [Keyboard Navigation by the Spreadsheet for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

@@ -29,6 +29,7 @@ export const __meta__ = {
         READONLY = "readonly",
         INPUT = "k-input-inner",
         SPIN = "spin",
+        KENDO_KEYDOWN = "kendoKeydown",
         ns = ".kendoNumericTextBox",
         TOUCHEND = "touchend",
         MOUSELEAVE = "mouseleave" + ns,
@@ -177,7 +178,8 @@ export const __meta__ = {
         },
         events: [
             CHANGE,
-            SPIN
+            SPIN,
+            KENDO_KEYDOWN
         ],
 
         _editable: function(options) {
@@ -224,7 +226,7 @@ export const __meta__ = {
                 });
 
                 that.element
-                    .on("keydown" + ns, that._keydown.bind(that))
+                    .on("keydown" + ns, that, that._keydown.bind(that))
                     .on("keyup" + ns, that._keyup.bind(that))
                     .on("paste" + ns, that._paste.bind(that))
                     .on("input" + ns, that._inputHandler.bind(that));

@@ -564,3 +564,58 @@ How to check if Kendo UI Drawer is currently open in jQuery? Determine if the si
                 });
             });
         </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the Drawer is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI Drawer? Capture and intercept keydown events fired while the Drawer is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the Drawer component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.Drawer`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default Drawer keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div id="drawer">
+      <div data-role="drawer-content">Content area</div>
+    </div>
+    <script>
+      $("#drawer").kendoDrawer({
+        template: "<ul><li>Home</li><li>About</li></ul>",
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <div id="drawer">
+      <div data-role="drawer-content">Content area</div>
+    </div>
+    <script>
+      $("#drawer").kendoDrawer({
+        template: "<ul><li>Home</li><li>About</li></ul>",
+      });
+      var widget = $("#drawer").data("kendoDrawer");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

@@ -30,5 +30,6 @@ Kendo UI Stepper supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Stepper for {{ site.framework }}]({% slug custom_keyboard_navigation_stepper_htmlhelper %})
 * [Keyboard Navigation in the Stepper HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/stepper/keyboard-navigation)
 * [Accessibility in the Stepper HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_stepper_accessibility %})

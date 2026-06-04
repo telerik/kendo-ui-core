@@ -151,7 +151,7 @@ export const __meta__ = {
                     .on("mouseleave" + NS, function() { wrapper.removeClass("k-hover"); })
                     .on("focus" + NS, function() { wrapper.addClass("k-focus"); })
                     .on("blur" + NS, function() { wrapper.removeClass("k-focus"); })
-                    .on(KEYDOWN_NS, bind(that._keydown, that))
+                    .on(KEYDOWN_NS, that, bind(that._keydown, that))
                     .on(CLICK_NS, ".k-input-button", bind(that.toggle, that))
                     .on(CLICK_NS, ".k-input-inner", function() {
                         that.trigger("activate");
@@ -308,7 +308,7 @@ export const __meta__ = {
             adaptiveSubtitle: null,
         },
 
-        events: [ "activate", "change", "select", "open", "close" ],
+        events: [ "activate", "change", "select", "open", "close", "kendoKeydown" ],
 
         open: function() {
             if (!this.element.prop("disabled")) {
@@ -532,6 +532,8 @@ export const __meta__ = {
                         adjustSize: { width: 5, height: 0 }
                     }).data("kendoPopup");
                 }
+
+                selectorWrapper.on(KEYDOWN_NS, that, $.noop);
 
                 selector.bind({
                     select: function(ev) {

@@ -1696,3 +1696,60 @@ If invoked prevents selection.
             }
         });
     </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the OrgChart is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI OrgChart? Capture and intercept keydown events fired while the OrgChart is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the OrgChart component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.OrgChart`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default OrgChart keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div id="orgchart"></div>
+    <script>
+      $("#orgchart").kendoOrgChart({
+        dataSource: [
+          { id: 1, name: "Jane", title: "Manager", expanded: true },
+          { id: 2, name: "John", title: "Lead", expanded: true, parentId: 1 }
+        ],
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <div id="orgchart"></div>
+    <script>
+      $("#orgchart").kendoOrgChart({
+        dataSource: [
+          { id: 1, name: "Jane", title: "Manager", expanded: true },
+          { id: 2, name: "John", title: "Lead", expanded: true, parentId: 1 }
+        ],
+      });
+      var widget = $("#orgchart").data("kendoOrgChart");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

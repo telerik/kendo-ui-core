@@ -72,7 +72,7 @@ import "../kendo.core.js";
             that.wrapper.on(CLICK_NS, DOT + TILE_CLASS, function(ev){
                 that._select(ev.currentTarget);
             })
-            .on(KEYDOWN_NS, bind(that._keydown, that))
+            .on(KEYDOWN_NS, that, bind(that._keydown, that))
             .on(BLUR_NS, function(){
                 that.wrapper.find(DOT + TILE_CLASS).removeClass(ITEMSFOCUSEDCLASS);
             })

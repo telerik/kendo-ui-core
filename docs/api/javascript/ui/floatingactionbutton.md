@@ -938,3 +938,58 @@ The **FloatingActionButton** instance that triggered the event.
 
         fab.element.trigger("click");
     </script>
+
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the FloatingActionButton is focused.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+<div class="meta-api-description">
+How do I handle keyboard events in Kendo UI FloatingActionButton? Capture and intercept keydown events fired while the FloatingActionButton is focused, enabling custom keyboard navigation, overriding default key behaviors, preventing built-in keydown logic with the preventKendoKeydown flag, canceling native browser actions via preventDefault, and implementing custom keyboard shortcuts or accessibility enhancements within the FloatingActionButton component.
+</div>
+
+#### Event Data
+
+##### e.sender `kendo.ui.FloatingActionButton`
+
+The widget instance which fired the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the default FloatingActionButton keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div style="position: relative; min-height: 100px;">
+      <button id="fab"></button>
+    </div>
+    <script>
+      $("#fab").kendoFloatingActionButton({
+        icon: "plus",
+        kendoKeydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log(e.keyCode);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "kendoKeydown" event after initialization
+
+    <div style="position: relative; min-height: 100px;">
+      <button id="fab"></button>
+    </div>
+    <script>
+      $("#fab").kendoFloatingActionButton({
+        icon: "plus",
+      });
+      var widget = $("#fab").data("kendoFloatingActionButton");
+      widget.bind("kendoKeydown", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.keyCode);
+      });
+    </script>

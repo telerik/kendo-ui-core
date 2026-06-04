@@ -44,5 +44,6 @@ The component supports the following keyboard shortcuts in **Horizontal mode**:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the Timeline for {{ site.framework }}]({% slug custom_keyboard_navigation_timeline_htmlhelper %})
 * [Keyboard Navigation by the Timeline HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/keyboard-navigation)
 * [Server-Side API](/api/timeline)

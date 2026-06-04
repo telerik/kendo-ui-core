@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the InlineAIPrompt is always available.
 
-For a runnable example, refer to the [demo on using the keyboard navigation of the InlineAIPrompt](https://demos.telerik.com/{{ site.platform }}/inline-aiprompt/keyboard-navigation).  
+For a runnable example, refer to the [demo on using the keyboard navigation of the InlineAIPrompt](https://demos.telerik.com/{{ site.platform }}/inline-aiprompt/keyboard-navigation).
 
 Kendo UI InlineAIPrompt supports the following keyboard shortcuts:
 
@@ -25,5 +25,6 @@ Kendo UI InlineAIPrompt supports the following keyboard shortcuts:
 
 ## See Also
 
+* [Custom Keyboard Navigation in the InlineAIPrompt for {{ site.framework }}]({% slug custom_keyboard_navigation_inlineaiprompt_htmlhelper %})
 * [Keyboard Navigation by the InlineAIPrompt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/inline-aiprompt/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})
