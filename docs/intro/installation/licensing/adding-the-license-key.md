@@ -15,12 +15,10 @@ Follow the steps in this article to download a license key script and include a 
 To add a Kendo UI license file to your application:
 
 1. Go to the [License Keys page](https://www.telerik.com/account/your-licenses/license-keys) in your Telerik account.
-2. On the `Progress® Kendo UI® for jQuery` row, click the **Script key** link in the **SCRIPT KEY** column.
-
-![Get License Key](../images/get-license-key.png)
-
-3.  Copy the JavaScript code snippet into a new file, for example, `telerik-license.js`.
-4.  Load the script in your project, after loading the Kendo UI for jQuery scripts, but before creating any components.
+2. Click the `View Script Keys` button
+3. In the dialog, `Progress® Kendo UI® for jQuery` should be preselected.
+4. Copy the JavaScript code snippet into a new file, for example, `telerik-license.js`.
+5. Load the script in your project, after loading the Kendo UI for jQuery scripts, but before creating any components.
 
 > **Note:**
 > - Load the `kendo.all.min.js` script before the license script. 
