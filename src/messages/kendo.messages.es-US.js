@@ -428,6 +428,7 @@
           "cancel": "Cancelar Cambios",
           "canceledit": "Cancelar",
           "create": "Agregar",
+          "add": "Agregar",
           "destroy": "Eliminar",
           "edit": "Editar",
           "excel": "Exportar a Excel",

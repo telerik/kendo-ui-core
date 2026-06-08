@@ -550,6 +550,7 @@
           "canceledit": "Abbrechen",
           "cancel": "Änderungen verwerfen",
           "create": "Neuen Datensatz hinzufügen",
+          "add": "Neuen Datensatz hinzufügen",
           "destroy": "Löschen",
           "edit": "Bearbeiten",
           "excel": "Exportieren als Excel",

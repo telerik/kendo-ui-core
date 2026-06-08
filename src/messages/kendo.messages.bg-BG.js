@@ -760,6 +760,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Добави",
     "destroy": "Изтриване",
     "edit": "Редактиране",
+    "add": "Добави нов запис",
     "excel": "Експорт към Excel",
     "pdf": "Експорт към PDF",
     "save": "Запази промените",

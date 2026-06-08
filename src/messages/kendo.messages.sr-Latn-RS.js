@@ -362,6 +362,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Otkaži promene",
     "canceledit": "Otkazati",
     "create": "Dodajte novi zapis",
+    "add": "Dodajte novi zapis",
     "destroy": "Izbriši",
     "edit": "Izmeni",
     "excel": "Izvozite u Excel",

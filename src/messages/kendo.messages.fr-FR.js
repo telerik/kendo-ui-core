@@ -284,6 +284,7 @@
           "cancel": "Annuler les modifications",
           "canceledit": "Annuler",
           "create": "Insérer",
+          "add": "Insérer",
           "destroy": "Effacer",
           "edit": "Éditer",
           "excel": "Exporter vers Excel",

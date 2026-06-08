@@ -279,6 +279,7 @@
           "canceledit": "Annuleren",
           "cancel": "Wijzigingen annuleren",
           "create": "Item toevoegen",
+          "add": "Item toevoegen",
           "destroy": "Verwijderen",
           "edit": "Bewerken",
           "excel": "Export naar Excel",

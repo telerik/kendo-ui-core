@@ -196,6 +196,7 @@ kendo.ui.Grid.prototype.options.messages =
 $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "commands": {
     "create": "Wstaw",
+    "add": "Wstaw",
     "destroy": "Usuń",
     "canceledit": "Anuluj",
     "update": "Aktualizuj",

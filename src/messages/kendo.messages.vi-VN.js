@@ -377,6 +377,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Hủy bỏ các thay đổi",
     "canceledit": "Hủy",
     "create": "Thêm bản ghi mới",
+    "add": "Thêm bản ghi mới",
     "destroy": "Xóa",
     "edit": "Sửa",
     "excel": "Xuất ra Excel",

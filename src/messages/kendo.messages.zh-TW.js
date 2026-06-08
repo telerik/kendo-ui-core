@@ -349,6 +349,7 @@
           "cancel": "取消",
           "canceledit": "取消",
           "create": "新增",
+          "add": "新增",
           "destroy": "刪除",
           "edit": "編輯",
           "excel": "匯出 Excel",

@@ -313,6 +313,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "İptal",
     "cancel": "Değişiklikleri iptal et",
     "create": "Yeni Kayıt Ekle",
+    "add": "Yeni Kayıt Ekle",
     "destroy": "Sil",
     "edit": "Düzenle",
     "excel": "Excel Kaydet",

@@ -7980,6 +7980,7 @@ declare namespace kendo.ui {
         create?: string | undefined;
         destroy?: string | undefined;
         edit?: string | undefined;
+        add?: string | undefined;
         excel?: string | undefined;
         save?: string | undefined;
         update?: string | undefined;

@@ -713,6 +713,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Add new record",
     "destroy": "Delete",
     "edit": "Edit",
+    "add": "Add new record",
     "excel": "Export to Excel",
     "pdf": "Export to PDF",
     "save": "Save changes",

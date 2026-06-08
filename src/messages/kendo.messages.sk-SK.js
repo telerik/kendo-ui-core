@@ -312,6 +312,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Zahodiť zmeny",
     "canceledit": "Storno",
     "create": "Pridať nový záznam",
+    "add": "Pridať nový záznam",
     "destroy": "Odstrániť",
     "edit": "Upraviť",
     "excel": "Exportovať do Excelu",

@@ -539,6 +539,7 @@
           "canceledit": "Cancel",
           "columns": "Columns",
           "create": "Add new record",
+          "add": "Add new record",
           "destroy": "Delete",
           "edit": "Edit",
           "excel": "Export to Excel",

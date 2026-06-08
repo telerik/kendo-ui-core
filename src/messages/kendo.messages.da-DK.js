@@ -159,6 +159,7 @@ kendo.ui.Grid.prototype.options.messages =
 $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "commands": {
     "create": "Indsæt",
+    "add": "Indsæt",
     "destroy": "Slet",
     "canceledit": "Fortryd",
     "update": "Opdatér",

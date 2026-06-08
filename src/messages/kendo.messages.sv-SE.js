@@ -233,6 +233,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Avbryt",
     "cancel": "Avbryt ändringar",
     "create": "Lägg till post",
+    "add": "Lägg till post",
     "destroy": "Radera",
     "edit": "Ändra",
     "excel": "Export to Excel",

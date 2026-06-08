@@ -356,6 +356,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Módosítások elvetése",
     "canceledit": "Mégse",
     "create": "Új elem",
+    "add": "Új elem",
     "destroy": "Törlés",
     "edit": "Szerkesztés",
     "excel": "Exportálás Excel-be",

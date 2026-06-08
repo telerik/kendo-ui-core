@@ -15449,6 +15449,40 @@ How do I customize the edit button label in Kendo UI Grid? Control and customize
     });
     </script>
 
+### messages.commands.add `String`
+
+Defines the text of the "Add" title that is rendered in the ActionSheet when adding a new record and adaptiveMode is set to `auto` .
+
+
+<div class="meta-api-description">
+How do I customize the add record title in Kendo UI Grid adaptive mode? Control and customize the title text displayed in the ActionSheet header when adding a new record in adaptive mode. Adjust, set, or configure the add command title to match user language preferences, update UI wording for better clarity, or adapt to different internationalization requirements within grid editing contexts. Enable changing, renaming, or localizing the add record ActionSheet title to provide a tailored user experience that fits various language settings and customization needs in editable data tables with adaptive rendering.
+</div>
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: ["edit", "destroy"] }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      editable: "popup",
+      adaptiveMode: "auto",
+      toolbar: ["create"],
+      messages: {
+        commands: {
+          add: "Add new"
+        }
+      }
+    });
+    </script>
+
 ### messages.commands.excel `String`
 
 Defines the text of the "Export to Excel" button of the grid toolbar.

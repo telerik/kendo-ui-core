@@ -151,6 +151,7 @@ kendo.ui.Grid.prototype.options.messages =
 $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "commands": {
     "create": "Ավելացնել",
+    "add": "Ավելացնել",
     "destroy": "Հեռացնել",
     "canceledit": "Չեղարկել",
     "update": "Թարմացնել",

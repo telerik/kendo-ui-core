@@ -362,6 +362,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Anulo ndryshimet",
     "canceledit": "Anulo",
     "create": "Shto të dhënë të re",
+    "add": "Shto të dhënë të re",
     "destroy": "Fshij",
     "edit": "Redakto",
     "excel": "Eksporto në Excel",

@@ -259,6 +259,7 @@ if (kendo.ui.Grid) {
         "canceledit": "Anulați",
         "cancel": "Anulați modificările",
         "create": "Adăugați element nou",
+        "add": "Adăugați element nou",
         "destroy": "Ștergeți",
         "edit": "Modificați",
         "excel": "Exportați în Excel",

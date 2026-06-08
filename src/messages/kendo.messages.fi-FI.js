@@ -288,6 +288,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Peruuta muutokset",
     "canceledit": "Peruuta",
     "create": "Lisää uusi tietue",
+    "add": "Lisää uusi tietue",
     "destroy": "Poista",
     "edit": "Muokkaa",
     "excel": "Vie Exceliin",

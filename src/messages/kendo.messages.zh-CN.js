@@ -464,6 +464,7 @@
                     "cancel": "取消",
                     "canceledit": "取消",
                     "create": "新增",
+                    "add": "新增",
                     "destroy": "删除",
                     "edit": "编辑",
                     "excel": "导出 Excel",

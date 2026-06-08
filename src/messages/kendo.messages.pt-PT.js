@@ -308,6 +308,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Cancelar alterações",
     "canceledit": "Cancelar",
     "create": "Adicionar novo registo",
+    "add": "Adicionar novo registo",
     "destroy": "Eliminar",
     "edit": "Editar",
     "excel": "Exportar para Excel",

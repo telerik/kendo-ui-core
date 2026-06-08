@@ -314,6 +314,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "יצוא ל",
     "canceledit": "בטל עריכה",
     "create": "צור חדש",
+    "add": "צור חדש",
     "destroy": "מחק",
     "edit": "עריכה",
     "save": "שמור",

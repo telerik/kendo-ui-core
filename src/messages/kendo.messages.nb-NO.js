@@ -194,6 +194,7 @@ if (kendo.ui.Grid) {
             "canceledit": "Avbryt",
             "cancel": "Avbryt endringer",
             "create": "Legg til post",
+            "add": "Legg til post",
             "destroy": "Slett",
             "edit": "Endre",
             "excel": "Export to Excel",

@@ -285,6 +285,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "変更のキャンセル",
     "canceledit": "キャンセル",
     "create": "新規レコードを追加",
+    "add": "新規レコードを追加",
     "destroy": "削除",
     "edit": "編集",
     "excel": "Export to Excel",

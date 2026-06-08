@@ -532,6 +532,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancel": "Tühista muudatus",
     "canceledit": "Tühista",
     "create": "Lisa uus salvestus",
+    "add": "Lisa uus salvestus",
     "destroy": "Kustuta",
     "edit": "Redigeeri",
     "excel": "Ekspordi Excelisse",

@@ -3638,7 +3638,7 @@ If invoked cancels the default action that belongs to the keydown event.
 #### Example - subscribe to the "kendoKeydown" event during initialization
 
     <div id="pdfviewer"></div>
-    <script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer({
         kendoKeydown: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -3650,7 +3650,7 @@ If invoked cancels the default action that belongs to the keydown event.
 #### Example - subscribe to the "kendoKeydown" event after initialization
 
     <div id="pdfviewer"></div>
-    <script>
+    <script type="module">
       $("#pdfviewer").kendoPDFViewer();
       var widget = $("#pdfviewer").data("kendoPDFViewer");
       widget.bind("kendoKeydown", function(e) {
