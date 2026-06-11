@@ -40,7 +40,7 @@ Creating a custom bundle from an existing `config.json` is extremely easy.
 4. Run the following command:
 
 	```sh
-	kendo jquery custom-build --no-interactive
+	kendo custom-build jquery --no-interactive
 	```
 
 The command generates `kendo.custom.min.js`, containing only the components and features from your existing configuration. The build uses the latest available Kendo UI for jQuery version by default.
@@ -67,7 +67,7 @@ If you want to create a brand new configuration file, make sure the folder does 
 Run the custom builder command:
 
 ```sh
-kendo jquery custom-build
+kendo custom-build jquery 
 ```
 
 The CLI starts an interactive flow where you can choose the output that matches your project.
@@ -77,10 +77,10 @@ The CLI starts an interactive flow where you can choose the output that matches 
 To select a specific Kendo UI for jQuery version, run the command with the `--version` flag:
 
 ```sh
-kendo jquery custom-build --version 2026.1.212
+kendo custom-build jquery --version 2026.1.212
 ```
 
-Version selection through `--version` works for versions starting with 2026. If you run `kendo jquery custom-build` without the flag, the CLI uses the latest available version.
+Version selection through `--version` works for versions starting with 2026. If you run `kendo custom-build jquery` without the flag, the CLI uses the latest available version.
 
 ## 4. Select Components
 
