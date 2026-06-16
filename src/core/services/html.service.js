@@ -15,11 +15,11 @@ class HtmlService {
      */
     decode(value) {
         const entities = {
-            '&amp;': '&',
-            '&lt;': '<',
-            '&gt;': '>',
-            '&quot;': '"',
-            '&#39;': "'"
+            "&amp;": "&",
+            "&lt;": "<",
+            "&gt;": ">",
+            "&quot;": '"',
+            "&#39;": "'",
         };
         return value.replace(/&(?:amp|lt|gt|quot|#39);/g, function (match) {
             return entities[match];
@@ -32,12 +32,7 @@ class HtmlService {
         if (shouldDecode === true) {
             value = this.decode(value);
         }
-        return ("" + value)
-            .replace(ampRegExp, "&amp;")
-            .replace(ltRegExp, "&lt;")
-            .replace(gtRegExp, "&gt;")
-            .replace(quoteRegExp, "&quot;")
-            .replace(aposRegExp, "&#39;");
+        return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
     /**
      * Sanitize a URL to prevent XSS attacks
@@ -67,7 +62,7 @@ class HtmlService {
         const urlRegex = /((https?:\/\/[^\s"'<>]+)|(www\.[^\s"'<>]+))/gi;
         const processedText = skipSanitization ? text : this.encode(text);
         return processedText.replace(urlRegex, (match, _p1, _p2, _p3, offset, fullString) => {
-            const lastTagClose = fullString.lastIndexOf('>', offset - 1);
+            const lastTagClose = fullString.lastIndexOf(">", offset - 1);
             const beforeMatch = fullString.substring(lastTagClose + 1, offset);
             if (/\w+\s*=\s*["']$/.test(beforeMatch)) {
                 return match;
@@ -75,15 +70,15 @@ class HtmlService {
             let url = match.trim();
             const displayText = match.trim();
             if (/^www\./i.test(url)) {
-                url = 'https://' + url;
+                url = "https://" + url;
             }
             try {
                 url = new URL(url).href;
-                const target = '_blank';
-                const rel = 'noopener noreferrer';
-                return `<a href="${url}" target="${target}"${rel ? ` rel="${rel}"` : ''}>${displayText}</a>`;
+                const target = "_blank";
+                const rel = "noopener noreferrer";
+                return `<a href="${url}" target="${target}"${rel ? ` rel="${rel}"` : ""}>${displayText}</a>`;
             }
-            catch (e) { //NOSONAR - No need to handle/log the error here.
+            catch (e) {
                 // If URL is invalid, return original text
                 return match;
             }

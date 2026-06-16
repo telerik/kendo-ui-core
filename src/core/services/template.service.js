@@ -11,12 +11,7 @@ const sharpRegExp = /__SHARP__/g;
  */
 function compilePart(part, stringPart) {
     if (stringPart) {
-        return "'" +
-            part.split("'").join("\\'")
-                .split('\\"').join('\\\\\\"')
-                .replace(/\n/g, "\\n")
-                .replace(/\r/g, "\\r")
-                .replace(/\t/g, "\\t") + "'";
+        return "'" + part.split("'").join("\\'").split('\\"').join('\\\\\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t") + "'";
     }
     else {
         const first = part.charAt(0);
@@ -73,7 +68,7 @@ class TemplateService {
         // Use options values only if they're not undefined (matches original jQuery extend behavior)
         const settings = {
             paramName: (options === null || options === void 0 ? void 0 : options.paramName) !== undefined ? options.paramName : this.paramName,
-            useWithBlock: (options === null || options === void 0 ? void 0 : options.useWithBlock) !== undefined ? options.useWithBlock : this.useWithBlock
+            useWithBlock: (options === null || options === void 0 ? void 0 : options.useWithBlock) !== undefined ? options.useWithBlock : this.useWithBlock,
         };
         const paramName = settings.paramName;
         const argumentName = paramName.match(argumentNameRegExp)[0];
@@ -81,12 +76,7 @@ class TemplateService {
         let functionBody = "var $kendoOutput, $kendoHtmlEncode = kendo.htmlEncode;";
         functionBody += useWithBlock ? "with(" + paramName + "){" : "";
         functionBody += "$kendoOutput=";
-        const parts = template
-            .replace(escapedCurlyRegExp, "__CURLY__")
-            .replace(encodeRegExp, "#=$kendoHtmlEncode($1)#")
-            .replace(curlyRegExp, "}")
-            .replace(escapedSharpRegExp, "__SHARP__")
-            .split("#");
+        const parts = template.replace(escapedCurlyRegExp, "__CURLY__").replace(encodeRegExp, "#=$kendoHtmlEncode($1)#").replace(curlyRegExp, "}").replace(escapedSharpRegExp, "__SHARP__").split("#");
         for (let idx = 0; idx < parts.length; idx++) {
             functionBody += compilePart(parts[idx], idx % 2 === 0);
         }
@@ -95,7 +85,7 @@ class TemplateService {
         functionBody = functionBody.replace(sharpRegExp, "#");
         try {
             // This function evaluation is required for legacy support of the Kendo Template syntax - non CSP compliant.
-            // NOSONAR - It is a valid security concern, however this is required for backward compatibility
+            // It is a valid security concern, however this is required for backward compatibility
             const fn = new Function(argumentName, functionBody);
             fn._slotCount = Math.floor(parts.length / 2);
             return fn;
@@ -104,7 +94,6 @@ class TemplateService {
             if (this.debugTemplates) {
                 console.warn(`Invalid template:'${template}' Generated code:'${functionBody}'`);
                 // Return a no-op function in debug mode
-                //NOSONAR - In debug mode we do not want to throw an error.
                 return (() => "");
             }
             else {
