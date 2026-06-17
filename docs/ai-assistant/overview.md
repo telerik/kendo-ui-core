@@ -82,3 +82,4 @@ Make sure to also get familiar with the terms and privacy policy of your selecte
 
 * Getting Started with the [Kendo UI for jQuery Coding Assistant]({% slug kendo_jquery_mcp_server %}).
 * Check out the latest [updates for the Kendo UI for jQuery Coding Assistant]({% slug ai_coding_assistant_changelog %}).
+* Learn how to set up [On-Premises Deployment]({% slug ai_coding_assistant_on_premises %}) for the AI Coding Assistant.

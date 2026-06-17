@@ -100,3 +100,4 @@ Read the full guide in the dedicated [DPL AI Coding Assistant article](https://d
 
 * Add the [Telerik {{ site.framework }} MCP Server](slug:ai_mcp_server) to an MCP-enabled client.
 * Explore the [Telerik {{ site.framework }} Prompt Library](slug:ai_prompt_library).
+* Learn how to set up [On-Premises Deployment](slug:ai_coding_assistant_on_premises_aspnet) for the AI Coding Assistant.
