@@ -38,6 +38,8 @@ $(".k-icon").addClass('k-i-calendar-date');
 ```
 #### Example
 
+The following example demonstrates a DatePicker that replaces the default calendar icon with the `k-i-calendar-date` web font icon after initialization.
+
 ```dojo
 <input id="datePicker"/>
 

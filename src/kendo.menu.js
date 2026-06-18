@@ -1132,7 +1132,7 @@ export const __meta__ = {
                 element.find(ICON_SELECTOR).children().addClass("k-i-loading");
                 dataItem.load();
                 that._openAfterLoad(element, dataItem);
-                return;
+                return that;
             }
 
             if (/^(top|bottom|default)$/.test(direction)) {

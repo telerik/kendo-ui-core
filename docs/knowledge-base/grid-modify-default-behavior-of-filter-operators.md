@@ -28,6 +28,8 @@ This sample demonstrates how to change the default functionality of the filterin
 
 ## Solution
 
+Override `kendo.data.Query.filterExpr` before initializing the Grid to intercept the filter expression generation. Inside the override, add a null check for the affected operators so they exclude null values from results.
+
 ```dojo
   
 

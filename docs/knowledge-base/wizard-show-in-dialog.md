@@ -31,6 +31,8 @@ How can I show a Kendo UI Wizard in a Dialog?
 
 ## Solution
 
+The following example initializes a Dialog with a form inside it and creates the Wizard in the `open` event handler. The Wizard collects attendee and user details across four steps and closes the Dialog when the user completes the **Done** step.
+
 ```dojo
     <div id="dialog">
       <form id="wizard" novalidate method="post"></form>

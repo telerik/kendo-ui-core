@@ -46,6 +46,8 @@ To retrieve the computed value of a formula cell, follow these steps:
 
 ### Example of Accessing Computed Values After Batch
 
+The following example passes `{ recalc: true }` to the `batch` call and then reads the formula result after the operation completes.
+
 ```javascript
 sheet.batch(function() {
     // Perform changes in the Spreadsheet

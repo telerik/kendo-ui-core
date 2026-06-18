@@ -148,6 +148,8 @@ Here's one approach you can take to add an external Kendo UI Menu with checkbox 
 
 #### Example
 
+The following example creates a Kendo UI Menu with checkbox items that control the visibility of each Grid column. Clicking a menu item calls `showColumn` or `hideColumn` and keeps the checkbox state in sync.
+
 ```dojo
     <ul id="columnMenu" style="width: 100px; margin-bottom: 5px"></ul>
 

@@ -47,6 +47,8 @@ To achieve the desired behavior, handle the [`open`](/api/javascript/ui/daterang
 
 ### Example
 
+The following example appends **Today**, **Last 7 Days**, and **This Month** buttons to the calendar footer on the first `open` event and wires each button to call the `range` method with the corresponding start and end dates.
+
 ```dojo
 <div class="k-d-flex k-justify-content-center" style="padding-top: 54px">
       <div class="k-w-300">

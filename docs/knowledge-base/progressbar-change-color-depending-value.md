@@ -47,6 +47,8 @@ $("#progressbar").kendoProgressBar({
 
 #### Example
 
+The following example initializes a ProgressBar and programmatically increments its value from 1 to 100, triggering the color change handler at each step.
+
 ```dojo
 <div id="progressbar"></div>
 <script>

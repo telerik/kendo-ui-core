@@ -45,7 +45,9 @@ To achieve this, use the [`excelExport`](https://www.telerik.com/kendo-jquery-ui
 3. Apply custom logic to identify rows that meet the condition (`addchgInd == "Y`) and merge them.
 4. Replace the identified rows with a new row containing the combined data.
 
-### Code Example:
+### Code Example
+
+The following example configures a Grid with an `excelExport` handler that iterates the workbook rows, merges consecutive rows where `addchgInd` equals `Y`, and replaces the original row array with the merged result.
 
 ```dojo
   <div id="grid"></div>

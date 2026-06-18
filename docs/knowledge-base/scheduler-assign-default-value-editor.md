@@ -61,6 +61,8 @@ How can I prevent having 'None' as an option and as a default value in the Dropd
 	```
 #### Example
 
+The following example initializes a Scheduler with remote data, sets `defaultValue: 1` on the `roomId` field, and hides the **None** option from the resource DropDownList using the `.k-list-optionlabel` CSS rule.
+
 ```dojo
 	<style>
 	    div.k-list-optionlabel {

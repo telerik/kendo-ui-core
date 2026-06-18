@@ -44,6 +44,8 @@ To ensure that the `.k-selected` class is applied to items when their checkboxes
 
 ### JavaScript Example
 
+The following script attaches a `change` listener to all checkboxes inside the TreeView. When a checkbox is checked, it adds the `.k-selected` class to the corresponding leaf item. When unchecked, it removes the class.
+
 ```javascript
 $(".k-treeview").on("change", ".k-checkbox", function () {
     var item = $(this)
@@ -60,6 +62,8 @@ $(".k-treeview").on("change", ".k-checkbox", function () {
 This script ensures that when a checkbox is checked, the corresponding item visually appears as selected by applying the `.k-selected` class.
 
 ### Example
+
+The following example demonstrates a DropDownTree with checkboxes enabled. Selecting a checkbox applies the `.k-selected` class to the item for visual consistency.
 
 ```dojo
  <label for="dropdowntree">Select one or more items</label>

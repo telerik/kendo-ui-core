@@ -81,7 +81,9 @@ highlight: {
 3. Use the provided `e.rect` values to create the visual path for the hovered element.
 4. Apply the configuration to your chart types such as Donut Chart, Stacked Chart, Funnel Chart, etc.
 
-### Example 
+### Example
+
+The following example demonstrates a Stacked Bar Chart where each series uses a custom `highlight.visual` function to render a darker color on hover.
 
 ```dojo
 <div id="chart"></div>

@@ -24,9 +24,11 @@ components: ["listbox"]
 
 ## Description
 
-This sample demonstrates how you can select and scroll to the item corresponding to the typed Key on the keyboard.
+This sample demonstrates how to select and scroll to the item corresponding to the key pressed on the keyboard.
 
 ## Solution
+
+Attach a `keydown` event listener to the document. When a key is pressed, iterate over the ListBox items and select the first item whose text starts with the pressed key. Then scroll the list container to bring the selected item into view.
 
 ```dojo
 

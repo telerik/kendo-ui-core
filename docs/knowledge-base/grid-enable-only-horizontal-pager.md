@@ -43,6 +43,8 @@ The pager can be set to always display as horizontal by changing the [pageable.r
 
 #### Example
 
+The following example initializes a Grid with `pageable.responsive` set to `false` so the pager always renders in its horizontal layout regardless of the available width.
+
 ```dojo
     <div id="grid"></div>
     <script>

@@ -49,6 +49,8 @@ To achieve this functionality, create a tooltip for the ArcGauge using the `kend
 
 ### Example Code Snippet
 
+The following example creates an ArcGauge paired with a Slider and a Tooltip. The tooltip content function reads the current slider value and returns the correct percentage for the hovered segment. The `refresh` method updates the tooltip whenever the slider value changes.
+
 ```dojo
  <div id="example">
       <div id="gauge-container">

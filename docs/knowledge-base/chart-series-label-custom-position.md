@@ -63,6 +63,8 @@ function left(e) {
 
 #### Example
 
+The following example demonstrates a Column Chart that renders the series label in the top-left corner of each bar by using a custom `visual` function.
+
 ```dojo
 <div id="chart"></div>
 <script>

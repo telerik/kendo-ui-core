@@ -30,6 +30,8 @@ Set the threshold as percentage or pixels.
 
 ## Updating the Threshold at Runtime
 
+To change the threshold after the component is initialized, call `setOptions` on the Chat instance and pass the new value.
+
 ```javascript
 const chat = $("#chat").data("kendoChat");
 chat.setOptions({

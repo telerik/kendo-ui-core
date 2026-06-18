@@ -24,11 +24,11 @@ components: ["datepicker"]
 
 ## Description
 
-You can achieve this requirement using the value method provided by the component:
-
-https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/methods/value
+To set a default value for the DatePicker, use the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker/methods/value) method provided by the component.
 
 ## Solution
+
+Initialize the DatePicker with a `value` option to define the default date. You can also call the `value` method at any time to update the selected date programmatically. The following example sets an initial value and then updates it to the current date.
 
 ```dojo
 

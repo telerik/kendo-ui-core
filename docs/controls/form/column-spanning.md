@@ -208,6 +208,8 @@ When using responsive column spanning, you can define multiple breakpoints with 
 
 ### Breakpoint Example
 
+The following example configures a form field to span 4 columns (full width) on mobile devices (up to 600px), 2 columns on tablets (601px to 1024px), and 1 column on desktops (1025px and above).
+
 ```javascript
 colSpan: [{
     maxWidth: 600,      // Mobile devices

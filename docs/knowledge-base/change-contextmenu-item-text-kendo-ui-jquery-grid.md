@@ -51,6 +51,8 @@ To change the text of the built-in "reorderRow" ContextMenu item while keeping i
 
 ### Code Example
 
+The following snippet gets a reference to the Grid's ContextMenu and binds to its `open` event. Inside the handler, it locates the default **Reorder row** text node and replaces it with the custom label.
+
 ```javascript
 $("#grid")
   .data("kendoGrid")

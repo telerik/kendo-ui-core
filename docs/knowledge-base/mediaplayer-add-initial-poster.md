@@ -24,9 +24,11 @@ components: ["mediaplayer"]
 
 ## Description
 
-This sample demonstrates how you can a separate image as the Poster of the player.
+This sample demonstrates how to set a separate image as the poster of the MediaPlayer.
 
 ## Solution
+
+Subscribe to the MediaPlayer's `ready` event using `.one()`. Inside the handler, locate the `<video>` element and set its `poster` attribute to the desired image URL. Call `load()` on the video element to apply the change before playback begins.
 
 ```dojo
 

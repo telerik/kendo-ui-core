@@ -24,6 +24,8 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
 
 ## Solution
 
+The following example initializes a Scheduler in Agenda view and attaches a ContextMenu to task elements. Selecting a menu item reads the `data-value` attribute, retrieves the matching data item by UID, and updates its `ownerId` field.
+
 ```dojo
   <div id="scheduler"></div>
   <ul id="contextMenu">

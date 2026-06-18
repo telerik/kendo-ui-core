@@ -51,6 +51,8 @@ Use the `Range.editor()` method for applying custom editors. For more details, r
 
 ### Example
 
+The following example registers a custom color-picker editor, initializes a Spreadsheet with that editor applied to a cell, and uses the `insertRow` event to re-apply the editor and custom background to every newly added row.
+
 ```dojo
     <div id="spreadsheet" style="width: 100%"></div>
     <script>

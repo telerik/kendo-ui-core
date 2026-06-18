@@ -86,6 +86,8 @@ $("#grid").kendoGrid({
 
 ### Suggested solution
 
+The following example overrides the filter operator to `contains`, re-checks the previously selected values on `columnMenuOpen`, and handles multi-column filtering with a Column Menu.
+
 ```dojo
   <div id="grid"></div>
     <script>
@@ -181,6 +183,8 @@ It is easiest to add the `k-active` class initially and let the grid with the cu
 ```
 
 #### Example
+
+The following example applies the initial filter on `dataBound` and adds the `k-active` class to the filter icon after a brief timeout to reflect the active filter state.
 
 ```dojo
   <div id="example">

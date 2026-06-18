@@ -43,6 +43,8 @@ To reverse the direction of numbers on a vertical slider, map the slider's value
 
 ### Code Example
 
+The following snippet initializes a vertical Slider with `min: 0` and `max: 20`, sets the starting value to `max` so the handle appears at the bottom, and inverts the displayed value in both the `slide` and `change` event handlers.
+
 ```html
 <div id="slider"></div>
 <span id="sliderValue"></span>

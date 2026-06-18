@@ -14,7 +14,7 @@ components: ["chart"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Chart for jQuery</td>
+  <td>ProgressÂ® Kendo UIÂ® Chart for jQuery</td>
  </tr>
 </table>
 
@@ -34,6 +34,8 @@ The following approach demonstrates how to:
 4. Stream live Candlestick data at regular intervals with play/pause control.
 
 ### Line Chart with Dynamic Data
+
+The following snippet initializes a smooth Line Chart and wires up four buttons to add a single point, add three points at once, remove the last point, and randomize all values.
 
 ```javascript
 var initialLineData = [6, 5.47, 8, 5.24, 4.76, 4.72, 4.67, 5.05, 4.76, 3.96, 1, 6.1, 2.85];
@@ -108,6 +110,8 @@ $("#randomizeBtn").on("click", function () {
 ```
 
 ### Candlestick Chart with Live Data
+
+The following snippet initializes a Candlestick Chart and streams a new data entry every second. A play/pause toggle button controls the interval.
 
 ```javascript
 var stockData = [

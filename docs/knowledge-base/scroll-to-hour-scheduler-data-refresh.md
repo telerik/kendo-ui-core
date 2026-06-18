@@ -76,6 +76,8 @@ function scrollToHour(targetHour) {
 
 ### Example Usage
 
+The following snippet calls the updated `scrollToHour` function inside the `.done()` callback of `dataSource.read()` to scroll to 11:00 AM after the data refresh completes.
+
 ```javascript
 $("#readBtn").on("click", function () {
     var scheduler = $("#scheduler").data("kendoScheduler");
@@ -86,6 +88,8 @@ $("#readBtn").on("click", function () {
 ```
 
 Full example
+
+The following example renders a Scheduler with a **Read** button. Clicking the button triggers `dataSource.read()` and then calls `scrollToHour` to restore the scroll position after the refresh.
 
 ```dojo
 <button id="readBtn" type="button" class="k-button k-button-primary">Read</button>

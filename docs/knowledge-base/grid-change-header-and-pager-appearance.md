@@ -24,13 +24,11 @@ components: ["grid"]
 
 ## Description
 
-1. If the changes will be multiple, you can go on creating your own theme:
-
-https://themebuilder.telerik.com/kendo-ui
-
-2. For lesser requirements, you can check this sample which demonstrates how to change the background color and overall appearance of the Grid header/footer and the pager.
+To apply large-scale visual changes to the Grid, use the [ThemeBuilder](https://themebuilder.telerik.com/kendo-ui) to generate a custom theme. For targeted changes to the header, footer, or pager background colors, apply custom CSS rules directly.
 
 ## Solution
+
+Target the `.k-grid-header`, `.k-header`, and `.k-pager` CSS classes to override the default background and text colors. The following example demonstrates how to apply a custom color scheme to the Grid header and pager.
 
 ```dojo
   

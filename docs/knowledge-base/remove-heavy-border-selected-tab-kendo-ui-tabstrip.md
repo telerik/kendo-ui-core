@@ -51,6 +51,8 @@ To remove the heavy border around the selected tab in Kendo UI TabStrip, apply t
 
 ### Example:
 
+The following example initializes a TabStrip with four city tabs and inlines the CSS rule that removes the focus box-shadow from selected and focused tab items.
+
 ```dojo
         <div id="tabstrip">
           <ul>

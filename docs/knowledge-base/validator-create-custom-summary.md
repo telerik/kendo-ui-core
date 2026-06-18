@@ -24,9 +24,11 @@ components: ["validator"]
 
 ## Description
 
-This sample demonstrates how you can display the Validation errors in your custom HTML format.
+This sample demonstrates how to display validation errors in a custom HTML format.
 
 ## Solution
+
+Initialize the Validator on the form element and call `validate()` in the submit handler. If validation fails, iterate over the errors returned by `errors()` and build a custom HTML list. Render the list in a container element below the form.
 
 ```dojo
     <div id="example">

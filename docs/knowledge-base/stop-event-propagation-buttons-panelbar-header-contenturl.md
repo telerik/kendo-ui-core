@@ -47,6 +47,8 @@ To achieve the desired behavior and ensure accessibility-friendly functionality,
 
 ### Example
 
+The following snippet uses event delegation to attach `click` and `keydown` handlers to `.panelbar-custom-button` elements. Each handler calls `stopPropagation()` and `preventDefault()` to block the parent `<a>` tag from navigating to the `contentUrl`.
+
 ```javascript
 // Attach event handlers using jQuery
 $(document).on('click', '.panelbar-custom-button', function(e) {
@@ -65,6 +67,8 @@ $(document).on('keydown', '.panelbar-custom-button', function(e) {
 ```
 
 ### Template Example
+
+The following snippet shows the header template structure with two buttons that carry the `panelbar-custom-button` class targeted by the event handlers above.
 
 ```html
 <script type="text/x-kendo-template">

@@ -36,6 +36,8 @@ How can I change the background of the tags in the MultiSelect by picking a colo
 
 ## Solution
 
+To change the background color of a MultiSelect tag, use a Tooltip that contains a ColorPalette component. When a user clicks on a tag, the Tooltip opens and displays the palette. Selecting a color from the palette applies it as the tag's background color.
+
 ```dojo
 <div id="container">
     <select id="products"></select>

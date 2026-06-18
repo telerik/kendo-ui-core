@@ -36,6 +36,8 @@ To individually fine-tune a command, use the [`command visible`](https://docs.te
 
 ###### Razor Example
 
+The following snippet passes an `IsAdmin` flag from the controller through `ViewBag` and uses it to toggle column visibility and the command column in the Razor template.
+
 ```
 public ActionResult Index()
 {
@@ -55,6 +57,8 @@ public ActionResult Index()
 ```
 
 ###### JavaScript Example
+
+The following snippet initializes a Grid in pure JavaScript and sets `hidden: !isAdmin` on the command column to control its visibility based on a boolean variable.
 
 ```
 var isAdmin = false;

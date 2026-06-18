@@ -25,9 +25,11 @@ components: ["datepicker"]
 
 ## Description
 
-This sample demonstrates how to achieve keyboard navigation with Tab press for Date Picker widgets located inside the Filter Menu of the Grid.
+This sample demonstrates how to achieve keyboard navigation with `Tab` press for DatePicker widgets located inside the Filter Menu of the Grid.
 
 ## Solution
+
+Handle the `filterMenuInit` event of the Grid to locate any DatePicker inputs inside the filter container. Attach a `keydown` listener to each DatePicker that moves focus to the next field when `Tab` is pressed.
 
 ```dojo
 

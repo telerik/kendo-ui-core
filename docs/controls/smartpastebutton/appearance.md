@@ -33,6 +33,8 @@ The available size values are:
 
 ### Size Example
 
+The following example renders three SmartPasteButton instances with `small`, `medium`, and `large` sizes.
+
 ```html
 <button id="smallButton" type="button">Small Smart Paste</button>
 <button id="mediumButton" type="button">Medium Smart Paste</button>
@@ -76,6 +78,8 @@ The available rounded values are:
 * `"full"`
 
 ### Border Radius Example
+
+The following example renders four SmartPasteButton instances, each with a different `rounded` value.
 
 ```html
 <button id="roundedSmall" type="button">Small Rounded</button>
@@ -126,6 +130,8 @@ The available fillMode values are:
 
 ### Fill Mode Example
 
+The following example renders three SmartPasteButton instances with `solid`, `outline`, and `flat` fill modes.
+
 ```html
 <button id="solidButton" type="button">Solid Fill</button>
 <button id="outlineButton" type="button">Outline Fill</button>
@@ -174,6 +180,8 @@ The available themeColor values are:
 * `"inverse"`
 
 ### Theme Color Example
+
+The following example renders five SmartPasteButton instances, each with a different `themeColor` value.
 
 ```html
 <button id="primaryButton" type="button">Primary</button>
@@ -296,6 +304,8 @@ $("#smartPasteButton").kendoSmartPasteButton({
 
 ### Built-in Icon Options
 
+The following example demonstrates three SmartPasteButton instances that use the `paste-sparkle`, `paste`, and `magic-wand` icons.
+
 ```html
 <button id="button1" type="button">Paste Sparkle</button>
 <button id="button2" type="button">Paste</button>
@@ -321,7 +331,7 @@ $("#button3").kendoSmartPasteButton({
 
 ### Icon with Text
 
-You can combine icons with text labels:
+To display both an icon and a label, set the `icon` and `text` options together. The following example renders a SmartPasteButton with the `paste-sparkle` icon and a visible text label.
 
 ```html
 <button id="iconTextButton" type="button">Smart Paste</button>

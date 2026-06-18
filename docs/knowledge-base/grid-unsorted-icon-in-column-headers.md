@@ -24,13 +24,11 @@ components: ["grid"]
 
 ## Description
 
-This sample demonstrates how you can implement a visual clue for sortable columns by adding a new icon in the grid's unsorted state.
-
-For a full list of available built-in icons you can check here:
-
-https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web 
+This sample demonstrates how to implement a visual clue for sortable columns by adding an icon in the Grid's unsorted state. For a full list of available built-in icons, see the [Icons Overview](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) article.
 
 ## Solution
+
+In the `dataBound` event handler, iterate over all sortable column headers. For each header that is not already sorted, append a swap icon to the column link. Remove the icon when the column becomes sorted.
 
 ```dojo
 

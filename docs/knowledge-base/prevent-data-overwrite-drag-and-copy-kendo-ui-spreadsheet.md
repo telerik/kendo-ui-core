@@ -47,6 +47,8 @@ To prevent accidental overwrites during drag-and-copy operations in Kendo UI for
 
 ### Code Example
 
+The following snippet attaches a handler to the `changing` event and calls `e.preventDefault()` when `changeType` equals `autoFill` and the user cancels the confirmation dialog.
+
 ```javascript
 $("#spreadsheet").kendoSpreadsheet({
     change: function(e) {

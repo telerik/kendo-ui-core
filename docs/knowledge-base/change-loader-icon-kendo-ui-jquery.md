@@ -45,6 +45,8 @@ Here is the implementation:
 
 ### CSS for Customizing the Loader Icon
 
+Target the `#container` element's `.k-loading-mask` to apply a custom background image and hide the default spinner elements and animations.
+
 ```css
 /* Ensure the container has relative positioning */
 #container {
@@ -95,6 +97,8 @@ Here is the implementation:
 
 ### JavaScript for Activating the Loader
 
+Call `kendo.ui.progress` with `true` to show the loader on a target element and with `false` to hide it. The following function activates the loader for both the page body and the specific container.
+
 ```javascript
 $(function () {
     function displayLoading(target) {
@@ -113,6 +117,8 @@ $(function () {
 });
 ```
 ### Sample HTML
+
+The following markup defines the container element that receives the custom loader and a surrounding paragraph that uses the default page-level loader.
 
 ```html
     <div id="container" class="k-widget">Lorem ipsum dolor sit amet, consectetur adipiscing elit.

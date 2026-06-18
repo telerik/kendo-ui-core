@@ -49,6 +49,8 @@ For columns that should not be editable conditionally, set the `editable` proper
 
 ### Example
 
+The following snippet shows how to pass a function to the `editable` property that returns `true` only for a specific data item, making the column conditionally editable at the row level.
+
 ```javascript
 { field: "name",
        editable: function (dataItem) {

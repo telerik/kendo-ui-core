@@ -56,6 +56,8 @@ tooltip: {
 
 ### Example
 
+The following example renders a Pie Chart with mixed positive and negative values and uses a `template` function to display the original `dataItem.value` in the tooltip.
+
 ```dojo
     <div id="example">
       <div class="demo-section wide">

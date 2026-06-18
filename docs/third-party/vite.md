@@ -42,6 +42,8 @@ npm install --save @progress/kendo-ui jquery
 
 ## 3. Install the Kendo UI Theme
 
+Install the Kendo UI theme package. For this guide, we will use the Classic theme:
+
 ```sh
 npm install @progress/kendo-theme-classic --save
 ```

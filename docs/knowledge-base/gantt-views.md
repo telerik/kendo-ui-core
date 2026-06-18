@@ -14,7 +14,7 @@ components: ["gantt"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Gantt for jQuery</td>
+  <td>ProgressÂ® Kendo UIÂ® Gantt for jQuery</td>
  </tr>
 </table>
 
@@ -33,6 +33,8 @@ The following approach demonstrates how to:
 3. Handle the [`navigate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/events/navigate) event to keep the custom buttons synchronized when the user switches views from the built-in view tabs.
 
 ### Initialize the Gantt with Views
+
+The following snippet initializes the Gantt with all four view types, sets **Month** as the default view, and wires the `navigate` event to keep the custom buttons in sync when the user switches views from the built-in toolbar.
 
 ```javascript
 var tasksData = [
@@ -114,6 +116,8 @@ $("#gantt").kendoGantt({
 
 ### Add Custom View Selector Buttons
 
+Place the following buttons outside the Gantt element. Each button carries a `data-view` attribute that maps to the corresponding Gantt view name.
+
 ```html
 <div class="gantt-view-buttons">
     <button type="button" class="gantt-view-btn" data-view="day">Day</button>
@@ -124,6 +128,8 @@ $("#gantt").kendoGantt({
 ```
 
 ### Handle View Switching
+
+The following snippet attaches a `click` handler to all view buttons. When a button is clicked, it activates the corresponding Gantt view and updates the `active` class.
 
 ```javascript
 $(".gantt-view-btn").on("click", function () {

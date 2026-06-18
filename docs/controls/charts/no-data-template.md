@@ -13,6 +13,8 @@ The Kendo UI for jQuery Chart component allows to display a message when there i
 
 ## Example with Bar Chart
 
+The following example demonstrates how to configure a custom No Data Template for a Bar Chart. The template includes a message and a button that, when clicked, loads data into the chart.
+
 ```dojo
 <div id="chart"></div> 
 <script>

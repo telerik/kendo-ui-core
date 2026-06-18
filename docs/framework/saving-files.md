@@ -93,6 +93,8 @@ The following examples demonstrate sample implementations of a server-side proxy
 
 ### ASP.NET WebForms
 
+The following example shows an ASPX page and its code-behind that decode the posted `base64` content and stream the file back to the browser with the appropriate `Content-Disposition` header.
+
 ```tab-ASPX
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="SaveFile.aspx.cs" Inherits="SaveFile" %>
 ```
@@ -126,6 +128,8 @@ public partial class SaveFile : System.Web.UI.Page
 ```
 
 ### ASP.NET WebAPI Controller
+
+The following example shows a Web API controller action that accepts the file data as a typed model and returns a streaming `HttpResponseMessage` with the correct content type and disposition headers.
 
 ```
 public class SaveFile : ApiController
@@ -161,6 +165,8 @@ public class SaveFile : ApiController
 
 ### ASP.NET MVC Proxy
 
+The following example shows an MVC controller action secured with `[ValidateAntiForgeryToken]` and the corresponding Razor view script that posts the file data to that action.
+
 ```tab-Controller
 public class HomeController
 {
@@ -187,6 +193,8 @@ public class HomeController
 
 ### PHP Proxy
 
+The following example reads the posted `base64`, `contentType`, and `fileName` values, decodes the content, and outputs the file with the appropriate headers.
+
 ```
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fileName = $_POST['fileName'];
@@ -204,6 +212,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ```
 
 ### Java (Spring MVC)
+
+The following example shows a Spring MVC controller method that decodes the base64 content and writes the file bytes to the response output stream.
 
 ```
 @RequestMapping(value = "/save", method = RequestMethod.POST)

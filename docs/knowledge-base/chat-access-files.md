@@ -14,7 +14,7 @@ components: ["chat"]
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress® Kendo UI® Chat for jQuery</td>
+  <td>ProgressÂ® Kendo UIÂ® Chat for jQuery</td>
  </tr>
 </table>
 
@@ -33,6 +33,8 @@ The following approach demonstrates how to:
 5. Show file metadata and image previews inside a Kendo UI Window when the custom "View Details" action is triggered through the [`fileMenuAction`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/filemenuaction) event.
 
 ### Configure the Chat with File Attachments and Actions
+
+The following example initializes the Chat with the `fileAttachment` and `fileActions` options, wires up the `sendMessage`, `fileMenuAction`, and `download` events, and opens a Kendo UI Window to display file metadata when a user selects **View Details**.
 
 ```HTML
 <div class="k-d-flex k-justify-content-center">

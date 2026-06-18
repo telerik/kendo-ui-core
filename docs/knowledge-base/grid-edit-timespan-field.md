@@ -28,6 +28,8 @@ This sample demonstrates how to edit a TimeSpan field in InCell editing mode of 
 
 ## Solution
 
+Create a custom MVVM binder that maps a `TimeSpan` object to a TimePicker widget. Register the binder before initializing the Grid so the InCell editor can read and write Hours, Minutes, and Seconds from the data item.
+
 ```dojo
   
     <script>

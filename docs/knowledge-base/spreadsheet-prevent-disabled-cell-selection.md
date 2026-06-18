@@ -25,6 +25,8 @@ How to prevent the selection for disabled cells in the Spreadsheet?
 
 ## Solution
 
+The following example overrides `Sheet.prototype.select` to block selection on disabled cells, initializes a food-order Spreadsheet, and provides a **Disable / Enable 'Quantity' column** button that toggles the `enable` state of the `C3:C11` range.
+
 ```dojo
 <style>
       .k-spreadsheet-cell {

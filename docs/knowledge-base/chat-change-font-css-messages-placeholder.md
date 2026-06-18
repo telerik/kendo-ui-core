@@ -40,6 +40,8 @@ Use the following CSS class to modify the font in the placeholder and the messag
 ```
 #### Example
 
+The following example demonstrates a Chat component that uses a custom font for both the message bubbles and the input placeholder.
+
 ```dojo
 	<style>
 		.k-bubble,

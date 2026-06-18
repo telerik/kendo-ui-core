@@ -69,7 +69,8 @@ kendo.bind($("#grid"), viewModel);
 ```
 
 ### Configuring MVVM Grid Columns
-In the MVVM Grid configuration, reference the custom editor function from the view model.
+
+In the MVVM Grid configuration, reference the custom editor function from the view model using the `editor` property in the column definition.
 
 ```html
 <div id="grid" data-role="grid"
@@ -84,7 +85,9 @@ In the MVVM Grid configuration, reference the custom editor function from the vi
 1. Bind the editor function directly to the view model.
 2. Ensure all required data and functions (`comboData`, `onChange`) are part of the view model.
 
-### Example 
+### Example
+
+The following example demonstrates a Grid bound through MVVM with a DropDownList custom editor. The `onChange` function is defined on the view model and referenced directly so the `change` event fires correctly.
 
 ```dojo
 <div id="example">

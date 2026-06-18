@@ -24,13 +24,15 @@ components: ["grid"]
 
 ## Description
 
-This sample demonstrates how you can use multiple values in the built-in Search Panel of the Grid, achieving multi-column and multi-value filtering with a single textbox input.
+This sample demonstrates how to use multiple values in the built-in Search Panel of the Grid, achieving multi-column and multi-value filtering with a single textbox input.
 
-The separation logic of the different values can be controlled the following variable:
+The separation logic of the different values can be controlled through the following variable:
 
 `var separator = ",";`
 
 ## Solution
+
+Override the Grid's internal `_toolbar` method to intercept search input events. Split the input value by the separator, build a composite `or` filter expression with `contains` conditions for each column, and apply it to the DataSource.
 
 ```dojo
   

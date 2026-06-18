@@ -53,6 +53,8 @@ How can I show the checkbox in the checkbox column of the Kendo UI TreeList for 
 
 #### Example
 
+The following example renders a TreeList with a checkbox column and uses the `dataBound` event to show checkboxes only on root nodes (where `parentId` is `null`) and hide them on all child rows.
+
 ```dojo
 
 <div id="treelist"></div>

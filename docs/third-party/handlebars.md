@@ -47,6 +47,8 @@ The [Kendo UI components](https://demos.telerik.com/kendo-ui/) can be integrated
 
 ## Example: Handlebars with Kendo UI ListView
 
+The following example renders a ListView that uses a Handlebars template to display a product name and unit price for each data item.
+
 ```html
 <script id="product-template" type="text/x-handlebars-template">
     <div class="product">

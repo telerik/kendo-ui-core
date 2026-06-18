@@ -64,6 +64,8 @@ I have a map that a user will utilize in order to mark their position. I want th
 
 #### Example
 
+The following example renders a Map centered on Austin, TX, adds a new marker at each clicked location with a tooltip that contains a **Remove** button, and exposes a **Show markers** button that lists all current marker coordinates.
+
 ```dojo
     <div id="example">
       <button class="k-button k-primary" onclick="show()">Show markers</button>

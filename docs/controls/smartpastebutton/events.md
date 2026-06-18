@@ -113,6 +113,8 @@ $("#smartPasteButton").kendoSmartPasteButton({
 - `e.sender` - The SmartPasteButton widget instance
 - `e.fieldValues` - Object containing the processed field values returned by the AI service
 
+The following example shows the structure of `e.fieldValues` and how to access the values populated by the AI service.
+
 ```javascript
 requestEnd: function(e) {
     // e.fieldValues contains the field values returned by the AI service
@@ -135,6 +137,8 @@ Fires when an error occurs during SmartPasteButton processing. Use this event to
 
 - `e.sender` - The SmartPasteButton widget instance
 - `e.error` - String containing the error message describing what went wrong
+
+The following example demonstrates an `error` handler that displays a user-friendly message and re-enables the form after a failure.
 
 ```javascript
 $("#smartPasteButton").kendoSmartPasteButton({
@@ -168,6 +172,8 @@ $("#smartPasteButton").kendoSmartPasteButton({
 ```
 
 ## Complete Example with All Events
+
+The following example combines all three events in a single SmartPasteButton configuration. It shows a loading indicator on `requestStart`, hides it and displays a success message on `requestEnd`, and shows an error message on `error`.
 
 ```html
 <form id="customerForm">

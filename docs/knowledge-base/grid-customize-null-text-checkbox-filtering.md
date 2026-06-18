@@ -33,6 +33,8 @@ You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/config
 
 ## Hide the null option from the filter menu
 
+The following example uses a custom `itemTemplate` that omits the checkbox item when the cell value is `null`, effectively hiding it from the filter list.
+
 ```dojo
     <div id="grid"></div>
     <script>
@@ -93,6 +95,8 @@ You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/config
 ```
 
 ## Customize null option text in the filter menu
+
+The following example uses a custom `itemTemplate` that replaces `null` cell values with the label **No Value** in the filter checkbox list.
 
 ```dojo
     <div id="grid"></div>

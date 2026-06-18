@@ -47,6 +47,9 @@ Set the CSS property of the following classes using a selector to add styling to
   }
 ```
 #### Example
+
+The following example applies the ID-scoped CSS rule to two PanelBar instances. Only the one with `id="panelbar"` receives the custom header color; the second instance is unaffected.
+
 ```dojo
 <style>
   #panelbar.k-panelbar>.k-item>.k-link,
@@ -105,6 +108,8 @@ Set the CSS property of the following classes using 'div' to add styling globall
   }
 ```
 #### Example
+
+The following example applies the global `div`-scoped CSS rule so both PanelBar instances on the page receive the same persistent header color.
 
 ``` dojo
 <style>

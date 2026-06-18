@@ -59,6 +59,8 @@ $("#scheduler").data("kendoScheduler").view(scheduler.viewName());
 
 ### Example
 
+The following example renders a Scheduler with a day view configured to use `minorTickCount: 2`. Clicking the **Update minor tick count** button updates the view's `minorTickCount` to `5` and refreshes the current view to apply the change.
+
 ```dojo
     <script src="../content/shared/js/schedulerTasks.js"></script>
 

@@ -24,9 +24,11 @@ components: ["grid"]
 
 ## Description
 
-This sample demonstrates how you add a new record using an external input element.
+This sample demonstrates how to add a new record to the Grid using an external input element.
 
 ## Solution
+
+Place the Grid and a custom form in separate TabStrip tabs. In the form's submit handler, call the DataSource `add` method with the input value, then navigate to the last page to make the new record visible.
 
 ```dojo
   

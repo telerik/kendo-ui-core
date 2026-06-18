@@ -63,6 +63,8 @@ function space(e) {
 ```
 #### Example
 
+The following example demonstrates a Stacked Column Chart that uses the `space` visual function to render a visible gap between each stacked series segment.
+
 ```dojo
 <div id="example">
   <div class="demo-section k-content wide">

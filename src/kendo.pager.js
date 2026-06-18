@@ -178,7 +178,7 @@ export const __meta__ = {
                     }
 
                     if (options.dataSource && !options.dataSource.total()) {
-                        that.list.empty().append(that.selectTemplate({ text: 0, tabindex: options.navigatalbe ? 0 : -1, navigatable: options.navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) }));
+                        that.list.empty().append(that.selectTemplate({ text: 0, tabindex: options.navigatable ? 0 : -1, navigatable: options.navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) }));
                     }
                     that._pagerInputWrap.hide();
 

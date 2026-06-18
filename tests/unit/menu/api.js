@@ -247,6 +247,30 @@ describe("menu api", function() {
         }, 1);
     });
 
+    it('open returns the menu instance when lazy loading children', function() {
+        let m = new kendo.ui.Menu($("<ul></ul>").appendTo(Mocha.fixture), {
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [{ text: "Item 1", hasChildren: true }]
+            })
+        });
+        let item = m.element.children("li:first");
+        let dataItem = m.dataSource.view()[0];
+
+        mockFunc(dataItem, "load", function() { });
+        mockFunc(m, "_openAfterLoad", function() { });
+
+        try {
+            assert.isFalse(dataItem.loaded());
+            assert.equal(m.open(item), m);
+            assert.equal(dataItem.load.callCount, 1);
+            assert.equal(m._openAfterLoad.callCount, 1);
+        } finally {
+            removeMocksIn(dataItem);
+            removeMocksIn(m);
+            m.destroy();
+        }
+    });
+
     it.skip('open should apply max-height and overflow styles to group UL', function(done) {
         let item = getRootItem(1).parent(),
             ul = item.find(".k-menu-group");

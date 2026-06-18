@@ -41,6 +41,8 @@ To ensure that markers do not appear on hover in the legend when [`markers.visib
 
 ### Configuration Example
 
+The following snippet sets `legend.item.highlight.visible` to `false` to prevent markers from appearing on legend hover, and sets `markers.visible` to `false` in `seriesDefaults` to hide markers in the chart itself.
+
 ```javascript
 $("#chart").kendoChart({
   title: {
@@ -65,6 +67,8 @@ $("#chart").kendoChart({
 ```
 
 ### Live Demo
+
+The following example renders a full Scatterline Chart with three series and applies both the legend highlight and marker visibility settings described above.
 
 ```dojo
  <div id="chart"></div>

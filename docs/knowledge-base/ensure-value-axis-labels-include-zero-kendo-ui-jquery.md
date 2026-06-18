@@ -41,6 +41,8 @@ To ensure the label for 0 appears on the value axis, use the [`majorUnit`](/api/
 
 ### Example Code
 
+The following snippet configures the `valueAxis` with a `majorUnit` of `1` and a custom label template that always renders the `0` label and renders other labels only when their value appears in the series data.
+
 ```javascript
 valueAxis: {
     min: -11, // Set the minimum value for the axis

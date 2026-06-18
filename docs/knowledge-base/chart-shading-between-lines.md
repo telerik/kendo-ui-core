@@ -77,6 +77,8 @@ series: [
 
 ## Example
 
+The following example renders a Line Chart with two data series and a Range Area series that fills the space between them with a light blue shade.
+
 ```dojo
   <div id="example">
       <div class="demo-section wide">

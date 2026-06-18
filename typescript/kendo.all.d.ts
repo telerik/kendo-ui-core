@@ -3895,7 +3895,6 @@ declare namespace kendo.ui {
         attachmentLayoutField?: string;
         messageStatusTemplate?: MessageStatusTemplateFunction | null;
         messageContentTemplate?: MessageContentTemplateFunction | null;
-        messageTemplate?: MessageTemplateFunction | null;
         userStatusTemplate?: UserStatusTemplateFunction | null;
         attachmentTemplate?: AttachmentTemplateFunction | null;
         messageBoxTemplate?: MessageBoxTemplateFunction | null;

@@ -24,9 +24,11 @@ components: ["grid"]
 
 ## Description
 
-This sample demonstrates how to save the changes in all Grids with InCell editing on the page, regardless whether there are separate or configured as an Hierarchy.
+This sample demonstrates how to save the changes in all Grids with InCell editing on the page, regardless whether they are separate or configured as a hierarchy.
 
 ## Solution
+
+Query all Grid instances on the page by selecting elements with `.k-widget.k-grid`. Then call `saveChanges()` on each one to persist pending edits in both parent and child Grids.
 
 ```dojo
   

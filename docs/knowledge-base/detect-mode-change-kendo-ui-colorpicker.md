@@ -46,6 +46,8 @@ To achieve detection of mode switching between HEX and RGB, use the `open` event
 
 ### Example Implementation:
 
+The following example attaches the click listener once on the first `open` event and logs the active mode to the console whenever the user toggles between HEX and RGB.
+
 ```javascript
 var firstOpen = true;
 

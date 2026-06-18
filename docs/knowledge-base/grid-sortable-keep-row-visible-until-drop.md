@@ -66,6 +66,8 @@ Here is the method, just place it before the grid/sortable is initialized and re
 ```
 #### Example
 
+The following example overrides `kendo.ui.Sortable.fn._dragstart` before initializing the Grid and Sortable so the dragged row remains visible in its original position until the user releases the mouse.
+
 ```dojo
     <div id="grid" style="width: 400px; margin: 0 auto;"></div>
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

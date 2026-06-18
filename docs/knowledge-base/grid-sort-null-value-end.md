@@ -52,6 +52,8 @@ Use the following custom function in the [columns.sortable.compare](https://docs
 ```
 #### Example
 
+The following example initializes a Grid with a sortable Name column that uses the custom compare function to position `null` values at the bottom for both ascending and descending sort directions.
+
 ```dojo
   <div id="grid"></div>
   <script>

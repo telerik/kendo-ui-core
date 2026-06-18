@@ -34,6 +34,8 @@ To exclude hidden columns from the drag-and-drop hint in the Kendo UI for jQuery
 
 ### Code Example
 
+The following example overrides `kendo.ui.Grid.fn._draggableRows` to check each column's visibility when building the drag hint, then initializes two Grids that support row drag and drop between them.
+
 ```dojo
 <div class="k-d-flex k-flex-wrap">
         <div class="k-flex-grow">

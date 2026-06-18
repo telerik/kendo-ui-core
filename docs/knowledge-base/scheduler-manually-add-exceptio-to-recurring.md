@@ -24,6 +24,8 @@ How to manually add exception date for recurring event in the Kendo Scheduler us
 
 ## Solution
 
+The following example pairs a DatePicker with a Scheduler that has a daily recurring event. Clicking the button reads the selected date, formats it as an ISO string, appends it to the event's `recurrenceException` field, and calls `sync()` to persist the change.
+
 ```dojo
   Pick a date to be added to the exception:
   <input id="datepicker" />

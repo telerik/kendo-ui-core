@@ -34,6 +34,8 @@ I want to be able to click on the expand/collapse icon of the parent task and se
 1. Get a reference to the current row.
 1. Use the Gantt [select method](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt/methods/select) to select the current row.
 
+The following snippet binds both `expand` and `collapse` events and calls `gantt.select()` with the row that matches the expanded or collapsed task's UID.
+
 ```
     gantt.list.bind('expand',function(e){
         gantt.select(this.element.find('[data-uid="'+e.model.uid+'"]'));
@@ -45,6 +47,8 @@ I want to be able to click on the expand/collapse icon of the parent task and se
 ```
 
 ## Example
+
+The following example renders a Gantt with remote data and wires up the `expand` and `collapse` events to select the corresponding task row automatically.
 
 ```dojo
 
