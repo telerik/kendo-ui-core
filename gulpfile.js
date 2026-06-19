@@ -48,7 +48,7 @@ function packNpm() {
 
 gulp.task('npm-core', packNpm);
 
-const taskListing = require('gulp-task-listing');
+const taskListing = require('./build/gulp/task-listing');
 gulp.task('tasks', taskListing.withFilters(/:/));
 
 // Exit immediately on Ctrl+C

@@ -66,7 +66,8 @@
     "semver": ">=7.5.2",
     "semver-regex": ">=3.1.4",
     "follow-redirects": ">=1.15.6",
-    "es5-ext": ">=0.10.63"
+    "es5-ext": ">=0.10.63",
+    "path-key": "4.0.0"
   },
   "scripts": {
     "build": "npm ci && npm run scripts:min",
