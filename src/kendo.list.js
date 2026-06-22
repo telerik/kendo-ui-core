@@ -839,7 +839,7 @@ export const __meta__ = {
                     return that.dataSource.getByUid($(index).data("uid"));
                 }
 
-                index = $(that.items()).index(index);
+                index = that.listView.getElementIndex(index);
             }
 
             return that.dataSource.flatView()[index];

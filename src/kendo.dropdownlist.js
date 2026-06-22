@@ -382,7 +382,7 @@ export const __meta__ = {
                     if (index.hasClass("k-list-optionlabel")) {
                         index = -1;
                     } else {
-                        index = $(that.items()).index(index);
+                        index = that.listView.getElementIndex(index);
                     }
                 } else if (that.hasOptionLabel()) {
                     index -= 1;

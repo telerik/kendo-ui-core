@@ -1365,4 +1365,93 @@ import { stub } from '../../helpers/unit/stub.js';
             });
             combobox._clear.click();
         });
+
+        // JMC-10448: dataItem(element) with grouped datasource
+        it("dataItem(element) returns correct dataItem for an item in the first group of a grouped list", function() {
+            let groupedData = [
+                { text: "Alpha", value: "1", category: "Group A" },
+                { text: "Beta",  value: "2", category: "Group A" },
+                { text: "Gamma", value: "3", category: "Group B" },
+                { text: "Delta", value: "4", category: "Group B" }
+            ];
+            let combobox = new ComboBox(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: {
+                    data: groupedData,
+                    group: { field: "category" }
+                }
+            });
+
+            let allItems = combobox.listView.items();
+            let alphaEl = allItems.filter(function() { return $(this).text().trim() === "Alpha"; });
+
+            let result = combobox.dataItem(alphaEl);
+
+            assert.isOk(result !== undefined, "dataItem() must not return undefined for a first-group item");
+            assert.equal(result.text, "Alpha");
+            assert.equal(result.value, "1");
+        });
+
+        it("dataItem(element) returns correct dataItem for an item in the second group of a grouped list (bug JMC-10448)", function() {
+            let groupedData = [
+                { text: "Alpha", value: "1", category: "Group A" },
+                { text: "Beta",  value: "2", category: "Group A" },
+                { text: "Gamma", value: "3", category: "Group B" },
+                { text: "Delta", value: "4", category: "Group B" }
+            ];
+            let combobox = new ComboBox(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: {
+                    data: groupedData,
+                    group: { field: "category" }
+                }
+            });
+
+            let allItems = combobox.listView.items();
+            let gammaEl = allItems.filter(function() { return $(this).text().trim() === "Gamma"; });
+
+            let result = combobox.dataItem(gammaEl);
+
+            assert.isOk(result !== undefined, "dataItem() must not return undefined for a second-group item");
+            assert.equal(result.text, "Gamma");
+            assert.equal(result.value, "3");
+        });
+
+        it("dataItem(element) returns correct dataItem for all items across 3 groups (bug JMC-10448)", function() {
+            let groupedData = [
+                { text: "Alpha",   value: "1", category: "Group A" },
+                { text: "Beta",    value: "2", category: "Group A" },
+                { text: "Gamma",   value: "3", category: "Group B" },
+                { text: "Delta",   value: "4", category: "Group B" },
+                { text: "Epsilon", value: "5", category: "Group C" },
+                { text: "Zeta",    value: "6", category: "Group C" }
+            ];
+            let combobox = new ComboBox(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: {
+                    data: groupedData,
+                    group: { field: "category" }
+                }
+            });
+
+            let allItems = combobox.listView.items();
+
+            let cases = [
+                { label: "Alpha",   value: "1" },
+                { label: "Gamma",   value: "3" },
+                { label: "Epsilon", value: "5" }
+            ];
+
+            cases.forEach(function(c) {
+                let el = allItems.filter(function() { return $(this).text().trim() === c.label; });
+                let result = combobox.dataItem(el);
+
+                assert.isOk(result !== undefined, "dataItem() must not return undefined for item '" + c.label + "'");
+                assert.equal(result.text, c.label, "dataItem().text should be '" + c.label + "'");
+                assert.equal(result.value, c.value, "dataItem().value should be '" + c.value + "'");
+            });
+        });
     });
