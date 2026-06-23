@@ -17,118 +17,122 @@ The [`kendo.format`](/api/javascript/kendo#format) and [`kendo.toString`](/api/j
 The following runnable example demonstrates how to format numbers by using the [`kendo.toString`](/api/javascript/kendo/methods/tostring) method:
 
 ```dojo
-    <!-- Add the de-DE culture file -->
-    <script src="https://kendo.cdn.telerik.com/2022.1.119/js/cultures/kendo.culture.de-DE.min.js"></script>
-    <h4>Number formats with US culture.</h4>
-    <div id="content"></div>
-    <h4>Number formats with DE culture.</h4>
-    <div id="content2"></div>
-    <h4>Applying Number formatting to Grid columns.</h4>
-    <div id="grid"></div>
-    <script>
-      // Default culture is en-US.
-      let number = 1234.567
-      let format = "<p> Format 'n' = " + kendo.toString(number, "n") + "</p>"
-      +"<p> Format 'c' = " + kendo.toString(number, "c") + "</p>"     
-      +"<p> Format 'p' = " + kendo.toString(number, "p") + "</p>"
-      +"<p> Format 'e' = " + kendo.toString(number, "e") + "</p>"
+<!-- Add the de-DE culture file -->
+<script src="https://kendo.cdn.telerik.com/2022.1.119/js/cultures/kendo.culture.de-DE.min.js"></script>
 
-      +"<p> Custom format 'n3' = " + kendo.toString(number, "n3") + "</p>"
-      +"<p> Custom format 'c3' = " + kendo.toString(number, "c3") + "</p>"
-      +"<p> Custom format 'p0' = " + kendo.toString(number, "p0") + "</p>"
-      +"<p> Custom format 'p2' = " + kendo.toString(number, "p2") + "</p>"
-      +"<p> Custom format '#' = " + kendo.toString(number, "#") + "</p>"
-      +"<p> Fromat decimal placeholder '.' = " + kendo.toString(number, "0.00") + "</p>"
-      +"<p> Fromat group separator ',' = " + kendo.toString(number, "##,#") + "</p>"
-      +"<p> Percentage placeholder '%' = " + kendo.toString(number, "# \\%") + "</p>"
-      +"<p> Currency placeholder '$' = " + kendo.toString(number, "# \\$") + "</p>"
-      +"<p> The exponential notation 'e0' = " + kendo.toString(number, "e0") + "</p><hr>";
-      $(format).appendTo(content);
+<h4>Number formats with US culture.</h4>
+<div id="content"></div>
 
-      // Switch to DE culture.
-      kendo.culture("de-DE");
+<h4>Number formats with DE culture.</h4>
+<div id="content2"></div>
 
-      let format2 =  "<p> Format 'c' = " + kendo.toString(number, "c") + "</p>"     
-      +"<p> Format 'p' = " + kendo.toString(number, "p") + "</p>"
-      +"<p> Custom format 'n3' = " + kendo.toString(number, "n3") + "</p>"
-      +"<p> Custom format 'c3' = " + kendo.toString(number, "c3") + "</p>"
-      +"<p> Custom format 'p0' = " + kendo.toString(number, "p0") + "</p>"
-      +"<p> Custom format 'p2' = " + kendo.toString(number, "p2") + "</p>"
-      +"<p> Fromat decimal placeholder '.' = " + kendo.toString(number, "0.00") + "</p>"
-      +"<p> Fromat group separator ',' = " + kendo.toString(number, "##,#") + "</p>"
-      +"<p> Currency placeholder '$' = " + kendo.toString(number, "# \\$") + "</p><hr>";
+<h4>Applying Number formatting to Grid columns.</h4>
+<div id="grid"></div>
 
-      $(format2).appendTo(content2);
+<script>
+  // Default culture is en-US.
+  let number = 1234.567
+  let format = "<p> Format 'n' = " + kendo.toString(number, "n") + "</p>"
+  +"<p> Format 'c' = " + kendo.toString(number, "c") + "</p>"     
+  +"<p> Format 'p' = " + kendo.toString(number, "p") + "</p>"
+  +"<p> Format 'e' = " + kendo.toString(number, "e") + "</p>"
 
-      $("#grid").kendoGrid({
-        dataSource: [
-          {
-            number: 123.456, 
-          }
-        ],
-        columns: [{
-          title: "n3",
-          field: "number",
-          format: "{0:n3}"
-        },{
-          title: "p0",
-          field: "number",
-          format: "{0:p0}"
-        },{
-          title: "c2",
-          field: "number",
-          format: "{0:c2}"
-        },{
-          title: "Decimal placeholder",
-          field: "number",
-          format: "{0:0.00}"
-        },{
-          title: "Standard",
-          field: "number"
-        }]
-      });
-    </script>
+  +"<p> Custom format 'n3' = " + kendo.toString(number, "n3") + "</p>"
+  +"<p> Custom format 'c3' = " + kendo.toString(number, "c3") + "</p>"
+  +"<p> Custom format 'p0' = " + kendo.toString(number, "p0") + "</p>"
+  +"<p> Custom format 'p2' = " + kendo.toString(number, "p2") + "</p>"
+  +"<p> Custom format '#' = " + kendo.toString(number, "#") + "</p>"
+  +"<p> Fromat decimal placeholder '.' = " + kendo.toString(number, "0.00") + "</p>"
+  +"<p> Fromat group separator ',' = " + kendo.toString(number, "##,#") + "</p>"
+  +"<p> Percentage placeholder '%' = " + kendo.toString(number, "# \\%") + "</p>"
+  +"<p> Currency placeholder '$' = " + kendo.toString(number, "# \\$") + "</p>"
+  +"<p> The exponential notation 'e0' = " + kendo.toString(number, "e0") + "</p><hr>";
+  $(format).appendTo(content);
+
+  // Switch to DE culture.
+  kendo.culture("de-DE");
+
+  let format2 =  "<p> Format 'c' = " + kendo.toString(number, "c") + "</p>"     
+  +"<p> Format 'p' = " + kendo.toString(number, "p") + "</p>"
+  +"<p> Custom format 'n3' = " + kendo.toString(number, "n3") + "</p>"
+  +"<p> Custom format 'c3' = " + kendo.toString(number, "c3") + "</p>"
+  +"<p> Custom format 'p0' = " + kendo.toString(number, "p0") + "</p>"
+  +"<p> Custom format 'p2' = " + kendo.toString(number, "p2") + "</p>"
+  +"<p> Fromat decimal placeholder '.' = " + kendo.toString(number, "0.00") + "</p>"
+  +"<p> Fromat group separator ',' = " + kendo.toString(number, "##,#") + "</p>"
+  +"<p> Currency placeholder '$' = " + kendo.toString(number, "# \\$") + "</p><hr>";
+
+  $(format2).appendTo(content2);
+
+  $("#grid").kendoGrid({
+    dataSource: [
+      {
+        number: 123.456, 
+      }
+    ],
+    columns: [{
+      title: "n3",
+      field: "number",
+      format: "{0:n3}"
+    },{
+      title: "p0",
+      field: "number",
+      format: "{0:p0}"
+    },{
+      title: "c2",
+      field: "number",
+      format: "{0:c2}"
+    },{
+      title: "Decimal placeholder",
+      field: "number",
+      format: "{0:0.00}"
+    },{
+      title: "Standard",
+      field: "number"
+    }]
+  });
+</script>
 ```
 
 ## Default Number Formats
 
 * `"n"`&mdash;Renders a number.
 
-    kendo.culture("en-US");
-    kendo.toString(1234.567, "n"); //1,234.57
+      kendo.culture("en-US");
+      kendo.toString(1234.567, "n"); //1,234.57
 
-    kendo.toString(10.12, "n5"); //10.12000
-    kendo.toString(10.12, "n0"); //10
+      kendo.toString(10.12, "n5"); //10.12000
+      kendo.toString(10.12, "n0"); //10
 
-    kendo.culture("de-DE");
-    kendo.toString(1234.567, "n3"); //1.234,567
+      kendo.culture("de-DE");
+      kendo.toString(1234.567, "n3"); //1.234,567
 
 * `"c"`&mdash;Renders a currency value.
 
-    kendo.culture("en-US");
-    kendo.toString(1234.567, "c"); //$1,234.57
+      kendo.culture("en-US");
+      kendo.toString(1234.567, "c"); //$1,234.57
 
-    kendo.culture("en-US");
-    kendo.toString(1234.567, "c0"); //$1,235
+      kendo.culture("en-US");
+      kendo.toString(1234.567, "c0"); //$1,235
 
-    kendo.culture("de-DE");
-    kendo.toString(1234.567, "c3"); //1.234,567 €
+      kendo.culture("de-DE");
+      kendo.toString(1234.567, "c3"); //1.234,567 €
 
 * `"p"`&mdash;Renders a percentage (number is multiplied by 100).
 
-    kendo.culture("en-US");
-    kendo.toString(0.222, "p"); //22.20 %
+      kendo.culture("en-US");
+      kendo.toString(0.222, "p"); //22.20 %
 
-    kendo.culture("en-US");
-    kendo.toString(0.222, "p0"); //22 %
+      kendo.culture("en-US");
+      kendo.toString(0.222, "p0"); //22 %
 
-    kendo.culture("de-DE");
-    kendo.toString(0.22, "p3"); //22.000 %
+      kendo.culture("de-DE");
+      kendo.toString(0.22, "p3"); //22.000 %
 
 * `"e"`&mdash;Renders exponential values.
 
-    kendo.toString(0.122, "e"); //1.22e-1
-    kendo.toString(0.122, "e4"); //1.2200e-1
+      kendo.toString(0.122, "e"); //1.22e-1
+      kendo.toString(0.122, "e4"); //1.2200e-1
 
 ## Custom Number Formats
 
@@ -166,77 +170,77 @@ The following specifiers are supported by Kendo UI:
 The following runnable example demonstrates how to use the [`kendo.toString`](/api/javascript/kendo/methods/tostring) method in the [`eventTemplate`](/api/javascript/ui/scheduler/configuration/eventtemplate) of the Scheduler:
 
 ```dojo
-    <div>
-      <label for="language">Choose language:</label>
-      <input id="language" value="en-US" />
-    </div>
+<div>
+  <label for="language">Choose language:</label>
+  <input id="language" value="en-US" />
+</div>
 
-    <div id="scheduler"></div>
-    <script id="event-template" type="text/x-kendo-template">
-      <div> Title: #: title #</div>
-      <div> Cost: #: kendo.toString(number, 'c0', kendo.culture().name) #</div>
-    </script>
-    <script>
+<div id="scheduler"></div>
+<script id="event-template" type="text/x-kendo-template">
+  <div> Title: #: title #</div>
+  <div> Cost: #: kendo.toString(number, 'c0', kendo.culture().name) #</div>
+</script>
 
-      function changeLanguage() {
-        kendo.ui.progress($("#scheduler"), true);
-        language= this.value();
+<script>
+  function changeLanguage() {
+    kendo.ui.progress($("#scheduler"), true);
+    language= this.value();
 
-        var baseUrlMessages = 'https://kendo.cdn.telerik.com/2022.1.119/js/messages/kendo.messages.';
-        var baseUrlCultures = 'https://kendo.cdn.telerik.com/2022.1.119/js/cultures/kendo.culture.';
+    var baseUrlMessages = 'https://kendo.cdn.telerik.com/2022.1.119/js/messages/kendo.messages.';
+    var baseUrlCultures = 'https://kendo.cdn.telerik.com/2022.1.119/js/cultures/kendo.culture.';
 
-        $.getScript(baseUrlMessages + language + ".min.js", function () {
-          $.getScript(baseUrlCultures + language + ".min.js", function () {
-            kendo.culture(language);
-            kendo.ui.progress($("#scheduler"), false);
-            createScheduler();
-          });
-        });
-      }
-
-      $(document).ready(function() {
-        $("#language").kendoDropDownList({
-          change: changeLanguage,
-          dataTextField: "text",
-          dataValueField: "value",
-          dataSource: [
-            {text: "bg-BG"},
-            {text: "zh-CN"},
-            {text: "de-DE"},
-            {text: "en-US"},
-          ]
-        });
-
-        $("#language").data("kendoDropDownList").trigger("change");
+    $.getScript(baseUrlMessages + language + ".min.js", function () {
+      $.getScript(baseUrlCultures + language + ".min.js", function () {
+        kendo.culture(language);
+        kendo.ui.progress($("#scheduler"), false);
+        createScheduler();
       });
+    });
+  }
 
-      function createScheduler() {
-        var element = $("#scheduler");
+  $(document).ready(function() {
+    $("#language").kendoDropDownList({
+      change: changeLanguage,
+      dataTextField: "text",
+      dataValueField: "value",
+      dataSource: [
+        {text: "bg-BG"},
+        {text: "zh-CN"},
+        {text: "de-DE"},
+        {text: "en-US"},
+      ]
+    });
 
-        if (element.data("kendoScheduler")) {
-          element.data("kendoScheduler").destroy();
-          element.empty();
+    $("#language").data("kendoDropDownList").trigger("change");
+  });
+
+  function createScheduler() {
+    var element = $("#scheduler");
+
+    if (element.data("kendoScheduler")) {
+      element.data("kendoScheduler").destroy();
+      element.empty();
+    }
+
+    element.kendoScheduler({
+      date: new Date("11/02/2022"),
+      startTime: new Date("2022/11/02 08:00 AM"),
+      editable: false,
+      eventTemplate: $("#event-template").html(),  
+      height: 500,
+      views: ["day", "week"],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2022/11/02 08:00 AM"),
+          end: new Date("2022/11/02 09:00 AM"),
+          title: "Auto Exhibition",
+          number: 50000
         }
-
-        element.kendoScheduler({
-          date: new Date("11/02/2022"),
-          startTime: new Date("2022/11/02 08:00 AM"),
-          editable: false,
-          eventTemplate: $("#event-template").html(),  
-          height: 500,
-          views: ["day", "week"],
-          dataSource: [
-            {
-              id: 1,
-              start: new Date("2022/11/02 08:00 AM"),
-              end: new Date("2022/11/02 09:00 AM"),
-              title: "Auto Exhibition",
-              number: 50000
-            }
-          ]  
-        });
-      }
-    </script>
+      ]  
+    });
+  }
+</script>
 ```
 
 ## See Also
