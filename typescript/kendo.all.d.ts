@@ -19389,6 +19389,10 @@ declare namespace kendo.dataviz.ui {
         data?: any;
     }
 
+    interface ChartNoData {
+        template?: string | Function | undefined;
+    }
+
     interface ChartOptions {
         name?: string | undefined;
         autoBind?: boolean | undefined;
@@ -19414,6 +19418,7 @@ declare namespace kendo.dataviz.ui {
         valueAxis?: ChartValueAxisItem | ChartValueAxisItem[] | undefined;
         xAxis?: ChartXAxisItem | ChartXAxisItem[] | undefined;
         yAxis?: ChartYAxisItem | ChartYAxisItem[] | undefined;
+        noData?: ChartNoData | undefined;
         zoomable?: boolean | ChartZoomable | undefined;
         axisLabelClick?(e: ChartAxisLabelClickEvent): void;
         dataBound?(e: ChartDataBoundEvent): void;
