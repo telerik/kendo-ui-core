@@ -878,6 +878,82 @@ describe("kendo.ui.DropDownList events", function() {
         });
     });
 
+    it("select event dataItem is defined when navigating to optionLabel via UP arrow", function() {
+        let selectDataItem;
+        let dropdownlist = new DropDownList(input, {
+            optionLabel: "select...",
+            dataSource: ["foo"],
+            value: "foo",
+            select: function(e) {
+                selectDataItem = e.dataItem;
+            }
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.UP
+        });
+
+        assert.isDefined(selectDataItem);
+        assert.equal(selectDataItem, "select...");
+    });
+
+    it("select event dataItem is defined when selecting optionLabel via ENTER key", function() {
+        let selectDataItem;
+        let dropdownlist = new DropDownList(input, {
+            optionLabel: "select...",
+            dataSource: ["foo"],
+            value: "foo"
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.UP
+        });
+
+        dropdownlist.one("select", function(e) {
+            selectDataItem = e.dataItem;
+        });
+
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+
+        assert.isDefined(selectDataItem);
+        assert.equal(selectDataItem, "select...");
+    });
+
+    it("select event dataItem contains optionLabel object when optionLabel is complex and selected via keyboard", function() {
+        let selectDataItem;
+        let dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { text: "item1", value: "1" },
+                { text: "item2", value: "2" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            optionLabel: { text: "Select...", value: "" },
+            value: "1",
+            select: function(e) {
+                selectDataItem = e.dataItem;
+            }
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.UP
+        });
+
+        assert.isDefined(selectDataItem);
+        assert.equal(selectDataItem.text, "Select...");
+        assert.equal(selectDataItem.value, "");
+    });
+
     asyncTest("widget triggers cascade only once on value set", function(done) {
         let ddl = new DropDownList(input, {
             optionLabel: "Select",

@@ -991,6 +991,41 @@ describe("kendo.ui.DropDownList animated selection", function() {
         dropdownlist.filterInput.focus().val("item2").keydown();
     });
 
+    it("DropDownList closes popup on Enter after refocusing via Tab", function() {
+        let dropdownlist = input.kendoDropDownList({
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1" },
+                { text: "item2", value: "item2" },
+                { text: "item3", value: "item3" }
+            ],
+            filter: "contains"
+        }).data("kendoDropDownList");
+
+        // Focus the widget and simulate a typing timeout being set
+        dropdownlist.wrapper.focus();
+        dropdownlist._typingTimeout = setTimeout(function() {}, 1000);
+
+        // Simulate Tab away (focusout)
+        dropdownlist.wrapper.focusout();
+
+        // Simulate Tab back (focusin)
+        dropdownlist.wrapper.focusin();
+
+        // Open popup
+        dropdownlist.open();
+
+        // Press Down to move selection
+        dropdownlist.wrapper.press(keys.DOWN);
+
+        // Press Enter to select and close
+        dropdownlist.wrapper.press(keys.ENTER);
+
+        assert.isFalse(dropdownlist.popup.visible());
+    });
+
     it("DropDownList does not close popup if still animating", function() {
         input.wrap('<div style="overflow:hidden"></div>');
         let parent = input.parent();

@@ -1725,6 +1725,10 @@ export const __meta__ = {
                 index = listView.getElementIndex(candidate);
             }
 
+            if (hasOptionLabel && index === -1 && that._optionLabelDataItem) {
+                return that._optionLabelDataItem();
+            }
+
             return listView.dataItemByIndex(index);
         },
 
@@ -1834,7 +1838,11 @@ export const __meta__ = {
                 var selection;
 
                 if (current) {
-                    dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
+                    if (that.optionLabel && that.optionLabel.length && current[0] === that.optionLabel[0]) {
+                        dataItem = that._optionLabelDataItem();
+                    } else {
+                        dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
+                    }
                     var shouldTrigger = true;
 
                     if (dataItem) {

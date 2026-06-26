@@ -664,6 +664,7 @@ export const __meta__ = {
 
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
+                that._typingTimeout = null;
 
                 if (support.mobileOS.ios && isIFrame) {
                     that._change();
