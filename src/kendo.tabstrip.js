@@ -766,32 +766,32 @@ export const __meta__ = {
                     text: (view[idx] && view[idx].text) || text(view[idx]),
                 };
 
-                if (options?.tabTemplate) {
+                if (options.tabTemplate) {
                     tab.model = view[idx];
                     tab.template = options.tabTemplate;
                 }
 
-                if (options?.dataEncodedField) {
+                if (options.dataEncodedField) {
                     tab.encoded = encoded(view[idx]);
                 }
 
-                if (options?.dataContentField) {
+                if (options.dataContentField) {
                     tab.content = content(view[idx]);
                 }
 
-                if (options?.dataContentUrlField) {
+                if (options.dataContentUrlField) {
                     tab.contentUrl = contentUrl(view[idx]);
                 }
 
-                if (options?.dataUrlField) {
+                if (options.dataUrlField) {
                     tab.url = url(view[idx]);
                 }
 
-                if (options?.dataImageUrlField) {
+                if (options.dataImageUrlField) {
                     tab.imageUrl = image(view[idx]);
                 }
 
-                if (options?.dataSpriteCssClass) {
+                if (options.dataSpriteCssClass) {
                     tab.spriteCssClass = sprite(view[idx]);
                 }
 
@@ -1054,7 +1054,7 @@ export const __meta__ = {
                         existingActionButtons.parent().append(actionTemplate);
                     }
 
-                    if (isFunction(action?.action)) {
+                    if (isFunction(action.action)) {
                         if (!existingActionButtons.length || isClosableAction) {
                             actionTemplate.bind(CLICK, action.action.bind(that));
                         } else {

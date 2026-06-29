@@ -1348,7 +1348,7 @@ export const __meta__ = {
     function normalizeSort(field, dir) {
         if (field) {
             var descriptor = typeof field === STRING ? { field: field, dir: dir } : field,
-            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+            descriptors = isArray(descriptor) ? descriptor : [descriptor];
 
             return grep(descriptors, function(d) { return !!d.dir; });
         }
@@ -1359,7 +1359,7 @@ export const __meta__ = {
 
         if (sorts) {
             var descriptor = typeof sorts === STRING ? { field: sorts, dir: dir } : sorts,
-            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+            descriptors = isArray(descriptor) ? descriptor : [descriptor];
 
             for (var i = 0; i < descriptors.length; i++) {
                 sortObject[descriptors[i].field] = { dir: descriptors[i].dir, index: i + 1 };
@@ -2180,7 +2180,7 @@ export const __meta__ = {
                     }
                  };
 
-                 if (service?.headers) {
+                 if (service.headers) {
                      requestOptions.headers = service.headers;
                  }
 

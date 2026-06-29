@@ -268,7 +268,7 @@ export const __meta__ = {
             });
 
             if (that.floatingLabel) {
-                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+                that.floatingLabel.enable(enable);
             }
         },
 

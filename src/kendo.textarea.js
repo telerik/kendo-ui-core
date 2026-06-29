@@ -189,8 +189,7 @@ export const __meta__ = {
             });
 
             if (that.floatingLabel) {
-                let enableValue = enable === undefined ? true : enable;
-                that.floatingLabel.enable(enableValue);
+                that.floatingLabel.enable(enable);
             }
         },
 

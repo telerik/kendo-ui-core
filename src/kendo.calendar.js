@@ -992,7 +992,7 @@ export const __meta__ = {
                 currentValue = new DATE(+that._current),
                 isRtl = that.isRtl(),
                 isDisabled = that.options.disableDates,
-                value, prevent, method, temp, cell, focusedCell, lastActive;
+                value, prevent, method, temp, cell, lastActive;
 
             if (e.target === that._table[0]) {
                 that._active = true;
@@ -1077,7 +1077,7 @@ export const __meta__ = {
 
                 if (that.rangeSelectable) {
                     cell = that._cellByDate(view.toDateString(currentValue));
-                    lastActive = toDateObject((that.rangeSelectable._lastActive || focusedCell).find("span"));
+                    lastActive = toDateObject((that.rangeSelectable._lastActive).find("span"));
                     if (!that._dateInViews(lastActive)) {
                         if (+lastActive > +currentValue) {
                             that.rangeSelectable._end = that.rangeSelectable._lastActive;

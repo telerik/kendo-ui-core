@@ -1782,7 +1782,7 @@ export const __meta__ = {
         }
 
         length = a.length;
-        if (length !== b.length) {
+        if (length !== b?.length) {
             return false;
         }
 

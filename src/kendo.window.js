@@ -1245,11 +1245,7 @@ import "./kendo.html.button.js";
                         windowTop = parseInt(wrapper.position().top, 10);
 
                     if (!that.options.pinned && windowTop > 0 && windowTop < scrollTop) {
-                        if (scrollTop > 0) {
-                            $(window).scrollTop(windowTop);
-                        } else {
-                            wrapper.css("top", scrollTop);
-                        }
+                        $(window).scrollTop(windowTop);
                     }
                 }
 
@@ -1664,7 +1660,7 @@ import "./kendo.html.button.js";
 
                         if (iframe) {
                             // refresh existing iframe
-                            iframe.src = url || iframe.src;
+                            iframe.src = url;
                         } else {
                             // render new iframe
                             element.html(templates.contentFrame(extend({}, initOptions, { content: options })));

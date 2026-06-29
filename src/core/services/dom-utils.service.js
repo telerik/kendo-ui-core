@@ -79,7 +79,7 @@ class DomUtilsService {
         if (dataset[namespaceService.ns + "scrollable"] === "false") {
             return false;
         }
-        if (typeof (element === null || element === void 0 ? void 0 : element.className) === "string" &&
+        if (typeof element.className === "string" &&
             element.className.indexOf("k-auto-scrollable") > -1) {
             return true;
         }

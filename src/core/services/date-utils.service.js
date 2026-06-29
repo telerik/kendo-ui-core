@@ -91,7 +91,9 @@ class DateUtilsService {
      * Get the week number in the year
      */
     weekInYear(date, weekStartDay) {
-        weekStartDay !== null && weekStartDay !== void 0 ? weekStartDay : (weekStartDay = cultureService.culture().calendar.firstDay);
+        if (weekStartDay === undefined) {
+            weekStartDay = cultureService.culture().calendar.firstDay;
+        }
         const prevWeekDate = this.addDays(date, -7);
         const nextWeekDate = this.addDays(date, 7);
         const weekNumber = this.calcWeekInYear(date, weekStartDay);

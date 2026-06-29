@@ -405,8 +405,8 @@ export const __meta__ = {
                 targetCenter = this._getElementCenter(target.element);
 
                 offsetDelta = {
-                    left: Math.round(cursorOffset.left - targetCenter.left),
-                    top: Math.round(cursorOffset.top - targetCenter.top)
+                    left: Math.round(cursorOffset.left - targetCenter?.left),
+                    top: Math.round(cursorOffset.top - targetCenter?.top)
                 };
 
                 $.extend(eventData, { target: target.element });

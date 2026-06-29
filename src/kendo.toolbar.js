@@ -318,8 +318,7 @@ export const __meta__ = {
                     scrollNextButton;
 
                 that.element.addClass("k-toolbar-scrollable");
-                let useNativeScrolling = true;
-                that.element.wrapInner(`<div class="k-toolbar-items ${useNativeScrolling ? "k-toolbar-items-scroll" : ""}"></div>`);
+                that.element.wrapInner(`<div class="k-toolbar-items k-toolbar-items-scroll"></div>`);
                 const scrollableElement = toolbarElement.find("> .k-toolbar-items");
                 const wrapperOffset = that.element[0].offsetWidth;
                 const tabGroupScroll = scrollableElement[0].scrollWidth;
@@ -1141,7 +1140,7 @@ export const __meta__ = {
                 this._addAttributes(options, menuitem);
             }
 
-            if (!this.options.navigateOnTab && inputsInTemplate.length > 0) {
+            if (element && !this.options.navigateOnTab && inputsInTemplate.length > 0) {
                 element.attr(TABINDEX, 0);
                 element.attr(ITEM_REF + TOOLBAR_TOOL, '');
                 inputsInTemplate.attr(TABINDEX, -1);

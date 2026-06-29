@@ -1829,7 +1829,7 @@ export const __meta__ = {
                 if (popupOpener.parent().is(menuSelector)) {
                     break;
                 }
-                popupOpener = overflowWrapper.find(popupOpenerSelector(popupId));
+                popupOpener = (overflowWrapper || that.element).find(popupOpenerSelector(popupId));
                 that.close(popupOpener, true);
                 popupId = popupOpener.closest(popupSelector).data(POPUP_ID_ATTR);
             }

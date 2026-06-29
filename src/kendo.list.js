@@ -253,7 +253,7 @@ export const __meta__ = {
             });
 
             if (this.label && this.label.floatingLabel) {
-                this.label.floatingLabel.enable(enable = enable === undefined ? true : enable);
+                this.label.floatingLabel.enable(enable);
             }
         },
 
@@ -2073,24 +2073,26 @@ export const __meta__ = {
             var parent = that._parentWidget();
             var focusout = isIE && parent instanceof ui.DropDownList ? BLUR : FOCUSOUT;
 
-            parent._focused.add(parent.filterInput).on(FOCUS, function() {
-                parent.unbind(CASCADE, that._cascadeHandlerProxy);
-                parent.unbind(CHANGE, that._cascadeHandlerProxy);
-                parent.first(CHANGE, that._cascadeHandlerProxy);
-            });
+            if (parent) {
+                parent._focused.add(parent.filterInput).on(FOCUS, function() {
+                    parent.unbind(CASCADE, that._cascadeHandlerProxy);
+                    parent.unbind(CHANGE, that._cascadeHandlerProxy);
+                    parent.first(CHANGE, that._cascadeHandlerProxy);
+                });
 
-            parent._focused.add(parent.filterInput).on(focusout, function() {
-                parent.unbind(CHANGE, that._cascadeHandlerProxy);
-                parent.unbind(CASCADE, that._cascadeHandlerProxy);
-                parent.first(CASCADE, that._cascadeHandlerProxy);
-            });
+                parent._focused.add(parent.filterInput).on(focusout, function() {
+                    parent.unbind(CHANGE, that._cascadeHandlerProxy);
+                    parent.unbind(CASCADE, that._cascadeHandlerProxy);
+                    parent.first(CASCADE, that._cascadeHandlerProxy);
+                });
+            }
         },
 
         _cascadeHandler: function(e) {
             var parent = this._parentWidget();
             var valueBeforeCascade = this.value();
 
-            this._userTriggered = e.userTriggered || parent._userTriggered;
+            this._userTriggered = e.userTriggered || parent?._userTriggered;
 
             if (this.listView.bound()) {
                 this._clearSelection(parent, true);
