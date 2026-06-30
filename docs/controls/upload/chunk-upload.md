@@ -17,7 +17,7 @@ You can persist the successfully uploaded files in the list and display them aga
 
 ## Uploading Batches of Files
 
-Regardless of the mode of operation the Upload is into, it generates a unique identifier (`uid`) for each file. If the Upload is used with its [`batch` option](/api/javascript/ui/upload/configuration/async.batch) enabled, the single `uid` that is generated stands for the batch of files that were simultaneously selected. If the Upload is used with the [`batch` option](/api/javascript/ui/upload/configuration/async.batch) disabled, a `uid` is generated for each separate file.
+The Upload generates a unique identifier (`uid`) for each upload unit. When the [`batch` option](/api/javascript/ui/upload/configuration/async.batch) is enabled, all files selected at the same time share a single `uid` that identifies the batch. When the [`batch` option](/api/javascript/ui/upload/configuration/async.batch) is disabled, each file receives its own `uid`.
 
 The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload/events/cancel), [`error`](/api/javascript/ui/upload/events/error), [`progress`](/api/javascript/ui/upload/events/progress), [`remove`](/api/javascript/ui/upload/events/remove), [`select`](/api/javascript/ui/upload/events/select), or [`upload`](/api/javascript/ui/upload/events/upload) events as a property of the `e.files` collection.
 

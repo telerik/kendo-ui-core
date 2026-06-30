@@ -363,12 +363,13 @@ describe("kendo.ui.DropDownList API", function() {
         dropdownlist.popup.toggle = oldOpen;
     });
 
-    it('Disabled dropdownlist removes tabIndex', function() {
+    it('Disabled dropdownlist sets tabIndex to -1 (JMC-9269)', function() {
         dropdownlist = new DropDownList(input.attr("tabindex", 2));
 
         dropdownlist.enable(false);
 
-        assert.isOk(!dropdownlist.wrapper.attr("tabindex"));
+        assert.equal(dropdownlist.wrapper.attr("tabindex"), "-1",
+            "Disabled DDL wrapper should have tabindex=-1 so screen readers can still focus it");
     });
 
     it('Disabled dropdownlist persists custom tabindex', function() {

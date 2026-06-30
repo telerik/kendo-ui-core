@@ -331,7 +331,7 @@ export const __meta__ = {
             this._prevent = true;
 
             filterInput.addClass("k-hidden");
-            filterInput.closest(".k-list-filter").css("width", this.popup.element.width());
+            filterInput.closest(".k-list-filter").css("width", this.popup.element.width() - 1);
             filterInput.removeClass("k-hidden");
 
             if (isInputActive) {
@@ -733,9 +733,14 @@ export const __meta__ = {
                     wrapper.on("input" + ns, that._search.bind(that));
                 }
 
+                if (!element.attr("aria-label")) {
+                    that._restoreAriaValue();
+                }
+
             } else if (disable) {
-                wrapper.removeAttr(TABINDEX);
+                wrapper.attr(TABINDEX, "-1");
                 dropDownWrapper.addClass(STATEDISABLED);
+                that._updateDisabledAriaValue();
             } else {
                 dropDownWrapper.removeClass(STATEDISABLED);
             }
@@ -1261,6 +1266,57 @@ export const __meta__ = {
             that._accessor(value, idx);
 
             that._triggerCascade();
+
+            // Keep aria accessible name in sync when disabled so screen readers can announce the selected value.
+            // This covers the case where _editable ran before data was available (enabled: false in options).
+            if (!that.element.attr("aria-label") && that.wrapper.hasClass(STATEDISABLED)) {
+                that._updateDisabledAriaValue();
+            }
+        },
+
+        _updateDisabledAriaValue: function() {
+            var that = this;
+            var element = that.element;
+            var wrapper = that.wrapper;
+
+            if (element.attr("aria-label")) {
+                return;
+            }
+
+            var text = that.text();
+            var existingLabelledBy = wrapper.attr("aria-labelledby");
+            var innerSpanId = wrapper.attr("aria-describedby");
+
+            if (existingLabelledBy) {
+                if (!wrapper.data("_origAriaLabelledBy")) {
+                    wrapper.data("_origAriaLabelledBy", existingLabelledBy);
+                }
+                if (text && innerSpanId && existingLabelledBy.indexOf(innerSpanId) === -1) {
+                    wrapper.attr("aria-labelledby", existingLabelledBy + " " + innerSpanId);
+                }
+            } else if (text) {
+                wrapper.attr("aria-label", text);
+            } else {
+                wrapper.removeAttr("aria-label");
+            }
+        },
+
+        _restoreAriaValue: function() {
+            var that = this;
+            var element = that.element;
+            var wrapper = that.wrapper;
+
+            if (element.attr("aria-label")) {
+                return;
+            }
+
+            var origLabelledBy = wrapper.data("_origAriaLabelledBy");
+            if (origLabelledBy !== undefined) {
+                wrapper.attr("aria-labelledby", origLabelledBy);
+                wrapper.removeData("_origAriaLabelledBy");
+            } else {
+                wrapper.removeAttr("aria-label");
+            }
         },
 
         _mobile: function() {

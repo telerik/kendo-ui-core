@@ -2098,7 +2098,9 @@ export const __meta__ = {
                 this._clearSelection(parent, true);
             }
 
-            this._cascadeSelect(parent, valueBeforeCascade);
+            if (parent) {
+                this._cascadeSelect(parent, valueBeforeCascade);
+            }
         },
 
         _cascadeChange: function(parent) {

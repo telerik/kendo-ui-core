@@ -1777,12 +1777,12 @@ export const __meta__ = {
     function compare(a, b) {
         var length;
 
-        if ((a === null && b !== null) || (a !== null && b === null)) {
-            return false;
+        if (a === null || b === null) {
+            return a === b;
         }
 
         length = a.length;
-        if (length !== b?.length) {
+        if (length !== b.length) {
             return false;
         }
 

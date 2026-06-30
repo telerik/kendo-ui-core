@@ -76,7 +76,7 @@ class HtmlService {
                 url = new URL(url).href;
                 const target = "_blank";
                 const rel = "noopener noreferrer";
-                return `<a href="${url}" target="${target}"${rel ? ` rel="${rel}"` : ""}>${displayText}</a>`;
+                return `<a href="${url}" target="${target}" rel="${rel}">${displayText}</a>`;
             }
             catch (e) {
                 // If URL is invalid, return original text

@@ -751,6 +751,105 @@ describe("kendo.ui.DropDownList searching", function() {
         assert.closeTo(dropdownlist.popup.element.closest(".k-animation-container").outerWidth(), dropdownlist.popup.element.outerWidth(true) + 1, 1);
     });
 
+    it("autoWidth popup width remains stable across repeated open and close cycles", function() {
+        let dropdownlist = new DropDownList(input, {
+            autoWidth: true,
+            animation: {
+                open: {
+                    duration: 0
+                },
+                close: {
+                    duration: 0
+                },
+            },
+            dataSource: {
+                data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text", "Short item"]
+            }
+        });
+        let animationContainer;
+        let baselineWidth;
+        let currentWidth;
+
+        dropdownlist.open();
+        dropdownlist.close();
+
+        dropdownlist.open();
+        animationContainer = dropdownlist.popup.element.closest(".k-animation-container");
+        baselineWidth = animationContainer.outerWidth();
+
+        for (let i = 0; i < 10; i++) {
+            dropdownlist.close();
+            dropdownlist.open();
+            currentWidth = animationContainer.outerWidth();
+
+            assert.equal(currentWidth, baselineWidth);
+        }
+    });
+
+    it("autoWidth with filter popup width remains stable across repeated open and close cycles", function() {
+        let dropdownlist = new DropDownList(input, {
+            autoWidth: true,
+            filter: "startswith",
+            animation: {
+                open: {
+                    duration: 0
+                },
+                close: {
+                    duration: 0
+                },
+            },
+            dataSource: {
+                data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text", "Short item"]
+            }
+        });
+        let animationContainer;
+        let baselineWidth;
+        let currentWidth;
+
+        dropdownlist.open();
+        dropdownlist.close();
+
+        dropdownlist.open();
+        animationContainer = dropdownlist.popup.element.closest(".k-animation-container");
+        baselineWidth = animationContainer.outerWidth();
+
+        for (let i = 0; i < 10; i++) {
+            dropdownlist.close();
+            dropdownlist.open();
+            currentWidth = animationContainer.outerWidth();
+
+            assert.equal(currentWidth, baselineWidth);
+        }
+    });
+
+    it("autoWidth filter input is sized to natural popup width not inflated container width", function() {
+        let dropdownlist = new DropDownList(input, {
+            autoWidth: true,
+            filter: "startswith",
+            animation: {
+                open: {
+                    duration: 0
+                },
+                close: {
+                    duration: 0
+                },
+            },
+            dataSource: {
+                data: ["Apples", "Oranges"]
+            }
+        });
+
+        dropdownlist.open();
+
+        const popupContentWidth = dropdownlist.popup.element.width();
+        dropdownlist._resizeFilterInput();
+
+        assert.equal(
+            dropdownlist.filterInput.closest(".k-list-filter")[0].style.width,
+            (popupContentWidth - 1) + "px"
+        );
+    });
+
     it("enabled autoWidth disables X scrolling", function() {
         let dropdownlist = new DropDownList(input, {
             autoWidth: true,

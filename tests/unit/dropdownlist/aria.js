@@ -287,3 +287,71 @@ describe("kendo.ui.DropDownList Aria", function() {
         label.remove();
     });
 });
+
+describe("kendo.ui.DropDownList Aria - disabled accessibility (JMC-9269)", function() {
+    let dropdownlist;
+
+    beforeEach(function() {
+        kendo.ns = "kendo-";
+        input = $("<input />").appendTo(Mocha.fixture);
+    });
+
+    afterEach(function() {
+        kendo.ns = "";
+        if (dropdownlist) {
+            dropdownlist.destroy();
+            dropdownlist = null;
+        }
+        input.remove();
+    });
+
+    it("disabled DropDownList sets tabindex to -1 instead of removing it", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["Apple", "Banana", "Cherry"],
+            value: "Banana"
+        });
+
+        dropdownlist.enable(false);
+
+        assert.equal(dropdownlist.wrapper.attr("tabindex"), "-1",
+            "Disabled DDL wrapper should have tabindex=-1 so screen readers can focus it");
+    });
+
+    it("disabled DropDownList with selected value sets aria-label on wrapper with the selected text", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["Apple", "Banana", "Cherry"],
+            value: "Banana"
+        });
+
+        dropdownlist.enable(false);
+
+        assert.equal(dropdownlist.wrapper.attr("aria-label"), "Banana",
+            "Disabled DDL wrapper should have aria-label containing the selected text for screen readers");
+    });
+
+    it("re-enabled DropDownList restores tabindex to 0 and removes aria-label", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["Apple", "Banana", "Cherry"],
+            value: "Banana"
+        });
+
+        dropdownlist.enable(false);
+        dropdownlist.enable(true);
+
+        assert.equal(dropdownlist.wrapper.attr("tabindex"), "0",
+            "Re-enabled DDL wrapper should restore tabindex=0");
+        assert.isUndefined(dropdownlist.wrapper.attr("aria-label"),
+            "Re-enabled DDL wrapper should not have aria-label");
+    });
+
+    it("DropDownList initialized with enabled: false sets aria-label with selected value", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["Apple", "Banana", "Cherry"],
+            value: "Banana",
+            enabled: false
+        });
+
+        assert.equal(dropdownlist.wrapper.attr("aria-label"), "Banana",
+            "DDL initialized disabled should have aria-label with selected text");
+    });
+});

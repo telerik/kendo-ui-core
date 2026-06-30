@@ -2319,7 +2319,7 @@ export const __meta__ = {
                 }
             };
 
-            if (service?.headers) {
+            if (service.headers) {
                 requestOptions.headers = service.headers;
             }
 
