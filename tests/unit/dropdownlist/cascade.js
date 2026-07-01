@@ -1387,4 +1387,157 @@ describe("kendo.ui.DropDownLists Cascading DropDownLists", function() {
 
         assert.equal(child.data("kendoDropDownList").text(), "X5");
     });
+
+    it("child widget does not trigger change during initialization", function() {
+        let ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                { text: "item1", id: "1", text2: "i" },
+                { text: "item3", id: "2", text2: "i" }
+            ]
+        });
+        let ddl2 = new DropDownList(child, {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    { text: "item1", id: "1" },
+                    { text: "item2", id: "1" },
+                    { text: "item3", id: "2" },
+                    { text: "item4", id: "2" }
+                ]
+            },
+            change: function() {
+                assert.isOk(false);
+            }
+        });
+    });
+
+    it("widget does not trigger cascade during initialization", function() {
+        let ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            cascade: function() {
+                assert.isOk(false);
+            },
+            dataSource: [
+                { text: "item1", id: "1", text2: "i" },
+                { text: "item3", id: "2", text2: "i" }
+            ]
+        });
+        let ddl2 = new DropDownList(child, {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    { text: "item1", id: "1" },
+                    { text: "item2", id: "1" },
+                    { text: "item3", id: "2" },
+                    { text: "item4", id: "2" }
+                ]
+            },
+            cascade: function() {
+                assert.isOk(false);
+            }
+        });
+    });
+
+    asyncTest("widget with remote data does not trigger cascade during initialization", function(done) {
+        let ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            cascade: function() {
+                assert.isOk(false, "cascade should not fire on init");
+            },
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                { text: "item1", id: "1" },
+                                { text: "item2", id: "2" }
+                            ]);
+                        }, 0);
+                    }
+                }
+            }
+        });
+
+        ddl.one("dataBound", function() {
+            done(() => {
+                assert.isOk(true, "dataBound fired without cascade");
+            });
+        });
+    });
+
+    asyncTest("child widget triggers cascade after parent resets to placeholder then makes new selection", function(done) {
+        let cascadeCount = 0;
+
+        let ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                { text: "item1", id: "1" },
+                                { text: "item2", id: "2" }
+                            ]);
+                        }, 0);
+                    }
+                }
+            }
+        });
+
+        let ddl2 = new DropDownList(child, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            cascade: function() {
+                cascadeCount++;
+            },
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([{ text: "item1", id: "1" }]);
+                        }, 0);
+                    }
+                }
+            }
+        });
+
+        ddl.one("dataBound", function() {
+            ddl.value("1");
+            ddl2.one("dataBound", function() {
+                ddl.value(""); // fires cascade on ddl2 synchronously (no remote fetch for empty parent)
+                cascadeCount = 0; // reset: now count only cascades triggered by the next selection
+                setTimeout(function() {
+                    ddl.value("2");
+                    ddl2.one("dataBound", function() {
+                        done(() => {
+                            assert.equal(cascadeCount, 1, "cascade should fire once after re-selection");
+                        });
+                    });
+                }, 50);
+            });
+        });
+    });
 });

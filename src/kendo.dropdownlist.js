@@ -131,6 +131,7 @@ export const __meta__ = {
                 that._aria();
             });
 
+            that._initializingCascade = true;
             that._cascade();
 
             that.one("set", function(e) {
@@ -154,6 +155,13 @@ export const __meta__ = {
                 }
 
                 that._textAccessor(text);
+            }
+            if (options.autoBind && !that.listView.bound()) {
+                that.one("dataBound", function() {
+                    that._initializingCascade = false;
+                });
+            } else {
+                that._initializingCascade = false;
             }
 
             disabled = $(that.element).parents("fieldset").is(':disabled');

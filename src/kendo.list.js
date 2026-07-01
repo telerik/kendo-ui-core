@@ -1468,11 +1468,15 @@ export const __meta__ = {
         },
 
         _triggerCascade: function() {
-            var that = this;
+            let that = this;
+            let value = that.value();
 
-            if (!that._cascadeTriggered || that.value() !== unifyType(that._cascadedValue, typeof that.value())) {
-                that._cascadedValue = that.value();
+            if (!that._cascadeTriggered || value !== unifyType(that._cascadedValue, typeof value)) {
+                that._cascadedValue = value;
                 that._cascadeTriggered = true;
+                if (that._initializingCascade && !value) {
+                    return;
+                }
                 that.trigger(CASCADE, { userTriggered: that._userTriggered });
             }
         },
@@ -2093,7 +2097,8 @@ export const __meta__ = {
             var valueBeforeCascade = this.value();
 
             this._userTriggered = e.userTriggered || parent?._userTriggered;
-
+            this._cascadeTriggered = false;
+            
             if (this.listView.bound()) {
                 this._clearSelection(parent, true);
             }
@@ -3301,7 +3306,7 @@ export const __meta__ = {
                     <span class='${groupTextClass}'>
                         ${groupText}
                     </span>
-                </li>    
+                </li>
             `);
 
             return { element: groupItem, groupId: groupId };
