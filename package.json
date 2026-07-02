@@ -53,7 +53,7 @@
     "validate-commit-msg": "^2.14.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
-    "vitest": "4.0.7",
+    "vitest": "4.1.0",
     "yargs": "~3.27.0"
   },
   "overrides": {
