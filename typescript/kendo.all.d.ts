@@ -4454,6 +4454,7 @@ declare namespace kendo.ui {
         adaptiveTitle?: string | null;
         adaptiveSubtitle?: string | null;
         buttons?: boolean | undefined;
+        buttonsTemplate?: string | Function | undefined;
         contrastTool?: boolean | ColorPickerContrastTool | undefined;
         clearButton?: boolean | undefined;
         columns?: number | undefined;
@@ -6851,6 +6852,7 @@ declare namespace kendo.ui {
         name?: string | undefined;
         opacity?: boolean | undefined;
         buttons?: boolean | undefined;
+        buttonsTemplate?: string | Function | undefined;
         clearButton?: boolean | undefined;
         contrastTool?: boolean | FlatColorPickerContrastTool | undefined;
         format?: string | undefined;

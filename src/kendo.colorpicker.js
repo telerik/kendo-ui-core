@@ -291,6 +291,7 @@ export const __meta__ = {
             messages: MESSAGES,
             opacity: false,
             buttons: true,
+            buttonsTemplate: null,
             preview: true,
             clearButton: false,
             input: true,
@@ -426,34 +427,42 @@ export const __meta__ = {
         _actionFooterButtons: function() {
             const that = this;
 
-            const buttons = [
-                {
-                    command: "cancel",
-                    text: "Cancel",
-                    size: "large",
-                    fillMode: that.options.fillMode,
-                },
-                {
-                    command: "apply",
-                    text: "Apply",
-                    size: "large",
-                    fillMode: that.options.fillMode,
-                    themeColor: "primary"
-                }
-            ];
-            let buttonsHtml = "";
+            let buttons;
+            if(that.options.buttonsTemplate) {
+                buttons = kendo.template(that.options.buttonsTemplate);
 
-            buttons.forEach(buttonOptions => {
-                const command = buttonOptions.command;
-                const text = buttonOptions.text;
+                return buttons;
+            }
+            else {
+                buttons = [
+                    {
+                        command: "cancel",
+                        text: "Cancel",
+                        size: "large",
+                        fillMode: that.options.fillMode,
+                    },
+                    {
+                        command: "apply",
+                        text: "Apply",
+                        size: "large",
+                        fillMode: that.options.fillMode,
+                        themeColor: "primary"
+                    }
+                ];
+                let buttonsHtml = "";
 
-                delete buttonOptions.command;
-                delete buttonOptions.text;
+                buttons.forEach(buttonOptions => {
+                    const command = buttonOptions.command;
+                    const text = buttonOptions.text;
 
-                buttonsHtml += kendo.html.renderButton(`<button data-command=${command}>${text}</button>`, buttonOptions);
-            });
+                    delete buttonOptions.command;
+                    delete buttonOptions.text;
 
-            return buttonsHtml;
+                    buttonsHtml += kendo.html.renderButton(`<button data-command=${command}>${text}</button>`, buttonOptions);
+                });
+
+                return buttonsHtml;
+            }
         },
 
         _actionSheetApply: function() {

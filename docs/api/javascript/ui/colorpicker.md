@@ -90,6 +90,27 @@ How do I show/hide apply and cancel buttons in a Kendo UI ColorPicker widget? Co
       })
     </script>
 
+
+### buttonsTemplate `String|Function` *(default: null)*
+
+Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the action buttons.
+
+> The `buttons` configuration option needs to be enabled.
+
+<div class="meta-api-description">
+How to customize the layout of action buttons in Kendo UI for jQuery? Customize, configure, or control the layout, appearance, and functionality of action buttons using custom markup, HTML templates, or JavaScript code; enable dynamic rendering and data-binding expressions to modify button labels, styles, order, and behavior; set or override default action buttons with flexible template syntax supporting string or function inputs for tailored UI actions, interactive buttons, and enhanced user interaction on forms.
+</div>
+
+#### Example
+
+    <div id="colorpicker"></div>
+    <script>
+    $("#colorpicker").kendoColorPicker({
+        buttons: true,
+        buttonsTemplate: "<button type='submit'>Submit</button>"
+    });
+    </script>
+
 ### contrastTool `Boolean|Object` *(default: false)*
 
 Enables the contrast tool in the ColorGradient.

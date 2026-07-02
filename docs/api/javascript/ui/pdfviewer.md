@@ -1349,7 +1349,7 @@ How can I customize the icons on a PDFViewer toolbar in Kendo UI for jQuery? Set
                 {
                     type: "button",
                     text: "Custom Image",
-                    imageUrl: "/content/shared/icons/sports/snowboarding.png"
+                    imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/snowboarding.png"
                 },
                 "pager"
             ]

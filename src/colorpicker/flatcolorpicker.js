@@ -105,6 +105,7 @@ import "../kendo.html.button.js";
             name: "FlatColorPicker",
             opacity: false,
             buttons: false,
+            buttonsTemplate: null,
             input: true,
             preview: true,
             clearButton: false,
@@ -330,11 +331,30 @@ import "../kendo.html.button.js";
                     '<div class="k-coloreditor-views k-vstack"></div>' +
                     (options.buttons ?
                     '<div class="k-coloreditor-footer k-actions k-actions-start k-actions-horizontal">' +
-                        html.renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: null, themeColor: "primary" })) +
-                        html.renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: null })) +
+                        that._renderActionButtons(options, buttonOptions) +
                     '</div>'
                     : '')
                 )(options, buttonOptions);
+        },
+
+        _renderActionButtons(options, buttonOptions) {
+            if(kendo.isPresent(options) && kendo.isBlank(options.buttonsTemplate)) {
+                return  (
+                            html
+                                .renderButton(`<button class="k-coloreditor-apply" title="${encode(options.messages.apply)}">
+                                    ${encode(options.messages.apply)}</button>`, extend({}, buttonOptions, { fillMode: null, themeColor: "primary" })
+                                ) +
+                            html
+                                .renderButton(`<button class="k-coloreditor-cancel" title="${encode(options.messages.cancel)}">
+                                    ${encode(options.messages.cancel)}</button>`, extend({}, buttonOptions, { fillMode: null })
+                                )
+                        );
+            }
+
+            let buttonsTemplate = kendo.template(options.buttonsTemplate),
+                buttonsMarkup = buttonsTemplate(options, buttonOptions);
+
+            return buttonsMarkup;
         },
 
         _addSizeClass: function(specificSize) {
