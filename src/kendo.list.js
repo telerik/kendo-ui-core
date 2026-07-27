@@ -2271,7 +2271,8 @@ export const __meta__ = {
             iconField: null,
             descriptionField: null,
             groupIconField: null,
-            actionField: null
+            actionField: null,
+            checkboxes: false
         },
 
         events: [
@@ -2875,7 +2876,10 @@ export const __meta__ = {
             } else if (selectable === "multiple") {
                 while (i < indices.length) {
                     index = indices[i];
-                    if (!$(children[index]).hasClass(KSELECTED)) {
+                    const isItemSelected = that.options.checkboxes
+                        ? $(children[index]).attr(ARIA_SELECTED) === 'true'
+                        : $(children[index]).hasClass(KSELECTED);
+                    if (!isItemSelected) {
                         i++;
                         continue;
                     }
@@ -2971,7 +2975,7 @@ export const __meta__ = {
                 that._dataItems.push(dataItem);
                 that._values.push(that._valueGetter(dataItem));
 
-                $(children[index]).addClass(KSELECTED).attr(ARIA_SELECTED, true);
+                $(children[index]).toggleClass(KSELECTED, !that.options.checkboxes).attr(ARIA_SELECTED, true);
 
                 added.push({
                     dataItem: dataItem
@@ -3180,7 +3184,7 @@ export const __meta__ = {
                 item += 'class="k-list-item';
             }
 
-            if (selected) {
+            if (selected && !options.checkboxes) {
                 item += ' k-selected';
             }
 
@@ -3216,6 +3220,10 @@ export const __meta__ = {
                     content += kendo.ui.icon({ icon: iconName, iconClass: "k-list-item-icon", attr: { "aria-hidden": "true" } });
                     content += '</span>';
                 }
+            }
+
+            if (options.checkboxes) {
+                content += '<span class="k-checkbox-wrap"><input class="k-checkbox" type="checkbox" tabindex="-1" aria-hidden="true"></span>';
             }
 
             // Text wrapper

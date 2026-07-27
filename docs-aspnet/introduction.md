@@ -213,7 +213,7 @@ To make your first steps with {{ site.product_short }}, you can {% if site.core 
 
 To get a quick overview of  {{ site.product_short }}, you can also see the following video:
 
-<iframe width="853" height="480" src="https://www.youtube.com/embed/jAOZY9TZi78?list=PLvmaC-XMqeBaHWzU1zyFgaNi2pcuix6Ps" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/xmqKZMHTV20" title="ASP.NET Core - Virtual Classroom Course Overview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% else %}
 * [First Steps with {{ site.product_short }}]({% slug gettingstarted_aspnetmvc %})&mdash;Create your first project with {{ site.product }} controls by using a project template.

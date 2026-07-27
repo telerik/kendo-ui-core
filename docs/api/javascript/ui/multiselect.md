@@ -382,6 +382,28 @@ How do I show/hide the clear button in a Kendo UI MultiSelect widget? Control th
     });
     </script>
 
+### checkboxes `Boolean` *(default: false)*
+
+When set to `true`, renders a checkbox next to each item in the dropdown list. Works in conjunction with the [selectAll](/api/javascript/ui/multiselect#configuration-selectAll) option to provide a fully checkbox-driven multi-selection experience.
+
+
+<div class="meta-api-description">
+How do I show checkboxes next to items in a Kendo UI MultiSelect dropdown? Enable or add checkboxes in a multi-selection list to let users visually check and uncheck items, rendering checkbox indicators alongside each option in the popup list, configure checkbox-based multi-select behavior, display checked state for selected items, control checkbox visibility in dropdown lists, and combine with selectAll to provide a header checkbox that selects or deselects all visible options at once.
+</div>
+
+#### Example - enable checkboxes
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        checkboxes: true
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -1093,6 +1115,31 @@ How do I customize the text label for a single selected item in a Kendo UI Multi
         });
     </script>
 
+### messages.selectAll `String` *(default: "Select all")*
+
+The text used for the label of the "Select all" sticky header item. Only relevant when [`selectAll`](/api/javascript/ui/multiselect#configuration-selectAll) is enabled.
+
+
+<div class="meta-api-description">
+How do I customize the label text of the select-all header in a Kendo UI MultiSelect? Change or set the message displayed in the sticky "Select all" header at the top of the dropdown list, configure the text for the bulk-select toggle item, localize or translate the select-all button label, and control the wording shown when selectAll is enabled in a multi-select dropdown.
+</div>
+
+#### Example - customize selectAll message
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        selectAll: true,
+        messages: {
+            selectAll: "Select All Items"
+        }
+    });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
@@ -1649,6 +1696,30 @@ How do I customize the separator in Kendo UI's MultiSelect component? Control, e
                 separator: false
             }
         })
+    </script>
+
+### summarizeAfter `Number` *(default: null)*
+
+When set to a number, the tag list switches to a summarized display once the number of selected items reaches or exceeds that threshold. The first `summarizeAfter` items are rendered as individual tags, and the remaining items are collapsed into a single overflow chip showing the count (e.g. "+5 item(s) selected"). When set to `null` (the default), all selected items are always rendered as individual tags unless [tagMode](/api/javascript/ui/multiselect#configuration-tagMode) is set to `"single"`.
+
+
+<div class="meta-api-description">
+How do I limit the number of visible tags in a Kendo UI MultiSelect and collapse the rest into a summary? Configure a threshold after which selected items are summarized into a single overflow chip instead of showing individual tags, set a maximum number of visible tags before condensing additional selections into a count label, enable a compact tag display mode that shows a "+N item(s) selected" indicator for overflow, control how many tags are fully rendered before switching to a summary view, and manage tag list overflow for large or unlimited multi-selection scenarios.
+</div>
+
+#### Example - summarize after 3 selections
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+        <option>Item4</option>
+        <option>Item5</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        summarizeAfter: 3
+    });
     </script>
 
 ### tagTemplate `String|Function`
@@ -2216,6 +2287,31 @@ How to set rounded corners for Kendo UI multiselect dropdowns? Adjust the border
     <script>
     $("#multiselect").kendoMultiSelect({
       rounded: "large"
+    });
+    </script>
+
+### selectAll `Boolean` *(default: false)*
+
+When set to `true`, renders a sticky "Select all" header at the top of the dropdown list. Clicking it selects all currently rendered items. When [checkboxes](/api/javascript/ui/multiselect#configuration-checkboxes) is also enabled, the header shows a checkbox that reflects the aggregate selection state: unchecked (none selected), indeterminate (some selected), or checked (all selected).
+
+The built-in click behavior can be overridden by handling the preventable [selectAllChange](/api/javascript/ui/multiselect#events-selectAllChange) event.
+
+
+<div class="meta-api-description">
+How do I add a "select all" option to a Kendo UI MultiSelect dropdown? Enable a sticky header that lets users select or deselect all items in a multi-select list at once, add a select-all checkbox or button to a dropdown, configure bulk selection behavior in a multi-selection widget, render a header that toggles between selecting and deselecting all visible options, combine with checkboxes for a fully checkbox-driven multi-select experience, and listen to the selectAllChange event to customize or override the default bulk-selection logic.
+</div>
+
+#### Example - enable the selectAll header
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        selectAll: true,
+        checkboxes: true
     });
     </script>
 
@@ -3105,6 +3201,90 @@ The widget instance which fired the event.
         //call preventDefault() to prevent the selection
         e.preventDefault();
       }
+    });
+    </script>
+
+### selectAllChange
+
+Fired when the user clicks the "Select all" header item or activates it via keyboard. The event is preventable — calling `e.preventDefault()` cancels the built-in select/deselect-all logic so the application can implement its own (for example, fetching and selecting all records from a remote data source).
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+
+<div class="meta-api-description">
+How do I intercept or customize the select-all behavior in a Kendo UI MultiSelect? Listen for when a user clicks the "Select all" header to bulk-select or bulk-deselect all items, prevent the default select-all logic and implement custom behavior such as fetching all records from a remote source before selecting them, detect whether the action is a select or deselect operation via the checked property, override built-in selectAll to load and set all remote data items at once, and handle the selectAllChange event to control or extend mass selection in virtual or server-paged multiselects.
+</div>
+
+#### Event Data
+
+##### e.checked `Boolean`
+
+`true` when the action is selecting all items, `false` when deselecting.
+
+##### e.preventDefault `Function`
+
+If invoked, the default select/deselect-all behavior is canceled and the widget state is left unchanged, allowing the handler to apply its own selection logic.
+
+##### e.sender `kendo.ui.MultiSelect`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "selectAllChange" event during initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        selectAll: true,
+        checkboxes: true,
+        selectAllChange: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("selectAllChange fired, checked:", e.checked);
+        }
+    });
+    </script>
+
+#### Example - subscribe to the "selectAllChange" event after initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        selectAll: true,
+        checkboxes: true
+    });
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+    multiselect.bind("selectAllChange", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("selectAllChange fired, checked:", e.checked);
+    });
+    </script>
+
+#### Example - prevent the default behavior and apply custom selection logic
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        selectAll: true,
+        checkboxes: true,
+        selectAllChange: function(e) {
+                this.value(["Item1", "Item2", "Item3"]);
+            } else {
+                this.value([]);
+            }
+            this.refresh();
+            this._change();
+        }
     });
     </script>
 

@@ -485,4 +485,139 @@ describe("kendo.ui.MultiSelect Initialization", function() {
         });
 
     });
+
+    asyncTest("virtual with checkboxes: removing pre-selected chip via X does not duplicate value", function(done) {
+        let multiselect = new MultiSelect(select, {
+            animation: false,
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            checkboxes: true,
+            tagMode: "multiple",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            },
+            value: [5, 10]
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.close();
+
+            setTimeout(function() {
+                let chipsBefore = multiselect.tagList.children(".k-chip").length;
+
+                multiselect.tagList.children(".k-chip").first().find(".k-icon,.k-svg-icon").trigger("click");
+
+                setTimeout(function() {
+                    done(() => {
+                        assert.equal(chipsBefore, 2, "two chips initially");
+                        assert.equal(multiselect.value().length, 1, "one value remains after removal");
+                        assert.equal(multiselect.value()[0], 10, "correct remaining value");
+                        assert.equal(multiselect.tagList.children(".k-chip").length, 1, "one chip remains");
+                    });
+                }, 200);
+            }, 100);
+        });
+
+        multiselect.open();
+    });
+
+    asyncTest("virtual with checkboxes: clear button unchecks all checkboxes", function(done) {
+        let multiselect = new MultiSelect(select, {
+            animation: false,
+            autoClose: false,
+            height: CONTAINER_HEIGHT,
+            dataTextField: "text",
+            dataValueField: "value",
+            checkboxes: true,
+            selectAll: true,
+            summarizeAfter: 4,
+            clearButton: true,
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            const lv = multiselect.listView;
+            const flatView = multiselect.dataSource.flatView();
+
+            for (let i = 0; i < 3; i++) {
+                if (!flatView[i]) { continue; }
+                lv._values.push(flatView[i].value);
+                lv._selectedDataItems.push(flatView[i]);
+                lv._selectedIndexes.push(i);
+                const item = $(multiselect.items()[i]);
+                item.attr("aria-selected", "true").addClass("k-selected");
+                item.find("input.k-checkbox").prop("checked", true).addClass("k-checked");
+            }
+
+            multiselect._updateTagListHTML();
+            multiselect._showClear();
+
+            multiselect._clearValue();
+
+            setTimeout(function() {
+                done(() => {
+                    assert.equal(multiselect.value().length, 0, "no values remain");
+                    assert.equal(multiselect.tagList.children(".k-chip").length, 0, "no chips remain");
+                    const checkedBoxes = $(multiselect.items()).find("input.k-checkbox:checked");
+                    assert.equal(checkedBoxes.length, 0, "no checkboxes remain checked");
+                    const selectedItems = $(multiselect.items()).filter("[aria-selected='true']");
+                    assert.equal(selectedItems.length, 0, "no items remain aria-selected");
+                });
+            }, 200);
+        });
+
+        multiselect.open();
+    });
+
+    asyncTest("virtual with checkboxes and selectAll: unchecking item does not produce undefined chip", function(done) {
+        let multiselect = new MultiSelect(select, {
+            animation: false,
+            autoClose: false,
+            height: CONTAINER_HEIGHT,
+            dataTextField: "text",
+            dataValueField: "value",
+            checkboxes: true,
+            tagMode: "multiple",
+            selectAll: true,
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            const lv = multiselect.listView;
+            const flatView = multiselect.dataSource.flatView();
+
+            for (let i = 0; i < 3; i++) {
+                if (!flatView[i]) { continue; }
+                lv._values.push(flatView[i].value);
+                lv._selectedDataItems.push(flatView[i]);
+                lv._selectedIndexes.push(i);
+                multiselect.tagList.append(multiselect.tagTemplate(flatView[i]));
+            }
+            const candidate = $(multiselect.items()[1]);
+            candidate.attr("aria-selected", "true");
+            candidate.find("input.k-checkbox").prop("checked", true).addClass("k-checked");
+
+            multiselect._deselectItemDirect(candidate, flatView[1]);
+
+            done(() => {
+                assert.equal(multiselect.tagList.children(".k-chip").length, 2, "two chips remain");
+                const texts = multiselect.tagList.children(".k-chip").find(".k-chip-label").toArray().map(el => el.textContent.trim());
+                assert.ok(texts.every(t => t !== "undefined" && t !== ""), "no undefined or empty chips");
+            });
+        });
+
+        multiselect.open();
+    });
 });

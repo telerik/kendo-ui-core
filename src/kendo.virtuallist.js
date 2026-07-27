@@ -405,7 +405,14 @@ export const __meta__ = {
         }
 
         element.toggleClass(FOCUSED, data.current);
-        element.toggleClass(SELECTED, data.selected);
+        element.toggleClass(SELECTED, !that.options.checkboxes && data.selected);
+        element.attr("aria-selected", data.selected);
+
+        if (that.options.checkboxes) {
+            const checkbox = element.find("input.k-checkbox");
+            checkbox.toggleClass("k-checked", data.selected).prop("checked", data.selected);
+        }
+
         element.toggleClass("k-first", data.newGroup);
         element.toggleClass("k-last", data.isLastGroupedItem);
         element.toggleClass("k-loading-item", !dataItem);
@@ -571,7 +578,8 @@ export const __meta__ = {
             iconField: null,
             descriptionField: null,
             groupIconField: null,
-            actionField: null
+            actionField: null,
+            checkboxes: false
         },
 
         events: [
@@ -716,10 +724,17 @@ export const __meta__ = {
         },
 
         _highlightSelectedItems: function() {
+            const hasCheckboxes = this.options.checkboxes;
             for (let i = 0; i < this._selectedDataItems.length; i++) {
                 const item = this._getElementByDataItem(this._selectedDataItems[i]);
                 if (item.length) {
-                    item.addClass(SELECTED);
+                    if (hasCheckboxes) {
+                        const checkbox = item.find("input.k-checkbox");
+                        checkbox.toggleClass("k-checked", true).prop("checked", true);
+                        item.attr("aria-selected", true);
+                    } else {
+                        item.addClass(SELECTED);
+                    }
                 }
             }
         },
@@ -946,7 +961,12 @@ export const __meta__ = {
                 for (let i = 0; i < this._selectedDataItems.length; i++) {
                     const item = this._getElementByDataItem(this._selectedDataItems[i]);
                     this._selectedIndexes.push(this._getIndecies(item)[0]);
-                    item.addClass(SELECTED);
+                    if (this.options.checkboxes) {
+                        item.find("input.k-checkbox").toggleClass("k-checked", true).prop("checked", true);
+                        item.attr("aria-selected", true);
+                    } else {
+                        item.addClass(SELECTED);
+                    }
                 }
 
                 this._triggerChange(removed, added);
@@ -1337,7 +1357,7 @@ export const __meta__ = {
             const done = function() {
                 const added = that._select(indices);
 
-                if (initialIndices.length === indices.length || singleSelection) {
+                if (!that._preventFocus && (initialIndices.length === indices.length || singleSelection)) {
                     that.focus(indices);
                 }
 
@@ -1589,11 +1609,9 @@ export const __meta__ = {
             const items = [];
             const itemHeight = this._getItemHeightStyle();
             const itemClass = this._getItemClass();
+            const hasCheckboxes = this.options.checkboxes;
 
             while (count-- > 0) {
-                const text = document.createElement("span");
-                text.className = "k-list-item-text";
-
                 const item = document.createElement("li");
                 item.tabIndex = -1;
                 item.className = itemClass;
@@ -1602,6 +1620,13 @@ export const __meta__ = {
                 item.style.minHeight = itemHeight;
                 item.style.position = "absolute";
                 item.style.width = "100%";
+
+                if (hasCheckboxes) {
+                    item.appendChild(this._createCheckboxWrap());
+                }
+
+                const text = document.createElement("span");
+                text.className = "k-list-item-text";
                 item.appendChild(text);
 
                 element.appendChild(item);
@@ -1715,6 +1740,7 @@ export const __meta__ = {
             const itemHeight = that._getItemHeightStyle();
             const hasColumns = that._isTableVariant();
             const itemClass = that._getItemClass();
+            const hasCheckboxes = !hasColumns && that.options.checkboxes;
 
             for (let i = 0; i < count; i++) {
                 const item = document.createElement("li");
@@ -1731,6 +1757,9 @@ export const __meta__ = {
                 // For table variant (columns), we don't add k-list-item-text here
                 // The column cells will be rendered by _renderGroupItem
                 if (!hasColumns) {
+                    if (hasCheckboxes) {
+                        item.appendChild(that._createCheckboxWrap());
+                    }
                     const text = document.createElement("span");
                     text.className = "k-list-item-text";
                     item.appendChild(text);
@@ -3032,6 +3061,19 @@ export const __meta__ = {
             }
         },
 
+        _createCheckboxWrap: function() {
+            const checkboxWrap = document.createElement("span");
+            checkboxWrap.className = "k-checkbox-wrap";
+            checkboxWrap.style.pointerEvents = "none";
+            const checkbox = document.createElement("input");
+            checkbox.className = "k-checkbox";
+            checkbox.type = "checkbox";
+            checkbox.setAttribute("tabindex", "-1");
+            checkbox.setAttribute("aria-hidden", "true");
+            checkboxWrap.appendChild(checkbox);
+            return checkboxWrap;
+        },
+
         /**
          * Creates a single item LI element.
          */
@@ -3051,6 +3093,9 @@ export const __meta__ = {
             li.style.transform = "none";
 
             if (!hasColumns) {
+                if (that.options.checkboxes) {
+                    li.appendChild(that._createCheckboxWrap());
+                }
                 const textSpan = document.createElement("span");
                 textSpan.className = "k-list-item-text";
                 li.appendChild(textSpan);
@@ -3284,7 +3329,14 @@ export const __meta__ = {
             }
 
             $element.toggleClass(FOCUSED, data.current);
-            $element.toggleClass(SELECTED, data.selected);
+            $element.toggleClass(SELECTED, !that.options.checkboxes && data.selected);
+            $element.attr("aria-selected", data.selected);
+
+            if (that.options.checkboxes) {
+                const checkbox = $element.find("input.k-checkbox");
+                checkbox.toggleClass("k-checked", data.selected).prop("checked", data.selected);
+            }
+
             $element.toggleClass("k-loading-item", !dataItem);
 
             element.style.display = "";
@@ -3724,10 +3776,19 @@ export const __meta__ = {
 
             if (selectable === true || !indices.length) { //deselect everything
                 for (let idx = 0; idx < selectedIndexes.length; idx++) {
+                    let element;
                     if (selectedIndexes[idx] !== undefined) {
-                        this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
+                        element = this._getElementByIndex(selectedIndexes[idx]);
                     } else if (selectedDataItems[idx]) {
-                        this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
+                        element = this._getElementByDataItem(selectedDataItems[idx]);
+                    }
+
+                    if (element) {
+                        element.removeClass(SELECTED);
+                        if (this.options.checkboxes) {
+                            element.removeAttr("aria-selected");
+                            element.find("input.k-checkbox").toggleClass("k-checked", false).prop("checked", false);
+                        }
                     }
 
                     removed.push({
@@ -3779,12 +3840,18 @@ export const __meta__ = {
         },
 
         _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
-            if (item.length > 0 && !item.hasClass(SELECTED)) {
+            const isSelectedInDOM = this.options.checkboxes ? item.attr("aria-selected") === "true" : item.hasClass(SELECTED);
+
+            if (item.length > 0 && !isSelectedInDOM) {
                 return;
             }
 
             if (item.length) {
                 item.removeClass(SELECTED);
+                if (this.options.checkboxes) {
+                    item.removeAttr("aria-selected");
+                    item.find("input.k-checkbox").toggleClass("k-checked", false).prop("checked", false);
+                }
             }
             this._values.splice(position, 1);
             this._selectedIndexes.splice(position, 1);
@@ -3877,7 +3944,13 @@ export const __meta__ = {
 
                     added.push({ index, dataItem });
 
-                    that._getElementByIndex(index).addClass(SELECTED);
+                    const selEl = that._getElementByIndex(index);
+                    if (that.options.checkboxes) {
+                        selEl.find("input.k-checkbox").toggleClass("k-checked", true).prop("checked", true);
+                        selEl.attr("aria-selected", true);
+                    } else {
+                        selEl.addClass(SELECTED);
+                    }
 
                     dataSource.range(oldSkip, take); //switch back the range
                 });

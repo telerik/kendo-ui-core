@@ -377,3 +377,73 @@ describe("kendo.ui.MultiSelect ARIA", function() {
         assert.equal(multiselect.input.attr("aria-activedescendant"), multiselect.current()[0].id);
     });
 });
+
+describe("kendo.ui.MultiSelect Select All ARIA", function() {
+    beforeEach(function() {
+        kendo.ns = "kendo-";
+        input = $("<select multiple id='ms'/>").appendTo(Mocha.fixture);
+        $("<label for='ms'>Label</label>").appendTo(Mocha.fixture);
+        Mocha.fixture.attr("role", "main");
+    });
+    afterEach(function() {
+        kendo.ns = "";
+        if (input.data("kendoMultiSelect")) {
+            input.data("kendoMultiSelect").destroy();
+        }
+    });
+
+    it("sticky header item has role=button when checkboxes is false", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, animation: false });
+        let item = ms.list.find('.k-list-sticky-header-item');
+        assert.equal(item.attr('role'), 'button');
+    });
+
+    it("sticky header input.k-checkbox has aria-label equal to messages.selectAll when checkboxes is true", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false });
+        let cb = ms.list.find('.k-list-sticky-header input.k-checkbox');
+        assert.equal(cb.attr('aria-label'), ms.options.messages.selectAll);
+    });
+
+    it("checked state sets aria-checked=true on sticky header checkbox", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false, value: ["a","b"] });
+        let cb = ms.list.find('.k-list-sticky-header input.k-checkbox');
+        assert.equal(cb.attr('aria-checked'), 'true');
+    });
+
+    it("unchecked state sets aria-checked=false on sticky header checkbox", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false });
+        let cb = ms.list.find('.k-list-sticky-header input.k-checkbox');
+        assert.equal(cb.attr('aria-checked'), 'false');
+    });
+
+    it("indeterminate state sets aria-checked=mixed on sticky header checkbox", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false, value: ["a"] });
+        let cb = ms.list.find('.k-list-sticky-header input.k-checkbox');
+        assert.equal(cb.attr('aria-checked'), 'mixed');
+    });
+
+    it("list-item checkboxes have aria-hidden=true", function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false });
+        ms.open();
+        let itemCbs = ms.listView.items().find('input.k-checkbox');
+        assert.isOk(itemCbs.length > 0);
+        itemCbs.each(function() {
+            assert.equal($(this).attr('aria-hidden'), 'true');
+        });
+    });
+
+    it("MultiSelect with selectAll: true is accessible", async function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, animation: false });
+        await axeRunFixture();
+    });
+
+    it("MultiSelect with selectAll: true and checkboxes: true is accessible", async function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false });
+        await axeRunFixture();
+    });
+
+    it("MultiSelect with selectAll: true, checkboxes: true and indeterminate state is accessible", async function() {
+        let ms = new MultiSelect(input, { dataSource: ["a","b"], selectAll: true, checkboxes: true, animation: false, value: ["a"] });
+        await axeRunFixture();
+    });
+});

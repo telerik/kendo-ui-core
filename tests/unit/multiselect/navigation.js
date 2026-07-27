@@ -1139,4 +1139,255 @@ describe("kendo.ui.MultiSelect tag navigation", function() {
 
         assert.equal(parentKeydowns, 0);
     });
+
+    it("handled keydown does not bubble to parent", function() {
+        let parentKeydowns = 0;
+        let multiselect = new MultiSelect(select, {
+            animation: false
+        });
+
+        multiselect.open();
+
+        Mocha.fixture.on("keydown.bubbletest", function() {
+            parentKeydowns++;
+        });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.DOWN });
+        Mocha.fixture.off("keydown.bubbletest");
+
+        assert.equal(parentKeydowns, 0);
+    });
+
+    it("ESC deselects all items in multiple tag mode when popup is closed", function() {
+        let multiselect = new MultiSelect(select, { animation: false, value: ["0", "1", "2"] });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.ESC });
+
+        assert.equal(multiselect.value().length, 0);
+        assert.deepEqual(multiselect.value(), []);
+    });
+
+    it("ESC does not produce a JS error when popup is closed", function() {
+        let multiselect = new MultiSelect(select, { animation: false, value: ["0", "1"] });
+
+        assert.doesNotThrow(function() {
+            multiselect.input.trigger({ type: "keydown", keyCode: keys.ESC });
+        });
+    });
+
+    it("ESC in multiple tag mode with summarizeAfter deselects all items", function() {
+        let multiselect = new MultiSelect(select, { animation: false, summarizeAfter: 3, value: ["0", "1", "2", "3"] });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.ESC });
+
+        assert.equal(multiselect.value().length, 0);
+        let chips = multiselect.tagList.children(".k-chip");
+        assert.equal(chips.length, 0);
+    });
+
+    it("ESC in multiple tag mode deselects all items regardless of overflow count", function() {
+        let multiselect = new MultiSelect(select, { animation: false, summarizeAfter: 2, value: ["0", "1", "2", "3", "4"] });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.ESC });
+
+        assert.equal(multiselect.value().length, 0);
+        let chips = multiselect.tagList.children(".k-chip");
+        assert.equal(chips.length, 0);
+    });
+
+    it("ESC in multiple tag mode with active filter deselects all items", function() {
+        let multiselect = new MultiSelect(select, {
+            animation: false,
+            summarizeAfter: 3,
+            value: ["0", "1", "2", "3", "4"],
+            filter: "contains"
+        });
+
+        multiselect.input.val("nonexistent");
+        multiselect.search("nonexistent");
+        multiselect.close();
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.ESC });
+
+        assert.equal(multiselect.value().length, 0);
+        let chips = multiselect.tagList.children(".k-chip");
+        assert.equal(chips.length, 0);
+    });
+
+    it("BACKSPACE removes overflow items when last chip is the summary overflow chip", function() {
+        let multiselect = new MultiSelect(select, { animation: false, summarizeAfter: 3, value: ["0", "1", "2", "3", "4"] });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.BACKSPACE });
+
+        assert.equal(multiselect.value().length, 3);
+        assert.deepEqual(multiselect.value(), ["0", "1", "2"]);
+        let chips = multiselect.tagList.children(".k-chip");
+        assert.equal(chips.length, 3);
+    });
+
+    it("BACKSPACE on overflow chip deselects all overflow items not just one", function() {
+        let multiselect = new MultiSelect(select, { animation: false, summarizeAfter: 2, value: ["0", "1", "2", "3", "4"] });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.BACKSPACE });
+
+        assert.equal(multiselect.value().length, 2);
+        assert.deepEqual(multiselect.value(), ["0", "1"]);
+        let chips = multiselect.tagList.children(".k-chip");
+        assert.equal(chips.length, 2);
+    });
+
+    it("BACKSPACE on overflow chip keeps items within summarizeAfter limit selected in popup", function() {
+        let multiselect = new MultiSelect(select, { animation: false, summarizeAfter: 3, value: ["0", "1", "2", "3", "4"] });
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.BACKSPACE });
+        multiselect.open();
+
+        let selectedListItems = multiselect.listView.items().filter(".k-selected");
+        assert.equal(selectedListItems.length, 3);
+    });
+});
+
+describe("kendo.ui.MultiSelect tag removal checkbox sync", function() {
+    let select;
+    beforeEach(function() {
+        kendo.ns = "kendo-";
+        select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
+        let options = [];
+        for (let i = 0; i < 5; i++) {
+            options.push("<option value='" + i + "'>Option" + i + "</option>");
+        }
+        select.html(options);
+    });
+    afterEach(function() {
+        kendo.ns = "";
+        if (select.data("kendoMultiSelect")) {
+            select.data("kendoMultiSelect").destroy();
+        }
+        select.parents(".k-widget").remove();
+    });
+
+    it("BACKSPACE unchecks the checkbox of the removed item in the popup", function() {
+        let multiselect = new MultiSelect(select, { animation: false, checkboxes: true, value: ["0"] });
+
+        multiselect.open();
+        let itemBefore = multiselect.listView.items().first();
+        assert.isOk(itemBefore.find("input.k-checkbox").prop("checked"), "checkbox checked before removal");
+        multiselect.close();
+
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.BACKSPACE });
+        multiselect.open();
+
+        let itemAfter = multiselect.listView.items().first();
+        assert.isOk(!itemAfter.find("input.k-checkbox").prop("checked"), "checkbox unchecked after removal");
+        assert.equal(multiselect.value().length, 0);
+    });
+
+    it("BACKSPACE sets aria-selected to false on the removed item", function() {
+        let multiselect = new MultiSelect(select, { animation: false, checkboxes: true, value: ["0"] });
+
+        multiselect.open();
+        multiselect.close();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.BACKSPACE });
+        multiselect.open();
+
+        let item = multiselect.listView.items().first();
+        assert.equal(item.attr("aria-selected"), "false");
+    });
+});
+
+describe("kendo.ui.MultiSelect Select All keyboard navigation", function() {
+    beforeEach(function() {
+        kendo.ns = "kendo-";
+        select = $("<select multiple=multiple/>").appendTo(Mocha.fixture);
+        populateSelect();
+    });
+    afterEach(function() {
+        kendo.ns = "";
+        if (select.data("kendoMultiSelect")) {
+            select.data("kendoMultiSelect").destroy();
+        }
+        select.parents(".k-widget").remove();
+    });
+
+    it("pressing UP from first list item focuses sticky header when selectAll is true", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false });
+        multiselect.open();
+        multiselect.listView.focusFirst();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.UP });
+        assert.isOk(multiselect._selectAllFocused);
+        assert.isOk(multiselect.list.find('.k-list-sticky-header-item').hasClass('k-focus'));
+    });
+
+    it("pressing DOWN when _selectAllFocused moves focus to first list item", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false });
+        multiselect.open();
+        multiselect.listView.focusFirst();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.UP });
+        assert.isOk(multiselect._selectAllFocused);
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.DOWN });
+        assert.isOk(!multiselect._selectAllFocused);
+        assert.isOk(!multiselect.list.find('.k-list-sticky-header-item').hasClass('k-focus'));
+    });
+
+    it("pressing ENTER when _selectAllFocused selects all items", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false });
+        multiselect.open();
+        multiselect.listView.focusFirst();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.UP });
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.ENTER });
+        assert.equal(multiselect.value().length, 5);
+    });
+
+    it("pressing HOME with selectAll: true focuses first list item", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false });
+        multiselect.open();
+        multiselect.listView.focusFirst();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.DOWN });
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.HOME });
+        assert.isOk(!multiselect._selectAllFocused);
+        assert.isOk(multiselect.listView.focus() && multiselect.listView.getElementIndex(multiselect.listView.focus()) === 0);
+    });
+
+    it("pressing HOME with selectAll: false focuses first list item (no regression)", function() {
+        let multiselect = new MultiSelect(select, { animation: false });
+        multiselect.open();
+        multiselect.listView.focusFirst();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.DOWN });
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.HOME });
+        assert.isOk(!multiselect._selectAllFocused);
+        assert.isOk(multiselect.listView.focus() && multiselect.listView.getElementIndex(multiselect.listView.focus()) === 0);
+    });
+
+    it("closing popup clears _selectAllFocused and k-focus from sticky header", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false });
+        multiselect.open();
+        multiselect.listView.focusFirst();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.UP });
+        assert.isOk(multiselect._selectAllFocused, "selectAllFocused before close");
+
+        multiselect.close();
+
+        assert.isOk(!multiselect._selectAllFocused, "_selectAllFocused cleared after close");
+        assert.isOk(!multiselect.list.find('.k-list-sticky-header-item').hasClass('k-focus'), "k-focus removed from header after close");
+    });
+
+    it("Select All deselect with autoClose:true does not leave k-focus on header for next open", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false, autoClose: true });
+        multiselect.open();
+        multiselect.value(multiselect.dataSource.data().map(function(d) { return d.value !== undefined ? d.value : d; }));
+        multiselect.list.find('.k-list-sticky-header-item').trigger('click');
+
+        assert.isOk(!multiselect._selectAllFocused, "_selectAllFocused is false after close");
+        assert.isOk(!multiselect.list.find('.k-list-sticky-header-item').hasClass('k-focus'), "no k-focus on header after autoClose");
+    });
+
+    it("Select All deselect with autoClose:false focuses Select All header", function() {
+        let multiselect = new MultiSelect(select, { selectAll: true, animation: false, autoClose: false });
+        multiselect.open();
+        multiselect.value(["0", "1", "2", "3", "4"]);
+        multiselect.list.find('.k-list-sticky-header-item').trigger('click');
+
+        assert.isOk(multiselect._selectAllFocused, "_selectAllFocused is true when popup stays open");
+        assert.isOk(multiselect.list.find('.k-list-sticky-header-item').hasClass('k-focus'), "k-focus on header when popup stays open");
+    });
 });

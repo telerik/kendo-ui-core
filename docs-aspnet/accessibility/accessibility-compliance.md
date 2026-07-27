@@ -15,7 +15,7 @@ This article lists the accessibility compliance of the {{ site.product }} compon
 
 The <a href="https://www.section508.gov/sell/acr/" target="_blank">Accessibility Conformance Report (ACR)</a> is a document that explains how information and communication technology products such as software, hardware, electronic content, and support documentation conform to leading global accessibility standards. {{ site.product }} provides an ACR through the <a href="https://www.itic.org/policy/accessibility/vpat" target="_blank">Voluntary Product Accessibility Template (VPAT®)</a>.
 
->tip Download the latest version of the [Accessibility Conformance Report](assets/kendo-ui-vpat2.4.doc).
+>tip Download the latest version of the [Accessibility Conformance Report](assets/vpat-report.pdf).
 
 ## Compliance Table
 

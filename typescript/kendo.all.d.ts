@@ -9438,6 +9438,7 @@ declare namespace kendo.ui {
         deleteTag?: string | undefined;
         downArrow?: string | undefined;
         noData?: string | undefined;
+        selectAll?: string | undefined;
         singleTag?: string | undefined;
     }
 
@@ -9450,6 +9451,7 @@ declare namespace kendo.ui {
         autoBind?: boolean | undefined;
         autoClose?: boolean | undefined;
         autoWidth?: boolean | undefined;
+        checkboxes?: boolean | undefined;
         clearButton?: boolean | undefined;
         dataSource?: any | any | kendo.data.DataSource | undefined;
         dataTextField?: string | undefined;
@@ -9485,7 +9487,9 @@ declare namespace kendo.ui {
         valuePrimitive?: boolean | undefined;
         virtual?: boolean | MultiSelectVirtual | undefined;
         rounded?: string | undefined;
+        selectAll?: boolean | undefined;
         size?: string | undefined;
+        summarizeAfter?: number | undefined;
         change?(e: MultiSelectChangeEvent): void;
         close?(e: MultiSelectCloseEvent): void;
         dataBound?(e: MultiSelectDataBoundEvent): void;
@@ -9494,6 +9498,7 @@ declare namespace kendo.ui {
         select?(e: MultiSelectSelectEvent): void;
         deselect?(e: MultiSelectDeselectEvent): void;
         kendoKeydown?(e: MultiSelectKendoKeydownEvent): void;
+        selectAllChange?(e: MultiSelectSelectAllChangeEvent): void;
     }
     interface MultiSelectEvent {
         sender: MultiSelect;
@@ -9525,6 +9530,10 @@ declare namespace kendo.ui {
     interface MultiSelectDeselectEvent extends MultiSelectEvent {
         dataItem?: any;
         item?: JQuery | undefined;
+    }
+
+    interface MultiSelectSelectAllChangeEvent extends MultiSelectEvent {
+        checked?: boolean | undefined;
     }
 
     class MultiViewCalendar extends kendo.ui.Widget {

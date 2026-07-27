@@ -45,6 +45,7 @@ export const __meta__ = {
         PROGRESS = "progress",
         SELECT = "select",
         DESELECT = "deselect",
+        SELECTALL = "selectAllChange",
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         ARIA_EXPANDED = "aria-expanded",
@@ -83,6 +84,10 @@ export const __meta__ = {
 
             that.ns = ns;
             List.fn.init.call(that, element, options);
+
+            if (that.options.summarizeAfter !== null && that.options.tagMode === "single") {
+                throw new Error("The summarizeAfter and tagMode: 'single' options are not compatible and cannot be used together.");
+            }
 
             that._optionsMap = {};
             that._customOptions = {};
@@ -139,6 +144,7 @@ export const __meta__ = {
             that._tagTemplate();
             that.requireValueMapper(that.options);
             that._initList();
+            that.listView.content.removeClass("k-list-scroller");
             that._aria(); // Update aria-controls now that UL is available (for StaticList)
 
             // For VirtualList, the UL is created after data is bound, so we need to update aria-controls then
@@ -193,7 +199,8 @@ export const __meta__ = {
                 "clear": "clear",
                 "deleteTag": "delete",
                 "noData": "No data found.",
-                "downArrow": "select"
+                "downArrow": "select",
+                "selectAll": "Select all"
             },
             enforceMinLength: false,
             delay: 100,
@@ -223,6 +230,9 @@ export const __meta__ = {
             label: null,
             adaptiveTitle: null,
             adaptiveSubtitle: null,
+            selectAll: false,
+            checkboxes: false,
+            summarizeAfter: null,
         },
 
         events: [
@@ -231,6 +241,7 @@ export const __meta__ = {
             CHANGE,
             SELECT,
             DESELECT,
+            SELECTALL,
             "filtering",
             "dataBinding",
             "dataBound",
@@ -258,6 +269,12 @@ export const __meta__ = {
 
             this.listView.setOptions(listOptions);
 
+            if (options.selectAll === false) {
+                this._removeSelectAllHeader();
+            } else if (options.selectAll === true && this.listView.bound()) {
+                this._renderSelectAllHeader();
+                this._updateSelectAllHeader();
+            }
 
             this._accessors();
             this._aria();
@@ -407,6 +424,10 @@ export const __meta__ = {
 
             listOptions.template = template;
 
+            if (that.options.checkboxes) {
+                listOptions.checkboxes = true;
+            }
+
             return listOptions;
         },
 
@@ -505,11 +526,14 @@ export const __meta__ = {
             that.element.trigger("blur");
         },
 
-        _removeTag: function(tag, shouldTrigger) {
+        _removeTag: function(tag, shouldTrigger, position) {
             var that = this;
             var state = that._state;
-            var position = tag.index();
+            if (position === undefined) {
+                position = tag.index();
+            }
             var listView = that.listView;
+
             var value = listView.value()[position];
             var dataItem = that.listView.selectedDataItems()[position];
             var customIndex = that._customOptions[value];
@@ -553,16 +577,59 @@ export const __meta__ = {
 
                 listViewItem = listViewItems[customIndex];
                 if (listViewItem) {
-                    $(listViewItem).removeClass("k-selected");
+                    $(listViewItem).removeClass("k-selected").attr("aria-selected", false);
+                    if (that.options.checkboxes) {
+                        $(listViewItem).find("input.k-checkbox").prop("checked", false).removeClass("k-checked");
+                    }
                 }
                 if (that.options.tagMode !== "single") {
-                    tag.remove();
+                    if (that.options.summarizeAfter !== null) {
+                        that._updateTagListHTML();
+                    } else {
+                        tag.remove();
+                    }
                 } else {
                     that._updateTagListHTML();
                 }
                 done();
             }
             this._placeholder();
+        },
+
+        _removeOverflowTag: function(tag, shouldTrigger) {
+            const that = this;
+            const limit = that.options.summarizeAfter;
+            const listView = that.listView;
+            const overflowDOMIndices = listView.select().slice(limit);
+
+            if (!overflowDOMIndices.length) {
+                if (listView.value().length <= limit) {
+                    return;
+                }
+                const overflowValues = listView._values.splice(limit);
+                listView._dataItems.splice(limit);
+                for (let i = 0; i < overflowValues.length; i++) {
+                    that._setOption(overflowValues[i], false);
+                }
+                that.currentTag(null);
+                that._updateTagListHTML();
+                that._placeholder();
+                if (shouldTrigger) {
+                    that._change();
+                }
+                that._close();
+                return;
+            }
+
+            that.persistTagList = false;
+            listView.select(overflowDOMIndices).done(function() {
+                that.currentTag(null);
+                that._placeholder();
+                if (shouldTrigger) {
+                    that._change();
+                }
+                that._close();
+            });
         },
 
         _tagListClick: function(e) {
@@ -579,32 +646,53 @@ export const __meta__ = {
         _clearValue: function() {
             var that = this;
 
-            if (that.options.tagMode === "single") {
-                that._clearSingleTagValue();
-            } else {
-                that.tagList.children(CHIP).each(function(index, tag) {
-                    that._removeTag($(tag), false);
-                });
-            }
+            that._clearAllValues();
 
             that.input.val("");
-            that._search(true);
-            that._change();
-            that.focus();
-            that._hideClear();
-
+            that._prev = "";
             if (that._state === FILTER) {
                 that._state = ACCEPT;
+                if (!that.options.enforceMinLength) {
+                    that._filterSource();
+                }
+            }
+            that.focus();
+            that._hideClear();
+        },
+
+        _clearAllValues: function() {
+            const that = this;
+            that.currentTag(null);
+            that.persistTagList = false;
+            that._clearSingleTagValue();
+            that._updateTagListHTML();
+            that._placeholder();
+            that._change();
+            that._updateSelectAllHeader();
+        },
+
+        _removeLastTag: function() {
+            const that = this;
+            const tag = that.tagList.children(CHIP).last();
+
+            if (tag && tag[0]) {
+                const limit = that.options.summarizeAfter;
+                if (limit !== null && tag.index() === limit && that.listView.value().length > limit) {
+                    that._removeOverflowTag(tag, true);
+                } else {
+                    that._removeTag(tag, true);
+                }
+                that._updateSelectAllHeader();
             }
         },
 
         _clearSingleTagValue: function() {
-            var that = this;
-            var items = that.dataItems();
-            var tags = that.tagList.children(CHIP);
-            var persistTagList = that.persistTagList;
+            const that = this;
+            const items = that.dataItems();
+            const tags = that.tagList.children(CHIP);
+            const persistTagList = that.persistTagList;
 
-            for (var i = 0; i < items.length; i += 1) {
+            for (let i = 0; i < items.length; i += 1) {
                 if (that.trigger(DESELECT, { dataItem: items[i], item: tags.first() })) {
                     that._close();
                     return;
@@ -664,6 +752,9 @@ export const __meta__ = {
                     .on(MOUSEENTER, CHIP, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, CHIP, function() { $(this).removeClass(HOVERCLASS); })
                     .on(CLICK + " touchend" + ns, ".k-chip .k-icon,.k-chip .k-svg-icon", that._tagListClick.bind(that));
+
+                that.list.off(CLICK, '.k-list-sticky-header-item');
+                that.list.on(CLICK, '.k-list-sticky-header-item', that._onSelectAllClick.bind(that));
             } else {
 
                 wrapper.toggleClass(STATEDISABLED, disable)
@@ -675,6 +766,8 @@ export const __meta__ = {
                      .attr(ARIA_READONLY, readonly);
 
                 that.element.prop(DISABLED, disable);
+
+                that.list.off(CLICK + " touchend" + ns, '.k-list-sticky-header-item');
             }
         },
 
@@ -697,6 +790,8 @@ export const __meta__ = {
 
         close: function() {
             this._activeItem = null;
+            this._selectAllFocused = false;
+            this.list.find('.k-list-sticky-header-item').removeClass(FOCUSEDCLASS);
             this.input.removeAttr(ARIA_ACTIVEDESCENDANT);
 
             this.popup.close();
@@ -737,6 +832,12 @@ export const __meta__ = {
                 that.popup._hovered = true;
                 that._initialOpen = false;
                 that.popup.open({ altTarget: that.wrapper.add(that.element).add(that.input) });
+                if (that.options.selectAll) {
+                    that._updateSelectAllHeader();
+                }
+                if (that.options.checkboxes) {
+                    that._syncListCheckboxes();
+                }
                 that._focusItem();
             }
         },
@@ -749,6 +850,9 @@ export const __meta__ = {
 
         refresh: function() {
             this.listView.refresh();
+            this._updateTagListHTML();
+            this._updateSelectAllHeader();
+            this._placeholder();
         },
 
         _floatCheck: function() {
@@ -768,6 +872,16 @@ export const __meta__ = {
             that._renderFooter();
             that._renderNoData();
             that._toggleNoData(!data.length);
+
+            if (that.options.selectAll) {
+                that._renderSelectAllHeader();
+                that._updateSelectAllHeader();
+            }
+
+            if (that.options.checkboxes) {
+                that._syncListCheckboxes();
+            }
+
             that._resizePopup();
 
             if (that._open) {
@@ -775,7 +889,9 @@ export const __meta__ = {
                 that.toggle(that._allowOpening());
             }
 
-            that.popup.position();
+            if (!that.listView._preventFocus) {
+                that.popup.position();
+            }
             that._updateItemFocus();
 
             if (that.options?.virtual?.mapValueTo === 'dataItem') {
@@ -796,6 +912,10 @@ export const __meta__ = {
                 data = that.dataSource.flatView(),
                 skip = that.listView.skip(),
                 isFirstPage = skip === undefined || skip === 0;
+
+            if (that.listView._preventFocus) {
+                return;
+            }
 
             if (data.length && isFirstPage) {
                 if (!that.options.highlightFirst) {
@@ -1031,7 +1151,12 @@ export const __meta__ = {
                     return;
                 }
 
-                if (listView.focus()) {
+                if (that._selectAllFocused) {
+                    that.list.find('.k-list-sticky-header-item').removeClass(FOCUSEDCLASS);
+                    that._selectAllFocused = false;
+                    that.input.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    listView.focusFirst();
+                } else if (listView.focus()) {
                     if (!that._activeItem && e.shiftKey) {
                         that._activeItem = listView.focus();
                         dir = -1;
@@ -1054,18 +1179,30 @@ export const __meta__ = {
 
             } else if (key === keys.UP) {
                 if (visible) {
-                    if (!that._activeItem && e.shiftKey) {
-                        that._activeItem = listView.focus();
-                        dir = 1;
-                    }
-                    activeItemIdx = listView.getElementIndex(that._getActiveItem().first());
-                    listView.focusPrev();
-                    if (!listView.focus()) {
+                    if (that._selectAllFocused) {
+                        that.list.find('.k-list-sticky-header-item').removeClass(FOCUSEDCLASS);
+                        that._selectAllFocused = false;
+                        that.input.removeAttr(ARIA_ACTIVEDESCENDANT);
                         that.close();
+                    } else if (that.options.selectAll && listView.focus() && listView.getElementIndex(listView.focus()) === 0) {
+                        listView.focus(-1);
+                        that.list.find('.k-list-sticky-header-item').addClass(FOCUSEDCLASS);
+                        that._selectAllFocused = true;
+                        that.input.attr(ARIA_ACTIVEDESCENDANT, that.element[0].id + '_selectAll');
                     } else {
-                        if (e.shiftKey && !that.options.virtual) {
-                            this._multipleSelection = true;
-                            that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus().first()) + dir);
+                        if (!that._activeItem && e.shiftKey) {
+                            that._activeItem = listView.focus();
+                            dir = 1;
+                        }
+                        activeItemIdx = listView.getElementIndex(that._getActiveItem().first());
+                        listView.focusPrev();
+                        if (!listView.focus()) {
+                            that.close();
+                        } else {
+                            if (e.shiftKey && !that.options.virtual) {
+                                this._multipleSelection = true;
+                                that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus().first()) + dir);
+                            }
                         }
                     }
                 }
@@ -1093,31 +1230,42 @@ export const __meta__ = {
 
                 if (listView.items().length) {
                     that._selectRange(0, listView.items().length - 1);
+                    that._updateSelectAllHeader();
                 }
                 handled = true;
             } else if (key === keys.ENTER && visible) {
-                if (!listView.focus()) {
-                    e.stopPropagation();
-                    return;
-                }
-
-                e.preventDefault();
-
-                if (this._multipleSelection) {
-                    this._multipleSelection = false;
-                     if (listView.focus().hasClass(SELECTEDCLASS)) {
-                        that._close();
+                if (that._selectAllFocused) {
+                    that._onSelectAllClick({ preventDefault: $.noop });
+                    e.preventDefault();
+                    handled = true;
+                } else {
+                    if (!listView.focus()) {
                         e.stopPropagation();
                         return;
                     }
-                }
 
-                that._select(listView.focus()).done(function() {
-                    that._change();
-                    that._close();
-                });
+                    e.preventDefault();
+
+                    if (this._multipleSelection) {
+                        this._multipleSelection = false;
+                         if (listView.focus().hasClass(SELECTEDCLASS)) {
+                            that._close();
+                            e.stopPropagation();
+                            return;
+                        }
+                    }
+
+                    that._select(listView.focus()).done(function() {
+                        that._change();
+                        that._close();
+                    });
+                    handled = true;
+                }
+            } else if (key === keys.SPACEBAR && e.ctrlKey && visible && that._selectAllFocused) {
+                that._onSelectAllClick({ preventDefault: $.noop });
+                e.preventDefault();
                 handled = true;
-            } else if (key === keys.SPACEBAR && e.ctrlKey && visible) {
+            } else if (key === keys.SPACEBAR && e.ctrlKey && visible && !that._selectAllFocused) {
                 if (that._activeItem && listView.focus() && listView.focus()[0] === that._activeItem[0]) {
                     that._activeItem = null;
                 }
@@ -1141,11 +1289,15 @@ export const __meta__ = {
             } else if (key === keys.ESC) {
                 if (visible) {
                     e.preventDefault();
+                } else if (that.options.tagMode === "single") {
+                    var lastPos = listView.value().length - 1;
+                    if (lastPos >= 0) {
+                        var lastTag = that.tagList.children(CHIP).last();
+                        that._removeTag(lastTag, false, lastPos);
+                        that._change();
+                    }
                 } else {
-                    that.tagList.children(CHIP).each(function(index, tag) {
-                        that._removeTag($(tag), false);
-                    });
-                    that._change();
+                    that._clearAllValues();
                 }
 
                 that.close();
@@ -1189,24 +1341,45 @@ export const __meta__ = {
                     }
                 }
                 handled = true;
-            } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
+            } else if (key === keys.DELETE && !hasValue) {
                 that._state = ACCEPT;
 
                 if (that.options.tagMode === "single") {
-                    that._clearSingleTagValue();
-
-                    that._change();
+                    that._clearAllValues();
                     that._close();
                     e.stopPropagation();
                     return;
                 }
 
-                if (key === keys.BACKSPACE && !tag) {
-                    tag = that.tagList.children(CHIP).last();
-                }
-
                 if (tag && tag[0]) {
-                    that._removeTag(tag, true);
+                    const limit = that.options.summarizeAfter;
+                    if (limit !== null && tag.index() === limit && listView.value().length > limit) {
+                        that._removeOverflowTag(tag, true);
+                    } else {
+                        that._removeTag(tag, true);
+                    }
+                    that._updateSelectAllHeader();
+                }
+                handled = true;
+            } else if (key === keys.BACKSPACE && !hasValue && that.options.tagMode === "single") {
+                that._state = ACCEPT;
+                that._clearAllValues();
+                that._close();
+                e.stopPropagation();
+                return;
+            } else if (key === keys.BACKSPACE && !hasValue) {
+                that._state = ACCEPT;
+
+                if (!tag) {
+                    that._removeLastTag();
+                } else if (tag[0]) {
+                    const limit = that.options.summarizeAfter;
+                    if (limit !== null && tag.index() === limit && listView.value().length > limit) {
+                        that._removeOverflowTag(tag, true);
+                    } else {
+                        that._removeTag(tag, true);
+                    }
+                    that._updateSelectAllHeader();
                 }
                 handled = true;
             } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
@@ -1426,25 +1599,36 @@ export const __meta__ = {
                 return;
             }
 
-            if (that.options.tagMode === "multiple") {
-                for (idx = removed.length - 1; idx > -1; idx--) {
-                    removedItem = removed[idx];
+            if (that._effectiveTagMode() === "multiple") {
+                if (that.options.summarizeAfter !== null) {
+                    that._updateTagListHTML();
 
-                    if (tagList.children(CHIP).length) {
-                        tagList[0].removeChild(tagList[0].children[removedItem.position]);
-                        that._setOption(getter(removedItem.dataItem), false);
+                    for (idx = removed.length - 1; idx > -1; idx--) {
+                        that._setOption(getter(removed[idx].dataItem), false);
                     }
+                    for (idx = 0; idx < added.length; idx++) {
+                        that._setOption(getter(added[idx].dataItem), true);
+                    }
+                } else {
+                    for (idx = removed.length - 1; idx > -1; idx--) {
+                        removedItem = removed[idx];
+
+                        if (tagList.children(CHIP).length) {
+                            tagList[0].removeChild(tagList[0].children[removedItem.position]);
+                            that._setOption(getter(removedItem.dataItem), false);
+                        }
+                    }
+
+                    for (idx = 0; idx < added.length; idx++) {
+                        addedItem = added[idx];
+
+                        that.tagList.append(that.tagTemplate(addedItem.dataItem));
+
+                        that._setOption(getter(addedItem.dataItem), true);
+                    }
+
+                    kendo.applyStylesFromKendoAttributes(that.tagList, ["background-color"]);
                 }
-
-                for (idx = 0; idx < added.length; idx++) {
-                    addedItem = added[idx];
-
-                    that.tagList.append(that.tagTemplate(addedItem.dataItem));
-
-                    that._setOption(getter(addedItem.dataItem), true);
-                }
-
-                kendo.applyStylesFromKendoAttributes(that.tagList, ["background-color"]);
             } else {
                 if (!that._maxTotal || that._maxTotal < total) {
                     that._maxTotal = total;
@@ -1465,6 +1649,14 @@ export const __meta__ = {
             that._refreshFloatingLabel();
 
             that._placeholder();
+
+            if (that.options.selectAll) {
+                that._updateSelectAllHeader();
+            }
+
+            if (that.options.checkboxes) {
+                that._syncListCheckboxes();
+            }
         },
 
         _refreshTagListAria: function() {
@@ -1473,16 +1665,50 @@ export const __meta__ = {
         },
 
         _updateTagListHTML: function() {
-            var that = this;
-            var values = that.value();
-            var total = that.dataSource.total();
-            var tagList = that.tagList;
+            const that = this;
+            const total = that.dataSource.total();
+            const tagList = that.tagList;
+            const selectedCount = that.listView.value().length;
 
             tagList.children(CHIP).each(function(index, tag) {
                 $(tag).remove();
             });
 
-            if (values.length) {
+            if (that.options.summarizeAfter !== null && selectedCount >= that.options.summarizeAfter) {
+                const allDataItems = that.dataItems();
+                const limit = that.options.summarizeAfter;
+                const visibleDataItems = allDataItems.slice(0, limit);
+                const overflowCount = allDataItems.length - limit;
+
+                for (const dataItem of visibleDataItems) {
+                    that.tagList.append(that.tagTemplate(dataItem));
+                }
+
+                if (overflowCount > 0) {
+                    that.tagList.append(html.renderChip('<span unselectable="on"></span>', $.extend({}, that.options, {
+                        enabled: true,
+                        text: '+' + overflowCount + ' ' + encode(that.options.messages.singleTag),
+                        attr: { unselectable: "on", "aria-selected": true, role: "option", "aria-keyshortcuts": "Enter" },
+                        removable: false,
+                        removableAttr: {},
+                        icon: "chevron-down",
+                        iconAttr: { unselectable: "on", "aria-hidden": true, "aria-label": "open" }
+                    })));
+                }
+
+                kendo.applyStylesFromKendoAttributes(that.tagList, ["background-color"]);
+            } else if (that._effectiveTagMode() === "multiple") {
+                const allDataItems = that.dataItems();
+                for (let i = 0; i < allDataItems.length; i++) {
+                    that.tagList.append(that.tagTemplate(allDataItems[i]));
+                }
+                kendo.applyStylesFromKendoAttributes(that.tagList, ["background-color"]);
+            } else {
+                const values = that.value();
+                if (!values.length) {
+                    that._refreshTagListAria();
+                    return;
+                }
                 that.tagList.append(that.tagTemplate({
                     values: values,
                     dataItems: that.dataItems(),
@@ -1506,7 +1732,9 @@ export const __meta__ = {
             var that = this;
             var listView = that.listView;
             var dataItem = listView.dataItemByIndex(listView.getElementIndex(candidate));
-            var isSelected = candidate.hasClass("k-selected");
+            var isSelected = that.options.checkboxes ?
+                candidate.find("input.k-checkbox").prop("checked") :
+                candidate.hasClass("k-selected");
 
             if (that._state === REBIND) {
                 that._state = "";
@@ -1518,6 +1746,11 @@ export const __meta__ = {
 
             if (that.trigger(isSelected ? DESELECT : SELECT, { dataItem: dataItem, item: candidate })) {
                 that._close();
+                return resolved;
+            }
+
+            if (isSelected && that.options.virtual && that.options.checkboxes) {
+                that._deselectItemDirect(candidate, dataItem);
                 return resolved;
             }
 
@@ -1753,12 +1986,284 @@ export const __meta__ = {
                             .removeClass('input-validation-error').css("display", "");
         },
 
+        _renderSelectAllHeader: function() {
+            const that = this;
+            that._removeSelectAllHeader();
+            const itemId = that.element[0].id + '_selectAll';
+            const label = that.options.messages.selectAll;
+            const checkboxHtml = that.options.checkboxes
+                ? '<span class="k-checkbox-wrap"><input class="k-checkbox" type="checkbox" aria-label="' + encode(label) + '"></span>'
+                : '';
+            const roleAttr = !that.options.checkboxes ? ' role="button"' : '';
+            const headerHtml = '<div class="k-list-sticky-header">' +
+                '<div class="k-list-sticky-header-item" id="' + itemId + '"' + roleAttr + '>' +
+                checkboxHtml +
+                '<span class="k-list-item-text">' + encode(label) + '</span>' +
+                '</div></div>';
+            that.list.prepend(headerHtml);
+        },
+
+        _removeSelectAllHeader: function() {
+            this.list.children('.k-list-sticky-header').remove();
+        },
+
+        _syncListCheckboxes: function() {
+            this.listView.items().each(function() {
+                const li = $(this);
+                const isSelected = li.attr('aria-selected') === 'true';
+                li.find('input.k-checkbox').toggleClass('k-checked', isSelected).prop('checked', isSelected);
+            });
+        },
+
+        _selectAllState: function() {
+            const that = this;
+            const selectedCount = that._listSelectedCount();
+            const total = that.dataSource.total();
+            if (selectedCount === 0) { return "unchecked"; }
+            if (selectedCount >= total) { return "checked"; }
+            return "indeterminate";
+        },
+
+        _updateSelectAllHeader: function() {
+            const that = this;
+            if (!that.options.selectAll) {
+                return;
+            }
+            const header = that.list.find('.k-list-sticky-header');
+            if (!header.length) {
+                return;
+            }
+            const state = that._selectAllState();
+
+            if (that.options.checkboxes) {
+                const checkbox = header.find('input.k-checkbox');
+                const ariaChecked = state === "checked" ? 'true' : state === "indeterminate" ? 'mixed' : 'false';
+                checkbox.toggleClass('k-checked', state === "checked")
+                    .toggleClass('k-indeterminate', state === "indeterminate")
+                    .prop('checked', state === "checked")
+                    .attr('aria-checked', ariaChecked);
+            } else {
+                header.find('.k-list-sticky-header-item').toggleClass(SELECTEDCLASS, state === "checked");
+            }
+        },
+
+        _focusSelectAllHeader: function() {
+            const that = this;
+            const headerItem = that.list.find('.k-list-sticky-header-item');
+            if (!headerItem.length) {
+                return;
+            }
+            that.listView.focus(-1);
+            headerItem.addClass(FOCUSEDCLASS);
+            that._selectAllFocused = true;
+            that.input.attr(ARIA_ACTIVEDESCENDANT, that.element[0].id + '_selectAll');
+        },
+
+        _onSelectAllClick: function(e) {
+            const that = this;
+            e.preventDefault();
+            const state = that._selectAllState();
+
+            if (that.trigger(SELECTALL, { checked: state !== "checked" })) {
+                return;
+            }
+
+            if (state === "checked") {
+                that._deselectAllItems();
+                that._updateTagListHTML();
+                that._placeholder();
+                that._updateSelectAllHeader();
+                that._change();
+                that._close();
+                that._clearFilterOnAutoClose();
+                if (!that.options.autoClose) {
+                    that._focusSelectAllHeader();
+                }
+            } else {
+                that._selectAllItems().done(function() {
+                    that._change();
+                    that._close();
+                    that._clearFilterOnAutoClose();
+                    if (!that.options.autoClose) {
+                        that._focusSelectAllHeader();
+                    }
+                });
+            }
+        },
+
+        _clearFilterOnAutoClose: function() {
+            const that = this;
+            if (!that.options.autoClose) {
+                return;
+            }
+            if (that._state === FILTER) {
+                that._state = ACCEPT;
+                that.listView.skipUpdate(true);
+            }
+            if (that.listView.bound() && that.listView.isFiltered()) {
+                that.persistTagList = true;
+                that._clearFilter();
+            }
+        },
+
+        _deselectItemDirect: function(candidate, dataItem) {
+            const that = this;
+            const listView = that.listView;
+            const valueGetter = that._value;
+            const val = valueGetter(dataItem);
+
+            const valIdx = listView._values.indexOf(val);
+            if (valIdx > -1) {
+                listView._values.splice(valIdx, 1);
+                listView._selectedDataItems.splice(valIdx, 1);
+                listView._selectedIndexes.splice(valIdx, 1);
+            }
+
+            if (that.options.checkboxes) {
+                candidate.find("input.k-checkbox").prop("checked", false).removeClass("k-checked");
+                candidate.attr("aria-selected", false);
+            }
+
+            if (that._effectiveTagMode() === "multiple") {
+                if (valIdx > -1) {
+                    that.tagList.children(CHIP).eq(valIdx).remove();
+                    that._setOption(val, false);
+                }
+            } else {
+                that._updateTagListHTML();
+            }
+            that._placeholder();
+            that._updateSelectAllHeader();
+        },
+
+        _selectAllItems: function() {
+            const that = this;
+            const listView = that.listView;
+            const flatView = that.dataSource.flatView();
+            const currentValues = listView.value();
+            const valueGetter = that._value;
+            const maxSelectedItems = that.options.maxSelectedItems;
+            const isVirtual = !!that.options.virtual;
+            const skip = isVirtual ? (listView.skip() || 0) : 0;
+            const total = isVirtual ? that.dataSource.total() : flatView.length;
+            const currentValueSet = {};
+
+            for (let i = 0; i < currentValues.length; i++) {
+                currentValueSet[currentValues[i]] = true;
+            }
+
+            let indices = [];
+            for (let i = 0; i < flatView.length; i++) {
+                const absIdx = skip + i;
+                if (absIdx < total && !currentValueSet[valueGetter(flatView[i])]) {
+                    indices.push(absIdx);
+                }
+            }
+
+            if (maxSelectedItems !== null) {
+                const available = maxSelectedItems - currentValues.length;
+                if (available <= 0) {
+                    return $.Deferred().resolve();
+                }
+                indices = indices.slice(0, available);
+            }
+
+            if (!indices.length) {
+                return $.Deferred().resolve();
+            }
+
+            that.persistTagList = false;
+
+            if (isVirtual) {
+                listView._preventFocus = true;
+            }
+
+            return listView.select(indices).done(function() {
+                if (isVirtual) {
+                    listView._preventFocus = false;
+                }
+                const currentSkip = listView.skip() || 0;
+                for (let k = 0; k < indices.length; k++) {
+                    const idx = indices[k];
+                    const dataItem = listView.dataItemByIndex(idx);
+                    const domIdx = idx - currentSkip;
+                    const candidate = $(listView.items()[domIdx]);
+                    that.trigger(SELECT, { dataItem: dataItem, item: candidate });
+                }
+            });
+        },
+
+        _deselectAllItems: function() {
+            const that = this;
+            const listView = that.listView;
+            const flatView = that.dataSource.flatView();
+            const valueGetter = that._value;
+            const currentValues = listView.value();
+            const flatViewValueSet = {};
+            const remainingValues = [];
+
+            if (that.options.virtual) {
+                that.persistTagList = false;
+                listView._values = [];
+                listView._selectedDataItems = [];
+                listView._selectedIndexes = [];
+                listView.value([]);
+                listView.items().each(function() {
+                    const li = $(this);
+                    li.attr('aria-selected', 'false').removeClass('k-selected');
+                    li.find('input.k-checkbox').prop('checked', false).removeClass('k-checked');
+                });
+                return;
+            }
+
+            for (let i = 0; i < flatView.length; i++) {
+                flatViewValueSet[valueGetter(flatView[i])] = true;
+            }
+            for (let i = 0; i < currentValues.length; i++) {
+                if (!flatViewValueSet[currentValues[i]]) {
+                    remainingValues.push(currentValues[i]);
+                }
+            }
+
+            const allDataItems = listView.selectedDataItems();
+            const remainingDataItems = allDataItems.filter(function(dataItem) {
+                return !flatViewValueSet[valueGetter(dataItem)];
+            });
+
+            that.persistTagList = false;
+            listView.value([]);
+            if (remainingDataItems.length) {
+                listView.selectedDataItems(remainingDataItems);
+            } else if (remainingValues.length) {
+                listView.setValue(remainingValues);
+            }
+        },
+
+        _listSelectedCount: function() {
+            if (this.options.virtual) {
+                return this.listView.value().length;
+            }
+            return Math.max(0, this.listView.value().length - Object.keys(this._customOptions).length);
+        },
+
+        _effectiveTagMode: function() {
+            if (this.options.summarizeAfter !== null && this._listSelectedCount() >= this.options.summarizeAfter) {
+                return "single";
+            }
+            return this.options.tagMode;
+        },
+
         _closeHandler: function(e) {
             if (this.trigger(CLOSE)) {
                 e.preventDefault();
             } else {
                 this.input.attr(ARIA_EXPANDED, false);
                 this.ul.attr(ARIA_HIDDEN, true);
+                if (this._selectAllFocused) {
+                    this.list.find('.k-list-sticky-header-item').removeClass(FOCUSEDCLASS);
+                    this._selectAllFocused = false;
+                    this.input.removeAttr(ARIA_ACTIVEDESCENDANT);
+                }
             }
         },
 

@@ -1822,7 +1822,8 @@ if (kendo.ui.MultiSelect) {
         "clear": "clear",
         "deleteTag": "delete",
         "noData": "No data found.",
-        "downArrow": "Select"
+        "downArrow": "Select",
+        "selectAll": "Select all"
     });
 }
 

@@ -1303,7 +1303,8 @@ if (kendo.ui.MultiSelect) {
         "clear": "изчисти",
         "deleteTag": "премахни",
         "noData": "Няма налични опции.",
-        "downArrow": "избери"
+        "downArrow": "избери",
+        "selectAll": "Избери всички"
     });
 }
 
