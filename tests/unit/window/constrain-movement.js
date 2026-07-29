@@ -395,4 +395,228 @@ describe("kendo.ui.window constrain-movement", function() {
 
         assert.equal(wnd.wrapper.outerHeight(), 400);
     });
+
+    it("resizing vertically is not blocked by stale boundary after containment with percentage height grows", function() {
+        let parent = $("<div style='height: 200px; width: 400px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 100%; position: relative;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: 100,
+            height: 50,
+            draggable: {
+                containment: containment
+            }
+        });
+
+        parent.height(800);
+
+        resizewnd(wnd, "s", 0, 500);
+
+        assert.isAbove(wnd.wrapper.outerHeight(), 160);
+    });
+
+    it("resizing horizontally is not blocked by stale boundary after containment with percentage width grows", function() {
+        let parent = $("<div style='height: 400px; width: 200px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 100%; width: 80%; position: relative;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: 50,
+            height: 50,
+            draggable: {
+                containment: containment
+            }
+        });
+
+        parent.width(800);
+
+        resizewnd(wnd, "e", 500, 0);
+
+        assert.isAbove(wnd.wrapper.outerWidth(), 160);
+    });
+
+    it("resizing SE is not blocked by stale boundaries after containment with percentage dimensions grows", function() {
+        let parent = $("<div style='height: 200px; width: 200px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: 50,
+            height: 50,
+            draggable: {
+                containment: containment
+            }
+        });
+
+        parent.height(800);
+        parent.width(800);
+
+        resizewnd(wnd, "se", 500, 500);
+
+        assert.isAbove(wnd.wrapper.outerHeight(), 160);
+        assert.isAbove(wnd.wrapper.outerWidth(), 160);
+    });
+
+    it("user-specified numeric maxHeight is still respected after containment grows", function() {
+        let parent = $("<div style='height: 200px; width: 400px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 100%; position: relative;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: 100,
+            height: 50,
+            maxHeight: 200,
+            draggable: {
+                containment: containment
+            }
+        });
+
+        parent.height(800);
+
+        resizewnd(wnd, "s", 0, 500);
+
+        assert.isAtMost(wnd.wrapper.outerHeight(), 210);
+    });
+
+    it("setOptions maxHeight is applied as the new user limit after containment grows", function() {
+        let parent = $("<div style='height: 200px; width: 400px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 100%; position: relative;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: 100,
+            height: 50,
+            draggable: {
+                containment: containment
+            }
+        });
+
+        wnd.setOptions({ maxHeight: 300 });
+
+        parent.height(800);
+
+        resizewnd(wnd, "s", 0, 500);
+
+        assert.isAbove(wnd.wrapper.outerHeight(), 160);
+        assert.isAtMost(wnd.wrapper.outerHeight(), 320);
+    });
+
+    it("resizing south works when maxHeight is a string with px", function() {
+        let parent = $("<div style='height: 500px; width: 500px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative; overflow: hidden;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: "200px",
+            height: "100px",
+            maxHeight: "300px",
+            draggable: {
+                containment: containment
+            }
+        });
+
+        let initialHeight = wnd.wrapper.outerHeight();
+        resizewnd(wnd, "s", 0, 100);
+
+        assert.isAbove(wnd.wrapper.outerHeight(), initialHeight);
+    });
+
+    it("resizing east works when maxWidth is a string with px", function() {
+        let parent = $("<div style='height: 500px; width: 500px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative; overflow: hidden;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: "100px",
+            height: "100px",
+            maxWidth: "300px",
+            draggable: {
+                containment: containment
+            }
+        });
+
+        let initialWidth = wnd.wrapper.outerWidth();
+        resizewnd(wnd, "e", 100, 0);
+
+        assert.isAbove(wnd.wrapper.outerWidth(), initialWidth);
+    });
+
+    it("resizing east works when maxHeight is a string with px (cross-axis)", function() {
+        let parent = $("<div style='height: 500px; width: 500px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative; overflow: hidden;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: "100px",
+            height: "100px",
+            maxHeight: "300px",
+            draggable: {
+                containment: containment
+            }
+        });
+
+        let initialWidth = wnd.wrapper.outerWidth();
+        resizewnd(wnd, "e", 100, 0);
+
+        assert.isAbove(wnd.wrapper.outerWidth(), initialWidth);
+    });
+
+    it("resizing south works when maxWidth is a string with px (cross-axis)", function() {
+        let parent = $("<div style='height: 500px; width: 500px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative; overflow: hidden;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: "200px",
+            height: "100px",
+            maxWidth: "300px",
+            draggable: {
+                containment: containment
+            }
+        });
+
+        let initialHeight = wnd.wrapper.outerHeight();
+        resizewnd(wnd, "s", 0, 100);
+
+        assert.isAbove(wnd.wrapper.outerHeight(), initialHeight);
+    });
+
+    it("string maxHeight is properly enforced as a limit", function() {
+        let parent = $("<div style='height: 500px; width: 500px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative; overflow: hidden;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: "200px",
+            height: "100px",
+            maxHeight: "200px",
+            draggable: {
+                containment: containment
+            }
+        });
+
+        resizewnd(wnd, "s", 0, 300);
+
+        assert.isAtMost(wnd.wrapper.outerHeight(), 210);
+    });
+
+    it("string maxWidth is properly enforced as a limit", function() {
+        let parent = $("<div style='height: 500px; width: 500px; position: relative;'></div>").appendTo(Mocha.fixture);
+        containment = $("<div style='height: 80%; width: 80%; position: relative; overflow: hidden;'></div>").appendTo(parent);
+
+        let wnd = setupWnd({
+            visible: true,
+            width: "100px",
+            height: "100px",
+            maxWidth: "200px",
+            draggable: {
+                containment: containment
+            }
+        });
+
+        resizewnd(wnd, "e", 300, 0);
+
+        assert.isAtMost(wnd.wrapper.outerWidth(), 210);
+    });
 });

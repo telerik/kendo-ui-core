@@ -159,7 +159,11 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 
 {% endif %}
 
->tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} AI Coding Assistant](slug://overview_ai) and the available [Grid-related prompts](slug:ai_prompt_library#grid).
+{% if site.core %}
+>tip You can accelerate your Grid journey with the [Telerik UI for ASP.NET Core Agentic UI Generator]({% slug ai-overview-core %}) and the [Component Assistant prompts]({% slug agentic-ui-generator-prompt-library-core %}#component-assistant-prompts).
+{% else %}
+>tip You can accelerate your Grid journey with the [Telerik {{ site.framework }} AI Coding Assistant]({% slug overview_ai %}) and the available [Grid-related prompts]({% slug ai_prompt_library %}#grid).
+{% endif %}
 
 ## Functionality and Features
 
@@ -209,8 +213,8 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
 * [Server-Side API](/api/grid)
 * [ASP.NET {{ site.framework_short }} Grid example](https://demos.telerik.com/{{ site.platform }}/grid)
 {% if site.core %}
-* [Forum Discussions](https://www.telerik.com/forums/aspnet-core-ui?tagId=753) 
+* [Forum Discussions](https://www.telerik.com/forums/aspnet-core-ui?tagId=753)
 {% else %}
-* [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=754) 
+* [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=754)
 {% endif %}
 * [How-To Examples](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Areas)

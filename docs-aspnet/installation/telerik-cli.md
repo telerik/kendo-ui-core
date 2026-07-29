@@ -199,7 +199,7 @@ telerik nuget config --scope project --path . --force
 
 ## Install MCP Server
 
-To [install the Telerik MCP server]({% slug overview_ai %}) for AI-assisted development, use the `mcp config` command:
+To [install the Telerik MCP server]({% if site.core %}{% slug ai-overview-core %}{% else %}{% slug overview_ai %}{% endif %}) for AI-assisted development, use the `mcp config` command:
 
 ````SH
 telerik mcp config

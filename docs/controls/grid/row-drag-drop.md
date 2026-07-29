@@ -107,8 +107,9 @@ When [`multiple selection`](/controls/grid/selection#multi-row-selection) is ena
 
 ## Known Limitations
 
-* The Row Drag & Drop does not work in a combination with data sources that involve rendering rows in an order different than their natural one, such as [`sorting`](/controls/grid/sorting), [`filtering`](/controls/grid/filtering) and [`grouping`](/controls/grid/grouping/overview).
-* The Drag & Drop functionality in combination with [`Selection`](https://demos.telerik.com/kendo-ui/grid/selection) is not supported in Microsoft Internet Explorer.
+* Row Drag & Drop is not supported when [`sorting`](/controls/grid/sorting) is applied &mdash; The sort re-orders the data after every change, so a dropped row immediately returns to its sorted position instead of staying where it was placed.
+* Row Drag & Drop is not supported when [`filtering`](/controls/grid/filtering) is applied &mdash; Because the filter hides rows from the view, the drop position does not match the actual position in the full dataset, causing rows to land in the wrong place.
+* Row Drag & Drop is not supported when [`grouping`](/controls/grid/grouping/overview) is applied &mdash; Rows can only be dropped within the flat list of visible data rows, so reordering across groups is not possible.
 
 ## See Also
 

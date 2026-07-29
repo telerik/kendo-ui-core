@@ -59,7 +59,7 @@ Follow these steps to set up the Agentic UI Generator and use it in your IDE:
    </TabStripTab>
    </TabStrip>
 
-1. (Optional) If you want to use the Agentic UI Generator in a new Telerik ASP.NET Core app, then create it with the [Telerik CLI](slug:installation-cli) or the [Telerik UI for ASP.NET Core project templates](slug:installation-project-templates).
+1. (Optional) If you want to use the Agentic UI Generator in a new Telerik ASP.NET Core app, then create it with the [Telerik CLI]({% slug installation_cli %}) or the [Telerik UI for ASP.NET Core project templates]({% slug newprojectwizards_visualstudio_aspnetcore %}).
 
 </TabStripTab>
 <TabStripTab title="Manual Setup">

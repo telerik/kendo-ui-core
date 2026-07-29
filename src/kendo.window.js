@@ -354,9 +354,17 @@ import "./kendo.html.button.js";
                 var paddingTop = contentBoxSizing ? toInt(wrapper, "padding-top") : 0;
 
                 if (this.containment && !this._isPinned) {
+                    var effectiveMaxHeight = this._userMaxHeight !== undefined ? this._userMaxHeight : maxHeight;
+                    var effectiveMaxWidth = this._userMaxWidth !== undefined ? this._userMaxWidth : options.maxWidth;
+                    effectiveMaxHeight = effectiveMaxHeight === Infinity ? Infinity : parseInt(effectiveMaxHeight, 10);
+                    effectiveMaxWidth = effectiveMaxWidth === Infinity ? Infinity : parseInt(effectiveMaxWidth, 10);
+                    this._userMaxHeight = effectiveMaxHeight;
+                    this._userMaxWidth = effectiveMaxWidth;
+                    this._tbBorderOffset = tbBorderWidth + paddingTop;
+                    this._lrBorderOffset = lrBorderWidth;
                     this._updateBoundaries();
-                    options.maxHeight = Math.min(this.containment.height - (tbBorderWidth + paddingTop), maxHeight);
-                    options.maxWidth = Math.min(this.containment.width - lrBorderWidth, options.maxWidth);
+                    options.maxHeight = Math.min(this.containment.height - this._tbBorderOffset, effectiveMaxHeight);
+                    options.maxWidth = Math.min(this.containment.width - this._lrBorderOffset, effectiveMaxWidth);
                 }
 
                 for (var i = 0; i < dimensions.length; i++) {
@@ -466,6 +474,11 @@ import "./kendo.html.button.js";
                     this.minLeft = containment.scrollLeft();
                     this.maxLeft = this.minLeft + containment.width - outerWidth(this.wrapper, true);
                     this.maxTop = this.minTop + containment.height - outerHeight(this.wrapper, true);
+                    if (this._userMaxHeight !== undefined) {
+                        this.options.maxHeight = Math.min(containment.height - (this._tbBorderOffset || 0), this._userMaxHeight);
+                        this.options.maxWidth = Math.min(containment.width - (this._lrBorderOffset || 0), this._userMaxWidth);
+                        this.wrapper.css({ maxHeight: this.options.maxHeight, maxWidth: this.options.maxWidth });
+                    }
                 }
             },
 
@@ -561,6 +574,12 @@ import "./kendo.html.button.js";
                 that._containerScrollTop = doc.scrollTop();
                 that._containerScrollLeft = doc.scrollLeft();
 
+                if (options.maxHeight) {
+                    that._userMaxHeight = options.maxHeight === Infinity ? Infinity : parseInt(options.maxHeight, 10);
+                }
+                if (options.maxWidth) {
+                    that._userMaxWidth = options.maxWidth === Infinity ? Infinity : parseInt(options.maxWidth, 10);
+                }
                 Widget.fn.setOptions.call(that, options);
                 var scrollable = that.options.scrollable !== false;
 

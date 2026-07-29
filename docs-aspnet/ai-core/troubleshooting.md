@@ -34,7 +34,7 @@ The error means one of the following:
 >
 > An automatically renewing license is not necessarily a Subscription license.
 
-For detailed information about license requirements and tool capabilities, see [License Requirements](slug:overview_ai#usage-limits).
+For detailed information about license requirements and tool capabilities, see [License Requirements](slug:ai-overview-core#usage-limits).
 
 ## I Started a Trial License but Cannot Activate the MCP Server
 
@@ -77,5 +77,5 @@ In this case, enable HTTP/2 on the client device and any related firewalls or pr
 
 * [Telerik UI for ASP.NET Core AI Tools Overview](slug:ai-overview-core)
 * [Getting Started](slug:agentic-ui-generator-getting-started-core)
-* [Telerik UI for ASP.NET Core AI Coding Assistant Overview](slug:overview_ai)
+* [Telerik UI for ASP.NET Core AI Coding Assistant Overview](slug:ai-overview-core)
 * [Licensing](slug:installation_license_key_aspnetcore)

@@ -150,7 +150,9 @@ The example below demonstrates how to drag and drop the Grid rows by using the k
 
 ## Known Limitations
 
-* Any DataSource operations (for example, sorting, filtering, grouping, and so on) that involve rendering rows in a different order than their natural one are not supported.
+* Row Drag and Drop is not supported when [sorting]({% slug htmlhelpers_grid_aspnetcore_sorting %}) is applied. The sort re-orders the data after every change, so a dropped row immediately returns to its sorted position instead of staying where it was placed.
+* Row Drag and Drop is not supported when [filtering]({% slug htmlhelpers_grid_aspnetcore_filtering %}) is applied. Because the filter hides rows from the view, the drop position does not match the actual position in the full dataset, causing rows to land in the wrong place.
+* Row Drag and Drop is not supported when [grouping]({% slug htmlhelpers_grid_aspnetcore_grouping %}) is applied. Rows can only be dropped within the flat list of visible data rows, so reordering across groups is not possible.
 
 ## See Also
 
