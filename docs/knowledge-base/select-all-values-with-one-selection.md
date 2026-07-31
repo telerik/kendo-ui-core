@@ -31,6 +31,8 @@ components: ["multiselect"]
  </tr>
 </table>
 
+> Starting with the **2026 Q3** release, the MultiSelect provides a built-in [`selectAll`](/api/javascript/ui/multiselect/configuration/selectall) option that renders a sticky header for selecting or deselecting all items. Consider using the built-in functionality instead of the custom approach shown below.
+
 ## Description
 
 How can I create a `dataItem` that holds an `all`-value, which selects all items in the Kendo UI MultiSelect widget?

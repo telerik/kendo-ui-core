@@ -30,6 +30,8 @@ MultiSelect for Kendo UI for jQuery
 </tbody>
 </table>
 
+> Starting with the **2026 Q3** release, the MultiSelect provides a built-in [`selectAll`](/api/javascript/ui/multiselect/configuration/selectall) option that renders a sticky header for selecting or deselecting all items. Consider using the built-in functionality instead of the custom approach shown below.
+
 ## Description 
 
 I want to configure the Kendo UI for jQuery [MultiSelect](https://www.telerik.com/kendo-jquery-ui/documentation/controls/multiselect/overview) to include a "Select All" option in the dropdown header and align it with other items in the list. Additionally, I want to display selected values as a single tag instead of showing individual tags for each selected item. When all items are selected, the tag should display the text "ALL".
