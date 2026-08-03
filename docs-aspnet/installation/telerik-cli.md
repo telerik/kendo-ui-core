@@ -260,6 +260,8 @@ telerik migrate fix --project=MyApp/MyApp.csproj
 | `--project` | Required | — | Path to `.csproj` file or project directory containing .cshtml files. Accepts absolute or relative paths. Error if missing: `--project is required. Provide a path to a .csproj file or project directory.` |
 | `--no-install` | Boolean | `false` | Skip automatic upgrade of `Telerik.UI.for.AspNet.Core` NuGet package. If package is outdated and this flag is used, command will not continue execution. |
 
+{% endif %}
+
 ## Set Up Telerik Environment
 
 The `setup` command performs multiple actions at once to configure your Telerik development environment:
@@ -269,9 +271,15 @@ The `setup` command performs multiple actions at once to configure your Telerik 
 * [Configure NuGet package source](#set-up-nuget-feed)
 * [Install MCP server(s)](#install-mcp-server)
 
+{% if site.core %}
 ````SH.skip-repl
 telerik setup aspnetcore
 ````
+{% else %}
+````SH.skip-repl
+telerik setup aspnetmvc
+````
+{% endif %}
 
 You can use the `setup` command with the following options:
 
@@ -280,8 +288,13 @@ You can use the `setup` command with the following options:
 * `--interactive` to prompt the user at every step. Each prompt shows the default value in brackets and `Enter` accepts it. This option is enabled by default when the standard input is a CLI terminal and [`Console.IsInputRedirected` is `false`](https://learn.microsoft.com/en-us/dotnet/api/system.console.isinputredirected).
 * `--no-interactive` to run without prompting the user and rely on explicit inline options or defaults. This option is enabled by default when the standard input is redirected and [`Console.IsInputRedirected` is `true`](https://learn.microsoft.com/en-us/dotnet/api/system.console.isinputredirected). The option is recommended for automation and CI use.
 
+{% if site.core %}
 ````SH.skip-repl
 telerik setup aspnetcore --scope project --nuget-path . --force --no-interactive
+````
+{% else %}
+````SH.skip-repl
+telerik setup aspnetmvc --scope project --nuget-path . --force --no-interactive
 ````
 {% endif %}
 
