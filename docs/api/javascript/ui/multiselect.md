@@ -3278,6 +3278,8 @@ The widget instance which fired the event.
         selectAll: true,
         checkboxes: true,
         selectAllChange: function(e) {
+            e.preventDefault();
+            if (e.checked) {
                 this.value(["Item1", "Item2", "Item3"]);
             } else {
                 this.value([]);
