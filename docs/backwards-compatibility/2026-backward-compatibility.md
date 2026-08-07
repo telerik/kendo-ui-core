@@ -11,6 +11,20 @@ position: 0
 
 This article lists the breaking or important changes in the 2026 releases of Kendo UI. For the complete list of changes in the UI components, see the [product release history](https://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
+## Kendo UI 2026 Q3
+
+### New summarizeAfter behavior for MultiSelect
+
+Starting with the **2026 Q3** release, the default value of the MultiSelect `summarizeAfter` configuration is `10`. When users select more than 10 items, the first 10 tags are displayed and the remaining selections are summarized in an overflow tag.
+
+To retain the previous behavior and render every selected item as an individual tag, set `summarizeAfter` to `null`.
+
+```javascript
+$("#multiselect").kendoMultiSelect({
+    summarizeAfter: null
+});
+```
+
 ## Kendo UI 2026 Q2
 
 ### New Meridian Theme - Default Theme Moved to Maintenance
@@ -656,4 +670,3 @@ If you have custom CSS or jQuery selectors targeting `.k-list-group-sticky-heade
 /* After */
 .k-multicolumncombobox .k-table-group-sticky-header { /* ... */ }
 ```
-

@@ -11,6 +11,27 @@ position: 2
 
 This article lists the breaking or important changes in the 2026 releases of {{ site.product }}.
 
+## {{ site.product }} 2026 Q3
+
+### New SummarizeAfter behavior for MultiSelect
+
+Starting with the **2026 Q3** release, the default value of the MultiSelect `SummarizeAfter` configuration is `10`. When users select more than 10 items, the first 10 tags are displayed and the remaining selections are summarized in an overflow tag.
+
+To retain the previous behavior and render every selected item as an individual tag, set `SummarizeAfter` to `null`.
+
+```HtmlHelper
+@(Html.Kendo().MultiSelect()
+    .Name("multiselect")
+    .SummarizeAfter(null)
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-multiselect name="multiselect" summarize-after="@((double?)null)"></kendo-multiselect>
+```
+{% endif %}
+
 ## {{ site.product }} 2026 Q2
 
 ### New Meridian Theme - Default Theme Moved to Maintenance
@@ -877,5 +898,3 @@ For the fluent wrappers `DashTypes` were a **string** and are now **enums**.
 - `DiagramShapeStrokeSettingsBuilder`
 - `DiagramStrokeSettingsBuilder`
   {% endif %}
-
-

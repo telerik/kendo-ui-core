@@ -1698,9 +1698,9 @@ How do I customize the separator in Kendo UI's MultiSelect component? Control, e
         })
     </script>
 
-### summarizeAfter `Number` *(default: null)*
+### summarizeAfter `Number` *(default: 10)*
 
-When set to a number, the tag list switches to a summarized display once the number of selected items reaches or exceeds that threshold. The first `summarizeAfter` items are rendered as individual tags, and the remaining items are collapsed into a single overflow chip showing the count (e.g. "+5 item(s) selected"). When set to `null` (the default), all selected items are always rendered as individual tags unless [tagMode](/api/javascript/ui/multiselect#configuration-tagMode) is set to `"single"`.
+When set to a number, the tag list switches to a summarized display once the number of selected items reaches or exceeds that threshold. The first `summarizeAfter` items are rendered as individual tags, and the remaining items are collapsed into a single overflow chip showing the count (e.g. "+5 item(s) selected"). Set `summarizeAfter` to `null` to render all selected items as individual tags unless [tagMode](/api/javascript/ui/multiselect#configuration-tagMode) is set to `"single"`.
 
 
 <div class="meta-api-description">

@@ -69,6 +69,7 @@ The following example demonstrates how to define the Drawer.
 
 * [Display modes]({% slug displaymodes_drawer_aspnetcore %})&mdash;The component provides three display modes that allow you to control how the Drawer is displayed on the screen.
 * [Interaction modes]({% slug interactionmodes_drawer_aspnetcore %})&mdash;The Drawer supports the `overlay` and `push` interaction modes, and you can determine if it will be rendered on left or right side.
+* [Items]({% slug htmlhelpers_drawer_items_aspnetcore %})&mdash;The Drawer allows you to populate its navigation from a data array.
 * [Templates]({% slug templates_drawer_aspnetcore %})&mdash;With the built-in item templates, you control how the Drawer items are rendered.
 * [Hierarchy]({% slug hierarchy_drawer_aspnetcore %})&mdash;The Drawer allows you to display hierarchically organized items.
 * [Events]({% slug events_drawer %})&mdash;The Drawer allows you to handle its events and implement custom functionality.

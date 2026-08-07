@@ -60,6 +60,354 @@ How do I control the initial state of a Kendo UI for jQuery navigation drawer? C
       });
     </script>
 
+### items `Array`
+
+Specifies the items rendered by the Drawer when the top-level `template` option is not set. Each item can define text, icon, state, custom attributes, per-item template functions, and nested child items through `items.items`. If `template` is configured, it takes precedence and the `items` configuration is ignored.
+
+
+<div class="meta-api-description">
+How do I bind or configure Drawer navigation items in Kendo UI for jQuery? Populate a drawer, sidebar, or slide-out navigation panel from an array of item objects, control text, icons, separators, selected and enabled states, nested child entries, per-item rendering, and custom attributes, and manage generated navigation structures for side menus without hand-writing the full HTML template. Configure menu data for a drawer, set up hierarchical navigation items, customize generated list entries, and ask how to render Drawer items from data instead of a static template.
+</div>
+
+#### Example - configure generated Drawer items
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            position: "left",
+            items: [
+                { text: "Home", icon: "home", selected: true },
+                { text: "Reports", icon: "chart-bar" },
+                { separator: true },
+                {
+                    text: "Settings",
+                    icon: "gear",
+                    items: [
+                        { text: "Profile", icon: "user" },
+                        { text: "Notifications", icon: "bell" }
+                    ]
+                }
+            ]
+        });
+    </script>
+
+### items.text `String`
+
+Defines the text of the item. If not set, the generated item renders no text.
+
+
+<div class="meta-api-description">
+How do I set the text label for a Drawer item in Kendo UI for jQuery? Configure the visible caption, label, title, or item text shown in generated drawer navigation entries, control whether an item displays descriptive text or appears without a label, and customize the wording used for side menu options, navigation rows, or hierarchical drawer entries in the generated item surface.
+</div>
+
+#### Example - set item text
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Inbox", icon: "inbox" },
+                { text: "Archive", icon: "folder" }
+            ]
+        });
+    </script>
+
+### items.icon `String`
+
+Defines the name for an existing icon in a Kendo UI theme.
+
+See [web font icons help article](/styles-and-layout/icons-web) for more details on Kendo UI icons.
+
+
+<div class="meta-api-description">
+How do I show icons in generated Drawer items? Configure a theme icon name for each drawer entry, set icons for navigation items in a sidebar or slide-out menu, customize the graphic shown next to drawer labels, and choose built-in Kendo UI icons for generated side navigation items to improve recognition and visual hierarchy.
+</div>
+
+#### Example - configure item icons
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Dashboard", icon: "home" },
+                { text: "Files", icon: "folder" },
+                { text: "Preferences", icon: "gear" }
+            ]
+        });
+    </script>
+
+### items.separator `Boolean` *(default: false)*
+
+Defines a separator item. When set to `true`, the Drawer renders a separator instead of a clickable item.
+
+
+<div class="meta-api-description">
+How do I add separators between Drawer items in Kendo UI for jQuery? Insert divider rows or separator elements inside generated drawer navigation, break item groups apart visually, configure non-clickable separator entries between menu items, and organize side menu content with section breaks in the generated Drawer items collection.
+</div>
+
+#### Example - render a separator item
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Overview", icon: "home" },
+                { separator: true },
+                { text: "Administration", icon: "gear" }
+            ]
+        });
+    </script>
+
+### items.selected `Boolean` *(default: false)*
+
+Toggles the selected state of the item.
+
+
+<div class="meta-api-description">
+How do I preselect a generated Drawer item in Kendo UI for jQuery? Configure which drawer navigation entry starts active, highlighted, chosen, or selected, initialize a selected state for generated side menu items, and control the active item in a Drawer so the current section or route is visually indicated when the widget is rendered.
+</div>
+
+#### Example - select an item by default
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Overview", icon: "home" },
+                { text: "Profile", icon: "user", selected: true },
+                { text: "Security", icon: "lock" }
+            ]
+        });
+    </script>
+
+### items.enabled `Boolean` *(default: true)*
+
+Toggles the enabled state of the item.
+
+
+<div class="meta-api-description">
+How do I disable individual Drawer items in Kendo UI for jQuery? Control whether generated drawer entries are enabled, disabled, interactive, clickable, or available for selection, configure inactive side menu items based on permissions or workflow state, and manage which generated navigation items can respond to user input inside the Drawer.
+</div>
+
+#### Example - disable an item
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Projects", icon: "folder" },
+                { text: "Billing", icon: "dollar", enabled: false },
+                { text: "Support", icon: "question-circle" }
+            ]
+        });
+    </script>
+
+### items.cssClass `String`
+
+Defines the class names of the generated item element.
+
+
+<div class="meta-api-description">
+How can I add custom CSS classes to generated Drawer items? Apply custom styling hooks, class names, or theme modifiers to individual drawer entries, control per-item appearance in a side navigation menu, assign classes for custom layouts or states, and configure generated Drawer item elements for targeted CSS styling and automation.
+</div>
+
+#### Example - add custom classes to an item
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                { text: "Priority", icon: "star", cssClass: "priority-item" },
+                { text: "Standard", icon: "home" }
+            ]
+        });
+    </script>
+
+### items.attr `Object`
+
+Defines custom HTML attributes of the generated item element.
+
+
+<div class="meta-api-description">
+How do I set custom HTML attributes on generated Drawer items? Configure data attributes, ARIA attributes, titles, IDs, and other DOM attributes for generated drawer navigation elements, add metadata or accessibility settings to side menu items, and control the rendered HTML attributes for individual Drawer entries without writing the full top-level template.
+</div>
+
+#### Example - configure custom item attributes
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                {
+                    text: "Reports",
+                    icon: "chart-bar",
+                    attr: {
+                        "data-section": "reports",
+                        "title": "Open Reports"
+                    }
+                },
+                { text: "Users", icon: "user" }
+            ]
+        });
+    </script>
+
+### items.template `Function`
+
+Sets a custom template function for the item. The implemented items surface supports function values only. The function must return the item markup. If the top-level `template` option is configured, it takes precedence over `items` and per-item templates are not used.
+
+
+<div class="meta-api-description">
+How do I customize the markup of a single Drawer item instead of the whole Drawer? Provide a per-item rendering function for generated drawer entries, override the default HTML of a specific side menu item, return custom markup for an individual Drawer item, and configure item-level rendering for generated navigation while keeping the overall Drawer on the items surface instead of switching to the top-level template.
+</div>
+
+#### Example - use a per-item template function
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            items: [
+                {
+                    text: "Profile",
+                    icon: "user",
+                    template: function(item) {
+                        return "<li data-role='drawer-item'>" +
+                            kendo.ui.icon({ icon: item.icon }) +
+                            "<span class='k-item-text'>" + kendo.htmlEncode(item.text) + "</span>" +
+                            "</li>";
+                    }
+                },
+                { text: "Preferences", icon: "gear" }
+            ]
+        });
+    </script>
+
+### items.miniTemplate `Function`
+
+Sets a custom template function for the item in mini mode. The implemented items surface supports function values only. The function must return the item markup used while the Drawer is collapsed in mini mode. If `mini.template` is configured, it takes precedence over `items.miniTemplate`.
+
+
+<div class="meta-api-description">
+How do I customize a generated Drawer item only in mini mode? Configure a per-item mini-mode rendering function for collapsed drawer navigation, return custom compact markup for individual items when the Drawer is minimized, tailor icon-only or condensed side menu entries per item, and ask how to override mini rendering for specific Drawer items while keeping the full items surface for normal mode.
+</div>
+
+#### Example - use a per-item mini template function
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            mini: {
+                width: 60
+            },
+            items: [
+                {
+                    text: "Inbox",
+                    icon: "inbox",
+                    miniTemplate: function(item) {
+                        return "<li data-role='drawer-item' title='" + kendo.htmlEncode(item.text) + "'>" +
+                            kendo.ui.icon({ icon: item.icon }) +
+                            "</li>";
+                    }
+                },
+                { text: "Archive", icon: "folder" }
+            ]
+        });
+    </script>
+
+### items.items `Array`
+
+Specifies nested child items. The Drawer renders child items recursively by using the same item configuration surface.
+
+
+<div class="meta-api-description">
+How do I create nested or hierarchical Drawer items in Kendo UI for jQuery? Build multilevel drawer navigation with child items, configure recursive side menu structures, add subitems or nested menu entries inside generated Drawer items, and represent parent-child navigation trees in a slide-out menu using nested arrays of item definitions.
+</div>
+
+#### Example - configure nested Drawer items
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            expanded: true,
+            mode: "push",
+            items: [
+                {
+                    text: "Management",
+                    icon: "folder",
+                    items: [
+                        { text: "Team", icon: "user" },
+                        { text: "Projects", icon: "home", selected: true }
+                    ]
+                },
+                { text: "Help", icon: "question-circle" }
+            ]
+        });
+    </script>
+
+### items.expanded `Boolean` *(default: false)*
+
+Toggles the initial expanded state of the item. When set to `true`, the item starts expanded and its child items are visible. Clicking a parent item toggles expand and collapse regardless of this setting.
+
+
+<div class="meta-api-description">
+How do I pre-expand a parent Drawer item with nested children in Kendo UI for jQuery? Configure which parent drawer navigation entries start open or expanded when the widget is rendered, control the default visibility of child items under a parent, initialize a nested drawer item group in an expanded or open state, and manage which hierarchical drawer groups are pre-opened to show their children without requiring user interaction.
+</div>
+
+#### Example - pre-expand a parent item
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            expanded: true,
+            mode: "push",
+            items: [
+                {
+                    text: "Management",
+                    icon: "folder",
+                    expanded: true,
+                    items: [
+                        { text: "Team", icon: "user" },
+                        { text: "Projects", icon: "home" }
+                    ]
+                },
+                { text: "Help", icon: "question-circle" }
+            ]
+        });
+    </script>
+
 ### position `String` *(default: 'left')*
 
 The position of the drawer. Can be `left` (default) or `right`.
@@ -140,7 +488,7 @@ How do I enable keyboard navigation in Kendo UI for jQuery Drawer control? Contr
 
 ### template `String | Function`
 
-Specifies the drawer's content.
+Specifies the drawer's content. When configured, it takes precedence over `items`.
 
 
 <div class="meta-api-description">
@@ -245,7 +593,7 @@ How do I adjust the width of the minimized drawer in Kendo UI for jQuery? Adjust
 
 ### mini.template `String | Function`
 
-Defines a specific template for the Kendo UI Drawer when in mini mode.
+Defines a specific template for the Kendo UI Drawer when in mini mode. When configured, it takes precedence over `items.miniTemplate`.
 
 
 <div class="meta-api-description">
@@ -505,32 +853,66 @@ How to prevent Kendo UI Drawer from showing until user is authenticated? Interce
 
 ### itemClick
 
-Fires when user clicks on item from the Kendo UI Drawer.
+Fires when the user clicks an item in the Kendo UI Drawer.
 
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 <div class="meta-api-description">
-How to prevent default action when an item is clicked in a Kendo UI Drawer? Detect and respond to user clicks on navigation or menu items within a sidebar or drawer interface by capturing item selection events, enabling custom logic execution, application state updates, route navigation, or prevention of default actions when an item is tapped or pressed. This interaction event delivers detailed information about the selected menu entry and the original click event, supporting access to item metadata and DOM event properties for tailored handling of drawer menu actions, item activation callbacks, or intercepting clicks for conditional behaviors in interfaces with slide-out panels or navigation drawers.
+How do I handle Drawer item clicks and get the clicked item data in Kendo UI for jQuery? Detect item selection in generated Drawer navigation, respond to clicks on side menu entries, access the clicked DOM element, retrieve the item configuration object for generated items, determine which Drawer entry was activated, and handle navigation logic or state changes when users click Drawer items rendered from the items surface or a custom template.
 </div>
 
-#### Example
+#### Event Data
+
+##### e.item `jQuery`
+
+The clicked item element.
+
+##### e.dataItem `Object`
+
+The item configuration object for generated items. When the Drawer uses the top-level `template` option, `e.dataItem` is `undefined`.
+
+##### e.sender `kendo.ui.Drawer`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "itemClick" event during initialization
 
     <div id="drawer">
-            <div>Content area content.</div>
-        </div>
-        <script>
-            $(document).ready(function() {
-                var drawerInstance = $("#drawer").kendoDrawer({
-                    mode: "push",
-                    template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-x-logo'></span><span class='item-text'>item 2</span></li></ul>`,
-                    position: 'left',
-                    itemClick: function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-                        console.log("Clicked on the" + e.item.find(".item-text").text());
-                    }
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $("#drawer").kendoDrawer({
+            mode: "push",
+            position: "left",
+            items: [
+                { text: "Home", icon: "home" },
+                { text: "Settings", icon: "gear" }
+            ],
+            itemClick: function(e) {
+                alert("Clicked: " + e.dataItem.text);
+            }
+        });
+    </script>
 
-                }).data("kendoDrawer");
-            });
-        </script>
+#### Example - subscribe to the "itemClick" event after initialization
+
+    <div id="drawer-after-init">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        var drawer = $("#drawer-after-init").kendoDrawer({
+            mode: "push",
+            position: "left",
+            items: [
+                { text: "Projects", icon: "folder" },
+                { text: "Team", icon: "user" }
+            ]
+        }).data("kendoDrawer");
+
+        drawer.bind("itemClick", function(e) {
+            alert("Clicked element text: " + $.trim(e.item.text()));
+        });
+    </script>
 
 ## Fields
 

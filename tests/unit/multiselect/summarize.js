@@ -27,9 +27,25 @@ describe("kendo.ui.MultiSelect summarizeAfter", function() {
 
     it("summarizeAfter: null renders individual chips unchanged", function() {
         populateSelect(5);
-        let ms = new MultiSelect(select, { tagMode: "multiple", animation: false });
+        let ms = new MultiSelect(select, { summarizeAfter: null, tagMode: "multiple", animation: false });
         ms.value(["0","1","2"]);
         assert.equal(ms.tagList.children('.k-chip').length, 3);
+    });
+
+    it("summarizes selections after 10 items by default", function() {
+        populateSelect(11);
+        let ms = new MultiSelect(select, { tagMode: "multiple", animation: false });
+        assert.equal(ms.options.summarizeAfter, 10);
+        ms.value(["0","1","2","3","4","5","6","7","8","9","10"]);
+        assert.equal(ms.tagList.children('.k-chip').length, 11);
+        assert.include(ms.tagList.children('.k-chip').last().text(), "+1");
+    });
+
+    it("does not summarize selections when tagMode is single", function() {
+        populateSelect(11);
+        let ms = new MultiSelect(select, { tagMode: "single", animation: false });
+        ms.value(["0","1","2","3","4","5","6","7","8","9","10"]);
+        assert.equal(ms.options.summarizeAfter, null);
     });
 
     it("summarizeAfter: 3 with 3 items selected renders individual chips (at threshold, not exceeded)", function() {

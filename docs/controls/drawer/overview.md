@@ -17,6 +17,7 @@ The Drawer is a dismissible panel used for navigation in responsive web applicat
 
 * [Display modes]({% slug displaymodes_kendoui_drawer %})–The Drawer provides a set of modes for handling the way the component is displayed.
 * [Interaction modes]({% slug interaction_kendoui_drawer %})–The Drawer provides a set of modes with which the user can interact, and positions in which the component can be rendered.
+* [Items]({% slug items_kendoui_drawer %})–The Drawer enables you to populate its navigation from a data array.
 * [Templates]({% slug templates_kendoui_drawer %})–The Drawer enables you to modify the appearance of its content.
 * [Hierarchy]({% slug hierarchy_kendoui_drawer %})–The Drawer enables you to create a hierarchical structure.
 

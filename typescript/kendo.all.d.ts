@@ -5335,21 +5335,36 @@ declare namespace kendo.ui {
 
     interface DrawerMini {
         width?: number | undefined;
-        template?: string | undefined;
+        template?: string | Function | undefined;
+    }
+
+    interface DrawerItem {
+        text?: string | undefined;
+        icon?: string | undefined;
+        separator?: boolean | undefined;
+        selected?: boolean | undefined;
+        enabled?: boolean | undefined;
+        cssClass?: string | undefined;
+        attr?: { [key: string]: any } | undefined;
+        template?: Function | undefined;
+        miniTemplate?: Function | undefined;
+        items?: DrawerItem[] | undefined;
+        expanded?: boolean | undefined;
     }
 
     interface DrawerOptions {
         name?: string | undefined;
         position?: string | undefined;
         mode?: string | undefined;
-        template?: string | undefined;
+        template?: string | Function | undefined;
         minHeight?: number | undefined;
         mini?: boolean | DrawerMini | undefined;
         swipeToOpen?: boolean | undefined;
         expanded?: boolean | undefined;
+        items?: DrawerItem[] | undefined;
         hide?(e: DrawerHideEvent): void;
         show?(e: DrawerEvent): void;
-        itemClick?(e: DrawerEvent): void;
+        itemClick?(e: DrawerItemClickEvent): void;
         kendoKeydown?(e: DrawerKendoKeydownEvent): void;
     }
     interface DrawerEvent {
@@ -5357,6 +5372,10 @@ declare namespace kendo.ui {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
         item?: JQuery | undefined;
+    }
+
+    interface DrawerItemClickEvent extends DrawerEvent {
+        dataItem?: DrawerItem | undefined;
     }
 
     interface DrawerKendoKeydownEvent extends DrawerEvent {

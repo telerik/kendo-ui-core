@@ -86,7 +86,7 @@ export const __meta__ = {
             List.fn.init.call(that, element, options);
 
             if (that.options.summarizeAfter !== null && that.options.tagMode === "single") {
-                throw new Error("The summarizeAfter and tagMode: 'single' options are not compatible and cannot be used together.");
+                that.options.summarizeAfter = null;
             }
 
             that._optionsMap = {};
@@ -232,7 +232,7 @@ export const __meta__ = {
             adaptiveSubtitle: null,
             selectAll: false,
             checkboxes: false,
-            summarizeAfter: null,
+            summarizeAfter: 10,
         },
 
         events: [
