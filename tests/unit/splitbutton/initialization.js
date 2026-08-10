@@ -230,6 +230,7 @@ describe("SplitButton - disabled states", function() {
         assert.isOk(button.hasClass("k-disabled"));
         assert.include(["disabled", "true"], button.next().attr("disabled"));
         assert.isOk(button.next().hasClass("k-disabled"));
+        assert.equal(button.next().attr("aria-disabled"), "true");
     });
 
     it("SplitButton renders disabled buttons when button has disabled attr", function() {

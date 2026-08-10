@@ -11,10 +11,10 @@ describe("kendo.ui.TextBox ARIA", function() {
         kendo.destroy(Mocha.fixture);
     });
 
-    it("initialization adds an aria-disabled false attribute", function() {
+    it("initialization does not add aria-disabled attribute", function() {
         let textbox = new TextBox(input);
 
-        assert.equal(textbox.element.attr("aria-disabled"), "false");
+        assert.isUndefined(textbox.element.attr("aria-disabled"));
     });
 
     it("initialization adds an aria-disabled true attribute when enable: false", function() {

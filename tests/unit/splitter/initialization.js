@@ -68,8 +68,8 @@ describe("initialization", function() {
 
         let splitbars = splitter.dom.find(".k-splitbar");
 
-        assert.equal(splitbars.eq(0).find("span.k-resize-handle").length, 0);
-        assert.equal(splitbars.eq(1).find("span.k-resize-handle").length, 1);
+        assert.equal(splitbars.eq(0).find("div.k-resize-handle").length, 0);
+        assert.equal(splitbars.eq(1).find("div.k-resize-handle").length, 1);
     });
 
     it("collapsed panes render expand arrow beside them", function() {

@@ -1,5 +1,5 @@
 import '@progress/kendo-ui/src/kendo.button.js';
-import { getButton } from "../../helpers/unit/button.js";
+import { getButton, getSpanButton } from "../../helpers/unit/button.js";
 
 let button;
 
@@ -45,14 +45,14 @@ let button;
             }
         });
 
-        it("initialization adds a button role", function() {
-            button = getButton().kendoButton();
+        it("initialization adds a button role for span button", function() {
+            button = getSpanButton().kendoButton();
 
             assert.equal(button.attr("role"), "button");
         });
 
-        it("initialization adds an aria-disabled false attribute", function() {
-            button = getButton().kendoButton();
+        it("initialization adds an aria-disabled false attribute for span button", function() {
+            button = getSpanButton().kendoButton();
 
             assert.equal(button.attr("aria-disabled"), "false");
         });
@@ -73,8 +73,8 @@ let button;
             assert.equal(button.attr("aria-disabled"), "true");
         });
 
-        it("enable(true) sets an aria-disabled false attribute", function() {
-            button = getButton().kendoButton({
+        it("enable(true) sets an aria-disabled false attribute for span button", function() {
+            button = getSpanButton().kendoButton({
                 enable: false
             });
 
@@ -91,6 +91,31 @@ let button;
             button.data("kendoButton").enable(false);
 
             assert.equal(button.attr("aria-disabled"), "true");
+        });
+
+        it("icon-only button has aria-label", function() {
+            button = getButton("").kendoButton({
+                icon: "folder"
+            });
+
+            assert.equal(button.attr("aria-label"), "Folder");
+        });
+
+        it("icon-only button preserves explicit aria-label", function() {
+            button = getButton("");
+            button.attr("aria-label", "My Folder Label");
+            button.kendoButton({
+                icon: "folder"
+            });
+
+            assert.equal(button.attr("aria-label"), "My Folder Label");
+        });
+
+        it("enabled native button does not add aria-disabled and role", function() {
+            button = getButton().kendoButton();
+
+            assert.isUndefined(button.attr("aria-disabled"));
+            assert.isUndefined(button.attr("role"));
         });
     });
 

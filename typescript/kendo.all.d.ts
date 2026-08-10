@@ -6876,6 +6876,7 @@ declare namespace kendo.ui {
         contrastTool?: boolean | FlatColorPickerContrastTool | undefined;
         format?: string | undefined;
         formats?: any | undefined;
+        palette?: string | any | undefined;
         view?: string | undefined;
         views?: any | undefined;
         size?: string | undefined;

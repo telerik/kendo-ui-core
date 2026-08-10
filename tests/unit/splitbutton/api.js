@@ -22,11 +22,19 @@ describe("SplitButton api methods", function() {
 
         assert.isOk(button.prop("disabled"));
         assert.isOk(button.next().prop("disabled"));
+        assert.equal(button.next().attr("aria-disabled"), "true");
 
         splitButton.enable();
 
         assert.isNotOk(button.prop("disabled"));
         assert.isNotOk(button.next().prop("disabled"));
+        assert.equal(button.next().attr("aria-disabled"), undefined);
+
+        splitButton.enable(false);
+
+        assert.isOk(button.prop("disabled"));
+        assert.isOk(button.next().prop("disabled"));
+        assert.equal(button.next().attr("aria-disabled"), "true");
     });
 
     it("SplitButton enable toggles the state of the button and its items", function() {

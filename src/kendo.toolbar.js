@@ -29,6 +29,7 @@ export const __meta__ = {
         MENU_BUTTON = "k-menu-button",
         POPUP_BUTTON = "k-popup-button",
         KSEPARATOR = "k-toolbar-separator k-separator",
+        SECTION_TOOLBAR = "k-toolbar-section",
         SPACER_CLASS = "k-spacer",
         UPLOAD_BUTTON = "k-upload-button",
         POPUP = "k-popup",
@@ -56,6 +57,8 @@ export const __meta__ = {
 
         ARIA_DISABLED = "aria-disabled",
         ARIA_CHECKED = "aria-checked",
+        ARIA_EXPANDED = "aria-expanded",
+        ARIA_HIDDEN = "aria-hidden",
         ARIA_LABEL = "aria-label",
 
         CHANGE = "change",
@@ -138,8 +141,8 @@ export const __meta__ = {
     var POPUP_BUTTON_TEMPLATE = `<button class="k-popup-button"><span class="k-button-icon k-icon"></span><span class="k-button-text">${kendo.ui.icon("chevron-down")}</span></button>`;
     var TEMPLATE_WRAPPER = "<div class='k-toolbar-item' aria-keyshortcuts='Enter'></div>";
     var CUSTOM_WIDGET_WRAP = "<span class='k-toolbar-item' tabindex='0' ref-toolbar-tool >";
-    var SEPARATOR_OVERFLOW_EL = "<li role='separator' class='k-separator k-menu-separator k-hidden'></li>";
-    var SEPARATOR_EL = '<div role="separator">&nbsp;</div>';
+    var SEPARATOR_OVERFLOW_EL = "<li class='k-separator k-menu-separator k-hidden'></li>";
+    var SEPARATOR_EL = '<div>&nbsp;</div>';
     var SPACER_EL = '<div>&nbsp;</div>';
 
     var ToolBar = Widget.extend({
@@ -155,6 +158,7 @@ export const __meta__ = {
             element.attr(KENDO_UID_ATTR, this.uid);
             element.addClass(KTOOLBAR);
             element.attr(ROLE, TOOLBAR);
+            element.attr(ARIA_LABEL, element.attr(ARIA_LABEL) || "Toolbar");
 
             if (options.resizable) {
                 this.hasOverflowButton = ["section", "menu"].includes(this.options.overflow?.mode);
@@ -295,7 +299,9 @@ export const __meta__ = {
             const that = this;
             const isHidden = that.options.overflow.scrollButtons === "hidden";
 
-            that.element.removeClass("k-toolbar-scrollable");
+            if (that.options.overflow?.mode !== "scroll") {
+                that.element.removeClass("k-toolbar-scrollable");
+            }
 
             if (isHidden) {
                 that.element.removeClass("k-toolbar-scrollable-overlay");
@@ -361,6 +367,9 @@ export const __meta__ = {
 
                     scrollPrevButton = that._scrollPrevButton = that.element.children(".k-toolbar-prev");
                     scrollNextButton = that._scrollNextButton = that.element.children(".k-toolbar-next");
+
+                    scrollPrevButton.attr(ARIA_HIDDEN, "true");
+                    scrollNextButton.attr(ARIA_HIDDEN, "true");
 
                     scrollPrevButton.on(mouseDown + ns, function() {
                         that._nowScrollingTabs = true;
@@ -1052,7 +1061,6 @@ export const __meta__ = {
             const id = options.id;
 
             separator.addClass(KSEPARATOR);
-            separator.attr(ROLE, SEPARATOR);
 
             if (this.overflowAnchor && this.overflowAnchorSeparator) {
                 separator.insertBefore(this.overflowAnchorSeparator);
@@ -1076,7 +1084,6 @@ export const __meta__ = {
                 const sectionSeparator = $(SEPARATOR_EL)
                     .addClass(KSEPARATOR)
                     .addClass(STATE_HIDDEN)
-                    .attr(ROLE, SEPARATOR)
                     .attr("ref-section-tool", options.uid);
 
                 let sectionSeparatorOptions = id ? $.extend(true, options, { id: id + DASH + "section-overflow" }) : options;
@@ -1989,8 +1996,9 @@ export const __meta__ = {
                 return;
             }
 
-            that.overflowAnchorSeparator = $(`<div class="k-toolbar-separator k-toolbar-button-separator k-separator" ${ROLE}="${SEPARATOR}"></div>`);
-            that.overflowAnchor = $("<button class='k-toolbar-overflow-button' title='More tools'>");
+            that.overflowAnchorSeparator = $(`<div class="k-toolbar-separator k-toolbar-button-separator k-separator"></div>`);
+            that.overflowAnchor = $("<button class='k-toolbar-overflow-button k-rounded-none' title='More tools' aria-haspopup='menu'>");
+            that.overflowAnchor.attr(ARIA_EXPANDED, "false");
             that.overflowAnchor.attr(ITEM_REF + TOOLBAR_TOOL, '');
             that.element.append(that.overflowAnchorSeparator);
             that.element.append(that.overflowAnchor);
@@ -2021,6 +2029,7 @@ export const __meta__ = {
                             return e.preventDefault();
                         }
 
+                        that.overflowAnchor.attr(ARIA_EXPANDED, "true");
                         that.overflowSection.element.width(that.element.outerWidth());
                     },
                     activate: function(e) {
@@ -2033,6 +2042,7 @@ export const __meta__ = {
                         if (that.trigger(OVERFLOW_CLOSE)) {
                             e.preventDefault();
                         } else {
+                            that.overflowAnchor.attr(ARIA_EXPANDED, "false");
                             that._resetTabIndex(that.overflowAnchor);
                             that.overflowAnchor.trigger(FOCUS);
                         }
@@ -2051,12 +2061,15 @@ export const __meta__ = {
                     open: function(e) {
                         if (that.trigger(OVERFLOW_OPEN)) {
                             e.preventDefault();
+                        } else {
+                            that.overflowAnchor.attr(ARIA_EXPANDED, "true");
                         }
                     },
                     close: function(e) {
                         if (that.trigger(OVERFLOW_CLOSE)) {
                             e.preventDefault();
                         } else {
+                            that.overflowAnchor.attr(ARIA_EXPANDED, "false");
                             that._resetTabIndex(that.overflowAnchor);
                             that.overflowAnchor.trigger(FOCUS);
                         }
@@ -2080,7 +2093,7 @@ export const __meta__ = {
             uploadWrapper = element.wrap("<div class='k-upload-button-wrap'></span>").parent();
 
             input = $("<input type='file' autocomplete='off' accept='" + extensions + "'/>")
-                .attr("aria-hidden", true)
+                .attr(ARIA_HIDDEN, true)
                 .one("change", (e) => {
                     that.trigger(CHANGE, {
                         target: element,
@@ -2109,10 +2122,16 @@ export const __meta__ = {
 
         _resizable: function() {
             var that = this,
-                element = that.element;
+                element = that.element,
+                overflowMode = that.options.overflow?.mode;
 
             that._renderOverflow();
-            element.addClass(RESIZABLE_TOOLBAR);
+
+            if (overflowMode == "section") {
+                element.addClass(SECTION_TOOLBAR);
+            } else if (overflowMode != "scroll") {
+                element.addClass(RESIZABLE_TOOLBAR);
+            }
 
             that._resizeHandler = kendo.onResize(function() {
                 that.resize();

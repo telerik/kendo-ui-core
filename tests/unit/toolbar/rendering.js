@@ -1520,6 +1520,42 @@ describe("Toolbar rendering:", function() {
         assert.isOk(!container.hasClass("k-toolbar-resizable"));
     });
 
+    it("section overflow toolbar receives k-toolbar-section class", function() {
+        container.kendoToolBar({
+            overflow: { mode: "section" },
+            items: [
+                { type: "button", text: "Action", overflow: "always" }
+            ]
+        });
+
+        assert.isOk(container.hasClass("k-toolbar-section"));
+    });
+
+    it("section overflow toolbar does not receive k-toolbar-resizable class", function() {
+        container.kendoToolBar({
+            overflow: { mode: "section" },
+            items: [
+                { type: "button", text: "Action", overflow: "always" }
+            ]
+        });
+
+        assert.isNotOk(container.hasClass("k-toolbar-resizable"));
+    });
+
+    it("scroll overflow toolbar receives k-toolbar-scrollable class and not k-toolbar-resizable", function() {
+        container.kendoToolBar({
+            overflow: { mode: "scroll", scrollButtons: "visible" },
+            items: [
+                { type: "button", text: "One" },
+                { type: "button", text: "Two" },
+                { type: "button", text: "Three" }
+            ]
+        });
+
+        assert.isOk(container.hasClass("k-toolbar-scrollable"));
+        assert.isNotOk(container.hasClass("k-toolbar-resizable"));
+    });
+
     it("renders overflow anchor", function() {
         container.kendoToolBar();
 

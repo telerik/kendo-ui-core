@@ -133,6 +133,10 @@ export const __meta__ = {
             that.element.toggleClass(styles.shadow, options.shadow);
             that._itemFlow(options.itemFlow);
 
+            if (!that.element.attr("aria-label")) {
+                that.element.attr("aria-label", "Bottom navigation");
+            }
+
             that._applyCssClasses();
         },
 
@@ -169,16 +173,25 @@ export const __meta__ = {
             var that = this,
                 itemTemplate = item.template || that.options.template,
                 isLink = item.url && isString(item.url),
+                attributes,
                 elm, icon;
+
+            attributes = extend({}, item.attributes);
+
+            if (item.enabled === false) {
+                attributes["aria-disabled"] = true;
+            }
+
+            if (item.selected === true) {
+                attributes["aria-current"] = true;
+            }
 
             elm = $(isLink ? template(templates.anchor)(item) : template(templates.item)(item));
 
             elm.toggleClass(bottomNavigationStyles.selected, item.selected === true)
                 .toggleClass(bottomNavigationStyles.disabled, item.enabled === false)
                 .addClass(item.cssClass)
-                .attr(extend({}, item.attributes, {
-                    "aria-disabled": item.enabled === false
-                }))
+                .attr(attributes)
                 .data(item.data);
 
             that._tabindex(elm);
@@ -197,12 +210,16 @@ export const __meta__ = {
             }, item);
 
             icon = $(templates.icon(item)).addClass(item.iconClass);
+            icon.attr("aria-hidden", "true");
+            icon.find("svg").attr("aria-hidden", "true");
 
             elm.append(icon);
 
             if (item.text) {
                 item.text = item.encoded === false ? item.text : kendo.htmlEncode(item.text);
                 elm.append($(templates.text(item)));
+            } else if (item.icon && !elm.attr("aria-label")) {
+                elm.attr("aria-label", item.icon);
             }
 
             return elm;
@@ -289,7 +306,14 @@ export const __meta__ = {
 
             if (that._isItem(item)) {
                 selectedItem.removeClass(bottomNavigationStyles.selected);
+                selectedItem.removeAttr("aria-current");
                 $(item).toggleClass(bottomNavigationStyles.selected, state);
+
+                if (state) {
+                    $(item).attr("aria-current", "true");
+                } else {
+                    $(item).removeAttr("aria-current");
+                }
             }
         },
 
@@ -300,7 +324,12 @@ export const __meta__ = {
 
             if (item && that._isItem(item)) {
                 $(item).toggleClass(bottomNavigationStyles.disabled, state);
-                $(item).attr("aria-disabled", state);
+
+                if (state) {
+                    $(item).attr("aria-disabled", "true");
+                } else {
+                    $(item).removeAttr("aria-disabled");
+                }
             }
         },
 

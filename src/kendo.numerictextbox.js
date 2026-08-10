@@ -39,13 +39,11 @@ export const __meta__ = {
         FOCUS = "focus",
         POINT = ".",
         SYMBOL = "symbol",
-        CLASS_ICON = "k-icon",
         LABELCLASSES = "k-label k-input-label",
         FLOATINGLABELCLASS = "k-floating-label",
         SELECTED = "k-selected",
         STATEDISABLED = "k-disabled",
         STATEINVALID = "k-invalid",
-        ARIA_DISABLED = "aria-disabled",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
         isPlainObject = $.isPlainObject,
@@ -62,8 +60,7 @@ export const __meta__ = {
 
              options = that.options;
              element = that.element
-                           .on("focusout" + ns, that._focusout.bind(that))
-                           .attr("role", "spinbutton");
+                           .on("focusout" + ns, that._focusout.bind(that));
 
              options.placeholder = options.placeholder || element.attr("placeholder");
              options.inputMode = options.inputMode || element.attr("inputmode") || "text";
@@ -209,9 +206,13 @@ export const __meta__ = {
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
+                that._upArrow
+                    .add(that._downArrow)
+                    .removeClass(STATEDISABLED)
+                    .prop(DISABLED, false);
+
                 text.prop(DISABLED, false)
-                    .prop(READONLY, false)
-                    .attr(ARIA_DISABLED, false);
+                    .prop(READONLY, false);
 
                 that._upArrowEventHandler.bind("press", function(e) {
                     e.preventDefault();
@@ -240,9 +241,13 @@ export const __meta__ = {
                     .addClass(disable ? STATEDISABLED : "")
                     .removeClass(disable ? "" : STATEDISABLED);
 
+                that._upArrow
+                    .add(that._downArrow)
+                    .toggleClass(STATEDISABLED, !!disable)
+                    .prop(DISABLED, !!disable);
+
                 text.attr(DISABLED, disable)
-                    .attr(READONLY, readonly)
-                    .attr(ARIA_DISABLED, disable);
+                    .attr(READONLY, readonly);
             }
         },
 
@@ -1008,7 +1013,7 @@ export const __meta__ = {
         var className = direction === "increase" ? "chevron-up" : "chevron-down";
         var dir = direction === "increase" ? "increase" : "decrease";
 
-        return html.renderButton('<button role="button" tabindex="-1" unselectable="on" class="k-spinner-' + dir + '" aria-label="' + text + '" title="' + text + '"></button>', extend({}, options, {
+        return html.renderButton('<button tabindex="-1" unselectable="on" class="k-spinner-' + dir + '" aria-label="' + text + '" title="' + text + '"></button>', extend({}, options, {
             icon: className,
             shape: null,
             rounded: null

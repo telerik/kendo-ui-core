@@ -189,4 +189,14 @@ describe("kendo.ui.tooltip aria", function() {
 
         await vi.waitUntil(() => !tooltip.popup.element.filter("[aria-hidden=true]").length);
     });
+
+    it("aria hidden attribute is absent when popup is visible", async function() {
+        let tooltip = new Tooltip(container, {});
+
+        tooltip.show(container);
+
+        await vi.waitUntil(() => tooltip.popup.visible());
+
+        assert.isOk(!tooltip.popup.element.attr("aria-hidden"));
+    });
 });

@@ -303,18 +303,18 @@ import "../kendo.html.button.js";
 
             return kendo.template((options, buttonOptions) =>
                     '<div class="k-coloreditor-header k-hstack">' +
-                        ((options.views && options.views.length > 1) ?
                         '<div class="k-coloreditor-header-actions k-hstack">' +
+                            ((options.views && options.views.length > 1) ?
                             '<div role="group" class="k-button-group k-button-group-flat">' +
-                                html.renderButton(`<button aria-pressed="false" data-view="gradient" title="${encode(options.messages.gradient)}"></button>`, extend({ icon: "droplet-slider" }, buttonOptions)) +
-                                html.renderButton(`<button aria-pressed="false" data-view="palette" title="${encode(options.messages.palette)}"></button>`, extend({ icon: "palette" }, buttonOptions)) +
-                            '</div>' +
-                        '</div>'
-                        : '') +
+                                html.renderButton(`<button aria-label="${encode(options.messages.gradient)}" aria-pressed="false" data-view="gradient" title="${encode(options.messages.gradient)}"></button>`, extend({ icon: "droplet-slider" }, buttonOptions)) +
+                                html.renderButton(`<button aria-label="${encode(options.messages.palette)}" aria-pressed="false" data-view="palette" title="${encode(options.messages.palette)}"></button>`, extend({ icon: "palette" }, buttonOptions)) +
+                            '</div>'
+                            : '') +
+                        '</div>' +
                         '<div class="k-spacer"></div>' +
                         '<div class="k-coloreditor-header-actions k-hstack">' +
                             (options.clearButton ?
-                            html.renderButton(`<button data-command="reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "droplet-slash" }, buttonOptions))
+                            html.renderButton(`<button aria-label="${encode(options.messages.clearColor)}" data-command="reset" title="${encode(options.messages.clearColor)}"></button>`, extend({ icon: "droplet-slash" }, buttonOptions))
                             : '') +
                             (options.preview ?
                             '<div class="k-coloreditor-preview k-vstack">' +

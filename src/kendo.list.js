@@ -1364,8 +1364,8 @@ export const __meta__ = {
 
             list.popup = new ui.ActionSheet(list.list.parent(), {
                 headerTemplate: (options) =>
-                `<div class="k-text-center k-actionsheet-titlebar" >` +
-                        '<div class="k-actionsheet-titlebar-group k-hbox">' +
+                `<div class="k-actionsheet-titlebar">` +
+                        '<div class="k-actionsheet-titlebar-group">' +
                             `<div  class="k-actionsheet-title">` +
                                 (list.options.adaptiveTitle || list.options.label ? `<div class="k-text-center">${list.options.adaptiveTitle || list.options.label}</div>` : '') +
                                 (list.options.adaptiveSubtitle ? `<div class="k-actionsheet-subtitle k-text-center">${list.options.adaptiveSubtitle || ""}</div>` : "") +

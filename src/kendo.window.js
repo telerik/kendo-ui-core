@@ -1849,7 +1849,7 @@ import "./kendo.html.button.js";
                 let iconName = (icon || "").toLowerCase() || name.toLowerCase();
                 if (iconName == "restore") { iconName = "window-restore"; }
 
-                return kendo.html.renderButton(`<button role='button' class='k-window-titlebar-action' aria-label='${name}'></button>`, { icon: iconName, fillMode: "flat", size: "xsmall" });
+                return kendo.html.renderButton(`<button class='k-window-titlebar-action' aria-label='${name}'></button>`, { icon: iconName, fillMode: "flat", size: "xsmall" });
             }),
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar'>" +

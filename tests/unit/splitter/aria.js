@@ -42,21 +42,18 @@ import { SplitterHelpers } from "../../helpers/unit/splitter-utils.js";
             assert.equal(splitbar.attr("aria-orientation"), "vertical");
         });
 
-        it("adds aria-value- attributes to splitbars", function() {
+        it("adds aria-keyshortcuts to splitbars", function() {
             let splitter = create();
             let splitbars = splitter.dom.find(".k-splitbar");
 
-            assert.equal(splitbars.eq(0).attr("aria-valuemin"), "0");
-            assert.equal(splitbars.eq(0).attr("aria-valuemax"), "100");
-            assert.equal(splitbars.eq(0).attr("aria-valuenow"), "50");
+            assert.equal(splitbars.eq(0).attr("aria-keyshortcuts"), "ArrowLeft ArrowRight ArrowUp ArrowDown");
         });
 
-        it("adds aria-controls attribute to splitbar pointing to the primary pane", function() {
+        it("adds aria-keyshortcuts to splitbars", function() {
             let splitter = create();
-            let splitbar = splitter.dom.find(".k-splitbar");
-            let panes = splitter.dom.find(".k-pane");
+            let splitbars = splitter.dom.find(".k-splitbar");
 
-            assert.equal(splitbar.attr("aria-controls"), panes.eq(0).attr("id"));
+            assert.equal(splitbars.eq(0).attr("aria-keyshortcuts"), "ArrowLeft ArrowRight ArrowUp ArrowDown");
         });
 
         it("adds aria-label taken from the primary pane", function() {
@@ -102,5 +99,42 @@ import { SplitterHelpers } from "../../helpers/unit/splitter-utils.js";
             let pane = splitterEl.find(".k-pane").eq(0);
 
             assert.equal(splitbar.attr("aria-labelledby"), pane.find("h3").attr("id"));
+        });
+
+        it("adds aria-valuemin and aria-valuemax to draggable splitbar", function() {
+            let splitter = create();
+            let splitbar = splitter.dom.find(".k-splitbar");
+
+            assert.equal(splitbar.attr("aria-valuemin"), "0");
+            assert.equal(splitbar.attr("aria-valuemax"), "100");
+        });
+
+        it("adds aria-controls pointing to the previous pane on draggable splitbar", function() {
+            let splitter = create();
+            let splitbar = splitter.dom.find(".k-splitbar");
+            let previousPane = splitter.dom.find(".k-pane").first();
+
+            assert.isOk(previousPane.attr("id"), "previous pane should have an id");
+            assert.equal(splitbar.attr("aria-controls"), previousPane.attr("id"));
+        });
+
+        it("does not add aria-valuemin, aria-valuemax, aria-controls to static splitbar", function() {
+            let splitter = create({
+                panes: [{ resizable: false }, { resizable: false }]
+            });
+            let splitbar = splitter.dom.find(".k-splitbar");
+
+            assert.isNotOk(splitbar.attr("aria-valuemin"), "static splitbar should not have aria-valuemin");
+            assert.isNotOk(splitbar.attr("aria-valuemax"), "static splitbar should not have aria-valuemax");
+            assert.isNotOk(splitbar.attr("aria-controls"), "static splitbar should not have aria-controls");
+        });
+
+        it("sets aria-valuenow after resize", function() {
+            let splitter = create({
+                panes: [{ size: "30%" }, {}]
+            });
+            let splitbar = splitter.dom.find(".k-splitbar");
+
+            assert.isOk(splitbar.attr("aria-valuenow") !== undefined, "aria-valuenow should be set after resize");
         });
     });

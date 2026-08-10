@@ -48,6 +48,7 @@ export const __meta__ = {
             iconClass: "",
             spriteCssClass: "",
             imageUrl: "",
+            autoAriaLabel: false,
             size: undefined,
             rounded: undefined,
             fillMode: undefined,
@@ -62,6 +63,7 @@ export const __meta__ = {
                 iconClass = options.iconClass,
                 spriteCssClass = options.spriteCssClass,
                 imageUrl = options.imageUrl,
+                labelText,
                 span, img, isEmpty;
 
             if (spriteCssClass || imageUrl || icon || iconClass) {
@@ -78,6 +80,20 @@ export const __meta__ = {
 
             if (isEmpty) {
                 that.element.addClass("k-icon-button");
+
+                if (options.autoAriaLabel !== false && !element.attr("aria-label")) {
+                    labelText = icon;
+
+                    if (!labelText && iconClass) {
+                        labelText = (iconClass.match(/k-i-([\w-]+)/) || [])[1];
+                    }
+
+                    if (labelText) {
+                        labelText = labelText.replace(/-/g, " ");
+                        labelText = labelText.charAt(0).toUpperCase() + labelText.slice(1);
+                        element.attr("aria-label", labelText);
+                    }
+                }
             }
 
             if (imageUrl) {

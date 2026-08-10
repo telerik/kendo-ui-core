@@ -173,6 +173,84 @@ describe("kendo.ui.Calendar ARIA", function() {
         assert.equal(div.find(".k-calendar-nav-fast").attr("tabindex"), -1);
     });
 
+    it("Calendar sets aria-label on the title button", function() {
+        let titleText = instance._view.title(instance._current, instance.options.min, instance.options.max, kendo.culture().name);
+        assert.equal(instance._title.attr("aria-label"), "Navigate to parent view: " + titleText);
+    });
+
+    it("Calendar removes aria-disabled from title when not at century view", function() {
+        instance.navigate(instance.options.max, "century");
+        assert.equal(instance._title.attr("aria-disabled"), "true");
+
+        instance.navigateDown(instance._current);
+        assert.isUndefined(instance._title.attr("aria-disabled"));
+    });
+
+    it("Calendar removes aria-disabled from prev arrow when not at min", function() {
+        instance.navigate(instance.options.min);
+        assert.equal(instance._prevArrow.attr("aria-disabled"), "true");
+
+        instance.navigate(new Date());
+        assert.isUndefined(instance._prevArrow.attr("aria-disabled"));
+    });
+
+    it("Calendar removes aria-disabled from next arrow when not at max", function() {
+        instance.navigate(instance.options.max);
+        assert.equal(instance._nextArrow.attr("aria-disabled"), "true");
+
+        instance.navigate(new Date());
+        assert.isUndefined(instance._nextArrow.attr("aria-disabled"));
+    });
+
+    it("Calendar adds aria-disabled to disabled date cells in month view", function() {
+        instance.setOptions({ disableDates: ["mo"] });
+        let disabledCells = div.find("td[aria-disabled='true']");
+        assert.isOk(disabledCells.length > 0);
+    });
+
+    it("Calendar table has role='grid' in month view", function() {
+        let table = div.find("table.k-calendar-table");
+        assert.equal(table.attr("role"), "grid");
+    });
+
+    it("Calendar thead has role='rowgroup'", function() {
+        assert.equal(div.find("thead.k-calendar-thead").attr("role"), "rowgroup");
+    });
+
+    it("Calendar tbody has role='rowgroup'", function() {
+        div.find("tbody.k-calendar-tbody").each(function(i, tbody) {
+            assert.equal(tbody.getAttribute("role"), "rowgroup");
+        });
+    });
+
+    it("Calendar today button has no role attribute", function() {
+        assert.isUndefined(div.find(".k-calendar-nav-today").attr("role"));
+    });
+
+});
+
+describe("kendo.ui.Calendar ARIA modern", function() {
+    beforeEach(function() {
+        div = $("<div id='test' />").appendTo(Mocha.fixture);
+        instance = new Calendar(div, { componentType: "modern" });
+    });
+    afterEach(function() {
+        instance.destroy();
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("modern Calendar sets aria-label on prev button using navigateToPast message", function() {
+        assert.equal(instance._prevArrow.attr("aria-label"), instance.options.messages.navigateToPast);
+    });
+
+    it("modern Calendar sets aria-label on next button using navigateToFuture message", function() {
+        assert.equal(instance._nextArrow.attr("aria-label"), instance.options.messages.navigateToFuture);
+    });
+
+    it("modern Calendar today button has no role attribute", function() {
+        assert.isUndefined(div.find(".k-calendar-nav-today").attr("role"));
+    });
+
 });
 
 describe("kendo.ui.Calendar aria with AXE", function() {

@@ -45,9 +45,11 @@ import "./kendo.html.button.js";
                 element = that.wrapper = that.element;
                 options = that.options;
 
-                html.renderButton(element, $.extend({}, options));
+                html.renderButton(element, $.extend({}, options, { autoAriaLabel: true }));
 
-                element.attr("role", "button");
+                if (!that._isNativeButton()) {
+                    element.attr("role", "button");
+                }
 
                 options.enable = options.enable && options.enabled && !element.attr(DISABLED);
                 that.enable(options.enable);
@@ -167,9 +169,21 @@ import "./kendo.html.button.js";
 
                 enable = !!enable;
                 that.options.enable = enable;
-                element.toggleClass(DISABLEDSTATE, !enable)
-                    .attr("aria-disabled", !enable)
-                    .attr(DISABLED, !enable);
+                element.toggleClass(DISABLEDSTATE, !enable);
+
+                if (that._isNativeButton()) {
+                    element.attr(DISABLED, !enable);
+
+                    if (enable) {
+                        element.removeAttr("aria-disabled");
+                    } else {
+                        element.attr("aria-disabled", true);
+                    }
+                } else {
+                    element
+                        .attr("aria-disabled", !enable)
+                        .attr(DISABLED, !enable);
+                }
 
                 if (enable) {
                     that._tabindex();

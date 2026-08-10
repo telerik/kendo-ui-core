@@ -18,7 +18,7 @@ Because Telerik UI for ASP.NET MVC is powered by Kendo UI, check the [general ar
 
 #### Kendo.Mvc.Examples upgraded to 4.6.2
 
-The examples project is 4.6.2 targetFramework. Installation of Microsoft .NET Framework 4.6.2 is required. If you cannot install it, you could switch the targetFramework to 4.5 and run the examples without using `Telerik.Web.PDF` dependency. `Telerik.Web.PDF` is a netstandard project that uses DPL libraries to convert PDF documents into json that is utilized by the PDFViewer component.
+The examples project is 4.6.2 targetFramework. Installation of Microsoft .NET Framework 4.6.2 is required. If you cannot install it, you could switch the targetFramework to 4.5 and run the examples without using `Telerik.Pdf.Web` dependency. `Telerik.Pdf.Web` is a netstandard project that uses DPL libraries to convert PDF documents into json that is utilized by the PDFViewer component.
 
 #### I Am Still Getting the Old Version
 

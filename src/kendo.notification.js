@@ -40,7 +40,7 @@ export const __meta__ = {
         RIGHT = "right",
         UP = "up",
         NS = ".kendoNotification",
-        WRAPPER = '<div role="alert" aria-live="polite" class="k-notification"></div>',
+        WRAPPER = '<div role="status" aria-live="polite" class="k-notification"></div>',
         GET_TEMPLATE_FUNC = (encodeContent) =>
             ({ typeIcon, content, closeButton }) =>
                 (typeIcon && (TYPEICONS[encode(typeIcon)] || encode(typeIcon)) ? kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) : '') +
@@ -392,8 +392,6 @@ export const __meta__ = {
                 type = BASE;
                 typeClass = "";
             }
-
-            wrapper.attr("aria-label", type);
 
             if (content !== null && content !== undefined && content !== "") {
 

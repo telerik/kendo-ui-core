@@ -13,7 +13,7 @@ You can configure the PDFViewer to use the [Telerik Document Processing library]
 
 ## Requirements
 
-* DPL Processing depends on the `Telerik.Web.PDF` assembly.
+* DPL Processing depends on the `Telerik.Pdf.Web` assembly.
 * To use DPL Processing in a project, it must target 4.6.2 .NET Framework.
 * The `Read.Url` option is mandatory, the `open` and `download` options are mandatory if the respective tools are displayed in the toolbar.
 

@@ -165,6 +165,43 @@ describe('kendo.ui.Badge content', function() {
         assert.equal(badge.text(), undefined);
         assert.equal(badge.element.find(".k-badge-icon").length, 1);
     });
+
+    it('badge.icon(svg) applies aria-hidden to icon wrapper and svg', function() {
+        badge = new Badge(span);
+
+        badge.icon('<svg id="raw-svg-test" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"></path></svg>');
+
+        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
+        assert.equal(badge.element.find('#raw-svg-test').attr('aria-hidden'), 'true');
+    });
+
+    it('badge.icon(svg) preserves existing aria-hidden false on svg', function() {
+        badge = new Badge(span);
+
+        badge.icon('<svg id="raw-svg-false" aria-hidden="false" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"></path></svg>');
+
+        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
+        assert.equal(badge.element.find('#raw-svg-false').attr('aria-hidden'), 'false');
+    });
+
+    it('badge.icon(svg) preserves existing aria-hidden true on svg', function() {
+        badge = new Badge(span);
+
+        badge.icon('<svg id="raw-svg-true" aria-hidden="true" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"></path></svg>');
+
+        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
+        assert.equal(badge.element.find('#raw-svg-true').attr('aria-hidden'), 'true');
+    });
+
+    it('badge.icon(svg) adds aria-hidden to root when only nested elements have it', function() {
+        badge = new Badge(span);
+
+        badge.icon('<svg id="raw-svg-nested" viewBox="0 0 10 10"><g aria-hidden="false"><path d="M0 0h10v10H0z"></path></g></svg>');
+
+        assert.equal(badge.element.find('.k-badge-icon').attr('aria-hidden'), 'true');
+        assert.equal(badge.element.find('#raw-svg-nested').attr('aria-hidden'), 'true');
+        assert.equal(badge.element.find('#raw-svg-nested g').attr('aria-hidden'), 'false');
+    });
     // #endregion
 
 

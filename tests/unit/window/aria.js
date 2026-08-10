@@ -120,17 +120,6 @@ describe("initialization", function() {
         );
     });
 
-    it("Window adds role button to the titlebar buttons", function() {
-        let wnd = createWindow(
-            { title: "Test", visible: true },
-            $("<div id='window'>Content</div>")
-        );
-        assert.equal(
-            wnd.wrapper.find(".k-window-titlebar-action").attr("role"),
-            "button"
-        );
-    });
-
     it("Window adds aria-hidden='true' on resize handles", function() {
         let wnd = createWindow(
             { title: "Test", resizable: true },

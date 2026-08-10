@@ -197,6 +197,7 @@ describe("kendo.ui.ActionSheet initialization", function() {
     it("widget should instanciate a popup", function() {
         createInstance();
         assert.isOk(instance.popup instanceof kendo.ui.Popup);
+        assert.isFalse(instance.element.hasClass("k-popup"));
     });
 
     it("widget should have a header when a title is specified", function() {

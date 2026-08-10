@@ -623,6 +623,32 @@ describe("kendo.ui.tooltip", function() {
         assert.isOk(!tooltip.popup.visible());
     });
 
+    it("pressing enter on the close button hides the tooltip", async function() {
+        let tooltip = new Tooltip(container, {
+            autoHide: false
+        });
+
+        tooltip.show(container);
+
+        tooltip.popup.element.find(".k-tooltip-button").press(kendo.keys.ENTER);
+
+        await vi.waitUntil(() => !tooltip.popup.visible());
+        assert.isOk(!tooltip.popup.visible());
+    });
+
+    it("pressing space on the close button hides the tooltip", async function() {
+        let tooltip = new Tooltip(container, {
+            autoHide: false
+        });
+
+        tooltip.show(container);
+
+        tooltip.popup.element.find(".k-tooltip-button").press(kendo.keys.SPACEBAR);
+
+        await vi.waitUntil(() => !tooltip.popup.visible());
+        assert.isOk(!tooltip.popup.visible());
+    });
+
     it("animation options are passed to the popup", function() {
         let tooltip = new Tooltip(container, {
             animation: {

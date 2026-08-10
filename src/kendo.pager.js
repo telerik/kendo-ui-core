@@ -20,12 +20,12 @@ export const __meta__ = {
         template = kendo.template,
         FIRST = "caret-alt-to-left",
         LAST = "caret-alt-to-right",
-        PREV = "chevron-left",
-        NEXT = "chevron-right",
+        PREV = "caret-alt-left",
+        NEXT = "caret-alt-right",
         FIRST_CONST = "caret-alt-to-left",
         LAST_CONST = "caret-alt-to-right",
-        PREV_CONST = "chevron-left",
-        NEXT_CONST = "chevron-right",
+        PREV_CONST = "caret-alt-left",
+        NEXT_CONST = "caret-alt-right",
         REFRESH = "arrow-rotate-cw",
         FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
@@ -36,7 +36,7 @@ export const __meta__ = {
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = ({ text, wrapClassName, className, size }) => `<button role="button" title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
+        iconTemplate = ({ text, wrapClassName, className, size }) => `<button title="${text}" aria-label="${text}" class="k-pager-nav k-button k-button-flat k-icon-button ${wrapClassName} ${size}">${kendo.ui.icon($('<span class="k-button-icon"></span>'),className)}</button>`;
 
     function button(options) {
         return options.template( {
@@ -62,12 +62,15 @@ export const __meta__ = {
     }
 
     function update(element, className, page, disabled) {
-       element.find(`[class*="-i-${className}"]`)
-              .parent()
-              .attr(kendo.attr("page"), page)
-              .attr("tabindex", disabled ? -1 : 0)
-              .attr("aria-disabled", disabled)
-              .toggleClass("k-disabled", disabled);
+       const btn = element.find(`[class*="-i-${className}"]`).parent();
+       btn.attr(kendo.attr("page"), page)
+          .attr("tabindex", disabled ? -1 : 0)
+          .toggleClass("k-disabled", disabled);
+       if (disabled) {
+           btn.attr("aria-disabled", true);
+       } else {
+           btn.removeAttr("aria-disabled");
+       }
     }
 
     function first(element, page) {
@@ -227,7 +230,7 @@ export const __meta__ = {
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<button role="button" href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-icon-button" title="' + options.messages.refresh +
+                    that.element.append('<button href="#" class="k-pager-refresh k-button ' + buttonSize + ' k-button-flat k-icon-button" title="' + options.messages.refresh +
                         '" aria-label="' + options.messages.refresh + '">' + kendo.ui.icon($('<span class="k-button-icon"></span>'),REFRESH) + '</button>');
                 }
 
@@ -256,6 +259,7 @@ export const __meta__ = {
                 that.refresh();
             }
 
+            that._aria();
             that._resizeHandler = that.resize.bind(that, true);
             $(window).on("resize" + NS, that._resizeHandler);
 
@@ -329,9 +333,9 @@ export const __meta__ = {
         options: {
             name: "Pager",
             adaptiveMode: "none",
-            ARIATemplate: ({ page, totalPages }) => `Page navigation, page ${page} of ${totalPages}`,
-            selectTemplate: ({ text, title, tabindex, size }) => `<button role="button" aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
-            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
+            ARIATemplate: ({ page, totalPages }) => `Page ${page} of ${totalPages}`,
+            selectTemplate: ({ text, title, tabindex, size }) => `<button aria-current="page" tabindex="${tabindex}" aria-label="${title}" class="k-button ${size} k-button-flat k-button-primary k-selected"><span class="k-button-text">${encode(text)}</span></button>`,
+            linkTemplate: ({ ns, idx, text, title, tabindex, size }) => `<button class="k-button ${size} k-button-flat k-button-primary" tabindex="${tabindex}" href="#" data-${ns}page="${idx}" aria-label="${title}" ${title !== "" ? `title="${title}"` : ''}><span class="k-button-text">${encode(text)}</span></button>`,
             numericSelectItemTemplate: ({ idx, selected, text }) => `<option value="${idx}" ${selected ? 'selected="selected"' : '' }>${encode(text)}</option>`,
             buttonCount: 10,
             autoBind: true,
@@ -752,9 +756,6 @@ export const __meta__ = {
         },
 
         _updateAria: function() {
-            if (!this.options.navigatable) {
-                return;
-            }
             this.element.attr("aria-label", this._ariaTemplate({ page: this.page(), totalPages: this.totalPages() }));
         },
 

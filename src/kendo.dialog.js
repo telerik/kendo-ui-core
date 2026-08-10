@@ -165,6 +165,12 @@ import "./kendo.html.button.js";
                     that._triggerOpen();
                 }
 
+                if (options.modal) {
+                    that.wrapper.attr("aria-modal", "true");
+                } else {
+                    that.wrapper.removeAttr("aria-modal");
+                }
+
                 if (typeof options.modal !== "undefined") {
                     that._enableDocumentScrolling();
                 }
@@ -322,6 +328,18 @@ import "./kendo.html.button.js";
 
                 if (options.actions.length) {
                     that._createActionbar(wrapper);
+                }
+
+                if (!content.attr("id")) {
+                    content.attr("id", kendo.guid() + "_k-dialog-content");
+                }
+
+                wrapper.attr("aria-describedby", content.attr("id"));
+
+                if (options.modal) {
+                    wrapper.attr("aria-modal", "true");
+                } else {
+                    wrapper.removeAttr("aria-modal");
                 }
             },
 

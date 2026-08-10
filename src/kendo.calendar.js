@@ -26,7 +26,7 @@ export const __meta__ = {
         template = kendo.template,
         getCulture = kendo.getCulture,
         transitionOrigin = "transform-origin",
-        cellTemplate = template((data) => `<td class="${data.cssClass}" role="gridcell"><span tabindex="-1" class="k-link" data-href="#" data-${data.ns}value="${data.dateString}">${data.value}</span></td>`),
+        cellTemplate = template((data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link" data-href="#" data-${data.ns}value="${data.dateString}">${data.value}</span></td>`),
         emptyCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-empty"></td>'),
         otherMonthCellTemplate = template(() => '<td role="gridcell" class="k-calendar-td k-empty">&nbsp;</td>'),
         weekNumberTemplate = template((data) => `<td class="k-calendar-td k-alt">${data.weekNumber}</td>`),
@@ -93,13 +93,13 @@ export const __meta__ = {
             </button>
             <span class="k-spacer"></span>
             <span class="k-calendar-nav">
-                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button">
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "next" : "prev"} class="k-calendar-nav-prev k-button ${size} k-button-flat k-icon-button" aria-label="${messages.navigateToPast}">
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "right" : "left"}`, iconClass: "k-button-icon" })}
                 </button>
-                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat" role="link">
+                <button tabindex="-1" ${actionAttr}="today" class="k-calendar-nav-today k-button ${size} k-button-flat">
                     <span class="k-button-text">${kendo.htmlEncode(messages.today)}</span>
                 </button>
-                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button">
+                <button tabindex="-1" ${actionAttr}=${isRtl ? "prev" : "next"} class="k-calendar-nav-next k-button ${size} k-button-flat k-icon-button" aria-label="${messages.navigateToFuture}">
                     ${kendo.ui.icon({ icon: `chevron-${isRtl ? "left" : "right"}`, iconClass: "k-button-icon" })}
                 </button>
             </span>
@@ -259,6 +259,9 @@ export const __meta__ = {
                 weekColumnHeader: "",
                 today: "Today",
                 navigateTo: "Navigate to ",
+                navigateToPast: "Navigate to previous view",
+                navigateToFuture: "Navigate to next view",
+                navigateToParentView: "parent view",
                 parentViews: {
                     month: "year view",
                     year: "decade view",
@@ -467,13 +470,16 @@ export const __meta__ = {
             compare = currentView.compare;
 
             disabled = view === views[CENTURY];
-            title.toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+            title.toggleClass(DISABLED, disabled);
+            if (disabled) { title.attr(ARIA_DISABLED, true); } else { title.removeAttr(ARIA_DISABLED); }
 
             disabled = compare(value, min) < 1;
-            that[PREVARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+            that[PREVARROW].toggleClass(DISABLED, disabled);
+            if (disabled) { that[PREVARROW].attr(ARIA_DISABLED, true); } else { that[PREVARROW].removeAttr(ARIA_DISABLED); }
 
             disabled = compare(value, max) > -1;
-            that[NEXTARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
+            that[NEXTARROW].toggleClass(DISABLED, disabled);
+            if (disabled) { that[NEXTARROW].attr(ARIA_DISABLED, true); } else { that[NEXTARROW].removeAttr(ARIA_DISABLED); }
 
             if (from && old && old.data("animating")) {
                 old.kendoStop(true, true);
@@ -483,10 +489,13 @@ export const __meta__ = {
             that._oldTable = from;
 
             if (!from || that._changeView) {
-                title.html('<span class="k-button-text">' + currentView.title(value, min, max, culture) + '</span>');
+                var messages = that.options.messages;
+                var titleText = currentView.title(value, min, max, culture);
+                title.html('<span class="k-button-text">' + titleText + '</span>');
+                title.attr("aria-label", messages.navigateTo + messages.navigateToParentView + ": " + titleText);
 
-                if (that.options.messages.parentViews && that._view.name !== CENTURY) {
-                    title.attr("title", encode(that.options.messages.navigateTo + that.options.messages.parentViews[that._view.name]));
+                if (messages.parentViews && that._view.name !== CENTURY) {
+                    title.attr("title", encode(messages.navigateTo + messages.parentViews[that._view.name]));
                 } else {
                     title.removeAttr("title");
                 }
@@ -1441,7 +1450,7 @@ export const __meta__ = {
 
             if (!footer[0]) {
                 footer = $(`<div class="k-calendar-footer">
-                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-flat k-button-primary" role="link">
+                    <button tabindex="-1" class="k-calendar-nav-today k-flex k-button k-button-flat k-button-primary">
                         <span class="k-button-text"></span>
                     </button>
                 </div>`).appendTo(element);
@@ -1622,7 +1631,7 @@ export const __meta__ = {
                 footerTemplate = (data) => `${kendo.toString(data,"D",options.culture)}`;
 
             that.month = {
-                content: (data) => `<td class="${data.cssClass}" role="gridcell"><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${data.url}" ${kendo.attr(VALUE)}="${data.dateString}" title="${data.title}">${executeTemplate(content, data) || data.value}</span></td>`,
+                content: (data) => `<td class="${data.cssClass}" role="gridcell"${data.ariaDisabled ? ' aria-disabled="true"' : ''}><span tabindex="-1" class="k-link ${data.linkClass}" data-href="${data.url}" ${kendo.attr(VALUE)}="${data.dateString}" title="${data.title}">${executeTemplate(content, data) || data.value}</span></td>`,
                 empty: (data) => `<td role="gridcell">${executeTemplate(empty, data) || "&nbsp;"}</td>`,
                 weekNumber: (data) => `<td class="k-calendar-td k-alt">${executeTemplate(weekNumber, data) || data.weekNumber}</td>`
             };
@@ -1727,14 +1736,14 @@ export const __meta__ = {
                     html += '<caption class="k-calendar-caption k-month-header">' + this.title(date, min, max, culture) + '</caption>';
                 }
 
-                html += '<thead class="k-calendar-thead"><tr role="row" class="k-calendar-tr">';
+                html += '<thead class="k-calendar-thead" role="rowgroup"><tr role="row" class="k-calendar-tr">';
 
                 if (isWeekColumnVisible) {
-                    html += '<th scope="col" class="k-calendar-th k-alt">' + encode(options.messages.weekColumnHeader) + '</th>';
+                    html += '<th scope="col" role="columnheader" class="k-calendar-th k-alt" aria-label="' + encode(options.messages.weekColumnHeader || "") + '">' + encode(options.messages.weekColumnHeader) + '</th>';
                 }
 
                 for (; idx < 7; idx++) {
-                    html += '<th scope="col" class="k-calendar-th" aria-label="' + names[idx] + '">' + shortNames[idx] + '</th>';
+                    html += '<th scope="col" role="columnheader" class="k-calendar-th" aria-label="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
 
                 adjustDST(today, 0);
@@ -1743,7 +1752,7 @@ export const __meta__ = {
                 return view({
                     cells: 42,
                     perRow: 7,
-                    html: html += '</tr></thead><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">',
+                    html: html += '</tr></thead><tbody class="k-calendar-tbody" role="rowgroup"><tr role="row" class="k-calendar-tr">',
                     start: createDate(start.getFullYear(), start.getMonth(), start.getDate()),
                     isWeekColumnVisible: isWeekColumnVisible,
                     weekNumber: options.weekNumber,
@@ -1765,7 +1774,8 @@ export const __meta__ = {
                             cssClass.push(OTHERMONTH);
                         }
 
-                        if (disableDates(date)) {
+                        var isDisabled = disableDates(date);
+                        if (isDisabled) {
                             cssClass.push(DISABLED);
                         }
 
@@ -1791,7 +1801,8 @@ export const __meta__ = {
                             dateString: toDateString(date),
                             cssClass: cssClass.join(" "),
                             linkClass: linkClass,
-                            url: url
+                            url: url,
+                            ariaDisabled: isDisabled || undefined
                         };
                     },
                     weekNumberBuild: function(date) {
@@ -1868,7 +1879,7 @@ export const __meta__ = {
                         html += '<caption class="k-calendar-caption k-meta-header">';
                             html += this.title(options.date);
                         html += '</caption>';
-                        html += '<tbody class="k-calendar-tbody">';
+                        html += '<tbody class="k-calendar-tbody" role="rowgroup">';
                             html += '<tr role="row" class="k-calendar-tr">';
                 }
 
@@ -1880,7 +1891,12 @@ export const __meta__ = {
                     setter: this.setDate,
                     content: options.content,
                     build: function(date) {
-                        var cssClass = [ "k-calendar-td" ];
+                        var cssClass = [ "k-calendar-td" ],
+                            todayDate = getToday();
+
+                        if (date.getFullYear() === todayDate.getFullYear() && date.getMonth() === todayDate.getMonth()) {
+                            cssClass.push("k-today");
+                        }
 
                         return {
                             value: namesAbbr[date.getMonth()],
@@ -1963,10 +1979,13 @@ export const __meta__ = {
                     html: html,
                     setter: this.setDate,
                     build: function(date, idx) {
-                        var cssClass = [ "k-calendar-td" ];
+                        var cssClass = [ "k-calendar-td" ],
+                            todayYear = getToday().getFullYear();
 
                         if (idx === 10 || idx === 11) {
                             cssClass.push(EMPTYCELL);
+                        } else if (date.getFullYear() === todayYear) {
+                            cssClass.push("k-today");
                         }
 
                         return {
@@ -2029,6 +2048,8 @@ export const __meta__ = {
                             html += '<tr role="row" class="k-calendar-tr">';
                 }
 
+                var todayDecadeStart = getToday().getFullYear() - getToday().getFullYear() % 10;
+
                 return view({
                     start: createDate(year - year % 100, 0, 1),
                     min: createDate(minYear, 0, 1),
@@ -2043,6 +2064,8 @@ export const __meta__ = {
 
                         if (idx === 10 || idx === 11) {
                             cssClass.push(EMPTYCELL);
+                        } else if (start <= todayDecadeStart && end >= todayDecadeStart) {
+                            cssClass.push("k-today");
                         }
 
                         if (start < min) {
@@ -2123,7 +2146,7 @@ export const __meta__ = {
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
             otherMonthTemplate = options.otherMonthCellTemplate || otherMonthCellTemplate,
-            html = options.html || '<table tabindex="0" role="grid" class="k-calendar-table" cellspacing="0"><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">';
+            html = options.html || '<table tabindex="0" role="grid" class="k-calendar-table" cellspacing="0"><tbody class="k-calendar-tbody" role="rowgroup"><tr role="row" class="k-calendar-tr">';
 
         if (isWeekColumnVisible) {
             html += weekNumber(weekNumberBuild(start));

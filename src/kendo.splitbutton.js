@@ -25,7 +25,6 @@ export const __meta__ = {
         ARIA_HASPOPUP = "aria-haspopup",
         ARIA_DISABLED = "aria-disabled",
         ARIA_CONTROLS = "aria-controls",
-        ARIA_LABEL = "aria-label",
         ARIA_EXPANDED = "aria-expanded",
 
         DISABLED = "disabled",
@@ -98,7 +97,7 @@ export const __meta__ = {
                 .wrap("<div id=\"" + wrapperId + "\" class=\"" + cssClasses.widget + "\"></div>")
                 .parent(".k-split-button");
 
-            that.arrowButton = $("<button tabindex=\"-1\" aria-label=\"arrow-button\" class=\"k-split-button-arrow\"></button>").appendTo(that.wrapper);
+            that.arrowButton = $("<button tabindex=\"-1\" aria-label=\"Toggle dropdown\" class=\"k-split-button-arrow\"></button>").appendTo(that.wrapper);
         },
 
         _applyCssClasses: function() {
@@ -161,15 +160,16 @@ export const __meta__ = {
         _aria: function() {
             var that = this,
                 element = that.element,
+                arrowButton = that.arrowButton,
                 menu = that.menu;
 
-            element.attr(ARIA_HASPOPUP, menu ? "menu" : null);
-            element.attr(ARIA_EXPANDED, menu ? false : null);
-            element.attr(ARIA_CONTROLS, menu ? menu.list.attr(ID) : null);
+            element.attr(ARIA_HASPOPUP, null);
+            element.attr(ARIA_EXPANDED, null);
+            element.attr(ARIA_CONTROLS, null);
 
-            if (!element.attr(ARIA_LABEL)) {
-                element.attr(ARIA_LABEL, element.text() + " " + that.options.messages.labelSuffix);
-            }
+            arrowButton.attr(ARIA_HASPOPUP, null);
+            arrowButton.attr(ARIA_EXPANDED, menu ? false : null);
+            arrowButton.attr(ARIA_CONTROLS, menu ? menu.list.attr(ID) : null);
         },
 
         _renderMenu: function() {
@@ -204,7 +204,7 @@ export const __meta__ = {
             }
 
             ev.sender.adjustPopupWidth(computedWidth);
-            that.element.attr(ARIA_EXPANDED, true);
+            that.arrowButton.attr(ARIA_EXPANDED, true);
         },
 
         menuCloseHandler: function(ev) {
@@ -216,7 +216,7 @@ export const __meta__ = {
                 return;
             }
 
-            that.element.attr(ARIA_EXPANDED, false);
+            that.arrowButton.attr(ARIA_EXPANDED, false);
             that.element.trigger(FOCUS);
         },
 
@@ -271,17 +271,12 @@ export const __meta__ = {
             this.element.add(this.arrowButton)
                 .toggleClass(DISABLEDSTATE, !enable);
 
-            if (enable) {
-                this.element.removeAttr(ARIA_DISABLED);
-            } else {
-                this.element.attr(ARIA_DISABLED, !enable);
-            }
-
             if (!soft) {
                 this.element.attr(DISABLED, !enable);
             }
 
             this.arrowButton.attr(DISABLED, !enable);
+            this.arrowButton.attr(ARIA_DISABLED, enable ? null : true);
         },
 
         enable: function(enable, menuItem, soft) {
@@ -319,11 +314,15 @@ export const __meta__ = {
         },
 
         open: function() {
-            this.menu._popup.open();
+            this.menu.open();
         },
 
         close: function() {
-            this.menu._popup.close();
+            this.menu.close();
+
+            if (!this.menu._popup.visible()) {
+                this.arrowButton.attr(ARIA_EXPANDED, false);
+            }
         },
 
         items: function() {

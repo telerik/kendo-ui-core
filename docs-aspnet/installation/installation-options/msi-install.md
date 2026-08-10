@@ -79,11 +79,11 @@ You will find the following in the {{ site.product }} installation directory:
 * `VSExtensions`&mdash;The extensions for Visual Studio.
 * `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (`kendo.all`, `kendo.dataviz`, `kendo.web`, and `kendo.mobile`).
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts.
-* `pdfviewer`&mdash;The `Telerik.Web.PDF` assembly from the Telerik Document Processing library and its dependencies.
+* `pdfviewer`&mdash;The `Telerik.Pdf.Web` assembly from the Telerik Document Processing library and its dependencies.
 * `dpl`&mdash;The NuGet packages for the Telerik Document Processing library. 
-* `export`&mdash;The `Telerik.Core.Export` NuGet package that allows exporting `IEnumerable` sources to XLSX and CSV formats.
+* `export`&mdash;The `Telerik.Export.Core` NuGet package that allows exporting `IEnumerable` sources to XLSX and CSV formats.
 * `license-agreements`&mdash;End-user license agreements files.
-* `spreadsheet`&mdash;The `Telerik.Web.Spreadsheet` assembly from the Telerik Document Processing library and its dependencies.
+* `spreadsheet`&mdash;The `Telerik.Spreadsheet.Web` assembly from the Telerik Document Processing library and its dependencies.
 {% if site.core %}
 * `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.
 * `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.

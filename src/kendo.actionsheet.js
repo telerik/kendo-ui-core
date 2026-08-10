@@ -298,6 +298,8 @@ export const __meta__ = {
                     anchor: options.anchor || that.wrapper
                 }));
 
+            that.element.removeClass("k-popup");
+
             if (options.focusOnActivate) {
                 that.popup.bind(ACTIVATE, that._openHandler.bind(that));
             }

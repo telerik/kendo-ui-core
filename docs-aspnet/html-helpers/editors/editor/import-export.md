@@ -21,7 +21,7 @@ The import and export capabilities are bundled as part of the [UI for ASP.NET MV
 
 To start using the import and export functionality:
 
-1. Add a reference in your project to the `Kendo.MVC.Export` assembly, or install the `Telerik.Core.Export` NuGet package for product versions after Q2 2025.
+1. Add a reference in your project to the `Telerik.Export.Core` assembly, or install the `Telerik.Export.Core` NuGet package for product versions after 2026 Q3.
 1. Add references in your project to the required [Telerik Document Processing libraries](https://docs.telerik.com/devtools/document-processing/introduction#libraries).
 
 ## Exporting Content from the Editor
@@ -72,7 +72,7 @@ To start using the import and export functionality:
 1. Implement the action method in the corresponding controller.
 
     ```C#
-    using Telerik.Core.Export;
+    using Telerik.Export.Core;
     ...
         [HttpPost]
         public ActionResult Export(EditorExportData data)
@@ -122,7 +122,7 @@ To start using the import and export functionality:
 1. Implement the action method in the corresponding controller.
 
     ```C#
-    using Telerik.Core.Export;
+    using Telerik.Export.Core;
     ...
         public ActionResult Import(HttpPostedFileBase file)
         {
@@ -151,7 +151,7 @@ To start using the import and export functionality:
 The Document Processing Library provides settings for the import and export which enables you to fine-tune the way the content is handled in the supported document types. The following example demonstrates how to use [`HtmlImportSettings`](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so that you can process HTML images before they are exported to `RadFlowDocument`.
 
 ```C#
-using Telerik.Core.Export;
+using Telerik.Export.Core;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
     [HttpPost]
@@ -186,7 +186,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
 
 ```C#
-using Telerik.Core.Export;
+using Telerik.Export.Core;
 using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
     public ActionResult Import(HttpPostedFileBase file)

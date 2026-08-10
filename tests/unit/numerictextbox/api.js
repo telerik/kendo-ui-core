@@ -265,6 +265,53 @@ describe("kendo.ui.NumericTextBox API", function() {
         assert.equal(text.attr("disabled"), undefined);
     });
 
+    it("enable(false) should add disabled attribute to spinner buttons", function() {
+        let textbox = new NumericTextBox(input);
+
+        textbox.enable(false);
+
+        assert.isOk(textbox._upArrow.is(":disabled"));
+        assert.isOk(textbox._downArrow.is(":disabled"));
+    });
+
+    it("enable(false) should add k-disabled class to spinner buttons", function() {
+        let textbox = new NumericTextBox(input);
+
+        textbox.enable(false);
+
+        assert.isOk(textbox._upArrow.hasClass("k-disabled"));
+        assert.isOk(textbox._downArrow.hasClass("k-disabled"));
+    });
+
+    it("enable() should remove disabled attribute from spinner buttons", function() {
+        let textbox = new NumericTextBox(input);
+
+        textbox.enable(false);
+        textbox.enable(true);
+
+        assert.isOk(!textbox._upArrow.is(":disabled"));
+        assert.isOk(!textbox._downArrow.is(":disabled"));
+    });
+
+    it("enable() should remove k-disabled class from spinner buttons", function() {
+        let textbox = new NumericTextBox(input);
+
+        textbox.enable(false);
+        textbox.enable(true);
+
+        assert.isOk(!textbox._upArrow.hasClass("k-disabled"));
+        assert.isOk(!textbox._downArrow.hasClass("k-disabled"));
+    });
+
+    it("initialization with enable: false should disable spinner buttons", function() {
+        let textbox = input.kendoNumericTextBox({ enable: false }).data("kendoNumericTextBox");
+
+        assert.isOk(textbox._upArrow.is(":disabled"));
+        assert.isOk(textbox._downArrow.is(":disabled"));
+        assert.isOk(textbox._upArrow.hasClass("k-disabled"));
+        assert.isOk(textbox._downArrow.hasClass("k-disabled"));
+    });
+
     it("readonly() makes  input element readonly", function() {
         let numerictextbox = input.kendoNumericTextBox().data("kendoNumericTextBox");
 

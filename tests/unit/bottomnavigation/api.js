@@ -161,6 +161,28 @@ describe("kendo.ui.bottomnavigation API", function() {
         assert.isFalse(bottomNav.items().eq(1).is(".k-selected"));
     });
 
+    it("select method updates aria-current", function() {
+        let bottomNav = setup({
+            items: [
+                { text: "home", icon: "home", selected: true },
+                { text: "text", icon: "text" }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).attr("aria-current"), "true");
+        assert.isUndefined(bottomNav.items().eq(1).attr("aria-current"));
+
+        bottomNav.select(bottomNav.items().eq(1));
+
+        assert.isUndefined(bottomNav.items().eq(0).attr("aria-current"));
+        assert.equal(bottomNav.items().eq(1).attr("aria-current"), "true");
+
+        bottomNav.select(bottomNav.items().eq(1), false);
+
+        assert.isUndefined(bottomNav.items().eq(0).attr("aria-current"));
+        assert.isUndefined(bottomNav.items().eq(1).attr("aria-current"));
+    });
+
     it("select method works with DOM element", function() {
         let bottomNav = setup({
             items: [
@@ -188,6 +210,26 @@ describe("kendo.ui.bottomnavigation API", function() {
         bottomNav.enable(bottomNav.items().eq(0));
 
         assert.isFalse(bottomNav.items().eq(0).is(".k-disabled"));
+    });
+
+    it("enable method updates aria-disabled", function() {
+        let bottomNav = setup({
+            items: [
+                { text: "home", icon: "home", enabled: false },
+                { text: "text", icon: "text" }
+            ]
+        });
+
+        assert.equal(bottomNav.items().eq(0).attr("aria-disabled"), "true");
+        assert.isUndefined(bottomNav.items().eq(1).attr("aria-disabled"));
+
+        bottomNav.enable(bottomNav.items().eq(0));
+
+        assert.isUndefined(bottomNav.items().eq(0).attr("aria-disabled"));
+
+        bottomNav.enable(bottomNav.items().eq(1), false);
+
+        assert.equal(bottomNav.items().eq(1).attr("aria-disabled"), "true");
     });
 
     it("enable method can enable item", function() {

@@ -238,7 +238,7 @@ export const __meta__ = {
             if (!readonly && !disable) {
                 element.prop(DISABLED, false)
                        .prop(READONLY, false)
-                       .attr(ARIA_DISABLED, false);
+                       .removeAttr(ARIA_DISABLED);
 
                 wrapper.removeClass(STATEDISABLED)
                         .removeClass(STATEREADONLY);
@@ -249,8 +249,13 @@ export const __meta__ = {
                 element.on(INPUT_EV + NS, that._input.bind(that));
             } else {
                 element.attr(DISABLED, disable)
-                       .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable);
+                       .attr(READONLY, readonly);
+
+                if (disable) {
+                    element.attr(ARIA_DISABLED, true);
+                } else {
+                    element.removeAttr(ARIA_DISABLED);
+                }
 
                 wrapper.toggleClass(STATEDISABLED, disable)
                         .toggleClass(STATEREADONLY, readonly);

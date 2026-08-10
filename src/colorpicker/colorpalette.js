@@ -188,7 +188,7 @@ import "../kendo.core.js";
             item.addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
         },
         _template: kendo.template(({colors, columns, tileSize, value, id}) => {
-            let startPart = '<table class="k-colorpalette-table" role="presentation"><tr role="row">';
+            let startPart = '<table class="k-colorpalette-table" role="none"><tr role="row">';
 
             let cellElements = "";
             for (var i = 0; i < colors.length; ++i) {

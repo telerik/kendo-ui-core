@@ -264,7 +264,7 @@ describe("kendo.ui.Calendar initialization", function() {
     it("Calendar adds  focused on focus", function() {
         let cal = new Calendar(div);
 
-        cal._table.focus();
+        cal.focus();
 
         assert.isOk(cal._cell.hasClass("k-focus"));
     });

@@ -36,9 +36,9 @@ export const __meta__ = {
 
         const subtitleHtml = options.subtitle || options.subtitle === "" ? `<div class="k-actionsheet-subtitle k-text-center">${options.subtitle || ""}</div>` : "";
 
-        return `<div class="k-text-center k-actionsheet-titlebar" >` +
+        return `<div class="k-actionsheet-titlebar">` +
             (options.title || options.title === "" ?
-                '<div class="k-actionsheet-titlebar-group k-hbox">' +
+                '<div class="k-actionsheet-titlebar-group">' +
                     startButtonHtml +
                     `<div id="${ACTIONSHEET_TITLE_ID}" class="k-actionsheet-title">` +
                         `<div class="k-text-center">${options.title}</div>` +

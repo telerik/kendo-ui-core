@@ -24,6 +24,31 @@ import { removeMocksIn } from '../../helpers/unit/mock-utils.js';
             assert.equal(dialog.element.parent().attr("role"), "dialog");
         });
 
+        it("Dialog has aria-describedby pointing to content id", function() {
+            let dialog = createDialog({ title: "Test" });
+
+            assert.equal(dialog.element.parent().attr("aria-describedby"), dialog.element.attr("id"));
+        });
+
+        it("Dialog sets content id when missing and references it with aria-describedby", function() {
+            let dialog = createDialog({ title: "Test" }, $("<div class='dialog' />").appendTo(Mocha.fixture));
+
+            assert.isOk(dialog.element.attr("id"));
+            assert.equal(dialog.element.parent().attr("aria-describedby"), dialog.element.attr("id"));
+        });
+
+        it("Modal Dialog has aria-modal true", function() {
+            let dialog = createDialog({ title: "Test", modal: true });
+
+            assert.equal(dialog.element.parent().attr("aria-modal"), "true");
+        });
+
+        it("Non-modal Dialog does not have aria-modal", function() {
+            let dialog = createDialog({ title: "Test", modal: false });
+
+            assert.isUndefined(dialog.element.parent().attr("aria-modal"));
+        });
+
         it("Dialog is accessible", async function() {
             let dialog = createDialog(
                 { title: "Test" }

@@ -44,6 +44,7 @@ export const __meta__ = {
         ARIA_LABEL = "aria-label",
         ARIA_LABELLEDBY = "aria-labelledby",
         ARIA_ORIENTATION = "aria-orientation",
+        ARIA_KEYSHORTCUTS = "aria-keyshortcuts",
         KSTATIC_PANE = "k-pane-static",
         SPLITTER = "k-splitter",
         KSPLITBAR = "k-splitbar",
@@ -371,7 +372,7 @@ export const __meta__ = {
                 return;
             }
 
-            arrow = target.children("span:not(.k-resize-handle)");
+            arrow = target.children("div:not(.k-resize-handle)");
 
             if (arrow.length !== 1) {
                 return;
@@ -424,20 +425,17 @@ export const __meta__ = {
         _updateSplitBar: function(splitbar, previousPane, nextPane, previousPaneEl) {
             var catIconIf = function(actionType, iconType, condition) {
                 var icon = iconType ? ui.icon({ icon: iconType, size: "xsmall" }) : "";
-                return condition ? "<span class='k-" + actionType + "'>" + icon + "</span>" : "";
+                if (actionType === "resize-handle") {
+                    return condition ? "<div class='k-" + actionType + "' aria-hidden='true'></div>" : "";
+                }
+                return condition ? "<div class='k-" + actionType + "'>" + icon + "</div>" : "";
             },
                 orientation = this.orientation,
                 draggable = (previousPane.resizable !== false) && (nextPane.resizable !== false),
                 prevCollapsible = previousPane.collapsible,
                 prevCollapsed = previousPane.collapsed,
                 nextCollapsible = nextPane.collapsible,
-                nextCollapsed = nextPane.collapsed,
-                previousPaneId = previousPaneEl.attr("id");
-
-            if (!previousPaneId) {
-                previousPaneId = kendo.guid();
-                previousPaneEl.attr("id", previousPaneId);
-            }
+                nextCollapsed = nextPane.collapsed;
 
             const isRtl = kendo.support.isRtl(splitbar);
             const leftIcon = isRtl ? "chevron-right" : "chevron-left";
@@ -445,9 +443,7 @@ export const __meta__ = {
 
             splitbar.addClass("k-splitbar k-splitbar-" + orientation)
                 .attr("role", "separator")
-                .attr(ARIA_VALUEMIN, "0")
-                .attr(ARIA_VALUEMAX, "100")
-                .attr(ARIA_CONTROLS, previousPaneId)
+                .attr(ARIA_KEYSHORTCUTS, "ArrowLeft ArrowRight ArrowUp ArrowDown")
                 .removeClass("k-splitbar-" + orientation + "-hover")
                 .toggleClass("k-splitbar-draggable-" + orientation,
                     draggable && !prevCollapsed && !nextCollapsed)
@@ -470,10 +466,28 @@ export const __meta__ = {
                 splitbar.attr(ARIA_LABELLEDBY, previousPane.labelId);
             } else if (previousPane.label) {
                 splitbar.attr(ARIA_LABEL, previousPane.label);
+            } else {
+                splitbar.attr(ARIA_LABEL, "Pane separator");
             }
 
             if (orientation == HORIZONTAL) {
                 splitbar.attr(ARIA_ORIENTATION, VERTICAL);
+            }
+
+            if (draggable) {
+                var previousPaneId = previousPaneEl.attr("id");
+                if (!previousPaneId) {
+                    previousPaneId = kendo.guid();
+                    previousPaneEl.attr("id", previousPaneId);
+                }
+                splitbar.attr(ARIA_VALUEMIN, "0")
+                        .attr(ARIA_VALUEMAX, "100")
+                        .attr(ARIA_CONTROLS, previousPaneId);
+            } else {
+                splitbar.removeAttr(ARIA_VALUEMIN)
+                        .removeAttr(ARIA_VALUEMAX)
+                        .removeAttr(ARIA_VALUENOW)
+                        .removeAttr(ARIA_CONTROLS);
             }
 
             if (!draggable && !prevCollapsible && !nextCollapsible) {
@@ -512,9 +526,12 @@ export const __meta__ = {
             var i, splitbar, valueNow, joinDimension;
 
             for (i = 0; i < splitBars.length; i++) {
+                splitbar = splitBars[i];
+                if (!splitbar.getAttribute(ARIA_VALUEMIN)) {
+                    continue;
+                }
                 joinDimension = (panesSizes[i] + panesSizes[i + 1]) || 1;
                 valueNow = Math.round(panesSizes[i] / joinDimension * 100);
-                splitbar = splitBars[i];
                 splitbar.setAttribute(ARIA_VALUENOW, valueNow);
             }
         },

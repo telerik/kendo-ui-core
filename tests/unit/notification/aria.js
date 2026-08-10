@@ -26,7 +26,7 @@ describe("Notification WAI-ARIA", function() {
 
         let element = $(".k-notification");
 
-        assert.equal(element.attr("role"), "alert");
+        assert.equal(element.attr("role"), "status");
     });
 
     it("Notification has appropriate aria-live", function() {
@@ -38,13 +38,13 @@ describe("Notification WAI-ARIA", function() {
         assert.equal(element.attr("aria-live"), "polite");
     });
 
-    it("Notification has appropriate aria-label", function() {
+    it("Notification does not set root aria-label", function() {
         notification = createNotification();
         notification.show("foo", "error");
 
         let element = $(".k-notification");
 
-        assert.equal(element.attr("aria-label"), "error");
+        assert.equal(element.attr("aria-label"), undefined);
     });
 
     it("Notification has appropriate aria-describedby", function() {
@@ -65,32 +65,6 @@ describe("Notification WAI-ARIA", function() {
         let element = $(".k-notification-actions .k-icon");
 
         assert.equal(element.attr("aria-hidden"), "true");
-    });
-
-    asyncTest("Notification popup has aria-hidden set to 'true'", function(done) {
-        notification = createNotification({
-            button: true
-        });
-
-        notification.show("foo");
-
-        let element = $(".k-notification");
-        notification.hide();
-
-        setTimeout(() => {
-            done(() => assert.equal(element.attr("aria-hidden"), "true"));
-        }, 10);
-    });
-
-    it("Notification popup has aria-hidden set to 'false'", function() {
-        notification = createNotification({
-            button: true
-        });
-
-        notification.show("foo");
-
-        let element = $(".k-notification");
-        assert.equal(element.attr("aria-hidden"), "false");
     });
 
     it("Notification does not violate AXE", async function() {

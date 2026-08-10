@@ -4,7 +4,7 @@ page_title: jQuery InlineAIPrompt Documentation - Custom Key Handling
 description: "Learn how to customize the key handling of the jQuery InlineAIPrompt by Kendo UI using the kendoKeydown event."
 components: ["inlineaiprompt"]
 slug: custom_keynav_inlineaiprompt_kendoui
-position: 1
+position: 3
 ---
 
 # Custom Key Handling

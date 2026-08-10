@@ -337,7 +337,7 @@ export const __meta__ = {
             for (var index in parents) {
                 var parentLi = parents.eq(index);
                 if (parentLi.find("ul").length) {
-                    parentLi.attr("aria-haspopup", true);
+                    parentLi.attr("aria-haspopup", "menu");
                 } else {
                     parentLi.removeAttr("aria-haspopup");
                 }
@@ -554,6 +554,10 @@ export const __meta__ = {
             popupCollision: null,
             autoSize: false,
             iconPosition: "before", // "before" or "after" text content
+            messages: {
+                scrollPrevious: "Scroll previous",
+                scrollNext: "Scroll next"
+            }
         },
 
         _initData: function() {
@@ -1638,7 +1642,7 @@ export const __meta__ = {
                    .addClass("k-menu-group")
                    .attr(ROLE, "menu")
                    .parent("li")
-                   .attr("aria-haspopup", "true")
+                   .attr("aria-haspopup", "menu")
                    .end()
                    .find("li > div")
                    .addClass("k-content")
@@ -2576,7 +2580,7 @@ export const __meta__ = {
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
                     var groupId = kendo.guid();
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items || item.content ? "aria-haspopup='true'" : ''}` +
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items || item.content ? "aria-haspopup='menu'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
                         ((item.items && item.items.length > 0) || item.content ?
@@ -2594,11 +2598,13 @@ export const __meta__ = {
                         ) +
                         "</li>";
                 }),
-                scrollButton: template(({ direction }) =>
-                    `<span class='k-button k-button-flat k-icon-button k-menu-scroll-button k-menu-scroll-button-${direction === 'left' || direction === 'up' ? 'prev' : 'next'}' unselectable='on'>` +
+                scrollButton: template(({ direction }) => {
+                    const isPrev = direction === 'left' || direction === 'up';
+                    const label = isPrev ? that.options.messages.scrollPrevious : that.options.messages.scrollNext;
+                    return `<span class='k-button k-button-flat k-icon-button k-menu-scroll-button k-menu-scroll-button-${isPrev ? 'prev' : 'next'}' unselectable='on' aria-label='${kendo.htmlEncode(label)}'>` +
                         kendo.ui.icon({ icon: `chevron-${direction}`, iconClass: "k-button-icon" }) +
-                    "</span>"
-                ),
+                        "</span>";
+                }),
                 arrow: template(({ item, group }) =>
                     `<span aria-hidden='true' class='k-menu-expand-arrow'>${kendo.ui.icon({ icon: group.horizontal ? "chevron-down" : "chevron-right" })}</span>`),
                 sprite: template((data) => {

@@ -88,4 +88,12 @@ describe("kendo.ui.DropDownList adaptive mode switching", function() {
             dropdownlist.open();
         });
     });
+
+    it("adaptive ActionSheet popup element does not have k-popup class", function() {
+        dropdownlist = createAdaptiveDropDownList();
+
+        dropdownlist._createActionSheet();
+
+        assert.isFalse(dropdownlist.popup.element.hasClass("k-popup"));
+    });
 });

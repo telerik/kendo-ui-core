@@ -123,7 +123,7 @@ describe("Toolbar WAI-ARIA:", function() {
         }
     });
 
-    it("by default the button has aria-disabled attribute set to false", function() {
+    it("by default the button does not have aria-disabled attribute", function() {
         container.kendoToolBar({
             items: [
                 { type: "button", id: "foo", text: "foo" }
@@ -132,7 +132,7 @@ describe("Toolbar WAI-ARIA:", function() {
 
         let button = container.find("#foo");
 
-        assert.equal(button.attr("aria-disabled"), "false");
+        assert.isUndefined(button.attr("aria-disabled"));
     });
 
     it("button with enable: false receives aria-disabled attribute", function() {
@@ -147,7 +147,7 @@ describe("Toolbar WAI-ARIA:", function() {
         assert.equal(button.attr("aria-disabled"), "true");
     });
 
-    it("splitbutton with enable: false has aria-disabled attribute equal to true", function() {
+    it("splitbutton with enable: false has k-disabled class on main button", function() {
         container.kendoToolBar({
             items: [{
                 type: "splitButton",
@@ -163,7 +163,7 @@ describe("Toolbar WAI-ARIA:", function() {
 
         let mainbutton = container.find("#foo");
 
-        assert.equal(mainbutton.attr("aria-disabled"), 'true');
+        assert.isOk(mainbutton.hasClass("k-disabled"));
     });
 
     it("toggleButton receives aria-pressed attribute", function() {
@@ -198,34 +198,6 @@ describe("Toolbar WAI-ARIA:", function() {
         assert.equal(buttons.eq(1).attr("aria-pressed"), "true");
     });
 
-    it("role='separator' is added to separator elements", function() {
-        container.kendoToolBar({
-            items: [
-                { type: "button", text: "Button" },
-                { type: "separator" },
-                { type: "button", text: "Button" },
-                {
-                    type: "button",
-                    text: "Action",
-                    overflow: "always"
-                },
-                { type: "separator" },
-                {
-                    type: "button",
-                    text: "Action",
-                    overflow: "always"
-                }
-            ]
-        }).data("kendoToolBar");
-
-        $(".k-toolbar-overflow-button").trigger('click');
-        let separators = $(".k-separator");
-
-        separators.each(function(i, sep) {
-            assert.equal(sep.getAttribute("role"), "separator");
-        });
-    });
-
     it("aria-label is added on buttons with only text", function() {
         container.kendoToolBar({
             items: [
@@ -248,5 +220,76 @@ describe("Toolbar WAI-ARIA:", function() {
         let button = $(".k-context-menu").find("#id_overflow");
 
         assert.equal(button.attr("aria-label"), "Foo");
+    });
+
+    it("overflow button has aria-expanded set to false initially", function() {
+        let toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "Action", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        assert.equal(toolbar.overflowAnchor.attr("aria-expanded"), "false");
+    });
+
+    it("overflow button aria-expanded toggles on menu open and close", function() {
+        let toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "Action", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.overflowMenu.open();
+        assert.equal(toolbar.overflowAnchor.attr("aria-expanded"), "true");
+
+        toolbar.overflowMenu.close();
+        assert.equal(toolbar.overflowAnchor.attr("aria-expanded"), "false");
+    });
+
+    it("overflow button aria-expanded toggles on section open and close", function() {
+        let toolbar = container.kendoToolBar({
+            overflow: { mode: "section" },
+            items: [
+                { type: "button", text: "Action", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.overflowSection.open();
+        assert.equal(toolbar.overflowAnchor.attr("aria-expanded"), "true");
+
+        toolbar.overflowSection.close();
+        assert.equal(toolbar.overflowAnchor.attr("aria-expanded"), "false");
+    });
+
+    it("k-toolbar-prev has aria-hidden=true and no aria-label", function() {
+        container.kendoToolBar({
+            overflow: { mode: "scroll" },
+            items: [
+                { type: "button", text: "One" },
+                { type: "button", text: "Two" },
+                { type: "button", text: "Three" }
+            ]
+        });
+
+        let prevButton = container.find(".k-toolbar-prev");
+
+        assert.equal(prevButton.attr("aria-hidden"), "true");
+        assert.isUndefined(prevButton.attr("aria-label"));
+    });
+
+    it("k-toolbar-next has aria-hidden=true and no aria-label", function() {
+        container.kendoToolBar({
+            overflow: { mode: "scroll" },
+            items: [
+                { type: "button", text: "One" },
+                { type: "button", text: "Two" },
+                { type: "button", text: "Three" }
+            ]
+        });
+
+        let nextButton = container.find(".k-toolbar-next");
+
+        assert.equal(nextButton.attr("aria-hidden"), "true");
+        assert.isUndefined(nextButton.attr("aria-label"));
     });
 });

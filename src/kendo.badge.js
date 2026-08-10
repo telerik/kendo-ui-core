@@ -16,7 +16,7 @@ export const __meta__ = {
     var HIDDEN = 'k-hidden';
 
     var iconTemplate = ({ icon }) => kendo.ui.icon($(`<span class='k-badge-icon'></span>`), { icon: icon });
-    var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon k-icon'>${icon}</span>`;
+    var svgIconTemplate = ({ icon }) => `<span class='k-badge-icon k-svg-icon k-icon' aria-hidden='true'>${icon}</span>`;
 
     var Badge = Widget.extend({
         init: function(element, options) {
@@ -267,8 +267,14 @@ export const __meta__ = {
 
             // Handle badge.icon(<SVG />)
             if (icon.indexOf('<svg') === 0) {
+                var svgIcon = icon;
+
+                if (!/^<svg\b[^>]*\baria-hidden\s*=/i.test(svgIcon)) {
+                    svgIcon = svgIcon.replace(/<svg\b([^>]*)>/i, "<svg$1 aria-hidden='true'>");
+                }
+
                 iconTemplateFunction = kendo.template(svgIconTemplate);
-                that.element.html(iconTemplateFunction({ icon: icon }));
+                that.element.html(iconTemplateFunction({ icon: svgIcon }));
 
                 return;
             }

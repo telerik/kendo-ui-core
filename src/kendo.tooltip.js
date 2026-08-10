@@ -37,7 +37,7 @@ export const __meta__ = {
         TEMPLATE = ({ autoHide, callout, dir }) =>
             `<div role="tooltip" class="k-tooltip${!autoHide ? ' k-tooltip-closable' : ''}">` +
                 '<div class="k-tooltip-content"></div>' +
-                (!autoHide ? `<div class="k-tooltip-button">${kendo.ui.icon($('<span title="Close"></span>'), { icon: "x" })}</div>` : '') +
+                (!autoHide ? `<div class="k-tooltip-button" role="button" aria-label="Close" tabindex="0">${kendo.ui.icon($("<span></span>"), { icon: "x" })}</div>` : '') +
                 (callout ? `<div class="k-callout k-callout-${dir}"></div>` : '') +
             '</div>',
         IFRAMETEMPLATE = kendo.template(({ content }) =>
@@ -562,6 +562,7 @@ export const __meta__ = {
                     that.popup.wrapper.on("mouseleave" + NS, that._mouseleave.bind(that));
                 } else {
                     that.popup.element.on("click" + NS, ".k-tooltip-button", that._closeButtonClick.bind(that));
+                    that.popup.element.on("keydown" + NS, ".k-tooltip-button", that._closeButtonKeyDown.bind(that));
                 }
             }
         },
@@ -616,6 +617,12 @@ export const __meta__ = {
         _closeButtonClick: function(e) {
             e.preventDefault();
             this.hide();
+        },
+
+        _closeButtonKeyDown: function(e) {
+            if (e.keyCode === kendo.keys.ENTER || e.keyCode === kendo.keys.SPACEBAR) {
+                this._closeButtonClick(e);
+            }
         },
 
         _mouseleave: function(e) {

@@ -12,8 +12,8 @@ describe("kendo.ui.NumericTextBox ARIA", function() {
     });
 
     it("NumericTextBox adds role to the input element", function() {
-        input.kendoNumericTextBox();
-        assert.equal(input.attr("role"), "spinbutton");
+        let ntb = input.kendoNumericTextBox().getKendoNumericTextBox();
+        assert.equal(ntb._text.attr("role"), "spinbutton");
     });
 
     it("NumericTextBox adds aria-valuemin", function() {

@@ -316,6 +316,5 @@ describe("kendo.ui.NumericTextBox initialization", function() {
 
         assert.isOk(textbox.wrapper.hasClass("k-disabled"));
         assert.include(["disabled", "true"], textbox._text.attr("disabled"));
-        assert.equal(textbox._text.attr("aria-disabled"), "true");
     });
 });

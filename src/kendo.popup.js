@@ -86,7 +86,6 @@ export const __meta__ = {
                 .addClass("k-popup")
                 .toggleClass("k-rtl", !!options.isRtl)
                 .appendTo(options.appendTo)
-                .attr("aria-hidden", true)
                 .on("mouseenter" + NS, function() {
                     that._hovered = true;
                 })
@@ -198,10 +197,6 @@ export const __meta__ = {
 
             that._closing = false;
             that._trigger(DEACTIVATE);
-            // This fixes an issue with aria-hidden error - https://github.com/telerik/kendo-ui-core/issues/8096
-            setTimeout(function() {
-                that.element.attr("aria-hidden", true);
-            }, 0);
         },
 
         destroy: function() {
@@ -316,9 +311,6 @@ export const __meta__ = {
                 parent.data(EFFECTS, animation.effects)
                        .kendoStop(true)
                        .kendoAnimate(animation);
-
-                element.attr("aria-hidden", false);
-
             }
         },
 
@@ -332,8 +324,7 @@ export const __meta__ = {
             .css({
                 display: "block",
                 position: ABSOLUTE
-            })
-            .attr("aria-hidden", false);
+            });
         },
 
         _location: function(isFixed) {

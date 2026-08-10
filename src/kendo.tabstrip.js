@@ -89,7 +89,7 @@ export const __meta__ = {
             itemActionsWrapperTemplate: () => `<span class="k-item-actions"></span>`,
             itemActionTemplate: ({ element, icon, iconClass, attributes }) => {
                 let resolvedAttributes = attributes ? (attributes.toJSON ? attributes.toJSON() : attributes) : {};
-                return kendo.html.renderButton(element || $("<button unselectable='on'></button>").attr(resolvedAttributes), { icon, iconClass, fillMode: "flat", size: "xsmall" });
+                return kendo.html.renderButton(element || $("<button unselectable='on'></button>").attr(resolvedAttributes), { icon, iconClass, fillMode: "flat", size: "xsmall", autoAriaLabel: false });
             },
         },
 
@@ -179,11 +179,14 @@ export const __meta__ = {
 
             const regex = options._enableDOMDataSource ? excludedNodesRegExp_DOM_DS : excludedNodesRegExp;
             if (!item.children("." + LINK).length) {
-                item
+                const filteredContents = item
                     .contents() // exclude groups, real links, templates and empty text nodes
-                    .filter(function() { return (!this.nodeName.match(regex) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
-                    .wrapAll("<span UNSELECTABLE='on' class='" + LINK + "'/>")
-                    .wrapAll("<span UNSELECTABLE='on' class='" + LINK_TEXT + "'/>");
+                    .filter(function() { return (!this.nodeName.match(regex) && !(this.nodeType == 3 && !trim(this.nodeValue))); });
+                const hasTextContent = filteredContents.filter(function() { return this.nodeType === 3; }).length > 0;
+                filteredContents.wrapAll("<span UNSELECTABLE='on' class='" + LINK + "'/>");
+                if (hasTextContent) {
+                    filteredContents.wrapAll("<span UNSELECTABLE='on' class='" + LINK_TEXT + "'/>");
+                }
             }
         });
 
@@ -201,7 +204,7 @@ export const __meta__ = {
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return `<span aria-hidden='true' class='k-button k-button-flat k-icon-button k-rounded-none k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
+        return `<span aria-hidden='true' class='k-button k-button-flat k-icon-button k-tabstrip-${buttonClass}' unselectable='on'>${kendo.ui.icon({ icon: iconClass, iconClass: "k-button-icon" })}</span>`;
     }
 
     function ajaxXhr() {
@@ -1023,7 +1026,7 @@ export const __meta__ = {
             let actions = [];
             let isClosable = tabOptions.closable;
 
-            let closeButtonAttributes = { icon: "x", attributes: { "ref-close-button": true }, action: that._handleClose };
+            let closeButtonAttributes = { icon: "x", attributes: { "ref-close-button": true, "aria-hidden": true, "class": "k-remove-tab" }, action: that._handleClose };
 
             if (tabOptions.actions) {
                 actions = Array.from(tabOptions.actions);
