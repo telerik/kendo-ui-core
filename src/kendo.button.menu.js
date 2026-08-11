@@ -132,7 +132,8 @@ export const __meta__ = {
             that._attachEvents();
 
             that._applyCssClasses(that.list);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         options: {
             name: "ButtonMenu",

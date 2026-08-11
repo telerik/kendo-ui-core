@@ -141,7 +141,8 @@ export const __meta__ = {
             if (options.toggleTarget) {
                 $(options.toggleTarget).on(options.toggleEvent + NS, that.toggle.bind(that));
             }
-        },
+            Widget.fn.endInit.call(this);
+},
 
         events: [
             OPEN,

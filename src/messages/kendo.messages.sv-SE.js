@@ -1258,4 +1258,45 @@ if (kendo.dataviz.ui.Chart) {
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktiv",
+            "completed": "Slutförd",
+            "awaitingApproval": "Inväntar godkännande",
+            "error": "Fel"
+        },
+        "approve": "Godkänn",
+        "reject": "Avvisa",
+        "parametersLabel": "Parametrar",
+        "resultLabel": "Resultat"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Föregående källa",
+        "nextSourceAction": "Nästa källa"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Börja om",
+        "restore": "Återställ kontrollpunkt",
+        "redo": "Gör om",
+        "checkpointRestoredText": "Kontrollpunkten återställd"
+    });
+}
+
 })(window.kendo.jQuery);

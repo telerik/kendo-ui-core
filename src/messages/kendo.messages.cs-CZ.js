@@ -1718,4 +1718,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktivní",
+            "completed": "Dokončeno",
+            "awaitingApproval": "Čeká na schválení",
+            "error": "Chyba"
+        },
+        "approve": "Schválit",
+        "reject": "Odmítnout",
+        "parametersLabel": "Parametry",
+        "resultLabel": "Výsledek"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Předchozí zdroj",
+        "nextSourceAction": "Další zdroj"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Začít znovu",
+        "restore": "Obnovit kontrolní bod",
+        "redo": "Znovu",
+        "checkpointRestoredText": "Kontrolní bod obnoven"
+    });
+}
+
 })(window.kendo.jQuery);

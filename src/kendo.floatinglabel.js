@@ -47,7 +47,8 @@ export const __meta__ = {
             that.element.addClass(FLOATINGLABELCONTAINER);
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         options: {
             name: 'FloatingLabel',

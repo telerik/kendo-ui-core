@@ -1638,4 +1638,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktywny",
+            "completed": "Ukończono",
+            "awaitingApproval": "Oczekuje na zatwierdzenie",
+            "error": "Błąd"
+        },
+        "approve": "Zatwierdź",
+        "reject": "Odrzuć",
+        "parametersLabel": "Parametry",
+        "resultLabel": "Wynik"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Poprzednie źródło",
+        "nextSourceAction": "Następne źródło"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Zacznij od nowa",
+        "restore": "Przywróć punkt kontrolny",
+        "redo": "Powtórz",
+        "checkpointRestoredText": "Punkt kontrolny przywrócony"
+    });
+}
+
 })(window.kendo.jQuery);

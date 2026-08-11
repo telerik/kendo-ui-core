@@ -71,7 +71,8 @@ export const __meta__ = {
             that._updateCssClasses();
             that._items();
             that._bindEvents();
-        },
+            Widget.fn.endInit.call(that);
+},
 
         options: {
             name: "BottomNavigation",

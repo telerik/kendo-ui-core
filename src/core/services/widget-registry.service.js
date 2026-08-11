@@ -71,9 +71,9 @@ class WidgetRegistryService {
             throw new Error("Widget must have a name in options");
         }
         prefix = prefix || "";
-        // Register to namespace
+        const componentName = name.toLowerCase();
         register[name] = widget;
-        register.roles[name.toLowerCase()] = widget;
+        register.roles[componentName] = widget;
         // Create jQuery plugin
         const getter = "getKendo" + prefix + name;
         const pluginName = "kendo" + prefix + name;

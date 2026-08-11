@@ -294,10 +294,10 @@ export const __meta__ = {
 
      function updateArrow(item) {
         item = $(item);
-        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-chevron]:not(.k-sprite),> .k-link > .k-menu-expand-arrow > [class*=k-svg-i-chevron]:not(.k-sprite)").parent().remove();
+        item.find("> .k-link > .k-menu-expand-arrow").remove();
 
         item.filter(":has(.k-menu-group)")
-            .children(".k-link:not(:has([class*=k-i-chevron]:not(.k-sprite))),.k-link:not(:has([class*=k-svg-i-chevron]:not(.k-sprite)))")
+            .children(".k-link:not(:has(.k-menu-expand-arrow))")
             .each(function() {
                 var item = $(this);
 
@@ -523,7 +523,8 @@ export const __meta__ = {
             }
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             OPEN,
@@ -858,21 +859,24 @@ export const __meta__ = {
         },
 
         setOptions: function(options) {
-            var animation = this.options.animation;
+            const that = this;
+            var animation = that.options.animation;
 
-            this._animations(options);
+            that._animations(options);
 
             options.animation = extend(true, animation, options.animation);
 
             if ("dataSource" in options) {
-                this._dataSource(options);
+                that._dataSource(options);
             }
 
-            this._updateClasses();
-            this._wrapGroups();
-            this._reinitOverflow(options);
+            that._renderWithIconContext(function() {
+                that._updateClasses();
+                that._wrapGroups();
+            });
+            that._reinitOverflow(options);
 
-            Widget.fn.setOptions.call(this, options);
+            Widget.fn.setOptions.call(that, options);
         },
 
         destroy: function() {
@@ -914,60 +918,72 @@ export const __meta__ = {
         },
 
         append: function(item, referenceItem) {
-            referenceItem = this.attemptGetItem(referenceItem);
+            const that = this;
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? this._childPopupElement(referenceItem).children().eq(0) : null);
+            return that._renderWithIconContext(function() {
+                referenceItem = that.attemptGetItem(referenceItem);
 
-            each(inserted.items, function(i) {
-                inserted.group.append(this);
-                updateArrow(this);
-                storeItemSelectEventHandler(this, item[i] || item);
+                const inserted = that._insert(item, referenceItem, referenceItem.length ? that._childPopupElement(referenceItem).children().eq(0) : null);
+
+                each(inserted.items, function(i) {
+                    inserted.group.append(this);
+                    updateArrow(this);
+                    storeItemSelectEventHandler(this, item[i] || item);
+                });
+
+                updateArrow(referenceItem);
+                updateFirstLast(inserted.group.find(".k-first, .k-last").add(inserted.items));
+                updateHasAriaPopup(getParentLiItems(inserted.group));
+
+                return that;
             });
-
-            updateArrow(referenceItem);
-            updateFirstLast(inserted.group.find(".k-first, .k-last").add(inserted.items));
-            updateHasAriaPopup(getParentLiItems(inserted.group));
-
-            return this;
         },
 
         insertBefore: function(item, referenceItem) {
-            referenceItem = this.attemptGetItem(referenceItem);
+            const that = this;
 
-            var inserted = this._insert(item, referenceItem, referenceItem.parent());
+            return that._renderWithIconContext(function() {
+                referenceItem = that.attemptGetItem(referenceItem);
 
-            each(inserted.items, function(i) {
-                referenceItem.before(this);
-                updateArrow(this);
-                updateFirstLast(this);
-                storeItemSelectEventHandler(this, item[i] || item);
+                const inserted = that._insert(item, referenceItem, referenceItem.parent());
+
+                each(inserted.items, function(i) {
+                    referenceItem.before(this);
+                    updateArrow(this);
+                    updateFirstLast(this);
+                    storeItemSelectEventHandler(this, item[i] || item);
+                });
+
+                updateFirstLast(referenceItem);
+
+                return that;
             });
-
-            updateFirstLast(referenceItem);
-
-            return this;
         },
 
         insertAfter: function(item, referenceItem) {
-            referenceItem = this.attemptGetItem(referenceItem);
+            const that = this;
 
-            var inserted = this._insert(item, referenceItem, referenceItem.parent());
+            return that._renderWithIconContext(function() {
+                referenceItem = that.attemptGetItem(referenceItem);
 
-            each(inserted.items, function(i) {
-                referenceItem.after(this);
-                updateArrow(this);
-                updateFirstLast(this);
-                storeItemSelectEventHandler(this, item[i] || item);
+                const inserted = that._insert(item, referenceItem, referenceItem.parent());
+
+                each(inserted.items, function(i) {
+                    referenceItem.after(this);
+                    updateArrow(this);
+                    updateFirstLast(this);
+                    storeItemSelectEventHandler(this, item[i] || item);
+                });
+
+                updateFirstLast(referenceItem);
+
+                return that;
             });
-
-            updateFirstLast(referenceItem);
-
-            return this;
         },
 
         _insert: function(item, referenceItem, parent) {
-            var that = this,
-                items, groups;
+            const that = this;
+            let items, groups;
 
             if (!referenceItem || !referenceItem.length) {
                 parent = that.element;
@@ -2620,19 +2636,21 @@ export const __meta__ = {
 
         renderItem: function(options) {
             var that = this;
-            options = extend({ menu: that, group: {} }, options);
+            return that._renderWithIconContext(function() {
+                options = extend({ menu: that, group: {} }, options);
 
-            var empty = that.templates.empty,
-                item = options.item;
+                var empty = that.templates.empty,
+                    item = options.item;
 
-            return that.templates.item(extend(options, {
-                separator: item.separator ? that.templates.separator : empty,
-                sprite: that.templates.sprite,
-                itemWrapper: that.templates.itemWrapper,
-                renderContent: that.renderContent,
-                arrow: item.items || item.content || item[that.options.dataContentField[0]] ? that.templates.arrow : empty,
-                subGroup: that.renderGroup.bind(that)
-            }, rendering));
+                return that.templates.item(extend(options, {
+                    separator: item.separator ? that.templates.separator : empty,
+                    sprite: that.templates.sprite,
+                    itemWrapper: that.templates.itemWrapper,
+                    renderContent: that.renderContent,
+                    arrow: item.items || item.content || item[that.options.dataContentField[0]] ? that.templates.arrow : empty,
+                    subGroup: that.renderGroup.bind(that)
+                }, rendering));
+            });
         },
 
         renderGroup: function(options) {
@@ -2678,7 +2696,8 @@ export const __meta__ = {
 
             that._popup();
             that._wire();
-        },
+            Menu.fn.endInit.call(that);
+},
 
         _initOverflow: function(options) {
             var that = this;

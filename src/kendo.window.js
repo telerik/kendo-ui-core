@@ -72,12 +72,21 @@ import "./kendo.html.button.js";
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
             ZINDEX = "zIndex",
-            MINIMIZE_MAXIMIZEICONSELECTORS = ".k-window-titlebar-actions .k-i-window-minimize,.k-window-titlebar-actions .k-i-window,.k-window-titlebar-actions .k-svg-i-window-minimize,.k-window-titlebar-actions .k-svg-i-window",
-            KPINICONCLASSSELECTOR = ".k-i-pin,.k-svg-i-pin",
-            KUNPINICONCLASSSELECTOR = ".k-i-unpin,.k-svg-i-unpin",
+            MINIMIZE_MAXIMIZEICONSELECTORS = ".k-window-titlebar-actions [ref-window-minimize],.k-window-titlebar-actions [ref-window-maximize]",
+            KPINICONCLASSSELECTOR = "[ref-window-pin]",
+            KUNPINICONCLASSSELECTOR = "[ref-window-unpin]",
             PIN_UNPINICONCLASSSELECTOR = KPINICONCLASSSELECTOR + "," + KUNPINICONCLASSSELECTOR,
             TITLEBAR_BUTTONSSELECTOR = ".k-window-titlebar .k-window-titlebar-action",
-            REFRESHICONSELECTOR = ".k-window-titlebar .k-i-arrow-rotate-cw,.k-window-titlebar .k-svg-i-arrow-rotate-cw",
+            REFRESHICONSELECTOR = ".k-window-titlebar [ref-window-refresh]",
+            WINDOW_ACTION_REFS = {
+                close: "_close",
+                maximize: "maximize",
+                minimize: "minimize",
+                restore: "restore",
+                refresh: "refresh",
+                pin: "pin",
+                unpin: "unpin"
+            },
             WINDOWEVENTSHANDLED = "WindowEventsHandled",
             zero = /^0[a-z]*$/i,
             isLocalUrl = kendo.isLocalUrl,
@@ -321,7 +330,9 @@ import "./kendo.html.button.js";
                 if (that._showWatermarkOverlay) {
                     that._showWatermarkOverlay(that.wrapper[0]);
                 }
-            },
+
+            Widget.fn.endInit.call(this);
+},
 
             _buttonEnter: function(e) {
                 $(e.currentTarget).addClass(KHOVERSTATE);
@@ -825,25 +836,17 @@ import "./kendo.html.button.js";
                 return overlay;
             },
 
-            _actionForIcon: function(icon) {
-                var iconClass = /\bk(-svg)?-i(-\w+)+\b/.exec(icon[0].className)[0];
-                return {
-                    "x": "_close",
-                    "window": "maximize",
-                    "window-minimize": "minimize",
-                    "window-restore": "restore",
-                    "arrow-rotate-cw": "refresh",
-                    "pin": "pin",
-                    "unpin": "unpin"
-                }[iconClass.replace(/(k-i-|k-svg-i-)/, "")];
+            _actionForRef: function(action) {
+                var ref = Object.keys(WINDOW_ACTION_REFS).find((name) => action.is(`[ref-window-${name}]`));
+
+                return WINDOW_ACTION_REFS[ref];
             },
 
             _windowActionHandler: function(e) {
                 if (this._closing) {
                     return;
                 }
-                var icon = $(e.target).closest(".k-window-titlebar-action").find(".k-icon,.k-svg-icon");
-                var action = this._actionForIcon(icon);
+                var action = this._actionForRef($(e.target).closest(".k-window-titlebar-action"));
 
                 if (action) {
                     e.preventDefault();
@@ -1323,14 +1326,14 @@ import "./kendo.html.button.js";
                     .removeClass(MAXIMIZEDSTATE)
                     .removeClass(KWINDOWMINIMIZED)
                     .find(".k-window-content,.k-resize-handle").show().end()
-                    .find(".k-window-titlebar .k-i-window-restore,.k-window-titlebar .k-svg-i-window-restore").parent().remove().end().end()
-                    .find(MINIMIZE_MAXIMIZEICONSELECTORS).parent().show().end().end()
-                    .find(PIN_UNPINICONCLASSSELECTOR).parent().show();
+                    .find("[ref-window-restore]").remove().end()
+                    .find(MINIMIZE_MAXIMIZEICONSELECTORS).show().end()
+                    .find(PIN_UNPINICONCLASSSELECTOR).show();
 
                 if (options.isMaximized) {
-                    that.wrapper.find(".k-i-window,.k-svg-i-window").parent().trigger("focus");
+                    that.wrapper.find("[ref-window-maximize]").trigger("focus");
                 } else if (options.isMinimized) {
-                    that.wrapper.find(".k-i-window-minimize,.k-svg-i-window-minimize").parent().trigger("focus");
+                    that.wrapper.find("[ref-window-minimize]").trigger("focus");
                 }
 
                 that.options.width = restoreOptions.width;
@@ -1375,16 +1378,16 @@ import "./kendo.html.button.js";
 
                 wrapper
                     .children(KWINDOWRESIZEHANDLES).hide().end()
-                    .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZEICONSELECTORS).parent().hide()
+                    .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZEICONSELECTORS).hide()
                     .eq(0).before(templates.action({ name: "window-restore" }));
 
                 callback.call(that);
 
-                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPINICONCLASSSELECTOR).parent().toggle(actionId !== "maximize");
+                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPINICONCLASSSELECTOR).toggle(actionId !== "maximize");
 
                 that.trigger(actionId);
 
-                wrapper.find(".k-i-window-restore,.k-svg-i-window-restore").parent().trigger("focus");
+                wrapper.find("[ref-window-restore]").trigger("focus");
 
                 return that;
             },
@@ -1541,9 +1544,10 @@ import "./kendo.html.button.js";
                     }
 
                     wrapper.css(extend(position, { position: "fixed" }));
-                    var pinIcon = wrapper.children(KWINDOWTITLEBAR).find(KPINICONCLASSSELECTOR).eq(0);
-                    if (pinIcon.length > 0) {
-                        kendo.ui.icon(pinIcon, { icon: "unpin" });
+                    var pinAction = wrapper.children(KWINDOWTITLEBAR).find(KPINICONCLASSSELECTOR).eq(0);
+                    if (pinAction.length > 0) {
+                        kendo.ui.icon(pinAction.find(".k-icon,.k-svg-icon"), { icon: "unpin" });
+                        pinAction.removeAttr("ref-window-pin").attr("ref-window-unpin", true);
                     }
 
                     that._isPinned = true;
@@ -1607,9 +1611,10 @@ import "./kendo.html.button.js";
                     position.left = constrain(left, that.minLeft, that.maxLeft);
 
                     wrapper.css(extend(position, { position: "" }));
-                    var pinIcon = wrapper.children(KWINDOWTITLEBAR).find(KUNPINICONCLASSSELECTOR).eq(0);
-                    if (pinIcon.length > 0) {
-                        kendo.ui.icon(pinIcon, { icon: "pin" });
+                    var pinAction = wrapper.children(KWINDOWTITLEBAR).find(KUNPINICONCLASSSELECTOR).eq(0);
+                    if (pinAction.length > 0) {
+                        kendo.ui.icon(pinAction.find(".k-icon,.k-svg-icon"), { icon: "pin" });
+                        pinAction.removeAttr("ref-window-unpin").attr("ref-window-pin", true);
                     }
                 }
             },
@@ -1709,7 +1714,7 @@ import "./kendo.html.button.js";
 
             _ajaxComplete: function() {
                 clearTimeout(this._loadingIconTimeout);
-                this.wrapper.find(REFRESHICONSELECTOR).removeClass(LOADINGICONCLASS);
+                this.wrapper.find(REFRESHICONSELECTOR).find(".k-icon,.k-svg-icon").removeClass(LOADINGICONCLASS);
             },
 
             _ajaxError: function(xhr, status) {
@@ -1731,7 +1736,7 @@ import "./kendo.html.button.js";
             },
 
             _showLoading: function() {
-                this.wrapper.find(REFRESHICONSELECTOR).addClass(LOADINGICONCLASS);
+                this.wrapper.find(REFRESHICONSELECTOR).find(".k-icon,.k-svg-icon").addClass(LOADINGICONCLASS);
             },
 
             _ajaxRequest: function(options) {
@@ -1847,9 +1852,18 @@ import "./kendo.html.button.js";
             wrapper: template(() => "<div class='k-window'></div>"),
             action: template(({ name, icon }) => {
                 let iconName = (icon || "").toLowerCase() || name.toLowerCase();
+                let actionRef = {
+                    "close": "close",
+                    "window-minimize": "minimize",
+                    "window-maximize": "maximize",
+                    "window-restore": "restore",
+                    "pin": "pin",
+                    "unpin": "unpin",
+                    "refresh": "refresh"
+                }[name.toLowerCase()];
                 if (iconName == "restore") { iconName = "window-restore"; }
 
-                return kendo.html.renderButton(`<button class='k-window-titlebar-action' aria-label='${name}'></button>`, { icon: iconName, fillMode: "flat", size: "xsmall" });
+                return kendo.html.renderButton(`<button ${actionRef ? `ref-window-${actionRef}` : ""} class='k-window-titlebar-action' aria-label='${name}'></button>`, { icon: iconName, fillMode: "flat", size: "xsmall" });
             }),
             titlebar: template(({ title }) =>
                 "<div class='k-window-titlebar'>" +
@@ -2221,4 +2235,3 @@ import "./kendo.html.button.js";
 
     })(window.kendo.jQuery);
 export default kendo;
-

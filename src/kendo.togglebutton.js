@@ -38,7 +38,8 @@ import "./kendo.button.js";
                 }
 
                 kendo.notify(that);
-            },
+                Button.fn.endInit.call(that);
+},
 
             destroy: function() {
                 var that = this;

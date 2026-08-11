@@ -2019,4 +2019,45 @@
 
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Activo",
+            "completed": "Completado",
+            "awaitingApproval": "En espera de aprobación",
+            "error": "Error"
+        },
+        "approve": "Aprobar",
+        "reject": "Rechazar",
+        "parametersLabel": "Parámetros",
+        "resultLabel": "Resultado"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Fuente anterior",
+        "nextSourceAction": "Fuente siguiente"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Empezar de nuevo",
+        "restore": "Restaurar punto de control",
+        "redo": "Rehacer",
+        "checkpointRestoredText": "Punto de control restaurado"
+    });
+}
+
 })(window.kendo.jQuery);

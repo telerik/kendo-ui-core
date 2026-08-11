@@ -2326,4 +2326,45 @@
 
     }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "活动中",
+            "completed": "已完成",
+            "awaitingApproval": "待审批",
+            "error": "错误"
+        },
+        "approve": "批准",
+        "reject": "拒绝",
+        "parametersLabel": "参数",
+        "resultLabel": "结果"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "上一个来源",
+        "nextSourceAction": "下一个来源"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "重新开始",
+        "restore": "恢复检查点",
+        "redo": "重做",
+        "checkpointRestoredText": "检查点已恢复"
+    });
+}
+
 })(window.kendo.jQuery);

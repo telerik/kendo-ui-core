@@ -1657,4 +1657,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Attivo",
+            "completed": "Completato",
+            "awaitingApproval": "In attesa di approvazione",
+            "error": "Errore"
+        },
+        "approve": "Approva",
+        "reject": "Rifiuta",
+        "parametersLabel": "Parametri",
+        "resultLabel": "Risultato"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Fonte precedente",
+        "nextSourceAction": "Fonte successiva"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Ricomincia",
+        "restore": "Ripristina checkpoint",
+        "redo": "Ripeti",
+        "checkpointRestoredText": "Checkpoint ripristinato"
+    });
+}
+
 })(window.kendo.jQuery);

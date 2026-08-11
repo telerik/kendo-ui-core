@@ -1,4 +1,5 @@
 import "./kendo.html.base.js";
+import { iconService } from "./core/services/icon-override.service";
 
 export const __meta__ = {
     id: "html.icon",
@@ -17,6 +18,15 @@ export const __meta__ = {
     const KI_PREFFIX = 'k-i-';
     const KSVGICON = 'k-icon k-svg-icon';
     const KSVG_PREFFIX = 'k-svg-i-';
+
+    function resolveSVGIconOverride(iconName, element) {
+        const result = iconService.resolve(iconName, element);
+        if (typeof result === "string") {
+            const camelName = result.replace(/-./g, function(x) { return x[1].toUpperCase(); });
+            return kendo.ui.svgIcons[camelName] || kendo.ui.svgIcons[camelName + "Icon"] || null;
+        }
+        return result;
+    }
 
     const FLIP_PREFIX = 'k-flip-';
     const FLIP_HORIZONTAL = `${FLIP_PREFIX}h`;
@@ -37,6 +47,7 @@ export const __meta__ = {
     };
 
     const VALID_VARIANTS = ['solid', 'outline', 'duotone'];
+
     const renderIcon = function(element, options) {
         if (!element || $.isPlainObject(element) || kendo.isString(element)) {
             options = element;
@@ -144,10 +155,13 @@ export const __meta__ = {
             icon: null
         }),
         _wrapper: function() {
-            var that = this,
+            const that = this,
+                iconName = typeof that.options.icon === "string" ? that.options.icon.replace(KI_PREFFIX, '') : null,
+                resolvedIcon = iconName && iconService.resolve(iconName, that.element[0]),
                 // Find if there is an existing k-i- class appended to the element.
                 currentIconClass = that.element[0].className.split(" ").find(x => x.includes(KI_PREFFIX)),
-                className = that.options.icon ? `${that.options.icon.startsWith(KI_PREFFIX) ? "" : KI_PREFFIX}${that.options.icon}` : "";
+                icon = typeof resolvedIcon === "string" ? resolvedIcon : that.options.icon,
+                className = icon ? `${icon.startsWith(KI_PREFFIX) ? "" : KI_PREFFIX}${icon}` : "";
 
             that._className = className;
             that.wrapper = that.element
@@ -201,8 +215,18 @@ export const __meta__ = {
                     }
                 }
 
-                const camelName = iconName.replace(/-(solid|outline|duotone)/, '').replace(/-./g, x=>x[1].toUpperCase());
-                icon = kendo.ui.svgIcons[camelName] || kendo.ui.svgIcons[`${camelName}Icon`];
+                const overrideIcon = resolveSVGIconOverride(iconName, that.element[0]);
+                if (overrideIcon) {
+                    icon = overrideIcon;
+                } else {
+                    const camelName = iconName.replace(/-(solid|outline|duotone)/, '').replace(/-./g, x=>x[1].toUpperCase());
+                    icon = kendo.ui.svgIcons[camelName] || kendo.ui.svgIcons[`${camelName}Icon`];
+                }
+            } else if ($.isPlainObject(icon) && icon.name) {
+                const overrideIcon = resolveSVGIconOverride(icon.name, that.element[0]);
+                if (overrideIcon) {
+                    icon = overrideIcon;
+                }
             }
 
             className = icon && icon.name ? `${KSVG_PREFFIX}${icon.name}` : '';
@@ -267,4 +291,3 @@ export const __meta__ = {
     }]);
 })(window.kendo.jQuery);
 export default kendo;
-

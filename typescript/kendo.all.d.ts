@@ -3076,6 +3076,60 @@ declare namespace kendo.ui {
         errorThrown?: string;
     }
 
+    class ChainOfThought extends kendo.ui.Widget {
+        static fn: ChainOfThought;
+
+        options: ChainOfThoughtOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ChainOfThought;
+
+        constructor(element: Element, options?: ChainOfThoughtOptions);
+
+        toggle(expand?: boolean): void;
+        expand(): void;
+        collapse(): void;
+        setThoughts(thoughts: ChainOfThoughtThought[]): void;
+        destroy(): void;
+    }
+
+    interface ChainOfThoughtThought {
+        label?: string | undefined;
+        secondaryLabel?: string | undefined;
+        svgIcon?: string | undefined;
+        completed?: boolean | undefined;
+        linesAdded?: number | undefined;
+        linesRemoved?: number | undefined;
+        time?: string | undefined;
+        children?: string | undefined;
+    }
+
+    interface ChainOfThoughtOptions {
+        name?: string | undefined;
+        label?: string | undefined;
+        secondaryLabel?: string | undefined;
+        svgIcon?: string | undefined;
+        completed?: boolean | undefined;
+        expanded?: boolean | undefined;
+        expandable?: boolean | undefined;
+        thoughts?: ChainOfThoughtThought[] | undefined;
+        linesAdded?: number | undefined;
+        linesRemoved?: number | undefined;
+        thoughtTemplate?: Function | undefined;
+        expandedChange?(e: ChainOfThoughtExpandedChangeEvent): void;
+    }
+    interface ChainOfThoughtEvent {
+        sender: ChainOfThought;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ChainOfThoughtExpandedChangeEvent extends ChainOfThoughtEvent {
+        expanded?: boolean | undefined;
+    }
+
     class ChartWizard extends kendo.ui.Widget {
         static fn: ChartWizard;
 
@@ -4124,6 +4178,47 @@ declare namespace kendo.ui {
         target?: JQuery | undefined;
     }
 
+    class Checkpoint extends kendo.ui.Widget {
+        static fn: Checkpoint;
+
+        options: CheckpointOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Checkpoint;
+
+        constructor(element: Element, options?: CheckpointOptions);
+
+        setState(state: string): void;
+        destroy(): void;
+    }
+
+    interface CheckpointMessages {
+        startOver?: string | undefined;
+        restore?: string | undefined;
+        redo?: string | undefined;
+        checkpointRestoredText?: string | undefined;
+    }
+
+    interface CheckpointOptions {
+        name?: string | undefined;
+        state?: string | undefined;
+        displayMode?: string | undefined;
+        template?: Function | undefined;
+        messages?: CheckpointMessages | undefined;
+        action?(e: CheckpointActionEvent): void;
+    }
+    interface CheckpointEvent {
+        sender: Checkpoint;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface CheckpointActionEvent extends CheckpointEvent {
+        action?: string | undefined;
+    }
+
     class Chip extends kendo.ui.Widget {
         static fn: Chip;
 
@@ -4299,6 +4394,59 @@ declare namespace kendo.ui {
         sender: CircularProgressBar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    class Citation extends kendo.ui.Widget {
+        static fn: Citation;
+
+        options: CitationOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Citation;
+
+        constructor(element: Element, options?: CitationOptions);
+
+        open(): void;
+        close(): void;
+        setOptions(options: CitationOptions): void;
+        destroy(): void;
+    }
+
+    interface CitationSource {
+        title?: string | undefined;
+        description?: string | undefined;
+        url?: string | undefined;
+    }
+
+    interface CitationMessages {
+        previousSourceAction?: string | undefined;
+        nextSourceAction?: string | undefined;
+    }
+
+    interface CitationOptions {
+        name?: string | undefined;
+        sources?: CitationSource[] | undefined;
+        label?: string | undefined;
+        svgIcon?: string | undefined;
+        showAdditionalCount?: boolean | undefined;
+        showOn?: string | undefined;
+        sourceIcon?: string | undefined;
+        sourceSVGIcon?: string | undefined;
+        popoverWidth?: number | undefined;
+        bodyTemplate?: Function | undefined;
+        messages?: CitationMessages | undefined;
+        open?(e: CitationOpenEvent): void;
+    }
+    interface CitationEvent {
+        sender: Citation;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface CitationOpenEvent extends CitationEvent {
+        sources?: CitationSource[] | undefined;
     }
 
     class ColorGradient extends kendo.ui.Widget {
@@ -11446,6 +11594,47 @@ declare namespace kendo.ui {
         target?: Element | undefined;
     }
 
+    class Reasoning extends kendo.ui.Widget {
+        static fn: Reasoning;
+
+        options: ReasoningOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Reasoning;
+
+        constructor(element: Element, options?: ReasoningOptions);
+
+        toggle(expand?: boolean): void;
+        expand(): void;
+        collapse(): void;
+        destroy(): void;
+    }
+
+    interface ReasoningOptions {
+        name?: string | undefined;
+        label?: string | undefined;
+        secondaryLabel?: string | undefined;
+        svgIcon?: string | undefined;
+        completed?: boolean | undefined;
+        expanded?: boolean | undefined;
+        expandable?: boolean | undefined;
+        content?: string | undefined;
+        contentTemplate?: Function | undefined;
+        time?: string | undefined;
+        expandedChange?(e: ReasoningExpandedChangeEvent): void;
+    }
+    interface ReasoningEvent {
+        sender: Reasoning;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ReasoningExpandedChangeEvent extends ReasoningEvent {
+        expanded?: boolean | undefined;
+    }
+
     class ResponsivePanel extends kendo.ui.Widget {
         static fn: ResponsivePanel;
 
@@ -14339,6 +14528,68 @@ declare namespace kendo.ui {
     interface ToolBarOverflowCloseEvent extends ToolBarEvent {}
 
     interface ToolBarOverflowOpenEvent extends ToolBarEvent {}
+
+    class ToolCall extends kendo.ui.Widget {
+        static fn: ToolCall;
+
+        options: ToolCallOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ToolCall;
+
+        constructor(element: Element, options?: ToolCallOptions);
+
+        toggle(expand?: boolean): void;
+        expand(): void;
+        collapse(): void;
+        setState(state: string): void;
+        destroy(): void;
+    }
+
+    interface ToolCallMessages {
+        states?: { active?: string | undefined; completed?: string | undefined; awaitingApproval?: string | undefined; error?: string | undefined } | undefined;
+        approve?: string | undefined;
+        reject?: string | undefined;
+        parametersLabel?: string | undefined;
+        resultLabel?: string | undefined;
+    }
+
+    interface ToolCallOptions {
+        name?: string | undefined;
+        svgIcon?: string | undefined;
+        label?: string | undefined;
+        secondaryLabel?: string | undefined;
+        state?: string | undefined;
+        expandable?: boolean | undefined;
+        expanded?: boolean | undefined;
+        parameters?: any;
+        result?: any;
+        approvalText?: string | undefined;
+        errorText?: string | undefined;
+        statusSVGIcon?: string | undefined;
+        parametersTemplate?: Function | undefined;
+        approvalTemplate?: Function | undefined;
+        resultTemplate?: Function | undefined;
+        errorTemplate?: Function | undefined;
+        messages?: ToolCallMessages | undefined;
+        expandedChange?(e: ToolCallExpandedChangeEvent): void;
+        action?(e: ToolCallActionEvent): void;
+    }
+    interface ToolCallEvent {
+        sender: ToolCall;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ToolCallExpandedChangeEvent extends ToolCallEvent {
+        expanded?: boolean | undefined;
+    }
+
+    interface ToolCallActionEvent extends ToolCallEvent {
+        action?: string | undefined;
+    }
 
     class Tooltip extends kendo.ui.Widget {
         static fn: Tooltip;
@@ -27494,6 +27745,10 @@ interface JQuery {
     kendoCaptcha(options: kendo.ui.CaptchaOptions): JQuery;
     data(key: "kendoCaptcha"): kendo.ui.Captcha | undefined;
 
+    kendoChainOfThought(): JQuery;
+    kendoChainOfThought(options: kendo.ui.ChainOfThoughtOptions): JQuery;
+    data(key: "kendoChainOfThought"): kendo.ui.ChainOfThought | undefined;
+
     kendoChart(): JQuery;
     kendoChart(options: kendo.dataviz.ui.ChartOptions): JQuery;
     data(key: "kendoChart"): kendo.dataviz.ui.Chart | undefined;
@@ -27510,6 +27765,10 @@ interface JQuery {
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
     data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup | undefined;
 
+    kendoCheckpoint(): JQuery;
+    kendoCheckpoint(options: kendo.ui.CheckpointOptions): JQuery;
+    data(key: "kendoCheckpoint"): kendo.ui.Checkpoint | undefined;
+
     kendoChip(): JQuery;
     kendoChip(options: kendo.ui.ChipOptions): JQuery;
     data(key: "kendoChip"): kendo.ui.Chip | undefined;
@@ -27525,6 +27784,10 @@ interface JQuery {
     kendoCircularProgressBar(): JQuery;
     kendoCircularProgressBar(options: kendo.ui.CircularProgressBarOptions): JQuery;
     data(key: "kendoCircularProgressBar"): kendo.ui.CircularProgressBar | undefined;
+
+    kendoCitation(): JQuery;
+    kendoCitation(options: kendo.ui.CitationOptions): JQuery;
+    data(key: "kendoCitation"): kendo.ui.Citation | undefined;
 
     kendoColorGradient(): JQuery;
     kendoColorGradient(options: kendo.ui.ColorGradientOptions): JQuery;
@@ -27797,6 +28060,10 @@ interface JQuery {
     kendoRating(options: kendo.ui.RatingOptions): JQuery;
     data(key: "kendoRating"): kendo.ui.Rating | undefined;
 
+    kendoReasoning(): JQuery;
+    kendoReasoning(options: kendo.ui.ReasoningOptions): JQuery;
+    data(key: "kendoReasoning"): kendo.ui.Reasoning | undefined;
+
     kendoResponsivePanel(): JQuery;
     kendoResponsivePanel(options: kendo.ui.ResponsivePanelOptions): JQuery;
     data(key: "kendoResponsivePanel"): kendo.ui.ResponsivePanel | undefined;
@@ -27900,6 +28167,10 @@ interface JQuery {
     kendoToolBar(): JQuery;
     kendoToolBar(options: kendo.ui.ToolBarOptions): JQuery;
     data(key: "kendoToolBar"): kendo.ui.ToolBar | undefined;
+
+    kendoToolCall(): JQuery;
+    kendoToolCall(options: kendo.ui.ToolCallOptions): JQuery;
+    data(key: "kendoToolCall"): kendo.ui.ToolCall | undefined;
 
     kendoTooltip(): JQuery;
     kendoTooltip(options: kendo.ui.TooltipOptions): JQuery;

@@ -84,7 +84,8 @@ import "./kendo.html.button.js";
                 if (that._showWatermarkOverlay) {
                     that._showWatermarkOverlay(that.wrapper[0]);
                 }
-            },
+                Widget.fn.endInit.call(that);
+},
 
             _init: function(element, options) {
                 var that = this,

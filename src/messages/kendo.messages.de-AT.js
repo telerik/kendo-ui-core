@@ -1804,4 +1804,43 @@
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktiv",
+            "completed": "Abgeschlossen",
+            "awaitingApproval": "Warte auf Genehmigung",
+            "error": "Fehler"
+        },
+        "approve": "Genehmigen",
+        "reject": "Ablehnen",
+        "parametersLabel": "Parameter",
+        "resultLabel": "Ergebnis"
+    });
+}
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Vorherige Quelle",
+        "nextSourceAction": "Nächste Quelle"
+    });
+}
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Von vorne beginnen",
+        "restore": "Checkpoint wiederherstellen",
+        "redo": "Wiederholen",
+        "checkpointRestoredText": "Checkpoint wiederhergestellt"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -28,3 +28,4 @@ export * from "./kendo-jquery.service";
 export * from "./widget-registry.service";
 export * from "./widget-utils.service";
 export * from "./namespace.service";
+export * from "./icon-override.service";

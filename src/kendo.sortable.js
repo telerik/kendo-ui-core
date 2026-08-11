@@ -92,7 +92,8 @@ export const __meta__ = {
                 that._toggleTabIndex(firstItem);
                 items.find(":kendoFocusable").attr("tabindex", -1);
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             START,

@@ -43,7 +43,8 @@ export const __meta__ = {
             });
 
             that.userEvents = that.draggable.userEvents;
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             RESIZE,

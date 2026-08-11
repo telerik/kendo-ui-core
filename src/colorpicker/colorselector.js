@@ -39,7 +39,7 @@ import "../kendo.color.js";
             if (options._standalone) {
                 that._triggerSelect = that._triggerChange;
             }
-        },
+},
         options: {
             name: "ColorSelector",
             ARIATemplate: (data) => `Current selected color is ${data || "none"}`,

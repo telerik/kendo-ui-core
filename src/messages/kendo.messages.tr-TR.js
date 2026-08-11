@@ -1632,4 +1632,45 @@ if (kendo.dataviz.ui.Chart) {
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktif",
+            "completed": "Tamamlandı",
+            "awaitingApproval": "Onay Bekleniyor",
+            "error": "Hata"
+        },
+        "approve": "Onayla",
+        "reject": "Reddet",
+        "parametersLabel": "Parametreler",
+        "resultLabel": "Sonuç"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Önceki kaynak",
+        "nextSourceAction": "Sonraki kaynak"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Baştan Başla",
+        "restore": "Kontrol Noktasını Geri Yükle",
+        "redo": "Yeniden Yap",
+        "checkpointRestoredText": "Kontrol Noktası Geri Yüklendi"
+    });
+}
+
 })(window.kendo.jQuery);

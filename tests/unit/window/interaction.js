@@ -69,6 +69,20 @@ describe("interaction", function() {
         assert.isOk(!dialog.options.isMaximized);
     });
 
+    it("clicking the close action triggers close", function() {
+        let closed = false;
+        dialog = createWindow({
+            actions: ["close"],
+            close: function() {
+                closed = true;
+            }
+        });
+
+        dialog.wrapper.find("[ref-window-close]").trigger("click");
+
+        assert.isTrue(closed);
+    });
+
     asyncTest("resizing window resizes inner widgets", function(done) {
         kendo.ui.plugin(ResizableWidget);
 

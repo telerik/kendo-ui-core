@@ -64,7 +64,8 @@ export const __meta__ = {
             kendo.notify(that);
 
             that._applyCssClasses();
-        },
+            Widget.fn.endInit.call(that);
+},
 
         options: {
             name: "SplitButton",

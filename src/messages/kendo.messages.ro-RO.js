@@ -1593,4 +1593,45 @@ $.extend(true, kendo.spreadsheet.messages.view,{
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Activ",
+            "completed": "Finalizat",
+            "awaitingApproval": "În așteptarea aprobării",
+            "error": "Eroare"
+        },
+        "approve": "Aprobă",
+        "reject": "Respinge",
+        "parametersLabel": "Parametri",
+        "resultLabel": "Rezultat"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Sursa anterioară",
+        "nextSourceAction": "Sursa următoare"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Reîncepe",
+        "restore": "Restaurează punctul de control",
+        "redo": "Refă",
+        "checkpointRestoredText": "Punctul de control a fost restaurat"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -53,7 +53,8 @@ import "../kendo.core.js";
             that.wrapper.attr("aria-label", that._ariaTemplate(that.value() || ""));
 
             that._attachEvents();
-        },
+            ColorSelector.fn.endInit.call(that);
+},
         focus: function(){
             if (this.wrapper && !this.wrapper.is("[unselectable='on']")) {
                 this.wrapper.trigger("focus");

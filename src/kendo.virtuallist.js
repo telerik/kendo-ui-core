@@ -550,7 +550,8 @@ export const __meta__ = {
             }, options.delay));
 
             that._selectable();
-        },
+            DataBoundWidget.fn.endInit.call(that);
+},
 
         options: {
             name: "VirtualList",

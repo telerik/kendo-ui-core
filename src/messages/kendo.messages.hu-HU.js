@@ -1624,4 +1624,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktív",
+            "completed": "Befejezve",
+            "awaitingApproval": "Jóváhagyásra vár",
+            "error": "Hiba"
+        },
+        "approve": "Jóváhagyás",
+        "reject": "Elutasítás",
+        "parametersLabel": "Paraméterek",
+        "resultLabel": "Eredmény"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Előző forrás",
+        "nextSourceAction": "Következő forrás"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Újrakezdés",
+        "restore": "Ellenőrzési pont visszaállítása",
+        "redo": "Újra",
+        "checkpointRestoredText": "Ellenőrzési pont visszaállítva"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -136,7 +136,8 @@ export const __meta__ = {
             that._createHeader();
             that._createFooter();
             that._wrapInView();
-        },
+            Widget.fn.endInit.call(that);
+},
 
         options: {
             id: "actionsheet-view",

@@ -73,7 +73,8 @@ export const __meta__ = {
             }
 
             that._attachEvents();
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             SELECT,

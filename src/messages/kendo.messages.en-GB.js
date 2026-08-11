@@ -1668,4 +1668,45 @@
       $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Active",
+            "completed": "Completed",
+            "awaitingApproval": "Awaiting Approval",
+            "error": "Error"
+        },
+        "approve": "Approve",
+        "reject": "Reject",
+        "parametersLabel": "Parameters",
+        "resultLabel": "Result"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Previous source",
+        "nextSourceAction": "Next source"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Start Over",
+        "restore": "Restore Checkpoint",
+        "redo": "Redo",
+        "checkpointRestoredText": "Checkpoint Restored"
+    });
+}
+
 })(window.kendo.jQuery);

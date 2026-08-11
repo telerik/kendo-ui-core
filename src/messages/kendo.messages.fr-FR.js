@@ -2118,4 +2118,45 @@ if (kendo.ui.PivotGrid) {
 
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Actif",
+            "completed": "Terminé",
+            "awaitingApproval": "En attente d'approbation",
+            "error": "Erreur"
+        },
+        "approve": "Approuver",
+        "reject": "Rejeter",
+        "parametersLabel": "Paramètres",
+        "resultLabel": "Résultat"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Source précédente",
+        "nextSourceAction": "Source suivante"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Recommencer",
+        "restore": "Restaurer le point de contrôle",
+        "redo": "Rétablir",
+        "checkpointRestoredText": "Point de contrôle restauré"
+    });
+}
+
 })(window.kendo.jQuery);

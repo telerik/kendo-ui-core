@@ -1896,4 +1896,45 @@ if (kendo.ui.NumericTextBox) {
         });
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Активен",
+            "completed": "Завършен",
+            "awaitingApproval": "Изчаква одобрение",
+            "error": "Грешка"
+        },
+        "approve": "Одобри",
+        "reject": "Откажи",
+        "parametersLabel": "Параметри",
+        "resultLabel": "Резултат"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Предишен източник",
+        "nextSourceAction": "Следващ източник"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Започни отначало",
+        "restore": "Възстанови контролна точка",
+        "redo": "Повторно",
+        "checkpointRestoredText": "Контролната точка е възстановена"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -176,7 +176,8 @@ export const __meta__ = {
             if (that._validateOnInit()) {
                 that.validate();
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [ VALIDATE, CHANGE, VALIDATE_INPUT ],
 

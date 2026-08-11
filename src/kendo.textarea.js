@@ -65,7 +65,8 @@ export const __meta__ = {
             }
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             CHANGE

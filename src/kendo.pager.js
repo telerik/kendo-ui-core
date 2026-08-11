@@ -268,7 +268,8 @@ export const __meta__ = {
             that.resize();
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(this);
+},
 
         _initNumericInputTextBox: function() {
             let that = this,

@@ -125,7 +125,7 @@ export const __meta__ = {
             Observable.fn.init.call(that);
 
             that.bind(["press", "release"], options || {});
-        },
+},
 
         captureNext: function() {
             this.capture = true;
@@ -529,7 +529,8 @@ export const __meta__ = {
             } else {
                 dropTargets[group].push( that );
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             DRAGENTER,
@@ -606,7 +607,8 @@ export const __meta__ = {
             } else {
                 dropAreas[group].push( that );
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         destroy: function() {
             destroyDroppable(dropAreas, this);
@@ -658,7 +660,8 @@ export const __meta__ = {
 
             that._afterEndHandler = that._afterEnd.bind(that);
             that._captureEscape = that._captureEscape.bind(that);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             HOLD,

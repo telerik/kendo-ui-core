@@ -26,7 +26,8 @@ export const __meta__ = {
             that.element = that.wrapper = that._icon.element;
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
         options: extend({}, html.HTMLFontIcon.fn.options, {
             name: 'FontIcon'
         }),
@@ -49,7 +50,8 @@ export const __meta__ = {
             that.element = that.wrapper = that._icon.element;
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
         options: extend({}, html.HTMLSvgIcon.fn.options, {
             name: 'SvgIcon'
         }),

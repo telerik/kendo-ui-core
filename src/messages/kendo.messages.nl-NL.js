@@ -1710,4 +1710,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Actief",
+            "completed": "Voltooid",
+            "awaitingApproval": "Wacht op goedkeuring",
+            "error": "Fout"
+        },
+        "approve": "Goedkeuren",
+        "reject": "Afwijzen",
+        "parametersLabel": "Parameters",
+        "resultLabel": "Resultaat"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Vorige bron",
+        "nextSourceAction": "Volgende bron"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Opnieuw beginnen",
+        "restore": "Controlepunt herstellen",
+        "redo": "Opnieuw",
+        "checkpointRestoredText": "Controlepunt hersteld"
+    });
+}
+
 })(window.kendo.jQuery);

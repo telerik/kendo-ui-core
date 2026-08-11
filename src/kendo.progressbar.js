@@ -75,7 +75,8 @@ export const __meta__ = {
             if ((options.value !== options.min) && (options.value !== false)) {
                that._updateProgress();
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         setOptions: function(options) {
             var that = this,

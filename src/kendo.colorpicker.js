@@ -107,7 +107,8 @@ export const __meta__ = {
 
             that._bindMediaQueries();
             that._updateUI(value);
-        },
+            Widget.fn.endInit.call(that);
+},
         destroy: function() {
             if (this.smallMQL) {
                 this.smallMQL.destroy();

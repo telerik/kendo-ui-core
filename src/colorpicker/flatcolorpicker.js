@@ -86,7 +86,8 @@ import "../kendo.html.button.js";
 
             that._attachEvents();
             that._navigation();
-        },
+            ColorSelector.fn.endInit.call(that);
+},
         destroy: function() {
             var that = this;
 

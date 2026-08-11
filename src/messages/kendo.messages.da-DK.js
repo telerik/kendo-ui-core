@@ -1238,4 +1238,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktiv",
+            "completed": "Fuldført",
+            "awaitingApproval": "Afventer godkendelse",
+            "error": "Fejl"
+        },
+        "approve": "Godkend",
+        "reject": "Afvis",
+        "parametersLabel": "Parametre",
+        "resultLabel": "Resultat"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Forrige kilde",
+        "nextSourceAction": "Næste kilde"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Start forfra",
+        "restore": "Gendan kontrolpunkt",
+        "redo": "Gentag",
+        "checkpointRestoredText": "Kontrolpunkt gendannet"
+    });
+}
+
 })(window.kendo.jQuery);

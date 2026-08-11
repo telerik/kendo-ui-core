@@ -30,7 +30,8 @@ export const __meta__ = {
             that._attachEvents();
 
             kendo.notify(that, kendo.ui);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             CHANGE

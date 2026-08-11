@@ -27,6 +27,7 @@ import { kendoJQueryService } from "../services/kendo-jquery.service";
 import { domUtilsService } from "../services/dom-utils.service";
 import { utilsService } from "../services/utils.service";
 import { cssPropertiesService } from "../services/css-properties.service";
+import { iconService } from "../services/icon-override.service";
 import { addWatermarkOverlayAndBanner } from "../../licensing";
 // CSS property names that can be applied to widgets
 const cssPropertiesNames = ["themeColor", "fillMode", "shape", "size", "rounded", "positionMode"];
@@ -79,7 +80,7 @@ export class Widget extends Observable {
          * Features active on this widget instance.
          */
         this._features = [];
-        // Call init with the provided arguments
+        this._iconContextToken = 0;
         if (element !== undefined) {
             this.init(element, options);
         }
@@ -90,13 +91,17 @@ export class Widget extends Observable {
      * @param options - Widget configuration options
      */
     init(element, options) {
-        var _a, _b;
+        var _a, _b, _c;
         const that = this;
         // Check licensing
         that._showWatermarkOverlay = addWatermarkOverlayAndBanner;
+        const componentName = (((_a = this.options) === null || _a === void 0 ? void 0 : _a.name) || "").toLowerCase();
         // Wrap element with KendoJQuery and bind handler
         const kendoJQuery = kendoJQueryService.getConstructor();
         that.element = kendoJQuery(element).handler(that);
+        if (componentName) {
+            that._iconContextToken = iconService.beginInit(componentName, that.element[0]);
+        }
         // Initialize Observable
         Observable.fn.init.call(that);
         // Handle dataSource special case - avoid deep cloning
@@ -110,8 +115,8 @@ export class Widget extends Observable {
             options = kendoJQuery.extend({}, options, { dataSource: {} });
         }
         const userFeatures = options === null || options === void 0 ? void 0 : options.features;
-        const protoFeatures = (_a = that.options) === null || _a === void 0 ? void 0 : _a.features;
-        const features = (_b = userFeatures !== null && userFeatures !== void 0 ? userFeatures : protoFeatures) !== null && _b !== void 0 ? _b : [];
+        const protoFeatures = (_b = that.options) === null || _b === void 0 ? void 0 : _b.features;
+        const features = (_c = userFeatures !== null && userFeatures !== void 0 ? userFeatures : protoFeatures) !== null && _c !== void 0 ? _c : [];
         if (options) {
             delete options.features;
         }
@@ -135,6 +140,24 @@ export class Widget extends Observable {
         that.element.data("kendo" + options.prefix + options.name, that);
         // Bind events from options
         that.bind(that.events, options);
+    }
+    endInit() {
+        if (this._iconContextToken) {
+            const token = this._iconContextToken;
+            this._iconContextToken = 0;
+            iconService.finalizeContext(token);
+        }
+    }
+    _renderWithIconContext(fn) {
+        var _a, _b;
+        const componentName = (((_a = this.options) === null || _a === void 0 ? void 0 : _a.name) || "").toLowerCase();
+        if (!componentName) {
+            return fn();
+        }
+        const token = iconService.beginInit(componentName, (_b = this.element) === null || _b === void 0 ? void 0 : _b[0]);
+        const result = fn();
+        iconService.finalizeContext(token);
+        return result;
     }
     /**
      * Check if the element has a MVVM binding target

@@ -70,7 +70,8 @@ import "./kendo.html.button.js";
                     .on(MOUSEUP + NS + " " + MOUSEOUT + NS, that._removeActive.bind(that));
 
                 kendo.notify(that);
-            },
+                Widget.fn.endInit.call(that);
+},
 
             destroy: function() {
                 var that = this;

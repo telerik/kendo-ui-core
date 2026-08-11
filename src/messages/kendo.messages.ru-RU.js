@@ -1636,4 +1636,45 @@ if (kendo.dataviz.ui.Chart) {
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Активный",
+            "completed": "Завершено",
+            "awaitingApproval": "Ожидает одобрения",
+            "error": "Ошибка"
+        },
+        "approve": "Одобрить",
+        "reject": "Отклонить",
+        "parametersLabel": "Параметры",
+        "resultLabel": "Результат"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Предыдущий источник",
+        "nextSourceAction": "Следующий источник"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Начать сначала",
+        "restore": "Восстановить контрольную точку",
+        "redo": "Повторить",
+        "checkpointRestoredText": "Контрольная точка восстановлена"
+    });
+}
+
 })(window.kendo.jQuery);

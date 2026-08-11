@@ -71,7 +71,9 @@ export const __meta__ = {
             if (that.floatingLabel) {
                 that.floatingLabel.refresh();
             }
-        },
+
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             CHANGE,

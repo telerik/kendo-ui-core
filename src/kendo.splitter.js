@@ -132,7 +132,8 @@ export const __meta__ = {
             that.resizing = new PaneResizing(that);
 
             that.element.triggerHandler("init" + NS);
-        },
+            Widget.fn.endInit.call(this);
+},
         events: [
             EXPAND,
             COLLAPSE,

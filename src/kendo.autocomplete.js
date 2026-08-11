@@ -156,7 +156,8 @@ export const __meta__ = {
             }
 
             that._aria();
-        },
+            List.fn.endInit.call(this);
+},
 
         options: {
             name: "AutoComplete",

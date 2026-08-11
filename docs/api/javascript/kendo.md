@@ -966,6 +966,86 @@ A name or keyword indicating where to display the document returned from the pro
 If you want to display the document in a new window or iframe,
 the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.ext>"`.
 
+### setIcons
+
+Registers icon overrides globally or per component. The active `iconType` determines whether the override is rendered as an SVG or font icon.
+
+Overrides can be applied globally (affecting all components) or scoped to a specific component type. When scoped to a component, only instances of that component will use the overridden icon.
+
+
+<div class="meta-api-description">
+How do I replace or override SVG icons in Kendo UI components? Customize or swap SVG icons used by widgets globally or per component by providing a dictionary of icon names mapped to custom SVG icon objects containing name, viewBox, and content (SVG path data); configure icon replacements for specific components such as Grid, Menu, TreeView, or PanelBar by nesting overrides under the component name; apply custom branded icon sets, replace default chevrons, arrows, or action icons with organization-specific vector graphics across all Kendo UI widgets or target individual component types for selective icon customization.
+</div>
+
+#### Parameters
+
+##### dictionary `Object`
+
+An object whose keys are either icon names (for global overrides) or component names (for component-scoped overrides). Each value can be:
+
+* A **string** — the replacement icon name. In SVG mode it can reference a built-in Kendo UI SVG icon; in font mode it is used as the font icon name.
+* An **SVG icon object** with the following fields:
+    * `name` - The icon identifier (String).
+    * `viewBox` - The SVG viewBox attribute value (String), e.g. `"0 0 24 24"`.
+    * `content` - The SVG markup content (String), e.g. `"<path d='M8 5l8 7-8 7'/>"`.
+* A **nested object** mapping icon names to strings or SVG icon objects (for component-scoped overrides).
+#### Example - Override a specific icon globally using a built-in icon name
+
+    <script>
+        kendo.setIcons({
+            "chevron-right": "arrow-right"
+        });
+    </script>
+
+#### Example - Override icons for a specific component
+
+    <script>
+        kendo.setIcons({
+            grid: {
+                "chevron-right": "arrow-right"
+            },
+            menu: {
+                "chevron-right": "caret-alt-right",
+                "chevron-down": "caret-alt-down"
+            }
+        });
+    </script>
+
+#### Example - Override an icon with a custom SVG object
+
+    <script>
+        kendo.setIcons({
+            grid: {
+                "chevron-right": {
+                    name: "grid-chevron",
+                    viewBox: "0 0 24 24",
+                    content: '<path d="M8 5l8 7-8 7"/>'
+                }
+            }
+        });
+    </script>
+
+#### Example - Combine global and component-scoped overrides
+
+    <script>
+        kendo.setIcons({
+            // Global override - applies to all components
+            "plus": {
+                name: "custom-plus",
+                viewBox: "0 0 24 24",
+                content: '<path d="M12 2v20M2 12h20"/>'
+            },
+            // Component-scoped override - applies only to Grid
+            grid: {
+                "filter": {
+                    name: "grid-filter",
+                    viewBox: "0 0 24 24",
+                    content: '<path d="M3 4h18l-7 8v6l-4 2V12L3 4z"/>'
+                }
+            }
+        });
+    </script>
+
 ### stringify
 
 Converts a JavaScript object to [JSON](https://en.wikipedia.org/wiki/JSON). Uses [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in browsers that support it.

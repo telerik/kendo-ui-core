@@ -1607,4 +1607,45 @@
 
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Ενεργό",
+            "completed": "Ολοκληρώθηκε",
+            "awaitingApproval": "Αναμένεται έγκριση",
+            "error": "Σφάλμα"
+        },
+        "approve": "Έγκριση",
+        "reject": "Απόρριψη",
+        "parametersLabel": "Παράμετροι",
+        "resultLabel": "Αποτέλεσμα"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Προηγούμενη πηγή",
+        "nextSourceAction": "Επόμενη πηγή"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Ξεκινήστε ξανά",
+        "restore": "Επαναφορά σημείου ελέγχου",
+        "redo": "Επανάληψη",
+        "checkpointRestoredText": "Το σημείο ελέγχου αποκαταστάθηκε"
+    });
+}
+
 })(window.kendo.jQuery);

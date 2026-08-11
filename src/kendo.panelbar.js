@@ -241,7 +241,8 @@ export const __meta__ = {
             if (that._showWatermarkOverlay) {
                 that._showWatermarkOverlay(that.wrapper[0]);
             }
-        },
+            Widget.fn.endInit.call(this);
+},
 
         events: [
             EXPAND,
@@ -1675,17 +1676,19 @@ export const __meta__ = {
 
         renderItem: function(options) {
             var that = this;
+            return that._renderWithIconContext(function() {
                 options = extend({ panelBar: that, group: {} }, options);
 
-            var empty = that.templates.empty,
-                item = options.item;
+                var empty = that.templates.empty,
+                    item = options.item;
 
-            return that.templates.item(extend(options, {
-                itemWrapper: that.templates.itemWrapper,
-                renderContent: that.renderContent,
-                arrow: that._hasChildItems(item) || item.content || item.contentUrl ? that.templates.arrow : empty,
-                subGroup: !options.loadOnDemand || item.expanded ? that.renderGroup : empty
-            }, rendering));
+                return that.templates.item(extend(options, {
+                    itemWrapper: that.templates.itemWrapper,
+                    renderContent: that.renderContent,
+                    arrow: that._hasChildItems(item) || item.content || item.contentUrl ? that.templates.arrow : empty,
+                    subGroup: !options.loadOnDemand || item.expanded ? that.renderGroup : empty
+                }, rendering));
+            });
         },
 
         renderGroup: function(options) {

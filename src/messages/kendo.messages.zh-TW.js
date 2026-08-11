@@ -1725,4 +1725,45 @@
 
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "活動中",
+            "completed": "已完成",
+            "awaitingApproval": "待審批",
+            "error": "錯誤"
+        },
+        "approve": "核准",
+        "reject": "拒絕",
+        "parametersLabel": "參數",
+        "resultLabel": "結果"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "上一個來源",
+        "nextSourceAction": "下一個來源"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "重新開始",
+        "restore": "還原檢查點",
+        "redo": "重做",
+        "checkpointRestoredText": "檢查點已還原"
+    });
+}
+
 })(window.kendo.jQuery);

@@ -144,7 +144,8 @@ export const __meta__ = {
             }
 
             that._aria();
-        },
+            Select.fn.endInit.call(this);
+},
 
         options: {
             name: "ComboBox",

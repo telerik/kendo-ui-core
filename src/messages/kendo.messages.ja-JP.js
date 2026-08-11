@@ -1589,4 +1589,45 @@ $.extend(true, kendo.spreadsheet.messages.view,{
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "アクティブ",
+            "completed": "完了",
+            "awaitingApproval": "承認待ち",
+            "error": "エラー"
+        },
+        "approve": "承認",
+        "reject": "拒否",
+        "parametersLabel": "パラメーター",
+        "resultLabel": "結果"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "前のソース",
+        "nextSourceAction": "次のソース"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "最初からやり直す",
+        "restore": "チェックポイントを復元",
+        "redo": "やり直し",
+        "checkpointRestoredText": "チェックポイントが復元されました"
+    });
+}
+
 })(window.kendo.jQuery);

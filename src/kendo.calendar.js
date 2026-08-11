@@ -219,7 +219,8 @@ export const __meta__ = {
             }
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(this);
+},
 
         options: {
             name: "Calendar",
@@ -713,7 +714,7 @@ export const __meta__ = {
                 that.selectable = new Selectable(that.wrapper, {
                     aria: true,
                     //excludes the anchor element
-                    inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-chevron-down,span.k-icon.k-i-chevron-up,span.k-svg-icon.k-svg-i-chevron-down,span.k-svg-icon.k-svg-i-chevron-up",
+                    inputSelectors: "input,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,.k-icon,.k-svg-icon,.k-svg-icon *",
                     multiple: selectableOptions.multiple,
                     filter: "table.k-calendar-table:eq(0) " + CELLSELECTORVALID,
                     change: that._onSelect.bind(that),

@@ -1574,4 +1574,45 @@ $.extend(true, kendo.spreadsheet.messages.view,{
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "פעיל",
+            "completed": "הושלם",
+            "awaitingApproval": "ממתין לאישור",
+            "error": "שגיאה"
+        },
+        "approve": "אשר",
+        "reject": "דחה",
+        "parametersLabel": "פרמטרים",
+        "resultLabel": "תוצאה"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "מקור קודם",
+        "nextSourceAction": "מקור הבא"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "התחל מחדש",
+        "restore": "שחזר נקודת ביקורת",
+        "redo": "בצע שוב",
+        "checkpointRestoredText": "נקודת ביקורת שוחזרה"
+    });
+}
+
 })(window.kendo.jQuery);

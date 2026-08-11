@@ -148,7 +148,8 @@ export const __meta__ = {
             if (that.options.showOn === "click") {
                 that.element.on("keydown" + NS, that.options.filter, that._keydown.bind(that));
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         options: {
             name: "TooltipBase",
@@ -366,7 +367,8 @@ export const __meta__ = {
             if (kendo.support.touch) {
                 that.element.on(kendo.support.mousedown + NS, that.options.filter, that._mouseenter.bind(that));
             }
-        },
+            Widget.fn.endInit.call(this);
+},
 
         options: {
             name: "Tooltip",

@@ -273,7 +273,8 @@ export const __meta__ = {
             if (that._showWatermarkOverlay) {
                 that._showWatermarkOverlay(that.element[0]);
             }
-        },
+            Widget.fn.endInit.call(this);
+},
 
         events: [
             SELECT,
@@ -1216,63 +1217,65 @@ export const __meta__ = {
         },
 
         _create: function(tab) {
-            var that = this,
-            tabs,
-            contents,
-            content,
-            newTabsCreated = false;
+            const that = this;
+            return that._renderWithIconContext(function() {
+                let tabs,
+                contents,
+                content,
+                newTabsCreated = false;
 
-            tab = tab instanceof kendo.data.ObservableArray ? tab.toJSON() : tab;
+                tab = tab instanceof kendo.data.ObservableArray ? tab.toJSON() : tab;
 
-            if ($.isPlainObject(tab) || Array.isArray(tab)) {
-                tab = Array.isArray(tab) ? tab : [tab];
-                newTabsCreated = true;
+                if ($.isPlainObject(tab) || Array.isArray(tab)) {
+                    tab = Array.isArray(tab) ? tab : [tab];
+                    newTabsCreated = true;
 
-                tabs = map(tab, function(value, idx) {
-                    that._appendUrlItem(tab[idx].contentUrl || null);
-                    const renderedTabItem = TabStrip.renderItem({
-                        group: that.tabGroup,
-                        item: extend(value, { index: idx })
+                    tabs = map(tab, function(value, idx) {
+                        that._appendUrlItem(tab[idx].contentUrl || null);
+                        const renderedTabItem = TabStrip.renderItem({
+                            group: that.tabGroup,
+                            item: extend(value, { index: idx })
+                        });
+
+                        value.closable = value.closable ?? that.options.closable;
+                        return $(that._initTabActions(renderedTabItem, value));
                     });
 
-                    value.closable = value.closable ?? that.options.closable;
-                    return $(that._initTabActions(renderedTabItem, value));
-                });
+                    contents = map( tab, function(value, idx) {
+                                if (typeof value.content == "string" || value.contentUrl) {
+                                    let tabstripContent = $(TabStrip.renderContent({
+                                        item: extend(value, { index: idx })
+                                    }));
 
-                contents = map( tab, function(value, idx) {
-                            if (typeof value.content == "string" || value.contentUrl) {
-                                let tabstripContent = $(TabStrip.renderContent({
-                                    item: extend(value, { index: idx })
-                                }));
+                                    kendo.applyStylesFromKendoAttributes(tabstripContent, ["display"]);
+                                    return tabstripContent;
+                                }
 
-                                kendo.applyStylesFromKendoAttributes(tabstripContent, ["display"]);
-                                return tabstripContent;
-                            }
-
-                            return $("<div class='" + CONTENT + "'></div>");
-                        });
-            } else {
-                if (typeof tab == "string" && tab[0] != "<") {
-                    tabs = that.element.find(tab);
+                                return $("<div class='" + CONTENT + "'></div>");
+                            });
                 } else {
-                    tabs = $(tab);
-                }
-                contents = $();
-                tabs.each(function() {
-                    if (/k-tabstrip-items/.test(this.parentNode.className)) {
-                        var element = that.element.find("[id='" + this.getAttribute(ARIA_CONTROLS) + "']");
-                        content = element;
+                    if (typeof tab == "string" && tab[0] != "<") {
+                        tabs = that.element.find(tab);
                     } else {
-                        content = $("<div class='" + CONTENT + "'/>");
+                        tabs = $(tab);
                     }
+                    contents = $();
+                    tabs.each(function() {
+                        if (/k-tabstrip-items/.test(this.parentNode.className)) {
+                            var element = that.element.find("[id='" + this.getAttribute(ARIA_CONTROLS) + "']");
+                            content = element;
+                        } else {
+                            content = $("<div class='" + CONTENT + "'/>");
+                        }
 
-                    contents = contents.add(content);
-                });
+                        contents = contents.add(content);
+                    });
 
-                updateTabClasses(tabs, that.options);
-            }
+                    updateTabClasses(tabs, that.options);
+                }
 
-            return { tabs: tabs, contents: contents, newTabsCreated: newTabsCreated };
+                return { tabs: tabs, contents: contents, newTabsCreated: newTabsCreated };
+            });
         },
 
         _current: function(candidate, preventFocus) {

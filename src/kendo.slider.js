@@ -98,7 +98,8 @@ export const __meta__ = {
             that._ariaLabel(that.wrapper.find(DRAG_HANDLE));
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             CHANGE,
@@ -713,7 +714,8 @@ export const __meta__ = {
             that._drag = new Slider.Drag(dragHandle, "", that, options);
 
             that._refreshAriaAttr(options.value);
-        },
+            SliderBase.fn.endInit.call(that);
+},
 
         options: {
             name: "Slider",
@@ -1399,7 +1401,8 @@ export const __meta__ = {
             that._lastHandleDrag = new Slider.Drag(dragHandles.eq(1), "lastHandle" , that, options);
 
             that._refreshAriaAttr(options.selectionStart , options.selectionEnd);
-        },
+            Widget.fn.endInit.call(this);
+},
 
         options: {
             name: "RangeSlider",

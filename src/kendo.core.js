@@ -28,6 +28,7 @@ import {
     widgetRegistryService,
     widgetUtilsService,
     namespaceService,
+    iconService,
     Class,
     Observable,
     Widget,
@@ -829,6 +830,10 @@ kendo.getSeriesColors = function() {
 kendo.defaults = defaultsService.getDefaults();
 kendo.setDefaults = function(key, value) {
     defaultsService.setDefaults(key, value);
+};
+
+kendo.setIcons = function(dictionary) {
+    iconService.setIcons(dictionary);
 };
 
 // Use external global flags for templates.

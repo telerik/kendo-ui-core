@@ -80,7 +80,8 @@ export const __meta__ = {
             that._mousedownProxy = that._mousedown.bind(that);
             that._clickProxy = that._click.bind(that);
             that.wrapper.on(KEYDOWN + ns, that, that._keydown.bind(that));
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [
             OPEN,

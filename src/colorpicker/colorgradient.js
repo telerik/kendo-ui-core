@@ -63,7 +63,7 @@ import "../kendo.icons.js";
             that.element.on(KEYDOWN_NS, that, that.keydown.bind(that));
 
             Observable.fn.init.call(that);
-        },
+},
         _template: kendo.template(({ options, ns }) => {
             let optionsSize = options.size?  encode(options.size) : "";
             let optionsTabIndex = encode(options.tabindex);
@@ -236,7 +236,8 @@ import "../kendo.icons.js";
             that._gradientInputs();
             that._updateUI(value);
             that._navigation();
-        },
+            ColorSelector.fn.endInit.call(this);
+},
         options: {
             name : "ColorGradient",
             opacity : false,

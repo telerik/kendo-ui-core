@@ -1630,4 +1630,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Đang hoạt động",
+            "completed": "Hoàn thành",
+            "awaitingApproval": "Chờ phê duyệt",
+            "error": "Lỗi"
+        },
+        "approve": "Phê duyệt",
+        "reject": "Từ chối",
+        "parametersLabel": "Tham số",
+        "resultLabel": "Kết quả"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Nguồn trước",
+        "nextSourceAction": "Nguồn tiếp theo"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Bắt đầu lại",
+        "restore": "Khôi phục điểm kiểm tra",
+        "redo": "Làm lại",
+        "checkpointRestoredText": "Đã khôi phục điểm kiểm tra"
+    });
+}
+
 })(window.kendo.jQuery);

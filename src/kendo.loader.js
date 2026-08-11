@@ -42,7 +42,8 @@ export const __meta__ = {
             that._appearance();
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(that);
+},
 
         destroy: function() {
             var that = this;

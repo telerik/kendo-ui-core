@@ -40,7 +40,8 @@ var Label = Widget.extend({
         }
 
         that._label();
-    },
+        Widget.fn.endInit.call(that);
+},
 
     destroy: function() {
         if (this.floatingLabel) {

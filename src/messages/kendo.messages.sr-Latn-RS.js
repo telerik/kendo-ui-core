@@ -1607,4 +1607,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktivan",
+            "completed": "Završeno",
+            "awaitingApproval": "Čeka odobrenje",
+            "error": "Greška"
+        },
+        "approve": "Odobri",
+        "reject": "Odbaci",
+        "parametersLabel": "Parametri",
+        "resultLabel": "Rezultat"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Prethodni izvor",
+        "nextSourceAction": "Sledeći izvor"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Počni iznova",
+        "restore": "Vrati kontrolnu tačku",
+        "redo": "Ponovi",
+        "checkpointRestoredText": "Kontrolna tačka vraćena"
+    });
+}
+
 })(window.kendo.jQuery);

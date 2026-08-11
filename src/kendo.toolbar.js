@@ -199,7 +199,8 @@ export const __meta__ = {
             if (this._showWatermarkOverlay) {
                 this._showWatermarkOverlay(this.wrapper[0]);
             }
-        },
+            Widget.fn.endInit.call(this);
+},
 
         events: [
             CLICK,

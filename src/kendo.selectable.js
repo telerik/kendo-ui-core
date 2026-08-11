@@ -37,9 +37,9 @@ export const __meta__ = {
         TOUCHSTART = "touchstart",
         TOUCHMOVE = "touchmove",
         TOUCHEND = "touchend",
-        INPUTSELECTOR_ICONSSELECTOR_FONT = "span.k-icon.k-i-chevron-down,span.k-icon.k-i-chevron-up,.k-icon.k-i-chevron-down,.k-icon.k-i-chevron-right,.k-icon.k-i-chevron-left",
-        INPUTSELECTOR_ICONSSELECTOR_SVG = INPUTSELECTOR_ICONSSELECTOR_FONT.replaceAll('k-i', 'k-svg-i'),
-        INPUTSELECTOR_SVG_PARTS = INPUTSELECTOR_ICONSSELECTOR_SVG.split(",").map((selector) => selector + " *").join(","),
+        INPUTSELECTOR_ICONSSELECTOR_FONT = ".k-icon",
+        INPUTSELECTOR_ICONSSELECTOR_SVG = ".k-svg-icon",
+        INPUTSELECTOR_SVG_PARTS = ".k-svg-icon *",
         INPUTSELECTOR = `input,a,textarea,.k-multiselect-wrap,select,button,${INPUTSELECTOR_ICONSSELECTOR_FONT},${INPUTSELECTOR_ICONSSELECTOR_SVG},${INPUTSELECTOR_SVG_PARTS},.k-button>span,.k-button>span *,.k-button>img,label.k-checkbox-label.k-no-text,span.k-numeric-wrap,.k-focusable`,
         msie = kendo.support.browser.msie,
         supportEventDelegation = false,
@@ -97,7 +97,8 @@ export const __meta__ = {
                 that.userEvents
                    .bind("select", that._select.bind(that));
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         events: [CHANGE, CHANGING, UNSELECT],
 
@@ -586,7 +587,8 @@ export const __meta__ = {
                 element.on(MOUSEENTER + ns, cellSelectorValid, that._mouseEnter.bind(that))
                     .on(MOUSELEAVE + ns, cellSelectorValid, that._mouseLeave.bind(that));
             }
-        },
+            Widget.fn.endInit.call(this);
+},
 
         events: [CHANGE],
 

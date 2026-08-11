@@ -1601,4 +1601,45 @@ $.extend(true, kendo.spreadsheet.messages.view,{
       });
   }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Активний",
+            "completed": "Завершено",
+            "awaitingApproval": "Очікує схвалення",
+            "error": "Помилка"
+        },
+        "approve": "Схвалити",
+        "reject": "Відхилити",
+        "parametersLabel": "Параметри",
+        "resultLabel": "Результат"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Попереднє джерело",
+        "nextSourceAction": "Наступне джерело"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Почати спочатку",
+        "restore": "Відновити контрольну точку",
+        "redo": "Повторити",
+        "checkpointRestoredText": "Контрольну точку відновлено"
+    });
+}
+
 })(window.kendo.jQuery);

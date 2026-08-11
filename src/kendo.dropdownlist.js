@@ -174,6 +174,8 @@ export const __meta__ = {
 
             kendo.notify(that);
             that._applyCssClasses();
+
+            Select.fn.endInit.call(that);
         },
 
         options: {

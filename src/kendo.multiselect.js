@@ -179,7 +179,8 @@ export const __meta__ = {
             }
 
             kendo.notify(that);
-        },
+            List.fn.endInit.call(that);
+},
 
         options: {
             name: "MultiSelect",

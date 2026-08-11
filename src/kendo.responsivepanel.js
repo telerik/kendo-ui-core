@@ -37,7 +37,8 @@ export const __meta__ = {
 
             this._resizeHandler = this.resize.bind(this, true);
             $(window).on("resize" + NS, this._resizeHandler);
-        },
+            Widget.fn.endInit.call(this);
+},
         _mediaQuery: ({ breakpoint, guid, toggleButton }) =>
             `@media (max-width: ${breakpoint - 1}px) {` +
                 `.${guid}.k-rpanel-animate.k-rpanel-left,` +

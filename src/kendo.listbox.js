@@ -140,7 +140,8 @@ export const __meta__ = {
             that._createToolbar();
             that._createDraggable();
             that._createNavigatable();
-        },
+            DataBoundWidget.fn.endInit.call(that);
+},
 
         destroy: function() {
             var that = this;
@@ -168,7 +169,7 @@ export const __meta__ = {
         setOptions: function(options) {
             let that = this;
             Widget.fn.setOptions.call(that, options);
-            
+
             that._templates();
             that._dataSource();
 

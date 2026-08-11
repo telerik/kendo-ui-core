@@ -435,7 +435,8 @@ export const __meta__ = {
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
             }
-        },
+            Widget.fn.endInit.call(that);
+},
 
         _wheelScroll: function(e) {
             if (e.ctrlKey) {

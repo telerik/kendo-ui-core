@@ -1489,4 +1489,45 @@ if (kendo.dataviz.ui.Chart) {
 
 }
 
+
+/* ToolCall messages */
+
+if (kendo.ui.ToolCall) {
+    kendo.ui.ToolCall.prototype.options.messages =
+    $.extend(true, kendo.ui.ToolCall.prototype.options.messages,{
+        "states": {
+            "active": "Aktiivinen",
+            "completed": "Valmis",
+            "awaitingApproval": "Odottaa hyväksyntää",
+            "error": "Virhe"
+        },
+        "approve": "Hyväksy",
+        "reject": "Hylkää",
+        "parametersLabel": "Parametrit",
+        "resultLabel": "Tulos"
+    });
+}
+
+/* Citation messages */
+
+if (kendo.ui.Citation) {
+    kendo.ui.Citation.prototype.options.messages =
+    $.extend(true, kendo.ui.Citation.prototype.options.messages,{
+        "previousSourceAction": "Edellinen lähde",
+        "nextSourceAction": "Seuraava lähde"
+    });
+}
+
+/* Checkpoint messages */
+
+if (kendo.ui.Checkpoint) {
+    kendo.ui.Checkpoint.prototype.options.messages =
+    $.extend(true, kendo.ui.Checkpoint.prototype.options.messages,{
+        "startOver": "Aloita alusta",
+        "restore": "Palauta tarkistuspiste",
+        "redo": "Tee uudelleen",
+        "checkpointRestoredText": "Tarkistuspiste palautettu"
+    });
+}
+
 })(window.kendo.jQuery);

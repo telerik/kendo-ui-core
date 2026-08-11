@@ -46,12 +46,7 @@ export const __meta__ = {
                 (typeIcon && (TYPEICONS[encode(typeIcon)] || encode(typeIcon)) ? kendo.ui.icon($(`<span class="k-notification-status" title="${encode(typeIcon)}"></span>`), { icon: TYPEICONS[encode(typeIcon)] || encode(typeIcon) }) : '') +
                 `<div class="k-notification-content">${encodeContent ? encode(content) : content}</div>`,
         TEMPLATE = GET_TEMPLATE_FUNC(false),
-        SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true),
-        defaultActions = {
-            close: {
-                template: kendo.ui.icon($('<span aria-hidden="true" title="Hide"></span>'), { icon: "x" })
-            }
-        };
+        SAFE_TEMPLATE = GET_TEMPLATE_FUNC(true);
 
     var Notification = Widget.extend({
         init: function(element, options) {
@@ -75,7 +70,8 @@ export const __meta__ = {
             that._compileStacking(options.stacking, options.position.top, options.position.left);
 
             kendo.notify(that);
-        },
+            Widget.fn.endInit.call(this);
+},
 
         events: [
             SHOW,
@@ -414,12 +410,15 @@ export const __meta__ = {
                         "data-role": "alert",
                         title: options.title
                     })
-                    .css({ width: options.width, height: options.height })
-                    .append(that._getCompiled(type, safe)(args));
+                    .css({ width: options.width, height: options.height });
 
-                if (args.closeButton) {
-                    wrapper.append(that.addActions("close"));
-                }
+                that._renderWithIconContext(function() {
+                    wrapper.append(that._getCompiled(type, safe)(args));
+
+                    if (args.closeButton) {
+                        wrapper.append(that.addActions("close"));
+                    }
+                });
 
                 wrapper.find(".k-notification-content").attr("id", contentId);
                 wrapper.attr("aria-describedby", contentId);
@@ -514,7 +513,12 @@ export const __meta__ = {
         },
 
         addActions: function(actions) {
-            var actionsContainer = $('<span class="k-notification-actions"/>');
+            const actionsContainer = $('<span class="k-notification-actions"/>');
+            const defaultActions = {
+                close: {
+                    template: kendo.ui.icon($('<span aria-hidden="true" title="Hide"></span>'), { icon: "x" })
+                }
+            };
 
             if (!Array.isArray(actions)) {
                 actions = [actions];
