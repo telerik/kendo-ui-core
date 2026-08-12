@@ -562,6 +562,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "nap",
     "weekday": "munkanap",
     "weekend": "pihenőnap"
+  },
+  "makeRecurring": "Ismétlővé tétel",
+  "summary": {
+    "on": "napján",
+    "onThe": "napján",
+    "onDay": "a napon",
+    "until": "ig"
   }
 });
 }

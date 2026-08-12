@@ -664,6 +664,13 @@
           "day": "día",
           "weekday": "día de semana",
           "weekend": "día de fin de semana"
+        },
+        "makeRecurring": "Hacer recurrente",
+        "summary": {
+          "on": "el",
+          "onThe": "el",
+          "onDay": "el día",
+          "until": "hasta"
         }
       });
   }

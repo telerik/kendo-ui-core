@@ -148,6 +148,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "dag",
     "weekday": "ugedag",
     "weekend": "weekend dag"
+  },
+  "makeRecurring": "Opret gentagelse",
+  "summary": {
+    "on": "om",
+    "onThe": "om den",
+    "onDay": "om dag",
+    "until": "til"
   }
 });
 }

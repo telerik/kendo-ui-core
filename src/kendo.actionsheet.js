@@ -273,7 +273,8 @@ export const __meta__ = {
             element.attr({
                 role: "dialog",
                 "aria-modal": true,
-                "aria-labelledby": that.options.title ? actionsheetTitleId : null
+                "aria-labelledby": that.options.title ? actionsheetTitleId : null,
+                "aria-hidden": true
             });
         },
 
@@ -311,6 +312,7 @@ export const __meta__ = {
 
             that.popup.bind(DEACTIVATE, (ev) => {
                 that.wrapper.addClass(HIDDEN);
+                that.element.attr("aria-hidden", true);
                 DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy);
                 DOCUMENT_ELEMENT.off(that.clickEvent, that._clickProxy);
                 that.trigger(DEACTIVATE, ev);
@@ -424,6 +426,7 @@ export const __meta__ = {
             that.altTarget = options && options.altTarget;
 
             that.wrapper.removeClass(HIDDEN);
+            that.element.attr("aria-hidden", false);
             that._elementHeight = that._elementHeight || that.element.outerHeight();
 
             if (that.options.adaptive) {
@@ -461,6 +464,7 @@ export const __meta__ = {
         close: function() {
             var that = this;
 
+            that.element.attr("aria-hidden", true);
             that.popup.close();
         },
 
@@ -591,4 +595,3 @@ export const __meta__ = {
 
 })(window.kendo.jQuery);
 export default kendo;
-

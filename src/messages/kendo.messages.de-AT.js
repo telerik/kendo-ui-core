@@ -307,6 +307,13 @@
           "day": "Tag",
           "weekday": "Wochentag",
           "weekend": "Tag am Wochenende"
+        },
+        "makeRecurring": "Wiederkehrend machen",
+        "summary": {
+          "on": "am",
+          "onThe": "am",
+          "onDay": "am Tag",
+          "until": "bis"
         }
       });
   }

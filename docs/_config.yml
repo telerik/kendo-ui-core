@@ -352,8 +352,6 @@ navigation:
         title: "PDF Export"
     "*barcode":
         title: "Barcode"
-    "*stockchart":
-        title: "Stock Chart"
     "*chart":
         title: "Chart"
     "*chart-types":
@@ -620,16 +618,16 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2026.2.520"
+cdnVersion: "2026.3.811"
 
 ## The themes CDN used
-themesCdnVersion: "14.1.0"
+themesCdnVersion: "14.5.0"
 
 ## The Pdfjs CDN version used
-pdfjsCdnVersion: "5.6.205"
+pdfjsCdnVersion: "5.5.207"
 
 ## The MVC Core version used
-mvcCoreVersion: "2026.2.520"
+mvcCoreVersion: "2026.3.811"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
@@ -1577,7 +1575,7 @@ defaults:
     values:
         component: "dropdownlist"
 
-
+-
     scope:
         path: "controls/editor"
     values:
@@ -1864,6 +1862,7 @@ defaults:
     values:
         component: "switch"
 
+-
     scope:
         path: "controls/tabstrip"
     values:
@@ -1917,6 +1916,7 @@ defaults:
     values:
         component: "tooltip"
 
+-
     scope:
         path: "controls/tilelayout"
     values:

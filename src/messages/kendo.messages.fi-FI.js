@@ -457,6 +457,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "päivä",
     "weekday": "arkipäivä",
     "weekend": "viikonloppu"
+  },
+  "makeRecurring": "Aseta toistuvaksi",
+  "summary": {
+    "on": "joka",
+    "onThe": "joka",
+    "onDay": "päivänä",
+    "until": "asti"
   }
 });
 }

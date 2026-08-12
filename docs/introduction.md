@@ -112,9 +112,15 @@ The following table lists the Kendo UI components (widgets) that are available i
     <IntroTableColumn>
         <IntroTableSection title="Conversational UI">
             <IntroTableAnchor title="AIPrompt" href="slug:overview_kendoui_aiprompt_component"></IntroTableAnchor>
+            <IntroTableAnchor title="ChainOfThought" href="slug:chain_of_thought_kendoui_llmkit"></IntroTableAnchor>
+            <IntroTableAnchor title="Checkpoint" href="slug:checkpoint_kendoui_llmkit"></IntroTableAnchor>
             <IntroTableAnchor title="Chat" href="slug:overview_kendoui_chat_widget"></IntroTableAnchor>
+            <IntroTableAnchor title="Citation" href="slug:citation_kendoui_llmkit"></IntroTableAnchor>
             <IntroTableAnchor title="InlineAIPrompt" href="slug:overview_kendoui_inlineaiprompt_component"></IntroTableAnchor>
+            <IntroTableAnchor title="LLM Kit" href="slug:overview_kendoui_llmkit"></IntroTableAnchor>
             <IntroTableAnchor title="PromptBox" href="slug:overview_kendoui_promptbox"></IntroTableAnchor>
+            <IntroTableAnchor title="Reasoning" href="slug:reasoning_kendoui_llmkit"></IntroTableAnchor>
+            <IntroTableAnchor title="ToolCall" href="slug:tool_call_kendoui_llmkit"></IntroTableAnchor>
         </IntroTableSection>
         <IntroTableSection title="PDF">
             <IntroTableAnchor title="PDFViewer" href="slug:overview_kendoui_pdfviewer_widget"></IntroTableAnchor>

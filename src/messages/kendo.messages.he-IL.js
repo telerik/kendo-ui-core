@@ -300,6 +300,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "יום",
     "weekday": "בשבוע",
     "weekend": "בסוף שבוע"
+  },
+  "makeRecurring": "הפוך לאירוע חוזר",
+  "summary": {
+    "on": "ב",
+    "onThe": "ב",
+    "onDay": "ביום",
+    "until": "עד"
   }
 });
 }

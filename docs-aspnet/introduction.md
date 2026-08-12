@@ -50,8 +50,14 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
       </IntroTableSection>
       <IntroTableSection title="Conversational UI">
          <IntroTableAnchor title="AIPrompt" href="slug:htmlhelpers_overview_aiprompt"></IntroTableAnchor>
+         <IntroTableAnchor title="ChainOfThought" href="slug:htmlhelpers_chain_of_thought_llmkit_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="Checkpoint" href="slug:htmlhelpers_checkpoint_llmkit_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="Chat" href="slug:htmlhelpers_chat_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="Citation" href="slug:htmlhelpers_citation_llmkit_aspnetcore"></IntroTableAnchor>
          <IntroTableAnchor title="InlineAIPrompt" href="slug:htmlhelpers_overview_inline_aiprompt"></IntroTableAnchor>
+         <IntroTableAnchor title="LLM Kit" href="slug:htmlhelpers_llmkit_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="Reasoning" href="slug:htmlhelpers_reasoning_llmkit_aspnetcore"></IntroTableAnchor>
+         <IntroTableAnchor title="ToolCall" href="slug:htmlhelpers_tool_call_llmkit_aspnetcore"></IntroTableAnchor>
       </IntroTableSection>
       <IntroTableSection title="Data Source">
          <IntroTableAnchor title="DataSource" href="slug:htmlhelpers_datasource_aspnetcore"></IntroTableAnchor>

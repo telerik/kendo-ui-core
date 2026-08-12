@@ -563,6 +563,13 @@
           "day": "天",
           "weekday": "工作日",
           "weekend": "週末"
+        },
+        "makeRecurring": "設為重複",
+        "summary": {
+          "on": "在",
+          "onThe": "在",
+          "onDay": "第",
+          "until": "至"
         }
       });
   }

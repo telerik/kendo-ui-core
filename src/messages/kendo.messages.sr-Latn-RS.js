@@ -568,6 +568,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "den",
     "weekday": "radni dan",
     "weekend": "vikend"
+  },
+  "makeRecurring": "Postavi ponavljanje",
+  "summary": {
+    "on": "u",
+    "onThe": "u",
+    "onDay": "na dan",
+    "until": "do"
   }
 });
 }

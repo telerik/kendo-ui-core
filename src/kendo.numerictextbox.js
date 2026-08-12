@@ -620,6 +620,8 @@ export const __meta__ = {
                                  "aria-valuemax": options.max !== NULL ? options.max * options.factor : options.max,
                                  "autocomplete": "off"
                              });
+
+            that.element.attr("role", "spinbutton");
         },
 
         _keydown: function(e) {

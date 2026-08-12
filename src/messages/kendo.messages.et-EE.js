@@ -801,6 +801,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
       "day": "päev",
       "weekday": "nädalapäev",
       "weekend": "nädalavahetuse päev"
+  },
+  "makeRecurring": "Muuda korduvaks",
+  "summary": {
+    "on": "nädalapäeval",
+    "onThe": "päeval",
+    "onDay": "päeval",
+    "until": "kuni"
   }
 });
 }

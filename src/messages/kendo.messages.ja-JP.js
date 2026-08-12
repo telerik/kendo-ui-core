@@ -453,6 +453,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "日",
     "weekday": "平日",
     "weekend": "週末"
+  },
+  "makeRecurring": "繰り返しを設定",
+  "summary": {
+    "on": "の",
+    "onThe": "の",
+    "onDay": "の日",
+    "until": "まで"
   }
 });
 }

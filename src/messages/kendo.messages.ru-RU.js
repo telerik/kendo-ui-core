@@ -150,6 +150,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "день",
     "weekday": "будний",
     "weekend": "выходной"
+  },
+  "makeRecurring": "Задать повторение",
+  "summary": {
+    "on": "в",
+    "onThe": "в",
+    "onDay": "в день",
+    "until": "до"
   }
 });
 }

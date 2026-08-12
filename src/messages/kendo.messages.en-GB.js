@@ -875,6 +875,13 @@
           "day": "day",
           "weekday": "weekday",
           "weekend": "weekend day"
+        },
+        "makeRecurring": "Make recurring",
+        "summary": {
+          "on": "on",
+          "onThe": "on the",
+          "onDay": "on day",
+          "until": "until"
         }
       });
   }

@@ -337,7 +337,7 @@ export const __meta__ = {
             for (var index in parents) {
                 var parentLi = parents.eq(index);
                 if (parentLi.find("ul").length) {
-                    parentLi.attr("aria-haspopup", "menu");
+                    parentLi.attr("aria-haspopup", "true");
                 } else {
                     parentLi.removeAttr("aria-haspopup");
                 }
@@ -1658,7 +1658,7 @@ export const __meta__ = {
                    .addClass("k-menu-group")
                    .attr(ROLE, "menu")
                    .parent("li")
-                   .attr("aria-haspopup", "menu")
+                   .attr("aria-haspopup", "true")
                    .end()
                    .find("li > div")
                    .addClass("k-content")
@@ -2596,7 +2596,7 @@ export const __meta__ = {
                         subGroup = data.subGroup;
                     var contentHtml = fieldAccessor("content")(item);
                     var groupId = kendo.guid();
-                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items || item.content ? "aria-haspopup='menu'" : ''}` +
+                    return `<li class='${rendering.wrapperCssClass(group, item)}' ${(item.hasChildren || item.items || item.content) ? 'aria-controls="' + groupId + '"' : '' } ${rendering.itemCssAttributes(item.toJSON ? item.toJSON() : item)} role='menuitem'  ${item.items || item.content ? "aria-haspopup='true'" : ''}` +
                         `${item.enabled === false ? "aria-disabled='true'" : ''}` +
                         kendo.attr("uid") + `='${item.uid}' ` +
                         ((item.items && item.items.length > 0) || item.content ?
