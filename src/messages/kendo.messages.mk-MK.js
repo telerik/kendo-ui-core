@@ -568,6 +568,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "ден",
     "weekday": "работен ден",
     "weekend": "ден од викенд"
+  },
+  "makeRecurring": "Постави повторување",
+  "summary": {
+    "on": "во",
+    "onThe": "во",
+    "onDay": "на ден",
+    "until": "до"
   }
 });
 }

@@ -39,7 +39,7 @@ describe("ARIA support", function() {
     it("has-popup attribute is added if node has childs", function() {
         setup({ dataSource: [{ text: "foo", items: [{ text: "bar" }] }] });
 
-        assert.equal(menu.find("[aria-haspopup=menu] span:first").text(), "foo");
+        assert.equal(menu.find("[aria-haspopup=true] span:first").text(), "foo");
     });
 
     it("has-popup attribute is added when using append method", function() {

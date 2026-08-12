@@ -694,6 +694,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "ден",
     "weekday": "делник",
     "weekend": "почивен ден"
+  },
+  "makeRecurring": "Задай повторение",
+  "summary": {
+    "on": "в",
+    "onThe": "на",
+    "onDay": "на ден",
+    "until": "до"
   }
 });
 }

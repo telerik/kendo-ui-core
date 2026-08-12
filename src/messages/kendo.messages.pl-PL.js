@@ -185,6 +185,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "dzień",
     "weekday": "dzień powszedni",
     "weekend": "dzień weekendu"
+  },
+  "makeRecurring": "Ustaw powtarzanie",
+  "summary": {
+    "on": "w",
+    "onThe": "w",
+    "onDay": "w dniu",
+    "until": "do"
   }
 });
 }

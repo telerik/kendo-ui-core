@@ -140,6 +140,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "օր",
     "weekday": "աշխատանքային օր",
     "weekend": "ոչ աշխատանքային օր"
+  },
+  "makeRecurring": "Դարձնել կրկնվող",
+  "summary": {
+    "on": "ն",
+    "onThe": "ն",
+    "onDay": "օրը",
+    "until": "մինչ"
   }
 });
 }

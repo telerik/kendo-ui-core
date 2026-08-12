@@ -28,8 +28,8 @@ liquid-output-delimiter-right: "}}"
 liquid:
   product: "Kendo UI for jQuery"
   platform: "kendo-ui"
-  cdnVersion: "2026.2.520"
-  themesCdnVersion: "14.1.0"
+  cdnVersion: "2026.3.811"
+  themesCdnVersion: "14.5.0"
 
 markdown-replacements:
 # TODO:REPLACE WITH SLUGS
@@ -43,9 +43,9 @@ default-code-block-language: js
 
 kendo-api-path: ./api
 dojo-scripts:
-  kendoCdnVersion: 2026.2.520
-  themesCdnVersion: 14.1.0
-  pdfJsVersion: 5.6.205
+  kendoCdnVersion: 2026.3.811
+  themesCdnVersion: 14.5.0
+  pdfJsVersion: 5.5.207
   jQueryVersion: 3.7.1
 
 demos:
@@ -193,6 +193,8 @@ meta:
     title: AIPrompt
   "*promptbox":
     title: PromptBox
+  controls/llm-kit:
+    title: LLM Kit
   "*window":
     title: Window
   "*upload":

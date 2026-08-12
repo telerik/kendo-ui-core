@@ -568,6 +568,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "ditë",
     "weekday": "ditë jave",
     "weekend": "ditë e fundjavës"
+  },
+  "makeRecurring": "Bëje të përsëritur",
+  "summary": {
+    "on": "në",
+    "onThe": "në",
+    "onDay": "ditën",
+    "until": "deri"
   }
 });
 }

@@ -122,6 +122,27 @@ How do I make Kendo UI Scheduler events span an entire day? Configure events to 
     console.log(event.isAllDay); // outputs "true"
     </script>
 
+### isReadonly `Boolean` *(default: false)*
+
+If set to `true`, the event renders and remains selectable, but cannot be edited, removed, moved, or resized. The Scheduler does not start edit or remove API and UI actions for the event, and move and resize interactions stop before their event chains. As a result, the `edit`, `save`, `cancel`, `remove`, `moveStart`, `move`, `moveEnd`, `resizeStart`, `resize`, and `resizeEnd` events are unavailable for the readonly event. Scheduler-level `add`, `change` selection, and `navigate` behavior remains available.
+
+
+<div class="meta-api-description">
+How do I make an individual Kendo UI Scheduler event readonly while keeping it visible and selectable? Mark an appointment as read-only to prevent editing, deleting, dragging, and resizing for that item without disabling Scheduler creation, selection changes, or navigation globally, and suppress the item-specific edit, remove, move, and resize event sequences.
+</div>
+
+#### Example - create a readonly event
+
+    <script>
+    var event = new kendo.data.SchedulerEvent({
+        id: 1,
+        title: "Maintenance Window",
+        start: new Date("2013/4/4 12:00"),
+        end: new Date("2013/4/4 13:00"),
+        isReadonly: true
+    });
+    </script>
+
 ### recurrenceException `String` *(default: undefined)*
 
 The recurrence exceptions. A list of comma separated dates formatted using the `yyyyMMddTHHmmssZ` format string.
@@ -377,6 +398,29 @@ How to determine if a Kendo UI Scheduler event spans the entire day? Control or 
     });
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event.isAllDay); // outputs "true"
+    </script>
+
+### isReadonly `Boolean`
+
+Indicates whether the event is readonly. Readonly events render and remain selectable, but edit and remove API and UI actions do not start, and move and resize interactions stop before their event chains. Therefore, `edit`, `save`, `cancel`, `remove`, `moveStart`, `move`, `moveEnd`, `resizeStart`, `resize`, and `resizeEnd` are unavailable for the readonly event. Scheduler-level `add`, `change` selection, and `navigate` behavior is not globally disabled.
+
+
+<div class="meta-api-description">
+How can I check whether a Kendo UI Scheduler event is readonly? Read or inspect the event-level read-only flag to determine whether an appointment can be edited, deleted, dragged, or resized while it remains rendered and selectable and while Scheduler-wide add, selection change, and navigation behavior continues to work.
+</div>
+
+#### Example - get the event isReadonly field
+
+    <script>
+    var event = new kendo.data.SchedulerEvent({
+        id: 1,
+        title: "Maintenance Window",
+        start: new Date("2013/4/4 12:00"),
+        end: new Date("2013/4/4 13:00"),
+        isReadonly: true
+    });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(event.isReadonly); // outputs "true"
     </script>
 
 ### recurrenceException `String`

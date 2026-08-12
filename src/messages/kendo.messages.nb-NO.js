@@ -139,6 +139,13 @@ if (kendo.ui.RecurrenceEditor) {
             "day": "dag",
             "weekday": "ukedag",
             "weekend": "helgedag"
+        },
+        "makeRecurring": "Gjør gjentagende",
+        "summary": {
+          "on": "på",
+          "onThe": "den",
+          "onDay": "dag",
+          "until": "til"
         }
     });
 }

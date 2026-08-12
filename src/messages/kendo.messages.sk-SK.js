@@ -481,6 +481,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "deň",
     "weekday": "pracovný deň",
     "weekend": "víkend"
+  },
+  "makeRecurring": "Nastaviť opakovanie",
+  "summary": {
+    "on": "v",
+    "onThe": "v",
+    "onDay": "v deň",
+    "until": "do"
   }
 });
 }

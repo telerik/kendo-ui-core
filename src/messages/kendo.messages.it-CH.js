@@ -165,6 +165,13 @@
           "day": "giorno",
           "weekday": "giorno della settimana",
           "weekend": "giorno finesettimana"
+        },
+        "makeRecurring": "Rendi ricorrente",
+        "summary": {
+          "on": "il",
+          "onThe": "il",
+          "onDay": "il giorno",
+          "until": "fino al"
         }
       });
   }

@@ -25,6 +25,138 @@ $("#multiselect").kendoMultiSelect({
 });
 ```
 
+### Document Processing and Spreadsheet Package Changes for ASP.NET Integrations
+
+The following package versions apply to these server-side integration scenarios:
+
+| Package | Version | Notes |
+|---------|---------|-------|
+| [Telerik.Spreadsheet.Web](https://www.nuget.org/packages/Telerik.Spreadsheet.Web) | `1.2.0` | Spreadsheet server-side processing package |
+| [Telerik.Pdf.Web](https://www.nuget.org/packages/Telerik.Pdf.Web) | `1.2.0` | Required for ASP.NET Core and ASP.NET MVC PDFViewer integration when using Document Processing-based PDF support |
+| [Telerik.Export.Core](https://www.nuget.org/packages/Telerik.Export.Core) | `1.2.0` | Enables exporting `IEnumerable` data sources to Excel, CSV, PDF, DOCX, RTF, and TXT |
+
+#### Spreadsheet Assembly Renamed
+
+The Spreadsheet dependency assembly has been renamed from `Telerik.Web.Spreadsheet` to `Telerik.Spreadsheet.Web`.
+
+#### PDF Processing Package Renamed
+
+The PDF processing dependency package has been renamed from `Telerik.Web.PDF` to `Telerik.Pdf.Web`.
+
+#### Server-Side Export Package Renamed
+
+The server-side export dependency package has been renamed from `Telerik.Core.Export` to `Telerik.Export.Core`.
+
+If your Kendo UI application relies on these ASP.NET server-side features, update project references accordingly and add the [Telerik.Spreadsheet.Web](https://www.nuget.org/packages/Telerik.Spreadsheet.Web) package explicitly. Likewise, replace `Telerik.Web.PDF` with [Telerik.Pdf.Web](https://www.nuget.org/packages/Telerik.Pdf.Web) and `Telerik.Core.Export` with [Telerik.Export.Core](https://www.nuget.org/packages/Telerik.Export.Core) where applicable.
+
+This change affects server-side processing and packaging only. It does not change the client-side Kendo UI for jQuery Spreadsheet API.
+### Scheduler - Enhanced Rendering (HTML and CSS)
+
+Starting with the **2026 Q3** release, the Scheduler adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling. Custom CSS or DOM queries that target the previous markup must be updated.
+
+#### Toolbar Markup Changed
+
+The toolbar now uses `fillMode="flat"`, has a new element order, and adds a "New Event" primary button. The navigation buttons are restructured&mdash;"Today" is a standalone flat button and Prev/Next are a separate `ButtonGroup` with `fillMode="flat"`.
+
+The view switcher remains a `SegmentedControl` at full width but collapses to a `MenuButton` at narrower widths. The toolbar progressively hides elements as available width decreases (responsive levels 0 through 3).
+
+If you have custom CSS targeting the toolbar navigation `ButtonGroup` with solid fill, update it to target flat-styled buttons.
+
+#### Event Element Structure Changed
+
+The internal event structure now uses a flex layout with CSS Container Queries (`container-type: size`). The `k-event-actions` class has been removed.
+
+Before:
+
+```html
+<div class="k-event">
+  <span class="k-event-actions"><!-- recurrence icon --></span>
+  <div>
+    <div class="k-event-template k-event-time">8:00 AM</div>
+    <div class="k-event-template">Event Title</div>
+  </div>
+  <span class="k-event-actions"><!-- delete link --></span>
+  <span class="k-resize-handle k-resize-n"></span>
+  <span class="k-resize-handle k-resize-s"></span>
+</div>
+```
+
+After:
+
+```html
+<div class="k-event" style="container-type: size">
+  <div>
+    <div class="k-event-template k-event-title">Event Title</div>
+    <div class="k-event-template k-event-time">
+      <span class="k-event-recurrence-icon"><!-- icon --></span>
+      10:00 AM - 10:30 AM
+    </div>
+  </div>
+  <span class="k-event-recurrence-icon"><!-- icon --></span>
+  <span class="k-resize-handle k-resize-n"></span>
+  <span class="k-resize-handle k-resize-s"></span>
+</div>
+```
+
+Key differences:
+
+- Title renders before time (order reversed).
+- `k-event-actions` replaced by `k-event-recurrence-icon` and `k-event-continuation` spans.
+- Delete action removed from static rendering.
+- Multi-day events use `k-event-continuation` spans with directional chevron icons.
+- Layout uses `display: flex; overflow: visible` instead of `overflow: hidden`.
+
+If you have custom CSS or jQuery selectors targeting `.k-event-actions`, replace them with `.k-event-recurrence-icon` or `.k-event-continuation`.
+
+#### Header Cell Markup Changed
+
+Day and Week view header cells now render two separate elements instead of a single combined text span.
+
+Before:
+
+```html
+<th class="k-scheduler-cell k-heading-cell">
+  <span class="k-link k-nav-day">Mon 6/13</span>
+</th>
+```
+
+After:
+
+```html
+<th class="k-scheduler-cell k-heading-cell">
+  <span class="k-scheduler-date-day">Mon</span>
+  <span class="k-link k-nav-day">13</span>
+</th>
+```
+
+If you have custom CSS targeting `.k-nav-day` content format, update it to account for the separate `.k-scheduler-date-day` element.
+
+#### Edit Dialog Markup Changed
+
+The quick create and quick edit flows now use a **Popover** (no overlay) instead of a full `Dialog`. Form labels use icons instead of text. Actions use the `k-popover-actions` class.
+
+The full edit dialog date/time section has the following changes:
+
+- Date and time pickers are now wrapped in `.k-scheduler-edit-form-row` containers instead of being direct grid children.
+- The `from`/`to` separator text uses a `.k-scheduler-datetime-label` class.
+- The grid changes from a 5-column layout to 3 columns (`2.5fr 1fr min-content`).
+- All-day toggle uses a `Switch` component instead of a checkbox.
+
+If you have custom CSS targeting date/time picker layout inside `.k-scheduler-datetime-grid`, update selectors to account for the new `.k-scheduler-edit-form-row` wrapper.
+
+#### Month View "More Events" Tooltip Replaced with Popover
+
+The month-view overflow indicator now renders a `Popover` instead of the legacy tooltip. All tooltip-specific class names have been renamed:
+
+| Before | After |
+|--------|-------|
+| `.k-tooltip.k-scheduler-tooltip` | `.k-popover.k-scheduler-popover` |
+| `.k-tooltip-title` | `.k-popover-header` |
+| `.k-tooltip-events-container` / `.k-tooltip-events` | `.k-popover-events` |
+| `.k-tooltip-event` | `.k-popover-event` |
+
+If you have custom CSS targeting `.k-scheduler-tooltip` or its child classes, update them to the corresponding `.k-scheduler-popover` equivalents.
+
 ## Kendo UI 2026 Q2
 
 ### New Meridian Theme - Default Theme Moved to Maintenance

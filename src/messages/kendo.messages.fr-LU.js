@@ -268,6 +268,13 @@
           "day": "jour",
           "weekday": "jour de la semaine",
           "weekend": "jour de week-end"
+        },
+        "makeRecurring": "Rendre récurrent",
+        "summary": {
+          "on": "le",
+          "onThe": "le",
+          "onDay": "le jour",
+          "until": "jusqu'au"
         }
       });
   }

@@ -755,16 +755,18 @@ How do I allow users to edit events in a Kendo UI Scheduler? Enable or disable t
 
 ### editable.window `Object`
 
-Configures the Kendo UI Window instance, which is used when the Grid edit mode is `"popup"`. The configuration is optional.
+Configures the Kendo UI Dialog instance that contains the desktop event editor. The configuration is optional.
 
-For more information, please refer to the [Window configuration API](/api/javascript/ui/window).
+> The `window` property name is retained for backward compatibility. The supplied options are passed to a [Dialog](/api/javascript/ui/dialog) instance.
+
+For more information, refer to the [Dialog configuration API](/api/javascript/ui/dialog#configuration).
 
 
 <div class="meta-api-description">
-How to customize the popup editing interface in Kendo UI Scheduler edit mode? Customize and control the popup editing interface appearing during scheduler popup edit mode, enabling settings for popup size, title text, screen position, modal overlay behavior, resizability, drag capability, animation effects, and custom CSS styling, allowing full adjustment of the editor window’s appearance and interaction to fit different UI requirements and user preferences in scheduling applications.
+How do I customize the Dialog used by the Kendo UI Scheduler desktop event editor? Configure the event editing Dialog through the legacy-named window option, including supported Dialog settings such as its title, width, modal behavior, closable state, animation, CSS classes, and lifecycle events when creating or editing appointments.
 </div>
 
-#### Example - Scheduler popup Window configuration
+#### Example - configure the Scheduler event editor Dialog
 
     <div id="scheduler"></div>
     <script>
@@ -1532,11 +1534,11 @@ How to change the default date label in Kendo UI Scheduler? Customize or transla
 
 ### messages.deleteWindowTitle `String`
 
-The text similar to "Delete event" displayed as title of the scheduler delete event window.
+The text similar to "Delete event" displayed as the title of the Scheduler delete-event confirmation Dialog.
 
 
 <div class="meta-api-description">
-How to customize the title of the confirmation dialog when deleting events in a Kendo UI Scheduler? Customize, configure, or set the confirmation dialog title text displayed when deleting events within a scheduler or calendar interface, enabling control over the prompt message, window heading, or alert title that appears during event removal actions, helping tailor user notifications, confirmation dialogs, deletion prompts, and modal window headings to match specific application wording or localization requirements.
+How do I customize the title of the confirmation Dialog when deleting events in a Kendo UI Scheduler? Customize, configure, localize, or set the Dialog heading displayed when users remove scheduled events while retaining the legacy deleteWindowTitle property name.
 </div>
 
 #### Example - set the "deleteWindowTitle" scheduler message
@@ -2154,6 +2156,29 @@ How do I customize the label for all-day events in Kendo UI Scheduler's event ed
     });
     </script>
 
+### messages.editor.cancelTimezoneReset `String`
+
+The text similar to "No" displayed for the cancel action in the timezone-reset confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the cancel action text in the Kendo UI Scheduler timezone-reset confirmation Dialog? Configure or localize the label that keeps the existing timezone settings when users decline to reset them.
+</div>
+
+#### Example - set the "cancelTimezoneReset" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          cancelTimezoneReset: "Keep timezone"
+        }
+      }
+    });
+    </script>
+
 ### messages.editor.description `String`
 
 The text similar to "Description" displayed in the scheduler event editor.
@@ -2187,7 +2212,7 @@ How do I customize the event description label in Kendo UI Scheduler? Customize,
 
 ### messages.editor.editorTitle `String`
 
-The text similar to "Event" displayed as title of the scheduler event editor.
+The fallback text similar to "Event" displayed as the title of the Scheduler event editor Dialog when the corresponding `newEvent` or `editEvent` message is not set.
 
 
 <div class="meta-api-description">
@@ -2213,6 +2238,29 @@ How to change the title of the event editor in Kendo UI Scheduler? Control and c
           title: "Interview"
         }
       ]
+    });
+    </script>
+
+### messages.editor.editEvent `String`
+
+The text similar to "Edit Event" displayed as the title of the Scheduler event editor Dialog when editing an existing event. Falls back to `messages.editor.editorTitle` when not set.
+
+
+<div class="meta-api-description">
+How do I customize the Kendo UI Scheduler Dialog title for editing an existing event? Configure or localize the heading shown when users open the desktop event editor to modify an appointment, with editorTitle used as a fallback.
+</div>
+
+#### Example - set the "editEvent" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          editEvent: "Modify Event"
+        }
+      }
     });
     </script>
 
@@ -2278,6 +2326,29 @@ How to customize the end timezone label in Kendo UI Scheduler? Customize or modi
     });
     </script>
 
+### messages.editor.newEvent `String`
+
+The text similar to "New Event" displayed as the title of the Scheduler event editor Dialog when creating an event. Falls back to `messages.editor.editorTitle` when not set.
+
+
+<div class="meta-api-description">
+How do I customize the Kendo UI Scheduler Dialog title for creating an event? Configure or localize the heading shown when users open the desktop event editor to add an appointment, with editorTitle used as a fallback.
+</div>
+
+#### Example - set the "newEvent" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          newEvent: "Create Event"
+        }
+      }
+    });
+    </script>
+
 ### messages.editor.repeat `String`
 
 The text similar to "Repeat" displayed in the scheduler event editor.
@@ -2306,6 +2377,52 @@ How do I customize the repeat label in Kendo UI Scheduler? Customize, configure,
           title: "Interview"
         }
       ]
+    });
+    </script>
+
+### messages.editor.resetTimezone `String`
+
+The text similar to "Yes" displayed for the confirm action in the timezone-reset confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the confirm action text in the Kendo UI Scheduler timezone-reset confirmation Dialog? Configure or localize the label that resets the event timezone settings when users confirm the action.
+</div>
+
+#### Example - set the "resetTimezone" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          resetTimezone: "Reset timezone"
+        }
+      }
+    });
+    </script>
+
+### messages.editor.resetTimezoneWindowTitle `String`
+
+The text similar to "Reset Timezone" displayed as the title of the timezone-reset confirmation Dialog.
+
+
+<div class="meta-api-description">
+How do I customize the title of the Kendo UI Scheduler timezone-reset confirmation Dialog? Configure or localize the Dialog heading shown before users reset an event's timezone settings while retaining the legacy resetTimezoneWindowTitle property name.
+</div>
+
+#### Example - set the "resetTimezoneWindowTitle" Scheduler editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        editor: {
+          resetTimezoneWindowTitle: "Clear timezone settings"
+        }
+      }
     });
     </script>
 
@@ -2524,6 +2641,82 @@ How do I customize the title of the event editor in Kendo UI Scheduler? Customiz
         }
       ]
     });
+    </script>
+
+### messages.moreEventsPopover `Object`
+
+Configures the messages in the Month view overflow popover. These messages are processed only when the Month view has [moreEventsPopover](/api/javascript/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
+
+
+<div class="meta-api-description">
+How do I customize the event overflow popover text in the Kendo UI Scheduler Month view? Configure or localize the labels shown by the monthly calendar's more-events popup when overflow opens in a popover, with the message group consumed only when the Month view popover behavior is enabled.
+</div>
+
+#### Example - customize the Month view more-events popover messages
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      views: [{ type: "month", selected: true, eventsPerDay: 1, moreEventsPopover: true }],
+      messages: {
+        moreEventsPopover: {
+          eventsLabel: "Appointments",
+          noEvents: "No appointments for this date."
+        }
+      },
+      dataSource: [
+        { id: 1, title: "Inspection", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00") },
+        { id: 2, title: "Delivery", start: new Date("2026/8/3 11:00"), end: new Date("2026/8/3 12:00") }
+      ]
+    });
+    </script>
+
+### messages.moreEventsPopover.eventsLabel `String` *(default: "Events")*
+
+The accessible label for the event list in the Month view overflow popover. The message is consumed only when the Month view has [moreEventsPopover](/api/javascript/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
+
+
+<div class="meta-api-description">
+How can I change the accessible events label in the Kendo UI Scheduler Month view overflow popup? Set or localize the event list label used by the monthly more-events popover when that popover behavior is enabled, including alternative wording such as appointments, bookings, or tasks.
+</div>
+
+#### Example - set the Month view popover events label
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      views: [{ type: "month", selected: true, eventsPerDay: 1, moreEventsPopover: true }],
+      messages: { moreEventsPopover: { eventsLabel: "Appointments" } },
+      dataSource: [
+        { id: 1, title: "Inspection", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00") },
+        { id: 2, title: "Delivery", start: new Date("2026/8/3 11:00"), end: new Date("2026/8/3 12:00") }
+      ]
+    });
+    </script>
+
+### messages.moreEventsPopover.noEvents `String` *(default: "No events on this date.")*
+
+The text displayed when the Month view overflow popover has no events for the selected date. The message is consumed only when the Month view has [moreEventsPopover](/api/javascript/ui/scheduler#configuration-views.moreEventsPopover) set to `true`.
+
+
+<div class="meta-api-description">
+How do I customize the empty message in the Kendo UI Scheduler Month view event overflow popover? Set or localize the no-events text displayed for a date in the monthly more-events popup when the Month view popover behavior is enabled.
+</div>
+
+#### Example - configure the Month view popover empty message
+
+    <div id="scheduler"></div>
+    <p id="configured-message"></p>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      views: [{ type: "month", selected: true, moreEventsPopover: true }],
+      messages: { moreEventsPopover: { noEvents: "No appointments for this date." } }
+    });
+    var scheduler = $("#scheduler").data("kendoScheduler");
+    $("#configured-message").text(scheduler.options.messages.moreEventsPopover.noEvents);
     </script>
 
 ### messages.recurrenceEditor `Object`
@@ -3245,6 +3438,28 @@ How to customize the title in the recurrence editor of a Kendo UI Scheduler? Cus
     });
     </script>
 
+### messages.recurrenceEditor.makeRecurring `String` *(default: "Make recurring")*
+
+The text displayed by the recurrence trigger when the event does not have a recurrence rule.
+
+
+<div class="meta-api-description">
+How do I customize the Make recurring text in the Kendo UI Scheduler event editor? Set or localize the recurrence trigger label shown for a nonrecurring appointment before the user defines a repeat rule.
+</div>
+
+#### Example - set the recurrence trigger message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: { recurrenceEditor: { makeRecurring: "Add recurrence" } },
+      dataSource: [
+        { id: 1, title: "Safety Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00") }
+      ]
+    });
+    </script>
+
 ### messages.recurrenceEditor.monthly `Object`
 
 The configuration of the scheduler recurrence editor monthly messages. Use this option to customize or localize the scheduler recurrence editor monthly messages.
@@ -3728,6 +3943,120 @@ How can I customize the "repeat" label in the Kendo UI Scheduler's recurrence ed
                 repeatTitle: "Repeat On"
             }
         }
+    });
+    </script>
+
+### messages.recurrenceEditor.summary `Object`
+
+Configures the connecting words used in the recurrence trigger summary.
+
+
+<div class="meta-api-description">
+How can I localize the recurrence summary in the Kendo UI Scheduler editor? Configure the connecting words used to describe weekly, monthly, yearly, and ending recurrence rules in the trigger label, including phrases for dates, ordinal positions, month days, and end dates.
+</div>
+
+#### Example - customize recurrence summary messages
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: {
+        recurrenceEditor: {
+          summary: { on: "during", onThe: "during the", onDay: "during day", until: "through" }
+        }
+      },
+      dataSource: [
+        { id: 1, title: "Inventory Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20260831T000000Z" }
+      ]
+    });
+    </script>
+
+### messages.recurrenceEditor.summary.on `String` *(default: "on")*
+
+The connecting word used before weekday lists in recurrence trigger summaries.
+
+
+<div class="meta-api-description">
+How do I change the word before weekdays in a Kendo UI Scheduler recurrence summary? Set or localize the connector used when a repeat rule summary lists the selected days of the week.
+</div>
+
+#### Example - set the recurrence summary weekday connector
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: { recurrenceEditor: { summary: { on: "during" } } },
+      dataSource: [
+        { id: 1, title: "Inventory Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=WEEKLY;BYDAY=MO" }
+      ]
+    });
+    </script>
+
+### messages.recurrenceEditor.summary.onThe `String` *(default: "on the")*
+
+The connecting phrase used before an ordinal weekday in recurrence trigger summaries.
+
+
+<div class="meta-api-description">
+How can I localize the phrase before an ordinal weekday in a Kendo UI Scheduler recurrence summary? Set or translate the connector used for patterns such as the first Monday or last Friday of a month or year.
+</div>
+
+#### Example - set the recurrence summary ordinal connector
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: { recurrenceEditor: { summary: { onThe: "during the" } } },
+      dataSource: [
+        { id: 1, title: "Compliance Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=MONTHLY;BYDAY=1MO" }
+      ]
+    });
+    </script>
+
+### messages.recurrenceEditor.summary.onDay `String` *(default: "on day")*
+
+The connecting phrase used before a day number in recurrence trigger summaries.
+
+
+<div class="meta-api-description">
+How do I customize the phrase before a numbered day in a Kendo UI Scheduler recurrence summary? Set or localize the connector used for monthly or yearly repeat rules that occur on a specific day number.
+</div>
+
+#### Example - set the recurrence summary day-number connector
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: { recurrenceEditor: { summary: { onDay: "during day" } } },
+      dataSource: [
+        { id: 1, title: "Billing Run", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=MONTHLY;BYMONTHDAY=3" }
+      ]
+    });
+    </script>
+
+### messages.recurrenceEditor.summary.until `String` *(default: "until")*
+
+The connecting word used before the end date in recurrence trigger summaries.
+
+
+<div class="meta-api-description">
+How can I change the word before the ending date in a Kendo UI Scheduler recurrence summary? Set or localize the connector that introduces the until date for a repeating appointment.
+</div>
+
+#### Example - set the recurrence summary end-date connector
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      messages: { recurrenceEditor: { summary: { until: "through" } } },
+      dataSource: [
+        { id: 1, title: "Inventory Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=WEEKLY;UNTIL=20260831T000000Z" }
+      ]
     });
     </script>
 
@@ -4424,11 +4753,11 @@ How can I customize the delete series message in Kendo UI Scheduler? Customize o
 
 ### messages.recurrenceMessages.deleteWindowTitle `String`
 
-The text similar to "Delete Recurring Item" displayed in the scheduler event editor.
+The text similar to "Delete Recurring Item" displayed as the title of the recurring-event deletion Dialog.
 
 
 <div class="meta-api-description">
-How to set the title for the delete recurring event confirmation dialog in Kendo UI Scheduler? Control and customize the title text displayed in the confirmation dialog when deleting recurring events or series within a scheduling interface, including setting, modifying, or localizing the delete window header to enhance user clarity, prompt customization, dialog labeling, and user interface message adjustments related to recurring event deletion prompts or warnings.
+How do I set the title of the recurring-event deletion Dialog in Kendo UI Scheduler? Control, customize, or localize the Dialog heading shown when users choose whether to delete one occurrence or an entire recurring series while retaining the legacy deleteWindowTitle property name.
 </div>
 
 #### Example - set the "deleteWindowTitle" scheduler editor message
@@ -4521,7 +4850,7 @@ The text similar to "Edit the series" displayed in the scheduler event editor.
 
 
 <div class="meta-api-description">
-How to customize the edit window series message in Kendo UI Scheduler? Customize or configure the localized text, label, or caption displayed during the modification or editing of an entire recurring event series within a calendar or scheduling interface, enabling tailored messaging for update, change, or adjust actions on series events, including prompts or notifications relevant to batch edits, recurring event management, and series-wide rescheduling in various languages or regional settings.
+How do I customize the action label for editing an entire recurring series in Kendo UI Scheduler? Configure or localize the text displayed for the series-editing action in the recurring-event Dialog while retaining the legacy editWindowSeries property name.
 </div>
 
 #### Example - set the "editWindowSeries" scheduler editor message
@@ -4548,11 +4877,11 @@ How to customize the edit window series message in Kendo UI Scheduler? Customize
 
 ### messages.recurrenceMessages.editWindowTitle `String`
 
-The text similar to "Edit Recurring Item" displayed in the scheduler event editor.
+The text similar to "Edit Recurring Item" displayed as the title of the recurring-event editing Dialog.
 
 
 <div class="meta-api-description">
-How do I customize the title of the edit window for recurring events in the Kendo UI Scheduler? Customize and localize the title text displayed in the event editor window when modifying or updating recurring events in a scheduling interface, enabling control over the edit dialog heading for repeated appointments, recurring task updates, or series modifications within calendar or planner tools. This setting lets developers configure, set, or change the window title to match different languages, user contexts, or branding needs when users open the editor to adjust recurrence details.
+How do I customize the title of the recurring-event editing Dialog in Kendo UI Scheduler? Configure, set, or localize the Dialog heading shown when users choose whether to edit one occurrence or an entire recurring series while retaining the legacy editWindowTitle property name.
 </div>
 
 #### Example - set the "editWindowTitle" scheduler editor message
@@ -4579,11 +4908,11 @@ How do I customize the title of the edit window for recurring events in the Kend
 
 ### messages.recurrenceMessages.resetSeriesWindowTitle `String`
 
-The title of the prompt dialog opened to confirm the resetting of a series event.
+The title of the Dialog opened to confirm resetting a recurring series.
 
 
 <div class="meta-api-description">
-How to customize reset series window title in Kendo UI Scheduler? Customize or translate the confirmation dialog title that appears when resetting a series of recurring events in a scheduling or calendar application, including options to set, localize, or modify the prompt text shown to users when they attempt to reset or edit entire recurring event series, ensuring clarity and context in various languages, configurations, or UI customizations for managing repeated event adjustments and resets.
+How do I customize the reset-series confirmation Dialog title in Kendo UI Scheduler? Set, translate, or localize the Dialog heading shown before resetting a recurring event series while retaining the legacy resetSeriesWindowTitle property name.
 </div>
 
 #### Example - set the "resetSeriesWindowTitle" scheduler editor message
@@ -5972,6 +6301,35 @@ How do I customize the title in the exported Kendo UI Scheduler PDF? Control the
     });
     </script>
 
+### recurrenceRuleLabelTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) used to render the recurrence trigger summary in the desktop event editor.
+
+The template data contains the following fields:
+
+* `rule`&mdash;The parsed recurrence rule object.
+* `recurrenceRule`&mdash;The serialized recurrence rule string.
+
+
+<div class="meta-api-description">
+How do I customize the recurrence summary shown by the Kendo UI Scheduler event editor? Provide a string or function template for the recurring-event trigger label and format its text from the parsed recurrence rule object or the serialized recurrence rule string.
+</div>
+
+#### Example - customize the recurrence trigger summary
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      recurrenceRuleLabelTemplate: function(data) {
+        return data.rule.freq.toUpperCase() + ": " + data.recurrenceRule;
+      },
+      dataSource: [
+        { id: 1, title: "Inventory Review", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), recurrenceRule: "FREQ=WEEKLY;BYDAY=MO" }
+      ]
+    });
+    </script>
+
 ### resources `Array`
 
 The configuration of the scheduler resource(s). A scheduler resource is optional metadata that can be associated
@@ -6328,6 +6686,35 @@ How do I configure Kendo UI for jQuery Scheduler to identify resource IDs in eve
             { text: "Small meeting room", value: 1 },
             { text: "Big meeting room", value: 2 }
           ]
+        }
+      ]
+    });
+    </script>
+
+### resources.icon `String`
+
+The name of the icon displayed instead of the resource text label in the desktop event editor. When the option is not set, the editor displays the resource [title](/api/javascript/ui/scheduler#configuration-resources.title), or its existing field-name fallback.
+
+
+<div class="meta-api-description">
+How do I show an icon instead of a resource label in the Kendo UI Scheduler desktop event editor? Set a Kendo icon name for a resource editor field while preserving the configured resource title or field name as the fallback when no icon is supplied.
+</div>
+
+#### Example - use an icon for a resource in the desktop editor
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      dataSource: [
+        { id: 1, title: "Equipment Inspection", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00"), technicianId: 1 }
+      ],
+      resources: [
+        {
+          field: "technicianId",
+          title: "Technician",
+          icon: "user",
+          dataSource: [{ text: "Morgan Lee", value: 1 }]
         }
       ]
     });
@@ -8368,6 +8755,33 @@ How do I configure the number of months displayed in a Kendo UI Scheduler year v
           }
         ]
       });
+    </script>
+
+### views.moreEventsPopover `Boolean` *(default: false)*
+
+Controls how event overflow is opened in the Month view. When set to `true`, clicking the more-events link opens a popover for the date. When set to `false`, clicking the link uses the legacy behavior and navigates to the Day view.
+
+> The `moreEventsPopover` option is supported only when `views.type` is set to `"month"`. The [messages.moreEventsPopover](/api/javascript/ui/scheduler#configuration-messages.moreEventsPopover) messages are processed only when this option is `true`.
+
+
+<div class="meta-api-description">
+How can I open event overflow in a popover instead of navigating from Month to Day view in the Kendo UI Scheduler? Enable the monthly more-events popup for dates with hidden appointments, or keep the default legacy click behavior that navigates to the Day view; this setting applies only to Month view and activates the related popover messages.
+</div>
+
+#### Example - open Month view event overflow in a popover
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2026/8/3"),
+      views: [
+        { type: "month", selected: true, eventsPerDay: 1, moreEventsPopover: true }
+      ],
+      dataSource: [
+        { id: 1, title: "Inspection", start: new Date("2026/8/3 09:00"), end: new Date("2026/8/3 10:00") },
+        { id: 2, title: "Delivery", start: new Date("2026/8/3 11:00"), end: new Date("2026/8/3 12:00") }
+      ]
+    });
     </script>
 
 ### views.name `String`

@@ -129,6 +129,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekday": "doordeweekse dag",
     "weekend": "weekend dag"
   },
+  "makeRecurring": "Herhalend maken",
+  "summary": {
+    "on": "op",
+    "onThe": "op de",
+    "onDay": "op dag",
+    "until": "tot"
+  },
   "weekly": {
     "interval": "week/weken",
     "repeatEvery": "Herhaal elke:",

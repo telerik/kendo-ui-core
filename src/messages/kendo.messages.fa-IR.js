@@ -456,6 +456,13 @@
                 "day": "روز",
                 "weekday": "روز هفته",
                 "weekend": "پایان هفته"
+            },
+            "makeRecurring": "تکراری کنید",
+            "summary": {
+              "on": "در",
+              "onThe": "در",
+              "onDay": "در روز",
+              "until": "تا"
             }
         });
     }

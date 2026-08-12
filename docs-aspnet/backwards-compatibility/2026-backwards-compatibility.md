@@ -32,6 +32,220 @@ To retain the previous behavior and render every selected item as an individual 
 ```
 {% endif %}
 
+### Document Processing and Spreadsheet Package Changes
+
+The following package versions apply:
+
+| Package | Version | Notes |
+|---------|---------|-------|
+| [Telerik.Spreadsheet.Web](https://www.nuget.org/packages/Telerik.Spreadsheet.Web) | `1.2.0` | Spreadsheet server-side processing package |
+| [Telerik.Pdf.Web](https://www.nuget.org/packages/Telerik.Pdf.Web) | `1.2.0` | Required for Telerik UI for ASP.NET Core PDFViewer and Telerik UI for ASP.NET MVC PDFViewer when using Document Processing-based PDF support |
+| [Telerik.Export.Core](https://www.nuget.org/packages/Telerik.Export.Core) | `1.2.0` | Enables exporting `IEnumerable` data sources to Excel, CSV, PDF, DOCX, RTF, and TXT |
+
+#### Spreadsheet Assembly Renamed
+
+The Spreadsheet dependency assembly has been renamed from `Telerik.Web.Spreadsheet` to `Telerik.Spreadsheet.Web`.
+
+#### PDF Processing Package Renamed
+
+The PDF processing dependency package has been renamed from `Telerik.Web.PDF` to `Telerik.Pdf.Web`.
+
+#### Server-Side Export Package Renamed
+
+The server-side export dependency package has been renamed from `Telerik.Core.Export` to `Telerik.Export.Core`.
+
+#### Migration
+
+- Update project references from `Telerik.Web.Spreadsheet` to `Telerik.Spreadsheet.Web`.
+- Add the [Telerik.Spreadsheet.Web](https://www.nuget.org/packages/Telerik.Spreadsheet.Web) package explicitly to projects that use Spreadsheet server-side import, export, or processing features.
+- Replace `Telerik.Web.PDF` with [Telerik.Pdf.Web](https://www.nuget.org/packages/Telerik.Pdf.Web) in applications that use PDFViewer Document Processing integration.
+- Replace `Telerik.Core.Export` with [Telerik.Export.Core](https://www.nuget.org/packages/Telerik.Export.Core) in applications that use server-side export helpers.
+
+Applications that still reference the old assembly or package names must update their project references to restore Spreadsheet, PDF processing, or export functionality.
+### Scheduler - Enhanced Rendering (HTML and CSS)
+
+Starting with the **2026 Q3** release, the Scheduler adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling. Custom CSS or DOM queries that target the previous markup must be updated.
+
+#### Toolbar Markup Changed
+
+The toolbar now uses `fillMode="flat"`, has a new element order, and adds a "New Event" primary button. The navigation buttons are restructured&mdash;"Today" is a standalone flat button and Prev/Next are a separate `ButtonGroup` with `fillMode="flat"`.
+
+The view switcher remains a `SegmentedControl` at full width but collapses to a `MenuButton` at narrower widths. The toolbar progressively hides elements as available width decreases (responsive levels 0 through 3).
+
+If you have custom CSS targeting the toolbar navigation `ButtonGroup` with solid fill, update it to target flat-styled buttons.
+
+#### Event Element Structure Changed
+
+The internal event structure now uses a flex layout with CSS Container Queries (`container-type: size`). The `k-event-actions` class has been removed.
+
+Before:
+
+```html
+<div class="k-event">
+  <span class="k-event-actions"><!-- recurrence icon --></span>
+  <div>
+    <div class="k-event-template k-event-time">8:00 AM</div>
+    <div class="k-event-template">Event Title</div>
+  </div>
+  <span class="k-event-actions"><!-- delete link --></span>
+  <span class="k-resize-handle k-resize-n"></span>
+  <span class="k-resize-handle k-resize-s"></span>
+</div>
+```
+
+After:
+
+```html
+<div class="k-event" style="container-type: size">
+  <div>
+    <div class="k-event-template k-event-title">Event Title</div>
+    <div class="k-event-template k-event-time">
+      <span class="k-event-recurrence-icon"><!-- icon --></span>
+      10:00 AM - 10:30 AM
+    </div>
+  </div>
+  <span class="k-event-recurrence-icon"><!-- icon --></span>
+  <span class="k-resize-handle k-resize-n"></span>
+  <span class="k-resize-handle k-resize-s"></span>
+</div>
+```
+
+Key differences:
+
+- Title renders before time (order reversed).
+- `k-event-actions` replaced by `k-event-recurrence-icon` and `k-event-continuation` spans.
+- Delete action removed from static rendering.
+- Multi-day events use `k-event-continuation` spans with directional chevron icons.
+- Layout uses `display: flex; overflow: visible` instead of `overflow: hidden`.
+
+If you have custom CSS or jQuery selectors targeting `.k-event-actions`, replace them with `.k-event-recurrence-icon` or `.k-event-continuation`.
+
+#### Header Cell Markup Changed
+
+Day and Week view header cells now render two separate elements instead of a single combined text span.
+
+Before:
+
+```html
+<th class="k-scheduler-cell k-heading-cell">
+  <span class="k-link k-nav-day">Mon 6/13</span>
+</th>
+```
+
+After:
+
+```html
+<th class="k-scheduler-cell k-heading-cell">
+  <span class="k-scheduler-date-day">Mon</span>
+  <span class="k-link k-nav-day">13</span>
+</th>
+```
+
+If you have custom CSS targeting `.k-nav-day` content format, update it to account for the separate `.k-scheduler-date-day` element.
+
+#### Edit Dialog Markup Changed
+
+The quick create and quick edit flows now use a **Popover** (no overlay) instead of a full `Dialog`. Form labels use icons instead of text. Actions use the `k-popover-actions` class.
+
+The full edit dialog date/time section has the following changes:
+
+- Date and time pickers are now wrapped in `.k-scheduler-edit-form-row` containers instead of being direct grid children.
+- The `from`/`to` separator text uses a `.k-scheduler-datetime-label` class.
+- The grid changes from a 5-column layout to 3 columns (`2.5fr 1fr min-content`).
+- All-day toggle uses a `Switch` component instead of a checkbox.
+
+If you have custom CSS targeting date/time picker layout inside `.k-scheduler-datetime-grid`, update selectors to account for the new `.k-scheduler-edit-form-row` wrapper.
+
+#### Edit Dialog Uses Dialog Instead of Window
+
+The Scheduler edit dialog now uses a `Dialog` component instead of a `Window`. The `Window` configuration method on the Scheduler's `Editable` settings now accepts `Action<DialogBuilder>` instead of `Action<WindowBuilder>`.
+
+**Before (2026 Q2 and earlier):**
+
+```HtmlHelper
+@(Html.Kendo().Scheduler<TaskViewModel>()
+    .Name("scheduler")
+    .Editable(e => e.Window(w => w
+        .Title("Edit Event")
+        .Width(600)
+        .Height(400)
+        .Draggable()
+        .Resizable()
+    ))
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-scheduler name="scheduler">
+    <editable>
+        <editable-window title="Edit Event" width="600" height="400" draggable="true" resizable="true" />
+    </editable>
+</kendo-scheduler>
+```
+{% endif %}
+
+**After (2026 Q3 and later):**
+
+```HtmlHelper
+@(Html.Kendo().Scheduler<TaskViewModel>()
+    .Name("scheduler")
+    .Editable(e => e.Window(w => w
+        .Title("Edit Event")
+        .Width("600px")
+        .Modal(m => m.Enabled(true))
+    ))
+)
+```
+
+{% if site.core %}
+```TagHelper
+<kendo-scheduler name="scheduler">
+    <editable>
+        <editable-window title="Edit Event" width="600px">
+            <modal enabled="true" />
+        </editable-window>
+    </editable>
+</kendo-scheduler>
+```
+{% endif %}
+
+The `Window` method name and `<editable-window>` tag name are preserved for backward compatibility, but the configurator now exposes `DialogBuilder` options instead of `WindowBuilder` options.
+
+**New `DialogBuilder` options available:**
+
+- `Actions` &ndash; configures the dialog action buttons
+- `ButtonLayout` &ndash; sets the layout of the action buttons (`Normal`, `Stretched`)
+- `Closable` &ndash; whether the dialog shows a close button
+- `Modal` &ndash; configures the modal overlay settings
+- `Size` &ndash; sets the dialog size (`Small`, `Medium`, `Large`)
+- `Content` &ndash; sets the dialog content
+- `Visible` &ndash; controls initial visibility
+- `Messages` &ndash; configures the dialog messages
+
+**Previous `WindowBuilder` options no longer available:**
+
+- `Draggable` &ndash; the dialog is not draggable
+- `Resizable` &ndash; the dialog is not resizable
+- `Pinned` &ndash; no pinned mode
+- `AppendTo` &ndash; no custom append target
+- `LoadContentFrom` &ndash; no remote content loading
+- `Position` &ndash; no custom positioning
+- `Actions` (window-style) &ndash; the title bar action buttons (`Minimize`, `Maximize`, `Close`) are replaced by dialog action buttons
+
+#### Month View "More Events" Tooltip Replaced with Popover
+
+The month-view overflow indicator now renders a `Popover` instead of the legacy tooltip. All tooltip-specific class names have been renamed:
+
+| Before | After |
+|--------|-------|
+| `.k-tooltip.k-scheduler-tooltip` | `.k-popover.k-scheduler-popover` |
+| `.k-tooltip-title` | `.k-popover-header` |
+| `.k-tooltip-events-container` / `.k-tooltip-events` | `.k-popover-events` |
+| `.k-tooltip-event` | `.k-popover-event` |
+
+If you have custom CSS targeting `.k-scheduler-tooltip` or its child classes, update them to the corresponding `.k-scheduler-popover` equivalents.
+
 ## {{ site.product }} 2026 Q2
 
 ### New Meridian Theme - Default Theme Moved to Maintenance

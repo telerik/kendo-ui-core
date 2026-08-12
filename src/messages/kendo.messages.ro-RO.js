@@ -139,6 +139,13 @@ if (kendo.ui.RecurrenceEditor) {
         "day": "zi",
         "weekday": "zi a saptamanii",
         "weekend": "zi de weekend"
+      },
+      "makeRecurring": "Setați ca recurent",
+      "summary": {
+        "on": "în",
+        "onThe": "în",
+        "onDay": "în ziua",
+        "until": "până la"
       }
     });
 }

@@ -32,9 +32,9 @@ liquid:
   product_url: https://www.telerik.com/aspnet-core-ui
   framework: "ASP.NET Core"
   framework_short: "Core"
-  cdnVersion: "2026.2.520"
-  themesCdnVersion: "14.1.0"
-  mvcCoreVersion: "2026.2.520"
+  cdnVersion: "2026.3.811"
+  themesCdnVersion: "14.5.0"
+  mvcCoreVersion: "2026.3.811"
   platform: aspnet-core
   core: true
   mvc: false
@@ -643,6 +643,8 @@ meta:
     title: Image Editor
   html-helpers/conversational-ui/inline-aiprompt:
     title: InlineAIPrompt
+  html-helpers/conversational-ui/llm-kit:
+    title: LLM Kit
   html-helpers/editors/flatcolorpicker:
     title: FlatColorPicker
   html-helpers/editors/listbox/binding:

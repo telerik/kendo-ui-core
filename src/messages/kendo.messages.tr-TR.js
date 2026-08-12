@@ -154,6 +154,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekday": "İş günü",
     "weekend": "Haftasonu"
   },
+  "makeRecurring": "Tekrarlı yap",
+  "summary": {
+    "on": "günü",
+    "onThe": "günü",
+    "onDay": "gün",
+    "until": "kadar"
+  },
   "weekly": {
     "interval": "Haftalar",
     "repeatEvery": "Her hafta tekrarla",

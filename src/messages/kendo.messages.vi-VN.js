@@ -585,6 +585,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "ngày",
     "weekday": "ngày trong tuần",
     "weekend": "ngày cuối tuần"
+  },
+  "makeRecurring": "Đặt lặp lại",
+  "summary": {
+    "on": "vào",
+    "onThe": "vào",
+    "onDay": "vào ngày",
+    "until": "đến"
   }
 });
 }

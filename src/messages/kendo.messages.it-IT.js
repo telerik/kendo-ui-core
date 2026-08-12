@@ -165,6 +165,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "giorno",
     "weekday": "giorno della settimana",
     "weekend": "giorno finesettimana"
+  },
+  "makeRecurring": "Rendi ricorrente",
+  "summary": {
+    "on": "il",
+    "onThe": "il",
+    "onDay": "il giorno",
+    "until": "fino al"
   }
 });
 }

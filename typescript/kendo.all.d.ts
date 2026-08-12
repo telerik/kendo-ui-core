@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2026.2.520
+// Type definitions for Kendo UI Professional v2026.3.811
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -718,6 +718,7 @@ declare namespace kendo.data {
         end?: Date | undefined;
         endTimezone?: string | undefined;
         isAllDay?: boolean | undefined;
+        isReadonly?: boolean | undefined;
         id?: any;
         start?: Date | undefined;
         startTimezone?: string | undefined;
@@ -741,6 +742,7 @@ declare namespace kendo.data {
         end: Date;
         endTimezone: string;
         isAllDay: boolean;
+        isReadonly: boolean;
         id: any;
         start: Date;
         startTimezone: string;
@@ -11823,13 +11825,22 @@ declare namespace kendo.ui {
         interval?: string | undefined;
     }
 
+    interface SchedulerMessagesRecurrenceEditorSummary {
+        on?: string | undefined;
+        onThe?: string | undefined;
+        onDay?: string | undefined;
+        until?: string | undefined;
+    }
+
     interface SchedulerMessagesRecurrenceEditor {
         daily?: SchedulerMessagesRecurrenceEditorDaily | undefined;
         end?: SchedulerMessagesRecurrenceEditorEnd | undefined;
         frequencies?: SchedulerMessagesRecurrenceEditorFrequencies | undefined;
         monthly?: SchedulerMessagesRecurrenceEditorMonthly | undefined;
         offsetPositions?: SchedulerMessagesRecurrenceEditorOffsetPositions | undefined;
+        makeRecurring?: string | undefined;
         recurrenceEditorTitle?: string | undefined;
+        summary?: SchedulerMessagesRecurrenceEditorSummary | undefined;
         weekly?: SchedulerMessagesRecurrenceEditorWeekly | undefined;
         weekdays?: SchedulerMessagesRecurrenceEditorWeekdays | undefined;
         yearly?: SchedulerMessagesRecurrenceEditorYearly | undefined;
@@ -11856,6 +11867,11 @@ declare namespace kendo.ui {
         timelineWeek?: string;
     }
 
+    interface SchedulerMessagesMoreEventsPopover {
+        eventsLabel?: string | undefined;
+        noEvents?: string | undefined;
+    }
+
     interface SchedulerMessages {
         allDay?: string | undefined;
         ariaEventLabel?: string | undefined;
@@ -11878,6 +11894,7 @@ declare namespace kendo.ui {
         today?: string | undefined;
         editable?: SchedulerMessagesEditable | undefined;
         editor?: SchedulerMessagesEditor | undefined;
+        moreEventsPopover?: SchedulerMessagesMoreEventsPopover | undefined;
         recurrenceEditor?: SchedulerMessagesRecurrenceEditor | undefined;
         recurrenceMessages?: SchedulerMessagesRecurrenceMessages | undefined;
         views?: SchedulerMessagesViews | undefined;
@@ -11921,6 +11938,7 @@ declare namespace kendo.ui {
         dataTextField?: string | undefined;
         dataValueField?: string | undefined;
         field?: string | undefined;
+        icon?: string | undefined;
         multiple?: boolean | undefined;
         name?: string | undefined;
         title?: string | undefined;
@@ -11978,6 +11996,7 @@ declare namespace kendo.ui {
         majorTimeHeaderTemplate?: string | Function | undefined;
         minorTickCount?: number | undefined;
         minorTimeHeaderTemplate?: string | Function | undefined;
+        moreEventsPopover?: boolean | undefined;
         name?: string | undefined;
         selected?: boolean | undefined;
         selectedDateFormat?: string | undefined;
@@ -12020,6 +12039,7 @@ declare namespace kendo.ui {
         mobile?: boolean | string | undefined;
         ongoingEvents?: boolean | SchedulerOngoing | undefined;
         pdf?: SchedulerPdf | undefined;
+        recurrenceRuleLabelTemplate?: string | Function | undefined;
         resources?: SchedulerResource[] | undefined;
         selectable?: boolean | undefined;
         showWorkHours?: boolean | undefined;
