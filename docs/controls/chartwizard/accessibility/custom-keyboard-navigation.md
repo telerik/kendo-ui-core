@@ -29,7 +29,15 @@ The following example demonstrates how to replace the default `Escape` key behav
     <div id="chartwizard"></div>
     <script>
     $("#chartwizard").kendoChartWizard({
-        dataSource: [{ category: "A", value: 1 }, { category: "B", value: 2 }],
+        dataSource: [
+            [
+                { field: 'Product Name', value: 'Calzone' },
+                { field: 'Quantity', value: 1 },
+                { field: 'Price', value: 12.39 },
+                { field: 'Tax', value: 2.48 },
+                { field: 'Total', value: 14.87 }
+                ],
+            ],
         kendoKeydown: function(e) {
             if (e.keyCode === kendo.keys.ESC) {
                 e.preventKendoKeydown = true;
@@ -52,7 +60,15 @@ The following example demonstrates how to add a `Ctrl+E` shortcut to trigger an 
     <div id="chartwizard"></div>
     <script>
     $("#chartwizard").kendoChartWizard({
-        dataSource: [{ category: "A", value: 1 }, { category: "B", value: 2 }],
+        dataSource: [
+            [
+                { field: 'Product Name', value: 'Calzone' },
+                { field: 'Quantity', value: 1 },
+                { field: 'Price', value: 12.39 },
+                { field: 'Tax', value: 2.48 },
+                { field: 'Total', value: 14.87 }
+                ],
+            ],
         kendoKeydown: function(e) {
             if (e.ctrlKey && e.keyCode === 69) { // Ctrl+E
                 console.log("Chart export triggered");
