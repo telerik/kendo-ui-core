@@ -50,6 +50,55 @@ The server-side export dependency package has been renamed from `Telerik.Core.Ex
 If your Kendo UI application relies on these ASP.NET server-side features, update project references accordingly and add the [Telerik.Spreadsheet.Web](https://www.nuget.org/packages/Telerik.Spreadsheet.Web) package explicitly. Likewise, replace `Telerik.Web.PDF` with [Telerik.Pdf.Web](https://www.nuget.org/packages/Telerik.Pdf.Web) and `Telerik.Core.Export` with [Telerik.Export.Core](https://www.nuget.org/packages/Telerik.Export.Core) where applicable.
 
 This change affects server-side processing and packaging only. It does not change the client-side Kendo UI for jQuery Spreadsheet API.
+
+### Accessibility Package Adoption Rendering Changes
+
+Starting with the **2026 Q3** release, several components adopt the new accessibility package. As a result, their rendered HTML structure and CSS class hooks change to align with the updated accessibility implementation.
+
+If your application uses custom CSS, DOM queries, snapshot tests, or automation that target the previous markup, review the following changes and update those integrations accordingly.
+
+#### Removed CSS Classes
+
+The following CSS classes are removed as part of the accessibility package adoption:
+
+| Component | Removed classes | Notes |
+|---------|---------|---------|
+| Avatar | `k-widget` | Removed from the Avatar wrapper. |
+| ActionSheet | `k-popup`, `k-text-center`, `k-hbox` | `k-popup` is removed from the ActionSheet root element. `k-text-center` and `k-hbox` are removed from the titlebar markup. |
+| FileManager | `k-widget` | Removed from the FileManager wrapper. |
+| MediaPlayer | `k-widget` | Removed from the MediaPlayer wrapper. |
+| TabStrip | `k-rounded-none` | Removed from the TabStrip scroll buttons. |
+| TreeMap | `k-widget` | Removed from the TreeMap wrapper. |
+
+#### Shared Adaptive ActionSheet Titlebar Changes
+
+The ActionSheet titlebar changes propagate to all components that use the shared adaptive ActionSheet implementation. In adaptive mode, the `k-text-center` and `k-hbox` classes are removed for the following components:
+
+- AutoComplete
+- ColorPicker
+- ComboBox
+- DatePicker
+- DateRangePicker
+- DateTimePicker
+- DropDownList
+- DropDownTree
+- MultiColumnComboBox
+- MultiSelect
+- TimePicker
+
+#### Other Structural Changes
+
+The following breaking changes also alter the rendered structure:
+
+| Component | Structural change |
+|---------|---------|
+| DockManager | A new `<span class="k-item-actions">` wrapper is added around the tab action buttons. |
+| Splitter | Collapse handles and resize handles now render `<div>` elements instead of `<span>` elements. |
+| TabStrip | The close button now adds the `k-remove-tab` class. |
+| ToolBar | A new `k-toolbar-section` class is introduced for grouped sections. The overflow anchor button now adds the `k-rounded-none` class. Separator markup is also updated and overflow separators no longer render `role="separator"`. |
+
+These changes are structural and may affect styling overrides or selectors that depend on removed classes, added wrappers, or previous element nesting.
+
 ### Scheduler - Enhanced Rendering (HTML and CSS)
 
 Starting with the **2026 Q3** release, the Scheduler adopts enhanced rendering that updates the generated HTML and the CSS hooks used for styling. Custom CSS or DOM queries that target the previous markup must be updated.
