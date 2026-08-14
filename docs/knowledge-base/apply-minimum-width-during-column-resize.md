@@ -131,7 +131,8 @@ The following example shows how to apply the width to a certain column if the wi
     <div id="grid"></div>
     <script>
       $(function(){
-        $("#grid").kendoGrid({
+        var minColumnWidth = 100;
+        var grid = $("#grid").kendoGrid({
           dataSource: {
             data: [{foo: "item", bar: "number", baz: "one"}]
           },
@@ -141,26 +142,29 @@ The following example shows how to apply the width to a certain column if the wi
             {field: "baz"}
           ],
           resizable: true
-        });
-      });
+        }).data("kendoGrid");
 
-      $(window).on("resize", function () {
-        var minColumnWidth = 100;
-        var grid = $("#grid").data("kendoGrid");
-        var columns = grid.getOptions().columns;
+        function applyMinWidth() {
+          if (!grid) {
+            return;
+          }
 
-        if ($(window).width() <= 716) {
-          columns[0].width = minColumnWidth;
+          var columns = grid.getOptions().columns;
+
+          if ($(window).width() <= 716) {
+            columns[0].width = minColumnWidth;
+          }
+          else {
+            columns[0].width = "";
+          }
+
           grid.setOptions({
             columns: columns
           });
         }
-        else {
-          columns[0].width = "";
-          grid.setOptions({
-            columns: columns
-          })
-        };
+
+        $(window).off("resize.gridMinWidth").on("resize.gridMinWidth", applyMinWidth);
+        applyMinWidth();
       });
     </script>
 ```

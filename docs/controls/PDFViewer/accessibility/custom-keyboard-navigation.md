@@ -27,7 +27,7 @@ The PDFViewer uses `Arrow Up` and `Arrow Down` to navigate pages. The following 
 
 ```dojo
     <div id="pdfviewer"></div>
-    <script>
+    <script type="module">
     $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
             file: ""
@@ -60,7 +60,7 @@ The following example adds a `G` key shortcut to prompt for a page number.
 
 ```dojo
     <div id="pdfviewer"></div>
-    <script>
+    <script type="module">
     $("#pdfviewer").kendoPDFViewer({
         pdfjsProcessing: {
             file: ""
