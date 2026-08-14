@@ -1812,13 +1812,12 @@ If invoked cancels the default action that belongs to the keydown event.
 
 #### Example - subscribe to the "kendoKeydown" event during initialization
 
-    <div id="window"></div>
+    <div id="window">This is a Kendo UI Window</div>
     <script>
       $("#window").kendoWindow({
         title: "About Kendo UI Window",
-        content: "This is a Kendo UI Window.",
-        kendoKeydown: function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        kendoKeydown: function (e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.keyCode);
         }
       });
@@ -1826,15 +1825,14 @@ If invoked cancels the default action that belongs to the keydown event.
 
 #### Example - subscribe to the "kendoKeydown" event after initialization
 
-    <div id="window"></div>
+    <div id="window">This is a Kendo UI Window</div>
     <script>
       $("#window").kendoWindow({
-        title: "About Kendo UI Window",
-        content: "This is a Kendo UI Window.",
+        title: "About Kendo UI Window"
       });
       var widget = $("#window").data("kendoWindow");
-      widget.bind("kendoKeydown", function(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+      widget.bind("kendoKeydown", function (e) {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.keyCode);
       });
     </script>
