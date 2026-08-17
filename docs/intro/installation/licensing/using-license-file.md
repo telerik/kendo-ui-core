@@ -66,6 +66,6 @@ Whenever you purchase a new Kendo UI for jQuery license or renew an existing one
 
 * [Licensing Overview]({% slug licensing-overview %})
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
-* [Adding the License Key to CI Services]({% slug license-key-to-ci-services %})
+* [Adding Deployment Keys to CI/CD Services]({% slug license-key-to-ci-services %})
 * [Frequently Asked Questions about Your Kendo UI for jQuery License Key]({% slug license-code-faq %})
 * [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release]({% slug handling-license-file-name-changes %})

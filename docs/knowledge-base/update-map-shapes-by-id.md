@@ -39,7 +39,7 @@ How can I update the shapes of the Kendo UI for jQuery Map by using their IDs?
 
 The following example demonstrates how to update the Map shapes by a specified ID.
 
-```dojo
+```pseudo
     <div id="map"></div>
     <script>
       function createMap() {

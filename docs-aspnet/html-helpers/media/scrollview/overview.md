@@ -237,4 +237,6 @@ If you set the `PageSize` option to a larger value, you will need to use a loop 
 ## See Also
 
 * [Using the API of the ScrollView for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
+* [Server-Side API of the ScrollView](/api/scrollview)
+* [Client-Side API of the ScrollView](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)
 * [Knowledge Base Section](/knowledge-base)

@@ -7,7 +7,7 @@ components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/getting-started, /mvc-6/getting-started, /getting-started/getting-started, /getting-started/first-steps-default-project
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 1
-permalink: /getting-started/first-steps-windows
+hidden: true
 ---
 
 # First Steps in {{ site.product }} with VS for Windows

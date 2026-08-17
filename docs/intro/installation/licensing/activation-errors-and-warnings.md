@@ -76,5 +76,5 @@ If you use Kendo UI for jQuery in a project with an expired or missing license, 
 
 * [Licensing Overview]({% slug licensing-overview %})
 * [Frequently Asked Questions about Your Kendo UI for jQuery License Key]({% slug license-code-faq %})
-* [Adding the License Key to CI Services]({% slug license-key-to-ci-services %})
+* [Adding Deployment Keys to CI/CD Services]({% slug license-key-to-ci-services %})
 * [Handling License Key File Name and Environment Variable Name Changes in the 2025 Q1 Release]({% slug handling-license-file-name-changes %})

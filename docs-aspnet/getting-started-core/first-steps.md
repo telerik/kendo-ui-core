@@ -4,6 +4,7 @@ page_title: First Steps with Telerik UI for ASP.NET Core
 meta_title: First Steps with Telerik UI for ASP.NET Core | Telerik UI for ASP.NET Core
 description: "Learn how to use the Telerik UI for ASP.NET Core components in an ASP.NET Core MVC application by setting up your Telerik development environment, creating a new project, and adding a UI component."
 components: ["general"]
+previous_url: /getting-started/first-steps-windows, /getting-started/first-steps-cli
 slug: gettingstartedtelerik_aspnetcore
 tag: "new"
 position: 1
