@@ -3,7 +3,6 @@ title: AI Components & Features
 page_title: Telerik UI for ASP.NET AI Components & Features
 description: "Build intelligent {{ site.framework }} apps faster with {{ site.product }} AI components and smart data features."
 slug: ai_components
-tag: updated
 position: 4
 ---
 
@@ -13,7 +12,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
 
 <article-card-container>
     <article-card
-        tag="updated"
         href="slug://htmlhelpers_ai_integration_chat"
         src="./images/aicomponents/Chat_Light_Large.svg"
         title="AI Chat"
@@ -22,7 +20,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Use the {{ site.product }} Chat component to deliver real-time AI-powered assistance to users.">
     </article-card>
     <article-card
-        tag="new"
         href="slug://smartbox_semantic_search_mode"
         src="./images/aicomponents/Semantic_Search_Light_Large.svg"
         title="Semantic Search"
@@ -31,7 +28,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Enhance data discovery using the {{ site.product }} Grid Semantic Search - intelligent meaning-based search capabilities.">
     </article-card>
     <article-card
-        tag="new"
         href="slug://htmlhelpers_overview_smartpastebutton"
         src="./images/aicomponents/SmartPaste_Light_Large.svg"
         title="SmartPaste"
@@ -40,7 +36,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Streamline data entry with the {{ site.product }} SmartPaste component - map and insert clipboard content into input fields with a single click.">
     </article-card>
     <article-card
-        tag="updated"
         href="slug://ai_toolbar_tool_core_grid"
         src="./images/aicomponents/AI_Data_Operations_Light_Large.svg"
         title="AI Data Operations"
@@ -49,7 +44,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Process data using the intelligent AI capabilities of the {{ site.product }} Grid.">
     </article-card>
     <article-card
-        tag="updated"
         href="slug://ai_toolbar_tool_core_grid#row-highlighting"
         src="./images/aicomponents/AI_Data_Highlights_Light_Large.svg"
         title="AI Data Highlight"
@@ -66,7 +60,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Manage column-level data operations in the {{ site.product }} Grid using its built-in AI feature.">
     </article-card>
     <article-card
-        tag="new"
         href="slug://htmlhelpers_promptbox_aspnetcore"
         src="./images/aicomponents/PromptBox_Light_Large.svg"
         title="PromptBox"
@@ -75,7 +68,6 @@ Accelerate development with cutting-edge AI-powered {{ site.product }} component
         description="Improve AI prompting with the {{ site.product }} PromptBox component - smart input for conversational apps.">
     </article-card>
     <article-card
-        tag="new"
         href="slug://ai_chat_assistant"
         src="./images/aicomponents/Grid_AI_Chat_Integration_Light_Large.svg"
         title="AI Chat Integration"

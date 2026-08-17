@@ -173,6 +173,12 @@ Licensing behavior differs due to changes in licensing enforcement and subscript
 
 In projects that cannot use build tasks (such as certain MVC/AJAX or WebForms-style scenarios), script keys must be embedded manually and `Telerik.Licensing.Runtime.dll` must be referenced explicitly. In standard NuGet-based MVC projects, runtime assemblies are handled automatically.
 
+## What is the difference between developer license keys and deployment keys?
+
+Developer license keys remain valid for CI/CD deployments and can be used in multiple pipelines, builds, and environments. However, their larger size can exceed the environment-variable limits of some CI/CD services. If a developer license key is exposed, you cannot revoke it independently.
+
+Deployment keys are application-specific keys designed for build pipelines. They are shorter than developer license keys, which helps avoid environment-variable limits, and you can remove a deployment key if it is exposed. For new CI/CD pipelines, we recommend using deployment keys.
+
 ## Next Steps
 
 * [Set Up the Telerik NuGet Feed]({%slug nuget_install_aspnetmvc6_aspnetmvc%})

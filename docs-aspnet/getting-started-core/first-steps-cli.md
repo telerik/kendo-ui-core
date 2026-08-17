@@ -6,7 +6,7 @@ components: ["general"]
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /getting-started/getting-started-linux, /getting-started/getting-started-vscode, /getting-started/getting-started-cli
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
 position: 3
-permalink: /getting-started/first-steps-cli
+hidden: true
 ---
 
 # First Steps in Telerik UI for ASP.NET Core with CLI

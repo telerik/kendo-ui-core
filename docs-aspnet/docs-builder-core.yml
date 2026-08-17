@@ -536,11 +536,11 @@ meta:
   styles-and-layout:
     title: Styles and Appearance
     position: 9
-  ai:
-    title: AI Tools
-    position: 3
   ai-core:
     title: AI Tools
+    position: 3
+  ai-core/agentic-ui-generator:
+    title: Agentic UI Generator
     position: 3
   html-helpers/pdf/pdfviewer:
     title: PDFViewer

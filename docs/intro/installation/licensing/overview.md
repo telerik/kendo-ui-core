@@ -42,7 +42,7 @@ To activate the Kendo UI for jQuery components, [download your assigned license 
 ## See Also
 
 * [License Activation Errors and Warnings]({% slug activation-error-warnings %})
-* [Adding the License Key to CI Services]({% slug license-key-to-ci-services %})
+* [Adding Deployment Keys to CI/CD Services]({% slug license-key-to-ci-services %})
 * [Frequently Asked Questions about Your Kendo UI for jQuery License Key]({% slug license-code-faq %})
 * [Adding Your Script License Key]({% slug using-license-code %})
 * [Adding a License Key File (NPM)]({% slug using-license-file %})

@@ -228,6 +228,10 @@ To allow FileManager to successfully read the files and folders from a physical 
 
 The following example shapes all required methods into one single `Read` operation.
 
+`ContentPath` is an application-defined property that identifies the root virtual folder served by the FileManager. It is not a built-in FileManager property. Define it in the controller or service that handles the FileManager operations. For example, the property can return `~/Content/UserFiles/` in an ASP.NET MVC application.
+
+`VirtualPathUtility` is the `System.Web.VirtualPathUtility` class, which provides path operations for ASP.NET MVC applications. ASP.NET Core does not include this class. In an ASP.NET Core application, use `IWebHostEnvironment.WebRootPath` with `Path.Combine` to resolve paths under `wwwroot`, or use an equivalent `IFileProvider` implementation. The `VirtualPathUtility` methods in the following examples therefore require adaptation when you target ASP.NET Core.
+
 {% if site.core %}
 
 ```C#

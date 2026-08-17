@@ -3,7 +3,6 @@ title: AI Components & Features
 page_title: AI Components and Features in Kendo UI for jQuery by Progress
 description: "Discover the AI-powered components and features in Kendo UI for jQuery designed to boost productivity and enhance functionality and user experience."
 slug: ai_components_kendoui
-tag: updated
 position: 4
 ---
 
@@ -13,7 +12,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
 
 <article-card-container>
     <article-card
-        tag="updated"
         href="/controls/chat/overview"
         src="./images/aicomponents/Chat_Light_Large.svg"
         title="AI Chat"
@@ -22,7 +20,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
         description="The Kendo UI for jQuery Chat component provides interactive AI conversation capabilities for your application.">
     </article-card>
     <article-card
-        tag="new"
         href="/controls/grid/smart-grid/semantic-search"
         src="./images/aicomponents/Semantic_Search_Light_Large.svg"
         title="Semantic Search"
@@ -31,7 +28,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
         description="Enhance data discovery using the Kendo UI for jQuery Grid Semantic Search - intelligent meaning-based search capabilities.">
     </article-card>
     <article-card
-        tag="new"
         href="/controls/smartpastebutton/overview"
         src="./images/aicomponents/SmartPaste_Light_Large.svg"
         title="SmartPaste"
@@ -40,7 +36,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
         description="Streamline data entry with the Kendo UI for jQuery SmartPaste component - map and insert clipboard content into input fields with a single click.">
     </article-card>
     <article-card
-        tag="updated"
         href="/controls/grid/smart-grid/ai-toolbar-tool"
         src="./images/aicomponents/AI_Data_Operations_Light_Large.svg"
         title="AI Data Operations"
@@ -49,7 +44,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
         description="The Kendo UI for jQuery Grid component offers smart AI features for advanced data manipulation and processing.">
     </article-card>
     <article-card
-        tag="updated"
         href="/controls/grid/smart-grid/ai-toolbar-tool#row-highlighting"
         src="./images/aicomponents/AI_Data_Highlights_Light_Large.svg"
         title="AI Data Highlight"
@@ -66,7 +60,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
         description="The Kendo UI for jQuery Grid component offers smart AI features for managing column-level data operations.">
     </article-card>
     <article-card
-        tag="new"
         href="/controls/promptbox/overview"
         src="./images/aicomponents/PromptBox_Light_Large.svg"
         title="PromptBox"
@@ -75,7 +68,6 @@ Explore the powerful AI-enhanced components and features in Kendo UI for jQuery 
         description="Improve AI prompting with the Kendo UI for jQuery PromptBox component - smart input for conversational apps.">
     </article-card>    
     <article-card
-        tag="new"
         href="/controls/grid/smart-grid/ai-chat-assistant"
         src="./images/aicomponents/Grid_AI_Chat_Integration_Light_Large.svg"
         title="AI Chat Integration"

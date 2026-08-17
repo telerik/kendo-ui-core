@@ -39,7 +39,7 @@ How can I highlight the shapes of the Kendo UI for jQuery Map by their specified
 
 The following example demonstrates how to highlight the Map shapes by a specified ID.
 
-```dojo
+```pseudo
     <div id="map"></div>
     <script>
       function createMap() {
