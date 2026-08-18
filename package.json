@@ -24,7 +24,7 @@
     "@rollup/plugin-virtual": "3.0.2",
     "@rollup/stream": "3.0.1",
     "@vitest/browser-playwright": "4.1.10",
-    "acorn": "^8.17.0",
+    "acorn": "^8.18.0",
     "axe-core": "^4.12.1",
     "chai": "^4.3.9",
     "colors": "1.4.0",

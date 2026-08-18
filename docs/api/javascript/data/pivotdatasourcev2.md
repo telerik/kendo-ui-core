@@ -439,13 +439,17 @@ The cube declaration. If configured, this option will enable the client cube pro
 How to configure cube schema for Kendo UI Pivot Grid with client-side processing? Configure multidimensional data modeling and client-side cube processing for pivot grids by defining the cube schema that maps flat or tabular data into a structured cube format, enabling aggregation, slicing, and dicing of data with dimensions and measures derived from arrays or OData responses; this setup supports transforming raw, flattened datasets into interactive pivot grid views where you control data shaping, aggregation logic, and hierarchical relationships without server-side processing, ideal for scenarios requiring in-browser analytics, custom dimension definitions, or advanced client binding and shaping of data models.
 </div>
 
-#### schema.cube.dimensions `Object`
+### schema.cube.dimensions `Object`
 
 A set of key/value pairs which specifies the field-dimension mapping that is available for processing dimensions. The key specifies the name of the field to which the dimension will be mapped.
 
 > The key has to match the column name that is used in the columns definition.
 
-##### Example - define the cube dimensions
+<div class="meta-api-description">
+How do I define dimension mappings for client-side cube processing in Kendo UI PivotDataSourceV2? Configure, map, or associate flat data fields with pivot dimensions by specifying dimension names and captions that correspond to column members, enabling hierarchical grouping, row and column axis processing, readable labels, and multidimensional analysis in a PivotGrid or pivot table.
+</div>
+
+#### Example - define the cube dimensions
 
     <script>
       var dataSource = new kendo.data.PivotDataSourceV2({
@@ -468,19 +472,31 @@ A set of key/value pairs which specifies the field-dimension mapping that is ava
       });
     </script>
 
-##### schema.cube.dimensions.dimensionName `String`
+### schema.cube.dimensions.dimensionName `String`
 
 The name of the field which maps to the dimension.
 
-##### schema.cube.dimensions.dimensionName.caption `String`
+<div class="meta-api-description">
+How do I map a data field to a pivot dimension in Kendo UI PivotDataSourceV2? Set or identify the field name used for a cube dimension so flat data can be grouped, organized, and processed on pivot rows or columns, connecting source fields with hierarchical dimension members for client-side cube analysis.
+</div>
+
+### schema.cube.dimensions.dimensionName.caption `String`
 
 A user-friendly name of the dimension.
 
-#### schema.cube.measures `Object`
+<div class="meta-api-description">
+How can I customize the display label for a pivot dimension in Kendo UI PivotDataSourceV2? Configure a readable caption or friendly title for a cube dimension so field names and hierarchy headers appear clearly in PivotGrid rows, columns, reports, or multidimensional data views while preserving the underlying dimension mapping.
+</div>
+
+### schema.cube.measures `Object`
 
 A set of key/value pairs which specifies the available measures. The key specifies the name of measure.
 
 > The key has to match the measure name that is used in the measures definition of the PivotDataSourceV2.
+
+<div class="meta-api-description">
+How do I define calculated measures for client-side cube processing in Kendo UI PivotDataSourceV2? Configure a set of named measures by mapping source fields to aggregation functions, formats, and analytical values, enabling pivot tables or PivotGrid components to calculate, summarize, and display metrics from flat data.
+</div>
 
 #### Example - define the cube measures which calculate the sum of the products price
 
@@ -513,15 +529,23 @@ A set of key/value pairs which specifies the available measures. The key specifi
       });
     </script>
 
-##### schema.cube.measures.measureName.field `String`
+### schema.cube.measures.measureName.field `String`
 
 The field name whose value is used for calculations.
 
-##### schema.cube.measures.measureName.format `String`
+<div class="meta-api-description">
+How do I choose the source field for a PivotDataSourceV2 measure? Set the data field whose values should be aggregated or calculated for a named cube measure, connecting flat dataset properties to sums, averages, counts, or other calculated metrics shown in a pivot table or PivotGrid.
+</div>
+
+### schema.cube.measures.measureName.format `String`
 
 The format which will be applied to the calculated measure value.
 
-##### schema.cube.measures.measureName.aggregate `String`
+<div class="meta-api-description">
+How can I format calculated measure values in Kendo UI PivotDataSourceV2? Configure the display format for aggregated metrics such as currency, percentages, numbers, or dates so measure results are rendered consistently and readably in client-side cube processing, PivotGrid cells, reports, and pivot table summaries.
+</div>
+
+### schema.cube.measures.measureName.aggregate `String`
 
 The function that is used to aggregate the measure value.
 
@@ -532,7 +556,11 @@ The built-in aggregates are:
 * `min`
 * `sum`
 
-###### Example - specify a built-in "average" aggregate function
+<div class="meta-api-description">
+How do I select the aggregation function for a PivotDataSourceV2 measure? Configure how source values are summarized by choosing built-in calculations such as average, count, maximum, minimum, or sum, controlling the metric computation used by client-side cube processing and displayed in pivot tables or PivotGrid reports.
+</div>
+
+#### Example - specify a built-in "average" aggregate function
 
     <script>
       var dataSource = new kendo.data.PivotDataSourceV2({
