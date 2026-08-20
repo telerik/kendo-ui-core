@@ -187,12 +187,14 @@ class SupportService {
         if (!isNaN(this._scrollbar) && !refresh) {
             return this._scrollbar;
         }
-        const div = document.createElement("div");
-        div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1;clear:both;display:block";
-        div.innerHTML = "&nbsp;";
-        document.body.appendChild(div);
-        this._scrollbar = div.offsetWidth - div.scrollWidth;
-        document.body.removeChild(div);
+        const outer = document.createElement("div");
+        outer.style.cssText = "overflow:scroll;position:absolute;top:-9999px;width:100px;height:100px;border:none";
+        const inner = document.createElement("div");
+        inner.style.width = "100%";
+        outer.appendChild(inner);
+        document.body.appendChild(outer);
+        this._scrollbar = Math.max(0, outer.offsetWidth - inner.offsetWidth);
+        document.body.removeChild(outer);
         return this._scrollbar;
     }
     /**

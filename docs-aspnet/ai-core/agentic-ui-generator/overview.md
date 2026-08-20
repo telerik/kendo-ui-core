@@ -73,7 +73,7 @@ The Agentic UI Generator orchestrates all assistants so you can build pages and 
 
 ![Diagram showing the IDE agent connected to the MCP server and Agentic UI Generator, which orchestrates specialized assistants](./images/ai-assistants.png)
 
->info The previously available `Telerik.ASPNETCoreHtml.MCP` and `Telerik.ASPNETCoreTag.MCP` packages will be deprecated in favor of the Agentic UI Generator.
+> The previously available `Telerik.ASPNETCoreHtml.MCP` and `Telerik.ASPNETCoreTag.MCP` packages will be deprecated in favor of the Agentic UI Generator.
 
 
 ## How the Agentic Flow Works
