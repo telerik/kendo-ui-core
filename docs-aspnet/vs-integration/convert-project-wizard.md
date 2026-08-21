@@ -106,11 +106,11 @@ The **Project Settings** page enables you to modify the project settings by conf
 
 The wizard automates several steps that are crucial for the project configuration. If you decide to perform these steps manually, follow the links below:
 
-- [Adding the NuGet Package]{% if site.core %}({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-the-nuget-package){% else %}({% slug setupwithnuget_aspnetmvc %}#installing-the-nuget-package){% endif %}
+{% if site.core %}- Adding the NuGet Package{% else %}- [Adding the NuGet Package]({% slug setupwithnuget_aspnetmvc %}#installing-the-nuget-package){% endif %}
 {% if site.core %}
 - [Setting for JSON Serialization]({% slug jsonserialization_core %})
 {% endif %}
-- [Adding a reference to Kendo.MVC.UI]{% if site.core %}({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#adding-a-reference-to-kendomvcui){% else %}({% slug manualsetup_aspnetmvc %}#downloading-and-referencing-the-kendomvcdll-assembly){% endif %}
+{% if site.core %}- Adding a reference to Kendo.MVC.UI{% else %}- [Adding a reference to Kendo.MVC.UI]({% slug manualsetup_aspnetmvc %}#downloading-and-referencing-the-kendomvcdll-assembly){% endif %}
 - [Including the client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 
 {% if site.mvc %}

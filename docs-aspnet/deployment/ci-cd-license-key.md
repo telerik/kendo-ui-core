@@ -130,7 +130,7 @@ Copy-Item -Path $(telerikLicense.secureFilePath) -Destination "$(Build.Repositor
 * [Licensing FAQ]({%slug licensing-faq%})
 * [CI, CD, Build Server]({%slug deployment_ci_cd_build%})
 {% if site.core %}
-* [Getting Started with {{ site.product }}]({%slug gettingstarted_aspnetmvc6_aspnetmvc%})
+* [Getting Started with {{ site.product }}]({%slug gettingstartedtelerik_aspnetcore%})
 {% else %}
 * [Getting Started with {{ site.product }}]({%slug setupwithnuget_aspnetmvc%})
 {% endif %}

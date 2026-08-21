@@ -3,7 +3,7 @@ title: Creating New Projects
 page_title: Creating New Projects
 description: "Learn how to create a new {{ site.product }} application."
 components: ["installerandvsextensions"]
-previous_url: /getting-started/vs-integration/new-project-wizard, /installation/vs-integration/new-project-wizard, /vs-integration-mvc/new-project-wizard
+previous_url: /getting-started/vs-integration/new-project-wizard, /installation/vs-integration/new-project-wizard, /vs-integration-mvc/new-project-wizard, /getting-started/first-steps-vs-extensions
 slug: newprojectwizards_visualstudio_aspnetcore
 position: 5
 ---
@@ -162,6 +162,45 @@ The following project templates are available:
         </tr>
     </tbody>
 </table>
+
+## Review the Grid Component
+
+The project templates configure the application for Telerik UI and can include a Grid with data binding. The Blank template also includes the expected [JSON serialization configuration]({% slug jsonserialization_core %}) in `Program.cs`.
+
+To review the Grid in the generated project:
+
+1. Add an `OrderViewModel` class to the `Models` folder.
+
+1. Create a `GridController` with an `Orders_Read` action that returns the Grid data through `ToDataSourceResult`.
+
+1. Add a Grid to `Views/Home/Index.cshtml` and configure its columns, paging, sorting, scrolling, filtering, and Ajax data source.
+
+The generated project includes the required Telerik references and resources. You can run the project and use the Grid immediately.
+
+## Add a DatePicker Component
+
+Add a [DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}) to `Views/Home/Index.cshtml` using the helper syntax selected in the project wizard:
+
+```HtmlHelper
+@(Html.Kendo().DatePicker()
+    .Name("my-picker")
+)
+```
+```TagHelper
+<kendo-datepicker name="my-picker" />
+```
+
+Run the project and open the `Index` page in the browser to view the DatePicker.
+
+## Change the Application Theme
+
+The project wizard applies the selected theme to the application. To change it later, replace the theme reference in `_Layout.cshtml`. For example, use the following CSS reference for the Default theme:
+
+```HTML
+<link href="https://kendo.cdn.telerik.com/themes/{{ site.themesCdnVersion }}/default/default-main.css" rel="stylesheet" type="text/css" />
+```
+
+The [SASS-based themes]({% slug sassbasedthemes_overview %}) do not require additional CSS files.
 
 {% else %}
 

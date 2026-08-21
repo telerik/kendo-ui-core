@@ -301,9 +301,9 @@ telerik setup aspnetmvc --scope project --nuget-path . --force --no-interactive
 ## See Also
 
 {% if site.core %}
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 * [Using the CDN Services]({% slug cdnservices_core %})
 {% else %}
-* [Starting a project with a template]({% slug gettingstarted_aspnetmvc %})
+* [Starting a project with a template]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 * [Adding Telerik UI through local files]({% slug manualsetup_aspnetmvc %})
 {% endif %}

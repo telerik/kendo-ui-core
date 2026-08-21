@@ -20,10 +20,10 @@ Telerik REPL saves you time—it requires no setup and has no prerequisites. You
 
 ## Features
 
-* Write, run, and save examples in Telerik REPL. 
+* Write, run, and save examples in Telerik REPL.
 * Share links to the examples that you save in Telerik REPL.
 * Edit the existing Telerik UI for ASP.NET Core demos—Telerik REPL is integrated with the demos and allows you to open and edit them. The models used in the demos are included and you can use them to bind the components to data.
-* Choose a theme that will be applied to the Telerik UI for ASP.NET Core components used in your example. 
+* Choose a theme that will be applied to the Telerik UI for ASP.NET Core components used in your example.
 * Share the created example as a link on a social media (Twitter, Facebook).
 
 ## Next Steps
@@ -34,4 +34,4 @@ Telerik REPL saves you time—it requires no setup and has no prerequisites. You
 
 ## See Also
 
-* [Getting Started with UI for ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Getting Started with UI for ASP.NET Core]({% slug gettingstartedtelerik_aspnetcore %})

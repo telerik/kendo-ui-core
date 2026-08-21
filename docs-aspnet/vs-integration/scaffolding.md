@@ -11,9 +11,9 @@ position: 15
 # Scaffolding for {{ site.product }}
 
 {% if site.core %}
-Since the 2022 R2 SP2 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature. 
+Since the 2022 R2 SP2 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature.
 {% else %}
-Since the R2 2023 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature. 
+Since the R2 2023 release, {{ site.product }} provides new way of generating Scaffolding templates as a convenient productivity feature.
 {% endif %}
 
 
@@ -68,5 +68,5 @@ The final result conveniently generates everything required to run the page from
 * [How to add a model to a Razor Pages app in ASP.NET Core (Microsoft Tutorial)](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model?view=aspnetcore-2.1)
 {% else %}
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Using Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug gettingstarted_aspnetmvc %})
+* [Using Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 {% endif %}

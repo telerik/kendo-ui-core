@@ -15,7 +15,7 @@ This article describes how to configure your system for the Telerik NuGet source
 [NuGet](https://www.nuget.org) is a popular .NET package manager. Telerik maintains a private NuGet feed with official {{ site.product }} releases and service packs. In the Telerik NuGet feed, you will see packages that your account has a license for; trials (active) and commercial (active and expired).
 
 {% if site.core %}
->tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug gettingstarted_aspnetmvc6_aspnetmvc%}) to add Telerik UI to the project.
+>tip Looking for a complete tutorial? Check out the [Quick Start guide]({%slug gettingstartedtelerik_aspnetcore%}) to add Telerik UI to the project.
 {% else %}
 >tip Looking for a complete tutorial? Check out the [Getting Started guide that uses NuGet]({%slug setupwithnuget_aspnetmvc%}) to add Telerik UI to the project.
 {% endif %}
@@ -238,7 +238,7 @@ If you experience any issues while configuring or using the Telerik NuGet feed, 
 ## Next Steps
 
 {% if site.core %}
-Once you have the Telerik NuGet source set up, follow the instructions to [create a {{ site.product }} app]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}).
+Once you have the Telerik NuGet source set up, follow the instructions to [create a {{ site.product }} app]({% slug gettingstartedtelerik_aspnetcore %}).
 {% else %}
 Once you have the Telerik NuGet source set up, follow the instructions to [create a {{ site.product }} app]({% slug setupwithnuget_aspnetmvc %}).
 {% endif %}

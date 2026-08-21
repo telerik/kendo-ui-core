@@ -12,7 +12,7 @@ position: 0
 
 The Telerik UI HTML Helpers for {{ site.framework }} are server-side wrappers that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> in an {{ site.framework }} application.
 
-You can add HTML Helpers to your application and then configure them further by using predefined strongly typed attributes. Most of the components expose events, which you can handle by using the `Events` configuration of the helpers.  
+You can add HTML Helpers to your application and then configure them further by using predefined strongly typed attributes. Most of the components expose events, which you can handle by using the `Events` configuration of the helpers.
 
 ## Components vs. Helpers
 
@@ -46,7 +46,7 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
 {% else %}
 # Tag and HTML Helpers Overview
 
-The Telerik UI Tag and HTML Helpers for {{ site.framework }} are server-side wrappers that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> in an {{ site.framework }} application. Both helper flavors offer the same functionality, and you can choose which one to use depending on your preferences. 
+The Telerik UI Tag and HTML Helpers for {{ site.framework }} are server-side wrappers that enable you to use and configure the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery components</a> in an {{ site.framework }} application. Both helper flavors offer the same functionality, and you can choose which one to use depending on your preferences.
 
 You can add the desired Tag or HTML Helpers to your application and then configure them further by using predefined strongly typed attributes. The helpers also allow you to handle the events of the components in your {{ site.framework }} projects.
 
@@ -119,6 +119,5 @@ The <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI f
 ## See Also
 
 * [Introduction to {{ site.product }}]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% endif %}

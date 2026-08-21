@@ -12,11 +12,11 @@ position: 1
 
 This article outlines the approaches for adding the Kendo client-side assets to your application.
 
-The {{ site.product }} suite is a set of server-side wrappers over the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery client-side widgets</a>. To use the {{ site.product_short }} components in an application, you need not only the [binaries]({% slug downloadinstall_aspnetcore %}) that enable you to use the {% if site.core %}TagHelpers and HtmlHelpers{% else %}HtmlHelpers{% endif %}, but also the required JavaScript and CSS client-side web assets. 
+The {{ site.product }} suite is a set of server-side wrappers over the <a href="https://www.telerik.com/kendo-jquery-ui" target="_blank">Kendo UI for jQuery client-side widgets</a>. To use the {{ site.product_short }} components in an application, you need not only the [binaries]({% slug downloadinstall_aspnetcore %}) that enable you to use the {% if site.core %}TagHelpers and HtmlHelpers{% else %}HtmlHelpers{% endif %}, but also the required JavaScript and CSS client-side web assets.
 
 ## Available Approaches
 
-You can use the following methods for adding the Kendo client-side resources to your project: 
+You can use the following methods for adding the Kendo client-side resources to your project:
 
 * Using local files
 
@@ -50,8 +50,7 @@ Depending on the Telerik UI components that you use in your project, you may nee
 
 {% if site.core %}
 * [Introduction to Telerik UI for ASP.NET Core]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}) 
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Download and Installation]({% slug downloadinstall_aspnetcore %})

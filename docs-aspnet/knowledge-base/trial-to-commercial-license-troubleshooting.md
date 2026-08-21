@@ -50,8 +50,8 @@ There are several common reasons for the observed behavior:
 
 ## Getting Started with {{ site.product }}
 
-* [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_project_template %})
-* [First steps with CLI (online guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Creating New Projects with Visual Studio (online guide)]({% slug newprojectwizards_visualstudio_aspnetcore %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 
 ## More {{ site.framework }} Resources
 

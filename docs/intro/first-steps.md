@@ -1,7 +1,7 @@
 ---
-title: First Steps
-page_title: First Steps with Your Kendo UI for jQuery Project Guide - Getting Started 
-meta_title: First Steps with Kendo UI for jQuery | Kendo UI for jQuery
+title: Quick Start
+page_title: Quick Start with Your Kendo UI for jQuery Project Guide - Getting Started 
+meta_title: Quick Start with Kendo UI for jQuery | Kendo UI for jQuery
 description: "Learn how to use Kendo UI for jQuery by setting up your development environment, creating a new project, and adding a UI component."
 components: ["general"]
 tag: "updated"
@@ -10,7 +10,7 @@ slug: getting_started_installation_kendoui
 position: 0
 ---
 
-# Getting Started with Kendo UI for jQuery
+# Quick Start with Kendo UI for jQuery
 
 This article explains how to use Kendo UI for jQuery in a new application. You will create a project and add a UI component.
 
@@ -112,8 +112,7 @@ If you want to add Kendo UI for jQuery components to an existing project, add th
     </script>
     ```
 
-> Prefer installing through a package manager? See [Installing with NPM]({% slug kendoui_npm_packages_kendoui_installation %}).
-
+If you prefer installing through a package manager you can also [install Kendo UI for jQuery with npm]({% slug kendoui_npm_packages_kendoui_installation %}).
 
 You now have your first Kendo UI for jQuery component running in your application.
 
@@ -121,18 +120,11 @@ You now have your first Kendo UI for jQuery component running in your applicatio
 
 <article-card-container>
     <article-card
-        href="slug://overview_kendoui_grid_widget"
-        src="../images/aicomponents/AI_Data_Highlight_Light_Large.svg"
-        title="Get Started with Data Grid"
-        darkSrc="../images/aicomponents/AI_Data_Highlight_Dark_Large.svg"
-        description="Bind the Kendo UI for jQuery Grid to data and choose from the large variety of built-in features.">
-    </article-card>
-    <article-card
-        href="slug://overview_kendoui_datasourcecomponent"
-        src="../images/aicomponents/AI_Column_Assistant_Light_Large.svg"
-        title="Learn Telerik Data Binding"
-        darkSrc="../images/aicomponents/AI_Column_Assistant_Dark_Large.svg"
-        description="Learn the data binding fundamentals for Kendo UI for jQuery components.">
+        href="slug://ai_coding_assistant_overview"
+        src="../images/aicomponents/Chat_Light_Large.svg"
+        title="Use AI Coding Assistant"
+        darkSrc="../images/aicomponents/Chat_Dark_Large.svg"
+        description="Use the AI Coding Assistant to get intelligent, context-aware help while building your Kendo UI for jQuery application.">
     </article-card>
     <article-card
         href="slug://welcometo_kendoui#list-of-components"
@@ -149,18 +141,25 @@ You now have your first Kendo UI for jQuery component running in your applicatio
         description="Explore the live Kendo UI for jQuery examples.">
     </article-card>
     <article-card
+        href="slug://overview_kendoui_grid_widget"
+        src="../images/aicomponents/AI_Data_Highlight_Light_Large.svg"
+        title="Get Started with Data Grid"
+        darkSrc="../images/aicomponents/AI_Data_Highlight_Dark_Large.svg"
+        description="Bind the Kendo UI for jQuery Grid to data and choose from the large variety of built-in features.">
+    </article-card>
+    <article-card
+        href="slug://overview_kendoui_datasourcecomponent"
+        src="../images/aicomponents/AI_Column_Assistant_Light_Large.svg"
+        title="Learn Telerik Data Binding"
+        darkSrc="../images/aicomponents/AI_Column_Assistant_Dark_Large.svg"
+        description="Learn the data binding fundamentals for Kendo UI for jQuery components.">
+    </article-card>
+    <article-card
         href="slug://sassbasedthemes_kendoui"
         src="../images/aicomponents/AIPrompt_Light_Large.svg"
         title="Create Themes"
         darkSrc="../images/aicomponents/AIPrompt_Dark_Large.svg"
         description="Review the built-in themes, customize them, or create your own.">
-    </article-card>
-    <article-card
-        href="slug://ai_coding_assistant_overview"
-        src="../images/aicomponents/Chat_Light_Large.svg"
-        title="Use Telerik AI Tools"
-        darkSrc="../images/aicomponents/Chat_Dark_Large.svg"
-        description="Kendo UI for jQuery provides AI-powered development assistance through a unified MCP server that delivers intelligent, context-aware help directly in your IDE.">
     </article-card>
 </article-card-container>
 

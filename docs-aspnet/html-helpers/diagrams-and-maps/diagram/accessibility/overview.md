@@ -69,4 +69,4 @@ For details on how the Diagram keyboard navigation works, refer to the [Diagram 
 
 * [Keyboard Navigation by the Diagram for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/keyboard-navigation)
 * [Keyboard Navigation by the Diagram for {{ site.framework }}](slug:keynav_diagram_aspnetcore)
-* [Accessibility in {{ site.product }}](slug:overview_accessibility)
+* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

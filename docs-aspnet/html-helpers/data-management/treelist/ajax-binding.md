@@ -32,7 +32,7 @@ The Ajax-bound mode has the following features:
 
 To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
-1. Create a new {{ site.framework }} web application. Follow the steps from the [introductory article]({% if site.core %}{% slug gettingstarted_aspnetmvc6_aspnetmvc %}{% else %}{% slug gettingstarted_aspnetmvc %}{% endif %}) to add {{ site.product }} to the application.
+1. Create a new {{ site.framework }} web application. Follow the steps from the [introductory article]({% if site.core %}{% slug gettingstartedtelerik_aspnetcore %}{% else %}{% slug gettingstartedtelerik_cli_aspnetmvc %}{% endif %}) to add {{ site.product }} to the application.
 1. Open the `HomeController.cs` and add a new action method which will return the items as JSON. The TreeList makes Ajax requests to this action.
 
         public ActionResult TreeList_Read()

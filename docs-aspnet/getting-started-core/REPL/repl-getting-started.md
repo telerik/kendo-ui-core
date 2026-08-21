@@ -24,7 +24,7 @@ To get a grasp of runnable examples that tackle different use-cases, see the [St
 
 ## Adding Static Assets
 
-In the Telerik REPL for ASP.NET Core, you can define your own script and style tags that reference static assets and add them to the `.cshtml` file that you are editing. 
+In the Telerik REPL for ASP.NET Core, you can define your own script and style tags that reference static assets and add them to the `.cshtml` file that you are editing.
 
 To add js or CSS files as static assets, click the Static Asset Manager icon and provide the url to files that you want to add.
 
@@ -112,11 +112,11 @@ The `@functions` directive enables you to add C# members (fields, properties, an
     @functions {
 
         public class Contact {
-            public string Name { get; set; }  
-            public string Position { get; set; }      
-            public string Country { get; set; }      
+            public string Name { get; set; }
+            public string Position { get; set; }
+            public string Country { get; set; }
         }
-        
+
         public string GenerateHtmlTable<T, Tproperty>(IEnumerable<T> list, params Expression<Func<T, Tproperty>>[] columns)
         {
             var sb = new StringBuilder();
@@ -193,6 +193,6 @@ The `@functions` directive enables you to add C# members (fields, properties, an
 
 ## See Also
 
-* [Getting Started with UI for ASP.NET Core]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Getting Started with UI for ASP.NET Core]({% slug gettingstartedtelerik_aspnetcore %})
 * [Using Telerik REPL with UI for ASP.NET Core]({% slug using_repl_with_demos_aspnetcore %})
 * [Using Predefined Models]({% slug using_predefined_models_repl_aspnetcore %})
