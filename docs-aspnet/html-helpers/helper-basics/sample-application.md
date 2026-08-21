@@ -55,8 +55,8 @@ The sample application Visual Studio Project contains the following items:
 ## See Also
 
 {% if site.core %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
-* [First Steps with Telerik UI for ASP.NET MVC]({% slug gettingstarted_aspnetmvc %})
+* [First Steps with Telerik UI for ASP.NET MVC]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 {% endif %}
 * [Getting Started with the Telerik Project Templates]({% slug newprojectwizards_visualstudio_aspnetcore %})

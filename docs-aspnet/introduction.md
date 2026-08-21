@@ -212,9 +212,9 @@ To read more about the benefits of using {{ site.product }}, visit the {% if sit
 To make your first steps with {{ site.product_short }}, you can {% if site.core %}<a href="https://www.telerik.com/aspnet-core-ui" target="_blank">start a free trial</a>{% else %}<a href="https://www.telerik.com/aspnet-mvc" target="_blank">start a free trial</a>{% endif %} and check some of the getting started tutorials:
 
 {% if site.core %}
-* [First Steps with {{ site.product_short }} on Visual Studio for Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})&mdash;A tutorial demonstrating how to start using {{ site.product }} in new or existing projects.
-* [Using a Project Template in VS for Windows]({% slug gettingstarted_project_template %})&mdash;The easiest way to create a new project with {{ site.product }}.
-* [First Steps with {{ site.product_short }} and CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})&mdash;Use .NET CLI to create a project that uses {{ site.product }} controls.
+* [Quick Start with {{ site.product_short }}]({% slug gettingstartedtelerik_aspnetcore %})&mdash;A tutorial demonstrating how to start using {{ site.product }} in new or existing projects.
+* [Creating New Projects with Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %})&mdash;The easiest way to create a new project with {{ site.product }}.
+* [Quick Start with {{ site.product_short }}]({% slug gettingstartedtelerik_aspnetcore %})&mdash;Use the .NET CLI to create a project that uses {{ site.product }} controls.
 * [Video Onboarding]({% slug virtualclass_uiforcore %})&mdash;A free course developed to help you get started with the Telerik UI for ASP.NET Core components and features.
 
 To get a quick overview of  {{ site.product_short }}, you can also see the following video:
@@ -222,7 +222,7 @@ To get a quick overview of  {{ site.product_short }}, you can also see the follo
 <iframe width="853" height="480" src="https://www.youtube.com/embed/xmqKZMHTV20" title="ASP.NET Core - Virtual Classroom Course Overview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% else %}
-* [First Steps with {{ site.product_short }}]({% slug gettingstarted_aspnetmvc %})&mdash;Create your first project with {{ site.product }} controls by using a project template.
+* [First Steps with {{ site.product_short }}]({% slug gettingstartedtelerik_cli_aspnetmvc %})&mdash;Create your first project with {{ site.product }} controls by using a project template.
 * [Installing Telerik UI for ASP.NET MVC with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})&mdash;Learn how to add the Telerik NuGet server to Visual Studio and to install the {{ site.product }} controls in your project.
 * [Scaffolding the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetcore %})&mdash;Learn how to use standard scaffolding to generate MVC-helper declarations together with the related Controller action methods.
 * [Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})&mdash;Learn the basics about the {{ site.product }} HTML Helpers.
@@ -261,8 +261,7 @@ For any issues you may come across while working with {{ site.product_short }}, 
 ## Next Steps
 
 {% if site.core %}
-* [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First steps with CLI (online guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 * [Including client-side resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 * [Integrating UI for ASP.NET Core in Visual Studio]({% slug overview_visualstudio_aspnetcore %})
 * [Upgrading UI for ASP.NET Core in Visual Studio]({% slug upgrade_aspnetcore %})

@@ -43,9 +43,9 @@ An alternative approach is to use [NuGet]({% slug nuget_install_aspnetmvc6_aspne
 * The Telerik UI for ASP.NET MVC **Sample Application** that is distributed with the same package requires:
 
    * [A current .NET Framework version](https://dotnet.microsoft.com/download/dotnet-framework)
-   
+
    * [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later
-   
+
    * Microsoft SQL Server Express LocalDB
 {% endif %}
 
@@ -80,7 +80,7 @@ You will find the following in the {{ site.product }} installation directory:
 * `typescript`&mdash;The TypeScript definitions for the Kendo combined scripts (`kendo.all`, `kendo.dataviz`, `kendo.web`, and `kendo.mobile`).
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts.
 * `pdfviewer`&mdash;The `Telerik.Pdf.Web` assembly from the Telerik Document Processing library and its dependencies.
-* `dpl`&mdash;The NuGet packages for the Telerik Document Processing library. 
+* `dpl`&mdash;The NuGet packages for the Telerik Document Processing library.
 * `export`&mdash;The `Telerik.Export.Core` NuGet package that allows exporting `IEnumerable` sources to XLSX and CSV formats.
 * `license-agreements`&mdash;End-user license agreements files.
 * `spreadsheet`&mdash;The `Telerik.Spreadsheet.Web` assembly from the Telerik Document Processing library and its dependencies.
@@ -96,7 +96,7 @@ You will find the following in the {{ site.product }} installation directory:
 
 ## Sample Application
 
-{{ site.product }} comes with a [Sample Demos Application]({% slug sample_application %}), in which you can explore and run locally the demos of the components. 
+{{ site.product }} comes with a [Sample Demos Application]({% slug sample_application %}), in which you can explore and run locally the demos of the components.
 
 ## Next Steps
 
@@ -107,8 +107,7 @@ You will find the following in the {{ site.product }} installation directory:
 ## See Also
 
 {% if site.core %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)

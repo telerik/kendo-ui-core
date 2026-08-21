@@ -118,8 +118,8 @@ Configure the accessibility attributes of the Diagram using the `Accessibility` 
 {% if site.core %}
 ```TagHelper
     <kendo-diagram name="diagram">
-        <accessibility role="application" 
-                      aria-role-description="Diagram" 
+        <accessibility role="application"
+                      aria-role-description="Diagram"
                       aria-label="Organization Chart" />
     </kendo-diagram>
 ```
@@ -144,7 +144,7 @@ Configure accessibility attributes for connections using the `ConnectionDefaults
 ```TagHelper
     <kendo-diagram name="diagram">
         <connection-defaults>
-            <accessibility aria-role-description="Connection" 
+            <accessibility aria-role-description="Connection"
                           aria-label="Connection between shapes" />
         </connection-defaults>
     </kendo-diagram>
@@ -156,4 +156,4 @@ The `AriaRoleDescription` property sets the accessibility role description for c
 ## See Also
 
 * [Keyboard Navigation by the Diagram for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/diagram/keyboard-navigation)
-* [Accessibility in {{ site.product }}](slug:overview_accessibility)
+* [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

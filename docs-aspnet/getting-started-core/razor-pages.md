@@ -30,7 +30,7 @@ The two alternative approaches for adding Telerik UI for ASP.NET Core to a new R
 * Use the [Telerik Extensions for Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %}) to create a new project. The [**GRID RAZOR PAGES**]({% slug newprojectwizards_visualstudio_aspnetcore %}#available-templates) template scaffolds a Razor Pages sample, which contains a Grid with enabled CRUD operations. The benefit of this approach is that the template will add the necessary configuration and dependencies automatically. You can focus on adding and configuring the UI components you need.
 * Use the default Visual Studio <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-6.0&tabs=visual-studio" target="_blank">**ASP.NET Core Web App**</a> template, which is based on the ASP.NET Razor Pages framework. Do not use the **Web Application (Model-View-Controller)** template.
 
-    Using the default Visual Studio Razor Pages template requires you to configure the project for the Telerik UI components as demonstrated in the [First Steps]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) article&mdash;you must configure the NuGet package source, install the Telerik components, add the required `Kendo.Mvc.UI` references, and provide the client-side resources.
+    Using the default Visual Studio Razor Pages template requires you to configure the project for the Telerik UI components as demonstrated in the [Quick Start]({% slug gettingstartedtelerik_aspnetcore %}) article&mdash;you must configure the NuGet package source, install the Telerik components, add the required `Kendo.Mvc.UI` references, and provide the client-side resources.
 
 ## Adding Components to a Razor Page
 
@@ -426,5 +426,4 @@ Razor Pages use `Page` in their routing mechanism which interferes with `GET` re
 ## See Also
 
 * [Configure a Custom DataSource for the Grid in Razor Pages]({% slug grid-custom-datasource-razor-ages %})
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})

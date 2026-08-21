@@ -4,7 +4,7 @@ page_title: Destroying Widgets
 description: "Get started with Telerik UI for {{ site.framework }} and learn how to destroy the helpers."
 components: ["general"]
 slug: destroyhelpers_core
-previous_url: /getting-started/helper-basics/destroy 
+previous_url: /getting-started/helper-basics/destroy
 position: 6
 ---
 
@@ -54,9 +54,8 @@ In addition to destroying a particular Telerik UI for {{ site.framework }} helpe
 ## See Also
 
 {% if site.core %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
-* [Starting a new Telerik UI project from a template]({% slug gettingstarted_aspnetmvc %})
+* [Starting a new Telerik UI project from a template]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 * [Manually adding the Telerik controls to an existing application]({% slug manualsetup_aspnetmvc%})
 {% endif %}

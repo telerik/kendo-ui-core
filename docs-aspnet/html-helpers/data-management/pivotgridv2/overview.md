@@ -27,9 +27,9 @@ The PivotGridV2 represents multidimensional data in a cross-tabular format. Comp
 To configure the PivotGridV2 for Ajax binding to an [Adventure Works](https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/multidimensional-modeling-adventure-works-tutorial?view=asallproducts-allversions) cube that is hosted on `https://demos.telerik.com/service/v2/olap/msmdpump.dll`, follow the next steps:
 
 {% if site.core %}
-1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET Core Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}) to install {{ site.product }} in the application.
+1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET Core Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstartedtelerik_aspnetcore %}) to install {{ site.product }} in the application.
 {% else %}
-1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstarted_aspnetmvc %}) to install {{ site.product }} in the application.
+1. Create a new {{ site.framework }} application. If you have the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the Visual Studio Extensions, follow the steps from the [introductory article]({% slug gettingstartedtelerik_cli_aspnetmvc %}) to install {{ site.product }} in the application.
 {% endif %}
 
 1. Add a PivotGridV2 to the `Index` View.

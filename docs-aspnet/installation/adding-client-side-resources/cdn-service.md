@@ -28,7 +28,7 @@ To access the Kendo UI CDN services, you can use either the HTTP or the HTTPS pr
 The URLs of the CDN service have the following structure:
 
 * `https://kendo.cdn.telerik.com/themes/[THEMEVERSION]/default/[FILENAME]`&mdash;The `themes` folder contains the [`.css` files](#adding-the-required-css-files) of the SASS themes for {{ site.product }} versions after R1 2023 SP1.
-* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [`.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1. 
+* `https://kendo.cdn.telerik.com/[VERSION]/styles/[FILENAME]`&mdash;The `styles` folder contains the [`.css` files](#adding-the-required-css-files) (SASS and LESS) for {{ site.product }} versions before R1 2023 SP1.
 * `https://kendo.cdn.telerik.com/[VERSION]/mjs/[FILENAME]`&mdash;The `mjs` folder contains the [JavaScript modules](#using-javascript-modules).
 * `https://kendo.cdn.telerik.com/[VERSION]/js/[FILENAME]`&mdash;The `js` folder contains the [bundled Kendo UI JavaScript files](#using-bundled-javascript).
 
@@ -140,8 +140,7 @@ The following articles provide solutions to common issues related to the Telerik
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 * [Installing {{ site.product }} with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
 {% if site.core %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc %})
+* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 {% endif %}

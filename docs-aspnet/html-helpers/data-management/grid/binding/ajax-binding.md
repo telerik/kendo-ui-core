@@ -12,7 +12,7 @@ position: 2
 
 You can configure the Grid component extension for Ajax binding.
 
-When configured for Ajax binding, the Grid for {{ site.framework }} makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data. For a runnable example, refer to the [demo on Ajax binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding).  
+When configured for Ajax binding, the Grid for {{ site.framework }} makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data. For a runnable example, refer to the [demo on Ajax binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding).
 
 The Ajax-bound mode has the following features:
 - The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
@@ -24,7 +24,7 @@ The Ajax-bound mode has the following features:
 
 To configure the Grid for {{ site.framework }} to do Ajax binding to the **Products** table of a sample database:
 
-1. Create a new {{ site.framework }} web application. Follow the steps from the [introductory article]({% if site.core %}{% slug gettingstarted_aspnetmvc6_aspnetmvc %}{% else %}{% slug gettingstarted_aspnetmvc %}{% endif %}) to add {{ site.product }} to the application. 
+1. Create a new {{ site.framework }} web application. Follow the steps from the [introductory article]({% if site.core %}{% slug gettingstartedtelerik_aspnetcore %}{% else %}{% slug gettingstartedtelerik_cli_aspnetmvc %}{% endif %}) to add {{ site.product }} to the application.
 {% if site.core %}
 1. Install the `Microsoft.EntityFrameworkCore` NuGet package.
 1. Install `Microsoft.EntityFrameworkCore.SqlServer` package.
@@ -32,11 +32,11 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 1. Run a `Scaffold-DbContext` command in the Visual Studio Package Management Console. It will generate models from the tables in a database called 'Sample'. For more information on scaffolding a model from an existing database refer to [this Microsoft article](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db#reverse-engineer-your-model).
 
     Scaffold-DbContext 'Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=D:\MyProjects\TelerikAspNetCoreApp1\TelerikAspNetCoreApp1\App_Data\Sample.mdf;Trusted_Connection=True;' Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context SampleEntities
-    
+
 Note that the command specifies the path to the database `Sample.mdf` file.
 
 {% else %}
-If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application using the [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetcore %}). 
+If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetcore %}), create a Telerik UI for ASP.NET MVC application using the [New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetcore %}).
 
 1. Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add new item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `SampleModel` and click **Next**. This starts the **Entity Data Model Wizard**.
 1.  Pick the **EF Designer from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.

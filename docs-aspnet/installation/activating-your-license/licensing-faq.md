@@ -188,8 +188,7 @@ Deployment keys are application-specific keys designed for build pipelines. They
 
 * [Troubleshoot License Key Errors]({%slug troubleshooting-license-key-errors%})
 {% if site.core %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
 * [Getting Started with Telerik UI for ASP.NET MVC (Fundamentals)]({% slug fundamentals_aspnetmvc %})
 {% endif %}

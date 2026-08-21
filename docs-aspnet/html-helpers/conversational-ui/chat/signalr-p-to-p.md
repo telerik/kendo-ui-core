@@ -28,15 +28,15 @@ Depending on your preferred editor, use any of the following approaches:
 {% if site.core %}
 
 * [Create a new {{ site.product }} application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetcore %})
-* [Create a new .NET Core application in Visual Studio and include the {{ site.product }} package]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Create a new .NET Core application with the CLI and include the {{ site.product }} package]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Create a new .NET Core application in Visual Studio and include the {{ site.product }} package]({% slug gettingstartedtelerik_aspnetcore %})
+* [Create a new .NET Core application with the CLI and include the {{ site.product }} package]({% slug gettingstartedtelerik_aspnetcore %})
 
 > For .NET 6 and later versions, SignalR is included as part of the ASP.NET Core shared framework, so no additional package installation is required for the server-side SignalR functionality.
 
 {% else %}
 
 * [Create a new Telerik UI for ASP.NET MVC application from the Standard template]({% slug newprojectwizards_visualstudio_aspnetcore %})
-* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC package]({% slug gettingstarted_aspnetmvc %})
+* [Create a new ASP.NET MVC application in Visual Studio and include the Telerik UI for ASP.NET MVC package]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 
 {% endif %}
 
@@ -144,7 +144,7 @@ Depending on your preferred editor, use any of the following approaches:
                     // Broadcast the message to all clients except the sender.
                     Clients.Others.broadcastMessage(senderId, senderName, message);
                 }
-                
+
                 public void SendTyping(string senderId, string senderName)
                 {
                     // Broadcast the typing notification to all clients except the sender.
@@ -180,7 +180,7 @@ Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mv
         var name = Guid.NewGuid().ToString();
     }
 
-    <kendo-chat name="chat" 
+    <kendo-chat name="chat"
         author-id="@name"
         is-typing-field="isTyping"
         on-send-message="onSendMessage"
@@ -269,15 +269,15 @@ Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mv
 1. Add the SignalR JavaScript client library. You can use NPM to install the package or reference the library directly from CDN.
 
     **Using npm**
-    
+
     ```bash
     npm install @microsoft/signalr
     ```
-    
+
     Then copy the file from `node_modules/@microsoft/signalr/dist/browser/signalr.min.js` to `wwwroot/lib/signalr/`.
 
     **Using CDN**
-    
+
     Reference the library directly from CDN in the View.
 
     ```HTML
@@ -367,11 +367,11 @@ Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mv
 1. Include the SignalR 2 script in the page. You can install [`Microsoft.AspNet.SignalR.JS`](https://www.nuget.org/packages/microsoft.aspnet.signalr.js/) NuGet package or reference the library directly from CDN.
 
     **Using NuGet package**
-    
+
     ```
     Install-Package Microsoft.AspNet.SignalR.JS
     ```
-    
+
     Then reference the library in the View:
 
     ```HTML
@@ -379,7 +379,7 @@ Initialize the Chat and implement handlers for its [`SendMessage`](/api/kendo.mv
     ```
 
     **Using CDN**
-    
+
     Reference the library directly from CDN in the View.
 
     ```HTML

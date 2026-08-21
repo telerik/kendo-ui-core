@@ -1,7 +1,7 @@
 ---
-title: First Steps
-page_title: First Steps with Telerik UI for ASP.NET MVC
-meta_title: First Steps with Telerik UI for ASP.NET MVC | Telerik UI for ASP.NET MVC
+title: Quick Start
+page_title: Quick Start with Telerik UI for ASP.NET MVC
+meta_title: Quick Start with Telerik UI for ASP.NET MVC | Telerik UI for ASP.NET MVC
 description: "Learn how to use the Telerik UI for ASP.NET MVC components in an ASP.NET MVC application by setting up your Telerik development environment, creating a new project, and adding a UI component."
 components: ["general"]
 tag: "new"
@@ -9,7 +9,7 @@ slug: gettingstartedtelerik_cli_aspnetmvc
 position: 1
 ---
 
-# First Steps with {{ site.product }}
+# Quick Start with {{ site.product }}
 
 This article explains how to use the Telerik UI for ASP.NET MVC components in an ASP.NET MVC application. You will set up your Telerik development environment, create a new application from scratch, and finally, add a UI component to a View.
 
@@ -56,6 +56,17 @@ This section assumes that you have successfully completed the Telerik-specific s
 To create a new Telerik ASP.NET MVC app, use your preferred approach:
 
 <TabStrip>
+<TabStripTab title="Project Template">
+
+1. Install the Telerik UI for ASP.NET MVC [Visual Studio extension]({% slug overview_visualstudio_aspnetcore %}#installing-the-extensions)
+
+1. In Visual Studio, create a new Telerik ASP.NET MVC project from the Telerik project templates.
+
+1. Follow [Using a Project Template]({% slug newprojectwizards_visualstudio_aspnetcore %}) for the complete workflow and screenshots.
+
+When you use the project template approach, the generated application is already configured for Telerik UI and includes Telerik components. Skip the [Configure the Application](#configure-the-application) and [Add Telerik Component](#add-telerik-component) sections.
+
+</TabStripTab>
 <TabStripTab title="Visual Studio">
 
 1. Open Visual Studio and select **Create a new project**.
@@ -65,20 +76,7 @@ To create a new Telerik ASP.NET MVC app, use your preferred approach:
 1. Add the {{ site.product }} NuGet package. Since the [Telerik NuGet feed is already configured](#set-up-telerik-development-environment), open the **NuGet Package Manager** and install `Telerik.UI.for.AspNet.Mvc5`.
 
 </TabStripTab>
-<TabStripTab title="Project Template">
-
-1. Install the Telerik UI for ASP.NET MVC [Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikUIforMVCVS2022Extensions).
-
-1. In Visual Studio, create a new Telerik ASP.NET MVC project from the Telerik project templates.
-
-1. Follow [Using a Project Template]({% slug gettingstarted_aspnetmvc %}) for the complete workflow and screenshots.
-
-When you use the project template approach, the generated application is already configured for Telerik UI and includes Telerik components. Skip the [Configure the Application](#configure-the-application) and [Add Telerik Component](#add-telerik-component) sections.
-
-</TabStripTab>
 </TabStrip>
-
-> To manually add Telerik UI for ASP.NET MVC to an existing app, see [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %}) or [Adding Telerik UI through Local Files]({% slug manualsetup_aspnetmvc %}).
 
 ### Configure the Application
 
@@ -178,7 +176,7 @@ Well done! Now you have your first {{ site.product }} component running in your 
 
 ## See Also
 
-* [Using a Project Template]({% slug gettingstarted_aspnetmvc %})
+* [Using a Project Template]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 * [Adding Telerik UI through Local Files]({% slug manualsetup_aspnetmvc %})
 * [Adding Telerik UI through NuGet]({% slug setupwithnuget_aspnetmvc %})
 * [Video Onboarding]({% slug virtualclass_uiformvc %})

@@ -50,7 +50,7 @@ Refer to [this section of the MSDN documentation](https://docs.microsoft.com/en-
 ## Adding {{site.product}} to the Application
 
 {% if site.core %}
-Follow the [guidelines for adding {{site.product}} to an existing application]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}):
+Follow the [guidelines for adding {{site.product}} to an existing application]({% slug gettingstartedtelerik_aspnetcore %}):
 {% else %}
 Follow the [guidelines for adding {{site.product}} to an existing application]({% slug manualsetup_aspnetmvc %}):
 {% endif %}
@@ -96,7 +96,7 @@ Follow the [guidelines for adding {{site.product}} to an existing application]({
                 .Read(read => read.Action("Read", "Item").Data("forgeryToken"))
                 .Update(update => update.Action("Update", "Item").Data("forgeryToken"))
                 .Destroy(update => update.Action("Destroy", "Item").Data("forgeryToken"))
-            ) 
+            )
         )
 
         <script type="text/javascript">
@@ -195,7 +195,7 @@ Follow the [guidelines for adding {{site.product}} to an existing application]({
             {
                 this._container = dbClient.GetContainer(databaseName, containerName);
             }
-            
+
             public async Task AddItemAsync(Item item)
             {
                 await this._container.CreateItemAsync<Item>(item, new PartitionKey(item.Id));
@@ -214,7 +214,7 @@ Follow the [guidelines for adding {{site.product}} to an existing application]({
                     return response.Resource;
                 }
                 catch(CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
-                { 
+                {
                     return null;
                 }
 
@@ -227,7 +227,7 @@ Follow the [guidelines for adding {{site.product}} to an existing application]({
                 while (query.HasMoreResults)
                 {
                     var response = await query.ReadNextAsync();
-                    
+
                     results.AddRange(response.ToList());
                 }
 

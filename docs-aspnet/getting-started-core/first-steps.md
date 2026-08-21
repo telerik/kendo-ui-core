@@ -1,16 +1,16 @@
 ---
-title: First Steps
-page_title: First Steps with Telerik UI for ASP.NET Core
-meta_title: First Steps with Telerik UI for ASP.NET Core | Telerik UI for ASP.NET Core
+title: Quick Start
+page_title: Quick Start with Telerik UI for ASP.NET Core
+meta_title: Quick Start with Telerik UI for ASP.NET Core | Telerik UI for ASP.NET Core
 description: "Learn how to use the Telerik UI for ASP.NET Core components in an ASP.NET Core MVC application by setting up your Telerik development environment, creating a new project, and adding a UI component."
 components: ["general"]
-previous_url: /getting-started/first-steps-windows, /getting-started/first-steps-cli
+previous_url: /getting-started/first-steps-windows, /getting-started/first-steps-cli, /getting-started-core/first-steps-cli
 slug: gettingstartedtelerik_aspnetcore
 tag: "new"
 position: 1
 ---
 
-# First Steps with {{ site.product }}
+# Quick Start with {{ site.product }}
 
 This article explains how to use the Telerik UI for ASP.NET Core components in an ASP.NET Core MVC application. You will set up your Telerik development environment, create a new application from scratch, and finally, add a UI component to a View.
 
@@ -72,6 +72,17 @@ To create a new Telerik ASP.NET Core app, use your preferred approach:
     ````
 
 </TabStripTab>
+<TabStripTab title="Project Template">
+
+1. Install the Telerik UI for ASP.NET Core [Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions).
+
+1. In Visual Studio, create a new **Telerik ASP.NET Core MVC Application** from the Telerik project templates.
+
+1. Follow [Creating New {{ site.product }} Projects]({% slug newprojectwizards_visualstudio_aspnetcore %}) for the complete workflow and screenshots.
+
+When you use the project template approach, the generated application is already configured for Telerik UI and includes Telerik components. Skip the [Configure the Application](#configure-the-application) and [Add Telerik Component](#add-telerik-component) sections.
+
+</TabStripTab>
 <TabStripTab title="Visual Studio">
 
 1. Open Visual Studio and select **Create a new project**.
@@ -87,20 +98,8 @@ To create a new Telerik ASP.NET Core app, use your preferred approach:
 1. Select the **TelerikNuGetV3** package source, search for `Telerik.UI.for.AspNet.Core`, and install the package.
 
 </TabStripTab>
-<TabStripTab title="Project Template">
-
-1. Install the Telerik UI for ASP.NET Core [Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions).
-
-1. In Visual Studio, create a new **Telerik ASP.NET Core MVC Application** from the Telerik project templates.
-
-1. Follow [Using a {{ site.product }} Project Template in VS for Windows]({% slug gettingstarted_project_template %}) for the complete workflow and screenshots.
-
-When you use the project template approach, the generated application is already configured for Telerik UI and includes Telerik components. Skip the [Configure the Application](#configure-the-application) and [Add Telerik Component](#add-telerik-component) sections.
-
-</TabStripTab>
 </TabStrip>
 
-> To manually add Telerik UI for ASP.NET Core to an existing app, follow the [First Steps with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}) article.
 
 ### Configure the Application
 
@@ -181,18 +180,11 @@ Well done! Now you have your first {{ site.product }} component running in your 
 
 <article-card-container>
     <article-card
-        href="slug://htmlhelpers_grid_aspnetcore_overview"
-        src="../images/aicomponents/AI_Data_Highlight_Light_Large.svg"
-        title="Get Started with Data Grid"
-        darkSrc="../images/aicomponents/AI_Data_Highlight_Dark_Large.svg"
-        description="Bind the {{ site.product }} Grid to data and choose from the large variety of built-in features.">
-    </article-card>
-    <article-card
-        href="slug://htmlhelpers_datasource_aspnetcore"
-        src="../images/aicomponents/AI_Column_Assistant_Light_Large.svg"
-        title="Learn Telerik Data Binding"
-        darkSrc="../images/aicomponents/AI_Column_Assistant_Dark_Large.svg"
-        description="Learn the data binding fundamentals for {{ site.product }} components.">
+        href="slug://ai-overview-core"
+        src="../images/aicomponents/Chat_Light_Large.svg"
+        title="Use Telerik AI Tools"
+        darkSrc="../images/aicomponents/Chat_Dark_Large.svg"
+        description="{{ site.product }} provides AI-powered development assistance through a unified MCP server that delivers intelligent, context-aware help directly in your IDE.">
     </article-card>
     <article-card
         href="slug://overview_aspnetmvc6_aspnetmvc#list-of-helpers"
@@ -209,25 +201,53 @@ Well done! Now you have your first {{ site.product }} component running in your 
         description="Explore the live {{ site.product }} examples.">
     </article-card>
     <article-card
+        href="slug://htmlhelpers_grid_aspnetcore_overview"
+        src="../images/aicomponents/AI_Data_Highlight_Light_Large.svg"
+        title="Get Started with Data Grid"
+        darkSrc="../images/aicomponents/AI_Data_Highlight_Dark_Large.svg"
+        description="Bind the {{ site.product }} Grid to data and choose from the large variety of built-in features.">
+    </article-card>
+    <article-card
+        href="slug://htmlhelpers_datasource_aspnetcore"
+        src="../images/aicomponents/AI_Column_Assistant_Light_Large.svg"
+        title="Learn Telerik Data Binding"
+        darkSrc="../images/aicomponents/AI_Column_Assistant_Dark_Large.svg"
+        description="Learn the data binding fundamentals for {{ site.product }} components.">
+    </article-card>
+    <article-card
         href="slug://sassbasedthemes_overview"
         src="../images/aicomponents/AIPrompt_Light_Large.svg"
         title="Create Themes"
         darkSrc="../images/aicomponents/AIPrompt_Dark_Large.svg"
         description="Review the built-in themes, customize them, or create your own.">
     </article-card>
-    <article-card
-        href="slug://ai-overview-core"
-        src="../images/aicomponents/Chat_Light_Large.svg"
-        title="Use Telerik AI Tools"
-        darkSrc="../images/aicomponents/Chat_Dark_Large.svg"
-        description="{{ site.product }} provides AI-powered development assistance through a unified MCP server that delivers intelligent, context-aware help directly in your IDE.">
-    </article-card>
 </article-card-container>
 
 ## See Also
 
-* [First Steps with CLI]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
-* [Using a Project Template]({% slug gettingstarted_project_template %})
-* [First Steps on Windows]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+
+* [Creating New Projects with Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %})
 * [Using Razor Pages]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
 * [Video Onboarding]({% slug virtualclass_uiforcore %})
+* [Setting Up Your License Key]({% slug installation_license_key_aspnetcore %})
+* [JSON Serialization]({% slug jsonserialization_core %})
+
+<style>
+[class^="tab-strip-module--tabList"] [class^="tab-strip-module--tabElement"]:first-child::after {
+    content: "Recommended";
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #e7f6ec;
+    color: #1f7a3d;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    vertical-align: middle;
+}
+</style>
+
+
+
+

@@ -4,7 +4,7 @@ page_title: Methods and Events
 description: "Get started with Telerik UI for {{ site.framework }}, obtain a reference to initialized helper instances, and call their methods and events."
 components: ["general"]
 slug: methodevents_core
-previous_url: /getting-started/helper-basics/events-and-methods 
+previous_url: /getting-started/helper-basics/events-and-methods
 position: 5
 ---
 
@@ -77,7 +77,7 @@ To get a reference to a helper instance, you may also use the `getKendo<WidgetNa
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data">
     </kendo-autocomplete>
 ```
@@ -112,7 +112,7 @@ After the helper instance is available, you can call its methods by using the st
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data">
     </kendo-autocomplete>
 ```
@@ -156,7 +156,7 @@ Event handlers which are attached during the initialization of the helper will b
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data" on-change="onChange">
     </kendo-autocomplete>
 ```
@@ -189,7 +189,7 @@ All helpers provide the `bind` and the `one` method. Both methods attach event h
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data">
     </kendo-autocomplete>
 ```
@@ -237,7 +237,7 @@ Each helper passes a single argument to the event handler&mdash;the so-called "e
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data" on-change="onChange">
     </kendo-autocomplete>
 ```
@@ -275,7 +275,7 @@ Certain helper events can be prevented by calling the `preventDefault` method of
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data" on-open="onOpen">
     </kendo-autocomplete>
 ```
@@ -310,7 +310,7 @@ To unbind from a specific event, keep a reference to the event handler function 
     @{
         var animals_data = new List<string>() { "Ant", "Antilope", "Badger" };
     }
-    
+
     <kendo-autocomplete name="animals" bind-to="animals_data">
     </kendo-autocomplete>
 ```
@@ -337,9 +337,8 @@ Telerik UI for {{ site.framework }} does not fire an event when the correspondin
 ## See Also
 
 {% if site.core %}
-* [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [First Steps with CLI (Online Guide)]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %})
+* [Quick Start]({% slug gettingstartedtelerik_aspnetcore %})
 {% else %}
-* [Starting a new Telerik UI project from a template]({% slug gettingstarted_aspnetmvc %})
+* [Starting a new Telerik UI project from a template]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 * [Manually adding the Telerik controls to an existing application]({% slug manualsetup_aspnetmvc%})
 {% endif %}

@@ -33,7 +33,7 @@ The `Telerik.UI.for.AspNet.Mvc5` NuGet package [depends on the `Telerik.Licensin
 
 Follow the steps below for [automatic](#automatic-installation) or [manual](#manual-installation) license key installation in your local development environment. To build {{ site.product_short }} apps in a CI/CD environment, [set up a Telerik license key in CI/CD]({%slug deployment_license_key_aspnetcore%}).
 
->The Telerik UI NuGet package (therefore, the Kendo.Mvc.dll that comes with the package) must be the same version as the Kendo UI script files referenced in the project's Layout file. 
+>The Telerik UI NuGet package (therefore, the Kendo.Mvc.dll that comes with the package) must be the same version as the Kendo UI script files referenced in the project's Layout file.
 
 An [invalid or missing license key results in app build warnings]({%slug troubleshooting-license-key-errors%}) and watermarks in the application UI.
 
@@ -57,7 +57,7 @@ If you need to activate {{ site.product }} only in a specific app, then save `te
 
 @[template](/_contentTemplates/licensing-templates.md#license-key-update-whenever)
 
-By default, when you have an active license, the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}) are activated internally. Version 2025.1.227 introduces the `ActivateKendoScripts` method that you can use to activate the Kendo UI scripts manually. Call this method if no Telerik HtmlHelper {% if site.core %}or TagHelper {% endif %} components are used in the View. 
+By default, when you have an active license, the [required Kendo UI scripts]({% slug copyclientresources_aspnetmvc6_aspnetmvc%}) are activated internally. Version 2025.1.227 introduces the `ActivateKendoScripts` method that you can use to activate the Kendo UI scripts manually. Call this method if no Telerik HtmlHelper {% if site.core %}or TagHelper {% endif %} components are used in the View.
 
 ```
     @(Html.Kendo().ActivateKendoScripts())
@@ -79,16 +79,16 @@ The new license key includes information about all previous purchases. The downl
 {% if site.mvc %}
 ## Referencing the Telerik.Licensing.Runtime.dll Assembly
 
-The activation aproach described here is an alternative to the manual and automatic license activation explained in the sections above. 
+The activation aproach described here is an alternative to the manual and automatic license activation explained in the sections above.
 
 If you don't want to install the `Telerik.Licensing` NuGet package, you can activate the license by following the steps below:
 
 1. Create an empty file named `TelerikLicense.cs` in your project's root folder.
 2. Copy the Telerik UI for ASP.NET MVC key available to you on the [License Keys page](https://www.telerik.com/account/your-licenses/license-keys).
-3. Paste the copied key into the `TelerikLicense.cs` you have created in step 1. 
-4. Go to the product's [Download Page](https://www.telerik.com/account/downloads/product-download?product=KENDOUIMVC) and download the `telerik.ui.for.aspnetmvc.[Version].commercial.zip` bundle. 
-5. Open the downloaded archive and navigate to the `\licensing\binaries` folder, which contains the `Telerik.Licensing.Runtime.dll` assembly. 
-6. Extract the `Telerik.Licensing.Runtime.dll` file, copy it to your project's `bin` folder, and then add a reference to it in Visual Studio. 
+3. Paste the copied key into the `TelerikLicense.cs` you have created in step 1.
+4. Go to the product's [Download Page](https://www.telerik.com/account/downloads/product-download?product=KENDOUIMVC) and download the `telerik.ui.for.aspnetmvc.[Version].commercial.zip` bundle.
+5. Open the downloaded archive and navigate to the `\licensing\binaries` folder, which contains the `Telerik.Licensing.Runtime.dll` assembly.
+6. Extract the `Telerik.Licensing.Runtime.dll` file, copy it to your project's `bin` folder, and then add a reference to it in Visual Studio.
 
 {% endif %}
 
@@ -102,7 +102,7 @@ If you don't want to install the `Telerik.Licensing` NuGet package, you can acti
 * [Licensing FAQ]({%slug licensing-faq%})
 * [Troubleshoot License Key Errors]({%slug troubleshooting-license-key-errors%})
 {% if site.core %}
-* [Get Started with {{ site.product }}]({%slug gettingstarted_aspnetmvc6_aspnetmvc%})
+* [Get Started with {{ site.product }}]({%slug gettingstartedtelerik_aspnetcore%})
 {% else %}
-* [Get Started with {{ site.product }}]({%slug gettingstarted_aspnetmvc%})
+* [Get Started with {{ site.product }}]({% slug gettingstartedtelerik_cli_aspnetmvc %})
 {% endif %}
