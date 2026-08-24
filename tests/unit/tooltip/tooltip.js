@@ -827,6 +827,18 @@ describe("kendo.ui.tooltip", function() {
         assert.equal(anchorPosition, calloutPosition - tooltip.options.offset);
     });
 
+    it("applies the wrapper margin offset before the animation completes", function() {
+        let tooltip = new Tooltip(container, {
+            position: "right",
+            animation: {
+                open: { effects: "fade", duration: 500 }
+            }
+        });
+
+        tooltip.show(container);
+
+        assert.isTrue(parseInt(tooltip.popup.wrapper.css("margin-left"), 10) > 0);
+    });
 
     asyncTest("hides tooltip on mouseout with hideAfter delay", function(done) {
         let tooltip = new Tooltip(container, { hideAfter: 50 });
