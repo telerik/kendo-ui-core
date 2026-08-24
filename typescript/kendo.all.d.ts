@@ -12077,6 +12077,10 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    interface SchedulerKendoKeydownEvent extends SchedulerEvent {
+        preventKendoKeydown: boolean;
+    }
+
     interface SchedulerAddEvent extends SchedulerEvent {
         event?: any;
     }
@@ -14388,10 +14392,8 @@ declare namespace kendo.ui {
         kendoKeydown?(e: ToggleButtonKendoKeydownEvent): void;
     }
 
-    interface ToggleButtonKendoKeydownEvent {
+    interface ToggleButtonKendoKeydownEvent extends ButtonKendoKeydownEvent {
         sender: ToggleButton;
-        preventDefault: Function;
-        preventKendoKeydown: boolean;
     }
 
     interface ToggleButtonToggleEvent {

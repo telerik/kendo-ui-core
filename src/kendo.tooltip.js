@@ -335,6 +335,10 @@ export const __meta__ = {
             }
             this.popup._shouldCorrectWidth = false;
             this.popup.open();
+
+            if (this.options.callout) {
+                this._offset(this.options.position, this.options.offset);
+            }
         }
     });
     kendo.ui.plugin(TooltipBase);
