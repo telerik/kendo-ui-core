@@ -81,6 +81,41 @@ describe("kendo.ui.tooltip.ajax", function() {
         tooltip.show(container);
     });
 
+    asyncTest("configured dimensions are preserved when remote content is shown for another target", function(done) {
+        let first = $("<span/>").appendTo(container),
+            second = $("<span/>").appendTo(container),
+            contentLoads = 0;
+
+        $.mockjax({
+            url: "foo/baz",
+            response: function() {
+                this.responseText = "foo";
+            }
+        });
+
+        let tooltip = new Tooltip(container, {
+            content: {
+                url: "foo/baz"
+            },
+            width: 500,
+            height: 500,
+            contentLoad: function() {
+                contentLoads++;
+
+                if (contentLoads === 1) {
+                    tooltip.show(second);
+                } else {
+                    done(() => {
+                        assert.equal(tooltip.popup.element.outerWidth(), 500);
+                        assert.equal(tooltip.popup.element.outerHeight(), 500);
+                    });
+                }
+            }
+        });
+
+        tooltip.show(first);
+    });
+
     asyncTest("error event is raised if request fails", function(done) {
         $.mockjax({
             url: "foo/baz",

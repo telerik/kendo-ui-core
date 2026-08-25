@@ -1390,9 +1390,7 @@ export const __meta__ = {
                 deactivate: () => {
                     this._refreshFloatingLabel();
                 },
-                popup: extend({}, list.options.popup, {
-                    autosize: list.options.autoWidth
-                })
+                popup: list.options.popup
             });
 
             list._postCreatePopup();

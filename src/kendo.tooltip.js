@@ -252,6 +252,15 @@ export const __meta__ = {
             that._positionCallout();
         },
 
+        _resetPopupDimensions: function() {
+            const that = this,
+                popup = that.popup;
+
+            popup.element.css({ width: that.options.width, height: that.options.height });
+            popup.element.parent().css({ width: "", height: "" });
+            popup.wrapper.css({ width: "", height: "" });
+        },
+
         _positionCallout: function() {
             var that = this,
                 position = that.options.position,
@@ -518,9 +527,7 @@ export const __meta__ = {
                 that._appendContent(popup.options.anchor);
 
                 if (popup.visible()) {
-                    popup.element.css({ width: "", height: "" });
-                    popup.element.parent().css({ width: "", height: "" });
-                    popup.wrapper.css({ width: "", height: "" });
+                    that._resetPopupDimensions();
                     that._recalculatePopupDimensions();
                 }
             }
@@ -539,9 +546,7 @@ export const __meta__ = {
             if (current && current[0] != target[0]) {
                 that.popup.close(true);
                 that.popup.element.kendoStop(true, true);// animation can be too long to hide the element before it is shown again
-                that.popup.element.css({ width: "", height: "" });
-                that.popup.element.parent().css({ width: "", height: "" });
-                that.popup.wrapper.css({ width: "", height: "" });
+                that._resetPopupDimensions();
             }
 
             if (!current || current[0] != target[0]) {
