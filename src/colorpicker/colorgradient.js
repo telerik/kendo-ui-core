@@ -540,7 +540,7 @@ import "../kendo.icons.js";
                                             '</span></div>'),
                 labelTemplate = kendo.template(({ messages, ratio, limit, level }) =>
                                             '<div>' +
-                                                `<span>${encode(level)}: ${encode(limit)} </span>` +
+                                                `<span>${encode(level)}: ${encode(kendo.toString(limit, "#.#"))} </span>` +
                                                 (ratio > limit ?
                                                 `<span class="k-contrast-validation !k-text-success">${encode(messages.pass)} ${kendo.ui.icon("check")}</span>`
                                                 :
