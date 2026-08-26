@@ -1185,14 +1185,14 @@ import "./kendo.html.button.js";
                     .hide()
                     .css("opacity", "");
 
-                that.trigger(DEACTIVATE);
-
                 if (that.options.modal) {
                     var lastModal = that._object(that._modals().last());
                     if (lastModal) {
                         lastModal.toFront();
                     }
                 }
+
+                that.trigger(DEACTIVATE);
             },
 
             close: function() {
@@ -1222,22 +1222,15 @@ import "./kendo.html.button.js";
                     openAnimation = this._animationOptions("open"),
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex,
-                    target = (e && e.target) || null,
-                    parentZIndex = 0;
+                    target = (e && e.target) || null;
 
-                $(KWINDOW).each(function(i, element) {
+                $(KWINDOW + VISIBLE).each(function(i, element) {
                     let windowObject = $(element),
                         zIndexNew = windowObject.css(ZINDEX),
                         contentElement = windowObject.children(KWINDOWCONTENT);
 
-                    parentZIndex = Math.max(parentZIndex, +windowObject.parent().css(ZINDEX) || 0);
-
                     if (!isNaN(zIndexNew)) {
                         zIndex = Math.max(+zIndexNew, zIndex);
-
-                        if (parentZIndex) {
-                            zIndex = Math.max(parentZIndex, zIndex);
-                        }
                     }
 
                     wrapper.data("isFront", element == currentWindow);
