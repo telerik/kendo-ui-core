@@ -614,19 +614,88 @@ describe("api", function() {
         assert.equal(dialog.wrapper.css("zIndex"), zIndex);
     });
 
-    it("toFront() raises window z-index above dialog", function() {
-        let windowWidget = createWindow();
-        let dialog = createDialog({
-            modal: false
+    it("dialog opened after window toFront should be above the window", function() {
+        let windowWidget = createWindow({
+            modal: true,
+            animation: false
         });
 
-
         windowWidget.toFront();
+
+        let dialog = createDialog({
+            modal: true,
+            visible: false,
+            animation: false
+        });
+
+        dialog.open();
+
         let windowZIndex = parseInt(windowWidget.wrapper.css("zIndex"), 10);
         let dialogWrapperZIndex = parseInt(dialog.dialogWrapper.css("z-index"), 10);
 
-        assert.isOk(windowZIndex > dialogWrapperZIndex,
-            "Window z-index (" + windowZIndex + ") should be greater than Dialog wrapper z-index (" + dialogWrapperZIndex + ")");
+        assert.isOk(dialogWrapperZIndex > windowZIndex,
+            "Dialog wrapper z-index (" + dialogWrapperZIndex + ") should be greater than Window z-index (" + windowZIndex + ")");
+    });
+
+    it("dialog reopened after close should be above the window", function() {
+        let windowWidget = createWindow({
+            modal: true,
+            animation: false
+        });
+
+        let dialog = createDialog({
+            modal: true,
+            visible: false,
+            animation: false
+        });
+
+        dialog.open();
+        dialog.close();
+
+        windowWidget.toFront();
+
+        dialog.open();
+
+        let windowZIndex = parseInt(windowWidget.wrapper.css("zIndex"), 10);
+        let dialogWrapperZIndex = parseInt(dialog.dialogWrapper.css("z-index"), 10);
+
+        assert.isOk(dialogWrapperZIndex > windowZIndex,
+            "Dialog wrapper z-index (" + dialogWrapperZIndex + ") should be greater than Window z-index (" + windowZIndex + ")");
+    });
+
+    it("dialog opened in deactivate handler is above remaining modal windows", function() {
+        let window1 = createWindow({
+            modal: true,
+            animation: false
+        });
+
+        let window2 = createWindow({
+            modal: true,
+            animation: false
+        });
+
+        let dialog = createDialog({
+            modal: true,
+            visible: false,
+            animation: false
+        });
+
+        let payrollWindow = createWindow({
+            modal: true,
+            animation: false,
+            deactivate: function() {
+                dialog.open();
+            }
+        });
+
+        payrollWindow.close();
+        window2.close();
+
+        let window1ZIndex = parseInt(window1.wrapper.css("zIndex"), 10);
+        let dialogWrapperZIndex = parseInt(dialog.dialogWrapper.css("z-index"), 10);
+
+        assert.isOk(dialogWrapperZIndex > window1ZIndex,
+            "Dialog wrapper z-index (" + dialogWrapperZIndex + ") should be greater than Window 1 z-index (" + window1ZIndex + ")");
     });
 
     asyncTest("open() calls toFront()", function(done) {
