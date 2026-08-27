@@ -33,7 +33,7 @@ This approach is applicable when:
 
 ## Setting Up Your License Key With NPM
 
-When installing Kendo UI for jQuery through npm, the `@progress/kendo-licensing` package is automatically retrieved from the npm registry and added to your project using standard package managers such as npm or yarn. The role of the `@progress/kendo-licensing` package is to locate you license key file (`telerik-license.txt`) and to execute the license activation commands during the setup process.
+When installing Kendo UI for jQuery through npm, the `@progress/kendo-licensing` package is automatically retrieved from the npm registry and added to your project using standard package managers such as npm or yarn. The role of the `@progress/kendo-licensing` package is to locate your license key file (`telerik-license.txt`) and to execute the license activation commands during the setup process.
 
 This licensing approach is well‑suited for modern development workflows, particularly when working with module bundlers (e.g., Webpack) or building applications with frameworks such as Angular, React, or Vue.js.
 

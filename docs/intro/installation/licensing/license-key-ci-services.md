@@ -30,6 +30,7 @@ The following general requirements apply to all CI/CD environments:
 
 * Regardless of the CI/CD tool you use, the step that installs the project dependencies must be executed before the step that activates the license.
 * The license activation step requires the `@progress/kendo-licensing` package to be downloaded and set up in your local environment or CI/CD pipeline.
+* Store the deployment key in an environment variable, secret, or secure file. Never hardcode it in a build script or workflow definition.
 * The CI pipeline configurations are not executable. They merely outline the specific sequence of steps.
 
 # Creating an Environment Variable
@@ -51,6 +52,7 @@ steps:
       run: npx kendo-ui-license activate
       # Set a working directory if the application is not in the repository root folder:
       # working-directory: 'ClientApp'
+      env:
         TELERIK_LICENSE: ${{ secrets.TELERIK_LICENSE }}
     # ... Run an application build after the activation of the license.
     - name: Build Application
@@ -64,7 +66,7 @@ steps:
 3. After running `npm install` or `yarn`, add a build step to activate the license.
 
 ```yaml
-yaml# .gitlab-ci.yml file
+# .gitlab-ci.yml file
 variables:
   NODE_ENV: production
 setup_dependencies:

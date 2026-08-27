@@ -60,8 +60,8 @@ If adding the license by using a script key:
 If adding the license by using a license key (npm):
 
 1. Renew your Kendo UI for jQuery license, if necessary.
-1. Download a [new license key file]({% slug using-license-file %}#downloading-the-license-key).
-1. [Activate the new license key]({% slug using-license-file %}#installing-or-updating-the-license-key).
+1. Download a [new license key file]({% slug using-license-file %}#download-your-license-key-file).
+1. [Activate the new license key]({% slug using-license-file %}#install-or-update-the-license-key-file-in-your-project).
 
 ## Can I use the same license key in multiple builds?
 
@@ -122,9 +122,9 @@ No, if you use CDN and Kendo UI for jQuery versions released prior to R3 2022 or
 No. Projects that use Kendo UI versions released before `2025.1.211` cannot activate the license through npm.
 For these versions, licensing can only be activated by [referencing a JavaScript license key script]({% slug using-license-code %}).
 
-## Will the product function without a license file?
+## Will the product function without a license key?
 
-Yes, the product will continue to function without a license file. However, a warning message will appear in the browser console if a valid license file is not present. In addition, any pages that contain unlicensed Kendo UI components will receive a [banner]({% slug activation-error-warnings %}#invalid-license) and select UI components will have a [watermark]({% slug activation-error-warnings %}#invalid-license).
+Yes, the product will continue to function without a license key. However, a warning message will appear in the browser console if a valid license key is not present. In addition, any pages that contain unlicensed Kendo UI components will receive a [banner]({% slug activation-error-warnings %}#invalid-license) and selected UI components will have a [watermark]({% slug activation-error-warnings %}#invalid-license).
 
 ## Will my license key be exposed in browser developer tools?
 

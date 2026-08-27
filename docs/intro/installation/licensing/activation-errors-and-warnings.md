@@ -21,8 +21,8 @@ An invalid license can be caused by any of the following:
 * Using a perpetual license for product versions released outside the validity period of your license.
 * Using an expired trial license.
 * A missing license for Kendo UI for jQuery.
-* Not [installing a license key]({% slug using-license-file %}#installing-or-updating-the-license-key) in your application.
-* Not [updating the license key]({% slug using-license-file %}#installing-or-updating-the-license-key) after renewing your Kendo UI for jQuery license.
+* Not [installing a license key]({% slug using-license-file %}#installing-or-updating-the-license-key) or [adding a script license key]({% slug using-license-code %}) to your application.
+* Not [updating the license key]({% slug using-license-file %}#installing-or-updating-the-license-key) or script license key after renewing your Kendo UI for jQuery license.
 
 ## License Warnings
 
