@@ -605,6 +605,25 @@ describe("api", function() {
         );
     });
 
+    it("toFront() updates the modal overlay reference to the frontmost modal window", function() {
+        let firstWindow = createWindow({ modal: true }),
+            secondWindow = createWindow({ modal: true });
+
+        firstWindow.toFront();
+
+        assert.equal(
+            firstWindow.wrapper.prev().attr("ref"),
+            firstWindow.element.attr("id") + "-overlay"
+        );
+
+        secondWindow.toFront();
+
+        assert.equal(
+            secondWindow.wrapper.prev().attr("ref"),
+            secondWindow.element.attr("id") + "-overlay"
+        );
+    });
+
     it("toFront() does not increase the window z-index if not necessary", function() {
         let dialog = createWindow(),
             zIndex = dialog.wrapper.css("zIndex");
@@ -1356,6 +1375,33 @@ describe("api", function() {
         assert.equal(
             dialog.wrapper.siblings(".k-overlay").filter(":visible").length,
             1
+        );
+    });
+
+    it("setOptions on a non-modal window does not hide another modal window overlay", function() {
+        let dialog1 = createWindow({ modal: false }),
+            dialog2 = createWindow({ modal: true });
+
+        dialog1.setOptions({ modal: false });
+
+        assert.isTrue(dialog2.wrapper.prev().is(".k-overlay:visible"));
+        assert.equal(
+            dialog2.wrapper.prev().attr("ref"),
+            dialog2.element.attr("id") + "-overlay"
+        );
+    });
+
+    it("setOptions reassigns the overlay when the frontmost modal window becomes non-modal", function() {
+        let dialog1 = createWindow({ modal: true }),
+            dialog2 = createWindow({ modal: true });
+
+        dialog1.toFront();
+        dialog1.setOptions({ modal: false });
+
+        assert.isTrue(dialog2.wrapper.prev().is(".k-overlay:visible"));
+        assert.equal(
+            dialog2.wrapper.prev().attr("ref"),
+            dialog2.element.attr("id") + "-overlay"
         );
     });
 

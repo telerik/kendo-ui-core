@@ -96,6 +96,19 @@ describe("initialization", function() {
         assert.equal(wnd.wrapper.attr("role"), "dialog");
     });
 
+    it("Window generates an id when the element does not have one", function() {
+        let wnd = createWindow(
+            { title: "Test" },
+            $("<div />")
+        );
+
+        assert.isOk(wnd.element.attr("id"));
+        assert.equal(
+            wnd.wrapper.attr("aria-labelledby"),
+            wnd.element.attr("id") + "_wnd_title"
+        );
+    });
+
     it("Window sets id to the title", function() {
         let wnd = createWindow(
             { title: "Test" },
