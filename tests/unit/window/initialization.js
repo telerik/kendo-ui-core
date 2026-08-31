@@ -219,6 +219,7 @@ describe("initialization", function() {
 
         assert.isOk(!dialog.wrapper.prev("div").is(".k-overlay"));
         assert.isOk(overlappingDialog.wrapper.prev("div").is(".k-overlay"));
+        assert.equal(overlappingDialog.wrapper.prev("div").attr("ref"), overlappingDialog.element.attr("id") + "-overlay");
         assert.deepEqual(
             dialog.wrapper.next("div")[0],
             overlappingDialog.wrapper.prev("div")[0]

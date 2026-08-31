@@ -96,6 +96,10 @@ import "./kendo.html.button.js";
                 large: "k-window-lg"
             };
 
+        function getOverlayReference(element) {
+            return element.attr("id") + "-overlay";
+        }
+
         function defined(x) {
             return (typeof x != "undefined");
         }
@@ -169,6 +173,8 @@ import "./kendo.html.button.js";
                 element = that.element;
                 content = options.content;
                 globalWindow = $(window);
+                id = element.attr("id") || kendo.guid();
+                element.attr("id", id);
 
                 if (suppressActions) {
                     options.actions = [];
@@ -290,16 +296,13 @@ import "./kendo.html.button.js";
                     that.pin();
                 }
 
-                id = element.attr("id");
-                if (id) {
-                    id = id + "_wnd_title";
-                    wrapper.attr({
-                            "role": "dialog",
-                            "aria-labelledby": id
-                        }).children(KWINDOWTITLEBAR)
-                        .children(KWINDOWTITLE)
-                        .attr("id", id);
-                }
+                id = id + "_wnd_title";
+                wrapper.attr({
+                        "role": "dialog",
+                        "aria-labelledby": id
+                    }).children(KWINDOWTITLEBAR)
+                    .children(KWINDOWTITLE)
+                    .attr("id", id);
 
                 wrapper.add(wrapper.children(".k-resize-handle," + KWINDOWTITLEBAR))
                     .on(kendo.support.mousedown + NS, that.toFront.bind(that));
@@ -609,9 +612,22 @@ import "./kendo.html.button.js";
                 that._actions();
 
                 if (typeof options.modal !== "undefined") {
-                    var visible = that.options.visible !== false;
+                    let visible = that.options.visible !== false,
+                        topModal;
+
                     that._enableDocumentScrolling();
-                    that._overlay(options.modal && visible);
+
+                    if (options.modal && visible) {
+                        that._overlay(true);
+                    } else {
+                        topModal = that._object(that._modals().last());
+
+                        if (topModal) {
+                            topModal._overlay(true);
+                        } else {
+                            that._overlay(false);
+                        }
+                    }
                 }
 
                 that.element.css(OVERFLOW, scrollable ? "" : "hidden");
@@ -813,13 +829,28 @@ import "./kendo.html.button.js";
             },
 
             _overlay: function(visible) {
-                var overlay = this.containment ? this.containment.children(KOVERLAY) : this.appendTo.children(KOVERLAY),
+                const overlayReference = getOverlayReference(this.element),
+                    container = this.containment ? this.containment : this.appendTo,
                     wrapper = this.wrapper,
-                    display = visible ? "inline-flex" : "none",
-                    zIndex = parseInt(wrapper.css(ZINDEX), 10) - 1;
+                    zIndex = parseInt(wrapper.css(ZINDEX), 10) - 1,
+                    display = visible ? "inline-flex" : "none";
+                let overlay = container.children(KOVERLAY);
 
-                if (!overlay.length) {
-                    overlay = $("<div class='k-overlay' />");
+                if (visible) {
+                    overlay = overlay.first();
+
+                    if (!overlay.length) {
+                        overlay = $("<div>").addClass("k-overlay");
+                    }
+
+                    overlay.attr("ref", overlayReference);
+                } else {
+                    overlay = overlay.filter(function() {
+                        return $(this).attr("ref") === overlayReference;
+                    });
+                    if (!overlay.length) {
+                        return overlay;
+                    }
                 }
 
                 overlay
@@ -1020,7 +1051,7 @@ import "./kendo.html.button.js";
 
                     if (options.modal) {
                         otherModalsVisible = !!that._modals().length;
-                        overlay = that._overlay(otherModalsVisible);
+                        overlay = that._overlay(true);
 
                         overlay.kendoStop(true, true);
 
@@ -1099,6 +1130,7 @@ import "./kendo.html.button.js";
                         this._enableDocumentScrolling();
                     }
                 } else if (modals.length) {
+                    this._overlay(false).remove();
                     this._object(modals.last())._overlay(true);
 
                     if (options.modal.preventScroll) {
@@ -1248,6 +1280,11 @@ import "./kendo.html.button.js";
                     wrapper.css(ZINDEX, zIndex + 2);
                 }
                 that.element.find("> .k-overlay").remove();
+
+                const topModal = that._object(that._modals().last());
+                if (topModal) {
+                    topModal._overlay(true);
+                }
 
                 if (that._shouldFocus(target)) {
                     if (!avoidFocus) {
