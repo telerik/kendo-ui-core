@@ -658,19 +658,23 @@ describe("keyboard support", function() {
                 .children(".k-overlay");
 
         assert.isOk(
-            modalOverlay.css("z-index") < win3.wrapper.css("z-index")
+            parseInt(modalOverlay.css("z-index"), 10) < parseInt(win3.wrapper.css("z-index"), 10)
         );
         assert.isOk(
-            modalOverlay.css("z-index") > win2.wrapper.css("z-index")
+            parseInt(modalOverlay.css("z-index"), 10) > parseInt(win2.wrapper.css("z-index"), 10)
         );
 
         win3.close();
 
+        modalOverlay = Mocha.fixture
+            .closest("body")
+            .children(".k-overlay");
+
         assert.isOk(
-            modalOverlay.css("z-index") < win2.wrapper.css("z-index")
+            parseInt(modalOverlay.css("z-index"), 10) < parseInt(win2.wrapper.css("z-index"), 10)
         );
         assert.isOk(
-            modalOverlay.css("z-index") > win1.wrapper.css("z-index")
+            parseInt(modalOverlay.css("z-index"), 10) > parseInt(win1.wrapper.css("z-index"), 10)
         );
     });
 
