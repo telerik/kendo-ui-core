@@ -32,9 +32,18 @@ liquid:
   themesCdnVersion: "14.5.0"
 
 markdown-replacements:
-# TODO:REPLACE WITH SLUGS
-- pattern: \(/?(kendo-ui/)?(?<url>api/javascript/.*?)/?\)
-  replacement: (slug:/$<url>)
+# Already-prefixed member slug paths with javascript/ → anchor on type page
+- pattern: \(slug:/api/javascript/(?<typePath>[^)]+?)/(?:fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/(?<member>[^)/#]+?)/?(?:#[^)]+)?\)
+  replacement: (slug:/api/$<typePath>#$<member>)
+# Already-prefixed slug paths with javascript/ → strip javascript/
+- pattern: \(slug:/api/javascript/(?<path>[^)]*?)\)
+  replacement: (slug:/api/$<path>)
+# Member paths (e.g. /api/javascript/ui/scheduler/events/edit) → anchor on type page
+- pattern: \(/?(?:kendo-ui/)?api/javascript/(?<typePath>[^)]+?)/(?:fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/(?<member>[^)/#]+?)/?(?:#[^)]+)?\)
+  replacement: (slug:/api/$<typePath>#$<member>)
+# General API path (e.g. /api/javascript/data/datasource) → slug
+- pattern: \(/?(kendo-ui/)?api/javascript/(?<path>.*?)/?\)
+  replacement: (slug:/api/$<path>)
 - pattern: (?<!!)\[(?<linkText>[^\]]+?)\]\(((?<part1>[a-z0-9]*)\.)((?<part2>[a-z0-9]*)\.)?((?<part3>[a-z0-9]*)\.)?(?<rest>[a-z0-9]*)\)
   replacement: "[$<linkText>](#$<part1>$<part2>$<part3>$<rest>)"
 
@@ -172,9 +181,6 @@ excluded-files:
 - "**/controls/chat/chat-items.md"
 
 meta:
-  api/javascript:
-    title: JavaScript
-    position: 2
   "*/accessibility":
     title: Accessibility
     position: 40
@@ -783,787 +789,23 @@ meta:
     relativeUrl: /knowledge-base
     position: 280
     hideChildren: true
-  api/javascript/dataviz:
-    title: dataviz
-  api:
-    title: API Reference
-    position: 0
-
-## Describing API reference articles which contain child properties which shall be rendered (grouped) on a same page
-kendo-api-groups:
--
-    file: "javascript/kendo.md"
-    group_parents:
-      - "support"
--
-    file: "javascript/data/datasource.md"
-    group_parents:
-      - "aggregate"
-      - "filter"
-      - "group"
-      - "schema"
-      - "sort"
-      - "transport.create"
-      - "transport.destroy"
-      - "transport.read"
-      - "transport.signalr"
-      - "transport.update"
--
-    file: "javascript/data/ganttdatasource.md"
-    group_parents:
-      - "schema"
--
-    file: "javascript/data/ganttdependencydatasource.md"
-    group_parents:
-      - "schema"
--
-    file: "javascript/data/hierarchicaldatasource.md"
-    group_parents:
-      - "schema"
--
-    file: "javascript/data/pivotdatasource.md"
-    group_parents:
-      - "columns"
-      - "measures"
-      - "rows"
-      - "transport"
-      - "schema"
--
-    file: "javascript/data/schedulerdatasource.md"
-    group_parents:
-      - "schema"
--
-    file: "javascript/data/treelistdatasource.md"
-    group_parents:
-      - "schema"
--
-    file: "javascript/dataviz/diagram/circle.md"
-    group_parents:
-      - "fill"
-      - "stroke"
--
-    file: "javascript/dataviz/diagram/connection.md"
-    group_parents:
-      - "content"
-      - "stroke"
-      - "startCap"
-      - "endCap"
-      - "points"
--
-    file: "javascript/dataviz/diagram/connector.md"
-    group_parents:
-      - "hover"
-      - "hover.fill"
-      - "hover.stroke"
-      - "fill"
-      - "stroke"
--
-    file: "javascript/dataviz/diagram/line.md"
-    group_parents:
-      - "stroke"
--
-    file: "javascript/dataviz/diagram/path.md"
-    group_parents:
-      - "endCap"
-      - "fill"
-      - "startCap"
-      - "stroke"
--
-    file: "javascript/dataviz/diagram/polyline.md"
-    group_parents:
-      - "endCap"
-      - "fill"
-      - "startCap"
-      - "stroke"
--
-    file: "javascript/dataviz/diagram/rectangle.md"
-    group_parents:
-      - "fill"
-      - "stroke"
--
-    file: "javascript/dataviz/diagram/shape.md"
-    group_parents:
-      - "stroke"
-      - "fill"
-      - "hover"
-      - "connectors"
-      - "rotation"
-      - "content"
-      - "connectorDefaults.hover"
-      - "connectorDefaults.fill"
-      - "connectorDefaults.stroke"
--
-    file: "javascript/dataviz/map/marker-layer.md"
-    group_parents:
-      - "---"
--
-    file: "javascript/dataviz/map/marker.md"
-    group_parents:
-      - "tooltip.animation"
-      - "tooltip.content"
--
-    file: "javascript/dataviz/ui/barcode.md"
-    group_parents:
-      - "border"
-      - "padding"
-      - "text.margin"
--
-    file: "javascript/dataviz/ui/chart.md"
-    group_parents:
-      - "axisDefaults.crosshair"
-      - "axisDefaults.labels"
-      - "axisDefaults.line"
-      - "axisDefaults.majorGridLines"
-      - "axisDefaults.majorTicks"
-      - "axisDefaults.minorGridLines"
-      - "axisDefaults.minorTicks"
-      - "axisDefaults.plotBands"
-      - "axisDefaults.title"
-      - "categoryAxis.autoBaseUnitSteps"
-      - "categoryAxis.crosshair"
-      - "categoryAxis.labels"
-      - "categoryAxis.line"
-      - "categoryAxis.majorGridLines"
-      - "categoryAxis.majorTicks"
-      - "categoryAxis.minorGridLines"
-      - "categoryAxis.minorTicks"
-      - "categoryAxis.plotBands"
-      - "categoryAxis.select"
-      - "categoryAxis.title"
-      - "categoryAxis.notes.icon"
-      - "categoryAxis.notes.label"
-      - "categoryAxis.notes.line"
-      - "categoryAxis.notes.data.icon"
-      - "categoryAxis.notes.data.label"
-      - "categoryAxis.notes.data.line"
-      - "chartArea"
-      - "legend.border"
-      - "legend.incactiveItems"
-      - "legend.item"
-      - "legend.labels"
-      - "legend.margin"
-      - "legend.padding"
-      - "panes.border"
-      - "panes.margin"
-      - "panes.padding"
-      - "panes.title"
-      - "pannable"
-      - "pdf.margin"
-      - "plotArea"
-      - "series.border"
-      - "series.connectors"
-      - "series.errorBars"
-      - "series.highlight"
-      - "series.labels.border"
-      - "series.labels.margin"
-      - "series.labels.padding"
-      - "series.labels.from"
-      - "series.labels.to"
-      - "series.line"
-      - "series.markers.border"
-      - "series.markers.from"
-      - "series.markers.to"
-      - "series.outliers"
-      - "series.extremes"
-      - "series.negativeValues"
-      - "series.overlay"
-      - "series.stack"
-      - "series.target"
-      - "series.tooltip"
-      - "series.notes.icon"
-      - "series.notes.label"
-      - "series.notes.line"
-      - "seriesDefaults.border"
-      - "seriesDefaults.labels.border"
-      - "seriesDefaults.labels.margin"
-      - "seriesDefaults.labels.padding"
-      - "seriesDefaults.labels.from"
-      - "seriesDefaults.labels.to"
-      - "seriesDefaults.overlay"
-      - "seriesDefaults.tooltip"
-      - "seriesDefaults.notes.icon"
-      - "seriesDefaults.notes.label"
-      - "seriesDefaults.notes.line"
-      - "title"
-      - "tooltip"
-      - "valueAxis.crosshair"
-      - "valueAxis.labels"
-      - "valueAxis.line"
-      - "valueAxis.majorGridLines"
-      - "valueAxis.majorTicks"
-      - "valueAxis.minorGridLines"
-      - "valueAxis.minorTicks"
-      - "valueAxis.plotBands"
-      - "valueAxis.title"
-      - "valueAxis.notes.icon"
-      - "valueAxis.notes.label"
-      - "valueAxis.notes.line"
-      - "valueAxis.notes.data.icon"
-      - "valueAxis.notes.data.label"
-      - "valueAxis.notes.data.line"
-      - "xAxis.crosshair"
-      - "xAxis.labels"
-      - "xAxis.line"
-      - "xAxis.majorGridLines"
-      - "xAxis.majorTicks"
-      - "xAxis.minorGridLines"
-      - "xAxis.minorTicks"
-      - "xAxis.plotBands"
-      - "xAxis.title"
-      - "xAxis.notes.icon"
-      - "xAxis.notes.label"
-      - "xAxis.notes.line"
-      - "xAxis.notes.data.icon"
-      - "xAxis.notes.data.label"
-      - "xAxis.notes.data.line"
-      - "yAxis.crosshair"
-      - "yAxis.labels"
-      - "yAxis.line"
-      - "yAxis.majorGridLines"
-      - "yAxis.majorTicks"
-      - "yAxis.minorGridLines"
-      - "yAxis.minorTicks"
-      - "yAxis.plotBands"
-      - "yAxis.title"
-      - "yAxis.notes.icon"
-      - "yAxis.notes.label"
-      - "yAxis.notes.line"
-      - "yAxis.notes.data.icon"
-      - "yAxis.notes.data.label"
-      - "yAxis.notes.data.line"
-      - "zoomable"
--
-    file: "javascript/dataviz/ui/diagram.md"
-    group_parents:
-      - "connectionDefaults.content"
-      - "connectionDefaults.editable"
-      - "connectionDefaults.endCap"
-      - "connectionDefaults.hover"
-      - "connectionDefaults.selection"
-      - "connectionDefaults.startCap"
-      - "connectionDefaults.stroke"
-      - "connections.content"
-      - "connections.editable"
-      - "connections.endCap"
-      - "connections.from"
-      - "connections.hover"
-      - "connections.points"
-      - "connections.selection"
-      - "connections.startCap"
-      - "connections.stroke"
-      - "connections.to"
-      - "editable.drag"
-      - "editable.resize"
-      - "editable.rotate"
-      - "editable.tools"
-      - "layout.grid"
-      - "pannable"
-      - "pdf.margin"
-      - "selectable"
-      - "shapeDefaults.connectors"
-      - "shapeDefaults.connectorDefaults"
-      - "shapeDefaults.content"
-      - "shapeDefaults.editable"
-      - "shapeDefaults.fill"
-      - "shapeDefaults.hover"
-      - "shapeDefaults.rotation"
-      - "shapeDefaults.stroke"
-      - "shape.connectors"
-      - "shape.connectorDefaults"
-      - "shape.content"
-      - "shape.editable"
-      - "shape.fill"
-      - "shape.hover"
-      - "shape.rotation"
-      - "shape.stroke"
--
-    file: "javascript/dataviz/ui/lineargauge.md"
-    group_parents:
-      - "gaugeArea.border"
-      - "gaugeArea.margin"
-      - "pointer.border"
-      - "pointer.track.border"
-      - "scale.line"
-      - "scale.labels.border"
-      - "scale.labels.margin"
-      - "scale.labels.padding"
-      - "scale.majorTicks"
-      - "scale.minorTicks"
-      - "scale.ranges"
--
-    file: "javascript/dataviz/ui/map.md"
-    group_parents:
-      - "controls.attribution"
-      - "controls.navigator"
-      - "controls.zoom"
-      - "layerDefaults.marker.tooltip.animation"
-      - "layerDefaults.marker.tooltip.content"
-      - "layerDefaults.shape.style.fill"
-      - "layerDefaults.shape.style.stroke"
-      - "layerDefaults.bubble.style.fill"
-      - "layerDefaults.bubble.style.stroke"
-      - "layerDefaults.tile"
-      - "layerDefaults.bing"
-      - "layers.tooltip.animation"
-      - "layers.tooltip.content"
-      - "layers.style.fill"
-      - "layers.style.stroke"
-      - "markerDefaults.tooltip.animation"
-      - "markerDefaults.tooltip.content"
-      - "markers.tooltip.animation"
-      - "markers.tooltip.content"
--
-    file: "javascript/dataviz/ui/qrcode.md"
-    group_parents:
-      - "border"
--
-    file: "javascript/dataviz/ui/radialgauge.md"
-    group_parents:
-      - "gaugeArea.border"
-      - "gaugeArea.margin"
-      - "pointer"
-      - "scale.labels.border"
-      - "scale.labels.margin"
-      - "scale.labels.padding"
-      - "scale.majorTicks"
-      - "scale.ranges"
--
-    file: "javascript/dataviz/ui/sparkline.md"
-    group_parents:
-      - "categoryAxis.crosshair"
-      - "categoryAxis.labels"
-      - "categoryAxis.line"
-      - "categoryAxis.majorGridLines"
-      - "categoryAxis.majorTicks"
-      - "categoryAxis.minorGridLines"
-      - "categoryAxis.minorTicks"
-      - "categoryAxis.plotBands"
-      - "categoryAxis.select"
-      - "categoryAxis.title"
-      - "categoryAxis.notes.icon"
-      - "categoryAxis.notes.label"
-      - "categoryAxis.notes.line"
-      - "categoryAxis.notes.data.icon"
-      - "categoryAxis.notes.data.label"
-      - "categoryAxis.notes.data.line"
-      - "chartArea"
-      - "plotArea"
-      - "series.border"
-      - "series.connectors"
-      - "series.errorBars"
-      - "series.highlight"
-      - "series.labels"
-      - "series.line"
-      - "series.markers"
-      - "series.target"
-      - "series.tooltip"
-      - "series.notes.icon"
-      - "series.notes.label"
-      - "series.notes.line"
-      - "seriesDefaults.border"
-      - "seriesDefaults.labels"
-      - "seriesDefaults.tooltip"
-      - "tooltip"
-      - "valueAxis.crosshair"
-      - "valueAxis.labels"
-      - "valueAxis.line"
-      - "valueAxis.majorGridLines"
-      - "valueAxis.majorTicks"
-      - "valueAxis.minorGridLines"
-      - "valueAxis.minorTicks"
-      - "valueAxis.plotBands"
-      - "valueAxis.title"
-      - "valueAxis.notes.icon"
-      - "valueAxis.notes.label"
-      - "valueAxis.notes.line"
-      - "valueAxis.notes.data.icon"
-      - "valueAxis.notes.data.label"
-      - "valueAxis.notes.data.line"
--
-    file: "javascript/dataviz/ui/stock-chart.md"
-    group_parents:
-      - "navigator.categoryAxis.autoBaseUnitSteps"
-      - "navigator.categoryAxis.crosshair"
-      - "navigator.categoryAxis.labels"
-      - "navigator.categoryAxis.majorGridLines"
-      - "navigator.categoryAxis.majorTicks"
-      - "navigator.categoryAxis.minorTicks"
-      - "navigator.categoryAxis.minorGridLines"
-      - "navigator.categoryAxis.plotBands"
-      - "navigator.categoryAxis.position"
-      - "navigator.categoryAxis.notes.icon"
-      - "navigator.categoryAxis.notes.label"
-      - "navigator.categoryAxis.notes.line"
-      - "navigator.categoryAxis.notes.data.icon"
-      - "navigator.categoryAxis.notes.data.label"
-      - "navigator.categoryAxis.notes.data.line"
-      - "navigator.pane"
-      - "navigator.select"
-      - "navigator.hint"
-      - "navigator.series.highlight"
-      - "navigator.series.labels"
-      - "navigator.series.markers"
-      - "navigator.series.tooltip"
-      - "categoryAxis.crosshair"
-      - "categoryAxis.labels"
-      - "categoryAxis.line"
-      - "categoryAxis.majorGridLines"
-      - "categoryAxis.majorTicks"
-      - "categoryAxis.minorGridLines"
-      - "categoryAxis.minorTicks"
-      - "categoryAxis.plotBands"
-      - "categoryAxis.select"
-      - "categoryAxis.title"
-      - "categoryAxis.notes.icon"
-      - "categoryAxis.notes.label"
-      - "categoryAxis.notes.line"
-      - "categoryAxis.notes.data.icon"
-      - "categoryAxis.notes.data.label"
-      - "categoryAxis.notes.data.line"
-      - "chartArea"
-      - "plotArea"
-      - "series.border"
-      - "series.connectors"
-      - "series.errorBars"
-      - "series.highlight"
-      - "series.labels"
-      - "series.line"
-      - "series.markers"
-      - "series.target"
-      - "series.tooltip"
-      - "series.notes.icon"
-      - "series.notes.label"
-      - "series.notes.line"
-      - "seriesDefaults.border"
-      - "seriesDefaults.labels"
-      - "seriesDefaults.tooltip"
-      - "tooltip"
-      - "valueAxis.crosshair"
-      - "valueAxis.labels"
-      - "valueAxis.line"
-      - "valueAxis.majorGridLines"
-      - "valueAxis.majorTicks"
-      - "valueAxis.minorGridLines"
-      - "valueAxis.minorTicks"
-      - "valueAxis.plotBands"
-      - "valueAxis.title"
-      - "valueAxis.notes.icon"
-      - "valueAxis.notes.label"
-      - "valueAxis.notes.line"
-      - "valueAxis.notes.data.icon"
-      - "valueAxis.notes.data.label"
-      - "valueAxis.notes.data.line"
--
-    file: "javascript/drawing/surface.md"
-    group_parents:
-      - "tooltip.animation"
--
-    file: "javascript/ooxml/workbook.md"
-    group_parents:
-      - "sheets.columns"
-      - "sheets.freezePane"
-      - "sheets.filter"
-      - "sheets.rows.cells.borderBottom"
-      - "sheets.rows.cells.borderLeft"
-      - "sheets.rows.cells.borderTop"
-      - "sheets.rows.cells.borderRight"
--
-    file: "javascript/ui/alert.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/autocomplete.md"
-    group_parents:
-      - "animation"
-      - "virtual"
--
-    file: "javascript/ui/buttongroup.md"
-    group_parents:
-      - "items"
--
-    file: "javascript/ui/calendar.md"
-    group_parents:
-      - "messages"
-      - "month"
--
-    file: "javascript/ui/colorpalette.md"
-    group_parents:
-      - "tileSize"
--
-    file: "javascript/ui/colorpicker.md"
-    group_parents:
-      - "tileSize"
-      - "messages"
--
-    file: "javascript/ui/combobox.md"
-    group_parents:
-      - "animation"
-      - "popup"
-      - "virtual"
--
-    file: "javascript/ui/confirm.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/contextmenu.md"
-    group_parents:
-      - "animation"
--
-    file: "javascript/ui/dateinput.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/datepicker.md"
-    group_parents:
-      - "animation"
-      - "month"
--
-    file: "javascript/ui/datetimepicker.md"
-    group_parents:
-      - "animation"
-      - "month"
--
-    file: "javascript/ui/dialog.md"
-    group_parents:
-      - "actions"
-      - "animation"
-      - "messages"
--
-    file: "javascript/ui/dropdownlist.md"
-    group_parents:
-      - "animation"
-      - "popup"
-      - "virtual"
--
-    file: "javascript/ui/editor.md"
-    group_parents:
-      - "deserialization"
-      - "immutables"
-      - "pasteCleanup"
-      - "pdf.margin"
-      - "tools.items"
-      - "imageBrowser.transport.read"
-      - "imageBrowser.transport.destroy"
-      - "imageBrowser.transport.create"
-      - "imageBrowser.schema.model.fields"
-      - "imageBrowser.messages"
-      - "fileBrowser.transport.read"
-      - "fileBrowser.transport.destroy"
-      - "fileBrowser.transport.create"
-      - "fileBrowser.schema.model.fields"
-      - "fileBrowser.messages"
--
-    file: "javascript/ui/filtermenu.md"
-    group_parents:
-      - "messages"
-      - "operators.string"
-      - "operators.number"
-      - "operators.date"
-      - "operators.enums"
--
-    file: "javascript/ui/flatcolorpicker.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/gantt.md"
-    group_parents:
-      - "assignments"
-      - "currentTimeMarker"
-      - "messages.actions"
-      - "messages.editor"
-      - "messages.views"
-      - "pdf.margin"
-      - "range"
-      - "toolbar"
-      - "tooltip"
-      - "views.range"
--
-    file: "javascript/ui/grid.md"
-    group_parents:
-      - "allowCopy"
-      - "columns.command"
-      - "columns.filterable.cell"
-      - "columns.sortable"
-      - "columnMenu.messages"
-      - "filterable.messages"
-      - "filterable.operators.string"
-      - "filterable.operators.number"
-      - "filterable.operators.date"
-      - "filterable.operators.enums"
-      - "messages.commands"
-      - "noRecords"
-      - "pageable.messages"
-      - "pdf.margin"
--
-    file: "javascript/ui/listbox.md"
-    group_parents:
-      - "draggable"
-      - "messages"
-      - "toolbar"
--
-    file: "javascript/ui/mediaplayer.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/menu.md"
-    group_parents:
-      - "animation"
-      - "openOnClick"
-      - "scrollable"
--
-    file: "javascript/ui/multiselect.md"
-    group_parents:
-      - "animation"
-      - "popup"
-      - "virtual"
--
-    file: "javascript/ui/notification.md"
-    group_parents:
-      - "position"
-      - "templates"
--
-    file: "javascript/ui/pager.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/panelbar.md"
-    group_parents:
-      - "animation"
-      - "messages"
--
-    file: "javascript/ui/pivotconfigurator.md"
-    group_parents:
-      - "sortable"
-      - "messages.fieldMenu.operators"
--
-    file: "javascript/ui/pivotgrid.md"
-    group_parents:
-      - "excel"
-      - "pdf.margin"
-      - "sortable"
-      - "messages.fieldMenu.operators"
--
-    file: "javascript/ui/popup.md"
-    group_parents:
-      - "animation"
--
-    file: "javascript/ui/prompt.md"
-    group_parents:
-      - "messages"
--
-    file: "javascript/ui/rangeslider.md"
-    group_parents:
-      - "tooltip"
--
-    file: "javascript/ui/scheduler.md"
-    group_parents:
-      - "currentTimeMarker"
-      - "group"
-      - "messages.editor"
-      - "messages.recurrenceEditor.daily"
-      - "messages.recurrenceEditor.end"
-      - "messages.recurrenceEditor.frequencies"
-      - "messages.recurrenceEditor.monthly"
-      - "messages.recurrenceEditor.offsetPositions"
-      - "messages.recurrenceEditor.weekly"
-      - "messages.recurrenceEditor.weekdays"
-      - "messages.recurrenceEditor.yearly"
-      - "messages.recurrenceMessages"
-      - "messages.views"
-      - "pdf.margin"
-      - "resources"
-      - "views.editable"
-      - "views.group"
--
-    file: "javascript/ui/slider.md"
-    group_parents:
-      - "tooltip"
--
-    file: "javascript/ui/sortable.md"
-    group_parents:
-      - "cursorOffset"
--
-    file: "javascript/ui/splitter.md"
-    group_parents:
-      - "panes"
--
-    file: "javascript/ui/spreadsheet.md"
-    group_parents:
-      - "defaultCellStyle"
-      - "excel"
-      - "pdf.margin"
-      - "sheets.columns"
-      - "sheets.filter"
-      - "sheets.rows.cells.borderBottom"
-      - "sheets.rows.cells.borderLeft"
-      - "sheets.rows.cells.borderTop"
-      - "sheets.rows.cells.borderRight"
-      - "sheets.rows.cells.validation"
-      - "sheets.sort"
-      - "toolbar"
--
-    file: "javascript/ui/tabstrip.md"
-    group_parents:
-      - "animation"
-      - "scrollable"
--
-    file: "javascript/ui/timepicker.md"
-    group_parents:
-      - "animation"
--
-    file: "javascript/ui/toolbar.md"
-    group_parents:
-      - "items.buttons"
-      - "items.menuButtons"
--
-    file: "javascript/ui/tooltip.md"
-    group_parents:
-      - "animation"
-      - "content"
--
-    file: "javascript/ui/treelist.md"
-    group_parents:
-      - "columns.command"
-      - "columns.filterable"
-      - "columnMenu.messages"
-      - "editable"
-      - "excel"
-      - "filterable.messages"
-      - "filterable.operators.string"
-      - "filterable.operators.number"
-      - "filterable.operators.date"
-      - "messages.commands"
-      - "pdf.margin"
-      - "sortable"
-      - "toolbar"
--
-    file: "javascript/ui/treeview.md"
-    group_parents:
-      - "animation"
-      - "checkboxes"
-      - "messages"
--
-    file: "javascript/ui/upload.md"
-    group_parents:
-      - "files"
-      - "validation"
--
-    file: "javascript/ui/window.md"
-    group_parents:
-      - "animation"
-      - "content"
-      - "position"
--
-    file: "javascript/ui/form.md"
-    group_parents:
-      - "validatable"
-      - "items"
 
 redirects:
 - from: ^/$
   to: /introduction
 
 - from: ^/api/wrappers/(.*)$
+  to: /api/$1
+
+- from: ^/api/javascript/(.*?)/(fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/([^/]+)$
+  to: /api/$1/$2/$3
+  slashifyMember: true
+
+- from: ^/api/(.*?)/(fields|methods|events|configuration|class-methods|class-fields|static-methods|constructor-parameters)/([^/]+)$
+  to: /api/$1/$2/$3
+  slashifyMember: true
+
+- from: ^/api/javascript/(.*)$
   to: /api/$1
 
 - from: ^/jsp/(.*)$
@@ -1579,34 +821,34 @@ redirects:
   to: https://www.telerik.com/php-ui
 
 - from: ^/api/web/(.*)$
-  to: /api/javascript/ui/$1
+  to: /api/ui/$1
 
 - from: ^/api/mobile/application$
-  to: /api/javascript/view
+  to: /api/view
 
 - from: ^/api/mobile/(.*)$
-  to: /api/javascript/ui/$1
+  to: /api/ui/$1
 
 - from: ^/api/framework/fx/(.*)$
-  to: /api/javascript/effects/$1
+  to: /api/effects/$1
 
 - from: ^/api/framework/widget$
-  to: /api/javascript/ui/widget
+  to: /api/ui/widget
 
 - from: ^/fiddler-jam-integration$
   to: /introduction
 
 - from: ^/api/framework/(class|color|kendo|layout|observable|router|view)$
-  to: /api/javascript/$1
+  to: /api/$1
 
 - from: ^/api/framework/(binder|datasource|ganttdatasource|ganttdependency|ganttdependencydatasource|gantttask|hierarchicaldatasource|model|node|observablearray|observableobject|pivotdatasource|schedulerdatasource|schedulerevent)$
-  to: /api/javascript/data/$1
+  to: /api/data/$1
 
 - from: ^/api/(?:javascript/)?dataviz/(barcode|chart|diagram|lineargauge|map|qrcode|radialgauge|sparkline|stock-chart|treemap)$
-  to: /api/javascript/dataviz/ui/$1
+  to: /api/dataviz/ui/$1
 
-- from: ^/api/javascript/geometry$
-  to: /api/javascript/geometry/arc
+- from: ^/api/geometry$
+  to: /api/geometry/arc
 
 - from: ^/web/(grid|listview|pivotgrid|spreadsheet|treelist)/(.*)$
   to: /controls/$1/$2
@@ -1683,68 +925,68 @@ redirects:
 - from: ^/using-kendo-with/(.*)$
   to: /$1
 
-- from: ^/api/javascript/ui/(datasource|dataSource)$
-  to: /api/javascript/data/datasource
+- from: ^/api/ui/(datasource|dataSource)$
+  to: /api/data/datasource
 
-- from: ^/api/javascript/ui/AutoComplete$
-  to: /api/javascript/ui/autocomplete
+- from: ^/api/ui/AutoComplete$
+  to: /api/ui/autocomplete
 
-- from: ^/api/javascript/ui/Editor$
-  to: /api/javascript/ui/editor
+- from: ^/api/ui/Editor$
+  to: /api/ui/editor
 
 - from: ^/controls/scheduling/scheduler/Overview$
   to: /controls/scheduler/overview
 
-- from: ^/api/javascript/ui/RangeSlider$
-  to: /api/javascript/ui/rangeslider
+- from: ^/api/ui/RangeSlider$
+  to: /api/ui/rangeslider
 
-- from: ^/api/javascript/ui/Splitter$
-  to: /api/javascript/ui/splitter
+- from: ^/api/ui/Splitter$
+  to: /api/ui/splitter
 
-- from: ^/api/javascript/ui/TreeView$
-  to: /api/javascript/ui/treeview
+- from: ^/api/ui/TreeView$
+  to: /api/ui/treeview
 
 - from: ^/documentation/api/framework/datasource$
-  to: /api/javascript/data/datasource
+  to: /api/data/datasource
 
 - from: ^/api/framework/validator$
-  to: /api/javascript/ui/validator
+  to: /api/ui/validator
 
 - from: ^/controls/data-management/grid/(introduction|walkthrough)$
   to: /controls/grid/overview
 
-- from: ^/api/javascript/mobile/ui/backbutton$
-  to: /api/javascript/ui/button
+- from: ^/api/mobile/ui/backbutton$
+  to: /api/ui/button
 
-- from: ^/api/javascript/mobile/ui/collapsible$
-  to: /api/javascript/ui/button
+- from: ^/api/mobile/ui/collapsible$
+  to: /api/ui/button
 
-- from: ^/api/javascript/mobile/ui/detailbutton$
-  to: /api/javascript/ui/button
+- from: ^/api/mobile/ui/detailbutton$
+  to: /api/ui/button
 
-- from: ^/api/javascript/mobile/ui/layout$
-  to: /api/javascript/layout
+- from: ^/api/mobile/ui/layout$
+  to: /api/layout
 
-- from: ^/api/javascript/mobile/ui/mobilewidget$
-  to: /api/javascript/view
+- from: ^/api/mobile/ui/mobilewidget$
+  to: /api/view
 
-- from: ^/api/javascript/mobile/ui/modalview$
-  to: /api/javascript/view
+- from: ^/api/mobile/ui/modalview$
+  to: /api/view
 
-- from: ^/api/javascript/mobile/ui/view$
-  to: /api/javascript/view
+- from: ^/api/mobile/ui/view$
+  to: /api/view
 
-- from: ^/api/javascript/mobile/ui/splitview$
-  to: /api/javascript/ui/splitter
+- from: ^/api/mobile/ui/splitview$
+  to: /api/ui/splitter
 
-- from: ^/api/javascript/mobile/ui/scroller$
-  to: /api/javascript/view
+- from: ^/api/mobile/ui/scroller$
+  to: /api/view
 
-- from: ^/api/javascript/mobile/ui/navbar$
-  to: /api/javascript/ui/menu
+- from: ^/api/mobile/ui/navbar$
+  to: /api/ui/menu
 
-- from: ^/api/javascript/mobile/ui/pane$
-  to: /api/javascript/ui/panelbar
+- from: ^/api/mobile/ui/pane$
+  to: /api/ui/panelbar
 
 - from: ^/styles-and-layout/performance-tips$
   to: /controls/charts/troubleshoot/performance-tips
@@ -1752,8 +994,8 @@ redirects:
 - from: ^/controls/data-management/spreadsheet/import-and-export-data/overview$
   to: /controls/spreadsheet/import-and-export-data/json
 
-- from: ^/api/javascript/dataviz/ui/stockchart/?$
-  to: /api/javascript/dataviz/ui/stock-chart
+- from: ^/api/dataviz/ui/stockchart/?$
+  to: /api/dataviz/ui/stock-chart
 
 - from: ^/aspnet-mvc/mvc-6/(.*)$
   to: https://www.telerik.com/aspnet-mvc/documentation/$1
@@ -1815,47 +1057,47 @@ redirects:
 - from: ^/api/aspnet-mvc/?(.*)$
   to: https://www.telerik.com/aspnet-mvc/documentation/api/$1
 
-- from: ^/api/javascript/ui/grid/configuration/allowcopy.(delimeter)$
-  to: /api/javascript/ui/grid/configuration/allowcopy
+- from: ^/api/ui/grid/configuration/allowcopy.(delimeter)$
+  to: /api/ui/grid/configuration/allowcopy
 
-- from: ^/api/javascript/ui/grid/configuration/columns.command.(visible|name|text.edit|text.cancel|text.update|text|classname|click|iconclass.edit|iconclass.update|iconclass.cancel|iconclass)$
-  to: /api/javascript/ui/grid/configuration/columns.command
+- from: ^/api/ui/grid/configuration/columns.command.(visible|name|text.edit|text.cancel|text.update|text|classname|click|iconclass.edit|iconclass.update|iconclass.cancel|iconclass)$
+  to: /api/ui/grid/configuration/columns.command
 
-- from: ^/api/javascript/ui/grid/configuration/columns.filterable.cell.(datasource|datatextfield|delay|inputwidth|suggestionoperator|minlength|enabled|operator|showoperators|template)$
-  to: /api/javascript/ui/grid/configuration/columns.filterable.cell
+- from: ^/api/ui/grid/configuration/columns.filterable.cell.(datasource|datatextfield|delay|inputwidth|suggestionoperator|minlength|enabled|operator|showoperators|template)$
+  to: /api/ui/grid/configuration/columns.filterable.cell
 
-- from: ^/api/javascript/ui/grid/configuration/columns.sortable.(compare|initialdirection)$
-  to: /api/javascript/ui/grid/configuration/columns.sortable
+- from: ^/api/ui/grid/configuration/columns.sortable.(compare|initialdirection)$
+  to: /api/ui/grid/configuration/columns.sortable
 
-- from: ^/api/javascript/ui/grid/configuration/columnmenu.messages.(columns|filter|sortascending|sortdescending|settings|done|unlock|lock)$
-  to: /api/javascript/ui/grid/configuration/columnmenu.messages
+- from: ^/api/ui/grid/configuration/columnmenu.messages.(columns|filter|sortascending|sortdescending|settings|done|unlock|lock)$
+  to: /api/ui/grid/configuration/columnmenu.messages
 
-- from: ^/api/javascript/ui/grid/configuration/filterable.messages.(and|clear|filter|info|title|isfalse|istrue|or|search|selectvalue|cancel|selecteditemsformat|operator|checkall|value)$
-  to: /api/javascript/ui/grid/configuration/filterable.messages
+- from: ^/api/ui/grid/configuration/filterable.messages.(and|clear|filter|info|title|isfalse|istrue|or|search|selectvalue|cancel|selecteditemsformat|operator|checkall|value)$
+  to: /api/ui/grid/configuration/filterable.messages
 
-- from: ^/api/javascript/ui/grid/configuration/filterable.operators.string.(neq|eq|isnull|isnotnull|isempty|isnotempty|startswith|contains|doesnotcontain|endswith)$
-  to: /api/javascript/ui/grid/configuration/filterable.operators.string
+- from: ^/api/ui/grid/configuration/filterable.operators.string.(neq|eq|isnull|isnotnull|isempty|isnotempty|startswith|contains|doesnotcontain|endswith)$
+  to: /api/ui/grid/configuration/filterable.operators.string
 
-- from: ^/api/javascript/ui/grid/configuration/filterable.operators.number.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
-  to: /api/javascript/ui/grid/configuration/filterable.operators.number
+- from: ^/api/ui/grid/configuration/filterable.operators.number.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
+  to: /api/ui/grid/configuration/filterable.operators.number
 
-- from: ^/api/javascript/ui/grid/configuration/filterable.operators.date.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
-  to: /api/javascript/ui/grid/configuration/filterable.operators.date
+- from: ^/api/ui/grid/configuration/filterable.operators.date.(neq|eq|isnull|isnotnull|gte|gt|lte|lt)$
+  to: /api/ui/grid/configuration/filterable.operators.date
 
-- from: ^/api/javascript/ui/grid/configuration/filterable.operators.enums.(neq|eq|isnull|isnotnull)$
-  to: /api/javascript/ui/grid/configuration/filterable.operators.enums
+- from: ^/api/ui/grid/configuration/filterable.operators.enums.(neq|eq|isnull|isnotnull)$
+  to: /api/ui/grid/configuration/filterable.operators.enums
 
-- from: ^/api/javascript/ui/grid/configuration/messages.commands.(canceledit|cancel|create|destroy|edit|excel|save|update)$
-  to: /api/javascript/ui/grid/configuration/messages.commands
+- from: ^/api/ui/grid/configuration/messages.commands.(canceledit|cancel|create|destroy|edit|excel|save|update)$
+  to: /api/ui/grid/configuration/messages.commands
 
-- from: ^/api/javascript/ui/grid/configuration/norecords.(template)$
-  to: /api/javascript/ui/grid/configuration/norecords
+- from: ^/api/ui/grid/configuration/norecords.(template)$
+  to: /api/ui/grid/configuration/norecords
 
-- from: ^/api/javascript/ui/grid/configuration/pageable.messages.(display|empty|itemsperpage|morepages|page|first|last|next|previous|refresh|of)$
-  to: /api/javascript/ui/grid/configuration/pageable.messages
+- from: ^/api/ui/grid/configuration/pageable.messages.(display|empty|itemsperpage|morepages|page|first|last|next|previous|refresh|of)$
+  to: /api/ui/grid/configuration/pageable.messages
 
-- from: ^/api/javascript/ui/grid/configuration/pdf.margin.(bottom|left|right|top)$
-  to: /api/javascript/ui/grid/configuration/pdf.margin
+- from: ^/api/ui/grid/configuration/pdf.margin.(bottom|left|right|top)$
+  to: /api/ui/grid/configuration/pdf.margin
 
 - from: ^/controls/(data-management|editors|layout|navigation|barcodes|interactivity|media|pdf|scheduling|gauges|conversational-ui|diagrams-and-maps)/(.*)$
   to: /controls/$2
@@ -1942,31 +1184,31 @@ redirects:
   to: https://demos.telerik.com/kendo-ui/dropdownlist/addnewitem
 
 - from: ^/api/dataviz/(barcode|chart|diagram|lineargauge|map|qrcode|radialgauge|sparkline|stock-chart|treemap|circulargauge|stock-chart)$
-  to: /api/javascript/dataviz/ui/$1
+  to: /api/dataviz/ui/$1
 
-- from: ^/api/javascript/dataviz/(chart|diagram|map)$
-  to: /api/javascript/dataviz/ui/$1
+- from: ^/api/dataviz/(chart|diagram|map)$
+  to: /api/dataviz/ui/$1
 
 - from: ^/api/dataviz/(.*)$
-  to: /api/javascript/dataviz/$1
+  to: /api/dataviz/$1
 
-- from: ^/api/javascript/dataviz/drawing/(.*)$
-  to: /api/javascript/drawing/$1
+- from: ^/api/dataviz/drawing/(.*)$
+  to: /api/drawing/$1
 
-- from: ^/api/javascript/dataviz/geometry/(.*)$
-  to: /api/javascript/geometry/$1
+- from: ^/api/dataviz/geometry/(.*)$
+  to: /api/geometry/$1
 
 - from: ^/web/styles-and-layout/(.*)$
   to: /styles-and-layout/$1
 
 - from: ^/styles-and-layout/using-kendo-in-responsive-web-pages$
-  to: /api/javascript/kendo/methods/resize
+  to: /api/kendo/methods/resize
 
 - from: ^/using-kendo-in-responsive-web-pages(.*)$
-  to: /api/javascript/kendo/methods/resize
+  to: /api/kendo/methods/resize
 
 - from: ^/styles-and-layout/rendering$
-  to: /api/javascript/dataviz/ui/chart/configuration/renderas
+  to: /api/dataviz/ui/chart/configuration/renderas
 
 - from: ^/controls/combobox/how-to/angularjs/(bind-to-ngmodel|detect-when-all-widgets-are-bound)$
   to: /knowledge-base
@@ -2050,7 +1292,7 @@ redirects:
   to: /styles-and-layout/sass-themes/font-icons
 
 - from: ^/controls/hybrid/styles/layout$
-  to: /api/javascript/layout
+  to: /api/layout
 
 - from: ^/controls/hybrid/styles/styling$
   to: /controls/button/button-styling
@@ -2062,10 +1304,10 @@ redirects:
   to: /intro/supporting/jquery-support
 
 - from: ^/controls/hybrid/switch/switch$
-  to: /api/javascript/ui/switch
+  to: /api/ui/switch
 
 - from: ^/controls/hybrid/tabstrip/(.*)$
-  to: /api/javascript/ui/tabstrip
+  to: /api/ui/tabstrip
 
 - from: ^/controls/hybrid/view/view$
   to: /framework/spa/view

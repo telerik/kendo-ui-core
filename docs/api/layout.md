@@ -46,7 +46,7 @@ The view instance that will be rendered.
 
 Optional. If provided, the new view will replace the current one with a [replace effect](/framework/fx/replace).
 
-###### Example
+#### Example
 
     <style>
         /* the initial position of the next div */
