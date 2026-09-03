@@ -119,7 +119,7 @@ You can manually build the source code of the components by following these step
       npm run build:dev:watch
     ```
 
-  - The follwing command enables you to produce a custom bundle with only the components that you need:
+  - The following command enables you to produce a custom bundle with only the components that you need:
 
     ```javascript
       npm run scripts:custom
